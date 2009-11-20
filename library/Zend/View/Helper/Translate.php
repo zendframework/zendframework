@@ -50,13 +50,6 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
      */
     public function __construct($translate = null)
     {
-        if ($translate === null) {
-            require_once 'Zend/Registry.php';
-            if (Zend_Registry::isRegistered('Zend_Translate')) {
-                $translate = Zend_Registry::get('Zend_Translate');
-            }
-        }
-
         if ($translate !== null) {
             $this->setTranslator($translate);
         }
@@ -133,6 +126,13 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
      */
     public function getTranslator()
     {
+        if ($this->_translator === null) {
+            require_once 'Zend/Registry.php';
+            if (Zend_Registry::isRegistered('Zend_Translate')) {
+                $this->setTranslator(Zend_Registry::get('Zend_Translate'));
+            }
+        }
+
         return $this->_translator;
     }
 

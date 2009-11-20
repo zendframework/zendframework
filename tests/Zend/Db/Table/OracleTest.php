@@ -100,6 +100,11 @@ class Zend_Db_Table_OracleTest extends Zend_Db_Table_TestCommon
         $this->assertEquals(5, $insertResult);
     }
 
+    protected function _getRowForTableAndIdentityWithVeryLongName()
+    {
+        return array('thisisalongtablenameidentity' => 1, 'stuff' => 'information');
+    }
+
     public function getDriver()
     {
         return 'Oracle';

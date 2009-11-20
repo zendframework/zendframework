@@ -1614,6 +1614,28 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         return $cacheFrontend;
     }
 
+    /**
+     * @group ZF-5674
+     */
+    public function testTableAndIdentityWithVeryLongName()
+    {
+        Zend_Db_Table::setDefaultAdapter($this->_db);
+        // create test table using no identifier quoting
+        $this->_util->createTable('thisisaveryverylongtablename', array(
+            'thisisalongtablenameidentity' => 'IDENTITY',
+            'stuff' => 'VARCHAR(32)'
+        ));
+        $tableName = $this->_util->getTableName('thisisaveryverylongtablename');
+        $table = new Zend_Db_Table('thisisaveryverylongtablename');
+        $row = $table->createRow($this->_getRowForTableAndIdentityWithVeryLongName());
+        $row->save();
+        $rowset = $table->find(1);
+        $this->assertEquals(1, count($rowset));
+        $this->_util->dropTable('thisisaveryverylongtablename');
+    }
 
-
+    protected function _getRowForTableAndIdentityWithVeryLongName()
+    {
+        return array('stuff' => 'information');
+    }
 }

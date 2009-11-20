@@ -135,13 +135,13 @@ class Zend_Db_TestUtil_Mysqli extends Zend_Db_TestUtil_Common
 
     protected function _createTestProcedure()
     {
-        $this->_rawQuery('DROP PROCEDURE IF EXISTS zf_test_procedure');
-        $this->_rawQuery('CREATE PROCEDURE zf_test_procedure(IN param1 INTEGER) BEGIN SELECT * FROM zfproducts WHERE product_id = param1; END');
+        $this->_tryRawQuery('DROP PROCEDURE IF EXISTS zf_test_procedure');
+        $this->_tryRawQuery('CREATE PROCEDURE zf_test_procedure(IN param1 INTEGER) BEGIN SELECT * FROM zfproducts WHERE product_id = param1; END');
     }
 
     protected function _dropTestProcedure()
     {
-        $this->_rawQuery('DROP PROCEDURE IF EXISTS zf_test_procedure');
+        $this->_tryRawQuery('DROP PROCEDURE IF EXISTS zf_test_procedure');
     }
 
     protected function _getSqlCreateView($viewName)

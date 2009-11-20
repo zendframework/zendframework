@@ -49,7 +49,9 @@ abstract class Zend_Db_Profiler_TestCommon extends Zend_Db_TestSetup
 
     public function tearDown()
     {
-        $this->_db->getProfiler()->setEnabled(false);
+        if($this->_db instanceof Zend_Db_Adapter_Abstract) {
+            $this->_db->getProfiler()->setEnabled(false);
+        }
         parent::tearDown();
     }
 

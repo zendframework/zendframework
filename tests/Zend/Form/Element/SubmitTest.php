@@ -179,6 +179,25 @@ class Zend_Form_Element_SubmitTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->element->isChecked());
     }
 
+    /**
+     * Tests that the isChecked method works as expected when using a translator.
+     * @group ZF-4073
+     */
+    public function testIsCheckedReturnsExpectedValueWhenUsingTranslator()
+    {
+        $translations = array('label' => 'translation');
+        $translate = new Zend_Translate('array', $translations);
+
+        $submit = new Zend_Form_Element_Submit('foo', 'label');
+        $submit->setTranslator($translate);
+        $submit->setValue($translations['label']);
+        
+        $this->assertTrue($submit->isChecked());
+
+        $submit->setValue('label');
+        $this->assertFalse($submit->isChecked());
+    }
+
     /*
      * Tests if title attribute (tooltip) is translated if the default decorators are loaded.
      * These decorators should load the Tooltip decorator as the first decorator.

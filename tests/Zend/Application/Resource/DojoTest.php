@@ -21,7 +21,7 @@
  */
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_LayoutTest::main');
+    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_DojoTest::main');
 }
 
 /**

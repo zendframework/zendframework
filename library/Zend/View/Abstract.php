@@ -139,8 +139,6 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
      */
     private $_strictVars = false;
 
-    private $_log;
-
     /**
      * Constructor.
      *

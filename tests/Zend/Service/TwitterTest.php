@@ -77,6 +77,20 @@ class Zend_Service_TwitterTest extends PHPUnit_Framework_TestCase
         Zend_Service_Abstract::getHttpClient()->setAdapter('Zend_Http_Client_Adapter_Socket');
         $this->twitter = new Zend_Service_Twitter(TESTS_ZEND_SERVICE_TWITTER_USER, TESTS_ZEND_SERVICE_TWITTER_PASS);
     }
+    
+    /**
+     * @issue ZF-8218
+     */
+    public function testUserNameNotRequired()
+    {
+        Zend_Service_Abstract::getHttpClient()->setAdapter('Zend_Http_Client_Adapter_Socket');
+        $twitter = new Zend_Service_Twitter();
+        $exists = $twitter->user->show('zftestuser1')->id() !== null;
+        
+        $this->assertTrue($exists);
+        
+        unset($twitter);
+    }
 
     /**
      * @issue ZF-7781

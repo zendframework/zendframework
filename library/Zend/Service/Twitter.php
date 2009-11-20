@@ -95,7 +95,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
      * @param  string $password
      * @return void
      */
-    public function __construct($username, $password = null)
+    public function __construct($username = null, $password = null)
     {
         $this->setLocalHttpClient(clone self::getHttpClient());
         if (is_array($username) && is_null($password)) {
@@ -106,7 +106,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
                 $this->setUsername($username[0]);
                 $this->setPassword($username[1]);
             }
-        } else {
+        } else if (!is_null($username)) {
             $this->setUsername($username);
             $this->setPassword($password);
         }
@@ -233,7 +233,7 @@ class Zend_Service_Twitter extends Zend_Rest_Client
         } else {
             $client->setCookieJar($this->_cookieJar);
         }
-        if (!$this->_authInitialized) {
+        if (!$this->_authInitialized && $this->getUsername() !== null) {
             $client->setAuth($this->getUsername(), $this->getPassword());
             $this->_authInitialized = true;
         }

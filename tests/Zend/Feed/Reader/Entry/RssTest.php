@@ -36,6 +36,8 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
+    
+    protected $_expectedCats = array();
 
     public function setup()
     {
@@ -51,6 +53,23 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             }
         }
         Zend_Date::setOptions(array('format_type'=>'iso'));
+        $this->_expectedCats = array(
+            array(
+                'term' => 'topic1',
+                'scheme' => 'http://example.com/schema1',
+                'label' => 'topic1'
+            ),
+            array(
+                'term' => 'topic1',
+                'scheme' => 'http://example.com/schema2',
+                'label' => 'topic1'
+            ),
+            array(
+                'term' => 'topic2',
+                'scheme' => 'http://example.com/schema1',
+                'label' => 'topic2'
+            )
+        );
     }
     
     public function teardown()
@@ -2482,7 +2501,7 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
      * Get CommentFeedLink (Unencoded Text)
      */
 
- // Atom 1.0
+    // RSS
 
     public function testGetsCommentFeedLinkFromRss20_WellFormedWeb10()
     {
@@ -2676,5 +2695,18 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals(null, $entry->getCommentFeedLink());
     }
-
+    
+    /**
+     * Get category data
+     * @group ZFR001
+     */
+    public function testGetsCategoriesFromRss20()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/rss20.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals($this->_expectedCats, (array) $entry->getCategories());
+        $this->assertEquals(array('topic1','topic2'), array_values($entry->getCategories()->getValues()));
+    }
 }

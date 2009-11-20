@@ -69,6 +69,8 @@ require_once 'Zend/Feed/Reader/Extension/Thread/Entry.php';
  */
 require_once 'Zend/Date.php';
 
+require_once 'Zend/Feed/Reader/Collection/Category.php';
+
 /**
  * @category   Zend
  * @package    Zend_Feed_Reader
@@ -457,6 +459,42 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
         $this->_data['links'] = $links;
 
         return $this->_data['links'];
+    }
+    
+    /**
+     * Get all categories
+     *
+     * @return Zend_Feed_Reader_Collection_Category
+     */
+    public function getCategories()
+    {
+        if (array_key_exists('categories', $this->_data)) {
+            return $this->_data['categories'];
+        }
+
+        if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10 &&
+            $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090) {
+            $list = $this->_xpath->query($this->_xpathQueryRss.'//category');
+        } else {
+            $list = $this->_xpath->query($this->_xpathQueryRdf.'//rss:category');
+        }
+
+        if (!$list->length) {
+            $categoryCollection = new Zend_Feed_Reader_Collection_Category;
+        } else {
+            $categoryCollection = new Zend_Feed_Reader_Collection_Category;
+            foreach ($list as $category) {
+                $categoryCollection[] = array(
+                    'term' => $category->nodeValue,
+                    'scheme' => $category->getAttribute('domain'),
+                    'label' => $category->nodeValue,
+                );
+            }
+        }
+
+        $this->_data['categories'] = $categoryCollection;
+
+        return $this->_data['categories'];
     }
 
     /**

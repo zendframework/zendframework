@@ -124,6 +124,6 @@ class Zend_Application_Resource_DojoTest extends PHPUnit_Framework_TestCase
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_LayoutTest::main') {
-    Zend_Application_Resource_LayoutTest::main();
+if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_DojoTest::main') {
+    Zend_Application_Resource_DojoTest::main();
 }

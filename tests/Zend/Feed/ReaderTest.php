@@ -268,39 +268,6 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(Zend_Feed_Reader::isRegistered('JungleBooks'));
     }
 
-    /**  Test condition for ZF-7486 (Could Not Replicate)  **/
-    public function testRepeatedFeedImportsWithCacheEnabledDirectOrIndirectDoNotCreateARedeclarationOfAbstractClassFatalError()
-    {
-        if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
-            || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
-        ) {
-            $this->markTestSkipped('testRepeatedFeedImportsDoNotCreateARedeclarationOfAbstractClassFatalError() requires a network connection');
-            return;
-        }
-        $frontendOptions = array(
-           'lifetime' => 7200,
-           'automatic_serialization' => true
-        );
-        $backendOptions = array(
-            'cache_dir' => $this->_getTempDirectory()
-        );
-        $cache = Zend_Cache::factory('Core','File',$frontendOptions,$backendOptions);
-        Zend_Feed_Reader::setCache($cache);
-        $feed = Zend_Feed_Reader::import('http://www.planet-php.net/rss/');
-        $cache->save($feed, 'feed1');
-        $feed2 = Zend_Feed_Reader::import('http://www.planet-php.net/rdf/');
-        $cache->save($feed, 'feed2');
-        $feed3 = Zend_Feed_Reader::import('http://www.planet-php.net/atom/');
-        $cache->save($feed, 'feed3');
-        $feed4 = Zend_Feed_Reader::import('http://www.phpdeveloper.org/feed');
-        $cache->save($feed, 'feed4');
-        $feedXmlFromCache = $cache->load('Zend_Feed_Reader_' . md5('http://www.planet-php.net/rss/'));
-        $feedFromCache = Zend_Feed_Reader::importString($feedXmlFromCache);
-        $this->assertTrue($feedFromCache instanceof Zend_Feed_Reader_FeedAbstract);
-        $feedFromCache2 = $cache->load('feed4');
-        $this->assertTrue($feedFromCache2 instanceof Zend_Feed_Reader_FeedAbstract);
-    }
-
     protected function _getTempDirectory()
     {
         $tmpdir = array();

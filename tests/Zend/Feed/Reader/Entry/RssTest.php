@@ -1792,7 +1792,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     // DC 1.0
@@ -1803,7 +1805,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss20.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss094_Dc10()
@@ -1812,7 +1816,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss094.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss093_Dc10()
@@ -1821,7 +1827,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss093.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss092_Dc10()
@@ -1830,7 +1838,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss092.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss091_Dc10()
@@ -1839,7 +1849,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss091.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss10_Dc10()
@@ -1848,7 +1860,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss10.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss090_Dc10()
@@ -1857,7 +1871,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc10/rss090.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     // DC 1.1
@@ -1868,7 +1884,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss20.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss094_Dc11()
@@ -1877,7 +1895,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss094.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss093_Dc11()
@@ -1886,7 +1906,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss093.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss092_Dc11()
@@ -1895,7 +1917,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss092.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss091_Dc11()
@@ -1904,7 +1928,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss091.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss10_Dc11()
@@ -1913,7 +1939,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss10.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromRss090_Dc11()
@@ -1922,7 +1950,9 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/dc11/rss090.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     // Missing DateModified
@@ -1999,7 +2029,10 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath.'/datemodified/plain/rss20-zf-7908.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Sunday 11 January 2009 09 55 59 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        //$this->assertEquals('Sunday 11 January 2009 09 55 59 +0000', $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('Sun, 11 Jan 2009 09:55:59 GMT', Zend_Date::RSS);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     /**

@@ -88,8 +88,9 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath . '/datecreated/plain/atom03.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000',
-        $entry->getDateCreated()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateCreated()));
     }
 
     public function testGetsDateCreatedFromAtom10()
@@ -98,8 +99,9 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath . '/datecreated/plain/atom10.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000',
-        $entry->getDateCreated()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateCreated()));
     }
 
     /**
@@ -111,8 +113,9 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath . '/datemodified/plain/atom03.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000',
-        $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     public function testGetsDateModifiedFromAtom10()
@@ -121,8 +124,9 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
             file_get_contents($this->_feedSamplePath . '/datemodified/plain/atom10.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Saturday 07 March 2009 08 03 50 +0000',
-        $entry->getDateModified()->toString('EEEE dd MMMM YYYY HH mm ss ZZZ'));
+        $edate = new Zend_Date;
+        $edate->set('2009-03-07T08:03:50Z', Zend_Date::ISO_8601);
+        $this->assertTrue($edate->equals($entry->getDateModified()));
     }
 
     /**

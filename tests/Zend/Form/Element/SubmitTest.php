@@ -207,6 +207,11 @@ class Zend_Form_Element_SubmitTest extends PHPUnit_Framework_TestCase
         $this->assertContains('bar', $html);
         $this->assertNotContains('baz', $html);
     }
+    
+    public function testSetDefaultIgnoredToTrueWhenNotDefined()
+    {
+        $this->assertTrue($this->element->getIgnore());
+    }
 
     /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete

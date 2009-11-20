@@ -269,6 +269,29 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
         }
         $this->assertEquals('http://meiobit.com/rss.xml', $links->rss);
     }
+    
+    /**
+     * @group ZF-8330
+     */
+    public function testGetsFeedLinksAndNormalisesRelativeUrlsOnUriWithPath()
+    {
+        try {
+            $currClient = Zend_Feed_Reader::getHttpClient();
+
+            $testAdapter = new Zend_Http_Client_Adapter_Test();
+            $testAdapter->setResponse(new Zend_Http_Response(200, array(), '<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head><body></body></html>'));
+            Zend_Feed_Reader::setHttpClient(new Zend_Http_Client(null, array('adapter' => $testAdapter)));
+
+            $links = Zend_Feed_Reader::findFeedLinks('http://foo/bar');
+
+            Zend_Feed_Reader::setHttpClient($currClient);
+        } catch(Exception $e) {
+            $this->fail($e->getMessage());
+        }
+
+        $this->assertEquals('http://foo/test.rss', $links->rss);
+        $this->assertEquals('http://foo/test.atom', $links->atom);
+    }
 
     public function testAddsPrefixPath()
     {

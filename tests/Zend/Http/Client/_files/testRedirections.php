@@ -24,7 +24,7 @@ if (! isset($_GET['redirection'])) $_GET['redirection'] = 0;
 $_GET['redirection']++;
 $https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off';
 
-if ($_GET['redirection'] < 4) {
+if (!isset($_GET['redirection']) || $_GET['redirection'] < 4) {
     $target = 'http' . ($https ? 's://' : '://')  . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
     header('Location: ' . $target . '?redirection=' . $_GET['redirection']);
 } else {

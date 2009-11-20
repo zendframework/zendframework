@@ -182,7 +182,12 @@ class Zend_Http_Client_CurlTest extends Zend_Http_Client_CommonHttpTests
     {
         $adapter = new Zend_Http_Client_Adapter_Curl();
         $this->client->setAdapter($adapter);
-        $adapter->setConfig(array('timeout' => 1, 'curloptions' => array(CURLOPT_FOLLOWLOCATION => true)));
+        $adapter->setConfig(array(
+            'curloptions' => array(
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_TIMEOUT => 1,
+            ))
+        );
 
         $this->client->setUri($this->baseuri . 'testRedirections.php');
 

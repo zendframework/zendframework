@@ -6,15 +6,15 @@
     <para>The following methods are available on all vendor-specific subclasses.</para>
 
     <para>
-        <code>Zend_Ldap_Node_Schema</code> includes the magic propery accessors
+        <code>Zend_Ldap_Node_Schema</code> includes the magic property accessors
         <code>__get()</code> and <code>__isset()</code> to access the attributes by their
         name. They proxy to <code>Zend_Ldap_Node_Schema::getAttribute()</code> and
         <code>Zend_Ldap_Node_Schema::existsAttribute()</code> respectively.
-        <code>__set()</code> and <code>__unset()</code> are also implemented but they throw
+        <code>__set()</code> and <code>__unset()</code> are also implemented, but they throw
         a <code>BadMethodCallException</code> as modifications are not allowed on RootDSE
         nodes. Furthermore the class implements <code>ArrayAccess</code> for
         array-style-access to the attributes. <code>offsetSet()</code> and
-        <code>offsetUnset()</code> also throw a <code>BadMethodCallException</code> due ro
+        <code>offsetUnset()</code> also throw a <code>BadMethodCallException</code> due to
         obvious reasons.
     </para>
 
@@ -75,9 +75,9 @@
                     <entry>
                         Returns an array representation of the current node. If
                         <code>$includeSystemAttributes</code> is <code>false</code>
-                        (defaults to <code>true</code>) the system specific attributes are
+                        (defaults to <code>true</code>), the system specific attributes are
                         stripped from the array. Unlike
-                        <code>Zend_Ldap_Node_Schema::getAttributes()</code> the resulting
+                        <code>Zend_Ldap_Node_Schema::getAttributes()</code>, the resulting
                         array contains the DN with key <code>'dn'</code>.
                     </entry>
                 </row>
@@ -108,11 +108,11 @@
                     </entry>
                     <entry>
                         Checks whether a given attribute exists. If
-                        <code>$emptyExists</code> is <code>false</code> empty attributes
+                        <code>$emptyExists</code> is <code>false</code>, empty attributes
                         (containing only array()) are treated as non-existent returning
-                        <code>false</code>. If <code>$emptyExists</code> is true empty
+                        <code>false</code>. If <code>$emptyExists</code> is true, empty
                         attributes are treated as existent returning <code>true</code>. In
-                        this case teh method returns <code>false</code> only if the
+                        this case the method returns <code>false</code> only if the
                         attribute name is missing in the key-collection.
                     </entry>
                 </row>
@@ -325,7 +325,7 @@
         Classes representing attribute types and object classes extend
         <code>Zend_Ldap_Node_Schema_Item</code> which provides some core methods to access
         arbitrary attributes on the underlying <acronym>LDAP</acronym> node.
-        <code>Zend_Ldap_Node_Schema_Item</code> includes the magic propery accessors
+        <code>Zend_Ldap_Node_Schema_Item</code> includes the magic property accessors
         <code>__get()</code> and <code>__isset()</code> to access the attributes by their
         name. Furthermore the class implements <code>ArrayAccess</code> for
         array-style-access to the attributes. <code>offsetSet()</code> and
@@ -417,7 +417,7 @@
                             getParent()</code>
                         </entry>
                         <entry>
-                            Returns the parent attribute type in the inhertitance
+                            Returns the parent attribute type in the inheritance
                             tree if one exists.
                         </entry>
                     </row>
@@ -440,7 +440,7 @@
                     <row>
                         <entry><code>array getParents()</code></entry>
                         <entry>
-                            Returns the parent object classes in the inhertitance
+                            Returns the parent object classes in the inheritance
                             tree if one exists. The returned array is an array of
                             <code>Zend_Ldap_Node_Schema_ObjectClass_OpenLdap</code>.
                         </entry>

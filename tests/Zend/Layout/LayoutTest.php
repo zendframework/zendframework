@@ -537,7 +537,9 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
         $layout->render();
     }
 
-    // #ZF-5152
+    /**
+     * @group ZF-5152
+     */
     public function testCallingStartMvcTwiceDoesntGenerateAnyUnexpectedBehavior()
     {
         Zend_Layout::startMvc('/some/path');
@@ -547,6 +549,17 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(Zend_Layout::getMvcInstance()->isEnabled());
     }
 
+    /**
+     * @group ZF-5891
+     */
+    public function testSetLayoutWithDisabledFlag()
+    {
+        $layout = new Zend_Layout();
+        $layout->disableLayout();
+        $layout->setLayout('foo', false);
+        $this->assertEquals('foo', $layout->getLayout());
+        $this->assertFalse($layout->isEnabled());
+    }
 }
 
 /**

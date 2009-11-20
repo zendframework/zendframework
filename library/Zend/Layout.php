@@ -326,15 +326,18 @@ class Zend_Layout
     /**
      * Set layout script to use
      *
-     * Note: enables layout.
+     * Note: enables layout by default, can be disabled
      *
      * @param  string $name
+     * @param  boolean $enabled
      * @return Zend_Layout
      */
-    public function setLayout($name)
+    public function setLayout($name, $enabled = true)
     {
         $this->_layout = (string) $name;
-        $this->enableLayout();
+        if ($enabled) {
+            $this->enableLayout();
+        }
         return $this;
     }
 

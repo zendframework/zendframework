@@ -61,7 +61,7 @@ class Zend_Config_Xml extends Zend_Config
      *
      * @param  string  $xml     XML file or string to process
      * @param  mixed   $section Section to process
-     * @param  boolean $options Whether modifiacations are allowed at runtime
+     * @param  boolean $options Whether modifications are allowed at runtime
      * @throws Zend_Config_Exception When xml is not set or cannot be loaded
      * @throws Zend_Config_Exception When section $sectionName cannot be found in $xml
      */

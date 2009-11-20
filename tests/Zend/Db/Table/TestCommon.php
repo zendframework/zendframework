@@ -691,7 +691,7 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         );
 
         $profilerEnabled = $this->_db->getProfiler()->getEnabled();
-        $this->_db->getProfiler()->setEnabled(true);
+        $this->_db->getProfiler()->setEnabled(true)->setFilterQueryType(Zend_Db_Profiler::INSERT);
         $insertResult = $table->insert($row);
         $this->_db->getProfiler()->setEnabled($profilerEnabled);
 

@@ -21,6 +21,14 @@
         you wish to use the client with a non-Zend_Rest_Server based service, it
         will still provide easier data access.
     </para>
+
+    <para>
+        In addition to <classname>Zend_Rest_Server</classname> and
+        <classname>Zend_Rest_Client</classname> components, <link
+            linkend="zend.controller.router.routes.rest"><classname>Zend_Rest_Route</classname> and
+            <classname>Zend_Rest_Controller</classname></link> classes are provided to aid routing
+        REST requests to controllers. 
+    </para>
 </sect1>
 
 <!--

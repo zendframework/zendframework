@@ -219,6 +219,17 @@ class Zend_Feed_ImportTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed::importArray($this->_getFullArray(), 'rss');
         $this->assertType('Zend_Feed_Rss', $feed);
     }
+    
+    /**
+     * Test the import of a RSS feed from an array
+     * @group ZF-5833
+     */
+    public function testRssImportSetsIsPermaLinkAsFalseIfGuidNotAUri()
+    {
+        $feed = Zend_Feed::importArray($this->_getFullArray(), 'rss');
+        $entry = $feed->current();
+        $this->assertEquals('false', $entry->guid['isPermaLink']);
+    }
 
     /**
      * Test the import of a RSS feed from an array

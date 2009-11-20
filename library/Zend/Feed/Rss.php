@@ -411,6 +411,9 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
 
             if (isset($dataentry->guid)) {
                 $guid = $this->_element->createElement('guid', $dataentry->guid);
+                if (!Zend_Uri::check($dataentry->guid)) {
+                    $guid->setAttribute('isPermaLink', 'false');
+                }
                 $item->appendChild($guid);
             }
 

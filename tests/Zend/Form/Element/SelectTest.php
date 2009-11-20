@@ -76,7 +76,9 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
     public function getView()
     {
         require_once 'Zend/View.php';
-        $view = new Zend_View();
+        $view = new Zend_View(array(
+            'encoding' => 'UTF-8',
+        ));
         $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper');
         return $view;
     }
@@ -239,6 +241,16 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->element->isValid('5'));
         $this->assertFalse($this->element->isValid('Technology'));
         $this->assertFalse($this->element->isValid('Web Developer'));
+    }
+
+    /**
+     * @group ZF-8342
+     */
+    public function testUsingPoundSymbolInOptionLabelShouldRenderCorrectly()
+    {
+        $this->element->addMultiOption('1', '£' . number_format(1));
+        $html = $this->element->render($this->getView());
+        $this->assertContains('>£', $html);
     }
 
     /**

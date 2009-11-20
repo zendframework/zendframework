@@ -214,6 +214,16 @@ class Zend_Form_Element implements Zend_Validate_Interface
     protected $_view;
 
     /**
+     * Is a specific decorator being rendered via the magic renderDecorator()?
+     * 
+     * This is to allow execution of logic inside the render() methods of child
+     * elements during the magic call while skipping the parent render() method.
+     * 
+     * @var bool
+     */
+    protected $_isPartialRendering = false;
+
+    /**
      * Constructor
      *
      * $spec may be:
@@ -920,6 +930,9 @@ class Zend_Form_Element implements Zend_Validate_Interface
     public function __call($method, $args)
     {
         if ('render' == substr($method, 0, 6)) {
+            $this->_isPartialRendering = true;
+            $this->render();
+            $this->_isPartialRendering = false;
             $decoratorName = substr($method, 6);
             if (false !== ($decorator = $this->getDecorator($decoratorName))) {
                 $decorator->setElement($this);
@@ -1951,6 +1964,10 @@ class Zend_Form_Element implements Zend_Validate_Interface
      */
     public function render(Zend_View_Interface $view = null)
     {
+        if ($this->_isPartialRendering) {
+            return '';
+        }
+
         if (null !== $view) {
             $this->setView($view);
         }

@@ -199,6 +199,16 @@ class Zend_Form_Element_HashTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-7404
+     */
+    public function testShouldRenderHashTokenIfRenderedThroughMagicCall()
+    {
+        $this->element->setView($this->getView());
+        $html = $this->element->renderViewHelper();
+        $this->assertContains($this->element->getHash(), $html, 'Html is: ' . $html);
+    }
+
+    /**
      * Used by test methods susceptible to ZF-2794, marks a test as incomplete
      *
      * @link   http://framework.zend.com/issues/browse/ZF-2794

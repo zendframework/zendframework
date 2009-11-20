@@ -20,6 +20,11 @@
  * @version    $Id$
  */
 
+/**
+ * Test helper
+ */
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 /** PHPUnit_Framework_TestCase */
 require_once 'PHPUnit/Framework/TestCase.php';
 
@@ -172,6 +177,25 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
         $protocol = $channel->getProtocol(Zend_Wildfire_Plugin_FirePhp::PROTOCOL_URI);
 
         $this->_profiler->setEnabled(true);
+
+        Zend_Wildfire_Channel_HttpHeaders::getInstance()->flush();
+
+        $messages = $protocol->getMessages();
+
+        $this->assertFalse($messages);
+    }
+
+    /**
+     * @group ZF-6395
+     */
+    public function testNoQueriesAfterFiltering()
+    {
+        $channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
+        $protocol = $channel->getProtocol(Zend_Wildfire_Plugin_FirePhp::PROTOCOL_URI);
+
+        $profiler = $this->_profiler->setEnabled(true);
+        $profiler->setFilterQueryType(Zend_Db_Profiler::INSERT | Zend_Db_Profiler::UPDATE);
+        $this->_db->fetchAll('select * from foo');
 
         Zend_Wildfire_Channel_HttpHeaders::getInstance()->flush();
 

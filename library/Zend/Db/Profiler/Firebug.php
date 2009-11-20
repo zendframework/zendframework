@@ -121,9 +121,9 @@ class Zend_Db_Profiler_Firebug extends Zend_Db_Profiler
      */
     public function queryEnd($queryId)
     {
-        parent::queryEnd($queryId);
+        $state = parent::queryEnd($queryId);
 
-        if (!$this->getEnabled()) {
+        if (!$this->getEnabled() || $state == self::IGNORED) {
             return;
         }
 

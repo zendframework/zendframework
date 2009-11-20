@@ -68,6 +68,15 @@ class Zend_Db_Profiler
      */
     const TRANSACTION = 64;
 
+    /**
+     * Inform that a query is stored (in case of filtering)
+     */
+    const STORED = 'stored';
+
+    /**
+     * Inform that a query is ignored (in case of filtering)
+     */
+    const IGNORED = 'ignored';
 
     /**
      * Array of Zend_Db_Profiler_Query objects.
@@ -289,7 +298,7 @@ class Zend_Db_Profiler
     {
         // Don't do anything if the Zend_Db_Profiler is not enabled.
         if (!$this->_enabled) {
-            return;
+            return self::IGNORED;
         }
 
         // Check for a valid query handle.
@@ -321,7 +330,7 @@ class Zend_Db_Profiler
          */
         if (null !== $this->_filterElapsedSecs && $qp->getElapsedSecs() < $this->_filterElapsedSecs) {
             unset($this->_queryProfiles[$queryId]);
-            return;
+            return self::IGNORED;
         }
 
         /**
@@ -330,8 +339,10 @@ class Zend_Db_Profiler
          */
         if (null !== $this->_filterTypes && !($qp->getQueryType() & $this->_filterTypes)) {
             unset($this->_queryProfiles[$queryId]);
-            return;
+            return self::IGNORED;
         }
+
+        return self::STORED;
     }
 
     /**

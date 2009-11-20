@@ -405,7 +405,7 @@ class Zend_Feed_Reader
         }
         $feedSet = new Zend_Feed_Reader_FeedSet;
         $links = $dom->getElementsByTagName('link');
-        $feedSet->addLinks($links);
+        $feedSet->addLinks($links, $uri);
         return $feedSet;
     }
 

@@ -249,6 +249,26 @@ class Zend_Feed_ReaderTest extends PHPUnit_Framework_TestCase
         }
         $this->assertEquals('http://feeds.feedburner.com/jonnyken/infoblog', $links->rss);
     }
+    
+    /**
+     * @group ZF-8330
+     */
+    public function testGetsFeedLinksAndNormalisesRelativeUrls()
+    {
+        if (!defined('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+            || !constant('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')
+        ) {
+            $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
+            return;
+        }
+
+        try {
+            $links = Zend_Feed_Reader::findFeedLinks('http://meiobit.com');
+        } catch(Exception $e) {
+            $this->fail($e->getMessage());
+        }
+        $this->assertEquals('http://meiobit.com/rss.xml', $links->rss);
+    }
 
     public function testAddsPrefixPath()
     {

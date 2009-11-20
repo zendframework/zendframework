@@ -25,6 +25,11 @@
 require_once 'Zend/Feed/Reader.php';
 
 /**
+ * @see Zend_Uri
+ */
+require_once 'Zend/Uri.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -52,9 +57,10 @@ class Zend_Feed_Reader_FeedSet extends ArrayObject
      * loaded automatically when each links 'feed' array key is accessed.
      *
      * @param DOMNodeList $links
+     * @param string $uri
      * @return void
      */
-    public function addLinks(DOMNodeList $links)
+    public function addLinks(DOMNodeList $links, $uri)
     {
         foreach ($links as $link) {
             if (strtolower($link->getAttribute('rel')) !== 'alternate'
@@ -62,18 +68,34 @@ class Zend_Feed_Reader_FeedSet extends ArrayObject
                 continue;
             }
             if (!isset($this->rss) && $link->getAttribute('type') == 'application/rss+xml') {
-                $this->rss = trim($link->getAttribute('href'));
+                $this->rss = $this->_absolutiseUri(trim($link->getAttribute('href')), $uri);
             } elseif(!isset($this->atom) && $link->getAttribute('type') == 'application/atom+xml') {
-                $this->atom = trim($link->getAttribute('href'));
+                $this->atom = $this->_absolutiseUri(trim($link->getAttribute('href')), $uri);
             } elseif(!isset($this->rdf) && $link->getAttribute('type') == 'application/rdf+xml') {
-                $this->rdf = trim($link->getAttribute('href'));
+                $this->rdf = $this->_absolutiseUri(trim($link->getAttribute('href')), $uri);
             }
             $this[] = new self(array(
                 'rel' => 'alternate',
                 'type' => $link->getAttribute('type'),
-                'href' => trim($link->getAttribute('href')),
+                'href' => $this->_absolutiseUri(trim($link->getAttribute('href')), $uri),
             ));
         }
+    }
+    
+    /**
+     *  Attempt to turn a relative URI into an absolute URI
+     */
+    protected function _absolutiseUri($link, $uri = null)
+    {
+        if (!Zend_Uri::check($link)) {
+            if (!is_null($uri)) {
+                $link = rtrim($uri, '/') . '/' . ltrim($link, '/');
+                if (!Zend_Uri::check($link)) {
+                    $link = null;
+                }
+            }
+        }
+        return $link;
     }
 
     /**

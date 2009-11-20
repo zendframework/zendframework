@@ -83,6 +83,15 @@ abstract class Zend_Controller_Action_Helper_Abstract
     }
 
     /**
+     * Hook into action controller initialization
+     *
+     * @return void
+     */
+    public function init()
+    {
+    }
+
+    /**
      * Hook into action controller preDispatch() workflow
      *
      * @return void

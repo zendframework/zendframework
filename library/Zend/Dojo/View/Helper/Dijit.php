@@ -220,7 +220,7 @@ abstract class Zend_Dojo_View_Helper_Dijit extends Zend_View_Helper_HtmlElement
                 }
                 break;
             case 'textarea':
-                $stripParams = array('id', 'name', 'type');
+                $stripParams = array('id', 'name', 'type', 'degrade');
                 break;
             default:
         }

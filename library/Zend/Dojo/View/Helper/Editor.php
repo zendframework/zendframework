@@ -20,8 +20,8 @@
  * @version    $Id$
  */
 
-/** Zend_Dojo_View_Helper_Textarea */
-require_once 'Zend/Dojo/View/Helper/Textarea.php';
+/** Zend_Dojo_View_Helper_Dijit */
+require_once 'Zend/Dojo/View/Helper/Dijit.php';
 
 /** Zend_Json */
 require_once 'Zend/Json.php';
@@ -35,7 +35,7 @@ require_once 'Zend/Json.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Textarea
+class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
 {
     /**
      * @param string Dijit type
@@ -83,6 +83,15 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Textarea
             }
         }
 
+        // Use a <div> by default, but allow degradation to <textarea> on request
+        $type = 'div';
+        if (isset($params['degrade'])) {
+            $type = ($params['degrade'])
+                  ? 'textarea'
+                  : 'div';
+            unset($params['degrade']);
+        }
+
         $hiddenName = $id;
         if (array_key_exists('id', $attribs)) {
             $hiddenId = $attribs['id'];
@@ -105,8 +114,18 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Textarea
         $this->_createGetParentFormFunction();
         $this->_createEditorOnSubmit($hiddenId, $textareaId);
 
-        $html = '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket()
-              . $this->textarea($textareaName, $value, $params, $attribs);
+        $attribs = $this->_prepareDijit($attribs, $params, 'textarea');
+
+        $html = '<input' . $this->_htmlAttribs($hiddenAttribs) . $this->getClosingBracket();
+        if ($type == 'textarea') {
+            $html .= '<textarea' . $this->_htmlAttribs($attribs) . '>'
+                   . $value
+                   . "</textarea>\n";
+        } else {
+            $html .= '<div' . $this->_htmlAttribs($attribs) . '>'
+                   . $value
+                   . "</div>\n";
+        }
 
         return $html;
     }
@@ -160,7 +179,7 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Textarea
         echo <<<EOJ
 function() {
     var form = zend.findParentForm(dojo.byId('$hiddenId'));
-    dojo.connect(form, 'onsubmit', function () {
+    dojo.connect(form, 'submit', function(e) {
         dojo.byId('$hiddenId').value = dijit.byId('$editorId').getValue(false);
     });
 }

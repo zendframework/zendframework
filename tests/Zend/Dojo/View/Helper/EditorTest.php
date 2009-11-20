@@ -97,11 +97,10 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
         return $view;
     }
 
-    public function testHelperShouldRenderTextareaWithAlteredId()
+    public function testHelperShouldRenderAlteredId()
     {
         $html = $this->helper->editor('foo');
-        $this->assertRegexp('#<textarea[^>]*(id="foo-Editor")#', $html, $html);
-        $this->assertContains('</textarea>', $html);
+        $this->assertContains('id="foo-Editor"', $html, $html);
     }
 
     public function testHelperShouldRenderHiddenElementWithGivenIdentifier()
@@ -116,7 +115,7 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
     public function testHelperShouldRenderDojoTypeWhenUsedDeclaratively()
     {
         $html = $this->helper->editor('foo');
-        $this->assertRegexp('#<textarea[^>]*(dojoType="dijit.Editor")#', $html);
+        $this->assertContains('dojoType="dijit.Editor"', $html);
     }
 
     public function testHelperShouldRegisterDijitModule()
@@ -126,15 +125,13 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
         $this->assertContains('dijit.Editor', $modules);
     }
 
-    public function testHelperShouldNormalizeArrayName()
+    public function testHelperShouldNormalizeArrayId()
     {
         $html = $this->helper->editor('foo[]');
-        $this->assertRegexp('#<textarea[^>]*(name="foo\[Editor\]\[\]")#', $html, $html);
-        $this->assertRegexp('#<textarea[^>]*(id="foo-Editor")#', $html, $html);
+        $this->assertContains('id="foo-Editor"', $html, $html);
 
         $html = $this->helper->editor('foo[bar]');
-        $this->assertRegexp('#<textarea[^>]*(name="foo\[bar\]\[Editor\]")#', $html, $html);
-        $this->assertRegexp('#<textarea[^>]*(id="foo-bar-Editor")#', $html, $html);
+        $this->assertContains('id="foo-bar-Editor"', $html, $html);
     }
 
     public function testHelperShouldJsonifyPlugins()
@@ -143,10 +140,10 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
         $html = $this->helper->editor('foo', '', array('plugins' => $plugins));
         $pluginsString = Zend_Json::encode($plugins);
         $pluginsString = str_replace('"', "'", $pluginsString);
-        $this->assertRegexp('#<textarea[^>]*(plugins="' . preg_quote($pluginsString) . '")#', $html);
+        $this->assertContains('plugins="' . $pluginsString . '"', $html);
     }
 
-    public function testHelperShouldCreateJavascriptToConnectTextareaToHiddenValue()
+    public function testHelperShouldCreateJavascriptToConnectEditorToHiddenValue()
     {
         $this->helper->editor('foo');
         $onLoadActions = $this->view->dojo()->getOnLoadActions();
@@ -195,6 +192,42 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
         foreach (array_values($plugins) as $plugin) {
             $this->assertContains('dojo.require("dijit._editor.plugins.' . $plugin . '")', $dojo, $dojo);
         }
+    }
+
+    /**
+     * @group ZF-6753
+     */
+    public function testHelperShouldUseDivByDefault()
+    {
+        $html = $this->helper->editor('foo');
+        $this->assertRegexp('#</?div[^>]*>#', $html, $html);
+    }
+
+    /**
+     * @group ZF-6753
+     */
+    public function testHelperShouldNotUseTextareaByDefault()
+    {
+        $html = $this->helper->editor('foo');
+        $this->assertNotRegexp('#</?textarea[^>]*>#', $html, $html);
+    }
+
+    /**
+     * @group ZF-6753
+     */
+    public function testHelperShouldAllowDegradationViaTextareaOnDemand()
+    {
+        $html = $this->helper->editor('foo', '', array('degrade' => true));
+        $this->assertRegexp('#</?textarea[^>]*>#', $html, $html);
+    }
+
+    /**
+     * @group ZF-6753
+     */
+    public function testWhenDegradingHelperShouldUseDijitEditorDojoType()
+    {
+        $html = $this->helper->editor('foo', '', array('degrade' => true));
+        $this->assertRegexp('#</?textarea[^>]*(dojoType="dijit.Editor")[^>]*>#', $html, $html);
     }
 }
 

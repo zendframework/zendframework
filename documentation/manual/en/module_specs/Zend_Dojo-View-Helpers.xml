@@ -657,6 +657,28 @@ echo $view->dateTextBox(
                 <programlisting language="php"><![CDATA[
 echo $view->editor('foo');
 ]]></programlisting>
+
+                <note>
+                    <title>Editor Dijit uses div by default</title>
+
+                    <para>
+                        The Editor dijit uses an <acronym>HTML</acronym> <acronym>DIV</acronym> by
+                        default.  The <classname>dijit._editor.RichText</classname> documentation
+                        indicates that having it built on an HTML <acronym>TEXTAREA</acronym> can
+                        potentially have security implications.
+                    </para>
+
+                    <para>
+                        That said, there may be times when you want an Editor widget that can
+                        gracefully degrade to a <acronym>TEXTAREA</acronym>. In such situations, you
+                        can do so by passing a boolean <constant>true</constant> value to the
+                        <varname>degrade</varname> parameter:
+                    </para>
+
+                    <programlisting language="php"><![CDATA[
+echo $this->editor('foo', '', array('degrade' => true));
+]]></programlisting>
+                </note>
             </listitem>
 
             <listitem>

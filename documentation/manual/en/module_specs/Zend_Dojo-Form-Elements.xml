@@ -675,6 +675,38 @@ $form->addElement('editor', 'content', array(
 ));
 ]]></programlisting>
         </example>
+
+        <note>
+            <title>Editor Dijit uses div by default</title>
+
+            <para>
+                The Editor dijit uses an <acronym>HTML</acronym> <acronym>DIV</acronym> by default.
+                The <classname>dijit._editor.RichText</classname> documentation indicates that
+                having it built on an HTML <acronym>TEXTAREA</acronym> can potentially have security
+                implications.
+            </para>
+
+            <para>
+                That said, there may be times when you want an Editor widget that can gracefully degrade to a
+                <acronym>TEXTAREA</acronym>. In such situations, you can do so by setting the
+                <varname>degrade</varname> property to <constant>true</constant>:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// At instantiation:
+$editor = new Zend_Dojo_Form_Element_Editor('foo', array(
+    'degrade' => true,
+));
+
+// Construction via the form:
+$form->addElement('editor', 'content', array(
+    'degrade' => true,
+));
+
+// Or after instantiation:
+$editor->degrade = true;
+]]></programlisting>
+        </note>
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.horizontalSlider">

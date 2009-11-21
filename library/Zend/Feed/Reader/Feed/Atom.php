@@ -49,6 +49,8 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
         parent::__construct($dom, $type);
         $atomClass = Zend_Feed_Reader::getPluginLoader()->getClassName('Atom_Feed');
         $this->_extensions['Atom_Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
+        $atomClass = Zend_Feed_Reader::getPluginLoader()->getClassName('DublinCore_Feed');
+        $this->_extensions['DublinCore_Feed'] = new $atomClass($dom, $this->_data['type'], $this->_xpath);
         foreach ($this->_extensions as $extension) {
             $extension->setXpathPrefix('/atom:feed');
         }
@@ -327,6 +329,28 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
         $this->_data['hubs'] = $hubs;
 
         return $this->_data['hubs'];
+    }
+    
+    /**
+     * Get all categories
+     *
+     * @return Zend_Feed_Reader_Collection_Category
+     */
+    public function getCategories()
+    {
+        if (array_key_exists('categories', $this->_data)) {
+            return $this->_data['categories'];
+        }
+
+        $categoryCollection = $this->getExtension('Atom')->getCategories();
+        
+        if (count($categoryCollection) == 0) {
+            $categoryCollection = $this->getExtension('DublinCore')->getCategories();
+        }
+
+        $this->_data['categories'] = $categoryCollection;
+
+        return $this->_data['categories'];
     }
 
     /**

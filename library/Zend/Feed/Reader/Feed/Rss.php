@@ -515,6 +515,46 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
 
         return $this->_data['hubs'];
     }
+    
+    /**
+     * Get all categories
+     *
+     * @return Zend_Feed_Reader_Collection_Category
+     */
+    public function getCategories()
+    {
+        if (array_key_exists('categories', $this->_data)) {
+            return $this->_data['categories'];
+        }
+
+        if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10 &&
+            $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090) {
+            $list = $this->_xpath->query('/rss/channel//category');
+        } else {
+            $list = $this->_xpath->query('/rdf:RDF/rss:channel//rss:category');
+        }
+
+        if ($list->length) {
+            $categoryCollection = new Zend_Feed_Reader_Collection_Category;
+            foreach ($list as $category) {
+                $categoryCollection[] = array(
+                    'term' => $category->nodeValue,
+                    'scheme' => $category->getAttribute('domain'),
+                    'label' => $category->nodeValue,
+                );
+            }
+        } else {
+            $categoryCollection = $this->getExtension('DublinCore')->getCategories();
+        }
+        
+        if (count($categoryCollection) == 0) {
+            $categoryCollection = $this->getExtension('Atom')->getCategories();
+        }
+
+        $this->_data['categories'] = $categoryCollection;
+
+        return $this->_data['categories'];
+    }
 
     /**
      * Read all entries to the internal entries array

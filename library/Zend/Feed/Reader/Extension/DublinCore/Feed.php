@@ -251,6 +251,40 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
 
         return $this->_data['date'];
     }
+    
+    /**
+     * Get categories (subjects under DC)
+     *
+     * @return Zend_Feed_Reader_Collection_Category
+     */
+    public function getCategories()
+    {
+        if (array_key_exists('categories', $this->_data)) {
+            return $this->_data['categories'];
+        }
+        
+        $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc11:subject');
+
+        if (!$list->length) {
+            $list = $this->_xpath->evaluate($this->getXpathPrefix() . '//dc10:subject');
+        }
+        
+        if ($list->length) {
+            $categoryCollection = new Zend_Feed_Reader_Collection_Category;
+            foreach ($list as $category) {
+                $categoryCollection[] = array(
+                    'term' => $category->nodeValue,
+                    'scheme' => null,
+                    'label' => $category->nodeValue,
+                );
+            }
+        } else {
+            $categoryCollection = new Zend_Feed_Reader_Collection_Category;
+        }
+        
+        $this->_data['categories'] = $categoryCollection;
+        return $this->_data['categories'];  
+    }
 
     /**
      * Register the default namespaces for the current feed format

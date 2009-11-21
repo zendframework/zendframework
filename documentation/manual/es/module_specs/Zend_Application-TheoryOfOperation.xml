@@ -35,7 +35,7 @@
         <listitem>
             <para>
                 <classname>Zend_Application</classname>: carga el entono
-				de PHP, incluyendo include_paths y autocarga,
+				de <acronym>PHP</acronym>, incluyendo include_paths y autocarga,
                 e instancia la clase requerida de bootstrap.
             </para>
         </listitem>

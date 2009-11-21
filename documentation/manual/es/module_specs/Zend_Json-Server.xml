@@ -276,7 +276,7 @@ $server->handle();
 
             <itemizedlist>
                 <listitem><para><methodname>setOptions(array $options)</methodname>: Especifica 
-                        la configuración del objeto. <methodname>$options</methodname> puede 
+                        la configuración del objeto. <varname>$options</varname> puede 
                         contener claves que concuerden con cualuier método 'set':
                         <methodname>setParams()</methodname>, <methodname>setMethod()</methodname>,
                         <methodname>setId()</methodname>, y
@@ -618,7 +618,7 @@ $server->handle();
                     asociativo conteniendo mínimamente la clave 'type' describiendo 
                     el tipo de parámetro y, opcionalmente la clave 'order'; 
                     cualquiera de las otras claves serán pasados como 
-                    <methodname>$options</methodname> a <methodname>addOption()</methodname>.</para></listitem>
+                    <varname>$options</varname> a <methodname>addOption()</methodname>.</para></listitem>
                 <listitem><para><methodname>setParams(array $params)</methodname>: 
                     Establecer muchos parámetros a la vez, sobrescribiendo 
                     cualquiera de los parámetros existentes.</para></listitem>

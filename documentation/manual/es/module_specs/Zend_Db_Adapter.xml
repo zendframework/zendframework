@@ -136,7 +136,7 @@
             Esta sección describe cómo crear una instancia de un
             Adaptador de base de datos. Esto corresponde a establecer
             una conexión a un servidor de Base de Datos (RDBMS) desde su
-            aplicación PHP.
+            aplicación <acronym>PHP</acronym>.
         </para>
 
         <sect3 id="zend.db.adapter.connecting.constructor">
@@ -367,7 +367,7 @@ $db = Zend_Db::factory($config->database);
                         : algunos servidores RDBMS pueden aceptar conexiones de red
                         sobre un número de puerto específico.
             El parámetro del puerto le permite especificar el puerto al
-            que su aplicación PHP se conecta, para que concuerde el puerto
+            que su aplicación <acronym>PHP</acronym> se conecta, para que concuerde el puerto
             configurado en el servidor RDBMS.
                     </para>
                 </listitem>
@@ -541,7 +541,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 RDBMS, use the
                 <methodname>getConnection()</methodname>
                 method. This method returns an object for the connection
-                as represented by the respective PHP database extension.
+                as represented by the respective <acronym>PHP</acronym> database extension.
                 For example, if you use any of the Adapter classes for
                 PDO drivers, then
                 <methodname>getConnection()</methodname>
@@ -1291,8 +1291,8 @@ $n = $db->delete('bugs', 'bug_id = 3');
 
         <para>
             When you form SQL queries, often it is the case that you need to
-            include the values of PHP variables in SQL expressions. This is
-            risky, because if the value in a PHP string contains certain
+            include the values of <acronym>PHP</acronym> variables in SQL expressions. This is
+            risky, because if the value in a <acronym>PHP</acronym> string contains certain
             symbols, such as the quote symbol, it could result in invalid SQL.
             For example, notice the imbalanced quote characters in the
             following query:
@@ -1308,7 +1308,7 @@ echo $sql;
         <para>
             Even worse is the risk that such code mistakes might be exploited
             deliberately by a person who is trying to manipulate the function
-            of your web application. If they can specify the value of a PHP
+            of your web application. If they can specify the value of a <acronym>PHP</acronym>
             variable through the use of an HTTP parameter or other mechanism,
             they might be able to make your SQL queries do things that you
             didn't intend them to do, such as return data to which the person
@@ -1319,11 +1319,11 @@ echo $sql;
 
         <para>
             The <classname>Zend_Db</classname> Adapter class provides convenient functions to help you
-            reduce vulnerabilities to SQL Injection attacks in your PHP code.
-            The solution is to escape special characters such as quotes in PHP
+            reduce vulnerabilities to SQL Injection attacks in your <acronym>PHP</acronym> code.
+            The solution is to escape special characters such as quotes in <acronym>PHP</acronym>
             values before they are interpolated into your SQL strings.
             This protects against both accidental and deliberate manipulation
-            of SQL strings by PHP variables that contain special characters.
+            of SQL strings by <acronym>PHP</acronym> variables that contain special characters.
         </para>
 
         <sect3 id="zend.db.adapter.quoting.quote">
@@ -1412,12 +1412,12 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             <title>Using quoteInto()</title>
 
             <para>
-                The most typical usage of quoting is to interpolate a PHP
+                The most typical usage of quoting is to interpolate a <acronym>PHP</acronym>
                 variable into a SQL expression or statement. You can use the
                 <methodname>quoteInto()</methodname> method to do this in one step. This
                 method takes two arguments: the first argument is a string
                 containing a placeholder symbol (<methodname>?</methodname>), and the
-                second argument is a value or PHP variable that should be
+                second argument is a value or <acronym>PHP</acronym> variable that should be
                 substituted for that placeholder.
             </para>
 
@@ -1466,10 +1466,10 @@ echo $sql;
 
             <para>
                 Values are not the only part of SQL syntax that might need to
-                be variable. If you use PHP variables to name tables, columns,
+                be variable. If you use <acronym>PHP</acronym> variables to name tables, columns,
                 or other identifiers in your SQL statements, you might need to
                 quote these strings too. By default, SQL identifiers have
-                syntax rules like PHP and most other programming languages.
+                syntax rules like <acronym>PHP</acronym> and most other programming languages.
                 For example, identifiers should not contain spaces, certain
                 punctuation or special characters, or international characters.
                 Also certain words are reserved for SQL syntax, and should not
@@ -1760,14 +1760,14 @@ try {
         <title>Closing a Connection</title>
 
         <para>
-            Normally it is not necessary to close a database connection. PHP
+            Normally it is not necessary to close a database connection. <acronym>PHP</acronym>
             automatically cleans up all resources and the end of a request.
             Database extensions are designed to close the connection as the
             reference to the resource object is cleaned up.
         </para>
 
         <para>
-            However, if you have a long-duration PHP script that initiates many
+            However, if you have a long-duration <acronym>PHP</acronym> script that initiates many
             database connections, you might need to close the connection, to avoid
             exhausting the capacity of your RDBMS server. You can use the
             Adapter's <methodname>closeConnection()</methodname> method to explicitly close

@@ -226,7 +226,7 @@ class AlternativeController extends Zend_Controller_Action
             <title>Usando la API _forward() de goto()</title>
 
             <para>
-                La API <methodname>gotoSimple()</methodname> imita a la de
+                La <acronym>API</acronym> <methodname>gotoSimple()</methodname> imita a la de
                 <classname>Zend_Controller_Action::_forward()</classname>.
                 La diferencia principal es que construye una URL desde los
                 parámetros pasados, y utiliza el formato por defecto

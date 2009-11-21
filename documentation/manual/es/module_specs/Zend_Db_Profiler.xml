@@ -98,7 +98,7 @@ db.profiler.class   = "MyProject_Db_Profiler"
 db.profiler.enabled = true
 ]]></programlisting>
 
-            Esta configuración puede ser aplicada con el siguiente código PHP:
+            Esta configuración puede ser aplicada con el siguiente código <acronym>PHP</acronym>:
 
              <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('config.ini', 'main');

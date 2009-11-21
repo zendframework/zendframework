@@ -50,7 +50,7 @@ $router->addRoute('user', $route);
             La implementación actual le permite utilizar cualquier carácter 
             (salvo una barra) como un identificador de variable, pero se recomienda 
             encarecidamente que se utilicen sólo caracteres que sean válidos para 
-            identificadores de variables PHP. En implementaciones futuras se 
+            identificadores de variables <acronym>PHP</acronym>. En implementaciones futuras se 
             podría alterar este comportamiento, resultando en probables fallos 
             escondidos en su código.
         </para>

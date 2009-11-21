@@ -61,7 +61,7 @@
             <ulink url="http://php.net/date_default_timezone_set">
                 date_default_timezone_set()
             </ulink>
-            . En PHP, podemos ajustar todas las funciones relacionadas
+            . En <acronym>PHP</acronym>, podemos ajustar todas las funciones relacionadas
             con fechas y hora para trabajar para un usuario particular
             configurando por defecto una zona horaria de acuerdo a las
             expectativas del usuario. Para una lista completa de
@@ -99,7 +99,7 @@ date_default_timezone_set('Europe/Berlin');
         <title>¿Por Qué Usar Zend_Date?</title>
 
         <para>
-            <classname>Zend_Date</classname> ofrece las siguientes prestaciones, las cuales extienden el alcance de las funciones de fecha de PHP:
+            <classname>Zend_Date</classname> ofrece las siguientes prestaciones, las cuales extienden el alcance de las funciones de fecha de <acronym>PHP</acronym>:
         </para>
 
         <itemizedlist mark="opencircle">
@@ -161,7 +161,7 @@ date_default_timezone_set('Europe/Berlin');
                 </para>
                 <para>
                     Las horas de amanecer y puesta de sol pueden mostrarse para cualquier lugar y día, para que no pierda ni un segundo de luz diurna
-                    para trabajar en su proyecto PHP favorito :)
+                    para trabajar en su proyecto <acronym>PHP</acronym> favorito :)
                 </para>
             </listitem>
         </itemizedlist>

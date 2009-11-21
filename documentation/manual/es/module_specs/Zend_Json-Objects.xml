@@ -21,7 +21,7 @@
         <para>
             La decodificación de objetos JSON plantea una dificultad adicional, 
             sin embargo, ya que los objetos Javascript se corresponden más 
-            estrechamente a un array asociativo de PHP. 
+            estrechamente a un array asociativo de <acronym>PHP</acronym>. 
             Algunos sugieren que debe pasarse un identificador de clase, y una  
             instancia del objeto de esa clase debe crearse y alimentarla con datos 
             de pares clave/valor del objeto JSON; otros consideran que esto podría 

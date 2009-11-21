@@ -158,7 +158,7 @@ $this->_helper->autoCompleteDojo($data);
             <para>
                 En primer lugar, veamos el Javascript necesario. Dojo ofrece
                 un marco completo para crear Javascript OOP, tal como lo hace
-                Zend Framework para PHP. Parte de eso es la capacidad de
+                Zend Framework para <acronym>PHP</acronym>. Parte de eso es la capacidad de
                 crear pseudo-namespaces utilizando la jerarquía de directorios.
                 Crearemos un directorio 'custom' en el mismo nivel en el cual
                 el directorio de Dojo forma parte de la distribución Dojo.

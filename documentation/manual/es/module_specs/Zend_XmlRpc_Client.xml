@@ -11,7 +11,7 @@
             Zend Framework provee soporte para consumo remoto para servicios XML-RPC
             como un cliente en el paquete <classname>Zend_XmlRpc_Client</classname>
             . Su mejor característica es la conversión automática de tipos
-            entre PHP y XML-RPC, un servidor de objeto proxy, y acceso a
+            entre <acronym>PHP</acronym> y XML-RPC, un servidor de objeto proxy, y acceso a
             capacidades de instrospección del servidor.
         </para>
 
@@ -46,9 +46,9 @@ echo $client->call('test.sayHello');
         </example>
 
         <para>
-            El valor XML-RPC devuelto desde la llamada al método remoto automáticamente será convertida al tipo nativo PHP equivalente
+            El valor XML-RPC devuelto desde la llamada al método remoto automáticamente será convertida al tipo nativo <acronym>PHP</acronym> equivalente
 
-            . En el ejemplo anterior, es devuelto un <methodname>string</methodname> PHP
+            . En el ejemplo anterior, es devuelto un <methodname>string</methodname> <acronym>PHP</acronym>
             y está listo para ser usado inmediatamente.
         </para>
 
@@ -80,7 +80,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
 
         <para>
             El método <methodname>call()</methodname> convertirá automáticamente la respuesta
-            XML-RPC y devolverá su tipo nativo PHP equivalente. Un objeto
+            XML-RPC y devolverá su tipo nativo <acronym>PHP</acronym> equivalente. Un objeto
             <methodname>Zend_XmlRpc_Response</methodname> para el valor devuelto también estará
             disponible para llamar el método <methodname>getLastResponse()</methodname>
             después de la llamada.
@@ -93,7 +93,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             Algunas llamadas a métodos remoto requieren parámetros. Éstos son
            dados al método <methodname>call()</methodname> de <classname>Zend_XmlRpc_Client</classname>
             como un array en el segundo parámetro. Cada parámetro puede ser dado
-            como un tipo nativo PHP, que será convertido automáticamente,
+            como un tipo nativo <acronym>PHP</acronym>, que será convertido automáticamente,
             o como un  objeto que representa un tipo específico de XML-RPC
             (uno de los objetos  <methodname>Zend_XmlRpc_Value</methodname>).
         </para>
@@ -102,7 +102,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             <title>Tipos Nativos PHP como Parámetro</title>
             <para>
                 Los parámetros pueden ser pasados a <methodname>call()</methodname> como variables
-                PHP nativas, ya sea un <methodname>string</methodname>,
+                <acronym>PHP</acronym> nativas, ya sea un <methodname>string</methodname>,
                 <methodname>integer</methodname>, <methodname>float</methodname>,
                 <methodname>boolean</methodname>, <methodname>array</methodname>, o un
                 <methodname>object</methodname>. En este caso, cada tipo PHP nativo será

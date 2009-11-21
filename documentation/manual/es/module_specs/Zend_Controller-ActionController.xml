@@ -527,7 +527,7 @@ class MyController extends Zend_Controller_Action
                 Si hay una solicitud a un controlador que incluye un método de
                 acción no definido, se invocará a
                 <classname>Zend_Controller_Action::__call()</classname>.
-                <methodname>__call()</methodname> es, por supuesto, el método mágico de PHP
+                <methodname>__call()</methodname> es, por supuesto, el método mágico de <acronym>PHP</acronym>
                 para la sobrecarga del método.
             </para>
 

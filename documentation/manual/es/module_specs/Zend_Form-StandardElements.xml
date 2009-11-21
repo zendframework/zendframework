@@ -828,7 +828,7 @@ $element->setValue(array('bar', 'bat'));
         <para>
             Textareas son usadas cuando se espera una larga cantidad de texto y
             no limites en la cantidad de texto sometido ( otro que el máximo tamaño
-            tomado por su servidor or PHP).
+            tomado por su servidor or <acronym>PHP</acronym>).
             <classname>Zend_Form_Element_Textarea</classname> usa la vista ayuda 'textArea'
             para desplegar tales elementos, ocupando el valor como el contendio del elemento.
         </para>

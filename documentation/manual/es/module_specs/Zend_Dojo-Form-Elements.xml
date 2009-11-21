@@ -1531,7 +1531,7 @@ $form->addElement(
                         <methodname>getRegExp()</methodname>: establece y
                     recupera la expresión regular a utilizar para validar el
                     elemento. La expresión regular no necesita límites (a
-                    diferencia de la familia de funciones preg*, de PHP).
+                    diferencia de la familia de funciones preg*, de <acronym>PHP</acronym>).
                 </para>
             </listitem>
 

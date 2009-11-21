@@ -484,10 +484,10 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     La diferencia fundamental es que puede escribir una opción 
                     que no está en la lista de las opciones disponibles, y que 
                     todavía considera válido el input. Opcionalmente acepta un quinto 
-                    argumento, un array asociativo <methodname>$options</methodname>; si lo 
+                    argumento, un array asociativo <varname>$options</varname>; si lo 
                     hay, ComboBox será presentado como un <methodname>select</methodname>. 
                     Note también que la <emphasis>label values</emphasis> del 
-                    array <methodname>$options</methodname> será devuelto al form -- y no 
+                    array <varname>$options</varname> será devuelto al form -- y no 
                     los valores en si mismos.
                 </para>
 
@@ -935,7 +935,7 @@ echo $view->passwordTextBox(
 
                 <para>
                     RadioButton acepta un cuarto argumento como opción,
-                    <methodname>$options</methodname>, un array asociativo de pares 
+                    <varname>$options</varname>, un array asociativo de pares 
                     valor/etiqueta utilizado como opciones de radio. 
                     También puede pasar estos como la clave <methodname>options</methodname> 
                     de <methodname>$attribs</methodname>. 

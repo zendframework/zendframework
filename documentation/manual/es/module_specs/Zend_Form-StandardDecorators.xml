@@ -20,7 +20,7 @@
             ser de cualquier valor de llamada de retorno PHP. Los Callbacks deben
             aceptar tres argumentos: <methodname>$content</methodname> (el contenido original
             enviado al decorador), <methodname>$element</methodname> (el objeto que se está decorando),
-            y un array de <methodname>$options</methodname>. Un callback de ejemplo sería:
+            y un array de <varname>$options</varname>. Un callback de ejemplo sería:
         </para>
 
          <programlisting language="php"><![CDATA[

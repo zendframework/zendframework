@@ -29,7 +29,7 @@
             <ulink url="http://php.net/parse_ini_file">
                 <methodname>parse_ini_file()</methodname>
             </ulink>
-            de PHP. Por favor, revise esta documentación para observar
+            de <acronym>PHP</acronym>. Por favor, revise esta documentación para observar
             sus comportamientos específicos, que se propagan a
             <classname>Zend_Config_Ini</classname>
             , tales como la forma en que los valores especiales:
@@ -51,7 +51,7 @@
             Por defecto, el carácter separador de clave es el punto (
             <methodname>.</methodname>
             ). Puede ser reemplazado, no obstante,cambiando la clave de
-            <methodname>$options</methodname>
+            <varname>$options</varname>
             llamada
             <methodname>'nestSeparator'</methodname>
             al construir el objeto

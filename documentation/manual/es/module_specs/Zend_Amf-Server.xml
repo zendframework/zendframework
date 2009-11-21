@@ -313,7 +313,7 @@ echo $respuesta;
 
         <para>
             <methodname>Zend_Amf</methodname> ofrece tres métodos para mapear ActionScript y objetos
-            PHP. </para>
+            <acronym>PHP</acronym>. </para>
 
         <itemizedlist>
             <listitem>
@@ -388,7 +388,7 @@ package
             actualizada. El segundo es el tag RemoteClass y define que esta clase puede tener
             mapeado un objeto remoto con un nombre de alias, en este caso
                 <emphasis>ContactVO</emphasis> Es obligatorio que en esta etiqueta(tag), el valor
-            que se estableció es la clase PHP sea estrictamente equivalente. </para>
+            que se estableció es la clase <acronym>PHP</acronym> sea estrictamente equivalente. </para>
         <programlisting language="as"><![CDATA[
 [Bindable]
 private var myContact:ContactVO;

@@ -224,7 +224,7 @@ switch ($result->getCode()) {
             
             <para> Por defecto, <classname>Zend_Auth</classname> provee
                 almacenamiento persistente de la identidad desde un intento de
-                autenticación exitoso usando la sesión PHP. En un intento de
+                autenticación exitoso usando la sesión <acronym>PHP</acronym>. En un intento de
                 autenticación exitoso,
                 <classname>end_Auth::authenticate()</classname> almacena la
                 identidad del resultado de autenticación en almacenamiento

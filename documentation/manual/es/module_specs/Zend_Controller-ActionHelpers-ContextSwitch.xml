@@ -212,7 +212,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem>
                 <para><emphasis>callbacks</emphasis>: un array que contiene una
-                o más de las claves 'init' o 'post', apuntando a callbacks PHP
+                o más de las claves 'init' o 'post', apuntando a callbacks <acronym>PHP</acronym>
                 válidos que pueden utilizarse para inicializar el contexto y
                 posterior procesamiento.</para>
 
@@ -602,7 +602,7 @@ $contextSwitch->initContext();
                     pueden ser 'init' o 'post' (indicando que se llamará a un
                     callback para cada contexto de inicialización o
                     postDispatch). <methodname>$callback</methodname> debe ser un callback
-                    válido de PHP.
+                    válido de <acronym>PHP</acronym>.
                 </para>
             </listitem>
 

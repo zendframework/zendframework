@@ -61,9 +61,9 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <para>
             El argumento <methodname>$once</methodname> es un booleano.  Si es <methodname>TRUE</methodname>,
-            <classname>Zend_Loader::loadFile()</classname> esa la función PHP
+            <classname>Zend_Loader::loadFile()</classname> esa la función <acronym>PHP</acronym>
             <ulink url="http://php.net/include"><methodname>include_once()</methodname></ulink>
-            para cargar el archivo, de lo contrario se utiliza la función PHP
+            para cargar el archivo, de lo contrario se utiliza la función <acronym>PHP</acronym>
             <ulink url="http://php.net/include_once"><methodname>include()</methodname></ulink>.
         </para>
 

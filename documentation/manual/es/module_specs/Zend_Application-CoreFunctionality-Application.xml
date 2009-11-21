@@ -163,7 +163,7 @@
                     <entry><classname>Zend_Application</classname></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <methodname>$options</methodname>: <emphasis>requerido</emphasis>.
+                            <varname>$options</varname>: <emphasis>requerido</emphasis>.
                             Un array de opciones de aplicación.
                         </para></listitem>
                     </itemizedlist></entry>

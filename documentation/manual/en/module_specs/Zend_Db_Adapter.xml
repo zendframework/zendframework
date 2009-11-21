@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
-
     <title>Zend_Db_Adapter</title>
 
     <para>
@@ -34,12 +33,14 @@
                 extension
             </para>
         </listitem>
+
         <listitem>
             <para>
                 MySQL, using the <ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink>
                 <acronym>PHP</acronym> extension
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Microsoft <acronym>SQL</acronym> Server, using the <ulink
@@ -47,25 +48,27 @@
                 extension
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Oracle, using the <ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink>
                 <acronym>PHP</acronym> extension
             </para>
         </listitem>
+
         <listitem>
             <para>
                 PostgreSQL, using the <ulink url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink>
                 <acronym>PHP</acronym> extension
             </para>
         </listitem>
+
         <listitem>
             <para>
                 SQLite, using the <ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink>
                 <acronym>PHP</acronym> extension
             </para>
         </listitem>
-
     </itemizedlist>
 
     <para>
@@ -81,12 +84,14 @@
                 <acronym>PHP</acronym> extension
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Oracle, using the <ulink url="http://www.php.net/oci8">oci8</ulink>
                 <acronym>PHP</acronym> extension
             </para>
         </listitem>
+
         <listitem>
             <para>
                 IBM DB2 and DB2/i5, using the <ulink
@@ -94,6 +99,7 @@
                 extension
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Firebird/Interbase, using the <ulink
@@ -115,7 +121,6 @@
     </note>
 
     <sect2 id="zend.db.adapter.connecting">
-
         <title>Connecting to a Database Using an Adapter</title>
 
         <para>
@@ -125,7 +130,6 @@
         </para>
 
         <sect3 id="zend.db.adapter.connecting.constructor">
-
             <title>Using a Zend_Db Adapter Constructor</title>
 
             <para>
@@ -136,6 +140,7 @@
 
             <example id="zend.db.adapter.connecting.constructor.example">
                 <title>Using an Adapter Constructor</title>
+
                 <programlisting language="php"><![CDATA[
 $db = new Zend_Db_Adapter_Pdo_Mysql(array(
     'host'     => '127.0.0.1',
@@ -145,11 +150,9 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 ));
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.connecting.factory">
-
             <title>Using the Zend_Db Factory</title>
 
             <para>
@@ -170,6 +173,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <example id="zend.db.adapter.connecting.factory.example">
                 <title>Using the Adapter Factory Method</title>
+
                 <programlisting language="php"><![CDATA[
 // We don't need the following statement because the
 // Zend_Db_Adapter_Pdo_Mysql file will be loaded for us by the Zend_Db
@@ -214,11 +218,9 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 ));
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.connecting.factory-config">
-
             <title>Using Zend_Config with the Zend_Db Factory</title>
 
             <para>
@@ -239,12 +241,14 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
             <example id="zend.db.adapter.connecting.factory.example1">
                 <title>Using the Adapter Factory Method with a Zend_Config Object</title>
+
                 <para>
                     In the example below, a <classname>Zend_Config</classname> object is created
                     from an array. You can also load data from an external file using classes such
                     as <link linkend="zend.config.adapters.ini">Zend_Config_Ini</link>
                     and <link linkend="zend.config.adapters.xml">Zend_Config_Xml</link>.
                 </para>
+
                 <programlisting language="php"><![CDATA[
 $config = new Zend_Config(
     array(
@@ -271,11 +275,9 @@ $db = Zend_Db::factory($config->database);
                 argument is of type <classname>Zend_Config</classname>, it is assumed to contain all
                 parameters, and the second argument is ignored.
             </para>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.connecting.parameters">
-
             <title>Adapter Parameters</title>
 
             <para>
@@ -293,6 +295,7 @@ $db = Zend_Db::factory($config->database);
                         'localhost' or '127.0.0.1'.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>username</emphasis>:
@@ -300,6 +303,7 @@ $db = Zend_Db::factory($config->database);
                         <acronym>RDBMS</acronym> server.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>password</emphasis>:
@@ -307,12 +311,14 @@ $db = Zend_Db::factory($config->database);
                         connection to the <acronym>RDBMS</acronym> server.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>dbname</emphasis>:
                         database instance name on the <acronym>RDBMS</acronym> server.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>port</emphasis>:
@@ -323,12 +329,14 @@ $db = Zend_Db::factory($config->database);
                         on the <acronym>RDBMS</acronym> server.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>charset</emphasis>:
                         specify the charset used for the connection.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>options</emphasis>:
@@ -336,6 +344,7 @@ $db = Zend_Db::factory($config->database);
                         that are generic to all <classname>Zend_Db_Adapter</classname> classes.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>driver_options</emphasis>:
@@ -345,6 +354,7 @@ $db = Zend_Db::factory($config->database);
                         set attributes of a <acronym>PDO</acronym> driver.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>adapterNamespace</emphasis>:
@@ -358,6 +368,7 @@ $db = Zend_Db::factory($config->database);
 
             <example id="zend.db.adapter.connecting.parameters.example1">
                 <title>Passing the Case-Folding Option to the Factory</title>
+
                 <para>
                     You can specify this option by the constant
                     <constant>Zend_Db::CASE_FOLDING</constant>.
@@ -368,6 +379,7 @@ $db = Zend_Db::factory($config->database);
                     <constant>Zend_Db::CASE_UPPER</constant>, and
                     <constant>Zend_Db::CASE_LOWER</constant>.
                 </para>
+
                 <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::CASE_FOLDING => Zend_Db::CASE_UPPER
@@ -387,6 +399,7 @@ $db = Zend_Db::factory('Db2', $params);
 
             <example id="zend.db.adapter.connecting.parameters.example2">
                 <title>Passing the Auto-Quoting Option to the Factory</title>
+
                 <para>
                     You can specify this option by the constant
                     <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant>. If the value
@@ -399,6 +412,7 @@ $db = Zend_Db::factory('Db2', $params);
                     to delimit identifiers, you must do so yourself using the
                     <methodname>quoteIdentifier()</methodname> method.
                 </para>
+
                 <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::AUTO_QUOTE_IDENTIFIERS => false
@@ -418,6 +432,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <example id="zend.db.adapter.connecting.parameters.example3">
                 <title>Passing PDO Driver Options to the Factory</title>
+
                 <programlisting language="php"><![CDATA[
 $pdoParams = array(
     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
@@ -440,6 +455,7 @@ echo $db->getConnection()
 
             <example id="zend.db.adapter.connecting.parameters.example4">
                 <title>Passing Serialization Options to the Factory</title>
+
                 <programlisting language="php"><![CDATA[
 $options = array(
     Zend_Db::ALLOW_SERIALIZATION => false
@@ -456,7 +472,6 @@ $params = array(
 $db = Zend_Db::factory('Pdo_Mysql', $params);
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.db.adapter.connecting.getconnection">
@@ -510,6 +525,7 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <example id="zend.db.adapter.connecting.getconnection.example">
                 <title>Handling Connection Exceptions</title>
+
                 <programlisting language="php"><![CDATA[
 try {
     $db = Zend_Db::factory('Pdo_Mysql', $parameters);
@@ -628,7 +644,7 @@ CREATE TABLE bugs_products (
 
         <para>
             This section describes methods of the Adapter class with which you
-            can run SELECT queries and retrieve the query results.
+            can run <acronym>SELECT</acronym> queries and retrieve the query results.
         </para>
 
         <sect3 id="zend.db.adapter.select.fetchall">
@@ -636,16 +652,16 @@ CREATE TABLE bugs_products (
             <title>Fetching a Complete Result Set</title>
 
             <para>
-                You can run a <acronym>SQL</acronym> SELECT query and retrieve its results in one
-                step using the <methodname>fetchAll()</methodname> method.
+                You can run a <acronym>SQL</acronym> <acronym>SELECT</acronym> query and retrieve
+                its results in one step using the <methodname>fetchAll()</methodname> method.
             </para>
 
             <para>
                 The first argument to this method is a string containing a
-                SELECT statement. Alternatively, the first argument can be an
+                <acronym>SELECT</acronym> statement. Alternatively, the first argument can be an
                 object of class <link linkend="zend.db.select">Zend_Db_Select</link>.
                 The Adapter automatically converts this object to a string
-                representation of the SELECT statement.
+                representation of the <acronym>SELECT</acronym> statement.
             </para>
 
             <para>
@@ -693,10 +709,10 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         Note that if your select-list contains more than one
                         column with the same name, for example if they are from
-                        two different tables in a JOIN, there can be only one
+                        two different tables in a <acronym>JOIN</acronym>, there can be only one
                         entry in the associative array for a given name.
-                        If you use the FETCH_ASSOC mode, you should specify
-                        column aliases in your SELECT query to ensure that the
+                        If you use the <acronym>FETCH_ASSOC</acronym> mode, you should specify
+                        column aliases in your <acronym>SELECT</acronym> query to ensure that the
                         names result in unique array keys.
                     </para>
                     <para>
@@ -821,13 +837,13 @@ echo $result[0];
                 The <methodname>fetchPairs()</methodname> method returns data in an array
                 of key-value pairs, as an associative array with a single entry
                 per row. The key of this associative array is taken from the
-                first column returned by the SELECT query. The value is taken
-                from the second column returned by the SELECT query. Any other
+                first column returned by the <acronym>SELECT</acronym> query. The value is taken
+                from the second column returned by the <acronym>SELECT</acronym> query. Any other
                 columns returned by the query are discarded.
             </para>
 
             <para>
-                You should design the SELECT query so that the first column
+                You should design the <acronym>SELECT</acronym> query so that the first column
                 returned has unique values. If there are duplicates values in
                 the first column, entries in the associative array will be
                 overwritten.
@@ -1252,11 +1268,11 @@ $n = $db->delete('bugs', 'bug_id = 3');
         <title>Quoting Values and Identifiers</title>
 
         <para>
-            When you form SQL queries, often it is the case that you need to
-            include the values of PHP variables in SQL expressions. This is
-            risky, because if the value in a PHP string contains certain
-            symbols, such as the quote symbol, it could result in invalid SQL.
-            For example, notice the imbalanced quote characters in the
+            When you form <acronym>SQL</acronym> queries, often it is the case that you need to
+            include the values of <acronym>PHP</acronym> variables in <acronym>SQL</acronym>
+            expressions. This is risky, because if the value in a <acronym>PHP</acronym> string
+            contains certain symbols, such as the quote symbol, it could result in invalid
+            <acronym>SQL</acronym>. For example, notice the imbalanced quote characters in the
             following query:
             <programlisting language="php"><![CDATA[
 $name = "O'Reilly";
@@ -1325,13 +1341,13 @@ echo $sql;
             </para>
 
             <para>
-                Values may need to be quoted or not quoted according to the SQL
+                Values may need to be quoted or not quoted according to the <acronym>SQL</acronym>
                 datatype context in which they are used. For instance, in some
                 RDBMS brands, an integer value must not be quoted as a string
                 if it is compared to an integer-type column or expression.
-                In other words, the following is an error in some SQL
-                implementations, assuming <property>intColumn</property> has a SQL
-                datatype of <constant>INTEGER</constant>
+                In other words, the following is an error in some <acronym>SQL</acronym>
+                implementations, assuming <property>intColumn</property> has a
+                <acronym>SQL</acronym> datatype of <constant>INTEGER</constant>
 
                 <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'
@@ -1346,6 +1362,7 @@ SELECT * FROM atable WHERE intColumn = '123'
 
             <example id="zend.db.adapter.quoting.quote.example-2">
                 <title>Using quote() with a SQL Type</title>
+
                 <programlisting language="php"><![CDATA[
 $value = '1234';
 $sql = 'SELECT * FROM atable WHERE intColumn = '
@@ -2136,15 +2153,16 @@ if (!is_null($version)) {
                         You can specify <property>pdoType</property> as a key in the
                         options array. The value can be "mssql" (the default),
                         "dblib", "freetds", or "sybase". This option affects
-                        the DSN prefix the adapter uses when constructing the
-                        DSN string. Both "freetds" and "sybase" imply a prefix
+                        the <acronym>DSN</acronym> prefix the adapter uses when constructing the
+                        <acronym>DSN</acronym> string. Both "freetds" and "sybase" imply a prefix
                         of "sybase:", which is used for the
                         <ulink url="http://www.freetds.org/">FreeTDS</ulink> set
                         of libraries.
                         See also
                         <ulink url="http://www.php.net/manual/en/ref.pdo-dblib.connection.php">
                         http://www.php.net/manual/en/ref.pdo-dblib.connection.php</ulink>
-                        for more information on the DSN prefixes used in this driver.
+                        for more information on the <acronym>DSN</acronym> prefixes used in this
+                        driver.
                     </para>
                 </listitem>
             </itemizedlist>

@@ -440,6 +440,68 @@ foreach ($links as $link) {
         is a lazy loaded attempt - feeds are never loaded until you try to
         access them using this method.</para>
   </sect2>
+  
+  <sect2 id="zend.feed.reader.attribute-collections">
+        <title>Attribute Collections</title>
+        
+        <para>In an attempt to simplify return types, with Zend Framework 1.10 return
+        types from the various feed and entry level methods may include an object
+        of type <classname>Zend_Feed_Reader_Collection_CollectionAbstract</classname>.
+        Despite the special class name which I'll explain below, this is just a simple
+        subclass of SPL's <classname>ArrayObject</classname>.</para>
+        
+        <para>The main purpose here is to allow the presentation of as much data as possible
+        from the requested elements, while still allowing access to the most relevant
+        data as a simple array. This also enforces a standard approach to returning
+        such data which previously may have wandered between arrays and objects.</para>
+        
+        <para>The new class type acts identically to <classname>ArrayObject</classname>
+        with the sole addition being a new method <methodname>getValues()</methodname>
+        which returns a simple flat array containing the most relevant information.</para>
+        
+        <para>A simple example of this is
+        <methodname>Zend_Feed_Reader_FeedInterface::getCategories()</methodname>.
+        When used with any RSS or Atom feed, this method will return category data as
+        a container object called <classname>Zend_Feed_Reader_Collection_Category</classname>.
+        The container object will contain, per category, three fields of data: type, scheme and
+        label. The "type" is the basic category name, often machine readable (i.e. plays nice
+        with URIs). The scheme represents a categorisation scheme (usually a URI identifier) also
+        known as a "domain" in RSS 2.0. The "label" is a human readable category name which supports
+        html entities.</para>
+        
+        <para>To access category labels by themselves in a simple value array,
+        you might commit to something like:</para>
+        
+        <programlisting language="php"><![CDATA[
+$feed = Zend_Feed_Reader::import('http://www.example.com/atom.xml');
+$categories = $feed->getCategories();
+$labels = array();
+foreach ($categories as $cat) {
+    $labels[] = $cat['label']
+}
+]]></programlisting>
+
+    <para>It's a contrived example, but the point is that the labels are tied up with
+    other information.</para>
+    
+    <para>However, the container class allows you to access the "most relevant" data
+    as a simple array using the <methodname>getValues()</methodname> method. The concept
+    of "most relevant" is obviously a judgement call. For categories it means the category labels
+    (not the types or schemes) while for authors it would be the authors' names
+    (not their email addresses or URLs). The simple array is flat (just values) and passed
+    through <methodname>array_unique</methodname> to remove duplication.</para>
+    
+    <programlisting language="php"><![CDATA[
+$feed = Zend_Feed_Reader::import('http://www.example.com/atom.xml');
+$categories = $feed->getCategories();
+$labels = $categories->getValues();
+]]></programlisting>
+
+    <para>The above example shows how to extract only labels and nothing else thus
+    giving simple access to the category labels without any additional work to extract
+    that data by itself.</para>
+        
+  </sect2>
 
   <sect2 id="zend.feed.reader.retrieve-info">
         <title>Retrieving Feed Information</title>
@@ -504,7 +566,7 @@ foreach ($links as $link) {
                     <row>
                         <entry><methodname>getDescription()</methodname></entry>
 
-                        <entry>Returns the text description of the feed</entry>
+                        <entry>Returns the text description of the feed.</entry>
                     </row>
 
                     <row>
@@ -524,7 +586,7 @@ foreach ($links as $link) {
 
                         <entry>
                             Returns the <acronym>URI</acronym> of this feed, which should be the
-                            same as the <acronym>URI</acronym> used to import the feed
+                            same as the <acronym>URI</acronym> used to import the feed.
                         </entry>
                     </row>
 
@@ -533,7 +595,7 @@ foreach ($links as $link) {
 
                         <entry>
                             Returns an array of all authors associated with this feed
-                            including email address in the author string if available
+                            including email address in the author string if available.
                         </entry>
                     </row>
 
@@ -562,7 +624,7 @@ foreach ($links as $link) {
                         <entry><methodname>getDateModified()</methodname></entry>
 
                         <entry>
-                            Returns the date on which this feed was last modified
+                            Returns the date on which this feed was last modified.
                         </entry>
                     </row>
 
@@ -571,7 +633,7 @@ foreach ($links as $link) {
 
                         <entry>
                             Returns the language of the feed (if defined) or simply the
-                            language noted in the <acronym>XML</acronym> document
+                            language noted in the <acronym>XML</acronym> document.
                         </entry>
                     </row>
 
@@ -589,7 +651,7 @@ foreach ($links as $link) {
                         <entry><methodname>getCopyright()</methodname></entry>
 
                         <entry>
-                            Returns any copyright notice associated with the feed
+                            Returns any copyright notice associated with the feed.
                         </entry>
                     </row>
 
@@ -600,6 +662,19 @@ foreach ($links as $link) {
                             Returns an array of all Hub Server <acronym>URI</acronym> endpoints which
                             are advertised by the feed for using with the Pubsubhubbub
                             Protocol, allowing subscriptions to the feed for real-time updates.
+                        </entry>
+                    </row>
+                    
+                    <row>
+                        <entry><methodname>getCategories()</methodname></entry>
+
+                        <entry>
+                            Returns a <classname>Zend_Feed_Reader_Collection_Category</classname>
+                            object containing the details of any categories associated with the overall feed.
+                            The supported fields include "type" (the machine readable category name), "scheme"
+                            (the categorisation scheme for this category), and "label" (a html decoded human readable
+                            category name). Where any of the three fields are absent from the field, they are either
+                            set to the closest available alternative or, in the case of "scheme", set to NULL.
                         </entry>
                     </row>
         </tbody>
@@ -929,6 +1004,19 @@ foreach ($links as $link) {
                             Returns a <acronym>URI</acronym> pointing to a feed of the provided type
                             containing all comments for this entry (type defaults to
                             Atom/<acronym>RSS</acronym> depending on current feed type).
+                        </entry>
+                    </row>
+                    
+                    <row>
+                        <entry><methodname>getCategories()</methodname></entry>
+
+                        <entry>
+                            Returns a <classname>Zend_Feed_Reader_Collection_Category</classname>
+                            object containing the details of any categories associated with the entry.
+                            The supported fields include "type" (the machine readable category name), "scheme"
+                            (the categorisation scheme for this category), and "label" (a html decoded human readable
+                            category name). Where any of the three fields are absent from the field, they are either
+                            set to the closest available alternative or, in the case of "scheme", set to NULL.
                         </entry>
                     </row>
                 </tbody>

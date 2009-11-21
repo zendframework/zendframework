@@ -27,7 +27,7 @@
         <classname>Zend_Rest_Client</classname> components, <link
             linkend="zend.controller.router.routes.rest"><classname>Zend_Rest_Route</classname> and
             <classname>Zend_Rest_Controller</classname></link> classes are provided to aid routing
-        REST requests to controllers. 
+        REST requests to controllers.
     </para>
 </sect1>
 

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
-
     <title>Zend_Db_Select</title>
 
     <sect2 id="zend.db.select.introduction">
-
         <title>Introduction</title>
 
         <para>
@@ -805,7 +803,7 @@ $select = $db->select()
 ]]></programlisting>
 
             </example>
-            
+
             <para>
                 You can pass an array as the second parameter to the
                 <methodname>where()</methodname> method when using the SQL IN operator.

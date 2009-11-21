@@ -27,7 +27,7 @@
                 switch back to the default mode of supporting only <acronym>ISO</acronym> date
                 format tokens. For a list of supported format codes, see
                 <link linkend="zend.date.constants.phpformats">Self-Defined OUTPUT Formats
-		Using PHP's date() Format Specifiers</link>
+        Using PHP's date() Format Specifiers</link>
             </para>
         </sect3>
 
@@ -153,7 +153,7 @@
             such as <constant>Zend_Date::HOUR</constant>. These constants are valid for all of the
             functions below. A list of all available constants is provided in
             <link linkend="zend.date.constants.list">list of all constants</link>.
-	    If no <varname>$part</varname> is
+        If no <varname>$part</varname> is
             specified, then <constant>Zend_Date::TIMESTAMP</constant> is assumed. Alternatively, a
             user-specified format may be used for <varname>$part</varname>, using the same
             underlying mechanism and format codes as <link
@@ -744,8 +744,8 @@ print $date;
                                 object's locale, or an optionally specified
                                 <varname>$locale</varname>. For a list of supported format codes,
                                 see <link
-					linkend="zend.date.constants.selfdefinedformats">Self-Defined
-					OUTPUT Formats with ISO</link>.
+                    linkend="zend.date.constants.selfdefinedformats">Self-Defined
+                    OUTPUT Formats with ISO</link>.
                             </para>
                         </entry>
                     </row>

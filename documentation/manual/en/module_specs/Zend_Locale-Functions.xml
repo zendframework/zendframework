@@ -1327,7 +1327,7 @@ if (Zend_Locale::isLocale($input)) {
         </para>
 
         <para>
-            Still it's sometimes usefull to prevent this automatic degrading, and this is where the second
+            Still it's sometimes useful to prevent this automatic degrading, and this is where the second
             parameter of <methodname>isLocale()</methodname> comes in place. The <code>strict</code> parameter defaults to
             <constant>FALSE</constant> and can be used to prevent degrading when set to <constant>TRUE</constant>.
         </para>

@@ -169,14 +169,14 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                     <para>
                         <emphasis><methodname>Zend_Filter::setDefaultNamespaces()</methodname></emphasis>:
                         Sets new default namespaces and overrides any previous set. It accepts
-                        eighter a string for a single namespace of an array for multiple namespaces.
+                        either a string for a single namespace of an array for multiple namespaces.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <emphasis><methodname>Zend_Filter::addDefaultNamespaces()</methodname></emphasis>:
-                        Adds additional namespaces to already set ones. It accepts eighter a string
+                        Adds additional namespaces to already set ones. It accepts either a string
                         for a single namespace of an array for multiple namespaces.
                     </para>
                 </listitem>

@@ -6,7 +6,7 @@
     <para>The following methods are available on all vendor-specific subclasses.</para>
 
     <para>
-        <classname>Zend_Ldap_Node_RootDse</classname> includes the magic propery accessors
+        <classname>Zend_Ldap_Node_RootDse</classname> includes the magic property accessors
         <methodname>__get()</methodname> and <methodname>__isset()</methodname> to access the attributes by their
         name. They proxy to <methodname>Zend_Ldap_Node_RootDse::getAttribute()</methodname> and
         <methodname>Zend_Ldap_Node_RootDse::existsAttribute()</methodname> respectively.
@@ -112,7 +112,7 @@
                         (containing only array()) are treated as non-existent returning
                         <constant>FALSE</constant>. If <varname>$emptyExists</varname> is true empty
                         attributes are treated as existent returning <constant>TRUE</constant>. In
-                        this case teh method returns <constant>FALSE</constant> only if the
+                        this case the method returns <constant>FALSE</constant> only if the
                         attribute name is missing in the key-collection.
                     </entry>
                 </row>

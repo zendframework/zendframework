@@ -175,7 +175,7 @@ print $encrypted;
             <listitem>
                 <para>
                     <emphasis>private</emphasis>: Your private key which will be used for encrypting
-                    the content. Also the private key can be eighter a filename with path of the key
+                    the content. Also the private key can be either a filename with path of the key
                     file, or just the content of the key file itself.
                 </para>
             </listitem>

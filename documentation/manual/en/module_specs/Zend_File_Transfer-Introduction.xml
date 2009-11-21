@@ -490,7 +490,7 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis>message</emphasis>: The actual message. Eighter the progress as
+                        <emphasis>message</emphasis>: The actual message. Either the progress as
                         text in the form <emphasis>10kB / 200kB</emphasis>, or a helpful message
                         in the case of a problem. Problems could be, that there is no upload in
                         progress, that there was a failure while retrieving the data for the

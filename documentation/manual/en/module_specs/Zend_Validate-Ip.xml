@@ -31,7 +31,7 @@ if ($validator->isValid($ip)) {
             <para>
                 Keep in mind that <classname>Zend_Validate_Ip</classname> only validates IP
                 addresses. Addresses like 'mydomain.com' or '192.168.50.1/index.html' are no valid
-                IP addresses. They are eighter hostnames or valid <acronym>URL</acronym>s but not IP
+                IP addresses. They are either hostnames or valid <acronym>URL</acronym>s but not IP
                 addresses.
             </para>
         </note>
@@ -51,7 +51,7 @@ if ($validator->isValid($ip)) {
         <title>Validate IPv4 or IPV6 alone</title>
 
         <para>
-            Sometimes it's usefull to validate only one of the supported formats. For example when
+            Sometimes it's useful to validate only one of the supported formats. For example when
             your network only supports IPv4. In this case it would be useless to allow IPv6 within
             this validator.
         </para>
@@ -59,7 +59,7 @@ if ($validator->isValid($ip)) {
         <para>
             To limit <classname>Zend_Validate_Ip</classname> to one protocol you can set the options
             <property>allowipv4</property> or <property>allowipv6</property> to
-            <constant>FALSE</constant>. You can do this eighter by giving the option to the
+            <constant>FALSE</constant>. You can do this either by giving the option to the
             constructor or by using <methodname>setOptions()</methodname> afterwards.
         </para>
 

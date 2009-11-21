@@ -22,7 +22,7 @@
         </para>
 
         <para>
-            There is one emminent difference for you. When you did not provide a vector at
+            There is one eminent difference for you. When you did not provide a vector at
             encryption you need to get it after you encrypted the content by using the
             <methodname>getVector()</methodname> method on the encryption filter. Without the
             correct vector you will not be able to decrypt the content.
@@ -74,7 +74,7 @@ print $decrypted;
             <listitem>
                 <para>
                     <emphasis>private</emphasis>: Your private key which will be used for decrypting
-                    the content. The private key can be eighter a filename with path of the key
+                    the content. The private key can be either a filename with path of the key
                     file, or just the content of the key file itself.
                 </para>
             </listitem>
@@ -82,7 +82,7 @@ print $decrypted;
             <listitem>
                 <para>
                     <emphasis>envelope</emphasis>: The encrypted envelope key from the user who
-                    encrypted the content. You can eigther provide the path and filename of the key
+                    encrypted the content. You can either provide the path and filename of the key
                     file, or just the content of the key file itself.
                 </para>
             </listitem>

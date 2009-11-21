@@ -54,7 +54,7 @@ $currency = new Zend_Currency();
     </note>
 
     <para>
-        Depending on your needs, several parameters can be speicified at instantiation. Each of
+        Depending on your needs, several parameters can be specified at instantiation. Each of
         these parameters is optional and can be omitted. Even the order of the parameters can be
         switched. The meaning of each parameter is described in this list:
     </para>
@@ -262,7 +262,7 @@ echo $currency->toCurrency(1000, array('script' => 'Arab'));
                 <para>
                     <emphasis>format</emphasis>: Defines the format which should be used for
                     displaying numbers. This number-format includes for example the thousand
-                    separator. You can eighter use a default format by giving a locale identifier,
+                    separator. You can either use a default format by giving a locale identifier,
                     or define the number-format manually. If no format is set the locale from the
                     <classname>Zend_Currency</classname> object will be used.
                 </para>

@@ -40,7 +40,7 @@ class Zend_Config_Xml extends Zend_Config
     const XML_NAMESPACE = 'http://framework.zend.com/xml/zend-config-xml/1.0/';
 
     /**
-     * Wether to skip extends or not
+     * Whether to skip extends or not
      *
      * @var boolean
      */

@@ -49,7 +49,7 @@ class Zend_Config_Ini extends Zend_Config
     protected $_sectionSeparator = ':';
 
     /**
-     * Wether to skip extends or not
+     * Whether to skip extends or not
      *
      * @var boolean
      */

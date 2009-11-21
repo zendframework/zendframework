@@ -38,6 +38,7 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
     protected $_feedSamplePath = null;
     
     protected $_expectedCats = array();
+    
     protected $_expectedCatsRdf = array();
 
     public function setup()
@@ -2848,4 +2849,78 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($this->_expectedCatsRdf, (array) $entry->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($entry->getCategories()->getValues()));
     }
+    
+    // No Categories In Entry
+    
+    public function testGetsCategoriesFromRss20_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/none/rss20.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals(array(), (array) $entry->getCategories());
+        $this->assertEquals(array(), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromRss090_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/none/rss090.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals(array(), (array) $entry->getCategories());
+        $this->assertEquals(array(), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromRss091_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/none/rss091.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals(array(), (array) $entry->getCategories());
+        $this->assertEquals(array(), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromRss092_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/none/rss092.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals(array(), (array) $entry->getCategories());
+        $this->assertEquals(array(), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromRss093_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/none/rss093.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals(array(), (array) $entry->getCategories());
+        $this->assertEquals(array(), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromRss094_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/none/rss094.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals(array(), (array) $entry->getCategories());
+        $this->assertEquals(array(), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromRss10_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/none/rss10.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals(array(), (array) $entry->getCategories());
+        $this->assertEquals(array(), array_values($entry->getCategories()->getValues()));
+    }
+    
+    
 }

@@ -479,9 +479,7 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
             $list = $this->_xpath->query($this->_xpathQueryRdf.'//rss:category');
         }
 
-        if (!$list->length) {
-            $categoryCollection = new Zend_Feed_Reader_Collection_Category;
-        } else {
+        if ($list->length) {
             $categoryCollection = new Zend_Feed_Reader_Collection_Category;
             foreach ($list as $category) {
                 $categoryCollection[] = array(
@@ -490,6 +488,8 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
                     'label' => $category->nodeValue,
                 );
             }
+        } else {
+            $categoryCollection = $this->getExtension('DublinCore')->getCategories();
         }
 
         $this->_data['categories'] = $categoryCollection;

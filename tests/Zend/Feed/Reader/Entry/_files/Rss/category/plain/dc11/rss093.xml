@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="0.93" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <channel>
+        <item>
+            <dc:subject><![CDATA[topic1]]></dc:subject>
+            <dc:subject><![CDATA[topic2]]></dc:subject>
+        </item>
+    </channel>
+</rss>

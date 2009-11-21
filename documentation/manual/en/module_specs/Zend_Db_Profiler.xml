@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
-
     <title>Zend_Db_Profiler</title>
 
     <sect2 id="zend.db.profiler.introduction">
-
         <title>Introduction</title>
 
         <para>
@@ -42,7 +40,7 @@ $db->getProfiler()->setEnabled(true);
 ]]></programlisting>
 
         <para>
-            The value of the '<code>profiler</code>' option is flexible. It is interpreted
+            The value of the '<property>profiler</property>' option is flexible. It is interpreted
             differently depending on its type. Most often, you should use a simple boolean value,
             but other types enable you to customize the profiler behavior.
         </para>
@@ -51,62 +49,73 @@ $db->getProfiler()->setEnabled(true);
             A boolean argument sets the profiler to enabled if it is a <constant>TRUE</constant>
             value, or disabled if <constant>FALSE</constant>. The profiler class is the adapter's
             default profiler class, <classname>Zend_Db_Profiler</classname>.
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-        </para>
 
         <para>
             An instance of a profiler object makes the adapter use that object. The object type must
             be <classname>Zend_Db_Profiler</classname> or a subclass thereof. Enabling the profiler
             is done separately.
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-        </para>
 
         <para>
             The argument can be an associative array containing any or all of the keys
-            '<code>enabled</code>', '<code>instance</code>', and '<code>class</code>'. The
-            '<code>enabled</code>' and '<code>instance</code>' keys correspond to the boolean and
-            instance types documented above. The '<code>class</code>' key is used to name a class to
+            '<property>enabled</property>', '<property>instance</property>', and
+            '<property>class</property>'. The '<property>enabled</property>' and
+            '<property>instance</property>' keys correspond to the boolean and instance types
+            documented above. The '<property>class</property>' key is used to name a class to
             use for a custom profiler. The class must be <classname>Zend_Db_Profiler</classname> or
             a subclass. The class is instantiated with no constructor arguments. The
-            '<code>class</code>' option is ignored when the '<code>instance</code>' option is
-            supplied.
-            <programlisting language="php"><![CDATA[
+            '<property>class</property>' option is ignored when the '<property>instance</property>'
+            option is supplied.
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $params['profiler'] = array(
     'enabled' => true,
     'class'   => 'MyProject_Db_Profiler'
 );
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-        </para>
 
         <para>
             Finally, the argument can be an object of type <classname>Zend_Config</classname>
             containing properties, which are treated as the array keys described above. For example,
-            a file "config.ini" might contain the following data:
-            <programlisting language="ini"><![CDATA[
+            a file "<filename>config.ini</filename>" might contain the following data:
+        </para>
+
+        <programlisting language="ini"><![CDATA[
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
 db.profiler.enabled = true
 ]]></programlisting>
 
-            This configuration can be applied by the following PHP code:
+        <para>
+            This configuration can be applied by the following <acronym>PHP</acronym> code:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('config.ini', 'main');
 $params['profiler'] = $config->db->profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
 
+        <para>
             The '<code>instance</code>' property may be used as in the following:
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $profiler = new MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $configData = array(
@@ -116,13 +125,9 @@ $config = new Zend_Config($configData);
 $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-
-        </para>
-
     </sect2>
 
     <sect2 id="zend.db.profiler.using">
-
         <title>Using the Profiler</title>
 
         <para>
@@ -147,18 +152,21 @@ $profiler = $db->getProfiler();
                     of queries that have been profiled.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getTotalElapsedSecs()</methodname> returns the total
                     number of seconds elapsed for all profiled queries.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getQueryProfiles()</methodname> returns an array of all
                     query profiles.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getLastQueryProfile()</methodname> returns the last (most
@@ -166,6 +174,7 @@ $profiler = $db->getProfiler();
                     has finished (if it hasn't, the end time will be null)
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>clear()</methodname> clears any past query profiles
@@ -306,25 +315,29 @@ $profiler->setFilterElapsedSecs(null);
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::INSERT</constant>: any query that
-                        adds new data to the database, generally <acronym>SQL</acronym> INSERT.
+                        adds new data to the database, generally <acronym>SQL</acronym>
+                        <acronym>INSERT</acronym>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::UPDATE</constant>: any query that
-                        updates existing data, usually <acronym>SQL</acronym> UPDATE.
+                        updates existing data, usually <acronym>SQL</acronym>
+                        <acronym>UPDATE</acronym>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::DELETE</constant>: any query that
-                        deletes existing data, usually <acronym>SQL</acronym> DELETE.
+                        deletes existing data, usually <acronym>SQL</acronym>
+                        <acronym>DELETE</acronym>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::SELECT</constant>: any query that
-                        retrieves existing data, usually <acronym>SQL</acronym> SELECT.
+                        retrieves existing data, usually <acronym>SQL</acronym>
+                        <acronym>SELECT</acronym>.
                     </para>
                 </listitem>
                 <listitem>

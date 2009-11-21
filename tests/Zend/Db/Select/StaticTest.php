@@ -686,10 +686,24 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
         $this->assertEquals('SELECT "zfproducts".* FROM "zfproducts" ORDER BY 2 DESC, 1 DESC', $sql);
     }
 
+    /**
+     * @group ZF-7491
+     */
+    public function testPhp53Assembly()
+    {
+        if (version_compare(PHP_VERSION, 5.3) == -1 ) {
+            $this->markTestSkipped('This test needs at least PHP 5.3');
+        }
+        $select = $this->_db->select();
+        $select->from('table1', '*');
+        $select->joinLeft(array('table2'), 'table1.id=table2.id');
+        $target = 'SELECT "table1".*, "table2".* FROM "table1"'
+                . "\n" . ' LEFT JOIN "table2" ON table1.id=table2.id';
+        $this->assertEquals($target, $select->assemble());
+    }
 
     public function getDriver()
     {
         return 'Static';
     }
-
 }

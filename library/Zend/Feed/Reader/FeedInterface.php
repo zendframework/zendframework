@@ -111,5 +111,12 @@ interface Zend_Feed_Reader_FeedInterface extends Iterator, Countable
      * @return string|null
      */
     public function getTitle();
+    
+    /**
+     * Get all categories
+     *
+     * @return Zend_Feed_Reader_Collection_Category
+     */
+    public function getCategories();
 
 }

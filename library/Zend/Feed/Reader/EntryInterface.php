@@ -133,4 +133,11 @@ interface Zend_Feed_Reader_EntryInterface
      * @return string
      */
     public function getCommentFeedLink();
+    
+    /**
+     * Get all categories
+     *
+     * @return Zend_Feed_Reader_Collection_Category
+     */
+    public function getCategories();
 }

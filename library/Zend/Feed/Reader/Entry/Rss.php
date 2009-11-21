@@ -69,6 +69,9 @@ require_once 'Zend/Feed/Reader/Extension/Thread/Entry.php';
  */
 require_once 'Zend/Date.php';
 
+/**
+ * @see Zend_Feed_Reader_Collection_Category
+ */
 require_once 'Zend/Feed/Reader/Collection/Category.php';
 
 /**
@@ -490,6 +493,10 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
             }
         } else {
             $categoryCollection = $this->getExtension('DublinCore')->getCategories();
+        }
+        
+        if (count($categoryCollection) == 0) {
+            $categoryCollection = $this->getExtension('Atom')->getCategories();
         }
 
         $this->_data['categories'] = $categoryCollection;

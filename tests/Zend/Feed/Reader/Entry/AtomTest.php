@@ -36,6 +36,10 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
 {
 
     protected $_feedSamplePath = null;
+    
+    protected $_expectedCats = array();
+    
+    protected $_expectedCatsDc = array();
 
     public function setup()
     {
@@ -51,6 +55,35 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
             }
         }
         Zend_Date::setOptions(array('format_type'=>'iso'));
+        $this->_expectedCats = array(
+            array(
+                'term' => 'topic1',
+                'scheme' => 'http://example.com/schema1',
+                'label' => 'topic1'
+            ),
+            array(
+                'term' => 'topic1',
+                'scheme' => 'http://example.com/schema2',
+                'label' => 'topic1'
+            ),
+            array(
+                'term' => 'cat_dog',
+                'scheme' => 'http://example.com/schema1',
+                'label' => 'Cat & Dog'
+            )
+        );
+        $this->_expectedCatsDc = array(
+            array(
+                'term' => 'topic1',
+                'scheme' => null,
+                'label' => 'topic1'
+            ),
+            array(
+                'term' => 'topic2',
+                'scheme' => null,
+                'label' => 'topic2'
+            )
+        );
     }
     
     public function teardown()
@@ -374,4 +407,75 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry/comments', $entry->getCommentLink());
     }
+    
+    /**
+     * Get category data
+     */
+    
+    // Atom 1.0 (Atom 0.3 never supported categories except via Atom 1.0/Dublin Core extensions)
+    
+    public function testGetsCategoriesFromAtom10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/atom10.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals($this->_expectedCats, (array) $entry->getCategories());
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromAtom03_Atom10Extension()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/atom03.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals($this->_expectedCats, (array) $entry->getCategories());
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
+    }
+    
+    // DC 1.0/1.1 for Atom 0.3
+    
+    public function testGetsCategoriesFromAtom03_Dc10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/dc10/atom03.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals($this->_expectedCatsDc, (array) $entry->getCategories());
+        $this->assertEquals(array('topic1','topic2'), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromAtom03_Dc11()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/dc11/atom03.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals($this->_expectedCatsDc, (array) $entry->getCategories());
+        $this->assertEquals(array('topic1','topic2'), array_values($entry->getCategories()->getValues()));
+    }
+    
+    // No Categories In Entry
+    
+    public function testGetsCategoriesFromAtom10_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/none/atom10.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals(array(), (array) $entry->getCategories());
+        $this->assertEquals(array(), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromAtom03_None()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/none/atom03.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals(array(), (array) $entry->getCategories());
+        $this->assertEquals(array(), array_values($entry->getCategories()->getValues()));
+    }
+    
 }

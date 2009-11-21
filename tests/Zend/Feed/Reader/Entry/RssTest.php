@@ -40,6 +40,8 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
     protected $_expectedCats = array();
     
     protected $_expectedCatsRdf = array();
+    
+    protected $_expectedCatsAtom = array();
 
     public function setup()
     {
@@ -82,6 +84,23 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
                 'term' => 'topic2',
                 'scheme' => null,
                 'label' => 'topic2'
+            )
+        );
+        $this->_expectedCatsAtom = array(
+            array(
+                'term' => 'topic1',
+                'scheme' => 'http://example.com/schema1',
+                'label' => 'topic1'
+            ),
+            array(
+                'term' => 'topic1',
+                'scheme' => 'http://example.com/schema2',
+                'label' => 'topic1'
+            ),
+            array(
+                'term' => 'cat_dog',
+                'scheme' => 'http://example.com/schema1',
+                'label' => 'Cat & Dog'
             )
         );
     }
@@ -2848,6 +2867,68 @@ class Zend_Feed_Reader_Entry_RssTest extends PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $this->assertEquals($this->_expectedCatsRdf, (array) $entry->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($entry->getCategories()->getValues()));
+    }
+    
+    // Atom 1.0
+    
+    public function testGetsCategoriesFromRss090_Atom10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss090.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals($this->_expectedCatsAtom, (array) $entry->getCategories());
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromRss091_Atom10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss091.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals($this->_expectedCatsAtom, (array) $entry->getCategories());
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromRss092_Atom10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss092.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals($this->_expectedCatsAtom, (array) $entry->getCategories());
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromRss093_Atom10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss093.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals($this->_expectedCatsAtom, (array) $entry->getCategories());
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromRss094_Atom10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss094.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals($this->_expectedCatsAtom, (array) $entry->getCategories());
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
+    }
+    
+    public function testGetsCategoriesFromRss10_Atom10()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath.'/category/plain/atom10/rss10.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals($this->_expectedCatsAtom, (array) $entry->getCategories());
+        $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
     }
     
     // No Categories In Entry

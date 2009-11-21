@@ -40,6 +40,11 @@ require_once 'Zend/Date.php';
 require_once 'Zend/Uri.php';
 
 /**
+ * @see Zend_Feed_Reader_Collection_Category
+ */
+require_once 'Zend/Feed/Reader/Collection/Category.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -458,6 +463,47 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         $this->_data['commentfeedlink'] = $link;
 
         return $this->_data['commentfeedlink'];
+    }
+    
+    /**
+     * Get all categories
+     *
+     * @return Zend_Feed_Reader_Collection_Category
+     */
+    public function getCategories()
+    {
+        if (array_key_exists('categories', $this->_data)) {
+            return $this->_data['categories'];
+        }
+
+        if ($this->_getAtomType() == Zend_Feed_Reader::TYPE_ATOM_10) {
+            $list = $this->_xpath->query($this->getXpathPrefix() . '//atom:category');
+        } else {
+            /**
+             * Since Atom 0.3 did not support categories, it would have used the
+             * Dublin Core extension. However there is a small possibility Atom 0.3
+             * may have been retrofittied to use Atom 1.0 instead.
+             */
+            $this->_xpath->registerNamespace('atom10', Zend_Feed_Reader::NAMESPACE_ATOM_10);
+            $list = $this->_xpath->query($this->getXpathPrefix() . '//atom10:category');
+        }
+
+        if ($list->length) {
+            $categoryCollection = new Zend_Feed_Reader_Collection_Category;
+            foreach ($list as $category) {
+                $categoryCollection[] = array(
+                    'term' => $category->getAttribute('term'),
+                    'scheme' => $category->getAttribute('scheme'),
+                    'label' => html_entity_decode($category->getAttribute('label'))
+                );
+            }
+        } else {
+            return new Zend_Feed_Reader_Collection_Category;
+        }
+
+        $this->_data['categories'] = $categoryCollection;
+
+        return $this->_data['categories'];
     }
 
     /**

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19118 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.introduction">
     <title>Einführung</title>
@@ -13,7 +13,7 @@
     </para>
 
     <para>
-        Das Zend Framework bietet beide Möglichkeiten, Client und Server, welche, wenn Sie zusammen
+        Zend Framework bietet beide Möglichkeiten, Client und Server, welche, wenn Sie zusammen
         benutzt werden, eine viel größere "logische" Interface Erfahrung über den Zugriff, auf
         virtuelle Objekt Eigenschaften erlauben. Die Server Komponente bietet automatische
         Darstellung von Funktionen und Klassen und verwendet ein bedeutungsvolles und einfaches
@@ -21,6 +21,14 @@
         möglich, die zurückgegebenen Daten vom Entfernten Aufruf einfachst zu erhalten. Sollte es
         gewünscht sein den Client mit einem nicht-Zend_Rest_Server basierenden Service zu verwenden,
         bietet er immer noch vereinfachten Zugriff auf die Daten.
+    </para>
+
+    <para>
+        Zusätzlich zu den Komponenten <classname>Zend_Rest_Server</classname> und
+        <classname>Zend_Rest_Client</classname> bieten die Klassen <link
+            linkend="zend.controller.router.routes.rest"><classname>Zend_Rest_Route</classname> und
+            <classname>Zend_Rest_Controller</classname></link> Hilfe beim Routen von REST Anfragen
+        zum Controller.
     </para>
 </sect1>
 <!--

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17598 -->
+<!-- EN-Revision: 19143 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit-Specifische Fomularelemente</title>
@@ -756,6 +756,40 @@ $form->addElement('editor', 'content', array(
 ));
 ]]></programlisting>
         </example>
+
+        <note>
+            <title>Das Editor Dijit verwendet standardmäßig div</title>
+
+            <para>
+                Das Editor dijit verwendet standardmäßig ein <acronym>HTML</acronym>
+                <acronym>DIV</acronym>. Die Dokumentation für
+                <classname>dijit._editor.RichText</classname> zeigt dass es potentielle Sicherheits
+                Probleme bereiten kann wenn man es auf ein HTML <acronym>TEXTAREA</acronym>
+                erstellt.
+            </para>
+
+            <para>
+                Deshalb kann es Zeiten geben in denen man ein Editor Widget benötigt das korrekt zu
+                einer <acronym>TEXTAREA</acronym> degradiert. In solchen Situationen kann man dass
+                durchführen indem die Eigenschaft <varname>degrade</varname> auf
+                <constant>true</constant> gesetzt wird:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// Bei der Instanzierung:
+$editor = new Zend_Dojo_Form_Element_Editor('foo', array(
+    'degrade' => true,
+));
+
+// Erstellung über die Form:
+$form->addElement('editor', 'content', array(
+    'degrade' => true,
+));
+
+// Oder nach der Instanzierung:
+$editor->degrade = true;
+]]></programlisting>
+        </note>
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.horizontalSlider">

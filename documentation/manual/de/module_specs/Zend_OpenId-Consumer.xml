@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17407 -->
+<!-- EN-Revision: 19074 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer Grundlagen</title>
@@ -366,11 +366,13 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
     {
         $table = $this->_association_table;
         $secret = base64_encode($secret);
-        $this->_db
-             ->query('insert into ' .
-                     $table . " (url, handle, macFunc, secret, expires) " .
-                     "values ('$url', '$handle', '$macFunc', " .
-                     "'$secret', $expires)");
+        $this->_db->insert($table, array(
+            'url'     => $url,
+            'handle'  => $handle,
+            'macFunc' => $macFunc,
+            'secret'  => $secret,
+            'expires' => $expires,
+        ));
         return true;
     }
 
@@ -381,9 +383,14 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
                                    &$expires)
     {
         $table = $this->_association_table;
-        $this->_db->query("delete from $table where expires < " . time());
-        $res = $this->_db->fetchRow('select handle, macFunc, secret, expires ' .
-                                    "from $table where url = '$url'");
+        $this->_db->delete(
+            $table, $this->_db->quoteInto('expires < ?', time())
+        );
+        $select = $this-_db->select()
+                ->from($table, array('handle', 'macFunc', 'secret', 'expires'))
+                ->where('url = ?', $url);
+        $res = $this->_db->fetchRow($select);
+
         if (is_array($res)) {
             $handle  = $res['handle'];
             $macFunc = $res['macFunc'];
@@ -401,10 +408,14 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
                                            &$expires)
     {
         $table = $this->_association_table;
-        $this->_db->query("delete from $table where expires < " . time());
-        $res = $this->_db
-                    ->fetchRow('select url, macFunc, secret, expires ' .
-                               "from $table where handle = '$handle'");
+        $this->_db->delete(
+            $table, $this->_db->quoteInto('expires < ', time())
+        );
+        $select = $this->_db->select()
+                ->from($table, array('url', 'macFunc', 'secret', 'expires')
+                ->where('handle = ?', $handle);
+        $res = $select->fetchRow($select);
+
         if (is_array($res)) {
             $url     = $res['url'];
             $macFunc = $res['macFunc'];
@@ -429,11 +440,14 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
                                      $expires)
     {
         $table = $this->_discovery_table;
-        $this->_db
-             ->query("insert into $table " .
-                     "(id, realId, server, version, expires) " .
-                     "values (" .
-                     "'$id', '$realId', '$server', $version, $expires)");
+        $this->_db->insert($table, array(
+            'id'      => $id,
+            'realId'  => $realId,
+            'server'  => $server,
+            'version' => $version,
+            'expires' => $expires,
+        ));
+
         return true;
     }
 
@@ -444,10 +458,12 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
                                      &$expires)
     {
         $table = $this->_discovery_table;
-        $this->_db->query("delete from $table where expires < " . time());
-        $res = $this->_db
-                    ->fetchRow('select realId, server, version, expires ' .
-                               "from $table where id = '$id'");
+        $this->_db->delete($table, $this->quoteInto('expires < ?', time()));
+        $select = $this->_db->select()
+                ->from($table, array('realId', 'server', 'version', 'expires'))
+                ->where('id = ?', $id);
+        $res = $this->_db->fetchRow($select);
+
         if (is_array($res)) {
             $realId  = $res['realId'];
             $server  = $res['server'];
@@ -461,7 +477,7 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
     public function delDiscoveryInfo($id)
     {
         $table = $this->_discovery_table;
-        $this->_db->query("delete from $table where id = '$id'");
+        $this->_db->delete($table, $this->_db->quoteInto('id = ?', $id));
         return true;
     }
 
@@ -469,8 +485,9 @@ class DbStorage extends Zend_OpenId_Consumer_Storage
     {
         $table = $this->_nonce_table;
         try {
-            $ret = $this->_db
-                        ->query("insert into $table (nonce) values ('$nonce')");
+            $ret = $this->_db->insert($table, array(
+                'nonce' => $nonce,
+            ));
         } catch (Zend_Db_Statement_Exception $e) {
             return false;
         }

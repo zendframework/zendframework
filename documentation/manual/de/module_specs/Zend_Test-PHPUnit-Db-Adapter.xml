@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17985 -->
+<!-- EN-Revision: 19082 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.db.adapter">
     <title>Verwenden des Datenbank Test Adapters</title>
@@ -91,6 +91,8 @@ echo $qp->getQuerY(); // SELECT * FROM bugs
     <para>
         Der Test Adapter spezifiziert auch Methoden um die Verwendung der Methoden
         <methodname>listTables()</methodname>, <methodname>describeTables()</methodname> und
-        <methodname>lastInsertId()</methodname> simuliert.
+        <methodname>lastInsertId()</methodname> simuliert. Wenn man
+        <methodname>setQuoteIdentifierSymbol()</methodname> verwendet kann man spezifizieren welches
+        Symbol für die Kommentierung verwendet werden soll, da Standardmäßig keines verwendet wird.
     </para>
 </sect2>

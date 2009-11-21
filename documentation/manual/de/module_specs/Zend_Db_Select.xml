@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18196 -->
+<!-- EN-Revision: 19109 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
 
@@ -804,7 +804,6 @@ $select = $db->select()
             </para>
 
             <example id="zend.db.select.building.where.example-param">
-
                 <title>Beispiel für einen Parameter in der where() Methode</title>
 
                 <programlisting language="php"><![CDATA[
@@ -819,6 +818,28 @@ $select = $db->select()
              ->from('products',
                     array('product_id', 'product_name', 'price'))
              ->where('price > ?', $minimumPrice);
+]]></programlisting>
+            </example>
+
+            <para>
+                Man kann als zweiten Parameter ein Array an die <methodname>where()</methodname>
+                Methode übergeben wenn der SQL IN Operator verwendet wird.
+            </para>
+
+            <example id="zend.db.select.building.where.example-array">
+                <title>Beispiel eines Array Parameters in der where() Methode</title>
+                <programlisting language="php"><![CDATA[
+// Diese Abrage wird gebaut:
+//   SELECT product_id, product_name, price
+//   FROM "products"
+//   WHERE (product_id IN (1, 2, 3))
+
+$productIds = array(1, 2, 3);
+
+$select = $db->select()
+             ->from('products',
+                    array('product_id', 'product_name', 'price'))
+             ->where('product_id IN (?)', $productIds);
 ]]></programlisting>
             </example>
 

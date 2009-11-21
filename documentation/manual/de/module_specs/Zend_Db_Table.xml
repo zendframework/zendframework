@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18737 -->
+<!-- EN-Revision: 19139 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
-
     <title>Zend_Db_Table</title>
 
     <sect2 id="zend.db.table.introduction">
-
         <title>Einführung</title>
 
         <para>
@@ -910,7 +908,9 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
                     <para>
 
                         <programlisting language="php"><![CDATA[
-// Ein Rowset holen
+/**
+ * Ein Rowset holen
+ */
 $rows = $table->fetchAll(
     'bug_status = "NEW"',
     'bug_id ASC',
@@ -923,8 +923,18 @@ $rows = $table->fetchAll(
         ->order('bug_id ASC')
         ->limit(10, 0)
     );
+// oder mit Bindung
+$rows = $table->fetchAll(
+    $table->select()
+        ->where('bug_status = :status')
+        ->bind(array(':status'=>'NEW')
+        ->order('bug_id ASC')
+        ->limit(10, 0)
+    );
 
-// Eine einzelne Zeile holen
+/**
+ * Eine einzelne Zeile holen
+ */
 $row = $table->fetchRow(
     'bug_status = "NEW"',
     'bug_id ASC'
@@ -932,6 +942,13 @@ $row = $table->fetchRow(
 $row = $table->fetchRow(
     $table->select()
         ->where('bug_status = ?', 'NEW')
+        ->order('bug_id ASC')
+    );
+// oder mit Bindung
+$row = $table->fetchRow(
+    $table->select()
+        ->where('bug_status = :status')
+        ->bind(array(':status'=>'NEW')
         ->order('bug_id ASC')
     );
 ]]></programlisting>

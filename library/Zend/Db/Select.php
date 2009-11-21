@@ -1258,8 +1258,7 @@ class Zend_Db_Select
 
         if (!empty($this->_parts[self::LIMIT_OFFSET])) {
             $offset = (int) $this->_parts[self::LIMIT_OFFSET];
-            // This should reduce to the max integer PHP can support
-            $count = intval(9223372036854775807);
+            $count = PHP_INT_MAX;
         }
 
         if (!empty($this->_parts[self::LIMIT_COUNT])) {

@@ -702,6 +702,17 @@ class Zend_Db_Select_StaticTest extends Zend_Db_Select_TestCommon
         $this->assertEquals($target, $select->assemble());
     }
 
+    /**
+     * @group ZF-7223
+     */
+    public function testMaxIntegerValueWithLimit()
+    {
+        $select = $this->_db->select();
+        $select->from('table1')->limit(0, 5);
+        $target = 'SELECT "table1".* FROM "table1" LIMIT ' . PHP_INT_MAX . ' OFFSET 5';
+        $this->assertEquals($target, $select->assemble());
+    }
+
     public function getDriver()
     {
         return 'Static';

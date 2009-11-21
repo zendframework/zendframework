@@ -947,9 +947,9 @@ $db->insert('bugs', $data);
             <para>
                 Columns you exclude from the array of data are not specified to
                 the database. Therefore, they follow the same rules that an
-                <acronym>SQL</acronym> INSERT statement follows: if the column has a DEFAULT
-                clause, the column takes that value in the row created,
-                otherwise the column is left in a NULL state.
+                <acronym>SQL</acronym> <acronym>INSERT</acronym> statement follows: if the column
+                has a <acronym>DEFAULT</acronym> clause, the column takes that value in the row
+                created, otherwise the column is left in a <acronym>NULL</acronym> state.
             </para>
 
             <para>
@@ -991,7 +991,7 @@ $db->insert('bugs', $data);
             <para>
                 Some <acronym>RDBMS</acronym> brands support auto-incrementing primary keys.
                 A table defined this way generates a primary key value
-                automatically during an INSERT of a new row. The return value
+                automatically during an <acronym>INSERT</acronym> of a new row. The return value
                 of the <methodname>insert()</methodname> method is <emphasis>not</emphasis>
                 the last inserted ID, because the table might not have an
                 auto-incremented column. Instead, the return value is the
@@ -1063,9 +1063,9 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 For <acronym>RDBMS</acronym> brands that don't support sequences, including MySQL,
                 Microsoft <acronym>SQL</acronym> Server, and SQLite, the arguments to the
                 <methodname>lastInsertId()</methodname> method are ignored, and the value returned
-                is the most recent value generated for any table by INSERT operations
-                during the current connection. For these <acronym>RDBMS</acronym> brands, the
-                <methodname>lastSequenceId()</methodname> method always returns
+                is the most recent value generated for any table by <acronym>INSERT</acronym>
+                operations during the current connection. For these <acronym>RDBMS</acronym> brands,
+                the <methodname>lastSequenceId()</methodname> method always returns
                 <constant>NULL</constant>.
             </para>
 
@@ -1091,12 +1091,14 @@ $id = $db->lastSequenceId('bugs_id_gen');
                     this, or else your application may use a lower transaction
                     isolation mode by design.
                 </para>
+
                 <para>
                     Furthermore, using an expression like "MAX(id)+1" to generate
                     a new value for a primary key is not safe, because two clients
                     could do this query simultaneously, and then both use the same
-                    calculated value for their next INSERT operation.
+                    calculated value for their next <acronym>INSERT</acronym> operation.
                 </para>
+
                 <para>
                     All <acronym>RDBMS</acronym> brands provide mechanisms to generate unique
                     values, and to return the last value generated. These
@@ -2274,7 +2276,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         To connect to an SQLite2 database, specify
-                        <code>'sqlite2'=>true</code> in the array of
+                        <command>'sqlite2' => true</command> in the array of
                         parameters when creating an instance of the
                         <classname>Pdo_Sqlite</classname> Adapter.
                     </para>
@@ -2282,7 +2284,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
                         To connect to an in-memory SQLite database,
-                        specify <code>'dbname'=>':memory:'</code> in the
+                        specify <command>'dbname' => ':memory:'</command> in the
                         array of parameters when creating an instance of
                         the <classname>Pdo_Sqlite</classname> Adapter.
                     </para>

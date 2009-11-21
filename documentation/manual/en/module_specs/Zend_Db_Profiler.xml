@@ -112,7 +112,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
 
         <para>
-            The '<code>instance</code>' property may be used as in the following:
+            The '<property>instance</property>' property may be used as in the following:
         </para>
 
         <programlisting language="php"><![CDATA[

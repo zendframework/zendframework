@@ -420,8 +420,8 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <methodname>returnResponse($flag)</methodname> se usa para decirle al 
                     front controller cuando regresar la respuesta 
-                    (<methodname>true</methodname>) desde <methodname>dispatch()</methodname>, o si la 
-                    respuesta debe ser emitida automáticamente (<methodname>false</methodname>).
+                    (constant>TRUE</constant>) desde <methodname>dispatch()</methodname>, o si la 
+                    respuesta debe ser emitida automáticamente (constant>FALSE</constant>).
                     Por defecto, la respuesta es automáticamente emitida 
                     (llamando a                  
                     <classname>Zend_Controller_Response_Abstract::sendResponse()</classname>);

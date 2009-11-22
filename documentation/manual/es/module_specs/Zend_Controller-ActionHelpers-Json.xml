@@ -79,7 +79,7 @@ class FooController extends Zend_Controller_Action
             quizás para envolver la respuesta de JSON en algún tipo de
             contexto -- cada método en el ayudante JSON acepta un segundo
             argumento opcional: un flag para activar o desactivar layouts.
-            Pasando un valor booleano <methodname>true</methodname> conservará los layouts
+            Pasando un valor booleano constant>TRUE</constant> conservará los layouts
             habilitados:
         </para>
 
@@ -106,7 +106,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
             de expresiones nativas de JSON utilizando objetos
             <methodname>Zend_Json_Expr</methodname>. Esta opción está desactivada por
             defecto. Para activar esta opción, pase un valor booleano
-            <methodname>true</methodname> a la opción <methodname>enableJsonExprFinder</methodname>:
+            constant>TRUE</constant> a la opción <methodname>enableJsonExprFinder</methodname>:
         </para>
 
          <programlisting language="php"><![CDATA[

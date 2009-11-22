@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16003 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.actionstack">
     <title>ActionStack</title>
 
-    <para>
-        El ayudante <emphasis>ActionStack</emphasis> le permite empujar requerimientos al
-        <link linkend="zend.controller.plugins.standard.actionstack">ActionStack</link>
-        plugin del front controller, el cual le ayuda efectivamente a crear
-        una cola de acciones a ejecutar durante la solicitud.
-        El ayudante le permite añadir acciones ya sea especificando nuevos
-        objetos solicitud o conjuntos acción/controlador/módulo.
-    </para>
+    <para> El helper <emphasis>ActionStack</emphasis> le permite empujar
+        requerimientos al <link
+            linkend="zend.controller.plugins.standard.actionstack"
+            >ActionStack</link> plugin del front controller, el cual le ayuda
+        efectivamente a crear una cola de acciones a ejecutar durante la
+        solicitud. El helper le permite añadir actions ya sea mediante la
+        especificación de los objetos o una 
+        nueva solicitud action - controller - module. </para>
 
     <note>
-        <title>Invocando al Ayudante ActionStack Inicializa el Plugin de ActionStack</title>
+        <title>Invocando al Ayudante ActionStack Inicializa el Plugin de
+            ActionStack</title>
 
-        <para>
-            Invocando al ayuudante <emphasis>ActionStack</emphasis> implicitamente
-            registra el plugin de <emphasis>ActionStack</emphasis> -- lo que significa
-            que no necesita registrar explícitamente el plugin de <emphasis>ActionStack</emphasis>
-            para utilizar esta funcionalidad.
-        </para>
+        <para> Invocando al helper <emphasis>ActionStack</emphasis>
+            implicitamente registra el plugin de
+                <emphasis>ActionStack</emphasis> -- lo que significa que no
+            necesita registrar explícitamente el plugin de
+                <emphasis>ActionStack</emphasis> para utilizar esta
+            funcionalidad. </para>
     </note>
 
     <example id="zend.controller.actionhelpers.actionstack.simple">
-        <title>Agregando una Tarea Usando Nombres de Acción, Controllador y Módulo</title>
+        <title>Agregando una Tarea Usando Nombres de Acción, Controllador y
+            Módulo</title>
 
-        <para>
-            A menudo, es más sencillo simplemente especificar la acción, el
+        <para> A menudo, es más sencillo simplemente especificar la acción, el
             controlador y el módulo (y parámetros opcionales de requerimientos),
             tal como cuando llama a
-            <methodname>Zend_Controller_Action::_forward()</methodname>:
-        </para>
+                <methodname>Zend_Controller_Action::_forward()</methodname>: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -59,12 +59,11 @@ class FooController extends Zend_Controller_Action
     <example id="zend.controller.actionhelpers.actionstack.simple2">
         <title>Agregando una Tarea al Objeto Solicitud (Request)</title>
 
-        <para>
-            A veces la naturaleza <acronym>OOP</acronym> de un objeto solicitud tiene más sentido;
-            puede pasar también tal objeto al ayudante <emphasis>ActionStack</emphasis>.
-        </para>
+        <para> A veces la naturaleza <acronym>OOP</acronym> de un objeto
+            solicitud tiene más sentido; puede pasar también tal objeto al
+            ayudante <emphasis>ActionStack</emphasis>. </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -90,6 +89,3 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
     </example>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

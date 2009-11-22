@@ -50,7 +50,7 @@ $db->getProfiler()->setEnabled(true);
 
         <para>
             Un argumento booleano establece el perfilador como habilitado si el valor es
-            <methodname>true</methodname>, o deshabilitado si es <methodname>false</methodname>. La clase del perfilador
+            constant>TRUE</constant>, o deshabilitado si es constant>FALSE</constant>. La clase del perfilador
             es el la clase de perfilador por defecto del adaptador, <classname>Zend_Db_Profiler</classname>.
              <programlisting language="php"><![CDATA[
 $params['profiler'] = true;

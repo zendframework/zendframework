@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17154 -->
+<!-- EN-Revision: 19150 -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
     <para>
@@ -27,7 +27,7 @@ $filter2 = new Zend_Filter_Encrypt(array('adapter' => 'openssl'));
     <para>
         別のアダプタを設定するために <methodname>setAdapter()</methodname>
         を使用することもできます。また <methodname>getAdapter()</methodname>
-        メソッドで、実際に設定されているアダプタを取得することができます。
+        メソッドで、実際に設定されているアダプタを取得できます。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -198,7 +198,7 @@ print $encrypted;
             後から公開鍵を取得あるいは設定するには、<methodname>getPublicKey()</methodname>
             および <methodname>setPublicKey()</methodname> メソッドを使用します。
             秘密鍵についても、<methodname>getPrivateKey()</methodname> および <methodname>setPrivateKey()</methodname>
-            メソッドで取得あるいは設定することができます。
+            メソッドで取得あるいは設定できます。
         </para>
 
         <programlisting language="php"><![CDATA[

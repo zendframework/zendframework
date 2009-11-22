@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18867 -->
+<!-- EN-Revision: 19161 -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
+
     <para>
         <classname>Zend_Config_Writer</classname> は、設定ファイルに
         <classname>Zend_Config</classname> オブジェクトを書き出します。
@@ -39,8 +40,8 @@
      <para>
         Ini ライターでは、セクションについてのレンダリング用のモードが２つあります。
         既定では、トップレベルの構成節は、常にセクション名に含まれます。
-        <code>$writer->setRenderWithoutSections()</code> を呼ぶことにより、
-        オプションの全てが INI ファイルのグローバル名前空間に含まれます。
+        <command>$writer->setRenderWithoutSections()</command> を呼ぶことにより、
+        オプションの全てが <acronym>INI</acronym> ファイルのグローバル名前空間に含まれます。
         そして、セクションは使用されません。
     </para>
 
@@ -140,9 +141,9 @@ $writer->write();
     </note>
 
     <para>
-        構成節の文字列を作成するために、
-        ファイル・ベースのライタ（INI、XMLとPHP配列）全てで内部的に
-        <methodname>render()</methodname> が使用されます。
+        構成節の文字列を作成するために、ファイル・ベースのライタ
+        （ <acronym>INI</acronym> 、 <acronym>XML</acronym> 及び <acronym>PHP</acronym> 配列）
+        全てで内部的に <methodname>render()</methodname> が使用されます。
         コンフィギュレーション・データの文字列表現にアクセスする必要があれば、
         このメソッドを外部からも使用できます。
     </para>

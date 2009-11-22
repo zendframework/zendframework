@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18196 -->
+<!-- EN-Revision: 19162 -->
 <sect1 id="zend.db.select">
 
     <title>Zend_Db_Select</title>
@@ -818,6 +818,31 @@ $select = $db->select()
              ->from('products',
                     array('product_id', 'product_name', 'price'))
              ->where('price > ?', $minimumPrice);
+]]></programlisting>
+
+            </example>
+
+             <para>
+                SQL の IN 演算子を使うとき、 <methodname>where()</methodname> メソッドに
+                第２引数として配列を渡せます。
+            </para>
+
+            <example id="zend.db.select.building.where.example-array">
+
+                <title>where() メソッドでの配列パラメータ例</title>
+
+                <programlisting language="php"><![CDATA[
+// クエリをビルド
+//   SELECT product_id, product_name, price
+//   FROM "products"
+//   WHERE (product_id IN (1, 2, 3))
+
+$productIds = array(1, 2, 3);
+
+$select = $db->select()
+             ->from('products',
+                    array('product_id', 'product_name', 'price'))
+             ->where('product_id IN (?)', $productIds);
 ]]></programlisting>
 
             </example>

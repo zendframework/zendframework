@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18028 -->
+<!-- EN-Revision: 19150 -->
 <sect1 id="zend.validate.introduction">
 
     <title>導入</title>
@@ -8,7 +8,7 @@
     <para>
         <classname>Zend_Validate</classname> コンポーネントは、一般的に必要となるバリデータを提供します。
         シンプルなバリデータチェイン機能も持っており、
-        ひとつのデータに対して複数のバリデータを指定した順に適用することができます。
+        ひとつのデータに対して複数のバリデータを指定した順に適用できます。
     </para>
 
     <sect2 id="zend.validate.introduction.definition">
@@ -97,7 +97,7 @@ if ($validator->isValid($email)) {
         <para>
             バリデータクラスの <methodname>setMessage()</methodname> メソッドを使用すると、
             検証に失敗した場合に <methodname>getMessages()</methodname>
-            が返すメッセージの書式を設定することができます。
+            が返すメッセージの書式を設定できます。
             最初の引数にはエラーメッセージを文字列で指定します。
             このメッセージに特定のトークンを含めると、
             バリデータがそれを実際の値に置き換えます。
@@ -153,7 +153,7 @@ $validator->setMessages( array(
 
         <para>
             より柔軟な検証失敗報告をしたい場合のために、
-            バリデーションクラスがサポートするメッセージトークンと同じ名前のプロパティを使用することができます。
+            バリデーションクラスがサポートするメッセージトークンと同じ名前のプロパティを使用できます。
             どのバリデータでも常に使用可能なプロパティは <code>value</code> です。
             これは、<methodname>isValid()</methodname> の引数として渡した値を返します。
             その他のプロパティについては、バリデーションクラスによって異なります。
@@ -238,7 +238,7 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
 
             <para>
                 自分で定義したバリデータを使う際に、
-                <methodname>Zend_Validate::is()</methodname> に 4 番目のパラメータを指定することができます。
+                <methodname>Zend_Validate::is()</methodname> に 4 番目のパラメータを指定できます。
                 これは、バリデータを探すための名前空間となります。
             </para>
 
@@ -283,7 +283,7 @@ iif (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12))
                     <para>
                         <emphasis><methodname>Zend_Validate::setDefaultNamespaces()</methodname></emphasis>:
                         新たなデフォルト名前空間を設定し、既存の名前空間を上書きします。
-                        単一の名前空間の場合は文字列、複数の場合は配列で指定することができます。
+                        単一の名前空間の場合は文字列、複数の場合は配列で指定できます。
                     </para>
                 </listitem>
 
@@ -291,7 +291,7 @@ iif (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12))
                     <para>
                         <emphasis><methodname>Zend_Validate::addDefaultNamespaces()</methodname></emphasis>:
                         新たな名前空間を、既に設定されているものに追加します。
-                        単一の名前空間の場合は文字列、複数の場合は配列で指定することができます。
+                        単一の名前空間の場合は文字列、複数の場合は配列で指定できます。
                     </para>
                 </listitem>
 
@@ -312,7 +312,7 @@ iif (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12))
 
         <para>
             Validate クラスには <methodname>setTranslator()</methodname> メソッドがあり、
-            <classname>Zend_Translate</classname> のインスタンスを指定することができます。
+            <classname>Zend_Translate</classname> のインスタンスを指定できます。
             これが、検証に失敗したときのメッセージを翻訳します。
             <methodname>getTranslator()</methodname> メソッドは、設定されているインスタンスを返します。
         </para>
@@ -331,7 +331,7 @@ $validator->setTranslator($translate);
         <para>
             静的メソッド <methodname>setDefaultTranslator()</methodname> で
             <classname>Zend_Translate</classname> のインスタンスを設定すると、
-            それをすべての検証クラスで使用することができます。この設定内容を取得するのが
+            それをすべての検証クラスで使用できます。この設定内容を取得するのが
             <methodname>getDefaultTranslator()</methodname> です。これを使用すると、
             個々のバリデータクラスで手動で翻訳器を設定せずに済むのでコードがシンプルになります。
         </para>
@@ -356,7 +356,7 @@ Zend_Validate::setDefaultTranslator($translate);
             時には、検証時に翻訳器を無効にしなければならないこともあるでしょう。
             そんな場合は <methodname>setDisableTranslator()</methodname> メソッドを使用します。
             このメソッドには boolean パラメータを指定します。また <methodname>translatorIsDisabled()</methodname>
-            で現在の値を取得することができます。
+            で現在の値を取得できます。
         </para>
 
         <programlisting language="php"><![CDATA[

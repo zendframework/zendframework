@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17848 -->
+<!-- EN-Revision: 19150 -->
 <sect1 id="zend.filter.introduction">
 
     <title>導入</title>
@@ -8,7 +8,7 @@
     <para>
         <classname>Zend_Filter</classname> コンポーネントは、データのフィルタリングに必要となる一般的な機能を提供します。
         シンプルなフィルタチェイン機能も持っており、
-        ひとつのデータに対して複数のフィルタを指定した順に適用することができます。
+        ひとつのデータに対して複数のフィルタを指定した順に適用できます。
     </para>
 
     <sect2 id="zend.filter.introduction.definition">
@@ -121,7 +121,7 @@ echo Zend_Filter::filterStatic('"', 'HtmlEntities', array('quotestyle' => ENT_QU
             <para>
                 自分で定義したフィルタを使う際に、
                 <methodname>Zend_Filter::filterStatic()</methodname> に
-                4 番目のパラメータを指定することができます。
+                4 番目のパラメータを指定できます。
                 これは、フィルタを探すための名前空間となります。
             </para>
 
@@ -164,7 +164,7 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                     <para>
                         <emphasis><methodname>Zend_Filter::setDefaultNamespaces()</methodname></emphasis>:
                         新たなデフォルト名前空間を設定し、既存の名前空間を上書きします。
-                        単一の名前空間の場合は文字列、複数の場合は配列で指定することができます。
+                        単一の名前空間の場合は文字列、複数の場合は配列で指定できます。
                     </para>
                 </listitem>
 
@@ -172,7 +172,7 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                     <para>
                         <emphasis><methodname>Zend_Filter::addDefaultNamespaces()</methodname></emphasis>:
                         新たな名前空間を、既に設定されているものに追加します。
-                        単一の名前空間の場合は文字列、複数の場合は配列で指定することができます。
+                        単一の名前空間の場合は文字列、複数の場合は配列で指定できます。
                     </para>
                 </listitem>
 

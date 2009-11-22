@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18737 -->
+<!-- EN-Revision: 19139 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -891,7 +891,9 @@ $rows = $table->find(array(1234, 5678), array('ABC', 'DEF'));
                     <para>
 
                         <programlisting language="php"><![CDATA[
-// 行セットを取得します
+/**
+ * 行セットを取得します
+ */
 $rows = $table->fetchAll(
     'bug_status = "NEW"',
     'bug_id ASC',
@@ -904,8 +906,18 @@ $rows = $table->fetchAll(
         ->order('bug_id ASC')
         ->limit(10, 0)
     );
+// またはバインディングを用いて
+$rows = $table->fetchAll(
+    $table->select()
+        ->where('bug_status = :status')
+        ->bind(array(':status'=>'NEW')
+        ->order('bug_id ASC')
+        ->limit(10, 0)
+    );
 
-// 単一の行を取得します
+/**
+ * 単一の行を取得します
+ */
 $row = $table->fetchRow(
     'bug_status = "NEW"',
     'bug_id ASC'
@@ -913,6 +925,13 @@ $row = $table->fetchRow(
 $row = $table->fetchRow(
     $table->select()
         ->where('bug_status = ?', 'NEW')
+        ->order('bug_id ASC')
+    );
+// またはバインディングを用いて
+$row = $table->fetchRow(
+    $table->select()
+        ->where('bug_status = :status')
+        ->bind(array(':status'=>'NEW')
         ->order('bug_id ASC')
     );
 ]]></programlisting>

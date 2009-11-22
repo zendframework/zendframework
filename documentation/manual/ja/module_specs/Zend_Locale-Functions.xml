@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 19150 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -17,7 +17,7 @@
 
         <para>
             <ulink url="http://php.net/language.oop5.cloning">オブジェクトのクローンを作成</ulink>し、
-            ロケールオブジェクトを正確かつ効率的に複製することができます。
+            ロケールオブジェクトを正確かつ効率的に複製できます。
             ロケール対応のメソッドのほとんどは、<code>$locale->toString()</code>
             が返す文字列表現のロケールを受け付けます。
         </para>
@@ -192,7 +192,7 @@ print $locale->getRegion();
         <title>地域化された文字列の取得</title>
 
         <para>
-            <methodname>getTranslationList()</methodname> を使用すると、地域化された情報を利用することができます。
+            <methodname>getTranslationList()</methodname> を使用すると、地域化された情報を利用できます。
             これらの情報は、各地域に特化したデータを顧客に対して提供する際に
             翻訳の必要がなくなるので便利です。
             これらはすでに使用可能となっています。
@@ -312,7 +312,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                           このロケールにおけるすべての月の表現の一覧を返します。
                           異なる表現方式がある場合は配列として返されます。
                           値を省略すると、グレゴリオ暦におけるすべての月の一覧を返します。
-                          値として、既知の暦の名前を指定することができます。
+                          値として、既知の暦の名前を指定できます。
                           その場合は指定した暦における月の一覧を返します。
                           単純に行うには
                           <link linkend="zend.date.introduction">Zend_Date</link>
@@ -339,7 +339,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                           このロケールにおけるすべての曜日の表現の一覧を返します。
                           異なる表現方式がある場合は配列として返されます。
                           値を省略すると、グレゴリオ暦におけるすべての曜日の一覧を返します。
-                          値として、既知の暦の名前を指定することができます。
+                          値として、既知の暦の名前を指定できます。
                           その場合は指定した暦における曜日の一覧を返します。
                           単純に行うには
                           <link linkend="zend.date.introduction">Zend_Date</link>
@@ -375,7 +375,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                           このロケールにおけるすべての四半期の表現の一覧を返します。
                           異なる表現方式がある場合は配列として返されます。
                           値を省略すると、グレゴリオ暦におけるすべての四半期の一覧を返します。
-                          値として、既知の暦の名前を指定することができます。
+                          値として、既知の暦の名前を指定できます。
                           その場合は指定した暦における四半期の一覧を返します。
                         </entry>
                     </row>
@@ -395,7 +395,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
                         <entry>
                           このロケールにおけるすべての紀元の表現の一覧を返します。
                           値を省略すると、グレゴリオ暦におけるすべての紀元の一覧を返します。
-                          値として、既知の暦の名前を指定することができます。
+                          値として、既知の暦の名前を指定できます。
                           その場合は指定した暦における紀元の一覧を返します。
                         </entry>
                     </row>
@@ -771,7 +771,7 @@ print Zend_Locale::getTranslation('de', 'language', 'zh');
         <para>
             単一の翻訳データがほしい場合は、<methodname>getTranslation()</methodname> を使用します。
             この関数は常に文字列を返しますが、<methodname>getTranslationList()</methodname>
-            メソッドよりも多くの型を使用することができます。
+            メソッドよりも多くの型を使用できます。
             また、値についても一点を除いて同じです。
             取得したい値について、詳細を指定する必要があります。
         </para>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 19150 -->
 <sect1 id="zend.file.transfer.introduction">
 
     <title>Zend_File_Transfer</title>
 
     <para>
         <classname>Zend_File_Transfer</classname> を使用すると、
-        ファイルのアップロードやダウンロードを管理することができます。
+        ファイルのアップロードやダウンロードを管理できます。
         組み込みのバリデータを使ってファイルを検証したり、
         フィルタによってファイルを変更したりという機能があります。
         <classname>Zend_File_Transfer</classname> はアダプタ形式を採用しており、
-        <acronym>HTTP</acronym> や FTP、WEBDAV などのさまざまな転送プロトコルを同じ <acronym>API</acronym> で使用することができます。
+        <acronym>HTTP</acronym> や FTP、WEBDAV などのさまざまな転送プロトコルを同じ <acronym>API</acronym> で使用できます。
     </para>
 
     <note>
@@ -89,7 +89,7 @@ if (!$adapter->receive()) {
             ローカルの保存先を <code>setDestination</code> メソッドで指定して
             <methodname>receive()</methodname> メソッドをコールします。
             アップロード時に何らかのエラーが発生した場合は、
-            返された例外の中でその情報を取得することができます。
+            返された例外の中でその情報を取得できます。
         </para>
 
     </example>
@@ -410,7 +410,7 @@ $names = $upload->getMimeType('foo');
 
         <para>
             これらふたつの条件さえ満たせば、ファイルアップロードの進捗状況を
-            <code>getProgress</code> メソッドで取得することができます。
+            <code>getProgress</code> メソッドで取得できます。
             実際には、これを処理する公式な方法は 2 通りあります。
         </para>
 

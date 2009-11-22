@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 19150 -->
+<sect2 id="zend.validate.set.ip">
+
+    <title>Ip</title>
+
+    <para>
+        <classname>Zend_Validate_Ip</classname> は、与えられた値が
+        IP アドレスかどうか検証できるようにします。
+        これは IPv4 及び IPv6 標準をサポートします。
+    </para>
+
+    <sect3 id="zend.validate.set.ip.basic">
+        <title>基本的な使用法</title>
+
+        <para>
+            基本的な使用法は、以下のようになります。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Ip();
+if ($validator->isValid($ip)) {
+    // ip は正しい形式のようです
+} else {
+    // ip が不正なので、理由を表示します
+}
+]]></programlisting>
+
+        <note>
+            <title>IP アドレスの検証</title>
+
+            <para>
+                <classname>Zend_Validate_Ip</classname> は IP アドレスだけを検証することを記憶にとどめてください。
+                'mydomain.com' や '192.168.50.1/index.html' のようなアドレスは、有効な IP アドレスではありません。
+                それらは IP アドレスではなく、 hostname または 有効な <acronym>URL</acronym> です。
+            </para>
+        </note>
+
+        <note>
+            <title>IPv6 の検証</title>
+
+            <para>
+                <classname>Zend_Validate_Ip</classname> は正規表現で IPv6 アドレスを検証します。
+                それは、 PHP 自身のフィルターやメソッドが RFC に準拠していないからです。
+                他の多くの利用可能なクラスもまた、それに準拠しません。
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.validate.set.ip.singletype">
+        <title>IPv4 または IPV6 だけを検証</title>
+
+        <para>
+            しばしば、サポートされる形式のうちの１つだけを検証するために役立ちます。
+            たとえば、ネットワークが IPv4 だけをサポートするときです。
+            この場合、このバリデータ内で IPv6 を受け付けることは無駄でしょう。
+        </para>
+
+        <para>
+            <classname>Zend_Validate_Ip</classname> をプロトコル１つに制限するために、
+            オプション <property>allowipv4</property> または <property>allowipv6</property> を
+            <constant>FALSE</constant> に設定できます。
+            これは、コンストラクタにオプションを与えることによって、
+            または、その後 <methodname>setOptions()</methodname> を用いて行なえます。
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Ip(array('allowipv6' => false);
+if ($validator->isValid($ip)) {
+    // ip は正しい ip4v アドレスのようです
+} else {
+    // ip は ipv4 アドレスではありません
+}
+]]></programlisting>
+
+        <note>
+            <title>既定の動作</title>
+
+            <para>
+                <classname>Zend_Validate_Ip</classname> が従う既定の動作は
+                両方の標準を受け付ける、です。
+            </para>
+        </note>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

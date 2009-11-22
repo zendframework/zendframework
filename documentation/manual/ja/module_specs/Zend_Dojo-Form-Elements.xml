@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17598 -->
+<!-- EN-Revision: 19143 -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit固有のフォーム要素</title>
 
@@ -223,7 +223,7 @@ $form->addElement(
             選ばれた選択肢を調べて、セットするためにアクセッサとミューテーターを提供します。
             それらはDijitMultiから拡張します。
             そして、それは<methodname>setMultiOptions()</methodname>及び<methodname>setMultiOption()</methodname>メソッドによって
-            選ばれた選択肢を指定することができます。
+            選ばれた選択肢を指定できます。
             さらに、以下のメソッドを利用できます:
         </para>
 
@@ -287,7 +287,7 @@ $form->addElement(
             この要素はデフォルトで登録します。
             <methodname>setRegisterInArrayValidator(false)</methodname>を呼び出すことでも、
             <code>registerInArrayValidator</code>設定キーにfalse値を渡すことでも、
-            このふるまいを抑制することができます。
+            このふるまいを抑制できます。
         </para>
 
         <example id="zend.dojo.form.elements.comboBox.selectExample">
@@ -651,6 +651,39 @@ $form->addElement('editor', 'content', array(
 ));
 ]]></programlisting>
         </example>
+
+        <note>
+            <title>エディタ Dijit は既定で div を使います</title>
+
+            <para>
+                エディタ dijit は既定で <acronym>HTML</acronym> の <acronym>DIV</acronym> を使います。
+                <classname>dijit._editor.RichText</classname> 資料は、
+                HTML の <acronym>TEXTAREA</acronym> の上にビルドされたそれを持つことが
+                セキュリティに影響するかもしれないことを示します。
+            </para>
+
+            <para>
+                言うことには、<acronym>TEXTAREA</acronym>に上品に退化できる
+                エディタ・ウィジェットを望む機会があるかもしれません。
+                そのような場面では、 <varname>degrade</varname> プロパティを <constant>true</constant>
+                に設定することによってそうすることができます。
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// 初期化にて
+$editor = new Zend_Dojo_Form_Element_Editor('foo', array(
+    'degrade' => true,
+));
+
+// フォームを通じた構築
+$form->addElement('editor', 'content', array(
+    'degrade' => true,
+));
+
+// または初期化後
+$editor->degrade = true;
+]]></programlisting>
+        </note>
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.horizontalSlider">
@@ -881,7 +914,7 @@ $form->addElement(
             数テキストボックスは、数を入力するためのテキスト要素です;
             数スピナーとは異なり、数は手で入力します。
             バリデーションと制約は、
-            数が特定の範囲または形式にとどまることを確実とするために提示することができます。
+            数が特定の範囲または形式にとどまることを確実とするために提示できます。
         </para>
 
         <para>
@@ -996,7 +1029,7 @@ $form->addElement(
         <para>
             ラジオボタンはDijitMultiから拡張します。
             そして、<methodname>setMultiOptions()</methodname>及び<methodname>setMultiOption()</methodname>メソッドによって
-            選ばれた選択肢を指定することができます。
+            選ばれた選択肢を指定できます。
         </para>
 
         <para>
@@ -1004,7 +1037,7 @@ $form->addElement(
             配列に対して登録された選択肢のキーを確認する<code>InArray</code>バリデーターを登録します。
             <methodname>setRegisterInArrayValidator(false)</methodname>または
             <code>registerInArrayValidator</code>のどちらを呼び出しても、
-            設定キーにfalse値を渡すことによってこのふるまいを抑制することができます。
+            設定キーにfalse値を渡すことによってこのふるまいを抑制できます。
         </para>
 
         <example id="zend.dojo.form.elements.radioButton.example">

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19162 -->
 <sect1 id="zend.rest.introduction">
     <title>導入</title>
 
@@ -16,9 +16,17 @@
         両方組み合わせて使用すると、ローカル環境上で仮想的なオブジェクト間のやり取りを体験できます。
         サーバコンポーネントは、関数やクラスを意味のある単純な <acronym>XML</acronym>
         形式で自動的に公開します。このサービスに対してクライアントからアクセスすると、
-        リモートコールの返すデータを簡単に取得することができます。
+        リモートコールの返すデータを簡単に取得できます。
         クライアント側で Zend_Rest_Server ベースのサービス以外と組み合わせて使用する際にも、
-        簡単にデータにアクセスすることができます。
+        簡単にデータにアクセスできます。
+    </para>
+
+    <para>
+        
+        <classname>Zend_Rest_Server</classname> 及び <classname>Zend_Rest_Client</classname>
+        コンポーネントに加えて、コントローラに REST リクエストをルーティングすることを助けるために
+        <link linkend="zend.controller.router.routes.rest"><classname>Zend_Rest_Route</classname>
+        及び <classname>Zend_Rest_Controller</classname></link> クラスが、提供されます。
     </para>
 </sect1>
 

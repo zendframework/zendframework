@@ -89,7 +89,7 @@ class Util
         <para>
             La descripción es escapada utilizando los mecanismos de escapado por defecto
             del objeto de vista. Puede desactivar esto pasando un valor
-            <methodname>false</methodname> a la opción 'escape' del decorador o el método
+            <constant>FALSE</constant> a la opción 'escape' del decorador o el método
             <methodname>setEscape()</methodname>.
         </para>
     </sect2>

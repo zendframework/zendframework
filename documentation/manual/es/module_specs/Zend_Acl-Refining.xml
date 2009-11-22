@@ -9,49 +9,39 @@
 
         <title>Definir mejor los controles de acceso</title>
 
-        <para>
-            El <acronym>ACL</acronym> básico según lo definido en la
-            <link linkend="zend.acl.introduction">
-                sección anterior
-            </link>
-            demuestra cómo los diversos privilegios se pueden otorgar
-            sobre todo el <acronym>ACL</acronym> (todos los recursos). En la práctica, sin
-            embargo, los controles de acceso tienden a tener excepciones
-            y diversos grados de complejidad. <classname>Zend_Acl</classname> permite lograr
-            estos refinamientos de una manera sencilla y flexible.
-        </para>
+        <para> El <acronym>ACL</acronym> básico según lo definido en la <link
+                linkend="zend.acl.introduction"> sección anterior </link>
+            demuestra cómo los diversos privilegios se pueden otorgar sobre todo
+            el <acronym>ACL</acronym> (todos los recursos). En la práctica, sin
+            embargo, los controles de acceso tienden a tener excepciones y
+            diversos grados de complejidad. <classname>Zend_Acl</classname>
+            permite lograr estos refinamientos de una manera sencilla y
+            flexible. </para>
 
-        <para>
-            Para el <acronym>CMS</acronym> del ejemplo se ha determinado que, si bien el
-            grupo 'staff' cubre las necesidades de la gran mayoría de
-            usuarios, hay una necesidad de un nuevo grupo 'marketing'
-            que requiere el acceso al boletín de noticias y las últimas
-            noticias en el CMS. El grupo es bastante auto suficiente y
-            tendrá la capacidad de publicar y de archivar los boletines
-            de noticias y las últimas noticias.
-        </para>
+        <para> Para el <acronym>CMS</acronym> del ejemplo se ha determinado que,
+            si bien el grupo 'staff' cubre las necesidades de la gran mayoría de
+            usuarios, hay una necesidad de un nuevo grupo 'marketing' que
+            requiere el acceso al boletín de noticias y las últimas noticias en
+            el CMS. El grupo es bastante auto suficiente y tendrá la capacidad
+            de publicar y de archivar los boletines de noticias y las últimas
+            noticias. </para>
 
-        <para>
-            Primero revisamos el registro del rol para reflejar estos
-            cambios. Hemos determinado que el grupo 'marketing' tiene
-            los mismos permisos básicos que 'staff', así que definimos
-            'marketing' de tal manera que herede los permisos de
-            'staff':
-        </para>
+        <para> Primero revisamos el registro del rol para reflejar estos
+            cambios. Hemos determinado que el grupo 'marketing' tiene los mismos
+            permisos básicos que 'staff', así que definimos 'marketing' de tal
+            manera que herede los permisos de 'staff': </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
  // El nuevo grupo de Marketing hereda los permisos de Staff
  $acl->addRole(new Zend_Acl_Role('marketing'), 'staff');
 ]]></programlisting>
 
-        <para>
-            A continuación, la nota que por encima de los controles de
-            acceso se refieren a recursos específicos (por ejemplo,
-            "boletín informativo", "últimas noticias", "anuncio de
-            noticias"). Ahora añadimos estos recursos:
-        </para>
+        <para> A continuación, la nota que por encima de los controles de acceso
+            se refieren a recursos específicos (por ejemplo, "boletín
+            informativo", "últimas noticias", "anuncio de noticias"). Ahora
+            añadimos estos recursos: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Crear recursos para las reglas
  // newsletter
  $acl->addResource(new Zend_Acl_Resource('newsletter'));
@@ -66,12 +56,10 @@ $acl->addResource(new Zend_Acl_Resource('latest'), 'news');
 $acl->addResource(new Zend_Acl_Resource('announcement'), 'news');
 ]]></programlisting>
 
-        <para>
-            Entonces es simplemente una cuestión de la definición de
-            estas normas más específicas en ámbitos de la <acronym>ACL</acronym>:
-        </para>
+        <para> Entonces es simplemente una cuestión de la definición de estas
+            normas más específicas en ámbitos de la <acronym>ACL</acronym>: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
  //
  Marketing debe ser capaz de archivar y publicar boletines informativos y
  // las últimas noticias
@@ -88,12 +76,10 @@ $acl->addResource(new Zend_Acl_Resource('announcement'), 'news');
  $acl->deny(null, 'announcement', 'archive');
 ]]></programlisting>
 
-        <para>
-            Ahora podemos consultar el <acronym>ACL</acronym> con respecto a los últimos
-            cambios:
-        </para>
+        <para> Ahora podemos consultar el <acronym>ACL</acronym> con respecto a
+            los últimos cambios: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
  echo $acl->isAllowed('staff', 'newsletter', 'publish') ?
  "allowed" : "denied";
  // denegado
@@ -134,15 +120,15 @@ $acl->addResource(new Zend_Acl_Resource('announcement'), 'news');
 
         <title>Eliminar los controles de acceso</title>
 
-        <para>
-            Para eliminar una o más reglas <acronym>ACL</acronym>, simplemente utilice el
-            método <methodname>removeAllow()</methodname> o <methodname>removeDeny()</methodname>. Al igual que con
-            <methodname>allow()</methodname> y <methodname>deny()</methodname>, puede utilizar un valor <constant>NULL</constant> para indicar
-            que el método es aplicable a todos los roles, recursos y/o
-            privilegios:
-        </para>
+        <para> Para eliminar una o más reglas <acronym>ACL</acronym>,
+            simplemente utilice el método <methodname>removeAllow()</methodname>
+            o <methodname>removeDeny()</methodname>. Al igual que con
+                <methodname>allow()</methodname> y
+                <methodname>deny()</methodname>, puede utilizar un valor
+                <constant>NULL</constant> para indicar que el método es
+            aplicable a todos los roles, recursos y/o privilegios: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Elimina la prohibición de leer las últimas noticias de staff (y marketing,
 // por herencia)
 $acl->removeDeny('staff', 'latest', 'revise');
@@ -168,13 +154,12 @@ echo $acl->isAllowed('marketing', 'newsletter', 'archive') ?
 
 ]]></programlisting>
 
-        <para>
-            Los privilegios pueden ser modificados de manera incremental como se
-            ha indicado anteriormente, pero un valor <constant>NULL</constant> para los
-            privilegios anula tales cambios incrementales:
-        </para>
+        <para> Los privilegios pueden ser modificados de manera incremental como
+            se ha indicado anteriormente, pero un valor
+                <constant>NULL</constant> para los privilegios anula tales
+            cambios incrementales: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 //Permitir al grupo de "marketing" todos los permisos a las últimas noticias
 $acl->allow('marketing', 'latest');
 

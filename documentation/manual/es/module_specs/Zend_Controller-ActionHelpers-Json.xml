@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16503 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.json">
     <title>JSON</title>
 
     <para>
-        Las respuestas JSON se están convirtiendo en la respuesta de elección
-        cuando se trata de requerimientos AJAX que esperan recibir
-        respuestas datasets; en el lado del cliente, JSON puede ser inmediatamente parseado y
+        Las respuestas  <acronym>JSON</acronym> se están convirtiendo en la respuesta de elección
+        cuando se trata de requerimientos <acronym>AJAX</acronym> que esperan recibir
+        respuestas datasets; en el lado del cliente,  <acronym>JSON</acronym> puede ser inmediatamente parseado y
         ejecutado rápidamente.
     </para>
 
     <para>
-        El ayudante de acción de JSON hace varias cosas:
+        El ayudante de acción de  <acronym>JSON</acronym> hace varias cosas:
     </para>
 
     <itemizedlist>
@@ -38,7 +38,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
          </para></listitem>
 
         <listitem><para>
-                Establece la cabecera de respuesta 'Content-Type' a 'application/json'.
+                Establece la cabecera de respuesta 'Content-Type' a '<filename>application/json</filename>'.
          </para></listitem>
 
         <listitem><para>
@@ -75,11 +75,11 @@ class FooController extends Zend_Controller_Action
         <title>Conservando los Esquemas(Layouts)</title>
 
         <para>
-            Si se tiene un esquema separado para respuestas de JSON --
-            quizás para envolver la respuesta de JSON en algún tipo de
-            contexto -- cada método en el ayudante JSON acepta un segundo
+            Si se tiene un esquema separado para respuestas de <acronym>JSON</acronym> --
+            quizás para envolver la respuesta de <acronym>JSON</acronym> en algún tipo de
+            contexto -- cada método en el ayudante <acronym>JSON</acronym> acepta un segundo
             argumento opcional: un flag para activar o desactivar layouts.
-            Pasando un valor booleano constant>TRUE</constant> conservará los layouts
+            Pasando un valor booleano <constant>TRUE</constant> conservará los layouts
             habilitados:
         </para>
 
@@ -103,10 +103,10 @@ $this->_helper->json($data, array('keepLayouts' => true);
 
         <para>
             <classname>Zend_Json::encode()</classname> permite la codificación
-            de expresiones nativas de JSON utilizando objetos
+            de expresiones nativas de <acronym>JSON</acronym> utilizando objetos
             <methodname>Zend_Json_Expr</methodname>. Esta opción está desactivada por
             defecto. Para activar esta opción, pase un valor booleano
-            constant>TRUE</constant> a la opción <methodname>enableJsonExprFinder</methodname>:
+            <constant>TRUE</constant> a la opción <methodname>enableJsonExprFinder</methodname>:
         </para>
 
          <programlisting language="php"><![CDATA[
@@ -116,7 +116,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true);
         <para>
             Si desea hacer esto, <emphasis>debe</emphasis> pasar un array
             como segundo argumento. Esto también le permite combinar otras
-            opciones, como la opción <methodname>keepLayouts</methodname>. Todas esas
+            opciones, como la opción <emphasis>keepLayouts</emphasis>. Todas esas
             opciones se pasan luego a <classname>Zend_Json::encode()</classname>.
         </para>
 

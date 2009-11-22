@@ -4,62 +4,59 @@
 <sect1 id="zend.json.xml2json">
     <title>Conversión de XML a JSON</title>
     <para>
-        <classname>Zend_Json</classname> roporciona una método conveniente para 
-        transformar datos en formato <acronym>XML</acronym> a formato JSON. Esta característica fue 
-        inspirado en un 
-        <ulink url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
-        artículo de IBM developerWorks</ulink>.
-    </para>
+        <classname>Zend_Json</classname> roporciona una método conveniente para
+        transformar datos en formato <acronym>XML</acronym> a formato JSON. Esta
+        característica fue inspirado en un <ulink
+            url="http://www.ibm.com/developerworks/xml/library/x-xml2jsonphp/">
+            artículo de IBM developerWorks</ulink>. </para>
 
     <para>
-        <classname>Zend_Json</classname> incluye una función estática llamada 
-        <classname>Zend_Json::fromXml()</classname>.
-        Esta función generará JSON desde una determinada entrada <acronym>XML</acronym>. 
-        Esta función toma cualquier string <acronym>XML</acronym> arbitrario como un parámetro de  
-        entrada. También puede tomar opcionalmente parámetros booleanos de entrada 
-        que instruyan a la lógica de conversión de ignorar o no los atributos 
-        <acronym>XML</acronym> durante el proceso de conversión. Si este parámetro opcional de entrada 
-        no está dado, entonces el comportamiento por defecto es ignorar los 
-        atributos <acronym>XML</acronym>. 
-        La llamada a esta función se hace como se muestra a continuación:
-    </para>
-     <programlisting language="php"><![CDATA[
+        <classname>Zend_Json</classname> incluye una función estática llamada
+            <classname>Zend_Json::fromXml()</classname>. Esta función generará
+        JSON desde una determinada entrada <acronym>XML</acronym>. Esta función
+        toma cualquier string <acronym>XML</acronym> arbitrario como un
+        parámetro de entrada. También puede tomar opcionalmente parámetros
+        booleanos de entrada que instruyan a la lógica de conversión de ignorar
+        o no los atributos <acronym>XML</acronym> durante el proceso de
+        conversión. Si este parámetro opcional de entrada no está dado, entonces
+        el comportamiento por defecto es ignorar los atributos
+            <acronym>XML</acronym>. La llamada a esta función se hace como se
+        muestra a continuación: </para>
+    <programlisting language="php"><![CDATA[
 // la función fromXml simplemente toma un string conteniendo XML 
 // como entrada.
 $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 ]]></programlisting>
 
     <para>
-        <classname>Zend_Json::fromXml()</classname> función que hace la conversión 
-        del parámetro de entrada formateado como un string <acronym>XML</acronym> y devuelve el 
-        string de salida equivalente formateado a JSON.  
-        En caso de cualquier entrada con formato <acronym>XML</acronym> erróneo o un error en la lógica 
-        de conversión, esta función arrojará una excepción. 
-        La conversión lógica también usa técnicas recursivas para recorrer el 
-        árbol <acronym>XML</acronym>. Soporta una recursión de hasta 25 niveles de profundidad. 
-        Más allá de esa profundidad, arrojará una 
-        <classname>Zend_Json_Exception</classname>. Hay varios archivos <acronym>XML</acronym> con 
-        diversos grados de complejidad provistas en el directorio de tests de  
-        Zend Framework. Se pueden utilizar para probar la funcionalidad de la 
-        característica xml2json.
-    </para>
+        <classname>Zend_Json::fromXml()</classname> función que hace la
+        conversión del parámetro de entrada formateado como un string
+            <acronym>XML</acronym> y devuelve el string de salida equivalente
+        formateado a JSON. En caso de cualquier entrada con formato
+            <acronym>XML</acronym> erróneo o un error en la lógica de
+        conversión, esta función arrojará una excepción. La conversión lógica
+        también usa técnicas recursivas para recorrer el árbol
+            <acronym>XML</acronym>. Soporta una recursión de hasta 25 niveles de
+        profundidad. Más allá de esa profundidad, arrojará una
+            <classname>Zend_Json_Exception</classname>. Hay varios archivos
+            <acronym>XML</acronym> con diversos grados de complejidad provistas
+        en el directorio de tests de Zend Framework. Se pueden utilizar para
+        probar la funcionalidad de la característica xml2json. </para>
 
-    <para>
-        El siguiente es un ejemplo simple que muestra tanto el string de entrada  
-        <acronym>XML</acronym> pasado a y al string JSON de salida devuelto como resultado de la 
-        función <classname>Zend_Json::fromXml()</classname>. Este ejemplo utilizó 
-        el parámetro de la función opcional como para no ignorar los atributos 
-        <acronym>XML</acronym> durante la conversión. Por lo tanto, puede notar que el string 
-        resultante JSON incluye una representación de los atributos <acronym>XML</acronym> presentes 
-        en el string de entrada <acronym>XML</acronym>.
-    </para>
+    <para> El siguiente es un ejemplo simple que muestra tanto el string de
+        entrada <acronym>XML</acronym> pasado a y al string JSON de salida
+        devuelto como resultado de la función
+            <classname>Zend_Json::fromXml()</classname>. Este ejemplo utilizó el
+        parámetro de la función opcional como para no ignorar los atributos
+            <acronym>XML</acronym> durante la conversión. Por lo tanto, puede
+        notar que el string resultante JSON incluye una representación de los
+        atributos <acronym>XML</acronym> presentes en el string de entrada
+            <acronym>XML</acronym>. </para>
 
-    <para>
-        String de entrada XML pasada a la función 
-        <classname>Zend_Json::fromXml()</classname>:
-    </para>
+    <para> String de entrada XML pasada a la función
+            <classname>Zend_Json::fromXml()</classname>: </para>
 
-     <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
 <books>
     <book id="1">
@@ -82,12 +79,10 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 </books>
 ]]></programlisting>
 
-    <para>
-        String de salida JSON devuelto por la función 
-        <classname>Zend_Json::fromXml()</classname>:
-    </para>
+    <para> String de salida JSON devuelto por la función
+            <classname>Zend_Json::fromXml()</classname>: </para>
 
-     <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 {
    "books" : {
       "book" : [ {
@@ -120,13 +115,8 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
 }
 ]]></programlisting>
 
-    <para>
-        Más detalles sobre esta característica xml2json pueden encontrarse en la 
-        propuesta original. Eche un vistazo a la
-        <ulink url="http://tinyurl.com/2tfa8z">Zend_xml2json proposal</ulink>.
-    </para>
+    <para> Más detalles sobre esta característica xml2json pueden encontrarse en
+        la propuesta original. Eche un vistazo a la <ulink
+            url="http://tinyurl.com/2tfa8z">Zend_xml2json proposal</ulink>. </para>
 
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -213,7 +213,8 @@ $pdfPage->drawText('Hello world!', 72, 720);
             codificación de caracteres a llamar en tiempo de dibujo y
                 <classname>Zend_Pdf</classname> se encargará de la conversión.
             Puede proporcionar la fuente de cualquier método de codificación de
-            strings soportados por la función de <acronym>PHP</acronym> <code>
+            strings soportados por la función de <acronym>PHP</acronym>
+            <code>
                 <ulink url="http://www.php.net/manual/function.iconv.php"
                     >iconv()</ulink>
             </code>: </para>
@@ -611,8 +612,9 @@ $pdfPage->drawImage($image, 100, 100, 400, 300);
             <emphasis>Importante! el soporte a PNG requiere que se configure la
                 extensión ZLIB para trabajar con imágenes canal Alfa.</emphasis>
         </para>
-        <para> Consulte la documentación de <acronym>PHP</acronym> para obtener información
-            detallada (<ulink url="http://www.php.net/manual/en/ref.image.php"
+        <para> Consulte la documentación de <acronym>PHP</acronym> para obtener
+            información detallada (<ulink
+                url="http://www.php.net/manual/en/ref.image.php"
                 >http://www.php.net/manual/en/ref.image.php</ulink>). (<ulink
                 url="http://www.php.net/manual/en/ref.zlib.php"
                 >http://www.php.net/manual/en/ref.zlib.php</ulink>). </para>

@@ -3,28 +3,22 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.create">
     <title>Creando y Cargando Documentos PDF</title>
-    <para>
-    La clase <classname>Zend_Pdf</classname> representa documentos PDF y 
-    proporciona operaciones a nivel de documento.
-    </para>
+    <para> La clase <classname>Zend_Pdf</classname> representa documentos PDF y
+        proporciona operaciones a nivel de documento. </para>
 
-    <para>
-    Para crear un nuevo documento, primero debe ser creado un nuevo objeto 
-    <classname>Zend_Pdf</classname>.
-    </para>
+    <para> Para crear un nuevo documento, primero debe ser creado un nuevo
+        objeto <classname>Zend_Pdf</classname>. </para>
 
-    <para>
-    La clase <classname>Zend_Pdf</classname> también ofrece dos métodos estáticos 
-    para cargar un documento PDF.
-    Estos métodos son <classname>Zend_Pdf::load()</classname> y 
-    <classname>Zend_Pdf::parse()</classname>.
-    Ambos retornan objetos <classname>Zend_Pdf</classname> como resultado o 
-    arrojan una excepción si ocurre un error.
-    </para>
+    <para> La clase <classname>Zend_Pdf</classname> también ofrece dos métodos
+        estáticos para cargar un documento PDF. Estos métodos son
+            <classname>Zend_Pdf::load()</classname> y
+            <classname>Zend_Pdf::parse()</classname>. Ambos retornan objetos
+            <classname>Zend_Pdf</classname> como resultado o arrojan una
+        excepción si ocurre un error. </para>
 
     <example id="zend.pdf.create.example-1">
         <title>Crear un nuevo documento PDF o cargar uno ya esistente.</title>
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 ...
 // Crear un nuevo documento PDF
 $pdf1 = new Zend_Pdf();
@@ -38,30 +32,23 @@ $pdf3 = Zend_Pdf::parse($pdfString);
 ]]></programlisting>
     </example>
 
-    <para>
-    El formato de archivos PDF soporta la actualización incremental del documento.  
-    Así, cada vez que un documento es actualizado, entonces se crea una nueva 
-    revisión del documento.
-    El componente <classname>Zend_Pdf</classname> soporta la recuperación de una 
-    revisión especificada.
-    </para>
-    <para>
-    Una revisión puede especificarse como un segundo parámetro a los métodos  
-    <classname>Zend_Pdf::load()</classname> y <classname>Zend_Pdf::parse()</classname> 
-    o requerirlo llamando al método <classname>Zend_Pdf::rollback()</classname>. 
-        <footnote>
-            <para>
-            El método <classname>Zend_Pdf::rollback()</classname> debe ser invocado 
-            antes de aplicar cualquier cambio al documento, de lo contrario el 
-            comportamiento no está definido.
-            </para>
-        </footnote>
-    call.
-    </para>
+    <para> El formato de archivos PDF soporta la actualización incremental del
+        documento. Así, cada vez que un documento es actualizado, entonces se
+        crea una nueva revisión del documento. El componente
+            <classname>Zend_Pdf</classname> soporta la recuperación de una
+        revisión especificada. </para>
+    <para> Una revisión puede especificarse como un segundo parámetro a los
+        métodos <classname>Zend_Pdf::load()</classname> y
+            <classname>Zend_Pdf::parse()</classname> o requerirlo llamando al
+        método <classname>Zend_Pdf::rollback()</classname>. <footnote>
+            <para> El método <classname>Zend_Pdf::rollback()</classname> debe
+                ser invocado antes de aplicar cualquier cambio al documento, de
+                lo contrario el comportamiento no está definido. </para>
+        </footnote> call. </para>
 
     <example id="zend.pdf.create.example-2">
         <title>Requiriendo Revisiones Específicas de un documento PDF</title>
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 ...
 // Cargar la revisión anterior del documento PDF
 $pdf1 = Zend_Pdf::load($fileName, 1);
@@ -79,6 +66,3 @@ $pdf3->rollback($revisions - 1);
 
 
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -49,7 +49,7 @@
         </para>
 
         <para>
-            Si <methodname>isValid()</methodname> devuelve <methodname>false</methodname>, la función
+            Si <methodname>isValid()</methodname> devuelve <constant>FALSE</constant>, la función
             <methodname>getMessages()</methodname> devuelve un array de mensajes explicando
             el motivo(s) del fracaso de la validación. Las claves del array son
             strings cortos que identifican las razones por las cuales fracasó

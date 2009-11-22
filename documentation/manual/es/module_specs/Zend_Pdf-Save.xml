@@ -3,28 +3,24 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.save">
     <title>Guardar Cambios a Documentos PDF</title>
-    <para>
-    Hay dos métodos que guardan los cambios a los documentos PDF:
-    los métodos son <classname>Zend_Pdf::save()</classname> y
-    <classname>Zend_Pdf::render()</classname>.
-    </para>
+    <para> Hay dos métodos que guardan los cambios a los documentos PDF: los
+        métodos son <classname>Zend_Pdf::save()</classname> y
+            <classname>Zend_Pdf::render()</classname>. </para>
 
     <para>
-    <classname>Zend_Pdf::save($filename, $updateOnly = false)</classname> 
-    guarda el documento PDF en un archivo. Si $updateOnly es verdadero, sólo 
-    entonces el nuevo segmento del archivo PDF se agrega al archivo. 
-    De lo contrario, el archivo es sobreescrito.
-    </para>
+        <classname>Zend_Pdf::save($filename, $updateOnly = false)</classname>
+        guarda el documento PDF en un archivo. Si $updateOnly es verdadero, sólo
+        entonces el nuevo segmento del archivo PDF se agrega al archivo. De lo
+        contrario, el archivo es sobreescrito. </para>
 
     <para>
-    <classname>Zend_Pdf::render($newSegmentOnly = false)</classname> 
-    regresa el documento PDF como un string. Si $newSegmentOnly es verdadero, 
-    entonces sólo el nuevo segmento del archivo PDF es devuelto.
-    </para>
+        <classname>Zend_Pdf::render($newSegmentOnly = false)</classname> regresa
+        el documento PDF como un string. Si $newSegmentOnly es verdadero,
+        entonces sólo el nuevo segmento del archivo PDF es devuelto. </para>
 
     <example id="zend.pdf.save.example-1">
         <title>Guardando Documentos PDF</title>
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 ...
 // Cargar el documento PDF
 $pdf = Zend_Pdf::load($fileName);
@@ -42,6 +38,3 @@ $pdfString = $pdf->render();
     </example>
 
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

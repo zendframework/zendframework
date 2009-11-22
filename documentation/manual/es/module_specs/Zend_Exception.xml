@@ -7,15 +7,14 @@
     <title>Using Exceptions</title>
 
     <para>
-        <classname>Zend_Exception</classname> is simply the base class for all exceptions thrown within Zend Framework.
-    </para>
+        <classname>Zend_Exception</classname> is simply the base class for all
+        exceptions thrown within Zend Framework. </para>
 
     <example id="zend.exception.using.example">
         <title>Catching an Exception</title>
-        <para>
-            The following code listing demonstrates how to catch an exception thrown in a Zend Framework class:
-        </para>
-         <programlisting language="php"><![CDATA[
+        <para> The following code listing demonstrates how to catch an exception
+            thrown in a Zend Framework class: </para>
+        <programlisting language="php"><![CDATA[
 try {
     // Calling Zend_Loader::loadClass() with a non-existant class will cause
     // an exception to be thrown in Zend_Loader
@@ -28,19 +27,14 @@ try {
 ]]></programlisting>
     </example>
     <para>
-        <classname>Zend_Exception</classname> can be used as a catch-all exception class in a
-        catch block to trap all exceptions thrown by Zend Framework classes. This can
-        be useful when the program can not recover by catching a specific exception type.
-    </para>
+        <classname>Zend_Exception</classname> can be used as a catch-all
+        exception class in a catch block to trap all exceptions thrown by Zend
+        Framework classes. This can be useful when the program can not recover
+        by catching a specific exception type. </para>
 
-    <para>
-        The documentation for each Zend Framework
-        component and class will contain specific information on which methods
-        throw exceptions, the circumstances that cause an exception to be thrown,
-        and the class of all exceptions that may be thrown.
-    </para>
+    <para> The documentation for each Zend Framework component and class will
+        contain specific information on which methods throw exceptions, the
+        circumstances that cause an exception to be thrown, and the class of all
+        exceptions that may be thrown. </para>
 
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

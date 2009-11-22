@@ -5,40 +5,34 @@
     <title>Trabajando con Páginas</title>
     <sect2 id="zend.pdf.pages.creation">
         <title>Creación de Páginas</title>
-        <para>
-             Las páginas en un documento PDF están representadas como instancias 
-             <classname>Zend_Pdf_Page</classname> en <classname>Zend_Pdf</classname>.
-        </para>
+        <para> Las páginas en un documento PDF están representadas como
+            instancias <classname>Zend_Pdf_Page</classname> en
+                <classname>Zend_Pdf</classname>. </para>
 
-        <para>
-            Las páginas PDF o bien son cargadas desde una PDF ya existente o 
-            creadas usando la <acronym>API</acronym> <classname>Zend_Pdf</classname>.
-        </para>
+        <para> Las páginas PDF o bien son cargadas desde una PDF ya existente o
+            creadas usando la <acronym>API</acronym>
+            <classname>Zend_Pdf</classname>. </para>
 
-        <para>
-            Se pueden crear nuevas páginas instanciando directamente al objeto  
-            <classname>Zend_Pdf_Page</classname> o llamando al método 
-            <classname>Zend_Pdf::newPage()</classname>, que devuelve un objeto  
-            <classname>Zend_Pdf_Page</classname>.
-            <classname>Zend_Pdf::newPage()</classname> crea una página que ya 
-            está agregada a un documento. Las páginas no agregadas no pueden ser 
-            utilizadas con múltiples documentos PDF, pero son algo más eficientes.
-            <footnote>
-                <para>
-                Es una limitación de la versión actual de ZF. Será eliminada en 
-                futuras versiones. Pero las páginas no agregadas siempre dan mejor 
-                resultado (más óptimo) para compartir páginas entre los documentos.
-                </para>
+        <para> Se pueden crear nuevas páginas instanciando directamente al
+            objeto <classname>Zend_Pdf_Page</classname> o llamando al método
+                <classname>Zend_Pdf::newPage()</classname>, que devuelve un
+            objeto <classname>Zend_Pdf_Page</classname>.
+                <classname>Zend_Pdf::newPage()</classname> crea una página que
+            ya está agregada a un documento. Las páginas no agregadas no pueden
+            ser utilizadas con múltiples documentos PDF, pero son algo más
+            eficientes. <footnote>
+                <para> Es una limitación de la versión actual de ZF. Será
+                    eliminada en futuras versiones. Pero las páginas no
+                    agregadas siempre dan mejor resultado (más óptimo) para
+                    compartir páginas entre los documentos. </para>
             </footnote>
         </para>
 
-        <para>
-        El método <classname>Zend_Pdf::newPage()</classname> y el constructor  
-        <classname>Zend_Pdf_Page</classname> toman los mismos parámetros que 
-        especifican el tamaño de la página. Pueden tomar el tamaño de la 
-        página ($x, $y) en puntos (1/72 pulgadas) o una constante predefinida 
-        representando un tipo de página:
-            <itemizedlist>
+        <para> El método <classname>Zend_Pdf::newPage()</classname> y el
+            constructor <classname>Zend_Pdf_Page</classname> toman los mismos
+            parámetros que especifican el tamaño de la página. Pueden tomar el
+            tamaño de la página ($x, $y) en puntos (1/72 pulgadas) o una
+            constante predefinida representando un tipo de página: <itemizedlist>
                 <listitem>
                     <para>Zend_Pdf_Page::SIZE_A4</para>
                 </listitem>
@@ -54,17 +48,16 @@
             </itemizedlist>
         </para>
 
-        <para>
-            Las páginas del documento se almacenados en el atributo público 
-            <methodname>$pages</methodname> de la clase <classname>Zend_Pdf</classname>. 
-            El atributo posee un array de objetos <classname>Zend_Pdf_Page</classname> 
-            y define completamente las instancias y el orden de las páginas. 
-            Este array puede manipularse como cualquie otro array PHP:
-        </para>
+        <para> Las páginas del documento se almacenados en el atributo público
+                <methodname>$pages</methodname> de la clase
+                <classname>Zend_Pdf</classname>. El atributo posee un array de
+            objetos <classname>Zend_Pdf_Page</classname> y define completamente
+            las instancias y el orden de las páginas. Este array puede
+            manipularse como cualquie otro array PHP: </para>
 
         <example id="zend.pdf.pages.example-1">
             <title>Administración de Páginas de un Documento PDF.</title>
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 // Invertir el orden de las páginas.
 $pdf->pages = array_reverse($pdf->pages);
@@ -84,15 +77,13 @@ unset($pdf->pages[$id]);
 
     <sect2 id="zend.pdf.pages.cloning">
         <title>Clonado de Páfinas.</title>
-        <para>
-            La página PDF existente puede ser clonada creando un nuevo objeto 
-            <classname>Zend_Pdf_Page</classname> con una página existente como 
-            parámetro:
-        </para>
+        <para> La página PDF existente puede ser clonada creando un nuevo objeto
+                <classname>Zend_Pdf_Page</classname> con una página existente
+            como parámetro: </para>
 
         <example id="zend.pdf.pages.example-2">
             <title>Clonando una Página Existente.</title>
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 ...
 // Almacenar la página plantilla en una variable
 $template = $pdf->pages[$templatePageIndex];
@@ -114,20 +105,14 @@ unset($pdf->pages[$templatePageIndex]);
 ]]></programlisting>
         </example>
 
-        <para>
-            Es útil si necesita crear varias páginas utilizando una plantilla.
-        </para>
+        <para> Es útil si necesita crear varias páginas utilizando una
+            plantilla. </para>
 
         <caution>
-            <para>
-                Importante! La página clonada comparte algunos recursos de PDF 
-                con una página plantilla, la que puede ser utilizada sólo en 
-                el mismo documento como una página plantilla. 
-                El documento modificado pueden guardarse como uno nuevo.
-            </para>
+            <para> Importante! La página clonada comparte algunos recursos de
+                PDF con una página plantilla, la que puede ser utilizada sólo en
+                el mismo documento como una página plantilla. El documento
+                modificado pueden guardarse como uno nuevo. </para>
         </caution>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

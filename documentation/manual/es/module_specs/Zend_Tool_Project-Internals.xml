@@ -5,13 +5,13 @@
     <title>Zend_Tool_Project Internos</title>
     <sect2 id="zend.tool.project.internals.xml-structure">
         <title>Zend_Tool_Project Estructura Xml Interna</title>
-        <para></para>
+        <para/>
         <!-- @todo -->
     </sect2>
 
     <sect2 id="zend.tool.project.internals.extending">
         <title>Zend_Tool_Project Enxtensión Interna</title>
-        <para></para>
+        <para/>
         <!-- @todo -->
     </sect2>
 </sect1>

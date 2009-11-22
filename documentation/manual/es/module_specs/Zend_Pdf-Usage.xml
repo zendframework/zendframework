@@ -3,21 +3,16 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.usage">
     <title>Ejemplo de Uso del módulo Zend_Pdf</title>
-    <para>
-        Esta sección proporciona un ejemplo de uso del módulo.
-    </para>
+    <para> Esta sección proporciona un ejemplo de uso del módulo. </para>
 
-    <para>
-        Este ejemplo se puede encontrar en el archivo <filename>demos/Zend/Pdf/demo.php</filename>.
-    </para>
-    <para>
-        También está el archivo <filename>test.pdf</filename>, que puede ser 
-        usado con esta demo con fines de prueba.
-    </para>
+    <para> Este ejemplo se puede encontrar en el archivo
+            <filename>demos/Zend/Pdf/demo.php</filename>. </para>
+    <para> También está el archivo <filename>test.pdf</filename>, que puede ser
+        usado con esta demo con fines de prueba. </para>
 
     <example id="zend.pdf.usage.example-1">
         <title>Demo de uso del módulo Zend_Pdf</title>
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * @package Zend_Pdf
  * @subpackage demo
@@ -266,6 +261,3 @@ if (isset($argv[2])) {
     </example>
 
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

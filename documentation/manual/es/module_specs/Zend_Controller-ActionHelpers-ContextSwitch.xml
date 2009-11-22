@@ -379,7 +379,7 @@ class FooController extends Zend_Controller_Action
                         <methodname>$context</methodname> puede ser un único
                     contexto, o un array de contextos. </para>
 
-                <para> Un valor de constant>TRUE</constant> para el
+                <para> Un valor de <constant>TRUE</constant> para el
                     contexto marcará todos los contextos como disponibles para
                     la acción. </para>
 
@@ -761,7 +761,7 @@ class CommentController extends Zend_Controller_Action
                 simplemente pedirá los parámetros finales '<filename>/comment/view</filename>',
                 '<filename>/comment/form</filename>', y '<filename>/comment/process</filename>', y pasar el parámetro
                 'format': '<filename>/comment/view/format/html</filename>',
-                '<filename>/comment/form/format/html', '<filename>/comment/process/format/json</filename>'. (O
+                '<filename>/comment/form/format/html</filename>', '<filename>/comment/process/format/json</filename>'. (O
                 puede pasar el parámetro via string de consulta: ejemplo
                 "?format=json"). </para>
 

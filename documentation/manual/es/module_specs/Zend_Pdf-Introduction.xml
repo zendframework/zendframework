@@ -4,72 +4,46 @@
 <sect1 id="zend.pdf.introduction">
     <!-- @todo review and revise upon completion of refactoring -->
     <title>Introducción</title>
-    <para>
-    El componente <classname>Zend_Pdf</classname> es un motor para manipular
-    documentos PDF (Portable Document Format). 
-    Puede cargar, crear, modificar y guardar documentos. Por lo tanto, puede 
-    ayudar a cualquier aplicación <acronym>PHP</acronym> a crear dinámicamente documentos PDF 
-    modificando los documentos existentes o generar unos nuevos desde cero.
-
-    <classname>Zend_Pdf</classname> ofrece las siguientes características:
-    <itemizedlist>
-        <listitem>
-            <para>
-            Crear un documento nuevo o cargar uno existente.
-            <footnote>
-                <para>
-                La carga de documentos PDF V1.4 (Acrobat 5) ahora está soportada.
+    <para> El componente <classname>Zend_Pdf</classname> es un motor para manipular documentos PDF
+        (Portable Document Format). Puede cargar, crear, modificar y guardar documentos. Por lo
+        tanto, puede ayudar a cualquier aplicación <acronym>PHP</acronym> a crear dinámicamente
+        documentos PDF modificando los documentos existentes o generar unos nuevos desde cero.
+            <classname>Zend_Pdf</classname> ofrece las siguientes características: <itemizedlist>
+            <listitem>
+                <para> Crear un documento nuevo o cargar uno existente. <footnote>
+                        <para> La carga de documentos PDF V1.4 (Acrobat 5) ahora está soportada.
+                        </para>
+                    </footnote>
                 </para>
-            </footnote>
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Recuperar una determinada revisión del documento.
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Manipular páginas desde dentro de un documento. Cambiar el orden de 
-            las páginas, añadir nuevas páginas, eliminar páginas de un documento.
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Diferentes primitivas de dibujo (líneas, rectángulos, polígonos, 
-            círculos, elipses y sectores).
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Dibujo de texto utilizando alguno de las 14 fuentes estándar 
-            (incorporadas) o sus propias fuentes personalizadas TrueType.
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Rotaciones.
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Dibujo de imágenes.
-            <footnote>
-                <para>
-                Están soportados los formatos de imagen JPG, PNG 
-                [hasta 8bit por channel+Alpha] y TIFF.
+            </listitem>
+            <listitem>
+                <para> Recuperar una determinada revisión del documento. </para>
+            </listitem>
+            <listitem>
+                <para> Manipular páginas desde dentro de un documento. Cambiar el orden de las
+                    páginas, añadir nuevas páginas, eliminar páginas de un documento. </para>
+            </listitem>
+            <listitem>
+                <para> Diferentes primitivas de dibujo (líneas, rectángulos, polígonos, círculos,
+                    elipses y sectores). </para>
+            </listitem>
+            <listitem>
+                <para> Dibujo de texto utilizando alguno de las 14 fuentes estándar (incorporadas) o
+                    sus propias fuentes personalizadas TrueType. </para>
+            </listitem>
+            <listitem>
+                <para> Rotaciones. </para>
+            </listitem>
+            <listitem>
+                <para> Dibujo de imágenes. <footnote>
+                        <para> Están soportados los formatos de imagen JPG, PNG [hasta 8bit por
+                            channel+Alpha] y TIFF. </para>
+                    </footnote>
                 </para>
-            </footnote>
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Actualización incremental de archivos PDF.
-            </para>
-        </listitem>
-    </itemizedlist>
+            </listitem>
+            <listitem>
+                <para> Actualización incremental de archivos PDF. </para>
+            </listitem>
+        </itemizedlist>
     </para>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

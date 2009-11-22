@@ -42,9 +42,9 @@
         <methodname>isValid()</methodname> y definir las variables y plantillas de mensajes
         que correspondan a los tipos de fallos de validación que puedan suceder.
         Si falla un valor en su test de validación, entonces <methodname>isValid()</methodname>
-        deberá devolver <methodname>false</methodname>.
+        deberá devolver <constant>FALSE</constant>.
         Si el valor pasa su test de validación, entonces <methodname>isValid()</methodname>
-        deberá devolver <methodname>true</methodname>.
+        deberá devolver <constant>TRUE</constant>.
     </para>
 
     <para>
@@ -189,7 +189,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 
             Tenga en cuenta que si cualquiera de las comprobaciones de validación
             falla en <methodname>isValid()</methodname>, ya está preparado un mensaje apropiado,
-            y el método inmediatamente devuelve <methodname>false</methodname>.
+            y el método inmediatamente devuelve <constant>FALSE</constant>.
             Estas reglas de validación son por lo tanto secuencialmente dependientes.
             Es decir, si uno de los tests falla, no hay necesidad de poner a
             prueba las posteriores reglas de validación.
@@ -278,7 +278,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 ]]></programlisting>
 
             Las cuatro pruebas de criterio en <methodname>isValid()</methodname> no devuelven
-            inmediatamente <methodname>false</methodname>.
+            inmediatamente <constant>FALSE</constant>.
             Esto permite a la clase de validación a proporcionar <emphasis role="bold">todas</emphasis>
             las razones por las que la contraseña de entrada no cumplió los requisitos
             de validación.

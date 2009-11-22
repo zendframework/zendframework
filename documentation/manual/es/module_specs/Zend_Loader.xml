@@ -60,7 +60,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         </para>
 
         <para>
-            El argumento <methodname>$once</methodname> es un booleano.  Si es <methodname>TRUE</methodname>,
+            El argumento <methodname>$once</methodname> es un booleano.  Si es <constant>TRUE</constant>,
             <classname>Zend_Loader::loadFile()</classname> esa la función <acronym>PHP</acronym>
             <ulink url="http://php.net/include"><methodname>include_once()</methodname></ulink>
             para cargar el archivo, de lo contrario se utiliza la función <acronym>PHP</acronym>
@@ -123,8 +123,8 @@ Zend_Loader::loadClass('Container_Tree',
 
         <para>
             El método estático <classname>Zend_Loader::isReadable($pathname)</classname>
-            devuelve <methodname>TRUE</methodname> si el archivo en la ruta $pathname existe
-            y tiene permisos de lectura, <methodname>FALSE</methodname> en caso contrario.
+            devuelve <constant>TRUE</constant> si el archivo en la ruta $pathname existe
+            y tiene permisos de lectura, <constant>FALSE</constant> en caso contrario.
         </para>
 
         <example id="zend.loader.load.isreadable.example">
@@ -219,8 +219,8 @@ Zend_Loader::registerAutoload('My_Loader');
         <para>
             Se puede eliminar un callback de autoload.
             <methodname>registerAutoload()</methodname> tiene un segundo parámetro opcional,
-            que es <methodname>true</methodname> por defecto. Si este parámetro es
-            <methodname>false</methodname>, el callback de autoload será borrado de la pila
+            que es <constant>TRUE</constant> por defecto. Si este parámetro es
+            <constant>FALSE</constant>, el callback de autoload será borrado de la pila
             de autoload SPL.
         </para>
 

@@ -194,7 +194,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             </itemizedlist>
 
             <para>
-                <methodname>fetch()</methodname> devuelve constant>FALSE</constant> si todas las filas
+                <methodname>fetch()</methodname> devuelve <constant>FALSE</constant> si todas las filas
                 del conjunto de resultados han sido extraídas.
             </para>
 
@@ -297,7 +297,7 @@ echo $rows[0][0];
                 conjunto de resultados, use <methodname>fetchColumn()</methodname>. El
                 parámetro opcional es el índice de la columna (integer), y por
                 defecto es 0. Este método devuelve un valor escalar, o
-                constant>FALSE</constant> si todas las filas del conjunto de resultados
+                <constant>FALSE</constant> si todas las filas del conjunto de resultados
                 han sido extraídas.
             </para>
 

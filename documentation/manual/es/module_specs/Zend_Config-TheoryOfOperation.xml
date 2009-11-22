@@ -59,7 +59,7 @@
         ítemes en <methodname>$localConfig</methodname> sobrescribirán cualquier item con el mismo nombre en
             <methodname>$config</methodname>. <note>
             <para> El objeto <classname>Zend_Config</classname> que está ejecutando el merge debe haber sido construido
-                para permitir modificaciones, pasando constant>TRUE</constant> como el segundo parámetro del
+                para permitir modificaciones, pasando <constant>TRUE</constant> como el segundo parámetro del
                 constructor. El método <methodname>setReadOnly()</methodname> puede entonces ser usado para evitar
                 cualquier modificación posterior después de que el merge se haya completado. </para>
         </note>

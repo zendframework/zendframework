@@ -112,7 +112,7 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
                                             true);
 ]]></programlisting>
         Alternativamente, para activar o desactivar la validación MX puede pasar
-        <methodname>true</methodname> o <methodname>false</methodname> a <methodname>$validator->setValidateMx()</methodname>.
+        <constant>TRUE</constant> o <constant>FALSE</constant> a <methodname>$validator->setValidateMx()</methodname>.
     </para>
 
     <para>

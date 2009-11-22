@@ -528,9 +528,9 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
         </sect3>
 
-       <sect3 id="zend.db.adapter.connecting.getconnection">
+        <sect3 id="zend.db.adapter.connecting.getconnection">
             <title>Managing Lazy Connections</title>
-
+            
             <para>
                 Creating an instance of an Adapter class does not immediately
                 connect to the <acronym>RDBMS</acronym> server. The Adapter saves the connection
@@ -541,74 +541,40 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 that you need to run any database queries during the current
                 request your application is serving.
             </para>
-
+            
             <para>
                 If you need to force the Adapter to connect to the <acronym>RDBMS</acronym>, use
                 the <methodname>getConnection()</methodname> method. This method returns
                 an object for the connection as represented by the respective
                 <acronym>PHP</acronym> database extension. For example, if you use any of the
                 Adapter classes for <acronym>PDO</acronym> drivers, then
-                <methodname>getConnection()</methodname> returns the <acronym>PDO</acronym> object, after
-                initiating it as a live connection to the specific database.
+                <methodname>getConnection()</methodname> returns the <acronym>PDO</acronym> object,
+                after initiating it as a live connection to the specific database.
             </para>
-
+            
             <para>
                 It can be useful to force the connection if you want to catch
                 any exceptions it throws as a result of invalid account
                 credentials, or other failure to connect to the <acronym>RDBMS</acronym> server.
                 These exceptions are not thrown until the connection is made,
                 so it can help simplify your application code if you handle the
-                exceptions in one place, instead 
-            <title>Managing Lazy Connections</title>
-
-            <para>
-                Creating an instance of an Adapter class does not
-                immediately connect to the <acronym>RDBMS</acronym> server. The Adapter
-                saves the connection parameters, and makes the actual
-                connection on demand, the first time you need to execute
-                a query. This ensures that creating an Adapter object is
-                quick and inexpensive. You can create an instance of an
-                Adapter even if you are not certain that you need to run
-                any database queries during the current request your
-                application is serving.
+                exceptions in one place, instead of at the time of
+                the first query against the database.
             </para>
-
-            <para>
-                If you need to force the Adapter to connect to the
-                <acronym>RDBMS</acronym>, use the
-                <methodname>getConnection()</methodname>
-                method. This method returns an object for the connection
-                as represented by the respective <acronym>PHP</acronym> database extension.
-                For example, if you use any of the Adapter classes for
-                 <acronym>PDO</acronym>  drivers, then
-                <methodname>getConnection()</methodname>
-                returns the  <acronym>PDO</acronym>  object, after initiating it as a live
-                connection to the specific database.
-            </para>
-
-            <para>
-                It can be useful to force the connection if you want to
-                catch any exceptions it throws as a result of invalid
-                account credentials, or other failure to connect to the
-                <acronym>RDBMS</acronym> server. These exceptions are not thrown until the
-                connection is made, so it can help simplify your
-                application code if you handle the exceptions in one
-                place, instead of at the time of the first query against
-                the database.
-            </para>
-
+            
             <para>
                 Additionally, an adapter can get serialized to store it, for example,
                 in a session variable. This can be very useful not only for the
                 adapter itself, but for other objects that aggregate it, like a
                 <classname>Zend_Db_Select</classname> object. By default, adapters are allowed
                 to be serialized, if you don't want it, you should consider passing the
-                <constant>Zend_Db::ALLOW_SERIALIZATION=false</classname> option, see the example above.
-                To respect lazy connections principle, the adapter won't reconnect itself
-                after being unserialized. You must then call <methodname>getConnection()
-                </methodname> yourself. You can make the adapter auto-reconnect by passing the
-                <classname>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE=true</classname> as an adapter
-                option.
+                <constant>Zend_Db::ALLOW_SERIALIZATION</constant> option with
+                <constant>FALSE</constant>, see the example above. To respect lazy connections
+                principle, the adapter won't reconnect itself after being unserialized. You must
+                then call <methodname>getConnection()</methodname> yourself. You can make the
+                adapter auto-reconnect by passing the
+                <constant>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE</constant> with
+                <constant>TRUE</constant> as an adapter option.
             </para>
 
             <example id="zend.db.adapter.connecting.getconnection.example">

@@ -2,13 +2,10 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.json.basics">
     <title>Uso Básico</title>
-    <para>
-        El uso de <classname>Zend_Json</classname> consiste en utilizar los dos 
-        métodos públicos estáticos disponibles: 
-        <classname>Zend_Json::encode()</classname> y
-        <classname>Zend_Json::decode()</classname>.
-    </para>
-     <programlisting language="php"><![CDATA[
+    <para> El uso de <classname>Zend_Json</classname> consiste en utilizar los dos métodos públicos
+        estáticos disponibles: <classname>Zend_Json::encode()</classname> y
+            <classname>Zend_Json::decode()</classname>. </para>
+    <programlisting language="php"><![CDATA[
 // Recuperar un valor:
 $phpNative = Zend_Json::decode($encodedValue);
 
@@ -16,6 +13,3 @@ $phpNative = Zend_Json::decode($encodedValue);
 $json = Zend_Json::encode($phpNative);
 ]]></programlisting>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

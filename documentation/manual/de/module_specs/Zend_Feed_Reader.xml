@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18514 -->
+<!-- EN-Revision: 19170 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -429,6 +429,86 @@ foreach ($links as $link) {
         </para>
   </sect2>
 
+    <sect2 id="zend.feed.reader.attribute-collections">
+        <title>Attribut Sammlungen</title>
+
+        <para>
+            In einem Versuch die Rückgabetypen zu vereinfachen, können Rückgabetypen für die
+            verschiedenen Feed und Entry Level Methoden ab Zend Framework 1.10 ein Objekt vom Typ
+            <classname>Zend_Feed_Reader_Collection_CollectionAbstract</classname> enthalten.
+            Abgesehen vom speziellen Klassennamen der anbei erklärt wird, ist es nur eine einfache
+            Subklasse von SPL's <classname>ArrayObject</classname>.
+        </para>
+
+        <para>
+            Der Hauptzweck hierbei besteht darin, die Präsentation von so vielen Daten wie möglich
+            von den angefragten Elementen zu erlauben, wärend trotzdem der Zugriff auf die meisten
+            relevanten Daten über ein einfaches Array erlaubt wird. Das erzwingt auch einen
+            Standardweg um solche Daten zurückzugeben, was vorher zwischen Arrays und Objekten
+            gewandert ist.
+        </para>
+
+        <para>
+            Der neue Klassentyp arbeitet identisch zu <classname>ArrayObject</classname>, mit der
+            gleichen kleinen Änderung dass eine neue Methode <methodname>getValues()</methodname>
+            existiert welche ein einfaches flaches Array zurückgibt dass die meisten relevanten
+            Informationen enthält.
+        </para>
+
+        <para>
+            Ein einfaches Beispiel hiervon ist
+            <methodname>Zend_Feed_Reader_FeedInterface::getCategories()</methodname>. Wenn es in
+            irgendeinem RSS oder Atom Feed verwendet wird, gibt diese Methode Daten der Kategorie
+            als Container Objekt zurück welches
+            <classname>Zend_Feed_Reader_Collection_Category</classname> genannt wird. Das Container
+            Objekt wird, für jede Kategorie, drei Felder an Daten enthalten: Typ, Schema und Label.
+            "type" ist der grundsätzliche Name der Kategorie, oft Maschinen lesbar (normalerweise
+            ein URI Identifikator) und in RSS 2.0 auch bekannt als "domain". "label" ist ein
+            menschlich lesbarer Kategorie Name welcher Html Entities unterstützt.
+        </para>
+
+        <para>
+            Um auf die Label der Kategorie selbst als einfache Array Werte zuzugreifen könnte man
+            das folgende verwenden:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$feed = Zend_Feed_Reader::import('http://www.example.com/atom.xml');
+$categories = $feed->getCategories();
+$labels = array();
+foreach ($categories as $cat) {
+    $labels[] = $cat['label']
+}
+]]></programlisting>
+
+        <para>
+            Es ist ein erfundenes Beispiel, aber der Punkt ist, dass Label zusammen mit anderen
+            Informationen gebunden sind.
+        </para>
+
+        <para>
+            Trotzdem erlaubt die Container Klasse den Zugriff auf die "relevantesten" Daten als
+            einfaches Array indem die Methode <methodname>getValues()</methodname> verwendet wird.
+            Das Konzept der "relevantesten" Daten ist offensichtlich ein beurteilter Aufruf. Für
+            Kategorien bedeutet es die Label der Kategorien (nicht die Typen oder Schemata) wärend
+            es für Autoren der Name des Autors wäre (nicht deren Email Adressen oder die URLs). Das
+            einfache Array ist flach (nur Werte) und durchläuft
+            <methodname>array_unique</methodname> um doppelte Werte zu entfernen.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$feed = Zend_Feed_Reader::import('http://www.example.com/atom.xml');
+$categories = $feed->getCategories();
+$labels = $categories->getValues();
+]]></programlisting>
+
+        <para>
+            Das obige Beispiel zeigt wie nur die Label und sonst nichts extrahiert wird. Das gibt
+            einen einfachen Zugriff auf die Label der Kategorie ohne zusätzliche Arbeit die Daten
+            selbst zu extrahieren.
+        </para>
+    </sect2>
+
   <sect2 id="zend.feed.reader.retrieve-info">
         <title>Empfangen von Feed Informationen</title>
 
@@ -591,6 +671,22 @@ foreach ($links as $link) {
                             zurück welche vom Feed für die Berwendung mit dem Pubsubhubbub
                             Protokoll bekanntgegeben werden, und erlaubt damit das Einschreiben
                             für Feeds für Real-Time Updates.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getCategories()</methodname></entry>
+
+                        <entry>
+                            Gibt ein <classname>Zend_Feed_Reader_Collection_Category</classname>
+                            Objekt zurück welches die Details aller Kategorien enthält die im
+                            kompletten Feed enthalten sind. Die unterstützten Felder enthalten
+                            "type" (den Maschinen lesbaren Namen der Kategorie), "scheme"
+                            (dem Schema der Kategorisierung für diese Kategorie), und "label" (ein
+                            Html dekodierter menschlich lesbarer Kategoriename). Wenn irgendeines
+                            der drei Felder abwesend ist, werden Sie entweder auf die näheste
+                            vorhandene Alternative gesetzt, oder im Fall von "scheme", auf NULL
+                            gesetzt.
                         </entry>
                     </row>
                 </tbody>
@@ -923,6 +1019,21 @@ foreach ($links as $link) {
                             vom angegebenen Typ ist, und alle Kommentare für diesen Eintrag enthält
                             (Der Typ ist standardmäßig Atom/<acronym>RSS</acronym> abhängig vom
                             aktuellen Feed Typ).
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getCategories()</methodname></entry>
+
+                        <entry>
+                            Gibt ein <classname>Zend_Feed_Reader_Collection_Category</classname>
+                            Objekt zurück welches die Details jeder Kategorie enthält welche mit dem
+                            Eintrag assoziiert ist. Die unterstützten Felder sind "type" (der
+                            Maschinen lesbare Name der Kategorie), "scheme" (der Name des Schemas
+                            der Kategorisierung für diese Kategorie), und "label" (ein Html
+                            dekodierter menschlich lesbarer Name der Kategorie). Wenn eines der drei
+                            Felder nicht vorhanden ist, werden Sie entweder auf den näheste
+                            vorhandene Alternative, oder im Fall von "scheme", auf NULL gesetzt.
                         </entry>
                     </row>
                 </tbody>

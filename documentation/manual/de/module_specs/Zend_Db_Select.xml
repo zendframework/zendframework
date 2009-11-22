@@ -2,11 +2,9 @@
 <!-- EN-Revision: 19109 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
-
     <title>Zend_Db_Select</title>
 
     <sect2 id="zend.db.select.introduction">
-
         <title>Einführung</title>
 
         <para>

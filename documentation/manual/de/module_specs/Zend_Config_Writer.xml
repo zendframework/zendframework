@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18867 -->
+<!-- EN-Revision: 19161 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
+
     <para>
         <classname>Zend_Config_Writer</classname> gibt einem die Möglichkeit Configdateien aus
         <classname>Zend_Config</classname> Objekten heraus zu schreiben. Es arbeitet mit einem
@@ -37,8 +38,9 @@
     <para>
         Der Ini Writer hat zwei Modi für die Darstellung bezüglich Sektionen. Standardmäßig wird die
         Top-Level Konfiguration immer in Sektionsnamen geschrieben. Durch den Aufruf von
-        <code>$writer->setRenderWithoutSections()</code> werden alle Optionen in den globalen
-        Namespace der INI Datei geschrieben und es werden keine Sektionen angehängt.
+        <command>$writer->setRenderWithoutSections()</command> werden alle Optionen in den globalen
+        Namespace der <acronym>INI</acronym> Datei geschrieben und es werden keine Sektionen
+        angehängt.
     </para>
 
     <para>
@@ -137,10 +139,10 @@ $writer->write();
     </note>
 
     <para>
-        Für alle Datei-basierenden Writer (INI, XML und PHP Array) wird intern
-        <methodname>render()</methodname> verwendet um den Konfigurationsstring zu erstellen. Diese
-        Methode kann auch von ausserhalb aus verwendet werden wenn man Zugriff auf eine
-        String-Repräsentation der Konfigurationsdaten benötigt.
+        Für alle Datei-basierenden Writer (<acronym>INI</acronym>, <acronym>XML</acronym> und
+        <acronym>PHP</acronym> Array) wird intern <methodname>render()</methodname> verwendet um den
+        Konfigurationsstring zu erstellen. Diese Methode kann auch von ausserhalb aus verwendet
+        werden wenn man Zugriff auf eine String-Repräsentation der Konfigurationsdaten benötigt.
     </para>
 </sect1>
 <!--

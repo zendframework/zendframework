@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17991 -->
+<!-- EN-Revision: 19161 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.rest">
     <title>Zend_Rest_Route</title>
@@ -29,39 +29,39 @@
             </thead>
             <tbody>
                 <row>
-                    <entry>GET</entry>
+                    <entry><acronym>GET</acronym></entry>
                     <entry><filename>/product/ratings/</filename></entry>
                     <entry><methodname>Product_RatingsController::indexAction()</methodname></entry>
                 </row>
                 <row>
-                    <entry>GET</entry>
+                    <entry><acronym>GET</acronym></entry>
                     <entry><filename>/product/ratings/:id</filename></entry>
                     <entry><methodname>Product_RatingsController::getAction()</methodname></entry>
                 </row>
                 <row>
-                    <entry>POST</entry>
+                    <entry><acronym>POST</acronym></entry>
                     <entry><filename>/product/ratings</filename></entry>
                     <entry><methodname>Product_RatingsController::postAction()</methodname></entry>
                 </row>
                 <row>
-                    <entry>PUT</entry>
+                    <entry><acronym>PUT</acronym></entry>
                     <entry><filename>/product/ratings/:id</filename></entry>
                     <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
                 </row>
                 <row>
-                    <entry>DELETE</entry>
+                    <entry><acronym>DELETE</acronym></entry>
                     <entry><filename>/product/ratings/:id</filename></entry>
                     <entry>
                         <methodname>Product_RatingsController::deleteAction()</methodname>
                     </entry>
                 </row>
                 <row>
-                    <entry>POST</entry>
+                    <entry><acronym>POST</acronym></entry>
                     <entry><command>/product/ratings/:id?_method="PUT"</command></entry>
                     <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
                 </row>
                 <row>
-                    <entry>POST</entry>
+                    <entry><acronym>POST</acronym></entry>
                     <entry><command>/product/ratings/:id?_method="DELETE"</command></entry>
                     <entry>
                         <methodname>Product_RatingsController::deleteAction()</methodname>

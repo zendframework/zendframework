@@ -684,7 +684,7 @@ class Foo_BarController extends Zend_Controller_Action
             <title>Convenciones de Nombres: Delimitadores de Palabras en Controladores y Nombres de Acción</title>
             <para>
                 Si su controlador o nombre de acción está compuesto por varias
-                palabras, el despachador exige que estos sean separados de la URL
+                palabras, el despachador exige que estos sean separados de la <acronym>URL</acronym>
                 por un path específico y caracteres delimitadores de palabras.
                 El <methodname>ViewRenderer</methodname> reemplaza cualquier delimitador
                 de paths encontrado en el nombre del controlador con el

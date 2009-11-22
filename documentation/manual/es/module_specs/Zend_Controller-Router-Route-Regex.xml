@@ -47,9 +47,9 @@ $values = array(
 
     <note>
         <para>
-            Las barras de comienzo y final están recortadas de la URL en el 
+            Las barras de comienzo y final están recortadas de la <acronym>URL</acronym> en el 
             Router antes de una concordancia. Como resultado, coincidendo con 
-            la URL <methodname>http://domain.com/foo/bar/</methodname>, involucraría al 
+            la <acronym>URL</acronym> <methodname>http://domain.com/foo/bar/</methodname>, involucraría al 
             regex de <methodname>foo/bar</methodname>, y no a <methodname>/foo/bar</methodname>.
         </para>
     </note>
@@ -195,7 +195,7 @@ $route = new Zend_Controller_Router_Route_Regex(
 
     <para>
         Lo que resultará en una mezcla de valores disponibles en la solicitud. 
-        Como ejemplo, la URL <methodname>http://domain.com/archive/2006/page/10</methodname>  
+        Como ejemplo, la <acronym>URL</acronym> <methodname>http://domain.com/archive/2006/page/10</methodname>  
         resultará con los siguientes valores:
     </para>
 
@@ -210,7 +210,7 @@ $values = array(
 
     <para>
         Dado que los patrones regex no pueden invertirse fácilmente, tendrá que 
-        preparar una URL inversa si desea usar un ayudante de URL o incluso 
+        preparar una <acronym>URL</acronym> inversa si desea usar un ayudante de <acronym>URL</acronym> o incluso 
         un método de ensamble de esta clase. Este path inverso está representado 
         por un string parseable por sprintf() y se define como el cuarto 
         parámetro del constructor:
@@ -229,7 +229,7 @@ $route = new Zend_Controller_Router_Route_Regex(
         Todo esto es algo que ya fue posible de hacer por medio de un objeto 
         de ruta estandard, por lo tanto podría preguntarese: ¿cuál es la ventaja 
         de utilizar la ruta Regex?. 
-        Principalmente, le permite describir cualquier tipo de URL sin 
+        Principalmente, le permite describir cualquier tipo de <acronym>URL</acronym> sin 
         restricción alguna. Imagínese que tiene un blog y desea crear URLs 
         como: <methodname>http://domain.com/blog/archive/01-Using_the_Regex_Router.html</methodname>, 
         y que tiene que descomponer el último elemento del path 

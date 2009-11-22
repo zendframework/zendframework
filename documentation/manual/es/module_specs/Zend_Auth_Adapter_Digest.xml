@@ -12,7 +12,7 @@
         <para> La <ulink
                 url="http://en.wikipedia.org/wiki/Digest_access_authentication"
                 >Autenticación "Digest"</ulink> es un método de la autenticación
-            HTTP que mejora la <ulink
+            <acronym>HTTP</acronym> que mejora la <ulink
                 url="http://en.wikipedia.org/wiki/Basic_authentication_scheme"
                 >Autenticación Básica</ulink> proporcionando una manera de
             autenticar sin tener que transmitir la contraseña de manera clara a

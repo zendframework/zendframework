@@ -10,7 +10,7 @@
             <classname>Zend_Controller_Front</classname> y el router, dispatcher, y
             clases de controlador. Empaqueta los nombres del módulo solicitado,
             controlador, acción, y los parámetros opcionales, así como el resto del
-            entorno de la solicitud, ya sea HTTP, el CLI, o PHP-GTK.
+            entorno de la solicitud, ya sea <acronym>HTTP</acronym>, el CLI, o PHP-GTK.
         </para>
 
         <itemizedlist>
@@ -255,7 +255,7 @@ $response   = $controller->dispatch();
             <title>Determining the Request Method</title>
 
             <para>
-                <methodname>getMethod()</methodname> allows you to determine the HTTP
+                <methodname>getMethod()</methodname> allows you to determine the <acronym>HTTP</acronym>
                 request method used to request the current resource.
                 Additionally, a variety of methods exist that allow you to get
                 boolean responses when asking if a specific type of request has
@@ -272,7 +272,7 @@ $response   = $controller->dispatch();
             </itemizedlist>
 
             <para>
-                The primary use case for these is for creating RESTful MVC
+                The primary use case for these is for creating RESTful MVC 
                 architectures.
             </para>
         </sect3>
@@ -284,7 +284,7 @@ $response   = $controller->dispatch();
                 <classname>Zend_Controller_Request_Http</classname> has a rudimentary
                 method for detecting AJAX requests:
                 <methodname>isXmlHttpRequest()</methodname>. This method looks for an
-                HTTP request header <methodname>X-Requested-With</methodname> with the value
+                <acronym>HTTP</acronym> request header <methodname>X-Requested-With</methodname> with the value
                 'XMLHttpRequest'; if found, it returns true.
             </para>
 
@@ -416,7 +416,7 @@ abstract class Zend_Controller_Request_Abstract
                       Para ampliar esta clase, o uno de sus derivados, cuando se necesita la
                         clase solicitud que interactue con un entorno específico con el fin de
                         recuperar los datos para su uso en las tareas antes descritas. Los ejemplos incluyen <link
-                                linkend = "zend.controller.request.http"> el entorno HTTP
+                                linkend = "zend.controller.request.http"> el entorno <acronym>HTTP</acronym>
                                 </link>, un entorno CLI, o un entorno de PHP-GTK.
         </para>
     </sect2>

@@ -451,7 +451,7 @@ $server->handle();
                 En su aspecto más básico, un SMD indica el método de transporte 
                 (POST, GET, TCP/IP, etc), el tipo de envoltura de la solicitud  
                 (generalmente se basa en el protocolo del servidor), 
-                el objetivo URL del proveedor del servicio, y un mapa de los 
+                el objetivo <acronym>URL</acronym> del proveedor del servicio, y un mapa de los 
                 servicios disponibles. En el caso de JSON-RPC, el servicio de mapa 
                 es una lista de los métodos disponibles, en el que cada método 
                 documenta los parámetros disponibles y sus tipos, así como los 
@@ -515,14 +515,14 @@ $server->handle();
                         tipo del contenido actual para las solicitudes al 
                         servicio.</para></listitem>
                 <listitem><para><methodname>setTarget($target)</methodname>: Establecer el 
-                        punto final de la URL para el servicio.</para></listitem>
+                        punto final de la <acronym>URL</acronym> para el servicio.</para></listitem>
                 <listitem><para><methodname>getTarget()</methodname>: Obtener el punto final 
-                        de la URL para el servicio.</para></listitem>
+                        de la <acronym>URL</acronym> para el servicio.</para></listitem>
                 <listitem><para><methodname>setId($id)</methodname>: Normalmente, este es el 
-                        punto final de la URL del servicio (igual que el 
+                        punto final de la <acronym>URL</acronym> del servicio (igual que el 
                         objetivo).</para></listitem>
                 <listitem><para><methodname>getId()</methodname>: Recuperar el ID del servicio 
-                        (normalmente el punto final de la URL del servicio).
+                        (normalmente el punto final de la <acronym>URL</acronym> del servicio).
                         </para></listitem>
                 <listitem><para><methodname>setDescription($description)</methodname>: 
                         Establecer una descripción del servicio (típicamente 
@@ -586,11 +586,11 @@ $server->handle();
                 <listitem><para><methodname>getTransport()</methodname>: Recuperar el transporte 
                         actual.</para></listitem>
                 <listitem><para><methodname>setTarget($target)</methodname>: Establecer el 
-                        punto final de la URL del servicio (típicamente, este 
+                        punto final de la <acronym>URL</acronym> del servicio (típicamente, este 
                         será el mismo que el SMD en general, al cual el servicio 
                         está agregado).</para></listitem>
                 <listitem><para><methodname>getTarget()</methodname>: Obtener el punto final 
-                        de la URL del servicio.</para></listitem>
+                        de la <acronym>URL</acronym> del servicio.</para></listitem>
                 <listitem><para><methodname>setEnvelope($envelopeType)</methodname>: 
                         Establecer la envoltura del servicio (actualmente, sólo 
                         se permiten las envolturas soportadas por 

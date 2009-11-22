@@ -44,7 +44,7 @@
             para <classname>Zend_Validate_Interface</classname> que define dos métodos,
             <methodname>isValid()</methodname> y <methodname>getMessages()</methodname>.
             El método <methodname>isValid()</methodname> realiza la validación del valor,
-            devolviendo <methodname>true</methodname> si y sólo si el valor pasa contra el criterio de
+            devolviendo <constant>TRUE</constant> si y sólo si el valor pasa contra el criterio de
             validación.
         </para>
 

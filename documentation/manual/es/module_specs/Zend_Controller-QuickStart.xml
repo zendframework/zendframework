@@ -20,9 +20,9 @@
             <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">
                 Front Controller (Controlador Frontal)
             </ulink>
-            en el cual todas las transacciones HTTP (requests) son
+            en el cual todas las transacciones <acronym>HTTP</acronym> (requests) son
             interceptadas por el controlador frontal y enviado a una
-            Acción particular de un Controlador según la URL pedida.
+            Acción particular de un Controlador según la <acronym>URL</acronym> pedida.
 
 
         </para>
@@ -148,9 +148,9 @@ Zend_Controller_Front::run('/path/to/app/controllers');
             <para>
                 Antes de tratar los action controllers, debe primero
                 entender cómo las peticiones son redirigidas en Zend Framework.
-                Por defecto, el primero segmento de una ruta URL apunta
+                Por defecto, el primero segmento de una ruta <acronym>URL</acronym> apunta
                 a un controlador, y el segundo a una acción. Por ejemplo,
-                dada la URL
+                dada la <acronym>URL</acronym>
                 <methodname>
                     http://framework.zend.com/roadmap/components
                 </methodname>

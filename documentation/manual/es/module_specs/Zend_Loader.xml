@@ -32,7 +32,7 @@
             <acronym>PHP</acronym>. El archivo cargado puede contener cualquier código <acronym>PHP</acronym>.
             El método se comporta como un envoltorio para la función <acronym>PHP</acronym>
             <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>.
-            Este método devuelve un booleano false en caso de fallo, por ejemplo,
+            Este método devuelve un booleano <constant>FALSE</constant> en caso de fallo, por ejemplo,
             si el archivo especificado no existe.
         </para>
 

@@ -181,13 +181,13 @@ $pdf->save($pdfPath);
     </para>
 
     <para>
-        Desde PDF v 1.6 los metadatos se pueden almacenar en el documento XML 
+        Desde PDF v 1.6 los metadatos se pueden almacenar en el documento <acronym>XML</acronym> 
         especial adjunto al PDF 
         (XMP - <ulink url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>).
     </para>
 
     <para>
-        Este documento XML se pueden recuperar y adjuntar al PDF con los métodos  
+        Este documento <acronym>XML</acronym> se pueden recuperar y adjuntar al PDF con los métodos  
         <classname>Zend_Pdf::getMetadata()</classname> y
         <classname>Zend_Pdf::setMetadata($metadata)</classname>:
              <programlisting language="php"><![CDATA[

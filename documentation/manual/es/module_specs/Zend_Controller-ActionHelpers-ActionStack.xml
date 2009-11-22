@@ -5,7 +5,7 @@
     <title>ActionStack</title>
 
     <para>
-        El ayudante <methodname>ActionStack</methodname> le permite empujar requerimientos al
+        El ayudante <emphasis>ActionStack</emphasis> le permite empujar requerimientos al
         <link linkend="zend.controller.plugins.standard.actionstack">ActionStack</link>
         plugin del front controller, el cual le ayuda efectivamente a crear
         una cola de acciones a ejecutar durante la solicitud.
@@ -17,9 +17,9 @@
         <title>Invocando al Ayudante ActionStack Inicializa el Plugin de ActionStack</title>
 
         <para>
-            Invocando al ayuudante <methodname>ActionStack</methodname> implicitamente
-            registra el plugin de <methodname>ActionStack</methodname> -- lo que significa
-            que no necesita registrar explícitamente el plugin de ActionStack
+            Invocando al ayuudante <emphasis>ActionStack</emphasis> implicitamente
+            registra el plugin de <emphasis>ActionStack</emphasis> -- lo que significa
+            que no necesita registrar explícitamente el plugin de <emphasis>ActionStack</emphasis>
             para utilizar esta funcionalidad.
         </para>
     </note>
@@ -31,7 +31,7 @@
             A menudo, es más sencillo simplemente especificar la acción, el
             controlador y el módulo (y parámetros opcionales de requerimientos),
             tal como cuando llama a
-            <classname>Zend_Controller_Action::_forward()</classname>:
+            <methodname>Zend_Controller_Action::_forward()</methodname>:
         </para>
 
          <programlisting language="php"><![CDATA[
@@ -60,8 +60,8 @@ class FooController extends Zend_Controller_Action
         <title>Agregando una Tarea al Objeto Solicitud (Request)</title>
 
         <para>
-            A veces la naturaleza OOP de un objeto solicitud tiene más sentido;
-            puede pasar también tal objeto al ayudante <methodname>ActionStack</methodname>.
+            A veces la naturaleza <acronym>OOP</acronym> de un objeto solicitud tiene más sentido;
+            puede pasar también tal objeto al ayudante <emphasis>ActionStack</emphasis>.
         </para>
 
          <programlisting language="php"><![CDATA[

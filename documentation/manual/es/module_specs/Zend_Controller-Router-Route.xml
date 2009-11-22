@@ -8,7 +8,7 @@
         <classname>Zend_Controller_Router_Route</classname> es la ruta 
         standard del framework. Combina la facilidad de uso con la flexibilidad  
         para la definición de rutas. Cada ruta consiste fundamentalmente en el 
-        mapeo de la URL (de partes estáticas y dinámicas (variables)) y puede ser 
+        mapeo de la <acronym>URL</acronym> (de partes estáticas y dinámicas (variables)) y puede ser 
         iniciada con valores predeterminados así como con requisitos variables.
     </para>
 
@@ -36,7 +36,7 @@ $router->addRoute('user', $route);
     <para>
         El primer parámetro en el constructor 
         <classname>Zend_Controller_Router_Route</classname>
-        es una definición de ruta que será acompañada de una URL. 
+        es una definición de ruta que será acompañada de una <acronym>URL</acronym>. 
         Las definiciones de ruta consisten en partes estáticas y dinámicas 
         separadas por el caracter barra ('/'). Las partes estáticas son simples 
         textos: <methodname>author</methodname>. Las partes dinámicas, llamadas variables, 
@@ -129,7 +129,7 @@ $router->addRoute('archive', $route);
 ]]></programlisting>
 
         <para>
-            La ruta de arriba comparará URLs como
+            La ruta de arriba comparará <acronym>URL</acronym>s como
             <methodname>http://domain.com/archive/2005</methodname> y
             <methodname>http://example.com/archive</methodname>. En este último caso la 
             variable year(año) tendrá un valor inicial predeterminado de 2006.
@@ -192,7 +192,7 @@ $router->addRoute('archive', $route);
         <para>
             Con una ruta definida como la de arriba, el router comparará solo 
             cuando la variable año contenga datos numéricos, eg. 
-            <methodname>http://domain.com/archive/2345</methodname>. Una URL como 
+            <methodname>http://domain.com/archive/2345</methodname>. Una <acronym>URL</acronym> como 
             <methodname>http://example.com/archive/test</methodname> no se comparará y en su 
             lugar el control se pasará a la próxima ruta en la cadena.
         </para>
@@ -278,7 +278,7 @@ $router->addRoute('archive', $route);
             <para>
                 Ocasionalmente un ID de mensaje que quiere usar en una de sus 
                 rutas ya se utiliza en un view script o en otro lugar. 
-                Para tener pleno control sobre URLs seguras, debe usar 
+                Para tener pleno control sobre <acronym>URL</acronym>s seguras, debe usar 
                 un archivo de idioma separado para los mensajes utilizados en 
                 la ruta.
             </para>

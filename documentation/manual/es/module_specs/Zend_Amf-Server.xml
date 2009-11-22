@@ -190,7 +190,7 @@ class Mundo
 ]]></programlisting>
 
         <para> Hay dos puntos clave en el ejemplo. En primer lugar, pero último en el listado,
-            creamos un canal <acronym>AMF</acronym>, y especificamos el punto final como la URL a
+            creamos un canal <acronym>AMF</acronym>, y especificamos el punto final como la <acronym>URL</acronym> a
             nuestro <classname>Zend_Amf_Server</classname>: </para>
 
         <programlisting language="xml"><![CDATA[
@@ -529,7 +529,7 @@ import flash.net.NetConnection;
 import flash.net.Responder;
 ]]></programlisting>
         <para> En la clase necesitaremos tres variables para representar a NetConnection, Responder,
-            y la URL del gateway a nuestra instalación <classname>Zend_Amf_Server</classname>. </para>
+            y la <acronym>URL</acronym> del gateway a nuestra instalación <classname>Zend_Amf_Server</classname>. </para>
         <programlisting language="as"><![CDATA[
 private var gateway:String = "http://example.com/server.php";
 private var connection:NetConnection;

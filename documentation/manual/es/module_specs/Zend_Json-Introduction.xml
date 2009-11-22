@@ -12,19 +12,19 @@
         JSON, JavaScript Object Notation, puede ser utilizado para intercambio 
         de datos entre JavaScript y otros lenguajes. 
         Dado que JSON puede ser evaluado directamente por JavaScript, es más 
-        eficiente y ligero que el formato XML para intercambiar datos con 
+        eficiente y ligero que el formato <acronym>XML</acronym> para intercambiar datos con 
         clientes JavaScript.
     </para>
 
     <para>
         Adicionalmente, <classname>Zend_Json</classname> provee una forma útil 
-        para convertir cualquier string arbitrario con formato XML en un string 
+        para convertir cualquier string arbitrario con formato <acronym>XML</acronym> en un string 
         con formato JSON. Este rasgo integral permite a desarrolladores <acronym>PHP</acronym>
-        transformar los datos codificados de la empresa en formato XML a 
+        transformar los datos codificados de la empresa en formato <acronym>XML</acronym> a 
         formato JSON antes de enviarlos a las aplicaciones del cliente Ajax 
         basadas en navegadores web. Provee una manera fácil de hacer 
         conversiones dinámicas de datos del código en el servidor evitando así 
-        el innecesario parsing de XML de las aplicaciones en el navegador.  
+        el innecesario parsing de <acronym>XML</acronym> de las aplicaciones en el navegador.  
         Ofrece una agradable función útil que facilita las técnicas de 
         procesamiento de datos para aplicaciones específicas.
     </para>

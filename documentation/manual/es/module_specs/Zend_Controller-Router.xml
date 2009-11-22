@@ -8,7 +8,7 @@
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> Es el router 
             standard del Framework. Routing es el proceso de tomar la parte 
-            final de una URI (la parte de la URI que viene después de la URL 
+            final de una URI (la parte de la URI que viene después de la <acronym>URL</acronym> 
             base) y la descomposición en parámetros para determinar qué módulo, 
             qué controlador y acción de ese controlador debe recibir la solicitud. 
             Estos valores del módulo, controlador, acción y otros parámetros 
@@ -24,7 +24,7 @@
             para permitir que una funcionalidad tipo mod_rewrite se pueda usar 
             en estructuras <acronym>PHP</acronym> puras. Se basa muy vagamente en el routing de 
             Ruby on Rails (RoR) y no requiere ningún conocimiento previo de 
-            reescritura de la URL del webserver. Está diseñado para trabajar 
+            reescritura de la <acronym>URL</acronym> del webserver. Está diseñado para trabajar 
             con solo una regla mod_rewrite de Apache (one of):
         </para>
 
@@ -179,14 +179,14 @@ $router->addRoute('user',
         <para>
             El primer parámetro a addRoute es el nombre de la ruta. 
             Se utiliza como un manejador para sacar las rutas del router 
-            (por ejemplo, con fines de generación de URL). 
+            (por ejemplo, con fines de generación de <acronym>URL</acronym>). 
             El segundo parámetro es la ruta misma.
         </para>
 
         <note>
             <para>
                 El uso más común del nombre de ruta es por medio del 
-                ayudante de url <classname>Zend_View</classname>:
+                ayudante de <acronym>URL</acronym> <classname>Zend_View</classname>:
             </para>
 
              <programlisting language="php"><![CDATA[
@@ -229,7 +229,7 @@ $router->addRoute('user',
         <note>
             <title>Valores Retornados</title>
             <para>
-                Los valores retornados del routing provienen de parámetros URL 
+                Los valores retornados del routing provienen de parámetros <acronym>URL</acronym> 
                 o de rutas definidas por defecto por el usuario. 
                 Estas variables son accesibles posteriormente a través de los métodos 
                 <classname>Zend_Controller_Request::getParam()</classname> o
@@ -347,14 +347,14 @@ $router->removeDefaultRoutes();
         <para>
             El router rewrite puede ser utilizado en subdirectorios (por 
             ejemplo <methodname>http://domain.com/~user/application-root/</methodname>) 
-            en cuyo caso la URL base de la aplicación 
+            en cuyo caso la <acronym>URL</acronym> base de la aplicación 
             (<methodname>/~user/application-root</methodname>) debe ser detectada 
             automáticamente por <classname>Zend_Controller_Request_Http</classname> 
             y usada en consecuencia.
         </para>
 
         <para>
-            Si la URL base se detecta incorrectamente se la puede anular con su 
+            Si la <acronym>URL</acronym> base se detecta incorrectamente se la puede anular con su 
             propio path de base usando
             <classname>Zend_Controller_Request_Http</classname> y llamando al 
             método <methodname>setBaseUrl()</methodname> (ver <xref

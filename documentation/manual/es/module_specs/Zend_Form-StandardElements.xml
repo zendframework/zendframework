@@ -521,7 +521,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
              utilizando  el método de acceso <methodname>setImageValue()</methodname>
             (o clave de configuración 'imageValue'). Cuando el valor establecido
             para el elemento sea igual a <methodname>imageValue</methodname>, entonces
-            el método de acceso <methodname>isChecked()</methodname> devolverá true.
+            el método de acceso <methodname>isChecked()</methodname> devolverá <constant>TRUE</constant>.
         </para>
 
         <para>

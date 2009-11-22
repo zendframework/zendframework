@@ -64,7 +64,7 @@
                     Por defecto, se usa
                     <classname>Zend_Controller_Request_Http</classname>, el cual
                     proporciona acceso a todo el ámbito de la petición
-                    HTTP.
+                    <acronym>HTTP</acronym>.
                 </para>
             </listitem>
 
@@ -157,7 +157,7 @@
                     <para>
                         Si desea que su clase controlador o el nombre del
                         método de la acción tenga múltiples MixedCasedWords o
-                        camelCasedWords, para separar las palabras en la url
+                        camelCasedWords, para separar las palabras en la <acronym>URL</acronym>
                         necesitará hacerlo con un '-' o '.' (aunque puede
                         configurar el carácter utilizado).
                     </para>
@@ -165,7 +165,7 @@
                     <para>
                         Como ejemplo, si se va a la acción en
                         <methodname>FooBarController::bazBatAction()</methodname>,
-                        se referirá a ella en la URL como
+                        se referirá a ella en la <acronym>URL</acronym> como
                         <methodname>/foo-bar/baz-bat</methodname>
                         o <methodname>/foo.bar/baz.bat</methodname>.
                     </para>

@@ -44,7 +44,7 @@ if ($validatorChain->isValid($username)) {
         alguno de los procesos de validación.
         <classname>Zend_Validate</classname> acepta tales casos pasando como segundo
         parámetro el método <methodname>addValidator()</methodname>.
-        Poniendo <methodname>$breakChainOnFailure</methodname> a <methodname>true</methodname>,
+        Poniendo <methodname>$breakChainOnFailure</methodname> a <constant>TRUE</constant>,
         el validador agregado quebrará la cadena de ejecución por el fracaso,
         que evita correr cualquier otra validación que se decida que es
         innecesaria o inapropiada para la situación.

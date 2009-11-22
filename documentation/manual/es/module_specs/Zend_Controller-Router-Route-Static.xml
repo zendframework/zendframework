@@ -21,7 +21,7 @@ $router->addRoute('login', $route);
 ]]></programlisting>
 
     <para>
-        La ruta anterior se comparará con una URL de <methodname>http://domain.com/login</methodname>,
+        La ruta anterior se comparará con una <acronym>URL</acronym> de <methodname>http://domain.com/login</methodname>,
         y hará un dispatch a <methodname>AuthController::loginAction()</methodname>.
     </para>
 
@@ -29,7 +29,7 @@ $router->addRoute('login', $route);
         <title>Advertencia: Las Rutas Estáticas Deben Contener Defaults Sanos</title>
 
         <para>
-            Dado que una ruta estática no pasa ninguna parte de la URL del  
+            Dado que una ruta estática no pasa ninguna parte de la <acronym>URL</acronym> del  
             objeto solicitud, como ser los parámetros, usted 
             <emphasis>debe</emphasis> pasar todos los parámetros necesarios para 
             enviar una solicitud a la ruta como si fuera por defecto. 

@@ -44,7 +44,7 @@
             <listitem>
                 <para>
                     <methodname>setGotoSimple()</methodname> puede ser utilizada para
-                    establecer la URL que usar por defecto si no se ha pasado
+                    establecer la <acronym>URL</acronym> que usar por defecto si no se ha pasado
                     ninguna a <methodname>gotoSimple()</methodname>.
                     Utiliza la <acronym>API</acronym> de
                     <classname>Zend_Controller_Action::_forward()</classname>:
@@ -56,9 +56,9 @@
             <listitem>
                 <para>
                     <methodname>setGotoRoute()</methodname> puede ser utilizada para
-                    establecer una URL basada en una ruta.
+                    establecer una <acronym>URL</acronym> basada en una ruta.
                     Pasarla en un array de pares clave/valor y un nombre de ruta,
-                    y que ensamblarán la URL según la definición y el tipo de
+                    y que ensamblarán la <acronym>URL</acronym> según la definición y el tipo de
                     ruta.
                 </para>
             </listitem>
@@ -66,15 +66,15 @@
             <listitem>
                 <para>
                     <methodname>setGotoUrl()</methodname> puede ser utilizada para
-                    establecer una URL por defecto si no se pasa ninguna a
-                    <methodname>gotoUrl()</methodname>. Acepta un solo string URL.
+                    establecer una <acronym>URL</acronym> por defecto si no se pasa ninguna a
+                    <methodname>gotoUrl()</methodname>. Acepta un solo string <acronym>URL</acronym>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setPrependBase()</methodname> puede ser utilizada para
-                    anteponer la URL base del objeto solicitud a una URL
+                    anteponer la <acronym>URL</acronym> base del objeto solicitud a una <acronym>URL</acronym>
                     especificada con
                     <methodname>setGotoUrl()</methodname>, <methodname>gotoUrl()</methodname>, o
                     <methodname>gotoUrlAndExit()</methodname>.
@@ -90,7 +90,7 @@
                     <methodname>$_SERVER['HTTP_HOST']</methodname>,
                     <methodname>$_SERVER['SERVER_PORT']</methodname>, y
                     <methodname>$_SERVER['HTTPS']</methodname>
-                    para formar una URI completa a la URL especificada por uno
+                    para formar una URI completa a la <acronym>URL</acronym> especificada por uno
                     de los métodos de redirección. Esta opción está desactivada
                     por defecto, pero podrá ser activada por defecto en
                     versiones posteriores.
@@ -107,7 +107,7 @@
             <listitem>
                 <para>
                     <methodname>gotoSimple()</methodname> usa <methodname>setGotoSimple()</methodname>
-                    (<methodname>_forward()-tipo API</methodname>) para construir una URL
+                    (<methodname>_forward()-tipo API</methodname>) para construir una <acronym>URL</acronym>
                     y realizar un redireccionamiento.
                 </para>
             </listitem>
@@ -115,7 +115,7 @@
             <listitem>
                 <para>
                     <methodname>gotoRoute()</methodname> usa <methodname>setGotoRoute()</methodname>
-                    (<methodname>route-assembly</methodname>) para construir una URL
+                    (<methodname>route-assembly</methodname>) para construir una <acronym>URL</acronym>
                     y realizar un redireccionamiento.
                 </para>
             </listitem>
@@ -123,14 +123,14 @@
             <listitem>
                 <para>
                     <methodname>gotoUrl()</methodname> usa <methodname>setGotoUrl()</methodname>
-                    (<methodname>URL string</methodname>) para construir una URL
+                    (<methodname>URL string</methodname>) para construir una <acronym>URL</acronym>
                     y realizar un redireccionamiento.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Por último, usted puede determinar la redirección actual de la URL
+            Por último, usted puede determinar la redirección actual de la <acronym>URL</acronym>
             en cualquier momento usando <methodname>getRedirectUrl()</methodname>.
         </para>
     </sect4>
@@ -143,8 +143,8 @@
 
             <para>
                 Este ejemplo anula varias opciones, incluido el establecimiento del
-                código de estado HTTP para usar en la redirección ('303'),
-                no saliendo por defecto en la redirección, y definir una URL a
+                código de estado <acronym>HTTP</acronym> para usar en la redirección ('303'),
+                no saliendo por defecto en la redirección, y definir una <acronym>URL</acronym> a
                 usar por defecto cuando se redireccione.
             </para>
 
@@ -228,7 +228,7 @@ class AlternativeController extends Zend_Controller_Action
             <para>
                 La <acronym>API</acronym> <methodname>gotoSimple()</methodname> imita a la de
                 <classname>Zend_Controller_Action::_forward()</classname>.
-                La diferencia principal es que construye una URL desde los
+                La diferencia principal es que construye una <acronym>URL</acronym> desde los
                 parámetros pasados, y utiliza el formato por defecto
                 <methodname>:module/:controller/:action/*</methodname> del enrutador
                 predeterminado. A continuación se redirecciona en lugar de
@@ -290,7 +290,7 @@ $router->addRoute('blogArchive', $route);
 
             <para>
                 Dado un array con el año fijado a 2006, mes a 4, día a 24,
-                e id a 42, entonces construye la siguiente URL
+                e id a 42, entonces construye la siguiente <acronym>URL</acronym>
                 <methodname>/blog/2006/4/24/42</methodname>.
             </para>
 

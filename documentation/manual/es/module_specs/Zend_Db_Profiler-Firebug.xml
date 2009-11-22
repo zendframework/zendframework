@@ -15,7 +15,7 @@ perfilado a la <ulink
         Todos los datos son enviados a través del componente
         <classname>Zend_Wildfire_Channel_HttpHeaders</classname> que usa cabeceras HTTP
         para asegurar que el contenido de la página no sea alterado.
-        Depurar peticiones AJAX que requieren respuestas JSON y XML
+        Depurar peticiones AJAX que requieren respuestas JSON y <acronym>XML</acronym>
         es perfectamente posible con este enfoque.
     </para>
 

@@ -145,7 +145,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
 $validator =
     new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS, false);
 ]]></programlisting>
-        Alternativamente puede pasar TRUE o FALSE a <methodname>$validator->setValidateIdn()</methodname>
+        Alternativamente puede pasar <constant>TRUE</constant> o <constant>FALSE</constant> a <methodname>$validator->setValidateIdn()</methodname>
         para activar o desactivar la validación IDN.
         Si está tratando de cotejar un nombre de host IDN que actualmente no
         está soportado, es probable que falle la validación si tiene caracteres
@@ -179,7 +179,7 @@ $validator =
                                false);
 ]]></programlisting>
 
-        Alternativamente puede pasar TRUE o FALSE a <methodname>$validator->setValidateTld()</methodname>
+        Alternativamente puede pasar <constant>TRUE</constant> o <constant>FALSE</constant> a <methodname>$validator->setValidateTld()</methodname>
         para activar o desactivar la validación TLD.
     </para>
 

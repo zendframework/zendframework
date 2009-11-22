@@ -337,7 +337,7 @@ $db = Zend_Db::factory($config->database);
                         <emphasis>host</emphasis>
                         : una string conteniendo un nombre de host o dirección IP
                         del servidor de base de datos. Si la base de datos está corriendo
-            sobre el mismo host que la aplicación PHP,
+            sobre el mismo host que la aplicación <acronym>PHP</acronym>,
                         usted puede utilizar 'localhost' o '127.0.0.1'.
                     </para>
                 </listitem>
@@ -812,7 +812,7 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         <emphasis>Zend_Db::FETCH_OBJ</emphasis>:
                         return data in an array of objects. The default class
-                        is the PHP built-in class stdClass. Columns of the
+                        is the <acronym>PHP</acronym> built-in class stdClass. Columns of the
                         result set are available as public properties of the
                         object.
                     </para>
@@ -1852,7 +1852,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
 
         <para>
             Similarly, you can access other methods or properties that are
-            specific to PHP database extensions. Be aware, though, that by
+            specific to<acronym>PHP</acronym> database extensions. Be aware, though, that by
             doing this you might constrain your application to the interface
             provided by the extension for a specific brand of RDBMS.
         </para>
@@ -1860,7 +1860,7 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         <para>
             In future versions of <classname>Zend_Db</classname>, there will be opportunities to
             add method entry points for functionality that is common to
-            the supported PHP database extensions. This will not affect
+            the supported <acronym>PHP</acronym> database extensions. This will not affect
             backward compatibility.
         </para>
 
@@ -2013,7 +2013,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_ibm.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_ibm.
                     </para>
                 </listitem>
                 <listitem>
@@ -2037,7 +2037,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_mssql.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_mssql.
                     </para>
                 </listitem>
                 <listitem>
@@ -2098,7 +2098,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_mysql.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_mysql.
                     </para>
                 </listitem>
                 <listitem>
@@ -2124,7 +2124,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_oci.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_oci.
                     </para>
                 </listitem>
                 <listitem>
@@ -2149,7 +2149,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_pgsql.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_pgsql.
                     </para>
                 </listitem>
                 <listitem>
@@ -2178,7 +2178,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extensions pdo and pdo_sqlite.
+                        This Adapter uses the <acronym>PHP</acronym> extensions pdo and pdo_sqlite.
                     </para>
                 </listitem>
                 <listitem>
@@ -2208,13 +2208,13 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        Older versions of the SQLite driver for PHP do not seem
+                        Older versions of the SQLite driver for <acronym>PHP</acronym> do not seem
                         to support the PRAGMA commands necessary to ensure that
                         short column names are used in result sets. If you
                         have problems that your result sets are returned with
                         keys of the form "tablename.columnname" when you do a
                         join query, then you should upgrade to the current
-                        version of PHP.
+                        version of <acronym>PHP</acronym>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2225,7 +2225,7 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        This Adapter uses the PHP extension php_interbase.
+                        This Adapter uses the <acronym>PHP</acronym> extension php_interbase.
                     </para>
                 </listitem>
                 <listitem>
@@ -2248,7 +2248,7 @@ if (!is_null($version)) {
                 <listitem>
                     <para>Adapter name is ZendX_Db_Adapter_Firebird.</para>
                     <para>Remember to use the param adapterNamespace with value ZendX_Db_Adapter.</para>
-                    <para>We recommend to update the gds32.dll (or linux equivalent) bundled with php, to the same version of the server. For Firebird the equivalent gds32.dll is fbclient.dll.</para>
+                    <para>We recommend to update the gds32.dll (or linux equivalent) bundled with <acronym>PHP</acronym>, to the same version of the server. For Firebird the equivalent gds32.dll is fbclient.dll.</para>
                     <para>By default all identifiers (tables names, fields) are returned in upper case.</para>
                 </listitem>
             </itemizedlist>

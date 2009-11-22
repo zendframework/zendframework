@@ -73,8 +73,8 @@ class NewsController extends Zend_Controller_Action
 
     <para>
         Digamos que queremos que <methodname>listAction()</methodname> también esté
-        disponible en un formato XML. En lugar de crear una acción diferente,
-        podemos indicarle que puede devolver una respuesta XML:
+        disponible en un formato <acronym>XML</acronym>. En lugar de crear una acción diferente,
+        podemos indicarle que puede devolver una respuesta <acronym>XML</acronym>:
     </para>
 
      <programlisting language="php"><![CDATA[
@@ -108,7 +108,7 @@ class NewsController extends Zend_Controller_Action
 
     <para>
         Ahora, necesitará crear un nuevo script de vista, 'news/list.xml.phtml',
-        que creará y mostrará a XML.
+        que creará y mostrará a <acronym>XML</acronym>.
     </para>
 
     <para>
@@ -121,7 +121,7 @@ class NewsController extends Zend_Controller_Action
 
     <itemizedlist>
         <listitem><para>
-                Via parámetro URL: <methodname>/news/list/format/xml</methodname>
+                Via parámetro <acronym>URL</acronym>: <methodname>/news/list/format/xml</methodname>
                 (recordar que el valor por defecto del esquema de ruteo permite
                 pares arbitrarios de clave/valor tras la acción).
         </para></listitem>
@@ -143,13 +143,13 @@ class NewsController extends Zend_Controller_Action
 
         <para>
             Por defecto, dos contextos están a disposición del ayudante
-            <methodname>ContextSwitch</methodname> : JSON y XML.
+            <methodname>ContextSwitch</methodname> : <acronym>JSON</acronym> y <acronym>XML</acronym>.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>JSON</emphasis>. El contexto JSON establece la
+                    <emphasis>JSON</emphasis>. El contexto <acronym>JSON</acronym> establece la
                     cabecera de respuesta 'Content-Type' a 'application/json',
                     y el sufijo del script de vista a 'json.phtml'.
                 </para>
@@ -157,7 +157,7 @@ class NewsController extends Zend_Controller_Action
                 <para>
                     Sin embargo, por defecto, no es necesario un script de vista.
                     Simplemente serializará todas las variables de la vista,
-                    y emitirá la respuesta JSON inmediatamente.
+                    y emitirá la respuesta <acronym>JSON</acronym> inmediatamente.
                 </para>
 
                 <para>
@@ -172,7 +172,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem>
                 <para>
-                    <emphasis>XML</emphasis>. El contexto XML establece la
+                    <emphasis>XML</emphasis>. El contexto <acronym>XML</acronym> establece la
                     cabecera de respuesta 'Content-Type' a 'text/xml',
                     y el sufijo del script de vista a 'xml.phtml'.
                     Necesitará crear un script de vista nuevo para el contexto.
@@ -219,16 +219,16 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
                 <para>La inicialización de callbacks ocurre cuando el contexto
                 es detectado por <methodname>ContextSwitch</methodname>.
                 Usted puede usarlo para ejecutar una lógica arbitraria.
-                Por ejemplo, el contexto JSON utiliza un callback
+                Por ejemplo, el contexto <acronym>JSON</acronym> utiliza un callback
                 para desactivar a ViewRenderer cuando está activada la
                 serialización auto-JSON.</para>
 
                 <para>El post procesamiento ocurre durante la rutina de la
                 acción <methodname>postDispatch()</methodname>, y puede ser utilizada
                 para ejecutar una lógica arbitraria. Como ejemplo, el contexto
-                JSON utiliza un callback para determinar si la serialización
+                <acronym>JSON</acronym> utiliza un callback para determinar si la serialización
                 auto-JSON está activada; si así fuera, serializa las variables
-                de la vista a JSON y envía la respuesta, pero si no,
+                de la vista a <acronym>JSON</acronym> y envía la respuesta, pero si no,
                 re-habilita a ViewRenderer.</para>
             </listitem>
         </itemizedlist>
@@ -263,7 +263,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
              </para></listitem>
 
             <listitem><para>
-                <methodname>hasContext($context)</methodname>: devuelve true si el contexto
+                <methodname>hasContext($context)</methodname>: devuelve <constant>TRUE</constant> si el contexto
                 existe, false de lo contrario.
             </para></listitem>
 
@@ -279,7 +279,7 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
             <listitem><para>
                 <methodname>removeContext($context)</methodname>: elimina un único contexto
-                por su nombre. Devuelve true si tiene éxito, false si el
+                por su nombre. Devuelve <constant>TRUE</constant> si tiene éxito, false si el
                 contexto no fue encontrado.
             </para></listitem>
 
@@ -328,8 +328,8 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
 
         <para>
-            Supongamos que queremos añadir un contexto XML a la acción 'list',
-            y contextos XML y JSON a la acción 'comments'.
+            Supongamos que queremos añadir un contexto <acronym>XML</acronym> a la acción 'list',
+            y contextos <acronym>XML</acronym> y <acronym>JSON</acronym> a la acción 'comments'.
             Podríamos hacerlo en el método <methodname>init()</methodname>:
         </para>
 
@@ -489,8 +489,8 @@ $contextSwitch->initContext('xml');
             <listitem>
                 <para>
                     <methodname>setAutoJsonSerialization($flag)</methodname>: Por defecto,
-                    los contextos JSON serializarán cualquier variable de vista
-                    a notación JSON y lo devolverán como una respuesta.
+                    los contextos <acronym>JSON</acronym> serializarán cualquier variable de vista
+                    a notación <acronym>JSON</acronym> y lo devolverán como una respuesta.
                     Si usted desea crear su propia respuesta, debe deshabilitar
                     esta opción; esto debe hacerse antes de llamar a
                     <methodname>initContext()</methodname>.
@@ -708,7 +708,7 @@ $contextSwitch->initContext();
             En primer lugar, el controlador de acción utiliza una propiedad
             diferente para determinar contextos, <methodname>$ajaxable</methodname>.
             Esto es, que puede tener diferentes contextos utilizados para
-            AJAX versus peticiones normales HTTP.
+            <acronym>AJAX</acronym> versus peticiones normales <acronym>HTTP</acronym>.
             Los diversos métodos <methodname>*ActionContext*()</methodname> de
             <methodname>AjaxContext</methodname> le escribirán a esta propiedad.
         </para>
@@ -735,9 +735,9 @@ $contextSwitch->initContext();
             <para>
                 En el siguiente ejemplo, estamos permitiendo requerimientos a
                 las acciones 'view', 'form', y 'process' para responder a
-                peticiones AJAX. En los dos primeros casos, 'view' y 'form',
+                peticiones <acronym>AJAX</acronym>. En los dos primeros casos, 'view' y 'form',
                 devolveremos fragmentos (snippets) de HTML con los cuales
-                actualizaremos la página; y en el último, devolveremos JSON.
+                actualizaremos la página; y en el último, devolveremos <acronym>JSON</acronym>.
             </para>
 
              <programlisting language="php"><![CDATA[
@@ -777,7 +777,7 @@ class CommentController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para>
-                En el lado del cliente, su biblioteca AJAX simplemente pedirá
+                En el lado del cliente, su biblioteca <acronym>AJAX</acronym> simplemente pedirá
                 los parámetros finales '/comment/view', '/comment/form', y
                 '/comment/process', y pasar el parámetro 'format':
                 '/comment/view/format/html', '/comment/form/format/html',

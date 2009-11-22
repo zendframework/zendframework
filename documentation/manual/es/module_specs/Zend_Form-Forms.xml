@@ -1761,7 +1761,7 @@ decorators.form.decorator = "Form"
 ]]></programlisting>
 
         <para>
-            El código de arriba fácilmente puede ser abstraído a un XML o un archivo de configuración basado en arrays PHP.
+            El código de arriba fácilmente puede ser abstraído a un <acronym>XML</acronym> o un archivo de configuración basado en arrays <acronym>PHP</acronym>.
         </para>
     </sect2>
 

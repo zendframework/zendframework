@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16509 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.autocomplete">
     <title>AutoComplete</title>
 
     <para>
-        Muchas bibliotecas de Javascript con AJAX ofrecen funcionalidad para
+        Muchas bibliotecas de Javascript con <acronym>AJAX</acronym> ofrecen funcionalidad para
         proporcionar autocompletado según la cual un selectlist de resultados
         potencialmente concordantes se visualiza a medida que el usuario tipea.
-        El ayudante <methodname>AutoComplete</methodname> pretende simplificar el retorno
+        El ayudante <emphasis>AutoComplete</emphasis> pretende simplificar el retorno
         de respuestas aceptables a esos métodos.
     </para>
 
     <para>
         Dado que no todas la bibliotecas JS implementan el autocompletado de
-        la misma manera, el ayudante <methodname>AutoComplete</methodname> ofrece algunas
+        la misma manera, el ayudante <emphasis>AutoComplete</emphasis> ofrece algunas
         funcionalidades abstractas de base necesarias para muchas bibliotecas,
         e implementaciones concretas para distintas bibliotecas.
         Los tipos de datos de retorno son generalmente o bien arrays de strings
-        JSON, array de arrays JSON (donde cada miembro del array está en un array
-        asociativo de metadatos utilizado para crear la selectlist), o HTML.
+        <acronym>JSON</acronym>, array de arrays <acronym>JSON</acronym> (donde cada miembro del array está en un array
+        asociativo de metadatos utilizado para crear la selectlist), o <acronym>HTML</acronym>.
     </para>
 
     <para>
@@ -62,7 +62,7 @@ class FooController extends Zend_Controller_Action
 
         <listitem><para>
                 Establece el cuerpo de la respuesta con datos
-                codificados/formateados para autocompletar.
+                codificados o formateados para autocompletar.
         </para></listitem>
 
         <listitem><para>
@@ -83,7 +83,7 @@ class FooController extends Zend_Controller_Action
 
         <listitem><para>
                 <methodname>encodeJson($data, $keepLayouts = false)</methodname>
-                codificará datos a JSON, y opcionalmente habilitando o
+                codificará datos a <acronym>JSON</acronym>, y opcionalmente habilitando o
                 deshabilitando esquemas. Típicamente, esto se llama dentro de
                 <methodname>prepareAutoCompletion()</methodname>.
         </para></listitem>
@@ -108,7 +108,7 @@ class FooController extends Zend_Controller_Action
                 <methodname>direct($data, $sendNow = true, $keepLayouts =
                     false)</methodname> se utiliza cuando se llama al ayudante como
                     un método del ayudante intermediario. El flag
-                    <methodname>$sendNow</methodname> se utiliza para determinar si se debe
+                     <varname>$sendNow</varname> se utiliza para determinar si se debe
                     llamar a <methodname>sendAutoCompletion()</methodname> o a
                     <methodname>prepareAutoCompletion()</methodname>, respectivamente.
         </para></listitem>
@@ -133,7 +133,7 @@ class FooController extends Zend_Controller_Action
 
         <para>
             En Zend Framework, puede pasar un simple array indexado al ayudante
-            AutoCompleteDojo, y este regresará una adecuada respuesta JSON
+            AutoCompleteDojo, y este regresará una adecuada respuesta <acronym>JSON</acronym>
             para su uso como almacenamiento:
         </para>
 
@@ -146,7 +146,7 @@ $this->_helper->autoCompleteDojo($data);
             <title>AutoCompletion con Dojo Usando Zend MVC</title>
 
             <para>
-                AutoCompletion con Dojo via Zend MVC requiere varias cosas:
+                AutoCompletion con Dojo via Zend <acronym>MVC</acronym> requiere varias cosas:
                 generar un objeto form para el ComboBox en el que usted quiere
                 AutoCompletado, un controlador de acción para prestar servicio
                 a los resultados de AutoCompletion, creando un QueryReadStore
@@ -157,13 +157,13 @@ $this->_helper->autoCompleteDojo($data);
 
             <para>
                 En primer lugar, veamos el Javascript necesario. Dojo ofrece
-                un marco completo para crear Javascript OOP, tal como lo hace
+                un marco completo para crear Javascript <acronym>OOP</acronym>, tal como lo hace
                 Zend Framework para <acronym>PHP</acronym>. Parte de eso es la capacidad de
                 crear pseudo-namespaces utilizando la jerarquía de directorios.
                 Crearemos un directorio 'custom' en el mismo nivel en el cual
                 el directorio de Dojo forma parte de la distribución Dojo.
                 Dentro del directorio, crearemos un archivo Javascript,
-                TestNameReadStore.js, con el siguiente contenido:
+                <filename>TestNameReadStore.js</filename>, con el siguiente contenido:
             </para>
 
             <programlisting language="javascript"><![CDATA[
@@ -222,12 +222,12 @@ class TestController extends Zend_Controller_Action
             <para>
                 Aquí, estamos simplemente creando un formulario con los métodos
                 'test' y 'go'. El método 'test' agrega varios atributos
-                especiales específicos de Dojo: dojoType, store, autoComplete
+                especiales específicos de Dojo: dojoType, store, <emphasis>AutoComplete</emphasis>
                 y hasDownArrow. El dojoType es utilizado para indicar que
                 estamos creando un ComboBox, y que vamos a vincularlo
                 a un almacén de datos (clave 'store') de 'testStore'
                 -- veremos más de esto más adelante.
-                Especificando 'autoComplete' como falso se le dice a Dojo que
+                Especificando '<emphasis>AutoComplete</emphasis>' como <constant>FALSE</constant> se le dice a Dojo que
                 no seleccione automáticamente el primer acierto, sino mostrar
                 una lista de aciertos. Por último, 'hasDownArrow' crea una
                 flecha abajo similar a un select box para que podamos
@@ -334,7 +334,7 @@ dojo.require("custom.TestNameReadStore");
             <para>
                 Note que las llamadas a los ayudantes de vista como headStyle
                 y headScript; son ubicadores, que podemos suministrar a la
-                sección 'head' del HTML de nuestro script de vista.
+                sección 'head' del <acronym>HTML</acronym> de nuestro script de vista.
             </para>
 
             <para>
@@ -348,13 +348,13 @@ dojo.require("custom.TestNameReadStore");
         <title>AutoCompletion con Scriptaculous</title>
         <para>
             <ulink url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
-            espera una respuesta HTML en un formato específico.
+            espera una respuesta <acronym>HTML</acronym> en un formato específico.
         </para>
 
         <para>
             El ayudante para utilizar con esta biblioteca es
             'AutoCompleteScriptaculous'. Simplemente proporcionarle un array de
-            datos, y el ayudante creará una respuesta HTML compatible con
+            datos, y el ayudante creará una respuesta <acronym>HTML</acronym> compatible con
             Ajax.Autocompleter.
         </para>
     </sect4>

@@ -352,7 +352,7 @@ $row->delete();
             <title>Serializing a Row</title>
 
             <para>
-                Simply use PHP's <methodname>serialize()</methodname> function to create a string containing a
+                Simply use <acronym>PHP</acronym>'s <methodname>serialize()</methodname> function to create a string containing a
                 byte-stream representation of the Row object argument.
             </para>
 

@@ -105,7 +105,7 @@
         </para>
 
         <para>        		
-			Al escribir las URLs, la manera de escribir la documentada acción camelCased
+			Al escribir las <acronym>URL</acronym>s, la manera de escribir la documentada acción camelCased
             es usar un separador de palabra, que son "." o '-' por defecto,
             pero pueden ser configurados en el despachador. El despachador internamente
             convierte en minúsculas el nombre de la acción, y usa estos separadores de palabra para
@@ -136,7 +136,7 @@
             ViewRenderer ya no resuelva estas direcciones, la semántica esta ahora
             forzada. La primera de ellas, el despachador ahora impone
             la sensibilidad en los nombres de la acción. Lo que esto significa es que la referencia a
-            sus acciones en la url utilisando camelCasing ya no para devolver
+            sus acciones en la <acronym>URL</acronym> utilisando camelCasing ya no para devolver
             al mismo método que utilizan los separadores de palabras (es decir, 'camel-casing').
             Esto nos lleva a la vista ViewRenderer ahora sólo en honor a las acciones
             palabra-separador cuando se devuleven los scripts vista.
@@ -676,8 +676,8 @@ echo $response;
 						<methodname>_redirect ()</methodname> ahora toma un segundo opcional
                         argumento, el código HTTP a retornar con la redirección, y
                         un opcional tercer argumento, <methodname>$prependBase</methodname>,
-                        que puede indicar que la URL base registrada en la
-                        solicitud del objeto debería ser añadido a la URL especificada.
+                        que puede indicar que la <acronym>URL</acronym> base registrada en la
+                        solicitud del objeto debería ser añadido a la <acronym>URL</acronym> especificada.
                     </para></listitem>
 
                     <listitem>
@@ -687,7 +687,7 @@ echo $response;
                             el cual ya no existe en la actual encarnación.
                             El único propósito de la muestra era proporcionar
                             información sobre la solicitud del controlador, acción,
-                            y los parámetros URL. Esta información es ahora
+                            y los parámetros <acronym>URL</acronym>. Esta información es ahora
                             disponible en la solicitud del objeto, y puede acceder
                             como sigue:
                         </para>

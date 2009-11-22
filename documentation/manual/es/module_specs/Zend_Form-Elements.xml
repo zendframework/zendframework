@@ -689,7 +689,7 @@ $messages = $element->getMessages();
                     <methodname>setRequired($flag)</methodname> y
                     <methodname>isRequired()</methodname> permiten establecer y recuperar el
                     estado de la bandera 'required'. Cuando se le asigna un
-                    booleano <methodname>true</methodname>, esta bandera requiere que el
+                    booleano <constant>TRUE</constant>, esta bandera requiere que el
                     elemento esté presente en la información procesada por
                     <classname>Zend_Form</classname>.
             </para></listitem>
@@ -699,7 +699,7 @@ $messages = $element->getMessages();
                     <methodname>getAllowEmpty()</methodname> permiten modificar el
                     comportamiento de elementos opcionales (p.e., elementos
                     donde la bandera required es false). Cuando la bandera 
-                    'allow empty' es true, valores vacíos no pasarán la cadena
+                    'allow empty' es <constant>TRUE</constant>, valores vacíos no pasarán la cadena
                     de validadores.
             </para></listitem>
 
@@ -707,7 +707,7 @@ $messages = $element->getMessages();
                     <methodname>setAutoInsertNotEmptyValidator($flag)</methodname> permite
                     especificar si realmente un validador 'NotEmpty' será
                     añadido el inicio de la cadena de validaciones cuando un
-                    elemento es requerido. Por defecto, esta bandera es true.
+                    elemento es requerido. Por defecto, esta bandera es <constant>TRUE</constant>.
             </para></listitem>
 
             <listitem><para>
@@ -1119,23 +1119,23 @@ echo $element->renderHtmlTag("This is the html tag content");
                 es requerido o no cuando se efectúa la validación del
                 formulario. Emplea los métodos de acceso
                 <methodname>setRequired()</methodname> y <methodname>getRequired()</methodname>. Esta
-                bandera es false por defecto.
+                bandera es <constant>FALSE</constant> por defecto.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>allowEmpty</emphasis>: bandera indicando si un
                 elemento no-requerido (opcional) debe intentar validar o no
-                valores vacíos. Cuando es true, y la bandera required es false,
+                valores vacíos. Cuando es <constant>TRUE</constant>, y la bandera required es <constant>FALSE</constant>,
                 valores vacíos no pasarán la cadena de validación, y se supone
                 verdadero. Emplea los métodos de acceso
                 <methodname>setAllowEmpty()</methodname> y <methodname>getAllowEmpty()</methodname>.
-                Esta bandera es true por defecto.
+                Esta bandera es <constant>TRUE</constant> por defecto.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>autoInsertNotEmptyValidator</emphasis>: bandera
                 indicando insertar o no un validador 'NotEmpty' cuando un
-                elemento es requerido. Por defecto, esta bandera es true.
+                elemento es requerido. Por defecto, esta bandera es <constant>TRUE</constant>.
                 Establezca la bandera con
                 <methodname>setAutoInsertNotEmptyValidator($flag)</methodname> y determine
                 el valor con <methodname>autoInsertNotEmptyValidator()</methodname>.

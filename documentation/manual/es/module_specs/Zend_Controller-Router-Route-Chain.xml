@@ -80,7 +80,7 @@ echo $chainedRoute->assemble();
             encadenamiento resultante. 
             El nombre de la ruta encadenada en el router será el nombre de la 
             ruta padre concatenada con un guión ('-') con el nombre de la ruta 
-            hijo. Un simple config en XML se vería así:
+            hijo. Un simple config en <acronym>XML</acronym> se vería así:
         </para>
 
         <programlisting language="xml"><![CDATA[

@@ -80,7 +80,6 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
 
         foreach ($document->getFieldNames() as $fieldName) {
             $field = $document->getField($fieldName);
-            $this->addField($field);
 
             if ($field->storeTermVector) {
                 /**
@@ -119,12 +118,22 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                         $this->_termDocs[$termKey][$this->_docCount][] = $position;
                     }
 
-                    $docNorms[$field->name] = chr($similarity->encodeNorm( $similarity->lengthNorm($field->name,
-                                                                                                   $tokenCounter)*
-                                                                           $document->boost*
-                                                                           $field->boost ));
+                    if ($tokenCounter == 0) {
+                        // Field contains empty value. Treat it as non-indexed and non-tokenized
+                        $field = clone($field);
+                        $field->isIndexed = $field->isTokenized = false;
+                    } else {
+                        $docNorms[$field->name] = chr($similarity->encodeNorm( $similarity->lengthNorm($field->name,
+                                                                                                       $tokenCounter)*
+                                                                               $document->boost*
+                                                                               $field->boost ));
+                    }
+                } else if (($fieldUtf8Value = $field->getUtf8Value()) == '') {
+                    // Field contains empty value. Treat it as non-indexed and non-tokenized
+                    $field = clone($field);
+                    $field->isIndexed = $field->isTokenized = false;
                 } else {
-                    $term = new Zend_Search_Lucene_Index_Term($field->getUtf8Value(), $field->name);
+                    $term = new Zend_Search_Lucene_Index_Term($fieldUtf8Value, $field->name);
                     $termKey = $term->key();
 
                     if (!isset($this->_termDictionary[$termKey])) {
@@ -147,8 +156,9 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
             if ($field->isStored) {
                 $storedFields[] = $field;
             }
-        }
 
+            $this->addField($field);
+        }
 
         foreach ($this->_fields as $fieldName => $field) {
             if (!$field->isIndexed) {

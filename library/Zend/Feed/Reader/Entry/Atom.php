@@ -298,7 +298,7 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
             return $this->_data['commentcount'];
         }
 
-        $commentcount = $this->getExtension('Thread')>getCommentCount();
+        $commentcount = $this->getExtension('Thread')->getCommentCount();
 
         if (!$commentcount) {
             $commentcount = $this->getExtension('Atom')->getCommentCount();

@@ -192,7 +192,7 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
     {
         $classPath = $this->getClassPath($class);
         if (false !== $classPath) {
-            return include $path;
+            return include $classPath;
         }
         return false;
     }

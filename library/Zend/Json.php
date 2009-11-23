@@ -336,4 +336,47 @@ class Zend_Json
 
         } // End of if (is_array($simpleXmlElementObject))
     } // End of function _processXml.
+    
+    /**
+     * Pretty-print JSON string
+     * 
+     * Use 'indent' option to select indentation string - by default it's a tab
+     * 
+     * @param string $json Original JSON string
+     * @param array $options Encoding options
+     * @return string
+     */
+    public static function prettyPrint($json, $options = array())
+    {
+        $tokens = preg_split('|([\{\}\]\[,])|', $json, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $result = "";
+        $indent = 0;
+        
+        $ind = "\t";
+        if(isset($options['indent'])) {
+            $ind = $options['indent'];
+        }
+        
+        foreach($tokens as $token) {
+            if($token == "") continue;
+            
+            $prefix = str_repeat($ind, $indent);
+            if($token == "{" || $token == "[") {
+                $indent++;
+                if($result[strlen($result)-1] == "\n") {
+                    $result .= $prefix;
+                }
+                $result .= "$token\n";
+            } else if($token == "}" || $token == "]") {
+                $indent--;
+                $prefix = str_repeat($ind, $indent);
+                $result .= "\n$prefix$token";                
+            } else if($token == ",") {
+                $result .= "$token\n";
+            } else {
+                $result .= $prefix.$token;
+            }
+        }
+        return $result;
+   }
 }

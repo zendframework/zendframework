@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18821 -->
+<!-- EN-Revision: 19173 -->
 <sect1 id="zend.db.adapter">
 
     <title>Zend_Db_Adapter</title>
@@ -602,7 +602,7 @@ CREATE TABLE bugs_products (
         <title>クエリ結果の読み込み</title>
 
         <para>
-            ここでは、SELECT クエリを実行してその結果を取得するための
+            ここでは、 <acronym>SELECT</acronym> クエリを実行してその結果を取得するための
             アダプタのメソッドについて説明します。
         </para>
 
@@ -611,17 +611,17 @@ CREATE TABLE bugs_products (
             <title>結果セット全体の取得</title>
 
             <para>
-                <acronym>SQL</acronym> の SELECT クエリの実行とその結果の取得を一度に行うには
+                <acronym>SQL</acronym> の <acronym>SELECT</acronym> クエリの実行とその結果の取得を一度に行うには
                 <methodname>fetchAll()</methodname> メソッドを使用します。
             </para>
 
             <para>
-                このメソッドの最初の引数には、SELECT 文を文字列で指定します。
+                このメソッドの最初の引数には、 <acronym>SELECT</acronym> 文を文字列で指定します。
                 あるいは、文字列ではなく
                 <link linkend="zend.db.select">Zend_Db_Select</link>
                 クラスのオブジェクトを指定することもできます。
                 オブジェクトを渡した場合は、アダプタの内部でそれを自動的に
-                SELECT 文の文字列に変換します。
+                <acronym>SELECT</acronym> 文の文字列に変換します。
             </para>
 
             <para>
@@ -667,10 +667,10 @@ $result = $db->fetchAll($sql, 2);
                     </para>
                     <para>
                         select で取得する一覧の中に同名のカラムが含まれている場合
-                        (たとえば複数テーブルを JOIN した場合など)
+                        (たとえば複数テーブルを <acronym>JOIN</acronym> した場合など)
                         は、その名前のエントリはひとつしか含まれません。
-                        FETCH_ASSOC モードを使用する場合は、
-                        SELECT クエリでカラムの別名を指定するなどして、
+                        <acronym>FETCH_ASSOC</acronym> モードを使用する場合は、
+                        <acronym>SELECT</acronym> クエリでカラムの別名を指定するなどして、
                         結果の配列におけるキーが一意になるようにしなければなりません。
                     </para>
                     <para>
@@ -793,13 +793,13 @@ echo $result[0];
             <para>
                 <methodname>fetchPairs()</methodname> メソッドは、データを キー/値
                 のペア (連想配列) の配列で返します。
-                この連想配列のキーは、SELECT クエリが返す最初のカラムの値となります。
-                また、連想配列の値は、SELECT クエリが返す二番目のカラムの値となります。
+                この連想配列のキーは、 <acronym>SELECT</acronym> クエリが返す最初のカラムの値となります。
+                また、連想配列の値は、 <acronym>SELECT</acronym> クエリが返す二番目のカラムの値となります。
                 クエリから返されるその他のカラムは破棄されます。
             </para>
 
             <para>
-                SELECT クエリをうまく設計し、最初のカラムの値が一意になるようにしなければなりません。
+                <acronym>SELECT</acronym> クエリをうまく設計し、最初のカラムの値が一意になるようにしなければなりません。
                 もし最初のカラムに重複する値があれば、連想配列のエントリが上書きされてしまいます。
             </para>
 
@@ -900,9 +900,9 @@ $db->insert('bugs', $data);
 
             <para>
                 データの配列で指定しなかったカラムについてはデータベースに対して何も指示しません。
-                つまり、<acronym>SQL</acronym> の INSERT 文で列を指定しなかった場合と同じ挙動となります。
-                DEFAULT 句が設定されていればその値が追加され、
-                設定されていなければ NULL のままとなります。
+                つまり、<acronym>SQL</acronym> の <acronym>INSERT</acronym> 文で列を指定しなかった場合と同じ挙動となります。
+                <acronym>DEFAULT</acronym> 句が設定されていればその値が追加され、
+                設定されていなければ <acronym>NULL</acronym> のままとなります。
             </para>
 
             <para>
@@ -941,7 +941,7 @@ $db->insert('bugs', $data);
 
             <para>
                 <acronym>RDBMS</acronym> によっては、主キーの自動インクリメントをサポートしているものもあります。
-                この方法で定義したテーブルに新しい行を INSERT すると、
+                この方法で定義したテーブルに新しい行を <acronym>INSERT</acronym> すると、
                 主キーの値が自動的に生成されます。
                 <methodname>insert()</methodname> メソッドの返り値は、最後に追加された ID
                 では<emphasis>ありません</emphasis>。
@@ -1014,7 +1014,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 Microsoft SQL Server、SQLite などの場合、
                 <methodname>lastInsertId()</methodname> メソッドの引数は無視されます。
                 このメソッドの返り値は、現在の接続で最後に実行された
-                INSERT 操作が生成した値となります。また、これらの <acronym>RDBMS</acronym> では
+                <acronym>INSERT</acronym> 操作が生成した値となります。また、これらの <acronym>RDBMS</acronym> では
                 <methodname>lastSequenceId()</methodname> メソッドの返り値は常に <constant>NULL</constant>
                 となります。
             </para>
@@ -1042,7 +1042,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 <para>
                     さらに、新しい主キーの値を生成する際に "MAX(id)+1"
                     のような式を使うのも同様に危険です。ふたつのクライアントから同時にこのクエリを実行すると、
-                    どちらも同じ値を取得することになり、同じ値で INSERT
+                    どちらも同じ値を取得することになり、同じ値で <acronym>INSERT</acronym>
                     を行なうことになってしまいます。
                 </para>
                 <para>
@@ -2092,13 +2092,13 @@ if (!is_null($version)) {
                         オプションの配列で、キーとして <property>pdoType</property>
                         を指定できます。この値は "mssql" (デフォルト)、
                         "dblib"、"freetds" あるいは "sybase" のいずれかとなります。
-                        このオプションは、DSN 文字列を作成する際に使用する
-                        DSN プレフィックスに影響を与えます。"freetds" および
+                        このオプションは、 <acronym>DSN</acronym> 文字列を作成する際に使用する
+                        <acronym>DSN</acronym> プレフィックスに影響を与えます。"freetds" および
                         "sybase" を指定した場合のプレフィックスは
                         "sybase:" となります。これは
                         <ulink url="http://www.freetds.org/">FreeTDS</ulink>
                         系のライブラリで用いられるものです。
-                        このドライバで使用できる DSN プレフィックスの詳細は
+                        このドライバで使用できる <acronym>DSN</acronym> プレフィックスの詳細は
                         <ulink url="http://www.php.net/manual/ja/ref.pdo-dblib.connection.php">
                         http://www.php.net/manual/ja/ref.pdo-dblib.connection.php</ulink>
                         を参照ください。
@@ -2215,7 +2215,7 @@ if (!is_null($version)) {
                         SQLite2 データベースに接続するには、
                         <classname>Pdo_Sqlite</classname> アダプタのインスタンスを作成する際に
                         パラメータの配列で
-                        <code>'sqlite2'=>true</code> を指定します。
+                        <command>'sqlite2' => true</command> を指定します。
                     </para>
                 </listitem>
                 <listitem>
@@ -2223,7 +2223,7 @@ if (!is_null($version)) {
                         メモリ上の SQLite データベースに接続するには、
                         <classname>Pdo_Sqlite</classname> アダプタのインスタンスを作成する際に
                         パラメータの配列で
-                        <code>'dbname'=>':memory:'</code> を指定します。
+                        <command>'dbname' => ':memory:'</command> を指定します。
                     </para>
                 </listitem>
                 <listitem>

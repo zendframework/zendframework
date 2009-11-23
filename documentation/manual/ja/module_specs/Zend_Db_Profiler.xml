@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 19173 -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>Zend_Db_Profiler</title>
@@ -10,7 +10,7 @@
         <title>導入</title>
 
         <para>
-            <classname>Zend_Db_Profiler</classname> を使用すると、クエリの情報を取得することができます。
+            <classname>Zend_Db_Profiler</classname> を使用すると、クエリの情報を取得できます。
             アダプタが実際に実行したクエリの内容や実行所要時間などが取得でき、
             余計なデバッグコードをクラスに追加しなくてもクエリを調べられるようになります。
             さらに、条件を指定して特定のクエリだけの情報を取得することもできます。
@@ -41,7 +41,7 @@ $db->getProfiler()->setEnabled(true);
 ]]></programlisting>
 
         <para>
-            <code>profiler</code> オプションの値には柔軟性があり、
+            <property>profiler</property> オプションの値には柔軟性があり、
             その型に応じて、さまざまな形式で解釈されます。
             たいていは単純な boolean 値を指定することになるでしょうが、
             その他の型を指定することでプロファイラの振る舞いをカスタマイズすることも可能です。
@@ -53,65 +53,75 @@ $db->getProfiler()->setEnabled(true);
             にすると、プロファイラを無効にします。プロファイラのクラスは、
             そのアダプタのデフォルトのプロファイラクラスである
             <classname>Zend_Db_Profiler</classname> となります。
-            <programlisting language="php"><![CDATA[
+        </para>
+
+<programlisting language="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-        </para>
 
         <para>
             プロファイラオブジェクトのインスタンスを、アダプタで使用します。
             このオブジェクトの型は、<classname>Zend_Db_Profiler</classname>
             あるいはそのサブクラスでなければなりません。
             プロファイラを有効にするには、次にようにします。
-            <programlisting language="php"><![CDATA[
+        </para>
+
+<programlisting language="php"><![CDATA[
 $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-        </para>
 
         <para>
-            引数は連想配列で、'<code>enabled</code>'、
-            '<code>instance</code>' および '<code>class</code>'
+            引数は連想配列で、'<property>enabled</property>'、
+            '<property>instance</property>' および '<property>class</property>'
             のいずれか (あるいはすべて) のキーを持ちます。
-            '<code>enabled</code>' と '<code>instance</code>' は、
+            '<property>enabled</property>' と '<property>instance</property>' は、
             それぞれ boolean および上で説明したインスタンスです。
-            '<code>class</code>' は、独自のプロファイラを使用する場合のクラス名を指定します。
+            '<property>class</property>' は、独自のプロファイラを使用する場合のクラス名を指定します。
             このクラスは <classname>Zend_Db_Profiler</classname> あるいはそのサブクラスでなければなりません。
             このクラスは、コンストラクタに何も引数を渡さないでインスタンス化されます。
-            '<code>class</code>' の内容は、
-            '<code>instance</code>' を指定した際には無視されます。
-            <programlisting language="php"><![CDATA[
+            '<property>class</property>' の内容は、
+            '<property>instance</property>' を指定した際には無視されます。
+        </para>
+
+<programlisting language="php"><![CDATA[
 $params['profiler'] = array(
     'enabled' => true,
     'class'   => 'MyProject_Db_Profiler'
 );
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-        </para>
 
         <para>
             また、引数は <classname>Zend_Config</classname> のオブジェクトで渡すこともできます。
             このオブジェクトのプロパティが、先ほどの連想配列のキーと同じように解釈されます。
-            たとえば、次のような内容の "config.ini" ファイルがあったとしましょう。
-            <programlisting language="ini"><![CDATA[
+            たとえば、次のような内容の "<filename>config.ini</filename>" ファイルがあったとしましょう。
+        </para>
+
+<programlisting language="ini"><![CDATA[
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
 db.profiler.enabled = true
 ]]></programlisting>
 
-            この設定を適用するには、次のような PHP コードを書きます。
+        <para>
+            この設定を適用するには、次のような <acronym>PHP</acronym> コードを書きます。
+        </para>
 
-            <programlisting language="php"><![CDATA[
+<programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('config.ini', 'main');
 $params['profiler'] = $config->db->profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
 
-            '<code>instance</code>' プロパティは、次のように使用します。
-            <programlisting language="php"><![CDATA[
+        <para>
+            '<property>instance</property>' プロパティは、次のように使用します。
+        </para>
+
+<programlisting language="php"><![CDATA[
 $profiler = new MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $configData = array(
@@ -121,8 +131,6 @@ $config = new Zend_Config($configData);
 $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-
-        </para>
 
     </sect2>
 
@@ -312,25 +320,25 @@ $profiler->setFilterElapsedSecs(null);
                     <para>
                         <constant>Zend_Db_Profiler::INSERT</constant>:
                         新しいデータをデータベースに追加するクエリ。
-                        一般的には <acronym>SQL</acronym> の INSERT。
+                        一般的には <acronym>SQL</acronym> の <acronym>INSERT</acronym>。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::UPDATE</constant>:
-                        既存のデータを更新するクエリ。通常は <acronym>SQL</acronym> の UPDATE。
+                        既存のデータを更新するクエリ。通常は <acronym>SQL</acronym> の <acronym>UPDATE</acronym>。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::DELETE</constant>:
-                        既存のデータを削除するクエリ。通常は <acronym>SQL</acronym> の DELETE。
+                        既存のデータを削除するクエリ。通常は <acronym>SQL</acronym> の <acronym>DELETE</acronym>。
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::SELECT</constant>:
-                        既存のデータを取得するクエリ。通常は <acronym>SQL</acronym> の SELECT。
+                        既存のデータを取得するクエリ。通常は <acronym>SQL</acronym> の <acronym>SELECT</acronym>。
                     </para>
                 </listitem>
                 <listitem>

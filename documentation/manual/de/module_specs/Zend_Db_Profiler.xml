@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 19173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
-
     <title>Zend_Db_Profiler</title>
 
     <sect2 id="zend.db.profiler.introduction">
-
         <title>Einführung</title>
 
         <para>
@@ -43,7 +41,7 @@ $db->getProfiler()->setEnabled(true);
 ]]></programlisting>
 
         <para>
-            Der Wert der <code>profiler</code> Option ist flexibel. Er wird unterschiedlich
+            Der Wert der <property>profiler</property> Option ist flexibel. Er wird unterschiedlich
             interpretiert, abhängig von seinem Typ. Meistens sollte ein einfacher Boolscher Wert
             verwendet werden, aber andere Typen ermöglichen es das Verhalten des Profilers
             anzupassen.
@@ -53,63 +51,74 @@ $db->getProfiler()->setEnabled(true);
             Ein boolsches Argument aktiviert den Profiler wenn es der Wert <constant>TRUE</constant> ist,
             oder schaltet ihn mit <constant>FALSE</constant> aus. Die Profiler Klasse ist die Standard
             Profiler Klasse des Adapters <classname>Zend_Db_Profiler</classname>.
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-        </para>
 
         <para>
             Eine Instanz eines Profiler Objektes führt dazu das der Adapter dieses Objekt verwendet.
             Der Typ des Objektes muß hierfür <classname>Zend_Db_Profiler</classname> oder eine
             Subklasse sein. Der Profiler muß separat eingeschaltet werden.
-            <programlisting language="php"><![CDATA[
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $profiler = MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-        </para>
 
         <para>
             Ein Argument kann ein assoziatives Array sein das eines oder alle der folgenden
-            Schlüssel enthält: '<code>enabled</code>', '<code>instance</code>', oder
-            '<code>class</code>'. Die '<code>enabled</code>' und '<code>instance</code>' Schlüssel
-            korrespondieren zu den zuvor dokumentierten boolschen und Instanz Typen. Der
-            '<code>class</code>' Schlüssel wird verwendet um die Klasse die für einen eigenen
-            Profiler verwendet werden soll, zu benennen. Die Klasse muß
+            Schlüssel enthält: '<property>enabled</property>', '<property>instance</property>', oder
+            '<property>class</property>'. Die Schlüssel '<property>enabled</property>' und
+            '<property>instance</property>' korrespondieren zu den zuvor dokumentierten boolschen
+            und Instanz Typen. Der '<property>class</property>' Schlüssel wird verwendet um die
+            Klasse die für einen eigenen Profiler verwendet werden soll, zu benennen. Die Klasse muß
             <classname>Zend_Db_Profiler</classname> oder eine Subklasse sein. Die Klasse wird ohne
-            Konstruktor Argumente instanziert. Die '<code>class</code>' Option wird ignoriert wenn
-            die '<code>instance</code>' Option angegeben wurde.
-            <programlisting language="php"><![CDATA[
+            Konstruktor Argumente instanziert. Die '<property>class</property>' Option wird
+            ignoriert wenn die '<property>instance</property>' Option angegeben wurde.
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $params['profiler'] = array(
     'enabled' => true,
     'class'   => 'MyProject_Db_Profiler'
 );
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-        </para>
 
         <para>
             Letztendlich kann das Argument ein Objekt des Typs <classname>Zend_Config</classname>
             sein das Eigenschaften enthält welche als Array Schlüssel verwendet werden wie anbei
-            beschrieben. Zum Beispiel könnte die Datei "config.ini" die folgenden Daten enthalten:
-            <programlisting language="php"><![CDATA[
+            beschrieben. Zum Beispiel könnte die Datei "<filename>config.ini</filename>" die
+            folgenden Daten enthalten:
+        </para>
+
+        <programlisting language="php"><![CDATA[
 [main]
 db.profiler.class   = "MyProject_Db_Profiler"
 db.profiler.enabled = true
 ]]></programlisting>
 
+        <para>
             Diese Konfiguration kann durch den folgenden PHP Code angesprochen werden:
+        </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('config.ini', 'main');
 $params['profiler'] = $config->db->profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
 
-            Die '<code>instance</code>' Eigenschaft kann wie folgt verwendet werden:
-            <programlisting language="php"><![CDATA[
+        <para>
+            Die Eigenschaft '<property>instance</property>' kann wie folgt verwendet werden:
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $profiler = new MyProject_Db_Profiler();
 $profiler->setEnabled(true);
 $configData = array(
@@ -119,13 +128,9 @@ $config = new Zend_Config($configData);
 $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-
-        </para>
-
     </sect2>
 
     <sect2 id="zend.db.profiler.using">
-
         <title>Den Profiler verwenden</title>
 
         <para>
@@ -150,18 +155,21 @@ $profiler = $db->getProfiler();
                     aufgezeichneten Abfragen zurück.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getTotalElapsedSecs()</methodname> gibt die gesamte Anzahl an
                     Sekunden für alle aufgezeichneten Abfragen zurück.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getQueryProfiles()</methodname> gibt ein Array mit allen
                     aufgezeichneten Abfragen zurück.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getLastQueryProfile()</methodname> gibt das Profil der letzten
@@ -169,6 +177,7 @@ $profiler = $db->getProfiler();
                     oder nicht (wenn nicht, wird die Endzeit null sein)
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>clear()</methodname> löscht jedes vorherige Abfrageprofile vom
@@ -194,6 +203,7 @@ $profiler = $db->getProfiler();
                     wenn das Statement ausgeführt wird.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getQueryParams()</methodname> gibt ein Array von Parameter Werten
@@ -204,6 +214,7 @@ $profiler = $db->getProfiler();
                     Parameter Indezes.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getElapsedSecs()</methodname> gibt die Anzahl der Sekunden zurück,
@@ -252,11 +263,9 @@ echo 'Queries per second: ' . $queryCount / $totalTime . "\n";
 echo 'Longest query length: ' . $longestTime . "\n";
 echo "Longest query: \n" . $longestQuery . "\n";
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.db.profiler.advanced">
-
         <title>Fortgeschrittene Profiler Verwendung</title>
 
         <para>
@@ -300,39 +309,46 @@ $profiler->setFilterElapsedSecs(null);
                         oder Auswahl einer Datenbank .
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::QUERY</constant>: allgemeine
                         Datenbankabfragen, die keinem der anderen Typen entsprechen.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::INSERT</constant>: jede Abfrage, die neue
                         Daten zur Datenbank hinzufügt, normalerweise ein <acronym>SQL</acronym>
-                        INSERT.
+                        <acronym>INSERT</acronym>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::UPDATE</constant>: jede Abfrage, die
                         vorhandene Daten aktualisiert, normalerweise ein <acronym>SQL</acronym>
-                        UPDATE.
+                        <acronym>UPDATE</acronym>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::DELETE</constant>: jede Abfrage, die
-                        vorhandene Daten löscht, normalerweise ein <acronym>SQL</acronym> DELETE.
+                        vorhandene Daten löscht, normalerweise ein <acronym>SQL</acronym>
+                        <acronym>DELETE</acronym>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::SELECT</constant>: jede Abfrage, die
                         vorhandene Daten selektiert, normalerweise ein <acronym>SQL</acronym>
-                        SELECT.
+                        <acronym>SELECT</acronym>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::TRANSACTION</constant>: jede
@@ -363,7 +379,6 @@ $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 // Remove all filters
 $profiler->setFilterQueryType(null);
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.db.profiler.advanced.getbytype">
@@ -392,9 +407,7 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT |
 // Hole DELETE Abfragen zurück
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.db.profiler.profilers">
@@ -407,7 +420,6 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
         </para>
 
         <xi:include href="Zend_Db_Profiler-Firebug.xml" />
-
     </sect2>
 </sect1>
 <!--

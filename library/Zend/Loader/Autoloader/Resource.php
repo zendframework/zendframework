@@ -173,7 +173,13 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
 
         $final = substr($class, strlen($lastMatch) + 1);
         $path = $this->_components[$lastMatch];
-        return $path . '/' . str_replace('_', '/', $final) . '.php';
+        $classPath = $path . '/' . str_replace('_', '/', $final) . '.php';
+
+        if (Zend_Loader::isReadable($classPath)) {
+            return $classPath;
+        }
+
+        return false;
     }
 
     /**
@@ -184,7 +190,11 @@ class Zend_Loader_Autoloader_Resource implements Zend_Loader_Autoloader_Interfac
      */
     public function autoload($class)
     {
-        return include $this->getClassPath($class);
+        $classPath = $this->getClassPath($class);
+        if (false !== $classPath) {
+            return include $path;
+        }
+        return false;
     }
 
     /**

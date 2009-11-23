@@ -404,13 +404,25 @@ class Zend_Loader_Autoloader_ResourceTest extends PHPUnit_Framework_TestCase
      */
     public function testAutoloaderResourceGetClassPath()
     {
-        //print_r(get_class_methods($this->loader));
         $this->loader->addResourceTypes(array(
             'model' => array('path' => 'models', 'namespace' => 'Model'),
         ));
         $path = $this->loader->getClassPath('FooBar_Model_Class_Model');
         // if true we have // in path
         $this->assertFalse(strpos($path, '//'));
+    }
+
+    /**
+     * @group ZF-8364
+     * @group ZF-6727
+     */
+    public function testAuloaderResourceGetClassPathReturnFalse()
+    {
+        $this->loader->addResourceTypes(array(
+            'model' => array('path' => 'models', 'namespace' => 'Model'),
+        ));
+        $path = $this->loader->autoload('Something_Totally_Wrong');
+        $this->assertFalse($path);
     }
 }
 

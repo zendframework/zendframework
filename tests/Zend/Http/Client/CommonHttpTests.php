@@ -847,7 +847,90 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
         $expected = $this->_getTestFileContents('ZF4238-zerolineresponse.txt');
         $this->assertEquals($expected, $got);
     }
+    
+    public function testStreamResponse()
+    {
+        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+              $this->markTestSkipped('Current adapter does not support streaming');
+              return;   
+        }
+        $this->client->setUri($this->baseuri . 'staticFile.jpg');
+        $this->client->setStream();
 
+        $response = $this->client->request();
+        
+        $this->assertTrue($response instanceof Zend_Http_Response_Stream, 'Request did not return stream response!');
+        $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
+        
+        $stream_name = $response->getStreamName();
+     
+        $stream_read = stream_get_contents($response->getStream());
+        $file_read = file_get_contents($stream_name);
+        
+        $expected = $this->_getTestFileContents('staticFile.jpg');
+
+        $this->assertEquals($expected, $stream_read, 'Downloaded stream does not seem to match!');
+        $this->assertEquals($expected, $file_read, 'Downloaded file does not seem to match!');
+    }
+    
+    public function testStreamResponseBody()
+    {
+        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+              $this->markTestSkipped('Current adapter does not support streaming');
+              return;   
+        }
+        $this->client->setUri($this->baseuri . 'staticFile.jpg');
+        $this->client->setStream();
+
+        $response = $this->client->request();
+        
+        $this->assertTrue($response instanceof Zend_Http_Response_Stream, 'Request did not return stream response!');
+        $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
+        
+        $body = $response->getBody();
+        
+        $expected = $this->_getTestFileContents('staticFile.jpg');
+        $this->assertEquals($expected, $body, 'Downloaded stream does not seem to match!');
+    }
+    
+    public function testStreamResponseNamed()
+    {
+        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+              $this->markTestSkipped('Current adapter does not support streaming');
+              return;   
+        }
+        $this->client->setUri($this->baseuri . 'staticFile.jpg');
+        $outfile = tempnam(sys_get_temp_dir(), "outstream");
+        $this->client->setStream($outfile);
+
+        $response = $this->client->request();
+        
+        $this->assertTrue($response instanceof Zend_Http_Response_Stream, 'Request did not return stream response!');
+        $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
+        
+        $this->assertEquals($outfile, $response->getStreamName());
+     
+        $stream_read = stream_get_contents($response->getStream());
+        $file_read = file_get_contents($outfile);
+        
+        $expected = $this->_getTestFileContents('staticFile.jpg');
+
+        $this->assertEquals($expected, $stream_read, 'Downloaded stream does not seem to match!');
+        $this->assertEquals($expected, $file_read, 'Downloaded file does not seem to match!');
+    }
+       
+    public function testStreamRequest()
+    {
+        if(!($this->client->getAdapter() instanceof Zend_Http_Client_Adapter_Stream)) {
+              $this->markTestSkipped('Current adapter does not support streaming');
+              return;   
+        }
+        $data = fopen(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR . 'staticFile.jpg', "r"); 
+        $res = $this->client->setRawData($data, 'image/jpeg')->request('PUT');
+        $expected = $this->_getTestFileContents('staticFile.jpg');
+        $this->assertEquals($expected, $res->getBody(), 'Response body does not contain the expected data');
+    }
+    
     /**
      * Internal helpder function to get the contents of test files
      *

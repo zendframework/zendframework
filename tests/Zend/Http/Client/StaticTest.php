@@ -597,7 +597,8 @@ class Zend_Http_Client_StaticTest_Mock extends Zend_Http_Client
         'httpversion'     => self::HTTP_1,
         'keepalive'       => false,
         'storeresponse'   => true,
-        'strict'          => true
+        'strict'          => true,
+        'output_stream'	  => false,
     );
 }
 

@@ -356,12 +356,41 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
 
         return $response->getBody();
     }
+    
+    /**
+     * Get an object using streaming
+     * 
+     * Can use either provided filename for storage or create a temp file if none provided.
+     *
+     * @param  string $object Object path
+     * @param  string $streamfile File to write the stream to
+     * @param  bool   $paidobject This is "requestor pays" object
+     * @return Zend_Http_Response_Stream|false
+     */
+    public function getObjectStream($object, $streamfile = null, $paidobject=false)
+    {
+        $object = $this->_fixupObjectName($object);
+        self::getHttpClient()->setStream($streamfile?$streamfile:true);
+        if ($paidobject) {
+            $response = $this->_makeRequest('GET', $object, null, array(self::S3_REQUESTPAY_HEADER => 'requester'));
+        }
+        else {
+            $response = $this->_makeRequest('GET', $object);
+        }
+        self::getHttpClient()->setStream(null);
+        
+        if ($response->getStatus() != 200 || !($response instanceof Zend_Http_Response_Stream)) {
+            return false;
+        }
 
+        return $response;
+    }
+    
     /**
      * Upload an object by a PHP string
      *
      * @param  string $object Object name
-     * @param  string $data   Object data
+     * @param  string|resource $data   Object data (can be string or stream)
      * @param  array  $meta   Metadata
      * @return boolean
      */
@@ -370,7 +399,9 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         $object = $this->_fixupObjectName($object);
         $headers = (is_array($meta)) ? $meta : array();
 
-        $headers['Content-MD5'] = base64_encode(md5($data, true));
+        if(!is_resource($data)) {
+            $headers['Content-MD5'] = base64_encode(md5($data, true));
+        } 
         $headers['Expect'] = '100-continue';
 
         if (!isset($headers[self::S3_CONTENT_TYPE_HEADER])) {
@@ -384,7 +415,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             // It is escaped by double quotes for some reason
             $etag = str_replace('"', '', $response->getHeader('Etag'));
 
-            if ($etag == md5($data)) {
+            if (is_resource($data) || $etag == md5($data)) {
                 return true;
             }
         }
@@ -423,6 +454,40 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     }
 
     /**
+     * Put file to S3 as object, using streaming
+     *
+     * @param string $path   File name
+     * @param string $object Object name
+     * @param array  $meta   Metadata
+     * @return boolean
+     */
+    public function putFileStream($path, $object, $meta=null)
+    {
+        $data = @fopen($path, "rb");
+        if ($data === false) {
+            /**
+             * @see Zend_Service_Amazon_S3_Exception
+             */
+            require_once 'Zend/Service/Amazon/S3/Exception.php';
+            throw new Zend_Service_Amazon_S3_Exception("Cannot open file $path");
+        }
+
+        if (!is_array($meta)) {
+            $meta = array();
+        }
+
+        if (!isset($meta[self::S3_CONTENT_TYPE_HEADER])) {
+           $meta[self::S3_CONTENT_TYPE_HEADER] = self::getMimeType($path);
+        }
+        
+        if(!isset($meta['Content-MD5'])) {
+            $headers['Content-MD5'] = base64_encode(md5_file($path, true));
+        }
+        
+        return $this->putObject($object, $data, $meta);
+    }
+    
+    /**
      * Remove a given object
      *
      * @param  string $object
@@ -440,11 +505,11 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     /**
      * Make a request to Amazon S3
      *
-     * @param  string $method
-     * @param  string $path
-     * @param  array  $params
-     * @param  array  $headers
-     * @param  string $data
+     * @param  string $method	Request method
+     * @param  string $path		Path to requested object
+     * @param  array  $params	Request parameters
+     * @param  array  $headers	HTTP headers
+     * @param  string|resource $data		Request data
      * @return Zend_Http_Response
      */
     public function _makeRequest($method, $path='', $params=null, $headers=array(), $data=null)
@@ -457,6 +522,14 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
 
         $headers['Date'] = gmdate(DATE_RFC1123, time());
 
+        if(is_resource($data) && $method != 'PUT') {
+            /**
+             * @see Zend_Service_Amazon_S3_Exception
+             */
+            require_once 'Zend/Service/Amazon/S3/Exception.php';
+            throw new Zend_Service_Amazon_S3_Exception("Only PUT request supports stream data");
+        }
+        
         // build the end point out
         $parts = explode('/', $path, 2);
         $endpoint = clone($this->_endpoint);

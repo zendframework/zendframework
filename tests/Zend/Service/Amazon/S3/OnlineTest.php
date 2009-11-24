@@ -109,6 +109,51 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("testdata", $this->_amazon->getObject($this->_bucket."/zftest"));
     }
 
+    /**
+     * Get object using streaming and temp files
+     * 
+     */
+    public function testGetObjectStream()
+    {
+        $this->_amazon->createBucket($this->_bucket);
+        $this->_amazon->putObject($this->_bucket."/zftest", "testdata");
+        $response = $this->_amazon->getObjectStream($this->_bucket."/zftest");
+
+        $this->assertTrue($response instanceof Zend_Http_Response_Stream, 'The test did not return stream response');
+        $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
+        
+        $stream_name = $response->getStreamName();
+     
+        $stream_read = stream_get_contents($response->getStream());
+        $file_read = file_get_contents($stream_name);
+        
+        $this->assertEquals("testdata", $stream_read, 'Downloaded stream does not seem to match!');
+        $this->assertEquals("testdata", $file_read, 'Downloaded file does not seem to match!');
+    }
+    
+    /**
+     * Get object using streaming and specific files
+     * 
+     */
+    public function testGetObjectStreamNamed()
+    {
+        $this->_amazon->createBucket($this->_bucket);
+        $this->_amazon->putObject($this->_bucket."/zftest", "testdata");
+        $outfile = tempnam(sys_get_temp_dir(), "output");
+  
+        $response = $this->_amazon->getObjectStream($this->_bucket."/zftest", $outfile);
+
+        $this->assertTrue($response instanceof Zend_Http_Response_Stream, 'The test did not return stream response');
+        $this->assertTrue(is_resource($response->getStream()), 'Request does not contain stream!');
+        
+        $this->assertEquals($outfile, $response->getStreamName());
+             
+        $stream_read = stream_get_contents($response->getStream());
+        $file_read = file_get_contents($outfile);
+        
+        $this->assertEquals("testdata", $stream_read, 'Downloaded stream does not seem to match!');
+        $this->assertEquals("testdata", $file_read, 'Downloaded file does not seem to match!');
+    }
 /**
      * Test getting info
      *
@@ -188,9 +233,13 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $this->assertNotContains($this->_bucket, $list);
     }
 
-    protected function _fileTest($filename, $object, $type, $exp_type)
+    protected function _fileTest($filename, $object, $type, $exp_type, $stream = false)
     {
-        $this->_amazon->putFile($filename, $object, array(Zend_Service_Amazon_S3::S3_CONTENT_TYPE_HEADER => $type));
+        if($stream) {
+            $this->_amazon->putFile($filename, $object, array(Zend_Service_Amazon_S3::S3_CONTENT_TYPE_HEADER => $type));
+        } else {
+            $this->_amazon->putFileStream($filename, $object, array(Zend_Service_Amazon_S3::S3_CONTENT_TYPE_HEADER => $type));
+        }
 
         $data = file_get_contents($filename);
 
@@ -204,7 +253,7 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $fdata = $this->_amazon->getObject($object);
         $this->assertEquals($data, $fdata);
     }
-
+    
     public function testPutFile()
     {
         $filedir = dirname(__FILE__)."/_files/";
@@ -216,6 +265,17 @@ class Zend_Service_Amazon_S3_OnlineTest extends PHPUnit_Framework_TestCase
         $this->_fileTest($filedir."testdata.html", $this->_bucket."/zftestfile3.html", 'text/plain', 'text/plain');
     }
 
+    public function testPutFileStream()
+    {
+        $filedir = dirname(__FILE__)."/_files/";
+        $this->_amazon->createBucket($this->_bucket);
+
+        $this->_fileTest($filedir."testdata", $this->_bucket."/zftestfile", null, 'binary/octet-stream', true);
+        $this->_fileTest($filedir."testdata", $this->_bucket."/zftestfile2", 'text/plain', 'text/plain', true);
+        $this->_fileTest($filedir."testdata.html", $this->_bucket."/zftestfile3", null, 'text/html', true);
+        $this->_fileTest($filedir."testdata.html", $this->_bucket."/zftestfile3.html", 'text/plain', 'text/plain', true);
+    }
+    
     public function testPutNoFile()
     {
         $filedir = dirname(__FILE__)."/_files/";

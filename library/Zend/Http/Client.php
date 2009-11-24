@@ -45,6 +45,11 @@ require_once 'Zend/Http/Client/Adapter/Interface.php';
 require_once 'Zend/Http/Response.php';
 
 /**
+ * @see Zend_Http_Response_Stream
+ */
+require_once 'Zend/Http/Response/Stream.php';
+
+/**
  * Zend_Http_Client is an implemetation of an HTTP client in PHP. The client
  * supports basic features like sending different HTTP requests and handling
  * redirections, as well as more advanced features like proxy settings, HTTP
@@ -110,7 +115,8 @@ class Zend_Http_Client
         'httpversion'     => self::HTTP_1,
         'keepalive'       => false,
         'storeresponse'   => true,
-        'strict'          => true
+        'strict'          => true,
+        'output_stream'	  => false,
     );
 
     /**
@@ -733,8 +739,10 @@ class Zend_Http_Client
      * 1. For advanced user who would like to set their own data, already encoded
      * 2. For backwards compatibilty: If someone uses the old post($data) method.
      *    this method will be used to set the encoded data.
+     * 
+     * $data can also be stream (such as file) from which the data will be read.
      *
-     * @param string $data
+     * @param string|resource $data
      * @param string $enctype
      * @return Zend_Http_Client
      */
@@ -742,7 +750,13 @@ class Zend_Http_Client
     {
         $this->raw_post_data = $data;
         $this->setEncType($enctype);
-
+        if (is_resource($data)) {
+            // We've got stream data
+            $stat = @fstat($data);
+            if($stat) {
+                $this->setHeaders(self::CONTENT_LENGTH, $stat['size']);
+            }
+        }
         return $this;
     }
 
@@ -846,6 +860,51 @@ class Zend_Http_Client
     }
 
     /**
+     * Set streaming for received data
+     * 
+     * @param string|boolean $streamfile Stream file, true for temp file, false/null for no streaming
+     * @return Zend_Http_Client
+     */
+    public function setStream($streamfile = true)
+    {
+        $this->setConfig(array("output_stream" => $streamfile));
+        return $this;
+    }
+    
+    /**
+     * Get status of streaming for received data
+     * @return boolean|string
+     */
+    public function getStream()
+    {
+        return $this->config["output_stream"];
+    }
+    
+    /**
+     * Create temporary stream
+     * 
+     * @return resource
+     */
+    protected function _openTempStream()
+    {
+        $this->_stream_name = $this->config['output_stream'];
+        if(!is_string($this->_stream_name)) {
+            // If name is not given, create temp name
+            $this->_stream_name = tempnam(isset($this->config['stream_tmp_dir'])?$this->config['stream_tmp_dir']:sys_get_temp_dir(),
+                 'Zend_Http_Client');
+        }
+        
+        $fp = fopen($this->_stream_name, "w+b");
+        if(!$fp) {
+                $this->close();
+                require_once 'Zend/Http/Client/Exception.php';
+                throw new Zend_Http_Client_Exception("Could not open temp file $name");
+            
+        }
+        return $fp;
+    }
+
+    /**
      * Send the HTTP request and return an HTTP response object
      *
      * @param string $method
@@ -888,21 +947,52 @@ class Zend_Http_Client
             $body = $this->_prepareBody();
             $headers = $this->_prepareHeaders();
 
+            // check that adapter supports streaming before using it
+            if(is_resource($body) && !($this->adapter instanceof Zend_Http_Client_Adapter_Stream)) {
+                /** @see Zend_Http_Client_Exception */
+                require_once 'Zend/Http/Client/Exception.php';
+                throw new Zend_Http_Client_Exception('Adapter does not support streaming');
+            }
+            
             // Open the connection, send the request and read the response
             $this->adapter->connect($uri->getHost(), $uri->getPort(),
                 ($uri->getScheme() == 'https' ? true : false));
 
+            if($this->config['output_stream']) {
+                if($this->adapter instanceof Zend_Http_Client_Adapter_Stream) {
+                    $stream = $this->_openTempStream();
+                    $this->adapter->setOutputStream($stream);
+                } else {
+                	/** @see Zend_Http_Client_Exception */
+                    require_once 'Zend/Http/Client/Exception.php';
+                    throw new Zend_Http_Client_Exception('Adapter does not support streaming');
+                }
+            } 
+                
             $this->last_request = $this->adapter->write($this->method,
                 $uri, $this->config['httpversion'], $headers, $body);
 
             $response = $this->adapter->read();
-            if (! $response) {
-                /** @see Zend_Http_Client_Exception */
-                require_once 'Zend/Http/Client/Exception.php';
-                throw new Zend_Http_Client_Exception('Unable to read response, or response is empty');
+	        if (! $response) {
+	            /** @see Zend_Http_Client_Exception */
+	            require_once 'Zend/Http/Client/Exception.php';
+	            throw new Zend_Http_Client_Exception('Unable to read response, or response is empty');
+	        }
+	
+	        if($this->config['output_stream']) {
+	            rewind($stream);
+	            // cleanup the adapter
+	            $this->adapter->setOutputStream(null);
+	            $response = Zend_Http_Response_Stream::fromStream($response, $stream);
+	            $response->setStreamName($this->_stream_name);
+	            if(!is_string($this->config['output_stream'])) {
+	                // we used temp name, will need to clean up
+	                $response->setCleanup(true);
+	            }
+	        } else {
+	            $response = Zend_Http_Response::fromString($response);
             }
-
-            $response = Zend_Http_Response::fromString($response);
+            
             if ($this->config['storeresponse']) {
                 $this->last_response = $response;
             }
@@ -1056,7 +1146,10 @@ class Zend_Http_Client
         if ($this->method == self::TRACE) {
             return '';
         }
-
+        
+        if (isset($this->raw_post_data) && is_resource($this->raw_post_data)) {
+            return $this->raw_post_data;
+        }
         // If mbstring overloads substr and strlen functions, we have to
         // override it's internal encoding
         if (function_exists('mb_internal_encoding') &&

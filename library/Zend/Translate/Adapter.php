@@ -112,7 +112,7 @@ abstract class Zend_Translate_Adapter {
             $id = 'Zend_Translate_' . $this->toString() . '_Options';
             $result = self::$_cache->load($id);
             if ($result) {
-                $this->_options   = unserialize($result);
+                $this->_options = $result;
             }
         }
 
@@ -270,7 +270,7 @@ abstract class Zend_Translate_Adapter {
 
         if (isset(self::$_cache) and ($change == true)) {
             $id = 'Zend_Translate_' . $this->toString() . '_Options';
-            self::$_cache->save( serialize($this->_options), $id, array('Zend_Translate'));
+            self::$_cache->save($this->_options, $id, array('Zend_Translate'));
         }
 
         return $this;
@@ -358,7 +358,7 @@ abstract class Zend_Translate_Adapter {
 
             if (isset(self::$_cache)) {
                 $id = 'Zend_Translate_' . $this->toString() . '_Options';
-                self::$_cache->save( serialize($this->_options), $id, array('Zend_Translate'));
+                self::$_cache->save($this->_options, $id, array('Zend_Translate'));
             }
         }
 
@@ -474,9 +474,8 @@ abstract class Zend_Translate_Adapter {
         $read = true;
         if (isset(self::$_cache)) {
             $id = 'Zend_Translate_' . md5(serialize($data)) . '_' . $this->toString();
-            $result = self::$_cache->load($id);
-            if ($result) {
-                $temp = unserialize($result);
+            $temp = self::$_cache->load($id);
+            if ($temp) {
                 $read = false;
             }
         }
@@ -518,7 +517,7 @@ abstract class Zend_Translate_Adapter {
 
         if (($read) and (isset(self::$_cache))) {
             $id = 'Zend_Translate_' . md5(serialize($data)) . '_' . $this->toString();
-            self::$_cache->save( serialize($temp), $id, array('Zend_Translate'));
+            self::$_cache->save($temp, $id, array('Zend_Translate'));
         }
 
         return $this;

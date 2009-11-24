@@ -686,6 +686,13 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testIgnoreHashValue()
+    {
+        $this->adapter->addInvalidFile();
+        $return = $this->adapter->getHash('crc32', 'test');
+        $this->assertEquals(array(), $return);
+    }
+
     public function testEmptyTempDirectoryDetection()
     {
         $this->adapter->_tmpDir = "";
@@ -716,6 +723,13 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testIgnoreFileSize()
+    {
+        $this->adapter->addInvalidFile();
+        $return = $this->adapter->getFileSize('test');
+        $this->assertEquals(array(), $return);
+    }
+
     public function testFileSizeByTmpName()
     {
         $options = $this->adapter->getOptions();
@@ -735,6 +749,13 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
         } catch (Zend_File_Transfer_Exception $e) {
             $this->assertContains('does not exist', $e->getMessage());
         }
+    }
+
+    public function testIgnoreMimeType()
+    {
+        $this->adapter->addInvalidFile();
+        $return = $this->adapter->getMimeType('test');
+        $this->assertEquals(array(), $return);
     }
 
     public function testMimeTypeByTmpName()
@@ -894,6 +915,22 @@ class Zend_File_Transfer_Adapter_AbstractTest_MockAdapter extends Zend_File_Tran
     public function isPathWriteable($path)
     {
         return parent::_isPathWriteable($path);
+    }
+
+    public function addInvalidFile()
+    {
+        $this->_files += array(
+            'test' => array(
+                'name'      => 'test.txt',
+                'type'      => 'image/jpeg',
+                'size'      => 0,
+                'tmp_name'  => '',
+                'options'   => array('ignoreNoFile' => true, 'useByteString' => true),
+                'validated' => false,
+                'received'  => false,
+                'filtered'  => false,
+            )
+        );
     }
 }
 

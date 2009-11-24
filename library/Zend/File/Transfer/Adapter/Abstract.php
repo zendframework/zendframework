@@ -1158,7 +1158,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 $result[$key] = hash_file($hash, $value['name']);
             } else if (file_exists($value['tmp_name'])) {
                 $result[$key] = hash_file($hash, $value['tmp_name']);
-            } else {
+            } else if (empty($value['options']['ignoreNoFile'])) {
                 require_once 'Zend/File/Transfer/Exception.php';
                 throw new Zend_File_Transfer_Exception("File '{$value['name']}' does not exist");
             }
@@ -1187,9 +1187,11 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 $size = sprintf("%u", @filesize($value['name']));
             } else if (file_exists($value['tmp_name'])) {
                 $size = sprintf("%u", @filesize($value['tmp_name']));
-            } else {
+            } else if (empty($value['options']['ignoreNoFile'])) {
                 require_once 'Zend/File/Transfer/Exception.php';
                 throw new Zend_File_Transfer_Exception("File '{$value['name']}' does not exist");
+            } else {
+                continue;
             }
 
             if ($value['options']['useByteString']) {
@@ -1223,9 +1225,11 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 $file = $value['name'];
             } else if (file_exists($value['tmp_name'])) {
                 $file = $value['tmp_name'];
-            } else {
+            } else if (empty($value['options']['ignoreNoFile'])) {
                 require_once 'Zend/File/Transfer/Exception.php';
                 throw new Zend_File_Transfer_Exception("File '{$value['name']}' does not exist");
+            } else {
+                continue;
             }
 
             if (class_exists('finfo', false)) {

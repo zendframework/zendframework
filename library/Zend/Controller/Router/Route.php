@@ -153,7 +153,6 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
      * @param string $route Map used to match with later submitted URL path
      * @param array $defaults Defaults for map variables with keys as variable names
      * @param array $reqs Regular expression requirements for variables (keys as variable names)
-     * @param array          $reqs       Regular expression requirements for variables (keys as variable names)
      * @param Zend_Translate $translator Translator to use for this instance
      */
     public function __construct($route, $defaults = array(), $reqs = array(), Zend_Translate $translator = null, $locale = null)

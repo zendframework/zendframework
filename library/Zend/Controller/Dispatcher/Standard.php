@@ -335,7 +335,7 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
         $dispatchDir = $this->getDispatchDirectory();
         $loadFile    = $dispatchDir . DIRECTORY_SEPARATOR . $this->classToFilename($className);
 
-        if (file_exists($loadFile)) {
+        if (Zend_Loader::isReadable($loadFile)) {
             include_once $loadFile;
         } else {
             require_once 'Zend/Controller/Dispatcher/Exception.php';

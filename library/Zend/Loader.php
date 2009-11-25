@@ -79,8 +79,7 @@ class Zend_Loader
             $file = basename($file);
             self::loadFile($file, $dirs, true);
         } else {
-            self::_securityCheck($file);
-            include $file;
+            self::loadFile($file);
         }
 
         if (!class_exists($class, false) && !interface_exists($class, false)) {

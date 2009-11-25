@@ -71,7 +71,7 @@ class Zend_Paginator_SerializableLimitIterator extends LimitIterator implements 
     }
 
     /**
-     * @paran string $data representation of the instance
+     * @param string $data representation of the instance
      */
     public function unserialize($data)
     {

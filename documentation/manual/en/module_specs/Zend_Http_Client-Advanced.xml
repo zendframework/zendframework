@@ -284,11 +284,15 @@ $client->setUri('http://christer:secret@example.com');
         <note>
             <title>Resetting parameters</title>
             <para>
-                Note that non-request specific headers are not reset when the
-                resetParameters method is used. As a matter of fact, only the
-                'Content-length' and 'Content-type' headers are reset. This
+                Note that non-request specific headers are not reset by default 
+                when the <methodname>resetParameters()</methodname> method is used. 
+                Only the 'Content-length' and 'Content-type' headers are reset. This
                 allows you to set-and-forget headers like 'Accept-language' and
                 'Accept-encoding'
+            </para>
+            <para>
+            To clean all headers and other data except for URI and method, use 
+            <methodname>resetParameters(true)</methodname>.
             </para>
         </note>
         <para>

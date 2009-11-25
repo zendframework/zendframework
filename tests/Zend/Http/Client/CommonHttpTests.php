@@ -237,9 +237,12 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
             'specialChars' => '<>$+ &?=[]^%',
             'array' => array('firstItem', 'secondItem', '3rdItem')
         );
-
+        
+        $headers = array("X-Foo" => "bar");
+        
         $this->client->setParameterPost($params);
         $this->client->setParameterGet($params);
+        $this->client->setHeaders($headers);
 
         $res = $this->client->request('POST');
 
@@ -251,6 +254,10 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         $this->assertNotContains(serialize($params), $res->getBody(),
             "returned body contains GET or POST parameters (it shouldn't!)");
+        $this->assertContains($headers["X-Foo"], $this->client->getHeader("X-Foo"), "Header not preserved by reset");
+
+        $this->client->resetParameters(true);
+        $this->assertNull($this->client->getHeader("X-Foo"), "Header preserved by reset(true)");
     }
 
     /**

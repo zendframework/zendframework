@@ -765,10 +765,14 @@ class Zend_Http_Client
      *
      * Should be used to reset the request parameters if the client is
      * used for several concurrent requests.
+     * 
+     * clearAll parameter controls if we clean just parameters or also
+     * headers and last_*
      *
+     * @param bool $clearAll Should all data be cleared?
      * @return Zend_Http_Client
      */
-    public function resetParameters()
+    public function resetParameters($clearAll = false)
     {
         // Reset parameter data
         $this->paramsGet     = array();
@@ -776,12 +780,18 @@ class Zend_Http_Client
         $this->files         = array();
         $this->raw_post_data = null;
 
-        // Clear outdated headers
-        if (isset($this->headers[strtolower(self::CONTENT_TYPE)])) {
-            unset($this->headers[strtolower(self::CONTENT_TYPE)]);
-        }
-        if (isset($this->headers[strtolower(self::CONTENT_LENGTH)])) {
-            unset($this->headers[strtolower(self::CONTENT_LENGTH)]);
+        if($clearAll) {
+            $this->headers = array();
+            $this->last_request = null;
+            $this->last_response = null;
+        } else {
+	        // Clear outdated headers
+	        if (isset($this->headers[strtolower(self::CONTENT_TYPE)])) {
+	            unset($this->headers[strtolower(self::CONTENT_TYPE)]);
+	        }
+	        if (isset($this->headers[strtolower(self::CONTENT_LENGTH)])) {
+	            unset($this->headers[strtolower(self::CONTENT_LENGTH)]);
+	        }
         }
 
         return $this;

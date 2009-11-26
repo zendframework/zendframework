@@ -178,7 +178,7 @@ class Zend_Cache_Backend_Memcached extends Zend_Cache_Backend implements Zend_Ca
     public function load($id, $doNotTestCacheValidity = false)
     {
         $tmp = $this->_memcache->get($id);
-        if (is_array($tmp)) {
+        if (is_array($tmp) && isset($tmp[0])) {
             return $tmp[0];
         }
         return false;

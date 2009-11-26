@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18840 -->
+<!-- EN-Revision: 19229 -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - 高度な使用法</title>
 
@@ -279,11 +279,15 @@ $client->setUri('http://christer:secret@example.com');
         <note>
             <title>パラメータのリセット</title>
             <para>
-                リクエスト固有でないヘッダは、resetParameters
-                メソッドを使用してもリセットされません。実際のところ、リセットされるのは
-                'Content-length' と 'Content-type' だけです。これにより、
-                たとえば 'Accept-language' や 'Accept-encoding'
+                リクエスト固有でないヘッダは、<methodname>resetParameters()</methodname>
+                メソッドを使用した時、既定ではリセットされません。
+                'Content-length' と 'Content-type' ヘッダのみリセットされます。
+                これにより、たとえば 'Accept-language' や 'Accept-encoding'
                 のようなヘッダを付け忘れることを防ぎます。
+            </para>
+            <para>
+                ヘッダの全てと、URIやメソッド以外のその他のデータを消去するには、
+                <methodname>resetParameters(true)</methodname> を使用してください。
             </para>
         </note>
         <para>
@@ -335,5 +339,66 @@ $response = $client->request(Zend_Http_Client::GET);
 $_SESSION['cookiejar'] = $client->getCookieJar();
 ]]></programlisting>
         </example>
+    </sect2>
+    <sect2 id="zend.http.client.streaming">
+        <title>データ・ストリーミング</title>
+        <para>
+            <!-- TODO : to be translated -->
+            By default, <classname>Zend_Http_Client</classname> accepts and returns data as PHP strings.
+            However, in many cases there are big files to be sent or received, thus keeping them
+            in memory might be unnecessary or too expensive. For these cases, <classname>Zend_Http_Client</classname>
+            supports reading data from files (and in general, PHP streams) and writing data to files (streams).  
+        </para>
+        <para>
+         In order to use stream to pass data to <classname>Zend_Http_Client</classname>, 
+         use <methodname>setRawData()</methodname> method with data argument being stream resource
+         (e.g., result of <methodname>fopen()</methodname>).
+            <example id="zend.http.client.streaming.example-1">
+                <title>ストリーミングでHTTP サーバにファイルを送信</title>
+                <programlisting language="php"><![CDATA[
+]]>
+$fp = fopen("mybigfile.zip", "r");
+$client->setRawData($fp, 'application/zip')->request('PUT');
+</programlisting>
+            </example>
+        </para>
+        <para>
+        Only PUT requests currently support sending streams to HTTP server.
+        </para>
+        
+        <para>
+        In order to receive data from the server as stream, use <methodname>setStream()</methodname>.
+        Optional argument specifies the filename where the data will be stored. If the argument is just 
+        TRUE (default), temporary file will be used and will be deleted once response object is destroyed.
+        Setting argument to FALSE disables the streaming functionality.  
+        </para>
+        
+        <para>
+        When using streaming, <methodname>request()</methodname> method will return object of class
+        <classname>Zend_Http_Client_Response_Stream</classname>, which has two useful methods:
+        <methodname>getStreamName()</methodname> will return the name of the file where the response is stored, 
+        and <methodname>getStream()</methodname> will return stream from which the response could be read.   
+        </para>
+        
+        <para>
+        You can either write the response to pre-defined file, or use temporary file for storing it and 
+        send it out or write it to another file using regular stream functions.  
+        <example id="zend.http.client.streaming.example-2">
+                <title>ストリーミングでHTTP サーバからファイルを受信</title>
+                <programlisting language="php"><![CDATA[
+]]>
+$client->setStreaming(); // 一時ファイルを使用
+$response = $client->request('GET');
+// ファイルをコピー
+copy($response->getStreamName(), "my/downloads/file");
+// ストリームを使用
+$fp = fopen("my/downloads/file2", "w");
+stream_copy_to_stream($response->getStream(), $fp);
+// 既知のファイルに書き出すこともできます
+$client->setStreaming("my/downloads/myfile)->request('GET');
+</programlisting>
+            </example>
+        </para>
+        
     </sect2>
 </sect1>

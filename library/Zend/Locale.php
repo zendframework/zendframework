@@ -819,10 +819,7 @@ class Zend_Locale
             $locale = new Zend_Locale($locale);
         }
 
-        if ($locale instanceof Zend_Locale) {
-            $locale = $locale->toString();
-        }
-
+        $locale = self::_prepareLocale($locale);
         return $locale;
     }
 

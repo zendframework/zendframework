@@ -816,6 +816,8 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
 
         $locale = new Zend_LocaleTestHelper('de_Latn_DE');
         $this->assertEquals('de_DE', $locale->toString());
+
+        $this->assertEquals('fr_FR', Zend_Locale::findLocale('fr-Arab-FR'));
     }
 
     /**

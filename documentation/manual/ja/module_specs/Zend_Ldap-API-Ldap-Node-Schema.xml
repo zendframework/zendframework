@@ -364,8 +364,8 @@
         <title>OpenLDAP</title>
 
         <para>
-            さらに、上記の共通メソッドは <code>Zend_Ldap_Node_Schema_OpenLDAP</code>
-            のインスタンスを利用します。
+            さらに、上記の共通メソッドが <code>Zend_Ldap_Node_Schema_OpenLDAP</code>
+            のインスタンスに適用されます。
         </para>
 
         <table id="zend.ldap.api.reference.zend-ldap-node-schema.openldap.table">

@@ -96,7 +96,12 @@ class Zend_Translate_Adapter_Tmx extends Zend_Translate_Adapter {
                     break;
                 case 'tuv':
                     if (isset($attrib['xml:lang']) === true) {
-                        $this->_tuv = $attrib['xml:lang'];
+                        if (Zend_Locale::isLocale($attrib['xml:lang'])) {
+                            $this->_tuv = Zend_Locale::findLocale($attrib['xml:lang']);
+                        } else {
+                            $this->_tuv = $attrib['xml:lang'];
+                        }
+
                         if (isset($this->_data[$this->_tuv]) === false) {
                             $this->_data[$this->_tuv] = array();
                         }

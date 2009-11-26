@@ -222,6 +222,21 @@ class Zend_Translate_Adapter_TmxTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-8375
+     */
+    public function testTranslate_ZF8375()
+    {
+        $adapter = new Zend_Translate_Adapter_Tmx(dirname(__FILE__) . '/_files/translation_en_8375.tmx', 'en', array('disableNotices' => true));
+        $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
+        $this->assertEquals('Message 1 (en)', $adapter->_('Message 1'));
+        $this->assertEquals('Message 6', $adapter->translate('Message 6'));
+        $this->assertEquals('Küchen Möbel (en)', $adapter->translate('Cooking furniture'));
+        $this->assertEquals('Cooking furniture (en)', $adapter->translate('Küchen Möbel'));
+        $this->assertEquals('Message 1 (fr)', $adapter->translate('Message 1', 'fr_FR'));
+        $this->assertEquals('Message 1 (fr)', $adapter->_('Message 1', 'fr_FR'));
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

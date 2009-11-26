@@ -31,6 +31,11 @@ require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHe
 require_once 'Zend/Uri.php';
 
 /**
+ * @see Zend_Uri_Http
+ */
+require_once 'Zend/Uri/Http.php';
+
+/**
  * PHPUnit test case
  */
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -198,7 +203,7 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
      * Test that setQuery() can handle unencoded query parameters (as other
      * browsers do), ZF-1934
      *
-     * @link   http://framework.zend.com/issues/browse/ZF-1934
+     * @group ZF-1934
      * @return void
      */
     public function testUnencodedQueryParameters()
@@ -265,10 +270,14 @@ class Zend_Uri_HttpTest extends PHPUnit_Framework_TestCase
     /**
      * Test that an extremely long URI does not break things up
      *
-     * @link http://framework.zend.com/issues/browse/ZF-3712
+     * @group ZF-3712
+     * @group ZF-7840
      */
     public function testVeryLongUriZF3712()
     {
+        if(!defined('TESTS_ZEND_URI_CRASH_TEST_ENABLED') || constant('TESTS_ZEND_URI_CRASH_TEST_ENABLED') == false) {
+            $this->markTestSkipped('The constant TESTS_ZEND_URI_CRASH_TEST_ENABLED has to be defined and true to allow the test to work.');
+        }
         $uri = file_get_contents(dirname(realpath(__FILE__)) . DIRECTORY_SEPARATOR .
            '_files' . DIRECTORY_SEPARATOR . 'testVeryLongUriZF3712.txt');
 

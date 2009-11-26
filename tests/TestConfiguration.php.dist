@@ -629,6 +629,17 @@ define('TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PRIVATE_KEY', 'private mailhide ke
 define('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI', false);
 
 /**
+ * Zend_Uri tests
+ *
+ * Setting CRASH_TEST_ENABLED to true will enable some tests that may
+ * potentially crash PHP on some systems, due to very deep-nesting regular
+ * expressions.
+ * 
+ * Only do this if you know what you are doing!
+ */
+define('TESTS_ZEND_URI_CRASH_TEST_ENABLED', false);
+
+/**
  * Zend_Validate tests
  *
  * Set ONLINE_ENABLED if you wish to run validators that require network 

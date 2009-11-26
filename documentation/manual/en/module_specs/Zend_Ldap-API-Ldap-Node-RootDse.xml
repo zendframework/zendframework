@@ -108,9 +108,9 @@
                     </entry>
                     <entry>
                         Checks whether a given attribute exists. If
-                        <varname>$emptyExists</varname> is <constant>FALSE</constant> empty attributes
+                        <varname>$emptyExists</varname> is <constant>FALSE</constant>, empty attributes
                         (containing only array()) are treated as non-existent returning
-                        <constant>FALSE</constant>. If <varname>$emptyExists</varname> is true empty
+                        <constant>FALSE</constant>. If <varname>$emptyExists</varname> is true, empty
                         attributes are treated as existent returning <constant>TRUE</constant>. In
                         this case the method returns <constant>FALSE</constant> only if the
                         attribute name is missing in the key-collection.

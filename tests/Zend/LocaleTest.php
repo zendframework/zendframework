@@ -821,6 +821,16 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * test SunLocales
+     * expected boolean
+     */
+    public function testSunLocale()
+    {
+        $this->assertTrue(Zend_LocaleTestHelper::isLocale('de_DE.utf8'));
+        $this->assertFalse(Zend_LocaleTestHelper::isLocale('de.utf8.DE'));
+    }
+
+    /**
      * @ZF-8030
      */
     public function testFailedLocaleOnPreTranslations()

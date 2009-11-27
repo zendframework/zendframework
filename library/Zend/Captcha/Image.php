@@ -94,7 +94,7 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
 
     /**
      * Image to use as starting point
-     * Default is blank image. If ptovided, should be PNG image.
+     * Default is blank image. If provided, should be PNG image.
      *
      * @var string
      */

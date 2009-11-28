@@ -521,19 +521,17 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         if (array_key_exists('source', $this->_data)) {
             return $this->_data['source'];
         }
-
-        if ($this->_getAtomType() == Zend_Feed_Reader::TYPE_ATOM_10) {
-            $source = $this->_xpath->query($this->getXpathPrefix() . '/atom:source[1]');
-        } else {
-            $source = null;
+        
+        $source = null;
+        if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10) {
+            $list = $this->_xpath->query($this->getXpathPrefix() . '/atom:source[1]');
+            if ($list->length) {
+                $element = $list->item(0);
+                $source = new Zend_Feed_Reader_Feed_Atom_Source($element, $this->getXpathPrefix());
+            }
         }
         
-        if ($source) {
-            $source = new Zend_Feed_Reader_Feed_Atom_Source($source, $this->getXpathPrefix());
-        }
-
         $this->_data['source'] = $source;
-
         return $this->_data['source']; 
     }
 

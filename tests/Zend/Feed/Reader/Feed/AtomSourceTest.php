@@ -22,7 +22,6 @@
 
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'Zend/Feed/Reader.php';
-require_once 'Zend/Feed/Reader/FeedAbstract.php';
 
 /**
  * @category   Zend

@@ -44,7 +44,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
      * @param  DOMDocument $dom
      * @param  string $type
      */
-    public function __construct(DomDocument $dom, $type = null)
+    public function __construct(DOMDocument $dom, $type = null)
     {
         parent::__construct($dom, $type);
         $atomClass = Zend_Feed_Reader::getPluginLoader()->getClassName('Atom_Feed');
@@ -356,6 +356,7 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
     /**
      * Read all entries to the internal entries array
      *
+     * @return void
      */
     protected function _indexEntries()
     {

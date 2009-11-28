@@ -45,6 +45,11 @@ require_once 'Zend/Uri.php';
 require_once 'Zend/Feed/Reader/Collection/Category.php';
 
 /**
+ * @see Zend_Feed_Reader_Feed_Atom_Source
+ */
+require_once 'Zend/Feed/Reader/Feed/Atom/Source.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -504,6 +509,32 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         $this->_data['categories'] = $categoryCollection;
 
         return $this->_data['categories'];
+    }
+    
+    /**
+     * Get source feed metadata from the entry
+     *
+     * @return Zend_Feed_Reader_Feed_Atom_Source|null
+     */
+    public function getSource()
+    {
+        if (array_key_exists('source', $this->_data)) {
+            return $this->_data['source'];
+        }
+
+        if ($this->_getAtomType() == Zend_Feed_Reader::TYPE_ATOM_10) {
+            $source = $this->_xpath->query($this->getXpathPrefix() . '/atom:source[1]');
+        } else {
+            $source = null;
+        }
+        
+        if ($source) {
+            $source = new Zend_Feed_Reader_Feed_Atom_Source($source, $this->getXpathPrefix());
+        }
+
+        $this->_data['source'] = $source;
+
+        return $this->_data['source']; 
     }
 
     /**

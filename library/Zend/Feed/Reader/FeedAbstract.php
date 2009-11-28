@@ -29,7 +29,6 @@ require_once 'Zend/Feed/Reader.php';
  */
 require_once 'Zend/Feed/Reader/Entry/Atom.php';
 
-
 /**
  * @see Zend_Feed_Reader_Entry_Rss
  */
@@ -83,6 +82,11 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
      */
     protected $_xpath = null;
 
+    /**
+     * Array of loaded extensions
+     *
+     * @var array
+     */
     protected $_extensions = array();
 
     /**
@@ -225,16 +229,6 @@ abstract class Zend_Feed_Reader_FeedAbstract implements Zend_Feed_Reader_FeedInt
     public function rewind()
     {
         $this->_entriesKey = 0;
-    }
-
-    /**
-     * Return the feed as an array
-     *
-     * @return array
-     */
-    public function toArray() // untested
-    {
-        return $this->_data;
     }
 
     /**

@@ -366,6 +366,24 @@ class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract impleme
 
         return $this->_data['categories'];
     }
+    
+    /**
+     * Get source feed metadata from the entry
+     *
+     * @return Zend_Feed_Reader_Feed_Atom_Source|null
+     */
+    public function getSource()
+    {
+        if (array_key_exists('source', $this->_data)) {
+            return $this->_data['source'];
+        }
+
+        $source = $this->getExtension('Atom')->getSource();
+
+        $this->_data['source'] = $source;
+
+        return $this->_data['source']; 
+    }
 
     /**
      * Set the XPath query (incl. on all Extensions)

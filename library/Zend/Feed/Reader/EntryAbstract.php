@@ -170,16 +170,6 @@ abstract class Zend_Feed_Reader_EntryAbstract
     }
 
     /**
-     * Serialize the entry to an array
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->_data;
-    }
-
-    /**
      * Get registered extensions
      *
      * @return array

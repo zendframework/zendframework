@@ -114,6 +114,22 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
         $this->assertRegexp("/<input[^>]*?$expect/", $html, $html);
     }
 
+    /*
+     * @see ZF-8268
+     * @group ZF-8268
+     */
+    public function testLabelIdIsCorrect()
+    {
+        require_once 'Zend/Form.php';
+        $form = new Zend_Form();
+        $form->setElementsBelongTo('comment');
+        $this->element->setLabel("My Captcha");
+        $form->addElement($this->element);
+        $html = $form->render($this->getView());
+        $expect = sprintf('for="comment-%s-input"', $this->element->getName());
+        $this->assertRegexp("/<label [^>]*?$expect/", $html, $html);
+    }
+    
     public function testTimeoutPopulatedByDefault()
     {
         $ttl = $this->captcha->getTimeout();

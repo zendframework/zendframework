@@ -277,7 +277,6 @@ class Zend_Feed_Reader_Feed_AtomSourceTest extends PHPUnit_Framework_TestCase
     /**
      * Get Pubsubhubbub Hubs
      */
-
     public function testGetsHubsFromAtom10()
     {
         $feed = Zend_Feed_Reader::importString(
@@ -293,7 +292,6 @@ class Zend_Feed_Reader_Feed_AtomSourceTest extends PHPUnit_Framework_TestCase
     /**
      * Get category data
      */
-    
     public function testGetsCategoriesFromAtom10()
     {
         $feed = Zend_Feed_Reader::importString(

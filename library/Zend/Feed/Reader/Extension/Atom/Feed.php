@@ -379,6 +379,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
             return $this->_data['hubs'];
         }
         $hubs = array();
+        
         $list = $this->_xpath->query($this->getXpathPrefix()
             . '//atom:link[@rel="hub"]/@href');
 
@@ -428,7 +429,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
             return $this->_data['categories'];
         }
 
-        if ($this->_getAtomType() == Zend_Feed_Reader::TYPE_ATOM_10) {
+        if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10) {
             $list = $this->_xpath->query($this->getXpathPrefix() . '//atom:category');
         } else {
             /**

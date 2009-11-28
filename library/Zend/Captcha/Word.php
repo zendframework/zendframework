@@ -93,6 +93,13 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
      * @var integer
      */
     protected $_timeout = 300;
+    
+    /**
+     * Should generate() keep session or create a new one?
+     * 
+     * @var boolean
+     */
+    protected $_keepSession = false;
 
     /**#@+
      * Error codes
@@ -210,6 +217,18 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
         return $this->_timeout;
     }
 
+	/**
+	 * Sets if session should be preserved on generate()
+	 * 
+	 * @param $keepSession Should session be kept on generate()?
+	 * @return Zend_Captcha_Word
+	 */
+	public function setKeepSession($keepSession) 
+	{
+		$this->_keepSession = $keepSession;
+		return $this;
+	}
+
     /**
      * Get session object
      *
@@ -239,6 +258,9 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
     public function setSession(Zend_Session_Namespace $session)
     {
         $this->_session = $session;
+        if($session) {
+            $this->_keepSession = true;
+        }
         return $this;
     }
 
@@ -303,10 +325,12 @@ abstract class Zend_Captcha_Word extends Zend_Captcha_Base
      */
     public function generate()
     {
-        $this->_session = null;
-        $id             = $this->_generateRandomId();
+        if(!$this->_keepSession) {
+            $this->_session = null;   
+        }
+        $id = $this->_generateRandomId();
         $this->_setId($id);
-        $word           = $this->_generateWord();
+        $word = $this->_generateWord();
         $this->_setWord($word);
         return $id;
     }

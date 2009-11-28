@@ -25,16 +25,6 @@
 require_once 'Zend/Feed/Reader.php';
 
 /**
- * @see Zend_Feed_Reader_Entry_Atom
- */
-require_once 'Zend/Feed/Reader/Entry/Atom.php';
-
-/**
- * @see Zend_Feed_Reader_Entry_Rss
- */
-require_once 'Zend/Feed/Reader/Entry/Rss.php';
-
-/**
  * @see Zend_feed_Reader_FeedInterface
  */
 require_once 'Zend/Feed/Reader/FeedInterface.php';

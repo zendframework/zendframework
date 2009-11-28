@@ -282,6 +282,23 @@ class Zend_Captcha_FigletTest extends PHPUnit_Framework_TestCase
         $input = array("id" => $this->captcha->getId(), "input" => $this->captcha->getWord());
         $this->assertTrue($this->element->isValid($input));
     }
+    
+    /**
+     * @group ZF-5728
+     */
+    public function testSetSessionWorks()
+    {
+        if(headers_sent($file, $line)) {
+            $this->markTestSkipped("Cannot use sessions because headers already sent");
+        }
+        require_once 'Zend/Session/Namespace.php';
+        $session = new Zend_Session_Namespace('captcha');
+        $this->captcha->setSession($session);
+        $this->testCaptchaIsRendered();
+        $input = array("id" => $this->captcha->getId(), "input" => $this->captcha->getWord());
+        $this->assertTrue($this->element->isValid($input));
+        $this->assertEquals($session->word, $this->captcha->getWord());
+    }
 }
 
 class Zend_Captcha_FigletTest_SessionContainer

@@ -752,7 +752,7 @@ class Zend_Locale
             return true;
         }
 
-        if (($locale !== null) and !is_string($locale) and !is_array($locale)) {
+        if (($locale === null) || (!is_string($locale) and !is_array($locale))) {
             return false;
         }
 

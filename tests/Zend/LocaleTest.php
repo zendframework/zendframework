@@ -795,7 +795,7 @@ class Zend_LocaleTest extends PHPUnit_Framework_TestCase
         $locale = $value->toString();
         $this->assertTrue(!empty($locale));
 
-        $this->assertTrue(Zend_LocaleTestHelper::isLocale(null));
+        $this->assertFalse(Zend_LocaleTestHelper::isLocale(null));
 
         $value = new Zend_LocaleTestHelper(0);
         $value = $value->toString();

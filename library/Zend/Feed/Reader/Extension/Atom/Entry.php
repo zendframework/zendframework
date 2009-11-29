@@ -86,13 +86,13 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             return $this->_data['authors'];
         }
 
-        $authors = $this->_xpath->query(
+        $authors = $this->getXpath()->query(
             $this->getXpathPrefix() . '//atom:author' . '|'
                 . $this->getXpathPrefix(). '//atom:contributor'
         );
 
         if (!$authors->length) {
-            $authors = $this->_xpath->query(
+            $authors = $this->getXpath()->query(
                 '//atom:author' . '|' . '//atom:contributor'
             );
         }
@@ -127,7 +127,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             return $this->_data['content'];
         }
 
-        $content = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:content)');
+        $content = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:content)');
 
         if ($content) {
             $content =  html_entity_decode($content, ENT_QUOTES, $this->getEncoding());
@@ -155,10 +155,10 @@ class Zend_Feed_Reader_Extension_Atom_Entry
 
         $date = null;
 
-        if ($this->getType() === Zend_Feed_Reader::TYPE_ATOM_03) {
-            $dateCreated = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:created)');
+        if ($this->_getAtomType() === Zend_Feed_Reader::TYPE_ATOM_03) {
+            $dateCreated = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:created)');
         } else {
-            $dateCreated = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:published)');
+            $dateCreated = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:published)');
         }
 
         if ($dateCreated) {
@@ -184,10 +184,10 @@ class Zend_Feed_Reader_Extension_Atom_Entry
 
         $date = null;
 
-        if ($this->getType() === Zend_Feed_Reader::TYPE_ATOM_03) {
-            $dateModified = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:modified)');
+        if ($this->_getAtomType() === Zend_Feed_Reader::TYPE_ATOM_03) {
+            $dateModified = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:modified)');
         } else {
-            $dateModified = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:updated)');
+            $dateModified = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:updated)');
         }
 
         if ($dateModified) {
@@ -211,7 +211,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             return $this->_data['description'];
         }
 
-        $description = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:summary)');
+        $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:summary)');
 
         if (!$description) {
             $description = null;
@@ -237,7 +237,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
 
         $enclosure = null;
 
-        $nodeList = $this->_xpath->query($this->getXpathPrefix() . '/atom:link[@rel="enclosure"]');
+        $nodeList = $this->getXpath()->query($this->getXpathPrefix() . '/atom:link[@rel="enclosure"]');
 
         if ($nodeList->length > 0) {
             $enclosure = new stdClass();
@@ -262,7 +262,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             return $this->_data['id'];
         }
 
-        $id = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:id)');
+        $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:id)');
 
         if (!$id) {
             if ($this->getPermalink()) {
@@ -290,12 +290,12 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             return $this->_data['baseUrl'];
         }
 
-        $baseUrl = $this->_xpath->evaluate('string('
+        $baseUrl = $this->getXpath()->evaluate('string('
             . $this->getXpathPrefix() . '/@xml:base[1]'
         . ')');
 
         if (!$baseUrl) {
-            $baseUrl = $this->_xpath->evaluate('string(//@xml:base[1])');
+            $baseUrl = $this->getXpath()->evaluate('string(//@xml:base[1])');
         }
 
         if (!$baseUrl) {
@@ -339,7 +339,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
 
         $links = array();
 
-        $list = $this->_xpath->query(
+        $list = $this->getXpath()->query(
             $this->getXpathPrefix() . '//atom:link[@rel="alternate"]/@href' . '|' .
             $this->getXpathPrefix() . '//atom:link[not(@rel)]/@href'
         );
@@ -376,7 +376,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             return $this->_data['title'];
         }
 
-        $title = $this->_xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:title)');
+        $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:title)');
 
         if (!$title) {
             $title = null;
@@ -402,8 +402,8 @@ class Zend_Feed_Reader_Extension_Atom_Entry
 
         $count = null;
 
-        $this->_xpath->registerNamespace('thread10', 'http://purl.org/syndication/thread/1.0');
-        $list = $this->_xpath->query(
+        $this->getXpath()->registerNamespace('thread10', 'http://purl.org/syndication/thread/1.0');
+        $list = $this->getXpath()->query(
             $this->getXpathPrefix() . '//atom:link[@rel="replies"]/@thread10:count'
         );
 
@@ -429,7 +429,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
 
         $link = null;
 
-        $list = $this->_xpath->query(
+        $list = $this->getXpath()->query(
             $this->getXpathPrefix() . '//atom:link[@rel="replies" and @type="text/html"]/@href'
         );
 
@@ -456,7 +456,7 @@ class Zend_Feed_Reader_Extension_Atom_Entry
 
         $link = null;
 
-        $list = $this->_xpath->query(
+        $list = $this->getXpath()->query(
             $this->getXpathPrefix() . '//atom:link[@rel="replies" and @type="application/'.$type.'+xml"]/@href'
         );
 
@@ -481,16 +481,16 @@ class Zend_Feed_Reader_Extension_Atom_Entry
             return $this->_data['categories'];
         }
 
-        if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10) {
-            $list = $this->_xpath->query($this->getXpathPrefix() . '//atom:category');
+        if ($this->_getAtomType() == Zend_Feed_Reader::TYPE_ATOM_10) {
+            $list = $this->getXpath()->query($this->getXpathPrefix() . '//atom:category');
         } else {
             /**
              * Since Atom 0.3 did not support categories, it would have used the
              * Dublin Core extension. However there is a small possibility Atom 0.3
              * may have been retrofittied to use Atom 1.0 instead.
              */
-            $this->_xpath->registerNamespace('atom10', Zend_Feed_Reader::NAMESPACE_ATOM_10);
-            $list = $this->_xpath->query($this->getXpathPrefix() . '//atom10:category');
+            $this->getXpath()->registerNamespace('atom10', Zend_Feed_Reader::NAMESPACE_ATOM_10);
+            $list = $this->getXpath()->query($this->getXpathPrefix() . '//atom10:category');
         }
 
         if ($list->length) {
@@ -523,8 +523,9 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         }
         
         $source = null;
+        // TODO: Investigate why _getAtomType() fails here. Is it even needed?
         if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10) {
-            $list = $this->_xpath->query($this->getXpathPrefix() . '/atom:source[1]');
+            $list = $this->getXpath()->query($this->getXpathPrefix() . '/atom:source[1]');
             if ($list->length) {
                 $element = $list->item(0);
                 $source = new Zend_Feed_Reader_Feed_Atom_Source($element, $this->getXpathPrefix());
@@ -596,18 +597,12 @@ class Zend_Feed_Reader_Extension_Atom_Entry
      */
     protected function _registerNamespaces()
     {
-        if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10
-            || $this->getType() == Zend_Feed_Reader::TYPE_ATOM_03
-        ) {
-            return; // pre-registered at Feed level
-        }
-        $atomDetected = $this->_getAtomType();
-        switch ($atomDetected) {
+        switch ($this->_getAtomType()) {
             case Zend_Feed_Reader::TYPE_ATOM_03:
-                $this->_xpath->registerNamespace('atom', Zend_Feed_Reader::NAMESPACE_ATOM_03);
+                $this->getXpath()->registerNamespace('atom', Zend_Feed_Reader::NAMESPACE_ATOM_03);
                 break;
             default:
-                $this->_xpath->registerNamespace('atom', Zend_Feed_Reader::NAMESPACE_ATOM_10);
+                $this->getXpath()->registerNamespace('atom', Zend_Feed_Reader::NAMESPACE_ATOM_10);
                 break;
         }
     }
@@ -617,17 +612,16 @@ class Zend_Feed_Reader_Extension_Atom_Entry
      */
     protected function _getAtomType()
     {
-        $nslist = $this->getDomDocument()->documentElement->attributes;
-        if (!$nslist->length) {
-            return null;
+        $dom = $this->getDomDocument();
+        $prefixAtom03 = $dom->lookupPrefix(Zend_Feed_Reader::NAMESPACE_ATOM_03);
+        $prefixAtom10 = $dom->lookupPrefix(Zend_Feed_Reader::NAMESPACE_ATOM_10);
+        if ($dom->isDefaultNamespace(Zend_Feed_Reader::NAMESPACE_ATOM_10)
+        || !empty($prefixAtom10)) {
+            return Zend_Feed_Reader::TYPE_ATOM_10;
         }
-        foreach ($nslist as $ns) {
-            if ($ns->value == Zend_Feed_Reader::NAMESPACE_ATOM_10) {
-                return Zend_Feed_Reader::TYPE_ATOM_10;
-            }
-            if ($ns->value == Zend_Feed_Reader::NAMESPACE_ATOM_03) {
-                return Zend_Feed_Reader::TYPE_ATOM_03;
-            }
+        if ($dom->isDefaultNamespace(Zend_Feed_Reader::NAMESPACE_ATOM_03)
+        || !empty($prefixAtom03)) {
+            return Zend_Feed_Reader::TYPE_ATOM_03;
         }
     }
 }

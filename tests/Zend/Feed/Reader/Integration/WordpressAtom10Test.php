@@ -39,6 +39,7 @@ class Zend_Feed_Reader_Integration_WordpressAtom10Test extends PHPUnit_Framework
 
     public function setup()
     {
+        Zend_Feed_Reader::reset();
         $this->_feedSamplePath = dirname(__FILE__) . '/_files/wordpress-atom10.xml';
         $this->_options = Zend_Date::setOptions();
         foreach($this->_options as $k=>$v) {

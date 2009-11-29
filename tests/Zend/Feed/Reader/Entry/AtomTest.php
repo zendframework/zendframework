@@ -43,6 +43,7 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
 
     public function setup()
     {
+        Zend_Feed_Reader::reset();
         if (Zend_Registry::isRegistered('Zend_Locale')) {
             $registry = Zend_Registry::getInstance();
             unset($registry['Zend_Locale']);
@@ -93,6 +94,7 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
 
     /**
      * Get Id (Unencoded Text)
+     * @group ZFR003
      */
     public function testGetsIdFromAtom03()
     {

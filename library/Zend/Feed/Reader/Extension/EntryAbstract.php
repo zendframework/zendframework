@@ -86,7 +86,7 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
         if (!is_null($type)) {
             $this->_data['type'] = $type;
         } else {
-            $this->_data['type'] = Zend_Feed_Reader::detectType($feed);
+            $this->_data['type'] = Zend_Feed_Reader::detectType($entry->ownerDocument, true);
         }
         // set the XPath query prefix for the entry being queried
         if ($this->getType() == Zend_Feed_Reader::TYPE_RSS_10
@@ -153,6 +153,9 @@ abstract class Zend_Feed_Reader_Extension_EntryAbstract
      */
     public function getXpath()
     {
+        if (!$this->_xpath) {
+            $this->setXpath(new DOMXPath($this->getDomDocument()));
+        }
         return $this->_xpath;
     }
 

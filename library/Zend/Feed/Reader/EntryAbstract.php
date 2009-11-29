@@ -154,6 +154,9 @@ abstract class Zend_Feed_Reader_EntryAbstract
      */
     public function getXpath()
     {
+        if (!$this->_xpath) {
+            $this->setXpath(new DOMXPath($this->getDomDocument()));
+        }
         return $this->_xpath;
     }
 

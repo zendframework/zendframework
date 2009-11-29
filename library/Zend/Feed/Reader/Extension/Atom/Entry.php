@@ -615,13 +615,13 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         $dom = $this->getDomDocument();
         $prefixAtom03 = $dom->lookupPrefix(Zend_Feed_Reader::NAMESPACE_ATOM_03);
         $prefixAtom10 = $dom->lookupPrefix(Zend_Feed_Reader::NAMESPACE_ATOM_10);
-        if ($dom->isDefaultNamespace(Zend_Feed_Reader::NAMESPACE_ATOM_10)
-        || !empty($prefixAtom10)) {
-            return Zend_Feed_Reader::TYPE_ATOM_10;
-        }
         if ($dom->isDefaultNamespace(Zend_Feed_Reader::NAMESPACE_ATOM_03)
         || !empty($prefixAtom03)) {
             return Zend_Feed_Reader::TYPE_ATOM_03;
+        }
+        if ($dom->isDefaultNamespace(Zend_Feed_Reader::NAMESPACE_ATOM_10)
+        || !empty($prefixAtom10)) {
+            return Zend_Feed_Reader::TYPE_ATOM_10;
         }
     }
 }

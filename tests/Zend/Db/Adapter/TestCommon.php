@@ -2014,4 +2014,44 @@ abstract class Zend_Db_Adapter_TestCommon extends Zend_Db_TestSetup
         $quotedString = $this->_db->quoteInto('? = bar', 'foo', NULL, 1);
         $this->assertEquals("'foo' = bar", $quotedString);
     }
+
+    /**
+     * @group ZF-8399
+     */
+    public function testLongQueryWithTextField()
+    {
+        // create test table using no identifier quoting
+        $this->_util->createTable('zf_longquery', array(
+            'id'    => 'INTEGER NOT NULL',
+            'stuff' => 'TEXT NOT NULL'
+        ));
+        $tableName = $this->_util->getTableName('zf_longquery');
+
+        // insert into the table
+        $longValue = str_repeat('x', 4000);
+        $numRows = $this->_db->insert($tableName, array(
+            'id' => 1,
+            'stuff' => $longValue
+        ));
+
+        $quotedTableName = $this->_db->quoteIdentifier('zf_longquery');
+        $sql = "INSERT INTO $quotedTableName VALUES (2, '$longValue')";
+        $this->_db->query($sql);
+
+        // check if the row was inserted as expected
+        $select = $this->_db->select()->from($tableName, array('id', 'stuff'));
+
+        $stmt = $this->_db->query($select);
+        $fetched = $stmt->fetchAll(Zend_Db::FETCH_NUM);
+        $a = array(
+            0 => array(0 => 1, 1 => $longValue),
+            1 => array(0 => 2, 1 => $longValue)
+        );
+        $this->assertEquals($a, $fetched,
+            'result of query not as expected');
+
+        // clean up
+        unset($stmt);
+        $this->_util->dropTable($tableName);
+    }
 }

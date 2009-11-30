@@ -252,6 +252,14 @@ class Zend_Db_Adapter_Pdo_OciTest extends Zend_Db_Adapter_Pdo_TestCommon
         $this->assertEquals($expected, stream_get_contents($value));
     }
 
+    /**
+     * @group ZF-8399
+     */
+    public function testLongQueryWithTextField()
+    {
+        $this->markTestSkipped($this->getDriver() . ' does not have TEXT field type');
+    }
+
     public function getDriver()
     {
         return 'Pdo_Oci';

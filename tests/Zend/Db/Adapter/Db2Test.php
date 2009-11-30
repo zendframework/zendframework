@@ -359,6 +359,14 @@ class Zend_Db_Adapter_Db2Test extends Zend_Db_Adapter_TestCommon
         $this->assertTrue(($tableCountNoSchema > $tableCountSchema), 'Table count with schema provided should be less than without.');
     }
 
+    /**
+     * @group ZF-8399
+     */
+    public function testLongQueryWithTextField()
+    {
+        $this->markTestSkipped($this->getDriver() . ' does not have TEXT field type');
+    }
+
     public function getDriver()
     {
         return 'Db2';

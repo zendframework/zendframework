@@ -519,9 +519,16 @@ class Zend_Db_Adapter_OracleTest extends Zend_Db_Adapter_TestCommon
         $this->_testAdapterAlternateStatement('Test_OracleStatement');
     }
 
+    /**
+     * @group ZF-8399
+     */
+    public function testLongQueryWithTextField()
+    {
+        $this->markTestSkipped($this->getDriver() . ' does not have TEXT field type');
+    }
+
     public function getDriver()
     {
         return 'Oracle';
     }
-
 }

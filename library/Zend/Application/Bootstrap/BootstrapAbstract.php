@@ -351,7 +351,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
                 }
             }
 
-            if (class_exists($plugin)) {
+            if (class_exists($plugin)) { //@SEE ZF-7550
                 $spec = (array) $spec;
                 $spec['bootstrap'] = $this;
                 $instance = new $plugin($spec);

@@ -719,6 +719,19 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $actual   = $bootstrap->getOptionKeys();
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * @group ZF-8424
+     */
+    public function testCallBootstrapHasResourcePluginCausesWarning()
+    {
+        $this->autoloader
+             ->suppressNotFoundWarnings(false)
+             ->setFallbackAutoloader(true);
+        $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        // this should fail with warnings
+        $bootstrap->hasPluginResource('foo');
+    }
 }
 
 class Zend_Application_Bootstrap_BootstrapAbstractTest_View

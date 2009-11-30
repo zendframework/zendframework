@@ -64,7 +64,7 @@
             <title>Apache ActiveMQ - Zend_Queue_Adapter_Activemq</title>
 
             <para>
-                Options here listed here are known requirements. Not all
+                Options listed here are known requirements. Not all
                 messaging servers require username or password.
             </para>
 

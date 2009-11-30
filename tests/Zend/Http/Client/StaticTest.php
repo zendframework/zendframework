@@ -534,6 +534,16 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @group ZF-8057
+     */
+    public function testSetDisabledAuthBeforSettingUriBug()
+    {
+        $client = new Zend_Http_Client_StaticTest_Mock();
+        // if the bug exists this call should creates a fatal error
+        $client->setAuth(false);
+    }
+
+    /**
      * Data providers
      */
 

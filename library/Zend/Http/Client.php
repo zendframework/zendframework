@@ -131,7 +131,7 @@ class Zend_Http_Client
      *
      * @var Zend_Uri_Http
      */
-    protected $uri;
+    protected $uri = null;
 
     /**
      * Associative array of request headers
@@ -548,8 +548,10 @@ class Zend_Http_Client
             $this->auth = null;
 
             // Clear the auth information in the uri instance as well
-            $this->getUri()->setUsername('');
-            $this->getUri()->setPassword('');
+            if ($this->uri instanceof Zend_Uri_Http) {
+                $this->getUri()->setUsername('');
+                $this->getUri()->setPassword('');
+            }
         // Else, set up authentication
         } else {
             // Check we got a proper authentication type
@@ -739,7 +741,7 @@ class Zend_Http_Client
      * 1. For advanced user who would like to set their own data, already encoded
      * 2. For backwards compatibilty: If someone uses the old post($data) method.
      *    this method will be used to set the encoded data.
-     * 
+     *
      * $data can also be stream (such as file) from which the data will be read.
      *
      * @param string|resource $data
@@ -765,7 +767,7 @@ class Zend_Http_Client
      *
      * Should be used to reset the request parameters if the client is
      * used for several concurrent requests.
-     * 
+     *
      * clearAll parameter controls if we clean just parameters or also
      * headers and last_*
      *
@@ -785,13 +787,13 @@ class Zend_Http_Client
             $this->last_request = null;
             $this->last_response = null;
         } else {
-	        // Clear outdated headers
-	        if (isset($this->headers[strtolower(self::CONTENT_TYPE)])) {
-	            unset($this->headers[strtolower(self::CONTENT_TYPE)]);
-	        }
-	        if (isset($this->headers[strtolower(self::CONTENT_LENGTH)])) {
-	            unset($this->headers[strtolower(self::CONTENT_LENGTH)]);
-	        }
+            // Clear outdated headers
+            if (isset($this->headers[strtolower(self::CONTENT_TYPE)])) {
+                unset($this->headers[strtolower(self::CONTENT_TYPE)]);
+            }
+            if (isset($this->headers[strtolower(self::CONTENT_LENGTH)])) {
+                unset($this->headers[strtolower(self::CONTENT_LENGTH)]);
+            }
         }
 
         return $this;
@@ -871,7 +873,7 @@ class Zend_Http_Client
 
     /**
      * Set streaming for received data
-     * 
+     *
      * @param string|boolean $streamfile Stream file, true for temp file, false/null for no streaming
      * @return Zend_Http_Client
      */
@@ -880,7 +882,7 @@ class Zend_Http_Client
         $this->setConfig(array("output_stream" => $streamfile));
         return $this;
     }
-    
+
     /**
      * Get status of streaming for received data
      * @return boolean|string
@@ -889,10 +891,10 @@ class Zend_Http_Client
     {
         return $this->config["output_stream"];
     }
-    
+
     /**
      * Create temporary stream
-     * 
+     *
      * @return resource
      */
     protected function _openTempStream()
@@ -903,13 +905,13 @@ class Zend_Http_Client
             $this->_stream_name = tempnam(isset($this->config['stream_tmp_dir'])?$this->config['stream_tmp_dir']:sys_get_temp_dir(),
                  'Zend_Http_Client');
         }
-        
+
         $fp = fopen($this->_stream_name, "w+b");
         if(!$fp) {
                 $this->close();
                 require_once 'Zend/Http/Client/Exception.php';
                 throw new Zend_Http_Client_Exception("Could not open temp file $name");
-            
+
         }
         return $fp;
     }
@@ -963,7 +965,7 @@ class Zend_Http_Client
                 require_once 'Zend/Http/Client/Exception.php';
                 throw new Zend_Http_Client_Exception('Adapter does not support streaming');
             }
-            
+
             // Open the connection, send the request and read the response
             $this->adapter->connect($uri->getHost(), $uri->getPort(),
                 ($uri->getScheme() == 'https' ? true : false));
@@ -973,36 +975,36 @@ class Zend_Http_Client
                     $stream = $this->_openTempStream();
                     $this->adapter->setOutputStream($stream);
                 } else {
-                	/** @see Zend_Http_Client_Exception */
+                    /** @see Zend_Http_Client_Exception */
                     require_once 'Zend/Http/Client/Exception.php';
                     throw new Zend_Http_Client_Exception('Adapter does not support streaming');
                 }
-            } 
-                
+            }
+
             $this->last_request = $this->adapter->write($this->method,
                 $uri, $this->config['httpversion'], $headers, $body);
 
             $response = $this->adapter->read();
-	        if (! $response) {
-	            /** @see Zend_Http_Client_Exception */
-	            require_once 'Zend/Http/Client/Exception.php';
-	            throw new Zend_Http_Client_Exception('Unable to read response, or response is empty');
-	        }
-	
-	        if($this->config['output_stream']) {
-	            rewind($stream);
-	            // cleanup the adapter
-	            $this->adapter->setOutputStream(null);
-	            $response = Zend_Http_Response_Stream::fromStream($response, $stream);
-	            $response->setStreamName($this->_stream_name);
-	            if(!is_string($this->config['output_stream'])) {
-	                // we used temp name, will need to clean up
-	                $response->setCleanup(true);
-	            }
-	        } else {
-	            $response = Zend_Http_Response::fromString($response);
+            if (! $response) {
+                /** @see Zend_Http_Client_Exception */
+                require_once 'Zend/Http/Client/Exception.php';
+                throw new Zend_Http_Client_Exception('Unable to read response, or response is empty');
             }
-            
+
+            if($this->config['output_stream']) {
+                rewind($stream);
+                // cleanup the adapter
+                $this->adapter->setOutputStream(null);
+                $response = Zend_Http_Response_Stream::fromStream($response, $stream);
+                $response->setStreamName($this->_stream_name);
+                if(!is_string($this->config['output_stream'])) {
+                    // we used temp name, will need to clean up
+                    $response->setCleanup(true);
+                }
+            } else {
+                $response = Zend_Http_Response::fromString($response);
+            }
+
             if ($this->config['storeresponse']) {
                 $this->last_response = $response;
             }
@@ -1156,7 +1158,7 @@ class Zend_Http_Client
         if ($this->method == self::TRACE) {
             return '';
         }
-        
+
         if (isset($this->raw_post_data) && is_resource($this->raw_post_data)) {
             return $this->raw_post_data;
         }

@@ -382,7 +382,7 @@ file_put_contents($path, $generator->generate());
         <title>Sähen der Erzeugung einer PHP Klasse über Reflection</title>
         <para>
             Man kann Code zu einer bestehenden Klasse hinzufügen. Um das Durchzuführen muß die
-            statiche <methodname>fromReflection()</methodname> Methode verwendet werden um die
+            statische <methodname>fromReflection()</methodname> Methode verwendet werden um die
             Klasse in ein Generator Objekt zu mappen. Von dort, kann man zusätzliche Eigenschaften
             oder Methoden hinzufügen und die Klasse neu erstellen.
         </para>

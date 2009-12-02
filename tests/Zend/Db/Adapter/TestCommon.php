@@ -246,7 +246,7 @@ abstract class Zend_Db_Adapter_TestCommon extends Zend_Db_TestSetup
         $this->assertEquals(1, $result[0]['product_id'], 'Expecting product_id of 0th row to be 1');
 
         $rowsAffected = $this->_db->delete('zfproducts', "$product_id = 2");
-        $this->assertEquals(1, $rowsAffected, 'Expected rows affected to return 1', 'Expecting rows affected to be 1');
+        $this->assertEquals(1, $rowsAffected, 'Expecting rows affected to be 1');
 
         $select = $this->_db->select()->from('zfproducts')->order('product_id ASC');
         $result = $this->_db->fetchAll($select);

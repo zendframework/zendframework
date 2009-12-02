@@ -459,6 +459,7 @@
         <xi:include href="module_specs/Zend_Service_Audioscrobbler.xml" />
         <xi:include href="module_specs/Zend_Service_Delicious.xml" />
         <xi:include href="module_specs/Zend_Service_Flickr.xml" />
+        <xi:include href="module_specs/Zend_Service_LiveDocx.xml" />
         <xi:include href="module_specs/Zend_Service_Nirvanix.xml" />
         <xi:include href="module_specs/Zend_Service-ReCaptcha.xml" />
         <xi:include href="module_specs/Zend_Service_Simpy.xml" />

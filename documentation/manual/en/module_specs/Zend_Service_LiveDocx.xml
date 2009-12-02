@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.service.livedocx">
+    <title>Zend_Service_LiveDocx</title>
+
+    <sect2 id="zend.service.livedocx.introduction">
+        <title>Introduction to LiveDocx</title>
+
+        <para>
+            LiveDocx is a <acronym>SOAP</acronym> service that allows developers to generate word
+            processing documents by combining structured data from PHP with a template, created in a
+            word processor. The resulting document can be saved as a <acronym>PDF</acronym>,
+            <acronym>DOCX</acronym>, <acronym>DOC</acronym>, <acronym>HTML</acronym> or 
+            <acronym>RTF</acronym> file. LiveDocx implements <ulink
+                    url="http://en.wikipedia.org/wiki/Mail_merge">mail-merge</ulink> in PHP.
+        </para>
+       
+        <para>
+            The family of <classname>Zend_Service_LiveDocx</classname> components provides a clean
+            and simple interface to the <ulink url="http://www.livedocx.com">LiveDocx API</ulink>
+            and additionally offers functionality to improve network performance.            
+        </para>
+
+        <para>The <ulink url="http://www.phplivedocx.org">phpLiveDocx project site</ulink> contains
+            a large number of sample applications, tips and tricks and latest news, specific
+            to the Zend Framework implementation of LiveDocx. These resources are designed to get
+            you up to speed with LiveDocx in PHP as quickly as possible.
+        </para>
+
+        <para>
+            The backend <acronym>SOAP</acronym> API is documented <ulink
+            url="http://www.livedocx.com/pub/documentation/api.aspx">on the LiveDocx
+            documentation pages</ulink>. 
+        </para>
+        
+        <sect3 id="zend.service.livedocx.account">
+            <title>Sign Up for an Account</title>
+    
+            <para>
+                Before you can start using LiveDocx, you must first <ulink
+                    url="https://www.livedocx.com/user/account_registration.aspx">sign up</ulink>
+                for an account. The account is completely free of charge and you only need to
+                specify a <emphasis>username</emphasis>, <emphasis>password</emphasis> and
+                <emphasis>e-mail address</emphasis>. Your login credentials will be dispatched to
+                the e-mail address you supply, so please type carefully.
+            </para>
+        </sect3>
+    
+        <sect3 id="zend.service.livedocx.templates-documents">
+            <title>Templates and Documents</title>
+    
+            <para>
+                LiveDocx differentiates between the following terms: 1)
+                <emphasis>template</emphasis> and 2) <emphasis>document</emphasis>. In order to
+                fully understand the documentation and indeed the actual API, it is important that
+                any programmer deploying LiveDocx understands the difference.
+            </para>
+    
+            <para>
+                The term <emphasis>template</emphasis> is used to refer to the input file, created
+                in a word processor, containing formatting and text fields. You can download an
+                <ulink
+                    url="http://www.phplivedocx.org/wp-content/uploads/2009/01/license-agreement-template.docx">example
+                    template</ulink>, stored as a <acronym>DOCX</acronym> file. The term
+                <emphasis>document</emphasis> is used to refer to the output file that contains the
+                template file, populated with data - i.e. the finished document. You can download an
+                <ulink
+                    url="http://www.phplivedocx.org/wp-content/uploads/2009/01/license-agreement-document.pdf">example
+                    document</ulink>, stored as a <acronym>PDF</acronym> file.
+            </para>
+        </sect3>
+    
+        <sect3 id="zend.service.livedocx.formats">
+            <title>Supported File Formats</title>
+            
+            <para>
+                LiveDocx supports the following file formats:
+            </para>
+            
+            <sect4 id="zend.service.livedocx.formats.template">
+                <title>Template File Formats (input)</title>
+                
+                <para>
+                    Templates can be saved in any of the following file formats:
+                </para>
+        
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/Office_Open_XML">DOCX</ulink> -
+                            Office Open <acronym>XML</acronym> format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/DOC_(computing)">DOC</ulink> -
+                            Microsoft Word <acronym>DOC</acronym> format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/Rich_Text_Format">RTF</ulink> -
+                            Rich text file format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink url="http://www.textcontrol.com/">TXD</ulink> - TX Text Control
+                            format
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </sect4>
+            
+            <sect4 id="zend.service.livedocx.formats.document">
+                <title>Document File Formats (output):</title>
+                
+                <para>
+                    The resulting document can be saved in any of the following file formats:
+                </para>
+        
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/Office_Open_XML">DOCX</ulink> -
+                            Office Open <acronym>XML</acronym> format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/DOC_(computing)">DOC</ulink> -
+                            Microsoft Word <acronym>DOC</acronym> format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/Xhtml">HTML</ulink> -
+                            <acronym>XHTML</acronym> 1.0 transitional format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/Rich_Text_Format">RTF</ulink> -
+                            Rich text file format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink
+                                url="http://en.wikipedia.org/wiki/Portable_Document_Format">PDF</ulink>
+                            - Acrobat Portable Document Format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink url="http://www.textcontrol.com/">TXD</ulink> - TX Text Control
+                            format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/Text_file">TXT</ulink> -
+                            <acronym>ANSI</acronym> plain text
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </sect4>
+            
+            <sect4 id="zend.service.livedocx.formats.image">
+                <title>Image File Formats (output):</title>
+                
+                <para>
+                    The resulting document can be saved in any of the following graphical file
+                    formats:
+                </para>                
+        
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/BMP_file_format">BMP</ulink> -
+                            Bitmap image format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/GIF">GIF</ulink> - Graphics
+                            Interchange Format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/Jpg">JPG</ulink> - Joint
+                            Photographic Experts Group format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink
+                                url="http://en.wikipedia.org/wiki/Portable_Network_Graphics">PNG</ulink>
+                            - Portable Network Graphics format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink
+                                url="http://en.wikipedia.org/wiki/Tagged_Image_File_Format">TIFF</ulink>
+                            - Tagged Image File Format
+                        </para>
+                    </listitem>
+        
+                    <listitem>
+                        <para>
+                            <ulink url="http://en.wikipedia.org/wiki/Windows_Metafile">WMF</ulink> -
+                            Windows Meta File format
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </sect4>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.service.livedocx.mailmerge">
+        <title>Zend_Service_LiveDocx_MailMerge</title>
+        
+        <para>
+             <classname>Zend_Service_LiveDocx_MailMerge</classname> is the mail-merge object in the
+             <classname>Zend_Service_LiveDocx</classname> family.
+        </para>
+
+        <sect3 id="zend.service.livedocx.mailmerge.generation">
+            <title>Document Generation Process</title>
+
+            <para>
+                The document generation process can be simplified with the following equation:
+            </para>
+
+            <para>
+                <emphasis>Template + Data = Document</emphasis>
+            </para>
+
+            <para>
+                Or expressed by the following diagram:
+            </para>
+            
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="./figures/zend.service.livedocx.mailmerge.generation-diabasic.png" format="png"></imagedata>
+                </imageobject>
+
+                <caption>
+                    <para>
+                        Data is inserted into template to create a document (<ulink
+                            url="./figures/zend.service.livedocx.mailmerge.generation-diabasic_zoom.png">view
+                            larger</ulink>).
+                    </para>
+                </caption>
+            </mediaobject>
+            
+            <para>
+                A template, created in a word processing application, such as Microsoft Word, is
+                loaded into LiveDocx. Data is then inserted into the template and the resulting
+                document is saved to any supported format.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.service.livedocx.mailmerge.templates">
+            <title>Creating Templates in Microsoft Word 2007</title>
+
+            <para>
+                Start off by launching Microsoft Word and creating a new document. Next, open up the
+                <emphasis>Field</emphasis> dialog box. This looks as follows:
+            </para>
+            
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="./figures/zend.service.livedocx.mailmerge.templates-msworddialog.png"
+                        format="png"></imagedata>
+                </imageobject>
+
+                <caption>
+                    <para>
+                        Microsoft Word 2007 Field dialog box (<ulink
+                            url="./figures/zend.service.livedocx.mailmerge.templates-msworddialog_zoom.png">view
+                            larger</ulink>).
+                    </para>
+                </caption>
+            </mediaobject>
+            
+            <para>
+                Using this dialog, you can insert the required merge fields into your document.
+                Below is a screenshot of a license agreement in Microsoft Word 2007. The merge
+                fields are marked as <code>{ MERGEFIELD FieldName }</code>:
+            </para>
+            
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="./figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull.png"
+                        format="png"></imagedata>
+                </imageobject>
+
+                <caption>
+                    <para>
+                        Template in Microsoft Word 2007 (<ulink
+                            url="./figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull_zoom.png">view
+                            larger</ulink>).
+                    </para>
+                </caption>
+            </mediaobject>
+            
+            <para>
+                Now, save the template as <emphasis>template.docx</emphasis>.
+            </para>
+
+            <para>
+                 In the next step, we are going to populate the merge fields with textual data from
+                 PHP.
+            </para>
+            
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="./figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped.png"
+                        format="png"></imagedata>
+                </imageobject>
+
+                <caption>
+                    <para>
+                        Cropped template in Microsoft Word 2007 (<ulink
+                            url="./figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped_zoom.png">view
+                            larger</ulink>).
+                    </para>
+                </caption>
+            </mediaobject>
+            
+            <para>
+                To populate the merge fields in the above cropped screenshot of the <ulink
+                    url="http://www.phplivedocx.org/wp-content/uploads/2009/01/license-agreement-template.docx">template</ulink>
+                in Microsoft Word, all we have to code is as follows:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+ 
+$phpLiveDocx->setLocalTemplate('template.docx');
+ 
+$phpLiveDocx->assign('software', 'Magic Graphical Compression Suite v1.9')
+            ->assign('licensee', 'Henry Döner-Meyer')
+            ->assign('company',  'Co-Operation');
+ 
+$phpLiveDocx->createDocument();
+ 
+$document = $phpLiveDocx->retrieveDocument('pdf');
+ 
+file_put_contents('document.pdf', $document);
+]]></programlisting>
+
+            <para>
+                The resulting document is written to disk in the file
+                <emphasis>document.pdf</emphasis>. This file can now be post-processed, sent via
+                e-mail or simply displayed, as is illustrated below in <emphasis>Document Viewer
+                    2.26.1</emphasis> on <emphasis>Ubuntu 9.04</emphasis>:
+            </para>
+            
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="./figures/zend.service.livedocx.mailmerge.templates-msworddocument.png"
+                        format="png"></imagedata>
+                </imageobject>
+
+                <caption>
+                    <para>
+                        Resulting document as <acronym>PDF</acronym> in Document Viewer 2.26.1
+                        (<ulink
+                            url="./figures/zend.service.livedocx.mailmerge.templates-msworddocument_zoom.png">view
+                            larger</ulink>).
+                    </para>
+                </caption>
+            </mediaobject>
+        </sect3>
+
+        <example id="zend.service.livedocx.mailmerge.advanced">
+            <title>Advanced Mail-Merge</title>
+
+            <para>
+                <classname>Zend_Service_LiveDocx_MailMerge</classname> allows designers to insert
+                any number of text fields into a template. These text fields are populated with data
+                when <emphasis>createDocument()</emphasis> is called.
+            </para>
+
+            <para>
+                In addition to text fields, it is also possible specify regions of a document, which
+                should be repeated.
+            </para>
+
+            <para>
+                For example, in a telephone bill it is necessary to print out a list of all
+                connections, including the destination number, duration and cost of each call. This
+                repeating row functionality can be achieved with so called blocks.
+            </para>
+
+            <para>
+                <emphasis>Blocks</emphasis> are simply regions of a document, which are repeated
+                when <methodname>createDocument()</methodname> is called. In a block any number of
+                <emphasis>block fields</emphasis> can be specified.
+            </para>
+
+            <para>
+                Blocks consist of two consecutive document targets with a unique name. The following
+                screenshot illustrates these targets and their names in red:
+            </para>
+
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="./figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat.png" format="png"></imagedata>
+                </imageobject>
+
+                <caption>
+                    <para>
+                        (<ulink
+                            url="./figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat_zoom.png">view
+                            larger</ulink>).
+                    </para>
+                </caption>
+            </mediaobject>
+            
+            <para>
+                The format of a block is as follows:
+            </para>
+
+            <programlisting language="text"><![CDATA[
+blockStart_ + unique name
+blockEnd_ + unique name
+]]></programlisting>
+
+            <para>For example:</para>
+
+            <programlisting language="text"><![CDATA[
+blockStart_block1
+blockEnd_block1
+]]></programlisting>
+
+            <para>
+                The content of a block is repeated, until all data assigned in the block fields has
+                been injected into the template. The data for block fields is specified in PHP as a
+                multi-assoc array.
+            </para>
+
+            <para>
+                The following screenshot of a template in Microsoft Word 2007 shows how block fields
+                are used:
+            </para>
+            
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="./figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate.png"
+                        format="png"></imagedata>
+                </imageobject>
+
+                <caption>
+                    <para>
+                        Template, illustrating blocks in Microsoft Word 2007 (<ulink
+                            url="./figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate_zoom.png">view
+                            larger</ulink>).
+                    </para>
+                </caption>
+            </mediaobject>
+            
+            <para>
+                The following code populates the above template with data.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+ 
+$phpLiveDocx->setLocalTemplate('template.doc');
+ 
+$billConnections = array(
+    array(
+        'connection_number'   => '+49 421 335 912', 
+        'connection_duration' => '00:00:07', 
+        'fee'                 => '€ 0.03',
+    ),
+    array(
+        'connection_number'   => '+49 421 335 913', 
+        'connection_duration' => '00:00:07', 
+        'fee'                 => '€ 0.03',
+    ),
+    array(
+        'connection_number'   => '+49 421 335 914', 
+        'connection_duration' => '00:00:07', 
+        'fee'                 => '€ 0.03',
+    ),
+    array(
+        'connection_number'   => '+49 421 335 916', 
+        'connection_duration' => '00:00:07', 
+        'fee'                 => '€ 0.03',
+    ),
+);
+ 
+$phpLiveDocx->assign('connection', $billConnections);
+
+// ... assign other data here ...
+
+$phpLiveDocx->createDocument();
+$document = $phpLiveDocx->retrieveDocument('pdf');
+file_put_contents('document.pdf', $document);
+]]></programlisting>
+
+            <para>
+                The data, which is specified in the array <varname>$billConnections</varname> is
+                repeated in the template in the block connection. The keys of the array
+                (<varname>connection_number</varname>, <varname>connection_duration</varname> and
+                <varname>fee</varname>) are the block field names - their data is inserted, one row
+                per iteration.
+            </para>
+
+            <para>
+                The resulting document is written to disk in the file
+                <emphasis>document.pdf</emphasis>. This file can now be post-processed, sent via
+                e-mail or simply displayed, as is illustrated below in <emphasis>Document Viewer
+                    2.26.1</emphasis> on <emphasis>Ubuntu 9.04</emphasis>:
+            </para>
+            
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="./figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument.png"
+                        format="png"></imagedata>
+                </imageobject>
+
+                <caption>
+                    <para>
+                        Resulting document as <acronym>PDF</acronym> in Document Viewer 2.26.1
+                        (<ulink
+                            url="./figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument_zoom.png">view
+                            larger</ulink>).
+                    </para>
+                </caption>
+            </mediaobject>
+            
+            <para>
+                You can download the <acronym>DOC</acronym> <ulink
+                    url="http://www.phplivedocx.org/wp-content/uploads/2009/01/telephone-bill-template.doc">template
+                    file</ulink> and the resulting <ulink
+                    url="http://www.phplivedocx.org/wp-content/uploads/2009/01/telephone-bill-document.pdf">PDF
+                    document</ulink>.
+            </para>
+
+            <para>
+                <emphasis>NOTE:</emphasis> blocks may not be nested.
+            </para>
+        </example>
+            
+        <example id="zend.service.livedocx.mailmerge.bitmaps">
+            <title>Generating bitmaps image files</title>
+
+            <para>
+                In addition to document file formats,
+                <classname>Zend_Service_LiveDocx_MailMerge</classname> also allows documents to be
+                saved to a number of image file formats (<acronym>BMP</acronym>,
+                <acronym>GIF</acronym>, <acronym>JPG</acronym>, <acronym>PNG</acronym> and
+                <acronym>TIFF</acronym>). Each page of the document is saved to one file.
+            </para>
+
+            <para>
+                The following sample illustrates the use of <methodname>getBitmaps($fromPage,
+                    $toPage, $zoomFactor, $format)</methodname> and
+                <methodname>getAllBitmaps($zoomFactor, $format)</methodname>.
+            </para>
+
+            <para>
+                <varname>$fromPage</varname> is the lower-bound page number of the page range that
+                should be returned as an image and <varname>$toPage</varname> the upper-bound page
+                number.  <varname>$zoomFactor</varname> is the size of the images, as a percent,
+                relative to the original page size. The range of this parameter is 10 to 400.
+                <varname>$format</varname> is the format of the images returned by this method. The
+                supported formats can be obtained by calling
+                <methodname>getImageFormats()</methodname>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$date = new Zend_Date();
+$date->setLocale('en_US');
+ 
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+ 
+$phpLiveDocx->setLocalTemplate('template.docx');
+ 
+$phpLiveDocx->assign('software', 'Magic Graphical Compression Suite v1.9')
+            ->assign('licensee', 'Daï Lemaitre')
+            ->assign('company',  'Megasoft Co-operation')
+            ->assign('date',     $date->get(Zend_Date::DATE_LONG))
+            ->assign('time',     $date->get(Zend_Date::TIME_LONG))
+            ->assign('city',     'Lyon')
+            ->assign('country',  'France');
+ 
+$phpLiveDocx->createDocument();
+ 
+// Get all bitmaps
+// (zoomFactor, format)
+$bitmaps = $phpLiveDocx->getAllBitmaps(100, 'png');
+ 
+// Get just bitmaps in specified range
+// (fromPage, toPage, zoomFactor, format)
+// $bitmaps = $phpLiveDocx->getBitmaps(2, 2, 100, 'png');
+ 
+foreach ($bitmaps as $pageNumber => $bitmapData) {
+    $filename = sprintf('documentPage%d.png', $pageNumber);
+    file_put_contents($filename, $bitmapData);
+}
+]]></programlisting>
+
+            <para>
+                This produces two files (<filename>documentPage1.png</filename> and
+                <filename>documentPage2.png</filename>) and writes them to disk in the same
+                directory as the executable PHP file.
+            </para>
+            
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="./figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1.png"
+                        format="png"></imagedata>
+                </imageobject>
+
+                <caption>
+                    <para>
+                        documentPage1.png (<ulink
+                            url="./figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1_zoom.png">view
+                            larger</ulink>).
+                    </para>
+                </caption>
+            </mediaobject>
+            
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="./figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2.png"
+                        format="png"></imagedata>
+                </imageobject>
+
+                <caption>
+                    <para>
+                        documentPage2.png (<ulink
+                            url="./figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2_zoom.png">view
+                            larger</ulink>).
+                    </para>
+                </caption>
+            </mediaobject>
+        </example>
+
+        <sect3 id="zend.service.livedocx.mailmerge.templates-types">
+            <title>Local vs. Remote Templates</title>
+    
+            <para>
+                Templates can be stored <emphasis>locally</emphasis>, on the client machine, or
+                <emphasis>remotely</emphasis>, on the server. There are advantages and disadvantages
+                to each approach.
+            </para>
+    
+            <para>
+                In the case that a template is stored locally, it must be transfered from the client
+                to the server on every request. If the content of the template rarely changes, this
+                approach is inefficient. Similarly, if the template is several megabytes in size, it
+                may take considerable time to transfer it to the server. Local template are useful
+                in situations in which the content of the template is constantly changing.
+            </para>
+    
+            <para>
+                The following code illustrates how to use a local template.
+            </para>
+    
+            <programlisting language="php"><![CDATA[
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+ 
+$phpLiveDocx->setLocalTemplate('./template.docx');
+ 
+// assign data and create document
+]]></programlisting>
+    
+            <para>
+                In the case that a template is stored remotely, it is uploaded once to the server
+                and then simply referenced on all subsequent requests. Obviously, this is much
+                quicker than using a local template, as the template does not have to be transfered
+                on every request. For speed critical applications, it is recommended to use the
+                remote template method.
+            </para>
+    
+            <para>
+                The following code illustrates how to upload a template to the server:
+            </para>
+    
+            <programlisting language="php"><![CDATA[
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+ 
+$phpLiveDocx->uploadTemplate('template.docx');
+]]></programlisting>
+    
+            <para>
+                The following code illustrates how to reference the remotely stored template on all
+                subsequent requests:
+            </para>
+    
+            <programlisting language="php"><![CDATA[
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+ 
+$phpLiveDocx->setRemoteTemplate('template.docx');
+ 
+// assign data and create document
+]]></programlisting>
+        </sect3>
+
+        <sect3 id="zend.service.livedocx.mailmerge.information">
+            <title>Getting Information</title>
+    
+            <para>
+                <classname>Zend_Service_LiveDocx_MailMerge</classname> provides a number of methods
+                to get information on field names, available fonts and supported formats.
+            </para>
+    
+            <example id="zend.service.livedocx.mailmerge.information.getfieldname">
+                <title>Get Array of Field Names in Template</title>
+    
+                <para>
+                    The following code returns and displays an array of all field names in the
+                    specified template. This functionality is useful, in the case that you create an
+                    application, in which an end-user can update a template.
+                </para>
+    
+                <programlisting language="php"><![CDATA[
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+
+$templateName = 'template-1-text-field.docx';
+$phpLiveDocx->setLocalTemplate($templateName);
+
+$fieldNames = $phpLiveDocx->getFieldNames();
+foreach ($fieldNames as $fieldName) {
+    printf('- %s%s', $fieldName, PHP_EOL);   
+}
+]]></programlisting>            
+            </example>
+    
+            <example id="zend.service.livedocx.mailmerge.information.getblockfieldname">
+                <title>Get Array of Block Field Names in Template</title>
+    
+                <para>
+                    The following code returns and displays an array of all block field names in the
+                    specified template. This functionality is useful, in the case that you create an
+                    application, in which an end-user can update a template. Before such templates
+                    can be populated, it is necessary to find out the names of the contained block
+                    fields.
+                </para>
+    
+                <programlisting language="php"><![CDATA[
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+
+$templateName = 'template-block-fields.doc';
+$phpLiveDocx->setLocalTemplate($templateName);
+
+$blockNames = $phpLiveDocx->getBlockNames();
+foreach ($blockNames as $blockName) {
+    $blockFieldNames = $phpLiveDocx->getBlockFieldNames($blockName);
+    foreach ($blockFieldNames as $blockFieldName) {
+        printf('- %s::%s%s', $blockName, $blockFieldName, PHP_EOL);          
+    }
+}
+]]></programlisting>            
+            </example>
+    
+            <example id="zend.service.livedocx.mailmerge.information.getfontnames">
+                <title>Get Array of Fonts Installed on Server</title>
+    
+                <para>
+                    The following code returns and displays an array of all fonts installed on the
+                    server. You can use this method to present a list of fonts which may be used in
+                    a template. It is important to inform the end-user about the fonts installed on
+                    the server, as only these fonts may be used in a template. In the case that a
+                    template contains fonts, which are not available on the server,
+                    font-substitution will take place. This may lead to undesirable results.
+                </para>
+    
+            <programlisting language="php"><![CDATA[
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+
+Zend_Debug::dump($phpLiveDocx->getFontNames());
+]]></programlisting>            
+    
+                <para>
+                    <emphasis>NOTE:</emphasis> As the return value of this method changes very
+                    infrequently, it is highly recommended to use a cache, such as
+                    <classname>Zend_Cache</classname> - this will considerably speed up your
+                    application.
+                </para>
+            </example>
+    
+            <example id="zend.service.livedocx.mailmerge.information.gettemplateformats">
+                <title>Get Array of Supported Template File Formats</title>
+    
+                <para>
+                    The following code returns and displays an array of all supported template file
+                    formats. This method is particularly useful in the case that a combo list should
+                    be displayed that allows the end-user to select the input format of the
+                    documentation generation process.
+                </para>
+    
+                <programlisting language="php"><![CDATA[
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge()
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+
+Zend_Debug::dump($phpLiveDocx->getTemplateFormats());
+]]></programlisting>    
+    
+                <para>
+                    <emphasis>NOTE:</emphasis> As the return value of this method changes very
+                    infrequently, it is highly recommended to use a cache, such as
+                    <classname>Zend_Cache</classname> - this will considerably speed up your
+                    application.
+                </para>        
+            </example>
+    
+            <example id="zend.service.livedocx.mailmerge.information.gettemplateformats">
+                <title>Get Array of Supported Document File Formats</title>
+    
+                <para>
+                    The following code returns and displays an array of all supported document file
+                    formats. This method is particularly useful in the case that a combo list should
+                    be displayed that allows the end-user to select the output format of the
+                    documentation generation process.
+                </para>
+    
+                <programlisting language="php"><![CDATA[
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+
+Zend_Debug::dump($phpLiveDocx->getDocumentFormats());
+]]></programlisting>            
+            </example>
+    
+            <example id="zend.service.livedocx.mailmerge.information.getimageformats">
+                <title>Get Array of Supported Image File Formats</title>
+    
+                <para>
+                    The following code returns and displays an array of all supported image file
+                    formats. This method is particularly useful in the case that a combo list should
+                    be displayed that allows the end-user to select the output format of the
+                    documentation generation process.
+                </para>
+    
+                <programlisting language="php"><![CDATA[
+$phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
+
+$phpLiveDocx->setUsername('myUsername')
+            ->setPassword('myPassword');
+
+Zend_Debug::dump($phpLiveDocx->getImageFormats());
+]]></programlisting>    
+    
+                <para>
+                    <emphasis>NOTE:</emphasis> As the return value of this method changes very
+                    infrequently, it is highly recommended to use a cache, such as
+                    <classname>Zend_Cache</classname> - this will considerably speed up your
+                    application.
+                </para>        
+            </example>
+        </sect3>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 tw=100 et:
+-->

@@ -1,465 +1,132 @@
-<appendix id="requirements">
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 18786 -->
+<!-- Reviewed: no -->
+<appendix id="requirements" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <title>Requisitos do Sistema</title>
+    <title>Pré-requisitos do Zend Framework</title>
 
-    <para>
-        Está seção documenta os requisitos do Zend Framework.
-    </para>
+    <sect1 id="requirements.introduction">
 
-    <sect1 id="requirements.version">
-
-        <title>Versão requerida do PHP</title>
-
-        <para>
-            Zend Framework requer PHP 5.1.4 ou superior. Algumas interfaces
-            SPL como <code>Countable</code> não estão estáveis nas versões
-            anteriores do PHP.
-        </para>
+        <title>Introdução</title>
 
         <para>
-            Zend Framework têm uma coleção extensa de testes de automação,
-            que você pode executar usando PHPUnit 3.0 ou superior. Está versão
-            do PHPUnit também requere PHP 5.1.4 ou superior.
+            Zend Framework requer um interpretador de <acronym>PHP</acronym> 5 com um servidor
+            web configurado para trabalhar corretamente com scripts <acronym>PHP</acronym>.
+            Algumas funcionalidades requerem extensões adicionais ou recursos do servidor web;
+            na maioria dos casos o framework pode ser usado sem eles, embora o desempenho possa
+            cair ou os recursos auxiliares não ficarem totalmente funcionais. Um exemplo dessa
+            dependência é o mod_rewrite em um ambiente do Apache, que pode ser usado para
+            implementar as "<acronym>URL</acronym>'s amigáveis" como
+            "<filename>http://www.example.com/user/edit</filename>". Se mod_rewrite não estiver
+            habilitado, o Zend Framework poderá ser configurado para suportar 
+            <acronym>URL</acronym>'s como
+            "<command>http://www.example.com?controller=user&amp;action=edit</command>".
+            <acronym>URL</acronym>'s amigáveis podem ser usadas para encurtar
+            <acronym>URL</acronym>'s para uma representação textual ou para otimização de sites
+            (<acronym>SEO</acronym>), mas elas não afetam diretamente a funcionalidade da aplicação.
         </para>
 
-        <para>
-            Apesar do Zend Framework funcionar corretamente com a versão do
-            PHP mencionada acima, você é fortemente recomendado a usar o PHP 5.2.2
-            ou posterior. Há melhorias importantes de segurança e performance
-            disponíveis nas versão mais nova do PHP.
-        </para>
+        <sect2 id="requirements.version">
 
-    </sect1>
+            <title>Versão do PHP</title>
 
-    <sect1 id="requirements.extensions">
+            <para>
+                Zend recomenda a versão mais atual do <acronym>PHP</acronym> em razão das
+                melhorias na segurança e no desempenho, e atualmente oferece suporte ao
+                <acronym>PHP</acronym> 5.2.4 ou posterior.
+            </para>
 
-        <title>Extensões PHP</title>
+            <para>
+                Zend Framework tem uma extensa coleção de testes unitários, que você pode
+                executar usando PHPUnit 3.3.0 ou posterior.
+            </para>
 
-        <para>
-            A baixo está uma tabela que lista todas as extensões típicas
-            encontradas no PHP, e como elas são usadas no Zend Framework.
-            Isto pode ajudar a guiá-lo para saber quais extensões são
-            requeridas para a sua aplicação. Nem todas as extensões usadas
-            pelo Zend Framework são necessárias para as aplicações.
-        </para>
+        </sect2>
 
-        <table frame='all' id="requirements.extensions.table-1">
-            <title>Extensões PHP usadas pelo Zend Framework</title>
-            <tgroup cols='3'>
-                <colspec colwidth='1in'/>
-                <colspec colwidth='1in'/>
-                <colspec colwidth='3in'/>
-                <thead>
-                    <row>
-                        <entry>Extensão</entry>
-                        <entry>Típo de Uso</entry>
-                        <entry>Usado por quais Componentes do Zend Framework</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry>apc</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Cache_Backend_Apc</entry>
-                    </row>
-                    <row>
-                        <entry>bcmath</entry>
-                        <entry>Opcional</entry>
-                        <entry>Zend_Locale_Math</entry>
-                    </row>
-                    <row>
-                        <entry>bitset</entry>
-                        <entry>Opcional</entry>
-                        <entry>Zend_Search_Lucene</entry>
-                    </row>
-                    <row>
-                        <entry>bz2</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>calendar</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>com_dotnet</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>ctype</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Auth_Adapter_Http, Zend_Gdata_App, Zend_Http_Client, Zend_Pdf, Zend_Rest_Client, Zend_Rest_Server, Zend_Search_Lucene, Zend_Uri, Zend_Validate</entry>
-                    </row>
-                    <row>
-                        <entry>curl</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Http_Client_Adapter_Curl</entry>
-                    </row>
-                    <row>
-                        <entry>date</entry>
-                        <entry>?</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>dba</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>dbase</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>dom</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Feed, Zend_Gdata, Zend_Log_Formatter_Xml, Zend_Rest_Server, Zend_Search_Lucene, Zend_Service_Amazon, Zend_Service_Delicious, Zend_Service_Flickr, Zend_Service_Simpy, Zend_Service_Yahoo, Zend_XmlRpc</entry>
-                    </row>
-                    <row>
-                        <entry>exif</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>fbsql</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>fdf</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>filter</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>ftp</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>gd</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Pdf</entry>
-                    </row>
-                    <row>
-                        <entry>gettext</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>gmp</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>hash</entry>
-                        <entry>?</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>ibm_db2</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Db_Adapter_Db2</entry>
-                    </row>
-                    <row>
-                        <entry>iconv</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Locale_Format, Zend_Mime_Decode, Zend_Pdf, Zend_Search_Lucene, Zend_Service_Audioscrobbler, Zend_Service_Flickr, Zend_XmlRpc_Client</entry>
-                    </row>
-                    <row>
-                        <entry>imap</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>informix</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>interbase</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Db_Adapter_Firebird</entry>
-                    </row>
-                    <row>
-                        <entry>json</entry>
-                        <entry>Opcional</entry>
-                        <entry>Zend_Json</entry>
-                    </row>
-                    <row>
-                        <entry>ldap</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>libxml</entry>
-                        <entry>Dependência</entry>
-                        <entry>DOM, SimpleXML, XSLT</entry>
-                    </row>
-                    <row>
-                        <entry>mbstring</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Feed</entry>
-                    </row>
-                    <row>
-                        <entry>mcrypt</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>memcache</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Cache_Backend_Memcached</entry>
-                    </row>
-                    <row>
-                        <entry>mhash</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>mime_magic</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Http_Client</entry>
-                    </row>
-                    <row>
-                        <entry>ming</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>msql</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>mssql</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>mysql</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>mysqli</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Db_Adapter_Mysqli</entry>
-                    </row>
-                    <row>
-                        <entry>ncurses</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>oci8</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Db_Adapter_Oracle</entry>
-                    </row>
-                    <row>
-                        <entry>odbc</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>openssl</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>pcntl</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>pcre</entry>
-                        <entry>Dependência</entry>
-                        <entry>Virtualmente todos os componentes</entry>
-                    </row>
-                    <row>
-                        <entry>pdo</entry>
-                        <entry>Dependência</entry>
-                        <entry>Todos adptadores de bancos de dados PDO</entry>
-                    </row>
-                    <row>
-                        <entry>pdo_dblib</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>pdo_firebird</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>pdo_mssql</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Db_Adapter_Pdo_Mssql</entry>
-                    </row>
-                    <row>
-                        <entry>pdo_mysql</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Db_Adapter_Pdo_Mysql</entry>
-                    </row>
-                    <row>
-                        <entry>pdo_oci</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Db_Adapter_Pdo_Oci</entry>
-                    </row>
-                    <row>
-                        <entry>pdo_pgsql</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Db_Adapter_Pdo_Pgsql</entry>
-                    </row>
-                    <row>
-                        <entry>pdo_sqlite</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Db_Adapter_Pdo_Sqlite</entry>
-                    </row>
-                    <row>
-                        <entry>pgsql</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>posix</entry>
-                        <entry>Opcional</entry>
-                        <entry>Zend_Mail</entry>
-                    </row>
-                    <row>
-                        <entry>pspell</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>readline</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>recode</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>Reflection</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Controller, Zend_Filter, Zend_Filter_Input, Zend_Json, Zend_Log, Zend_Rest_Server, Zend_Server_Reflection, Zend_Validate, Zend_View, Zend_XmlRpc_Server</entry>
-                    </row>
-                    <row>
-                        <entry>session</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Controller_Action_Helper_Redirector, Zend_Session</entry>
-                    </row>
-                    <row>
-                        <entry>shmop</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>SimpleXML</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Config_Xml, Zend_Feed, Zend_Rest_Client, Zend_Service_Audioscrobbler, Zend_XmlRpc</entry>
-                    </row>
-                    <row>
-                        <entry>soap</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Service_StrikeIron</entry>
-                    </row>
-                    <row>
-                        <entry>sockets</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>SPL</entry>
-                        <entry>Dependência</entry>
-                        <entry>Virtually all components</entry>
-                    </row>
-                    <row>
-                        <entry>standard</entry>
-                        <entry>Dependência</entry>
-                        <entry>Virtually all components</entry>
-                    </row>
-                    <row>
-                        <entry>sybase</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>sysvmsg</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>sysvsem</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>sysvshm</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>tidy</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>tokenizer</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>wddx</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>xml</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Translate_Adapter_Qt, Zend_Translate_Adapter_Tmx, Zend_Translate_Adapter_Xliff</entry>
-                    </row>
-                    <row>
-                        <entry>XMLReader</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>xmlrpc</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>XMLWriter</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>xsl</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>zip</entry>
-                        <entry>--</entry>
-                        <entry></entry>
-                    </row>
-                    <row>
-                        <entry>zlib</entry>
-                        <entry>Dependência</entry>
-                        <entry>Zend_Pdf, Memcache</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
+        <sect2 id="requirements.extensions">
+
+            <title>Extensões do PHP</title>
+
+            <para>
+                Você encontrará abaixo uma tabela listando todas as extensões normalmente
+                encontradas no <acronym>PHP</acronym> e como o Zend Framework as utiliza. Você
+                deve verificar se as extensões no qual os componentes do Zend Framework que você
+                está usando em sua aplicação estão disponíveis em seu ambiente
+                <acronym>PHP</acronym>. Muitas das aplicações não requerem todas as extensões
+                listadas abaixo.
+            </para>
+
+            <para>
+                Uma dependência do tipo "hard" indica que os componentes ou classes não poderão
+                funcionar corretamente se a respectiva extensão não estiver disponível, enquanto
+                uma dependência do tipo "soft" indica que o componente poderá usar a extensão, se
+                estiver disponível, mas irá funcionar corretamente se não estiver. Muitos
+                componentes utilizarão automaticamente determinadas extensões, se estas estiverem
+                disponíveis, para otimizar o desempenho, mas vão executar um código com
+                funcionalidade similar no próprio componente caso as extensões estejam
+                indisponíveis.
+            </para>
+
+            <xi:include href="requirements-php-extensions-table.xml" />
+        </sect2>
+
+        <sect2 id="requirements.zendcomponents">
+
+            <title>Componentes do Zend Framework</title>
+
+            <para>
+                Abaixo está uma tabela que lista todos os componentes do Zend Framework
+                disponíveis e qual a extensão <acronym>PHP</acronym> que necessitam. Isso pode
+                te ajudar a saber quais extensões são necessárias em sua aplicação. Nem todas as
+                extensões utilizadas pelo Zend Framework são necessárias em cada aplicação.
+            </para>
+
+            <para>
+                Uma dependência do tipo "hard" indica que os componentes ou classes não poderão
+                funcionar corretamente se a respectiva extensão não estiver disponível, enquanto
+                uma dependência do tipo "soft" indica que o componente poderá usar a extensão, se
+                estiver disponível, mas irá funcionar corretamente se não estiver. Muitos
+                componentes utilizarão automaticamente determinadas extensões, se estas estiverem
+                disponíveis, para otimizar o desempenho, mas vão executar um código com
+                funcionalidade similar no próprio componente caso as extensões estejam
+                indisponíveis.
+            </para>
+
+            <xi:include href="requirements-zendcomponents-table.xml" />
+        </sect2>
+
+        <sect2 id="requirements.dependencies">
+
+            <title>Dependências do Zend Framework</title>
+
+            <para>
+                Abaixo você encontrará uma tabela com os componentes do Zend Framework e suas
+                respectivas dependências com outros componentes do Zend Framework. Isto te
+                ajudará se precisar ter apenas componentes individuais em vez do
+                Zend Framework completo.
+            </para>
+
+            <para>
+                Uma dependência do tipo "hard" indica que os componentes ou classes não poderão
+                funcionar corretamente se o respectivo componente dependente não estiver
+                disponível, enquanto uma dependência do tipo "soft" indica que o componente pode
+                precisar do componente dependente em situações especiais ou com adaptadores
+                especiais. Enfim, uma dependência do tipo "fix" indica que estes componentes ou
+                classes, em todo caso, são utilizados por subcomponentes, e uma dependência do
+                tipo "sub" indica que estes componentes podem ser utilizados pelos subcomponentes
+                em situações especiais ou com adaptadores especiais.
+            </para>
+
+            <note>
+                <para>
+                    Mesmo se for possível separar os componentes individuais para o uso do Zend
+                    Framework completo, você deve ter em mente que isso pode levar a problemas
+                    quando os arquivos são perdidos ou os componentes são usados de dinamicamente.
+                </para>
+            </note>
+
+            <xi:include href="requirements-dependencies-table.xml" />
+        </sect2>
 
     </sect1>
 

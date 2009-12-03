@@ -60,7 +60,7 @@ $processor = PROCESSOR_PDFTK;
 
 // Number of documents (populated with random strings) to concatenate.
 
-$iterations = 10;
+$iterations = 3;
 
 // -----------------------------------------------------------------------------
 
@@ -95,8 +95,8 @@ $date->setLocale(Demos_Zend_Service_LiveDocx_Helper::LOCALE);
 
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME);
-$phpLiveDocx->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
+$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
+            ->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
 
 $phpLiveDocx->setLocalTemplate('template.docx');
 
@@ -105,13 +105,13 @@ for ($iteration = 1; $iteration <= $iterations; $iteration ++) {
     $tempFilename = sprintf('%s/%010s.pdf', $tempDirectory, $iteration);
     $tempFilenames[] = $tempFilename;
     
-    $phpLiveDocx->assign('software', randomString());
-    $phpLiveDocx->assign('licensee', randomString());
-    $phpLiveDocx->assign('company',  randomString());
-    $phpLiveDocx->assign('date',     $date->now()->get(Zend_Date::DATE_LONG));
-    $phpLiveDocx->assign('time',     $date->now()->get(Zend_Date::TIME_LONG));
-    $phpLiveDocx->assign('city',     randomString());
-    $phpLiveDocx->assign('country',  randomString());
+    $phpLiveDocx->assign('software', randomString())
+                ->assign('licensee', randomString())
+                ->assign('company',  randomString())
+                ->assign('date',     $date->now()->get(Zend_Date::DATE_LONG))
+                ->assign('time',     $date->now()->get(Zend_Date::TIME_LONG))
+                ->assign('city',     randomString())
+                ->assign('country',  randomString());
         
     $phpLiveDocx->createDocument();
     
@@ -126,7 +126,7 @@ unset($phpLiveDocx, $date);
 
 // Concatenate temporary documents and write output document
 
-$outputFilename = './document.pdf';
+$outputFilename = './document-concat.pdf';
 
 $logger->log('Concatenating temporary documents...', Zend_Log::INFO);
 

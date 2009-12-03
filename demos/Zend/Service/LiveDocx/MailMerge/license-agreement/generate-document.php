@@ -10,18 +10,18 @@ $date->setLocale(Demos_Zend_Service_LiveDocx_Helper::LOCALE);
 
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME);
-$phpLiveDocx->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
+$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
+            ->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
 
 $phpLiveDocx->setLocalTemplate('template.docx');
 
-$phpLiveDocx->assign('software', 'Magic Graphical Compression Suite v1.9');
-$phpLiveDocx->assign('licensee', 'Henry Döner-Meyer');
-$phpLiveDocx->assign('company',  'Co-Operation');
-$phpLiveDocx->assign('date',     $date->get(Zend_Date::DATE_LONG));
-$phpLiveDocx->assign('time',     $date->get(Zend_Date::TIME_LONG));
-$phpLiveDocx->assign('city',     'Berlin');
-$phpLiveDocx->assign('country',  'Germany');
+$phpLiveDocx->assign('software', 'Magic Graphical Compression Suite v1.9')
+            ->assign('licensee', 'Henry Döner-Meyer')
+            ->assign('company',  'Co-Operation')
+            ->assign('date',     $date->get(Zend_Date::DATE_LONG))
+            ->assign('time',     $date->get(Zend_Date::TIME_LONG))
+            ->assign('city',     'Berlin')
+            ->assign('country',  'Germany');
 
 /**
  * ALTERNATIVE: Concatenating PDF files locally - basic

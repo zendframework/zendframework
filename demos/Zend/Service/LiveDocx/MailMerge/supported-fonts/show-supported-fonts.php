@@ -6,8 +6,8 @@ require_once dirname(__FILE__) . '/../../common.php';
 
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME);
-$phpLiveDocx->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
+$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
+            ->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
 
 system('clear');
 

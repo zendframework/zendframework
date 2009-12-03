@@ -14,8 +14,8 @@ print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(
 
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME);
-$phpLiveDocx->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
+$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
+            ->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
 
 $counter = 1;
 foreach ($phpLiveDocx->listTemplates() as $result) {

@@ -22,8 +22,8 @@ $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
 $phpLiveDocx->setSoapClient($mySoapClient);
 
-$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME);
-$phpLiveDocx->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
+$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
+            ->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
 
 $phpLiveDocx->getTemplateFormats(); // then call methods as usual
 

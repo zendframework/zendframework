@@ -10,12 +10,13 @@ $date->setLocale(Demos_Zend_Service_LiveDocx_Helper::LOCALE);
 
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME);
-$phpLiveDocx->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
+$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
+            ->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
 
 /*
  * ALTERNATIVE: Specify username and password in constructor
  */
+            
 /*
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge(
     array (
@@ -28,9 +29,9 @@ $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge(
 $phpLiveDocx->setLocalTemplate('template.doc');
 
 
-$phpLiveDocx->assign('customer_number', sprintf("#%'10s",  rand(0,1000000000)));
-$phpLiveDocx->assign('invoice_number',  sprintf("#%'10s",  rand(0,1000000000)));
-$phpLiveDocx->assign('account_number',  sprintf("#%'10s",  rand(0,1000000000)));
+$phpLiveDocx->assign('customer_number', sprintf("#%'10s",  rand(0,1000000000)))
+            ->assign('invoice_number',  sprintf("#%'10s",  rand(0,1000000000)))
+            ->assign('account_number',  sprintf("#%'10s",  rand(0,1000000000)));
 
 
 $billData = array (  

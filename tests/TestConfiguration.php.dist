@@ -616,6 +616,17 @@ define('TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PUBLIC_KEY', 'public mailhide key'
 define('TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PRIVATE_KEY', 'private mailhide key');
 
 /**
+ * Zend_Service_LiveDocx configuration
+ *
+ * Define username and password in order to run unit tests for LiveDocX web 
+ * services.
+ *
+ * phpunit/phpunit will typically work.
+ */
+define('TESTS_ZEND_SERVICE_LIVEDOCX_USERNAME', false);
+define('TESTS_ZEND_SERVICE_LIVEDOCX_PASSWORD', false);
+
+/**
  * Zend_Soap_AutoDiscover scenario tests for complex objects and wsdl generation
  *
  * Copy all the files of zf/tests/Zend/Soap/_files/fulltests into a directory

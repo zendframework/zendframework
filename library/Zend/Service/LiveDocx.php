@@ -231,12 +231,12 @@ class Zend_Service_LiveDocx
                 );
             }
             
-            if (null === ($client = $this->getSoapClient())) {
+            if (null === $this->getSoapClient()) {
                 $this->_initSoapClient($this->_endpoint);
             }            
             
             try {
-                $client->LogIn(array(
+                $this->getSoapClient()->LogIn(array(
                     'username' => $this->getUsername(),
                     'password' => $this->getPassword(),
                 ));

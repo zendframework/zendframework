@@ -1,20 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 17175 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.service.introduction">
-  <title>Introdução</title>
+    <title>Introdução</title>
+    <para>
+        <classname>Zend_Service</classname> é uma classe abstrata que serve como base para
+        implementações para web service, como <acronym>SOAP</acronym> ou REST.
+    </para>
+    <para>
+        Se você precisar de suporte básico para serviços REST baseados em <acronym>XML</acronym>,
+        você pode olhar em <link
+            linkend="zend.rest.client"><classname>Zend_Rest_Client</classname></link>.
+    </para>
+    <para>
+        Além de ser capaz de estender o <classname>Zend_Service</classname> e usar o
+        <classname>Zend_Rest_Client</classname> para web services baseados em REST, Zend
+        também fornece suporte para web services populares. Consulte as seções seguintes
+        para obter informações específicas sobre cada web service suportado.
+    </para>
 
-  <para><code>Zend_Service</code> é uma classe abstrata que serve de base para
-  a implementação de web services (ex: XML-RPC).</para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <link linkend="zend.service.akismet">Akismet</link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.service.amazon">Amazon</link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.service.audioscrobbler">Audioscrobbler</link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.service.delicious">Del.icio.us</link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.service.flickr">Flickr</link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.service.simpy">Simpy</link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.service.slideshare">SlideShare</link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.service.strikeiron">StrikeIron</link>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <link linkend="zend.service.yahoo">Yahoo!</link>
+            </para>
+        </listitem>
+    </itemizedlist>
 
-  <para><code>Zend_Service</code> oferece suporte para qualquer web service
-  baseado em REST por meio do modulo <link
-  linkend="zend.service.rest"><code>Zend_Service_Rest</code></link>.</para>
+    <para>
+        Mais serviços serão adicionados no futuro.
+    </para>
 
-  <para>Além da possibilidade de poder extender a classe
-  <code>Zend_Service</code> e usar o <code>Zend_Service_Rest</code> para web
-  services baseados em REST, Zend também fornece suporte a web services
-  populares tais como <link linkend="zend.service.amazon">Amazon</link>, <link
-  linkend="zend.service.flickr">Flickr</link>, e <link
-  linkend="zend.service.yahoo">Yahoo!</link>. Outros poderão ser acrescentados
-  em um futuro próximo.</para>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

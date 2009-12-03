@@ -463,8 +463,8 @@ foreach ($links as $link) {
         <methodname>Zend_Feed_Reader_FeedInterface::getCategories()</methodname>.
         When used with any RSS or Atom feed, this method will return category data as
         a container object called <classname>Zend_Feed_Reader_Collection_Category</classname>.
-        The container object will contain, per category, three fields of data: type, scheme and
-        label. The "type" is the basic category name, often machine readable (i.e. plays nice
+        The container object will contain, per category, three fields of data: term, scheme and
+        label. The "term" is the basic category name, often machine readable (i.e. plays nice
         with URIs). The scheme represents a categorisation scheme (usually a URI identifier) also
         known as a "domain" in RSS 2.0. The "label" is a human readable category name which supports
         html entities.</para>
@@ -487,7 +487,7 @@ foreach ($categories as $cat) {
     <para>However, the container class allows you to access the "most relevant" data
     as a simple array using the <methodname>getValues()</methodname> method. The concept
     of "most relevant" is obviously a judgement call. For categories it means the category labels
-    (not the types or schemes) while for authors it would be the authors' names
+    (not the terms or schemes) while for authors it would be the authors' names
     (not their email addresses or URLs). The simple array is flat (just values) and passed
     through <methodname>array_unique</methodname> to remove duplication.</para>
     
@@ -671,8 +671,8 @@ $labels = $categories->getValues();
                         <entry>
                             Returns a <classname>Zend_Feed_Reader_Collection_Category</classname>
                             object containing the details of any categories associated with the overall feed.
-                            The supported fields include "type" (the machine readable category name), "scheme"
-                            (the categorisation scheme for this category), and "label" (a html decoded human readable
+                            The supported fields include "term" (the machine readable category name), "scheme"
+                            (the categorisation scheme/domain for this category), and "label" (a html decoded human readable
                             category name). Where any of the three fields are absent from the field, they are either
                             set to the closest available alternative or, in the case of "scheme", set to NULL.
                         </entry>
@@ -1013,8 +1013,8 @@ $labels = $categories->getValues();
                         <entry>
                             Returns a <classname>Zend_Feed_Reader_Collection_Category</classname>
                             object containing the details of any categories associated with the entry.
-                            The supported fields include "type" (the machine readable category name), "scheme"
-                            (the categorisation scheme for this category), and "label" (a html decoded human readable
+                            The supported fields include "term" (the machine readable category name), "scheme"
+                            (the categorisation scheme/domain for this category), and "label" (a html decoded human readable
                             category name). Where any of the three fields are absent from the field, they are either
                             set to the closest available alternative or, in the case of "scheme", set to NULL.
                         </entry>

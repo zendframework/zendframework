@@ -461,8 +461,8 @@ foreach ($links as $link) {
             irgendeinem RSS oder Atom Feed verwendet wird, gibt diese Methode Daten der Kategorie
             als Container Objekt zurück welches
             <classname>Zend_Feed_Reader_Collection_Category</classname> genannt wird. Das Container
-            Objekt wird, für jede Kategorie, drei Felder an Daten enthalten: Typ, Schema und Label.
-            "type" ist der grundsätzliche Name der Kategorie, oft Maschinen lesbar (normalerweise
+            Objekt wird, für jede Kategorie, drei Felder an Daten enthalten: term, schema und label.
+            "term" ist der grundsätzliche Name der Kategorie, oft Maschinen lesbar (normalerweise
             ein URI Identifikator) und in RSS 2.0 auch bekannt als "domain". "label" ist ein
             menschlich lesbarer Kategorie Name welcher Html Entities unterstützt.
         </para>
@@ -681,7 +681,7 @@ $labels = $categories->getValues();
                             Gibt ein <classname>Zend_Feed_Reader_Collection_Category</classname>
                             Objekt zurück welches die Details aller Kategorien enthält die im
                             kompletten Feed enthalten sind. Die unterstützten Felder enthalten
-                            "type" (den Maschinen lesbaren Namen der Kategorie), "scheme"
+                            "term" (den Maschinen lesbaren Namen der Kategorie), "scheme"
                             (dem Schema der Kategorisierung für diese Kategorie), und "label" (ein
                             Html dekodierter menschlich lesbarer Kategoriename). Wenn irgendeines
                             der drei Felder abwesend ist, werden Sie entweder auf die näheste
@@ -1028,7 +1028,7 @@ $labels = $categories->getValues();
                         <entry>
                             Gibt ein <classname>Zend_Feed_Reader_Collection_Category</classname>
                             Objekt zurück welches die Details jeder Kategorie enthält welche mit dem
-                            Eintrag assoziiert ist. Die unterstützten Felder sind "type" (der
+                            Eintrag assoziiert ist. Die unterstützten Felder sind "term" (der
                             Maschinen lesbare Name der Kategorie), "scheme" (der Name des Schemas
                             der Kategorisierung für diese Kategorie), und "label" (ein Html
                             dekodierter menschlich lesbarer Name der Kategorie). Wenn eines der drei

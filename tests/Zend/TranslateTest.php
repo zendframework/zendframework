@@ -626,6 +626,17 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Translating Object
+     */
+    public function testObjectTranslation()
+    {
+        $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, dirname(__FILE__) . '/Translate/Adapter/_files/testarray', 'en_GB', array('scan' => Zend_Translate::LOCALE_DIRECTORY));
+        $this->assertEquals('Message 1 (ja)', $lang->_('Message 1', 'ja'));
+
+        $this->assertEquals($lang, $lang->translate($lang));
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno

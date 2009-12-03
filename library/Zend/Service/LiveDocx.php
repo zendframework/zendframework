@@ -101,8 +101,8 @@ class Zend_Service_LiveDocx
      * {code}
      * $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
      * 
-     * $phpLiveDocx->setUsername('myUsername');
-     * $phpLiveDocx->setPassword('myPassword');
+     * $phpLiveDocx->setUsername('myUsername')
+     *             ->setPassword('myPassword');
      * {/code}
      * 
      * Or, if you want to specify your own SoapClient:
@@ -110,8 +110,8 @@ class Zend_Service_LiveDocx
      * {code}
      * $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
      * 
-     * $phpLiveDocx->setUsername('myUsername');
-     * $phpLiveDocx->setPassword('myPassword');
+     * $phpLiveDocx->setUsername('myUsername')
+     *             ->setPassword('myPassword');
      * 
      * $phpLiveDocx->setSoapClient(
      *     new Zend_Soap_Client('https://api.example.com/path/mailmerge.asmx?WSDL')

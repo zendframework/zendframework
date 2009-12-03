@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18682 -->
+<!-- EN-Revision: 19349 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -502,6 +502,9 @@
         <xi:include href="module_specs/Zend_Service_Audioscrobbler.xml" />
         <xi:include href="module_specs/Zend_Service_Delicious.xml" />
         <xi:include href="module_specs/Zend_Service_Flickr.xml" />
+        <xi:include href="module_specs/Zend_Service_LiveDocx.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Service_LiveDocx.xml"/></xi:fallback>
+        </xi:include>
         <xi:include href="module_specs/Zend_Service_Nirvanix.xml" />
         <xi:include href="module_specs/Zend_Service-ReCaptcha.xml" />
         <xi:include href="module_specs/Zend_Service_Simpy.xml" />
@@ -640,9 +643,7 @@
         <xi:include href="ref/migration-06.xml" />
     </appendix>
     <xi:include href="ref/coding_standard.xml" />
-    <xi:include href="ref/documentation-standard.xml">
-        <xi:fallback><xi:include href="../en/ref/documentation-standard.xml" /></xi:fallback>
-    </xi:include>
+    <xi:include href="ref/documentation-standard.xml" />
     <xi:include href="ref/project-structure.xml" />
     <appendix id="performance">
         <title>Zend Framework パフォーマンスガイド</title>

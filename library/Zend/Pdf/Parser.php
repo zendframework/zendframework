@@ -236,7 +236,7 @@ class Zend_Pdf_Parser
                 throw new Zend_Pdf_Exception(sprintf('PDF file syntax error. Offset - 0x%X. Wrong W dictionary entry. Only type field of stream entries has default value and could be zero length.', $offset));
             }
 
-            $xrefStreamData = &$xrefStream->value;
+            $xrefStreamData = $xrefStream->value;
 
             if ($trailerDict->Index !== null) {
                 if ($trailerDict->Index->getType() != Zend_Pdf_Element::TYPE_ARRAY) {

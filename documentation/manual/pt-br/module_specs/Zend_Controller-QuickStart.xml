@@ -22,7 +22,7 @@
             em mente, tanto por derivação das classes existentes, como escrevendo novas classes
             que implementam as várias interfaces e classes abstratas que formam a fundação da
             família de classes controladoras, ou escrevendo plugins ou auxiliadores de ação para
-            aumentar ou manipular a funcionalidade do sistema. 
+            aumentar ou manipular a funcionalidade do sistema.
         </para>
     </sect2>
 
@@ -179,8 +179,8 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 <emphasis>roadmap</emphasis> e para a ação <emphasis>components</emphasis>. Se
                 nenhuma ação for informada, a ação <emphasis>index</emphasis> é assumida, e se
                 nenhum controlador for informado, o controlador <emphasis>index</emphasis> é
-                assumido (seguindo a convenção do Apache que mapeia um DirectoryIndex
-                automaticamente).
+                assumido (seguindo a convenção do Apache que mapeia um
+                <emphasis>DirectoryIndex</emphasis> automaticamente).
             </para>
 
             <para>
@@ -189,7 +189,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 controlador, com a primeira letra em maiúsculo, e acrescenta a palavra
                 <emphasis>Controller</emphasis>. Sendo assim, em nosso exemplo acima, o
                 controlador <emphasis>roadmap</emphasis> é mapeado para a classe
-                <classname>RoadmapController</classname>. 
+                <classname>RoadmapController</classname>.
             </para>
 
             <para>

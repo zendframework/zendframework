@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19389 -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle ヘルパー</title>
 
@@ -58,7 +58,7 @@
             <title>Headstyle で条件コメントを使う例</title>
             <programlisting language="php"><![CDATA[
 // スクリプトを追加します
-$this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
+$this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
 ]]></programlisting>
         </example>
     </note>
@@ -70,7 +70,7 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
     </para>
 
     <para>
-        <methodname>headStyle()</methodname> メソッドを使うと、宣言の要素を手っ取り早く追加することができます。
+        <methodname>headStyle()</methodname> メソッドを使うと、宣言の要素を手っ取り早く追加できます。
         シグネチャは
         <methodname>headStyle($content$placement = 'APPEND', $attributes = array())</methodname>
         です。<varname>$placement</varname> には 'APPEND'、'PREPEND' あるいは 'SET'
@@ -97,7 +97,7 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
         <title>HeadStyle ヘルパーの基本的な使用法</title>
 
         <para>
-            新しい style タグを、好きなときに指定することができます。
+            新しい style タグを、好きなときに指定できます。
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19389 -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>ビューヘルパー</title>
 
@@ -146,7 +146,7 @@ echo $this->formCheckbox('foo', 'bar');
 echo $this->formCheckbox('foo', 'bar', array('checked' => true));
 
 // 'bar' および 'baz' でチェック状態と未チェック状態を表します。これはチェックされていません
-echo $this->formCheckbox('foo', null, null, array('bar', 'baz');
+echo $this->formCheckbox('foo', null, null, array('bar', 'baz'));
 
 // 'bar' および 'baz' でチェック状態と未チェック状態を表します。これはチェックされていません
 echo $this->formCheckbox('foo', null, null, array(
@@ -155,18 +155,18 @@ echo $this->formCheckbox('foo', null, null, array(
 ));
 
 // 'bar' および 'baz' でチェック状態と未チェック状態を表します。これはチェックされています
-echo $this->formCheckbox('foo', 'bar', null, array('bar', 'baz');
+echo $this->formCheckbox('foo', 'bar', null, array('bar', 'baz'));
 echo $this->formCheckbox('foo',
                          null,
                          array('checked' => true),
-                         array('bar', 'baz');
+                         array('bar', 'baz'));
 
 // 'bar' および 'baz' でチェック状態と未チェック状態を表します。これはチェックされていません
-echo $this->formCheckbox('foo', 'baz', null, array('bar', 'baz');
+echo $this->formCheckbox('foo', 'baz', null, array('bar', 'baz'));
 echo $this->formCheckbox('foo',
                          null,
                          array('checked' => false),
-                         array('bar', 'baz');
+                         array('bar', 'baz'));
 ]]></programlisting>
 
                 <para>

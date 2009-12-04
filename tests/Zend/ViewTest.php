@@ -1074,6 +1074,54 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $paths = $view->getFilterPaths();
         $this->assertTrue(array_key_exists('My_View_', $paths), var_export($paths, 1));
     }
+    
+    /**
+     * @group ZF-8177
+     */
+    public function testRegisterHelperShouldRegisterHelperWithView()
+    {
+    	require_once dirname(__FILE__) . '/View/_stubs/HelperDir1/Stub1.php';
+    	
+    	$view = new Zend_View();
+    	$helper = new Foo_View_Helper_Stub1();
+    	$view->registerHelper($helper, 'stub1');
+    	
+    	$this->assertEquals($view->getHelper('stub1'), $helper);
+    	$this->assertEquals($view->stub1(), 'foo');
+    }
+
+    /**
+     * @group ZF-8177
+     * @expectedException Zend_View_Exception
+     */
+    public function testRegisterHelperShouldThrowExceptionIfNotProvidedAnObject()
+    {
+        $view = new Zend_View();
+        $view->registerHelper('Foo', 'foo');
+    }
+
+    /**
+     * @group ZF-8177
+     * @expectedException Zend_View_Exception
+     */
+    public function testRegisterHelperShouldThrowExceptionIfProvidedANonHelperObject()
+    {
+        $view   = new Zend_View();
+        $helper = new stdClass;
+        $view->registerHelper($helper, 'foo');
+    }
+
+    /**
+     * @group ZF-8177
+     */
+    public function testRegisterHelperShouldRegisterViewObjectWithHelper()
+    {
+    	require_once 'Zend/View/Helper/Doctype.php';
+    	$view = new Zend_View();
+    	$helper = new Zend_View_Helper_Doctype();
+    	$view->registerHelper($helper, 'doctype');
+        $this->assertSame($view, $helper->view);
+    }
 }
 
 /**

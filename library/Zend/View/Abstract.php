@@ -555,6 +555,39 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
     {
         return $this->getPluginLoader('helper')->getPaths();
     }
+    
+    /**
+     * Registers a helper object, bypassing plugin loader
+     *
+     * @param  Zend_View_Helper_Abstract|object $helper
+     * @param  string $name
+     * @return Zend_View_Abstract
+     * @throws Zend_View_Exception
+     */
+    public function registerHelper($helper, $name)
+    {
+        if (!is_object($helper)) {
+            require_once 'Zend/View/Exception.php';
+            throw new Zend_View_Exception('View helper must be an object');
+        }
+
+        if (!$helper instanceof Zend_View_Interface) {
+            if (!method_exists($helper, $name)) {
+                require_once 'Zend/View/Exception.php';
+                throw new Zend_View_Exception(
+                    'View helper must implement Zend_View_Interface or have a method matching the name provided'
+                );
+            }
+        }
+
+        if (method_exists($helper, 'setView')) {
+            $helper->setView($this);
+        }
+
+        $name = ucfirst($name);
+        $this->_helper[$name] = $helper;
+        return $this;
+    }
 
     /**
      * Get a helper by name

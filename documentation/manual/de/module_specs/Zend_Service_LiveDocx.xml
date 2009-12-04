@@ -5,7 +5,7 @@
     <title>Zend_Service_LiveDocx</title>
 
     <sect2 id="zend.service.livedocx.introduction">
-        <title>Introduction to LiveDocx</title>
+        <title>Einführung in LiveDocx</title>
 
         <para>
             LiveDocx is a <acronym>SOAP</acronym> service that allows developers to generate word

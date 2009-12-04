@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19389 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle Helfer</title>
@@ -56,7 +56,7 @@
             <title>Headstyle mit abhängigen Kommentaren</title>
             <programlisting language="php"><![CDATA[
 // Skripte hinzufügen
-$this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7');
+$this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
 ]]></programlisting>
 
         </example>

@@ -146,7 +146,7 @@ echo $this->formCheckbox('foo', 'bar');
 echo $this->formCheckbox('foo', 'bar', array('checked' => true));
 
 // 'bar' and 'baz' as checked/unchecked options; unchecked
-echo $this->formCheckbox('foo', null, null, array('bar', 'baz');
+echo $this->formCheckbox('foo', null, null, array('bar', 'baz'));
 
 // 'bar' and 'baz' as checked/unchecked options; unchecked
 echo $this->formCheckbox('foo', null, null, array(
@@ -155,18 +155,18 @@ echo $this->formCheckbox('foo', null, null, array(
 ));
 
 // 'bar' and 'baz' as checked/unchecked options; checked
-echo $this->formCheckbox('foo', 'bar', null, array('bar', 'baz');
+echo $this->formCheckbox('foo', 'bar', null, array('bar', 'baz'));
 echo $this->formCheckbox('foo',
                          null,
                          array('checked' => true),
-                         array('bar', 'baz');
+                         array('bar', 'baz'));
 
 // 'bar' and 'baz' as checked/unchecked options; unchecked
-echo $this->formCheckbox('foo', 'baz', null, array('bar', 'baz');
+echo $this->formCheckbox('foo', 'baz', null, array('bar', 'baz'));
 echo $this->formCheckbox('foo',
                          null,
                          array('checked' => false),
-                         array('bar', 'baz');
+                         array('bar', 'baz'));
 ]]></programlisting>
 
                 <para>

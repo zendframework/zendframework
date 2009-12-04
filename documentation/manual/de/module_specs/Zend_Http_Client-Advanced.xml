@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18840 -->
+<!-- EN-Revision: 19229 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - Fortgeschrittende Nutzung</title>
 
     <sect2 id="zend.http.client.redirections">
         <title>HTTP Umleitungen</title>
+
         <para>
             Standardmäßig verarbeitet <classname>Zend_Http_Client</classname>
             <acronym>HTTP</acronym> Umleitungen automatisch und folgt bis zu 5 Umleitungen. Dies
             kann durch Setzen des 'maxredirects' Konfigurationsparameters gändert werden.
         </para>
+
         <para>
             Gemäß dem HTTP/1.1 RFC sollten HTTP 301 und 302 Antworten vom Client behandelt werden,
             indem die selbe Anfrage erneut an die angebene Stelle versendet wird - unter Verwendung
@@ -31,6 +33,7 @@ $client->setConfig(array('strictredirects' => false);
 ]]></programlisting>
             </example>
         </para>
+
         <para>
             Man kann immer die Anzahl der durchgeführten Umleitungen nach dem Senden einer Anfrage
             durch Verwendung der getRedirectionsCount() Methoden erhalten.
@@ -39,6 +42,7 @@ $client->setConfig(array('strictredirects' => false);
 
     <sect2 id="zend.http.client.cookies">
         <title>Hinzufügen von Cookies und Verwendung von persistenten Cookies</title>
+
         <para>
             Zend_Http_Client stellt eine einfache Schnittstelle zum Hinzufügen von Cookies zu einer
             Anfrage bereit, so dass keine direkten Header Änderungen notwendig sind. Dies wird
@@ -275,15 +279,24 @@ $client->setUri('http://christer:secret@example.com');
             Anfragehauptteil und anfragespezifischen Header zurückgesetzt und nicht bei der nächsten
             Anfrage wiederverwendet werden.
         </para>
+
         <note>
             <title>Parameter zurück setzen</title>
+
             <para>
-                Bitte beachten, dass Header, die nicht anfragespezifisch sind, nicht zurück gesetzt
-                werden, wenn die resetParameters Methode verwendet wird. Tatsächlich werden nur
-                die 'Content-length' und 'Content-type' Header zurück gesetzt. Dies erlaubt das
-                Setzen und Vergessen von Headern wie 'Accept-language' und 'Accept-encoding'.
+                Bitte beachten, dass Header, die nicht anfragespezifisch sind, standardmäßig nicht
+                zurück gesetzt werden, wenn die <methodname>resetParameters()</methodname> Methode
+                verwendet wird. Nur die 'Content-length' und 'Content-type' Header werden zurück
+                gesetzt. Dies erlaubt das Setzen und Vergessen von Headern wie 'Accept-language' und
+                'Accept-encoding'.
+            </para>
+
+            <para>
+                Um alle Header und Daten aus der URI und der Methode zu löschen kann
+                <methodname>resetParameters(true)</methodname> verwendet werden.
             </para>
         </note>
+
         <para>
             Ein weiteres Feature, welches speziell für aufeinander folgende Anfragen entwickelt
             worden ist, ist das Cookie Jar Objekt (Keksdose). Cookie Jars erlauben das automatische
@@ -292,6 +305,7 @@ $client->setUri('http://christer:secret@example.com');
             Authentifizierungsanfrage zu durchlaufen, bevor die eigentliche Anfrage zum
             Erhalten der Daten gesendet wird.
         </para>
+
         <para>
             Wenn die Applikation eine Authentifizierungsanfrage pro Benutzer erfordert und
             nachfolgende Anfragen in mehr als einem Skript in der Applikation durchgeführt werden
@@ -335,6 +349,79 @@ $response = $client->request(Zend_Http_Client::GET);
 $_SESSION['cookiejar'] = $client->getCookieJar();
 ]]></programlisting>
         </example>
+    </sect2>
+
+    <sect2 id="zend.http.client.streaming">
+        <title>Daten Streaming</title>
+
+        <para>
+            Standardmäßig akzeptiert <classname>Zend_Http_Client</classname> Daten als PHP Strings
+            und gibt diese auch zurück. Trotzdem sind in vielen Fällen große Dateien zu Senden oder
+            zu Empfangen. Diese im Speicher zu halten könnte unnötig oder zu teuer sein. Für diese
+            Fälle unterstützt <classname>Zend_Http_Client</classname> das Lesen von Daten aus
+            Dateien (und generell auch PHP Streams) und das Schreiben von Daten in Dateien
+            (Streams).
+        </para>
+
+        <para>
+            Um Streams für die Übergabe von Daten zu <classname>Zend_Http_Client</classname> zu
+            verwenden, muss die Methode <methodname>setRawData()</methodname> verwendet werden,
+            wobei das Daten Argument eine Stream Ressource ist (z.B. das Ergebnis von
+            <methodname>fopen()</methodname>).
+            <example id="zend.http.client.streaming.example-1">
+                <title>Senden von Dateien zum HTTP Server durch Streamen</title>
+
+                <programlisting language="php"><![CDATA[
+]]>
+$fp = fopen("mybigfile.zip", "r");
+$client->setRawData($fp, 'application/zip')->request('PUT');
+</programlisting>
+            </example>
+        </para>
+
+        <para>
+            Aktuell unterstützen nur PUT Anfragen das Senden von Streams zum HTTP Server.
+        </para>
+
+        <para>
+            Um Daten vom Server als Stream zu Empfangen kann <methodname>setStream()</methodname>
+            verwendet werden. Das optionale Argument spezifiziert den Dateinamen unter dem die Daten
+            gespeichert werden. Wenn das Argument einfach nur TRUE ist (Standard), wird eine
+            temporäre Datei verwenden und gelöscht sobald das Antwort Objekt zerstört wird.
+            Wenn das Argument auf FALSE gesetzt wird, ist die Streaming-Funktionalität
+            ausgeschaltet.
+        </para>
+
+        <para>
+            Wenn Streaming verwendet wird, gibt die Methode <methodname>request()</methodname> ein
+            Objekt der Klasse <classname>Zend_Http_Client_Response_Stream</classname> zurück,
+            welches zwei nützliche Methoden hat: <methodname>getStreamName()</methodname> gibt den
+            Namen der Datei zurück in welcher die Antwort gespeichert wird, und
+            <methodname>getStream()</methodname> gibt den Stream zurück von dem die Antwort gelesen
+            werden könnte.
+        </para>
+
+        <para>
+            Man kann die Antwort entweder in eine vordefinierte Datei schreiben, oder eine temporäre
+            Datei hierfür verwenden und Sie woanders hinsenden, oder Sie durch Verwendung von
+            regulären Streaming Funktionen an eine andere Datei Senden.
+            <example id="zend.http.client.streaming.example-2">
+                <title>Empfangen von Dateien vom HTTP Server durch Streamen</title>
+
+                <programlisting language="php"><![CDATA[
+]]>
+$client->setStreaming(); // will use temp file
+$response = $client->request('GET');
+// Datei kopieren
+copy($response->getStreamName(), "my/downloads/file");
+// Stream verwenden
+$fp = fopen("my/downloads/file2", "w");
+stream_copy_to_stream($response->getStream(), $fp);
+// Kann auch in eine bekannte Datei schreiben
+$client->setStreaming("my/downloads/myfile)->request('GET');
+</programlisting>
+            </example>
+        </para>
     </sect2>
 </sect1>
 <!--

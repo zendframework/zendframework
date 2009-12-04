@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 19227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.s3">
     <title>Zend_Service_Amazon_S3</title>
@@ -457,6 +457,55 @@ foreach($list as $name) {
                 </para>
             </listitem>
        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.service.amazon.s3.streaming">
+        <title>Daten Streamen</title>
+
+        <para>
+            Es ist möglich Objekte zu Holen und Setzen wobei keine Stream Daten verwendet werden die
+            im Speicher sind, sondern Dateien oder PHP Streams. Das ist Speziell dann nützlich wenn
+            Dateien sehr groß sind um nicht über Speichergrenzen zu kommen.
+        </para>
+
+        <para>
+            Um ein Objekt mit Streaming zu Empfangen muss die Methode
+            <methodname>getObjectStream($object, $filename)</methodname> verwendet werden. Diese
+            Methode gibt einen <classname>Zend_Http_Response_Stream</classname> zurück, welcher wie
+            im Kapitel <link linkend="zend.http.client.streaming">HTTP Client Daten Streaming</link>
+            verwendet werden kann.
+            <example id="zend.service.amazon.s3.streaming.example1">
+                <title>Beispiel für das Streamen von Daten mit Zend_Service_Amazon_S3</title>
+
+                <programlisting language="php"><![CDATA[
+$response = $amazon->getObjectStream("mybycket/zftest");
+// Datei kopieren
+copy($response->getStreamName(), "my/downloads/file");
+// Hinauf Streamen
+$fp = fopen("my/downloads/file2", "w");
+stream_copy_to_stream($response->getStream(), $fp);
+]]></programlisting>
+            </example>
+        </para>
+
+        <para>
+            Der zweite Parameter für <methodname>getObjectStream()</methodname> ist optional und
+            spezifiziert die Zieldatei in welche die dAten geschrieben werden. Wenn er nicht
+            spezifiziert ist, wird eine temporäre Datei verwendet. Diese wird gelöscht nachdem das
+            Antwort-Objekt gelöscht wurde.
+         </para>
+
+         <para>
+             Um ein Objekt mit Streaming zu Senden kann <methodname>putFileStream()</methodname>
+             verwendet werden. Es hat die gleiche Signatur wie <methodname>putFile()</methodname>
+             verwendet aber Streaming und liest die Datei nicht in den Speicher ein.
+         </para>
+
+         <para>
+             Man kann auch eine Stream Ressource an die <methodname>putObject()</methodname> Methode
+             als Daten Parameter übergeben. In diesem Fall werden die Daten vom Stream gelesen wenn
+             die Anfrage an den Server gesendet wird.
+         </para>
     </sect2>
 
     <sect2 id="zend.service.amazon.s3.streams">

@@ -19,10 +19,10 @@
  * @version    $Id$
  */
 
-/** Zend_Controller_Request_Abstract */
+/** @see Zend_Controller_Request_Abstract */
 require_once 'Zend/Controller/Request/Abstract.php';
 
-/** Zend_Uri */
+/** @see Zend_Uri */
 require_once 'Zend/Uri.php';
 
 /**
@@ -920,7 +920,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
     /**
      * Is this a Flash request?
      *
-     * @return bool
+     * @return boolean
      */
     public function isFlashRequest()
     {
@@ -1031,6 +1031,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
     /**
      * Get the client's IP addres
      *
+     * @param  boolean $checkProxy
      * @return string
      */
     public function getClientIp($checkProxy = true)

@@ -18,7 +18,7 @@
             dependência é o mod_rewrite em um ambiente do Apache, que pode ser usado para
             implementar as "<acronym>URL</acronym>'s amigáveis" como
             "<filename>http://www.example.com/user/edit</filename>". Se mod_rewrite não estiver
-            habilitado, o Zend Framework poderá ser configurado para suportar 
+            habilitado, o Zend Framework poderá ser configurado para suportar
             <acronym>URL</acronym>'s como
             "<command>http://www.example.com?controller=user&amp;action=edit</command>".
             <acronym>URL</acronym>'s amigáveis podem ser usadas para encurtar

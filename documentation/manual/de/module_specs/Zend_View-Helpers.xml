@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19389 -->
+<!-- EN-Revision: 19404 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -544,6 +544,40 @@ class My_View_Helper_ScriptPath
             Wenn <classname>Zend_View_Helper_Abstract</classname> erweitert wird, muß diese Methode
             nicht selbst definiert werden da Sie schon vordefiniert ist.
         </para>
+    </sect2>
+
+    <sect2 id="zend.view.helpers.registering-concrete">
+        <title>Konkrete Helper registrieren</title>
+
+        <para>
+            Manchmal ist es bequem einen View Helfer zu instanzieren, und diesen dann in der View zu
+            registrieren. Ab Version 1.10.0 ist es jetzt möglich die Methode
+            <methodname>registerHelper()</methodname> zu verwenden, welche zwei Argumente erwartet:
+            das Helfer Objekt, und den Namen mit dem es registriert wird.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$helper = new My_Helper_Foo();
+// ...etwas konfigurieren oder dependency injection durchführen...
+
+$view->registerHelper($helper, 'foo');
+]]></programlisting>
+
+        <para>
+            Wenn der Helfer eine <methodname>setView()</methodname> Methode hat, wird das View
+            Objekt diese aufrufen und sich selbst bei der Registrierung in den Helfer injizieren.
+        </para>
+
+        <note>
+            <title>Helfer-Namen sollten einer Methode entsprechen</title>
+
+            <para>
+                Das zweite Argument von <methodname>registerHelper()</methodname> ist der Name des
+                Helfers. Eine entsprechender Methodenname sollte im Helfer existieren; andernfalls
+                ruft <classname>Zend_View</classname> eine nicht existierende Methode aus wenn der
+                Helfer ausgeführt wird, was einen fatalen PHP Fehler verursacht.
+            </para>
+        </note>
     </sect2>
 </sect1>
 <!--

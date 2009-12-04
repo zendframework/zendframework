@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19380 -->
+<!-- EN-Revision: 19402 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.pregreplace">
     <title>PregReplace</title>
@@ -48,7 +48,7 @@ $filter->filter($input);
 
     <para>
         Für eine komplexere Verwendung sollte man einen Blick in <acronym>PHP</acronym>'s <ulink
-            linkend="http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php">Kapitel für
+            url="http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php">Kapitel für
             PCRE Pattern</ulink> werfen.
     </para>
 </sect2>

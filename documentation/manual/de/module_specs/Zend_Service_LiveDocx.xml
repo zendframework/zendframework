@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19366 -->
+<!-- EN-Revision: 19405 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.livedocx">
     <title>Zend_Service_LiveDocx</title>
@@ -258,7 +258,7 @@
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="figures/zend.service.livedocx.mailmerge.generation-diabasic.png" format="png"></imagedata>
+                    <imagedata fileref="figures/zend.service.livedocx.mailmerge.generation-diabasic.png" format="PNG"></imagedata>
                 </imageobject>
 
                 <caption>
@@ -288,7 +288,7 @@
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="figures/zend.service.livedocx.mailmerge.templates-msworddialog.png"
-                        format="png"></imagedata>
+                        format="PNG"></imagedata>
                 </imageobject>
 
                 <caption>
@@ -309,7 +309,7 @@
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull.png"
-                        format="png"></imagedata>
+                        format="PNG"></imagedata>
                 </imageobject>
 
                 <caption>
@@ -333,7 +333,7 @@
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped.png"
-                        format="png"></imagedata>
+                        format="PNG"></imagedata>
                 </imageobject>
 
                 <caption>
@@ -380,7 +380,7 @@ file_put_contents('document.pdf', $document);
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="figures/zend.service.livedocx.mailmerge.templates-msworddocument.png"
-                        format="png"></imagedata>
+                        format="PNG"></imagedata>
                 </imageobject>
 
                 <caption>
@@ -394,7 +394,7 @@ file_put_contents('document.pdf', $document);
             </mediaobject>
         </sect3>
 
-        <example id="zend.service.livedocx.mailmerge.advanced">
+        <sect3 id="zend.service.livedocx.mailmerge.advanced">
             <title>Advanced Mail-Merge</title>
 
             <para>
@@ -427,7 +427,7 @@ file_put_contents('document.pdf', $document);
 
             <mediaobject>
                 <imageobject>
-                    <imagedata fileref="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat.png" format="png"></imagedata>
+                    <imagedata fileref="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat.png" format="PNG"></imagedata>
                 </imageobject>
 
                 <caption>
@@ -469,7 +469,7 @@ blockEnd_block1
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate.png"
-                        format="png"></imagedata>
+                        format="PNG"></imagedata>
                 </imageobject>
 
                 <caption>
@@ -543,7 +543,7 @@ file_put_contents('document.pdf', $document);
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument.png"
-                        format="png"></imagedata>
+                        format="PNG"></imagedata>
                 </imageobject>
 
                 <caption>
@@ -567,9 +567,9 @@ file_put_contents('document.pdf', $document);
             <para>
                 <emphasis>NOTE:</emphasis> blocks may not be nested.
             </para>
-        </example>
+        </sect3>
 
-        <example id="zend.service.livedocx.mailmerge.bitmaps">
+        <sect3 id="zend.service.livedocx.mailmerge.bitmaps">
             <title>Generating bitmaps image files</title>
 
             <para>
@@ -640,7 +640,7 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1.png"
-                        format="png"></imagedata>
+                        format="PNG"></imagedata>
                 </imageobject>
 
                 <caption>
@@ -655,7 +655,7 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
             <mediaobject>
                 <imageobject>
                     <imagedata fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2.png"
-                        format="png"></imagedata>
+                        format="PNG"></imagedata>
                 </imageobject>
 
                 <caption>
@@ -666,7 +666,7 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
                     </para>
                 </caption>
             </mediaobject>
-        </example>
+        </sect3>
 
         <sect3 id="zend.service.livedocx.mailmerge.templates-types">
             <title>Local vs. Remote Templates</title>
@@ -857,7 +857,7 @@ Zend_Debug::dump($phpLiveDocx->getTemplateFormats());
                 </para>
             </example>
 
-            <example id="zend.service.livedocx.mailmerge.information.gettemplateformats">
+            <example id="zend.service.livedocx.mailmerge.information.getdocumentformats">
                 <title>Get Array of Supported Document File Formats</title>
 
                 <para>

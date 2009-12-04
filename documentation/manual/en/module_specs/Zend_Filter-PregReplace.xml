@@ -47,7 +47,7 @@ $filter->filter($input);
 
     <para>
         For a more complex usage take a look into <acronym>PHP</acronym>'s <ulink
-            linkend="http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php">PCRE
+            url="http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php">PCRE
             Pattern Chapter</ulink>.
     </para>
 </sect2>

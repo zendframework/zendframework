@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18311 -->
+<!-- EN-Revision: 19380 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -86,13 +86,9 @@
     <xi:include href="Zend_Filter-NormalizedToLocalized.xml" />
     <xi:include href="Zend_Filter-Null.xml" />
 
-    <sect2 id="zend.filter.set.stripnewlines">
-        <title>StripNewlines</title>
-        <para>
-            文字列 <varname>$value</varname> から一切の改行制御文字を取り除いたものを返します。
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Filter-PregReplace.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Filter-PregReplace.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Filter-RealPath.xml" />
     <xi:include href="Zend_Filter-StringToLower.xml" />
     <xi:include href="Zend_Filter-StringToUpper.xml" />
@@ -102,6 +98,13 @@
         <para>
             文字列 <varname>$value</varname>
             の先頭と末尾から文字を取り除いたものを返します。
+        </para>
+    </sect2>
+
+    <sect2 id="zend.filter.set.stripnewlines">
+        <title>StripNewlines</title>
+        <para>
+            文字列 <varname>$value</varname> から一切の改行制御文字を取り除いたものを返します。
         </para>
     </sect2>
 

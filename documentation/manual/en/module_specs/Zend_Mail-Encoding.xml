@@ -21,7 +21,7 @@
 
     <programlisting language="php"><![CDATA[
 // By default Zend_Mime::ENCODING_QUOTEDPRINTABLE
-$mail = new Zend_Mail('UTF-8');
+$mail = new Zend_Mail();
 
 // Reset to Base64 Encoding.
 $mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);

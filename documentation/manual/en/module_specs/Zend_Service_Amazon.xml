@@ -75,7 +75,9 @@ foreach ($results as $result) {
                 resembles the Fluent Interface design pattern.
             </para>
             <programlisting language="php"><![CDATA[
-$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY', 'US, 'AMAZON_SECRET_KEY');
+$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY',
+                                       'US,
+                                       'AMAZON_SECRET_KEY');
 $query->category('Books')->Keywords('PHP');
 $results = $query->search();
 foreach ($results as $result) {

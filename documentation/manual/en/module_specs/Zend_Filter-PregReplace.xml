@@ -21,7 +21,8 @@
     </para>
 
     <programlisting language="php"><![CDATA[
-$filter = new Zend_Filter_PregReplace(array('match' => 'bob', 'replace' => 'john'));
+$filter = new Zend_Filter_PregReplace(array('match' => 'bob',
+                                            'replace' => 'john'));
 $input  = 'Hy bob!";
 
 $filter->filter($input);

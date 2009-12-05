@@ -854,7 +854,9 @@ $iterator = new RecursiveIteratorIterator(
 foreach ($iterator as $chainedAction) {
     $actionsCount++;
 }
-printf("Actions in a tree: %d\n", $actionsCount++); // Prints 'Actions in a tree: 4'
+
+// Prints 'Actions in a tree: 4'
+printf("Actions in a tree: %d\n", $actionsCount++);
 ]]></programlisting>
         </sect3>
 
@@ -1051,18 +1053,23 @@ $pdf->save($path, true);
 $pdf = Zend_Pdf::load($path);
 
 foreach ($pdf->outlines as $documentRootOutlineEntry) {
-    $iterator = new RecursiveIteratorIterator($documentRootOutlineEntry,
-                                              RecursiveIteratorIterator::SELF_FIRST);
+    $iterator = new RecursiveIteratorIterator(
+                    $documentRootOutlineEntry,
+                    RecursiveIteratorIterator::SELF_FIRST
+                );
     foreach ($iterator as $childOutlineItem) {
         $OutlineItemTarget = $childOutlineItem->getTarget();
         if ($OutlineItemTarget instanceof Zend_Pdf_Destination) {
             if ($pdf->resolveDestination($OutlineItemTarget) === null) {
-                // Mark Outline item with unresolvable destination using RED color
+                // Mark Outline item with unresolvable destination
+                // using RED color
                 $childOutlineItem->setColor(new Zend_Pdf_Color_Rgb(1, 0, 0));
             }
         } else if ($OutlineItemTarget instanceof Zend_Pdf_Action_GoTo) {
-            if ($pdf->resolveDestination($OutlineItemTarget->setDestination()) === null) {
-                // Mark Outline item with unresolvable destination using RED color
+            $OutlineItemTarget->setDestination();
+            if ($pdf->resolveDestination($OutlineItemTarget) === null) {
+                // Mark Outline item with unresolvable destination
+                // using RED color
                 $childOutlineItem->setColor(new Zend_Pdf_Color_Rgb(1, 0, 0));
             }
         }

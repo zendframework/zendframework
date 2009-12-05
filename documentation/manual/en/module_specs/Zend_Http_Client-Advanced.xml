@@ -362,10 +362,9 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
             <example id="zend.http.client.streaming.example-1">
                 <title>Sending file to HTTP server with streaming</title>
                 <programlisting language="php"><![CDATA[
-]]>
 $fp = fopen("mybigfile.zip", "r");
 $client->setRawData($fp, 'application/zip')->request('PUT');
-</programlisting>
+]]></programlisting>
             </example>
         </para>
         <para>

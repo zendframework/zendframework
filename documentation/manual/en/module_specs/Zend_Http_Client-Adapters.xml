@@ -578,7 +578,8 @@ try {
     // ...
 }
 
-// Further requests will work as expected until you call setNextRequestWillFail(true) again
+// Further requests will work as expected until
+// you call setNextRequestWillFail(true) again
 ]]></programlisting>
         </example>
     </sect2>

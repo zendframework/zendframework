@@ -1387,7 +1387,9 @@ http://example.com/junglebooks/rss/module/1.0/
     <link>http://example.com/junglebooks</link>
     <description>Many book reviews!</description>
     <pubDate>Fri, 26 Jun 2009 19:15:10 GMT</pubDate>
-    <jungle:dayPopular>http://example.com/junglebooks/book/938</jungle:dayPopular>
+    <jungle:dayPopular>
+        http://example.com/junglebooks/book/938
+    </jungle:dayPopular>
     <item>
         <title>Review Of Flatland: A Romance of Many Dimensions</title>
         <link>http://example.com/junglebooks/review/987</link>

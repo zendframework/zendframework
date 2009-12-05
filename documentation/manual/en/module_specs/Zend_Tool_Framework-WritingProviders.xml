@@ -78,16 +78,16 @@
             </para>
 
             <programlisting language="php"><![CDATA[
-    class My_Component_Manifest implements Zend_Tool_Framework_Manifest_ProviderManifestable
+class My_Component_Manifest
+    implements Zend_Tool_Framework_Manifest_ProviderManifestable
+{
+    public function getProviders()
     {
-        public function getProviders()
-        {
-            return array(
-                new My_Component_HelloProvider()
-            );
-        }
+        return array(
+            new My_Component_HelloProvider()
+        );
     }
-
+}
 ]]></programlisting>
 
         </example>
@@ -147,7 +147,8 @@ class My_Component_HelloProvider
 {
     public function say()
     {
-        $this->_registry->getResponse()->appendContent("Hello from my provider!");
+        $this->_registry->getResponse
+                        ->appendContent("Hello from my provider!");
     }
 }
 ]]></programlisting>
@@ -220,7 +221,9 @@ class My_Component_HelloProvider
 {
     public function say($name = 'Ralph')
     {
-        $nameResponse = $this->_registry->getClient()->promptInteractiveInput("Whats your name?");
+        $nameResponse = $this->_registry
+                             ->getClient()
+                             ->promptInteractiveInput("Whats your name?");
         $name = $name->getContent();
 
         echo 'Hello' . $name . ', from my provider!';

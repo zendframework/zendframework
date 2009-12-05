@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 19419 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
@@ -84,7 +84,9 @@ foreach ($results as $result) {
                 Interface Design Pattern verwendet.
             </para>
             <programlisting language="php"><![CDATA[
-$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
+$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY',
+                                       'US',
+                                       'AMAZON_SECRET_KEY');
 $query->category('Books')->Keywords('PHP');
 $results = $query->search();
 foreach ($results as $result) {

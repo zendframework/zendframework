@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19402 -->
+<!-- EN-Revision: 19419 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.pregreplace">
     <title>PregReplace</title>
@@ -22,7 +22,8 @@
     </para>
 
     <programlisting language="php"><![CDATA[
-$filter = new Zend_Filter_PregReplace(array('match' => 'bob', 'replace' => 'john'));
+$filter = new Zend_Filter_PregReplace(array('match' => 'bob',
+                                            'replace' => 'john'));
 $input  = 'Hy bob!";
 
 $filter->filter($input);

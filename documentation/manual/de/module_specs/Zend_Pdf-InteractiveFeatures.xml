@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18824 -->
+<!-- EN-Revision: 19419 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.interactive-features">
     <title>Interaktive Features</title>
@@ -859,7 +859,9 @@ $iterator = new RecursiveIteratorIterator(
 foreach ($iterator as $chainedAction) {
     $actionsCount++;
 }
-printf("Aktionen im Baum: %d\n", $actionsCount++); // Ausgabe 'Aktionen im Baum: 4'
+
+// Ausgabe 'Aktionen im Baum: 4'
+printf("Aktionen im Baum: %d\n", $actionsCount++);
 ]]></programlisting>
         </sect3>
 
@@ -1063,8 +1065,10 @@ $pdf->save($path, true);
 $pdf = Zend_Pdf::load($path);
 
 foreach ($pdf->outlines as $documentRootOutlineEntry) {
-    $iterator = new RecursiveIteratorIterator($documentRootOutlineEntry,
-                                              RecursiveIteratorIterator::SELF_FIRST);
+    $iterator = new RecursiveIteratorIterator(
+                    $documentRootOutlineEntry,
+                    RecursiveIteratorIterator::SELF_FIRST
+                );
     foreach ($iterator as $childOutlineItem) {
         $OutlineItemTarget = $childOutlineItem->getTarget();
         if ($OutlineItemTarget instanceof Zend_Pdf_Destination) {
@@ -1074,7 +1078,8 @@ foreach ($pdf->outlines as $documentRootOutlineEntry) {
                 $childOutlineItem->setColor(new Zend_Pdf_Color_Rgb(1, 0, 0));
             }
         } else if ($OutlineItemTarget instanceof Zend_Pdf_Action_GoTo) {
-            if ($pdf->resolveDestination($OutlineItemTarget->setDestination()) === null) {
+            $OutlineItemTarget->setDestination();
+            if ($pdf->resolveDestination($OutlineItemTarget) === null) {
                 // Markiert ein Outline Element dessen Ziel
                 // nicht auflösbar ist mit Roter Farbe
                 $childOutlineItem->setColor(new Zend_Pdf_Color_Rgb(1, 0, 0));

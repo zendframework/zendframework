@@ -21,19 +21,22 @@
                 used for rendering the path to the currently active page.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.view.helpers.initial.navigation.links">Links</link>,
                 used for rendering navigational head links (e.g.
-                <code>&lt;link rel="next" href="..." /&gt;</code>)
+                <command>&lt;link rel="next" href="..." /&gt;</command>)
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.view.helpers.initial.navigation.menu">Menu</link>,
                 used for rendering menus.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.view.helpers.initial.navigation.sitemap">Sitemap</link>,
@@ -42,6 +45,7 @@
                     format</ulink>.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link
@@ -64,42 +68,48 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>{get|set}Container()</code> gets/sets the navigation
-                container the helper should operate on by default, and
+                <methodname>getContainer()</methodname> and <methodname>setContainer()</methodname>
+                gets and sets the navigation container the helper should operate on by default, and
                 <methodname>hasContainer()</methodname> checks if the helper
                 has container registered.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>{get|set}Translator()</code> gets/sets the
-                translator used for translating labels and titles, and
-                <code>{get|set}UseTranslator()</code> controls whether
+                <methodname>getTranslator()</methodname> and
+                <methodname>setTranslator()</methodname> gets and sets the
+                translator used for translating labels and titles.
+                <methodname>getUseTranslator()</methodname> and
+                <methodname>setUseTranslator()</methodname> controls whether
                 the translator should be enabled. The method
                 <methodname>hasTranslator()</methodname> checks if the helper has
                 a translator registered.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>{get|set}Acl()</code>, <code>{get|set}Role()</code>,
-                gets/sets <acronym>ACL</acronym> (<classname>Zend_Acl</classname>) instance and
+                <methodname>getAcl()</methodname>, <methodname>setAcl()</methodname>,
+                <methodname>getRole()</methodname> and <methodname>setRole()</methodname>,
+                gets and sets <acronym>ACL</acronym> (<classname>Zend_Acl</classname>) instance and
                 role (<type>String</type> or
                 <classname>Zend_Acl_Role_Interface</classname>) used for
-                filtering out pages when rendering, and
-                <code>{get|set}UseAcl()</code> controls whether <acronym>ACL</acronym> should
+                filtering out pages when rendering. <methodname>getUseAcl()</methodname> and
+                <methodname>setUseAcl()</methodname> controls whether <acronym>ACL</acronym> should
                 be enabled. The methods <methodname>hasAcl()</methodname> and
                 <methodname>hasRole()</methodname> checks if the helper has an
                 <acronym>ACL</acronym> instance or a role registered.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>__toString()</methodname>, magic method to ensure that
-                helpers can be rendered by <code>echo</code>ing the
-                helper instance directly.
+                helpers can be rendered by echoing the helper instance directly.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>render()</methodname>, must be implemented by concrete
@@ -116,35 +126,40 @@
      <itemizedlist>
         <listitem>
             <para>
-                <code>{get|set}Indent()</code> gets/set indentation. The
-                setter accepts a <type>String</type> or an <code>int</code>.
-                In the case of an <code>int</code>, the helper will use
+                <methodname>getIndent()</methodname> and <methodname>setIndent()</methodname>
+                gets and sets indentation. The setter accepts a <type>String</type> or an
+                <type>Integer</type>. In the case of an <type>Integer</type>, the helper will use
                 the given number of spaces for indentation. I.e.,
                 <methodname>setIndent(4)</methodname> means 4 initial spaces of
                 indentation. Indentation can be specified for all helpers
                 except the Sitemap helper.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>{get|set}MinDepth()</code> gets/set the minimum depth
-                a page must have to be included by the helper. Setting
-                <constant>NULL</constant> means no minimum depth.
+                <methodname>getMinDepth()</methodname> and <methodname>setMinDepth()</methodname>
+                gets and sets the minimum depth a page must have to be included by the helper.
+                Setting <constant>NULL</constant> means no minimum depth.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>{get|set}MaxDepth()</code> gets/set the maximum depth
-                a page can have to be included by the helper. Setting
-                <constant>NULL</constant> means no maximum depth.
+                <methodname>getMaxDepth()</methodname> and <methodname>setMaxDepth()</methodname>
+                gets and sets the maximum depth a page can have to be included by the helper.
+                Setting <constant>NULL</constant> means no maximum depth.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>{get|set}RenderInvisible()</code> gets/set whether to
+                <methodname>getRenderInvisible()</methodname> and
+                <methodname>setRenderInvisible()</methodname> gets and sets whether to
                 render items that have been marked as invisible or not.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>__call()</methodname> is used for proxying calls to the
@@ -154,6 +169,7 @@
                 below.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>findActive($container, $minDepth, $maxDepth)</methodname>
@@ -167,30 +183,33 @@
                 found.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <methodname>htmlify()</methodname> renders an <code>a</code> HTML
-                element from a <classname>Zend_Navigation_Page</classname>
-                instance.
+                <methodname>htmlify()</methodname> renders an <emphasis>'a'</emphasis> HTML
+                element from a <classname>Zend_Navigation_Page</classname> instance.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>accept()</methodname> is used for determining if a page
                 should be accepted when iterating containers. This method
                 checks for page visibility and verifies that the helper's
-                role is allowed access to the page's resource/privilege.
+                role is allowed access to the page's resource and privilege.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>static setDefaultAcl()</code> is used for setting
-                a defualt <acronym>ACL</acronym> object that will be used by helpers.
+                The static method <methodname>setDefaultAcl()</methodname> is used for setting
+                a default <acronym>ACL</acronym> object that will be used by helpers.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>static setDefaultRole()</code> is used for setting
+                The static method <methodname>setDefaultRole()</methodname> is used for setting
                 a default <acronym>ACL</acronym> that will be used by helpers
             </para>
         </listitem>
@@ -198,12 +217,12 @@
 
     <para>
         If a navigation container is not explicitly set in a helper using
-        <code>$helper->setContainer($nav)</code>, the helper will look
+        <command>$helper->setContainer($nav)</command>, the helper will look
         for a container instance with the key <classname>Zend_Navigation</classname> in
         <link linkend="zend.registry">the registry</link>.
         If a container is not explicitly set or found in the registry, the
         helper will create an empty <classname>Zend_Navigation</classname>
-        container when calling <code>$helper->getContainer()</code>.
+        container when calling <command>$helper->getContainer()</command>.
     </para>
 
     <example id="zend.view.helpers.initial.navigation.proxy.example">
@@ -234,14 +253,15 @@ $this->navigation()->addPage(array(
             The navigation helpers support translation of page labels and titles.
             You can set a translator of type <classname>Zend_Translate</classname>
             or <classname>Zend_Translate_Adapter</classname> in the helper using
-            <code>$helper->setTranslator($translator)</code>, or like with other
+            <command>$helper->setTranslator($translator)</command>, or like with other
             I18n-enabled components; by adding the translator to
             <link linkend="zend.registry">the registry</link> by using the key
             <classname>Zend_Translate</classname>.
         </para>
 
         <para>
-            If you want to disable translation, use <code>$helper->setUseTranslator(false)</code>.
+            If you want to disable translation, use
+            <command>$helper->setUseTranslator(false)</command>.
         </para>
 
         <para>

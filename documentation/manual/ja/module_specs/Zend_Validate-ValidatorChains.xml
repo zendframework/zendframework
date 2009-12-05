@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18028 -->
+<!-- EN-Revision: 19419 -->
 <sect1 id="zend.validate.validator_chains">
 
     <title>バリデータチェイン</title>
@@ -15,7 +15,9 @@
         <programlisting language="php"><![CDATA[
 // バリデータチェインを作成し、そこにバリデータを追加します
 $validatorChain = new Zend_Validate();
-$validatorChain->addValidator(new Zend_Validate_StringLength(array('min' => 6, 'max' => 12)))
+$validatorChain->addValidator(
+                    new Zend_Validate_StringLength(array('min' => 6,
+                                                         'max' => 12)))
                ->addValidator(new Zend_Validate_Alnum());
 
 // ユーザ名を検証します
@@ -50,7 +52,10 @@ if ($validatorChain->isValid($username)) {
         英数字の検証を行わなくなります。
 
         <programlisting language="php"><![CDATA[
-$validatorChain->addValidator(new Zend_Validate_StringLength(array('min' => 6, 'max' => 12)), true)
+$validatorChain->addValidator(
+                    new Zend_Validate_StringLength(array('min' => 6,
+                                                         'max' => 12)),
+                    true)
                ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>
 

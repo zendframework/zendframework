@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18840 -->
+<!-- EN-Revision: 19419 -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - 接続アダプタ</title>
 
@@ -583,7 +583,8 @@ try {
     // ...
 }
 
-// これ以降の処理は、次に setNextRequestWillFail(true) をコールするまで通常通りに行います
+// これ以降の処理は、 setNextRequestWillFail(true) を次に呼び出すまで
+//通常通りに行います
 ]]></programlisting>
         </example>
     </sect2>

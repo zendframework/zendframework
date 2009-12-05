@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18960 -->
+<!-- EN-Revision: 19419 -->
 <sect2 id="zend.validate.set.email_address">
     <title>メールアドレス</title>
 
@@ -330,7 +330,11 @@ $validator->getHostnameValidator()->setValidateTld(false);
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
-$validator->setMessages(array(Zend_Validate_Hostname::UNKNOWN_TLD => 'I don't know the TLD you gave'));
+$validator->setMessages(
+    array(
+        Zend_Validate_Hostname::UNKNOWN_TLD => 'I don't know the TLD you gave'
+    )
+);
 ]]></programlisting>
 
         <para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19082 -->
+<!-- EN-Revision: 19418 -->
 <sect2 id="zend.test.phpunit.db.adapter">
     <title>データベース・テスト・アダプタの使用</title>
 
@@ -79,8 +79,7 @@ $stmt = $adapter->query("SELECT * FROM bugs");
 $qp = $adapter->getProfiler()->getLastQueryProfile();
 
 echo $qp->getQuerY(); // SELECT * FROM bugs
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         テスト・アダプタは、指定されたクエリが本当に、

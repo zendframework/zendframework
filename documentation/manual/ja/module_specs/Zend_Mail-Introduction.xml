@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18298 -->
+<!-- EN-Revision: 19418 -->
 <sect1 id="zend.mail.introduction">
 
     <title>導入</title>
@@ -132,12 +132,12 @@ $mail->send();
             <title>Sendmail トランスポートと Windows</title>
 
             <para>
-                PHPマニュアルでは、<code>mail()</code>関数は Windows と *nix ベースのシステムとでは、
+                PHPマニュアルでは、<methodname>mail()</methodname>関数は Windows と *nix ベースのシステムとでは、
                 異なる振る舞いをすると述べています。
                 Windows で Sendmail トランスポートを利用すると、
                 <methodname>addBcc()</methodname> との連携は動作しません。
                 他のすべての受信者が、受信者として彼を見られるように、
-                <code>mail()</code> 関数は BCC 受信者に送ります。
+                <methodname>mail()</methodname> 関数は BCC 受信者に送ります。
             </para>
 
             <para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 19423 -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
     <sect2 id="zend.service.amazon.introduction">
@@ -84,7 +84,9 @@ foreach ($results as $result) {
                 は、Fluent Interface パターンと似た形式です。
             </para>
             <programlisting language="php"><![CDATA[
-$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY', 'US, 'AMAZON_SECRET_KEY');
+$query = new Zend_Service_Amazon_Query('AMAZON_API_KEY',
+                                       'US',
+                                       'AMAZON_SECRET_KEY');
 $query->category('Books')->Keywords('PHP');
 $results = $query->search();
 foreach ($results as $result) {
@@ -165,7 +167,7 @@ foreach ($results as $result) {
             <title>ResponseGroup オプションの使用法</title>
             <para>
                 <code>ResponseGroup</code> オプションを使用すると、
-                レスポンスで返される情報を制御することができます。
+                レスポンスで返される情報を制御できます。
             </para>
             <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18225 -->
+<!-- EN-Revision: 19418 -->
 <sect2 id="zend.test.phpunit.testing">
     <title>コントローラおよび MVC アプリケーションのテスト</title>
 
@@ -85,7 +85,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         <important>
             <para>
                 Redirect アクションヘルパーは、<methodname>gotoAndExit()</methodname>
-                メソッドを使うときに <code>exit()</code>
+                メソッドを使うときに <methodname>exit()</methodname>
                 ステートメントを発行し、このメソッドのテストを停止させます。
                 アプリケーションのテスト容易性を考慮して、
                 リダイレクタではこのメソッドを使わないようにしましょう。
@@ -116,14 +116,13 @@ class MyController extends Zend_Controller_Action
         // do some stuff here
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <important>
             <para>
                 アプリケーションによっては、これだけでは不十分かもしれません。さらに
-                <code>preDispatch()</code> あるいは
-                <code>postDispatch()</code> といったロジックを実行するかもしれないからです。
+                <methodname>preDispatch()</methodname> あるいは
+                <methodname>postDispatch()</methodname> といったロジックを実行するかもしれないからです。
                 現状の Zend Test では、これらをうまく処理することはできません。
             </para>
         </important>

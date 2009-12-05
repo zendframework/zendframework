@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17662 -->
+<!-- EN-Revision: 19418 -->
 <sect1 id="zend.paginator.usage">
     <title>使用法</title>
 
@@ -174,7 +174,7 @@ $this->view->paginator = $paginator;
             事前にデータベースからデータを取得する必要はありません。
             どちらのアダプタも、自動的にデータを取得して総ページ数を計算します。
             もしデータベースからのデータに対して何らかの処理が必要となるのなら、
-            アダプタの <code>getItems()</code> メソッドをアプリケーション内で継承します。
+            アダプタの <methodname>getItems()</methodname> メソッドをアプリケーション内で継承します。
         </para>
 
         <para>
@@ -353,7 +353,7 @@ $paginator = new Zend_Paginator($adapter);
         <para>
             デフォルトのビュー partial とスクロール形式、
             そしてビューのインスタンスを設定してしまえば、
-            PaginationControl のコールを完全に除去することができます。
+            PaginationControl のコールを完全に除去できます。
         </para>
 
         <programlisting language="php"><![CDATA[

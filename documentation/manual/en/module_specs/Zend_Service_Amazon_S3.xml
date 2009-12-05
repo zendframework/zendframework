@@ -373,17 +373,17 @@ foreach($list as $name) {
        </itemizedlist>
     </sect2>
     <sect2 id="zend.service.amazon.s3.streaming">
-    	<title>Data Streaming</title>
-    	<para>
-    	It is possible to get and put objects using not stream data held in memory but files or PHP streams.
-    	This is especially useful when file sizes are large in order not to overcome memory limits. 
-    	</para>
-    	<para>
-    	To receive object using streaming, use method <methodname>getObjectStream($object, $filename)</methodname>. This method
-    	will return <classname>Zend_Http_Response_Stream</classname>, which can be used as described in 
-    	<link linkend="zend.http.client.streaming">HTTP Client Data Streaming</link> section.  
-    	<example id="zend.service.amazon.s3.streaming.example1">
-    	<title>Zend_Service_Amazon_S3 Data Streaming Example</title>
+        <title>Data Streaming</title>
+        <para>
+        It is possible to get and put objects using not stream data held in memory but files or PHP streams.
+        This is especially useful when file sizes are large in order not to overcome memory limits.
+        </para>
+        <para>
+        To receive object using streaming, use method <methodname>getObjectStream($object, $filename)</methodname>. This method
+        will return <classname>Zend_Http_Response_Stream</classname>, which can be used as described in
+        <link linkend="zend.http.client.streaming">HTTP Client Data Streaming</link> section.
+        <example id="zend.service.amazon.s3.streaming.example1">
+        <title>Zend_Service_Amazon_S3 Data Streaming Example</title>
              <programlisting language="php"><![CDATA[
 $response = $amazon->getObjectStream("mybycket/zftest");
 // copy file
@@ -392,22 +392,22 @@ copy($response->getStreamName(), "my/downloads/file");
 $fp = fopen("my/downloads/file2", "w");
 stream_copy_to_stream($response->getStream(), $fp);
 ]]></programlisting>
-		</example>
-    	</para>
-    	<para>Second parameter for <methodname>getObjectStream()</methodname> is optional and specifies target file
-    	 to write the data. If not specified, temporary file is used, which will be deleted after 
-    	 the respons eobject is destroyed.
-    	 </para>
-    	 
-    	 <para>
-    	 To send object using streaming, use <methodname>putFileStream()</methodname> which has the same signature as
-    	 <methodname>putFile()</methodname> but will use streaming and not read the file into memory.
-    	 </para>
-    	 
-    	 <para>
-    	 Also, you can pass stream resource to <methodname>putObject()</methodname> method data parameter,
-    	 in which case the data will be read from the stream when sending the request to the server. 
-    	 </para>
+        </example>
+        </para>
+        <para>Second parameter for <methodname>getObjectStream()</methodname> is optional and specifies target file
+         to write the data. If not specified, temporary file is used, which will be deleted after
+         the respons eobject is destroyed.
+         </para>
+
+         <para>
+         To send object using streaming, use <methodname>putFileStream()</methodname> which has the same signature as
+         <methodname>putFile()</methodname> but will use streaming and not read the file into memory.
+         </para>
+
+         <para>
+         Also, you can pass stream resource to <methodname>putObject()</methodname> method data parameter,
+         in which case the data will be read from the stream when sending the request to the server.
+         </para>
     </sect2>
     <sect2 id="zend.service.amazon.s3.streams">
         <title>Stream wrapper</title>

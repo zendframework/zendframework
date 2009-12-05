@@ -71,7 +71,7 @@
                 with a special filename ending with "Manifest.php".
                 A Provider Manifest is an implementation of the
                 <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface>
-                and requires the <code>getProviders()</code> method to return
+                and requires the <methodname>getProviders()</methodname> method to return
                 an array of instantiated providers. In anticipation of our first
                 own provider <classname>My_Component_HelloProvider</classname>
                 we will create the following manifest:
@@ -87,8 +87,8 @@
             );
         }
     }
-    ]]>
-            </programlisting>
+
+]]></programlisting>
 
         </example>
     </sect2>
@@ -150,8 +150,7 @@ class My_Component_HelloProvider
         $this->_registry->getResponse()->appendContent("Hello from my provider!");
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             As you can see one has to extend the <classname>Zend_Tool_Framework_Provider_Abstract</classname>
@@ -227,8 +226,7 @@ class My_Component_HelloProvider
         echo 'Hello' . $name . ', from my provider!';
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 This command throws an exception if the current client is not
@@ -310,8 +308,7 @@ class My_Component_HelloProvider
         }
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
         </sect3>
 
         <sect3 id="zend.tool.framework.writing-providers.advanced.configstorage">
@@ -339,8 +336,7 @@ class My_Component_HelloProvider
         }
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 The returned configuration is of the type <classname>Zend_Tool_Framework_Client_Config</classname>
@@ -364,8 +360,7 @@ class My_Component_HelloProvider
         echo "Hello $aValue!";
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 The API of the storage is very simple:
@@ -382,8 +377,7 @@ class Zend_Tool_Framework_Client_Storage
     public function remove($name);
     public function getStreamUri($name);
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <important>
                 <para>

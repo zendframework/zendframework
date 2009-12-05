@@ -84,7 +84,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
         <important>
             <para>
-                The redirect action helper issues an <code>exit()</code> statement
+                The redirect action helper issues an <methodname>exit()</methodname> statement
                 when using the method <methodname>gotoAndExit()</methodname>
                 and will then obviously also stops a test running for this method.
                 For testability of your application dont use that method on the
@@ -116,13 +116,12 @@ class MyController extends Zend_Controller_Action
         // do some stuff here
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <important>
             <para>
-                Depending on your application this is not enough as additional action, <code>preDispatch()</code> or
-                <code>postDispatch()</code> logic might be executed. This cannot be handled in a good way with
+                Depending on your application this is not enough as additional action, <methodname>preDispatch()</methodname> or
+                <methodname>postDispatch()</methodname> logic might be executed. This cannot be handled in a good way with
                 Zend Test currently.
             </para>
         </important>

@@ -440,25 +440,25 @@ foreach ($links as $link) {
         is a lazy loaded attempt - feeds are never loaded until you try to
         access them using this method.</para>
   </sect2>
-  
+
   <sect2 id="zend.feed.reader.attribute-collections">
         <title>Attribute Collections</title>
-        
+
         <para>In an attempt to simplify return types, with Zend Framework 1.10 return
         types from the various feed and entry level methods may include an object
         of type <classname>Zend_Feed_Reader_Collection_CollectionAbstract</classname>.
         Despite the special class name which I'll explain below, this is just a simple
         subclass of SPL's <classname>ArrayObject</classname>.</para>
-        
+
         <para>The main purpose here is to allow the presentation of as much data as possible
         from the requested elements, while still allowing access to the most relevant
         data as a simple array. This also enforces a standard approach to returning
         such data which previously may have wandered between arrays and objects.</para>
-        
+
         <para>The new class type acts identically to <classname>ArrayObject</classname>
         with the sole addition being a new method <methodname>getValues()</methodname>
         which returns a simple flat array containing the most relevant information.</para>
-        
+
         <para>A simple example of this is
         <methodname>Zend_Feed_Reader_FeedInterface::getCategories()</methodname>.
         When used with any RSS or Atom feed, this method will return category data as
@@ -468,10 +468,10 @@ foreach ($links as $link) {
         with URIs). The scheme represents a categorisation scheme (usually a URI identifier) also
         known as a "domain" in RSS 2.0. The "label" is a human readable category name which supports
         html entities.</para>
-        
+
         <para>To access category labels by themselves in a simple value array,
         you might commit to something like:</para>
-        
+
         <programlisting language="php"><![CDATA[
 $feed = Zend_Feed_Reader::import('http://www.example.com/atom.xml');
 $categories = $feed->getCategories();
@@ -483,14 +483,14 @@ foreach ($categories as $cat) {
 
     <para>It's a contrived example, but the point is that the labels are tied up with
     other information.</para>
-    
+
     <para>However, the container class allows you to access the "most relevant" data
     as a simple array using the <methodname>getValues()</methodname> method. The concept
     of "most relevant" is obviously a judgement call. For categories it means the category labels
     (not the terms or schemes) while for authors it would be the authors' names
     (not their email addresses or URLs). The simple array is flat (just values) and passed
     through <methodname>array_unique</methodname> to remove duplication.</para>
-    
+
     <programlisting language="php"><![CDATA[
 $feed = Zend_Feed_Reader::import('http://www.example.com/atom.xml');
 $categories = $feed->getCategories();
@@ -500,7 +500,7 @@ $labels = $categories->getValues();
     <para>The above example shows how to extract only labels and nothing else thus
     giving simple access to the category labels without any additional work to extract
     that data by itself.</para>
-        
+
   </sect2>
 
   <sect2 id="zend.feed.reader.retrieve-info">
@@ -664,7 +664,7 @@ $labels = $categories->getValues();
                             Protocol, allowing subscriptions to the feed for real-time updates.
                         </entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>getCategories()</methodname></entry>
 
@@ -1006,7 +1006,7 @@ $labels = $categories->getValues();
                             Atom/<acronym>RSS</acronym> depending on current feed type).
                         </entry>
                     </row>
-                    
+
                     <row>
                         <entry><methodname>getCategories()</methodname></entry>
 

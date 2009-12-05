@@ -284,14 +284,14 @@ $client->setUri('http://christer:secret@example.com');
         <note>
             <title>Resetting parameters</title>
             <para>
-                Note that non-request specific headers are not reset by default 
-                when the <methodname>resetParameters()</methodname> method is used. 
+                Note that non-request specific headers are not reset by default
+                when the <methodname>resetParameters()</methodname> method is used.
                 Only the 'Content-length' and 'Content-type' headers are reset. This
                 allows you to set-and-forget headers like 'Accept-language' and
                 'Accept-encoding'
             </para>
             <para>
-            To clean all headers and other data except for URI and method, use 
+            To clean all headers and other data except for URI and method, use
             <methodname>resetParameters(true)</methodname>.
             </para>
         </note>
@@ -353,12 +353,12 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
             By default, <classname>Zend_Http_Client</classname> accepts and returns data as PHP strings.
             However, in many cases there are big files to be sent or received, thus keeping them
             in memory might be unnecessary or too expensive. For these cases, <classname>Zend_Http_Client</classname>
-            supports reading data from files (and in general, PHP streams) and writing data to files (streams).  
+            supports reading data from files (and in general, PHP streams) and writing data to files (streams).
         </para>
         <para>
-        	In order to use stream to pass data to <classname>Zend_Http_Client</classname>, 
-        	use <methodname>setRawData()</methodname> method with data argument being stream resource
-        	(e.g., result of <methodname>fopen()</methodname>).
+            In order to use stream to pass data to <classname>Zend_Http_Client</classname>,
+            use <methodname>setRawData()</methodname> method with data argument being stream resource
+            (e.g., result of <methodname>fopen()</methodname>).
             <example id="zend.http.client.streaming.example-1">
                 <title>Sending file to HTTP server with streaming</title>
                 <programlisting language="php"><![CDATA[
@@ -371,24 +371,24 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
         <para>
         Only PUT requests currently support sending streams to HTTP server.
         </para>
-        
+
         <para>
         In order to receive data from the server as stream, use <methodname>setStream()</methodname>.
-        Optional argument specifies the filename where the data will be stored. If the argument is just 
+        Optional argument specifies the filename where the data will be stored. If the argument is just
         TRUE (default), temporary file will be used and will be deleted once response object is destroyed.
-        Setting argument to FALSE disables the streaming functionality.  
+        Setting argument to FALSE disables the streaming functionality.
         </para>
-        
+
         <para>
         When using streaming, <methodname>request()</methodname> method will return object of class
         <classname>Zend_Http_Client_Response_Stream</classname>, which has two useful methods:
-        <methodname>getStreamName()</methodname> will return the name of the file where the response is stored, 
-        and <methodname>getStream()</methodname> will return stream from which the response could be read.   
+        <methodname>getStreamName()</methodname> will return the name of the file where the response is stored,
+        and <methodname>getStream()</methodname> will return stream from which the response could be read.
         </para>
-        
+
         <para>
-        You can either write the response to pre-defined file, or use temporary file for storing it and 
-        send it out or write it to another file using regular stream functions.  
+        You can either write the response to pre-defined file, or use temporary file for storing it and
+        send it out or write it to another file using regular stream functions.
         <example id="zend.http.client.streaming.example-2">
                 <title>Receiving file from HTTP server with streaming</title>
                 <programlisting language="php"><![CDATA[
@@ -405,6 +405,6 @@ $client->setStreaming("my/downloads/myfile)->request('GET');
 </programlisting>
             </example>
         </para>
-        
+
     </sect2>
 </sect1>

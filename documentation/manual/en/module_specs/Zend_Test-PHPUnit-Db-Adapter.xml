@@ -73,8 +73,7 @@ $stmt = $adapter->query("SELECT * FROM bugs");
 $qp = $adapter->getProfiler()->getLastQueryProfile();
 
 echo $qp->getQuerY(); // SELECT * FROM bugs
-]]>
-    </programlisting>
+]]></programlisting>
 
     <para>
         The test adapter never checks if the query specified is really of the type SELECT, DELETE,

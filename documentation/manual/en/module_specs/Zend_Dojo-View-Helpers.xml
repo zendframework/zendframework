@@ -663,7 +663,7 @@ echo $view->editor('foo');
 
                     <para>
                         The Editor dijit uses an <acronym>HTML</acronym> <acronym>DIV</acronym> by
-                        default.  The <classname>dijit._editor.RichText</classname> documentation
+                        default. The <classname>dijit._editor.RichText</classname> documentation
                         indicates that having it built on an HTML <acronym>TEXTAREA</acronym> can
                         potentially have security implications.
                     </para>

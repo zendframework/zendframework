@@ -76,7 +76,7 @@ foreach ($results as $result) {
             </para>
             <programlisting language="php"><![CDATA[
 $query = new Zend_Service_Amazon_Query('AMAZON_API_KEY',
-                                       'US,
+                                       'US',
                                        'AMAZON_SECRET_KEY');
 $query->category('Books')->Keywords('PHP');
 $results = $query->search();

@@ -7,12 +7,12 @@
         Valid HTML and <acronym>XHTML</acronym> documents should include a
         <constant>DOCTYPE</constant> declaration. Besides being difficult to remember, these can
         also affect how certain elements in your document should be rendered (for instance,
-        CDATA escaping in <code>&lt;script&gt;</code> and
-        <code>&lt;style&gt;</code> elements.
+        CDATA escaping in <emphasis>&lt;script&gt;</emphasis> and
+        <emphasis>&lt;style&gt;</emphasis> elements.
     </para>
 
     <para>
-        The <code>Doctype</code> helper allows you to specify one of the
+        The <classname>Doctype</classname> helper allows you to specify one of the
         following types:
     </para>
 
@@ -33,7 +33,7 @@
     </para>
 
     <para>
-        The <code>Doctype</code> helper is a concrete implementation of the
+        The <classname>Doctype</classname> helper is a concrete implementation of the
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder
             helper</link>.
     </para>

@@ -5,7 +5,7 @@
     <title>Cycle Helper</title>
 
     <para>
-      The <code>Cycle</code> helper is used to alternate a set of values.
+      The <classname>Cycle</classname> helper is used to alternate a set of values.
     </para>
 
     <example id="zend.view.helpers.initial.cycle.basicusage">
@@ -53,8 +53,8 @@ $this->cycle()->prev();
 
        <para>
            To use two cycles you have to specify the names of cycles. Just set second parameter in
-           cycle method. <code>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</code>. You can
-           also use setName($name) function.
+           cycle method. <command>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</command>. You
+           can also use setName($name) function.
         </para>
 
     </example>

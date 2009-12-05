@@ -4,7 +4,7 @@
     <title>Action View Helper</title>
 
     <para>
-        The <code>Action</code> view helper enables view scripts to dispatch a
+        The <classname>Action</classname> view helper enables view scripts to dispatch a
         given controller action; the result of the response object following the
         dispatch is then returned. These can be used when a particular action
         could generate re-usable content or "widget-ized" content.
@@ -16,9 +16,9 @@
     </para>
 
     <para>
-        The <acronym>API</acronym> for the <code>Action</code> view helper follows that of most
-        <acronym>MVC</acronym> components that invoke controller actions: <code>action($action,
-            $controller, $module = null, array $params = array())</code>.
+        The <acronym>API</acronym> for the <classname>Action</classname> view helper follows that of
+        most <acronym>MVC</acronym> components that invoke controller actions:
+        <command>action($action, $controller, $module = null, array $params = array())</command>.
         <varname>$action</varname> and <varname>$controller</varname> are required; if no
         module is specified, the default module is assumed.
     </para>
@@ -27,7 +27,7 @@
         <title>Basic Usage of Action View Helper</title>
 
         <para>
-            As an example, you may have a <code>CommentController</code> with a
+            As an example, you may have a <classname>CommentController</classname> with a
             <methodname>listAction()</methodname> method you wish to invoke in order to pull
             a list of comments for the current request:
         </para>

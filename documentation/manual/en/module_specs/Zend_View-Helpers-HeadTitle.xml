@@ -4,17 +4,17 @@
     <title>HeadTitle Helper</title>
 
     <para>
-        The HTML <code>&lt;title&gt;</code> element is used to provide a title
-        for an HTML document. The <code>HeadTitle</code> helper allows you to
+        The HTML <emphasis>&lt;title&gt;</emphasis> element is used to provide a title
+        for an HTML document. The <classname>HeadTitle</classname> helper allows you to
         programmatically create and store the title for later retrieval and
         output.
     </para>
 
     <para>
-        The <code>HeadTitle</code> helper is a concrete implementation of the
+        The <classname>HeadTitle</classname> helper is a concrete implementation of the
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder
             helper</link>. It overrides the <methodname>toString()</methodname> method to
-        enforce generating a <code>&lt;title&gt;</code> element, and adds a
+        enforce generating a <emphasis>&lt;title&gt;</emphasis> element, and adds a
         <methodname>headTitle()</methodname> method for quick and easy setting and
         aggregation of title elements. The signature for that method is
         <methodname>headTitle($title, $setType = 'APPEND')</methodname>; by default, the

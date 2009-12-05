@@ -4,7 +4,7 @@
     <title>HeadMeta Helper</title>
 
     <para>
-        The HTML <code>&lt;meta&gt;</code> element is used to provide meta
+        The HTML <emphasis>&lt;meta&gt;</emphasis> element is used to provide meta
         information about your HTML document -- typically keywords, document
         character set, caching pragmas, etc. Meta tags may be either of the
         'http-equiv' or 'name' types, must contain a 'content' attribute, and
@@ -12,27 +12,59 @@
     </para>
 
     <para>
-        The <code>HeadMeta</code> helper supports the following methods for
+        The <classname>HeadMeta</classname> helper supports the following methods for
         setting and adding meta tags:
     </para>
 
     <itemizedlist>
-        <listitem><para><code>appendName($keyValue, $content,
-                    $conditionalName)</code></para></listitem>
-        <listitem><para><code>offsetSetName($index, $keyValue, $content,
-                    $conditionalName)</code></para></listitem>
-        <listitem><para><code>prependName($keyValue, $content,
-                    $conditionalName)</code></para></listitem>
-        <listitem><para><code>setName($keyValue, $content,
-                    $modifiers)</code></para></listitem>
-        <listitem><para><code>appendHttpEquiv($keyValue, $content,
-                    $conditionalHttpEquiv)</code></para></listitem>
-        <listitem><para><code>offsetSetHttpEquiv($index, $keyValue, $content,
-                    $conditionalHttpEquiv)</code></para></listitem>
-        <listitem><para><code>prependHttpEquiv($keyValue, $content,
-                    $conditionalHttpEquiv)</code></para></listitem>
-        <listitem><para><code>setHttpEquiv($keyValue, $content,
-                    $modifiers)</code></para></listitem>
+        <listitem>
+            <para>
+                <command>appendName($keyValue, $content, $conditionalName)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetName($index, $keyValue, $content, $conditionalName)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependName($keyValue, $content, $conditionalName)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setName($keyValue, $content, $modifiers)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>appendHttpEquiv($keyValue, $content, $conditionalHttpEquiv)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetHttpEquiv($index, $keyValue, $content,
+                    $conditionalHttpEquiv)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependHttpEquiv($keyValue, $content, $conditionalHttpEquiv)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setHttpEquiv($keyValue, $content, $modifiers)</command>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -44,9 +76,9 @@
 
     <para>
         You may also set meta tags using the <methodname>headMeta()</methodname> helper
-        method, which has the following signature: <code>headMeta($content,
+        method, which has the following signature: <command>headMeta($content,
             $keyValue, $keyType = 'name', $modifiers = array(), $placement =
-            'APPEND')</code>. <varname>$keyValue</varname> is the content for the key
+            'APPEND')</command>. <varname>$keyValue</varname> is the content for the key
         specified in <varname>$keyType</varname>, which should be either 'name' or
         'http-equiv'. <varname>$placement</varname> can be either 'SET' (overwrites
         all previously stored values), 'APPEND' (added to end of stack), or
@@ -54,17 +86,17 @@
     </para>
 
     <para>
-        <code>HeadMeta</code> overrides each of <methodname>append()</methodname>,
+        <classname>HeadMeta</classname> overrides each of <methodname>append()</methodname>,
         <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and
         <methodname>set()</methodname> to enforce usage of the special methods as listed above.
-        Internally, it stores each item as a <code>stdClass</code> token, which it later
+        Internally, it stores each item as a <property>stdClass</property> token, which it later
         serializes using the <methodname>itemToString()</methodname> method. This allows you
         to perform checks on the items in the stack, and optionally modify these
         items by simply modifying the object returned.
     </para>
 
     <para>
-        The <code>HeadMeta</code> helper is a concrete implementation of the
+        The <classname>HeadMeta</classname> helper is a concrete implementation of the
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder
             helper</link>.
     </para>

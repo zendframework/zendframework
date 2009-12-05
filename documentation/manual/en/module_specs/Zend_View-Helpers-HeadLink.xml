@@ -4,27 +4,43 @@
     <title>HeadLink Helper</title>
 
     <para>
-        The HTML <code>&lt;link&gt;</code> element is increasingly used for
+        The HTML <emphasis>&lt;link&gt;</emphasis> element is increasingly used for
         linking a variety of resources for your site: stylesheets, feeds,
-        favicons, trackbacks, and more. The <code>HeadLink</code> helper
+        favicons, trackbacks, and more. The <classname>HeadLink</classname> helper
         provides a simple interface for creating and aggregating these elements
         for later retrieval and output in your layout script.
     </para>
 
     <para>
-        The <code>HeadLink</code> helper has special methods for adding
+        The <classname>HeadLink</classname> helper has special methods for adding
         stylesheet links to its stack:
     </para>
 
     <itemizedlist>
-        <listitem><para><code>appendStylesheet($href, $media,
-                    $conditionalStylesheet, $extras)</code></para></listitem>
-        <listitem><para><code>offsetSetStylesheet($index, $href, $media,
-                    $conditionalStylesheet, $extras)</code></para></listitem>
-        <listitem><para><code>prependStylesheet($href, $media,
-                    $conditionalStylesheet, $extras)</code></para></listitem>
-        <listitem><para><code>setStylesheet($href, $media,
-                    $conditionalStylesheet, $extras)</code></para></listitem>
+        <listitem>
+            <para>
+                <command>appendStylesheet($href, $media, $conditionalStylesheet, $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetStylesheet($index, $href, $media, $conditionalStylesheet,
+                    $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependStylesheet($href, $media, $conditionalStylesheet, $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setStylesheet($href, $media, $conditionalStylesheet, $extras)</command>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -37,30 +53,45 @@
     </para>
 
     <para>
-        Additionally, the <code>HeadLink</code> helper has special methods for
+        Additionally, the <classname>HeadLink</classname> helper has special methods for
         adding 'alternate' links to its stack:
     </para>
 
     <itemizedlist>
-        <listitem><para><code>appendAlternate($href, $type,
-                    $title, $extras)</code></para></listitem>
-        <listitem><para><code>offsetSetAlternate($index, $href, $type,
-                    $title, $extras)</code></para></listitem>
-        <listitem><para><code>prependAlternate($href, $type,
-                    $title, $extras)</code></para></listitem>
-        <listitem><para><code>setAlternate($href, $type,
-                    $title, $extras)</code></para></listitem>
+        <listitem>
+            <para>
+                <command>appendAlternate($href, $type, $title, $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetAlternate($index, $href, $type, $title, $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependAlternate($href, $type, $title, $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setAlternate($href, $type, $title, $extras)</command>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
         The <methodname>headLink()</methodname> helper method allows specifying all
-        attributes necessary for a <code>&lt;link&gt;</code> element, and allows
+        attributes necessary for a <emphasis>&lt;link&gt;</emphasis> element, and allows
         you to also specify placement -- whether the new element replaces all
         others, prepends (top of stack), or appends (end of stack).
     </para>
 
     <para>
-        The <code>HeadLink</code> helper is a concrete implementation of the
+        The <classname>HeadLink</classname> helper is a concrete implementation of the
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder
             helper</link>.
     </para>
@@ -69,7 +100,7 @@
         <title>HeadLink Helper Basic Usage</title>
 
         <para>
-            You may specify a <code>headLink</code> at any time. Typically, you
+            You may specify a <emphasis>headLink</emphasis> at any time. Typically, you
             will specify global links in your layout script, and application
             specific links in your application view scripts. In your layout
             script, in the &lt;head&gt; section, you will then echo the helper

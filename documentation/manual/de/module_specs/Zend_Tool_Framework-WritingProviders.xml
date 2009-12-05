@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18840 -->
+<!-- EN-Revision: 19418 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.writing-providers">
     <title>Erstellen von Providern für die Verwendung mit Zend_Tool_Framework</title>
@@ -74,9 +74,9 @@
                 einem speziellen Dateinamen anbietet der mit "Manifest.php" endet. Ein Provider
                 Manifest ist eine Implementation von
                 <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface> und
-                benötigt die Methode <code>getProviders()</code> welche ein Array von instanziierten
-                Providern zurückgibt. Anders als unser erster eigener Provider erstellt
-                <classname>My_Component_HelloProvider</classname> das folgende Manifest:
+                benötigt die Methode <methodname>getProviders()</methodname> welche ein Array von
+                instanziierten Providern zurückgibt. Anders als unser erster eigener Provider
+                erstellt <classname>My_Component_HelloProvider</classname> das folgende Manifest:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -89,8 +89,7 @@
             );
         }
     }
-    ]]>
-            </programlisting>
+]]></programlisting>
         </example>
     </sect2>
 
@@ -152,8 +151,7 @@ class My_Component_HelloProvider
         $this->_registry->getResponse()->appendContent("Hello from my provider!");
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <para>
             Wie man sieht muss man <classname>Zend_Tool_Framework_Provider_Abstract</classname>
@@ -225,8 +223,7 @@ class My_Component_HelloProvider
         echo 'Hallo' . $name . ', von meinem Provider!';
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Dieses Kommando wirft eine Exception wenn der aktuelle Client nicht in der Lage ist
@@ -361,8 +358,7 @@ class My_Component_HelloProvider
         echo "Hallo $aValue!";
     }
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para>
                 Die API des Speichers ist sehr einfach:
@@ -379,8 +375,7 @@ class Zend_Tool_Framework_Client_Storage
     public function remove($name);
     public function getStreamUri($name);
 }
-]]>
-            </programlisting>
+]]></programlisting>
 
             <important>
                 <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19405 -->
+<!-- EN-Revision: 19418 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.livedocx">
     <title>Zend_Service_LiveDocx</title>
@@ -589,7 +589,7 @@ file_put_contents('document.pdf', $document);
             <para>
                 <varname>$fromPage</varname> is the lower-bound page number of the page range that
                 should be returned as an image and <varname>$toPage</varname> the upper-bound page
-                number.  <varname>$zoomFactor</varname> is the size of the images, as a percent,
+                number. <varname>$zoomFactor</varname> is the size of the images, as a percent,
                 relative to the original page size. The range of this parameter is 10 to 400.
                 <varname>$format</varname> is the format of the images returned by this method. The
                 supported formats can be obtained by calling

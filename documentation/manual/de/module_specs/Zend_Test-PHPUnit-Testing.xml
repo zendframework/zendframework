@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18225 -->
+<!-- EN-Revision: 19418 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.testing">
     <title>Testen eigener Controller und MVC Anwendungen</title>
@@ -84,11 +84,11 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 
         <important>
             <para>
-                Der Redirect Action Helper hat Probleme mit der <code>exit()</code> Anweisung wenn
-                die <methodname>gotoAndExit()</methodname> Methode verwendet wird, und wird dann
-                natürlich auch einen Test beenden der für diese Methode läuft. Um die eigene
-                Anwendung testbar zu machen sollte diese Methode nicht am Redirector verwendet
-                werden.
+                Der Redirect Action Helper hat Probleme mit der <methodname>exit()</methodname>
+                Anweisung wenn die <methodname>gotoAndExit()</methodname> Methode verwendet wird,
+                und wird dann natürlich auch einen Test beenden der für diese Methode läuft. Um die
+                eigene Anwendung testbar zu machen sollte diese Methode nicht am Redirector
+                verwendet werden.
             </para>
         </important>
 
@@ -117,15 +117,14 @@ class MyController extends Zend_Controller_Action
         // Mach was
     }
 }
-]]>
-        </programlisting>
+]]></programlisting>
 
         <important>
             <para>
                 Abhängig von der eigenen Anwendung kann es sein dass das nicht genug ist da eine
-                zusätzliche <code>preDispatch()</code> oder <code>postDispatch()</code> Logik
-                ausgeführt werden könnte. Das kann aktuell mit Zend_Test auf keine vernünftige Weise
-                behandelt werden.
+                zusätzliche <methodname>preDispatch()</methodname> oder
+                <methodname>postDispatch()</methodname> Logik ausgeführt werden könnte. Das kann
+                aktuell mit Zend_Test auf keine vernünftige Weise behandelt werden.
             </para>
         </important>
     </sect3>

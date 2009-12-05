@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17662 -->
+<!-- EN-Revision: 19418 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.usage">
     <title>Verwendung</title>
@@ -177,8 +177,8 @@ $this->view->paginator = $paginator;
             Um die DbSelect und DbTableSelect Adapter zu verwenden muß man die Daten nicht direkt
             von der Datenbank empfangen. Beide Adapter führen den Empfang selbst durch, und Zählen
             auch die Anzahl der Seiten. Wenn zusätzliche Arbeit basieren auf den Ergebnissen des
-            Adapters getan werden soll, kann die <code>getItems()</code> Methode des Adapters in der
-            eigenen Anwendung erweitert werden.
+            Adapters getan werden soll, kann die <methodname>getItems()</methodname> Methode des
+            Adapters in der eigenen Anwendung erweitert werden.
         </para>
 
         <para>

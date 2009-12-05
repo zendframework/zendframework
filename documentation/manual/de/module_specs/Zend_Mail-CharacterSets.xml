@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 19422 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.character-sets">
     <title>Zeichensätze</title>
+
     <para>
         <classname>Zend_Mail</classname> prüft nicht auf die richtigen Zeichensätze für die
         Mailbestandteile. Wenn <classname>Zend_Mail</classname> instanziiert wird, kann ein
@@ -12,12 +13,44 @@
         Mailbestandteil erstellt wird, kann für jeden Bestandteil ein anderer Zeichensatz angegeben
         werden.
     </para>
+
     <note>
         <title>Nur im Textformat</title>
+
         <para>
             Zeichensätze sind nur auf Mailbestandteile im Textformat anwendbar.
         </para>
     </note>
+
+    <example id="zend.mail.character-sets.cjk">
+        <title>Verwendung in CJK Sprachen</title>
+
+        <para>
+            Das folgende Beispiel zeigt wie <classname>Zend_Mail</classname> im japanischen
+            verwendet werden kann. Das ist eine der <acronym>CJK</acronym> (oder auch
+            <acronym>CJKV</acronym>) Sprachen. Wenn man Chinesisch verwendet, kann man auch
+            <acronym>HZ-GB-2312</acronym> statt <acronym>ISO-2022-JP</acronym> verwenden.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Wir nehmen an das die Zeichenkodierung der Strings in PHP Skripten UTF-8 ist
+function myConvert($string) {
+    return mb_convert_encoding($string, 'ISO-2022-JP', 'UTF-8');
+}
+
+$mail = new Zend_Mail('ISO-2022-JP');
+// In diesem Fall kann ENCODING_7BIT verwendet werden,
+// weil ISO-2022-JP MSB nicht verwendet
+$mail->setBodyText(myConvert('This is the text of the mail.'),
+                             null,
+                             Zend_Mime::ENCODING_7BIT);
+$mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
+$mail->setFrom('somebody@example.com', myConvert('Some Sender'));
+$mail->addTo('somebody_else@example.com', myConvert('Some Recipient'));
+$mail->setSubject(myConvert('TestSubject'));
+$mail->send();
+]]></programlisting>
+    </example>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

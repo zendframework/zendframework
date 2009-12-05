@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17407 -->
+<!-- EN-Revision: 19421 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.encoding">
     <title>Kodierung</title>
@@ -26,7 +26,7 @@
 
     <programlisting language="php"><![CDATA[
 // Standardmäßig Zend_Mime::ENCODING_QUOTEDPRINTABLE
-$mail = new Zend_Mail('UTF-8');
+$mail = new Zend_Mail();
 
 // Auf Base64 Kodierung zurücksetzen
 $mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);

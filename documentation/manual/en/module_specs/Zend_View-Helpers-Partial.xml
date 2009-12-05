@@ -4,7 +4,7 @@
     <title>Partial Helper</title>
 
     <para>
-        The <code>Partial</code> view helper is used to render a specified
+        The <classname>Partial</classname> view helper is used to render a specified
         template within its own variable scope. The primary use is for reusable
         template fragments with which you do not need to worry about variable
         name clashes. Additionally, they allow you to specify partial view
@@ -12,7 +12,7 @@
     </para>
 
     <para>
-        A sibling to the <code>Partial</code>, the <code>PartialLoop</code> view
+        A sibling to the <classname>Partial</classname>, the <classname>PartialLoop</classname> view
         helper allows you to pass iterable data, and render a partial for each
         item.
     </para>
@@ -20,9 +20,10 @@
     <note>
         <title>PartialLoop Counter</title>
         <para>
-            The <code>PartialLoop</code> view helper assigns a variable to the view named
-            <code>partialCounter</code> which passes the current position of the array to the view
-            script. This provides an easy way to have alternating colors on table rows for example.
+            The <classname>PartialLoop</classname> view helper assigns a variable to the view named
+            <emphasis>partialCounter</emphasis> which passes the current position of the array to
+            the view script. This provides an easy way to have alternating colors on table rows for
+            example.
         </para>
 
     </note>
@@ -69,7 +70,7 @@
             <title>What is a model?</title>
 
             <para>
-                A model used with the <code>Partial</code> view helper can be
+                A model used with the <classname>Partial</classname> view helper can be
                 one of the following:
             </para>
 
@@ -134,11 +135,11 @@ $view->partialLoop()->setObjectKey('model');
         </para>
 
         <para>
-            The <code>PartialLoop</code> view helper helps solve this issue. It
+            The <classname>PartialLoop</classname> view helper helps solve this issue. It
             allows you to pass an iterable item (array or object implementing
-            <code>Iterator</code>) as the model. It then iterates over this,
+            <emphasis>Iterator</emphasis>) as the model. It then iterates over this,
             passing, the items to the partial script as the model. Items in the
-            iterator may be any model the <code>Partial</code> view helper
+            iterator may be any model the <classname>Partial</classname> view helper
             allows.
         </para>
 
@@ -167,7 +168,7 @@ $model = array(
 
         <para>
             In your view script, you could then invoke the
-            <code>PartialLoop</code> helper:
+            <classname>PartialLoop</classname> helper:
         </para>
 
         <programlisting language="php"><![CDATA[

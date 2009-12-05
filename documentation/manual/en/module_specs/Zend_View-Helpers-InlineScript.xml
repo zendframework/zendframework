@@ -4,9 +4,9 @@
     <title>InlineScript Helper</title>
 
     <para>
-        The HTML <code>&lt;script&gt;</code> element is used to either provide
+        The HTML <emphasis>&lt;script&gt;</emphasis> element is used to either provide
         inline client-side scripting elements or link to a remote resource
-        containing client-side scripting code. The <code>InlineScript</code>
+        containing client-side scripting code. The <classname>InlineScript</classname>
         helper allows you to manage both. It is derived from <link
             linkend="zend.view.helpers.initial.headscript">HeadScript</link>,
         and any method of that helper is available; however, use the
@@ -18,14 +18,14 @@
         <title>Use InlineScript for HTML Body Scripts</title>
 
         <para>
-            <code>InlineScript</code>, should be used when you wish to include
-            scripts inline in the HTML <code>body</code>. Placing scripts at the
+            <classname>InlineScript</classname>, should be used when you wish to include
+            scripts inline in the HTML <emphasis>body</emphasis>. Placing scripts at the
             end of your document is a good practice for speeding up delivery of
             your page, particularly when using 3rd party analytics scripts.
         </para>
 
         <para>
-            Some JS libraries need to be included in the HTML <code>head</code>;
+            Some JS libraries need to be included in the HTML <emphasis>head</emphasis>;
             use <link linkend="zend.view.helpers.initial.headscript">HeadScript</link>
             for those scripts.
         </para>

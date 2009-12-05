@@ -44,7 +44,7 @@ Content-Type: application/json
         <para>
             To keep layouts, the second parameter needs to be boolean
             <constant>TRUE</constant>. When the second parameter is an array, keeping
-            layouts can be achieved by including a <code>keepLayouts</code> key
+            layouts can be achieved by including a <property>keepLayouts</property> key
             with a value of a boolean <constant>TRUE</constant>.
         </para>
 
@@ -60,7 +60,7 @@ echo $this->json($this->data, array('keepLayouts' => true));
             <classname>Zend_Json::encode</classname> allows the encoding of native
             <acronym>JSON</acronym> expressions using <classname>Zend_Json_Expr</classname> objects.
             This option is disabled by default. To enable this option, pass a boolean
-            <constant>TRUE</constant> to the <code>enableJsonExprFinder</code> key of
+            <constant>TRUE</constant> to the <property>enableJsonExprFinder</property> key of
             the options array:
         </para>
 

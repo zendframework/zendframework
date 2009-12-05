@@ -4,8 +4,9 @@
     <title>HeadStyle Helper</title>
 
     <para>
-        The HTML <code>&lt;style&gt;</code> element is used to include
-        <acronym>CSS</acronym> stylesheets inline in the HTML <code>&lt;head&gt;</code> element.
+        The HTML <emphasis>&lt;style&gt;</emphasis> element is used to include
+        <acronym>CSS</acronym> stylesheets inline in the HTML <emphasis>&lt;head&gt;</emphasis>
+        element.
     </para>
 
     <note>
@@ -13,40 +14,55 @@
 
         <para>
             <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
-            should be used to create <code>&lt;link&gt;</code> elements for
-            including external stylesheets. <code>HeadStyle</code> is used when
+            should be used to create <emphasis>&lt;link&gt;</emphasis> elements for
+            including external stylesheets. <classname>HeadStyle</classname> is used when
             you wish to define your stylesheets inline.
         </para>
     </note>
 
     <para>
-        The <code>HeadStyle</code> helper supports the following methods for
+        The <classname>HeadStyle</classname> helper supports the following methods for
         setting and adding stylesheet declarations:
     </para>
 
     <itemizedlist>
-        <listitem><para><code>appendStyle($content, $attributes =
-                    array())</code></para></listitem>
-        <listitem><para><code>offsetSetStyle($index, $content, $attributes =
-                    array())</code></para></listitem>
-        <listitem><para><code>prependStyle($content, $attributes =
-                    array())</code></para></listitem>
-        <listitem><para><code>setStyle($content, $attributes =
-                    array())</code></para></listitem>
+        <listitem>
+            <para>
+                <command>appendStyle($content, $attributes = array())</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetStyle($index, $content, $attributes = array())</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependStyle($content, $attributes = array())</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setStyle($content, $attributes = array())</command>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
         In all cases, <varname>$content</varname> is the actual <acronym>CSS</acronym> declarations.
         <varname>$attributes</varname> are any additional attributes you wish to provide to the
-        <code>style</code> tag: lang, title, media, or dir are all permissible.
+        <property>style</property> tag: lang, title, media, or dir are all permissible.
     </para>
 
     <note>
         <title>Setting Conditional Comments</title>
 
         <para>
-            <code>HeadStyle</code> allows you to wrap the style tag in conditional comments,
-            which allows you to hide it from specific browsers. To add the conditional
+            <classname>HeadStyle</classname> allows you to wrap the style tag in conditional
+            comments, which allows you to hide it from specific browsers. To add the conditional
             tags, pass the conditional value as part of the <varname>$attributes</varname> parameter
             in the method calls.
         </para>
@@ -61,7 +77,7 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
     </note>
 
     <para>
-        <code>HeadStyle</code> also allows capturing style declarations; this
+        <classname>HeadStyle</classname> also allows capturing style declarations; this
         can be useful if you want to create the declarations programmatically,
         and then place them elsewhere. The usage for this will be showed in an
         example below.
@@ -75,17 +91,17 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
     </para>
 
     <para>
-        <code>HeadStyle</code> overrides each of <methodname>append()</methodname>,
+        <classname>HeadStyle</classname> overrides each of <methodname>append()</methodname>,
         <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and
         <methodname>set()</methodname> to enforce usage of the special methods as listed above.
-        Internally, it stores each item as a <code>stdClass</code> token, which it later
+        Internally, it stores each item as a <property>stdClass</property> token, which it later
         serializes using the <methodname>itemToString()</methodname> method. This allows you
         to perform checks on the items in the stack, and optionally modify these
         items by simply modifying the object returned.
     </para>
 
     <para>
-        The <code>HeadStyle</code> helper is a concrete implementation of the
+        The <classname>HeadStyle</classname> helper is a concrete implementation of the
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder
             helper</link>.
     </para>
@@ -139,8 +155,8 @@ $this->headStyle()->prependStyle($firstStyles);
             Sometimes you need to generate <acronym>CSS</acronym> style declarations
             programmatically. While you could use string concatenation,
             heredocs, and the like, often it's easier just to do so by creating
-            the styles and sprinkling in <acronym>PHP</acronym> tags. <code>HeadStyle</code> lets
-            you do just that, capturing it to the stack:
+            the styles and sprinkling in <acronym>PHP</acronym> tags.
+            <classname>HeadStyle</classname> lets you do just that, capturing it to the stack:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -165,7 +181,7 @@ body {
 
             <listitem><para>
                     If you wish to specify any additional attributes for the
-                    <code>&lt;style&gt;</code> tag, pass them in an array as
+                    <emphasis>&lt;style&gt;</emphasis> tag, pass them in an array as
                     the second argument to <methodname>captureStart()</methodname>.
             </para></listitem>
         </itemizedlist>

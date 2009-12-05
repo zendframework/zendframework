@@ -4,40 +4,75 @@
     <title>HeadScript Helper</title>
 
     <para>
-        The HTML <code>&lt;script&gt;</code> element is used to either provide
+        The HTML <emphasis>&lt;script&gt;</emphasis> element is used to either provide
         inline client-side scripting elements or link to a remote resource
-        containing client-side scripting code. The <code>HeadScript</code>
+        containing client-side scripting code. The <classname>HeadScript</classname>
         helper allows you to manage both.
     </para>
 
     <para>
-        The <code>HeadScript</code> helper supports the following methods for
+        The <classname>HeadScript</classname> helper supports the following methods for
         setting and adding scripts:
     </para>
 
     <itemizedlist>
-        <listitem><para><code>appendFile($src, $type = 'text/javascript',
-                    $attrs = array())</code></para></listitem>
-        <listitem><para><code>offsetSetFile($index, $src, $type = 'text/javascript',
-                    $attrs = array())</code></para></listitem>
-        <listitem><para><code>prependFile($src, $type = 'text/javascript',
-                    $attrs = array())</code></para></listitem>
-        <listitem><para><code>setFile($src, $type = 'text/javascript',
-                    $attrs = array())</code></para></listitem>
-        <listitem><para><code>appendScript($script, $type = 'text/javascript',
-                    $attrs = array())</code></para></listitem>
-        <listitem><para><code>offsetSetScript($index, $script, $type = 'text/javascript',
-                    $attrs = array())</code></para></listitem>
-        <listitem><para><code>prependScript($script, $type = 'text/javascript',
-                    $attrs = array())</code></para></listitem>
-        <listitem><para><code>setScript($script, $type = 'text/javascript',
-                    $attrs = array())</code></para></listitem>
+        <listitem>
+            <para>
+                <command>appendFile($src, $type = 'text/javascript', $attrs = array())</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetFile($index, $src, $type = 'text/javascript', $attrs =
+                    array())</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependFile($src, $type = 'text/javascript', $attrs = array())</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setFile($src, $type = 'text/javascript', $attrs = array())</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>appendScript($script, $type = 'text/javascript', $attrs =
+                    array())</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetScript($index, $script, $type = 'text/javascript', $attrs =
+                    array())</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependScript($script, $type = 'text/javascript', $attrs =
+                    array())</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setScript($script, $type = 'text/javascript', $attrs = array())</command>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
-        In the case of the <code>*File()</code> methods, <varname>$src</varname> is
+        In the case of the *<methodname>File()</methodname> methods, <varname>$src</varname> is
         the remote location of the script to load; this is usually in the form
-        of a <acronym>URL</acronym> or a path. For the <code>*Script()</code> methods,
+        of a <acronym>URL</acronym> or a path. For the *<methodname>Script()</methodname> methods,
         <varname>$script</varname> is the client-side scripting directives you wish to
         use in the element.
     </para>
@@ -46,8 +81,8 @@
         <title>Setting Conditional Comments</title>
 
         <para>
-            <code>HeadScript</code> allows you to wrap the script tag in conditional comments,
-            which allows you to hide it from specific browsers. To add the conditional
+            <classname>HeadScript</classname> allows you to wrap the script tag in conditional
+            comments, which allows you to hide it from specific browsers. To add the conditional
             tags, pass the conditional value as part of the <varname>$attrs</varname> parameter in
             the method calls.
         </para>
@@ -66,7 +101,7 @@ $this->headScript()->appendFile(
     </note>
 
     <para>
-        <code>HeadScript</code> also allows capturing scripts; this can be
+        <classname>HeadScript</classname> also allows capturing scripts; this can be
         useful if you want to create the client-side script programmatically,
         and then place it elsewhere. The usage for this will be showed in an
         example below.
@@ -83,17 +118,17 @@ $this->headScript()->appendFile(
     </para>
 
     <para>
-        <code>HeadScript</code> overrides each of <methodname>append()</methodname>,
+        <classname>HeadScript</classname> overrides each of <methodname>append()</methodname>,
         <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and
         <methodname>set()</methodname> to enforce usage of the special methods as listed above.
-        Internally, it stores each item as a <code>stdClass</code> token, which it later
+        Internally, it stores each item as a <property>stdClass</property> token, which it later
         serializes using the <methodname>itemToString()</methodname> method. This allows you
         to perform checks on the items in the stack, and optionally modify these
         items by simply modifying the object returned.
     </para>
 
     <para>
-        The <code>HeadScript</code> helper is a concrete implementation of the
+        The <classname>HeadScript</classname> helper is a concrete implementation of the
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder
             helper</link>.
     </para>
@@ -102,10 +137,10 @@ $this->headScript()->appendFile(
         <title>Use InlineScript for HTML Body Scripts</title>
 
         <para>
-            <code>HeadScript</code>'s sibling helper, <link
+            <classname>HeadScript</classname>'s sibling helper, <link
                 linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>,
             should be used when you wish to include scripts inline in the HTML
-            <code>body</code>. Placing scripts at the end of your document is a
+            <emphasis>body</emphasis>. Placing scripts at the end of your document is a
             good practice for speeding up delivery of your page, particularly
             when using 3rd party analytics scripts.
         </para>
@@ -115,8 +150,8 @@ $this->headScript()->appendFile(
         <title>Arbitrary Attributes are Disabled by Default</title>
 
         <para>
-            By default, <code>HeadScript</code> only will render
-            <code>&lt;script&gt;</code> attributes that are blessed by the W3C.
+            By default, <classname>HeadScript</classname> only will render
+            <emphasis>&lt;script&gt;</emphasis> attributes that are blessed by the W3C.
             These include 'type', 'charset', 'defer', 'language', and 'src'.
             However, some javascript frameworks, notably <ulink
                 url="http://www.dojotoolkit.org/">Dojo</ulink>, utilize custom
@@ -181,8 +216,8 @@ $this->headScript()->prependFile('/js/prototype.js');
             Sometimes you need to generate client-side scripts programmatically.
             While you could use string concatenation, heredocs, and the like,
             often it's easier just to do so by creating the script and
-            sprinkling in <acronym>PHP</acronym> tags. <code>HeadScript</code> lets you do just
-            that, capturing it to the stack:
+            sprinkling in <acronym>PHP</acronym> tags. <classname>HeadScript</classname> lets you do
+            just that, capturing it to the stack:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -212,7 +247,7 @@ $('foo_form').action = action;
 
             <listitem><para>
                     If you wish to specify any additional attributes for the
-                    <code>&lt;script&gt;</code> tag, pass them in an array as
+                    <emphasis>&lt;script&gt;</emphasis> tag, pass them in an array as
                     the third argument to <methodname>captureStart()</methodname>.
             </para></listitem>
         </itemizedlist>

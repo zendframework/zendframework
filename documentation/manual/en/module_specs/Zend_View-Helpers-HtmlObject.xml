@@ -4,8 +4,8 @@
     <title>HTML Object Helpers</title>
 
     <para>
-        The HTML <code><![CDATA[
-<object>]]></code> element is used for embedding
+        The HTML <emphasis><![CDATA[
+<object>]]></emphasis> element is used for embedding
         media like Flash or QuickTime in web pages. The object view helpers take
         care of embedding media with minimum effort.
     </para>
@@ -17,25 +17,25 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>htmlFlash</code>
+                <methodname>htmlFlash()</methodname>
                 Generates markup for embedding Flash files.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>htmlObject</code>
+                <methodname>htmlObject()</methodname>
                 Generates markup for embedding a custom Object.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>htmlPage</code>
+                <methodname>htmlPage()</methodname>
                 Generates markup for embedding other (X)HTML pages.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>htmlQuicktime</code>
+                <methodname>htmlQuicktime()</methodname>
                 Generates markup for embedding QuickTime files.
             </para>
         </listitem>
@@ -75,9 +75,9 @@
 
     <para>
         Additionally you can specify attributes, parameters and content that can
-        be rendered along with the <code><![CDATA[
-<object>]]></code>. This will
-        be demonstrated using the <code>htmlObject</code> helper.
+        be rendered along with the <emphasis><![CDATA[
+<object>]]></emphasis>. This will
+        be demonstrated using the <methodname>htmlObject()</methodname> helper.
     </para>
 
     <example id="zend.view.helpers.initial.object.object">
@@ -86,14 +86,14 @@
         <para>
             The first argument in the object helpers is always required. It is
             the <acronym>URI</acronym> to the resource you want to embed. The second argument is
-            only required in the <code>htmlObject</code> helper. The other helpers
+            only required in the <methodname>htmlObject()</methodname> helper. The other helpers
             already contain the correct value for this argument. The third
             argument is used for passing along attributes to the object element.
-            It only accepts an array with key-value pairs. The <code>classid</code>
-            and <code>codebase</code> are examples of such attributes. The fourth
+            It only accepts an array with key-value pairs. <property>classid</property>
+            and <property>codebase</property> are examples of such attributes. The fourth
             argument also only takes a key-value array and uses them to create
-            <code><![CDATA[
-<param>]]></code> elements. You will see an example
+            <emphasis><![CDATA[
+<param>]]></emphasis> elements. You will see an example
             of this shortly. Lastly, there is the option of providing additional
             content to the object. Now for an example which utilizes all arguments.
         </para>

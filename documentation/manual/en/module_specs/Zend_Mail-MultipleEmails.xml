@@ -37,7 +37,7 @@ for ($i = 0; $i < 5; $i++) {
     <para>
         If you wish to have a separate connection for each mail
         delivery, you will need to create and destroy your transport before and
-        after each <function>send()</function> method is called. Or alternatively,
+        after each <methodname>send()</methodname> method is called. Or alternatively,
         you can manipulate the connection between each delivery by accessing the
         transport's protocol object.
     </para>

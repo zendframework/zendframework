@@ -201,8 +201,8 @@
                 <title>Regression in PHP 5.3</title>
 
                 <para>
-                    Prior to <acronym>PHP</acronym> 5.3, <function>parse_ini_file()</function> and
-                    <function>parse_ini_string()</function> handled non-ASCII characters
+                    Prior to <acronym>PHP</acronym> 5.3, <methodname>parse_ini_file()</methodname>
+                    and <methodname>parse_ini_string()</methodname> handled non-ASCII characters
                     within <acronym>INI</acronym> option keys worked without an issue. However, starting with <acronym>PHP</acronym> 5.3,
                     any such keys will now be silently dropped in the returned array from either
                     function. If you had keys utilizing UTF-8 or Latin-1 characters, you may find

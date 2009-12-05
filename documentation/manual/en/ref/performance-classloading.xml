@@ -225,7 +225,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 through each <acronym>PHP</acronym> file and tells it to replace each instance of
                 'require_once' with '// require_once', effectively commenting
                 out each such statement. (It selectively keeps
-                <function>require_once</function> calls within
+                <methodname>require_once()</methodname> calls within
                 <classname>Zend_Application</classname> and
                 <classname>Zend_Loader_Autoloader</classname>, as these classes will fail without
                 them.)

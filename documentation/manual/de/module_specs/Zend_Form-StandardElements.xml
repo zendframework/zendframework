@@ -61,7 +61,7 @@
 
         <para>
             Adapter können alle Adapter in <classname>Zend_Captcha</classname> sein, sowie jeder
-            eigene Adapter der irgendwo anders definiert wurde. Um das z uerlauben, kann ein
+            eigene Adapter der irgendwo anders definiert wurde. Um das zu erlauben, kann ein
             zusätzlicher Schlüssel für den Plugin Ladetyp, 'CAPTCHA' oder 'captcha' übergeben
             werden, wenn der Plugin Loader Präfixpfad spezifiziert wird:
         </para>

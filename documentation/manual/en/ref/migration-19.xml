@@ -74,14 +74,15 @@ $valid->enableHeaderCheck();
             <para>
                 In version 1.9 of Zend Framework, there has been a change in the way
                 <classname>Zend_Http_Client</classname> internally stores information about
-                files to be uploaded, set using the <methodname>Zend_Http_Client::setFileUpload()</methodname>
-                method.
+                files to be uploaded, set using the
+                <methodname>Zend_Http_Client::setFileUpload()</methodname> method.
             </para>
 
             <para>
                 This change was introduced in order to allow multiple files to be uploaded
                 with the same form name, as an array of files. More information about this issue
-                can be found in <ulink url="http://framework.zend.com/issues/browse/ZF-5744">this bug report</ulink>.
+                can be found in <ulink
+                    url="http://framework.zend.com/issues/browse/ZF-5744">this bug report</ulink>.
             </para>
 
             <example id="migration.19.zend.http.client.fileuploadsarray.example">
@@ -136,20 +137,23 @@ $client->setFileUpload('file2.txt',
             <title>Deprecation of Zend_Http_Client::_getParametersRecursive()</title>
 
             <para>
-                Starting from version 1.9, the protected method <methodname>_getParametersRecursive()</methodname>
-                is no longer used by <classname>Zend_Http_Client</classname> and is deprecated.
-                Using it will cause an E_NOTICE message to be emitted by <acronym>PHP</acronym>.
+                Starting from version 1.9, the protected method
+                <methodname>_getParametersRecursive()</methodname> is no longer used by
+                <classname>Zend_Http_Client</classname> and is deprecated. Using it will cause an
+                E_NOTICE message to be emitted by <acronym>PHP</acronym>.
             </para>
 
             <para>
                 If you subclass <classname>Zend_Http_Client</classname> and call this method, you
-                should look into using the <methodname>Zend_Http_Client::_flattenParametersArray()</methodname>
-                static method instead.
+                should look into using the
+                <methodname>Zend_Http_Client::_flattenParametersArray()</methodname> static method
+                instead.
             </para>
 
             <para>
-                Again, since this <classname>_getParametersRecursive</classname> is a protected method,
-                this change will only affect users who subclass <classname>Zend_Http_Client</classname>.
+                Again, since this <classname>_getParametersRecursive</classname> is a protected
+                method, this change will only affect users who subclass
+                <classname>Zend_Http_Client</classname>.
             </para>
         </sect3>
     </sect2>

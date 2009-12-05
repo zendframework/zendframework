@@ -12,8 +12,8 @@
     </para>
 
     <para>
-        <classname>Zend_View</classname> is template system agnostic; you may use <acronym>PHP</acronym> as
-        your template language, or create instances of other
+        <classname>Zend_View</classname> is template system agnostic; you may use
+        <acronym>PHP</acronym> as your template language, or create instances of other
         template systems and manipulate them within your view
         script.
     </para>
@@ -155,8 +155,9 @@ base/path/
 
             <listitem><para>
                 <code>escape</code>: indicate a callback to be used by
-                <methodname>escape()</methodname>. May be set via <methodname>setEscape()</methodname>
-                or the <code>escape</code> option to the constructor.
+                <methodname>escape()</methodname>. May be set via
+                <methodname>setEscape()</methodname> or the <code>escape</code> option to the
+                constructor.
             </para></listitem>
 
             <listitem><para>

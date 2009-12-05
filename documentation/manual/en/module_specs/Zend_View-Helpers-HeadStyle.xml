@@ -47,8 +47,8 @@
         <para>
             <code>HeadStyle</code> allows you to wrap the style tag in conditional comments,
             which allows you to hide it from specific browsers. To add the conditional
-            tags, pass the conditional value as part of the <varname>$attributes</varname> parameter in
-            the method calls.
+            tags, pass the conditional value as part of the <varname>$attributes</varname> parameter
+            in the method calls.
         </para>
 
         <example id="zend.view.helpers.initial.headstyle.conditional">
@@ -76,9 +76,9 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
 
     <para>
         <code>HeadStyle</code> overrides each of <methodname>append()</methodname>,
-        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and <methodname>set()</methodname>
-        to enforce usage of the special methods as listed above. Internally, it
-        stores each item as a <code>stdClass</code> token, which it later
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and
+        <methodname>set()</methodname> to enforce usage of the special methods as listed above.
+        Internally, it stores each item as a <code>stdClass</code> token, which it later
         serializes using the <methodname>itemToString()</methodname> method. This allows you
         to perform checks on the items in the stack, and optionally modify these
         items by simply modifying the object returned.

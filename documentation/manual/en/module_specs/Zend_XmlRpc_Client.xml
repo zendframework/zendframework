@@ -105,8 +105,8 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
         <sect3 id="zend.xmlrpc.value.parameters.php-native">
             <title>PHP Native Types as Parameters</title>
             <para>
-                Parameters may be passed to <methodname>call()</methodname> as native <acronym>PHP</acronym>
-                variables, meaning as a <type>String</type>,
+                Parameters may be passed to <methodname>call()</methodname> as native
+                <acronym>PHP</acronym> variables, meaning as a <type>String</type>,
                 <code>integer</code>, <code>float</code>,
                 <type>Boolean</type>, <type>Array</type>, or an
                 <code>object</code>. In this case, each <acronym>PHP</acronym> native type will
@@ -590,15 +590,15 @@ $client->doRequest($request);
             The <acronym>HTTP</acronym> client can be retrieved at any time with the
             <methodname>getHttpClient()</methodname> method. For most cases, the default
             <acronym>HTTP</acronym> client will be sufficient. However, the
-            <methodname>setHttpClient()</methodname> method allows for a different <acronym>HTTP</acronym>
-            client instance to be injected.
+            <methodname>setHttpClient()</methodname> method allows for a different
+            <acronym>HTTP</acronym> client instance to be injected.
         </para>
 
         <para>
-            The <methodname>setHttpClient()</methodname> is particularly useful for unit testing. When combined
-            with the <classname>Zend_Http_Client_Adapter_Test</classname>, remote services can be
-            mocked out for testing. See the unit tests for <classname>Zend_XmlRpc_Client</classname>
-            for examples of how to do this.
+            The <methodname>setHttpClient()</methodname> is particularly useful for unit testing.
+            When combined with the <classname>Zend_Http_Client_Adapter_Test</classname>, remote
+            services can be mocked out for testing. See the unit tests for
+            <classname>Zend_XmlRpc_Client</classname> for examples of how to do this.
         </para>
     </sect2>
 

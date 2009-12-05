@@ -77,8 +77,8 @@
 
             <listitem><para>
                 <code>fieldset($name, $content, $attribs):</code> Creates an
-                <acronym>XHTML</acronym> fieldset. If <varname>$attribs</varname> contains a 'legend'
-                key, that value will be used for the fieldset legend. The
+                <acronym>XHTML</acronym> fieldset. If <varname>$attribs</varname> contains a
+                'legend' key, that value will be used for the fieldset legend. The
                 fieldset will surround the <varname>$content</varname> as provided to
                 the helper.
             </para></listitem>
@@ -86,8 +86,8 @@
             <listitem><para>
                 <code>form($name, $attribs, $content):</code> Generates an <acronym>XHTML</acronym>
                 form. All <varname>$attribs</varname> are escaped and rendered as
-                <acronym>XHTML</acronym> attributes of the form tag. If <varname>$content</varname> is
-                present and not a boolean false, then that content is rendered
+                <acronym>XHTML</acronym> attributes of the form tag. If <varname>$content</varname>
+                is present and not a boolean false, then that content is rendered
                 within the start and close form tags; if <varname>$content</varname>
                 is a boolean false (the default), only the opening form tag is
                 generated.
@@ -179,8 +179,8 @@ echo $this->formCheckbox('foo',
             <listitem>
                 <para>
                     <code>formErrors($errors, $options):</code> Generates an
-                    <acronym>XHTML</acronym> unordered list to show errors. <varname>$errors</varname>
-                    should be a string or an array of strings;
+                    <acronym>XHTML</acronym> unordered list to show errors.
+                    <varname>$errors</varname> should be a string or an array of strings;
                     <varname>$options</varname> should be any attributes you want
                     placed in the opening list tag.
                 </para>

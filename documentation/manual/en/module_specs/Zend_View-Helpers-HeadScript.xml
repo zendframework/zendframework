@@ -84,9 +84,9 @@ $this->headScript()->appendFile(
 
     <para>
         <code>HeadScript</code> overrides each of <methodname>append()</methodname>,
-        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and <methodname>set()</methodname>
-        to enforce usage of the special methods as listed above. Internally, it
-        stores each item as a <code>stdClass</code> token, which it later
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and
+        <methodname>set()</methodname> to enforce usage of the special methods as listed above.
+        Internally, it stores each item as a <code>stdClass</code> token, which it later
         serializes using the <methodname>itemToString()</methodname> method. This allows you
         to perform checks on the items in the stack, and optionally modify these
         items by simply modifying the object returned.
@@ -205,8 +205,8 @@ $('foo_form').action = action;
             </para></listitem>
 
             <listitem><para>
-                    The script <acronym>MIME</acronym> type is assumed to be 'text/javascript'; if you
-                    wish to specify a different type, you will need to pass it
+                    The script <acronym>MIME</acronym> type is assumed to be 'text/javascript'; if
+                    you wish to specify a different type, you will need to pass it
                     as the second argument to <methodname>captureStart()</methodname>.
             </para></listitem>
 

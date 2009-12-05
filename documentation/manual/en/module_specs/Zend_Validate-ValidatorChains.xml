@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.validator_chains">
-
     <title>Validator Chains</title>
 
     <para>
@@ -34,19 +33,19 @@ if ($validatorChain->isValid($username)) {
         12 characters, and then it is checked to ensure that it contains only alphanumeric
         characters. The second validation, for alphanumeric characters, is performed regardless of
         whether the first validation, for length between 6 and 12 characters, succeeds. This means
-        that if both validations fail, <methodname>getMessages()</methodname> will return failure messages from
-        both validators.
+        that if both validations fail, <methodname>getMessages()</methodname> will return failure
+        messages from both validators.
     </para>
 
     <para>
         In some cases it makes sense to have a validator break the chain if its validation process
         fails. <classname>Zend_Validate</classname> supports such use cases with the second
         parameter to the <methodname>addValidator()</methodname> method. By setting
-        <varname>$breakChainOnFailure</varname> to <constant>TRUE</constant>, the added validator will break the
-        chain execution upon failure, which avoids running any other validations that are determined
-        to be unnecessary or inappropriate for the situation. If the above example were written as
-        follows, then the alphanumeric validation would not occur if the string length validation
-        fails:
+        <varname>$breakChainOnFailure</varname> to <constant>TRUE</constant>, the added validator
+        will break the chain execution upon failure, which avoids running any other validations that
+        are determined to be unnecessary or inappropriate for the situation. If the above example
+        were written as follows, then the alphanumeric validation would not occur if the string
+        length validation fails:
 
         <programlisting language="php"><![CDATA[
 $validatorChain->addValidator(

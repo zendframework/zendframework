@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
-
     <title>Introduction</title>
 
     <para>
@@ -12,7 +11,6 @@
     </para>
 
     <sect2 id="zend.validate.introduction.definition">
-
         <title>What is a validator?</title>
 
         <para>
@@ -342,9 +340,9 @@ $validator->setTranslator($translate);
         <para>
             With the static <methodname>setDefaultTranslator()</methodname> method you can set
             a instance of <classname>Zend_Translate</classname> which will be used for all
-            validation classes, and can be retrieved with <methodname>getDefaultTranslator()</methodname>.
-            This prevents you from setting a translator manually for all validator classes,
-            and simplifies your code.
+            validation classes, and can be retrieved with
+            <methodname>getDefaultTranslator()</methodname>. This prevents you from setting a
+            translator manually for all validator classes, and simplifies your code.
         </para>
 
         <programlisting language="php"><![CDATA[

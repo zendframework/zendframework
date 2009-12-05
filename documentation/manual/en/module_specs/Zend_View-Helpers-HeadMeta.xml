@@ -55,9 +55,9 @@
 
     <para>
         <code>HeadMeta</code> overrides each of <methodname>append()</methodname>,
-        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and <methodname>set()</methodname>
-        to enforce usage of the special methods as listed above. Internally, it
-        stores each item as a <code>stdClass</code> token, which it later
+        <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, and
+        <methodname>set()</methodname> to enforce usage of the special methods as listed above.
+        Internally, it stores each item as a <code>stdClass</code> token, which it later
         serializes using the <methodname>itemToString()</methodname> method. This allows you
         to perform checks on the items in the stack, and optionally modify these
         items by simply modifying the object returned.

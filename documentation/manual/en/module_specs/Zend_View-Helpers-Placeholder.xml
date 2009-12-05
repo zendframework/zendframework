@@ -4,7 +4,7 @@
     <title>Placeholder Helper</title>
 
     <para>
-        The <code>Placeholder</code> view helper is used to persist content
+        The <classname>Placeholder</classname> view helper is used to persist content
         between view scripts and view instances. It also offers some useful
         features such as aggregating content, capturing view script content
         for later use, and adding pre- and post-text to content (and custom
@@ -16,7 +16,7 @@
 
         <para>
             Basic usage of placeholders is to persist view data. Each invocation
-            of the <code>Placeholder</code> helper expects a placeholder name;
+            of the <classname>Placeholder</classname> helper expects a placeholder name;
             the helper then returns a placeholder container object that you can
             either manipulate or simply echo out.
         </para>
@@ -42,38 +42,46 @@
         </para>
 
         <para>
-            The <code>Placeholder</code> view helper uses containers that extend
-            <code>ArrayObject</code>, providing a rich featureset for
+            The <classname>Placeholder</classname> view helper uses containers that extend
+            <classname>ArrayObject</classname>, providing a rich featureset for
             manipulating arrays. In addition, it offers a variety of methods for
             formatting the content stored in the container:
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setPrefix($prefix)</methodname> sets text with which to
                     prefix the content. Use <methodname>getPrefix()</methodname> at any time
                     to determine what the current setting is.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setPostfix($prefix)</methodname> sets text with which to
                     append the content. Use <methodname>getPostfix()</methodname> at any time
                     to determine what the current setting is.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setSeparator($prefix)</methodname> sets text with which to
                     separate aggregated content. Use <methodname>getSeparator()</methodname>
                     at any time to determine what the current setting is.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setIndent($prefix)</methodname> can be used to set an
                     indentation value for content. If an integer is passed,
                     that number of spaces will be used; if a string is passed,
                     the string will be used. Use <methodname>getIndent()</methodname>
                     at any time to determine what the current setting is.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <programlisting language="php"><![CDATA[
@@ -97,8 +105,8 @@ $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
 ]]></programlisting>
 
         <para>
-            Because the <code>Placeholder</code> container objects extend
-            <code>ArrayObject</code>, you can also assign content to a specific
+            Because the <classname>Placeholder</classname> container objects extend
+            <classname>ArrayObject</classname>, you can also assign content to a specific
             key in the container easily, instead of simply pushing it into the
             container. Keys may be accessed either as object properties or as
             array keys.
@@ -120,7 +128,7 @@ echo $foo['bar'];
 
         <para>
             Occasionally you may have content for a placeholder in a view script
-            that is easiest to template; the <code>Placeholder</code> view
+            that is easiest to template; the <classname>Placeholder</classname> view
             helper allows you to capture arbitrary content for later rendering
             using the following <acronym>API</acronym>.
         </para>
@@ -134,7 +142,7 @@ echo $foo['bar'];
 
                 <para>
                     <varname>$type</varname> should be one of the
-                    <code>Placeholder</code> constants <constant>APPEND</constant> or
+                    <classname>Placeholder</classname> constants <constant>APPEND</constant> or
                     <constant>SET</constant>. If <constant>APPEND</constant>, captured content
                     is appended to the list of current content in the
                     placeholder; if <constant>SET</constant>, captured content is used
@@ -157,11 +165,13 @@ echo $foo['bar'];
                 </para>
             </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>captureEnd()</methodname> stops capturing content, and
                     places it in the container object according to how
                     <methodname>captureStart()</methodname> was called.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <programlisting language="php"><![CDATA[
@@ -209,33 +219,47 @@ foreach ($this->data as $datum): ?>
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.doctype">Doctype</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.headmeta">HeadMeta</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.headscript">HeadScript</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.headstyle">HeadStyle</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.headtitle">HeadTitle</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
     </sect4>
 </sect3>

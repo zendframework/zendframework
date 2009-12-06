@@ -175,6 +175,17 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         </entry>
                         <entry><emphasis>0</emphasis></entry>
                     </row>
+                    <row>
+                        <entry>useId</entry>
+                        <entry>Xliff</entry>
+                        <entry>
+                            If you set this option to <constant>FALSE</constant>, then the source
+                            string will be used as message Id. The default for this option is
+                            <constant>TRUE</constant>, which means that the Id from the trans-unit
+                            element will be used as message Id
+                        </entry>
+                        <entry><emphasis>true</emphasis></entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>

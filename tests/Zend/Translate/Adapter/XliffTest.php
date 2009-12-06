@@ -200,7 +200,7 @@ class Zend_Translate_Adapter_XliffTest extends PHPUnit_Framework_TestCase
 
     public function testIsoEncoding()
     {
-        $adapter = new Zend_Translate_Adapter_Xliff(dirname(__FILE__) . '/_files/translation_en3.xliff', 'en');
+        $adapter = new Zend_Translate_Adapter_Xliff(dirname(__FILE__) . '/_files/translation_en3.xliff', 'en', array('useId' => false));
         $this->assertEquals('Message 1 (en)', $adapter->translate('Message 1'));
         $this->assertEquals('Message 1 (en)', $adapter->_('Message 1'));
 

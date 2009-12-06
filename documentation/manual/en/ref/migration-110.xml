@@ -57,6 +57,29 @@
         </sect3>
     </sect2>
 
+    <sect2 id="migration.110.zend.translate">
+        <title>Zend_Translate</title>
+
+        <sect3 id="migration.110.zend.translate.xliff">
+            <title>Xliff adapter</title>
+
+            <para>
+                In past the Xliff adapter used the source string as message Id. According to the
+                Xliff standard the trans-unit Id should be used. This behaviour was corrected with
+                Zend Framework 1.10. Now the trans-unit Id is used as message Id per default.
+            </para>
+
+            <para>
+                But you can still get the incorrect and old behaviour by setting the
+                <property>useId</property> option to <constant>FALSE</constant>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$trans = new Zend_Translate('xliff', '/path/to/source', $locale, array('useId' => false));
+]]></programlisting>
+        </sect3>
+    </sect2>
+
     <sect2 id="migration.110.zend.validate">
         <title>Zend_Validate</title>
 

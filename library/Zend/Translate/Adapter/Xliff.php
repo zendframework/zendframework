@@ -36,10 +36,12 @@ require_once 'Zend/Translate/Adapter.php';
 class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
     // Internal variables
     private $_file        = false;
+    private $_useId       = true;
     private $_cleared     = array();
     private $_transunit   = null;
     private $_source      = null;
     private $_target      = null;
+    private $_langId      = null;
     private $_scontent    = null;
     private $_tcontent    = null;
     private $_stag        = false;
@@ -64,6 +66,12 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
             throw new Zend_Translate_Exception('Translation file \'' . $filename . '\' is not readable.');
         }
 
+        if (empty($options['useId'])) {
+            $this->_useId = false;
+        } else {
+            $this->_useId = true;
+        }
+
         $encoding      = $this->_findEncoding($filename);
         $this->_target = $locale;
         $this->_file   = xml_parser_create($encoding);
@@ -81,6 +89,7 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
             throw new Zend_Translate_Exception($ex);
         }
 
+var_dump($this->_data);
         return $this->_data;
     }
 
@@ -117,6 +126,7 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
                     break;
                 case 'trans-unit':
                     $this->_transunit = true;
+                    $this->_langId = $attrib['id'];
                     break;
                 case 'source':
                     if ($this->_transunit === true) {
@@ -148,20 +158,35 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
             switch (strtolower($name)) {
                 case 'trans-unit':
                     $this->_transunit = null;
-                    $this->_scontent = null;
-                    $this->_tcontent = null;
+                    $this->_langId    = null;
+                    $this->_scontent  = null;
+                    $this->_tcontent  = null;
                     break;
                 case 'source':
-                    if (!empty($this->_scontent) and !empty($this->_tcontent) or
-                        (isset($this->_data[$this->_source][$this->_scontent]) === false)) {
-                        $this->_data[$this->_source][$this->_scontent] = $this->_scontent;
+                    if ($this->_useId) {
+                        if (!empty($this->_scontent) && !empty($this->_langId) &&
+                            !isset($this->_data[$this->_source][$this->_langId])) {
+                            $this->_data[$this->_source][$this->_langId] = $this->_scontent;
+                        }
+                    } else {
+                        if (!empty($this->_scontent) &&
+                            !isset($this->_data[$this->_source][$this->_scontent])) {
+                            $this->_data[$this->_source][$this->_scontent] = $this->_scontent;
+                        }
                     }
                     $this->_stag = false;
                     break;
                 case 'target':
-                    if (!empty($this->_scontent) and !empty($this->_tcontent) or
-                        (isset($this->_data[$this->_source][$this->_scontent]) === false)) {
-                        $this->_data[$this->_target][$this->_scontent] = $this->_tcontent;
+                    if ($this->_useId) {
+                        if (!empty($this->_tcontent) && !empty($this->_langId) &&
+                            !isset($this->_data[$this->_target][$this->_langId])) {
+                            $this->_data[$this->_target][$this->_langId] = $this->_tcontent;
+                        }
+                    } else {
+                        if (!empty($this->_tcontent) && !empty($this->_scontent) &&
+                            !isset($this->_data[$this->_target][$this->_scontent])) {
+                            $this->_data[$this->_target][$this->_scontent] = $this->_tcontent;
+                        }
                     }
                     $this->_ttag = false;
                     break;

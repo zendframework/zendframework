@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19418 -->
+<!-- EN-Revision: 19446 -->
 <sect1 id="zend.db.select">
 
     <title>Zend_Db_Select</title>
@@ -794,12 +794,6 @@ $select = $db->select()
                 これは式を置き換える値となります。
                 <classname>Zend_Db_Select</classname> は値をクォートし、式の中の
                 クエスチョンマーク ("<code>?</code>") をその値で置き換えます。
-            </para>
-
-            <para>
-                このメソッドはパラメータをひとつだけ受け取ります。
-                複数の値を置換する必要がある場合は、文字列を自分でフォーマットし、
-                値の挿入やクォートを自分で行う必要があります。
             </para>
 
             <example id="zend.db.select.building.where.example-param">

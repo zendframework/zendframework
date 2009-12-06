@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18755 -->
+<!-- EN-Revision: 19426 -->
 <sect1 id="zend.mail.multiple-emails">
     <title>SMTP 接続による複数のメールの送信</title>
 
@@ -38,7 +38,7 @@ for ($i = 0; $i < 5; $i++) {
 
     <para>
         各配送ごとに別々の接続を使用したい場合は、
-        <function>send()</function> メソッドのコールの前後に
+        <methodname>send()</methodname> メソッドのコールの前後に
         トランスポートの作成と廃棄をする必要があります。
         あるいは、トランスポートのプロトコルオブジェクトを用いて
         各配送の接続を操作することもできます。

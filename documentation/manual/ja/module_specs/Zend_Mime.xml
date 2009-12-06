@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 19440 -->
 <sect1 id="zend.mime.mime">
     <title>Zend_Mime</title>
 
@@ -29,6 +29,11 @@
             </listitem>
             <listitem>
                 <para>
+                    <methodname>Zend_Mime::encode()</methodname>: 指定されたエンコードで文字列を エンコードします。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
                     <methodname>Zend_Mime::encodeBase64()</methodname>: 文字列を base64 でエンコードします。
                 </para>
             </listitem>
@@ -36,6 +41,18 @@
                 <para>
                     <methodname>Zend_Mime::encodeQuotedPrintable()</methodname>:
                     文字列を quoted-printable でエンコードします。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>Zend_Mime::encodeBase64Header()</methodname>:
+                    メールヘッダ用に文字列を base64 でエンコードします。
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>Zend_Mime::encodeQuotedPrintableHeader()</methodname>:
+                    メールヘッダ用に文字列を quoted-printable でエンコードします。
                 </para>
             </listitem>
         </itemizedlist>
@@ -86,6 +103,21 @@
             <listitem>
                 <para>
                     <constant>Zend_Mime::DISPOSITION_INLINE</constant>: 'inline'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_Mime::MULTIPART_ALTERNATIVE</constant>: 'multipart/alternative'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_Mime::MULTIPART_MIXED</constant>: 'multipart/mixed'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_Mime::MULTIPART_RELATED</constant>: 'multipart/related'
                 </para>
             </listitem>
         </itemizedlist>

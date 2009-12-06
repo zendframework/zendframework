@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18786 -->
+<!-- EN-Revision: 19426 -->
 <sect1 id="zend.translate.adapter">
 
     <title>Zend_Translate のアダプタ</title>
@@ -204,8 +204,8 @@
                 <title>PHP 5.3 でのリグレッション</title>
 
                 <para>
-                    <acronym>PHP</acronym> 5.3 より前のバージョンでは、<function>parse_ini_file()</function> および
-                    <function>parse_ini_string()</function> で
+                    <acronym>PHP</acronym> 5.3 より前のバージョンでは、<methodname>parse_ini_file()</methodname>
+                    および <methodname>parse_ini_string()</methodname> で
                     <acronym>INI</acronym> オプションのキーに非 ASCII 文字を問題なく使用できました。
                     しかし <acronym>PHP</acronym> 5.3 以降では、
                     非 ASCII 文字のキーはどちらの関数の返す配列からも黙って抜け落ちてしまいます。

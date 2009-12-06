@@ -792,9 +792,9 @@ class Zend_Mail extends Zend_Mime_Message
     /**
      * Sets Date-header
      *
-     * @param  string    $date
+     * @param  timestamp|string|Zend_Date $date
      * @return Zend_Mail Provides fluent interface
-     * @throws Zend_Mail_Exception if called subsequent times
+     * @throws Zend_Mail_Exception if called subsequent times or wrong date format.
      */
     public function setDate($date = null)
     {
@@ -866,7 +866,7 @@ class Zend_Mail extends Zend_Mime_Message
      * true  :Auto
      * false :No set
      * null  :No set
-     * string:Sets string
+     * string:Sets given string
      * @return  Zend_Mail Provides fluent interface
      * @throws  Zend_Mail_Exception
      */
@@ -963,7 +963,8 @@ class Zend_Mail extends Zend_Mime_Message
     public function addHeader($name, $value, $append = false)
     {
         $prohibit = array('to', 'cc', 'bcc', 'from', 'subject',
-                          'return-path', 'date', 'message-id',
+                          'reply-to', 'return-path',
+                          'date', 'message-id',
                          );
         if (in_array(strtolower($name), $prohibit)) {
             /**

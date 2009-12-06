@@ -26,12 +26,27 @@
             </listitem>
             <listitem>
                 <para>
+                    <methodname>Zend_Mime::encode()</methodname>: Encodes a string with specified encoding.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
                     <methodname>Zend_Mime::encodeBase64()</methodname>: Encodes a string into base64 encoding.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <methodname>Zend_Mime::encodeQuotedPrintable()</methodname>: Encodes a string with the quoted-printable mechanism.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>Zend_Mime::encodeBase64Header()</methodname>: Encodes a string into base64 encoding for Mail Headers.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>Zend_Mime::encodeQuotedPrintableHeader()</methodname>: Encodes a string with the quoted-printable mechanism for Mail Headers.
                 </para>
             </listitem>
         </itemizedlist>
@@ -82,6 +97,21 @@
             <listitem>
                 <para>
                     <constant>Zend_Mime::DISPOSITION_INLINE</constant>: 'inline'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_Mime::MULTIPART_ALTERNATIVE</constant>: 'multipart/alternative'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_Mime::MULTIPART_MIXED</constant>: 'multipart/mixed'
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <constant>Zend_Mime::MULTIPART_RELATED</constant>: 'multipart/related'
                 </para>
             </listitem>
         </itemizedlist>

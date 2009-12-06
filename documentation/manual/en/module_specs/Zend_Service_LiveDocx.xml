@@ -21,17 +21,47 @@
             and additionally offers functionality to improve network performance.
         </para>
 
-        <para>The <ulink url="http://www.phplivedocx.org">phpLiveDocx project site</ulink> contains
-            a large number of sample applications, tips and tricks and latest news, specific
-            to the Zend Framework implementation of LiveDocx. These resources are designed to get
-            you up to speed with LiveDocx in PHP as quickly as possible.
+        <para>
+            In addition to this section of the manual, if you are interested in learning more about
+            <classname>Zend_Service_LiveDocx</classname> and the backend <acronym>SOAP</acronym>
+            service LiveDocx, please take a look at the following resources:
         </para>
 
-        <para>
-            The backend <acronym>SOAP</acronym> API is documented <ulink
-            url="http://www.livedocx.com/pub/documentation/api.aspx">on the LiveDocx
-            documentation pages</ulink>.
-        </para>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Shipped demonstration applications</emphasis>. There are a large
+                    number of demonstration applications in the directory
+                    <emphasis>/demos/Zend/Service/LiveDocx</emphasis> of the Zend Framework
+                    distribution file or trunk version, checked out of the standard SVN repository.
+                    These are designed to get you up to speed with
+                    <classname>Zend_Service_LiveDocx</classname> within a matter of minutes.                            
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="http://www.phplivedocx.org/">
+                    <classname>Zend_Service_LiveDocx</classname> blog and web site</ulink>. 
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="http://www.livedocx.com/pub/documentation/api.aspx">
+                    LiveDocx SOAP API documentation</ulink>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="https://api.livedocx.com/1.2/mailmerge.asmx?wsdl">
+                    LiveDocx WSDL</ulink>.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <ulink url="https://www.livedocx.com/">LiveDocx blog and web site</ulink>.
+                </para>
+            </listitem>
+        </itemizedlist>
 
         <sect3 id="zend.service.livedocx.account">
             <title>Sign Up for an Account</title>

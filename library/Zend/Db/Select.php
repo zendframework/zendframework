@@ -466,7 +466,7 @@ class Zend_Db_Select
      * </code>
      *
      * @param string   $cond  The WHERE condition.
-     * @param string   $value OPTIONAL A single value to quote into the condition.
+     * @param mixed    $value OPTIONAL The value to quote into the condition.
      * @param constant $type  OPTIONAL The type of the given value
      * @return Zend_Db_Select This Zend_Db_Select object.
      */
@@ -483,7 +483,7 @@ class Zend_Db_Select
      * Otherwise identical to where().
      *
      * @param string   $cond  The WHERE condition.
-     * @param string   $value OPTIONAL A single value to quote into the condition.
+     * @param mixed    $value OPTIONAL The value to quote into the condition.
      * @param constant $type  OPTIONAL The type of the given value
      * @return Zend_Db_Select This Zend_Db_Select object.
      *
@@ -526,7 +526,7 @@ class Zend_Db_Select
      * appears. See {@link where()} for an example
      *
      * @param string $cond The HAVING condition.
-     * @param string|Zend_Db_Expr $val A single value to quote into the condition.
+     * @param string|Zend_Db_Expr $val The value to quote into the condition.
      * @return Zend_Db_Select This Zend_Db_Select object.
      */
     public function having($cond)
@@ -551,7 +551,7 @@ class Zend_Db_Select
      * Otherwise identical to orHaving().
      *
      * @param string $cond The HAVING condition.
-     * @param string $val A single value to quote into the condition.
+     * @param mixed  $val  The value to quote into the condition.
      * @return Zend_Db_Select This Zend_Db_Select object.
      *
      * @see having()
@@ -984,7 +984,7 @@ class Zend_Db_Select
      * Internal function for creating the where clause
      *
      * @param string   $condition
-     * @param string   $value  optional
+     * @param mixed    $value  optional
      * @param string   $type   optional
      * @param boolean  $bool  true = AND, false = OR
      * @return string  clause

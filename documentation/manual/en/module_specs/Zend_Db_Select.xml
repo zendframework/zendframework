@@ -778,12 +778,6 @@ $select = $db->select()
                 the expression.
             </para>
 
-            <para>
-                This method accepts only one parameter. If you have an expression into which you
-                need to substitute multiple variables, you must format the string manually,
-                interpolating variables and performing quoting yourself.
-            </para>
-
             <example id="zend.db.select.building.where.example-param">
 
                 <title>Example of a parameter in the where() method</title>

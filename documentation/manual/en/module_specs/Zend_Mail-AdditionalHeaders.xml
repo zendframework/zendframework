@@ -4,9 +4,52 @@
     <title>Additional Headers</title>
 
     <para>
-        Arbitrary mail headers can be set by using the <methodname>addHeader()</methodname> method.
-        It requires two parameters containing the name and the value of the header field. A third
-        optional parameter determines if the header should have only one or multiple values:
+        <classname>Zend_Mail</classname> provides several methods to set additional Mail Headers:
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>setReplyTo($email, $name=null)</methodname>: sets the Reply-To: header.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>setReturnPath($email)</methodname>: sets the Return-Path: header.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>setDate($date = null)</methodname>: sets the Date: header.
+                    This method uses current time stamp by default. Or You can pass time stamp,
+                    date string or <classname>Zend_Date</classname> instance to this method.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>setMessageId($id = true)</methodname>: sets the Message-Id: header.
+                    This method can generate message ID automatically by default. Or You can pass
+                    your message ID string to this method.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <methodname>createMessageId()</methodname>: is generator of the message ID.
+                    The <methodname>setMessageId()</methodname> method call this method internally.
+                    You can use this method for your own purpose.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <note>
+        <title>Operation corresponding to the Return-Path: header</title>
+        <para>
+            Operation has not yet implemented in <classname>Zend_Mail</classname>.
+        </para>
+    </note>
+
+    <para>
+        Furthermore, arbitrary mail headers can be set by using the <methodname>addHeader()</methodname>
+        method. It requires two parameters containing the name and the value of the header field.
+        A third optional parameter determines if the header should have only one or multiple values:
     </para>
 
     <example id="zend.mail.additional-headers.example-1">
@@ -19,11 +62,6 @@ $mail->addHeader('X-greetingsTo', 'Dad', true);
 ]]></programlisting>
     </example>
 
-    <para>
-        To set the Reply-To: header there exists the function
-        <methodname>setReplyTo($email, $name=null)</methodname>, because it requires additional
-        special escaping of the different parts (email and name).
-    </para>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

@@ -12,3 +12,8 @@ require_once dirname(__FILE__) . '/Helper.php';
 // Set autoloader to autoload libraries
 require_once 'Zend/Loader/Autoloader.php';
 $autoloader = Zend_Loader_Autoloader::getInstance();
+
+// Set default locale
+Zend_Locale::setDefault(Demos_Zend_Service_LiveDocx_Helper::LOCALE);
+$locale = new Zend_Locale(Zend_Locale::ZFDEFAULT);
+Zend_Registry::set('Zend_Locale', $locale);

@@ -90,9 +90,6 @@ mkdir($tempDirectory);
 
 $tempFilenames = array();
 
-$date = new Zend_Date();
-$date->setLocale(Demos_Zend_Service_LiveDocx_Helper::LOCALE);
-
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
 $phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
@@ -108,8 +105,8 @@ for ($iteration = 1; $iteration <= $iterations; $iteration ++) {
     $phpLiveDocx->assign('software', randomString())
                 ->assign('licensee', randomString())
                 ->assign('company',  randomString())
-                ->assign('date',     $date->now()->get(Zend_Date::DATE_LONG))
-                ->assign('time',     $date->now()->get(Zend_Date::TIME_LONG))
+                ->assign('date',     Zend_Date::now()->toString(Zend_Date::DATE_LONG))
+                ->assign('time',     Zend_Date::now()->toString(Zend_Date::TIME_LONG))
                 ->assign('city',     randomString())
                 ->assign('country',  randomString());
         
@@ -120,7 +117,7 @@ for ($iteration = 1; $iteration <= $iterations; $iteration ++) {
     $logger->log(sprintf('Generating temporary document %s.', $tempFilename), Zend_Log::INFO);
 }
 
-unset($phpLiveDocx, $date);
+unset($phpLiveDocx);
 
 // -----------------------------------------------------------------------------
 

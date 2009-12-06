@@ -34,12 +34,20 @@ require_once 'Zend/Date.php';
 class Demos_Zend_Service_LiveDocx_Helper
 {
     /**
-     * LiveDocx demo username
+     * LiveDocx demonstration username
+     * 
+     * IMPORTANT: These login credentials may be used for demonstration purposes only.
+     *            Getting your own username and password takes less than 1 minute.
+     *            Goto http://is.gd/5dK5A to sign up.
      */
     const USERNAME = 'zfdemos';
     
     /**
-     * LiveDocx demo password
+     * LiveDocx demonstration password
+     *
+     * IMPORTANT: These login credentials may be used for demonstration purposes only.
+     *            Getting your own username and password takes less than 1 minute.
+     *            Goto http://is.gd/5dK5A to sign up.
      */    
     const PASSWORD = 'fkj3487o4zf35';
     
@@ -63,17 +71,14 @@ class Demos_Zend_Service_LiveDocx_Helper
     {
         $ret = '';
         
-        $dateFormat = Zend_Date::RFC_1123;
-        
         $date = new Zend_Date();
-        $date->setLocale(self::LOCALE);
         
         if (count($result) > 0) {
             foreach ($result as $record) {
                 $date->set($record['createTime']);
-                $createTimeFormatted = $date->get($dateFormat);
+                $createTimeFormatted = $date->get(Zend_Date::RFC_1123);
                 $date->set($record['modifyTime']);
-                $modifyTimeFormatted = $date->get($dateFormat);
+                $modifyTimeFormatted = $date->get(Zend_Date::RFC_1123);
                 $ret .= sprintf('         Filename  : %s%s', $record['filename'], PHP_EOL);
                 $ret .= sprintf('         File Size : %d b%s', $record['fileSize'], PHP_EOL);
                 $ret .= sprintf('     Creation Time : %d (%s)%s', $record['createTime'], $createTimeFormatted, PHP_EOL);
@@ -81,6 +86,7 @@ class Demos_Zend_Service_LiveDocx_Helper
                 $ret .= PHP_EOL;
             }
         }
+        
         unset($date);
         
         return $ret;

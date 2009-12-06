@@ -4,10 +4,6 @@
 require_once dirname(__FILE__) . '/../../common.php';
 
 
-$date = new Zend_Date();
-
-$date->setLocale(Demos_Zend_Service_LiveDocx_Helper::LOCALE);
-
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
 $phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
@@ -18,8 +14,8 @@ $phpLiveDocx->setLocalTemplate('template.docx');
 $phpLiveDocx->setFieldValue('software', 'Magic Graphical Compression Suite v1.9')
             ->setFieldValue('licensee', 'Henry Döner-Meyer')
             ->setFieldValue('company',  'Megasoft Co-operation')
-            ->setFieldValue('date',     $date->get(Zend_Date::DATE_LONG))
-            ->setFieldValue('time',     $date->get(Zend_Date::TIME_LONG))
+            ->setFieldValue('date',     Zend_Date::now()->toString(Zend_Date::DATE_LONG))
+            ->setFieldValue('time',     Zend_Date::now()->toString(Zend_Date::TIME_LONG))
             ->setFieldValue('city',     'Bremen')
             ->setFieldValue('country',  'Germany');
 

@@ -4,10 +4,6 @@
 require_once dirname(__FILE__) . '/../../common.php';
 
 
-$date = new Zend_Date();
-
-$date->setLocale(Demos_Zend_Service_LiveDocx_Helper::LOCALE);
-
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
 $phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
@@ -36,11 +32,12 @@ $phpLiveDocx->assign('customer_number', sprintf("#%'10s",  rand(0,1000000000)))
 
 $billData = array (  
     'phone'         => '+22 (0)333 444 555',
-    'date'          => $date->get(Zend_Date::DATE_LONG),
+    'date'          => Zend_Date::now()->toString(Zend_Date::DATE_LONG),
     'name'          => 'James Henry Brown',
     'service_phone' => '+22 (0)333 444 559',
     'service_fax'   => '+22 (0)333 444 558',
-    'month'         => sprintf('%s %s', $date->get(Zend_Date::MONTH_NAME), $date->get(Zend_Date::YEAR)),
+    'month'         => sprintf('%s %s', Zend_Date::now()->toString(Zend_Date::MONTH_NAME),
+                                        Zend_Date::now()->toString(Zend_Date::YEAR)),
     'monthly_fee'   =>  '15.00',
     'total_net'     =>  '19.60',
     'tax'           =>  '19.00',

@@ -391,7 +391,6 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
         <example id="zend.http.client.streaming.example-2">
                 <title>Receiving file from HTTP server with streaming</title>
                 <programlisting language="php"><![CDATA[
-]]>
 $client->setStreaming(); // will use temp file
 $response = $client->request('GET');
 // copy file
@@ -401,7 +400,7 @@ $fp = fopen("my/downloads/file2", "w");
 stream_copy_to_stream($response->getStream(), $fp);
 // Also can write to known file
 $client->setStreaming("my/downloads/myfile)->request('GET');
-</programlisting>
+]]></programlisting>
             </example>
         </para>
 

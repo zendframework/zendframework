@@ -35,13 +35,13 @@
                     <emphasis>/demos/Zend/Service/LiveDocx</emphasis> of the Zend Framework
                     distribution file or trunk version, checked out of the standard SVN repository.
                     These are designed to get you up to speed with
-                    <classname>Zend_Service_LiveDocx</classname> within a matter of minutes.                            
+                    <classname>Zend_Service_LiveDocx</classname> within a matter of minutes.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <ulink url="http://www.phplivedocx.org/">
-                    <classname>Zend_Service_LiveDocx</classname> blog and web site</ulink>. 
+                    <classname>Zend_Service_LiveDocx</classname> blog and web site</ulink>.
                 </para>
             </listitem>
             <listitem>

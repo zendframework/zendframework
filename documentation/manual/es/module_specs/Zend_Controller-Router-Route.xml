@@ -96,7 +96,7 @@ public function userinfoAction()
         La definición de ruta puede contener uno o más caracteres especiales 
         - un comodín - representado por el símbolo '*'. 
         Se utiliza para reunir parámetros al igual que el valor de ruta por 
-        defecto del Módulo (var => pares de valores definidos en la URI). 
+        defecto del Módulo (var => pares de valores definidos en la <acronym>URI</acronym>). 
         La siguiente ruta imita más o menos el comportamiento de la ruta del 
         Módulo:
     </para>

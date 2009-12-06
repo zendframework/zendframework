@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16658 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.dispatcher">
     <title>El Despachador</title>
@@ -16,8 +16,8 @@
             Si no se encuentra algún módulo, controlador o acción, se usarán
             los valores por defecto para ellos.
             <classname>Zend_Controller_Dispatcher_Standard</classname>
-            especifica <methodname>index</methodname> para cada uno de los controladores y
-            acciones por defecto y <methodname>default</methodname> para el valor por
+            especifica <emphasis>index</emphasis> para cada uno de los controladores y
+            acciones por defecto y <emphasis>default</emphasis> para el valor por
             defecto del módulo, pero permite al desarrollador cambiar los
             valores por defecto para cada uno usando los métodos
             <methodname>setDefaultController()</methodname>,
@@ -34,7 +34,7 @@
                 configuración por defecto es que el módulo por defecto es
                 <emphasis>no</emphasis> namespaced).
                 Como de 1.5.0, ahora puede hacerlo especificando el
-                <methodname>prefixDefaultModule</methodname> como verdadero tanto en el
+                <methodname>prefixDefaultModule</methodname> como <constant>TRUE</constant> tanto en el
                 front controller como es su despachador:
             </para>
 
@@ -64,7 +64,7 @@ $dispatcher->setParam('prefixDefaultModule', true);
         <para>
             Al comienzo de cada iteración, establece un flag en el objeto
             solicitud indicando que la acción se ha despachado.
-            Si una acción o un plugin pre/postDispatch resetea ese flag,
+            Si una acción o un plugin pre o postDispatch resetea ese flag,
             el loop de despacho continuará e intentará despachar la nueva
             solicitud. Cambiando el controlador y/o la acción en la solicitud y
             reseteando el flag despachado, el desarrollador puede definir

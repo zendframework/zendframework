@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17136 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.basics">
     <title>Conceptos Básicos de Zend_Controller</title>
@@ -47,7 +47,7 @@
             <listitem>
                 <para>
                     <classname>Zend_Controller_Request_Abstract</classname> (a
-                    menudo denominado <methodname>Request Object</methodname>) representa
+                    menudo denominado <emphasis>Request Object</emphasis>) representa
                     el entorno de la solicitud y ofrece métodos para
                     establecer y recuperar el controlador, los nombres de las
                     acciones y cualquier parámetro de solicitud. Además realiza un seguimiento
@@ -86,15 +86,15 @@
                 <para>
                     El router por defecto,
                     <classname>Zend_Controller_Router_Rewrite</classname>,
-                    toma el punto final de una URI como se especificó en
+                    toma el punto final de una <acronym>URI</acronym> como se especificó en
                     <classname>Zend_Controller_Request_Http</classname>
                     y la descompone en un controlador, una acción y parámetros,
                     basándose en la información de la ruta del url.
-                    Como ejemplo, la URL
-                    <methodname>http://localhost/foo/bar/key/value</methodname> se
-                    decodificará para usar el controlador <methodname>foo</methodname>,
-                    la acción <methodname>bar</methodname> y especificar un parámetro
-                    <methodname>key</methodname> con el valor de <methodname>value</methodname>.
+                    Como ejemplo, la <acronym>URL</acronym>
+                    <filename>http://localhost/foo/bar/key/value</filename> se
+                    decodificará para usar el controlador <emphasis>foo</emphasis>,
+                    la acción <emphasis>bar</emphasis> y especificar un parámetro
+                    <emphasis>key</emphasis> con el valor de <emphasis>value</emphasis>.
                 </para>
 
                 <para>
@@ -111,7 +111,7 @@
                     <classname>Zend_Controller_Dispatcher_Interface</classname>
                     se usa para definir dispatchers. Dispatching (Despachar) es el proceso
                     de sacar el controlador y la acción del objeto que solicita y
-                    mapearlo a un controlador archivo/clase y al método acción
+                    mapearlo a un controlador archivo (o clase) y al método acción
                     en la clase del controlador. Si el controlador o acción no
                     existen, hará un manejo para determinar los controladores
                     por defecto y las acciones a enviar.
@@ -126,7 +126,7 @@
                     el bucle se repetirá, llamando a cualquier acción que esté
                     actualmente establecida en la solicitud del objeto.
                     La primera vez el bucle termina con la solicitud del objeto,
-                    el estado de lo enviado se establece a (booleano true),
+                    el estado de lo enviado se establece a (<type>Boolean</type> <constant>TRUE</constant>),
                     que terminará el procesamiento.
                 </para>
 
@@ -137,8 +137,8 @@
                     terminan en la palabra Controller, y los métodos de acción
                     como camelCasedMethods cuando terminan en la palabra Action:
                     <methodname>FooController::barAction()</methodname>. En este caso,
-                    el controlador será referido como <methodname>foo</methodname> y a la
-                    acción como <methodname>bar</methodname>.
+                    el controlador será referido como <emphasis>foo</emphasis> y a la
+                    acción como <emphasis>bar</emphasis>.
                 </para>
 
                 <note>
@@ -166,8 +166,8 @@
                         Como ejemplo, si se va a la acción en
                         <methodname>FooBarController::bazBatAction()</methodname>,
                         se referirá a ella en la <acronym>URL</acronym> como
-                        <methodname>/foo-bar/baz-bat</methodname>
-                        o <methodname>/foo.bar/baz.bat</methodname>.
+                        <filename>/foo-bar/baz-bat</filename>
+                        o <filename>/foo.bar/baz.bat</filename>.
                     </para>
                 </note>
             </listitem>
@@ -193,7 +193,7 @@
                 <para>
                     La clase de respuesta (response) por defecto es
                     <classname>Zend_Controller_Response_Http</classname>,
-                    la cual es adecuada para usarla en un entorno HTTP.
+                    la cual es adecuada para usarla en un entorno <acronym>HTTP</acronym>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -206,7 +206,7 @@
         para determinar qué controlador (y la acción en ese controlador)
         despachar.
         <classname>Zend_Controller_Router_Rewrite</classname>
-        descompone la URI a fin de establecer el controlador y el nombre de
+        descompone la <acronym>URI</acronym> a fin de establecer el controlador y el nombre de
         acción en la solicitud.
         <classname>Zend_Controller_Front</classname>
         entonces entra al bucle del dispatch. Llama a

@@ -42,7 +42,7 @@
         <para>
                 Basado en el tipo de solicitud, puede haber más métodos disponibles.
                 La solicitud por defecto usada, <classname>Zend_Controller_Request_Http</classname>,
-            por ejemplo, tiene métodos para recuperar la URI de la solicitud, ruta de la 
+            por ejemplo, tiene métodos para recuperar la <acronym>URI</acronym> de la solicitud, ruta de la 
             información, parámetros <methodname>$_GET</methodname> y <methodname>$_POST</methodname>,
             etc.
         </para>
@@ -57,11 +57,11 @@
         <para>
                 Adicionalmente, la solicitud objeto es particularmente útil en pruebas.
                 El desarrolador puede cambiar el entorno de la solicitud, incluyendo módulos,
-                controladores, acciones, parámetros, URI, etc, y pasar la solicitud 
+                controladores, acciones, parámetros, <acronym>URI</acronym>, etc, y pasar la solicitud 
                 objeto al controlador front para probar el flujo de la aplicación. Cuando se vincula 
                 con el <link linkend="zend.controller.response">objeto 
                         respuesta </link>, es posible elaborar y precisar una unidad de pruebas de aplicaciones
-                MVC.
+                <acronym>MVC</acronym>.
         </para>
     </sect2>
 
@@ -75,9 +75,9 @@
                 <classname>Zend_Controller_Request_Http</classname> encapsula el acceso a 
                 relevantes valores tal como el nombre de la llave y el valor para el
                 controlador y variables de aación enrutamiento y todos los
-                parámetros adicionales analizados desde el URI. Adiccionalmente permite el acceso
+                parámetros adicionales analizados desde el <acronym>URI</acronym>. Adiccionalmente permite el acceso
                 a valores contenidos en las superglobales como miembros públicos y 
-                administra la actual base URL y la solicitud URI. los valores
+                administra la actual base <acronym>URL</acronym> y la solicitud <acronym>URI</acronym>. los valores
                 Superglobales no pueden ser determinados en una solicitud objeto, en vez usar los
                 métodos setParam/getParam para determinar o recuperar los parámetros del usuario.
             </para>
@@ -126,7 +126,7 @@
 
                 <para>
                         Esto es primordialmente útil para aceptar el contenido cuando
-                        se desarrolla una aplicación MVC simple.
+                        se desarrolla una aplicación <acronym>MVC</acronym> simple.
                 </para>
             </note>
 
@@ -134,7 +134,7 @@
                     Usted puede determinar parámetros de usuario en la solicitud objeto usando
                     <methodname>setParam()</methodname> y recuperar los mismos despues usando
                 <methodname>getParam()</methodname>. El router hace uso de esta 
-                funcionalidad para determinar parámetros correspondientes en la solicitud URI 
+                funcionalidad para determinar parámetros correspondientes en la solicitud <acronym>URI</acronym> 
                 a la solicitud objeto.
             </para>
 
@@ -173,7 +173,7 @@
                     If you are using Apache's 404 handler to pass incoming
                     requests to the front controller, or using a PT flag with
                     rewrite rules, <methodname>$_SERVER['REDIRECT_URL']</methodname>
-                    contains the URI you need, not
+                    contains the <acronym>URI</acronym> you need, not
                     <methodname>$_SERVER['REQUEST_URI']</methodname>. If you are using such
                     a setup and getting invalid routing, you should use the
                     <classname>Zend_Controller_Request_Apache404</classname> class instead
@@ -201,18 +201,18 @@ $front->setRequest($request);
                 <classname>Zend_Controller_Request_Http</classname> allows
                 <classname>Zend_Controller_Router_Rewrite</classname> to be used in subdirectories.
                 <classname>Zend_Controller_Request_Http</classname> will attempt to automatically
-                detect your base URL and set it accordingly.
+                detect your base <acronym>URL</acronym> and set it accordingly.
             </para>
 
             <para>
                 For example, if you keep your <methodname>index.php</methodname> in a
                 webserver subdirectory named
-                <methodname>/projects/myapp/index.php</methodname>, base URL (rewrite base)
+                <methodname>/projects/myapp/index.php</methodname>, base <acronym>URL</acronym> (rewrite base)
                 should be set to <methodname>/projects/myapp</methodname>. This string will
                 then be stripped from the beginning of the path before
                 calculating any route matches. This frees one from the necessity
                 of prepending it to any of your routes. A route of
-                <methodname>'user/:username'</methodname> will match URIs like
+                <methodname>'user/:username'</methodname> will match <acronym>URI</acronym>s like
                 <methodname>http://localhost/projects/myapp/user/martel</methodname> and
                 <methodname>http://example.com/user/martel</methodname>.
             </para>
@@ -220,21 +220,21 @@ $front->setRequest($request);
             <note>
                 <title>URL Detection is Case Sensitive</title>
                 <para>
-                    Automatic base URL detection is case sensitive, so make sure your URL
+                    Automatic base <acronym>URL</acronym> detection is case sensitive, so make sure your <acronym>URL</acronym>
                     will match a subdirectory name in a filesystem (even on Windows
                     machines). If it doesn't, an exception will be raised.
                 </para>
             </note>
 
             <para>
-                Should base URL be detected incorrectly you can override it
+                Should base <acronym>URL</acronym> be detected incorrectly you can override it
                 with your own base path with the help of the
                 <methodname>setBaseUrl()</methodname> method of either the
                 <classname>Zend_Controller_Request_Http</classname> class, or the
                 <classname>Zend_Controller_Front</classname> class. The easiest
                 method is to set it in <classname>Zend_Controller_Front</classname>,
                 which will proxy it into the request object. Example usage to
-                set a custom base URL:
+                set a custom base <acronym>URL</acronym>:
             </para>
 
              <programlisting language="php"><![CDATA[
@@ -272,7 +272,7 @@ $response   = $controller->dispatch();
             </itemizedlist>
 
             <para>
-                The primary use case for these is for creating RESTful MVC 
+                The primary use case for these is for creating RESTful <acronym>MVC</acronym>
                 architectures.
             </para>
         </sect3>

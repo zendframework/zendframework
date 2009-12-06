@@ -8,7 +8,7 @@
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> Es el router 
             standard del Framework. Routing es el proceso de tomar la parte 
-            final de una URI (la parte de la URI que viene después de la <acronym>URL</acronym> 
+            final de una <acronym>URI</acronym> (la parte de la <acronym>URI</acronym> que viene después de la <acronym>URL</acronym> 
             base) y la descomposición en parámetros para determinar qué módulo, 
             qué controlador y acción de ese controlador debe recibir la solicitud. 
             Estos valores del módulo, controlador, acción y otros parámetros 
@@ -202,7 +202,7 @@ $router->addRoute('user',
         <para>
             El routing es un simple proceso de iteración a través de todas las 
             rutas provistas y la equiparación de sus definiciones con la petición 
-            actual de URI. Cuando se encuentra una concordancia, se devuelven 
+            actual de <acronym>URI</acronym>. Cuando se encuentra una concordancia, se devuelven 
             valores de variables desde la instancia Route y se inyecta en el 
             objeto <classname>Zend_Controller_Request</classname>  
             para su posterior utilización en el dispatcher así también como en 
@@ -262,12 +262,12 @@ $router->addRoute('user',
 
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> viene 
-            preconfigurado con una ruta por defecto, que se comparará con URIs 
+            preconfigurado con una ruta por defecto, que se comparará con <acronym>URI</acronym>s 
             en la forma de <methodname>controller/action</methodname>. 
             Además, se puede especificar un nombre de módulo como primer 
-            elemento del path, permitiendo URIs de la forma            
+            elemento del path, permitiendo <acronym>URI</acronym>s de la forma            
             <methodname>module/controller/action</methodname>. Por último, también coincidrá  
-            con cualquier parámetro adicional agregado a la URI por defecto -
+            con cualquier parámetro adicional agregado a la <acronym>URI</acronym> por defecto -
             <methodname>controller/action/var1/value1/var2/value2</methodname>.
         </para>
 

@@ -8,7 +8,7 @@
         <title>Introducción</title>
 
         <para>
-            Los componentes MVC en Zend Framework utilizan un Front Controller,
+            Los componentes <acronym>MVC</acronym> en Zend Framework utilizan un Front Controller,
             lo que significa que todas las solicitudes de un determinado
             sitio pasarán por un solo punto de entrada. Como resultado, todas
             las excepciones burbujearán eventualmente hacia arriba hasta el
@@ -19,7 +19,7 @@
         <para>
             Sin embargo, los mensajes de excepción y la información de backtrace
             contienen a menudo información sensible del sistema, como
-            declaraciones SQL, ubicaciones de archivos y otras cosas más.
+            declaraciones <acronym>SQL</acronym>, ubicaciones de archivos y otras cosas más.
             Para ayudar a proteger su sitio, por defecto
             <classname>Zend_Controller_Front</classname> captura todas las
             excepciones y las registra con el objeto respuesta; a su vez, y
@@ -31,7 +31,7 @@
         <title>Manejando las Excepciones</title>
 
         <para>
-            Ya hay varios mecanismos construidos en los componentes de MVC,
+            Ya hay varios mecanismos construidos en los componentes de <acronym>MVC</acronym>,
             que le permiten manejar excepciones.
         </para>
 
@@ -66,10 +66,10 @@
             </listitem>
 
             <listitem>
-                <para><classname>Zend_Controller_Front::throwExceptions()</classname></para>
+                <para><methodname>Zend_Controller_Front::throwExceptions()</methodname></para>
 
                 <para>
-                    Pasando a este método un valor booleano verdadero,
+                    Pasando a este método un valor booleano <constant>TRUE</constant>,
                     puede decirle al front controller que, en lugar
                     de sumar excepciones en el objeto respuesta o utilizando
                     el plugin de manejo de errores, prefiere manejarlos usted mismo.
@@ -94,10 +94,10 @@ try {
             </listitem>
 
             <listitem>
-                <para><classname>Zend_Controller_Response_Abstract::renderExceptions()</classname></para>
+                <para><methodname>Zend_Controller_Response_Abstract::renderExceptions()</methodname></para>
 
                 <para>
-                    Al pasar a este método un valor booleano verdadero,
+                    Al pasar a este método un valor booleano <constant>TRUE</constant>,
                     le esta diciendo al objeto respuesta que debe emitir un
                     mensaje de excepción y backtrace cuando se renderiza a sí
                     mismo.
@@ -109,14 +109,14 @@ try {
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Front::returnResponse()</classname> y
-                    <classname>Zend_Controller_Response_Abstract::isException()</classname>.
+                    <methodname>Zend_Controller_Front::returnResponse()</methodname> y
+                    <methodname>Zend_Controller_Response_Abstract::isException()</methodname>.
                 </para>
 
                 <para>
-                    Pasando un valor booleano verdadero a
-                    <classname>Zend_Controller_Front::returnResponse()</classname>,
-                    <classname>Zend_Controller_Front::dispatch()</classname>
+                    Pasando un valor booleano <constant>TRUE</constant> a
+                    <methodname>Zend_Controller_Front::returnResponse()</methodname>,
+                    <methodname>Zend_Controller_Front::dispatch()</methodname>
                     no renderizará la respuesta, sino que la devolverá.
                     Una vez que tiene la respuesta, entonces puede probar ver
                     si todas las excepciones fueron atrapadas usando su método
@@ -153,7 +153,7 @@ if ($response->isException()) {
         <title>Excepciones MVC que Usted Pueda Encontrar</title>
 
         <para>
-            Los diversos componentes de MVC -- solicitud, router, despachador,
+            Los diversos componentes de <acronym>MVC</acronym> -- solicitud, router, despachador,
             controlador de acción, y los objetos respuesta -- pueden arrojar
             excepciones en ocasiones.
             Algunas excepciones puede ser condicionalmente anuladas,
@@ -303,7 +303,7 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
                             Este método es agradable porque puede alterar
                             transparentemente la acción antes del último
                             despacho. Sin embargo, también significa que errores
-                            ortográficos en la URL todavía pueden despacharse
+                            ortográficos en la <acronym>URL</acronym> todavía pueden despacharse
                             correctamente, lo que no es muy bueno para la
                             optimización en un motor de búsqueda.
                         </para>

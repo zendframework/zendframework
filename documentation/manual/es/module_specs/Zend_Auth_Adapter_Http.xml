@@ -134,9 +134,9 @@
                         <entry>Si, cuando
                                 <methodname>'accept_schemes'</methodname>
                             contiene <emphasis>'digest'</emphasis></entry>
-                        <entry> Lista de URIs separadas por espacios para las
+                        <entry> Lista de <acronym>URI</acronym>s separadas por espacios para las
                             cuales la misma información de autenticación es
-                            válida. No es necesario que todas las URIs apunten
+                            válida. No es necesario que todas las <acronym>URI</acronym>s apunten
                             al mismo oservidor. </entry>
                     </row>
                     <row>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 16705 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.quickstart">
     <title>Inicio rápido a Zend_Controller</title>
@@ -8,7 +8,7 @@
         <title>Introducción</title>
         <para>
             <methodname>Zend_Controller</methodname>
-            es el corazón del sistema de MVC de Zend Framework MVC. MVC
+            es el corazón del sistema de <acronym>MVC</acronym> de Zend Framework <acronym>MVC</acronym>.<acronym>MVC</acronym>
             son las siglas de
             <ulink url="http://en.wikipedia.org/wiki/Model-view-controller">
                 Modelo-Vista-Controlador
@@ -74,12 +74,12 @@ html/
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.docroot">
-            <title>Establezca su document root</title>
+            <title>Establezca el document root</title>
 
             <para>
                 Apunte su document root en su servidor web hacia el
                 directorio
-                <methodname>html</methodname>
+                <filename>html/</filename>
                 de la estructura de archivos de arriba.
             </para>
         </sect3>
@@ -89,7 +89,7 @@ html/
 
             <para>
                 Edite el archivo
-                <methodname>html/.htaccess</methodname>
+                <filename>html/.htaccess</filename>
                 que aparece arriba de la siguiente forma:
             </para>
 
@@ -102,6 +102,53 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
+            <note>
+                <title>Learn about mod_rewrite</title>
+
+                <para>
+                    The above rewrite rules allow access to any file under your
+                    virtual host's document root. If there are files you do not
+                    want exposed in this way, you may want to be more
+                    restrictive in your rules. Go to the Apache website to
+                    <ulink
+                        url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">learn
+                        more about mod_rewrite</ulink>.
+                </para>
+            </note>
+
+            <para>
+                If using <acronym>IIS</acronym> 7.0, use the following as your rewrite
+                configuration:
+            </para>
+
+            <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+     <system.webServer>
+         <rewrite>
+             <rules>
+                 <rule name="Imported Rule 1" stopProcessing="true">
+                     <match url="^.*$" />
+                     <conditions logicalGrouping="MatchAny">
+                         <add input="{REQUEST_FILENAME}"
+                             matchType="IsFile" pattern=""
+                             ignoreCase="false" />
+                         <add input="{REQUEST_FILENAME}"
+                             matchType="IsDirectory"
+                             pattern="" ignoreCase="false" />
+                     </conditions>
+                     <action type="None" />
+                 </rule>
+                 <rule name="Imported Rule 2" stopProcessing="true">
+                     <match url="^.*$" />
+                     <action type="Rewrite" url="index.php" />
+                 </rule>
+             </rules>
+         </rewrite>
+     </system.webServer>
+</configuration>
+]]></programlisting>
+			
             <para>
                 La regla de arriba redirigirá las peticiones a recuros existentes
                 (enlaces simbólicos existentes, archivos no vacíos, o directorios no vacíos)
@@ -121,14 +168,14 @@ RewriteRule ^.*$ index.php [NC,L]
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.bootstrap">
-            <title>Cree su archivo bootstrap</title>
+            <title>Crear el archivo bootstrap</title>
 
             <para>
                 El archivo bootstrap es la página a la que todas las peticiones
                 son redirigidas a través de --
-                <methodname>html/index.php</methodname>
+                <filename>html/index.php</filename>
                 en este caso. Abra el archivo
-                <methodname>html/index.php</methodname>
+                <filename>html/index.php</filename>
                 en el editor de su elección y añada lo siguiente:
             </para>
 
@@ -143,7 +190,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.controller">
-            <title>Cree su action controller por defecto</title>
+            <title>Crear el action controller por defecto</title>
 
             <para>
                 Antes de tratar los action controllers, debe primero
@@ -151,21 +198,21 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 Por defecto, el primero segmento de una ruta <acronym>URL</acronym> apunta
                 a un controlador, y el segundo a una acción. Por ejemplo,
                 dada la <acronym>URL</acronym>
-                <methodname>
+                <filename>
                     http://framework.zend.com/roadmap/components
-                </methodname>
+                </filename>
                 , la ruta es
-                <methodname>/roadmap/components</methodname>
+                <filename>/roadmap/components</filename>
                 , que apuntará al controlador
-                <methodname>roadmap</methodname>
+                <emphasis>roadmap</emphasis>
                 y la acción
-                <methodname>components</methodname>
+                <emphasis>components</emphasis>
                 . Si no se suministra una acción, se asume la acción
-                <methodname>index</methodname>
+                <emphasis>index</emphasis>
                 , y si no se suministra un controlador, se asume el controlador
-                <methodname>index</methodname>
+                <emphasis>index</emphasis>
                 (siguiendo la convención de Apache de apuntar a
-                <methodname>DirectoryIndex</methodname>
+                <emphasis>DirectoryIndex</emphasis>
                 automáticamente).
             </para>
 
@@ -174,9 +221,9 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 toma entonces el valor del controlador y lo apunta
                 a una clase. Por defecto, pone en mayúsculas la primera letra
                 del nombre de controlador y agrega la palabra
-                <methodname>Controller</methodname>
+                <emphasis>Controller</emphasis>
                 . De esta forma, en nuestro ejemplo de arriba, el controlador
-                <methodname>roadmap</methodname>
+                <emphasis>roadmap</emphasis>
                 es dirigido a la clase
                 <methodname>RoadmapController</methodname>
                 .
@@ -186,11 +233,11 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 De la misma forma, el valor de action es dirigido
                 a un método de la clase controladora. Por defecto, el valor se
                 pasa a minúsculas, y la palabra
-                <methodname>Action</methodname>
+                <emphasis>Action</emphasis>
                 es añadida. De esta forma, en nuestro ejemplo de arriba, la acción
-                <methodname>components</methodname>
+                <emphasis>components</emphasis>
                 se convierte en
-                <methodname>componentsAction</methodname>
+                <emphasis>componentsAction</emphasis>
                 , y el método final llamado es
                 <methodname>RoadmapController::componentsAction()</methodname>
                 .
@@ -200,9 +247,9 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 Continuando, creemos ahora un action controller
                 y un método de acción por defecto. Como se ha dicho antes,
                 el controlador por defecto y la acción llamada son ambos
-                <methodname>index</methodname>
+                <emphasis>index</emphasis>
                 . Abra el archivo
-                <methodname>application/controllers/IndexController.php</methodname>
+                <filename>application/controllers/IndexController.php</filename>
                 , e introduzca lo siguiente:
             </para>
 
@@ -226,18 +273,18 @@ class IndexController extends Zend_Controller_Action
                 tendrá su contenido generado inmediatamente.
                 Por defecto,
                 <methodname>Zend_View</methodname>
-                es usado como la capa Vista en el patrón MVC. El
-                <methodname>ViewRenderer</methodname>
+                es usado como la capa Vista en el patrón <acronym>MVC</acronym>. El
+                <emphasis>ViewRenderer</emphasis>
                 hace algo de magia, y usa el nombre de controlador (e.g.,
                 <methodname>index</methodname>
                 ) y el nombre de acción actual (e.g.,
-                <methodname>index</methodname>
+                <emphasis>index</emphasis>
                 ) para determinar qué plantilla traer. Por defecto,
                 las plantillas terminan con la extensión
                 <methodname>.phtml</methodname>
                 , lo que significa que en el ejemplo de arriba, la
                 plantilla
-                <methodname>index/index.phtml</methodname>
+                <filename>index/index.phtml</filename>
                 será generada. Adicionalmente, el
                 <methodname>ViewRenderer</methodname>
                 asume automáticamente que la carpeta
@@ -245,9 +292,9 @@ class IndexController extends Zend_Controller_Action
                 al mismo nivel que la carpeta controller será
                 la carpeta raíz de la vista, y que el script de vista actual
                 estará en la subcarpeta
-                <methodname>views/scripts/</methodname>.
+                <filename>views/scripts/</filename>.
                 De esta forma, la plantilla generada será encontrada en
-                <methodname>application/views/scripts/index/index.phtml</methodname>
+                <filename>application/views/scripts/index/index.phtml</filename>
                 .
             </para>
         </sect3>
@@ -261,10 +308,10 @@ class IndexController extends Zend_Controller_Action
                     en la sección anterior
                 </link>
                 , los scripts de vista se encuentran en
-                <methodname>application/views/scripts/</methodname>
+                <filename>application/views/scripts/</filename>
                 ; el view script para el controlador y la acción por defecto
                 está en
-                <methodname>application/views/scripts/index/index.phtml</methodname>
+                <filename>application/views/scripts/index/index.phtml</filename>
                 . Cree este archivo, y escriba un poco de HTML:
             </para>
 
@@ -312,9 +359,9 @@ class ErrorController extends Zend_Controller_Action
             <para>
                 Asumiendo el sistema de carpetas discutido anteriormente,
                 este archivo irá en
-                <methodname>application/controllers/ErrorController.php</methodname>
+                <filename>application/controllers/ErrorController.php</filename>
                 . También necesitará crear un view script en
-                <methodname>application/views/scripts/error/error.phtml</methodname>
+                <filename>application/views/scripts/error/error.phtml</filename>
                 ; el contenido de ejemplo será parecido a:
             </para>
 
@@ -341,25 +388,25 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             <para>
                 Con su primer controlador y vista, ya puede arrancar su navegador y acceder a su sitio.
                 Asumiendo que
-                <methodname>example.com</methodname>
-                es su dominio, cualquiera de las siguientes URLs le llevará a
+                <filename>example.com</filename>
+                es su dominio, cualquiera de las siguientes <acronym>URL</acronym>s le llevará a
                 la página que acaba de crear:
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <methodname>http://example.com/</methodname>
+                        <filename>http://example.com/</filename>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <methodname>http://example.com/index</methodname>
+                        <filename>http://example.com/index</filename>
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <methodname>http://example.com/index/index</methodname>
+                        <filename>http://example.com/index/index</filename>
                     </para>
                 </listitem>
             </itemizedlist>

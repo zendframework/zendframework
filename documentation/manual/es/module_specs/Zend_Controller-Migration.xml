@@ -5,7 +5,7 @@
     <title>Migración de versiones anteriores</title>
 
     <para>
-    	La <acronym>API</acronym> de los componentes de MVC  ha cambiado en el tiempo. Si usted ha empezado a
+    	La <acronym>API</acronym> de los componentes de <acronym>MVC</acronym>  ha cambiado en el tiempo. Si usted ha empezado a
     	usar una versión anterior de Zend Framework, siga la guía de abajo para
     	migrar sus acripts para usar la arquitectura nueva.
     </para>
@@ -446,7 +446,7 @@ $viewRenderer->setView($view);
         <title>Migrando desde 0.6.0 to 0.8.0 o versiones nuevas</title>
 
         <para>
-        	Por los cambios previos, el más básico uso de los componentes MVC 
+        	Por los cambios previos, el más básico uso de los componentes <acronym>MVC</acronym>
             sigue siendo el mismo:
         </para>
 
@@ -483,7 +483,7 @@ Zend_Controller_Front::run('/path/to/controllers');
 					Una nueva clase ruta para uso con el router reescribir se 
                     presentó,
                     <classname> Zend_Controller_Router_Route_Module </classname>, que abarca
-                    la ruta por defecto utilizado por el MVC, y tiene soporte para el<link
+                    la ruta por defecto utilizado por el <acronym>MVC</acronym>, y tiene soporte para el<link
                     	linkend = "zend.controller.modular">controlador de
                         módulos </link>.
                 </para>
@@ -534,7 +534,7 @@ final protected function _forward($action,
         <title>Migrando desde 0.2.0 o antes de 0.6.0</title>
 
         <para>
-        	El mas basico uso de los componentes de MVC no ha cambiado; se puede
+        	El mas basico uso de los componentes de <acronym>MVC</acronym> no ha cambiado; se puede
         	seguir utilizando a cada uno en la siguiente manera:
         </para>
 

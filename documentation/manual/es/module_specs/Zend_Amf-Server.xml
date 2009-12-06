@@ -143,7 +143,7 @@ class Mundo
                 <filename>http://example.com/server.php</filename>. En este
             caso, usted debería modificar su fichero
                 <filename>service-config.xml</filename> poniendo este valor como
-            atributo al punto final del canal uri. </para>
+            atributo al punto final del canal<acronym>URI</acronym>. </para>
         <para> Si nunca ha creado un fichero
                 <filename>service-config.xml</filename> puede hacerlo abriendo
             su proyecto en la ventana del navegador. Haga clic derecho sobre el

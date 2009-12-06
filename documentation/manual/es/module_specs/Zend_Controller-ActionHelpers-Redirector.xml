@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17171 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.redirector">
     <title>Redirector</title>
@@ -7,148 +7,142 @@
     <sect4 id="zend.controller.actionhelper.redirector.introduction">
         <title>Introducción</title>
 
-        <para>
-            El ayudante <methodname>Redirector</methodname> le permite utilizar un
-            objeto de redireccionamiento para cumplir con necesidades de su
-            aplicación para redireccionar a una nueva URL.
-            Ofrece numerosas ventajas sobre el método <methodname>_redirect()</methodname>,
-            tales como poder preconfigurar un comportamiento para todo el sitio
-            en el objeto redirector o usando el construido en
-            <methodname>gotoSimple($action, $controller, $module, $params)</methodname>,
-            interfaz similar a la de
-            <classname>Zend_Controller_Action::_forward()</classname>.
-        </para>
+        <para> El ayudante <emphasis>Redirector</emphasis> le permite
+            utilizar un objeto de redireccionamiento para cumplir con
+            necesidades de su aplicación para redireccionar a una nueva
+            <acronym>URL</acronym>.
+            Ofrece numerosas ventajas sobre el método
+                <methodname>_redirect()</methodname>, tales como poder
+            preconfigurar un comportamiento para todo el sitio en el objeto
+            redirector o usando el construido en <methodname>gotoSimple($action,
+                $controller, $module, $params)</methodname>, interfaz similar a
+            la de <methodname>Zend_Controller_Action::_forward()</methodname>. </para>
 
-        <para>
-            El <methodname>Redirector</methodname> tiene un número de métodos que pueden
-            utilizarse para afectar el comportamiento al redireccionar:
-        </para>
+        <para> El <emphasis>Redirector</emphasis> tiene un número de métodos
+            que pueden utilizarse para afectar el comportamiento al
+            redireccionar: </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>setCode()</methodname> puede ser utilizado para establecer
-                    el código de respuesta HTTP que utilizar durante la
-                    redirección.
-                </para>
+                    <methodname>setCode()</methodname> puede ser utilizado para
+                    establecer el código de respuesta HTTP que utilizar durante
+                    la redirección. </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setExit()</methodname> puede usarse para forzar un
-                    <methodname>exit()</methodname> tras una redirección.
-                    Por defecto es verdadero (true).
-                </para>
+                    <methodname>setExit()</methodname> puede usarse para forzar
+                    un <methodname>exit()</methodname> tras una redirección. Por
+                    defecto es verdadero ( <constant>TRUE</constant>). </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setGotoSimple()</methodname> puede ser utilizada para
-                    establecer la <acronym>URL</acronym> que usar por defecto si no se ha pasado
-                    ninguna a <methodname>gotoSimple()</methodname>.
-                    Utiliza la <acronym>API</acronym> de
-                    <classname>Zend_Controller_Action::_forward()</classname>:
-                    setGotoSimple($action, $controller = null, $module = null, array
-                    $params = array());
-                </para>
+                    <methodname>setGotoSimple()</methodname> puede ser utilizada
+                    para establecer la <acronym>URL</acronym> que usar por
+                    defecto si no se ha pasado ninguna a
+                        <methodname>gotoSimple()</methodname>. Utiliza la
+                        <acronym>API</acronym> de
+                        <classname>Zend_Controller_Action::_forward()</classname>:
+                    setGotoSimple($action, $controller = null, $module = null,
+                    array $params = array()); </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setGotoRoute()</methodname> puede ser utilizada para
-                    establecer una <acronym>URL</acronym> basada en una ruta.
-                    Pasarla en un array de pares clave/valor y un nombre de ruta,
-                    y que ensamblarán la <acronym>URL</acronym> según la definición y el tipo de
-                    ruta.
-                </para>
+                    <methodname>setGotoRoute()</methodname> puede ser utilizada
+                    para establecer una <acronym>URL</acronym> basada en una
+                    ruta. Pasarla en un array de pares clave/valor y un nombre
+                    de ruta, y que ensamblarán la <acronym>URL</acronym> según
+                    la definición y el tipo de ruta. </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setGotoUrl()</methodname> puede ser utilizada para
-                    establecer una <acronym>URL</acronym> por defecto si no se pasa ninguna a
-                    <methodname>gotoUrl()</methodname>. Acepta un solo string <acronym>URL</acronym>.
-                </para>
+                    <methodname>setGotoUrl()</methodname> puede ser utilizada
+                    para establecer una <acronym>URL</acronym> por defecto si no
+                    se pasa ninguna a <methodname>gotoUrl()</methodname>. Acepta
+                    un solo string <acronym>URL</acronym>. </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setPrependBase()</methodname> puede ser utilizada para
-                    anteponer la <acronym>URL</acronym> base del objeto solicitud a una <acronym>URL</acronym>
-                    especificada con
-                    <methodname>setGotoUrl()</methodname>, <methodname>gotoUrl()</methodname>, o
-                    <methodname>gotoUrlAndExit()</methodname>.
-                </para>
+                    <methodname>setPrependBase()</methodname> puede ser
+                    utilizada para anteponer la <acronym>URL</acronym> base del
+                    objeto solicitud a una <acronym>URL</acronym> especificada
+                    con <methodname>setGotoUrl()</methodname>,
+                        <methodname>gotoUrl()</methodname>, o
+                        <methodname>gotoUrlAndExit()</methodname>. </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>setUseAbsoluteUri()</methodname> puede ser utilizada para
-                    forzar al <methodname>Redirector</methodname> a usar URIs absolutas
-                    cuando está redireccionando. Cuando se establece esta
-                    opción, se utiliza el valor de
-                    <methodname>$_SERVER['HTTP_HOST']</methodname>,
-                    <methodname>$_SERVER['SERVER_PORT']</methodname>, y
-                    <methodname>$_SERVER['HTTPS']</methodname>
-                    para formar una URI completa a la <acronym>URL</acronym> especificada por uno
-                    de los métodos de redirección. Esta opción está desactivada
-                    por defecto, pero podrá ser activada por defecto en
-                    versiones posteriores.
-                </para>
+                    <methodname>setUseAbsoluteUri()</methodname> puede ser
+                    utilizada para forzar al <emphasis>Redirector</emphasis>
+                    a usar <acronym>URI</acronym>s absolutas cuando está redireccionando. Cuando se
+                    establece esta opción, se utiliza el valor de
+                    <varname>$_SERVER['HTTP_HOST']</varname>,
+                    <varname>$_SERVER['SERVER_PORT']</varname>, y
+                    <varname>$_SERVER['HTTPS']</varname> para formar
+                    una <acronym>URI</acronym> completa a la <acronym>URL</acronym> especificada
+                    por uno de los métodos de redirección. Esta opción está
+                    desactivada por defecto, pero podrá ser activada por defecto
+                    en versiones posteriores. </para>
             </listitem>
         </itemizedlist>
 
-        <para>
-            Además, hay una variedad de métodos en el redireccionamiento para
-            realizar las redirecciones actuales:
-        </para>
+        <para> Además, hay una variedad de métodos en el redireccionamiento para
+            realizar las redirecciones actuales: </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>gotoSimple()</methodname> usa <methodname>setGotoSimple()</methodname>
-                    (<methodname>_forward()-tipo API</methodname>) para construir una <acronym>URL</acronym>
-                    y realizar un redireccionamiento.
+                    <methodname>gotoSimple()</methodname> usa
+                        <methodname>setGotoSimple()</methodname>
+                        (<methodname>_forward()-tipo API</methodname>) para
+                    construir una <acronym>URL</acronym> y realizar un
+                    redireccionamiento. </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>gotoRoute()</methodname> usa
+                        <methodname>setGotoRoute()</methodname>
+                        (<methodname>route-assembly</methodname>) para construir
+                    una <acronym>URL</acronym> y realizar un redireccionamiento.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>gotoRoute()</methodname> usa <methodname>setGotoRoute()</methodname>
-                    (<methodname>route-assembly</methodname>) para construir una <acronym>URL</acronym>
-                    y realizar un redireccionamiento.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <methodname>gotoUrl()</methodname> usa <methodname>setGotoUrl()</methodname>
-                    (<methodname>URL string</methodname>) para construir una <acronym>URL</acronym>
-                    y realizar un redireccionamiento.
+                    <methodname>gotoUrl()</methodname> usa
+                        <methodname>setGotoUrl()</methodname> (<methodname>URL
+                        string</methodname>) para construir una
+                        <acronym>URL</acronym> y realizar un redireccionamiento.
                 </para>
             </listitem>
         </itemizedlist>
 
-        <para>
-            Por último, usted puede determinar la redirección actual de la <acronym>URL</acronym>
-            en cualquier momento usando <methodname>getRedirectUrl()</methodname>.
-        </para>
+        <para> Por último, usted puede determinar la redirección actual de la
+                <acronym>URL</acronym> en cualquier momento usando
+                <methodname>getRedirectUrl()</methodname>. </para>
     </sect4>
 
     <sect4 id="zend.controller.actionhelper.redirector.basicusage">
         <title>Ejemplos Básicos de Uso</title>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-1">
+        <example
+            id="zend.controller.actionhelper.redirector.basicusage.example-1">
             <title>Estableciendo Opciones</title>
 
-            <para>
-                Este ejemplo anula varias opciones, incluido el establecimiento del
-                código de estado <acronym>HTTP</acronym> para usar en la redirección ('303'),
-                no saliendo por defecto en la redirección, y definir una <acronym>URL</acronym> a
-                usar por defecto cuando se redireccione.
-            </para>
+            <para> Este ejemplo anula varias opciones, incluido el
+                establecimiento del código de estado <acronym>HTTP</acronym>
+                para usar en la redirección ('303'), no saliendo por defecto en
+                la redirección, y definir una <acronym>URL</acronym> a usar por
+                defecto cuando se redireccione. </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class SomeController extends Zend_Controller_Action
 {
     /**
@@ -185,16 +179,15 @@ class SomeController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-2">
+        <example
+            id="zend.controller.actionhelper.redirector.basicusage.example-2">
             <title>Usando Defaults</title>
 
-            <para>
-                Este ejemplo asume que se usan los valores predeterminados,
+            <para> Este ejemplo asume que se usan los valores predeterminados,
                 lo que significa que cualquier redirección resultará en un
-                <methodname>exit()</methodname> inmediato.
-            </para>
+                    <methodname>exit()</methodname> inmediato. </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // EJEMPLO ALTERNATIVO
 class AlternativeController extends Zend_Controller_Action
 {
@@ -222,20 +215,21 @@ class AlternativeController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-3">
+        <example
+            id="zend.controller.actionhelper.redirector.basicusage.example-3">
             <title>Usando la API _forward() de goto()</title>
 
-            <para>
-                La <acronym>API</acronym> <methodname>gotoSimple()</methodname> imita a la de
-                <classname>Zend_Controller_Action::_forward()</classname>.
-                La diferencia principal es que construye una <acronym>URL</acronym> desde los
-                parámetros pasados, y utiliza el formato por defecto
-                <methodname>:module/:controller/:action/*</methodname> del enrutador
-                predeterminado. A continuación se redirecciona en lugar de
-                encadenar la acción.
-            </para>
+            <para> La <acronym>API</acronym>
+                <methodname>gotoSimple()</methodname> imita a la de
+                    <classname>Zend_Controller_Action::_forward()</classname>.
+                La diferencia principal es que construye una
+                    <acronym>URL</acronym> desde los parámetros pasados, y
+                utiliza el formato por defecto
+                    <methodname>:module/:controller/:action/*</methodname> del
+                enrutador predeterminado. A continuación se redirecciona en
+                lugar de encadenar la acción. </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class ForwardController extends Zend_Controller_Action
 {
     /**
@@ -268,17 +262,17 @@ class ForwardController extends Zend_Controller_Action
 ]]></programlisting>
         </example>
 
-        <example id="zend.controller.actionhelper.redirector.basicusage.example-4">
+        <example
+            id="zend.controller.actionhelper.redirector.basicusage.example-4">
             <title>Usando Ruta de Ensamblaje con gotoRoute()</title>
 
-            <para>
-                El siguiente ejemplo usa el método <methodname>assemble()</methodname> del
-                <link linkend="zend.controller.router">enrutador</link>
-                para crear una URL basada en un array asociativo de parámetros
-                pasados. Se supone que la siguiente ruta ha sido registrada:
-            </para>
+            <para> El siguiente ejemplo usa el método
+                    <methodname>assemble()</methodname> del <link
+                    linkend="zend.controller.router">enrutador</link> para crear
+                una URL basada en un array asociativo de parámetros pasados. Se
+                supone que la siguiente ruta ha sido registrada: </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'blog/:year/:month/:day/:id',
     array('controller' => 'archive',
@@ -288,13 +282,11 @@ $route = new Zend_Controller_Router_Route(
 $router->addRoute('blogArchive', $route);
 ]]></programlisting>
 
-            <para>
-                Dado un array con el año fijado a 2006, mes a 4, día a 24,
-                e id a 42, entonces construye la siguiente <acronym>URL</acronym>
-                <methodname>/blog/2006/4/24/42</methodname>.
-            </para>
+            <para> Dado un array con el año fijado a 2006, mes a 4, día a 24, e
+                id a 42, entonces construye la siguiente <acronym>URL</acronym>
+                <filename>/blog/2006/4/24/42</filename>. </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class BlogAdminController extends Zend_Controller_Action
 {
     /**
@@ -328,6 +320,3 @@ class BlogAdminController extends Zend_Controller_Action
         </example>
     </sect4>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

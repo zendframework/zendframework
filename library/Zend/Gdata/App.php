@@ -634,9 +634,9 @@ class Zend_Gdata_App
 
         // Make sure the HTTP client object is 'clean' before making a request
         // In addition to standard headers to reset via resetParameters(),
-        // also reset the Slug header
+        // also reset the Slug and If-Match headers
         $this->_httpClient->resetParameters();
-        $this->_httpClient->setHeaders('Slug', null);
+        $this->_httpClient->setHeaders(array('Slug', 'If-Match'));
 
         // Set the params for the new request to be performed
         $this->_httpClient->setHeaders($headers);

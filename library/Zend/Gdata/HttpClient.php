@@ -325,11 +325,11 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
      *
      * @return Zend_Http_Client
      */
-    public function resetParameters()
+    public function resetParameters($clearAll = false)
     {
         $this->_streamingRequest = false;
 
-        return parent::resetParameters();
+        return parent::resetParameters($clearAll);
     }
 
     /**

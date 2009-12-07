@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
-
     <title>HTTP Authentication Adapter</title>
 
     <sect2 id="zend.auth.adapter.http.introduction">
-
         <title>Introduction</title>
 
         <para>
@@ -132,8 +130,8 @@
                     <row>
                         <entry><emphasis><property>digest_domains</property></emphasis></entry>
                         <entry>
-                            Yes, when <property>'accept_schemes'</property> contains
-                            <emphasis>'digest'</emphasis>
+                            Yes, when <property>accept_schemes</property> contains
+                            <emphasis>digest</emphasis>
                         </entry>
                         <entry>
                             Space-separated list of <acronym>URI</acronym>s for which the same
@@ -144,8 +142,8 @@
                     <row>
                         <entry><emphasis><property>nonce_timeout</property></emphasis></entry>
                         <entry>
-                            Yes, when <property>'accept_schemes'</property> contains
-                            <emphasis>'digest'</emphasis>
+                            Yes, when <property>accept_schemes</property> contains
+                            <emphasis>digest</emphasis>
                         </entry>
                         <entry>
                             Sets the number of seconds for which the nonce is valid. See notes

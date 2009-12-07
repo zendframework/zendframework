@@ -28,39 +28,39 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><acronym>GET</acronym></entry>
+                    <entry><constant>GET</constant></entry>
                     <entry><filename>/product/ratings/</filename></entry>
                     <entry><methodname>Product_RatingsController::indexAction()</methodname></entry>
                 </row>
                 <row>
-                    <entry><acronym>GET</acronym></entry>
+                    <entry><constant>GET</constant></entry>
                     <entry><filename>/product/ratings/:id</filename></entry>
                     <entry><methodname>Product_RatingsController::getAction()</methodname></entry>
                 </row>
                 <row>
-                    <entry><acronym>POST</acronym></entry>
+                    <entry><constant>POST</constant></entry>
                     <entry><filename>/product/ratings</filename></entry>
                     <entry><methodname>Product_RatingsController::postAction()</methodname></entry>
                 </row>
                 <row>
-                    <entry><acronym>PUT</acronym></entry>
+                    <entry><constant>PUT</constant></entry>
                     <entry><filename>/product/ratings/:id</filename></entry>
                     <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
                 </row>
                 <row>
-                    <entry><acronym>DELETE</acronym></entry>
+                    <entry><constant>DELETE</constant></entry>
                     <entry><filename>/product/ratings/:id</filename></entry>
                     <entry>
                         <methodname>Product_RatingsController::deleteAction()</methodname>
                     </entry>
                 </row>
                 <row>
-                    <entry><acronym>POST</acronym></entry>
+                    <entry><constant>POST</constant></entry>
                     <entry><command>/product/ratings/:id?_method="PUT"</command></entry>
                     <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
                 </row>
                 <row>
-                    <entry><acronym>POST</acronym></entry>
+                    <entry><constant>POST</constant></entry>
                     <entry><command>/product/ratings/:id?_method="DELETE"</command></entry>
                     <entry>
                         <methodname>Product_RatingsController::deleteAction()</methodname>

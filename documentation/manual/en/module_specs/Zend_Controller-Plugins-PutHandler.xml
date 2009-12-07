@@ -5,10 +5,10 @@
 
     <para>
         <classname>Zend_Controller_Plugin_PutHandler</classname> provides a drop-in
-        plugin for marshalling <acronym>PUT</acronym> request bodies into request parameters, just
-        like <acronym>POST</acronym> request bodies. It will inspect the request and, if
-        <acronym>PUT</acronym>, will use parse_str to parse the raw <acronym>PUT</acronym> body into
-        an array of params which is then set on the request. E.g.,
+        plugin for marshalling <constant>PUT</constant> request bodies into request parameters, just
+        like <constant>POST</constant> request bodies. It will inspect the request and, if
+        <constant>PUT</constant>, will use parse_str to parse the raw <constant>PUT</constant> body
+        into an array of params which is then set on the request. E.g.,
     </para>
 
     <programlisting language="txt"><![CDATA[
@@ -28,7 +28,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_PutHandler());
 ]]></programlisting>
 
     <para>
-        Then you can access the <acronym>PUT</acronym> body params by name from the request inside
+        Then you can access the <constant>PUT</constant> body params by name from the request inside
         your controller:
     </para>
 

@@ -20,14 +20,16 @@
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_TestCase */
-require_once 'PHPUnit/Framework/TestCase.php';
+require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /** Zend_Log */
 require_once 'Zend/Log.php';
 
 /** Zend_Log_Writer_Mock */
 require_once 'Zend/Log/Writer/Mock.php';
+
+/** Zend_Log_Writer_Stream */
+require_once 'Zend/Log/Writer/Stream.php';
 
 /**
  * @category   Zend
@@ -200,5 +202,43 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(array_key_exists($field, $event));
         $this->assertEquals($value, $event[$field]);
+    }
+
+    /**
+     * @group ZF-8491
+     */
+    public function testLogAcceptsExtrasParameterAsArrayAndPushesIntoEvent()
+    {
+        $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
+        $logger->info('foo', array('content' => 'nonesuch'));
+        $event = array_shift($mock->events);
+        $this->assertContains('content', array_keys($event));
+        $this->assertEquals('nonesuch', $event['content']);
+    }
+
+    /**
+     * @group ZF-8491
+     */
+    public function testLogNumericKeysInExtrasArrayArePassedToInfoKeyOfEvent()
+    {
+        $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
+        $logger->info('foo', array('content' => 'nonesuch', 'bar'));
+        $event = array_shift($mock->events);
+        $this->assertContains('content', array_keys($event));
+        $this->assertContains('info', array_keys($event));
+        $this->assertContains('bar', $event['info']);
+    }
+
+    /**
+     * @group ZF-8491
+     */
+    public function testLogAcceptsExtrasParameterAsScalarAndAddsAsInfoKeyToEvent()
+    {
+        $logger = new Zend_Log($mock = new Zend_Log_Writer_Mock);
+        $logger->info('foo', 'nonesuch');
+        $event = array_shift($mock->events);
+        $this->assertContains('info', array_keys($event));
+        $info = $event['info'];
+        $this->assertContains('nonesuch', $info);
     }
 }

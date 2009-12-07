@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.log.writers.zendmonitor">
+    <title>Writing to the Zend Server Monitor</title>
+
+    <para>
+        <classname>Zend_Log_Writer_ZendMonitor</classname> allows you to log events via Zend
+        Server's Monitor API. This allows you to aggregate log messages for your entire application
+        environment in a single location. Internally, it simply uses the
+        <functionname>monitor_custom_event()</functionname> function from the Zend Monitor API.
+    </para>
+
+    <para>
+        One particularly useful feature of the Monitor API is that it allows you to specify
+        arbitrary custom information alongside the log message. For instance, if you wish to log an
+        exception, you can log not just the exception message, but pass the entire exception object
+        to the function, and then inspect the object within the Zend Server event monitor.
+    </para>
+
+    <note>
+        <title>Zend Monitor must be installed and enabled</title>
+
+        <para>
+            In order to use this log writer, Zend Monitor must be both installed and enabled.
+            However, it is designed such that if Zend Monitor is not detected, it will simply act as
+            a null logger.
+        </para>
+    </note>
+
+    <para>
+        Instantiating the <classname>ZendMonitor</classname> log writer is trivial:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$writer = new Zend_Log_Writer_ZendMonitor();
+$log    = new Zend_Log($writer);
+]]></programlisting>
+
+    <para>
+        Then, simply log messages as usual:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$log->info('This is a message');
+]]></programlisting>
+
+    <para>
+        If you want to specify additional information to log with the event, pass that information
+        in a second parameter:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$log->info('Exception occurred', $e);
+]]></programlisting>
+
+    <para>
+        The second parameter may be a scalar, object, or array; if you need to pass multiple pieces
+        of information, the best way to do so is to pass an associative array.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$log->info('Exception occurred', array(
+    'request'   => $request,
+    'exception' => $e,
+));
+]]></programlisting>
+
+    <para>
+        Within Zend Server, your event is logged as a "custom event". From the "Monitor" tab, select
+        the "Events" sub-item, and then filter on "Custom" to see custom events.
+    </para>
+
+    <mediaobject>
+        <imageobject>
+            <imagedata fileref="figures/zend.log.writers.zendmonitor-events.png"
+                format="PNG"></imagedata>
+
+            <caption>
+                <para>
+                    Events in Zend Server's Monitor dashboard
+                </para>
+            </caption>
+        </imageobject>
+    </mediaobject>
+
+    <para>
+        In this screenshot, the first two events listed are custom events logged via the
+        <classname>ZendMonitor</classname> log writer. You may then click on an event to view all
+        information related to it.
+    </para>
+
+    <mediaobject>
+        <imageobject>
+            <imagedata fileref="figures/zend.log.writers.zendmonitor-event.png"
+                format="PNG"></imagedata>
+
+            <caption>
+                <para>
+                    Event detail in Zend Server's Monitor
+                </para>
+            </caption>
+        </imageobject>
+    </mediaobject>
+
+    <para>
+        Clicking on the "Custom" sub tab will detail any extra information you logged by passing the
+        second argument to the logging method. This information will be logged as the
+        <varname>info</varname> subkey; you can see that the request object was logged in this
+        example.
+    </para>
+
+    <note>
+        <title>Integration with Zend_Application</title>
+
+        <para>
+            The <classname>ZendMonitor</classname> log writer has a corresponding <link
+                linkend="zend.application.available-resources.zendmonitor"><classname>Zend_Application</classname>
+                bootstrap resource</link>. If you create your
+            project using the <command>zf.sh</command> or <command>zf.bat</command> command, this
+            resource will be registered for you by default, and used in your
+            <classname>ErrorController</classname> to log application exceptions.
+        </para>
+    </note>
+</sect2>

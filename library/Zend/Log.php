@@ -100,7 +100,21 @@ class Zend_Log
     {
         $priority = strtoupper($method);
         if (($priority = array_search($priority, $this->_priorities)) !== false) {
-            $this->log(array_shift($params), $priority);
+            switch (count($params)) {
+                case 0:
+                    /** @see Zend_Log_Exception */
+                    require_once 'Zend/Log/Exception.php';
+                    throw new Zend_Log_Exception('Missing log message');
+                case 1:
+                    $message = array_shift($params);
+                    $extras = null;
+                    break;
+                default:
+                    $message = array_shift($params);
+                    $extras  = array_shift($params);
+                    break;
+            }
+            $this->log($message, $priority, $extras);
         } else {
             /** @see Zend_Log_Exception */
             require_once 'Zend/Log/Exception.php';
@@ -113,10 +127,11 @@ class Zend_Log
      *
      * @param  string   $message   Message to log
      * @param  integer  $priority  Priority of message
+     * @param  mixed    $extras    Extra information to log in event
      * @return void
      * @throws Zend_Log_Exception
      */
-    public function log($message, $priority)
+    public function log($message, $priority, $extras = null)
     {
         // sanity checks
         if (empty($this->_writers)) {
@@ -137,6 +152,25 @@ class Zend_Log
                                     'priority'     => $priority,
                                     'priorityName' => $this->_priorities[$priority]),
                               $this->_extras);
+
+        // Check to see if any extra information was passed
+        if (!empty($extras)) {
+            $info = array();
+            if (is_array($extras)) {
+                foreach ($extras as $key => $value) {
+                    if (is_string($key)) {
+                        $event[$key] = $value;
+                    } else {
+                        $info[] = $value;
+                    }
+                }
+            } else {
+                $info = $extras;
+            }
+            if (!empty($info)) {
+                $event['info'] = $info;
+            }
+        }
 
         // abort if rejected by the global filters
         foreach ($this->_filters as $filter) {

@@ -21,7 +21,7 @@
         <acronym>JSON</acronym> for its messaging envelopes. This JSON-RPC implementation follows
         <acronym>PHP</acronym>'s <ulink
             url="http://www.php.net/manual/en/class.soapserver.php">SoapServer</ulink>
-        <acronym>API</acronym>. This means that in a typical situation, you will simply:
+        <acronym>API</acronym>. This means, in a typical situation, you will simply:
     </para>
 
     <itemizedlist>
@@ -121,7 +121,7 @@ class Calculator
             Note that each method has a docblock with entries indicating each
             parameter and its type, as well as an entry for the return value.
             This is <emphasis>absolutely critical</emphasis> when utilizing
-            <classname>Zend_Json_Server</classname> -- or any other server component in
+            <classname>Zend_Json_Server</classname> or any other server component in
             Zend Framework, for that matter.
         </para>
 

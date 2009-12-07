@@ -89,7 +89,6 @@ class Zend_Translate_Adapter_Xliff extends Zend_Translate_Adapter {
             throw new Zend_Translate_Exception($ex);
         }
 
-var_dump($this->_data);
         return $this->_data;
     }
 

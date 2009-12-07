@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19161 -->
+<!-- EN-Revision: 19483 -->
 <sect3 id="zend.controller.plugins.standard.puthandler">
     <title>Zend_Controller_Plugin_PutHandler</title>
 
     <para>
         <classname>Zend_Controller_Plugin_PutHandler</classname>は、
-        まるで <acronym>POST</acronym> リクエスト・ボディのようなリクエスト・パラメータに
-        <acronym>PUT</acronym> リクエスト・ボディを配置するために、
+        まるで <constant>POST</constant> リクエスト・ボディのようなリクエスト・パラメータに
+        <constant>PUT</constant> リクエスト・ボディを配置するために、
         ドロップイン・プラグインを提供します。
-        それはリクエストを調べます、そして、 <acronym>PUT</acronym> ならば、
-        生の <acronym>PUT</acronym> ボディを解析してリクエストに配置されるパラメータの配列にするためにparse_strを使います。
+        それはリクエストを調べます、そして、 <constant>PUT</constant> ならば、
+        生の <constant>PUT</constant> ボディを解析してリクエストに配置されるパラメータの配列にするためにparse_strを使います。
         例えば、
     </para>
 
@@ -31,7 +31,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_PutHandler());
 ]]></programlisting>
 
     <para>
-        そして、コントローラ内でリクエストから <acronym>PUT</acronym> ボディー・パラメータに名前によるアクセスができます:
+        そして、コントローラ内でリクエストから <constant>PUT</constant> ボディー・パラメータに名前によるアクセスができます:
     </para>
 
     <programlisting language="php"><![CDATA[

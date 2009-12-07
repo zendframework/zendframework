@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17597 -->
+<!-- EN-Revision: 19483 -->
 <sect1 id="zend.auth.adapter.http">
 
     <title>HTTP 認証アダプタ</title>
@@ -128,7 +128,7 @@
                     <row>
                         <entry><emphasis><property>digest_domains</property></emphasis></entry>
                         <entry>
-                            <property>'accept_schemes'</property> が <emphasis>'digest'</emphasis> を含む場合は Yes
+                            <property>accept_schemes</property> が <emphasis>digest</emphasis> を含む場合は Yes
                         </entry>
                         <entry>
                             空白区切りの <acronym>URI</acronym> のリストで、
@@ -139,7 +139,7 @@
                     <row>
                         <entry><emphasis><property>nonce_timeout</property></emphasis></entry>
                         <entry>
-                            <property>'accept_schemes'</property> が <emphasis>'digest'</emphasis> を含む場合は Yes
+                            <property>accept_schemes</property> が <emphasis>digest</emphasis> を含む場合は Yes
                         </entry>
                         <entry>
                             nonce の有効期限を秒数で指定します。以下の注意を参照ください。
@@ -198,7 +198,7 @@
             <para>
                 ファイルリゾルバは、非常にシンプルなクラスです。
                 ファイル名を指定するプロパティを保持しており、
-                コンストラクタでこれを指定することができます。
+                コンストラクタでこれを指定できます。
                 <methodname>resolve()</methodname> メソッドはテキストファイルを走査し、
                 ユーザ名とレルムにマッチする行を探します。テキストファイルのフォーマットは
                 Apache の htpasswd ファイルと似た形式で

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19173 -->
+<!-- EN-Revision: 19484 -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>Zend_Db_Profiler</title>
@@ -332,7 +332,7 @@ $profiler->setFilterElapsedSecs(null);
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::DELETE</constant>:
-                        既存のデータを削除するクエリ。通常は <acronym>SQL</acronym> の <acronym>DELETE</acronym>。
+                        既存のデータを削除するクエリ。通常は <acronym>SQL</acronym> の <constant>DELETE</constant>。
                     </para>
                 </listitem>
                 <listitem>
@@ -385,7 +385,8 @@ $profiler->setFilterQueryType(null);
                 <methodname>getQueryProfiles()</methodname> のもうひとつの機能として、
                 最初の引数にクエリの型 (あるいは複数の型の論理和)
                 を指定することによるその場での絞り込みが可能です。
-                クエリの型を表す定数については <xref linkend="zend.db.profiler.advanced.filtertype" />
+                クエリの型を表す定数については <link
+                    linkend="zend.db.profiler.advanced.filtertype">この節</link>
                 を参照ください。
             </para>
 

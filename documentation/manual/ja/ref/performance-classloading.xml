@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17864 -->
+<!-- EN-Revision: 19426 -->
 <sect1 id="performance.classloading">
     <title>クラスの読み込み</title>
 
@@ -230,7 +230,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
                 効果的にその命令をコメントアウトします
                 (<classname>Zend_Application</classname> と
                 <classname>Zend_Loader_Autoloader</classname> の中にある
-                <function>require_once</function> はそのままにしてあります。
+                <methodname>require_once</methodname> はそのままにしてあります。
                 そうしないと処理が失敗するからです)。
             </para>
 

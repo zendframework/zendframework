@@ -4,7 +4,7 @@
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer Grundlagen</title>
     <para>
-        <classname>Zend_OpenId_Consumer</classname> kann verwendet werdeb um OpenID
+        <classname>Zend_OpenId_Consumer</classname> kann verwendet werden um OpenID
         Authentifizierung auf Webseiten zu implementieren.
     </para>
 

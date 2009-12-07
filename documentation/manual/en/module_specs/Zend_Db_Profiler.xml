@@ -330,7 +330,7 @@ $profiler->setFilterElapsedSecs(null);
                     <para>
                         <constant>Zend_Db_Profiler::DELETE</constant>: any query that
                         deletes existing data, usually <acronym>SQL</acronym>
-                        <acronym>DELETE</acronym>.
+                        <constant>DELETE</constant>.
                     </para>
                 </listitem>
                 <listitem>
@@ -383,8 +383,8 @@ $profiler->setFilterQueryType(null);
                 moment. Another feature of <methodname>getQueryProfiles()</methodname> is
                 that it can do this filtering on-the-fly, by passing a query
                 type (or logical combination of query types) as its first
-                argument; see <xref linkend="zend.db.profiler.advanced.filtertype" />
-                for a list of the query type constants.
+                argument; see <link linkend="zend.db.profiler.advanced.filtertype">this
+                    section</link> for a list of the query type constants.
             </para>
 
             <programlisting language="php"><![CDATA[

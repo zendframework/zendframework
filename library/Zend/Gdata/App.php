@@ -256,7 +256,7 @@ class Zend_Gdata_App
             )
         );
         $this->_httpClient = $client;
-        Zend_Gdata::setStaticHttpClient($client);
+        self::setStaticHttpClient($client);
         return $this;
     }
 

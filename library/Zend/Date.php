@@ -240,6 +240,7 @@ class Zend_Date extends Zend_Date_DateObject
         if (empty($options)) {
             return self::$_options;
         }
+
         foreach ($options as $name => $value) {
             $name  = strtolower($name);
 
@@ -1049,7 +1050,7 @@ class Zend_Date extends Zend_Date_DateObject
      * @param  string|integer|array|Zend_Date  $date    Date or datepart to set
      * @param  string                          $part    OPTIONAL Part of the date to set, if null the timestamp is set
      * @param  string|Zend_Locale              $locale  OPTIONAL Locale for parsing input
-     * @return integer|string  new datepart
+     * @return Zend_Date Provides fluid interface
      * @throws Zend_Date_Exception
      */
     public function set($date, $part = null, $locale = null)
@@ -1061,8 +1062,8 @@ class Zend_Date extends Zend_Date_DateObject
         $zone = $this->getTimezoneFromString($date);
         $this->setTimezone($zone);
 
-        $result = $this->_calculate('set', $date, $part, $locale);
-        return $result;
+        $this->_calculate('set', $date, $part, $locale);
+        return $this;
     }
 
     /**
@@ -1087,7 +1088,7 @@ class Zend_Date extends Zend_Date_DateObject
         }
 
         $this->_calculate('add', $date, $part, $locale);
-        return $this->toString($part, 'iso', $locale);
+        return $this;
     }
 
     /**
@@ -1110,7 +1111,7 @@ class Zend_Date extends Zend_Date_DateObject
         }
 
         $this->_calculate('sub', $date, $part, $locale);
-        return $this->toString($part, 'iso', $locale);
+        return $this;
     }
 
     /**
@@ -2640,6 +2641,7 @@ class Zend_Date extends Zend_Date_DateObject
         if ($result == 0) {
             return true;
         }
+
         return false;
     }
 
@@ -2661,6 +2663,7 @@ class Zend_Date extends Zend_Date_DateObject
         if ($result == -1) {
             return true;
         }
+
         return false;
     }
 
@@ -2683,6 +2686,7 @@ class Zend_Date extends Zend_Date_DateObject
         if ($result == 1) {
             return true;
         }
+
         return false;
     }
 
@@ -4296,7 +4300,7 @@ class Zend_Date extends Zend_Date_DateObject
      *
      * @param  integer $precision Precision for the fractional datepart 3 = milliseconds
      * @throws Zend_Date_Exception
-     * @return void
+     * @return Zend_Date Provides fluid interface
      */
     public function setFractionalPrecision($precision)
     {
@@ -4305,6 +4309,7 @@ class Zend_Date extends Zend_Date_DateObject
             throw new Zend_Date_Exception("precision ($precision) must be a positive integer less than 10", $precision);
         }
         $this->_precision = (int) $precision;
+        return $this;
     }
 
 
@@ -4325,7 +4330,7 @@ class Zend_Date extends Zend_Date_DateObject
      *
      * @param  integer|Zend_Date $milli     (Optional) Millisecond to set, when null the actual millisecond is set
      * @param  integer           $precision (Optional) Fraction precision of the given milliseconds
-     * @return integer|string
+     * @return Zend_Date Prodives fluid interface
      */
     public function setMilliSecond($milli = null, $precision = null)
     {
@@ -4347,7 +4352,7 @@ class Zend_Date extends Zend_Date_DateObject
 
         $this->_fractional = 0;
         $this->addMilliSecond($milli, $precision);
-        return $this->_fractional;
+        return $this;
     }
 
 
@@ -4356,7 +4361,7 @@ class Zend_Date extends Zend_Date_DateObject
      *
      * @param  integer|Zend_Date $milli     (Optional) Millisecond to add, when null the actual millisecond is added
      * @param  integer           $precision (Optional) Fractional precision for the given milliseconds
-     * @return integer|string
+     * @return Zend_Date Provides fluid interface
      */
     public function addMilliSecond($milli = null, $precision = null)
     {
@@ -4404,7 +4409,7 @@ class Zend_Date extends Zend_Date_DateObject
             }
         }
 
-        return $this->_fractional;
+        return $this;
     }
 
 
@@ -4413,11 +4418,12 @@ class Zend_Date extends Zend_Date_DateObject
      *
      * @param  integer|Zend_Date $milli     (Optional) Millisecond to sub, when null the actual millisecond is subtracted
      * @param  integer           $precision (Optional) Fractional precision for the given milliseconds
-     * @return integer
+     * @return Zend_Date Provides fluid interface
      */
     public function subMilliSecond($milli = null, $precision = null)
     {
-        return $this->addMilliSecond(0 - $milli, $precision);
+        $this->addMilliSecond(0 - $milli, $precision);
+        return $this;
     }
 
     /**

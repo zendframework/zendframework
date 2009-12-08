@@ -71,8 +71,8 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
             <methodname>json_decode()</methodname> são utilizados para a codificação e
             descodificação <acronym>JSON</acronym>. Se não estiver instalado, uma implementação do
             Zend Framework no código <acronym>PHP</acronym> é usada para a codificação e
-            descodificação. Este último é consideravelmente mais lento do que usando a extensão do php,
-            mas comporta-se exatamente da mesma forma.
+            descodificação. Este último é consideravelmente mais lento do que usando a extensão
+            do php, mas comporta-se exatamente da mesma forma.
         </para>
 
         <para>
@@ -104,8 +104,8 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             imutável. Você pode definir a expressão javascript como o primeiro argumento do
             construtor. Por padrão <classname>Zend_Json::encode</classname> não codifica callbacks
             de javascript, você deverá passar a opção <code>'enableJsonExprFinder' = true</code>
-            para a função codificadora. Se ativado, o suporte à expressão funcionará para todas as
-            expressões aninhadas em estruturas de grande porte.
+            para a função <code>encode</code>. Se ativado, o suporte à expressão funcionará para
+            todas as expressões aninhadas em estruturas de grande porte.
             Um exemplo de uso seria parecido com:
         </para>
 

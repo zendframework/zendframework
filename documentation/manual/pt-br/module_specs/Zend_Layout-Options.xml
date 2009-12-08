@@ -68,7 +68,8 @@
                 quando <classname>Zend_Layout</classname> estiver utilizando os componentes
                 <acronym>MVC</acronym>. Por padrão, ela é
                 <classname>Zend_Layout_Controller_Plugin_Layout</classname>. Os acessores são
-                <methodname>setPluginClass()</methodname> e <methodname>getPluginClass()</methodname>.
+                <methodname>setPluginClass()</methodname> e
+                <methodname>getPluginClass()</methodname>.
         </para></listitem>
 
         <listitem><para>

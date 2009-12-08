@@ -71,7 +71,7 @@ class Zend_Application_Resource_AllTests
         $suite->addTestSuite('Zend_Application_Resource_NavigationTest');
         $suite->addTestSuite('Zend_Application_Resource_SessionTest');
         $suite->addTestSuite('Zend_Application_Resource_ViewTest');
-        $suite->addTestSuite('Zend_Application_Resource_MonitorTest');
+        $suite->addTestSuite('Zend_Application_Resource_ZendmonitorTest');
 
         return $suite;
     }

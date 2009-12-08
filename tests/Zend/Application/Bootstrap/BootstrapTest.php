@@ -128,6 +128,38 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit_Framework_TestCas
 
         $this->assertTrue($this->bootstrap->getContainer()->zfappbootstrap);
     }
+
+    /**
+     * @group ZF-8496
+     */
+    public function testBootstrapShouldInitializeModuleAutoloader()
+    {
+        $this->assertTrue($this->bootstrap->getResourceLoader() instanceof Zend_Application_Module_Autoloader);
+    }
+
+    /**
+     * @group ZF-8496
+     */
+    public function testBootstrapAutoloaderShouldHaveApplicationNamespaceByDefault()
+    {
+        $al = $this->bootstrap->getResourceLoader();
+        $this->assertEquals('Application', $al->getNamespace());
+    }
+
+    /**
+     * @group ZF-8496
+     */
+    public function testBootstrapAutoloaderNamespaceShouldBeConfigurable()
+    {
+        $application = new Zend_Application('testing', array(
+            'defaultappnamespace' => 'Default',
+        ));
+        $bootstrap   = new Zend_Application_Bootstrap_Bootstrap(
+            $application
+        );
+        $al = $bootstrap->getResourceLoader();
+        $this->assertEquals('Default', $al->getNamespace());
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Bootstrap_BootstrapTest::main') {

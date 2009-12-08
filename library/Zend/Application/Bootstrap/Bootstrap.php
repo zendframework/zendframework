@@ -36,6 +36,18 @@ class Zend_Application_Bootstrap_Bootstrap
     extends Zend_Application_Bootstrap_BootstrapAbstract
 {
     /**
+     * Default application resource namespace
+     * @var string
+     */
+    protected $_defaultAppNamespace = 'Application';
+
+    /**
+     * Application resource autoloader
+     * @var Zend_Loader_Autoloader_Resource
+     */
+    protected $_resourceLoader;
+
+    /**
      * Constructor
      *
      * Ensure FrontController resource is registered
@@ -46,6 +58,14 @@ class Zend_Application_Bootstrap_Bootstrap
     public function __construct($application)
     {
         parent::__construct($application);
+
+        if ($application->hasOption('resourceloader')) {
+            $this->setOptions(array(
+                'resourceloader' => $application->getOption('resourceloader')
+            ));
+        }
+        $this->getResourceLoader();
+
         if (!$this->hasPluginResource('FrontController')) {
             $this->registerPluginResource('FrontController');
         }
@@ -75,5 +95,57 @@ class Zend_Application_Bootstrap_Bootstrap
 
         $front->setParam('bootstrap', $this);
         $front->dispatch();
+    }
+
+    /**
+     * Set module resource loader
+     *
+     * @param  Zend_Loader_Autoloader_Resource $loader
+     * @return Zend_Application_Module_Bootstrap
+     */
+    public function setResourceLoader(Zend_Loader_Autoloader_Resource $loader)
+    {
+        $this->_resourceLoader = $loader;
+        return $this;
+    }
+
+    /**
+     * Retrieve module resource loader
+     *
+     * @return Zend_Loader_Autoloader_Resource
+     */
+    public function getResourceLoader()
+    {
+        if (null === $this->_resourceLoader) {
+            $r    = new ReflectionClass($this);
+            $path = $r->getFileName();
+            $this->setResourceLoader(new Zend_Application_Module_Autoloader(array(
+                'namespace' => $this->getDefaultAppNamespace(),
+                'basePath'  => dirname($path),
+            )));
+        }
+        return $this->_resourceLoader;
+    }
+
+    /**
+     * Get defaultAppNamespace
+     *
+     * @return string
+     */
+    public function getDefaultAppNamespace()
+    {
+        return $this->_defaultAppNamespace;
+    }
+
+    /**
+     * Set defaultAppNamespace
+     *
+     * @param  string
+     * @return Zend_Application_Bootstrap_Bootstrap
+     */
+    public function setDefaultAppNamespace($value)
+    {
+        $this->_defaultAppNamespace = (string) $value;
+        return $this;
     }
 }

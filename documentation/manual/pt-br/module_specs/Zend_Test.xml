@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 17175 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.test.introduction">
+    <title>Introdução</title>
+
+    <para>
+        <classname>Zend_Test</classname> fornece ferramentas para facilitar os testes unitários de
+        suas aplicações Zend Framework. Neste momento, estamos propondo algumas facilidades que
+        permitem a análise de sua aplicação <acronym>MVC</acronym> em Zend Framework.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

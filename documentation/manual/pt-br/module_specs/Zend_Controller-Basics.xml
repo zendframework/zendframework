@@ -95,9 +95,9 @@
                 <para>
                     <classname>Zend_Controller_Dispatcher_Interface</classname> é usado para
                     definir despachantes. Despachar é o processo de pegar o controlador e a ação
-                    do objeto de requisição e mapeá-lo para um arquivo/classe de um controlador e
-                    método de ação na classe do controlador. Se o controlador ou ação não existir,
-                    ele determina o controlador e ação padrão para despachar.
+                    do objeto de requisição e mapeá-lo para um arquivo de um controlador (ou
+                    classe) e método de ação na classe do controlador. Se o controlador ou ação
+                    não existir, ele determina o controlador e ação padrão para despachar.
                 </para>
 
                 <para>
@@ -107,7 +107,7 @@
                     requisição despachado é reiniciado em algum ponto, o laço irá se repetir,
                     chamando qualquer ação atualmente estabelecida no objeto de requisição. A
                     primeira vez que o laço do objeto de requisição terminar com o status ativado
-                    (<type>Booleano</type> <constant>TRUE</constant>), ele irá finalizar
+                    (<type>Boolean</type> <constant>TRUE</constant>), ele irá finalizar
                     o processo.
                 </para>
 
@@ -135,7 +135,7 @@
                     <para>
                         Se você deseja que o nome de seu controlador de classe ou do método de ação
                         tenham múltiplas MixedCasedWords ou camelCasedWords, você precisará, para
-                        separar as palavras na URL, um '-' ou '.' (embora você pode configurar o
+                        separar as palavras na url, um '-' ou '.' (embora você pode configurar o
                         caractere utilizado).
                     </para>
 

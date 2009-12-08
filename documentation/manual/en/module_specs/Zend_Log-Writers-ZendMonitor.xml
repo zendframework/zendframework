@@ -7,7 +7,7 @@
         <classname>Zend_Log_Writer_ZendMonitor</classname> allows you to log events via Zend
         Server's Monitor API. This allows you to aggregate log messages for your entire application
         environment in a single location. Internally, it simply uses the
-        <functionname>monitor_custom_event()</functionname> function from the Zend Monitor API.
+        <methodname>monitor_custom_event()</methodname> function from the Zend Monitor API.
     </para>
 
     <para>

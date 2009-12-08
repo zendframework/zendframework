@@ -1200,12 +1200,14 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
 
     /**
      * Returns an array of registered roles
+     * @expectedException PHPUnit_Framework_Error
      * @issue ZF-5638
      */
     public function testGetRegisteredRoles()
     {
         $acl = $this->_acl;
         $acl->addRole('developer');
+
         $roles = $acl->getRegisteredRoles();
         $this->assertTrue(is_array($roles));
         $this->assertFalse(empty($roles));
@@ -1272,6 +1274,49 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
         $allowed = $acl->isAllowed('role','resource','privilege',$assertion);
 
         $this->assertTrue($allowed);
+    }
+    
+    /**
+     * @group ZF-8468
+     */
+    public function testGetRegisteredRolesIsDeprecated() {
+        try {
+            $this->_acl->getRegisteredRoles();
+            $this->fail('getRegisteredRoles() did not throw an exception');
+        } catch(PHPUnit_Framework_Error $e) {
+            return;
+        }
+        
+        $this->fail('An expected notice has not been raised');
+    }
+    
+    /**
+     * @group ZF-8468
+     */
+    public function testgetRoles() {
+        $this->assertEquals(array(),$this->_acl->getRoles());
+
+        $roleGuest = new Zend_Acl_Role('guest');
+        $this->_acl->addRole($roleGuest);
+        $this->_acl->addRole(new Zend_Acl_Role('staff'), $roleGuest);
+        $this->_acl->addRole(new Zend_Acl_Role('editor'), 'staff');
+        $this->_acl->addRole(new Zend_Acl_Role('administrator'));
+
+        $expected = array('guest', 'staff','editor','administrator');
+        $this->assertEquals($expected, $this->_acl->getRoles());
+    }
+    
+    /**
+     * @group ZF-8468
+     */
+    public function testgetResources() {
+        $this->assertEquals(array(),$this->_acl->getResources());
+
+        $this->_acl->add(new Zend_Acl_Resource('someResource'));
+        $this->_acl->add(new Zend_Acl_Resource('someOtherResource'));
+
+        $expected = array('someResource', 'someOtherResource');
+        $this->assertEquals($expected, $this->_acl->getResources());
     }
 
 }

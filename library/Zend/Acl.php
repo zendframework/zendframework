@@ -1132,12 +1132,33 @@ class Zend_Acl
 
 
     /**
-     * @return array of registered roles
-     *
+     * @return array of registered roles (Deprecated)
+     * @deprecated Deprecated since version 1.10 (December 2009)
      */
     public function getRegisteredRoles()
     {
+        trigger_error('The method getRegisteredRoles() was deprecated as of '
+                    . 'version 1.0, and may be removed. You\'re encouraged '
+                    . 'to use getRoles() instead.');
+
         return $this->_getRoleRegistry()->getRoles();
     }
 
+    /**
+     * @return array of registered roles
+     */
+    public function getRoles()
+    {
+        return array_keys($this->_getRoleRegistry()->getRoles());
+    }
+
+    /**
+     * @return array of registered resources
+     */
+    public function getResources()
+    {
+        return array_keys($this->_resources);
+    }
+    
 }
+    

@@ -17,7 +17,7 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Model.php 18386 2009-09-23 20:44:43Z ralph $
  */
 
 /**
@@ -26,27 +26,14 @@
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Tool_Framework_Metadata_Interface
+class Zend_Tool_Project_Provider_Application extends Zend_Tool_Project_Provider_Abstract
 {
-
-    /**
-     * getType()
-     *
-     * The type of metadata this describes
-     *
-     */
-    public function getType();
-
-    /**
-     * getName()
-     *
-     */
-    public function getName();
-
-    /**
-     * getValue()
-     *
-     */
-    public function getValue();
+    
+    protected $_specialties = array('ClassNamePrefix');
+    
+    public function changeClassNamePrefix($classNamePrefix, $force = false)
+    {
+        
+    }
     
 }

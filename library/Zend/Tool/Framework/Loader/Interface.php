@@ -13,7 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Tool
+ * @package    Tool
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -21,32 +21,22 @@
  */
 
 /**
+ * Basic Interface for factilities that load Zend_Tool providers or manifests.
+ *
  * @category   Zend
- * @package    Zend_Tool
+ * @package    Tool
+ * @subpackage Framework
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Tool_Framework_Metadata_Interface
+interface Zend_Tool_Framework_Loader_Interface
 {
-
     /**
-     * getType()
+     * Load Providers and Manifests
      *
-     * The type of metadata this describes
+     * Returns an array of all loaded class names.
      *
+     * @return array
      */
-    public function getType();
-
-    /**
-     * getName()
-     *
-     */
-    public function getName();
-
-    /**
-     * getValue()
-     *
-     */
-    public function getValue();
-    
+    public function load();
 }

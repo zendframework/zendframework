@@ -17,7 +17,7 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: ViewScriptFile.php 18386 2009-09-23 20:44:43Z ralph $
  */
 
 /**
@@ -36,13 +36,18 @@ require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Project_Context_Filesystem_File
+class Zend_Tool_Project_Context_Zf_LayoutScriptFile extends Zend_Tool_Project_Context_Filesystem_File
 {
 
     /**
      * @var string
      */
-    protected $_filesystemName = 'application.ini';
+    protected $_filesystemName = 'layout.phtml';
+
+    /**
+     * @var string
+     */
+    protected $_layoutName = null;
 
     /**
      * getName()
@@ -51,17 +56,22 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
      */
     public function getName()
     {
-        return 'ApplicationConfigFile';
+        return 'LayoutScriptFile';
     }
 
     /**
      * init()
      *
-     * @return Zend_Tool_Project_Context_Zf_ApplicationConfigFile
+     * @return Zend_Tool_Project_Context_Zf_ViewScriptFile
      */
     public function init()
     {
-        $this->_type = $this->_resource->getAttribute('type');
+        if ($layoutName = $this->_resource->getAttribute('layoutName')) {
+            $this->_layoutName = $layoutName;
+        } else {
+            throw new Exception('Either a forActionName or scriptName is required.');
+        }
+
         parent::init();
         return $this;
     }
@@ -69,11 +79,17 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
     /**
      * getPersistentAttributes()
      *
-     * @return array
+     * @return unknown
      */
     public function getPersistentAttributes()
     {
-        return array('type' => $this->_type);
+        $attributes = array();
+
+        if ($this->_layoutName) {
+            $attributes['layoutName'] = $this->_layoutName;
+        }
+
+        return $attributes;
     }
 
     /**
@@ -83,27 +99,10 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
      */
     public function getContents()
     {
-        $contents =<<<EOS
-[production]
-phpSettings.display_startup_errors = 0
-phpSettings.display_errors = 0
-includePaths.library = APPLICATION_PATH "/../library"
-bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
-bootstrap.class = "Bootstrap"
-resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
-resources.frontController.params.displayExceptions = 0
-
-[staging : production]
-
-[testing : production]
-phpSettings.display_startup_errors = 1
-phpSettings.display_errors = 1
-
-[development : production]
-phpSettings.display_startup_errors = 1
-phpSettings.display_errors = 1
-resources.frontController.params.displayExceptions = 1
+        $contents = <<<EOS
+<?php echo \$this->layout()->content; ?>
 EOS;
+
         return $contents;
     }
 

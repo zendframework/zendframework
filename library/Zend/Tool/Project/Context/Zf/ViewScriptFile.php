@@ -73,7 +73,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
     {
         if ($forActionName = $this->_resource->getAttribute('forActionName')) {
             $this->_forActionName = $forActionName;
-            $this->_filesystemName = $forActionName . '.phtml';
+            $this->_filesystemName = $this->_convertActionNameToFilesystemName($forActionName) . '.phtml';
         } elseif ($scriptName = $this->_resource->getAttribute('scriptName')) {
             $this->_scriptName = $scriptName;
             $this->_filesystemName = $scriptName . '.phtml';
@@ -126,7 +126,7 @@ class Zend_Tool_Project_Context_Zf_ViewScriptFile extends Zend_Tool_Project_Cont
   <h1>An error occurred</h1>
   <h2><?php echo \$this->message ?></h2>
 
-  <?php if ('development' == APPLICATION_ENV): ?>
+  <?php if (isset(\$this->exception)): ?>
 
   <h3>Exception information:</h3>
   <p>
@@ -201,4 +201,12 @@ EOS;
         return $contents;
     }
 
+    protected function _convertActionNameToFilesystemName($actionName)
+    {
+        $filter = new Zend_Filter();
+        $filter->addFilter(new Zend_Filter_Word_CamelCaseToDash())
+            ->addFilter(new Zend_Filter_StringToLower());
+        return $filter->filter($actionName);
+    }
+    
 }

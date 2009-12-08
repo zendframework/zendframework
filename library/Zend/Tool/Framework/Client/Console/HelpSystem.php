@@ -63,13 +63,9 @@ class Zend_Tool_Framework_Client_Console_HelpSystem
         // break apart the message into wrapped chunks
         $errorMessages = explode(PHP_EOL, wordwrap($errorMessage, 70, PHP_EOL, false));
 
-        $text = '                       An Error Has Occurred                            ';
-        $this->_response->appendContent($text, array('color' => array('hiWhite', 'bgRed')));
-
-        foreach ($errorMessages as $errorMessage) {
-            $errorMessage = sprintf('%-70s', $errorMessage);
-            $this->_response->appendContent(' ' . $errorMessage . ' ', array('color' => array('white', 'bgRed')));
-        }
+        $text = 'An Error Has Occurred';
+        $this->_response->appendContent($text, array('color' => array('hiWhite', 'bgRed'), 'aligncenter' => true));
+        $this->_response->appendContent($errorMessage, array('indention' => 1, 'blockize' => 72, 'color' => array('white', 'bgRed')));
 
         if ($exception && $this->_registry->getRequest()->isDebug()) {
             $this->_response->appendContent($exception->getTraceAsString());

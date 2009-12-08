@@ -39,6 +39,8 @@ require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
 class Zend_Tool_Project_Context_Zf_DbTableFile extends Zend_Tool_Project_Context_Filesystem_File
 {
 
+    protected $_dbTableName;
+    
     /**
      * getName()
      *
@@ -48,9 +50,6 @@ class Zend_Tool_Project_Context_Zf_DbTableFile extends Zend_Tool_Project_Context
     {
         return 'DbTableFile';
     }
-
-    /*
-    protected $_dbTableName;
 
     public function getPersistentAttributes()
     {
@@ -67,6 +66,10 @@ class Zend_Tool_Project_Context_Zf_DbTableFile extends Zend_Tool_Project_Context
     {
         return $this->_dbTableName;
     }
-    */
 
+    public function getContents()
+    {
+        
+    }
+    
 }

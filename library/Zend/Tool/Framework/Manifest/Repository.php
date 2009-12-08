@@ -95,6 +95,12 @@ class Zend_Tool_Framework_Manifest_Repository
             }
 
             foreach ($providers as $provider) {
+
+                // if provider is a string, try and load it as an object
+                if (is_string($provider)) {
+                    $provider = new $provider();
+                }
+                
                 if (!$provider instanceof Zend_Tool_Framework_Provider_Interface) {
                     require_once 'Zend/Tool/Framework/Manifest/Exception.php';
                     throw new Zend_Tool_Framework_Manifest_Exception(
@@ -171,6 +177,13 @@ class Zend_Tool_Framework_Manifest_Repository
                 }
 
                 foreach ($metadatas as $metadata) {
+                    if (is_array($metadata)) {
+                        if (!class_exists('Zend_Tool_Framework_Metadata_Dynamic')) {
+                            require_once 'Zend/Tool/Framework/Metadata/Dynamic.php';
+                        }
+                        $metadata = new Zend_Tool_Framework_Metadata_Dynamic($metadata);
+                    }
+                    
                     if (!$metadata instanceof Zend_Tool_Framework_Metadata_Interface) {
                         require_once 'Zend/Tool/Framework/Manifest/Exception.php';
                         throw new Zend_Tool_Framework_Manifest_Exception(

@@ -26,12 +26,18 @@
 require_once 'Zend/Tool/Framework/Metadata/Interface.php';
 
 /**
+ * @see Zend_Tool_Framework_Metadata_Attributable
+ */
+require_once 'Zend/Tool/Framework/Metadata/Attributable.php';
+
+/**
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Framework_Metadata_Basic implements Zend_Tool_Framework_Metadata_Interface
+class Zend_Tool_Framework_Metadata_Basic 
+    implements Zend_Tool_Framework_Metadata_Interface, Zend_Tool_Framework_Metadata_Attributable
 {
 
     /**#@+

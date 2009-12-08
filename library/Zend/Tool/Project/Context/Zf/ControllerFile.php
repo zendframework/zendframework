@@ -21,21 +21,6 @@
  */
 
 /**
- * @see Zend_Tool_Project_Context_Filesystem_File
- */
-require_once 'Zend/Tool/Project/Context/Filesystem/File.php';
-
-/**
- * @see Zend_CodeGenerator_Php_File
- */
-require_once 'Zend/CodeGenerator/Php/File.php';
-
-/**
- * @see Zend_Filter_Word_DashToCamelCase
- */
-require_once 'Zend/Filter/Word/DashToCamelCase.php';
-
-/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
@@ -57,19 +42,23 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
     /**
      * @var string
      */
+    protected $_moduleName = null;
+    
+    /**
+     * @var string
+     */
     protected $_filesystemName = 'controllerName';
 
     /**
      * init()
      *
-     * @return Zend_Tool_Project_Context_Zf_ControllerFile
      */
     public function init()
     {
         $this->_controllerName = $this->_resource->getAttribute('controllerName');
+        $this->_moduleName = $this->_resource->getAttribute('moduleName');
         $this->_filesystemName = ucfirst($this->_controllerName) . 'Controller.php';
         parent::init();
-        return $this;
     }
 
     /**
@@ -112,10 +101,11 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
     public function getContents()
     {
 
-        $filter = new Zend_Filter_Word_DashToCamelCase();
+        //$filter = new Zend_Filter_Word_DashToCamelCase();
 
-        $className = $filter->filter($this->_controllerName) . 'Controller';
-
+        $className = ($this->_moduleName) ? ucfirst($this->_moduleName) . '_' : '';
+        $className .= $this->_controllerName . 'Controller';
+        
         $codeGenFile = new Zend_CodeGenerator_Php_File(array(
             'fileName' => $this->getPath(),
             'classes' => array(
@@ -126,11 +116,11 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
                         new Zend_CodeGenerator_Php_Method(array(
                             'name' => 'init',
                             'body' => '/* Initialize action controller here */',
-                        ))
-                    )
-                ))
-            )
-        ));
+                        	))
+                    	)
+                	))
+            	)
+        	));
 
 
         if ($className == 'ErrorController') {
@@ -162,7 +152,11 @@ switch (\$errors->type) {
         break;
 }
 
-\$this->view->exception = \$errors->exception;
+// conditionally display exceptions
+if (\$this->getInvokeArg('displayExceptions') == true) {
+    \$this->view->exception = \$errors->exception;
+}
+
 \$this->view->request   = \$errors->request;
 EOS
                                 ))
@@ -185,9 +179,9 @@ EOS
      */
     public function addAction($actionName)
     {
-        $class = $this->getCodeGenerator();
-        $class->setMethod(array('name' => $actionName . 'Action', 'body' => '        // action body here'));
-        file_put_contents($this->getPath(), $codeGenFile->generate());
+        $classCodeGen = $this->getCodeGenerator();
+        $classCodeGen->setMethod(array('name' => $actionName . 'Action', 'body' => '        // action body here'));
+        file_put_contents($this->getPath(), $classCodeGen->generate());
     }
 
     /**

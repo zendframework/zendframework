@@ -81,7 +81,10 @@ class Zend_Tool_Project_Provider_Controller
             throw new Zend_Tool_Project_Provider_Exception($exceptionMessage);
         }
 
-        $newController = $controllersDirectory->createResource('controllerFile', array('controllerName' => $controllerName));
+        $newController = $controllersDirectory->createResource(
+            'controllerFile', 
+            array('controllerName' => $controllerName, 'moduleName' => $moduleName)
+            );
 
         return $newController;
     }
@@ -125,9 +128,9 @@ class Zend_Tool_Project_Provider_Controller
     }
 
     /**
-     * Enter description here...
+     * Create a new controller
      *
-     * @param string $name The name of the controller to create.
+     * @param string $name The name of the controller to create, in camelCase.
      * @param bool $indexActionIncluded Whether or not to create the index action.
      */
     public function create($name, $indexActionIncluded = true, $module = null)
@@ -142,6 +145,13 @@ class Zend_Tool_Project_Provider_Controller
             throw new Zend_Tool_Project_Provider_Exception('This project already has a controller named ' . $name);
         }
 
+        // Check that there is not a dash or underscore, return if doesnt match regex
+        if (preg_match('#[_-]#', $name)) {
+            throw new Zend_Tool_Project_Provider_Exception('Controller names should be camel cased.');
+        }
+        
+        $name = ucwords($name);
+        
         try {
             $controllerResource = self::createResource($this->_loadedProfile, $name, $module);
             if ($indexActionIncluded) {

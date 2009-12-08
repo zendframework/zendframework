@@ -89,14 +89,30 @@ class Zend_Tool_Project_Context_Zf_BootstrapFile extends Zend_Tool_Project_Conte
      */
     public function getContents()
     {
+        $autoloadMethodBody =<<<EOS
+\$autoloader = new Zend_Application_Module_Autoloader(array(
+    'namespace' => 'Application_',
+    'basePath'  => APPLICATION_PATH,
+    ));
+return \$autoloader;
+EOS;
+
+        
+        
         $codeGenFile = new Zend_CodeGenerator_Php_File(array(
             'classes' => array(
                 new Zend_CodeGenerator_Php_Class(array(
                     'name' => 'Bootstrap',
                     'extendedClass' => 'Zend_Application_Bootstrap_Bootstrap',
-                )),
-            )
-        ));
+                    'methods' => array(
+                        new Zend_CodeGenerator_Php_Method(array(
+                            'name' => '_initAppAutoloader',
+                            'body' => $autoloadMethodBody,
+                            ))
+                        )
+                    )),
+                )
+            ));
 
         return $codeGenFile->generate();
     }

@@ -87,8 +87,12 @@ class Zend_Tool_Project_Context_Repository implements Countable
             require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($contextClass);
         }
-        $context = new $contextClass();
-        return $this->addContext($context);
+        $reflectionContextClass = new ReflectionClass($contextClass);
+        if ($reflectionContextClass->isInstantiable()) {
+            $context = new $contextClass();
+            return $this->addContext($context);
+        }
+        return $this;
     }
 
     /**

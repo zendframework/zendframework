@@ -31,7 +31,9 @@ require_once 'Zend/Tool/Project/Provider/Abstract.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Project extends Zend_Tool_Project_Provider_Abstract
+class Zend_Tool_Project_Provider_Project
+    extends Zend_Tool_Project_Provider_Abstract
+    //implements Zend_Tool_Framework_Provider_DocblockManifestInterface
 {
 
     protected $_specialties = array('Info');
@@ -40,6 +42,8 @@ class Zend_Tool_Project_Provider_Project extends Zend_Tool_Project_Provider_Abst
      * create()
      *
      * @param string $path
+     * @param string $nameOfProfile shortName=n
+     * @param string $fileOfProfile shortName=f
      */
     public function create($path, $nameOfProfile = null, $fileOfProfile = null)
     {

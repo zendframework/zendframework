@@ -57,7 +57,7 @@ class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_T
     public function init()
     {
         $this->_forControllerName = $this->_resource->getAttribute('forControllerName');
-        $this->_filesystemName = $this->_forControllerName;
+        $this->_filesystemName = $this->_convertControllerNameToFilesystemName($this->_forControllerName);
         parent::init();
         return $this;
     }
@@ -82,6 +82,14 @@ class Zend_Tool_Project_Context_Zf_ViewControllerScriptsDirectory extends Zend_T
     public function getName()
     {
         return 'ViewControllerScriptsDirectory';
+    }
+    
+    protected function _convertControllerNameToFilesystemName($controllerName)
+    {
+        $filter = new Zend_Filter();
+        $filter->addFilter(new Zend_Filter_Word_CamelCaseToDash())
+            ->addFilter(new Zend_Filter_StringToLower());
+        return $filter->filter($controllerName);
     }
 
 }

@@ -83,6 +83,9 @@ abstract class Zend_Tool_Project_Provider_Abstract extends Zend_Tool_Framework_P
             $contextRegistry->addContextsFromDirectory(
                 dirname(dirname(__FILE__)) . '/Context/Zf/', 'Zend_Tool_Project_Context_Zf_'
             );
+            $contextRegistry->addContextsFromDirectory(
+                dirname(dirname(__FILE__)) . '/Context/Filesystem/', 'Zend_Tool_Project_Context_Filesystem_'
+            );
             self::$_isInitialized = true;
         }
 

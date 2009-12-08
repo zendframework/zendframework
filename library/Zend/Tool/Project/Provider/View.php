@@ -61,7 +61,7 @@ class Zend_Tool_Project_Provider_View extends Zend_Tool_Project_Provider_Abstrac
             $profileSearchParams = array('modulesDirectory', 'moduleDirectory' => array('moduleName' => $moduleName));
             $noModuleSearch = null;
         } else {
-            $noModuleSearch = array('ModulesDirectory');
+            $noModuleSearch = array('modulesDirectory');
         }
 
         $profileSearchParams[] = 'viewsDirectory';
@@ -74,7 +74,7 @@ class Zend_Tool_Project_Provider_View extends Zend_Tool_Project_Provider_Abstrac
 
         $profileSearchParams['viewControllerScriptsDirectory'] = array('forControllerName' => $controllerName);
 
-        // XXXXXXXXX below is failing b/c of above search params
+        // @todo check if below is failing b/c of above search params
         if (($viewControllerScriptsDirectory = $viewScriptsDirectory->search($profileSearchParams)) === false) {
             $viewControllerScriptsDirectory = $viewScriptsDirectory->createResource('viewControllerScriptsDirectory', array('forControllerName' => $controllerName));
         }

@@ -179,10 +179,10 @@ class Zend_Tool_Framework_Registry implements Zend_Tool_Framework_Registry_Inter
     /**
      * setLoader()
      *
-     * @param Zend_Tool_Framework_Loader_Abstract $loader
+     * @param Zend_Tool_Framework_Loader_Interface $loader
      * @return Zend_Tool_Framework_Registry
      */
-    public function setLoader(Zend_Tool_Framework_Loader_Abstract $loader)
+    public function setLoader(Zend_Tool_Framework_Loader_Interface $loader)
     {
         $this->_loader = $loader;
         if ($this->isObjectRegistryEnablable($this->_loader)) {

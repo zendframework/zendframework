@@ -14,11 +14,12 @@
  *
  * @category   Zend
  * @package    Zend_Tool
- * @subpackage Framework
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+
+require_once "Zend/Tool/Framework/Client/Response/ContentDecorator/Interface.php";
 
 /**
  * @category   Zend
@@ -26,27 +27,30 @@
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Tool_Framework_Metadata_Interface
+class Zend_Tool_Framework_Client_Console_ResponseDecorator_Indention
+    implements Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
 {
+    public function getName()
+    {
+        return 'indention';
+    }
 
     /**
-     * getType()
-     *
-     * The type of metadata this describes
-     *
+     * @param string $content
+     * @param integer $indention
      */
-    public function getType();
+    public function decorate($content, $indention)
+    {
+        if(strval(intval($indention)) != $indention) {
+            return $content;
+        }
 
-    /**
-     * getName()
-     *
-     */
-    public function getName();
-
-    /**
-     * getValue()
-     *
-     */
-    public function getValue();
-    
+        $newContent = "";
+        $lines = preg_split('((\r\n|\r|\n)+)', $content);
+        $lineIndention = str_repeat(' ', $indention);
+        foreach($lines AS $line) {
+            $newContent .= $lineIndention.$line.PHP_EOL;
+        }
+        return rtrim($newContent);
+    }
 }

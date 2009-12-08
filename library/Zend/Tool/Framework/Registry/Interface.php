@@ -50,7 +50,7 @@ interface Zend_Tool_Framework_Registry_Interface
      * @param Zend_Tool_Framework_Loader_Abstract $loader
      * @return Zend_Tool_Framework_Registry
      */
-    public function setLoader(Zend_Tool_Framework_Loader_Abstract $loader);
+    public function setLoader(Zend_Tool_Framework_Loader_Interface $loader);
 
     /**
      * getLoader()

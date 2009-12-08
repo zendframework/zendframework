@@ -44,9 +44,9 @@ class Zend_Tool_Framework_Client_Response
     protected $_exception = null;
 
     /**
-     * @var null|array
+     * @var array
      */
-    protected $_decorators = null;
+    protected $_decorators = array();
 
     /**
      * @var array

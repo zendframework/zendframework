@@ -17,7 +17,7 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: ViewScriptsDirectory.php 18386 2009-09-23 20:44:43Z ralph $
  */
 
 /**
@@ -36,38 +36,22 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Context_Zf_ApplicationDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
+class Zend_Tool_Project_Context_Zf_LayoutScriptsDirectory extends Zend_Tool_Project_Context_Filesystem_Directory
 {
 
-    protected $_filesystemName = 'application';
-
-    protected $_classNamePrefix = 'Application_';
-    
     /**
-     * getPersistentAttributes
-     *
-     * @return array
+     * @var string
      */
-    public function getPersistentAttributes()
-    {
-        return array(
-            'classNamePrefix' => $this->getClassNamePrefix()
-            );
-    }
-    
+    protected $_filesystemName = 'scripts';
+
+    /**
+     * getName()
+     *
+     * @return string
+     */
     public function getName()
     {
-        return 'ApplicationDirectory';
-    }
-    
-    public function setClassNamePrefix($classNamePrefix)
-    {
-        $this->_classNamePrefix = $classNamePrefix;
-    }
-    
-    public function getClassNamePrefix()
-    {
-        return $this->_classNamePrefix;
+        return 'LayoutScriptsDirectory';
     }
 
 }

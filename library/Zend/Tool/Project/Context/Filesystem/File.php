@@ -36,9 +36,19 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Abstract.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Context_Filesystem_Abstract
+class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Context_Filesystem_Abstract
 {
 
+    /**
+     * getName()
+     * 
+     * @return string
+     */
+    public function getName()
+    {
+        return 'file';
+    }
+    
     /**
      * init()
      *

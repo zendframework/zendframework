@@ -25,13 +25,19 @@
  */
 require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
 
+require_once 'Zend/Tool/Framework/Loader/Interface.php';
+require_once 'Zend/Tool/Framework/Manifest/Interface.php';
+require_once 'Zend/Tool/Framework/Provider/Interface.php';
+
+
 /**
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Tool_Framework_Loader_Abstract implements Zend_Tool_Framework_Registry_EnabledInterface
+abstract class Zend_Tool_Framework_Loader_Abstract 
+    implements Zend_Tool_Framework_Loader_Interface, Zend_Tool_Framework_Registry_EnabledInterface
 {
     /**
      * @var Zend_Tool_Framework_Repository_Interface
@@ -77,8 +83,8 @@ abstract class Zend_Tool_Framework_Loader_Abstract implements Zend_Tool_Framewor
         $this->_retrievedFiles = $this->getRetrievedFiles();
         $this->_loadedClasses  = array();
 
-        $manifestRegistry = $this->_registry->getManifestRepository();
-        $providerRegistry = $this->_registry->getProviderRepository();
+        $manifestRepository = $this->_registry->getManifestRepository();
+        $providerRepository = $this->_registry->getProviderRepository();
 
         $loadedClasses = array();
 
@@ -105,15 +111,15 @@ abstract class Zend_Tool_Framework_Loader_Abstract implements Zend_Tool_Framewor
             if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Manifest_Interface')
                 && !$reflectionClass->isAbstract())
             {
-                $manifestRegistry->addManifest($reflectionClass->newInstance());
+                $manifestRepository->addManifest($reflectionClass->newInstance());
                 $this->_loadedClasses[] = $loadedClass;
             }
 
             if ($reflectionClass->implementsInterface('Zend_Tool_Framework_Provider_Interface')
                 && !$reflectionClass->isAbstract()
-                && !$providerRegistry->hasProvider($reflectionClass->getName(), false))
+                && !$providerRepository->hasProvider($reflectionClass->getName(), false))
             {
-                $providerRegistry->addProvider($reflectionClass->newInstance());
+                $providerRepository->addProvider($reflectionClass->newInstance());
                 $this->_loadedClasses[] = $loadedClass;
             }
 

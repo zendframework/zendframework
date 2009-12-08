@@ -154,10 +154,10 @@ class Zend_Validate_Callback extends Zend_Validate_Abstract
     {
         $this->_setValue($value);
 
-        $options = $this->getOptions();
-        array_unshift($options, $value);
-
+        $options  = $this->getOptions();
         $callback = $this->getCallback();
+        $args     = func_get_args();
+        $options  = array_merge($args, $options);
 
         try {
             if (!call_user_func_array($callback, $options)) {

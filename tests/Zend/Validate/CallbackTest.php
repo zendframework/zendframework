@@ -106,6 +106,13 @@ class Zend_Validate_CallbackTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testAddingValueOptions()
+    {
+        $valid = new Zend_Validate_Callback(array('callback' => array($this, 'optionsCallback'), 'options' => 'options'));
+        $this->assertEquals(array('options'), $valid->getOptions());
+        $this->assertTrue($valid->isValid('test', 'something'));
+    }
+
     public function objectCallback($value)
     {
         return true;
@@ -114,6 +121,13 @@ class Zend_Validate_CallbackTest extends PHPUnit_Framework_TestCase
     public static function staticCallback($value)
     {
         return true;
+    }
+
+    public function optionsCallback($value)
+    {
+        $args = func_get_args();
+        $this->assertContains('something', $args);
+        return $args;
     }
 }
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.callback">
-
     <title>Callback</title>
 
     <para>
@@ -209,8 +208,25 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
 
         <para>
+            When there are additional values given to <methodname>isValid()</methodname> then these
+            values will be added immediately after <varname>$value</varname>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Callback(array('MyClass', 'myMethod'));
+$valid->setOptions($option);
+
+if ($valid->isValid($input, $additional)) {
+    // input appears to be valid
+} else {
+    // input is invalid
+}
+]]></programlisting>
+
+        <para>
             When making the call to the callback, the value to be validated will always be passed as
-            the first argument to the callback; all other options will follow it. The amount and
+            the first argument to the callback followed by all other values given to
+            <methodname>isValid()</methodname>; all other options will follow it. The amount and
             type of options which can be used is not limited.
         </para>
     </sect3>

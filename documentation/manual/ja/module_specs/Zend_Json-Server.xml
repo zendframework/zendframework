@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18716 -->
+<!-- EN-Revision: 19477 -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPCサーバー</title>
 
@@ -141,7 +141,7 @@ $server->handle();
 ]]></programlisting>
 
         <para>
-            しかしながら、JSON-RPCクライアントがメソッドを自動検出することができるように、
+            しかしながら、JSON-RPCクライアントがメソッドを自動検出できるように、
             SMDを返す問題を対象にしません。
             それは、<acronym>HTTP</acronym>がメソッドをリクエストすることを確定し、
             それから、若干のサーバー・メタデータを指定することによって達成されます:

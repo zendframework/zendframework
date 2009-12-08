@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18622 -->
+<!-- EN-Revision: 19493 -->
 <sect1 id="zend.application.available-resources" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>利用できるリソースプラグイン</title>
 
@@ -17,4 +17,7 @@
     <xi:include href="Zend_Application-AvailableResources-Router.xml" />
     <xi:include href="Zend_Application-AvailableResources-Session.xml" />
     <xi:include href="Zend_Application-AvailableResources-View.xml" />
+    <xi:include href="Zend_Application-AvailableResources-ZendMonitor.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Application-AvailableResources-ZendMonitor.xml" /></xi:fallback>
+    </xi:include>
 </sect1>

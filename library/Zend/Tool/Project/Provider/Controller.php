@@ -21,31 +21,6 @@
  */
 
 /**
- * @see Zend_Tool_Project_Provider_Abstract
- */
-require_once 'Zend/Tool/Project/Provider/Abstract.php';
-
-/**
- * @see Zend_Tool_Framework_Registry
- */
-require_once 'Zend/Tool/Framework/Registry.php';
-
-/**
- * @see Zend_Tool_Project_Provider_View
- */
-require_once 'Zend/Tool/Project/Provider/View.php';
-
-/**
- * @see Zend_Tool_Project_Provider_Exception
- */
-require_once 'Zend/Tool/Project/Provider/Exception.php';
-
-/**
- * @see Zend_Tool_Framework_Provider_Pretendable
- */
-require_once 'Zend/Tool/Framework/Provider/Pretendable.php';
-
-/**
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)

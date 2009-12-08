@@ -100,11 +100,8 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
      */
     public function getContents()
     {
-
-        //$filter = new Zend_Filter_Word_DashToCamelCase();
-
         $className = ($this->_moduleName) ? ucfirst($this->_moduleName) . '_' : '';
-        $className .= $this->_controllerName . 'Controller';
+        $className .= ucfirst($this->_controllerName) . 'Controller';
         
         $codeGenFile = new Zend_CodeGenerator_Php_File(array(
             'fileName' => $this->getPath(),
@@ -159,7 +156,18 @@ if (\$this->getInvokeArg('displayExceptions') == true) {
 
 \$this->view->request   = \$errors->request;
 EOS
-                                ))
+                                )),
+                            new Zend_CodeGenerator_Php_Method(array(
+                                'name' => 'getMonitorLog',
+                                'body' => <<<EOS
+\$bootstrap = \$this->getInvokeArg('bootstrap');
+if (!\$bootstrap->hasPluginResource('ZendMonitor')) {
+    return false;
+}
+\$log = \$bootstrap->getResource('ZendMonitor');
+return \$log;
+EOS
+                                )),
                             )
                         ))
                     )

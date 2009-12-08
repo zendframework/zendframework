@@ -125,20 +125,20 @@ class Zend_Tool_Project_Provider_Project
                     <applicationConfigFile type="ini" />
                 </configsDirectory>
                 <controllersDirectory>
-                    <controllerFile controllerName="index">
+                    <controllerFile controllerName="Index">
                         <actionMethod actionName="index" />
                     </controllerFile>
-                    <controllerFile controllerName="error" />
+                    <controllerFile controllerName="Error" />
                 </controllersDirectory>
                 <layoutsDirectory enabled="false" />
                 <modelsDirectory />
                 <modulesDirectory enabled="false" />
                 <viewsDirectory>
                     <viewScriptsDirectory>
-                        <viewControllerScriptsDirectory forControllerName="index">
+                        <viewControllerScriptsDirectory forControllerName="Index">
                             <viewScriptFile forActionName="index" />
                         </viewControllerScriptsDirectory>
-                        <viewControllerScriptsDirectory forControllerName="error">
+                        <viewControllerScriptsDirectory forControllerName="Error">
                             <viewScriptFile forActionName="error" />
                         </viewControllerScriptsDirectory>
                     </viewScriptsDirectory>

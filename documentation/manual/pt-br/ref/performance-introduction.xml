@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 14978 -->
+<!-- Reviewed: no -->
+<sect1 id="performance.introduction">
+    <title>Introdução</title>
+
+    <para>
+        A finalidade deste apêndice é fornecer algumas estratégias concretas para melhorar o
+        desempenho de seus aplicativos em Zend Framework. O guia é apresentado no formato
+        "Perguntas e Respostas", e é dividido em áreas de interesse.
+    </para>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

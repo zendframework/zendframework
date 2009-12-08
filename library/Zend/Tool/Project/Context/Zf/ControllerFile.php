@@ -149,6 +149,11 @@ switch (\$errors->type) {
         break;
 }
 
+// Log to Zend Monitor, if logger available
+if (\$monitor = \$this->getMonitorLog()) {
+    \$monitor->crit(\$this->view->message, \$errors->exception);
+}
+
 // conditionally display exceptions
 if (\$this->getInvokeArg('displayExceptions') == true) {
     \$this->view->exception = \$errors->exception;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18004 -->
+<!-- EN-Revision: 19457 -->
 <sect1 id="zend.translate.additional">
 
     <title>翻訳用の追加機能</title>
@@ -178,6 +178,17 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             CSV の行の長さの最大値を定義します。0 にすると、自動的に検出します。
                         </entry>
                         <entry><emphasis>0</emphasis></entry>
+                    </row>
+                    <row>
+                        <entry>useId</entry>
+                        <entry>Xliff</entry>
+                        <entry>
+                            もしこのオプションを <constant>FALSE</constant> に設定すると、
+                            ソースの文字列はメッセージ Id として使われます。
+                            このオプションの既定値は <constant>TRUE</constant> で、
+                            それは, 翻訳単位要素からの Id がメッセージ Id として使われることを意味します。
+                        </entry>
+                        <entry><emphasis>true</emphasis></entry>
                     </row>
                 </tbody>
             </tgroup>

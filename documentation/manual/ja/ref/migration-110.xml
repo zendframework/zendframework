@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18833 -->
+<!-- EN-Revision: 19457 -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
 
@@ -54,6 +54,31 @@
                 コード内でこれらのメッセージを翻訳している場合、新しい定数を使います。
                 利点として、正しいつづりを得るために、本来の文字列を翻訳する必要はもうありません。
             </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="migration.110.zend.translate">
+        <title>Zend_Translate</title>
+
+        <sect3 id="migration.110.zend.translate.xliff">
+            <title>Xliff アダプタ</title>
+
+            <para>
+                過去には Xliff アダプタはソースの文字列をメッセージ Id として使いました。
+                Xliff 標準に沿って、翻訳単位 Id が使われるべきです。
+                この振る舞いは Zend Framework 1.10 で修正されました。
+                今では既定では翻訳単位 Id はメッセージId として使われます。
+            </para>
+
+            <para>
+                しかし、 <property>useId</property> オプションを <constant>FALSE</constant> に設定することにより、
+                正しくなくて古い振る舞いをまだ得られます。
+                
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$trans = new Zend_Translate('xliff', '/path/to/source', $locale, array('useId' => false));
+]]></programlisting>
         </sect3>
     </sect2>
 

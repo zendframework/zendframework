@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19436 -->
 <sect3 id="zend.view.helpers.initial.action">
     <title>Action ビューヘルパー</title>
 
     <para>
-        <code>Action</code> ビューヘルパーは、
+        <classname>Action</classname> ビューヘルパーは、
         ビュースクリプトから指定したコントローラのアクションを実行し、
         その結果のレスポンスオブジェクトを返します。
         これは、特定のアクションが再利用可能なコンテンツを返す場合や、
@@ -18,10 +18,10 @@
     </para>
 
     <para>
-        <code>Action</code> ビューヘルパーの <acronym>API</acronym>
+        <classname>Action</classname> ビューヘルパーの <acronym>API</acronym>
         はコントローラアクションを起動する大半の <acronym>MVC</acronym>
-        コンポーネントと同じで、<methodname>action($action,
-            $controller, $module = null, array $params = array())</methodname>
+        コンポーネントと同じで、<command>action($action,
+            $controller, $module = null, array $params = array())</command>
         のようになります。<varname>$action</varname> と <varname>$controller</varname>
         は必須です。モジュールを省略した場合はデフォルトのモジュールを使用します。
     </para>
@@ -30,7 +30,7 @@
         <title>Action ビューヘルパーの基本的な使用法</title>
 
         <para>
-            たとえば <code>CommentController</code> に
+            たとえば <classname>CommentController</classname> に
             <methodname>listAction()</methodname> というメソッドがあったとしましょう。
             コメント一覧を取得するために現在のリクエストからこのメソッドを起動するには、
             次のようにします。

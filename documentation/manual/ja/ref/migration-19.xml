@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18804 -->
+<!-- EN-Revision: 19425 -->
 <sect1 id="migration.19">
     <title>Zend Framework 1.9</title>
 
@@ -84,9 +84,9 @@ $valid->enableHeaderCheck();
                 複数のファイルを同じフォーム名で
                 ファイルの配列としてアップロードできるように
                 この変化が取り入れられました。
-                この問題に関するより多くの情報は、
-                <ulink url="http://framework.zend.com/issues/browse/ZF-5744">このバグ・レポート</ulink>
-                で見つけることができます。
+                この問題に関するより多くの情報は、<ulink
+                    url="http://framework.zend.com/issues/browse/ZF-5744">このバグ・レポート</ulink>
+                で見つけられます。
             </para>
 
             <example id="migration.19.zend.http.client.fileuploadsarray.example">

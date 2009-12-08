@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19421 -->
+<!-- EN-Revision: 19518 -->
 <sect1 id="zend.mail.encoding">
     <title>エンコーディング</title>
     <para>
@@ -8,6 +8,7 @@
         quotedprintable 方式でエンコードされます。
         メッセージヘッダーもbase64を <methodname>setHeaderEncoding()</methodname> で指定しなければ
         quotedprintable 方式でエンコードされます。
+        もしあなたがラテン文字ベースではない言語を使う場合、 base64 がより適切でしょう。
         その他の添付ファイルは、デフォルトでは
         base64 でエンコードされますが、<methodname>addAttachment()</methodname> のコール時に変更したり
         <acronym>MIME</acronym> パートオブジェクトに後から代入して変更することもできます。
@@ -23,15 +24,16 @@
         には、特定の文字セットにおける問題があるからです。
         このアルゴリズムではヘッダを空白文字でのみ区切るので、
         推奨される長さである 76 文字を超えるヘッダができてしまう可能性があります。
-        そんな場合は、次の例のようにしてヘッダのエンコード方式を
+        そんな場合は、次の例と同様にヘッダのエンコード方式を
         BASE64 に変更しましょう。
     </para>
 
     <programlisting language="php"><![CDATA[
 // デフォルトは Zend_Mime::ENCODING_QUOTEDPRINTABLE です
-$mail = new Zend_Mail();
+$mail = new Zend_Mail('KOI8-R');
 
-// Base64 エンコーディングに変更します
+// KOI8-R で表現されるロシア語はラテン文字ベースの言語と
+// 大きく異なるので、Base64 エンコーディングに変更します
 $mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
 ]]></programlisting>
 

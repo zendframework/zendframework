@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18892 -->
+<!-- EN-Revision: 19425 -->
 <sect1 id="zend.view.introduction">
 
     <title>導入</title>
@@ -17,7 +17,7 @@
         <classname>Zend_View</classname> は、テンプレートシステムに対しては特にこだわりはありません。
         テンプレート言語として <acronym>PHP</acronym> を使用するか、
         あるいは他のテンプレートエンジンのインスタンスを作成して、
-        それをビュースクリプトの中で操作することができます。
+        それをビュースクリプトの中で操作できます。
     </para>
 
     <para>
@@ -122,7 +122,7 @@ echo $view->render('booklist.php');
 
         <para>
             <classname>Zend_View</classname> のオプションを設定すると、
-            ビュースクリプトの振る舞いを変更することができます。
+            ビュースクリプトの振る舞いを変更できます。
         </para>
 
         <itemizedlist>

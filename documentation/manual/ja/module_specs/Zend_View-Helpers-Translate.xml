@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 19433 -->
 <sect3 id="zend.view.helpers.initial.translate">
 
     <title>翻訳ヘルパー</title>
@@ -9,15 +9,15 @@
         ウェブサイトを複数言語で提供することもよくあります。
         サイト上のコンテンツを翻訳するには、
         <link linkend="zend.translate.introduction">Zend Translate</link>
-        を使用します。これをビューと統合するために使用するのが
-        <code>Translate</code> ビューヘルパーです。
+        を使用します。 <classname>Zend Translate</classname> をビューと統合するために使用するのが
+        <emphasis>Translate</emphasis> ビューヘルパーです。
     </para>
 
     <para>
         これ以降のすべての例では、単純は配列翻訳アダプタを使用します。
         もちろん <classname>Zend_Translate</classname> の任意のインスタンスやお好みの
         <classname>Zend_Translate_Adapter</classname> のサブクラスを使うことも可能です。
-        <code>Translate</code> ビューヘルパーのインスタンスを作成するにはいくつかの方法があります。
+        <emphasis>Translate</emphasis> ビューヘルパーのインスタンスを作成するにはいくつかの方法があります。
     </para>
 
     <itemizedlist>
@@ -40,7 +40,7 @@
 
     <para>
         登録済みの <classname>Zend_Translate</classname> のインスタンスを使用する方法をおすすめします。
-        アダプタをレジストリに追加する際に、使用するロケールを選択することができます。
+        アダプタをレジストリに追加する際に、使用するロケールを選択できます。
     </para>
 
     <note>
@@ -202,7 +202,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
         翻訳のロケールを変更しなければならないこともあるでしょう。
         翻訳単位で動的に変更することもできますが、
         静的に変更してそれ以降のすべての翻訳に適用させることもできます。
-        そして、パラメータリスト型あるいはパラメータ配列型のどちらの形式でもそれを使用することができます。
+        そして、パラメータリスト型あるいはパラメータ配列型のどちらの形式でもそれを使用できます。
         どひらの形式の場合も、ロケールは最後のパラメータとして指定します。
     </para>
 
@@ -240,7 +240,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
     </example>
 
     <para>
-        上の例では新しいデフォルトロケールとして <code>'it'</code>
+        上の例では新しいデフォルトロケールとして <emphasis>'it'</emphasis>
         を設定しており、これ以降の翻訳ではこのロケールを使用します。
     </para>
 

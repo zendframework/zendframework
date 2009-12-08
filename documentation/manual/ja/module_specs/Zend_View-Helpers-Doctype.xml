@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19436 -->
 <sect3 id="zend.view.helpers.initial.doctype">
     <title>Doctype ヘルパー</title>
 
@@ -9,13 +9,13 @@
         <constant>DOCTYPE</constant> 宣言が必要です。
         覚えておくことが難しいというだけではなく、
         これらは特定の要素のレンダリング方法
-        (たとえば、<code>&lt;script&gt;</code> や
-        <code>&lt;style&gt;</code> 要素における CDATA
+        (たとえば、<emphasis>&lt;script&gt;</emphasis> や
+        <emphasis>&lt;style&gt;</emphasis> 要素における CDATA
         のエスケープ方法) に影響を与えます。
     </para>
 
     <para>
-        <code>Doctype</code> ヘルパーは、以下のいずれかの形式を指定します。
+        <classname>Doctype</classname> ヘルパーは、以下のいずれかの形式を指定します。
     </para>
 
     <itemizedlist>
@@ -31,11 +31,11 @@
     </itemizedlist>
 
     <para>
-        整形式なものであれば、独自の doctype を追加することができます。
+        整形式なものであれば、独自の doctype を追加できます。
     </para>
 
     <para>
-        <code>Doctype</code> ヘルパーは、
+        <classname>Doctype</classname> ヘルパーは、
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder
         ヘルパー</link> の具象実装です。
     </para>
@@ -44,7 +44,7 @@
         <title>Doctype ヘルパーの基本的な使用法</title>
 
         <para>
-            doctype は、いつでも指定することができます。
+            doctype は、いつでも指定できます。
             しかし、doctype によって出力を切りかえるヘルパーを使用する場合は
             まず doctype を設定してからでないと動作しません。もっともシンプルな使用法は、
             レイアウトスクリプトの先頭で指定と出力を同時に行うことでしょう。

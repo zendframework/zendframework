@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 19436 -->
 <sect3 id="zend.view.helpers.initial.headtitle">
     <title>HeadTitle ヘルパー</title>
 
     <para>
-        HTML の <code>&lt;title&gt;</code> 要素を使用して、
+        HTML の <emphasis>&lt;title&gt;</emphasis> 要素を使用して、
         HTML ドキュメントのタイトルを設定します。
-        <code>HeadTitle</code> ヘルパーは、
+        <classname>HeadTitle</classname> ヘルパーは、
         プログラム上で作成したタイトルを保存しておいて、
         後で出力の際にそれを取得するためのものです。
     </para>
 
     <para>
-        <code>HeadTitle</code> ヘルパーは、
+        <classname>HeadTitle</classname> ヘルパーは、
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder
         ヘルパー</link> の具象実装です。
         <methodname>toString()</methodname> メソッドをオーバーライドして
-        <code>&lt;title&gt;</code> 要素を生成するようにしており、
+        <classname>&lt;title&gt;</classname> 要素を生成するようにしており、
         <methodname>headTitle()</methodname> メソッドによって title
         要素の設定や集約を簡単にできるようになっています。
         このメソッドのシグネチャは
@@ -31,7 +31,7 @@
         <title>HeadTitle ヘルパーの基本的な使用法</title>
 
         <para>
-            title タグは、いつでも好きなときに指定することができます。
+            title タグは、いつでも好きなときに指定できます。
             一般的な使用法としては、アプリケーション内での階層、
             つまりサイト、コントローラ、アクションその他のリソースについての情報を示すことがあります。
         </para>

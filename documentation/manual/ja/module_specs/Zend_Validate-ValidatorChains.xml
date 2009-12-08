@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19419 -->
+<!-- EN-Revision: 19432 -->
 <sect1 id="zend.validate.validator_chains">
 
     <title>バリデータチェイン</title>
 
     <para>
         ひとつの値に対して、複数のバリデータを指定した順に適用しなければならないことがよくあります。
-        以下のコードは、
-        <link linkend="zend.validate.introduction">導入</link>
+        以下のコードは、<link
+            linkend="zend.validate.introduction">導入</link>
         で説明した例を解決するための方法を示すものです。
         ユーザ名が 6 文字から 12 文字までの英数字であるかどうかを検証します。
 

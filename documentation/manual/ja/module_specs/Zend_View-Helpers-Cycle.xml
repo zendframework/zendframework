@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 19436 -->
 <sect3 id="zend.view.helpers.initial.cycle">
 
     <title>Cycle ヘルパー</title>
 
     <para>
-        <code>Cycle</code>ヘルパーは 一組の値を交互に切り替えるために使われます。
+        <classname>Cycle</classname>ヘルパーは 一組の値を交互に切り替えるために使われます。
     </para>
 
     <example id="zend.view.helpers.initial.cycle.basicusage">
@@ -55,7 +55,7 @@ $this->cycle()->prev();
         <para>
             ２つ以上の繰り返しを利用する場合は、繰り返しの名前を指定しなければなりません。
             第２パラメータを cycle メソッドで設定してください。
-            <code>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</code>.
+            <command>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</command>.
             setName($name)関数を使うこともできます。
         </para>
 

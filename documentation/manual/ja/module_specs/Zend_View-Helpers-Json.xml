@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 19434 -->
 <sect3 id="zend.view.helpers.initial.json">
     <title>JSON ヘルパー</title>
 
@@ -37,7 +37,7 @@ Content-Type: application/json
         <title>レイアウトの維持、およびZend_Json_Expr によるエンコードの有効化</title>
 
         <para>
-            <acronym>JSON</acronym> ヘルパーの各メソッドには、オプションで 2 番目の引数を指定することができます。
+            <acronym>JSON</acronym> ヘルパーの各メソッドには、オプションで 2 番目の引数を指定できます。
             この 2 番目の引数は、レイアウト機能の有効/無効を指定する boolean フラグか
             あるいは <methodname>Zend_Json::encode()</methodname>
             に渡して内部的なデータのエンコードに使用するオプションの配列となります。
@@ -47,7 +47,7 @@ Content-Type: application/json
             レイアウトを維持するには、2 番目のパラメータを
             <constant>TRUE</constant> としなければなりません。
             2 番目のパラメータを配列ににする場合にレイアウトを維持するには、配列に
-            <code>keepLayouts</code> というキーを含め、その値を
+            <property>keepLayouts</property> というキーを含め、その値を
             <constant>TRUE</constant> にします。
         </para>
 
@@ -61,9 +61,9 @@ echo $this->json($this->data, array('keepLayouts' => true));
 
         <para>
             <methodname>Zend_Json::encode()</methodname> は、ネイティブ <acronym>JSON</acronym> 式を
-            <classname>Zend_Json_Expr</classname> オブジェクトを使用してエンコードすることができます。
+            <classname>Zend_Json_Expr</classname> オブジェクトを使用してエンコードできます。
             このオプションはデフォルトでは無効になっています。
-            有効にするには、<code>enableJsonExprFinder</code>
+            有効にするには、<property>enableJsonExprFinder</property>
             オプションに <constant>TRUE</constant> を設定します。
         </para>
 

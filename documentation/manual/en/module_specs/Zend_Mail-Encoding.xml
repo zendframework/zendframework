@@ -5,6 +5,7 @@
     <para>
         Text and HTML message bodies are encoded with the quotedprintable mechanism by default. Message headers
         are also encoded with the quotedprintable mechanism if you do not specify base64 in <methodname>setHeaderEncoding()</methodname>.
+        If you use language that is not Roman letters-based, the base64 would be more suitable.
         All other attachments are encoded via base64 if no other encoding is given in the <methodname>addAttachment()</methodname>
         call or assigned to the <acronym>MIME</acronym> part object later. 7Bit and 8Bit encoding currently only pass on the
         binary content data.
@@ -16,14 +17,15 @@
         This due to the problems of <code>iconv_mime_encode</code> and <code>mb_encode_mimeheader</code>
         with regards to certain charsets. This algorithm only breaks the header at spaces, which might lead to headers
         that far exceed the suggested length of 76 chars. For this cases it is suggested to switch to BASE64
-        header encoding as the following example describes:
+        header encoding same as the following example describes:
     </para>
 
     <programlisting language="php"><![CDATA[
 // By default Zend_Mime::ENCODING_QUOTEDPRINTABLE
-$mail = new Zend_Mail();
+$mail = new Zend_Mail('KOI8-R');
 
-// Reset to Base64 Encoding.
+// Reset to Base64 Encoding because Russian expressed in KOI8-R is
+// different from Roman letters-based languages greatly.
 $mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
 ]]></programlisting>
 

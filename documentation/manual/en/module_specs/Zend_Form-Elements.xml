@@ -645,6 +645,25 @@ $messages = $element->getMessages();
             </para>
         </note>
 
+        <note>
+            <title>When is an element detected as empty?</title>
+
+            <para>
+                As mentioned the 'NotEmpty' validator is used to detect if an element is empty
+                or not. But <classname>Zend_Validate_NotEmpty</classname> does, per default, not
+                work like <acronym>PHP</acronym>'s method <methodname>empty()</methodname>.
+            </para>
+
+            <para>
+                This means when an element contains an integer <emphasis>0</emphasis> or an string
+                <emphasis>'0'</emphasis> then the element will be seen as not empty. If you want to
+                have a different behaviour you must create your own instance of
+                <classname>Zend_Validate_NotEmpty</classname>. There you can define the behaviour of
+                this validator. See <ulink
+                    linkend="zend.validate.set.notempty">Zend_Validate_NotEmpty</ulink> for details.
+            </para>
+        </note>
+
         <para>
             Methods associated with validation include:
         </para>

@@ -66,13 +66,13 @@
                 <itemizedlist>
                     <listitem><para>
                         Old method <acronym>API</acronym>:
-                        <command>Zend_Filter_File_Rename($oldfile, $newfile,
-                        $overwrite)</command>
+                        <methodname>Zend_Filter_File_Rename($oldfile, $newfile,
+                            $overwrite)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <command>Zend_Filter_File_Rename($options)</command>
+                        <methodname>Zend_Filter_File_Rename($options)</methodname>
                         where <varname>$options</varname> accepts the following array keys:
                         <emphasis>source</emphasis> equals to <varname>$oldfile</varname>,
                         <emphasis>target</emphasis> equals to <varname>$newfile</varname>,
@@ -105,12 +105,12 @@ $upload->addFilter('Rename',
                 <itemizedlist>
                     <listitem><para>
                         Old method <acronym>API</acronym>:
-                        <command>Zend_Validate_File_Count($min, $max)</command>
+                        <methodname>Zend_Validate_File_Count($min, $max)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <command>Zend_Validate_File_Count($options)</command>
+                        <methodname>Zend_Validate_File_Count($options)</methodname>
                         where <varname>$options</varname> accepts the following array keys:
                         <emphasis>min</emphasis> equals to <varname>$min</varname>,
                         <emphasis>max</emphasis> equals to <varname>$max</varname>.
@@ -142,12 +142,12 @@ $upload->addValidator('Count',
                 <itemizedlist>
                     <listitem><para>
                         Old method <acronym>API</acronym>:
-                        <command>Zend_Validate_File_Extension($extension, $case)</command>
+                        <methodname>Zend_Validate_File_Extension($extension, $case)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <command>Zend_Validate_File_Extension($options)</command> where
+                        <methodname>Zend_Validate_File_Extension($options)</methodname> where
                         <varname>$options</varname> accepts the following array keys:
                         <emphasis>*</emphasis> equals to <varname>$extension</varname> and can have
                         any other key, <emphasis>case</emphasis> equals to <varname>$case</varname>.
@@ -179,12 +179,13 @@ $upload->addValidator('Extension',
                 <itemizedlist>
                     <listitem><para>
                         Old method <acronym>API</acronym>:
-                        <command>Zend_Validate_File_FilesSize($min, $max, $bytestring)</command>
+                        <methodname>Zend_Validate_File_FilesSize($min, $max,
+                            $bytestring)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <command>Zend_Validate_File_FilesSize($options)</command> where
+                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> where
                         <varname>$options</varname> accepts the following array keys:
                         <emphasis>min</emphasis> equals to <varname>$min</varname>,
                         <emphasis>max</emphasis> equals to <varname>$max</varname>,
@@ -231,13 +232,13 @@ $upload->setUseByteSting(true); // set flag
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <command>Zend_Validate_File_Hash($hash,
-                            $algorithm)</command>
+                        Old method <acronym>API</acronym>:
+                        <methodname>Zend_Validate_File_Hash($hash, $algorithm)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <command>Zend_Validate_File_Hash($options)</command>
+                        <methodname>Zend_Validate_File_Hash($options)</methodname>
                         where <varname>$options</varname> accepts the following array keys:
                         <emphasis>*</emphasis> equals to <varname>$hash</varname> and can have any
                         other key, <emphasis>algorithm</emphasis> equals to
@@ -270,13 +271,13 @@ $upload->addValidator('Hash',
                 <itemizedlist>
                     <listitem><para>
                         Old method <acronym>API</acronym>:
-                        <command>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth,
-                            $maxheight)</command>
+                        <methodname>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth,
+                            $maxheight)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <command>Zend_Validate_File_FilesSize($options)</command> where
+                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> where
                         <varname>$options</varname> accepts the following array keys:
                         <emphasis>minwidth</emphasis> equals to <varname>$minwidth</varname>,
                         <emphasis>maxwidth</emphasis> equals to <varname>$maxwidth</varname>,
@@ -311,13 +312,13 @@ $upload->addValidator('ImageSize',
 
                 <itemizedlist>
                     <listitem><para>
-                        Old method <acronym>API</acronym>: <command>Zend_Validate_File_Size($min,
-                            $max, $bytestring)</command>
+                        Old method <acronym>API</acronym>: <methodname>Zend_Validate_File_Size($min,
+                            $max, $bytestring)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         New method <acronym>API</acronym>:
-                        <command>Zend_Validate_File_Size($options)</command>
+                        <methodname>Zend_Validate_File_Size($options)</methodname>
                         where <varname>$options</varname> accepts the following array keys:
                         <emphasis>min</emphasis> equals to <varname>$min</varname>,
                         <emphasis>max</emphasis> equals to <varname>$max</varname>,
@@ -360,7 +361,7 @@ $upload->addValidator('Size',
                 old behaviour of a returned string, but it triggers a user warning to
                 mention you to change to the new behaviour. The rerouting which the old
                 behaviour of <methodname>isLocale()</methodname> could have done is no longer
-                neccessary as all I18N will now process a rerouting themself.
+                neccessary as all I18n will now process a rerouting themself.
             </para>
 
             <para>
@@ -531,18 +532,18 @@ $language = new Zend_Translate('gettext',
 
         <note>
             <para>
-                The API changes within <classname>Zend_View</classname> are only
+                The <acronym>API</acronym> changes within <classname>Zend_View</classname> are only
                 notable for you when you are upgrading to release 1.7.5 or higher.
             </para>
         </note>
 
         <para>
             Prior to the 1.7.5 release, the Zend Framework team was notified of
-            a potential Local File Inclusion (LFI) vulnerability in the
+            a potential Local File Inclusion (<acronym>LFI</acronym>) vulnerability in the
             <methodname>Zend_View::render()</methodname> method. Prior to 1.7.5, the method
             allowed, by default, the ability to specify view scripts that
             included parent directory notation (e.g., "../" or "..\"). This
-            opens the possibility for an LFI attack if unfiltered user input is
+            opens the possibility for an <acronym>LFI</acronym> attack if unfiltered user input is
             passed to the <methodname>render()</methodname> method:
         </para>
 

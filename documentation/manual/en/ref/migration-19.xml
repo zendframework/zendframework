@@ -140,7 +140,7 @@ $client->setFileUpload('file2.txt',
                 Starting from version 1.9, the protected method
                 <methodname>_getParametersRecursive()</methodname> is no longer used by
                 <classname>Zend_Http_Client</classname> and is deprecated. Using it will cause an
-                E_NOTICE message to be emitted by <acronym>PHP</acronym>.
+                <constant>E_NOTICE</constant> message to be emitted by <acronym>PHP</acronym>.
             </para>
 
             <para>
@@ -151,7 +151,7 @@ $client->setFileUpload('file2.txt',
             </para>
 
             <para>
-                Again, since this <classname>_getParametersRecursive</classname> is a protected
+                Again, since this <methodname>_getParametersRecursive()</methodname> is a protected
                 method, this change will only affect users who subclass
                 <classname>Zend_Http_Client</classname>.
             </para>
@@ -183,36 +183,69 @@ $client->setFileUpload('file2.txt',
                     </thead>
                     <tbody>
                         <row>
-                            <entry>getLanguageTranslationList($locale)</entry>
-                            <entry>getTranslationList('language', $locale)</entry>
+                            <entry>
+                                <methodname>getLanguageTranslationList($locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslationList('language', $locale)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getScriptTranslationList($locale)</entry>
-                            <entry>getTranslationList('script', $locale)</entry>
+                            <entry>
+                                <methodname>getScriptTranslationList($locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslationList('script', $locale)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getCountryTranslationList($locale)</entry>
-                            <entry>getTranslationList('territory', $locale, 2)</entry>
+                            <entry>
+                                <methodname>getCountryTranslationList($locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslationList('territory', $locale, 2)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getTerritoryTranslationList($locale)</entry>
-                            <entry>getTranslationList('territory', $locale, 1)</entry>
+                            <entry>
+                                <methodname>getTerritoryTranslationList($locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslationList('territory', $locale, 1)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getLanguageTranslation($value, $locale)</entry>
-                            <entry>getTranslation($value, 'language', $locale)</entry>
+                            <entry>
+                                <methodname>getLanguageTranslation($value, $locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslation($value, 'language', $locale)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getScriptTranslation($value, $locale)</entry>
-                            <entry>getTranslation($value, 'script', $locale)</entry>
+                            <entry>
+                                <methodname>getScriptTranslation($value, $locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslation($value, 'script', $locale)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getCountryTranslation($value, $locale)</entry>
-                            <entry>getTranslation($value, 'country', $locale)</entry>
+                            <entry>
+                                <methodname>getCountryTranslation($value, $locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslation($value, 'country', $locale)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getTerritoryTranslation($value, $locale)</entry>
-                            <entry>getTranslation($value, 'territory', $locale)</entry>
+                            <entry>
+                                <methodname>getTerritoryTranslation($value, $locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslation($value, 'territory',
+                                    $locale)</methodname>
+                            </entry>
                         </row>
                     </tbody>
                 </tgroup>
@@ -226,14 +259,14 @@ $client->setFileUpload('file2.txt',
         <para>
             Prior to the 1.9 release, the menu helper
             (<classname>Zend_View_Helper_Navigation_Menu</classname>) did not
-            render sub menus correctly. When the <code>onlyActiveBranch</code>
-            was <constant>TRUE</constant> and the option <code>renderParents</code>
+            render sub menus correctly. When <property>onlyActiveBranch</property>
+            was <constant>TRUE</constant> and the option <property>renderParents</property>
             <constant>FALSE</constant>, nothing would be rendered if the deepest active
-            page was at a depth lower than the <code>minDepth</code> option.
+            page was at a depth lower than the <property>minDepth</property> option.
         </para>
 
         <para>
-            In simpler words; if <code>minDepth</code> was set to <code>1</code>
+            In simpler words; if <property>minDepth</property> was set to '1'
             and the active page was at one of the first level pages, nothing
             would be rendered, as the following example shows.
         </para>
@@ -290,7 +323,7 @@ $container = new Zend_Navigation(array(
         <para>
             Since release 1.9, the <methodname>_renderDeepestMenu()</methodname> method in
             <classname>Zend_View_Helper_Navigation_Menu</classname> will accept
-            active pages at one level below <code>minDepth</code>, as long as
+            active pages at one level below <property>minDepth</property>, as long as
             the page has children.
         </para>
 

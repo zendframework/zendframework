@@ -70,18 +70,13 @@ $log->info('Exception occurred', array(
         the "Events" sub-item, and then filter on "Custom" to see custom events.
     </para>
 
-    <mediaobject>
-        <imageobject>
-            <imagedata fileref="figures/zend.log.writers.zendmonitor-events.png"
-                format="PNG"></imagedata>
+    <para>
+        <inlinegraphic fileref="figures/zend.log.writers.zendmonitor-events.png" format="PNG" />
+    </para>
 
-            <caption>
-                <para>
-                    Events in Zend Server's Monitor dashboard
-                </para>
-            </caption>
-        </imageobject>
-    </mediaobject>
+    <para>
+        Events in Zend Server's Monitor dashboard
+    </para>
 
     <para>
         In this screenshot, the first two events listed are custom events logged via the
@@ -89,18 +84,13 @@ $log->info('Exception occurred', array(
         information related to it.
     </para>
 
-    <mediaobject>
-        <imageobject>
-            <imagedata fileref="figures/zend.log.writers.zendmonitor-event.png"
-                format="PNG"></imagedata>
+    <para>
+        <inlinegraphic fileref="figures/zend.log.writers.zendmonitor-event.png" format="PNG" />
+    </para>
 
-            <caption>
-                <para>
-                    Event detail in Zend Server's Monitor
-                </para>
-            </caption>
-        </imageobject>
-    </mediaobject>
+    <para>
+        Event detail in Zend Server's Monitor
+    </para>
 
     <para>
         Clicking on the "Custom" sub tab will detail any extra information you logged by passing the

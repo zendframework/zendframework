@@ -87,7 +87,6 @@ abstract class Zend_XmlRpc_Value
     const XMLRPC_TYPE_NIL       = 'nil';
     const XMLRPC_TYPE_APACHENIL = 'ex:nil';
 
-
     /**
      * Get the native XML-RPC type (the type is one of the Zend_XmlRpc_Value::XMLRPC_TYPE_* constants)
      *
@@ -227,7 +226,7 @@ abstract class Zend_XmlRpc_Value
      * @return Zend_XmlRpc_Value
      * @static
      */
-    private static function _phpVarToNativeXmlRpc($value)
+    protected static function _phpVarToNativeXmlRpc($value)
     {
         switch (gettype($value)) {
             case 'object':
@@ -291,7 +290,7 @@ abstract class Zend_XmlRpc_Value
      * @return Zend_XmlRpc_Value
      * @static
      */
-    private static function _xmlStringToNativeXmlRpc($xml)
+    protected static function _xmlStringToNativeXmlRpc($xml)
     {
         self::_createSimpleXMLElement($xml);
 
@@ -388,7 +387,7 @@ abstract class Zend_XmlRpc_Value
         return $xmlrpcValue;
     }
 
-    private static function _createSimpleXMLElement(&$xml)
+    protected static function _createSimpleXMLElement(&$xml)
     {
         if ($xml instanceof SimpleXMLElement) {
             return;
@@ -411,7 +410,7 @@ abstract class Zend_XmlRpc_Value
      * @param string &$value Value bind variable
      * @return void
      */
-    private static function _extractTypeAndValue(SimpleXMLElement $xml, &$type, &$value)
+    protected static function _extractTypeAndValue(SimpleXMLElement $xml, &$type, &$value)
     {
         list($type, $value) = each($xml);
 
@@ -437,7 +436,7 @@ abstract class Zend_XmlRpc_Value
      * @param $xml
      * @return void
      */
-    private function _setXML($xml)
+    protected function _setXML($xml)
     {
         $this->_as_xml = $xml;
     }

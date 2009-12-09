@@ -76,11 +76,11 @@ class Zend_Log_Writer_Db extends Zend_Log_Writer_Abstract
     static public function factory($config)
     {
         $config = self::_parseConfig($config);
-        $config = $config + array(
+        $config = array_merge(array(
             'db'        => null, 
             'table'     => null, 
             'columnMap' => null,
-        );
+        ), $config);
         
         if (isset($config['columnmap'])) {
             $config['columnMap'] = $config['columnmap'];

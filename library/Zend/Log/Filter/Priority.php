@@ -72,10 +72,10 @@ class Zend_Log_Filter_Priority extends Zend_Log_Filter_Abstract
     static public function factory($config) 
     {
         $config = self::_parseConfig($config);
-        $config = $config + array(
+        $config = array_merge(array(
             'priority' => null, 
             'operator' => null,
-        );
+        ), $config);
 
         // Add support for constants
         if (is_string($config['priority'])) {

@@ -21,14 +21,17 @@
  */
 
 /**
+ * Resource for initializing the locale
+ *
+ * @uses       Zend_Application_Resource_ResourceAbstract
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
-class Zend_Application_Resource_Zendmonitor extends Zend_Application_Resource_ResourceAbstract
+class Zend_Application_Resource_Log
+    extends Zend_Application_Resource_ResourceAbstract
 {
     /**
      * @var Zend_Log
@@ -36,8 +39,8 @@ class Zend_Application_Resource_Zendmonitor extends Zend_Application_Resource_Re
     protected $_log;
 
     /**
-     * Initialize log resource
-     * 
+     * Defined by Zend_Application_Resource_Resource
+     *
      * @return Zend_Log
      */
     public function init()
@@ -46,29 +49,24 @@ class Zend_Application_Resource_Zendmonitor extends Zend_Application_Resource_Re
     }
 
     /**
-     * Get log instance
-     *
-     * Lazy-loads instance if not registered
-     * 
-     * @return Zend_Log
-     */
-    public function getLog()
-    {
-        if (null === $this->_log) {
-            $this->setLog(new Zend_Log(new Zend_Log_Writer_ZendMonitor()));
-        }
-        return $this->_log;
-    }
-
-    /**
-     * Set log instance
+     * Attach logger
      * 
      * @param  Zend_Log $log 
-     * @return Zend_Application_Resource_Zendmonitor
+     * @return Zend_Application_Resource_Log
      */
     public function setLog(Zend_Log $log)
     {
         $this->_log = $log;
         return $this;
+    }
+
+    public function getLog()
+    {
+        if (null === $this->_log) {
+            $options = $this->getOptions();
+            $log = Zend_Log::factory($options);
+            $this->setLog($log);
+        }
+        return $this->_log;
     }
 }

@@ -92,10 +92,10 @@ class Zend_Log_Writer_Stream extends Zend_Log_Writer_Abstract
     static public function factory($config)
     {
         $config = self::_parseConfig($config);
-        $config = $config + array(
+        $config = array_merge(array(
             'stream' => null, 
             'mode'   => null,
-        );
+        ), $config);
 
         $streamOrUrl = isset($config['url']) ? $config['url'] : $config['stream']; 
         

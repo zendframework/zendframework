@@ -44,28 +44,6 @@ $logger = Zend_Log::factory(array(
     </para>
 
     <para>
-        If you plan on only providing a single writer, you can use a slightly more compact syntax:
-    </para>
-
-    <programlisting language="php"><![CDATA[
-$logger = Zend_Log::factory(array(
-    'writerName'   => 'Stream',
-    'writerParams' => array(
-        'stream'   => '/tmp/zend.log',
-    ),
-    'filterName'   => 'Priority',
-    'filterParams' => array(
-        'priority' => Zend_Log::WARN,
-    ),
-));
-]]></programlisting>
-
-    <para>
-        We recommend using embedded arrays/configuration, however, as this provides more flexibility
-        later should you need to add log writers.
-    </para>
-
-    <para>
         Each writer can be defined with the following keys:
     </para>
 

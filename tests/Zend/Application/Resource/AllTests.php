@@ -35,11 +35,11 @@ require_once 'Zend/Application/Resource/DojoTest.php';
 require_once 'Zend/Application/Resource/FrontcontrollerTest.php';
 require_once 'Zend/Application/Resource/LayoutTest.php';
 require_once 'Zend/Application/Resource/LocaleTest.php';
+require_once 'Zend/Application/Resource/LogTest.php';
 require_once 'Zend/Application/Resource/ModulesTest.php';
 require_once 'Zend/Application/Resource/NavigationTest.php';
 require_once 'Zend/Application/Resource/SessionTest.php';
 require_once 'Zend/Application/Resource/ViewTest.php';
-require_once 'Zend/Application/Resource/ZendmonitorTest.php';
 
 /**
  * @category   Zend
@@ -67,11 +67,11 @@ class Zend_Application_Resource_AllTests
         $suite->addTestSuite('Zend_Application_Resource_FrontcontrollerTest');
         $suite->addTestSuite('Zend_Application_Resource_LayoutTest');
         $suite->addTestSuite('Zend_Application_Resource_LocaleTest');
+        $suite->addTestSuite('Zend_Application_Resource_LogTest');
         $suite->addTestSuite('Zend_Application_Resource_ModulesTest');
         $suite->addTestSuite('Zend_Application_Resource_NavigationTest');
         $suite->addTestSuite('Zend_Application_Resource_SessionTest');
         $suite->addTestSuite('Zend_Application_Resource_ViewTest');
-        $suite->addTestSuite('Zend_Application_Resource_ZendmonitorTest');
 
         return $suite;
     }

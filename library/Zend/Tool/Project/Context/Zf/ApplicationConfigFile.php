@@ -92,7 +92,7 @@ bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.params.displayExceptions = 0
-resources.zendmonitor[] =
+resources.log.zendmonitor.writerName = "ZendMonitor"
 
 [staging : production]
 

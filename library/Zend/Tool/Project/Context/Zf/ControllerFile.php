@@ -149,9 +149,9 @@ switch (\$errors->type) {
         break;
 }
 
-// Log to Zend Monitor, if logger available
-if (\$monitor = \$this->getMonitorLog()) {
-    \$monitor->crit(\$this->view->message, \$errors->exception);
+// Log exception, if logger available
+if (\$log = \$this->getLog()) {
+    \$log->crit(\$this->view->message, \$errors->exception);
 }
 
 // conditionally display exceptions
@@ -163,13 +163,13 @@ if (\$this->getInvokeArg('displayExceptions') == true) {
 EOS
                                 )),
                             new Zend_CodeGenerator_Php_Method(array(
-                                'name' => 'getMonitorLog',
+                                'name' => 'getLog',
                                 'body' => <<<EOS
 \$bootstrap = \$this->getInvokeArg('bootstrap');
-if (!\$bootstrap->hasPluginResource('ZendMonitor')) {
+if (!\$bootstrap->hasPluginResource('Log')) {
     return false;
 }
-\$log = \$bootstrap->getResource('ZendMonitor');
+\$log = \$bootstrap->getResource('Log');
 return \$log;
 EOS
                                 )),

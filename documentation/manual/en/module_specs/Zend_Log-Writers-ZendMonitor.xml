@@ -103,12 +103,18 @@ $log->info('Exception occurred', array(
         <title>Integration with Zend_Application</title>
 
         <para>
-            The <classname>ZendMonitor</classname> log writer has a corresponding <link
-                linkend="zend.application.available-resources.zendmonitor"><classname>Zend_Application</classname>
-                bootstrap resource</link>. If you create your
-            project using the <command>zf.sh</command> or <command>zf.bat</command> command, this
-            resource will be registered for you by default, and used in your
-            <classname>ErrorController</classname> to log application exceptions.
+            By default, the <command>zf.sh</command> and <command>zf.bat</command> commands add
+            configuration for the <link
+                linkend="zend.application.available-resources.log"><classname>Zend_Application</classname>
+                log resource</link>, which includes configuration for the
+            <classname>ZendMonitor</classname> log writer. Additionally, the
+            <classname>ErrorController</classname> uses the configured logger to log application
+            exceptions -- providing you with Zend Monitor event integration by default.
+        </para>
+
+        <para>
+            As noted previously, if the Monitor API is not detected in your PHP installation, the
+            logger will simply act as a null logger.
         </para>
     </note>
 </sect2>

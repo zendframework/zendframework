@@ -222,8 +222,7 @@ class Zend_Log
             $namespace = $config[ $type . 'Namespace' ];
         }
 
-        $fullClassName = strtolower($namespace . '_' . $className);
-        $fullClassName = str_replace(' ', '_', ucwords(str_replace('_', ' ', $fullClassName)));
+        $fullClassName = $namespace . '_' . $className;
         return $fullClassName;
     }
 

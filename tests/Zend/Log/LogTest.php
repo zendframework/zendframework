@@ -276,4 +276,15 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger = Zend_Log::factory($cfg['log']);
         $this->assertTrue($logger instanceof Zend_Log);
     }
+
+    public function testFactoryUsesNameAndNamespaceWithoutModifications() 
+    {
+        $cfg = array('log' => array('memory' => array(
+            'writerName'      => "ZendMonitor", 
+            'writerNamespace' => "Zend_Log_Writer", 
+        )));
+
+        $logger = Zend_Log::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Zend_Log);
+    }
 }

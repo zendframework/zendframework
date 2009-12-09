@@ -307,6 +307,7 @@
         <xi:include href="module_specs/Zend_Log-Writers.xml" parse="xml" />
         <xi:include href="module_specs/Zend_Log-Formatters.xml" />
         <xi:include href="module_specs/Zend_Log-Filters.xml" />
+        <xi:include href="module_specs/Zend_Log-Factory.xml" />
     </chapter>
 
     <chapter id="zend.mail">

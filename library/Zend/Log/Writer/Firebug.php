@@ -90,7 +90,7 @@ class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
      */
     static public function factory($config)
     {
-        return new self($config);
+        return new self();
     }
 
     /**

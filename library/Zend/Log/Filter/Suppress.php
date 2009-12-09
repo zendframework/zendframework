@@ -72,6 +72,6 @@ class Zend_Log_Filter_Suppress extends Zend_Log_Filter_Abstract
      */
     static public function factory($config)
     {
-        return new self($config);
+        return new self();
     }
 }

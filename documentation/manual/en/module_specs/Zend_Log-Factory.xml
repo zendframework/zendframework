@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.log.factory">
+    <title>Using the Factory to Create a Log</title>
+
+    <para>
+        In addition to direct instantiation, you may also use the static
+        <methodname>factory()</methodname> method to instantiate a Log instance, as well as to
+        configure attached writers and their filters. Using the factory, you can attach zero or
+        more writers. Configuration may be passed as either an array or a
+        <classname>Zend_Config</classname> instance.
+    </para>
+
+    <para>
+        As an example:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$logger = Zend_Log::factory(array(
+    array(
+        'writerName'   => 'Stream',
+        'writerParams' => array(
+            'stream'   => '/tmp/zend.log',
+        ),
+        'filterName'   => 'Priority',
+        'filterParams' => array(
+            'priority' => Zend_Log::WARN,
+        ),
+    ),
+    array(
+        'writerName'   => 'Firebug',
+        'filterName'   => 'Priority',
+        'filterParams' => array(
+            'priority' => Zend_Log::INFO,
+        ),
+    ),
+));
+]]></programlisting>
+
+    <para>
+        The above will instantiate a logger with two writers, one for writing to a local file,
+        another for sending data to Firebug. Each has an attached priority filter, with different
+        maximum priorities.
+    </para>
+
+    <para>
+        If you plan on only providing a single writer, you can use a slightly more compact syntax:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$logger = Zend_Log::factory(array(
+    'writerName'   => 'Stream',
+    'writerParams' => array(
+        'stream'   => '/tmp/zend.log',
+    ),
+    'filterName'   => 'Priority',
+    'filterParams' => array(
+        'priority' => Zend_Log::WARN,
+    ),
+));
+]]></programlisting>
+
+    <para>
+        We recommend using embedded arrays/configuration, however, as this provides more flexibility
+        later should you need to add log writers.
+    </para>
+
+    <para>
+        Each writer can be defined with the following keys:
+    </para>
+
+    <variablelist>
+        <varlistentry>
+            <term>writerName (required)</term>
+
+            <listitem>
+                <para>
+                    The "short" name of a log writer; the name of the log writer minus the leading
+                    class prefix/namespace. See the "writerNamespace" entry below for more details.
+                    Examples: "Mock", "Stream", "Firebug".
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>writerParams (optional)</term>
+
+            <listitem>
+                <para>
+                    An associative array of parameters to use when instantiating the log writer.
+                    Each log writer's <methodname>factory()</methodname> method will map these to
+                    constructor arguments, as noted below.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>writerNamespace (optional)</term>
+
+            <listitem>
+                <para>
+                    The class prefix/namespace to use when constructing the final log writer
+                    classname. By default, if this is not provided, "Zend_Log_Writer" is assumed;
+                    however, you can pass your own namespace if you are using a custom log writer.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>filterName (optional)</term>
+
+            <listitem>
+                <para>
+                    The "short" name of a filter to use with the given log writer; the name of the
+                    filter minus the leading class prefix/namespace. See the "filterNamespace" entry
+                    below for more details.  Examples: "Message", "Priority".
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>filterParams (optional)</term>
+
+            <listitem>
+                <para>
+                    An associative array of parameters to use when instantiating the log filter.
+                    Each log filter's <methodname>factory()</methodname> method will map these to
+                    constructor arguments, as noted below.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>filterNamespace (optional)</term>
+
+            <listitem>
+                <para>
+                    The class prefix/namespace to use when constructing the final log filter
+                    classname. By default, if this is not provided, "Zend_Log_Filter" is assumed;
+                    however, you can pass your own namespace if you are using a custom log filter.
+                </para>
+            </listitem>
+        </varlistentry>
+    </variablelist>
+
+    <para>
+        Each writer and each filter has specific options.
+    </para>
+
+    <sect2 id="zend.log.factory.writer-options">
+        <title>Writer Options</title>
+
+        <sect3 id="zend.log.factory.writer-options.db">
+            <title>Zend_Log_Writer_Db Options</title>
+
+            <variablelist>
+                <varlistentry>
+                    <term>db</term>
+
+                    <listitem>
+                        <para>
+                            A <classname>Zend_Db_Adapter</classname> instance.
+                        </para>
+                    </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                    <term>table</term>
+
+                    <listitem>
+                        <para>
+                            The name of the table in the RDBMS that will contain log entries.
+                        </para>
+                    </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                    <term>columnMap</term>
+
+                    <listitem>
+                        <para>
+                            An associative array mapping database table column names to log event
+                            fields.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.firebug">
+            <title>Zend_Log_Writer_Firebug Options</title>
+
+            <para>
+                This log writer takes no options; any provided will be ignored.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.mail">
+            <title>Zend_Log_Writer_Mail Options</title>
+
+            <para>
+                <classname>Zend_Log_Writer_Mail</classname> currently (as of 1.10) does not
+                implement a factory, and will raise an exception if you attempt to instantiate it
+                via <methodname>Zend_Log::factory()</methodname>.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.mock">
+            <title>Zend_Log_Writer_Mock Options</title>
+
+            <para>
+                This log writer takes no options; any provided will be ignored.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.null">
+            <title>Zend_Log_Writer_Null Options</title>
+
+            <para>
+                This log writer takes no options; any provided will be ignored.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.stream">
+            <title>Zend_Log_Writer_Stream Options</title>
+
+            <variablelist>
+                <varlistentry>
+                    <term>stream|url</term>
+
+                    <listitem>
+                        <para>
+                            A valid PHP stream identifier to which to log.
+                        </para>
+                    </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                    <term>mode</term>
+
+                    <listitem>
+                        <para>
+                            The I/O mode with which to log; defaults to "a", for "append".
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.syslog">
+            <title>Zend_Log_Writer_Syslog Options</title>
+
+            <variablelist>
+                <varlistentry>
+                    <term>application</term>
+
+                    <listitem>
+                        <para>
+                            Application name used by the syslog writer.
+                        </para>
+                    </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                    <term>facility</term>
+
+                    <listitem>
+                        <para>
+                            Facility used by the syslog writer.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.zendmonitor">
+            <title>Zend_Log_Writer_ZendMonitor Options</title>
+
+            <para>
+                This log writer takes no options; any provided will be ignored.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.log.factory.filter-options">
+        <title>Filter Options</title>
+
+        <sect3 id="zend.log.factory.filter-options.message">
+            <title>Zend_Log_Filter_Message Options</title>
+
+            <variablelist>
+                <varlistentry>
+                    <term>regexp</term>
+
+                    <listitem>
+                        <para>
+                            Regular expression that must be matched in order to log a message.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </sect3>
+
+        <sect3 id="zend.log.factory.filter-options.priority">
+            <title>Zend_Log_Filter_Priority Options</title>
+
+            <variablelist>
+                <varlistentry>
+                    <term>priority</term>
+
+                    <listitem>
+                        <para>
+                            The maximum priority level by which messages will be logged.
+                        </para>
+                    </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                    <term>operator</term>
+
+                    <listitem>
+                        <para>
+                            The comparison operator by which to do priority comparisons; defaults to
+                            "&lt;=".
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </sect3>
+
+        <sect3 id="zend.log.factory.filter-options.suppress">
+            <title>Zend_Log_Writer_Suppress Options</title>
+
+            <para>
+                This log filter takes no options; any provided will be ignored.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.log.factory.custom">
+        <title>Creating Configurable Writers and Filters</title>
+
+        <para>
+            If you find yourself needing to write your own log writers and/or filters, you can make
+            them compatible with <methodname>Zend_Log::factory()</methodname> very easily.
+        </para>
+
+        <para>
+            At the minimum, you need to implement
+            <interfacename>Zend_Log_FactoryInterface</interfacename>, which expects a static
+            <methodname>factory()</methodname> method that accepts a single argument,
+            <varname>$config</varname>, which may be either an array or
+            <classname>Zend_Config</classname> object. If your log writer extends
+            <classname>Zend_Log_Writer_Abstract</classname>, or your log filter extends
+            <classname>Zend_Log_Filter_Abstract</classname>, you will pick this up for free.
+        </para>
+
+        <para>
+            Then, simply define mappings between the accepted configuration and any constructor
+            arguments. As an example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
+{
+    public function __construct($bar, $baz)
+    {
+        // ...
+    }
+
+    public static function factory($config)
+    {
+        if ($config instanceof Zend_Config) {
+            $config = $config->toArray();
+        }
+        if (!is_array($config)) {
+            throw new Exception(
+                'factory expects an array or Zend_Config instance'
+            );
+        }
+
+        $default = array(
+            'bar' => null,
+            'baz' => null,
+        );
+        $config = array_merge($default, $config);
+
+        return new self(
+            $config['bar'],
+            $config['baz']
+        );
+    }
+}
+]]></programlisting>
+
+        <para>
+            Alternately, you could call appropriate setters after instantiation, but prior to
+            returning the instance:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
+{
+    public function __construct($bar = null, $baz = null)
+    {
+        // ...
+    }
+
+    public function setBar($value)
+    {
+        // ...
+    }
+
+    public function setBaz($value)
+    {
+        // ...
+    }
+
+    public static function factory($config)
+    {
+        if ($config instanceof Zend_Config) {
+            $config = $config->toArray();
+        }
+        if (!is_array($config)) {
+            throw new Exception(
+                'factory expects an array or Zend_Config instance'
+            );
+        }
+
+        $writer = new self();
+        if (isset($config['bar'])) {
+            $writer->setBar($config['bar']);
+        }
+        if (isset($config['baz'])) {
+            $writer->setBaz($config['baz']);
+        }
+        return $writer;
+    }
+}
+]]></programlisting>
+    </sect2>
+</sect1>

@@ -127,14 +127,7 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
      */
     static public function factory($config)
     {
-        throw new Zend_Exception('TODO: Implement');
-//        $config = self::_parseConfig($config);
-//        $config = $config + array('mail'=>NULL, 'layout'=>NULL);
-//        
-//        return new self(
-//            $config['mail'],
-//            $config['layout']
-//        );
+        throw new Zend_Exception('Zend_Log_Writer_Mail does not currently implement a factory');
     }
 
     /**

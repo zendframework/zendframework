@@ -31,7 +31,7 @@ require_once 'Zend/Log/Filter/Interface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Log_Filter_Priority implements Zend_Log_Filter_Interface
+class Zend_Log_Filter_Priority extends Zend_Log_Filter_Abstract
 {
     /**
      * @var integer
@@ -51,7 +51,7 @@ class Zend_Log_Filter_Priority implements Zend_Log_Filter_Interface
      * @param  string   $operator  Comparison operator
      * @throws Zend_Log_Exception
      */
-    public function __construct($priority, $operator = '<=')
+    public function __construct($priority, $operator = NULL)
     {
         if (! is_integer($priority)) {
             require_once 'Zend/Log/Exception.php';
@@ -59,7 +59,30 @@ class Zend_Log_Filter_Priority implements Zend_Log_Filter_Interface
         }
 
         $this->_priority = $priority;
-        $this->_operator = $operator;
+        $this->_operator = is_null($operator) ? '<=' : $operator;
+    }
+
+    /**
+     * Create a new instance of Zend_Log_Filter_Priority
+     * 
+     * @exception Zend_Log_Exception
+     * @param mixed $config
+     * @return Zend_Log_Filter_Priority
+     */
+    static public function factory($config) 
+    {
+        $config = self::_parseConfig($config);
+        $config = $config + array('priority'=>NULL, 'operator'=>NULL);
+
+        // Add support for constants
+        if (is_string($config['priority'])) {
+            $config['priority'] = constant($config['priority']);
+        }
+
+        return new self(
+            $config['priority'], 
+            $config['operator']
+        );
     }
 
     /**

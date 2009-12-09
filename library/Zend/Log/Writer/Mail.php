@@ -117,6 +117,25 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
         $this->_layout    = $layout;
         $this->_formatter = new Zend_Log_Formatter_Simple();
     }
+    
+    /**
+     * Create a new instance of Zend_Log_Writer_Mail
+     * 
+     * @exception Zend_Log_Exception
+     * @param mixed $config
+     * @return Zend_Log_Writer_Mail
+     */
+    static public function factory($config)
+    {
+        throw new Zend_Exception('TODO: Implement');
+//        $config = self::_parseConfig($config);
+//        $config = $config + array('mail'=>NULL, 'layout'=>NULL);
+//        
+//        return new self(
+//            $config['mail'],
+//            $config['layout']
+//        );
+    }
 
     /**
      * Places event line into array of lines to be used as message body.

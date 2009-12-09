@@ -31,7 +31,7 @@ require_once 'Zend/Log/Filter/Priority.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-abstract class Zend_Log_Writer_Abstract
+abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
 {
     /**
      * @var array of Zend_Log_Filter_Interface
@@ -104,4 +104,26 @@ abstract class Zend_Log_Writer_Abstract
      */
     abstract protected function _write($event);
 
+    /**
+     * Validate and optionally convert the config to array
+     * 
+     * @exception Zend_Log_Exception
+     * @param mixed $config Zend_Config or Array
+     * @return array
+     */
+    static protected function _parseConfig($config)
+    {
+        if ($config instanceof Zend_Config) {
+            $config = $config->asArray();
+        }
+
+        if (!is_array($config)) {
+            require_once 'Zend/Log/Exception.php';
+            throw new Zend_Log_Exception(
+				'Configuration must be an array or instance of Zend_Config'
+			);
+        }
+
+        return $config;
+    }
 }

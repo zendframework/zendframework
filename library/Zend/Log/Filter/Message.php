@@ -31,7 +31,7 @@ require_once 'Zend/Log/Filter/Interface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Log_Filter_Message implements Zend_Log_Filter_Interface
+class Zend_Log_Filter_Message extends Zend_Log_Filter_Abstract
 {
     /**
      * @var string
@@ -51,6 +51,23 @@ class Zend_Log_Filter_Message implements Zend_Log_Filter_Interface
             throw new Zend_Log_Exception("Invalid regular expression '$regexp'");
         }
         $this->_regexp = $regexp;
+    }
+
+    /**
+     * Create a new instance of Zend_Log_Filter_Message
+     * 
+     * @exception Zend_Log_Exception
+     * @param mixed $config
+     * @return Zend_Log_Filter_Message
+     */
+    static public function factory($config) 
+    {
+        $config = self::_parseConfig($config);
+        $config = $config + array('regexp'=>NULL);
+
+        return new self(
+            $config['regexp']
+        );
     }
 
     /**

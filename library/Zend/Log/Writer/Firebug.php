@@ -80,6 +80,18 @@ class Zend_Log_Writer_Firebug extends Zend_Log_Writer_Abstract
 
         $this->_formatter = new Zend_Log_Formatter_Firebug();
     }
+   
+    /**
+     * Create a new instance of Zend_Log_Writer_Firebug
+     * 
+     * @exception Zend_Log_Exception
+     * @param mixed $config
+     * @return Zend_Log_Writer_Firebug
+     */
+    static public function factory($config)
+    {
+        return new self($config);
+    }
 
     /**
      * Enable or disable the log writer.

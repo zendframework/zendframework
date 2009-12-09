@@ -31,7 +31,7 @@ require_once 'Zend/Log/Filter/Interface.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
-class Zend_Log_Filter_Suppress implements Zend_Log_Filter_Interface
+class Zend_Log_Filter_Suppress extends Zend_Log_Filter_Abstract
 {
     /**
      * @var boolean
@@ -63,4 +63,15 @@ class Zend_Log_Filter_Suppress implements Zend_Log_Filter_Interface
         return $this->_accept;
     }
 
+    /**
+     * Create a new instance of Zend_Log_Filter_Suppress
+     * 
+     * @exception Zend_Log_Exception
+     * @param mixed $config
+     * @return Zend_Log_Filter_Suppress
+     */
+    static public function factory($config)
+    {
+        return new self($config);
+    }
 }

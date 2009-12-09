@@ -293,35 +293,9 @@ abstract class Zend_XmlRpc_Value
      */
     private static function _xmlStringToNativeXmlRpc($xml)
     {
-        if (!$xml instanceof SimpleXMLElement) {
-            try {
-                $xml = new SimpleXMLElement($xml);
-            } catch (Exception $e) {
-                // The given string is not a valid XML
-                require_once 'Zend/XmlRpc/Value/Exception.php';
-                throw new Zend_XmlRpc_Value_Exception('Failed to create XML-RPC value from XML string: '.$e->getMessage(),$e->getCode());
-            }
-        }
+        self::_createSimpleXMLElement($xml);
 
-        $type = null;
-        $value = null;
-        list($type, $value) = each($xml);
-
-        if (!$type and $value === null) {
-            $namespaces = array('ex' => 'http://ws.apache.org/xmlrpc/namespaces/extensions');
-            foreach ($namespaces as $namespaceName => $namespaceUri) {
-                $namespaceXml = $xml->children($namespaceUri);
-                list($type, $value) = each($namespaceXml);
-                if ($type !== null) {
-                    $type = $namespaceName . ':' . $type;
-                    break;
-                }
-            }
-        }
-
-        if (!$type) {    // If no type was specified, the default is string
-            $type = self::XMLRPC_TYPE_STRING;
-        }
+        self::_extractTypeAndValue($xml, $type, $value);
 
         switch ($type) {
             // All valid and known XML-RPC native values
@@ -412,6 +386,51 @@ abstract class Zend_XmlRpc_Value
         $xmlrpcValue->_setXML($xml->asXML());
 
         return $xmlrpcValue;
+    }
+
+    private static function _createSimpleXMLElement(&$xml)
+    {
+        if ($xml instanceof SimpleXMLElement) {
+            return;
+        }
+
+        try {
+            $xml = new SimpleXMLElement($xml);
+        } catch (Exception $e) {
+            // The given string is not a valid XML
+            require_once 'Zend/XmlRpc/Value/Exception.php';
+            throw new Zend_XmlRpc_Value_Exception('Failed to create XML-RPC value from XML string: ' . $e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Extract XML/RPC type and value from SimpleXMLElement object
+     *
+     * @param SimpleXMLElement $xml
+     * @param string &$type Type bind variable
+     * @param string &$value Value bind variable
+     * @return void
+     */
+    private static function _extractTypeAndValue(SimpleXMLElement $xml, &$type, &$value)
+    {
+        list($type, $value) = each($xml);
+
+        if (!$type and $value === null) {
+            $namespaces = array('ex' => 'http://ws.apache.org/xmlrpc/namespaces/extensions');
+            foreach ($namespaces as $namespaceName => $namespaceUri) {
+                $namespaceXml = $xml->children($namespaceUri);
+                list($type, $value) = each($namespaceXml);
+                if ($type !== null) {
+                    $type = $namespaceName . ':' . $type;
+                    break;
+                }
+            }
+        }
+
+        // If no type was specified, the default is string
+        if (!$type) {
+            $type = self::XMLRPC_TYPE_STRING;
+        }
     }
 
     /**

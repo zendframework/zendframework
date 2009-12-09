@@ -17,7 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: NullTest.php 17573 2009-08-13 18:01:41Z alexander $
  */
 
 /** PHPUnit_Framework_TestCase */
@@ -42,4 +42,13 @@ class Zend_Log_Writer_NullTest extends PHPUnit_Framework_TestCase
         $writer->write(array('message' => 'foo', 'priority' => 42));
     }
 
+    public function testFactory()
+    {
+        $cfg = array('log' => array('memory' => array(
+            'writerName' => "Null"
+        )));
+
+        $logger = Zend_Log::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Zend_Log);
+    }
 }

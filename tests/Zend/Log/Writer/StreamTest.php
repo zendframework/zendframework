@@ -17,7 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: StreamTest.php 18950 2009-11-12 15:37:56Z alexander $
  */
 
 /** PHPUnit_Framework_TestCase */
@@ -144,5 +144,33 @@ class Zend_Log_Writer_StreamTest extends PHPUnit_Framework_TestCase
         fclose($stream);
 
         $this->assertContains($expected, $contents);
+    }
+    
+    public function testFactoryStream()
+    {
+        $cfg = array('log' => array('memory' => array(
+            'writerName'   => "Mock",
+            'writerParams' => array(
+                'stream' => 'php://memory',
+                'mode'   => 'a'
+            )
+        )));
+
+        $logger = Zend_Log::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Zend_Log);
+    }
+    
+    public function testFactoryUrl()
+    {
+        $cfg = array('log' => array('memory' => array(
+            'writerName'   => "Mock",
+            'writerParams' => array(
+                'url'  => 'http://localhost',
+                'mode' => 'a'
+            )
+        )));
+
+        $logger = Zend_Log::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Zend_Log);
     }
 }

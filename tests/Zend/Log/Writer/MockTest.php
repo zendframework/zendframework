@@ -17,7 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: MockTest.php 17573 2009-08-13 18:01:41Z alexander $
  */
 
 /** PHPUnit_Framework_TestCase */
@@ -46,4 +46,13 @@ class Zend_Log_Writer_MockTest extends PHPUnit_Framework_TestCase
         $this->assertSame(array($fields), $writer->events);
     }
 
+    public function testFactory()
+    {
+        $cfg = array('log' => array('memory' => array(
+            'writerName' => "Mock"
+        )));
+
+        $logger = Zend_Log::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Zend_Log);
+    }
 }

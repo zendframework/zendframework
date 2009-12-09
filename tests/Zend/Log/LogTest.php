@@ -17,7 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: LogTest.php 18950 2009-11-12 15:37:56Z alexander $
  */
 
 require_once dirname(__FILE__) . '/../../TestHelper.php';
@@ -52,7 +52,7 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
     public function testWriterCanBeAddedWithConstructor()
     {
         $logger = new Zend_Log($this->writer);
-        $logger->log($message = 'message-to-long', Zend_Log::INFO);
+        $logger->log($message = 'message-to-log', Zend_Log::INFO);
 
         rewind($this->log);
         $this->assertContains($message, stream_get_contents($this->log));
@@ -240,5 +240,40 @@ class Zend_Log_LogTest extends PHPUnit_Framework_TestCase
         $this->assertContains('info', array_keys($event));
         $info = $event['info'];
         $this->assertContains('nonesuch', $info);
+    }
+    
+    // Factory
+
+    public function testLogConstructFromConfigStream() 
+    {
+        $cfg = array('log' => array('memory' => array(
+            'writerName'      => "Stream", 
+            'writerNamespace' => "Zend_Log_Writer", 
+            'writerParams'    => array(
+                'stream'      => "php://memory"
+            )        
+        )));
+
+        $logger = Zend_Log::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Zend_Log);
+    }
+
+    public function testLogConstructFromConfigStreamAndFilter() 
+    {
+        $cfg = array('log' => array('memory' => array(
+            'writerName'      => "Stream", 
+            'writerNamespace' => "Zend_Log_Writer", 
+            'writerParams'    => array(
+                'stream'      => "php://memory"
+            ), 
+            'filterName'   => "Priority", 
+            'filterParams' => array(
+                'priority' => "Zend_Log::CRIT", 
+                'operator' => "<="
+             ),        
+        )));
+
+        $logger = Zend_Log::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Zend_Log);
     }
 }

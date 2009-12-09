@@ -17,7 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: MessageTest.php 18950 2009-11-12 15:37:56Z alexander $
  */
 
 /** PHPUnit_Framework_TestCase */
@@ -56,5 +56,18 @@ class Zend_Log_Filter_MessageTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($filter->accept(array('message' => 'foo accept bar')));
         $this->assertFalse($filter->accept(array('message' => 'foo reject bar')));
     }
+    
+    public function testFactory()
+    {
+        $cfg = array('log' => array('memory' => array(
+            'writerName'   => "Mock", 
+            'filterName'   => "Message", 
+            'filterParams' => array(
+                'regexp'   => "/42/" 
+             ),        
+        )));
 
+        $logger = Zend_Log::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Zend_Log);
+    }
 }

@@ -17,7 +17,7 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: PriorityTest.php 18950 2009-11-12 15:37:56Z alexander $
  */
 
 /** PHPUnit_Framework_TestCase */
@@ -69,5 +69,30 @@ class Zend_Log_Filter_PriorityTest extends PHPUnit_Framework_TestCase
             $this->assertRegExp('/must be an integer/i', $e->getMessage());
         }
     }
+    
+    public function testFactory()
+    {
+        $cfg = array('log' => array('memory' => array(
+            'writerName' => "Mock", 
+            'filterName' => "Priority", 
+            'filterParams' => array(
+                'priority' => "Zend_Log::CRIT", 
+                'operator' => "<="
+             ),        
+        )));
 
+        $logger = Zend_Log::factory($cfg['log']);
+        $this->assertTrue($logger instanceof Zend_Log);
+        
+        try {
+            $logger = Zend_Log::factory(array('Null' => array(
+                'writerName'   => 'Mock',
+                'filterName'   => 'Priority',
+                'filterParams' => array(),
+            )));            
+        } catch(Exception $e) {
+            $this->assertType('Zend_Log_Exception', $e);
+            $this->assertRegExp('/must be an integer/', $e->getMessage());
+        }
+    }
 }

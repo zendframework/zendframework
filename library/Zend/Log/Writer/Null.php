@@ -46,14 +46,12 @@ class Zend_Log_Writer_Null extends Zend_Log_Writer_Abstract
     /**
      * Create a new instance of Zend_Log_Writer_Null
      * 
-     * @exception Zend_Log_Exception
-     * @param mixed $config
+     * @param  array|Zend_Config $config
      * @return Zend_Log_Writer_Null
+     * @throws Zend_Log_Exception
      */
     static public function factory($config)
     {
-        return new self(
-            self::_parseConfig($config)
-        );
+        return new self();
     }
 }

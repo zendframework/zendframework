@@ -20,8 +20,8 @@
  * @version    $Id$
  */
 
-/** Zend_Log_Filter_Interface */
-require_once 'Zend/Log/Filter/Interface.php';
+/** Zend_Log_Filter_Abstract */
+require_once 'Zend/Log/Filter/Abstract.php';
 
 /**
  * @category   Zend
@@ -65,14 +65,17 @@ class Zend_Log_Filter_Priority extends Zend_Log_Filter_Abstract
     /**
      * Create a new instance of Zend_Log_Filter_Priority
      * 
-     * @exception Zend_Log_Exception
-     * @param mixed $config
+     * @param  array|Zend_Config $config
      * @return Zend_Log_Filter_Priority
+     * @throws Zend_Log_Exception
      */
     static public function factory($config) 
     {
         $config = self::_parseConfig($config);
-        $config = $config + array('priority'=>NULL, 'operator'=>NULL);
+        $config = $config + array(
+            'priority' => null, 
+            'operator' => null,
+        );
 
         // Add support for constants
         if (is_string($config['priority'])) {
@@ -95,5 +98,4 @@ class Zend_Log_Filter_Priority extends Zend_Log_Filter_Abstract
     {
         return version_compare($event['priority'], $this->_priority, $this->_operator);
     }
-
 }

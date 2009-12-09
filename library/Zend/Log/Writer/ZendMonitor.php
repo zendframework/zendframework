@@ -50,6 +50,18 @@ class Zend_Log_Writer_ZendMonitor extends Zend_Log_Writer_Abstract
     }
 
     /**
+     * Create a new instance of Zend_Log_Writer_ZendMonitor
+     * 
+     * @param  array|Zend_Config $config
+     * @return Zend_Log_Writer_Syslog
+     * @throws Zend_Log_Exception
+     */
+    static public function factory($config)
+    {
+        return new self();
+    }
+
+    /**
      * Is logging to this writer enabled?
      *
      * If the Zend Monitor extension is not enabled, this log writer will 

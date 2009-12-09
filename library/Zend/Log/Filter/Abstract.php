@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+/** @see Zend_Log_Filter_Interface */
+require_once 'Zend/Log/Filter/Interface.php';
+
+/** @see Zend_Log_FactoryInterface */
+require_once 'Zend/Log/FactoryInterface.php';
+
 /**
  * @category   Zend
  * @package    Zend_Log
@@ -34,9 +40,9 @@ abstract class Zend_Log_Filter_Abstract
     /**
      * Validate and optionally convert the config to array
      * 
-     * @exception Zend_Log_Exception
-     * @param mixed $config Zend_Config or Array
+     * @param  array|Zend_Config $config Zend_Config or Array
      * @return array
+     * @throws Zend_Log_Exception
      */
     static protected function _parseConfig($config)
     {

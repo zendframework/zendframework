@@ -90,7 +90,7 @@ class Zend_Log
      * Factory to construct the logger and one or more writers
      * based on the configuration array
      *
-     * @param mixed Array or instance of Zend_Config
+     * @param  array|Zend_Config Array or instance of Zend_Config
      * @return Zend_Log
      */
     static public function factory($config = array())
@@ -108,9 +108,7 @@ class Zend_Log
         
         if (!is_array(current($config))) {
             $log->addWriter(current($config));
-
         } else {
-
             foreach($config as $writer) {
                 $log->addWriter($writer);
             }
@@ -123,14 +121,14 @@ class Zend_Log
     /**
      * Construct a writer object based on a configuration array
      *
-     * @param array $spec config array with writer spec
+     * @param  array $spec config array with writer spec
      * @return Zend_Log_Writer_Abstract
      */
     protected function _constructWriterFromConfig($config)
     {
         $writer = $this->_constructFromConfig('writer', $config, $this->_defaultWriterNamespace);
 
-        if (! $writer instanceof Zend_Log_Writer_Abstract) {
+        if (!$writer instanceof Zend_Log_Writer_Abstract) {
             require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception("{$writerName} does not extend Zend_Log_Writer_Abstract!");
         }
@@ -146,14 +144,14 @@ class Zend_Log
     /**
      * Construct filter object from configuration array or Zend_Config object
      *
-     * @param mixed $config Zend_Config or Array
+     * @param  array|Zend_Config $config Zend_Config or Array
      * @return Zend_Log_Filter_Interface
      */
     protected function _constructFilterFromConfig($config)
     {
         $filter = $this->_constructFromConfig('filter', $config, $this->_defaultFilterNamespace);
 
-        if (! $filter instanceof Zend_Log_Filter_Interface) {
+        if (!$filter instanceof Zend_Log_Filter_Interface) {
             require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception("{$filterName} does not implement Zend_Log_Filter_Interface");
         }
@@ -182,13 +180,15 @@ class Zend_Log
             );
         }
 
-        $params = isset($config[ $type .'Params' ]) ? $config[ $type .'Params' ] : array();
+        $params    = isset($config[ $type .'Params' ]) ? $config[ $type .'Params' ] : array();
         $className = $this->getClassName($config, $type, $namespace);
-        Zend_Loader::loadClass($className);
+        if (!class_exists($className)) {
+            require_once 'Zend/Loader.php';
+            Zend_Loader::loadClass($className);
+        }
 
         $reflection = new ReflectionClass($className);
-        if (!$reflection->implementsInterface('Zend_Log_FactoryInterface'))
-        {        
+        if (!$reflection->implementsInterface('Zend_Log_FactoryInterface')) {        
             throw new Zend_Log_Exception(
                 'Driver does not implement Zend_Log_FactoryInterface and can not be constructed from config.'
             );
@@ -393,15 +393,15 @@ class Zend_Log
      */
     public function addWriter($writer)
     {
-        if ( is_array($writer) || $writer instanceof  Zend_Config) {
+        if (is_array($writer) || $writer instanceof  Zend_Config) {
             $writer = $this->_constructWriterFromConfig($writer);
         }
 
-        if(! $writer instanceof Zend_Log_Writer_Abstract) {
+        if (!$writer instanceof Zend_Log_Writer_Abstract) {
             require_once 'Zend/Log/Exception.php';
             throw new Zend_Log_Exception(
-              'Writer must be an instance of Zend_Log_Writer_Abstract ' .
-              'or you should pass a configuration array'
+                'Writer must be an instance of Zend_Log_Writer_Abstract'
+                . ' or you should pass a configuration array'
             );
         }
 
@@ -418,5 +418,4 @@ class Zend_Log
     public function setEventItem($name, $value) {
         $this->_extras = array_merge($this->_extras, array($name => $value));
     }
-
 }

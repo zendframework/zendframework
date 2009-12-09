@@ -107,9 +107,9 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
     /**
      * Validate and optionally convert the config to array
      * 
-     * @exception Zend_Log_Exception
-     * @param mixed $config Zend_Config or Array
+     * @param  array|Zend_Config $config Zend_Config or Array
      * @return array
+     * @throws Zend_Log_Exception
      */
     static protected function _parseConfig($config)
     {

@@ -37,5 +37,4 @@ interface Zend_Log_Filter_Interface
      * @return boolean            accepted?
      */
     public function accept($event);
-
 }

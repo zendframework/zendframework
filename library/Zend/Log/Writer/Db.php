@@ -69,14 +69,18 @@ class Zend_Log_Writer_Db extends Zend_Log_Writer_Abstract
     /**
      * Create a new instance of Zend_Log_Writer_Db
      * 
-     * @exception Zend_Log_Exception
-     * @param mixed $config
+     * @param  array|Zend_Config $config
      * @return Zend_Log_Writer_Db
+     * @throws Zend_Log_Exception
      */
     static public function factory($config)
     {
         $config = self::_parseConfig($config);
-        $config = $config + array('db'=>NULL, 'table'=>NULL, 'columnMap'=>NULL);
+        $config = $config + array(
+            'db'        => null, 
+            'table'     => null, 
+            'columnMap' => null,
+        );
         
         if (isset($config['columnmap'])) {
             $config['columnMap'] = $config['columnmap'];
@@ -132,5 +136,4 @@ class Zend_Log_Writer_Db extends Zend_Log_Writer_Abstract
 
         $this->_db->insert($this->_table, $dataToInsert);
     }
-
 }

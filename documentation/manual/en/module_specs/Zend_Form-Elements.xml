@@ -660,7 +660,7 @@ $messages = $element->getMessages();
                 have a different behaviour you must create your own instance of
                 <classname>Zend_Validate_NotEmpty</classname>. There you can define the behaviour of
                 this validator. See <ulink
-                    linkend="zend.validate.set.notempty">Zend_Validate_NotEmpty</ulink> for details.
+                    url="zend.validate.set.notempty">Zend_Validate_NotEmpty</ulink> for details.
             </para>
         </note>
 

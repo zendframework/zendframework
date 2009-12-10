@@ -416,8 +416,10 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
     public function testGetSetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_server->getEncoding());
-        $this->_server->setEncoding('ISO-8859-1');
+        $this->assertEquals('UTF-8', Zend_XmlRpc_Value::getGenerator()->getEncoding());
+        $this->assertSame($this->_server, $this->_server->setEncoding('ISO-8859-1'));
         $this->assertEquals('ISO-8859-1', $this->_server->getEncoding());
+        $this->assertEquals('ISO-8859-1', Zend_XmlRpc_Value::getGenerator()->getEncoding());
     }
 
     /**

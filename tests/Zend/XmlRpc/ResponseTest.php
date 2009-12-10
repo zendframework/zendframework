@@ -208,8 +208,10 @@ EOD;
     public function testSetGetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_response->getEncoding());
-        $this->_response->setEncoding('ISO-8859-1');
+        $this->assertEquals('UTF-8', Zend_XmlRpc_Value::getGenerator()->getEncoding());
+        $this->assertSame($this->_response, $this->_response->setEncoding('ISO-8859-1'));
         $this->assertEquals('ISO-8859-1', $this->_response->getEncoding());
+        $this->assertEquals('ISO-8859-1', Zend_XmlRpc_Value::getGenerator()->getEncoding());
     }
 
     public function testLoadXmlThrowsExceptionWithMissingNodes()

@@ -733,6 +733,19 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertSame('foobar', $o2->getProperty());
     }
 
+    public function testChangingExceptionResetsGeneratorObject()
+    {
+        $generator = Zend_XmlRpc_Value::getGenerator();
+        Zend_XmlRpc_Value::setEncoding('UTF-8');
+        $this->assertNotSame($generator, Zend_XmlRpc_Value::getGenerator());
+        $this->assertEquals($generator, Zend_XmlRpc_Value::getGenerator());
+
+        $generator = Zend_XmlRpc_Value::getGenerator();
+        Zend_XmlRpc_Value::setEncoding('ISO-8859-1');
+        $this->assertNotSame($generator, Zend_XmlRpc_Value::getGenerator());
+        $this->assertNotEquals($generator, Zend_XmlRpc_Value::getGenerator());
+    }
+
     // Exceptions
 
     public function testFactoryThrowsWhenInvalidTypeSpecified()

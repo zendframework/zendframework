@@ -97,6 +97,11 @@ abstract class Zend_XmlRpc_Value
         return $this->_type;
     }
 
+    /**
+     * Get XML generator instance
+     *
+     * @return Zend_XmlRpc_Generator_Abstract
+     */
     public static function getGenerator()
     {
         if (!self::$_generator) {
@@ -107,9 +112,28 @@ abstract class Zend_XmlRpc_Value
         return self::$_generator;
     }
 
+    /**
+     * Sets XML generator instance
+     *
+     * @param Zend_XmlRpc_Generator_Abstract $generator
+     * @return void
+     */
     public static function setGenerator(Zend_XmlRpc_Generator_Abstract $generator)
     {
         self::$_generator = $generator;
+    }
+
+    /**
+     * Changes the encoding of the generator
+     *
+     * @param string $encoding
+     * @return void
+     */
+    public static function setEncoding($encoding)
+    {
+        $generator = self::getGenerator();
+        $newGenerator = new $generator($encoding);
+        self::setGenerator($newGenerator);
     }
 
     /**

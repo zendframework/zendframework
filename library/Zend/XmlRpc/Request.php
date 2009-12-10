@@ -116,6 +116,7 @@ class Zend_XmlRpc_Request
     public function setEncoding($encoding)
     {
         $this->_encoding = $encoding;
+        Zend_XmlRpc_Value::setEncoding($encoding);
         return $this;
     }
 

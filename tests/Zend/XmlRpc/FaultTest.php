@@ -272,8 +272,10 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     public function testSetGetEncoding()
     {
         $this->assertEquals('UTF-8', $this->_fault->getEncoding());
+        $this->assertEquals('UTF-8', Zend_XmlRpc_Value::getGenerator()->getEncoding());
         $this->_fault->setEncoding('ISO-8859-1');
         $this->assertEquals('ISO-8859-1', $this->_fault->getEncoding());
+        $this->assertEquals('ISO-8859-1', Zend_XmlRpc_Value::getGenerator()->getEncoding());
     }
 
     public function testUnknownErrorIsUsedIfUnknownErrorCodeEndEmptyMessageIsPassed()

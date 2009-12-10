@@ -132,17 +132,24 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit_Framework_TestCas
     /**
      * @group ZF-8496
      */
-    public function testBootstrapShouldInitializeModuleAutoloader()
+    public function testBootstrapModuleAutoloaderShouldNotBeInitializedByDefault()
     {
-        $this->assertTrue($this->bootstrap->getResourceLoader() instanceof Zend_Application_Module_Autoloader);
+        $this->assertFalse($this->bootstrap->getResourceLoader() instanceof Zend_Application_Module_Autoloader);
     }
 
     /**
      * @group ZF-8496
      */
-    public function testBootstrapAutoloaderShouldHaveApplicationNamespaceByDefault()
+    public function testBootstrapShouldInitializeModuleAutoloaderWhenNamespaceSpecified()
     {
-        $al = $this->bootstrap->getResourceLoader();
+        $application = new Zend_Application('testing', array(
+            'appnamespace' => 'Application',
+        ));
+        $bootstrap   = new Zend_Application_Bootstrap_Bootstrap(
+            $application
+        );
+        $this->assertTrue($bootstrap->getResourceLoader() instanceof Zend_Application_Module_Autoloader);
+        $al = $bootstrap->getResourceLoader();
         $this->assertEquals('Application', $al->getNamespace());
     }
 
@@ -152,7 +159,7 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit_Framework_TestCas
     public function testBootstrapAutoloaderNamespaceShouldBeConfigurable()
     {
         $application = new Zend_Application('testing', array(
-            'defaultappnamespace' => 'Default',
+            'appnamespace' => 'Default',
         ));
         $bootstrap   = new Zend_Application_Bootstrap_Bootstrap(
             $application

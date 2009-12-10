@@ -90,6 +90,7 @@ phpSettings.display_errors = 0
 includePaths.library = APPLICATION_PATH "/../library"
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
+appnamespace = "Application"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.params.displayExceptions = 0
 resources.log.zendmonitor.writerName = "ZendMonitor"

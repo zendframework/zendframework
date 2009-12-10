@@ -36,10 +36,10 @@ class Zend_Application_Bootstrap_Bootstrap
     extends Zend_Application_Bootstrap_BootstrapAbstract
 {
     /**
-     * Default application resource namespace
-     * @var string
+     * Application resource namespace
+     * @var false|string
      */
-    protected $_defaultAppNamespace = 'Application';
+    protected $_appNamespace = false;
 
     /**
      * Application resource autoloader
@@ -116,11 +116,13 @@ class Zend_Application_Bootstrap_Bootstrap
      */
     public function getResourceLoader()
     {
-        if (null === $this->_resourceLoader) {
+        if ((null === $this->_resourceLoader)
+            && (false !== ($namespace = $this->getAppNamespace()))
+        ) {
             $r    = new ReflectionClass($this);
             $path = $r->getFileName();
             $this->setResourceLoader(new Zend_Application_Module_Autoloader(array(
-                'namespace' => $this->getDefaultAppNamespace(),
+                'namespace' => $namespace,
                 'basePath'  => dirname($path),
             )));
         }
@@ -128,24 +130,24 @@ class Zend_Application_Bootstrap_Bootstrap
     }
 
     /**
-     * Get defaultAppNamespace
+     * Get application namespace (used for module autoloading)
      *
      * @return string
      */
-    public function getDefaultAppNamespace()
+    public function getAppNamespace()
     {
-        return $this->_defaultAppNamespace;
+        return $this->_appNamespace;
     }
 
     /**
-     * Set defaultAppNamespace
+     * Set application namespace (for module autoloading)
      *
      * @param  string
      * @return Zend_Application_Bootstrap_Bootstrap
      */
-    public function setDefaultAppNamespace($value)
+    public function setAppNamespace($value)
     {
-        $this->_defaultAppNamespace = (string) $value;
+        $this->_appNamespace = (string) $value;
         return $this;
     }
 }

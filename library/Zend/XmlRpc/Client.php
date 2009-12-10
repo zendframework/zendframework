@@ -331,16 +331,23 @@ class Zend_XmlRpc_Client
                 );
                 $params = (array)$params;
                 foreach ($params as $key => $param) {
+
+                    if ($param instanceof Zend_XmlRpc_Value) {
+                        continue;
+                    }
+
                     $type = Zend_XmlRpc_Value::AUTO_DETECT_TYPE;
                     foreach ($signatures as $signature) {
                         if (!is_array($signature)) {
                             continue;
                         }
+
                         if (isset($signature['parameters'][$key])) {
                             $type = $signature['parameters'][$key];
                             $type = in_array($type, $validTypes) ? $type : Zend_XmlRpc_Value::AUTO_DETECT_TYPE;
                         }
                     }
+
                     $params[$key] = Zend_XmlRpc_Value::getXmlRpcValue($param, $type);
                 }
             }

@@ -222,7 +222,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-1797
+     * @group ZF-1797
      */
     public function testSuccesfulRpcMethodCallWithXmlRpcValueParameters()
     {
@@ -249,7 +249,7 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-2978
+     * @group ZF-2978
      */
     public function testSkippingSystemCallDisabledByDefault()
     {
@@ -257,15 +257,16 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see ZF-6993
+     * @group ZF-6993
      */
     public function testWhenPassingAStringAndAnIntegerIsExpectedParamIsConverted()
     {
         $this->mockIntrospector();
-        $this->mockedIntrospector->expects($this->exactly(2))
-                           ->method('getMethodSignature')
-                           ->with('test.method')
-                           ->will($this->returnValue(array(array('parameters' => array('int')))));
+        $this->mockedIntrospector
+             ->expects($this->exactly(2))
+             ->method('getMethodSignature')
+             ->with('test.method')
+             ->will($this->returnValue(array(array('parameters' => array('int')))));
 
         $expect = 'test.method response';
         $this->setServerResponseTo($expect);
@@ -278,6 +279,23 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expect, $this->xmlrpcClient->call('test.method', '1'));
         $params = $this->xmlrpcClient->getLastRequest()->getParams();
         $this->assertSame(1, $params[0]->getValue());
+    }
+
+    /**
+     * @group ZF-8074
+     */
+    public function testXmlRpcObjectsAreNotConverted()
+    {
+        $this->mockIntrospector();
+        $this->mockedIntrospector
+             ->expects($this->exactly(1))
+             ->method('getMethodSignature')
+             ->with('date.method')
+             ->will($this->returnValue(array(array('parameters' => array('dateTime.iso8601', 'string')))));
+
+        $expects = 'date.method response';
+        $this->setServerResponseTo($expects);
+        $this->assertSame($expects, $this->xmlrpcClient->call('date.method', array(Zend_XmlRpc_Value::getXmlRpcValue(time(), Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME), 'foo')));
     }
 
     public function testAllowsSkippingSystemCallForArrayStructLookup()

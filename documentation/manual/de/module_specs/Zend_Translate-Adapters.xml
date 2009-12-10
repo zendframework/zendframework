@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18786 -->
+<!-- EN-Revision: 19426 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.adapter">
 
@@ -245,8 +245,8 @@
                 <title>Rückschritt in PHP 5.3</title>
 
                 <para>
-                    Vor <acronym>PHP</acronym> 5.3 haben <function>parse_ini_file()</function> und
-                    <function>parse_ini_string()</function> nicht ASCII Zeichen in
+                    Vor <acronym>PHP</acronym> 5.3 haben <methodname>parse_ini_file()</methodname>
+                    und <methodname>parse_ini_string()</methodname> nicht ASCII Zeichen in
                     <acronym>INI</acronym> Optionsschlüsseln ohne Probleme behandelt. Aber beginnend
                     mit <acronym>PHP</acronym> 5.3 werden alle diese Schlüssel leise im
                     zurückgegebenen Array von beiden Funktionen entfernt. Wenn man Schlüssel hatte

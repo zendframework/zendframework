@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19418 -->
+<!-- EN-Revision: 19446 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
     <title>Zend_Db_Select</title>
@@ -793,12 +793,6 @@ $select = $db->select()
                 ist ein Wert der in die Expression eingesetzt wird.
                 <classname>Zend_Db_Select</classname> Quotiert den Wert und ersetzt ihn für ein
                 Fragezeichen ("<code>?</code>") in der Expression.
-            </para>
-
-            <para>
-                Wenn in eine Expression mehr als eine Variable eingesetzt werden soll muss der
-                String manuell formatiert werden und die Variablen müssen von Hand quotiert und
-                eingesetzt werden.
             </para>
 
             <example id="zend.db.select.building.where.example-param">

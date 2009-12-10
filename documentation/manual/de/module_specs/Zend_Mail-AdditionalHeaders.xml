@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17503 -->
+<!-- EN-Revision: 19450 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.additional-headers">
     <title>Zusätzliche Kopfzeilen</title>
 
     <para>
-        Beliebige Kopfzeilen können über die <methodname>addHeader()</methodname> Methode in einer
-        Mail gesetzt werden. Sie benötigt zwei Parameter, die den Namen und den Wert des Kopfzeilen
-        Feldes enthalten. Ein dritter, optionaler Parameter legt fest, ob die Kopfzeile einen oder
-        mehrere Werte enthalten darf:
+        <classname>Zend_Mail</classname> bietet verschiedene Methode um zusätzliche Mail Header zu
+        setzen:
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>setReplyTo($email, $name=null)</methodname>: Setzt den Reply-To:
+                    Header.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setDate($date = null)</methodname>: Setzt den Date: Header.
+                    Diese Methode verwendet standardmäßig den aktuellen Zeitpunkt. Man kann dieser
+                    Methode auch einen Zeitpunkt, einen Datumsstring oder eine Instanz von
+                    <classname>Zend_Date</classname> übergeben.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setMessageId($id = true)</methodname>: Setzt den Message-Id: Header.
+                    Diese Methode erzeugt standardmäßig automatisch eine Message ID. Oder man
+                    übergibt der Methode einen eigenen Message ID String. Diese Methode ruft intern
+                    <methodname>createMessageId()</methodname> auf.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </para>
+
+    <note>
+        <title>Return-Path</title>
+
+        <para>
+            Wenn man den Return-Path in eigenen Mail setzen will, sollte man unter <link
+                linkend="zend.mail.introduction.sendmail">Konfiguration des Sendmail
+                Transports</link> nachsehen. Unglücklicherweise führt die
+            <methodname>setReturnPath($email)</methodname> Methode dies nicht aus.
+        </para>
+    </note>
+
+    <para>
+        Weiters können eigene Mail Header gesetzt werden indem man die
+        <methodname>addHeader()</methodname> Methode verwendet. Sie benötigt zwei Parameter welche
+        den Namen und den Wert des Header Fields enthalten. Ein optionaler dritter Parameter
+        zeigt an ob der Header nur einen oder mehrere Werte enthalten soll:
     </para>
 
     <example id="zend.mail.additional-headers.example-1">
@@ -20,12 +62,6 @@ $mail->addHeader('X-greetingsTo', 'Mom', true); // mehrer Werte
 $mail->addHeader('X-greetingsTo', 'Dad', true);
 ]]></programlisting>
     </example>
-
-    <para>
-        Um den Reply-To: Header zu setzen gibt es die Funktion
-        <methodname>setReplyTo($email, $name=null)</methodname> weil zusätzliches spezielles
-        Escaping der unterschiedlichen Teile (Email und Name) notwendig ist.
-    </para>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

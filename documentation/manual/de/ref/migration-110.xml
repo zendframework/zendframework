@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18833 -->
+<!-- EN-Revision: 19457 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
@@ -57,6 +57,30 @@
                 Konstanten verwenden. Als Vorteil muss man den originalen String im englischen nicht
                 mehr übersetzen um die richtige Schreibweise zu erhalten.
             </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="migration.110.zend.translate">
+        <title>Zend_Translate</title>
+
+        <sect3 id="migration.110.zend.translate.xliff">
+            <title>Xliff Adapter</title>
+
+            <para>
+                In der Vergangenheit hat der Xliff Adapter den Source String als Message Id
+                verwendet. Laut dem Xliff Standard sollte die trans-unit Id verwendet werden.
+                Dieses Verhalten wurde mit Zend Framework 1.10 korrigiert. Jetzt wird
+                standardmäßig die trans-unit Id als Message Id verwendet.
+            </para>
+
+            <para>
+                Aber man kann trotzdem das falsch und alte Verhalten bekommen indem die
+                <property>useId</property> Option auf <constant>FALSE</constant> gesetzt wird.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$trans = new Zend_Translate('xliff', '/path/to/source', $locale, array('useId' => false));
+]]></programlisting>
         </sect3>
     </sect2>
 

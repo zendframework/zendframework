@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18004 -->
+<!-- EN-Revision: 19457 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.additional">
-
     <title>Zusätzliche Features für Übersetzungen</title>
 
     <para>
@@ -11,7 +10,6 @@
     </para>
 
     <sect2 id="zend.translate.additional.options">
-
         <title>Optionen für Adapter</title>
 
         <para>
@@ -179,6 +177,18 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             doppelte Hochkomma
                         </entry>
                         <entry><emphasis>0</emphasis></entry>
+                    </row>
+
+                    <row>
+                        <entry>useId</entry>
+                        <entry>Xliff</entry>
+                        <entry>
+                            Wenn diese Option auf <constant>FALSE</constant> gesetzt wird, dann wird
+                            der Source String als Message Id verwendet. Der Standardwert dieser
+                            Option ist <constant>TRUE</constant>, was bedeutet dass die Id vom
+                            trans-unit Element als Message Id verwendet wird
+                        </entry>
+                        <entry><emphasis>true</emphasis></entry>
                     </row>
                 </tbody>
             </tgroup>

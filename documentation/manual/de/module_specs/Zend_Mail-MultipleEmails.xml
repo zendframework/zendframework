@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18755 -->
+<!-- EN-Revision: 19426 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.multiple-emails">
     <title>Versand von mehreren E-Mails über eine SMTP Verbindung</title>
@@ -37,8 +37,8 @@ for ($i = 0; $i < 5; $i++) {
 
     <para>
         Wenn man eine separate Verbindung für jeden Mailtransport haben will, muß der Transport vor
-        und nach jedem Aufruf der <function>send()</function> Methode erstellt und gelöscht werden.
-        Oder alternativ kann die Verbindung zwischen jedem Transport, durch Zugriff auf das
+        und nach jedem Aufruf der <methodname>send()</methodname> Methode erstellt und gelöscht
+        werden. Oder alternativ kann die Verbindung zwischen jedem Transport, durch Zugriff auf das
         Protokoll Objekt des Transportes, manipuliert werden.
     </para>
 

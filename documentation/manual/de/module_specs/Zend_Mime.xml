@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 19440 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.mime">
     <title>Zend_Mime</title>
 
     <sect2 id="zend.mime.mime.introduction">
         <title>Einführung</title>
+
         <para>
             <classname>Zend_Mime</classname> ist eine Hilfsklasse für die Verarbeitung von
             mehrteiligen <acronym>MIME</acronym> Nachrichten. Es wird von <link
@@ -17,7 +18,8 @@
     </sect2>
 
     <sect2 id="zend.mime.mime.static">
-    <title>Statische Methoden und Konstanten</title>
+        <title>Statische Methoden und Konstanten</title>
+
         <para>
             <classname>Zend_Mime</classname> stellt einige einfache statische Hilfsmethoden für die
             <acronym>MIME</acronym> Verarbeitung bereit:
@@ -29,20 +31,44 @@
                         zurückgegeben.
                     </para>
                 </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Mime::encode()</methodname>: Codiert einen String mit der
+                        spezifizierten Kodierung.
+                    </para>
+                </listitem>
+
                 <listitem>
                     <para>
                         <methodname>Zend_Mime::encodeBase64()</methodname>: Codiert einen String in
                         die base64 Codierung.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>Zend_Mime::encodeQuotedPrintable()</methodname>: Codiert einen
                         String mit dem "quoted-printable" Mechanismus.
                     </para>
                 </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Mime::encodeBase64Header()</methodname>: Codiert einen
+                        String zu einer base64 Kodierung für Mail Header.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Mime::encodeQuotedPrintableHeader()</methodname>: Codiert
+                        einen String mit dem Quoted-Printable Mechanismus für Mail Header.
+                    </para>
+                </listitem>
             </itemizedlist>
         </para>
+
         <para>
             <classname>Zend_Mime</classname> definiert einen Satz Konstanten, die üblicherweise von
             <acronym>MIME</acronym> Nachrichten verwendet werden:
@@ -53,53 +79,80 @@
                         'application/octet-stream'
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Mime::TYPE_TEXT</constant>: 'text/plain'
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Mime::TYPE_HTML</constant>: 'text/html'
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Mime::ENCODING_7BIT</constant>: '7bit'
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Mime::ENCODING_8BIT</constant>: '8bit';
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Mime::ENCODING_QUOTEDPRINTABLE</constant>:
                         'quoted-printable'
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Mime::ENCODING_BASE64</constant>: 'base64'
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Mime::DISPOSITION_ATTACHMENT</constant>: 'attachment'
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Mime::DISPOSITION_INLINE</constant>: 'inline'
                     </para>
                 </listitem>
+
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::MULTIPART_ALTERNATIVE</constant>: 'multipart/alternative'
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::MULTIPART_MIXED</constant>: 'multipart/mixed'
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::MULTIPART_RELATED</constant>: 'multipart/related'
+                    </para>
+                </listitem>
             </itemizedlist>
         </para>
-        </sect2>
+    </sect2>
 
-        <sect2 id="zend.mime.mime.instantiation">
+    <sect2 id="zend.mime.mime.instantiation">
         <title>Zend_Mime instanziieren</title>
+
         <para>
             Wenn ein <classname>Zend_Mime</classname> instanziiert wird, wird eine
             <acronym>MIME</acronym> Abgrenzung gespeichert, die von allen nachfolgenden nicht
@@ -108,6 +161,7 @@
             Abgrenzung verwendet. Anderfalls wird eine zufällige <acronym>MIME</acronym> Abgrenzung
             während der Konstruktionsphase generiert.
         </para>
+
         <para>
             Ein <classname>Zend_Mime</classname> Objekt hat die folgenden Methoden:
             <itemizedlist>
@@ -117,12 +171,14 @@
                         <acronym>MIME</acronym> Abgrenzung zurück.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>boundaryLine()</methodname>: Gibt die komplette Zeile der
                         <acronym>MIME</acronym> Abgrenzung zurück.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>mimeEnd()</methodname>: Gibt die komplette Endzeile der

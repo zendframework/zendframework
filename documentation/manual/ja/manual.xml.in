@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19349 -->
+<!-- EN-Revision: 19550 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -324,6 +324,9 @@
         <xi:include href="module_specs/Zend_Log-Writers.xml" parse="xml" />
         <xi:include href="module_specs/Zend_Log-Formatters.xml" />
         <xi:include href="module_specs/Zend_Log-Filters.xml" />
+        <xi:include href="module_specs/Zend_Log-Factory.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Log-Factory.xml" /></xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.mail">

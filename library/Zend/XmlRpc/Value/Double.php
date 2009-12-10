@@ -47,7 +47,7 @@ class Zend_XmlRpc_Value_Double extends Zend_XmlRpc_Value_Scalar
         $this->_type = self::XMLRPC_TYPE_DOUBLE;
         $precision = (int)ini_get('precision');
         $formatString = '%1.' . $precision . 'f';
-        $this->_value = sprintf($formatString, (float)$value);
+        $this->_value = rtrim(sprintf($formatString, (float)$value), '0');
     }
 
     /**

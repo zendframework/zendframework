@@ -32,6 +32,7 @@ require_once 'Zend/XmlRpc/ResponseTest.php';
 require_once 'Zend/XmlRpc/FaultTest.php';
 require_once 'Zend/XmlRpc/ClientTest.php';
 require_once 'Zend/XmlRpc/ServerTest.php';
+require_once 'Zend/XmlRpc/GeneratorTest.php';
 require_once 'Zend/XmlRpc/Server/CacheTest.php';
 require_once 'Zend/XmlRpc/Server/FaultTest.php';
 
@@ -61,6 +62,7 @@ class Zend_XmlRpc_AllTests
         $suite->addTestSuite('Zend_XmlRpc_FaultTest');
         $suite->addTestSuite('Zend_XmlRpc_ClientTest');
         $suite->addTestSuite('Zend_XmlRpc_ServerTest');
+        $suite->addTestSuite('Zend_XmlRpc_GeneratorTest');
         $suite->addTestSuite('Zend_XmlRpc_Server_CacheTest');
         $suite->addTestSuite('Zend_XmlRpc_Server_FaultTest');
 

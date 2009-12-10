@@ -49,30 +49,27 @@ class Zend_XmlRpc_Value_Array extends Zend_XmlRpc_Value_Collection
 
 
     /**
-     * Return the XML code that represent an array native MXL-RPC value
+     * Generate the XML code that represent an array native MXL-RPC value
      *
-     * @return string
+     * @return void
      */
-    public function saveXML()
+    protected function _generateXml()
     {
-        if (!$this->_as_xml) {   // The XML code was not calculated yet
-            $dom   = new DOMDocument('1.0');
-            $value = $dom->appendChild($dom->createElement('value'));
-            $array = $value->appendChild($dom->createElement('array'));
-            $data  = $array->appendChild($dom->createElement('data'));
+        $generator = $this->getGenerator();
+        $generator->startElement('value')
+                  ->startElement('array')
+                  ->startElement('data');
 
-            if (is_array($this->_value)) {
-                foreach ($this->_value as $val) {
-                    /* @var $val Zend_XmlRpc_Value */
-                    $data->appendChild($dom->importNode($val->getAsDOM(), true));
-                }
+        if (is_array($this->_value)) {
+            foreach ($this->_value as $val) {
+                $val->generateXml();
             }
-
-            $this->_as_dom = $value;
-            $this->_as_xml = $this->_stripXmlDeclaration($dom);
         }
+        $generator->endElement('data')
+                  ->endElement('array')
+                  ->endElement('value');
 
-        return $this->_as_xml;
+        $this->_xml = (string)$generator;
     }
 }
 

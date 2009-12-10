@@ -53,12 +53,12 @@ abstract class Zend_XmlRpc_Value
     /**
      * XML code representation of this object (will be calculated only once)
      */
-    protected $_as_xml;
+    protected $_xml;
 
     /**
-     * DOMElement representation of object (will be calculated only once)
+     * @var Zend_XmlRpc_Generator_Abstract
      */
-    protected $_as_dom;
+    protected static $_generator;
 
     /**
      * Specify that the XML-RPC native type will be auto detected from a PHP variable type
@@ -97,6 +97,20 @@ abstract class Zend_XmlRpc_Value
         return $this->_type;
     }
 
+    public static function getGenerator()
+    {
+        if (!self::$_generator) {
+            require_once 'Zend/XmlRpc/Generator/DOMDocument.php';
+            self::$_generator = new Zend_XmlRpc_Generator_DOMDocument();
+        }
+
+        return self::$_generator;
+    }
+
+    public static function setGenerator(Zend_XmlRpc_Generator_Abstract $generator)
+    {
+        self::$_generator = $generator;
+    }
 
     /**
      * Return the value of this object, convert the XML-RPC native value into a PHP variable
@@ -111,31 +125,24 @@ abstract class Zend_XmlRpc_Value
      *
      * @return string
      */
-    abstract public function saveXML();
-
-    /**
-     * Return DOMElement representation of object
-     *
-     * @return DOMElement
-     */
-    public function getAsDOM()
+    public function saveXml()
     {
-        if (!$this->_as_dom) {
-            $doc = new DOMDocument('1.0');
-            $doc->loadXML($this->saveXML());
-            $this->_as_dom = $doc->documentElement;
+        if (!$this->_xml) {
+            $this->generateXml();
         }
-
-        return $this->_as_dom;
+        return $this->_xml;
     }
 
     /**
-     * @param DOMDocument $dom
-     * @return mixed
+     * Generate XML code that represent a native XML/RPC value
+     *
+     * @return void
      */
-    protected function _stripXmlDeclaration(DOMDocument $dom)
+    public function generateXml()
     {
-        return preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $dom->saveXML());
+        if (!$this->_xml) {
+            $this->_generateXml();
+        }
     }
 
     /**
@@ -438,9 +445,17 @@ abstract class Zend_XmlRpc_Value
      */
     protected function _setXML($xml)
     {
-        $this->_as_xml = $xml;
+        $this->_xml = $this->_stripXmlDeclaration($xml);
     }
 
+    /**
+     * @param DOMDocument $dom
+     * @return mixed
+     */
+    protected function _stripXmlDeclaration($xml)
+    {
+        return preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $xml);
+    }
 
     /**
      * Make sure a string will be safe for XML, convert risky characters to entities

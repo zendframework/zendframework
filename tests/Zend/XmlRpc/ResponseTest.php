@@ -122,7 +122,7 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
         $value    = $param->appendChild($dom->createElement('value'));
         $value->appendChild($dom->createElement('string', 'Return value'));
 
-        $xml = $dom->saveXML();
+        $xml = $dom->saveXml();
 
         $parsed = $this->_response->loadXml($xml);
         $this->assertTrue($parsed, $xml);
@@ -162,7 +162,7 @@ EOD;
     }
 
     /**
-     * helper for saveXML() and __toString() tests
+     * helper for saveXml() and __toString() tests
      *
      * @param string $xml
      * @return void
@@ -183,12 +183,12 @@ EOD;
     }
 
     /**
-     * saveXML() test
+     * saveXml() test
      */
     public function testSaveXML()
     {
         $this->_response->setReturnValue('return value');
-        $xml = $this->_response->saveXML();
+        $xml = $this->_response->saveXml();
         $this->_testXmlResponse($xml);
     }
 

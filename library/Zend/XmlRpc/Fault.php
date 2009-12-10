@@ -276,7 +276,7 @@ class Zend_XmlRpc_Fault
      *
      * @return string
      */
-    public function saveXML()
+    public function saveXml()
     {
         // Create fault value
         $faultStruct = array(
@@ -284,16 +284,15 @@ class Zend_XmlRpc_Fault
             'faultString' => $this->getMessage()
         );
         $value = Zend_XmlRpc_Value::getXmlRpcValue($faultStruct);
-        $valueDOM = new DOMDocument('1.0', $this->getEncoding());
-        $valueDOM->loadXML($value->saveXML());
 
-        // Build response XML
-        $dom  = new DOMDocument('1.0', $this->getEncoding());
-        $r    = $dom->appendChild($dom->createElement('methodResponse'));
-        $f    = $r->appendChild($dom->createElement('fault'));
-        $f->appendChild($dom->importNode($valueDOM->documentElement, 1));
+        $generator = Zend_XmlRpc_Value::getGenerator();
+        $generator->startElement('methodResponse')
+                  ->startElement('fault');
+        $value->saveXml();
+        $generator->endElement('fault')
+                  ->endElement('methodResponse');
 
-        return $dom->saveXML();
+        return $generator->flush();
     }
 
     /**

@@ -121,7 +121,7 @@ class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
         $time = time();
         $this->_request->addParam($time, Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME);
         $this->_request->setMethod('foo.bar');
-        $xml = $this->_request->saveXML();
+        $xml = $this->_request->saveXml();
         $sxl = new SimpleXMLElement($xml);
         $param = $sxl->params->param->value;
         $type  = 'dateTime.iso8601';
@@ -182,7 +182,7 @@ class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
             $value2->appendChild($dom->createElement('boolean', 1));
 
 
-        $xml = $dom->saveXML();
+        $xml = $dom->saveXml();
 
         try {
             $parsed = $this->_request->loadXml($xml);
@@ -272,7 +272,7 @@ class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * helper for saveXML() and __toString() tests
+     * helper for saveXml() and __toString() tests
      *
      * @param string $xml
      * @return void
@@ -321,7 +321,7 @@ class Zend_XmlRpc_RequestTest extends PHPUnit_Framework_TestCase
         $argv = array('string', true);
         $this->_request->setMethod('do.Something');
         $this->_request->setParams($argv);
-        $xml = $this->_request->saveXML();
+        $xml = $this->_request->saveXml();
         $this->_testXmlRequest($xml, $argv);
     }
 

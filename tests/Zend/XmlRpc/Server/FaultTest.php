@@ -243,13 +243,12 @@ class Zend_XmlRpc_Server_FaultTest extends PHPUnit_Framework_TestCase
 
         $xml = $dom->saveXML();
 
+        require_once 'Zend/XmlRpc/Server/Exception.php';
         $e = new Zend_XmlRpc_Server_Exception('Testing fault', 411);
         $fault = Zend_XmlRpc_Server_Fault::getInstance($e);
 
-        $this->assertEquals($xml, $fault->__toString());
+        $this->assertEquals(trim($xml), trim($fault->__toString()));
     }
-
-
 }
 
 class zxrs_fault_test_exception extends Exception {}

@@ -104,7 +104,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
             $value2 = $member2->appendChild($dom->createElement('value'));
             $value2->appendChild($dom->createElement('string', 'Error string'));
 
-        return $dom->saveXML();
+        return $dom->saveXml();
     }
 
     protected function _createNonStandardXml()
@@ -124,7 +124,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
             $member2->appendChild($dom->createElement('name', 'faultString'));
             $value2 = $member2->appendChild($dom->createElement('value', 'Error string'));
 
-        return $dom->saveXML();
+        return $dom->saveXml();
     }
 
     /**
@@ -210,7 +210,7 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * helper for saveXML() and __toString() tests
+     * helper for saveXml() and __toString() tests
      *
      * @param string $xml
      * @return void
@@ -245,13 +245,13 @@ class Zend_XmlRpc_FaultTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * saveXML() test
+     * saveXml() test
      */
     public function testSaveXML()
     {
         $this->_fault->setCode(1000);
         $this->_fault->setMessage('Fault message');
-        $xml = $this->_fault->saveXML();
+        $xml = $this->_fault->saveXml();
         $this->_testXmlFault($xml);
     }
 

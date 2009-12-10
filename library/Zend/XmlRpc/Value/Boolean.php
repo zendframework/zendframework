@@ -60,25 +60,4 @@ class Zend_XmlRpc_Value_Boolean extends Zend_XmlRpc_Value_Scalar
     {
         return (bool)$this->_value;
     }
-
-    /**
-     * Return the XML-RPC serialization of the boolean value
-     *
-     * @return string
-     */
-    public function saveXML()
-    {
-        if (! $this->_as_xml) {   // The XML was not generated yet
-            $dom   = new DOMDocument('1.0', 'UTF-8');
-            $value = $dom->appendChild($dom->createElement('value'));
-            $type  = $value->appendChild($dom->createElement($this->_type));
-            $type->appendChild($dom->createTextNode($this->_value));
-
-            $this->_as_dom = $value;
-            $this->_as_xml = $this->_stripXmlDeclaration($dom);
-        }
-
-        return $this->_as_xml;
-    }
 }
-

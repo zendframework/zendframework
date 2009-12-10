@@ -176,7 +176,7 @@ class Zend_XmlRpc_Response
         }
 
         try {
-            $xml = @new SimpleXMLElement($response);
+            $xml = new SimpleXMLElement($response);
         } catch (Exception $e) {
             // Not valid XML
             $this->_fault = new Zend_XmlRpc_Fault(651);
@@ -221,20 +221,19 @@ class Zend_XmlRpc_Response
      *
      * @return string
      */
-    public function saveXML()
+    public function saveXml()
     {
         $value = $this->_getXmlRpcReturn();
-        $valueDOM = new DOMDocument('1.0', $this->getEncoding());
-        $valueDOM->loadXML($value->saveXML());
+        $generator = Zend_XmlRpc_Value::getGenerator();
+        $generator->startElement('methodResponse')
+                  ->startElement('params')
+                  ->startElement('param');
+        $value->generateXml();
+        $generator->endElement('param')
+                  ->endElement('params')
+                  ->endElement('methodResponse');
 
-        $dom      = new DOMDocument('1.0', $this->getEncoding());
-        $response = $dom->appendChild($dom->createElement('methodResponse'));
-        $params   = $response->appendChild($dom->createElement('params'));
-        $param    = $params->appendChild($dom->createElement('param'));
-
-        $param->appendChild($dom->importNode($valueDOM->documentElement, true));
-
-        return $dom->saveXML();
+        return $generator->flush();
     }
 
     /**

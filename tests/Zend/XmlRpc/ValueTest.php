@@ -19,13 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version $Id$
  */
-
-// Call Zend_XmlRpc_ValueTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    require_once dirname(__FILE__) . '/../../TestHelper.php';
-    define("PHPUnit_MAIN_METHOD", "Zend_XmlRpc_ValueTest::main");
-}
-
 require_once "PHPUnit/Framework/TestCase.php";
 require_once "PHPUnit/Framework/TestSuite.php";
 
@@ -59,19 +52,6 @@ require_once 'Zend/XmlRpc/TestProvider.php';
  */
 class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        require_once "PHPUnit/TextUI/TestRunner.php";
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_XmlRpc_ValueTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     // Boolean
 
     public function testFactoryAutodetectsBoolean()
@@ -199,7 +179,7 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
     {
         $native = (string)(PHP_INT_MAX + 1);
         $types = array(Zend_XmlRpc_Value::XMLRPC_TYPE_APACHEI8,
-                        Zend_XmlRpc_Value::XMLRPC_TYPE_I8);
+                       Zend_XmlRpc_Value::XMLRPC_TYPE_I8);
 
         $bigInt = new Zend_Crypt_Math_BigInteger();
         $bigInt->init($native);
@@ -209,6 +189,10 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
             $this->assertSame('i8', $value->getType());
             $this->assertEquals($bigInt, $value->getValue());
         }
+
+        $value = Zend_XmlRpc_Value::getXmlRpcValue($bigInt);
+        $this->assertSame('i8', $value->getType());
+        $this->assertEquals($bigInt, $value->getValue());
     }
 
     // Double
@@ -756,6 +740,12 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         } catch (Exception $e) {
             $this->assertRegexp('/given type is not/i', $e->getMessage());
         }
+    }
+
+    public function testPassingXmlRpcObjectReturnsTheSameObject()
+    {
+        $xmlRpcValue = new Zend_XmlRpc_Value_String('foo');
+        $this->assertSame($xmlRpcValue, Zend_XmlRpc_Value::getXmlRpcValue($xmlRpcValue));
     }
 
     // Custom Assertions and Helper Methods

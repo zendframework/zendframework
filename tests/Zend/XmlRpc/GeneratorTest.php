@@ -20,12 +20,6 @@
  * @version $Id: ValueTest.php 18442 2009-09-30 13:17:48Z lars $
  */
 
-// Call Zend_XmlRpc_ValueTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    require_once dirname(__FILE__) . '/../../TestHelper.php';
-    define("PHPUnit_MAIN_METHOD", "Zend_XmlRpc_ValueTest::main");
-}
-
 require_once "PHPUnit/Framework/TestCase.php";
 require_once "PHPUnit/Framework/TestSuite.php";
 require_once 'Zend/XmlRpc/Generator/DOMDocument.php';

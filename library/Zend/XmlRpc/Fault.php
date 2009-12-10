@@ -219,8 +219,7 @@ class Zend_XmlRpc_Fault
         }
 
         $structXml = $xml->fault->value->asXML();
-        $structXml = preg_replace('/<\?xml version=.*?\?>/i', '', $structXml);
-        $struct    = Zend_XmlRpc_Value::getXmlRpcValue(trim($structXml), Zend_XmlRpc_Value::XML_STRING);
+        $struct    = Zend_XmlRpc_Value::getXmlRpcValue($structXml, Zend_XmlRpc_Value::XML_STRING);
         $struct    = $struct->getValue();
 
         if (isset($struct['faultCode'])) {

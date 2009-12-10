@@ -45,7 +45,7 @@ class Zend_XmlRpc_Value_String extends Zend_XmlRpc_Value_Scalar
         $this->_type = self::XMLRPC_TYPE_STRING;
 
         // Make sure this value is string and all XML characters are encoded
-        $this->_value = $this->_escapeXmlEntities($value);
+        $this->_value = $this->getGenerator()->escapeEntities($value);
     }
 
     /**
@@ -56,7 +56,7 @@ class Zend_XmlRpc_Value_String extends Zend_XmlRpc_Value_Scalar
      */
     public function getValue()
     {
-        return $this->_decodeXmlEntities($this->_value);
+        return $this->getGenerator()->decodeEntities($this->_value);
     }
 }
 

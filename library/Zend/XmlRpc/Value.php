@@ -266,6 +266,11 @@ abstract class Zend_XmlRpc_Value
                     return $value;
                 }
 
+                if ($value instanceof Zend_Crypt_Math_BigInteger) {
+                    require_once 'Zend/XmlRpc/Value/BigInteger.php';
+                    return new Zend_XmlRpc_Value_BigInteger($value);
+                }
+
                 // Otherwise, we convert the object into a struct
                 $value = get_object_vars($value);
                 // Break intentionally omitted
@@ -284,10 +289,6 @@ abstract class Zend_XmlRpc_Value
             case 'integer':
                 require_once 'Zend/XmlRpc/Value/Integer.php';
                 return new Zend_XmlRpc_Value_Integer($value);
-
-            case 'i8':
-                require_once 'Zend/XmlRpc/Value/BigInteger.php';
-                return new Zend_XmlRpc_Value_BigInteger($value);
 
             case 'double':
                 require_once 'Zend/XmlRpc/Value/Double.php';
@@ -469,37 +470,6 @@ abstract class Zend_XmlRpc_Value
      */
     protected function _setXML($xml)
     {
-        $this->_xml = $this->_stripXmlDeclaration($xml);
-    }
-
-    /**
-     * @param DOMDocument $dom
-     * @return mixed
-     */
-    protected function _stripXmlDeclaration($xml)
-    {
-        return preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $xml);
-    }
-
-    /**
-     * Make sure a string will be safe for XML, convert risky characters to entities
-     *
-     * @param string $str
-     * @return string
-     */
-    protected function _escapeXmlEntities($str)
-    {
-        return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
-    }
-
-    /**
-     * Convert XML entities into string values
-     *
-     * @param string $str
-     * @return string
-     */
-    protected function _decodeXmlEntities($str)
-    {
-        return html_entity_decode($str, ENT_QUOTES, 'UTF-8');
+        $this->_xml = $this->getGenerator()->stripDeclaration($xml);
     }
 }

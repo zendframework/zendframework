@@ -19,12 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version $Id$
  */
-
-// Call Zend_XmlRpc_ServerTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_XmlRpc_ServerTest::main');
-}
-
 require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 require_once 'Zend/XmlRpc/Server.php';
@@ -48,17 +42,6 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
      * @var Zend_XmlRpc_Server
      */
     protected $_server;
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_XmlRpc_ServerTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
 
     /**
      * Setup environment

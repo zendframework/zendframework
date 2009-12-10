@@ -34,13 +34,14 @@ print $server->getDate()->getIso();
 ]]></programlisting>
 
         <para>
-            So what is happening in the background of <classname>Zend_TimeSync</classname>? First the syntax of the
-            time server is checked. In our example, '<code>0.pool.ntp.org</code>' is checked and
-            recognised as a possible address for a time server. Then when calling
-            <methodname>getDate()</methodname> the actual set time server is requested and it will return its own
-            time. <classname>Zend_TimeSync</classname> then calculates the difference to the actual time of the
-            server running the script and returns a <classname>Zend_Date</classname> object with the
-            correct time.
+            So what is happening in the background of <classname>Zend_TimeSync</classname>? First
+            the syntax of the time server is checked. In our example,
+            '<emphasis>0.pool.ntp.org</emphasis>' is checked and recognised as a possible address
+            for a time server. Then when calling <methodname>getDate()</methodname> the actual set
+            time server is requested and it will return its own time.
+            <classname>Zend_TimeSync</classname> then calculates the difference to the actual time
+            of the server running the script and returns a <classname>Zend_Date</classname> object
+            with the correct time.
         </para>
 
         <para>

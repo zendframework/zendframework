@@ -151,10 +151,11 @@ foreach ($results as $result) {
     <sect2 id="zend.service.yahoo.classes">
         <title>Zend_Service_Yahoo Classes</title>
         <para>
-            The following classes are all returned by the various Yahoo! searches. Each search type returns a
-            type-specific result set which can be easily iterated, with each result being contained in a type result
-            object. All result set classes implement the <code>SeekableIterator</code> interface, allowing for easy
-            iteration and seeking to a specific result.
+            The following classes are all returned by the various Yahoo! searches. Each search type
+            returns a type-specific result set which can be easily iterated, with each result being
+            contained in a type result object. All result set classes implement the
+            <classname>SeekableIterator</classname> interface, allowing for easy iteration and
+            seeking to a specific result.
             <itemizedlist>
                 <listitem><para><link linkend="zend.service.yahoo.classes.resultset"><classname>Zend_Service_Yahoo_ResultSet</classname></link></para></listitem>
                 <listitem><para><link linkend="zend.service.yahoo.classes.webresultset"><classname>Zend_Service_Yahoo_WebResultSet</classname></link></para></listitem>

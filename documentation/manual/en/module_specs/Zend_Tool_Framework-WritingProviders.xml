@@ -137,8 +137,9 @@ Hello from my provider!
         <para>
             As discussed in the architecture section Zend Tool allows to hook different clients for
             using your Zend Tool providers. To keep compliant with different clients you should
-            use the response object to return messages from your providers instead of using <code>echo</code>
-            or a similiar output mechanism. Rewritting our hello provider with this knowledge it looks like:
+            use the response object to return messages from your providers instead of using
+            <methodname>echo()</methodname> or a similiar output mechanism. Rewritting our hello
+            provider with this knowledge it looks like:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -342,9 +343,10 @@ class My_Component_HelloProvider
 ]]></programlisting>
 
             <para>
-                The returned configuration is of the type <classname>Zend_Tool_Framework_Client_Config</classname>
-                but internally the <code>__get</code> and <code>__set</code> magic methods proxy to a
-                <classname>Zend_Config</classname> of the given configuration type.
+                The returned configuration is of the type
+                <classname>Zend_Tool_Framework_Client_Config</classname> but internally the
+                <methodname>__get()</methodname> and <methodname>__set()</methodname> magic methods
+                proxy to a <classname>Zend_Config</classname> of the given configuration type.
             </para>
 
             <para>

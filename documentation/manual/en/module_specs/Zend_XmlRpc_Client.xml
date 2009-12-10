@@ -107,9 +107,9 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             <para>
                 Parameters may be passed to <methodname>call()</methodname> as native
                 <acronym>PHP</acronym> variables, meaning as a <type>String</type>,
-                <code>integer</code>, <code>float</code>,
+                <type>Integer</type>, <type>Float</type>,
                 <type>Boolean</type>, <type>Array</type>, or an
-                <code>object</code>. In this case, each <acronym>PHP</acronym> native type will
+                <type>Object</type>. In this case, each <acronym>PHP</acronym> native type will
                 be auto-detected and converted into one of the <acronym>XML-RPC</acronym> types
                 according to this table:
             </para>
@@ -172,14 +172,14 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                     as it could represent either an array or a struct.
                     <classname>Zend_XmlRpc_Client</classname> detects such conditions and
                     makes a request to the server's
-                    <code>system.methodSignature</code> method to determine the
+                    <command>system.methodSignature</command> method to determine the
                     appropriate <acronym>XML-RPC</acronym> type to cast to.
                 </para>
 
                 <para>
                     However, this in itself can lead to issues. First off,
                     servers that do not support
-                    <code>system.methodSignature</code> will log failed
+                    <command>system.methodSignature</command> will log failed
                     requests, and <classname>Zend_XmlRpc_Client</classname> will resort to
                     casting the value to an <acronym>XML-RPC</acronym> array type. Additionally,
                     this means that any call with array arguments will result in
@@ -217,8 +217,8 @@ $result = $client->call('foo.bar', array(array()));
                     </listitem>
                     <listitem>
                         <para>
-                            When the procedure requires <code>base64</code> or
-                            <code>dateTime.iso8601</code> type (which doesn't exists as a
+                            When the procedure requires <property>base64</property> or
+                            <property>dateTime.iso8601</property> type (which doesn't exists as a
                             <acronym>PHP</acronym> native type)
                         </para>
                     </listitem>
@@ -351,7 +351,7 @@ $result = $client->call('foo.bar', array(array()));
                         <acronym>PHP</acronym> casting. For example, if a string is given as a
                         value to the <classname>Zend_XmlRpc_Value_Integer</classname>
                         object, it will be converted using
-                        <code>(int)$value</code>.
+                        <command>(int)$value</command>.
                     </para>
                 </note>
             </para>
@@ -391,7 +391,7 @@ $hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) returns "hello"
             The <methodname>getProxy()</methodname> method receives an optional argument
             specifying which namespace of the remote server to proxy. If it
             does not receive a namespace, the default namespace will be
-            proxied. In the next example, the <code>test</code> namespace
+            proxied. In the next example, the 'test' namespace
             will be proxied:
         </para>
 
@@ -410,8 +410,8 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) returns "hello"
             If the remote server supports nested namespaces of any depth,
             these can also be used through the server proxy. For example, if
             the server in the example above had a method
-            <code>test.foo.bar()</code>, it could be called as
-            <code>$test->foo->bar()</code>.
+            <command>test.foo.bar()</command>, it could be called as
+            <command>$test->foo->bar()</command>.
         </para>
     </sect2>
 
@@ -429,7 +429,7 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) returns "hello"
 
             <para>
                 If any <acronym>HTTP</acronym> error occurs, such as the remote
-                <acronym>HTTP</acronym> server returns a <code>404 Not Found</code>, a
+                <acronym>HTTP</acronym> server returns a <emphasis>404 Not Found</emphasis>, a
                 <classname>Zend_XmlRpc_Client_HttpException</classname> will be thrown.
             </para>
 
@@ -522,7 +522,7 @@ try {
         <title>Server Introspection</title>
         <para>
             Some <acronym>XML-RPC</acronym> servers support the de facto introspection methods
-            under the <acronym>XML-RPC</acronym> <code>system.</code> namespace.
+            under the <acronym>XML-RPC</acronym> <emphasis>system.</emphasis> namespace.
             <classname>Zend_XmlRpc_Client</classname> provides special support for servers with
             these capabilities.
         </para>

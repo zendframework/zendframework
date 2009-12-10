@@ -7,7 +7,7 @@
         As noted in the <link linkend="zend.test.phpunit.loginexample">Login
             example</link>, all <acronym>MVC</acronym> test cases should extend
         <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>. This class in turn
-        extends <code>PHPUnit_Framework_TestCase</code>, and gives you all the
+        extends <classname>PHPUnit_Framework_TestCase</classname>, and gives you all the
         structure and assertions you'd expect from PHPUnit -- as well as some
         scaffolding and assertions specific to Zend Framework's <acronym>MVC</acronym>
         implementation.
@@ -107,7 +107,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         environment to a clean request state, resetting any plugins and
         helpers, resetting the front controller instance, and creating new
         request and response objects. Once this is done, it will then either
-        <code>include</code> the file specified in <varname>$bootstrap</varname>, or
+        <methodname>include()</methodname> the file specified in <varname>$bootstrap</varname>, or
         call the callback specified.
     </para>
 

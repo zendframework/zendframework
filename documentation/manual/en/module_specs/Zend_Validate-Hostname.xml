@@ -31,7 +31,7 @@ if ($validator->isValid($hostname)) {
 ]]></programlisting>
 
         This will match the hostname <varname>$hostname</varname> and on failure populate
-        <code>$validator->getMessages()</code> with useful error messages.
+        <methodname>getMessages()</methodname> with useful error messages.
 
     </para>
 
@@ -93,8 +93,8 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     <para>
         To match an IDN domain it's as simple as just using the standard Hostname validator since
         IDN matching is enabled by default. If you wish to disable IDN validation this can be done
-        by either passing a parameter to the <classname>Zend_Validate_Hostname</classname> constructor or via the
-        <code>$validator->setValidateIdn()</code> method.
+        by either passing a parameter to the <classname>Zend_Validate_Hostname</classname>
+        constructor or via the <methodname>setValidateIdn()</methodname> method.
     </para>
 
     <para>
@@ -112,7 +112,7 @@ $validator =
 ]]></programlisting>
 
         Alternatively you can either pass TRUE or FALSE to
-        <code>$validator->setValidateIdn()</code> to enable or disable IDN validation.
+        <methodname>setValidateIdn()</methodname> to enable or disable IDN validation.
         If you are trying to match an IDN hostname which isn't currently supported it is likely
         it will fail validation if it has any international characters in it. Where a ccTLD file
         doesn't exist in Zend/Validate/Hostname specifying the additional characters a normal
@@ -145,7 +145,7 @@ $validator =
 ]]></programlisting>
 
         Alternatively you can either pass TRUE or FALSE to
-        <code>$validator->setValidateTld()</code> to enable or disable TLD validation.
+        <methodname>setValidateTld()</methodname> to enable or disable TLD validation.
     </para>
 
     <para>

@@ -15,7 +15,7 @@
 
         <para>
             The following is a simple test case for a
-            <code>UserController</code> to verify several things:
+            <classname>UserController</classname> to verify several things:
         </para>
 
         <itemizedlist>

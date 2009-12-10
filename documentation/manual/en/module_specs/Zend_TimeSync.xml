@@ -101,7 +101,7 @@
         <title>What is NTP ?</title>
 
         <para>
-            The <code>Network Time Protocol</code> (<emphasis>NTP</emphasis>) is a protocol
+            The Network Time Protocol (<emphasis>NTP</emphasis>) is a protocol
             for synchronizing multiple systems' clocks over packet-switched, variable-latency data
             networks. NTP uses UDP port 123 as its transport layer. See the
             <ulink url="http://en.wikipedia.org/wiki/Network_Time_Protocol">wikipedia article</ulink>
@@ -115,7 +115,7 @@
         <title>What is SNTP?</title>
 
         <para>
-            The <code>Simple Network Time Protocol</code> (<emphasis>SNTP</emphasis>) is a
+            The Simple Network Time Protocol (<emphasis>SNTP</emphasis>) is a
             protocol synchronizing multiple systems' clocks over packet-switched, variable-latency
             data networks. SNTP uses UDP port 37 as its transport layer. It is closely related to the
             Network Time Protocol, but simpler.
@@ -188,7 +188,7 @@
         <para>
             See <ulink url="http://www.pool.ntp.org">pool.ntp.org</ulink> to find your nearest
             server pool. For example, if your server is located within Germany you can connect to
-            <code>0.europe.pool.ntp.org</code>.
+            <emphasis>0.europe.pool.ntp.org</emphasis>.
         </para>
 
     </sect2>

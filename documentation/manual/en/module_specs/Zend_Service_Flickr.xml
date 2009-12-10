@@ -136,8 +136,9 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
             <para>Represents a set of Results from a Flickr search.</para>
             <note>
                 <para>
-                    Implements the <code>SeekableIterator</code> interface for easy iteration (e.g., using
-                    <code>foreach</code>), as well as direct access to a specific result using <methodname>seek()</methodname>.
+                    Implements the <classname>SeekableIterator</classname> interface for easy
+                    iteration (e.g., using <methodname>foreach()</methodname>), as well as direct
+                    access to a specific result using <methodname>seek()</methodname>.
                 </para>
             </note>
             <sect4 id="zend.service.flickr.classes.resultset.properties">

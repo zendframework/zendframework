@@ -309,7 +309,7 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group #ZF-6637
+     * @group ZF-6637
      */
     public function testToStringWhenInvalidKeyProvidedShouldConvertThrownException()
     {

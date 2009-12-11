@@ -90,6 +90,7 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
         $bootstrap = new ZfModule_Bootstrap($this->application);
         $module = $bootstrap->getModuleName();
         $loader = $bootstrap->getResourceLoader();
+        $this->assertNotNull($loader, "resource loader is unexpectedly NULL");
         $this->assertEquals($module, $loader->getNamespace());
     }
 

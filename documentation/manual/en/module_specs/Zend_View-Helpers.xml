@@ -43,13 +43,13 @@
 
     <para>
         To use a helper in your view script, call it using
-        <code>$this->helperName()</code>. Behind the scenes,
+        <command>$this->helperName()</command>. Behind the scenes,
         <classname>Zend_View</classname> will load the
         <classname>Zend_View_Helper_HelperName</classname> class, create an object
         instance of it, and call its <methodname>helperName()</methodname> method. The
         object instance is persistent within the <classname>Zend_View</classname>
         instance, and is reused for all future calls to
-        <code>$this->helperName()</code>.
+        <command>$this->helperName()</command>.
     </para>
 
     <sect2 id="zend.view.helpers.initial">
@@ -66,7 +66,7 @@
         <itemizedlist>
 
             <listitem><para>
-                <code>declareVars():</code> Primarily for use when using
+                <methodname>declareVars()</methodname>: Primarily for use when using
                 <methodname>strictVars()</methodname>, this helper can be used to declare
                 template variables that may or may not already be set in the
                 view object, as well as to set default values. Arrays passed as
@@ -76,7 +76,7 @@
             </para></listitem>
 
             <listitem><para>
-                <code>fieldset($name, $content, $attribs):</code> Creates an
+                <methodname>fieldset($name, $content, $attribs)</methodname>: Creates an
                 <acronym>XHTML</acronym> fieldset. If <varname>$attribs</varname> contains a
                 'legend' key, that value will be used for the fieldset legend. The
                 fieldset will surround the <varname>$content</varname> as provided to
@@ -84,24 +84,24 @@
             </para></listitem>
 
             <listitem><para>
-                <code>form($name, $attribs, $content):</code> Generates an <acronym>XHTML</acronym>
-                form. All <varname>$attribs</varname> are escaped and rendered as
-                <acronym>XHTML</acronym> attributes of the form tag. If <varname>$content</varname>
-                is present and not a boolean false, then that content is rendered
-                within the start and close form tags; if <varname>$content</varname>
+                <methodname>form($name, $attribs, $content)</methodname>: Generates an
+                <acronym>XHTML</acronym> form. All <varname>$attribs</varname> are escaped and
+                rendered as <acronym>XHTML</acronym> attributes of the form tag. If
+                <varname>$content</varname> is present and not a boolean false, then that content is
+                rendered within the start and close form tags; if <varname>$content</varname>
                 is a boolean false (the default), only the opening form tag is
                 generated.
             </para></listitem>
 
             <listitem><para>
-                <code>formButton($name, $value, $attribs):</code> Creates an
+                <methodname>formButton($name, $value, $attribs)</methodname>: Creates an
                 &lt;button /&gt; element.
             </para></listitem>
 
             <listitem>
                 <para>
-                    <code>formCheckbox($name, $value, $attribs,
-                        $options):</code> Creates an &lt;input type="checkbox"
+                    <methodname>formCheckbox($name, $value, $attribs,
+                        $options)</methodname>: Creates an &lt;input type="checkbox"
                     /&gt; element.
                 </para>
 
@@ -178,7 +178,7 @@ echo $this->formCheckbox('foo',
 
             <listitem>
                 <para>
-                    <code>formErrors($errors, $options):</code> Generates an
+                    <methodname>formErrors($errors, $options)</methodname>: Generates an
                     <acronym>XHTML</acronym> unordered list to show errors.
                     <varname>$errors</varname> should be a string or an array of strings;
                     <varname>$options</varname> should be any attributes you want
@@ -212,26 +212,26 @@ echo $this->formCheckbox('foo',
             </listitem>
 
             <listitem><para>
-                <code>formFile($name, $attribs):</code> Creates an
+                <methodname>formFile($name, $attribs)</methodname>: Creates an
                 &lt;input type="file" /&gt; element.
             </para></listitem>
 
             <listitem><para>
-                <code>formHidden($name, $value, $attribs):</code> Creates an
+                <methodname>formHidden($name, $value, $attribs)</methodname>: Creates an
                 &lt;input type="hidden" /&gt; element.
             </para></listitem>
 
             <listitem><para>
-                <code>formLabel($name, $value, $attribs):</code> Creates a
-                &lt;label&gt; element, setting the <code>for</code> attribute to
+                <methodname>formLabel($name, $value, $attribs)</methodname>: Creates a
+                &lt;label&gt; element, setting the <property>for</property> attribute to
                 <varname>$name</varname>, and the actual label text to
-                <varname>$value</varname>. If <code>disable</code> is passed in
-                <code>attribs</code>, nothing will be returned.
+                <varname>$value</varname>. If <emphasis>disable</emphasis> is passed in
+                <property>attribs</property>, nothing will be returned.
             </para></listitem>
 
             <listitem><para>
-                <code>formMultiCheckbox($name, $value, $attribs, $options,
-                    $listsep):</code> Creates a list of checkboxes.
+                <methodname>formMultiCheckbox($name, $value, $attribs, $options,
+                    $listsep)</methodname>: Creates a list of checkboxes.
                 <varname>$options</varname> should be an associative array, and may be
                 arbitrarily deep. <varname>$value</varname> may be a single value or
                 an array of selected values that match the keys in the
@@ -242,12 +242,12 @@ echo $this->formCheckbox('foo',
             </para></listitem>
 
             <listitem><para>
-                <code>formPassword($name, $value, $attribs):</code> Creates an
+                <methodname>formPassword($name, $value, $attribs)</methodname>: Creates an
                 &lt;input type="password" /&gt; element.
             </para></listitem>
 
             <listitem><para>
-                <code>formRadio($name, $value, $attribs, $options):</code>
+                <methodname>formRadio($name, $value, $attribs, $options)</methodname>:
                 Creates a series of &lt;input type="radio" /&gt; elements, one
                 for each of the $options elements. In the $options array, the
                 element key is the radio value, and the element value is the
@@ -255,12 +255,12 @@ echo $this->formCheckbox('foo',
             </para></listitem>
 
             <listitem><para>
-                <code>formReset($name, $value, $attribs):</code> Creates an
+                <methodname>formReset($name, $value, $attribs)</methodname>: Creates an
                 &lt;input type="reset" /&gt; element.
             </para></listitem>
 
             <listitem><para>
-                <code>formSelect($name, $value, $attribs, $options):</code>
+                <methodname>formSelect($name, $value, $attribs, $options)</methodname>:
                 Creates a &lt;select&gt;...&lt;/select&gt; block, with one
                 &lt;option&gt;one for each of the $options elements. In the
                 $options array, the element key is the option value, and the
@@ -269,29 +269,29 @@ echo $this->formCheckbox('foo',
             </para></listitem>
 
             <listitem><para>
-                <code>formSubmit($name, $value, $attribs):</code> Creates an
+                <methodname>formSubmit($name, $value, $attribs)</methodname>: Creates an
                 &lt;input type="submit" /&gt; element.
             </para></listitem>
 
             <listitem><para>
-                <code>formText($name, $value, $attribs):</code> Creates an
+                <methodname>formText($name, $value, $attribs)</methodname>: Creates an
                 &lt;input type="text" /&gt; element.
             </para></listitem>
 
             <listitem><para>
-                <code>formTextarea($name, $value, $attribs):</code> Creates a
+                <methodname>formTextarea($name, $value, $attribs)</methodname>: Creates a
                 &lt;textarea&gt;...&lt;/textarea&gt; block.
             </para></listitem>
 
             <listitem><para>
-                <code>url($urlOptions, $name, $reset):</code> Creates a <acronym>URL</acronym>
-                string based on a named route. <varname>$urlOptions</varname> should
-                be an associative array of key/value pairs used by the
-                particular route.
+                <methodname>url($urlOptions, $name, $reset)</methodname>: Creates a
+                <acronym>URL</acronym> string based on a named route.
+                <varname>$urlOptions</varname> should be an associative array of key/value pairs
+                used by the particular route.
             </para></listitem>
 
             <listitem><para>
-                <code>htmlList($items, $ordered, $attribs, $escape):</code> generates
+                <methodname>htmlList($items, $ordered, $attribs, $escape)</methodname>: generates
                 unordered and ordered lists based on the <varname>$items</varname>
                 passed to it. If <varname>$items</varname> is a multidimensional
                 array, a nested list will be built. If the <varname>$escape</varname>
@@ -479,7 +479,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
         </para>
 
         <para>
-            Here is an example of our <code>SpecialPurpose</code> helper code:
+            Here is an example of our <classname>SpecialPurpose</classname> helper code:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -496,7 +496,7 @@ class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
 ]]></programlisting>
 
         <para>
-            Then in a view script, you can call the <code>SpecialPurpose</code>
+            Then in a view script, you can call the <classname>SpecialPurpose</classname>
             helper as many times as you like; it will be instantiated once, and
             then it persists for the life of that <classname>Zend_View</classname>
             instance.

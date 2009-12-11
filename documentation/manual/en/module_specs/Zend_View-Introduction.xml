@@ -125,7 +125,7 @@ echo $view->render('booklist.php');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>basePath</code>: indicate a base path from which to set
+                    <property>basePath</property>: indicate a base path from which to set
                     the script, helper, and filter path. It assumes a directory
                     structure of:
                 </para>
@@ -139,40 +139,40 @@ base/path/
 
                 <para>
                     This may be set via <methodname>setBasePath()</methodname>,
-                    <methodname>addBasePath()</methodname>, or the <code>basePath</code>
+                    <methodname>addBasePath()</methodname>, or the <property>basePath</property>
                     option to the constructor.
                 </para>
             </listitem>
 
             <listitem><para>
-                <code>encoding</code>: indicate the character encoding to use
+                <property>encoding</property>: indicate the character encoding to use
                 with <methodname>htmlentities()</methodname>,
                 <methodname>htmlspecialchars()</methodname>, and other operations. Defaults
                 to ISO-8859-1 (latin1). May be set via
-                <methodname>setEncoding()</methodname> or the <code>encoding</code> option
+                <methodname>setEncoding()</methodname> or the <property>encoding</property> option
                 to the constructor.
             </para></listitem>
 
             <listitem><para>
-                <code>escape</code>: indicate a callback to be used by
+                <property>escape</property>: indicate a callback to be used by
                 <methodname>escape()</methodname>. May be set via
-                <methodname>setEscape()</methodname> or the <code>escape</code> option to the
-                constructor.
-            </para></listitem>
-
-            <listitem><para>
-                <code>filter</code>: indicate a filter to use after rendering
-                a view script. May be set via <methodname>setFilter()</methodname>,
-                <methodname>addFilter()</methodname>, or the <code>filter</code> option to
+                <methodname>setEscape()</methodname> or the <property>escape</property> option to
                 the constructor.
             </para></listitem>
 
             <listitem><para>
-                <code>strictVars:</code> force <classname>Zend_View</classname> to emit
+                <property>filter</property>: indicate a filter to use after rendering
+                a view script. May be set via <methodname>setFilter()</methodname>,
+                <methodname>addFilter()</methodname>, or the <property>filter</property> option to
+                the constructor.
+            </para></listitem>
+
+            <listitem><para>
+                <property>strictVars</property>: force <classname>Zend_View</classname> to emit
                 notices and warnings when uninitialized view variables are
                 accessed. This may be set by calling
                 <methodname>strictVars(true)</methodname> or passing the
-                <code>strictVars</code> option to the constructor.
+                <property>strictVars</property> option to the constructor.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -181,8 +181,8 @@ base/path/
         <title>Short Tags with View Scripts</title>
 
         <para>
-            In our examples, we make use of <acronym>PHP</acronym> long tags: <code>&lt;?php</code>.
-            We also favor the use of <ulink
+            In our examples, we make use of <acronym>PHP</acronym> long tags:
+            <emphasis>&lt;?php</emphasis>. We also favor the use of <ulink
                 url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">alternate
                 syntax for control structures</ulink>. These are convenient shorthands to use when
             writing view scripts, as they make the constructs more terse, keep statements on single
@@ -190,14 +190,15 @@ base/path/
         </para>
 
         <para>
-            In previous versions, we often recommended using short tags (<code>&lt;?</code> and
-            <code>&lt;?=</code>), as they make the view scripts slightly less verbose. However, the
-            default for the <filename>php.ini</filename> <constant>short_open_tag</constant> setting
-            is typically off in production or on shared hosts -- making their use not terribly
-            portable. If you use template <acronym>XML</acronym> in view scripts, short
-            open tags will cause the templates to fail validation. Finally, if you use short tags
-            when <constant>short_open_tag</constant> is off, the view scripts will either cause
-            errors or simply echo PHP code back to the viewer.
+            In previous versions, we often recommended using short tags (<emphasis>&lt;?</emphasis>
+            and <emphasis>&lt;?=</emphasis>), as they make the view scripts slightly less verbose.
+            However, the default for the <filename>php.ini</filename>
+            <constant>short_open_tag</constant> setting is typically off in production or on shared
+            hosts -- making their use not terribly portable. If you use template
+            <acronym>XML</acronym> in view scripts, short open tags will cause the templates to fail
+            validation. Finally, if you use short tags when <constant>short_open_tag</constant> is
+            off, the view scripts will either cause errors or simply echo PHP code back to the
+            viewer.
         </para>
 
         <para>
@@ -208,7 +209,7 @@ base/path/
         <itemizedlist>
             <listitem>
                 <para>
-                    Turn on short tags in your <code>.htaccess</code> file:
+                    Turn on short tags in your <filename>.htaccess</filename> file:
                 </para>
 
                 <programlisting language="apache"><![CDATA[
@@ -217,8 +218,8 @@ php_value "short_open_tag" "on"
 
                 <para>
                     This will only be possible if you are allowed to create and
-                    utilize <code>.htaccess</code> files. This directive can
-                    also be added to your <code>httpd.conf</code> file.
+                    utilize <filename>.htaccess</filename> files. This directive can
+                    also be added to your <filename>httpd.conf</filename> file.
                 </para>
             </listitem>
 

@@ -53,7 +53,7 @@
             array values are the corresponding human-readable string messages.
             The keys and values are class-dependent; each validation class
             defines its own set of validation failure messages and the unique
-            keys that identify them. Each class also has a <code>const</code>
+            keys that identify them. Each class also has a const
             definition that matches each identifier for a validation failure
             cause.
         </para>
@@ -101,10 +101,10 @@ if ($validator->isValid($email)) {
             first argument of this method is a string containing the error
             message. You can include tokens in this string which will be
             substituted with data relevant to the validator. The token
-            <code>%value%</code> is supported by all validators; this is
+            <emphasis>%value%</emphasis> is supported by all validators; this is
             substituted with the value you passed to <methodname>isValid()</methodname>.
             Other tokens may be supported on a case-by-case basis in each
-            validation class. For example, <code>%max%</code> is a token
+            validation class. For example, <emphasis>%max%</emphasis> is a token
             supported by <classname>Zend_Validate_LessThan</classname>.
             The <methodname>getMessageVariables()</methodname> method returns an array
             of variable tokens supported by the validator.
@@ -160,7 +160,7 @@ $validator->setMessages( array(
             If your application requires even greater flexibility with which it
             reports validation failures, you can access properties by the same
             name as the message tokens supported by a given validation class.
-            The <code>value</code> property is always available in a validator;
+            The <property>value</property> property is always available in a validator;
             it is the value you specified as the argument of
             <methodname>isValid()</methodname>. Other properties may be supported on a
             case-by-case basis in each validation class.

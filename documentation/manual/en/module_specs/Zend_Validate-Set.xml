@@ -38,8 +38,8 @@
         <title>Barcode</title>
         <para>
             This validator is instantiated with a barcode type against which you wish to validate a
-            barcode value. It currently supports "<code>UPC-A</code>" (Universal Product Code) and
-            "<code>EAN-13</code>" (European Article Number) barcode types, and the
+            barcode value. It currently supports "UPC-A" (Universal Product Code) and
+            "EAN-13" (European Article Number) barcode types, and the
             <methodname>isValid()</methodname> method returns true if and only if the input successfully
             validates against the barcode validation algorithm. You should remove all characters
             other than the digits zero through nine (0-9) from the input value before passing it on
@@ -79,11 +79,11 @@
     <sect2 id="zend.validate.set.date">
         <title>Date</title>
         <para>
-            Returns <constant>TRUE</constant> if <varname>$value</varname> is a valid date of the format
-            <code>YYYY-MM-DD</code>. If the optional <code>locale</code> option is set then the date
-            will be validated according to the set locale. And if the optional <code>format</code>
-            option is set this format is used for the validation. for details about the optional
-            parameters see <link
+            Returns <constant>TRUE</constant> if <varname>$value</varname> is a valid date of the
+            format 'YYYY-MM-DD'. If the optional <property>locale</property> option is set then the
+            date will be validated according to the set locale. And if the optional
+            <property>format</property> option is set this format is used for the validation. for
+            details about the optional parameters see <link
                 linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>.
         </para>
     </sect2>
@@ -220,14 +220,14 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.string_length">
         <title>StringLength</title>
         <para>
-            Returns <constant>TRUE</constant> if and only if the string length of <varname>$value</varname> is at
-            least a minimum and no greater than a maximum (when the max option is not
-            <constant>NULL</constant>). The <methodname>setMin()</methodname> method throws an exception if the minimum
-            length is set to a value greater than the set maximum length, and the
-            <methodname>setMax()</methodname> method throws an exception if the maximum length is set to a
-            value less than the set minimum length. This class supports UTF-8 and other
-            character encodings, based on the current value of <ulink
-                url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>.
+            Returns <constant>TRUE</constant> if and only if the string length of
+            <varname>$value</varname> is at least a minimum and no greater than a maximum (when the
+            max option is not <constant>NULL</constant>). The <methodname>setMin()</methodname>
+            method throws an exception if the minimum length is set to a value greater than the set
+            maximum length, and the <methodname>setMax()</methodname> method throws an exception if
+            the maximum length is set to a value less than the set minimum length. This class
+            supports UTF-8 and other character encodings, based on the current value of <ulink
+                url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration">iconv.internal_encoding</ulink>.
             If you need a different encoding you can set it with the accessor methods getEncoding
             and setEncoding.
         </para>

@@ -83,12 +83,12 @@ class MyValid_Float extends Zend_Validate_Abstract
 
         <para>
             The class defines a template for its single validation failure message, which includes
-            the built-in magic parameter, <code>%value%</code>. The call to <methodname>_setValue()</methodname>
-            prepares the object to insert the tested value into the failure message automatically,
-            should the value fail validation. The call to <methodname>_error()</methodname> tracks a reason for
-            validation failure. Since this class only defines one failure message, it is not
-            necessary to provide <methodname>_error()</methodname> with the name of the failure message
-            template.
+            the built-in magic parameter, <emphasis>%value%</emphasis>. The call to
+            <methodname>_setValue()</methodname> prepares the object to insert the tested value into
+            the failure message automatically, should the value fail validation. The call to
+            <methodname>_error()</methodname> tracks a reason for validation failure. Since this
+            class only defines one failure message, it is not necessary to provide
+            <methodname>_error()</methodname> with the name of the failure message template.
         </para>
 
     </example>
@@ -169,8 +169,9 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
             The public properties <varname>$minimum</varname> and <varname>$maximum</varname> have been
             established to provide the minimum and maximum boundaries, respectively, for a value to
             successfully validate. The class also defines two message variables that correspond to
-            the public properties and allow <code>min</code> and <code>max</code> to be used in
-            message templates as magic parameters, just as with <code>value</code>.
+            the public properties and allow <property>min</property> and <property>max</property> to
+            be used in message templates as magic parameters, just as with
+            <property>value</property>.
         </para>
 
         <para>
@@ -264,7 +265,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
             Note that the four criteria tests in <methodname>isValid()</methodname> do not immediately return
             <constant>FALSE</constant>. This allows the validation class to provide <emphasis>all</emphasis>
             of the reasons that the input password failed to meet the validation requirements. if,
-            for example, a user were to input the string "<code>#$%</code>" as a password,
+            for example, a user were to input the string "#$%" as a password,
             <methodname>isValid()</methodname> would cause all four validation failure messages to be returned
             by a subsequent call to <methodname>getMessages()</methodname>.
         </para>

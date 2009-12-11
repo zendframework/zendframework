@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19419 -->
+<!-- EN-Revision: 19432 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.validator_chains">
-
     <title>Kettenprüfungen</title>
 
     <para>

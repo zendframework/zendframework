@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19433 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.placeholder">
     <title>Platzhalter (PlaceHolder) Helfer</title>
 
     <para>
-        Der <code>Placeholder</code> View Helfer wird verwendet um Inhalte zwischen View Skripten
-        und View Instanzen persistent zu machen. Er bietet auch einige nützliche Features wie
-        Inhalte zu vereinigen, Inhalte von View Skripten zu erfassen und Vor- sowie Nach-Texte zu
-        Inhalten hinzuzufügen (und eigene Separatoren für vereinigte Inhalte).
+        Der <classname>Placeholder</classname> View Helfer wird verwendet um Inhalte zwischen View
+        Skripten und View Instanzen persistent zu machen. Er bietet auch einige nützliche Features
+        wie Inhalte zu vereinigen, Inhalte von View Skripten zu erfassen und Vor- sowie Nach-Texte
+        zu Inhalten hinzuzufügen (und eigene Separatoren für vereinigte Inhalte).
     </para>
 
     <example id="zend.view.helpers.initial.placeholder.usage">
@@ -16,9 +16,9 @@
 
         <para>
             Die grundsätzliche Verwendung von Platzhaltern ist die persistenz von View Daten. Jeder
-            Aufruf des <code>Placeholder</code> Helfers erwartet einen Platzhalter Namen; der Helfer
-            gibt dann ein Platzhalter Container Objekt zurück das entweder manipuliert oder einfach
-            ausgegeben werden kann.
+            Aufruf des <classname>Placeholder</classname> Helfers erwartet einen Platzhalter Namen;
+            der Helfer gibt dann ein Platzhalter Container Objekt zurück das entweder manipuliert
+            oder einfach ausgegeben werden kann.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -42,10 +42,10 @@
         </para>
 
         <para>
-            Der <code>Placeholder</code> View Helfer verwendet Container die
-            <code>ArrayObject</code> erweitern, und ein reichhaltiges Set von Features für die
-            Manipulation von Arrays bieten. Zusätzlich bietet es eine Anzahl von Methoden für die
-            Formatierung des Inhalts der im Container gespeichert ist:
+            Der <classname>Placeholder</classname> View Helfer verwendet Container die
+            <classname>ArrayObject</classname> erweitern, und ein reichhaltiges Set von Features für
+            die Manipulation von Arrays bieten. Zusätzlich bietet es eine Anzahl von Methoden für
+            die Formatierung des Inhalts der im Container gespeichert ist:
         </para>
 
         <itemizedlist>
@@ -106,10 +106,11 @@ $this->placeholder('foo')->setPrefix("<ul>\n    <li>")
 ]]></programlisting>
 
         <para>
-            Weil die <code>Placeholder</code> Container Objekte <code>ArrayObject</code> erweitern,
-            können Inhalte einem speziellen Schlüssel im Container sehr einfach zugeordnet werden,
-            statt diese einfach an den Container anzufügen. Auf Schlüssel kann entweder als Objekt
-            Eigenschaften oder als Array Schlüssel zugegriffen werden.
+            Weil die <classname>Placeholder</classname> Container Objekte
+            <classname>ArrayObject</classname> erweitern, können Inhalte einem speziellen Schlüssel
+            im Container sehr einfach zugeordnet werden, statt diese einfach an den Container
+            anzufügen. Auf Schlüssel kann entweder als Objekt Eigenschaften oder als Array Schlüssel
+            zugegriffen werden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -128,8 +129,8 @@ echo $foo['bar'];
 
         <para>
             Gelegentlich will man Inhalte für einen Platzhalter in einem View Skript haben die
-            einfachst als Vorlage zu verwenden sind; der <code>Placeholder</code> View Helfer
-            erlaubt es willkürliche Inhalte zu erfassen um diese später durch Verwendung der
+            einfachst als Vorlage zu verwenden sind; der <classname>Placeholder</classname> View
+            Helfer erlaubt es willkürliche Inhalte zu erfassen um diese später durch Verwendung der
             folgenden <acronym>API</acronym> darstellen zu können.
         </para>
 
@@ -141,8 +142,8 @@ echo $foo['bar'];
                 </para>
 
                 <para>
-                    <varname>$type</varname> sollte eine der <code>Placeholder</code> Konstanten
-                    <constant>APPEND</constant> oder <constant>SET</constant> sein.
+                    <varname>$type</varname> sollte eine der <classname>Placeholder</classname>
+                    Konstanten <constant>APPEND</constant> oder <constant>SET</constant> sein.
                     <constant>APPEND</constant> fügt erfasste Inhalte der Liste der aktuellen
                     Inhalte im Placeholder an; <constant>SET</constant> verwendet erfasste Inhalte
                     als einzigen Wert für den Platzhalter (überschreibt potentiell alle vorherigen
@@ -216,33 +217,47 @@ foreach ($this->data as $datum): ?>
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.doctype">Doctype</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.headlink">HeadLink</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.headmeta">HeadMeta</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.headscript">HeadScript</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.headstyle">HeadStyle</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.headtitle">HeadTitle</link>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <link linkend="zend.view.helpers.initial.inlinescript">InlineScript</link>
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
     </sect4>
 </sect3>

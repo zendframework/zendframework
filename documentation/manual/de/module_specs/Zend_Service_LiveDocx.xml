@@ -722,24 +722,25 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
         </sect3>
 
         <sect3 id="zend.service.livedocx.mailmerge.templates-types">
-            <title>Local vs. Remote Templates</title>
+            <title>Lokale vs. Remote Templates</title>
 
             <para>
-                Templates can be stored <emphasis>locally</emphasis>, on the client machine, or
-                <emphasis>remotely</emphasis>, on the server. There are advantages and disadvantages
-                to each approach.
+                Templates können <emphasis>lokal</emphasis>, auf der Client Maschine, gespeichert
+                werden, oder <emphasis>remote</emphasis> auf dem Server. Jede Variante hat Vorteile
+                und Nachteile.
             </para>
 
             <para>
-                In the case that a template is stored locally, it must be transfered from the client
-                to the server on every request. If the content of the template rarely changes, this
-                approach is inefficient. Similarly, if the template is several megabytes in size, it
-                may take considerable time to transfer it to the server. Local template are useful
-                in situations in which the content of the template is constantly changing.
+                Im Falle das ein Templage lokal gespeichert ist, muss es bei jeder Anfrage vom
+                Client auf den Server transferiert werden. Wenn sich der Inhalt vom Templates
+                selten ändert, ist dieser Weg sehr ineffizient. Ähnlich auch, wenn das Template eine
+                Größe von mehreren Megabyte hat, kann es eine beträchtliche Zeit dauern es auf den
+                Server zu transferieren. Lokale Templates sind in Situationen sinnvoll in denen der
+                Inhalt des Templates konstant geändert wird.
             </para>
 
             <para>
-                The following code illustrates how to use a local template.
+                Der folgende Code zeigt wie man ein lokales Template verwendet.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -750,19 +751,20 @@ $phpLiveDocx->setUsername('myUsername')
 
 $phpLiveDocx->setLocalTemplate('./template.docx');
 
-// assign data and create document
+// Daten hinzufügen und das Dokument erstellen
 ]]></programlisting>
 
             <para>
-                In the case that a template is stored remotely, it is uploaded once to the server
-                and then simply referenced on all subsequent requests. Obviously, this is much
-                quicker than using a local template, as the template does not have to be transfered
-                on every request. For speed critical applications, it is recommended to use the
-                remote template method.
+                Im Fall das ein Template remote gespeichert ist, wird es nur einmal auf den Server
+                geladen und anschließend bei allen nachfolgenden Anfragen darauf referenziert.
+                Natürlich ist das viel schneller als ein lokales Template zu verwenden, da das
+                Template nicht bei jeder Anfrage übertragen werden muss. Für Anwendungen bei denen
+                die Geschwindigkeit kritisch ist, wird es Empfohlen die Remote Template Methode zu
+                verwenden.
             </para>
 
             <para>
-                The following code illustrates how to upload a template to the server:
+                Der folgende Code zeigt wie ein Template auf den Server übertragen wird:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -775,8 +777,8 @@ $phpLiveDocx->uploadTemplate('template.docx');
 ]]></programlisting>
 
             <para>
-                The following code illustrates how to reference the remotely stored template on all
-                subsequent requests:
+                Der folgende Code zeigt wie auf das remote gespeicherte Template bei allen
+                weiteren Anfragen referenziert wird:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -792,20 +794,21 @@ $phpLiveDocx->setRemoteTemplate('template.docx');
         </sect3>
 
         <sect3 id="zend.service.livedocx.mailmerge.information">
-            <title>Getting Information</title>
+            <title>Informationen erhalten</title>
 
             <para>
-                <classname>Zend_Service_LiveDocx_MailMerge</classname> provides a number of methods
-                to get information on field names, available fonts and supported formats.
+                <classname>Zend_Service_LiveDocx_MailMerge</classname> bietet eine Anzahl an
+                Methoden um Informationen über Feldnamen, vorhandene Schriftarten und unterstützte
+                Formate zu erhalten.
             </para>
 
             <example id="zend.service.livedocx.mailmerge.information.getfieldname">
-                <title>Get Array of Field Names in Template</title>
+                <title>Ein Array an Feldnamen vom Template erhalten</title>
 
                 <para>
-                    The following code returns and displays an array of all field names in the
-                    specified template. This functionality is useful, in the case that you create an
-                    application, in which an end-user can update a template.
+                    Der folgende Code retourniert und zeigt ein Array aller Feldnamen im
+                    spezifizierten Template an. Diese Funktionalität ist nützlich, wenn man eine
+                    Anwendung erstellt, in welcher der End-Benutzer das Template aktualisieren kann.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -825,14 +828,14 @@ foreach ($fieldNames as $fieldName) {
             </example>
 
             <example id="zend.service.livedocx.mailmerge.information.getblockfieldname">
-                <title>Get Array of Block Field Names in Template</title>
+                <title>Ein Array an Block Feldnamen vom Template erhalten</title>
 
                 <para>
-                    The following code returns and displays an array of all block field names in the
-                    specified template. This functionality is useful, in the case that you create an
-                    application, in which an end-user can update a template. Before such templates
-                    can be populated, it is necessary to find out the names of the contained block
-                    fields.
+                    Der folgende Code retourniert und zeigt ein Array aller Block Feldnamen im
+                    spezifizierten Template an. Diese Funktionalität ist nützlich, wenn man eine
+                    Anwendung erstellt, in welcher der End-Benutzer das Template aktualisieren kann.
+                    Bevor solche Templates veröffentlicht werden können, ist es notwendig die Namen
+                    der enthaltenen Blockfelder herauszufinden.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -855,15 +858,19 @@ foreach ($blockNames as $blockName) {
             </example>
 
             <example id="zend.service.livedocx.mailmerge.information.getfontnames">
-                <title>Get Array of Fonts Installed on Server</title>
+                <title>
+                    Ein Array von Schriftarten erhalten welche auf dem Server installiert sind
+                </title>
 
                 <para>
-                    The following code returns and displays an array of all fonts installed on the
-                    server. You can use this method to present a list of fonts which may be used in
-                    a template. It is important to inform the end-user about the fonts installed on
-                    the server, as only these fonts may be used in a template. In the case that a
-                    template contains fonts, which are not available on the server,
-                    font-substitution will take place. This may lead to undesirable results.
+                    Der folgende Code retourniert und zeigt ein Array aller auf dem Server
+                    installierten Schriftarten an. Diese Methode kann verwendet werden um eine Liste
+                    von Schriftarten anzuzeigen welche in einem Template verwendet werden können.
+                    Das ist nützlich um den Endbenutzer über die auf dem Server installierten
+                    Schriften zu informieren, da nur diese Schriftarten in einem Template verwendet
+                    werden können. Im Falle das ein Template Schriften enthänt, welche auf dem
+                    Server nicht enthalten sind, wird eine andere Schriftart verwendet. Dies kann
+                    zu unerwünschten Ergebnissen führen.
                 </para>
 
             <programlisting language="php"><![CDATA[
@@ -876,21 +883,20 @@ Zend_Debug::dump($phpLiveDocx->getFontNames());
 ]]></programlisting>
 
                 <para>
-                    <emphasis>NOTE:</emphasis> As the return value of this method changes very
-                    infrequently, it is highly recommended to use a cache, such as
-                    <classname>Zend_Cache</classname> - this will considerably speed up your
-                    application.
+                    <emphasis>BEACHTE:</emphasis> Da sich der Rückgabewert diese Methode sehr
+                    selten ändert, ist es sehr empfehlenswert einen Cache zu verwenden, wie z.B.
+                    <classname>Zend_Cache</classname> - das macht die Anwendung sichtbar schneller.
                 </para>
             </example>
 
             <example id="zend.service.livedocx.mailmerge.information.gettemplateformats">
-                <title>Get Array of Supported Template File Formats</title>
+                <title>Ein Array an unterstützten Dateiformaten für Templates erhalten</title>
 
                 <para>
-                    The following code returns and displays an array of all supported template file
-                    formats. This method is particularly useful in the case that a combo list should
-                    be displayed that allows the end-user to select the input format of the
-                    documentation generation process.
+                    Der folgende Code retourniert und zeigt ein Array aller unterstützten
+                    Dateiformate für Templates. Diese Methode ist partiell nützlich im Fall das
+                    eine Kombinationsbox angezeigt werden soll, welche es dem Endbenutzer erlaubt
+                    das Eingabeformat für den Erstellungsprozess des Dokuments auszuwählen.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -903,21 +909,20 @@ Zend_Debug::dump($phpLiveDocx->getTemplateFormats());
 ]]></programlisting>
 
                 <para>
-                    <emphasis>NOTE:</emphasis> As the return value of this method changes very
-                    infrequently, it is highly recommended to use a cache, such as
-                    <classname>Zend_Cache</classname> - this will considerably speed up your
-                    application.
+                    <emphasis>BEACHTE:</emphasis> Da sich der Rückgabewert diese Methode sehr
+                    selten ändert, ist es sehr empfehlenswert einen Cache zu verwenden, wie z.B.
+                    <classname>Zend_Cache</classname> - das macht die Anwendung sichtbar schneller.
                 </para>
             </example>
 
             <example id="zend.service.livedocx.mailmerge.information.getdocumentformats">
-                <title>Get Array of Supported Document File Formats</title>
+                <title>Ein Array an unterstützten Dateiformaten für Dokumente erhalten</title>
 
                 <para>
-                    The following code returns and displays an array of all supported document file
-                    formats. This method is particularly useful in the case that a combo list should
-                    be displayed that allows the end-user to select the output format of the
-                    documentation generation process.
+                    Der folgende Code retourniert und zeigt ein Array aller unterstützten
+                    Dateiformate für Dokumente. Diese Methode ist partiell nützlich im Fall das
+                    eine Kombinationsliste angezeigt werden soll, welche es dem Endbenutzer erlaubt
+                    das Ausgabeformat für den Erstellungsprozess des Dokuments auszuwählen.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -931,13 +936,13 @@ Zend_Debug::dump($phpLiveDocx->getDocumentFormats());
             </example>
 
             <example id="zend.service.livedocx.mailmerge.information.getimageformats">
-                <title>Get Array of Supported Image File Formats</title>
+                <title>Ein Array an unterstützten Dateiformaten für Bilder erhalten</title>
 
                 <para>
-                    The following code returns and displays an array of all supported image file
-                    formats. This method is particularly useful in the case that a combo list should
-                    be displayed that allows the end-user to select the output format of the
-                    documentation generation process.
+                    Der folgende Code retourniert und zeigt ein Array aller unterstützten
+                    Dateiformate für Bilder. Diese Methode ist partiell nützlich im Fall das
+                    eine Kombinationsliste angezeigt werden soll, welche es dem Endbenutzer erlaubt
+                    das Ausgabeformat für den Erstellungsprozess des Dokuments auszuwählen.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -950,10 +955,9 @@ Zend_Debug::dump($phpLiveDocx->getImageFormats());
 ]]></programlisting>
 
                 <para>
-                    <emphasis>NOTE:</emphasis> As the return value of this method changes very
-                    infrequently, it is highly recommended to use a cache, such as
-                    <classname>Zend_Cache</classname> - this will considerably speed up your
-                    application.
+                    <emphasis>BEACHTE:</emphasis> Da sich der Rückgabewert diese Methode sehr
+                    selten ändert, ist es sehr empfehlenswert einen Cache zu verwenden, wie z.B.
+                    <classname>Zend_Cache</classname> - das macht die Anwendung sichtbar schneller.
                 </para>
             </example>
         </sect3>

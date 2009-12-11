@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19150 -->
+<!-- EN-Revision: 19432 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
-
     <title>Einführung</title>
 
     <para>
@@ -13,7 +12,6 @@
     </para>
 
     <sect2 id="zend.validate.introduction.definition">
-
         <title>Was ist eine Prüfung?</title>
 
         <para>

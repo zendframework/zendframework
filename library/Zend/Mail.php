@@ -528,44 +528,65 @@ class Zend_Mail extends Zend_Mime_Message
     }
 
     /**
-     * Adds To-header and recipient
+     * Adds To-header and recipient, $email can be an array, or a single string address
      *
-     * @param  string $email
+     * @param  string|array $email
      * @param  string $name
      * @return Zend_Mail Provides fluent interface
      */
     public function addTo($email, $name='')
     {
-        $this->_addRecipientAndHeader('To', $email, $name);
-        $this->_to[] = $email;
+        if (!is_array($email)) {
+            $email = array($name => $email);
+        }
+        
+        foreach ($email as $n => $recipient) {
+            $this->_addRecipientAndHeader('To', $recipient, is_int($n) ? '' : $n);
+            $this->_to[] = $recipient;
+        }
+
         return $this;
     }
 
     /**
-     * Adds Cc-header and recipient
+     * Adds Cc-header and recipient, $email can be an array, or a single string address
      *
-     * @param  string    $email
+     * @param  string|array    $email
      * @param  string    $name
      * @return Zend_Mail Provides fluent interface
      */
     public function addCc($email, $name='')
     {
-        $this->_addRecipientAndHeader('Cc', $email, $name);
+        if (!is_array($email)) {
+            $email = array($name => $email);
+        }
+        
+        foreach ($email as $n => $recipient) {
+            $this->_addRecipientAndHeader('Cc', $recipient, is_int($n) ? '' : $n);
+        }
+        
         return $this;
     }
 
     /**
-     * Adds Bcc recipient
+     * Adds Bcc recipient, $email can be an array, or a single string address
      *
-     * @param  string    $email
+     * @param  string|array    $email
      * @return Zend_Mail Provides fluent interface
      */
     public function addBcc($email)
     {
-        $this->_addRecipientAndHeader('Bcc', $email, '');
+        if (!is_array($email)) {
+            $email = array($email);
+        }
+        
+        foreach ($email as $recipient) {
+            $this->_addRecipientAndHeader('Bcc', $recipient, '');
+        }
+        
         return $this;
     }
-
+    
     /**
      * Return list of recipient email addresses
      *

@@ -159,6 +159,38 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $this->assertContains('To: recipient1@example.com', $mock->header);
         $this->assertContains('Cc: Example no. 1 for cc <recipient1_cc@example.com>', $mock->header);
     }
+    
+    /**
+     * Test sending in arrays of recipients
+     */
+    public function testArrayRecipients()
+    {
+        $mail = new Zend_Mail();
+        $res = $mail->setBodyText('Test #2');
+        $mail->setFrom('eli@example.com', 'test Mail User');
+        $mail->setSubject('Subject #2');
+        $mail->addTo(array('heather@example.com', 'Ramsey White' => 'ramsey@example.com'));
+        $mail->addCc(array('keith@example.com', 'Cal Evans' => 'cal@example.com'));
+        $mail->addBcc(array('ralph@example.com', 'matthew@example.com'));
+
+        $mock = new Zend_Mail_Transport_Mock();
+        $mail->send($mock);
+
+        $this->assertTrue($mock->called);
+        $this->assertEquals('eli@example.com', $mock->from);
+        $this->assertContains('heather@example.com', $mock->recipients);
+        $this->assertContains('ramsey@example.com', $mock->recipients);
+        $this->assertContains('ralph@example.com', $mock->recipients);
+        $this->assertContains('matthew@example.com', $mock->recipients);
+        $this->assertContains('keith@example.com', $mock->recipients);
+        $this->assertContains('cal@example.com', $mock->recipients);
+        $this->assertContains('Test #2', $mock->body);
+        $this->assertContains('From: test Mail User <eli@example.com>', $mock->header);
+        $this->assertContains('Subject: Subject #2', $mock->header);
+        $this->assertContains('To: heather@example.com', $mock->header);
+        $this->assertContains('Ramsey White <ramsey@example.com>', $mock->header);
+        $this->assertContains('Cal Evans <cal@example.com>', $mock->header);
+    }
 
     /**
      * Check if Header Fields are encoded correctly and if

@@ -20,11 +20,12 @@
  * @version    $Id $
  */
 
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Tool_Framework_AllTests::main');
 }
 
-/** requires here */
 require_once 'Zend/Tool/Framework/RegistryTest.php';
 require_once 'Zend/Tool/Framework/Action/BaseTest.php';
 require_once 'Zend/Tool/Framework/Action/RepositoryTest.php';

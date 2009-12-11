@@ -20,96 +20,27 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_AllTests::main');
 }
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
-
-/**
- * Exclude from code coverage report
- */
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-/**
- * @see Zend_Service_AkismetTest
- */
 require_once 'Zend/Service/AkismetTest.php';
-
-/**
- * @see Zend_Service_Amazon_AllTests
- */
 require_once 'Zend/Service/Amazon/AllTests.php';
-
-/**
- * @see Zend_Service_Audioscrobbler_AllTests
- */
 require_once 'Zend/Service/Audioscrobbler/AllTests.php';
-
-/**
- * @see Zend_Service_Delicious_AllTests
- */
 require_once 'Zend/Service/Delicious/AllTests.php';
-
-/**
- * @see Zend_Service_Flickr_AllTests
- */
 require_once 'Zend/Service/Flickr/AllTests.php';
-
-/**
- * @see Zend_Service_LiveDocx_AllTests
- */
 require_once 'Zend/Service/LiveDocx/AllTests.php';
-
-/**
- * @see Zend_Service_Nirvanix_AllTests
- */
 require_once 'Zend/Service/Nirvanix/AllTests.php';
-
-/**
- * @see Zend_Service_ReCaptcha_AllTests
- */
 require_once 'Zend/Service/ReCaptcha/AllTests.php';
-
-/**
- * @see Zend_Service_Simpy_AllTests
- */
 require_once 'Zend/Service/Simpy/AllTests.php';
-
-/**
- * @see Zend_Service_SlideShareTest
- */
 require_once 'Zend/Service/SlideShareTest.php';
-
-/**
- * @see Zend_Service_StrikeIron_AllTests
- */
 require_once 'Zend/Service/StrikeIron/AllTests.php';
-
-/**
- * @see Zend_Service_Technorati_AllTests
- */
 require_once 'Zend/Service/Technorati/AllTests.php';
-
-/**
- * @see Zend_Service_TwitterTest
- */
 require_once 'Zend/Service/TwitterTest.php';
-
-/**
- * @see Zend_Service_TwitterSearchTest
- */
 require_once 'Zend/Service/TwitterSearchTest.php';
-
-/**
- * @see Zend_Service_Yahoo_AllTests
- */
 require_once 'Zend/Service/Yahoo/AllTests.php';
-
 
 /**
  * @category   Zend

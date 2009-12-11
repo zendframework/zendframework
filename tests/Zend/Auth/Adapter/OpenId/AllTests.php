@@ -20,22 +20,13 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Auth_Adapter_OpenId_AllTests::main');
 }
 
-
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
-
-/**
- * Zend_Auth_Adapter_OpenIdTest
- */
 require_once 'Zend/Auth/Adapter/OpenId/OpenIdTest.php';
-
 
 /**
  * @category   Zend

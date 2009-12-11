@@ -20,14 +20,13 @@
  * @version    $Id$
  */
 
-error_reporting( E_ALL | E_STRICT ); // now required for each test suite
 // define('TESTS_ZEND_LOCALE_BCMATH_ENABLED', false); // uncomment to disable use of bcmath extension by Zend_Date
+
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Date_AllTests::main');
 }
-
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 require_once 'Zend/Date/DateObjectTest.php';
 
@@ -48,7 +47,7 @@ class Zend_Date_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Date_DateObject');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Date_Date');
 
         $suite->addTestSuite('Zend_Date_DateObjectTest');
 

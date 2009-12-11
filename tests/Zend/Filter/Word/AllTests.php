@@ -20,19 +20,12 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Filter_Word_AllTests::main');
 }
 
-
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
-
-/**
- * Word filter tests
- */
 require_once 'Zend/Filter/Word/CamelCaseToDashTest.php';
 require_once 'Zend/Filter/Word/CamelCaseToSeparatorTest.php';
 require_once 'Zend/Filter/Word/CamelCaseToUnderscoreTest.php';

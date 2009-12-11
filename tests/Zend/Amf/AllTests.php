@@ -20,10 +20,8 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Amf_AllTests::main');
 }
@@ -38,7 +36,6 @@ require_once 'Zend/Amf/Value/MessageBodyTest.php';
 require_once 'Zend/Amf/Value/MessageHeaderTest.php';
 require_once 'Zend/Amf/AuthTest.php';
 require_once 'Zend/Amf/ResourceTest.php';
-
 
 /**
  * @category   Zend

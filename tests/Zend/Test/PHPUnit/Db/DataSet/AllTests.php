@@ -20,7 +20,11 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__)."/../../../../../TestHelper.php";
+require_once dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Test_PHPUnit_Db_DataSet_AllTests::main');
+}
 
 require_once "DbRowsetTest.php";
 require_once "QueryDataSetTest.php";
@@ -38,9 +42,15 @@ require_once "DbTableDataSetTest.php";
  */
 class Zend_Test_PHPUnit_Db_DataSet_AllTests
 {
+    public static function main()
+    {
+        PHPUnit_TextUI_TestRunner::run(self::suite());
+    }
+
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Test PHPUnit Database DataSets');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test_PHPUnit_Db_DataSet');
+
         $suite->addTestSuite('Zend_Test_PHPUnit_Db_DataSet_DbRowsetTest');
         $suite->addTestSuite('Zend_Test_PHPUnit_Db_DataSet_QueryDataSetTest');
         $suite->addTestSuite('Zend_Test_PHPUnit_Db_DataSet_QueryTableTest');
@@ -49,4 +59,8 @@ class Zend_Test_PHPUnit_Db_DataSet_AllTests
 
         return $suite;
     }
+}
+
+if (PHPUnit_MAIN_METHOD == 'Zend_Test_PHPUnit_Db_DataSet_AllTests::main') {
+    Zend_Test_PHPUnit_Db_DataSet_AllTests::main();
 }

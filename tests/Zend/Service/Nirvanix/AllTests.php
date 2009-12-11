@@ -20,45 +20,17 @@
  * @version    $Id $
  */
 
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_Nirvanix_AllTests::main');
 }
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
-
-/**
- * Exclude from code coverage report
- */
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-/**
- * @see Zend_Service_Nirvanix_NirvanixTest
- */
 require_once 'Zend/Service/Nirvanix/NirvanixTest.php';
-
-/**
- * @see Zend_Service_Nirvanix_ExceptionTest
- */
 require_once 'Zend/Service/Nirvanix/ExceptionTest.php';
-
-/**
- * @see Zend_Service_Nirvanix_ResponseTest
- */
 require_once 'Zend/Service/Nirvanix/ResponseTest.php';
-
-/**
- * @see Zend_Service_Nirvanix_Namespace_BaseTest
- */
 require_once 'Zend/Service/Nirvanix/Namespace/BaseTest.php';
-
-/**
- * @see Zend_Service_Nirvanix_Namespace_ImfsTest
- */
 require_once 'Zend/Service/Nirvanix/Namespace/ImfsTest.php';
-
 
 /**
  * @category   Zend

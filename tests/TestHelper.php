@@ -40,18 +40,9 @@ error_reporting( E_ALL | E_STRICT );
  * Determine the root, library, and tests directories of the framework
  * distribution.
  */
-$zfRoot        = dirname(__FILE__) . '/..';
+$zfRoot        = realpath(dirname(dirname(__FILE__)));
 $zfCoreLibrary = "$zfRoot/library";
 $zfCoreTests   = "$zfRoot/tests";
-
-/*
- * Omit from code coverage reports the contents of the tests directory
- */
-if (defined('TESTS_GENERATE_REPORT') && TESTS_GENERATE_REPORT === true) {
-    foreach (array('php', 'phtml', 'csv') as $suffix) {
-        PHPUnit_Util_Filter::addDirectoryToFilter($zfCoreTests, ".$suffix");
-    }
-}
 
 /*
  * Prepend the Zend Framework library/ and tests/ directories to the
@@ -76,22 +67,33 @@ if (is_readable($zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
     require_once $zfCoreTests . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
 }
 
+if (defined('TESTS_GENERATE_REPORT') && TESTS_GENERATE_REPORT === true &&
+    version_compare(PHPUnit_Runner_Version::id(), '3.1.6', '>=')) {
+
+    /*
+     * Add Zend Framework library/ directory to the PHPUnit code coverage
+     * whitelist. This has the effect that only production code source files
+     * appear in the code coverage report and that all production code source
+     * files, even those that are not covered by a test yet, are processed.
+     */
+    PHPUnit_Util_Filter::addDirectoryToWhitelist($zfCoreLibrary);
+
+    /*
+     * Omit from code coverage reports the contents of the tests directory
+     */
+    foreach (array('.php', '.phtml', '.csv', '.inc') as $suffix) {
+        PHPUnit_Util_Filter::addDirectoryToFilter($zfCoreTests, $suffix);
+    }
+    PHPUnit_Util_Filter::addDirectoryToFilter(PEAR_INSTALL_DIR);
+    PHPUnit_Util_Filter::addDirectoryToFilter(PHP_LIBDIR);
+}
+
+
 /**
  * Start output buffering, if enabled
  */
 if (defined('TESTS_ZEND_OB_ENABLED') && constant('TESTS_ZEND_OB_ENABLED')) {
     ob_start();
-}
-
-/*
- * Add Zend Framework library/ directory to the PHPUnit code coverage
- * whitelist. This has the effect that only production code source files appear
- * in the code coverage report and that all production code source files, even
- * those that are not covered by a test yet, are processed.
- */
-if (defined('TESTS_GENERATE_REPORT') && TESTS_GENERATE_REPORT === true &&
-    version_compare(PHPUnit_Runner_Version::id(), '3.1.6', '>=')) {
-    PHPUnit_Util_Filter::addDirectoryToWhitelist($zfCoreLibrary);
 }
 
 /*

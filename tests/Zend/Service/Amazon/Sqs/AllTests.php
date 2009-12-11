@@ -20,28 +20,13 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_Amazon_Sqs_AllTests::main');
 }
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
-
-/**
- * Exclude from code coverage report
- */
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-/**
- * @see Zend_Service_Amazon_Sqs_OfflineTest
- */
 require_once 'Zend/Service/Amazon/Sqs/OfflineTest.php';
-
-/**
- * @see Zend_Service_Amazon_Sqs_OnlineTest
- */
 require_once 'Zend/Service/Amazon/Sqs/OnlineTest.php';
 
 /**
@@ -72,7 +57,7 @@ class Zend_Service_Amazon_Sqs_AllTests
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service - Amazon - SQS');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service_Amazon_Sqs');
 
         $suite->addTestSuite('Zend_Service_Amazon_Sqs_OfflineTest');
 

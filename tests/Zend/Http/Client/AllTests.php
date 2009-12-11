@@ -20,21 +20,11 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Http_Client_AllTests::main');
 }
-
-// Read local configuration
-if (! defined('TESTS_ZEND_HTTP_CLIENT_BASEURI') &&
-    is_readable('TestConfiguration.php')) {
-
-    require_once 'TestConfiguration.php';
-}
-
-require_once realpath(dirname(__FILE__) . '/../../../') . '/TestHelper.php';
-
-require_once 'PHPUnit/Framework/TestSuite.php';
-require_once 'PHPUnit/TextUI/TestRunner.php';
 
 require_once 'Zend/Http/Client/StaticTest.php';
 require_once 'Zend/Http/Client/SocketTest.php';

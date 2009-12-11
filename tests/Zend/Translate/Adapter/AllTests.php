@@ -20,11 +20,11 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Translate_Adapter_AllTests::main');
 }
-
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 require_once 'Zend/Translate/Adapter/ArrayTest.php';
 require_once 'Zend/Translate/Adapter/CsvTest.php';
@@ -53,7 +53,7 @@ class Zend_Translate_Adapter_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Translate');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Translate_Adapter');
 
         $suite->addTestSuite('Zend_Translate_Adapter_ArrayTest');
         $suite->addTestSuite('Zend_Translate_Adapter_CsvTest');

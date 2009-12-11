@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Memory_AllTests::main');
 }
-
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 require_once 'Zend/Memory/MemoryTest.php';
 require_once 'Zend/Memory/ValueTest.php';
@@ -61,7 +58,6 @@ class Zend_Memory_AllTests
         $suite->addTestSuite('Zend_Memory_Container_LockedTest');
         $suite->addTestSuite('Zend_Memory_Container_AccessControllerTest');
         $suite->addTestSuite('Zend_Memory_MemoryManagerTest');
-
 
         return $suite;
     }

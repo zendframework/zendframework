@@ -20,14 +20,14 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Ldap_Ldif_AllTests::main');
 }
+
+require_once 'Zend/Ldap/Ldif/SimpleEncoderTest.php';
+require_once 'Zend/Ldap/Ldif/SimpleDecoderTest.php';
 
 /**
  * @category   Zend
@@ -49,15 +49,7 @@ class Zend_Ldap_Ldif_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Ldap_Ldif');
 
-        /**
-         * @see Zend_Ldap_Ldif_SimpleEncoderTest
-         */
-        require_once 'Zend/Ldap/Ldif/SimpleEncoderTest.php';
         $suite->addTestSuite('Zend_Ldap_Ldif_SimpleEncoderTest');
-        /**
-         * @see Zend_Ldap_Ldif_SimpleDecoderTest
-         */
-        require_once 'Zend/Ldap/Ldif/SimpleDecoderTest.php';
         $suite->addTestSuite('Zend_Ldap_Ldif_SimpleDecoderTest');
 
         if (defined('TESTS_ZEND_LDAP_ONLINE_ENABLED')

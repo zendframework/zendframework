@@ -20,14 +20,11 @@
  * @version    $Id: $
  */
 
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_LiveDocx_AllTests::main');
 }
-
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 require_once 'Zend/Service/LiveDocx/LiveDocxTest.php';
 require_once 'Zend/Service/LiveDocx/MailMergeTest.php';
@@ -38,6 +35,8 @@ require_once 'Zend/Service/LiveDocx/MailMergeTest.php';
  * @category   Zend
  * @package    Zend_Service_LiveDocx
  * @subpackage UnitTests
+ * @group      Zend_Service
+ * @group      Zend_Service_LiveDocx
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id: $

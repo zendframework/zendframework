@@ -20,14 +20,13 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Test_PHPUnit_Constraint_AllTests::main');
 }
+
+require_once 'Zend/Test/PHPUnit/Constraint/DomQueryTest.php';
 
 /**
  * @category   Zend
@@ -49,10 +48,6 @@ class Zend_Test_PHPUnit_Constraint_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test_PHPUnit_Constraint');
 
-        /**
-         * @see Zend_Test_PHPUnit_Constraint_DomQueryTest
-         */
-        require_once 'Zend/Test/PHPUnit/Constraint/DomQueryTest.php';
         $suite->addTestSuite('Zend_Test_PHPUnit_Constraint_DomQueryTest');
 
         return $suite;

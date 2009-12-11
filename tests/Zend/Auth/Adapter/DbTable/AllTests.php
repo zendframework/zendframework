@@ -20,35 +20,14 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Auth_Adapter_DbTable_AllTests::main');
 }
 
-
-/**
- * PHPUnit_Framework_TestSuite
- */
-require_once 'PHPUnit/Framework/TestSuite.php';
-
-
-/**
- * PHPUnit_TextUI_TestRunner
- */
-require_once 'PHPUnit/TextUI/TestRunner.php';
-
-
-/**
- * @see Zend_Auth_Adapter_DbTable_BasicSqliteTest
- */
 require_once 'Zend/Auth/Adapter/DbTable/BasicSqliteTest.php';
-
-
-/**
- * @see Zend_Auth_Adapter_DbTable_BasicSqliteTest_SkipTests
- */
 require_once 'Zend/Auth/Adapter/DbTable/BasicSqliteTest/SkipTests.php';
-
 
 /**
  * @category   Zend
@@ -77,7 +56,7 @@ class Zend_Auth_Adapter_DbTable_AllTests
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Auth_Adapter_Http');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Auth_Adapter_DbTable');
 
         if (!defined('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') ||
             constant('TESTS_ZEND_AUTH_ADAPTER_DBTABLE_PDO_SQLITE_ENABLED') === false) {

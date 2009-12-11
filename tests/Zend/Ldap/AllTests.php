@@ -20,13 +20,29 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Ldap_AllTests::main');
+}
+
+require_once 'Zend/Ldap/OfflineTest.php';
+require_once 'Zend/Ldap/AttributeTest.php';
+require_once 'Zend/Ldap/ConverterTest.php';
+require_once 'Zend/Ldap/Dn/AllTests.php';
+require_once 'Zend/Ldap/FilterTest.php';
+require_once 'Zend/Ldap/Node/AllTests.php';
+require_once 'Zend/Ldap/Ldif/AllTests.php';
+
+if (defined('TESTS_ZEND_LDAP_ONLINE_ENABLED')
+    && constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
+    require_once 'Zend/Ldap/ConnectTest.php';
+    require_once 'Zend/Ldap/BindTest.php';
+    require_once 'Zend/Ldap/CanonTest.php';
+    require_once 'Zend/Ldap/SearchTest.php';
+    require_once 'Zend/Ldap/CrudTest.php';
+    require_once 'Zend/Ldap/CopyRenameTest.php';
+    require_once 'Zend/Ldap/ChangePasswordTest.php';
 }
 
 /**
@@ -48,78 +64,22 @@ class Zend_Ldap_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Ldap');
 
-        /**
-         * @see Zend_Ldap_OfflineTest
-         */
-        require_once 'Zend/Ldap/OfflineTest.php';
         $suite->addTestSuite('Zend_Ldap_OfflineTest');
-        /**
-         * @see Zend_Ldap_AttributeTest
-         */
-        require_once 'Zend/Ldap/AttributeTest.php';
         $suite->addTestSuite('Zend_Ldap_AttributeTest');
-        /**
-         * @see Zend_Ldap_ConverterTest
-         */
-        require_once 'Zend/Ldap/ConverterTest.php';
         $suite->addTestSuite('Zend_Ldap_ConverterTest');
-        /**
-         * @see Zend_Ldap_Dn_AllTests
-         */
-        require_once 'Zend/Ldap/Dn/AllTests.php';
         $suite->addTest(Zend_Ldap_Dn_AllTests::suite());
-        /**
-         * @see Zend_Ldap_FilterTest
-         */
-        require_once 'Zend/Ldap/FilterTest.php';
         $suite->addTestSuite('Zend_Ldap_FilterTest');
-        /**
-         * @see Zend_Ldap_Node_AllTests
-         */
-        require_once 'Zend/Ldap/Node/AllTests.php';
         $suite->addTest(Zend_Ldap_Node_AllTests::suite());
-        /**
-         * @see Zend_Ldap_Ldif_AllTests
-         */
-        require_once 'Zend/Ldap/Ldif/AllTests.php';
         $suite->addTest(Zend_Ldap_Ldif_AllTests::suite());
 
         if (defined('TESTS_ZEND_LDAP_ONLINE_ENABLED')
             && constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
-            /**
-             * @see Zend_Ldap_ConnectTest
-             */
-            require_once 'Zend/Ldap/ConnectTest.php';
             $suite->addTestSuite('Zend_Ldap_ConnectTest');
-            /**
-             * @see Zend_Ldap_BindTest
-             */
-            require_once 'Zend/Ldap/BindTest.php';
             $suite->addTestSuite('Zend_Ldap_BindTest');
-            /**
-             * @see Zend_Ldap_CanonTest
-             */
-            require_once 'Zend/Ldap/CanonTest.php';
             $suite->addTestSuite('Zend_Ldap_CanonTest');
-            /**
-             * @see Zend_Ldap_SearchTest
-             */
-            require_once 'Zend/Ldap/SearchTest.php';
             $suite->addTestSuite('Zend_Ldap_SearchTest');
-            /**
-             * @see Zend_Ldap_CrudTest
-             */
-            require_once 'Zend/Ldap/CrudTest.php';
             $suite->addTestSuite('Zend_Ldap_CrudTest');
-            /**
-             * @see Zend_Ldap_CopyRenameTest
-             */
-            require_once 'Zend/Ldap/CopyRenameTest.php';
             $suite->addTestSuite('Zend_Ldap_CopyRenameTest');
-            /**
-             * @see Zend_Ldap_ChangePasswordTest
-             */
-            require_once 'Zend/Ldap/ChangePasswordTest.php';
             $suite->addTestSuite('Zend_Ldap_ChangePasswordTest');
         } else {
             $suite->addTest(new Zend_Ldap_SkipOnlineTests());

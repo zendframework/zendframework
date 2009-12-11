@@ -20,16 +20,13 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Session_SaveHandler_AllTests::main');
 }
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
-
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
+require_once 'Zend/Session/SaveHandler/DbTableTest.php';
 
 /**
  * @category   Zend
@@ -59,11 +56,6 @@ class Zend_Session_SaveHandler_AllTests
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Session_SaveHandler');
-
-        /**
-         * @see Zend_Session_SaveHandler_DbTableTest
-         */
-        require_once 'Zend/Session/SaveHandler/DbTableTest.php';
 
         if (!extension_loaded('pdo_sqlite')) {
             $suite->addTestSuite('Zend_Session_SaveHandler_DbTableTestSkip');

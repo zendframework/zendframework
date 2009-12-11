@@ -20,41 +20,16 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Auth_Adapter_Http_AllTests::main');
 }
 
-
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
-
-
-/**
- * @see Zend_Auth_Adapter_Http_AuthTest
- */
 require_once 'Zend/Auth/Adapter/Http/AuthTest.php';
-
-
-/**
- * @see Zend_Auth_Adapter_Http_ObjectTest
- */
 require_once 'Zend/Auth/Adapter/Http/ObjectTest.php';
-
-
-/**
- * @see Zend_Auth_Adapter_Http_ProxyTest
- */
 require_once 'Zend/Auth/Adapter/Http/ProxyTest.php';
-
-
-/**
- * @see Zend_Auth_Adapter_Http_Resolver_AllTests
- */
 require_once 'Zend/Auth/Adapter/Http/Resolver/AllTests.php';
-
 
 /**
  * @category   Zend

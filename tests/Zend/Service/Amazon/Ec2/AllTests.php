@@ -19,13 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_Amazon_Ec2_AllTests::main');
 }
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 require_once 'Zend/Service/Amazon/Ec2/AvailabilityzonesTest.php';
 require_once 'Zend/Service/Amazon/Ec2/EbsTest.php';
@@ -70,7 +69,7 @@ class Zend_Service_Amazon_Ec2_AllTests
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service_Amazon - Ec2');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service_Amazon_Ec2');
 
         $suite->addTestSuite('Zend_Service_Amazon_Ec2_AvailabilityzonesTest');
         $suite->addTestSuite('Zend_Service_Amazon_Ec2_EbsTest');

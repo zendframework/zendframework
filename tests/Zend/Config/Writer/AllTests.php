@@ -20,10 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
+PHPUnit_Util_Filter::addDirectoryToFilter(dirname(__FILE__) . "/temp", "cfg");
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Config_Writer_AllTests::main');
@@ -45,7 +44,6 @@ class Zend_Config_Writer_AllTests
 {
     public static function main()
     {
-    PHPUnit_Util_Filter::addDirectoryToFilter(dirname(__FILE__) . "/temp", "cfg");
         PHPUnit_TextUI_TestRunner::run(self::suite());
     }
 

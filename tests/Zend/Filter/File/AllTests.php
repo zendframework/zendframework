@@ -13,50 +13,64 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Reflection
+ * @package    Zend_Filter
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: AllTests.php 16225 2009-06-21 20:34:55Z thomas $
  */
 
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Reflection_Docblock_AllTests::main');
+    define('PHPUnit_MAIN_METHOD', 'Zend_Filter_File_AllTests::main');
 }
 
-require_once 'Zend/Reflection/Docblock/TagTest.php';
-require_once 'Zend/Reflection/Docblock/Tag/ParamTest.php';
-require_once 'Zend/Reflection/Docblock/Tag/ReturnTest.php';
+require_once 'Zend/Filter/File/DecryptTest.php';
+require_once 'Zend/Filter/File/EncryptTest.php';
+require_once 'Zend/Filter/File/LowerCaseTest.php';
+require_once 'Zend/Filter/File/RenameTest.php';
+require_once 'Zend/Filter/File/UpperCaseTest.php';
 
 /**
  * @category   Zend
- * @package    Zend_Reflection
+ * @package    Zend_Filter
  * @subpackage UnitTests
+ * @group      Zend_Filter
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Reflection
  */
-class Zend_Reflection_Docblock_AllTests
+class Zend_Filter_File_AllTests
 {
+    /**
+     * Runs this test suite
+     *
+     * @return void
+     */
     public static function main()
     {
         PHPUnit_TextUI_TestRunner::run(self::suite());
     }
 
+    /**
+     * Creates and returns this test suite
+     *
+     * @return PHPUnit_Framework_TestSuite
+     */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Reflection_Docblock');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Filter_File');
 
-        $suite->addTestSuite('Zend_Reflection_Docblock_TagTest');
-        $suite->addTestSuite('Zend_Reflection_Docblock_Tag_ParamTest');
-        $suite->addTestSuite('Zend_Reflection_Docblock_Tag_ReturnTest');
+        $suite->addTestSuite('Zend_Filter_File_DecryptTest');
+        $suite->addTestSuite('Zend_Filter_File_EncryptTest');
+        $suite->addTestSuite('Zend_Filter_File_LowerCaseTest');
+        $suite->addTestSuite('Zend_Filter_File_RenameTest');
+        $suite->addTestSuite('Zend_Filter_File_UpperCaseTest');
 
         return $suite;
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Reflection_Docblock_AllTests::main') {
-    Zend_Reflection_Docblock_AllTests::main();
+if (PHPUnit_MAIN_METHOD == 'Zend_Filter_File_AllTests::main') {
+    Zend_Filter_File_AllTests::main();
 }

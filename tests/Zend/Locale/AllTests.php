@@ -20,25 +20,11 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Locale_AllTests::main');
 }
-
-if (!defined('TESTS_ZEND_LOCALE_FORMAT_SETLOCALE')) {
-    /**
-     * Read in user-defined test configuration if available; otherwise, read default test configuration.
-     * This facilitates running "php AllTests.php" in this subdirectory or "phpunit Zend_Locale_AllTests".
-     */
-    $_test_configuration = dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..'
-        . DIRECTORY_SEPARATOR .  'TestConfiguration.php';
-    if (is_readable($_test_configuration)) {
-        include_once $_test_configuration;
-    } else if (is_readable("$_test_configuration.dist")) {
-        include_once "$_test_configuration.dist";
-    }
-}
-
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 // define('TESTS_ZEND_LOCALE_BCMATH_ENABLED', false); // uncomment to disable use of bcmath extension by Zend_Date
 

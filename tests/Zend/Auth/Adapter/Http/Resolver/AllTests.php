@@ -20,29 +20,13 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Auth_Adapter_Http_Resolver_AllTests::main');
 }
 
-
-/**
- * PHPUnit_Framework_TestSuite
- */
-require_once 'PHPUnit/Framework/TestSuite.php';
-
-
-/**
- * PHPUnit_TextUI_TestRunner
- */
-require_once 'PHPUnit/TextUI/TestRunner.php';
-
-
-/**
- * @see Zend_Auth_Adapter_Http_Resolver_FileTest
- */
 require_once 'Zend/Auth/Adapter/Http/Resolver/FileTest.php';
-
 
 /**
  * @category   Zend
@@ -71,7 +55,7 @@ class Zend_Auth_Adapter_Http_Resolver_AllTests
      */
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Auth_Adapter_Http Resolvers');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Auth_Adapter_Http Resolver');
 
         $suite->addTestSuite('Zend_Auth_Adapter_Http_Resolver_FileTest');
 

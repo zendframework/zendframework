@@ -20,142 +20,37 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Validate_AllTests::main');
 }
 
-
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
-
-/**
- * @see Zend_Validate_AbstractTest
- */
 require_once 'Zend/Validate/AbstractTest.php';
-
-/**
- * @see Zend_Validate_AlnumTest
- */
 require_once 'Zend/Validate/AlnumTest.php';
-
-/**
- * @see Zend_Validate_AlphaTest
- */
 require_once 'Zend/Validate/AlphaTest.php';
-
-/**
- * @see Zend_Validate_BarcodeTest
- */
 require_once 'Zend/Validate/BarcodeTest.php';
-
-/**
- * @see Zend_Validate_BetweenTest
- */
 require_once 'Zend/Validate/BetweenTest.php';
-
-/**
- * @see Zend_Validate_CcnumTest
- */
 require_once 'Zend/Validate/CcnumTest.php';
-
-/**
- * @see Zend_Validate_DateTest
- */
 require_once 'Zend/Validate/DateTest.php';
-
-/**
- * @see Zend_Validate_Db_AllTests
- */
 require_once 'Zend/Validate/Db/AllTests.php';
-
-/**
- * @see Zend_Validate_DigitsTest
- */
 require_once 'Zend/Validate/DigitsTest.php';
-
-/**
- * @see Zend_Validate_EmailAddressTest
- */
 require_once 'Zend/Validate/EmailAddressTest.php';
-
-/**
- * @see Zend_Validate_File_AllTests
- */
 require_once 'Zend/Validate/File/AllTests.php';
-
-/**
- * @see Zend_Validate_FloatTest
- */
 require_once 'Zend/Validate/FloatTest.php';
-
-/**
- * @see Zend_Validate_GreaterThanTest
- */
 require_once 'Zend/Validate/GreaterThanTest.php';
-
-/**
- * @see Zend_Validate_HexTest
- */
 require_once 'Zend/Validate/HexTest.php';
-
-/**
- * @see Zend_Validate_HostnameTest
- */
 require_once 'Zend/Validate/HostnameTest.php';
-
-/**
- * @see Zend_Validate_IdenticalTest
- */
 require_once 'Zend/Validate/IdenticalTest.php';
-
-/**
- * @see Zend_Validate_InArrayTest
- */
 require_once 'Zend/Validate/InArrayTest.php';
-
-/**
- * @see Zend_Validate_IntTest
- */
 require_once 'Zend/Validate/IntTest.php';
-
-/**
- * @see Zend_Validate_IpTest
- */
 require_once 'Zend/Validate/IpTest.php';
-
-/**
- * @see Zend_Validate_LessThanTest
- */
 require_once 'Zend/Validate/LessThanTest.php';
-
-/**
- * @see Zend_Validate_MessageTest
- */
 require_once 'Zend/Validate/MessageTest.php';
-
-/**
- * @see Zend_Validate_NotEmptyTest
- */
 require_once 'Zend/Validate/NotEmptyTest.php';
-
-/**
- * @see Zend_Validate_RegexTest
- */
 require_once 'Zend/Validate/RegexTest.php';
-
-/**
- * @see Zend_Validate_Sitemap_AllTests
- */
 require_once 'Zend/Validate/Sitemap/AllTests.php';
-
-/**
- * @see Zend_Validate_StringLengthTest
- */
 require_once 'Zend/Validate/StringLengthTest.php';
-
 
 /**
  * @category   Zend

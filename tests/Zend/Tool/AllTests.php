@@ -20,9 +20,6 @@
  * @version    $Id $
  */
 
-/**
- * Test helper
- */
 require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
@@ -50,8 +47,10 @@ class Zend_Tool_AllTests
     public static function suite()
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Tool');
+
         $suite->addTestSuite('Zend_Tool_Framework_AllTests');
         $suite->addTestSuite('Zend_Tool_Project_AllTests');
+
         return $suite;
     }
 }

@@ -20,21 +20,11 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Feed_AllTests::main');
 }
-
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
-
-/**
- * Exclude from code coverage report
- */
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 
 require_once 'Zend/Feed/ArrayAccessTest.php';
 require_once 'Zend/Feed/AtomEntryOnlyTest.php';

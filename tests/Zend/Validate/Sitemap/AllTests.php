@@ -19,11 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
+
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Validate_Sitemap_AllTests::main');
 }
-
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 require_once 'Zend/Validate/Sitemap/ChangefreqTest.php';
 require_once 'Zend/Validate/Sitemap/LastmodTest.php';

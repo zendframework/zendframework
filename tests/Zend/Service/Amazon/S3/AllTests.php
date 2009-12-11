@@ -20,36 +20,15 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_Amazon_S3_AllTests::main');
 }
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
-
-/**
- * Exclude from code coverage report
- */
-PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
-/**
- * @see Zend_Service_Amazon_OfflineTest
- */
 require_once 'Zend/Service/Amazon/S3/OfflineTest.php';
-
-/**
- * @see Zend_Service_Amazon_OnlineTest
- */
 require_once 'Zend/Service/Amazon/S3/OnlineTest.php';
-
-/**
- * @see Zend_Service_Amazon_StreamTest
- */
 require_once 'Zend/Service/Amazon/S3/StreamTest.php';
-
 
 
 /**

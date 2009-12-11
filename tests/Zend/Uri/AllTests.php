@@ -20,35 +20,13 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Uri_AllTests::main');
 }
 
-
-/**
- * Test helper
- */
-require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
-
-
-/**
- * PHPUnit_Framework_TestSuite
- */
-require_once 'PHPUnit/Framework/TestSuite.php';
-
-
-/**
- * PHPUnit_TextUI_TestRunner
- */
-require_once 'PHPUnit/TextUI/TestRunner.php';
-
-
-/**
- * @see Zend_Uri_HttpTest
- */
 require_once 'Zend/Uri/HttpTest.php';
-
 
 /**
  * @category   Zend

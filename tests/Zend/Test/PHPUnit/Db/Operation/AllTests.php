@@ -20,6 +20,12 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Test_PHPUnit_Db_Operation_AllTests::main');
+}
+
 require_once "InsertTest.php";
 require_once "TruncateTest.php";
 require_once "DeleteAllTest.php";
@@ -34,13 +40,23 @@ require_once "DeleteAllTest.php";
  */
 class Zend_Test_PHPUnit_Db_Operation_AllTests
 {
+    public static function main()
+    {
+        PHPUnit_TextUI_TestRunner::run(self::suite());
+    }
+
     static public function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Test PHPUnit Database Operation');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test_PHPUnit_Db_Operation');
+
         $suite->addTestSuite('Zend_Test_PHPUnit_Db_Operation_InsertTest');
         $suite->addTestSuite('Zend_Test_PHPUnit_Db_Operation_TruncateTest');
         $suite->addTestSuite('Zend_Test_PHPUnit_Db_Operation_DeleteAllTest');
 
         return $suite;
     }
+}
+
+if (PHPUnit_MAIN_METHOD == 'Zend_Test_PHPUnit_Db_Operation_AllTests::main') {
+    Zend_Test_PHPUnit_Db_Operation_AllTests::main();
 }

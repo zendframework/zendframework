@@ -20,53 +20,17 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Auth_Adapter_AllTests::main');
 }
 
-
-/**
- * PHPUnit_Framework_TestSuite
- */
-require_once 'PHPUnit/Framework/TestSuite.php';
-
-
-/**
- * PHPUnit_TextUI_TestRunner
- */
-require_once 'PHPUnit/TextUI/TestRunner.php';
-
-
-/**
- * @see Zend_Auth_Adapter_DbTable_AllTests
- */
 require_once 'Zend/Auth/Adapter/DbTable/AllTests.php';
-
-
-/**
- * @see Zend_Auth_Adapter_DigestTest
- */
 require_once 'Zend/Auth/Adapter/DigestTest.php';
-
-
-/**
- * @see Zend_Auth_Adapter_Http_AllTests
- */
 require_once 'Zend/Auth/Adapter/Http/AllTests.php';
-
-
-/**
- * @see Zend_Auth_Adapter_Ldap_AllTests
- */
 require_once 'Zend/Auth/Adapter/Ldap/AllTests.php';
-
-
-/**
- * @see Zend_Auth_Adapter_OpenId_AllTests
- */
 require_once 'Zend/Auth/Adapter/OpenId/AllTests.php';
-
 
 /**
  * @category   Zend

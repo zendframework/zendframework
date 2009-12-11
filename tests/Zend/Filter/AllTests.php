@@ -20,130 +20,36 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Filter_AllTests::main');
 }
 
-
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
-
-/**
- * @see Zend_Filter_AlnumTest
- */
 require_once 'Zend/Filter/AlnumTest.php';
-
-/**
- * @see Zend_Filter_AlphaTest
- */
 require_once 'Zend/Filter/AlphaTest.php';
-
-/**
- * @see Zend_Filter_BaseNameTest
- */
 require_once 'Zend/Filter/BaseNameTest.php';
-
-/**
- * @see Zend_Filter_CallbackTest
- */
 require_once 'Zend/Filter/CallbackTest.php';
-
-/**
- * @see Zend_Filter_CompressTest
- */
 require_once 'Zend/Filter/CompressTest.php';
-
-/**
- * @see Zend_Filter_DecompressTest
- */
 require_once 'Zend/Filter/DecompressTest.php';
-
-/**
- * @see Zend_Filter_DecryptTest
- */
 require_once 'Zend/Filter/DecryptTest.php';
-
-/**
- * @see Zend_Filter_DigitsTest
- */
 require_once 'Zend/Filter/DigitsTest.php';
-
-/**
- * @see Zend_Filter_DirTest
- */
 require_once 'Zend/Filter/DirTest.php';
-
-/**
- * @see Zend_Filter_EncryptTest
- */
 require_once 'Zend/Filter/EncryptTest.php';
-
-/**
- * @see Zend_Filter_HtmlEntitiesTest
- */
 require_once 'Zend/Filter/HtmlEntitiesTest.php';
-
-/**
- * @see Zend_Filter_InflectorTest
- */
 require_once 'Zend/Filter/InflectorTest.php';
-
-/**
- * @see Zend_Filter_InputTest
- */
 require_once 'Zend/Filter/InputTest.php';
-
-/**
- * @see Zend_Filter_IntTest
- */
 require_once 'Zend/Filter/IntTest.php';
-
-/**
- * @see Zend_Filter_NullTest
- */
 require_once 'Zend/Filter/NullTest.php';
-
-/**
- * @see Zend_Filter_PregReplaceTest
- */
 require_once 'Zend/Filter/PregReplaceTest.php';
-
-/**
- * @see Zend_Filter_RealPathTest
- */
 require_once 'Zend/Filter/RealPathTest.php';
-
-/**
- * @see Zend_Filter_StringToLowerTest
- */
 require_once 'Zend/Filter/StringToLowerTest.php';
-
-/**
- * @see Zend_Filter_StringToUpperTest
- */
 require_once 'Zend/Filter/StringToUpperTest.php';
-
-/**
- * @see Zend_Filter_StringTrimTest
- */
 require_once 'Zend/Filter/StringTrimTest.php';
-
-/**
- * @see Zend_Filter_StripNewlinesTest
- */
 require_once 'Zend/Filter/StripNewlinesTest.php';
-
-/**
- * @see Zend_Filter_StripTagsTest
- */
 require_once 'Zend/Filter/StripTagsTest.php';
 
-/**
- * Compress filter tests
- */
+/*
 require_once 'Zend/Filter/Compress/Bz2Test.php';
 require_once 'Zend/Filter/Compress/GzTest.php';
 require_once 'Zend/Filter/Compress/LzfTest.php';
@@ -151,24 +57,15 @@ require_once 'Zend/Filter/Compress/RarTest.php';
 require_once 'Zend/Filter/Compress/TarTest.php';
 require_once 'Zend/Filter/Compress/ZipTest.php';
 
-/**
- * Encrypt filter tests
- */
 require_once 'Zend/Filter/Encrypt/McryptTest.php';
 require_once 'Zend/Filter/Encrypt/OpensslTest.php';
 
-/**
- * File filter tests
- */
 require_once 'Zend/Filter/File/DecryptTest.php';
 require_once 'Zend/Filter/File/EncryptTest.php';
 require_once 'Zend/Filter/File/LowerCaseTest.php';
 require_once 'Zend/Filter/File/RenameTest.php';
 require_once 'Zend/Filter/File/UpperCaseTest.php';
 
-/**
- * Word filter tests
- */
 require_once 'Zend/Filter/Word/CamelCaseToDashTest.php';
 require_once 'Zend/Filter/Word/CamelCaseToSeparatorTest.php';
 require_once 'Zend/Filter/Word/CamelCaseToUnderscoreTest.php';
@@ -181,6 +78,12 @@ require_once 'Zend/Filter/Word/SeparatorToSeparatorTest.php';
 require_once 'Zend/Filter/Word/UnderscoreToCamelCaseTest.php';
 require_once 'Zend/Filter/Word/UnderscoreToDashTest.php';
 require_once 'Zend/Filter/Word/UnderscoreToSeparatorTest.php';
+*/
+
+require_once 'Zend/Filter/Compress/AllTests.php';
+require_once 'Zend/Filter/Encrypt/AllTests.php';
+require_once 'Zend/Filter/File/AllTests.php';
+require_once 'Zend/Filter/Word/AllTests.php';
 
 /**
  * @category   Zend
@@ -232,6 +135,8 @@ class Zend_Filter_AllTests
         $suite->addTestSuite('Zend_Filter_StringTrimTest');
         $suite->addTestSuite('Zend_Filter_StripNewlinesTest');
         $suite->addTestSuite('Zend_Filter_StripTagsTest');
+
+/*
         $suite->addTestSuite('Zend_Filter_Compress_Bz2Test');
         $suite->addTestSuite('Zend_Filter_Compress_GzTest');
         $suite->addTestSuite('Zend_Filter_Compress_LzfTest');
@@ -257,6 +162,12 @@ class Zend_Filter_AllTests
         $suite->addTestSuite('Zend_Filter_Word_UnderscoreToCamelCaseTest');
         $suite->addTestSuite('Zend_Filter_Word_UnderscoreToDashTest');
         $suite->addTestSuite('Zend_Filter_Word_UnderscoreToSeparatorTest');
+*/
+
+        $suite->addTest(Zend_Filter_Compress_AllTests::suite());
+        $suite->addTest(Zend_Filter_Encrypt_AllTests::suite());
+        $suite->addTest(Zend_Filter_File_AllTests::suite());
+        $suite->addTest(Zend_Filter_Word_AllTests::suite());
 
         return $suite;
     }

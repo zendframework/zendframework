@@ -20,18 +20,13 @@
  * @version    $Id$
  */
 
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Auth_AllTests::main');
 }
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
-
-/**
- * @see Zend_Auth_Adapter_AllTests
- */
 require_once 'Zend/Auth/Adapter/AllTests.php';
-
 
 /**
  * @category   Zend

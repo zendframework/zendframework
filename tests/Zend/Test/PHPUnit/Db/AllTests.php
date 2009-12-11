@@ -20,7 +20,11 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__)."/../../../../TestHelper.php";
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Test_PHPUnit_Db_AllTests::main');
+}
 
 require_once "DataSet/AllTests.php";
 require_once "Operation/AllTests.php";
@@ -41,9 +45,15 @@ require_once "Integration/MysqlIntegrationTest.php";
  */
 class Zend_Test_PHPUnit_Db_AllTests
 {
+    public static function main()
+    {
+        PHPUnit_TextUI_TestRunner::run(self::suite());
+    }
+
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Test PHPUnit Database Extension');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Test_PHPUnit_Db');
+
         $suite->addTestSuite('Zend_Test_PHPUnit_Db_TestCaseTest');
         $suite->addTestSuite('Zend_Test_PHPUnit_Db_ConnectionTest');
         $suite->addTestSuite('Zend_Test_PHPUnit_Db_SimpleTesterTest');
@@ -55,4 +65,8 @@ class Zend_Test_PHPUnit_Db_AllTests
 
         return $suite;
     }
+}
+
+if (PHPUnit_MAIN_METHOD == 'Zend_Test_PHPUnit_Db_AllTests::main') {
+    Zend_Test_PHPUnit_Db_AllTests::main();
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18840 -->
+<!-- EN-Revision: 19568 -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>テストケースの起動</title>
 
@@ -10,7 +10,7 @@
         テストケースは
         <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>
         を継承しなければなりません。このクラスは
-        <code>PHPUnit_Framework_TestCase</code> を継承しており、
+        <classname>PHPUnit_Framework_TestCase</classname> を継承しており、
         PHPUnit が提供する仕組みやアサーションをすべて使用できます。
         またそれに加えて、Zend Framework の
         <acronym>MVC</acronym> 実装に特化した scaffold 機能やアサーションもあります。
@@ -111,8 +111,8 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         プラグインやヘルパーをすべてリセットし、
         フロントコントローラをリセットして
         リクエストオブジェクトとレスポンスオブジェクトを新しく作成します。
-        それが終わったら、<code>$bootstrap</code>
-        で指定したファイルを読み込むか、
+        それが終わったら、<varname>$bootstrap</varname>
+        で指定したファイルを <methodname>include()</methodname> するか、
         あるいは指定したコールバックを呼び出します。
     </para>
 

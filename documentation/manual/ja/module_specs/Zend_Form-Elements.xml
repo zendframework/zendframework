@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 19554 -->
 <sect1 id="zend.form.elements">
     <title>Zend_Form_Element を用いたフォーム要素の作成</title>
 
@@ -51,7 +51,7 @@
         <para>
             <classname>Zend_Form_Element</classname> は、<link
                 linkend="zend.loader.pluginloader">Zend_Loader_PluginLoader</link>
-            を使用しており、バリデータやフィルタ、デコレータの場所を指定することができます。
+            を使用しており、バリデータやフィルタ、デコレータの場所を指定できます。
             それぞれに独自のプラグインローダーが関連付けられており、
             アクセサを使用して個別に取得したり変更したりできます。
         </para>
@@ -204,7 +204,7 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
             これらの操作は
             <classname>Zend_Filter</classname> が行います。
             <classname>Zend_Form_Element</classname> はフィルタチェインをサポートしているので、
-            複数のフィルタを順に適用することができます。
+            複数のフィルタを順に適用できます。
             フィルタリングは、バリデーションの際や要素の値を <code>getValue()</code>
             で取得する際に行われます。
         </para>
@@ -577,7 +577,7 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
 
         <para>
             検証に失敗したときは、バリデータチェインから
-            エラーコードとメッセージを取得することができます。
+            エラーコードとメッセージを取得できます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -592,7 +592,7 @@ $messages = $element->getMessages();
 
         <para>
             バリデータに加えて、ある要素が必須である場合は
-            <code>setRequired(true)</code> を使用することができます。
+            <code>setRequired(true)</code> を使用できます。
             デフォルトではこのフラグは false です。
             この場合は、<code>isValid()</code>
             に何も値が渡されなかった場合はバリデーションチェインをスキップします。
@@ -626,7 +626,7 @@ $messages = $element->getMessages();
                 <para>
                     この振る舞いが気に入らない場合は、
                     <code>setAutoInsertNotEmptyValidator($flag)</code>
-                    に false を渡せばこの機能を無効にすることができます。
+                    に false を渡せばこの機能を無効にできます。
                     この場合、 <code>isValid()</code>
                     がバリデータチェインに勝手に
                     'NotEmpty' バリデータを追加することはなくなります。
@@ -648,6 +648,26 @@ $messages = $element->getMessages();
                 <classname>Zend_Validate_Interface</classname> を実装しています。
                 つまり、フォーム以外のバリデータチェインでも
                 フォーム要素を使用できるということです。
+            </para>
+        </note>
+
+        <!-- TODO : to be translated -->
+        <note>
+            <title>When is an element detected as empty?</title>
+
+            <para>
+                As mentioned the 'NotEmpty' validator is used to detect if an element is empty
+                or not. But <classname>Zend_Validate_NotEmpty</classname> does, per default, not
+                work like <acronym>PHP</acronym>'s method <methodname>empty()</methodname>.
+            </para>
+
+            <para>
+                This means when an element contains an integer <emphasis>0</emphasis> or an string
+                <emphasis>'0'</emphasis> then the element will be seen as not empty. If you want to
+                have a different behaviour you must create your own instance of
+                <classname>Zend_Validate_NotEmpty</classname>. There you can define the behaviour of
+                this validator. See <ulink
+                    url="zend.validate.set.notempty">Zend_Validate_NotEmpty</ulink> for details.
             </para>
         </note>
 
@@ -1032,7 +1052,7 @@ echo $element->renderHtmlTag("This is the html tag content");
 
         <para>
             <classname>Zend_Form_Element</classname> は、
-            要素の属性やメタデータを処理することができます。
+            要素の属性やメタデータを処理できます。
             基本的な属性には次のようなものがあります。
         </para>
 
@@ -1265,7 +1285,7 @@ $element->class = 'text;
 
         <para>
             <classname>Zend_Form_Element</classname> のコンストラクタには、配列あるいは
-            <classname>Zend_Config</classname> オブジェクトでオプションを指定することができます。
+            <classname>Zend_Config</classname> オブジェクトでオプションを指定できます。
             また、<code>setOptions()</code> や
             <code>setConfig()</code> で設定を変更することもできます。
             一般に、キーの名前は次のようになります。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18028 -->
+<!-- EN-Revision: 19568 -->
 <sect2 id="zend.validate.set.hostname">
 
     <title>ホスト名</title>
@@ -34,7 +34,7 @@ if ($validator->isValid($hostname)) {
 
         これは、ホスト名 <varname>$hostname</varname> を検証し、失敗した場合は
         その原因を表す便利なエラーメッセージを
-        <code>$validator->getMessages()</code> で取得します。
+        <methodname>$validator->getMessages()</methodname> で取得します。
 
     </para>
 
@@ -86,7 +86,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend
         の一部、たとえば 'de' (ドイツ) などでは、ドメイン名の中に国際化文字の使用をサポートしています。
         これは、国際化ドメイン名 (International Domain Names: IDN) といわれるものです。
         これらのドメインについても、<classname>Zend_Validate_Hostname</classname>
-        の検証プロセスで使用する文字を拡張することで検証することができます。
+        の検証プロセスで使用する文字を拡張することで検証できます。
     </para>
 
     <para>
@@ -98,7 +98,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS | Zend
         というのも、IDN のマッチングはデフォルトで有効になっているからです。
         IDN の検証を無効にしたい場合は、<classname>Zend_Validate_Hostname</classname>
         のコンストラクタにパラメータを渡すか、あるいは
-        <code>$validator->setValidateIdn()</code> メソッドを使用します。
+        <methodname>setValidateIdn()</methodname> メソッドを使用します。
     </para>
 
     <para>
@@ -116,7 +116,7 @@ $validator =
 ]]></programlisting>
 
         あるいは、TRUE または FALSE を
-        <code>$validator->setValidateIdn()</code> に渡すことで、
+        <methodname>setValidateIdn()</methodname> に渡すことで、
         IDN の検証を有効あるいは無効にすることもできます。
 
         現在サポートされていない IDN ホスト名に対するマッチングを行おうとすると、
@@ -135,7 +135,7 @@ $validator =
 
     <para>
         デフォルトでは、ホスト名の検証は既知の TLD の一覧に基づいて行われます。
-        この機能が不要な場合は、IDN サポートを無効にするのと同じ方法で無効にすることができます。
+        この機能が不要な場合は、IDN サポートを無効にするのと同じ方法で無効にできます。
         TLD の検証を無効にするには、<classname>Zend_Validate_Hostname</classname> のコンストラクタに三番目のパラメータを渡します。
         以下の例では、IDN の検証は二番目のパラメータで有効にしています。
 
@@ -151,7 +151,7 @@ $validator =
 ]]></programlisting>
 
         あるいは、TRUE または FALSE を
-        <code>$validator->ValidateTld()</code> に渡すことで、
+        <methodname>setValidateIdn()</methodname> に渡すことで、
         TLD の検証を有効あるいは無効にすることもできます。
     </para>
 

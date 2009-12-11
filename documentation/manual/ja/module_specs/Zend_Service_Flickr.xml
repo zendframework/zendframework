@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 19568 -->
 <sect1 id="zend.service.flickr">
     <title>Zend_Service_Flickr</title>
     <sect2 id="zend.service.flickr.introduction">
@@ -33,7 +33,7 @@ foreach ($results as $result) {
             <title>オプションのパラメータ</title>
             <para>
                 <methodname>tagSearch()</methodname> は、オプションの
-                二番目の引数に検索オプションを指定することができます。
+                二番目の引数に検索オプションを指定できます。
             </para>
         </note>
     </sect2>
@@ -41,7 +41,7 @@ foreach ($results as $result) {
         <title>Flickr ユーザの写真や情報の検索</title>
         <para>
             <classname>Zend_Service_Flickr</classname> では、いくつかの方法で
-            Flickr ユーザについての情報を取得することができます。
+            Flickr ユーザについての情報を取得できます。
         </para>
         <itemizedlist>
             <listitem>
@@ -86,7 +86,7 @@ foreach ($results as $result) {
         <title>グループプールからの写真の検索</title>
         <para>
             <classname>Zend_Service_Flickr</classname> は、
-            グループにプールされている写真をグループ ID を指定して取得することができます。
+            グループにプールされている写真をグループ ID を指定して取得できます。
             <methodname>groupPoolGetPhotos()</methodname> メソッドを使用します。
         </para>
         <example id="zend.service.flickr.grouppoolgetphotos.example-1">
@@ -105,7 +105,7 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
             <title>オプションのパラメータ</title>
             <para>
                 <methodname>groupPoolGetPhotos()</methodname> は、オプションの
-                二番目の引数に設定の配列を指定することができます。
+                二番目の引数に設定の配列を指定できます。
             </para>
         </note>
     </sect2>
@@ -148,8 +148,8 @@ echo "<a href=\"$image->clickUri\">クリックすると画像を表示します
             <para>Flickr 検索からの結果セットを表します。</para>
             <note>
                 <para>
-                    操作性を高めるため、<code>SeekableIterator</code> インターフェイスを実装しています。
-                    これにより、一般的な順次処理 (例えば <code>foreach</code> など)
+                    操作性を高めるため、<classname>SeekableIterator</classname> インターフェイスを実装しています。
+                    これにより、一般的な順次処理 (例えば <methodname>foreach()</methodname> など)
                     だけでなく <methodname>seek()</methodname> を使用した特定の結果への直接アクセスも可能です。
                 </para>
             </note>

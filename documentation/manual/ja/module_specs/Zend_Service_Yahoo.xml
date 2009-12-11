@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 19568 -->
 <sect1 id="zend.service.yahoo">
     <title>Zend_Service_Yahoo</title>
     <sect2 id="zend.service.yahoo.introduction">
@@ -167,7 +167,7 @@ foreach ($results as $result) {
             Yahoo! 検索から返される結果は、以下のクラスのいずれかとなります。
             検索の種類によってそれに対応した結果セットが返され、
             そのセットを順に処理していくと、中には検索の種類に応じた結果オブジェクトが含まれます。
-            すべての結果セットクラスは <code>SeekableIterator</code>
+            すべての結果セットクラスは <classname>SeekableIterator</classname>
             インターフェイスを実装しています。
             そのため、順次処理だけでなく特定の結果の処理も簡単にできます。
             <itemizedlist>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 19568 -->
 <sect1 id="zend.timesync.introduction">
 
     <title>導入</title>
@@ -109,7 +109,7 @@
         <title>NTP とは?</title>
 
         <para>
-            <code>Network Time Protocol</code> (<emphasis>NTP</emphasis>)
+            Network Time Protocol (<emphasis>NTP</emphasis>)
             は、ネットワーク上のパケット交換によってコンピュータシステムの時刻を同期させるプロトコルです。
             NTP は UDP ポート 123 を使用します。このプロトコルについての詳細は
             <ulink url="http://en.wikipedia.org/wiki/Network_Time_Protocol">wikipedia の記事</ulink>
@@ -124,7 +124,7 @@
         <title>SNTP とは?</title>
 
         <para>
-            <code>Simple Network Time Protocol</code> (<emphasis>SNTP</emphasis>)
+            Simple Network Time Protocol (<emphasis>SNTP</emphasis>)
             は、ネットワーク上のパケット交換によってコンピュータシステムの時刻を同期させるプロトコルです。
             SNTP は UDP ポート 37 を使用します。<code>NTP</code>
             プロトコルに似ていますが、よりシンプルです。
@@ -195,12 +195,12 @@
 
         <para>
             どうやってタイムサーバを見つけたらいいのでしょう?
-            一般には、どのタイムサーバでも使用することができます。
+            一般には、どのタイムサーバでも使用できます。
             LAN 内にあるものであってもかまいませんし、
             公開されているタイムサーバを使用してもかまいません。
             公開されているタイムサーバを使用する場合は、サーバプールを使用しましょう。
             サーバプールは、公開されているタイムサーバのアドレスをまとめたもので、
-            そこにリクエストを送るとプール内のアドレスをランダムに取得することができます。
+            そこにリクエストを送るとプール内のアドレスをランダムに取得できます。
             これを使用すれば、リクエストを分散させることができます。
             公開サーバプールは各地域ごとに用意されているので、
             上に挙げたようなような問題が発生することもありません。
@@ -209,7 +209,7 @@
         <para>
             まずは <ulink url="http://www.pool.ntp.org">pool.ntp.org</ulink>
             で一番近いサーバプールを見つけましょう。たとえばサーバがドイツ国内にあるのなら
-            <code>0.europe.pool.ntp.org</code>
+            <emphasis>0.europe.pool.ntp.org</emphasis>
             を使用することになるでしょう。
         </para>
 

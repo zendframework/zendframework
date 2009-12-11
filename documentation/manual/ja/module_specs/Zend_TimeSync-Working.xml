@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 19568 -->
 <sect1 id="zend.timesync.working">
 
     <title>Zend_TimeSync の動作</title>
@@ -40,7 +40,7 @@ print $server->getDate()->getIso();
         <para>
             このとき <classname>Zend_TimeSync</classname> の裏側では何が起こっているのでしょうか?
             まず、指定したサーバの構文をチェックします。つまり今回の例では、
-            '<code>0.pool.ntp.org</code>' がタイムサーバのアドレスとして正しい形式かどうかを確認します。
+            '<emphasis>0.pool.ntp.org</emphasis>' がタイムサーバのアドレスとして正しい形式かどうかを確認します。
             それから、<methodname>getDate()</methodname> をコールする際に実際にタイムサーバを設定し、
             そのサーバの時刻を返します。<classname>Zend_TimeSync</classname>
             は、スクリプトが動作しているサーバの時刻と返された時刻とを比較し、
@@ -125,7 +125,7 @@ print $server->getDate()->getIso();
         </para>
 
         <para>
-            タイムサーバのアドレスに、適切なプロトコルを指定することができます。
+            タイムサーバのアドレスに、適切なプロトコルを指定できます。
             <classname>Zend_TimeSync</classname> がサポートしているプロトコルは 2 種類で、
             デフォルトのプロトコルは <emphasis>NTP</emphasis> です。
             NTP しか使用しないのなら、先ほどまでの例のようにプロトコル指定を省略しても構いません。
@@ -141,7 +141,7 @@ print $server->getDate()->getIso();
 ]]></programlisting>
 
         <para>
-            <classname>Zend_TimeSync</classname> は複数のタイムサーバを使用することができます。
+            <classname>Zend_TimeSync</classname> は複数のタイムサーバを使用できます。
             特定のプロトコルだけでなく、個々のサーバに対して別のプロトコルも指定できるようになっています。
         </para>
 
@@ -160,7 +160,7 @@ print $server->getDate()->getIso();
 
         <para>
             しかし、実際には使われているポートが違うこともあります。
-            使用するポートは、サーバごとにアドレス内に指定することができます。
+            使用するポートは、サーバごとにアドレス内に指定できます。
             ポートを指定するには、アドレスに続けてその数字を指定します。
             ポートを指定しなかった場合は、<classname>Zend_TimeSync</classname> は標準のポートを使用します。
         </para>
@@ -182,7 +182,7 @@ print $server->getDate()->getIso();
         <para>
             実際のところ <classname>Zend_TimeSync</classname> で使用するオプションはひとつだけで、
             それも内部的に使用するものです。しかし、必要に応じて任意のオプションを指定して
-            リクエストを送信することができます。
+            リクエストを送信できます。
         </para>
 
         <para>
@@ -194,7 +194,7 @@ print $server->getDate()->getIso();
         </para>
 
         <para>
-            <methodname>setOptions()</methodname> メソッドを使用すれば、任意のオプションを指定することができます。
+            <methodname>setOptions()</methodname> メソッドを使用すれば、任意のオプションを指定できます。
             このメソッドには、オプション名とその値を関連付けた配列を指定します。
             既に設定済みのオプションは、新しい値で上書きされます。
             どんなオプションが設定されているのかを知りたい場合は

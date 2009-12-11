@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19389 -->
+<!-- EN-Revision: 19425 -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>ビューヘルパー</title>
 
     <para>
         ビュースクリプトの中で、複雑な関数を繰り返し実行しなければならないこともあるでしょう
         (例えば日付のフォーマット、フォーム要素の作成、リンクの作成など)。
-        このような作業を行うために、ヘルパークラスを使用することができます。
+        このような作業を行うために、ヘルパークラスを使用できます。
     </para>
 
     <para>
@@ -69,7 +69,7 @@
             <listitem><para>
                 <code>declareVars():</code>
                 <methodname>strictVars()</methodname> を使用する際に同時に使用します。
-                このヘルパーを使用すると、テンプレート変数を宣言することができます。
+                このヘルパーを使用すると、テンプレート変数を宣言できます。
                 この変数は、すでにビュースクリプトで設定されているものでもいないものでもかまいません。
                 また、同時にデフォルト値も設定します。
                 このメソッドへの引数として配列を渡すとデフォルト値を設定します。
@@ -233,7 +233,7 @@ echo $this->formCheckbox('foo',
             <listitem><para>
                 <code>formMultiCheckbox($name, $value, $attribs, $options,
                     $listsep):</code> チェックボックスのリストを作成します。
-                <varname>$options</varname> は連想配列で、任意の深さにすることができます。
+                <varname>$options</varname> は連想配列で、任意の深さにできます。
                 <varname>$value</varname> は単一の値か複数の値の配列で、これが
                 <varname>$options</varname> 配列のキーにマッチします。
                 <varname>$listsep</varname> は、デフォルトでは HTML の改行
@@ -378,7 +378,7 @@ echo $this->formCheckbox('foo',
 
         <para>
             ビュースクリプトと同様、
-            <classname>Zend_View</classname> がヘルパークラスを探すパスをコントローラから積み重ねて指定することができます。
+            <classname>Zend_View</classname> がヘルパークラスを探すパスをコントローラから積み重ねて指定できます。
             デフォルトでは、<classname>Zend_View</classname> は "Zend/View/Helper/*" からヘルパークラスを探します。
             <classname>Zend_View</classname> に別の場所を探すように指定するには
             <methodname>setHelperPath()</methodname> および <methodname>addHelperPath()</methodname> メソッドを使用します。
@@ -446,7 +446,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
                 MixedCaps 方式を使用します。たとえば
                 "specialPurpose" という名前のヘルパーを作成した場合は、そのクラス名には
                 最低限 "SpecialPurpose" が含まれている必要があります。
-                このクラス名にプレフィックスを指定することができます。
+                このクラス名にプレフィックスを指定できます。
                 プレフィックスの一部に 'View_Helper' を含めることを推奨します。たとえば
                 "My_View_Helper_SpecialPurpose" のようになります
                 (<methodname>addHelperPath()</methodname> や
@@ -556,6 +556,41 @@ class My_View_Helper_ScriptPath
             <classname>Zend_View_Helper_Abstract</classname> を継承する場合は、
             このメソッドはすでに定義済みであるため定義する必要はありません。
         </para>
+    </sect2>
+
+    <!-- TODO : to be translated -->
+    <sect2 id="zend.view.helpers.registering-concrete">
+        <title>Registering Concrete Helpers</title>
+
+        <para>
+            Sometimes it is convenient to instantiate a view helper, and then register it with the
+            view. As of version 1.10.0, this is now possible using the
+            <methodname>registerHelper()</methodname> method, which expects two arguments: the
+            helper object, and the name by which it will be registered.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$helper = new My_Helper_Foo();
+// ...do some configuration or dependency injection...
+
+$view->registerHelper($helper, 'foo');
+]]></programlisting>
+
+        <para>
+            If the helper has a <methodname>setView()</methodname> method, the view object will call
+            this and inject itself into the helper on registration.
+        </para>
+
+        <note>
+            <title>Helper name should match a method</title>
+
+            <para>
+                The second argument to <methodname>registerHelper()</methodname> is the name of the
+                helper. A corresponding method name should exist in the helper; otherwise,
+                <classname>Zend_View</classname> will call a non-existent method when invoking the
+                helper, raising a fatal PHP error.
+            </para>
+        </note>
     </sect2>
 </sect1>
 <!--

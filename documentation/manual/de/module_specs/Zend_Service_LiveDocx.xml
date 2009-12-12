@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19452 -->
+<!-- EN-Revision: 19522 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.livedocx">
     <title>Zend_Service_LiveDocx</title>
@@ -293,21 +293,17 @@
                 Oder durch das folgende Diagramm ausgedrückt werden:
             </para>
 
-            <mediaobject>
-                <imageobject>
-                    <imagedata
-                        fileref="figures/zend.service.livedocx.mailmerge.generation-diabasic.png"
-                        format="PNG"></imagedata>
-                </imageobject>
+            <para>
+                <inlinegraphic
+                    fileref="figures/zend.service.livedocx.mailmerge.generation-diabasic.png"
+                    format="PNG" />
+            </para>
 
-                <caption>
-                    <para>
-                        Daten werden in ein Template eingefügt um ein Dokument zu erstellen (<ulink
-                            url="figures/zend.service.livedocx.mailmerge.generation-diabasic_zoom.png">größer
-                            darstellen</ulink>).
-                    </para>
-                </caption>
-            </mediaobject>
+            <para>
+                Daten werden in ein Template eingefügt um ein Dokument zu erstellen (<ulink
+                    url="figures/zend.service.livedocx.mailmerge.generation-diabasic_zoom.png">größer
+                    darstellen</ulink>).
+            </para>
 
             <para>
                 Ein Template das in einer Word Bearbeitungsanwendung, wie Microsoft Word, erstellt
@@ -325,21 +321,17 @@
                 Er sieht wie folgt aus:
             </para>
 
-            <mediaobject>
-                <imageobject>
-                    <imagedata
-                        fileref="figures/zend.service.livedocx.mailmerge.templates-msworddialog.png"
-                        format="PNG"></imagedata>
-                </imageobject>
+            <para>
+                <inlinegraphic
+                    fileref="figures/zend.service.livedocx.mailmerge.templates-msworddialog.png"
+                    format="PNG" />
+            </para>
 
-                <caption>
-                    <para>
-                        Dialogbox Felder in Microsoft Word 2007 (<ulink
-                            url="figures/zend.service.livedocx.mailmerge.templates-msworddialog_zoom.png">größer
-                            darstellen</ulink>).
-                    </para>
-                </caption>
-            </mediaobject>
+            <para>
+                Dialogbox Felder in Microsoft Word 2007 (<ulink
+                    url="figures/zend.service.livedocx.mailmerge.templates-msworddialog_zoom.png">größer
+                    darstellen</ulink>).
+            </para>
 
             <para>
                 Durch Verwendung dieses Dialogs kann man die benötigten Merge-Felder in das eigene
@@ -347,21 +339,17 @@
                 Word 2007. Die Merge Felder sind als <code>{ MERGEFIELD FieldName }</code> markiert:
             </para>
 
-            <mediaobject>
-                <imageobject>
-                    <imagedata
-                        fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull.png"
-                        format="PNG"></imagedata>
-                </imageobject>
+            <para>
+                <inlinegraphic
+                    fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull.png"
+                    format="PNG" />
+            </para>
 
-                <caption>
-                    <para>
-                        Das Template in Microsoft Word 2007 (<ulink
-                            url="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull_zoom.png">größer
-                            darstellen</ulink>).
-                    </para>
-                </caption>
-            </mediaobject>
+            <para>
+                Das Template in Microsoft Word 2007 (<ulink
+                    url="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull_zoom.png">größer
+                    darstellen</ulink>).
+            </para>
 
             <para>
                 Jetzt muss das Template als <emphasis>template.docx</emphasis> gespeichert werden.
@@ -372,21 +360,17 @@
                 PHP.
             </para>
 
-            <mediaobject>
-                <imageobject>
-                    <imagedata
-                        fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped.png"
-                        format="PNG"></imagedata>
-                </imageobject>
+            <para>
+                <inlinegraphic
+                    fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped.png"
+                    format="PNG" />
+            </para>
 
-                <caption>
-                    <para>
-                        Unterteiltes Template in Microsoft Word 2007 (<ulink
-                            url="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped_zoom.png">größer
-                            darstellen</ulink>).
-                    </para>
-                </caption>
-            </mediaobject>
+            <para>
+                Unterteiltes Template in Microsoft Word 2007 (<ulink
+                    url="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped_zoom.png">größer
+                    darstellen</ulink>).
+            </para>
 
             <para>
                 Um die Merge Felder, im vorher unterteilten Screenshot des <ulink
@@ -421,22 +405,18 @@ file_put_contents('document.pdf', $document);
                 gezeigt:
             </para>
 
-            <mediaobject>
-                <imageobject>
-                    <imagedata
-                        fileref="figures/zend.service.livedocx.mailmerge.templates-msworddocument.png"
-                        format="PNG"></imagedata>
-                </imageobject>
+            <para>
+                <inlinegraphic
+                    fileref="figures/zend.service.livedocx.mailmerge.templates-msworddocument.png"
+                    format="PNG" />
+            </para>
 
-                <caption>
-                    <para>
-                        Resultierendes Dokument als <acronym>PDF</acronym> im Document Viewer 2.26.1
-                        (<ulink
-                            url="figures/zend.service.livedocx.mailmerge.templates-msworddocument_zoom.png">größer
-                            darstellen</ulink>).
-                    </para>
-                </caption>
-            </mediaobject>
+            <para>
+                Resultierendes Dokument als <acronym>PDF</acronym> im Document Viewer 2.26.1
+                (<ulink
+                    url="figures/zend.service.livedocx.mailmerge.templates-msworddocument_zoom.png">größer
+                    darstellen</ulink>).
+            </para>
         </sect3>
 
         <sect3 id="zend.service.livedocx.mailmerge.advanced">
@@ -471,21 +451,17 @@ file_put_contents('document.pdf', $document);
                 Namen. Der folgende Screenshot zeigt diese Ziele und deren Namen in Rot:
             </para>
 
-            <mediaobject>
-                <imageobject>
-                    <imagedata
-                        fileref="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat.png"
-                        format="PNG"></imagedata>
-                </imageobject>
+            <para>
+                <inlinegraphic
+                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat.png"
+                    format="PNG" />
+            </para>
 
-                <caption>
-                    <para>
-                        (<ulink
-                            url="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat_zoom.png">größer
-                            darstellen</ulink>).
-                    </para>
-                </caption>
-            </mediaobject>
+            <para>
+                (<ulink
+                    url="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat_zoom.png">größer
+                    darstellen</ulink>).
+            </para>
 
             <para>
                 Das Format eines Blocks ist wie folgt:
@@ -514,21 +490,17 @@ blockEnd_block1
                 verwendet werden:
             </para>
 
-            <mediaobject>
-                <imageobject>
-                    <imagedata
-                        fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate.png"
-                        format="PNG"></imagedata>
-                </imageobject>
+            <para>
+                <inlinegraphic
+                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate.png"
+                    format="PNG" />
+            </para>
 
-                <caption>
-                    <para>
-                        Template, welches Blöcke in Microsoft Word 2007 zeigt (<ulink
-                            url="figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate_zoom.png">größer
-                            darstellen</ulink>).
-                    </para>
-                </caption>
-            </mediaobject>
+            <para>
+                Template, welches Blöcke in Microsoft Word 2007 zeigt (<ulink
+                    url="figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate_zoom.png">größer
+                    darstellen</ulink>).
+            </para>
 
             <para>
                 Der folgende Code füllt das obige Template mit Daten.
@@ -590,22 +562,18 @@ file_put_contents('document.pdf', $document);
                 gezeigt:
             </para>
 
-            <mediaobject>
-                <imageobject>
-                    <imagedata
-                        fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument.png"
-                        format="PNG"></imagedata>
-                </imageobject>
+            <para>
+                <inlinegraphic
+                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument.png"
+                    format="PNG" />
+            </para>
 
-                <caption>
-                    <para>
-                        Das resultierende Dokument als <acronym>PDF</acronym> im Document Viewer
-                        2.26.1 (<ulink
-                            url="figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument_zoom.png">größer
-                            darstellen</ulink>).
-                    </para>
-                </caption>
-            </mediaobject>
+            <para>
+                Das resultierende Dokument als <acronym>PDF</acronym> im Document Viewer
+                2.26.1 (<ulink
+                    url="figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument_zoom.png">größer
+                    darstellen</ulink>).
+            </para>
 
             <para>
                 Man kann die <acronym>DOC</acronym> <ulink
@@ -688,37 +656,29 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
                 in das gleiche Verzeichnis wie die ausführbare PHP Datei.
             </para>
 
-            <mediaobject>
-                <imageobject>
-                    <imagedata
-                        fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1.png"
-                        format="PNG"></imagedata>
-                </imageobject>
+            <para>
+                <inlinegraphic
+                    fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1.png"
+                    format="PNG" />
+            </para>
 
-                <caption>
-                    <para>
-                        documentPage1.png (<ulink
-                            url="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1_zoom.png">größer
-                            darstellen</ulink>).
-                    </para>
-                </caption>
-            </mediaobject>
+            <para>
+                documentPage1.png (<ulink
+                    url="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1_zoom.png">größer
+                    darstellen</ulink>).
+            </para>
 
-            <mediaobject>
-                <imageobject>
-                    <imagedata
-                        fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2.png"
-                        format="PNG"></imagedata>
-                </imageobject>
+            <para>
+                <inlinegraphic
+                    fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2.png"
+                    format="PNG" />
+            </para>
 
-                <caption>
-                    <para>
-                        documentPage2.png (<ulink
-                            url="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2_zoom.png">größer
-                            darstellen</ulink>).
-                    </para>
-                </caption>
-            </mediaobject>
+            <para>
+                documentPage2.png (<ulink
+                    url="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2_zoom.png">größer
+                    darstellen</ulink>).
+            </para>
         </sect3>
 
         <sect3 id="zend.service.livedocx.mailmerge.templates-types">

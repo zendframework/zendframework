@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18833 -->
+<!-- EN-Revision: 19523 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.17">
     <title>Zend Framework 1.7</title>
@@ -68,13 +68,13 @@
                 <itemizedlist>
                     <listitem><para>
                         Alte <acronym>API</acronym> der Methode:
-                        <command>Zend_Filter_File_Rename($oldfile, $newfile,
-                            $overwrite)</command>
+                        <methodname>Zend_Filter_File_Rename($oldfile, $newfile,
+                            $overwrite)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         Neue <acronym>API</acronym> der Methode:
-                        <command>Zend_Filter_File_Rename($options)</command> wobei
+                        <methodname>Zend_Filter_File_Rename($options)</methodname> wobei
                         <varname>$options</varname> die folgenden Schlüssel für das Array
                         akzeptiert: <emphasis>source</emphasis> identisch mit
                         <varname>$oldfile</varname>, <emphasis>target</emphasis> identisch mit
@@ -108,12 +108,12 @@ $upload->addFilter('Rename',
                 <itemizedlist>
                     <listitem><para>
                         Alte <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_Count($min, $max)</command>
+                        <methodname>Zend_Validate_File_Count($min, $max)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         Neue <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_Count($options)</command> wobei
+                        <methodname>Zend_Validate_File_Count($options)</methodname> wobei
                         <varname>$options</varname> die folgenden Schlüssel für das Array
                         akzeptiert: <emphasis>min</emphasis> identisch mit <varname>$min</varname>,
                         <emphasis>max</emphasis> identisch mit <varname>$max</varname>
@@ -145,12 +145,12 @@ $upload->addValidator('Count',
                 <itemizedlist>
                     <listitem><para>
                         Alte <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_Extension($extension, $case)</command>
+                        <methodname>Zend_Validate_File_Extension($extension, $case)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         Neue <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_Extension($options)</command> wobei
+                        <methodname>Zend_Validate_File_Extension($options)</methodname> wobei
                         <varname>$options</varname> die folgenden Schlüssel für das Array
                         akzeptiert: <emphasis>*</emphasis> identisch mit
                         <varname>$extension</varname> und kann jeden anderen Schlüssel haben
@@ -183,12 +183,13 @@ $upload->addValidator('Extension',
                 <itemizedlist>
                     <listitem><para>
                         Alte <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_FilesSize($min, $max, $bytestring)</command>
+                        <methodname>Zend_Validate_File_FilesSize($min, $max,
+                            $bytestring)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         Neue <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_FilesSize($options)</command> wobei
+                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> wobei
                         <varname>$options</varname> die folgenden Schlüssel für das Array
                         akzeptiert: <emphasis>min</emphasis> identisch mit <varname>$min</varname>,
                         <emphasis>max</emphasis> identisch mit <varname>$max</varname>,
@@ -236,12 +237,12 @@ $upload->setUseByteSting(true); // Flag setzen
                 <itemizedlist>
                     <listitem><para>
                         Alte <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_Hash($hash, $algorithm)</command>
+                        <methodname>Zend_Validate_File_Hash($hash, $algorithm)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         Neue <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_Hash($options)</command> wobei
+                        <methodname>Zend_Validate_File_Hash($options)</methodname> wobei
                         <varname>$options</varname> die folgenden Schlüssel für das Array
                         akzeptiert: <emphasis>*</emphasis> identisch mit <varname>$hash</varname>
                         und kann jeden anderen Schlüssel haben <emphasis>algorithm</emphasis>
@@ -274,13 +275,13 @@ $upload->addValidator('Hash',
                 <itemizedlist>
                     <listitem><para>
                         Alte <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth,
-                            $maxheight)</command>
+                        <methodname>Zend_Validate_File_ImageSize($minwidth, $minheight, $maxwidth,
+                            $maxheight)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         Neue <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_FilesSize($options)</command> wobei
+                        <methodname>Zend_Validate_File_FilesSize($options)</methodname> wobei
                         <varname>$options</varname> die folgenden Schlüssel für das Array
                         akzeptiert: <emphasis>minwidth</emphasis> identisch mit
                         <varname>$minwidth</varname>, <emphasis>maxwidth</emphasis> identisch mit
@@ -317,12 +318,12 @@ $upload->addValidator('ImageSize',
                 <itemizedlist>
                     <listitem><para>
                         Alte <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_Size($min, $max, $bytestring)</command>
+                        <methodname>Zend_Validate_File_Size($min, $max, $bytestring)</methodname>
                     </para></listitem>
 
                     <listitem><para>
                         Neue <acronym>API</acronym> der Methode:
-                        <command>Zend_Validate_File_Size($options)</command> wobei
+                        <methodname>Zend_Validate_File_Size($options)</methodname> wobei
                         <varname>$options</varname> die folgenden Schlüssel für das Array
                         akzeptiert: <emphasis>min</emphasis> identisch mit <varname>$min</varname>,
                         <emphasis>max</emphasis> identisch mit <varname>$max</varname>,
@@ -366,7 +367,7 @@ $upload->addValidator('Size',
                 zurückgegeben wird, zu verwenden, aber das triggert auch eine User Warning die
                 darauf hinweist das man auf das neue Verhalten wechseln sollte. Das Rerouting
                 welches das alte Verhalten von <methodname>isLocale()</methodname> durchgeführt
-                hätte ist nicht länger notwendig, da alle I18N Komponenten jetzt das Rerouting
+                hätte ist nicht länger notwendig, da alle I18n Komponenten jetzt das Rerouting
                 selbst durchführen.
             </para>
 

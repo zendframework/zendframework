@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 19436 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headtitle">
     <title>HeadTitle Helfer</title>
 
     <para>
-        Das HTML <code>&lt;title&gt;</code> Element wird verwendet um einen Titel für ein HTML
-        Dokument anzubieten. Der <code>HeadTitle</code> Helfer erlaubt es Titel für späteren Empfang
-        und Ausgabe programmtechnisch zu Erstellen und zu Speichern.
+        Das HTML <emphasis>&lt;title&gt;</emphasis> Element wird verwendet um einen Titel für ein
+        HTML Dokument anzubieten. Der <classname>HeadTitle</classname> Helfer erlaubt es Titel für
+        späteren Empfang und Ausgabe programmtechnisch zu Erstellen und zu Speichern.
     </para>
 
     <para>
-        Der <code>HeadTitle</code> Helfer ist eine konkrete Implementation des
+        Der <classname>HeadTitle</classname> Helfer ist eine konkrete Implementation des
         <link linkend="zend.view.helpers.initial.placeholder">Plaltzhalter Helfer</link>. Er
         überschreibt die <methodname>toString()</methodname> Methode um die erstellung des
-        <code>&lt;title&gt;</code> Elements zu erzwingen, und fgt eine
+        <emphasis>&lt;title&gt;</emphasis> Elements zu erzwingen, und fügt eine
         <methodname>headTitle()</methodname> Methode für das schnelle und einfache Einstellen und
         Ändern von Titel Elementen hinzu. Die Signatur dieser Methode ist
         <methodname>headTitle($title, $setType = 'APPEND')</methodname>; standardmäßig, wird der

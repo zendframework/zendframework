@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19425 -->
+<!-- EN-Revision: 19437 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headstyle">
     <title>HeadStyle Helfer</title>
 
     <para>
-        Das HTML Element <code>&lt;style&gt;</code> wird verwendet um <acronym>CSS</acronym>
-        Stylesheets im HTML Element <code>&lt;head&gt;</code> zu inkludieren.
+        Das HTML Element <emphasis>&lt;style&gt;</emphasis> wird verwendet um <acronym>CSS</acronym>
+        Stylesheets im HTML Element <emphasis>&lt;head&gt;</emphasis> zu inkludieren.
     </para>
 
     <note>
@@ -14,42 +14,58 @@
 
         <para>
             <link linkend="zend.view.helpers.initial.headlink">HeadLink</link> sollte verwendet
-            werden um <code>&lt;link&gt;</code> Elemente zu Erstellen die externe Stylesheets
-            enthalten. <code>HeadStyle</code> wird verwendet wenn man Stylesheets inline definieren
-            will.
+            werden um <emphasis>&lt;link&gt;</emphasis> Elemente zu Erstellen die externe
+            Stylesheets enthalten. <classname>HeadStyle</classname> wird verwendet wenn man
+            Stylesheets inline definieren will.
         </para>
     </note>
 
     <para>
-        Der <code>HeadStyle</code> Helfer unterstützt die folgenden Methoden für das Setzen und
-        Hinzufügen von Stylesheet Deklarationen:
+        Der <classname>HeadStyle</classname> Helfer unterstützt die folgenden Methoden für das
+        Setzen und Hinzufügen von Stylesheet Deklarationen:
     </para>
 
     <itemizedlist>
-        <listitem><para><code>appendStyle($content, $attributes =
-                    array())</code></para></listitem>
-        <listitem><para><code>offsetSetStyle($index, $content, $attributes =
-                    array())</code></para></listitem>
-        <listitem><para><code>prependStyle($content, $attributes =
-                    array())</code></para></listitem>
-        <listitem><para><code>setStyle($content, $attributes =
-                    array())</code></para></listitem>
+        <listitem>
+            <para>
+                <code>appendStyle($content, $attributes = array())</code>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>offsetSetStyle($index, $content, $attributes = array())</code>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>prependStyle($content, $attributes = array())</code>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <code>setStyle($content, $attributes = array())</code>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
         In allen Fällen ist <varname>$content</varname> die aktuelle <acronym>CSS</acronym>
         Deklaration. <varname>$attributes</varname> sind alle zusätzlichen Attribute die das
-        <code>style</code> Tag erhalten soll: lang, title, media, oder dir sind alle möglich.
+        <property>style</property> Tag erhalten soll: lang, title, media, oder dir sind alle
+        möglich.
     </para>
 
     <note>
         <title>Abhängige Kommentare setzen</title>
 
         <para>
-            <code>HeadStyle</code> erlaubt es ein Script Tag in abhängige Kommentare zu setzen, das
-            es erlaubt es vor speziellen Browsern zu verstecken. Um abhängige Tags zu setzen, muß
-            der abhängige Wert als Teil des <varname>$attrs</varname> Parameters im Methodenaufruf
-            übergeben werden.
+            <classname>HeadStyle</classname> erlaubt es ein Script Tag in abhängige Kommentare zu
+            setzen, das es erlaubt es vor speziellen Browsern zu verstecken. Um abhängige Tags zu
+            setzen, muß der abhängige Wert als Teil des <varname>$attrs</varname> Parameters im
+            Methodenaufruf übergeben werden.
         </para>
 
         <example id="zend.view.helpers.initial.headstyle.conditional">
@@ -63,9 +79,10 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
     </note>
 
     <para>
-        <code>HeadStyle</code> erlaubt auch das Erfassen von Style Deklarationen; das kann nützlich
-        sein wenn eine Deklaration programmtechnisch erstellt werden soll und Sie dann woanders
-        platziert wird. Die Verwendung hierfür wird in einem unten angeführten Beispiel gezeigt.
+        <classname>HeadStyle</classname> erlaubt auch das Erfassen von Style Deklarationen; das kann
+        nützlich sein wenn eine Deklaration programmtechnisch erstellt werden soll und Sie dann
+        woanders platziert wird. Die Verwendung hierfür wird in einem unten angeführten Beispiel
+        gezeigt.
     </para>
 
     <para>
@@ -76,17 +93,18 @@ $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
     </para>
 
     <para>
-        <code>HeadStyle</code> überschreibt jedes <methodname>append()</methodname>,
+        <classname>HeadStyle</classname> überschreibt jedes <methodname>append()</methodname>,
         <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, und
         <methodname>set()</methodname> um die Verwendung der oben gelisteten speziellen Methoden zu
-        forcieren. Intern wird jeder Teil als <code>stdClass</code> Token gespeichert, welches
-        später serialisiert wird durch Verwendung der <methodname>itemToString()</methodname>
-        Methode. Das erlaubt es die Teile im Stack zu Prüfen, und optional auch zu Ändern durch
-        einfaches Modifizieren des zurückgegebenen Objektes.
+        forcieren. Intern wird jeder Teil als <property>stdClass</property> Token gespeichert,
+        welches später serialisiert wird durch Verwendung der
+        <methodname>itemToString()</methodname> Methode. Das erlaubt es die Teile im Stack zu
+        Prüfen, und optional auch zu Ändern durch einfaches Modifizieren des zurückgegebenen
+        Objektes.
     </para>
 
     <para>
-        Der <code>HeadStyle</code> Helfer ist eine konkrete Implementation des
+        Der <classname>HeadStyle</classname> Helfer ist eine konkrete Implementation des
         <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfers</link>.
     </para>
 
@@ -139,8 +157,8 @@ $this->headStyle()->prependStyle($firstStyles);
             Hier und da müssen <acronym>CSS</acronym> Style Deklarationen programmtechnisch erstellt
             werden. Wärend String Kopplungen, HereDocs und ähnliches verwendet werden könnte, ist es
             oft einfacher das durch erstellen der Styles und deren Einfügung in
-            <acronym>PHP</acronym> Tags zu machen. <code>HeadStyle</code> lässt das zu indem es in
-            den Stack erfasst wird:
+            <acronym>PHP</acronym> Tags zu machen. <classname>HeadStyle</classname> lässt das zu
+            indem es in den Stack erfasst wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -166,9 +184,9 @@ body {
 
             <listitem>
                 <para>
-                    Wenn zusätzliche Attribute für das <code>&lt;style&gt;</code> Tag spezifiziert
-                    werden sollen, dann müssen diese in einem Array als zweites Argument an
-                    <methodname>captureStart()</methodname> übergeben werden.
+                    Wenn zusätzliche Attribute für das <emphasis>&lt;style&gt;</emphasis> Tag
+                    spezifiziert werden sollen, dann müssen diese in einem Array als zweites
+                    Argument an <methodname>captureStart()</methodname> übergeben werden.
                 </para>
             </listitem>
         </itemizedlist>

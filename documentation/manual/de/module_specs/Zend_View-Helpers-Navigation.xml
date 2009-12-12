@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19425 -->
+<!-- EN-Revision: 19435 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.navigation">
     <title>Navigations Helfer</title>
@@ -22,19 +22,22 @@
                 wird für die Darstellung des Pfades der aktuell aktiven Seite verwendet.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.view.helpers.initial.navigation.links">Links</link>,
                 wird für die Darstellung von Navigations Header Links (z.B.
-                <code>&lt;link rel="next" href="..." /&gt;</code>) verwendet.
+                <command>&lt;link rel="next" href="..." /&gt;</command>) verwendet.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.view.helpers.initial.navigation.menu">Menu</link>,
                 wird für die Darstellung von Menüs verwendet.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.view.helpers.initial.navigation.sitemap">Sitemap</link>,
@@ -43,6 +46,7 @@
                     Format</ulink> entsprechen.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link
@@ -65,40 +69,48 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>{get|set}Container()</code> empfängt/setzt den Navigations Container
-                mit dem der Helfer standardmäßig arbeiten soll, und
-                <methodname>hasContainer()</methodname> prüft ob der Helfer Container
+                <methodname>getContainer()</methodname> und <methodname>setContainer()</methodname>
+                empfängt/setzt den Navigations Container mit dem der Helfer standardmäßig arbeiten
+                soll, und <methodname>hasContainer()</methodname> prüft ob der Helfer Container
                 registriert hat.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>{get|set}Translator()</code> empfängt/setzt den Übersetzer der für die
-                Übersetzung von Überschriften und Titelm verwendet wird, und
-                <code>{get|set}UseTranslator()</code> kontrolliert ob der Übersetzer aktiviert
-                werden soll. Die Methode <methodname>hasTranslator()</methodname> prüft ob der
-                Helfer einen Übersetzer registriert hat.
+                <methodname>getTranslator()</methodname> und
+                <methodname>setTranslator()</methodname> empfängt und setzt den Übersetzer der für
+                die Übersetzung von Überschriften und Titelm verwendet wird, und
+                <methodname>getUseTranslator()</methodname> sowie
+                <methodname>setUseTranslator()</methodname> kontrollieren ob der Übersetzer
+                aktiviert werden soll. Die Methode <methodname>hasTranslator()</methodname> prüft ob
+                der Helfer einen Übersetzer registriert hat.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>{get|set}Acl()</code>, <code>{get|set}Role()</code>,
-                empfängt/setzt <acronym>ACL</acronym> (<classname>Zend_Acl</classname>) Instanzen
-                und Rollen (<type>String</type> oder <classname>Zend_Acl_Role_Interface</classname>)
-                die bei der Darstellung für das Filtern von Seiten verwendet werden, und
-                <code>{get|set}UseAcl()</code> kontrolliert ob <acronym>ACL</acronym> aktiviert
-                werden soll. Die Methoden <methodname>hasAcl()</methodname> und
+                <methodname>getAcl()</methodname>, <methodname>setAcl()</methodname>,
+                <methodname>getRole()</methodname> und <methodname>setRole()</methodname>
+                empfangen und setzen <acronym>ACL</acronym> (<classname>Zend_Acl</classname>)
+                Instanzen und Rollen (<type>String</type> oder
+                <classname>Zend_Acl_Role_Interface</classname>) die bei der Darstellung für das
+                Filtern von Seiten verwendet werden. <methodname>getUseAcl()</methodname> und
+                <methodname>setUseAcl()</methodname> kontrolliert ob <acronym>ACL</acronym>
+                aktiviert werden soll. Die Methoden <methodname>hasAcl()</methodname> und
                 <methodname>hasRole()</methodname> prüfen ob der Helfer eine <acronym>ACL</acronym>
                 Instanz oder Rolle registriert hat.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>__toString()</methodname>, die magische Methode stellt sicher das
-                der Helfer, durch den direkten Aufruf von <code>echo</code> an der Instanz des
-                Helfers, dargestellt werden kann.
+                der Helfer, durch die direkte Ausgabe an der Instanz des Helfers, dargestellt
+                werden kann.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>render()</methodname>, muß von konkreten Helfern implementiert
@@ -116,35 +128,42 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>{get|set}Indent()</code> empfängt/setzt die Einrückung. Der Setzer
-                akzeptiert einen <type>String</type> oder ein <code>int</code>. Im
-                Fall eines <code>int</code>'s verwendet der Helfer die angegebene Zahl
-                als Leerzeichen für die Einrückung. Z.B. bedeutet
+                <methodname>getIndent()</methodname> und <methodname>setIndent()</methodname>
+                empfängt und setzt die Einrückung. Der Setzer akzeptiert einen <type>String</type>
+                oder ein <type>Integer</type>. Im Fall eines <type>Integer</type>'s verwendet der
+                Helfer die angegebene Zahl als Leerzeichen für die Einrückung. Z.B. bedeutet
                 <methodname>setIndent(4)</methodname> eine Einrückung von initial 4 Leerzeichen.
                 Die Einrückung kann für alle Helfer außer dem Sitemap Helfer spezifiziert
                 werden.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>{get|set}MinDepth()</code> empfängt/setzt die minimale Tiefe die eine
-                Seite haben muß um vom Helfer eingefügt zu werden. Das Setzen von
-                <constant>NULL</constant> bedeutet keine minimale Tiefe.
+                <methodname>getMinDepth()</methodname> und <methodname>setMinDepth()</methodname>
+                empfängt und setzt die minimale Tiefe die eine Seite haben muß um vom Helfer
+                eingefügt zu werden. Das Setzen von <constant>NULL</constant> bedeutet keine
+                minimale Tiefe.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>{get|set}MaxDepth()</code> empfängt/setzt die maximale Tiefe die eine
-                Seite haben muß um vom Helfer eingefügt zu werden. Das Setzen von
-                <constant>NULL</constant> bedeutet keine maximale Tiefe.
+                <methodname>getMaxDepth()</methodname> und <methodname>setMaxDepth()</methodname>
+                empfängt und setzt die maximale Tiefe die eine Seite haben muß um vom Helfer
+                eingefügt zu werden. Das Setzen von <constant>NULL</constant> bedeutet keine
+                maximale Tiefe.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>{get|set}RenderInvisible()</code> empfängt/setzt ob Elemente die als
-                unsichtbar markiert sind, dargestellt werden oder nicht.
+                <methodname>getRenderInvisible()</methodname> und
+                <methodname>setRenderInvisible()</methodname> empfängt und setzt ob Elemente die
+                als unsichtbar markiert sind, dargestellt werden oder nicht.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>__call()</methodname> wird verwendet um Aufrufe zum Container, der
@@ -154,6 +173,7 @@
                     linkend="zend.view.helpers.initial.navigation.proxy.example">Beispiel</link>.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>findActive($container, $minDepth, $maxDepth)</methodname> wird
@@ -166,42 +186,48 @@
                 enthält, und die Tiefe bei der die Seite gefunden wurde.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <methodname>htmlify()</methodname> stellt ein <code>a</code> HTML Element von
-                einer <classname>Zend_Navigation_Page</classname> Instanz dar.
+                <methodname>htmlify()</methodname> stellt ein <emphasis>'a'</emphasis> HTML Element
+                von einer <classname>Zend_Navigation_Page</classname> Instanz dar.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>accept()</methodname> wird verwendet um zu erkennen ub eine Seite
                 akzeptiert werden soll wenn durch Container iteriert wird. Diese Methode prüft
                 die Sichtbarkeit der Seite und verifiziert das die Rolle des Helfers auf die
-                Ressource/Privilegien der Seite zugreifen darf.
+                Ressourcen und Privilegien der Seite zugreifen darf.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>static setDefaultAcl()</code> wird für das Setzen des standardmäßigen
-                <acronym>ACL</acronym> Objekts verwendet, das dann von Helfern verwendet wird.
+                Die statische Methode <methodname>setDefaultAcl()</methodname> wird für das Setzen
+                des standardmäßigen <acronym>ACL</acronym> Objekts verwendet, das dann von Helfern
+                verwendet wird.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>static setDefaultRole()</code> wird für das Setzen der standardmäßigen
-                <acronym>ACL</acronym> verwendet, die dann von Helfern verwendet wird.
+                Die statische Methode <methodname>setDefaultRole()</methodname> wird für das Setzen
+                der standardmäßigen <acronym>ACL</acronym> verwendet, die dann von Helfern verwendet
+                wird.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
         Wenn ein Navigations Container nicht explizit in einem Helfer durch Verwendung von
-        <code>$helper->setContainer($nav)</code> gesetzt ist, schaut der Helfer in
+        <command>$helper->setContainer($nav)</command> gesetzt ist, schaut der Helfer in
         <link linkend="zend.registry">der Registry</link> nach einer Container Instanz mit dem
         Schlüssel <classname>Zend_Navigation</classname>. Wenn ein Container nicht explizit gesetzt
         wurde, oder nicht in der Registry gefunden wird, erstellt der Helfer einen leeren
-        <classname>Zend_Navigation</classname> Container wenn <code>$helper->getContainer()</code>
-        aufgerufen wird.
+        <classname>Zend_Navigation</classname> Container wenn
+        <command>$helper->getContainer()</command> aufgerufen wird.
     </para>
 
     <example id="zend.view.helpers.initial.navigation.proxy.example">
@@ -232,7 +258,7 @@ $this->navigation()->addPage(array(
             Der Navigations Helfer unterstützt die Übersetzung von SeitenLabels und Überschriften.
             Man kann einen Übersetzer vom Typ <classname>Zend_Translate</classname> oder
             <classname>Zend_Translate_Adapter</classname> im Helfer setzen indem
-            <code>$helper->setTranslator($translator)</code> verwendet wird, oder wie in allen
+            <command>$helper->setTranslator($translator)</command> verwendet wird, oder wie in allen
             anderen I18n-fähigen Komponenten; durch das Hinzufügen des Übersetzers in
             <link linkend="zend.registry">die Registry</link> indem der Schlüssel
             <classname>Zend_Translate</classname> verwendet wird.
@@ -240,7 +266,7 @@ $this->navigation()->addPage(array(
 
         <para>
             Wenn man die Übersetzung ausschalten will, sollte man
-            <code>$helper->setUseTranslator(false)</code> verwenden.
+            <command>$helper->setUseTranslator(false)</command> verwenden.
         </para>
 
         <para>

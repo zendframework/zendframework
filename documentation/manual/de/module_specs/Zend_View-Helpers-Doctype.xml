@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19432 -->
+<!-- EN-Revision: 19436 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.doctype">
     <title>Doctype Helfer</title>
@@ -8,12 +8,13 @@
         Gültige HTML und <acronym>XHTML</acronym> Dokumente sollten eine
         <constant>DOCTYPE</constant> Deklaration enthalten. Neben der Schwierigkeit sich diese zu
         merken, können Sie auch beeinflussen wie bestimmte Elemente im Dokument dargestellt werden
-        sollen (zum Beispiel, CDATA Kommentierung in <code>&lt;script&gt;</code> und
-        <code>&lt;style&gt;</code> Elementen.
+        sollen (zum Beispiel, CDATA Kommentierung in <emphasis>&lt;script&gt;</emphasis> und
+        <emphasis>&lt;style&gt;</emphasis> Elementen.
     </para>
 
     <para>
-        Der <code>Doctype</code> Helfer erlaubt die Spezifikation von einem der folgenden Typen:
+        Der <classname>Doctype</classname> Helfer erlaubt die Spezifikation von einem der folgenden
+        Typen:
     </para>
 
     <itemizedlist>
@@ -33,7 +34,7 @@
     </para>
 
     <para>
-        Der <code>Doctype</code> Helfer ist eine konkrete Implementation des
+        Der <classname>Doctype</classname> Helfer ist eine konkrete Implementation des
         <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfers</link>.
     </para>
 

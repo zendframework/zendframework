@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 19434 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.inlinescript">
     <title>InlineScript Helfer</title>
 
     <para>
-        Das HTML <code>&lt;script&gt;</code> Element wird verwendet um entweder Clientseitige
-        Skriptelemente Inline zu ermöglichen oder um eine entfernte Ressource zu verlinken die
-        Clientseitigen Skriptcode enthält. Der <code>InlineScript</code> Helfer erlaubt es beides zu
-        managen. Er ist von <link linkend="zend.view.helpers.initial.headscript">HeadScript</link>
-        abgeleitet und jede Methode dieses Helfers ist vorhanden; trotzdem, sollte die
+        Das HTML <emphasis>&lt;script&gt;</emphasis> Element wird verwendet um entweder
+        Clientseitige Skriptelemente Inline zu ermöglichen oder um eine entfernte Ressource zu
+        verlinken die Clientseitigen Skriptcode enthält. Der <classname>InlineScript</classname>
+        Helfer erlaubt es beides zu managen. Er ist von <link
+            linkend="zend.view.helpers.initial.headscript">HeadScript</link> abgeleitet und jede
+        Methode dieses Helfers ist vorhanden; trotzdem, sollte die
         <methodname>inlineScript()</methodname> Methode statt <methodname>headScript()</methodname>
         verwendet werden.
     </para>
@@ -18,15 +19,16 @@
         <title>InlineScript für HTML Body Skripte verwenden</title>
 
         <para>
-            <code>InlineScript</code>, sollte verwendet werden wenn man Skripte im HTML
-            <code>body</code> inkludieren will. Skripte am Ende des Dokuments zu platzieren ist eine
-            gute Praxis um das Versenden von Seiten schneller zu machen, speziell wen 3rd Party
-            Analyse Skripte verwendet werden.
+            <classname>InlineScript</classname>, sollte verwendet werden wenn man Skripte im HTML
+            <emphasis>body</emphasis> inkludieren will. Skripte am Ende des Dokuments zu platzieren
+            ist eine gute Praxis um das Versenden von Seiten schneller zu machen, speziell wen 3rd
+            Party Analyse Skripte verwendet werden.
         </para>
 
         <para>
-            Einige JS Bibliotheken müssen im HTML <code>head</code>; für diese Skripte sollte
-            <link linkend="zend.view.helpers.initial.headscript">HeadScript</link> verwendet werden.
+            Einige JS Bibliotheken müssen im HTML <emphasis>head</emphasis>; für diese Skripte
+            sollte <link linkend="zend.view.helpers.initial.headscript">HeadScript</link> verwendet
+            werden.
         </para>
     </note>
 </sect3>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19437 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.object">
     <title>HTML Objekt Helfer</title>
 
     <para>
-        Das HTML <code><![CDATA[<object>]]></code> Element wird für das Einbetten von Medien wie
-        Flash oder Quicktime in Webseiten verwendet. Der Object View Helfer übernimmt die Einbettung
-        von Medien mit einem minimalen Aufwand.
+        Das HTML <emphasis><![CDATA[<object>]]></emphasis> Element wird für das Einbetten von Medien
+        wie Flash oder Quicktime in Webseiten verwendet. Der Object View Helfer übernimmt die
+        Einbettung von Medien mit einem minimalen Aufwand.
     </para>
 
     <para>
@@ -17,25 +17,25 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>htmlFlash</code>
+                <methodname>htmlFlash()</methodname>
                 Erzeugt Markup für die Einbettung von Flash Dateien.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>htmlObject</code>
+                <methodname>htmlObject()</methodname>
                 Erzeugt Markup für die Einbettung von eigenen Objekten.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>htmlPage</code>
+                <methodname>htmlPage()</methodname>
                 Erzeugt Markup für die Einbettung anderer (X)HTML Seiten.
             </para>
         </listitem>
         <listitem>
             <para>
-                <code>htmlQuicktime</code>
+                <methodname>htmlQuicktime()</methodname>
                 Erzeugt Markup für die Einbettung von QuickTime Dateien.
             </para>
         </listitem>
@@ -75,8 +75,8 @@
 
     <para>
         Zusätzlich können Attribute, Parameter und Inhalte definiert werden die mit dem
-        <code><![CDATA[<object>]]></code> dargestellt werden. Das wird durch Verwendung des
-        <code>htmlObject</code> Helfers demonstriert.
+        <emphasis><![CDATA[<object>]]></emphasis> dargestellt werden. Das wird durch Verwendung des
+        <methodname>htmlObject()</methodname> Helfers demonstriert.
     </para>
 
     <example id="zend.view.helpers.initial.object.object">
@@ -85,15 +85,15 @@
         <para>
             Das erste Argument des Objekt Helfers wird immer benötigt. Es ist die
             <acronym>URI</acronym> zu der Ressource die man einbetten will. Das zweite Argument wird
-            nur im <code>htmlObject</code> Helfer benötigt. Die anderen Helfer enthalten bereits den
-            wichtigen Wert für dieses Argument. Der dritte Parameter wird für die Übergabe von
-            Argumenten an das Objekt Element verwendet. Es akzeptiert nur ein Array mit
-            Schlüssel-Wert Paaren. Die <code>classid</code> und <code>codebase</code> sind Beispiel
-            für solche Attribute. Das vierte Argument nimmt auch Schlüssel-Wert Paare und verwendet
-            diese für die Erstellung von <code><![CDATA[<param>]]></code> Elementen. Sie sehen in
-            Kürze ein Beispiel hierfür. Letztendlich, gibt es eine Option für das zur
-            Verfügungstellen von zusätzlichen Inhalten beim Objekt. Jetzt folgt ein Beispiel welches
-            alle Argumente verwendet.
+            nur im <methodname>htmlObject()</methodname> Helfer benötigt. Die anderen Helfer
+            enthalten bereits den wichtigen Wert für dieses Argument. Der dritte Parameter wird für
+            die Übergabe von Argumenten an das Objekt Element verwendet. Es akzeptiert nur ein Array
+            mit Schlüssel-Wert Paaren. Die <property>classid</property> und
+            <property>codebase</property> sind Beispiel für solche Attribute. Das vierte Argument
+            nimmt auch Schlüssel-Wert Paare und verwendet diese für die Erstellung von
+            <emphasis><![CDATA[<param>]]></emphasis> Elementen. Sie sehen in Kürze ein Beispiel
+            hierfür. Letztendlich, gibt es eine Option für das zur Verfügungstellen von zusätzlichen
+            Inhalten beim Objekt. Jetzt folgt ein Beispiel welches alle Argumente verwendet.
         </para>
 
         <programlisting language="php"><![CDATA[

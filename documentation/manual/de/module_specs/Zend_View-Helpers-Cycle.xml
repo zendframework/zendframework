@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 19436 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.cycle">
     <title>Cycle Helfer</title>
 
     <para>
-      Der <code>Cycle</code> Helfer wird verwendet um ein Set von Werte zu ändern.
+      Der <classname>Cycle</classname> Helfer wird verwendet um ein Set von Werte zu ändern.
     </para>
 
     <example id="zend.view.helpers.initial.cycle.basicusage">
@@ -45,14 +45,18 @@ $this->cycle()->prev();
 </tr>
 ]]></programlisting>
     </example>
-<example id="zend.view.helpers.initial.cycle.advanceusage">
-       <title>Mit einem oder mehreren Zyklen arbeiten</title>
-<para>Um zwei Zyklen zu verwenden muß man den Namen des Zyklus verwenden. Einfach zwei Parameter
-in der cycle Methode setzen. <code>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</code>.
-Man kann auch die setName($name) Funktion verwenden.
-</para>
-</example>
-      <programlisting language="php"><![CDATA[
+    <example id="zend.view.helpers.initial.cycle.advanceusage">
+        <title>Mit einem oder mehreren Zyklen arbeiten</title>
+
+        <para>
+            Um zwei Zyklen zu verwenden muß man den Namen des Zyklus verwenden. Einfach zwei
+            Parameter in der cycle Methode setzen.
+            <command>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</command>. Man kann auch die
+            setName($name) Funktion verwenden.
+        </para>
+    </example>
+
+    <programlisting language="php"><![CDATA[
 <?php foreach ($this->books as $book):?>
   <tr style="background-color:<?php echo $this->cycle(array("#F0F0F0",
                                                             "#FFFFFF"))

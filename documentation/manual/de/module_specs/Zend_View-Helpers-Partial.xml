@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 19434 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.partial">
     <title>Partielle Helfer</title>
 
     <para>
-        Der <code>Partial</code> (Partielle) View Helfer wird verwendet um ein spezielles Template
-        innerhalb seines eigenen variablen Bereichs zu rendern. Primär wird er für wiederverwendbare
-        Templatefragmente verwendet bei denen man keine Vorsorge wegen variablen Namenskonflikten
-        aufpassen muß. Zusätzlich erlauben Sie es Teile von View Skripten von speziellen Modulen zu
-        spezifizieren.
+        Der <classname>Partial</classname> (Partielle) View Helfer wird verwendet um ein spezielles
+        Template innerhalb seines eigenen variablen Bereichs zu rendern. Primär wird er für
+        wiederverwendbare Templatefragmente verwendet bei denen man keine Vorsorge wegen variablen
+        Namenskonflikten aufpassen muß. Zusätzlich erlauben Sie es Teile von View Skripten von
+        speziellen Modulen zu spezifizieren.
     </para>
 
     <para>
-        Ein Geschwisterteil zum <code>Partial</code> ist der <code>PartialLoop</code> View Helfer
-        der es erlaubt Daten zu übergeben die durchlaufen werden können, und einen Abschnitt für
-        jedes Teil auszugeben.
+        Ein Geschwisterteil zum <classname>Partial</classname> ist der
+        <classname>PartialLoop</classname> View Helfer der es erlaubt Daten zu übergeben die
+        durchlaufen werden können, und einen Abschnitt für jedes Teil auszugeben.
     </para>
 
     <note>
         <title>PartialLoop Zähler</title>
         <para>
-            Der <code>PartialLoop</code> View Helfer fügt der View eine Variable hinzu die
-            <code>partialCounter</code> heißt und welche die aktuelle Position des Arrays zum View
-            Skript übergibt. Das bietet einen einfachen Weg um alternative Farbgebungen zum Bespiel
-            bei Tabellenzeilen zu haben.
+            Der <classname>PartialLoop</classname> View Helfer fügt der View eine Variable hinzu die
+            <emphasis>partialCounter</emphasis> heißt und welche die aktuelle Position des Arrays
+            zum View Skript übergibt. Das bietet einen einfachen Weg um alternative Farbgebungen zum
+            Bespiel bei Tabellenzeilen zu haben.
         </para>
 
     </note>
@@ -72,8 +72,8 @@
         <title>Was ist ein Modell?</title>
 
         <para>
-            Ein Modell das mit dem <code>Partial</code> View Helfer verwendet wird kann eines der
-            folgenden sein:
+            Ein Modell das mit dem <classname>Partial</classname> View Helfer verwendet wird kann
+            eines der folgenden sein:
         </para>
 
         <itemizedlist>
@@ -141,11 +141,12 @@ $view->partialLoop()->setObjectKey('model');
         </para>
 
         <para>
-            Der <code>PartialLoop</code> View Helfer hilft bei der Lösung dieses Problems. Er
-            erlaubt es einen wiederholenden Teil (Array oder Objekt das einen <code>Iterator</code>
-            implementiert) als Modell zu übergeben. Er iteriert dann darüber, und übergibt dessen
-            Teile dem Partial Skript als Modell. Teil in diesem Iterator kann jedes Modell sein das
-            der <code>Partial</code> View Helfer erlaubt.
+            Der <classname>PartialLoop</classname> View Helfer hilft bei der Lösung dieses Problems.
+            Er erlaubt es einen wiederholenden Teil (Array oder Objekt das einen
+            <emphasis>Iterator</emphasis> implementiert) als Modell zu übergeben. Er iteriert dann
+            darüber, und übergibt dessen Teile dem Partial Skript als Modell. Teil in diesem
+            Iterator kann jedes Modell sein das der <classname>Partial</classname> View Helfer
+            erlaubt.
         </para>
 
         <para>
@@ -172,7 +173,7 @@ $model = array(
 ]]></programlisting>
 
         <para>
-            Im View Skript wird dann der <code>PartialLoop</code> Helfer aufgerufen:
+            Im View Skript wird dann der <classname>PartialLoop</classname> Helfer aufgerufen:
         </para>
 
         <programlisting language="php"><![CDATA[

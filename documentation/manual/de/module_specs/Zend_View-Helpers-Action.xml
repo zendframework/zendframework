@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19432 -->
+<!-- EN-Revision: 19436 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.action">
     <title>Action View Helfer</title>
 
     <para>
-        Der <code>Action</code> View Helfer ermöglicht es View Skripten eine gegebene Controller
-        Aktion auszuführen; das Ergebnis des Antwortsobjektes das der Ausführung folgt wird dann
-        zurückgegeben. Dieses kann verwendet werden wenn eine bestimmte Aktion wiederverwendbare
-        Inhalte oder "helfende" Inhalte erstellt.
+        Der <classname>Action</classname> View Helfer ermöglicht es View Skripten eine gegebene
+        Controller Aktion auszuführen; das Ergebnis des Antwortsobjektes das der Ausführung folgt
+        wird dann zurückgegeben. Dieses kann verwendet werden wenn eine bestimmte Aktion
+        wiederverwendbare Inhalte oder "helfende" Inhalte erstellt.
     </para>
 
     <para>
@@ -17,10 +17,10 @@
     </para>
 
     <para>
-        Die <acronym>API</acronym> für den <code>Action</code> View Helfer folgt dem der meisten
-        <acronym>MVC</acronym> Komponenten die Controller Aktionen aufrufen:
-        <methodname>action($action, $controller, $module = null, array $params =
-            array())</methodname>. <varname>$action</varname> und <varname>$controller</varname>
+        Die <acronym>API</acronym> für den <classname>Action</classname> View Helfer folgt dem der
+        meisten <acronym>MVC</acronym> Komponenten die Controller Aktionen aufrufen:
+        <command>action($action, $controller, $module = null, array $params =
+            array())</command>. <varname>$action</varname> und <varname>$controller</varname>
         werden benötigt; wenn kein Modul angegeben wird, dann wird das Standardmodul angenommen.
     </para>
 
@@ -28,7 +28,7 @@
         <title>Grundsätzliche Verwendung von Action View Helfern</title>
 
         <para>
-            Als Beispiel, könnte man einen <code>CommentController</code> mit einer
+            Als Beispiel, könnte man einen <classname>CommentController</classname> mit einer
             <methodname>listAction()</methodname> Methode haben die man in Reihenfolge ausführen
             will, um eine Liste von Kommentaren für die aktuelle Anfrage herauszuholen:
         </para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 19433 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.translate">
 
@@ -9,15 +9,15 @@
         Oft sind Webseiten in verschiedenen Sprachen vorhanden. Um den Inhalt einer Site zu
         übersetzen sollte ganz einfach <link
             linkend="zend.translate.introduction">Zend Translate</link> verwendet werden, und um
-        <code>Zend Translate</code> in der eigenen View zu integrieren sollte der
-        <code>Translate</code> View Helfer verwendet werden.
+        <classname>Zend Translate</classname> in der eigenen View zu integrieren sollte der
+        <classname>Translate</classname> View Helfer verwendet werden.
     </para>
 
     <para>
         In allen folgenden Beispielen verwenden wir den einfachen Array Übersetzungs Adapter.
         Natürlich kann jede Instanz von <classname>Zend_Translate</classname> und genauso jede
         Subklasse von <classname>Zend_Translate_Adapter</classname> verwendet werden. Es gibt
-        verschiedene Wege den <code>Translate</code> View Helfer zu initiieren:
+        verschiedene Wege den <classname>Translate</classname> View Helfer zu initiieren:
     </para>
 
     <itemizedlist>
@@ -27,11 +27,13 @@
                 Instanz
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Danach, durch das Fluent Interface
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Direkt, durch Instanzierung der Klasse
@@ -55,7 +57,6 @@
     </note>
 
     <example id="zend.view.helpers.initial.translate.registered">
-
         <title>Registrierte Instanz</title>
 
         <para>
@@ -74,7 +75,6 @@ Zend_Registry::set('Zend_Translate', $adapter);
 echo $this->translate('simple');
 // gibt 'einfach' zurück
 ]]></programlisting>
-
     </example>
 
     <para>
@@ -83,7 +83,6 @@ echo $this->translate('simple');
     </para>
 
     <example id="zend.view.helpers.initial.translate.afterwards">
-
         <title>In der View</title>
 
         <para>
@@ -99,7 +98,6 @@ $adapter = new Zend_Translate('array', array('simple' => 'einfach'), 'de');
 $this->translate()->setTranslator($adapter)->translate('simple');
 // das gibt 'einfach' zurück
 ]]></programlisting>
-
     </example>
 
     <para>
@@ -108,7 +106,6 @@ $this->translate()->setTranslator($adapter)->translate('simple');
     </para>
 
     <example id="zend.view.helpers.initial.translate.directly">
-
         <title>Direkte Verwendung</title>
 
         <programlisting language="php"><![CDATA[
@@ -124,7 +121,6 @@ print $translate->translate('simple'); // das gibt 'einfach' zurück
             Dieser Weg kann verwendet werden wenn man nicht mit <classname>Zend_View</classname>
             arbeitet und übersetzte Ausgaben erzeugen muß.
         </para>
-
     </example>
 
     <para>
@@ -136,7 +132,6 @@ print $translate->translate('simple'); // das gibt 'einfach' zurück
     </para>
 
     <example id="zend.view.helpers.initial.translate.parameter">
-
         <title>Einzelne Parameter</title>
 
         <para>
@@ -150,7 +145,6 @@ $date = "Montag";
 $this->translate("Today is %1\$s", $date);
 // könnte 'Heute ist Montag' zurückgeben
 ]]></programlisting>
-
     </example>
 
     <note>
@@ -161,7 +155,6 @@ $this->translate("Today is %1\$s", $date);
     </note>
 
     <example id="zend.view.helpers.initial.translate.parameterlist">
-
         <title>Liste von Parametern</title>
 
         <para>
@@ -179,11 +172,9 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s",
                  $time);
 // könnte 'Heute ist Monday in April. Aktuelle Zeit: 11:20:55' zurückgeben
 ]]></programlisting>
-
     </example>
 
     <example id="zend.view.helpers.initial.translate.parameterarray">
-
         <title>Array von Parametern</title>
 
         <para>
@@ -196,7 +187,6 @@ $date = array("Monday", "April", "11:20:55");
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 // könnte 'Heute ist Monday in April. Aktuelle Zeit: 11:20:55' zurückgeben
 ]]></programlisting>
-
     </example>
 
     <para>
@@ -208,7 +198,6 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
     </para>
 
     <example id="zend.view.helpers.initial.translate.dynamic">
-
         <title>Das Gebietsschema dynamisch wechseln</title>
 
         <programlisting language="php"><![CDATA[
@@ -216,7 +205,6 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 $date = array("Monday", "April", "11:20:55");
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
 ]]></programlisting>
-
     </example>
 
     <para>
@@ -228,7 +216,6 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date, 'it');
     </para>
 
     <example id="zend.view.helpers.initial.translate.static">
-
         <title>Das Gebietsschema statisch wechseln</title>
 
         <programlisting language="php"><![CDATA[
@@ -237,12 +224,11 @@ $date = array("Monday", "April", "11:20:55");
 $this->translate()->setLocale('it');
 $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 ]]></programlisting>
-
     </example>
 
     <para>
-        Das obige Beispiel setzt <code>'it'</code> als neues standardmäßiges Gebietsschema welches
-        für alle weiteren Übersetzungen verwendet wird.
+        Das obige Beispiel setzt <emphasis>'it'</emphasis> als neues standardmäßiges Gebietsschema
+        welches für alle weiteren Übersetzungen verwendet wird.
     </para>
 
     <para>
@@ -251,7 +237,6 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
     </para>
 
     <example id="zend.view.helpers.initial.translate.getlocale">
-
         <title>Das aktuell gesetzte Gebietsschema erhalten</title>
 
         <programlisting language="php"><![CDATA[
@@ -268,9 +253,7 @@ $this->translate("Today is %1\$s in %2\$s. Actual time: %3\$s", $date);
 // gibt 'it' als neues standardmäßig gesetztes Gebietsschema zurück
 $this->translate()->getLocale();
 ]]></programlisting>
-
     </example>
-
 </sect3>
 <!--
 vim:se ts=4 sw=4 et:

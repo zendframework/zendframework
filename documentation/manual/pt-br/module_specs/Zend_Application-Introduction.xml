@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 15814 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.application.introduction">
+    <title>Introdução</title>
+
+    <para>
+        <classname>Zend_Application</classname> fornece um mecanismo de inicialização de aplicações
+        que fornece recursos reutilizáveis, classes de inicialização modulares e verificação de
+        dependência. Ele também cuida da configuração do ambiente <acronym>PHP</acronym> e introduz
+        por padrão o auto-carregamento.
+    </para>
+</sect1>

@@ -58,7 +58,8 @@ html: html/index.html
 
 html/index.html: $(MANUAL_XML) $(HTML_XSL)
 	@echo "Rendering the whole manual with $(XSLTPROC)..."
-	$(XSLTPROC) --xinclude --output html/index.html $(HTML_XSL) $(MANUAL_XML)
+	$(XMLLINT) --xinclude --output _temp_manual.xml $(MANUAL_XML)
+	$(XSLTPROC) --xinclude --output html/index.html $(HTML_XSL) _temp_manual.xml
 	@echo "Copying manual figures (recursively)..."
 	-[ -d figures ] && cp -r figures html/
 

@@ -114,7 +114,7 @@ abstract class Zend_Log_Writer_Abstract implements Zend_Log_FactoryInterface
     static protected function _parseConfig($config)
     {
         if ($config instanceof Zend_Config) {
-            $config = $config->asArray();
+            $config = $config->toArray();
         }
 
         if (!is_array($config)) {

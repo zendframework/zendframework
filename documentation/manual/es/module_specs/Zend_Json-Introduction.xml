@@ -16,7 +16,7 @@
         cualquier string arbitrario con formato <acronym>XML</acronym> en un string con formato
         JSON. Este rasgo integral permite a desarrolladores <acronym>PHP</acronym> transformar los
         datos codificados de la empresa en formato <acronym>XML</acronym> a formato JSON antes de
-        enviarlos a las aplicaciones del cliente Ajax basadas en navegadores web. Provee una manera
+        enviarlos a las aplicaciones del cliente  <acronym>AJAX</acronym> basadas en navegadores web. Provee una manera
         fácil de hacer conversiones dinámicas de datos del código en el servidor evitando así el
         innecesario parsing de <acronym>XML</acronym> de las aplicaciones en el navegador. Ofrece
         una agradable función útil que facilita las técnicas de procesamiento de datos para

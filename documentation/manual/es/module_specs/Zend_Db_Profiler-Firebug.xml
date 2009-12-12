@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17600 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Perfilando con Firebug</title>
@@ -12,9 +12,10 @@
 
     <para> Todos los datos son enviados a través del componente
             <classname>Zend_Wildfire_Channel_HttpHeaders</classname> que usa
-        cabeceras HTTP para asegurar que el contenido de la página no sea
-        alterado. Depurar peticiones AJAX que requieren respuestas JSON y
-            <acronym>XML</acronym> es perfectamente posible con este enfoque. </para>
+        cabeceras <acronym>HTTP</acronym> para asegurar que el contenido de la página no sea
+        alterado. Depurar peticiones <acronym>AJAX</acronym> que requieren
+        respuestas <acronym>JSON</acronym> y <acronym>XML</acronym> es perfectamente posible con
+        este enfoque. </para>
 
     <para> Requerimientos: </para>
 

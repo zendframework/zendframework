@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17597 -->
+<!-- EN-Revision: 19483 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
 
@@ -48,7 +48,7 @@
 
 
         <para> Hay algunas características notables del
-            <acronym>RFC-2617</acronym> no implementadas todavía: </para>
+                <acronym>RFC-2617</acronym> no implementadas todavía: </para>
         <itemizedlist>
             <listitem>
                 <para> Seguimiento "nonce", que permitiría un gran apoyo, y un
@@ -132,12 +132,13 @@
                             </emphasis>
                         </entry>
                         <entry>Si, cuando
-                                <methodname>'accept_schemes'</methodname>
+                                <methodname>accept_schemes</methodname>
                             contiene <emphasis>'digest'</emphasis></entry>
-                        <entry> Lista de <acronym>URI</acronym>s separadas por espacios para las
-                            cuales la misma información de autenticación es
-                            válida. No es necesario que todas las <acronym>URI</acronym>s apunten
-                            al mismo oservidor. </entry>
+                        <entry> Lista de <acronym>URI</acronym>s separadas por
+                            espacios para las cuales la misma información de
+                            autenticación es válida. No es necesario que todas
+                            las <acronym>URI</acronym>s apunten al mismo
+                            oservidor. </entry>
                     </row>
                     <row>
                         <entry>
@@ -146,7 +147,7 @@
                             </emphasis>
                         </entry>
                         <entry>Si, cuando
-                                <methodname>'accept_schemes'</methodname>
+                                <methodname>accept_schemes</methodname>
                             contiene <emphasis>'digest'</emphasis></entry>
                         <entry> Establece el número de segundos para los cuales
                             el "nonce" es válido. Ver notas de abajo. </entry>
@@ -207,13 +208,11 @@
                     <methodname>resolve()</methodname> recorre el archivo de
                 texto, buscando una linea con el correspondiente username y
                 realm. El formato del archivo de texto es similar a los archivos
-                htpasswd de Apache: 
-                </para>
-                <programlisting><![CDATA[
+                htpasswd de Apache: </para>
+            <programlisting><![CDATA[
 <username>:<realm>:<credentials>\n
 ]]></programlisting>
-                <para>
-                Cada linea consta de tres campos -username, realm, y
+            <para> Cada linea consta de tres campos -username, realm, y
                 credenciales - cada uno separados por dos puntos. El campo
                 credenciales es opaco al archivo "resolver"; simplemente
                 devuelve el valor tal como és al llamador. Por lo tanto, este
@@ -222,7 +221,7 @@
                 ser escrito en texto claro. En la autenticación "Digest",
                 debería ser en hash <acronym>MD5</acronym> descrito
                 anteriormente. </para>
-            
+
             <para> Hay dos formas igualmente fácil de crear un archivo de
                 "resolver": </para>
             <programlisting language="php"><![CDATA[
@@ -234,11 +233,9 @@ $resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $resolver->setFile($path);
-]]></programlisting> 
-            <para>
-            Si la ruta está vacía o no se puede leer, se lanza una
-            excepción.
-            </para>
+]]></programlisting>
+            <para> Si la ruta está vacía o no se puede leer, se lanza una
+                excepción. </para>
         </sect3>
 
     </sect2>

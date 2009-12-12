@@ -52,7 +52,7 @@
         excepciones, salvo que sea imposible determinar si el valor de entrada
         es válido o no.
         Algunos ejemplos de casos razonables para lanzar una excepción podría ser
-        si un archivo no puede abrirse, que un servidor LDAP no pudiera ser
+        si un archivo no puede abrirse, que un servidor <acronym>LDAP</acronym> no pudiera ser
         contactado, o una conexión a una base de datos no estuviera disponible.
         Estos son casos en los que puede ser necesario determinar el éxito o
         fracaso de la validación.

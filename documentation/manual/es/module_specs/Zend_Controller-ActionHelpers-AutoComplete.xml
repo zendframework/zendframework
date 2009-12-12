@@ -115,7 +115,7 @@ class FooController extends Zend_Controller_Action
     </itemizedlist>
 
     <para>
-        Actualmente, <methodname>AutoComplete</methodname> soporta las bibliotecas AJAX de
+        Actualmente, <methodname>AutoComplete</methodname> soporta las bibliotecas  <acronym>AJAX</acronym> de
         Dojo y Scriptaculous.
     </para>
 

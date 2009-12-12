@@ -5,11 +5,11 @@
     <title>Trabajando con Páginas</title>
     <sect2 id="zend.pdf.pages.creation">
         <title>Creación de Páginas</title>
-        <para> Las páginas en un documento PDF están representadas como
+        <para> Las páginas en un documento <acronym>PDF</acronym> están representadas como
             instancias <classname>Zend_Pdf_Page</classname> en
                 <classname>Zend_Pdf</classname>. </para>
 
-        <para> Las páginas PDF o bien son cargadas desde una PDF ya existente o
+        <para> Las páginas <acronym>PDF</acronym> o bien son cargadas desde una <acronym>PDF</acronym> ya existente o
             creadas usando la <acronym>API</acronym>
             <classname>Zend_Pdf</classname>. </para>
 
@@ -19,7 +19,7 @@
             objeto <classname>Zend_Pdf_Page</classname>.
                 <classname>Zend_Pdf::newPage()</classname> crea una página que
             ya está agregada a un documento. Las páginas no agregadas no pueden
-            ser utilizadas con múltiples documentos PDF, pero son algo más
+            ser utilizadas con múltiples documentos <acronym>PDF</acronym>, pero son algo más
             eficientes. <footnote>
                 <para> Es una limitación de la versión actual de ZF. Será
                     eliminada en futuras versiones. Pero las páginas no
@@ -77,7 +77,7 @@ unset($pdf->pages[$id]);
 
     <sect2 id="zend.pdf.pages.cloning">
         <title>Clonado de Páfinas.</title>
-        <para> La página PDF existente puede ser clonada creando un nuevo objeto
+        <para> La página <acronym>PDF</acronym> existente puede ser clonada creando un nuevo objeto
                 <classname>Zend_Pdf_Page</classname> con una página existente
             como parámetro: </para>
 
@@ -110,7 +110,7 @@ unset($pdf->pages[$templatePageIndex]);
 
         <caution>
             <para> Importante! La página clonada comparte algunos recursos de
-                PDF con una página plantilla, la que puede ser utilizada sólo en
+                <acronym>PDF</acronym> con una página plantilla, la que puede ser utilizada sólo en
                 el mismo documento como una página plantilla. El documento
                 modificado pueden guardarse como uno nuevo. </para>
         </caution>

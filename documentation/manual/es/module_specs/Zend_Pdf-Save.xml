@@ -3,20 +3,20 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.save">
     <title>Guardar Cambios a Documentos PDF</title>
-    <para> Hay dos métodos que guardan los cambios a los documentos PDF: los
+    <para> Hay dos métodos que guardan los cambios a los documentos <acronym>PDF</acronym>: los
         métodos son <classname>Zend_Pdf::save()</classname> y
             <classname>Zend_Pdf::render()</classname>. </para>
 
     <para>
         <classname>Zend_Pdf::save($filename, $updateOnly = false)</classname>
-        guarda el documento PDF en un archivo. Si $updateOnly es verdadero, sólo
-        entonces el nuevo segmento del archivo PDF se agrega al archivo. De lo
+        guarda el documento <acronym>PDF</acronym> en un archivo. Si $updateOnly es verdadero, sólo
+        entonces el nuevo segmento del archivo <acronym>PDF</acronym> se agrega al archivo. De lo
         contrario, el archivo es sobreescrito. </para>
 
     <para>
         <classname>Zend_Pdf::render($newSegmentOnly = false)</classname> regresa
-        el documento PDF como un string. Si $newSegmentOnly es verdadero,
-        entonces sólo el nuevo segmento del archivo PDF es devuelto. </para>
+        el documento <acronym>PDF</acronym> como un string. Si $newSegmentOnly es verdadero,
+        entonces sólo el nuevo segmento del archivo <acronym>PDF</acronym> es devuelto. </para>
 
     <example id="zend.pdf.save.example-1">
         <title>Guardando Documentos PDF</title>

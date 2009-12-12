@@ -6,9 +6,9 @@
     <para>
         <classname>Zend_Config_Ini</classname>
         permite a los desarrolladores almacenar datos de configuración
-        en un formato de datos INI familiar, y leer de ellos en la
+        en un formato de datos <acronym>INI</acronym> familiar, y leer de ellos en la
         aplicación usando una sintáxis de propiedades de objetos
-        anidados. El formato INI se especializa en proveer tanto la
+        anidados. El formato <acronym>INI</acronym> se especializa en proveer tanto la
         habilidad de mantener una jerarquía de claves de datos (data
         keys) de configuración como la de mantener una jerarquía entre
         secciones de datos de configuración. Las jerarquías de datos de

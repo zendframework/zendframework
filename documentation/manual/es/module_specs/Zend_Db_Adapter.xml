@@ -1293,10 +1293,10 @@ $n = $db->delete('bugs', 'bug_id = 3');
         <title>Quoting Values and Identifiers</title>
 
         <para>
-            When you form SQL queries, often it is the case that you need to
-            include the values of PHP variables in SQL expressions. This is
+            When you form <acronym>SQL</acronym> queries, often it is the case that you need to
+            include the values of PHP variables in <acronym>SQL</acronym> expressions. This is
             risky, because if the value in a PHP string contains certain
-            symbols, such as the quote symbol, it could result in invalid SQL.
+            symbols, such as the quote symbol, it could result in invalid <acronym>SQL</acronym>.
             For example, notice the imbalanced quote characters in the
             following query:
             <programlisting language="php"><![CDATA[
@@ -1365,12 +1365,12 @@ echo $sql;
             </para>
 
             <para>
-                Values may need to be quoted or not quoted according to the SQL
+                Values may need to be quoted or not quoted according to the <acronym>SQL</acronym>
                 datatype context in which they are used. For instance, in some
                 RDBMS brands, an integer value must not be quoted as a string
                 if it is compared to an integer-type column or expression.
-                In other words, the following is an error in some SQL
-                implementations, assuming <code>intColumn</code> has a SQL
+                In other words, the following is an error in some <acronym>SQL</acronym>
+                implementations, assuming <code>intColumn</code> has a <acronym>SQL</acronym>
                 datatype of <constant>INTEGER</constant>
 
                 <programlisting language="php"><![CDATA[

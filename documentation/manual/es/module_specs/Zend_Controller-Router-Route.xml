@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17592 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
 
     <para>
-        <classname>Zend_Controller_Router_Route</classname> es la ruta 
-        standard del framework. Combina la facilidad de uso con la flexibilidad  
-        para la definición de rutas. Cada ruta consiste fundamentalmente en el 
-        mapeo de la <acronym>URL</acronym> (de partes estáticas y dinámicas (variables)) y puede ser 
-        iniciada con valores predeterminados así como con requisitos variables.
-    </para>
+        <classname>Zend_Controller_Router_Route</classname> es la ruta standard
+        del framework. Combina la facilidad de uso con la flexibilidad para la
+        definición de rutas. Cada ruta consiste fundamentalmente en el mapeo de
+        la <acronym>URL</acronym> (de partes estáticas y dinámicas (variables))
+        y puede ser iniciada con valores predeterminados así como con requisitos
+        variables. </para>
 
-    <para>
-        Imaginemos que nuestra aplicación ficticia necesitará algunas páginas 
-        informativas sobre los autores del contenido. 
-        Queremos ser capaces de apuntar nuestro navegador web a 
-        <methodname>http://domain.com/author/martel</methodname> para ver la información 
-        sobre este muchacho "martel". La ruta para esa funcionalidad podría 
-        parecerse a:
-    </para>
+    <para> Imaginemos que nuestra aplicación ficticia necesitará algunas páginas
+        informativas sobre los autores del contenido. Queremos ser capaces de
+        apuntar nuestro navegador web a
+            <filename>http://domain.com/author/martel</filename> para ver la
+        información sobre este muchacho "martel". La ruta para esa funcionalidad
+        podría parecerse a: </para>
 
-     <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'author/:username',
     array(
@@ -33,39 +31,34 @@ $route = new Zend_Controller_Router_Route(
 $router->addRoute('user', $route);
 ]]></programlisting>
 
-    <para>
-        El primer parámetro en el constructor 
-        <classname>Zend_Controller_Router_Route</classname>
-        es una definición de ruta que será acompañada de una <acronym>URL</acronym>. 
-        Las definiciones de ruta consisten en partes estáticas y dinámicas 
-        separadas por el caracter barra ('/'). Las partes estáticas son simples 
-        textos: <methodname>author</methodname>. Las partes dinámicas, llamadas variables, 
-        se marcan anteponiendo dos puntos (:) al nombre de la variable  
-        <methodname>:username</methodname>.
-    </para>
+    <para> El primer parámetro en el constructor
+            <classname>Zend_Controller_Router_Route</classname> es una
+        definición de ruta que será acompañada de una <acronym>URL</acronym>.
+        Las definiciones de ruta consisten en partes estáticas y dinámicas
+        separadas por el caracter barra ('/'). Las partes estáticas son simples
+        textos: <command>author</command>. Las partes dinámicas, llamadas
+        variables, se marcan anteponiendo dos puntos (:) al nombre de la
+        variable <command>:username</command>. </para>
 
     <note>
         <title>Uso de Caracteres</title>
-        <para>
-            La implementación actual le permite utilizar cualquier carácter 
-            (salvo una barra) como un identificador de variable, pero se recomienda 
-            encarecidamente que se utilicen sólo caracteres que sean válidos para 
-            identificadores de variables <acronym>PHP</acronym>. En implementaciones futuras se 
-            podría alterar este comportamiento, resultando en probables fallos 
-            escondidos en su código.
-        </para>
+        <para> La implementación actual le permite utilizar cualquier carácter
+            (salvo una barra) como un identificador de variable, pero se
+            recomienda encarecidamente que se utilicen sólo caracteres que sean
+            válidos para identificadores de variables <acronym>PHP</acronym>. En
+            implementaciones futuras se podría alterar este comportamiento,
+            resultando en probables fallos escondidos en su código. </para>
     </note>
 
-    <para>
-        Este ejemplo de ruta debería ser coincidente cuando apunta su navegador a
-        <methodname>http://domain.com/author/martel</methodname>, en cuyo caso todas sus 
-        variables se inyectan al objeto <classname>Zend_Controller_Request</classname> 
-        y quedando accesibles en <methodname>ProfileController</methodname>. 
-        Las variables devueltas por este ejemplo pueden ser representadas como 
-        el siguiente array de pares clave/valor:
-    </para>
+    <para> Este ejemplo de ruta debería ser coincidente cuando apunta su
+        navegador a <filename>http://domain.com/author/martel</filename>, en
+        cuyo caso todas sus variables se inyectan al objeto
+            <classname>Zend_Controller_Request</classname> y quedando accesibles
+        en <classname>ProfileController</classname>. Las variables devueltas
+        por este ejemplo pueden ser representadas como el siguiente array de
+        pares clave/valor: </para>
 
-     <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $values = array(
     'username'   => 'martel',
     'controller' => 'profile',
@@ -73,16 +66,15 @@ $values = array(
 );
 ]]></programlisting>
 
-    <para>
-        Después, <classname>Zend_Controller_Dispatcher_Standard</classname> 
-        debe invocar al método <methodname>userinfoAction()</methodname> de su clase 
-        <methodname>ProfileController</methodname> (en el módulo por defecto) basado en
-        estos valores. Allí se podrán acceder a todas las variables mediante  
-        los métodos <classname>Zend_Controller_Action::_getParam()</classname> 
-        o <classname>Zend_Controller_Request::getParam()</classname>:
-    </para>
+    <para> Después, <classname>Zend_Controller_Dispatcher_Standard</classname>
+        debe invocar al método <methodname>userinfoAction()</methodname> de su
+        clase <classname>ProfileController</classname> (en el módulo por
+        defecto) basado en estos valores. Allí se podrán acceder a todas las
+        variables mediante los métodos
+        <methodname>Zend_Controller_Action::_getParam()</methodname> o
+        <methodname>Zend_Controller_Request::getParam()</methodname>: </para>
 
-     <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 public function userinfoAction()
 {
     $request = $this->getRequest();
@@ -92,16 +84,13 @@ public function userinfoAction()
 }
 ]]></programlisting>
 
-    <para>
-        La definición de ruta puede contener uno o más caracteres especiales 
-        - un comodín - representado por el símbolo '*'. 
-        Se utiliza para reunir parámetros al igual que el valor de ruta por 
-        defecto del Módulo (var => pares de valores definidos en la <acronym>URI</acronym>). 
-        La siguiente ruta imita más o menos el comportamiento de la ruta del 
-        Módulo:
-    </para>
+    <para> La definición de ruta puede contener uno o más caracteres especiales
+        - un comodín - representado por el símbolo '*'. Se utiliza para reunir
+        parámetros al igual que el valor de ruta por defecto del Módulo (var =>
+        pares de valores definidos en la <acronym>URI</acronym>). La siguiente
+        ruta imita más o menos el comportamiento de la ruta del Módulo: </para>
 
-     <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     ':module/:controller/:action/*',
     array('module' => 'default')
@@ -112,15 +101,13 @@ $router->addRoute('default', $route);
     <sect4 id="zend.controller.router.routes.standard.variable-defaults">
         <title>Variables por Defecto</title>
 
-        <para>
-            Cada variable en la ruta puede tener una valor por defecto y para 
-            esto es que se usa el segundo parámetro del constructor 
-            <classname>Zend_Controller_Router_Route</classname>. 
-            Este parámetro es un array con claves representando los nombres de 
-            variables y con valores como los deseados por defecto:
-        </para>
+        <para> Cada variable en la ruta puede tener una valor por defecto y para
+            esto es que se usa el segundo parámetro del constructor
+                <classname>Zend_Controller_Router_Route</classname>. Este
+            parámetro es un array con claves representando los nombres de
+            variables y con valores como los deseados por defecto: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array('year' => 2006)
@@ -128,25 +115,22 @@ $route = new Zend_Controller_Router_Route(
 $router->addRoute('archive', $route);
 ]]></programlisting>
 
-        <para>
-            La ruta de arriba comparará <acronym>URL</acronym>s como
-            <methodname>http://domain.com/archive/2005</methodname> y
-            <methodname>http://example.com/archive</methodname>. En este último caso la 
-            variable year(año) tendrá un valor inicial predeterminado de 2006.
-        </para>
+        <para> La ruta de arriba comparará <acronym>URL</acronym>s como
+                <filename>http://domain.com/archive/2005</filename> y
+                <filename>http://example.com/archive</filename>. En este último
+            caso la variable year(año) tendrá un valor inicial predeterminado de
+            2006. </para>
 
-        <para>
-            Este ejemplo resultará en inyectar una variable año al objeto 
-            solicitud. Ya que no hay información de enrutamiento presente 
-            (no se define ningún controlador ni parámetros de acción), 
-            la solicitud será enviada al controlador y al método de acción 
-            por defecto (que a la vez ambos están definidos en 
-            <classname>Zend_Controller_Dispatcher_Abstract</classname>). 
-            Para hacerlos más utilizables, tiene que proporcionar un controlador 
-            válido y una acción válida como la ruta por defecto:
-        </para>
+        <para> Este ejemplo resultará en inyectar una variable año al objeto
+            solicitud. Ya que no hay información de enrutamiento presente (no se
+            define ningún controlador ni parámetros de acción), la solicitud
+            será enviada al controlador y al método de acción por defecto (que a
+            la vez ambos están definidos en
+                <classname>Zend_Controller_Dispatcher_Abstract</classname>).
+            Para hacerlos más utilizables, tiene que proporcionar un controlador
+            válido y una acción válida como la ruta por defecto: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(
@@ -158,25 +142,21 @@ $route = new Zend_Controller_Router_Route(
 $router->addRoute('archive', $route);
 ]]></programlisting>
 
-        <para>
-            Entonces, esta ruta resultará en el dispatch al método 
-            <methodname>showAction()</methodname> de la clase 
-            <methodname>ArchiveController</methodname>.
-        </para>
+        <para> Entonces, esta ruta resultará en el dispatch al método
+            <methodname>showAction()</methodname> de la clase
+            <classname>ArchiveController</classname>. </para>
 
     </sect4>
 
     <sect4 id="zend.controller.router.routes.standard.variable-requirements">
         <title>Requerimientos para Variables</title>
 
-        <para>
-            Podemos agregar un tercer parámetro al constructor
-            <classname>Zend_Controller_Router_Route</classname> donde podemos  
-            establecer los requisitos para las variables. 
-            Estas son definidas como partes de una expresión regular:
-        </para>
+        <para> Podemos agregar un tercer parámetro al constructor
+                <classname>Zend_Controller_Router_Route</classname> donde
+            podemos establecer los requisitos para las variables. Estas son
+            definidas como partes de una expresión regular: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route(
     'archive/:year',
     array(
@@ -189,107 +169,85 @@ $route = new Zend_Controller_Router_Route(
 $router->addRoute('archive', $route);
 ]]></programlisting>
 
-        <para>
-            Con una ruta definida como la de arriba, el router comparará solo 
-            cuando la variable año contenga datos numéricos, eg. 
-            <methodname>http://domain.com/archive/2345</methodname>. Una <acronym>URL</acronym> como 
-            <methodname>http://example.com/archive/test</methodname> no se comparará y en su 
-            lugar el control se pasará a la próxima ruta en la cadena.
-        </para>
+        <para> Con una ruta definida como la de arriba, el router comparará solo
+            cuando la variable año contenga datos numéricos, eg.
+                <filename>http://domain.com/archive/2345</filename>. Una
+                <acronym>URL</acronym> como
+                <filename>http://example.com/archive/test</filename> no se
+            comparará y en su lugar el control se pasará a la próxima ruta en la
+            cadena. </para>
     </sect4>
 
     <sect4 id="zend.controller.router.routes.standard.translated-segments">
         <title>Segmentos Traducidos</title>
 
-        <para>
-            El standard de ruta brinda apoyo a la traducción de segmentos. 
-            Para utilizar esta característica, tiene que definir por lo menos 
-            un traductor (una instancia de <classname>Zend_Translate</classname>) 
-            mediante una de las siguientes formas:
-        </para>
+        <para> El standard de ruta brinda apoyo a la traducción de segmentos.
+            Para utilizar esta característica, tiene que definir por lo menos un
+            traductor (una instancia de <classname>Zend_Translate</classname>)
+            mediante una de las siguientes formas: </para>
 
         <itemizedlist>
             <listitem>
-                <para>
-                    Ponerlo en el registro con la clave 
-                    <classname>Zend_Translate</classname>.
+                <para> Ponerlo en el registro con la clave
+                    <methodname>Zend_Translate</methodname>. </para>
+            </listitem>
+            <listitem>
+                <para> Setearlo mediante el método estático
+                    <methodname>Zend_Controller_Router_Route::setDefaultTranslator()</methodname>.
                 </para>
             </listitem>
             <listitem>
-                <para>
-                    Setearlo mediante el método estático
-                    <classname>Zend_Controller_Router_Route::setDefaultTranslator()</classname>.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Pasarlo como cuarto parámetro al constructor.
-                </para>
+                <para> Pasarlo como cuarto parámetro al constructor. </para>
             </listitem>
         </itemizedlist>
 
-        <para>
-            Por defecto, se utilizará el "locale" especificado en la instancia 
-            <classname>Zend_Translate</classname>.  
-            Para anularlo, debe setearlo (como una instancia de 
-            <classname>Zend_Locale</classname> o un string local) de una de las 
-            siguientes maneras:
-        </para>
+        <para> Por defecto, se utilizará el "locale" especificado en la
+            instancia <classname>Zend_Translate</classname>. Para anularlo, debe
+            setearlo (como una instancia de <classname>Zend_Locale</classname> o
+            un string local) de una de las siguientes maneras: </para>
 
         <itemizedlist>
             <listitem>
-                <para>
-                    Ponerlo en el registro con la clave <classname>Zend_Locale</classname>.
+                <para> Ponerlo en el registro con la clave
+                        <classname>Zend_Locale</classname>. </para>
+            </listitem>
+            <listitem>
+                <para> Setearlo mediante el método estático
+                        <classname>Zend_Controller_Router_Route::setDefaultLocale()</classname>.
                 </para>
             </listitem>
             <listitem>
-                <para>
-                    Setearlo mediante el método estático 
-                    <classname>Zend_Controller_Router_Route::setDefaultLocale()</classname>.
-                </para>
+                <para> Pasarlo como cuarto parámetro al constructor. </para>
             </listitem>
             <listitem>
-                <para>
-                    Pasarlo como cuarto parámetro al constructor.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Pasarlo como parámetro <methodname>@locale</methodname> al método de 
-                    ensamblaje.
-                </para>
+                <para> Pasarlo como parámetro <command>@locale</command>
+                    al método de ensamblaje. </para>
             </listitem>
         </itemizedlist>
 
-        <para>
-            Los segmentos traducidos se dividen en dos partes. 
-            Los segmentos fijos están precedidos por un único signo 
-            <methodname>@</methodname>, y serán traducidos al "locale" actual para el 
-            ensamblaje y se revierten al ID del mensaje cuando se acepte 
-            nuevamente. Los segmentos dinámicos tienen el prefijo <methodname>:@</methodname>.
-            Para el ensamblaje, el parámetro dado será traducido y se insertará 
-            en la posición del parámetro. 
-            Cuando se acepte, el parámetro traducido de la URL volverá al ID
-            del mensaje nuevamente.
-        </para>
+        <para> Los segmentos traducidos se dividen en dos partes. Los segmentos
+            fijos están precedidos por un único signo
+            <emphasis>@</emphasis>, y serán traducidos al "locale" actual
+            para el ensamblaje y se revierten al ID del mensaje cuando se acepte
+            nuevamente. Los segmentos dinámicos tienen el prefijo
+            <command>:@</command>. Para el ensamblaje, el parámetro
+            dado será traducido y se insertará en la posición del parámetro.
+            Cuando se acepte, el parámetro traducido de la URL volverá al ID del
+            mensaje nuevamente. </para>
 
         <note>
             <title>IDs de Mensajes y Archivos de Lenguajes Separados</title>
-            <para>
-                Ocasionalmente un ID de mensaje que quiere usar en una de sus 
-                rutas ya se utiliza en un view script o en otro lugar. 
-                Para tener pleno control sobre <acronym>URL</acronym>s seguras, debe usar 
-                un archivo de idioma separado para los mensajes utilizados en 
-                la ruta.
-            </para>
+            <para> Ocasionalmente un ID de mensaje que quiere usar en una de sus
+                rutas ya se utiliza en un view script o en otro lugar. Para
+                tener pleno control sobre <acronym>URL</acronym>s seguras, debe
+                usar un archivo de idioma separado para los mensajes utilizados
+                en la ruta. </para>
         </note>
 
-        <para>
-            La siguiente es la forma más sencilla para preparar el itinerario 
-            normal para el uso de la traducción del segmento:
-        </para>
+        <para> La siguiente es la forma más sencilla para preparar el itinerario
+            normal para el uso de la traducción del segmento: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Prepare el traductor
 $translator = new Zend_Translate('array', array(), 'en');
 $translator->addTranslation(array('archive' => 'archiv',
@@ -305,11 +263,9 @@ $translator->setLocale('en');
 Zend_Controller_Router_Route::setDefaultTranslator($translator);
 ]]></programlisting>
 
-        <para>
-            Este ejemplo demuestra el uso de segmentos estáticos:
-        </para>
+        <para> Este ejemplo demuestra el uso de segmentos estáticos: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Crear la ruta
 $route = new Zend_Controller_Router_Route(
     '@archive',
@@ -327,12 +283,10 @@ $route->assemble(array());
 $route->assemble(array());
 ]]></programlisting>
 
-        <para>
-            Puede usar segmentos dinámicos para crear veriones traducidas como 
-            del tipo módulo-ruta:
-        </para>
+        <para> Puede usar segmentos dinámicos para crear veriones traducidas
+            como del tipo módulo-ruta: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Crear la ruta
 $route = new Zend_Controller_Router_Route(
     ':@controller/:@action/*',
@@ -350,11 +304,9 @@ $route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
 $route->assemble(array('controller' => 'archive', 'foo' => 'bar'));
 ]]></programlisting>
 
-        <para>
-            También puede mezclar segmentos estáticos y dinámicos:
-        </para>
+        <para> También puede mezclar segmentos estáticos y dinámicos: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 // Crear la ruta
 $route = new Zend_Controller_Router_Route(
     '@archive/:@mode/:value',
@@ -377,6 +329,3 @@ $route->assemble(array('mode' => 'month', 'value' => '5', '@locale' => 'de'));
 ]]></programlisting>
     </sect4>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

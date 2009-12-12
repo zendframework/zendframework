@@ -105,7 +105,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
 
             <para>
                 Skip declaration of <methodname>$_dependentTables</methodname> if you use referential integrity
-                constraints in the RDBMS server to implement cascading operations. See
+                constraints in the  <acronym>RDBMS</acronym> server to implement cascading operations. See
                 <xref linkend="zend.db.table.relationships.cascading" /> for more information.
             </para>
 
@@ -152,7 +152,7 @@ class BugsProducts extends Zend_Db_Table_Abstract
             <listitem>
                 <para>
                     <emphasis>refTableClass</emphasis> => The class name of the
-                    parent table. Use the class name, not the physical name of the SQL table.
+                    parent table. Use the class name, not the physical name of the <acronym>SQL</acronym> table.
                 </para>
 
                 <para>
@@ -716,7 +716,7 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
 
             <para>
                 Declaring cascading operations in <classname>Zend_Db_Table</classname> is intended
-                <emphasis>only</emphasis> for RDBMS brands that do not support
+                <emphasis>only</emphasis> for  <acronym>RDBMS</acronym> brands that do not support
                 declarative referential integrity (DRI).
             </para>
 
@@ -727,15 +727,15 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
             </para>
 
             <para>
-                If your RDBMS implements DRI and the <methodname>ON DELETE</methodname> and
+                If your <acronym>RDBMS</acronym> implements DRI and the <methodname>ON DELETE</methodname> and
                 <methodname>ON UPDATE</methodname> clauses, you should declare these clauses in your database
                 schema, instead of using the cascading feature in <classname>Zend_Db_Table</classname>. Declaring
-                cascading DRI rules in the RDBMS is better for database performance, consistency,
+                cascading DRI rules in the  <acronym>RDBMS</acronym> is better for database performance, consistency,
                 and integrity.
             </para>
 
             <para>
-                Most importantly, do not declare cascading operations both in the RDBMS and in your
+                Most importantly, do not declare cascading operations both in the  <acronym>RDBMS</acronym> and in your
                 <classname>Zend_Db_Table</classname> class.
             </para>
 

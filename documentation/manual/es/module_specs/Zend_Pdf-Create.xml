@@ -10,7 +10,7 @@
         objeto <classname>Zend_Pdf</classname>. </para>
 
     <para> La clase <classname>Zend_Pdf</classname> también ofrece dos métodos
-        estáticos para cargar un documento PDF. Estos métodos son
+        estáticos para cargar un documento <acronym>PDF</acronym>. Estos métodos son
             <classname>Zend_Pdf::load()</classname> y
             <classname>Zend_Pdf::parse()</classname>. Ambos retornan objetos
             <classname>Zend_Pdf</classname> como resultado o arrojan una

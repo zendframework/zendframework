@@ -562,7 +562,7 @@ $ctrl->dispatch();
         <para>        		
 			Alentamos el uso del objeto Response para agregar contenido y
             cabeceras. Esto permitirá una mayor flexibilidad en el formato de salida intercambiando
-            (por instancias, JSON o XML en lugar de XHTML) en sus aplicaciones.
+            (por instancias, <acronym>JSON</acronym> o <acronym>XML</acronym> en lugar de <acronym>XHTML</acronym>) en sus aplicaciones.
             Por defecto, el envío <methodname> distpach() </methodname> enviará la respuesta, enviando ambas
             cabeceras y enviando cuanlquier contenido. También se puede tener el controlador front 
             retorne la respuesta usando <methodname>returnResponse()</methodname>,

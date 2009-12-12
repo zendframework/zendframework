@@ -324,8 +324,8 @@ $form->addElement('text', 'username', array('order' => 10));
             requerido, la validación se ejecuta contra un valor nulo. </para>
 
         <para> ¿De dónde provienen los datos?. Puede usar
-                <methodname>$_POST</methodname> o
-            <methodname>$_GET</methodname>, o cualquier otra fuente de datos que
+                <varname>$_POST</varname> o
+            <varname>$_GET</varname>, o cualquier otra fuente de datos que
             tenga a mano (solicitud de un servicio web, por ejemplo): </para>
 
         <programlisting language="php"><![CDATA[
@@ -336,7 +336,7 @@ if ($form->isValid($_POST)) {
 }
 ]]></programlisting>
 
-        <para> Con solicitudes AJAX, a veces puede ignorar la validación de un
+        <para> Con solicitudes  <acronym>AJAX</acronym>, a veces puede ignorar la validación de un
             solo elemento, o grupo de elementos.
                 <methodname>isValidPartial()</methodname> validará parcialmente
             el formulario. A diferencia de <methodname>isValid()</methodname>,
@@ -508,7 +508,7 @@ class UserController extends Zend_Controller_Action
             configurables mediante <classname>Zend_Config</classname>; puede
             incluso pasar un objeto al constructor o pasarlo a través de
                 <methodname>setConfig()</methodname>. Veamos cómo podemos crear
-            el formulario anterior usando un archivo INI. Primero, vamos a
+            el formulario anterior usando un archivo <acronym>INI</acronym>. Primero, vamos a
             seguir las recomendaciones, y colocaremos nuestras configuraciones
             dentro de secciones reflejando su objetivo y y enfocándonos en la
             sección 'development'. A continuación, pondremos en una sección de

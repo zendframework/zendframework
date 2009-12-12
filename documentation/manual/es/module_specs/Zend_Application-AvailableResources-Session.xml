@@ -47,7 +47,7 @@
         <title>Configuración de recursos de la Sesión Ejemplo</title>
 
         <para>
-            A continuación el snippet INI nos muestra cómo configurar el recurso
+            A continuación el snippet <acronym>INI</acronym> nos muestra cómo configurar el recurso
             para sesiones. Se establecen varias opciones
             <classname>Zend_Session</classname>, como también configura una
             instancia <classname>Zend_Session_SaveHandler_DbTable</classname>.

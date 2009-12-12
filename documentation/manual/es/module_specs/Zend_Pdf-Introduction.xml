@@ -4,14 +4,14 @@
 <sect1 id="zend.pdf.introduction">
     <!-- @todo review and revise upon completion of refactoring -->
     <title>Introducción</title>
-    <para> El componente <classname>Zend_Pdf</classname> es un motor para manipular documentos PDF
+    <para> El componente <classname>Zend_Pdf</classname> es un motor para manipular documentos <acronym>PDF</acronym>
         (Portable Document Format). Puede cargar, crear, modificar y guardar documentos. Por lo
         tanto, puede ayudar a cualquier aplicación <acronym>PHP</acronym> a crear dinámicamente
-        documentos PDF modificando los documentos existentes o generar unos nuevos desde cero.
+        documentos <acronym>PDF</acronym> modificando los documentos existentes o generar unos nuevos desde cero.
             <classname>Zend_Pdf</classname> ofrece las siguientes características: <itemizedlist>
             <listitem>
                 <para> Crear un documento nuevo o cargar uno existente. <footnote>
-                        <para> La carga de documentos PDF V1.4 (Acrobat 5) ahora está soportada.
+                        <para> La carga de documentos <acronym>PDF</acronym> V1.4 (Acrobat 5) ahora está soportada.
                         </para>
                     </footnote>
                 </para>
@@ -42,7 +42,7 @@
                 </para>
             </listitem>
             <listitem>
-                <para> Actualización incremental de archivos PDF. </para>
+                <para> Actualización incremental de archivos <acronym>PDF</acronym>. </para>
             </listitem>
         </itemizedlist>
     </para>

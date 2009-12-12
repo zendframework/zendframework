@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17597 -->
+<!-- EN-Revision: 19483 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
-
     <title>HTTP Authentication Adapter</title>
 
     <sect2 id="zend.auth.adapter.http.introduction">
-
         <title>Einführung</title>
 
         <para>
@@ -135,8 +133,8 @@
                     <row>
                         <entry><emphasis><property>digest_domains</property></emphasis></entry>
                         <entry>
-                            Ja, wenn <property>'accept_schemes'</property>
-                            <emphasis>'digest'</emphasis> enthält
+                            Ja, wenn <property>accept_schemes</property>
+                            <emphasis>digest</emphasis> enthält
                         </entry>
                         <entry>
                             Leerzeichen-getrennte Liste von <acronym>URI</acronym>s für welche die
@@ -148,8 +146,8 @@
                     <row>
                         <entry><emphasis><property>nonce_timeout</property></emphasis></entry>
                         <entry>
-                            Ja, wenn <property>'accept_schemes'</property>
-                            <emphasis>'digest'</emphasis> enthält
+                            Ja, wenn <property>accept_schemes</property>
+                            <emphasis>digest</emphasis> enthält
                         </entry>
                         <entry>
                             Setzt die Anzahl an Sekunden für welche die Verfolgung gültig ist.

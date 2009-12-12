@@ -1,31 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 19438 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headlink">
     <title>HeadLink Helfer</title>
 
     <para>
-        Das HTML <code>&lt;link&gt;</code> Element wird immer mehr für das Verlinken einer Vielzahl
-        von Ressourcen der eigenen Site verwendet: Stylesheets, Feeds, FavIcons, Trackbacks, und
-        andere. Der <code>HeadLink</code> Helfer bietet ein einfaches Interface für die Erstellung
-        und das Anhäufen dieser Elemente für das spätere Empfangen und deren Ausgabe im eigenen
-        Layout Skript.
+        Das HTML <emphasis>&lt;link&gt;</emphasis> Element wird immer mehr für das Verlinken einer
+        Vielzahl von Ressourcen der eigenen Site verwendet: Stylesheets, Feeds, FavIcons,
+        Trackbacks, und andere. Der <classname>HeadLink</classname> Helfer bietet ein einfaches
+        Interface für die Erstellung und das Anhäufen dieser Elemente für das spätere Empfangen und
+        deren Ausgabe im eigenen Layout Skript.
     </para>
 
     <para>
-        Der <code>HeadLink</code> Helfer hat spezielle Methode für das hinzufügen von Stylesheet
-        Links zu seinem Stack:
+        Der <classname>HeadLink</classname> Helfer hat spezielle Methode für das hinzufügen von
+        Stylesheet Links zu seinem Stack:
     </para>
 
     <itemizedlist>
-        <listitem><para><code>appendStylesheet($href, $media,
-                    $conditionalStylesheet, $extras)</code></para></listitem>
-        <listitem><para><code>offsetSetStylesheet($index, $href, $media,
-                    $conditionalStylesheet, $extras)</code></para></listitem>
-        <listitem><para><code>prependStylesheet($href, $media,
-                    $conditionalStylesheet, $extras)</code></para></listitem>
-        <listitem><para><code>setStylesheet($href, $media,
-                    $conditionalStylesheet, $extras)</code></para></listitem>
+        <listitem>
+            <para>
+                <command>appendStylesheet($href, $media, $conditionalStylesheet, $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetStylesheet($index, $href, $media, $conditionalStylesheet,
+                    $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependStylesheet($href, $media, $conditionalStylesheet, $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setStylesheet($href, $media, $conditionalStylesheet, $extras)</command>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -37,30 +53,46 @@
     </para>
 
     <para>
-        Zusätzlich hat der <code>HeadLink</code> Helfer eine spezielle Methode für das Hinzufügen
-        von 'alternativen' (alternate) Links zu seinem Stack:
+        Zusätzlich hat der <classname>HeadLink</classname> Helfer eine spezielle Methode für das
+        Hinzufügen von 'alternativen' (alternate) Links zu seinem Stack:
     </para>
 
     <itemizedlist>
-        <listitem><para><code>appendAlternate($href, $type,
-                    $title, $extras)</code></para></listitem>
-        <listitem><para><code>offsetSetAlternate($index, $href, $type,
-                    $title, $extras)</code></para></listitem>
-        <listitem><para><code>prependAlternate($href, $type,
-                    $title, $extras)</code></para></listitem>
-        <listitem><para><code>setAlternate($href, $type,
-                    $title, $extras)</code></para></listitem>
+        <listitem>
+            <para>
+                <command>appendAlternate($href, $type, $title, $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetAlternate($index, $href, $type, $title, $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependAlternate($href, $type, $title, $extras)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setAlternate($href, $type, $title, $extras)</command>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
         Die <methodname>headLink()</methodname> Helfer Methode erlaubt das Spezifizieren aller
-        Attribute die für ein <code>&lt;link&gt;</code> Element notwendig sind, und erlaubt auch die
-        Spezifizfikation der Platzierung --- entweder ersetzt das neue Element alle anderen, wird
-        vorangestellt (an den Beginn des Stacks) , oder angefügt (an das Ende des Stacks).
+        Attribute die für ein <emphasis>&lt;link&gt;</emphasis> Element notwendig sind, und erlaubt
+        auch die Spezifizfikation der Platzierung --- entweder ersetzt das neue Element alle
+        anderen, wird vorangestellt (an den Beginn des Stacks) , oder angefügt (an das Ende des
+        Stacks).
     </para>
 
     <para>
-        Der <code>HeadLink</code> Helfer ist eine konkrete Implementation des
+        Der <classname>HeadLink</classname> Helfer ist eine konkrete Implementation des
         <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfers</link>.
     </para>
 
@@ -68,10 +100,10 @@
         <title>Grundsätzliche Verwendung des HeadLink Helfers</title>
 
         <para>
-            <code>headLink</code> kann jederzeit spezifiziert werden. Typischerweise wird ein
-            globaler Link im eigenen Layout Skript spezifiziert, und anwendungsspezifische Links in
-            den View Skripten der Anwendung. Im Layoutskript, in der &lt;head&gt; Sektion, muß das
-            der Helfer ausgegeben werden.
+            <emphasis>headLink</emphasis> kann jederzeit spezifiziert werden. Typischerweise wird
+            ein globaler Link im eigenen Layout Skript spezifiziert, und anwendungsspezifische Links
+            in den View Skripten der Anwendung. Im Layoutskript, in der &lt;head&gt; Sektion, muß
+            das der Helfer ausgegeben werden.
         </para>
 
         <programlisting language="php"><![CDATA[

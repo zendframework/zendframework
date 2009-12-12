@@ -1,39 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19432 -->
+<!-- EN-Revision: 19438 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta Helfer</title>
 
     <para>
-        Das HTML Element <code>&lt;meta&gt;</code> wird verwendet um Meta Informationen über das
-        HTML Dokument anzubieten -- typischerweise Schlüsselwörter. Dokument Zeichensätze, Cache
+        Das HTML Element <emphasis>&lt;meta&gt;</emphasis> wird verwendet um Meta Informationen über
+        das HTML Dokument anzubieten -- typischerweise Schlüsselwörter. Dokument Zeichensätze, Cache
         Pragmas, usw. Meta Tags können entweder 'http-equiv' oder 'name' Typen sein, müssen ein
         'content' Attribut enthalten, und können auch eines der 'lang' oder 'scheme' Modifikator
         Attributen enthalten.
     </para>
 
     <para>
-        Der <code>HeadMeta</code> Helfer unterstützt die folgenden Methoden für das Setzen und
-        Hinzufügen von Meta Tags:
+        Der <classname>HeadMeta</classname> Helfer unterstützt die folgenden Methoden für das Setzen
+        und Hinzufügen von Meta Tags:
     </para>
 
     <itemizedlist>
-        <listitem><para><code>appendName($keyValue, $content,
-                    $conditionalName)</code></para></listitem>
-        <listitem><para><code>offsetSetName($index, $keyValue, $content,
-                    $conditionalName)</code></para></listitem>
-        <listitem><para><code>prependName($keyValue, $content,
-                    $conditionalName)</code></para></listitem>
-        <listitem><para><code>setName($keyValue, $content,
-                    $modifiers)</code></para></listitem>
-        <listitem><para><code>appendHttpEquiv($keyValue, $content,
-                    $conditionalHttpEquiv)</code></para></listitem>
-        <listitem><para><code>offsetSetHttpEquiv($index, $keyValue, $content,
-                    $conditionalHttpEquiv)</code></para></listitem>
-        <listitem><para><code>prependHttpEquiv($keyValue, $content,
-                    $conditionalHttpEquiv)</code></para></listitem>
-        <listitem><para><code>setHttpEquiv($keyValue, $content,
-                    $modifiers)</code></para></listitem>
+        <listitem>
+            <para>
+                <command>appendName($keyValue, $content, $conditionalName)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetName($index, $keyValue, $content, $conditionalName)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependName($keyValue, $content, $conditionalName)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setName($keyValue, $content, $modifiers)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>appendHttpEquiv($keyValue, $content, $conditionalHttpEquiv)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>offsetSetHttpEquiv($index, $keyValue, $content,
+                    $conditionalHttpEquiv)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>prependHttpEquiv($keyValue, $content, $conditionalHttpEquiv)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setHttpEquiv($keyValue, $content, $modifiers)</command>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -45,8 +77,8 @@
 
     <para>
         Meta Tags können auch gesetzt werden indem die <methodname>headMeta()</methodname>
-        Helfermethode verwendet wird, welche die folgende Signatur hat: <code>headMeta($content,
-            $keyValue, $keyType = 'name', $modifiers = array(), $placement = 'APPEND')</code>.
+        Helfermethode verwendet wird, welche die folgende Signatur hat: <command>headMeta($content,
+            $keyValue, $keyType = 'name', $modifiers = array(), $placement = 'APPEND')</command>.
         <varname>$keyValue</varname> ist der Intalt für den Schlüssel der in
         <varname>$keyType</varname> spezifiziert ist, und welche entweder 'name' oder 'http-equiv'
         sein sollte. <varname>$placement</varname> kann entweder 'SET' (überschreibt alle vorher
@@ -55,17 +87,17 @@
     </para>
 
     <para>
-        <code>HeadMeta</code> überschreibt <methodname>append()</methodname>,
+        <classname>HeadMeta</classname> überschreibt <methodname>append()</methodname>,
         <methodname>offsetSet()</methodname>, <methodname>prepend()</methodname>, und
         <methodname>set()</methodname> um die Verwendung der speziellen Methoden wie oben gelistet
-        zu erzwingen. Intern wird jedes Element als <code>stdClass</code> Token gespeichert, welches
-        später durch Verwendung der <methodname>itemToString()</methodname> Methode serialisiert
-        wird. Das erlaubt es Prüfungen an den Elementen im Stack durchzuführen, und diese Elemente
-        optional zu verändern indem einfach das zurückgegebene Objekt verändert wird.
+        zu erzwingen. Intern wird jedes Element als <property>stdClass</property> Token gespeichert,
+        welches später durch Verwendung der <methodname>itemToString()</methodname> Methode
+        serialisiert wird. Das erlaubt es Prüfungen an den Elementen im Stack durchzuführen, und
+        diese Elemente optional zu verändern indem einfach das zurückgegebene Objekt verändert wird.
     </para>
 
     <para>
-        Der <code>HeadMeta</code> Helfer ist eine konkrete Implementation des
+        Der <classname>HeadMeta</classname> Helfer ist eine konkrete Implementation des
         <link linkend="zend.view.helpers.initial.placeholder">Platzhalter Helfers</link>.
     </para>
 

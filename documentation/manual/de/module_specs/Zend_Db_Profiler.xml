@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19173 -->
+<!-- EN-Revision: 19484 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Db_Profiler</title>
@@ -337,7 +337,7 @@ $profiler->setFilterElapsedSecs(null);
                     <para>
                         <constant>Zend_Db_Profiler::DELETE</constant>: jede Abfrage, die
                         vorhandene Daten löscht, normalerweise ein <acronym>SQL</acronym>
-                        <acronym>DELETE</acronym>.
+                        <constant>DELETE</constant>.
                     </para>
                 </listitem>
 
@@ -391,8 +391,8 @@ $profiler->setFilterQueryType(null);
                 Ein weiteres Feature von <methodname>getQueryProfiles()</methodname> ist das
                 Filtern der Abfragen "on-the-fly" durch Übergabe eines Abfragetyps (oder eine
                 logischen Kombination von Abfragetypen) als erstes Argument; beachte
-                <xref linkend="zend.db.profiler.advanced.filtertype" /> für eine Liste der
-                Konstanten für Abfragetypen.
+                <link linkend="zend.db.profiler.advanced.filtertype">dieses Kapitel</link> für eine
+                Liste der Konstanten für Abfragetypen.
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -105,9 +105,9 @@ $logger = Zend_Log::factory(array(
 
             <listitem>
                 <para>
-                    An associative array of parameters to use when instantiating the log filter.
-                    Each log filter's <methodname>factory()</methodname> method will map these to
-                    constructor arguments, as noted below.
+                    Ein assoziatives Array an Parametern das verwendet wird wenn der Log Filter
+                    instanziert wird. Jede <methodname>factory()</methodname> Methode eines Log
+                    Filters führt diese mit den Constructor Argumenten zusammen, wie anbei erwähnt.
                 </para>
             </listitem>
         </varlistentry>
@@ -117,23 +117,24 @@ $logger = Zend_Log::factory(array(
 
             <listitem>
                 <para>
-                    The class prefix/namespace to use when constructing the final log filter
-                    classname. By default, if this is not provided, "Zend_Log_Filter" is assumed;
-                    however, you can pass your own namespace if you are using a custom log filter.
+                    Der Klassenpräfix/Namespace der verwendet wird wenn der endgültige Klassenname
+                    des Log Filters erstellt wird. Wird er nicht angegeben, dann wird standardmäßig
+                    "Zend_Log_Filter" angenommen; trotzdem kann man einen eigenen Namespace
+                    übergeben, wenn man einen eigenen Log Filter verwendet.
                 </para>
             </listitem>
         </varlistentry>
     </variablelist>
 
     <para>
-        Each writer and each filter has specific options.
+        Jeder Writer und jeder Filter hat spezifische Optionen.
     </para>
 
     <sect2 id="zend.log.factory.writer-options">
-        <title>Writer Options</title>
+        <title>Writer Optionen</title>
 
         <sect3 id="zend.log.factory.writer-options.db">
-            <title>Zend_Log_Writer_Db Options</title>
+            <title>Zend_Log_Writer_Db Optionen</title>
 
             <variablelist>
                 <varlistentry>
@@ -141,7 +142,7 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            A <classname>Zend_Db_Adapter</classname> instance.
+                            Eine Instanz von <classname>Zend_Db_Adapter</classname>.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -151,7 +152,7 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            The name of the table in the RDBMS that will contain log entries.
+                            Der Name der Tabelle in der RDBMS welche Log Einträge enthalten soll.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -161,8 +162,8 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            An associative array mapping database table column names to log event
-                            fields.
+                            Ein assoziatives Array welches die Namen der Spalten der
+                            Datenbanktabelle mit den Feldern der Log Events verknüpft.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -170,41 +171,41 @@ $logger = Zend_Log::factory(array(
         </sect3>
 
         <sect3 id="zend.log.factory.writer-options.firebug">
-            <title>Zend_Log_Writer_Firebug Options</title>
+            <title>Zend_Log_Writer_Firebug Optionen</title>
 
             <para>
-                This log writer takes no options; any provided will be ignored.
+                Dieser Log Writer nimmt keine Optionen; alle übergebenen werden ignoriert.
             </para>
         </sect3>
 
         <sect3 id="zend.log.factory.writer-options.mail">
-            <title>Zend_Log_Writer_Mail Options</title>
+            <title>Zend_Log_Writer_Mail Optionen</title>
 
             <para>
-                <classname>Zend_Log_Writer_Mail</classname> currently (as of 1.10) does not
-                implement a factory, and will raise an exception if you attempt to instantiate it
-                via <methodname>Zend_Log::factory()</methodname>.
+                <classname>Zend_Log_Writer_Mail</classname> implementiert aktuell (mit 1.10) keine
+                Factory, und wirft eine Exception wenn man versucht Ihn über
+                <methodname>Zend_Log::factory()</methodname> zu instanzieren.
             </para>
         </sect3>
 
         <sect3 id="zend.log.factory.writer-options.mock">
-            <title>Zend_Log_Writer_Mock Options</title>
+            <title>Zend_Log_Writer_Mock Optionen</title>
 
             <para>
-                This log writer takes no options; any provided will be ignored.
+                Dieser Log Writer nimmt keine Optionen; alle übergebenen werden ignoriert.
             </para>
         </sect3>
 
         <sect3 id="zend.log.factory.writer-options.null">
-            <title>Zend_Log_Writer_Null Options</title>
+            <title>Zend_Log_Writer_Null Optionen</title>
 
             <para>
-                This log writer takes no options; any provided will be ignored.
+                Dieser Log Writer nimmt keine Optionen; alle übergebenen werden ignoriert.
             </para>
         </sect3>
 
         <sect3 id="zend.log.factory.writer-options.stream">
-            <title>Zend_Log_Writer_Stream Options</title>
+            <title>Zend_Log_Writer_Stream Optionen</title>
 
             <variablelist>
                 <varlistentry>
@@ -212,7 +213,8 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            A valid PHP stream identifier to which to log.
+                            Ein gültiger Identifikator eines PHP Streams auf den geloggt werden
+                            soll.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -222,7 +224,8 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            The I/O mode with which to log; defaults to "a", for "append".
+                            Der I/O Modus mit dem geloggt werden soll; Standardwert ist "a" für
+                            "append".
                         </para>
                     </listitem>
                 </varlistentry>
@@ -230,7 +233,7 @@ $logger = Zend_Log::factory(array(
         </sect3>
 
         <sect3 id="zend.log.factory.writer-options.syslog">
-            <title>Zend_Log_Writer_Syslog Options</title>
+            <title>Zend_Log_Writer_Syslog Optionen</title>
 
             <variablelist>
                 <varlistentry>
@@ -238,7 +241,7 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            Application name used by the syslog writer.
+                            Der Name der Anwendung die vom Syslog Writer verwendet wird.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -248,7 +251,7 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            Facility used by the syslog writer.
+                            Die Facility die vom Syslog Writer verwendet wird.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -256,19 +259,19 @@ $logger = Zend_Log::factory(array(
         </sect3>
 
         <sect3 id="zend.log.factory.writer-options.zendmonitor">
-            <title>Zend_Log_Writer_ZendMonitor Options</title>
+            <title>Zend_Log_Writer_ZendMonitor Optionen</title>
 
             <para>
-                This log writer takes no options; any provided will be ignored.
+                Dieser Log Writer nimmt keine Optionen; alle übergebenen werden ignoriert.
             </para>
         </sect3>
     </sect2>
 
     <sect2 id="zend.log.factory.filter-options">
-        <title>Filter Options</title>
+        <title>Filter Optionen</title>
 
         <sect3 id="zend.log.factory.filter-options.message">
-            <title>Zend_Log_Filter_Message Options</title>
+            <title>Zend_Log_Filter_Message Optionen</title>
 
             <variablelist>
                 <varlistentry>
@@ -276,7 +279,8 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            Regular expression that must be matched in order to log a message.
+                            Ein regulärer Ausdruck der passen muss damit eine Nachricht geloggt
+                            wird.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -284,7 +288,7 @@ $logger = Zend_Log::factory(array(
         </sect3>
 
         <sect3 id="zend.log.factory.filter-options.priority">
-            <title>Zend_Log_Filter_Priority Options</title>
+            <title>Zend_Log_Filter_Priority Optionen</title>
 
             <variablelist>
                 <varlistentry>
@@ -292,7 +296,7 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            The maximum priority level by which messages will be logged.
+                            Das maximale Level der Priorität mit dem Nachrichten geloggt werden.
                         </para>
                     </listitem>
                 </varlistentry>
@@ -302,8 +306,8 @@ $logger = Zend_Log::factory(array(
 
                     <listitem>
                         <para>
-                            The comparison operator by which to do priority comparisons; defaults to
-                            "&lt;=".
+                            Der Vergleichsoperator mit dem Vergleiche der Priorität durchgeführt
+                            werden; der Standardwert ist "&lt;=".
                         </para>
                     </listitem>
                 </varlistentry>
@@ -311,35 +315,34 @@ $logger = Zend_Log::factory(array(
         </sect3>
 
         <sect3 id="zend.log.factory.filter-options.suppress">
-            <title>Zend_Log_Writer_Suppress Options</title>
+            <title>Zend_Log_Writer_Suppress Optionen</title>
 
             <para>
-                This log filter takes no options; any provided will be ignored.
+                Dieser Log Filter nimmt keine Optionen; alle übergebenen werden ignoriert.
             </para>
         </sect3>
     </sect2>
 
     <sect2 id="zend.log.factory.custom">
-        <title>Creating Configurable Writers and Filters</title>
+        <title>Erstellen konfigurierbarer Writer und Filter</title>
 
         <para>
-            If you find yourself needing to write your own log writers and/or filters, you can make
-            them compatible with <methodname>Zend_Log::factory()</methodname> very easily.
+            Wenn man die Notwendigkeit hat eigene Log Writer und/oder Filter zu schreiben kann man
+            diese sehr einfach zu <methodname>Zend_Log::factory()</methodname> kompatibel machen.
         </para>
 
         <para>
-            At the minimum, you need to implement
-            <interfacename>Zend_Log_FactoryInterface</interfacename>, which expects a static
-            <methodname>factory()</methodname> method that accepts a single argument,
-            <varname>$config</varname>, which may be either an array or
-            <classname>Zend_Config</classname> object. If your log writer extends
-            <classname>Zend_Log_Writer_Abstract</classname>, or your log filter extends
-            <classname>Zend_Log_Filter_Abstract</classname>, you will pick this up for free.
+            Dazu muss man mindestens <interfacename>Zend_Log_FactoryInterface</interfacename>
+            implementieren, welches eine statische <methodname>factory()</methodname> Methode
+            erwartet die ein einzelnes <varname>$config</varname> Argument akzeptiert. Wenn der
+            eigene Log Writer <classname>Zend_Log_Writer_Abstract</classname> erweitert, oder der
+            eigene Filter <classname>Zend_Log_Filter_Abstract</classname> erweitert, nimmt man das
+            bereits kostenlos mit.
         </para>
 
         <para>
-            Then, simply define mappings between the accepted configuration and any constructor
-            arguments. As an example:
+            Dann muss man einfach Verknüpfungen zwischen akzeptierten Konfigurationen und den
+            Contructor Argumenten definieren. Als Beispiel:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -357,7 +360,7 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
         }
         if (!is_array($config)) {
             throw new Exception(
-                'factory expects an array or Zend_Config instance'
+                'factory erwartet ein Array oder eine Instanz von Zend_Config'
             );
         }
 
@@ -376,8 +379,8 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
 ]]></programlisting>
 
         <para>
-            Alternately, you could call appropriate setters after instantiation, but prior to
-            returning the instance:
+            Alternativ könnte man die richtigen Setter nach der Instanzierung aufrufen, aber noch
+            bevor die Instanz zurückgegeben wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -405,7 +408,7 @@ class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
         }
         if (!is_array($config)) {
             throw new Exception(
-                'factory expects an array or Zend_Config instance'
+                'factory erwartet ein Array oder eine Instanz von Zend_Config'
             );
         }
 

@@ -159,7 +159,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $this->assertContains('To: recipient1@example.com', $mock->header);
         $this->assertContains('Cc: Example no. 1 for cc <recipient1_cc@example.com>', $mock->header);
     }
-    
+
     /**
      * Test sending in arrays of recipients
      */
@@ -190,6 +190,30 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $this->assertContains('To: heather@example.com', $mock->header);
         $this->assertContains('Ramsey White <ramsey@example.com>', $mock->header);
         $this->assertContains('Cal Evans <cal@example.com>', $mock->header);
+    }
+
+    /**
+     * @group ZF-8503 Test recipients Header format.
+     */
+    public function testRecipientsHeaderFormat()
+    {
+        $mail = new Zend_Mail();
+        $res = $mail->setBodyText('Test recipients Header format.');
+        $mail->setFrom('yoshida@example.com', 'test Mail User');
+        $mail->setSubject('Test recipients Header format.');
+        $mail->addTo('address_to1@example.com', 'name_to@example.com');
+        $mail->addTo('address_to2@example.com', 'noinclude comma nor at mark');
+        $mail->addCc('address_cc@example.com', 'include, name_cc');
+
+        $mock = new Zend_Mail_Transport_Mock();
+        $mail->send($mock);
+
+        $this->assertTrue($mock->called);
+        $this->assertEquals('yoshida@example.com', $mock->from);
+        $this->assertContains('Test recipients Header format.', $mock->body);
+        $this->assertContains('To: "name_to@example.com" <address_to1@example.com>', $mock->header);
+        $this->assertContains('noinclude comma nor at mark <address_to2@example.com>', $mock->header);
+        $this->assertContains('Cc: "include, name_cc" <address_cc@example.com>', $mock->header);
     }
 
     /**

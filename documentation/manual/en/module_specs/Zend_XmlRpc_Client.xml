@@ -381,9 +381,9 @@ $result = $client->call('foo.bar', array(array()));
             <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
-$server = $client->getProxy();           // Proxy the default namespace
+$service = $client->getProxy();           // Proxy the default namespace
 
-$hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) returns "hello"
+$hello = $service->test->sayHello(1, 2);  // test.Hello(1, 2) returns "hello"
 ]]></programlisting>
         </example>
 
@@ -561,8 +561,8 @@ $request->setParams(array('foo', 'bar'));
 
 $client->doRequest($request);
 
-// $server->getLastRequest() returns instanceof Zend_XmlRpc_Request
-// $server->getLastResponse() returns instanceof Zend_XmlRpc_Response
+// $client->getLastRequest() returns instanceof Zend_XmlRpc_Request
+// $client->getLastResponse() returns instanceof Zend_XmlRpc_Response
 ]]></programlisting>
         </example>
 

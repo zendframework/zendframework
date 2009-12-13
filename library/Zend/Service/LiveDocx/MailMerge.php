@@ -32,32 +32,96 @@ require_once 'Zend/Service/LiveDocx.php';
  * @subpackage LiveDocx
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @since      LiveDocx 1.0 
  */
 class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
 {
     /**
-     * URI of LiveDocx.MailMerge service
+     * URI of LiveDocx.MailMerge WSDL
+     * @since LiveDocx 1.0 
      */
-    const ENDPOINT = 'https://api.livedocx.com/1.2/mailmerge.asmx?WSDL';
+    const WSDL = 'https://api.livedocx.com/1.2/mailmerge.asmx?WSDL';
+    
+    /**
+     * Document access permission: After the document has been opened no further
+     * document access is restricted
+     * @since LiveDocx 1.2 Premium 
+     */
+    const DOCUMENT_ACCESS_PERMISSION_ALLOW_ALL = 'AllowAll';
+
+    /**
+     * Document access permission: Allow comments to be added and interactive
+     * form fields (including signature fields) to be filled in
+     * @since LiveDocx 1.2 Premium 
+     */    
+    const DOCUMENT_ACCESS_PERMISSION_ALLOW_AUTHORING = 'AllowAuthoring';
+    
+    /**
+     * Document access permission: Allow existing interactive form fields
+     * (including signature fields) to be filled in
+     * @since LiveDocx 1.2 Premium 
+     */    
+    const DOCUMENT_ACCESS_PERMISSION_ALLOW_AUTHORING_FIELDS = 'AllowAuthoringFields';
+    
+    /**
+     * Document access permission: Allow content access for the visually
+     * impaired only
+     * @since LiveDocx 1.2 Premium
+     */    
+    const DOCUMENT_ACCESS_PERMISSION_ALLOW_CONTENT_ACCESSIBILITY = 'AllowContentAccessibility';
+    
+    /**
+     * Document access permission: Allow the document to be to assembled
+     * (insert, rotate or delete pages and create bookmarks or thumbnails)
+     * @since LiveDocx 1.2 Premium
+     */    
+    const DOCUMENT_ACCESS_PERMISSION_ALLOW_DOCUMENT_ASSEMBLY = 'AllowDocumentAssembly';
+    
+    /**
+     * Document access permission: Allow text and/or graphics to be extracted
+     * @since LiveDocx 1.2 Premium 
+     */    
+    const DOCUMENT_ACCESS_PERMISSION_ALLOW_EXTRACT_CONTENTS = 'AllowExtractContents';
+    
+    /**
+     * Document access permission: Allow the document contents to be modified
+     * @since LiveDocx 1.2 Premium
+     */    
+    const DOCUMENT_ACCESS_PERMISSION_ALLOW_GENERAL_EDITING = 'AllowGeneralEditing';
+    
+    /**
+     * Document access permission: Allow the document to be printed
+     * @since LiveDocx 1.2 Premium
+     */    
+    const DOCUMENT_ACCESS_PERMISSION_ALLOW_PRINTING_HIGH_LEVEL = 'AllowHighLevelPrinting';
+    
+    /**
+     * Document access permission: Allow the document to be printed (low-level)
+     * @since LiveDocx 1.2 Premium
+     */    
+    const DOCUMENT_ACCESS_PERMISSION_ALLOW_PRINTING_LOW_LEVEL = 'AllowLowLevelPrinting';    
 
     /**
      * Field values
      *
-     * @var array
+     * @var   array
+     * @since LiveDocx 1.0
      */
     protected $_fieldValues;
 
     /**
      * Block field values
      *
-     * @var array
+     * @var   array
+     * @since LiveDocx 1.0
      */
     protected $_blockFieldValues;
 
     /**
      * Document properties of PDF file (only)
      *
-     * @var array
+     * @var   array
+     * @since LiveDocx 1.0
      */
     protected $_documentProperties;
 
@@ -66,10 +130,11 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @return void
      * @return throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.0
      */
     public function __construct($options = null)
     {
-        $this->_endpoint         = self::ENDPOINT;
+        $this->_wsdl             = self::WSDL;
         $this->_fieldValues      = array();
         $this->_blockFieldValues = array();
         
@@ -85,6 +150,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param  string $filename
      * @return Zend_Service_LiveDocx_MailMerge
      * @throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.0
      */
     public function setLocalTemplate($filename)
     {
@@ -112,6 +178,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param  string $filename
      * @return Zend_Service_LiveDocx_MailMerge
      * @throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.0
      */
     public function setRemoteTemplate($filename)
     {
@@ -137,6 +204,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param  array $values
      * @return Zend_Service_LiveDocx_MailMerge
      * @throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.0
      */
     public function setFieldValues($values)
     {
@@ -173,6 +241,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @throws Zend_Service_LiveDocx_Exception
      * @return Zend_Service_LiveDocx_MailMerge
+     * @since  LiveDocx 1.0
      */
     public function setFieldValue($field, $value)
     {
@@ -188,6 +257,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @return Zend_Service_LiveDocx_MailMerge
      * @throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.0
      */
     public function setBlockFieldValues($blockName, $blockFieldValues)
     {
@@ -215,6 +285,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param array|string $value
      * @return Zend_Service_LiveDocx_MailMerge
      * @throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.0
      */
     public function assign($field, $value = null)
     {
@@ -239,10 +310,110 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
     }
 
     /**
+     * Set a password to open to document
+     * 
+     * This method can only be used for PDF documents
+     * 
+     * @param  string  $password
+     * @return Zend_Service_LiveDocx_MailMerge
+     * @throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.2 Premium
+     */
+    public function setDocumentPassword($password)
+    {
+        $this->logIn();
+        
+        try {
+            $this->getSoapClient()->SetDocumentPassword(array(
+                'password' => $password
+            ));
+        } catch (Exception $e) {
+            require_once 'Zend/Service/LiveDocx/Exception.php';
+            throw new Zend_Service_LiveDocx_Exception(
+                'Cannot set document password. This method can be used on PDF files only.', 0, $e
+            );
+        }
+        
+        $this->_documentProperties['Encrypted'] = true;
+        
+        return $this;        
+    }
+    
+    /**
+     * Set a master password for document and determine which security features
+     * are accessible without using the master password.
+     * 
+     * As default, nothing is allowed. To allow a security setting,
+     * explicatively set it using one of he DOCUMENT_ACCESS_PERMISSION_* class
+     * constants. 
+     * 
+     * {code}
+     * $phpLiveDocx->setDocumentAccessPermissions(
+     *     array (
+     *         Zend_Service_LiveDocx_MailMerge::DOCUMENT_ACCESS_PERMISSION_ALLOW_PRINTING_HIGH_LEVEL,
+     *         Zend_Service_LiveDocx_MailMerge::DOCUMENT_ACCESS_PERMISSION_ALLOW_EXTRACT_CONTENTS
+     *     ),
+     *     'myDocumentAccessPassword'
+     * );
+     * {code}
+     * 
+     * This method can only be used for PDF documents
+     * 
+     * @param  array  $permissions 
+     * @param  string $password
+     * @return Zend_Service_LiveDocx_MailMerge
+     * @throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.2 Premium
+     */
+    public function setDocumentAccessPermissions($permissions, $password)
+    {
+        $validPermissions = array(
+            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_ALL ,
+            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_AUTHORING ,
+            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_AUTHORING_FIELDS ,
+            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_CONTENT_ACCESSIBILITY ,
+            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_DOCUMENT_ASSEMBLY ,
+            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_EXTRACT_CONTENTS ,
+            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_GENERAL_EDITING ,
+            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_PRINTING_HIGH_LEVEL ,
+            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_PRINTING_LOW_LEVEL
+        );      
+        
+        foreach ($permissions as $permission) {
+            if (! in_array($permission, $validPermissions)) {
+                require_once 'Zend/Service/LiveDocx/Exception.php';
+                throw new Zend_Service_LiveDocx_Exception(
+                    'Invalid document access permission. '
+                  . 'Must be one of Zend_Service_LiveDocx_MailMerge::DOCUMENT_ACCESS_PERMISSION_* class constants'
+                );
+            }
+        }
+        
+        $this->logIn();
+        
+        try {
+            $this->getSoapClient()->SetDocumentAccessPermissions(array(
+                'permissions' => $permissions,
+                'password'    => $password
+            ));
+        } catch (Exception $e) {
+            require_once 'Zend/Service/LiveDocx/Exception.php';
+            throw new Zend_Service_LiveDocx_Exception(
+                'Cannot set document access permissions', 0, $e
+            );
+        }
+        
+        $this->_documentProperties['Encrypted'] = true;
+        
+        return $this;        
+    }    
+    
+    /**
      * Merge assigned data with template to generate document
      *
      * @throws Zend_Service_LiveDocx_Excpetion
      * @return void
+     * @since  LiveDocx 1.0
      */
     public function createDocument()
     {
@@ -272,6 +443,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @throws Zend_Service_LiveDocx_Exception
      * @return binary
+     * @since  LiveDocx 1.0
      */
     public function retrieveDocument($format)
     {
@@ -292,8 +464,10 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         }
 
         $ret = base64_decode($result->RetrieveDocumentResult);
-
-        if ('pdf' === $format) {
+        
+        // @todo: Move this logic to backend server in future version
+        if ('pdf' === $format &&
+            false === $this->_documentProperties['Encrypted']) {
             require_once 'Zend/Pdf.php';
             $pdf = Zend_Pdf::parse($ret);
             $pdf->properties = $this->_getDocumentProperties();
@@ -310,6 +484,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param  integer $fromPage
      * @param  integer $toPage
      * @return array
+     * @since  LiveDocx 1.2
      */
     public function getMetafiles($fromPage, $toPage)
     {
@@ -341,6 +516,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * Return array contains WMF data (binary) - array key is page number
      *
      * @return array
+     * @since  LiveDocx 1.2
      */
     public function getAllMetafiles()
     {
@@ -373,6 +549,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param  integer $zoomFactor
      * @param  string  $format
      * @return array
+     * @since  LiveDocx 1.2
      */    
     public function getBitmaps($fromPage, $toPage, $zoomFactor, $format)
     {
@@ -409,6 +586,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param  integer $zoomFactor
      * @param  string  $format
      * @return array
+     * @since  LiveDocx 1.2
      */    
     public function getAllBitmaps($zoomFactor, $format)
     {
@@ -439,6 +617,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * Return all the fields in the template
      *
      * @return array
+     * @since  LiveDocx 1.0
      */
     public function getFieldNames()
     {
@@ -463,6 +642,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param  string $blockName
      * @return array
+     * @since  LiveDocx 1.0
      */
     public function getBlockFieldNames($blockName)
     {
@@ -488,6 +668,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * Return all the block fields in the template
      *
      * @return array
+     * @since  LiveDocx 1.0
      */
     public function getBlockNames()
     {
@@ -510,9 +691,8 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
     /**
      * Set the default document properties
      *
-     * Valid for PDF documents only
-     *
      * @return null
+     * @since  LiveDocx 1.0
      */
     protected function _setDefaultDocumentProperties()
     {
@@ -529,12 +709,13 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $this->_documentProperties['Producer']     = $projectUrl;
         $this->_documentProperties['CreationDate'] = $creationDate;
         $this->_documentProperties['ModDate']      = $creationDate;
+        
+        // Set to true, if contents are password protected or encrypted
+        $this->_documentProperties['Encrypted'] = false; 
     }
 
     /**
      * Set the document properties
-     *
-     * Valid for PDF documents only
      *
      * $properties is an assoc array with the following format:
      *
@@ -546,9 +727,12 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *     'keywords'     => '', // (string)
      * );
      * {code}
+     * 
+     * This method can only be used for PDF documents
      *
      * @param  array $properties
      * @return Zend_Service_LiveDocx_MailMerge
+     * @since  LiveDocx 1.0
      */
     public function setDocumentProperties($properties)
     {
@@ -569,6 +753,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * Return currently set document properties
      *
      * @return array
+     * @since  LiveDocx 1.0
      */
     protected function _getDocumentProperties()
     {
@@ -581,6 +766,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param  string $filename
      * @return void
      * @throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.0
      */
     public function uploadTemplate($filename)
     {
@@ -605,6 +791,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param  string $filename
      * @return binary
      * @throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.0
      */
     public function downloadTemplate($filename)
     {
@@ -630,6 +817,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param  string $filename
      * @return void
      * @throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.0
      */
     public function deleteTemplate($filename)
     {
@@ -644,6 +832,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * List all templates stored on LiveDocx service
      *
      * @return array
+     * @since  LiveDocx 1.0 
      */
     public function listTemplates()
     {
@@ -664,6 +853,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param  string $filename
      * @return boolean
+     * @since  LiveDocx 1.0
      */
     public function templateExists($filename)
     {
@@ -680,6 +870,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * Share a document - i.e. the document is available to all over the Internet
      *
      * @return string
+     * @since  LiveDocx 1.0
      */
     public function shareDocument()
     {
@@ -699,6 +890,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * List all shared documents stored on LiveDocx service
      *
      * @return array
+     * @since  LiveDocx 1.0
      */
     public function listSharedDocuments()
     {
@@ -721,6 +913,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param  string $filename
      * @return void
+     * @since  LiveDocx 1.0
      */
     public function deleteSharedDocument($filename)
     {
@@ -737,6 +930,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param  string $filename
      * @return binary
      * @throws Zend_Service_LiveDocx_Exception
+     * @since  LiveDocx 1.0
      */
     public function downloadSharedDocument($filename)
     {
@@ -761,6 +955,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param  string $filename
      * @return boolean
+     * @since  LiveDocx 1.0
      */
     public function sharedDocumentExists($filename)
     {
@@ -784,6 +979,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * Return supported template formats (lowercase)
      *
      * @return array
+     * @since  LiveDocx 1.0
      */
     public function getTemplateFormats()
     {
@@ -804,6 +1000,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * Return supported document formats (lowercase)
      *
      * @return array
+     * @since  LiveDocx 1.1
      */
     public function getDocumentFormats()
     {
@@ -824,6 +1021,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * Return supported image formats (lowercase)
      *
      * @return array
+     * @since  LiveDocx 1.2
      */
     public function getImageFormats()
     {
@@ -844,6 +1042,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * Return the names of all fonts that are installed on backend server
      *
      * @return array
+     * @since  LiveDocx 1.2
      */
     public function getFontNames()
     {
@@ -864,6 +1063,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param  array $list
      * @return array
+     * @since  LiveDocx 1.0 
      */
     protected function _backendListArrayToMultiAssocArray($list)
     {
@@ -903,6 +1103,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @param array $assoc
      *
      * @return array
+     * @since  LiveDocx 1.0
      */
     public static function assocArrayToArrayOfArrayOfString($assoc)
     {
@@ -917,6 +1118,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      *
      * @param  array $multi
      * @return array
+     * @since  LiveDocx 1.0
      */
     public static function multiAssocArrayToArrayOfArrayOfString($multi)
     {

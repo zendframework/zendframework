@@ -14,15 +14,11 @@ print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(
     PHP_EOL)
 );
 
-$mySoapClient = new Zend_Soap_Client(
-    'https://api.example.com/1.2/mailmerge.asmx?WSDL'
-);
 
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setSoapClient($mySoapClient);
-
-$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
+$phpLiveDocx->setWsdl('https://api.example.com/1.2/mailmerge.asmx?WSDL')
+            ->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
             ->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
 
 $phpLiveDocx->getTemplateFormats(); // then call methods as usual

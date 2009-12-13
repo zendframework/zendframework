@@ -15,7 +15,7 @@
             Es una buena idea si planea utilizar
             <classname>Zend_Session</classname> o
             <classname>Zend_Session_Namespace</classname>, que inicializa con
-            <classname>Zend_Session::start()</classname> en su archivo
+            <methodname>Zend_Session::start()</methodname> en su archivo
             bootstrap. (Para más detalles de su uso vea la documentación en
             <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>).
         </para>

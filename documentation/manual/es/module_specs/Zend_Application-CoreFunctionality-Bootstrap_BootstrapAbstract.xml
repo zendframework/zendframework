@@ -102,7 +102,7 @@
                     <entry><type>mixed</type></entry>
                     <entry><itemizedlist>
                         <listitem><para>
-                            <methodname>$key</methodname>: <emphasis>requerido</emphasis>.
+                            <varname>$key</varname>: <emphasis>requerido</emphasis>.
                             Clave de opción para recuperar.
                         </para></listitem>
                     </itemizedlist></entry>

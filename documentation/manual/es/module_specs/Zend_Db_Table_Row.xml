@@ -470,7 +470,7 @@ $rowClone->save();
             <classname>Zend_Db_Table_Row_Abstract</classname>. You can define your own concrete class for instances of Row
             by extending <classname>Zend_Db_Table_Row_Abstract</classname>. To use your new Row class to store results of
             Table queries, specify the custom Row class by name either in the
-            <methodname>$_rowClass</methodname> protected member of a Table class, or in the array argument of
+            <varname>$_rowClass</methodname> protected member of a Table class, or in the array argument of
             the constructor of a Table object.
         </para>
 

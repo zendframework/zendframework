@@ -129,7 +129,7 @@ if ($response->isException()) {
 ]]></programlisting>
 
                 <para> La principal ventaja que este método ofrece por sobre
-                        <classname>Zend_Controller_Front::throwExceptions()</classname>
+                        <methodname>Zend_Controller_Front::throwExceptions()</methodname>
                     es que le permite renderizar condicionalmente la respuesta
                     después de manejar la excepción. Esta capturará cualquier
                     excepción en la cadena de controladores, a diferencia del
@@ -153,7 +153,7 @@ if ($response->isException()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Dispatcher::dispatch()</classname>
+                    <methodname>Zend_Controller_Dispatcher::dispatch()</methodname>
                     hará, por defecto, arrojar una excepción si se hace un
                     requerimiento a un controlador no válido. Hay dos maneras
                     recomendadas para lidiar con esto. </para>
@@ -200,7 +200,7 @@ $dispatcher->setParam('useDefaultControllerAlways', true);
 
             <listitem>
                 <para>
-                    <classname>Zend_Controller_Action::__call()</classname>
+                    <methodname>Zend_Controller_Action::__call()</methodname>
                     arrojará una
                         <classname>Zend_Controller_Action_Exception</classname>
                     si no puede despachar una acción inexistente a un método. Es
@@ -283,9 +283,9 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
 
                     <listitem>
                         <para> Use
-                                <classname>Zend_Controller_Action::preDispatch()</classname>
+                                <methodname>Zend_Controller_Action::preDispatch()</methodname>
                             o
-                                <classname>Zend_Controller_Plugin_Abstract::preDispatch()</classname>
+                                <methodname>Zend_Controller_Plugin_Abstract::preDispatch()</methodname>
                             para identificar acciones inválidas. </para>
 
                         <para> Subclaseando

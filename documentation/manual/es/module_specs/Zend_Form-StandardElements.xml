@@ -5,7 +5,7 @@
     <title>Elementos Enviados en el Formulario Estandard de Zend Framework</title>
 
     <para> Zend Framework viene con clases de elementos concretos cubriendo la mayoría de los
-        elementos de los formularios HTML. La mayoría simplemente especifica una vista de ayuda para
+        elementos de los formularios <acronym>HTML</acronym>. La mayoría simplemente especifica una vista de ayuda para
         usar cuando se decora el elemento, pero varios ofrecen funcionalidad adicional. La siguiente
         es una lista de todas las clases, así como también una descripción de la funcionalidad que
         ofrecen. </para>
@@ -13,7 +13,7 @@
     <sect2 id="zend.form.standardElements.button">
         <title>Zend_Form_Element_Button</title>
 
-        <para> Usada para crear elementos HTML de tipo button,
+        <para> Usada para crear elementos <acronym>HTML</acronym> de tipo button,
                 <classname>Zend_Form_Element_Button</classname> extiende <link
                 linkend="zend.form.standardElements.submit">Zend_Form_Element_Submit</link>,
             derivandi sy funcionalidad personalizada. It specifies the 'formButton' view helper for
@@ -103,7 +103,7 @@ $element = new Zend_Form_Element_Captcha('foo', array(
     <sect2 id="zend.form.standardElements.checkbox">
         <title>Zend_Form_Element_Checkbox</title>
 
-        <para> Las casillas de verificación (checkboxes) HTML le permiten devolver un valor
+        <para> Las casillas de verificación (checkboxes) <acronym>HTML</acronym> le permiten devolver un valor
             específico, pero básicamente funcionan como los booleanos: cuando está marcada, el valor
             es enviado; cuando no está marcada, no se envía nada. Internamente,
             Zend_Form_Element_Checkbox fuerza este estado. </para>
@@ -504,7 +504,7 @@ $element->setValue(array('bar', 'bat'));
     <sect2 id="zend.form.standardElements.multiselect">
         <title>Zend_Form_Element_Multiselect</title>
 
-        <para> XHTML <methodname>selector</methodname> de elementos permite 'multiple' atributos,
+        <para> <acronym>XHTML</acronym>  <methodname>selector</methodname> de elementos permite 'multiple' atributos,
             indicando multiples opciones pueden ser seleccionados por submision, en vez de lo usual.
                 <classname>Zend_Form_Element_Multiselect</classname> extiende <link
                 linkend="zend.form.standardElements.select">Zend_Form_Element_Select</link>, y

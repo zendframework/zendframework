@@ -64,7 +64,7 @@
 
         <para>
         	El siguiente ejemplo muestra el uso de <classname>Zend_Auth_Adapter_OpenId</classname>. 
-        	Como se mencionó anteriormente, <classname>Zend_Auth_Adapter_OpenId::autenticar()</classname> 
+        	Como se mencionó anteriormente, <methodname>Zend_Auth_Adapter_OpenId::autenticar()</methodname> 
         	debe ser llamada dos veces. 
         	La primera vez es cuando el usuario envía el formulario <acronym>HTML</acronym> 
         	con el <varname>$_POST['openid_action']</varname> en  <emphasis>"Login" </emphasis>, 

@@ -213,7 +213,7 @@ $router->addRoute('archive', $route);
             </listitem>
             <listitem>
                 <para> Setearlo mediante el método estático
-                        <classname>Zend_Controller_Router_Route::setDefaultLocale()</classname>.
+                        <methodname>Zend_Controller_Router_Route::setDefaultLocale()</methodname>.
                 </para>
             </listitem>
             <listitem>

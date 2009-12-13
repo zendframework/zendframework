@@ -44,7 +44,7 @@
                     defecto si no se ha pasado ninguna a
                         <methodname>gotoSimple()</methodname>. Utiliza la
                         <acronym>API</acronym> de
-                        <classname>Zend_Controller_Action::_forward()</classname>:
+                        <methodname>Zend_Controller_Action::_forward()</methodname>:
                     setGotoSimple($action, $controller = null, $module = null,
                     array $params = array()); </para>
             </listitem>
@@ -221,7 +221,7 @@ class AlternativeController extends Zend_Controller_Action
 
             <para> La <acronym>API</acronym>
                 <methodname>gotoSimple()</methodname> imita a la de
-                    <classname>Zend_Controller_Action::_forward()</classname>.
+                    <methodname>Zend_Controller_Action::_forward()</methodname>.
                 La diferencia principal es que construye una
                     <acronym>URL</acronym> desde los parámetros pasados, y
                 utiliza el formato por defecto

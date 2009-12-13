@@ -107,7 +107,7 @@
                         </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Si <methodname>$resource</methodname> está vacío, ejecutar todos
+                        Si <varname>$resource</varname> está vacío, ejecutar todos
                         los recursos del bootstrap.
                         Si es un string, ejecutar ese único recurso;
                         si es un array, ejecutar cada recurso del array.

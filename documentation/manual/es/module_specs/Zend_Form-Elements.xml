@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 19554 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
     <title>Creando elementos de formulario usando Zend_Form_Element</title>
@@ -38,9 +38,9 @@
     <para> La clase base, <classname>Zend_Form_Element</classname>, funciona por
         defecto para varios casos, pero es mejor extender la clase para
         elementos con fines especiales de uso común. Adicionalmente, Zend
-        Framework contiene un número de elementos XHTML estándar; puede leer de
-        ellos <link linkend="zend.form.standardElements">en el capítulo
-            Elementos Estándares</link>
+        Framework contiene un número de elementos <acronym>XHTML</acronym>
+        estándar; puede leer de ellos <link linkend="zend.form.standardElements"
+            >en el capítulo Elementos Estándares</link>
     </para>
 
     <sect2 id="zend.form.elements.loaders">
@@ -66,29 +66,27 @@
             <listitem>
                 <para>
                     <methodname>setPluginLoader($loader, $type)</methodname>:
-                        <methodname>$loader</methodname> es el propio objeto
-                    cargador, mientras <methodname>$type</methodname> es uno de
-                    los tipos arriba mencionados. Esto establece el cargador de
-                    plugin para el tipo dado en el objeto cargador recién
-                    especificado. </para>
+                        <varname>$loader</varname> es el propio objeto cargador,
+                    mientras <varname>$type</varname> es uno de los tipos arriba
+                    mencionados. Esto establece el cargador de plugin para el
+                    tipo dado en el objeto cargador recién especificado. </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>getPluginLoader($type)</methodname>: obtiene el
-                    cargador de plugin asociado con
-                        <methodname>$type</methodname>. </para>
+                    cargador de plugin asociado con <varname>$type</varname>.
+                </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>addPrefixPath($prefix, $path, $type =
                         null)</methodname>: agrega una asociación prefijo/ruta
-                    para el cargador especificado por
-                        <methodname>$type</methodname>. Si
-                        <methodname>$type</methodname> es null, se intentará
-                    agregar la ruta a todos los cargadores, añadiendo el prefijo
-                    a cada "_Validate", "_Filter" y "_Decorator"; y agregandole
+                    para el cargador especificado por <varname>$type</varname>.
+                    Si <varname>$type</varname> es null, se intentará agregar la
+                    ruta a todos los cargadores, añadiendo el prefijo a cada
+                    "_Validate", "_Filter" y "_Decorator"; y agregandole
                     "Validate/", "Filter/" y "Decorator/" a la ruta. Si tiene
                     todas sus clases extras para elementos de formulario dentro
                     de una jerarquía común, este método es conveniente para
@@ -193,12 +191,12 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
 
         <para> A menudo es útil y/o necesario realizar alguna normalización en
             la entrada antes de la validación – por ejemplo, puede querer
-            eliminar todo el HTML, pero realizar las validaciones sobre lo
-            restante para asegurarse que el envío es válido. O puede eliminar
-            los espacios en blanco al inicio o fin de la entrada para asegurarse
-            de que un validador StringLenth (longitud de la cadena) no regrese
-            un positivo falso. Estas operaciones pueden realizarse usando
-                <methodname>Zend_Filter</methodname>, y
+            eliminar todo el <acronym>HTML</acronym>, pero realizar las
+            validaciones sobre lo restante para asegurarse que el envío es
+            válido. O puede eliminar los espacios en blanco al inicio o fin de
+            la entrada para asegurarse de que un validador StringLenth (longitud
+            de la cadena) no regrese un positivo falso. Estas operaciones pueden
+            realizarse usando <methodname>Zend_Filter</methodname>, y
                 <classname>Zend_Form_Element</classname> que soportan cadenas de
             filtros, permitiéndole especificar múltiples filtros secuenciales a
             utilizar. El filtrado sucede tanto en la validación como cuando
@@ -407,8 +405,7 @@ $element->addValidator('StringLength', false, array(6, 20));
             el cual son definidos en el constructor. El ejemplo de arriba
             instanciará la clase
                 <classname>Zend_Validate_StringLenth</classname> con los
-            parámetros <methodname>$min</methodname> y
-                <methodname>$max</methodname>: </para>
+            parámetros <varname>$min</varname> y <varname>$max</varname>: </para>
 
         <programlisting language="php"><![CDATA[
 
@@ -422,8 +419,8 @@ $validator = new Zend_Validate_StringLength(6, 20);
             <para> Algunos desarrolladores querrán estipular mensajes de error
                 personalizados para un validador. El argumento
                     <varname>$options</varname> de
-                    <classname>Zend_Form_Element::addValidator()</classname> le
-                permite hacerlo proporcionando la clave 'messages' y
+                    <methodname>Zend_Form_Element::addValidator()</methodname>
+                le permite hacerlo proporcionando la clave 'messages' y
                 estableciendolos en un array de pares clave/valor para
                 especificar las plantillas de mensaje. Necesitará conocer los
                 códigos de error de los diferentes tipos de error de un
@@ -504,7 +501,7 @@ if ($element->isValid($value)) {
             <title>Validación operando en valores filtrados</title>
 
             <para>
-                <classname>Zend_Form_Element::isValid()</classname>> siempre
+                <methodname>Zend_Form_Element::isValid()</methodname>> siempre
                 filtra los valores antes de la validación a través de la cadena
                 de filtros. Vea <link linkend="zend.form.elements.filters">la
                     sección de filtros</link> para más información. </para>
@@ -514,12 +511,12 @@ if ($element->isValid($value)) {
             <title>Contexto de validación</title>
 
             <para>
-                <classname>Zend_Form_Element::isValid()</classname>> soporta un
-                argumento adicional, <methodname>$context</methodname>.
-                    <classname>Zend_Form::isValid()</classname> pasa todo el
+                <methodname>Zend_Form_Element::isValid()</methodname>> soporta
+                un argumento adicional, <methodname>$context</methodname>.
+                    <methodname>Zend_Form::isValid()</methodname> pasa todo el
                 conjunto de datos procesados a <methodname>$context</methodname>
                 cuando valida un formulario, y
-                    <classname>Zend_Form_Element::isValid()</classname>>, a su
+                    <methodname>Zend_Form_Element::isValid()</methodname>>, a su
                 vez, lo pasa a cada validador. Esto significa que puede escribir
                 validadores que son conscientes de los datos pasados a otros
                 elementos del formulario. Como ejemplo, considere un formulario
@@ -812,12 +809,12 @@ $messages = $element->getMessages();
         <title>Decoradores</title>
 
         <para> Una dolencia particular para muchos desarrolladores web es la
-            creación del XHTML para formularios por ellos mismos. Para cada
-            elemento, el desarrollador necesita crear la marcación para el
-            elemento mismo, comúnmente una etiqueta (label), y, si son amables
-            con sus usuarios, la marcación para mostrar mensajes de errores de
-            validación. Cuanto más elementos en una página, menos trivial se
-            convierte esta tarea. </para>
+            creación del <acronym>XHTML</acronym> para formularios por ellos
+            mismos. Para cada elemento, el desarrollador necesita crear la
+            marcación para el elemento mismo, comúnmente una etiqueta (label),
+            y, si son amables con sus usuarios, la marcación para mostrar
+            mensajes de errores de validación. Cuanto más elementos en una
+            página, menos trivial se convierte esta tarea. </para>
 
         <para>
             <classname>Zend_Form_Element</classname> intenta resolver este
@@ -1145,9 +1142,9 @@ echo $element->renderHtmlTag("This is the html tag content");
         </itemizedlist>
 
         <para> Los elementos del formulario pueden requerir metainformación
-            adicional. Para elementos XHTML del formuladio, por ejemplo, puede
-            querer especificar atributos como el class o id. Para facilitar esto
-            hay un conjunto de métodos de acceso: </para>
+            adicional. Para elementos <acronym>XHTML</acronym> del formuladio,
+            por ejemplo, puede querer especificar atributos como el class o id.
+            Para facilitar esto hay un conjunto de métodos de acceso: </para>
 
         <itemizedlist>
             <listitem>

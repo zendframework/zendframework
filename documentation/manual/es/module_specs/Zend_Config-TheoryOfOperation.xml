@@ -53,11 +53,11 @@
         sección abuela, etc..., pero la herencia múltiple (i.e., la sección C heredando directamente de las secciones
         padre A y B) no está permitida. </para>
     <para> Si tiene dos objetos <classname>Zend_Config</classname>, puede combinarlos en un único objeto usando la
-        función <methodname>merge()</methodname>. Por ejemplo, dados <methodname>$config</methodname> y
-            <methodname>$localConfig</methodname>, puede fusionar datos de <methodname>$localConfig</methodname> a
-            <methodname>$config</methodname> usando <methodname>$config-&gt;merge($localConfig);</methodname>. Los
-        ítemes en <methodname>$localConfig</methodname> sobrescribirán cualquier item con el mismo nombre en
-            <methodname>$config</methodname>. <note>
+        función <methodname>merge()</methodname>. Por ejemplo, dados <varname>$config</varname> y
+            <varname>$localConfig</varname>, puede fusionar datos de <varname>$localConfig</varname> a
+            <varname>$config</varname> usando <methodname>$config-&gt;merge($localConfig);</methodname>. Los
+        ítemes en <varname>$localConfig</varname> sobrescribirán cualquier item con el mismo nombre en
+            <varname>$config</varname>. <note>
             <para> El objeto <classname>Zend_Config</classname> que está ejecutando el merge debe haber sido construido
                 para permitir modificaciones, pasando <constant>TRUE</constant> como el segundo parámetro del
                 constructor. El método <methodname>setReadOnly()</methodname> puede entonces ser usado para evitar

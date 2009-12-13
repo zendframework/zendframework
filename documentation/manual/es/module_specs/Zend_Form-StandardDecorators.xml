@@ -18,8 +18,8 @@
             mostrar el contenido. Las llamadas de retorno deben especificarse a través
             de la opción 'callback' pasada en la configuración del decorador, y pueden
             ser de cualquier valor de llamada de retorno PHP. Los Callbacks deben
-            aceptar tres argumentos: <methodname>$content</methodname> (el contenido original
-            enviado al decorador), <methodname>$element</methodname> (el objeto que se está decorando),
+            aceptar tres argumentos: <varname>$content</varname> (el contenido original
+            enviado al decorador), <varname>$element</varname> (el objeto que se está decorando),
             y un array de <varname>$options</varname>. Un callback de ejemplo sería:
         </para>
 
@@ -79,7 +79,7 @@ class Util
         <para>
             Por defecto, si no se encuentra la descripción, no se genera ninguna salida.
             Si la descripción está presente, entonces se envolverá en una etiqueta
-            <methodname>p</methodname> HTML por defecto, aunque tiene la posibilidad de especificar
+            <methodname>p</methodname> <acronym>HTML</acronym> por defecto, aunque tiene la posibilidad de especificar
             una etiqueta pasando una opción <methodname>tag</methodname> al crear el decorador, o
             llamando a <methodname>setTag()</methodname>. También puede especificar una clase
             para el tag usando la opción <methodname>class</methodname> o llamando a
@@ -148,9 +148,9 @@ class Util
             de fieldsets, EL decorador Fieldset busca la opción
             'legend' o bien el método <methodname>getLegend()</methodname> en el elemento
             registrado, y lo usa como campo "legend" si no es vacío. Cualquier
-            contenido pasado es envuelto en el fieldset HTML, reemplazando
+            contenido pasado es envuelto en el fieldset <acronym>HTML</acronym>, reemplazando
             al contenido original. Cualquier atributo pasado al elemento decorado
-            será generado como atributo del fieldset HTML.
+            será generado como atributo del fieldset <acronym>HTML</acronym>.
         </para>
     </sect2>
 
@@ -171,9 +171,9 @@ class Util
 
         <para>
             Los objetos <classname>Zend_Form</classname> normalmente necesitan generar una etiqueta
-            HTML "form". El decorador Form utiliza la ayuda del view helper Form. Encapsula
-            cualquier contenido provista en un elemento HTML form, usando la acción y el
-            método del objeto Zend Form, y cualquier atributo como atributo HTML.
+            <acronym>HTML</acronym> "form". El decorador Form utiliza la ayuda del view helper Form. Encapsula
+            cualquier contenido provista en un elemento <acronym>HTML</acronym> form, usando la acción y el
+            método del objeto Zend Form, y cualquier atributo como atributo <acronym>HTML</acronym>.
         </para>
     </sect2>
 
@@ -265,9 +265,9 @@ class Util
         <title>Zend_Form_Decorator_HtmlTag</title>
 
         <para>
-            El decorador HtmlTag le permite utilizar etiquetas HTML para
+            El decorador HtmlTag le permite utilizar etiquetas <acronym>HTML</acronym> para
             decorador el contenido; la etiqueta utiliza es pasada en la opción 'tag'
-            , y cualquier otra opción es usada como atributo HTML de esa etiqueta.
+            , y cualquier otra opción es usada como atributo <acronym>HTML</acronym> de esa etiqueta.
             Por defecto, el contenido generado reemplaza al contenido envolviéndolo en
             la etiqueta dada. De cualquier forma, se permite especificar una
             localización de tipo 'append' (postponer) o 'prepend' (anteponer).
@@ -278,9 +278,9 @@ class Util
         <title>Zend_Form_Decorator_Image</title>
 
         <para>
-            El decorador Image le permite crear un input HTML de tipo image
+            El decorador Image le permite crear un input <acronym>HTML</acronym> de tipo image
             (<methodname>&lt;input type="image" ... /&gt;</methodname>), y opcionalmente
-            mostrarlo dentro de otro tag HTML.
+            mostrarlo dentro de otro tag <acronym>HTML</acronym>.
         </para>
 
         <para>
@@ -293,7 +293,7 @@ class Util
         </para>
 
         <para>
-            Para especificar una etiqueta HTML que utilizar con el elemento, pase la opción
+            Para especificar una etiqueta <acronym>HTML</acronym> que utilizar con el elemento, pase la opción
             'tag' al decorador, o llame explícitamente a
             <methodname>setTag()</methodname>.
         </para>
@@ -315,7 +315,7 @@ class Util
 
         <para>
             Opcionalmente, se puede especificar la opción 'tag'; si se suministra, encapsula
-            la etiqueta en la etiqueta HTML en cuestión. Si la opción está presenta
+            la etiqueta en la etiqueta <acronym>HTML</acronym> en cuestión. Si la opción está presenta
             pero no hay etiqueta, la etiqueta será generada sin contenido.
             Puede especificar la clase que usar con la etiqueta mediante la opción
             'class' o llamando a <methodname>setClass()</methodname>.

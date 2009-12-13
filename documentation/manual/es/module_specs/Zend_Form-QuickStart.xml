@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Inicio rápido a Zend_Form</title>
@@ -35,13 +35,14 @@ $form->setAction('/resource/process')
      ->setMethod('post');
 ]]></programlisting>
 
-        <para> El código de arriba establece el action del formulario a la URL
-            parcial "/resource/process" y como method HTTP POST. Esto se
+        <para> El código de arriba establece el action del formulario a la <acronym>URL</acronym>
+            parcial "/resource/process" y como method <acronym>HTTP</acronym> POST. Esto se
             mostrará en la presentación final. </para>
 
-        <para> Usted puede establecer atributos HTML adicionales para la
-            etiqueta <methodname>&lt;form&gt;</methodname> mediante el
-            uso de los métodos setAttrib() o setAttribs(). Por ejemplo, si desea
+        <para> Usted puede establecer atributos <acronym>HTML</acronym>
+            adicionales para la etiqueta
+                <methodname>&lt;form&gt;</methodname> mediante el uso de
+            los métodos setAttrib() o setAttribs(). Por ejemplo, si desea
             especificar el id establezca el atributo "id": </para>
 
         <programlisting language="php"><![CDATA[
@@ -54,7 +55,8 @@ $form->setAttrib('id', 'login');
 
         <para> Un formulario no es nada sin sus elementos.
                 <classname>Zend_Form</classname> contiene de manera
-            predeterminada algunos elementos que generan XHTML vía auxiliares
+            predeterminada algunos elementos que generan
+                <acronym>XHTML</acronym> vía auxiliares
                 <classname>Zend_View</classname>. Son los siguientes: </para>
 
         <itemizedlist>
@@ -198,7 +200,7 @@ $username->addValidators(array('alnum',
         <para> Tan simple como esto, realizarlo para cada uno de los elementos
             del formulario puede resultar un poco tedioso. Intentemos la opción
             (b) arriba mencionada. Cuando creamos un nuevo elemento utilizando
-                <classname>Zend_Form::addElement()</classname> como fábrica,
+                <methodname>Zend_Form::addElement()</methodname> como fábrica,
             opcionalmente podemos pasar las opciones de configuración. Éstas
             pueden incluir validadores y los filtros que se van a utilizar. Por
             lo tanto, para hacer todo lo anterior implícitamente, intente lo
@@ -244,7 +246,7 @@ echo $form;
                 <classname>Zend_Form_Element</classname> intentarán utilizar el
             objeto vista inicializado en el
                 <methodname>ViewRenderer</methodname>, lo que significa que no
-            tendrá que establecer la vista manualmente cuando use el MVC de Zend
+            tendrá que establecer la vista manualmente cuando use el <acronym>MVC</acronym> de Zend
             Framework. Generar un formulario en un script vista es tan simple
             como: </para>
 
@@ -324,9 +326,9 @@ $form->addElement('text', 'username', array('order' => 10));
             requerido, la validación se ejecuta contra un valor nulo. </para>
 
         <para> ¿De dónde provienen los datos?. Puede usar
-                <varname>$_POST</varname> o
-            <varname>$_GET</varname>, o cualquier otra fuente de datos que
-            tenga a mano (solicitud de un servicio web, por ejemplo): </para>
+                <varname>$_POST</varname> o <varname>$_GET</varname>, o
+            cualquier otra fuente de datos que tenga a mano (solicitud de un
+            servicio web, por ejemplo): </para>
 
         <programlisting language="php"><![CDATA[
 if ($form->isValid($_POST)) {
@@ -336,8 +338,8 @@ if ($form->isValid($_POST)) {
 }
 ]]></programlisting>
 
-        <para> Con solicitudes  <acronym>AJAX</acronym>, a veces puede ignorar la validación de un
-            solo elemento, o grupo de elementos.
+        <para> Con solicitudes <acronym>AJAX</acronym>, a veces puede ignorar la
+            validación de un solo elemento, o grupo de elementos.
                 <methodname>isValidPartial()</methodname> validará parcialmente
             el formulario. A diferencia de <methodname>isValid()</methodname>,
             que como sea, si alguna clave no esta presente, no ejecutará las
@@ -354,8 +356,8 @@ if ($form->isValidPartial($_POST)) {
         <para> Un método adicional, <methodname>processAjax()</methodname>,
             puede también ser usado para validar formularios parciales. A
             diferencia de <methodname>isValidPartial()</methodname>, regresa una
-            cadena en formato JSON conteniendo mensajes de error en caso de
-            fallo. </para>
+            cadena en formato <acronym>JSON</acronym>-formatted conteniendo mensajes de
+            error en caso de fallo. </para>
 
         <para> Asumiendo que sus validaciones han pasado, ahora puede obtener
             los valores filtrados: </para>
@@ -498,7 +500,7 @@ class UserController extends Zend_Controller_Action
         <para> Como notará en el código del controlador, hay más trabajo por
             hacer: mientras la información enviada sea válida, necesitará
             todavía realizar la autenticación usando
-                <methodname>Zend_Auth</methodname>, por ejemplo. </para>
+            <classname>Zend_Auth</classname>, por ejemplo. </para>
     </sect2>
 
     <sect2 id="zend.form.quickstart.config">
@@ -508,12 +510,12 @@ class UserController extends Zend_Controller_Action
             configurables mediante <classname>Zend_Config</classname>; puede
             incluso pasar un objeto al constructor o pasarlo a través de
                 <methodname>setConfig()</methodname>. Veamos cómo podemos crear
-            el formulario anterior usando un archivo <acronym>INI</acronym>. Primero, vamos a
-            seguir las recomendaciones, y colocaremos nuestras configuraciones
-            dentro de secciones reflejando su objetivo y y enfocándonos en la
-            sección 'development'. A continuación, pondremos en una sección de
-            configuración para el controlador dado ('user'), y una clave para el
-            formulario ('login'): </para>
+            el formulario anterior usando un archivo <acronym>INI</acronym>.
+            Primero, vamos a seguir las recomendaciones, y colocaremos nuestras
+            configuraciones dentro de secciones reflejando su objetivo y y
+            enfocándonos en la sección 'development'. A continuación, pondremos
+            en una sección de configuración para el controlador dado ('user'), y
+            una clave para el formulario ('login'): </para>
 
         <programlisting language="ini"><![CDATA[
 [development]

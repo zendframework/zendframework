@@ -15,9 +15,9 @@
 
         <para> Se pueden crear nuevas páginas instanciando directamente al
             objeto <classname>Zend_Pdf_Page</classname> o llamando al método
-                <classname>Zend_Pdf::newPage()</classname>, que devuelve un
+                <methodname>Zend_Pdf::newPage()</methodname>, que devuelve un
             objeto <classname>Zend_Pdf_Page</classname>.
-                <classname>Zend_Pdf::newPage()</classname> crea una página que
+                <methodname>Zend_Pdf::newPage()</methodname> crea una página que
             ya está agregada a un documento. Las páginas no agregadas no pueden
             ser utilizadas con múltiples documentos <acronym>PDF</acronym>, pero son algo más
             eficientes. <footnote>
@@ -28,7 +28,7 @@
             </footnote>
         </para>
 
-        <para> El método <classname>Zend_Pdf::newPage()</classname> y el
+        <para> El método <methodname>Zend_Pdf::newPage()</methodname> y el
             constructor <classname>Zend_Pdf_Page</classname> toman los mismos
             parámetros que especifican el tamaño de la página. Pueden tomar el
             tamaño de la página ($x, $y) en puntos (1/72 pulgadas) o una
@@ -49,7 +49,7 @@
         </para>
 
         <para> Las páginas del documento se almacenados en el atributo público
-                <methodname>$pages</methodname> de la clase
+                <varname>$pages</varname> de la clase
                 <classname>Zend_Pdf</classname>. El atributo posee un array de
             objetos <classname>Zend_Pdf_Page</classname> y define completamente
             las instancias y el orden de las páginas. Este array puede

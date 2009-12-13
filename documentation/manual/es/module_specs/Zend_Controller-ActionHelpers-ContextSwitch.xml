@@ -705,7 +705,7 @@ $contextSwitch->initContext();
             ninguna conmutación de contexto. </para>
 
         <para> En tercer lugar, <emphasis>AjaxContext</emphasis> agrega un
-            contexto adicional, HTML. En este contexto, se establece el sufijo a
+            contexto adicional, <acronym>HTML</acronym>. En este contexto, se establece el sufijo a
             '<filename>ajax.phtml</filename>' para diferenciar el contexto de una solicitud normal.
             No se devuelven cabeceras adicionales. </para>
 
@@ -717,7 +717,7 @@ $contextSwitch->initContext();
             <para> En el siguiente ejemplo, estamos permitiendo requerimientos a
                 las acciones 'view', 'form', y 'process' para responder a
                 peticiones <acronym>AJAX</acronym>. En los dos primeros casos,
-                'view' y 'form', devolveremos fragmentos (snippets) de HTML con
+                'view' y 'form', devolveremos fragmentos (snippets) de <acronym>HTML</acronym> con
                 los cuales actualizaremos la página; y en el último,
                 devolveremos <acronym>JSON</acronym>. </para>
 

@@ -23,7 +23,7 @@
         <listitem>
             <para>
                 Opcionalmente, un array de opciones que pasar como segundo
-                argumento a <classname>Zend_Json::encode()</classname>.
+                argumento a <methodname>Zend_Json::encode()</methodname>.
                 Este array de opciones permite habilitar layouts y
                 codificación utilizando <classname>Zend_Json_Expr</classname>.
              </para>
@@ -102,7 +102,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
         <title>Habilitando la Codificación usando Zend_Json_Expr</title>
 
         <para>
-            <classname>Zend_Json::encode()</classname> permite la codificación
+            <methodname>Zend_Json::encode()</methodname> permite la codificación
             de expresiones nativas de <acronym>JSON</acronym> utilizando objetos
             <methodname>Zend_Json_Expr</methodname>. Esta opción está desactivada por
             defecto. Para activar esta opción, pase un valor booleano
@@ -117,7 +117,7 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true);
             Si desea hacer esto, <emphasis>debe</emphasis> pasar un array
             como segundo argumento. Esto también le permite combinar otras
             opciones, como la opción <emphasis>keepLayouts</emphasis>. Todas esas
-            opciones se pasan luego a <classname>Zend_Json::encode()</classname>.
+            opciones se pasan luego a <methodname>Zend_Json::encode()</methodname>.
         </para>
 
          <programlisting language="php"><![CDATA[

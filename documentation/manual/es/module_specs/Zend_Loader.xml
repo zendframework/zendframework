@@ -28,7 +28,7 @@
         <title>Cargando Archivos</title>
 
         <para>
-            El método estático <classname>Zend_Loader::loadFile()</classname> carga un archivo
+            El método estático <methodname>Zend_Loader::loadFile()</methodname> carga un archivo
             <acronym>PHP</acronym>. El archivo cargado puede contener cualquier código <acronym>PHP</acronym>.
             El método se comporta como un envoltorio para la función <acronym>PHP</acronym>
             <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>.
@@ -44,24 +44,24 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
     </example>
 
         <para>
-            El argumento <methodname>$filename</methodname> especifica el archivo que se va a cargar,
+            El argumento <varname>$filename</varname> especifica el archivo que se va a cargar,
             el cual no debe contener ninguna información de rutas.
-            Una verificación de seguridad es efectuada sobre <methodname>$filename</methodname>.
-            El archivo <methodname>$filename</methodname> sólo puede contener caracteres alfanuméricos,
+            Una verificación de seguridad es efectuada sobre <varname>$filename</varname>.
+            El archivo <varname>$filename</varname> sólo puede contener caracteres alfanuméricos,
             guiones ("-"), barras bajas ("_"), o puntos (".").
-            No hay ninguna restricción en el argumento <methodname>$dirs</methodname>.
+            No hay ninguna restricción en el argumento <varname>$dirs</varname>.
         </para>
 
         <para>
-            El parámetro <methodname>$dirs</methodname> especifica en qué carpetas buscar el archivo.
-            Si el valor es <methodname>NULL</methodname>, sólo se buscará en el <methodname>include_path</methodname>
+            El parámetro <varname>$dirs</varname> especifica en qué carpetas buscar el archivo.
+            Si el valor es <constant>NULL</constant>, sólo se buscará en el <methodname>include_path</methodname>
             ; si el valor es un string o un array, se buscará en la carpeta o carpetas especificadas
             , seguidas del <methodname>include_path</methodname>.
         </para>
 
         <para>
-            El argumento <methodname>$once</methodname> es un booleano.  Si es <constant>TRUE</constant>,
-            <classname>Zend_Loader::loadFile()</classname> esa la función <acronym>PHP</acronym>
+            El argumento <varname>$once</varname> es un booleano.  Si es <constant>TRUE</constant>,
+            <methodname>Zend_Loader::loadFile()</methodname> esa la función <acronym>PHP</acronym>
             <ulink url="http://php.net/include"><methodname>include_once()</methodname></ulink>
             para cargar el archivo, de lo contrario se utiliza la función <acronym>PHP</acronym>
             <ulink url="http://php.net/include_once"><methodname>include()</methodname></ulink>.
@@ -97,10 +97,10 @@ Zend_Loader::loadClass('Container_Tree',
         </para>
 
         <para>
-            Si <methodname>$dirs</methodname> es una cadena o un array,
-            <classname>Zend_Loader::loadClass()</classname> busca las carpetas en el
+            Si <varname>$dirs</varname> es una cadena o un array,
+            <methodname>Zend_Loader::loadClass()</methodname> busca las carpetas en el
             orden suministrado. El primer archivo encontrado es cargado. Si el archivo
-            no existe en el <methodname>$dirs</methodname> especificado, entonces se busca en el
+            no existe en el <varname>$dirs</varname> especificado, entonces se busca en el
             <methodname>include_path</methodname> del entorno PHP.
         </para>
 
@@ -110,7 +110,7 @@ Zend_Loader::loadClass('Container_Tree',
         </para>
 
         <para>
-            <classname>Zend_Loader::loadFile()</classname> se usa para cargar, así que
+            <methodname>Zend_Loader::loadFile()</methodname> se usa para cargar, así que
             el nombre de la clase puede contener únicamente caracteres alfanuméricos,
             guiones ('-'), barras bajas ('_'), y puntos ('.').
         </para>
@@ -137,7 +137,7 @@ if (Zend_Loader::isReadable($filename)) {
         </example>
 
         <para>
-            El argumento <methodname>$filename</methodname> especifica el nombre de archivo que
+            El argumento <varname>$filename</varname> especifica el nombre de archivo que
             comprobar.  Puede contener información de la ruta.
             Este método envuelve la función <acronym>PHP</acronym>
             <ulink url="http://php.net/is_readable"><methodname>is_readable()</methodname></ulink>.

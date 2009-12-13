@@ -4,8 +4,8 @@
 <sect1 id="zend.pdf.save">
     <title>Guardar Cambios a Documentos PDF</title>
     <para> Hay dos métodos que guardan los cambios a los documentos <acronym>PDF</acronym>: los
-        métodos son <classname>Zend_Pdf::save()</classname> y
-            <classname>Zend_Pdf::render()</classname>. </para>
+        métodos son <methodname>Zend_Pdf::save()</methodname> y
+            <methodname>Zend_Pdf::render()</methodname>. </para>
 
     <para>
         <classname>Zend_Pdf::save($filename, $updateOnly = false)</classname>

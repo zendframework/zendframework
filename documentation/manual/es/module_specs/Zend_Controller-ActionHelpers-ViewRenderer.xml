@@ -218,7 +218,7 @@ $this->foo(); // llama a Foo_View_Helper_Foo::foo()
                 <para>
                     <methodname>setScriptAction($name)</methodname> puede ser
                     utilizado para especificar el script de acción a renderizar.
-                        <methodname>$name</methodname> debe ser el nombre del
+                        <varname>$name</varname> debe ser el nombre del
                     script menos el sufijo del archivo (y sin el subdirectorio
                     del controlador, a menos que
                     <emphasis>noController</emphasis> se haya activado).
@@ -410,7 +410,7 @@ $viewRenderer =
                         $reference)</methodname> permite establecer un inflector
                     personalizado para usar con
                     <emphasis>ViewRenderer</emphasis>. Si
-                        <methodname>$reference</methodname> es verdadero,
+                        <varname>$reference</varname> es verdadero,
                     establecerá el sufijo y directorio de módulos como
                     referencias estáticas a las propiedades de
                     <emphasis>ViewRenderer</emphasis>, así como al
@@ -499,7 +499,7 @@ $viewRenderer =
 
                 <note>
                     <para> Por defecto,
-                            <classname>Zend_Controller_Action::renderScript()</classname>
+                            <methodname>Zend_Controller_Action::renderScript()</methodname>
                         le delega a <emphasis>ViewRenderer</emphasis> el
                         método <methodname>renderScript()</methodname>. </para>
                 </note>
@@ -533,7 +533,7 @@ $viewRenderer =
 
                 <note>
                     <para> Por defecto,
-                            <classname>Zend_Controller_Action::getViewScript()</classname>
+                            <methodname>Zend_Controller_Action::getViewScript()</methodname>
                         delega el método
                             <methodname>getViewScript()</methodname> de
                         <emphasis>ViewRenderer</emphasis>. </para>
@@ -565,7 +565,7 @@ $viewRenderer =
 
                 <note>
                     <para> Por defecto,
-                            <classname>Zend_Controller_Action::render()</classname>
+                            <methodname>Zend_Controller_Action::render()</methodname>
                         delega a <emphasis>ViewRenderer</emphasis> el método
                             <methodname>render()</methodname>. </para>
                 </note>
@@ -577,10 +577,10 @@ $viewRenderer =
                     permite pasar variables de especificación del path a fin de
                     determinar el path para la creación del script de vista.
                     Este pasa <methodname>$action</methodname> y
-                        <methodname>$vars</methodname> a
+                        <varname>$vars</varname> a
                         <methodname>getScriptPath()</methodname>, y luego pasa
                     el path del script resultante y
-                        <methodname>$name</methodname> a
+                        <varname>$name</varname> a
                         <methodname>renderScript()</methodname>. </para>
             </listitem>
         </itemizedlist>
@@ -672,7 +672,7 @@ class Foo_BarController extends Zend_Controller_Action
 
             <para> Para algunas acciones o controladores, usted puede querer
                 apagar el autorendering -- por ejemplo, si quiere emitir un tipo
-                diferente de salida (XML, JSON, etc), o si simplemente no desea
+                diferente de salida (<acronym>XML</acronym>, <acronym>JSON</acronym>, etc), o si simplemente no desea
                 emitir nada. Tiene dos opciones: apagar todos los casos de
                 autorendering (<methodname>setNeverRender()</methodname>), o
                 simplemente desactivarlo para la acción actual

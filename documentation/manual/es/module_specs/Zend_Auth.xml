@@ -25,7 +25,7 @@
             . Esto significa que usar el operador <methodname>new</methodname> y
             la keyword <methodname>clone</methodname> no va a funcionar con la
             clase <classname>Zend_Auth</classname> : use
-            <classname>Zend_Auth::getInstance()</classname> en su lugar.
+            <methodname>Zend_Auth::getInstance()</methodname> en su lugar.
         </para>
     </note>
     <sect2 id="zend.auth.introduction.adapters">
@@ -226,7 +226,7 @@ switch ($result->getCode()) {
                 almacenamiento persistente de la identidad desde un intento de
                 autenticación exitoso usando la sesión <acronym>PHP</acronym>. En un intento de
                 autenticación exitoso,
-                <classname>end_Auth::authenticate()</classname> almacena la
+                <methodname>end_Auth::authenticate()</methodname> almacena la
                 identidad del resultado de autenticación en almacenamiento
                 persistente. A menos que se configure diferente,
                 <classname>Zend_Auth</classname> usa una clase de
@@ -237,7 +237,7 @@ switch ($result->getCode()) {
                 </link> . Una clase diferente podría ser utilizada mediante
                 proveer un objeto que implemente
                 <classname>Zend_Auth_Storage_Interface</classname> a
-                <classname>Zend_Auth::setStorage()</classname>
+                <methodname>Zend_Auth::setStorage()</methodname>
             </para>
             
             <note>
@@ -262,7 +262,7 @@ switch ($result->getCode()) {
                     este valor es pasado internamente al constructor de
                     <classname>Zend_Session_Namespace</classname> . Esto
                     debería ocurrir antes de que se intente la autenticación, ya
-                    que <classname>Zend_Auth::authenticate()</classname> realiza
+                    que <methodname>Zend_Auth::authenticate()</methodname> realiza
                     el almacenamiento automático de la identidad.
                 </para>
                 
@@ -297,7 +297,7 @@ $result = $auth->authenticate($authAdapter);
                 Para esos casos los desarrolladores podrían simplemente
                 implementar <classname>Zend_Auth_Storage_Interface</classname> y
                 suplir una instancia de la clase a
-                <classname>Zend_Auth::setStorage()</classname> . </para>
+                <methodname>Zend_Auth::setStorage()</methodname> . </para>
             
             <example id="zend.auth.introduction.persistence.custom.example">
                 
@@ -375,7 +375,7 @@ class MyStorage implements Zend_Auth_Storage_Interface
                 
                 <para> A fin de poder usar esta clase de almacenamiento
                     personalizada,
-                    <classname>Zend_Auth::setStorage()</classname> es
+                    <methodname>Zend_Auth::setStorage()</methodname> es
                     invocada antes de intentar una petición de autenticación:
                 </para>
                 <programlisting language="php"><![CDATA[
@@ -408,7 +408,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
         <orderedlist>
             <listitem>
                 <para> indirectamente, a través de
-                    <classname>Zend_Auth::authenticate()</classname>
+                    <methodname>Zend_Auth::authenticate()</methodname>
                 </para>
             </listitem>
             <listitem>

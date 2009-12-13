@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17987 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.advanced">
     <title>Uso avanzado de Zend_Form</title>
@@ -149,7 +149,7 @@
             con los <link linkend="zend.form.forms.subforms"
                 >subformularios</link>. Por defecto, los subformularios son
             generados usando la notación de array como se muestra en el anterior
-            formulario HTML listado completo con identificadores. El nombre del
+            formulario <acronym>HTML</acronym> listado completo con identificadores. El nombre del
             array esta basado en el nombre del subformulario, con las llaves
             basados en los elementos contenidos en el subformulario. Los
             subformularios pueder ser anidados arbitrariamente, y esto puede
@@ -197,7 +197,7 @@
         <para> Adicionalmente, a nivel del elemento, se pueden especificar
             elementos individuales que puedan pertenecer a arrays particulares
             usando el método
-                <classname>Zend_Form_Element::setBelongsTo()</classname>. Para
+                <methodname>Zend_Form_Element::setBelongsTo()</methodname>. Para
             descubrir el valor que tiene -- sea o no sea definido explícitamente
             o implícitamente a través del formulario -- se puede usar el accesor
                 <methodname>getBelongsTo()</methodname>. </para>
@@ -548,10 +548,10 @@ class RegistrationController extends Zend_Controller_Action
 ]]></programlisting>
 
             <para> El método de arriba nos permite usar notaciones tal como
-                    "<methodname>$subForm =
-                    $this-&gt;getCurrentSubForm();</methodname>" recuperar
-                el actual subformulario para la validación, o "<methodname>$next
-                    = $this-&gt;getNextSubForm();</methodname>" obtener el
+                "<command>$subForm =
+                    $this-&gt;getCurrentSubForm();</command>" recuperar
+                el actual subformulario para la validación, o "<command>$next
+                    = $this-&gt;getNextSubForm();</command>" obtener el
                 siguiente para mostrar. </para>
 
             <para> Ahora, vamos a encontrar la manera para procesar y mostrar

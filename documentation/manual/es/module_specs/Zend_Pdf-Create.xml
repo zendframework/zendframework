@@ -11,8 +11,8 @@
 
     <para> La clase <classname>Zend_Pdf</classname> también ofrece dos métodos
         estáticos para cargar un documento <acronym>PDF</acronym>. Estos métodos son
-            <classname>Zend_Pdf::load()</classname> y
-            <classname>Zend_Pdf::parse()</classname>. Ambos retornan objetos
+            <methodname>Zend_Pdf::load()</methodname> y
+            <methodname>Zend_Pdf::parse()</methodname>. Ambos retornan objetos
             <classname>Zend_Pdf</classname> como resultado o arrojan una
         excepción si ocurre un error. </para>
 
@@ -38,10 +38,10 @@ $pdf3 = Zend_Pdf::parse($pdfString);
             <classname>Zend_Pdf</classname> soporta la recuperación de una
         revisión especificada. </para>
     <para> Una revisión puede especificarse como un segundo parámetro a los
-        métodos <classname>Zend_Pdf::load()</classname> y
-            <classname>Zend_Pdf::parse()</classname> o requerirlo llamando al
-        método <classname>Zend_Pdf::rollback()</classname>. <footnote>
-            <para> El método <classname>Zend_Pdf::rollback()</classname> debe
+        métodos <methodname>Zend_Pdf::load()</methodname> y
+            <methodname>Zend_Pdf::parse()</methodname> o requerirlo llamando al
+        método <methodname>Zend_Pdf::rollback()</methodname>. <footnote>
+            <para> El método <methodname>Zend_Pdf::rollback()</methodname> debe
                 ser invocado antes de aplicar cualquier cambio al documento, de
                 lo contrario el comportamiento no está definido. </para>
         </footnote> call. </para>

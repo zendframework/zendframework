@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 19143 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Elementos de Formularios Dijit-Specific</title>
@@ -531,7 +531,7 @@ $form->addElement(
         <title>Editor</title>
 
         <para> Editor proporciona un editor WYSIWYG que puede ser utilizado
-            tanto para crear como para editar contenidos HTML ricos.
+            tanto para crear como para editar contenidos <acronym>HTML</acronym> ricos.
             dijit.Editor es pluggable y podrá ampliarse con plugins
             personalizados si lo desea; para más detalles vea en <ulink
                 url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text"
@@ -738,7 +738,7 @@ $form->addElement(
             <listitem>
                 <para>
                     <emphasis>styleSheets</emphasis> indica qué otras hojas de
-                    estilo CSS deberían ser utilizadas para incidir sobre la
+                    estilo <acronym>CSS</acronym> deberían ser utilizadas para incidir sobre la
                     pantalla del Editor. Por defecto, ninguna está registrada, y
                     hereda la página de estilos. Los siguientes accessors y
                     mutators están disponibles para manipular al editor de hojas
@@ -797,8 +797,42 @@ $form->addElement('editor', 'content', array(
     'height'             => '250px',
     'inheritWidth'       => true,
     'styleSheets'        => array('/js/custom/editor.css'),
-));]></programlisting>
+));
+]]></programlisting>
+        
         </example>
+        
+        <note>
+            <title>Editor Dijit uses div by default</title>
+            
+            <para>
+                The Editor dijit uses an <acronym>HTML</acronym> <acronym>DIV</acronym> by default.
+                The <classname>dijit._editor.RichText</classname> documentation indicates that
+                having it built on an <acronym>HTML</acronym> <acronym>TEXTAREA</acronym> can potentially have security
+                implications.
+            </para>
+            
+            <para>
+                That said, there may be times when you want an Editor widget that can gracefully degrade to a
+                <acronym>TEXTAREA</acronym>. In such situations, you can do so by setting the
+                <varname>degrade</varname> property to <constant>true</constant>:
+            </para>
+            
+            <programlisting language="php"><![CDATA[
+// At instantiation:
+$editor = new Zend_Dojo_Form_Element_Editor('foo', array(
+    'degrade' => true,
+));
+
+// Construction via the form:
+$form->addElement('editor', 'content', array(
+    'degrade' => true,
+));
+
+// Or after instantiation:
+$editor->degrade = true;
+]]></programlisting>
+        </note>
     </sect3>
 
 
@@ -866,8 +900,8 @@ $form->addElement('editor', 'content', array(
                 <para>
                     <methodname>setTopDecorationAttribs(array $attribs)</methodname> y
                     <methodname>setBottomDecorationAttribs(array $attribs)</methodname>:
-                    atributos HTML para especificar una Regla dada o el 
-                    elemento contenedor de HTML RuleLabels.
+                    atributos <acronym>HTML</acronym> para especificar una Regla dada o el 
+                    elemento contenedor de <acronym>HTML</acronym> RuleLabels.
                 </para>
             </listitem>
 
@@ -1133,7 +1167,7 @@ $form->addElement(
             texto de contraseñas de dijit que también proporciona validación del
             lado del cliente. </para>
 
-        <para> Internmente, NumberTextBox proviene de <link
+        <para> Internmente, PasswordTextBox proviene de <link
                 linkend="zend.dojo.form.elements.validationTextBox"
                 >ValidationTextBox</link> y <link
                 linkend="zend.dojo.form.elements.textBox">TextBox</link>; todos
@@ -1204,9 +1238,9 @@ $form->addElement(
         <title>SimpleTextarea</title>
 
         <para> SimpleTextarea actúa principalmente como un textarea estándar de
-            HTML. Sin embargo, no permite establecer filas ni columnas. En su
+            <acronym>HTML</acronym>. Sin embargo, no permite establecer filas ni columnas. En su
             lugar, el ancho de textarea debe especificarse utilizando medidas
-            CSS estándar. A diferencia de Textarea, esta no aumentará
+            <acronym>CSS</acronym> estándar. A diferencia de Textarea, esta no aumentará
             automáticamente. </para>
 
         <example id="zend.dojo.form.elements.simpletextarea.example">
@@ -1229,11 +1263,11 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.slider">
         <title>Elemento abstracto Slider</title>
 
-        <para> Slider es un elemento abstracto que proviene de ambos 
-            <link linkend="zend.dojo.form.elements.horizontalSlider">
-            HorizontalSlider</link> y 
-            <link linkend="zend.dojo.form.elements.verticalSlider">VerticalSlider</link>. 
-            Expone una serie de métodos comunes para
+        <para> Slider es un elemento abstracto que proviene de ambos <link
+                linkend="zend.dojo.form.elements.horizontalSlider">
+                HorizontalSlider</link> y <link
+                linkend="zend.dojo.form.elements.verticalSlider"
+                >VerticalSlider</link>. Expone una serie de métodos comunes para
             configurar sus deslizadores, incluyendo a: </para>
 
         <itemizedlist>
@@ -1396,9 +1430,10 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.textarea">
         <title>Textarea</title>
 
-        <para> Textarea actúa principalmente como un textarea estándar de HTML.
+        <para> Textarea actúa principalmente como un textarea estándar de
+            <acronym>HTML</acronym>.
             Sin embargo, no permite establecer filas y columnas. En su lugar, el
-            ancho de la textarea debe especificarse utilizando medidas CSS
+            ancho de la textarea debe especificarse utilizando medidas <acronym>CSS</acronym>
             estándar; las filas debe omitirse totalmente. Luego, la textarea
             crecerá verticalmente tanto como texto se añada a ella. </para>
 
@@ -1531,8 +1566,8 @@ $form->addElement(
                         <methodname>getRegExp()</methodname>: establece y
                     recupera la expresión regular a utilizar para validar el
                     elemento. La expresión regular no necesita límites (a
-                    diferencia de la familia de funciones preg*, de <acronym>PHP</acronym>).
-                </para>
+                    diferencia de la familia de funciones preg*, de
+                        <acronym>PHP</acronym>). </para>
             </listitem>
 
             <listitem>

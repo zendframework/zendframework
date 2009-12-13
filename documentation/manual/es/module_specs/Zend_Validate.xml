@@ -194,7 +194,7 @@ if (!validator->isValid('word')) {
         <para>
             Si es inconveniente cargar una clase de validación y crear una
             instancia del validador, puede usar el método estático
-            <classname>Zend_Validate::is()</classname> como un estilo alternativo de invocación.
+            <methodname>Zend_Validate::is()</methodname> como un estilo alternativo de invocación.
             El primer argumento de este método es el valor de una entrada de datos
             que usted pasaría al método <methodname>isValid()</methodname>.
             El segundo argumento es un string, que corresponde al nombre base

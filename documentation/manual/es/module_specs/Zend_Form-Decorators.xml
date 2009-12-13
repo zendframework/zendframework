@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17173 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
     <title>Creando un personalizado marcado de formulario usando
@@ -67,7 +67,7 @@
                     decorador (ejemplo FormElements usa el separador entre cada
                     item generado). En el caso que un decorador reemplace el
                     contenido, esta configuración puede ser ignorada. El valor
-                    por defecto es <methodname>PHP_EOL</methodname>. </para>
+                    por defecto es <constant>PHP_EOL</constant>. </para>
             </listitem>
         </itemizedlist>
 
@@ -117,7 +117,7 @@
                 <methodname>getElement()</methodname> es usado para recuperarlo. </para>
 
         <para> Cada método decorador <methodname>render()</methodname> acepta
-            una cadena <methodname>$content</methodname>. Cuando el primer
+            una cadena <varname>$content</varname>. Cuando el primer
             decorador es llamado, esta cadena esta tipicamente vacía, mientras
             las subsecuentes llamadas serán puestas. Basados en el tipo de
             decorador y en las opciones pasadas, el decorador ya sea reemplazará

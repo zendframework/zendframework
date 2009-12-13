@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17166 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.examples">
     <title>Ejemplos de Dojo Form</title>
 
     <example id="zend.dojo.form.examples.dojoform">
-        <title>Usando <classname>Zend_Dojo_Form</classname></title>
+        <title>Usando Zend_Dojo_Form</title>
 
-        <para>
-            La forma más fácil de utilizar Dojo con <classname>Zend_Form</classname> 
-            es utilizar <classname>Zend_Dojo_Form</classname>, ya sea mediante 
-            el uso directo o mediante su extensión. 
-            Este ejemplo muestra la extensión de <classname>Zend_Dojo_Form</classname>, 
-            y muestra el uso de todos los elementos dijit. 
-            Crea cuatro sub forms, y decora el form para utilizar un TabContainer, 
-            mostrando cada sub form en su propia pestaña.
-        </para>
+        <para> La forma más fácil de utilizar Dojo con
+                <classname>Zend_Form</classname> es utilizar
+                <classname>Zend_Dojo_Form</classname>, ya sea mediante el uso
+            directo o mediante su extensión. Este ejemplo muestra la extensión
+            de <classname>Zend_Dojo_Form</classname>, y muestra el uso de todos
+            los elementos dijit. Crea cuatro sub forms, y decora el form para
+            utilizar un TabContainer, mostrando cada sub form en su propia
+            pestaña. </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Test extends Zend_Dojo_Form
 {
     /**
@@ -356,18 +355,14 @@ class My_Form_Test extends Zend_Dojo_Form
     <example id="zend.dojo.form.examples.decorating">
         <title>Modificando un form existente para utilizarlo con Dojo</title>
 
-        <para>
-            Los forms existentes pueden ser modificados para ser utilizados 
-            también por Dojo, usando el método estático 
-            <classname>Zend_Dojo::enableForm()</classname>.
-        </para>
+        <para> Los forms existentes pueden ser modificados para ser utilizados
+            también por Dojo, usando el método estático
+            <methodname>Zend_Dojo::enableForm()</methodname>. </para>
 
-        <para>
-            Este primer ejemplo muestra como decorar una instancia de un form 
-            existente:
-        </para>
+        <para> Este primer ejemplo muestra como decorar una instancia de un form
+            existente: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $form = new My_Custom_Form();
 Zend_Dojo::enableForm($form);
 $form->addElement(
@@ -389,12 +384,10 @@ array(
 );
 ]]></programlisting>
 
-        <para>
-            Alternativamente, puede hacer un ligero retoque a su form de 
-            inicialización:
-        </para>
+        <para> Alternativamente, puede hacer un ligero retoque a su form de
+            inicialización: </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Custom_Form extends Zend_Form
 {
     public function init()
@@ -406,14 +399,10 @@ class My_Custom_Form extends Zend_Form
 }
 ]]></programlisting>
 
-        <para>
-            Por supuesto, si puede hacerlo... podría y debería simplemente 
-            alterar la clase a heredar de <classname>Zend_Dojo_Form</classname>, 
-            que es una sustitución del drop-in de <classname>Zend_Form</classname> 
-            que ya está habilitada por Dojo.... 
-        </para>
+        <para> Por supuesto, si puede hacerlo... podría y debería simplemente
+            alterar la clase a heredar de <classname>Zend_Dojo_Form</classname>,
+            que es una sustitución del drop-in de
+                <classname>Zend_Form</classname> que ya está habilitada por
+            Dojo.... </para>
     </example>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

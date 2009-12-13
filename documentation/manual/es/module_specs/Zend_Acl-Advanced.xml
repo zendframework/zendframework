@@ -43,7 +43,7 @@
 
         <para>
             <classname>Zend_Acl</classname> provee soporte para reglas condicionales con
-                <methodname>Zend_Acl_Assert_Interface</methodname> . Con el fin de utilizar la regla
+                <classname>Zend_Acl_Assert_Interface</classname> . Con el fin de utilizar la regla
             de aserción de la interfaz, un desarrollador escribe una clase que implemente el método
                 <methodname>assert()</methodname> de la interfaz: </para>
 

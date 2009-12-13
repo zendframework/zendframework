@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17987 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.introduction">
     <title>Introducción</title>
 
-    <para>
-        Zend Framework trae incorporado <ulink
-            url="http://dojotoolkit.org">Dojo Toolkit</ulink> para brindar apoyo 
-        out-of-the-box al desarrollo de aplicaciones "ricas de internet". Los 
-        puntos de integración con Dojo incluyen:
-    </para>
+    <para> Zend Framework trae incorporado <ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink>
+        para brindar apoyo out-of-the-box al desarrollo de aplicaciones "ricas de internet". Los
+        puntos de integración con Dojo incluyen: </para>
 
     <itemizedlist>
-        <listitem><para>Soporte JSON-RPC</para></listitem>
-        <listitem><para>Compatibilidad dojo.data</para></listitem>
-        <listitem><para>Ayudante de vista para ayudar a establecer el medio ambiente de Dojo</para></listitem>
-        <listitem><para>Ayudantes de Dijit-specific <classname>Zend_View</classname></para></listitem>
-        <listitem><para>Elementos y decoradores de Dijit-specific <classname>Zend_Form</classname></para></listitem>
+        <listitem>
+            <para>Soporte JSON-RPC</para>
+        </listitem>
+        <listitem>
+            <para>Compatibilidad dojo.data</para>
+        </listitem>
+        <listitem>
+            <para>Ayudante de vista para ayudar a establecer el medio ambiente de Dojo</para>
+        </listitem>
+        <listitem>
+            <para>Ayudantes de Dijit-specific <classname>Zend_View</classname></para>
+        </listitem>
+        <listitem>
+            <para>Elementos y decoradores de Dijit-specific <classname>Zend_Form</classname></para>
+        </listitem>
     </itemizedlist>
 
-    <para>
-        La propia distribución de Dojo puede encontrarse en el directorio 
-        <methodname>externals/dojo/</methodname> de la distribución de Zend Framework. 
-        Esta es una distribución fuente, que incluye completamente los fuentes 
-        javascript de Dojo, unidades de pruebas, y constructores de herramientas. 
-        Puede hacer un symlink a su directorio javascript, copiarlo, o 
-        utilizarlo como herramienta para crear sus propias construcciones 
-        personalizadas a fin de incluirlas en su proyecto. 
-        Alternativamente, puede usar una de las Content Delivery Networks que 
-        ofrece Dojo (ZF apoya tanto el AOL CDN oficial así como el Google CDN).
-    </para>
+    <para> La propia distribución de Dojo puede encontrarse en el directorio
+        <filename>externals/dojo/</filename> de la distribución de Zend Framework. Esta es
+        una distribución fuente, que incluye completamente los fuentes javascript de Dojo, unidades
+        de pruebas, y constructores de herramientas. Puede hacer un symlink a su directorio
+        javascript, copiarlo, o utilizarlo como herramienta para crear sus propias construcciones
+        personalizadas a fin de incluirlas en su proyecto. Alternativamente, puede usar una de las
+        Content Delivery Networks que ofrece Dojo (Zend Framework apoya tanto el AOL CDN oficial así como el
+        Google CDN). </para>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

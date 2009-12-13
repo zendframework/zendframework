@@ -17,7 +17,7 @@
         getMessages(), y getErrors(), que pueden ser implementadas por clases de usuario
         a fin de crear objetos de validación personalizados.
         Un objeto que implementa una interfaz <classname>Zend_Validate_Interface</classname>
-        puede añadirse a una cadena de validación con <classname>Zend_Validate::addValidator()</classname>.
+        puede añadirse a una cadena de validación con <methodname>Zend_Validate::addValidator()</methodname>.
         Tales objetos también pueden ser usados con
         <link linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link>.
     </para>

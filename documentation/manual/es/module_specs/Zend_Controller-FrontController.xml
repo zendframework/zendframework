@@ -430,7 +430,7 @@ Zend_Controller_Front::run('../application/controllers');
                     respuesta debe ser emitida automáticamente (<constant>FALSE</constant>).
                     Por defecto, la respuesta es automáticamente emitida 
                     (llamando a                  
-                    <classname>Zend_Controller_Response_Abstract::sendResponse()</classname>);
+                    <methodname>Zend_Controller_Response_Abstract::sendResponse()</methodname>);
                     activando <methodname>returnResponse()</methodname>) se anulará este 
                     comportamiento.
                 </para>
@@ -462,7 +462,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <methodname>setParam($name, $value)</methodname> permite establecer un 
-                    único parámetro de <methodname>$name</methodname> con el valor 
+                    único parámetro de <varname>$name</varname> con el valor 
                     <varname>$value</varname>.
                 </para>
             </listitem>
@@ -478,7 +478,7 @@ Zend_Controller_Front::run('../application/controllers');
                 <para>
                     <methodname>getParam($name)</methodname> permite recuperar un único 
                     parámetro a la vez, utilizando como identificador a 
-                    <methodname>$name</methodname>.
+                    <varname>$name</varname>.
                 </para>
             </listitem>
 

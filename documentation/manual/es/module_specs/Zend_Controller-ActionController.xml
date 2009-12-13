@@ -138,7 +138,7 @@ class FooController extends Zend_Controller_Action
         <para>
             Si bien siempre puede anular el contolador de acción del
             constructor, no lo recomendamos.
-            <classname>Zend_Controller_Action::__construct()</classname>
+            <methodname>Zend_Controller_Action::__construct()</methodname>
             realiza algunas tareas importantes, tales como registrar los
             objetos de solicitud y respuesta, así como los argumentos de
             cualquier invocación personalizada pasados desde el front
@@ -559,7 +559,7 @@ class MyController extends Zend_Controller_Action
             <para>
                 Si hay una solicitud a un controlador que incluye un método de
                 acción no definido, se invocará a
-                <classname>Zend_Controller_Action::__call()</classname>.
+                <methodname>Zend_Controller_Action::__call()</methodname>.
                 <methodname>__call()</methodname> es, por supuesto, el método mágico de <acronym>PHP</acronym>
                 para la sobrecarga del método.
             </para>

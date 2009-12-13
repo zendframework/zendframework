@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17344 -->
+<!-- EN-Revision: 19419 -->
 <sect1 id="zend.filter.introduction">
 
     <title>Introducción</title>
@@ -18,29 +18,29 @@
             innecesarios, etc </para>
         <para> This basic definition of a filter may be extended to include generalized
             transformations upon input. A common transformation applied in web applications is the
-            escaping of HTML entities. For example, if a form field is automatically populated with
-            untrusted input (e.g., from a web browser), this value should either be free of HTML
-            entities or contain only escaped HTML entities, in order to prevent undesired behavior
-            and security vulnerabilities. To meet this requirement, HTML entities that appear in the
+            escaping of <acronym>HTML</acronym> entities. For example, if a form field is automatically populated with
+            untrusted input (e.g., from a web browser), this value should either be free of <acronym>HTML</acronym>
+            entities or contain only escaped <acronym>HTML</acronym> entities, in order to prevent undesired behavior
+            and security vulnerabilities. To meet this requirement, <acronym>HTML</acronym> entities that appear in the
             input must either be removed or escaped. Of course, which approach is more appropriate
-            depends on the situation. A filter that removes the HTML entities operates within the
+            depends on the situation. A filter that removes the <acronym>HTML</acronym> entities operates within the
             scope of the first definition of filter - an operator that produces a subset of the
-            input. A filter that escapes the HTML entities, however, transforms the input (e.g.,
+            input. A filter that escapes the <acronym>HTML</acronym> entities, however, transforms the input (e.g.,
                 "<code>&amp;</code>" is transformed to "<code>&amp;amp;</code>"). Supporting
             such use cases for web developers is important, and "to filter," in the context of using
                 <classname>Zend_Filter</classname>, means to perform some transformations upon input
             data. </para> Esta definición básica de un filtro puede ser extendido para incluir
         transformaciones generalizadas sobre la entrada. Una transformación común requerida en las
-        aplicaciones web es la de escapar las entidades HTML. Por ejemplo, si un campo del
+        aplicaciones web es la de escapar las entidades <acronym>HTML</acronym>. Por ejemplo, si un campo del
         formulario es completado automáticamente y contiene datos no verificados (por ejemplo, datos
-        ingresados desde un navegador web), este valor debe estar libre de las entidades HTML o sólo
-        contener entidades HTML de forma escapada, a fin de evitar comportamientos no deseados y
-        vulnerabilidades de seguridad. Para cumplir este requerimiento, las entidades HTML que
+        ingresados desde un navegador web), este valor debe estar libre de las entidades <acronym>HTML</acronym> o sólo
+        contener entidades <acronym>HTML</acronym> de forma escapada, a fin de evitar comportamientos no deseados y
+        vulnerabilidades de seguridad. Para cumplir este requerimiento, las entidades <acronym>HTML</acronym> que
         aparecen en los datos introducidos deben ser suprimidos o escapados. Por supuesto, el
         enfoque más adecuado depende del contexto y de la situción. Un filtro que quita las
-        entidades HTML funciona dentro del ámbito o alcance de la primera definición del filtro - un
+        entidades <acronym>HTML</acronym> funciona dentro del ámbito o alcance de la primera definición del filtro - un
         operador que produce un subconjunto de la entrada. Un filtro que escapa a las entidades
-        HTML, sin embargo, transforma la entrada (por ejemplo, "<code> &amp;</code>" se
+        <acronym>HTML</acronym>, sin embargo, transforma la entrada (por ejemplo, "<code> &amp;</code>" se
         transforma en "<code> &amp;amp;</code>"). El Apoyo a los casos de uso como para la web
         los desarrolladores es importante, y "filtrar", en el contexto de la utilización de
             <classname> Zend_Filter </classname>, los medios para realizar algunas transformaciones

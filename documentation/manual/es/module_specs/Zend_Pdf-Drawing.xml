@@ -40,7 +40,7 @@ $color2 = new Zend_Pdf_Color_Rgb($r, $g, $b);
 $color3 = new Zend_Pdf_Color_Cmyk($c, $m, $y, $k);
 ]]></programlisting>
 
-        <para> Los estilos de colores HTML también se proporcionan con la clase
+        <para> Los estilos de colores <acronym>HTML</acronym> también se proporcionan con la clase
                 <classname>Zend_Pdf_Color_Html</classname>: </para>
         <programlisting language="php"><![CDATA[
 $color1 = new Zend_Pdf_Color_Html('#3366FF');
@@ -235,9 +235,9 @@ $pdfPage->drawText($unicodeString, 72, 720, 'UTF-8');
     <sect2 id="zend.pdf.drawing.using-fonts">
         <title>Uso de Fuentes</title>
         <para>
-            <classname>Zend_Pdf_Page::drawText()</classname> utiliza la fuente y
+            <methodname>Zend_Pdf_Page::drawText()</methodname> utiliza la fuente y
             el tamaño actual de la fuente de la página, que se establece con el
-            método <classname>Zend_Pdf_Page::setFont()</classname>: </para>
+            método <methodname>Zend_Pdf_Page::setFont()</methodname>: </para>
         <programlisting language="php"><![CDATA[
 /**
  * Establecer la fuente actual.
@@ -651,10 +651,10 @@ public function setLineDashingPattern($pattern, $phase = 0);
     <sect2 id="zend.pdf.drawing.fill-style">
         <title>Estilo Relleno</title>
         <para> Los métodos
-            <classname>Zend_Pdf_Page::drawRectangle()</classname>,
-                <classname>Zend_Pdf_Page::drawPolygon()</classname>,
-                <classname>Zend_Pdf_Page::drawCircle()</classname> y
-                <classname>Zend_Pdf_Page::drawEllipse()</classname> toman el
+            <methodname>Zend_Pdf_Page::drawRectangle()</methodname>,
+                <methodname>Zend_Pdf_Page::drawPolygon()</methodname>,
+                <methodname>Zend_Pdf_Page::drawCircle()</methodname> y
+                <methodname>Zend_Pdf_Page::drawEllipse()</methodname> toman el
             argumento <methodname>$fillType</methodname> como un parámetro
             opcional. Puede ser: </para>
 
@@ -672,9 +672,9 @@ public function setLineDashingPattern($pattern, $phase = 0);
             </listitem>
         </itemizedlist>
 
-        <para> El método <classname>Zend_Pdf_Page::drawPolygon()</classname>
+        <para> El método <methodname>Zend_Pdf_Page::drawPolygon()</methodname>
             también tiene un parámetro adicional
-                <methodname>$fillMethod</methodname>: </para>
+                <varname>$fillMethod</varname>: </para>
         <itemizedlist>
             <listitem>
                 <para>Zend_Pdf_Page::FILL_METHOD_NON_ZERO_WINDING
@@ -760,7 +760,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
             <title>Rotaciones.</title>
             <para> La página PDF se puede rotar antes de aplicar cualquier
                 operación de dibujo. Se puede hacer con el método
-                    <classname>Zend_Pdf_Page::rotate()</classname>: </para>
+                    <methodname>Zend_Pdf_Page::rotate()</methodname>: </para>
             <programlisting language="php"><![CDATA[
 /**
  * Rotar la página.
@@ -777,7 +777,7 @@ public function rotate($x, $y, $angle);
         <sect3 id="zend.pdf.drawing.linear-transformations.scale">
             <title>A partir de ZF 1.8, el escalado.</title>
             <para> La escala de transformación es proporcionada por el método:
-                    <classname>Zend_Pdf_Page::scale()</classname>: </para>
+                    <methodname>Zend_Pdf_Page::scale()</methodname>: </para>
             <programlisting language="php"><![CDATA[
 /**
  * Establecer la escala al sistema de coordenadas.
@@ -793,7 +793,7 @@ public function scale($xScale, $yScale);
         <sect3 id="zend.pdf.drawing.linear-transformations.translate">
             <title>A partir de ZF 1.8, traducir.</title>
             <para> El desplazamiento del sistema de coordenadas es realizado por
-                el método <classname>Zend_Pdf_Page::translate()</classname>: </para>
+                el método <methodname>Zend_Pdf_Page::translate()</methodname>: </para>
             <programlisting language="php"><![CDATA[
 /**
  * Traducir sistema de coordenadas.
@@ -809,7 +809,7 @@ public function translate($xShift, $yShift);
         <sect3 id="zend.pdf.drawing.linear-transformations.skew">
             <title>A partir de ZF 1.8, el sesgo.</title>
             <para> El sesgo de una página se puede hacer utilizando el método
-                    <classname>Zend_Pdf_Page::skew()</classname>: </para>
+                    <methodname>Zend_Pdf_Page::skew()</methodname>: </para>
             <programlisting language="php"><![CDATA[
 /**
  * Traducir sistema de coordenadas.
@@ -1080,7 +1080,7 @@ public function getFontSize();
         <para> El módulo <classname>Zend_Pdf</classname> soporta el manejo de la
             transparencia. </para>
         <para> La transparencia puede ser el método
-                <classname>Zend_Pdf_Page::setAlpha()</classname>: <programlisting language="php"><![CDATA[
+                <methodname>Zend_Pdf_Page::setAlpha()</methodname>: <programlisting language="php"><![CDATA[
 
 /**
  * Establecer la transparencia.

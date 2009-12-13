@@ -415,19 +415,19 @@ $viewRenderer->setView($view);
             <listitem>
                 <para>
                     <methodname>setRedirectCode()</methodname>; usa
-                    <classname>Zend_Controller_Action_Helper_Redirector::setCode()</classname>.
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setCode()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <methodname>setRedirectPrependBase()</methodname>; usa
-                    <classname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</classname>.
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</methodname>.
                 </para>
             </listitem>
             <listitem>
                 <para>
                     <methodname>setRedirectExit()</methodname>; usa
-                    <classname>Zend_Controller_Action_Helper_Redirector::setExit()</classname>.
+                    <methodname>Zend_Controller_Action_Helper_Redirector::setExit()</methodname>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -505,7 +505,7 @@ Zend_Controller_Front::run('/path/to/controllers');
 
             <listitem>
                 <para>
-                    Los argumentos de <classname>Zend_Controller_Action::_forward()</classname>
+                    Los argumentos de <methodname>Zend_Controller_Action::_forward()</methodname>
                     han cambiado. la firma es ahora:
                 </para>
 
@@ -517,11 +517,11 @@ final protected function _forward($action,
 ]]></programlisting>
 
                 <para>
-                	<methodname>$accion</methodname> es siempre necesaria; si ningún controlador es
+                	<varname>$accion</varname> es siempre necesaria; si ningún controlador es
                 	especificado, es asumida una acción en el actual controlador.
-                    <methodname>$module</methodname> es siempre ignorado a menos que
-                    <methodname>$controller</methodname> sea especificado. Por último, cualquier
-                    <methodname>$params</methodname> previsto será adjuntado a la
+                    <varname>$module</varname> es siempre ignorado a menos que
+                    <varname>$controller</varname> sea especificado. Por último, cualquier
+                    <varname>$params</varname> previsto será adjuntado a la
                     solicitud del objeto. Si no necesita el controlador o el
                     módulo, pero aún tienen que pasar los parámetros, basta con especificar
                     null para esos valores.
@@ -584,7 +584,7 @@ $ctrl->dispatch();
         <itemizedlist>
             <listitem>
                 <para>
-                	<classname>Zend_Controller_Front::distpach()</classname> por defecto
+                	<methodname>Zend_Controller_Front::distpach()</methodname> por defecto
                     intercepta excepciones en la respuesta del objeto, y no los envia
                     en orden de prevenir un sistema de informacion sensitivo de ser 
                     enviado. Se puede anular esto de varias maneras:                    
@@ -622,13 +622,13 @@ echo $response;
             </listitem>
 
             <listitem><para>
-            	<classname>Zend_Controller_Dispatcher_Interface::dispatch()</classname>
+            	<methodname>Zend_Controller_Dispatcher_Interface::dispatch()</methodname>
                 ahora acepta y devuelve un <xref linkend="zend.controller.request" />
                 objeto en lugar de un despachador simbólico.
             </para></listitem>
 
             <listitem><para>            	
-				<classname>Zend_Controller_Router_Interface::route()</classname>
+				<methodname>Zend_Controller_Router_Interface::route()</methodname>
                 ahora acepta y devuelve un <xref linkend="zend.controller.request" />
                 objeto en lugar de un despachador simbólico.                 
             </para></listitem>
@@ -642,7 +642,7 @@ echo $response;
                         <classname> Zend_Controller_Request_Abstract $request</classname>
                         <classname> Zend_Controller_Response_Abstract $response</classname>
                         y <methodname> array $ params (opcional) </methodname>.
-                        <classname> Zend_Controller_Action::__construct()</classname> usa
+                        <methodname> Zend_Controller_Action::__construct()</methodname> usa
                         los argumentos para para configurar la petición, la respuesta, y propiedades
                         invokeArgs del objeto, y si se sobrecarga el
                         constructor se debe hacer lo mismo. Mejor aún, use
@@ -675,7 +675,7 @@ echo $response;
                     <listitem><para>                    	
 						<methodname>_redirect ()</methodname> ahora toma un segundo opcional
                         argumento, el código HTTP a retornar con la redirección, y
-                        un opcional tercer argumento, <methodname>$prependBase</methodname>,
+                        un opcional tercer argumento, <varname>$prependBase</varname>,
                         que puede indicar que la <acronym>URL</acronym> base registrada en la
                         solicitud del objeto debería ser añadido a la <acronym>URL</acronym> especificada.
                     </para></listitem>
@@ -738,9 +738,9 @@ public function __call($method, $args)
             </listitem>
 
             <listitem><para>
-                <classname>Zend_Controller_RewriteRouter::setRewriteBase()</classname> ha
-                sido eliminado. Use <classname>Zend_Controller_Front::setBaseUrl()</classname>
-                en lugar de (o <classname>Zend_Controller_Request_Http::setBaseUrl()</classname>, si esta usando
+                <methodname>Zend_Controller_RewriteRouter::setRewriteBase()</methodname> ha
+                sido eliminado. Use <methodname>Zend_Controller_Front::setBaseUrl()</methodname>
+                en lugar de (o <methodname>Zend_Controller_Request_Http::setBaseUrl()</methodname>, si esta usando
                 la petición de la clase).
             </para></listitem>
 

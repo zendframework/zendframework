@@ -28,7 +28,7 @@ printf('Username : %s%sPassword : %s%s    WSDL : %s%s%s',
     PHP_EOL,
     $phpLiveDocx->getPassword(),
     PHP_EOL,
-    $phpLiveDocx->getSoapClient()->getWsdl(),
+    $phpLiveDocx->getWsdl(),
     PHP_EOL,
     PHP_EOL
 );

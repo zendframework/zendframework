@@ -14,7 +14,6 @@ print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(
     PHP_EOL)
 );
 
-
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
 $phpLiveDocx->setWsdl('https://api.example.com/1.2/mailmerge.asmx?WSDL')

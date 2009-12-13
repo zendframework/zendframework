@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 18834 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.debug.dumping">
 
@@ -21,15 +21,22 @@ Zend_Debug::dump($var, $label=null, $echo=true);
     </example>
 
     <para>
-        El argumento <methodname>$var</methodname> especifica la expresión o variable sobre
+        El argumento <varname>$var</varname> especifica la expresión o variable sobre
         la cual el método <classname>Zend_Debug::dump()</classname> generará información.
     </para>
 
+	     <para>
+        The <varname>$label</varname> argument is a string to be prepended to the
+        output of <methodname>Zend_Debug::dump()</methodname>. It may be useful, for
+         example, to use labels if you are dumping information about multiple
+         variables on a given screen.
+     </para>
+	
     <para>
-        El argumento boleano <methodname>$echo</methodname> especifica si la salida de
+        El argumento boleano <varname>$echo</varname> especifica si la salida de
         <classname>Zend_Debug::dump()</classname> es o no mostrada. Si es
-        <methodname>verdadera</methodname>, la salida es mostrada. A pesar del valor del
-        argumento <methodname>$echo</methodname>, el retorno de este método contiene la
+        <constant>TRUE</constant>, la salida es mostrada. A pesar del valor del
+        argumento <varname>$echo</varname>, el retorno de este método contiene la
         salida.
     </para>
 
@@ -40,7 +47,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         Si el flujo de salida es detectado como una presentación de la web, la
         salida de <methodname>var_dump()</methodname> es escapada usando
         <ulink url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
-        y envuelta con el tag (X)HTML <methodname>pre</methodname>.
+        y envuelta con el tag (X)HTML <command>&lt;pre&gt;</command>.
     </para>
 
     <tip>
@@ -52,10 +59,10 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         </para>
         <para>
             También considere el componente <link linkend="zend.log.overview">
-            Zend_Log</link> escribiendo el código de depuración más
-            permanente. Por ejemplo, puede utilizar el nivel de log de
-            <methodname>DEPURACIÓN</methodname> y el Stream log writer, para mostrar la
-            cadena de salida de <classname>Zend_Debug::dump()</classname>.
+            Zend_Log</link>  component when writing more permanent debugging code. For example,
+            you can use the <constant>DEBUG</constant> log level and the
+            <link linkend="zend.log.writers.stream">stream log writer</link> to
+            output the string returned by <methodname>Zend_Debug::dump()</methodname>.
         </para>
     </tip>
 

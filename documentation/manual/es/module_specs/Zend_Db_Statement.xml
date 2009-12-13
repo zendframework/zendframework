@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17987 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.statement">
 
@@ -86,7 +86,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
         <para>
             Si usa <emphasis>parámetros posicionales</emphasis>, o los que
-            están marcados por un signo de interrogación (<methodname>?</methodname>), pase
+            están marcados por un signo de interrogación (<emphasis>?</emphasis>), pase
             los valores de vinculación en un array plano.
         </para>
 
@@ -104,7 +104,7 @@ $stmt->execute(array('goofy', 'FIXED'));
         <para>
             Si usa <emphasis>parámetros nombrados</emphasis>, o los que son
             indicados por un string identificador precedido por un caracter de
-            dos puntos (<methodname>:</methodname>), pase el valor en un array asociativo.
+            dos puntos (<emphasis>:</emphasis>), pase el valor en un array asociativo.
             Las claves de este array deben coincidir con el nombre de los
             parámetros.
         </para>
@@ -122,7 +122,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
         </example>
 
         <para>
-            Las declaraciones PDO soportan tanto parámetros posicionales como
+            Las declaraciones <acronym>PDO</acronym> soportan tanto parámetros posicionales como
             parámetros nombrados, pero no ambos tipos en la misma declaración
             <acronym>SQL</acronym>. Algunas clases <classname>Zend_Db_Statement</classname> para extensiones no-PDO
             soportan solo un tipo de parámetro o el otro.

@@ -66,7 +66,6 @@ echo $server->handle();
         <title>Anatomy of a webservice</title>
 
         <sect3 id="zend.xmlrpc.server.anatomy.general">
-
             <title>General considerations</title>
 
             <para>
@@ -91,8 +90,7 @@ echo $server->handle();
             </para>
         </sect3>
 
-        <sect3 id="zend.xmlrpc.server.anatomy.general">
-
+        <sect3 id="zend.xmlrpc.server.anatomy.expose">
             <title>What to expose?</title>
 
             <para>
@@ -104,8 +102,9 @@ echo $server->handle();
                 the best webservice calls are those not happening. Therefore
                 service calls need to be more coarse-grained than usual business
                 logic is. Often an additional layer in front of your business
-                objects makes sense. This layer is sometimes referred to as
-                <ulink url="http://martinfowler.com/eaaCatalog/remoteFacade.html">Remote Facade.</ulink>.
+                objects makes sense. This layer is sometimes referred to as <ulink
+                    url="http://martinfowler.com/eaaCatalog/remoteFacade.html">Remote
+                    Facade</ulink>.
                 Such a service layer adds a coarse grained interface on top of
                 your business logic and groups verbose operations into smaller
                 ones.
@@ -314,21 +313,25 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
 
     <sect2 id="zend.xmlrpc.server.caching">
         <title>Caching Server Definitions Between Requests</title>
+
         <para>
             Attaching many classes to an <acronym>XML-RPC</acronym> server instance can utilize a
             lot of resources; each class must introspect using the Reflection
             <acronym>API</acronym> (via <classname>Zend_Server_Reflection</classname>), which in
             turn generates a list of all possible method signatures to provide to the server class.
         </para>
+
         <para>
             To reduce this performance hit somewhat, <classname>Zend_XmlRpc_Server_Cache</classname>
             can be used to cache the server definition between requests. When
             combined with <methodname>__autoload()</methodname>, this can greatly increase
             performance.
         </para>
+
         <para>
             An sample usage follows:
         </para>
+
         <programlisting language="php"><![CDATA[
 function __autoload($class)
 {
@@ -352,6 +355,7 @@ if (!Zend_XmlRpc_Server_Cache::get($cacheFile, $server)) {
 
 echo $server->handle();
 ]]></programlisting>
+
         <para>
             The above example attempts to retrieve a server definition from
             <property>xmlrpc.cache</property> in the same directory as the script. If unsuccessful,
@@ -363,11 +367,13 @@ echo $server->handle();
 
     <sect2 id="zend.xmlrpc.server.use">
         <title>Usage Examples</title>
+
         <para>
             Below are several usage examples, showing the full spectrum of
             options available to developers. Usage examples will each build
             on the previous example provided.
         </para>
+
         <example id="zend.xmlrpc.server.use.attach-function">
             <title>Basic Usage</title>
 
@@ -419,6 +425,7 @@ echo $server->handle();
                 methods and passing arguments to its methods. This can be used to specify certain
                 defaults when registering service classes.
             </para>
+
             <programlisting language="php"><![CDATA[
 class Services_PricingService
 {
@@ -551,9 +558,8 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <title>Utilizing custom request and response objects</title>
-
         <example id="zend.xmlrpc.server.use.custom-request-object">
+            <title>Utilizing custom request and response objects</title>
 
             <para>
                 Some use cases require to utilize a custom request object.
@@ -593,6 +599,8 @@ echo $server->handle($request);
         </example>
 
         <example id="zend.xmlrpc.server.use.custom-response-object">
+            <title>Specifying a custom response class</title>
+
             <para>
                 The example below illustrates specifying a custom response class
                 for the returned response.
@@ -623,11 +631,10 @@ $server->setResponseClass('Services_Response');
 echo $server->handle($request);
 ]]></programlisting>
         </example>
-     </sect2>
+    </sect2>
 
-     <sect2 id="zend.xmlrpc.server.performance">
-
-         <title>Performance optimization</title>
+    <sect2 id="zend.xmlrpc.server.performance">
+        <title>Performance optimization</title>
 
         <example id="zend.xmlrpc.server.performance.caching">
             <title>Cache server definitions between requests</title>
@@ -664,6 +671,7 @@ $server->setResponseClass('Services_Response');
 
 echo $server->handle($request);
 ]]></programlisting>
+
             <note>
                 The server cache file should be located outside the document root.
             </note>
@@ -701,18 +709,26 @@ $server = new Zend_XmlRpc_Server();
 ]]></programlisting>
 
             <note>
-                Performance is determined by a lot of parameters and
-                benchmarks only apply for the specific test case. Differences
-                come from PHP version, installed extensions, webserver and
-                operating system just to name a few. Please make sure to
-                benchmark your application on your own and decide which
-                generator to use based on <emphasis>your</emphasis> numbers.
+                <title>Benchmark your application</title>
+
+                <para>
+                    Performance is determined by a lot of parameters and
+                    benchmarks only apply for the specific test case. Differences
+                    come from PHP version, installed extensions, webserver and
+                    operating system just to name a few. Please make sure to
+                    benchmark your application on your own and decide which
+                    generator to use based on <emphasis>your</emphasis> numbers.
+                </para>
             </note>
 
             <note>
-                This optimization makes sense for the client side too. Just
-                select the alternate <acronym>XML</acronym> generator before
-                doing any work with <classname>Zend_XmlRpc_Client</classname>.
+                <title>Benchmark your client</title>
+
+                <para>
+                    This optimization makes sense for the client side too. Just
+                    select the alternate <acronym>XML</acronym> generator before
+                    doing any work with <classname>Zend_XmlRpc_Client</classname>.
+                </para>
             </note>
 
         </example>

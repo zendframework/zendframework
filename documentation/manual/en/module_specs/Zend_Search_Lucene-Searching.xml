@@ -397,7 +397,7 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
                 'indexing', 'indices' and other word forms will be highlighted.
             </para>
             <para>
-                On the other hand, if word is skipped by corrent analyzer (e.g. if short words filter is applied to the analyzer),
+                On the other hand, if word is skipped by current analyzer (e.g. if short words filter is applied to the analyzer),
                 then nothing will be highlighted.
             </para>
         </note>
@@ -460,7 +460,7 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
             your own highlighter or just extend the default and redefine color table.
         </para>
         <para>
-            <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code> has similar behavior. The only differenece
+            <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code> has similar behavior. The only difference
             is that it takes as an input and returns HTML fragment without &lt;>HTML>, &lt;HEAD>, &lt;BODY> tags.
             Nevertheless, fragment is automatically transformed to valid <acronym>XHTML</acronym>.
         </para>

@@ -539,7 +539,7 @@ class Zend_Mail extends Zend_Mime_Message
         if (!is_array($email)) {
             $email = array($name => $email);
         }
-        
+
         foreach ($email as $n => $recipient) {
             $this->_addRecipientAndHeader('To', $recipient, is_int($n) ? '' : $n);
             $this->_to[] = $recipient;
@@ -560,11 +560,11 @@ class Zend_Mail extends Zend_Mime_Message
         if (!is_array($email)) {
             $email = array($name => $email);
         }
-        
+
         foreach ($email as $n => $recipient) {
             $this->_addRecipientAndHeader('Cc', $recipient, is_int($n) ? '' : $n);
         }
-        
+
         return $this;
     }
 
@@ -579,14 +579,14 @@ class Zend_Mail extends Zend_Mime_Message
         if (!is_array($email)) {
             $email = array($email);
         }
-        
+
         foreach ($email as $recipient) {
             $this->_addRecipientAndHeader('Bcc', $recipient, '');
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Return list of recipient email addresses
      *
@@ -1108,7 +1108,8 @@ class Zend_Mail extends Zend_Mime_Message
             return $email;
         } else {
             $encodedName = $this->_encodeHeader($name);
-            if ($encodedName === $name && strpos($name, ',') !== false) {
+            if ($encodedName === $name &&
+                    ((strpos($name, '@') !== false) || (strpos($name, ',') !== false))) {
                 $format = '"%s" <%s>';
             } else {
                 $format = '%s <%s>';

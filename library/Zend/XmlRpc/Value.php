@@ -271,6 +271,11 @@ abstract class Zend_XmlRpc_Value
                     return new Zend_XmlRpc_Value_BigInteger($value);
                 }
 
+                if ($value instanceof Zend_Date or $value instanceof DateTime) {
+                    require_once 'Zend/XmlRpc/Value/DateTime.php';
+                    return new Zend_XmlRpc_Value_DateTime($value);
+                }
+
                 // Otherwise, we convert the object into a struct
                 $value = get_object_vars($value);
                 // Break intentionally omitted

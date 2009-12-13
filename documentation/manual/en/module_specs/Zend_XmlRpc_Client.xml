@@ -160,6 +160,14 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                             <entry>object</entry>
                             <entry>array</entry>
                         </row>
+                        <row>
+                            <entry>Zend_Date</entry>
+                            <entry>dateTime.iso8601</entry>
+                        </row>
+                        <row>
+                            <entry>DateTime</entry>
+                            <entry>dateTime.iso8601</entry>
+                        </row>
                     </tbody>
                 </tgroup>
             </table>

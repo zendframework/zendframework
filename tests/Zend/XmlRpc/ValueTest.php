@@ -39,6 +39,7 @@ require_once 'Zend/Crypt/Math/BigInteger.php';
 require_once 'Zend/XmlRpc/Generator/DOMDocument.php';
 require_once 'Zend/XmlRpc/Generator/XMLWriter.php';
 require_once 'Zend/XmlRpc/TestProvider.php';
+require_once 'Zend/Date.php';
 
 /**
  * Test case for Zend_XmlRpc_Value
@@ -657,6 +658,83 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('dateTime.iso8601', $val->getType());
         $this->assertSame(strtotime($iso8601), strtotime($val->getValue()));
         $this->assertEquals($this->wrapXml($xml), $val->saveXml());
+    }
+
+    /**
+     * @dataProvider Zend_XmlRpc_TestProvider::provideGenerators
+     * @group ZF-4249
+     */
+    public function testMarshalDateTimeFromFromZendDate(Zend_XmlRpc_Generator_Abstract $generator)
+    {
+        Zend_XmlRpc_Value::setGenerator($generator);
+        $date = new Zend_Date(array('year' => 2039, 'month' => 4, 'day' => 18,
+                                    'hour' => 13, 'minute' => 14, 'second' => 15));
+        $dateString = '20390418T13:14:15';
+        $xml = "<value><dateTime.iso8601>$dateString</dateTime.iso8601></value>";
+
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($date, Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME);
+        $this->assertXmlRpcType('dateTime', $val);
+        $this->assertEquals('dateTime.iso8601', $val->getType());
+        $this->assertSame($dateString, $val->getValue());
+        $this->assertEquals(trim($xml), trim($val->saveXml()));
+
+    }
+
+    /**
+     * @dataProvider Zend_XmlRpc_TestProvider::provideGenerators
+     * @group ZF-4249
+     */
+    public function testMarshalDateTimeFromZendDateAndAutodetectingType(Zend_XmlRpc_Generator_Abstract $generator)
+    {
+        Zend_XmlRpc_Value::setGenerator($generator);
+        $date = new Zend_Date(array('year' => 2039, 'month' => 4, 'day' => 18,
+                                    'hour' => 13, 'minute' => 14, 'second' => 15));
+        $dateString = '20390418T13:14:15';
+        $xml = "<value><dateTime.iso8601>$dateString</dateTime.iso8601></value>";
+
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($date, Zend_XmlRpc_Value::AUTO_DETECT_TYPE);
+        $this->assertXmlRpcType('dateTime', $val);
+        $this->assertEquals('dateTime.iso8601', $val->getType());
+        $this->assertSame($dateString, $val->getValue());
+        $this->assertEquals(trim($xml), trim($val->saveXml()));
+    }
+
+    /**
+     * @dataProvider Zend_XmlRpc_TestProvider::provideGenerators
+     * @group ZF-4249
+     */
+    public function testMarshalDateTimeFromFromDateTime(Zend_XmlRpc_Generator_Abstract $generator)
+    {
+        Zend_XmlRpc_Value::setGenerator($generator);
+        $dateString = '20390418T13:14:15';
+        $date = new DateTime($dateString);
+        $dateString = '20390418T13:14:15';
+        $xml = "<value><dateTime.iso8601>$dateString</dateTime.iso8601></value>";
+
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($date, Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME);
+        $this->assertXmlRpcType('dateTime', $val);
+        $this->assertEquals('dateTime.iso8601', $val->getType());
+        $this->assertSame($dateString, $val->getValue());
+        $this->assertEquals(trim($xml), trim($val->saveXml()));
+
+    }
+
+    /**
+     * @dataProvider Zend_XmlRpc_TestProvider::provideGenerators
+     * @group ZF-4249
+     */
+    public function testMarshalDateTimeFromDateTimeAndAutodetectingType(Zend_XmlRpc_Generator_Abstract $generator)
+    {
+        Zend_XmlRpc_Value::setGenerator($generator);
+        $dateString = '20390418T13:14:15';
+        $date = new DateTime($dateString);
+        $xml = "<value><dateTime.iso8601>$dateString</dateTime.iso8601></value>";
+
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($date, Zend_XmlRpc_Value::AUTO_DETECT_TYPE);
+        $this->assertXmlRpcType('dateTime', $val);
+        $this->assertEquals('dateTime.iso8601', $val->getType());
+        $this->assertSame($dateString, $val->getValue());
+        $this->assertEquals(trim($xml), trim($val->saveXml()));
     }
 
     // Base64

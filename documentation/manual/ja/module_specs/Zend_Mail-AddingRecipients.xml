@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17503 -->
+<!-- EN-Revision: 19585 -->
 <sect1 id="zend.mail.adding-recipients">
     <title>受信者の追加</title>
 
@@ -40,6 +40,17 @@
             <methodname>addTo()</methodname> および <methodname>addCc()</methodname> では、
             2 番目の引数として、人間が読みやすい形式のあて先を指定することができます。
             その引き数中の２重引用符は単一引用符に、山括弧は角括弧に変更されます。
+        </para>
+    </note>
+
+    <note>
+        <title>選択できる使用法</title>
+
+        <para>
+            これらのメソッド３つは全て、１回につき一つの代わりに、
+            追加する電子メール・アドレスの配列を受け取ることもできます。
+            <methodname>addTo()</methodname> 及び <methodname>addCc()</methodname> の場合、
+            それらは、キーが人間が読み取れる受取人の名前である連想配列でありえます。
         </para>
     </note>
 </sect1>

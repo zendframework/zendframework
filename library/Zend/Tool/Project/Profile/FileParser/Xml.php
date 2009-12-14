@@ -69,6 +69,9 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
         $this->_profile = $profile;
         $xmlElement = new SimpleXMLElement('<projectProfile />');
 
+//        $xmlElement->addAttribute('version', $profile->getVersion());
+//        $xmlElement->addAttribute('type', $profile->getType());
+        
         self::_serializeRecurser($profile, $xmlElement);
 
         $doc = new DOMDocument('1.0');

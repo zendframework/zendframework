@@ -116,7 +116,7 @@ class Zend_Tool_Project_Provider_Project
     {
         $data = <<<EOS
 <?xml version="1.0" encoding="UTF-8"?>
-    <projectProfile type="default">
+    <projectProfile type="default" version="1.10">
         <projectDirectory>
             <projectProfileFile />
             <applicationDirectory>
@@ -130,6 +130,7 @@ class Zend_Tool_Project_Provider_Project
                     </controllerFile>
                     <controllerFile controllerName="Error" />
                 </controllersDirectory>
+                <formsDirectory enabled="false" />
                 <layoutsDirectory enabled="false" />
                 <modelsDirectory />
                 <modulesDirectory enabled="false" />

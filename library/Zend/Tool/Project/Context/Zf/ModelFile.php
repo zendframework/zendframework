@@ -38,11 +38,6 @@ class Zend_Tool_Project_Context_Zf_ModelFile extends Zend_Tool_Project_Context_Z
      * @var string
      */
     protected $_modelName = 'Base';
-
-    /**
-     * @var string
-     */
-    protected $_moduleName = null;
     
     /**
      * @var string
@@ -56,7 +51,6 @@ class Zend_Tool_Project_Context_Zf_ModelFile extends Zend_Tool_Project_Context_Z
     public function init()
     {
         $this->_modelName = $this->_resource->getAttribute('modelName');
-        //$this->_moduleName = $this->_resource->getAttribute('moduleName');
         $this->_filesystemName = ucfirst($this->_modelName) . '.php';
         parent::init();
     }
@@ -98,12 +92,6 @@ class Zend_Tool_Project_Context_Zf_ModelFile extends Zend_Tool_Project_Context_Z
             'classes' => array(
                 new Zend_CodeGenerator_Php_Class(array(
                     'name' => $className,
-                    //'methods' => array(
-                    //    new Zend_CodeGenerator_Php_Method(array(
-                    //        'name' => 'someMethodName',
-                    //        'body' => '/* method body here */',
-                    //    	  ))
-                    //    )
                     ))
                 )
             ));

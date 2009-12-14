@@ -31,48 +31,8 @@ require_once 'Zend/Tool/Project/Provider/Abstract.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstract
+class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstract implements Zend_Tool_Framework_Provider_Pretendable
 {
-    
-    public static function prepareApplicationConfig(Zend_Tool_Project_Profile $profile, $section = 'production', $layoutPath = 'layout/scripts/')
-    {
-        $appConfigFileResource = $profile->search('ApplicationConfigFile');
-                
-        if ($appConfigFileResource == false) {
-            throw new Zend_Tool_Project_Exception('A project with an application config file is required to use this provider.');
-        }
-        
-        $appConfigFilePath = $appConfigFileResource->getPath();
-        
-        $config = new Zend_Config_Ini($appConfigFilePath, null, array('skipExtends' => true, 'allowModifications' => true));
-        
-        if (!isset($config->{$section})) {
-            throw new Zend_Tool_Project_Exception('The config does not have a ' . $section . ' section.');
-        }
-        
-        $currentSection = $config->{$section};
-        
-        if (!isset($currentSection->resources)) {
-            $currentSection->resources = array();
-        }
-        
-        $configResources = $currentSection->resources;
-        
-        if (!isset($configResources->layout)) {
-            $configResources->layout = array();
-        }
-        
-        $layout = $configResources->layout;
-        
-        $layout->layoutPath = 'APPLICATION_PATH "layouts/scripts"';
-        
-        $writer = new Zend_Config_Writer_Ini(array(
-            'config' => $config,
-            'filename' => $appConfigFilePath
-            ));
-        $writer->write();
-        
-    }
     
     public static function createResource(Zend_Tool_Project_Profile $profile, $layoutName = 'layout')
     {
@@ -102,24 +62,50 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
     {
         $profile = $this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
         
-        self::prepareApplicationConfig($profile);
+        $applicationConfigResource = $profile->search('ApplicationConfigFile');
+
+        if (!$applicationConfigResource) {
+            throw new Zend_Tool_Project_Exception('A project with an application config file is required to use this provider.');
+        }
         
-        $layoutScriptFile = self::createResource($profile);
+        $zc = $applicationConfigResource->getAsZendConfig();
         
-        $layoutScriptFile->create();
+        if (isset($zc->resources) && isset($zf->resources->layout)) {
+            $this->_registry->getResponse()->appendContent('A layout resource already exists in this project\'s application configuration file.');
+            return;
+        }
         
-        $this->_registry->getResponse()->appendContent(
-            'Layouts have been enabled, and a default layout created at ' 
-            . $layoutScriptFile->getPath()
-            );
+        $layoutPath = 'APPLICATION_PATH "/layouts/scripts/"';
+        
+        $quoteValue = (preg_match('#"\'#', $layoutPath)) ? false : true;
+        
+        if ($this->_registry->getRequest()->isPretend()) {
+            $this->_registry->getResponse()->appendContent('Would add "resources.layout.layoutPath" key to the application config file.');
+        } else {
+            $applicationConfigResource->addStringItem('resources.layout.layoutPath', $layoutPath, 'production', $quoteValue);
+            $applicationConfigResource->create(); 
             
-        $this->_registry->getResponse()->appendContent('A layout entry has been added to the application config file.');
+            $layoutScriptFile = self::createResource($profile);
+            
+            $layoutScriptFile->create();
+            
+            $this->_registry->getResponse()->appendContent(
+                'Layouts have been enabled, and a default layout created at ' 
+                . $layoutScriptFile->getPath()
+                );
+                
+            $this->_registry->getResponse()->appendContent('A layout entry has been added to the application config file.');
+        }
+        
+       
         
     }
     
     public function disable()
     {
-        
+        // @todo
     }
+    
+    
     
 }

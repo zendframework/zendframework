@@ -116,4 +116,9 @@ EOS;
 
         return $codeGenFile->generate();
     }
+    
+    public function getApplicationInstance()
+    {
+        return $this->_applicationInstance;
+    }
 }

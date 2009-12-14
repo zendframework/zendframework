@@ -41,7 +41,7 @@ class Zend_Tool_Project_Provider_DbTable extends Zend_Tool_Project_Provider_Abst
      */
     protected $_nameFilter = null;
     
-    public static function createResource(Zend_Tool_Project_Profile $profile, $dbTableName, $moduleName = null)
+    public static function createResource(Zend_Tool_Project_Profile $profile, $dbTableName, $actualTableName, $moduleName = null)
     {
         $profileSearchParams = array();
 
@@ -50,27 +50,86 @@ class Zend_Tool_Project_Provider_DbTable extends Zend_Tool_Project_Provider_Abst
         }
 
         $profileSearchParams[] = 'modelsDirectory';
-
+        
         $modelsDirectory = $profile->search($profileSearchParams);
         
         if (!($dbTableDirectory = $modelsDirectory->search('DbTableDirectory'))) {
             $dbTableDirectory = $modelsDirectory->createResource('DbTableDirectory');
         }
         
-        $dbTableFile = $dbTableDirectory->createResource('DbTableFile', array('dbTableName' => $dbTableName));
+        $dbTableFile = $dbTableDirectory->createResource('DbTableFile', array('dbTableName' => $dbTableName, 'actualTableName' => $actualTableName));
         
         return $dbTableFile;
     }
+    
+    public static function hasResource(Zend_Tool_Project_Profile $profile, $dbTableName, $moduleName = null)
+    {
+        $profileSearchParams = array();
+
+        if ($moduleName != null && is_string($moduleName)) {
+            $profileSearchParams = array('modulesDirectory', 'moduleDirectory' => array('moduleName' => $moduleName));
+        }
+
+        $profileSearchParams[] = 'modelsDirectory';
+        
+        $modelsDirectory = $profile->search($profileSearchParams);
+        
+        if (!($dbTableDirectory = $modelsDirectory->search('DbTableDirectory'))) {
+            return false;
+        }
+        
+        $dbTableFile = $dbTableDirectory->search(array('DbTableFile' => array('dbTableName' => $dbTableName)));
+        
+        return ($dbTableFile instanceof Zend_Tool_Project_Profile_Resource) ? true : false;
+    }
       
     
-    public function create($tableName, $module = null)
+    public function create($name, $actualTableName, $module = null, $forceOverwrite = true)
     {
-        //@todo create
+        $this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
+
+        if ($actualTableName == '') {
+            throw new Zend_Tool_Project_Provider_Exception('You must provide both the DbTable name as well as the actual db table\'s name.');
+        }
+        
+        if (self::hasResource($this->_loadedProfile, $name, $module)) {
+            throw new Zend_Tool_Project_Provider_Exception('This project already has a DbTable named ' . $name);
+        }
+
+        // Check that there is not a dash or underscore, return if doesnt match regex
+        if (preg_match('#[_-]#', $name)) {
+            throw new Zend_Tool_Project_Provider_Exception('DbTable names should be camel cased.');
+        }
+        
+        $name = ucwords($name);
+        
+        try {
+            $modelResource = self::createResource($this->_loadedProfile, $name, $actualTableName, $module);
+        } catch (Exception $e) {
+            $response = $this->_registry->getResponse();
+            $response->setException($e);
+            return;
+        }
+
+        // do the creation
+        if ($this->_registry->getRequest()->isPretend()) {
+
+            $this->_registry->getResponse()->appendContent('Would create a DbTable at '  . $modelResource->getContext()->getPath());
+
+        } else {
+
+            $this->_registry->getResponse()->appendContent('Creating a model at ' . $modelResource->getContext()->getPath());
+            $modelResource->create();
+
+            $this->_storeProfile();
+        }
     }
     
-    public function createFromDatabase($module = null)
+    public function createFromDatabase($module = null, $forceOverwrite = true)
     {
-        //@todo create from db
+        $bootstrapResource = $profile->search('Bootstrap');
+        $bi = $bootstrapResource->getApplicationInstance();
+        var_dump($bi);
     }
     
     protected function _convertTableNameToClassName($tableName)
@@ -80,7 +139,6 @@ class Zend_Tool_Project_Provider_DbTable extends Zend_Tool_Project_Provider_Abst
             $this->_nameFilter
                 ->addFilter(new Zend_Filter_Word_UnderscoreToCamelCase());
         }
-        
         
         return $this->_nameFilter->filter($tableName);
     }

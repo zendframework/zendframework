@@ -45,6 +45,11 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
     protected $_filesystemName = 'application.ini';
 
     /**
+     * @var string
+     */
+    protected $_content = null;
+    
+    /**
      * getName()
      *
      * @return string
@@ -83,6 +88,111 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
      */
     public function getContents()
     {
+        if ($this->_content === null) {
+            $this->_content = $this->_getDefaultContents();
+        }
+        
+        return $this->_content;
+    }
+
+    public function getAsZendConfig($section = 'production')
+    {
+        return new Zend_Config_Ini($this->getPath(), $section);
+    }
+    
+    /**
+     * addStringItem()
+     * 
+     * @param string $key 
+     * @param string $value
+     * @param string $section
+     * @param bool   $quoteValue
+     * @return Zend_Tool_Project_Context_Zf_ApplicationConfigFile
+     */
+    public function addStringItem($key, $value, $section = 'production', $quoteValue = true)
+    {
+        if ($quoteValue) {
+            $value = '"' . $value . '"';
+        }
+        
+        $contentLines = file($this->getPath());
+        
+        $newLines = array();
+        $insideSection = false;
+        
+        foreach ($contentLines as $contentLineIndex => $contentLine) {
+            
+            if ($insideSection === false && preg_match('#^\[' . $section . '#', $contentLine)) {
+                $insideSection = true;
+            }
+            
+            if ($insideSection) {
+                if ((trim($contentLine) == null) || ($contentLines[$contentLineIndex + 1][0] == '[')) {
+                    $newLines[] = $key . ' = ' . $value . "\n";
+                    $insideSection = null;
+                }
+            }
+            
+            $newLines[] = $contentLine;
+        }
+
+        $this->_content = implode('', $newLines);
+        return $this;
+    }
+    
+    /**
+     * 
+     * @param array $item
+     * @param string $section
+     * @param bool $quoteValue
+     * @return Zend_Tool_Project_Context_Zf_ApplicationConfigFile
+     */
+    public function addItem($item, $section = 'production', $quoteValue = true)
+    {
+        $stringItems = array();
+        $stringValues = array();
+        $configKeyNames = array();
+        
+        $rii = new RecursiveIteratorIterator(
+            new RecursiveArrayIterator($item),
+            RecursiveIteratorIterator::SELF_FIRST
+            );
+        
+        $lastDepth = 0;
+        
+        // loop through array structure recursively to create proper keys
+        foreach ($rii as $name => $value) {
+            $lastDepth = $rii->getDepth();
+            
+            if (is_array($value)) {
+                array_push($configKeyNames, $name);
+            } else {
+                $stringItems[] = implode('.', $configKeyNames) . '.' . $name;
+                $stringValues[] = $value;
+            }
+        }
+        
+        foreach ($stringItems as $stringItemIndex => $stringItem) {
+            $this->addStringItem($stringItem, $stringValues[$stringItemIndex], $section, $quoteValue);
+        }
+        
+        return $this;
+    }
+    
+//    public function removeStringItem($key, $section = 'production')
+//    {
+//        
+//    }
+//    
+//    public function removeItem($item, $section = 'production')
+//    {
+//        
+//    }
+    
+    protected function _getDefaultContents()
+    {
+        // resources.log.zendmonitor.writerName = "ZendMonitor"
+        
         $contents =<<<EOS
 [production]
 phpSettings.display_startup_errors = 0
@@ -93,7 +203,6 @@ bootstrap.class = "Bootstrap"
 appnamespace = "Application"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.frontController.params.displayExceptions = 0
-resources.log.zendmonitor.writerName = "ZendMonitor"
 
 [staging : production]
 
@@ -105,8 +214,9 @@ phpSettings.display_errors = 1
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
 resources.frontController.params.displayExceptions = 1
+
 EOS;
         return $contents;
     }
-
+    
 }

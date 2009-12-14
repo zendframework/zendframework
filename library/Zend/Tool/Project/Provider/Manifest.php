@@ -57,6 +57,7 @@ class Zend_Tool_Project_Provider_Manifest implements
             'Zend_Tool_Project_Provider_Module',
         
             // application problem providers
+            'Zend_Tool_Project_Provider_Form',
             'Zend_Tool_Project_Provider_Layout',
             'Zend_Tool_Project_Provider_DbAdapter',
             'Zend_Tool_Project_Provider_DbTable',

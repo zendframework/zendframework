@@ -25,8 +25,6 @@
 require_once 'Zend/Search/Lucene/Document.php';
 
 
-if (class_exists('ZipArchive', false)) {
-
 /**
  * OpenXML document.
  *
@@ -129,5 +127,3 @@ abstract class Zend_Search_Lucene_Document_OpenXml extends Zend_Search_Lucene_Do
         return implode('/', $absolutes);
     }
 }
-
-} // end if (class_exists('ZipArchive'))

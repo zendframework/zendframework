@@ -23,8 +23,6 @@
 /** Zend_Search_Lucene_Document_OpenXml */
 require_once 'Zend/Search/Lucene/Document/OpenXml.php';
 
-if (class_exists('ZipArchive', false)) {
-
 /**
  * Docx document.
  *
@@ -50,6 +48,11 @@ class Zend_Search_Lucene_Document_Docx extends Zend_Search_Lucene_Document_OpenX
      * @throws Zend_Search_Lucene_Exception
      */
     private function __construct($fileName, $storeContent) {
+        if (!class_exists('ZipArchive', false)) {
+            require_once 'Zend/Search/Lucene/Exception.php';
+            throw new Zend_Search_Lucene_Exception('MS Office documents processing functionality requires Zip extension to be loaded');
+        }
+
         // Document data holders
         $documentBody = array();
         $coreProperties = array();
@@ -146,5 +149,3 @@ class Zend_Search_Lucene_Document_Docx extends Zend_Search_Lucene_Document_OpenX
         return new Zend_Search_Lucene_Document_Docx($fileName, $storeContent);
     }
 }
-
-} // end if (class_exists('ZipArchive'))

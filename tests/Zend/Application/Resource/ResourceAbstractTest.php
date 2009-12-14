@@ -178,6 +178,22 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
         $options = $resource->getOptions();
         $this->assertNotContains('bootstrap', array_keys($options));
     }
+
+    /**
+     * @group ZF-8520
+     */
+    public function testFirstResourceOptionShouldNotBeDropped()
+    {
+        require_once dirname(__FILE__) . '/../_files/resources/Foo.php';
+        $options = array(
+            array('someData'),
+            array('someMoreData'),
+        );
+
+        $resource = new Zend_Application_BootstrapTest_Resource_Foo($options);
+        $stored   = $resource->getOptions();
+        $this->assertSame($options, $stored);
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_ResourceAbstractTest::main') {

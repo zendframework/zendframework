@@ -380,6 +380,7 @@ abstract class Zend_Mail_Protocol_Abstract
         $this->_response = array();
         $cmd = '';
         $msg = '';
+        $errMsg = '';
 
         if (!is_array($code)) {
             $code = array($code);
@@ -389,15 +390,21 @@ abstract class Zend_Mail_Protocol_Abstract
             $this->_response[] = $result = $this->_receive($timeout);
             sscanf($result, $this->_template, $cmd, $msg);
 
-            if ($cmd === null || !in_array($cmd, $code)) {
-                /**
-                 * @see Zend_Mail_Protocol_Exception
-                 */
-                require_once 'Zend/Mail/Protocol/Exception.php';
-                throw new Zend_Mail_Protocol_Exception($result);
+            if ($errMsg !== '') {
+                $errMsg .= $msg;
+            } elseif ($cmd === null || !in_array($cmd, $code)) {
+                $errMsg =  $msg;
             }
 
         } while (strpos($msg, '-') === 0); // The '-' message prefix indicates an information string instead of a response string.
+
+        if ($errMsg !== '') {
+            /**
+             * @see Zend_Mail_Protocol_Exception
+             */
+            require_once 'Zend/Mail/Protocol/Exception.php';
+            throw new Zend_Mail_Protocol_Exception($errMsg);
+        }
 
         return $msg;
     }

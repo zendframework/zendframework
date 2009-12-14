@@ -291,8 +291,8 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
     public function testMarshalStringFromXmlRpc(Zend_XmlRpc_Generator_Abstract $generator)
     {
         Zend_XmlRpc_Value::setGenerator($generator);
-        $native = 'foo';
-        $xml = "<value><string>$native</string></value>";
+        $native = 'foo<>';
+        $xml = "<value><string>foo&lt;&gt;</string></value>";
         $val = Zend_XmlRpc_Value::getXmlRpcValue($xml,
                                     Zend_XmlRpc_Value::XML_STRING);
 
@@ -308,8 +308,8 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
     public function testMarshalStringFromDefault(Zend_XmlRpc_Generator_Abstract $generator)
     {
         Zend_XmlRpc_Value::setGenerator($generator);
-        $native = 'foo';
-        $xml = "<string>$native</string>";
+        $native = 'foo<br/>bar';
+        $xml = "<string>foo&lt;br/&gt;bar</string>";
         $val = Zend_XmlRpc_Value::getXmlRpcValue($xml,
                                     Zend_XmlRpc_Value::XML_STRING);
 
@@ -480,9 +480,10 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
     public function testMarshalStructFromXmlRpc(Zend_XmlRpc_Generator_Abstract $generator)
     {
         Zend_XmlRpc_Value::setGenerator($generator);
-        $native = array('foo' => 0);
+        $native = array('foo' => 0, 'bar' => 'foo<>bar');
         $xml = '<value><struct><member><name>foo</name><value><int>0</int>'
-             . '</value></member></struct></value>';
+             . '</value></member><member><name>bar</name><value><string>'
+             . 'foo&lt;&gt;bar</string></value></member></struct></value>';
 
         $val = Zend_XmlRpc_Value::getXmlRpcValue($xml,
                                     Zend_XmlRpc_Value::XML_STRING);
@@ -491,6 +492,28 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('struct', $val->getType());
         $this->assertSame($native, $val->getValue());
         $this->assertEquals($this->wrapXml($xml), $val->saveXml());
+    }
+
+    /**
+     * @dataProvider Zend_XmlRpc_TestProvider::provideGenerators
+     */
+    public function testMarshallingNestedStructFromXmlRpc(Zend_XmlRpc_Generator_Abstract $generator)
+    {
+        Zend_XmlRpc_Value::setGenerator($generator);
+        $native = array('foo' => array('bar' => '<br/>'));
+        $xml = '<value><struct><member><name>foo</name><value><struct><member>'
+             . '<name>bar</name><value><string>&lt;br/&gt;</string></value>'
+             . '</member></struct></value></member></struct></value>';
+
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($xml, Zend_XmlRpc_Value::XML_STRING);
+
+        $this->assertXmlRpcType('struct', $val);
+        $this->assertEquals('struct', $val->getType());
+        $this->assertSame($native, $val->getValue());
+        $this->assertSame($this->wrapXml($xml), $val->saveXml());
+
+        $val = Zend_XmlRpc_Value::getXmlRpcValue($native);
+        $this->assertSame(trim($xml), trim($val->saveXml()));
     }
 
     /**

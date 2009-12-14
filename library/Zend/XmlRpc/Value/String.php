@@ -45,18 +45,16 @@ class Zend_XmlRpc_Value_String extends Zend_XmlRpc_Value_Scalar
         $this->_type = self::XMLRPC_TYPE_STRING;
 
         // Make sure this value is string and all XML characters are encoded
-        $this->_value = $this->getGenerator()->escapeEntities($value);
+        $this->_value = (string)$value;
     }
 
     /**
      * Return the value of this object, convert the XML-RPC native string value into a PHP string
-     * Decode all encoded risky XML entities back to normal characters
      *
      * @return string
      */
     public function getValue()
     {
-        return $this->getGenerator()->decodeEntities($this->_value);
+        return (string)$this->_value;
     }
 }
-

@@ -851,7 +851,7 @@ class Zend_Search_Lucene_Interface_MultiSearcher implements Zend_Search_Lucene_I
     public function optimize()
     {
         foreach ($this->_indices as $index) {
-            $index->_optimise();
+            $index->optimise();
         }
     }
 

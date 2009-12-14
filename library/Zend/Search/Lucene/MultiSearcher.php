@@ -794,10 +794,15 @@ class Zend_Search_Lucene_Interface_MultiSearcher implements Zend_Search_Lucene_I
      * Set callback for choosing target index.
      *
      * @param callback $callback
+     * @throws Zend_Search_Lucene_Exception
      */
     public function setDocumentDistributorCallback($callback)
     {
-        if ($callback !== null  &&  !is_callable($callback))
+        if ($callback !== null  &&  !is_callable($callback)) {
+            require_once 'Zend/Search/Lucene/Exception.php';
+            throw new Zend_Search_Lucene_Exception('$callback parameter must be a valid callback.');
+        }
+
         $this->_documentDistributorCallBack = $callback;
     }
 
@@ -822,7 +827,7 @@ class Zend_Search_Lucene_Interface_MultiSearcher implements Zend_Search_Lucene_I
         if ($this->_documentDistributorCallBack !== null) {
             $index = call_user_func($this->_documentDistributorCallBack, $document, $this->_indices);
         } else {
-            $index = $this->_indices[ array_rand($this->_indices) ];
+            $index = $this->_indices[array_rand($this->_indices)];
         }
 
         $index->addDocument($document);

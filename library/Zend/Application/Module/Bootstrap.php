@@ -102,7 +102,7 @@ abstract class Zend_Application_Module_Bootstrap
      * 
      * @return string
      */
-    public function getDefaultAppNamespace()
+    public function getAppNamespace()
     {
         return $this->getModuleName();
     }

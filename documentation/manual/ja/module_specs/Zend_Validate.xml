@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19432 -->
+<!-- EN-Revision: 19577 -->
 <sect1 id="zend.validate.introduction">
 
     <title>導入</title>
@@ -101,11 +101,11 @@ if ($validator->isValid($email)) {
             最初の引数にはエラーメッセージを文字列で指定します。
             このメッセージに特定のトークンを含めると、
             バリデータがそれを実際の値に置き換えます。
-            トークン <code>%value%</code> はすべてのバリデータがサポートしており、
+            トークン <emphasis>%value%</emphasis> はすべてのバリデータがサポートしており、
             これは <methodname>isValid()</methodname> に渡した値に置き換えられます。
             その他、バリデーションクラスによっていろいろなトークンをサポートしています。
             たとえば、<classname>Zend_Validate_LessThan</classname> では
-            <code>%max%</code> というトークンをサポートしています。
+            <emphasis>%max%</emphasis> というトークンをサポートしています。
             <methodname>getMessageVariables()</methodname> メソッドは、
             そのバリデータがサポートする変数トークンの配列を返します。
         </para>
@@ -154,7 +154,7 @@ $validator->setMessages( array(
         <para>
             より柔軟な検証失敗報告をしたい場合のために、
             バリデーションクラスがサポートするメッセージトークンと同じ名前のプロパティを使用できます。
-            どのバリデータでも常に使用可能なプロパティは <code>value</code> です。
+            どのバリデータでも常に使用可能なプロパティは <property>value</property> です。
             これは、<methodname>isValid()</methodname> の引数として渡した値を返します。
             その他のプロパティについては、バリデーションクラスによって異なります。
 

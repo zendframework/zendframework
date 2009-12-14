@@ -329,7 +329,10 @@ class Zend_XmlRpc_Client
                     Zend_XmlRpc_Value::XMLRPC_TYPE_STRING,
                     Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT,
                 );
-                $params = (array)$params;
+
+                if (!is_array($params)) {
+                    $params = array($params);
+                }
                 foreach ($params as $key => $param) {
 
                     if ($param instanceof Zend_XmlRpc_Value) {

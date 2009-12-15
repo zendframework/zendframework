@@ -28,6 +28,11 @@ require_once dirname(__FILE__) . '/../TestHelper.php';
 require_once 'Zend/Translate.php';
 
 /**
+ * Zend_Translate_Plural
+ */
+require_once 'Zend/Translate/Plural.php';
+
+/**
  * @category   Zend
  * @package    Zend_Translate
  * @subpackage UnitTests
@@ -637,6 +642,30 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests getting plurals from lowered locale
+     */
+    public function testGettingPluralsUsingOwnRule()
+    {
+        $lang = new Zend_Translate(
+            Zend_Translate::AN_ARRAY,
+            array('singular' =>
+                array('plural_0 (en)',
+                    'plural_1 (en)',
+                    'plural_2 (en)',
+                    'plural_3 (en)'),
+                'plural' => ''), 'en'
+        );
+        $lang->addTranslation(array('msg1' => 'Message 1 (ru)'), 'en_US');
+        $lang->setLocale('en_US');
+
+        Zend_Translate_Plural::setPlural(array($this, 'customPlural'), 'en_US');
+        $this->assertEquals('plural_1 (en)', $lang->translate(array('singular', 'plural', 1)));
+        $this->assertEquals('plural_1 (en)', $lang->plural('singular', 'plural', 1));
+        $this->assertEquals('plural_1 (en)', $lang->translate(array('singular', 'plural', 0)));
+        $this->assertEquals('plural_1 (en)', $lang->plural('singular', 'plural', 0));
+    }
+
+    /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *
      * @param  integer $errno
@@ -649,6 +678,16 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
     public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
     {
         $this->_errorOccured = true;
+    }
+
+    /**
+     * Custom callback for testGettingPluralsUsingOwnRule
+     *
+     * @param  integer $number
+     * @return integer
+     */
+    public function customPlural($number) {
+        return 1;
     }
 }
 

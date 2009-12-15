@@ -30,7 +30,18 @@
 class Zend_Translate_Plural
 {
     /**
+     * Manual rule to use
+     *
+     * @var string
+     */
+    protected static $_plural = array();
+
+    /**
      * Returns the plural definition to use
+     *
+     * @param  integer $number Number for plural selection
+     * @param  string  $locale Locale to use
+     * @return integer Plural number to use
      */
     public static function getPlural($number, $locale)
     {
@@ -41,6 +52,16 @@ class Zend_Translate_Plural
 
         if (strlen($locale) > 3) {
             $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
+        }
+
+        if (isset(self::$_plural[$locale])) {
+            $return = call_user_func(self::$_plural[$locale], $number);
+
+            if (!is_int($return) || ($return < 0)) {
+                $return = 0;
+            }
+
+            return $return;
         }
 
         switch($locale) {
@@ -57,6 +78,7 @@ class Zend_Translate_Plural
             case 'th':
             case 'tr':
             case 'vi':
+            case 'zh':
                 return 0;
                 break;
 
@@ -110,7 +132,6 @@ class Zend_Translate_Plural
             case 'te':
             case 'tk':
             case 'ur':
-            case 'zh':
             case 'zu':
                 return ($number == 1) ? 0 : 1;
 
@@ -173,5 +194,31 @@ class Zend_Translate_Plural
             default:
                 return 0;
         }
+    }
+
+    /**
+     * Set's a new plural rule
+     *
+     * @param string $rule   Callback which acts as rule
+     * @param string $locale Locale which is used for this callback
+     * @return null
+     */
+    public static function setPlural($rule, $locale)
+    {
+        if ($locale == "pt_BR") {
+            // temporary set a locale for brasilian
+            $locale = "xbr";
+        }
+
+        if (strlen($locale) > 3) {
+            $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
+        }
+
+        if (!is_callable($rule)) {
+            require_once 'Zend/Translate/Exception.php';
+            throw new Zend_Translate_Exception('The given rule can not be called');
+        }
+
+        self::$_plural[$locale] = $rule;
     }
 }

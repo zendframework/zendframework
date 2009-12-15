@@ -500,11 +500,11 @@ abstract class Zend_Pdf_FileParser_Font_OpenType extends Zend_Pdf_FileParser_Fon
 
         try {
             $this->_jumpToTable('OS/2');
-        } catch (Zend_Pdf_Exception $exception) {
+        } catch (Zend_Pdf_Exception $e) {
             /* This table is not always present. If missing, use default values.
              */
             require_once 'Zend/Pdf/Exception.php';
-            if ($exception->getCode() == Zend_Pdf_Exception::REQUIRED_TABLE_NOT_FOUND) {
+            if ($e->getCode() == Zend_Pdf_Exception::REQUIRED_TABLE_NOT_FOUND) {
                 $this->_debugLog('No OS/2 table found. Using default values');
                 $this->fontWeight = Zend_Pdf_Font::WEIGHT_NORMAL;
                 $this->fontWidth = Zend_Pdf_Font::WIDTH_NORMAL;
@@ -525,7 +525,8 @@ abstract class Zend_Pdf_FileParser_Font_OpenType extends Zend_Pdf_FileParser_Fon
             } else {
                 /* Something else went wrong. Throw this exception higher up the chain.
                  */
-                throw $exception;
+                throw $e;
+                throw new Zend_Pdf_Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
 

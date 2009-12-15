@@ -170,7 +170,7 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
 
         } catch (Zend_Http_Client_Exception $zhce) {
             $message = 'Error in request to AWS service: ' . $zhce->getMessage();
-            throw new Zend_Service_Amazon_Ec2_Exception($message, $zhce->getCode());
+            throw new Zend_Service_Amazon_Ec2_Exception($message, $zhce->getCode(), $zhce);
         }
         $response = new Zend_Service_Amazon_Ec2_Response($httpResponse);
         $this->checkForErrors($response);

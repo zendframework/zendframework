@@ -759,7 +759,7 @@ class Zend_Pdf_Page
                 $fonts[$resourceId] = $extractedFont;
             } catch (Zend_Pdf_Exception $e) {
                 if ($e->getMessage() != 'Unsupported font type.') {
-                    throw $e;
+                    throw new Zend_Pdf_Exception($e->getMessage(), $e->getCode(), $e);
                 }
             }
         }
@@ -814,7 +814,7 @@ class Zend_Pdf_Page
                 return new Zend_Pdf_Resource_Font_Extracted($fontDictionary);
             } catch (Zend_Pdf_Exception $e) {
                 if ($e->getMessage() != 'Unsupported font type.') {
-                    throw $e;
+                    throw new Zend_Pdf_Exception($e->getMessage(), $e->getCode(), $e);
                 }
 
                 // Continue searhing font with specified name

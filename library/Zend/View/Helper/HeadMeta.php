@@ -100,7 +100,9 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
                 return 'http-equiv';
             default:
                 require_once 'Zend/View/Exception.php';
-                throw new Zend_View_Exception(sprintf('Invalid type "%s" passed to _normalizeType', $type));
+                $e = new Zend_View_Exception(sprintf('Invalid type "%s" passed to _normalizeType', $type));
+                $e->setView($this->view);
+                throw $e;
         }
     }
 
@@ -138,7 +140,9 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
 
             if (2 > $argc) {
                 require_once 'Zend/View/Exception.php';
-                throw new Zend_View_Exception('Too few arguments provided; requires key value, and content');
+                $e = new Zend_View_Exception('Too few arguments provided; requires key value, and content');
+                $e->setView($this->view);
+                throw $e;
             }
 
             if (3 > $argc) {
@@ -192,7 +196,9 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
     {
         if (!$this->_isValid($value)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('Invalid value passed to append; please use appendMeta()');
+            $e = new Zend_View_Exception('Invalid value passed to append; please use appendMeta()');
+            $e->setView($this->view);
+            throw $e;
         }
 
         return $this->getContainer()->append($value);
@@ -210,7 +216,9 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
     {
         if (!$this->_isValid($value)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('Invalid value passed to offsetSet; please use offsetSetMeta()');
+            $e =  new Zend_View_Exception('Invalid value passed to offsetSet; please use offsetSetMeta()');
+            $e->setView($this->view);
+            throw $e;
         }
 
         return $this->getContainer()->offsetSet($index, $value);
@@ -227,7 +235,9 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
     {
         if (!in_array($index, $this->getContainer()->getKeys())) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('Invalid index passed to offsetUnset.');
+            $e = new Zend_View_Exception('Invalid index passed to offsetUnset()');
+            $e->setView($this->view);
+            throw $e;
         }
 
         return $this->getContainer()->offsetUnset($index);
@@ -244,7 +254,9 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
     {
         if (!$this->_isValid($value)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('Invalid value passed to prepend; please use prependMeta()');
+            $e = new Zend_View_Exception('Invalid value passed to prepend; please use prependMeta()');
+            $e->setView($this->view);
+            throw $e;
         }
 
         return $this->getContainer()->prepend($value);
@@ -261,7 +273,9 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
     {
         if (!$this->_isValid($value)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('Invalid value passed to set; please use setMeta()');
+            $e = new Zend_View_Exception('Invalid value passed to set; please use setMeta()');
+            $e->setView($this->view);
+            throw $e;
         }
 
         $container = $this->getContainer();
@@ -287,7 +301,9 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
     {
         if (!in_array($item->type, $this->_typeKeys)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception(sprintf('Invalid type "%s" provided for meta', $item->type));
+            $e = new Zend_View_Exception(sprintf('Invalid type "%s" provided for meta', $item->type));
+            $e->setView($this->view);
+            throw $e;
         }
         $type = $item->type;
 

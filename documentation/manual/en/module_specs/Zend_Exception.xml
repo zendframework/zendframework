@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.exception.using">
-
     <title>Using Exceptions</title>
 
     <para>
@@ -11,14 +10,16 @@
 
     <example id="zend.exception.using.example">
         <title>Catching an Exception</title>
+
         <para>
             The following code listing demonstrates how to catch an exception thrown in a Zend
             Framework class:
         </para>
+
         <programlisting language="php"><![CDATA[
 try {
     // Calling Zend_Loader::loadClass() with a non-existant class will cause
-    // an exception to be thrown in Zend_Loader
+    // an exception to be thrown in Zend_Loader:
     Zend_Loader::loadClass('nonexistantclass');
 } catch (Zend_Exception $e) {
     echo "Caught exception: " . get_class($e) . "\n";
@@ -27,6 +28,7 @@ try {
 }
 ]]></programlisting>
     </example>
+
     <para>
         <classname>Zend_Exception</classname> can be used as a catch-all exception class in a
         catch block to trap all exceptions thrown by Zend Framework classes. This can
@@ -37,9 +39,8 @@ try {
         The documentation for each Zend Framework
         component and class will contain specific information on which methods
         throw exceptions, the circumstances that cause an exception to be thrown,
-        and the class of all exceptions that may be thrown.
+        and the various exception types that may be thrown.
     </para>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

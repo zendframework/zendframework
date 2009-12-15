@@ -416,7 +416,7 @@ class Zend_Search_Lucene_Index_Writer
             if (strpos($e->getMessage(), 'is not readable') !== false) {
                 $genFile = $this->_directory->createFile('segments.gen');
             } else {
-                throw $e;
+                throw new Zend_Search_Lucene_Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
 
@@ -603,7 +603,8 @@ class Zend_Search_Lucene_Index_Writer
             Zend_Search_Lucene_LockManager::releaseWriteLock($this->_directory);
 
             // Throw the exception
-            throw $e;
+            require_once 'Zend/Search/Lucene/Exception.php';
+            throw new Zend_Search_Lucene_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
         // Write generation (second copy)
@@ -716,7 +717,7 @@ class Zend_Search_Lucene_Index_Writer
                     if (strpos($e->getMessage(), 'Can\'t delete file') === false) {
                         // That's not "file is under processing or already deleted" exception
                         // Pass it through
-                        throw $e;
+                        throw new Zend_Search_Lucene_Exception($e->getMessage(), $e->getCode(), $e);
                     }
                 }
             }

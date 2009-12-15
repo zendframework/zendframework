@@ -314,7 +314,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
                     $this->getLoader()->load($className);
                 } catch (Exception $e) {
                     require_once 'Zend/Amf/Server/Exception.php';
-                    throw new Zend_Amf_Server_Exception('Class "' . $className . '" does not exist: '.$e->getMessage());
+                    throw new Zend_Amf_Server_Exception('Class "' . $className . '" does not exist: '.$e->getMessage(), 0, $e);
                 }
                 // Add the new loaded class to the server.
                 $this->setClass($className, $source);
@@ -350,7 +350,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
                     $object = $info->getDeclaringClass()->newInstance();
                 } catch (Exception $e) {
                     require_once 'Zend/Amf/Server/Exception.php';
-                    throw new Zend_Amf_Server_Exception('Error instantiating class ' . $class . ' to invoke method ' . $info->getName() . ': '.$e->getMessage(), 621);
+                    throw new Zend_Amf_Server_Exception('Error instantiating class ' . $class . ' to invoke method ' . $info->getName() . ': '.$e->getMessage(), 621, $e);
                 }
                 $this->_checkAcl($object, $info->getName());
                 $return = $info->invokeArgs($object, $params);
@@ -628,7 +628,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
         } catch (Exception $e) {
             // Handle any errors in the serialization and service  calls.
             require_once 'Zend/Amf/Server/Exception.php';
-            throw new Zend_Amf_Server_Exception('Handle error: ' . $e->getMessage() . ' ' . $e->getLine());
+            throw new Zend_Amf_Server_Exception('Handle error: ' . $e->getMessage() . ' ' . $e->getLine(), 0, $e);
         }
 
         // Return the Amf serialized output string

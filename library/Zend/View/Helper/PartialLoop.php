@@ -71,7 +71,9 @@ class Zend_View_Helper_PartialLoop extends Zend_View_Helper_Partial
             && (is_object($model) && !method_exists($model, 'toArray'))
         ) {
             require_once 'Zend/View/Helper/Partial/Exception.php';
-            throw new Zend_View_Helper_Partial_Exception('PartialLoop helper requires iterable data');
+            $e = new Zend_View_Helper_Partial_Exception('PartialLoop helper requires iterable data');
+            $e->setView($this->view);
+            throw $e;
         }
 
         if (is_object($model)

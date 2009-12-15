@@ -51,7 +51,9 @@ class Zend_View_Helper_HtmlList extends Zend_View_Helper_FormElement
     {
         if (!is_array($items)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('First param must be an array', $this);
+            $e = new Zend_View_Exception('First param must be an array');
+            $e->setView($this->view);
+            throw $e;
         }
 
         $list = '';

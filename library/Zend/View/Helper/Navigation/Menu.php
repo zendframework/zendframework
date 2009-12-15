@@ -587,8 +587,11 @@ class Zend_View_Helper_Navigation_Menu
 
         if (empty($partial)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception(
-                    'Unable to render menu: No partial view script provided');
+            $e = new Zend_View_Exception(
+                'Unable to render menu: No partial view script provided'
+            );
+            $e->setView($this->view);
+            throw $e;
         }
 
         $model = array(
@@ -598,10 +601,13 @@ class Zend_View_Helper_Navigation_Menu
         if (is_array($partial)) {
             if (count($partial) != 2) {
                 require_once 'Zend/View/Exception.php';
-                throw new Zend_View_Exception(
-                        'Unable to render menu: A view partial supplied as ' .
-                        'an array must contain two values: partial view ' .
-                        'script and module where script can be found');
+                $e = new Zend_View_Exception(
+                    'Unable to render menu: A view partial supplied as ' 
+                    .  'an array must contain two values: partial view ' 
+                    .  'script and module where script can be found'
+                );
+                $e->setView($this->view);
+                throw $e;
             }
 
             return $this->view->partial($partial[0], $partial[1], $model);

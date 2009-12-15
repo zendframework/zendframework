@@ -222,10 +222,10 @@ final class Zend_Amf_Parse_TypeLoader
             }
             return $resource;
         } catch(Zend_Amf_Exception $e) {
-            throw $e;
+            throw new Zend_Amf_Exception($e->getMessage(), $e->getCode(), $e);
         } catch(Exception $e) {
             require_once 'Zend/Amf/Exception.php';
-            throw new Zend_Amf_Exception('Can not serialize resource type: '. get_resource_type($resource));
+            throw new Zend_Amf_Exception('Can not serialize resource type: '. get_resource_type($resource), 0, $e);
         }
     }
 }

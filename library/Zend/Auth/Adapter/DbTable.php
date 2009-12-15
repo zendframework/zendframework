@@ -415,7 +415,7 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
             require_once 'Zend/Auth/Adapter/Exception.php';
             throw new Zend_Auth_Adapter_Exception('The supplied parameters to Zend_Auth_Adapter_DbTable failed to '
                                                 . 'produce a valid sql statement, please check table and column names '
-                                                . 'for validity.');
+                                                . 'for validity.', 0, $e);
         }
         return $resultIdentities;
     }

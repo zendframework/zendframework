@@ -213,7 +213,8 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
                             throw new Zend_Feed_Exception(
                                 'Could not load date due to unrecognised'
                                 .' format (should follow RFC 822 or 2822):'
-                                . $e->getMessage()
+                                . $e->getMessage(),
+                                0, $e
                             );
                         }
                     }

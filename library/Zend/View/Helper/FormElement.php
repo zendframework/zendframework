@@ -66,8 +66,10 @@ abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
         } elseif ($translator instanceof Zend_Translate) {
             $this->_translator = $translator->getAdapter();
         } else {
-            require_once 'Zend/Form/Exception.php';
-            throw new Zend_Form_Exception('Invalid translator specified');
+            require_once 'Zend/View/Exception.php';
+            $e = new Zend_View_Exception('Invalid translator specified');
+            $e->setView($this->view);
+            throw $e;
         }
          return $this;
     }

@@ -38,10 +38,10 @@ class Zend_View_Exception extends Zend_Exception
 {
     protected $view = null;
 
-    public function __construct($message, Zend_View_Interface $view = null)
+    public function setView(Zend_View_Interface $view = null)
     {
         $this->view = $view;
-        parent::__construct($message);
+        return $this;
     }
 
     public function getView()

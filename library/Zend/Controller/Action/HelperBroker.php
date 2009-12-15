@@ -366,7 +366,7 @@ class Zend_Controller_Action_HelperBroker
             $class = self::getPluginLoader()->load($name);
         } catch (Zend_Loader_PluginLoader_Exception $e) {
             require_once 'Zend/Controller/Action/Exception.php';
-            throw new Zend_Controller_Action_Exception('Action Helper by name ' . $name . ' not found');
+            throw new Zend_Controller_Action_Exception('Action Helper by name ' . $name . ' not found', 0, $e);
         }
 
         $helper = new $class();

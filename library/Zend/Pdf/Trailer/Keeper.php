@@ -137,7 +137,7 @@ class Zend_Pdf_Trailer_Keeper extends Zend_Pdf_Trailer
                 return 0;
             }
 
-            throw $e;
+            throw new Zend_Pdf_Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

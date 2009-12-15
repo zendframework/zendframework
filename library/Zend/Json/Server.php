@@ -529,7 +529,7 @@ class Zend_Json_Server extends Zend_Server_Abstract
         try {
             $result = $this->_dispatch($invocable, $params);
         } catch (Exception $e) {
-            return $this->fault($e->getMessage(), $e->getCode());
+            return $this->fault($e->getMessage(), $e->getCode(), $e);
         }
 
         $this->getResponse()->setResult($result);

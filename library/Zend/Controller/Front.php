@@ -287,9 +287,9 @@ class Zend_Controller_Front
     {
         try{
             $dir = new DirectoryIterator($path);
-        }catch(Exception $e){
+        } catch(Exception $e) {
             require_once 'Zend/Controller/Exception.php';
-            throw new Zend_Controller_Exception("Directory $path not readable");
+            throw new Zend_Controller_Exception("Directory $path not readable", 0, $e);
         }
         foreach ($dir as $file) {
             if ($file->isDot() || !$file->isDir()) {
@@ -946,7 +946,8 @@ class Zend_Controller_Front
                     $dispatcher->dispatch($this->_request, $this->_response);
                 } catch (Exception $e) {
                     if ($this->throwExceptions()) {
-                        throw $e;
+                        require_once 'Zend/Controller/Exception.php';
+                        throw new Zend_Controller_Exception($e->getMessage(), $e->getCode(), $e);
                     }
                     $this->_response->setException($e);
                 }
@@ -958,7 +959,8 @@ class Zend_Controller_Front
             } while (!$this->_request->isDispatched());
         } catch (Exception $e) {
             if ($this->throwExceptions()) {
-                throw $e;
+                require_once 'Zend/Controller/Exception.php';
+                throw new Zend_Controller_Exception($e->getMessage(), $e->getCode(), $e);
             }
 
             $this->_response->setException($e);
@@ -971,7 +973,8 @@ class Zend_Controller_Front
             $this->_plugins->dispatchLoopShutdown();
         } catch (Exception $e) {
             if ($this->throwExceptions()) {
-                throw $e;
+                require_once 'Zend/Controller/Exception.php';
+                throw new Zend_Controller_Exception($e->getMessage(), $e->getCode(), $e);
             }
 
             $this->_response->setException($e);

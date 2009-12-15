@@ -175,10 +175,12 @@ class Zend_View_Helper_Navigation
         if (!$helper instanceof Zend_View_Helper_Navigation_Helper) {
             if ($strict) {
                 require_once 'Zend/View/Exception.php';
-                throw new Zend_View_Exception(sprintf(
+                $e = new Zend_View_Exception(sprintf(
                         'Proxy helper "%s" is not an instance of ' .
                         'Zend_View_Helper_Navigation_Helper',
                         get_class($helper)));
+                $e->setView($this->view);
+                throw $e;
             }
 
             return null;

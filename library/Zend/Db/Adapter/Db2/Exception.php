@@ -38,8 +38,8 @@ class Zend_Db_Adapter_Db2_Exception extends Zend_Db_Adapter_Exception
    protected $code = '00000';
    protected $message = 'unknown exception';
 
-   function __construct($msg = 'unknown exception', $state = '00000') {
-       $this->message = $msg;
-       $this->code = $state;
+   function __construct($message = 'unknown exception', $code = '00000', Exception $e = null) 
+   {
+       parent::__construct($message, $code, $e);
    }
 }

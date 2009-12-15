@@ -36,23 +36,22 @@ class Zend_Db_Adapter_Exception extends Zend_Db_Exception
 {
     protected $_chainedException = null;
 
-    public function __construct($message = null, Exception $e = null)
+    public function __construct($message = '', $code = 0, Exception $e = null)
     {
-        if ($e) {
-            $this->_chainedException = $e;
-            $this->code = $e->getCode();
+        if ($e && (0 === $code)) {
+            $code = $e->getCode();
         }
-        parent::__construct($message);
+        parent::__construct($message, $code, $e);
     }
 
     public function hasChainedException()
     {
-        return ($this->_chainedException!==null);
+        return ($this->_previous !== null);
     }
 
     public function getChainedException()
     {
-        return $this->_chainedException;
+        return $this->getPrevious();
     }
 
 }

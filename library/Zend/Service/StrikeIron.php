@@ -81,7 +81,7 @@ class Zend_Service_StrikeIron
              * @see Zend_Service_StrikeIron_Exception
              */
             require_once 'Zend/Service/StrikeIron/Exception.php';
-            throw new Zend_Service_StrikeIron_Exception($msg, $e->getCode());
+            throw new Zend_Service_StrikeIron_Exception($msg, $e->getCode(), $e);
         }
 
         // instantiate and return the service

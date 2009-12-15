@@ -842,7 +842,7 @@ class Zend_Http_Client
                 } catch (Zend_Exception $e) {
                     /** @see Zend_Http_Client_Exception */
                     require_once 'Zend/Http/Client/Exception.php';
-                    throw new Zend_Http_Client_Exception("Unable to load adapter '$adapter': {$e->getMessage()}");
+                    throw new Zend_Http_Client_Exception("Unable to load adapter '$adapter': {$e->getMessage()}", 0, $e);
                 }
             }
 

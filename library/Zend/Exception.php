@@ -16,16 +16,69 @@
  * @package    Zend
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
+if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+    /**
+     * @category   Zend
+     * @package    Zend
+     * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+     * @license    http://framework.zend.com/license/new-bsd     New BSD License
+     */
+    class Zend_Exception extends Exception
+    {
+        /**
+         * @var null|Exception
+         */
+        private $_previous = null;
 
-/**
- * @category   Zend
- * @package    Zend
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Exception extends Exception
-{}
+        /**
+         * Construct the exception
+         *
+         * @param  string $msg
+         * @param  int $code
+         * @param  Exception $previous
+         * @return void
+         */
+        public function __construct($msg = '', $code = 0, Exception $previous = null)
+        {
+            parent::__construct($msg, $code);
+            $this->_previous = $previous;
+        }
 
+        /**
+         * Returns previous Exception
+         *
+         * @return Exception|null
+         */
+        final public function getPrevious()
+        {
+            return $this->_previous;
+        }
+
+        /**
+         * String representation of the exception
+         *
+         * @return string
+         */
+        public function __toString()
+        {
+            if (null !== ($e = $this->getPrevious())) {
+                return $e->__toString() 
+                    . "\n\nNext " 
+                    . parent::__toString();
+            }
+            return parent::__toString();
+        }
+    }
+} else {
+    /**
+     * @category   Zend
+     * @package    Zend
+     * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+     * @license    http://framework.zend.com/license/new-bsd     New BSD License
+     */
+    class Zend_Exception extends Exception
+    {
+    }
+}

@@ -200,7 +200,7 @@ abstract class Zend_Measure_Abstract
             $value = Zend_Locale_Format::getNumber($value, array('locale' => $locale));
         } catch(Exception $e) {
             require_once 'Zend/Measure/Exception.php';
-            throw new Zend_Measure_Exception($e->getMessage());
+            throw new Zend_Measure_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
         $this->_value = $value;

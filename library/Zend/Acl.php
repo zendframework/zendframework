@@ -309,7 +309,7 @@ class Zend_Acl
                 }
                 $resourceParent = $this->get($resourceParentId);
             } catch (Zend_Acl_Exception $e) {
-                throw new Zend_Acl_Exception("Parent Resource id '$resourceParentId' does not exist");
+                throw new Zend_Acl_Exception("Parent Resource id '$resourceParentId' does not exist", 0, $e);
             }
             $this->_resources[$resourceParentId]['children'][$resourceId] = $resource;
         }
@@ -407,7 +407,7 @@ class Zend_Acl
             $resourceId     = $this->get($resource)->getResourceId();
             $inheritId = $this->get($inherit)->getResourceId();
         } catch (Zend_Acl_Exception $e) {
-            throw $e;
+            throw new Zend_Acl_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
         if (null !== $this->_resources[$resourceId]['parent']) {
@@ -445,7 +445,7 @@ class Zend_Acl
         try {
             $resourceId = $this->get($resource)->getResourceId();
         } catch (Zend_Acl_Exception $e) {
-            throw $e;
+            throw new Zend_Acl_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
         $resourcesRemoved = array($resourceId);

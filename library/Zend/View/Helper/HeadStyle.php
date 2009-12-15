@@ -147,7 +147,9 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
 
             if (1 > $argc) {
                 require_once 'Zend/View/Exception.php';
-                throw new Zend_View_Exception(sprintf('Method "%s" requires minimally content for the stylesheet', $method));
+                $e = new Zend_View_Exception(sprintf('Method "%s" requires minimally content for the stylesheet', $method));
+                $e->setView($this->view);
+                throw $e;
             }
 
             $content = $args[0];
@@ -199,7 +201,9 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     {
         if (!$this->_isValid($value)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('Invalid value passed to append; please use appendStyle()');
+            $e = new Zend_View_Exception('Invalid value passed to append; please use appendStyle()');
+            $e->setView($this->view);
+            throw $e;
         }
 
         return $this->getContainer()->append($value);
@@ -216,7 +220,9 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     {
         if (!$this->_isValid($value)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('Invalid value passed to offsetSet; please use offsetSetStyle()');
+            $e = new Zend_View_Exception('Invalid value passed to offsetSet; please use offsetSetStyle()');
+            $e->setView($this->view);
+            throw $e;
         }
 
         return $this->getContainer()->offsetSet($index, $value);
@@ -232,7 +238,9 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     {
         if (!$this->_isValid($value)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('Invalid value passed to prepend; please use prependStyle()');
+            $e = new Zend_View_Exception('Invalid value passed to prepend; please use prependStyle()');
+            $e->setView($this->view);
+            throw $e;
         }
 
         return $this->getContainer()->prepend($value);
@@ -248,7 +256,9 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     {
         if (!$this->_isValid($value)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('Invalid value passed to set; please use setStyle()');
+            $e = new Zend_View_Exception('Invalid value passed to set; please use setStyle()');
+            $e->setView($this->view);
+            throw $e;
         }
 
         return $this->getContainer()->set($value);
@@ -265,7 +275,9 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     {
         if ($this->_captureLock) {
             require_once 'Zend/View/Helper/Placeholder/Container/Exception.php';
-            throw new Zend_View_Helper_Placeholder_Container_Exception('Cannot nest headStyle captures');
+            $e = new Zend_View_Helper_Placeholder_Container_Exception('Cannot nest headStyle captures');
+            $e->setView($this->view);
+            throw $e;
         }
 
         $this->_captureLock        = true;

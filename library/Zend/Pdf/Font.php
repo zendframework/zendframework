@@ -709,7 +709,7 @@ abstract class Zend_Pdf_Font
                 $cidFont = new Zend_Pdf_Resource_Font_CidFont_TrueType($fontParser, $embeddingOptions);
                 $font    = new Zend_Pdf_Resource_Font_Type0($cidFont);
             }
-        } catch (Zend_Pdf_Exception $exception) {
+        } catch (Zend_Pdf_Exception $e) {
             /* The following exception codes suggest that this isn't really a
              * TrueType font. If we caught such an exception, simply return
              * null. For all other cases, it probably is a TrueType font but has
@@ -717,14 +717,14 @@ abstract class Zend_Pdf_Font
              */
             $fontParser = null;
             require_once 'Zend/Pdf/Exception.php';
-            switch ($exception->getCode()) {
+            switch ($e->getCode()) {
                 case Zend_Pdf_Exception::WRONG_FONT_TYPE:    // break intentionally omitted
                 case Zend_Pdf_Exception::BAD_TABLE_COUNT:    // break intentionally omitted
                 case Zend_Pdf_Exception::BAD_MAGIC_NUMBER:
                     return null;
 
                 default:
-                    throw $exception;
+                    throw new Zend_Pdf_Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
         return $font;

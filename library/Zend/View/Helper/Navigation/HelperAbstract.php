@@ -376,10 +376,13 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
             $this->_role = $role;
         } else {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception(sprintf(
-                    '$role must be a string, null, or an instance of ' .
-                            'Zend_Acl_Role_Interface; %s given',
-                    gettype($role)));
+            $e = new Zend_View_Exception(sprintf(
+                '$role must be a string, null, or an instance of ' 
+                .  'Zend_Acl_Role_Interface; %s given',
+                gettype($role)
+            ));
+            $e->setView($this->view);
+            throw $e;
         }
 
         return $this;
@@ -845,7 +848,8 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
         } else {
             require_once 'Zend/View/Exception.php';
             throw new Zend_View_Exception(
-                    '$role must be null|string|Zend_Acl_Role_Interface');
+                '$role must be null|string|Zend_Acl_Role_Interface'
+            );
         }
     }
 }

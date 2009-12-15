@@ -228,7 +228,9 @@ abstract class Zend_View_Helper_Placeholder_Container_Standalone extends Zend_Vi
         }
 
         require_once 'Zend/View/Exception.php';
-        throw new Zend_View_Exception('Method "' . $method . '" does not exist');
+        $e = new Zend_View_Exception('Method "' . $method . '" does not exist');
+        $e->setView($this->view);
+        throw $e;
     }
 
     /**

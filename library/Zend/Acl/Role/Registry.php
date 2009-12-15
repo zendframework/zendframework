@@ -91,7 +91,7 @@ class Zend_Acl_Role_Registry
                     }
                     $roleParent = $this->get($roleParentId);
                 } catch (Zend_Acl_Role_Registry_Exception $e) {
-                    throw new Zend_Acl_Role_Registry_Exception("Parent Role id '$roleParentId' does not exist");
+                    throw new Zend_Acl_Role_Registry_Exception("Parent Role id '$roleParentId' does not exist", 0, $e);
                 }
                 $roleParents[$roleParentId] = $roleParent;
                 $this->_roles[$roleParentId]['children'][$roleId] = $role;
@@ -200,7 +200,7 @@ class Zend_Acl_Role_Registry
             $roleId     = $this->get($role)->getRoleId();
             $inheritId = $this->get($inherit)->getRoleId();
         } catch (Zend_Acl_Role_Registry_Exception $e) {
-            throw $e;
+            throw new Zend_Acl_Role_Registry_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
         $inherits = isset($this->_roles[$roleId]['parents'][$inheritId]);
@@ -236,7 +236,7 @@ class Zend_Acl_Role_Registry
         try {
             $roleId = $this->get($role)->getRoleId();
         } catch (Zend_Acl_Role_Registry_Exception $e) {
-            throw $e;
+            throw new Zend_Acl_Role_Registry_Exception($e->getMessage(), $e->getCode(), $e);
         }
 
         foreach ($this->_roles[$roleId]['children'] as $childId => $child) {

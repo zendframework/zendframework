@@ -354,7 +354,7 @@ class Zend_Service_SlideShare
             $response = $client->request('POST');
         } catch(Zend_Http_Client_Exception $e) {
             require_once 'Zend/Service/SlideShare/Exception.php';
-            throw new Zend_Service_SlideShare_Exception("Service Request Failed: {$e->getMessage()}");
+            throw new Zend_Service_SlideShare_Exception("Service Request Failed: {$e->getMessage()}", 0, $e);
         }
 
         $sxe = simplexml_load_string($response->getBody());
@@ -406,7 +406,7 @@ class Zend_Service_SlideShare
                 $response = $client->request('POST');
             } catch(Zend_Http_Client_Exception $e) {
                 require_once 'Zend/Service/SlideShare/Exception.php';
-                throw new Zend_Service_SlideShare_Exception("Service Request Failed: {$e->getMessage()}");
+                throw new Zend_Service_SlideShare_Exception("Service Request Failed: {$e->getMessage()}", 0, $e);
             }
 
             $sxe = simplexml_load_string($response->getBody());
@@ -544,7 +544,7 @@ class Zend_Service_SlideShare
                 $response = $client->request('POST');
             } catch(Zend_Http_Client_Exception $e) {
                 require_once 'Zend/Service/SlideShare/Exception.php';
-                throw new Zend_Service_SlideShare_Exception("Service Request Failed: {$e->getMessage()}");
+                throw new Zend_Service_SlideShare_Exception("Service Request Failed: {$e->getMessage()}", 0, $e);
             }
 
             $sxe = simplexml_load_string($response->getBody());

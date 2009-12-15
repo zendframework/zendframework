@@ -391,7 +391,7 @@ abstract class Zend_Db_Table_Rowset_Abstract implements SeekableIterator, Counta
             $row = $this->current();
         } catch (Zend_Db_Table_Rowset_Exception $e) {
             require_once 'Zend/Db/Table/Rowset/Exception.php';
-            throw new Zend_Db_Table_Rowset_Exception('No row could be found at position ' . (int) $position);
+            throw new Zend_Db_Table_Rowset_Exception('No row could be found at position ' . (int) $position, 0, $e);
         }
         if ($seek == false) {
             $this->seek($key);

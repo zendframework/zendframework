@@ -276,7 +276,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
                     // Compound file is not found or is not readable
                     $this->_isCompound = false;
                 } else {
-                    throw $e;
+                    throw new Zend_Search_Lucene_Exception($e->getMessage(), $e->getCode(), $e);
                 }
             }
         }
@@ -401,7 +401,7 @@ class Zend_Search_Lucene_Index_SegmentInfo implements Zend_Search_Lucene_Index_T
             }
         } catch(Zend_Search_Lucene_Exception $e) {
             if (strpos($e->getMessage(), 'is not readable') === false) {
-                throw $e;
+                throw new Zend_Search_Lucene_Exception($e->getMessage(), $e->getCode(), $e);
             }
             // There is no deletion file
             $this->_delGen = -1;

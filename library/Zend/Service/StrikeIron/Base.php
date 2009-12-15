@@ -103,7 +103,7 @@ class Zend_Service_StrikeIron_Base
              * @see Zend_Service_StrikeIron_Exception
              */
             require_once 'Zend/Service/StrikeIron/Exception.php';
-            throw new Zend_Service_StrikeIron_Exception($message, $e->getCode());
+            throw new Zend_Service_StrikeIron_Exception($message, $e->getCode(), $e);
         }
 
         // transform/decorate the result and return it

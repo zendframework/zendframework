@@ -167,7 +167,9 @@ class Zend_View_Helper_Placeholder_Registry
         $reflection = new ReflectionClass($name);
         if (!$reflection->isSubclassOf(new ReflectionClass('Zend_View_Helper_Placeholder_Container_Abstract'))) {
             require_once 'Zend/View/Helper/Placeholder/Registry/Exception.php';
-            throw new Zend_View_Helper_Placeholder_Registry_Exception('Invalid Container class specified');
+            $e = new Zend_View_Helper_Placeholder_Registry_Exception('Invalid Container class specified');
+            $e->setView($this->view);
+            throw $e;
         }
 
         $this->_containerClass = $name;

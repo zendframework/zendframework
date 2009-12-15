@@ -96,7 +96,9 @@ class Zend_View_Helper_PaginationControl
                  */
                 require_once 'Zend/View/Exception.php';
 
-                throw new Zend_View_Exception('No paginator instance provided or incorrect type');
+                $e = new Zend_View_Exception('No paginator instance provided or incorrect type');
+                $e->setView($this->view);
+                throw $e;
             }
         }
 
@@ -106,8 +108,9 @@ class Zend_View_Helper_PaginationControl
                  * @see Zend_View_Exception
                  */
                 require_once 'Zend/View/Exception.php';
-
-                throw new Zend_View_Exception('No view partial provided and no default set');
+                $e = new Zend_View_Exception('No view partial provided and no default set');
+                $e->setView($this->view);
+                throw $e;
             }
 
             $partial = self::$_defaultViewPartial;
@@ -125,8 +128,9 @@ class Zend_View_Helper_PaginationControl
                  * @see Zend_View_Exception
                  */
                 require_once 'Zend/View/Exception.php';
-
-                throw new Zend_View_Exception('A view partial supplied as an array must contain two values: the filename and its module');
+                $e = new Zend_View_Exception('A view partial supplied as an array must contain two values: the filename and its module');
+                $e->setView($this->view);
+                throw $e;
             }
 
             if ($partial[1] !== null) {

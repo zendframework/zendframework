@@ -66,7 +66,9 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
         $modules = $front->getControllerDirectory();
         if (empty($modules)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('Action helper depends on valid front controller instance');
+            $e = new Zend_View_Exception('Action helper depends on valid front controller instance');
+            $e->setView($this->view);
+            throw $e;
         }
 
         $request  = $front->getRequest();
@@ -74,7 +76,9 @@ class Zend_View_Helper_Action extends Zend_View_Helper_Abstract
 
         if (empty($request) || empty($response)) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('Action view helper requires both a registered request and response object in the front controller instance');
+            $e = new Zend_View_Exception('Action view helper requires both a registered request and response object in the front controller instance');
+            $e->setView($this->view);
+            throw $e;
         }
 
         $this->request       = clone $request;

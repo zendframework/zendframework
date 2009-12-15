@@ -165,7 +165,7 @@ abstract class Zend_Translate_Adapter {
             $locale    = Zend_Locale::findLocale($locale);
         } catch (Zend_Locale_Exception $e) {
             require_once 'Zend/Translate/Exception.php';
-            throw new Zend_Translate_Exception("The given Language '{$locale}' does not exist");
+            throw new Zend_Translate_Exception("The given Language '{$locale}' does not exist", 0, $e);
         }
 
         $options  = $options + $this->_options;
@@ -325,7 +325,7 @@ abstract class Zend_Translate_Adapter {
             $locale = Zend_Locale::findLocale($locale);
         } catch (Zend_Locale_Exception $e) {
             require_once 'Zend/Translate/Exception.php';
-            throw new Zend_Translate_Exception("The given Language ({$locale}) does not exist");
+            throw new Zend_Translate_Exception("The given Language ({$locale}) does not exist", 0, $e);
         }
 
         if (!isset($this->_translate[$locale])) {
@@ -464,7 +464,7 @@ abstract class Zend_Translate_Adapter {
             $locale    = Zend_Locale::findLocale($locale);
         } catch (Zend_Locale_Exception $e) {
             require_once 'Zend/Translate/Exception.php';
-            throw new Zend_Translate_Exception("The given Language '{$locale}' does not exist");
+            throw new Zend_Translate_Exception("The given Language '{$locale}' does not exist", 0, $e);
         }
 
         if ($options['clear'] || !isset($this->_translate[$locale])) {

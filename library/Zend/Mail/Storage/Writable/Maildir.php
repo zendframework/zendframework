@@ -873,7 +873,7 @@ class Zend_Mail_Storage_Writable_Maildir extends    Zend_Mail_Storage_Folder_Mai
             try {
                 $quota = $this->getQuota(true);
             } catch (Zend_Mail_Storage_Exception $e) {
-                throw new Zend_Mail_Storage_Exception('no quota defintion found');
+                throw new Zend_Mail_Storage_Exception('no quota definition found', 0, $e);
             }
         }
 

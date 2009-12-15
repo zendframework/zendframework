@@ -91,7 +91,9 @@ class Zend_View_Helper_HeadTitle extends Zend_View_Helper_Placeholder_Container_
             $this->_translator = $translate->getAdapter();
         } else {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception("You must set an instance of Zend_Translate or Zend_Translate_Adapter");
+            $e = new Zend_View_Exception("You must set an instance of Zend_Translate or Zend_Translate_Adapter");
+            $e->setView($this->view);
+            throw $e;
         }
         return $this;
     }

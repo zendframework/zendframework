@@ -151,7 +151,7 @@ class Zend_Amf_Request
             $data = $this->_deserializer->readTypeMarker();
         } catch (Exception $e) {
             require_once 'Zend/Amf/Exception.php';
-            throw new Zend_Amf_Exception('Unable to parse ' . $name . ' header data: ' . $e->getMessage() . ' '. $e->getLine());
+            throw new Zend_Amf_Exception('Unable to parse ' . $name . ' header data: ' . $e->getMessage() . ' '. $e->getLine(), 0, $e);
         }
 
         $header = new Zend_Amf_Value_MessageHeader($name, $mustRead, $data, $length);
@@ -173,7 +173,7 @@ class Zend_Amf_Request
             $data = $this->_deserializer->readTypeMarker();
         } catch (Exception $e) {
             require_once 'Zend/Amf/Exception.php';
-            throw new Zend_Amf_Exception('Unable to parse ' . $targetURI . ' body data ' . $e->getMessage());
+            throw new Zend_Amf_Exception('Unable to parse ' . $targetURI . ' body data ' . $e->getMessage(), 0, $e);
         }
 
         // Check for AMF3 objectEncoding

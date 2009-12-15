@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.exception.previous">
+    <title>Previous Exceptions</title>
+
+    <para>
+        Since Zend Framework 1.10, <classname>Zend_Exception</classname> implements the PHP 5.3
+        support for previous exceptions. Simply put, when in a <methodname>catch</methodname>
+        block, you can throw a new exception that references the original exception, which helps
+        provide additional context when debugging. By providing this support in Zend Framework, your
+        code may now be forwards compatible with PHP 5.3.
+    </para>
+
+    <para>
+        Previous exceptions are indicated as the third argument to an exception constructor.
+    </para>
+
+    <example id="zend.exception.previous.example">
+        <title>Previous exceptions</title>
+
+        <programlisting language="php"><![CDATA[
+try {
+    $db->query($sql);
+} catch (Zend_Db_Statement_Exception $e) {
+    if ($e->getPrevious()) {
+        echo '[' . get_class($e) 
+            . '] has the previous exception of [' 
+            . get_class($e->getPrevious()) 
+            . ']' . PHP_EOL;
+    } else {
+        echo '[' . get_class($e) 
+            . '] does not have a previous exception' 
+            . PHP_EOL;
+    }
+
+    echo $e; 
+    // displays all exceptions starting by the first thrown 
+    // exception if available.
+}
+]]></programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

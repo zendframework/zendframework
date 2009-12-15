@@ -251,7 +251,7 @@ class Zend_Mail_Storage_Imap extends Zend_Mail_Storage_Abstract
                  * @see Zend_Mail_Storage_Exception
                  */
                 require_once 'Zend/Mail/Storage/Exception.php';
-                throw new Zend_Mail_Storage_Exception('cannot select INBOX, is this a valid transport?');
+                throw new Zend_Mail_Storage_Exception('cannot select INBOX, is this a valid transport?', 0, $e);
             }
             return;
         }

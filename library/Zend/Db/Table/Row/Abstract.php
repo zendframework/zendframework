@@ -1083,7 +1083,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess
                 Zend_Loader::loadClass($rowsetClass);
             } catch (Zend_Exception $e) {
                 require_once 'Zend/Db/Table/Row/Exception.php';
-                throw new Zend_Db_Table_Row_Exception($e->getMessage());
+                throw new Zend_Db_Table_Row_Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
         $rowset = new $rowsetClass($config);
@@ -1177,7 +1177,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess
                 Zend_Loader::loadClass($tableName);
             } catch (Zend_Exception $e) {
                 require_once 'Zend/Db/Table/Row/Exception.php';
-                throw new Zend_Db_Table_Row_Exception($e->getMessage());
+                throw new Zend_Db_Table_Row_Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
 

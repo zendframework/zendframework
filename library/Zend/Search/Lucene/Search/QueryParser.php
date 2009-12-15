@@ -372,10 +372,11 @@ class Zend_Search_Lucene_Search_QueryParser extends Zend_Search_Lucene_FSM
                     self::$_instance->_lastToken = $token;
                 } catch (Exception $e) {
                     if (strpos($e->getMessage(), 'There is no any rule for') !== false) {
-                        throw new Zend_Search_Lucene_Search_QueryParserException( 'Syntax error at char position ' . $token->position . '.' );
+                        throw new Zend_Search_Lucene_Search_QueryParserException( 'Syntax error at char position ' . $token->position . '.', 0, $e);
                     }
 
-                    throw $e;
+                    require_once 'Zend/Search/Lucene/Exception.php';
+                    throw new Zend_Search_Lucene_Exception($e->getMessage(), $e->getCode(), $e);
                 }
             }
 
@@ -401,7 +402,8 @@ class Zend_Search_Lucene_Search_QueryParser extends Zend_Search_Lucene_FSM
 
                 return $query;
             } else {
-                throw $e;
+                require_once 'Zend/Search/Lucene/Exception.php';
+                throw new Zend_Search_Lucene_Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
     }

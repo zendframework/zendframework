@@ -516,7 +516,7 @@ class Zend_Currency
             $this->_options['locale'] = Zend_Locale::findLocale($locale);
         } catch (Zend_Locale_Exception $e) {
             require_once 'Zend/Currency/Exception.php';
-            throw new Zend_Currency_Exception($e->getMessage());
+            throw new Zend_Currency_Exception($e->getMessage(), 0, $e);
         }
 
         // Get currency details
@@ -605,7 +605,7 @@ class Zend_Currency
                         Zend_Locale_Format::convertNumerals(0, $options['script']);
                     } catch (Zend_Locale_Exception $e) {
                         require_once 'Zend/Currency/Exception.php';
-                        throw new Zend_Currency_Exception($e->getMessage());
+                        throw new Zend_Currency_Exception($e->getMessage(), 0, $e);
                     }
                     break;
 

@@ -290,11 +290,11 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
                     if (strpos($e->getMessage(), 'is not readable') !== false) {
                         return -1;
                     } else {
-                        throw $e;
+                        throw new Zend_Search_Lucene_Exception($e->getMessage(), $e->getCode(), $e);
                     }
                 }
             } else {
-                throw $e;
+                throw new Zend_Search_Lucene_Exception($e->getMessage(), $e->getCode(), $e);
             }
         }
 
@@ -521,9 +521,9 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
                 Zend_Search_Lucene_LockManager::releaseReadLock($this->_directory);
 
                 if (strpos($e->getMessage(), 'Can\'t obtain exclusive index lock') === false) {
-                    throw $e;
+                    throw new Zend_Search_Lucene_Exception($e->getMessage(), $e->getCode(), $e);
                 } else {
-                    throw new Zend_Search_Lucene_Exception('Can\'t create index. It\'s under processing now');
+                    throw new Zend_Search_Lucene_Exception('Can\'t create index. It\'s under processing now', 0, $e);
                 }
             }
 
@@ -1000,7 +1000,7 @@ class Zend_Search_Lucene implements Zend_Search_Lucene_Interface
                             $value = $hit->getDocument()->getFieldValue($fieldName);
                         } catch (Zend_Search_Lucene_Exception $e) {
                             if (strpos($e->getMessage(), 'not found') === false) {
-                                throw $e;
+                                throw new Zend_Search_Lucene_Exception($e->getMessage(), $e->getCode(), $e);
                             } else {
                                 $value = null;
                             }

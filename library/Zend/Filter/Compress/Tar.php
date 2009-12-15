@@ -62,7 +62,7 @@ class Zend_Filter_Compress_Tar extends Zend_Filter_Compress_CompressAbstract
                 Zend_Loader::loadClass('Archive_Tar');
             } catch (Zend_Exception $e) {
                 require_once 'Zend/Filter/Exception.php';
-                throw new Zend_Filter_Exception('This filter needs PEARs Archive_Tar');
+                throw new Zend_Filter_Exception('This filter needs PEARs Archive_Tar', 0, $e);
             }
         }
 

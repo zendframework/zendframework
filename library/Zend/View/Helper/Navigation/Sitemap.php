@@ -228,9 +228,11 @@ class Zend_View_Helper_Navigation_Sitemap
             $this->_serverUrl = $uri->getUri();
         } else {
             require_once 'Zend/Uri/Exception.php';
-            throw new Zend_Uri_Exception(sprintf(
+            $e = new Zend_Uri_Exception(sprintf(
                     'Invalid server URL: "%s"',
                     $serverUrl));
+            $e->setView($this->view);
+            throw $e;
         }
 
         return $this;
@@ -379,9 +381,11 @@ class Zend_View_Helper_Navigation_Sitemap
             if ($this->getUseSitemapValidators() &&
                 !$locValidator->isValid($url)) {
                 require_once 'Zend/View/Exception.php';
-                throw new Zend_View_Exception(sprintf(
+                $e = new Zend_View_Exception(sprintf(
                         'Encountered an invalid URL for Sitemap XML: "%s"',
                         $url));
+                $e->setView($this->view);
+                throw $e;
             }
 
             // put url in 'loc' element
@@ -435,9 +439,11 @@ class Zend_View_Helper_Navigation_Sitemap
         if ($this->getUseSchemaValidation()) {
             if (!@$dom->schemaValidate(self::SITEMAP_XSD)) {
                 require_once 'Zend/View/Exception.php';
-                throw new Zend_View_Exception(sprintf(
+                $e = new Zend_View_Exception(sprintf(
                         'Sitemap is invalid according to XML Schema at "%s"',
                         self::SITEMAP_XSD));
+                $e->setView($this->view);
+                throw $e;
             }
         }
 

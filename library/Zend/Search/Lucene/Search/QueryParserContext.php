@@ -327,7 +327,7 @@ class Zend_Search_Lucene_Search_QueryParserContext
             //                                                          $e->getMessage() . '\'.' );
             // It's query syntax error message and it should be user friendly. So FSM message is omitted
             require_once 'Zend/Search/Lucene/Search/QueryParserException.php';
-            throw new Zend_Search_Lucene_Search_QueryParserException('Boolean expression error.');
+            throw new Zend_Search_Lucene_Search_QueryParserException('Boolean expression error.', 0, $e);
         }
 
         // Remove 'only negative' conjunctions

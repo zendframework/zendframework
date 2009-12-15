@@ -602,7 +602,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
             throw new Zend_Rest_Server_Exception('Error instantiating class ' . $class .
                                                  ' to invoke method ' . $this->_functions[$this->_method]->getName() .
                                                  ' (' . $e->getMessage() . ') ',
-                                                 500);
+                                                 500, $e);
         }
 
         try {

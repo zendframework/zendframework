@@ -37,30 +37,13 @@ require_once 'Zend/Db/Exception.php';
 class Zend_Db_Statement_Exception extends Zend_Db_Exception
 {
     /**
-     * @var Exception
-     */
-    protected $_chainedException = null;
-
-    /**
-     * @param string $message
-     * @param string|int $code
-     * @param Exception $chainedException
-     */
-    public function __construct($message = null, $code = null, Exception $chainedException=null)
-    {
-        $this->message = $message;
-        $this->code = $code;
-        $this->_chainedException = $chainedException;
-    }
-
-    /**
      * Check if this general exception has a specific database driver specific exception nested inside.
      *
      * @return bool
      */
     public function hasChainedException()
     {
-        return ($this->_chainedException!==null);
+        return ($this->_previous !== null);
     }
 
     /**
@@ -68,6 +51,6 @@ class Zend_Db_Statement_Exception extends Zend_Db_Exception
      */
     public function getChainedException()
     {
-        return $this->_chainedException;
+        return $this->_previous;
     }
 }

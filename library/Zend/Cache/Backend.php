@@ -232,7 +232,7 @@ class Zend_Cache_Backend
              */
             require_once 'Zend/Log.php';
         } catch (Zend_Exception $e) {
-            Zend_Cache::throwException('Logging feature is enabled but the Zend_Log class is not available');
+            Zend_Cache::throwException('Logging feature is enabled but the Zend_Log class is not available', $e);
         }
         if (isset($this->_directives['logger'])) {
             if ($this->_directives['logger'] instanceof Zend_Log) {

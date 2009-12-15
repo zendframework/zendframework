@@ -496,7 +496,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
             }
         } catch (Exception $e) {
             require_once 'Zend/Amf/Exception.php';
-            throw new Zend_Amf_Exception('Unable to writeObject output: ' . $e->getMessage());
+            throw new Zend_Amf_Exception('Unable to writeObject output: ' . $e->getMessage(), 0, $e);
         }
 
         return $this;

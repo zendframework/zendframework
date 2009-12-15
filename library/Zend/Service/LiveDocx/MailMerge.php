@@ -177,6 +177,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
     public function setFieldValue($field, $value)
     {
         $this->_fieldValues[$field] = $value;
+        
         return $this;
     }
 
@@ -354,7 +355,6 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
     {
         $this->logIn();
         
-        $ret    = null;
         $format = strtolower($format);
         
         try {
@@ -368,9 +368,7 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
             );
         }
 
-        $ret = base64_decode($result->RetrieveDocumentResult);
-        
-        return $ret;
+        return base64_decode($result->RetrieveDocumentResult);
     }
 
     /**

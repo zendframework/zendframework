@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19550 -->
+<!-- EN-Revision: 19661 -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
@@ -185,6 +185,10 @@
     <chapter id="zend.exception">
         <title>Zend_Exception</title>
         <xi:include href="module_specs/Zend_Exception.xml" />
+        <xi:include href="module_specs/Zend_Exception-Basic.xml" />
+        <xi:include href="module_specs/Zend_Exception-Previous.xml">
+            <xi:fallback><xi:include href="../en/module_specs/Zend_Exception-Previous.xml" /></xi:fallback>
+        </xi:include>
     </chapter>
 
     <chapter id="zend.feed">

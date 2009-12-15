@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 19661 -->
+<sect1 id="zend.exception.basic">
+    <title>基本的な使用法</title>
+
+    <para>
+        <classname>Zend_Exception</classname> はZend Framework でスローされる例外全ての基底クラスです。
+        このクラスは、 PHP の基本的な <classname>Exception</classname> クラスを拡張します。
+    </para>
+
+    <example id="zend.exception.catchall.example">
+        <title>Zend Framework の例外全てを捕捉する</title>
+
+        <programlisting language="php"><![CDATA[
+try {
+    // あなたのコード
+} catch (Zend_Exception $e) {
+    // 何らかの処理
+}
+]]></programlisting>
+    </example>
+
+    <example id="zend.exception.catchcomponent.example">
+        <title>Zend Framework の特定のコンポーネントでスローされた例外を捕捉する</title>
+
+        <programlisting language="php"><![CDATA[
+try {
+    // あなたのコード
+} catch (Zend_Db_Exception $e) {
+    // 何らかの処理
+}
+]]></programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

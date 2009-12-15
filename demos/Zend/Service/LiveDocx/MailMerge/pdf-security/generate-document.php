@@ -6,7 +6,7 @@ require_once dirname(__FILE__) . '/../../common.php';
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
 // Set WSDL of your premium service server
-$phpLiveDocx->setWsdl('https://api.example.com/1.2/mailmerge.asmx?WSDL');
+$phpLiveDocx->setWsdl('https://api.livedocx.com/dev/mailmerge.asmx?wsdl');
 
 $phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
             ->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
@@ -26,10 +26,10 @@ $phpLiveDocx->setDocumentPassword('aaaaaaaaaa');
 
 // Available on premium service only
 $phpLiveDocx->setDocumentAccessPermissions(
-    array (
-        Zend_Service_LiveDocx_MailMerge::DOCUMENT_ACCESS_PERMISSION_ALLOW_PRINTING_HIGH_LEVEL,
-        Zend_Service_LiveDocx_MailMerge::DOCUMENT_ACCESS_PERMISSION_ALLOW_EXTRACT_CONTENTS
-    ),
+    array(
+        'AllowHighLevelPrinting' ,  // getDocumentAccessOptions() returns
+        'AllowExtractContents'      // array of permitted values
+    ),   
     'myDocumentAccessPassword'
 );
 

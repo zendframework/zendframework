@@ -58,15 +58,6 @@ $fieldValues = array (
 $phpLiveDocx->assign($fieldValues);
 */
 
-$documentProperties = array (
-    'title'    => 'License Agreement',
-    'author'   => 'Megasoft Co-operation',
-    'subject'  => 'Magic Graphical Compression Suite v1.9',
-    'keywords' => 'graphics, magical, compression, license'
-);
-
-$phpLiveDocx->setDocumentProperties($documentProperties);
-
 $phpLiveDocx->createDocument();
 
 $document = $phpLiveDocx->retrieveDocument('pdf');

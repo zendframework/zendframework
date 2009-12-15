@@ -41,65 +41,6 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      * @since LiveDocx 1.0 
      */
     const WSDL = 'https://api.livedocx.com/1.2/mailmerge.asmx?WSDL';
-    
-    /**
-     * Document access permission: After the document has been opened no further
-     * document access is restricted
-     * @since LiveDocx 1.2 Premium 
-     */
-    const DOCUMENT_ACCESS_PERMISSION_ALLOW_ALL = 'AllowAll';
-
-    /**
-     * Document access permission: Allow comments to be added and interactive
-     * form fields (including signature fields) to be filled in
-     * @since LiveDocx 1.2 Premium 
-     */    
-    const DOCUMENT_ACCESS_PERMISSION_ALLOW_AUTHORING = 'AllowAuthoring';
-    
-    /**
-     * Document access permission: Allow existing interactive form fields
-     * (including signature fields) to be filled in
-     * @since LiveDocx 1.2 Premium 
-     */    
-    const DOCUMENT_ACCESS_PERMISSION_ALLOW_AUTHORING_FIELDS = 'AllowAuthoringFields';
-    
-    /**
-     * Document access permission: Allow content access for the visually
-     * impaired only
-     * @since LiveDocx 1.2 Premium
-     */    
-    const DOCUMENT_ACCESS_PERMISSION_ALLOW_CONTENT_ACCESSIBILITY = 'AllowContentAccessibility';
-    
-    /**
-     * Document access permission: Allow the document to be to assembled
-     * (insert, rotate or delete pages and create bookmarks or thumbnails)
-     * @since LiveDocx 1.2 Premium
-     */    
-    const DOCUMENT_ACCESS_PERMISSION_ALLOW_DOCUMENT_ASSEMBLY = 'AllowDocumentAssembly';
-    
-    /**
-     * Document access permission: Allow text and/or graphics to be extracted
-     * @since LiveDocx 1.2 Premium 
-     */    
-    const DOCUMENT_ACCESS_PERMISSION_ALLOW_EXTRACT_CONTENTS = 'AllowExtractContents';
-    
-    /**
-     * Document access permission: Allow the document contents to be modified
-     * @since LiveDocx 1.2 Premium
-     */    
-    const DOCUMENT_ACCESS_PERMISSION_ALLOW_GENERAL_EDITING = 'AllowGeneralEditing';
-    
-    /**
-     * Document access permission: Allow the document to be printed
-     * @since LiveDocx 1.2 Premium
-     */    
-    const DOCUMENT_ACCESS_PERMISSION_ALLOW_PRINTING_HIGH_LEVEL = 'AllowHighLevelPrinting';
-    
-    /**
-     * Document access permission: Allow the document to be printed (low-level)
-     * @since LiveDocx 1.2 Premium
-     */    
-    const DOCUMENT_ACCESS_PERMISSION_ALLOW_PRINTING_LOW_LEVEL = 'AllowLowLevelPrinting';    
 
     /**
      * Field values
@@ -118,14 +59,6 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
     protected $_blockFieldValues;
 
     /**
-     * Document properties of PDF file (only)
-     *
-     * @var   array
-     * @since LiveDocx 1.0
-     */
-    protected $_documentProperties;
-
-    /**
      * Constructor (LiveDocx.MailMerge SOAP Service)
      *
      * @return void
@@ -137,8 +70,6 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         $this->_wsdl             = self::WSDL;
         $this->_fieldValues      = array();
         $this->_blockFieldValues = array();
-        
-        $this->_setDefaultDocumentProperties();
         
         parent::__construct($options);
     }
@@ -334,8 +265,6 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
             );
         }
         
-        $this->_documentProperties['Encrypted'] = true;
-        
         return $this;        
     }
     
@@ -367,28 +296,6 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
      */
     public function setDocumentAccessPermissions($permissions, $password)
     {
-        $validPermissions = array(
-            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_ALL ,
-            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_AUTHORING ,
-            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_AUTHORING_FIELDS ,
-            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_CONTENT_ACCESSIBILITY ,
-            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_DOCUMENT_ASSEMBLY ,
-            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_EXTRACT_CONTENTS ,
-            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_GENERAL_EDITING ,
-            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_PRINTING_HIGH_LEVEL ,
-            self::DOCUMENT_ACCESS_PERMISSION_ALLOW_PRINTING_LOW_LEVEL
-        );      
-        
-        foreach ($permissions as $permission) {
-            if (! in_array($permission, $validPermissions)) {
-                require_once 'Zend/Service/LiveDocx/Exception.php';
-                throw new Zend_Service_LiveDocx_Exception(
-                    'Invalid document access permission. '
-                  . 'Must be one of Zend_Service_LiveDocx_MailMerge::DOCUMENT_ACCESS_PERMISSION_* class constants'
-                );
-            }
-        }
-        
         $this->logIn();
         
         try {
@@ -402,8 +309,6 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
                 'Cannot set document access permissions', 0, $e
             );
         }
-        
-        $this->_documentProperties['Encrypted'] = true;
         
         return $this;        
     }    
@@ -465,15 +370,6 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
 
         $ret = base64_decode($result->RetrieveDocumentResult);
         
-        // @todo: Move this logic to backend server in future version
-        if ('pdf' === $format &&
-            false === $this->_documentProperties['Encrypted']) {
-            require_once 'Zend/Pdf.php';
-            $pdf = Zend_Pdf::parse($ret);
-            $pdf->properties = $this->_getDocumentProperties();
-            $ret = $pdf->render();
-        }
-
         return $ret;
     }
 
@@ -686,78 +582,6 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
         }
 
         return $ret;
-    }
-
-    /**
-     * Set the default document properties
-     *
-     * @return null
-     * @since  LiveDocx 1.0
-     */
-    protected function _setDefaultDocumentProperties()
-    {
-        $date = new Zend_Date();
-
-        $this->_documentProperties = array();
-
-        $projectName  = sprintf('phpLiveDocx %s', self::getVersion());
-        $projectUrl   = 'http://www.phpLiveDocx.org';
-        $creationDate = sprintf('D:%s', $date->toString('YYYYMMddHHmmss'));
-        
-        // Zend_Pdf expects keys with uppercase first letter
-        $this->_documentProperties['Creator']      = $projectName;
-        $this->_documentProperties['Producer']     = $projectUrl;
-        $this->_documentProperties['CreationDate'] = $creationDate;
-        $this->_documentProperties['ModDate']      = $creationDate;
-        
-        // Set to true, if contents are password protected or encrypted
-        $this->_documentProperties['Encrypted'] = false; 
-    }
-
-    /**
-     * Set the document properties
-     *
-     * $properties is an assoc array with the following format:
-     *
-     * {code}
-     * $properties = array (
-     *     'title'        => '', // (string)
-     *     'author'       => '', // (string)
-     *     'subject'      => '', // (string)
-     *     'keywords'     => '', // (string)
-     * );
-     * {code}
-     * 
-     * This method can only be used for PDF documents
-     *
-     * @param  array $properties
-     * @return Zend_Service_LiveDocx_MailMerge
-     * @since  LiveDocx 1.0
-     */
-    public function setDocumentProperties($properties)
-    {
-        // For consistency, keys in $properties are lowercase.
-        // Zend_Pdf expects keys with uppercase first letter
-        $keys = array('Title', 'Author', 'Subject', 'Keywords');
-        foreach ($keys as $key) {
-            $lowerCaseKey = strtolower($key);
-            if (isset($properties[$lowerCaseKey])) {
-                $this->_documentProperties[$key] = $properties[$lowerCaseKey];
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * Return currently set document properties
-     *
-     * @return array
-     * @since  LiveDocx 1.0
-     */
-    protected function _getDocumentProperties()
-    {
-        return $this->_documentProperties;
     }
 
     /**
@@ -1053,6 +877,26 @@ class Zend_Service_LiveDocx_MailMerge extends Zend_Service_LiveDocx
 
         if (isset($result->GetFontNamesResult->string)) {
             $ret = $result->GetFontNamesResult->string;
+        }
+
+        return $ret;
+    }    
+    
+    /**
+     * Return supported document access options
+     *
+     * @return array
+     * @since  LiveDocx 1.2 Premium
+     */
+    public function getDocumentAccessOptions()
+    {
+        $this->logIn();
+        
+        $ret    = array();
+        $result = $this->getSoapClient()->GetDocumentAccessOptions();
+
+        if (isset($result->GetDocumentAccessOptionsResult->string)) {
+            $ret = $result->GetDocumentAccessOptionsResult->string;
         }
 
         return $ret;

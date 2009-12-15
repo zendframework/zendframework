@@ -360,36 +360,32 @@ class Zend_Service_LiveDocx_MailMergeTest extends PHPUnit_Framework_TestCase
     }
 
     // -------------------------------------------------------------------------
-
+    
     public function testGetTemplateFormats()
     {
-        $expectedResults = array('doc', 'docx', 'rtf', 'txd');
+        $expectedResults = array('doc' , 'docx' , 'rtf' , 'txd');
         $this->assertEquals($expectedResults, $this->phpLiveDocx->getTemplateFormats());
     }
 
     public function testGetDocumentFormats()
     {
-        $expectedResults = array('doc', 'docx', 'html', 'pdf', 'rtf', 'txd', 'txt');
+        $expectedResults = array('doc' , 'docx' , 'html' , 'pdf' , 'rtf' , 'txd' , 'txt');
         $this->assertEquals($expectedResults, $this->phpLiveDocx->getDocumentFormats());
     }
 
     public function testGetImageFormats()
     {
-        $expectedResults = array('bmp', 'gif', 'jpg', 'png', 'tiff');
+        $expectedResults = array('bmp' , 'gif' , 'jpg' , 'png' , 'tiff');
         $this->assertEquals($expectedResults, $this->phpLiveDocx->getImageFormats());
     }
 
+    public function testGetDocumentAccessOptions()
+    {
+        $expectedResults = array('AllowAuthoring' , 'AllowAuthoringFields' , 'AllowContentAccessibility' , 'AllowDocumentAssembly' , 'AllowExtractContents' , 'AllowGeneralEditing' , 'AllowHighLevelPrinting' , 'AllowLowLevelPrinting' , 'AllowAll');
+        $this->assertEquals($expectedResults, $this->phpLiveDocx->getDocumentAccessOptions());
+    }
+    
     // -------------------------------------------------------------------------
-
-    public function testGetMetafiles()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testGetAllMetafiles()
-    {
-        $this->markTestIncomplete();
-    }
 
     public function testGetBitmaps()
     {
@@ -508,20 +504,6 @@ class Zend_Service_LiveDocx_MailMergeTest extends PHPUnit_Framework_TestCase
         // Local Template
         $this->phpLiveDocx->setLocalTemplate($this->path . DIRECTORY_SEPARATOR . self::TEST_TEMPLATE_2);
         $this->assertEquals($expectedResults, $this->phpLiveDocx->getBlockNames());
-    }
-
-    // -------------------------------------------------------------------------
-
-    public function testSetDocumentProperties()
-    {
-        $testValues = array(
-            'title'    => 'phpunit',
-            'author'   => 'phpunit',
-            'subject'  => 'phpunit',
-            'keywords' => 'phpunit',
-        );
-
-        $this->assertTrue(is_a($this->phpLiveDocx->setDocumentProperties($testValues), 'Zend_Service_LiveDocx_MailMerge'));
     }
 
     // -------------------------------------------------------------------------

@@ -74,16 +74,6 @@ $billConnections = array(
 $phpLiveDocx->assign('connection', $billConnections);
 
 
-$documentProperties = array (
-    'title'    => sprintf('Telephone Invoice (%s)', $billData['name']),
-    'author'   => 'TIS Telecom', 
-    'subject'  => sprintf('Your telephone invoice for %s', $billData['month']),
-    'keywords' => sprintf('Telephone, Payment, Invoice, %s', $billData['month'])
-);
-
-$phpLiveDocx->setDocumentProperties($documentProperties);
-
-
 $phpLiveDocx->createDocument();
 
 $document = $phpLiveDocx->retrieveDocument('pdf');

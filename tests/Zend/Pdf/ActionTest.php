@@ -23,7 +23,13 @@
 /** Zend_Pdf_Action */
 require_once 'Zend/Pdf/Action.php';
 
-/** Zend_Pdf_Action */
+/** Zend_Pdf_Action_GoTo */
+require_once 'Zend/Pdf/Action/GoTo.php';
+
+/** Zend_Pdf_Action_URI */
+require_once 'Zend/Pdf/Action/URI.php';
+
+/** Zend_Pdf_ElementFactory */
 require_once 'Zend/Pdf/ElementFactory.php';
 
 /** Zend_Pdf */
@@ -370,6 +376,65 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($pdf->resolveDestination($action1->getDestination()) === $page2);
         $this->assertTrue($pdf->resolveDestination($action2->getDestination()) === null);
+    }
+
+    public function testActionURILoad1()
+    {
+        $dictionary = new Zend_Pdf_Element_Dictionary();
+        $dictionary->Type = new Zend_Pdf_Element_Name('Action');
+        $dictionary->S    = new Zend_Pdf_Element_Name('URI');
+        $dictionary->URI  = new Zend_Pdf_Element_String('http://somehost/');
+
+        $action = Zend_Pdf_Action::load($dictionary);
+
+        $this->assertTrue($action instanceof Zend_Pdf_Action_URI);
+    }
+
+    public function testActionURILoad2()
+    {
+        $dictionary = new Zend_Pdf_Element_Dictionary();
+        $dictionary->Type = new Zend_Pdf_Element_Name('Action');
+        $dictionary->S    = new Zend_Pdf_Element_Name('URI');
+
+
+        try {
+            $action = Zend_Pdf_Action::load($dictionary);
+            $this->fail("exception expected");
+        } catch (Zend_Pdf_Exception $e) {
+            $this->assertContains('URI action dictionary entry is required', $e->getMessage());
+        }
+    }
+
+    public function testActionURICreate()
+    {
+        $action = Zend_Pdf_Action_URI::create('http://somehost/');
+
+        $this->assertTrue($action instanceof Zend_Pdf_Action_URI);
+
+        $this->assertEquals($action->getResource()->toString(),
+                            '<</Type /Action /S /URI /URI (http://somehost/) >>');
+    }
+
+    public function testActionURIGettersSetters()
+    {
+        $action = Zend_Pdf_Action_URI::create('http://somehost/');
+
+        $this->assertEquals($action->getUri(), 'http://somehost/');
+
+        $action->setUri('http://another_host/');
+        $this->assertEquals($action->getUri(), 'http://another_host/');
+
+        $this->assertEquals($action->getIsMap(), false);
+
+        $action->setIsMap(true);
+        $this->assertEquals($action->getIsMap(), true);
+        $this->assertEquals($action->getResource()->toString(),
+                            '<</Type /Action /S /URI /URI (http://another_host/) /IsMap true >>');
+
+        $action->setIsMap(false);
+        $this->assertEquals($action->getIsMap(), false);
+        $this->assertEquals($action->getResource()->toString(),
+                            '<</Type /Action /S /URI /URI (http://another_host/) >>');
     }
 
     /**

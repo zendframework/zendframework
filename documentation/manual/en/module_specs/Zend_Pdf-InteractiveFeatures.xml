@@ -791,12 +791,23 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
             </itemizedlist>
 
             <para>
-                Only <classname>Zend_Pdf_Action_GoTo</classname> actions can be created by
-                user now. It can be done using
+                Only <classname>Zend_Pdf_Action_GoTo</classname> and 
+                <classname>Zend_Pdf_Action_URI</classname> actions can be created by
+                user now.
+            </para>
+
+            <para>
+                GoTo action object can be created using
                 <methodname>Zend_Pdf_Action_GoTo::create($destination)</methodname> method,
                 where <varname>$destination</varname> is a
-                <classname>Zend_Pdf_Destination</classname> object or string which can be used
+                <classname>Zend_Pdf_Destination</classname> object or a string which can be used
                 to identify named destination.
+            </para>
+
+            <para>
+                <methodname>Zend_Pdf_Action_URI::create($uri[, $isMap])</methodname> method has
+                to be used to create a URI action (see API documentation for the details).
+                Optional <varname>$isMap</varname> parameter is set to false by default. 
             </para>
 
             <para>

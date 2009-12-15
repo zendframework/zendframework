@@ -53,7 +53,6 @@ class Zend_Pdf_Action_GoTo extends Zend_Pdf_Action
      *
      * @param Zend_Pdf_Element_Dictionary $dictionary
      * @param SplObjectStorage            $processedActions  list of already processed action dictionaries, used to avoid cyclic references
-     * @throws Zend_Pdf_Exception
      */
     public function __construct(Zend_Pdf_Element $dictionary, SplObjectStorage $processedActions)
     {
@@ -92,6 +91,7 @@ class Zend_Pdf_Action_GoTo extends Zend_Pdf_Action
     /**
      * Set goto action destination
      *
+     * @param Zend_Pdf_Destination|string $destination
      * @return Zend_Pdf_Action_GoTo
      */
     public function setDestination(Zend_Pdf_Destination $destination)

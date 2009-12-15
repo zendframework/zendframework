@@ -107,6 +107,7 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
         $leafAction->S    = new Zend_Pdf_Element_Name('URI');
+        $leafAction->URI  = new Zend_Pdf_Element_Name('http://some_host/');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();
@@ -227,6 +228,7 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $leafAction = new Zend_Pdf_Element_Dictionary();
         $leafAction->Type = new Zend_Pdf_Element_Name('Action');
         $leafAction->S    = new Zend_Pdf_Element_Name('URI');
+        $leafAction->URI  = new Zend_Pdf_Element_Name('http://some_host/');
         $action2Dictionary->Next->items[] = $leafAction;
 
         $leafAction = new Zend_Pdf_Element_Dictionary();

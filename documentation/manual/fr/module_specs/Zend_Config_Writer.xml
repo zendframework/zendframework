@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 16674 -->
+<!-- EN-Revision: 19691 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
@@ -9,7 +9,7 @@
         fichiers de configuration à partir d'objets <classname>Zend_Config</classname>. Il
         fonctionne avec des adaptateurs détachés du système et est donc très simple à utiliser. Par
         défaut <classname>Zend_Config_Writer</classname> embarque trois adaptateurs, qui
-        fonctionnent tous de la même façon. Vous instanciez un rédacteur ("writer") avec des
+        fonctionnent tous sur la base de fichiers. Vous instanciez un rédacteur ("writer") avec des
         options spécifiques, qui peuvent être <emphasis>filename</emphasis> et
         <emphasis>config</emphasis>. Ensuite
         vous pouvez appeler la méthode <methodname>write()</methodname> du rédacteur et le fichier
@@ -31,8 +31,16 @@
         </listitem>
     </itemizedlist>
 
+     <para>
+        Le rédacteur <acronym>INI</acronym> possède deux modes de rendu en fonction des sections.
+        Par défaut la configuration de premier niveau est toujours écrite dans des noms de section.
+        En appelant <command>$writer->setRenderWithoutSections();</command>, toutes les options
+        sont écrites dans l'espace de noms global du fichier <acronym>INI</acronym> et aucune
+        section n'est appliquée.
+    </para>
+
     <para>
-        Une exception subsiste, <classname>Zend_Config_Writer_Ini</classname> qui a un
+        De plus, <classname>Zend_Config_Writer_Ini</classname> a un
         paramètre optionnel additionnel <emphasis>nestSeparator</emphasis>, définissant le caractère
         séparant les profondeurs d'imbrication. Par défaut il s'agit du point,
         comme <classname>Zend_Config_Ini</classname> l'accepte par défaut.
@@ -131,4 +139,12 @@ $writer->write();
             <emphasis>skipExtends</emphasis> au constructeur.
         </para>
     </note>
+
+    <para>
+        Pour tous les rédacteurs à base de fichiers (<acronym>INI</acronym>, <acronym>XML</acronym>
+        et tableau <acronym>PHP</acronym>), en interne la méthode <methodname>render()</methodname>
+        est utilisée pour construire la chaîne de configuration. Cette méthode peut être utilisée
+        en dehors de la classe si vous souhaitez accéder à une représentation textuelle de vos
+        données de configuration.
+    </para>
 </sect1>

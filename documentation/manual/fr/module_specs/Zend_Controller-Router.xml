@@ -208,7 +208,7 @@ $router->addRoute('user',
                 vue "url"&#160;:
             </para>
             <programlisting language="php"><![CDATA[
-<a href="<?= $this->url(array('username' => 'martel'), 'user') ?>">
+<a href="<?php echo $this->url(array('username' => 'martel'), 'user') ?>">
 Martel
 </a>
 ]]></programlisting>
@@ -356,10 +356,11 @@ $router->removeDefaultRoutes();
         </para>
 
         <para>
-            Si ça n'était pas le cas, vous pouvez spécifier votre propre base <acronym>URL</acronym> dans
-            <classname>Zend_Controller_Request_Http</classname> en appelant
-            <methodname>setBaseUrl()</methodname> (voyez
-            <xref linkend="zend.controller.request.http.baseurl" />)&#160;:
+            Si ça n'était pas le cas, vous pouvez spécifier votre propre base <acronym>URL</acronym>
+            dans <classname>Zend_Controller_Request_Http</classname> en appelant
+            <methodname>setBaseUrl()</methodname> (voyez <link
+                linkend="zend.controller.request.http.baseurl">Base URL and
+                Subdirectories</link>)&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[

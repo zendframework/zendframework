@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 19661 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.exception.basic">
+    <title>Uso básico</title>
+
+    <para>
+        <classname>Zend_Exception</classname> é a classe base para todas as exceções
+        lançadas pelo Zend Framework. Esta classe estende a parte essencial da classe
+        <classname>Exception</classname> do PHP.
+    </para>
+
+    <example id="zend.exception.catchall.example">
+        <title>Tratando todas as exceções do Zend Framework</title>
+
+        <programlisting language="php"><![CDATA[
+try {
+    // seu código
+} catch (Zend_Exception $e) {
+    // faça alguma coisa
+}
+]]></programlisting>
+    </example>
+
+    <example id="zend.exception.catchcomponent.example">
+        <title>Tratando as excepções lançadas por um componente específico do Zend Framework</title>
+
+        <programlisting language="php"><![CDATA[
+try {
+    // seu código
+} catch (Zend_Db_Exception $e) {
+    // faça alguma coisa
+}
+]]></programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

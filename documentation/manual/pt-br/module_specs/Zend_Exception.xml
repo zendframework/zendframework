@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15681 -->
+<!-- EN-Revision: 19661 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.exception.using">
-
     <title>Usando as Exceções</title>
 
     <para>
@@ -11,23 +10,26 @@
     </para>
 
     <example id="zend.exception.using.example">
-        <title>Tratando uma Exceção</title>
+        <title>Catching an Exception</title>
+
         <para>
             O código a seguir demonstra como tratar uma exceção lançada em uma
             classe do Zend Framework:
         </para>
+
         <programlisting language="php"><![CDATA[
 try {
     // Chamar Zend_Loader::loadClass() com uma classe inexistente irá causar
-    // uma exceção para ser lançada em Zend_Loader
+    // uma exceção para ser lançada em Zend_Loader:
     Zend_Loader::loadClass('nonexistantclass');
 } catch (Zend_Exception $e) {
     echo "Tratando a exceção: " . get_class($e) . "\n";
     echo "Mensagem: " . $e->getMessage() . "\n";
-    // Outro código para recuperar do erro
+    // Other code to recover from the error
 }
 ]]></programlisting>
     </example>
+
     <para>
         <classname>Zend_Exception</classname> pode ser usado como uma classe de exceção pega-tudo
         em um bloco de tratamento para capturar todas as exceções lançadas pelas classes do
@@ -38,9 +40,8 @@ try {
     <para>
         A documentação de cada componente e classe do Zend Framework irá conter informações
         específicas sobre os métodos para lançar exceções, as circunstâncias que fazem com
-        que uma exceção seja lançada, e a classe das exceções que foram lançadas.
+        que uma exceção seja lançada, e os diversos tipos de exceção que podem ser lançadas.
     </para>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

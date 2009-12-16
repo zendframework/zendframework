@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 19661 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.exception.previous">
+    <title>Exceções Anteriores</title>
+
+    <para>
+        Desde o Zend Framework 1.10, <classname>Zend_Exception</classname> implementa as exceções
+        anteriores do PHP 5.3. Simplificando, em um bloco <methodname>catch</methodname>, você pode
+        lançar uma nova exceção que faz referência a exceção original, ajudando a fornecer contexto
+        adicional na depuração. Ao fornecer este suporte no Zend Framework, seu código agora poderá
+        avançar na compatibilidade com o PHP 5.3.
+    </para>
+
+    <para>
+        Exceções anteriores são indicadas como o terceiro argumento para um construtor de exceção.
+    </para>
+
+    <example id="zend.exception.previous.example">
+        <title>Exceções anteriores</title>
+
+        <programlisting language="php"><![CDATA[
+try {
+    $db->query($sql);
+} catch (Zend_Db_Statement_Exception $e) {
+    if ($e->getPrevious()) {
+        echo '[' . get_class($e) 
+            . '] has the previous exception of [' 
+            . get_class($e->getPrevious()) 
+            . ']' . PHP_EOL;
+    } else {
+        echo '[' . get_class($e) 
+            . '] does not have a previous exception' 
+            . PHP_EOL;
+    }
+
+    echo $e; 
+    // exibe todas as exceções começando pela primeira
+    // exceção lançada, se disponível.
+}
+]]></programlisting>
+    </example>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

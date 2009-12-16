@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19550 -->
+<!-- EN-Revision: 19661 -->
 <!-- Reviewed: no -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
@@ -487,6 +487,16 @@
         <xi:include href="module_specs/Zend_Exception.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Exception.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Exception-Basic.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Exception-Basic.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Exception-Previous.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Exception-Previous.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>

@@ -36,7 +36,7 @@
     </itemizedlist>
 
     <para>
-        The Ini writer has two modes for rendering with regard to sections.
+        The <acronym>INI</acronym> writer has two modes for rendering with regard to sections.
         By default the top-level configuration is always written into section names.
         By calling <command>$writer->setRenderWithoutSections();</command> all options are written
         into the global namespace of the <acronym>INI</acronym> file and no sections are applied.

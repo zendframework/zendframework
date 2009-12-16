@@ -21,14 +21,14 @@
  */
 
 /**
- * @var Zend_XmlRpc_Generator_Abstract
+ * @var Zend_XmlRpc_Generator_GeneratorAbstract
  */
-require_once 'Zend/XmlRpc/Generator/Abstract.php';
+require_once 'Zend/XmlRpc/Generator/GeneratorAbstract.php';
 
 /**
  * XML generator adapter based on XMLWriter
  */
-class Zend_XmlRpc_Generator_XMLWriter extends Zend_XmlRpc_Generator_Abstract
+class Zend_XmlRpc_Generator_XmlWriter extends Zend_XmlRpc_Generator_GeneratorAbstract
 {
     /**
      * XMLWriter instance
@@ -56,7 +56,7 @@ class Zend_XmlRpc_Generator_XMLWriter extends Zend_XmlRpc_Generator_Abstract
      *
      * @param string $name
      * @param string $value
-     * @return Zend_XmlRpc_Generator_XMLWriter Fluent interface
+     * @return Zend_XmlRpc_Generator_XmlWriter Fluent interface
      */
     public function startElement($name, $value = null)
     {
@@ -69,6 +69,14 @@ class Zend_XmlRpc_Generator_XMLWriter extends Zend_XmlRpc_Generator_Abstract
         return $this;
     }
 
+    /**
+     * End of an XML element
+     *
+     * Called to mark the end of an XML element
+     *
+     * @param string $name
+     * @return Zend_XmlRpc_Generator_XmlWriter Fluent interface
+     */
     public function endElement($name)
     {
         $this->_xmlWriter->endElement();

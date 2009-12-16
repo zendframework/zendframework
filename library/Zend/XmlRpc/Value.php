@@ -56,7 +56,7 @@ abstract class Zend_XmlRpc_Value
     protected $_xml;
 
     /**
-     * @var Zend_XmlRpc_Generator_Abstract
+     * @var Zend_XmlRpc_Generator_GeneratorAbstract
      */
     protected static $_generator;
 
@@ -100,13 +100,18 @@ abstract class Zend_XmlRpc_Value
     /**
      * Get XML generator instance
      *
-     * @return Zend_XmlRpc_Generator_Abstract
+     * @return Zend_XmlRpc_Generator_GeneratorAbstract
      */
     public static function getGenerator()
     {
         if (!self::$_generator) {
-            require_once 'Zend/XmlRpc/Generator/DOMDocument.php';
-            self::$_generator = new Zend_XmlRpc_Generator_DOMDocument();
+            if (extension_loaded('xmlwriter')) {
+                require_once 'Zend/XmlRpc/Generator/XmlWriter.php';
+                self::$_generator = new Zend_XmlRpc_Generator_XmlWriter();
+            } else {
+                require_once 'Zend/XmlRpc/Generator/DomDocument.php';
+                self::$_generator = new Zend_XmlRpc_Generator_DomDocument();
+            }
         }
 
         return self::$_generator;
@@ -115,10 +120,10 @@ abstract class Zend_XmlRpc_Value
     /**
      * Sets XML generator instance
      *
-     * @param Zend_XmlRpc_Generator_Abstract $generator
+     * @param Zend_XmlRpc_Generator_GeneratorAbstract $generator
      * @return void
      */
-    public static function setGenerator(Zend_XmlRpc_Generator_Abstract $generator)
+    public static function setGenerator(Zend_XmlRpc_Generator_GeneratorAbstract $generator)
     {
         self::$_generator = $generator;
     }

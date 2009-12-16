@@ -19,21 +19,25 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version $Id: ValueTest.php 18442 2009-09-30 13:17:48Z lars $
  */
+
+require_once 'Zend/XmlRpc/Generator/DomDocument.php';
+require_once 'Zend/XmlRpc/Generator/XmlWriter.php';
+
 abstract class Zend_XmlRpc_TestProvider
 {
     public static function provideGenerators()
     {
         return array(
-            array(new Zend_XmlRpc_Generator_DOMDocument()),
-            array(new Zend_XmlRpc_Generator_XMLWriter()),
+            array(new Zend_XmlRpc_Generator_DomDocument()),
+            array(new Zend_XmlRpc_Generator_XmlWriter()),
         );
     }
 
     public static function provideGeneratorsWithAlternateEncodings()
     {
         return array(
-            array(new Zend_XmlRpc_Generator_DOMDocument('ISO-8859-1')),
-            array(new Zend_XmlRpc_Generator_XMLWriter('ISO-8859-1')),
+            array(new Zend_XmlRpc_Generator_DomDocument('ISO-8859-1')),
+            array(new Zend_XmlRpc_Generator_XmlWriter('ISO-8859-1')),
         );
     }
 }

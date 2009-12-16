@@ -23,7 +23,7 @@
 /**
  * Abstract XML generator adapter
  */
-abstract class Zend_XmlRpc_Generator_Abstract
+abstract class Zend_XmlRpc_Generator_GeneratorAbstract
 {
     /**
      * @var string

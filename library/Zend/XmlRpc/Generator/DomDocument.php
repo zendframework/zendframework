@@ -21,14 +21,14 @@
  */
 
 /**
- * @var Zend_XmlRpc_Generator_Abstract
+ * @var Zend_XmlRpc_Generator_GeneratorAbstract
  */
-require_once 'Zend/XmlRpc/Generator/Abstract.php';
+require_once 'Zend/XmlRpc/Generator/GeneratorAbstract.php';
 
 /**
  * DOMDocument based implementation of a XML/RPC generator
  */
-class Zend_XmlRpc_Generator_DOMDocument extends Zend_XmlRpc_Generator_Abstract
+class Zend_XmlRpc_Generator_DomDocument extends Zend_XmlRpc_Generator_GeneratorAbstract
 {
     /**
      * @var DOMDocument
@@ -47,7 +47,7 @@ class Zend_XmlRpc_Generator_DOMDocument extends Zend_XmlRpc_Generator_Abstract
      *
      * @param string $name
      * @param string $value
-     * @return Zend_XmlRpc_Generator_DOMDocument Fluent interface
+     * @return Zend_XmlRpc_Generator_DomDocument Fluent interface
      */
     public function startElement($name, $value = null)
     {
@@ -68,7 +68,7 @@ class Zend_XmlRpc_Generator_DOMDocument extends Zend_XmlRpc_Generator_Abstract
      * Resets $_currentElement to the next parent node in the hierarchy
      *
      * @param string $name
-     * @return Zend_XmlRpc_Generator_DOMDocument Fluent interface
+     * @return Zend_XmlRpc_Generator_DomDocument Fluent interface
      */
     public function endElement($name)
     {

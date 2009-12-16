@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.barcode.creation">
+    <title>Barcode creation using Zend_Barcode class</title>
+
+    <sect2 id="zend.barcode.creation.configuration">
+        <title>Using Zend_Barcode::factory</title>
+
+        <para>
+            <classname>Zend_Barcode</classname> uses a factory method to create an instance of a
+            renderer that extends <classname>Zend_Barcode_Renderer_RendererAbstract</classname>. The
+            factory method accepts five arguments.
+        </para>
+
+        <orderedlist>
+            <listitem>
+                <para>The name of the barcode format (e.g., "code39") (required)</para>
+            </listitem>
+
+            <listitem>
+                <para>The name of the renderer (e.g., "image") (required)</para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Options to pass to the barcode object (an array or
+                    <classname>Zend_Config</classname> object) (optional)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Options to pass to the renderer object (an array or
+                    <classname>Zend_Config</classname> object) (optional)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Boolean to indicate whether or not to automatically render errors. If an
+                    exception occurs, the provided barcode object will be replaced with an Error
+                    representation (optional default <constant>TRUE</constant>)
+                </para>
+            </listitem>
+        </orderedlist>
+
+        <example id="zend.barcode.creation.configuration.example-1">
+            <title>Getting a Renderer with Zend_Barcode::factory()</title>
+
+            <para>
+                <methodname>Zend_Barcode::factory()</methodname> instantiates barcode objects and
+                renderers and ties them together. In this first example, we will use the
+                <emphasis>Code39</emphasis> barcode type together with the
+                <emphasis>Image</emphasis> renderer.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// Only the text to draw is required
+$barcodeOptions = array('text' => 'ZEND-FRAMEWORK');
+
+// No required options
+$rendererOptions = array();
+$renderer = Zend_Barcode::factory(
+    'code39', 'image', $barcodeOptions, $rendererOptions
+);
+]]></programlisting>
+        </example>
+
+        <example id="zend.barcode.creation.configuration.example-2">
+            <title>Using Zend_Barcode::factory() with Zend_Config objects</title>
+
+            <para>
+                You may pass a <classname>Zend_Config</classname> object to the factory in order to
+                create the necessary objects. The following example is functionally equivalent to
+                the previous.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// Using only one Zend_Config object
+$config = new Zend_Config(array(
+    'barcode'        => 'code39',
+    'barcodeParams'  => array('text' => 'ZEND-FRAMEWORK'),
+    'renderer'       => 'image',
+    'rendererParams' => array('imageType' => 'gif'),
+));
+
+$renderer = Zend_Barcode::factory($config);
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.barcode.creation.drawing">
+        <title>Drawing a barcode</title>
+
+        <para>
+            When you <emphasis>draw</emphasis> the barcode, you retrieve the resource in which the
+            barcode is drawn. To draw a barcode, you can call the <methodname>draw()</methodname> of
+            the renderer, or simply use the proxy method provided by
+            <classname>Zend_Barcode</classname>.
+        </para>
+
+        <example id="zend.barcode.creation.drawing.example-1">
+            <title>Drawing a barcode with the renderer object</title>
+
+            <programlisting language="php"><![CDATA[
+// Only the text to draw is required
+$barcodeOptions = array('text' => 'ZEND-FRAMEWORK');
+
+// No required options
+$rendererOptions = array();
+
+// Draw the barcode in a new image,
+$imageResource = Zend_Barcode::factory(
+    'code39', 'image', $barcodeOptions, $rendererOptions
+)->draw();
+]]></programlisting>
+        </example>
+
+        <example id="zend.barcode.creation.drawing.example-2">
+            <title>Drawing a barcode with Zend_Barcode::draw()</title>
+
+            <programlisting language="php"><![CDATA[
+// Only the text to draw is required
+$barcodeOptions = array('text' => 'ZEND-FRAMEWORK');
+
+// No required options
+$rendererOptions = array();
+
+// Draw the barcode in a new image,
+$imageResource = Zend_Barcode::draw(
+    'code39', 'image', $barcodeOptions, $rendererOptions
+);
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.barcode.creation.renderering">
+        <title>Renderering a barcode</title>
+
+        <para>
+            When you render a barcode, you draw the barcode, you send the headers and you send the
+            resource (e.g. to a browser). To render a barcode, you can call the
+            <methodname>render()</methodname> method of the renderer or simply use the proxy method
+            provided by <classname>Zend_Barcode</classname>.
+        </para>
+
+        <example id="zend.barcode.creation.renderering.example-1">
+            <title>Renderering a barcode with the renderer object</title>
+
+            <programlisting language="php"><![CDATA[
+// Only the text to draw is required
+$barcodeOptions = array('text' => 'ZEND-FRAMEWORK');
+
+// No required options
+$rendererOptions = array();
+
+// Draw the barcode in a new image,
+// send the headers and the image
+Zend_Barcode::factory(
+    'code39', 'image', $barcodeOptions, $rendererOptions
+)->render();
+]]></programlisting>
+
+            <para>
+                This will generate this barcode:
+            </para>
+
+            <para>
+                <inlinegraphic width="275" align="center" valign="middle"
+                    fileref="figures/zend.barcode.introduction.example-1.png" format="PNG"/>
+            </para>
+        </example>
+
+        <example id="zend.barcode.creation.renderering.example-2">
+            <title>Renderering a barcode with Zend_Barcode::render()</title>
+
+            <programlisting language="php"><![CDATA[
+// Only the text to draw is required
+$barcodeOptions = array('text' => 'ZEND-FRAMEWORK');
+
+// No required options
+$rendererOptions = array();
+
+// Draw the barcode in a new image,
+// send the headers and the image
+Zend_Barcode::render(
+    'code39', 'image', $barcodeOptions, $rendererOptions
+);
+]]></programlisting>
+
+            <para>
+                This will generate the same barcode as the previous example.
+            </para>
+        </example>
+    </sect2>
+</sect1>

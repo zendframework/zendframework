@@ -32,6 +32,7 @@ require_once 'Zend/Amf/AllTests.php';
 require_once 'Zend/Application/AllTests.php';
 require_once 'Zend/AuthTest.php';
 require_once 'Zend/Auth/AllTests.php';
+require_once 'Zend/Barcode/AllTests.php';
 require_once 'Zend/Cache/AllTests.php';
 require_once 'Zend/Captcha/AllTests.php';
 require_once 'Zend/CodeGenerator/Php/AllTests.php';
@@ -164,6 +165,7 @@ class Zend_AllTests
         $suite->addTest(Zend_Application_AllTests::suite());
         $suite->addTestSuite('Zend_AuthTest');
         $suite->addTest(Zend_Auth_AllTests::suite());
+        $suite->addTest(Zend_Barcode_AllTests::suite());
         $suite->addTest(Zend_Cache_AllTests::suite());
         $suite->addTest(Zend_Captcha_AllTests::suite());
         $suite->addTest(Zend_CodeGenerator_Php_AllTests::suite());

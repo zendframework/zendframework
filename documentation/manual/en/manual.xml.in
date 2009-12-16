@@ -68,6 +68,14 @@
         <xi:include href="module_specs/Zend_Auth_Adapter_OpenId.xml" />
     </chapter>
 
+    <chapter id="zend.barcode">
+        <title>Zend_Barcode</title>
+        <xi:include href="module_specs/Zend_Barcode-Introduction.xml" />
+        <xi:include href="module_specs/Zend_Barcode-Creation.xml" />
+        <xi:include href="module_specs/Zend_Barcode-Objects.xml" parse="xml"/>
+        <xi:include href="module_specs/Zend_Barcode-Renderers.xml" />
+    </chapter>
+
     <chapter id="zend.cache">
         <title>Zend_Cache</title>
         <xi:include href="module_specs/Zend_Cache-Introduction.xml" />

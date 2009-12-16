@@ -16,7 +16,7 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: UpcA.php 18028 2009-09-08 20:52:23Z thomas $
  */
 
 /**
@@ -30,13 +30,13 @@ require_once 'Zend/Validate/Barcode/AdapterAbstract.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Validate_Barcode_Ean13 extends Zend_Validate_Barcode_AdapterAbstract
+class Zend_Validate_Barcode_Upce extends Zend_Validate_Barcode_AdapterAbstract
 {
     /**
      * Allowed barcode lengths
      * @var integer
      */
-    protected $_length = 13;
+    protected $_length = 6;
 
     /**
      * Allowed barcode characters
@@ -49,4 +49,16 @@ class Zend_Validate_Barcode_Ean13 extends Zend_Validate_Barcode_AdapterAbstract
      * @var string
      */
     protected $_checksum = '_mod10';
+
+    /**
+     * Constructor
+     *
+     * Set check flag to false
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->setCheck(false);
+    }
 }

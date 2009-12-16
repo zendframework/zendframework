@@ -34,18 +34,7 @@
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.barcode">
-        <title>Barcode</title>
-        <para>
-            This validator is instantiated with a barcode type against which you wish to validate a
-            barcode value. It currently supports "UPC-A" (Universal Product Code) and
-            "EAN-13" (European Article Number) barcode types, and the
-            <methodname>isValid()</methodname> method returns true if and only if the input successfully
-            validates against the barcode validation algorithm. You should remove all characters
-            other than the digits zero through nine (0-9) from the input value before passing it on
-            to the validator.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-Barcode.xml" />
 
     <sect2 id="zend.validate.set.between">
         <title>Between</title>

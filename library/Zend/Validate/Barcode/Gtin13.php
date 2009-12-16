@@ -16,7 +16,7 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Ean13.php 18028 2009-09-08 20:52:23Z thomas $
  */
 
 /**
@@ -30,7 +30,7 @@ require_once 'Zend/Validate/Barcode/AdapterAbstract.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Validate_Barcode_Ean13 extends Zend_Validate_Barcode_AdapterAbstract
+class Zend_Validate_Barcode_Gtin13 extends Zend_Validate_Barcode_AdapterAbstract
 {
     /**
      * Allowed barcode lengths

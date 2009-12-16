@@ -10,7 +10,7 @@
     </para>
 
     <example id="zend.exception.using.example">
-        <title>Catching an Exception</title>
+        <title>Tratando uma Exceção</title>
 
         <para>
             O código a seguir demonstra como tratar uma exceção lançada em uma
@@ -25,7 +25,7 @@ try {
 } catch (Zend_Exception $e) {
     echo "Tratando a exceção: " . get_class($e) . "\n";
     echo "Mensagem: " . $e->getMessage() . "\n";
-    // Other code to recover from the error
+    // Outro código para recuperar do erro
 }
 ]]></programlisting>
     </example>

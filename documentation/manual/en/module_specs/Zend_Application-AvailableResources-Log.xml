@@ -6,7 +6,7 @@
     <para>
         <classname>Zend_Application_Resource_Log</classname> to instantiate a
         <classname>Zend_Log</classname> instance with an arbitrary number of log writers.
-        Configuration will be passed to the <classname>Zend_Log::factory()</classname> method,
+        Configuration will be passed to the <methodname>Zend_Log::factory()</methodname> method,
         allowing you to specify combinations of log writers and filters. The log instance may then
         be retrieved from the bootstrap later in order to log events.
     </para>

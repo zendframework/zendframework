@@ -14,7 +14,6 @@
         front controller.
     </para>
 
-
     <para>
         In most cases, you will want to extend this class for your bootstrapping
         needs, or simply use this class and provide a list of resource plugins
@@ -31,7 +30,7 @@
                 linkend="zend.loader.autoloader-resource.module">Zend_Application_Module_Autoloader</link>
             object, providing the requested namespace and the bootstrap's directory as arguments.
             You may enable this functionality by providing a namespace to the "appnamespace"
-            configuration option. As an INI example:
+            configuration option. As an <acronym>INI</acronym> example:
         </para>
 
         <programlisting language="ini"><![CDATA[
@@ -39,7 +38,7 @@ appnamespace = "Application"
 ]]></programlisting>
 
         <para>
-            Or in XML:
+            Or in <acronym>XML</acronym>:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -52,8 +51,8 @@ appnamespace = "Application"
         </para>
 
         <para>
-            Alternately, you can simply define the <varname>$_appNamespace</varname> property of your
-            bootstrap class with the appropriate value:
+            Alternately, you can simply define the <varname>$_appNamespace</varname> property of
+            your bootstrap class with the appropriate value:
         </para>
 
         <programlisting language="php"><![CDATA[

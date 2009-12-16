@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19425 -->
+<!-- EN-Revision: 19606 -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
 
@@ -108,9 +108,9 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             <para>
                 <methodname>call()</methodname> のパラメータをネイティブの <acronym>PHP</acronym>
                 型で渡します。つまり <type>String</type>、
-                <code>integer</code>、<code>float</code>、
+                <type>Integer</type>、<type>Float</type>、
                 <type>Boolean</type>、<type>Array</type> あるいは
-                <code>object</code> で渡すということです。
+                <type>Object</type> で渡すということです。
                 このとき、<acronym>PHP</acronym> のネイティブ型は自動的に検出され、
                 以下の表にしたがって <acronym>XML-RPC</acronym> 型に変換されます。
             </para>
@@ -161,6 +161,14 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                             <entry>object</entry>
                             <entry>array</entry>
                         </row>
+                        <row>
+                            <entry>Zend_Date</entry>
+                            <entry>dateTime.iso8601</entry>
+                        </row>
+                        <row>
+                            <entry>DateTime</entry>
+                            <entry>dateTime.iso8601</entry>
+                        </row>
                     </tbody>
                 </tgroup>
             </table>
@@ -173,14 +181,14 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                     それが array と struct のどちらにでもとれるからです。
                     <classname>Zend_XmlRpc_Client</classname>
                     は、このような状況を検出した場合にはサーバの
-                    <code>system.methodSignature</code>
+                    <command>system.methodSignature</command>
                     メソッドにリクエストを送り、どの <acronym>XML-RPC</acronym>
                     型に変換すべきかを判断します。
                 </para>
 
                 <para>
                     しかし、このやりかた自体にも別の問題があります。
-                    まず、サーバが <code>system.methodSignature</code>
+                    まず、サーバが <command>system.methodSignature</command>
                     をサポートしていない場合には「リクエストに失敗した」
                     記録がサーバに残ってしまいます。この場合、
                     <classname>Zend_XmlRpc_Client</classname> は値を
@@ -220,8 +228,8 @@ $result = $client->call('foo.bar', array(array()));
                     </listitem>
                     <listitem>
                         <para>
-                            プロシージャが <code>base64</code> 型や
-                            <code>dateTime.iso8601</code> 型を要求していることがある
+                            プロシージャが <property>base64</property> 型や
+                            <property>dateTime.iso8601</property> 型を要求していることがある
                             (これらは <acronym>PHP</acronym> のネイティブ型には存在しません)。
                         </para>
                     </listitem>
@@ -337,7 +345,7 @@ $result = $client->call('foo.bar', array(array()));
                         その値は <acronym>PHP</acronym> の型として設定されます。この <acronym>PHP</acronym> の型は、
                         <acronym>PHP</acronym> のキャスト機能によって変換されます。
                         たとえば、<classname>Zend_XmlRpc_Value_Integer</classname>
-                        に文字列を渡すと、<code>(int)$value</code>
+                        に文字列を渡すと、<command>(int)$value</command>
                         のように変換されます。
                     </para>
                 </note>
@@ -369,9 +377,9 @@ $result = $client->call('foo.bar', array(array()));
             <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
-$server = $client->getProxy();           // デフォルトの名前空間のプロキシを作成します
+$service = $client->getProxy();           // デフォルトの名前空間のプロキシを作成します
 
-$hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) は "hello" を返します
+$hello = $service->test->sayHello(1, 2);  // test.Hello(1, 2) は "hello" を返します
 ]]></programlisting>
         </example>
 
@@ -379,7 +387,7 @@ $hello = $server->test->sayHello(1, 2);  // test.Hello(1, 2) は "hello" を返�
             <methodname>getProxy()</methodname> のオプションの引数で、
             リモートサーバのどの名前空間をプロキシするかを指定できます。
             名前空間を指定しなかった場合は、デフォルトの名前空間をプロキシします。
-            次の例では、<code>test</code> 名前空間がプロキシの対象となります。
+            次の例では、 'test' 名前空間がプロキシの対象となります。
         </para>
 
         <example id="zend.xmlrpc.client.requests-and-responses.example-2">
@@ -396,8 +404,8 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) は "hello" を返し
         <para>
             リモートサーバが入れ子状の名前空間をサポートしている場合は、
             サーバプロキシでもそれを使用できます。たとえば、
-            上の例のサーバがメソッド <code>test.foo.bar()</code>
-            を保持している場合は、<code>$test->foo->bar()</code>
+            上の例のサーバがメソッド <command>test.foo.bar()</command>
+            を保持している場合は、<command>$test->foo->bar()</command>
             のようにコールします。
         </para>
     </sect2>
@@ -416,7 +424,7 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) は "hello" を返し
             <para>
                 <acronym>HTTP</acronym> エラーが発生した場合、
                 つまり、たとえばリモート <acronym>HTTP</acronym> サーバが
-                <code>404 Not Found</code> を返したような場合に
+                <emphasis>404 Not Found</emphasis> を返したような場合に
                 <classname>Zend_XmlRpc_Client_HttpException</classname> がスローされます。
             </para>
 
@@ -506,7 +514,7 @@ try {
     <sect2 id="zend.xmlrpc.client.introspection">
         <title>サーバのイントロスペクション</title>
         <para>
-            <acronym>XML-RPC</acronym> サーバの中には、<acronym>XML-RPC</acronym> の <code>system.</code> 名前空間で
+            <acronym>XML-RPC</acronym> サーバの中には、<acronym>XML-RPC</acronym> の <emphasis>system.</emphasis> 名前空間で
             デファクトのイントロスペクションメソッドをサポートしているものもあります。
             <classname>Zend_XmlRpc_Client</classname> は、この機能を持つサーバもサポートしています。
         </para>
@@ -544,8 +552,8 @@ $request->setParams(array('foo', 'bar'));
 
 $client->doRequest($request);
 
-// $server->getLastRequest() は Zend_XmlRpc_Request のインスタンスを返します
-// $server->getLastResponse() は Zend_XmlRpc_Response のインスタンスを返します
+// $client->getLastRequest() は Zend_XmlRpc_Request のインスタンスを返します
+// $client->getLastResponse() は Zend_XmlRpc_Response のインスタンスを返します
 ]]></programlisting>
         </example>
 

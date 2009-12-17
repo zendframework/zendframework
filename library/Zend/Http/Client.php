@@ -76,6 +76,7 @@ class Zend_Http_Client
     const TRACE   = 'TRACE';
     const OPTIONS = 'OPTIONS';
     const CONNECT = 'CONNECT';
+    const MERGE   = 'MERGE';
 
     /**
      * Supported HTTP Authentication methods

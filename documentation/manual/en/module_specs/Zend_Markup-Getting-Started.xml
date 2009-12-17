@@ -69,7 +69,7 @@ Should output something like:
         <para>
             Besides simply parsing and rendering markup such as BBCode,
             <classname>Zend_Markup</classname> is also able to handle incorrect input. Most BBCode
-            processors are not able to render all input to <acroym>XHTML</acroym> valid output.
+            processors are not able to render all input to <acronym>XHTML</acronym> valid output.
             <classname>Zend_Markup</classname> corrects input that is nested incorrectly, and also
             closes tags that were not closed:
         </para>

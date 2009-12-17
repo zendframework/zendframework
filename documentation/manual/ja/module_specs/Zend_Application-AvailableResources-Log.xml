@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19555 -->
+<!-- EN-Revision: 19689 -->
 <sect2 id="zend.application.available-resources.log">
     <title>Zend_Application_Resource_Log</title>
 
     <para>
         任意の数のログ・ライタとともに <classname>Zend_Log</classname>インスタンスを
         生成するものが <classname>Zend_Application_Resource_Log</classname> です。
-        構成は <classname>Zend_Log::factory()</classname> メソッドに渡され、
+        構成は <methodname>Zend_Log::factory()</methodname> メソッドに渡され、
         ログ・ライタとフィルタの組合せを指定できます。
         それから、ログ・インスタンスはイベントを記録するために、
         後でブートストラップから取得されることがあります。

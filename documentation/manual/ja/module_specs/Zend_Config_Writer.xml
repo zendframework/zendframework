@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19161 -->
+<!-- EN-Revision: 19691 -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
 
@@ -38,7 +38,7 @@
     </itemizedlist>
 
      <para>
-        Ini ライターでは、セクションについてのレンダリング用のモードが２つあります。
+        <acronym>INI</acronym> ライターでは、セクションについてのレンダリング用のモードが２つあります。
         既定では、トップレベルの構成節は、常にセクション名に含まれます。
         <command>$writer->setRenderWithoutSections()</command> を呼ぶことにより、
         オプションの全てが <acronym>INI</acronym> ファイルのグローバル名前空間に含まれます。

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 19731 -->
+<sect1 id="zend.barcode.introduction">
+    <title>導入</title>
+
+    <para>
+        <classname>Zend_Barcode</classname> は、バーコードを生成する一般的な方法を提示します。
+        <classname>Zend_Barcode</classname> コンポーネントは、2つのサブコンポーネントに分けられます。
+        バーコード・オブジェクトとレンダラ。
+        オブジェクトによって、レンダラと独立してバーコードを作成できます。
+        与える人は、定められたサポートに基づくバーコードを描けます。
+    </para>
+</sect1>

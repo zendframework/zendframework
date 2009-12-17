@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18656 -->
+<!-- EN-Revision: 19711 -->
 <appendix id="project-structure">
     <title>Zend Framework MVC アプリケーションのために推奨されるプロジェクト構造</title>
 
@@ -44,7 +44,7 @@
     <sect1 id="project-structure.project">
         <title>推奨されるプロジェクト・ディレクトリ構造</title>
 
-        <programlisting language="txt"><![CDATA[
+        <programlisting language="text"><![CDATA[
 <project name>/
     application/
         configs/
@@ -273,7 +273,7 @@
             <filename>application/</filename> ディレクトリのそれを模倣しなければなりません。
         </para>
 
-        <programlisting language="xml"><![CDATA[
+        <programlisting language="text"><![CDATA[
 <modulename>
     configs/
         application.ini
@@ -329,7 +329,7 @@
                     リクエスト全てを <filename>index.php</filename> に導きます。
                 </para>
 
-                <programlisting language="xml"><![CDATA[
+                <programlisting language="text"><![CDATA[
 <VirtualHost my.domain.com:80>
     ServerName   my.domain.com
     DocumentRoot /path/to/server/root/my.domain.com/public

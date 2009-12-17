@@ -51,6 +51,16 @@ require_once 'Zend/Feed/Reader/Integration/WordpressAtom10Test.php';
 require_once 'Zend/Feed/Reader/Integration/LautDeRdfTest.php';
 require_once 'Zend/Feed/Reader/Integration/H-OnlineComAtom10Test.php';
 
+require_once 'Zend/Feed/Writer/FeedTest.php';
+require_once 'Zend/Feed/Writer/EntryTest.php';
+require_once 'Zend/Feed/Writer/Renderer/Feed/AtomTest.php';
+require_once 'Zend/Feed/Writer/Renderer/Feed/RssTest.php';
+require_once 'Zend/Feed/Writer/Renderer/Entry/AtomTest.php';
+require_once 'Zend/Feed/Writer/Renderer/Entry/RssTest.php';
+
+require_once 'Zend/Feed/Writer/Extension/ITunes/EntryTest.php';
+require_once 'Zend/Feed/Writer/Extension/ITunes/FeedTest.php';
+
 /**
  * @category   Zend
  * @package    Zend_Feed
@@ -105,6 +115,16 @@ class Zend_Feed_AllTests
         $suite->addTestSuite('Zend_Feed_Reader_Integration_WordpressAtom10Test');
         $suite->addTestSuite('Zend_Feed_Reader_Integration_LautDeRdfTest');
         $suite->addTestSuite('Zend_Feed_Reader_Integration_HOnlineComAtom10Test');
+        
+        $suite->addTestSuite('Zend_Feed_Writer_FeedTest');
+        $suite->addTestSuite('Zend_Feed_Writer_EntryTest');
+        $suite->addTestSuite('Zend_Feed_Writer_Renderer_Feed_AtomTest');
+        $suite->addTestSuite('Zend_Feed_Writer_Renderer_Feed_RssTest');
+        $suite->addTestSuite('Zend_Feed_Writer_Renderer_Entry_AtomTest');
+        $suite->addTestSuite('Zend_Feed_Writer_Renderer_Entry_RssTest');
+        
+        $suite->addTestSuite('Zend_Feed_Writer_Extension_ITunes_EntryTest');
+        $suite->addTestSuite('Zend_Feed_Writer_Extension_ITunes_FeedTest');
 
         return $suite;
     }

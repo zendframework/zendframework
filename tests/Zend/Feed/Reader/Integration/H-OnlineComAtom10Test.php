@@ -68,7 +68,7 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals(array('The H'), $feed->getAuthors());
+        $this->assertEquals(array(array('name'=>'The H')), (array) $feed->getAuthors());
     }
 
     public function testGetsSingleAuthor()
@@ -76,7 +76,7 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals('The H', $feed->getAuthor());
+        $this->assertEquals(array('name'=>'The H'), $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -155,7 +155,7 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(array('The H'), $entry->getAuthors());
+        $this->assertEquals(array(array('name'=>'The H')), (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -164,7 +164,7 @@ class Zend_Feed_Reader_Integration_HOnlineComAtom10Test extends PHPUnit_Framewor
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('The H', $entry->getAuthor());
+        $this->assertEquals(array('name'=>'The H'), $entry->getAuthor());
     }
 
     public function testGetsEntryDescription()

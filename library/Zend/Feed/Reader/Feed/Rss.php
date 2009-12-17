@@ -40,6 +40,11 @@ require_once 'Zend/Feed/Reader/Extension/DublinCore/Feed.php';
 require_once 'Zend/Date.php';
 
 /**
+ * @see Zend_Feed_Reader_Collection_Author
+ */
+require_once 'Zend/Feed/Reader/Collection/Author.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
@@ -100,33 +105,54 @@ class Zend_Feed_Reader_Feed_Rss extends Zend_Feed_Reader_FeedAbstract
         if (array_key_exists('authors', $this->_data)) {
             return $this->_data['authors'];
         }
-
+        
         $authors = array();
-
-        if (empty($authors)) {
-            $authors = $this->getExtension('DublinCore')->getAuthors();
-        }
-
-        if (empty($authors)) {
-            if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10 && $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090) {
-                $list = $this->_xpath->query('//author');
-            } else {
-                $list = $this->_xpath->query('//rss:author');
-            }
-
-            foreach ($list as $authorObj) {
-                $authors[] = $authorObj->nodeValue;
+        $authors_dc = $this->getExtension('DublinCore')->getAuthors();
+        if (!empty($authors_dc)) {
+            foreach ($authors_dc as $author) {
+                $authors[] = array(
+                    'name' => $author['name']
+                );
             }
         }
 
-        if (empty($authors)) {
-            $authors = $this->getExtension('Atom')->getAuthors();
-        }
-
-        if (empty($authors)) {
-            $authors = null;
+        /**
+         * Technically RSS doesn't specific author element use at the feed level
+         * but it's supported on a "just in case" basis.
+         */
+        if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10
+        && $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090) {
+            $list = $this->_xpath->query('//author');
         } else {
-            $authors = array_unique($authors);
+            $list = $this->_xpath->query('//rss:author');
+        }
+        if ($list->length) {
+            foreach ($list as $author) {
+                $string = trim($author->nodeValue);
+                $email = null;
+                $name = null;
+                $data = array();
+                // Pretty rough parsing - but it's a catchall
+                if (preg_match("/^.*@[^ ]*/", $string, $matches)) {
+                    $data['email'] = trim($matches[0]);
+                    if (preg_match("/\((.*)\)$/", $string, $matches)) {
+                        $data['name'] = $matches[1];
+                    }
+                    $authors[] = $data;
+                } 
+            }
+        }
+
+        if (count($authors) == 0) {
+            $authors = $this->getExtension('Atom')->getAuthors();
+        } else {
+            $authors = new Zend_Feed_Reader_Collection_Author(
+                Zend_Feed_Reader::arrayUnique($authors)
+            );
+        }
+
+        if (count($authors) == 0) {
+            $authors = null;
         }
 
         $this->_data['authors'] = $authors;

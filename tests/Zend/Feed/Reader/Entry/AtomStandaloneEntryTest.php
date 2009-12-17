@@ -163,14 +163,15 @@ class Zend_Feed_Reader_Entry_AtomStandaloneEntryTest extends PHPUnit_Framework_T
         );
 
         $authors = array(
-            0 => 'joe@example.com (Joe Bloggs)',
-            1 => 'Joe Bloggs',
-            3 => 'joe@example.com',
-            4 => 'http://www.example.com',
-            6 => 'jane@example.com (Jane Bloggs)'
+            array('email'=>'joe@example.com','name'=>'Joe Bloggs','uri'=>'http://www.example.com'),
+            array('name'=>'Joe Bloggs','uri'=>'http://www.example.com'),
+            array('name'=>'Joe Bloggs'),
+            array('email'=>'joe@example.com','uri'=>'http://www.example.com'),
+            array('uri'=>'http://www.example.com'),
+            array('email'=>'joe@example.com')
         );
 
-        $this->assertEquals($authors, $entry->getAuthors());
+        $this->assertEquals($authors, (array) $entry->getAuthors());
     }
 
     /**
@@ -182,7 +183,7 @@ class Zend_Feed_Reader_Entry_AtomStandaloneEntryTest extends PHPUnit_Framework_T
         $entry = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath . '/author/atom10.xml')
         );
-        $this->assertEquals('joe@example.com (Joe Bloggs)', $entry->getAuthor());
+        $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com','uri'=>'http://www.example.com'), $entry->getAuthor());
     }
 
     /**

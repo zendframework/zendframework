@@ -159,45 +159,50 @@ class Zend_Feed_Reader_Entry_Rss extends Zend_Feed_Reader_EntryAbstract implemen
         if (array_key_exists('authors', $this->_data)) {
             return $this->_data['authors'];
         }
-
+        
         $authors = array();
-        // @todo: create a list from all potential sources rather than from alternatives
-        if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10 &&
-            $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090) {
-            $list = $this->_xpath->evaluate($this->_xpathQueryRss.'//author');
-        } else {
-            $list = $this->_xpath->evaluate($this->_xpathQueryRdf.'//rss:author');
-        }
-        if (!$list->length) {
-            if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10 && $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090) {
-                $list = $this->_xpath->query('//author');
-            } else {
-                $list = $this->_xpath->query('//rss:author');
+        $authors_dc = $this->getExtension('DublinCore')->getAuthors();
+        if (!empty($authors_dc)) {
+            foreach ($authors_dc as $author) {
+                $authors[] = array(
+                    'name' => $author['name']
+                );
             }
         }
-
+        
+        if ($this->getType() !== Zend_Feed_Reader::TYPE_RSS_10
+        && $this->getType() !== Zend_Feed_Reader::TYPE_RSS_090) {
+            $list = $this->_xpath->query($this->_xpathQueryRss . '//author');
+        } else {
+            $list = $this->_xpath->query($this->_xpathQueryRdf . '//rss:author');
+        }
         if ($list->length) {
             foreach ($list as $author) {
-                if ($this->getType() == Zend_Feed_Reader::TYPE_RSS_20
-                    && preg_match("/\(([^\)]+)\)/", $author->nodeValue, $matches, PREG_OFFSET_CAPTURE)
-                ) {
-                    // source name from RSS 2.0 <author>
-                    // format "joe@example.com (Joe Bloggs)"
-                    $authors[] = $matches[1][0];
-                } else {
-                    $authors[] = $author->nodeValue;
-                }
+                $string = trim($author->nodeValue);
+                $email = null;
+                $name = null;
+                $data = array();
+                // Pretty rough parsing - but it's a catchall
+                if (preg_match("/^.*@[^ ]*/", $string, $matches)) {
+                    $data['email'] = trim($matches[0]);
+                    if (preg_match("/\((.*)\)$/", $string, $matches)) {
+                        $data['name'] = $matches[1];
+                    }
+                    $authors[] = $data;
+                } 
             }
-
-            $authors = array_unique($authors);
         }
 
-        if (empty($authors)) {
-            $authors = $this->getExtension('DublinCore')->getAuthors();
-        }
-
-        if (empty($authors)) {
+        if (count($authors) == 0) {
             $authors = $this->getExtension('Atom')->getAuthors();
+        } else {
+            $authors = new Zend_Feed_Reader_Collection_Author(
+                Zend_Feed_Reader::arrayUnique($authors)
+            );
+        }
+
+        if (count($authors) == 0) {
+            $authors = null;
         }
 
         $this->_data['authors'] = $authors;

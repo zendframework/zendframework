@@ -696,4 +696,24 @@ class Zend_Feed_Reader
         self::registerExtension('Thread');
         self::registerExtension('Podcast');
     }
+    
+    /**
+     * Utility method to apply array_unique operation to a multidimensional
+     * array.
+     *
+     * @param array
+     * @return array
+     */
+    public static function arrayUnique(array $array)
+    {
+        foreach ($array as &$value) {
+            $value = serialize($value);
+        }
+        $array = array_unique($array);
+        foreach ($array as &$value) {
+            $value = unserialize($value);
+        }
+        return $array;
+    }
+ 
 }

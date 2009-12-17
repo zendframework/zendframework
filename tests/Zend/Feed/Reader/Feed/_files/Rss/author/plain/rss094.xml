@@ -2,8 +2,8 @@
 <rss version="0.94">
     <channel>
         <item>
-            <author>Joe Bloggs</author>
-            <author>Jane Bloggs</author>
+            <author>joe@example.com (Joe Bloggs)</author>
+            <author>jane@example.com (Jane Bloggs)</author>
         </item>
     </channel>
 </rss>

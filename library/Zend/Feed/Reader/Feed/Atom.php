@@ -84,9 +84,9 @@ class Zend_Feed_Reader_Feed_Atom extends Zend_Feed_Reader_FeedAbstract
             return $this->_data['authors'];
         }
 
-        $people = $this->getExtension('Atom')->getAuthors();
+        $authors = $this->getExtension('Atom')->getAuthors();
 
-        $this->_data['authors'] = $people;
+        $this->_data['authors'] = $authors;
 
         return $this->_data['authors'];
     }

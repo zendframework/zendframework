@@ -35,6 +35,11 @@ require_once 'Zend/Date.php';
 require_once 'Zend/Uri.php';
 
 /**
+ * @see Zend_Feed_Reader_Collection_Author
+ */
+require_once 'Zend/Feed/Reader/Collection/Author.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -71,38 +76,28 @@ class Zend_Feed_Reader_Extension_Atom_Feed
             return $this->_data['authors'];
         }
 
-        $authors = $this->_xpath->query('//atom:author');
-        $contributors = $this->_xpath->query('//atom:contributor');
+        $list = $this->_xpath->query('//atom:author');
 
-        $people = array();
+        $authors = array();
 
-        if ($authors->length) {
-            foreach ($authors as $author) {
+        if ($list->length) {
+            foreach ($list as $author) {
                 $author = $this->_getAuthor($author);
-
                 if (!empty($author)) {
-                    $people[] = $author;
+                    $authors[] = $author;
                 }
             }
         }
 
-        if ($contributors->length) {
-            foreach ($contributors as $contributor) {
-                $contributor = $this->_getAuthor($contributor);
-
-                if (!empty($contributor)) {
-                    $people[] = $contributor;
-                }
-            }
-        }
-
-        if (empty($people)) {
-            $people = null;
+        if (count($authors) == 0) {
+            $authors = null;
         } else {
-            $people = array_unique($people);
+            $authors = new Zend_Feed_Reader_Collection_Author(
+                Zend_Feed_Reader::arrayUnique($authors)
+            );
         }
 
-        $this->_data['authors'] = $people;
+        $this->_data['authors'] = $authors;
 
         return $this->_data['authors'];
     }
@@ -467,35 +462,28 @@ class Zend_Feed_Reader_Extension_Atom_Feed
      */
     protected function _getAuthor(DOMElement $element)
     {
-        $email = null;
-        $name  = null;
-        $uri   = null;
+        $author = array();
 
         $emailNode = $element->getElementsByTagName('email');
         $nameNode  = $element->getElementsByTagName('name');
         $uriNode   = $element->getElementsByTagName('uri');
-
-        if ($emailNode->length) {
-            $email = $emailNode->item(0)->nodeValue;
+        
+        if ($emailNode->length && strlen($emailNode->item(0)->nodeValue) > 0) {
+            $author['email'] = $emailNode->item(0)->nodeValue;
         }
 
-        if ($nameNode->length) {
-            $name = $nameNode->item(0)->nodeValue;
+        if ($nameNode->length && strlen($nameNode->item(0)->nodeValue) > 0) {
+            $author['name'] = $nameNode->item(0)->nodeValue;
         }
 
-        if ($uriNode->length) {
-            $uri = $uriNode->item(0)->nodeValue;
+        if ($uriNode->length && strlen($uriNode->item(0)->nodeValue) > 0) {
+            $author['uri'] = $uriNode->item(0)->nodeValue;
         }
 
-        if (!empty($email)) {
-            return $email . (empty($name) ? '' : ' (' . $name . ')');
-        } else if (!empty($name)) {
-            return $name;
-        } else if (!empty($uri)) {
-            return $uri;
+        if (empty($author)) {
+            return null;
         }
-
-        return null;
+        return $author;
     }
 
     /**

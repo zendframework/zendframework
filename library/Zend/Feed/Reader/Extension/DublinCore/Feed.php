@@ -30,6 +30,11 @@ require_once 'Zend/Feed/Reader/Extension/FeedAbstract.php';
 require_once 'Zend/Date.php';
 
 /**
+ * @see Zend_Feed_Reader_Collection_Author
+ */
+require_once 'Zend/Feed/Reader/Collection/Author.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
@@ -79,13 +84,18 @@ class Zend_Feed_Reader_Extension_DublinCore_Feed
                 $list = $this->_xpath->query('//dc10:publisher');
             }
         }
-
-        foreach ($list as $authorObj) {
-            $authors[] = $authorObj->nodeValue;
-        }
-
-        if (!empty($authors)) {
-            $authors = array_unique($authors);
+        
+        if ($list->length) {
+            foreach ($list as $author) {
+                $authors[] = array(
+                    'name' => $author->nodeValue
+                );
+            }
+            $authors = new Zend_Feed_Reader_Collection_Author(
+                Zend_Feed_Reader::arrayUnique($authors)
+            );
+        } else {
+            $authors = null;
         }
 
         $this->_data['authors'] = $authors;

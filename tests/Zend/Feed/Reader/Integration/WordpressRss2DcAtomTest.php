@@ -60,7 +60,9 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals(array('norm2782'), $feed->getAuthors());
+        $this->assertEquals(array(
+            array('name'=>'norm2782')
+        ), (array) $feed->getAuthors());
     }
 
     public function testGetsSingleAuthor()
@@ -68,7 +70,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals('norm2782', $feed->getAuthor());
+        $this->assertEquals(array('name'=>'norm2782'), $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -151,7 +153,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(array('norm2782'), $entry->getAuthors());
+        $this->assertEquals(array(array('name'=>'norm2782')), (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -160,7 +162,7 @@ class Zend_Feed_Reader_Integration_WordpressRss2DcAtomTest extends PHPUnit_Frame
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('norm2782', $entry->getAuthor());
+        $this->assertEquals(array('name'=>'norm2782'), $entry->getAuthor());
     }
 
     public function testGetsEntryDescription()

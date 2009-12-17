@@ -72,7 +72,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals(array('laut.de'), $feed->getAuthors());
+        $this->assertEquals(array(array('name'=>'laut.de')), (array) $feed->getAuthors());
     }
 
     public function testGetsSingleAuthor()
@@ -80,7 +80,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath)
         );
-        $this->assertEquals('laut.de', $feed->getAuthor());
+        $this->assertEquals(array('name'=>'laut.de'), $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -153,7 +153,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(array('laut.de'), $entry->getAuthors());
+        $this->assertEquals(array(array('name'=>'laut.de')), (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -162,7 +162,7 @@ class Zend_Feed_Reader_Integration_LautDeRdfTest extends PHPUnit_Framework_TestC
             file_get_contents($this->_feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('laut.de', $entry->getAuthor());
+        $this->assertEquals(array('name'=>'laut.de'), $entry->getAuthor());
     }
 
     // Technically, the next two tests should not pass. However the source feed has an encoding

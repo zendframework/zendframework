@@ -4,8 +4,8 @@
     xmlns="http://my.netscape.com/rdf/simple/0.9/">
     <channel>
         <item>
-            <author>Joe Bloggs</author>
-            <author>Jane Bloggs</author>
+            <author>joe@example.com (Joe Bloggs)</author>
+            <author>jane@example.com (Jane Bloggs)</author>
         </item>
     </channel>
 </rdf:RDF>

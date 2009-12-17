@@ -87,16 +87,15 @@ class Zend_Feed_Reader_Extension_DublinCore_Entry
 
         if ($list->length) {
             foreach ($list as $author) {
-                if ($this->getType() == Zend_Feed_Reader::TYPE_RSS_20
-                    && preg_match("/\(([^\)]+)\)/", $author->nodeValue, $matches, PREG_OFFSET_CAPTURE)
-                ) {
-                    $authors[] = $matches[1][0];
-                } else {
-                    $authors[] = $author->nodeValue;
-                }
+                $authors[] = array(
+                    'name' => $author->nodeValue
+                );
             }
-
-            $authors = array_unique($authors);
+            $authors = new Zend_Feed_Reader_Collection_Author(
+                Zend_Feed_Reader::arrayUnique($authors)
+            );
+        } else {
+            $authors = null;
         }
 
         $this->_data['authors'] = $authors;

@@ -27,6 +27,8 @@ require_once 'Zend/XmlRpc/Response.php';
 
 require_once 'Zend/Http/Client/Adapter/Test.php';
 
+require_once 'Zend/XmlRpc/Value/DateTime.php';
+
 /**
  * Test case for Zend_XmlRpc_Value
  *
@@ -662,6 +664,27 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->xmlrpcClient->call('method'));
         $this->assertSame($expectedUserAgent, $this->httpClient->getHeader('user-agent'));
     }
+    
+    /**
+     * @group ZF-8478
+     */
+    public function testPythonSimpleXMLRPCServerWithUnsupportedMethodSignatures()
+    {
+        try
+        {
+        	$introspector = new Zend_XmlRpc_Client_ServerIntrospection(
+                new Test_XmlRpc_Client('http://localhost/')
+            );
+            
+            $signature = $introspector->getMethodSignature('add');
+            if (!is_array($signature)) {
+                $this->fail('Expected exception has not been thrown');
+            }
+        }
+        catch (Zend_XmlRpc_Client_IntrospectException $e) {
+            $this->assertEquals('Invalid signature for method "add"', $e->getMessage());
+        }
+    }
 
     // Helpers
     public function setServerResponseTo($nativeVars)
@@ -713,6 +736,28 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
     {
         $this->mockedHttpClient = $this->getMock('Zend_Http_Client');
         $this->xmlrpcClient->setHttpClient($this->mockedHttpClient);
+    }
+}
+
+/** related to ZF-8478 */
+require_once 'Zend/XmlRpc/Client/ServerProxy.php';
+class Python_SimpleXMLRPCServerWithUnsupportedIntrospection extends Zend_XmlRpc_Client_ServerProxy {
+    public function __call($method, $args) {
+        if ($method == 'methodSignature') {
+            return 'signatures not supported';
+        }
+        return parent::__call($method, $args);
+    }
+}
+
+/** related to ZF-8478 */
+require_once 'Zend/XmlRpc/Client.php';
+class Test_XmlRpc_Client extends Zend_XmlRpc_Client {
+    public function getProxy($namespace = '') {
+    	if (empty($this->_proxyCache[$namespace])) {
+    	    $this->_proxyCache[$namespace] = new Python_SimpleXMLRPCServerWithUnsupportedIntrospection($this, $namespace);
+    	}
+        return parent::getProxy($namespace);
     }
 }
 

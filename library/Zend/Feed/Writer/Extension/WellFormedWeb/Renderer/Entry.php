@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -27,13 +27,17 @@ require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
 /**
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Writer_Extension_WellFormedWeb_Renderer_Entry
-extends Zend_Feed_Writer_Extension_RendererAbstract
+    extends Zend_Feed_Writer_Extension_RendererAbstract
 {
-
+    /**
+     * Render entry
+     * 
+     * @return void
+     */
     public function render()
     {
         if (strtolower($this->getType()) == 'atom') {
@@ -43,12 +47,24 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $this->_setCommentFeedLinks($this->_dom, $this->_base);
     }
     
+    /**
+     * Append entry namespaces
+     * 
+     * @return void
+     */
     protected function _appendNamespaces()
     {
         $this->getRootElement()->setAttribute('xmlns:wfw',
             'http://wellformedweb.org/CommentAPI/');  
     }
     
+    /**
+     * Set entry comment feed links
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setCommentFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $links = $this->getDataContainer()->getCommentFeedLinks();
@@ -63,5 +79,4 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
             }
         }
     }
-
 }

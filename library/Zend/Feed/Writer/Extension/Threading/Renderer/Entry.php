@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -27,13 +27,17 @@ require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
 /**
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
-extends Zend_Feed_Writer_Extension_RendererAbstract
+    extends Zend_Feed_Writer_Extension_RendererAbstract
 {
-
+    /**
+     * Render entry
+     * 
+     * @return void
+     */
     public function render()
     {
         if (strtolower($this->getType()) == 'rss') {
@@ -45,12 +49,24 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $this->_setCommentCount($this->_dom, $this->_base);
     }
     
+    /**
+     * Append entry namespaces
+     * 
+     * @return void
+     */
     protected function _appendNamespaces()
     {
         $this->getRootElement()->setAttribute('xmlns:thr',
             'http://purl.org/syndication/thread/1.0');  
     }
     
+    /**
+     * Set comment link
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
     {
         $link = $this->getDataContainer()->getCommentLink();
@@ -69,6 +85,13 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $root->appendChild($clink);
     }
     
+    /**
+     * Set comment feed links
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setCommentFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $links = $this->getDataContainer()->getCommentFeedLinks();
@@ -89,6 +112,13 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         }
     }
 
+    /**
+     * Set entry comment count
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setCommentCount(DOMDocument $dom, DOMElement $root)
     {
         $count = $this->getDataContainer()->getCommentCount();
@@ -99,5 +129,4 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $tcount->nodeValue = $count;
         $root->appendChild($tcount);
     }
-
 }

@@ -19,8 +19,10 @@
  * @version    $Id$
  */
  
+/** @see Zend_Feed_Writer */
 require_once 'Zend/Feed/Writer.php';
 
+/** @see Zend_Version */
 require_once 'Zend/Version.php';
  
 /**
@@ -31,15 +33,30 @@ require_once 'Zend/Version.php';
  */
 class Zend_Feed_Writer_Renderer_RendererAbstract
 {
-
+    /**
+     * Extensions
+     * @var array
+     */
     protected $_extensions = array();
     
+    /**
+     * @var mixed
+     */
     protected $_container = null;
 
+    /**
+     * @var DOMDocument
+     */
     protected $_dom = null;
 
+    /**
+     * @var bool
+     */
     protected $_ignoreExceptions = false;
 
+    /**
+     * @var array
+     */
     protected $_exceptions = array();
     
     /**
@@ -57,8 +74,17 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
      */
     protected $_type = null;
     
+    /**
+     * @var DOMElement
+     */
     protected $_rootElement = null;
 
+    /**
+     * Constructor
+     * 
+     * @param  mixed $container 
+     * @return void
+     */
     public function __construct($container)
     {
         $this->_container = $container;
@@ -66,36 +92,74 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
         $this->_loadExtensions();
     }
     
+    /**
+     * Save XML to string
+     * 
+     * @return string
+     */
     public function saveXml()
     {
         return $this->getDomDocument()->saveXml();
     }
 
+    /**
+     * Get DOM document
+     * 
+     * @return DOMDocument
+     */
     public function getDomDocument()
     {
         return $this->_dom;
     }
 
+    /**
+     * Get document element from DOM
+     * 
+     * @return DOMElement
+     */
     public function getElement()
     {
         return $this->getDomDocument()->documentElement;
     }
 
+    /**
+     * Get data container of items being rendered
+     * 
+     * @return mixed
+     */
     public function getDataContainer()
     {
         return $this->_container;
     }
     
+    /**
+     * Set feed encoding
+     * 
+     * @param  string $enc 
+     * @return Zend_Feed_Writer_Renderer_RendererAbstract
+     */
     public function setEncoding($enc)
     {
         $this->_encoding = $enc;
+        return $this;
     }
     
+    /**
+     * Get feed encoding
+     * 
+     * @return string
+     */
     public function getEncoding()
     {
         return $this->_encoding;
     }
 
+    /**
+     * Indicate whether or not to ignore exceptions
+     * 
+     * @param  bool $bool 
+     * @return Zend_Feed_Writer_Renderer_RendererAbstract
+     */
     public function ignoreExceptions($bool = true)
     {
         if (!is_bool($bool)) {
@@ -103,8 +167,14 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
             throw new Zend_Feed_Exception('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
         }
         $this->_ignoreExceptions = $bool;
+        return $this;
     }
 
+    /**
+     * Get exception list
+     * 
+     * @return array
+     */
     public function getExceptions()
     {
         return $this->_exceptions;
@@ -177,5 +247,4 @@ class Zend_Feed_Writer_Renderer_RendererAbstract
             $this->_extensions[$extension]->setEncoding($this->getEncoding());
         }
     }
-
 }

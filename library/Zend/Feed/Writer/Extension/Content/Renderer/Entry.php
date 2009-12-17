@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -27,13 +27,17 @@ require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
 /**
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Writer_Extension_Content_Renderer_Entry
-extends Zend_Feed_Writer_Extension_RendererAbstract
+    extends Zend_Feed_Writer_Extension_RendererAbstract
 {
-
+    /**
+     * Render entry
+     * 
+     * @return void
+     */
     public function render()
     {
         if (strtolower($this->getType()) == 'atom') {
@@ -43,12 +47,24 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $this->_setContent($this->_dom, $this->_base);
     }
     
+    /**
+     * Append namespaces to root element
+     * 
+     * @return void
+     */
     protected function _appendNamespaces()
     {
         $this->getRootElement()->setAttribute('xmlns:content',
             'http://purl.org/rss/1.0/modules/content/');  
     }
 
+    /**
+     * Set entry content
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setContent(DOMDocument $dom, DOMElement $root)
     {
         $content = $this->getDataContainer()->getContent();
@@ -63,5 +79,4 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
             $this->getDataContainer()->getEncoding()
         );
     }
-
 }

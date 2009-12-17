@@ -82,7 +82,10 @@ class Zend_Feed_Writer_Entry
     {
         $author = array();
         if (is_array($name)) {
-            if (!array_key_exists('name', $name) || empty($name['name']) || !is_string($name['name'])) {
+            if (!array_key_exists('name', $name) 
+                || empty($name['name']) 
+                || !is_string($name['name'])
+            ) {
                 require_once 'Zend/Feed/Exception.php';
                 throw new Zend_Feed_Exception('Invalid parameter: author array must include a "name" key with a non-empty string value');
             }
@@ -95,7 +98,10 @@ class Zend_Feed_Writer_Entry
                 $author['email'] = $name['email'];
             }
             if (isset($name['uri'])) {
-                if (empty($name['uri']) || !is_string($name['uri']) || !Zend_Uri::check($name['uri'])) {
+                if (empty($name['uri']) 
+                    || !is_string($name['uri']) 
+                    || !Zend_Uri::check($name['uri'])
+                ) {
                     require_once 'Zend/Feed/Exception.php';
                     throw new Zend_Feed_Exception('Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI');
                 }
@@ -663,5 +669,4 @@ class Zend_Feed_Writer_Entry
             $this->_extensions[$ext]->setEncoding($this->getEncoding());
         }
     }
-
 }

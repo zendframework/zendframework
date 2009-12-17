@@ -31,15 +31,25 @@ require_once 'Zend/Feed/Writer/Renderer/RendererAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Writer_Renderer_Entry_Rss
-extends Zend_Feed_Writer_Renderer_RendererAbstract
-implements Zend_Feed_Writer_Renderer_RendererInterface
+    extends Zend_Feed_Writer_Renderer_RendererAbstract
+    implements Zend_Feed_Writer_Renderer_RendererInterface
 {
-
+    /**
+     * Constructor
+     * 
+     * @param  Zend_Feed_Writer_Entry $container 
+     * @return void
+     */
     public function __construct (Zend_Feed_Writer_Entry $container)
     {
         parent::__construct($container);
     }
     
+    /**
+     * Render RSS entry
+     * 
+     * @return Zend_Feed_Writer_Renderer_Entry_Rss
+     */
     public function render()
     {
         $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
@@ -66,6 +76,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         return $this;
     }
     
+    /**
+     * Set entry title
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDescription()
@@ -91,6 +108,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         );
     }
     
+    /**
+     * Set entry description
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDescription()
@@ -117,6 +141,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         );
     }
     
+    /**
+     * Set date entry was last modified
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDateModified()) {
@@ -129,6 +160,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
             ->get(Zend_Date::RSS);
     }
     
+    /**
+     * Set date entry was created
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
         if (!$this->getDataContainer()->getDateCreated()) {
@@ -141,6 +179,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         }
     }
     
+    /**
+     * Set entry authors
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->_container->getAuthors();
@@ -158,6 +203,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         }
     }
     
+    /**
+     * Set entry enclosure
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setEnclosure(DOMDocument $dom, DOMElement $root)
     {
         $data = $this->_container->getEnclosure();
@@ -171,6 +223,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         $root->appendChild($enclosure);
     }
     
+    /**
+     * Set link to entry
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getLink()) {
@@ -181,6 +240,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         $link->nodeValue = $this->getDataContainer()->getLink();
     }
     
+    /**
+     * Set entry identifier
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getId()
@@ -200,6 +266,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         }
     }
     
+    /**
+     * Set link to entry comments
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
     {
         $link = $this->getDataContainer()->getCommentLink();
@@ -210,5 +283,4 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         $clink->nodeValue = $link;
         $root->appendChild($clink);
     }
-
 }

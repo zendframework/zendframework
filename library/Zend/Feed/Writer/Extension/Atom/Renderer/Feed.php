@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -27,13 +27,17 @@ require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
 /**
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Writer_Extension_Atom_Renderer_Feed
-extends Zend_Feed_Writer_Extension_RendererAbstract
+    extends Zend_Feed_Writer_Extension_RendererAbstract
 {
-
+    /**
+     * Render feed
+     * 
+     * @return void
+     */
     public function render()
     {
         /**
@@ -48,12 +52,24 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $this->_setHubs($this->_dom, $this->_base);
     }
     
+    /**
+     * Append namespaces to root element of feed
+     * 
+     * @return void
+     */
     protected function _appendNamespaces()
     {
         $this->getRootElement()->setAttribute('xmlns:atom',
             'http://www.w3.org/2005/Atom');  
     }
 
+    /**
+     * Set feed link elements
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $flinks = $this->getDataContainer()->getFeedLinks();
@@ -61,7 +77,7 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
             return;
         }
         foreach ($flinks as $type => $href) {
-            $mime = 'application/' . strtolower($type) . '+xml';
+            $mime  = 'application/' . strtolower($type) . '+xml';
             $flink = $dom->createElement('atom:link');
             $root->appendChild($flink);
             $flink->setAttribute('rel', 'self');
@@ -70,6 +86,13 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         }
     }
     
+    /**
+     * Set PuSH hubs
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setHubs(DOMDocument $dom, DOMElement $root)
     {
         $hubs = $this->getDataContainer()->getHubs();
@@ -83,5 +106,4 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
             $root->appendChild($hub);
         }
     }
-
 }

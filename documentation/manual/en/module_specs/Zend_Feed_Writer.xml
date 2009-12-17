@@ -1,99 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
 <sect1 id="zend.feed.writer">
     <title>Zend_Feed_Writer</title>
 
     <sect2 id="zend.feed.writer.introduction">
         <title>Introduction</title>
 
-        <para><classname>Zend_Feed_Writer</classname> is the sibling component to
-        <classname>Zend_Feed_Reader</classname> responsible for generating feeds
-        for output. It supports the Atom 1.0 specification (RFC 4287) and RSS 2.0
-        as specified by the RSS Advisory Board (RSS 2.0.11). It does not deviate
-        from these standards. It does, however, offer a simple Extension system
-        which allows for any extension/module for either of these two specifications
-        to be implemented if they are not provided out of the box.</para>
+        <para>
+            <classname>Zend_Feed_Writer</classname> is the sibling component to
+            <classname>Zend_Feed_Reader</classname> responsible for generating feeds for output. It
+            supports the Atom 1.0 specification (RFC 4287) and RSS 2.0 as specified by the RSS
+            Advisory Board (RSS 2.0.11). It does not deviate from these standards. It does, however,
+            offer a simple Extension system which allows for any extension/module for either of
+            these two specifications to be implemented if they are not provided out of the box.
+        </para>
         
-        <para>In many ways, <classname>Zend_Feed_Writer</classname> is the inverse
-        of <classname>Zend_Feed_Reader</classname>. Where
-        <classname>Zend_Feed_Reader</classname> focused on providing an easy to
-        use architecture fronted by getter methods, <classname>Zend_Feed_Writer</classname>
-        is fronted by similarly named setters or mutators. This ensures the API
-        won't pose a learning curve to anyone familiar with
-        <classname>Zend_Feed_Reader</classname>.</para>
+        <para>
+            In many ways, <classname>Zend_Feed_Writer</classname> is the inverse of
+            <classname>Zend_Feed_Reader</classname>. Where <classname>Zend_Feed_Reader</classname>
+            focused on providing an easy to use architecture fronted by getter methods,
+            <classname>Zend_Feed_Writer</classname> is fronted by similarly named setters or
+            mutators. This ensures the API won't pose a learning curve to anyone familiar with
+            <classname>Zend_Feed_Reader</classname>.
+        </para>
         
-        <para>As a result of this design, the rest may even be obvious. Behind the
-        scenes, data set on any <classname>Zend_Feed_Reader</classname> object is
-        translated at render time onto a <classname>DOMDocument</classname> object
-        using the necessary feed elements. For each supported feed type there is
-        both an Atom 1.0 and RSS 2.0 renderer. Using a <classname>DOMDocument</classname>
-        rather a templating solution has numerous advantages, the most obvious being
-        the ability to export the <classname>DOMDocument</classname> for additional
-        processing and relying on PHP DOM for correct and valid rendering.</para>
+        <para>
+            As a result of this design, the rest may even be obvious. Behind the scenes, data set on
+            any <classname>Zend_Feed_Reader</classname> object is translated at render time onto a
+            <classname>DOMDocument</classname> object using the necessary feed elements. For each
+            supported feed type there is both an Atom 1.0 and RSS 2.0 renderer. Using a
+            <classname>DOMDocument</classname> rather a templating solution has numerous advantages,
+            the most obvious being the ability to export the <classname>DOMDocument</classname> for
+            additional processing and relying on PHP DOM for correct and valid rendering.
+        </para>
         
-        <para>As with <classname>Zend_Feed_Reader</classname>,
-        <classname>Zend_Feed_Writer</classname> is a standalone replacement for
-        <classname>Zend_Feed</classname>'s Builder architecture and is not compatible
-        with those classes.</para>
+        <para>
+            As with <classname>Zend_Feed_Reader</classname>, <classname>Zend_Feed_Writer</classname>
+            is a standalone replacement for <classname>Zend_Feed</classname>'s Builder architecture
+            and is not compatible with those classes.
+        </para>
         
     </sect2>
     
     <sect2 id="zend.feed.writer.architecture">
         <title>Architecture</title>
         
-        <para>The architecture of <classname>Zend_Feed_Writer</classname> is very
-        simple. It has two core sets of classes: containers and renderers.</para>
+        <para>
+            The architecture of <classname>Zend_Feed_Writer</classname> is very simple. It has two
+            core sets of classes: containers and renderers.
+        </para>
         
-        <para>The containers include the <classname>Zend_Feed_Writer_Feed</classname>
-        and <classname>Zend_Feed_Writer_Entry</classname> classes. The Entry classes
-        can be attached to any Feed class. The sole purpose of these containers is
-        to collect data about the feed to generate using a simple interface of setter
-        methods. These methods perform some data validity testing. For example, it
-        will validate any passed URIs, dates, etc. These checks are not tied to any
-        of the feed standards. The container objects also contain methods to allow
-        for fast rendering and export of the final feed, and these can be reused at will.</para>
+        <para>
+            The containers include the <classname>Zend_Feed_Writer_Feed</classname> and
+            <classname>Zend_Feed_Writer_Entry</classname> classes. The Entry classes can be attached
+            to any Feed class. The sole purpose of these containers is to collect data about the
+            feed to generate using a simple interface of setter methods. These methods perform some
+            data validity testing. For example, it will validate any passed URIs, dates, etc. These
+            checks are not tied to any of the feed standards. The container objects also contain
+            methods to allow for fast rendering and export of the final feed, and these can be
+            reused at will.
+        </para>
         
-        <para>While there are two data containers, there are four renderers - two
-        matching container renderers per support feed type. The renderer accept a
-        container, and based on its content attempt to generate a valid feed. If
-        the renderer is unable to generate a valid feed, perhaps due to the container
-        missing an obligatory data point, it will report this by throwing an
-        <classname>Exception</classname>. While it is possible to ignore
-        <classname>Exception</classname>s, this removes the default safeguard of
-        ensuring you have sufficient data set to render a wholly valid feed.</para>
+        <para>
+            While there are two data containers, there are four renderers - two matching container
+            renderers per support feed type. The renderer accept a container, and based on its
+            content attempt to generate a valid feed. If the renderer is unable to generate a valid
+            feed, perhaps due to the container missing an obligatory data point, it will report this
+            by throwing an <classname>Exception</classname>. While it is possible to ignore
+            <classname>Exception</classname>s, this removes the default safeguard of ensuring you
+            have sufficient data set to render a wholly valid feed.
+        </para>
         
-        <para>Due to the system being divided between data containers and
-        renderers, it can make Extensions somewhat interesting. A typical Extension
-        offering namespaced feed and entry level elements, must itself reflect the
-        exact same architecture, i.e. offer feed and entry level data containers,
-        and matching renderers. There is, fortunately, no complex integration work
-        required since all Extension classes are simply registered and automatically
-        used by the core classes. We'll meet Extensions in more detail at the end
-        of this section.</para>
-        
+        <para>
+            Due to the system being divided between data containers and renderers, it can make
+            Extensions somewhat interesting. A typical Extension offering namespaced feed and entry
+            level elements, must itself reflect the exact same architecture, i.e. offer feed and
+            entry level data containers, and matching renderers. There is, fortunately, no complex
+            integration work required since all Extension classes are simply registered and
+            automatically used by the core classes. We'll meet Extensions in more detail at the end
+            of this section.
+        </para>
     </sect2>
     
     <sect2 id="zend.feed.writer.getting.started">
         <title>Getting Started</title>
     
-        <para>Using <classname>Zend_Feed_Reader</classname> is as simple as
-        setting data and triggering the renderer. Here is an example to generate
-        a minimal Atom 1.0 feed.</para>
+        <para>
+            Using <classname>Zend_Feed_Reader</classname> is as simple as setting data and
+            triggering the renderer. Here is an example to generate a minimal Atom 1.0 feed.
+        </para>
         
         <programlisting language="php"><![CDATA[
-require_once 'Zend/Feed/Writer/Feed.php';
-
 /**
  * Create the parent feed
  */
-
 $feed = new Zend_Feed_Writer_Feed;
 $feed->setTitle('Paddy\'s Blog');
 $feed->setLink('http://www.example.com');
 $feed->setFeedLink('http://www.example.com/atom', 'atom');
 $feed->addAuthor(array(
-    'name' => 'Paddy',
+    'name'  => 'Paddy',
     'email' => 'paddy@example.com',
-    'uri' => 'http://www.example.com'
+    'uri'   => 'http://www.example.com',
 ));
 $feed->setDateModified(time());
 $feed->addHub('http://pubsubhubbub.appspot.com/');
@@ -102,14 +110,13 @@ $feed->addHub('http://pubsubhubbub.appspot.com/');
  * Add one or more entries. Note that entries must
  * be manually added once created.
  */
-
 $entry = $feed->createEntry();
 $entry->setTitle('All Your Base Are Belong To Us');
 $entry->setLink('http://www.example.com/all-your-base-are-belong-to-us');
 $entry->addAuthor(array(
-    'name' => 'Paddy',
+    'name'  => 'Paddy',
     'email' => 'paddy@example.com',
-    'uri' => 'http://www.example.com'
+    'uri'   => 'http://www.example.com',
 ));
 $entry->setDateModified(time());
 $entry->setDateCreated(time());
@@ -121,13 +128,14 @@ $feed->addEntry($entry);
  * Render the resulting feed to Atom 1.0 and assign to $out.
  * You can substitute "atom" with "rss" to generate an RSS 2.0 feed.
  */
-
 $out = $feed->export('atom');
 ]]></programlisting>
 
-        <para>The output rendered should be as follows:</para>
+        <para>
+            The output rendered should be as follows:
+        </para>
         
-                <programlisting language="xml">
+        <programlisting language="xml">
 &#60;?xml version="1.0" encoding="utf-8"?&#62;
 &#60;feed xmlns="http://www.w3.org/2005/Atom"&#62;
     &#60;title type="text"&#62;Paddy's Blog&#60;/title&#62;
@@ -166,15 +174,14 @@ $out = $feed->export('atom');
 &#60;/feed&#62;
 </programlisting>
 
-        <para>This is a perfect Atom 1.0 example. It should be noted that omitting
-        an obligatory point of data, such as a title, will trigger an
-        <classname>Exception</classname> when rendering as Atom 1.0. This will
-        differ for RSS 2.0 since a title may be omitted so long as a description
-        is present. This gives rise to Exceptions that differ between the two standards
-        depending on the renderer in use. By design, <classname>Zend_Feed_Writer</classname>
-        will not render an invalid feed for either standard unless the end-user
-        deliberately elects to ignore all Exceptions.</para>
-    
+        <para>
+            This is a perfect Atom 1.0 example. It should be noted that omitting an obligatory point
+            of data, such as a title, will trigger an <classname>Exception</classname> when
+            rendering as Atom 1.0. This will differ for RSS 2.0 since a title may be omitted so long
+            as a description is present. This gives rise to Exceptions that differ between the two
+            standards depending on the renderer in use. By design,
+            <classname>Zend_Feed_Writer</classname> will not render an invalid feed for either
+            standard unless the end-user deliberately elects to ignore all Exceptions.
+        </para>
     </sect2>
-
 </sect1>

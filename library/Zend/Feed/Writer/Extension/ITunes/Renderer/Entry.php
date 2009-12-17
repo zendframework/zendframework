@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -27,13 +27,17 @@ require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
 /**
  * @category   Zend
  * @package    Zend_Feed_Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Writer_Extension_ITunes_Renderer_Entry
-extends Zend_Feed_Writer_Extension_RendererAbstract
+    extends Zend_Feed_Writer_Extension_RendererAbstract
 {
-
+    /**
+     * Render entry
+     * 
+     * @return void
+     */
     public function render()
     {
         $this->_appendNamespaces();
@@ -46,12 +50,24 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $this->_setSummary($this->_dom, $this->_base);
     }
     
+    /**
+     * Append namespaces to entry root
+     * 
+     * @return void
+     */
     protected function _appendNamespaces()
     {
         $this->getRootElement()->setAttribute('xmlns:itunes',
             'http://www.itunes.com/dtds/podcast-1.0.dtd');  
     }
 
+    /**
+     * Set entry authors
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->getDataContainer()->getItunesAuthors();
@@ -67,6 +83,13 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         }
     }
     
+    /**
+     * Set itunes block
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setBlock(DOMDocument $dom, DOMElement $root)
     {
         $block = $this->getDataContainer()->getItunesBlock();
@@ -78,6 +101,13 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $root->appendChild($el);
     }
     
+    /**
+     * Set entry duration
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setDuration(DOMDocument $dom, DOMElement $root)
     {
         $duration = $this->getDataContainer()->getItunesDuration();
@@ -89,6 +119,13 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $root->appendChild($el);
     }
     
+    /**
+     * Set explicit flag
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setExplicit(DOMDocument $dom, DOMElement $root)
     {
         $explicit = $this->getDataContainer()->getItunesExplicit();
@@ -100,6 +137,13 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $root->appendChild($el);
     }
     
+    /**
+     * Set entry keywords
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setKeywords(DOMDocument $dom, DOMElement $root)
     {
         $keywords = $this->getDataContainer()->getItunesKeywords();
@@ -113,6 +157,13 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $root->appendChild($el);
     }
     
+    /**
+     * Set entry subtitle
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setSubtitle(DOMDocument $dom, DOMElement $root)
     {
         $subtitle = $this->getDataContainer()->getItunesSubtitle();
@@ -126,6 +177,13 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         $root->appendChild($el);
     }
     
+    /**
+     * Set entry summary
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setSummary(DOMDocument $dom, DOMElement $root)
     {
         $summary = $this->getDataContainer()->getItunesSummary();
@@ -138,5 +196,4 @@ extends Zend_Feed_Writer_Extension_RendererAbstract
         );
         $root->appendChild($el);
     }
-
 }

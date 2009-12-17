@@ -57,7 +57,6 @@ require_once 'Zend/Feed/Writer/Renderer/Feed/Rss.php';
  */
 class Zend_Feed_Writer_Feed implements Iterator, Countable
 {
-
     /**
      * Contains all Feed level date to append in feed output
      *
@@ -411,8 +410,10 @@ class Zend_Feed_Writer_Feed implements Iterator, Countable
             . ' readable category name');
         }
         if (isset($category['scheme'])) {
-            if (empty($category['scheme']) || !is_string($category['scheme'])
-            || !Zend_Uri::check($category['scheme'])) {
+            if (empty($category['scheme']) 
+                || !is_string($category['scheme'])
+                || !Zend_Uri::check($category['scheme'])
+            ) {
                 require_once 'Zend/Feed/Exception.php';
                 throw new Zend_Feed_Exception('The Atom scheme or RSS domain of'
                 . ' a category must be a valid URI');
@@ -896,5 +897,4 @@ class Zend_Feed_Writer_Feed implements Iterator, Countable
             $this->_extensions[$ext]->setEncoding($this->getEncoding());
         }
     }
-
 }

@@ -76,10 +76,10 @@ class Zend_Feed_Writer
      * @var array
      */
     protected static $_extensions = array(
-        'entry' => array(),
-        'feed' => array(),
+        'entry'         => array(),
+        'feed'          => array(),
         'entryRenderer' => array(),
-        'feedRenderer' => array()
+        'feedRenderer'  => array(),
     );
     
     /**
@@ -155,9 +155,10 @@ class Zend_Feed_Writer
         $entryRendererName = $name . '_Renderer_Entry';
         if (self::isRegistered($name)) {
             if (self::getPluginLoader()->isLoaded($feedName)
-            || self::getPluginLoader()->isLoaded($entryName)
-            || self::getPluginLoader()->isLoaded($feedRendererName)
-            || self::getPluginLoader()->isLoaded($entryRendererName)) {
+                || self::getPluginLoader()->isLoaded($entryName)
+                || self::getPluginLoader()->isLoaded($feedRendererName)
+                || self::getPluginLoader()->isLoaded($entryRendererName)
+            ) {
                 return;
             }
         }
@@ -182,9 +183,9 @@ class Zend_Feed_Writer
         } catch (Zend_Loader_PluginLoader_Exception $e) {
         }
         if (!self::getPluginLoader()->isLoaded($feedName)
-        && !self::getPluginLoader()->isLoaded($entryName)
-        && !self::getPluginLoader()->isLoaded($feedRendererName)
-        && !self::getPluginLoader()->isLoaded($entryRendererName)
+            && !self::getPluginLoader()->isLoaded($entryName)
+            && !self::getPluginLoader()->isLoaded($feedRendererName)
+            && !self::getPluginLoader()->isLoaded($entryRendererName)
         ) {
             require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Could not load extension: ' . $name
@@ -205,9 +206,9 @@ class Zend_Feed_Writer
         $feedRendererName  = $extensionName . '_Renderer_Feed';
         $entryRendererName = $extensionName . '_Renderer_Entry';
         if (in_array($feedName, self::$_extensions['feed'])
-        || in_array($entryName, self::$_extensions['entry'])
-        || in_array($feedRendererName, self::$_extensions['feedRenderer'])
-        || in_array($entryRendererName, self::$_extensions['entryRenderer'])
+            || in_array($entryName, self::$_extensions['entry'])
+            || in_array($feedRendererName, self::$_extensions['feedRenderer'])
+            || in_array($entryRendererName, self::$_extensions['entryRenderer'])
         ) {
             return true;
         }
@@ -231,13 +232,13 @@ class Zend_Feed_Writer
      */
     public static function reset()
     {
-        self::$_pluginLoader       = null;
-        self::$_prefixPaths        = array();
-        self::$_extensions         = array(
-            'entry' => array(),
-            'feed' => array(),
+        self::$_pluginLoader = null;
+        self::$_prefixPaths  = array();
+        self::$_extensions   = array(
+            'entry'         => array(),
+            'feed'          => array(),
             'entryRenderer' => array(),
-            'feedRenderer' => array()
+            'feedRenderer'  => array(),
         );
     }
 

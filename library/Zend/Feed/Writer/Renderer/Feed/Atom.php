@@ -19,14 +19,19 @@
  * @version    $Id$
  */
 
+/** @see Zend_Feed_Writer_Feed */
 require_once 'Zend/Feed/Writer/Feed.php';
 
+/** @see Zend_Version */
 require_once 'Zend/Version.php';
 
+/** @see Zend_Feed_Writer_Renderer_RendererInterface */
 require_once 'Zend/Feed/Writer/Renderer/RendererInterface.php';
 
+/** @see Zend_Feed_Writer_Renderer_Entry_Atom */
 require_once 'Zend/Feed/Writer/Renderer/Entry/Atom.php';
 
+/** @see Zend_Feed_Writer_Renderer_RendererAbstract */
 require_once 'Zend/Feed/Writer/Renderer/RendererAbstract.php';
 
 /**
@@ -36,15 +41,25 @@ require_once 'Zend/Feed/Writer/Renderer/RendererAbstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Feed_Writer_Renderer_Feed_Atom
-extends Zend_Feed_Writer_Renderer_RendererAbstract
-implements Zend_Feed_Writer_Renderer_RendererInterface
+    extends Zend_Feed_Writer_Renderer_RendererAbstract
+    implements Zend_Feed_Writer_Renderer_RendererInterface
 {
-
+    /**
+     * Constructor
+     * 
+     * @param  Zend_Feed_Writer_Feed $container 
+     * @return void
+     */
     public function __construct (Zend_Feed_Writer_Feed $container)
     {
         parent::__construct($container);
     }
 
+    /**
+     * Render Atom feed
+     * 
+     * @return Zend_Feed_Writer_Renderer_Feed_Atom
+     */
     public function render()
     {
         if (!$this->_container->getEncoding()) {
@@ -97,6 +112,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         return $this;
     }
 
+    /**
+     * Set feed language
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setLanguage(DOMDocument $dom, DOMElement $root)
     {
         if ($this->getDataContainer()->getLanguage()) {
@@ -105,6 +127,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         }
     }
 
+    /**
+     * Set feed title
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getTitle()) {
@@ -126,6 +155,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         $title->nodeValue = $this->getDataContainer()->getTitle();
     }
 
+    /**
+     * Set feed description
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDescription()) {
@@ -137,6 +173,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         $subtitle->nodeValue = $this->getDataContainer()->getDescription();
     }
 
+    /**
+     * Set date feed was last modified
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDateModified()) {
@@ -158,6 +201,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
             ->get(Zend_Date::ISO_8601);
     }
 
+    /**
+     * Set feed generator string
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getGenerator()) {
@@ -177,6 +227,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         }
     }
 
+    /**
+     * Set link to feed
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getLink()) {
@@ -189,6 +246,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         $link->setAttribute('href', $this->getDataContainer()->getLink());
     }
 
+    /**
+     * Set feed links
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $flinks = $this->getDataContainer()->getFeedLinks();
@@ -217,6 +281,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         }
     }
     
+    /**
+     * Set feed authors 
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->_container->getAuthors();
@@ -247,6 +318,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         }
     }
 
+    /**
+     * Set feed identifier
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getId()
@@ -274,6 +352,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         $id->nodeValue = $this->getDataContainer()->getId();
     }
     
+    /**
+     * Set feed copyright
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setCopyright(DOMDocument $dom, DOMElement $root)
     {
         $copyright = $this->getDataContainer()->getCopyright();
@@ -285,6 +370,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         $copy->nodeValue = $copyright;
     }
     
+    /**
+     * Set date feed was created 
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
         if(!$this->getDataContainer()->getDateCreated()) {
@@ -297,6 +389,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         }
     }
     
+    /**
+     * Set base URL to feed links
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setBaseUrl(DOMDocument $dom, DOMElement $root)
     {
         $baseUrl = $this->getDataContainer()->getBaseUrl();
@@ -306,6 +405,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         $root->setAttribute('xml:base', $baseUrl);
     }
     
+    /**
+     * Set hubs to which this feed pushes 
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setHubs(DOMDocument $dom, DOMElement $root)
     {
         $hubs = $this->getDataContainer()->getHubs();
@@ -320,6 +426,13 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
         }
     }
     
+    /**
+     * Set feed cateories 
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
     protected function _setCategories(DOMDocument $dom, DOMElement $root)
     {
         $categories = $this->getDataContainer()->getCategories();
@@ -344,5 +457,4 @@ implements Zend_Feed_Writer_Renderer_RendererInterface
             $root->appendChild($category);
         }
     }
-
 }

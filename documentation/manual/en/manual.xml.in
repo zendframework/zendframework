@@ -338,6 +338,14 @@
         <xi:include href="module_specs/Zend_Mail_Read.xml" />
     </chapter>
 
+    <chapter id="zend.markup">
+        <title>Zend_Markup</title>
+        <xi:include href="module_specs/Zend_Markup.xml" />
+        <xi:include href="module_specs/Zend_Markup-Getting-Started.xml" />
+        <xi:include href="module_specs/Zend_Markup-Parsers.xml" />
+        <xi:include href="module_specs/Zend_Markup-Renderers.xml" />
+    </chapter>
+
     <chapter id="zend.measure">
         <title>Zend_Measure</title>
         <xi:include href="module_specs/Zend_Measure-Introduction.xml" />

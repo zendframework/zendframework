@@ -36,7 +36,7 @@
     <sect1 id="project-structure.project">
         <title>Recommended Project Directory Structure</title>
 
-        <programlisting language="txt"><![CDATA[
+        <programlisting language="text"><![CDATA[
 <project name>/
     application/
         configs/
@@ -250,7 +250,7 @@
             <filename>application/</filename> directory in the recommended project structure:
         </para>
 
-        <programlisting language="xml"><![CDATA[
+        <programlisting language="text"><![CDATA[
 <modulename>
     configs/
         application.ini
@@ -307,7 +307,7 @@
                     the <property>document_root</property>.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
+                <programlisting language="text"><![CDATA[
 <VirtualHost my.domain.com:80>
     ServerName   my.domain.com
     DocumentRoot /path/to/server/root/my.domain.com/public

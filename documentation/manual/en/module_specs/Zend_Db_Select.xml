@@ -1105,8 +1105,9 @@ $select = $db->select()
             <para>
                 In <classname>Zend_Db_Select</classname>, you can use the
                 <methodname>limit()</methodname> method to specify the count of rows and the number
-                of rows to skip. The first argument to this method is the desired count of rows. The
-                second argument is the number of rows to skip.
+                of rows to skip. The <emphasis>first</emphasis> argument to this method is the
+                desired count of rows. The <emphasis>second</emphasis> argument is the number of
+                rows to skip.
             </para>
 
             <example id="zend.db.select.building.limit.example">
@@ -1118,11 +1119,15 @@ $select = $db->select()
 //   SELECT p."product_id", p."product_name"
 //   FROM "products" AS p
 //   LIMIT 10, 20
+// Equivalent to:
+//   SELECT p."product_id", p."product_name"
+//   FROM "products" AS p
+//   LIMIT 20 OFFSET 10
 
 $select = $db->select()
              ->from(array('p' => 'products'),
                     array('product_id', 'product_name'))
-             ->limit(10, 20);
+             ->limit(20, 10);
 ]]></programlisting>
 
             </example>

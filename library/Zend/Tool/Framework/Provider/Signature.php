@@ -202,10 +202,11 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
      * @param string $actionName
      * @return array
      */
-    public function getActionableMethodByActionName($actionName)
+    public function getActionableMethodByActionName($actionName, $specialtyName = '_Global')
     {
         foreach ($this->_actionableMethods as $actionableMethod) {
-            if ($actionName == $actionableMethod['actionName']) {
+            if ($actionName == $actionableMethod['actionName']
+                && $specialtyName == $actionableMethod['specialty']) {
                 return $actionableMethod;
             }
         }

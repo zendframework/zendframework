@@ -280,8 +280,9 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
 
         // get the action name
         $actionName = $this->_registry->getRequest()->getActionName();
+        $specialtyName = $this->_registry->getRequest()->getSpecialtyName();
 
-        if (!$actionableMethod = $providerSignature->getActionableMethodByActionName($actionName)) {
+        if (!$actionableMethod = $providerSignature->getActionableMethodByActionName($actionName, $specialtyName)) {
             require_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('Dispatcher error - actionable method not found');
         }
@@ -314,9 +315,9 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
             }
         }
 
-        if (($specialtyName = $this->_registry->getRequest()->getSpecialtyName()) != '_Global') {
-            $methodName .= $specialtyName;
-        }
+//        if ($specialtyName != '_Global') {
+//            $methodName .= $specialtyName;
+//        }
 
         $this->_handleDispatchExecution($provider, $methodName, $callParameters);
     }

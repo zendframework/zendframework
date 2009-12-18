@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19661 -->
+<!-- EN-Revision: 19738 -->
 <!-- Reviewed: no -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
@@ -141,6 +141,30 @@
         <xi:include href="module_specs/Zend_Auth_Adapter_OpenId.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Auth_Adapter_OpenId.xml" />
+            </xi:fallback>
+        </xi:include>
+    </chapter>
+
+    <chapter id="zend.barcode">
+        <title>Zend_Barcode</title>
+        <xi:include href="module_specs/Zend_Barcode-Introduction.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Barcode-Introduction.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Barcode-Creation.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Barcode-Creation.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Barcode-Objects.xml" parse="xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Barcode-Objects.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Barcode-Renderers.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Barcode-Renderers.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -546,6 +570,11 @@
         <xi:include href="module_specs/Zend_Feed_Reader.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Feed_Reader.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Feed_Writer.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Feed_Writer.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -1003,6 +1032,30 @@
         <xi:include href="module_specs/Zend_Mail_Read.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Mail_Read.xml" />
+            </xi:fallback>
+        </xi:include>
+    </chapter>
+
+    <chapter id="zend.markup">
+        <title>Zend_Markup</title>
+        <xi:include href="module_specs/Zend_Markup.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Markup.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Markup-Getting-Started.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Markup-Getting-Started.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Markup-Parsers.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Markup-Parsers.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Markup-Renderers.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Markup-Renderers.xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -1606,6 +1659,21 @@
         </xi:include>
     </chapter>
 
+    <chapter id="zend.tool">
+        <title>Zend_Tool</title>
+        <xi:include href="module_specs/Zend_Tool-Usage-CLI.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Tool-Usage-CLI.xml" />
+            </xi:fallback>
+        </xi:include>
+        <xi:include href="module_specs/Zend_Tool-Extending.xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Tool-Extending.xml" />
+            </xi:fallback>
+        </xi:include>
+    </chapter>
+
+    <!--
     <chapter id="zend.tool.framework">
         <title>Zend_Tool_Framework</title>
         <xi:include href="module_specs/Zend_Tool_Framework-Introduction.xml">
@@ -1663,6 +1731,7 @@
             </xi:fallback>
         </xi:include>
     </chapter>
+    -->
 
     <chapter id="zend.translate">
         <title>Zend_Translate</title>

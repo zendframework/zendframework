@@ -37,7 +37,7 @@
                     <entry>setPageRange</entry>
                     <entry>
                         Define o número de itens a serem exibidos no controle de paginação (padrão
-                        10). Nota: Na maioria das vezes esse número será aderido  exatamente, mas
+                        10). Nota: Na maioria das vezes esse número será aderido exatamente, mas
                         estilos de rolagem tem a opção de apenas usá-lo como um guia ou valor
                         inicial (ex.: Elástico).
                     </entry>

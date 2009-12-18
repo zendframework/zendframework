@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.form.decorators.layering">
+    <title>Layering Decorators</title>
+
+    <para>
+        If you were following closely in <link linkend="learning.form.decorators.simplest">the
+            previous section</link>, you may have noticed that a decorator's
+        <methodname>render()</methodname> method takes a single argument,
+        <varname>$content</varname>. This is expected to be a string.
+        <methodname>render()</methodname> will then take this string and decide to either replace
+        it, append to it, or prepend it. This allows you to have a chain of decorators -- which
+        allows you to create decorators that render only a subset of the element's metadata, and
+        then layer these decorators to build the full markup for the element. 
+    </para>
+
+    <para>
+        Let's look at how this works in practice.
+    </para>
+
+    <para>
+        For most form element types, the following decorators are used:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <classname>ViewHelper</classname> (render the form input using one of the standard
+                form view helpers).
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Errors</classname> (render validation errors via an unordered list).
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Description</classname> (render any description attached to the element;
+                often used for tooltips).
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>HtmlTag</classname> (wrap all of the above in a <code>&lt;dd&gt;</code>
+                tag.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Label</classname> (render the label preceding the above, wrapped in a
+                <code>&lt;dt&gt;</code> tag.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        You'll notice that each of these decorators does just one thing, and operates on one
+        specific piece of metadata stored in the form element: the <classname>Errors</classname>
+        decorator pulls validation errors and renders them; the <classname>Label</classname>
+        decorator pulls just the label and renders it. This allows the individual decorators to be
+        very succinct, repeatable, and, more importantly, testable.
+    </para>
+
+    <para>
+        It's also where that <varname>$content</varname> argument comes into play: each decorator's
+        <methodname>render()</methodname> method is designed to accept content, and then either
+        replace it (usually by wrapping it), prepend to it, or append to it.
+    </para>
+
+    <para>
+        So, it's best to think of the process of decoration as one of building an onion from the
+        inside out.
+    </para>
+
+    <para>
+        To simplify the process, we'll take a look at the example from <link
+            linkend="learning.form.decorators.simplest">the previous section</link>. Recall:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
+{
+    protected $_format = '<label for="%s">%s</label>'
+                       . '<input id="%s" name="%s" type="text" value="%s"/>';
+
+    public function render($content)
+    {
+        $element = $this->getElement();
+        $name    = htmlentities($element->getFullyQualifiedName());
+        $label   = htmlentities($element->getLabel());
+        $id      = htmlentities($element->getId());
+        $value   = htmlentities($element->getValue());
+
+        $markup  = sprintf($this->_format, $id, $label, $id, $name, $value);
+        return $markup;
+    }
+}
+]]></programlisting>
+
+    <para>
+        Let's now remove the label functionality, and build a separate decorator for that.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
+{
+    protected $_format = '<input id="%s" name="%s" type="text" value="%s"/>';
+
+    public function render($content)
+    {
+        $element = $this->getElement();
+        $name    = htmlentities($element->getFullyQualifiedName());
+        $id      = htmlentities($element->getId());
+        $value   = htmlentities($element->getValue());
+
+        $markup  = sprintf($this->_format, $id, $name, $value);
+        return $markup;
+    }
+}
+
+class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
+{
+    protected $_format = '<label for="%s">%s</label>';
+
+    public function render($content)
+    {
+        $element = $this->getElement();
+        $id      = htmlentities($element->getId());
+        $label   = htmlentities($element->getLabel());
+
+        $markup = sprint($this->_format, $id, $label);
+        return $markup;
+    }
+}
+]]></programlisting>
+
+    <para>
+        Now, this may look all well and good, but here's the problem: as written currently, the last
+        decorator to run wins, and overwrites everything.  You'll end up with just the input, or
+        just the label, depending on which you register last.
+    </para>
+
+    <para>
+        To overcome this, simply concatenate the passed in <varname>$content</varname> with the
+        markup somehow:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+return $content . $markup;
+]]></programlisting>
+
+    <para>
+        The problem with the above approach comes when you want to programmatically choose whether
+        the original content should precede or append the new markup. Fortunately, there's a
+        standard mechanism for this already; <classname>Zend_Form_Decorator_Abstract</classname> has
+        a concept of placement and defines some constants for matching it. Additionally, it allows
+        specifying a separator to place between the two. Let's make use of those:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
+{
+    protected $_format = '<input id="%s" name="%s" type="text" value="%s"/>';
+
+    public function render($content)
+    {
+        $element = $this->getElement();
+        $name    = htmlentities($element->getFullyQualifiedName());
+        $id      = htmlentities($element->getId());
+        $value   = htmlentities($element->getValue());
+
+        $markup  = sprintf($this->_format, $id, $name, $value);
+
+        $placement = $this->getPlacement();
+        $separator = $this->getSeparator();
+        switch ($placement) {
+            case self::PREPEND:
+                return $markup . $separator . $content;
+            case self::APPEND:
+            default:
+                return $content . $separator . $markup;
+        }
+    }
+}
+
+class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
+{
+    protected $_format = '<label for="%s">%s</label>';
+
+    public function render($content)
+    {
+        $element = $this->getElement();
+        $id      = htmlentities($element->getId());
+        $label   = htmlentities($element->getLabel());
+
+        $markup = sprint($this->_format, $id, $label);
+
+        $placement = $this->getPlacement();
+        $separator = $this->getSeparator();
+        switch ($placement) {
+            case self::APPEND:
+                return $markup . $separator . $content;
+            case self::PREPEND:
+            default:
+                return $content . $separator . $markup;
+        }
+    }
+}
+]]></programlisting>
+
+    <para>
+        Notice in the above that I'm switching the default case for each; the assumption will be
+        that labels prepend content, and input appends.
+    </para>
+
+    <para>
+        Now, let's create a form element that uses these:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$element = new Zend_Form_Element('foo', array(
+    'label'      => 'Foo',
+    'belongsTo'  => 'bar',
+    'value'      => 'test',
+    'prefixPath' => array('decorator' => array(
+        'My_Decorator' => 'path/to/decorators/',
+    )),
+    'decorators' => array(
+        'SimpleInput',
+        'SimpleLabel',
+    ),
+));
+]]></programlisting>
+
+    <para>
+        How will this work? When we call <methodname>render()</methodname>, the element will iterate
+        through the various attached decorators, calling <methodname>render()</methodname> on each.
+        It will pass an empty string to the very first, and then whatever content is created will be
+        passed to the next, and so on:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Initial content is an empty string: ''.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                '' is passed to the <classname>SimpleInput</classname> decorator, which then
+                generates a form input that it appends to the empty string: <code>&lt;input
+                    id="bar-foo" name="bar[foo]" type="text" value="test"/&gt;</code>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                The input is then passed as content to the <classname>SimpleLabel</classname>
+                decorator, which generates a label and prepends it to the original content; the
+                default separator is a <constant>PHP_EOL</constant> character, giving us this:
+                <code>&lt;label for="bar-foo"&gt;\n&lt;input id="bar-foo" name="bar[foo]"
+                    type="text" value="test"/&gt;</code>.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        But wait a second! What if you wanted the label to come after the input for some reason?
+        Remember that "placement" flag? You can pass it as an option to the decorator. The easiest
+        way to do this is to pass an array of options with the decorator during element creation:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$element = new Zend_Form_Element('foo', array(
+    'label'      => 'Foo',
+    'belongsTo'  => 'bar',
+    'value'      => 'test',
+    'prefixPath' => array('decorator' => array(
+        'My_Decorator' => 'path/to/decorators/',
+    )),
+    'decorators' => array(
+        'SimpleInput'
+        array('SimpleLabel', array('placement' => 'append')),
+    ),
+));
+]]></programlisting>
+
+    <para>
+        Notice that when passing options, you must wrap the decorator within an array; this hints to
+        the constructor that options are available. The decorator name is the first element of the
+        array, and options are passed in an array to the second element of the array.
+    </para>
+
+    <para>
+        The above results in the markup <code>&lt;input id="bar-foo" name="bar[foo]" type="text"
+            value="test"/&gt;\n&lt;label for="bar-foo"&gt;</code>.
+    </para>
+
+    <para>
+        Using this technique, you can have decorators that target specific metadata of the element
+        or form and create only the markup relevant to that metadata; by using mulitiple decorators,
+        you can then build up the complete element markup. Our onion is the result.
+    </para>
+
+    <para>
+        There are pros and cons to this approach. First, the cons:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                More complex to implement. You have to pay careful attention to the decorators you
+                use and what placement you utilize in order to build up the markup in the correct
+                sequence.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                More resource intensive. More decorators means more objects; multiply this by the
+                number of elements you have in a form, and you may end up with some serious resource
+                usage. Caching can help here.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        The advantages are compelling, though:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Reusable decorators. You can create truly re-usable decorators with this technique,
+                as you don't have to worry about the complete markup, but only markup for one or a
+                few pieces of element/form metadata.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Ultimate flexibility. You can theoretically generate any markup combination you want
+                from a small number of decorators.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        While the above examples are the intended usage of decorators within
+        <classname>Zend_Form</classname>, it's often hard to wrap your head around how the
+        decorators interact with one another to build the final markup. For this reason, some
+        flexibility was added in the 1.7 series to make rendering individual decorators possible --
+        which gives some Rails-like simplicity to rendering forms. We'll look at that in the next
+        section.
+    </para>
+</sect1>

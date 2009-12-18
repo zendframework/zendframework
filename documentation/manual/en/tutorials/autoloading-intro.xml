@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.autoloading.intro">
+    <title>Introduction</title>
+
+    <para>
+        Autoloading is a mechanism that eliminates the need to manually require dependencies within
+        your PHP code. Per <ulink url="http://php.net/autoload">the PHP autoload manual</ulink>,
+        once an autoloader has been defined, it "is automatically called in case you are trying to use
+        a class/interface which hasn't been defined yet."
+    </para>
+
+    <para>
+        Using autoloading, you do not need to worry about <emphasis>where</emphasis> a class exists
+        in your project. With well-defined autoloaders, you do not need to worry about where a class
+        file is relative to the current class file; you simply use the class, and the autoloader
+        will perform the file lookup.
+    </para>
+
+    <para>
+        Additionally, autoloading, because it defers loading to the last possible moment and ensures
+        that a match only has to occur once, can be a huge performance boost -- particularly if you
+        take the time to strip out <methodname>require_once()</methodname> calls before you move
+        to deployment.
+    </para>
+
+    <para>
+        Zend Framework encourages the use of autoloading, and provides several tools to provide
+        autoloading of both library code as well as application code. This tutorial covers these
+        tools, as well as how to use them effectively.
+    </para>
+</sect1>

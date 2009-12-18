@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.autoloading.usage">
+    <title>Basic Autoloader Usage</title>
+
+    <para>
+        Now that we have an understanding of what autoloading is and the goals and design of Zend
+        Framework's autoloading solution, let's look at how to use
+        <classname>Zend_Loader_Autoloader</classname>.
+    </para>
+
+    <para>
+        In the simplest case, you would simply require the class, and then instantiate it. Since
+        <classname>Zend_Loader_Autoloader</classname> is a singleton (due to the fact that the SPL
+        autoloader is a single resource), we use <methodname>getInstance()</methodname> to retrieve
+        an instance.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+require_once 'Zend/Loader/Autoloader.php';
+Zend_Loader_Autoloader::getInstance();
+]]></programlisting>
+
+    <para>
+        By default, this will allow loading any classes with the class namespace prefixes of "Zend_"
+        or "ZendX_", as long as they are on your <constant>include_path</constant>.
+    </para>
+
+    <para>
+        What happens if you have other namespace prefixes you wish to use? The best, and simplest,
+        way is to call the <methodname>registerNamespace()</methodname> method on the instance. You
+        can pass a single namespace prefix, or an array of them:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+require_once 'Zend/Loader/Autoloader.php';
+$loader = Zend_Loader_Autoloader::getInstance();
+$loader->registerNamespace('Foo_');
+$loader->registerNamespace(array('Foo_', 'Bar_'));
+]]></programlisting>
+
+    <para>
+        Alternately, you can tell <classname>Zend_Loader_Autoloader</classname> to act as a
+        "fallback" autoloader. This means that it will try to resolve any class regardless of
+        namespace prefix.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$loader->setFallbackAutoloader(true);
+]]></programlisting>
+
+    <warning>
+        <title>Do not use as a fallback autoloader</title>
+
+        <para>
+            While it's tempting to use <classname>Zend_Loader_Autoloader</classname> as a fallback
+            autoloader, we do not recommend the practice.
+        </para>
+
+        <para>
+            Internally, <classname>Zend_Loader_Autoloader</classname> uses
+            <methodname>Zend_Loader::loadClass()</methodname> to load classes. That method uses
+            <methodname>include()</methodname> to attempt to load the given class file.
+            <methodname>include()</methodname> will return a boolean <constant>false</constant>
+            if not successful -- but also issues a PHP warning. This latter fact can lead to some
+            issues:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    If <constant>display_errors</constant> is enabled, the warning will be included
+                    in output.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Depending on the <constant>error_reporting</constant> level you have chosen, it
+                    could also clutter your logs.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            You can suppress the error messages (the <classname>Zend_Loader_Autoloader</classname>
+            documentation details this), but note that the suppression is only relevant when
+            <constant>display_errors</constant> is enabled; the error log will always display the
+            messages. For these reasons, we recommend always configuring the namespace prefixes the
+            autoloader should be aware of
+        </para>
+    </warning>
+
+    <note>
+        <title>Namespace Prefixes vs PHP Namespaces</title>
+
+        <para>
+            At the time this is written, PHP 5.3 has been released. With that version, PHP now has
+            official namespace support.
+        </para>
+
+        <para>
+            However, Zend Framework predates PHP 5.3, and thus namespaces. Within Zend Framework,
+            when we refer to "namespaces", we are referring to a practice whereby classes are
+            prefixed with a vender "namespace". As an example, all Zend Framework class names are
+            prefixed with "Zend_" -- that is our vendor "namespace".
+        </para>
+
+        <para>
+            Zend Framework plans to offer native PHP namespace support to the autoloader in future
+            revisions, and its own library will utilize namespaces starting with version 2.0.0.
+        </para>
+    </note>
+
+    <para>
+        If you have a custom autoloader you wish to use with Zend Framework -- perhaps an autoloader
+        from a third-party library you are also using -- you can manage it with
+        <classname>Zend_Loader_Autoloader</classname>'s <methodname>pushAutoloader()</methodname>
+        and <methodname>unshiftAutoloader()</methodname> methods. These methods will append or
+        prepend, respectively, autoloaders to a chain that is called prior to executing ZF's
+        internal autoloading mechanism. This approach offers the following benefits:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Each method takes an optional second argument, a class namespace prefix. This can be
+                used to indicate that the given autoloader should only be used when looking up
+                classes with that given class prefix. If the class being resolved does not have that
+                prefix, the autoloader will be skipped -- which can lead to performance
+                improvements.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                If you need to manipulate <methodname>spl_autoload</methodname>'s registry, any
+                autoloaders that are callbacks pointing to instance methods can pose issues, as
+                <methodname>spl_autoload_functions()</methodname> does not return the exact same
+                callbacks. <classname>Zend_Loader_Autoloader</classname> has no such limitation.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Autoloaders managed this way may be any valid PHP callback.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+// Append function 'my_autoloader' to the stack, 
+// to manage classes with the prefix 'My_':
+$loader->pushAutoloader('my_autoloader', 'My_');
+
+// Prepend static method Foo_Loader::autoload() to the stack, 
+// to manage classes with the prefix 'Foo_':
+$loader->unshiftAutoloader(array('Foo_Loader', 'autoload'), 'Foo_');
+]]></programlisting>
+</sect1>

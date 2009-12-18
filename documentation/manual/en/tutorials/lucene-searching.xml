@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.lucene.searching">
+    <title>Searching</title>
+
+    <para>
+        Searching is performed by using the <methodname>find()</methodname> method:
+    </para>
+
+    <example id="learning.lucene.searching.search-example">
+        <title>Searching through the index</title>
+
+        <programlisting language="php"><![CDATA[
+$hits = $index->find($query);
+
+foreach ($hits as $hit) {
+    printf(“%d %f %s\n”, $hit->id, $hit->score, $hit->title);
+}
+]]></programlisting>
+    </example>
+
+    <para>
+        This example demonstrates the usage of two special search hit properties -
+        <varname>id</varname> and <varname>score</varname>.
+    </para>
+    
+    <para>
+        <varname>id</varname> is an internal document identifier used within a Lucene index. It may
+        be used for a variety of operations, including deleting a document from the index:
+    </para>
+
+    <example id="learning.lucene.searching.delete-example">
+        <title>Deleting an Indexed Document</title>
+
+        <programlisting language="php"><![CDATA[
+$index->delete($id);
+]]></programlisting>
+    </example>
+
+    <para>
+        Or retrieving the document from the index:
+    </para>
+
+    <example id="learning.lucene.searching.retrieve-example">
+        <title>Retrieving an Indexed Document</title>
+
+        <programlisting language="php"><![CDATA[
+$doc = $index->getDocument($id);
+]]></programlisting>
+    </example>
+
+    <note id="learning.lucene.searching.identifiers">
+        <title>Internal Document Identifiers</title>
+
+        <para>
+            Important note! Internal document identifiers may be changed by index optimization or
+            the auto-optimization process, but it's never changed within a single script's execution
+            unless the <methodname>addDocument()</methodname> (which may involve an
+            auto-optimization procedure) or <methodname>optimize()</methodname> methods are called.
+        </para>
+    </note>
+    
+    <para>
+        The <varname>score</varname> field is a hit score. Search results are ordered by score by
+        default (best results returned first).
+    </para>
+    
+    <para>
+        It's also possible to order result sets by specific field values. See the <link
+            linkend="zend.search.lucene.searching.sorting">
+            <classname>Zend_Search_Lucene</classname> documentation</link> for more details about
+        this possibility.
+    </para>
+        
+    <para>
+        The example also demonstrates an ability to access stored fields (e.g.,
+        <code>$hit-&gt;title</code>).  At the first access to any hit property other than
+        <varname>id</varname> or <varname>score</varname>, document stored fields are loaded, and
+        the corresponding field value is returned.
+    </para>
+        
+    <para>
+        This causes an ambiguity for documents having their own <varname>id</varname> or
+        <varname>score</varname> fields; as a result, it's not recommended to use these field names
+        within stored documents. Nevertheless, they still can be accessed via the
+        <methodname>getDocument()</methodname> method:
+    </para>
+
+    <example id="learning.lucene.searching.id-score-fields">
+        <title>Accessing the original document's "id" and "score" fields</title>
+
+        <programlisting language="php"><![CDATA[
+$id    = $hit->getDocument()->id;
+$score = $hit->getDocument()->score;
+]]></programlisting>
+    </example>
+</sect1>

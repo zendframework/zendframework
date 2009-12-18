@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.view.placeholders.conclusion">
+    <title>View Placeholders: Conclusion</title>
+
+    <para>
+        View placeholders are a simple and powerful method for creating rich layouts for your
+        application. You can use a variety of standard placeholders, such as those discussed
+        (<methodname>doctype()</methodname>, <methodname>headTitle()</methodname>,
+        <methodname>headLink()</methodname>, and <methodname>headScript()</methodname>), or use
+        the generic <methodname>placeholder()</methodname> helper to aggregate content and render it
+        in custom ways. Experiment with their exposed functionality, and visit the appropriate
+        sections in the reference guide to find out about the additional features they offer -- and
+        how you may leverage those features to create rich content for your readers.
+    </para>
+</sect1>

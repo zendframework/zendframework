@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.plugins.conclusion">
+    <title>Conclusion</title>
+
+    <para>
+        Understanding the concept of prefix paths and overriding existing plugins will help you with
+        your understanding of many components within the framework. Plugins are used in a variety of
+        places: 
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <classname>Zend_Application</classname>: resources.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend_Controller_Action</classname>: action helpers.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend_Feed_Reader</classname>: plugins.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend_Form</classname>: elements, filters, validators, and decorators.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend_View</classname>: view helpers.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        And several more places, besides. Learn the concepts early so you can leverage this
+        important extension point in Zend Framework.
+    </para>
+
+    <note>
+        <title>Caveat</title>
+
+        <para>
+            We'll note here that <classname>Zend_Controller_Front</classname> has a plugin system -
+            but it does not adhere to any of the guidelines offerred in this tutorial. The plugins
+            registered with the front controller must be instantiated directly and registered
+            individually with it. The reason for this is that this system predates any other plugin
+            system in the framework, and changes to it must be carefully weighed to ensure existing
+            plugins written by developers continue to work with it.
+        </para>
+    </note>
+</sect1>

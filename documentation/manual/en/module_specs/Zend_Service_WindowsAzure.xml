@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect1 id="zend.service.windowsazure">
+<sect1 id="zend.service.windowsazure" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_WindowsAzure</title>
 
     <sect2 id="zend.service.windowsazure.introduction">
@@ -111,5 +111,9 @@
             Windows Azure's features, no matter if it is hosted on the Windows Azure platform or on
             an in-premise web server.
         </para>
-  </sect2>
+    </sect2>
+
+    <xi:include href="Zend_Service_WindowsAzure_Blob.xml" />
+    <xi:include href="Zend_Service_WindowsAzure_Table.xml" />
+    <xi:include href="Zend_Service_WindowsAzure_Queue.xml" />
 </sect1>

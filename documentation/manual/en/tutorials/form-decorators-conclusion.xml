@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.form.decorators.conclusion">
+    <title>Conclusion</title>
+
+    <para>
+        Form decorators are a system that takes some time to learn. At first, they will likely
+        feel cumbersome and overly complex. Hopefully the various topics covered in this chapter
+        will help you to understand both how they work, as well as strategies for using them
+        effectively in your forms.
+    </para>
+</sect1>

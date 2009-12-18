@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.view.placeholders.standard">
+    <title>Standard Placeholders</title>
+
+    <para>
+        In the <link linkend="learning.view.placeholders.basics">previous section</link>, we learned
+        about the <methodname>placeholder()</methodname> view helper, and how it can be used to
+        aggregate custom content. In this section, we'll look at some of the concrete placeholders
+        shipped with Zend Framework, and how you can use them to your advantage when creating
+        complex composite layouts.
+    </para>
+
+    <para>
+        Most of the shipped placeholders are for generating content for the
+        <code>&lt;head&gt;</code> section of your layout content -- an area you typically cannot
+        manipulate directly via your application view scripts, but one you may want to influence. As
+        examples: you may want your title to contain certain content on every page, but specific
+        content based on the controller and/or action; you may want to specify
+        <acronym>CSS</acronym> files to load based on what section of the application you're in; you
+        may need specific JavaScript scripts loaded at different times; or you may want to set the
+        <acronym>DocType</acronym> declaration.
+    </para>
+
+    <para>
+        Zend Framework ships with placeholder implementations for each of these situations, and
+        several more.
+    </para>
+
+    <sect2 id="learning.view.placeholders.standard.doctype">
+        <title>Setting the DocType</title>
+
+        <para>
+            <acronym>DocType</acronym> declarations are troublesome to memorize, and often essential
+            to include in your document to ensure the browser properly renders your content. The
+            <methodname>doctype()</methodname> view helper allows you to use simple string mnemonics
+            to specify the desired <acronym>DocType</acronym>; additionally, other helpers will
+            query the <methodname>doctype()</methodname> helper to ensure the output generated
+            conforms with the requested <acronym>DocType</acronym>.
+        </para>
+
+        <para>
+            As an example, if you want to use the <acronym>XHTML1</acronym> Strict
+            <acronym>DTD</acronym>, you can simply specify:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$this->doctype('XHTML1_STRICT');
+]]></programlisting>
+
+        <para>
+            Among the other available mnemonics, you'll find these common types:
+        </para>
+
+        <variablelist>
+            <varlistentry>
+                <term>XHTML1_STRICT</term>
+
+                <listitem>
+                    <para>
+                        <acronym>XHTML</acronym> 1.0 Strict
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>XHTML1_TRANSITIONAL</term>
+
+                <listitem>
+                    <para>
+                        <acronym>XHTML</acronym> 1.0 Transitional
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>HTML4_STRICT</term>
+
+                <listitem>
+                    <para>
+                        <acronym>HTML</acronym> 4.01 Strict
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>HTML4_Loose</term>
+
+                <listitem>
+                    <para>
+                        <acronym>HTML</acronym> 4.01 Loose
+                    </para>
+                </listitem>
+            </varlistentry>
+
+            <varlistentry>
+                <term>HTML5</term>
+
+                <listitem>
+                    <para>
+                        <acronym>HTML</acronym> 5
+                    </para>
+                </listitem>
+            </varlistentry>
+        </variablelist>
+
+        <para>
+            You can assign the type and render the declaration in a single call:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+echo $this->doctype('XHTML1_STRICT');
+]]></programlisting>
+
+        <para>
+            However, the better approach is to assign the type in your bootstrap, and then render it
+            in your layout. Try adding the following to your bootstrap class:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+    protected function _initDocType()
+    {
+        $this->bootstrap('View');
+        $view = $this->getResource('View');
+        $view->doctype('XHTML1_STRICT');
+    }
+}
+]]></programlisting>
+
+        <para>
+            Then, in your layout script, simply <functionname>echo</functionname> the helper at the
+            top of the file:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<?php echo $this->doctype() ?>
+<html>
+    <!-- ... -->
+]]></programlisting>
+
+        <para>
+            This will ensure that your DocType-aware view helpers render the appropriate markup, 
+            ensure that the type is set well before the layout is rendered, and provide a single
+            location to change the DocType.
+        </para>
+    </sect2>
+
+    <sect2 id="learning.view.placeholders.standard.head-title">
+        <title>Specifying the Page Title</title>
+
+        <para>
+            Often, a site will include the site or business name as  part of the page title, and
+            then add additional information based on the location within the site. As an example,
+            the zend.com website includes the string "Zend.com" on all pages, and the prepends
+            information based on the page: "Zend Server - Zend.com". Within Zend Framework, the
+            <methodname>headTitle()</methodname> view helper can help simplify this task.
+        </para>
+
+        <para>
+            At its simplest, the <methodname>headTitle()</methodname> helper allows you to aggregate
+            content for the <code>&lt;title&gt;</code> tag; when you echo it, it then assembles it
+            based on the order in which segments are added. You can control the order using
+            <methodname>prepend()</methodname> and <methodname>append()</methodname>, and provide a
+            separator to use between segments using the <methodname>setSeparator()</methodname>
+            method.
+        </para>
+
+        <para>
+            Typically, you should specify any segments common to all pages in your bootstrap,
+            similar to how we define the doctype. In this case, we'll define a
+            <methodname>_initPlaceholders()</methodname> method for operating on all the various
+            placeholders, and specify an initial title as well as a separator.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+    // ...
+
+    protected function _initPlaceholders()
+    {
+        $this->bootstrap('View');
+        $view = $this->getResource('View');
+        $view->doctype('XHTML1_STRICT');
+
+        // Set the initial title and separator:
+        $view->headTitle('My Site')
+             ->setSeparator(' :: ');
+    }
+
+    // ...
+}
+]]></programlisting>
+
+        <para>
+            Within a view script, we might want to add another segment:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<?php $this->headTitle()->append('Some Page'); // place after other segments ?>
+<?php $this->headTitle()->prepend('Some Page'); // place before ?>
+]]></programlisting>
+
+        <para>
+            In our layout, we will simply echo the <methodname>headTitle()</methodname> helper:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<?php echo $this->doctype() ?>
+<html>
+    <?php echo $this->headTitle() ?> 
+    <!-- ... -->
+]]></programlisting>
+
+        <para>
+            This will generate the following output:
+        </para>
+
+        <programlisting language="html"><![CDATA[
+<!-- If append() was used: -->
+<title>My Site :: Some Page</title>
+
+<!-- If prepend() was used: -->
+<title>Some Page :: My Site</title>
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="learning.view.placeholders.standard.head-link">
+        <title>Specifying Stylesheets with HeadLink</title>
+
+        <para>
+            Good CSS developers will often create a general stylesheet for sitewide styles, and
+            individual stylesheets for specific sections or pages of the website, and load these
+            latter conditionally so as to decrease the amount of data needing to be transferred on
+            each request. The <methodname>headLink()</methodname> placeholder makes such conditional
+            aggregation of stylesheets trivial within your application.
+        </para>
+
+        <para>
+            To accomplish this, <methodname>headLink()</methodname> defines a number of "virtual"
+            methods (via overloading) to make the process trivial. The ones we will be concerned
+            with are <methodname>appendStylesheet()</methodname> and
+            <methodname>prependStylesheet()</methodname>. Each takes up to four arguments,
+            <varname>$href</varname> (the relative path to the stylesheet),
+            <varname>$media</varname> (the MIME type, which defaults to "text/css"),
+            <varname>$conditionalStylesheet</varname> (which can be used to specify a "condition"
+            under which the stylesheet will be evaluated), and <varname>$extras</varname> (an
+            associative array of key/value pairs, commonly used to specify a key for "media"). In
+            most cases, you will only need to specify the first argument, the relative path to the
+            stylesheet.
+        </para>
+
+        <para>
+            In our example, we'll assume that all pages need to load the stylesheet located in
+            "/styles/site.css" (relative to the document root); we'll specify this in our
+            <methodname>_initPlaceholders()</methodname> bootstrap method.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+    // ...
+
+    protected function _initPlaceholders()
+    {
+        $this->bootstrap('View');
+        $view = $this->getResource('View');
+        $view->doctype('XHTML1_STRICT');
+
+        // Set the initial title and separator:
+        $view->headTitle('My Site')
+             ->setSeparator(' :: ');
+
+        // Set the initial stylesheet:
+        $view->headLink()->prependStylesheet('/styles/site.css');
+    }
+
+    // ...
+}
+]]></programlisting>
+
+        <para>
+            Later, in a controller or action-specific view script, we can add more stylesheets:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<?php $this->headLink()->appendStylesheet('/styles/user-list.css') ?>
+]]></programlisting>
+
+        <para>
+            Within our layout view script, once again, we simply echo the placeholder:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<?php echo $this->doctype() ?>
+<html>
+    <?php echo $this->headTitle() ?> 
+    <?php echo $this->headLink() ?> 
+    <!-- ... -->
+]]></programlisting>
+
+        <para>
+            This will generate the following output:
+        </para>
+
+        <programlisting language="html"><![CDATA[
+<link rel="stylesheet" type="text/css" href="/styles/site.css" />
+<link rel="stylesheet" type="text/css" href="/styles/user-list.css" />
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="learning.view.placeholders.standard.head-script">
+        <title>Aggregating Scripts Using HeadScript</title>
+
+        <para>
+            Another common tactic to prevent long page load times is to only load JavaScript when
+            necessary. That said, you may need several layers of scripts: perhaps one for
+            progressively enhancing menus on the site, and another for page-specific content. In
+            these situations, the <methodname>headScript()</methodname> helper presents a solution.
+        </para>
+
+        <para>
+            Similar to the <methodname>headLink()</methodname> helper,
+            <methodname>headScript()</methodname> provides the ability to append or prepend scripts
+            to the collection, and then echo the entire set. It provides the flexibility to specify
+            either script files themselves to load, or explicit JavaScript. You also have the option
+            of capturing JavaScript via
+            <methodname>captureStart()</methodname>/<methodname>captureEnd()</methodname>, which
+            allows you to simply inline the JavaScript instead of requiring an additional call to
+            your server.
+        </para>
+
+        <para>
+            Also like <methodname>headLink()</methodname>, <methodname>headScript</methodname>
+            provides "virtual" methods via overloading as a convenience when specifying items to
+            aggregate; common methods include <methodname>prependFile()</methodname>,
+            <methodname>appendFile()</methodname>, <methodname>prependScript()</methodname>, and
+            <methodname>appendScript()</methodname>. The first two allow you to specify files that
+            will be referenced in a <code>&lt;script&gt;</code> tag's <varname>src</varname>
+            attribute; the latter two will take the content provided and render it as literal
+            JavaScript within a <code>&lt;script&gt;</code> tag.
+        </para>
+
+        <para>
+            In this example, we'll specify that a script, "/js/site.js" needs to be loaded on every
+            page; we'll update our <methodname>_initPlaceholders()</methodname> bootstrap method to
+            do this.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+    // ...
+
+    protected function _initPlaceholders()
+    {
+        $this->bootstrap('View');
+        $view = $this->getResource('View');
+        $view->doctype('XHTML1_STRICT');
+
+        // Set the initial title and separator:
+        $view->headTitle('My Site')
+             ->setSeparator(' :: ');
+
+        // Set the initial stylesheet:
+        $view->headLink()->prependStylesheet('/styles/site.css');
+
+        // Set the initial JS to load:
+        $view->headScript()->prependFile('/js/site.js');
+    }
+
+    // ...
+}
+]]></programlisting>
+
+        <para>
+            Within a view script, we might then add an extra script file to source, or capture some
+            JavaScript to include in our document.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<?php $this->headScript()->appendFile('/js/user-list.js') ?>
+<?php $this->headScript()->captureStart() ?>
+site = {
+    baseUrl: "<?php echo $this->baseUrl() ?>"
+};
+<?php $this->headScript()->captureEnd() ?>
+]]></programlisting>
+
+        <para>
+            Within our layout script, we then simply echo the placeholder, just as we have all the
+            others:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<?php echo $this->doctype() ?>
+<html>
+    <?php echo $this->headTitle() ?> 
+    <?php echo $this->headLink() ?> 
+    <?php echo $this->headScript() ?> 
+    <!-- ... -->
+]]></programlisting>
+
+        <para>
+            This will generate the following output:
+        </para>
+
+        <programlisting language="html"><![CDATA[
+<script type="text/javascript" src="/js/site.js"></script>
+<script type="text/javascript" src="/js/user-list.js"></script>
+<script type="text/javascript">
+site = {
+    baseUrl: "<?php echo $this->baseUrl() ?>"
+};
+</script>
+]]></programlisting>
+
+        <note>
+            <title>InlineScript Variant</title>
+
+            <para>
+                Many browsers will often block display of a page until all scripts and stylesheets
+                referenced in the <code>&lt;head&gt;</code> section have loaded. If you have a
+                number of such directives, this can impact how soon somebody can start actually
+                viewing the page.
+            </para>
+
+            <para>
+                One way around this is to emit your <code>&lt;script&gt;</code> tags just prior to
+                closing the <code>&lt;body&gt;</code> of your document. (This is a practice
+                specifically recommend by the <ulink
+                    url="http://developer.yahoo.com/yslow/">Y! Slow project</ulink>.)
+            </para>
+
+            <para>
+                Zend Framework supports this in two different ways:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        You can render your <methodname>headScript()</methodname> tag whereever you
+                        like in your layout script; just because the title references "head" does
+                        not mean it needs to be rendered in that location.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Alternately, you may use the <methodname>inlineScript()</methodname> helper,
+                        which is simply a variant on <methodname>headScript()</methodname>, and
+                        retains the same behavior, but uses a separate registry.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </note>
+    </sect2>
+</sect1>

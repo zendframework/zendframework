@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.lucene.index-structure">
+    <title>Lucene Index Structure</title>
+
+    <para>
+        In order to fully utilize <classname>Zend_Search_Lucene</classname>'s capabilities with
+        maximum performance, you need to understand it's internal index structure.
+    </para>
+    
+    <para>
+        An <emphasis>index</emphasis> is stored as a set of files within a single directory.
+    </para>
+
+    <para>
+        An <emphasis>index</emphasis> consists of any number of independent
+        <emphasis>segments</emphasis> which store information about a subset of indexed documents.
+        Each <emphasis>segment</emphasis> has its own <emphasis>terms dictionary</emphasis>, terms
+        dictionary index, and document storage (stored field values) <footnote><para>Starting with
+                Lucene 2.3, document storage files can be shared between segments; however,
+                <classname>Zend_Search_Lucene</classname> doesn't use this
+                capability</para></footnote>. All segment data is stored in
+        <filename>_xxxxx.cfs</filename> files, where <varname>xxxxx</varname> is a segment name.
+    </para>
+
+    <para>
+        Once an index segment file is created, it can't be updated.  New documents are added to new
+        segments.  Deleted documents are only marked as deleted in an optional
+        <filename>&lt;segmentname&gt;.del</filename> file. 
+    </para>
+
+    <para>
+        Document updating is performed as separate delete and add operations, even though it's done
+        using an <methodname>update()</methodname> API call<footnote><para>This call is provided
+                only by Java Lucene now, but it's planned to extend the
+                <classname>Zend_Search_Lucene</classname> API with similar
+                functionality</para></footnote>.  This simplifies adding new documents, and allows
+        updating concurrently with search operations.
+    </para>
+
+    <para>
+        On the other hand, using several segments (one document per segment as a borderline case) 
+        increases search time:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                retrieving a term from a dictionary is performed for each segment;
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                the terms dictionary index is pre-loaded for each segment (this process takes the
+                most search time for simple queries, and it also requires additional memory).
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        If the terms dictionary reaches a saturation point, then search through one segment is 
+        <emphasis>N</emphasis> times faster than search through <emphasis>N</emphasis> segments 
+        in most cases.
+    </para>
+
+    <para>
+        <emphasis>Index optimization</emphasis> merges two or more segments into a single new one. A
+        new segment is added to the index segments list, and old segments are excluded.
+    </para>
+
+    <para>
+        Segment list updates are performed as an atomic operation. This gives the ability of
+        concurrently adding new documents, performing index optimization, and searching through the
+        index.
+    </para>
+
+    <para>
+        Index auto-optimization is performed after each new segment generation. It merges sets of
+        the smallest segments into larger segments, and larger segments into even larger segments,
+        if we have enough segments to merge.
+    </para>
+
+    <para>
+        Index auto-optimization is controlled by three options:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <varname>MaxBufferedDocs</varname> (the minimal number of documents required before
+                the buffered in-memory documents are written into a new segment);
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <varname>MaxMergeDocs</varname> (the largest number of documents ever merged by
+                an optimization operation); and
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <varname>MergeFactor</varname> (which determines how often segment indices are
+                merged by auto-optimization operations).
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        If we add one document per script execution, then <emphasis>MaxBufferedDocs</emphasis> is
+        actually not used (only one new segment with only one document is created at the end of
+        script execution, at which time the auto-optimization process starts).
+    </para>
+</sect1>

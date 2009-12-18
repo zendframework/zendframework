@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.layout.conclusions">
+    <title>Zend_Layout: Conclusions</title>
+
+    <para>
+        <classname>Zend_Layout</classname> is a very simple wrapper around
+        <classname>Zend_View</classname> which provides you immediately with the benefits of a Two
+        Step View, giving you the flexibility to create a site-wide design into which you may inject
+        your application content.
+    </para>
+
+    <para>
+        If you're looking closely at the examples, however, you may come away with the idea that the
+        functionality is relatively limited: how do you alter the page title, inject an optional
+        script tag, or even create an optional sidebar? These questions are addressed with the
+        concept of a "Composite View" -- and are the subject of the next chapter in the tutorial,
+        which covers view "placeholders."
+    </para>
+</sect1>

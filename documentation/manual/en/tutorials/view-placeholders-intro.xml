@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.view.placeholders.intro">
+    <title>Introduction</title>
+
+    <para>
+        In <link linkend="learning.layout">the previous chapter</link>, we looked at primarily the
+        Two Step View pattern, which allows you to embed individual application views within a
+        sitewide layout. At the end of that chapter, however, we discussed some limitations:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                How do you alter the page title?
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                How would you inject conditional scripts or stylesheets into the sitewide layout?
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                How would you create and render an optional sidebar? What if there was some content
+                that was unconditional, and other content that was conditional for the sidebar?
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        These questions are addressed in the <ulink
+            url="http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html">Composite
+        View</ulink> design pattern. One approach to that pattern is to provide "hints" or content
+        to the sitewide layout. In Zend Framework, this is achieved through specialized view helpers
+        called "placeholders." Placeholders allow you to aggregate content, and then render that
+        aggregate content elsewhere.
+    </para>
+</sect1>

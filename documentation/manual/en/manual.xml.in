@@ -29,11 +29,106 @@
         -->
     </bookinfo>
 
-    <chapter id="introduction">
+    <part id="introduction">
         <title>Introduction to Zend Framework</title>
         <xi:include href="ref/overview.xml" />
         <xi:include href="ref/installation.xml" />
-    </chapter>
+    </part>
+
+    <part id="learning">
+        <title>Learning Zend Framework</title>
+
+        <chapter id="learning.quickstart">
+            <title>Zend Framework Quick Start</title>
+            <xi:include href="tutorials/quickstart-intro-mvc.xml" />
+            <xi:include href="tutorials/quickstart-create-project.xml" />
+            <xi:include href="tutorials/quickstart-create-layout.xml" />
+            <xi:include href="tutorials/quickstart-create-model.xml" />
+            <xi:include href="tutorials/quickstart-create-form.xml" />
+            <xi:include href="tutorials/quickstart-conclusion.xml" />
+        </chapter>
+
+        <chapter id="learning.autoloading">
+            <title>Autoloading in Zend Framework</title>
+            <xi:include href="tutorials/autoloading-intro.xml" />
+            <xi:include href="tutorials/autoloading-design.xml" />
+            <xi:include href="tutorials/autoloading-usage.xml" />
+            <xi:include href="tutorials/autoloading-resources.xml" />
+            <xi:include href="tutorials/autoloading-conclusion.xml" />
+        </chapter>
+
+        <chapter id="learning.plugins">
+            <title>Plugins in Zend Framework</title>
+            <xi:include href="tutorials/plugins-intro.xml" />
+            <xi:include href="tutorials/plugins-usage.xml" />
+            <xi:include href="tutorials/plugins-conclusion.xml" />
+        </chapter>
+
+        <chapter id="learning.layout">
+            <title>Getting Started with Zend_Layout</title>
+            <xi:include href="tutorials/layout-intro.xml" />
+            <xi:include href="tutorials/layout-usage.xml" />
+            <xi:include href="tutorials/layout-conclusions.xml" />
+        </chapter>
+
+        <chapter id="learning.view.placeholders">
+            <title>Getting Started with Zend_View Placeholders</title>
+            <xi:include href="tutorials/view-placeholders-intro.xml" />
+            <xi:include href="tutorials/view-placeholders-basics.xml" />
+            <xi:include href="tutorials/view-placeholders-standard.xml" />
+            <xi:include href="tutorials/view-placeholders-conclusion.xml" />
+        </chapter>
+
+        <chapter id="learning.form.decorators">
+            <title>Understanding and Using Zend Form Decorators</title>
+            <xi:include href="tutorials/form-decorators-intro.xml" />
+            <xi:include href="tutorials/form-decorators-simplest.xml" />
+            <xi:include href="tutorials/form-decorators-layering.xml" />
+            <xi:include href="tutorials/form-decorators-individual.xml" />
+            <xi:include href="tutorials/form-decorators-composite.xml" />
+            <xi:include href="tutorials/form-decorators-conclusion.xml" />
+        </chapter>
+
+        <chapter id="learning.multiuser">
+            <title>Getting Started with Zend_Session, Zend_Auth, and Zend_Acl</title>
+            <xi:include href="tutorials/multiuser-intro.xml" />
+            <xi:include href="tutorials/multiuser-sessions.xml" />
+            <xi:include href="tutorials/multiuser-authentication.xml" />
+            <xi:include href="tutorials/multiuser-authorization.xml" />
+        </chapter>
+
+        <chapter id="learning.lucene">
+            <title>Getting Started with Zend_Search_Lucene</title>
+            <xi:include href="tutorials/lucene-intro.xml" />
+            <xi:include href="tutorials/lucene-index-structure.xml" />
+            <xi:include href="tutorials/lucene-index-opening.xml" />
+            <xi:include href="tutorials/lucene-indexing.xml" />
+            <xi:include href="tutorials/lucene-searching.xml" />
+            <xi:include href="tutorials/lucene-queries.xml" />
+            <xi:include href="tutorials/lucene-pagination.xml" />
+        </chapter>
+        
+        <chapter id="learning.paginator">
+            <title>Getting Started with Zend_Paginator</title>
+            <xi:include href="tutorials/paginator-intro.xml" />
+            <xi:include href="tutorials/paginator-simple.xml" />
+            <xi:include href="tutorials/paginator-control.xml" />
+            <xi:include href="tutorials/paginator-together.xml" />
+        </chapter>
+
+        <!--
+        Include new tutorials like this:
+        <chapter id="learning.foo">
+            <xi:include href="tutorials/foobar.xml" />
+        </chapter>
+
+        Thus, if a tutorial consists of multiple sections, they can still be
+        grouped within the same chapter.
+        -->
+    </part>
+
+    <part id="reference">
+        <title>Zend Framework Reference</title>
 
     <chapter id="zend.acl">
         <title>Zend_Acl</title>
@@ -489,10 +584,7 @@
         <xi:include href="module_specs/Zend_Service_StrikeIron-AdvancedUses.xml" />
         <xi:include href="module_specs/Zend_Service_Technorati.xml" />
         <xi:include href="module_specs/Zend_Service_Twitter.xml" parse="xml" />
-        <xi:include href="module_specs/Zend_Service_WindowsAzure.xml" />
-        <xi:include href="module_specs/Zend_Service_WindowsAzure_Blob.xml" />
-        <xi:include href="module_specs/Zend_Service_WindowsAzure_Table.xml" />
-        <xi:include href="module_specs/Zend_Service_WindowsAzure_Queue.xml" />
+        <xi:include href="module_specs/Zend_Service_WindowsAzure.xml" parse="xml" />
         <xi:include href="module_specs/Zend_Service_Yahoo.xml" />
     </chapter>
 
@@ -607,6 +699,8 @@
         <xi:include href="module_specs/Zend_XmlRpc_Client.xml" />
         <xi:include href="module_specs/Zend_XmlRpc_Server.xml" />
     </chapter>
+    </part>
+
     <xi:include href="ref/requirements.xml" />
     <appendix id="migration">
         <title>Zend Framework Migration Notes</title>

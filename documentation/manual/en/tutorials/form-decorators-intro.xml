@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="learning.form.decorators.intro">
+    <title>Introduction</title>
+
+    <para>
+        <link linkend="zend.form">Zend_Form</link> utilizes the <emphasis>decorator</emphasis>
+        pattern in order to render elements and forms. Unlike the classic <ulink
+            url="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</ulink>, in
+        which you pass an object to a wrapping class, decorators in <classname>Zend_Form</classname>
+        implement a <ulink url="http://en.wikipedia.org/wiki/Strategy_pattern">strategy
+            pattern</ulink>, and utilize the metadata contained in an element or form in order to
+        create a representation of it
+    </para>
+
+    <para>
+        Don't let the terminology scare you away, however; at heart, decorators in
+        <classname>Zend_Form</classname> are not terribly difficult, and the mini-tutorials that
+        follow should help you along the way. They will guide you through the basics of decoration,
+        all the way to creating decorators for composite elements.
+    </para>
+</sect1>

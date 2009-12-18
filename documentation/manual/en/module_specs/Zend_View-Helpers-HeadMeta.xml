@@ -65,6 +65,12 @@
                 <command>setHttpEquiv($keyValue, $content, $modifiers)</command>
             </para>
         </listitem>
+
+		<listitem>
+            <para>
+                <command>setCharset($charset)</command>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -143,6 +149,16 @@ $this->headMeta()->appendHttpEquiv('expires',
 $this->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=UTF-8')
                  ->appendHttpEquiv('Content-Language', 'en-US');
+]]></programlisting>
+
+        <para>
+            If you are serving an HTML5 document, you should provide the character 
+			set like this:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// setting character set in HTML5
+$this->headMeta()->setCharset('UTF-8'); // Will look like <meta charset="UTF-8">
 ]]></programlisting>
 
         <para>

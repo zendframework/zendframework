@@ -86,6 +86,16 @@ if ($view->doctype()->isXhtml()) {
     // do something differently
 }
 ]]></programlisting>
+
+        <para>
+            You can also check if the doctype represents an <acronym>HTML5</acronym> document
+        </para>
+
+        <programlisting language="php"><![CDATA[
+if ($view->doctype()->isHtml5()) {
+    // do something differently
+}
+]]></programlisting>
     </example>
 </sect3>
 <!--

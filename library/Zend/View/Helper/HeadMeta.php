@@ -39,7 +39,7 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
      * Types of attributes
      * @var array
      */
-    protected $_typeKeys     = array('name', 'http-equiv');
+    protected $_typeKeys     = array('name', 'http-equiv', 'charset');
     protected $_requiredKeys = array('content');
     protected $_modifierKeys = array('lang', 'scheme');
 
@@ -166,6 +166,25 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
         return parent::__call($method, $args);
     }
 
+	/**
+	 * Create an HTML5-style meta charset tag. Something like <meta charset="utf-8">
+	 * 
+	 * Not valid in a non-HTML5 doctype
+	 *
+	 * @param string $charset 
+	 * @return Zend_View_Helper_HeadMeta Provides a fluent interface
+	 */
+    public function setCharset($charset)
+    {
+        $item = new stdClass;
+        $item->type = 'charset';
+        $item->charset = $charset;
+        $item->content = null;
+        $item->modifiers = array();
+        $this->set($item);
+        return $this;
+    }
+
     /**
      * Determine if item is valid
      *
@@ -176,9 +195,14 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
     {
         if ((!$item instanceof stdClass)
             || !isset($item->type)
-            || !isset($item->content)
             || !isset($item->modifiers))
         {
+            return false;
+        }
+
+        if (!isset($item->content)
+        && (! $this->view->doctype()->isHtml5()
+        || (! $this->view->doctype()->isHtml5() && $item->type !== 'charset'))) {
             return false;
         }
 
@@ -309,6 +333,12 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
 
         $modifiersString = '';
         foreach ($item->modifiers as $key => $value) {
+            if ($this->view->doctype()->isHtml5()
+            && $key == 'scheme') {
+                require_once 'Zend/View/Exception.php';
+                throw new Zend_View_Exception('Invalid modifier '
+                . '"scheme" provided; not supported by HTML5');
+            }
             if (!in_array($key, $this->_modifierKeys)) {
                 continue;
             }
@@ -316,9 +346,16 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
         }
 
         if ($this->view instanceof Zend_View_Abstract) {
-            $tpl = ($this->view->doctype()->isXhtml())
-                 ? '<meta %s="%s" content="%s" %s/>'
-                 : '<meta %s="%s" content="%s" %s>';
+            if ($this->view->doctype()->isHtml5()
+            && $type == 'charset') {
+				$tpl = ($this->view->doctype()->isXhtml())
+					? '<meta %s="%s"/>'
+					: '<meta %s="%s">';
+            } elseif ($this->view->doctype()->isXhtml()) {
+                $tpl = '<meta %s="%s" content="%s" %s/>';
+            } else {
+                $tpl = '<meta %s="%s" content="%s" %s>';
+            }
         } else {
             $tpl = '<meta %s="%s" content="%s" %s/>';
         }

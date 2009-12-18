@@ -435,6 +435,39 @@ class Zend_View_Helper_HeadMetaTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $test);
     }
+	
+	/**
+	 * @issue ZF-7722
+	 */
+	public function testCharsetValidateFail() 
+	{
+		$view = new Zend_View();
+		$view->doctype('HTML4_STRICT');
+		
+		try {
+			$view->headMeta()->setCharset('utf-8');
+			$this->fail('Should not be able to set charset for a HTML4 doctype');
+		} catch (Zend_View_Exception $e) {}
+	}
+	
+	/**
+	 * @issue ZF-7722
+	 */
+	public function testCharset() {
+		$view = new Zend_View();
+		$view->doctype('HTML5');
+		
+		$view->headMeta()->setCharset('utf-8');
+		$this->assertEquals(
+			'<meta charset="utf-8">',
+			$view->headMeta()->toString());
+			
+		$view->doctype('XHTML5');
+		
+		$this->assertEquals(
+			'<meta charset="utf-8"/>',
+			$view->headMeta()->toString());
+	}
 
 }
 

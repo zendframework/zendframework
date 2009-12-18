@@ -109,16 +109,21 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
             fclose($lock);
             return false;
         }
-        $f = @fopen($name, 'w+');
-        if ($f === false) {
+        try {
+            $f = @fopen($name, 'w+');
+            if ($f === false) {
+                fclose($lock);
+                return false;
+            }
+            $data = serialize(array($handle, $macFunc, $secret, $expires));
+            fwrite($f, $data);
+            fclose($f);
             fclose($lock);
-            return false;
+            return true;
+        } catch (Exception $e) {
+            fclose($lock);
+            throw $e;
         }
-        $data = serialize(array($handle, $macFunc, $secret, $expires));
-        fwrite($f, $data);
-        fclose($f);
-        fclose($lock);
-        return true;
     }
 
     /**
@@ -143,27 +148,32 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
             fclose($lock);
             return false;
         }
-        $f = @fopen($name, 'r');
-        if ($f === false) {
-            fclose($lock);
-            return false;
-        }
-        $ret = false;
-        $data = stream_get_contents($f);
-        if (!empty($data)) {
-            list($storedHandle, $macFunc, $secret, $expires) = unserialize($data);
-            if ($handle === $storedHandle && $expires > time()) {
-                $ret = true;
-            } else {
-                fclose($f);
-                @unlink($name);
+        try {
+            $f = @fopen($name, 'r');
+            if ($f === false) {
                 fclose($lock);
                 return false;
             }
+            $ret = false;
+            $data = stream_get_contents($f);
+            if (!empty($data)) {
+                list($storedHandle, $macFunc, $secret, $expires) = unserialize($data);
+                if ($handle === $storedHandle && $expires > time()) {
+                    $ret = true;
+                } else {
+                    fclose($f);
+                    @unlink($name);
+                    fclose($lock);
+                    return false;
+                }
+            }
+            fclose($f);
+            fclose($lock);
+            return $ret;
+        } catch (Exception $e) {
+            fclose($lock);
+            throw $e;
         }
-        fclose($f);
-        fclose($lock);
-        return $ret;
     }
 
     /**
@@ -183,9 +193,14 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
             fclose($lock);
             return false;
         }
-        @unlink($name);
-        fclose($lock);
-        return true;
+        try {
+            @unlink($name);
+            fclose($lock);
+            return true;
+        } catch (Exception $e) {
+            fclose($lock);
+            throw $e;
+        }
     }
 
     /**
@@ -208,16 +223,21 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
             fclose($lock);
             return false;
         }
-        $f = @fopen($name, 'x');
-        if ($f === false) {
+        try {
+            $f = @fopen($name, 'x');
+            if ($f === false) {
+                fclose($lock);
+                return false;
+            }
+            $data = serialize(array($id, $password, array()));
+            fwrite($f, $data);
+            fclose($f);
             fclose($lock);
-            return false;
+            return true;
+        } catch (Exception $e) {
+            fclose($lock);
+            throw $e;
         }
-        $data = serialize(array($id, $password, array()));
-        fwrite($f, $data);
-        fclose($f);
-        fclose($lock);
-        return true;
     }
 
     /**
@@ -237,22 +257,27 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
             fclose($lock);
             return false;
         }
-        $f = @fopen($name, 'r');
-        if ($f === false) {
-            fclose($lock);
-            return false;
-        }
-        $ret = false;
-        $data = stream_get_contents($f);
-        if (!empty($data)) {
-            list($storedId, $storedPassword, $trusted) = unserialize($data);
-            if ($id === $storedId) {
-                $ret = true;
+        try { 
+            $f = @fopen($name, 'r');
+            if ($f === false) {
+                fclose($lock);
+                return false;
             }
+            $ret = false;
+            $data = stream_get_contents($f);
+            if (!empty($data)) {
+                list($storedId, $storedPassword, $trusted) = unserialize($data);
+                if ($id === $storedId) {
+                    $ret = true;
+                }
+            }
+            fclose($f);
+            fclose($lock);
+            return $ret;
+        } catch (Exception $e) {
+            fclose($lock);
+            throw $e;
         }
-        fclose($f);
-        fclose($lock);
-        return $ret;
     }
 
     /**
@@ -273,22 +298,27 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
             fclose($lock);
             return false;
         }
-        $f = @fopen($name, 'r');
-        if ($f === false) {
-            fclose($lock);
-            return false;
-        }
-        $ret = false;
-        $data = stream_get_contents($f);
-        if (!empty($data)) {
-            list($storedId, $storedPassword, $trusted) = unserialize($data);
-            if ($id === $storedId && $password === $storedPassword) {
-                $ret = true;
+        try {
+            $f = @fopen($name, 'r');
+            if ($f === false) {
+                fclose($lock);
+                return false;
             }
+            $ret = false;
+            $data = stream_get_contents($f);
+            if (!empty($data)) {
+                list($storedId, $storedPassword, $trusted) = unserialize($data);
+                if ($id === $storedId && $password === $storedPassword) {
+                    $ret = true;
+                }
+            }
+            fclose($f);
+            fclose($lock);
+            return $ret;
+        } catch (Exception $e) {
+            fclose($lock);
+            throw $e;
         }
-        fclose($f);
-        fclose($lock);
-        return $ret;
     }
 
     /**
@@ -308,9 +338,14 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
             fclose($lock);
             return false;
         }
-        @unlink($name);
-        fclose($lock);
-        return true;
+        try {
+            @unlink($name);
+            fclose($lock);
+            return true;
+        } catch (Exception $e) {
+            fclose($lock);
+            throw $e;
+        }
     }
 
     /**
@@ -331,22 +366,27 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
             fclose($lock);
             return false;
         }
-        $f = @fopen($name, 'r');
-        if ($f === false) {
-            fclose($lock);
-            return false;
-        }
-        $ret = false;
-        $data = stream_get_contents($f);
-        if (!empty($data)) {
-            list($storedId, $storedPassword, $trusted) = unserialize($data);
-            if ($id === $storedId) {
-                $ret = $trusted;
+        try {
+            $f = @fopen($name, 'r');
+            if ($f === false) {
+                fclose($lock);
+                return false;
             }
+            $ret = false;
+            $data = stream_get_contents($f);
+            if (!empty($data)) {
+                list($storedId, $storedPassword, $trusted) = unserialize($data);
+                if ($id === $storedId) {
+                    $ret = $trusted;
+                }
+            }
+            fclose($f);
+            fclose($lock);
+            return $ret;
+        } catch (Exception $e) {
+            fclose($lock);
+            throw $e;
         }
-        fclose($f);
-        fclose($lock);
-        return $ret;
     }
 
     /**
@@ -368,30 +408,35 @@ class Zend_OpenId_Provider_Storage_File extends Zend_OpenId_Provider_Storage
             fclose($lock);
             return false;
         }
-        $f = @fopen($name, 'r+');
-        if ($f === false) {
-            fclose($lock);
-            return false;
-        }
-        $ret = false;
-        $data = stream_get_contents($f);
-        if (!empty($data)) {
-            list($storedId, $storedPassword, $sites) = unserialize($data);
-            if ($id === $storedId) {
-                if ($trusted === null) {
-                    unset($sites[$site]);
-                } else {
-                    $sites[$site] = $trusted;
-                }
-                rewind($f);
-                ftruncate($f, 0);
-                $data = serialize(array($id, $storedPassword, $sites));
-                fwrite($f, $data);
-                $ret = true;
+        try {
+            $f = @fopen($name, 'r+');
+            if ($f === false) {
+                fclose($lock);
+                return false;
             }
+            $ret = false;
+            $data = stream_get_contents($f);
+            if (!empty($data)) {
+                list($storedId, $storedPassword, $sites) = unserialize($data);
+                if ($id === $storedId) {
+                    if ($trusted === null) {
+                        unset($sites[$site]);
+                    } else {
+                        $sites[$site] = $trusted;
+                    }
+                    rewind($f);
+                    ftruncate($f, 0);
+                    $data = serialize(array($id, $storedPassword, $sites));
+                    fwrite($f, $data);
+                    $ret = true;
+                }
+            }
+            fclose($f);
+            fclose($lock);
+            return $ret;
+        } catch (Exception $e) {
+            fclose($lock);
+            throw $e;
         }
-        fclose($f);
-        fclose($lock);
-        return $ret;
     }
 }

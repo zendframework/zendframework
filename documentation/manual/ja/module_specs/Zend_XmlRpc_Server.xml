@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17520 -->
+<!-- EN-Revision: 19674 -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
 
@@ -61,8 +61,59 @@ echo $server->handle();
             <classname>Zend_XmlRpc_Response</classname> を継承したオブジェクトか
             <classname>Zend_XmlRpc_Server_Fault</classname> オブジェクトを返します。
             これらのオブジェクトはどちらも <methodname>__toString()</methodname>
-            メソッドを実装しており、妥当な <acronym>XML-RPC</acronym> <acronym>XML</acronym> レスポンスを直接出力することができます。
+            メソッドを実装しており、妥当な <acronym>XML-RPC</acronym> <acronym>XML</acronym> レスポンスを直接出力できます。
         </para>
+    </sect2>
+
+    <!-- TODO : to be translated -->
+    <sect2 id="zend.xmlrpc.server.anatomy">
+        <title>Anatomy of a webservice</title>
+
+        <sect3 id="zend.xmlrpc.server.anatomy.general">
+            <title>General considerations</title>
+
+            <para>
+                For maximum performance it is recommended to use a simple
+                bootstrap file for the server component. Using
+                <classname>Zend_XmlRpc_Server</classname> inside a
+                <link linkend="zend.controller"><classname>Zend_Controller</classname></link>
+                is strongly discouraged to avoid the overhead.
+            </para>
+
+            <para>
+                Services change over time and while webservices are generally
+                less change intense as code-native <acronym>APIs</acronym>, it
+                is recommended to version your service. Do so to lay grounds to
+                provide compatibility for clients using older versions of your
+                service and manage your service lifecycle including deprecation
+                timeframes.To do so just include a version number into your
+                <acronym>URI</acronym>. It is also recommended to include the
+                remote protocol name in the <acronym>URI</acronym> to allow easy
+                integration of upcoming remoting technologies.
+                http://myservice.ws/<emphasis>1.0/XMLRPC/</emphasis>.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.xmlrpc.server.anatomy.expose">
+            <title>What to expose?</title>
+
+            <para>
+                Most of the time it is not sensible to expose business objects
+                directly. Business objects are usually small and under heavy
+                change, because change is cheap in this layer of your
+                application. Once deployed and adopted, web services are hard to
+                change. Another concern is <acronym>I/O</acronym> and latency:
+                the best webservice calls are those not happening. Therefore
+                service calls need to be more coarse-grained than usual business
+                logic is. Often an additional layer in front of your business
+                objects makes sense. This layer is sometimes referred to as <ulink
+                    url="http://martinfowler.com/eaaCatalog/remoteFacade.html">Remote
+                    Facade</ulink>.
+                Such a service layer adds a coarse grained interface on top of
+                your business logic and groups verbose operations into smaller
+                ones.
+            </para>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.xmlrpc.server.conventions">
@@ -144,11 +195,12 @@ function myFunc($val1, $val2, $val3)
 }
 ]]></programlisting>
 
-        <para>
-            しかし、注意すべきことがあります。複数のシグネチャを定義すると、
-            それを利用する開発者を混乱させてしまいます。
-            一般論として、<acronym>XML-RPC</acronym> のメソッドは複数のシグネチャを持たないほうがいいでしょう。
-        </para>
+        <note>
+            <para>
+                複数のシグネチャを定義すると、それを利用する開発者を混乱させてしまいます。
+                物事を簡単にするために、 <acronym>XML-RPC</acronym> サービスのメソッドは単純なシグネチャだけを持つべきでしょう。
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.xmlrpc.server.namespaces">
@@ -254,7 +306,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
             他のプロジェクトの例外を継承した例外クラスを利用するのなら、
             一連のクラス群を一度にホワイトリストに登録することもできます。
             <classname>Zend_XmlRpc_Server_Exceptions</classname> は常にホワイトリストに登録されており、
-            固有の内部エラー (メソッドが未定義であるなど) を報告することができます。
+            固有の内部エラー (メソッドが未定義であるなど) を報告できます。
         </para>
 
         <para>
@@ -274,7 +326,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
         </para>
         <para>
             使用するリソースの量を軽減するために、<classname>Zend_XmlRpc_Server_Cache</classname>
-            を用いてリクエスト間でサーバ定義をキャッシュすることができます。
+            を用いてリクエスト間でサーバ定義をキャッシュできます。
             <methodname>__autoload()</methodname> と組み合わせることで、これはパフォーマンスを劇的に向上させます。
         </para>
         <para>
@@ -318,7 +370,8 @@ echo $server->handle();
             以下のいくつかの使用例で、開発者が使用できるオプションを説明します。
             各使用例は、それまでに紹介した例に追加していく形式になります。
         </para>
-        <sect3 id="zend.xmlrpc.server.use.case1">
+
+        <example id="zend.xmlrpc.server.use.attach-function">
             <title>基本的な使用法</title>
 
             <para>
@@ -328,10 +381,10 @@ echo $server->handle();
 
             <programlisting language="php"><![CDATA[
 /**
- * 値の MD5 sum を返します
+ * 値の MD5 合計を返します
  *
  * @param string $value md5sum を計算する値
- * @return string 値の MD5 sum
+ * @return string 値の MD5 合計
  */
 function md5Value($value)
 {
@@ -342,9 +395,9 @@ $server = new Zend_XmlRpc_Server();
 $server->addFunction('md5Value');
 echo $server->handle();
 ]]></programlisting>
-        </sect3>
+        </example>
 
-        <sect3 id="zend.xmlrpc.server.use.case2">
+        <example id="zend.xmlrpc.server.use.attach-class">
             <title>クラスのアタッチ</title>
 
             <para>
@@ -359,9 +412,109 @@ $server = new Zend_XmlRpc_Server();
 $server->setClass('Services_Comb');
 echo $server->handle();
 ]]></programlisting>
-        </sect3>
+        </example>
 
-        <sect3 id="zend.xmlrpc.server.use.case3">
+        <!-- TODO : to be translated -->
+        <example id="zend.xmlrpc.server.use.attach-class-with-arguments">
+            <title>Attaching a class with arguments</title>
+
+            <para>
+                The following example illustrates how to attach a class' public
+                methods and passing arguments to its methods. This can be used to specify certain
+                defaults when registering service classes.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class Services_PricingService
+{
+    /**
+     * Calculate current price of product with $productId
+     *
+     * @param ProductRepository $productRepository
+     * @param PurchaseRepository $purchaseRepository
+     * @param integer $productId
+     */
+    public function calculate(ProductRepository $productRepository,
+                              PurchaseRepository $purchaseRepository,
+                              $productId)
+    {
+        ...
+    }
+}
+
+$server = new Zend_XmlRpc_Server();
+$server->setClass('Services_PricingService',
+                  'pricing',
+                  new ProductRepository(),
+                  new PurchaseRepository());
+]]></programlisting>
+
+            <para>
+                The arguments passed at <methodname>setClass()</methodname> at server construction time are
+                injected into the method call <command>pricing.calculate()</command> on remote invokation.
+                In the example above, only the argument <code>$purchaseId</code> is expected from the client.
+            </para>
+        </example>
+
+        <example id="zend.xmlrpc.server.use.attach-class-with-arguments-constructor">
+            <title>Passing arguments only to constructor</title>
+
+            <para>
+                <classname>Zend_XmlRpc_Server</classname> allows to restrict argument passing to
+                constructors only. This can be used for constructor dependency injection.
+                To limit injection to constructors, call <methodname>sendArgumentsToAllMethods</methodname>
+                and pass <code>false</code> as an argument. This disables the default behavior of all arguments
+                being injected into the remote method. In the example below the instance of
+                <classname>ProductRepository</classname> and <classname>PurchaseRepository</classname> is only
+                injected into the constructor of <classname>Services_PricingService2</classname>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class Services_PricingService2
+{
+    /**
+     * @param ProductRepository $productRepository
+     * @param PurchaseRepository $purchaseRepository
+     */
+    public function __construct(ProductRepository $productRepository,
+                                PurchaseRepository $purchaseRepository)
+    {
+        ...
+    }
+
+    /**
+     * Calculate current price of product with $productId
+     *
+     * @param integer $productId
+     * @return double
+     */
+    public function calculate($productId)
+    {
+        ...
+    }
+}
+
+$server = new Zend_XmlRpc_Server();
+$server->sendArgumentsToAllMethods(false);
+$server->setClass('Services_PricingService2',
+                  'pricing',
+                  new ProductRepository(),
+                  new PurchaseRepository());
+]]></programlisting>
+        </example>
+
+        <example id="zend.xmlrpc.server.use.attach-instance">
+            <title>Attaching a class instance</title>
+
+            <para>
+                <methodname>setClass()</methodname> allows to register a previously instantiated
+                object at the server. Just pass an instance instead of the class name. Obviously
+                passing arguments to the constructor is not possible with pre-instantiated
+                objects.
+            </para>
+        </example>
+
+        <example id="zend.xmlrpc.server.use.attach-several-classes-namespaces">
             <title>名前空間を用いた複数のクラスのアタッチ</title>
 
             <para>
@@ -379,9 +532,9 @@ $server->setClass('Services_Brush', 'brush'); // メソッドをコールする�
 $server->setClass('Services_Pick', 'pick');   // メソッドをコールするには pick.* とします
 echo $server->handle();
 ]]></programlisting>
-        </sect3>
+        </example>
 
-        <sect3 id="zend.xmlrpc.server.use.case4">
+        <example id="zend.xmlrpc.server.use.exceptions-faults">
             <title>fault レスポンス用に使用する例外の指定</title>
 
             <para>
@@ -404,11 +557,22 @@ $server->setClass('Services_Brush', 'brush'); // メソッドをコールする�
 $server->setClass('Services_Pick', 'pick');   // メソッドをコールするには pick.* とします
 echo $server->handle();
 ]]></programlisting>
-        </sect3>
+        </example>
 
-        <sect3 id="zend.xmlrpc.server.use.case5">
-            <title>独自のリクエストオブジェクトの利用</title>
+        <example id="zend.xmlrpc.server.use.custom-request-object">
+            <title>独自のリクエスト及びレスポンスオブジェクトの利用</title>
 
+            <!-- TODO : to be translated -->
+            <para>
+                Some use cases require to utilize a custom request object.
+                For example, <acronym>XML/RPC</acronym> is not bound to
+                <acronym>HTTP</acronym> as a transfer protocol. It is possible to use
+                other transfer protocols like <acronym>SSH</acronym> or telnet to send
+                the request and response data over the wire. Another use case is
+                authentication and authorization. In case of a different transfer
+                protocol, one need to change the implementation to read request data.
+            </para>
+            
             <para>
                 次の例は、独自のリクエストオブジェクトを作成し、
                 それをサーバに渡して処理します。
@@ -434,10 +598,10 @@ $request = new Services_Request();
 
 echo $server->handle($request);
 ]]></programlisting>
-        </sect3>
+        </example>
 
-        <sect3 id="zend.xmlrpc.server.use.case6">
-            <title>独自のレスポンスオブジェクトの利用</title>
+        <example id="zend.xmlrpc.server.use.custom-response-object">
+            <title>独自のレスポンスクラスの指定</title>
 
             <para>
                 次の例は、独自のレスポンスクラスを作成し、
@@ -468,9 +632,13 @@ $server->setResponseClass('Services_Response');
 
 echo $server->handle($request);
 ]]></programlisting>
-        </sect3>
+        </example>
+    </sect2>
 
-        <sect3 id="zend.xmlrpc.server.use.case7">
+    <sect2 id="zend.xmlrpc.server.performance">
+        <title>パフォーマンスの最適化</title>
+
+        <example id="zend.xmlrpc.server.performance.caching">
             <title>リクエスト間でのサーバ定義のキャッシュ</title>
 
             <para>
@@ -504,7 +672,68 @@ $server->setResponseClass('Services_Response');
 
 echo $server->handle($request);
 ]]></programlisting>
-        </sect3>
+        </example>
+
+        <!-- TODO : to be translated -->
+        <note>
+            <para>
+                The server cache file should be located outside the document root.
+            </para>
+        </note>
+
+        <example id="zend.xmlrpc.server.performance.xmlgen">
+
+            <title>Optimizing XML generation</title>
+
+            <para>
+                <classname>Zend_XmlRpc_Server</classname> uses
+                <classname>DOMDocument</classname> of <acronym>PHP</acronym>
+                extension <code>ext/dom</code> to generate it's
+                <acronym>XML</acronym> output. While <code>ext/dom</code> is
+                available on a lot of hosts it is not exactly the fastest.
+                Benchmarks have shown, that <classname>XMLWriter</classname>
+                from <code>ext/xmlwriter</code> performs better.
+            </para>
+
+            <para>
+                If <code>ext/xmlwriter</code> is available on your host, you can
+                select a the <classname>XMLWriter</classname>-based generator
+                to leaverage the performance differences.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+require_once 'Zend/XmlRpc/Server.php';
+require_once 'Zend/XmlRpc/Generator/XMLWriter.php';
+
+Zend_XmlRpc_Value::setGenerator(new Zend_XmlRpc_Generator_XMLWriter());
+
+$server = new Zend_XmlRpc_Server();
+...
+]]></programlisting>
+        </example>
+
+        <note>
+            <title>Benchmark your application</title>
+
+            <para>
+                Performance is determined by a lot of parameters and
+                benchmarks only apply for the specific test case. Differences
+                come from PHP version, installed extensions, webserver and
+                operating system just to name a few. Please make sure to
+                benchmark your application on your own and decide which
+                generator to use based on <emphasis>your</emphasis> numbers.
+            </para>
+        </note>
+
+        <note>
+            <title>Benchmark your client</title>
+
+            <para>
+                This optimization makes sense for the client side too. Just
+                select the alternate <acronym>XML</acronym> generator before
+                doing any work with <classname>Zend_XmlRpc_Client</classname>.
+            </para>
+        </note>
     </sect2>
 </sect1>
 <!--

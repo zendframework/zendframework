@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18986 -->
+<!-- EN-Revision: 19692 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -34,18 +34,9 @@
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.barcode">
-        <title>Barcode</title>
-        <para>
-            このバリデータのインスタンスを作成する際には、検証したいバーコードの形式を指定します。
-            現在サポートしているバーコード形式は "<code>UPC-A</code>" (Universal Product Code) と
-            "<code>EAN-13</code>" (European Article Number) です。
-            <methodname>isValid()</methodname> メソッドは、
-            指定した型のバーコードの検証アルゴリズムで入力が検証できた場合に
-            true を返します。このバリデータに入力を渡す前に、
-            数字の 0 から 9 まで (0-9) 以外の文字はすべて取り除いておかなければなりません。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-Barcode.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Barcode.xml" /></xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.validate.set.between">
         <title>Between</title>
@@ -84,10 +75,10 @@
     <sect2 id="zend.validate.set.date">
         <title>Date</title>
         <para>
-            <code>$value</code> が <code>YYYY-MM-DD</code> 形式の日付である場合にのみ
-            <constant>TRUE</constant> を返します。オプションの <code>locale</code>
+            <code>$value</code> が 'YYYY-MM-DD' 形式の日付である場合にのみ
+            <constant>TRUE</constant> を返します。オプションの <property>locale</property>
             を設定すると、そのロケールに応じた検証を行います。
-            オプションの <code>format</code> を設定すると、
+            オプションの <property>format</property> を設定すると、
             そのフォーマットを使用して検証を行います。オプションパラメータの詳細は
             <link linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>
             を参照ください。
@@ -234,8 +225,8 @@ if ($validator->isValid($iban)) {
             <methodname>setMin()</methodname>
             で最大値より大きい値を指定したり <methodname>setMax()</methodname>
             で最小値より小さい値を設定したりした場合に例外をスローします。
-            このクラスは UTF-8 のほかに
-            <ulink url="http://www.php.net/manual/ja/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>
+            このクラスは UTF-8 のほかに <ulink
+                url="http://www.php.net/manual/ja/ref.iconv.php#iconv.configuration">iconv.internal_encoding</ulink>
             にもとづいたその他の文字エンコーディングもサポートします。
             別のエンコーディングを使用したい場合は、アクセサメソッド getEncoding
             および setEncoding で設定します。

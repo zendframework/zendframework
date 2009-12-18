@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.service.windowsazure">
+    <title>Zend_Service_WindowsAzure</title>
+
+    <sect2 id="zend.service.windowsazure.introduction">
+        <title>Introduction</title>
+
+        <para>
+          Windows Azure is the name for Microsoft’s Software + Services platform, an operating
+          system in the cloud providing services for hosting, management, scalable storage with
+          support for simple blobs, tables, and queues, as well as a management infrastructure for
+          provisioning and geo-distribution of cloud-based services, and a development platform for
+          the Azure Services layer.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.windowsazure.sdk">
+        <title>Installing the Windows Azure SDK</title>
+
+        <para>
+            There are two development scenario's when working with Windows Azure.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    You can develop your application using
+                    <classname>Zend_Service_WindowsAzure</classname> and the Windows Azure SDK,
+                    which provides a local developent environment of the services provided by
+                    Windows Azure's cloud infrastructure.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    You can develop your application using
+                    <classname>Zend_Service_WindowsAzure</classname>, working directly with the
+                    Windows Azure cloud infrastructure.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            The first case requires you to install the <ulink
+                url="http://www.microsoft.com/downloads/details.aspx?familyid=11B451C4-7A7B-4537-A769-E1D157BAD8C6&amp;displaylang=en">Windows
+                Azure SDK</ulink> on your development machine.  It is currently only available for
+            Windows environments; progress is being made on a Java-based version of the SDK which
+            can run on any platform.
+        </para>
+
+        <para>
+            The latter case requires you to have an account at <ulink
+                url="http://www.azure.com">Azure.com</ulink>.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.windowsazure.apiDocumentation">
+        <title>API Documentation</title>
+
+        <para>
+            The <classname>Zend_Service_WindowsAzure</classname> class provides the PHP wrapper to
+            the Windows Azure <acronym>REST</acronym> interface. Please consult the <ulink
+                url="http://msdn.microsoft.com/en-us/library/dd179355.aspx">REST
+                documentation</ulink> for detailed description of the service. You will need to be
+            familiar with basic concepts in order to use this service.
+        </para>
+    
+    </sect2>
+
+    <sect2 id="zend.service.windowsazure.features">
+        <title>Features</title>
+
+        <para>
+            <classname>Zend_Service_WindowsAzure</classname> provides the following functionality:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    PHP classes for Windows Azure Blobs, Tables and Queues (for
+                    <acronym>CRUD</acronym> operations)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Helper Classes for HTTP transport, AuthN/AuthZ, REST and Error Management
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Manageability, Instrumentation and Logging support
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+    <sect2 id="zend.service.windowsazure.architecture">
+        <title>Architecture</title>
+
+        <para>
+            <classname>Zend_Service_WindowsAzure</classname> provides access to Windows Azure's
+            storage, computation and management interfaces by abstracting the REST/XML interface
+            Windows Azure provides into a simple PHP API.
+        </para>
+
+        <para>
+            An application built using <classname>Zend_Service_WindowsAzure</classname> can access
+            Windows Azure's features, no matter if it is hosted on the Windows Azure platform or on
+            an in-premise web server.
+        </para>
+  </sect2>
+</sect1>

@@ -489,6 +489,10 @@
         <xi:include href="module_specs/Zend_Service_StrikeIron-AdvancedUses.xml" />
         <xi:include href="module_specs/Zend_Service_Technorati.xml" />
         <xi:include href="module_specs/Zend_Service_Twitter.xml" parse="xml" />
+        <xi:include href="module_specs/Zend_Service_WindowsAzure.xml" />
+        <xi:include href="module_specs/Zend_Service_WindowsAzure_Blob.xml" />
+        <xi:include href="module_specs/Zend_Service_WindowsAzure_Table.xml" />
+        <xi:include href="module_specs/Zend_Service_WindowsAzure_Queue.xml" />
         <xi:include href="module_specs/Zend_Service_Yahoo.xml" />
     </chapter>
 

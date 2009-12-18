@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 16603 -->
+<!-- EN-Revision: 19483 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.plugins.standard.puthandler">
     <title>Zend_Controller_Plugin_PutHandler</title>
+
     <para>
-        <classname>Zend_Controller_Plugin_PutHandler</classname> provides a drop-in
-        plugin for marshalling PUT request bodies into request parameters, just
-        like POST request bodies. It will inspect the request and, if PUT, will
-        use parse_str to parse the raw PUT body into an array of params
-        which is then set on the request. E.g.,
+        <classname>Zend_Controller_Plugin_PutHandler</classname> fournit un plugin intégré pour
+        la gestion du corps des requêtes <constant>PUT</constant> en tant que paramètres de
+        requête, tout comme le corps d'une requête <constant>POST</constant>. Il va inspecter
+        la requête et, s'il s'agit d'une requête <constant>PUT</constant>, va utiliser la
+        fonction parse_str pour découper le contenu brut de la requête <constant>PUT</constant>
+        en un tableau de paramètres qui est ensuite enregistré dans l'objet de requête. Par
+        exemple&#160;:
     </para>
+
     <programlisting language="txt"><![CDATA[
 PUT /notes/5.xml HTTP/1.1
+
 title=Hello&body=World
 ]]></programlisting>
+
     <para>
-        To receive the 'title' and 'body' params as regular request params,
-        register the plugin:
+        Pour recevoir les paramètres "title" et "body" comme des paramètres de requête habituels,
+        vous devez enregistrer le plugin&#160;:
     </para>
+
     <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_PutHandler());
 ]]></programlisting>
+
     <para>
-        Then you can access the PUT body params by name from the request inside
-        your controller:
+        Ensuite vous pouvez accéder aux paramètres du corps de la requête <constant>PUT</constant>
+        par leur nom à l'intérieur de votre contrôleur&#160;:
     </para>
+
     <programlisting language="php"><![CDATA[
 ...
 public function putAction()

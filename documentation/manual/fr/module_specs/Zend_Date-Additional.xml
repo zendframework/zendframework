@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 17750 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.additional">
     <title>Exemples concrets</title>
@@ -184,10 +184,10 @@ print_r (Zend_Date_Cities::getCityList());
 
             <programlisting language="php"><![CDATA[
 // Trouve la localisation d'une ville avec l'horizon effectif
-print_r (Zend_Date_Cities::City('Vienna'));
+print_r (Zend_Date_Cities::city('Vienna'));
 
 // utilise l'horizon nautique
-print_r (Zend_Date_Cities::City('Vienna', 'nautic'));
+print_r (Zend_Date_Cities::city('Vienna', 'nautic'));
 
 // Voici une ville personnalisée qui n'est pas dans la liste prédéfinie
 $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
@@ -208,7 +208,7 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
 
             <programlisting language="php"><![CDATA[
 // Retrouve la localisation d'une ville
-$city = Zend_Date_Cities::City('Vienna');
+$city = Zend_Date_Cities::city('Vienna');
 
 // Créer une date à partir de laquelle extraire
 // les informations relatives au soleil

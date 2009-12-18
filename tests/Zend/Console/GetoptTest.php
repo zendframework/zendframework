@@ -278,6 +278,34 @@ class Zend_Console_GetoptTest extends PHPUnit_Framework_TestCase
         unset($opts->a);
         $this->assertFalse(isset($opts->a));
     }
+    
+    /**
+     * @group ZF-5948
+     */
+    public function testGetoptAddSetNonArrayArguments()
+    {
+        $opts = new Zend_Console_GetOpt('abp:', array('-foo'));
+        try {
+            $opts->setArguments('-a');
+            $this->fail('Expected to catch a Zend_Console_Getopt_Exception');
+        } catch(Zend_Exception $e) {
+            $this->assertType('Zend_Console_Getopt_Exception', $e,
+                'Expected Zend_Console_Getopt_Exception, got '. get_class($e));
+            $this->assertEquals("Parameter #1 to setArguments should be an array",
+                $e->getMessage());
+        }
+        
+        try {
+            $opts->addArguments('-b');
+            $this->fail('Expected to catch a Zend_Console_Getopt_Exception');
+        } catch(Zend_Exception $e) {
+            $this->assertType('Zend_Console_Getopt_Exception', $e,
+                'Expected Zend_Console_Getopt_Exception, got '. get_class($e));
+            $this->assertEquals("Parameter #1 to addArguments should be an array",
+                $e->getMessage());
+        }
+        
+    }
 
     public function testGetoptAddArguments()
     {

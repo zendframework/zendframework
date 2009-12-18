@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.tool.extending">
+    <title>Extending Zend_Tool</title>
+    
+    <sect2 id="zend.tool.extending.overview">
+        <title>Overview of Zend_Tool</title>
+        
+		<para>
+		    <classname>Zend_Tool_Framework</classname> is a framework for exposing common
+		    functionalities such as the creation of project scaffolds, code
+		    generation, search index generation, and much more. Functionality may be
+		    written and exposed via <acronym>PHP</acronym> classes dropped into the
+		    <acronym>PHP</acronym> <property>include_path</property>, providing incredible
+		    flexibility of implementation. The functionality may then be consumed by writing
+		    implementation and/or protocol-specific clients -- such as console
+		    clients, <acronym>XML-RPC</acronym>, <acronym>SOAP</acronym>, and much more.
+		</para>
+		
+	    <para>
+	        <classname>Zend_Tool_Project</classname> builds on and extends the capabilities of
+	        <classname>Zend_Tool_Framework</classname> to that of managing a "project". In general, a
+	        "project" is a planned endeavor or an initiative. In the computer world, projects generally
+	        are a collection of resources. These resources can be files, directories, databases,
+	        schemas, images, styles, and more.
+	    </para>
+        
+    </sect2>
+    
+    <sect2 id="zend.tool.extending.zend-tool-framework">
+        <title>Zend_Tool_Framework Extensions</title>
+        
+        <sect3 id="zend.tool.extending.zend-tool-framework.architecture">
+            <title>Overall Architecture</title>
+            
+		    <para>
+		        <classname>Zend_Tool_Framework</classname> provides the following:
+		    </para>
+		
+		    <itemizedlist>
+		        <listitem>
+		            <para>
+		                <emphasis>Common interfaces and abstracts</emphasis> that allow
+		                developers to create functionality and capabilities that are
+		                dispatchable by tooling clients.
+		            </para>
+		        </listitem>
+		
+		        <listitem>
+		            <para>
+		                <emphasis>Base client functionality</emphasis> and a concrete
+		                console implementation that connect external tools and
+		                interfaces to the <classname>Zend_Tool_Framework</classname>. The Console
+		                client may be used in <acronym>CLI</acronym> environments such as unix shells and
+		                the Windows console.
+		            </para>
+		        </listitem>
+		
+		        <listitem>
+		            <para>
+		                <emphasis>"Provider" and "Manifest" interfaces</emphasis> that
+		                can be utilized by the tooling system. "Providers" represent the
+		                functional aspect of the framework, and define the actions that
+		                tooling clients may call. "Manifests" act as metadata registries
+		                that provide additional context for the various defined
+		                providers.
+		            </para>
+		        </listitem>
+		
+		        <listitem>
+		            <para>
+		                <emphasis>An introspective loading system</emphasis> that will
+		                scan the environment for providers and determine what is
+		                required to dispatch them.
+		            </para>
+		        </listitem>
+		
+		        <listitem>
+		            <para>
+		                <emphasis>A standard set of system providers</emphasis> that
+		                allow the system to report what the full capabilities of the
+		                system are as well as provide useful feedback. This also
+		                includes a comprehensive "Help System".
+		            </para>
+		        </listitem>
+		    </itemizedlist>
+		
+		    <para>
+		        Definitions that you should be aware of through this manual with respect
+		        to <classname>Zend_Tool_Framework</classname> include:
+		    </para>
+		
+		    <itemizedlist>
+
+		        <listitem><para>
+		            <classname>Zend_Tool_Framework</classname> - The framework which exposes
+		            tooling capabilities.
+		        </para></listitem>
+		
+		        <listitem><para>
+		            <emphasis>Tooling Client</emphasis> - A developer tool that connects
+		            to and consumes <classname>Zend_Tool_Framework</classname>.
+		        </para></listitem>
+		
+		        <listitem><para>
+		            <emphasis>Client</emphasis> - The subsystem of
+		            <classname>Zend_Tool_Framework</classname> that exposes an interface such that
+		            tooling clients can connect, query and execute commands.
+		        </para></listitem>
+		
+		        <listitem><para>
+		            <emphasis>Console Client / Command Line Interface /
+		            <filename>zf.php</filename></emphasis> - The tooling client for the command line.
+		        </para></listitem>
+		
+		        <listitem><para>
+		            <emphasis>Provider</emphasis> - A subsystem and a collection of
+		            built-in functionality that the framework exports.
+		        </para></listitem>
+		
+		        <listitem><para>
+		            <emphasis>Manifest</emphasis> - A subsystem for defining,
+		            organizing, and disseminating provider requirement data.
+		        </para></listitem>
+		
+		        <listitem><para>
+		            <classname>Zend_Tool_Project</classname> Provider - A set of providers
+		            specifically for creating and maintaining Zend Framework-based
+		            projects.
+		        </para></listitem>
+
+		    </itemizedlist>
+            
+        </sect3>
+        
+        <sect3 id="zend.tool.extending.zend-tool-framework.cli-client">
+            <title>Understanding the CLI Client</title>
+            
+		    <para>
+		        The <acronym>CLI</acronym>, or command line tool (internally known as the console tool),
+		        is currently the primary interface for dispatching <classname>Zend_Tool</classname>
+		        requests. With the <acronym>CLI</acronym> tool, developers can issue tooling requests
+		        inside the "command line windows", also commonly known as a "terminal"
+		        window. This environment is predominant in the *nix environment, but
+		        also has a common implementation in windows with the
+		        <filename>cmd.exe</filename>, console2 and also with the Cygwin project.
+		    </para>
+		
+		    <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-general">
+		        <title>Setting up the CLI tool</title>
+		
+		        <para>
+		            To issue tooling requests via the command line client, you first
+		            need to set up the client so that your system can handle the "zf"
+		            command. The command line client, for all intents and purposes, is
+		            the <filename>.sh</filename> or <filename>.bat</filename> file that is provided with
+		            your Zend Framework distribution. In trunk, it can be found here:
+		            <ulink
+		                url="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</ulink>.
+		        </para>
+		
+		        <para>
+		            As you can see, there are 3 files in the <filename>/bin/</filename>
+		            directory: a <filename>zf.php</filename>, <filename>zf.sh</filename>, and
+		            <filename>zf.bat</filename>. The <filename>zf.sh</filename> and the
+		            <filename>zf.bat</filename> are the operating system specific client
+		            wrappers: <filename>zf.sh</filename> for the *nix environment, and
+		            <filename>zf.bat</filename> for the Win32 environment. These client wrappers are
+		            responsible for finding the proper <filename>php.exe</filename>, finding the
+		            <filename>zf.php</filename>, and passing on the client request. The
+		            <filename>zf.php</filename> is the responsible for handling understanding
+		            your environment, constructing the proper include_path, and passing
+		            what is provided on the command line to the proper library component
+		            for dispatching.
+		        </para>
+		
+		        <para>
+		            Ultimately, you want to ensure two things to make everything work
+		            regardless of the operating system you are on:
+		        </para>
+		
+		        <orderedlist>
+		            <listitem>
+		                <para>
+		                    <filename>zf.sh/zf.bat</filename> is reachable from your system
+		                    path. This is the ability to call <command>zf</command> from
+		                    anywhere on your command line, regardless of what your
+		                    current working directory is.
+		                </para>
+		            </listitem>
+		            <listitem>
+		                <para>
+		                    <filename>ZendFramework/library</filename> is in your
+		                    <property>include_path</property>.
+		                </para>
+		            </listitem>
+		        </orderedlist>
+		
+		        <note>
+		            <para>
+		                Note: while the above are the most ideal
+		                requirements, you can simply download Zend Framework and expect it
+		                to work as <filename>./path/to/zf.php</filename> some command.
+		            </para>
+		        </note>
+		
+		    </sect4>
+		
+		    <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-starnix">
+		        <title>Setting up the CLI tool on Unix-like Systems</title>
+		
+		        <para>
+		            The most common setup in the *nix environment, is to copy the
+		            <filename>zf.sh</filename> and <filename>zf.php</filename> into the same directory
+		            as your <acronym>PHP</acronym> binary. This can generally be found in one of the
+		            following places:
+		        </para>
+		
+		        <programlisting language="text"><![CDATA[
+/usr/bin
+/usr/local/bin
+/usr/local/ZendServer/bin/
+/Applications/ZendServer/bin/
+]]></programlisting>
+		
+		        <para>
+		            To find out the location of your <acronym>PHP</acronym> binary, you can execute 'which
+		            php' on the command line. This will return the location of the <acronym>PHP</acronym>
+		            binary you will be using to run <acronym>PHP</acronym> scripts in this environment.
+		        </para>
+		
+		        <para>
+		            The next order of business is to ensure that Zend Framework
+		            library is set up correctly inside of the system <acronym>PHP</acronym>
+		            <property>include_path</property>. To find out where your
+		            <property>include_path</property> is located, you can execute <command>php -i</command>
+		            and look for the <property>include_path</property> variable, or more succinctly,
+		            execute <command>php -i | grep include_path</command>. Once you have found where
+		            your <property>include_path</property> is located (this will generally be
+		            something like <filename>/usr/lib/php</filename>, <filename>/usr/share/php</filename>,
+		            <filename>/usr/local/lib/php</filename>, or similar), ensure that the contents of the
+		            <filename>/library/</filename> directory are put
+		            inside your <property>include_path</property> specified directory.
+		        </para>
+		
+		        <para>
+		            Once you have done those two things, you should be able to issue a
+		            command and get back the proper response like this:
+		        </para>
+		
+		        <para>
+		            <inlinegraphic scale="100" align="center" valign="middle"
+		                fileref="figures/zend.tool.framework.cliversionunix.png" format="PNG" />
+		        </para>
+		
+		        <para>
+		            If you do not see this type of output, go back and check your setup
+		            to ensure you have all of the necessary pieces in the proper place.
+		        </para>
+		
+		        <para>
+		            There are a couple of alternative setups you might want to employ
+		            depending on your servers configuration, your level of access, or
+		            for other reasons.
+		        </para>
+		
+		        <para>
+		            <emphasis>Alternative Setup</emphasis> involves keeping the Zend
+		            Framework download together as is, and creating a link from a <constant>PATH</constant>
+		            location to the <filename>zf.sh</filename>. What this means is you can
+		            place the contents of the ZendFramework download into a location
+		            such as <filename>/usr/local/share/ZendFramework</filename>, or more locally
+		            like <filename>/home/username/lib/ZendFramework</filename>, and creating a
+		            symbolic link to the <filename>zf.sh</filename>.
+		        </para>
+		
+		        <para>
+		            Assuming you want to put the link inside <filename>/usr/local/bin</filename>
+		            (this could also work for placing the link inside
+		            <filename>/home/username/bin/</filename> for example) you would issue a
+		            command similar to this: </para>
+		
+		        <programlisting language="sh"><![CDATA[
+ln -s /usr/local/share/ZendFramework/bin/zf.sh /usr/local/bin/zf
+
+# OR (for example)
+ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
+]]></programlisting>
+		
+		        <para>
+		            This will create a link which you should be able to access globally
+		            on the command line.
+		        </para>
+		
+		    </sect4>
+		
+		    <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-windows">
+		        <title>Setting up the CLI tool on Windows</title>
+		
+		        <para>
+		            The most common setup in the Windows Win32 environment, is to copy
+		            the <filename>zf.bat</filename> and <filename>zf.php</filename> into the same
+		            directory as your <acronym>PHP</acronym> binary. This can generally be found in one of
+		            the following places:
+		        </para>
+		
+		        <programlisting language="text"><![CDATA[
+C:\PHP
+C:\Program Files\ZendServer\bin\
+C:\WAMP\PHP\bin
+]]></programlisting>
+		
+		        <para>
+		            You should be able to run <filename>php.exe</filename> on the command line.
+		            If you are not able to, first check the documentation that came with
+		            your <acronym>PHP</acronym> distribution, or ensure that the path to
+		            <filename>php.exe</filename> is in your
+		            Windows <constant>PATH</constant> environment variable.
+		        </para>
+		
+		        <para>
+		            The next order of business is to ensure that Zend Framework
+		            library is set up correctly inside of the system <acronym>PHP</acronym>
+		            <property>include_path</property>. To find out where your
+		            <property>include_path</property> is located, you can type <command>php -i</command> and
+		            look for the <property>include_path</property> variable, or more succinctly
+		            execute <command>php -i | grep include_path</command> if you have Cygwin setup with
+		            grep available. Once you have found where your
+		            <property>include_path</property> is located (this will generally be
+		            something like <filename>C:\PHP\pear</filename>, <filename>C:\PHP\share</filename>,
+		            <filename>C:\Program%20Files\ZendServer\share</filename> or similar), ensure
+		            that the contents of the library/ directory are put inside your
+		            <property>include_path</property> specified directory.
+		        </para>
+		
+		        <para>
+		            Once you have done those two things, you should be able to issue a
+		            command and get back the proper response like this:
+		        </para>
+		
+		        <para>
+		            <inlinegraphic scale="100" align="center" valign="middle"
+		                fileref="figures/zend.tool.framework.cliversionwin32.png" format="PNG" />
+		        </para>
+		
+		        <para>
+		            If you do not see this type of output, go back and check your setup
+		            to ensure you have all of the necessary pieces in the proper place.
+		        </para>
+		
+		        <para>
+		            There are a couple of alternative setups you might want to employ
+		            depending on your server's configuration, your level of access, or
+		            for other reasons.
+		        </para>
+		
+		        <para>
+		            <emphasis>Alternative Setup</emphasis> involves keeping the Zend
+		            Framework download together as is, and altering both your system
+		            <constant>PATH</constant> as well as the <filename>php.ini</filename> file.
+		            In your user's environment, make sure to add
+		            <filename>C:\Path\To\ZendFramework\bin</filename>, so that your
+		            <filename>zf.bat</filename> file is executable. Also, alter the
+		            <filename>php.ini</filename> file to ensure that
+		            <filename>C:\Path\To\ZendFramework\library</filename> is in your
+		            <property>include_path</property>.
+		        </para>
+		
+		    </sect4>
+		
+		    <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-othernotes">
+		        <title>Other Setup Considerations</title>
+		
+		        <para>
+		            If for some reason you do not want Zend Framework library inside
+		            your <property>include_path</property>, there is another option. There are
+		            two special environment variables that <filename>zf.php</filename> will
+		            utilize to determine the location of your Zend Framework
+		            installation.
+		        </para>
+		
+		        <para>
+		            The first is <constant>ZEND_TOOL_INCLUDE_PATH_PREPEND</constant>, which will
+		            prepend the value of this environment variable to the system
+		            (<filename>php.ini</filename>) <property>include_path</property> before loading the
+		            client.
+		        </para>
+		
+		        <para>
+		            Alternatively, you might want to use
+		            <constant>ZEND_TOOL_INCLUDE_PATH</constant> to completely
+		            <emphasis>replace</emphasis> the system <property>include_path</property>
+		            for one that makes sense specifically for the <command>zf</command>
+		            command line tool.
+		        </para>
+		    </sect4>
+		    
+        </sect3>
+        
+        <sect3 id="zend.tool.extending.zend-tool-framework.providers-and-manifests">
+            <title>Creating Providers</title>
+            
+		    <para>
+		        In general, a provider, on its own, is nothing more than the shell for a
+		        developer to bundle up some capabilities they wish to dispatch with the
+		        command line (or other) clients. It is an analogue to what a
+		        "controller" is inside of your <acronym>MVC</acronym> application.
+		    </para>
+		
+		    <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading">
+		        <title>How Zend Tool finds your Providers</title>
+		
+		        <para>
+		            By default Zend Tool uses the BasicLoader to find all
+		            the providers that you can run. It recursivly iterates all
+		            include path directories and opens all files that end
+		            with "Manifest.php" or "Provider.php". All classes in these
+		            files are inspected if they implement either
+		            <classname>Zend_Tool_Framework_Provider_Interface</classname>
+		            or <classname>Zend_Tool_Framework_Manifest_ProviderManifestable</classname>.
+		            Instances of the provider interface make up for the real functionality
+		            and all their public methods are accessible as provider actions.
+		            The ProviderManifestable interface however requires the implementation of a method
+		            <methodname>getProviders()</methodname> which returns an array of
+		            instantiated provider interface instances.
+		        </para>
+		
+		        <para>
+		            The following naming rules apply on how you can access the providers
+		            that were found by the IncludePathLoader:
+		        </para>
+		
+		        <itemizedlist>
+		            <listitem>
+		                <para>
+		                    The last part of your classname split by underscore is used
+		                    for the provider name, e.g. "My_Provider_Hello" leads to your
+		                    provider being accessible by the name "hello".
+		                </para>
+		            </listitem>
+		            <listitem>
+		                <para>
+		                    If your provider has a method <methodname>getName()</methodname>
+		                    it will be used instead of the previous method to determine
+		                    the name.
+		                </para>
+		            </listitem>
+		            <listitem>
+		                <para>
+		                    If your provider has "Provider" as prefix, e.g. it is called
+		                    <classname>My_HelloProvider</classname> it will be stripped
+		                    from the name so that the provider will be called "hello".
+		                </para>
+		            </listitem>
+		        </itemizedlist>
+		
+		        <note>
+		            <para>The IncludePathLoader does not follow symlinks, that means
+		            you cannot link provider functionality into your include paths,
+		            they have to be physically present in the include paths.</para>
+		        </note>
+		
+		        <example id="zend.tool.framework.writing-providers.loading.example">
+		            <title>Exposing Your Providers with a Manifest</title>
+		
+		            <para>
+		                You can expose your providers to Zend Tool by offering a manifest
+		                with a special filename ending with "Manifest.php".
+		                A Provider Manifest is an implementation of the
+		                <interface>Zend_Tool_Framework_Manifest_ProviderManifestable</interface>
+		                and requires the <methodname>getProviders()</methodname> method to return
+		                an array of instantiated providers. In anticipation of our first
+		                own provider <classname>My_Component_HelloProvider</classname>
+		                we will create the following manifest:
+		            </para>
+		
+		            <programlisting language="php"><![CDATA[
+class My_Component_Manifest
+    implements Zend_Tool_Framework_Manifest_ProviderManifestable
+{
+    public function getProviders()
+    {
+        return array(
+            new My_Component_HelloProvider()
+        );
+    }
+}
+]]></programlisting>
+		
+		        </example>
+		    </sect4>
+		
+		    <sect4 id="zend.tool.framework.writing-providers.basic">
+		        <title>Basic Instructions for Creating Providers</title>
+		
+		        <para>
+		            As an example, if a developer wants to add the capability of showing
+		            the version of a datafile that his 3rd party component is working
+		            from, there is only one class the developer would need to implement.
+		            Assuming the component is called <classname>My_Component</classname>, he would
+		            create a class named <classname>My_Component_HelloProvider</classname> in a
+		            file named <filename>HelloProvider.php</filename> somewhere on the
+		            <property>include_path</property>. This class would implement
+		            <classname>Zend_Tool_Framework_Provider_Interface</classname>, and the body of
+		            this file would only have to look like the following:
+		        </para>
+		
+		        <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    implements Zend_Tool_Framework_Provider_Interface
+{
+    public function say()
+    {
+        echo 'Hello from my provider!';
+    }
+}
+]]></programlisting>
+		
+		        <para>
+		            Given that code above, and assuming the developer wishes to access
+		            this functionality through the console client, the call would look
+		            like this:
+		        </para>
+		
+		        <programlisting language="sh"><![CDATA[
+% zf say hello
+Hello from my provider!
+]]></programlisting>
+		    </sect4>
+		
+		    <sect4 id="zend.tool.framework.writing-providers.response">
+		        <title>The response object</title>
+		
+		        <para>
+		            As discussed in the architecture section Zend Tool allows to hook different clients for
+		            using your Zend Tool providers. To keep compliant with different clients you should
+		            use the response object to return messages from your providers instead of using
+		            <methodname>echo()</methodname> or a similiar output mechanism. Rewritting our hello
+		            provider with this knowledge it looks like:
+		        </para>
+		
+		        <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say()
+    {
+        $this->_registry->getResponse
+                        ->appendContent("Hello from my provider!");
+    }
+}
+]]></programlisting>
+		
+		        <para>
+		            As you can see one has to extend the <classname>Zend_Tool_Framework_Provider_Abstract</classname>
+		            to gain access to the Registry which holds the <classname>Zend_Tool_Framework_Client_Response</classname>
+		            instance.
+		        </para>
+		    </sect4>
+		
+		    <sect4 id="zend.tool.framework.writing-providers.advanced">
+		        <title>Advanced Development Information</title>
+		
+		        <sect5 id="zend.tool.framework.writing-providers.advanced.variables">
+		            <title>Passing Variables to a Provider</title>
+		
+		            <para>
+		                The above "Hello World" example is great for simple commands, but
+		                what about something more advanced? As your scripting and tooling
+		                needs grow, you might find that you need the ability to accept
+		                variables. Much like function signatures have parameters, your
+		                tooling requests can also accept parameters.
+		            </para>
+		
+		            <para>
+		                Just as each tooling request can be isolated to a method within a
+		                class, the parameters of a tooling request can also be isolated in a
+		                very well known place. Parameters of the action methods of a
+		                provider can include the same parameters you want your client to
+		                utilize when calling that provider and action combination. For
+		                example, if you wanted to accept a name in the above example, you
+		                would probably do this in OO code:
+		            </para>
+		
+		        <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    implements Zend_Tool_Framework_Provider_Interface
+{
+    public function say($name = 'Ralph')
+    {
+        echo 'Hello' . $name . ', from my provider!';
+    }
+}
+]]></programlisting>
+		
+		            <para>
+		                The above example can then be called via the command line
+		                <command>zf say hello Joe</command>. "Joe" will be supplied to the provider as
+		                a parameter of the method call. Also note, as you see that the
+		                parameter is optional, that means it is also optional on the command
+		                line, so that <command>zf say hello</command> will still work, and default
+		                to the name "Ralph".
+		            </para>
+		
+		        </sect5>
+		
+		        <sect5 id="zend.tool.framework.writing-providers.advanced.prompt">
+		            <title>Prompt the User for Input</title>
+		
+		            <para>
+		                There are cases when the workflow of your provider requires
+		                to prompt the user for input. This can be done by requesting
+		                the client to ask for more the required input by calling:
+		            </para>
+		
+		            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say($name = 'Ralph')
+    {
+        $nameResponse = $this->_registry
+                             ->getClient()
+                             ->promptInteractiveInput("Whats your name?");
+        $name = $name->getContent();
+
+        echo 'Hello' . $name . ', from my provider!';
+    }
+}
+]]></programlisting>
+		
+		            <para>
+		                This command throws an exception if the current client is not
+		                able to handle interactive requests. In case of the default Console Client
+		                however you will be asked to enter the name.
+		            </para>
+		        </sect5>
+		
+		        <sect5 id="zend.tool.framework.writing-providers.advanced.pretendable">
+		            <title>Pretending to execute a Provider Action</title>
+		
+		            <para>
+		                Another interesting feature you might wish to implement is
+		                <emphasis>pretendability</emphasis>. Pretendabilty is the ability
+		                for your provider to "pretend" as if it is doing the requested
+		                action and provider combination and give the user as much
+		                information about what it <emphasis>would</emphasis> do without
+		                actually doing it. This might be an important notion when doing
+		                heavy database or filesystem modifications that the user might not
+		                otherwise want to do.
+		            </para>
+		
+		            <para>
+		                Pretendability is easy to implement. There are two parts to this
+		                feature: 1) marking the provider as having the ability to "pretend",
+		                and 2) checking the request to ensure the current request was indeed
+		                asked to be "pretended". This feature is demonstrated in the code
+		                sample below.
+		            </para>
+		
+		            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends    Zend_Tool_Framework_Provider_Abstract
+    implements Zend_Tool_Framework_Provider_Pretendable
+{
+    public function say($name = 'Ralph')
+    {
+        if ($this->_registry->getRequest()->isPretend()) {
+            echo 'I would say hello to ' . $name . '.';
+        } else {
+            echo 'Hello' . $name . ', from my provider!';
+        }
+    }
+}
+]]></programlisting>
+		
+		            <para>
+		                To run the provider in pretend mode just call:
+		            </para>
+		
+		            <programlisting language="sh"><![CDATA[
+% zf --pretend say hello Ralph
+I would say hello Ralph.
+]]></programlisting>
+		
+		        </sect5>
+		
+		        <sect5 id="zend.tool.framework.writing-providers.advanced.verbosedebug">
+		            <title>Verbose and Debug modes</title>
+		
+		            <para>
+		                You can also run your provider actions in "verbose" or "debug" modes.
+		                The semantics in regard to this actions have to be implemented by you
+		                in the context of your provider. You can access debug or verbose modes
+		                with:
+		            </para>
+		
+		            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    implements Zend_Tool_Framework_Provider_Interface
+{
+    public function say($name = 'Ralph')
+    {
+        if($this->_registry->getRequest()->isVerbose()) {
+            echo "Hello::say has been called\n";
+        }
+        if($this->_registry->getRequest()->isDebug()) {
+            syslog(LOG_INFO, "Hello::say has been called\n");
+        }
+    }
+}
+]]></programlisting>
+		        </sect5>
+		
+		        <sect5 id="zend.tool.framework.writing-providers.advanced.configstorage">
+		            <title>Accessing User Config and Storage</title>
+		
+		            <para>
+		                Using the Enviroment variable <property>ZF_CONFIG_FILE</property> or the
+		                .zf.ini in your home directory you can inject configuration parameters into
+		                any Zend Tool provider. Access to this configuration is available via the
+		                registry that is passed to your provider if you extend
+		                <classname>Zend_Tool_Framework_Provider_Abstract</classname>.
+		            </para>
+		
+		            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say()
+    {
+        $username = $this->_registry->getConfig()->username;
+        if(!empty($username)) {
+            echo "Hello $username!";
+        } else {
+            echo "Hello!";
+        }
+    }
+}
+]]></programlisting>
+		
+		            <para>
+		                The returned configuration is of the type
+		                <classname>Zend_Tool_Framework_Client_Config</classname> but internally the
+		                <methodname>__get()</methodname> and <methodname>__set()</methodname> magic methods
+		                proxy to a <classname>Zend_Config</classname> of the given configuration type.
+		            </para>
+		
+		            <para>
+		                The storage allows to save arbitrary data for later reference. This can be useful for batch
+		                processing tasks or for re-runs of your tasks. You can access the storage in a similar way
+		                like the configuration:
+		            </para>
+		
+		            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Framework_Provider_Abstract
+{
+    public function say()
+    {
+        $aValue = $this->_registry->getStorage()->get("myUsername");
+        echo "Hello $aValue!";
+    }
+}
+]]></programlisting>
+		
+		            <para>
+		                The API of the storage is very simple:
+		            </para>
+		
+		            <programlisting language="php"><![CDATA[
+class Zend_Tool_Framework_Client_Storage
+{
+    public function setAdapter($adapter);
+    public function isEnabled();
+    public function put($name, $value);
+    public function get($name, $defaultValue=null);
+    public function has($name);
+    public function remove($name);
+    public function getStreamUri($name);
+}
+]]></programlisting>
+		
+		            <important>
+		                <para>
+		                    When designing your providers that are config or storage aware remember to
+		                    check if the required user-config or storage keys really exist for a user.
+		                    You won't run into fatal errors when none of these are provided though,
+		                    since empty ones are created upon request.
+		                </para>
+		            </important>
+		        </sect5>
+		
+		    </sect4>
+
+        </sect3>
+        
+    </sect2>
+    
+    <sect2 id="zend.tool.extending.zend-tool-project">
+        <title>Zend_Tool_Project Extensions</title>
+        
+        <para>
+            Zend_Tool_Project exposes a rich set of functionality and capabilities that make the task
+            of creating new providers, specficially those targetting project easier and more manageable.
+        </para>
+        
+        <sect3 id="zend.tool.extending.zend-tool-project.architecture">
+            <title>Overall Architecture</title>
+            
+		    <para>
+		        This same concept applies to Zend Framework projects. In Zend Framework projects, you have
+		        controllers, actions, views, models, databases and so on and so forth. In terms of
+		        <classname>Zend_Tool</classname>, we need a way to track these types of resources - thus
+		        <classname>Zend_Tool_Project</classname>.
+		    </para>
+		
+		    <para>
+		        <classname>Zend_Tool_Project</classname> is capable of tracking project resources throughout
+		        the development of a project. So, for example, if in one command you created a controller,
+		        and in the next command you wish to create an action within that controller,
+		        <classname>Zend_Tool_Project</classname> is gonna have to <emphasis>know</emphasis> about
+		        the controller file you created so that you can (in the next action), be able to append that
+		        action to it. This is what keeps our projects up to date and <emphasis>stateful</emphasis>.
+		    </para>
+		
+		    <para>
+		        Another important point to understand about projects is that typically, resources are
+		        organized in a hierarchical fashion. With that in mind,
+		        <classname>Zend_Tool_Project</classname> is capable of serializing the current project into
+		        a internal representation that allows it to keep track of not only <emphasis>what</emphasis>
+		        resources are part of a project at any given time, but also <emphasis>where</emphasis> they
+		        are in relation to one another.
+		    </para>
+            
+        </sect3>
+        
+        
+        <sect3 id="zend.tool.extending.zend-tool-project.providers">
+            <title>Creating Providers</title>
+            
+            <para>
+                Project specific providers are created in the same fashion as plain framework providers, with
+                one exception: project providers must extend the <code>Zend_Tool_Project_Provider_Abstract</code>.
+                This class comes with some significant functionality that helps developers load existing project,
+                obtian the profile object, and be able to search the profile, then later store any changes to the
+                current project profile.
+            </para>
+            
+            <programlisting language="php"><![CDATA[
+class My_Component_HelloProvider
+    extends Zend_Tool_Project_Provider_Abstract
+{
+    public function say()
+    {
+        $profile = $this->_loadExistingProfile();
+        
+        /* ... do project stuff here */
+        
+        $this->_storeProfile();
+    }
+}
+]]></programlisting>
+            
+        </sect3>
+        
+        <!-- 
+        <sect3 id="zend.tool.extending.zend-tool-project.resources-and-contexts">
+            <title>Creating Resources &amp; Contexts</title>
+            
+            
+            
+        </sect3>
+        -->
+        
+    </sect2>
+</sect1>

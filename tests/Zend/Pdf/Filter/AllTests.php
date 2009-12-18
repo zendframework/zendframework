@@ -17,24 +17,16 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
  */
 
-require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
-
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Pdf_AllTests::main');
+    define('PHPUnit_MAIN_METHOD', 'Zend_Pdf_Filter_AllTests::main');
 }
 
-require_once 'Zend/Pdf/ActionTest.php';
-require_once 'Zend/Pdf/DestinationTest.php';
-require_once 'Zend/Pdf/DrawingTest.php';
-require_once 'Zend/Pdf/FactoryTest.php';
-require_once 'Zend/Pdf/NamedDestinationsTest.php';
-require_once 'Zend/Pdf/ProcessingTest.php';
+require_once 'PHPUnit/Framework/TestSuite.php';
+require_once 'PHPUnit/TextUI/TestRunner.php';
 
-require_once 'Zend/Pdf/Element/AllTests.php';
-require_once 'Zend/Pdf/Filter/AllTests.php';
+require_once 'Zend/Pdf/Filter/RunLengthTest.php';
 
 /**
  * @category   Zend
@@ -44,7 +36,7 @@ require_once 'Zend/Pdf/Filter/AllTests.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Pdf
  */
-class Zend_Pdf_AllTests
+class Zend_Pdf_Filter_AllTests
 {
     public static function main()
     {
@@ -53,22 +45,15 @@ class Zend_Pdf_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Pdf');
+        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Pdf_Filter');
 
-        $suite->addTestSuite('Zend_Pdf_ActionTest');
-        $suite->addTestSuite('Zend_Pdf_DestinationTest');
-        $suite->addTestSuite('Zend_Pdf_DrawingTest');
-        $suite->addTestSuite('Zend_Pdf_FactoryTest');
-        $suite->addTestSuite('Zend_Pdf_NamedDestinationsTest');
-        $suite->addTestSuite('Zend_Pdf_ProcessingTest');
-
-        $suite->addTest(Zend_Pdf_Element_AllTests::suite());
-        $suite->addTest(Zend_Pdf_Filter_AllTests::suite());
+        $suite->addTestSuite('Zend_Pdf_Filter_RunLengthTest');
 
         return $suite;
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Pdf_AllTests::main') {
-    Zend_Pdf_AllTests::main();
+if (PHPUnit_MAIN_METHOD == 'Zend_Pdf_Filter_AllTests::main') {
+    Zend_Pdf_Filter_AllTests::main();
 }
+

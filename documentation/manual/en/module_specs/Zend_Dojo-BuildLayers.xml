@@ -133,9 +133,13 @@ class App_Plugin_DojoLayer extends Zend_Controller_Plugin_Abstract
 
     public function getBuild()
     {
+        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
+            'ViewRenderer'
+        );
+        $viewRenderer->initView();
         if (null === $this->_build) {
             $this->_build = new Zend_Dojo_BuildLayer(array(
-                'view'      => $view,
+                'view'      => $viewRenderer->view,
                 'layerName' => 'custom.main',
             ));
         }

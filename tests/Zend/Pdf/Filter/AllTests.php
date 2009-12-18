@@ -26,6 +26,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once 'PHPUnit/Framework/TestSuite.php';
 require_once 'PHPUnit/TextUI/TestRunner.php';
 
+require_once 'Zend/Pdf/Filter/Ascii85Test.php';
 require_once 'Zend/Pdf/Filter/RunLengthTest.php';
 
 /**
@@ -47,6 +48,7 @@ class Zend_Pdf_Filter_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Pdf_Filter');
 
+        $suite->addTestSuite('Zend_Pdf_Filter_Ascii85Test');
         $suite->addTestSuite('Zend_Pdf_Filter_RunLengthTest');
 
         return $suite;

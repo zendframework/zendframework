@@ -240,6 +240,8 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                             $this->_wildcardData[$var] = (isset($path[$i+1])) ? urldecode($path[$i+1]) : null;
                         }
                     }
+
+                    $matchedPath = implode($this->_urlDelimiter, $path);
                     break;
                 }
 

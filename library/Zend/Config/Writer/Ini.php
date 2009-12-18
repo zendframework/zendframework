@@ -152,8 +152,12 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
             return $value;
         } elseif (is_bool($value)) {
             return ($value ? 'true' : 'false');
+        } elseif (strpos($value, '"') === false) {
+            return '"' . $value .  '"';
         } else {
-            return '"' . addslashes($value) .  '"';
+            /** @see Zend_Config_Exception */
+            require_once 'Zend/Config/Exception.php';
+            throw new Zend_Config_Exception('Value can not contain double quotes "');
         }
     }
 }

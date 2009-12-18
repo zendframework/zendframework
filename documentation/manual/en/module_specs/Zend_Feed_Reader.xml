@@ -62,8 +62,8 @@
             Rather it is an alternative following a different ideology focused
             on being simple to use, flexible, consistent and extendable through
             the plugin system. <classname>Zend_Feed_Reader</classname> is also
-            not capable of constructing feeds through this will be addressed at
-            a future date.
+            not capable of constructing feeds and delegates this responsibility
+            to <classname>Zend_Feed_Writer</classname>, its sibling in arms.
         </para>
     </sect2>
 
@@ -108,7 +108,7 @@ foreach ($feed as $entry) {
         'title'        => $entry->getTitle(),
         'description'  => $entry->getDescription(),
         'dateModified' => $entry->getDateModified(),
-        'author'       => $entry->getAuthor(),
+        'authors'       => $entry->getAuthors(),
         'link'         => $entry->getLink(),
         'content'      => $entry->getContent()
     );
@@ -119,7 +119,7 @@ foreach ($feed as $entry) {
         <para>
             The example above demonstrates
             <classname>Zend_Feed_Reader</classname>'s <acronym>API</acronym>, and it also
-            demonstrates some of it's internal operation. In reality, the <acronym>RDF</acronym>
+            demonstrates some of its internal operation. In reality, the <acronym>RDF</acronym>
             feed selected does not have any native date or author elements,
             however it does utilise the Dublin Core 1.1 module which offers
             namespaced creator and date elements.
@@ -158,7 +158,7 @@ $feed  = Zend_Feed_Reader::importFeed($zfeed);
         <title>Retrieving Underlying Feed and Entry Sources</title>
 
         <para>
-            <classname>Zend_Feed_Reader</classname> does it's best not to stick
+            <classname>Zend_Feed_Reader</classname> does its best not to stick
             you in a narrow confine. If you need to work on a feed outside of
             <classname>Zend_Feed_Reader</classname>, you can extract the base
             <classname>DOMDocument</classname> or
@@ -388,11 +388,14 @@ $feed = Zend_Feed_Reader::import(
         </para>
 
         <para>
-            The returned object is an <classname>ArrayObject</classname>
-            called <classname>Zend_Feed_Reader_FeedSet</classname> so you can cast
+            The returned object is an <classname>ArrayObject</classname> subclass
+            called <classname>Zend_Feed_Reader_Collection_FeedLink</classname> so you can cast
             it to an array, or iterate over it, to access all the detected links.
             However, as a simple shortcut, you can just grab the first RSS, RDF
-            or Atom link using its public properties as in the example below.
+            or Atom link using its public properties as in the example below. Otherwise,
+            each element of the <classname>ArrayObject</classname> is a simple array
+            with the keys "type" and "uri" where the type is one of "rdf", "rss" or
+            "atom".
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -425,20 +428,10 @@ if(isset($links->atom)) {
 $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
 
 foreach ($links as $link) {
-    echo $link['href'], "\n";
+    echo $link['uri'], "\n";
 }
 ]]></programlisting>
 
-        <para>The available keys are <emphasis>href</emphasis>, <emphasis>rel</emphasis>
-        which will always be 'alternate', <emphasis>type</emphasis> which will
-        be one of <code>application/rss+xml</code>, <code>application/rdf+xml</code>
-        or <code>application/atom+xml</code> and <emphasis>feed</emphasis>.
-        <emphasis>feed</emphasis> is only available if you preserve the
-        <classname>ArrayObject</classname> (i.e. do not cast it to an array)
-        and using it triggers an attempt to load the feed into a
-        <classname>Zend_Feed_Reader_FeedAbstract</classname> instance. This
-        is a lazy loaded attempt - feeds are never loaded until you try to
-        access them using this method.</para>
   </sect2>
 
   <sect2 id="zend.feed.reader.attribute-collections">
@@ -467,7 +460,8 @@ foreach ($links as $link) {
         label. The "term" is the basic category name, often machine readable (i.e. plays nice
         with URIs). The scheme represents a categorisation scheme (usually a URI identifier) also
         known as a "domain" in RSS 2.0. The "label" is a human readable category name which supports
-        html entities.</para>
+        html entities. In RSS 2.0, there is no label attribute so it is always set to the same value as
+        the term for convenience.</para>
 
         <para>To access category labels by themselves in a simple value array,
         you might commit to something like:</para>
@@ -488,8 +482,8 @@ foreach ($categories as $cat) {
     as a simple array using the <methodname>getValues()</methodname> method. The concept
     of "most relevant" is obviously a judgement call. For categories it means the category labels
     (not the terms or schemes) while for authors it would be the authors' names
-    (not their email addresses or URLs). The simple array is flat (just values) and passed
-    through <methodname>array_unique</methodname> to remove duplication.</para>
+    (not their email addresses or URIs). The simple array is flat (just values) and passed
+    through <methodname>array_unique()</methodname> to remove duplication.</para>
 
     <programlisting language="php"><![CDATA[
 $feed = Zend_Feed_Reader::import('http://www.example.com/atom.xml');
@@ -523,6 +517,18 @@ $labels = $categories->getValues();
             information you want.
         </para>
 
+        <note><para>
+            While determining common ground between feed types is itself complex, it
+            should be noted that RSS in particular is a constantly disputed "specification".
+            This has its roots in the original RSS 2.0 document which contains ambiguities
+            and does not detail the correct treatment of all elements. As a result, this
+            component rigorously applies the RSS 2.0.11 Specification published by the
+            RSS Advisory Board and its accompanying RSS Best Practices Profile. No
+            other interpretation of RSS 2.0 will be supported though exceptions may
+            be allowed where it does not directly prevent the application of the two
+            documents mentioned above.
+        </para></note>
+
         <para>
             Of course, we don't live in an ideal world so there may be times the
             <acronym>API</acronym> just does not cover what you're looking for. To assist you,
@@ -532,7 +538,8 @@ $labels = $categories->getValues();
             another Extension is too much trouble, you can simply grab the
             underlying <acronym>DOM</acronym> or XPath objects and do it by hand in your
             application. Of course, we really do encourage writing an Extension
-            simply to make it more portable and reusable.
+            simply to make it more portable and reusable, and useful Extensions may be proposed
+            to the Framework for formal addition.
         </para>
 
         <para>
@@ -542,8 +549,7 @@ $labels = $categories->getValues();
             <classname>Zend_Feed_Reader</classname>. The naming of these
             Extension sourced methods remain fairly generic - all Extension
             methods operate at the same level as the Core <acronym>API</acronym> though we do allow
-            you to retrieve any specific Extension object separately if
-            required.
+            you to retrieve any specific Extension object separately if required.
         </para>
 
         <table>
@@ -585,8 +591,10 @@ $labels = $categories->getValues();
                         <entry><methodname>getFeedLink()</methodname></entry>
 
                         <entry>
-                            Returns the <acronym>URI</acronym> of this feed, which should be the
-                            same as the <acronym>URI</acronym> used to import the feed.
+                            Returns the <acronym>URI</acronym> of this feed, which may be the
+                            same as the <acronym>URI</acronym> used to import the feed. There
+                            are important cases where the feed link may differ because the source
+                            URI is being updated and is intended to be removed in the future.
                         </entry>
                     </row>
 
@@ -594,8 +602,10 @@ $labels = $categories->getValues();
                         <entry><methodname>getAuthors()</methodname></entry>
 
                         <entry>
-                            Returns an array of all authors associated with this feed
-                            including email address in the author string if available.
+                            Returns an object of type <classname>Zend_Feed_Reader_Collection_Author</classname>
+                            which is an <classname>ArrayObject</classname> whose elements are each simple
+                            arrays containing any combination of the keys "name", "email" and
+                            "uri". Where irrelevant to the source data, some of these keys may be omitted.
                         </entry>
                     </row>
 
@@ -605,8 +615,8 @@ $labels = $categories->getValues();
                         <entry>
                             Returns either the first author known, or with the
                             optional <varname>$index</varname> parameter any specific
-                            index on the array of Authors (returning null if an
-                            invalid index).
+                            index on the array of Authors as described above (returning
+                            null if an invalid index).
                         </entry>
                     </row>
 
@@ -616,7 +626,8 @@ $labels = $categories->getValues();
                         <entry>
                             Returns the date on which this feed was created. Generally
                             only applicable to Atom where it represents the date the resource
-                            described by an Atom 1.0 document was created.
+                            described by an Atom 1.0 document was created. The returned date
+                            will be a <classname>Zend_Date</classname> object.
                         </entry>
                     </row>
 
@@ -624,7 +635,8 @@ $labels = $categories->getValues();
                         <entry><methodname>getDateModified()</methodname></entry>
 
                         <entry>
-                            Returns the date on which this feed was last modified.
+                            Returns the date on which this feed was last modified. The returned date
+                            will be a <classname>Zend_Date</classname> object.
                         </entry>
                     </row>
 
@@ -660,7 +672,7 @@ $labels = $categories->getValues();
 
                         <entry>
                             Returns an array of all Hub Server <acronym>URI</acronym> endpoints which
-                            are advertised by the feed for using with the Pubsubhubbub
+                            are advertised by the feed for use with the Pubsubhubbub
                             Protocol, allowing subscriptions to the feed for real-time updates.
                         </entry>
                     </row>
@@ -775,7 +787,8 @@ $labels = $categories->getValues();
                         <entry>
                             Returns the encoding of the source <acronym>XML</acronym> document
                             (note: this cannot account for errors such as the
-                            server sending documents in a different encoding)
+                            server sending documents in a different encoding). Where not
+                            defined, the default UTF-8 encoding of Unicode is applied.
                         </entry>
                     </row>
 
@@ -882,19 +895,19 @@ $labels = $categories->getValues();
                     <row>
                         <entry><methodname>getId()</methodname></entry>
 
-                        <entry>Returns a unique ID for the current entry</entry>
+                        <entry>Returns a unique ID for the current entry.</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getTitle()</methodname></entry>
 
-                        <entry>Returns the title of the current entry</entry>
+                        <entry>Returns the title of the current entry.</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getDescription()</methodname></entry>
 
-                        <entry>Returns a description of the current entry</entry>
+                        <entry>Returns a description of the current entry.</entry>
                     </row>
 
                     <row>
@@ -902,7 +915,7 @@ $labels = $categories->getValues();
 
                         <entry>
                             Returns a <acronym>URI</acronym> to the <acronym>HTML</acronym> version
-                            of the current entry
+                            of the current entry.
                         </entry>
                     </row>
 
@@ -910,7 +923,8 @@ $labels = $categories->getValues();
                         <entry><methodname>getPermaLink()</methodname></entry>
 
                         <entry>
-                            Returns the permanent link to the current entry
+                            Returns the permanent link to the current entry. In most cases,
+                            this is the same as using <methodname>getLink()</methodname>.
                         </entry>
                     </row>
 
@@ -918,19 +932,21 @@ $labels = $categories->getValues();
                         <entry><methodname>getAuthors()</methodname></entry>
 
                         <entry>
-                            Returns an array of all authors associated with this entry
-                            including email address in the author string if available
+                            Returns an object of type <classname>Zend_Feed_Reader_Collection_Author</classname>
+                            which is an <classname>ArrayObject</classname> whose elements are each simple
+                            arrays containing any combination of the keys "name", "email" and
+                            "uri". Where irrelevant to the source data, some of these keys may be omitted.
                         </entry>
                     </row>
 
                     <row>
-                        <entry><methodname>getAuthor($index = 0)</methodname></entry>
+                        <entry><methodname>getAuthor(integer $index = 0)</methodname></entry>
 
                         <entry>
                             Returns either the first author known, or with the
                             optional <varname>$index</varname> parameter any specific
-                            index on the array of Authors (returning null if an
-                            invalid index).
+                            index on the array of Authors as described above (returning
+                            null if an invalid index).
                         </entry>
                     </row>
 
@@ -973,6 +989,9 @@ $labels = $categories->getValues();
                             attributes from a multi-media &lt;enclosure&gt; element including
                             as array keys: <emphasis>url</emphasis>,
                             <emphasis>length</emphasis>, <emphasis>type</emphasis>.
+                            In accordance with the RSS Best Practices Profile of the RSS
+                            Advisory Board, no support is offers for multiple enclosures
+                            since such support forms no part of the RSS specification.
                         </entry>
                     </row>
 
@@ -996,8 +1015,8 @@ $labels = $categories->getValues();
 
                     <row>
                         <entry>
-                            <methodname>getCommentFeedLink(string $type =
-                                'atom'|'rss')</methodname>
+                            <methodname>getCommentFeedLink([string $type =
+                                'atom'|'rss'])</methodname>
                         </entry>
 
                         <entry>
@@ -1043,16 +1062,23 @@ $labels = $categories->getValues();
                 consider tracking the <acronym>MD5</acronym> hash of three other elements
                 concatenated, e.g. using <methodname>getTitle()</methodname>,
                 <methodname>getDescription()</methodname> and
-                <methodname>getContent()</methodname>. If the entry was trully
+                <methodname>getContent()</methodname>. If the entry was truly
                 updated, this hash computation will give a different result than
-                previously saved hashes for the same entry. Further muddying the
+                previously saved hashes for the same entry. This is obviously
+                content oriented, and will not assist in detecting changes to other
+                relevant elements. Atom feeds should not require such steps.
+            </para>
+            
+            <para>
+                Further muddying the
                 waters, dates in feeds may follow different standards. Atom and
                 Dublin Core dates should follow <acronym>ISO</acronym> 8601,
                 and <acronym>RSS</acronym> dates should
                 follow <acronym>RFC</acronym> 822 or <acronym>RFC</acronym> 2822
                 which is also common. Date methods
                 will throw an exception if <classname>Zend_Date</classname>
-                cannot load the date string using one of the above standards.
+                cannot load the date string using one of the above standards, or
+                the PHP recognised possibilities for <acronym>RSS</acronym> dates.
             </para>
         </caution>
 
@@ -1119,7 +1145,8 @@ $labels = $categories->getValues();
                         <entry>
                             Returns the encoding of the source <acronym>XML</acronym> document
                             (note: this cannot account for errors such as the server sending
-                            documents in a different encoding)
+                            documents in a different encoding). The default encoding applied
+                            in the absence of any other is the UTF-8 encoding of Unicode.
                         </entry>
                     </row>
 
@@ -1548,5 +1575,68 @@ $firstIsbn = $feed->current()->getIsbn();
                 <classname>JungleBooks_Entry</classname>.
             </para>
         </sect3>
-  </sect2>
+    </sect2>
+  
+    <sect2 id="migrating.from.1.9.6.to.1.10.or.later">
+        <title>Migrating from 1.9.6 to 1.10 or later</title>
+        
+        <para>
+            With the introduction of Zend Framework 1.10, <classname>Zend_Feed_Reader</classname>'s
+            handling of retrieving Authors and Contributors was changed, introducing
+            a break in backwards compatibility. This change was an effort to harmonise
+            the treatment of such data across the RSS and Atom classes of the component
+            and enable the return of Author and Contributor data in more accessible,
+            usable and detailed form. It also rectifies an error in that it was assumed
+            any author element referred to a name. In RSS this is incorrect as an
+            author element is actually only required to provide an email address.
+            In addition, the original implementation applied its RSS limits to Atom
+            feeds significantly reducing the usefulness of the parser with that format.
+        </para>
+        
+        <para>
+            The change means that methods like <methodname>getAuthors()</methodname>
+            and <methodname>getContributors</methodname> no longer return a simple array
+            of strings parsed from the relevant RSS and Atom elements. Instead, the return
+            value is an <classname>ArrayObject</classname> subclass called
+            <classname>Zend_Feed_Reader_Collection_Author</classname> which simulates
+            an iterable multidimensional array of Authors. Each member of this object
+            will be a simple array with three potential keys (as the source data permits).
+            These include: name, email and uri.
+        </para>
+        
+        <para>
+            The original behaviour of such methods would have returned a simple
+            array of strings, each string attempting to present a single name, but
+            in reality this was unreliable since there is no rule governing the format
+            of RSS Author strings.
+        </para>
+        
+        <para>
+            The simplest method of simulating the original behaviour of these
+            methods is to use the <classname>Zend_Feed_Reader_Collection_Author</classname>'s
+            <methodname>getValues()</methodname> which also returns a simple array of strings
+            representing the "most relevant data", for authors presumed to be their name.
+            Each value in the resulting array is derived from the "name" value
+            attached to each Author (if present). In most cases this simple change is
+            easy to apply as demonstrated below.
+        </para>
+        
+        <programlisting language="php"><![CDATA[
+/**
+ * In 1.9.6
+ */
+
+$feed = Zend_Feed_Reader::import('http://example.com/feed');
+$authors = $feed->getAuthors();
+
+/**
+ * Equivalent in 1.10
+ */
+$feed = Zend_Feed_Reader::import('http://example.com/feed');
+$authors = $feed->getAuthors()->getValues();
+
+
+]]></programlisting>
+        
+    </sect2>
 </sect1>

@@ -12,11 +12,14 @@
         in windows with the <filename>cmd.exe</filename>, console2 and also with the Cygwin project.
     </para>
     
+    <!--
     <sect2 id="zend.tool.usage.cli.introduction">
         <title>Introduction</title>
     </sect2>
-
+    -->
+    
     <sect2 id="zend.tool.usage.cli.installation">
+        <title>Installation</title>
         
         <sect3 id="zend.tool.usage.cli.installation.download-and-go">
             <title>Download And Go</title>
@@ -90,7 +93,8 @@ pear install zfcampus/zf
     </sect2>
     
     <sect2 id="zend.tool.usage.cli.general-purpose-commands">
-    
+        <title>General Purpose Commands</title>
+
         <sect3 id="zend.tool.usage.cli.general-purpose-commands.version">
             <title>Version</title>
             
@@ -177,6 +181,7 @@ zf show manifest
     </sect2>
     
     <sect2 id="zend.tool.usage.cli.project-specific-commands">
+        <title>Project Specific Commands</title>
     
         <sect3 id="zend.tool.usage.cli.project-specific-commands.project">
             <title>Project</title>
@@ -396,7 +401,7 @@ zf configure dbadapter "adapter=Pdo_Sqlite&dbname=../data/test.db" -s developmen
                 The DbTable provider is responsible for creating Zend_Db_Table 
                 model/data access files for your application to consume, with the proper 
                 class name, and in the proper location in the application. The two 
-                important pieces of information are the <empasis>DbTable name</empasis>, 
+                important pieces of information are the <emphasis>DbTable name</emphasis>, 
                 and the <emphasis>actual database table name</emphasis>. For example:            
             </para>
 
@@ -448,6 +453,7 @@ zf enable layout
     </sect2>
     
     <sect2 id="zend.tool.usage.cli.environment-customization">
+        <title>Environment Customization</title>
     
         <sect3 id="zend.tool.usage.cli.environment-customization.storage-directory">
             <title>The Storage Directory</title>
@@ -490,66 +496,66 @@ zf --setup config-file
             
             <itemizedlist>
                 <listitem>
-                    ZF_HOME
+                    <para>ZF_HOME</para>
                     <itemizedlist>
-                        <listitem>the directory this tool will look for a home directory</listitem>
-                        <listitem>directory must exist</listitem>
+                        <listitem><para>the directory this tool will look for a home directory</para></listitem>
+                        <listitem><para>directory must exist</para></listitem>
                         <listitem>
-                            search order:
+                            <para>search order:</para>
                             <itemizedlist>
-                                <listitem>ZF_HOME environment variable</listitem>
-                                <listitem>HOME environment variable</listitem>
-                                <listitem>then HOMEPATH environment variable</listitem>
+                                <listitem><para>ZF_HOME environment variable</para></listitem>
+                                <listitem><para>HOME environment variable</para></listitem>
+                                <listitem><para>then HOMEPATH environment variable</para></listitem>
                             </itemizedlist>
                         </listitem>
                     </itemizedlist>
                 </listitem>
                 <listitem>
-                    ZF_STORAGE_DIRECTORY
+                    <para>ZF_STORAGE_DIRECTORY</para>
                     <itemizedlist>
-                        <listitem>where this tool will look for a storage directory</listitem>
-                        <listitem>directory must exist</listitem>
+                        <listitem><para>where this tool will look for a storage directory</para></listitem>
+                        <listitem><para>directory must exist</para></listitem>
                         <listitem>
-                            search order:
+                            <para>search order:</para>
                             <itemizedlist>
-                                <listitem>ZF_STORAGE_DIRECTORY environment variable</listitem>
-                                <listitem>$homeDirectory/.zf/ directory </listitem>
+                                <listitem><para>ZF_STORAGE_DIRECTORY environment variable</para></listitem>
+                                <listitem><para>$homeDirectory/.zf/ directory</para></listitem>
                             </itemizedlist>
                         </listitem>
                     </itemizedlist>
                 </listitem>
                 <listitem>
-                    ZF_CONFIG_FILE
+                    <para>ZF_CONFIG_FILE</para>
                     <itemizedlist>
-                        <listitem>where this tool will look for a configuration file</listitem>
+                        <listitem><para>where this tool will look for a configuration file</para></listitem>
                         <listitem>
-                            search order:
+                            <para>search order:</para>
                             <itemizedlist>
-                                <listitem>ZF_CONFIG_FILE environment variable</listitem>
-                                <listitem>$homeDirectory/.zf.ini file if it exists</listitem>
-                                <listitem>$storageDirectory/zf.ini file if it exists </listitem>
+                                <listitem><para>ZF_CONFIG_FILE environment variable</para></listitem>
+                                <listitem><para>$homeDirectory/.zf.ini file if it exists</para></listitem>
+                                <listitem><para>$storageDirectory/zf.ini file if it exists</para></listitem>
                             </itemizedlist>
                         </listitem>
                     </itemizedlist>
                 </listitem>
                 <listitem>
-                    ZF_INCLUDE_PATH
+                    <para>ZF_INCLUDE_PATH</para>
                     <itemizedlist>
-                        <listitem>set the include_path for this tool to use this value</listitem>
+                        <listitem><para>set the include_path for this tool to use this value</para></listitem>
                         <listitem>
-                            original behavior:
+                            <para>original behavior:</para>
                             <itemizedlist>
-                                <listitem>use php's include_path to find ZF</listitem>
-                                <listitem>use the ZF_INCLUDE_PATH environment variable</listitem>
-                                <listitem>use the path ../library (relative to zf.php) to find ZF </listitem>
+                                <listitem><para>use php's include_path to find ZF</para></listitem>
+                                <listitem><para>use the ZF_INCLUDE_PATH environment variable</para></listitem>
+                                <listitem><para>use the path ../library (relative to zf.php) to find ZF</para></listitem>
                             </itemizedlist>
                         </listitem>
                     </itemizedlist>
                 </listitem>
                 <listitem>
-                    ZF_INCLUDE_PATH_PREPEND
+                    <para>ZF_INCLUDE_PATH_PREPEND</para>
                     <itemizedlist>
-                        <listitem>prepend the current php.ini include_path with this value </listitem>
+                        <listitem><para>prepend the current php.ini include_path with this value</para></listitem>
                     </itemizedlist>
                 </listitem>
             </itemizedlist>

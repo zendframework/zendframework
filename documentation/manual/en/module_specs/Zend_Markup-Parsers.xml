@@ -194,6 +194,11 @@
             </tgroup>
         </table>
         
+        <para>
+            Also, the Textile parser wraps all tags into paragraphs; a paragraph ends with two
+            newlines, and if there are more tags, a new paragraph will be added.
+        </para>
+
         <sect3 id="zend.markup.parsers.textile.lists">
             <title>Lists</title>
             
@@ -216,10 +221,5 @@
                 that need to start on a new line (like 'h1' etc.) cannot be used inside lists.
             </para>
         </sect3>
-
-        <para>
-            Also, the Textile parser wraps all tags into paragraphs; a paragraph ends with two
-            newlines, and if there are more tags, a new paragraph will be added.
-        </para>
     </sect2>
 </sect1>

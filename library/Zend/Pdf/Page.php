@@ -284,11 +284,11 @@ class Zend_Pdf_Page
                     $param1 = Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE;
                     break;
                 default:
-                    // should be in "x:y" form
+                    // should be in "x:y" or "x:y:" form
             }
 
             $pageDim = explode(':', $param1);
-            if(count($pageDim) == 3) {
+            if(count($pageDim) == 2  ||  count($pageDim) == 3) {
                 $pageWidth  = $pageDim[0];
                 $pageHeight = $pageDim[1];
             } else {

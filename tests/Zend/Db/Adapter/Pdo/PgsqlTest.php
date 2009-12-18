@@ -185,7 +185,7 @@ class Zend_Db_Adapter_Pdo_PgsqlTest extends Zend_Db_Adapter_Pdo_TestCommon
     /**
      * @group ZF-3972
      */
-    public function testCharacterVarying()
+    public function testAdapterCharacterVarying()
     {
         $this->_util->createTable('zf_pgsql_charvary',
                                   array('pg_id' => 'character varying(4) NOT NULL',
@@ -194,5 +194,17 @@ class Zend_Db_Adapter_Pdo_PgsqlTest extends Zend_Db_Adapter_Pdo_TestCommon
         $this->_util->dropTable('zf_pgsql_charvary');
         $this->assertEquals(null , $description['pg_id']['DEFAULT']);
         $this->assertEquals('A', $description['pg_info']['DEFAULT']);
+    }
+
+    /**
+     * @group ZF-7640
+     */
+    public function testAdapterBpchar()
+    {
+        $this->_util->createTable('zf_pgsql_bpchar',
+                                  array('pg_name' => "character(100) DEFAULT 'Default'::bpchar"));
+        $description = $this->_db->describeTable('zf_pgsql_bpchar');
+        $this->_util->dropTable('zf_pgsql_bpchar');
+        $this->assertEquals('Default', $description['pg_name']['DEFAULT']);
     }
 }

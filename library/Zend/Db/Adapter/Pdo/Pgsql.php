@@ -195,15 +195,15 @@ class Zend_Db_Adapter_Pdo_Pgsql extends Zend_Db_Adapter_Pdo_Abstract
         $desc = array();
         foreach ($result as $key => $row) {
             $defaultValue = $row[$default_value];
-            if ($row[$type] == 'varchar') {
-                if (preg_match('/character varying(?:\((\d+)\))?/', $row[$complete_type], $matches)) {
+            if ($row[$type] == 'varchar' || $row[$type] == 'bpchar' ) {
+                if (preg_match('/character(?: varying)?(?:\((\d+)\))?/', $row[$complete_type], $matches)) {
                     if (isset($matches[1])) {
                         $row[$length] = $matches[1];
                     } else {
                         $row[$length] = null; // unlimited
                     }
                 }
-                if (preg_match("/^'(.*?)'::character varying$/", $defaultValue, $matches)) {
+                if (preg_match("/^'(.*?)'::(?:character varying|bpchar)$/", $defaultValue, $matches)) {
                     $defaultValue = $matches[1];
                 }
             }

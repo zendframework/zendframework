@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 18429 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.definition.theory">
     <title>Aspect théorique</title>
@@ -28,47 +28,47 @@
     <sect2 id="zend.date.theory.internals">
         <title>Fonctionnement interne</title>
 
-        <para>
-            <itemizedlist mark="opencircle">
-                <listitem>
-                    <para>Référence temporelle UNIX (timestamp)&#160;:</para>
+        <itemizedlist mark="opencircle">
+            <listitem>
+                <para>Référence temporelle <acronym>UNIX</acronym> (timestamp)&#160;:</para>
 
-                    <para>
-                        Toutes les dates et heures, même celles ambiguës (par exemple sans
-                        année), sont représentées en interne par des moments absolus dans le temps,
-                        stockés en tant que référence temporelle UNIX exprimant la différence entre
-                        le moment désiré et le 1er janvier 1970 à 00:00:00 <acronym>GMT</acronym>. Ceci est seulement
-                        possible, parce que <classname>Zend_Date</classname> n'est pas limité aux
-                        références temporelles UNIX ou aux valeurs entières. L'extension BCMath est
-                        requise pour supporter les très grandes dates hors de la plage du Vendredi
-                        13 décembre 1901 à 20:45:54 <acronym>GMT</acronym> au Mardi 19 janvier 2038 à 03:14:07 <acronym>GMT</acronym>. De
-                        plus de petites erreurs mathématiques peuvent apparaître causées par les
-                        limitations inhérentes aux types de données float et aux arrondis, à moins
-                        d'utiliser l'extension BCMath.
-                    </para>
-                </listitem>
+                <para>
+                    Toutes les dates et heures, même celles ambiguës (par exemple sans
+                    année), sont représentées en interne par des moments absolus dans le temps,
+                    stockés en tant que référence temporelle <acronym>UNIX</acronym> exprimant
+                    la différence entre le moment désiré et le 1er janvier 1970 à 00:00:00
+                    <acronym>GMT</acronym>. Ceci est seulement possible, parce que
+                    <classname>Zend_Date</classname> n'est pas limité aux références temporelles
+                    <acronym>UNIX</acronym> ou aux valeurs entières. L'extension BCMath est
+                    requise pour supporter les très grandes dates hors de la plage du Vendredi
+                    13 décembre 1901 à 20:45:54 <acronym>GMT</acronym> au Mardi 19 janvier 2038
+                    à 03:14:07 <acronym>GMT</acronym>. De
+                    plus de petites erreurs mathématiques peuvent apparaître causées par les
+                    limitations inhérentes aux types de données float et aux arrondis, à moins
+                    d'utiliser l'extension BCMath.
+                </para>
+            </listitem>
 
-                <listitem>
-                    <para>
-                        Parties de date en tant que décalages de référence temporelle&#160;:
-                    </para>
+            <listitem>
+                <para>
+                    Parties de date en tant que décalages de référence temporelle&#160;:
+                </para>
 
-                    <para>
-                        Ainsi, une instance d'objet représentant trois heures peut être
-                        exprimé en tant que trois heures après le 1er janvier 1970 à 00:00:00 <acronym>GMT</acronym> -
-                        c'est-à-dire 0 + 3 * 60 * 60 = 10800.
-                    </para>
-                </listitem>
+                <para>
+                    Ainsi, une instance d'objet représentant trois heures peut être
+                    exprimé en tant que trois heures après le 1er janvier 1970 à 00:00:00
+                    <acronym>GMT</acronym> - c'est-à-dire 0 + 3 * 60 * 60 = 10800.
+                </para>
+            </listitem>
 
-                <listitem>
-                    <para>Fonctions <acronym>PHP</acronym>&#160;:</para>
+            <listitem>
+                <para>Fonctions <acronym>PHP</acronym>&#160;:</para>
 
-                    <para>
-                        Quand cela est possible, <classname>Zend_Date</classname> utilise
-                        actuellement les fonctions <acronym>PHP</acronym> pour améliorer les performances.
-                    </para>
-                </listitem>
-            </itemizedlist>
-        </para>
+                <para>
+                    Quand cela est possible, <classname>Zend_Date</classname> utilise actuellement
+                    les fonctions <acronym>PHP</acronym> pour améliorer les performances.
+                </para>
+            </listitem>
+        </itemizedlist>
     </sect2>
 </sect1>

@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 17600 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Profiler avec Firebug</title>
 
     <para>
         <classname>Zend_Db_Profiler_Firebug</classname> envoie des informations de profilage
-        vers la <ulink url="http://www.getfirebug.com/">console Firebug</ulink>.
+        vers la <ulink url="http://getfirebug.com/logging.html">console</ulink>
+        <ulink url="http://www.getfirebug.com/">Firebug</ulink>.
     </para>
 
     <para>
         Toutes les données sont envoyées via le composant
-        <classname>Zend_Wildfire_Channel_HttpHeaders</classname> qui utilise les en-têtes <acronym>HTTP</acronym> pour
-        s'assurer que le contenu de la page n'est pas perturbé. Déboguer les requêtes <acronym>AJAX</acronym> qui
-        requière du <acronym>JSON</acronym> "propre" ou un réponse <acronym>XML</acronym> est possible avec cette approche.
+        <classname>Zend_Wildfire_Channel_HttpHeaders</classname> qui utilise les en-têtes
+        <acronym>HTTP</acronym> pour s'assurer que le contenu de la page n'est pas perturbé.
+        Déboguer les requêtes <acronym>AJAX</acronym> qui requière du <acronym>JSON</acronym>
+        "propre" ou un réponse <acronym>XML</acronym> est possible avec cette approche.
     </para>
 
     <para>Éléments requis&#160;:</para>
@@ -29,14 +31,16 @@
         <listitem>
             <para>
                 L'extension Firefox nommée Firebug qui peut être téléchargée à cette adresse
-                <ulink url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
+                <ulink
+                    url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 L'extension Firefox nommée FirePHP qui peut être téléchargée à cette adresse
-                <ulink url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.
+                <ulink
+                    url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.
             </para>
         </listitem>
     </itemizedlist>

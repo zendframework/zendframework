@@ -184,6 +184,27 @@ abstract class Zend_Controller_Response_Abstract
         return $this;
     }
 
+	/**
+	 * Clears the specified HTTP header
+	 *
+	 * @param  string $name
+	 * @return Zend_Controller_Response_Abstract
+	 */
+	public function clearHeader($name)
+	{
+		if (! count($this->_headers)) {
+			return $this;
+		}
+
+		foreach ($this->_headers as $index => $header) {
+			if ($name == $header['name']) {
+				unset($this->_headers[$index]);
+			}
+		}
+
+		return $this;
+	}
+
     /**
      * Set raw HTTP header
      *
@@ -222,6 +243,24 @@ abstract class Zend_Controller_Response_Abstract
         $this->_headersRaw = array();
         return $this;
     }
+
+	/**
+	 * Clears the specified raw HTTP header
+	 *
+	 * @param  string $headerRaw
+	 * @return Zend_Controller_Response_Abstract
+	 */
+	public function clearRawHeader($headerRaw)
+	{
+		if (! count($this->_headersRaw)) {
+			return $this;
+		}
+
+		$key = array_search($headerRaw, $this->_headersRaw);
+		unset($this->_headersRaw[$key]);
+
+		return $this;
+	}
 
     /**
      * Clear all headers, normal and raw

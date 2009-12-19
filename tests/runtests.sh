@@ -47,7 +47,7 @@ while [ -n "$1" ] ; do
      PHPUNIT_GROUPS="" 
      break ;;
 
-    Amazon|Amazon_Ec2|Amazon_S3|Audioscrobbler|Delicious|Flickr|Nirvanix|ReCaptcha|Simpy|StrikeIron|Technorati|Yahoo)
+    Akismet|Amazon|Amazon_Ec2|Amazon_S3|Amazon_Sqs|Audioscrobbler|Delicious|Flickr|LiveDocx|Nirvanix|ReCaptcha|Simpy|SlideShare|StrikeIron|Technorati|Twitter|WindowsAzure|Yahoo)
      PHPUNIT_GROUPS="${PHPUNIT_GROUPS:+"$PHPUNIT_GROUPS,"}Zend_Service_$1" 
      shift ;;
     Ec2|S3)
@@ -70,4 +70,4 @@ done
 
 set -x
 ${PHPUNIT} ${PHPUNIT_OPTS} ${PHPUNIT_COVERAGE} ${PHPUNIT_DB} \
-  ${PHPUNIT_GROUPS:+"--group $PHPUNIT_GROUPS"} AllTests
+  ${PHPUNIT_GROUPS:+--group $PHPUNIT_GROUPS} AllTests

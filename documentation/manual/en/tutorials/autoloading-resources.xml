@@ -32,7 +32,7 @@ $loader = new Zend_Application_Module_Autoloader(array(
 
     <para>
         Once you have the loader in place, you then need to inform it of the various resource types
-        it's aware of. These resource types are simply subtree/prefix pairs.
+        it's aware of. These resource types are simply pairs of subtree and prefix.
     </para>
 
     <para>
@@ -68,8 +68,9 @@ $loader = new Zend_Loader_Autoloader_Resource(array(
         which the resource type may be found, and the component prefix to use for the resource type.
         In the above tree, we have three resource types: form (in the subdirectory "forms", with a
         component prefix of "Form"), model (in the subdirectory "models", with a component prefix of
-        "Model"), and dbtable (in the subdirectory "models/DbTable, with a component prefix of
-        "Model_DbTable"). We'd define them as follows:
+        "Model"), and dbtable (in the subdirectory "<filename>models/DbTable</filename>",
+        with a component prefix of "<classname>Model_DbTable</classname>"). We'd define them as
+        follows:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -91,10 +92,11 @@ $guestbook = new Foo_Model_Guestbook();
         <title>Module Resource Autoloading</title>
 
         <para>
-            Zend Framework's MVC layer encourages the use of "modules", which are self-contained
-            applications within your site. Modules typically have a number of resource types by
-            default, and Zend Framework even <link linkend="project-structure.filesystem">recommends
-                a standard directory layout for modules</link>. Resource autoloaders are therefore
+            Zend Framework's <acronym>MVC</acronym> layer encourages the use of "modules", which
+            are self-contained applications within your site. Modules typically have a number of
+            resource types by default, and Zend Framework even
+            <link linkend="project-structure.filesystem">recommends a standard directory layout
+                for modules</link>. Resource autoloaders are therefore
             quite useful in this paradigm -- so useful that they are enabled by default when you
             create a bootstrap class for your module that extends
             <classname>Zend_Application_Module_Bootstrap</classname>. For more information, read

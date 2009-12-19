@@ -5,9 +5,9 @@
 
     <para>
         Autoloading is a mechanism that eliminates the need to manually require dependencies within
-        your PHP code. Per <ulink url="http://php.net/autoload">the PHP autoload manual</ulink>,
-        once an autoloader has been defined, it "is automatically called in case you are trying to use
-        a class/interface which hasn't been defined yet."
+        your <acronym>PHP</acronym> code. Per <ulink url="http://php.net/autoload">the PHP
+        autoload manual</ulink>, once an autoloader has been defined, it "is automatically called
+        in case you are trying to use a class or an interface which hasn't been defined yet."
     </para>
 
     <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19161 -->
+<!-- EN-Revision: 19691 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
@@ -36,11 +36,11 @@
     </itemizedlist>
 
     <para>
-        Der Ini Writer hat zwei Modi für die Darstellung bezüglich Sektionen. Standardmäßig wird die
-        Top-Level Konfiguration immer in Sektionsnamen geschrieben. Durch den Aufruf von
-        <command>$writer->setRenderWithoutSections()</command> werden alle Optionen in den globalen
-        Namespace der <acronym>INI</acronym> Datei geschrieben und es werden keine Sektionen
-        angehängt.
+        Der <acronym>INI</acronym> Writer hat zwei Modi für die Darstellung bezüglich Sektionen.
+        Standardmäßig wird die Top-Level Konfiguration immer in Sektionsnamen geschrieben. Durch den
+        Aufruf von <command>$writer->setRenderWithoutSections()</command> werden alle Optionen in
+        den globalen Namespace der <acronym>INI</acronym> Datei geschrieben und es werden keine
+        Sektionen angehängt.
     </para>
 
     <para>

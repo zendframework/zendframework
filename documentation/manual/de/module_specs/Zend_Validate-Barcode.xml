@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 19692 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.barcode">
+    <title>Barcode</title>
+
+    <para>
+        <classname>Zend_Validate_Barcode</classname> erlaubt es zu prüfen ob ein gegebener Wert als
+        Barcode repräsentiert werden kann.
+    </para>
+
+    <para>
+        <classname>Zend_Validate_Barcode</classname> unterstützt viele Barcode Standards und kann
+        sehr einfach mit prorietären Barcode Implementationen erweitert werden. Die folgenden
+        Barcode Standards werden unterstützt:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis>CODE25</emphasis>: Oft auch "Two of Five" genannt.
+            </para>
+
+            <para>
+                Dieser Barcode hat keine Begrenzung der Länge, muss aber eine gerade Anzahl an
+                Zeichen enthalten. Es unterstützt nur Ziffern, und die letzt Ziffer kann eine
+                optionale Checksumme sein welche durch Modulo 10 berechnet wird. Dieser Standard
+                wird weltweit verwendet und üblicherweise im Handel.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>CODE39</emphasis>: CODE39 ist einer der ältesten vorhandenen Codes.
+            </para>
+
+            <para>
+                Dieser Barcode hat eine variable Länge. Er unterstützt Ziffern, alphabetische
+                Zeichen und 7 spezielle Zeichen. Er kann eine optionale Checksumme enthalten welche
+                durch Modulo 43 berechnet wird. Dieser Standard wird weltweit verwendet und
+                üblicherweise in der Industrie.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>CODE93</emphasis>: CODE93 ist der Nachfolger von CODE39.
+            </para>
+
+            <para>
+                Dieser Barcode hat eine variable Länge. Er unterstützt Ziffern, alphabetische
+                Zeichen und 7 spezielle Zeichen. Er enthält eine Checksumme welche durch Modulo 47
+                berechnet wird und aus 2 Zeichen besteht. Dieser Standard produziert einen
+                kompakteren Code als CODE39 und ist sicherer.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>EAN8</emphasis>: EAN ist die Abkürzung für "European Article Number".
+            </para>
+
+            <para>
+                Dieser Barcode muss eine Länge von 8 Zeichen haben. Er unterstützt nur Ziffern wobei
+                die letzte Ziffer immer eine Checksumme ist. Dieser Standard wird weltweit
+                verwendet, hat aber eine sehr begrenzte Reichweite. Er kann auf kleinen Artikeln
+                gefunden werden wo ein längerer Barcode nicht gedruckt werden könnte.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>EAN12</emphasis>: EAN ist die Abkürzung für "European Article Number".
+            </para>
+
+            <para>
+                Dieser Barcode muss eine Länge von 12 Zeichen haben. Er unterstützt nur Ziffern
+                wobei die letzte Ziffer immer eine Checksumme ist welche durch Modulo 10 berechnet
+                wird. Dieser Standard wird in der USA verwendet und hierbei üblicherweise im Handel.
+                Er wurde ersetzt durch EAN13.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>EAN13</emphasis>: EAN ist die Abkürzung für "European Article Number".
+            </para>
+
+            <para>
+                Dieser Barcode muss eine Länge von 13 Zeichen haben. Er unterstützt nur Ziffern
+                wobei die letzte Ziffer immer eine Checksumme ist welche durch Modulo 10 berechnet
+                wird. Dieser Standard wird weltweit verwendet, üblicherweise im Handel.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>EAN14</emphasis>: EAN ist die Abkürzung für "European Article Number".
+            </para>
+
+            <para>
+                Dieser Barcode muss eine Länge von 14 Zeichen haben. Er unterstützt nur Ziffern
+                wobei die letzte Ziffer immer eine Checksumme ist welche durch Modulo 10 berechnet
+                wird. Dieser Standard wird weltweit verwendet, üblicherweise im Handel. Er ist der
+                Nachfolger von EAN13.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>GTIN12</emphasis>: GTIN ist die Abkürzung für "Global Trade Item Number".
+            </para>
+
+            <para>
+                Dieser Barcode verwendet den gleichen Standard wie EAN12 und ist sein Nachfolger.
+                Er wird üblicherweise in den USA verwendet.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>GTIN13</emphasis>: GTIN ist die Abkürzung für "Global Trade Item Number".
+            </para>
+
+            <para>
+                Dieser Barcode verwendet den gleichen Standard wie EAN13 und ist sein Nachfolger.
+                Er wird weltweit von der Industrie verwendet.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>GTIN14</emphasis>: GTIN ist die Abkürzung für "Global Trade Item Number".
+            </para>
+
+            <para>
+                Dieser Barcode verwendet den gleichen Standard wie EAN14 und ist sein Nachfolger.
+                Er wird weltweit verwendet, üblicherweise im Handel.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>ITF14</emphasis>: ITF14 ist die GS1 Implementation des Interleaved Two of
+                Five Barcodes.
+            </para>
+
+            <para>
+                Dieser Barcode ist eine spezielle Variante von Interleaved 2 of 5. Er muss eine
+                Länge von 14 Zeichen haben und basiert auf GTIN14. Er unterstützt nur Ziffern wobei
+                die letzte Ziffer die Ziffer einer Checksumme ist welche durch Modulo 10 berechnet
+                wird. Er wird weltweit verwendet, üblicherweise im Handel.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>SSCC</emphasis>: SSCC ist die Abkürzung für "Serial Shipping Container
+                Code".
+            </para>
+
+            <para>
+                Dieser Barcode ist eine Variante des EAN Barcodes. Er muss eine Länge von 18 Zeichen
+                enthalten und unterstützt nur Ziffern. Die letzte Ziffer muss ein Ziffer für eine
+                Checksumme sein welche durch Modulo 10 berechnet wird. Er wird üblicherweise in der
+                Transport Industrie verwendet.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>UPCA</emphasis>: UPC ist die Abkürzung für "Univeral Product Code".
+            </para>
+
+            <para>
+                Dieser Barcode ist der Vorgänger von EAN13. Er muss eine Länge von 12 Zeichen haben
+                und unterstützt nur Ziffern. Die letzte Ziffer muss die Ziffer einer Checksumme sein
+                welche durch Modulo 10 berechnet wird. Er wird üblicherweise in den USA verwendet.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>UPCE</emphasis>: UPCE ist die kurze Variante von UPCA.
+            </para>
+
+            <para>
+                Dieser Barcode ist die kleinere Variante von UPCA. Er muss eine Länge von 6 Zeichen
+                haben und unterstützt nur Ziffern. Es gibt keine Checksumme in diesem Barcode. Er
+                wird üblicherweise bei kleinen Produkten verwendet wo ein UPCA Barcode nicht passen
+                würde.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <sect3 id="zend.validate.set.barcode.basic">
+        <title>Grundsätzliche Verwendung</title>
+
+        <para>
+            Um zu prüfen ob ein angegebener String ein Barcode ist muss man nur dessen Typ wissen.
+            Siehe das folgende Beispiel für einen EAN13 Barcode:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Barcode('EAN13');
+if ($valid->isValid($input)) {
+    // Die Eingabe scheint gültig zu sein
+} else {
+    // Die Eingabe ist ungültig
+}
+]]></programlisting>
+    </sect3>
+
+    <sect3 id="zend.validate.set.barcode.checksum">
+        <title>Optionale Checksumme</title>
+
+        <para>
+            Einige Barcodes können mit einer optionalen Checksumme angegeben werden. Diese Barcodes
+            würden gültig sein, selbst ohne Checksumme. Trotzdem, wenn eine Checksumme angegeben
+            wird, dann sollte man Sie auch prüfen. Standardmäßig führen diese Barcode Typen keine
+            Prüfung der Checksumme durch. Durch Verwendung der Option <property>checksum</property>
+            kann man definieren ob die Checksumme geprüft oder ignoriert wird.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid = new Zend_Validate_Barcode(array(
+    'adapter'  => 'EAN13',
+    'checksum' => false,
+));
+if ($valid->isValid($input)) {
+    // Die Eingabe scheint gültig zu sein
+} else {
+    // Die Eingabe ist ungültig
+}
+]]></programlisting>
+
+        <note>
+            <title>Reduzierte Sicherheit durch ausgeschaltete Prüfung der Checksumme</title>
+
+            <para>
+                 Indem die Prüfung der Checksumme ausgeschaltet wird, verringert man auch die
+                 Sicherheit der verwendeten Barcodes. Zusätzlich sollte man beachten dass man
+                 die Prüfung der Checksumme für jene Barcode Typen ausschalten kann welche einen
+                 Wert für die Checksumme enthalten müssen. Barcodes welche nicht gültig wären
+                 könnten dann als gültig zurückgegeben werden, selbst wenn Sie es nicht sind.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.validate.set.barcode.custom">
+        <title>Schreiben eigener Adapter</title>
+
+        <para>
+            Man kann eigene Barcode Prüfungen für die Verwendung mit
+            <classname>Zend_Validate_Barcode</classname> schreiben; das ist oft notwendig wenn man
+            mit proprietären Barcodes arbeiten muss. Um eine eigene Barcode Prüfung zu schreiben
+            benötigt man die folgenden Informationen.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Length</emphasis>: Die Länge welche der Barcode haben muss. Diese kann
+                    einen der folgenden Werte haben:
+                </para>
+
+                <itemizedlist>
+                    <listitem>
+                        <para>
+                            <emphasis>Integer</emphasis>: Ein Wert größer als 0, was bedeutet das
+                            der Barcode diese Länge haben muss.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            <emphasis>-1</emphasis>: Es gibt keine Begrenzung der Länge für diesen
+                            Barcode.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            <emphasis>"even"</emphasis>: Die Länge dieses Barcodes muss eine gerade
+                            Anzahl an Ziffern enthalten.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            <emphasis>"odd"</emphasis>: Die Länge dieses Barcodes muss eine ungerade
+                            Anzahl an Ziffern enthalten.
+                        </para>
+                    </listitem>
+
+                    <listitem>
+                        <para>
+                            <emphasis>array</emphasis>: Ein Array von Integer Werten. Die Länge
+                            dieses Barcodes muss einer der gesetzten Array Werte haben.
+                        </para>
+                    </listitem>
+                </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Characters</emphasis>: Ein String der die erlaubten Zeichen für diesen
+                    Barcode enthält. Auhc der Integer Wert 128 ist erlaubt, was für die ersten 128
+                    Zeichen der ASCII Tabelle steht.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum</emphasis>: Ein Strung der als Callback für eine Methode
+                    verwendet wird, welche die Prüfung der Checksumme durchführt.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Die eigene Barcode Prüfung muss
+            <classname>Zend_Validate_Barcode_AdapterAbstract</classname> erweitern oder
+            <interface>Zend_Validate_Barcode_AdapterInterface</interface> implementieren.
+        </para>
+
+        <para>
+            Als Beispiel, erstellen wir eine Prüfung welche eine gerade Anzahl an Zeichen erwartet
+            welche alle Ziffern und die Zeichen 'ABCDE' enthalten kann, und die eine Checksumme
+            benötigt.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class My_Barcode_MyBar extends Zend_Validate_Barcode_AdapterAbstract
+{
+    protected $_length     = 'even';
+    protected $_characters = '0123456789ABCDE';
+    protected $_checksum   = '_mod66';
+
+    protected function _mod66($barcode)
+    {
+        // Mach einige Prüfungen und gib ein Boolean zurück
+    }
+}
+
+$valid = new Zend_Validate_Barcode('My_Barcode_MyBar');
+if ($valid->isValid($input)) {
+    // Die Eingabe scheint gültig zu sein
+} else {
+    // Die Eingabe ist ungültig
+}
+]]></programlisting>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

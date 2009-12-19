@@ -95,21 +95,21 @@ class Zend_Cache_Backend_TwoLevels extends Zend_Cache_Backend implements Zend_Ca
      *
      * @var Zend_Cache_Backend
      */
-    private $_slowBackend;
+    protected $_slowBackend;
 
     /**
      * Fast Backend
      *
      * @var Zend_Cache_Backend
      */
-    private $_fastBackend;
+    protected $_fastBackend;
 
     /**
      * Cache for the fast backend filling percentage
      *
      * @var int
      */
-    private $_fastBackendFillingPercentage = null;
+    protected $_fastBackendFillingPercentage = null;
 
     /**
      * Constructor

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17427 -->
-<sect1 id="introduction.overview">
+<!-- EN-Revision: 19778 -->
+<chapter id="introduction.overview">
 
     <title>概要</title>
 
@@ -30,7 +30,7 @@
         作成したいアプリケーションがどんなものであったとしても、
         きっとあなたの要求を満たす Zend Framework のコンポーネントが存在することでしょう。
         それを使用することで開発期間を大幅に短縮させることができ、
-        また十分にテスト済みの仕組みを使用することができます。
+        また十分にテスト済みの仕組みを使用できます。
     </para>
     <para>
         Zend Framework プロジェクトの主なスポンサーは <ulink url="http://www.zend.com">
@@ -48,7 +48,7 @@
         IRC チャネル</ulink>、そしてその他の掲示板などで活動しています。
         Zend Framework に対して何か質問がある方は、これらのいずれかに参加してみるといいでしょう。
     </para>
-</sect1>
+</chapter>
 <!--
 vim:se ts=4 sw=4 et:
 -->

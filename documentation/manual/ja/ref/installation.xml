@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17427 -->
-<sect1 id="introduction.installation">
+<!-- EN-Revision: 19778 -->
+<chapter id="introduction.installation">
 
     <title>インストール</title>
 
@@ -97,4 +97,4 @@
         これ以降の章では、Zend Framework の包括的な使用法をコンポーネント単位で説明します。
     </para>
 
-</sect1>
+</chapter>

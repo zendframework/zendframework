@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19483 -->
+<!-- EN-Revision: 19753 -->
 <sect3 id="zend.controller.router.routes.rest">
     <title>Zend_Rest_Route</title>
 
@@ -57,12 +57,12 @@
                 </row>
                 <row>
                     <entry><constant>POST</constant></entry>
-                    <entry><command>/product/ratings/:id?_method="PUT"</command></entry>
+                    <entry><filename>/product/ratings/:id?_method="PUT"</filename></entry>
                     <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
                 </row>
                 <row>
                     <entry><constant>POST</constant></entry>
-                    <entry><command>/product/ratings/:id?_method="DELETE"</command></entry>
+                    <entry><filename>/product/ratings/:id?_method="DELETE"</filename></entry>
                     <entry>
                         <methodname>Product_RatingsController::deleteAction()</methodname>
                     </entry>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17427 -->
+<!-- EN-Revision: 19778 -->
 <!-- Reviewed: no -->
-<sect1 id="introduction.installation">
+<chapter id="introduction.installation">
     <title>Installation</title>
 
     <para>
@@ -102,4 +102,4 @@
         divers composants peuvent être choisis pour un usage indépendant si nécessaire. Les
         chapitres suivants documente l'utilisation de Zend Framework composant par composant.
     </para>
-</sect1>
+</chapter>

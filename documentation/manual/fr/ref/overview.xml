@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17427 -->
+<!-- EN-Revision: 19778 -->
 <!-- Reviewed: no -->
-<sect1 id="introduction.overview">
+<chapter id="introduction.overview">
     <title>Présentation</title>
 
     <para>
@@ -48,4 +48,4 @@
         que vous avez sur le Zend Framework, la communauté est toujours disponible pour y
         répondre.
     </para>
-</sect1>
+</chapter>

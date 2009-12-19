@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19738 -->
+<!-- EN-Revision: 19778 -->
 <!-- Reviewed: no -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
@@ -30,7 +30,7 @@
         -->
     </bookinfo>
 
-    <chapter id="introduction">
+    <part id="introduction">
         <title>Introdução ao Zend Framework</title>
         <xi:include href="ref/overview.xml">
             <xi:fallback>
@@ -42,7 +42,270 @@
                 <xi:include href="../en/ref/installation.xml" />
             </xi:fallback>
         </xi:include>
-    </chapter>
+    </part>
+
+    <part id="learning">
+        <title>Conhecendo o Zend Framework</title>
+
+        <chapter id="learning.quickstart">
+            <title>Guia Rápido do Zend Framework</title>
+            <xi:include href="tutorials/quickstart-intro-mvc.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/quickstart-intro-mvc.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/quickstart-create-project.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/quickstart-create-project.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/quickstart-create-layout.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/quickstart-create-layout.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/quickstart-create-model.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/quickstart-create-model.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/quickstart-create-form.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/quickstart-create-form.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/quickstart-conclusion.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/quickstart-conclusion.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
+        <chapter id="learning.autoloading">
+            <title>Auto-carregamento no Zend Framework</title>
+            <xi:include href="tutorials/autoloading-intro.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/autoloading-intro.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/autoloading-design.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/autoloading-design.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/autoloading-usage.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/autoloading-usage.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/autoloading-resources.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/autoloading-resources.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/autoloading-conclusion.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/autoloading-conclusion.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
+        <chapter id="learning.plugins">
+            <title>Plugins no Zend Framework</title>
+            <xi:include href="tutorials/plugins-intro.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/plugins-intro.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/plugins-usage.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/plugins-usage.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/plugins-conclusion.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/plugins-conclusion.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
+        <chapter id="learning.layout">
+            <title>Iniciando com o Zend_Layout</title>
+            <xi:include href="tutorials/layout-intro.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/layout-intro.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/layout-usage.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/layout-usage.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/layout-conclusions.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/layout-conclusions.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
+        <chapter id="learning.view.placeholders">
+            <title>Iniciando com os Marcadores do Zend_View</title>
+            <xi:include href="tutorials/view-placeholders-intro.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/view-placeholders-intro.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/view-placeholders-basics.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/view-placeholders-basics.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/view-placeholders-standard.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/view-placeholders-standard.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/view-placeholders-conclusion.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/view-placeholders-conclusion.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
+        <chapter id="learning.form.decorators">
+            <title>Entendendo e Usando os Decoradores do Zend Form</title>
+            <xi:include href="tutorials/form-decorators-intro.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/form-decorators-intro.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/form-decorators-simplest.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/form-decorators-simplest.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/form-decorators-layering.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/form-decorators-layering.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/form-decorators-individual.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/form-decorators-individual.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/form-decorators-composite.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/form-decorators-composite.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/form-decorators-conclusion.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/form-decorators-conclusion.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
+        <chapter id="learning.multiuser">
+            <title>Iniciando com o Zend_Session, Zend_Auth, e Zend_Acl</title>
+            <xi:include href="tutorials/multiuser-intro.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/multiuser-intro.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/multiuser-sessions.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/multiuser-sessions.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/multiuser-authentication.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/multiuser-authentication.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/multiuser-authorization.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/multiuser-authorization.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
+        <chapter id="learning.lucene">
+            <title>Iniciando com o Zend_Search_Lucene</title>
+            <xi:include href="tutorials/lucene-intro.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/lucene-intro.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/lucene-index-structure.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/lucene-index-structure.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/lucene-index-opening.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/lucene-index-opening.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/lucene-indexing.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/lucene-indexing.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/lucene-searching.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/lucene-searching.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/lucene-queries.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/lucene-queries.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/lucene-pagination.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/lucene-pagination.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+        
+        <chapter id="learning.paginator">
+            <title>Iniciando com o Zend_Paginator</title>
+            <xi:include href="tutorials/paginator-intro.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/paginator-intro.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/paginator-simple.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/paginator-simple.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/paginator-control.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/paginator-control.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="tutorials/paginator-together.xml">
+                <xi:fallback>
+                    <xi:include href="../en/tutorials/paginator-together.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
+        <!--
+        Include new tutorials like this:
+        <chapter id="learning.foo">
+            <xi:include href="tutorials/foobar.xml" />
+        </chapter>
+
+        Thus, if a tutorial consists of multiple sections, they can still be
+        grouped within the same chapter.
+        -->
+    </part>
+
+    <part id="reference">
+        <title>Referência do Zend Framework</title>
 
     <chapter id="zend.acl">
         <title>Zend_Acl</title>
@@ -159,7 +422,7 @@
         </xi:include>
         <xi:include href="module_specs/Zend_Barcode-Objects.xml" parse="xml">
             <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Barcode-Objects.xml" />
+                <xi:include href="../en/module_specs/Zend_Barcode-Objects.xml" parse="xml" />
             </xi:fallback>
         </xi:include>
         <xi:include href="module_specs/Zend_Barcode-Renderers.xml">
@@ -419,7 +682,7 @@
         </xi:include>
         <xi:include href="module_specs/Zend_Db_Profiler.xml" parse="xml">
             <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Db_Profiler.xml" />
+                <xi:include href="../en/module_specs/Zend_Db_Profiler.xml" parse="xml" />
             </xi:fallback>
         </xi:include>
         <xi:include href="module_specs/Zend_Db_Select.xml">
@@ -942,7 +1205,7 @@
         </xi:include>
         <xi:include href="module_specs/Zend_Log-Writers.xml" parse="xml">
             <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_Log-Writers.xml" />
+                <xi:include href="../en/module_specs/Zend_Log-Writers.xml" parse="xml" />
             </xi:fallback>
         </xi:include>
         <xi:include href="module_specs/Zend_Log-Formatters.xml">
@@ -1538,6 +1801,11 @@
                 <xi:include href="../en/module_specs/Zend_Service_Twitter.xml" parse="xml" />
             </xi:fallback>
         </xi:include>
+        <xi:include href="module_specs/Zend_Service_WindowsAzure.xml" parse="xml">
+            <xi:fallback>
+                <xi:include href="../en/module_specs/Zend_Service_WindowsAzure.xml" parse="xml" />
+            </xi:fallback>
+        </xi:include>
         <xi:include href="module_specs/Zend_Service_Yahoo.xml">
             <xi:fallback>
                 <xi:include href="../en/module_specs/Zend_Service_Yahoo.xml" />
@@ -1673,7 +1941,6 @@
         </xi:include>
     </chapter>
 
-    <!--
     <chapter id="zend.tool.framework">
         <title>Zend_Tool_Framework</title>
         <xi:include href="module_specs/Zend_Tool_Framework-Introduction.xml">
@@ -1731,7 +1998,6 @@
             </xi:fallback>
         </xi:include>
     </chapter>
-    -->
 
     <chapter id="zend.translate">
         <title>Zend_Translate</title>
@@ -1838,7 +2104,7 @@
         </xi:include>
         <xi:include href="module_specs/Zend_View-Abstract.xml" parse="xml">
             <xi:fallback>
-                <xi:include href="../en/module_specs/Zend_View-Abstract.xml" />
+                <xi:include href="../en/module_specs/Zend_View-Abstract.xml" parse="xml" />
             </xi:fallback>
         </xi:include>
     </chapter>
@@ -1870,6 +2136,7 @@
             </xi:fallback>
         </xi:include>
     </chapter>
+    </part>
 
     <xi:include href="ref/requirements.xml">
         <xi:fallback>

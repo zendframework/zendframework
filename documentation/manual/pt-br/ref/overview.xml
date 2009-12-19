@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17427 -->
+<!-- EN-Revision: 19778 -->
 <!-- Reviewed: no -->
-<sect1 id="introduction.overview">
+<chapter id="introduction.overview">
 
     <title>Resumo</title>
 
@@ -43,7 +43,7 @@
         <ulink url="http://www.zftalk.com">canais IRC</ulink>, e outros fóruns. Seja qual for a sua
         pergunta sobre o Zend Framework, a comunidade estará sempre disponível para lhe responder.
     </para>
-</sect1>
+</chapter>
 <!--
 vim:se ts=4 sw=4 et:
 -->

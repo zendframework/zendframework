@@ -33,7 +33,7 @@
                 storage.
             </para>
 
-            <example id="zend.service.windowsazure.storage.blob.api.create-container">
+            <example id="zend.service.windowsazure.storage.blob.api.create-container.example">
                 <title>Creating a storage container</title>
 
                 <programlisting language="php"><![CDATA[
@@ -53,7 +53,7 @@ echo 'Container name is: ' . $result->Name;
                 storage.
             </para>
 
-            <example id="zend.service.windowsazure.storage.blob.api.delete-container">
+            <example id="zend.service.windowsazure.storage.blob.api.delete-container.example">
                 <title>Deleting a storage container</title>
 
                 <programlisting role="php"><![CDATA[
@@ -71,7 +71,7 @@ $storageClient->deleteContainer('testcontainer');
                 development storage. Note that the container has already been created before.
             </para>
 
-            <example id="zend.service.windowsazure.storage.blob.api.storing-blob">
+            <example id="zend.service.windowsazure.storage.blob.api.storing-blob.example">
                 <title>Storing a blob</title>
 
                 <programlisting language="php"><![CDATA[
@@ -97,7 +97,7 @@ echo 'Blob name is: ' . $result->Name;
                 created before.
             </para>
 
-            <example id="zend.service.windowsazure.storage.blob.api.copy-blob">
+            <example id="zend.service.windowsazure.storage.blob.api.copy-blob.example">
                 <title>Copying a blob</title>
 
                 <programlisting language="php"><![CDATA[
@@ -122,7 +122,7 @@ echo 'Copied blob name is: ' . $result->Name;
                 blob has been uploaded.
             </para>
 
-            <example id="zend.service.windowsazure.storage.blob.api.download-blob">
+            <example id="zend.service.windowsazure.storage.blob.api.download-blob.example">
                 <title>Downloading a blob</title>
 
                 <programlisting language="php"><![CDATA[
@@ -151,7 +151,7 @@ $storageClient->getBlob(
                 storage. Note that the container has already been created before.
             </para>
 
-            <example id="zend.service.windowsazure.storage.blob.api.public-blob">
+            <example id="zend.service.windowsazure.storage.blob.api.public-blob.example">
                 <title>Making a blob publicly available</title>
 
                 <programlisting language="php"><![CDATA[
@@ -189,7 +189,7 @@ $storageClient->setContainerAcl('testcontainer', Zend_Service_WindowsAzure_Stora
             client as a PHP file stream wrapper. The blob storage stream wrapper provides
             support for using regular file operations on Windows Azure Blob Storage.
             For example, one can open a file from Windows Azure Blob Storage with
-            the <modulename>fopen()</modulename> function:
+            the <methodname>fopen()</methodname> function:
         </para>
 
         <example id="zend.service.windowsazure.storage.blob.wrapper.sample">

@@ -636,7 +636,6 @@
         <xi:include href="module_specs/Zend_Tool-Extending.xml" />
     </chapter>
 
-    <!--
     <chapter id="zend.tool.framework">
         <title>Zend_Tool_Framework</title>
         <xi:include href="module_specs/Zend_Tool_Framework-Introduction.xml" />
@@ -654,7 +653,6 @@
         <xi:include href="module_specs/Zend_Tool_Project-Providers.xml" />
         <xi:include href="module_specs/Zend_Tool_Project-Internals.xml" />
     </chapter>
-    -->
 
     <chapter id="zend.translate">
         <title>Zend_Translate</title>

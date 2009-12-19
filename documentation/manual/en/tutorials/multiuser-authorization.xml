@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect1 id="learning.multiuser.authentication">
+<sect1 id="learning.multiuser.authorization">
     <title>Building an Authorization System in ZF</title>
 
     <sect2 id="learning.multiuser.authorization.intro">

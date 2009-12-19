@@ -730,7 +730,7 @@ if (!isset($_SESSION['firstVisit'])) {
         <warning>
             <para>
                 The <classname>Zend_Service_WindowsAzure_SessionHandler</classname> session handler
-                should be registered before a call to <modulename>session_start()</modulename>
+                should be registered before a call to <methodname>session_start()</methodname>
                 is made!
             </para>
         </warning>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect1 id="introduction.installation">
+<chapter id="introduction.installation">
 
     <title>Installation</title>
 
@@ -97,4 +97,4 @@
         comprehensive reference to Zend Framework on a component-by-component basis.
     </para>
 
-</sect1>
+</chapter>

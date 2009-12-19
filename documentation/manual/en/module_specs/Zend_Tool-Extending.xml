@@ -460,7 +460,7 @@ C:\WAMP\PHP\bin
                     they have to be physically present in the include paths.</para>
                 </note>
 
-                <example id="zend.tool.framework.writing-providers.loading.example">
+                <example id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading.example">
                     <title>Exposing Your Providers with a Manifest</title>
 
                     <para>
@@ -490,7 +490,7 @@ class My_Component_Manifest
                 </example>
             </sect4>
 
-            <sect4 id="zend.tool.framework.writing-providers.basic">
+            <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.basic">
                 <title>Basic Instructions for Creating Providers</title>
 
                 <para>
@@ -528,7 +528,7 @@ Hello from my provider!
 ]]></programlisting>
             </sect4>
 
-            <sect4 id="zend.tool.framework.writing-providers.response">
+            <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.response">
                 <title>The response object</title>
 
                 <para>
@@ -558,10 +558,10 @@ class My_Component_HelloProvider
                 </para>
             </sect4>
 
-            <sect4 id="zend.tool.framework.writing-providers.advanced">
+            <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced">
                 <title>Advanced Development Information</title>
 
-                <sect5 id="zend.tool.framework.writing-providers.advanced.variables">
+                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.variables">
                     <title>Passing Variables to a Provider</title>
 
                     <para>
@@ -604,7 +604,7 @@ class My_Component_HelloProvider
 
                 </sect5>
 
-                <sect5 id="zend.tool.framework.writing-providers.advanced.prompt">
+                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.prompt">
                     <title>Prompt the User for Input</title>
 
                     <para>
@@ -636,7 +636,7 @@ class My_Component_HelloProvider
                     </para>
                 </sect5>
 
-                <sect5 id="zend.tool.framework.writing-providers.advanced.pretendable">
+                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.pretendable">
                     <title>Pretending to execute a Provider Action</title>
 
                     <para>
@@ -685,7 +685,7 @@ I would say hello Ralph.
 
                 </sect5>
 
-                <sect5 id="zend.tool.framework.writing-providers.advanced.verbosedebug">
+                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.verbosedebug">
                     <title>Verbose and Debug modes</title>
 
                     <para>
@@ -712,7 +712,7 @@ class My_Component_HelloProvider
 ]]></programlisting>
                 </sect5>
 
-                <sect5 id="zend.tool.framework.writing-providers.advanced.configstorage">
+                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.configstorage">
                     <title>Accessing User Config and Storage</title>
 
                     <para>

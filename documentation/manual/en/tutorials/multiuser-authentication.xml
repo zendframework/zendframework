@@ -63,7 +63,7 @@ CREATE TABLE users (
             password salt column.  This salt column is used as part of a technique called salting that
             would improve the security of your database of information against brute force attacks
             targeting the algorithm of your password hashing.
-            <a href="http://en.wikipedia.org/wiki/Salting_%28cryptography%29">More information</a>
+            <ulink url="http://en.wikipedia.org/wiki/Salting_%28cryptography%29">More information</ulink>
             on salting.
         </para>
 
@@ -72,9 +72,7 @@ CREATE TABLE users (
             "login form".  We will use Zend_Form to accomplish this.
         </para>
 
-
-<programlisting language="php"><![CDATA[
-<?php
+        <programlisting language="php"><![CDATA[
 // located at application/forms/Auth/Login.php
 
 class Default_Form_Auth_Login extends Zend_Form
@@ -164,8 +162,6 @@ class AuthController extends Zend_Controller_Action
         </para>
 
         <programlisting language="php"><![CDATA[
-<?php
-
 $this->form->setAction($this->url());
 echo $this->form;
 ]]></programlisting>

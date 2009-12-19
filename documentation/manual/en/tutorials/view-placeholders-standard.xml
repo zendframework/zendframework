@@ -130,7 +130,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
         <para>
-            Then, in your layout script, simply <functionname>echo</functionname> the helper at the
+            Then, in your layout script, simply <function>echo</function> the helper at the
             top of the file:
         </para>
 

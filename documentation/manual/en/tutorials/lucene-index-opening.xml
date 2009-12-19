@@ -17,7 +17,7 @@ $index = Zend_Search_Lucene::create($indexPath);
 ]]></programlisting>
     </example>
 
-    <example id="learning.lucene.index-opening.creation">
+    <example id="learning.lucene.index-opening.opening">
         <title>Lucene Index Opening</title>
 
         <programlisting language="php"><![CDATA[

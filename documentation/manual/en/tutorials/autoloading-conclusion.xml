@@ -14,7 +14,7 @@
     <para>
         For more information on its usage, read the <link
             linkend="zend.loader.autoloader">Zend_Loader_Autoloader</link> and <link
-            linkend="zend.loader.autoloader-resources">Zend_Loader_Autoloader_Resource</link> manual
+            linkend="zend.loader.autoloader-resource">Zend_Loader_Autoloader_Resource</link> manual
         pages.
     </para>
 </sect1>

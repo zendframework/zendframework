@@ -104,7 +104,7 @@ if ($mysession->counter > 1999) {
         </para>
 
     </sect2>
-    <sect2 id="learning.multiuser.sessions.basic-usage">
+    <sect2 id="learning.multiuser.sessions.advanced-usage">
         <title>Advanced Usage of Zend_Session</title>
 
         <para>

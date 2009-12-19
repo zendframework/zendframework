@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect1 id="introduction.overview">
+<chapter id="introduction.overview">
 
     <title>Overview</title>
 
@@ -39,7 +39,7 @@
         forums. Whatever question you have about Zend Framework, the community is always available
         to address it.
     </para>
-</sect1>
+</chapter>
 <!--
 vim:se ts=4 sw=4 et:
 -->

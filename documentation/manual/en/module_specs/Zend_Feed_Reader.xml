@@ -1577,7 +1577,7 @@ $firstIsbn = $feed->current()->getIsbn();
         </sect3>
     </sect2>
 
-    <sect2 id="migrating.from.1.9.6.to.1.10.or.later">
+    <sect2 id="zend.feed.reader.migrating.from.1.9.6.to.1.10.or.later">
         <title>Migrating from 1.9.6 to 1.10 or later</title>
 
         <para>

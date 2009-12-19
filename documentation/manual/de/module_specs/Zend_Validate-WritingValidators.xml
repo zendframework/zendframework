@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18032 -->
+<!-- EN-Revision: 19577 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.writing_validators">
-
     <title>Schreiben von Prüfern</title>
 
     <para>
@@ -56,7 +55,6 @@
     </para>
 
     <example id="zend.validate.writing_validators.example.simple">
-
         <title>Erstellen einer einfachen Prüfklasse</title>
 
         <para>
@@ -90,18 +88,16 @@ class MyValid_Float extends Zend_Validate_Abstract
 
         <para>
             Die Klasse definiert ein Template für Ihre einzige Nachricht bei Prüfungsfehlern, welche
-            den eingebauten magischen Parameter <code>%value%</code> inkludiert. Der Aufruf von
-            <methodname>_setValue()</methodname> präpariert das Objekt den getesteten Wert
+            den eingebauten magischen Parameter <emphasis>%value%</emphasis> inkludiert. Der Aufruf
+            von <methodname>_setValue()</methodname> präpariert das Objekt den getesteten Wert
             automatisch in die Fehlernachricht einzufügen, wenn die Prüfung des Wertes fehlschlägt.
             Der Aufruf von <methodname>_error()</methodname> spürt den Grund für die fehlgeschlagene
             Prüfung auf. Da diese Klasse nur eine Fehlernachricht definiert, ist es nicht notwendig
             <methodname>_error()</methodname> den Namen des Templates der Fehlernachricht zu geben.
         </para>
-
     </example>
 
     <example id="zend.validate.writing_validators.example.conditions.dependent">
-
         <title>Schreiben einer Prüfklasse die abhängige Konditionen besitzt</title>
 
         <para>
@@ -115,9 +111,11 @@ class MyValid_Float extends Zend_Validate_Abstract
             <listitem>
                 <para>Der Eingabewert ist nicht nummerisch.</para>
             </listitem>
+
             <listitem>
                 <para>Der Eingabewert ist kleiner als der minimal erlaubte Wert.</para>
             </listitem>
+
             <listitem>
                 <para>Der Eingabewert ist größer als der maximal erlaubte Wert.</para>
             </listitem>
@@ -177,8 +175,9 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
             <varname>$maximum</varname> wurden eingeführt um die Mindest- und Maximalgrenzen
             anzubieten, beziehungsweise, für einen Wert um die Prüfung erfolgreich zu bestehen. Die
             Klasse definiert auch zwei Nachrichtenvariablen die zu den öffentlichen Eigenschaften
-            korrespondieren und es erlauben <code>min</code> und <code>max</code> in den Nachrichten
-            Templates als magische Parameter zu verwenden, genauso wie <code>value</code>.
+            korrespondieren und es erlauben <property>min</property> und <property>max</property> in
+            den Nachrichten Templates als magische Parameter zu verwenden, genauso wie
+            <property>value</property>.
         </para>
 
         <para>
@@ -191,11 +190,9 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
             besitzt, wo die Prüfobjekte mehrfache Gründe zurückgeben könnten, warum ein spezieller
             Prüfversuch fehlgeschlagen ist.
         </para>
-
     </example>
 
     <example id="zend.validate.writing_validators.example.conditions.independent">
-
         <title>Prüfen mit unabhängigen Konditionen, mehrfache Gründe für Fehler</title>
 
         <para>
@@ -209,12 +206,15 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
             <listitem>
                 <para>mindestens 8 Zeichen Länge,</para>
             </listitem>
+
             <listitem>
                 <para>enthält mindestens ein großgeschriebenes Zeichen,</para>
             </listitem>
+
             <listitem>
                 <para>enthält mindestens ein kleingeschriebenes Zeichen,</para>
             </listitem>
+
             <listitem>
                 <para>und enthält mindestens eine Ziffer.</para>
             </listitem>
@@ -277,13 +277,11 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
             sofort <constant>FALSE</constant> zurückgeben. Das erlaubt der Prüfklasse
             <emphasis>alle</emphasis> Gründe anzubieten bei denen das Eingabepasswort
             den Prüfvoraussetzungen nicht entsprochen hat. Wenn, zum Beispiel, ein Benutzer den
-            String "<code>#$%</code>" als Passwort angegeben hat, würde
+            String "#$%" als Passwort angegeben hat, würde
             <methodname>isValid()</methodname> alle vier Prüfungfehlermeldungen zurückgeben bei
             einen nachfolgenden Aufruf von <methodname>getMessages()</methodname>.
         </para>
-
     </example>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

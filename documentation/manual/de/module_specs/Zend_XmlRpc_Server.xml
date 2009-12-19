@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17520 -->
+<!-- EN-Revision: 19604 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -63,6 +63,52 @@ echo $server->handle();
             gültige <acronym>XML-RPC</acronym> Antwort im <acronym>XML</acronym>-Format zurückgibt,
             die direkt ausgegeben werden kann.
         </para>
+    </sect2>
+
+    <sect2 id="zend.xmlrpc.server.anatomy">
+        <title>Anatomie eines Webservices</title>
+
+        <sect3 id="zend.xmlrpc.server.anatomy.general">
+            <title>Generelle Annahmen</title>
+
+            <para>
+                Für eine maximale Performance ist es Notwendig eine einfache Bootstrap Datei für die
+                Server Komponente zu verwenden. Der Verwendung von
+                <classname>Zend_XmlRpc_Server</classname> innerhalb von <link
+                    linkend="zend.controller"><classname>Zend_Controller</classname></link> wird
+                strengstens abgeraten um den Overhead zu vermeiden.
+            </para>
+
+            <para>
+                Services ändern sich mit der Zeit, und wärend sich Webservices generell weniger
+                intensiv ändern wie Code-native <acronym>APIs</acronym>, wird empfohlen den eigenen
+                Service zu versionieren. Das legt den Grundstein für die Kompatibilität zu Clients
+                welche eine ältere Version des eigenen Services verwenden und managt den
+                Lebenszyklus des Services. Um das zu tun sollte eine Versionsnummer in die
+                <acronym>URI</acronym> eingefügt werden. Es wird auch empfohlen den Namen des
+                Remote Protokolls in der <acronym>URI</acronym> einzufügen um eine einfache
+                Integration von zukünftigen Remote Technologien zu erlauben.
+                http://myservice.ws/<emphasis>1.0/XMLRPC/</emphasis>.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.xmlrpc.server.anatomy.general">
+            <title>Was kann man freigeben?</title>
+
+            <para>
+                Meistens ist es nicht sensibel Business Objekte direkt freizugeben. Business
+                Objekte sind normalerweise klein und werden häufig geändert, da die Änderung in
+                diesem Layer der Anwendung sehr billig ist. Sobald Webservices bekanntgegeben und
+                verwendet werden ist eine Änderung sehr hart. Andere Vorbehalte sind
+                <acronym>I/O</acronym> und Latenz: die besten Aufrufe von Webservices sind jene die
+                nicht stattfinden. Deswegen müssen Aufrufe zu Services grob körniger sein als die
+                normale Business Logik selbst. Oft macht ein zusätzlicher Layer vor der Business
+                Logik sinn. Dieser Layer wird manchmal als <ulink
+                    url="http://martinfowler.com/eaaCatalog/remoteFacade.html">Remote Facade</ulink>
+                bezeichnet. Solch ein Service Layer fügt ein grob körniges Interface über der
+                Business Logik hinzu und gruppiert langatmige Operationen zu kleineren.
+            </para>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.xmlrpc.server.conventions">
@@ -148,9 +194,9 @@ function myFunc($val1, $val2, $val3)
 ]]></programlisting>
 
         <para>
-            Dennoch eine Anmerkung: Das Erlaubung von vielen Signaturen kann
-            zu Verwirrung für Entwickler führen, wenn Sie diese Services nutzen;
-            man sollte einer <acronym>XML-RPC</acronym> Methode deshalb nur eine Signatur zuweisen.
+            Wenn man viele Signaturen erlaubt kann dies zu Verwirrung bei Entwicklern führen, welche
+            diese Services nutzen; um die Dinge einfach zu halten sollte eine
+            <acronym>XML-RPC</acronym> Methode deshalb nur eine Signatur haben.
         </para>
     </sect2>
 
@@ -270,6 +316,7 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
 
     <sect2 id="zend.xmlrpc.server.caching">
         <title>Zwischenspeichern von Serverdefinitionen zwischen den Anfragen</title>
+
         <para>
             Das Hinzufügen einer Vielzahl von Klassen zu einer <acronym>XML-RPC</acronym> Server
             Instanz kann zu einem großen Ressourcenverbrauch führen; jede Klasse muss via Reflection
@@ -277,15 +324,18 @@ Zend_XmlRpc_Server_Fault::attachFaultException('My_Project_Exception');
             werden, welche eine Liste von allen möglichen Signaturen, die der Server verwenden kann,
             zurückgibt.
         </para>
+
         <para>
             Um die Einbußen zu reduzieren, kann <classname>Zend_XmlRpc_Server_Cache</classname>
             genutzt werden, welche die Serverdefinitionen zwischen den Anfragen zwischenspeichert.
             Wenn dies mit <methodname>__autoload()</methodname> kombiniert wird, kann es zu einem
             großen Geschwindigkeitsschub kommen.
         </para>
+
         <para>
             Ein Beispiel folgt:
         </para>
+
         <programlisting language="php"><![CDATA[
 function __autoload($class)
 {
@@ -309,6 +359,7 @@ if (!Zend_XmlRpc_Server_Cache::get($cacheFile, $server)) {
 
 echo $server->handle();
 ]]></programlisting>
+
         <para>
             Obiges Beispiel zeigt, wie der Server versucht, eine Definition
             aus der Datei <property>xmlrpc.cache</property>, welches sich im selben Ordner wie das
@@ -321,12 +372,14 @@ echo $server->handle();
 
     <sect2 id="zend.xmlrpc.server.use">
         <title>Nutzungsbeispiele</title>
+
         <para>
             Unten finden sich etliche Beispiele für eine Nutzung, die das
             gesamte Spektrum der verfügbaren Optionen für den Entwickler darstellen.
             These Beispiele bauen immer auf den vorangegangenen Beispielen auf.
         </para>
-        <sect3 id="zend.xmlrpc.server.use.case1">
+
+        <example id="zend.xmlrpc.server.use.attach-function">
             <title>Grundlegende Benutzung</title>
 
             <para>
@@ -350,9 +403,9 @@ $server = new Zend_XmlRpc_Server();
 $server->addFunction('md5Value');
 echo $server->handle();
 ]]></programlisting>
-        </sect3>
+        </example>
 
-        <sect3 id="zend.xmlrpc.server.use.case2">
+        <example id="zend.xmlrpc.server.use.attach-class">
             <title>Hinzufügen einer Klasse</title>
 
             <para>
@@ -365,9 +418,106 @@ $server = new Zend_XmlRpc_Server();
 $server->setClass('Services_Comb');
 echo $server->handle();
 ]]></programlisting>
-        </sect3>
+        </example>
 
-        <sect3 id="zend.xmlrpc.server.use.case3">
+        <example id="zend.xmlrpc.server.use.attach-class-with-arguments">
+            <title>Hinzufügen einer Klasse mit Argumenten</title>
+
+            <para>
+                Das folgende Beispiel zeigt wie öffentliche Methoden einer Klasse hinzugefügt werden
+                und an deren Methoden Argumente übergeben werden können. Das kann verwendet werden
+                um spezielle Standardwerte zu spezifizieren wenn Serviceklassen registriert werden.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class Services_PricingService
+{
+    /**
+     * Calculate current price of product with $productId
+     *
+     * @param ProductRepository $productRepository
+     * @param PurchaseRepository $purchaseRepository
+     * @param integer $productId
+     */
+    public function calculate(ProductRepository $productRepository,
+                              PurchaseRepository $purchaseRepository,
+                              $productId)
+    {
+        ...
+    }
+}
+
+$server = new Zend_XmlRpc_Server();
+$server->setClass('Services_PricingService', 'pricing', new ProductRepository(), new PurchaseRepository());
+]]></programlisting>
+
+            <para>
+                Die Argumente welche an <methodname>setClass()</methodname> wärend der
+                Erstellungszeit des Servers übergeben werden, werden dem Methodenaufruf
+                <command>pricing.calculate()</command> injiziert, wenn er aufgerufen wird. Im obigen
+                Beispiel wird vom Client nur das Argument <code>$purchaseId</code> erwartet.
+            </para>
+        </example>
+
+        <example id="zend.xmlrpc.server.use.attach-class-with-arguments-constructor">
+            <title>Argumente nur dem Constructor übergeben</title>
+
+            <para>
+                <classname>Zend_XmlRpc_Server</classname> erlaubt es die Übergabe von Argumenten nur
+                für den Constructor zu limitieren. Das kann für Dependency Injection beim
+                Constructor verwendet werden. Um die Injektion auf Constructoren zu begrenzen muss
+                <methodname>sendArgumentsToAllMethods</methodname> aufgerufen und
+                <code>false</code> als Argument übergeben werden. Dies deaktiviert das
+                Standardverhalten mit dem alle Argumente in die entfernte Methode injiziert werden.
+                Im nächsten Beispiel werden die Instanzen von
+                <classname>ProductRepository</classname> und
+                <classname>PurchaseRepository</classname> nur in dem Constructor von
+                <classname>Services_PricingService2</classname> injiziert.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class Services_PricingService2
+{
+    /**
+     * @param ProductRepository $productRepository
+     * @param PurchaseRepository $purchaseRepository
+     */
+    public function __construct(ProductRepository $productRepository,
+                                PurchaseRepository $purchaseRepository)
+    {
+        ...
+    }
+
+    /**
+     * Calculate current price of product with $productId
+     *
+     * @param integer $productId
+     * @return double
+     */
+    public function calculate($productId)
+    {
+        ...
+    }
+}
+
+$server = new Zend_XmlRpc_Server();
+$server->sendArgumentsToAllMethods(false);
+$server->setClass('Services_PricingService2', 'pricing', new ProductRepository(), new PurchaseRepository());
+]]></programlisting>
+        </example>
+
+        <example id="zend.xmlrpc.server.use.attach-instance">
+            <title>Die Instanz einer Klasse anhängen</title>
+
+            <para>
+                <methodname>setClass()</methodname> erlaubt es ein vorher instanziertes Objekt beim
+                Server zu registrieren. Man muss nur die Instanz statt dem Namen der Klasse
+                übergeben. Natürlich ist die Übergabe von Argumenten an den Constructor bei vorher
+                instanzierten Objekten nicht möglich.
+            </para>
+        </example>
+
+        <example id="zend.xmlrpc.server.use.attach-several-classes-namespaces">
             <title>Mehrere Klassen unter der Nutzung von Namensräumen hinzufügen</title>
 
             <para>
@@ -392,9 +542,9 @@ $server->setClass('Services_Brush', 'brush');
 $server->setClass('Services_Pick', 'pick');
 echo $server->handle();
 ]]></programlisting>
-        </sect3>
+        </example>
 
-        <sect3 id="zend.xmlrpc.server.use.case4">
+        <example id="zend.xmlrpc.server.use.example-faults">
             <title>Bestimmen von Exceptions als valide Fehler-Antwort</title>
 
             <para>
@@ -424,10 +574,21 @@ $server->setClass('Services_Brush', 'brush');
 $server->setClass('Services_Pick', 'pick');
 echo $server->handle();
 ]]></programlisting>
-        </sect3>
+        </example>
 
-        <sect3 id="zend.xmlrpc.server.use.case5">
-            <title>Nutzen eines eigenen Anfrage-Objekts</title>
+        <title>Utilizing custom request and response objects</title>
+
+        <example id="zend.xmlrpc.server.use.custom-request-object">
+
+            <para>
+                 Einige Anwendungsfälle verlangen die Verwendung eines eigenen Request Objektes.
+                 Zum Beispiel ist <acronym>XML/RPC</acronym> nicht an <acronym>HTTP</acronym> als
+                 Übertragungsprotokoll gebunden. Es ist möglich auch andere Übertragungsprotokolle
+                 wie <acronym>SSH</acronym> oder Telnet zu verwenden um Anfrage und Antwort Daten
+                 über den Draht zu senden. Ein anderer Anwendungsfall ist die Authentifizierung
+                 und Authorisierung. Im Falle eines anderen Übertragungsprotokolls muss die
+                 Implementation geändert werden damit Anfrage Daten gelesen werden können.
+            </para>
 
             <para>
                 Im folgenden Beispiel wird ein eigenes Anfrage-Objekt instanziert
@@ -460,10 +621,9 @@ $request = new Services_Request();
 
 echo $server->handle($request);
 ]]></programlisting>
-        </sect3>
+        </example>
 
-        <sect3 id="zend.xmlrpc.server.use.case6">
-            <title>Nutzen eigener Antwort-Objekte</title>
+        <example id="zend.xmlrpc.server.use.custom-response-object">
 
             <para>
                 Das nachstehende Beispiel zeigt, wie man eine eigene Antwort-Klasse
@@ -500,9 +660,14 @@ $server->setResponseClass('Services_Response');
 
 echo $server->handle($request);
 ]]></programlisting>
-        </sect3>
+        </example>
+    </sect2>
 
-        <sect3 id="zend.xmlrpc.server.use.case7">
+    <sect2 id="zend.xmlrpc.server.performance">
+
+        <title>Performance Optimierung</title>
+
+        <example id="zend.xmlrpc.server.performance.caching">
             <title>Zwischenspeichern von Serverdefinition zwischen den Anfragen</title>
 
             <para>
@@ -543,7 +708,56 @@ $server->setResponseClass('Services_Response');
 
 echo $server->handle($request);
 ]]></programlisting>
-        </sect3>
+
+            <note>
+                Die Datei des Server Caches sollte ausserhalb des Document Roots platziert werden.
+            </note>
+        </example>
+
+        <example id="zend.xmlrpc.server.performance.xmlgen">
+            <title>Optimizing XML generation</title>
+
+            <para>
+                <classname>Zend_XmlRpc_Server</classname> verwendet
+                <classname>DOMDocument</classname> der <acronym>PHP</acronym> Erweiterung
+                <code>ext/dom</code> um seine <acronym>XML</acronym> Ausgaben zu erstellen. Wärend
+                <code>ext/dom</code> auf vielen Hosts vorhanden ist, ist es nicht wirklich das
+                schnellste. Benchmarks haben gezeigt das <classname>XMLWriter</classname> von
+                <code>ext/xmlwriter</code> schneller ist.
+            </para>
+
+            <para>
+                Wenn <code>ext/xmlwriter</code> auf dem eigenen Host vorhanden ist, kann ein
+                <classname>XMLWriter</classname>-basierter Generator ausgewählt werden um die
+                Performance Unterschiede auszunutzen.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+<?php
+require_once 'Zend/XmlRpc/Server.php';
+require_once 'Zend/XmlRpc/Generator/XMLWriter.php';
+
+Zend_XmlRpc_Value::setGenerator(new Zend_XmlRpc_Generator_XMLWriter());
+
+$server = new Zend_XmlRpc_Server();
+...
+]]></programlisting>
+
+            <note>
+                Performance wird durch eine Vielzahl an Parametern und Benchmarks ermittelt welche
+                nur für den speziellen Testfall angewendet werden. Unterschiede basieren auf der PHP
+                Version, installierten Erweiterungen, dem Webserver und dem Betriebssystem um nur
+                einige zu nennen. Man sollte darauf achten das man die eigene Anwendung selbst
+                benchmarkt und anschließend auswählt welchen Generator man verwendet, aber basierend
+                auf <emphasis>eigenen</emphasis> Zahlen.
+            </note>
+
+            <note>
+                Diese Optimierung macht auch für die Client Seite Sinn. Man muss den alternativen
+                <acronym>XML</acronym> Generator nur auswählen bevor man irgendeine Arbeit mit
+                <classname>Zend_XmlRpc_Client</classname> durchführt.
+            </note>
+        </example>
     </sect2>
 </sect1>
 <!--

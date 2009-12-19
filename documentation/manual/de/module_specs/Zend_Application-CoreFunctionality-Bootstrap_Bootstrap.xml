@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15718 -->
+<!-- EN-Revision: 19571 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrap">
     <title>Zend_Application_Bootstrap_Bootstrap</title>
@@ -19,4 +19,48 @@
         erweitern, oder einfach diese Klasse verwenden und eine Liste von Ressource Plugins
         angeben die zu verwenden sind.
     </para>
+
+    <sect3 id="zend.application.core-functionality.bootstrap-bootstrap.autoloading">
+        <title>Aktivieren des AutoLoadings für die Anwendung</title>
+
+        <para>
+            Zusätzlich bietet diese Bootstrap Implementation die Möglichkeit des "Namespace" oder
+            Klassenpräfix für Ressourcen zu spezifizieren der in seinem Baum ist, was wiederum das
+            automatische Laden der verschiedenen Anwendungsressourcen ermöglicht; als wichtigstes
+            instanziert es ein <link
+                linkend="zend.loader.autoloader-resource.module">Zend_Application_Module_Autoloader</link>
+            Objekt, welches den angefragten Namespace und das Verzeichnis des Bootstraps als
+            Argument angibt. Man kann diese Funktionalität aktivieren indem ein Namespace an die
+            Konfigurations Option "appnamespace" angegeben wird. Als INI Beispiel:
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+appnamespace = "Application"
+]]></programlisting>
+
+        <para>
+            Oder als XML:
+        </para>
+
+        <programlisting language="xml"><![CDATA[
+<appnamespace>Application</appnamespace>
+]]></programlisting>
+
+        <para>
+            Standardmäßig aktiviert <classname>Zend_Tool</classname> diese Option mit dem Wert
+            "Application".
+        </para>
+
+        <para>
+            Alternativ kann einfach die Eigenschaft <varname>$_appNamespace</varname> der eigenen
+            Bootstrap Klasse mit dem korrekten Wert definiert werden:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+    protected $_appNamespace = 'Application';
+}
+]]></programlisting>
+    </sect3>
 </sect2>

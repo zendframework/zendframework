@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 19568 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.flickr">
     <title>Zend_Service_Flickr</title>
+
     <sect2 id="zend.service.flickr.introduction">
         <title>Einführung</title>
+
         <para>
             <classname>Zend_Service_Flickr</classname> ist eine einfache <acronym>API</acronym> um
             den Flickr REST Web Service zu nutzen. Für die Benutzung des Flickr Web Service,
@@ -13,12 +15,15 @@
             <ulink url="http://www.flickr.com/services/api/">Flickr <acronym>API</acronym>
                 Dokumentation</ulink>.
         </para>
+
         <para>
             Im folgenden Bespiel benutzen wir die <methodname>tagSearch()</methodname> Methode um
             Photos zu suchen welche "php" im Tag haben.
         </para>
+
         <example id="zend.service.flickr.introduction.example-1">
             <title>Simple Flickr Photo Suche</title>
+
             <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 $results = $flickr->tagSearch("php");
@@ -28,20 +33,25 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
+
         <note>
             <title>Optionale Parameter</title>
+
             <para>
                 <methodname>tagSearch()</methodname> aktepziert als optionalen zweiten Parameter ein
                 Array mit Optionen.
             </para>
         </note>
     </sect2>
+
     <sect2 id="zend.service.flickr.finding-users">
         <title>Bilder und Informationen von Flickr Benutzern finden</title>
+
         <para>
             <classname>Zend_Service_Flickr</classname> stellt verschiedene unterschiedliche Wege zur
             Verfügung um Informationen von Flickr Benutzern zu bekommen:
         </para>
+
         <itemizedlist>
             <listitem>
                 <para>
@@ -51,12 +61,14 @@ foreach ($results as $result) {
                     <classname>Zend_Service_Flickr_ResultSet</classname> Objekt.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getIdByUsername()</methodname>: Gibt die Benutzer ID als String
                     zurück, welcher mit dem übergebenen String des Benutzernamens verknüpft ist.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getIdByEmail()</methodname>: Gibt die Benutzer ID als String zurück,
@@ -64,15 +76,18 @@ foreach ($results as $result) {
                 </para>
             </listitem>
         </itemizedlist>
+
         <example id="zend.service.flickr.finding-users.example-1">
             <title>
                 Finden von öffentlichen Photos eines Flickr Benutzers durch seine E-Mail Adresse
             </title>
+
             <para>
                 In diesem Beispiel haben wir die E-Mail adresse eines Flickr Benutzers und wir holen
                 uns die öffentlichen Photos eines Benutzer durch Verwendung der
                 <methodname>userSearch()</methodname> Methode:
             </para>
+
             <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 $results = $flickr->userSearch($userEmail);
@@ -83,15 +98,19 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.flickr.grouppoolgetphotos">
         <title>Photos in einem Gruppenpool finden</title>
+
         <para>
             <classname>Zend_Service_Flickr</classname> erlaubt es Photos eines Gruppenpools
             basierend auf der ID zu empfangen. Hierfür kann die
             <methodname>groupPoolGetPhotos()</methodname> Methode verwendet werden:
         </para>
+
         <example id="zend.service.flickr.grouppoolgetphotos.example-1">
             <title>Empfangen von Photos aus einem Gruppenpool durch die Gruppen ID</title>
+
             <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
@@ -102,27 +121,34 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
     }
 ]]></programlisting>
         </example>
+
         <note>
             <title>Optionale Parameter</title>
+
             <para>
                 <methodname>groupPoolGetPhotos()</methodname> akzeptiert einen optionalen zweiten
                 Parameter als ein Array von Optionen.
             </para>
         </note>
     </sect2>
+
     <sect2 id="zend.service.flickr.getimagedetails">
         <title>Empfangen von Details zu Bildern durch Flickr</title>
+
         <para>
             <classname>Zend_Service_Flickr</classname> erlaubt es schnell und einfach an Details zu
             Bilders zu kommen, basieren auf einer übergebenen ID des Bildes. Einfach durch benutzen
             der <methodname>getImageDetails()</methodname> Methode, wie im folgenden Beispiel:
         </para>
+
         <example id="zend.service.flickr.getimagedetails.example-1">
             <title>Empfangen von Details zu Bildern durch Flickr</title>
+
             <para>
                 Sobald man eine Flickr Bild ID hat, ist es eine einfache Angelegenheit,
                 Informationen über ein Bild zu bekommen:
             </para>
+
             <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 $image = $flickr->getImageDetails($imageId);
@@ -132,8 +158,10 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.flickr.classes">
         <title>Zend_Service_Flickr Ergebnis Klassen</title>
+
         <para>
             Die folgenden Klassen werden durch <methodname>tagSearch()</methodname> und
             <methodname>userSearch()</methodname> zurückgegeben:
@@ -143,11 +171,13 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                         <link linkend="zend.service.flickr.classes.resultset"><classname>Zend_Service_Flickr_ResultSet</classname></link>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <link linkend="zend.service.flickr.classes.result"><classname>Zend_Service_Flickr_Result</classname></link>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <link linkend="zend.service.flickr.classes.image"><classname>Zend_Service_Flickr_Image</classname></link>
@@ -155,20 +185,27 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                 </listitem>
             </itemizedlist>
         </para>
+
         <sect3 id="zend.service.flickr.classes.resultset">
             <title>Zend_Service_Flickr_ResultSet</title>
+
             <para>Repräsentiert ein Set von Ergebnissen von einer Flickr Suche.</para>
+
             <note>
                 <para>
-                    Implementiert das <code>SeekableIterator</code> Interface für einfache Iteration
-                    (z.B. benutzen von <code>foreach</code>), sowie einen direkten Zugriff auf ein
-                    spezielles Ergebnis durch Benutzen von <methodname>seek()</methodname>.
+                    Implementiert das <classname>SeekableIterator</classname> Interface für einfache
+                    Iteration (z.B. benutzen von <methodname>foreach()</methodname>), sowie einen
+                    direkten Zugriff auf ein spezielles Ergebnis durch Benutzen von
+                    <methodname>seek()</methodname>.
                 </para>
             </note>
+
             <sect4 id="zend.service.flickr.classes.resultset.properties">
                 <title>Eigenschaften</title>
+
                 <table id="zend.service.flickr.classes.resultset.properties.table-1">
                     <title>Zend_Service_Flickr_ResultSet Eigenschaften</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -177,6 +214,7 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>totalResultsAvailable</entry>

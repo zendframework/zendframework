@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16166 -->
+<!-- EN-Revision: 19568 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.timesync.introduction">
-
     <title>Einführung</title>
 
     <para>
@@ -20,7 +19,6 @@
     </para>
 
     <note>
-
         <title>Hintergrund</title>
 
         <para>
@@ -28,11 +26,9 @@
             aber es gibt eine Instanz von <link linkend="zend.date.introduction">Zend_Date</link>
             zurück mit der der Unterschied zur Serverzeit verarbeitet werden kann.
         </para>
-
     </note>
 
     <sect2 id="zend.timesync.introduction.why">
-
         <title>Warum Zend_TimeSync ?</title>
 
         <para>
@@ -56,16 +52,19 @@
                 <para>
                     <emphasis>Server ohne Zeitservice</emphasis>
                 </para>
+
                 <para>
                     Wenn eine Anwendung auf einem Server läuft und auf diesem Server kein
                     Zeitservice läuft kann es Sinn machen <classname>Zend_TimeSync</classname> in
                     der eigenen Anwendung zu verwenden.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>Separater Datenbank Server</emphasis>
                 </para>
+
                 <para>
                     Wenn eine Datenbank auf einem anderen Server läuft und dieser Server
                     nicht mit <emphasis>NTP</emphasis> oder
@@ -73,10 +72,12 @@
                     kann man Probleme haben Zeitstempel zu speichern und zu verwenden.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>Mehrere Server</emphasis>
                 </para>
+
                 <para>
                     Wenn die Anwendung auf mehr als einem Server läuft, und die Zeitbasis dieser
                     Server nicht miteinander gekoppelt sind, kann das zu Problemen in der Anwendung
@@ -84,10 +85,12 @@
                     Server kommen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>Batch Ausführung</emphasis>
                 </para>
+
                 <para>
                     Wenn man mit einem Zeitserver arbeiten oder Ihn in einer Batchdatei oder in
                     einer Kommandozeilen Anwendung inkludieren will, kann
@@ -105,36 +108,31 @@
     </sect2>
 
     <sect2 id="zend.timesync.introduction.ntp">
-
         <title>Was ist NTP ?</title>
 
         <para>
-            Das <code>Network Time Protocol</code> (<emphasis>NTP</emphasis>) ist
+            Das Network Time Protocol (<emphasis>NTP</emphasis>) ist
             ein Protokoll für die Synchronisierung von mehreren Systemuhren über
             Paket-geführte, variabel laufende Datennetzwerke. NTP verwendet den UDP Port 123 als
             seine Transportschicht. Siehe <ulink
                 url="http://en.wikipedia.org/wiki/Network_Time_Protocol">diesen Wikipedia
                 Artikel</ulink> für Details über das Protokoll.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.introduction.sntp">
-
         <title>Was ist SNTP?</title>
 
         <para>
-            Das <code>Simple Network Time Protocol</code> (<emphasis>SNTP</emphasis>)
+            Das Simple Network Time Protocol (<emphasis>SNTP</emphasis>)
             ist ein Protokoll für die Synchronisierung von mehreren Systemuhren über
             Paket-geführte, variabel laufende Datennetzwerke. SNTP verwendet den UDP Port 37 als
             Transportschicht. Es ist fast identisch mit dem Network Time Protokoll aber
             einfacher.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.introduction.problematic">
-
         <title>Problematische Verwendung</title>
 
         <para>
@@ -144,11 +142,9 @@
             Bevor man <classname>Zend_TimeSync</classname> verwendet sollte das hier sorgfältig
             durchgelesen werden.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.introduction.decision">
-
         <title>Auswählen welcher Server verwendet werden soll</title>
 
         <para>
@@ -161,6 +157,7 @@
                 <para>
                     Distanz
                 </para>
+
                 <para>
                     Die Distanz vom Server auf dem die Anwendung läuft und dem Zeitserver der
                     angefragt wird. Wenn der Server in Europa sitzt mach es weni Sinn einen
@@ -169,10 +166,12 @@
                     Anfrage und es reduziert auch die Last im Netzwerk.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Geschwindigkeit
                 </para>
+
                 <para>
                     Wie lange es dauert eine Anfrage zu empfangen ist auch relevant. Es sollten
                     andere Server probiert werden um das beste Ergebnis zu erhalten. Wenn ein
@@ -180,10 +179,12 @@
                     unnötige Verzögerungen haben.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Aufteilung
                 </para>
+
                 <para>
                     Es sollte nicht immer der gleiche Server verwendet werden. Alle Zeitserver
                     sperren Anfragen von Servern welche sie überfluten. Wenn eine Anwendung
@@ -207,9 +208,8 @@
         <para>
             Siehe <ulink url="http://www.pool.ntp.org">pool.ntp.org</ulink> um den
             am nächsten liegenden Serverpool zu finden. Wenn, zum Beispiel, der eigene Server also
-            in Deutschland liegt kann man sich auf <code>0.europe.pool.ntp.org</code> verbinden.
+            in Deutschland liegt kann man sich auf <emphasis>0.europe.pool.ntp.org</emphasis>
+            verbinden.
         </para>
-
     </sect2>
-
 </sect1>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18028 -->
+<!-- EN-Revision: 19568 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.hostname">
-
     <title>Hostname</title>
 
     <para>
@@ -32,9 +31,8 @@ if ($validator->isValid($hostname)) {
 ]]></programlisting>
 
         Das prüft den Hostnamen <varname>$hostname</varname> und wird einen Fehler über
-        <code>$validator->getMessages()</code> mit einer nützlichen Fehlermeldung
+        <methodname>getMessages()</methodname> mit einer nützlichen Fehlermeldung
         auswerfen.
-
     </para>
 
     <para>
@@ -117,7 +115,7 @@ $validator =
     );
 ]]></programlisting>
 
-        Alternativ kann entweder TRUE oder FALSE an <code>$validator->setValidateIdn()</code>
+        Alternativ kann entweder TRUE oder FALSE an <methodname>setValidateIdn()</methodname>
         übergeben werden, um die IDN Prüfung ein- oder auszuschalten.
         Wenn ein IDN Hostname geprüft wird, der aktuell nicht unterstützt wird, ist es sicher das
         die Prüfung fehlschlagen wird wenn er irgendwelche internationalen Zeichen hat. Wo keine
@@ -153,7 +151,7 @@ $validator =
 ]]></programlisting>
 
         Alternativ kann entweder TRUE oder FALSE übergeben an
-        <code>$validator->setValidateTld()</code> übergeben werden um die TLD Prüfung ein- oder
+        <methodname>setValidateTld()</methodname> übergeben werden um die TLD Prüfung ein- oder
         auszuschalten.
     </para>
 

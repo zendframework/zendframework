@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19425 -->
+<!-- EN-Revision: 19577 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
     <title>Einführung</title>
@@ -124,7 +124,7 @@ echo $view->render('booklist.php');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>basePath</code>: zeigt den Basispfad von dem der Skript-, Helfer-
+                    <property>basePath</property>: zeigt den Basispfad von dem der Skript-, Helfer-
                     und Filterpfad gesetzt wird. Es nimmt folgende Verzeichnisstruktur an:
                 </para>
 
@@ -137,39 +137,39 @@ base/path/
 
                 <para>
                     Das kann über <methodname>setBasePath()</methodname>,
-                    <methodname>addBasePath()</methodname>, oder die <code>basePath</code>
+                    <methodname>addBasePath()</methodname>, oder die <property>basePath</property>
                     Option dem Konstruktor gesetzt werden.
                 </para>
             </listitem>
 
             <listitem><para>
-                <code>encoding</code>: zeigt das Verschlüsseln der Zeichen für die Verwendung mit
-                <methodname>htmlentities()</methodname>,
+                <property>encoding</property>: zeigt das Verschlüsseln der Zeichen für die
+                Verwendung mit <methodname>htmlentities()</methodname>,
                 <methodname>htmlspecialchars()</methodname>, und anderen Operationen. Standardwert
                 ist ISO-8859-1 (latin1). Kann über
-                <methodname>setEncoding()</methodname>, oder die <code>encoding</code> Option im
-                Konstruktor, gesetzt werden.
+                <methodname>setEncoding()</methodname>, oder die <property>encoding</property>
+                Option im Constructor, gesetzt werden.
             </para></listitem>
 
             <listitem><para>
-                <code>escape</code>: zeigt einen Rückruf welche durch
+                <property>escape</property>: zeigt einen Rückruf welche durch
                 <methodname>escape()</methodname> benutzt wird. Kann über
-                <methodname>setEscape()</methodname>, oder die <code>escape</code> Option im
+                <methodname>setEscape()</methodname>, oder die <property>escape</property> Option im
                 Konstruktor, gesetzt werden.
             </para></listitem>
 
             <listitem><para>
-                <code>filter</code>: zeigt einen Filter welcher nach dem Rendern des View Skripts
-                verwendet wird. Kann über <methodname>setFilter()</methodname>,
-                <methodname>addFilter()</methodname>, oder die <code>filter</code> Option im
+                <property>filter</property>: zeigt einen Filter welcher nach dem Rendern des View
+                Skripts verwendet wird. Kann über <methodname>setFilter()</methodname>,
+                <methodname>addFilter()</methodname>, oder die <property>filter</property> Option im
                 Konstruktor, gesetzt werden.
             </para></listitem>
 
             <listitem><para>
-                <code>strictVars:</code> zwingt <classname>Zend_View</classname> Notizen und
+                <property>strictVars:</property> zwingt <classname>Zend_View</classname> Notizen und
                 Warnungen auszugeben wenn auf nicht initialisierte View Variablen zugegriffen wird.
                 Das kann durch den Aufruf von <methodname>strictVars(true)</methodname>, oder der
-                Übergabe der <code>strictVars</code> Option im Konstruktor, gesetzt werden.
+                Übergabe der <property>strictVars</property> Option im Konstruktor, gesetzt werden.
             </para></listitem>
         </itemizedlist>
     </sect2>
@@ -179,7 +179,7 @@ base/path/
 
         <para>
             In unseren Beispielen verwenden wir <acronym>PHP</acronym> Long
-            Tags: <code>&lt;?php</code>. Wir empfehlen auch die <ulink
+            Tags: <emphasis>&lt;?php</emphasis>. Wir empfehlen auch die <ulink
                 url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">
                 alternative Syntax für Kontrollstrukturen</ulink>. Diese sind übliche Abkürzungen die
             Verwendet werden wenn View Skripte geschrieben werden, da Sie Konstrukte verständlicher
@@ -189,15 +189,15 @@ base/path/
 
         <para>
             In vorhergehenden Versionen haben wir oft die Verwendung von Short Tags empfohlen
-            (<code>&lt;?</code> und <code>&lt;?=</code>), da Sie die View Skripte weniger
-            kompliziert machen. Trotzdem ist der Standardwert der <filename>php.ini</filename>
-            Option <constant>short_open_tag</constant> typischerweise in Produktion oder bei
-            Shared Hosts deaktiviert -- was deren Verwendung nicht wicklich portabel macht. Wenn
-            man <acronym>XML</acronym> in View Skripten als Template verwendet, werden Short
-            Open Tags dazu führen das die Prüfung der Templates fehlschlägt. Letztendlich, wenn man
-            Short Tags verwendet, wärend <constant>short_open_tag</constant> ausgeschaltet ist,
-            werden die View Skripte entweder Fehler verursachen oder einfach den PHP Code an den
-            Betrachter zurücksenden.
+            (<emphasis>&lt;?</emphasis> und <emphasis>&lt;?=</emphasis>), da Sie die View Skripte
+            weniger kompliziert machen. Trotzdem ist der Standardwert der
+            <filename>php.ini</filename> Option <constant>short_open_tag</constant> typischerweise
+            in Produktion oder bei Shared Hosts deaktiviert -- was deren Verwendung nicht wicklich
+            portabel macht. Wenn man <acronym>XML</acronym> in View Skripten als Template verwendet,
+            werden Short Open Tags dazu führen das die Prüfung der Templates fehlschlägt.
+            Letztendlich, wenn man Short Tags verwendet, wärend <constant>short_open_tag</constant>
+            ausgeschaltet ist, werden die View Skripte entweder Fehler verursachen oder einfach den
+            PHP Code an den Betrachter zurücksenden.
         </para>
 
         <para>
@@ -208,7 +208,7 @@ base/path/
        <itemizedlist>
             <listitem>
                 <para>
-                    Die Short Tags in der <code>.htaccess</code> Datei einschalten:
+                    Die Short Tags in der <filename>.htaccess</filename> Datei einschalten:
                 </para>
 
                 <programlisting language="apache"><![CDATA[
@@ -216,9 +216,9 @@ php_value "short_open_tag" "on"
 ]]></programlisting>
 
                 <para>
-                    Das ist nur dann möglich wenn es erlaubt ist <code>.htaccess</code> Dateien zu
-                    erstellen und anzupassen. Diese Direktive kann auch in der
-                    <code>httpd.conf</code> Datei hinzugefügt werden.
+                    Das ist nur dann möglich wenn es erlaubt ist <filename>.htaccess</filename>
+                    Dateien zu erstellen und anzupassen. Diese Direktive kann auch in der
+                    <filename>httpd.conf</filename> Datei hinzugefügt werden.
                 </para>
             </listitem>
 

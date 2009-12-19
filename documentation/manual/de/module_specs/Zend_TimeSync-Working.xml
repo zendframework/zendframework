@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 19568 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.timesync.working">
-
     <title>Arbeiten mit Zend_TimeSync</title>
 
     <para>
@@ -40,12 +39,12 @@ print $server->getDate()->getIso();
         <para>
             Was passiert also im Hintergrund von <classname>Zend_TimeSync</classname>? Zuerst wird
             der Syntax des Timeservers geprüft. In unserem Beispiel wird also
-            '<code>0.pool.ntp.org</code>' geprüft und als möglicherweise richtige Adresse für einen
-            Zeitserver erkannt. Wenn jetzt <methodname>getDate()</methodname> aufgerufen wird, wird
-            der aktuell gesetzte Zeitserver angefragt und er gibt seine eigene Zeit zurück.
-            <classname>Zend_TimeSync</classname> berechnet darauf die Differenz zur aktuellen Zeit
-            des Servers auf dem das Skript läuft und gibt ein <classname>Zend_Date</classname>
-            Objekt mit der korrigierten Zeit zurück.
+            '<emphasis>0.pool.ntp.org</emphasis>' geprüft und als möglicherweise richtige Adresse
+            für einen Zeitserver erkannt. Wenn jetzt <methodname>getDate()</methodname> aufgerufen
+            wird, wird der aktuell gesetzte Zeitserver angefragt und er gibt seine eigene Zeit
+            zurück. <classname>Zend_TimeSync</classname> berechnet darauf die Differenz zur
+            aktuellen Zeit des Servers auf dem das Skript läuft und gibt ein
+            <classname>Zend_Date</classname> Objekt mit der korrigierten Zeit zurück.
         </para>
 
         <para>

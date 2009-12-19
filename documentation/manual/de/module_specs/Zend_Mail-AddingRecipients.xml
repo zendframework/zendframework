@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17503 -->
+<!-- EN-Revision: 19585 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.adding-recipients">
     <title>Empfänger hinzufügen</title>
@@ -44,6 +44,17 @@
             zweiten, optionalen Parameter, der für einen visuell lesbaren Namen des Empfängers in
             der Kopfzeile verwendet wird. Im Parameter werden doppelte Anführungszeichen auf
             einfache und runde Klammern zu eckigen getauscht.
+        </para>
+    </note>
+
+    <note>
+        <title>Optionale Verwendung</title>
+
+        <para>
+            Alle drei Methoden akzeptieren auch ein Array von Email Adressen das hinzugefügt werden
+            kann, statt jeweils nur einer einzelnen.  Im Fall von <methodname>addTo()</methodname>
+            und <methodname>addCc()</methodname>, kann dies ein assoziatives Array sein, wobei der
+            Schlüssel ein menschlich lesbarer Name für den Empfänger ist.
         </para>
     </note>
 </sect1>

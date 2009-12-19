@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18986 -->
+<!-- EN-Revision: 19577 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
-
     <title>Standard Prüfklassen</title>
 
     <para>
@@ -42,8 +41,8 @@
         <title>Barcode</title>
         <para>
             Dieser Prüfer wird mit einem Barcode Typ instanziert gegen den ein Barcode Wert geprüft
-            werden soll. Aktuell werden die "<code>UPC-A</code>" (Universal Product Code) und
-            "<code>EAN-13</code>" (European Article Number) Barcode Typen unterstützt, und die
+            werden soll. Aktuell werden die "UPC-A" (Universal Product Code) und
+            "EAN-13" (European Article Number) Barcode Typen unterstützt, und die
             <methodname>isValid()</methodname> Methode gibt dann und nur dann true zurück wenn die
             Eingabe erfolgreich gegen den Barcode Prüfalgorithmus geprüft wurde. Es sollten alle von
             den Ziffern 0 bis 9 (0-9) unterschiedliche Zeichen vom Eingabewert entfernt werden bevor
@@ -67,6 +66,7 @@
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> dem Luhn
             Algorithmus (mod-10 Checksumme) für Kreditkarten Nummern folgt.
@@ -83,13 +83,14 @@
 
     <sect2 id="zend.validate.set.date">
         <title>Date</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> ein
-            gültiges Datum im Format <code>YYYY-MM-DD</code> ist. Wenn die optionale
-            <code>locale</code> Option gesetzt ist, dann wird das Datum entsprechend dem gesetzten
-            Gebietsschemas geprüft. Und wenn die optionale <code>format</code> Option gesetzt wird,
-            dann wird dieses Format für die Prüfung herangezogen. Für Details über die optionalen
-            Parametern siehe <link
+            gültiges Datum im Format 'YYYY-MM-DD' ist. Wenn die optionale
+            <property>locale</property> Option gesetzt ist, dann wird das Datum entsprechend dem
+            gesetzten Gebietsschemas geprüft. Und wenn die optionale <property>format</property>
+            Option gesetzt wird, dann wird dieses Format für die Prüfung herangezogen. Für Details
+            über die optionalen Parametern siehe <link
                 linkend="zend.date.others.comparison.table">Zend_Date::isDate()</link>.
         </para>
     </sect2>
@@ -108,6 +109,7 @@
 
     <sect2 id="zend.validate.set.float">
         <title>Float</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> ein
             Fließkomma Wert ist. Seit Zend Framework 1.8 verwendet diese Prüfung auch das aktuelle
@@ -120,6 +122,7 @@
 
     <sect2 id="zend.validate.set.greater_than">
         <title>GreaterThan</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> größer als
             die Minimale Grenze ist.
@@ -128,6 +131,7 @@
 
     <sect2 id="zend.validate.set.hex">
         <title>Hex</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> nur
             Hexadezimale Digitale Zeichen enthält.
@@ -138,16 +142,19 @@
 
     <sect2 id="zend.validate.set.iban">
         <title>Iban</title>
+
         <para>
             Gibe nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> eine
             gültige IBAN (Internationale Bank Account Nummer) enthält. IBAN Nummern werden gegen ein
             Land geprüft in dem Sie verwendet werden und durch eine Checksumme.
         </para>
+
         <para>
             Es gibt zwei Wege um IBAN Nummern zu prüfen. Als ersten Weg kann man ein Gebietsschema
             angeben das das Land repräsentiert. Jede angegebene IBAN Nummer wird das gegen dieses
             Land geprüft.
         </para>
+
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban('de_AT');
 $iban = 'AT611904300234573201';
@@ -160,11 +167,13 @@ if ($validator->isValid($iban)) {
     }
 }
 ]]></programlisting>
+
         <para>
             Das sollte man tun wenn man IBAN Nummern gegen ein einzelnes Land prüfen will. Der
             einfachere Weg der Prüfung ist es kein Gebietsschema anzugeben wie im nächsten Beispiel
             gezeigt.
         </para>
+
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban();
 $iban = 'AT611904300234573201';
@@ -174,6 +183,7 @@ if ($validator->isValid($iban)) {
     // IBAN ist ungültig
 }
 ]]></programlisting>
+
         <para>
             Aber das zeigt ein großes Problem: Wenn man nur IBAN Nummern von einem einzelnen Land
             akzeptieren darf, zum Beispiel Frankreich, sind auch die IBAN Nummer von anderen Ländern
@@ -189,6 +199,7 @@ if ($validator->isValid($iban)) {
 
     <sect2 id="zend.validate.set.int">
         <title>Int</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> ein
             gültiger Integer ist. Seit Zend Framework 1.8 verwendet diese Prüfung auch das aktuelle
@@ -203,6 +214,7 @@ if ($validator->isValid($iban)) {
 
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> kleiner
             als die Maximale Grenze ist.
@@ -211,6 +223,7 @@ if ($validator->isValid($iban)) {
 
     <sect2 id="zend.validate.set.not_empty">
         <title>NotEmpty</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> kein
             leerer Wert ist.
@@ -221,6 +234,7 @@ if ($validator->isValid($iban)) {
 
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> mit einem
             Regular Expression Pattern geprüft werden kann.
@@ -231,6 +245,7 @@ if ($validator->isValid($iban)) {
 
     <sect2 id="zend.validate.set.string_length">
         <title>StringLength</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn die Länge des Strings von
             <varname>$value</varname> mindstens ein Minimum und nicht größer als ein Maximum ist
@@ -241,12 +256,11 @@ if ($validator->isValid($iban)) {
             auf einen kleineren Wert als die minimale Länge gesetzt wird. Seit Version 1.0.2
             unterstützt diese Klasse UTF-8 und andere Zeichensätze, basierend auf dem aktuellen Wert
             von <ulink
-                url="http://www.php.net/manual/de/ref.iconv.php#iconv.configuration"><code>iconv.internal_encoding</code></ulink>.
+                url="http://www.php.net/manual/de/ref.iconv.php#iconv.configuration">iconv.internal_encoding</ulink>.
             Wenn man ein anderes Encoding benötigt kann man es mit den Zugriffsmethoden getEncoding
             und setEncoding setzen.
         </para>
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

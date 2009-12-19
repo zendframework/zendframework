@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19419 -->
+<!-- EN-Revision: 19568 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.writing-providers">
     <title>Erstellen von Providern für die Verwendung mit Zend_Tool_Framework</title>
@@ -138,9 +138,9 @@ Hello from my provider!
             Wie in der Archikektur Sektion diskutiert erlaubt Zend Tool unterschiedliche Clients für
             die Verwendung in Zend Tool Providern zu verwenden. Um mit den unterschiedlichen Clients
             kompatibel zu bleiben sollte man das Antwort Objekt verwenden um Nachrichten von eigenen
-            Providern zurückzugeben, statt <code>echo</code> oder ähnliche Ausgabe Mechanismen zu
-            verwenden. Unser umgeschriebener Hallo Provider sieht mit dem jetzt bekannten wie folgt
-            aus:
+            Providern zurückzugeben, statt <methodname>echo()</methodname> oder ähnliche Ausgabe
+            Mechanismen zu verwenden. Unser umgeschriebener Hallo Provider sieht mit dem jetzt
+            bekannten wie folgt aus:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -341,8 +341,9 @@ class My_Component_HelloProvider
             <para>
                 Die zurückgegebene Konfiguration ist vom Typ
                 <classname>Zend_Tool_Framework_Client_Config</classname>, aber intern verweisen die
-                magischen Methoden <code>__get</code> und <code>__set</code> auf
-                <classname>Zend_Config</classname> des angegebenen Konfigurations Typs.
+                magischen Methoden <methodname>__get()</methodname> und
+                <methodname>__set()</methodname> auf <classname>Zend_Config</classname> des
+                angegebenen Konfigurations Typs.
             </para>
 
             <para>

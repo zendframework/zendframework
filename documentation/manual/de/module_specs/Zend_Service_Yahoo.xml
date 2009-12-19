@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 19568 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.yahoo">
     <title>Zend_Service_Yahoo</title>
+
     <sect2 id="zend.service.yahoo.introduction">
         <title>Einführung</title>
+
         <para>
             <classname>Zend_Service_Yahoo</classname> ist eine einfach <acronym>API</acronym> für
             die Benutzung von vielen der Yahoo! REST <acronym>API</acronym>s
@@ -16,8 +18,10 @@
             ausgefüllt und abgeschickt werden
         </para>
     </sect2>
+
     <sect2 id="zend.service.yahoo.websearch">
         <title>Suchen im Web mit Yahoo!</title>
+
         <para>
             <classname>Zend_Service_Yahoo</classname> ermöglicht es im Web mit Yahoo! zu Suchen mit
             Hilfe der Methode <methodname>webSearch()</methodname>, welche einen String als Abfrage
@@ -27,8 +31,10 @@
             Dokumentation</ulink> sehen. Die <methodname>webSearch()</methodname> Methode gibt ein
             <classname>Zend_Service_Yahoo_WebResultSet</classname> Objekt zurück.
         </para>
+
         <example id="zend.service.yahoo.websearch.example-1">
             <title>Suchen im Web mit Yahoo!</title>
+
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->webSearch('PHP');
@@ -38,8 +44,10 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.yahoo.imagesearch">
         <title>Finden von Bildern mit Yahoo!</title>
+
         <para>
             Man kann mit Yahoo nach Bildern suchen indem man
             <classname>Zend_Service_Yahoo</classname>'s <methodname>imageSearch()</methodname>
@@ -50,8 +58,10 @@ foreach ($results as $result) {
             <ulink url="http://developer.yahoo.com/search/image/V1/imageSearch.html">Yahoo! Bild
                 Such Dokumentation</ulink> sehen.
         </para>
+
         <example id="zend.service.yahoo.imagesearch.example-1">
             <title>Finden von Bildern mit Yahoo!</title>
+
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->imageSearch('PHP');
@@ -61,8 +71,10 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.yahoo.videosearch">
         <title>Videos mit Yahoo! finden</title>
+
         <para>
             Mit Yahoo können Videos gesucht werden indem <classname>Zend_Service_Yahoo</classname>'s
             <methodname>videoSearch()</methodname> Methode verwendet wird. Für komplette Details und
@@ -70,8 +82,10 @@ foreach ($results as $result) {
                 url="http://developer.yahoo.com/search/video/V1/videoSearch.html">Yahoo! Video
                 Search Dokumentation</ulink> gesehen werden.
         </para>
+
         <example id="zend.service.yahoo.videosearch.example-1">
             <title>Videos mit Yahoo! finden</title>
+
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->videoSearch('PHP');
@@ -81,16 +95,20 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.yahoo.localsearch">
         <title>Finden von lokalen Geschäften und Services mit Yahoo!</title>
+
         <para>
             Man kann mit Yahoo! nach lokalen Geschäften und Services suchen, indem man die
             <methodname>localSearch()</methodname> Methode benutzt. Für vollständige Details bitte
             in die <ulink url="http://developer.yahoo.com/search/local/V1/localSearch.html">Yahoo!
                 Lokal Such Documentation</ulink> sehen
         </para>
+
         <example id="zend.service.yahoo.localsearch.example-1">
             <title>Finden von lokalen Geschäften und Services mit Yahoo!</title>
+
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->localSearch('Apple Computer', array('zip' => '95014'));
@@ -100,16 +118,20 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.yahoo.newssearch">
         <title>Suchen mit Yahoo! News</title>
+
         <para>
             Suchen mit Yahoo! News ist einfach; nur die <methodname>newsSearch()</methodname>
             Methode, wie im nachfolgenden Beispiel gezeigt, benutzen. Für vollständige Details bitte
             in die <ulink url="http://developer.yahoo.com/search/news/V1/newsSearch.html">Yahoo!
                 News Such Dokumenation</ulink> sehen
         </para>
+
         <example id="zend.service.yahoo.newssearch.example-1">
             <title>Suchen in Yahoo! News</title>
+
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->newsSearch('PHP');
@@ -119,8 +141,10 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.yahoo.inlinkdatasearch">
         <title>Durchsuchen von Yahoo! Site Explorer Inbound Links</title>
+
         <para>
             Das Durchsuchen von Yahoo! Site Explorer Inbound Links ist einfach; es muß nur die
             <methodname>inlinkDataSearch()</methodname> Methode wie im folgenden Beispiel verwendet
@@ -128,8 +152,10 @@ foreach ($results as $result) {
             <ulink url="http://developer.yahoo.com/search/siteexplorer/V1/inlinkData.html">Yahoo!
             Site Explorer Inbound Links Dokumentation</ulink> gesehen werden.
         </para>
+
         <example id="zend.service.yahoo.inlinkdatasearch.example-1">
             <title>Durchsuchen von Yahoo! Site Explorer Inbound Links</title>
+
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->inlinkDataSearch('http://framework.zend.com/');
@@ -139,8 +165,10 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.yahoo.pagedatasearch">
         <title>Durchsuchen von Yahoo! Site Explorer's PageData</title>
+
         <para>
             Das Durchsuchen von Yahoo! Site Explorer's PageData ist einfach; es muß nur die
             <methodname>pageDataSearch()</methodname> Methode wie im folgenden Beispiel verwendet
@@ -148,8 +176,10 @@ foreach ($results as $result) {
             <ulink url="http://developer.yahoo.com/search/siteexplorer/V1/pageData.html">Yahoo!
             Site Explorer PageData Dokumentation</ulink> gesehen werden.
         </para>
+
         <example id="zend.service.yahoo.pagedatasearch.example-1">
             <title>Durchsuchen von Yahoo! Site Explorer's PageData</title>
+
             <programlisting language="php"><![CDATA[
 $yahoo = new Zend_Service_Yahoo("YAHOO_APPLICATION_ID");
 $results = $yahoo->pageDataSearch('http://framework.zend.com/');
@@ -159,14 +189,16 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.yahoo.classes">
         <title>Zend_Service_Yahoo Klassen</title>
+
         <para>
             Die folgenden Klassen werden durch die verschiedenen Yahoo! Suchen zurückgegeben. Jeder
             Such Typ gibt einen speziellen Ergebnistyp zurück, welcher einfach Iteriert werden kann
             und jedes Ergebnis in einem Ergebnis Objekt beinhaltet. Alle Ergebnis Klassen beinhalten
-            ein <code>SeekableIterator</code> Interface, welches einfachste Iteration und die Suche
-            nach einem speziellen Ergebnis ermöglicht.
+            ein <classname>SeekableIterator</classname> Interface, welches einfachste Iteration und
+            die Suche nach einem speziellen Ergebnis ermöglicht.
             <itemizedlist>
                 <listitem><para><link linkend="zend.service.yahoo.classes.resultset"><classname>Zend_Service_Yahoo_ResultSet</classname></link></para></listitem>
                 <listitem><para><link linkend="zend.service.yahoo.classes.webresultset"><classname>Zend_Service_Yahoo_WebResultSet</classname></link></para></listitem>

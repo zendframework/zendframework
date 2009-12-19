@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19432 -->
+<!-- EN-Revision: 19577 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
     <title>Einführung</title>
@@ -34,7 +34,6 @@
     </sect2>
 
     <sect2 id="zend.validate.introduction.using">
-
         <title>Standardnutzung von Prüfungen</title>
 
         <para>
@@ -54,7 +53,7 @@
             entsprechend menschlich-lesbaren String Nachrichten. Die Schlüssel und Werte sind
             Klassenabhängig; jede Prüfklasse definiert Ihr eigenes Set von Nachrichten für
             fehlgeschlagene Prüfungen und die eindeutigen Schlüssel die diese identifizieren. Jede
-            Klasse hat also eine <code>const</code> Definition die jedem Identifikator für eine
+            Klasse hat also eine const Definition die jedem Identifikator für eine
             fehlgeschlagene Prüfung entspricht.
         </para>
 
@@ -89,13 +88,10 @@ if ($validator->isValid($email)) {
     }
 }
 ]]></programlisting>
-
         </para>
-
     </sect2>
 
     <sect2 id="zend.validate.introduction.messages">
-
         <title>Nachrichten anpassen</title>
 
         <para>
@@ -104,11 +100,12 @@ if ($validator->isValid($email)) {
             <methodname>getMessages()</methodname> im Fall einer fehlerhaften Prüfung zurückgegeben
             wird. Das erste Argument dieser Methode ist ein String der die Fehlernachricht enthält.
             Es können Kürzel in den String eingebaut werden welche mit den für die Prüfung
-            relevanten Daten aufgefüllt werden. Das Kürzel <code>%value%</code> wird von allen
-            Prüfungen unterstützt; es ist verbunden mit dem Wert der an
+            relevanten Daten aufgefüllt werden. Das Kürzel <emphasis>%value%</emphasis> wird von
+            allen Prüfungen unterstützt; es ist verbunden mit dem Wert der an
             <methodname>isValid()</methodname> übergeben wird. Andere Kürzel können unterstützt
-            werden von Fall-zu-Fall in jeder Prüfer-Klasse. Zum Beispiel ist <code>%max%</code> das
-            Kürzel welches von <classname>Zend_Validate_LessThan</classname> unterstützt wird. Die
+            werden von Fall-zu-Fall in jeder Prüfer-Klasse. Zum Beispiel ist
+            <emphasis>%max%</emphasis> das Kürzel welches von
+            <classname>Zend_Validate_LessThan</classname> unterstützt wird. Die
             <methodname>getMessageVariables()</methodname> Methode give ein Array von variablen
             Kürzel zurück welche vom Prüfer unterstützt werden.
         </para>
@@ -157,14 +154,13 @@ $validator->setMessages( array(
         'Der String \'%value%\' ist zu lang'
 ));
 ]]></programlisting>
-
         </para>
 
         <para>
             Wenn die Anwendung mehr Flexibilität benötigt in der Art und Weise wie Prüffehler
             gemeldet werden, kann auf die Eigenschaften durch den selben Namen zugegriffen
             werden wie mit dem Nachrichten Kürzel das von einer Prüfklasse unterstützt wird.
-            Die <code>value</code> Eigenschaft ist immer in einem Prüfer vorhanden; Das ist
+            Die <property>value</property> Eigenschaft ist immer in einem Prüfer vorhanden; Das ist
             der Wert der als Argument von <methodname>isValid()</methodname> definiert wurde. Andere
             Eigenschaften können von Fall zu Fall in jeder Prüfklasse unterstützt werden.
 
@@ -182,11 +178,9 @@ if (!validator->isValid('word')) {
 }
 ]]></programlisting>
         </para>
-
     </sect2>
 
     <sect2 id="zend.validate.introduction.static">
-
         <title>Verwenden der statischen is() Methode</title>
 
         <para>
@@ -241,7 +235,6 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
         </para>
 
         <sect3 id="zend.validate.introduction.static.namespaces">
-
             <title>Namespaces</title>
 
             <para>
@@ -318,7 +311,6 @@ if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) 
     </sect2>
 
     <sect2 id="zend.validate.introduction.translation">
-
         <title>Meldungen übersetzen</title>
 
         <para>
@@ -382,9 +374,7 @@ if (!$validator->isTranslatorDisabled()) {
             Kopf behalten das der Übersetzer auch mit den Meldungen arbeitet die man selbst gesetzt
             hat.
         </para>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

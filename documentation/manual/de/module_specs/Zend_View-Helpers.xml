@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19425 -->
+<!-- EN-Revision: 19577 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
-
     <title>View Helfer</title>
 
     <para>
@@ -45,15 +44,15 @@
 
     <para>
         Um einen Helfer in deinem View Skript zu verwenden, rufe ihn mittels
-        <code>$this->helperName()</code> auf. Im Hintergrund wird <classname>Zend_View</classname>
-        die Klasse <classname>Zend_View_Helper_HelperName</classname> laden, eine Objektinstanz der
+        <command>$this->helperName()</command> auf. Im Hintergrund wird
+        <classname>Zend_View</classname> die Klasse
+        <classname>Zend_View_Helper_HelperName</classname> laden, eine Objektinstanz der
         Klasse erstellen und deren Methode <methodname>helperName()</methodname> aufrufen. Die
         Objektinstanz bleibt innerhalb der <classname>Zend_View</classname> Instanz bestehen und
-        wird bei allen weiteren Aufrufen von <code>$this->helperName()</code> wiederverwendet.
+        wird bei allen weiteren Aufrufen von <command>$this->helperName()</command> wiederverwendet.
     </para>
 
     <sect2 id="zend.view.helpers.initial">
-
         <title>Vorhandene Helfer</title>
 
         <para>
@@ -65,7 +64,6 @@
         </para>
 
         <itemizedlist>
-
             <listitem><para>
                 <methodname>declareVars()</methodname>: Primär benutzt mit
                 <methodname>strictVars()</methodname>, kann dieser Helfer verwendet werden um
@@ -219,10 +217,10 @@ echo $this->formCheckbox('foo',
 
            <listitem><para>
                 <methodname>formLabel($name, $value, $attribs)</methodname>: Erstellt ein
-                &lt;label&gt; Element, setzt das <code>for</code> Attribut auf
+                &lt;label&gt; Element, setzt das <property>for</property> Attribut auf
                 <varname>$name</varname>, und den aktuellen Labeltext auf
-                <varname>$value</varname>. Wenn <code>disable</code> an
-                <code>attribs</code> übergeben wird, wird nichts zurückgegeben.
+                <varname>$value</varname>. Wenn <emphasis>disable</emphasis> an
+                <property>attribs</property> übergeben wird, wird nichts zurückgegeben.
             </para></listitem>
 
             <listitem><para>
@@ -469,7 +467,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
         </para>
 
         <para>
-            Hier ist ein Beispiel für unseren <code>SpecialPurpose</code> Helfer:
+            Hier ist ein Beispiel für unseren <classname>SpecialPurpose</classname> Helfer:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -486,8 +484,8 @@ class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
 ]]></programlisting>
 
         <para>
-            Dann rufst du in einem View Skript den <code>SpecialPurpose</code> Helfer so oft auf,
-            wie du möchtest; er wird einmal instanziiert und bleibt für die Lebensdauer der
+            Dann rufst du in einem View Skript den <classname>SpecialPurpose</classname> Helfer so
+            oft auf, wie du möchtest; er wird einmal instanziiert und bleibt für die Lebensdauer der
             <classname>Zend_View</classname> Instanz bestehen.
         </para>
 

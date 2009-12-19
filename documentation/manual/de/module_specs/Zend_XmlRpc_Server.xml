@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19614 -->
+<!-- EN-Revision: 19674 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -194,11 +194,13 @@ function myFunc($val1, $val2, $val3)
 }
 ]]></programlisting>
 
-        <para>
-            Wenn man viele Signaturen erlaubt kann dies zu Verwirrung bei Entwicklern führen, welche
-            diese Services nutzen; um die Dinge einfach zu halten sollte eine
-            <acronym>XML-RPC</acronym> Methode deshalb nur eine Signatur haben.
-        </para>
+        <note>
+            <para>
+                Wenn man viele Signaturen erlaubt kann dies zu Verwirrung bei Entwicklern führen,
+                welche diese Services nutzen; um die Dinge einfach zu halten sollte eine
+                <acronym>XML-RPC</acronym> Methode deshalb nur eine Signatur haben.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.xmlrpc.server.namespaces">
@@ -449,7 +451,10 @@ class Services_PricingService
 }
 
 $server = new Zend_XmlRpc_Server();
-$server->setClass('Services_PricingService', 'pricing', new ProductRepository(), new PurchaseRepository());
+$server->setClass('Services_PricingService',
+                  'pricing',
+                  new ProductRepository(),
+                  new PurchaseRepository());
 ]]></programlisting>
 
             <para>
@@ -503,7 +508,10 @@ class Services_PricingService2
 
 $server = new Zend_XmlRpc_Server();
 $server->sendArgumentsToAllMethods(false);
-$server->setClass('Services_PricingService2', 'pricing', new ProductRepository(), new PurchaseRepository());
+$server->setClass('Services_PricingService2',
+                  'pricing',
+                  new ProductRepository(),
+                  new PurchaseRepository());
 ]]></programlisting>
         </example>
 
@@ -710,7 +718,10 @@ echo $server->handle($request);
 ]]></programlisting>
 
             <note>
-                Die Datei des Server Caches sollte ausserhalb des Document Roots platziert werden.
+                <para>
+                    Die Datei des Server Caches sollte ausserhalb des Document Roots platziert
+                    werden.
+                </para>
             </note>
         </example>
 
@@ -733,7 +744,6 @@ echo $server->handle($request);
             </para>
 
             <programlisting language="php"><![CDATA[
-<?php
 require_once 'Zend/XmlRpc/Server.php';
 require_once 'Zend/XmlRpc/Generator/XMLWriter.php';
 
@@ -742,30 +752,30 @@ Zend_XmlRpc_Value::setGenerator(new Zend_XmlRpc_Generator_XMLWriter());
 $server = new Zend_XmlRpc_Server();
 ...
 ]]></programlisting>
-
-            <note>
-                <title>Die eigene Anwendung benchmarken</title>
-
-                <para>
-                    Performance wird durch eine Vielzahl an Parametern und Benchmarks ermittelt
-                    welche nur für den speziellen Testfall angewendet werden. Unterschiede basieren
-                    auf der PHP Version, installierten Erweiterungen, dem Webserver und dem
-                    Betriebssystem um nur einige zu nennen. Man sollte darauf achten das man die
-                    eigene Anwendung selbst benchmarkt und anschließend auswählt welchen Generator
-                    man verwendet, aber basierend auf <emphasis>eigenen</emphasis> Zahlen.
-                </para>
-            </note>
-
-            <note>
-                <title>Den eigenen Client benchmarken</title>
-
-                <para>
-                    Diese Optimierung macht auch für die Client Seite Sinn. Man muss den
-                    alternativen <acronym>XML</acronym> Generator nur auswählen bevor man irgendeine
-                    Arbeit mit <classname>Zend_XmlRpc_Client</classname> durchführt.
-                </para>
-            </note>
         </example>
+
+        <note>
+            <title>Die eigene Anwendung benchmarken</title>
+
+            <para>
+                Performance wird durch eine Vielzahl an Parametern und Benchmarks ermittelt
+                welche nur für den speziellen Testfall angewendet werden. Unterschiede basieren
+                auf der PHP Version, installierten Erweiterungen, dem Webserver und dem
+                Betriebssystem um nur einige zu nennen. Man sollte darauf achten das man die
+                eigene Anwendung selbst benchmarkt und anschließend auswählt welchen Generator
+                man verwendet, aber basierend auf <emphasis>eigenen</emphasis> Zahlen.
+            </para>
+        </note>
+
+        <note>
+            <title>Den eigenen Client benchmarken</title>
+
+            <para>
+                Diese Optimierung macht auch für die Client Seite Sinn. Man muss den
+                alternativen <acronym>XML</acronym> Generator nur auswählen bevor man irgendeine
+                Arbeit mit <classname>Zend_XmlRpc_Client</classname> durchführt.
+            </para>
+        </note>
     </sect2>
 </sect1>
 <!--

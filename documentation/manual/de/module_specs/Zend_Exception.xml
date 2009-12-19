@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15681 -->
+<!-- EN-Revision: 19661 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.exception.using">
-
     <title>Verwenden von Ausnahmen</title>
 
     <para>
-        <classname>Zend_Exception</classname> ist einfach die Basisklasse für alle Ausnahmen die
+        <classname>Zend_Exception</classname> ist einfach die Basisklasse für alle Exceptions die
         vom Zend Framework geworfen werden.
     </para>
 
     <example id="zend.exception.using.example">
-        <title>Fangen einer Ausnahme</title>
+        <title>Fangen einer Exception</title>
+
         <para>
-            Das folgende Code Beispiel demonstriert wie eine Ausnahme gefangen werden
+            Das folgende Code Beispiel demonstriert wie eine Exception gefangen werden
             kann die in einer Zend Framework Klasse geworfen wird:
         </para>
+
         <programlisting language="php"><![CDATA[
 try {
     // Der Aufruf von Zend_Loader::loadClass() mit einer nicht-existierenden
-    // Klasse wird eine Ausnahme in Zend_Loader werfen
+    // Klasse wird eine Exception in Zend_Loader werfen:
     Zend_Loader::loadClass('nonexistantclass');
 } catch (Zend_Exception $e) {
-    echo "Gefangene Ausnahme: " . get_class($e) . "\n";
+    echo "Gefangene Exception: " . get_class($e) . "\n";
     echo "Nachricht: " . $e->getMessage() . "\n";
     // anderer Code um den Fehler zu korrigieren.
 }
@@ -31,18 +32,17 @@ try {
 
     <para>
         <classname>Zend_Exception</classname> kann als fang-sie-alle Exception Klasse in einem
-        Catch Block verwendet werden um alle Ausnahmen, die von Zend Framework Klassen geworfen
+        Catch Block verwendet werden um alle Exceptions, die von Zend Framework Klassen geworfen
         werden, zu fangen. Das kann nützlich sein wenn das Programm, durch das Fangen eines
-        speziellen Ausnahmetyps, nicht wiederhergestellt werden kann.
+        speziellen Exception Typs, nicht wiederhergestellt werden kann.
     </para>
 
     <para>
         Die Dokumentation der einzelnen Zend Framework Komponenten und Klassen
-        enthält spezielle Informationen darüber welche Methoden Ausnahmen werfen,
-        die Gründe die dazu führen das eine Ausnahme geworfen wird, und die Klassen
-        aller Ausnahmen die geworfen werden können.
+        enthält spezielle Informationen darüber welche Methoden Exceptions werfen,
+        die Gründe die dazu führen das eine Exception geworfen wird, und die verschiedenen Exception
+        Typen die geworfen werden können.
     </para>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

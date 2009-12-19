@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19383 -->
+<!-- EN-Revision: 19669 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.plurals">
     <title>Plurale Schreibweisen für Übersetzungen</title>
@@ -33,7 +33,6 @@
     </para>
 
     <sect2 id="zend.translate.plurals.traditional">
-
         <title>Traditionelle plurale Übersetzung</title>
 
         <para>
@@ -44,7 +43,6 @@
         </para>
 
         <example id="zend.translate.plurals.traditional.example1">
-
             <title>Beispiel einer traditionellen pluralen Übersetzung</title>
 
             <para>
@@ -63,13 +61,10 @@
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->plural('Car', 'Cars', $number);
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.translate.plurals.modern">
-
         <title>Moderne plurale Übersetzungen</title>
 
         <para>
@@ -88,7 +83,6 @@ $translate->plural('Car', 'Cars', $number);
         </para>
 
         <example id="zend.translate.plurals.modern.example1">
-
             <title>Beispiel für moderne plurale Übersetzungen</title>
 
             <para>
@@ -109,7 +103,6 @@ $translate->translate(array('Car', 'Cars', $number));
         </para>
 
         <example id="zend.translate.plurals.modern.example2">
-
             <title>
                 Beispiel einer modernen pluralen Übersetzung durch Verwendung einer anderen
                 Quellsprachen
@@ -128,7 +121,6 @@ $translate->translate(array('Car',
                             $number,
                             'ru'));
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -141,11 +133,9 @@ $translate->translate(array('Car',
             Wenn man die plurale Sprache nicht angibt dan wird standardmäßig englisch verwendet
             und jede zusätzliche Plurale Definition wird ignoriert.
         </para>
-
     </sect2>
 
     <sect2 id="zend.translate.plurals.source">
-
         <title>Plurale Quelldateien</title>
 
         <para>
@@ -162,39 +152,48 @@ $translate->translate(array('Car',
                         <entry>Plural unterstützt</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>Array</entry>
                         <entry><emphasis>Ja</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Csv</entry>
                         <entry><emphasis>Ja</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Gettext</entry>
                         <entry><emphasis>Ja</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Ini</entry>
                         <entry><emphasis>Nein</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Qt</entry>
                         <entry><emphasis>Nein</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Tbx</entry>
                         <entry><emphasis>Nein</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Tmx</entry>
                         <entry><emphasis>Nein</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Xliff</entry>
                         <entry><emphasis>Nein</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>XmlTm</entry>
                         <entry><emphasis>Nein</emphasis></entry>
@@ -208,7 +207,6 @@ $translate->translate(array('Car',
         </para>
 
         <sect3 id="zend.translate.plurals.source.array">
-
             <title>Array Quellen mit pluralen Definitionen</title>
 
             <para>
@@ -251,11 +249,9 @@ array(
                 Quellsprache mehr plurale Formen unterstützt, dann muß einfach eine neue leere
                 Übersetzung hinzugefügt werden.
             </para>
-
         </sect3>
 
         <sect3 id="zend.translate.plurals.source.csv">
-
             <title>CSV Quellen mit pluralen Definitionen</title>
 
             <para>
@@ -294,6 +290,80 @@ array(
                 </para>
             </note>
         </sect3>
+    </sect2>
+
+    <sect2 id="zend.translate.plurals.customrules">
+        <title>Eigene Plural Regeln</title>
+
+        <para>
+            In seltenen Fällen kann es nützlich sein wenn man in der Lage ist eigene Plural Regeln
+            zu definieren. Chinesisch zum Beispiel. Diese Sprache definiert zwei Plural Regeln.
+            Standardmäßig verwendet Sie kein Plural. Aber in seltenen Fällen wird eine Regel wie
+            diese verwendet: <emphasis>(number == 1) ? 0 : 1</emphasis>.
+        </para>
+
+        <para>
+            Auch wenn man eine Sprache verwenden will die keine bekannten Plural Regeln hat, und
+            man eigene Regeln definieren will.
+        </para>
+
+        <para>
+            Das kann durch Verwendung von <methodname>Zend_Translate_Plural::setRule()</methodname>
+            getan werden. Diese Methode erwartet zwei Parameter welche angegeben werden müssen. Eine
+            Regel, welche einfach ein Callback zu einer selbst definierten Methode ist. Und ein
+            Gebietsschema für das diese Regel verwendet wird.
+        </para>
+
+        <para>
+            Die eigene Regel könnte wie folgt aussehen:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+public function MyRule($number) {
+    return ($number == 10) ? 0 : 1;
+}
+]]></programlisting>
+
+        <para>
+            Wie man sieht muss die eigene Regel einen Parameter akzeptieren. Er ist eine Zahl die
+            man verwendet um zurückzugeben welches Plural der Übersetzung verwendet werden muss.
+            In unserem Beispiel haben wir definiert dass wenn wie eine '10' erhalten, die Plural
+            Definition 0 verwendet werden soll, und in allen anderen Fälle verwendet wir eine 1.
+        </para>
+
+        <para>
+            Eigene Regeln können so einfach oder so kompliziert sein wie man will. Man muss einfach
+            nur einen Integer Wert zurückgeben. Die Plural Definition ß steht hierbei für die
+            Singular Übersetzung, und 1 steht für die erste Plural Regel.
+        </para>
+
+        <para>
+            Um die eigene Regel zu aktivieren und diese mit dem gewünschten Gebietsschema zu
+            verknüpfen, muss man den folgenden Aufruf tätigen:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+Zend_Translate_Plural::setPlural('MyPlural', 'zh');
+]]></programlisting>
+
+        <para>
+            Jetzt haben wir unsere Plural Definition mit der chinesischen Sprache verknüpft.
+        </para>
+
+        <para>
+            Man kann für jede Sprache eigene Plural Regeln definieren. Aber man sollte aufpassen
+            dass man plurale Regeln setzt bevor Übersetzungen durchgeführt werden.
+        </para>
+
+        <note>
+            <title>Eigene Plural Regeln nur definieren wenn dies benötigt wird</title>
+
+            <para>
+                <classname>Zend_Translate</classname> definiert Plurale für die meisten bekannten
+                Sprachen. Man sollte keine eigenen Plurale definieren wenn man das nicht
+                benötigt. Die Standardregeln funktionieren meistens.
+            </para>
+        </note>
     </sect2>
 </sect1>
 <!--

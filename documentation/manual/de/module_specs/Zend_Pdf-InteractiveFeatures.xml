@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19419 -->
+<!-- EN-Revision: 19670 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.interactive-features">
     <title>Interaktive Features</title>
+
     <sect2 id="zend.pdf.pages.interactive-features.destinations">
         <title>Ziele</title>
 
@@ -797,12 +798,24 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
             </itemizedlist>
 
             <para>
-                Nur <classname>Zend_Pdf_Action_GoTo</classname> Aktionen können aktuell von
-                Benutzern erstellt werden. Das kann getan werden indem die Methode
+                Nur <classname>Zend_Pdf_Action_GoTo</classname> und
+                <classname>Zend_Pdf_Action_URI</classname> Aktionen können aktuell von
+                Benutzern erstellt werden.
+            </para>
+
+            <para>
+                Goto Aktionen können erstellt werden indem die Methode
                 <methodname>Zend_Pdf_Action_GoTo::create($destination)</methodname> verwendet
                 wird wobei <varname>$destination</varname> ein
-                <classname>Zend_Pdf_Destination</classname> Objekt oder String ist der verwendet
+                <classname>Zend_Pdf_Destination</classname> Objekt oder ein String ist der verwendet
                 werden kann um ein benanntes Ziel zu identifizieren.
+            </para>
+
+            <para>
+                Die Methode <methodname>Zend_Pdf_Action_URI::create($uri[, $isMap])</methodname>
+                muss verwendet werden um eine URI Aktion zu erstellen (siehe die API Dokumentation
+                für Details). Der optionale <varname>$isMap</varname> Parameter wird
+                standardmäßig auf false gesetzt.
             </para>
 
             <para>

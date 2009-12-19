@@ -61,6 +61,8 @@ require_once 'Zend/Feed/Writer/Renderer/Entry/RssTest.php';
 require_once 'Zend/Feed/Writer/Extension/ITunes/EntryTest.php';
 require_once 'Zend/Feed/Writer/Extension/ITunes/FeedTest.php';
 
+require_once 'Zend/Feed/Pubsubhubbub/AllTests.php';
+
 /**
  * @category   Zend
  * @package    Zend_Feed
@@ -125,6 +127,8 @@ class Zend_Feed_AllTests
         
         $suite->addTestSuite('Zend_Feed_Writer_Extension_ITunes_EntryTest');
         $suite->addTestSuite('Zend_Feed_Writer_Extension_ITunes_FeedTest');
+        
+        $suite->addTest(Zend_Feed_Pubsubhubbub_AllTests::suite());
 
         return $suite;
     }

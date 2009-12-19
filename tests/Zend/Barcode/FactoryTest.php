@@ -20,25 +20,16 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
+require_once dirname(dirname(dirname(__FILE__))) . '/TestHelper.php';
 
-/**
- * @see Zend_Barcode
- */
 require_once 'Zend/Barcode.php';
-
-/**
- * @see Zend_Config
- */
 require_once 'Zend/Config.php';
 
 /**
  * @category   Zend
  * @package    Zend_Barcode
  * @subpackage UnitTests
+ * @group      Zend_Barcode
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

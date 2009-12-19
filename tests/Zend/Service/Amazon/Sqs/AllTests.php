@@ -37,6 +37,7 @@ require_once 'Zend/Service/Amazon/Sqs/OnlineTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
+ * @group      Zend_Service_Amazon_Sqs
  */
 class Zend_Service_Amazon_Sqs_AllTests
 {

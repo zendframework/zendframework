@@ -20,19 +20,9 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-/**
- * @see Zend_Service_Amazon_Sqs
- */
 require_once 'Zend/Service/Amazon/Sqs.php';
-
-/**
- * @see Zend_Http_Client_Adapter_Socket
- */
 require_once 'Zend/Http/Client/Adapter/Socket.php';
 
 /**
@@ -43,6 +33,7 @@ require_once 'Zend/Http/Client/Adapter/Socket.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
+ * @group      Zend_Service_Amazon_Sqs
  */
 class Zend_Service_Amazon_Sqs_OnlineTest extends PHPUnit_Framework_TestCase
 {

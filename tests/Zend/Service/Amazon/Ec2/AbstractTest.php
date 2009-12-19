@@ -20,12 +20,8 @@
  * @version    $Id: AbstractTest.php 17667 2009-08-18 21:40:09Z mikaelkael $
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'Zend/Service/Amazon/Ec2/Abstract.php';
 
 /**
@@ -38,6 +34,7 @@ require_once 'Zend/Service/Amazon/Ec2/Abstract.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
+ * @group      Zend_Service_Amazon_Ec2
  */
 class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
 {

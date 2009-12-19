@@ -13,27 +13,22 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Json
+ * @package    Zend_Exception
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../TestHelper.php';
+require_once dirname(dirname(__FILE__)) . '/TestHelper.php';
 
-/**
- * @see Zend_Exception
- */
 require_once 'Zend/Exception.php';
 
 /**
  * @category   Zend
  * @package    Zend_Exception
  * @subpackage UnitTests
+ * @group      Zend_Exception
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

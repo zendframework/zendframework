@@ -20,36 +20,18 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
+require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-/**
- * Zend_Acl
- */
 require_once 'Zend/Acl.php';
-
-/**
- * Zend_Acl_Resource
- */
 require_once 'Zend/Acl/Resource.php';
-
-/**
- * Zend_Acl_Role
- */
 require_once 'Zend/Acl/Role.php';
-
-/**
- * @see Zend_Acl_MockAssertion
- */
 require_once dirname(__FILE__) . '/_files/MockAssertion.php';
-
 
 /**
  * @category   Zend
  * @package    Zend_Acl
  * @subpackage UnitTests
+ * @group      Zend_Acl
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

@@ -30,7 +30,6 @@ require_once 'Zend/Service/Amazon/S3/OfflineTest.php';
 require_once 'Zend/Service/Amazon/S3/OnlineTest.php';
 require_once 'Zend/Service/Amazon/S3/StreamTest.php';
 
-
 /**
  * @category   Zend
  * @package    Zend_Service_Amazon_S3
@@ -39,6 +38,7 @@ require_once 'Zend/Service/Amazon/S3/StreamTest.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
+ * @group      Zend_Service_Amazon_S3
  */
 class Zend_Service_Amazon_S3_AllTests
 {

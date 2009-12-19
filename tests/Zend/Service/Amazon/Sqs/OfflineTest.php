@@ -20,10 +20,7 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
+require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 /**
  * @category   Zend
@@ -33,6 +30,7 @@ require_once dirname(__FILE__) . '/../../../../TestHelper.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Service
  * @group      Zend_Service_Amazon
+ * @group      Zend_Service_Amazon_Sqs
  */
 class Zend_Service_Amazon_Sqs_OfflineTest extends PHPUnit_Framework_TestCase
 {

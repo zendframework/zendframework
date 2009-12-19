@@ -112,6 +112,14 @@ class Zend_Queue_Stomp_Connection_Mock
     }
 }
 
+/**
+ * @category   Zend
+ * @package    Zend_Queue
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Queue
+ */
 class Zend_Queue_Stomp_ClientTest extends PHPUnit_Framework_TestCase
 {
     public function testConstruct()

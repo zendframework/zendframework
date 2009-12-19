@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19604 -->
+<!-- EN-Revision: 19614 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -92,7 +92,7 @@ echo $server->handle();
             </para>
         </sect3>
 
-        <sect3 id="zend.xmlrpc.server.anatomy.general">
+        <sect3 id="zend.xmlrpc.server.anatomy.expose">
             <title>Was kann man freigeben?</title>
 
             <para>
@@ -113,6 +113,7 @@ echo $server->handle();
 
     <sect2 id="zend.xmlrpc.server.conventions">
         <title>Konventionen</title>
+
         <para>
             <classname>Zend_XmlRpc_Server</classname> ermöglicht es dem Entwickler, Funktionen und
             Methodenaufrufe als ausführbare <acronym>XML-RPC</acronym> Methoden anzufügen. Durch
@@ -576,9 +577,8 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <title>Utilizing custom request and response objects</title>
-
         <example id="zend.xmlrpc.server.use.custom-request-object">
+            <title>Anpassen eigener Anfrage und Antwort Objekte</title>
 
             <para>
                  Einige Anwendungsfälle verlangen die Verwendung eines eigenen Request Objektes.
@@ -624,6 +624,7 @@ echo $server->handle($request);
         </example>
 
         <example id="zend.xmlrpc.server.use.custom-response-object">
+            <title>Eine eigene Antwort Klasse spezifizieren</title>
 
             <para>
                 Das nachstehende Beispiel zeigt, wie man eine eigene Antwort-Klasse
@@ -664,7 +665,6 @@ echo $server->handle($request);
     </sect2>
 
     <sect2 id="zend.xmlrpc.server.performance">
-
         <title>Performance Optimierung</title>
 
         <example id="zend.xmlrpc.server.performance.caching">
@@ -744,18 +744,26 @@ $server = new Zend_XmlRpc_Server();
 ]]></programlisting>
 
             <note>
-                Performance wird durch eine Vielzahl an Parametern und Benchmarks ermittelt welche
-                nur für den speziellen Testfall angewendet werden. Unterschiede basieren auf der PHP
-                Version, installierten Erweiterungen, dem Webserver und dem Betriebssystem um nur
-                einige zu nennen. Man sollte darauf achten das man die eigene Anwendung selbst
-                benchmarkt und anschließend auswählt welchen Generator man verwendet, aber basierend
-                auf <emphasis>eigenen</emphasis> Zahlen.
+                <title>Die eigene Anwendung benchmarken</title>
+
+                <para>
+                    Performance wird durch eine Vielzahl an Parametern und Benchmarks ermittelt
+                    welche nur für den speziellen Testfall angewendet werden. Unterschiede basieren
+                    auf der PHP Version, installierten Erweiterungen, dem Webserver und dem
+                    Betriebssystem um nur einige zu nennen. Man sollte darauf achten das man die
+                    eigene Anwendung selbst benchmarkt und anschließend auswählt welchen Generator
+                    man verwendet, aber basierend auf <emphasis>eigenen</emphasis> Zahlen.
+                </para>
             </note>
 
             <note>
-                Diese Optimierung macht auch für die Client Seite Sinn. Man muss den alternativen
-                <acronym>XML</acronym> Generator nur auswählen bevor man irgendeine Arbeit mit
-                <classname>Zend_XmlRpc_Client</classname> durchführt.
+                <title>Den eigenen Client benchmarken</title>
+
+                <para>
+                    Diese Optimierung macht auch für die Client Seite Sinn. Man muss den
+                    alternativen <acronym>XML</acronym> Generator nur auswählen bevor man irgendeine
+                    Arbeit mit <classname>Zend_XmlRpc_Client</classname> durchführt.
+                </para>
             </note>
         </example>
     </sect2>

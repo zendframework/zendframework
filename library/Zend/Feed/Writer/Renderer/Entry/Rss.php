@@ -54,6 +54,7 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
     {
         $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
         $this->_dom->formatOutput = true;
+        $this->_dom->substituteEntities = false;
         $entry = $this->_dom->createElement('item');
         $this->_dom->appendChild($entry);
         
@@ -66,6 +67,7 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
         $this->_setAuthors($this->_dom, $entry);
         $this->_setEnclosure($this->_dom, $entry);
         $this->_setCommentLink($this->_dom, $entry);
+        $this->_setCategories($this->_dom, $entry);
         foreach ($this->_extensions as $ext) {
             $ext->setType($this->getType());
             $ext->setRootElement($this->getRootElement());
@@ -101,11 +103,8 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
         }
         $title = $dom->createElement('title');
         $root->appendChild($title);
-        $title->nodeValue = htmlentities(
-            $this->getDataContainer()->getTitle(),
-            ENT_QUOTES,
-            $this->getDataContainer()->getEncoding()
-        );
+        $text = $dom->createTextNode($this->getDataContainer()->getTitle());
+        $title->appendChild($text);
     }
     
     /**
@@ -134,11 +133,8 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
         }
         $subtitle = $dom->createElement('description');
         $root->appendChild($subtitle);
-        $subtitle->nodeValue = htmlentities(
-            $this->getDataContainer()->getDescription(),
-            ENT_QUOTES,
-            $this->getDataContainer()->getEncoding()
-        );
+        $text = $dom->createCDATASection($this->getDataContainer()->getDescription());
+        $subtitle->appendChild($text);
     }
     
     /**
@@ -156,8 +152,10 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
 
         $updated = $dom->createElement('pubDate');
         $root->appendChild($updated);
-        $updated->nodeValue = $this->getDataContainer()->getDateModified()
-            ->get(Zend_Date::RSS);
+        $text = $dom->createTextNode(
+            $this->getDataContainer()->getDateModified()->get(Zend_Date::RSS)
+        );
+        $updated->appendChild($text);
     }
     
     /**
@@ -198,7 +196,8 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
             if (array_key_exists('email', $data)) {
                 $name = $data['email'] . ' (' . $data['name'] . ')';
             }
-            $author->nodeValue = $name;
+            $text = $dom->createTextNode($name);
+            $author->appendChild($text);
             $root->appendChild($author);
         }
     }
@@ -237,7 +236,8 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
         }
         $link = $dom->createElement('link');
         $root->appendChild($link);
-        $link->nodeValue = $this->getDataContainer()->getLink();
+        $text = $dom->createTextNode($this->getDataContainer()->getLink());
+        $link->appendChild($text);
     }
     
     /**
@@ -260,7 +260,8 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
             $this->getDataContainer()->setId(
                 $this->getDataContainer()->getLink());
         }
-        $id->nodeValue = $this->getDataContainer()->getId();
+        $text = $dom->createTextNode($this->getDataContainer()->getId());
+        $id->appendChild($text);
         if (!Zend_Uri::check($this->getDataContainer()->getId())) {
             $id->setAttribute('isPermaLink', 'false');
         }
@@ -280,7 +281,32 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
             return;
         }
         $clink = $this->_dom->createElement('comments');
-        $clink->nodeValue = $link;
+        $text = $dom->createTextNode($link);
+        $clink->appendChild($text);
         $root->appendChild($clink);
+    }
+    
+    /**
+     * Set entry categories
+     * 
+     * @param DOMDocument $dom 
+     * @param DOMElement $root 
+     * @return void
+     */
+    protected function _setCategories(DOMDocument $dom, DOMElement $root)
+    {
+        $categories = $this->getDataContainer()->getCategories();
+        if (!$categories) {
+            return;
+        }
+        foreach ($categories as $cat) {
+            $category = $dom->createElement('category');
+            if (isset($cat['scheme'])) {
+                $category->setAttribute('domain', $cat['scheme']);
+            }
+            $text = $dom->createCDATASection($cat['term']);
+            $category->appendChild($text);
+            $root->appendChild($category);
+        }
     }
 }

@@ -152,7 +152,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
         $title = $dom->createElement('title');
         $root->appendChild($title);
         $title->setAttribute('type', 'text');
-        $title->nodeValue = $this->getDataContainer()->getTitle();
+        $text = $dom->createTextNode($this->getDataContainer()->getTitle());
+        $title->appendChild($text);
     }
 
     /**
@@ -170,7 +171,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
         $subtitle = $dom->createElement('subtitle');
         $root->appendChild($subtitle);
         $subtitle->setAttribute('type', 'text');
-        $subtitle->nodeValue = $this->getDataContainer()->getDescription();
+        $text = $dom->createTextNode($this->getDataContainer()->getDescription());
+        $subtitle->appendChild($text);
     }
 
     /**
@@ -197,8 +199,10 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
 
         $updated = $dom->createElement('updated');
         $root->appendChild($updated);
-        $updated->nodeValue = $this->getDataContainer()->getDateModified()
-            ->get(Zend_Date::ISO_8601);
+        $text = $dom->createTextNode(
+            $this->getDataContainer()->getDateModified()->get(Zend_Date::ISO_8601)
+        );
+        $updated->appendChild($text);
     }
 
     /**
@@ -218,7 +222,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
         $gdata = $this->getDataContainer()->getGenerator();
         $generator = $dom->createElement('generator');
         $root->appendChild($generator);
-        $generator->nodeValue = $gdata['name'];
+        $text = $dom->createTextNode($gdata['name']);
+        $generator->appendChild($text);
         if (array_key_exists('uri', $gdata)) {
             $generator->setAttribute('uri', $gdata['uri']);
         }
@@ -304,16 +309,19 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
             $name = $this->_dom->createElement('name');
             $author->appendChild($name);
             $root->appendChild($author);
-            $name->nodeValue = $data['name'];
+            $text = $dom->createTextNode($data['name']);
+            $name->appendChild($text);
             if (array_key_exists('email', $data)) {
                 $email = $this->_dom->createElement('email');
                 $author->appendChild($email);
-                $email->nodeValue = $data['email'];
+                $text = $dom->createTextNode($data['email']);
+                $email->appendChild($text);
             }
             if (array_key_exists('uri', $data)) {
                 $uri = $this->_dom->createElement('uri');
                 $author->appendChild($uri);
-                $uri->nodeValue = $data['uri'];
+                $text = $dom->createTextNode($data['uri']);
+                $uri->appendChild($text);
             }
         }
     }
@@ -349,7 +357,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
         }
         $id = $dom->createElement('id');
         $root->appendChild($id);
-        $id->nodeValue = $this->getDataContainer()->getId();
+        $text = $dom->createTextNode($this->getDataContainer()->getId());
+        $id->appendChild($text);
     }
     
     /**
@@ -367,7 +376,8 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
         }
         $copy = $dom->createElement('rights');
         $root->appendChild($copy);
-        $copy->nodeValue = $copyright;
+        $text = $dom->createTextNode($copyright);
+        $copy->appendChild($text);
     }
     
     /**
@@ -443,13 +453,9 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
             $category = $dom->createElement('category');
             $category->setAttribute('term', $cat['term']);
             if (isset($cat['label'])) {
-                $category->setAttribute('label',
-                    htmlentities($cat['label'], ENT_QUOTES, $this->getDataContainer()->getEncoding())
-                );
+                $category->setAttribute('label', $cat['label']);
             } else {
-                $category->setAttribute('label',
-                    htmlentities($cat['term'], ENT_QUOTES, $this->getDataContainer()->getEncoding())
-                );
+                $category->setAttribute('label', $cat['term']);
             }
             if (isset($cat['scheme'])) {
                 $category->setAttribute('scheme', $cat['scheme']);

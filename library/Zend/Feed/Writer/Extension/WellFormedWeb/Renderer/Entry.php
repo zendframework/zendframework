@@ -74,7 +74,8 @@ class Zend_Feed_Writer_Extension_WellFormedWeb_Renderer_Entry
         foreach ($links as $link) {
             if ($link['type'] == 'rss') {
                 $flink = $this->_dom->createElement('wfw:commentRss');
-                $flink->nodeValue = $link['uri'];
+                $text = $dom->createTextNode($link['uri']);
+                $flink->appendChild($text);
                 $root->appendChild($flink);
             }
         }

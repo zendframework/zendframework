@@ -262,6 +262,23 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
         $this->assertEquals(22, $entry->getCommentCount());
     }
     
+    public function testCategoriesCanBeSet()
+    {
+        $this->_validEntry->addCategories(array(
+            array('term'=>'cat_dog', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2')
+        ));
+        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
+        $atomFeed->render();
+        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $entry = $feed->current();
+        $expected = array(
+            array('term'=>'cat_dog', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2', 'label' => 'cat_dog2', 'scheme' => null)
+        );
+        $this->assertEquals($expected, (array) $entry->getCategories());
+    }
+    
     public function testCommentFeedLinksRendered()
     {
         $renderer = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);

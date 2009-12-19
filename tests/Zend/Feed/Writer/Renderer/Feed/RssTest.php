@@ -107,6 +107,18 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
         $rssFeed->render();
     }
 
+    /**
+     * @group ZFWCHARDATA01
+     */
+    public function testFeedTitleCharDataEncoding()
+    {
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->_validWriter->setTitle('<>&\'"áéíóú');
+        $rssFeed->render();
+        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $this->assertEquals('<>&\'"áéíóú', $feed->getTitle());
+    }
+
     public function testFeedDescriptionHasBeenSet()
     {
         $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
@@ -123,6 +135,18 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
         $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validWriter->remove('description');
         $rssFeed->render();
+    }
+    
+    /**
+     * @group ZFWCHARDATA01
+     */
+    public function testFeedDescriptionCharDataEncoding()
+    {
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->_validWriter->setDescription('<>&\'"áéíóú');
+        $rssFeed->render();
+        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $this->assertEquals('<>&\'"áéíóú', $feed->getDescription());
     }
 
     public function testFeedUpdatedDateHasBeenSet()
@@ -245,6 +269,19 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('name'=>'Joe'), $feed->getAuthor());
     }
     
+    /**
+     * @group ZFWCHARDATA01
+     */
+    public function testFeedAuthorCharDataEncoding()
+    {   
+        $this->_validWriter->addAuthor('<>&\'"áéíóú', 'joe@example.com', 'http://www.example.com/joe');
+        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $atomFeed->render();
+        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $author = $feed->getAuthor();
+        $this->assertEquals(array('name'=>'<>&\'"áéíóú'), $feed->getAuthor());
+    }
+    
     public function testCopyrightCanBeSet()
     {
         $this->_validWriter->setCopyright('Copyright © 2009 Paddy');
@@ -252,6 +289,18 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
         $rssFeed->render();
         $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
         $this->assertEquals('Copyright © 2009 Paddy', $feed->getCopyright());
+    }
+    
+    /**
+     * @group ZFWCHARDATA01
+     */
+    public function testCopyrightCharDataEncoding()
+    {
+        $this->_validWriter->setCopyright('<>&\'"áéíóú');
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $this->assertEquals('<>&\'"áéíóú', $feed->getCopyright());
     }
     
     public function testCategoriesCanBeSet()
@@ -265,6 +314,25 @@ class Zend_Feed_Writer_Renderer_Feed_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
         $expected = array(
             array('term'=>'cat_dog', 'label' => 'cat_dog', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2', 'label' => 'cat_dog2', 'scheme' => null)
+        );
+        $this->assertEquals($expected, (array) $feed->getCategories());
+    }
+    
+    /**
+     * @group ZFWCHARDATA01
+     */
+    public function testCategoriesCharDataEncoding()
+    {
+        $this->_validWriter->addCategories(array(
+            array('term'=>'<>&\'"áéíóú', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2')
+        ));
+        $rssFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $rssFeed->render();
+        $feed = Zend_Feed_Reader::importString($rssFeed->saveXml());
+        $expected = array(
+            array('term'=>'<>&\'"áéíóú', 'label' => '<>&\'"áéíóú', 'scheme' => 'http://example.com/schema1'),
             array('term'=>'cat_dog2', 'label' => 'cat_dog2', 'scheme' => null)
         );
         $this->assertEquals($expected, (array) $feed->getCategories());

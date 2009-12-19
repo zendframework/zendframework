@@ -74,8 +74,9 @@ class Zend_Feed_Writer_Extension_DublinCore_Renderer_Feed
         foreach ($authors as $data) {
             $author = $this->_dom->createElement('dc:creator');
             if (array_key_exists('name', $data)) {
-                $author->nodeValue = $data['name'];
-                $root->appendChild($author);   
+                $text = $dom->createTextNode($data['name']);
+                $author->appendChild($text);
+                $root->appendChild($author);  
             }
         }
     }

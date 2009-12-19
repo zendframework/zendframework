@@ -80,9 +80,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         }
         foreach ($authors as $author) {
             $el = $dom->createElement('itunes:author');
-            $el->nodeValue = Zend_Feed_Writer::xmlentities(
-                $author, $this->getEncoding()
-            );
+            $text = $dom->createTextNode($author);
+            $el->appendChild($text);
             $root->appendChild($el);
         }
     }
@@ -101,7 +100,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
             return;
         }
         $el = $dom->createElement('itunes:block');
-        $el->nodeValue = $block;
+        $text = $dom->createTextNode($block);
+        $el->appendChild($text);
         $root->appendChild($el);
     }
     
@@ -174,7 +174,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
             return;
         }
         $el = $dom->createElement('itunes:duration');
-        $el->nodeValue = $duration;
+        $text = $dom->createTextNode($duration);
+        $el->appendChild($text);
         $root->appendChild($el);
     }
     
@@ -192,7 +193,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
             return;
         }
         $el = $dom->createElement('itunes:explicit');
-        $el->nodeValue = $explicit;
+        $text = $dom->createTextNode($explicit);
+        $el->appendChild($text);
         $root->appendChild($el);
     }
     
@@ -210,9 +212,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
             return;
         }
         $el = $dom->createElement('itunes:keywords');
-        $el->nodeValue = Zend_Feed_Writer::xmlentities(
-            implode(',', $keywords), $this->getEncoding()
-        );
+        $text = $dom->createTextNode(implode(',', $keywords));
+        $el->appendChild($text);
         $root->appendChild($el);
     }
     
@@ -230,9 +231,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
             return;
         }
         $el = $dom->createElement('itunes:new-feed-url');
-        $el->nodeValue = Zend_Feed_Writer::xmlentities(
-            $url, $this->getEncoding()
-        );
+        $text = $dom->createTextNode($url);
+        $el->appendChild($text);
         $root->appendChild($el);
     }
     
@@ -252,13 +252,11 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         foreach ($owners as $owner) {
             $el = $dom->createElement('itunes:owner');
             $name = $dom->createElement('itunes:name');
-            $name->nodeValue = Zend_Feed_Writer::xmlentities(
-                $owner['name'], $this->getEncoding()
-            );
+            $text = $dom->createTextNode($owner['name']);
+            $name->appendChild($text);
             $email = $dom->createElement('itunes:email');
-            $email->nodeValue = Zend_Feed_Writer::xmlentities(
-                $owner['email'], $this->getEncoding()
-            );
+            $text = $dom->createTextNode($owner['email']);
+            $email->appendChild($text);
             $root->appendChild($el);
             $el->appendChild($name);
             $el->appendChild($email);
@@ -279,9 +277,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
             return;
         }
         $el = $dom->createElement('itunes:subtitle');
-        $el->nodeValue = Zend_Feed_Writer::xmlentities(
-            $subtitle, $this->getEncoding()
-        );
+        $text = $dom->createTextNode($subtitle);
+        $el->appendChild($text);
         $root->appendChild($el);
     }
     
@@ -299,9 +296,8 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
             return;
         }
         $el = $dom->createElement('itunes:summary');
-        $el->nodeValue = Zend_Feed_Writer::xmlentities(
-            $summary, $this->getEncoding()
-        );
+        $text = $dom->createTextNode($summary);
+        $el->appendChild($text);
         $root->appendChild($el);
     }
 }

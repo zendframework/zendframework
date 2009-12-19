@@ -532,6 +532,60 @@ class Zend_Feed_Writer_Entry
     }
     
     /**
+     * Add a entry category
+     *
+     * @param string $category
+     */ 
+    public function addCategory(array $category)
+    {
+        if (!isset($category['term'])) {
+            require_once 'Zend/Feed/Exception.php';
+            throw new Zend_Feed_Exception('Each category must be an array and '
+            . 'contain at least a "term" element containing the machine '
+            . ' readable category name');
+        }
+        if (isset($category['scheme'])) {
+            if (empty($category['scheme']) 
+                || !is_string($category['scheme'])
+                || !Zend_Uri::check($category['scheme'])
+            ) {
+                require_once 'Zend/Feed/Exception.php';
+                throw new Zend_Feed_Exception('The Atom scheme or RSS domain of'
+                . ' a category must be a valid URI');
+            }
+        }
+        if (!isset($this->_data['categories'])) {
+            $this->_data['categories'] = array();
+        }
+        $this->_data['categories'][] = $category;
+    }
+    
+    /**
+     * Set an array of entry categories
+     *
+     * @param array $categories
+     */
+    public function addCategories(array $categories)
+    {
+        foreach ($categories as $category) {
+            $this->addCategory($category);
+        }
+    }
+    
+    /**
+     * Get the entry categories
+     *
+     * @return string|null
+     */
+    public function getCategories()
+    {
+        if (!array_key_exists('categories', $this->_data)) {
+            return null;
+        }
+        return $this->_data['categories'];
+    }
+    
+    /**
      * Adds an enclosure to the entry.
      *
      * @param array $enclosures

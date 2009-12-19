@@ -101,12 +101,21 @@ class Zend_Feed_Writer_Renderer_Entry_RssTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException Zend_Feed_Exception
      */
-    public function testFeedTitleIfMissingThrowsExceptionIfDescriptionAlsoMissing()
+    public function testEntryTitleIfMissingThrowsExceptionIfDescriptionAlsoMissing()
     {
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validEntry->remove('title');
         $this->_validEntry->remove('description');
         $atomFeed->render();
+    }
+    
+    public function testEntryTitleCharDataEncoding()
+    {
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->_validEntry->setTitle('<>&\'"áéíóú');
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
+        $entry = $feed->current();
+        $this->assertEquals('<>&\'"áéíóú', $entry->getTitle());
     }
 
     public function testEntrySummaryDescriptionHasBeenSet()
@@ -120,12 +129,21 @@ class Zend_Feed_Writer_Renderer_Entry_RssTest extends PHPUnit_Framework_TestCase
     /**
      * @expectedException Zend_Feed_Exception
      */
-    public function testFeedDescriptionIfMissingThrowsExceptionIfAlsoNoTitle()
+    public function testEntryDescriptionIfMissingThrowsExceptionIfAlsoNoTitle()
     {
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $this->_validEntry->remove('description');
         $this->_validEntry->remove('title');
         $atomFeed->render();
+    }
+    
+    public function testEntryDescriptionCharDataEncoding()
+    {
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->_validEntry->setDescription('<>&\'"áéíóú');
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
+        $entry = $feed->current();
+        $this->assertEquals('<>&\'"áéíóú', $entry->getDescription());
     }
     
     public function testEntryContentHasBeenSet()
@@ -135,6 +153,15 @@ class Zend_Feed_Writer_Renderer_Entry_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $this->assertEquals('This is test entry content.', $entry->getContent());
+    }
+    
+    public function testEntryContentCharDataEncoding()
+    {
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $this->_validEntry->setContent('<>&\'"áéíóú');
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
+        $entry = $feed->current();
+        $this->assertEquals('<>&\'"áéíóú', $entry->getContent());
     }
 
     public function testEntryUpdatedDateHasBeenSet()
@@ -173,6 +200,16 @@ class Zend_Feed_Writer_Renderer_Entry_RssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array('name'=>'Jane'), $entry->getAuthor());
     }
     
+    public function testEntryAuthorCharDataEncoding()
+    {
+        $this->_validEntry->addAuthor('<>&\'"áéíóú', 'jane@example.com', 'http://www.example.com/jane');
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
+        $entry = $feed->current();
+        $author = $entry->getAuthor();
+        $this->assertEquals(array('name'=>'<>&\'"áéíóú'), $entry->getAuthor());
+    }
+    
     public function testEntryHoldsAnyEnclosureAdded()
     {
         $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
@@ -203,7 +240,7 @@ class Zend_Feed_Writer_Renderer_Entry_RssTest extends PHPUnit_Framework_TestCase
         $this->markTestIncomplete('Untest due to ZFR potential bug');
     }
 
-    public function testFeedIdDefaultIsUsedIfNotSetByHand()
+    public function testEntryIdDefaultIsUsedIfNotSetByHand()
     {
         $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
         $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
@@ -241,6 +278,41 @@ class Zend_Feed_Writer_Renderer_Entry_RssTest extends PHPUnit_Framework_TestCase
         // Skipped assertion is because RSS has no facility to show Atom feeds without an extension
         $this->assertEquals('http://www.example.com/rss/id/1', $entry->getCommentFeedLink('rss'));
         //$this->assertEquals('http://www.example.com/atom/id/1', $entry->getCommentFeedLink('atom'));
+    }
+    
+    public function testCategoriesCanBeSet()
+    {
+        $this->_validEntry->addCategories(array(
+            array('term'=>'cat_dog', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2')
+        ));
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
+        $entry = $feed->current();
+        $expected = array(
+            array('term'=>'cat_dog', 'label' => 'cat_dog', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2', 'label' => 'cat_dog2', 'scheme' => null)
+        );
+        $this->assertEquals($expected, (array) $entry->getCategories());
+    }
+    
+    /**
+     * @group ZFWCHARDATA01
+     */
+    public function testCategoriesCharDataEncoding()
+    {
+        $this->_validEntry->addCategories(array(
+            array('term'=>'<>&\'"áéíóú', 'label' => 'Cats & Dogs', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2')
+        ));
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Rss($this->_validWriter);
+        $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
+        $entry = $feed->current();
+        $expected = array(
+            array('term'=>'<>&\'"áéíóú', 'label' => '<>&\'"áéíóú', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2', 'label' => 'cat_dog2', 'scheme' => null)
+        );
+        $this->assertEquals($expected, (array) $entry->getCategories());
     }
 
 }

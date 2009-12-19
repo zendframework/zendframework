@@ -73,10 +73,7 @@ class Zend_Feed_Writer_Extension_Content_Renderer_Entry
         }
         $element = $dom->createElement('content:encoded');
         $root->appendChild($element);
-        $element->nodeValue = htmlentities(
-            $this->getDataContainer()->getContent(),
-            ENT_QUOTES,
-            $this->getDataContainer()->getEncoding()
-        );
+        $cdata = $dom->createCDATASection($content);
+        $element->appendChild($cdata);
     }
 }

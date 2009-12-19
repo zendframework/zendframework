@@ -109,6 +109,18 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends PHPUnit_Framework_TestCase
         $this->_validWriter->remove('title');
         $atomFeed->render();
     }
+    
+    /**
+     * @group ZFWCHARDATA01
+     */
+    public function testFeedTitleCharDataEncoding()
+    {
+        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
+        $this->_validWriter->setTitle('<>&\'"áéíóú');
+        $atomFeed->render();
+        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $this->assertEquals('<>&\'"áéíóú', $feed->getTitle());
+    }
 
     public function testFeedSubtitleHasBeenSet()
     {
@@ -123,6 +135,18 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends PHPUnit_Framework_TestCase
         $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $this->_validWriter->remove('description');
         $atomFeed->render();
+    }
+    
+    /**
+     * @group ZFWCHARDATA01
+     */
+    public function testFeedSubtitleCharDataEncoding()
+    {
+        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
+        $this->_validWriter->setDescription('<>&\'"áéíóú');
+        $atomFeed->render();
+        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $this->assertEquals('<>&\'"áéíóú', $feed->getDescription());
     }
 
     public function testFeedUpdatedDateHasBeenSet()
@@ -165,6 +189,18 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends PHPUnit_Framework_TestCase
         $atomFeed->render();
         $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
         $this->assertEquals('Zend_Feed_Writer', $feed->getGenerator());
+    }
+    
+    /**
+     * @group ZFWCHARDATA01
+     */
+    public function testFeedGeneratorCharDataEncoding()
+    {
+        $this->_validWriter->setGenerator('<>&\'"áéíóú', '1.00', 'http://www.example.com');
+        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
+        $atomFeed->render();
+        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $this->assertEquals('<>&\'"áéíóú', $feed->getGenerator());
     }
 
     public function testFeedLanguageHasBeenSet()
@@ -247,6 +283,26 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends PHPUnit_Framework_TestCase
             'uri'=>'http://www.example.com/joe'), $feed->getAuthor());
     }
     
+    /**
+     * @group ZFWCHARDATA01
+     */
+    public function testFeedAuthorCharDataEncoding()
+    {
+        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
+        $this->_validWriter->remove('authors');
+        $this->_validWriter->addAuthor(array(
+            'email'=>'<>&\'"áéíóú',
+            'name'=>'<>&\'"áéíóú',
+            'uri'=>'http://www.example.com/joe'));
+        $atomFeed->render();
+        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $author = $feed->getAuthor();
+        $this->assertEquals(array(
+            'email'=>'<>&\'"áéíóú',
+            'name'=>'<>&\'"áéíóú',
+            'uri'=>'http://www.example.com/joe'), $feed->getAuthor());
+    }
+    
     public function testFeedAuthorIfNotSetThrowsExceptionIfAnyEntriesAlsoAreMissingAuthors()
     {
         $this->markTestIncomplete('Not yet implemented...');
@@ -292,6 +348,15 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright © 2009 Paddy', $feed->getCopyright());
     }
     
+    public function testCopyrightCharDataEncoding()
+    {
+        $this->_validWriter->setCopyright('<>&\'"áéíóú');
+        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
+        $atomFeed->render();
+        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $this->assertEquals('<>&\'"áéíóú', $feed->getCopyright());
+    }
+    
     public function testCategoriesCanBeSet()
     {
         $this->_validWriter->addCategories(array(
@@ -308,9 +373,22 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, (array) $feed->getCategories());
     }
     
-    /**
-     * @group ZFW030
-     */
+    public function testCategoriesCharDataEncoding()
+    {
+        $this->_validWriter->addCategories(array(
+            array('term'=>'cat_dog', 'label' => '<>&\'"áéíóú', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2')
+        ));
+        $atomFeed = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
+        $atomFeed->render();
+        $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
+        $expected = array(
+            array('term'=>'cat_dog', 'label' => '<>&\'"áéíóú', 'scheme' => 'http://example.com/schema1'),
+            array('term'=>'cat_dog2', 'label' => 'cat_dog2', 'scheme' => null)
+        );
+        $this->assertEquals($expected, (array) $feed->getCategories());
+    }
+    
     public function testHubsCanBeSet()
     {
         $this->_validWriter->addHubs(

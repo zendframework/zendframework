@@ -67,6 +67,7 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         }
         $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
         $this->_dom->formatOutput = true;
+        $this->_dom->substituteEntities = false;
         $rss = $this->_dom->createElement('rss');
         $this->setRootElement($rss);
         $rss->setAttribute('version', '2.0');
@@ -153,11 +154,8 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
 
         $title = $dom->createElement('title');
         $root->appendChild($title);
-        $title->nodeValue = htmlentities(
-            $this->getDataContainer()->getTitle(),
-            ENT_QUOTES,
-            $this->getDataContainer()->getEncoding()
-        );
+        $text = $dom->createTextNode($this->getDataContainer()->getTitle());
+        $title->appendChild($text);
     }
 
     /**
@@ -183,11 +181,8 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         }
         $subtitle = $dom->createElement('description');
         $root->appendChild($subtitle);
-        $subtitle->nodeValue = htmlentities(
-            $this->getDataContainer()->getDescription(),
-            ENT_QUOTES,
-            $this->getDataContainer()->getEncoding()
-        );
+        $text = $dom->createTextNode($this->getDataContainer()->getDescription());
+        $subtitle->appendChild($text);
     }
 
     /**
@@ -205,8 +200,10 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
 
         $updated = $dom->createElement('pubDate');
         $root->appendChild($updated);
-        $updated->nodeValue = $this->getDataContainer()->getDateModified()
-            ->get(Zend_Date::RSS);
+        $text = $dom->createTextNode(
+            $this->getDataContainer()->getDateModified()->get(Zend_Date::RSS)
+        );
+        $updated->appendChild($text);
     }
 
     /**
@@ -233,7 +230,8 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         if (array_key_exists('uri', $gdata)) {
             $name .= ' (' . $gdata['uri'] . ')';
         }
-        $generator->nodeValue = $name;
+        $text = $dom->createTextNode($name);
+        $generator->appendChild($text);
     }
 
     /**
@@ -260,7 +258,8 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         }
         $link = $dom->createElement('link');
         $root->appendChild($link);
-        $link->nodeValue = $value;
+        $text = $dom->createTextNode($value);
+        $link->appendChild($text);
         if (!Zend_Uri::check($value)) {
             $link->setAttribute('isPermaLink', 'false');
         }
@@ -285,7 +284,8 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
             if (array_key_exists('email', $data)) {
                 $name = $data['email'] . ' (' . $data['name'] . ')';
             }
-            $author->nodeValue = $name;
+            $text = $dom->createTextNode($name);
+            $author->appendChild($text);
             $root->appendChild($author);
         }
     }
@@ -305,7 +305,8 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
         }
         $copy = $dom->createElement('copyright');
         $root->appendChild($copy);
-        $copy->nodeValue = $copyright;
+        $text = $dom->createTextNode($copyright);
+        $copy->appendChild($text);
     }
     
     /**
@@ -361,7 +362,8 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
             if (isset($cat['scheme'])) {
                 $category->setAttribute('domain', $cat['scheme']);
             }
-            $category->nodeValue = $cat['term'];
+            $text = $dom->createTextNode($cat['term']);
+            $category->appendChild($text);
             $root->appendChild($category);
         }
     }

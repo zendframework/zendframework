@@ -66,6 +66,7 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
         $this->_setAuthors($this->_dom, $entry);
         $this->_setEnclosure($this->_dom, $entry);
         $this->_setContent($this->_dom, $entry);
+        $this->_setCategories($this->_dom, $entry);
 
         foreach ($this->_extensions as $ext) {
             $ext->setType($this->getType());
@@ -150,8 +151,10 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
 
         $updated = $dom->createElement('updated');
         $root->appendChild($updated);
-        $updated->nodeValue = $this->getDataContainer()->getDateModified()
-            ->get(Zend_Date::ISO_8601);
+        $text = $dom->createTextNode(
+            $this->getDataContainer()->getDateModified()->get(Zend_Date::ISO_8601)
+        );
+        $updated->appendChild($text);
     }
     
     /**
@@ -166,10 +169,12 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
         if (!$this->getDataContainer()->getDateCreated()) {
             return;
         }
-        $updated = $dom->createElement('published');
-        $root->appendChild($updated);
-        $updated->nodeValue = $this->getDataContainer()->getDateCreated()
-            ->get(Zend_Date::ISO_8601);
+        $el = $dom->createElement('published');
+        $root->appendChild($el);
+        $text = $dom->createTextNode(
+            $this->getDataContainer()->getDateCreated()->get(Zend_Date::ISO_8601)
+        );
+        $el->appendChild($text);
     }
     
     /**
@@ -194,16 +199,19 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
             $name = $this->_dom->createElement('name');
             $author->appendChild($name);
             $root->appendChild($author);
-            $name->nodeValue = $data['name'];
+            $text = $dom->createTextNode($data['name']);
+            $name->appendChild($text);
             if (array_key_exists('email', $data)) {
                 $email = $this->_dom->createElement('email');
                 $author->appendChild($email);
-                $email->nodeValue = $data['email'];
+                $text = $dom->createTextNode($data['email']);
+                $email->appendChild($text);
             }
             if (array_key_exists('uri', $data)) {
                 $uri = $this->_dom->createElement('uri');
                 $author->appendChild($uri);
-                $uri->nodeValue = $data['uri'];
+                $text = $dom->createTextNode($data['uri']);
+                $uri->appendChild($text);
             }
         }
     }
@@ -277,7 +285,8 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
         }
         $id = $dom->createElement('id');
         $root->appendChild($id);
-        $id->nodeValue = $this->getDataContainer()->getId();
+        $text = $dom->createTextNode($this->getDataContainer()->getId());
+        $id->appendChild($text);
     }
     
     /**
@@ -309,5 +318,33 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
         $cdata = $dom->createCDATASection($content);
         $element->appendChild($cdata);
         $root->appendChild($element);
+    }
+    
+    /**
+     * Set entry cateories 
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
+    protected function _setCategories(DOMDocument $dom, DOMElement $root)
+    {
+        $categories = $this->getDataContainer()->getCategories();
+        if (!$categories) {
+            return;
+        }
+        foreach ($categories as $cat) {
+            $category = $dom->createElement('category');
+            $category->setAttribute('term', $cat['term']);
+            if (isset($cat['label'])) {
+                $category->setAttribute('label', $cat['label']);
+            } else {
+                $category->setAttribute('label', $cat['term']);
+            }
+            if (isset($cat['scheme'])) {
+                $category->setAttribute('scheme', $cat['scheme']);
+            }
+            $root->appendChild($category);
+        }
     }
 }

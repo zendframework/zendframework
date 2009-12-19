@@ -182,7 +182,10 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
         $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $author = $entry->getAuthor();
-        $this->assertEquals('jane@example.com (Jane)', $entry->getAuthor());
+        $this->assertEquals(array(
+            'name'=>'Jane',
+            'email'=>'jane@example.com',
+            'uri'=>'http://www.example.com/jane'), $entry->getAuthor());
     }
     
     public function testEntryHoldsAnyEnclosureAdded()

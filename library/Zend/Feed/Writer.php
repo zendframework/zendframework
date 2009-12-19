@@ -259,7 +259,9 @@ class Zend_Feed_Writer
     }
     
     /**
-     * Replaces XML special characters with entities.
+     * Replaces XML special characters with entities. This is a generally
+     * safe XML encoding targeting the <, > and & characters. Quotes are
+     * left unencoded. It is not suitable for RSS 2.0 character data.
      *
      * @param string $string
      * @param string $encoding
@@ -267,9 +269,26 @@ class Zend_Feed_Writer
      */
     public static function xmlentities($string, $encoding)
     {
-        return str_replace('&#039;', '&apos;', htmlspecialchars(
-            $string, ENT_QUOTES, $encoding
-        ));
+        return htmlspecialchars($string, ENT_NOQUOTES, $encoding);
+    }
+    
+    /**
+     * Replaces the characters <, > and & with hexadecimal entities as
+     * recommended for textual character data not representing HTML in RSS 2.0.
+     * Per the published RSS Best Practices Profile this attempts to maximise
+     * compatibility with various feed parsers/readers.
+     *
+     * @param string $string
+     * @param string $encoding
+     * @return string
+     */
+    public static function textentities($string, $encoding)
+    {
+        return str_replace(
+            array('&amp;', '&lt;', '&gt;'),
+            array('&#x26;', '&#x3C;', '&#x3E;'),
+            htmlspecialchars($string, ENT_NOQUOTES, $encoding)
+        );
     }
 
 }

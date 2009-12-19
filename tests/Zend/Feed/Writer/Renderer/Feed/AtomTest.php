@@ -241,7 +241,10 @@ class Zend_Feed_Writer_Renderer_Feed_AtomTest extends PHPUnit_Framework_TestCase
         $atomFeed->render();
         $feed = Zend_Feed_Reader::importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
-        $this->assertEquals('joe@example.com (Joe)', $feed->getAuthor());
+        $this->assertEquals(array(
+            'email'=>'joe@example.com',
+            'name'=>'Joe',
+            'uri'=>'http://www.example.com/joe'), $feed->getAuthor());
     }
     
     public function testFeedAuthorIfNotSetThrowsExceptionIfAnyEntriesAlsoAreMissingAuthors()

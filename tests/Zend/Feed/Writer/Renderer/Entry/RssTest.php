@@ -170,7 +170,7 @@ class Zend_Feed_Writer_Renderer_Entry_RssTest extends PHPUnit_Framework_TestCase
         $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
         $author = $entry->getAuthor();
-        $this->assertEquals('Jane', $entry->getAuthor());
+        $this->assertEquals(array('name'=>'Jane'), $entry->getAuthor());
     }
     
     public function testEntryHoldsAnyEnclosureAdded()

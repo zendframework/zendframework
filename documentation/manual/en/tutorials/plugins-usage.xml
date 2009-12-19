@@ -135,7 +135,7 @@ $element->addValidator('NotEmpty')
         </para>
 
         <programlisting language="php"><![CDATA[
-// Zend_View::addHelperPath() utilizes the PluginLoader; however, it inverts 
+// Zend_View::addHelperPath() utilizes the PluginLoader; however, it inverts
 // the arguments, as it provides a default value of "Zend_View_Helper" for the
 // plugin prefix.
 //

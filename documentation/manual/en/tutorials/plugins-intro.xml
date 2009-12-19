@@ -25,7 +25,7 @@
         <listitem>
             <para>
                 Related plugins will share a common class prefix. For instance, if you have created
-                a number of view helpers, they might all share the class prefix "Foo_View_Helper_". 
+                a number of view helpers, they might all share the class prefix "Foo_View_Helper_".
             </para>
         </listitem>
 

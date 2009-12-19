@@ -11,7 +11,7 @@
         <methodname>render()</methodname> will then take this string and decide to either replace
         it, append to it, or prepend it. This allows you to have a chain of decorators -- which
         allows you to create decorators that render only a subset of the element's metadata, and
-        then layer these decorators to build the full markup for the element. 
+        then layer these decorators to build the full markup for the element.
     </para>
 
     <para>

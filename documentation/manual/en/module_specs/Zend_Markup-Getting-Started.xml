@@ -8,22 +8,22 @@
         and <acronym>HTML</acronym> renderer. The priciples discussed can be adapted to other
         parsers and renderers.
     </para>
-    
+
     <example id="zend.markup.getting-started.basic-usage">
         <title>Basic Zend_Markup Usage</title>
-        
+
         <para>
             We will first instantiate a <classname>Zend_Markup_Renderer_Html</classname> object
             using the <methodname>Zend_Markup::factory()</methodname> method.  This will also create
             a <classname>Zend_Markup_Parser_Bbcode</classname> object which will be added to the
             renderer object.
         </para>
-        
+
         <para>
             Afther that, we will use the <methodname>render()</methodname> method to convert a piece
             of BBCode to <acronym>HTML</acronym>.
         </para>
-        
+
         <programlisting language="php"><![CDATA[
 // Creates instance of Zend_Markup_Renderer_Html,
 // with Zend_Markup_Parser_BbCode as its parser
@@ -33,15 +33,15 @@ echo $bbcode->render('[b]bold text[/b] and [i]cursive text[/i]');
 // Outputs: '<strong>bold text</strong> and <em>cursive text</em>'
 ]]></programlisting>
     </example>
-    
+
     <example id="zend.markup.getting-started.complicated-example">
         <title>A more complicated example of Zend_Markup</title>
-        
+
         <para>
             This time, we will do exactly the same as above, but with more complicated BBCode
             markup.
         </para>
-    
+
         <programlisting language="php"><![CDATA[
 $bbcode = Zend_Markup::factory('Bbcode');
 
@@ -62,7 +62,7 @@ Should output something like:
 */
 ]]></programlisting>
     </example>
-    
+
     <example id="zend.markup.getting-started.incorrect-input">
         <title>Processing incorrect input</title>
 
@@ -73,7 +73,7 @@ Should output something like:
             <classname>Zend_Markup</classname> corrects input that is nested incorrectly, and also
             closes tags that were not closed:
         </para>
-        
+
         <programlisting language="php"><![CDATA[
 $bbcode = Zend_Markup::factory('Bbcode');
 

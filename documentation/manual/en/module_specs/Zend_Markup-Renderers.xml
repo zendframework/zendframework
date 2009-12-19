@@ -7,17 +7,17 @@
         <classname>Zend_Markup</classname> is currently shipped with one renderer, the
         <acronym>HTML</acronym> renderer.
     </para>
-    
+
     <sect2 id="zend.markup.renderers.add">
         <title>Adding your own tags</title>
-        
+
         <para>
             By adding your own tags, you can add your own functionality to the
             <classname>Zend_Markup</classname> renderers. With the tag structure, you can add about
             any functionality you want. From simple tags, to complicated tag structures. A simple
             example for a 'foo' tag:
         </para>
-        
+
         <programlisting language="php"><![CDATA[
 // Creates instance of Zend_Markup_Renderer_Html,
 // with Zend_Markup_Parser_BbCode as its parser
@@ -33,8 +33,8 @@ $bbcode->addTag(
     Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE
         | Zend_Markup_Renderer_RendererAbstract::TAG_NORMAL,
     array(
-        'start' => '-bar-', 
-        'end'   => '-baz-', 
+        'start' => '-bar-',
+        'end'   => '-baz-',
         'group' => 'inline',
     )
 );
@@ -42,7 +42,7 @@ $bbcode->addTag(
 // now, this will output: 'my -bar-tag-baz-'
 echo $bbcode->render('my [foo]tag[/foo]');
 ]]></programlisting>
-        
+
         <para>
             Please note that creating your own tags only makes sense when your parser also supports
             it with a tag structure. Currently, only BBCode supports this. Textile doesn't have

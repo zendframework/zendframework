@@ -26,7 +26,7 @@ $doc->addField(Zend_Search_Lucene_Field::unStored('contents', $docBody));
 $doc->addField(Zend_Search_Lucene_Field::binary('avatar', $avatarData));
 ]]></programlisting>
     </example>
-    
+
     <para>
         The second method is to load it from <acronym>HTML</acronym> or Microsoft Office 2007 files:
     </para>

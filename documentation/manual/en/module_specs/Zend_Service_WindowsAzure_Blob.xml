@@ -163,16 +163,16 @@ $storageClient->setContainerAcl('testcontainer', Zend_Service_WindowsAzure_Stora
             </example>
         </sect4>
     </sect3>
-  
+
     <sect3 id="zend.service.windowsazure.storage.blob.root">
         <title>Root container</title>
 
         <para>
-            Windows Azure Blob Storage provides support to work with a "root container". 
-            This means that a blob can be stored in the root of your storage account, 
+            Windows Azure Blob Storage provides support to work with a "root container".
+            This means that a blob can be stored in the root of your storage account,
             i.e. <code>http://myaccount.blob.core.windows.net/somefile.txt</code>.
         </para>
-        
+
         <para>
             In order to work with the root container, it should first be created using the
             <methodname>createContainer()</methodname> method, naming the container
@@ -180,7 +180,7 @@ $storageClient->setContainerAcl('testcontainer', Zend_Service_WindowsAzure_Stora
             with the container name set to <varname>$root</varname>.
         </para>
     </sect3>
-  
+
     <sect3 id="zend.service.windowsazure.storage.blob.wrapper">
         <title>Blob storage stream wrapper</title>
 
@@ -203,7 +203,7 @@ $fileHandle = fopen('azure://mycontainer/myfile.txt', 'r');
 fclose($fileHandle);
 ]]></programlisting>
         </example>
-    
+
         <para>
             In order to do this, the Windows Azure SDK for PHP blob storage client
             must be registered as a stream wrapper. This can be done by calling the
@@ -222,7 +222,7 @@ $storageClient->registerStreamWrapper(); // registers azure:// on this storage c
 $storageClient->registerStreamWrapper('blob://'); // regiters blob:// on this storage client
 ]]></programlisting>
         </example>
-    
+
         <para>
             To unregister the stream wrapper, the <methodname>unregisterStreamWrapper()</methodname>
             method can be used.
@@ -240,20 +240,20 @@ $storageClient->registerStreamWrapper('blob://'); // regiters blob:// on this st
             assigned on a container or a blob and given to a specific client using an URL-based
             model.
         </para>
-        
+
         <para>
             An example would be the following signature:
         </para>
-        
+
         <literallayout>
 http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A06%3A17Z&amp;se=2009-08-17T09%3A56%3A17Z&amp;sr=c&amp;sp=w&amp;sig=hscQ7Su1nqd91OfMTwTkxabhJSaspx%2BD%2Fz8UqZAgn9s%3D
         </literallayout>
-        
+
         <para>
             The above signature gives write access to the "phpazuretestshared1"
             container of the "phpstorage" account.
         </para>
-    
+
         <sect4 id="zend.service.windowsazure.storage.blob.sharedaccesssig.generate">
             <title>Generating a Shared Access Signature</title>
 
@@ -264,7 +264,7 @@ http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A0
                 <classname>Zend_Service_WindowsAzure_Storage_Blob</classname> storage client can be
                 used.
             </para>
-            
+
             <para>
                 The following example code will generate a Shared Access Signature for write access
                 in a container named "container1", within a timeframe of 3000 seconds.
@@ -278,14 +278,14 @@ $storageClient   = new Zend_Service_WindowsAzure_Storage_Blob();
 $sharedAccessUrl = storageClient->generateSharedAccessUrl(
     'container1',
     '',
-    'c', 
+    'c',
     'w',
     $storageClient ->isoDate(time() - 500),
     $storageClient ->isoDate(time() + 3000)
 );
 ]]></programlisting>
             </example>
-            
+
             <para>
                 The following example code will generate a Shared Access Signature for read access
                 in a blob named <filename>test.txt</filename> in a container named "container1"
@@ -300,7 +300,7 @@ $storageClient   = new Zend_Service_WindowsAzure_Storage_Blob();
 $sharedAccessUrl = storageClient->generateSharedAccessUrl(
     'container1',
     'test.txt',
-    'b', 
+    'b',
     'r',
     $storageClient ->isoDate(time() - 500),
     $storageClient ->isoDate(time() + 3000)
@@ -308,7 +308,7 @@ $sharedAccessUrl = storageClient->generateSharedAccessUrl(
 ]]></programlisting>
             </example>
         </sect4>
-        
+
         <sect4 id="zend.service.windowsazure.storage.blob.sharedaccesssig.consume">
             <title>Working with Shared Access Signatures from others</title>
 
@@ -317,11 +317,11 @@ $sharedAccessUrl = storageClient->generateSharedAccessUrl(
                 Windows Azure SDK for PHP to work with the addressed resource.  For example, the
                 following signature can be retrieved from the owner of a storage account:
             </para>
-            
+
             <literallayout>
 http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A06%3A17Z&amp;se=2009-08-17T09%3A56%3A17Z&amp;sr=c&amp;sp=w&amp;sig=hscQ7Su1nqd91OfMTwTkxabhJSaspx%2BD%2Fz8UqZAgn9s%3D
             </literallayout>
-            
+
             <para>
                 The above signature gives write access to the "phpazuretestshared1" "container" of
                 the phpstorage account. Since the shared key for the account is not known, the
@@ -334,19 +334,19 @@ http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A0
                 <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob(
     'blob.core.windows.net', 'phpstorage', ''
-); 
-$storageClient->setCredentials( 
-    new Zend_Service_WindowsAzure_Credentials_SharedAccessSignature() 
 );
-$storageClient->getCredentials()->setPermissionSet(array( 
-    'http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A06%3A17Z&se=2009-08-17T09%3A56%3A17Z&sr=c&sp=w&sig=hscQ7Su1nqd91OfMTwTkxabhJSaspx%2BD%2Fz8UqZAgn9s%3D' 
+$storageClient->setCredentials(
+    new Zend_Service_WindowsAzure_Credentials_SharedAccessSignature()
+);
+$storageClient->getCredentials()->setPermissionSet(array(
+    'http://phpstorage.blob.core.windows.net/phpazuretestshared1?st=2009-08-17T09%3A06%3A17Z&se=2009-08-17T09%3A56%3A17Z&sr=c&sp=w&sig=hscQ7Su1nqd91OfMTwTkxabhJSaspx%2BD%2Fz8UqZAgn9s%3D'
 ));
 $storageClient->putBlob(
     'phpazuretestshared1', 'NewBlob.txt', 'C:\Files\dataforazure.txt'
 );
 ]]></programlisting>
             </example>
-            
+
             <para>
                 Note that there was no explicit permission to write to a specific blob. Instead, the
                 Windows Azure SDK for PHP determined that a permission was required to either write

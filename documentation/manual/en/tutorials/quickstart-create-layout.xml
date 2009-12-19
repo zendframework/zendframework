@@ -164,12 +164,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 // application/layouts/scripts/layout.phtml
 
 echo $this->doctype() ?>
-<html xmlns="http://www.w3.org/1999/xhtml"> 
-<head>  
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Zend Framework Quickstart Application</title>
   <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
-</head> 
+</head>
 <body>
 <div id="header" style="background-color: #EEEEEE; height: 30px;">
     <div id="header-logo" style="float: left">
@@ -177,8 +177,8 @@ echo $this->doctype() ?>
     </div>
     <div id="header-navigation" style="float: right">
         <a href="<?php echo $this->url(
-            array('controller'=>'guestbook'), 
-            'default', 
+            array('controller'=>'guestbook'),
+            'default',
             true) ?>">Guestbook</a>
     </div>
 </div>

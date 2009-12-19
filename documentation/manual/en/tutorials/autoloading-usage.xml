@@ -147,11 +147,11 @@ $loader->setFallbackAutoloader(true);
     </para>
 
     <programlisting language="php"><![CDATA[
-// Append function 'my_autoloader' to the stack, 
+// Append function 'my_autoloader' to the stack,
 // to manage classes with the prefix 'My_':
 $loader->pushAutoloader('my_autoloader', 'My_');
 
-// Prepend static method Foo_Loader::autoload() to the stack, 
+// Prepend static method Foo_Loader::autoload() to the stack,
 // to manage classes with the prefix 'Foo_':
 $loader->unshiftAutoloader(array('Foo_Loader', 'autoload'), 'Foo_');
 ]]></programlisting>

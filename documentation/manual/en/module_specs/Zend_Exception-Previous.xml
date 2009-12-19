@@ -23,18 +23,18 @@ try {
     $db->query($sql);
 } catch (Zend_Db_Statement_Exception $e) {
     if ($e->getPrevious()) {
-        echo '[' . get_class($e) 
-            . '] has the previous exception of [' 
-            . get_class($e->getPrevious()) 
+        echo '[' . get_class($e)
+            . '] has the previous exception of ['
+            . get_class($e->getPrevious())
             . ']' . PHP_EOL;
     } else {
-        echo '[' . get_class($e) 
-            . '] does not have a previous exception' 
+        echo '[' . get_class($e)
+            . '] does not have a previous exception'
             . PHP_EOL;
     }
 
-    echo $e; 
-    // displays all exceptions starting by the first thrown 
+    echo $e;
+    // displays all exceptions starting by the first thrown
     // exception if available.
 }
 ]]></programlisting>

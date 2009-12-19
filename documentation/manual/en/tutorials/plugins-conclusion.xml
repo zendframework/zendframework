@@ -6,7 +6,7 @@
     <para>
         Understanding the concept of prefix paths and overriding existing plugins will help you with
         your understanding of many components within the framework. Plugins are used in a variety of
-        places: 
+        places:
     </para>
 
     <itemizedlist>

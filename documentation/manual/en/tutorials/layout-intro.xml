@@ -18,7 +18,7 @@
     <?php else: ?>
     <?php foreach ($this->users as $user): ?>
     <li>
-        <?php echo $this->escape($user->fullname) ?> 
+        <?php echo $this->escape($user->fullname) ?>
         (<?php echo $this->escape($user->email) ?>)
     </li>
     <?php endforeach ?>

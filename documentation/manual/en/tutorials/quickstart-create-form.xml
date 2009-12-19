@@ -48,8 +48,8 @@ class Default_Form_Guestbook extends Zend_Form
             'label'      => 'Please enter the 5 letters displayed below:',
             'required'   => true,
             'captcha'    => array(
-                'captcha' => 'Figlet', 
-                'wordLen' => 5, 
+                'captcha' => 'Figlet',
+                'wordLen' => 5,
                 'timeout' => 300
             )
         ));
@@ -118,7 +118,7 @@ class GuestbookController extends Zend_Controller_Action
                 return $this->_helper->redirector('index');
             }
         }
-        
+
         $this->view->form = $form;
     }
 }
@@ -133,7 +133,7 @@ class GuestbookController extends Zend_Controller_Action
 
 Please use the form below to sign our guestbook!
 
-<?php 
+<?php
 $this->form->setAction($this->url());
 echo $this->form;
 ]]></programlisting>

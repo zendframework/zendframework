@@ -66,7 +66,7 @@
             </para>
         </listitem>
 
-		<listitem>
+        <listitem>
             <para>
                 <command>setCharset($charset)</command>
             </para>
@@ -152,8 +152,8 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
 ]]></programlisting>
 
         <para>
-            If you are serving an HTML5 document, you should provide the character 
-			set like this:
+            If you are serving an HTML5 document, you should provide the character
+            set like this:
         </para>
 
         <programlisting language="php"><![CDATA[

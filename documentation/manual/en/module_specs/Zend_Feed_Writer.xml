@@ -14,7 +14,7 @@
             offer a simple Extension system which allows for any extension/module for either of
             these two specifications to be implemented if they are not provided out of the box.
         </para>
-        
+
         <para>
             In many ways, <classname>Zend_Feed_Writer</classname> is the inverse of
             <classname>Zend_Feed_Reader</classname>. Where <classname>Zend_Feed_Reader</classname>
@@ -23,7 +23,7 @@
             mutators. This ensures the API won't pose a learning curve to anyone familiar with
             <classname>Zend_Feed_Reader</classname>.
         </para>
-        
+
         <para>
             As a result of this design, the rest may even be obvious. Behind the scenes, data set on
             any <classname>Zend_Feed_Reader</classname> object is translated at render time onto a
@@ -33,23 +33,23 @@
             the most obvious being the ability to export the <classname>DOMDocument</classname> for
             additional processing and relying on PHP DOM for correct and valid rendering.
         </para>
-        
+
         <para>
             As with <classname>Zend_Feed_Reader</classname>, <classname>Zend_Feed_Writer</classname>
             is a standalone replacement for <classname>Zend_Feed</classname>'s Builder architecture
             and is not compatible with those classes.
         </para>
-        
+
     </sect2>
-    
+
     <sect2 id="zend.feed.writer.architecture">
         <title>Architecture</title>
-        
+
         <para>
             The architecture of <classname>Zend_Feed_Writer</classname> is very simple. It has two
             core sets of classes: containers and renderers.
         </para>
-        
+
         <para>
             The containers include the <classname>Zend_Feed_Writer_Feed</classname> and
             <classname>Zend_Feed_Writer_Entry</classname> classes. The Entry classes can be attached
@@ -60,7 +60,7 @@
             methods to allow for fast rendering and export of the final feed, and these can be
             reused at will.
         </para>
-        
+
         <para>
             While there are two data containers, there are four renderers - two matching container
             renderers per support feed type. The renderer accept a container, and based on its
@@ -70,7 +70,7 @@
             <classname>Exception</classname>s, this removes the default safeguard of ensuring you
             have sufficient data set to render a wholly valid feed.
         </para>
-        
+
         <para>
             Due to the system being divided between data containers and renderers, it can make
             Extensions somewhat interesting. A typical Extension offering namespaced feed and entry
@@ -81,15 +81,15 @@
             of this section.
         </para>
     </sect2>
-    
+
     <sect2 id="zend.feed.writer.getting.started">
         <title>Getting Started</title>
-    
+
         <para>
             Using <classname>Zend_Feed_Reader</classname> is as simple as setting data and
             triggering the renderer. Here is an example to generate a minimal Atom 1.0 feed.
         </para>
-        
+
         <programlisting language="php"><![CDATA[
 /**
  * Create the parent feed
@@ -134,7 +134,7 @@ $out = $feed->export('atom');
         <para>
             The output rendered should be as follows:
         </para>
-        
+
         <programlisting language="xml">
 &#60;?xml version="1.0" encoding="utf-8"?&#62;
 &#60;feed xmlns="http://www.w3.org/2005/Atom"&#62;

@@ -11,15 +11,15 @@
 
     <example id="learning.lucene.index-opening.creation">
         <title>Lucene Index Creation</title>
-        
+
         <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::create($indexPath);
 ]]></programlisting>
     </example>
-    
+
     <example id="learning.lucene.index-opening.creation">
         <title>Lucene Index Opening</title>
-        
+
         <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 ]]></programlisting>

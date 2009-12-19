@@ -148,7 +148,7 @@ resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-testing.db"
 [development : production]
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-dev.db"
 ]]></programlisting>
-    
+
     <para>
         Your final configuration file should look like the following:
     </para>
@@ -163,7 +163,7 @@ bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
-resources.view[] = 
+resources.view[] =
 resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
 
@@ -226,13 +226,13 @@ CREATE INDEX "id" ON "guestbook" ("id");
 --
 -- You can begin populating the database with the following SQL statements.
 
-INSERT INTO guestbook (email, comment, created) VALUES 
-    ('ralph.schindler@zend.com', 
-    'Hello! Hope you enjoy this sample zf application!', 
+INSERT INTO guestbook (email, comment, created) VALUES
+    ('ralph.schindler@zend.com',
+    'Hello! Hope you enjoy this sample zf application!',
     DATETIME('NOW'));
-INSERT INTO guestbook (email, comment, created) VALUES 
-    ('foo@bar.com', 
-    'Baz baz baz, baz baz Baz baz baz - baz baz baz.', 
+INSERT INTO guestbook (email, comment, created) VALUES
+    ('foo@bar.com',
+    'Baz baz baz, baz baz Baz baz baz - baz baz baz.',
     DATETIME('NOW'));
 ]]></programlisting>
 
@@ -298,7 +298,7 @@ $bootstrap = $application->getBootstrap();
 $bootstrap->bootstrap('db');
 $dbAdapter = $bootstrap->getResource('db');
 
-// let the user know whats going on (we are actually creating a 
+// let the user know whats going on (we are actually creating a
 // database here)
 if ('testing' != APPLICATION_ENV) {
     echo 'Writing Database Guestbook in (control-c to cancel): ' . PHP_EOL;
@@ -314,7 +314,7 @@ if (file_exists($dbFile)) {
     unlink($dbFile);
 }
 
-// this block executes the actual statements that were loaded from 
+// this block executes the actual statements that were loaded from
 // the schema file.
 try {
     $schemaSql = file_get_contents(dirname(__FILE__) . '/schema.sqlite.sql');
@@ -327,7 +327,7 @@ try {
         echo 'Database Created';
         echo PHP_EOL;
     }
-    
+
     if ($withData) {
         $dataSql = file_get_contents(dirname(__FILE__) . '/data.sqlite.sql');
         // use the connection directly to load sql in batches
@@ -337,7 +337,7 @@ try {
             echo PHP_EOL;
         }
     }
-    
+
 } catch (Exception $e) {
     echo 'AN ERROR HAS OCCURED:' . PHP_EOL;
     echo $e->getMessage() . PHP_EOL;
@@ -362,7 +362,7 @@ return true;
 
     <programlisting language="text"><![CDATA[
 path/to/ZendFrameworkQuickstart/scripts$ php load.sqlite.php --withdata
-Writing Database Guestbook in (control-c to cancel): 
+Writing Database Guestbook in (control-c to cancel):
 1
 Database Created
 Data Loaded.
@@ -681,7 +681,7 @@ C:> zf.bat create controller guestbook
     <programlisting language="php"><![CDATA[
 // application/controllers/GuestbookController.php
 
-class GuestbookController extends Zend_Controller_Action 
+class GuestbookController extends Zend_Controller_Action
 {
     public function indexAction()
     {
@@ -703,8 +703,8 @@ class GuestbookController extends Zend_Controller_Action
     array(
         'controller' => 'guestbook',
         'action'     => 'sign'
-    ), 
-    'default', 
+    ),
+    'default',
     true) ?>">Sign Our Guestbook</a></p>
 
 Guestbook Entries: <br />
@@ -745,7 +745,7 @@ Guestbook Entries: <br />
         <programlisting language="php"><![CDATA[
 Usage: load.sqlite.php [ options ]
 --withdata|-w         Load database with sample data
---env|-e [  ]         Application environment for which to create database 
+--env|-e [  ]         Application environment for which to create database
                       (defaults to development)
 --help|-h             Help -- usage message)]]
 ]]></programlisting>

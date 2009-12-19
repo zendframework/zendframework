@@ -7,7 +7,7 @@
         In order to fully utilize <classname>Zend_Search_Lucene</classname>'s capabilities with
         maximum performance, you need to understand it's internal index structure.
     </para>
-    
+
     <para>
         An <emphasis>index</emphasis> is stored as a set of files within a single directory.
     </para>
@@ -26,7 +26,7 @@
     <para>
         Once an index segment file is created, it can't be updated.  New documents are added to new
         segments.  Deleted documents are only marked as deleted in an optional
-        <filename>&lt;segmentname&gt;.del</filename> file. 
+        <filename>&lt;segmentname&gt;.del</filename> file.
     </para>
 
     <para>
@@ -39,7 +39,7 @@
     </para>
 
     <para>
-        On the other hand, using several segments (one document per segment as a borderline case) 
+        On the other hand, using several segments (one document per segment as a borderline case)
         increases search time:
     </para>
 
@@ -59,8 +59,8 @@
     </itemizedlist>
 
     <para>
-        If the terms dictionary reaches a saturation point, then search through one segment is 
-        <emphasis>N</emphasis> times faster than search through <emphasis>N</emphasis> segments 
+        If the terms dictionary reaches a saturation point, then search through one segment is
+        <emphasis>N</emphasis> times faster than search through <emphasis>N</emphasis> segments
         in most cases.
     </para>
 

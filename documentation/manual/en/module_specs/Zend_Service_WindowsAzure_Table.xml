@@ -87,13 +87,13 @@ foreach ($result as $table) {
             has a primary key and a set of properties. A property is a named, typed-value pair,
             similar to a column.
         </para>
-        
+
         <para>
             The Table service does not enforce any schema for tables, so two entities in the same
             table may have different sets of properties. Developers may choose to enforce a schema
             on the client side. A table may contain any number of entities.
         </para>
-        
+
         <para>
             <classname>Zend_Service_WindowsAzure_Storage_Table</classname> provides 2 ways of
             working with entities:
@@ -127,12 +127,12 @@ class SampleEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
     * @azure Name
     */
     public $Name;
-    
+
     /**
     * @azure Age Edm.Int64
     */
     public $Age;
-    
+
     /**
     * @azure Visible Edm.Boolean
     */
@@ -210,12 +210,12 @@ class SampleEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
      * @azure Name
      */
     public $Name;
-    
+
     /**
      * @azure Age Edm.Int64
      */
     public $Age;
-    
+
     /**
      * @azure Visible Edm.Boolean
      */
@@ -404,7 +404,7 @@ $target->Name = 'Name'; // Will add property "Name" of type "Edm.String"
 $target->Age  = 25;     // Will add property "Age" of type "Edm.Int32"
 
 // Change type of property "Age" to "Edm.Int32":
-$target->setAzurePropertyType('Age', 'Edm.Int64'); 
+$target->setAzurePropertyType('Age', 'Edm.Int64');
 ]]></programlisting>
             </example>
 
@@ -515,7 +515,7 @@ $entity = $storageClient->retrieveEntityById(
 $entity->Name = 'New name';
 
 // last parameter instructs the Etag check:
-$result = $storageClient->updateEntity('testtable', $entity, true); 
+$result = $storageClient->updateEntity('testtable', $entity, true);
 ]]></programlisting>
                 </example>
             </sect5>
@@ -646,20 +646,20 @@ $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
 
 // Start batch
 $batch = $storageClient->startBatch();
-            
+
 // Insert entities in batch
 $entities = generateEntities();
 foreach ($entities as $entity) {
     $storageClient->insertEntity($tableName, $entity);
 }
-            
+
 // Commit
 $batch->commit();
 ]]></programlisting>
             </example>
         </sect4>
     </sect3>
-  
+
     <sect3 id="zend.service.windowsazure.storage.table.sessionhandler">
         <title>Table storage session handler</title>
 
@@ -670,7 +670,7 @@ $batch->commit();
             <classname>Zend_Service_WindowsAzure_SessionHandler</classname> class, which uses
             Windows Azure Table Storage as a session handler for PHP applications.
         </para>
-        
+
         <para>
             To use the <classname>Zend_Service_WindowsAzure_SessionHandler</classname> session
             handler, it should be registered as the default session handler for your PHP
@@ -691,19 +691,19 @@ $sessionHandler = new Zend_Service_WindowsAzure_SessionHandler(
 $sessionHandler->register();
 ]]></programlisting>
         </example>
-    
+
         <para>
             The above classname registers the
             <classname>Zend_Service_WindowsAzure_SessionHandler</classname> session handler and will
             store sessions in a table called "sessionstable".
         </para>
-        
+
         <para>
             After registration of the
             <classname>Zend_Service_WindowsAzure_SessionHandler</classname> session handler,
             sessions can be started and used in the same way as a normal PHP session:
         </para>
-        
+
         <example id="zend.service.windowsazure.storage.table.api.sessionhandler-usage">
             <title>Using table storage session handler</title>
 
@@ -726,7 +726,7 @@ if (!isset($_SESSION['firstVisit'])) {
 // ...
 ]]></programlisting>
         </example>
-    
+
         <warning>
             <para>
                 The <classname>Zend_Service_WindowsAzure_SessionHandler</classname> session handler

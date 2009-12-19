@@ -7,7 +7,7 @@
         The Queue service stores messages that may be read by any client who has access to the
         storage account.
     </para>
-    
+
     <para>
         A queue can contain an unlimited number of messages, each of which can be up to 8 KB in
         size. Messages are generally added to the end of the queue and retrieved from the front of
@@ -83,7 +83,7 @@ $storageClient->deleteQueue('testqueue');
 $storageClient = new Zend_Service_WindowsAzure_Storage_Queue();
 
 // 3600 = time-to-live of the message, if omitted defaults to 7 days
-$storageClient->putMessage('testqueue', 'This is a test message', 3600); 
+$storageClient->putMessage('testqueue', 'This is a test message', 3600);
 ]]></programlisting>
             </example>
         </sect4>
@@ -110,7 +110,7 @@ foreach ($messages as $message) {
 }
 ]]></programlisting>
             </example>
-            
+
             <para>
                 The messages that are read using <methodname>getMessages()</methodname> will be
                 invisible in the queue for 30 seconds, after which the messages will re-appear in
@@ -159,7 +159,7 @@ foreach ($messages as $message) {
 }
 ]]></programlisting>
             </example>
-            
+
             <para>
                 Note that messages that are read using <methodname>peekMessages()</methodname> will
                 not become invisible in the queue, nor can they be marked as processed using the

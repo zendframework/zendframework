@@ -17,7 +17,7 @@
             as a universal installation package compatible with most Linux distributions.
         </para>
 
-        <para> 
+        <para>
             After you have installed Zend Server, the Framework files may be found
             under <filename>/Applications/ZendServer/share/ZendFramework</filename> on Mac
             OSX, <filename>C:\Program Files\Zend\ZendServer\share\ZendFramework</filename> on
@@ -271,22 +271,22 @@ class ErrorController extends Zend_Controller_Action
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
-        
-        switch ($errors->type) { 
+
+        switch ($errors->type) {
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
-        
+
                 // 404 error -- controller or action not found
                 $this->getResponse()->setHttpResponseCode(404);
                 $this->view->message = 'Page not found';
                 break;
             default:
-                // application error 
+                // application error
                 $this->getResponse()->setHttpResponseCode(500);
                 $this->view->message = 'Application error';
                 break;
         }
-        
+
         $this->view->exception = $errors->exception;
         $this->view->request   = $errors->request;
     }
@@ -328,7 +328,7 @@ class ErrorController extends Zend_Controller_Action
         <programlisting language="php"><![CDATA[
 <!-- application/views/scripts/index/index.phtml -->
 <style>
-    
+
     a:link,
     a:visited
     {
@@ -350,7 +350,7 @@ class ErrorController extends Zend_Controller_Action
         overflow: hidden;
         text-align: center;
     }
-    
+
     div#more-information
     {
         background-image: url(http://framework.zend.com/images/bkg_body-bottom.gif);
@@ -369,7 +369,7 @@ class ErrorController extends Zend_Controller_Action
         <p>
             Helpful Links: <br />
             <a href="http://framework.zend.com/">Zend Framework Website</a> |
-            <a href="http://framework.zend.com/manual/en/">Zend Framework 
+            <a href="http://framework.zend.com/manual/en/">Zend Framework
                 Manual</a>
         </p>
     </div>
@@ -383,34 +383,34 @@ class ErrorController extends Zend_Controller_Action
 
         <programlisting language="php"><![CDATA[
 <!-- application/views/scripts/error/error.phtml -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"; 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd> 
-<html xmlns="http://www.w3.org/1999/xhtml"> 
-<head>  
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-  <title>Zend Framework Default Application</title> 
-</head> 
-<body> 
-  <h1>An error occurred</h1> 
-  <h2><?php echo $this->message ?></h2> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN";
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Zend Framework Default Application</title>
+</head>
+<body>
+  <h1>An error occurred</h1>
+  <h2><?php echo $this->message ?></h2>
 
-  <?php if ('development' == $this->env): ?> 
-  
-  <h3>Exception information:</h3> 
-  <p> 
-      <b>Message:</b> <?php echo $this->exception->getMessage() ?> 
-  </p> 
+  <?php if ('development' == $this->env): ?>
 
-  <h3>Stack trace:</h3> 
-  <pre><?php echo $this->exception->getTraceAsString() ?> 
-  </pre> 
+  <h3>Exception information:</h3>
+  <p>
+      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+  </p>
 
-  <h3>Request Parameters:</h3> 
-  <pre><?php echo var_export($this->request->getParams(), 1) ?> 
-  </pre> 
+  <h3>Stack trace:</h3>
+  <pre><?php echo $this->exception->getTraceAsString() ?>
+  </pre>
+
+  <h3>Request Parameters:</h3>
+  <pre><?php echo var_export($this->request->getParams(), 1) ?>
+  </pre>
   <?php endif ?>
-  
-</body> 
+
+</body>
 </html>
 ]]></programlisting>
     </sect2>

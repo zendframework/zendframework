@@ -91,7 +91,7 @@
             <li><a href="/some/target">Link</a></li>
         </ul>
     </div>
-</div>        
+</div>
 ]]></programlisting>
 
     <para>
@@ -242,7 +242,7 @@ $this->placeholder('sidebar')
     <div class="block">
         <p>User: matthew</p>
     </div>
-</div>        
+</div>
 ]]></programlisting>
 
     <para>

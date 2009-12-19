@@ -1068,7 +1068,7 @@ $labels = $categories->getValues();
                 content oriented, and will not assist in detecting changes to other
                 relevant elements. Atom feeds should not require such steps.
             </para>
-            
+
             <para>
                 Further muddying the
                 waters, dates in feeds may follow different standards. Atom and
@@ -1576,10 +1576,10 @@ $firstIsbn = $feed->current()->getIsbn();
             </para>
         </sect3>
     </sect2>
-  
+
     <sect2 id="migrating.from.1.9.6.to.1.10.or.later">
         <title>Migrating from 1.9.6 to 1.10 or later</title>
-        
+
         <para>
             With the introduction of Zend Framework 1.10, <classname>Zend_Feed_Reader</classname>'s
             handling of retrieving Authors and Contributors was changed, introducing
@@ -1592,7 +1592,7 @@ $firstIsbn = $feed->current()->getIsbn();
             In addition, the original implementation applied its RSS limits to Atom
             feeds significantly reducing the usefulness of the parser with that format.
         </para>
-        
+
         <para>
             The change means that methods like <methodname>getAuthors()</methodname>
             and <methodname>getContributors</methodname> no longer return a simple array
@@ -1603,14 +1603,14 @@ $firstIsbn = $feed->current()->getIsbn();
             will be a simple array with three potential keys (as the source data permits).
             These include: name, email and uri.
         </para>
-        
+
         <para>
             The original behaviour of such methods would have returned a simple
             array of strings, each string attempting to present a single name, but
             in reality this was unreliable since there is no rule governing the format
             of RSS Author strings.
         </para>
-        
+
         <para>
             The simplest method of simulating the original behaviour of these
             methods is to use the <classname>Zend_Feed_Reader_Collection_Author</classname>'s
@@ -1620,7 +1620,7 @@ $firstIsbn = $feed->current()->getIsbn();
             attached to each Author (if present). In most cases this simple change is
             easy to apply as demonstrated below.
         </para>
-        
+
         <programlisting language="php"><![CDATA[
 /**
  * In 1.9.6
@@ -1637,6 +1637,6 @@ $authors = $feed->getAuthors()->getValues();
 
 
 ]]></programlisting>
-        
+
     </sect2>
 </sect1>

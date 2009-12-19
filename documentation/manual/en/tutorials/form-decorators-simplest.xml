@@ -121,7 +121,7 @@ class TextPerson
     public function __call($method, $args)
     {
         if (!method_exists($this->_person, $method)) {
-            throw new Exception('Invalid method called on HtmlPerson: ' 
+            throw new Exception('Invalid method called on HtmlPerson: '
                 .  $method);
         }
         return call_user_func_array(array($this->_person, $method), $args);

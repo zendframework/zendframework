@@ -8,13 +8,13 @@
         It allows searching for individual terms, phrases, ranges of terms; using wildcards and
         fuzzy search; combining queries using boolean operators; and so on.
     </para>
-        
+
     <para>
         A detailed query language description can be found in the <link
             linkend="zend.search.lucene.query-language">
             Zend_Search_Lucene component documentation</link>.
     </para>
-        
+
     <para>
         What follows are examples of some common query types and strategies.
     </para>
@@ -122,7 +122,7 @@ title:"The Right Way" AND  go
 
     <example id="learning.lucene.queries.fields-and-document-alt">
         <title>Querying against specific fields as well as the entire document (alternate)</title>
-        
+
         <programlisting language="text"><![CDATA[
 title:Do it right
 ]]></programlisting>

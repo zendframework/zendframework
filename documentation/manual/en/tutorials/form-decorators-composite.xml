@@ -156,8 +156,8 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
                  ->setMonth(date('m', $date))
                  ->setYear(date('Y', $date));
         } elseif (is_array($value)
-                  && (isset($value['day']) 
-                      && isset($value['month']) 
+                  && (isset($value['day'])
+                      && isset($value['month'])
                       && isset($value['year'])
                   )
         ) {
@@ -268,8 +268,8 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
     public function __construct($spec, $options = null)
     {
         $this->addPrefixPath(
-            'My_Form_Decorator', 
-            'My/Form/Decorator', 
+            'My_Form_Decorator',
+            'My/Form/Decorator',
             'decorator'
         );
         parent::__construct($spec, $options);
@@ -309,7 +309,7 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
             $this->addDecorator('Date')
                  ->addDecorator('Errors')
                  ->addDecorator('Description', array(
-                     'tag'   => 'p', 
+                     'tag'   => 'p',
                      'class' => 'description'
                  ))
                  ->addDecorator('HtmlTag', array(
@@ -348,10 +348,10 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
     Date of Birth:
 </label></dt>
 <dd id="dateOfBirth-element">
-    <input type="text" name="dateOfBirth[day]" id="dateOfBirth-day" 
-        value="20" size="2" maxlength="2"> / 
+    <input type="text" name="dateOfBirth[day]" id="dateOfBirth-day"
+        value="20" size="2" maxlength="2"> /
     <input type="text" name="dateOfBirth[month]" id="dateOfBirth-month"
-        value="4" size="2" maxlength="2"> / 
+        value="4" size="2" maxlength="2"> /
     <input type="text" name="dateOfBirth[year]" id="dateOfBirth-year"
         value="2009" size="4" maxlength="4">
 </dd>

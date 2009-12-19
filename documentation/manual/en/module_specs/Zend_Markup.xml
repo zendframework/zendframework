@@ -6,7 +6,7 @@
     <para>
         The <classname>Zend_Markup</classname> component provides an extensible
         way for parsing text and rendering lightweight markup languages like
-        BBcode and Textile. It is available as of Zend Framework version 1.10. 
+        BBcode and Textile. It is available as of Zend Framework version 1.10.
     </para>
 
     <para>

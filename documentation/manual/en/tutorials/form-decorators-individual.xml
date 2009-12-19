@@ -8,7 +8,7 @@
         looked at how you can combine decorators to create complex output. We noted that while you
         have a ton of flexibility with this approach, it also adds some complexity and overhead. In
         this section, we will examine how to render decorators individually in order to create
-        custom markup for forms and/or individual elements. 
+        custom markup for forms and/or individual elements.
     </para>
 
     <para>
@@ -144,7 +144,7 @@ class My_Form_UserDemographics extends Zend_Form
                 <classname>ViewHelper</classname>: utilize a view helper to render a form input
             </para>
         </listitem>
-        
+
         <listitem>
             <para>
                 <classname>Errors</classname>: utilize the <classname>FormErrors</classname> view
@@ -185,8 +185,8 @@ class My_Form_UserDemographics extends Zend_Form
     </para>
 
     <programlisting language="php"><![CDATA[
-<?php 
-$form = $this->form; 
+<?php
+$form = $this->form;
 // Remove <dt> from label generation
 foreach ($form->getElements() as $element) {
     $element->getDecorator('label')->setOption('tag', null);
@@ -195,11 +195,11 @@ foreach ($form->getElements() as $element) {
 <form method="<?php echo $form->getMethod() ?>" action="<?php echo
     $form->getAction()?>">
     <div class="element">
-        <?php echo $form->title->renderLabel() 
+        <?php echo $form->title->renderLabel()
               . $form->title->renderViewHelper() ?>
-        <?php echo $form->firstName->renderLabel() 
+        <?php echo $form->firstName->renderLabel()
               . $form->firstName->renderViewHelper() ?>
-        <?php echo $form->lastName->renderLabel() 
+        <?php echo $form->lastName->renderLabel()
               . $form->lastName->renderViewHelper() ?>
     </div>
     <div class="element">
@@ -214,11 +214,11 @@ foreach ($form->getElements() as $element) {
             'size' => 4, 'maxlength' => 4)) ?>
     </div>
     <div class="element">
-        <?php echo $form->password->renderLabel() 
+        <?php echo $form->password->renderLabel()
               . $form->password->renderViewHelper() ?>
     </div>
     <div class="element">
-        <?php echo $form->passwordConfirmation->renderLabel() 
+        <?php echo $form->passwordConfirmation->renderLabel()
               . $form->passwordConfirmation->renderViewHelper() ?>
     </div>
     <?php echo $this->formSubmit('submit', 'Save') ?>
@@ -238,7 +238,7 @@ foreach ($form->getElements() as $element) {
 
         <label for="firstName" tag="" class="optional">First name:</label>
         <input type="text" name="firstName" id="firstName" value=""/>
-        
+
         <label for="lastName" tag="" class="optional">Last name:</label>
         <input type="text" name="lastName" id="lastName" value=""/>
     </div>
@@ -246,7 +246,7 @@ foreach ($form->getElements() as $element) {
     <div class="element">
         <label for="dateOfBirth" tag="" class="optional">Date of Birth
             (DD/MM/YYYY):</label>
-        <input type="text" name="dateOfBirth[day]" id="dateOfBirth-day" 
+        <input type="text" name="dateOfBirth[day]" id="dateOfBirth-day"
             value="" size="2" maxlength="2"/>
         /
         <input type="text" name="dateOfBirth[month]" id="dateOfBirth-month"
@@ -262,7 +262,7 @@ foreach ($form->getElements() as $element) {
     </div>
 
     <div class="element">
-        <label for="passwordConfirmation" tag="" class="" id="submit" 
+        <label for="passwordConfirmation" tag="" class="" id="submit"
             value="Save"/>
 </form>
 ]]></programlisting>

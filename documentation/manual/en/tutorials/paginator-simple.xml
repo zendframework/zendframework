@@ -2,7 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="learning.paginator.simple">
     <title>Simple Examples</title>
-    
+
     <para>
         In this first example we won't do anything spectacular, but hopefully it will
         give you a good idea of what Zend_Paginator is designed to do.
@@ -11,7 +11,7 @@
         method in the <classname>Zend_Paginator</classname> class to get a <classname>Zend_Paginator</classname>
         object with our array in it.
     </para>
-    
+
     <programlisting language="php"><![CDATA[
 // Create an array with numbers 1 to 100
 $data = range(1, 100);
@@ -19,7 +19,7 @@ $data = range(1, 100);
 // Get a Paginator object using Zend_Paginator's built-in factory.
 $paginator = Zend_Paginator::factory($data);
 ]]></programlisting>
-    
+
     <para>
         We're already almost done! The $paginator variable now contains a reference to the
         Paginator object. By default it is setup to display 10 items per page.
@@ -29,7 +29,7 @@ $paginator = Zend_Paginator::factory($data);
         a specific page later on. The snippet below will display an unordered list containing the
         numbers 1 to 10, which are the numbers on the first page.
     </para>
-    
+
     <programlisting language="php"><![CDATA[
 // Create an array with numbers 1 to 100
 $data = range(1, 100);
@@ -46,12 +46,12 @@ foreach ($paginator as $item) {
 
 ?></ul>
 ]]></programlisting>
-    
+
     <para>
         Now let's try and render the items on the second page. You can use the
         <methodname>setCurrentPageNumber()</methodname> method to select which page you want to view.
     </para>
-    
+
     <programlisting language="php"><![CDATA[
 // Create an array with numbers 1 to 100
 $data = range(1, 100);
@@ -71,12 +71,12 @@ foreach ($paginator as $item) {
 
 ?></ul>
 ]]></programlisting>
-    
+
     <para>
         As expected, this little snippet will render an unordered list with the numbers
         11 to 20 in it.
     </para>
-    
+
     <para>
         These simple examples demonstrate a small portion of what can be achieved with
         <classname>Zend_Paginator</classname>. However, a real application rarely reads its data from a plain
@@ -84,13 +84,13 @@ foreach ($paginator as $item) {
         to paginate the results of a database query. Before reading on, make sure you're familiar with
         the way <classname>Zend_Db_Select</classname> works!
     </para>
-    
+
     <para>
         In the database examples we will look at a table with blog posts called 'posts'.
         The 'posts' table has four columns: id, title, body, date_created.
         Let's dive right in and have a look at a simple example.
     </para>
-    
+
     <programlisting language="php"><![CDATA[
 // Create a select query. $db is a Zend_Db_Adapter object, which we assume
 // already exists in your script.
@@ -111,14 +111,14 @@ foreach ($paginator as $item) {
 
 ?></ul>
 ]]></programlisting>
-    
+
     <para>
         As you can see, this example is not that different from the previous one.
-        The only difference is that you pass a <classname>Zend_Db_Select</classname> object to the 
+        The only difference is that you pass a <classname>Zend_Db_Select</classname> object to the
         Paginator's <methodname>factory()</methodname> method, rather than an array.
         For more details on how the database adapter makes sure that your query
         is being executed efficiently, see the Zend_Paginator chapter in the reference manual
         on the DbSelect and DbTableSelect adapters.
     </para>
-    
+
 </sect1>

@@ -243,6 +243,18 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_T
 
     public function testRespondsToValidConfirmationWith200Response()
     {
+        $this->_get['hub_mode'] = 'unsubscribe';
+        $this->_tableGateway->expects($this->any())
+            ->method('find')
+            ->with($this->equalTo('verifytokenkey'))
+            ->will($this->returnValue($this->_rowset));
+        $rowdata = new stdClass;
+        $rowdata->id = 'verifytokenkey';
+        $rowdata->verify_token = hash('sha256', 'cba');
+        $rowdata->created_time = time();
+        $this->_rowset->expects($this->any())
+            ->method('current')
+            ->will($this->returnValue($rowdata));
         $this->_callback->handle($this->_get);
         $this->assertTrue($this->_callback->getHttpResponse()->getHttpResponseCode() == 200);
     }

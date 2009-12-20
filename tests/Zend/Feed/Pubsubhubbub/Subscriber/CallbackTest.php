@@ -145,19 +145,16 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_T
         $this->assertThat($this->_callback->getStorage(), $this->identicalTo($storage));
     }
 
-    /**
-     * @group ZFP001
-     */
     public function testValidatesValidHttpGetData()
     {
-        $this->_adapter->expects($this->once())
+        $this->_tableGateway->expects($this->any())
             ->method('find')
             ->with($this->equalTo('verifytokenkey'))
             ->will($this->returnValue($this->_rowset));
-        $this->_rowset->expects($this->once())
+        $this->_rowset->expects($this->any())
             ->method('current')
             ->will($this->returnValue(array(
-                'verify_token' => hash('sha256', 'verifytokenkey')
+                'verify_token' => hash('sha256', 'cba')
             )));
         $this->assertTrue($this->_callback->isValidHubVerification($this->_get));
     }
@@ -191,10 +188,19 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_T
         unset($this->_get['hub_verify_token']);
         $this->assertFalse($this->_callback->isValidHubVerification($this->_get));
     }
-
+    
     public function testReturnsTrueIfModeSetAsUnsubscribeFromHttpGetData()
     {
         $this->_get['hub_mode'] = 'unsubscribe';
+        $this->_tableGateway->expects($this->any())
+            ->method('find')
+            ->with($this->equalTo('verifytokenkey'))
+            ->will($this->returnValue($this->_rowset));
+        $this->_rowset->expects($this->any())
+            ->method('current')
+            ->will($this->returnValue(array(
+                'verify_token' => hash('sha256', 'cba')
+            )));
         $this->assertTrue($this->_callback->isValidHubVerification($this->_get));
     }
 

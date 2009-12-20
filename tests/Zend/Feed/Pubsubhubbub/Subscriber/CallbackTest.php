@@ -251,10 +251,23 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_T
         $rowdata = new stdClass;
         $rowdata->id = 'verifytokenkey';
         $rowdata->verify_token = hash('sha256', 'cba');
-        $rowdata->created_time = time();
+        $t = time();
+        $rowdata->created_time = $t;
         $this->_rowset->expects($this->any())
             ->method('current')
             ->will($this->returnValue($rowdata));
+            
+        $this->_tableGateway->expects($this->once())
+            ->method('update')
+            ->with(
+                $this->equalTo(array('id'=>'verifytokenkey','verify_token'=>hash('sha256', 'cba'),'created_time'=>$t,'verified'=>'1')),
+                $this->equalTo('id = \'verifytokenkey\'')
+            );
+        $this->_adapter->expects($this->once())
+            ->method('quoteInto')
+            ->with($this->equalTo('id = ?'), $this->equalTo('verifytokenkey'))
+            ->will($this->returnValue('id = \'verifytokenkey\'')); 
+            
         $this->_callback->handle($this->_get);
         $this->assertTrue($this->_callback->getHttpResponse()->getHttpResponseCode() == 200);
     }

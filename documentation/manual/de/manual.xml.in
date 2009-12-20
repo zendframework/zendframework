@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19722 -->
+<!-- EN-Revision: 19738 -->
 <!-- Reviewed: no -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
@@ -204,6 +204,7 @@
         <xi:include href="module_specs/Zend_Feed-ModifyingFeed.xml" />
         <xi:include href="module_specs/Zend_Feed-CustomFeed.xml" />
         <xi:include href="module_specs/Zend_Feed_Reader.xml" />
+        <xi:include href="module_specs/Zend_Feed_Writer.xml" />
     </chapter>
 
     <chapter id="zend.file">
@@ -534,6 +535,13 @@
         <xi:include href="module_specs/Zend_TimeSync-Working.xml" />
     </chapter>
 
+    <chapter id="zend.tool">
+        <title>Zend_Tool</title>
+        <xi:include href="module_specs/Zend_Tool-Usage-CLI.xml" />
+        <xi:include href="module_specs/Zend_Tool-Extending.xml" />
+    </chapter>
+
+    <!--
     <chapter id="zend.tool.framework">
         <title>Zend_Tool_Framework</title>
         <xi:include href="module_specs/Zend_Tool_Framework-Introduction.xml" />
@@ -549,8 +557,9 @@
         <xi:include href="module_specs/Zend_Tool_Project.xml" />
         <xi:include href="module_specs/Zend_Tool_Project-CreateProject.xml" />
         <xi:include href="module_specs/Zend_Tool_Project-Providers.xml" />
-        <!-- <xi:include href="module_specs/Zend_Tool_Project-Internals.xml" /> -->
+        <xi:include href="module_specs/Zend_Tool_Project-Internals.xml" />
     </chapter>
+    -->
 
     <chapter id="zend.translate">
         <title>Zend_Translate</title>
@@ -627,6 +636,7 @@
         <xi:include href="ref/performance-localization.xml" />
         <xi:include href="ref/performance-view.xml" />
     </appendix>
+
     <xi:include href="ref/copyrights.xml" />
     <index id="the.index" />
 </book>

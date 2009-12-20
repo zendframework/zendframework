@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 19730 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.feed.writer">
+    <title>Zend_Feed_Writer</title>
+
+    <sect2 id="zend.feed.writer.introduction">
+        <title>Einführung</title>
+
+        <para>
+            <classname>Zend_Feed_Writer</classname> ist die Bruderkomponente zu
+            <classname>Zend_Feed_Reader</classname> und verantwortlich für die Erzeugung von
+            Feeds für die Ausgabe. Sie unterstützt die Atom 1.0 Spezifikation (RFC 4287) und
+            RSS 2.0 wie vom RSS Advisory Board (RSS 2.0.11) spezifiziert. Es ist kein Nachkomme
+            dieser Standard. Trotzdem bietet es ein einfaches System der Erweiterung welches es
+            erlaube jede Erweiterung/Modul für jede der zwei Spezifikationen zu implementieren
+            wenn diese nicht von Haus aus angeboten werden.
+        </para>
+
+        <para>
+            Auf vielen Wegen ist <classname>Zend_Feed_Writer</classname> das Gegenteil von
+            <classname>Zend_Feed_Reader</classname>. Wobei <classname>Zend_Feed_Reader</classname>
+            darauf fokusiert ist ein einfach zu verwendendes Architektur Frontend durch Getter
+            Methoden anzubieten, und <classname>Zend_Feed_Writer</classname> durch ähnlich
+            benannte Setter oder Mutatoren. Das stellt sicher das die API keine weitere Lernkurve
+            erfordert wenn jemand bereits mit <classname>Zend_Feed_Reader</classname> bekannt ist.
+        </para>
+
+        <para>
+            Als Ergebnis dieses Designs, ist der Rest sogar einleuchtend. Dahinter, wird jedes
+            Datenset eines <classname>Zend_Feed_Reader</classname> Objekts wärend der
+            Darstellungszeit in ein <classname>DOMDocument</classname> Objekt übersetzt indem die
+            notwendigen Feed Elemente verwendet werden. Für jeden unterstützten Feed Typen gibt es
+            beide, sowohl einen Atom 1.0 als auch einen RSS 2.0 Renderer. Die Verwendung von
+            <classname>DOMDocument</classname> statt einer Template Lösung hat viele Vorteile.
+            Der offensichtlichste ist die Möglichkeit das <classname>DOMDocument</classname> zu
+            exportieren um es weiter zu bearbeiten und auf PHP DOM für die Korrakturen und
+            richtige Darstellung zu setzen.
+        </para>
+
+        <para>
+            Wie bei <classname>Zend_Feed_Reader</classname> ist
+            <classname>Zend_Feed_Writer</classname> ein alleinstehender Ersatz für
+            <classname>Zend_Feed</classname>'s Builder Architektur und nicht kompatibel mit diesen
+            Klassen.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.feed.writer.architecture">
+        <title>Architektur</title>
+
+        <para>
+            Die Architektur von <classname>Zend_Feed_Writer</classname> ist sehr einfach. Es hat
+            zwei Kernsets von Klassen: Container und Renderer.
+        </para>
+
+        <para>
+            The containers include the <classname>Zend_Feed_Writer_Feed</classname> and
+            <classname>Zend_Feed_Writer_Entry</classname> classes. The Entry classes can be attached
+            to any Feed class. The sole purpose of these containers is to collect data about the
+            feed to generate using a simple interface of setter methods. These methods perform some
+            data validity testing. For example, it will validate any passed URIs, dates, etc. These
+            checks are not tied to any of the feed standards. The container objects also contain
+            methods to allow for fast rendering and export of the final feed, and these can be
+            reused at will.
+        </para>
+
+        <para>
+            While there are two data containers, there are four renderers - two matching container
+            renderers per support feed type. The renderer accept a container, and based on its
+            content attempt to generate a valid feed. If the renderer is unable to generate a valid
+            feed, perhaps due to the container missing an obligatory data point, it will report this
+            by throwing an <classname>Exception</classname>. While it is possible to ignore
+            <classname>Exception</classname>s, this removes the default safeguard of ensuring you
+            have sufficient data set to render a wholly valid feed.
+        </para>
+
+        <para>
+            Due to the system being divided between data containers and renderers, it can make
+            Extensions somewhat interesting. A typical Extension offering namespaced feed and entry
+            level elements, must itself reflect the exact same architecture, i.e. offer feed and
+            entry level data containers, and matching renderers. There is, fortunately, no complex
+            integration work required since all Extension classes are simply registered and
+            automatically used by the core classes. We'll meet Extensions in more detail at the end
+            of this section.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.feed.writer.getting.started">
+        <title>Getting Started</title>
+
+        <para>
+            Using <classname>Zend_Feed_Reader</classname> is as simple as setting data and
+            triggering the renderer. Here is an example to generate a minimal Atom 1.0 feed.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+/**
+ * Create the parent feed
+ */
+$feed = new Zend_Feed_Writer_Feed;
+$feed->setTitle('Paddy\'s Blog');
+$feed->setLink('http://www.example.com');
+$feed->setFeedLink('http://www.example.com/atom', 'atom');
+$feed->addAuthor(array(
+    'name'  => 'Paddy',
+    'email' => 'paddy@example.com',
+    'uri'   => 'http://www.example.com',
+));
+$feed->setDateModified(time());
+$feed->addHub('http://pubsubhubbub.appspot.com/');
+
+/**
+ * Add one or more entries. Note that entries must
+ * be manually added once created.
+ */
+$entry = $feed->createEntry();
+$entry->setTitle('All Your Base Are Belong To Us');
+$entry->setLink('http://www.example.com/all-your-base-are-belong-to-us');
+$entry->addAuthor(array(
+    'name'  => 'Paddy',
+    'email' => 'paddy@example.com',
+    'uri'   => 'http://www.example.com',
+));
+$entry->setDateModified(time());
+$entry->setDateCreated(time());
+$entry->setDescription('Exposing the difficultly of porting games to English.');
+$entry->setContent('I am not writing the article. The example is long enough as is ;).');
+$feed->addEntry($entry);
+
+/**
+ * Render the resulting feed to Atom 1.0 and assign to $out.
+ * You can substitute "atom" with "rss" to generate an RSS 2.0 feed.
+ */
+$out = $feed->export('atom');
+]]></programlisting>
+
+        <para>
+            The output rendered should be as follows:
+        </para>
+
+        <programlisting language="xml">
+&#60;?xml version="1.0" encoding="utf-8"?&#62;
+&#60;feed xmlns="http://www.w3.org/2005/Atom"&#62;
+    &#60;title type="text"&#62;Paddy's Blog&#60;/title&#62;
+    &#60;subtitle type="text"&#62;Writing about PC Games since 176 BC.&#60;/subtitle&#62;
+    &#60;updated&#62;2009-12-14T20:28:18+00:00&#60;/updated&#62;
+    &#60;generator uri="http://framework.zend.com" version="1.10.0alpha"&#62;
+        Zend_Feed_Writer
+    &#60;/generator&#62;
+    &#60;link rel="alternate" type="text/html" href="http://www.example.com"/&#62;
+    &#60;link rel="self" type="application/atom+xml" href="http://www.example.com/atom"/&#62;
+    &#60;id&#62;http://www.example.com&#60;/id&#62;
+    &#60;author&#62;
+        &#60;name&#62;Paddy&#60;/name&#62;
+        &#60;email&#62;paddy@example.com&#60;/email&#62;
+        &#60;uri&#62;http://www.example.com&#60;/uri&#62;
+    &#60;/author&#62;
+    &#60;link rel="hub" href="http://pubsubhubbub.appspot.com/"/&#62;
+    &#60;entry&#62;
+        &#60;title type="html"&#62;&#60;![CDATA[All Your Base Are Belong To Us]]&#62;&#60;/title&#62;
+        &#60;summary type="html"&#62;
+            &#60;![CDATA[Exposing the difficultly of porting games to English.]]&#62;
+        &#60;/summary&#62;
+        &#60;published&#62;2009-12-14T20:28:18+00:00&#60;/published&#62;
+        &#60;updated&#62;2009-12-14T20:28:18+00:00&#60;/updated&#62;
+        &#60;link rel="alternate" type="text/html" href="http://www.example.com/all-your-base-are-belong-to-us"/&#62;
+        &#60;id&#62;http://www.example.com/all-your-base-are-belong-to-us&#60;/id&#62;
+        &#60;author&#62;
+        &#60;name&#62;Paddy&#60;/name&#62;
+        &#60;email&#62;paddy@example.com&#60;/email&#62;
+        &#60;uri&#62;http://www.example.com&#60;/uri&#62;
+        &#60;/author&#62;
+        &#60;content type="html"&#62;
+            &#60;![CDATA[I am not writing the article. The example is long enough as is ;).]]&#62;
+        &#60;/content&#62;
+    &#60;/entry&#62;
+&#60;/feed&#62;
+</programlisting>
+
+        <para>
+            This is a perfectly valid Atom 1.0 example. It should be noted that omitting an obligatory point
+            of data, such as a title, will trigger an <classname>Exception</classname> when
+            rendering as Atom 1.0. This will differ for RSS 2.0 since a title may be omitted so long
+            as a description is present. This gives rise to Exceptions that differ between the two
+            standards depending on the renderer in use. By design,
+            <classname>Zend_Feed_Writer</classname> will not render an invalid feed for either
+            standard unless the end-user deliberately elects to ignore all Exceptions.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.feed.writer.setting.feed.data.points">
+        <title>Setting Feed Data Points</title>
+
+        <para>
+            Before you can render a feed, you must first setup the data necessary for
+            the feed being rendered. This utilises a simple setter style API which doubles
+            as an initial method for validating the data being set. By design, the API
+            closely matches that for <classname>Zend_Feed_Reader</classname> to avoid
+            undue confusion and uncertainty.
+        </para>
+
+        <para>
+            <classname>Zend_Feed_Writer</classname> offers this API via its data container
+            classes <classname>Zend_Feed_Writer_Feed</classname> and
+            <classname>Zend_Feed_Writer_Entry</classname>. These classes merely store
+            all feed data in type-agnostic manner, meaning you may reuse any data
+            container with any renderer without requiring additional work. Both classes
+            are also amenable to Extensions, meaning that an Extension may define its own
+            container classes which are registered to the base container classes as extensions, and
+            are checked when any method call triggers the base container's
+            <methodname>__call()</methodname> method.
+        </para>
+
+        <para>
+            Here's a summary of the Core <acronym>API</acronym> for Feeds. You should note it
+            comprises not only the basic <acronym>RSS</acronym> and Atom standards, but also
+            accounts for a number of included Extensions bundled with
+            <classname>Zend_Feed_Writer</classname>. The naming of these
+            Extension sourced methods remain fairly generic - all Extension
+            methods operate at the same level as the Core <acronym>API</acronym> though we do allow
+            you to retrieve any specific Extension object separately if required.
+        </para>
+
+        <table>
+            <title>Feed Level API Methods</title>
+
+            <tgroup cols="2">
+                <tbody>
+                    <row>
+                        <entry><methodname>setId()</methodname></entry>
+
+                        <entry>Set a unique ID associated with this feed. For Atom 1.0
+                        this is an atom:id element, whereas for RSS 2.0 it is added
+                        as a guid element. These are optional so long as a link is
+                        added, i.e. the link is set as the ID.</entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setTitle()</methodname></entry>
+
+                        <entry>Set the title of the feed.</entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setDescription()</methodname></entry>
+
+                        <entry>Set the text description of the feed.</entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setLink()</methodname></entry>
+
+                        <entry>
+                            Set a <acronym>URI</acronym> to the <acronym>HTML</acronym> website
+                            containing the same or
+                            similar information as this feed (i.e. if the feed is from a blog,
+                            it should provide the blog's <acronym>URI</acronym> where the
+                            <acronym>HTML</acronym> version of the entries can be read).
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setFeedLinks()</methodname></entry>
+
+                        <entry>
+                            Add a link to an XML feed, whether the feed being generated or
+                            an alternate URI pointing to the same feed but in a different
+                            format. At a minimum, it is recommended to include a link to
+                            the feed being generated so it has an identifiable final
+                            URI allowing a client to track its location changes without
+                            necessitating constant redirects. The parameter is an array of
+                            arrays, where each sub-array contains the keys "type" and "uri".
+                            The type should be one of "atom", "rss", or "rdf". If a type is
+                            omitted, it defaults to the type used when rendering the feed.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setAuthors()</methodname></entry>
+
+                        <entry>
+                            Sets the data for authors. The parameter is an array of arrays
+                            where each sub-array may contain the keys "name", "email" and
+                            "uri". The "uri" value is only applicable for Atom feeds since
+                            RSS contains no facility to show it. For RSS 2.0, rendering will
+                            create two elements - an author element containing the email
+                            reference with the name in brackets, and a Dublin Core creator
+                            element only containing the name.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setAuthor()</methodname></entry>
+
+                        <entry>
+                            Sets the data for a single author following the same
+                            format as described above for a single sub-array.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setDateCreated()</methodname></entry>
+
+                        <entry>
+                            Sets the date on which this feed was created. Generally
+                            only applicable to Atom where it represents the date the resource
+                            described by an Atom 1.0 document was created. The expected parameter
+                            may be a UNIX timestamp or a <classname>Zend_Date</classname> object.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getDateModified()</methodname></entry>
+
+                        <entry>
+                            Sets the date on which this feed was last modified. The expected parameter
+                            may be a UNIX timestamp or a <classname>Zend_Date</classname> object.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setLanguage()</methodname></entry>
+
+                        <entry>
+                            Sets the language of the feed. This will be omitted unless set.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getGenerator()</methodname></entry>
+
+                        <entry>
+                            Allows the setting of a generator. The parameter should be an
+                            array containing the keys "name", "version" and "uri". If omitted
+                            a default generator will be added referencing
+                            <classname>Zend_Feed_Writer</classname>, the current Zend Framework
+                            version and the Framework's URI.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setCopyright()</methodname></entry>
+
+                        <entry>
+                            Sets a copyright notice associated with the feed.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setHubs()</methodname></entry>
+
+                        <entry>
+                            Accepts an array of Pubsubhubbub Hub Endpoints to be rendered in
+                            the feed as Atom links so that PuSH Subscribers may subscribe to
+                            your feed. Note that you must implement a Pubsubhubbub Publisher in
+                            order for real-time updates to be enabled. A Publisher may be implemented
+                            using <classname>Zend_Feed_Pubsubhubbub_Publisher</classname>.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setCategories()</methodname></entry>
+
+                        <entry>
+                            Accepts an array of categories for rendering, where each element is itself
+                            an array whose possible keys include "term", "label" and "scheme". The "term"
+                            is a typically a category name suitable for inclusion in a URI. The "label"
+                            may be a human readable category name supporting special characters (it is encoded
+                            during rendering) and is a required key. The "scheme" (called the domain in RSS)
+                            is optional but must be a valid URI.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </sect2>
+
+    <sect2 id="zend.feed.writer.setting.entry.data.points">
+        <title>Setting Entry Data Points</title>
+
+        <para>
+            Here's a summary of the Core <acronym>API</acronym> for Entries/Items. You should note it
+            comprises not only the basic <acronym>RSS</acronym> and Atom standards, but also
+            accounts for a number of included Extensions bundled with
+            <classname>Zend_Feed_Writer</classname>. The naming of these
+            Extension sourced methods remain fairly generic - all Extension
+            methods operate at the same level as the Core <acronym>API</acronym> though we do allow
+            you to retrieve any specific Extension object separately if required.
+        </para>
+
+        <table>
+            <title>Entry Level API Methods</title>
+
+            <tgroup cols="2">
+                <tbody>
+                    <row>
+                        <entry><methodname>setId()</methodname></entry>
+
+                        <entry>Set a unique ID associated with this feed. For Atom 1.0
+                        this is an atom:id element, whereas for RSS 2.0 it is added
+                        as a guid element. These are optional so long as a link is
+                        added, i.e. the link is set as the ID.</entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setTitle()</methodname></entry>
+
+                        <entry>Set the title of the feed.</entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setDescription()</methodname></entry>
+
+                        <entry>Set the text description of the feed.</entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setLink()</methodname></entry>
+
+                        <entry>
+                            Set a <acronym>URI</acronym> to the <acronym>HTML</acronym> website
+                            containing the same or
+                            similar information as this feed (i.e. if the feed is from a blog,
+                            it should provide the blog's <acronym>URI</acronym> where the
+                            <acronym>HTML</acronym> version of the entries can be read).
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setFeedLinks()</methodname></entry>
+
+                        <entry>
+                            Add a link to an XML feed, whether the feed being generated or
+                            an alternate URI pointing to the same feed but in a different
+                            format. At a minimum, it is recommended to include a link to
+                            the feed being generated so it has an identifiable final
+                            URI allowing a client to track its location changes without
+                            necessitating constant redirects. The parameter is an array of
+                            arrays, where each sub-array contains the keys "type" and "uri".
+                            The type should be one of "atom", "rss", or "rdf". If a type is
+                            omitted, it defaults to the type used when rendering the feed.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setAuthors()</methodname></entry>
+
+                        <entry>
+                            Sets the data for authors. The parameter is an array of arrays
+                            where each sub-array may contain the keys "name", "email" and
+                            "uri". The "uri" value is only applicable for Atom feeds since
+                            RSS contains no facility to show it. For RSS 2.0, rendering will
+                            create two elements - an author element containing the email
+                            reference with the name in brackets, and a Dublin Core creator
+                            element only containing the name.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setAuthor()</methodname></entry>
+
+                        <entry>
+                            Sets the data for a single author following the same
+                            format as described above for a single sub-array.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setDateCreated()</methodname></entry>
+
+                        <entry>
+                            Sets the date on which this feed was created. Generally
+                            only applicable to Atom where it represents the date the resource
+                            described by an Atom 1.0 document was created. The expected parameter
+                            may be a UNIX timestamp or a <classname>Zend_Date</classname> object.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getDateModified()</methodname></entry>
+
+                        <entry>
+                            Sets the date on which this feed was last modified. The expected parameter
+                            may be a UNIX timestamp or a <classname>Zend_Date</classname> object.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setLanguage()</methodname></entry>
+
+                        <entry>
+                            Sets the language of the feed. This will be omitted unless set.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>getGenerator()</methodname></entry>
+
+                        <entry>
+                            Allows the setting of a generator. The parameter should be an
+                            array containing the keys "name", "version" and "uri". If omitted
+                            a default generator will be added referencing
+                            <classname>Zend_Feed_Writer</classname>, the current Zend Framework
+                            version and the Framework's URI.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setCopyright()</methodname></entry>
+
+                        <entry>
+                            Sets a copyright notice associated with the feed.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setHubs()</methodname></entry>
+
+                        <entry>
+                            Accepts an array of Pubsubhubbub Hub Endpoints to be rendered in
+                            the feed as Atom links so that PuSH Subscribers may subscribe to
+                            your feed. Note that you must implement a Pubsubhubbub Publisher in
+                            order for real-time updates to be enabled. A Publisher may be implemented
+                            using <classname>Zend_Feed_Pubsubhubbub_Publisher</classname>.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><methodname>setCategories()</methodname></entry>
+
+                        <entry>
+                            Accepts an array of categories for rendering, where each element is itself
+                            an array whose possible keys include "term", "label" and "scheme". The "term"
+                            is a typically a category name suitable for inclusion in a URI. The "label"
+                            may be a human readable category name supporting special characters (it is encoded
+                            during rendering) and is a required key. The "scheme" (called the domain in RSS)
+                            is optional but must be a valid URI.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </sect2>
+</sect1>

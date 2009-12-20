@@ -5,7 +5,8 @@
 
     <para>
         In Pubsubhubbub, the Publisher is the party who publishes a live feed and frequently updates
-        it with new content. In order for these updates to be pushed to Subscribers, the Publisher
+        it with new content. This may be a blog, an aggregator, or even a web service with a public
+        feed based API. In order for these updates to be pushed to Subscribers, the Publisher
         must notify all of its supported Hubs that an update has occured using a simple HTTP POST
         request containing the URI or the updated Topic (i.e the updated RSS or Atom feed). The Hub
         will confirm receipt of the notification, fetch the updated feed, and forward any updates to
@@ -14,7 +15,8 @@
 
     <para>
         By design, this means the Publisher has very little to do except send these Hub pings
-        whenever its feeds change.
+        whenever its feeds change. As a result, the Publisher implementation is extremely
+        simple to use and requires very little work to setup and use when feeds are updated.
     </para>
 
     <sect2 id="zend.feed.pubsubhubbub.pubsubhubbub.publisher.zend.feed.pubsubhubbub.publisher">
@@ -30,9 +32,12 @@
         <para>
             The following example shows a Publisher notifying a collection of Hubs about updates to
             a pair of local RSS and Atom feeds. The class retains a collection of errors which
-            include the Hub URLs, so the notification can be reattempted later and/or logged if any
+            include the Hub URLs, so the notification can be re-attempted later and/or logged if any
             notifications happen to fail. Each resulting error array also includes a "response" key
-            containing the related HTTP response object.
+            containing the related HTTP response object. In the event of any errors, it is strongly
+            recommended to attempt the operation for failed Hub Endpoints at least once more at a
+            future time. This may require the use of either a scheduled task for this purpose or
+            a job queue though such extra steps are optional.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -56,7 +61,7 @@ if (!$publisher->isSuccess()) {
     }
 }
 
-// reschedule notifications for the failed Hubs
+// reschedule notifications for the failed Hubs in $failedHubs
 ]]></programlisting>
 
         <para>
@@ -71,7 +76,7 @@ if (!$publisher->isSuccess()) {
         <para>
             You can also skip setting Hub URIs, and notify each in turn using the
             <methodname>notifyHub()</methodname> method which accepts the URI of a Hub endpoint as
-            its only argumement.
+            its only argument.
         </para>
 
         <para>
@@ -79,7 +84,9 @@ if (!$publisher->isSuccess()) {
             most of the feed processing and distribution is handled by the selected Hubs. It is
             however important to detect errors and reschedule notifications as soon as possible
             (with a reasonable maximum number of retries) to ensure notifications reach all
-            Subscribers.
+            Subscribers. In many cases as a final alternative, Hubs may frequently poll your
+            feeds to offer some additional tolerance for failures both in terms of their own
+            temporary downtime or Publisher errors/downtime.
         </para>
     </sect2>
 </sect1>

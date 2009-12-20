@@ -14,7 +14,7 @@
 
         <para>
             Pubsubhubbub is an open, simple web-scale pubsub protocol. A common use case to enable
-            blog's (Publishers) to "push" updates from their RSS or Atom feeds (Topics) to end
+            blogs (Publishers) to "push" updates from their RSS or Atom feeds (Topics) to end
             Subscribers. These Subscribers will have subscribed to the blog's RSS or Atom feed via a
             Hub, a central server which is notified of any updates by the Publisher and which then
             distributes these updates to all Subscribers. Any feed may advertise that it supports
@@ -23,11 +23,11 @@
 
         <para>
             Pubsubhubbub has garnered attention because it is a pubsub protocol which is easy to
-            implement, and which operates over HTTP. It's philosophy is to replace the traditional
+            implement and which operates over HTTP. Its philosophy is to replace the traditional
             model where blog feeds have been polled at regular intervals to detect and retrieve
             updates.  Depending on the frequency of polling, this can take a lot of time to
             propagate updates to interested parties from planet aggregators to desktop readers. With
-            a pubsub system in place, updates are not polled by Subscribers, they are pushed to
+            a pubsub system in place, updates are not simply polled by Subscribers, they are pushed to
             Subscribers, elimenating any delay. For this reason, Pubsubhubbub forms part of what has
             been dubbed the real-time web.
         </para>
@@ -35,9 +35,17 @@
         <para>
             The protocol does not exist in isolation. Pubsub systems have been around for a while,
             such as the familiar Jabber Publish-Subscribe protocol, XEP-0060, or the less well known
-            rssCloud (described in 2001).  However these have not achieved widespread adoption.
-            rssCloud, which was recently revived with the appearance of Pubsubhubbub, has also seen
-            its usage increase significantly.
+            rssCloud (described in 2001).  However these have not achieved widespread adoption typically
+            due to either their complexity, poor timing or lack of suitability for web applications.
+            rssCloud, which was recently revived as a response to the appearance of Pubsubhubbub, has
+            also seen its usage increase significantly though it lacks a formal specification and
+            currently does not support Atom 1.0 feeds.
+        </para>
+        
+        <para>
+            Perhaps surprisingly given its relative early age, Pubsubhubbub is already in use including
+            in Google Reader, Feedburner, Wordpress (plugins are availabe for self-hosted blogs), and
+            many more.
         </para>
     </sect2>
 
@@ -47,14 +55,14 @@
         <para>
             <classname>Zend_Feed_Pubsubhubbub</classname> implements two sides of the Pubsubhubbub
             0.2 Specification: a Publisher and a Subscriber. It does not currently implement a Hub
-            Server.
+            Server though this is in progress for a future Zend Framework release.
         </para>
 
         <para>
             A Publisher is responsible for notifying all supported Hubs (many can be supported to
             add redundancy to the system) of any updates to its feeds, whether they be Atom or RSS
             based. This is achieved by pinging the supported Hub Servers with the URL of the updated
-            feed. In Pubsubhubbub terminology, any updateable resource capable of being subscribed
+            feed. In Pubsubhubbub terminology, any updatable resource capable of being subscribed
             to is referred to as a Topic. Once a ping is received, the Hub will request the updated
             feed, process it for updated items, and forward all updates to all Subscribers
             subscribed to that feed.
@@ -63,19 +71,25 @@
         <para>
             A Subscriber is any party or application which subscribes to one or more Hubs to receive
             updates from a Topic hosted by a Publisher. The Subscriber never directly communicates
-            with the Publisher, since the Hub acts as an intermediary, accepting subscriptions and
+            with the Publisher since the Hub acts as an intermediary, accepting subscriptions and
             sending updates to subscribed Subscribers. The Subscriber therefore communicates only
             with the Hub, either to subscribe/unsubscribe to Topics, or when it receives updates
-            from the Hub.
+            from the Hub. This communication design ("Fat Pings") effectively removes the possibility of
+            a "Thundering Herd" issue. This occurs in a pubsub system where the Hub merely informs
+            Subscribers that an update is available, prompting all Subscribers to immediately retrieve
+            the feed from the Publisher giving rise to a traffic spike. In Pubsubhubbub, the Hub
+            distributes the actual update in a "Fat Ping" so the Publisher is not subjected to any
+            traffic spike.
         </para>
 
         <para>
-            <classname>Zend_Feed_Pubsubhubbub</classname> implements these two sides with the
+            <classname>Zend_Feed_Pubsubhubbub</classname> implements Pubsubhubbub Publishers and
+            Subscribers with the
             classes <classname>Zend_Feed_Pubsubhubbub_Publisher</classname> and
             <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname>. In addition, the Subscriber
-            implementation may handle any feed updates from a Hub by using
-            <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>.  These are covered in
-            subsequent sections.
+            implementation may handle any feed updates forwarded from a Hub by using
+            <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>.  These classes, their
+            use cases, and APIs are covered in subsequent sections.
         </para>
     </sect2>
 </sect1>

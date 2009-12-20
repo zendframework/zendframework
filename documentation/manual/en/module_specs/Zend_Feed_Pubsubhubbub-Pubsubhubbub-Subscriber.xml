@@ -6,24 +6,24 @@
     <para>
         In Pubsubhubbub, the Subscriber is the party who wishes to receive updates to any Topic (RSS
         or Atom feed). They achieve this by subscribing to one or more of the Hubs advertised by
-        that Topic, usually as a set of one or more atom links with a rel attribute of "hub". The
+        that Topic, usually as a set of one or more Atom 1.0 links with a rel attribute of "hub". The
         Hub from that point forward will send an Atom or RSS feed containing all updates to that
         Subscriber's Callback URL when it receives an update notification from the Publisher. In
         this way, the Subscriber need never actually visit the original feed (though it's still
         recommended at some level to ensure updates are retrieved if ever a Hub goes offline). All
         subscription requests must contain the URI of the Topic being subscribed and a Callback URL
-        which that the Hub will use to confirm the subscription and to forward updates.
+        which the Hub will use to confirm the subscription and to forward updates.
     </para>
 
     <para>
         The Subsciber therefore has two roles. To create and manage subscriptions, including
         subscribing for new Topics with a Hub, unsubscribing (if necessary), and periodically
-        renewing subscriptions since they have a limited validity as set by the Hub. This is handled
+        renewing subscriptions since they may have a limited validity as set by the Hub. This is handled
         by <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname>.
     </para>
 
     <para>
-        The second role, is to accept updates sent by a Hub to the Subscriber's Callback URL, i.e.
+        The second role is to accept updates sent by a Hub to the Subscriber's Callback URL, i.e.
         the URI the Subscriber has assigned to handle updates. The Callback URL also handles events
         where the Hub contacts the Subscriber to confirm all subscriptions and unsubscriptions.
         This is handled by using an instance of
@@ -36,9 +36,11 @@
             <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname> implements the Pubsubhubbub 0.2
             Specification. As this is a new specification version not all Hubs currently implement
             it. The new specification allows the Callback URL to include a query string which is
-            used by this class, but not supported by all Hubs. Unfortunately, the previous
-            specification was difficult to use within an application using Routing, i.e. many
-            application frameworks, so this component does NOT support 0.1 Hubs.
+            used by this class, but not supported by all Hubs. In the interests of maximising
+            compatibility it is therefore recommended that the query string component of the
+            Subscriber Callback URI be presented as a path element, i.e. recognised as a
+            parameter in the route associated with the Callback URI and used by the application's
+            Router.
         </para>
     </important>
 
@@ -58,20 +60,23 @@
             Any subscription (or unsubscription) requires the relevant information before
             proceeding, i.e. the URI of the Topic (Atom or RSS feed) to be subscribed to for
             updates, and the URI of the endpoint for the Hub which will handle the subscription and
-            forwarding of the updates. It should also be noted that subscriptions have a default
-            life of 30 days, changeable by the Hub, meaning that subscriptions must be renewed
-            periodically before they expire - simply attempt to re-subsribe before the expiry date
-            of the original subscription. This component does not handle automated subscription
-            renewals.
+            forwarding of the updates. The lifetime of a subscription may be determined by the
+            Hub but most Hubs should support automatic subscription refreshes by checking with
+            the Subscriber. This is supported by <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>
+            and requires no other work on your part. It is still strongly recommended that you use
+            the Hub sourced subscription time to live (ttl) to schedule the creation of new subscriptions
+            (the process is identical to that for any new subscription) to refresh it with the Hub.
+            While it should not be necessary per se, it covers cases where a Hub may not support
+            automatic subscription refreshing and rules out Hub errors for additional redundancy.
         </para>
 
         <para>
-            With the relevant information to hand, a subscription can be attempted:
+            With the relevant information to hand, a subscription can be attempted as
+            demonstrated below:
         </para>
 
         <programlisting lang="php"><![CDATA[
-$storage = new Zend_Feed_Pubsubhubbub_Storage_Filesystem;
-$storage->setDirectory('../tmp');
+$storage = new Zend_Feed_Pubsubhubbub_Model_Subscription;
 
 $subscriber = new Zend_Feed_Pubsubhubbub_Subscriber;
 $subscriber->setStorage($storage);
@@ -82,7 +87,26 @@ $subscriber->subscribeAll();
 ]]></programlisting>
 
         <para>
-            Behind the scenes, the Subscriber will send a request to the Hub endpoint containing the
+            In order to store subscriptions and offer access to this data for general use,
+            the component requires a database (a schema is provided later in this section).
+            By default, it is assumed the table name is "subscription" and it utilises
+            <classname>Zend_Db_Table_Abstract</classname> in the background meaning it
+            will use the default adapter you have set for your application. You may also
+            pass a specific custom <classname>Zend_Db_Table_Abstract</classname> instance
+            into the associated model <classname>Zend_Feed_Pubsubhubbub_Model_Subscription</classname>.
+            This custom adapter may be as simple in intent as changing the table name to use or as
+            complex as you deem necessary.
+        </para>
+        
+        <para>
+            While this Model is offered as a default ready-to-roll solution, you may create your
+            own Model using any other backend or database layer (e.g. Doctrine) so long as the
+            resulting class implements the interface
+            <classname>Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface</classname>.
+        </para>
+
+        <para>
+            Behind the scenes, the Subscriber above will send a request to the Hub endpoint containing the
             following parameters (based on the previous example):
         </para>
 
@@ -120,6 +144,18 @@ $subscriber->subscribeAll();
                                 URI path which is more difficult to implement in a Zend Framework
                                 application.
                             </para>
+                            
+                            <para>
+                                Nevertheless, since not all Hubs support query string parameters,
+                                we still strongly recommend adding the subscription key as a path component
+                                in the form http://www.mydomain.com/hubbub/callback/5536df06b5dcb966edab3a4c4d56213c16a8184.
+                                To accomplish this, it requires defining a route capable of parsing out the final
+                                value of the key (one could simply add a parameter key in front and use the default routes),
+                                and then retrieving the value and passing it to the Subscriber Callback object. It also
+                                requires calling the class method
+                                <methodname>Zend_Pubsubhubbub_Subscriber_Callback::usePathParameter(true)</methodname>.
+                                A detailed example is offered later.
+                            </para>
                         </entry>
                     </row>
 
@@ -131,10 +167,12 @@ $subscriber->subscribeAll();
                         <entry>
                             <para>
                                 The number of seconds for which the Subscriber would like a new
-                                subscription to remain valid for. Hubs may enforce their own maximum
-                                subscription period. All subscriptions must be renewed by simply
+                                subscription to remain valid for (i.e. a TTL). Hubs may enforce their own maximum
+                                subscription period. All subscriptions should be renewed by simply
                                 re-subscribing before the subscription period ends to ensure
-                                continuity of updates.
+                                continuity of updates. Hubs should additionally attempt to automatically
+                                refresh subscriptions before they expire by contacting Subscribers (handled
+                                automatically by the Callback class).
                             </para>
                         </entry>
                     </row>
@@ -173,7 +211,9 @@ $subscriber->subscribeAll();
                         <entry>
                             <para>
                                 Indicates to the Hub the preferred mode of verifying subscriptions
-                                or unsubscriptions. It is repeated twice in order of preference.
+                                or unsubscriptions. It is repeated twice in order of preference. Technically
+                                this component does not distinguish between the two modes and treats both
+                                equally.
                             </para>
                         </entry>
                     </row>
@@ -186,7 +226,9 @@ $subscriber->subscribeAll();
                         <entry>
                             <para>
                                 Indicates to the Hub the preferred mode of verifying subscriptions
-                                or unsubscriptions. It is repeated twice in order of preference.
+                                or unsubscriptions. It is repeated twice in order of preference. Technically
+                                this component does not distinguish between the two modes and treats both
+                                equally.
                             </para>
                         </entry>
                     </row>
@@ -215,6 +257,9 @@ $subscriber->subscribeAll();
             <methodname>Zend_Pubsubhubbub_Subscriber::setLeaseSeconds()</methodname> or show a
             preference for the async verify mode by using <code>
                 setPreferredVerificationMode(Zend_Feed_Pubsubhubbub::VERIFICATION_MODE_ASYNC)</code>.
+            However the Hubs retain the capability to enforce their own preferences and for this
+            reason the component is deliberately designed to work across almost any set of options
+            with minimum end-user configuration required. Conventions are great when they work!
         </para>
 
         <note>
@@ -228,7 +273,10 @@ $subscriber->subscribeAll();
                 immediately, and its verification request may occur at a later time. Since
                 <classname>Zend_Pubsubhubbub</classname> implements the Subscriber verification role
                 as a separate callback class and requires the use of a backend storage medium, it
-                actually supports both transparently.
+                actually supports both transparently though in terms of end-user performance,
+                asynchronous verification is very much preferred to eliminate the impact of a
+                poorly performing Hub tying up end-user server resources and connections for
+                too long.
             </para>
         </note>
 
@@ -241,14 +289,12 @@ $subscriber->subscribeAll();
 
         <para>
             By default, a new instance of <classname>Zend_Pubsubhubbub_Subscriber</classname> will
-            attempt to use a file backed storage medium which defaults to the location of your
-            system's temporary directory. It is recommended to set a custom storage solution where
-            possible. At present the available storage solutions include
-            <classname>Zend_Pubsubhubbub_Storage_Filesystem</classname> and
-            <classname>Zend_Pubsubhubbub_Storage_Memory</classname>. You may set a storage object
-            using <methodname>setStorage()</methodname>.  All storage objects must implement the
-            interface <classname>Zend_Feed_Pubsubhubbub_StorageInterface</classname>.
-            <emphasis>TODO</emphasis>
+            attempt to use a database backed storage medium which defaults to using the default
+            <classname>Zend_Db</classname> adapter with a table name of "subscription".
+            It is recommended to set a custom storage solution where these defaults are not apt either
+            by passing in a new Model supporting the required interface or by passing a new instance
+            of <classname>Zend_Db_Table_Abstract</classname> to the default Model's constructor to change
+            the used table name.
         </para>
     </sect2>
 
@@ -259,7 +305,7 @@ $subscriber->subscribeAll();
             Whenever a subscription or unsubscription request is made, the Hub must verify the
             request by forwarding a new verification request to the Callback URL set in the
             subscription/unsubscription parameters. To handle these Hub requests, which will include
-            all future communications contain Topic updates, the Callback URL should trigger the
+            all future communications containing Topic (feed) updates, the Callback URL should trigger the
             execution of an instance of <classname>Zend_Pubsubhubbub_Subscriber_Callback</classname>
             to handle the request.
         </para>
@@ -270,9 +316,7 @@ $subscriber->subscribeAll();
         </para>
 
         <programlisting lang="php"><![CDATA[
-$storage = new Zend_Feed_Pubsubhubbub_Storage_Filesystem;
-$storage->setDirectory('../tmp');
-
+$storage = new Zend_Feed_Pubsubhubbub_Model_Subscription;
 $callback = new Zend_Feed_Pubsubhubbub_Subscriber_Callback;
 $callback->setStorage($storage);
 $callback->handle();
@@ -281,11 +325,13 @@ $callback->sendResponse();
 /**
  * Check if the callback resulting in the receipt of a feed update.
  * Otherwise it was either a (un)sub verification request or invalid request.
+ * Typically we need do nothing other than add feed update handling - the rest
+ * is handled internally by the class.
  */
 if ($callback->hasFeedUpdate()) {
     $feedString = $callback->getFeedUpdate();
     /**
-     *  Process the feed update asynchronously to avoid a Hub timeout
+     *  Process the feed update asynchronously to avoid a Hub timeout.
      */
 }
 ]]></programlisting>
@@ -293,8 +339,8 @@ if ($callback->hasFeedUpdate()) {
         <note>
             <para>
                 It should be noted that
-                <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> independently
-                parses any incoming query string and other parameters.  This is necessary since PHP
+                <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> may independently
+                parse any incoming query string and other parameters.  This is necessary since PHP
                 alters the structure and keys of a query string when it is parsed into the
                 <varname>$_GET</varname> or <varname>$_POST</varname> superglobals.  For example,
                 all duplicate keys are ignored and periods are converted to underscores.
@@ -309,9 +355,14 @@ if ($callback->hasFeedUpdate()) {
                 received, it should never be processed on the spot since this leaves the Hub waiting
                 for a response. Rather, any processing should be offloaded to another process or
                 deferred until after a response has been returned to the Hub. One symptom of a
-                failure to promptly complete Hub requests is that Hub may continue to attempt
+                failure to promptly complete Hub requests is that a Hub may continue to attempt
                 delivery of the update/verification request leading to duplicated update attempts
-                being processed by the Subscriber.
+                being processed by the Subscriber. This appears problematic - but in reality a
+                Hub may apply a timeout of just a few seconds, and if no response is received within
+                that time it may disconnect (assuming a delivery failure) and retry later. Note that
+                Hubs are expected to distribute vast volumes of updates so their resources are
+                stretched - please do process feeds asynchronously (e.g. in a separate process or
+                a job queue or even a cron scheduled task) as much as possible.
             </para>
         </important>
     </sect2>

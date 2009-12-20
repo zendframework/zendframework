@@ -20,22 +20,23 @@
                 Lucene 2.3, document storage files can be shared between segments; however,
                 <classname>Zend_Search_Lucene</classname> doesn't use this
                 capability</para></footnote>. All segment data is stored in
-        <filename>_xxxxx.cfs</filename> files, where <varname>xxxxx</varname> is a segment name.
+        <filename>_xxxxx.cfs</filename> files, where <emphasis>xxxxx</emphasis> is a segment name.
     </para>
 
     <para>
-        Once an index segment file is created, it can't be updated.  New documents are added to new
-        segments.  Deleted documents are only marked as deleted in an optional
+        Once an index segment file is created, it can't be updated. New documents are added to new
+        segments. Deleted documents are only marked as deleted in an optional
         <filename>&lt;segmentname&gt;.del</filename> file.
     </para>
 
     <para>
         Document updating is performed as separate delete and add operations, even though it's done
-        using an <methodname>update()</methodname> API call<footnote><para>This call is provided
-                only by Java Lucene now, but it's planned to extend the
-                <classname>Zend_Search_Lucene</classname> API with similar
-                functionality</para></footnote>.  This simplifies adding new documents, and allows
-        updating concurrently with search operations.
+        using an <methodname>update()</methodname> <acronym>API</acronym> call
+        <footnote><para>This call is provided only by Java Lucene now, but it's planned to extend
+            the <classname>Zend_Search_Lucene</classname> <acronym>API</acronym> with similar
+            functionality</para></footnote>.
+        This simplifies adding new documents, and allows updating concurrently with search
+        operations.
     </para>
 
     <para>
@@ -88,21 +89,21 @@
     <itemizedlist>
         <listitem>
             <para>
-                <varname>MaxBufferedDocs</varname> (the minimal number of documents required before
-                the buffered in-memory documents are written into a new segment);
+                <emphasis>MaxBufferedDocs</emphasis> (the minimal number of documents required
+                before the buffered in-memory documents are written into a new segment);
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <varname>MaxMergeDocs</varname> (the largest number of documents ever merged by
+                <emphasis>MaxMergeDocs</emphasis> (the largest number of documents ever merged by
                 an optimization operation); and
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <varname>MergeFactor</varname> (which determines how often segment indices are
+                <emphasis>MergeFactor</emphasis> (which determines how often segment indices are
                 merged by auto-optimization operations).
             </para>
         </listitem>

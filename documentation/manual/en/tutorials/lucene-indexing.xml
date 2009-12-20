@@ -55,8 +55,8 @@ $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($path);
         </para>
 
         <para>
-            You may need an on-demand indexing configuration (something like OLTP system). In such
-            systems, you usually add one document per user request. As such, the
+            You may need an on-demand indexing configuration (something like <acronym>OLTP</acronym>
+            system). In such systems, you usually add one document per user request. As such, the
             <emphasis>MaxBufferedDocs</emphasis> option will not affect the system. On the other
             hand, <emphasis>MaxMergeDocs</emphasis> is really helpful as it allows you to limit
             maximum script execution time. <emphasis>MergeFactor</emphasis> should be set to a value
@@ -68,7 +68,7 @@ $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($path);
         <para>
             If you will be primarily performing batch index updates, your configuration should use a
             <emphasis>MaxBufferedDocs</emphasis> option set to the maximum value supported by the
-            available amount of memory.  <emphasis>MaxMergeDocs</emphasis> and
+            available amount of memory. <emphasis>MaxMergeDocs</emphasis> and
             <emphasis>MergeFactor</emphasis> have to be set to values reducing auto-optimization
             involvement as much as possible <footnote><para>An additional limit is the maximum file
                     handlers supported by the operation system for concurrent open

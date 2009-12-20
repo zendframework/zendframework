@@ -102,8 +102,8 @@ title:"The Right Way" AND text:go
 ]]></programlisting>
 
         <para>
-            Searches for the phrase "The Right Way" within the <varname>title</varname> field and
-            the word "go" within the <varname>text</varname> field.
+            Searches for the phrase "The Right Way" within the <property>title</property> field and
+            the word "go" within the <property>text</property> field.
         </para>
     </example>
 
@@ -115,7 +115,7 @@ title:"The Right Way" AND  go
 ]]></programlisting>
 
         <para>
-            Searches for the phrase "The Right Way" within the <varname>title</varname> field and
+            Searches for the phrase "The Right Way" within the <property>title</property> field and
             the word "go" word appearing in any field of the document.
         </para>
     </example>
@@ -128,9 +128,9 @@ title:Do it right
 ]]></programlisting>
 
         <para>
-            Searches for the word "Do" within the <varname>title</varname> field and the words "it"
-            and "right" words through all fields; any single one matching will result in a document
-            match.
+            Searches for the word "Do" within the <property>title</property> field and the words
+            "it" and "right" words through all fields; any single one matching will result in
+            a document match.
         </para>
     </example>
 

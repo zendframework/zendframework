@@ -14,19 +14,20 @@
 $hits = $index->find($query);
 
 foreach ($hits as $hit) {
-    printf(“%d %f %s\n”, $hit->id, $hit->score, $hit->title);
+    printf("%d %f %s\n", $hit->id, $hit->score, $hit->title);
 }
 ]]></programlisting>
     </example>
 
     <para>
         This example demonstrates the usage of two special search hit properties -
-        <varname>id</varname> and <varname>score</varname>.
+        <property>id</property> and <property>score</property>.
     </para>
 
     <para>
-        <varname>id</varname> is an internal document identifier used within a Lucene index. It may
-        be used for a variety of operations, including deleting a document from the index:
+        <property>id</property> is an internal document identifier used within a Lucene index.
+        It may be used for a variety of operations, including deleting a document from the
+        index:
     </para>
 
     <example id="learning.lucene.searching.delete-example">
@@ -61,7 +62,7 @@ $doc = $index->getDocument($id);
     </note>
 
     <para>
-        The <varname>score</varname> field is a hit score. Search results are ordered by score by
+        The <property>score</property> field is a hit score. Search results are ordered by score by
         default (best results returned first).
     </para>
 
@@ -74,15 +75,15 @@ $doc = $index->getDocument($id);
 
     <para>
         The example also demonstrates an ability to access stored fields (e.g.,
-        <code>$hit-&gt;title</code>).  At the first access to any hit property other than
-        <varname>id</varname> or <varname>score</varname>, document stored fields are loaded, and
-        the corresponding field value is returned.
+        <command>$hit->title</command>). At the first access to any hit property other than
+        <property>id</property> or <property>score</property>, document stored fields are loaded,
+        and the corresponding field value is returned.
     </para>
 
     <para>
-        This causes an ambiguity for documents having their own <varname>id</varname> or
-        <varname>score</varname> fields; as a result, it's not recommended to use these field names
-        within stored documents. Nevertheless, they still can be accessed via the
+        This causes an ambiguity for documents having their own <property>id</property> or
+        <property>score</property> fields; as a result, it's not recommended to use these field
+        names within stored documents. Nevertheless, they still can be accessed via the
         <methodname>getDocument()</methodname> method:
     </para>
 

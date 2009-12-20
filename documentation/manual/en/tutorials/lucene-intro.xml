@@ -5,16 +5,16 @@
 
     <para>
         The <classname>Zend_Search_Lucene</classname> component is intended to provide a
-        ready-for-use full-text search solution.  It doesn't require any PHP
+        ready-for-use full-text search solution. It doesn't require any <acronym>PHP</acronym>
         extensions<footnote><para>Though some <acronym>UTF-8</acronym> processing functionality
-                requires the <classname>mbstring</classname> extension to be turned
+                requires the <emphasis>mbstring</emphasis> extension to be turned
                 on</para></footnote> or additional software to be installed, and can be used
         immediately after Zend Framework installation.
     </para>
 
     <para>
-        <classname>Zend_Search_Lucene</classname> is a pure PHP port of the popular open source
-        full-text search engine known as Apache Lucene.  See <ulink
+        <classname>Zend_Search_Lucene</classname> is a pure <acronym>PHP</acronym> port of the
+        popular open source full-text search engine known as Apache Lucene. See <ulink
             url="http://lucene.apache.org">http://lucene.apache.org/</ulink> for the details.
     </para>
 
@@ -40,7 +40,7 @@
     <para>
         Several analyzers are provided within the <classname>Zend_Search_Lucene</classname> package.
         The default analyzer works with <acronym>ASCII</acronym> text (since the
-        <acronym>UTF-8</acronym> analyzer needs the <classname>mbstring</classname> extension to be
+        <acronym>UTF-8</acronym> analyzer needs the <emphasis>mbstring</emphasis> extension to be
         turned on). It is case insensitive, and it skips numbers. Use other analyzers or create your
         own analyzer if you need to change this behavior.
     </para>
@@ -79,9 +79,9 @@
             <para>
                 <emphasis>Not</emphasis> to use Lucene index as a storage since it may dramatically
                 decrease search hit retrieving performance. Store only unique document identifiers
-                (doc paths, URLs, database unique IDs) and associated data within an index. E.g.
-                title, annotation, category, language info, avatar. (Note: a field may be included
-                in indexing, but not stored, or stored, but not indexed).
+                (doc paths, <acronym>URL</acronym>s, database unique IDs) and associated data within
+                an index. E.g. title, annotation, category, language info, avatar. (Note: a field
+                may be included in indexing, but not stored, or stored, but not indexed).
             </para>
         </listitem>
 

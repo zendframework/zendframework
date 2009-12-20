@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19577 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Aides de vue</title>
@@ -135,7 +135,7 @@ echo $this->formCheckbox('foo', 'bar');
 echo $this->formCheckbox('foo', 'bar', array('checked' => true));
 
 // "bar" et "baz" en tant qu'options cochée/décochée ; décochée
-echo $this->formCheckbox('foo', null, null, array('bar', 'baz');
+echo $this->formCheckbox('foo', null, null, array('bar', 'baz'));
 
 // "bar" et "baz" en tant qu'options cochée/décochée ; décochée
 echo $this->formCheckbox('foo', null, null, array(
@@ -144,18 +144,18 @@ echo $this->formCheckbox('foo', null, null, array(
 ));
 
 // "bar" et "baz" en tant qu'options cochée/décochée ; cochée
-echo $this->formCheckbox('foo', 'bar', null, array('bar', 'baz');
+echo $this->formCheckbox('foo', 'bar', null, array('bar', 'baz'));
 echo $this->formCheckbox('foo',
                          null,
                          array('checked' => true),
-                         array('bar', 'baz');
+                         array('bar', 'baz'));
 
 // "bar" et "baz" en tant qu'options cochée/décochée ; décochée
-echo $this->formCheckbox('foo', 'baz', null, array('bar', 'baz');
+echo $this->formCheckbox('foo', 'baz', null, array('bar', 'baz'));
 echo $this->formCheckbox('foo',
                          null,
                          array('checked' => false),
-                         array('bar', 'baz');
+                         array('bar', 'baz'));
 ]]></programlisting>
 
                 <para>
@@ -586,5 +586,39 @@ class Ma_View_Helper_ScriptPath
             courante. Il est de votre responsabilité de maintenir la persistance de l'objet dans
             votre classe, de même que de déterminer la façon dont il peut être accéder.
         </para>
+    </sect2>
+
+    <sect2 id="zend.view.helpers.registering-concrete">
+        <title>Registering Concrete Helpers</title>
+
+        <para>
+            Sometimes it is convenient to instantiate a view helper, and then register it with the
+            view. As of version 1.10.0, this is now possible using the
+            <methodname>registerHelper()</methodname> method, which expects two arguments: the
+            helper object, and the name by which it will be registered.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$helper = new My_Helper_Foo();
+// ...do some configuration or dependency injection...
+
+$view->registerHelper($helper, 'foo');
+]]></programlisting>
+
+        <para>
+            If the helper has a <methodname>setView()</methodname> method, the view object will call
+            this and inject itself into the helper on registration.
+        </para>
+
+        <note>
+            <title>Helper name should match a method</title>
+
+            <para>
+                The second argument to <methodname>registerHelper()</methodname> is the name of the
+                helper. A corresponding method name should exist in the helper; otherwise,
+                <classname>Zend_View</classname> will call a non-existent method when invoking the
+                helper, raising a fatal PHP error.
+            </para>
+        </note>
     </sect2>
 </sect1>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19771 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.doctype">
     <title>L'aide de vue Doctype</title>
@@ -97,8 +97,8 @@ $doctype = $view->doctype()->getDoctype();
 ]]></programlisting>
 
         <para>
-            Typiquement, vous pouvez simplement vouloir savoir si le doctype est <acronym>XHTML</acronym> ou non
-            ; pour ceci, la méthode <methodname>isXhtml()</methodname> vous suffira :
+            Typiquement, vous pouvez simplement vouloir savoir si le doctype est <acronym>XHTML</acronym> ou
+            non&#160;; pour ceci, la méthode <methodname>isXhtml()</methodname> vous suffira&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -106,5 +106,17 @@ if ($view->doctype()->isXhtml()) {
     // faire qqch de différent
 }
 ]]></programlisting>
+
+        <para>
+            Vous pouvez aussi vérifier si le doctype représente un document
+            <acronym>HTML5</acronym>&#160;:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+if ($view->doctype()->isHtml5()) {
+    // faire qqch de différent
+}
+]]></programlisting>
+
     </example>
 </sect3>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19568 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.test.phpunit" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Test_PHPUnit</title>
@@ -16,7 +16,7 @@
 
         <para>
             L'exemple suivant est un simple test pour un contrôleur
-            <code>UserController</code> permettant de vérifier différentes choses :
+            <classname>UserController</classname> permettant de vérifier différentes choses :
         </para>
 
         <itemizedlist>

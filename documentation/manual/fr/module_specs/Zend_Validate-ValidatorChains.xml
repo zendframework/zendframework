@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 19432 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.validator_chains">
     <title>Chaînes de validation</title>
@@ -12,7 +12,9 @@
         role="php"><![CDATA[
 // Creation d'une chaine de validateurs et ajout de validateurs
 $validateurChaine = new Zend_Validate();
-$validateurChaine->addValidator(new Zend_Validate_StringLength(6, 12))
+$validateurChaine->addValidator(
+                    new Zend_Validate_StringLength(array('min' => 6,
+                                                         'max' => 12)))
                  ->addValidator(new Zend_Validate_Alnum());
 
 // Validation de l'identifiant
@@ -42,7 +44,10 @@ if ($validateurChaine->isValid($identifiant)) {
         inutile ou inapproprié dans ce cas de figure. Si l'exemple précédent était écrit comme suit,
         la validation alphanumérique ne serait pas lancé si la vérification de la longueur de la
         valeur échouait : <programlisting language="php"><![CDATA[
-$validateurChaine->addValidator(new Zend_Validate_StringLength(6, 12), true)
+$validateurChaine->addValidator(
+                    new Zend_Validate_StringLength(array('min' => 6,
+                                                         'max' => 12)),
+                    true)
                  ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting></para>
 

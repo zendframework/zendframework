@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17409 -->
+<!-- EN-Revision: 18935 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.scripts">
     <title>Scripts de vue</title>
@@ -429,7 +429,8 @@ class Zend_View_Smarty implements Zend_View_Interface
             <programlisting language="php"><![CDATA[
 //Exemple 1a. Dans l'initView() de l'initializer.
 $view = new Zend_View_Smarty('/chemin/vers/les/templates');
-$viewRenderer = new Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
+$viewRenderer =
+    Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
 $viewRenderer->setView($view)
              ->setViewBasePathSpec($view->_smarty->template_dir)
              ->setViewScriptPathSpec(':controller/:action.:suffix')

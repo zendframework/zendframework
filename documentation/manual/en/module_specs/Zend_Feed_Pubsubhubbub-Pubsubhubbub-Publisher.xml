@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.feed.pubsubhubbub.pubsubhubbub.publisher">
+    <title>Pubsubhubbub Publisher</title>
+
+    <para>
+        In Pubsubhubbub, the Publisher is the party who publishes a live feed and frequently updates
+        it with new content. In order for these updates to be pushed to Subscribers, the Publisher
+        must notify all of its supported Hubs that an update has occured using a simple HTTP POST
+        request containing the URI or the updated Topic (i.e the updated RSS or Atom feed). The Hub
+        will confirm receipt of the notification, fetch the updated feed, and forward any updates to
+        any Subscribers who have subscribed to that Hub for updates from the relevant feed.
+    </para>
+
+    <para>
+        By design, this means the Publisher has very little to do except send these Hub pings
+        whenever its feeds change.
+    </para>
+
+    <sect2 id="zend.feed.pubsubhubbub.pubsubhubbub.publisher.zend.feed.pubsubhubbub.publisher">
+        <title>Zend_Feed_Pubsubhubbub_Publisher</title>
+
+        <para>
+            <classname>Zend_Feed_Pubsubhubbub_Publisher</classname> implements a full Pubsubhubbub
+            Publisher. Its setup for use is also simple, requiring mainly that it is configured with
+            the URI endpoint for all Hubs to be notified of updates, and the URIs of all Topics to
+            be included in the notifications.
+        </para>
+
+        <para>
+            The following example shows a Publisher notifying a collection of Hubs about updates to
+            a pair of local RSS and Atom feeds. The class retains a collection of errors which
+            include the Hub URLs, so the notification can be reattempted later and/or logged if any
+            notifications happen to fail. Each resulting error array also includes a "response" key
+            containing the related HTTP response object.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$publisher = new Zend_Feed_Pubsubhubbub_Publisher;
+$publisher->addHubUrls(array(
+    'http://pubsubhubbub.appspot.com/', 
+    'http://hubbub.example.com',
+));
+$publisher->addUpdatedTopicUrls(array(
+    'http://www.example.net/rss', 
+    'http://www.example.net/atom',
+));
+$publisher->notifyAll();
+
+if (!$publisher->isSuccess()) {
+    // check for errors
+    $errors     = $publisher->getErrors();
+    $failedHubs = array()
+    foreach ($errors as $error) {
+        $failedHubs[] = $error['hubUrl'];
+    }
+}
+
+// reschedule notifications for the failed Hubs
+]]></programlisting>
+
+        <para>
+            If you prefer having more concrete control over the Publisher, the methods
+            <methodname>addHubUrls()</methodname> and <methodname>addUpdatedTopicUrls()</methodname>
+            pass each array value to the singular <methodname>addHubUrl()</methodname> and
+            <methodname>addUpdatedTopicUrl()</methodname> public methods.  There are also matching
+            <methodname>removeUpdatedTopicUrl()</methodname> and
+            <methodname>removeHubUrl()</methodname> methods.
+        </para>
+
+        <para>
+            You can also skip setting Hub URIs, and notify each in turn using the
+            <methodname>notifyHub()</methodname> method which accepts the URI of a Hub endpoint as
+            its only argumement.
+        </para>
+
+        <para>
+            There are no other tasks to cover. The Publisher implementation is very simple since
+            most of the feed processing and distribution is handled by the selected Hubs. It is
+            however important to detect errors and reschedule notifications as soon as possible
+            (with a reasonable maximum number of retries) to ensure notifications reach all
+            Subscribers.
+        </para>
+    </sect2>
+</sect1>

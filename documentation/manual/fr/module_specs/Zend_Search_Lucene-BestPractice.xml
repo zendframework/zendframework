@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 18715 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.best-practice">
     <title>Bonnes pratiques</title>
@@ -371,7 +371,7 @@ foreach ($hits as $hit) {
 
 // Récupération de documents avec la méthode find()
 // en utilisant l'API de requête.
-$term = new Zend_Search_Lucene_Index_Term($docId, idFieldName);
+$term = new Zend_Search_Lucene_Index_Term($docId, $idFieldName);
 $query = new Zend_Search_Lucene_Search_Query_Term($term);
 $hits  = $index->find($query);
 foreach ($hits as $hit) {
@@ -383,7 +383,7 @@ foreach ($hits as $hit) {
 ...
 
 // Récupération de documents avec la méthode termDocs()
-$term = new Zend_Search_Lucene_Index_Term($docId, idFieldName);
+$term = new Zend_Search_Lucene_Index_Term($docId, $idFieldName);
 $docIds  = $index->termDocs($term);
 foreach ($docIds as $id) {
     $doc = $index->getDocument($id);

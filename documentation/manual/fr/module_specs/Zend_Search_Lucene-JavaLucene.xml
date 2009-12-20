@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17174 -->
+<!-- EN-Revision: 18536 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.java-lucene">
     <title>Agir avec Lucene Java</title>
@@ -14,13 +14,14 @@
 
         <para>
             Une description détaillée de ce format est disponible ici: <ulink
-            url="http://lucene.apache.org/java/docs/fileformats.html"></ulink><footnote>
-                <para>
-                    La version du format de fichier supporté actuellement est la 2.3 (depuis
-                    Zend Framework 1.6).
-                </para>
-                </footnote>.
+                url="http://lucene.apache.org/java/2_3_0/fileformats.html"/>
+            <footnote>
+            <para>
+                La version du format de fichier supporté actuellement est la 2.3 (depuis
+                Zend Framework 1.6).
             </para>
+            </footnote>.
+        </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.index-directory">

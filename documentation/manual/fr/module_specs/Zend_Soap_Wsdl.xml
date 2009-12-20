@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 18176 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL</title>
@@ -566,70 +566,6 @@ $soapMyClassType = $wsdl->getType('MyClass');
             <methodname>toXML()</methodname>, <methodname>toDomDocument()</methodname> et <code>dump($filename =
             false)</code> peuvent être utilisées pour récupérer un document WSDL sous forme de <acronym>XML</acronym>,
             de structure DOM, ou de fichier.
-        </para>
-    </sect2>
-
-    <sect2 id="zend.soap.wsdl.parser">
-        <title>Analyse des documents WSDL</title>
-
-        <para>
-            Zend_Soap_Wsdl contient aussi un analyseur de documents WSDL qui a son application
-            la plus importante dans les tests unitaires et dans la génération de code pour les
-            services Web <acronym>SOAP</acronym> (client et serveur). L'exemple suivant vous montre comment l'analyseur
-            peut être utilisé :
-        </para>
-
-        <programlisting language="php"><![CDATA[
-// Chargement du WSDL dans un DOMDocument
-$dom = new DOMDocument();
-$dom->loadXML($wsdlString);
-
-// Création de l'analyseur
-$parser = Zend_Soap_Wsdl_Parser::factory($dom);
-$result = $parser->parse();
-
-// Nom du service Web
-echo $result->getName();
-
-// Ports d'accès et éléments internes
-foreach($result->ports AS $port) {
-    echo $port->getName();
-    foreach($port->bindings AS $binding) {
-        echo $binding->getName();
-
-        foreach($binding->operations AS $operation) {
-            echo $operation->getName();
-            echo $operation->inputMessage->getName();
-            echo $operation->outputMessage->getName();
-        }
-    }
-}
-// Vous pouvez accéder aux liaisons (bindings), aux messages, aux opérations
-// et tout autre éléments directement
-foreach($result->operations AS $operation) {
-    // faire qqch
-}
-foreach($result->bindings AS $binding {
-    // faire qqch
-}
-foreach($result->messages AS $message) {
-    // faire qqch
-}
-foreach($result->services AS $service) {
-    // faire qqch
-}
-foreach($result->types AS $type) {
-    // faire qqch
-}
-]]></programlisting>
-
-        <para>
-            Tous les éléments implémentent l'interface
-            <classname>Zend_Soap_Wsdl_Element_Interface</classname> qui déclare les fonctions
-            <methodname>getName()</methodname> et <methodname>getDocumentation()</methodname> fournissant respectivement un
-            identifiant unique de l'élément et sa documentation. Tous les éléments possèdent des
-            propriétés publiques qui décrivent son état avec plus de détails et qui contient aussi
-            ses dépendances imbriquées pour un accès itérable facile.
         </para>
     </sect2>
 </sect1>

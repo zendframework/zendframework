@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17409 -->
+<!-- EN-Revision: 18536 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>Créer des index</title>
@@ -147,7 +147,7 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
             conceptuellement. Une mise à jour de segment requiert une réorganisation complète de
             tous les segments. Consultez les formats de fichiers d'index pour plus de détails
             (<ulink
-            url="http://lucene.apache.org/java/docs/fileformats.html">http://lucene.apache.org/java/docs/fileformats.html</ulink>)
+                url="http://lucene.apache.org/java/2_3_0/fileformats.html">http://lucene.apache.org/java/2_3_0/fileformats.html</ulink>)
             <footnote>
                 <para>
                     Le format de fichier d'index supporté actuellement est la version 2.3

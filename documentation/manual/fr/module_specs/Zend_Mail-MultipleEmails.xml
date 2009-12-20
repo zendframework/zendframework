@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 19426 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.multiple-emails">
     <title>Envoyer plusieurs émail par connexion SMTP</title>
@@ -16,10 +16,11 @@
 
         <programlisting language="php"><![CDATA[
 // Créer un transport
-$transport = new Zend_Mail_Transport_Smtp('localhost');
+$config = array('name' => 'sender.example.com');
+$transport = new Zend_Mail_Transport_Smtp('mail.example.com', $config);
 
 // Boucle à travers les messages
-for ($i = 0; $i > 5; $i++) {
+for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
     $mail->addTo('studio@peptolab.com', 'Test');
     $mail->setFrom('studio@peptolab.com', 'Test');
@@ -35,8 +36,8 @@ for ($i = 0; $i > 5; $i++) {
     <para>
         Si vous voulez avoir une connexion SMTP séparée pour chaque distribution d'émail, vous
         devez créer et détruire votre transport avant et après chaque appel de la méthode
-        <methodname>send()</methodname>. Ou sinon, vous pouvez manipuler la connexion entre chaque distribution
-        en accédant à l'objet de protocole de transport.
+        <methodname>send()</methodname>. Ou sinon, vous pouvez manipuler la connexion entre chaque
+        distribution en accédant à l'objet de protocole de transport.
     </para>
 
     <example id="zend.mail.multiple-emails.example-2">
@@ -46,14 +47,14 @@ for ($i = 0; $i > 5; $i++) {
 // Créer un transport
 $transport = new Zend_Mail_Transport_Smtp();
 
-$protocol = new Zend_Mail_Protocol_Smtp('localhost');
+$protocol = new Zend_Mail_Protocol_Smtp('mail.example.com');
 $protocol->connect();
-$protocol->helo('localhost');
+$protocol->helo('sender.example.com');
 
 $transport->setConnection($protocol);
 
 // Boucle à travers les messages
-for ($i = 0; $i > 5; $i++) {
+for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
     $mail->addTo('studio@peptolab.com', 'Test');
     $mail->setFrom('studio@peptolab.com', 'Test');

@@ -274,6 +274,29 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_T
 
     public function testRespondsToValidConfirmationWithBodyContainingHubChallenge()
     {
+        $this->_tableGateway->expects($this->any())
+            ->method('find')
+            ->with($this->equalTo('verifytokenkey'))
+            ->will($this->returnValue($this->_rowset));
+        $rowdata = new stdClass;
+        $rowdata->id = 'verifytokenkey';
+        $rowdata->verify_token = hash('sha256', 'cba');
+        $t = time();
+        $rowdata->created_time = $t;
+        $this->_rowset->expects($this->any())
+            ->method('current')
+            ->will($this->returnValue($rowdata));
+            
+        $this->_tableGateway->expects($this->once())
+            ->method('update')
+            ->with(
+                $this->equalTo(array('id'=>'verifytokenkey','verify_token'=>hash('sha256', 'cba'),'created_time'=>$t,'verified'=>'1')),
+                $this->equalTo('id = \'verifytokenkey\'')
+            );
+        $this->_adapter->expects($this->once())
+            ->method('quoteInto')
+            ->with($this->equalTo('id = ?'), $this->equalTo('verifytokenkey'))
+            ->will($this->returnValue('id = \'verifytokenkey\''));
         $this->_callback->handle($this->_get);
         $this->assertTrue($this->_callback->getHttpResponse()->getBody() == 'abc');
     }
@@ -285,10 +308,24 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_T
         $_SERVER['CONTENT_TYPE'] = 'application/atom+xml';
         $feedXml = file_get_contents(dirname(__FILE__) . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml; // dirty  alternative to php://input
+        
+        $this->_tableGateway->expects($this->any())
+            ->method('find')
+            ->with($this->equalTo('verifytokenkey'))
+            ->will($this->returnValue($this->_rowset));
+        $rowdata = new stdClass;
+        $rowdata->id = 'verifytokenkey';
+        $rowdata->verify_token = hash('sha256', 'cba');
+        $t = time();
+        $rowdata->created_time = $t;
+        $this->_rowset->expects($this->any())
+            ->method('current')
+            ->will($this->returnValue($rowdata));
+        
         $this->_callback->handle(array());
         $this->assertTrue($this->_callback->getHttpResponse()->getHttpResponseCode() == 200);
     }
-
+    
     public function testRespondsToInvalidFeedUpdateNotPostWith404Response()
     {   // yes, this example makes no sense for GET - I know!!!
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -296,6 +333,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_T
         $_SERVER['CONTENT_TYPE'] = 'application/atom+xml';
         $feedXml = file_get_contents(dirname(__FILE__) . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
+        
         $this->_callback->handle(array());
         $this->assertTrue($this->_callback->getHttpResponse()->getHttpResponseCode() == 404);
     }
@@ -324,6 +362,20 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_T
         $_SERVER['CONTENT_TYPE'] = 'application/rss+xml';
         $feedXml = file_get_contents(dirname(__FILE__) . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
+        
+        $this->_tableGateway->expects($this->any())
+            ->method('find')
+            ->with($this->equalTo('verifytokenkey'))
+            ->will($this->returnValue($this->_rowset));
+        $rowdata = new stdClass;
+        $rowdata->id = 'verifytokenkey';
+        $rowdata->verify_token = hash('sha256', 'cba');
+        $t = time();
+        $rowdata->created_time = $t;
+        $this->_rowset->expects($this->any())
+            ->method('current')
+            ->will($this->returnValue($rowdata));
+        
         $this->_callback->handle(array());
         $this->assertTrue($this->_callback->getHttpResponse()->getHttpResponseCode() == 200);
     }
@@ -335,6 +387,20 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_T
         $_SERVER['CONTENT_TYPE'] = 'application/atom+xml';
         $feedXml = file_get_contents(dirname(__FILE__) . '/_files/atom10.xml');
         $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
+        
+        $this->_tableGateway->expects($this->any())
+            ->method('find')
+            ->with($this->equalTo('verifytokenkey'))
+            ->will($this->returnValue($this->_rowset));
+        $rowdata = new stdClass;
+        $rowdata->id = 'verifytokenkey';
+        $rowdata->verify_token = hash('sha256', 'cba');
+        $t = time();
+        $rowdata->created_time = $t;
+        $this->_rowset->expects($this->any())
+            ->method('current')
+            ->will($this->returnValue($rowdata));
+        
         $this->_callback->handle(array());
         $this->assertTrue($this->_callback->getHttpResponse()->getHeader('X-Hub-On-Behalf-Of') == 1);
     }

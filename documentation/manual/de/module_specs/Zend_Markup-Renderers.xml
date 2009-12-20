@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 19720 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.markup.renderers">
+    <title>Zend_Markup Renderer</title>
+
+    <para>
+        <classname>Zend_Markup</classname> wird aktuell mit einem Renderer ausgeliefert, dem
+        <acronym>HTML</acronym> Renderer.
+    </para>
+
+    <sect2 id="zend.markup.renderers.add">
+        <title>Eigene Tags hinzufügen</title>
+
+        <para>
+            Indem man eigene Tags hinzufügt, kann man den <classname>Zend_Markup</classname>
+            Renderern eigene Funktionalitäten hinzufügen. Mit der Tag Struktur kann man jede
+            Funktionalität welche man haben will hinzufügen. Von einfachen Tags bis zu komplizierten
+            Tag Strukturen. Ein einfaches Beispiel für ein 'foo' Tag:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Erstellt eine Instanz von Zend_Markup_Renderer_Html,
+// mit Zend_Markup_Parser_BbCode als seinen Parser
+$bbcode = Zend_Markup::factory('Bbcode');
+
+// Dies erstellt ein einfaches 'foo' Tag
+// Der erste Parameter definiert den Namen des Tags
+// Der zweite Parameter nimmt ein Integer welche den Typ des Tags definiert
+// Der dritte Parameter ist ein Array die andere Dinge des Tags definiert
+// wie die Gruppe des Tags, und (in diesem Fall) ein Start und Ende Tag
+$bbcode->addTag(
+    'foo',
+    Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE
+        | Zend_Markup_Renderer_RendererAbstract::TAG_NORMAL,
+    array(
+        'start' => '-bar-',
+        'end'   => '-baz-',
+        'group' => 'inline',
+    )
+);
+
+// Jetzt gibt dies folgendes aus: 'my -bar-tag-baz-'
+echo $bbcode->render('my [foo]tag[/foo]');
+]]></programlisting>
+
+        <para>
+            Es gilt zu beachten das die Erstellung eigener Tag nur dann Sinn macht wenn der eigene
+            Parser diese auch in einer Tag Struktur unterstützt. Aktuell unterstützt dies nur
+            BBCode. Textile hat keine Unterstützung für eigene Tags.
+        </para>
+    </sect2>
+</sect1>

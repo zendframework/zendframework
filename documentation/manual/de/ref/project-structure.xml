@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18656 -->
+<!-- EN-Revision: 19711 -->
 <!-- Reviewed: no -->
 <appendix id="project-structure">
     <title>Vorgeschlagene Struktur für die Projekt Struktur von Zend Framework MVC Anwendungen</title>
@@ -39,7 +39,7 @@
     <sect1 id="project-structure.project">
         <title>Vorgeschlagene Verzeichnis Struktur für Projekte</title>
 
-        <programlisting language="txt"><![CDATA[
+        <programlisting language="text"><![CDATA[
 <project name>/
     application/
         configs/
@@ -264,7 +264,7 @@
             entsprechen:
         </para>
 
-        <programlisting language="xml"><![CDATA[
+        <programlisting language="text"><![CDATA[
 <modulename>/
     configs/
         application.ini
@@ -323,7 +323,7 @@
                     wenn eine passende Datei im <property>document_root</property> gefunden wurde.
                 </para>
 
-                <programlisting language="xml"><![CDATA[
+                <programlisting language="text"><![CDATA[
 <VirtualHost my.domain.com:80>
     ServerName   my.domain.com
     DocumentRoot /path/to/server/root/my.domain.com/public

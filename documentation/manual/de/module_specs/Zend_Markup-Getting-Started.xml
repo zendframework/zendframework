@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 19720 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.markup.getting-started">
+    <title>Beginnen mit Zend_Markup</title>
+
+    <para>
+        This guide to get you started with <classname>Zend_Markup</classname> uses the BBCode parser
+        and <acronym>HTML</acronym> renderer. The priciples discussed can be adapted to other
+        parsers and renderers.
+    </para>
+
+    <example id="zend.markup.getting-started.basic-usage">
+        <title>Basic Zend_Markup Usage</title>
+
+        <para>
+            We will first instantiate a <classname>Zend_Markup_Renderer_Html</classname> object
+            using the <methodname>Zend_Markup::factory()</methodname> method.  This will also create
+            a <classname>Zend_Markup_Parser_Bbcode</classname> object which will be added to the
+            renderer object.
+        </para>
+
+        <para>
+            Afther that, we will use the <methodname>render()</methodname> method to convert a piece
+            of BBCode to <acronym>HTML</acronym>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Creates instance of Zend_Markup_Renderer_Html,
+// with Zend_Markup_Parser_BbCode as its parser
+$bbcode = Zend_Markup::factory('Bbcode');
+
+echo $bbcode->render('[b]bold text[/b] and [i]cursive text[/i]');
+// Outputs: '<strong>bold text</strong> and <em>cursive text</em>'
+]]></programlisting>
+    </example>
+
+    <example id="zend.markup.getting-started.complicated-example">
+        <title>A more complicated example of Zend_Markup</title>
+
+        <para>
+            This time, we will do exactly the same as above, but with more complicated BBCode
+            markup.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$bbcode = Zend_Markup::factory('Bbcode');
+
+$input = <<<EOT
+[list]
+[*]Zend Framework
+[*]Foobar
+[/list]
+EOT;
+
+echo $bbcode->render($input);
+/*
+Should output something like:
+<ul>
+<li>Zend Framework</li>
+<li>Foobar</li>
+</ul>
+*/
+]]></programlisting>
+    </example>
+
+    <example id="zend.markup.getting-started.incorrect-input">
+        <title>Processing incorrect input</title>
+
+        <para>
+            Besides simply parsing and rendering markup such as BBCode,
+            <classname>Zend_Markup</classname> is also able to handle incorrect input. Most BBCode
+            processors are not able to render all input to <acronym>XHTML</acronym> valid output.
+            <classname>Zend_Markup</classname> corrects input that is nested incorrectly, and also
+            closes tags that were not closed:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$bbcode = Zend_Markup::factory('Bbcode');
+
+echo $bbcode->render('some [i]wrong [b]sample [/i] text');
+// Note that the '[b]' tag is never closed, and is also incorrectly
+// nested; regardless, Zend_Markup renders it correctly as:
+// some <em>wrong <strong>sample </strong></em><strong> text</strong>
+]]></programlisting>
+    </example>
+</sect1>

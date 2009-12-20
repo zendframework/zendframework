@@ -2,21 +2,21 @@
 <!-- EN-Revision: 19720 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.markup.parsers">
-    <title>Zend_Markup Parsers</title>
+    <title>Zend_Markup Parser</title>
 
     <para>
-        <classname>Zend_Markup</classname> is currently shipped with two parsers, a BBCode parser
-        and a Textile parser.
+        <classname>Zend_Markup</classname> wird aktuell mit zwei Parsern ausgeliefert, einen BBCode
+        Parser und einen Textile Parser.
     </para>
 
     <sect2 id="zend.markup.parsers.theory">
-        <title>Theory of Parsing</title>
+        <title>Theorie des Parsens</title>
 
         <para>
-            The parsers of <classname>Zend_Markup</classname> are classes that convert text with
-            markup to a token tree. Although we are using the BBCode parser as example here, the
-            idea of the token tree remains the same across all parsers. We will start with this
-            piece of BBCode for example:
+            Die Parser von <classname>Zend_Markup</classname> sind Klasse die Text mit Markup in
+            einen Token Baum konvertieren. Auch wenn wir hier den BBCode Parser als Beispiel
+            verwenden ist die Idee des Token Baums die gleiche bei allen Parsern. Wir beginnen mit
+            diesem Teil von BBCode als Beispiel:
         </para>
 
         <programlisting><![CDATA[
@@ -24,8 +24,7 @@
 ]]></programlisting>
 
         <para>
-            Then the BBCode parser will take that value, tear it apart and create the following
-            tree:
+            Der BBCode Parser nimmt diesen Wert, teilt Ihn auf und erzeugt den folgenden Baum:
         </para>
 
         <itemizedlist>
@@ -55,21 +54,21 @@
         </itemizedlist>
 
         <para>
-            You will notice that the closing tags are gone, they don't show up as content in the
-            tree structure. This is because the closing tag isn't part of the actual content.
-            Although, this does not mean that the closing tag is just lost, it is stored inside the
-            tag information for the tag itself. Also, please note that this is just a simplified
-            view of the tree itself. The actual tree contains a lot more information, like the tag's
-            attributes and its name.
+            Wie man sieht sind die schließenden Tags weg. Sie werden nicht als Inhalt der
+            Baumstruktur angezeigt. Das ist deswegen der Fall, da schließende Tags kein Teil des
+            aktuellen Inhalts sind. Das bedeutet aber nicht das die schließenden Tags einfach
+            verloren sind. Sie sind in der Tag Information für das Tag selbst gespeichert. Es ist
+            auch zu beachten das dies nur eine vereinfachte Darstelliung des Baumes selbst ist. Der
+            aktuelle Baum enthält viel mehr Information, wie die Attribute der Tags und deren Namen.
         </para>
     </sect2>
 
     <sect2 id="zend.markup.parsers.bbcode">
-        <title>The BBCode parser</title>
+        <title>Der BBCode Parser</title>
 
         <para>
-            The BBCode parser is a <classname>Zend_Markup</classname> parser that converts BBCode to
-            a token tree. The syntax of all BBCode tags is:
+            Der BBCode Parser ist ein <classname>Zend_Markup</classname> Parser der BBCode in einen
+            Token Baum konvertiert. Die Syntax alle BBCode Tags ist:
         </para>
 
         <programlisting language="text"><![CDATA[
@@ -77,7 +76,7 @@
 ]]></programlisting>
 
         <para>
-            Some examples of valid BBCode tags are:
+            Einige Beispiel von gültigen BBCode Tags sind:
         </para>
 
         <programlisting><![CDATA[
@@ -88,28 +87,28 @@
 ]]></programlisting>
 
         <para>
-            By default, all tags are closed by using the format '[/tagname]'.
+            Standardmäßig werden alle Tags durch Verwendung des Formats '[/tagname]' geschlossen.
         </para>
     </sect2>
 
     <sect2 id="zend.markup.parsers.textile">
-        <title>The Textile parser</title>
+        <title>Der Textile Parser</title>
 
         <para>
-            The Textile parser is a <classname>Zend_Markup</classname> parser that converts Textile
-            to a token tree. Because Textile doesn't have a tag structure, the following is a list
-            of example tags:
+            Der Textile Parser ist ein <classname>Zend_Markup</classname> Parser der Textile in
+            einen Token Baum konvertiert. Weil Textile keine Tag Struktur hat ist nachfolgend eine
+            Liste von Beispiel Tags:
         </para>
 
         <table id="zend.markup.parsers.textile.tags">
-            <title>List of basic Textile tags</title>
+            <title>Liste der grundsätzlichen Textile Tags</title>
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
                 <thead>
                     <row>
-                        <entry>Sample input</entry>
+                        <entry>Beispiel Eingabe</entry>
 
-                        <entry>Sample output</entry>
+                        <entry>Beispiel Ausgabe</entry>
                     </row>
                 </thead>
 
@@ -196,30 +195,32 @@
         </table>
 
         <para>
-            Also, the Textile parser wraps all tags into paragraphs; a paragraph ends with two
-            newlines, and if there are more tags, a new paragraph will be added.
+            Auch der Textile Parser wrappt alle Tags in Paragraphen; ein Paragraph endet mit zwei
+            Leerzeilen, und wenn es mehr Tags gibt, wird ein neuer Paragraph hinzugefügt.
         </para>
 
         <sect3 id="zend.markup.parsers.textile.lists">
-            <title>Lists</title>
+            <title>Listen</title>
 
             <para>
-                The Textile parser also supports two types of lists. The numeric type, using the "#"
-                character and bullit-lists using the "*" character. An example of both lists:
+                Der Textile Parser unterstützt auch zwei Typen von Listen. Den nummerischen Typ
+                der das "#" Zeichen verwendet und Bullet-Listen welche das "*" Zeichen verwenden.
+                Anbei ein Beispiel für beide Listen:
             </para>
 
             <programlisting><![CDATA[
-# Item 1
-# Item 2
+# Element 1
+# Element 2
 
-* Item 1
-* Item 2
+* Element 1
+* Element 2
 ]]></programlisting>
 
             <para>
-                The above will generate two lists: the first, numbered; and the second, bulleted.
-                Inside list items, you can use normal tags like strong (*), and emphasized (_). Tags
-                that need to start on a new line (like 'h1' etc.) cannot be used inside lists.
+                Das obige erzeugt zwei Listen: Die erste nummeriert; und die zweite mit Punkten.
+                In den Listen Elementen können normale Tags wie dick (*), und hochgestellt (_)
+                verwendet werden. Tags die auf einer neuen Zeile beginnen müssen (wie 'h1' usw.)
+                können nicht innerhalb von Listen verwendet werden.
             </para>
         </sect3>
     </sect2>

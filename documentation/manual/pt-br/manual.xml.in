@@ -268,7 +268,7 @@
                 </xi:fallback>
             </xi:include>
         </chapter>
-        
+
         <chapter id="learning.paginator">
             <title>Iniciando com o Zend_Paginator</title>
             <xi:include href="tutorials/paginator-intro.xml">

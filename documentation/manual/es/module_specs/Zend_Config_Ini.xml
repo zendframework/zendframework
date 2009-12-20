@@ -3,7 +3,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
-    <para>
+   <para>
         <classname>Zend_Config_Ini</classname>
         permite a los desarrolladores almacenar datos de configuración
         en un formato de datos <acronym>INI</acronym> familiar, y leer de ellos en la
@@ -20,10 +20,10 @@
         "<emphasis>:</emphasis>"
         ) y el nombre de la sección desde la cual se quieren heredar los
         datos.
-    </para>
+   </para>
     <note>
         <title>parse_ini_file</title>
-        <para>
+       <para>
             <classname>Zend_Config_Ini</classname>
             utiliza la función
             <ulink url="http://php.net/parse_ini_file">
@@ -43,17 +43,17 @@
             , y
             <constant>NULL</constant>
             son manejados.
-        </para>
+       </para>
     </note>
     <note>
         <title>Separador de clave</title>
-        <para>
+       <para>
             Por defecto, el carácter separador de clave es el punto (
             "<emphasis>.</emphasis>"
             ). Puede ser reemplazado, no obstante,cambiando la clave de
             <varname>$options</varname>
             llamada
-            <property>nestSeparator</property> 
+            <property>nestSeparator</property>
             al construir el objeto
             <classname>Zend_Config_Ini</classname>
             . Por ejemplo:
@@ -63,11 +63,11 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
                               'pruebas',
                               $options);
 ]]></programlisting>
-        </para>
+       </para>
     </note>
     <example id="zend.config.adapters.ini.example.using">
         <title>Utilizando Zend_Config_Ini</title>
-        <para>
+       <para>
             Este ejemplo muestra una forma de uso básica de
             <classname>Zend_Config_Ini</classname>
             para cargar datos de configuración de un archivo <acronym>INI</acronym>. En
@@ -83,7 +83,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
             los siguientes datos de configuración están contenidos en
             <filename>/path/to/config.ini</filename>:
             :
-        </para>
+       </para>
         <programlisting language="ini"><![CDATA[
 ; Datos de configuración de la web de producción
 [produccion]
@@ -101,12 +101,12 @@ database.params.host     = dev.example.com
 database.params.username = devuser
 database.params.password = devsecret
 ]]></programlisting>
-        <para>
+       <para>
             Ahora, asuma que el desarrollador de aplicaciones necesita
             los datos de configuración de la etapa de pruebas del
             archivo <acronym>INI</acronym>. Resulta fácil cargar estos datos especificando
             el archivo <acronym>INI</acronym> en la sección de la etapa de pruebas:
-        </para>
+       </para>
          <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'pruebas');
 
@@ -147,15 +147,15 @@ echo $config->database->params->dbname; // muestra "dbname"
                         </entry>
                     </row>
                     <row>
-                        
+
                             <entry><varname>$options</varname> (default <constant>FALSE</constant>)</entry>
-                       
+
                         <entry>
                             Array de opciones. Las siguientes claves
                             están aceptadas:
                             <itemizedlist>
                                 <listitem>
-                                    <para>
+                                   <para>
 <emphasis><property>allowModifications</property></emphasis>:
                                         : Fijar a
                                         <constant>TRUE</constant>
@@ -163,15 +163,15 @@ echo $config->database->params->dbname; // muestra "dbname"
                                         subsiguientes del archivo
                                         cargado. Por defecto es
                                         <constant>NULL</constant>
-                                    </para>
+                                   </para>
                                 </listitem>
                                 <listitem>
-                                    <para>
+                                   <para>
 <emphasis><property>nestSeparator</property></emphasis>
                                         : Carácter que utilizar como
                                         separador de anidamiento. Por
                                         defecto es "."
-                                    </para>
+                                   </para>
                                 </listitem>
                             </itemizedlist>
                         </entry>

@@ -5,7 +5,7 @@
 
     <title>Cadenas de Validadores</title>
 
-    <para> Frecuentemente deben aplicarse múltiples validaciones a algún valor
+    <para>Frecuentemente deben aplicarse múltiples validaciones a algún valor
         en un orden particular. El siguiente código demuestra una forma de
         resolver el ejemplo de la <link linkend="zend.validate.introduction"
             >introducción</link>, donde el nombre de usuario debe tener entre 6
@@ -33,9 +33,9 @@ if ($validatorChain->isValid($username)) {
         validación; de longitud entre 6 y 12 caracteres; tenga éxito. Esto
         significa que si ambas validaciones fallan,
             <methodname>getMessages()</methodname> devolverá mensajes de fracaso
-        desde ambos validadores. </para>
+        desde ambos validadores.</para>
 
-    <para> En algunos casos tiene sentido detener la cadena de validación si
+    <para>En algunos casos tiene sentido detener la cadena de validación si
         falla alguno de los procesos de validación.
             <classname>Zend_Validate</classname> acepta tales casos pasando como
         segundo parámetro el método <methodname>addValidator()</methodname>.
@@ -49,10 +49,10 @@ if ($validatorChain->isValid($username)) {
 $validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
         ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>
-    </para>
+   </para>
 
-    <para> Cualquier objeto que implemente
+    <para>Cualquier objeto que implemente
             <classname>Zend_Validate_Interface</classname> puede ser utilizado
-        en una cadena de validación. </para>
+        en una cadena de validación.</para>
 
 </sect1>

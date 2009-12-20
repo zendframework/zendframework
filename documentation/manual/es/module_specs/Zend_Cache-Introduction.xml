@@ -3,11 +3,11 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.introduction">
     <title>Introducción</title>
-    <para>
+   <para>
         <classname>Zend_Cache</classname>
         provee una forma genérica para cualquier caché de datos.
-    </para>
-    <para>
+   </para>
+   <para>
         El almacenamiento en caché en Zend Framework se opera por
         interfaces, mientras que los registros de caché son almacenados
         a través de adapatadores del backend (
@@ -20,10 +20,10 @@
         etiquetas. Utilizando éstas, es fácil en el futuro eliminar
         determinados tipos de registro.(Ejemplo: "eliminar todos los
         registros caché de determinada etiqueta").
-    </para>
-    <para>
+   </para>
+   <para>
         El módulo principal (<classname>Zend_Cache_Core</classname>)
-		es genérico, flexible y configurable. Aun para sus necesidades
+        es genérico, flexible y configurable. Aun para sus necesidades
         específicas existen frontends de caché que extienden
         <classname>Zend_Cache_Core</classname>
         a conveniencia:
@@ -36,13 +36,13 @@
         <emphasis>Class</emphasis>
         .
 
-    </para>
+   </para>
     <example id="zend.cache.introduction.example-1">
         <title>
             Obtener un frontend con
             Zend_Cache::factory()
         </title>
-        <para>
+       <para>
             <methodname>Zend_Cache::factory()</methodname>
             ejemplifica objetos correctos y los une. En este primer
             ejemplo, usaremos el frontend
@@ -50,7 +50,7 @@
             junto con el backend
             <emphasis>File</emphasis>
             .
-        </para>
+       </para>
 
          <programlisting language="php"><![CDATA[
 $frontendOptions = array(
@@ -74,18 +74,18 @@ $cache = Zend_Cache::factory('Core',
         <title>
             Frontends y Backends Compuestos de Múltiples Palabras
         </title>
-        <para>
+       <para>
             Algunos frontends y backends se nombran usando varias
             palabras, tal como 'ZenPlatform'. Al fabricarlas las
             especificamos, las separamos usando un separador de
             palabras, como un espacio (' '), guión ('-'), o punto ('.').
-        </para>
+       </para>
     </note>
 
     <example id="zend.cache.introduction.example-2">
         <title>Almacenando en caché un resultado de consulta a una base de datos</title>
 
-        <para>
+       <para>
             Ahora que tenemos un frontend, podemos almacenar en caché
             cualquier tipo de dato (hemos activado la serialización). Por
             ejemplo, podemos almacenar en caché un resultado de una
@@ -93,7 +93,7 @@ $cache = Zend_Cache::factory('Core',
             almacenada en caché, no es necesario ni conectar la base
             de datos; los registros se obtienen del caché de forma no
             serializada.
-        </para>
+       </para>
 
          <programlisting language="php"><![CDATA[
 // $cache initializada en el ejemplo anterior
@@ -126,7 +126,7 @@ print_r($result);
             salida
             Zend_Cache
         </title>
-        <para>
+       <para>
             ‘Resaltamos’ las secciones en las que deseamos almacenar en
             caché la salida, mediante la adición de algunas condiciones lógicas,
             encapsulamos la sección dentro de los métodos
@@ -135,8 +135,8 @@ print_r($result);
             <methodname>end()</methodname>
             (esto se parece al primer ejemplo y es la estrategia
             fundamental para el almacenamiento en caché).
-        </para>
-        <para>
+       </para>
+       <para>
             Dentro, los datos de salida, como siempre – todas las salidas
             serán almacenadas en caché cuando se ordene la ejecución del
             método
@@ -144,7 +144,7 @@ print_r($result);
             . En la siguiente ejecución, toda la sección se saltará a
             favor de la búsqueda de datos del caché (tanto tiempo como
             el registro del caché sea válido).
-        </para>
+       </para>
          <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 30,                   // tiempo de vida de caché de 30 segundos
@@ -170,7 +170,7 @@ if(!$cache->start('mypage')) {
 
 echo 'Esto no estará en caché nunca ('.time().').';
 ]]></programlisting>
-        <para>
+       <para>
             Note que delineamos el resultado de
             <methodname>time()</methodname>
             dos veces; esto es algo dinámico para los propósitos de la
@@ -184,10 +184,10 @@ echo 'Esto no estará en caché nunca ('.time().').';
             registro caché ha expirado -- sólo para ser almacenado en
             caché nuevamente. Deberá probarlo en su visualizador o
             consola.
-        </para>
+       </para>
     </example>
     <note>
-        <para>
+       <para>
             Cuando usamos <classname>Zend_Cache</classname>, ponemos atención a la importación
             del identificador caché (pasado a
             <methodname>save()</methodname>
@@ -197,7 +197,7 @@ echo 'Esto no estará en caché nunca ('.time().').';
             en caché, de otra manera los registros almacenados en caché
             que no se vinculan podrían borrarse unos a otros, o peor
             aún, mostrarse uno en lugar del otro.
-        </para>
+       </para>
     </note>
 </sect1>
 <!--

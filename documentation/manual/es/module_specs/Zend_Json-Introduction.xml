@@ -7,13 +7,13 @@
         <classname>Zend_Json</classname> ofrece métodos convenientes para la serialización desde
             <acronym>PHP</acronym> nativo a <acronym>JSON</acronym> y la decodificación <acronym>JSON</acronym> a <acronym>PHP</acronym>
         nativo. Para más información sobre <acronym>JSON</acronym>, <ulink url="http://www.json.org/"> visite el sitio
-            del proyecto <acronym>JSON</acronym></ulink>. </para>
-    <para> <acronym>JSON</acronym>, JavaScript Object Notation, puede ser utilizado para intercambio de datos entre
+            del proyecto <acronym>JSON</acronym></ulink>.</para>
+    <para><acronym>JSON</acronym>, JavaScript Object Notation, puede ser utilizado para intercambio de datos entre
         JavaScript y otros lenguajes. Dado que <acronym>JSON</acronym> puede ser evaluado directamente por JavaScript,
         es más eficiente y ligero que el formato <acronym>XML</acronym> para intercambiar datos con
-        clientes JavaScript. </para>
+        clientes JavaScript.</para>
 
-    <para> Adicionalmente, <classname>Zend_Json</classname> provee una forma útil para convertir
+    <para>Adicionalmente, <classname>Zend_Json</classname> provee una forma útil para convertir
         cualquier string arbitrario con formato <acronym>XML</acronym> en un string con formato
         <acronym>JSON</acronym>. Este rasgo integral permite a desarrolladores <acronym>PHP</acronym> transformar los
         datos codificados de la empresa en formato <acronym>XML</acronym> a formato<acronym>JSON</acronym> antes de
@@ -21,6 +21,6 @@
         fácil de hacer conversiones dinámicas de datos del código en el servidor evitando así el
         innecesario parsing de <acronym>XML</acronym> de las aplicaciones en el navegador. Ofrece
         una agradable función útil que facilita las técnicas de procesamiento de datos para
-        aplicaciones específicas. </para>
+        aplicaciones específicas.</para>
 
 </sect1>

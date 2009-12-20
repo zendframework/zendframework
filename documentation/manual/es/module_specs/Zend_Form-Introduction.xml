@@ -6,7 +6,7 @@
 
     <para>
         <classname>Zend_Form</classname> simplifica la creación y manipulación de formularios en tus
-        aplicaciones web. Cumple los siguientes objetivos: </para>
+        aplicaciones web. Cumple los siguientes objetivos:</para>
 
     <itemizedlist>
         <listitem>
@@ -26,9 +26,9 @@
         </listitem>
     </itemizedlist>
 
-    <para> Se aprovecha en gran medida de otros componentes de Zend Framework para lograr sus
+    <para>Se aprovecha en gran medida de otros componentes de Zend Framework para lograr sus
         objetivos, incluyendo <classname>Zend_Config</classname>,
             <classname>Zend_Validate</classname>, <classname>Zend_Filter</classname>,
             <classname>Zend_Loader_PluginLoader</classname> y, opcionalmente,
-            <classname>Zend_View</classname>. </para>
+            <classname>Zend_View</classname>.</para>
 </sect1>

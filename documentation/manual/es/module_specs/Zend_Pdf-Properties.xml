@@ -4,9 +4,9 @@
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
     <title>Información del Documento y Metadatos.</title>
-    <para> Un documento PDF puede incluir información general como el título del documento, autor,
-        la creación y modificación de fechas. </para>
-    <para> Históricamente, esta información se almacena usando una estructura especial de
+    <para>Un documento PDF puede incluir información general como el título del documento, autor,
+        la creación y modificación de fechas.</para>
+    <para>Históricamente, esta información se almacena usando una estructura especial de
         Información. Esta estructura está disponible para lectura y la escritura como una array
         asociativo utilizando propiedades públicas <methodname>properties</methodname> de objetos
             <classname>Zend_Pdf</classname>: <programlisting language="php"><![CDATA[
@@ -18,38 +18,38 @@ echo $pdf->properties['Author'] . "\n";
 $pdf->properties['Title'] = 'New Title.';
 $pdf->save($pdfPath);
 ]]></programlisting>
-    </para>
-    <para> Las siguientes claves están definidas por v1.4 <acronym>PDF</acronym> (Acrobat 5) estándar: <itemizedlist>
+   </para>
+    <para>Las siguientes claves están definidas por v1.4 <acronym>PDF</acronym> (Acrobat 5) estándar: <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Title</emphasis> - string, opcional, el título del documento. </para>
+                    <emphasis>Title</emphasis> - string, opcional, el título del documento.</para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis>Author</emphasis> - string, opcional, el nombre de la persona que creó
-                    el documento. </para>
+                    el documento.</para>
             </listitem>
             <listitem>
                 <para>
-                    <emphasis>Subject</emphasis> - string, opcional, el tema del documento. </para>
+                    <emphasis>Subject</emphasis> - string, opcional, el tema del documento.</para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis>Keywords</emphasis> - string, opcional, las palabras clave asociadas
-                    con el documento. </para>
+                    con el documento.</para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis>Creator</emphasis> - string, opcional, si el documento se convirtió
                     desde otro formato a <acronym>PDF</acronym>, el nombre de la aplicación (por ejemplo, Adobe
                     FrameMaker ®) que creó el documento original a partir del cual se convirtió.
-                </para>
+               </para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis>Producer</emphasis> - string, opcional, si el documento se convirtió
                     desde otro formato a <acronym>PDF</acronym>, el nombre de la aplicación (por ejemplo, Acrobat
-                    Distiller), que lo convirtió a <acronym>PDF</acronym>. </para>
+                    Distiller), que lo convirtió a <acronym>PDF</acronym>.</para>
             </listitem>
             <listitem>
                 <para>
@@ -58,43 +58,43 @@ $pdf->save($pdfPath);
                     que: <itemizedlist>
                         <listitem>
                             <para>
-                                <emphasis>YYYY</emphasis> es el año. </para>
+                                <emphasis>YYYY</emphasis> es el año.</para>
                         </listitem>
                         <listitem>
                             <para>
-                                <emphasis>MM</emphasis> es el mes. </para>
+                                <emphasis>MM</emphasis> es el mes.</para>
                         </listitem>
                         <listitem>
                             <para>
-                                <emphasis>DD</emphasis> es el día (01–31). </para>
+                                <emphasis>DD</emphasis> es el día (01–31).</para>
                         </listitem>
                         <listitem>
                             <para>
-                                <emphasis>HH</emphasis> es la hora (00–23). </para>
+                                <emphasis>HH</emphasis> es la hora (00–23).</para>
                         </listitem>
                         <listitem>
                             <para>
-                                <emphasis>mm</emphasis> es el minuto (00–59). </para>
+                                <emphasis>mm</emphasis> es el minuto (00–59).</para>
                         </listitem>
                         <listitem>
                             <para>
-                                <emphasis>SS</emphasis> es el segundo (00–59). </para>
+                                <emphasis>SS</emphasis> es el segundo (00–59).</para>
                         </listitem>
                         <listitem>
                             <para>
                                 <emphasis>O</emphasis> es la relación de la hora local a la hora
                                 universal (UT), identificado por uno de los caracteres +, -, o Z
-                                (véase más adelante). </para>
+                                (véase más adelante).</para>
                         </listitem>
                         <listitem>
                             <para>
                                 <emphasis>HH</emphasis> seguido de ' es el valor absoluto de la
-                                posición de la UT en horas (00-23). </para>
+                                posición de la UT en horas (00-23).</para>
                         </listitem>
                         <listitem>
                             <para>
                                 <emphasis>mm</emphasis> seguido de ' es el valor absoluto de la
-                                posición de la UT en minutos (00-59). </para>
+                                posición de la UT en minutos (00-59).</para>
                         </listitem>
                     </itemizedlist> El carácter apóstrofe (') después de HH mm es parte de la
                     sintaxis. Todos los campos después del año son opcionales. (El prefijo D:,
@@ -105,16 +105,16 @@ $pdf->save($pdfPath);
                     la UT, y la letra Z que la hora local es igual a la UT. Si no se especifica la
                     información UT, la relación del tiempo especificado para UT se considera
                     desconocida. Ya sea que la zona horaria se conozca o no, el resto de la fecha
-                    debe estar especificada en la hora local. </para>
-                <para> Por ejemplo, el 23 de diciembre de 1998, a las 7:52 PM, hora estándar del
+                    debe estar especificada en la hora local.</para>
+                <para>Por ejemplo, el 23 de diciembre de 1998, a las 7:52 PM, hora estándar del
                     Pacífico de EE.UU., está representado por el string "D:199812231952-08'00'".
-                </para>
+               </para>
             </listitem>
             <listitem>
                 <para>
                     <emphasis>ModDate</emphasis> - string, opcional, la fecha y la hora en que el
                     documento fue modificado mas recientemente, de la misma forma que
-                        <emphasis>CreationDate</emphasis>. </para>
+                        <emphasis>CreationDate</emphasis>.</para>
             </listitem>
             <listitem>
                 <para>
@@ -123,30 +123,30 @@ $pdf->save($pdfPath);
                         <listitem>
                             <para>
                                 <emphasis>true</emphasis> - El documento ha sido capturado; no se
-                                necesitan más capturas. </para>
+                                necesitan más capturas.</para>
                         </listitem>
                         <listitem>
                             <para>
                                 <emphasis>false</emphasis> - El documento aún no ha sido capturado;
-                                cualquier captura todavía debe ser hecha. </para>
+                                cualquier captura todavía debe ser hecha.</para>
                         </listitem>
                         <listitem>
                             <para>
                                 <emphasis>null</emphasis> - O bien se desconoce si el documento ha
                                 sido capturado o que lo ha sido en parte pero no completamente
-                                capturado, y alguna captura adicional puede ser necesaria. </para>
+                                capturado, y alguna captura adicional puede ser necesaria.</para>
                         </listitem>
                     </itemizedlist>
-                </para>
+               </para>
             </listitem>
         </itemizedlist>
-    </para>
+   </para>
 
-    <para> Desde <acronym>PDF</acronym> v 1.6 los metadatos se pueden almacenar en el documento <acronym>XML</acronym>
+    <para>Desde <acronym>PDF</acronym> v 1.6 los metadatos se pueden almacenar en el documento <acronym>XML</acronym>
         especial adjunto al <acronym>PDF</acronym> (XMP - <ulink url="http://www.adobe.com/products/xmp/">Extensible
-            Metadata Platform</ulink>). </para>
+            Metadata Platform</ulink>).</para>
 
-    <para> Este documento <acronym>XML</acronym> se pueden recuperar y adjuntar al <acronym>PDF</acronym> con los
+    <para>Este documento <acronym>XML</acronym> se pueden recuperar y adjuntar al <acronym>PDF</acronym> con los
         métodos <methodname>Zend_Pdf::getMetadata()</methodname> y
             <methodname>Zend_Pdf::setMetadata($metadata)</methodname>: <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
@@ -168,9 +168,9 @@ $titleNode->nodeValue = 'New title';
 $pdf->setMetadata($metadataDOM->saveXML());
 $pdf->save($pdfPath);
 ]]></programlisting>
-    </para>
+   </para>
 
-    <para> Las propiedades comunes del documento se duplican en la estructura de Info y el documento
+    <para>Las propiedades comunes del documento se duplican en la estructura de Info y el documento
         Metadata (si se presentan). Ahora es responsabilidad del usuario la aplicación para
-        mantenerlos sincronizados. </para>
+        mantenerlos sincronizados.</para>
 </sect1>

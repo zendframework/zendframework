@@ -4,19 +4,19 @@
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: Envolturas de dojo.data</title>
 
-    <para> Dojo proporciona abstracciones de datos para los widgets de datos
+   <para>Dojo proporciona abstracciones de datos para los widgets de datos
         habilitados a través de su componente dojo.data. Este componente
         proporciona la capacidad de adjuntar un datastore, ofrecer algunos
         metadatos relativos al campo identidad, opcionalmente una etiqueta de
         campo, y una <acronym>API</acronym> para efectuar consultas,
         clasificación, recuperación de archivos y conjuntos de registros del
-        datastore. </para>
+        datastore.</para>
 
-    <para> dojo.data se utiliza a menudo con XmlHttpRequest para traer
+   <para>dojo.data se utiliza a menudo con XmlHttpRequest para traer
         dinámicamente datos desde el servidor. El principal mecanismo para esto
         es extender el QueryReadStore para que apunte a una  <acronym>URL</acronym> y especificar la
         información a consultar. El lado del servidor después devuelve los datos
-        con el siguiente formato <acronym>JSON</acronym>: </para>
+        con el siguiente formato <acronym>JSON</acronym>:</para>
 
     <programlisting language="javascript"><![CDATA[
 {
@@ -29,17 +29,17 @@
 }
 ]]></programlisting>
 
-    <para>
+   <para>
         <classname>Zend_Dojo_Data</classname> ofrece una interfaz simple para la
         construcción de estas estructuras programáticamente, interactuando con
-        ellos, y serializándolos a un array o a <acronym>JSON</acronym>. </para>
+        ellos, y serializándolos a un array o a <acronym>JSON</acronym>.</para>
 
     <sect2 id="zend.dojo.data.usage">
         <title>Uso de Zend_Dojo_Data</title>
 
-        <para> En su forma más simple, dojo.data requiere que se proporcione el
+       <para>En su forma más simple, dojo.data requiere que se proporcione el
             nombre del campo identificador en cada item, y un conjunto de items
-            (datos). Puede pasarlos tanto via el constructor, o via mutators: </para>
+            (datos). Puede pasarlos tanto via el constructor, o via mutators:</para>
 
         <example id="zend.dojo.data.usage.constructor">
             <title>Inicialización de Zend_Dojo_Data via constructor</title>
@@ -59,9 +59,9 @@ $data->setIdentifier('id')
 ]]></programlisting>
         </example>
 
-        <para> También puede añadir un solo item a la vez, o agregar items
+       <para>También puede añadir un solo item a la vez, o agregar items
             utilizando <methodname>addItem()</methodname> y
-                <methodname>addItems()</methodname>. </para>
+                <methodname>addItems()</methodname>.</para>
 
         <example id="zend.dojo.data.usage.append">
             <title>Agregando datos a
@@ -78,53 +78,53 @@ $data->addItems($someMoreItems);
         <note>
             <title>Siempre use un identificador!</title>
 
-            <para> Cada datastore de dojo.data requiere que la columna
+           <para>Cada datastore de dojo.data requiere que la columna
                 identificadora se proporcione como metadatos, incluyendo
                     <classname>Zend_Dojo_Data</classname>. De hecho, si intenta
                 añadir items sin un identificador, se generará una excepción.
-            </para>
+           </para>
         </note>
 
-        <para> Los items individuales pueden ser uno de los siguientes: </para>
+       <para>Los items individuales pueden ser uno de los siguientes:</para>
 
         <itemizedlist>
             <listitem>
-                <para> Arrays asociativos </para>
+               <para>Arrays asociativos</para>
             </listitem>
 
             <listitem>
-                <para> Objectos implementando un método
+               <para>Objectos implementando un método
                         <methodname>toArray()</methodname>
-                </para>
+               </para>
             </listitem>
 
             <listitem>
-                <para> Cualquiera de los otros objetos (se serializarán via
-                    get_object_vars()) </para>
+               <para>Cualquiera de los otros objetos (se serializarán via
+                    get_object_vars())</para>
             </listitem>
         </itemizedlist>
 
-        <para> Puede adjuntar colecciones de los items anteriores via
+       <para>Puede adjuntar colecciones de los items anteriores via
                 <methodname>addItems()</methodname> o
                 <methodname>setItems()</methodname> (sobreescribe todos los
             items previamente establecidos); cuando lo haga, puede pasar un solo
-            argumento: </para>
+            argumento:</para>
 
         <itemizedlist>
             <listitem>
-                <para> Arrays </para>
+               <para>Arrays</para>
             </listitem>
 
             <listitem>
-                <para> Objectos implementando la interfaz
+               <para>Objectos implementando la interfaz
                         <methodname>Traversable</methodname>, que incluye las
                     interfaces <methodname>Iterator</methodname> y
-                        <methodname>ArrayAccess</methodname>. </para>
+                        <methodname>ArrayAccess</methodname>.</para>
             </listitem>
         </itemizedlist>
 
-        <para> Si quiere especificar un campo que actuará como una etiqueta para
-            el item, llame a <methodname>setLabel()</methodname>: </para>
+       <para>Si quiere especificar un campo que actuará como una etiqueta para
+            el item, llame a <methodname>setLabel()</methodname>:</para>
 
         <example id="zend.dojo.data.usage.label">
             <title>Especificando la etiqueta de un campo en
@@ -135,9 +135,9 @@ $data->setLabel('name');
 ]]></programlisting>
         </example>
 
-        <para> Por último, también puede cargar un item
+       <para>Por último, también puede cargar un item
             <classname>Zend_Dojo_Data</classname> de un array <acronym>JSON</acronym>
-            dojo.data, utilizando el método <methodname>fromJson()</methodname>. </para>
+            dojo.data, utilizando el método <methodname>fromJson()</methodname>.</para>
 
         <example id="zend.dojo.data.usage.populate">
             <title>Alimentando Zend_Dojo_Data desde
@@ -152,7 +152,7 @@ $data->fromJson($json);
     <sect2 id="zend.dojo.data.metadata">
         <title>Agregando metadatos a sus contenedores</title>
 
-        <para> Algunos componentes de Dojo requieren metadatos adicionales junto
+       <para>Algunos componentes de Dojo requieren metadatos adicionales junto
             al conjunto de datos de dojo.data. Como ejemplo,
                 <methodname>dojox.grid.Grid</methodname> puede tirar datos
             dinámicamente desde un
@@ -164,11 +164,11 @@ $data->fromJson($json);
             pedidos de subconjuntos de datos al servidor y cuando dejar de hacer
             más peticiones (es decir, ha llegado a la última página de datos).
             Esta técnica es útil para despachar grandes conjuntos de datos en
-            sus plantillas sin cargar todo el conjunto de una sola vez. </para>
+            sus plantillas sin cargar todo el conjunto de una sola vez.</para>
 
-        <para>
+       <para>
             <classname>Zend_Dojo_Data</classname> permite asignar propiedades a
-            los metadatos como al objeto. Lo siguiente ilustra su uso: </para>
+            los metadatos como al objeto. Lo siguiente ilustra su uso:</para>
 
         <programlisting language="php"><![CDATA[
 // Establece el "numRows" a 100
@@ -197,23 +197,23 @@ $data->clearMetadata();
     <sect2 id="zend.dojo.data.advanced">
         <title>Casos Avanzados de Uso</title>
 
-        <para> Además de actuar como un contenedor de datos serializable,
+       <para>Además de actuar como un contenedor de datos serializable,
                 <classname>Zend_Dojo_Data</classname> también ofrece la
             posibilidad de manipular y recorrer los datos en una variedad de
-            formas. </para>
+            formas.</para>
 
-        <para>
+       <para>
             <classname>Zend_Dojo_Data</classname> implementa las interfaces
                 <methodname>ArrayAccess</methodname>,
                 <methodname>Iterator</methodname>, y
                 <methodname>Countable</methodname>. Por lo tanto, puede usar la
-            recopilación de datos casi como si fuera un array. </para>
+            recopilación de datos casi como si fuera un array.</para>
 
-        <para> Todos los items son referenciados por el identificador de campo.
+       <para>Todos los items son referenciados por el identificador de campo.
             Dado que los identificadores deben ser únicos, puede usar los
             valores de este campo para sacar los registros individuales. Hay dos
             maneras de hacer esto: con el método
-                <methodname>getItem()</methodname>, o via notación de array. </para>
+                <methodname>getItem()</methodname>, o via notación de array.</para>
 
         <programlisting language="php"><![CDATA[
 // Usando getItem():
@@ -223,8 +223,8 @@ $item = $data->getItem('foo');
 $item = $data['foo'];
 ]]></programlisting>
 
-        <para> Si conoce el identificador, puede utilizarlo para recuperar un
-            item, actualizarlo, borrarlo, crearlo, o probarlo: </para>
+       <para>Si conoce el identificador, puede utilizarlo para recuperar un
+            item, actualizarlo, borrarlo, crearlo, o probarlo:</para>
 
         <programlisting language="php"><![CDATA[
 // Actualizar o crear un item:
@@ -238,8 +238,8 @@ if (isset($data[foo])) {
 }
 ]]></programlisting>
 
-        <para> También puede hacer un loop sobre todos los items. Internamente,
-            todos los items se almacenan como arrays. </para>
+       <para>También puede hacer un loop sobre todos los items. Internamente,
+            todos los items se almacenan como arrays.</para>
 
         <programlisting language="php"><![CDATA[
 foreach ($data as $item) {
@@ -247,16 +247,16 @@ foreach ($data as $item) {
 }
 ]]></programlisting>
 
-        <para> O inclusive contar para ver cuántos ítems tiene: </para>
+       <para>O inclusive contar para ver cuántos ítems tiene:</para>
 
         <programlisting language="php"><![CDATA[
 echo count($data), " items encontrados!";
 ]]></programlisting>
 
-        <para> Por último, como la clase implementa
+       <para>Por último, como la clase implementa
                 <methodname>__toString()</methodname>, también puede convertirlo
             a <acronym>JSON</acronym> simplemente con "echo" de <acronym>PHP</acronym> o
-            convertirlo a string: </para>
+            convertirlo a string:</para>
 
         <programlisting language="php"><![CDATA[
 echo $data; // echo como un string JSON
@@ -267,125 +267,125 @@ $json = (string) $data; // conversión a string == conversión a JSON
         <sect3 id="zend.dojo.data.advanced.methods">
             <title>Métodos Disponibles</title>
 
-            <para> Además de los métodos necesarios para aplicar las interfaces
+           <para>Además de los métodos necesarios para aplicar las interfaces
                 enumeradas anteriormente, están disponibles los siguientes
-                métodos. </para>
+                métodos.</para>
 
             <itemizedlist>
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>setItems($items)</methodname>: establece
                         varios items a la vez, sobrescribiendo cualquier item
                         que figurase anteriormente en el objeto.
                             <methodname>$items</methodname> debe ser un array o
-                        un objeto <methodname>Traversable</methodname>. </para>
+                        un objeto <methodname>Traversable</methodname>.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>setItem($item, $id = null)</methodname>:
                         establece un item individual, opcionalmente puede pasar
                         un identificador explícito. Sobreescribe el item si ya
                         existe en la colección. Los items válidos incluyen a
                         arrays asociativos, objetos implementando
                             <methodname>toArray()</methodname>, o cualquier
-                        objeto con propiedades públicas. </para>
+                        objeto con propiedades públicas.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>addItem($item, $id = null)</methodname>:
                         añade un item individual, opcionalmente puede pasar un
                         identificador explícito. Generará una excepción si el
                         item ya existe en la colección. Los items válidos
                         incluyen a arrays asociativos, objetos implementando
                             <methodname>toArray()</methodname>, o cualquier
-                        objeto con propiedades públicas. </para>
+                        objeto con propiedades públicas.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>addItems($items)</methodname>: agrega
                         múltiples items a la vez, añadiendolos a cualquiera de
                         los items actuales. Generará una excepción si alguno de
                         los nuevos items tiene un identificador concordante a un
                         identificador ya existente en la colección.
                             <methodname>$items</methodname> debe ser un array o
-                        un objeto <methodname>Traversable</methodname>. </para>
+                        un objeto <methodname>Traversable</methodname>.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>getItems()</methodname>: recupera todos los
-                        items como un array de arrays. </para>
+                        items como un array de arrays.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>hasItem($id)</methodname>: determina si un
                         item con el identificador dado existe en la colección.
-                    </para>
+                   </para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>getItem($id)</methodname>: recupera un item
                         con el identificador dado de la colección; el item
                         retornado será un array asociativo. Si ningún item
-                        coincide, se devolverá un valor null. </para>
+                        coincide, se devolverá un valor null.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>removeItem($id)</methodname>: elimina de la
-                        colección un item con el identificador dado. </para>
+                        colección un item con el identificador dado.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>clearItems()</methodname>: elimina todos los
-                        items de la colección. </para>
+                        items de la colección.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>setIdentifier($identifier)</methodname>:
                         establece el nombre del campo que representa el
                         identificador único para cada item en la colección.
-                    </para>
+                   </para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>getIdentifier()</methodname>: recupera el
-                        nombre del campo identificador. </para>
+                        nombre del campo identificador.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>setLabel($label)</methodname>: establece el
                         nombre de un campo para ser utilizado como la etiqueta a
-                        mostrar para un item. </para>
+                        mostrar para un item.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>getLabel()</methodname>: recupera la
-                        etiqueta del nombre del campo. </para>
+                        etiqueta del nombre del campo.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>toArray()</methodname>: enviar el objeto a
                         un array. Como mínimo, el array contendrá las claves
                         'identifier', 'items', y 'label' si una etiqueta de
-                        campo ha sido establecida en el objeto. </para>
+                        campo ha sido establecida en el objeto.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
+                   <para>
                         <methodname>toJson()</methodname>: enviar el objeto a
-                        una representación <acronym>JSON</acronym>. </para>
+                        una representación <acronym>JSON</acronym>.</para>
                 </listitem>
             </itemizedlist>
         </sect3>

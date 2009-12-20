@@ -4,8 +4,8 @@
 <sect1 id="zend.application.available-resources" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Plugins de Recursos Disponibles</title>
 
-    <para> Aquí encontrará documentación del tipo <acronym>API</acronym> sobre todos los recursos de
-        plugins disponibles por defecto en <classname>Zend_Application</classname>. </para>
+   <para>Aquí encontrará documentación del tipo <acronym>API</acronym> sobre todos los recursos de
+        plugins disponibles por defecto en <classname>Zend_Application</classname>.</para>
 
     <xi:include href="Zend_Application-AvailableResources-Db.xml"/>
     <xi:include href="Zend_Application-AvailableResources-Frontcontroller.xml"/>

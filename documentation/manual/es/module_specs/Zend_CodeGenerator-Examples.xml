@@ -7,8 +7,8 @@
     <example id="zend.codegenerator.examples.class">
         <title>Generando clases PHP</title>
 
-        <para> El siguiente ejemplo genera una clase vacía con una clase de
-            nivel DocBlock. </para>
+       <para>El siguiente ejemplo genera una clase vacía con una clase de
+            nivel DocBlock.</para>
 
         <programlisting language="php"><![CDATA[
 
@@ -32,7 +32,7 @@ $foo->setName('Foo')
 echo $foo->generate();
 ]]></programlisting>
 
-        <para> El código anterior resultará en lo siguiente: </para>
+       <para>El código anterior resultará en lo siguiente:</para>
 
         <programlisting language="php"><![CDATA[
 
@@ -56,8 +56,8 @@ class Foo
     <example id="zend.codegenerator.examples.class-properties">
         <title>Generando clases PHP con propiedades de clase</title>
 
-        <para> Basándonos en el ejemplo anterior, ahora agreguemos propiedades a
-            nuestra clase generada. </para>
+       <para>Basándonos en el ejemplo anterior, ahora agreguemos propiedades a
+            nuestra clase generada.</para>
 
         <programlisting language="php"><![CDATA[
 
@@ -98,7 +98,7 @@ $foo->setName('Foo')
 echo $foo->generate();
 ]]></programlisting>
 
-        <para> Lo anterior resulta en la siguiente definición de clase: </para>
+       <para>Lo anterior resulta en la siguiente definición de clase:</para>
 
         <programlisting language="php"><![CDATA[
 
@@ -128,11 +128,11 @@ class Foo
     <example id="zend.codegenerator.examples.class-methods">
         <title>Generando clases PHP con métodos de clase</title>
 
-        <para>
+       <para>
             <classname>Zend_CodeGenerator_Php_Class</classname> le permite
             adjuntar métodos con contenido opcional a sus clases. Los métodos
             pueden adjuntarse tanto como arrys o como instancias concretas de
-                <classname>Zend_CodeGenerator_Php_Method</classname>. </para>
+                <classname>Zend_CodeGenerator_Php_Method</classname>.</para>
 
         <programlisting language="php"><![CDATA[
 
@@ -209,7 +209,7 @@ $foo->setName('Foo')
 echo $foo->generate();
 ]]></programlisting>
 
-        <para> Lo anterior genera la siguiente salida: </para>
+       <para>Lo anterior genera la siguiente salida:</para>
 
         <programlisting language="php"><![CDATA[
 
@@ -262,18 +262,18 @@ class Foo
     <example id="zend.codegenerator.examples.file">
         <title>Generando archivos PHP</title>
 
-        <para>
+       <para>
             <classname>Zend_CodeGenerator_Php_File</classname> puede ser
             utilizada para generar el contenido de un archivo
                 <acronym>PHP</acronym>. Usted puede incluir clases, así como el
             contenido arbitrario del cuerpo. Cuando acople clases, debe adjuntar
             instancias concretas de
                 <classname>Zend_CodeGenerator_Php_Class</classname> o un array
-            definiendo la clase. </para>
+            definiendo la clase.</para>
 
-        <para> En el ejemplo siguiente, asumiremos que ha definido
+       <para>En el ejemplo siguiente, asumiremos que ha definido
                 <varname>$foo</varname> como una de las definiciones de clase
-            del ejemplo anterior. </para>
+            del ejemplo anterior.</para>
 
         <programlisting language="php"><![CDATA[
 
@@ -292,9 +292,9 @@ $file = new Zend_CodeGenerator_Php_File(array(
 ));
 ]]></programlisting>
 
-        <para> Llamando a <methodname>generate()</methodname> generará el código
+       <para>Llamando a <methodname>generate()</methodname> generará el código
             -- pero no lo grabará en un archivo. Usted mismo deberá capturar y
-            grabar los contenidos en un archivo. Por ejemplo: </para>
+            grabar los contenidos en un archivo. Por ejemplo:</para>
 
         <programlisting language="php"><![CDATA[
 
@@ -302,7 +302,7 @@ $code = $file->generate();
 file_put_contents('Foo.php', $code);
 ]]></programlisting>
 
-        <para> Lo anterior generará el siguiente archivo: </para>
+       <para>Lo anterior generará el siguiente archivo:</para>
 
         <programlisting language="php"><![CDATA[
 
@@ -366,11 +366,11 @@ define('APPLICATION_ENV', 'testing');
     <example id="zend.codegenerator.examples.reflection-file">
         <title>Sembrando la generación de código para un archivo PHP via
             reflection</title>
-        <para> You can add <acronym>PHP</acronym> code to an existing
+       <para>You can add <acronym>PHP</acronym> code to an existing
                 <acronym>PHP</acronym> file using the code generator. To do so,
             you need to first do reflection on it. The static method
                 <methodname>fromReflectedFileName()</methodname> allows you to
-            do this. </para>
+            do this.</para>
 
         <programlisting language="php"><![CDATA[
 $generator = Zend_CodeGenerator_Php_File::fromReflectedFileName($path);
@@ -382,10 +382,10 @@ file_put_contents($path, $generator->generate());
 
     <example id="zend.codegenerator.examples.reflection-class">
         <title>Sembrando la generación de clases PHP via reflection</title>
-        <para> You may add code to an existing class. To do so, first use the
+       <para>You may add code to an existing class. To do so, first use the
             static <methodname>fromReflection()</methodname> method to map the
             class into a generator object. From there, you may add additional
-            properties or methods, and then regenerate the class. </para>
+            properties or methods, and then regenerate the class.</para>
 
         <programlisting language="php"><![CDATA[
 $generator = Zend_CodeGenerator_Php_Class::fromReflection(
@@ -417,9 +417,9 @@ $code = $generator->generate();
 
     <example id="zend.codegenerator.examples.reflection-method">
         <title>Sembrando la generación de métodos PHP via reflection</title>
-        <para> You may add code to an existing class. To do so, first use the
+       <para>You may add code to an existing class. To do so, first use the
             static <methodname>fromReflection()</methodname> method to map the
             class into a generator object. From there, you may add additional
-            properties or methods, and then regenerate the class. </para>
+            properties or methods, and then regenerate the class.</para>
     </example>
 </sect1>

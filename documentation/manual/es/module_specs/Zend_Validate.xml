@@ -9,7 +9,7 @@
         Cuando se necesita validar algún tipo de dato, el componente <classname>Zend_Validate</classname> ofrece un conjunto de validadores,
         como así también un sencillo mecanismo de encadenado de validaciones por el cual
         múltiples validadores pueden aplicarse a un dato en un orden definido por el usuario.
-    </para>
+   </para>
 
     <sect2 id="zend.validate.introduction.definition">
 
@@ -21,7 +21,7 @@
             con los requisitos. Si la entrada no cumple los requisitos,
             un validador también podrá proporcionar información adicional
             sobre que requisito(s) no son satisfechos.
-        </para>
+       </para>
 
         <para>
             Por ejemplo, una aplicación web podría requerir que un usuario ingrese
@@ -31,7 +31,7 @@
             estos requisitos.
             Si el nombre de usuario elegido no cumple con uno o ambos de los requisitos,
             sería útil saber cuál de estos requisitos no se cumple.
-        </para>
+       </para>
 
     </sect2>
 
@@ -46,7 +46,7 @@
             El método <methodname>isValid()</methodname> realiza la validación del valor,
             devolviendo <constant>TRUE</constant> si y sólo si el valor pasa contra el criterio de
             validación.
-        </para>
+       </para>
 
         <para>
             Si <methodname>isValid()</methodname> devuelve <constant>FALSE</constant>, la función
@@ -61,7 +61,7 @@
             Cada clase tiene también una definición <methodname>const</methodname>
             que hace corresponder a cada identificador con una causa del fallo
             de validación.
-        </para>
+       </para>
 
         <note>
             <para>
@@ -70,7 +70,7 @@
                Cada llamada a <methodname>isValid()</methodname> borra los mensajes y errores
                causados por una llamada anterior <methodname>isValid()</methodname>, porque es
                probable que cada llamada a <methodname>isValid()</methodname> se refiera al valor de una entrada diferente.
-            </para>
+           </para>
         </note>
 
         <para>
@@ -89,7 +89,7 @@ if ($validator->isValid($email)) {
 }
 ]]></programlisting>
 
-        </para>
+       </para>
 
     </sect2>
 
@@ -110,7 +110,7 @@ if ($validator->isValid($email)) {
            apoyado por <classname>Zend_Validate_LessThan</classname>.
            El método <methodname>getMessageVariables()</methodname> devuelve un array de tokens
            variables aceptados por el validador.
-        </para>
+       </para>
 
         <para>
             El segundo argumento opcional es un string que identifica la plantilla
@@ -123,7 +123,7 @@ if ($validator->isValid($email)) {
             Muchas clases de validación sólo definen una plantilla de mensaje de
             error, así que no hay necesidad de especificar el cambio de plantilla
             de mensaje.
-        </para>
+       </para>
 
         <para>
              <programlisting language="php"><![CDATA[
@@ -141,7 +141,7 @@ if (!$validator->isValid('word')) {
     // "El string 'word' es muy corto; debe tener al menos 8 caracteres"
 }
 ]]></programlisting>
-        </para>
+       </para>
 
         <para>
             Puede establecer varios mensajes usando el método <methodname>setMessages()</methodname>.
@@ -158,7 +158,7 @@ $validator->setMessages( array(
 ));
 ]]></programlisting>
 
-        </para>
+       </para>
 
         <para>
             Incluso, si su aplicación requiere una mayor flexibilidad para informar
@@ -183,7 +183,7 @@ if (!validator->isValid('word')) {
         . "\n";
 }
 ]]></programlisting>
-        </para>
+       </para>
 
     </sect2>
 
@@ -208,7 +208,7 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
 }
 ]]></programlisting>
 
-        </para>
+       </para>
 
         <para>
             Si el validador lo necesita, también puede pasar un array de constructores de argumentos.
@@ -219,28 +219,28 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
 }
 ]]></programlisting>
 
-        </para>
+       </para>
 
         <para>
             El método <methodname>is()</methodname> devuelve un valor booleano, lo mismo que
             el método <methodname>isValid()</methodname>. Cuando se utiliza el método estático
             <methodname>is()</methodname>, no están disponibles los mensajes de fracaso de
             validación.
-        </para>
+       </para>
 
         <para>
             El uso estático puede ser conveniente para invocar un validador ad-hoc
             (hecho especialmente), pero si tiene la necesidad de ejecutar el validador para múltiples
             entradas, es más eficiente usar métodos no estáticos, creando una
             instancia del objeto validador y llamando a su método <methodname>isValid()</methodname>.
-        </para>
+       </para>
 
         <para>
             También la clase <classname>Zend_Filter_Input</classname> le permite crear
             ejemplos y ejecutar múltiples filtros y clases de validadores por
             demanda, para procesar juegos de datos de entrada. Ver
             <xref linkend="zend.filter.input" />.
-        </para>
+       </para>
 
     </sect2>
     <sect2 id="zend.validate.introduction.translation">
@@ -252,7 +252,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             which you can specify a instance of <classname>Zend_Translate</classname> which
             will translate the messages in case of a validation failure. The
             <methodname>getTranslator()</methodname> method returns the set translator instance.
-        </para>
+       </para>
 
          <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
@@ -271,7 +271,7 @@ $validator->setTranslator($translate);
             validation classes, and can be retrieved with <methodname>getDefaultTranslator()</methodname>.
             This prevents you from setting a translator manually for all validator classes,
             and simplifies your code.
-        </para>
+       </para>
 
          <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
@@ -286,7 +286,7 @@ Zend_Validate::setDefaultTranslator($translate);
             <para>
                 When you have set an application wide locale within your registry, then this
                 locale will be used as default translator.
-            </para>
+           </para>
         </note>
 
         <para>
@@ -294,7 +294,7 @@ Zend_Validate::setDefaultTranslator($translate);
             To archive this you can use the <methodname>setDisableTranslator()</methodname> method,
             which accepts a boolean parameter, and <methodname>translatorIsDisabled()</methodname>
             to get the set value.
-        </para>
+       </para>
 
          <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_StringLength(8, 12);
@@ -307,7 +307,7 @@ if (!$validator->isTranslatorDisabled()) {
             It is also possible to use a translator instead of setting own messages with
             <methodname>setMessage()</methodname>. But doing so, you should keep in mind, that the
             translator works also on messages you set your own.
-        </para>
+       </para>
 
     </sect2>
 </sect1>

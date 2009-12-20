@@ -4,12 +4,12 @@
 <sect2 id="zend.application.core-functionality.application">
     <title>Zend_Application</title>
 
-    <para>
+   <para>
         <classname>Zend_Application</classname>  proporciona la funcionalidad
         básica del componente, y el punto de entrada a su aplicación
         Zend Framework. Su propósito es doble: para configurar el medio ambiente
         <acronym>PHP</acronym> (incluyendo autocarga), y ejecutar su aplicación bootstrap.
-    </para>
+   </para>
 
     <table id="zend.application.core-functionality.application.api.options">
         <title>Zend_Application options</title>
@@ -26,51 +26,51 @@
                     <entry><para>
                         Array of <filename>php.ini</filename> settings to use. Keys should be the
                         <filename>php.ini</filename> keys.
-                    </para></entry>
+                   </para></entry>
                 </row>
-                
+
                 <row>
                     <entry><emphasis><property>includePaths</property></emphasis></entry>
                     <entry><para>
                         Additional paths to prepend to the
                         <emphasis>include_path</emphasis>. Should be an array of paths.
-                    </para></entry>
+                   </para></entry>
                 </row>
-                
+
                 <row>
                     <entry><emphasis><property>autoloaderNamespaces</property></emphasis></entry>
                     <entry><para>
                         Array of additional namespaces to register with the
                         <classname>Zend_Loader_Autoloader</classname> instance.
-                    </para></entry>
+                   </para></entry>
                 </row>
-                
+
                 <row>
                     <entry><emphasis><property>bootstrap</property></emphasis></entry>
                     <entry><para>
                         Either the string path to the bootstrap class, or an array
                         with elements for the 'path' and 'class' for the application
                         bootstrap.
-                    </para></entry>
+                   </para></entry>
                 </row>
             </tbody>
         </tgroup>
     </table>
-    
+
     <note>
         <title>Option names</title>
-        
-        <para>
+
+       <para>
             Please note that option names are case insensitive.
-        </para>
+       </para>
     </note>
 
-    <para>
+   <para>
         Típicamente, pasará toda la configuración al constructor
         <classname>Zend_Application</classname>, pero también puede configurar
-        totalmente el objeto utilizando sus propios métodos. En esta referencia 
+        totalmente el objeto utilizando sus propios métodos. En esta referencia
         se ilustran ambos casos de uso.
-    </para>
+   </para>
 
     <table id="zend.application.core-functionality.application.api.table">
         <title>Métodos de Zend_Application</title>
@@ -96,13 +96,13 @@
                                 Strings típicos podrían incluir "desarrollo",
                                 "pruebas", "qa", o "producción", pero será definido
                                 por sus requisitos organizacionales.
-                            </para></listitem>
+                           </para></listitem>
 
                             <listitem>
-                            <para>
+                           <para>
                                 <varname>$options</varname>>: <emphasis>opcional</emphasis>.
                                 El argumento puede ser uno de los siguientes valores:
-                            </para>
+                           </para>
                             <itemizedlist>
                                 <listitem><para>
                                     <emphasis>String</emphasis>: path
@@ -112,17 +112,17 @@
                                     <methodname>$environment</methodname> se utilizará para
                                     determinar qué sección de la configuración
                                     se traerá.
-                                </para></listitem>
+                               </para></listitem>
 
                                 <listitem><para>
                                     <emphasis><type>Array</type></emphasis>: array asociativo
                                     de datos de configuración para su aplicación.
-                                </para></listitem>
+                               </para></listitem>
 
                                 <listitem><para>
                                     <emphasis><classname>Zend_Config</classname></emphasis>:
                                     instancia del objeto de configuración.
-                                </para></listitem>
+                               </para></listitem>
                             </itemizedlist>
                         </listitem>
                     </itemizedlist></entry>
@@ -134,7 +134,7 @@
                         es registrada durante la instanciación.
                         Las opciones pasadas al onstructor se pasan a
                         <methodname>setOptions()</methodname>.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -144,7 +144,7 @@
                     <entry><para>
                         Recuperar el string del medio ambiente que se pasó al
                         constructor.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -155,7 +155,7 @@
                         Recuperar la instancia de
                         <classname>Zend_Loader_Autoloader</classname>
                         registrados durante la instanciación.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -165,7 +165,7 @@
                         <listitem><para>
                             <varname>$options</varname>: <emphasis>requerido</emphasis>.
                             Un array de opciones de aplicación.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Todas las opciones se almacenan internamente, y llamando
@@ -176,7 +176,7 @@
                         <methodname>setPhpSettings()</methodname>.
                         (Los nombres de opciones son indiferentes a mayúsculas/
                         minúsculas.)
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -188,7 +188,7 @@
                         objeto; podría ser utilizada para guardar en cache a
                         través de <classname>Zend_Config</classname> las
                         opciones para serializar un formato entre reqerimientos.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -198,14 +198,14 @@
                     <itemizedlist>
                         <listitem><para>
                             <varname>$key</varname>: String opcional de la clave de lookup
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist>
                     </entry>
                     <entry><para>
                         Determinar si una opción con la clave ha sido registrada
                         o no. Las claves son indiferentes a mayúsculas/
                         minúsculas.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -214,12 +214,12 @@
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$key</varname>: String opcional de la clave de lookup
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Recuperar el valor de la opción de una clave dada.
                         Retorna <constant>NULL</constant> si la clave no existe.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -229,26 +229,26 @@
                         <listitem><para>
                             <varname>$settings</varname>: <emphasis>requerido</emphasis>.
                             Array asociativo en los settings de <acronym>PHP</acronym>  <acronym>INI</acronym>.
-                        </para></listitem>
+                       </para></listitem>
 
                         <listitem><para>
                             <varname>$prefix</varname>: <emphasis>opcional</emphasis>.
                             Prefijo de tipo string para anteponer a la opción
-                            claves. Usado internamente para permitir el mapping 
+                            claves. Usado internamente para permitir el mapping
                             anidado de matrices separados por puntos en las
                             claves de <filename>php.ini</filename>.
                             En el uso normal, este argumento nunca debe ser
                             pasado por un usuario.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
-                        Establece un conjunto de ajustaes en <filename>php.ini</filename>. para run-time. 
+                        Establece un conjunto de ajustaes en <filename>php.ini</filename>. para run-time.
                         Las configuraciones separadas por punto pueden ser
                         anidadas jerárquicamente
                         (lo que puede ocurrir con los archivos <acronym>INI</acronym>
                         <classname>Zend_Config</classname>) mediante un array de
                         de arrays, y aún resolver correctamente.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -260,12 +260,12 @@
                             Array de strings representando los namespaces a
                             registrar con la instancia
                             <classname>Zend_Loader_Autoloader</classname>.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Registra los namespaces con la instancia
                         <classname>Zend_Loader_Autoloader</classname>.
-                      </para></entry>
+                     </para></entry>
                 </row>
 
                 <row>
@@ -279,7 +279,7 @@
                             </classname>, un string del path a la clase bootstrap,
                             un arrray asociativo de classname =&gt;nombre_de_archivo,
                             o un array asociativo con las claves 'class' y 'path'.
-                        </para></listitem>
+                       </para></listitem>
 
                         <listitem><para>
                             <varname>$class</varname>: <emphasis>opcional</emphasis>.
@@ -287,7 +287,7 @@
                             <varname>$class</varname> puede ser especificado,
                             y debe ser el string nombre de clase de la
                             clase contenida en el archivo representado por path.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                 </row>
 
@@ -297,7 +297,7 @@
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar la instancia del bootstrap registrado.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -307,7 +307,7 @@
                     <entry><para>
                         Llamar al método <methodname>bootstrap()</methodname>
                         para cargar la aplicación.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -317,7 +317,7 @@
                     <entry><para>
                         Llamar al método <methodname>run()</methodname> del bootstrap
                         para despachar la aplicación.
-                    </para></entry>
+                   </para></entry>
                 </row>
             </tbody>
         </tgroup>

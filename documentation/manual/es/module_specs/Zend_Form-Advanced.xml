@@ -7,18 +7,18 @@
     <para>
         <classname>Zend_Form</classname> tiene una funcional riqueza, muchas de
         ellas dirigidas a expertos desarroladores. Este capítulo esta dirigido a
-        documentar algunas de las funcionalidades con ejemplos y casos de uso. </para>
+        documentar algunas de las funcionalidades con ejemplos y casos de uso.</para>
 
     <sect2 id="zend.form.advanced.arrayNotation">
         <title>Notación de array</title>
 
-        <para> A muchos desarroladores web experimentados les gusta agrupar
+        <para>A muchos desarroladores web experimentados les gusta agrupar
             elementos relacionados de formulario usando notación de array en los
             nombres del elemento. Por ejemplo, si se tienen dos direcciones que
             se desean capturar, un envío y una dirección de facturación, se
             pueden tener elementos idénticos; agrupándolos en un array se puede
             asegurar que son capturados por separado. Nótese el siguiente
-            formulario por ejemplo: </para>
+            formulario por ejemplo:</para>
 
         <programlisting language="html"><![CDATA[
 <form>
@@ -72,10 +72,10 @@
 </form>
 ]]></programlisting>
 
-        <para> En este ejemplo, la facturación y la dirección de envío contienen
+        <para>En este ejemplo, la facturación y la dirección de envío contienen
             algunos campos idénticos, eso significa que uno puede sobrescribir
             al otro. Nosotros podemos resolver esta solución usando una notación
-            de array: </para>
+            de array:</para>
 
         <programlisting language="html"><![CDATA[
 <form>
@@ -139,10 +139,10 @@
 </form>
 ]]></programlisting>
 
-        <para> En el ejemplo anterior, obtenemos direcciones separadas. En el
+        <para>En el ejemplo anterior, obtenemos direcciones separadas. En el
             formulario sometido, ahora tenemos tres elementos, 'guardar'
             elemento para someterlo, y dos arrays, 'envio' y 'cuenta', cada uno
-            con llaves para los variados elementos. </para>
+            con llaves para los variados elementos.</para>
 
         <para>
             <classname>Zend_Form</classname> intenta automatizar este proceso
@@ -158,12 +158,12 @@
             respetan la estructura del array, asegurando que sus formularios
             sean validados correctamente, no importa cuan arbitrariamente
             anidados esten los subformularios. No se necesita hacer nada para
-            beneficiarse; éste comportamiento esta activo por defecto. </para>
+            beneficiarse; éste comportamiento esta activo por defecto.</para>
 
-        <para> Adicionalmente, existen facilidades que le permiten activar
+        <para>Adicionalmente, existen facilidades que le permiten activar
             condicionalmente la notación de un array, así como también
             especificar el específico array al cual un elemento o coleccion
-            pertenece: </para>
+            pertenece:</para>
 
         <itemizedlist>
             <listitem>
@@ -177,11 +177,11 @@
                     llamado. Si el formulario no tiene un nombre específico, o
                     si <methodname>setElementsBelongTo()</methodname> no ha sido
                     definido, esta bandera será ignorada (como cuando no hay
-                    nombre del array al cual los elementos puedan pertenecer). </para>
+                    nombre del array al cual los elementos puedan pertenecer).</para>
 
-                <para> Se deberá determinar si un formulario está siendo tratado
+                <para>Se deberá determinar si un formulario está siendo tratado
                     como un array usando el accesor
-                        <methodname>isArray()</methodname>. </para>
+                        <methodname>isArray()</methodname>.</para>
             </listitem>
 
             <listitem>
@@ -190,43 +190,43 @@
                     Usando este método, se puede especificar el nombre de un
                     array al cual todos los elementos del formulario pertenecen.
                     Se puede determinar el nombre usando el accesor
-                        <methodname>getElementsBelongTo()</methodname>. </para>
+                        <methodname>getElementsBelongTo()</methodname>.</para>
             </listitem>
         </itemizedlist>
 
-        <para> Adicionalmente, a nivel del elemento, se pueden especificar
+        <para>Adicionalmente, a nivel del elemento, se pueden especificar
             elementos individuales que puedan pertenecer a arrays particulares
             usando el método
                 <methodname>Zend_Form_Element::setBelongsTo()</methodname>. Para
             descubrir el valor que tiene -- sea o no sea definido explícitamente
             o implícitamente a través del formulario -- se puede usar el accesor
-                <methodname>getBelongsTo()</methodname>. </para>
+                <methodname>getBelongsTo()</methodname>.</para>
     </sect2>
 
     <sect2 id="zend.form.advanced.multiPage">
         <title>Formularios Multi-Página</title>
 
-        <para> Actualmente, los formularios multi-página no están oficialmente
+        <para>Actualmente, los formularios multi-página no están oficialmente
             soportados en <classname>Zend_Form</classname>; sin embargo, la
             mayoría del soporte para implementarlos está disponible y puede ser
-            utilizado con algunos retoques. </para>
+            utilizado con algunos retoques.</para>
 
-        <para> La clave para crear fomrularios multi-página es utilizar
+        <para>La clave para crear fomrularios multi-página es utilizar
             subformularios, pero solo para mostrar un solo subformulario por
             página. Esto le permite someter un solo subformulario a la vez y
             validarlo, pero no procesar el formulario hasta que todos los
-            subformularios esten completos. </para>
+            subformularios esten completos.</para>
 
         <example id="zend.form.advanced.multiPage.registration">
             <title>Ejemplo de formulario de registro</title>
-            <para> Vamos a usar un formulario de registro como ejemplo. Para
+            <para>Vamos a usar un formulario de registro como ejemplo. Para
                 nuestros propósitos, queremos capturar el nombre del usuario y
                 la contraseña en la primera página, después la información del
                 usuario -- nombre, apellido, y ubicación -- y finalmente
-                permitirles decidir qué lista de correo, si desean suscribirse. </para>
+                permitirles decidir qué lista de correo, si desean suscribirse.</para>
 
-            <para> Primero, vamos a crear nuestro propio formulario, y definir
-                varios subformularios dentro del mismo: </para>
+            <para>Primero, vamos a crear nuestro propio formulario, y definir
+                varios subformularios dentro del mismo:</para>
 
             <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
@@ -329,14 +329,14 @@ class My_Form_Registration extends Zend_Form
 }
 ]]></programlisting>
 
-            <para> Note que no hay botones de enviar, y que ni hemos hecho nada
+            <para>Note que no hay botones de enviar, y que ni hemos hecho nada
                 con los decoradores de subformularios -- lo que significa que
                 por defecto serán desplegados como campos. Necesitaremos hacer
                 algo con ellos mientras desplegamos cada subformulario
                 individualmente, y añadir botones de manera que podamos
                 procesarlos realmente -- el cual requerira las propiedades
                 acción y método. Vamos a añadir algunos andamios a nuestras
-                clases para proveer esa información: </para>
+                clases para proveer esa información:</para>
 
             <programlisting language="php"><![CDATA[
 class My_Form_Registration extends Zend_Form
@@ -416,7 +416,7 @@ class My_Form_Registration extends Zend_Form
 }
 ]]></programlisting>
 
-            <para> Siguiente, necesitamos añadir andamios a nuestro action
+            <para>Siguiente, necesitamos añadir andamios a nuestro action
                 controller, y tener varias consideraciones. Primero, necesitamos
                 asegurar que persiste la información del formulario entre los
                 requerimientos, de esa manera determinar cuándo terminar.
@@ -425,10 +425,10 @@ class My_Form_Registration extends Zend_Form
                 de acuerdo a la información. Usaremos
                     <classname>Zend_Session_Namespace</classname> para persistir
                 la información, el cual nos ayudará a responder la pregunta de
-                qué formulario someter. </para>
+                qué formulario someter.</para>
 
-            <para> Vamos a crear nuestro controlador, y añadir un método para
-                recuperar un formulario instanciado: </para>
+            <para>Vamos a crear nuestro controlador, y añadir un método para
+                recuperar un formulario instanciado:</para>
 
             <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
@@ -445,14 +445,14 @@ class RegistrationController extends Zend_Controller_Action
 }
 ]]></programlisting>
 
-            <para> Ahora, vamos a añadir algunas funcionalidades para determinar
+            <para>Ahora, vamos a añadir algunas funcionalidades para determinar
                 qué formulario mostrar. Básicamente, hasta que el formulario
                 entero sea considerado válido, necesitamos continuar mostrando
                 segmentos de formulario. Adicionalmente, queremos asegurar que
                 están en un orden particular: usuario, demog, y después las
                 listas. Podemos determinar qué información ha sido sometida
                 verificando nuestro session namespace para claves particulares
-                representando cada subformulario. </para>
+                representando cada subformulario.</para>
 
             <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
@@ -547,14 +547,14 @@ class RegistrationController extends Zend_Controller_Action
 }
 ]]></programlisting>
 
-            <para> El método de arriba nos permite usar notaciones tal como
+            <para>El método de arriba nos permite usar notaciones tal como
                 "<command>$subForm =
                     $this-&gt;getCurrentSubForm();</command>" recuperar
                 el actual subformulario para la validación, o "<command>$next
                     = $this-&gt;getNextSubForm();</command>" obtener el
-                siguiente para mostrar. </para>
+                siguiente para mostrar.</para>
 
-            <para> Ahora, vamos a encontrar la manera para procesar y mostrar
+            <para>Ahora, vamos a encontrar la manera para procesar y mostrar
                 varios subformularios. Podemos usar
                     <methodname>getCurrentSubForm()</methodname> para determinar
                 si algún subformulario ha sido sometido (los valores de retorno
@@ -562,14 +562,14 @@ class RegistrationController extends Zend_Controller_Action
                     <methodname>getNextSubForm()</methodname> recupera el
                 formulario que mostrar. Podemos entonces usar el método del
                 formulario <methodname>prepareSubForm()</methodname> para
-                asegurar que el formulario está listo para mostrar. </para>
+                asegurar que el formulario está listo para mostrar.</para>
 
-            <para> Cuando tenemos un formulario sometido, podemos validar el
+            <para>Cuando tenemos un formulario sometido, podemos validar el
                 subformulario, y luego verificar si el formulario entero es
                 válido ahora. Para hacer esas tareas, necesitamos métodos
                 adicionales que aseguren que la información sometida es añadida
                 a la sesión, y que cuando validamos el formulario entero,
-                nosotros validamos contra todos los segmentos de la sesión: </para>
+                nosotros validamos contra todos los segmentos de la sesión:</para>
 
             <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
@@ -612,10 +612,10 @@ class RegistrationController extends Zend_Controller_Action
 }
 ]]></programlisting>
 
-            <para> Ahora que tenemos el trabajo preparado, vamos a construir las
+            <para>Ahora que tenemos el trabajo preparado, vamos a construir las
                 acciones para este controlador. Necesitaremos una página de
                 destino para el formulario, y luego una acción 'process' para
-                procesar el formulario. </para>
+                procesar el formulario.</para>
 
             <programlisting language="php"><![CDATA[
 class RegistrationController extends Zend_Controller_Action
@@ -658,7 +658,7 @@ class RegistrationController extends Zend_Controller_Action
 }
 ]]></programlisting>
 
-            <para> Como se ha notado, el código actual para procesar el
+            <para>Como se ha notado, el código actual para procesar el
                 formulario es relativamente simple. Verificamos si tenemos un
                 subformulario actual sometido y si no, retornamos a la página de
                 destino. Si tenemos un subformulario, intentaremos validarlo,
@@ -666,9 +666,9 @@ class RegistrationController extends Zend_Controller_Action
                 válido, entonces verificaremos si el formulario es válido, lo
                 que debería indicar que hemos terminado; si no, mostraremos el
                 siguiente segmento del formulario. Finalmente, mostraremos una
-                página de verificación con el contenido de la sesión. </para>
+                página de verificación con el contenido de la sesión.</para>
 
-            <para> Los scripts de vista son muy simples: </para>
+            <para>Los scripts de vista son muy simples:</para>
 
             <programlisting language="php"><![CDATA[
 <? // registration/index.phtml ?>
@@ -703,11 +703,11 @@ foreach ($this->info as $info):
 endforeach
 ]]></programlisting>
 
-            <para> Próximas novedades de Zend Framework incluirán componentes
+            <para>Próximas novedades de Zend Framework incluirán componentes
                 para hacer formularios multi páginas mas simples, abstrayendo la
                 sesión y la lógica de orden. Mientras tanto, el ejemplo de
                 arriba debería servir como guia razonable para alcanzar esta
-                tarea en su web. </para>
+                tarea en su web.</para>
         </example>
     </sect2>
 </sect1>

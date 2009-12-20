@@ -8,7 +8,7 @@
         developer to bundle up some capabilities they wish to dispatch with the
         command line (or other) clients. It is an analogue to what a
         "controller" is inside of your <acronym>MVC</acronym> application.
-    </para>
+   </para>
 
     <sect2 id="zend.tool.framework.writing-providers.loading">
         <title>How Zend Tool finds your Providers</title>
@@ -26,12 +26,12 @@
             The ProviderManifestable interface however requires the implementation of a method
             <methodname>getProviders()</methodname> which returns an array of
             instantiated provider interface instances.
-        </para>
+       </para>
 
         <para>
             The following naming rules apply on how you can access the providers
             that were found by the IncludePathLoader:
-        </para>
+       </para>
 
         <itemizedlist>
             <listitem>
@@ -39,21 +39,21 @@
                     The last part of your classname split by underscore is used
                     for the provider name, e.g. "My_Provider_Hello" leads to your
                     provider being accessible by the name "hello".
-                </para>
+               </para>
             </listitem>
             <listitem>
                 <para>
                     If your provider has a method <methodname>getName()</methodname>
                     it will be used instead of the previous method to determine
                     the name.
-                </para>
+               </para>
             </listitem>
             <listitem>
                 <para>
                     If your provider has "Provider" as prefix, e.g. it is called
                     <classname>My_HelloProvider</classname> it will be stripped
                     from the name so that the provider will be called "hello".
-                </para>
+               </para>
             </listitem>
         </itemizedlist>
 
@@ -75,7 +75,7 @@
                 an array of instantiated providers. In anticipation of our first
                 own provider <classname>My_Component_HelloProvider</classname>
                 we will create the following manifest:
-            </para>
+           </para>
 
             <programlisting language="php"><![CDATA[
 class My_Component_Manifest
@@ -106,7 +106,7 @@ class My_Component_Manifest
             <property>include_path</property>. This class would implement
             <classname>Zend_Tool_Framework_Provider_Interface</classname>, and the body of
             this file would only have to look like the following:
-        </para>
+       </para>
 
         <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
@@ -123,7 +123,7 @@ class My_Component_HelloProvider
             Given that code above, and assuming the developer wishes to access
             this functionality through the console client, the call would look
             like this:
-        </para>
+       </para>
 
         <programlisting language="sh"><![CDATA[
 % zf say hello
@@ -140,7 +140,7 @@ Hello from my provider!
             use the response object to return messages from your providers instead of using
             <methodname>echo()</methodname> or a similiar output mechanism. Rewritting our hello
             provider with this knowledge it looks like:
-        </para>
+       </para>
 
         <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
@@ -158,7 +158,7 @@ class My_Component_HelloProvider
             As you can see one has to extend the <classname>Zend_Tool_Framework_Provider_Abstract</classname>
             to gain access to the Registry which holds the <classname>Zend_Tool_Framework_Client_Response</classname>
             instance.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.tool.framework.writing-providers.advanced">
@@ -173,7 +173,7 @@ class My_Component_HelloProvider
                 needs grow, you might find that you need the ability to accept
                 variables. Much like function signatures have parameters, your
                 tooling requests can also accept parameters.
-            </para>
+           </para>
 
             <para>
                 Just as each tooling request can be isolated to a method within a
@@ -183,7 +183,7 @@ class My_Component_HelloProvider
                 utilize when calling that provider and action combination. For
                 example, if you wanted to accept a name in the above example, you
                 would probably do this in OO code:
-            </para>
+           </para>
 
         <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
@@ -203,7 +203,7 @@ class My_Component_HelloProvider
                 parameter is optional, that means it is also optional on the command
                 line, so that <command>zf say hello</command> will still work, and default
                 to the name "Ralph".
-            </para>
+           </para>
 
         </sect3>
 
@@ -214,7 +214,7 @@ class My_Component_HelloProvider
                 There are cases when the workflow of your provider requires
                 to prompt the user for input. This can be done by requesting
                 the client to ask for more the required input by calling:
-            </para>
+           </para>
 
             <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
@@ -236,7 +236,7 @@ class My_Component_HelloProvider
                 This command throws an exception if the current client is not
                 able to handle interactive requests. In case of the default Console Client
                 however you will be asked to enter the name.
-            </para>
+           </para>
         </sect3>
 
         <sect3 id="zend.tool.framework.writing-providers.advanced.pretendable">
@@ -251,7 +251,7 @@ class My_Component_HelloProvider
                 actually doing it. This might be an important notion when doing
                 heavy database or filesystem modifications that the user might not
                 otherwise want to do.
-            </para>
+           </para>
 
             <para>
                 Pretendability is easy to implement. There are two parts to this
@@ -259,7 +259,7 @@ class My_Component_HelloProvider
                 and 2) checking the request to ensure the current request was indeed
                 asked to be "pretended". This feature is demonstrated in the code
                 sample below.
-            </para>
+           </para>
 
             <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
@@ -279,7 +279,7 @@ class My_Component_HelloProvider
 
             <para>
                 To run the provider in pretend mode just call:
-            </para>
+           </para>
 
             <programlisting language="sh"><![CDATA[
 % zf --pretend say hello Ralph
@@ -296,7 +296,7 @@ I would say hello Ralph.
                 The semantics in regard to this actions have to be implemented by you
                 in the context of your provider. You can access debug or verbose modes
                 with:
-            </para>
+           </para>
 
             <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
@@ -324,7 +324,7 @@ class My_Component_HelloProvider
                 any Zend Tool provider. Access to this configuration is available via the
                 registry that is passed to your provider if you extend
                 <classname>Zend_Tool_Framework_Provider_Abstract</classname>.
-            </para>
+           </para>
 
             <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
@@ -347,13 +347,13 @@ class My_Component_HelloProvider
                 <classname>Zend_Tool_Framework_Client_Config</classname> but internally the
                 <methodname>__get()</methodname> and <methodname>__set()</methodname> magic methods
                 proxy to a <classname>Zend_Config</classname> of the given configuration type.
-            </para>
+           </para>
 
             <para>
                 The storage allows to save arbitrary data for later reference. This can be useful for batch
                 processing tasks or for re-runs of your tasks. You can access the storage in a similar way
                 like the configuration:
-            </para>
+           </para>
 
             <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
@@ -369,7 +369,7 @@ class My_Component_HelloProvider
 
             <para>
                 The API of the storage is very simple:
-            </para>
+           </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_Tool_Framework_Client_Storage
@@ -390,7 +390,7 @@ class Zend_Tool_Framework_Client_Storage
                     check if the required user-config or storage keys really exist for a user.
                     You won't run into fatal errors when none of these are provided though,
                     since empty ones are created upon request.
-                </para>
+               </para>
             </important>
         </sect3>
 

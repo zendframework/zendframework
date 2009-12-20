@@ -12,8 +12,8 @@
 
     <example id="zend.exception.using.example">
         <title>Capturando una Excepcion</title>
-        <para> 
-		El siguiente  listado de código muestra cómo capturar una excepción
+        <para>
+        El siguiente  listado de código muestra cómo capturar una excepción
             lanzado en Zend Framework:</para>
         <programlisting language="php"><![CDATA[
 try {
@@ -31,9 +31,9 @@ try {
         <classname>Zend_Exception</classname> can be used as a catch-all
         exception class in a catch block to trap all exceptions thrown by Zend
         Framework classes. This can be useful when the program can not recover
-        by catching a specific exception type. </para>
+        by catching a specific exception type.</para>
 
-<para> La documentación de cada componente  y clase de Zend Framework 
+<para>La documentación de cada componente  y clase de Zend Framework
         contienen información específica sobre los métodos que generan excepciones, la
         circunstancias en que provocan una excepción a ser lanzado,
 y los diferentes tipos de excepción que puede ser lanzadas. </ para>

@@ -4,17 +4,17 @@
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapper">
     <title>Zend_Application_Bootstrap_Bootstrapper</title>
 
-    <para>
+   <para>
         <classname>Zend_Application_Bootstrap_Bootstrapper</classname> es la
         interfaz base que deben implementar todas clases bootstrap.
         Las funcionalidades de base están encaminadan a la configuración,
         identificación de los recursos, bootstraping (ya sea de los recursos
         individuales o de toda la aplicación), y de despachar la aplicación.
-    </para>
+   </para>
 
-    <para>
+   <para>
         Los siguientes métodos conforman la definición de la interfaz.
-    </para>
+   </para>
 
     <table id="zend.application.core-functionality.bootstrap-bootstrapper.methods-table">
         <title>Zend_Application_Bootstrap_Bootstrapper Interface</title>
@@ -37,14 +37,14 @@
                             Debe aceptar un objeto <classname>Zend_Application</classname> o
                             <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                             como único argumento.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Constructor. Acepta un solo argumento, que debe ser un
                         objeto
                         <classname>Zend_Application</classname>, u otro objero
                         bootstrap.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -54,27 +54,27 @@
                         <listitem><para>
                             <varname>$options</varname>: <emphasis>requerido</emphasis>.
                             Array de opciones a establecer.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Típicamente, cualquier opción que tiene un setter
                         concordante invocará ese setter; de lo contrario,
                         la opción será simplemente almacenada para su
                         recuperación posterior.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
                     <entry><methodname>getApplication()</methodname></entry>
                     <entry>
-                        <classname>Zend_Application | 
+                        <classname>Zend_Application |
                         Zend_Application_Bootstrap_Bootstrapper</classname>
                     </entry>
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar el objeto aplicación/bootstrap pasado via
                         constructor.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -84,7 +84,7 @@
                     <entry><para>
                         Recuperar el string del medio ambiente registrado
                         con el objeto padre de la aplicación o del bootstrap.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -95,7 +95,7 @@
                         Recuperar una lista de los recursos inicializadores de
                         nombres disponibles con los que fueron definidos en la clase.
                         Esto puede ser de implementación específica.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -104,14 +104,14 @@
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$resource</varname>: <emphasis>optional</emphasis>.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Si <varname>$resource</varname> está vacío, ejecutar todos
                         los recursos del bootstrap.
                         Si es un string, ejecutar ese único recurso;
                         si es un array, ejecutar cada recurso del array.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -121,7 +121,7 @@
                     <entry><para>
                         Define qué lógica de aplicación ejecutar luego del
                         bootstrap.
-                    </para></entry>
+                   </para></entry>
                 </row>
             </tbody>
         </tgroup>

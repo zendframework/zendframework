@@ -4,7 +4,7 @@
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapabstract">
     <title>Zend_Application_Bootstrap_BootstrapAbstract</title>
 
-    <para>
+   <para>
         <classname>Zend_Application_Bootstrap_BootstrapAbstract</classname> es
         una clase abstracta que proporciona la base funcional de un arranque
         (bootstrap) común. Implementa a ambos
@@ -12,7 +12,7 @@
             Zend_Application_Bootstrap_Bootstrapper</link> y a <link
             linkend="zend.application.core-functionality.bootstrap-resourcebootstrapper">
            <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname></link>.
-    </para>
+   </para>
 
     <table id="zend.application.core-functionality.bootstrap-bootstrapabstract.api.table">
         <title>Métodos de Zend_Application_Bootstrap_BootstrapAbstract</title>
@@ -35,13 +35,13 @@
                             Acepta tanto a <classname>Zend_Application</classname> o al
                             objeto <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                             como único argumento.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Constructor. Acepta un solo argumento, que debe ser un
                         objeto <classname>Zend_Application</classname>, u otro
                         objeto bootstrap.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -51,18 +51,18 @@
                         <listitem><para>
                             <varname>$options</varname>: <emphasis>requerido</emphasis>.
                             Array de opciones a establecer.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry>
-                    <para>
+                   <para>
                         Cualquier opción que tiene un setter concordante invocará
                         ese setter; de lo contrario, la opción será simplemente
                         almacenada para su recuperación posterior.
                         Como ejemplo, si su clase extendida definió
                         un método  <methodname>setFoo()</methodname>, la opción 'foo'
                         pasaría el valor a ese método.
-                    </para>
-                    <para>
+                   </para>
+                   <para>
                         También pueden usarse dos opciones especiales clave.
                         <property>pluginPaths</property> puede ser utilizada para
                         especificar prefijos de paths para los recursos plugin;
@@ -71,7 +71,7 @@
                         especificar los recursos plugin a utilizar,
                         y debería estar constituído por pares de opciones plugin
                         recurso/instanciación.
-                    </para>
+                   </para>
                     </entry>
                 </row>
 
@@ -82,7 +82,7 @@
                     <entry><para>
                         Devuelve todas las opciones registradas via
                         <methodname>setOptions()</methodname>.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -92,7 +92,7 @@
                         <listitem><para>
                             <varname>$key</varname>: <emphasis>requerido</emphasis>.
                             Clave de opción a probar.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>Determinar si una opción clave está presente.</para></entry>
                 </row>
@@ -104,13 +104,13 @@
                         <listitem><para>
                             <varname>$key</varname>: <emphasis>requerido</emphasis>.
                             Clave de opción para recuperar.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Recuperar el valor asociado con una opción clave;
                         retorna <constant>NULL</constant> si ninguna opción está registrada con
                         esa clave.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -125,11 +125,11 @@
                     <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$application</varname>: <emphasis>requerido</emphasis>.
-                            </para></listitem>
+                           </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Registrar al objeto padre de la aplicación o en el bootstrap.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -140,7 +140,7 @@
                     <entry><para>
                         Recuperar el objeto aplicación/bootstrap pasado via
                         constructor.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -150,7 +150,7 @@
                     <entry><para>
                         Recuperar el string del entorno registrado
                         con el objeto padre de la aplicación o del bootstrap.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -161,7 +161,7 @@
                         Recuperar una lista de los recursos inicializadores de
                         nombres disponibles con los fueron definidos en la clase.
                         Esto puede ser de implementación específica.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -174,7 +174,7 @@
                         registra una instancia
                         <link linkend="zend.registry">Zend_Registry</link>
                         antes de retornarlo.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -184,14 +184,14 @@
                         <listitem><para>
                             <varname>$container</varname>, <emphasis>requerido</emphasis>.
                             Un objeto en el cual almacenar recursos.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Proporciona un contenedor en el que se almacenan recursos.
                         Cuando un método de recurso o plugin devuelve un valor,
                         será almacenado en este contenedor para su recuperación
                         posterior.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -201,7 +201,7 @@
                         <listitem><para>
                             <methodname>$name</methodname>, <emphasis>requerido</emphasis>.
                             Nombre del recurso a comprobar.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Cuando un método de recurso o plugin devuelve un valor,
@@ -209,7 +209,7 @@
                         <methodname>getContainer()</methodname> y
                         <methodname>setContainer()</methodname>. Este método indicará si
                         se ha establecido o no un valor para ese recurso.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -219,7 +219,7 @@
                         <listitem><para>
                             <varname>$name</varname>, <emphasis>requerido</emphasis>.
                             Nombre del recurso a recuperar.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Cuando un método de recurso o plugin devuelve un valor,
@@ -227,7 +227,7 @@
                         <methodname>getContainer()</methodname> y
                         <methodname>setContainer()</methodname>. Este método recuperará
                         recursos del contenedor.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -236,24 +236,24 @@
                     <entry><itemizedlist>
                         <listitem><para>
                             <varname>$resource</varname>: <emphasis>opcional</emphasis>.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry>
-                    <para>
+                   <para>
                         Si <varname>$resource</varname> está vacío, ejecutar todos
                         los recursos del bootstrap.
                         Si es un string, ejecutar ese único recurso;
                         si es un array, ejecutar cada recurso del array.
-                    </para>
+                   </para>
 
-                    <para>
+                   <para>
                         Este método puede ser utilizado para ejecutar
                         bootstraps individuales, ya hayan sido definidos en la
                         propia clase o mediante clases de recursos de plugin.
                         Un recurso definido en la clase será ejecutado en
                         preferencia por sobre un recurso de plugin en el caso
                         de conflicto de nombres.
-                    </para>
+                   </para>
                     </entry>
                 </row>
 
@@ -264,7 +264,7 @@
                     <entry><para>
                         Define qué lógica de aplicación ejecutar luego del
                         bootstrap.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -274,19 +274,19 @@
                         <listitem><para>
                             <varname>$method</varname>: <emphasis>requerido</emphasis>.
                             El nombre del método a llamar.
-                        </para></listitem>
+                       </para></listitem>
 
                         <listitem><para>
                             <varname>$args</varname>: <emphasis>requerido</emphasis>.
                             Array de argumentos para usar en el método de llamada.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Ofrece comodidad para bootstrapping de recursos
                         individuales permitiéndole llamar
                         'bootstrap&lt;ResourceName&gt;()' en vez de usar el
                         método <methodname>bootstrap()</methodname>.
-                    </para></entry>
+                   </para></entry>
                 </row>
             </tbody>
         </tgroup>

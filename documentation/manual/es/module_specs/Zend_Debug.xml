@@ -5,12 +5,12 @@
 
     <title>Mostrar información de variables(Dumping Variables)</title>
 
-    <para>
+   <para>
         El método estático <methodname>Zend_Debug::dump()</methodname> imprime o devuelve
         información sobre una expresión. Esta sencilla técnica de depuración es
         común, porque es fácil de utilizar en caliente y no requiere
         inicialización, herramientas especiales, o la depuración del entorno.
-    </para>
+   </para>
 
     <example id="zend.debug.dumping.example">
         <title>Ejemplo del método dump()</title>
@@ -20,27 +20,27 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 ]]></programlisting>
     </example>
 
-    <para>
+   <para>
         El argumento <varname>$var</varname> especifica la expresión o variable sobre
         la cual el método <methodname>Zend_Debug::dump()</methodname> generará información.
-    </para>
+   </para>
 
-	     <para>
+        <para>
         The <varname>$label</varname> argument is a string to be prepended to the
         output of <methodname>Zend_Debug::dump()</methodname>. It may be useful, for
          example, to use labels if you are dumping information about multiple
          variables on a given screen.
-     </para>
-	
-    <para>
+    </para>
+    
+   <para>
         El argumento boleano <varname>$echo</varname> especifica si la salida de
         <methodname>Zend_Debug::dump()</methodname> es o no mostrada. Si es
         <constant>TRUE</constant>, la salida es mostrada. A pesar del valor del
         argumento <varname>$echo</varname>, el retorno de este método contiene la
         salida.
-    </para>
+   </para>
 
-    <para>
+   <para>
         Puede ser útil comprender que el método <methodname>Zend_Debug::dump()</methodname>
         envuelve la función de <acronym>PHP</acronym>
         <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>.
@@ -48,22 +48,22 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         salida de <methodname>var_dump()</methodname> es escapada usando
         <ulink url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
         y envuelta con el tag (X)HTML <command>&lt;pre&gt;</command>.
-    </para>
+   </para>
 
     <tip>
         <title>Depurando con Zend_Log</title>
-        <para>
+       <para>
             Usar <methodname>Zend_Debug::dump()</methodname> es lo mejor para la depuración
             en caliente durante el desarrollo de software. Puede añadir el código para
             volcar una variable y después quitar el código fácilmente.
-        </para>
-        <para>
+       </para>
+       <para>
             También considere el componente <link linkend="zend.log.overview">
             Zend_Log</link>  component when writing more permanent debugging code. For example,
             you can use the <constant>DEBUG</constant> log level and the
             <link linkend="zend.log.writers.stream">stream log writer</link> to
             output the string returned by <methodname>Zend_Debug::dump()</methodname>.
-        </para>
+       </para>
     </tip>
 
 </sect1>

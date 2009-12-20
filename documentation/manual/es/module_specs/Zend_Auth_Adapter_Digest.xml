@@ -9,74 +9,74 @@
 
         <title>Introducción</title>
 
-        <para> La <ulink
+       <para>La <ulink
                 url="http://en.wikipedia.org/wiki/Digest_access_authentication"
                 >Autenticación "Digest"</ulink> es un método de la autenticación
             <acronym>HTTP</acronym> que mejora la <ulink
                 url="http://en.wikipedia.org/wiki/Basic_authentication_scheme"
                 >Autenticación Básica</ulink> proporcionando una manera de
             autenticar sin tener que transmitir la contraseña de manera clara a
-            través de la red. </para>
+            través de la red.</para>
 
-        <para> Este adaptador permite la autentificación contra archivos de
+       <para>Este adaptador permite la autentificación contra archivos de
             texto que contengan líneas que tengan los elementos básicos de la
             autenticación "Digest":
-        </para>
-        
+       </para>
+
             <itemizedlist>
                 <listitem>
-                    <para> username, tal como
-                        "<emphasis><filename>joe.user</filename></emphasis>" </para>
+                   <para>username, tal como
+                        "<emphasis><filename>joe.user</filename></emphasis>"</para>
                 </listitem>
                 <listitem>
-                    <para> realm, tal como "<emphasis>Administrative Area</emphasis>" </para>
+                   <para>realm, tal como "<emphasis>Administrative Area</emphasis>"</para>
                 </listitem>
                 <listitem>
-                    <para> Hash  <acronym>MD5</acronym> del username, realm y password,
-                        separados por dos puntos </para>
+                   <para>Hash  <acronym>MD5</acronym> del username, realm y password,
+                        separados por dos puntos</para>
                 </listitem>
-            </itemizedlist> 
-        
-        <para>
+            </itemizedlist>
+
+       <para>
         Los elementos anteriores están separados por dos
             puntos, como en el ejemplo siguiente (en el que la contraseña es
-            "<emphasis>somePassword</emphasis>"): </para>
+            "<emphasis>somePassword</emphasis>"):</para>
 
         <programlisting language="txt"><![CDATA[
 someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 ]]></programlisting>
-    
+
     </sect2>
 
     <sect2 id="zend.auth.adapter.digest.specifics">
 
         <title>Detalles Específicos</title>
 
-        <para> El adaptador de autenticación "Digest",
+       <para>El adaptador de autenticación "Digest",
                 <classname>Zend_Auth_Adapter_Digest</classname>, requiere varios
-            parámetros de entrada: 
-        </para>
-        
+            parámetros de entrada:
+       </para>
+
             <itemizedlist>
                 <listitem>
-                    <para> filename - Nombre del archivo contra el que se
-                        realiza la autenticación de las consultas </para>
+                   <para>filename - Nombre del archivo contra el que se
+                        realiza la autenticación de las consultas</para>
                 </listitem>
                 <listitem>
-                    <para> realm - Domino de la autenticación "Digest" </para>
+                   <para>realm - Domino de la autenticación "Digest"</para>
                 </listitem>
                 <listitem>
-                    <para> username - Usuario de la autenticación "Digest"
-                    </para>
+                   <para>username - Usuario de la autenticación "Digest"
+                   </para>
                 </listitem>
                 <listitem>
-                    <para> password - Contraseña para el usuario del dominio
-                    </para>
+                   <para>password - Contraseña para el usuario del dominio
+                   </para>
                 </listitem>
-            </itemizedlist> 
-        <para>
+            </itemizedlist>
+       <para>
         Estos parámetros deben ser establecidos antes de
-            llamar a <methodname>authenticate()</methodname>. </para>
+            llamar a <methodname>authenticate()</methodname>.</para>
 
     </sect2>
 
@@ -84,13 +84,13 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 
         <title>Identidad</title>
 
-        <para> El adaptador de autenticación "Digest" devuelve un objeto
+       <para>El adaptador de autenticación "Digest" devuelve un objeto
                 <classname>Zend_Auth_Result</classname>, que ha sido rellenado
             con la identidad como un array que tenga claves
             <emphasis>realm</emphasis> y
             <emphasis>username</emphasis>. Los respectivos valores del
             array asociados con esas claves correspondes con los valores fijados
-            andes de llamar a <methodname>authenticate()</methodname>. </para>
+            andes de llamar a <methodname>authenticate()</methodname>.</para>
 
         <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_Digest($filename,

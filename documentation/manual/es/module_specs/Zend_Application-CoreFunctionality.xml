@@ -4,10 +4,10 @@
 <sect1 id="zend.application.core-functionality" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Funcionalidad Básica</title>
 
-    <para>
+   <para>
         Aquí encontrará documentación del tipo <acronym>API</acronym> acerca de todos los
         componentes básicos de <classname>Zend_Application</classname>.
-    </para>
+   </para>
 
     <xi:include href="Zend_Application-CoreFunctionality-Application.xml" />
     <xi:include href="Zend_Application-CoreFunctionality-Bootstrap_Bootstrapper.xml" />

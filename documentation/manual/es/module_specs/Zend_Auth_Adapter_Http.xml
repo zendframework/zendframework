@@ -9,7 +9,7 @@
 
         <title>Introducción</title>
 
-        <para>
+       <para>
             <classname>Zend_Auth_Adapter_Http</classname> proporciona una
             implementación compatible con <ulink
                 url="http://tools.ietf.org/html/rfc2617">RFC-2617</ulink>,
@@ -21,46 +21,46 @@
             autenticación "Digest" es un método de autenticación
                 <acronym>HTTP</acronym> que mejora la autenticación básica
             proporcionando una manera de autenticar sin tener que transmitir la
-            contraseña de manera clara en un texto a través de la red. </para>
+            contraseña de manera clara en un texto a través de la red.</para>
 
-        <para>
+       <para>
             <emphasis role="strong">Características Principales:</emphasis>
-        </para>
+       </para>
 
         <itemizedlist>
             <listitem>
-                <para> Soporta tanto Autenticación "Digest" como Básica. </para>
+               <para>Soporta tanto Autenticación "Digest" como Básica.</para>
             </listitem>
             <listitem>
-                <para> Establece retos en todos los proyectos soportados, por lo
+               <para>Establece retos en todos los proyectos soportados, por lo
                     que el cliente puede responder con cualquier proyecto que
-                    soporte. </para>
+                    soporte.</para>
             </listitem>
             <listitem>
-                <para> Soporta autenticación proxy. </para>
+               <para>Soporta autenticación proxy.</para>
             </listitem>
             <listitem>
-                <para> Incluye soporte para la autenticación contra archivos de
+               <para>Incluye soporte para la autenticación contra archivos de
                     texto y proporciona una interfaz para autenticar contra
-                    otras fuentes, tales como bases de datos. </para>
+                    otras fuentes, tales como bases de datos.</para>
             </listitem>
         </itemizedlist>
 
 
-        <para> Hay algunas características notables del
-                <acronym>RFC-2617</acronym> no implementadas todavía: </para>
+       <para>Hay algunas características notables del
+                <acronym>RFC-2617</acronym> no implementadas todavía:</para>
         <itemizedlist>
             <listitem>
-                <para> Seguimiento "nonce", que permitiría un gran apoyo, y un
-                    aumento de la protección de repetidos ataques. </para>
+               <para>Seguimiento "nonce", que permitiría un gran apoyo, y un
+                    aumento de la protección de repetidos ataques.</para>
             </listitem>
             <listitem>
-                <para> Autenticación con comprobación de integridad, o
-                    "auth-int". </para>
+               <para>Autenticación con comprobación de integridad, o
+                    "auth-int".</para>
             </listitem>
             <listitem>
-                <para> Cabecera de información de la autenticación
-                        <acronym>HTTP</acronym>. </para>
+               <para>Cabecera de información de la autenticación
+                        <acronym>HTTP</acronym>.</para>
             </listitem>
         </itemizedlist>
 
@@ -71,7 +71,7 @@
 
         <title>Descripción del diseño</title>
 
-        <para> Este adaptador consiste en dos sub-componentes, la propia clase
+       <para>Este adaptador consiste en dos sub-componentes, la propia clase
             autenticación <acronym>HTTP</acronym>, y el llamado "Resolvers". La
             clase autenticación <acronym>HTTP</acronym> encapsula la lógica para
             llevar a cabo tanto la autenticación basica y la "Digest". Utiliza
@@ -79,7 +79,7 @@
             almacenados (por defecto, archivos de texto), y recuperar las
             credenciales de los datos almacenados. Las credenciales del
             "Resolved" se comparan con los valores presentados por el cliente
-            para determinar si la autenticación es satisfactoria. </para>
+            para determinar si la autenticación es satisfactoria.</para>
 
     </sect2>
 
@@ -87,9 +87,9 @@
 
         <title>Opciones de Configuración</title>
 
-        <para> La clase <classname>Zend_Auth_Adapter_Http</classname> requiere
+       <para>La clase <classname>Zend_Auth_Adapter_Http</classname> requiere
             un array configurado que pasará a su constructor. Hay varias
-            opciones de configuración disponibles, y algunas son obligatorias: </para>
+            opciones de configuración disponibles, y algunas son obligatorias:</para>
         <table id="zend.auth.adapter.configuration_options.table">
             <title>Opciones de Configuración</title>
             <tgroup cols="3">
@@ -168,14 +168,14 @@
         </table>
 
         <note>
-            <para> La implementación actual del
+           <para>La implementación actual del
                     <property>nonce_timeout</property> tiene algunos efectos
                 colaterales interesantes. Este ajuste es supuesto para
                 determinar la vida util válida para un determinado "nonce", o de
                 manera efectiva el tiempo que una información de autenticación
                 del cliente es aceptada. Actualmente, si se establece en 3600
                 (por ejemplo), hará que el adaptador indique al cliente las
-                nuevas credenciales cada hora, a la hora en punto. </para>
+                nuevas credenciales cada hora, a la hora en punto.</para>
         </note>
 
     </sect2>
@@ -184,35 +184,35 @@
 
         <title>Resolvers</title>
 
-        <para> El trabajo del "Resolver" es tener un username y un realm, y
+       <para>El trabajo del "Resolver" es tener un username y un realm, y
             devolver algún valor de tipo credencial. La autenticación básica
             espera recibir la versión codificada en Base64 de la contraseña del
             usuario. La autenticación "Digest" espera recibir un hash del
             username del usuario, un realm, y su contraseña (separados por
             coma). Actualmente, sólo se admite el algoritmo de hash
-                <acronym>MD5</acronym>. </para>
+                <acronym>MD5</acronym>.</para>
 
-        <para>
+       <para>
             <classname>Zend_Auth_Adapter_Http</classname> se basa en la
             implementación de objetos
                 <classname>Zend_Auth_Adapter_Http_Resolver_Interface</classname>.
             Un archivo de texto de la clase "Resolve" se incluye con este
             adaptador, pero cualquier otro tipo de "resolver" puede ser creado
-            simplemente implementando la interfaz del "resolver". </para>
+            simplemente implementando la interfaz del "resolver".</para>
 
         <sect3 id="zend.auth.adapter.http.resolvers.file">
             <title>Archivo Resolver</title>
-            <para> El archivo "resolver" es una clase muy simple. Tiene una
+           <para>El archivo "resolver" es una clase muy simple. Tiene una
                 única propiedad que especifique un nombre de archivo, que
                 también puede ser pasado al constructor. Su método
                     <methodname>resolve()</methodname> recorre el archivo de
                 texto, buscando una linea con el correspondiente username y
                 realm. El formato del archivo de texto es similar a los archivos
-                htpasswd de Apache: </para>
+                htpasswd de Apache:</para>
             <programlisting><![CDATA[
 <username>:<realm>:<credentials>\n
 ]]></programlisting>
-            <para> Cada linea consta de tres campos -username, realm, y
+           <para>Cada linea consta de tres campos -username, realm, y
                 credenciales - cada uno separados por dos puntos. El campo
                 credenciales es opaco al archivo "resolver"; simplemente
                 devuelve el valor tal como és al llamador. Por lo tanto, este
@@ -220,22 +220,22 @@
                 "Digest". En la autenticación básica, el campo credenciales debe
                 ser escrito en texto claro. En la autenticación "Digest",
                 debería ser en hash <acronym>MD5</acronym> descrito
-                anteriormente. </para>
+                anteriormente.</para>
 
-            <para> Hay dos formas igualmente fácil de crear un archivo de
-                "resolver": </para>
+           <para>Hay dos formas igualmente fácil de crear un archivo de
+                "resolver":</para>
             <programlisting language="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File($path);
 ]]></programlisting>
-            <para> o </para>
+           <para>o</para>
             <programlisting language="php"><![CDATA[
 $path     = 'files/passwd.txt';
 $resolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $resolver->setFile($path);
 ]]></programlisting>
-            <para> Si la ruta está vacía o no se puede leer, se lanza una
-                excepción. </para>
+           <para>Si la ruta está vacía o no se puede leer, se lanza una
+                excepción.</para>
         </sect3>
 
     </sect2>
@@ -244,8 +244,8 @@ $resolver->setFile($path);
 
         <title>Uso Básico</title>
 
-        <para> En primer lugar, establecemos un array con los valores de
-            configuración obligatorios: </para>
+       <para>En primer lugar, establecemos un array con los valores de
+            configuración obligatorios:</para>
         <programlisting language="php"><![CDATA[
 $config = array(
     'accept_schemes' => 'basic digest',
@@ -254,23 +254,23 @@ $config = array(
     'nonce_timeout'  => 3600,
 );
 ]]></programlisting>
-        <para> Este array hará que el adaptador acepte la autenticación básica o
+       <para>Este array hará que el adaptador acepte la autenticación básica o
             "Digest", y requerirá un acceso autenticado a todas las áreas del
             sitio en <filename>/members_only</filename> y
                 <filename>/my_account</filename>. El valor realm es normalmente
             mostrado por el navegador en el cuadro de dialogo contraseña. El
                 <property>nonce_timeout</property>, por supuesto, se comporta
-            como se ha descrito anteriormente. </para>
+            como se ha descrito anteriormente.</para>
 
-        <para> A continuación, creamos el objeto Zend_Auth_Adapter_Http: </para>
+       <para>A continuación, creamos el objeto Zend_Auth_Adapter_Http:</para>
         <programlisting language="php"><![CDATA[
 $adapter = new Zend_Auth_Adapter_Http($config);
 ]]></programlisting>
 
 
-        <para> Ya que estamos soportando tanto la autenticación básica como la
+       <para>Ya que estamos soportando tanto la autenticación básica como la
             "Digest", necesitamos dos objetos diferentes resolver. Tenga en
-            cuenta que esto podría ser facilmente dos clases diferentes: </para>
+            cuenta que esto podría ser facilmente dos clases diferentes:</para>
         <programlisting language="php"><![CDATA[
 $basicResolver = new Zend_Auth_Adapter_Http_Resolver_File();
 $basicResolver->setFile('files/basicPasswd.txt');
@@ -283,9 +283,9 @@ $adapter->setDigestResolver($digestResolver);
 ]]></programlisting>
 
 
-        <para> Por último, realizamos la autenticación. El adaptador necesita
+       <para>Por último, realizamos la autenticación. El adaptador necesita
             una referencia a ambos objetos solicitud y respuesta para hacer su
-            trabajo: </para>
+            trabajo:</para>
         <programlisting language="php"><![CDATA[
 assert($request instanceof Zend_Controller_Request_Http);
 assert($response instanceof Zend_Controller_Response_Http);

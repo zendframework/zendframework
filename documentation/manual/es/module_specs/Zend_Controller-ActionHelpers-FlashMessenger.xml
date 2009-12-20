@@ -6,7 +6,7 @@
 
     <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
         <title>Introducción</title>
-        <para>
+       <para>
             El ayudante <emphasis>FlashMessenger</emphasis> le permite pasar mensajes
             que el usuario puede querer ver en la próxima solicitud.
             Para lograrlo, <emphasis>FlashMessenger</emphasis> usa
@@ -18,20 +18,20 @@
             <methodname>Zend_Session::start()</methodname> en su archivo
             bootstrap. (Para más detalles de su uso vea la documentación en
             <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>).
-        </para>
+       </para>
 
     </sect4>
 
     <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
         <title>Ejemplo Básico de Uso</title>
-        <para>
+       <para>
             El ejemplo de uso de abajo muestra el uso del flash messenger en
             su forma más elemental. Cuando se llama la acción
             <filename>/some/my</filename>, añade el mensaje de flash "Record Saved!".
             Una solicitud posterior a la acción
             <filename>/some/my-next-request</filename> lo recuperará (y entonces
             también lo suprimirá).
-        </para>
+       </para>
 
          <programlisting language="php"><![CDATA[
 class SomeController extends Zend_Controller_Action

@@ -9,7 +9,7 @@
         estructuras DOM. Actualmente, ofrecemos <classname>Zend_Dom_Query</classname>, el cual
         provee una interfaz unificada para consultar documentos DOM utilizando selectores
         XPath y <acronym>CSS</acronym>.
-    </para>
+   </para>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

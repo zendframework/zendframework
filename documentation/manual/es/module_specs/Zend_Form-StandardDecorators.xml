@@ -8,7 +8,7 @@
         <classname>Zend_Form</classname> se distribuye con distintos decoradores estándar. Para más
         información sobre el uso de decoradores en general, vea <link
             linkend="zend.form.decorators">la sección sobre decoradores</link>.
-    </para>
+   </para>
 
     <sect2 id="zend.form.standardDecorators.callback">
         <title>Zend_Form_Decorator_Callback</title>
@@ -21,7 +21,7 @@
             aceptar tres argumentos: <varname>$content</varname> (el contenido original
             enviado al decorador), <varname>$element</varname> (el objeto que se está decorando),
             y un array de <varname>$options</varname>. Un callback de ejemplo sería:
-        </para>
+       </para>
 
          <programlisting language="php"><![CDATA[
 class Util
@@ -38,14 +38,14 @@ class Util
                 'label')</methodname>, y generaría un (mal) código HTML para
             la etiqueta. El decorador Callback reemplazará, antepondrá o postpondrá
             el contenido original con el que devuelva.
-        </para>
+       </para>
 
         <para>
             El decorador Callback permite especificar un valor null para la opción
             placement (colocación), que reemplazará el contenido original
             con el valor devuelto de la llamada de retorno; 'prepend' (anteponer) y 'append' (postponer)
             siguen siendo válidas.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.captcha">
@@ -55,7 +55,7 @@ class Util
             El decorador Captcha se usa junto con el <link
                 linkend="zend.form.standardElements.captcha">elemento de formulario Captcha</link>. Utiliza el método
             <methodname>render()</methodname> del adaptador del captcha para generar la salida.
-        </para>
+       </para>
 
         <para>
             Una variante del decorador Captcha, 'Captcha_Word', es usada frecuentemente,
@@ -63,7 +63,7 @@ class Util
             el identificador de sesión que hay que comparar, y la entrada es para
             la verificación de usuario del captcha. Éstos elementos son validados
             como un sólo elemento.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.description">
@@ -74,7 +74,7 @@ class Util
             de un elemento <classname>Zend_Form</classname>, <methodname>Zend_Form_Element</methodname>, o
            <classname>Zend_Form_DisplayGroup</classname>; toma la descripción usando el método
             <methodname>getDescription()</methodname> del objeto.
-        </para>
+       </para>
 
         <para>
             Por defecto, si no se encuentra la descripción, no se genera ninguna salida.
@@ -84,14 +84,14 @@ class Util
             llamando a <methodname>setTag()</methodname>. También puede especificar una clase
             para el tag usando la opción <methodname>class</methodname> o llamando a
             <methodname>setClass()</methodname>; por defecto, se usa la clase 'hint'.
-        </para>
+       </para>
 
         <para>
             La descripción es escapada utilizando los mecanismos de escapado por defecto
             del objeto de vista. Puede desactivar esto pasando un valor
             <constant>FALSE</constant> a la opción 'escape' del decorador o el método
             <methodname>setEscape()</methodname>.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.dtDdWrapper">
@@ -107,7 +107,7 @@ class Util
             vacío (definition term)(<methodname>&lt;dt&gt;</methodname>) y encapsula su contenido
             en un nuevo dato de definición (<methodname>&lt;dd&gt;</methodname>).
             La salida queda como sigue:
-        </para>
+       </para>
 
         <programlisting language="html"><![CDATA[
 <dt></dt>
@@ -120,7 +120,7 @@ class Util
         <para>
             Este decorador reemplaza el contenido que se le provee
             envolviéndolo dentro del elemento <methodname>&lt;dd&gt;</methodname>.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.errors">
@@ -132,12 +132,12 @@ class Util
             que genera mensajes de error en una lista no ordenada
             (<methodname>&lt;ul&gt;</methodname>) como elementos de lista (li). El elemento
             <methodname>&lt;ul&gt;</methodname> recibe una clase de "errores".
-        </para>
+       </para>
 
         <para>
             El decorador de Errores puede anteponerse o postponerse al contenido
             que se le provee.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.fieldset">
@@ -151,7 +151,7 @@ class Util
             contenido pasado es envuelto en el fieldset <acronym>HTML</acronym>, reemplazando
             al contenido original. Cualquier atributo pasado al elemento decorado
             será generado como atributo del fieldset <acronym>HTML</acronym>.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.file">
@@ -163,7 +163,7 @@ class Util
             File es usado por <classname>Zend_Form_Element_File</classname> y permite fijar
             múltiples elementos file con una única llamada al método. Se usa automáticamente
             y fija el nombre de cada elemento.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.form">
@@ -174,7 +174,7 @@ class Util
             <acronym>HTML</acronym> "form". El decorador Form utiliza la ayuda del view helper Form. Encapsula
             cualquier contenido provista en un elemento <acronym>HTML</acronym> form, usando la acción y el
             método del objeto Zend Form, y cualquier atributo como atributo <acronym>HTML</acronym>.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.formElements">
@@ -187,7 +187,7 @@ class Util
             llamando a <methodname>render()</methodname> en cada uno de ellos y uniéndolos
             con el separador indicado. Puede anteponer o postponer al contenido que
             se le envía.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.formErrors">
@@ -197,11 +197,11 @@ class Util
             Algunos desarrolladores y diseñadores prefieren agrupar todos los
             mensajes de error en la parte superior del formulario. El decorador
             FormErrors le permite hacer esto.
-        </para>
+       </para>
 
         <para>
             Por defecto, la lista de errores generada tiene el siguiente marcado:
-        </para>
+       </para>
 
         <programlisting language="html"><![CDATA[
 <ul class="form-errors">
@@ -222,43 +222,43 @@ class Util
 
         <para>
             Puede pasar como parámetro varias opciones para configurar la salida generada:
-        </para>
+       </para>
 
         <itemizedlist>
             <listitem><para>
                 <methodname>ignoreSubForms</methodname>: se desactiva o no la recursividad
                 en los subformularios. Por defecto: false (i.e., permitir recursividad).
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                 <methodname>markupElementLabelEnd</methodname>: Marcado para postponer las etiquetas de elementos. Por defecto: '&lt;/b&gt;'
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                 <methodname>markupElementLabelStart</methodname>: Marcado para anteponer las etiquetas de elementos. Por defecto'&lt;b&gt;'
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                 <methodname>markupListEnd</methodname>: Marcado para postponer listas de mensajes de error.  Por defecto: '&lt;/ul&gt;'.
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                 <methodname>markupListItemEnd</methodname>: Marcado para postponer mensajes de error individuales.  Por defecto: '&lt;/li&gt;'
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                 <methodname>markupListItemStart</methodname>: Marcado para anteponer mensajes de error individuales.  Por defecto: '&lt;li&gt;'
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                 <methodname>markupListStart</methodname>: Marcado para anteponer listas de mensajes de error.  Por defecto: '&lt;ul class="form-errors"&gt;'
-            </para></listitem>
+           </para></listitem>
         </itemizedlist>
 
         <para>
             El decorador FormErrors puede anteponerse o postponerse al contenido
             que se le provee.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.htmlTag">
@@ -271,7 +271,7 @@ class Util
             Por defecto, el contenido generado reemplaza al contenido envolviéndolo en
             la etiqueta dada. De cualquier forma, se permite especificar una
             localización de tipo 'append' (postponer) o 'prepend' (anteponer).
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.image">
@@ -281,7 +281,7 @@ class Util
             El decorador Image le permite crear un input <acronym>HTML</acronym> de tipo image
             (<methodname>&lt;input type="image" ... /&gt;</methodname>), y opcionalmente
             mostrarlo dentro de otro tag <acronym>HTML</acronym>.
-        </para>
+       </para>
 
         <para>
             Por defecto, el decorador usa la propiedad src del elemento,
@@ -290,13 +290,13 @@ class Util
             como la etiqueta 'alt', y <methodname>imageValue</methodname> (manipulado con los
             métodos <methodname>setImageValue()</methodname> y
             <methodname>getImageValue()</methodname>) será usada como el campo 'value'.
-        </para>
+       </para>
 
         <para>
             Para especificar una etiqueta <acronym>HTML</acronym> que utilizar con el elemento, pase la opción
             'tag' al decorador, o llame explícitamente a
             <methodname>setTag()</methodname>.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.label">
@@ -311,7 +311,7 @@ class Util
             la etiqueta, no se genera. Por defecto, las etiquetas se
             traducen cuando existe un adaptador de traducciones y existe una
             traducción para la etiqueta.
-        </para>
+       </para>
 
         <para>
             Opcionalmente, se puede especificar la opción 'tag'; si se suministra, encapsula
@@ -319,7 +319,7 @@ class Util
             pero no hay etiqueta, la etiqueta será generada sin contenido.
             Puede especificar la clase que usar con la etiqueta mediante la opción
             'class' o llamando a <methodname>setClass()</methodname>.
-        </para>
+       </para>
 
         <para>
             Adicionalmente, se pueden especificar prefijos o sufijos que usar
@@ -327,7 +327,7 @@ class Util
             un elemento opcional o requerido. Por ejemplo, podríamos querer
             añadir ':' a la etiqueta o un '*', indicando que el elemento es requerido.
             Se puede realizar con las siguientes opciones y métodos:
-        </para>
+       </para>
 
         <itemizedlist>
             <listitem><para>
@@ -335,35 +335,35 @@ class Util
                     cuando el elemento es opcional. Utilice los accesores
                     <methodname>setOptionalPrefix()</methodname> y
                     <methodname>getOptionalPrefix()</methodname> para manipularlo.
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                     <methodname>optionalSuffix</methodname>: fija el texto pospuesto a la etiqueta
                     cuando el elemento es opcional. Utilice los accesores
                     <methodname>setOptionalSuffix()</methodname> y
                     <methodname>getOptionalSuffix()</methodname> para manipularlo.
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                     <methodname>requiredPrefix</methodname>: fija el texto antepuesto a la etiqueta
                     cuando el elemento es requerido. Utilice los accesores
                     <methodname>setRequiredPrefix()</methodname> y
                     <methodname>getRequiredPrefix()</methodname> para manipularlo.
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                     <methodname>requiredSuffix</methodname>: fija el texto antepuesto a la etiqueta
                     cuando el elemento es requerido. Utilice los accesores
                     <methodname>setRequiredSuffix()</methodname> y
                     <methodname>getRequiredSuffix()</methodname> para manipularlo.
-            </para></listitem>
+           </para></listitem>
         </itemizedlist>
 
         <para>
             Por defecto, el decorador Label antecede al contenido provisto;
             especifique la opción 'placement' (colocación) como 'append' para
             colocarlo después del contenido.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.prepareElements">
@@ -379,7 +379,7 @@ class Util
             Esta tarea puede realizarse gracias al decorador
             'PrepareElements'. Normalmente, se indicará como el primer
             decorador en al lista.
-        </para>
+       </para>
 
          <programlisting language="php"><![CDATA[
 $form->setDecorators(array(
@@ -400,17 +400,17 @@ $form->setDecorators(array(
             utiliza el último segmento del nombre de clase del elemento para determinar
             el helper, anteponiéndole la cadena 'form': e.g., 'Zend_Form_Element_Text'
             buscaría un view helper del tipo 'formText'.
-        </para>
+       </para>
 
         <para>
             Cualquier atributo del elemento suministrado es pasado al view helper
             como atributo del elemento.
-        </para>
+       </para>
 
         <para>
             Por defecto, este decorador postpone el contenido; utilice la opción 'placement'
             para especificar una localización distinta.
-        </para>
+       </para>
     </sect2>
 
     <sect2 id="zend.form.standardDecorators.viewScript">
@@ -422,7 +422,7 @@ $form->setDecorators(array(
             entregar el view script a un diseñador, o simplemente crear
             una forma fácil de sobreescribir basado en el módulo que se esté usando.
             El decorador ViewScript soluciona este problema.
-        </para>
+       </para>
 
         <para>
             El decorador ViewScript requiere una opción 'viewScript', o bien suministrada
@@ -430,32 +430,32 @@ $form->setDecorators(array(
             script parcial, lo que significa que cada llamada a él tiene su propio espacio de variables;
             Ninguna variable de la vista será rellenada, aparte del elemento en sí. Distintas variables son
             entonces rellenadas:
-        </para>
+       </para>
 
         <itemizedlist>
             <listitem><para>
                     <methodname>element</methodname>: el elemento decorado
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                     <methodname>content</methodname>: el contenido pasado al decorador
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                     <methodname>decorator</methodname>: el propio objeto decorador
-            </para></listitem>
+           </para></listitem>
 
             <listitem><para>
                     Del mismo modo, todas las opciones pasadas al decorador a través de
                     <methodname>setOptions()</methodname> que no son usadas internamente (tales
                     como placement, separator, etc.) son pasadas como
                     variables de vista.
-            </para></listitem>
+           </para></listitem>
         </itemizedlist>
 
         <para>
             Como ejemplo, se pueden tener el siguiente elemento:
-        </para>
+       </para>
 
          <programlisting language="php"><![CDATA[
 // Fija un decorador ViewScript a un único elemento ,
@@ -473,7 +473,7 @@ $element->setDecorators(array(array('ViewScript',
 
         <para>
             Un view script puede tener el siguiente aspecto:
-        </para>
+       </para>
 
          <programlisting language="php"><![CDATA[
 <div class="<?php echo  $this->class ?>">
@@ -497,7 +497,7 @@ $element->setDecorators(array(array('ViewScript',
                 contenido provisto por el decorador -- por ejemplo, si desea encapsularlo.
                 Puede hacer esto especificando un valor booleano false en la
                 opción 'placement' del decorador:
-            </para>
+           </para>
 
              <programlisting language="php"><![CDATA[
 // En la creación del decorador:
@@ -517,7 +517,7 @@ $this->decorator->setOption('placement', false);
         <para>
             Se recomienda usar el decorador ViewScript cuando necesite un control
             muy preciso sobre cómo generados sus elementos.
-        </para>
+       </para>
     </sect2>
 </sect1>
 <!--

@@ -4,14 +4,14 @@
 <sect2 id="zend.application.core-functionality.resource-resource">
     <title>Zend_Application_Resource_Resource</title>
 
-    <para>
+   <para>
         <classname>Zend_Application_Resource_Resource</classname> es una
         interfaz para recursos de plugin utilizados con clases bootstrap implementando
         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>.
         Se espera que los recursos de plugins permitan la configuración,
         estar enterados del bootstrap, y aplicar un patrón de estrategia para la
         inicialización de recursos.
-    </para>
+   </para>
 
     <table id="zend.application.core-functionality.resource-resource.api">
         <title>Zend_Application_Resource_Resource Interface</title>
@@ -32,12 +32,12 @@
                         <listitem><para>
                             <varname>$options</varname>: <emphasis>opcional</emphasis>.
                             Opciones con las cuales establecer el estado de los recursos.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         El constructor debería permitir pasar opciones con las
                         cuales inicializar el estado.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -47,11 +47,11 @@
                             <listitem><para>
                                 <varname>$bootstrap</varname>: <emphasis>requerido</emphasis>.
                                 Padre del bootstrap inicializando este recurso.
-                            </para></listitem>
+                           </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Debería permitir registrar el objeto padre del bootstrap.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -60,7 +60,7 @@
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar la instancia del bootstrap registrado.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -70,11 +70,11 @@
                         <listitem><para>
                             <varname>$options</varname>: <emphasis>requerido</emphasis>.
                             Opciones con las cuales establecer el estado.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Establecer el estado del recurso.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -83,7 +83,7 @@
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar opciones registradas.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -92,7 +92,7 @@
                     <entry>N/A</entry>
                     <entry><para>
                         Patrón de estrategia: ejecute inicialización de los recursos.
-                    </para></entry>
+                   </para></entry>
                 </row>
             </tbody>
         </tgroup>

@@ -3,9 +3,9 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.json.basics">
     <title>Uso Básico</title>
-    <para> El uso de <classname>Zend_Json</classname> consiste en utilizar los dos métodos públicos
+    <para>El uso de <classname>Zend_Json</classname> consiste en utilizar los dos métodos públicos
         estáticos disponibles: <methodname>Zend_Json::encode()</methodname> y
-            <methodname>Zend_Json::decode()</methodname>. </para>
+            <methodname>Zend_Json::decode()</methodname>.</para>
     <programlisting language="php"><![CDATA[
 // Recuperar un valor:
 $phpNative = Zend_Json::decode($encodedValue);

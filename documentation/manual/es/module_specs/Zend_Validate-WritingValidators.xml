@@ -10,7 +10,7 @@
         pero inevitablemente, los desarrolladores quiere escribir sus propios
         validadores personalizados para sus necesidades particulares.
         La tarea de escribir un validador personalizado se describe en esta sección.
-    </para>
+   </para>
 
     <para>
         <classname>Zend_Validate_Interface</classname> define tres métodos, isValid(),
@@ -20,7 +20,7 @@
         puede añadirse a una cadena de validación con <methodname>Zend_Validate::addValidator()</methodname>.
         Tales objetos también pueden ser usados con
         <link linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link>.
-    </para>
+   </para>
 
     <para>
         De la descripción anterior de <classname>Zend_Validate_Interface</classname>, podrá inferir
@@ -31,7 +31,7 @@
         La disponibilidad de las razones para los fracasos de validación puede ser
         valiosa para una aplicación por diversos motivos, tales como proporcionar
         estadísticas para análisis de usabilidad.
-    </para>
+   </para>
 
     <para>
         La funcionalidad de los mensajes de validación básica de fallos están
@@ -45,7 +45,7 @@
         deberá devolver <constant>FALSE</constant>.
         Si el valor pasa su test de validación, entonces <methodname>isValid()</methodname>
         deberá devolver <constant>TRUE</constant>.
-    </para>
+   </para>
 
     <para>
         En general, el método <methodname>isValid()</methodname> no debería arrojar
@@ -56,7 +56,7 @@
         contactado, o una conexión a una base de datos no estuviera disponible.
         Estos son casos en los que puede ser necesario determinar el éxito o
         fracaso de la validación.
-    </para>
+   </para>
 
     <example id="zend.validate.writing_validators.example.simple">
 
@@ -101,7 +101,7 @@ class MyValid_Float extends Zend_Validate_Abstract
             Dado que esta clase sólo define un mensaje de fallo, no es necesario
             darle a <methodname>_error()</methodname> el nombre de la plantilla del mensaje
             de fallo.
-        </para>
+       </para>
 
     </example>
 
@@ -126,7 +126,7 @@ class MyValid_Float extends Zend_Validate_Abstract
                     <para>El valor de entrada es mayor que el valor máximo permitido.</para>
                 </listitem>
             </itemizedlist>
-        </para>
+       </para>
 
         <para>
             Estas razones en el fallo de validación, son traducidas a las definiciones en la clase:
@@ -183,7 +183,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
             las propiedades públicas y permiten usar <methodname>min</methodname> y <methodname>max</methodname>
             en plantillas de mensajes como parámetros mágicos, al igual que con
             <methodname>value</methodname>.
-        </para>
+       </para>
 
         <para>
 
@@ -198,7 +198,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
             validación independientes, donde el objeto validación puede devolver
             múltiples razones por las cuales fracasó un intento de validación en
             particular.
-        </para>
+       </para>
 
     </example>
 
@@ -226,7 +226,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
                     <para>contener al menos un dígito.</para>
                 </listitem>
             </itemizedlist>
-        </para>
+       </para>
 
         <para>
             La siguiente clase implementa estos criterios de validación:
@@ -286,7 +286,7 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
             como contraseña, <methodname>isValid()</methodname> causaría que los cuatro
             mensajes de fracaso de validación sean devueltos por un llamado posterior
             a <methodname>getMessages()</methodname>.
-        </para>
+       </para>
 
     </example>
 

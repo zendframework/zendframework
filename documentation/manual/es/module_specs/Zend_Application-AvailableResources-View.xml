@@ -4,29 +4,29 @@
 <sect2 id="zend.application.available-resources.view">
     <title>Zend_Application_Resource_View</title>
 
-    <para>
+   <para>
         <classname>Zend_Application_Resource_View</classname> puede ser
-        utilizada para configurar una instancia <classname>Zend_View</classname>. 
+        utilizada para configurar una instancia <classname>Zend_View</classname>.
         Las opciones de configuración son por <link
             linkend="zend.view.introduction.options">las opciones de <classname>Zend_View</classname></link>.
-    </para>
+   </para>
 
-    <para>
+   <para>
         Una vez hecha la configuración de la instancia de vista, crea una
         instancia de
         <classname>Zend_Controller_Action_Helper_ViewRenderer</classname> y
         registra el ViewRenderer con
         <classname>Zend_Controller_Action_HelperBroker</classname> -- desde la
         cual usted puede recuperarla posteriormente.
-    </para>
+   </para>
 
     <example id="zend.application.available-resources.view.configExample">
         <title>Ejemplo de configuración del recurso Vista</title>
 
-        <para>
+       <para>
             A continuación un snippet <acronym>INI</acronym>  mostrando cómo configurar el recurso
             vista (view).
-        </para>
+       </para>
 
         <programlisting language="ini"><![CDATA[
 

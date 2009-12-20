@@ -4,9 +4,9 @@
 <sect1 id="zend.dojo.introduction">
     <title>Introducción</title>
 
-    <para> Zend Framework trae incorporado <ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink>
+    <para>Zend Framework trae incorporado <ulink url="http://dojotoolkit.org">Dojo Toolkit</ulink>
         para brindar apoyo out-of-the-box al desarrollo de aplicaciones "ricas de internet". Los
-        puntos de integración con Dojo incluyen: </para>
+        puntos de integración con Dojo incluyen:</para>
 
     <itemizedlist>
         <listitem>
@@ -26,12 +26,12 @@
         </listitem>
     </itemizedlist>
 
-    <para> La propia distribución de Dojo puede encontrarse en el directorio
+    <para>La propia distribución de Dojo puede encontrarse en el directorio
         <filename>externals/dojo/</filename> de la distribución de Zend Framework. Esta es
         una distribución fuente, que incluye completamente los fuentes javascript de Dojo, unidades
         de pruebas, y constructores de herramientas. Puede hacer un symlink a su directorio
         javascript, copiarlo, o utilizarlo como herramienta para crear sus propias construcciones
         personalizadas a fin de incluirlas en su proyecto. Alternativamente, puede usar una de las
         Content Delivery Networks que ofrece Dojo (Zend Framework apoya tanto el AOL CDN oficial así como el
-        Google CDN). </para>
+        Google CDN).</para>
 </sect1>

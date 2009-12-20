@@ -10,11 +10,11 @@
         de email. El validador primero divide la dirección de email en la parte
         local @ nombre de host e intenta igualar a estos contra especificaciones
         conocidas para direcciones y nombres de host para el correo electrónico.
-    </para>
+   </para>
 
     <para>
         <emphasis>Utilización básica</emphasis>
-    </para>
+   </para>
 
     <para>
         Un ejemplo básico de uso se ve a continuación:
@@ -33,11 +33,11 @@ if ($validator->isValid($email)) {
 
         Esto coincide con el correo electrónico <methodname>$email</methodname> y si fracasa,
         alimenta <methodname>$validator->getMessages()</methodname> con mensajes de error útiles.
-    </para>
+   </para>
 
     <para>
         <emphasis>Partes locales complejas</emphasis>
-    </para>
+   </para>
 
     <para>
         <classname>Zend_Validate_EmailAddress</classname> se comparará con cualquier
@@ -45,17 +45,17 @@ if ($validator->isValid($email)) {
         Por ejemplo, correos electrónicos válidos incluyen <methodname>bob@domain.com</methodname> ,
         <methodname>bob+jones@domain.us</methodname> , <methodname>"bob@jones"@domain.com</methodname> y
         <methodname>"bob jones"@domain.com</methodname>
-    </para>
+   </para>
 
     <para>
         Algunos formatos obsoletos de email actualmente no validan
         (por ejemplo los retornos de carro o "\" un caracter en una dirección
         de correo electrónico).
-    </para>
+   </para>
 
     <para>
         <emphasis>Validar diferentes tipos de nombres de host</emphasis>
-    </para>
+   </para>
 
     <para>
         La parte nombre de host de una dirección de correo es validado contra
@@ -63,7 +63,7 @@ if ($validator->isValid($email)) {
         Por defecto sólo son aceptados nombres de host DNS de la forma
         <methodname>domain.com</methodname>, aunque si lo desea también puede aceptar
         direcciones IP y nombres de host locales.
-    </para>
+   </para>
 
     <para>
         Para ello necesita instanciar a <classname>Zend_Validate_EmailAddress</classname>
@@ -85,11 +85,11 @@ if ($validator->isValid($email)) {
     }
 }
 ]]></programlisting>
-    </para>
+   </para>
 
     <para>
         <emphasis>Verificar si el nombre de host realmente acepta email</emphasis>
-    </para>
+   </para>
 
     <para>
         Sólo porque una dirección de correo electrónico está en el formato correcto,
@@ -99,7 +99,7 @@ if ($validator->isValid($email)) {
         registro DNS para correo electrónico en ese nombre de host.
         Esto le dice que el nombre de host acepta email, pero no le dice si la
         dirección de correo electrónico exacta es válida en si misma.
-    </para>
+   </para>
 
     <para>
         La comprobación MX no está activada por defecto y en este momento es
@@ -113,18 +113,18 @@ $validator = new Zend_Validate_EmailAddress(Zend_Validate_Hostname::ALLOW_DNS,
 ]]></programlisting>
         Alternativamente, para activar o desactivar la validación MX puede pasar
         <constant>TRUE</constant> o <constant>FALSE</constant> a <methodname>$validator->setValidateMx()</methodname>.
-    </para>
+   </para>
 
     <para>
         Al habilitarlo, se usarán las funciones de red para comprobar
         la presencia de un registro MX en el nombre de host de la dirección
         de correo electrónico que desea validar.
         Tenga en cuenta esto probablemente hará más lento su script.
-    </para>
+   </para>
 
     <para>
         <emphasis>Validating International Domains Names</emphasis>
-    </para>
+   </para>
 
     <para>
         <classname>Zend_Validate_EmailAddress</classname> también comparará caracteres
@@ -139,16 +139,16 @@ $validator->hostnameValidator->setValidateIdn(false);
 ]]></programlisting>
         Sobre el uso de <methodname>setValidateIdn()</methodname> encontrará más información
         en la documentación de <classname>Zend_Validate_Hostname</classname>.
-    </para>
+   </para>
 
     <para>
         Tenga en cuenta que los IDNs se validarán solo si
         usted permite que nombres de host DNS sean validados.
-    </para>
+   </para>
 
     <para>
         <emphasis>Validar Dominios de Nivel Superior (TLD)</emphasis>
-    </para>
+   </para>
 
     <para>
         Por defecto, un nombre de host se cotejará con una lista conocida de TLDs.
@@ -161,12 +161,12 @@ $validator->hostnameValidator->setValidateTld(false);
 ]]></programlisting>
         Encontrará más información sobre el uso de <methodname>setValidateTld()</methodname>
         en la documentación de <classname>Zend_Validate_Hostname</classname>.
-    </para>
+   </para>
 
     <para>
         Tenga en cuenta que los TLDs se validarán solo si
         usted permite que nombres de host DNS sean validados.
-    </para>
+   </para>
 
 </sect2>
 <!--

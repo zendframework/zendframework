@@ -4,7 +4,7 @@
 <sect2 id="zend.application.core-functionality.bootstrap-resourcebootstrapper">
     <title>Zend_Application_Bootstrap_ResourceBootstrapper</title>
 
-    <para>
+   <para>
         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname> es una
         interfaz para usar cuando una clase de arranque cargará recursos
         externos -- por ejemplo, uno o más recursos no se definirán
@@ -13,11 +13,11 @@
         <link linkend="zend.application.core-functionality.bootstrap-bootstrapper">Zend_Application_Bootstrap_Bootstrapper</link>;
         <link linkend="zend.application.core-functionality.bootstrap-bootstrapabstract">Zend_Application_Bootstrap_BootstrapAbstract</link>
         que implementan esta funcionalidad.
-    </para>
+   </para>
 
-    <para>
+   <para>
         Los siguientes métodos conforman la definición de la interfaz.
-    </para>
+   </para>
 
     <table id="zend.application.core-functionality.bootstrap-resourcebootstrapper.methods-table">
         <title>Zend_Application_Bootstrap_ResourceBootstrapper Interface</title>
@@ -40,18 +40,18 @@
                             <varname>$resource</varname>: <emphasis>requerido</emphasis>.
                             Un nombre de recurso o un objeto
                             <classname>Zend_Application_Resource_Resource</classname>.
-                        </para></listitem>
+                       </para></listitem>
 
                         <listitem><para>
                             <varname>$options</varname>: <emphasis>opcional</emphasis>.
                             Un array o un objeto <classname>Zend_Config</classname>
                             para pasar al recurso en instanciación.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Registre un recurso con la clase, proporcionando
                         configuración opcional para pasar al recurso.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -61,11 +61,11 @@
                         <listitem><para>
                             <varname>$resource</varname>: <emphasis>requerido</emphasis>.
                             Nombre de un recurso para des-registrar desde la clase.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Eliminar un recurso de plugin de la clase.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -75,12 +75,12 @@
                         <listitem><para>
                             <methodname>$resource</methodname>: <emphasis>requerido</emphasis>.
                             Nombre del recurso.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Determinar si un recurso específico se ha registrado
                         en la clase.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -90,11 +90,11 @@
                         <listitem><para>
                             <varname>$resource</varname>: <emphasis>requerido</emphasis>.
                             Nombre de un recurso a recuperar (string).
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Recuperar una instacia de un recurso de plugin por su nombre.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -104,7 +104,7 @@
                     <entry><para>
                         Recuperar una lista de todos los nombres de recursos de
                         plugin registrados.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -116,12 +116,12 @@
                             <varname>$loader</varname>: <emphasis>requerido</emphasis>.
                             Instancia del cargador de plugin para utilizar
                             cuando se resuelven nombres de plugin a las clases.
-                        </para></listitem>
+                       </para></listitem>
                     </itemizedlist></entry>
                     <entry><para>
                         Registre una instancia del cargador de plugin para
                         utilizar cuando se resuelven nombres de clases de plugin.
-                    </para></entry>
+                   </para></entry>
                 </row>
 
                 <row>
@@ -130,7 +130,7 @@
                     <entry>N/A</entry>
                     <entry><para>
                         Recuperar el cargador de plugin registrado.
-                    </para></entry>
+                   </para></entry>
                 </row>
             </tbody>
         </tgroup>

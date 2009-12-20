@@ -15,15 +15,15 @@
             <acronym>PHP</acronym> de la especificación del <ulink
             url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal"
             >Service Mapping Description (SMD)</ulink> para prestar un servicio
-        de metadatos a consumidores del servicio. </para>
+        de metadatos a consumidores del servicio.</para>
 
-    <para> JSON-RPC es un protocolo liviano de Remote Procedure Call que utiliza
+    <para>JSON-RPC es un protocolo liviano de Remote Procedure Call que utiliza
         JSON para envolver sus mensajes. Esta implementación JSON-RPC sigue la
             <acronym>API</acronym>
         <acronym>PHP</acronym> de <ulink
             url="http://us.php.net/manual/en/function.soap-soapserver-construct.php"
             >SoapServer</ulink>. Esto significa que, en una situación típica,
-        simplemente: </para>
+        simplemente:</para>
 
     <itemizedlist>
         <listitem>
@@ -45,7 +45,7 @@
         información para construir tanto la SMD y hacer cumplir el método de
         llamado de firmas. Como tal, es imperativo que cualquier de las
         funciones agregadas y/o los métodos de clase tengan mínimamente una
-        plena documentación de <acronym>PHP</acronym> docblocks: </para>
+        plena documentación de <acronym>PHP</acronym> docblocks:</para>
 
     <itemizedlist>
         <listitem>
@@ -63,14 +63,14 @@
         escribir esto, sólo requieren a POST como es. Esto hace que sea fácil de
         utilizar el mismo punto final del servidor para manejar a ambas
         peticiones así como para entregar el servicio SMD, como se muestra en el
-        siguiente ejemplo. </para>
+        siguiente ejemplo.</para>
 
     <example id="zend.json.server.usage">
         <title>Uso de Zend_Json_Server</title>
 
-        <para> Primero, definir una clase que queramos exponer vía servidor
+        <para>Primero, definir una clase que queramos exponer vía servidor
             JSON-RPC. Vamos a la clase 'Calculator', y definir los métodos para
-            'add', 'subtract', 'multiply', y 'divide': </para>
+            'add', 'subtract', 'multiply', y 'divide':</para>
 
         <programlisting language="php"><![CDATA[
 /**
@@ -128,13 +128,13 @@ class Calculator
 }
 ]]></programlisting>
 
-        <para> Nótese que cada método tiene un docblock con entradas indicando
+        <para>Nótese que cada método tiene un docblock con entradas indicando
             cada parámetro y su tipo, así como una entrada para el valor de
             retorno. Esto es <emphasis>absolutamente crítico</emphasis> cuando
             se usa <classname>Zend_Json_Server</classname> -- o cualquier otro
-            componente del servidor en Zend Framework, por esa cuestión. </para>
+            componente del servidor en Zend Framework, por esa cuestión.</para>
 
-        <para> Ahora, crearemos un script para manejar las peticiones: </para>
+        <para>Ahora, crearemos un script para manejar las peticiones:</para>
 
         <programlisting language="php"><![CDATA[
 $server = new Zend_Json_Server();
@@ -146,10 +146,10 @@ $server->setClass('Calculator');
 $server->handle();
 ]]></programlisting>
 
-        <para> Sin embargo, esto no soluciona el problema de devolución de un
+        <para>Sin embargo, esto no soluciona el problema de devolución de un
             SMD para que el cliente JSON-RPC pueda autodescubrir los métodos.
             Esto puede lograrse determinando el método del requerimiento HTTP, y
-            luego especificando algún servidor de metadatos: </para>
+            luego especificando algún servidor de metadatos:</para>
 
         <programlisting language="php"><![CDATA[
 $server = new Zend_Json_Server();
@@ -172,9 +172,9 @@ if ('GET' == $_SERVER['REQUEST_METHOD']) {
 $server->handle();
 ]]></programlisting>
 
-        <para> Si utiliza el servidor JSON-RPC con Dojo toolkit, también
+        <para>Si utiliza el servidor JSON-RPC con Dojo toolkit, también
             necesitará establecer un flag de compatibilidad especial para
-            garantizar que los dos interoperen correctamente: </para>
+            garantizar que los dos interoperen correctamente:</para>
 
 
         <programlisting language="php"><![CDATA[
@@ -201,10 +201,10 @@ $server->handle();
     <sect2 id="zend.json.server.details">
         <title>Detalles Avanzados</title>
 
-        <para> Aunque la mayor funcionalidad de
+        <para>Aunque la mayor funcionalidad de
                 <classname>Zend_Json_Server</classname> se puntualiza en <xref
                 linkend="zend.json.server.usage"/>, hay más funcionalidad
-            avanzada disponible. </para>
+            avanzada disponible.</para>
 
         <sect3 id="zend.json.server.details.zendjsonserver">
             <title>Zend_Json_Server</title>
@@ -213,7 +213,7 @@ $server->handle();
                 <classname>Zend_Json_Server</classname> es la clase núcleo en la
                 propuesta JSON-RPC; que maneja todas las peticiones y como
                 respuesta devuelve un conjunto de datos. Tiene los siguientes
-                métodos: </para>
+                métodos:</para>
 
             <itemizedlist>
                 <listitem>
@@ -282,16 +282,16 @@ $server->handle();
         <sect3 id="zend.json.server.details.zendjsonserverrequest">
             <title>Zend_Json_Server_Request</title>
 
-            <para> El medio ambiente de una solicitud JSON-RPC está encapsulado
+            <para>El medio ambiente de una solicitud JSON-RPC está encapsulado
                 en el objeto <classname>Zend_Json_Server_Request</classname>.
                 Este objeto le permite establecer porciones necesarias de la
                 solicitud JSON-RPC, incluida el ID de la solicitud, parámetros y
                 especificaciones de la versión JSON-RPC. Tiene la capacidad de
                 cargarse a sí mismo via JSON o un conjunto de opciones, y puede
                 mostrase a si mismo como JSON vía el método
-                    <methodname>toJson()</methodname>. </para>
+                    <methodname>toJson()</methodname>.</para>
 
-            <para> El objeto solicitud tiene los siguientes métodos disponibles: </para>
+            <para>El objeto solicitud tiene los siguientes métodos disponibles:</para>
 
             <itemizedlist>
                 <listitem>
@@ -309,7 +309,7 @@ $server->handle();
                         null)</methodname>: Agrega un parámetro para usar con el
                         método de llamada. Los parámetros pueden ser sólo los
                         valores, o pueden incluir opcionalmente el nombre del
-                        parámetro. </para>
+                        parámetro.</para>
                 </listitem>
                 <listitem>
                     <para><methodname>addParams(array $params)</methodname>:
@@ -359,7 +359,7 @@ $server->handle();
                 <listitem>
                     <para><methodname>getVersion()</methodname>: Recuperar la
                         versión de la especificación JSON-RPC utilizados por la
-                        solicitud. </para>
+                        solicitud.</para>
                 </listitem>
                 <listitem>
                     <para><methodname>loadJson($json)</methodname>: Cargar el
@@ -371,25 +371,25 @@ $server->handle();
                 </listitem>
             </itemizedlist>
 
-            <para> Una versión específica de HTTP está disponible a través de
+            <para>Una versión específica de HTTP está disponible a través de
                     <classname>Zend_Json_Server_Request_Http</classname>. Esta
                 clase podrá recuperar la solicitud via
                     <methodname>php://input</methodname>, y permite el acceso
                 JSON sin procesar vía el método
-                    <methodname>getRawJson()</methodname>. </para>
+                    <methodname>getRawJson()</methodname>.</para>
         </sect3>
 
         <sect3 id="zend.json.server.details.zendjsonserverresponse">
             <title>Zend_Json_Server_Response</title>
 
-            <para> La respuesta del conjunto de datos JSON-RPC es encapsulada en
+            <para>La respuesta del conjunto de datos JSON-RPC es encapsulada en
                 el objeto <classname>Zend_Json_Server_Response</classname>. Este
                 objeto le permite ajustar el valor de retorno de la solicitud,
                 siendo la respuesta un error o no, el identificador de
                 solicitud, con que versión de especificación esta conformada la
-                respuesta de JSON-RPC, y, opcionalmente el mapa de servicio. </para>
+                respuesta de JSON-RPC, y, opcionalmente el mapa de servicio.</para>
 
-            <para> El objeto respuesta tiene los siguientes métodos disponibles: </para>
+            <para>El objeto respuesta tiene los siguientes métodos disponibles:</para>
 
             <itemizedlist>
                 <listitem>
@@ -404,7 +404,7 @@ $server->handle();
                     <para><methodname>setError(Zend_Json_Server_Error
                             $error)</methodname>: Establecer un objeto error. Si
                         ya está, este será utilizado como la respuesta cuando se
-                        serialize a JSON. </para>
+                        serialize a JSON.</para>
                 </listitem>
                 <listitem>
                     <para><methodname>getError()</methodname>: Recuperar el
@@ -418,7 +418,7 @@ $server->handle();
                     <para><methodname>setId($name)</methodname>: Establecer el
                         identificador de solicitud (de manera que la respuesta
                         del cliente pueda coincidir con la solicitud original).
-                    </para>
+                   </para>
                 </listitem>
                 <listitem>
                     <para><methodname>getId()</methodname>: Recuperar el
@@ -441,7 +441,7 @@ $server->handle();
                 <listitem>
                     <para><methodname>setServiceMap($serviceMap)</methodname>:
                         Establecer el objeto mapa de servicio para la respuesta.
-                    </para>
+                   </para>
                 </listitem>
                 <listitem>
                     <para><methodname>getServiceMap()</methodname>: Recuperar el
@@ -449,30 +449,30 @@ $server->handle();
                 </listitem>
             </itemizedlist>
 
-            <para> Una versión específica de HTTP está disponible a través de
+            <para>Una versión específica de HTTP está disponible a través de
                     <classname>Zend_Json_Server_Response_Http</classname>. Esta
                 clase enviará las cabeceras HTTP apropiadas así como serializará
-                la respuesta como JSON. </para>
+                la respuesta como JSON.</para>
         </sect3>
 
         <sect3 id="zend.json.server.details.zendjsonservererror">
             <title>Zend_Json_Server_Error</title>
 
-            <para> JSON-RPC tiene un formato especial para informar condiciones
+            <para>JSON-RPC tiene un formato especial para informar condiciones
                 de error. Todos los errores necesitan proporcionar, mínimamente,
                 un mensaje de error y un código de error; opcionalmente, pueden
-                proporcionar datos adicionales, tales como un backtrace. </para>
+                proporcionar datos adicionales, tales como un backtrace.</para>
 
-            <para> Los códigos de error derivan de los recomendados por <ulink
+            <para>Los códigos de error derivan de los recomendados por <ulink
                     url="http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php"
                     >el proyecto XML-RPC EPI</ulink>.
                     <classname>Zend_Json_Server</classname> apropiadamente
                 asigna el código sobre la base de la condición de error. Para
-                las excepciones de la aplicación, se utiliza el código '-32000'. </para>
+                las excepciones de la aplicación, se utiliza el código '-32000'.</para>
 
             <para>
                 <classname>Zend_Json_Server_Error</classname> expone los
-                siguientes métodos: </para>
+                siguientes métodos:</para>
 
             <itemizedlist>
                 <listitem>
@@ -517,30 +517,30 @@ $server->handle();
         <sect3 id="zend.json.server.details.zendjsonserversmd">
             <title>Zend_Json_Server_Smd</title>
 
-            <para> SMD quiere decir Service Mapping Description, un esquema JSON
+            <para>SMD quiere decir Service Mapping Description, un esquema JSON
                 que define cómo un cliente puede interactuar con un servicio web
                 en particular. En el momento de escribir esto, la <ulink
                     url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal"
                     >especificación</ulink> todavía no ha sido ratificada
                 oficialmente, pero ya está en uso en Dojo toolkit así como en
-                otros clientes consumidores de JSON-RPC. </para>
+                otros clientes consumidores de JSON-RPC.</para>
 
-            <para> En su aspecto más básico, un SMD indica el método de
+            <para>En su aspecto más básico, un SMD indica el método de
                 transporte (POST, GET, TCP/IP, etc), el tipo de envoltura de la
                 solicitud (generalmente se basa en el protocolo del servidor),
                 el objetivo <acronym>URL</acronym> del proveedor del servicio, y
                 un mapa de los servicios disponibles. En el caso de JSON-RPC, el
                 servicio de mapa es una lista de los métodos disponibles, en el
                 que cada método documenta los parámetros disponibles y sus
-                tipos, así como los tipos de valores esperados a devolver. </para>
+                tipos, así como los tipos de valores esperados a devolver.</para>
 
             <para>
                 <classname>Zend_Json_Server_Smd</classname> Proporciona un
                 objeto orientado para construir servicios de mapas. Básicamente,
                 pasa los metadatos describiendo el servicio usando mutators, y
-                especifica los servicios (métodos y funciones). </para>
+                especifica los servicios (métodos y funciones).</para>
 
-            <para> Las descripciones de los servicios son típicamente instancias
+            <para>Las descripciones de los servicios son típicamente instancias
                 de <classname>Zend_Json_Server_Smd_Service</classname>; también
                 puede pasar toda la información como un array a los diversos
                 mutators de servicios en
@@ -550,17 +550,17 @@ $server->handle();
                 (típicamente, la función o el nombre del método), los parámetros
                 (nombres, tipos y posición), y el tipo del valor de retorno.
                 Opcionalmente, cada servicio puede tener su propio objetivo y
-                envoltura, aunque esta funcionalidad rara vez es utilizada. </para>
+                envoltura, aunque esta funcionalidad rara vez es utilizada.</para>
 
             <para>
                 <classname>Zend_Json_Server</classname> Realmente todo esto
                 sucede entre bambalinas para usted, utilizando reflexión sobre
                 las clases y funciones agregadas; debe crear su propio servicio
                 de mapas sólo si necesita brindar funcionalidad personalizada
-                que la introspección de clase y función no puede ofrecer. </para>
+                que la introspección de clase y función no puede ofrecer.</para>
 
-            <para> Los métodos disponibles en
-                    <classname>Zend_Json_Server_Smd</classname> incluyen: </para>
+            <para>Los métodos disponibles en
+                    <classname>Zend_Json_Server_Smd</classname> incluyen:</para>
 
             <itemizedlist>
                 <listitem>
@@ -619,7 +619,7 @@ $server->handle();
                 <listitem>
                     <para><methodname>getId()</methodname>: Recuperar el ID del
                         servicio (normalmente el punto final de la
-                            <acronym>URL</acronym> del servicio). </para>
+                            <acronym>URL</acronym> del servicio).</para>
                 </listitem>
                 <listitem>
                     <para><methodname>setDescription($description)</methodname>:
@@ -641,7 +641,7 @@ $server->handle();
                 <listitem>
                     <para><methodname>isDojoCompatible()</methodname>: Devuelve
                         el valor del flag de compatibilidad de Dojo (falso, por
-                        defecto). </para>
+                        defecto).</para>
                 </listitem>
                 <listitem>
                     <para><methodname>addService($service)</methodname>: Añade
@@ -658,7 +658,7 @@ $server->handle();
                     <para><methodname>setServices(array $services)</methodname>:
                         Agrega múltiples servicios a la vez, sobreescribiendo
                         cualquiera de los servicios previamente establecidos.
-                    </para>
+                   </para>
                 </listitem>
                 <listitem>
                     <para><methodname>getService($name)</methodname>: Ontiene el
@@ -689,7 +689,7 @@ $server->handle();
 
             <para>
                 <classname>Zend_Json_Server_Smd_Service</classname> tiene los
-                siguientes métodos: </para>
+                siguientes métodos:</para>
 
             <itemizedlist>
                 <listitem>
@@ -697,7 +697,7 @@ $server->handle();
                         Establecer el estado del objeto dede un array. Cualquier
                         mutator (métodos comenzando con 'set') puede ser
                         utilizado como una clave y establecerlo mediante este
-                        método. </para>
+                        método.</para>
                 </listitem>
                 <listitem>
                     <para><methodname>setName($name)</methodname>: Establecer el

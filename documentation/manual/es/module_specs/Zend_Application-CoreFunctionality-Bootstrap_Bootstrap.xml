@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19571 -->
+<!-- EN-Revision: 19689 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrap">
     <title>Zend_Application_Bootstrap_Bootstrap</title>
@@ -26,7 +26,7 @@
                 linkend="zend.loader.autoloader-resource.module">Zend_Application_Module_Autoloader</link>
             object, providing the requested namespace and the bootstrap's directory as arguments.
             You may enable this functionality by providing a namespace to the "appnamespace"
-            configuration option. As an <acronym>INI</acronym> example:
+            configuration option. As an <acronym>INI</acronym> Ejemplo:
         </para>
         
         <programlisting language="ini"><![CDATA[
@@ -34,7 +34,7 @@ appnamespace = "Application"
 ]]></programlisting>
         
         <para>
-            Or in <acronym>XML</acronym>:
+            O en <acronym>XML</acronym>:
         </para>
         
         <programlisting language="xml"><![CDATA[

@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15681 -->
+<!-- EN-Revision: 19661 -->
 <!-- Reviewed: no -->
 <!-- Traducir todo de nuevo-->
 <sect1 id="zend.exception.using">
 
-    <title>Using Exceptions</title>
+    <title>Uso de Excepciones</title>
 
     <para>
-        <classname>Zend_Exception</classname> is simply the base class for all
-        exceptions thrown within Zend Framework. </para>
+        <classname>Zend_Exception</classname> es simplemente la clase base para todos los
+        las excepciones lanzadas dentro de Zend Framework.</para>
 
     <example id="zend.exception.using.example">
-        <title>Catching an Exception</title>
-        <para> The following code listing demonstrates how to catch an exception
-            thrown in a Zend Framework class: </para>
+        <title>Capturando una Excepcion</title>
+        <para> 
+		El siguiente  listado de código muestra cómo capturar una excepción
+            lanzado en Zend Framework:</para>
         <programlisting language="php"><![CDATA[
 try {
     // Calling Zend_Loader::loadClass() with a non-existant class will cause
-    // an exception to be thrown in Zend_Loader
+    // an exception to be thrown in Zend_Loader;
     Zend_Loader::loadClass('nonexistantclass');
 } catch (Zend_Exception $e) {
     echo "Caught exception: " . get_class($e) . "\n";
@@ -32,9 +33,9 @@ try {
         Framework classes. This can be useful when the program can not recover
         by catching a specific exception type. </para>
 
-    <para> The documentation for each Zend Framework component and class will
-        contain specific information on which methods throw exceptions, the
-        circumstances that cause an exception to be thrown, and the class of all
-        exceptions that may be thrown. </para>
+<para> La documentación de cada componente  y clase de Zend Framework 
+        contienen información específica sobre los métodos que generan excepciones, la
+        circunstancias en que provocan una excepción a ser lanzado,
+y los diferentes tipos de excepción que puede ser lanzadas. </ para>
 
 </sect1>

@@ -19,7 +19,8 @@
  * @version    $Id$
  */
 
-require_once 'PHPUnit/Framework/TestCase.php';
+require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
+
 require_once 'Zend/Feed/Pubsubhubbub/Subscriber.php';
 require_once 'Zend/Http/Client.php';
 require_once 'Zend/Http/Client/Adapter/Socket.php';
@@ -37,6 +38,8 @@ require_once 'Zend/Uri/Http.php';
  * @category   Zend
  * @package    Zend_Feed
  * @subpackage UnitTests
+ * @group      Zend_Feed
+ * @group      Zend_Feed_Subsubhubbub
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

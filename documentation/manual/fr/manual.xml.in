@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 19778 -->
+<!-- EN-Revision: 19811 -->
 <!-- Reviewed: no -->
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
@@ -29,7 +29,6 @@
             </mediaobject>
         -->
     </bookinfo>
-
 
     <part id="introduction">
         <title>Introduction au Zend Framework</title>
@@ -829,6 +828,21 @@
             <xi:include href="module_specs/Zend_Feed_Writer.xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Feed_Writer.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Feed_Pubsubhubbub-Introduction.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Feed_Pubsubhubbub-Introduction.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Feed_Pubsubhubbub-Pubsubhubbub-Publisher.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Feed_Pubsubhubbub-Pubsubhubbub-Publisher.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Feed_Pubsubhubbub-Pubsubhubbub-Subscriber.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Feed_Pubsubhubbub-Pubsubhubbub-Subscriber.xml" />
                 </xi:fallback>
             </xi:include>
         </chapter>

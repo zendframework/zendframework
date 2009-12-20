@@ -184,9 +184,10 @@ $out = $feed->export('atom');
             standard unless the end-user deliberately elects to ignore all Exceptions.
         </para>
     </sect2>
-    
+
     <sect2 id="zend.feed.writer.setting.feed.data.points">
-    
+        <title>Setting Feed Data Points</title>
+
         <para>
             Before you can render a feed, you must first setup the data necessary for
             the feed being rendered. This utilises a simple setter style API which doubles
@@ -194,9 +195,9 @@ $out = $feed->export('atom');
             closely matches that for <classname>Zend_Feed_Reader</classname> to avoid
             undue confusion and uncertainty.
         </para>
-        
+
         <para>
-            <classname>Zend_Feed_Writer<classname> offers this API via its data container
+            <classname>Zend_Feed_Writer</classname> offers this API via its data container
             classes <classname>Zend_Feed_Writer_Feed</classname> and
             <classname>Zend_Feed_Writer_Entry</classname>. These classes merely store
             all feed data in type-agnostic manner, meaning you may reuse any data
@@ -206,7 +207,7 @@ $out = $feed->export('atom');
             are checked when any method call triggers the base container's
             <methodname>__call()</methodname> method.
         </para>
-        
+
         <para>
             Here's a summary of the Core <acronym>API</acronym> for Feeds. You should note it
             comprises not only the basic <acronym>RSS</acronym> and Atom standards, but also
@@ -370,9 +371,10 @@ $out = $feed->export('atom');
             </tgroup>
         </table>
     </sect2>
-    
+
     <sect2 id="zend.feed.writer.setting.entry.data.points">
-    
+        <title>Setting Entry Data Points</title>
+
         <para>
             Here's a summary of the Core <acronym>API</acronym> for Entries/Items. You should note it
             comprises not only the basic <acronym>RSS</acronym> and Atom standards, but also
@@ -536,5 +538,4 @@ $out = $feed->export('atom');
             </tgroup>
         </table>
     </sect2>
-    
 </sect1>

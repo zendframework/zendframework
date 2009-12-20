@@ -13,8 +13,8 @@
         <title>Layout Configuration</title>
 
         <para>
-            The recommended location of layouts is in a "layouts/scripts/" subdirectory of your
-            application:
+            The recommended location of layouts is in a "<filename>layouts/scripts/</filename>"
+            subdirectory of your application:
         </para>
 
         <programlisting language="text"><![CDATA[
@@ -30,7 +30,7 @@ application
 
         <para>
             To initialize <classname>Zend_Layout</classname>, add the following to your
-            configuration file ("application/configs/application.ini"):
+            configuration file ("<filename>application/configs/application.ini</filename>"):
         </para>
 
         <programlisting language="dosini"><![CDATA[
@@ -41,7 +41,7 @@ resources.layout.layout = "layout"
         <para>
             The first line indicates where to look for layout scripts; the second line gives the
             name of the layout to use, minus the view script extension (which is assumed to be
-            ".phtml" by default).
+            "<filename>.phtml</filename>" by default).
         </para>
     </sect2>
 
@@ -50,7 +50,8 @@ resources.layout.layout = "layout"
 
         <para>
             Now that you have your configuration in place, you need to create your layout script.
-            First, make sure that you've created the "application/layouts/scripts" directory; then,
+            First, make sure that you've created the
+            "<filename>application/layouts/scripts</filename>" directory; then,
             open an editor, and create the markup for your layout. Layout scripts are simply view
             scripts, with some slight differences.
         </para>
@@ -71,10 +72,10 @@ resources.layout.layout = "layout"
             helper. When you register the <classname>Zend_Layout</classname> resource, you also gain
             access to both an action and view helper that allow you access to the
             <classname>Zend_Layout</classname> instance; you can then call operations on the layout
-            object. In this case, we're retrieving a named variable, <varname>content</varname>, and
-            echoing it. By default, the <varname>content</varname> variable is populated for you
-            from the application view script rendered. Otherwise, anything you'd normally do in a
-            view script is perfectly valid -- call any helpers or view methods you desire.
+            object. In this case, we're retrieving a named variable, <varname>$content</varname>,
+            and echoing it. By default, the <varname>$content</varname> variable is populated for
+            you from the application view script rendered. Otherwise, anything you'd normally do
+            in a view script is perfectly valid -- call any helpers or view methods you desire.
         </para>
 
         <para>
@@ -178,7 +179,7 @@ $layout = $bootstrap->getResource('Layout');
                 <para>
                     <emphasis>Setting layout variables</emphasis>.
                     <classname>Zend_Layout</classname> keeps its own registry of layout-specific
-                    view variables that you can access; the <varname>content</varname> key noted in
+                    view variables that you can access; the <varname>$content</varname> key noted in
                     the initial layout script sample is one such example. You can assign and
                     retrieve these using normal property access, or via the
                     <methodname>assign()</methodname> method.
@@ -232,7 +233,7 @@ $layout->setLayout('alternate');
 ]]></programlisting>
 
                 <para>
-                    The layout script should reside in the <varname>layoutPath</varname> directory
+                    The layout script should reside in the <varname>$layoutPath</varname> directory
                     specified in your configuration. <classname>Zend_Layout</classname> will then
                     use this new layout when rendering.
                 </para>

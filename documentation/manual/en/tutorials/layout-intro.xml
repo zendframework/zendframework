@@ -4,10 +4,11 @@
     <title>Introduction</title>
 
     <para>
-        When building a website using the Zend Framework <acronym>MVC</acronym> layers, your view
+        When building a website using Zend Framework <acronym>MVC</acronym> layers, your view
         scripts will typically be just snippets of <acronym>HTML</acronym> pertinent to the
-        requested action. For instance, if you had the action "/user/list", you might create a view
-        script that iterates through the users and presents an unordered list:
+        requested action. For instance, if you had the action "<filename>/user/list</filename>",
+        you might create a view script that iterates through the users and presents an unordered
+        list:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -28,8 +29,8 @@
 
     <para>
         Since this is just a snippet of <acronym>HTML</acronym>, it's not a valid page; it's missing
-        a <acronym>Doctype</acronym> declaration, and the opening <acronym>HTML</acronym> and
-        <acronym>body</acronym> tags. So, the question is, where will these be created?
+        a <acronym>DOCTYPE</acronym> declaration, and the opening <acronym>HTML</acronym> and
+        <acronym>BODY</acronym> tags. So, the question is, where will these be created?
     </para>
 
     <para>

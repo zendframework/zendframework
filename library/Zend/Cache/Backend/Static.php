@@ -189,7 +189,7 @@ class Zend_Cache_Backend_Static
 
         $pathName = $this->_options['public_dir'] . dirname($id);
         if (!file_exists($pathName)) {
-            mkdir($pathName, $this->_options['cache_file_umask'], true);
+            mkdir($pathName, $this->_octdec($this->_options['cache_file_umask']), true);
         }
 
         if (is_null($id) || strlen($id) == 0) {
@@ -455,5 +455,20 @@ class Zend_Cache_Backend_Static
         ) {
             Zend_Cache::throwException("Invalid id or tag '$string' : must be a valid URL path");
         }
+    }
+    
+    /**
+     * Detect an octal string and return its octal value for file permission ops
+     * otherwise return the non-string (assumed octal or decimal int already)
+     *
+     * @param $val The potential octal in need of conversion
+     * @return int
+     */
+    protected function _octdec($val)
+    {
+        if (decoct(octdec($val)) == $val && is_string($val)) {
+            return octdec($val);
+        }
+        return $val;
     }
 }

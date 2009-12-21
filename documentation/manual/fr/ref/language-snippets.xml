@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- links -->
+<!ENTITY lang                                   'fr'>
+<!ENTITY zf.manual.link                         'http://framework.zend.com/manual/fr/'>
+<!ENTITY php.manual.link                        'http://www.php.net/manual/fr/'>
+
+<!-- manual.xml.in -->
+<!ENTITY book.title                             'Guide de référence du programmeur'>
+<!ENTITY book.subtitle                          'Zend Framework'>
+<!ENTITY book.edition                           'Guide de référence de Zend Framework destiné au programmeur'>
+
+<!ENTITY chapter.introduction.title             'Introduction au Zend Framework'>
+
+<!ENTITY part.learning.title                    'Apprendre Zend Framework'>
+<!ENTITY part.learning.quickstart.title         'Démarrez rapidement avec Zend Framework'>
+<!ENTITY part.learning.autoloading.title        'Chargement automatique avec Zend Framework'>
+<!ENTITY part.learning.plugins.title            'Les plugins dans Zend Framework'>
+<!ENTITY part.learning.layout.title             'Bien démarrer avec Zend_Layout'>
+<!ENTITY part.learning.view.placeholders.title  'Bien démarrer avec Zend_View'>
+<!ENTITY part.learning.form.decorators.title    'Bien comprendre et utiliser les décorateurs Zend Form'>
+<!ENTITY part.learning.multiuser.title          'Bien démarrer avec Zend_Session, Zend_Auth, et Zend_Acl'>
+<!ENTITY part.learning.lucene.title             'Bien démarrer avec Zend_Search_Lucene'>
+<!ENTITY part.learning.paginator.title          'Bien démarrer avec Zend_Paginator'>
+
+<!ENTITY part.reference.title                   'Guide de référence Zend Framework'>
+
+<!ENTITY appendix.migration.title               'Notes de migration de Zend Framework'>
+
+<!ENTITY appendix.performance.title             'Guide de performance Zend Framework'>

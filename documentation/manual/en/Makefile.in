@@ -62,7 +62,7 @@ html/index.html: $(MANUAL_XML) $(HTML_XSL)
 	@echo "Copying manual figures (recursively)..."
 	-[ -d figures ] && cp -r figures html/
 
-$(MANUAL_XML): $(MANUAL_XML).in
+$(MANUAL_XML): ../en/$(MANUAL_XML).in
 	sed -e 's!@DOCBOOK_DTD@!$(DOCBOOK_DTD)!' $< > $@
 	
 $(HTML_XSL): $(HTML_XSL).in

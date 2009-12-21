@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE entities
+[    
+    <!-- Add translated specific definitions and snippets -->
+    <!ENTITY % language-snippets SYSTEM "./ref/language-snippets.xml">
+    %language-snippets;
+
+    <!-- Fallback to English definitions and snippets (in case of missing translation) -->
+    <!ENTITY % language-snippets.default SYSTEM "../en/ref/language-snippets.xml">
+    %language-snippets.default;
+]>
+
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
                 xmlns:fo="http://www.w3.org/1999/XSL/Format"   
 				version="1.0">
@@ -23,7 +35,7 @@
 	<xsl:param name="html.stylesheet">dbstyle.css</xsl:param>
 	<xsl:param name="header.rule">0</xsl:param>
 	<xsl:param name="footer.rule">0</xsl:param>
-          <xsl:param name="htmlhelp.chm" select="'Zend_Framework_EN.chm'"/>
+          <xsl:param name="htmlhelp.chm" select="'Zend_Framework_&lang;.chm'"/>
           <xsl:param name="htmlhelp.hhc.binary" select="0"/>
           <xsl:param name="htmlhelp.hhc.folders.instead.books" select="0"/>
           <xsl:param name="toc.section.depth" select="4"/>

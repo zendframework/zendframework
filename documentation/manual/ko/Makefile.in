@@ -65,7 +65,7 @@ html/index.html: $(MANUAL_XML) $(HTML_XSL)
 $(MANUAL_XML): ../en/$(MANUAL_XML).in
 	sed -e 's!@DOCBOOK_DTD@!$(DOCBOOK_DTD)!' $< > $@
 	
-$(HTML_XSL): $(HTML_XSL).in
+$(HTML_XSL): ../en/$(HTML_XSL).in
 	sed -e 's!@DOCBOOK_XSL@!$(DOCBOOK_XSL)!' $< > $@
 
 # Build the docs in PDF format
@@ -95,13 +95,13 @@ pdf-print-volume2: pdf-dir $(PDF_XSL) $(MANUAL_PRINT2_XML)
 	$(XSLTPROC) --xinclude --output ZendFramework.fo $(PDF_XSL) _temp_manual_2.xml
 	"$(FOP)" -fo ZendFramework.fo -pdf pdf/ZendFrameworkVolume2.pdf
 
-$(MANUAL_PRINT1_XML): $(MANUAL_PRINT1_XML).in
+$(MANUAL_PRINT1_XML): ../en/$(MANUAL_PRINT1_XML).in
 	sed -e 's!@DOCBOOK_DTD@!$(DOCBOOK_DTD)!' $< > $@
 	
-$(MANUAL_PRINT2_XML): $(MANUAL_PRINT2_XML).in
+$(MANUAL_PRINT2_XML): ../en/$(MANUAL_PRINT2_XML).in
 	sed -e 's!@DOCBOOK_DTD@!$(DOCBOOK_DTD)!' $< > $@
 
-$(PDF_XSL): $(PDF_XSL).in
+$(PDF_XSL): ../en/$(PDF_XSL).in
 	sed -e 's!@DOCBOOK_FO_XSL@!$(DOCBOOK_FO_XSL)!' $< > $@
 
 # Cleanup

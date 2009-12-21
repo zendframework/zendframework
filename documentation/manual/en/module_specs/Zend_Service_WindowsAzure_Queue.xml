@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect2 id="zend.service.windowsazure.storage.queue">
+<sect1 id="zend.service.windowsazure.storage.queue">
     <title>Zend_Service_WindowsAzure_Storage_Queue</title>
 
     <para>
         The Queue service stores messages that may be read by any client who has access to the
         storage account.
     </para>
-
+    
     <para>
         A queue can contain an unlimited number of messages, each of which can be up to 8 KB in
         size. Messages are generally added to the end of the queue and retrieved from the front of
@@ -22,7 +22,7 @@
         provide a native PHP interface to the storage account.
     </para>
 
-    <sect3 id="zend.service.windowsazure.storage.queue.api">
+    <sect2 id="zend.service.windowsazure.storage.queue.api">
         <title>API Examples</title>
 
         <para>
@@ -32,7 +32,7 @@
             features.
         </para>
 
-        <sect4 id="zend.service.windowsazure.storage.queue.api.create-queue">
+        <sect3 id="zend.service.windowsazure.storage.queue.api.create-queue">
             <title>Creating a queue</title>
 
             <para>
@@ -49,9 +49,9 @@ $result = $storageClient->createQueue('testqueue');
 echo 'Queue name is: ' . $result->Name;
 ]]></programlisting>
             </example>
-        </sect4>
+        </sect3>
 
-        <sect4 id="zend.service.windowsazure.storage.queue.api.delete-queue">
+        <sect3 id="zend.service.windowsazure.storage.queue.api.delete-queue">
             <title>Deleting a queue</title>
 
             <para>
@@ -66,9 +66,9 @@ $storageClient = new Zend_Service_WindowsAzure_Storage_Queue();
 $storageClient->deleteQueue('testqueue');
 ]]></programlisting>
             </example>
-        </sect4>
+        </sect3>
 
-        <sect4 id="zend.service.windowsazure.storage.queue.api.storing-queue">
+        <sect3 id="zend.service.windowsazure.storage.queue.api.storing-queue">
             <title>Adding a message to a queue</title>
 
             <para>
@@ -83,12 +83,12 @@ $storageClient->deleteQueue('testqueue');
 $storageClient = new Zend_Service_WindowsAzure_Storage_Queue();
 
 // 3600 = time-to-live of the message, if omitted defaults to 7 days
-$storageClient->putMessage('testqueue', 'This is a test message', 3600);
+$storageClient->putMessage('testqueue', 'This is a test message', 3600); 
 ]]></programlisting>
             </example>
-        </sect4>
+        </sect3>
 
-        <sect4 id="zend.service.windowsazure.storage.queue.api.read-queue">
+        <sect3 id="zend.service.windowsazure.storage.queue.api.read-queue">
             <title>Reading a message from a queue</title>
 
             <para>
@@ -110,7 +110,7 @@ foreach ($messages as $message) {
 }
 ]]></programlisting>
             </example>
-
+            
             <para>
                 The messages that are read using <methodname>getMessages()</methodname> will be
                 invisible in the queue for 30 seconds, after which the messages will re-appear in
@@ -135,9 +135,9 @@ foreach ($messages as $message) {
 }
 ]]></programlisting>
             </example>
-        </sect4>
+        </sect3>
 
-        <sect4 id="zend.service.windowsazure.storage.queue.api.peek-queue">
+        <sect3 id="zend.service.windowsazure.storage.queue.api.peek-queue">
             <title>Check if there are messages in a queue</title>
 
             <para>
@@ -159,13 +159,13 @@ foreach ($messages as $message) {
 }
 ]]></programlisting>
             </example>
-
+            
             <para>
                 Note that messages that are read using <methodname>peekMessages()</methodname> will
                 not become invisible in the queue, nor can they be marked as processed using the
                 <methodname>deleteMessage()</methodname> method.  To do this, use
                 <methodname>getMessages()</methodname> instead.
             </para>
-        </sect4>
-    </sect3>
-</sect2>
+        </sect3>
+    </sect2>
+</sect1>

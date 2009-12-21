@@ -15,12 +15,15 @@
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage UnitTests
- * @version    $Id: AllTests.php 35709 2009-12-14 14:14:14Z unknown $
+ * @version    $Id: AllTests.php 35999 2009-12-21 07:56:42Z unknown $
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
+/**
+ * Test helpers
+ */
+require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_AllTests::main');
@@ -43,9 +46,7 @@ require_once 'Zend/Service/WindowsAzure/SessionHandlerTest.php';
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage UnitTests
- * @group      Zend_Service
- * @group      Zend_Service_WindowsAzure
- * @version    $Id: AllTests.php 35709 2009-12-14 14:14:14Z unknown $
+ * @version    $Id: AllTests.php 35999 2009-12-21 07:56:42Z unknown $
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -58,10 +59,10 @@ class Zend_Service_WindowsAzure_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Service_WindowsAzure');
-
+        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
 
         $suite->addTest(Zend_Service_WindowsAzure_Credentials_AllTests::suite());
+        
         $suite->addTestSuite('Zend_Service_WindowsAzure_RetryPolicyTest');
         $suite->addTestSuite('Zend_Service_WindowsAzure_StorageTest');
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {

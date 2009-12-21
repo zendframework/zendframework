@@ -17,7 +17,7 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Storage.php 35835 2009-12-17 09:40:36Z unknown $
+ * @version    $Id: Storage.php 35999 2009-12-21 07:56:42Z unknown $
  */
 
 /**
@@ -176,31 +176,31 @@ class Zend_Service_WindowsAzure_Storage
 	 * @param boolean $usePathStyleUri Use path-style URI's
 	 * @param Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy Retry policy to use when making requests
 	 */
-    public function __construct(
-        $host = self::URL_DEV_BLOB, 
-        $accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT, 
-        $accountKey = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY, 
-        $usePathStyleUri = false, Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null
-    ) {
-		$this->_host            = $host;
-		$this->_accountName     = $accountName;
-		$this->_accountKey      = $accountKey;
+	public function __construct(
+		$host = self::URL_DEV_BLOB,
+		$accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT,
+		$accountKey = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY,
+		$usePathStyleUri = false,
+		Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null
+	) {
+		$this->_host = $host;
+		$this->_accountName = $accountName;
+		$this->_accountKey = $accountKey;
 		$this->_usePathStyleUri = $usePathStyleUri;
 		
 		// Using local storage?
-        if (!$this->_usePathStyleUri 
-            && ($this->_host == self::URL_DEV_BLOB 
-                || $this->_host == self::URL_DEV_QUEUE 
-                || $this->_host == self::URL_DEV_TABLE)
-        ) {
+		if (!$this->_usePathStyleUri
+			&& ($this->_host == self::URL_DEV_BLOB
+				|| $this->_host == self::URL_DEV_QUEUE
+				|| $this->_host == self::URL_DEV_TABLE)
+		) {
 			// Local storage
 			$this->_usePathStyleUri = true;
 		}
 		
 		if (is_null($this->_credentials)) {
-            $this->_credentials = new Zend_Service_WindowsAzure_Credentials_SharedKey(
-                $this->_accountName, $this->_accountKey, $this->_usePathStyleUri
-            );
+		    $this->_credentials = new Zend_Service_WindowsAzure_Credentials_SharedKey(
+		    	$this->_accountName, $this->_accountKey, $this->_usePathStyleUri);
 		}
 		
 		$this->_retryPolicy = $retryPolicy;
@@ -295,11 +295,11 @@ class Zend_Service_WindowsAzure_Storage
 	 */
 	public function getBaseUrl()
 	{
-        if ($this->_usePathStyleUri) {
+		if ($this->_usePathStyleUri) {
 			return 'http://' . $this->_host . '/' . $this->_accountName;
-        }
-
-        return 'http://' . $this->_accountName . '.' . $this->_host;
+		} else {
+			return 'http://' . $this->_accountName . '.' . $this->_host;
+		}
 	}
 	
 	/**
@@ -338,16 +338,16 @@ class Zend_Service_WindowsAzure_Storage
 	 * @param string $requiredPermission Required permission
 	 * @return Zend_Http_Response
 	 */
-    protected function _performRequest(
-        $path = '/', 
-        $queryString = '', 
-        $httpVerb = Zend_Http_Client::GET, 
-        $headers = array(), 
-        $forTableStorage = false, 
-        $rawData = null, 
-        $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, 
-        $requiredPermission = Zend_Service_WindowsAzure_Credentials::PERMISSION_READ
-    ) {
+	protected function _performRequest(
+		$path = '/',
+		$queryString = '',
+		$httpVerb = Zend_Http_Client::GET,
+		$headers = array(),
+		$forTableStorage = false,
+		$rawData = null,
+		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+	) {
 	    // Clean path
 		if (strpos($path, '/') !== 0) {
 			$path = '/' . $path;
@@ -374,10 +374,10 @@ class Zend_Service_WindowsAzure_Storage
 		$queryString    = self::urlencode($queryString);
 
 		// Generate URL and sign request
-        $requestUrl     = $this->_credentials
-                        ->signRequestUrl($this->getBaseUrl() . $path . $queryString, $resourceType, $requiredPermission);
-        $requestHeaders = $this->_credentials
-                        ->signRequestHeaders($httpVerb, $path, $queryString, $headers, $forTableStorage, $resourceType, $requiredPermission);
+		$requestUrl     = $this->_credentials
+						  ->signRequestUrl($this->getBaseUrl() . $path . $queryString, $resourceType, $requiredPermission);
+		$requestHeaders = $this->_credentials
+						  ->signRequestHeaders($httpVerb, $path, $queryString, $headers, $forTableStorage, $resourceType, $requiredPermission);
 
 		// Prepare request
 		$this->_httpClientChannel->resetParameters(true);

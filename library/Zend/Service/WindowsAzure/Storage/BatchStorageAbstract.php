@@ -57,7 +57,7 @@ require_once 'Zend/Http/Response.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_Service_WindowsAzure_Storage_BatchStorageAbstract 
+abstract class Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
     extends Zend_Service_WindowsAzure_Storage
 {	
     /**

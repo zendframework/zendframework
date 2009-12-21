@@ -81,13 +81,13 @@ abstract class Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 	 * @param string $accountKey Account key for Windows Azure
 	 * @param boolean $usePathStyleUri Use path-style URI's
 	 */
-    public function __construct(
-        $accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT, 
-        $accountKey = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY, 
-        $usePathStyleUri = false
-    ) {
-		$this->_accountName     = $accountName;
-		$this->_accountKey      = base64_decode($accountKey);
+	public function __construct(
+		$accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT,
+		$accountKey  = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY,
+		$usePathStyleUri = false
+	) {
+		$this->_accountName = $accountName;
+		$this->_accountKey = base64_decode($accountKey);
 		$this->_usePathStyleUri = $usePathStyleUri;
 	}
 	
@@ -95,36 +95,36 @@ abstract class Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 	 * Set account name for Windows Azure
 	 *
 	 * @param  string $value
-     * @return Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+	 * @return Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 	 */
 	public function setAccountName($value = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT)
 	{
 		$this->_accountName = $value;
-        return $this;
+		return $this;
 	}
 	
 	/**
 	 * Set account key for Windows Azure
 	 *
 	 * @param  string $value
-     * @return Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+	 * @return Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 	 */
 	public function setAccountkey($value = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY)
 	{
 		$this->_accountKey = base64_decode($value);
-        return $this;
+		return $this;
 	}
 	
 	/**
 	 * Set use path-style URI's
 	 *
 	 * @param  boolean $value
-     * @return Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+	 * @return Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 	 */
 	public function setUsePathStyleUri($value = false)
 	{
 		$this->_usePathStyleUri = $value;
-        return $this;
+		return $this;
 	}
 	
 	/**
@@ -135,7 +135,11 @@ abstract class Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 	 * @param string $requiredPermission Required permission
 	 * @return string Signed request URL
 	 */
-	abstract public function signRequestUrl($requestUrl = '');
+	abstract public function signRequestUrl(
+		$requestUrl = '',
+		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+	);
 	
 	/**
 	 * Sign request headers with credentials
@@ -149,7 +153,16 @@ abstract class Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 	 * @param string $requiredPermission Required permission
 	 * @return array Array of headers
 	 */
-	abstract public function signRequestHeaders($httpVerb = Zend_Http_Client::GET, $path = '/', $queryString = '', $headers = null, $forTableStorage = false, $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, $requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ);
+	abstract public function signRequestHeaders(
+		$httpVerb = Zend_Http_Client::GET,
+		$path = '/',
+		$queryString = '',
+		$headers = null,
+		$forTableStorage = false,
+		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+	);
+	
 	
 	/**
 	 * Prepare query string for signing

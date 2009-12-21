@@ -30,12 +30,17 @@ require_once 'Zend/Service/WindowsAzure/Credentials/CredentialsAbstract.php';
 require_once 'Zend/Service/WindowsAzure/Storage.php';
 
 /**
+ * @see Zend_Service_WindowsAzure_Credentials_SharedKey
+ */
+require_once 'Zend/Service/WindowsAzure/Credentials/SharedKey.php';
+
+/**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */ 
-class Zend_Service_WindowsAzure_Credentials_SharedKeyLite 
+class Zend_Service_WindowsAzure_Credentials_SharedKeyLite
     extends Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 {
     /**
@@ -46,8 +51,11 @@ class Zend_Service_WindowsAzure_Credentials_SharedKeyLite
 	 * @param string $requiredPermission Required permission
 	 * @return string Signed request URL
 	 */
-	public function signRequestUrl($requestUrl = '', $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, $requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ)
-	{
+	public function signRequestUrl(
+		$requestUrl = '',
+		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+	) {
 	    return $requestUrl;
 	}
 	
@@ -63,15 +71,15 @@ class Zend_Service_WindowsAzure_Credentials_SharedKeyLite
 	 * @param string $requiredPermission Required permission
 	 * @return array Array of headers
 	 */
-    public function signRequestHeaders(
-        $httpVerb = Zend_Http_Client::GET, 
-        $path = '/', 
-        $queryString = '', 
-        $headers = null, 
-        $forTableStorage = false, 
-        $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, 
-        $requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
-    ) {
+	public function signRequestHeaders(
+		$httpVerb = Zend_Http_Client::GET,
+		$path = '/',
+		$queryString = '',
+		$headers = null,
+		$forTableStorage = false,
+		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+	) {
 		// Determine path
 		if ($this->_usePathStyleUri) {
 			$path = substr($path, strpos($path, '/'));

@@ -17,11 +17,11 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://todo     name_todo
- * @version    $Id: Blob.php 35835 2009-12-17 09:40:36Z unknown $
+ * @version    $Id: Blob.php 35999 2009-12-21 07:56:42Z unknown $
  */
 
 /**
- * @see Zend_Service_WindowsAzure_Credentials_SharedKey
+ * @see Zend_Service_WindowsAzure_Credentials_CredentialsAbstract_SharedKey
  */
 require_once 'Zend/Service/WindowsAzure/Credentials/SharedKey.php';
 
@@ -123,7 +123,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 	 * @param boolean $usePathStyleUri Use path-style URI's
 	 * @param Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy Retry policy to use when making requests
 	 */
-	public function __construct($host = Zend_Service_WindowsAzure_Storage::URL_DEV_BLOB, $accountName = Zend_Service_WindowsAzure_Credentials_SharedKey::DEVSTORE_ACCOUNT, $accountKey = Zend_Service_WindowsAzure_Credentials_SharedKey::DEVSTORE_KEY, $usePathStyleUri = false, Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null)
+	public function __construct($host = Zend_Service_WindowsAzure_Storage::URL_DEV_BLOB, $accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract_CredentialsAbstract::DEVSTORE_ACCOUNT, $accountKey = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract_CredentialsAbstract::DEVSTORE_KEY, $usePathStyleUri = false, Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null)
 	{
 		parent::__construct($host, $accountName, $accountKey, $usePathStyleUri, $retryPolicy);
 		
@@ -492,7 +492,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$response = $this->_performRequest('', $queryString, Zend_Http_Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_LIST);	
 		if ($response->isSuccessful()) {
 			$xmlContainers = $this->_parseResponse($response)->Containers->Container;
-			$xmlMarker = (string) $this->_parseResponse($response)->NextMarker;
+			$xmlMarker = (string)$this->_parseResponse($response)->NextMarker;
 
 			$containers = array();
 			if (!is_null($xmlContainers)) {

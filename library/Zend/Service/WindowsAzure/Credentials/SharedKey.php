@@ -16,7 +16,7 @@
  * @package    Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: SharedKeyCredentials.php 35835 2009-12-17 09:40:36Z unknown $
+ * @version    $Id: SharedKey.php 35999 2009-12-21 07:56:42Z unknown $
  */
 
 /**
@@ -40,7 +40,7 @@ require_once 'Zend/Http/Client.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */ 
-class Zend_Service_WindowsAzure_Credentials_SharedKey 
+class Zend_Service_WindowsAzure_Credentials_SharedKey
     extends Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
 {
     /**
@@ -51,11 +51,11 @@ class Zend_Service_WindowsAzure_Credentials_SharedKey
 	 * @param string $requiredPermission Required permission
 	 * @return string Signed request URL
 	 */
-    public function signRequestUrl(
-        $requestUrl = '', 
-        $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, 
-        $requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
-    ) {
+	public function signRequestUrl(
+		$requestUrl = '',
+		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+	) {
 	    return $requestUrl;
 	}
 	
@@ -71,15 +71,15 @@ class Zend_Service_WindowsAzure_Credentials_SharedKey
 	 * @param string $requiredPermission Required permission
 	 * @return array Array of headers
 	 */
-    public function signRequestHeaders(
-        $httpVerb = Zend_Http_Client::GET, 
-        $path = '/', 
-        $queryString = '', 
-        $headers = null, 
-        $forTableStorage = false, 
-        $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, 
-        $requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
-    ) {
+	public function signRequestHeaders(
+		$httpVerb = Zend_Http_Client::GET,
+		$path = '/',
+		$queryString = '',
+		$headers = null,
+		$forTableStorage = false,
+		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+	) {
 		// http://github.com/sriramk/winazurestorage/blob/214010a2f8931bac9c96dfeb337d56fe084ca63b/winazurestorage.py
 
 		// Determine path

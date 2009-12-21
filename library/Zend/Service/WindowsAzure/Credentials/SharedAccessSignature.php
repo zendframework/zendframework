@@ -51,19 +51,18 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
     protected $_permissionSet = array();
     
 	/**
-	 * Constructor
+	 * Creates a new Zend_Service_WindowsAzure_Credentials_SharedAccessSignature instance
 	 *
 	 * @param string $accountName Account name for Windows Azure
 	 * @param string $accountKey Account key for Windows Azure
 	 * @param boolean $usePathStyleUri Use path-style URI's
 	 * @param array $permissionSet Permission set
 	 */
-    public function __construct(
-        $accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT, 
-        $accountKey = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY, 
-        $usePathStyleUri = false, 
-        $permissionSet = array()
-    ) {
+	public function __construct(
+		$accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT,
+		$accountKey  = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY,
+		$usePathStyleUri = false, $permissionSet = array()
+	) {
 	    parent::__construct($accountName, $accountKey, $usePathStyleUri);
 	    $this->_permissionSet = $permissionSet;
 	}
@@ -85,16 +84,16 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	 * For example: first add blob permissions, end with container-wide permissions.
 	 * 
 	 * Warning: the signed access signature URL must match the account name of the
-	 * Zend_Service_WindowsAzure_Credentials_SharedAccessSignature instance
+	 * Zend_Service_WindowsAzure_Credentials_Zend_Service_WindowsAzure_Credentials_SharedAccessSignature instance
 	 * 
-	 * @param array $value Permission set
-     * @return void
+	 * @param  array $value Permission set
+	 * @return void
 	 */
     public function setPermissionSet($value = array())
 	{
 		foreach ($value as $url) {
 			if (strpos($url, $this->_accountName) === false) {
-				throw new Zend_Service_WindowsAzure_Exception('The permission set can only contain URLs for the account name specified in the Zend_Service_WindowsAzure_SharedAccessSignatureCredentials instance.');
+				throw new Zend_Service_WindowsAzure_Exception('The permission set can only contain URLs for the account name specified in the Zend_Service_WindowsAzure_Credentials_SharedAccessSignature instance.');
 			}
 		}
 	    $this->_permissionSet = $value;
@@ -112,12 +111,12 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
      * @return string 
      */
     public function createSignature(
-        $path = '/', 
-        $resource = 'b', 
-        $permissions = 'r', 
-        $start = '', 
-        $expiry = '', 
-        $identifier = ''
+    	$path = '/',
+    	$resource = 'b',
+    	$permissions = 'r',
+    	$start = '',
+    	$expiry = '',
+    	$identifier = ''
     ) {
 		// Determine path
 		if ($this->_usePathStyleUri) {
@@ -163,13 +162,13 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
      * @return string 
      */
     public function createSignedQueryString(
-        $path = '/', 
-        $queryString = '', 
-        $resource = 'b', 
-        $permissions = 'r', 
-        $start = '', 
-        $expiry = '', 
-        $identifier = ''
+    	$path = '/',
+    	$queryString = '',
+    	$resource = 'b',
+    	$permissions = 'r',
+    	$start = '',
+    	$expiry = '',
+    	$identifier = ''
     ) {
         // Parts
         $parts = array();
@@ -203,10 +202,10 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	 * @return string Signed request URL
 	 */
     public function permissionMatchesRequest(
-        $permissionUrl = '', 
-        $requestUrl = '', 
-        $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, 
-        $requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+    	$permissionUrl = '',
+    	$requestUrl = '',
+    	$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
+    	$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
     ) {
         // Build requirements
         $requiredResourceType = $resourceType;
@@ -252,11 +251,11 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	 * @param string $requiredPermission Required permission
 	 * @return string Signed request URL
 	 */
-    public function signRequestUrl(
-        $requestUrl = '', 
-        $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, 
-        $requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
-    ) {
+	public function signRequestUrl(
+		$requestUrl = '',
+		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+	) {
 	    // Look for a matching permission
 	    foreach ($this->getPermissionSet() as $permittedUrl) {
 	        if ($this->permissionMatchesRequest($permittedUrl, $requestUrl, $resourceType, $requiredPermission)) {
@@ -292,15 +291,15 @@ class Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
 	 * @param string $requiredPermission Required permission
 	 * @return array Array of headers
 	 */
-    public function signRequestHeaders(
-        $httpVerb = Zend_Http_Client::GET, 
-        $path = '/', 
-        $queryString = '', 
-        $headers = null, 
-        $forTableStorage = false, 
-        $resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN, 
-        $requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
-    ) {
+	public function signRequestHeaders(
+		$httpVerb = Zend_Http_Client::GET,
+		$path = '/',
+		$queryString = '',
+		$headers = null,
+		$forTableStorage = false,
+		$resourceType = Zend_Service_WindowsAzure_Storage::RESOURCE_UNKNOWN,
+		$requiredPermission = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ
+	) {
 	    return $headers;
 	}
 }

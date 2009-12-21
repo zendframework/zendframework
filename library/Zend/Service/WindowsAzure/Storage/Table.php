@@ -93,7 +93,7 @@ require_once 'Zend/Service/WindowsAzure/Exception.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Service_WindowsAzure_Storage_Table 
+class Zend_Service_WindowsAzure_Storage_Table
     extends Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
 {
 	/**
@@ -750,6 +750,16 @@ class Zend_Service_WindowsAzure_Storage_Table
 		} else {
 			throw new Zend_Service_WindowsAzure_Exception($this->_getErrorMessage($response, 'Resource could not be accessed.'));
 		}
+	}
+	
+	/**
+	 * Generate RFC 1123 compliant date string
+	 * 
+	 * @return string
+	 */
+	protected function _rfcDate()
+	{
+	    return gmdate('D, d M Y H:i:s', time()) . ' GMT'; // RFC 1123
 	}
 	
 	/**

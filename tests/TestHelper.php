@@ -20,11 +20,6 @@
  */
 
 /*
- * Start output buffering
- */
-ob_start();
-
-/*
  * Include PHPUnit dependencies
  */
 require_once 'PHPUnit/Framework.php';

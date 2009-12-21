@@ -7,6 +7,8 @@
 
 <!-- manual.xml.in -->
 <!ENTITY book.title                             'Guia de Referência do Programador'>
+<!ENTITY book.pdf1.title                        'Programmer&#39;s Reference Guide: Volume 1'>
+<!ENTITY book.pdf2.title                        'Programmer&#39;s Reference Guide: Volume 2'>
 <!ENTITY book.subtitle                          'Zend Framework'>
 <!ENTITY book.edition                           'Guia de Referência do Programador'>
 

@@ -4,8 +4,16 @@
 [
     <!ENTITY % xinclude SYSTEM "../en/xinclude.mod">
     %xinclude;
+    
+    <!-- Add translated specific definitions and snippets -->
+    <!ENTITY % language-snippets SYSTEM "./ref/language-snippets.xml">
+    %language-snippets;
+
+    <!-- Fallback to English definitions and snippets (in case of missing translation) -->
+    <!ENTITY % language-snippets.default SYSTEM "../en/ref/language-snippets.xml">
+    %language-snippets.default;
 ]>
-<book id="manual" lang="en">
+<book id="manual" lang="&lang;">
     <chapter>
         <title>XMLLint</title>
         <xi:include href="@XMLFILE@">

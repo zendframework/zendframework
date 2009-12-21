@@ -19,8 +19,6 @@
  * @version    $Id$
  */
 
-require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
-
 require_once 'Zend/Feed/Pubsubhubbub/Subscriber/Callback.php';
 require_once 'Zend/Feed/Pubsubhubbub/Model/Subscription.php';
 require_once 'Zend/Db/Table/Rowset/Abstract.php';

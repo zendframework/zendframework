@@ -425,7 +425,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
         }
 
         if ($this->getType() == Zend_Feed_Reader::TYPE_ATOM_10) {
-            $list = $this->_xpath->query($this->getXpathPrefix() . '//atom:category');
+            $list = $this->_xpath->query($this->getXpathPrefix() . '/atom:category');
         } else {
             /**
              * Since Atom 0.3 did not support categories, it would have used the
@@ -433,7 +433,7 @@ class Zend_Feed_Reader_Extension_Atom_Feed
              * may have been retrofittied to use Atom 1.0 instead.
              */
             $this->_xpath->registerNamespace('atom10', Zend_Feed_Reader::NAMESPACE_ATOM_10);
-            $list = $this->_xpath->query($this->getXpathPrefix() . '//atom10:category');
+            $list = $this->_xpath->query($this->getXpathPrefix() . '/atom10:category');
         }
 
         if ($list->length) {

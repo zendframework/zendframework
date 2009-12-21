@@ -155,10 +155,6 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
                 return $this->offsetSet($index, $item);
             }
 
-            if ($action == 'set') {
-                //var_dump($this->getContainer());
-            }
-
             $this->$action($item);
             return $this;
         }
@@ -240,7 +236,7 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
     {
         if (!$this->_isValid($value)) {
             require_once 'Zend/View/Exception.php';
-            $e =  new Zend_View_Exception('Invalid value passed to offsetSet; please use offsetSetMeta()');
+            $e =  new Zend_View_Exception('Invalid value passed to offsetSet; please use offsetSetName() or offsetSetHttpEquiv()');
             $e->setView($this->view);
             throw $e;
         }

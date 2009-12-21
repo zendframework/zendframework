@@ -167,7 +167,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
                             self::$_expiringData[$namespace] = $_SESSION[$namespace];
                             unset($_SESSION[$namespace]);
                         }
-                        unset($_SESSION['__ZF'][$namespace]['ENNH']);
+                        unset($_SESSION['__ZF'][$namespace]);
                     }
                 }
 
@@ -183,6 +183,9 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
                             }
                             unset($_SESSION['__ZF'][$namespace]['ENVNH'][$variable]);
                         }
+                    }
+                    if(empty($_SESSION['__ZF'][$namespace]['ENVNH'])) {
+                        unset($_SESSION['__ZF'][$namespace]['ENVNH']);
                     }
                 }
             }

@@ -8,6 +8,7 @@
         available by default in <classname>Zend_Application</classname>.
     </para>
 
+    <xi:include href="Zend_Application-AvailableResources-CacheManager.xml" />
     <xi:include href="Zend_Application-AvailableResources-Db.xml" />
     <xi:include href="Zend_Application-AvailableResources-Frontcontroller.xml" />
     <xi:include href="Zend_Application-AvailableResources-Layout.xml" />

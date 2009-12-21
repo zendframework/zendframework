@@ -6,7 +6,7 @@
     <para>
         It's the nature of applications to require a multitude of caches of any
         type often dependent on the controller, library or domain model being
-        accessed. To allow for a simple means of defining <classname>Zend_Cache<classname>
+        accessed. To allow for a simple means of defining <classname>Zend_Cache</classname>
         options in advance (such as from a bootstrap) so that accessing a cache
         object requires minimum setup within the application source code, the
         <classname>Zend_Cache_Manager</classname> class was written. This class
@@ -23,7 +23,7 @@
         These templates do not give rise to a cache until the user attempts to retrieve
         a named cache (associated with an existing option template) using the method
         <methodname>Zend_Cache_Manager::getCache()</methodname>.
-    <para>
+    </para>
     
     <programlisting language="php"><![CDATA[
 $manager = new Zend_Cache_Manager;

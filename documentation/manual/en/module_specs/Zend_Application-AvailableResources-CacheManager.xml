@@ -20,7 +20,7 @@
 
         <para>
             Below is a sample <acronym>INI</acronym> file showing how
-            <classname>Zend_Cache_Manager<classname> may be configured. The format
+            <classname>Zend_Cache_Manager</classname> may be configured. The format
             is the CacheManager resource prefix (resources.cacheManager) followed
             be the name to assign to an option cache template/bundle (e.g.
             resources.cacheManager.database) and finally followed by a typical

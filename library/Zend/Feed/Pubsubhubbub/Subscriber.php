@@ -101,10 +101,10 @@ class Zend_Feed_Pubsubhubbub_Subscriber
     protected $_asyncHubs = array();
 
     /**
-     * An instance of Zend_Feed_Pubsubhubbub_Entity used to background
+     * An instance of Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface used to background
      * save any verification tokens associated with a subscription or other.
      *
-     * @var Zend_Feed_Pubsubhubbub_Entity
+     * @var Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface
      */
     protected $_storage = null;
 
@@ -519,13 +519,13 @@ class Zend_Feed_Pubsubhubbub_Subscriber
     }
 
     /**
-     * Sets an instance of Zend_Feed_Pubsubhubbub_Entity used to background
+     * Sets an instance of Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface used to background
      * save any verification tokens associated with a subscription or other.
      *
-     * @param  Zend_Feed_Pubsubhubbub_Entity $storage
+     * @param  Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface $storage
      * @return Zend_Feed_Pubsubhubbub_Subscriber
      */
-    public function setStorage(Zend_Feed_Pubsubhubbub_Model_ModelAbstract $storage)
+    public function setStorage(Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface $storage)
     {
         $this->_storage = $storage;
         return $this;
@@ -536,7 +536,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
      * to background save any verification tokens associated with a subscription
      * or other.
      *
-     * @return Zend_Feed_Pubsubhubbub_Storage_StorageInterface
+     * @return Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface
      */
     public function getStorage()
     {

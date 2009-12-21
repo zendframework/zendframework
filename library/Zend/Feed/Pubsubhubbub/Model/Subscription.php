@@ -22,6 +22,9 @@
 /** @see Zend_Feed_Pubsubhubbub_Model_ModelAbstract */
 require_once 'Zend/Feed/Pubsubhubbub/Model/ModelAbstract.php';
 
+/** @see Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface */
+require_once 'Zend/Feed/Pubsubhubbub/Model/SubscriptionInterface.php';
+
 /**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
@@ -31,6 +34,7 @@ require_once 'Zend/Feed/Pubsubhubbub/Model/ModelAbstract.php';
  */
 class Zend_Feed_Pubsubhubbub_Model_Subscription
     extends Zend_Feed_Pubsubhubbub_Model_ModelAbstract
+    implements Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface
 {
     
     /**

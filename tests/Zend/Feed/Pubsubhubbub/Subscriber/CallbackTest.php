@@ -141,7 +141,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_CallbackTest extends PHPUnit_Framework_T
 
     public function testCanSetStorageImplementation()
     {
-	    $storage = new Zend_Feed_Pubsubhubbub_Model_ModelAbstract($this->_tableGateway);
+	    $storage = new Zend_Feed_Pubsubhubbub_Model_Subscription($this->_tableGateway);
         $this->_callback->setStorage($storage);
         $this->assertThat($this->_callback->getStorage(), $this->identicalTo($storage));
     }

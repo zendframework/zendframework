@@ -356,10 +356,10 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
 
         return $response->getBody();
     }
-    
+
     /**
      * Get an object using streaming
-     * 
+     *
      * Can use either provided filename for storage or create a temp file if none provided.
      *
      * @param  string $object Object path
@@ -378,14 +378,14 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             $response = $this->_makeRequest('GET', $object);
         }
         self::getHttpClient()->setStream(null);
-        
+
         if ($response->getStatus() != 200 || !($response instanceof Zend_Http_Response_Stream)) {
             return false;
         }
 
         return $response;
     }
-    
+
     /**
      * Upload an object by a PHP string
      *
@@ -401,7 +401,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
 
         if(!is_resource($data)) {
             $headers['Content-MD5'] = base64_encode(md5($data, true));
-        } 
+        }
         $headers['Expect'] = '100-continue';
 
         if (!isset($headers[self::S3_CONTENT_TYPE_HEADER])) {
@@ -479,14 +479,14 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
         if (!isset($meta[self::S3_CONTENT_TYPE_HEADER])) {
            $meta[self::S3_CONTENT_TYPE_HEADER] = self::getMimeType($path);
         }
-        
+
         if(!isset($meta['Content-MD5'])) {
             $headers['Content-MD5'] = base64_encode(md5_file($path, true));
         }
-        
+
         return $this->putObject($object, $data, $meta);
     }
-    
+
     /**
      * Remove a given object
      *
@@ -529,7 +529,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             require_once 'Zend/Service/Amazon/S3/Exception.php';
             throw new Zend_Service_Amazon_S3_Exception("Only PUT request supports stream data");
         }
-        
+
         // build the end point out
         $parts = explode('/', $path, 2);
         $endpoint = clone($this->_endpoint);
@@ -675,8 +675,6 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
     /**
      * Attempt to get the content-type of a file based on the extension
      *
-     * TODO: move this to Zend_Mime
-     *
      * @param  string $path
      * @return string
      */
@@ -689,7 +687,7 @@ class Zend_Service_Amazon_S3 extends Zend_Service_Amazon_Abstract
             return 'binary/octet-stream';
         }
 
-        switch ($ext) {
+        switch (strtolower($ext)) {
             case 'xls':
                 $content_type = 'application/excel';
                 break;

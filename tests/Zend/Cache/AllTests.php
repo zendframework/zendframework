@@ -26,21 +26,23 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Cache_AllTests::main');
 }
 
-require_once 'Zend/Cache/FactoryTest.php';
-require_once 'Zend/Cache/CoreTest.php';
-require_once 'Zend/Cache/FileBackendTest.php';
-require_once 'Zend/Cache/SqliteBackendTest.php';
-require_once 'Zend/Cache/OutputFrontendTest.php';
-require_once 'Zend/Cache/FunctionFrontendTest.php';
-require_once 'Zend/Cache/ClassFrontendTest.php';
-require_once 'Zend/Cache/FileFrontendTest.php';
 require_once 'Zend/Cache/ApcBackendTest.php';
-require_once 'Zend/Cache/XcacheBackendTest.php';
+require_once 'Zend/Cache/ClassFrontendTest.php';
+require_once 'Zend/Cache/CoreTest.php';
+require_once 'Zend/Cache/FactoryTest.php';
+require_once 'Zend/Cache/FileBackendTest.php';
+require_once 'Zend/Cache/FileFrontendTest.php';
+require_once 'Zend/Cache/FunctionFrontendTest.php';
+require_once 'Zend/Cache/ManagerTest.php';
 require_once 'Zend/Cache/MemcachedBackendTest.php';
+require_once 'Zend/Cache/OutputFrontendTest.php';
 require_once 'Zend/Cache/PageFrontendTest.php';
-require_once 'Zend/Cache/ZendPlatformBackendTest.php';
 require_once 'Zend/Cache/SkipTests.php';
+require_once 'Zend/Cache/SqliteBackendTest.php';
+require_once 'Zend/Cache/StaticBackendTest.php';
 require_once 'Zend/Cache/TwoLevelsBackendTest.php';
+require_once 'Zend/Cache/XcacheBackendTest.php';
+require_once 'Zend/Cache/ZendPlatformBackendTest.php';
 require_once 'Zend/Cache/ZendServerDiskTest.php';
 require_once 'Zend/Cache/ZendServerShMemTest.php';
 

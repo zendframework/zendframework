@@ -174,8 +174,7 @@ class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase {
     {
         $this->assertTrue($this->_instance->remove('bar'));
         $this->assertFalse($this->_instance->test('bar'));
-
-        $this->_instance->remove('barbar');
+        $this->assertFalse($this->_instance->remove('barbar'));
         $this->assertFalse($this->_instance->test('barbar'));
     }
 

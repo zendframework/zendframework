@@ -42,7 +42,7 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
          */
         public function __construct($msg = '', $code = 0, Exception $previous = null)
         {
-            parent::__construct($msg, $code);
+            parent::__construct($msg, (int) $code);
             $this->_previous = $previous;
         }
 
@@ -80,5 +80,12 @@ if (version_compare(PHP_VERSION, '5.3.0', '<')) {
      */
     class Zend_Exception extends Exception
     {
+        public function __construct($msg = '', $code = 0, Exception $previous = null)
+        {
+            if (!is_int($code)) {
+                $code = (int) $code;
+            }
+            parent::__construct($msg, $code, $previous);
+        }
     }
 }

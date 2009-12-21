@@ -53,6 +53,11 @@ require_once 'Zend/View.php';
  */
 class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Zend_Form
+     */
+    public $form;
+
     public static function main()
     {
         $suite  = new PHPUnit_Framework_TestSuite('Zend_Form_FormTest');
@@ -3748,6 +3753,49 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $this->form->addError('Error');
         $this->assertFalse($this->form->isValid(array()));
+    }
+
+    /**
+     * @group ZF-8494
+     */
+    public function testGetValidValues()
+    {
+        $data = array('valid' => 1234, 'invalid' => 'invalid', 'noElement' => 'noElement');
+
+        require_once "Zend/Validate/Int.php";
+
+        $validElement = new Zend_Form_Element("valid");
+        $validElement->addValidator(new Zend_Validate_Int());
+        $this->form->addElement($validElement);
+
+        $invalidElement = new Zend_Form_Element('invalid');
+        $invalidElement->addValidator(new Zend_Validate_Int());
+        $this->form->addElement($invalidElement);
+
+        $this->assertEquals(array('valid' => 1234), $this->form->getValidValues($data));
+    }
+
+    /**
+     * @group ZF-8494
+     */
+    public function testGetValidSubFormValues()
+    {
+        $data = array('sub' => array('valid' => 1234, 'invalid' => 'invalid', 'noElement' => 'noElement'));
+
+        require_once "Zend/Validate/Int.php";
+
+        $subForm = new Zend_Form_SubForm();
+        $validElement = new Zend_Form_Element("valid");
+        $validElement->addValidator(new Zend_Validate_Int());
+        $subForm->addElement($validElement);
+
+        $invalidElement = new Zend_Form_Element('invalid');
+        $invalidElement->addValidator(new Zend_Validate_Int());
+        $subForm->addElement($invalidElement);
+
+        $this->form->addSubForm($subForm, 'sub');
+
+        $this->assertEquals(array('sub' => array('valid' => 1234)), $this->form->getValidValues($data));
     }
 
     /**

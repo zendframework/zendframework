@@ -1316,6 +1316,35 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     }
 
     /**
+     * Returns only the valid values from the given form input.
+     *
+     * For models that can be saved in a partially valid state, for example when following the builder,
+     * prototype or state patterns it is particularly interessting to retrieve all the current valid
+     * values to persist them.
+     *
+     * @param  array $data
+     * @return array
+     */
+    public function getValidValues($data)
+    {
+        $values = array();
+        foreach ($this->getElements() as $key => $element) {
+            if (isset($data[$key])) {
+                if($element->isValid($data[$key], $data)) {
+                    $values[$key] = $element->getValue();
+                }
+            }
+        }
+        foreach ($this->getSubForms() as $key => $form) {
+            if (isset($data[$key])) {
+                $values[$key] = $form->getValidValues($data[$key]);
+            }
+        }
+
+        return $values;
+    }
+
+    /**
      * Get unfiltered element value
      *
      * @param  string $name

@@ -1528,6 +1528,25 @@ $messages = $form->getMessages('username');
                 All errors set in this fashion may be translated.
             </para>
         </sect3>
+
+        <sect3 id="zend.form.forms.validation.values">
+            <title>Retrieving Valid Values Only</title>
+
+            <para>
+                There are scenarios when you want to allow your user to work on a valid form
+                in several steps. Meanwhile you allow the user to save the form with any
+                set of values inbetween. Then if all the data is specified you can transfer
+                the model from the building or prototying stage to a valid stage.
+            </para>
+
+            <para>
+                You can retrieve all the valid values that match the submitted data by calling:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$validValues = $form->getValidValues($_POST);
+]]></programlisting>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.form.forms.methods">

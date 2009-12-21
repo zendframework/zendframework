@@ -257,5 +257,11 @@ class Zend_Feed_Writer
         self::registerExtension('Threading');
         self::registerExtension('ITunes');
     }
+    
+    public static function lcfirst($str)
+    {
+        $str[0] = strtolower($str[0]);
+        return $str;
+    }
 
 }

@@ -344,7 +344,7 @@ class Zend_Feed_Writer_Extension_ITunes_Feed
      */
     public function __call($method, array $params)
     {
-        $point = lcfirst(substr($method, 9));
+        $point = Zend_Feed_Writer::lcfirst(substr($method, 9));
         if (!method_exists($this, 'setItunes' . ucfirst($point))
             && !method_exists($this, 'addItunes' . ucfirst($point))
         ) {

@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
     "@DOCBOOK_DTD@"
 [
-    <!ENTITY % xinclude SYSTEM "xinclude.mod">
+    <!ENTITY % xinclude SYSTEM "../en/xinclude.mod">
     %xinclude;
 ]>
 <book id="manual" lang="en">

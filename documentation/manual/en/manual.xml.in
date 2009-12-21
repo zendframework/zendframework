@@ -177,6 +177,7 @@
         <xi:include href="module_specs/Zend_Cache-Theory.xml" />
         <xi:include href="module_specs/Zend_Cache-Frontends.xml" />
         <xi:include href="module_specs/Zend_Cache-Backends.xml" />
+        <xi:include href="module_specs/Zend_Cache-Cache_Manager.xml" />
     </chapter>
 
     <chapter id="zend.captcha">

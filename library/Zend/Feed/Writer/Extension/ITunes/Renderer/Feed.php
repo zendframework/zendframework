@@ -121,21 +121,15 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         foreach ($cats as $key=>$cat) {
             if (!is_array($cat)) {
                 $el = $dom->createElement('itunes:category');
-                $el->setAttribute('text', Zend_Feed_Writer::xmlentities(
-                    $cat, $this->getEncoding()
-                ));
+                $el->setAttribute('text', $cat);
                 $root->appendChild($el);
             } else {
                 $el = $dom->createElement('itunes:category');
-                $el->setAttribute('text', Zend_Feed_Writer::xmlentities(
-                    $key, $this->getEncoding()
-                ));
+                $el->setAttribute('text', $key);
                 $root->appendChild($el);
                 foreach ($cat as $subcat) {
                     $el2 = $dom->createElement('itunes:category');
-                    $el2->setAttribute('text', Zend_Feed_Writer::xmlentities(
-                        $subcat, $this->getEncoding()
-                    ));
+                    $el2->setAttribute('text', $subcat);
                     $el->appendChild($el2);
                 }
             }

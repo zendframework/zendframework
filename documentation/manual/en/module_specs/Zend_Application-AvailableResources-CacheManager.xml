@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.cachemanager">
-    <title>Zend_Application_Resource_CacheManager</title>
+    <title>Zend_Application_Resource_Cachemanager</title>
 
     <para>
-        <classname>Zend_Application_Resource_CacheManager</classname> may be
+        <classname>Zend_Application_Resource_Cachemanager</classname> may be
         utilised to configure a set of <classname>Zend_Cache</classname> option
         bundles for use when lazy loading caches using
         <classname>Zend_Cache_Manager</classname>
@@ -16,23 +16,23 @@
     </para>
 
     <example id="zend.application.available-resources.cachemanager.configExample">
-        <title>Sample Cache Manager resource configuration</title>
+        <title>Sample Cachemanager resource configuration</title>
 
         <para>
             Below is a sample <acronym>INI</acronym> file showing how
             <classname>Zend_Cache_Manager</classname> may be configured. The format
-            is the CacheManager resource prefix (resources.cacheManager) followed
+            is the Cachemanager resource prefix (resources.cachemanager) followed
             be the name to assign to an option cache template/bundle (e.g.
-            resources.cacheManager.database) and finally followed by a typical
+            resources.cachemanager.database) and finally followed by a typical
             <classname>Zend_Cache</classname> option.
         </para>
 
         <programlisting language="ini"><![CDATA[
-resources.cacheManager.database.frontend.name = Core
-resources.cacheManager.database.frontend.options.lifetime = 7200
-resources.cacheManager.database.frontend.options.automatic_serialization = true
-resources.cacheManager.database.backend.name = File
-resources.cacheManager.database.backend.options.cache_dir = "/path/to/cache"
+resources.cachemanager.database.frontend.name = Core
+resources.cachemanager.database.frontend.options.lifetime = 7200
+resources.cachemanager.database.frontend.options.automatic_serialization = true
+resources.cachemanager.database.backend.name = File
+resources.cachemanager.database.backend.options.cache_dir = "/path/to/cache"
 ]]></programlisting>
 
         <para>

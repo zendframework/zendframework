@@ -31,7 +31,7 @@ require_once 'Zend/Application/Resource/ResourceAbstract.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Application_Resource_CacheManager extends Zend_Application_Resource_ResourceAbstract
+class Zend_Application_Resource_Cachemanager extends Zend_Application_Resource_ResourceAbstract
 {
     /**
      * @var Zend_Cache_Manager

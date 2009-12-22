@@ -10,7 +10,7 @@
         options in advance (such as from a bootstrap) so that accessing a cache
         object requires minimum setup within the application source code, the
         <classname>Zend_Cache_Manager</classname> class was written. This class
-        is accompanied by <classname>Zend_Application_Resource_CacheManager</classname>
+        is accompanied by <classname>Zend_Application_Resource_Cachemanager</classname>
         ensuring bootstrap configuration is available and
         <classname>Zend_Controller_Action_Helper_Cache</classname> to allow simple
         cache access and instantiation from controllers and other helpers.
@@ -178,7 +178,7 @@ $databaseCache = $manager->getCache('database');
 
     <para>
         To assist in making the Cache Manager more useful, it is accompanied by
-        <classname>Zend_Application_Resource_CacheManager</classname> and also
+        <classname>Zend_Application_Resource_Cachemanager</classname> and also
         the <classname>Zend_Controller_Action_Helper_Cache</classname> Action
         Helper. Both of these are described in their relevant areas of the
         Reference Guide.

@@ -40,9 +40,9 @@ require_once 'Zend/Loader/Autoloader.php';
 require_once 'Zend/Controller/Front.php';
 
 /**
- * Zend_Application_Resource_CacheManager
+ * Zend_Application_Resource_Cachemanager
  */
-require_once 'Zend/Application/Resource/CacheManager.php';
+require_once 'Zend/Application/Resource/Cachemanager.php';
 
 /**
  * @category   Zend
@@ -100,22 +100,22 @@ class Zend_Application_Resource_CacheManagerTest extends PHPUnit_Framework_TestC
     public function testInitializationCreatesCacheManagerInstance()
     {
 
-        $resource = new Zend_Application_Resource_CacheManager(array());
+        $resource = new Zend_Application_Resource_Cachemanager(array());
         $resource->init();
-        $this->assertTrue($resource->getCacheManager() instanceof Zend_Cache_Manager);
+        $this->assertTrue($resource->getCachemanager() instanceof Zend_Cache_Manager);
     }
 
     public function testInitializationPushesCacheManagerToBootstrapWhenPresent()
     {
-        $resource = new Zend_Application_Resource_CacheManager(array());
+        $resource = new Zend_Application_Resource_Cachemanager(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
-        $this->assertSame($resource->getCacheManager(), $this->bootstrap->cacheManager);
+        $this->assertSame($resource->getCachemanager(), $this->bootstrap->cacheManager);
     }
 
     public function testShouldReturnCacheManagerWhenComplete()
     {
-        $resource = new Zend_Application_Resource_CacheManager(array());
+        $resource = new Zend_Application_Resource_Cachemanager(array());
         $manager = $resource->init();
         $this->assertTrue($manager instanceof Zend_Cache_Manager);
     }
@@ -131,7 +131,7 @@ class Zend_Application_Resource_CacheManagerTest extends PHPUnit_Framework_TestC
                 )
             )
         );
-        $resource = new Zend_Application_Resource_CacheManager($options);
+        $resource = new Zend_Application_Resource_Cachemanager($options);
         $manager = $resource->init();
         $cacheTemplate = $manager->getCacheTemplate('page');
         $this->assertEquals('/foo', $cacheTemplate['backend']['options']['cache_dir']);
@@ -148,7 +148,7 @@ class Zend_Application_Resource_CacheManagerTest extends PHPUnit_Framework_TestC
                 )
             )
         );
-        $resource = new Zend_Application_Resource_CacheManager($options);
+        $resource = new Zend_Application_Resource_Cachemanager($options);
         $manager = $resource->init();
         $cacheTemplate = $manager->getCacheTemplate('foo');
         $this->assertSame($options['foo'], $cacheTemplate);

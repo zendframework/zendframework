@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18865 -->
+<!-- EN-Revision: 19867 -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisioning の使用法</title>
 
@@ -25,7 +25,7 @@
     <para>
         Google Apps Provisioning <acronym>API</acronym> の使用法や
         <acronym>API</acronym> にアクセスできるようにするための方法については <ulink
-        url="http://code.google.com/apis/calendar/overview.html">Provisioning
+        url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html">Provisioning
         <acronym>API</acronym> V2.0 Reference</ulink> を参照ください。
     </para>
 

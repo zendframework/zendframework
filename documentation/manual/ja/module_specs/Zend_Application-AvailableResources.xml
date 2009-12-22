@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19555 -->
+<!-- EN-Revision: 19854 -->
 <sect1 id="zend.application.available-resources" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>利用できるリソースプラグイン</title>
 
@@ -9,6 +9,9 @@
         すべてについて、<acronym>API</acronym>のようにドキュメントをご覧いただけます。
     </para>
 
+    <xi:include href="Zend_Application-AvailableResources-CacheManager.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Application-AvailableResources-CacheManager.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Application-AvailableResources-Db.xml" />
     <xi:include href="Zend_Application-AvailableResources-Frontcontroller.xml" />
     <xi:include href="Zend_Application-AvailableResources-Layout.xml" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19436 -->
+<!-- EN-Revision: 19771 -->
 <sect3 id="zend.view.helpers.initial.doctype">
     <title>Doctype ヘルパー</title>
 
@@ -88,6 +88,17 @@ $doctype = $view->doctype()->getDoctype();
         <programlisting language="php"><![CDATA[
 if ($view->doctype()->isXhtml()) {
     // 何かをします
+}
+]]></programlisting>
+
+        <!-- TODO : to be translated -->
+        <para>
+            You can also check if the doctype represents an <acronym>HTML5</acronym> document
+        </para>
+
+        <programlisting language="php"><![CDATA[
+if ($view->doctype()->isHtml5()) {
+    // do something differently
 }
 ]]></programlisting>
     </example>

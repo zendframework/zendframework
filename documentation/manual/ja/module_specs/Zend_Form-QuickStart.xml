@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 19873 -->
 <sect1 id="zend.form.quickstart">
     <title>Zend_Form クイックスタート</title>
 
@@ -63,7 +63,7 @@ $form->setAttrib('id', 'login');
         <para>
             要素がなければフォームには何の意味もありません。
             <classname>Zend_Form</classname> にデフォルトで組み込まれている要素を使用すると、
-            <classname>Zend_View</classname> ヘルパーを用いて <acronym>XHTML</acronym> 形式でレンダリングすることができます。
+            <classname>Zend_View</classname> ヘルパーを用いて <acronym>XHTML</acronym> 形式でレンダリングできます。
             以下のような要素が組み込まれています。
         </para>
 
@@ -292,7 +292,7 @@ echo $form;
             先頭 (あるいは末尾) へのコンテンツの追加、
             その他コンテンツに対する操作を行うことになります。
             複数のデコレータを組み合わせることで、
-            さまざまな効果を適用することができます。
+            さまざまな効果を適用できます。
             デフォルトでは、<classname>Zend_Form_Element</classname>
             は 4 つのデコレータを組み合わせて出力を行います。
             その設定は、次のようになっています。
@@ -429,6 +429,16 @@ $values = $form->getValues();
 
         <programlisting language="php"><![CDATA[
 $unfiltered = $form->getUnfilteredValues();
+]]></programlisting>
+
+        <!-- TODO : to be translated -->
+        <para>
+            If you on the other hand need all the valid and filtered values of a partially valid form,
+            you can call:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$values = $form->getValidValues($_POST);
 ]]></programlisting>
     </sect2>
 
@@ -577,7 +587,7 @@ class UserController extends Zend_Controller_Action
 
         <para>
             <classname>Zend_Form</classname> のすべてのクラスは
-            <classname>Zend_Config</classname> を用いて設定することができます。
+            <classname>Zend_Config</classname> を用いて設定できます。
             コンストラクタに <classname>Zend_Config</classname>
             オブジェクトを渡すか、あるいは <methodname>setConfig()</methodname>
             を使用して渡すことになります。先ほどのようなフォームを

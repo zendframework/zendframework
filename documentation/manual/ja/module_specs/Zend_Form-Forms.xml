@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 19873 -->
 <sect1 id="zend.form.forms">
     <title>Zend_Form によるフォームの作成</title>
 
@@ -51,7 +51,7 @@ $form = new My_Form()
 
     <para>
         <classname>Zend_Config</classname> のインスタンスあるいは配列で設定を渡すことができます。
-        これを使用すると、オブジェクトの状態を設定したり新しい要素を作成したりすることができます。
+        これを使用すると、オブジェクトの状態を設定したり新しい要素を作成したりできます。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -61,7 +61,7 @@ $form = new Zend_Form($config);
 
     <para>
         <classname>Zend_Form</classname> は順次処理が可能です。
-        各要素や表示グループ、サブフォームごとに処理することができます。
+        各要素や表示グループ、サブフォームごとに処理できます。
         処理順は、登録した順番および各項目に設定されている順番となります。
         これは、各要素のレンダリングを適切な順で行いたいときに便利です。
     </para>
@@ -76,7 +76,7 @@ $form = new Zend_Form($config);
         <para>
             <classname>Zend_Form</classname> では、
             <classname>Zend_Loader_PluginLoader</classname> を使用することで
-            別の要素やデコレータの位置を指定することができます。
+            別の要素やデコレータの位置を指定できます。
             それぞれにプラグインローダーを関連づけることができ、
             汎用的なアクセサを使用してそれを取得したり変更したりします。
         </para>
@@ -112,7 +112,7 @@ $form = new Zend_Form($config);
                 プレフィックスの後に "_Element" および
                 "_Decorator" を追加し、パスに "Element/" および
                 "Decorator/" を追加します。追加のフォーム要素クラス群をすべて同じ階層に配置した場合は、
-                このメソッドを使用すると簡単に基底プレフィックスを設定することができます。
+                このメソッドを使用すると簡単に基底プレフィックスを設定できます。
             </para></listitem>
 
             <listitem><para>
@@ -226,7 +226,7 @@ $form->addElement('text', 'foo', array('label' => 'Foo:'));
         </note>
 
         <para>
-            要素をフォームに追加したら、名前を指定してそれを取得することができます。
+            要素をフォームに追加したら、名前を指定してそれを取得できます。
             取得するには、<methodname>getElement()</methodname> メソッドを使用するか
             オブジェクトのプロパティとして要素にアクセスします。
             property:
@@ -260,7 +260,7 @@ $username = $form->createElement('text', 'username');
                 その値を用いてデータベースの更新なりウェブサービスの操作なりといった作業を行います。
                 すべての要素の値を取得するには <methodname>getValues()</methodname> を使用します。
                 <methodname>getValue($name)</methodname> を使用すると、
-                要素名を指定して特定の要素の値を取得することができます。
+                要素名を指定して特定の要素の値を取得できます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -337,7 +337,7 @@ $form->addElementPrefixPath('My_Foo_Decorator',
                 <title>すべての要素に対するデコレータの設定</title>
 
                 <para>
-                    すべての要素に対するデコレータを設定することができます。
+                    すべての要素に対するデコレータを設定できます。
                     <methodname>setElementDecorators()</methodname> に
                     <methodname>setDecorators()</methodname>
                     と同じようなデコレータの配列を渡すと、
@@ -632,7 +632,7 @@ $form->addDisplayGroupPrefixPath('My_Foo_Decorator', 'My/Foo/Decorator');
                 <title>すべての表示グループに対するデコレータの設定</title>
 
                 <para>
-                    すべての表示グループに対するデコレータを設定することができます。
+                    すべての表示グループに対するデコレータを設定できます。
                     <methodname>setDisplayGroupDecorators()</methodname> に
                     <methodname>setDecorators()</methodname>
                     と同じようなデコレータの配列を渡すと、
@@ -658,10 +658,10 @@ $form->setDisplayGroupDecorators(array(
                 デフォルトでは、<classname>Zend_Form</classname> は
                 表示グループ用に <classname>Zend_Form_DisplayGroup</classname>
                 クラスを使用します。
-                このクラスを継承すれば、独自の機能を持つクラスを作成することができます。
+                このクラスを継承すれば、独自の機能を持つクラスを作成できます。
                 <methodname>addDisplayGroup()</methodname>
                 には具象インスタンスを渡すことはできませんが、
-                どのクラスを使用するのかをオプションで指定することができます。
+                どのクラスを使用するのかをオプションで指定できます。
                 このときに使用するキーは 'displayGroupClass' です。
             </para>
 
@@ -889,7 +889,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             <listitem><para>
                 論理的な要素グループの作成。
                 サブフォームは単なるフォームであり、
-                サブフォームを独立したエンティティとして検証することができます。
+                サブフォームを独立したエンティティとして検証できます。
             </para></listitem>
 
             <listitem><para>
@@ -936,7 +936,7 @@ $subForm = $form->subform;
 ]]></programlisting>
 
         <para>
-            サブフォームは、親フォームの要素のひとつとして順次処理することができます。
+            サブフォームは、親フォームの要素のひとつとして順次処理できます。
             サブフォーム内の要素は処理できません。
         </para>
 
@@ -1051,7 +1051,7 @@ $form->setAction('/user/login')
             <constant>Zend_Form::ENCTYPE_MULTIPART</constant> を定義しており、
             これらはそれぞれ 'application/x-www-form-urlencoded' と
             'multipart/form-data' に対応します。
-            しかし、これ以外にも任意のエンコード形式を指定することができます。
+            しかし、これ以外にも任意のエンコード形式を指定できます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1070,7 +1070,7 @@ $form->setAction('/user/login')
 
         <para>
             <classname>Zend_Form</classname> は <code>Countable</code>
-            インターフェイスを実装しており、count 関数の引数として使用することができます。
+            インターフェイスを実装しており、count 関数の引数として使用できます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1121,7 +1121,7 @@ $form->clearAttribs();
             (要素、表示グループ、サブフォーム)
             を順次処理し、それらをレンダリングした結果を返します。
             それ以外のデコレータを使用して、コンテンツをラップしたり
-            前後に何かを追加したりすることができます。
+            前後に何かを追加したりできます。
         </para>
 
         <para>
@@ -1228,7 +1228,7 @@ $fooBar  = $form->getDecorator('FooBar');
             独自のデコレータを使用してフォームを作成することもできます。
             一般的な使用例としては、作成したい HTML が厳密に決まっている場合などがあります。
             デコレータでそれとまったく同じ HTML を作成し、単純にそれを返せばいいのです。
-            個々の要素や表示グループに対してもそれぞれデコレータを使用することができます。
+            個々の要素や表示グループに対してもそれぞれデコレータを使用できます。
         </para>
 
         <para>
@@ -1295,7 +1295,7 @@ echo $form->renderFieldset("<p>This is fieldset content</p>");
         <para>
             フォームの主な使用法は、送信されたデータを検証することです。
             <classname>Zend_Form</classname> は、フォーム全体あるいはその一部を一度に検証したり、
-            XmlHttpRequests (AJAX) のレスポンスを自動的に検証したりすることができます。
+            XmlHttpRequests (AJAX) のレスポンスを自動的に検証したりできます。
             送信されたデータが無効な場合は、
             要素やサブフォームについて
             検証エラーのコードやメッセージを取得するメソッドが用意されています。
@@ -1354,7 +1354,7 @@ $json = $form->processAjax($data);
         <para>
             フォームの検証に失敗した場合は、エラーコードとエラーメッセージをそれぞれ
             <methodname>getErrors()</methodname> と
-            <methodname>getMessages()</methodname> で取得することができます。
+            <methodname>getMessages()</methodname> で取得できます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -1457,6 +1457,26 @@ $messages = $form->getMessages('username');
             <para>
                 この方式で設定したすべてのエラーは翻訳されることになります。
             </para>
+        </sect3>
+
+        <!-- TODO : to be translated -->
+        <sect3 id="zend.form.forms.validation.values">
+            <title>Retrieving Valid Values Only</title>
+
+            <para>
+                There are scenarios when you want to allow your user to work on a valid form
+                in several steps. Meanwhile you allow the user to save the form with any
+                set of values inbetween. Then if all the data is specified you can transfer
+                the model from the building or prototying stage to a valid stage.
+            </para>
+
+            <para>
+                You can retrieve all the valid values that match the submitted data by calling:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$validValues = $form->getValidValues($_POST);
+]]></programlisting>
         </sect3>
     </sect2>
 
@@ -1662,15 +1682,15 @@ $messages = $form->getMessages('username');
             <methodname>setOptions()</methodname> や <methodname>setConfig()</methodname> を用いて
             (あるいはコンストラクタでオプションや
             <classname>Zend_Config</classname> オブジェクトを渡して)
-            さまざまに設定することができます。
+            さまざまに設定できます。
             これらのメソッドを使用して、フォームの要素や表示グループ、デコレータ、
-            そしてメタデータを設定することができます。
+            そしてメタデータを設定できます。
         </para>
 
         <para>
             全般的なルールとして、もし 'set' + オプションのキー
             という名前のメソッドが <classname>Zend_Form</classname>
-            にあった場合は、そのメソッドを使用するとオプションを設定することができます。
+            にあった場合は、そのメソッドを使用するとオプションを設定できます。
             アクセサが存在しない場合は
             キーが属性への参照とみなされ、
             <methodname>setAttrib()</methodname> に渡されます。

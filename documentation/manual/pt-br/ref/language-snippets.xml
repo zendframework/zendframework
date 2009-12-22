@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 19887 -->
+<!-- Reviewed: no -->
 
 <!-- links -->
 <!ENTITY lang                                   'pt-br'>
 <!ENTITY zf.manual.link                         'http://framework.zend.com/manual/en/'>
-<!ENTITY php.manual.link                        'http://www.php.net/manual/en/'>
+<!ENTITY php.manual.link                        'http://www.php.net/manual/pt_BR/'>
 
 <!-- manual.xml.in -->
 <!ENTITY book.title                             'Guia de Referência do Programador'>
-<!ENTITY book.pdf1.title                        'Programmer&#39;s Reference Guide: Volume 1'>
-<!ENTITY book.pdf2.title                        'Programmer&#39;s Reference Guide: Volume 2'>
+<!ENTITY book.pdf1.title                        'Guia de Referência do Programador: Volume 1'>
+<!ENTITY book.pdf2.title                        'Guia de Referência do Programador: Volume 2'>
 <!ENTITY book.subtitle                          'Zend Framework'>
-<!ENTITY book.edition                           'Guia de Referência do Programador'>
+<!ENTITY book.edition                           'Guia de Referência do Programador para Zend Framework'>
 
 <!ENTITY chapter.introduction.title             'Introdução ao Zend Framework'>
 

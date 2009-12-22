@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 19731 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.barcode.introduction">
+    <title>Introduction</title>
+    <para>
+        <classname>Zend_Barcode</classname> fournit une manière générique de générer des
+        code-barres. Le composant <classname>Zend_Barcode</classname> est divisé en deux
+        sous-composants&#160;: les objets code-barres et les générateurs de rendu. Les objets
+        permettent de créer les code-barres indépendamment du support de rendu. Les générateurs
+        de rendu vous permettent de tracer les code-barres en fonction sur le support.
+    </para>
+</sect1>

@@ -163,6 +163,19 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('zendframework', $values['id']);
     }
 
+    public function test_RESTfulApp_GET_project_byIdentifier_urlencoded()
+    {
+        $request = $this->_buildRequest('GET', '/project/zend+framework');
+        $values = $this->_invokeRouteMatch($request);
+
+        $this->assertType('array', $values);
+        $this->assertTrue(isset($values['module']));
+        $this->assertEquals('default', $values['module']);
+        $this->assertEquals('project', $values['controller']);
+        $this->assertEquals('get', $values['action']);
+        $this->assertEquals('zend framework', $values['id']);
+    }
+    
     public function test_RESTfulApp_GET_project_edit()
     {
         $request = $this->_buildRequest('GET', '/project/zendframework/edit');
@@ -485,7 +498,23 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $url = $route->assemble($params);
         $this->assertEquals('mod/user/index/foo/bar', $url);
     }
+    
+    public function test_assemble_encode_param_values()
+    {
+        $route = new Zend_Rest_Route($this->_front, array(), array());
+        $params = array('module'=>'mod', 'controller'=>'user', 'index'=>true, 'foo'=>'bar is n!ice');
+        $url = $route->assemble($params);
+        $this->assertEquals('mod/user/index/foo/bar+is+n%21ice', $url);
+    }
 
+    public function test_assemble_does_NOT_encode_param_values()
+    {
+        $route = new Zend_Rest_Route($this->_front, array(), array());
+        $params = array('module'=>'mod', 'controller'=>'user', 'index'=>true, 'foo'=>'bar is n!ice');
+        $url = $route->assemble($params, false, false);
+        $this->assertEquals('mod/user/index/foo/bar is n!ice', $url);
+    }
+    
     private function _buildRequest($method, $uri)
     {
         $request = new Zend_Controller_Request_HttpTestCase();

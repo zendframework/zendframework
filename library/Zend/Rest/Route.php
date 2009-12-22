@@ -116,7 +116,6 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
         if ($path != '') {
 
             $path = explode(self::URI_DELIMITER, $path);
-
             // Determine Module
             $moduleName = $this->_defaults[$this->_moduleKey];
             $dispatcher = $this->_front->getDispatcher();
@@ -140,6 +139,11 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
                     // Controller, return false to fall back to other routes
                     return false;
                 }
+            } elseif ($this->_checkRestfulController($moduleName, $controllerName)) {
+            	$values[$this->_controllerKey] = $controllerName;
+            	$values[$this->_actionKey] = 'get';
+            } else {
+            	return false;
             }
 
             //Store path count for method mapping

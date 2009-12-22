@@ -416,6 +416,24 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($values);
     }
 
+    public function test_postToNonRESTfulDefaultController_moduleHasAnotherRESTfulController_defaultControllerInURL_returnsFalse()
+    {
+        $request = $this->_buildRequest('POST', '/mod/index');
+        $config = array('mod'=>array('user'));
+        $values = $this->_invokeRouteMatch($request, $config);
+    
+        $this->assertFalse($values);
+    }
+
+    public function test_postToNonRESTfulDefaultController_moduleHasAnotherRESTfulController_noDefaultControllerInURL_returnsFalse()
+    {
+        $request = $this->_buildRequest('POST', '/mod');
+        $config = array('mod'=>array('user'));
+        $values = $this->_invokeRouteMatch($request, $config);
+    
+        $this->assertFalse($values);
+    }
+
     public function test_RESTfulController_PUT_user_byIdentifier()
     {
         $request = $this->_buildRequest('PUT', '/mod/user/lcrouch');

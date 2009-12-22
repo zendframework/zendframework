@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 19452 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - Utilisation avancée</title>
@@ -255,7 +255,9 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
         <para>
             Actuellement, <classname>Zend_Http_Client</classname> propose uniquement
             l'authentification HTTP "basic". Cette fonctionnalité est utilisée via la méthode
-            <methodname>setAuth()</methodname>. Celle-ci accepte trois paramètres : le nom d'utilisateur, le mot
+            <methodname>setAuth()</methodname>, ou en spécifiant le nom d'utilisateur et le mot
+            de passe dans l'URI. La méthode <methodname>setAuth()</methodname> accepte trois
+            paramètres : le nom d'utilisateur, le mot
             de passe et un type d'authentification optionnel. Comme mentionné, seule
             l'authentification "basic" est actuellement implémentée (l'ajout de l'authentification
             "digest" est planifié). <example id="zend.http.client.http_authentication.example-1">
@@ -271,6 +273,10 @@ $client->setAuth('shahar',
 // L'authentification 'basic' étant le comportement par défaut,
 // on peut aussi écrire ceci :
 $client->setAuth('shahar', 'monMotdePasse!');
+
+// Vous pouvez aussi spécifier le nom d'utilisateur
+// et le mot de passe dans l'URI
+$client->setUri('http://christer:secret@example.com');
 ]]></programlisting>
                 </example>
             </para>
@@ -307,11 +313,16 @@ $client->setAuth('shahar', 'monMotdePasse!');
             <title>Réinitialiser les paramètres</title>
 
             <para>
-                Notez que les en-têtes spécifiques non liés à la requête ne sont pas
-                réinitialisés quand la méthode <code>resetParameters</code> est invoquée. En fait,
-                seuls les en-têtes "Content-length" et "Content-type" sont supprimés. Ceci permet de
-                définir une seule fois les en-têtes comme "Accept-language" ou
+                Notez que les en-têtes spécifiques non liés à la requête ne sont pas réinitialisés
+                par défaut quand la méthode <methodname>resetParameters</methodname> est invoquée.
+                En fait, seuls les en-têtes "Content-length" et "Content-type" sont supprimés.
+                Ceci permet de définir une seule fois les en-têtes comme "Accept-language" ou
                 "Accept-encoding".
+            </para>
+
+            <para>
+                Pour effacer tous les entêtes et toutes les données excepté l'URI et la méthode,
+                utilisez <methodname>resetParameters(true)</methodname>.
             </para>
         </note>
 
@@ -367,5 +378,66 @@ $reponse = $client->request(Zend_Http_Client::GET);
 $_SESSION['cookiejar'] = $client->getCookieJar();
 ]]></programlisting>
         </example>
+    </sect2>
+
+    <sect2 id="zend.http.client.streaming">
+        <title>Data Streaming</title>
+        <para>
+            By default, <classname>Zend_Http_Client</classname> accepts and returns data as PHP strings.
+            However, in many cases there are big files to be sent or received, thus keeping them
+            in memory might be unnecessary or too expensive. For these cases, <classname>Zend_Http_Client</classname>
+            supports reading data from files (and in general, PHP streams) and writing data to files (streams).
+        </para>
+        <para>
+            In order to use stream to pass data to <classname>Zend_Http_Client</classname>,
+            use <methodname>setRawData()</methodname> method with data argument being stream resource
+            (e.g., result of <methodname>fopen()</methodname>).
+            <example id="zend.http.client.streaming.example-1">
+                <title>Sending file to HTTP server with streaming</title>
+
+                <programlisting language="php"><![CDATA[
+$fp = fopen("mybigfile.zip", "r");
+$client->setRawData($fp, 'application/zip')->request('PUT');
+]]></programlisting>
+            </example>
+        </para>
+
+        <para>
+            Only PUT requests currently support sending streams to HTTP server.
+        </para>
+
+        <para>
+            In order to receive data from the server as stream, use <methodname>setStream()</methodname>.
+            Optional argument specifies the filename where the data will be stored. If the argument is just
+            TRUE (default), temporary file will be used and will be deleted once response object is destroyed.
+            Setting argument to FALSE disables the streaming functionality.
+        </para>
+
+        <para>
+            When using streaming, <methodname>request()</methodname> method will return object of class
+            <classname>Zend_Http_Client_Response_Stream</classname>, which has two useful methods:
+            <methodname>getStreamName()</methodname> will return the name of the file where the response is stored,
+            and <methodname>getStream()</methodname> will return stream from which the response could be read.
+        </para>
+
+        <para>
+            You can either write the response to pre-defined file, or use temporary file for storing it and
+            send it out or write it to another file using regular stream functions.
+            <example id="zend.http.client.streaming.example-2">
+                <title>Receiving file from HTTP server with streaming</title>
+
+                <programlisting language="php"><![CDATA[
+$client->setStreaming(); // will use temp file
+$response = $client->request('GET');
+// copy file
+copy($response->getStreamName(), "my/downloads/file");
+// use stream
+$fp = fopen("my/downloads/file2", "w");
+stream_copy_to_stream($response->getStream(), $fp);
+// Also can write to known file
+$client->setStreaming("my/downloads/myfile)->request('GET');
+]]></programlisting>
+            </example>
+        </para>
     </sect2>
 </sect1>

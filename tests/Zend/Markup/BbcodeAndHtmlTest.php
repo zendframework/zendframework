@@ -342,6 +342,22 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
                             $m->render('[b class=\'">xss\']foobar[/b]'));
     }
 
+    public function testWrongNestedLists()
+    {
+        $m = $this->_markup;
+        // thanks to PadraicB for finding this
+        $input = <<<BBCODE
+[list]
+[*] Subject 1
+[list]
+[*] First
+[*] Second
+[/list]
+[*] Subject 2
+[/list]
+BBCODE;
+        $m->render($input);
+    }
 }
 
 

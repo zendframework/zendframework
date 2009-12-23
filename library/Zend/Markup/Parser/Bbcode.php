@@ -435,9 +435,10 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
         if ($this->_isStopper($this->_tag)) {
             // we got a stopper, end the current tag and get back to the parent
             $this->_current->setStopper($this->_tag);
-            $this->_current = $this->_current->getParent();
 
             $this->_removeFromSearchedStoppers($this->_current);
+
+            $this->_current = $this->_current->getParent();
         } elseif (!empty($this->_searchedStoppers[$this->_tag])) {
             // hell has broken loose, these stoppers are searched somewere
             // lower in the tree

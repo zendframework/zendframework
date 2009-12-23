@@ -28,7 +28,7 @@ require_once 'Zend/Locale.php';
 /**
  * Class for handling number conversions
  *
- * This class can only handle numbers without precission
+ * This class can only handle numbers without precision
  *
  * @category   Zend
  * @package    Zend_Measure

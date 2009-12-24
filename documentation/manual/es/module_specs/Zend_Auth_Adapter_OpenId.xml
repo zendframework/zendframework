@@ -8,35 +8,37 @@
     <sect2 id="zend.auth.adapter.openid.introduction">
 
         <title>Introducción</title>
-       <para>El adaptador <classname>Zend_Auth_Adapter_OpenId</classname> se
+        <para>El adaptador <classname>Zend_Auth_Adapter_OpenId</classname> se
             puede usar para autentificar usuarios usando un servidor remoto de
             OpenID. Este método de autenticación supone que el usuario sólo
             envia su OpenID a la aplicacion web, luego se redirecciona (envia) a
             su proveedor de OpenID para su verificacion mediante su contraseña o
             algún otro metodo. Esta contraseña no se le proporciona a la
             aplicacion web.</para>
-       <para>El OpenID solo es un <acronym>URI</acronym> que apunta a un sitio
+        <para>El OpenID solo es un <acronym>URI</acronym> que apunta a un sitio
             con información del usuari, así como información especiales que
             describe que servidor usar y que información (identidad) se debe
             enviar. Puedes leer más información acerca de OpenID en el <ulink
-                url="http://www.openid.net/">sitio oficial de OpenId</ulink>.</para>
-       <para>La clase <classname>Zend_Auth_Adapter_OpenId</classname>encapsula
+                url="http://www.openid.net/">sitio oficial de
+            OpenId</ulink>.</para>
+        <para>La clase <classname>Zend_Auth_Adapter_OpenId</classname>encapsula
             al componente <classname>Zend_OpenId_Consumer</classname>, el cual
             implementa el protocolo de autentificación OpenID.</para>
 
         <note>
-           <para>
+            <para>
                 <classname>Zend_OpenId</classname> aprovecha las <ulink
                     url="http://php.net/gmp">GMP extension</ulink>, cuando estén
-                disponibles. Considere la posibilidad de usar <acronym>GMP</acronym>
-                    extension para un mejor rendimiento cuando use
-                    <classname>Zend_Auth_Adapter_OpenId</classname>.</para>
+                disponibles. Considere la posibilidad de usar
+                    <acronym>GMP</acronym> extension para un mejor rendimiento
+                cuando use
+                <classname>Zend_Auth_Adapter_OpenId</classname>.</para>
         </note>
     </sect2>
 
     <sect2 id="zend.auth.adapter.openid.specifics">
         <title>Características</title>
-       <para>Como es el caso de todos los adaptadores
+        <para>Como es el caso de todos los adaptadores
                 <classname>Zend_Auth</classname>, la clase
                 <classname>Zend_Auth_Adapter_OpenId</classname> implementa
                 <classname>Zend_Auth_Adapter_Interface</classname>, el cual
@@ -45,7 +47,7 @@
             configurado antes de ser llamado. La configuracion del adaptador
             requiere la creacion de un OpenID y otras opciones de
                 <classname>Zend_OpenId</classname> específicos.</para>
-       <para>Sin embargo, a diferencia de otros adaptadores de
+        <para>Sin embargo, a diferencia de otros adaptadores de
                 <classname>Zend_Auth</classname>,
                 <classname>Zend_Auth_Adapter_OpenId</classname> realiza la
             autenticación en un servidor externo en dos peticiones
@@ -60,9 +62,10 @@
             de nuevo para verificar la firma que acompaña a la petición de
             re-direccionamiento del servidor para completar el proceso de
             autenticación . En esta segunda invocación, el método devolverá el
-            objeto <classname>Zend_Auth_Result</classname> como se esperaba.</para>
+            objeto <classname>Zend_Auth_Result</classname> como se
+            esperaba.</para>
 
-       <para>El siguiente ejemplo muestra el uso de
+        <para>El siguiente ejemplo muestra el uso de
                 <classname>Zend_Auth_Adapter_OpenId</classname>. Como se
             mencionó anteriormente,
                 <methodname>Zend_Auth_Adapter_OpenId::autenticar()</methodname>
@@ -116,7 +119,7 @@ if ((isset($_POST['openid_action']) &&
 </fieldset></form></body></html>
 
 ]]></programlisting>
-       <para>Puede personalizar el proceso de autenticación OpenID de varias
+        <para>Puede personalizar el proceso de autenticación OpenID de varias
             formas. Por ejemplo, recibir la redirección del servidor de OpenID
             en una página aparte, especificando la "raíz" del sitio web y
             utilizar un <classname>Zend_OpenId_Consumer_Storage</classname> o un

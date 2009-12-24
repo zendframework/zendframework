@@ -371,6 +371,16 @@ $values = $form->getValues();
         <programlisting language="php"><![CDATA[
 $unfiltered = $form->getUnfilteredValues();
 ]]></programlisting>
+
+        <para>
+            If you on the other hand need all the valid and filtered values of a partially valid form,
+            you can call:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$values = $form->getValidValues($_POST);
+]]></programlisting>
+
     </sect2>
 
     <sect2 id="zend.form.quickstart.errorstatus">

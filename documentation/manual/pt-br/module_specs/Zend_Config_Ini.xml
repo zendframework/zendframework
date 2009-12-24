@@ -6,14 +6,14 @@
 
     <para>
         <classname>Zend_Config_Ini</classname> permite aos desenvolvedores armazenar os dados de
-        configuração em um formato <acronym>INI</acronym> conhecido e lê-los no aplicativo usando
-        sintaxe de propriedade do objeto aninhado. O formato <acronym>INI</acronym> é especializado
-        em proporcionar tanto a capacidade de ter uma hierarquia de chaves de dados de configuração
-        quanto de herança entre as seções de dados de configuração. Hierarquias de dados de
-        configuração são suportadas através da separação das chaves com o ponto ou caractere de
-        período ("<emphasis>.</emphasis>"). Uma seção pode estender ou herdar de outra seção,
-        seguindo o nome da seção, com um caractere dois pontos ("<emphasis>:</emphasis>") e o nome
-        da seção a partir do qual os dados devem ser herdados.
+        configuração em um formato <acronym>INI</acronym> conhecido e lê-los no aplicativo através
+        de uma sintaxe de propriedade de objeto aninhado. O formato <acronym>INI</acronym> é
+        especializado em proporcionar tanto a capacidade de ter uma hierarquia de chaves de dados
+        de configuração quanto de herança entre as seções de dados de configuração. Hierarquias de
+        dados de configuração são suportadas através da separação das chaves com o ponto ou
+        caractere de período ("<emphasis>.</emphasis>"). Uma seção pode estender ou herdar de outra
+        seção, seguindo o nome da seção, com um caractere dois pontos ("<emphasis>:</emphasis>") e
+        o nome da seção a partir do qual os dados devem ser herdados.
     </para>
 
     <note>

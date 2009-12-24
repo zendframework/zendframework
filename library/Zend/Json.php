@@ -363,7 +363,7 @@ class Zend_Json
             $prefix = str_repeat($ind, $indent);
             if($token == "{" || $token == "[") {
                 $indent++;
-                if($result[strlen($result)-1] == "\n") {
+                if($result != "" && $result[strlen($result)-1] == "\n") {
                     $result .= $prefix;
                 }
                 $result .= "$token\n";

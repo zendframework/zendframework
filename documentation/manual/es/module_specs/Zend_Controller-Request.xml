@@ -175,7 +175,7 @@
                     using such a setup and getting invalid routing, you should
                     use the
                         <classname>Zend_Controller_Request_Apache404</classname>
-                    class instead of the default Http class for your request
+                    class instead of the default <acronym>HTTP</acronym> class for your request
                     object:</para>
 
                 <programlisting language="php"><![CDATA[
@@ -325,7 +325,7 @@ $response   = $controller->dispatch();
             </itemizedlist>
 
            <para>Most <acronym>AJAX</acronym> libraries allow you to send
-                custom HTTP request headers; if your library does not send this
+                custom <acronym>HTTP</acronym> request headers; if your library does not send this
                 header, simply add it as a request header to ensure the
                     <methodname>isXmlHttpRequest()</methodname> method works for
                 you.</para>

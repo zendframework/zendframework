@@ -101,7 +101,7 @@ Zend_Loader::loadClass('Container_Tree',
             <methodname>Zend_Loader::loadClass()</methodname> busca las carpetas en el
             orden suministrado. El primer archivo encontrado es cargado. Si el archivo
             no existe en el <varname>$dirs</varname> especificado, entonces se busca en el
-            <methodname>include_path</methodname> del entorno PHP.
+            <methodname>include_path</methodname> del entorno <acronym>PHP</acronym>.
        </para>
 
         <para>

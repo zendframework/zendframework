@@ -674,7 +674,7 @@ echo $response;
 
                     <listitem><para>                       
                         <methodname>_redirect ()</methodname> ahora toma un segundo opcional
-                        argumento, el código HTTP a retornar con la redirección, y
+                        argumento, el código <acronym>HTTP</acronym> a retornar con la redirección, y
                         un opcional tercer argumento, <varname>$prependBase</varname>,
                         que puede indicar que la <acronym>URL</acronym> base registrada en la
                         solicitud del objeto debería ser añadido a la <acronym>URL</acronym> especificada.

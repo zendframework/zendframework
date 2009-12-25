@@ -397,7 +397,7 @@ $hello = $test->sayHello(1, 2);         // test.Hello(1,2) returns "hello"
         <sect3 id="zend.xmlrpc.client.error-handling.http">
             <title>HTTP Errors</title>
 
-            <para>If any HTTP error occurs, such as the remote HTTP server
+            <para>If any <acronym>HTTP</acronym> error occurs, such as the remote <acronym>HTTP</acronym> server
                 returns a <methodname>404 Not Found</methodname>, a
                     <methodname>Zend_XmlRpc_Client_HttpException</methodname>
                 will be thrown.</para>
@@ -539,17 +539,17 @@ $client->doRequest($request);
     <sect2 id="zend.xmlrpc.client.http-client">
         <title>HTTP Client and Testing</title>
 
-        <para>In all of the prior examples, an HTTP client was never specified.
+        <para>In all of the prior examples, an <acronym>HTTP</acronym> client was never specified.
             When this is the case, a new instance of
                 <methodname>Zend_Http_Client</methodname> will be created with
             its default options and used by
                 <classname>Zend_XmlRpc_Client</classname> automatically.</para>
 
-        <para>The HTTP client can be retrieved at any time with the
+        <para>The <acronym>HTTP</acronym> client can be retrieved at any time with the
                 <methodname>getHttpClient()</methodname> method. For most cases,
-            the default HTTP client will be sufficient. However, the
+            the default <acronym>HTTP</acronym> client will be sufficient. However, the
                 <methodname>setHttpClient()</methodname> method allows for a
-            different HTTP client instance to be injected.</para>
+            different <acronym>HTTP</acronym> client instance to be injected.</para>
 
         <para>The <methodname>setHttpClient()</methodname> is particularly
             useful for unit testing. When combined with the

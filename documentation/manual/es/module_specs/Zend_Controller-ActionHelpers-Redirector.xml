@@ -26,7 +26,7 @@
             <listitem>
                <para>
                     <methodname>setCode()</methodname> puede ser utilizado para
-                    establecer el código de respuesta HTTP que utilizar durante
+                    establecer el código de respuesta <acronym>HTTP</acronym> que utilizar durante
                     la redirección.</para>
             </listitem>
 

@@ -148,7 +148,7 @@ $server->handle();
 
         <para>Sin embargo, esto no soluciona el problema de devolución de un
             SMD para que el cliente JSON-RPC pueda autodescubrir los métodos.
-            Esto puede lograrse determinando el método del requerimiento HTTP, y
+            Esto puede lograrse determinando el método del requerimiento <acronym>HTTP</acronym>, y
             luego especificando algún servidor de metadatos:</para>
 
         <programlisting language="php"><![CDATA[
@@ -371,7 +371,7 @@ $server->handle();
                 </listitem>
             </itemizedlist>
 
-            <para>Una versión específica de HTTP está disponible a través de
+            <para>Una versión específica de <acronym>HTTP</acronym> está disponible a través de
                     <classname>Zend_Json_Server_Request_Http</classname>. Esta
                 clase podrá recuperar la solicitud via
                     <methodname>php://input</methodname>, y permite el acceso
@@ -449,10 +449,10 @@ $server->handle();
                 </listitem>
             </itemizedlist>
 
-            <para>Una versión específica de HTTP está disponible a través de
+            <para>Una versión específica de <acronym>HTTP</acronym> está disponible a través de
                     <classname>Zend_Json_Server_Response_Http</classname>. Esta
-                clase enviará las cabeceras HTTP apropiadas así como serializará
-                la respuesta como JSON.</para>
+                clase enviará las cabeceras <acronym>HTTP</acronym> apropiadas así como serializará
+                la respuesta como<acronym>JSON</acronym>.</para>
         </sect3>
 
         <sect3 id="zend.json.server.details.zendjsonservererror">

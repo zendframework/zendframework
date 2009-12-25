@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 19766 -->
+<!-- Reviewed: no -->
+<sect1 id="learning.quickstart.create-form">
+    <title>Create A Form</title>
+
+    <para>
+        For our guestbook to be useful, we need a form for submitting new entries.
+    </para>
+
+    <para>
+        Our first order of business is to create the actual form class. First, create the directory
+        <filename>application/forms/</filename>. This directory will contain form classes for the
+        application. Next, we'll create a form class in
+        <filename>application/forms/Guestbook.php</filename>:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+// application/forms/Guestbook.php
+
+class Default_Form_Guestbook extends Zend_Form
+{
+    public function init()
+    {
+        // Set the method for the display form to POST
+        $this->setMethod('post');
+
+        // Add an email element
+        $this->addElement('text', 'email', array(
+            'label'      => 'Your email address:',
+            'required'   => true,
+            'filters'    => array('StringTrim'),
+            'validators' => array(
+                'EmailAddress',
+            )
+        ));
+
+        // Add the comment element
+        $this->addElement('textarea', 'comment', array(
+            'label'      => 'Please Comment:',
+            'required'   => true,
+            'validators' => array(
+                array('validator' => 'StringLength', 'options' => array(0, 20))
+                )
+        ));
+
+        // Add a captcha
+        $this->addElement('captcha', 'captcha', array(
+            'label'      => 'Please enter the 5 letters displayed below:',
+            'required'   => true,
+            'captcha'    => array(
+                'captcha' => 'Figlet',
+                'wordLen' => 5,
+                'timeout' => 300
+            )
+        ));
+
+        // Add the submit button
+        $this->addElement('submit', 'submit', array(
+            'ignore'   => true,
+            'label'    => 'Sign Guestbook',
+        ));
+
+        // And finally add some CSRF protection
+        $this->addElement('hash', 'csrf', array(
+            'ignore' => true,
+        ));
+    }
+}
+]]></programlisting>
+
+    <para>
+        The above form defines five elements: an email address field, a comment field, a CAPTCHA for
+        preventing spam submissions, a submit button, and a CSRF protection token.
+    </para>
+
+    <para>
+        Next, we will add a <methodname>signAction()</methodname> to our
+        <classname>GuestbookController</classname> which will process the form upon submission. To
+        create the action and related view script, execute the following:
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+# Unix-like systems:
+% zf.sh create action sign guestbook
+
+# DOS/Windows:
+C:> zf.bat create action sign guestbook
+]]></programlisting>
+
+    <para>
+        This will create a <methodname>signAction()</methodname> method in our controller, as well
+        as the appropriate view script.
+    </para>
+
+    <para>
+        Let's add some logic into our guestbook controller's sign action. We need to first check if
+        we're getting a POST or a GET request; in the latter case, we'll simply display the form.
+        However, if we get a POST request, we'll want to validate the posted data against our form,
+        and, if valid, create a new entry and save it. The logic might look like this:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+// application/controllers/GuestbookController.php
+
+class GuestbookController extends Zend_Controller_Action
+{
+    // snipping indexAction()...
+
+    public function signAction()
+    {
+        $request = $this->getRequest();
+        $form    = new Default_Form_Guestbook();
+
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($request->getPost())) {
+                $model = new Default_Model_Guestbook($form->getValues());
+                $model->save();
+                return $this->_helper->redirector('index');
+            }
+        }
+
+        $this->view->form = $form;
+    }
+}
+]]></programlisting>
+
+    <para>
+        Of course, we also need to edit the view script; edit <filename>application/views/scripts/guestbook/sign.phtml</filename> to read:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+<!-- application/views/scripts/guestbook/sign.phtml -->
+
+Please use the form below to sign our guestbook!
+
+<?php
+$this->form->setAction($this->url());
+echo $this->form;
+]]></programlisting>
+
+    <note>
+        <title>Better Looking Forms</title>
+
+        <para>
+            No one will be waxing poetic about the beauty of this form anytime soon. No matter -
+            form appearance is fully customizable! See the <link
+                linkend="zend.form.decorators">decorators section in the reference guide</link>
+            for details.
+        </para>
+
+        <para>
+            Additionally, you may be interested in <ulink
+                url="http://weierophinney.net/matthew/plugin/tag/decorators">this series of posts on
+                decorators</ulink>.
+        </para>
+    </note>
+
+    <note>
+        <title>Checkpoint</title>
+
+        <para>
+            Now browse to "http://localhost/guestbook/sign". You should see the following in your
+            browser:
+        </para>
+
+        <para>
+            <inlinegraphic width="421" scale="100" align="center" valign="middle"
+                fileref="figures/learning.quickstart.create-form.png" format="PNG" />
+        </para>
+    </note>
+</sect1>

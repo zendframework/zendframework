@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 19766 -->
+<!-- Reviewed: no -->
+<sect1 id="learning.form.decorators.intro">
+    <title>Einführung</title>
+
+    <para>
+        <link linkend="zend.form">Zend_Form</link> verwendet das <emphasis>Decorator</emphasis>
+        Pattern um Elemente und Formulare darzustellen. Anders als das klassische <ulink
+            url="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator Pattern</ulink>, dem man
+        ein Objekt übergibt um eine Klasse zu umhüllen, implementieren die Decorators in
+        <classname>Zend_Form</classname> ein <ulink
+            url="http://en.wikipedia.org/wiki/Strategy_pattern">Strategy Pattern</ulink>, und
+        verwenden die Metadaten welche in einem Element oder Formular enthalten sind um eine
+        Repräsenation von Ihm zu erstellen.
+    </para>
+
+    <para>
+        Man sollte sich von der Ausdrucksweise nicht erschrecken lassen. Trotzdem, im Herzen sind
+        Decorators in <classname>Zend_Form</classname> schrecklich einfach, und das nachfolgende
+        Mini-Tutorial sollte helfen damit zurecht zu kommen. Es führt durch die Grundsätze der
+        Decoration, den ganzen Weg für die Erstellung von Decorators für kombinierte Elemente.
+    </para>
+</sect1>

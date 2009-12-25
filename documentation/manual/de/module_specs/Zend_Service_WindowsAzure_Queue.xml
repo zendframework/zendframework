@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 19766 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.service.windowsazure.storage.queue">
+    <title>Zend_Service_WindowsAzure_Storage_Queue</title>
+
+    <para>
+        The Queue service stores messages that may be read by any client who has access to the
+        storage account.
+    </para>
+
+    <para>
+        A queue can contain an unlimited number of messages, each of which can be up to 8 KB in
+        size. Messages are generally added to the end of the queue and retrieved from the front of
+        the queue, although first in/first out (<acronym>FIFO</acronym>) behavior is not guaranteed.
+        If you need to store messages larger than 8 KB, you can store message data as a queue or in
+        a table and then store a reference to the data as a message in a queue.
+    </para>
+
+    <para>
+        Queue Storage is offered by Windows Azure as a <acronym>REST</acronym> API which is wrapped
+        by the <classname>Zend_Service_WindowsAzure_Storage_Queue</classname> class in order to
+        provide a native PHP interface to the storage account.
+    </para>
+
+    <sect2 id="zend.service.windowsazure.storage.queue.api">
+        <title>API Examples</title>
+
+        <para>
+            This topic lists some examples of using the
+            <classname>Zend_Service_WindowsAzure_Storage_Queue</classname> class.  Other features
+            are available in the download package, as well as a detailed API documentation of those
+            features.
+        </para>
+
+        <sect3 id="zend.service.windowsazure.storage.queue.api.create-queue">
+            <title>Creating a queue</title>
+
+            <para>
+                Using the following code, a queue can be created on development storage.
+            </para>
+
+            <example id="zend.service.windowsazure.storage.queue.api.create-queue.example">
+                <title>Creating a queue</title>
+
+                <programlisting language="php"><![CDATA[
+$storageClient = new Zend_Service_WindowsAzure_Storage_Queue();
+$result = $storageClient->createQueue('testqueue');
+
+echo 'Queue name is: ' . $result->Name;
+]]></programlisting>
+            </example>
+        </sect3>
+
+        <sect3 id="zend.service.windowsazure.storage.queue.api.delete-queue">
+            <title>Deleting a queue</title>
+
+            <para>
+                Using the following code, a queue can be removed from development storage.
+            </para>
+
+            <example id="zend.service.windowsazure.storage.queue.api.delete-queue.example">
+                <title>Deleting a queue</title>
+
+                <programlisting language="php"><![CDATA[
+$storageClient = new Zend_Service_WindowsAzure_Storage_Queue();
+$storageClient->deleteQueue('testqueue');
+]]></programlisting>
+            </example>
+        </sect3>
+
+        <sect3 id="zend.service.windowsazure.storage.queue.api.storing-queue">
+            <title>Adding a message to a queue</title>
+
+            <para>
+                Using the following code, a message can be added to a queue on development storage.
+                Note that the queue has already been created before.
+            </para>
+
+            <example id="zend.service.windowsazure.storage.queue.api.storing-queue.example">
+                <title>Adding a message to a queue</title>
+
+                <programlisting language="php"><![CDATA[
+$storageClient = new Zend_Service_WindowsAzure_Storage_Queue();
+
+// 3600 = time-to-live of the message, if omitted defaults to 7 days
+$storageClient->putMessage('testqueue', 'This is a test message', 3600);
+]]></programlisting>
+            </example>
+        </sect3>
+
+        <sect3 id="zend.service.windowsazure.storage.queue.api.read-queue">
+            <title>Reading a message from a queue</title>
+
+            <para>
+                Using the following code, a message can be read from a queue on development storage.
+                Note that the queue and message have already been created before.
+            </para>
+
+            <example id="zend.service.windowsazure.storage.queue.api.read-queue.example">
+                <title>Reading a message from a queue</title>
+
+                <programlisting language="php"><![CDATA[
+$storageClient = new Zend_Service_WindowsAzure_Storage_Queue();
+
+// retrieve 10 messages at once
+$messages = $storageClient->getMessages('testqueue', 10);
+
+foreach ($messages as $message) {
+    echo $message->MessageText . "\r\n";
+}
+]]></programlisting>
+            </example>
+
+            <para>
+                The messages that are read using <methodname>getMessages()</methodname> will be
+                invisible in the queue for 30 seconds, after which the messages will re-appear in
+                the queue.  To mark a message as processed and remove it from the queue, use the
+                <methodname>deleteMessage()</methodname> method.
+            </para>
+
+            <example id="zend.service.windowsazure.storage.queue.api.read-queue.processexample">
+                <title>Marking a message as processed</title>
+
+                <programlisting language="php"><![CDATA[
+$storageClient = new Zend_Service_WindowsAzure_Storage_Queue();
+
+// retrieve 10 messages at once
+$messages = $storageClient->getMessages('testqueue', 10);
+
+foreach ($messages as $message) {
+    echo $message . "\r\n";
+
+    // Mark the message as processed
+    $storageClient->deleteMessage('testqueue', $message);
+}
+]]></programlisting>
+            </example>
+        </sect3>
+
+        <sect3 id="zend.service.windowsazure.storage.queue.api.peek-queue">
+            <title>Check if there are messages in a queue</title>
+
+            <para>
+                Using the following code, a queue can be checked for new messages.  Note that the
+                queue and message have already been created before.
+            </para>
+
+            <example id="zend.service.windowsazure.storage.queue.api.peek-queue.example">
+                <title>Check if there are messages in a queue</title>
+
+                <programlisting language="php"><![CDATA[
+$storageClient = new Zend_Service_WindowsAzure_Storage_Queue();
+
+// retrieve 10 messages at once
+$messages = $storageClient->peekMessages('testqueue', 10);
+
+foreach ($messages as $message) {
+    echo $message->MessageText . "\r\n";
+}
+]]></programlisting>
+            </example>
+
+            <para>
+                Note that messages that are read using <methodname>peekMessages()</methodname> will
+                not become invisible in the queue, nor can they be marked as processed using the
+                <methodname>deleteMessage()</methodname> method.  To do this, use
+                <methodname>getMessages()</methodname> instead.
+            </para>
+        </sect3>
+    </sect2>
+</sect1>

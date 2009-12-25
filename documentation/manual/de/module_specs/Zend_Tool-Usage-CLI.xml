@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19748 -->
+<!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.usage.cli">
-    <title>Using Zend_Tool On The Command Line</title>
+    <title>Verwendung von Zend_Tool auf der Kommandozeile</title>
 
     <para>
-        The <acronym>CLI</acronym>, or command line tool (internally known as the console tool),
-        is currently the primary interface for dispatching <classname>Zend_Tool</classname>
-        requests. With the <acronym>CLI</acronym> tool, developers can issue tooling requests
-        inside the "command line window", also commonly known as a "terminal" window. This
-        environment is predominant in the *nix environment, but also has a common implementation
-        in windows with the <filename>cmd.exe</filename>, console2 and also with the Cygwin project.
+        Das <acronym>CLI</acronym>, oder Kommandozeilentool (intern bekannt als Konsolen Tool),
+        ist aktuell das primäre Interface für die Bearbeitung von <classname>Zend_Tool</classname>
+        Anfragen. Mit dem <acronym>CLI</acronym> Tool können Entwickler Tooling Anfragen im
+        "Kommandozeilen Fenster", auch bekannt als "Terminal" Fenster, auslösen. Diese Umgebung ist
+        vorherrschend bei *nix Umgebungen, es gibt aber auch übliche Implementationen unter Windows
+        mit <filename>cmd.exe</filename>, Console2 und auch im Cygwin Projekt.
     </para>
 
     <!--
     <sect2 id="zend.tool.usage.cli.introduction">
-        <title>Introduction</title>
+        <title>Einführung</title>
     </sect2>
     -->
 
@@ -23,31 +23,29 @@
         <title>Installation</title>
 
         <sect3 id="zend.tool.usage.cli.installation.download-and-go">
-            <title>Download And Go</title>
+            <title>Herunterladen und anfangen</title>
 
             <para>
-                First download Zend Framework.  This can be done by going to framework.zend.com
-                and downloading the latest release.  After you've downloaded the package and placed
-                it on your system.  The next step is to make the zf command available to your system.
-                The easiest way to do this, is to copy the proper files from the bin/ directory
-                of the download, and place these files within the <emphasis>same</emphasis> directory
-                as the location of the php cli binary.
+                Zuerst muss Zend Framework heruntergeladen werden. Das kann man tun, indem man auf
+                framework.zend.com geht und das letzte Release herunterlädt. Nachdem man das
+                Paket heruntergeladen und auf dem System plaziert hat ist der nächste Schritt das
+                zf Kommendo auf dem System zu erstellen. Der einfachste Weg das zu tun ist die
+                richtigen Dateien vom bin/ Verzeichnis des Downloads zu kopieren, und diese Dateien
+                im <emphasis>gleichen</emphasis> Verzeichnis zu platzieren wie der Ort an dem die
+                PHP CLI Binardatei ist.
             </para>
-
-
-
         </sect3>
 
         <sect3 id="zend.tool.usage.cli.installation.pear">
-            <title>Installing Via Pear</title>
+            <title>Installation über Pear</title>
 
             <para>
-                To install via PEAR, you must use the 3rd party zfcampus.org site to retrieve the
-                latest Zend Framework PEAR package.  These packages are typically built within a day
-                of an official Zend Framework release.  The benefit of installing via the PEAR package
-                manager is that during the install process, the ZF library will end up on the
-                include_path, and the zf.php and zf scripts will end up in a place on your system
-                that will allow you to run them without any additional setup.
+                Um es über PEAR zu installieren muss man die 3rd Party Site zfcampus.org verwenden
+                und das letzte Zend Framwork PEAR Paket empfangen. Diese Pakete werden
+                typischerweise innerhalb eines Tages nach einem offiziellen Zend Framework Release
+                erstellt. Der Vorteil der Installation über den PEAR Package Manager ist, dass die
+                ZF Bibliothek im include_path endet, und die zf.php und ZF Skripte an einem Ort im
+                eigenen System enden der es erlaubt Sie ohne zusätzliches Setup zu starten.
             </para>
 
             <programlisting language="text"><![CDATA[
@@ -56,68 +54,67 @@ pear install zfcampus/zf
 ]]></programlisting>
 
             <para>
-                That is it. After the initial install, you should be able to continue on by
-                running the zf command.  Go good way to check to see if it't there is to run
-                zf --help
+                Das ist es schon. Nachdem initialen Setup sollte man in der Lage sein weiter zu
+                machen indem das zf Kommando ausgeführt wird. Ein gute Weg um zu prüfen ob es
+                vorhanden ist, ist es zf --help auszuführen.
             </para>
-
         </sect3>
 
         <sect3 id="zend.tool.usage.cli.installation.install-by-hand">
-            <title>Installing by Hand</title>
+            <title>Installation von Hand</title>
 
             <para>
-                Installing by hand refers to the process of forcing the zf.php and Zend Framework
-                library to work together when they are placed in non-convential places, or at least,
-                in a place that your system cannot dispatch from easily (typical of programs in your
-                system PATH).
+                Die Installtion von Hand zeigt den Prozess um zf.php und die Zend Framework
+                Bibliothek dazu zu zwingen zusammen zu arbeiten wenn diese nicht auf konventionellen
+                Orten abgelegt wurden, oder zumindest, an einem Ort an dem das eigene System diese
+                nicht einfach ausführen kann (typisch für Programme im eigenen System Pfad).
             </para>
 
             <para>
-                If you are on a *nix or mac system, you can also create a link from somewhere in your
-                path to the zf.sh file.  If you do this, you do not need to worry about having
-                Zend Framework's library on your include_path, as the zf.php and zf.sh files will
-                be able to access the library relative to where they are (meaning the ./bin/ files
-                are ../library/ relative to the Zend Framework library).
+                Wenn man auf einem *nix oder Mac System ist, kann man auch einen Link von irgendwo im
+                eigenen Pfad zur zf.sh Datei erstellen. Wenn man das macht muss man sich keine
+                Gedanken darüber machen das die Zend Framework Bibliothek im eigenen include_path
+                ist, da die Dateien zf.php und zf.sh auf die Bibliothek, relativ dazu wo Sie sind,
+                zugreifen können (was bedeutet das die ./bin/ Dateien relativ zu ../library/ der
+                Zend Framework Bibliothek sind).
             </para>
 
             <para>
-                There are a number of other options available for setting up the zf.php and library
-                on your system.  These options revolve around setting specific environment variables.
-                These are described in the later section on "customizing the CLI environement".  The
-                environment variables for setting the zf.php include_path, ZF_INCLUDE_PATH and
-                ZF_INCLUDE_PATH_PREPEND, are the ones of most interest.
+                Es gibt eine Anzahl von anderen vorhandenen Optionen für das Setup von zf.php und
+                der Bibliothek im eigenen System. Diese Optionen drehen sich um das Setzen von
+                speziellen Umgebungsvariablen. Diese werden im späteren Kapitel "Die CLI Umgebung
+                anpassen" beschrieben. Die Umgebungsvariablen für das Setzen von include_path,
+                ZF_INCLUDE_PATH und ZF_INCLUDE_PATH_PREPEND für zf.php sind die interessantesten.
             </para>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.tool.usage.cli.general-purpose-commands">
-        <title>General Purpose Commands</title>
+        <title>Kommandos für generelle Zwecke</title>
 
         <sect3 id="zend.tool.usage.cli.general-purpose-commands.version">
             <title>Version</title>
 
             <para>
-                This will show the current version number of the copy of Zend Framework the zf.php tool is using.
+                Das zeigt die aktuelle Versionsnummer der Kopie vom Zend Framework welche das zf.php
+                Tool verwendet.
             </para>
 
             <programlisting language="text"><![CDATA[
 zf show version
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.tool.usage.cli.general-purpose-commands.built-in-help">
-            <title>Built-in Help</title>
+            <title>Eingebaute Hilfe</title>
 
             <para>
-                The built-in help system is the primary place where you can get up-to-date information
-                on what your system is capable of doing.  The help system is dynamic in that as providers
-                are added to your system, they are automatically dispatchable, and as such, the parameters
-                required to run them will be in the help screen.  The easiest way to retrieve the help
-                screen is the following:
+                Das eingebaute Hilfe System ist der primäre Ort von dem man up-to-date Informationen
+                darüber erhält was das eigene System in der Lage ist zu tun. Das Hilfe System ist
+                dahingehend dynamisch das Provider dem eigenen System hinzugefügt und
+                automatisch ausgeführt werden, und als solches werden die notwendigen Parameter
+                damit Sie ausgeführt werden können, im Hilfe Schirm vorhanden. Der einfachste Weg um
+                den Hilfe Schirm zu erhalten ist der folgende:
             </para>
 
             <programlisting language="text"><![CDATA[
@@ -125,11 +122,13 @@ zf --help
 ]]></programlisting>
 
             <para>
-                This will give you an overview of the various capabilities of the system.  Sometimes, there
-                are more finite commands than can be run, and to gain more information about these, you might
-                have to run a more specialized help command.  For specialized help, simply replace any of the
-                elements of the command with a "?". This will tell the help system that you want more
-                information about what commands can go in place of the question mark. For example:
+                Das gibt einen Überblick über die verschiedenen Möglichkeiten des Systems. Manchmal
+                gibt es engültigere Kommandos die ausgeführt werden können, und um mehr
+                Informationen über Sie zu erhalten muss man ein spezialisierteres Hilfe Kommando
+                ausführen. Für die spezialisierte Hilfe muss einfach eines der Elemente des
+                Kommandos mit einem "=" ersetzt werden. Das sagt dem Hilfe System das man mehr
+                Informationen darüber will welche Kommandos an Stelle des Fragezeichens stehen
+                können. Zum Beispiel:
             </para>
 
             <programlisting language="text"><![CDATA[
@@ -137,7 +136,8 @@ zf ? controller
 ]]></programlisting>
 
             <para>
-                The above means "show me all 'actions' for the provider 'controller'"; while the following:
+                Das obige bedeutet "zeig mir alle 'Aktionen' für den Provider 'controller'"; wärend
+                das folgende:
             </para>
 
             <programlisting language="text"><![CDATA[
@@ -145,44 +145,40 @@ zf show ?
 ]]></programlisting>
 
             <para>
-                means "show me all providers that support the 'show' action". This works for drilling down
-                into options as well as you can see in the following examples:
+                bedeutet "zeig mit alle Provider welche die 'show' Aktion unterstützen. Das arbeitet
+                auch wenn man in Optionen geht wie man im folgenden Beispiel sehen kann:
             </para>
 
             <programlisting language="text"><![CDATA[
-zf show version.? (show any specialties)
-zf show version ? (show any options)
+zf show version.? (zeige alle Spezialitäten)
+zf show version ? (zeige alle Optionen)
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.tool.usage.cli.general-purpose-commands.manifest">
             <title>Manifest</title>
 
             <para>
-                This will show what information is in the tooling systems manifest. This is more important
-                for provider developers than casual users of the tooling system.
+                Das zeigt welche Informationen im Tooling System Manifest sind. Das ist wichtiger
+                für Entwickler von Providers als für normale Benutzer des Tooling Systems.
             </para>
 
             <programlisting language="text"><![CDATA[
 zf show manifest
 ]]></programlisting>
-
         </sect3>
 
         <!--
         <sect3 id="zend.tool.usage.cli.general-purpose-commands.tool-configuration">
-            <title>Tool Configuration</title>
+            <title>Tool Konfiguration</title>
 
-            <para>Placeholder   need docs from @beberli </para>
-
+            <para>Platzhalter, benötigt Handbuch von @beberli</para>
         </sect3>
         -->
-
     </sect2>
 
     <sect2 id="zend.tool.usage.cli.project-specific-commands">
-        <title>Project Specific Commands</title>
+        <title>Projekt spezifische Kommandos</title>
 
         <sect3 id="zend.tool.usage.cli.project-specific-commands.project">
             <title>Project</title>

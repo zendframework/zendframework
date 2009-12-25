@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19438 -->
+<!-- EN-Revision: 19771 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta Helfer</title>
@@ -64,6 +64,12 @@
         <listitem>
             <para>
                 <command>setHttpEquiv($keyValue, $content, $modifiers)</command>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <command>setCharset($charset)</command>
             </para>
         </listitem>
     </itemizedlist>
@@ -143,6 +149,15 @@ $this->headMeta()->appendHttpEquiv('expires',
 $this->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=UTF-8')
                  ->appendHttpEquiv('Content-Language', 'en-US');
+]]></programlisting>
+
+        <para>
+            Wenn man ein HTML5 Dokument serviert, sollte man das Character Set wie folgt angeben:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Das Character Set im HTML5 setzen
+$this->headMeta()->setCharset('UTF-8'); // Sieht aus wie <meta charset="UTF-8">
 ]]></programlisting>
 
         <para>

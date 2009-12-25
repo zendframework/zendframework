@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 19766 -->
+<!-- Reviewed: no -->
+<sect1 id="learning.quickstart.create-project">
+    <title>Create Your Project</title>
+
+    <para>
+        In order to create your project, you must first download and extract Zend Framework.
+    </para>
+
+    <sect2 id="learning.quickstart.create-project.install-zf">
+        <title>Install Zend Framework</title>
+
+        <para>
+            The easiest way to get Zend Framework along with a complete PHP stack is by installing
+            <ulink url="http://www.zend.com/en/products/server-ce/downloads">Zend Server</ulink>.
+            Zend Server has native installers for Mac OSX, Windows, Fedora Core, and Ubuntu, as well
+            as a universal installation package compatible with most Linux distributions.
+        </para>
+
+        <para>
+            After you have installed Zend Server, the Framework files may be found
+            under <filename>/Applications/ZendServer/share/ZendFramework</filename> on Mac
+            OSX, <filename>C:\Program Files\Zend\ZendServer\share\ZendFramework</filename> on
+            Windows, and <filename>/usr/local/zend/share/ZendFramework</filename> on Linux.
+            The <constant>include_path</constant> will already be configured to include
+            Zend Framework.
+        </para>
+
+        <para>
+            Alternately, you can <ulink url="http://framework.zend.com/download/latest">Download the
+            latest version of Zend Framework</ulink> and extract the contents; make a note of where
+            you have done so.
+        </para>
+
+        <para>
+            Optionally, you can add the path to the <filename>library/</filename> subdirectory of
+            the archive to your <filename>php.ini</filename>'s <constant>include_path</constant>
+            setting.
+        </para>
+
+        <para>
+            That's it! Zend Framework is now installed and ready to use.
+        </para>
+    </sect2>
+
+    <sect2 id="learning.quickstart.create-project.create-project">
+        <title>Create Your Project</title>
+
+        <note>
+            <title>zf Command Line Tool</title>
+
+            <para>
+                In your Zend Framework installation is a <filename>bin/</filename> subdirectory,
+                containing the scripts <filename>zf.sh</filename> and <filename>zf.bat</filename>
+                for Unix-based and Windows-based users, respectively. Make a note of the absolute
+                path to this script.
+            </para>
+
+            <para>
+                Wherever you see references to <filename>zf.sh</filename> or
+                <filename>zf.bat</filename>, please substitute the absolute path to the script. On
+                Unix-like systems, you may want to use your shell's alias functionality:
+                <command>alias zf.sh=path/to/ZendFramework/bin/zf.sh</command>.
+            </para>
+
+            <para>
+                If you have problems setting up the <command>zf</command> command-line tool, please
+                refer to <link linkend="zend.tool.framework.clitool.setup-general">the
+                    manual</link>.
+            </para>
+        </note>
+
+        <para>
+            Open a terminal (in Windows, <command>Start -> Run</command>, and then use
+            <command>cmd</command>). Navigate to a directory where you would like to start a
+            project. Then, use the path to the appropriate script, and execute one of the following:
+        </para>
+
+        <programlisting language="shell"><![CDATA[
+# Unix:
+% zf.sh create project quickstart
+
+# DOS/Windows:
+C:> zf.bat create project quickstart
+]]></programlisting>
+
+        <para>
+            Running this command will create your basic site structure, including your initial
+            controllers and views. The tree looks like the following:
+        </para>
+
+        <programlisting language="text"><![CDATA[
+quickstart
+|-- application
+|   |-- Bootstrap.php
+|   |-- configs
+|   |   `-- application.ini
+|   |-- controllers
+|   |   |-- ErrorController.php
+|   |   `-- IndexController.php
+|   |-- models
+|   `-- views
+|       |-- helpers
+|       `-- scripts
+|           |-- error
+|           |   `-- error.phtml
+|           `-- index
+|               `-- index.phtml
+|-- library
+|-- public
+|   `-- index.php
+`-- tests
+    |-- application
+    |   `-- bootstrap.php
+    |-- library
+    |   `-- bootstrap.php
+    `-- phpunit.xml
+]]></programlisting>
+
+        <para>
+            At this point, if you haven't added Zend Framework to your
+            <constant>include_path</constant>, we recommend either copying or symlinking it into
+            your <filename>library/</filename> directory. In either case, you'll want to either
+            recursively copy or symlink the <filename>library/Zend/</filename> directory of your
+            Zend Framework installation into the <filename>library/</filename> directory of your
+            project. On unix-like systems, that would look like one of the following:
+        </para>
+
+        <programlisting language="shell"><![CDATA[
+# Symlink:
+% cd library; ln -s path/to/ZendFramework/library/Zend .
+
+# Copy:
+% cd library; cp -r path/to/ZendFramework/library/Zend .
+]]></programlisting>
+
+        <para>
+            On Windows systems, it may be easiest to do this from the Explorer.
+        </para>
+
+        <para>
+            Now that the project is created, the main artifacts to begin understanding are the
+            bootstrap, configuration, action controllers, and views.
+        </para>
+    </sect2>
+
+    <sect2 id="learning.quickstart.create-project.bootstrap">
+        <title>The Bootstrap</title>
+
+        <para>
+            Your <classname>Bootstrap</classname> class defines what resources and components to
+            initialize. By default, Zend Framework's <link linkend="zend.controller.front">Front
+                Controller</link> is initialized, and it uses the
+            <filename>application/controllers/</filename> as the default directory in which to look
+            for action controllers (more on that later). The class looks like the following:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// application/Bootstrap.php
+
+class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+{
+}
+]]></programlisting>
+
+        <para>
+            As you can see, not much is necessary to begin with.
+        </para>
+    </sect2>
+
+    <sect2 id="learning.quickstart.create-project.configuration">
+        <title>Configuration</title>
+
+        <para>
+            While Zend Framework is itself configurationless, you often need to configure your
+            application. The default configuration is placed in
+            <filename>application/configs/application.ini</filename>, and contains some basic
+            directives for setting your PHP environment (for instance, turning error reporting on
+            and off), indicating the path to your bootstrap class (as well as its class name), and
+            the path to your action controllers. It looks as follows:
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+; application/configs/application.ini
+
+[production]
+phpSettings.display_startup_errors = 0
+phpSettings.display_errors = 0
+includePaths.library = APPLICATION_PATH "/../library"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+
+[staging : production]
+
+[testing : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+
+[development : production]
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+]]></programlisting>
+
+        <para>
+            Several things about this file should be noted. First, when using INI-style
+            configuration, you can reference constants directly and expand them;
+            <constant>APPLICATION_PATH</constant> is actually a constant. Additionally note that
+            there are several sections defined: production, staging, testing, and development. The
+            latter three inherit settings from the "production" environment. This is a useful way to
+            organize configuration to ensure that appropriate settings are available in each stage
+            of application development.
+        </para>
+    </sect2>
+
+    <sect2 id="learning.quickstart.create-project.action-controllers">
+        <title>Action Controllers</title>
+
+        <para>
+            Your application's <emphasis>action controllers</emphasis> contain your application
+            workflow, and do the work of mapping your requests to the appropriate models and views.
+        </para>
+
+        <para>
+            An action controller should have one or more methods ending in "Action"; these methods
+            may then be requested via the web. By default, Zend Framework URLs follow the schema
+            <constant>/controller/action</constant>, where "controller" maps to the action
+            controller name (minus the "Controller" suffix) and "action" maps to an action method
+            (minus the "Action" suffix).
+        </para>
+
+        <para>
+            Typically, you always need an <classname>IndexController</classname>, which is a
+            fallback controller and which also serves the home page of the site, and an
+            <classname>ErrorController</classname>, which is used to indicate things such as HTTP
+            404 errors (controller or action not found) and HTTP 500 errors (application errors).
+        </para>
+
+        <para>
+            The default <classname>IndexController</classname> is as follows:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// application/controllers/IndexController.php
+
+class IndexController extends Zend_Controller_Action
+{
+
+    public function init()
+    {
+        /* Initialize action controller here */
+    }
+
+    public function indexAction()
+    {
+        // action body
+    }
+}
+]]></programlisting>
+
+        <para>
+            And the default <classname>ErrorController</classname> is as follows:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// application/controllers/ErrorController.php
+
+class ErrorController extends Zend_Controller_Action
+{
+
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+
+                // 404 error -- controller or action not found
+                $this->getResponse()->setHttpResponseCode(404);
+                $this->view->message = 'Page not found';
+                break;
+            default:
+                // application error
+                $this->getResponse()->setHttpResponseCode(500);
+                $this->view->message = 'Application error';
+                break;
+        }
+
+        $this->view->exception = $errors->exception;
+        $this->view->request   = $errors->request;
+    }
+}
+]]></programlisting>
+
+        <para>
+            You'll note that (1) the <classname>IndexController</classname> contains no real code,
+            and (2) the <classname>ErrorController</classname> makes reference to a "view" property.
+            That leads nicely into our next subject.
+        </para>
+    </sect2>
+
+    <sect2 id="learning.quickstart.create-project.views">
+        <title>Views</title>
+
+        <para>
+            Views in Zend Framework are written in plain old PHP. View scripts are placed in
+            <filename>application/views/scripts/</filename>, where they are further categorized
+            using the controller names. In our case, we have an
+            <classname>IndexController</classname> and an <classname>ErrorController</classname>,
+            and thus we have corresponding <filename>index/</filename> and
+            <filename>error/</filename> subdirectories within our view scripts directory. Within
+            these subdirectories, you will then find and create view scripts that correspond to each
+            controller action exposed; in the default case, we thus have the view scripts
+            <filename>index/index.phtml</filename> and <filename>error/error.phtml</filename>.
+        </para>
+
+        <para>
+            View scripts may contain any markup you want, and use the <code>&lt;?php</code> opening
+            tag and <code>?&gt;</code> closing tag to insert PHP directives.
+        </para>
+
+        <para>
+            The following is what we install by default for the
+            <filename>index/index.phtml</filename> view script:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<!-- application/views/scripts/index/index.phtml -->
+<style>
+
+    a:link,
+    a:visited
+    {
+        color: #0398CA;
+    }
+
+    span#zf-name
+    {
+        color: #91BE3F;
+    }
+
+    div#welcome
+    {
+        color: #FFFFFF;
+        background-image: url(http://framework.zend.com/images/bkg_header.jpg);
+        width:  600px;
+        height: 400px;
+        border: 2px solid #444444;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    div#more-information
+    {
+        background-image: url(http://framework.zend.com/images/bkg_body-bottom.gif);
+        height: 100%;
+    }
+
+</style>
+<div id="welcome">
+    <h1>Welcome to the <span id="zf-name">Zend Framework!</span><h1 />
+    <h3>This is your project's main page<h3 />
+    <div id="more-information">
+        <p>
+            <img src="http://framework.zend.com/images/PoweredBy_ZF_4LightBG.png" />
+        </p>
+
+        <p>
+            Helpful Links: <br />
+            <a href="http://framework.zend.com/">Zend Framework Website</a> |
+            <a href="http://framework.zend.com/manual/en/">Zend Framework
+                Manual</a>
+        </p>
+    </div>
+</div>
+]]></programlisting>
+
+        <para>
+            The <filename>error/error.phtml</filename> view script is slightly more interesting as
+            it uses some PHP conditionals:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+<!-- application/views/scripts/error/error.phtml -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN";
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Zend Framework Default Application</title>
+</head>
+<body>
+  <h1>An error occurred</h1>
+  <h2><?php echo $this->message ?></h2>
+
+  <?php if ('development' == $this->env): ?>
+
+  <h3>Exception information:</h3>
+  <p>
+      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+  </p>
+
+  <h3>Stack trace:</h3>
+  <pre><?php echo $this->exception->getTraceAsString() ?>
+  </pre>
+
+  <h3>Request Parameters:</h3>
+  <pre><?php echo var_export($this->request->getParams(), 1) ?>
+  </pre>
+  <?php endif ?>
+
+</body>
+</html>
+]]></programlisting>
+    </sect2>
+
+    <sect2 id="learning.quickstart.create-project.checkpoint">
+        <title>Checkpoint</title>
+
+        <para>
+            At this point, you should be able to fire up your initial Zend Framework application.
+            Create a virtual host in your web server, and point its document root to your
+            application's <filename>public/</filename> subdirectory. Make sure your host's name is
+            in your DNS or hosts file, and then point your browser to it. You should be able to see
+            a welcome page at this point.
+        </para>
+    </sect2>
+</sect1>

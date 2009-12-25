@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 19766 -->
+<!-- Reviewed: no -->
+<sect1 id="learning.lucene.intro">
+    <title>Zend_Search_Lucene Introduction</title>
+
+    <para>
+        The <classname>Zend_Search_Lucene</classname> component is intended to provide a
+        ready-for-use full-text search solution. It doesn't require any <acronym>PHP</acronym>
+        extensions<footnote><para>Though some <acronym>UTF-8</acronym> processing functionality
+                requires the <emphasis>mbstring</emphasis> extension to be turned
+                on</para></footnote> or additional software to be installed, and can be used
+        immediately after Zend Framework installation.
+    </para>
+
+    <para>
+        <classname>Zend_Search_Lucene</classname> is a pure <acronym>PHP</acronym> port of the
+        popular open source full-text search engine known as Apache Lucene. See <ulink
+            url="http://lucene.apache.org">http://lucene.apache.org/</ulink> for the details.
+    </para>
+
+    <para>
+        Information must be indexed to be available for searching.
+        <classname>Zend_Search_Lucene</classname> and Java Lucene use a document concept known as an
+        "atomic indexing item."
+    </para>
+
+    <para>
+        Each document is a set of fields: &lt;name, value&gt; pairs where name and value are
+        <acronym>UTF-8</acronym> strings<footnote><para>Binary strings are also allowed to be used
+                as field values</para></footnote>. Any subset of the document fields may be marked
+        as "indexed" to include field data in the text indexing process.
+    </para>
+
+    <para>
+        Field values may or may not be tokenized while indexing. If a field is not tokenized, then
+        the field value is stored as one term; otherwise, the current analyzer is used for
+        tokenization.
+    </para>
+
+    <para>
+        Several analyzers are provided within the <classname>Zend_Search_Lucene</classname> package.
+        The default analyzer works with <acronym>ASCII</acronym> text (since the
+        <acronym>UTF-8</acronym> analyzer needs the <emphasis>mbstring</emphasis> extension to be
+        turned on). It is case insensitive, and it skips numbers. Use other analyzers or create your
+        own analyzer if you need to change this behavior.
+    </para>
+
+    <note>
+        <title>Using analyzers during indexing and searching</title>
+
+        <para>
+            Important note! Search queries are also tokenized using the "current analyzer", so the
+            same analyzer must be set as the default during both the indexing and searching process.
+            This will guarantee that source and searched text will be transformed into terms in the
+            same way.
+        </para>
+    </note>
+
+    <para>
+        Field values are optionally stored within an index. This allows the original field data to
+        be retrieved from the index while searching. This is the only way to associate search
+        results with the original data (internal document IDs may be changed after index
+        optimization or auto-optimization).
+    </para>
+
+    <para>
+        The thing that should be remembered is that a Lucene index is not a database. It doesn't
+        provide index backup mechanisms except backup of the file system directory. It doesn't
+        provide transactional mechanisms though concurrent index update as well as concurrent update
+        and read are supported. It doesn't compare with databases in data retrieving speed.
+    </para>
+
+    <para>
+        So it's good idea:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                <emphasis>Not</emphasis> to use Lucene index as a storage since it may dramatically
+                decrease search hit retrieving performance. Store only unique document identifiers
+                (doc paths, <acronym>URL</acronym>s, database unique IDs) and associated data within
+                an index. E.g. title, annotation, category, language info, avatar. (Note: a field
+                may be included in indexing, but not stored, or stored, but not indexed).
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                To write functionality that can rebuild an index completely if it's corrupted for
+                any reason.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Individual documents in the index may have completely different sets of fields. The same
+        fields in different documents don't need to have the same attributes. E.g. a field may be
+        indexed for one document and skipped from indexing for another. The same applies for
+        storing, tokenizing, or treating field value as a binary string.
+    </para>
+</sect1>

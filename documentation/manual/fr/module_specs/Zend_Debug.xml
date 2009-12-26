@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 18834 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.debug.dumping">
     <title>Afficher des informations</title>
@@ -15,7 +15,7 @@
         <title>Exemple avec la méthode dump()</title>
 
         <programlisting language="php"><![CDATA[
-Zend_Debug::dump($var, $label=null, $echo=true);
+Zend_Debug::dump($var, $label = null, $echo = true);
 ]]></programlisting>
     </example>
 
@@ -26,24 +26,25 @@ Zend_Debug::dump($var, $label=null, $echo=true);
 
     <para>
         L'argument <varname>$label</varname> est un texte arbitraire à placer avant la sortie de
-        <methodname>Zend_Debug::dump()</methodname>. Ceci est utile lorsque vous souhaitez afficher à
-        l'écran des informations concernant plusieurs variables.
+        <methodname>Zend_Debug::dump()</methodname>. Ceci est utile lorsque vous souhaitez
+        afficher à l'écran des informations concernant plusieurs variables.
     </para>
 
     <para>
         Le booléen <varname>$echo</varname> indique s'il faut (ou non) afficher la sortie de
-        <methodname>Zend_Debug::dump()</methodname>. Si <constant>TRUE</constant>, la sortie sera affichée.
-        Quel que soit l'état de <varname>$echo</varname>, la sortie est toujours retournée.
+        <methodname>Zend_Debug::dump()</methodname>. Si <constant>TRUE</constant>, la sortie
+        sera affichée. Quel que soit l'état de <varname>$echo</varname>, la sortie est
+        toujours retournée.
     </para>
 
     <para>
         Il peut être utile de savoir que la méthode <methodname>Zend_Debug::dump()</methodname>
-        enveloppe la fonction <acronym>PHP</acronym>
-        <ulink url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>. Si le flux est
-        reconnu à destination d'un contenu Web, l'affichage de <methodname>var_dump()</methodname> est échappé
-        avec
-        <ulink url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>et est
-        enveloppé entre des balises (X)HTML <code>&lt;pre&gt; et &lt;/pre&gt;</code>.
+        enveloppe la fonction <acronym>PHP</acronym> <ulink
+            url="http://php.net/var_dump"><methodname>var_dump()</methodname></ulink>. Si le flux
+        est reconnu à destination d'un contenu Web, l'affichage de
+        <methodname>var_dump()</methodname> est échappé avec <ulink
+            url="http://php.net/htmlspecialchars"><methodname>htmlspecialchars()</methodname></ulink>
+        et est enveloppé entre des balises (X)HTML <command>&lt;pre&gt; et &lt;/pre&gt;</command>.
     </para>
 
     <tip>
@@ -56,10 +57,11 @@ Zend_Debug::dump($var, $label=null, $echo=true);
         </para>
 
         <para>
-            Vous pouvez aussi considérer le composant
-            <link linkend="zend.log.overview">Zend_Log</link>si vous souhaitez rendre permanent du
-            code de débogage. Par exemple, vous pouvez utiliser le niveau de log <constant>DEBUG</constant>
-            et le flux d'écriture Stream du log pour afficher la chaîne retournée par
+            Vous pouvez aussi considérer le composant <link
+                linkend="zend.log.overview">Zend_Log</link>si vous souhaitez rendre permanent du
+            code de débogage. Par exemple, vous pouvez utiliser le niveau de log
+            <constant>DEBUG</constant> et le <link linkend="zend.log.writers.stream">flux
+            d'écriture Stream du log</link> pour afficher la chaîne retournée par
             <methodname>Zend_Debug::dump()</methodname>.
         </para>
     </tip>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19854 -->
+<!-- EN-Revision: 19883 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.cachemanager">
-    <title>Zend_Application_Resource_CacheManager</title>
+    <title>Zend_Application_Resource_Cachemanager</title>
 
     <para>
-        <classname>Zend_Application_Resource_CacheManager</classname> peut être utilisé
+        <classname>Zend_Application_Resource_Cachemanager</classname> peut être utilisé
         pour configurer un jeu d'ensemble d'options <classname>Zend_Cache</classname>
         permettant de paramétrer des caches à chargement tardifs ("lazy loading") avec
         <classname>Zend_Cache_Manager</classname>
@@ -23,17 +23,17 @@
         <para>
             Ci-dessous vous trouverez un extrait de fichier <acronym>INI</acronym> montrant
             comment <classname>Zend_Cache_Manager</classname> peut être configuré. Le
-            format est le préfixe de la ressource CacheManager ("resources.cacheManager")
-            suivi par le nom d'un modèle (par exemple resources.cacheManager.database) et
+            format est le préfixe de la ressource Cachemanager ("resources.cachemanager")
+            suivi par le nom d'un modèle (par exemple resources.cachemanager.database) et
             finalement suivi par une option habituelle de <classname>Zend_Cache</classname>.
         </para>
 
         <programlisting language="ini"><![CDATA[
-resources.cacheManager.database.frontend.name = Core
-resources.cacheManager.database.frontend.options.lifetime = 7200
-resources.cacheManager.database.frontend.options.automatic_serialization = true
-resources.cacheManager.database.backend.name = File
-resources.cacheManager.database.backend.options.cache_dir = "/path/to/cache"
+resources.cachemanager.database.frontend.name = Core
+resources.cachemanager.database.frontend.options.lifetime = 7200
+resources.cachemanager.database.frontend.options.automatic_serialization = true
+resources.cachemanager.database.backend.name = File
+resources.cachemanager.database.backend.options.cache_dir = "/path/to/cache"
 ]]></programlisting>
 
         <para>

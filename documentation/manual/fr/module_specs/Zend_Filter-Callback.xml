@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17154 -->
+<!-- EN-Revision: 18081 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.callback">
     <title>Callback</title>
     <para>
         Ce filtre vous permet d'utiliser votre propre fonction en tant que filtre de
-        <classname>Zend_Filter</classname>. Nul besoin de créer un filtre si une fonction ou méthode
-        fait déja le travail.
+        <classname>Zend_Filter</classname>. Nul besoin de créer un filtre si une fonction ou
+        méthode fait déja le travail.
     </para>
 
     <para>
@@ -21,8 +21,8 @@ print $filter->filter('Hello!');
 ]]></programlisting>
 
     <para>
-        C'est très simple de passer une fonction à appliquer comme filtre. Dans le cas de méthodes de classes,
-        passez un tableau comme callback.
+        C'est très simple de passer une fonction à appliquer comme filtre. Dans le cas de méthodes
+        de classes, passez un tableau comme callback.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -38,8 +38,9 @@ print $filter->filter('Hello!');
 ]]></programlisting>
 
     <para>
-        Pour récupérer la fonction de filtrage actuelle, utilisez <methodname>getCallback()</methodname> et pour en
-        affecter une nouvelle, utilisez <methodname>setCallback()</methodname>.
+        Pour récupérer la fonction de filtrage actuelle, utilisez
+        <methodname>getCallback()</methodname> et pour en affecter une nouvelle, utilisez
+        <methodname>setCallback()</methodname>.
     </para>
 
     <para>
@@ -49,8 +50,10 @@ print $filter->filter('Hello!');
 
     <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Callback(
-    'MyMethod',
-    array('key' => 'param1', 'key2' => 'param2')
+    array(
+        'callback' => 'MyMethod',
+        'options'  => array('key' => 'param1', 'key2' => 'param2')
+    )
 );
 $filter->filter(array('value' => 'Hello'));
 ]]></programlisting>

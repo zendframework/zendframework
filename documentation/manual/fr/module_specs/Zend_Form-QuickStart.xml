@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 19873 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Zend_Form démarrage rapide</title>
@@ -391,6 +391,15 @@ $values = $form->getValues();
 
         <programlisting language="php"><![CDATA[
 $unfiltered = $form->getUnfilteredValues();
+]]></programlisting>
+
+        <para>
+            Si d'un autre côté, vous ne souhaitez que les valeurs filtrées valides d'un formulaire
+            partiellement valide, vous pouvez appeler&#160;:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$values = $form->getValidValues($_POST);
 ]]></programlisting>
     </sect2>
 

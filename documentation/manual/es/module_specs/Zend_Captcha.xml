@@ -29,7 +29,7 @@
         intenta proveer una amalgama de backends
         que pueden ser utilizados por separado o en
         conjunción con
-        <methodname>Zend_Form</methodname>
+        <classname>Zend_Form</classname>
         .
     </para>
 </sect1>

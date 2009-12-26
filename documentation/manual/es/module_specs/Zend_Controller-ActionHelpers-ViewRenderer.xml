@@ -84,12 +84,12 @@
                 está habilitado por
                 defecto. Puede desactivarlo vía parámetro del front controller
                 <emphasis>noViewRenderer</emphasis>
-                (<command>$front->setParam('noViewRenderer',true)</command>) 
-				o eliminando al ayudante del stack de ayudantes
+                (<command>$front->setParam('noViewRenderer',true)</command>)
+                o eliminando al ayudante del stack de ayudantes
                 (
-				<methodname>
-				Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')
-				</methodname>
+                <methodname>
+                Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')
+                </methodname>
                 ).
             </para>
 
@@ -803,8 +803,8 @@ $viewRenderer =
                     <varname>$name</varname>
                     o
                     <varname>$noController</varname>
-                    se han pasado, y si es así, establece los flags apropiados 
-					(responseSegment y  noController, respectivamente) en
+                    se han pasado, y si es así, establece los flags apropiados
+                    (responseSegment y  noController, respectivamente) en
                     <emphasis>ViewRenderer</emphasis>
                     . A continuación, pasa el argumento
                     <varname>$action</varname>

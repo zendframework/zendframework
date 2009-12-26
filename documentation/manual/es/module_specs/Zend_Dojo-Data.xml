@@ -422,7 +422,7 @@ $json = (string) $data; // conversión a string == conversión a JSON
                         los nuevos items tiene un
                         identificador concordante a un
                         identificador ya existente en la colección.
-                        <methodname>$items</methodname>
+                        <varname>$items</varname>
                         debe ser un array o
                         un objeto
                         <methodname>Traversable</methodname>

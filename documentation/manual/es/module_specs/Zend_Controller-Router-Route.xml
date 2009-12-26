@@ -278,7 +278,7 @@ $router->addRoute('archive', $route);
             <listitem>
                 <para>
                     Ponerlo en el registro con la clave
-                    <methodname>Zend_Translate</methodname>
+                    <classname>Zend_Translate</classname>
                     .
                 </para>
             </listitem>

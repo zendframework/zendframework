@@ -867,7 +867,7 @@ $contextSwitch->initContext();
                         $callbacks)</methodname>
                     : establece varios callbacks
                     para un determinado contexto.
-                    <methodname>$callbacks</methodname>
+                    <varname>$callbacks</varname>
                     deben ser pares de
                     diparadores/callbacks. En realidad, la mayor cantidad de
                     callbacks que pueden ser registrados son dos, uno para la

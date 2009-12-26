@@ -738,7 +738,7 @@ $form->setElementFilters(array('StringTrim'));
 
         <para>
             La clase base para los grupos de visualización es
-            <methodname>Zend_Form_DisplayGroup</methodname>
+            <classname>Zend_Form_DisplayGroup</classname>
             . Mientras puede
             ser instanciado directamente, es mejor usar el método
             <methodname>addDisplayGroup()</methodname>
@@ -751,7 +751,7 @@ $form->setElementFilters(array('StringTrim'));
             visualización como segundo argumento. Opcionalmente, se puede pasar
             en una array de
             opciones o en un objeto
-            <methodname>Zend_Config</methodname>
+            <classname>Zend_Config</classname>
             como tercer argumento.
         </para>
 
@@ -802,7 +802,7 @@ $form->addDisplayGroup(
                 Esta opción puede ser una mezcla con otras opciones pasadas,
                 ambas como opciones de
                 array o en el objeto
-                <methodname>Zend_Config</methodname>
+                <classname>Zend_Config</classname>
             </para>
         </note>
 
@@ -874,7 +874,7 @@ $form->setDisplayGroupDecorators(array(
                 <classname>Zend_Form</classname>
                 utiliza la
                 clase
-                <methodname>Zend_Form_DisplayGroup</methodname>
+                <classname>Zend_Form_DisplayGroup</classname>
                 para
                 grupos de visualización. Puede ocurrir que necesite extender
                 esta clase con el
@@ -900,7 +900,7 @@ $form->addDisplayGroup(
                 <classname>Zend_Form</classname>
                 intentará cargarla a través
                 de
-                <methodname>Zend_Loader</methodname>
+                <classname>Zend_Loader</classname>
                 .
             </para>
 
@@ -1007,7 +1007,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             <title>Métodos Zend_Form_DisplayGroup</title>
 
             <para>
-                <methodname>Zend_Form_DisplayGroup</methodname>
+                <classname>Zend_Form_DisplayGroup</classname>
                 tiene los
                 siguientes métodos, agrupados por tipo:
             </para>
@@ -1372,7 +1372,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             Un sub formulario puede ser un objeto
             <classname>Zend_Form</classname>
             o mas originalmente, un objeto
-            <methodname>Zend_Form_SubForm</methodname>
+            <classname>Zend_Form_SubForm</classname>
             . éste último contiene
             decoradores apropiados para la inclusión en un formulario extenso
             (i.e., no se generan adicionales formulario etiquetas
@@ -1694,7 +1694,7 @@ $form = new Zend_Form(array('disableLoadDefaultDecorators' => true));
                 Esta opción puede ser combinada con alguna otra opción que
                 usted pueda pasar, tanto
                 como opciones de array o en un objeto
-                <methodname>Zend_Config</methodname>
+                <classname>Zend_Config</classname>
             </para>
         </note>
 
@@ -2670,7 +2670,7 @@ $validValues = $form->getValidValues($_POST);
             <methodname>setConfig()</methodname>
             (o pasando opciones o un
             objeto
-            <methodname>Zend_Config</methodname>
+            <classname>Zend_Config</classname>
             al constructor). Usando
             estos métodos, se pueden especificar elementos formulario, grupos
             de

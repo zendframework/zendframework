@@ -593,7 +593,7 @@ Zend_Controller_Front::run('../application/controllers');
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>useDefaultControllerAlways</methodname>
+                    <emphasis>useDefaultControllerAlways</emphasis>
                     se usa para indicar a
                     <link linkend="zend.controller.dispatcher">el dispatcher</link>
                     que utilice el
@@ -615,7 +615,7 @@ Zend_Controller_Front::run('../application/controllers');
 
             <listitem>
                 <para>
-                    <methodname>disableOutputBuffering</methodname>
+                    <emphasis>disableOutputBuffering</emphasis>
                     se usa para indicarle a
                     <link linkend="zend.controller.dispatcher">el dispatcher</link>
                     que no debe

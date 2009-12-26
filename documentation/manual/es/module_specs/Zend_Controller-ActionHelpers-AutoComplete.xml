@@ -166,7 +166,7 @@ class FooController extends Zend_Controller_Action
 
     <para>
         Actualmente,
-        <methodname>AutoComplete</methodname>
+        <emphasis>AutoComplete</emphasis>
         soporta las bibliotecas
         <acronym>AJAX</acronym>
         de

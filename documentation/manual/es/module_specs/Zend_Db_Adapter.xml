@@ -25,9 +25,7 @@
     </para>
 
     <para>
-        Las clases
-        <methodname>Adapters</methodname>
-        de
+        Las clases Adapters de
         <classname>Zend_Db</classname>
         crean un puente entre las extensiones de base de
         datos de
@@ -521,7 +519,7 @@ $db = Zend_Db::factory($config->database);
                 </title>
                 <para>
                     Usted puede pasar esta opción específica por la constante
-                    <classname>Zend_Db::CASE_FOLDING</classname>
+                    <constant>Zend_Db::CASE_FOLDING</constant>
                     . Este corresponde al atributo
                     <constant>ATTR_CASE</constant>
                     en los drivers de base de datos
@@ -529,11 +527,11 @@ $db = Zend_Db::factory($config->database);
                     e IBM DB2,
                     ajustando la sensibilidad de las claves tipo cadena en los resultados
                     de consultas. La opción toma los valores
-                    <classname>Zend_Db::CASE_NATURAL</classname>
+                    <constant>Zend_Db::CASE_NATURAL</constant>
                     (el predeterminado),
-                    <classname>Zend_Db::CASE_UPPER</classname>
+                    <constant>Zend_Db::CASE_UPPER</constant>
                     , y
-                    <classname>Zend_Db::CASE_LOWER</classname>
+                    <constant>Zend_Db::CASE_LOWER</constant>
                     .
                 </para>
                 <programlisting language="php"><![CDATA[
@@ -559,7 +557,7 @@ $db = Zend_Db::factory('Db2', $params);
                 </title>
                 <para>
                     Usted puede especificar esta opción por la constante
-                    <methodname>Zend_Db::AUTO_QUOTE_IDENTIFIERS</methodname>
+                    <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS</constant>
                     . Si el valor es
                     <constant>TRUE</constant>
                     (el predeterminado), los identificadores como nombres de tabla,
@@ -938,7 +936,7 @@ $result = $db->fetchAll($sql, 2);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_ASSOC</emphasis>
+                        <constant>Zend_Db::FETCH_ASSOC</constant>
                         :
                         return data in an array of associative arrays.
                         The array keys are column
@@ -978,7 +976,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_NUM</emphasis>
+                        <constant>Zend_Db::FETCH_NUM</constant>
                         :
                         return data in an array of arrays. The arrays are
                         indexed by integers,
@@ -989,7 +987,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_BOTH</emphasis>
+                        <constant>Zend_Db::FETCH_BOTH</constant>
                         :
                         return data in an array of arrays. The array keys are
                         both strings as used
@@ -1004,7 +1002,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_COLUMN</emphasis>
+                        <constant>Zend_Db::FETCH_COLUMN</constant>
                         :
                         return data in an array of values. The value in each array
                         is the value
@@ -1015,7 +1013,7 @@ $result = $db->fetchAll($sql, 2);
                 </listitem>
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_OBJ</emphasis>
+                        <constant>Zend_Db::FETCH_OBJ</constant>
                         :
                         return data in an array of objects. The default class
                         is the

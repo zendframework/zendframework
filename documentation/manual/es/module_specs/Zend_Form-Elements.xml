@@ -248,7 +248,7 @@ $form->addElementPrefixPath('My_Decorator', 'My/Decorator/', 'decorator');
             de la cadena) no regrese un positivo
             falso. Estas operaciones pueden
             realizarse usando
-            <methodname>Zend_Filter</methodname>
+            <classname>Zend_Filter</classname>
             , y
             <classname>Zend_Form_Element</classname>
             que soportan cadenas de
@@ -646,12 +646,12 @@ if ($element->isValid($value)) {
                 <methodname>Zend_Form_Element::isValid()</methodname>
                 > soporta
                 un argumento adicional,
-                <methodname>$context</methodname>
+                <varname>$context</varname>
                 .
                 <methodname>Zend_Form::isValid()</methodname>
                 pasa todo el
                 conjunto de datos procesados a
-                <methodname>$context</methodname>
+                <varname>$context</varname>
                 cuando valida un formulario, y
                 <methodname>Zend_Form_Element::isValid()</methodname>
                 >, a su
@@ -1099,7 +1099,7 @@ $messages = $element->getMessages();
                     <emphasis>Errors</emphasis>
                     : añade mensajes de error al
                     elemento usando
-                    <methodname>Zend_View_Helper_FormErrors</methodname>
+                    <classname>Zend_View_Helper_FormErrors</classname>
                     . Si
                     no está presente, no se añade nada.
                 </para>
@@ -1129,7 +1129,7 @@ $messages = $element->getMessages();
                     <emphasis>Label</emphasis>
                     : añade al comienzo una etiqueta
                     al elemento usando
-                    <methodname>Zend_View_Helper_FormLabel</methodname>,
+                    <classname>Zend_View_Helper_FormLabel</classname>,
                     y
                     envolviéndola en una etiqueta &lt;dt&gt;. Si ninguna
                     etiqueta es provista, solo
@@ -1159,7 +1159,7 @@ $element = new Zend_Form_Element('foo',
                 Esta opción puede ser combinada junto con cualquier otra
                 opción que pase, ya sea como
                 un array de opciones o en un objeto
-                <methodname>Zend_Config</methodname>
+                <classname>Zend_Config</classname>
                 .
             </para>
         </note>
@@ -1969,7 +1969,7 @@ $element->class = 'text;
             <classname>Zend_Form_Element</classname>
             acepta
             tanto una matriz de opciones como un objeto
-            <methodname>Zend_Config</methodname>
+            <classname>Zend_Config</classname>
             conteniendo opciones, y
             esto puede configurarse usando
             <methodname>setOptions()</methodname>

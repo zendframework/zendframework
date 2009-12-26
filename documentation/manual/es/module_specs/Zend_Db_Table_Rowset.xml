@@ -431,7 +431,7 @@ $row->save();
             <classname>Zend_Db_Table_Rowset_Abstract</classname>
             . Specify the custom
             Rowset class by name either in the
-            <methodname>$_rowsetClass</methodname>
+            <varname>$_rowsetClass</varname>
             protected member of a Table class, or in the array argument of the
             constructor of a Table
             object.

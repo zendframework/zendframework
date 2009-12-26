@@ -19,7 +19,7 @@
     </para>
     <para>
         Para los propósitos de esta documentación:
-	 </para>	
+     </para>
         <itemizedlist>
             <listitem>
                 <para>
@@ -38,7 +38,7 @@
                 </para>
             </listitem>
         </itemizedlist>
-		<para>
+        <para>
         En términos generales,
         <emphasis> Los roles solicitan
             acceso a los recursos </emphasis>
@@ -445,14 +445,13 @@ $acl->addRole(new Zend_Acl_Role('administrador'));
             porque los recursos
             y roles heredan reglas que están definidas en
             sus padres.
-			
-					    <note>
-        <para>In general, <classname>Zend_Acl</classname> obeys a given rule if and only if a more
-        specific rule does not apply.
-    </para>
-</note>
         </para>
 
+		        <note>
+            <para>In general, <classname>Zend_Acl</classname> obeys a given rule if and only if a more
+                specific rule does not apply.
+            </para>
+        </note>
 
         <para>Consecuentemente, podemos definir un grupo razonablemente
             complejo de reglas con un
@@ -479,7 +478,7 @@ $acl->allow($rolInvitado, null, 'ver');
 $acl->allow('invitado', null, 'ver');
 //*/
 
-// Personal hereda el privilegio de ver de invitado, 
+// Personal hereda el privilegio de ver de invitado,
 // pero también necesita privilegios adicionales
 $acl->allow('personal', null, array('editar', 'enviar', 'revisar'));
 

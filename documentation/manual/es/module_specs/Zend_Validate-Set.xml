@@ -222,12 +222,12 @@ if ($validator->isValid($iban)) {
             Devuelve
             <constant>TRUE</constant>
             si y sólo si
-            <methodname>$valor</methodname>
+            <varname>$valor</varname>
             se
             encuentra en un array, y si la opción es estricta entonces también verificará el tipo
             de
             dato de
-            <methodname>$valor</methodname>
+            <varname>$valor</varname>
             .
         </para>
     </sect2>

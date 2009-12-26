@@ -342,46 +342,47 @@ $pdfPage->setFont($font, 36);
             :
             <itemizedlist>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_COURIER</para>
+                    <para>
+					<constant>Zend_Pdf_Font::FONT_COURIER</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_COURIER_BOLD</para>
+                    <para><constant>Zend_Pdf_Font::FONT_COURIER_BOLD</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_COURIER_ITALIC</para>
+                    <para><constant>Zend_Pdf_Font::FONT_COURIER_ITALIC</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_COURIER_BOLD_ITALIC</para>
+                    <para><constant>Zend_Pdf_Font::FONT_COURIER_BOLD_ITALIC</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_TIMES</para>
+                    <para><constant>Zend_Pdf_Font::FONT_TIMES</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_TIMES_BOLD</para>
+                    <para><constant>Zend_Pdf_Font::FONT_TIMES_BOLD</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_TIMES_ITALIC</para>
+                    <para><constant>Zend_Pdf_Font::FONT_TIMES_ITALIC</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_TIMES_BOLD_ITALIC</para>
+                    <para><constant>Zend_Pdf_Font::FONT_TIMES_BOLD_ITALIC</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_HELVETICA</para>
+                    <para><constant>Zend_Pdf_Font::FONT_HELVETICA</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_HELVETICA_BOLD</para>
+                    <para><constant>Zend_Pdf_Font::FONT_HELVETICA_BOLD</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_HELVETICA_ITALIC</para>
+                    <para><constant>Zend_Pdf_Font::FONT_HELVETICA_ITALIC</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_HELVETICA_BOLD_ITALIC</para>
+                    <para><constant>Zend_Pdf_Font::FONT_HELVETICA_BOLD_ITALIC</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_SYMBOL</para>
+                    <para><constant>Zend_Pdf_Font::FONT_SYMBOL</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Font::FONT_ZAPFDINGBATS</para>
+                    <para><constant>Zend_Pdf_Font::FONT_ZAPFDINGBATS</constant></para>
                 </listitem>
             </itemizedlist>
         </para>
@@ -812,10 +813,10 @@ public function setLineDashingPattern($pattern, $phase = 0);
 
         <itemizedlist>
             <listitem>
-                <para>Zend_Pdf_Page::SHAPE_DRAW_STROKE - forma del trazo</para>
+                <para><constant>Zend_Pdf_Page::SHAPE_DRAW_STROKE</constant> - forma del trazo</para>
             </listitem>
             <listitem>
-                <para>Zend_Pdf_Page::SHAPE_DRAW_FILL - sólo llenar la
+                <para><constant>Zend_Pdf_Page::SHAPE_DRAW_FILL</constant> - sólo llenar la
                     forma</para>
             </listitem>
             <listitem>

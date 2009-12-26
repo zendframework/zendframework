@@ -205,8 +205,7 @@ date_default_timezone_set('Europe/Berlin');
                     ilimitado, con la ayuda de la extensión BCMath. Si BCMath no
                     está disponible, Zend_Date tendrá una funcionalidad de
                     timestamps reducida al
-                    rango del tipo
-                    <methodname>float</methodname>
+                    rango del tipo float
                     soportado por su
                     servidor. El tamaño de un float es dependiente de la
                     plataforma,

@@ -167,7 +167,7 @@
             ,
             <classname>Zend_Form_Element</classname>
             ,
-            <methodname>Zend_Form_DisplayGroup</methodname>
+            <classname>Zend_Form_DisplayGroup</classname>
             , y todas las
             clases derivan de ellas. El método
             <methodname>setElement()</methodname>

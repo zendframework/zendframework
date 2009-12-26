@@ -264,7 +264,7 @@ $router->addRoute('user',
 
             <para>
                 Que resultaría en la href:
-                <methodname>user/martel</methodname>
+                <filename>user/martel</filename>
                 .
             </para>
         </note>
@@ -341,9 +341,9 @@ $router->addRoute('user',
                 <classname>Zend_Controller_Request_Http</classname>
                 mediante los
                 métodos
-                <methodname>setControllerKey</methodname>
+                <methodname>setControllerKey()</methodname>
                 y
-                <methodname>setActionKey</methodname>
+                <methodname>setActionKey()</methodname>
                 .
             </para>
         </note>
@@ -360,7 +360,7 @@ $router->addRoute('user',
             <acronym>URI</acronym>
             s
             en la forma de
-            <methodname>controller/action</methodname>
+            <filename>controller/action</filename>
             .
             Además, se puede especificar un nombre de módulo como primer
             elemento del path,
@@ -497,7 +497,7 @@ $request->setBaseUrl('/~user/application-root/');
             Puede establecer los parámetros globales en un router que se
             proporcionan automáticamente
             a una ruta cuando se ensamblasn mediante
-            <methodname>setGlobalParam</methodname>
+            <methodname>setGlobalParam()</methodname>
             . Si se establece un parámetro global
             pero también se lo entrega directamente al método
             de ensamblaje,

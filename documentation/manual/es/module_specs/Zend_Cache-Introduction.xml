@@ -51,7 +51,7 @@
             <methodname>Zend_Cache::factory()</methodname>
             ejemplifica objetos correctos y los une. En este primer
             ejemplo, usaremos el frontend
-            <methodname>Core</methodname>
+            <emphasis>Core</emphasis>
             junto con el backend
             <emphasis>File</emphasis>
             .

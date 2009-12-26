@@ -43,10 +43,10 @@
             través de su método estático
             <methodname>getInstance()</methodname>
             . Esto significa que usar el operador
-            <methodname>new</methodname>
+            <emphasis>new</emphasis>
             y
             la keyword
-            <methodname>clone</methodname>
+            <emphasis>clone</emphasis>
             no va a funcionar con la
             clase
             <classname>Zend_Auth</classname>
@@ -184,6 +184,8 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             operaciones "frente al usuario" que son comunes a los
             resultados de adaptadores
             Zend_Auth:
+        </para>
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -238,7 +240,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
                     </para>
                 </listitem>
             </itemizedlist>
-        </para>
+
 
         <para>El desarrollador podría desear ramificar basado en el tipo de
             resultado de la
@@ -628,7 +630,7 @@ Zend_Auth::getInstance()->clearIdentity();
             . Los detalles
             específicos del adaptador son discutidos en la documentación de cada
             adaptador. El siguiente ejemplo utiliza directamente
-            <methodname>MyAuthAdapter</methodname>
+            <classname>MyAuthAdapter</classname>
             :
         </para>
 

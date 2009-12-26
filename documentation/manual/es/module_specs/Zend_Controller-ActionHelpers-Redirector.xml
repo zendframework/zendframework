@@ -174,9 +174,8 @@
                     <methodname>gotoSimple()</methodname>
                     usa
                     <methodname>setGotoSimple()</methodname>
-                    (
-                    <methodname>_forward()-tipo API</methodname>
-                    ) para
+                    (<methodname>_forward()</methodname>-tipo <acronym>API</acronym>)
+                    para
                     construir una
                     <acronym>URL</acronym>
                     y realizar un
@@ -190,7 +189,7 @@
                     usa
                     <methodname>setGotoRoute()</methodname>
                     (
-                    <methodname>route-assembly</methodname>
+                    <emphasis>route-assembly</emphasis>
                     ) para construir
                     una
                     <acronym>URL</acronym>

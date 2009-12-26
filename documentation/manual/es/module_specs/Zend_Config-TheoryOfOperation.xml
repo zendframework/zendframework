@@ -34,7 +34,7 @@
         implementa las interfaces
         <emphasis>Countable</emphasis>
         e
-        <methodname>Iterator</methodname>
+        <emphasis>Iterator</emphasis>
         para facilitar el aceso sencillo a los datos de configuración. Así, uno
         puede usar la función
         <ulink url="http://php.net/count">

@@ -95,7 +95,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
         <para>
             El argumento puede ser un array asociativo conteniendo algunas o
             todas las claves '
-            <methodname>enabled</methodname>
+            <property>enabled</property>
             ',
             '
             <property>instance</property>
@@ -135,7 +135,7 @@ $db = Zend_Db::factory('PDO_MYSQL', $params);
 
         <para>
             Finalmente, el argumento puede ser un objeto de tipo
-            <methodname>Zend_Config</methodname>
+            <classname>Zend_Config</classname>
             conteniendo las
             propiedades, que son tratadas como las claves de array descritas
             recién.
@@ -257,7 +257,7 @@ $profiler = $db->getProfiler();
             individuales de
             <methodname>getQueryProfiles()</methodname>
             son
-            <methodname>Zend_Db_Profiler_Query</methodname>
+            <classname>Zend_Db_Profiler_Query</classname>
             objetos, que
             proporcionan la capacidad para inspeccionar cada una de las
             consultas:

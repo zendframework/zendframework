@@ -52,7 +52,7 @@
             en el sitio web de Zend Framework .
             Puede utilizarlo para probar o explorar los
             componentes
-            <methodname>Zend_XmlRpc</methodname>
+            <classname>Zend_XmlRpc</classname>
             .
         </para>
 
@@ -117,7 +117,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             para el método repoto puede contener tipos nativos
             <acronym>PHP</acronym>
             s, objetos
-            <methodname>Zend_XmlRpc_Value</methodname>
+            <classname>Zend_XmlRpc_Value</classname>
             , o una combinación
             de estos.
         </para>
@@ -157,7 +157,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
             de
             <acronym>XML-RPC</acronym>
             (uno de los objetos
-            <methodname>Zend_XmlRpc_Value</methodname>
+            <classname>Zend_XmlRpc_Value</classname>
             ).
         </para>
 
@@ -719,9 +719,9 @@ try {
                 <methodname>call()</methodname>
                 es usado
                 para realizar la petición,
-                <methodname>Zend_XmlRpc_Client_FaultException</methodname>
+                <classname>Zend_XmlRpc_Client_FaultException</classname>
                 será lanzado como error. Un objeto
-                <methodname>Zend_XmlRpc_Response</methodname>
+                <classname>Zend_XmlRpc_Response</classname>
                 conteniendo el
                 error estará disponible llamando a
                 <methodname>getLastResponse()</methodname>
@@ -735,12 +735,12 @@ try {
                 usado para realizar una petición, no lanzará una excepción. En
                 vez de eso,
                 devolverá un objeto
-                <methodname>Zend_XmlRpc_Response</methodname>
+                <classname>Zend_XmlRpc_Response</classname>
                 que contendrá
                 el error. Esto puede comprobarse con
                 <methodname>isFault()</methodname>
                 método instancia de
-                <methodname>Zend_XmlRpc_Response</methodname>
+                <classname>Zend_XmlRpc_Response</classname>
                 .
             </para>
         </sect3>

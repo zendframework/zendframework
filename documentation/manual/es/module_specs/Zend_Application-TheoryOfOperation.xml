@@ -229,7 +229,7 @@ interface Zend_Application_Bootstrap_Bootstrapper
                 recursos de clase.
                 Cualquier método protegido cuyo nombre
                 comience con un prefijo
-                <methodname>_init</methodname>
+                <emphasis>_init</emphasis>
                 será considerado
                 un método de recurso.
             </para>

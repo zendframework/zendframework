@@ -167,7 +167,7 @@
                         </entry>
                         <entry>
                             Si, cuando
-                            <methodname>accept_schemes</methodname>
+                            <property>accept_schemes</property>
                             contiene
                             <emphasis>'digest'</emphasis>
                         </entry>
@@ -191,7 +191,7 @@
                         </entry>
                         <entry>
                             Si, cuando
-                            <methodname>accept_schemes</methodname>
+                            <property>accept_schemes</property>
                             contiene
                             <emphasis>'digest'</emphasis>
                         </entry>

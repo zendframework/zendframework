@@ -175,7 +175,7 @@ Zend_Loader::loadClass('Container_Tree',
             Si el archivo no es encontrado o la clase no existe después de la carga,
             <methodname>Zend_Loader::loadClass()</methodname>
             lanza una
-            <methodname>Zend_Exception</methodname>
+            <classname>Zend_Exception</classname>
             .
         </para>
 
@@ -262,7 +262,7 @@ if (Zend_Loader::isReadable($filename)) {
             , entonces el método
             <methodname>registerAutoload()</methodname>
             lanza una
-            <methodname>Zend_Exception</methodname>
+            <classname>Zend_Exception</classname>
             .
         </para>
 

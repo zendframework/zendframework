@@ -49,7 +49,7 @@
                 <emphasis>no</emphasis>
                 namespaced).
                 Como de 1.5.0, ahora puede hacerlo especificando el
-                <methodname>prefixDefaultModule</methodname>
+                <emphasis>prefixDefaultModule</emphasis>
                 como
                 <constant>TRUE</constant>
                 tanto en el

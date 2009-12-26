@@ -388,7 +388,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     <methodname>removeLayer($path)</methodname>
                     : eliminar la capa que concuerde
                     con
-                    <methodname>$path</methodname>
+                    <varname>$path</varname>
                     de la lista de capas registradas
                     (construcción personalizada).
                 </para>
@@ -398,9 +398,9 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     <methodname>setCdnBase($url)</methodname>
                     : establecer la URL base para un CDN;
                     típicamente, una de las
-                    <classname>Zend_Dojo::CDN_BASE_AOL</classname>
+                    <constant>Zend_Dojo::CDN_BASE_AOL</constant>
                     o
-                    <classname>Zend_Dojo::CDN_BASE_GOOGLE</classname>
+                    <constant>Zend_Dojo::CDN_BASE_GOOGLE</constant>
                     , pero sólo necesita ser el
                     string del URL antes del número de versión.
                 </para>

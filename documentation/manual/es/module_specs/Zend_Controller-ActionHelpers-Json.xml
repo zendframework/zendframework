@@ -127,7 +127,7 @@ $this->_helper->json($data, true);
             Este array puede contener
             una variedad de opciones, incluida la
             opción
-            <methodname>keepLayouts</methodname>
+            <emphasis>keepLayouts</emphasis>
             :
         </para>
 
@@ -145,13 +145,13 @@ $this->_helper->json($data, array('keepLayouts' => true);
             de expresiones nativas de
             <acronym>JSON</acronym>
             utilizando objetos
-            <methodname>Zend_Json_Expr</methodname>
+            <classname>Zend_Json_Expr</classname>
             . Esta opción está desactivada por
             defecto. Para activar esta opción, pase un valor
             booleano
             <constant>TRUE</constant>
             a la opción
-            <methodname>enableJsonExprFinder</methodname>
+            <emphasis>enableJsonExprFinder</emphasis>
             :
         </para>
 

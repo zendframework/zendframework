@@ -350,7 +350,7 @@ $front->setRequest($request);
                 , base
                 <acronym>URL</acronym>
                 (rewrite base) should be set to
-                <methodname>/projects/myapp</methodname>
+                <filename>/projects/myapp</filename>
                 . This string will
                 then be stripped from the beginning of the path before
                 calculating

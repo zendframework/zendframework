@@ -37,7 +37,7 @@ if ($validatorChain->isValid($username)) {
     <para>
         Los validadores se ejecutan en el orden en que se agregaron
         a
-        <methodname>Zend_Validate</methodname>
+        <classname>Zend_Validate</classname>
         . En el ejemplo anterior, el
         nombre de usuario, primero se comprueba que su longitud esté
         entre 6 y

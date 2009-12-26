@@ -7,7 +7,7 @@
     <sect2 id="zend.controller.quickstart.introduction">
         <title>Introducción</title>
         <para>
-            <methodname>Zend_Controller</methodname>
+            <classname>Zend_Controller</classname>
             es el corazón del sistema de
             <acronym>MVC</acronym>
             de Zend Framework
@@ -21,7 +21,7 @@
             y es un patrón de diseño con el objetivo de separar la
             lógica de la aplicación de la
             lógica de visualización.
-            <methodname>Zend_Controller_Front</methodname>
+            <classname>Zend_Controller_Front</classname>
             implementa el patrón
             <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">
                 Front Controller (Controlador Frontal)
@@ -38,7 +38,7 @@
         </para>
         <para>
             El sistema
-            <methodname>Zend_Controller</methodname>
+            <classname>Zend_Controller</classname>
             fue construido con la extensibilidad en mente, ya sea
             heredando las clases existentes,
             escribiendo nuevas clases
@@ -244,7 +244,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
 
             <para>
                 El dispatcher de
-                <methodname>Zend_Controller</methodname>
+                <classname>Zend_Controller</classname>
                 toma entonces el valor del controlador y lo apunta
                 a una clase. Por defecto, pone en
                 mayúsculas la primera letra
@@ -253,7 +253,7 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 . De esta forma, en nuestro ejemplo de arriba, el controlador
                 <emphasis>roadmap</emphasis>
                 es dirigido a la clase
-                <methodname>RoadmapController</methodname>
+                <classname>RoadmapController</classname>
                 .
             </para>
 
@@ -303,26 +303,26 @@ class IndexController extends Zend_Controller_Action
                 script correspondiente,
                 tendrá su contenido generado inmediatamente.
                 Por defecto,
-                <methodname>Zend_View</methodname>
+                <classname>Zend_View</classname>
                 es usado como la capa Vista en el patrón
                 <acronym>MVC</acronym>
                 . El
                 <emphasis>ViewRenderer</emphasis>
                 hace algo de magia, y usa el nombre de controlador (e.g.,
-                <methodname>index</methodname>
+                <emphasis>index</emphasis>
                 ) y el nombre de acción actual (e.g.,
                 <emphasis>index</emphasis>
                 ) para determinar qué plantilla traer. Por defecto,
                 las plantillas terminan con la
                 extensión
-                <methodname>.phtml</methodname>
+                <filename>.phtml</filename>
                 , lo que significa que en el ejemplo de arriba, la
                 plantilla
                 <filename>index/index.phtml</filename>
                 será generada. Adicionalmente, el
-                <methodname>ViewRenderer</methodname>
+                <emphasis>ViewRenderer</emphasis>
                 asume automáticamente que la carpeta
-                <methodname>views</methodname>
+                <emphasis>views</emphasis>
                 al mismo nivel que la carpeta controller será
                 la carpeta raíz de la vista, y que el
                 script de vista actual
@@ -379,9 +379,9 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 un controlador para manejar los errores.
                 Por defecto,
                 asume un
-                <methodname>ErrorController</methodname>
+                <emphasis>ErrorController</emphasis>
                 en el módulo default con un método
-                <methodname>errorAction</methodname>
+                <methodname>errorAction()</methodname>
                 :
             </para>
 

@@ -393,7 +393,7 @@ myservice.world.hello("Wade");
             capturados y devueltas como mensajes de
             error de
             <acronym>AMF</acronym>
-            (AMF ErrorMessages). Sin embargo, el
+            (<acronym>AMF</acronym> ErrorMessages). Sin embargo, el
             contenido de estos objetos de mensajes de error
             variará dependiendo
             de si el servidor está o no en modo "producción" (el estado por

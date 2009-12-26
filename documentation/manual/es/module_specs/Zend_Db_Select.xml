@@ -284,7 +284,7 @@ $select = $db->select()
                 para una tabla. Puede especificar el
                 nombre de la tabla como
                 "
-                <methodname>nombreDeEsquema.nombre DeTabla</methodname>
+                "<code>schemaName.tableName</code>"
                 ",
                 donde
                 <classname>Zend_Db_Select</classname>
@@ -358,7 +358,7 @@ $select = $db->select()
             <para>
                 Puedes especificar el nombre de columna como
                 "
-                <methodname>nombreCorrelacionado.nombreDeColumna</methodname>
+                <code>nombreCorrelacionado.nombreDeColumna</code>
                 ".
                 <classname>Zend_Db_Select</classname>
                 entrecomillará cada
@@ -631,7 +631,7 @@ $select = $db->select()
 
             <para>
                 Muchas consultas útiles involucran el uso de un
-                <methodname>JOIN</methodname>
+                <acronym>JOIN</acronym>
                 para combinar filas de
                 multiples tablas. Puedes agregar tablas a una consulta
                 <classname>Zend_Db_Select</classname>
@@ -1252,9 +1252,9 @@ $select = $db->select()
             <para>
                 En el ejemplo anterior, los resultados deberían ser
                 diferentes sin paréntesis, porque
-                <methodname>AND</methodname>
+                <acronym>AND</acronym>
                 tiene precedencia más alta respecto a
-                <methodname>OR</methodname>
+                <acronym>OR</acronym>
                 .
                 <classname>Zend_Db_Select</classname>
                 aplica el parentesis
@@ -1263,7 +1263,7 @@ $select = $db->select()
                 <methodname>where()</methodname>
                 vincula de forma más
                 fuerte el
-                <methodname>AND</methodname>
+                <acronym>AND</acronym>
                 que combina las
                 expresiones.
             </para>
@@ -1351,12 +1351,12 @@ $select = $db->select()
                 <constant>HAVING</constant>
                 aplica una condición de
                 restricción en grupos de filas. Es similar a una cláusula
-                <methodname>WHERE</methodname>
+                <constant>WHERE</constant>
                 aplicando una condición de
                 restricción a las filas. Pero las 2 cláusulas son
                 diferentes
                 porque las condiciones
-                <methodname>WHERE</methodname>
+                <constant>WHERE</constant>
                 son
                 aplicadas antes que definan los grupos, mientras que las
                 condiciones
@@ -1389,7 +1389,7 @@ $select = $db->select()
                 combinadas usando el operador Booleano
                 <methodname>AND</methodname>
                 , o el operador
-                <methodname>OR</methodname>
+                <code>OR</code>
                 si usa el método
                 <methodname>orHaving()</methodname>
                 .
@@ -1445,8 +1445,8 @@ $select = $db->select()
                 En
                 <acronym>SQL</acronym>
                 , la cláusula
-                <methodname>ORDER
-                    BY</methodname>
+                <code>ORDER
+                    BY</code>
                 especifica una o más columnas o expresiones
                 por el cual el resultado de la consulta
                 será ordenado. Si
@@ -1459,7 +1459,7 @@ $select = $db->select()
                 valor al mayor valor. Puede también ordenar de mayor a menor
                 valor para una columna dada en la lista espeificando la palabra
                 clave
-                <methodname>DESC</methodname>
+                <constant>DESC</constant>
                 después de la columna.
             </para>
 
@@ -1474,9 +1474,9 @@ $select = $db->select()
                 elemento del array es un string nombrando la columna.
                 Opcionalmente con la palabra
                 reservada
-                <methodname>ASC</methodname>
+                <constant>ASC</constant>
                 o
-                <methodname>DESC</methodname>
+                <constant>DESC</constant>
                 siguiendola, separada por un espacio.
             </para>
 
@@ -1910,10 +1910,10 @@ echo "$sql\n";
                 . Por ejemplo, puede usar este método
                 para devolver un array de expresiones para la
                 cláusula
-                <methodname>WHERE</methodname>
+                <constant>WHERE</constant>
                 , o el array de columnas (o
                 expresiones de columnas) que estan en la lista del
-                <methodname>SELECT</methodname>
+                <constant>SELECT</constant>
                 , o los valores de la
                 cantidad y comienzo para la cláusula
                 <constant>LIMIT</constant>
@@ -1938,12 +1938,12 @@ echo "$sql\n";
                 es un string que
                 identifica qué parte del la consulta Select va a devolver. Por
                 ejemplo, el string
-                <methodname>'from'</methodname>
+                <code>'from'</code>
                 identifica la
                 parte del objeto Select que almacena la información de las
                 tablas de la
                 cláusula
-                <methodname>FROM</methodname>
+                <constant>FROM</constant>
                 , incluyendo
                 uniones de tablas.
             </para>

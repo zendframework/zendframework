@@ -611,7 +611,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
 
         <para>
             Internamente, el elemento almacena un identificador único usando
-            <methodname>Zend_Session_Namespace</methodname>
+            <classname>Zend_Session_Namespace</classname>
             , y lo comprueba
             en el momento que se envía (comprueba que el TTL no ha espirado). El
             validador 'Identical' entonces es usado para asegurarse que el hash

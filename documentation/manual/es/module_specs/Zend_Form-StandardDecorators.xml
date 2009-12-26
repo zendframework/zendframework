@@ -88,7 +88,7 @@ class Util
             elemento
             <classname>Zend_Form</classname>
             ,
-            <methodname>Zend_Form_Element</methodname>
+            <classname>Zend_Form_Element</classname>
             , o
             <classname>Zend_Form_DisplayGroup</classname>
             ; toma la descripción usando el método

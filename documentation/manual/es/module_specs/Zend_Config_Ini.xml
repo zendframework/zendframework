@@ -172,7 +172,7 @@ echo $config->database->params->dbname; // muestra "dbname"
                     </row>
                     <row>
                         <entry>
-                            <methodname>$section</methodname>
+                            <varname>$section</varname>
                         </entry>
                         <entry>
                             La [sección] contenida en el archivo

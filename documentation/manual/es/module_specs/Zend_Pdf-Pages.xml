@@ -71,13 +71,13 @@
                     <para>Zend_Pdf_Page::SIZE_A4</para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Page::SIZE_A4_LANDSCAPE</para>
+                    <para><constant>Zend_Pdf_Page::SIZE_A4_LANDSCAPE</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Page::SIZE_LETTER</para>
+                    <para><constant>Zend_Pdf_Page::SIZE_LETTER</constant></para>
                 </listitem>
                 <listitem>
-                    <para>Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE</para>
+                    <para><constant>Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE</constant></para>
                 </listitem>
             </itemizedlist>
         </para>

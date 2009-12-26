@@ -169,7 +169,7 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
             del objeto valor y es inmutable. Se puede establecer la
             expresión de
             javascript como el primer argumento del constructor. Por defecto
-            <classname>Zend_Json::encode</classname>
+            <constant>Zend_Json::encode</constant>
             no codifica callbacks
             javascript, usted tiene que pasar la opción
             <methodname>'enableJsonExprFinder' = true</methodname>

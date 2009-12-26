@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17344 -->
+<!-- EN-Revision: 18943 -->
 <table frame='all' id="requirements.zendcomponents.table-1">
-    <title>Zend Framework Components and the PHP Extensions they use</title>
+	 <title>Componentes de Zend Framework y las extensiones PHP que usan</title>
     <tgroup cols='3'>
         <thead>
             <row>
-                <entry>Zend Framework Components</entry>
-                <entry>Dependency Type</entry>
+                <entry>Componentes de Zend Framework </entry>
+                <entry>Tipo de Dependecncia</entry>
                 <entry><acronym>PHP</acronym> Extension</entry>
             </row>
         </thead>
         <tbody>
             <row>
                 <entry morerows="2" valign="middle">
-                    <emphasis>All Components</emphasis>
+                    <emphasis>Todos los Componentes</emphasis>
                 </entry>
-                <entry morerows="2" valign="middle">Hard</entry>
+                <entry morerows="2" valign="middle">Fuerte</entry>
                 <entry>
                     <ulink url="http://www.php.net/manual/en/ref.pcre.php">pcre</ulink>
                 </entry>
@@ -48,7 +48,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.datetime.php">date</ulink>
@@ -128,7 +128,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.image.php">gd</ulink>
@@ -197,7 +197,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
@@ -308,7 +308,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
@@ -378,7 +378,7 @@
                 <entry>upload_extension</entry>
             </row>
             <row>
-                <entry>
+                <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
                             url="http://framework.zend.com/manual/en/zend.filter.html">
@@ -386,10 +386,17 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                </entry>
+            </row>
+            <row>
+                <entry>Debil</entry>
+                <entry>
+                    <ulink
+                        url="http://www.php.net/manual/en/ref.zlib.php">zlib</ulink>
                 </entry>
             </row>
             <row>
@@ -479,14 +486,14 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Soft</entry>
+                <entry>Debil</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.json.php">json</ulink>
                 </entry>
             </row>
             <row>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
@@ -540,14 +547,14 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Soft</entry>
+                <entry>Debil</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.bc.php">bcmath</ulink>
                 </entry>
             </row>
             <row>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
@@ -589,7 +596,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Soft</entry>
+                <entry>Debil</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.posix.php">posix</ulink>
@@ -628,7 +635,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
@@ -775,7 +782,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Soft</entry>
+                <entry>Debil</entry>
                 <entry>
                     <ulink
                         url="http://pecl.php.net/package/Bitset">bitset</ulink>
@@ -815,7 +822,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
@@ -950,7 +957,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <emphasis>
                         <ulink
@@ -1000,7 +1007,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.soap.php">soap</ulink>
@@ -1060,7 +1067,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.session.php">session</ulink>
@@ -1142,7 +1149,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.xml.php">xml</ulink>
@@ -1157,7 +1164,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/ref.ctype.php">ctype</ulink>
@@ -1205,7 +1212,7 @@
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>Fuerte</entry>
                 <entry>
                     <ulink
                         url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>

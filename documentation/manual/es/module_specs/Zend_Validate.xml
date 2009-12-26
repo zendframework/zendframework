@@ -90,7 +90,7 @@ if ($validator->isValid($email)) {
 }
 ]]></programlisting>
 
-      
+   
 
     </sect2>
 
@@ -160,7 +160,7 @@ $validator->setMessages( array(
 ));
 ]]></programlisting>
 
-      
+   
 
         <para>
             Incluso, si su aplicación requiere una mayor flexibilidad para informar
@@ -316,7 +316,7 @@ if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) 
                 </listitem>
             </itemizedlist>
         </sect3>
-      
+   
     </sect2>
     <sect2 id="zend.validate.introduction.translation">
 

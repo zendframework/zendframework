@@ -127,12 +127,12 @@ class MyValid_Float extends Zend_Validate_Abstract
                     <para>El valor de entrada es mayor que el valor máximo permitido.</para>
                 </listitem>
             </itemizedlist>
-      
+   
 
         <para>
             Estas razones en el fallo de validación, son traducidas a las definiciones en la clase:
         </para>
-       
+    
              <programlisting language="php"><![CDATA[
 class MyValid_NumericBetween extends Zend_Validate_Abstract
 {
@@ -231,7 +231,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
                     <para>contener al menos un dígito.</para>
                 </listitem>
             </itemizedlist>
-      
+   
 
         <para>
             La siguiente clase implementa estos criterios de validación:

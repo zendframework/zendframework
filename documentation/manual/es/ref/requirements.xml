@@ -64,7 +64,7 @@
         </para>
 
         <xi:include href="requirements-php-extensions-table.xml" />
-      
+   
     </sect1>
 
     <sect1 id="requirements.zendcomponents">
@@ -91,9 +91,9 @@
             componente si las extensiones no están disponibles.
         </para>
 
-      
+   
             <xi:include href="requirements-zendcomponents-table.xml" />
-           
+        
                 <!-- <colspec colwidth='3in'/>
                 <colspec colwidth='1in'/>
                 <colspec colwidth='3in'/>
@@ -623,7 +623,7 @@
                     </row>
                 </tbody>
             </tgroup>
-       
+    
 
     </sect1>
 

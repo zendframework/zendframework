@@ -13,7 +13,7 @@ Véase el apéndice <link linkend="requirements"> requisitos </ link> para una l
     <para>
         La instalación del Zend Framework es muy simple. Una vez que haya descargado y descomprimido el framework, deberá añadir la carpeta <filename>/library</filename> de la distribución al principio de su "include path". También puede mover la carpeta "library" a cualquier otra posición (compartida o no) de su sistema de archivos.
     </para>
-   
+
         <itemizedlist>
             <listitem>
                 <para>
@@ -22,7 +22,7 @@ Véase el apéndice <link linkend="requirements"> requisitos </ link> para una l
                       es una buena opción para aquellos que comienzan o son nuevos en Zend Framework.
                 </para>
             </listitem>
-           
+        
             <listitem>
             <para>
                 <ulink url="http://framework.zend.com/download/snapshot">Download the latest

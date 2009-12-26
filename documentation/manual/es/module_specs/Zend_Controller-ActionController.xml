@@ -183,7 +183,7 @@ class FooController extends Zend_Controller_Action
             la acción), por ejemplo, o colocando contenido generado en una
             plantilla general del sitio (<methodname>postDispatch()</methodname>).
        </para>
-       
+   
                 <note>
             <title>Usage of init() vs. preDispatch()</title>
 

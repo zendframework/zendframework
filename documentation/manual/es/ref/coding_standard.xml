@@ -472,7 +472,6 @@ $greeting = "Hello $name, welcome back!";
 $greeting = "Hello {$name}, welcome back!";
 ]]></programlisting>
 
-
                 <para>
                     Por consistencia, esta forma no está permitida:
 
@@ -532,7 +531,6 @@ $sql = "SELECT `id`, `name` FROM `people` "
                     <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
 ]]></programlisting>
-
 
                 <para>
                     Se permite declarar arrays indexados multilínea usando la
@@ -697,7 +695,6 @@ class SampleClass
 ]]></programlisting>
              </sect3>
 
-
             <sect3 id="coding-standard.coding-style.classes.member-variables">
                 <title>Variables de miembros de clase</title>
 
@@ -769,7 +766,6 @@ class Foo
 }
 ]]></programlisting>
 
-
              <para>
                     In cases where the argument list exceeds the <link
                         linkend="coding-standard.php-file-formatting.max-line-length">maximum line
@@ -808,7 +804,6 @@ class Foo
                     </para>
                 </note>
 
-
                     <programlisting language="php"><![CDATA[
 /**
  * Bloque de Documentación aquí
@@ -827,7 +822,6 @@ class Foo
                 <para>
                     La llamada por referencia está estrictamente prohibida.
                 </para>
-
 
                 <para>
                     El valor de retorno no debe estar indicado entre
@@ -1161,7 +1155,6 @@ switch ($numPeople) {
  * @deprecated Class deprecated in Release 2.0.0
  */
 ]]></programlisting>
-
 
                 <para>
                     The <property>@category</property> annotation must have a value of "Zend".

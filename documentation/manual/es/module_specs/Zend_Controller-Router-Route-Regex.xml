@@ -135,7 +135,6 @@ $values = array(
         funcione en cualquier ambiente. Las claves pueden contener nombres de
         variables o índices de sub-patrones:</para>
 
-
     <programlisting language="php"><![CDATA[
 $route = new Zend_Controller_Router_Route_Regex(
     'archive/(\d+)',

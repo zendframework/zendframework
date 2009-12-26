@@ -79,7 +79,6 @@
         parámetro de Front Controller pasándolo a <methodname>setParam()</methodname>.
    </para>
 
-
     <example id="zend.application.available-resources.frontcontroller.configExample">
         <title>Ejemplo Front Controller resource configuration</title>
 

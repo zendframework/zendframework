@@ -171,7 +171,6 @@ Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID
 Zend_Auth_Result::FAILURE_UNCATEGORIZED
 ]]></programlisting>
 
-
        <para>El siguiente ejemplo ilustra como un desarrollador podría
             ramificar basado en el código resultado:
        </para>
@@ -198,7 +197,6 @@ switch ($result->getCode()) {
         break;
 }
 ]]></programlisting>
-
 
     </sect2>
 
@@ -281,7 +279,6 @@ $auth->setStorage(new Zend_Auth_Storage_Session('unEspacionombre'));
 // suceso
 $result = $auth->authenticate($authAdapter);
 ]]></programlisting>
-
 
             </example>
 
@@ -391,7 +388,6 @@ Zend_Auth::getInstance()->setStorage(new MyStorage());
 $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 ]]></programlisting>
 
-
             </example>
 
         </sect3>
@@ -417,7 +413,6 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
                     adaptador</para>
             </listitem>
         </orderedlist>
-
 
        <para>El siguiente ejemplo ilustra como usar el adaptador
             <classname>:Zend_Auth</classname> : indirectamente, a través del
@@ -457,7 +452,6 @@ if ($auth->hasIdentity()) {
 }
 ]]></programlisting>
 
-
        <para>Para remover una identidad del almacenamiento persistente,
             simplemente usa el metodo <methodname>clearIdentity()</methodname>
             method. Comunmente esto sería usado para implementar una operación
@@ -495,7 +489,6 @@ if (!$result->isValid()) {
     // $result->getIdentity() === $username
 }
 ]]></programlisting>
-
 
     </sect2>
 

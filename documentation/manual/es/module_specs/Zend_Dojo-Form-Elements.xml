@@ -835,7 +835,6 @@ $editor->degrade = true;
         </note>
     </sect3>
 
-
     <sect3 id="zend.dojo.form.elements.horizontalSlider">
         <title>HorizontalSlider</title>
 

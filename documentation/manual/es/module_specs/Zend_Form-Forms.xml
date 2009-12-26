@@ -1724,8 +1724,6 @@ $validValues = $form->getValidValues($_POST);
         </sect3>
     </sect2>
 
-
-
     <sect2 id="zend.form.forms.methods">
         <title>Métodos</title>
 

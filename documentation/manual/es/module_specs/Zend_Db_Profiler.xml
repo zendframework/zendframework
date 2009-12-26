@@ -58,7 +58,6 @@ $params['profiler'] = true;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
 
-
        <para>Una instancia del objeto perfilador hace que el adaptador use ese
             objeto. El tipo del objeto debe ser
                 <classname>Zend_Db_Profiler</classname> o una subclase de este.
@@ -71,7 +70,6 @@ $profiler->setEnabled(true);
 $params['profiler'] = $profiler;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-
 
        <para>El argumento puede ser un array asociativo conteniendo algunas o
             todas las claves '<methodname>enabled</methodname>',
@@ -95,7 +93,6 @@ $params['profiler'] = array(
 );
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-
 
        <para>Finalmente, el argumento puede ser un objeto de tipo
                 <methodname>Zend_Config</methodname> conteniendo las
@@ -134,7 +131,6 @@ $config = new Zend_Config($configData);
 $params['profiler'] = $config;
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 ]]></programlisting>
-
 
     </sect2>
 

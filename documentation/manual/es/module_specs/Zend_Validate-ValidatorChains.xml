@@ -64,7 +64,6 @@ $validatorChain->addValidator(
                ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>
 
-
     <para>Cualquier objeto que implemente
             <classname>Zend_Validate_Interface</classname> puede ser utilizado
         en una cadena de validación.</para>

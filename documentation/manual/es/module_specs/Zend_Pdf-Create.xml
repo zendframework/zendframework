@@ -64,5 +64,4 @@ $pdf3->rollback($revisions - 1);
 ]]></programlisting>
     </example>
 
-
 </sect1>

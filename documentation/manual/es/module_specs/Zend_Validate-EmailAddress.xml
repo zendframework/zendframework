@@ -171,7 +171,6 @@ if ($validator->isValid($email)) {
 }
 ]]></programlisting>
 
-
      <sect3 id="zend.validate.set.email_address.checkacceptance">
 
         <title>Verificar si el nombre de host realmente acepta email</title>
@@ -201,8 +200,6 @@ $validator = new Zend_Validate_EmailAddress(
     )
 );
 ]]></programlisting>
-
-
 
    <note>
             <title>MX Check under Windows</title>

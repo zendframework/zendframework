@@ -150,7 +150,6 @@
                 para declarar la conexión.
            </para>
 
-
             <example id="zend.db.adapter.connecting.constructor.example">
                 <title>Usando el Constructor de un Adaptador</title>
                  <programlisting language="php"><![CDATA[
@@ -190,10 +189,6 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
                 mismo array de parámetros que hubiera enviado al
                 constructor del adaptador.
            </para>
-
-
-
-
 
             <example id="zend.db.adapter.connecting.factory.example">
                 <title>Usando el Adaptador del método factory</title>

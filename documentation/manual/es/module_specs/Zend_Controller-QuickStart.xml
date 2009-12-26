@@ -24,7 +24,6 @@
             interceptadas por el controlador frontal y enviado a una
             Acción particular de un Controlador según la <acronym>URL</acronym> pedida.
 
-
        </para>
        <para>
             El sistema

@@ -176,7 +176,6 @@ $server->handle();
             necesitará establecer un flag de compatibilidad especial para
             garantizar que los dos interoperen correctamente:</para>
 
-
         <programlisting language="php"><![CDATA[
 $server = new Zend_Json_Server();
 $server->setClass('Calculator');

@@ -199,7 +199,6 @@ $page2->setLineWidth(0.5)
 
 $page2->restoreGS();
 
-
 // Movimineto del sistema de coordenadas, sesgado y escalado
 $page2->saveGS();
 $page2->translate(60, 150)     // Despalazamiento del sistema de coordenadas

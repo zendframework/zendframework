@@ -49,7 +49,6 @@ $color3 = new Zend_Pdf_Color_Html('forestgreen');
 ]]></programlisting>
     </sect2>
 
-
     <sect2 id="zend.pdf.drawing.shape-drawing">
         <title>Dibujo de Formas</title>
         <para>Todas las operaciones de dibujo se puede hacer en un contexto de
@@ -452,7 +451,6 @@ $pdfPage->setFont($font, 36)
         </example>
     </sect2>
 
-
     <sect2 id="zend.pdf.drawing.extracting-fonts">
         <title>Extracción de las fuentes.</title>
         <para>El módulo <classname>Zend_Pdf</classname> proporciona una
@@ -567,8 +565,6 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
             </itemizedlist>
        </para>
     </sect2>
-
-
 
     <sect2 id="zend.pdf.drawing.image-drawing">
         <title>Dibujo de Imágenes</title>

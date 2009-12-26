@@ -196,7 +196,6 @@ $username->addValidators(array('alnum',
     ->addFilters(array('StringToLower'));
 ]]></programlisting>
 
-
         <para>Tan simple como esto, realizarlo para cada uno de los elementos
             del formulario puede resultar un poco tedioso. Intentemos la opción
             (b) arriba mencionada. Cuando creamos un nuevo elemento utilizando

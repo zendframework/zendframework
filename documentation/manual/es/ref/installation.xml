@@ -73,7 +73,6 @@ Véase el apéndice <link linkend="requirements"> requisitos </ link> para una l
         </listitem>
     </itemizedlist>
 
-
     <para>
         Una vez que tenga disponible una copia de Zend Framework, su aplicación necesita poder acceder a las clases del framework. Aunque hay
         <ulink url="http://www.php.net/manual/en/configuration.changes.php">

@@ -46,7 +46,6 @@
             </listitem>
         </itemizedlist>
 
-
        <para>Hay algunas características notables del
                 <acronym>RFC-2617</acronym> no implementadas todavía:</para>
         <itemizedlist>
@@ -63,7 +62,6 @@
                         <acronym>HTTP</acronym>.</para>
             </listitem>
         </itemizedlist>
-
 
     </sect2>
 
@@ -267,7 +265,6 @@ $config = array(
 $adapter = new Zend_Auth_Adapter_Http($config);
 ]]></programlisting>
 
-
        <para>Ya que estamos soportando tanto la autenticación básica como la
             "Digest", necesitamos dos objetos diferentes resolver. Tenga en
             cuenta que esto podría ser facilmente dos clases diferentes:</para>
@@ -281,7 +278,6 @@ $digestResolver->setFile('files/digestPasswd.txt');
 $adapter->setBasicResolver($basicResolver);
 $adapter->setDigestResolver($digestResolver);
 ]]></programlisting>
-
 
        <para>Por último, realizamos la autenticación. El adaptador necesita
             una referencia a ambos objetos solicitud y respuesta para hacer su
@@ -298,7 +294,6 @@ if (!$result->isValid()) {
     // Bad userame/password, or canceled password prompt
 }
 ]]></programlisting>
-
 
     </sect2>
 

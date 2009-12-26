@@ -22,7 +22,6 @@
             Zend_Locale.</para>
     </note>
 
-
     <sect2 id="zend.validate.set.alpha">
         <title>Alpha</title>
         <para>Devuelve <constant>TRUE</constant> si y sólo si <varname>$valor</varname> sólo
@@ -90,7 +89,6 @@
             configuracion regional o crear una instancia para este validador</para>
     </sect2>
 
-
     <sect2 id="zend.validate.set.greater_than">
         <title>GreaterThan</title>
         <para>Devuelve <constant>TRUE</constant> si y sólo si <varname>$valor</varname> es
@@ -102,7 +100,6 @@
         <para>Devuelve <constant>TRUE</constant> si y sólo si <varname>$valor</varname>
             contiene caracteres hexadecimales (0-9 y A-F).</para>
     </sect2>
-
 
     <xi:include href="Zend_Validate-Hostname.xml"/>
 
@@ -143,7 +140,6 @@ if ($validator->isValid($iban)) {
             country you should give the locale. And when you accept all IBAN numbers regardless of
             any country omit the locale for simplicity.</para>
     </sect2>
-
 
     <sect2 id="zend.validate.set.in_array">
         <title>InArray</title>

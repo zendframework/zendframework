@@ -506,7 +506,6 @@ class Zend_Amf_Parse_Resource_MysqlResult
 
     </sect2>
 
-
     <sect2 id="zend.amf.server.flash">
         <title>Conectándose al Servidor desde Flash</title>
 
@@ -568,7 +567,6 @@ package {
   }
 }
 ]]></programlisting>
-
 
        <para>Primero tenemos que importar dos bibliotecas de ActionScript que
             realizan la mayor parte del trabajo. La primera es NetConnection que

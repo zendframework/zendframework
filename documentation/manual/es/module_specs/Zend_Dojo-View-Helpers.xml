@@ -650,7 +650,6 @@ echo $view->dateTextBox(
 echo $view->editor('foo');
 ]]></programlisting>
 
-
                 <note>
                     <title>Editor Dijit uses div by default</title>
 

@@ -33,7 +33,6 @@
         </sect3>
     </sect2>
 
-
     <sect2 id="zend.controller.migration.fromonesixtooneseven">
         <title>Migración de 1.6.x a 1.7.0 o nuevas versiones</title>
 

@@ -335,7 +335,6 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
 
            <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
 
-
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
 {

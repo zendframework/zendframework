@@ -47,7 +47,7 @@ if ($validator->isValid($email)) {
             afterwards, by using <methodname>setOptions()</methodname>. The following options are
             supported:
         </para>
-    
+
         <itemizedlist>
             <listitem>
                 <para>
@@ -112,13 +112,13 @@ $validator->setOptions(array('domain' => false));
         <code>bob+jones@domain.us</code> , <code>"bob@jones"@domain.com</code> y
         <code>"bob jones"@domain.com</code>
    </para>
-    
+
                <para>
         Algunos formatos obsoletos de email actualmente no validan
         (por ejemplo los retornos de carro o "\" un caracter en una dirección
         de correo electrónico).
    </para>
-    
+
     </sect3>
 
     <sect3 id="zend.validate.set.email_address.purelocal">
@@ -203,7 +203,6 @@ $validator = new Zend_Validate_EmailAddress(
 
    <note>
             <title>MX Check under Windows</title>
-        
 
             <para>
                 Within Windows environments MX checking is only available when

@@ -65,7 +65,7 @@
         <sect3 id="zend.controller.migration.fromoneohtoonesix.dispatcher">
             <title>Cambios en la interfaz del Dispatcher</title>
 
-          <para>              
+          <para>
                 Los usuarios atrajeron nuestra atención con el hecho de que
                  <classname> Zend_Controller_Front </classname> y
                  <classname> Zend_Controller_Router_Route_Module </classname> fueron
@@ -97,13 +97,13 @@
     <sect2 id="zend.controller.migration.fromoneohtoonefive">
         <title>Migranado desde 1.0.x a 1.5.0 o versiones posteriores</title>
 
-      <para>          
+      <para>
             Aunque la mayoría de la funcionalidad básica sigue siendo la misma, y todas las
             funcionalidades documentadas siguen siendo la mismas, hay una en particular
             "característica" <emphasis>undocumented</emphasis> que ha cambiado.
        </para>
 
-      <para>          
+      <para>
             Al escribir las <acronym>URL</acronym>s, la manera de escribir la documentada acción camelCased
             es usar un separador de palabra, que son "." o '-' por defecto,
             pero pueden ser configurados en el despachador. El despachador internamente
@@ -117,7 +117,7 @@
            <acronym>PHP</acronym>, ambos ejecutarán el mismo método.
        </para>
 
-      <para>      
+      <para>
             Esto causa problemas con la vista ViewRenderer cuando devuelve scripts de la
             vista. El canónico, la documentada forma es que todos los separadores de palabra
             se conviertan en guiones, y las palabras en minúsculas. Esto crea
@@ -155,7 +155,7 @@
            </para></listitem>
 
             <listitem>
-              <para>              
+              <para>
                     Segunda mejor opción: La vista ViewRenderer delega ahora resoluciones de scripts
                     de vistas a <classname> Zend_Filter_Inflector </classname>; se puede
                     modificar las normas del inflector para que ya no separe
@@ -175,7 +175,7 @@ $inflector->setFilterRule(':action', array(
 ));
 ]]></programlisting>
 
-              <para>                  
+              <para>
                     El anterior código modificará el inflector para que ya no
                     separe las palabras con guión, usted puede querer eliminar
                     el filtro 'StringToLower' si usted desea<emphasis>hacer</emphasis>
@@ -275,7 +275,7 @@ $front->setParam('noViewRenderer', true);
             <methodname>ViewRenderer</methodname>, existen demasiadas cosas que ver en el
             código del controlador. Primero, ver las acciones método (los métodos
             terminados en 'Action'), y determinar lo que cada uno esta haciendo. Si ninguno
-            de los siguientes esta pasando, usted necesitará hacer cambios:       
+            de los siguientes esta pasando, usted necesitará hacer cambios:
        </para>
 
         <itemizedlist>
@@ -431,7 +431,7 @@ $viewRenderer->setView($view);
             </listitem>
         </itemizedlist>
 
-      <para>          
+      <para>
             Leer la documentación <link linkend="zend.controller.actionhelpers">ayudantes
                 de acción</link> para obtener más información sobre cómo
              recuperar y manipular objetos de ayuda, y la <link
@@ -468,7 +468,7 @@ Zend_Controller_Front::run('/path/to/controllers');
             </listitem>
 
             <listitem>
-              <para>                  
+              <para>
                     <classname> Zend_Controller_RewriteRouter </classname> ha sido renombrado a
                     <classname> Zend_Controller_Router_Rewrite </classname>, y promovido a
                     router estándar enviado con el framework;
@@ -478,7 +478,7 @@ Zend_Controller_Front::run('/path/to/controllers');
             </listitem>
 
             <listitem>
-              <para>                  
+              <para>
                     Una nueva clase ruta para uso con el router reescribir se
                     presentó,
                     <classname> Zend_Controller_Router_Route_Module </classname>, que abarca
@@ -558,7 +558,7 @@ $ctrl->setControllerDirectory('/path/to/controllers');
 $ctrl->dispatch();
 ]]></programlisting>
 
-      <para>          
+      <para>
             Alentamos el uso del objeto Response para agregar contenido y
             cabeceras. Esto permitirá una mayor flexibilidad en el formato de salida intercambiando
             (por instancias, <acronym>JSON</acronym> o <acronym>XML</acronym> en lugar de <acronym>XHTML</acronym>) en sus aplicaciones.
@@ -570,7 +570,7 @@ $ctrl->dispatch();
             la salida de buffers.
        </para>
 
-      <para>          
+      <para>
             Hay muchas características adicionales que amplían las existentes API,
             y estas son observadas en la documentación.
        </para>
@@ -626,7 +626,7 @@ echo $response;
                 objeto en lugar de un despachador simbólico.
            </para></listitem>
 
-            <listitem><para>          
+            <listitem><para>
                 <methodname>Zend_Controller_Router_Interface::route()</methodname>
                 ahora acepta y devuelve un <xref linkend="zend.controller.request" />
                 objeto en lugar de un despachador simbólico.
@@ -671,7 +671,7 @@ echo $response;
                         indefinidas acciones automaticamente.
                    </para></listitem>
 
-                    <listitem><para>                  
+                    <listitem><para>
                         <methodname>_redirect ()</methodname> ahora toma un segundo opcional
                         argumento, el código <acronym>HTTP</acronym> a retornar con la redirección, y
                         un opcional tercer argumento, <varname>$prependBase</varname>,
@@ -680,7 +680,7 @@ echo $response;
                    </para></listitem>
 
                     <listitem>
-                      <para>                          
+                      <para>
                             La propiedad <methodname>_action</methodname> ya no está configurada.
                             Esta propiedad fue un <classname> Zend_Controller_Dispatcher_Token </classname>,
                             el cual ya no existe en la actual encarnación.

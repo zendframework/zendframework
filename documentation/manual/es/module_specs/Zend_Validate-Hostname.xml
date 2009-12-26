@@ -51,7 +51,7 @@ if ($validator->isValid($hostname)) {
         de la red local, y <constant>ALLOW_ALL</constant> para permitir
         todos estos tres tipos. Para comprobar que direcciones IP puede
         utilizar, vea el siguiente ejemplo:
-    
+
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
 if ($validator->isValid($hostname)) {

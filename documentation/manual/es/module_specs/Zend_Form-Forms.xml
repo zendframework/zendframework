@@ -1703,7 +1703,7 @@ $messages = $form->getMessages('username');
             <para>Todos los errores determinados de esta manera pueden ser
                 traducidos.</para>
         </sect3>
-    
+
                 <sect3 id="zend.form.forms.validation.values">
             <title>Retrieving Valid Values Only</title>
 

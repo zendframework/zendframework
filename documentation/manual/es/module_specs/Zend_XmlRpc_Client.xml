@@ -507,7 +507,7 @@ try {
 }
 ]]></programlisting>
             </example>
-        
+
             <para>Cuando el método <methodname>call()</methodname> es usado
                 para realizar la petición,
                     <methodname>Zend_XmlRpc_Client_FaultException</methodname>

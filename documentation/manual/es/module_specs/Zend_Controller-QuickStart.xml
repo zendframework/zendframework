@@ -147,7 +147,7 @@ RewriteRule ^.*$ index.php [NC,L]
      </system.webServer>
 </configuration>
 ]]></programlisting>
-       
+
            <para>
                 La regla de arriba redirigirá las peticiones a recuros existentes
                 (enlaces simbólicos existentes, archivos no vacíos, o directorios no vacíos)

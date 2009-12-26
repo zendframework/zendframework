@@ -11,7 +11,7 @@
             >introducción</link>, donde el nombre de usuario debe tener entre 6
         y 12 caracteres alfanuméricos.
     </para>
-    
+
         <programlisting language="php"><![CDATA[
 // Crea una cadena de validadores y le agrega validadores
 $validatorChain = new Zend_Validate();
@@ -55,7 +55,7 @@ Los validadores se ejecutan en el orden en que se agregaron
         validación alfanumérica no se ejecutará si falla la longitud del string
         de validación:
         </para>
-    
+
         <programlisting language="php"><![CDATA[
 $validatorChain->addValidator(
                     new Zend_Validate_StringLength(array('min' => 6,

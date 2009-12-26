@@ -48,7 +48,7 @@
         <title>Ccnum</title>
         <para>Devuelve <constant>TRUE</constant> si y sólo si <varname>$valor</varname> sigue el
             algoritmo Luhn (mod-10 checksum) para tarjetas de crédito.</para>
-        
+
                     <note>
             <para>
                 The <classname>Ccnum</classname> validator has been deprecated in favor of the
@@ -108,7 +108,7 @@
         <para>Returns <constant>TRUE</constant> if and only if <varname>$value</varname>
             contains a valid IBAN (International Bank Account Number). IBAN numbers are validated
             against the country where they are used and by a checksum.</para>
-        
+
         <para>There are two ways to validate IBAN numbers. As first way you can give a locale which
             represents a country. Any given IBAN number will then be validated against this country.</para>
         <programlisting language="php"><![CDATA[

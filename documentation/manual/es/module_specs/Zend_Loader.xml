@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17175 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
 
     <title>Cargando archivos y clases dinámicamente</title>
 
     <para>
-        La clase Zend_Loader incluye métodos para ayudar a cargar archivos
+        La clase <classname>Zend_Loader</classname> incluye métodos para ayudar a cargar archivos
         dinámicamente.
    </para>
 
@@ -185,7 +185,7 @@ Zend_Loader::registerAutoload();
             <title>Ejemplo de registro del método de callback autoload desde una clase
             extendida</title>
             <para>
-                Debido a la semántica de referencia de funciones estáticas en PHP,
+                Debido a la semántica de referencia de funciones estáticas en <acronym>PHP</acronym>,
                 se debe implementar código tanto para la clase <methodname>loadClass()</methodname>
                 como <methodname>autoload()</methodname>, y <methodname>autoload()</methodname>
                 debe llamar a <methodname>self::loadClass()</methodname>.  Si su método

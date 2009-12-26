@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.pages">
     <title>Trabajando con Páginas</title>
@@ -21,7 +21,7 @@
             ya está agregada a un documento. Las páginas no agregadas no pueden
             ser utilizadas con múltiples documentos <acronym>PDF</acronym>, pero son algo más
             eficientes. <footnote>
-                <para>Es una limitación de la versión actual de ZF. Será
+                <para>Es una limitación de la versión actual de Zend Framework. Será
                     eliminada en futuras versiones. Pero las páginas no
                     agregadas siempre dan mejor resultado (más óptimo) para
                     compartir páginas entre los documentos.</para>
@@ -53,7 +53,7 @@
                 <classname>Zend_Pdf</classname>. El atributo posee un array de
             objetos <classname>Zend_Pdf_Page</classname> y define completamente
             las instancias y el orden de las páginas. Este array puede
-            manipularse como cualquie otro array PHP:</para>
+            manipularse como cualquie otro array <acronym>PHP</acronym>:</para>
 
         <example id="zend.pdf.pages.example-1">
             <title>Administración de Páginas de un Documento PDF.</title>

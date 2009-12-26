@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.create">
     <title>Creando y Cargando Documentos PDF</title>
-    <para>La clase <classname>Zend_Pdf</classname> representa documentos PDF y
+    <para>La clase <classname>Zend_Pdf</classname> representa documentos <acronym>PDF</acronym> y
         proporciona operaciones a nivel de documento.</para>
 
     <para>Para crear un nuevo documento, primero debe ser creado un nuevo
@@ -32,7 +32,7 @@ $pdf3 = Zend_Pdf::parse($pdfString);
 ]]></programlisting>
     </example>
 
-    <para>El formato de archivos PDF soporta la actualización incremental del
+    <para>El formato de archivos <acronym>PDF</acronym> soporta la actualización incremental del
         documento. Así, cada vez que un documento es actualizado, entonces se
         crea una nueva revisión del documento. El componente
             <classname>Zend_Pdf</classname> soporta la recuperación de una

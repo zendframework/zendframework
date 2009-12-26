@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 17227 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
     <title>Información del Documento y Metadatos.</title>
-    <para>Un documento PDF puede incluir información general como el título del documento, autor,
+    <para>Un documento <acronym>PDF</acronym> puede incluir información general como el título del documento, autor,
         la creación y modificación de fechas.</para>
     <para>Históricamente, esta información se almacena usando una estructura especial de
         Información. Esta estructura está disponible para lectura y la escritura como una array

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17111 -->
+<!-- EN-Revision: 18940 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
   <title>Estándares de codificación de Zend Framework para PHP</title>
@@ -126,7 +126,7 @@
             <para>
                 Nota: No use retornos de carro (carriage returns, CR) como en
                 las fuentes de Apple (0x0D) o la combinación de retorno de
-                carro - linefeed (CRLF) estandar para sistemas operativos
+                carro - linefeed (<acronym>CRLF</acronym>) estandar para sistemas operativos
                 Windows (0x0D, 0x0A).
             </para>
         </sect2>
@@ -362,7 +362,7 @@ widgetFactory()
                 Por norma general, se recomienda la elocuencia. Las variables
                 deberían ser siempre tan elocuentes como prácticas para
                 describir los datos que el desarrollador pretende almacenar en
-                ellas. Variables escuetas como "$i" y "$n" están desaconsejadas,
+                ellas. Variables escuetas como "<varname>$i</varname>" y "<varname>$n</varname>" están desaconsejadas,
                 salvo para el contexto de los bucles más pequeños.
                 Si un bucle contiene más de 20 líneas de código, las variables
                 de índice deberían tener nombres más descriptivos.
@@ -417,7 +417,7 @@ widgetFactory()
 
             <para>
                 Las etiquetas cortas (short tags) no se permiten nunca.
-                Para archivos que contengan únicamente código PHP, la etiqueta
+                Para archivos que contengan únicamente código <acronym>PHP</acronym>, la etiqueta
                 de cierrre debe omitirse siempre
                 (Ver <xref linkend="coding-standard.php-file-formatting.general" />).
             </para>
@@ -712,10 +712,10 @@ class SampleClass
                     declaraciones de cualquier método.
                 </para>
                 <para>
-                    La construcción <code>var</code> no está permitido.
+                    La construcción <emphasis>var</emphasis> no está permitido.
                     Las variables de miembro siempre declaran su visibilidad
-                    usando uno los modificadores <code>private</code>,
-                    <code>protected</code>, o <code>public</code>.
+                    usando uno los modificadores <property>private</property>,
+                    <property>protected</property>, o <property>public</property>.
                     Dar acceso a las variables de miembro declarándolas
                     directamente como public está permitido pero no se aconseja
                     en favor de accesor methods (set &amp; get).
@@ -735,8 +735,8 @@ class SampleClass
                 </para>
                 <para>
                     Los métodos dentro de clases deben declarar siempre su
-                    visibilidad usando un modificador <code>private</code>,
-                    <code>protected</code>, o <code>public</code>.
+                    visibilidad usando un modificador <property>private</property>,
+                    <property>protected</property>, o <property>public</property>.
                 </para>
                 <para>
                     Como en las clases, la llave "{" debe ser escrita en la
@@ -750,6 +750,7 @@ class SampleClass
                 <para>
                     Lo siguiente es un ejemplo de una declaración admisible de
                     una función en una clase:
+				</para>
 				
                     <programlisting language="php"><![CDATA[
 /**
@@ -767,7 +768,7 @@ class Foo
     }
 }
 ]]></programlisting>
-</para>
+
 
              <para>
                     In cases where the argument list exceeds the <link
@@ -779,7 +780,7 @@ class Foo
                     brace of the function or method with one space separating the two, and at the
                     same indentation level as the function or method declaration. The following is
                     an example of one such situation:
-
+ </para>
                     <programlisting language="php"><![CDATA[
 /**
  * Documentation Block Here
@@ -797,7 +798,7 @@ class Foo
     }
 }
 ]]></programlisting>
-                </para>
+               
 
                 <note>
 					<para>
@@ -914,7 +915,7 @@ threeArguments(array(
 
                 <para>
                     Las sentencias de control basadas en las construcciones
-                    <methodname>if</methodname> y <methodname>elseif</methodname> deben tener un solo
+                    <emphasis>if</emphasis> y <emphasis>elseif</emphasis> deben tener un solo
                     espacio en blanco antes del paréntesis de apertura del
                     condicional y un solo espacio en blanco después del
                     paréntesis de cierre.
@@ -1046,18 +1047,18 @@ switch ($numPeople) {
                 </programlisting>
 
                 <para>
-                    La construcción <methodname>default</methodname> no debe omitirse nunca
-                    en una declaración <methodname>switch</methodname>.
+                    La construcción <property>default</property> no debe omitirse nunca
+                    en una declaración <property>switch</property>.
                 </para>
 				
 				<note>
                 <para>
                     <emphasis>NOTA:</emphasis> En ocasiones, resulta útil
-                    escribir una declaración <methodname>case</methodname> que salta al	
-                    siguiente case al no incluir un <methodname>break</methodname> o
-                    <methodname>return</methodname> dentro de ese case. Para distinguir	
+                    escribir una declaración <property>case</property> que salta al	
+                    siguiente case al no incluir un <property>break</property> o
+                    <property>return</property> dentro de ese case. Para distinguir	
                     estos casos de posibles errores, cualquier declaración
-                    donde <methodname>break</methodname> o <methodname>return</methodname> sean	
+                    donde <property>break</property> o <property>return</property> sean	
                     omitidos deberán contener un comentario indicando que se
                     omitieron intencionadamente.
                 </para>
@@ -1130,7 +1131,7 @@ switch ($numPeople) {
                 <para>
                     The <property>@subpackage</property> annotation is optional.  If provided, it
                     should be the subcomponent name, minus the class prefix. In the example above,
-                    the assumption is that the class in the file is either "Zend_Magic_Wand", or
+                    the assumption is that the class in the file is either  "<classname>Zend_Magic_Wand</classname>", or
                     uses that classname as part of its prefix.
                 </para>
 
@@ -1175,7 +1176,7 @@ switch ($numPeople) {
                 <para>
                     The <property>@subpackage</property> annotation is optional.  If provided, it
                     should be the subcomponent name, minus the class prefix. In the example above,
-                    the assumption is that the class described is either "Zend_Magic_Wand", or uses
+                    the assumption is that the class described is either "<classname>Zend_Magic_Wand</classname>", or uses
                     that classname as part of its prefix.
                 </para>
 

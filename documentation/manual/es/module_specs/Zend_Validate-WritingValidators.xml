@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 19577 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.writing_validators">
 
@@ -26,7 +26,7 @@
         De la descripción anterior de <classname>Zend_Validate_Interface</classname>, podrá inferir
         que las clases de validación que proporciona Zend Framework devuelven un
         valor booleano para cuando un valor se valida satisfactoriamente o no.
-        También proporcionan información sobre <emphasis role="bold">por qué</emphasis>
+        También proporcionan información sobre <emphasis>por qué</emphasis>
         un valor falló en la validación.
         La disponibilidad de las razones para los fracasos de validación puede ser
         valiosa para una aplicación por diversos motivos, tales como proporcionar
@@ -92,7 +92,7 @@ class MyValid_Float extends Zend_Validate_Abstract
 ]]></programlisting>
 
             La clase define una plantilla para su único mensaje de fallo de
-            validación, que incluye el mágico parámetro <methodname>%value%</methodname>.
+            validación, que incluye el mágico parámetro <emphasis>%value%</emphasis>.
             La llamada a <methodname>_setValue()</methodname> prepara al objeto para insertar
             automáticamente en el mensaje de fallo al valor probado, si éste
             falla en la validación.
@@ -114,6 +114,7 @@ class MyValid_Float extends Zend_Validate_Abstract
             y dentro del límite de un rango de valores mínimos y máximos.
             Un valor de entrada podría fallar en la validación exactamente por una
             de las siguientes razones:
+</para>
 
             <itemizedlist>
                 <listitem>
@@ -126,11 +127,12 @@ class MyValid_Float extends Zend_Validate_Abstract
                     <para>El valor de entrada es mayor que el valor máximo permitido.</para>
                 </listitem>
             </itemizedlist>
-       </para>
+       
 
         <para>
             Estas razones en el fallo de validación, son traducidas a las definiciones en la clase:
-
+		</para>
+		
              <programlisting language="php"><![CDATA[
 class MyValid_NumericBetween extends Zend_Validate_Abstract
 {
@@ -176,13 +178,15 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 }
 ]]></programlisting>
 
-            Las propiedades públicas <methodname>$minimum</methodname> y <methodname>$maximum</methodname>
+
+             <para>
+			Las propiedades públicas <varname>$minimum</varname> y <varname>$maximum</varname>
             se han establecido para proporcionar los límites mínimo y máximo,
             respectivamente, de un valor a validar.
             La clase también define dos variables de mensajes que corresponden a
-            las propiedades públicas y permiten usar <methodname>min</methodname> y <methodname>max</methodname>
+            las propiedades públicas y permiten usar <property>min</property> y <property>max</property>
             en plantillas de mensajes como parámetros mágicos, al igual que con
-            <methodname>value</methodname>.
+            <property>value</methodname>.
        </para>
 
         <para>
@@ -211,6 +215,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
             contraseña que cumple determinados criterios para ayudar a tener
             cuentas de usuario seguras. Supongamos que la seguridad de la contraseña
             aplica criterios que fuerzan a lo siguiente:
+</para>
 
             <itemizedlist>
                 <listitem>
@@ -226,7 +231,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
                     <para>contener al menos un dígito.</para>
                 </listitem>
             </itemizedlist>
-       </para>
+       
 
         <para>
             La siguiente clase implementa estos criterios de validación:

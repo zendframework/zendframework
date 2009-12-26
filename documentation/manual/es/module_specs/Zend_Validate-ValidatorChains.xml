@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 19432 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.validator_chains">
 
@@ -9,10 +9,15 @@
         en un orden particular. El siguiente código demuestra una forma de
         resolver el ejemplo de la <link linkend="zend.validate.introduction"
             >introducción</link>, donde el nombre de usuario debe tener entre 6
-        y 12 caracteres alfanuméricos. <programlisting language="php"><![CDATA[
+        y 12 caracteres alfanuméricos. 
+	</para>	
+		
+		<programlisting language="php"><![CDATA[
 // Crea una cadena de validadores y le agrega validadores
 $validatorChain = new Zend_Validate();
-$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12))
+$validatorChain->addValidator(
+                    new Zend_Validate_StringLength(array('min' => 6,
+                                                         'max' => 12)))
                ->addValidator(new Zend_Validate_Alnum());
 
 // Valida el username
@@ -24,7 +29,10 @@ if ($validatorChain->isValid($username)) {
         echo "$message\n";
     }
 }
-]]></programlisting> Los validadores se ejecutan en el orden en que se agregaron
+]]></programlisting> 
+
+<para>
+Los validadores se ejecutan en el orden en que se agregaron
         a <methodname>Zend_Validate</methodname>. En el ejemplo anterior, el
         nombre de usuario, primero se comprueba que su longitud esté entre 6 y
         12 caracteres y luego se controla para garantizar que sólo contiene
@@ -45,11 +53,17 @@ if ($validatorChain->isValid($username)) {
         que se decida que es innecesaria o inapropiada para la situación. Si el
         ejemplo anterior fue escrito como sigue, entonces el sistema de
         validación alfanumérica no se ejecutará si falla la longitud del string
-        de validación: <programlisting language="php"><![CDATA[
-$validatorChain->addValidator(new Zend_Validate_StringLength(6, 12), true)
-        ->addValidator(new Zend_Validate_Alnum());
+        de validación: 
+		</para>
+		
+        <programlisting language="php"><![CDATA[
+$validatorChain->addValidator(
+                    new Zend_Validate_StringLength(array('min' => 6,
+                                                         'max' => 12)),
+                    true)
+               ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>
-   </para>
+   
 
     <para>Cualquier objeto que implemente
             <classname>Zend_Validate_Interface</classname> puede ser utilizado

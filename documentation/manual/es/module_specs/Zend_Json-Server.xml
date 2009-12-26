@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 14000 -->
+<!-- EN-Revision: 19477 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - servidor JSON-RPC</title>
@@ -583,9 +583,9 @@ $server->handle();
                         Establecer la envoltura de la solicitud que debería ser
                         utilizada para acceder al servicio. Actualmente las
                         constantes soportadas son
-                            <classname>Zend_Json_Server_Smd::ENV_JSONRPC_1</classname>
+                            <constant>Zend_Json_Server_Smd::ENV_JSONRPC_1</constant>
                         y
-                            <classname>Zend_Json_Server_Smd::ENV_JSONRPC_1</classname>.</para>
+                            <constant>Zend_Json_Server_Smd::ENV_JSONRPC_1</constant>.</para>
                 </listitem>
                 <listitem>
                     <para><methodname>getEnvelope()</methodname>: Obtener la
@@ -634,7 +634,7 @@ $server->handle();
                 <listitem>
                     <para><methodname>setDojoCompatible($flag)</methodname>:
                         Establecer un flag que indique si el SMD es compatible o
-                        no con el toolkit de Dojo. Cuando sea verdadero, el JSON
+                        no con el toolkit de Dojo. Cuando sea verdadero, el <acronym>JSON</acronym>
                         SMD será formateado para cumplir con el formato que
                         espera el cliente de Dojo JSON-RPC.</para>
                 </listitem>
@@ -796,7 +796,7 @@ $server->handle();
                 </listitem>
                 <listitem>
                     <para><methodname>toJson()</methodname>: Mandar el servicio
-                        a una representación JSON.</para>
+                        a una representación <acronym>JSON</acronym>.</para>
                 </listitem>
             </itemizedlist>
         </sect3>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 15103 -->
 <!-- Reviewed: no -->
-<sect1 id="introduction.overview">
+<chapter id="introduction.overview">
 
     <title>Descripción general</title>
 
     <para>
-        Zend Framework (ZF) es un framework de código abierto para desarrollar
+        Zend Framework  es un framework de código abierto para desarrollar
         aplicaciones web y servicios web con PHP5.
-        ZF es una implementación que usa código 100% orientado a objetos.
-        La estructura de los componentes de ZF es algo único; cada componente
+         Zend Framework  es una implementación que usa código 100% orientado a objetos.
+        La estructura de los componentes de  Zend Framework  es algo único; cada componente
         está construido con una baja dependencia de otros componentes.
         Esta arquitectura débilmente acoplada permite a los desarrolladores
         utilizar los componentes por separado.
@@ -20,14 +20,14 @@
        Aunque se pueden utilizar de forma individual, los componentes de la
        biblioteca estándar de Zend Framework conforman un potente y extensible
        framework de aplicaciones web al combinarse.
-       ZF ofrece un gran rendimiento y una robusta implementación MVC,
+       Zend Framework ofrece un gran rendimiento y una robusta implementación <acronym>MVC</acronym>,
        una abstración de base de datos fácil de usar, y un componente de
-       formularios que implementa la prestación de formularios HTML,
+       formularios que implementa la prestación de formularios <acronym>HTML</acronym>,
        validación y filtado para que los desarrolladores puedan consolidar
        todas las operaciones usando de una manera sencilla la interfaz
-       orientada a objetos. Otros componentes, como Zend_Auth y Zend_Acl,
+       orientada a objetos. Otros componentes, como <classname>Zend_Auth</classname> y <classname>Zend_Acl</classname>,
        proveen autentificación de usuarios y autorización diferentes a las
-       tiendas de certificados comunes (REVISAR ESTO).
+       tiendas de certificados comunes <!-- (REVISAR ESTO)-->.
        También existen componentes que implementan bibliotecas de cliente
        para acceder de forma sencilla a los web services más populares.
        Cualesquiera que sean las necesidades de su solicitud, usted tiene
@@ -45,14 +45,14 @@
     </para>
     <para>
         Zend Framework no podría haber proporcionado y apoyado todas estas
-    características sin la ayuda de la vibrante comunidad de ZF.
+    características sin la ayuda de la vibrante comunidad de Zend Framework.
     Los miembros de la comunidad, incluidos los contribuyentes,
     están disponibles en las , <ulink url="http://framework.zend.com/archives">listas de correo</ulink>, <ulink url="http://www.zftalk.com">
         canales de IRC</ulink>, y en otros foros.
-        Cualquier duda que tenga acerca de ZF, la comunidad está siempre
+        Cualquier duda que tenga acerca de Zend Framework, la comunidad está siempre
         disponible para responder.
     </para>
-</sect1>
+</chapter>
 <!--
 vim:se ts=4 sw=4 et:
 -->

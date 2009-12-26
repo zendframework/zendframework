@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 19577 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
 
     <title>Introducción</title>
 
     <para>
-        Cuando se necesita validar algún tipo de dato, el componente <classname>Zend_Validate</classname> ofrece un conjunto de validadores,
+        Cuando se necesita validar algún tipo de dato, el componente <classname>Zend_Validate</classname> 
+		ofrece un conjunto de validadores,
         como así también un sencillo mecanismo de encadenado de validaciones por el cual
         múltiples validadores pueden aplicarse a un dato en un orden definido por el usuario.
    </para>
@@ -58,7 +59,7 @@
             Las claves y los valores son dependientes de la clase; cada clase de validación
             define su propio conjunto de mensajes de validación fallidas y las
             claves únicas que las identifican.
-            Cada clase tiene también una definición <methodname>const</methodname>
+            Cada clase tiene también una definición constante
             que hace corresponder a cada identificador con una causa del fallo
             de validación.
        </para>
@@ -75,7 +76,7 @@
 
         <para>
             El siguiente ejemplo ilustra la validación de una dirección de e-mail:
-
+</para>
              <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress();
 
@@ -89,7 +90,7 @@ if ($validator->isValid($email)) {
 }
 ]]></programlisting>
 
-       </para>
+       
 
     </sect2>
 
@@ -103,10 +104,10 @@ if ($validator->isValid($email)) {
            <methodname>getMessages()</methodname> en caso de fallo de validación.
            El primer argumento de este método es un string que contiene el mensaje
            de error. Usted puede incluir tokens en este array que serán sustituidos
-           con datos relevantes al validador. El token <methodname>%value%</methodname> es aceptado
+           con datos relevantes al validador. El token <emphasis>%value%</emphasis> es aceptado
            por todos los validadores, que es sustituido por el valor que pasó a
            <methodname>isValid()</methodname>. Cada clase de validación, puede dar apoyo a otros
-           tokens en base a cada caso. Por ejemplo, <methodname>%max%</methodname> es un token
+           tokens en base a cada caso. Por ejemplo, <emphasis>%max%</methodname> es un token
            apoyado por <classname>Zend_Validate_LessThan</classname>.
            El método <methodname>getMessageVariables()</methodname> devuelve un array de tokens
            variables aceptados por el validador.
@@ -127,7 +128,7 @@ if ($validator->isValid($email)) {
 
         <para>
              <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 
 $validator->setMessage(
     'El string \'%value%\' es muy corto; debe tener al menos %min% ' .
@@ -146,9 +147,10 @@ if (!$validator->isValid('word')) {
         <para>
             Puede establecer varios mensajes usando el método <methodname>setMessages()</methodname>.
             Su argumento es un array que contiene pares de clave/mensaje.
+</para>
 
              <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 
 $validator->setMessages( array(
     Zend_Validate_StringLength::TOO_SHORT =>
@@ -158,7 +160,7 @@ $validator->setMessages( array(
 ));
 ]]></programlisting>
 
-       </para>
+       
 
         <para>
             Incluso, si su aplicación requiere una mayor flexibilidad para informar
@@ -214,7 +216,7 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
             Si el validador lo necesita, también puede pasar un array de constructores de argumentos.
 
              <programlisting language="php"><![CDATA[
-if (Zend_Validate::is($value, 'Between', array(1, 12))) {
+if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
     // Si, $value está entre 1 y 12
 }
 ]]></programlisting>
@@ -241,7 +243,80 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
             demanda, para procesar juegos de datos de entrada. Ver
             <xref linkend="zend.filter.input" />.
        </para>
+<sect3 id="zend.validate.introduction.static.namespaces">
 
+            <title>Namespaces</title>
+
+            <para>
+                When working with self defined validators you can give a forth parameter
+                to <methodname>Zend_Validate::is()</methodname> which is the namespace
+                where your validator can be found.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+if (Zend_Validate::is($value, 'MyValidator', array('min' => 1, 'max' => 12),
+                      array('FirstNamespace', 'SecondNamespace')) {
+    // Yes, $value is ok
+}
+]]></programlisting>
+
+            <para>
+                <classname>Zend_Validate</classname> allows also to set namespaces as default.
+                This means that you can set them once in your bootstrap and have not to give
+                them again for each call of <methodname>Zend_Validate::is()</methodname>. The
+                following code snippet is identical to the above one.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+Zend_Validate::setDefaultNamespaces(array('FirstNamespace', 'SecondNamespace'));
+if (Zend_Validate::is($value, 'MyValidator', array('min' => 1, 'max' => 12)) {
+    // Yes, $value is ok
+}
+
+if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) {
+    // Yes, $value is ok
+}
+]]></programlisting>
+
+            <para>
+                For your convinience there are following methods which allow the handling of
+                namespaces:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::getDefaultNamespaces()</methodname></emphasis>:
+                        Returns all set default namespaces as array.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::setDefaultNamespaces()</methodname></emphasis>:
+                        Sets new default namespaces and overrides any previous set. It accepts
+                        either a string for a single namespace of an array for multiple namespaces.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::addDefaultNamespaces()</methodname></emphasis>:
+                        Adds additional namespaces to already set ones. It accepts either a string
+                        for a single namespace of an array for multiple namespaces.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis><methodname>Zend_Validate::hasDefaultNamespaces()</methodname></emphasis>:
+                        Returns true when one or more default namespaces are set, and false when no
+                        default namespaces are set.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+	   
     </sect2>
     <sect2 id="zend.validate.introduction.translation">
 
@@ -255,7 +330,7 @@ if (Zend_Validate::is($value, 'Between', array(1, 12))) {
        </para>
 
          <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 $translate = new Zend_Translate(
     'array',
     array(Zend_Validate_StringLength::TOO_SHORT => 'Translated \'%value%\''),
@@ -297,7 +372,7 @@ Zend_Validate::setDefaultTranslator($translate);
        </para>
 
          <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_StringLength(8, 12);
+$validator = new Zend_Validate_StringLength(array('min' => 8, 'max' => 12));
 if (!$validator->isTranslatorDisabled()) {
     $validator->setDisableTranslator();
 }

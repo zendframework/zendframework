@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17325 -->
+<!-- EN-Revision: 19778 -->
 <!-- Reviewed: no -->
-<sect1 id="introduction.installation">
+<chapter id="introduction.installation">
 
     <title> Instalación</title>
 
     <para>
-        Zend Framework requiere por lo menos PHP 5.1.4 o superior, aunque Zend recomienda encarecidamente la versión 5.2.3 o superior, porque hay parches de seguridad y mejoras en el rendimiento entre estas dos versiones. Por favor, consulte el anexo sobre los  <link linkend="requirements">requisitos del sistema</link>. para obtener más información.
-
+Véase el apéndice <link linkend="requirements"> requisitos </ link> para una lista detallada de
+        requisitos para Zend Framework.
     </para>
 
     <para>
@@ -92,4 +92,4 @@
         Ya que los componentes de Zend Framework están débilmente conectados, tiene la opción de usar cualquier combinación de ellos en sus aplicaciones. Los siguientes capítulos presentan una referencia exhaustiva de Zend Framework, componente a componente.
     </para>
 
-</sect1>
+</chapter>

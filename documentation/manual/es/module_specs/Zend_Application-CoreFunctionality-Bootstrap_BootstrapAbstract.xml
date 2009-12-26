@@ -36,7 +36,7 @@
                         <methodname>__construct($application)</methodname>
                     </entry>
                     <entry>
-                        <methodname>void</methodname>
+                        <type>void</type>
                     </entry>
                     <entry>
                         <itemizedlist>
@@ -324,7 +324,7 @@
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    <methodname>$name</methodname>
+                                    <varname>$name</varname>
                                     ,
                                     <emphasis>requerido</emphasis>
                                     .

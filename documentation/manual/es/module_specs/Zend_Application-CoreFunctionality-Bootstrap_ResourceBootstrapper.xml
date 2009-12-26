@@ -116,7 +116,7 @@
                         <itemizedlist>
                             <listitem>
                                 <para>
-                                    <methodname>$resource</methodname>
+                                    <varname>$resource</varname>
                                     :
                                     <emphasis>requerido</emphasis>
                                     .

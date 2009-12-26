@@ -372,7 +372,7 @@ $json = (string) $data; // conversión a string == conversión a JSON
                         varios items a la vez, sobrescribiendo cualquier item
                         que figurase
                         anteriormente en el objeto.
-                        <methodname>$items</methodname>
+                        <varname>$items</varname>
                         debe ser un array o
                         un objeto
                         <methodname>Traversable</methodname>

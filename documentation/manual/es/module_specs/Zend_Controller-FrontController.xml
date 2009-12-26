@@ -286,7 +286,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <title>run()</title>
 
             <para>
-                <classname>Zend_Controller_Front::run($path)</classname>
+                <methodname>Zend_Controller_Front::run($path)</methodname>
                 es un método estático que
                 toma simplemente un path a un directorio que contiene
                 controladores. Obtiene una

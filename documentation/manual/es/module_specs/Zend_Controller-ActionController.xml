@@ -547,7 +547,7 @@ string render(string $action = null,
                 <filename>$viewSuffix</filename>
                 ).
                 Pasándole un valor a
-                <methodname>$action</methodname>
+                <varname>$action</varname>
                 suministrará esa
                 plantilla en al subdirectorio
                 <filename>/[controller]/</filename>

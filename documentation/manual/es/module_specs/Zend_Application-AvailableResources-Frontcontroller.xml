@@ -74,7 +74,7 @@
 
         <listitem>
             <para>
-                <methodname>defaultAction</methodname>
+               <emphasis><property>defaultAction</property></emphasis>
                 : nombre base de la acción por defecto
                 (normalmente, "índex").
             </para>

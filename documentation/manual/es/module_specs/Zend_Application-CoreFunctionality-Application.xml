@@ -150,13 +150,13 @@
                                 <itemizedlist>
                                     <listitem>
                                         <para>
-                                            <emphasis>String</emphasis>
+                                            <emphasis><type>String</type>emphasis>
                                             : path
                                             al archivo
                                             <classname>Zend_Config</classname>
                                             para cargarlo como donfiguración de su
                                             aplicación.
-                                            <methodname>$environment</methodname>
+                                            <varname>$environment</varname>
                                             se utilizará para
                                             determinar qué sección de la configuración
                                             se traerá.
@@ -205,7 +205,7 @@
                         <methodname>getEnvironment()</methodname>
                     </entry>
                     <entry>
-                        <methodname>string</methodname>
+                        <type>String</type>
                     </entry>
                     <entry>N/A</entry>
                     <entry>
@@ -319,7 +319,7 @@
                         <methodname>getOption($key)</methodname>
                     </entry>
                     <entry>
-                        <methodname>mixed</methodname>
+                        <type>mixed</type>
                     </entry>
                     <entry>
                         <itemizedlist>
@@ -477,7 +477,9 @@
                         <methodname>getBootstrap()</methodname>
                     </entry>
                     <entry>
-                        <methodname>null | Zend_Application_Bootstrap_Bootstrapper</methodname>
+                        <constant>NULL</constant> |
+                        <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
+
                     </entry>
                     <entry>N/A</entry>
                     <entry>
@@ -492,7 +494,7 @@
                         <methodname>bootstrap()</methodname>
                     </entry>
                     <entry>
-                        <methodname>void</methodname>
+                        <type>void</type>
                     </entry>
                     <entry>N/A</entry>
                     <entry>
@@ -509,7 +511,7 @@
                         <methodname>run()</methodname>
                     </entry>
                     <entry>
-                        <methodname>void</methodname>
+                        <type>void</type>
                     </entry>
                     <entry>N/A</entry>
                     <entry>

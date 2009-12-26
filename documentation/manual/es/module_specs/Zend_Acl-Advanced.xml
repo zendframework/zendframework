@@ -67,14 +67,14 @@
             marcado
             como una fuente de abusos.
             <classname>Zend_Acl</classname>tiene soporte para la
-            aplicación de normas basadas en cualquier condición que el
-            desarrollador necesite.</para>
+			aplicación de normas basadas en cualquier condición que el
+			desarrollador necesite.</para>
 
         <para>
             <classname>Zend_Acl</classname>
             provee soporte para reglas condicionales con
             <classname>Zend_Acl_Assert_Interface</classname>. Con el fin de utilizar la regla
-            de aserción de la interfaz, un desarrollador escribe
+			de aserción de la interfaz, un desarrollador escribe
             una clase que implemente el método<methodname>assert()</methodname>
             de la interfaz:
         </para>

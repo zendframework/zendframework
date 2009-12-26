@@ -195,7 +195,7 @@ Zend_Loader::loadClass('Container_Tree',
 
         <para>
             El método estático
-            <classname>Zend_Loader::isReadable($pathname)</classname>
+            <methodname>Zend_Loader::isReadable($pathname)</methodname>
             devuelve
             <constant>TRUE</constant>
             si el archivo en la ruta $pathname existe

@@ -511,7 +511,7 @@ echo $respuesta;
         </para>
 
         <para>
-            <methodname>Zend_Amf</methodname>
+            <classname>Zend_Amf</classname>
             ofrece tres métodos para mapear
             ActionScript y objetos
             <acronym>PHP</acronym>

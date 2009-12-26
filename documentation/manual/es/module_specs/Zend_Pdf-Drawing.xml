@@ -315,11 +315,11 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
             TrueType. Los objetos Font se obtienen a
             través de una de los dos
             métodos de fábrica:
-            <classname>Zend_Pdf_Font::fontWithName($fontName)</classname>
+            <methodname>Zend_Pdf_Font::fontWithName($fontName)</methodname>
             para las 14 fuentes estándar
             <acronym>PDF</acronym>
             o
-            <classname>Zend_Pdf_Font::fontWithPath($filePath)</classname>
+            <methodname>Zend_Pdf_Font::fontWithPath($filePath)</methodname>
             para fuentes personalizadas.
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-1">
@@ -721,7 +721,7 @@ public function drawImage(Zend_Pdf_Resource_Image $image, $x1, $y1, $x2, $y2);
 ]]></programlisting>
         <para>
             Los objetos imagen deben ser creados con el método
-            <classname>Zend_Pdf_Image::imageWithPath($filePath)</classname>
+            <methodname>Zend_Pdf_Image::imageWithPath($filePath)</methodname>
             (imágenes JPG, PNG y TIFF ahora son soportadas):
         </para>
         <example id="zend.pdf.drawing.image-drawing.example-1">

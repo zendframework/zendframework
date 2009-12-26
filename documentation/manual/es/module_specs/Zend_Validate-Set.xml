@@ -54,11 +54,11 @@
             está entre
             los valores límites mínimo y máximo. La comparación es inclusiva por defecto
             (
-            <methodname>$valor</methodname>
+            <varname>$valor</varname>
             puede ser igual a una valor límite), aunque esto
             puede ser anulado a fin de hacer una
             comparación estricta, donde
-            <methodname>$valor</methodname>
+            <varname>$valor</varname>
             debe ser estrictamente mayor al mínimo y
             estrictamente menor al máximo.
         </para>

@@ -66,7 +66,7 @@
                 <methodname>_forward()</methodname>
                 ,
                 redirecciona, o
-                <methodname>render</methodname>
+                <methodname>render()</methodname>
                 manualmente, el
                 autorendering no se llevará a cabo, como está realizando
                 cualquiera de
@@ -84,13 +84,12 @@
                 está habilitado por
                 defecto. Puede desactivarlo vía parámetro del front controller
                 <emphasis>noViewRenderer</emphasis>
+                (<command>$front->setParam('noViewRenderer',true)</command>) 
+				o eliminando al ayudante del stack de ayudantes
                 (
-                <command>$front->setParam('noViewRenderer',
-                    true)</command>
-                ) o eliminando al ayudante del stack de
-                ayudantes
-                (
-                <methodname>Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')</methodname>
+				<methodname>
+				Zend_Controller_Action_HelperBroker::removeHelper('viewRenderer')
+				</methodname>
                 ).
             </para>
 
@@ -121,7 +120,7 @@ Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
                 <listitem>
                     <para>
                         Inicializar y/o recuperar un objeto
-                        <methodname>ViewRenderer</methodname>
+                        <emphasis>ViewRenderer</emphasis>
                         por demanda
                         via el ayudante:
                     </para>
@@ -142,7 +141,7 @@ $viewRenderer->setView($view)
 
         <para>
             En su uso más básico, simplemente instancie a
-            <methodname>ViewRenderer</methodname>
+            <emphasis>ViewRenderer</emphasis>
             y páselo al ayudante de
             acciones. La forma más fácil para instanciar y registrar de una
             sola
@@ -611,7 +610,7 @@ $viewRenderer =
             <itemizedlist>
                 <listitem>
                     <para>
-                        <filename>:module</filename>
+                        <emphasis>:module</emphasis>
                         : MixedCase y
                         camelCasedWords están separados por guiones, y el string
                         completo se convierte a minúsculas. Por ejemplo:
@@ -630,7 +629,7 @@ $viewRenderer =
 
                 <listitem>
                     <para>
-                        <filename>:controller</filename>
+                        <emphasis>:controller</emphasis>
                         : MixedCase y
                         camelCasedWords están separados por guiones; los
                         subrayados se
@@ -717,7 +716,7 @@ $viewRenderer =
                     <para>
                         Una vez que la vista ha sido renderizada al objeto
                         respuesta, se establece
-                        <methodname>noRender</methodname>
+                        <emphasis>noRender</emphasis>
                         para evitar
                         accidentalmente renderizar el mismo script de vista
                         varias veces.
@@ -745,7 +744,7 @@ $viewRenderer =
                     el path a un script de vista basado en la acción pasada y/o
                     cualquier
                     variables pasadas en
-                    <methodname>$vars</methodname>
+                    <varname>$vars</varname>
                     . Las claves para este
                     array pueden incluir cualquiera de las claves de
                     especificación de paths ('moduleDir', 'module',
@@ -756,7 +755,7 @@ $viewRenderer =
                 </para>
 
                 <para>
-                    <emphasis>getViewScript()</emphasis>
+                    <methodname>getViewScript()</methodname>
                     utilizará tanto a
                     <emphasis>viewScriptPathSpec</emphasis>
                     o
@@ -799,24 +798,19 @@ $viewRenderer =
 
             <listitem>
                 <para>
-                    <methodname>render($action, $name,
-                        $noController)</methodname>
-                    comprueba primero para ver
-                    si bien
-                    <methodname>$name</methodname>
+                    <methodname>render($action, $name, $noController)</methodname>
+                    comprueba primero para ver si bien
+                    <varname>$name</varname>
                     o
                     <varname>$noController</varname>
-                    se han pasado, y
-                    si es así, establece los flags apropiados (responseSegment y
-                    noController, respectivamente) en
+                    se han pasado, y si es así, establece los flags apropiados 
+					(responseSegment y  noController, respectivamente) en
                     <emphasis>ViewRenderer</emphasis>
-                    . A
-                    continuación, pasa el argumento
+                    . A continuación, pasa el argumento
                     <varname>$action</varname>
                     , si hay alguno, a
                     <methodname>getViewScript()</methodname>
-                    . Por último,
-                    pasa el path calculado del script de vista a
+                    . Por último, pasa el path calculado del script de vista a
                     <methodname>renderScript()</methodname>
                     .
                 </para>
@@ -855,7 +849,7 @@ $viewRenderer =
                     determinar el path
                     para la creación del script de vista.
                     Este pasa
-                    <methodname>$action</methodname>
+                    <varname>$action</varname>
                     y
                     <varname>$vars</varname>
                     a
@@ -956,7 +950,7 @@ class Foo_BarController extends Zend_Controller_Action
                 a
                 <methodname>Bar_BazController::bazBatAction()</methodname>
                 en
-                <methodname>Bar/BazController.php</methodname>
+                <filename>Bar/BazController.php</filename>
                 (note la
                 separación del path) y renderiza
                 <filename>bar/baz/baz-bat.phtml</filename>
@@ -969,7 +963,7 @@ class Foo_BarController extends Zend_Controller_Action
                 defecto, pero que, debido a la existencia
                 de un separador de paths, el controlador
                 recibe el nombre
-                <methodname>Bar_BazController</methodname>
+                <classname>Bar_BazController</classname>
                 , en
                 <filename>Bar/BazController.php</filename>
                 . El

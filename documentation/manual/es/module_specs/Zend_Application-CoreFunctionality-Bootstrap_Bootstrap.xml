@@ -32,7 +32,8 @@
             Additionally, this bootstrap implementation provides the ability to specify the
             "namespace" or class prefix for resources located in its tree, which will enable
             autoloading of various application resources; essentially, it instantiates a
-            <link linkend="zend.loader.autoloader-resource.module">Zend_Application_Module_Autoloader</link>
+            <link linkend="zend.loader.autoloader-resource.module">
+			Zend_Application_Module_Autoloader</link>
             object, providing the requested namespace and the bootstrap's directory as arguments.
             You may enable this functionality by providing a namespace to the "appnamespace"
             configuration option. As an

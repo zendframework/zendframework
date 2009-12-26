@@ -19,6 +19,7 @@
     </para>
     <para>
         Para los propósitos de esta documentación:
+	 </para>	
         <itemizedlist>
             <listitem>
                 <para>
@@ -37,6 +38,7 @@
                 </para>
             </listitem>
         </itemizedlist>
+		<para>
         En términos generales,
         <emphasis> Los roles solicitan
             acceso a los recursos </emphasis>
@@ -327,7 +329,7 @@ $acl = new Zend_Acl();
             identificación de sus
             usuarios. Puede haber un grupo de 'Invitados' para permitir acceso
             limitado para demostraciones, un grupo de 'Personal' para la mayoría
-            de usuarios del CMS
+            de usuarios del <acronym>CMS</acronym>
             quienes realizan la mayor parte de operaciones
             del día a día, un grupo 'Editores' para
             las responsabilidades de
@@ -399,7 +401,7 @@ require_once 'Zend/Acl.php';
 
 $acl = new Zend_Acl();
 
-// Agregar grupos al registro de roles usando <classname>Zend_Acl</classname>_Role
+// Agregar grupos al registro de roles usando Zend_Acl_Role
 require_once 'Zend/Acl/Role.php';
 
 // Invitado no hereda controles de acceso
@@ -443,7 +445,14 @@ $acl->addRole(new Zend_Acl_Role('administrador'));
             porque los recursos
             y roles heredan reglas que están definidas en
             sus padres.
+			
+					    <note>
+        <para>In general, <classname>Zend_Acl</classname> obeys a given rule if and only if a more
+        specific rule does not apply.
+    </para>
+</note>
         </para>
+
 
         <para>Consecuentemente, podemos definir un grupo razonablemente
             complejo de reglas con un
@@ -470,7 +479,8 @@ $acl->allow($rolInvitado, null, 'ver');
 $acl->allow('invitado', null, 'ver');
 //*/
 
-// Personal hereda el privilegio de ver de invitado, pero también necesita privilegios adicionales
+// Personal hereda el privilegio de ver de invitado, 
+// pero también necesita privilegios adicionales
 $acl->allow('personal', null, array('editar', 'enviar', 'revisar'));
 
 // Editor hereda los privilegios de ver, editar, enviar, y revisar de personal,

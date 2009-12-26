@@ -64,7 +64,7 @@ if ($validatorChain->isValid($username)) {
         <methodname>addValidator()</methodname>
         .
         Poniendo
-        <methodname>$breakChainOnFailure</methodname>
+        <varname>$breakChainOnFailure</varname>
         a
         <constant>TRUE</constant>
         , el validador agregado quebrará la cadena

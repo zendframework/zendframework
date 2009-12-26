@@ -279,7 +279,7 @@
                 realm. El formato del archivo de texto es similar a los archivos
                 htpasswd de Apache:
             </para>
-            <programlisting><![CDATA[
+            <programlisting language="txt"><![CDATA[
 <username>:<realm>:<credentials>\n
 ]]></programlisting>
             <para>

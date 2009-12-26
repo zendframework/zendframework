@@ -547,7 +547,7 @@ class FooController extends Zend_Controller_Action
                     disponibles para una acción. Si ya existen los
                     mapeos,
                     simplemente se añade a esos mapeos.
-                    <methodname>$context</methodname>
+                    <varname>$context</varname>
                     puede ser un único
                     contexto, o un array de contextos.
                 </para>
@@ -573,7 +573,7 @@ class FooController extends Zend_Controller_Action
                     disponibles para una acción. Si el mapeo ya
                     existe, se
                     reemplaza con los especificados.
-                    <methodname>$context</methodname>
+                    <varname>$context</varname>
                     puede ser un único
                     contexto, o un array de contextos.
                 </para>
@@ -630,7 +630,7 @@ class FooController extends Zend_Controller_Action
                         $context)</methodname>
                     : elimina uno o más contextos de
                     una acción determinada.
-                    <methodname>$context</methodname>
+                    <varname>$context</varname>
                     puede ser un único contexto o un array de contextos.
                 </para>
             </listitem>
@@ -796,7 +796,7 @@ $contextSwitch->initContext();
                     <methodname>addHeader()</methodname>
                     , así que si la
                     cabecera ya existe, arrojará una excepción.
-                    <methodname>$headers</methodname>
+                    <varname>$headers</varname>
                     es un array de pares
                     cabecera/contexto.
                 </para>
@@ -853,7 +853,7 @@ $contextSwitch->initContext();
                     (indicando que
                     se llamará a un callback para cada contexto
                     de inicialización o postDispatch).
-                    <methodname>$callback</methodname>
+                    <varname>$callback</varname>
                     debe ser un callback
                     válido de
                     <acronym>PHP</acronym>
@@ -996,7 +996,7 @@ $contextSwitch->initContext();
             En primer lugar, el controlador de acción utiliza una propiedad
             diferente para determinar
             contextos,
-            <methodname>$ajaxable</methodname>
+            <varname>$ajaxable</varname>
             . Esto es, que puede tener
             diferentes contextos utilizados para
             <acronym>AJAX</acronym>

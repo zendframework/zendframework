@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 18274 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.importing">
     <title>Importer des flux</title>
@@ -335,11 +335,11 @@ $atomFeedFromArray =
 // la ligne suivante est équivalente à celle ci-dessus ;
 // par défaut l'instance Zend_Feed_Atom est retournée
 $atomFeedFromArray =
-    Zend_Feed::importArray(new Zend_Feed_Builder($array), 'atom');
+    Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'atom');
 
 // importe un flux rss à partir d'un constructeur personnalisé
 $rssFeedFromArray =
-    Zend_Feed::importArray(new Zend_Feed_Builder($array), 'rss');
+    Zend_Feed::importBuilder(new Zend_Feed_Builder($array), 'rss');
 ]]></programlisting>
 
         </sect3>

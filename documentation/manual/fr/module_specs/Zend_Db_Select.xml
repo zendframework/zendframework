@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17409 -->
+<!-- EN-Revision: 19726 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
     <title>Zend_Db_Select</title>
@@ -739,12 +739,6 @@ $select = $db->select()
                 dans l'expression.
             </para>
 
-            <para>
-                Cette méthode accepte un seul paramètre. Si vous avez une expression dans
-                laquelle vous devez substituer plusieurs variables, vous devez formater la chaîne
-                manuellement, en interpolant les variables et en les échappant vous-même.
-            </para>
-
             <example id="zend.db.select.building.where.example-param">
                 <title>Exemple d'un paramètre dans la méthode where()</title>
 
@@ -761,6 +755,30 @@ $select = $db->select()
                     array('produit_id', 'produit_nom', 'prix'))
              ->where('prix > ?', $prixminimum);
 ]]></programlisting>
+            </example>
+
+            <para>
+                Vous pouvez fournir un tableau en tant que second paramètre de la méthode
+                <methodname>where()</methodname> quand vous utilisez l'opérateur SQL "IN".
+            </para>
+ 
+            <example id="zend.db.select.building.where.example-array">
+                <title>Exemple d'un paramètre de type tableau pour la méthode where()</title>
+
+                <programlisting language="php"><![CDATA[
+// Construire cette requête :
+//   SELECT produit_id, produit_nom, prix
+//   FROM "produits"
+//   WHERE (produit_id IN (1, 2, 3))
+
+$productIds = array(1, 2, 3);
+
+$select = $db->select()
+             ->from('produits',
+                    array('produit_id', 'produit_nom', 'prix'))
+             ->where('produit_id IN (?)', $productIds);
+]]></programlisting>
+
             </example>
 
             <para>
@@ -1125,6 +1143,33 @@ $select = $db->select()
 $select = $db->select()
              ->forUpdate()
              ->from(array('p' => 'produits'));
+]]></programlisting>
+            </example>
+        </sect3>
+
+        <sect3 id="zend.db.select.building.union">
+            <title>Construire une requête UNION</title>
+
+            <para>
+                Vous pouvez construire des requêtes de type union avec
+                <classname>Zend_Db_Select</classname> en fournissant un tableau de
+                <classname>Zend_Db_Select</classname> ou de chaînes de requêtes SQL à la méthode
+                <methodname>union()</methodname>. En second paramètre, vous pouvez fournir les
+                constantes <constant>Zend_Db_Select::SQL_UNION</constant> ou
+                <constant>Zend_Db_Select::SQL_UNION_ALL</constant> pour spécifier le type d'union
+                que vous souhaitez réaliser.
+            </para>
+
+            <example id="zend.db.select.building.union.example">
+                <title>Exemple avec la méthode union()</title>
+
+                <programlisting language="php"><![CDATA[
+$sql1 = $db->select();
+$sql2 = "SELECT ...";
+
+$select = $db->select()
+    ->union(array($sql1, $sql2))
+    ->order("id");
 ]]></programlisting>
             </example>
         </sect3>

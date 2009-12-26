@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19139 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table">
     <title>Zend_Db_Table</title>
@@ -753,11 +753,26 @@ $rows = $table->fetchAll('bug_status = "NEW"', 'bug_id ASC', 10, 0);
 $rows = $table->fetchAll($table->select()->where('bug_status = ?', 'NEW')
                                          ->order('bug_id ASC')
                                          ->limit(10, 0));
+// ou avec liaison :
+$rows = $table->fetchAll(
+    $table->select()
+        ->where('bug_status = :status')
+        ->bind(array(':status'=>'NEW')
+        ->order('bug_id ASC')
+        ->limit(10, 0)
+    );
 
 // Récupérer un row
 $row = $table->fetchRow('bug_status = "NEW"', 'bug_id ASC');
 $row = $table->fetchRow($table->select()->where('bug_status = ?', 'NEW')
                                         ->order('bug_id ASC'));
+// ou avec liaison :
+$row = $table->fetchRow(
+    $table->select()
+        ->where('bug_status = :status')
+        ->bind(array(':status'=>'NEW')
+        ->order('bug_id ASC')
+    );
 ]]></programlisting></para>
                     </warning>
                 </para>
@@ -879,7 +894,7 @@ $order  = 'bug_id';
 $count  = 10;
 $offset = 20;
 
-$select = $table->select()->where(array('bug_status = ?' => 'NEW'))
+$select = $table->select()->where('bug_status = ?', 'NEW')
                           ->order($order)
                           ->limit($count, $offset);
 

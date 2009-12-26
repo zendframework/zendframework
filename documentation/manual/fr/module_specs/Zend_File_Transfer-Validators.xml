@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 17685 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.validators">
     <title>Validateurs pour Zend_File_Transfer</title>
@@ -557,6 +557,16 @@ $upload->addValidator('ExcludeExtension', false, array('php', 'exe', 'case' => t
                     souhaitez exclure.
                 </para>
             </listitem>
+
+            <listitem>
+                <para>
+                    <code>headerCheck</code>&#160;: si spécifié à <constant>TRUE</constant>, cette
+                    option va vérifier l'information <acronym>HTTP</acronym> concernant le type de
+                    fichier quand les extensions <emphasis>fileInfo</emphasis> ou
+                    <emphasis>mimeMagic</emphasis> ne seront pas trouvées. La valeur par défaut de
+                    cette option est <constant>FALSE</constant>.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -1070,6 +1080,16 @@ $upload->addValidator('Md5', false, array('3b3652f336522365223', 'eb3365f3365ddc
                 <para>
                     Avec cette option vous pouvez définir le type <acronym>MIME</acronym> des fichiers qui seront
                     acceptés.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>headerCheck</code>&#160;: si spécifié à <constant>TRUE</constant>, cette
+                    option va vérifier l'information <acronym>HTTP</acronym> concernant le type de
+                    fichier quand les extensions <emphasis>fileInfo</emphasis> ou
+                    <emphasis>mimeMagic</emphasis> ne seront pas trouvées. La valeur par défaut de
+                    cette option est <constant>FALSE</constant>.
                 </para>
             </listitem>
 

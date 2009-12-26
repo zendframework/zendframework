@@ -19,6 +19,7 @@
 
     <example id="learning.lucene.pagination.example">
         <title>Exemple de pagination de résultat de recherche</title>
+
         <programlisting language="php"><![CDATA[
 $cacheId = md5($query);
 if (!$resultSet = $cache->load($cacheId)) {

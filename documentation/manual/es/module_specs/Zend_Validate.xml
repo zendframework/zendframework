@@ -6,8 +6,8 @@
     <title>Introducción</title>
 
     <para>
-        Cuando se necesita validar algún tipo de dato, el componente <classname>Zend_Validate</classname> 
-		ofrece un conjunto de validadores,
+        Cuando se necesita validar algún tipo de dato, el componente <classname>Zend_Validate</classname>
+        ofrece un conjunto de validadores,
         como así también un sencillo mecanismo de encadenado de validaciones por el cual
         múltiples validadores pueden aplicarse a un dato en un orden definido por el usuario.
    </para>
@@ -90,7 +90,7 @@ if ($validator->isValid($email)) {
 }
 ]]></programlisting>
 
-       
+      
 
     </sect2>
 
@@ -160,7 +160,7 @@ $validator->setMessages( array(
 ));
 ]]></programlisting>
 
-       
+      
 
         <para>
             Incluso, si su aplicación requiere una mayor flexibilidad para informar
@@ -316,7 +316,7 @@ if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) 
                 </listitem>
             </itemizedlist>
         </sect3>
-	   
+      
     </sect2>
     <sect2 id="zend.validate.introduction.translation">
 

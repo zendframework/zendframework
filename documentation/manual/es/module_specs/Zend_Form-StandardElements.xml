@@ -374,7 +374,7 @@ $form->addElement($element, 'foo');
 
             <para>Tan pronto como haya dos elementos file nombrados de forma
             idéntica, el segundo elemento no se mostrará o enviará.</para>
-            
+           
             <para>
                 Additionally, file elements are not rendered within the sub-form. So when
                 you add a file element into a subform, then the element will be rendered

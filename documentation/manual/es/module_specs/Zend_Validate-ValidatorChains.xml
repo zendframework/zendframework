@@ -9,10 +9,10 @@
         en un orden particular. El siguiente código demuestra una forma de
         resolver el ejemplo de la <link linkend="zend.validate.introduction"
             >introducción</link>, donde el nombre de usuario debe tener entre 6
-        y 12 caracteres alfanuméricos. 
-	</para>	
-		
-		<programlisting language="php"><![CDATA[
+        y 12 caracteres alfanuméricos.
+    </para>   
+       
+        <programlisting language="php"><![CDATA[
 // Crea una cadena de validadores y le agrega validadores
 $validatorChain = new Zend_Validate();
 $validatorChain->addValidator(
@@ -29,7 +29,7 @@ if ($validatorChain->isValid($username)) {
         echo "$message\n";
     }
 }
-]]></programlisting> 
+]]></programlisting>
 
 <para>
 Los validadores se ejecutan en el orden en que se agregaron
@@ -53,9 +53,9 @@ Los validadores se ejecutan en el orden en que se agregaron
         que se decida que es innecesaria o inapropiada para la situación. Si el
         ejemplo anterior fue escrito como sigue, entonces el sistema de
         validación alfanumérica no se ejecutará si falla la longitud del string
-        de validación: 
-		</para>
-		
+        de validación:
+        </para>
+       
         <programlisting language="php"><![CDATA[
 $validatorChain->addValidator(
                     new Zend_Validate_StringLength(array('min' => 6,
@@ -63,7 +63,7 @@ $validatorChain->addValidator(
                     true)
                ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>
-   
+  
 
     <para>Cualquier objeto que implemente
             <classname>Zend_Validate_Interface</classname> puede ser utilizado

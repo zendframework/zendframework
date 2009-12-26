@@ -43,7 +43,6 @@
             utilizada para iniciar el recurso DB.</para>
 
         <programlisting language="ini"><![CDATA[
-
 [production]
 resources.db.adapter = "pdo_mysql"
 resources.db.params.host = "localhost"
@@ -64,7 +63,6 @@ resources.db.isDefaultTableAdapter = true
             desde su archivo de arranque:</para>
 
         <programlisting language="php"><![CDATA[
-
 $resource = $bootstrap->getPluginResource('db');
 ]]></programlisting>
 
@@ -72,7 +70,6 @@ $resource = $bootstrap->getPluginResource('db');
             método <methodname>getDbAdapter()</methodname>:</para>
 
         <programlisting language="php"><![CDATA[
-
 $db = $resource->getDbAdapter();
 ]]></programlisting>
     </note>

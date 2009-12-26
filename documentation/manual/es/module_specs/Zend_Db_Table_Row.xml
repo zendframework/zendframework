@@ -42,7 +42,6 @@
             <title>Example of fetching a row</title>
 
             <programlisting language="php"><![CDATA[
-
 $bugs = new Bugs();
 $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 ]]></programlisting>
@@ -58,7 +57,6 @@ $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
             <title>Example of reading a row in a rowset</title>
 
             <programlisting language="php"><![CDATA[
-
 $bugs = new Bugs();
 $rowset = $bugs->fetchAll($bugs->select()->where('bug_status = ?', 1));
 $row = $rowset->current();
@@ -80,7 +78,6 @@ $row = $rowset->current();
                 <title>Example of reading a column in a row</title>
 
                 <programlisting language="php"><![CDATA[
-
 $bugs = new Bugs();
 $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 
@@ -120,7 +117,6 @@ echo $row->bug_description;
                 <title>Example of using the toArray() method</title>
 
                 <programlisting language="php"><![CDATA[
-
 $bugs = new Bugs();
 $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 
@@ -178,7 +174,6 @@ foreach ($rowArray as $column => $value) {
                 <title>Example of changing a column in a row</title>
 
                 <programlisting language="php"><![CDATA[
-
 $bugs = new Bugs();
 $row = $bugs->fetchRow($bugs->select()->where('bug_id = ?', 1));
 
@@ -209,7 +204,6 @@ $row->save();
                 <title>Example of creating a new row for a table</title>
 
                 <programlisting language="php"><![CDATA[
-
 $bugs = new Bugs();
 $newRow = $bugs->createRow();
 
@@ -232,7 +226,6 @@ $newRow->save();
                 <title>Example of populating a new row for a table</title>
 
                 <programlisting language="php"><![CDATA[
-
 $data = array(
     'bug_description' => '...description...',
     'bug_status'      => 'NEW'
@@ -278,7 +271,6 @@ $newRow->save();
                     Row</title>
 
                 <programlisting language="php"><![CDATA[
-
 $bugs = new Bugs();
 $newRow = $bugs->createRow();
 
@@ -312,7 +304,6 @@ $newRow->save();
                 <title>Example of deleting a row</title>
 
                 <programlisting language="php"><![CDATA[
-
 $bugs = new Bugs();
 $row = $bugs->fetchRow('bug_id = 1');
 
@@ -355,7 +346,6 @@ $row->delete();
                 <title>Example of serializing a row</title>
 
                 <programlisting language="php"><![CDATA[
-
 $bugs = new Bugs();
 $row = $bugs->fetchRow('bug_id = 1');
 
@@ -388,7 +378,6 @@ $serializedRow = serialize($row);
                 <title>Example of unserializing a serialized row</title>
 
                 <programlisting language="php"><![CDATA[
-
 $rowClone = unserialize($serializedRow);
 
 // Now you can use object properties, but read-only
@@ -433,7 +422,6 @@ echo $rowClone->bug_description;
                 <title>Example of reactivating a row</title>
 
                 <programlisting language="php"><![CDATA[
-
 $rowClone = unserialize($serializedRow);
 
 $bugs = new Bugs();
@@ -473,7 +461,6 @@ $rowClone->save();
             <title>Specifying a custom Row class</title>
 
             <programlisting language="php"><![CDATA[
-
 class MyRow extends Zend_Db_Table_Row_Abstract
 {
     // ...customizations
@@ -509,7 +496,6 @@ $bugs = new Bugs(array('rowClass' => 'MyRow'));
                     <title>Example usage of init() method</title>
 
                     <programlisting language="php"><![CDATA[
-
 class MyApplicationRow extends Zend_Db_Table_Row_Abstract
 {
     protected $_role;
@@ -569,7 +555,6 @@ class MyApplicationRow extends Zend_Db_Table_Row_Abstract
                     behavior.</para>
 
                 <programlisting language="php"><![CDATA[
-
 class MyLoggingRow extends Zend_Db_Table_Row_Abstract
 {
     protected function _insert()
@@ -608,7 +593,6 @@ if ($loggingEnabled) {
                     table classes.</para>
 
                 <programlisting language="php"><![CDATA[
-
 class MyLoggingRow extends Zend_Db_Table_Row_Abstract
 {
     protected function _insert()
@@ -669,7 +653,6 @@ class Products extends Zend_Db_Table_Abstract
                     database table.</para>
 
                 <programlisting language="php"><![CDATA[
-
 class MyInflectedRow extends Zend_Db_Table_Row_Abstract
 {
     protected function _transformColumn($columnName)

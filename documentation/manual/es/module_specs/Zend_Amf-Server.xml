@@ -629,7 +629,7 @@ private function onFault(fault:Object):void {
 ]]></programlisting>
        <para>La inclusión de ActionScript para realizar la conexión remota ha
             finalizado. Al ejecutar el fichero ZendExample, se establece una
-            conexión con Zend_Amf. En resumen, se han añadido las variables
+            conexión con <classname>Zend_Amf</classname>. En resumen, se han añadido las variables
             requeridas para abrir una conexión con el servidor remoto, se han
             definido qué métodos se deben utilizar cuando su aplicación recibe
             una respuesta desde el servidor, y finalmente se han mostrado los

@@ -671,35 +671,35 @@ class RegistrationController extends Zend_Controller_Action
             <para>Los scripts de vista son muy simples:</para>
 
             <programlisting language="php"><![CDATA[
-<? // registration/index.phtml ?>
+<?php // registration/index.phtml ?>
 <h2>registro</h2>
 <?php echo  $this->form ?>
 
-<? // registration/verification.phtml ?>
+<?php // registration/verification.phtml ?>
 <h2>Gracias por Registrarse!</h2>
 <p>
     Aquí está la información que nos ha proporcionado:
 </p>
 
-<?
+<?php
 // Tienen que construir esto con los items que estan almacenados en los namespaces
 // de la sesión
 foreach ($this->info as $info):
     foreach ($info as $form => $data): ?>
 <h4><?php echo  ucfirst($form) ?>:</h4>
 <dl>
-    <? foreach ($data as $key => $value): ?>
+    <?php foreach ($data as $key => $value): ?>
     <dt><?php echo  ucfirst($key) ?></dt>
-    <? if (is_array($value)):
+    <?php if (is_array($value)):
         foreach ($value as $label => $val): ?>
     <dd><?php echo  $val ?></dd>
-        <? endforeach;
+        <?php endforeach;
        else: ?>
     <dd><?php echo  $this->escape($value) ?></dd>
-    <? endif;
+    <?php endif;
     endforeach; ?>
 </dl>
-<? endforeach;
+<?php endforeach;
 endforeach
 ]]></programlisting>
 

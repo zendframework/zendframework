@@ -33,7 +33,6 @@
        </para>
 
         <programlisting language="sh"><![CDATA[
-
 % zf create project newproject
 ]]></programlisting>
 
@@ -42,7 +41,6 @@
        </para>
 
         <programlisting language="dos"><![CDATA[
-
 C:> zf.bat create project newproject
 ]]></programlisting>
 
@@ -51,7 +49,6 @@ C:> zf.bat create project newproject
        </para>
 
         <programlisting language="text"><![CDATA[
-
 newproject
 |-- application
 |   |-- Bootstrap.php
@@ -86,7 +83,6 @@ newproject
        </para>
 
         <programlisting language="php"><![CDATA[
-
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {}
 ]]></programlisting>
@@ -98,7 +94,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
        </para>
 
         <programlisting language="dosini"><![CDATA[
-
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -131,7 +126,6 @@ phpSettings.display_errors = 1
        </para>
 
         <programlisting language="php"><![CDATA[
-
 <?php
 // Define el path al directorio de la aplicación
 defined('APPLICATION_PATH')
@@ -195,7 +189,6 @@ $application->bootstrap()
        </para>
 
         <programlisting language="php"><![CDATA[
-
 <?php
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
@@ -211,7 +204,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
        </para>
 
         <programlisting language="dosini"><![CDATA[
-
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -238,7 +230,6 @@ phpSettings.display_errors = 1
        </para>
 
         <programlisting language="php"><![CDATA[
-
 <?php
 // Define la ruta al directorio de la aplicación
 defined('APPLICATION_PATH')
@@ -252,12 +243,12 @@ defined('APPLICATION_ENV')
                                          : 'production'));
 
 // Typically, you will also want to add your library/ directory
-// to the include_path, particularly if it contains your ZF installed
+// to the include_path, particularly if it contains your Zend Framework installed
 set_include_path(implode(PATH_SEPARATOR, array(
     dirname(dirname(__FILE__)) . '/library',
     get_include_path(),
 )));
-                                        
+
 /** Zend_Application */
 require_once 'Zend/Application.php';
 
@@ -280,7 +271,6 @@ $application->bootstrap()
        </para>
 
         <programlisting language="conf"><![CDATA[
-
 SetEnv APPLICATION_ENV development
 
 RewriteEngine On
@@ -304,7 +294,7 @@ RewriteRule ^.*$ index.php [NC,L]
            </para>
 
         </note>
-        
+
        <para>
             En este punto, está listo para comenzar a usar las ventajas de
             <classname>Zend_Application</classname>.
@@ -342,7 +332,6 @@ RewriteRule ^.*$ index.php [NC,L]
        </para>
 
         <programlisting language="dosini"><![CDATA[
-
 [production]
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
@@ -373,7 +362,6 @@ phpSettings.display_errors = 1
        </para>
 
         <programlisting language="php"><![CDATA[
-
 <?php echo $this->doctype() ?>
 <html>
 <head>
@@ -401,7 +389,6 @@ phpSettings.display_errors = 1
        </para>
 
         <programlisting language="php"><![CDATA[
-
 <?php
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {    protected function _initView()

@@ -42,15 +42,15 @@
             estrictamente menor al máximo.</para>
     </sect2>
 
-	<xi:include href="Zend_Validate-Callback.xml" />
+    <xi:include href="Zend_Validate-Callback.xml" />
     <xi:include href="Zend_Validate-CreditCard.xml" />
-	
+   
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
         <para>Devuelve <constant>TRUE</constant> si y sólo si <varname>$valor</varname> sigue el
             algoritmo Luhn (mod-10 checksum) para tarjetas de crédito.</para>
-			
-			        <note>
+           
+                    <note>
             <para>
                 The <classname>Ccnum</classname> validator has been deprecated in favor of the
                 <classname>CreditCard</classname> validator. For security reasons you should use
@@ -111,7 +111,7 @@
         <para>Returns <constant>TRUE</constant> if and only if <varname>$value</varname>
             contains a valid IBAN (International Bank Account Number). IBAN numbers are validated
             against the country where they are used and by a checksum.</para>
-			
+           
         <para>There are two ways to validate IBAN numbers. As first way you can give a locale which
             represents a country. Any given IBAN number will then be validated against this country.</para>
         <programlisting language="php"><![CDATA[
@@ -154,11 +154,11 @@ if ($validator->isValid($iban)) {
 
     <xi:include href="Zend_Validate-Identical.xml" />
     <xi:include href="Zend_Validate-InArray.xml" />
-	
+   
     <sect2 id="zend.validate.set.int">
         <title>Int</title>
         <para>
-		Returns <constant>TRUE</constant> if and only if <varname>$value</varname> is a valid integer. Since
+        Returns <constant>TRUE</constant> if and only if <varname>$value</varname> is a valid integer. Since
             Zend Framework 1.8 this validator takes into account the actual locale from browser,
             environment or application wide set locale. You can of course use the get/setLocale
             accessors to change the used locale or give it while creating a instance of this
@@ -179,8 +179,8 @@ if ($validator->isValid($iban)) {
             vacío.</para>
     </sect2>
 
-	<xi:include href="Zend_Validate-PostCode.xml" />
-	
+    <xi:include href="Zend_Validate-PostCode.xml" />
+   
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>
         <para>Devuelve <constant>TRUE</constant> si y sólo si <varname>$valor</varname>
@@ -206,9 +206,9 @@ if ($validator->isValid($iban)) {
                 url="http://www.php.net/manual/en/ref.iconv.php#iconv.configuration">
                 iconv.internal_encoding
             </ulink>.
-			If you need a different encoding you can set it with the accessor methods getEncoding
+            If you need a different encoding you can set it with the accessor methods getEncoding
              and setEncoding.
-			</para>
+            </para>
     </sect2>
 
 </sect1>

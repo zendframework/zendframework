@@ -18,23 +18,23 @@
                 códigos fuente basados en Zend Framework.
                 También debe resaltarse que especificar completamente los
                 estándares de código requiere un esfuerzo significativo.
-			</para>
-			<note>
-                <para>               
-				Nota: A veces, los desarrolladores consideran el establecimiento
+            </para>
+            <note>
+                <para>              
+                Nota: A veces, los desarrolladores consideran el establecimiento
                 de estándares más importante que lo que el estándar sugiere
                 realmente al nivel más detallado de diseño.
                 Estas pautas en los estándares de código de Zend Framework
-                han demostrado funcionar bien en otros projectos ZF.
+                han demostrado funcionar bien en otros projectos de Zend Framework.
                 Puede modificar estos estándares o usarlos en conformidad con
                 los términos de nuestra <ulink url="http://framework.zend.com/license">licencia</ulink>
-				</para>
-			</note>
-			
+                </para>
+            </note>
+           
             <para>
-                Temas incluídos en los estándares de código ZF:
-			</para>
-			
+                Temas incluídos en los estándares de código de Zend Framework:
+            </para>
+           
                 <itemizedlist>
                     <listitem>
                         <para>Dar formato a archivos <acronym>PHP</acronym></para>
@@ -52,7 +52,7 @@
                         <para>Documentación integrada</para>
                     </listitem>
                 </itemizedlist>
-            
+           
         </sect2>
 
         <sect2 id="coding-standard.overview.goals">
@@ -61,7 +61,7 @@
                 Los estándares de código resultan importantes en cualquier
                 proyecto de desarrollo, pero son especialmente importantes
                 cuando muchos desarrolladores trabajan en el mismo proyecto.
-                Los	estándares de código ayudan a asegurar que el código tenga
+                Los    estándares de código ayudan a asegurar que el código tenga
                 una alta calidad, menos errores, y pueda ser mantenido fácilmente.
             </para>
         </sect2>
@@ -81,7 +81,7 @@
             </para>
 
             <note>
-			<para>
+            <para>
                 <emphasis>IMPORTANTE:</emphasis> La inclusión de datos binarios
                 arbitrarios permitidos por <methodname>__HALT_COMPILER()</methodname>
                 está prohibida en los archivos <acronym>PHP</acronym> de Zend Framework,
@@ -89,7 +89,7 @@
                 El uso de esta característica sólo está permitido en algunos
                 scripts de instalación.
             </para>
-			</note>
+            </note>
         </sect2>
 
         <sect2 id="coding-standard.php-file-formatting.indentation">
@@ -142,10 +142,10 @@
                 Zend Framework se estandariza una convencion de nombres de
                 clases donde los nombres de las clases apuntan directamente a
                 las carpetas en las que estan contenidas.
-                La carpeta raiz de la biblioteca estandar de ZF es la carpeta
+                La carpeta raiz de la biblioteca estandar de Zend Framework es la carpeta
                 "Zend/", mientras que la carpeta raíz de las bibliotecas
-                extra de ZF es la carpeta "ZendX/".
-                Todas las clases de Zend Framework están almacenadas	
+                extra de Zend Framework es la carpeta "ZendX/".
+                Todas las clases de Zend Framework están almacenadas   
                 jerárquicamente bajo estas carpetas raíz.
             </para>
 
@@ -177,21 +177,21 @@
             <para>
                 Vea los nombres de clase en las bibliotecas estandar y
                 adicionales (extras) como ejemplos de esta convención de nombres.
-			</para>
-			    
-			<note>
-				<para>
+            </para>
+               
+            <note>
+                <para>
                 <emphasis>IMPORTANTE:</emphasis> El código que deba distribuirse
-                junto a las bibliotecas ZF, pero no forma parte de las bibliotecas
+                junto a las bibliotecas de Zend Framework, pero no forma parte de las bibliotecas
                 estándar o extras de Zend (e.g.: código o bibliotecas
                 que no estén distribuídas por Zend) no puede empezar nunca por
                 "Zend_" o "ZendX_".
-				</para>
-			</note>	
+                </para>
+            </note>   
         </sect2>
 
-		
-		<sect2 id="coding-standard.naming-conventions.abstracts">
+       
+        <sect2 id="coding-standard.naming-conventions.abstracts">
             <title>Clases Abstractas </title>
 
             <para>
@@ -200,21 +200,21 @@
                 con una regla adicional: Los nombres de las clases abstractas deben acabar con el término, "Abstract",
                 y ese término no debe ser precedida por un guión bajo. Ejemplo,
                 <classname>Zend_Controller_Plugin_Abstract</classname> es considerado un nombre no válido,
-				pero <classname>Zend_Controller_PluginAbstract</classname> o
-                <classname>Zend_Controller_Plugin_PluginAbstract</classname> serian nombres válidos. 
+                pero <classname>Zend_Controller_PluginAbstract</classname> o
+                <classname>Zend_Controller_Plugin_PluginAbstract</classname> serian nombres válidos.
              </para>
-			 
-			 
+            
+            
 
             <note>
                 <para>
-					Esta convención de nombres es nuevo con la versión 1.9.0 de Zend Framework. 
-					Las clases que preceden aquella versión no pueden seguir esta regla, pero serán renombradas 
-					en el futuro a fin de cumplir la regla.
+                    Esta convención de nombres es nuevo con la versión 1.9.0 de Zend Framework.
+                    Las clases que preceden aquella versión no pueden seguir esta regla, pero serán renombradas
+                    en el futuro a fin de cumplir la regla.
                 </para>
             </note>
          </sect2>
- 
+
         <sect2 id="coding-standard.naming-conventions.interfaces">
             <title>Interfaces</title>
 
@@ -224,25 +224,25 @@
                  con una regla adicional: Los nombres de las interfaces opcionalmente pueden acabar con el término,
                 "Interface",pero término no debe ser precedida por un guión bajo. Ejemplo,
                 <classname>Zend_Controller_Plugin_Interface</classname> es considerado un nombre no válido,
-				pero <classname>Zend_Controller_PluginInterface</classname> o
+                pero <classname>Zend_Controller_PluginInterface</classname> o
                 <classname>Zend_Controller_Plugin_PluginInterface</classname> serian nombres válidos.
             </para>
 
             <para>
-				Si bien esta regla no es necesaria, se recomienda encarecidamente su uso, 
-				ya que proporciona una buena refrencia visual a los desarrolladores, como saber  
-				que archivos contienen interfaces en lugar de clases.
+                Si bien esta regla no es necesaria, se recomienda encarecidamente su uso,
+                ya que proporciona una buena refrencia visual a los desarrolladores, como saber 
+                que archivos contienen interfaces en lugar de clases.
             </para>
 
             <note>
                 <para>
-                    Esta convención de nombres es nuevo con la versión 1.9.0 de Zend Framework. 
-					Las clases que preceden aquella versión no pueden seguir esta regla, pero serán renombradas 
-					en el futuro a fin de cumplir la regla.
+                    Esta convención de nombres es nuevo con la versión 1.9.0 de Zend Framework.
+                    Las clases que preceden aquella versión no pueden seguir esta regla, pero serán renombradas
+                    en el futuro a fin de cumplir la regla.
                 </para>
             </note>
         </sect2>
-		
+       
         <sect2 id="coding-standard.naming-conventions.filenames">
             <title>Nombres de Archivo</title>
 
@@ -257,7 +257,7 @@
                 extensión "<filename>.php</filename>", con la excepción de los scripts de la vista.
                 Los siguientes ejemplos muestran nombres de archivo admisibles
                 para clases de Zend Framework..:
-			</para>	
+            </para>   
                 <programlisting language="php"><![CDATA[
 Zend/Db.php
 
@@ -266,7 +266,7 @@ Zend/Controller/Front.php
 Zend/View/Helper/FormRadio.php
 ]]>
                 </programlisting>
-			<para>
+            <para>
                 Los nombres de archivo deben apuntar a nombres de clases como
                 se describe arriba.
             </para>
@@ -297,7 +297,7 @@ Zend/View/Helper/FormRadio.php
 
             <para>
                 Estos son ejemplos de nombres de funciones admisibles:
-			</para>
+            </para>
                 <programlisting language="php"><![CDATA[
 filterInput()
 
@@ -338,7 +338,7 @@ widgetFactory()
 
             <para>
                 Los nombres de variables pueden contener caracteres
-                alfanuméricos. Las barras bajas (_)	no están permitidas.
+                alfanuméricos. Las barras bajas (_)    no están permitidas.
                 Los números están permitidos en los nombres de variable pero no
                 se aconseja en la mayoría de los casos.
             </para>
@@ -406,8 +406,8 @@ widgetFactory()
             <para>
                 El código <acronym>PHP</acronym> debe estar delimitado siempre por la forma
                 completa de las etiquetas <acronym>PHP</acronym> estándar:
-			</para>
-			
+            </para>
+           
                 <programlisting language="php"><![CDATA[
 <?php
 
@@ -433,8 +433,8 @@ widgetFactory()
                     Cuando una cadena es literal (no contiene sustitución de
                     variables), el apóstrofo o "comilla" debería ser usado
                     siempre para delimitar la cadena:
-				</para>
-				
+                </para>
+               
                     <programlisting language="php"><![CDATA[
 $a = 'Example String';
 ]]></programlisting>
@@ -448,11 +448,11 @@ $a = 'Example String';
                     Cuando una cadena literal de caracteres contega apóstrofos,
                     es permitido delimitar la cadena de caracteres con "comillas dobles".
                     Esto es especialmente útil para sentencias <constant>SQL</constant>:
-				</para>
+                </para>
                     <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'";
 ]]></programlisting>
-				<para>
+                <para>
                    En esta sintáxis es preferible escapar apóstrofes,
                     ya que es mucho más fácil de leer.
                 </para>
@@ -464,7 +464,7 @@ $sql = "SELECT `id`, `name` from `people` WHERE `name`='Fred' OR `name`='Susan'"
                 <para>
                     La sustitución de variables está permitida en cualquiera
                     de estas formas:
-				</para>
+                </para>
 
                     <programlisting language="php"><![CDATA[
 $greeting = "Hello $name, welcome back!";
@@ -489,7 +489,7 @@ $greeting = "Hello ${name}, welcome back!";
                     Las cadenas deben ser concatenadas usando el operador
                     punto ("."). Un espacio debe añadirse siempre antes y
                     después del operador "." para mejorar la legibilidad:
-				</para>
+                </para>
                     <programlisting language="php"><![CDATA[
 $company = 'Zend' . ' ' . 'Technologies';
 ]]></programlisting>
@@ -500,7 +500,7 @@ $company = 'Zend' . ' ' . 'Technologies';
                     legibilidad. En estos casos, cada linea sucesiva debe
                     llevar un margen de espacios en blanco de forma que el
                     operador "." está alineado bajo el operador "=":
-				</para>
+                </para>
                     <programlisting language="php"><![CDATA[
 $sql = "SELECT `id`, `name` FROM `people` "
      . "WHERE `name` = 'Susan' "
@@ -528,7 +528,7 @@ $sql = "SELECT `id`, `name` FROM `people` "
                     <methodname>array</methodname>, un espacio de separación deben
                     añadirse después de cada coma, para mejorar la
                     legibilidad:
-				</para>
+                </para>
                     <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
 ]]></programlisting>
@@ -540,7 +540,7 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio');
                     En este caso, cada línea sucesiva debe ser tabulada con
                     cuatro espacios de forma que el principio de cada línea
                     está alineado:
-				</para>
+                </para>
                     <programlisting language="php"><![CDATA[
 $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
                      $a, $b, $c,
@@ -548,10 +548,10 @@ $sampleArray = array(1, 2, 3, 'Zend', 'Studio',
 ]]></programlisting>
 
  <para>
-                    Alternativamente, el elemento inicial del array puede comenzar en la siguiente línea. Si es así, 
-                    debe ser alineado en un nivel de sangría superior a la línea que contiene 
-                    la declaración del array, y todas las sucesivas líneas deben tener la mismo 
-                    indentación, el paréntesis de cierre debe ser en una nueva línea al mismo 
+                    Alternativamente, el elemento inicial del array puede comenzar en la siguiente línea. Si es así,
+                    debe ser alineado en un nivel de sangría superior a la línea que contiene
+                    la declaración del array, y todas las sucesivas líneas deben tener la mismo
+                    indentación, el paréntesis de cierre debe ser en una nueva línea al mismo
                     nivel de indentación que la línea que contiene la declaración del array:
                  </para>
 
@@ -564,10 +564,10 @@ $sampleArray = array(
 ]]></programlisting>
 
                 <para>
-					Al utilizar esta última declaración, recomendamos la utilización de una coma detrás de
-                    el último elemento de la matriz, lo que minimizará el impacto de añadir nuevos elementos 
-                    en las siguientes líneas, y ayuda a garantizar que no se produzcan errores debido 
-					a la falta de una coma.
+                    Al utilizar esta última declaración, recomendamos la utilización de una coma detrás de
+                    el último elemento de la matriz, lo que minimizará el impacto de añadir nuevos elementos
+                    en las siguientes líneas, y ayuda a garantizar que no se produzcan errores debido
+                    a la falta de una coma.
                 </para>
             </sect3>
 
@@ -580,20 +580,20 @@ $sampleArray = array(
                     en múltiples líneas. En este caso, cada línea sucesiva debe
                     ser tabuladas con cuatro espacios de forma que tanto las
                     llaves como los valores están alineados:
-				</para>
-				
+                </para>
+               
                     <programlisting language="php"><![CDATA[
 $sampleArray = array('firstKey'  => 'firstValue',
                      'secondKey' => 'secondValue');
 ]]></programlisting>
 
 <para>
-                    Alternativamente, el elemento inicial del array puede comenzar en la siguiente línea. Si es así, 
-                    debe ser alineado en un nivel de sangría superior a la línea que contiene 
-                    la declaración del array, y todas las sucesivas líneas deben tener la mismo 
-                    indentación, el paréntesis de cierre debe ser en una nueva línea al mismo 
+                    Alternativamente, el elemento inicial del array puede comenzar en la siguiente línea. Si es así,
+                    debe ser alineado en un nivel de sangría superior a la línea que contiene
+                    la declaración del array, y todas las sucesivas líneas deben tener la mismo
+                    indentación, el paréntesis de cierre debe ser en una nueva línea al mismo
                     nivel de indentación que la línea que contiene la declaración del array: Para
-                    mejor legibilidad, los diversos operadores de asiganción "=>" deben ser rellenados 
+                    mejor legibilidad, los diversos operadores de asiganción "=>" deben ser rellenados
                     con espacios en blanco hasta que se alinien.
                  </para>
 
@@ -605,10 +605,10 @@ $sampleArray = array(
 ]]></programlisting>
 
                 <para>
-					Al utilizar esta última declaración, recomendamos la utilización de una coma detrás de
-                    el último elemento de la matriz, lo que minimizará el impacto de añadir nuevos elementos 
-                    en las siguientes líneas, y ayuda a garantizar que no se produzcan errores debido 
-					a la falta de una coma.
+                    Al utilizar esta última declaración, recomendamos la utilización de una coma detrás de
+                    el último elemento de la matriz, lo que minimizará el impacto de añadir nuevos elementos
+                    en las siguientes líneas, y ayuda a garantizar que no se produzcan errores debido
+                    a la falta de una coma.
                 </para>
 
             </sect3>
@@ -641,10 +641,10 @@ $sampleArray = array(
                     separar la clase de cualquier código <acronym>PHP</acronym> adicional en el
                     archivo de clase.
                 </para>
-				<para>
+                <para>
                     A continuación se muestra un ejemplo de una declaración de
                     clase que es permitida:
-				</para>
+                </para>
                     <programlisting language="php"><![CDATA[
 /**
  * Bloque de Documentación aquí
@@ -657,7 +657,7 @@ class SampleClass
 ]]></programlisting>
 
                 <para>
-					Las clases que extiendan otras clases o interfaces deberían 
+                    Las clases que extiendan otras clases o interfaces deberían
                     declarar sus dependencias en la misma línea siempre que sea posible.
                  </para>
 
@@ -668,10 +668,10 @@ class SampleClass extends FooAbstract implements BarInterface
 ]]></programlisting>
 
                 <para>
-					Si como resultado de esas declaraciones, la longitud de la línea excede la longitud del 
-					<link linkend="coding-standard.php-file-formatting.max-line-length">Tamaño máximo de línea</link>,
-					se debe romper la línea antes de la palabra clave "extends" y / o "implements" 
-					e indentarlo con un nivel de indentación (4 espacios).
+                    Si como resultado de esas declaraciones, la longitud de la línea excede la longitud del
+                    <link linkend="coding-standard.php-file-formatting.max-line-length">Tamaño máximo de línea</link>,
+                    se debe romper la línea antes de la palabra clave "extends" y / o "implements"
+                    e indentarlo con un nivel de indentación (4 espacios).
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -750,8 +750,8 @@ class SampleClass
                 <para>
                     Lo siguiente es un ejemplo de una declaración admisible de
                     una función en una clase:
-				</para>
-				
+                </para>
+               
                     <programlisting language="php"><![CDATA[
 /**
  * Bloque de Documentación aquí
@@ -798,15 +798,15 @@ class Foo
     }
 }
 ]]></programlisting>
-               
+              
 
                 <note>
-					<para>
+                    <para>
                     <emphasis>NOTA:</emphasis>
                     El paso por referencia es el único mecanismo de paso de
                     parámetros permitido en una declaración de método.
-					</para>
-				</note>
+                    </para>
+                </note>
 
 
                     <programlisting language="php"><![CDATA[
@@ -822,7 +822,7 @@ class Foo
     {}
 }
 ]]></programlisting>
-               
+              
 
                 <para>
                     La llamada por referencia está estrictamente prohibida.
@@ -858,7 +858,7 @@ class Foo
     }
 }
 ]]></programlisting>
-                
+               
 
             </sect3>
 
@@ -870,12 +870,12 @@ class Foo
                     por un único espacio posterior después del delimitador coma.
                     A continuación se muestra un ejemplo de una invocación
                     admisible de una función que recibe tres argumentos:
-				</para>	
+                </para>   
 
                     <programlisting language="php"><![CDATA[
 threeArguments(1, 2, 3);
 ]]></programlisting>
-                
+               
 
                 <para>
                     La llamada por referencia está estrictamente prohibida.
@@ -888,7 +888,7 @@ threeArguments(1, 2, 3);
                     separarse en múltiples líneas para aumentar la legibilidad.
                     En esos casos, se aplican las pautas normales para escribir
                     arrays:
-					</para>
+                    </para>
 
 <programlisting language="php"><![CDATA[
 threeArguments(array(1, 2, 3), 2, 3);
@@ -903,7 +903,7 @@ threeArguments(array(
     56.44, $d, 500
 ), 2, 3);
 ]]></programlisting>
-                
+               
             </sect3>
         </sect2>
 
@@ -933,13 +933,13 @@ threeArguments(array(
                     la sentencia condicional. La llave de cierre "}" se escribe
                     siempre en su propia línea. Cualquier contenido dentro de
                     las llaves debe separarse con cuatro espacios en blanco.
-				</para>
+                </para>
                     <programlisting language="php"><![CDATA[
 if ($a != 2) {
     $a = 2;
 }
 ]]></programlisting>
-                
+               
 <para>
                     If the conditional statement causes the line length to exceed the <link
                         linkend="coding-standard.php-file-formatting.max-line-length">maximum line
@@ -950,7 +950,7 @@ if ($a != 2) {
                     the opening brace, with one space separating the two, at an indentation level
                     equivalent to the opening control statement.
                  </para>
- 
+
                 <programlisting language="php"><![CDATA[
 if (($a == $b)
     && ($b == $c)
@@ -959,19 +959,19 @@ if (($a == $b)
     $a = $d;
 }
 ]]></programlisting>
-				
-				                <para>
+               
+                                <para>
                     The intention of this latter declaration format is to prevent issues when
                     adding or removing clauses from the conditional during later revisions.
                 </para>
-				
+               
                 <para>
                     Para las declaraciones "if" que incluyan "elseif" o "else",
                     las convenciones de formato son similares a la construcción
                     "if". Los ejemplos siguientes demuestran el formato correcto
                     para declaraciones "if" con construcciones "else" y/o
                     "elseif":
-				 </para>
+                 </para>
 
                    <programlisting language="php"><![CDATA[
 if ($a != 2) {
@@ -1002,7 +1002,7 @@ if (($a == $b)
 }
 ]]></programlisting>
 
-				<para>
+                <para>
                     <acronym>PHP</acronym> permite escribir sentencias sin llaves -{}- en algunas
                     circunstancias.
                     Este estándar de código no hace ninguna diferenciación-
@@ -1050,19 +1050,19 @@ switch ($numPeople) {
                     La construcción <property>default</property> no debe omitirse nunca
                     en una declaración <property>switch</property>.
                 </para>
-				
-				<note>
+               
+                <note>
                 <para>
                     <emphasis>NOTA:</emphasis> En ocasiones, resulta útil
-                    escribir una declaración <property>case</property> que salta al	
+                    escribir una declaración <property>case</property> que salta al   
                     siguiente case al no incluir un <property>break</property> o
-                    <property>return</property> dentro de ese case. Para distinguir	
+                    <property>return</property> dentro de ese case. Para distinguir   
                     estos casos de posibles errores, cualquier declaración
-                    donde <property>break</property> o <property>return</property> sean	
+                    donde <property>break</property> o <property>return</property> sean   
                     omitidos deberán contener un comentario indicando que se
                     omitieron intencionadamente.
                 </para>
-				</note>
+                </note>
             </sect3>
         </sect2>
 
@@ -1097,7 +1097,7 @@ switch ($numPeople) {
                     Cada archivo que contenga código <acronym>PHP</acronym> debe tener un bloque
                     de documentación al principio del archivo que contenga como
                     mínimo las siguientes etiquetas phpDocumentor:
-				</para>
+                </para>
 
                     <programlisting language="php"><![CDATA[
 /**
@@ -1143,7 +1143,7 @@ switch ($numPeople) {
                 <para>
                     Cada clase debe contener un bloque de documentación que
                     contenga como mínimo las siguientes etiquetas phpDocumentor:
-				</para>
+                </para>
                     <programlisting language="php"><![CDATA[
 /**
  * Descripción corta de la clase
@@ -1188,7 +1188,7 @@ switch ($numPeople) {
                 <para>
                 Cada función, incluyendo métodos de objeto, debe contener un
                 bloque de documentación que contenga como mínimo:
-				</para>
+                </para>
 
                     <itemizedlist>
                         <listitem><para>Una descripción de la función</para></listitem>
@@ -1207,7 +1207,7 @@ switch ($numPeople) {
                     Si una función/método puede lanzar una excepción,
                     utilice @throws para todos los tipos de excepciones
                     conocidas:
-				</para>	
+                </para>   
 
                     <programlisting language="php"><![CDATA[
 @throws exceptionclass [description]

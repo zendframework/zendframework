@@ -2,7 +2,7 @@
 <!-- EN-Revision: 18943 -->
 <!-- Reviewed: no -->
 <table frame='all' id="requirements.zendcomponents.table-1">
-	 <title>Componentes de Zend Framework y las extensiones PHP que usan</title>
+     <title>Componentes de Zend Framework y las extensiones PHP que usan</title>
     <tgroup cols='3'>
         <thead>
             <row>

@@ -50,9 +50,9 @@ if ($validator->isValid($hostname)) {
         IP, <constant>ALLOW_LOCAL</constant> para permitir nombres de host
         de la red local, y <constant>ALLOW_ALL</constant> para permitir
         todos estos tres tipos. Para comprobar que direcciones IP puede
-        utilizar, vea el siguiente ejemplo: 
-		
-		<programlisting language="php"><![CDATA[
+        utilizar, vea el siguiente ejemplo:
+       
+        <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
 if ($validator->isValid($hostname)) {
     // hostname parece ser válido
@@ -87,7 +87,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
         extendidos que se utilizan en el proceso de validación.</para>
 
     <para>
-	 Until now more than 50 ccTLDs support IDN domains.
+     Until now more than 50 ccTLDs support IDN domains.
    </para>
 
     <para>Cotejar dominios IDN es tan simple como usar el validador estándar
@@ -97,10 +97,10 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
             <methodname>setValidateIdn()</methodname>.</para>
 
     <para>Puede deshabilitar la validación IDN, pasando un segundo parámetro al
-        constructor Zend_Validate_Hostname de la siguiente manera. 
-	</para>	
-	
-		<programlisting language="php"><![CDATA[
+        constructor Zend_Validate_Hostname de la siguiente manera.
+    </para>   
+   
+        <programlisting language="php"><![CDATA[
 $validator =
     new Zend_Validate_Hostname(
         array(
@@ -133,9 +133,9 @@ Alternativamente puede pasar <constant>TRUE</constant> o
         en la misma forma que deshabilita el soporte IDN. Puede deshabilitar la
         validación TLD pasando un tercer parámetro al constructor
         Zend_Validate_Hostname. En el siguiente ejemplo estamos dando respaldo a
-        la validación IDN a través del segundo parámetro. 
-	</para>	
-		<programlisting language="php"><![CDATA[
+        la validación IDN a través del segundo parámetro.
+    </para>   
+        <programlisting language="php"><![CDATA[
 $validator =
     new Zend_Validate_Hostname(
         array(

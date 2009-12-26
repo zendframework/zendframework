@@ -129,7 +129,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                             <entry>integer</entry>
                             <entry>int</entry>
                         </row>
-						<row>
+                        <row>
                             <entry>Zend_Crypt_Math_BigInteger</entry>
                             <entry>i8</entry>
                         </row>
@@ -146,7 +146,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                             <entry>string</entry>
                             <entry>string</entry>
                         </row>
-						                   <row>
+                                           <row>
                             <entry>null</entry>
                             <entry>nil</entry>
                         </row>
@@ -163,7 +163,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                             <entry>object</entry>
                             <entry>array</entry>
                         </row>
-						                        <row>
+                                                <row>
                             <entry>Zend_Date</entry>
                             <entry>dateTime.iso8601</entry>
                         </row>
@@ -508,7 +508,7 @@ try {
 }
 ]]></programlisting>
             </example>
-			
+           
             <para>Cuando el método <methodname>call()</methodname> es usado
                 para realizar la petición,
                     <methodname>Zend_XmlRpc_Client_FaultException</methodname>

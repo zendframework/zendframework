@@ -126,7 +126,7 @@ date_default_timezone_set('Europe/Berlin');
                     limitaciones heredadas de los tipos de dato float, y errores
                     de redondeo de números flotantes pueden introducir errores
                     en los cálculos. Para evitar estos problemas, los
-                    componentes ZF I18n usan la extensión BCMath, si está
+                    componentes  de Zend Framework I18n usan la extensión BCMath, si está
                     disponible.</para>
             </listitem>
             <listitem>

@@ -72,7 +72,6 @@ $options = array(
             configuración de recursos en ese módulo.
        </para>
         <programlisting language="ini"><![CDATA[
-
 [production]
 news.resources.db.adapter = "pdo_mysql"
 news.resources.db.params.host = "localhost"
@@ -82,7 +81,6 @@ news.resources.db.params.dbname = "news"
 news.resources.layout.layout = "news"
 ]]></programlisting>
         <programlisting language="xml"><![CDATA[
-
 <?xml version="1.0"?>
 <config>
     <production>
@@ -114,7 +112,6 @@ news.resources.layout.layout = "news"
             <methodname>getExecutedBootstraps()</methodname> de los recursos de Módulo.
        </para>
         <programlisting language="php"><![CDATA[
-
 $resource = $bootstrap->getPluginResource('modules');
 $moduleBootstraps = $resource->getExecutedBootstraps();
 $newsBootstrap = $moduleBootstraps['news'];

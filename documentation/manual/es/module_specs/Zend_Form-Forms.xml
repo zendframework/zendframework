@@ -1703,8 +1703,8 @@ $messages = $form->getMessages('username');
             <para>Todos los errores determinados de esta manera pueden ser
                 traducidos.</para>
         </sect3>
-		
-		        <sect3 id="zend.form.forms.validation.values">
+       
+                <sect3 id="zend.form.forms.validation.values">
             <title>Retrieving Valid Values Only</title>
 
             <para>
@@ -1724,8 +1724,8 @@ $validValues = $form->getValidValues($_POST);
         </sect3>
     </sect2>
 
-	
-	
+   
+   
     <sect2 id="zend.form.forms.methods">
         <title>Métodos</title>
 

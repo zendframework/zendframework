@@ -89,7 +89,6 @@
        </para>
 
         <programlisting language="ini"><![CDATA[
-
 [production]
 resources.frontController.controllerDirectory = APPLICATION_PATH . "/controllers"
 resources.frontController.moduleControllerDirectoryName = "actions"
@@ -112,7 +111,6 @@ resources.frontController.env = APPLICATION_ENV
        </para>
 
          <programlisting language="php"><![CDATA[
-
 $bootstrap->bootstrap('frontController');
 $front = $bootstrap->frontController;
 ]]></programlisting>

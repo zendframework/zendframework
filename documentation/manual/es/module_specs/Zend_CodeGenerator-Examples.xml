@@ -11,7 +11,6 @@
             nivel DocBlock.</para>
 
         <programlisting language="php"><![CDATA[
-
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => 'Sample generated class',
@@ -35,7 +34,6 @@ echo $foo->generate();
        <para>El código anterior resultará en lo siguiente:</para>
 
         <programlisting language="php"><![CDATA[
-
 /**
  * Sample generated class
  *
@@ -60,7 +58,6 @@ class Foo
             nuestra clase generada.</para>
 
         <programlisting language="php"><![CDATA[
-
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => 'Sample generated class',
@@ -101,7 +98,6 @@ echo $foo->generate();
        <para>Lo anterior resulta en la siguiente definición de clase:</para>
 
         <programlisting language="php"><![CDATA[
-
 /**
  * Sample generated class
  *
@@ -135,7 +131,6 @@ class Foo
                 <classname>Zend_CodeGenerator_Php_Method</classname>.</para>
 
         <programlisting language="php"><![CDATA[
-
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => 'Sample generated class',
@@ -212,7 +207,6 @@ echo $foo->generate();
        <para>Lo anterior genera la siguiente salida:</para>
 
         <programlisting language="php"><![CDATA[
-
 /**
  * Sample generated class
  *
@@ -276,7 +270,6 @@ class Foo
             del ejemplo anterior.</para>
 
         <programlisting language="php"><![CDATA[
-
 $file = new Zend_CodeGenerator_Php_File(array(
     'classes'  => array($foo);
     'docblock' => new Zend_CodeGenerator_Php_Docblock(array(
@@ -297,7 +290,6 @@ $file = new Zend_CodeGenerator_Php_File(array(
             grabar los contenidos en un archivo. Por ejemplo:</para>
 
         <programlisting language="php"><![CDATA[
-
 $code = $file->generate();
 file_put_contents('Foo.php', $code);
 ]]></programlisting>
@@ -305,7 +297,6 @@ file_put_contents('Foo.php', $code);
        <para>Lo anterior generará el siguiente archivo:</para>
 
         <programlisting language="php"><![CDATA[
-
 <?php
 /**
  * Foo class file

@@ -15,7 +15,6 @@
     <example id="zend.debug.dumping.example">
         <title>Ejemplo del método dump()</title>
          <programlisting language="php"><![CDATA[
-
 Zend_Debug::dump($var, $label=null, $echo=true);
 ]]></programlisting>
     </example>
@@ -31,7 +30,7 @@ Zend_Debug::dump($var, $label=null, $echo=true);
          example, to use labels if you are dumping information about multiple
          variables on a given screen.
     </para>
-    
+   
    <para>
         El argumento boleano <varname>$echo</varname> especifica si la salida de
         <methodname>Zend_Debug::dump()</methodname> es o no mostrada. Si es

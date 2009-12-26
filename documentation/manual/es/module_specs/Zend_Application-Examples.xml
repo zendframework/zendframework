@@ -8,7 +8,6 @@
         simplemente un talón vacío ampliando la clase base bootstrap:</para>
 
     <programlisting language="php"><![CDATA[
-
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 }
@@ -17,7 +16,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
    <para>Con el archivo de configuración coresspondiente:</para>
 
     <programlisting language="ini"><![CDATA[
-
 ; APPLICATION_PATH/configs/application.ini
 [production]
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
@@ -49,7 +47,6 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
         bootstrap y devolver el valor para almacenar en el bootstrap.</para>
 
     <programlisting language="php"><![CDATA[
-
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initRequest(array $options = array())
@@ -104,7 +101,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         podría ser como lo siguiente:</para>
 
     <programlisting language="php"><![CDATA[
-
 class My_Bootstrap_Resource_View
     extends Zend_Application_Resource_ResourceAbstract
 {
@@ -141,7 +137,6 @@ class My_Bootstrap_Resource_View
         corto del plugin del recurso (por ejemplo, "view"):</para>
 
     <programlisting language="php"><![CDATA[
-
 $application = new Zend_Application(
     APPLICATION_ENV,
     array(
@@ -166,7 +161,6 @@ $application = new Zend_Application(
         inicializadores accediendo al bootstrap padre:</para>
 
     <programlisting language="php"><![CDATA[
-
 class My_Bootstrap_Resource_Layout
     extends Zend_Application_Resource_ResourceAbstract
 {
@@ -187,7 +181,6 @@ class My_Bootstrap_Resource_Layout
         ejecutarla:</para>
 
     <programlisting language="php"><![CDATA[
-
 $application = new Zend_Application(...);
 $application->bootstrap()
             ->run();
@@ -197,7 +190,6 @@ $application->bootstrap()
         inicializar recursos específicos:</para>
 
     <programlisting language="php"><![CDATA[
-
 $application = new Zend_Application(...);
 $application->getBootstrap()->bootstrap('db');
 
@@ -211,7 +203,6 @@ echo $service->handle();
         sobrecarga:</para>
 
     <programlisting language="php"><![CDATA[
-
 $application = new Zend_Application(...);
 $application->getBootstrap()->bootstrapDb();
 ]]></programlisting>

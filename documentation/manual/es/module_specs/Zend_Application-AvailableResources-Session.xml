@@ -54,7 +54,6 @@
        </para>
 
         <programlisting language="ini"><![CDATA[
-
 resources.session.save_path = APPLICATION_PATH "/../data/session"
 resources.session.use_only_cookies = true
 resources.session.remember_me_seconds = 864000

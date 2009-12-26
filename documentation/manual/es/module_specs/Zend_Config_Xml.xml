@@ -172,7 +172,7 @@ EOT;
 $config = new Zend_Config_Xml($string, 'staging');
 ]]></programlisting>
     </note>
-    
+   
     <note>
         <title>Zend_Config XML namespace</title>
        <para>

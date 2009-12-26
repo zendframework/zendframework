@@ -14,7 +14,7 @@
 
     <sect3 id="zend.validate.set.email_address.basic">
         <title>Utilización básica</title>
-   
+  
     <para>
         Un ejemplo básico de uso se ve a continuación:
 </para>
@@ -32,22 +32,22 @@ if ($validator->isValid($email)) {
 ]]></programlisting>
 
         <para>
-		Esto coincide con el correo electrónico <varname>$email</varname> y si fracasa,
+        Esto coincide con el correo electrónico <varname>$email</varname> y si fracasa,
         alimenta <code>$validator->getMessages()</code> con mensajes de error útiles.
    </para>
 </sect3>
 
  <sect3 id="zend.validate.set.email_address.options">
-   
+  
         <title>>Partes locales complejas</title>
-   
+  
             <para>
             <classname>Zend_Validate_EmailAddress</classname> supports several options which can
             either be set at initiation, by giving an array with the related options, or
             afterwards, by using <methodname>setOptions()</methodname>. The following options are
             supported:
         </para>
-		
+       
         <itemizedlist>
             <listitem>
                 <para>
@@ -75,7 +75,7 @@ if ($validator->isValid($email)) {
                     accepts emails. This option defaults to <constant>FALSE</constant>.
                 </para>
             </listitem>
-   
+  
             <listitem>
                 <para>
                     <emphasis>deep</emphasis>: Defines if the servers MX records should be verified
@@ -105,20 +105,20 @@ $validator->setOptions(array('domain' => false));
     <sect3 id="zend.validate.set.email_address.complexlocal">
         <title>Complex local parts</title>
 
-	<para>
+    <para>
         <classname>Zend_Validate_EmailAddress</classname> se comparará con cualquier
         dirección de correo válida de acuardo a RFC2822.
         Por ejemplo, correos electrónicos válidos incluyen <code>bob@domain.com</code> ,
         <code>bob+jones@domain.us</code> , <code>"bob@jones"@domain.com</code> y
         <code>"bob jones"@domain.com</code>
    </para>
-		
-		       <para>
+       
+               <para>
         Algunos formatos obsoletos de email actualmente no validan
         (por ejemplo los retornos de carro o "\" un caracter en una dirección
         de correo electrónico).
    </para>
-		
+       
     </sect3>
 
     <sect3 id="zend.validate.set.email_address.purelocal">
@@ -141,7 +141,7 @@ $validator->setOptions(array('domain' => FALSE));
     <sect3 id="zend.validate.set.email_address.hostnametype">
         <title>Validating different types of hostnames</title>
 
-	    <para>
+        <para>
         La parte nombre de host de una dirección de correo es validado contra
         <link linkend="zend.validate.set.hostname"><classname>Zend_Validate_Hostname</classname></link>.
         Por defecto sólo son aceptados nombres de host DNS de la forma
@@ -155,7 +155,7 @@ $validator->setOptions(array('domain' => FALSE));
         Más detalles están incluidos en <classname>Zend_Validate_EmailAddress</classname>,
         aunque abajo hay un ejemplo de cómo aceptar tanto nombres de host DNS y
         locales:
-	</para>	
+    </para>   
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(
@@ -170,12 +170,12 @@ if ($validator->isValid($email)) {
     }
 }
 ]]></programlisting>
-   
+  
 
      <sect3 id="zend.validate.set.email_address.checkacceptance">
-	
-        <title>Verificar si el nombre de host realmente acepta email</title>
    
+        <title>Verificar si el nombre de host realmente acepta email</title>
+  
     <para>
         Sólo porque una dirección de correo electrónico está en el formato correcto,
         no necesariamente significa que esa dirección de correo electrónico
@@ -191,7 +191,7 @@ if ($validator->isValid($email)) {
         soportada sólo por plataformas UNIX.
         Para habilitar el control MX puede pasar un segundo parámetro al
         constructor <classname>Zend_Validate_EmailAddress</classname>.
-		</para>
+        </para>
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_EmailAddress(
@@ -203,10 +203,10 @@ $validator = new Zend_Validate_EmailAddress(
 ]]></programlisting>
 
 
-   
+  
    <note>
             <title>MX Check under Windows</title>
-			
+           
 
             <para>
                 Within Windows environments MX checking is only available when
@@ -215,7 +215,7 @@ $validator = new Zend_Validate_EmailAddress(
             </para>
         </note>
 
-	<para>
+    <para>
         Alternativamente, para activar o desactivar la validación MX puede pasar
         <constant>TRUE</constant> o <constant>FALSE</constant> a <methodname>$validator->setValidateMx()</methodname>.
    </para>
@@ -259,7 +259,7 @@ $validator = new Zend_Validate_EmailAddress(
 
  <note>
             <title>Disallowed IP addresses</title>
-	
+   
             <para>
                 You should note that MX validation is only accepted for external servers. When deep
                 MX validation is enabled, then local IP addresses like <command>192.168.*</command>
@@ -267,7 +267,7 @@ $validator = new Zend_Validate_EmailAddress(
             </para>
         </note>
     </sect3>
-	
+   
  <sect3 id="zend.validate.set.email_address.validateidn">
         <title>Validating International Domains Names</title>
 
@@ -279,7 +279,7 @@ $validator = new Zend_Validate_EmailAddress(
         cambiando el ajuste a través del objeto <classname>Zend_Validate_Hostname</classname>
         que existe en <classname>Zend_Validate_EmailAddress</classname>.
 </para>
- 
+
         <programlisting language="php"><![CDATA[
 $validator->getHostnameValidator()->setValidateIdn(false);
 ]]></programlisting>
@@ -289,7 +289,7 @@ $validator->getHostnameValidator()->setValidateIdn(false);
         en la documentación de <classname>Zend_Validate_Hostname</classname>.
    </para>
 
-		       <para>
+               <para>
         Tenga en cuenta que los IDNs se validarán solo si
         usted permite que nombres de host DNS sean validados.
    </para>

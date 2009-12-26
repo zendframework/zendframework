@@ -12,18 +12,18 @@ Véase el apéndice <link linkend="requirements"> requisitos </ link> para una l
 
     <para>
         La instalación del Zend Framework es muy simple. Una vez que haya descargado y descomprimido el framework, deberá añadir la carpeta <filename>/library</filename> de la distribución al principio de su "include path". También puede mover la carpeta "library" a cualquier otra posición (compartida o no) de su sistema de archivos.
-	</para>
-	
+    </para>
+   
         <itemizedlist>
             <listitem>
                 <para>
-                      <ulink url="http://framework.zend.com/download">Descargar la última versión estable.</ulink> 
-					  Esta versión esta disponible en formatos<filename>.zip</filename>. <filename>.tar.gz</filename>, 
-					  es una buena opción para aquellos que comienzan o son nuevos en Zend Framework.
+                      <ulink url="http://framework.zend.com/download">Descargar la última versión estable.</ulink>
+                      Esta versión esta disponible en formatos<filename>.zip</filename>. <filename>.tar.gz</filename>,
+                      es una buena opción para aquellos que comienzan o son nuevos en Zend Framework.
                 </para>
             </listitem>
-            
-			<listitem>
+           
+            <listitem>
             <para>
                 <ulink url="http://framework.zend.com/download/snapshot">Download the latest
                 nightly snapshot.</ulink> For those who would brave the cutting edge, the
@@ -78,8 +78,8 @@ Véase el apéndice <link linkend="requirements"> requisitos </ link> para una l
         Una vez que tenga disponible una copia de Zend Framework, su aplicación necesita poder acceder a las clases del framework. Aunque hay
         <ulink url="http://www.php.net/manual/en/configuration.changes.php">
         diferentes maneras de lograr esto</ulink>, su
-        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path"><methodname>include_path</methodname></ulink> de 
-		<acronym>PHP</acronym> necesita contener una ruta a la librería de Zend Framework.
+        <ulink url="http://www.php.net/manual/en/ini.core.php#ini.include-path"><methodname>include_path</methodname></ulink> de
+        <acronym>PHP</acronym> necesita contener una ruta a la librería de Zend Framework.
     </para>
 
     <para>

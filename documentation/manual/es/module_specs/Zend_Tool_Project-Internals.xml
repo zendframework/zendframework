@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 15103 -->
+    <!-- Reviewed: no -->
 <sect1 id="zend.tool.project.internals">
     <title>Zend_Tool_Project Internos</title>
     <sect2 id="zend.tool.project.internals.xml-structure">

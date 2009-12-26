@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 17133 -->
+    <!-- Reviewed: no -->
 <sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Ayudantes de Dojo View</title>
 
@@ -9,25 +9,38 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>dojo():</emphasis> configura el medio ambiente de Dojo para su página,
-                incluyendo valores de configuración de Dojo, paths de módulos personalizados,
-                sentencias de requerimientos de módulos, temas de hojas de estilo, uso de CDN, y
-                más.</para>
+                <emphasis>dojo():</emphasis>
+                configura el medio ambiente de Dojo para su página,
+                incluyendo valores de
+                configuración de Dojo, paths de módulos personalizados,
+                sentencias de requerimientos
+                de módulos, temas de hojas de estilo, uso de CDN, y
+                más.
+            </para>
         </listitem>
     </itemizedlist>
 
     <example id="zend.dojo.view.setup">
         <title>Usando los Ayudantes de Dojo View</title>
 
-        <para>Para utilizar los ayudantes de vista de Dojo, necesitará decirle a un objeto vista
-            dónde encontrarlos. Puede hacerlo llamando a <methodname>addHelperPath()</methodname>:</para>
+        <para>
+            Para utilizar los ayudantes de vista de Dojo, necesitará decirle a un objeto vista
+            dónde
+            encontrarlos. Puede hacerlo llamando a
+            <methodname>addHelperPath()</methodname>
+            :
+        </para>
 
         <programlisting language="php"><![CDATA[
 $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
 ]]></programlisting>
 
-        <para>Alternativamente, puede usar el método de <classname>Zend_Dojo</classname>
-            <methodname>enableView()</methodname> para que haga el trabajo por usted:</para>
+        <para>
+            Alternativamente, puede usar el método de
+            <classname>Zend_Dojo</classname>
+            <methodname>enableView()</methodname>
+            para que haga el trabajo por usted:
+        </para>
 
         <programlisting language="php"><![CDATA[
 Zend_Dojo::enableView($view);

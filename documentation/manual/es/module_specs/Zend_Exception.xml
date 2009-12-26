@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19661 -->
-<!-- Reviewed: no -->
-<!-- Traducir todo de nuevo-->
+    <!-- EN-Revision: 19661 -->
+    <!-- Reviewed: no -->
+    <!-- Traducir todo de nuevo-->
 <sect1 id="zend.exception.using">
 
     <title>Uso de Excepciones</title>
 
     <para>
-        <classname>Zend_Exception</classname> es simplemente la clase base para todos los
-        las excepciones lanzadas dentro de Zend Framework.</para>
+        <classname>Zend_Exception</classname>
+        es simplemente la clase base para todos los
+        las excepciones lanzadas dentro de Zend
+        Framework.
+    </para>
 
     <example id="zend.exception.using.example">
         <title>Capturando una Excepcion</title>
         <para>
-        El siguiente  listado de código muestra cómo capturar una excepción
+            El siguiente listado de cï¿½digo muestra cï¿½mo capturar una excepciï¿½n
             lanzado en Zend Framework:</para>
         <programlisting language="php"><![CDATA[
 try {
@@ -28,14 +31,20 @@ try {
 ]]></programlisting>
     </example>
     <para>
-        <classname>Zend_Exception</classname> can be used as a catch-all
-        exception class in a catch block to trap all exceptions thrown by Zend
+        <classname>Zend_Exception</classname>
+        can be used as a catch-all
+        exception class in a catch block to trap all exceptions thrown by
+        Zend
         Framework classes. This can be useful when the program can not recover
-        by catching a specific exception type.</para>
+        by catching a
+        specific exception type.
+    </para>
 
-<para>La documentación de cada componente  y clase de Zend Framework
-        contienen información específica sobre los métodos que generan excepciones, la
-        circunstancias en que provocan una excepción a ser lanzado,
-y los diferentes tipos de excepción que puede ser lanzadas. </ para>
+    <para>La documentaciï¿½n de cada componente y clase de Zend Framework
+        contienen informaciï¿½n
+        especï¿½fica sobre los mï¿½todos que generan excepciones, la
+        circunstancias en que provocan una
+        excepciï¿½n a ser lanzado,
+        y los diferentes tipos de excepciï¿½n que puede ser lanzadas. </ para>
 
 </sect1>

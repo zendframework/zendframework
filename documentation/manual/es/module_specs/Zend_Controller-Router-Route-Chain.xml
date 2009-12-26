@@ -1,36 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18083 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 18083 -->
+    <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.chain">
     <title>Zend_Controller_Router_Route_Chain</title>
 
-   <para>
-        <classname>Zend_Controller_Router_Route_Chain</classname> es una ruta
+    <para>
+        <classname>Zend_Controller_Router_Route_Chain</classname>
+        es una ruta
         que permite encadenar juntas a múltiples rutas. Esto le permite
-        encadenar hostname/rutas y rutas de paths, o múltiples paths de rutas
-        por ejemplo. El encadenamiento puede hacerse programáticamente o dentro
-        de un archivo de configuración.</para>
+        encadenar
+        hostname/rutas y rutas de paths, o múltiples paths de rutas
+        por ejemplo. El encadenamiento
+        puede hacerse programáticamente o dentro
+        de un archivo de configuración.
+    </para>
 
     <note>
         <title>Prioridad de Parámetros</title>
-       <para>Cuando se encadenan en conjunto varias rutas, los parámetros de
-            la ruta exterior tienen mayor prioridad que los parámetros de la
-            ruta interior. Así, si define un controlador en el exterior y otro
+        <para>Cuando se encadenan en conjunto varias rutas, los parámetros de
+            la ruta exterior tienen
+            mayor prioridad que los parámetros de la
+            ruta interior. Así, si define un controlador en
+            el exterior y otro
             en la ruta interior, será seleccionado el controlador de la ruta
             exterior.</para>
     </note>
 
-   <para>Cuando el encadenamiento se realiza prográmaticamente, hay dos
-        maneras de archivarlo. La primera consiste en crear una nueva instancia
-            <classname>Zend_Controller_Router_Route_Chain</classname> y entones
-        llamar al método <methodname>chain()</methodname> varias veces con todas
+    <para>
+        Cuando el encadenamiento se realiza prográmaticamente, hay dos
+        maneras de archivarlo. La
+        primera consiste en crear una nueva instancia
+        <classname>Zend_Controller_Router_Route_Chain</classname>
+        y entones
+        llamar al método
+        <methodname>chain()</methodname>
+        varias veces con todas
         las rutas que deberían encadenarse juntas. La otra forma es tomar la
         primera ruta, por ejemplo, la ruta del nombre del host, y llamar al
-        método <methodname>chain()</methodname> con la ruta que debería ser
-        anexada a ella. Esto no modificará la ruta del nombre del host, pero
+        método
+        <methodname>chain()</methodname>
+        con la ruta que debería ser
+        anexada a ella. Esto no modificará la ruta del nombre del host,
+        pero
         devolverá una nueva instancia de
-            <classname>Zend_Controller_Router_Route_Chain</classname>, teniendo
-        entonces a ambas rutas encadenadas juntas:</para>
+        <classname>Zend_Controller_Router_Route_Chain</classname>
+        , teniendo
+        entonces a ambas rutas encadenadas juntas:
+    </para>
 
     <programlisting language="php"><![CDATA[
 // Crear dos rutas
@@ -46,8 +62,9 @@ $chainedRoute->chain($hostnameRoute)
 $chainedRoute = $hostnameRoute->chain($pathRoute);
 ]]></programlisting>
 
-   <para>Cuando las rutas se encadenan juntas, su separador es una
-        barra ('/'). Pueden haber casos cuando quiera tener un separador
+    <para>Cuando las rutas se encadenan juntas, su separador es una
+        barra ('/'). Pueden haber casos
+        cuando quiera tener un separador
         diferente:</para>
 
     <programlisting language="php"><![CDATA[
@@ -65,16 +82,27 @@ echo $chainedRoute->assemble();
     <sect4 id="zend.controller.router.routes.chain.config">
         <title>Encadenar Rutas via Zend_Config</title>
 
-       <para>Para encadenar juntas a las rutas en un archivo de configuración,
-            hay parámetros adicionales para la configuración de aquellos. El
-            enfoque más sencillo es utilizar los parámetros
-            <property>chains</property>. Este es simplemente una lista
-            de las rutas, que será encadenada con la ruta padre. Ni la ruta
+        <para>
+            Para encadenar juntas a las rutas en un archivo de configuración,
+            hay parámetros
+            adicionales para la configuración de aquellos. El
+            enfoque más sencillo es utilizar los
+            parámetros
+            <property>chains</property>
+            . Este es simplemente una lista
+            de las rutas, que será encadenada con la ruta padre. Ni
+            la ruta
             padre ni la ruta hijo serán añadidos directamente al router sino que
-            sólo lo hará la ruta del encadenamiento resultante. El nombre de la
-            ruta encadenada en el router será el nombre de la ruta padre
-            concatenada con un guión ('-') con el nombre de la ruta hijo. Un
-            simple config en <acronym>XML</acronym> se vería así:</para>
+            sólo lo hará
+            la ruta del encadenamiento resultante. El nombre de la
+            ruta encadenada en el router será
+            el nombre de la ruta padre
+            concatenada con un guión ('-') con el nombre de la ruta hijo.
+            Un
+            simple config en
+            <acronym>XML</acronym>
+            se vería así:
+        </para>
 
         <programlisting language="xml"><![CDATA[
 <routes>
@@ -114,18 +142,29 @@ echo $chainedRoute->assemble();
 </routes>
 ]]></programlisting>
 
-       <para>Esto se traducirá en las tres rutas
-            <command>www-language-index</command>,
-            <command>www-language-imprint</command> y
-            <command>users-language-profile</command> que sólo
+        <para>
+            Esto se traducirá en las tres rutas
+            <command>www-language-index</command>
+            ,
+            <command>www-language-imprint</command>
+            y
+            <command>users-language-profile</command>
+            que sólo
             concordarán basados en el nombre y la ruta
-            <command>misc</command>, que se comparará con cualquier
-            nombre de host.</para>
+            <command>misc</command>
+            , que se comparará con cualquier
+            nombre de host.
+        </para>
 
-       <para>La manera alternativa de crear una ruta encadenada es a través
-            del parámetro <property>chain</property>, que sólo puede
+        <para>
+            La manera alternativa de crear una ruta encadenada es a través
+            del parámetro
+            <property>chain</property>
+            , que sólo puede
             utilizarse directamente con el tipo cadena-ruta, y también trabaja
-            en el nivel raíz:</para>
+            en el
+            nivel raíz:
+        </para>
 
         <programlisting language="xml"><![CDATA[
 <routes>
@@ -154,8 +193,11 @@ echo $chainedRoute->assemble();
 </routes>
 ]]></programlisting>
 
-       <para>También puede darle el parámetro a <property>chain</property>
-            como un array en vez de separ las rutas con comas:</para>
+        <para>
+            También puede darle el parámetro a
+            <property>chain</property>
+            como un array en vez de separ las rutas con comas:
+        </para>
 
         <programlisting language="xml"><![CDATA[
 <routes>
@@ -172,11 +214,14 @@ echo $chainedRoute->assemble();
 </routes>
 ]]></programlisting>
 
-       <para>
-            When you configure chain routes with <classname>Zend_Config</classname> and
+        <para>
+            When you configure chain routes with
+            <classname>Zend_Config</classname>
+            and
             want the chain name separator to be different from a dash, you
-            need to specify this separator separately:
-       </para>
+            need to specify this
+            separator separately:
+        </para>
 
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config(array(

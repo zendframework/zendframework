@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 17175 -->
+    <!-- Reviewed: no -->
 <sect1 id="zend.test.introduction">
     <title>Introducción</title>
 
     <para>
-        <classname>Zend_Test</classname> proporciona herramientas para facilitar las pruebas
-        unitarias (unit testing) de sus aplicaciones basadas en Zend Framework. Actualmente,
-        ofrecemos facilidades para probar sus aplicaciones <acronym>MVC</acronym> basadas en Zend
-        Framework</para>
+        <classname>Zend_Test</classname>
+        proporciona herramientas para facilitar las pruebas
+        unitarias (unit testing) de sus
+        aplicaciones basadas en Zend Framework. Actualmente,
+        ofrecemos facilidades para probar sus
+        aplicaciones
+        <acronym>MVC</acronym>
+        basadas en Zend
+        Framework
+    </para>
 </sect1>

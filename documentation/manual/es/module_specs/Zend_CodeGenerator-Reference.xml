@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18423 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 18423 -->
+    <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.reference">
     <title>Referencias de Zend_CodeGenerator</title>
 
@@ -10,9 +10,13 @@
         <sect3 id="zend.codegenerator.reference.abstracts.abstract">
             <title>Zend_CodeGenerator_Abstract</title>
 
-           <para>La clase base desde la cual heredan todos las clases
-                CodeGenerator proporciona la funcionalidad mínima necesaria. Su
-                    <acronym>API</acronym> es la siguiente:</para>
+            <para>
+                La clase base desde la cual heredan todos las clases
+                CodeGenerator proporciona la
+                funcionalidad mínima necesaria. Su
+                <acronym>API</acronym>
+                es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Abstract
@@ -28,41 +32,68 @@ abstract class Zend_CodeGenerator_Abstract
 }
 ]]></programlisting>
 
-           <para>El constructor primero llama a
-                    <methodname>_init()</methodname> (que se deja vacía para
-                implementar extenciones a clases concretas), se pasa entonces el
-                parámetro <varname>$options</varname> a
-                    <methodname>setOptions()</methodname>, y finalmente se llama
-                a <methodname>_prepare()</methodname> (nuevamente, a ser
-                implementada por extensión de una clase)</para>
+            <para>
+                El constructor primero llama a
+                <methodname>_init()</methodname>
+                (que se deja vacía para
+                implementar extenciones a clases concretas), se pasa entonces
+                el
+                parámetro
+                <varname>$options</varname>
+                a
+                <methodname>setOptions()</methodname>
+                , y finalmente se llama
+                a
+                <methodname>_prepare()</methodname>
+                (nuevamente, a ser
+                implementada por extensión de una clase)
+            </para>
 
-           <para>Al igual que la mayoría de las clases en Zend Framework,
-                    <methodname>setOptions()</methodname> compara una opción
+            <para>
+                Al igual que la mayoría de las clases en Zend Framework,
+                <methodname>setOptions()</methodname>
+                compara una opción
                 clave con setters existentes en la clase, y pasa el valor de ese
-                método si lo encuentra.</para>
+                método si lo encuentra.
+            </para>
 
-           <para>
-                <methodname>__toString()</methodname> es marcado como final, y
-                proxies a <methodname>generate()</methodname>.</para>
+            <para>
+                <methodname>__toString()</methodname>
+                es marcado como final, y
+                proxies a
+                <methodname>generate()</methodname>
+                .
+            </para>
 
-           <para>
-                <methodname>setSourceContent()</methodname> y
-                    <methodname>getSourceContent()</methodname> están destinados
+            <para>
+                <methodname>setSourceContent()</methodname>
+                y
+                <methodname>getSourceContent()</methodname>
+                están destinados
                 ya sea para fijar el valor por defecto del contenido para el
-                código a ser generado, o para sustituir dicho contenido una vez
-                que se completen todas las tareas de generación.</para>
+                código a
+                ser generado, o para sustituir dicho contenido una vez
+                que se completen todas las
+                tareas de generación.
+            </para>
         </sect3>
 
         <sect3 id="zend.codegenerator.reference.abstracts.php-abstract">
             <title>Zend_CodeGenerator_Php_Abstract</title>
 
-           <para>
-                <classname>Zend_CodeGenerator_Php_Abstract</classname> extiende
-                    <classname>Zend_CodeGenerator_Abstract</classname>, y añade
+            <para>
+                <classname>Zend_CodeGenerator_Php_Abstract</classname>
+                extiende
+                <classname>Zend_CodeGenerator_Abstract</classname>
+                , y añade
                 algunas propiedades para localizar su contenido si es que ha
-                cambiado, así como el nivel de identación que debe aparecer
-                antes del contenido generado. Su <acronym>API</acronym> es la
-                siguiente:</para>
+                cambiado, así
+                como el nivel de identación que debe aparecer
+                antes del contenido generado. Su
+                <acronym>API</acronym>
+                es la
+                siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Php_Abstract
@@ -79,13 +110,18 @@ abstract class Zend_CodeGenerator_Php_Abstract
         <sect3 id="zend.codegenerator.reference.abstracts.php-member-abstract">
             <title>Zend_CodeGenerator_Php_Member_Abstract</title>
 
-           <para>
-                <classname>Zend_CodeGenerator_Php_Member_Abstract</classname> es
+            <para>
+                <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>
+                es
                 una clase base para generar los miembros de clase -- propiedades
-                y métodos -- y brinda accesos y mutadores para establecer
-                visibilidad; ya sea el miembro abstracto o no, estático o
-                definitivo; y el nombre del miembro. Su <acronym>API</acronym>
-                es la siguiente:</para>
+                y métodos -- y
+                brinda accesos y mutadores para establecer
+                visibilidad; ya sea el miembro abstracto o
+                no, estático o
+                definitivo; y el nombre del miembro. Su
+                <acronym>API</acronym>
+                es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 abstract class Zend_CodeGenerator_Php_Member_Abstract
@@ -110,14 +146,24 @@ abstract class Zend_CodeGenerator_Php_Member_Abstract
         <sect3 id="zend.codegenerator.reference.concrete.php-body">
             <title>Zend_CodeGenerator_Php_Body</title>
 
-           <para>
-                <classname>Zend_CodeGenerator_Php_Body</classname> se destina
+            <para>
+                <classname>Zend_CodeGenerator_Php_Body</classname>
+                se destina
                 para generar código procedural arbitrario para incluir dentro de
-                un archivo. Como tal, usted simplemente establece contenidos
-                para el objeto, y éste devolverá el contenido cuando usted
-                invoque a <methodname>generate()</methodname>.</para>
+                un
+                archivo. Como tal, usted simplemente establece contenidos
+                para el objeto, y éste
+                devolverá el contenido cuando usted
+                invoque a
+                <methodname>generate()</methodname>
+                .
+            </para>
 
-           <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
+            <para>
+                La
+                <acronym>API</acronym>
+                de la clase es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
@@ -132,17 +178,29 @@ class Zend_CodeGenerator_Php_Body extends Zend_CodeGenerator_Php_Abstract
         <sect3 id="zend.codegenerator.reference.concrete.php-class">
             <title>Zend_CodeGenerator_Php_Class</title>
 
-           <para>
-                <classname>Zend_CodeGenerator_Php_Class</classname> Está
-                destinado a generar clases <acronym>PHP</acronym>. La
-                funcionalidad básica sólo genera la clase <acronym>PHP</acronym>
-                en si misma, así como opcionalmente el <acronym>PHP</acronym>
+            <para>
+                <classname>Zend_CodeGenerator_Php_Class</classname>
+                Está
+                destinado a generar clases
+                <acronym>PHP</acronym>
+                . La
+                funcionalidad básica sólo genera la clase
+                <acronym>PHP</acronym>
+                en si misma, así como opcionalmente el
+                <acronym>PHP</acronym>
                 DocBlock. Las clases pueden implementarse o heredarse de otras
-                clases, y pueden ser marcadas como abstractas. Utilizando otras
-                clases generadoras de código, también puede agregar constantes
-                de clase, propiedades y métodos.</para>
+                clases, y pueden ser
+                marcadas como abstractas. Utilizando otras
+                clases generadoras de código, también
+                puede agregar constantes
+                de clase, propiedades y métodos.
+            </para>
 
-           <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
+            <para>
+                La
+                <acronym>API</acronym>
+                de la clase es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
@@ -174,41 +232,68 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 }
 ]]></programlisting>
 
-           <para>El método <methodname>setProperty()</methodname> acepta un
+            <para>
+                El método
+                <methodname>setProperty()</methodname>
+                acepta un
                 array de información que puede ser utilizada para generar una
-                instancia <classname>Zend_CodeGenerator_Php_Property</classname>
+                instancia
+                <classname>Zend_CodeGenerator_Php_Property</classname>
                 -- o simplemente una instancia de
-                    <classname>Zend_CodeGenerator_Php_Property</classname>.
-                Análogamente, <methodname>setMethod()</methodname> acepta o un
+                <classname>Zend_CodeGenerator_Php_Property</classname>
+                .
+                Análogamente,
+                <methodname>setMethod()</methodname>
+                acepta o un
                 array de información para generar una instancia de
-                    <classname>Zend_CodeGenerator_Php_Method</classname> o una
-                instancia concreta de esa clase.</para>
+                <classname>Zend_CodeGenerator_Php_Method</classname>
+                o una
+                instancia concreta de esa clase.
+            </para>
 
-           <para>Se debe observar que <methodname>setDocBlock()</methodname>
+            <para>
+                Se debe observar que
+                <methodname>setDocBlock()</methodname>
                 espera una instancia de
-                    <classname>Zend_CodeGenerator_Php_DocBlock</classname>.
-           </para>
+                <classname>Zend_CodeGenerator_Php_DocBlock</classname>
+                .
+            </para>
         </sect3>
 
         <sect3 id="zend.codegenerator.reference.concrete.php-docblock">
             <title>Zend_CodeGenerator_Php_Docblock</title>
 
-           <para>
-                <classname>Zend_CodeGenerator_Php_Docblock</classname> puede ser
-                utilizada para generar <acronym>PHP</acronym> docblocks
+            <para>
+                <classname>Zend_CodeGenerator_Php_Docblock</classname>
+                puede ser
+                utilizada para generar
+                <acronym>PHP</acronym>
+                docblocks
                 arbitrarios, incluidas todas las características estándar de
-                docblock: descripciones cortas y largas y además los tags de
-                anotaciones.</para>
+                docblock:
+                descripciones cortas y largas y además los tags de
+                anotaciones.
+            </para>
 
-           <para>Los tags de anotación pueden establecerse utilizando los
-                métodos <methodname>setTag()</methodname> y
-                    <methodname>setTags()</methodname>; cada una de estas toman
+            <para>
+                Los tags de anotación pueden establecerse utilizando los
+                métodos
+                <methodname>setTag()</methodname>
+                y
+                <methodname>setTags()</methodname>
+                ; cada una de estas toman
                 o un array describiendo el tag que puede ser pasado al
                 constructor
-                    <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname>,
-                o una instancia de esa clase.</para>
+                <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname>
+                ,
+                o una instancia de esa clase.
+            </para>
 
-           <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
+            <para>
+                La
+                <acronym>API</acronym>
+                de la clase es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
@@ -231,15 +316,25 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
         <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag">
             <title>Zend_CodeGenerator_Php_Docblock_Tag</title>
 
-           <para>
-                <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname> está
+            <para>
+                <classname>Zend_CodeGenerator_Php_Docblock_Tag</classname>
+                está
                 destinado a crear tags de anotaciones arbitrarias para su
-                inclusión en <acronym>PHP</acronym> docblocks. Se espera que los
-                tags (etiquetas) contengan un nombre (la porción que sigue
+                inclusión en
+                <acronym>PHP</acronym>
+                docblocks. Se espera que los
+                tags (etiquetas) contengan un nombre (la porción que
+                sigue
                 inmediatamente después del símbolo '@') y una descripción (todo
-                lo que sigue después del nombre del tag).</para>
+                lo que sigue
+                después del nombre del tag).
+            </para>
 
-           <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
+            <para>
+                La
+                <acronym>API</acronym>
+                de la clase es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag
@@ -260,17 +355,25 @@ class Zend_CodeGenerator_Php_Docblock_Tag
         <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag-param">
             <title>Zend_CodeGenerator_Php_DocBlock_Tag_Param</title>
 
-           <para>
+            <para>
                 <classname>Zend_CodeGenerator_Php_DocBlock_Tag_Param</classname>
                 es una versión especializada de
-                    <classname>Zend_CodeGenerator_Php_DocBlock_Tag</classname>,
+                <classname>Zend_CodeGenerator_Php_DocBlock_Tag</classname>
+                ,
                 y representa un parámetro del método. El nombre del tag es por
-                lo tanto ("param"), pero debido al formato de este tag de
-                anotación, es necesaria información adicional a fin de
+                lo tanto ("param"),
+                pero debido al formato de este tag de
+                anotación, es necesaria información adicional a
+                fin de
                 generarla: el nombre del parámetro y el tipo de datos que
-                representa.</para>
+                representa.
+            </para>
 
-           <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
+            <para>
+                La
+                <acronym>API</acronym>
+                de la clase es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag_Param
@@ -288,18 +391,25 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
 ]]></programlisting>
         </sect3>
 
-        <sect3
-            id="zend.codegenerator.reference.concrete.php-docblock-tag-return">
+        <sect3 id="zend.codegenerator.reference.concrete.php-docblock-tag-return">
             <title>Zend_CodeGenerator_Php_DocBlock_Tag_Return</title>
 
-           <para>Al igual la variante del tag docblock,
-                    <classname>Zend_CodeGenerator_Php_Docblock_Tab_Return</classname>
+            <para>
+                Al igual la variante del tag docblock,
+                <classname>Zend_CodeGenerator_Php_Docblock_Tab_Return</classname>
                 es una variante de un tag de anotación para representar el valor
-                de retorno del método. En este caso, el nombre del tag de
-                anotación es conocido ("return"), pero requiere un tipo de
-                retorno.</para>
+                de retorno del
+                método. En este caso, el nombre del tag de
+                anotación es conocido ("return"), pero
+                requiere un tipo de
+                retorno.
+            </para>
 
-           <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
+            <para>
+                La
+                <acronym>API</acronym>
+                de la clase es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Docblock_Tag_Param
@@ -318,22 +428,38 @@ class Zend_CodeGenerator_Php_Docblock_Tag_Param
         <sect3 id="zend.codegenerator.reference.concrete.php-file">
             <title>Zend_CodeGenerator_Php_File</title>
 
-           <para>
-                <classname>Zend_CodeGenerator_Php_File</classname> se utiliza
+            <para>
+                <classname>Zend_CodeGenerator_Php_File</classname>
+                se utiliza
                 para generar el contenido íntegro de un archivo que contiene
-                código <acronym>PHP</acronym>. El archivo puede contener clases
-                o código <acronym>PHP</acronym> arbitrario, así como un archivo
-                de nivel docblock si así lo desea.</para>
+                código
+                <acronym>PHP</acronym>
+                . El archivo puede contener clases
+                o código
+                <acronym>PHP</acronym>
+                arbitrario, así como un archivo
+                de nivel docblock si así lo desea.
+            </para>
 
-           <para>Cuando se agregan clases al archivo, necesitará pasar o un
-                array de información para pasar al constructor
-                    <classname>Zend_CodeGenerator_Php_Class</classname>, o una
+            <para>
+                Cuando se agregan clases al archivo, necesitará pasar o un
+                array de información para
+                pasar al constructor
+                <classname>Zend_CodeGenerator_Php_Class</classname>
+                , o una
                 instancia de esa clase. De manera similar, con docblocks, usted
-                tendrá que pasar información para que lo consuma el constructor
-                    <classname>Zend_CodeGenerator_Php_Docblock</classname> o una
-                instancia de la clase.</para>
+                tendrá que
+                pasar información para que lo consuma el constructor
+                <classname>Zend_CodeGenerator_Php_Docblock</classname>
+                o una
+                instancia de la clase.
+            </para>
 
-           <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
+            <para>
+                La
+                <acronym>API</acronym>
+                de la clase es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
@@ -364,16 +490,24 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
         <sect3 id="zend.codegenerator.reference.concrete.php-member-container">
             <title>Zend_CodeGenerator_Php_Member_Container</title>
 
-           <para>
+            <para>
                 <classname>Zend_CodeGenerator_Php_Member_Container</classname>
                 es usado internamente por
-                    <classname>Zend_CodeGenerator_Php_Class</classname> para
+                <classname>Zend_CodeGenerator_Php_Class</classname>
+                para
                 seguir la pista de los los miembros de la clase -- a propiedades
-                y métodos por igual. Estos están indexados por nombre,
-                utilizando las instancias concretas de los miembros como
-                valores.</para>
+                y métodos por
+                igual. Estos están indexados por nombre,
+                utilizando las instancias concretas de los
+                miembros como
+                valores.
+            </para>
 
-           <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
+            <para>
+                La
+                <acronym>API</acronym>
+                de la clase es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
@@ -386,24 +520,38 @@ class Zend_CodeGenerator_Php_Member_Container extends ArrayObject
         <sect3 id="zend.codegenerator.reference.concrete.php-method">
             <title>Zend_CodeGenerator_Php_Method</title>
 
-           <para>
-                <classname>Zend_CodeGenerator_Php_Method</classname> describe un
+            <para>
+                <classname>Zend_CodeGenerator_Php_Method</classname>
+                describe un
                 método de clase, y puede generar tanto el código y el docblock
-                para el método. La visibilidad y condición estática, abstracta,
-                o se puede indicar como final, por su clase padre,
-                    <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>.
+                para el
+                método. La visibilidad y condición estática, abstracta,
+                o se puede indicar como
+                final, por su clase padre,
+                <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>
+                .
                 Finalmente, pueden especificarse los parámetros y valor de
-                retorno para el método.</para>
+                retorno para el método.
+            </para>
 
-           <para>Pueden establecerse los parámetros usando
-                    <methodname>setParameter()</methodname> o
-                    <methodname>setParameters()</methodname>. En cada caso, un
+            <para>
+                Pueden establecerse los parámetros usando
+                <methodname>setParameter()</methodname>
+                o
+                <methodname>setParameters()</methodname>
+                . En cada caso, un
                 parámetro debe ser un array de información para pasar al
                 constructor
-                    <classname>Zend_CodeGenerator_Php_Parameter</classname> o
-                una instancia de esa clase.</para>
+                <classname>Zend_CodeGenerator_Php_Parameter</classname>
+                o
+                una instancia de esa clase.
+            </para>
 
-           <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
+            <para>
+                La
+                <acronym>API</acronym>
+                de la clase es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Method
@@ -428,15 +576,24 @@ class Zend_CodeGenerator_Php_Method
         <sect3 id="zend.codegenerator.reference.concrete.php-parameter">
             <title>Zend_CodeGenerator_Php_Parameter</title>
 
-           <para>
-                <classname>Zend_CodeGenerator_Php_Parameter</classname> puede
+            <para>
+                <classname>Zend_CodeGenerator_Php_Parameter</classname>
+                puede
                 ser utilizada para especificar parámetros del método. Cada
-                parámetro puede tener una posición (si no están especificados,
-                se usarán en el orden que estén registrados en el método), son
+                parámetro puede tener
+                una posición (si no están especificados,
+                se usarán en el orden que estén registrados
+                en el método), son
                 oblogatorios un valor por defecto, un tipo de datos y un nombre
-                de parámetro.</para>
+                de
+                parámetro.
+            </para>
 
-           <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
+            <para>
+                La
+                <acronym>API</acronym>
+                de la clase es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
@@ -458,12 +615,13 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 }
 ]]></programlisting>
 
-           <para>
+            <para>
                 There are several problems that might occur when trying to set null, booleans or
                 arrays as default values. For this the value holder object
-                <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname> can be used,
+                <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname>
+                can be used,
                 for example:
-           </para>
+            </para>
 
             <programlisting language="php"><![CDATA[
 $parameter = new Zend_CodeGenerator_Php_Parameter();
@@ -475,26 +633,40 @@ $parameter->setDefaultValue(
 );
 ]]></programlisting>
 
-           <para>
-                Internally <methodname>setDefaultValue()</methodname> also converts the values
-                which can't be expressed in <acronym>PHP</acronym> into the value holder.
-           </para>
+            <para>
+                Internally
+                <methodname>setDefaultValue()</methodname>
+                also converts the values
+                which can't be expressed in
+                <acronym>PHP</acronym>
+                into the value holder.
+            </para>
 
         </sect3>
 
         <sect3 id="zend.codegenerator.reference.concrete.php-property">
             <title>Zend_CodeGenerator_Php_Property</title>
 
-           <para>
-                <classname>Zend_CodeGenerator_Php_Property</classname> describe
+            <para>
+                <classname>Zend_CodeGenerator_Php_Property</classname>
+                describe
                 una propiedad de clase, que puede ser tanto una constante o una
-                variable. En cada caso, la propiedad puede tener un valor
-                predeterminado asociado con ella. Además, la visibilidad de las
-                propiedades de la variable puede ser establecida por la clase
+                variable. En
+                cada caso, la propiedad puede tener un valor
+                predeterminado asociado con ella.
+                Además, la visibilidad de las
+                propiedades de la variable puede ser establecida por la
+                clase
                 padre,
-                    <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>.</para>
+                <classname>Zend_CodeGenerator_Php_Member_Abstract</classname>
+                .
+            </para>
 
-           <para>La <acronym>API</acronym> de la clase es la siguiente:</para>
+            <para>
+                La
+                <acronym>API</acronym>
+                de la clase es la siguiente:
+            </para>
 
             <programlisting language="php"><![CDATA[
 class Zend_CodeGenerator_Php_Property

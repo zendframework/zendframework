@@ -1,59 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16503 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 16503 -->
+    <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.json">
     <title>JSON</title>
 
-   <para>
-        Las respuestas  <acronym>JSON</acronym> se están convirtiendo en la respuesta de elección
-        cuando se trata de requerimientos <acronym>AJAX</acronym> que esperan recibir
-        respuestas datasets; en el lado del cliente,  <acronym>JSON</acronym> puede ser inmediatamente parseado y
+    <para>
+        Las respuestas
+        <acronym>JSON</acronym>
+        se están convirtiendo en la respuesta de elección
+        cuando se trata de requerimientos
+        <acronym>AJAX</acronym>
+        que esperan recibir
+        respuestas datasets; en el lado del cliente,
+        <acronym>JSON</acronym>
+        puede ser inmediatamente parseado y
         ejecutado rápidamente.
-   </para>
+    </para>
 
-   <para>
-        El ayudante de acción de  <acronym>JSON</acronym> hace varias cosas:
-   </para>
+    <para>
+        El ayudante de acción de
+        <acronym>JSON</acronym>
+        hace varias cosas:
+    </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 Deshabilita los layouts si estuvieran habilitados.
-       </para></listitem>
+       </para>
+        </listitem>
 
         <listitem>
-           <para>
+            <para>
                 Opcionalmente, un array de opciones que pasar como segundo
-                argumento a <methodname>Zend_Json::encode()</methodname>.
+                argumento a
+                <methodname>Zend_Json::encode()</methodname>
+                .
                 Este array de opciones permite habilitar layouts y
-                codificación utilizando <classname>Zend_Json_Expr</classname>.
+                codificación utilizando
+                <classname>Zend_Json_Expr</classname>
+                .
             </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('enableJsonExprFinder' => true));
 ]]></programlisting>
         </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Desactiva la ViewRenderer si está actualmente habilitada.
-        </para></listitem>
+        </para>
+        </listitem>
 
-        <listitem><para>
-                Establece la cabecera de respuesta 'Content-Type' a '<filename>application/json</filename>'.
-        </para></listitem>
+        <listitem>
+            <para>
+                Establece la cabecera de respuesta 'Content-Type' a '
+                <filename>application/json</filename>
+                '.
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Por defecto, devuelve inmediatamente la respuesta, sin esperar
-                a la acción para finalizar la ejecución.
-       </para></listitem>
+                a la acción para
+                finalizar la ejecución.
+       </para>
+        </listitem>
     </itemizedlist>
 
-   <para>
+    <para>
         El uso es simple: o bien llamarlo como un método del ayudante,
-        o llamar a uno de los métodos <methodname>encodeJson()</methodname> o
-        <methodname>sendJson()</methodname>:
-   </para>
+        o llamar a uno de los métodos
+        <methodname>encodeJson()</methodname>
+        o
+        <methodname>sendJson()</methodname>
+        :
+    </para>
 
-     <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -74,26 +100,38 @@ class FooController extends Zend_Controller_Action
     <note>
         <title>Conservando los Esquemas(Layouts)</title>
 
-       <para>
-            Si se tiene un esquema separado para respuestas de <acronym>JSON</acronym> --
-            quizás para envolver la respuesta de <acronym>JSON</acronym> en algún tipo de
-            contexto -- cada método en el ayudante <acronym>JSON</acronym> acepta un segundo
+        <para>
+            Si se tiene un esquema separado para respuestas de
+            <acronym>JSON</acronym>
+            --
+            quizás para envolver la respuesta de
+            <acronym>JSON</acronym>
+            en algún tipo de
+            contexto -- cada método en el ayudante
+            <acronym>JSON</acronym>
+            acepta un segundo
             argumento opcional: un flag para activar o desactivar layouts.
-            Pasando un valor booleano <constant>TRUE</constant> conservará los layouts
+            Pasando
+            un valor booleano
+            <constant>TRUE</constant>
+            conservará los layouts
             habilitados:
-       </para>
+        </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, true);
 ]]></programlisting>
 
-       <para>
+        <para>
             Opcionalmente, puede pasar un array como el segundo parámetro.
-            Este array puede contener una variedad de opciones, incluida la
-            opción <methodname>keepLayouts</methodname>:
-       </para>
+            Este array puede contener
+            una variedad de opciones, incluida la
+            opción
+            <methodname>keepLayouts</methodname>
+            :
+        </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('keepLayouts' => true);
 ]]></programlisting>
     </note>
@@ -101,26 +139,41 @@ $this->_helper->json($data, array('keepLayouts' => true);
     <note>
         <title>Habilitando la Codificación usando Zend_Json_Expr</title>
 
-       <para>
-            <methodname>Zend_Json::encode()</methodname> permite la codificación
-            de expresiones nativas de <acronym>JSON</acronym> utilizando objetos
-            <methodname>Zend_Json_Expr</methodname>. Esta opción está desactivada por
-            defecto. Para activar esta opción, pase un valor booleano
-            <constant>TRUE</constant> a la opción <methodname>enableJsonExprFinder</methodname>:
-       </para>
+        <para>
+            <methodname>Zend_Json::encode()</methodname>
+            permite la codificación
+            de expresiones nativas de
+            <acronym>JSON</acronym>
+            utilizando objetos
+            <methodname>Zend_Json_Expr</methodname>
+            . Esta opción está desactivada por
+            defecto. Para activar esta opción, pase un valor
+            booleano
+            <constant>TRUE</constant>
+            a la opción
+            <methodname>enableJsonExprFinder</methodname>
+            :
+        </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array('enableJsonExprFinder' => true);
 ]]></programlisting>
 
-       <para>
-            Si desea hacer esto, <emphasis>debe</emphasis> pasar un array
+        <para>
+            Si desea hacer esto,
+            <emphasis>debe</emphasis>
+            pasar un array
             como segundo argumento. Esto también le permite combinar otras
-            opciones, como la opción <emphasis>keepLayouts</emphasis>. Todas esas
-            opciones se pasan luego a <methodname>Zend_Json::encode()</methodname>.
-       </para>
+            opciones,
+            como la opción
+            <emphasis>keepLayouts</emphasis>
+            . Todas esas
+            opciones se pasan luego a
+            <methodname>Zend_Json::encode()</methodname>
+            .
+        </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $this->_helper->json($data, array(
     'enableJsonExprFinder' => true,
     'keepLayouts'          => true,
@@ -128,6 +181,6 @@ $this->_helper->json($data, array(
 ]]></programlisting>
     </note>
 </sect3>
-<!--
+    <!--
 vim:se ts=4 sw=4 et:
 -->

@@ -1,60 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16705 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 16705 -->
+    <!-- Reviewed: no -->
 <sect1 id="zend.controller.quickstart">
     <title>Inicio rápido a Zend_Controller</title>
 
     <sect2 id="zend.controller.quickstart.introduction">
         <title>Introducción</title>
-       <para>
+        <para>
             <methodname>Zend_Controller</methodname>
-            es el corazón del sistema de <acronym>MVC</acronym> de Zend Framework <acronym>MVC</acronym>.<acronym>MVC</acronym>
+            es el corazón del sistema de
+            <acronym>MVC</acronym>
+            de Zend Framework
+            <acronym>MVC</acronym>
+            .
+            <acronym>MVC</acronym>
             son las siglas de
             <ulink url="http://en.wikipedia.org/wiki/Model-view-controller">
                 Modelo-Vista-Controlador
             </ulink>
             y es un patrón de diseño con el objetivo de separar la
-            lógica de la aplicación de la lógica de visualización.
+            lógica de la aplicación de la
+            lógica de visualización.
             <methodname>Zend_Controller_Front</methodname>
             implementa el patrón
             <ulink url="http://www.martinfowler.com/eaaCatalog/frontController.html">
                 Front Controller (Controlador Frontal)
             </ulink>
-            en el cual todas las transacciones <acronym>HTTP</acronym> (requests) son
+            en el cual todas las transacciones
+            <acronym>HTTP</acronym>
+            (requests) son
             interceptadas por el controlador frontal y enviado a una
-            Acción particular de un Controlador según la <acronym>URL</acronym> pedida.
+            Acción particular
+            de un Controlador según la
+            <acronym>URL</acronym>
+            pedida.
 
-       </para>
-       <para>
+        </para>
+        <para>
             El sistema
             <methodname>Zend_Controller</methodname>
             fue construido con la extensibilidad en mente, ya sea
-            heredando las clases existentes, escribiendo nuevas clases
+            heredando las clases existentes,
+            escribiendo nuevas clases
             que implementan varias interfaces o clases abstractas que
             forman la base de la familia de clases del controlador, o
-            escribiendo plugins o helpers de las acciones para aumentar
+            escribiendo plugins o helpers
+            de las acciones para aumentar
             o manipular la funcionalidad del sistema.
-       </para>
+        </para>
     </sect2>
 
     <sect2 id="zend.controller.quickstart.go">
         <title>Quick Start</title>
 
-       <para>
+        <para>
             Si necesita información más detallada, mire las secciones
-            siguientes. Si solamente quiere inicializar y ejecutar una
+            siguientes. Si solamente
+            quiere inicializar y ejecutar una
             aplicación rápidamente, siga leyendo.
        </para>
 
         <sect3 id="zend.controller.quickstart.go.directory">
             <title>Cree su estructura de archivos</title>
 
-           <para>
+            <para>
                 El primer paso es crear su estructura de archivos. La
-                estructura típica es la siguiente:
+                estructura típica es la
+                siguiente:
            </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 application/
     controllers/
         IndexController.php
@@ -75,24 +90,24 @@ html/
         <sect3 id="zend.controller.quickstart.go.docroot">
             <title>Establezca el document root</title>
 
-           <para>
+            <para>
                 Apunte su document root en su servidor web hacia el
                 directorio
                 <filename>html/</filename>
                 de la estructura de archivos de arriba.
-           </para>
+            </para>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.rewrite">
             <title>Cree sus reglas de reescritura</title>
 
-           <para>
+            <para>
                 Edite el archivo
                 <filename>html/.htaccess</filename>
                 que aparece arriba de la siguiente forma:
-           </para>
+            </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
@@ -104,21 +119,25 @@ RewriteRule ^.*$ index.php [NC,L]
             <note>
                 <title>Learn about mod_rewrite</title>
 
-               <para>
+                <para>
                     The above rewrite rules allow access to any file under your
-                    virtual host's document root. If there are files you do not
-                    want exposed in this way, you may want to be more
+                    virtual host's
+                    document root. If there are files you do not
+                    want exposed in this way, you may
+                    want to be more
                     restrictive in your rules. Go to the Apache website to
-                    <ulink
-                        url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">learn
-                        more about mod_rewrite</ulink>.
-               </para>
+                    <ulink url="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">learn
+                        more about mod_rewrite</ulink>
+                    .
+                </para>
             </note>
 
-           <para>
-                If using <acronym>IIS</acronym> 7.0, use the following as your rewrite
+            <para>
+                If using
+                <acronym>IIS</acronym>
+                7.0, use the following as your rewrite
                 configuration:
-           </para>
+            </para>
 
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
@@ -148,55 +167,63 @@ RewriteRule ^.*$ index.php [NC,L]
 </configuration>
 ]]></programlisting>
 
-           <para>
+            <para>
                 La regla de arriba redirigirá las peticiones a recuros existentes
-                (enlaces simbólicos existentes, archivos no vacíos, o directorios no vacíos)
-        en consecuencia, y todas las otras peticiones al front controller.
+                (enlaces
+                simbólicos existentes, archivos no vacíos, o directorios no vacíos)
+                en consecuencia, y todas las otras peticiones al front controller.
            </para>
 
             <note>
-               <para>
+                <para>
                     Las reglas de arriba pertenecen a Apache. Para ejemplos de reglas
-                    de rewrite para otros servidores web, mire la
+                    de rewrite para
+                    otros servidores web, mire la
                     <link linkend="zend.controller.router.introduction">
                         documentación de router
                     </link>
                     .
-               </para>
+                </para>
             </note>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.bootstrap">
             <title>Crear el archivo bootstrap</title>
 
-           <para>
+            <para>
                 El archivo bootstrap es la página a la que todas las peticiones
-                son redirigidas a través de --
+                son redirigidas a
+                través de --
                 <filename>html/index.php</filename>
                 en este caso. Abra el archivo
                 <filename>html/index.php</filename>
                 en el editor de su elección y añada lo siguiente:
-           </para>
+            </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 Zend_Controller_Front::run('/path/to/app/controllers');
 ]]></programlisting>
 
-           <para>
+            <para>
                 Esto instanciará y hará un dispatch del front controller, que
-                redigirá las peticiones a los action controllers.
+                redigirá las
+                peticiones a los action controllers.
            </para>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.controller">
             <title>Crear el action controller por defecto</title>
 
-           <para>
+            <para>
                 Antes de tratar los action controllers, debe primero
-                entender cómo las peticiones son redirigidas en Zend Framework.
-                Por defecto, el primero segmento de una ruta <acronym>URL</acronym> apunta
+                entender cómo las peticiones son
+                redirigidas en Zend Framework.
+                Por defecto, el primero segmento de una ruta
+                <acronym>URL</acronym>
+                apunta
                 a un controlador, y el segundo a una acción. Por ejemplo,
-                dada la <acronym>URL</acronym>
+                dada la
+                <acronym>URL</acronym>
                 <filename>
                     http://framework.zend.com/roadmap/components
                 </filename>
@@ -213,12 +240,14 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 (siguiendo la convención de Apache de apuntar a
                 <emphasis>DirectoryIndex</emphasis>
                 automáticamente).
-           </para>
+            </para>
 
-           <para>
-                El dispatcher de <methodname>Zend_Controller</methodname>
+            <para>
+                El dispatcher de
+                <methodname>Zend_Controller</methodname>
                 toma entonces el valor del controlador y lo apunta
-                a una clase. Por defecto, pone en mayúsculas la primera letra
+                a una clase. Por defecto, pone en
+                mayúsculas la primera letra
                 del nombre de controlador y agrega la palabra
                 <emphasis>Controller</emphasis>
                 . De esta forma, en nuestro ejemplo de arriba, el controlador
@@ -226,11 +255,12 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 es dirigido a la clase
                 <methodname>RoadmapController</methodname>
                 .
-           </para>
+            </para>
 
-           <para>
+            <para>
                 De la misma forma, el valor de action es dirigido
-                a un método de la clase controladora. Por defecto, el valor se
+                a un método de la clase
+                controladora. Por defecto, el valor se
                 pasa a minúsculas, y la palabra
                 <emphasis>Action</emphasis>
                 es añadida. De esta forma, en nuestro ejemplo de arriba, la acción
@@ -240,19 +270,20 @@ Zend_Controller_Front::run('/path/to/app/controllers');
                 , y el método final llamado es
                 <methodname>RoadmapController::componentsAction()</methodname>
                 .
-           </para>
+            </para>
 
-           <para>
+            <para>
                 Continuando, creemos ahora un action controller
-                y un método de acción por defecto. Como se ha dicho antes,
+                y un método de acción por defecto.
+                Como se ha dicho antes,
                 el controlador por defecto y la acción llamada son ambos
                 <emphasis>index</emphasis>
                 . Abra el archivo
                 <filename>application/controllers/IndexController.php</filename>
                 , e introduzca lo siguiente:
-           </para>
+            </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 /** Zend_Controller_Action */
 class IndexController extends Zend_Controller_Action
 {
@@ -262,24 +293,28 @@ class IndexController extends Zend_Controller_Action
 }
 ]]></programlisting>
 
-           <para>
+            <para>
                 Por defecto, el action helper
                 <link linkend="zend.controller.actionhelpers.viewrenderer">
                     ViewRenderer
                 </link>
                 está activado. Esto significa que simplemente
-                definiendo un action method y un view script correspondiente,
+                definiendo un action method y un view
+                script correspondiente,
                 tendrá su contenido generado inmediatamente.
                 Por defecto,
                 <methodname>Zend_View</methodname>
-                es usado como la capa Vista en el patrón <acronym>MVC</acronym>. El
+                es usado como la capa Vista en el patrón
+                <acronym>MVC</acronym>
+                . El
                 <emphasis>ViewRenderer</emphasis>
                 hace algo de magia, y usa el nombre de controlador (e.g.,
                 <methodname>index</methodname>
                 ) y el nombre de acción actual (e.g.,
                 <emphasis>index</emphasis>
                 ) para determinar qué plantilla traer. Por defecto,
-                las plantillas terminan con la extensión
+                las plantillas terminan con la
+                extensión
                 <methodname>.phtml</methodname>
                 , lo que significa que en el ejemplo de arriba, la
                 plantilla
@@ -289,19 +324,21 @@ class IndexController extends Zend_Controller_Action
                 asume automáticamente que la carpeta
                 <methodname>views</methodname>
                 al mismo nivel que la carpeta controller será
-                la carpeta raíz de la vista, y que el script de vista actual
+                la carpeta raíz de la vista, y que el
+                script de vista actual
                 estará en la subcarpeta
-                <filename>views/scripts/</filename>.
+                <filename>views/scripts/</filename>
+                .
                 De esta forma, la plantilla generada será encontrada en
                 <filename>application/views/scripts/index/index.phtml</filename>
                 .
-           </para>
+            </para>
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.view">
             <title>Cree su view script</title>
 
-           <para>
+            <para>
                 Como hemos mencionado
                 <link linkend="zend.controller.quickstart.go.controller">
                     en la sección anterior
@@ -312,9 +349,9 @@ class IndexController extends Zend_Controller_Action
                 está en
                 <filename>application/views/scripts/index/index.phtml</filename>
                 . Cree este archivo, y escriba un poco de HTML:
-           </para>
+            </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -333,20 +370,22 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         <sect3 id="zend.controller.quickstart.go.errorhandler">
             <title>Cree su controlador de errores</title>
 
-           <para>
+            <para>
                 Por defecto, está registrado
                 <link linkend="zend.controller.plugins.standard.errorhandler">
                     el plugin 'error handler'
-                </link>. Este plugin espera que exista
+                </link>
+                . Este plugin espera que exista
                 un controlador para manejar los errores.
-                Por defecto, asume un
+                Por defecto,
+                asume un
                 <methodname>ErrorController</methodname>
                 en el módulo default con un método
                 <methodname>errorAction</methodname>
                 :
-           </para>
+            </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class ErrorController extends Zend_Controller_Action
 {
     public function errorAction()
@@ -355,16 +394,16 @@ class ErrorController extends Zend_Controller_Action
 }
 ]]></programlisting>
 
-           <para>
+            <para>
                 Asumiendo el sistema de carpetas discutido anteriormente,
                 este archivo irá en
                 <filename>application/controllers/ErrorController.php</filename>
                 . También necesitará crear un view script en
                 <filename>application/views/scripts/error/error.phtml</filename>
                 ; el contenido de ejemplo será parecido a:
-           </para>
+            </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 <!DOCTYPE html
 PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -384,38 +423,42 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         <sect3 id="zend.controller.quickstart.go.finish">
             <title>¡Vea el sitio!</title>
 
-           <para>
-                Con su primer controlador y vista, ya puede arrancar su navegador y acceder a su sitio.
+            <para>
+                Con su primer controlador y vista, ya puede arrancar su navegador y acceder a su
+                sitio.
                 Asumiendo que
                 <filename>example.com</filename>
-                es su dominio, cualquiera de las siguientes <acronym>URL</acronym>s le llevará a
+                es su dominio, cualquiera de las siguientes
+                <acronym>URL</acronym>
+                s le llevará a
                 la página que acaba de crear:
-           </para>
+            </para>
 
             <itemizedlist>
                 <listitem>
-                   <para>
+                    <para>
                         <filename>http://example.com/</filename>
-                   </para>
+                    </para>
                 </listitem>
                 <listitem>
-                   <para>
+                    <para>
                         <filename>http://example.com/index</filename>
-                   </para>
+                    </para>
                 </listitem>
                 <listitem>
-                   <para>
+                    <para>
                         <filename>http://example.com/index/index</filename>
-                   </para>
+                    </para>
                 </listitem>
             </itemizedlist>
 
-           <para>
-                Ya está listo para empezar a crear más métodos de controladores y acciones. ¡Felicidades!
+            <para>
+                Ya está listo para empezar a crear más métodos de controladores y acciones.
+                ¡Felicidades!
            </para>
         </sect3>
     </sect2>
 </sect1>
-<!--
+    <!--
     vim:se ts=4 sw=4 et:
 -->

@@ -66,20 +66,16 @@
             negar el acceso debido a una petición que proviene de una dirección IP que se ha
             marcado
             como una fuente de abusos.
-            <classname>Zend_Acl</classname>
-            tiene soporte para la
+            <classname>Zend_Acl</classname>tiene soporte para la
             aplicación de normas basadas en cualquier condición que el
-            desarrollador necesite.
-        </para>
+            desarrollador necesite.</para>
 
         <para>
             <classname>Zend_Acl</classname>
             provee soporte para reglas condicionales con
-            <classname>Zend_Acl_Assert_Interface</classname>
-            . Con el fin de utilizar la regla
+            <classname>Zend_Acl_Assert_Interface</classname>. Con el fin de utilizar la regla
             de aserción de la interfaz, un desarrollador escribe
-            una clase que implemente el método
-            <methodname>assert()</methodname>
+            una clase que implemente el método<methodname>assert()</methodname>
             de la interfaz:
         </para>
 

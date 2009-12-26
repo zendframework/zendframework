@@ -1,71 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19143 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 19143 -->
+    <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Elementos de Formularios Dijit-Specific</title>
 
-   <para>Cada formulario dijit para el que se provee un ayudante tiene un
-        elemento correspondiente <classname>Zend_Form</classname>. Todos ellos
+    <para>
+        Cada formulario dijit para el que se provee un ayudante tiene un
+        elemento correspondiente
+        <classname>Zend_Form</classname>
+        . Todos ellos
         tienen los siguientes métodos disponibles para manipular los parámetros
-        dijit:</para>
+        dijit:
+    </para>
 
     <itemizedlist>
         <listitem>
-           <para>
-                <methodname>setDijitParam($key, $value)</methodname>: establecer
+            <para>
+                <methodname>setDijitParam($key, $value)</methodname>
+                : establecer
                 un único parámetro dijit. Si el parámetro dijit ya existe, se
-                borrará y se reemplazará por el nuevo.</para>
+                borrará y
+                se reemplazará por el nuevo.
+            </para>
         </listitem>
 
         <listitem>
-           <para>
-                <methodname>setDijitParams(array $params)</methodname>:
+            <para>
+                <methodname>setDijitParams(array $params)</methodname>
+                :
                 establecer varios parámetros dijit a la vez. Cualquiera de los
-                parámetros pasados que concuerden con los ya presentes se
-                sobreescribirán.</para>
+                parámetros pasados
+                que concuerden con los ya presentes se
+                sobreescribirán.
+            </para>
         </listitem>
 
         <listitem>
-           <para>
-                <methodname>hasDijitParam($key)</methodname>: si un determinado
+            <para>
+                <methodname>hasDijitParam($key)</methodname>
+                : si un determinado
                 parámetro dijit está definido y presente, devolverá TRUE, de lo
-                contrario devolverá FALSE.</para>
+                contrario devolverá FALSE.
+            </para>
         </listitem>
 
         <listitem>
-           <para>
-                <methodname>getDijitParam($key)</methodname>: recupera el
+            <para>
+                <methodname>getDijitParam($key)</methodname>
+                : recupera el
                 parámetro dijit. Si no está disponible, se devuelve un valor
-                null.</para>
+                null.
+            </para>
         </listitem>
 
         <listitem>
-           <para>
-                <methodname>getDijitParams()</methodname>: recupera todos los
-                parámetros dijit.</para>
+            <para>
+                <methodname>getDijitParams()</methodname>
+                : recupera todos los
+                parámetros dijit.
+            </para>
         </listitem>
 
         <listitem>
-           <para>
-                <methodname>removeDijitParam($key)</methodname>: elimina el
-                parámetro dijit dado.</para>
+            <para>
+                <methodname>removeDijitParam($key)</methodname>
+                : elimina el
+                parámetro dijit dado.
+            </para>
         </listitem>
 
         <listitem>
-           <para>
-                <methodname>clearDijitParams()</methodname>: borra todos los
-                parámetros dijit actualmente definidos.</para>
+            <para>
+                <methodname>clearDijitParams()</methodname>
+                : borra todos los
+                parámetros dijit actualmente definidos.
+            </para>
         </listitem>
     </itemizedlist>
 
-   <para>Los parámetros Dijit se almacenan en la propiedad pública
-            <methodname>dijitParams</methodname>. Así, puede habilitar dijit
-        para un elemento de un formulario existente simplemente estableciendo
+    <para>
+        Los parámetros Dijit se almacenan en la propiedad pública
+        <methodname>dijitParams</methodname>
+        . Así, puede habilitar dijit
+        para un elemento de un formulario existente simplemente
+        estableciendo
         esta propiedad en el elemento; sencillamante no tendrá los accessors
-        anteriores a fin de facilitar la manipulación de parámetros.</para>
+        anteriores
+        a fin de facilitar la manipulación de parámetros.
+    </para>
 
-   <para>Además, los elementos específicos de dijit implementan una lista
-        diferente de decoradores, correspondientes a lo siguiente:</para>
+    <para>Además, los elementos específicos de dijit implementan una lista
+        diferente de decoradores,
+        correspondientes a lo siguiente:</para>
 
     <programlisting language="php"><![CDATA[
 $element->addDecorator('DijitElement')
@@ -74,51 +100,72 @@ $element->addDecorator('DijitElement')
         ->addDecorator('Label', array('tag' => 'dt'));
 ]]></programlisting>
 
-   <para>En efecto, el decorador DijitElement es utilizado en lugar del
-        decorador standard ViewHelper.</para>
+    <para>En efecto, el decorador DijitElement es utilizado en lugar del
+        decorador standard
+        ViewHelper.</para>
 
-   <para>Finalmente, el elemento base Dijit asegura que el path del ayudante
-        de vista de Dojo se establezca en la vista.</para>
+    <para>Finalmente, el elemento base Dijit asegura que el path del ayudante
+        de vista de Dojo se
+        establezca en la vista.</para>
 
-   <para>Una variante de DijitElement, DijitMulti, ofrece la funcionalidad del
-        elemento abstracto del formulario <methodname>Multi</methodname>,
+    <para>
+        Una variante de DijitElement, DijitMulti, ofrece la funcionalidad del
+        elemento abstracto del
+        formulario
+        <methodname>Multi</methodname>
+        ,
         permitiendo al desarrollador especificar 'multiOptions' -- típicamente
-        opciones "select" u opciones de "radio".</para>
+        opciones "select" u
+        opciones de "radio".
+    </para>
 
-   <para>Los siguientes elementos dijit están incluídos en la distribución
-        standard de Zend Framework.</para>
+    <para>Los siguientes elementos dijit están incluídos en la distribución
+        standard de Zend
+        Framework.</para>
 
     <sect3 id="zend.dojo.form.elements.button">
         <title>Button</title>
 
-       <para>Si bien no derivan del elemento standard Button <link
-                linkend="zend.form.standardElements.button"/>, implementan la
+        <para>
+            Si bien no derivan del elemento standard Button
+            <link linkend="zend.form.standardElements.button"/>
+            , implementan la
             misma funcionalidad, y pueden ser utilizados como una sustitución de
-            drop-in, como se expone en la siguiente funcionalidad:</para>
+            drop-in, como se expone en la siguiente funcionalidad:
+        </para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>getLabel()</methodname> utilizará el nombre del
+                <para>
+                    <methodname>getLabel()</methodname>
+                    utilizará el nombre del
                     elemento como el rótulo del botón si no se ha provisto el
                     nombre. Además, traducirá el nombre si un adaptador de
-                    traducción encuentra concordancia con un mensaje disponible.
-               </para>
+                    traducción encuentra
+                    concordancia con un mensaje disponible.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>isChecked()</methodname> determina si el valor
+                <para>
+                    <methodname>isChecked()</methodname>
+                    determina si el valor
                     enviado coincide con la etiqueta; si así fuera, devuelve
                     true. Esto es útil para determinar qué botón se utilizó
-                    cuando se envió un formulario.</para>
+                    cuando se envió un
+                    formulario.
+                </para>
             </listitem>
         </itemizedlist>
 
-       <para>Además, sólo los decoradores
-                <methodname>DijitElement</methodname> y
-                <methodname>DtDdWrapper</methodname> se utilizan para elementos
-            Button.</para>
+        <para>
+            Además, sólo los decoradores
+            <methodname>DijitElement</methodname>
+            y
+            <methodname>DtDdWrapper</methodname>
+            se utilizan para elementos
+            Button.
+        </para>
 
         <example id="zend.dojo.form.elements.button.example">
             <title>Ejemplo de Uso del Elemento Button dijit</title>
@@ -138,49 +185,62 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.checkBox">
         <title>CheckBox</title>
 
-       <para>Si bien no derivan del elemento standard Checkbox <link
-                linkend="zend.form.standardElements.checkbox"/>, aplican la
-            misma funcionalidad. Esto significa exponer los siguientes métodos:</para>
+        <para>
+            Si bien no derivan del elemento standard Checkbox
+            <link linkend="zend.form.standardElements.checkbox"/>
+            , aplican la
+            misma funcionalidad. Esto significa exponer los siguientes métodos:
+        </para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>setCheckedValue($value)</methodname>: establecer
+                <para>
+                    <methodname>setCheckedValue($value)</methodname>
+                    : establecer
                     el valor a usar cuando el elemento está marcado (checked).
-               </para>
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>getCheckedValue()</methodname>: obtener el valor
-                    del item a usar cuando está comprobado (checked).</para>
+                <para>
+                    <methodname>getCheckedValue()</methodname>
+                    : obtener el valor
+                    del item a usar cuando está comprobado (checked).
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setUncheckedValue($value)</methodname>:
+                <para>
+                    <methodname>setUncheckedValue($value)</methodname>
+                    :
                     establecer el valor del item a utilizar cuando está
-                    desactivado (unchecked).</para>
+                    desactivado (unchecked).
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>getUncheckedValue()</methodname>: obtener el
+                <para>
+                    <methodname>getUncheckedValue()</methodname>
+                    : obtener el
                     valor del item a utilizar cuando está desactivado
-                    (unchecked).</para>
+                    (unchecked).
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setChecked($flag)</methodname>: marcar el
+                <para>
+                    <methodname>setChecked($flag)</methodname>
+                    : marcar el
                     elemento como activado (checked) o desactivado (unchecked).
-               </para>
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>isChecked()</methodname>: determina si el
-                    elemento está activo (checked) actualmente.</para>
+                <para>
+                    <methodname>isChecked()</methodname>
+                    : determina si el
+                    elemento está activo (checked) actualmente.
+                </para>
             </listitem>
         </itemizedlist>
 
@@ -205,109 +265,156 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.comboBox">
         <title>ComboBox y FilteringSelect</title>
 
-       <para>Como se señaló en la documentación del ayudante de vista de
-            ComboBox dijit <link linkend="zend.dojo.view.dijit.form"/>, los
+        <para>
+            Como se señaló en la documentación del ayudante de vista de
+            ComboBox dijit
+            <link linkend="zend.dojo.view.dijit.form"/>
+            , los
             ComboBoxes son un híbrido entre "select" y "text input", permitiendo
-            el autocompletado y la capacidad para especificar una alternativa a
-            las opciones provistas. FilteringSelects es lo mismo, pero no
-            permite entradas arbitrarias.</para>
+            el
+            autocompletado y la capacidad para especificar una alternativa a
+            las opciones provistas.
+            FilteringSelects es lo mismo, pero no
+            permite entradas arbitrarias.
+        </para>
 
         <note>
             <title>ComboBoxes que Devuelven los Valores de los Labels</title>
 
-           <para>Los ComboBoxes devuelven los valores de los rótulos (labels),
-                y no los valores de opción, que pueden llevar a una
-                desvinculación de las expectativas. Por esta razón, los
+            <para>
+                Los ComboBoxes devuelven los valores de los rótulos (labels),
+                y no los valores de
+                opción, que pueden llevar a una
+                desvinculación de las expectativas. Por esta razón,
+                los
                 ComboBoxes no auto-registran un validador
-                    <methodname>InArray</methodname> (aunque los
-                FilteringSelects si lo hacen).</para>
+                <methodname>InArray</methodname>
+                (aunque los
+                FilteringSelects si lo hacen).
+            </para>
         </note>
 
-       <para>Los elementos de forms de ComboBox y FilteringSelect proporcionan
-            accessors y mutators para examinar y establecer las opciones
-            seleccionadas, así como para especificar un datastore dojo.data (si
-            se usa). Se extienden desde DijitMulti, que le permite especificar
+        <para>
+            Los elementos de forms de ComboBox y FilteringSelect proporcionan
+            accessors y mutators
+            para examinar y establecer las opciones
+            seleccionadas, así como para especificar un
+            datastore dojo.data (si
+            se usa). Se extienden desde DijitMulti, que le permite
+            especificar
             opciones de selección vía los métodos
-                <methodname>setMultiOptions()</methodname> y
-                <methodname>setMultiOption()</methodname>. Además, están
-            disponibles los siguientes métodos:</para>
+            <methodname>setMultiOptions()</methodname>
+            y
+            <methodname>setMultiOption()</methodname>
+            . Además, están
+            disponibles los siguientes métodos:
+        </para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>getStoreInfo()</methodname>: Obtener del
+                <para>
+                    <methodname>getStoreInfo()</methodname>
+                    : Obtener del
                     datastore toda la información establecida actualmente.
-                    Devuelve un array vacío si no hay datos actualmente
-                    establecidos.</para>
+                    Devuelve un
+                    array vacío si no hay datos actualmente
+                    establecidos.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setStoreId($identifier)</methodname>: establece
+                <para>
+                    <methodname>setStoreId($identifier)</methodname>
+                    : establece
                     la variable del identificador (generalmente referenciado por
-                    el atributo 'jsId' en Dojo). Este debe ser un nombre de
-                    variable válido para javascript.</para>
+                    el
+                    atributo 'jsId' en Dojo). Este debe ser un nombre de
+                    variable válido para
+                    javascript.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>getStoreId()</methodname>: recupera el nombre de
-                    la variable del identificador del datastore.</para>
+                <para>
+                    <methodname>getStoreId()</methodname>
+                    : recupera el nombre de
+                    la variable del identificador del datastore.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setStoreType($dojoType)</methodname>: establece
+                <para>
+                    <methodname>setStoreType($dojoType)</methodname>
+                    : establece
                     la clase del datastore a usar; por ejemplo,
-                    "dojo.data.ItemFileReadStore".</para>
+                    "dojo.data.ItemFileReadStore".
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>getStoreType()</methodname>: obtiene la clase
-                    del datastore a usar.</para>
+                <para>
+                    <methodname>getStoreType()</methodname>
+                    : obtiene la clase
+                    del datastore a usar.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setStoreParams(array $params)</methodname>:
+                <para>
+                    <methodname>setStoreParams(array $params)</methodname>
+                    :
                     establece cualquiera de los parámetros utilizados para
-                    configurar el objeto datastore. Como ejemplo, el datastore
-                    dojo.data.ItemFileReadStore esperaría un parámetro 'url'
+                    configurar el objeto
+                    datastore. Como ejemplo, el datastore
+                    dojo.data.ItemFileReadStore esperaría un
+                    parámetro 'url'
                     apuntando a un lugar que devolvería el objeto dojo.data.
-               </para>
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>getStoreParams()</methodname>: obtiene
+                <para>
+                    <methodname>getStoreParams()</methodname>
+                    : obtiene
                     cualquiera de los parámetros del datastore actualmente
-                    establecido; si no hay ninguno, se devuelve un array vacío.
-               </para>
+                    establecido; si
+                    no hay ninguno, se devuelve un array vacío.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setAutocomplete($flag)</methodname>: indica si
+                <para>
+                    <methodname>setAutocomplete($flag)</methodname>
+                    : indica si
                     será usado o no el elemento seleccionado una vez que el
-                    usuario deje el elemento.</para>
+                    usuario deje
+                    el elemento.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>getAutocomplete()</methodname>: obtener el valor
-                    del flag de autocomplete.</para>
+                <para>
+                    <methodname>getAutocomplete()</methodname>
+                    : obtener el valor
+                    del flag de autocomplete.
+                </para>
             </listitem>
         </itemizedlist>
 
-       <para>Por defecto, si no hay ningún dojo.data registrado con el
-            elemento, este elemento registra un validador
-                <methodname>InArray</methodname> que valida contra las claves
+        <para>
+            Por defecto, si no hay ningún dojo.data registrado con el
+            elemento, este elemento
+            registra un validador
+            <methodname>InArray</methodname>
+            que valida contra las claves
             del array de las opciones registradas. Puede desactivar este
             comportamiento ya sea llamando a
-                <methodname>setRegisterInArrayValidator(false)</methodname>, o
+            <methodname>setRegisterInArrayValidator(false)</methodname>
+            , o
             pasando un valor false a la clave de configuración
-                <methodname>registerInArrayValidator</methodname>.</para>
+            <methodname>registerInArrayValidator</methodname>
+            .
+        </para>
 
         <example id="zend.dojo.form.elements.comboBox.selectExample">
             <title>Elemento de ComboBox dijit Usado como select input</title>
@@ -355,68 +462,86 @@ $form->addElement(
 ]]></programlisting>
         </example>
 
-       <para>Los ejemplos anteriores también podrían utilizar
-                <methodname>FilteringSelect</methodname> en vez de
-                <methodname>ComboBox</methodname>.</para>
+        <para>
+            Los ejemplos anteriores también podrían utilizar
+            <methodname>FilteringSelect</methodname>
+            en vez de
+            <methodname>ComboBox</methodname>
+            .
+        </para>
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.currencyTextBox">
         <title>CurrencyTextBox</title>
 
-       <para>El CurrencyTextBox principalmente brinda apoyo a la entrada de
-            moneda. La moneda puede ser localizada, y puede manejar tanto a
+        <para>El CurrencyTextBox principalmente brinda apoyo a la entrada de
+            moneda. La moneda puede
+            ser localizada, y puede manejar tanto a
             valores fraccionarios como no fraccionarios.</para>
 
-       <para>Internamente, CurrencyTextBox deriva de <link
-                linkend="zend.dojo.form.elements.numberTextBox"
-                >NumberTextBox</link>, <link
-                linkend="zend.dojo.form.elements.validationTextBox"
-                >ValidationTextBox</link>, y <link
-                linkend="zend.dojo.form.elements.textBox">TextBox</link>; todos
+        <para>
+            Internamente, CurrencyTextBox deriva de
+            <link linkend="zend.dojo.form.elements.numberTextBox">NumberTextBox</link>
+            ,
+            <link linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            , y
+            <link linkend="zend.dojo.form.elements.textBox">TextBox</link>
+            ; todos
             los métodos disponibles a esas clases están disponibles. Además,
-            pueden utilizarse los siguientes métodos restrictivos:</para>
+            pueden utilizarse
+            los siguientes métodos restrictivos:
+        </para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>setCurrency($currency)</methodname>: establecer
+                <para>
+                    <methodname>setCurrency($currency)</methodname>
+                    : establecer
                     el tipo de moneda a usar; y debe seguir la especificación
-                        <ulink url="http://en.wikipedia.org/wiki/ISO_4217"
-                        >ISO-4217</ulink>
-               </para>
+                    <ulink url="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</ulink>
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>getCurrency()</methodname>: recupera el tipo de
-                    moneda actual.</para>
+                <para>
+                    <methodname>getCurrency()</methodname>
+                    : recupera el tipo de
+                    moneda actual.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setSymbol($symbol)</methodname>: establece el
-                    símbolo de 3 letras <ulink
-                        url="http://en.wikipedia.org/wiki/ISO_4217"
-                        >ISO-4217</ulink> de la moneda a usar.</para>
+                <para>
+                    <methodname>setSymbol($symbol)</methodname>
+                    : establece el
+                    símbolo de 3 letras
+                    <ulink url="http://en.wikipedia.org/wiki/ISO_4217">ISO-4217</ulink>
+                    de la moneda a usar.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>getSymbol()</methodname>: recupera el símbolo de
-                    la moneda actual.</para>
+                <para>
+                    <methodname>getSymbol()</methodname>
+                    : recupera el símbolo de
+                    la moneda actual.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setFractional($flag)</methodname>: establece si
+                <para>
+                    <methodname>setFractional($flag)</methodname>
+                    : establece si
                     la moneda debería permitir o no valores fraccionarios.
-               </para>
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>getFractional()</methodname>: recupera el status
-                    del flag fraccional.</para>
+                <para>
+                    <methodname>getFractional()</methodname>
+                    : recupera el status
+                    del flag fraccional.
+                </para>
             </listitem>
         </itemizedlist>
 
@@ -443,69 +568,93 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.dateTextBox">
         <title>DateTextBox</title>
 
-       <para>DateTextBox establece un calendario desplegable (drop-down) para
-            seleccionar una fecha, así como validación y formateo de fechas del
+        <para>DateTextBox establece un calendario desplegable (drop-down) para
+            seleccionar una fecha,
+            así como validación y formateo de fechas del
             lado del clente.</para>
 
-       <para>Internamente, DateTextBox deriva de <link
-                linkend="zend.dojo.form.elements.validationTextBox"
-                >ValidationTextBox</link> y <link
-                linkend="zend.dojo.form.elements.textBox">TextBox</link>; todos
+        <para>
+            Internamente, DateTextBox deriva de
+            <link linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            y
+            <link linkend="zend.dojo.form.elements.textBox">TextBox</link>
+            ; todos
             los métodos disponibles a esas clases están disponibles. Además, los
-            siguientes métodos pueden utilizarse para establecer restricciones
-            individuales:</para>
+            siguientes
+            métodos pueden utilizarse para establecer restricciones
+            individuales:
+        </para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>setAmPm($flag)</methodname> y
-                        <methodname>getAmPm()</methodname>: Cuándo usar o no los
-                    strings AM/PM en los fortmatos de horas.</para>
+                <para>
+                    <methodname>setAmPm($flag)</methodname>
+                    y
+                    <methodname>getAmPm()</methodname>
+                    : Cuándo usar o no los
+                    strings AM/PM en los fortmatos de horas.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setStrict($flag)</methodname> y
-                        <methodname>getStrict()</methodname>: Cuándo usar o no
+                <para>
+                    <methodname>setStrict($flag)</methodname>
+                    y
+                    <methodname>getStrict()</methodname>
+                    : Cuándo usar o no
                     el matching para una expresión regular estricta al validar
-                    la entrada. Si es falso, que es el valor por defecto, será
-                    indulgente sobre espacios en blanco y algunas abreviaturas.
-               </para>
+                    la
+                    entrada. Si es falso, que es el valor por defecto, será
+                    indulgente sobre espacios
+                    en blanco y algunas abreviaturas.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setLocale($locale)</methodname> y
-                        <methodname>getLocale()</methodname>: Establece y
+                <para>
+                    <methodname>setLocale($locale)</methodname>
+                    y
+                    <methodname>getLocale()</methodname>
+                    : Establece y
                     recupera la localidad a utilizar con este elemento
-                    específico.</para>
+                    específico.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setDatePattern($pattern)</methodname> y
-                        <methodname>getDatePattern()</methodname>: provee y
-                    recupera el <ulink
-                        url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns"
-                        > patrón de formato de fechas unicode</ulink> para el
-                    formateo de fechas.</para>
+                <para>
+                    <methodname>setDatePattern($pattern)</methodname>
+                    y
+                    <methodname>getDatePattern()</methodname>
+                    : provee y
+                    recupera el
+                    <ulink url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">
+                        patrón de formato de fechas unicode</ulink>
+                    para el
+                    formateo de fechas.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setFormatLength($formatLength)</methodname> y
-                        <methodname>getFormatLength()</methodname>: proporciona
+                <para>
+                    <methodname>setFormatLength($formatLength)</methodname>
+                    y
+                    <methodname>getFormatLength()</methodname>
+                    : proporciona
                     y recupera la longitud del tipo de formato a usar; debe ser
-                    uno de los siguientes: "long", "short", "medium" o "full".
-               </para>
+                    uno de
+                    los siguientes: "long", "short", "medium" o "full".
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setSelector($selector)</methodname> y
-                        <methodname>getSelector()</methodname>: proporciona y
+                <para>
+                    <methodname>setSelector($selector)</methodname>
+                    y
+                    <methodname>getSelector()</methodname>
+                    : proporciona y
                     recupera el estilo del selector; debe ser "date" o "time".
-               </para>
+                </para>
             </listitem>
         </itemizedlist>
 
@@ -530,257 +679,303 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.editor">
         <title>Editor</title>
 
-       <para>Editor proporciona un editor WYSIWYG que puede ser utilizado
-            tanto para crear como para editar contenidos <acronym>HTML</acronym> ricos.
+        <para>
+            Editor proporciona un editor WYSIWYG que puede ser utilizado
+            tanto para crear como para
+            editar contenidos
+            <acronym>HTML</acronym>
+            ricos.
             dijit.Editor es pluggable y podrá ampliarse con plugins
-            personalizados si lo desea; para más detalles vea en <ulink
+            personalizados si lo desea;
+            para más detalles vea en
+            <ulink
                 url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text"
-                > la documentación de dijit.Editor</ulink>.</para>
+            > la documentación de dijit.Editor</ulink>
+            .
+        </para>
 
-       <para>El elemento form de Editor proporciona un número de accessors y
-            mutators para manipular diversos parámetros dijit, tal como sigue:</para>
+        <para>El elemento form de Editor proporciona un número de accessors y
+            mutators para manipular
+            diversos parámetros dijit, tal como sigue:</para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <emphasis>captureEvents</emphasis> son eventos que se
+                <para>
+                    <emphasis>captureEvents</emphasis>
+                    son eventos que se
                     conectan al área de edición en si. Los siguientes accessors
-                    y mutators están disponibles para manipular la captura de
-                    eventos:</para>
+                    y
+                    mutators están disponibles para manipular la captura de
+                    eventos:
+                </para>
 
                 <itemizedlist>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>addCaptureEvent($event)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>addCaptureEvents(array
                                 $events)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>setCaptureEvents(array
                                 $events)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>getCaptureEvents()</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>hasCaptureEvent($event)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>removeCaptureEvent($event)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>clearCaptureEvents()</methodname>
-                       </para>
+                        </para>
                     </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem>
-               <para>
-                    <emphasis>events</emphasis> son eventos DOM estándar, como
-                    onClick, onKeyup, etc. Los siguientes accessors y mutators
-                    están disponibles para manipular eventos:</para>
+                <para>
+                    <emphasis>events</emphasis>
+                    son eventos DOM estándar, como
+                    onClick, onKeyup, etc. Los siguientes accessors y
+                    mutators
+                    están disponibles para manipular eventos:
+                </para>
 
                 <itemizedlist>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>addEvent($event)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>addEvents(array $events)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>setEvents(array $events)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>getEvents()</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>hasEvent($event)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>removeEvent($event)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>clearEvents()</methodname>
-                       </para>
+                        </para>
                     </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem>
-               <para>
-                    <emphasis>plugins</emphasis> añaden funcionalidad al Editor
-                    -- herramientas adicionales para la barra de herramientas,
+                <para>
+                    <emphasis>plugins</emphasis>
+                    añaden funcionalidad al Editor
+                    -- herramientas adicionales para la barra de
+                    herramientas,
                     estilos adicionales a permitir, etc. Los siguientes
-                    accessors y mutators están disponibles para manipular
-                    plugins:</para>
+                    accessors y
+                    mutators están disponibles para manipular
+                    plugins:
+                </para>
 
                 <itemizedlist>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>addPlugin($plugin)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>addPlugins(array $plugins)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>setPlugins(array $plugins)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>getPlugins()</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>hasPlugin($plugin)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>removePlugin($plugin)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>clearPlugins()</methodname>
-                       </para>
+                        </para>
                     </listitem>
                 </itemizedlist>
             </listitem>
 
             <listitem>
-               <para>
-                    <emphasis>editActionInterval</emphasis> se utiliza para
+                <para>
+                    <emphasis>editActionInterval</emphasis>
+                    se utiliza para
                     agrupar eventos para deshacer operaciones. Por defecto, este
                     valor es de 3 segundos. El método
-                        <methodname>setEditActionInterval($interval)</methodname>
+                    <methodname>setEditActionInterval($interval)</methodname>
                     puede ser usado para establecer el valor, mientras que
-                        <methodname>getEditActionInterval()</methodname> lo
-                    recuperará.</para>
+                    <methodname>getEditActionInterval()</methodname>
+                    lo
+                    recuperará.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <emphasis>focusOnLoad</emphasis> se utiliza para determinar
-                    si este editor en particular recibirá atención cuando la
+                <para>
+                    <emphasis>focusOnLoad</emphasis>
+                    se utiliza para determinar
+                    si este editor en particular recibirá atención cuando
+                    la
                     página se haya cargado. Por defecto, esto es falso. El
-                    método <methodname>setFocusOnLoad($flag)</methodname> puede
+                    método
+                    <methodname>setFocusOnLoad($flag)</methodname>
+                    puede
                     usarse para establecer el valor, mientras que
-                        <methodname>getFocusOnLoad()</methodname> lo recuperará.
-               </para>
+                    <methodname>getFocusOnLoad()</methodname>
+                    lo recuperará.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <emphasis>height</emphasis> especifica la altura del editor;
+                <para>
+                    <emphasis>height</emphasis>
+                    especifica la altura del editor;
                     por defecto, es de 300px. El método
-                        <methodname>setHeight($height)</methodname> puede ser
+                    <methodname>setHeight($height)</methodname>
+                    puede ser
                     utilizado para establecer el valor, mientras que
-                        <methodname>getHeight()</methodname> lo recupera.
-               </para>
+                    <methodname>getHeight()</methodname>
+                    lo recupera.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <emphasis>inheritWidth</emphasis> se utiliza para determinar
+                <para>
+                    <emphasis>inheritWidth</emphasis>
+                    se utiliza para determinar
                     si el editor utilizará el ancho del contenedor padre o
                     simplemente toma por defecto el 100% del ancho. Por defecto,
-                    esto es falso (es decir, llenará el ancho de la ventana). El
-                    método <methodname>setInheritWidth($flag)</methodname> puede
+                    esto es falso (es
+                    decir, llenará el ancho de la ventana). El
+                    método
+                    <methodname>setInheritWidth($flag)</methodname>
+                    puede
                     ser utilizado para establecer el valor, mientras que
-                        <methodname>getInheritWidth()</methodname> lo
-                    recuperará.</para>
+                    <methodname>getInheritWidth()</methodname>
+                    lo
+                    recuperará.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <emphasis>minHeight</emphasis> indica la altura mínima del
+                <para>
+                    <emphasis>minHeight</emphasis>
+                    indica la altura mínima del
                     editor; por defecto, es de 1em. El método
-                        <methodname>setMinHeight($height)</methodname> puede ser
+                    <methodname>setMinHeight($height)</methodname>
+                    puede ser
                     utilizado para establecer el valor, mientras que
-                        <methodname>getMinHeight()</methodname> lo recuperará.
-               </para>
+                    <methodname>getMinHeight()</methodname>
+                    lo recuperará.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <emphasis>styleSheets</emphasis> indica qué otras hojas de
-                    estilo <acronym>CSS</acronym> deberían ser utilizadas para incidir sobre la
-                    pantalla del Editor. Por defecto, ninguna está registrada, y
-                    hereda la página de estilos. Los siguientes accessors y
+                <para>
+                    <emphasis>styleSheets</emphasis>
+                    indica qué otras hojas de
+                    estilo
+                    <acronym>CSS</acronym>
+                    deberían ser utilizadas para incidir sobre la
+                    pantalla del Editor. Por defecto,
+                    ninguna está registrada, y
+                    hereda la página de estilos. Los siguientes accessors
+                    y
                     mutators están disponibles para manipular al editor de hojas
-                    de estilo (stylesheets):</para>
+                    de estilo
+                    (stylesheets):
+                </para>
 
                 <itemizedlist>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>addStyleSheet($styleSheet)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>addStyleSheets(array
                                 $styleSheets)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>setStyleSheets(array
                                 $styleSheets)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>getStyleSheets()</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>hasStyleSheet($styleSheet)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>removeStyleSheet($styleSheet)</methodname>
-                       </para>
+                        </para>
                     </listitem>
                     <listitem>
-                       <para>
+                        <para>
                             <methodname>clearStyleSheets()</methodname>
-                       </para>
+                        </para>
                     </listitem>
                 </itemizedlist>
             </listitem>
@@ -805,18 +1000,31 @@ $form->addElement('editor', 'content', array(
         <note>
             <title>Editor Dijit uses div by default</title>
 
-           <para>
-                The Editor dijit uses an <acronym>HTML</acronym> <acronym>DIV</acronym> by default.
-                The <classname>dijit._editor.RichText</classname> documentation indicates that
-                having it built on an <acronym>HTML</acronym> <acronym>TEXTAREA</acronym> can potentially have security
+            <para>
+                The Editor dijit uses an
+                <acronym>HTML</acronym>
+                <acronym>DIV</acronym>
+                by default.
+                The
+                <classname>dijit._editor.RichText</classname>
+                documentation indicates that
+                having it built on an
+                <acronym>HTML</acronym>
+                <acronym>TEXTAREA</acronym>
+                can potentially have security
                 implications.
-           </para>
+            </para>
 
-           <para>
-                That said, there may be times when you want an Editor widget that can gracefully degrade to a
-                <acronym>TEXTAREA</acronym>. In such situations, you can do so by setting the
-                <varname>degrade</varname> property to <constant>true</constant>:
-           </para>
+            <para>
+                That said, there may be times when you want an Editor widget that can gracefully
+                degrade to a
+                <acronym>TEXTAREA</acronym>
+                . In such situations, you can do so by setting the
+                <varname>degrade</varname>
+                property to
+                <constant>true</constant>
+                :
+            </para>
 
             <programlisting language="php"><![CDATA[
 // At instantiation:
@@ -838,96 +1046,123 @@ $editor->degrade = true;
     <sect3 id="zend.dojo.form.elements.horizontalSlider">
         <title>HorizontalSlider</title>
 
-       <para>
+        <para>
             HorizontalSlider proporciona un widget deslizador de UI para
-            seleccionar un valor numérico dentro de un rango.
-            Internamente, establece el valor de un elemento oculto que es
+            seleccionar un valor
+            numérico dentro de un rango.
+            Internamente, establece el valor de un elemento oculto que
+            es
             enviado por el formulario.
        </para>
 
-       <para>
-            HorizontalSlider proviene del elemento abstracto <link
-                linkend="zend.dojo.form.elements.slider">Slider dijit</link>.
+        <para>
+            HorizontalSlider proviene del elemento abstracto
+            <link linkend="zend.dojo.form.elements.slider">Slider dijit</link>
+            .
             Además, tiene una variedad de métodos de ajuste y configuración
-            de reglas deslizantes y etiquetas para esas reglas.
-       </para>
+            de reglas deslizantes y
+            etiquetas para esas reglas.
+        </para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>setTopDecorationDijit($dijit)</methodname> y
-                    <methodname>setBottomDecorationDijit($dijit)</methodname>: establecen el
+                <para>
+                    <methodname>setTopDecorationDijit($dijit)</methodname>
+                    y
+                    <methodname>setBottomDecorationDijit($dijit)</methodname>
+                    : establecen el
                     nombre de la dijit a utilizar bien para la parte superior o
                     inferior de la barra deslizante.
-                    Esto no debería incluir el prefijo "dijit.form.",
+                    Esto no debería incluir el prefijo
+                    "dijit.form.",
                     sino sólo el último nombre -- "HorizontalRule" o
                     "HorizontalRuleLabels".
-               </para>
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setTopDecorationContainer($container)</methodname> y
-                    <methodname>setBottomDecorationContainer($container)</methodname>:
+                <para>
+                    <methodname>setTopDecorationContainer($container)</methodname>
+                    y
+                    <methodname>setBottomDecorationContainer($container)</methodname>
+                    :
                     especifican el nombre a utilizar para el elemento
-                    contenedor de las reglas; por ejemplo 'Toprule',
+                    contenedor de las reglas; por
+                    ejemplo 'Toprule',
                     'topContainer', etc.
-               </para>
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setTopDecorationLabels(array $labels)</methodname> y
-                    <methodname>setBottomDecorationLabels(array $labels)</methodname>:
+                <para>
+                    <methodname>setTopDecorationLabels(array $labels)</methodname>
+                    y
+                    <methodname>setBottomDecorationLabels(array $labels)</methodname>
+                    :
                     establecen las etiquetas a usar por uno de los tipos
-                    RuleLabels dijit. Debe ser un array indexado; especificar un
-                    único espacio vacío para saltar a la posición de una
+                    RuleLabels dijit. Debe ser
+                    un array indexado; especificar un
+                    único espacio vacío para saltar a la posición
+                    de una
                     determinada etiqueta (como ser al comienzo o al final).
-               </para>
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setTopDecorationParams(array $params)</methodname> y
-                    <methodname>setBottomDecorationParams(array $params)</methodname>:
+                <para>
+                    <methodname>setTopDecorationParams(array $params)</methodname>
+                    y
+                    <methodname>setBottomDecorationParams(array $params)</methodname>
+                    :
                     parámetros dijit para utilizar al configurar la Regla o
                     RuleLabels dijit.
-               </para>
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setTopDecorationAttribs(array $attribs)</methodname> y
-                    <methodname>setBottomDecorationAttribs(array $attribs)</methodname>:
-                    atributos <acronym>HTML</acronym> para especificar una Regla dada o el
-                    elemento contenedor de <acronym>HTML</acronym> RuleLabels.
-               </para>
+                <para>
+                    <methodname>setTopDecorationAttribs(array $attribs)</methodname>
+                    y
+                    <methodname>setBottomDecorationAttribs(array $attribs)</methodname>
+                    :
+                    atributos
+                    <acronym>HTML</acronym>
+                    para especificar una Regla dada o el
+                    elemento contenedor de
+                    <acronym>HTML</acronym>
+                    RuleLabels.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>getTopDecoration()</methodname> y
-                    <methodname>getBottomDecoration()</methodname>: recuperar todos los
+                <para>
+                    <methodname>getTopDecoration()</methodname>
+                    y
+                    <methodname>getBottomDecoration()</methodname>
+                    : recuperar todos los
                     metadatos para una determinada Regla o definición de
                     RuleLabels, tal como han sido provistos por los mutators
                     anteriores.
-               </para>
+                </para>
             </listitem>
         </itemizedlist>
 
         <example id="zend.dojo.form.elements.horizontalSlider.example">
             <title>Ejemplo de Uso del Elemento HorizontalSlider dijit</title>
 
-           <para>
+            <para>
                 Lo siguiente creará un deslizador horizontal de selección con
-                valores enteros que van desde -10 a 10. La parte superior tendrá
-                etiquetas en las marcas del 20%, 40%, 60%, y 80%.
+                valores enteros que
+                van desde -10 a 10. La parte superior tendrá
+                etiquetas en las marcas del 20%, 40%,
+                60%, y 80%.
                 La parte inferior será una regla con marcas en el 0, 50%, y 100%.
-                Cada vez que se cambie el valor, el elemento oculto almacenará
+                Cada vez
+                que se cambie el valor, el elemento oculto almacenará
                 el valor actualizado.
            </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $form->addElement(
     'HorizontalSlider',
     'horizontal',
@@ -978,76 +1213,105 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.numberSpinner">
         <title>NumberSpinner</title>
 
-       <para>Un número spinner es un elemento de texto para introducir valores
-            numéricos; también incluye elementos de incremento y decremento del
+        <para>Un número spinner es un elemento de texto para introducir valores
+            numéricos; también
+            incluye elementos de incremento y decremento del
             valor por una cantidad fija.</para>
 
-       <para>Se encuentran disponibles los siguientes métodos:</para>
+        <para>Se encuentran disponibles los siguientes métodos:</para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>setDefaultTimeout($timeout)</methodname> y
-                        <methodname>getDefaultTimeout()</methodname>: establece
+                <para>
+                    <methodname>setDefaultTimeout($timeout)</methodname>
+                    y
+                    <methodname>getDefaultTimeout()</methodname>
+                    : establece
                     y recupera el tiempo de espera predeterminado en
-                    milisegundos, entre cuando el botón se mantiene presionado y
-                    cambia el valor.</para>
+                    milisegundos, entre
+                    cuando el botón se mantiene presionado y
+                    cambia el valor.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setTimeoutChangeRate($rate)</methodname> y
-                        <methodname>getTimeoutChangeRate()</methodname>:
+                <para>
+                    <methodname>setTimeoutChangeRate($rate)</methodname>
+                    y
+                    <methodname>getTimeoutChangeRate()</methodname>
+                    :
                     establece y recupera la tasa en milisegundos, en la que se
-                    harán cambios cuando un botón se mantiene presionado.
-               </para>
+                    harán cambios cuando
+                    un botón se mantiene presionado.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setLargeDelta($delta)</methodname> y
-                        <methodname>getLargeDelta()</methodname>: establece y
+                <para>
+                    <methodname>setLargeDelta($delta)</methodname>
+                    y
+                    <methodname>getLargeDelta()</methodname>
+                    : establece y
                     recupera la cantidad en la que el valor numérico debería
-                    cambiar cuando un botón se mantiene presionado.</para>
+                    cambiar
+                    cuando un botón se mantiene presionado.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setSmallDelta($delta)</methodname> y
-                        <methodname>getSmallDelta()</methodname>: establece y
+                <para>
+                    <methodname>setSmallDelta($delta)</methodname>
+                    y
+                    <methodname>getSmallDelta()</methodname>
+                    : establece y
                     recupera el delta con la que el número debería cambiar
-                    cuando se pulsa un botón una vez.</para>
+                    cuando se
+                    pulsa un botón una vez.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setIntermediateChanges($flag)</methodname> y
-                        <methodname>getIntermediateChanges()</methodname>:
+                <para>
+                    <methodname>setIntermediateChanges($flag)</methodname>
+                    y
+                    <methodname>getIntermediateChanges()</methodname>
+                    :
                     establece y recupera el flag que indica si debe o no ser
-                    mostrado cada cambio de valor cuando un botón se mantiene
-                    presionado.</para>
+                    mostrado cada cambio de
+                    valor cuando un botón se mantiene
+                    presionado.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setRangeMessage($message)</methodname> y
-                        <methodname>getRangeMessage()</methodname>: establece y
+                <para>
+                    <methodname>setRangeMessage($message)</methodname>
+                    y
+                    <methodname>getRangeMessage()</methodname>
+                    : establece y
                     recupera el mensaje indicando el rango de valores
-                    disponibles.</para>
+                    disponibles.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setMin($value)</methodname> y
-                        <methodname>getMin()</methodname>: establece y recupera
-                    el valor mínimo posible.</para>
+                <para>
+                    <methodname>setMin($value)</methodname>
+                    y
+                    <methodname>getMin()</methodname>
+                    : establece y recupera
+                    el valor mínimo posible.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setMax($value)</methodname> y
-                        <methodname>getMax()</methodname>: establece y recupera
-                    el valor máximo posible.</para>
+                <para>
+                    <methodname>setMax($value)</methodname>
+                    y
+                    <methodname>getMax()</methodname>
+                    : establece y recupera
+                    el valor máximo posible.
+                </para>
             </listitem>
         </itemizedlist>
 
@@ -1078,61 +1342,86 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.numberTextBox">
         <title>NumberTextBox</title>
 
-       <para>Un cuadro de texto numérico es un elemento de texto de
-            introducción de valores numéricos; a diferencia de NumberSpinner, se
-            introducen manualmente. Se pueden proporcionar validaciones y
-            restricciones para garantizar que el número permanece en un rango o
+        <para>Un cuadro de texto numérico es un elemento de texto de
+            introducción de valores
+            numéricos; a diferencia de NumberSpinner, se
+            introducen manualmente. Se pueden
+            proporcionar validaciones y
+            restricciones para garantizar que el número permanece en un
+            rango o
             formato particular.</para>
 
-       <para>Internmente, NumberTextBox proviene de <link
-                linkend="zend.dojo.form.elements.validationTextBox"
-                >ValidationTextBox</link> y <link
-                linkend="zend.dojo.form.elements.textBox">TextBox</link>; todos
+        <para>
+            Internmente, NumberTextBox proviene de
+            <link linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            y
+            <link linkend="zend.dojo.form.elements.textBox">TextBox</link>
+            ; todos
             los métodos disponibles a esas clases están disponibles. Además, los
-            siguientes métodos pueden utilizarse para establecer restricciones
-            individuales:</para>
+            siguientes
+            métodos pueden utilizarse para establecer restricciones
+            individuales:
+        </para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>setLocale($locale)</methodname> y
-                        <methodname>getLocale()</methodname>: especifica y
+                <para>
+                    <methodname>setLocale($locale)</methodname>
+                    y
+                    <methodname>getLocale()</methodname>
+                    : especifica y
                     recupera un "locale" determinado o alternativo para usar con
-                    este dijit.</para>
+                    este
+                    dijit.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setPattern($pattern)</methodname> y
-                        <methodname>getPattern()</methodname>: establece y
-                    recupera un <ulink
-                        url="http://www.unicode.org/reports/tr35/#Number_Format_Patterns"
-                        > patrón de formato numérico </ulink> a usar en el
-                    formateo de números.</para>
+                <para>
+                    <methodname>setPattern($pattern)</methodname>
+                    y
+                    <methodname>getPattern()</methodname>
+                    : establece y
+                    recupera un
+                    <ulink url="http://www.unicode.org/reports/tr35/#Number_Format_Patterns">
+                        patrón de formato numérico </ulink>
+                    a usar en el
+                    formateo de números.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setType($type)</methodname> y
-                        <methodname>getType()</methodname>: establece y recupera
+                <para>
+                    <methodname>setType($type)</methodname>
+                    y
+                    <methodname>getType()</methodname>
+                    : establece y recupera
                     el tipo de formato numérico a utilizar (deberán ser uno de
-                    'decimal', 'percent', o 'currency').</para>
+                    'decimal', 'percent', o 'currency').
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setPlaces($places)</methodname> y
-                        <methodname>getPlaces()</methodname>: establece y
-                    recupera el número de decimales que soportará.</para>
+                <para>
+                    <methodname>setPlaces($places)</methodname>
+                    y
+                    <methodname>getPlaces()</methodname>
+                    : establece y
+                    recupera el número de decimales que soportará.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setStrict($flag)</methodname> y
-                        <methodname>getStrict()</methodname>: establece y
+                <para>
+                    <methodname>setStrict($flag)</methodname>
+                    y
+                    <methodname>getStrict()</methodname>
+                    : establece y
                     recupera el valor estricto del flag, que indica cuánta
-                    indulgencia es permitida en relación con espacios en blanco
-                    y con caracteres no numéricos.</para>
+                    indulgencia
+                    es permitida en relación con espacios en blanco
+                    y con caracteres no numéricos.
+                </para>
             </listitem>
         </itemizedlist>
 
@@ -1161,16 +1450,21 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.passwordTextBox">
         <title>PasswordTextBox</title>
 
-       <para>PasswordTextBox es simplemente un ValidationTextBox que está
-            ligado a una contraseña; su único objetivo es permitir la entrada de
-            texto de contraseñas de dijit que también proporciona validación del
+        <para>PasswordTextBox es simplemente un ValidationTextBox que está
+            ligado a una contraseña;
+            su único objetivo es permitir la entrada de
+            texto de contraseñas de dijit que también
+            proporciona validación del
             lado del cliente.</para>
 
-       <para>Internmente, PasswordTextBox proviene de <link
-                linkend="zend.dojo.form.elements.validationTextBox"
-                >ValidationTextBox</link> y <link
-                linkend="zend.dojo.form.elements.textBox">TextBox</link>; todos
-            los métodos disponibles a esas clases están disponibles.</para>
+        <para>
+            Internmente, PasswordTextBox proviene de
+            <link linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            y
+            <link linkend="zend.dojo.form.elements.textBox">TextBox</link>
+            ; todos
+            los métodos disponibles a esas clases están disponibles.
+        </para>
 
         <example id="zend.dojo.form.elements.passwordTextBox.example">
             <title>Ejemplo de Uso del Elemento PasswordTextBox dijit</title>
@@ -1196,21 +1490,32 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.radioButton">
         <title>RadioButton</title>
 
-       <para>RadioButton envuelve a elementos standard de entrada tipo radio
-            para brindar un look-and-feel consistente con otros dojo dijits.</para>
+        <para>RadioButton envuelve a elementos standard de entrada tipo radio
+            para brindar un
+            look-and-feel consistente con otros dojo dijits.</para>
 
-       <para>RadioButton se extiende desde DijitMulti, que le permite
-            especificar la selección de opciones vía los métodos
-                <methodname>setMultiOptions()</methodname> y
-                <methodname>setMultiOption()</methodname>.</para>
+        <para>
+            RadioButton se extiende desde DijitMulti, que le permite
+            especificar la selección de
+            opciones vía los métodos
+            <methodname>setMultiOptions()</methodname>
+            y
+            <methodname>setMultiOption()</methodname>
+            .
+        </para>
 
-       <para>Por defecto, este elemento registra un validador
-                <methodname>InArray</methodname> que valida contra las calves
+        <para>
+            Por defecto, este elemento registra un validador
+            <methodname>InArray</methodname>
+            que valida contra las calves
             del array de las opciones registradas. Puede desactivar este
             comportamiento ya sea llamando a
-                <methodname>setRegisterInArrayValidator(false)</methodname>, o
+            <methodname>setRegisterInArrayValidator(false)</methodname>
+            , o
             pasando un valor falso a la clave de configuración
-                <methodname>registerInArrayValidator</methodname>.</para>
+            <methodname>registerInArrayValidator</methodname>
+            .
+        </para>
 
         <example id="zend.dojo.form.elements.radioButton.example">
             <title>Ejemplo de Uso del Elemento RadioButton dijit</title>
@@ -1236,11 +1541,16 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.simpletextarea">
         <title>SimpleTextarea</title>
 
-       <para>SimpleTextarea actúa principalmente como un textarea estándar de
-            <acronym>HTML</acronym>. Sin embargo, no permite establecer filas ni columnas. En su
-            lugar, el ancho de textarea debe especificarse utilizando medidas
-            <acronym>CSS</acronym> estándar. A diferencia de Textarea, esta no aumentará
-            automáticamente.</para>
+        <para>
+            SimpleTextarea actúa principalmente como un textarea estándar de
+            <acronym>HTML</acronym>
+            . Sin embargo, no permite establecer filas ni columnas. En su
+            lugar, el ancho de textarea
+            debe especificarse utilizando medidas
+            <acronym>CSS</acronym>
+            estándar. A diferencia de Textarea, esta no aumentará
+            automáticamente.
+        </para>
 
         <example id="zend.dojo.form.elements.simpletextarea.example">
             <title>Ejemplo de Uso del Elemento SimpleTextarea dijit</title>
@@ -1262,84 +1572,119 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.slider">
         <title>Elemento abstracto Slider</title>
 
-       <para>Slider es un elemento abstracto que proviene de ambos <link
-                linkend="zend.dojo.form.elements.horizontalSlider">
-                HorizontalSlider</link> y <link
-                linkend="zend.dojo.form.elements.verticalSlider"
-                >VerticalSlider</link>. Expone una serie de métodos comunes para
-            configurar sus deslizadores, incluyendo a:</para>
+        <para>
+            Slider es un elemento abstracto que proviene de ambos
+            <link linkend="zend.dojo.form.elements.horizontalSlider">
+                HorizontalSlider</link>
+            y
+            <link linkend="zend.dojo.form.elements.verticalSlider">VerticalSlider</link>
+            . Expone una serie de métodos comunes para
+            configurar sus deslizadores, incluyendo a:
+        </para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>setClickSelect($flag)</methodname> y
-                        <methodname>getClickSelect()</methodname>: establece y
+                <para>
+                    <methodname>setClickSelect($flag)</methodname>
+                    y
+                    <methodname>getClickSelect()</methodname>
+                    : establece y
                     recupera el flag que indica cuando al presionar el botón
-                    deslizante cambia o no el valor.</para>
+                    deslizante
+                    cambia o no el valor.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setIntermediateChanges($flag)</methodname> y
-                        <methodname>getIntermediateChanges()</methodname>:
+                <para>
+                    <methodname>setIntermediateChanges($flag)</methodname>
+                    y
+                    <methodname>getIntermediateChanges()</methodname>
+                    :
                     establece y recupera el flag que indica si dijit enviará o
-                    no una notificación sobre cada evento de cambio del
-                    deslizador.</para>
+                    no una notificación
+                    sobre cada evento de cambio del
+                    deslizador.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setShowButtons($flag)</methodname> y
-                        <methodname>getShowButtons()</methodname>: establece y
+                <para>
+                    <methodname>setShowButtons($flag)</methodname>
+                    y
+                    <methodname>getShowButtons()</methodname>
+                    : establece y
                     recupera el flag que indica si los botones de uno u otro
-                    extremo se mostrarán o no; si es así, el usuario puede hacer
-                    clic sobre éstos para cambiar el valor de la barra
-                    deslizante.</para>
+                    extremo se
+                    mostrarán o no; si es así, el usuario puede hacer
+                    clic sobre éstos para cambiar
+                    el valor de la barra
+                    deslizante.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setDiscreteValues($value)</methodname> y
-                        <methodname>getDiscreteValues()</methodname>: establece
+                <para>
+                    <methodname>setDiscreteValues($value)</methodname>
+                    y
+                    <methodname>getDiscreteValues()</methodname>
+                    : establece
                     y recupera el número de valores discretos representados por
-                    el deslizador.</para>
+                    el
+                    deslizador.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setMaximum($value)</methodname> y
-                        <methodname>getMaximum()</methodname>: establece y
-                    recupera el valor máximo del deslizador.</para>
+                <para>
+                    <methodname>setMaximum($value)</methodname>
+                    y
+                    <methodname>getMaximum()</methodname>
+                    : establece y
+                    recupera el valor máximo del deslizador.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setMinimum($value)</methodname> y
-                        <methodname>getMinimum()</methodname>: establece y
-                    recupera el valor mínimo del deslizador.</para>
+                <para>
+                    <methodname>setMinimum($value)</methodname>
+                    y
+                    <methodname>getMinimum()</methodname>
+                    : establece y
+                    recupera el valor mínimo del deslizador.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setPageIncrement($value)</methodname> y
-                        <methodname>getPageIncrement()</methodname>: establece
+                <para>
+                    <methodname>setPageIncrement($value)</methodname>
+                    y
+                    <methodname>getPageIncrement()</methodname>
+                    : establece
                     la cantidad en que cambiará el deslizador por eventos del
-                    teclado.</para>
+                    teclado.
+                </para>
             </listitem>
         </itemizedlist>
 
-       <para>Ejemplos de uso provistos con cada clase extendida concretamente.
+        <para>Ejemplos de uso provistos con cada clase extendida concretamente.
        </para>
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.submitButton">
         <title>SubmitButton</title>
 
-       <para>Si bien no hay Dijit llamado SubmitButton, incluimos uno aquí
-            para proporcionar un botón dijit capaz de enviar un formulario sin
-            que se exijan ligaduras con javascript. Funciona exactamente igual
-            que el <link linkend="zend.dojo.form.elements.button">Button
-                dijit</link>.</para>
+        <para>
+            Si bien no hay Dijit llamado SubmitButton, incluimos uno aquí
+            para proporcionar un botón
+            dijit capaz de enviar un formulario sin
+            que se exijan ligaduras con javascript. Funciona
+            exactamente igual
+            que el
+            <link linkend="zend.dojo.form.elements.button">Button
+                dijit</link>
+            .
+        </para>
 
         <example id="zend.dojo.form.elements.submitButton.example">
             <title>Ejemplo de Uso del Elemento SubmitButton dijit</title>
@@ -1361,50 +1706,69 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.textBox">
         <title>TextBox</title>
 
-       <para>Textbox se incluyó principalmente para proporcionar una entrada
-            de texto con apariencia coherente y con el look-and-feel de los
-            demás dijits. Sin embargo, también incluye algunas pequeñas
+        <para>Textbox se incluyó principalmente para proporcionar una entrada
+            de texto con apariencia
+            coherente y con el look-and-feel de los
+            demás dijits. Sin embargo, también incluye
+            algunas pequeñas
             capacidades de filtrado y validación, representadas en los métodos
             siguientes:</para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>setLowercase($flag)</methodname> y
-                        <methodname>getLowercase()</methodname>: establece y
+                <para>
+                    <methodname>setLowercase($flag)</methodname>
+                    y
+                    <methodname>getLowercase()</methodname>
+                    : establece y
                     recupera el flag que indica si la entrada debe o no ser
-                    presentada en minúsculas.</para>
+                    presentada
+                    en minúsculas.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setPropercase($flag)</methodname> y
-                        <methodname>getPropercase()</methodname>: establece y
+                <para>
+                    <methodname>setPropercase($flag)</methodname>
+                    y
+                    <methodname>getPropercase()</methodname>
+                    : establece y
                     recupera el flag que indica si la entrada debe ser o no ser
-                    presentada como Proper Case.</para>
+                    presentada como Proper Case.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setUppercase($flag)</methodname> y
-                        <methodname>getUppercase()</methodname>: establece y
+                <para>
+                    <methodname>setUppercase($flag)</methodname>
+                    y
+                    <methodname>getUppercase()</methodname>
+                    : establece y
                     recupera el flag que indica si la entrada debe ser
-                    presentada como mayúsculas (UPPERCASE).</para>
+                    presentada como
+                    mayúsculas (UPPERCASE).
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setTrim($flag)</methodname> y
-                        <methodname>getTrim()</methodname>: establece y recupera
+                <para>
+                    <methodname>setTrim($flag)</methodname>
+                    y
+                    <methodname>getTrim()</methodname>
+                    : establece y recupera
                     el flag que indica si los espacios al comienzo o al final
-                    deben ser eliminados o no.</para>
+                    deben ser eliminados o no.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setMaxLength($length)</methodname> y
-                        <methodname>getMaxLength()</methodname>: establece y
-                    recupera la longitud máxima del input.</para>
+                <para>
+                    <methodname>setMaxLength($length)</methodname>
+                    y
+                    <methodname>getMaxLength()</methodname>
+                    : establece y
+                    recupera la longitud máxima del input.
+                </para>
             </listitem>
         </itemizedlist>
 
@@ -1429,12 +1793,18 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.textarea">
         <title>Textarea</title>
 
-       <para>Textarea actúa principalmente como un textarea estándar de
-            <acronym>HTML</acronym>.
+        <para>
+            Textarea actúa principalmente como un textarea estándar de
+            <acronym>HTML</acronym>
+            .
             Sin embargo, no permite establecer filas y columnas. En su lugar, el
-            ancho de la textarea debe especificarse utilizando medidas <acronym>CSS</acronym>
+            ancho de la
+            textarea debe especificarse utilizando medidas
+            <acronym>CSS</acronym>
             estándar; las filas debe omitirse totalmente. Luego, la textarea
-            crecerá verticalmente tanto como texto se añada a ella.</para>
+            crecerá verticalmente
+            tanto como texto se añada a ella.
+        </para>
 
         <example id="zend.dojo.form.elements.textarea.example">
             <title>Ejemplo de Uso del Elemento Textarea dijit</title>
@@ -1456,66 +1826,88 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.timeTextBox">
         <title>TimeTextBox</title>
 
-       <para>TimeTextBox es una entrada de texto que proporciona una lista
-            desplegable (drop-down) para seleccionar un tiempo (fecha y hora).
-            La lista desplegable, puede ser configurada para mostrar una cierta
+        <para>TimeTextBox es una entrada de texto que proporciona una lista
+            desplegable (drop-down)
+            para seleccionar un tiempo (fecha y hora).
+            La lista desplegable, puede ser configurada
+            para mostrar una cierta
             ventana de tiempo, con incrementos especificados.</para>
 
-       <para>Internamente, TimeTextBox proviene de <link
-                linkend="zend.dojo.form.elements.dateTextBox"
-            >DateTextBox</link>, <link
-                linkend="zend.dojo.form.elements.validationTextBox"
-                >ValidationTextBox</link> y <link
-                linkend="zend.dojo.form.elements.textBox">TextBox</link>; todos
+        <para>
+            Internamente, TimeTextBox proviene de
+            <link linkend="zend.dojo.form.elements.dateTextBox">DateTextBox</link>
+            ,
+            <link linkend="zend.dojo.form.elements.validationTextBox">ValidationTextBox</link>
+            y
+            <link linkend="zend.dojo.form.elements.textBox">TextBox</link>
+            ; todos
             los métodos disponibles a esas clases están disponibles. Además, los
-            siguientes métodos pueden utilizarse para establecer restricciones
-            individuales:</para>
+            siguientes
+            métodos pueden utilizarse para establecer restricciones
+            individuales:
+        </para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>setTimePattern($pattern)</methodname> y
-                        <methodname>getTimePattern()</methodname>: establece y
-                    recupera el <ulink
-                        url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns"
-                        >patrón de formato de fecha y hora unicode</ulink> para
-                    el formato correspondiente.</para>
+                <para>
+                    <methodname>setTimePattern($pattern)</methodname>
+                    y
+                    <methodname>getTimePattern()</methodname>
+                    : establece y
+                    recupera el
+                    <ulink url="http://www.unicode.org/reports/tr35/#Date_Format_Patterns">patrón
+                        de formato de fecha y hora unicode</ulink>
+                    para
+                    el formato correspondiente.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setClickableIncrement($format)</methodname> y
-                        <methodname>getClickableIncrement()</methodname>:
-                    establece y recupera el string <ulink
-                        url="http://en.wikipedia.org/wiki/ISO_8601"
-                        >ISO-8601</ulink> representando la cantidad de tiempo a
-                    incrementar cada vez que se recolecta un elemento clickable.
-               </para>
+                <para>
+                    <methodname>setClickableIncrement($format)</methodname>
+                    y
+                    <methodname>getClickableIncrement()</methodname>
+                    :
+                    establece y recupera el string
+                    <ulink url="http://en.wikipedia.org/wiki/ISO_8601">ISO-8601</ulink>
+                    representando la cantidad de tiempo a
+                    incrementar cada vez que se recolecta un
+                    elemento clickable.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setVisibleIncrement($format)</methodname> y
-                        <methodname>getVisibleIncrement()</methodname>:
+                <para>
+                    <methodname>setVisibleIncrement($format)</methodname>
+                    y
+                    <methodname>getVisibleIncrement()</methodname>
+                    :
                     establece y recupera el incremento visible en el selector de
-                    tiempo; debe seguir los formatos ISO-8601.</para>
+                    tiempo; debe seguir
+                    los formatos ISO-8601.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setVisibleRange($format)</methodname> y
-                        <methodname>getVisibleRange()</methodname>: establece y
+                <para>
+                    <methodname>setVisibleRange($format)</methodname>
+                    y
+                    <methodname>getVisibleRange()</methodname>
+                    : establece y
                     recupera el intervalo de tiempo visible en el selector de
-                    tiempo en cualquier momento; debe seguir los formatos
-                    ISO-8601.</para>
+                    tiempo en
+                    cualquier momento; debe seguir los formatos
+                    ISO-8601.
+                </para>
             </listitem>
         </itemizedlist>
 
         <example id="zend.dojo.form.elements.timeTextBox.example">
             <title>Ejemplo de Uso del Elemento TimeTextBox dijit</title>
 
-           <para>Lo siguiente creará un TimeTextBox que muestra 2 horas a la
-                vez, con incrementos de 10 minutos.</para>
+            <para>Lo siguiente creará un TimeTextBox que muestra 2 horas a la
+                vez, con incrementos de
+                10 minutos.</para>
 
             <programlisting language="php"><![CDATA[
 $form->addElement(
@@ -1536,78 +1928,111 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.validationTextBox">
         <title>ValidationTextBox</title>
 
-       <para>ValidationTextBox ofrece la posibilidad de añadir validaciones y
-            limitaciones a una entrada de texto. Internamente, proviene de <link
-                linkend="zend.dojo.form.elements.textBox">TextBox</link>, y
+        <para>
+            ValidationTextBox ofrece la posibilidad de añadir validaciones y
+            limitaciones a una
+            entrada de texto. Internamente, proviene de
+            <link linkend="zend.dojo.form.elements.textBox">TextBox</link>
+            , y
             añade los siguientes accessors y mutators para manejar parámetros
-            dijit:</para>
+            dijit:
+        </para>
 
         <itemizedlist>
             <listitem>
-               <para>
-                    <methodname>setInvalidMessage($message)</methodname> y
-                        <methodname>getInvalidMessage()</methodname>: establece
+                <para>
+                    <methodname>setInvalidMessage($message)</methodname>
+                    y
+                    <methodname>getInvalidMessage()</methodname>
+                    : establece
                     y recupera el mensaje de tooltip para mostrar cuando el
-                    valor no se validó.</para>
+                    valor no se
+                    validó.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setPromptMessage($message)</methodname> y
-                        <methodname>getPromptMessage()</methodname>: establece y
+                <para>
+                    <methodname>setPromptMessage($message)</methodname>
+                    y
+                    <methodname>getPromptMessage()</methodname>
+                    : establece y
                     recupera el mensaje de tooltip a mostrar para el uso del
-                    elemento.</para>
+                    elemento.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setRegExp($regexp)</methodname> y
-                        <methodname>getRegExp()</methodname>: establece y
+                <para>
+                    <methodname>setRegExp($regexp)</methodname>
+                    y
+                    <methodname>getRegExp()</methodname>
+                    : establece y
                     recupera la expresión regular a utilizar para validar el
-                    elemento. La expresión regular no necesita límites (a
-                    diferencia de la familia de funciones preg*, de
-                        <acronym>PHP</acronym>).</para>
+                    elemento.
+                    La expresión regular no necesita límites (a
+                    diferencia de la familia de funciones
+                    preg*, de
+                    <acronym>PHP</acronym>
+                    ).
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>setConstraint($key, $value)</methodname> y
-                        <methodname>getConstraint($key)</methodname>: establece
+                <para>
+                    <methodname>setConstraint($key, $value)</methodname>
+                    y
+                    <methodname>getConstraint($key)</methodname>
+                    : establece
                     y recupera restricciones adicionales para utilizar al
-                    validar el elemento; se utiliza principalmente con
-                    subclases. Las restricciones son almacenados en la clave
-                    'constraints' de los parámetros dijit.</para>
+                    validar el
+                    elemento; se utiliza principalmente con
+                    subclases. Las restricciones son
+                    almacenados en la clave
+                    'constraints' de los parámetros dijit.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
+                <para>
                     <methodname>setConstraints(array $constraints)</methodname>
-                    y <methodname>getConstraints()</methodname>: establece y
+                    y
+                    <methodname>getConstraints()</methodname>
+                    : establece y
                     recupera las restricciones para utilizar al validar el
-                    elemento; se utiliza principalmente con subclases.</para>
+                    elemento; se
+                    utiliza principalmente con subclases.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>hasConstraint($key)</methodname>: prueba si una
-                    restricción dada existe.</para>
+                <para>
+                    <methodname>hasConstraint($key)</methodname>
+                    : prueba si una
+                    restricción dada existe.
+                </para>
             </listitem>
 
             <listitem>
-               <para>
-                    <methodname>removeConstraint($key)</methodname> y
-                        <methodname>clearConstraints()</methodname>: elimina una
+                <para>
+                    <methodname>removeConstraint($key)</methodname>
+                    y
+                    <methodname>clearConstraints()</methodname>
+                    : elimina una
                     restricción individual o todas las restricciones para el
-                    elemento.</para>
+                    elemento.
+                </para>
             </listitem>
         </itemizedlist>
 
         <example id="zend.dojo.form.elements.validationTextBox.example">
             <title>Ejemplo de Uso del Elemento ValidationTextBox dijit</title>
 
-           <para>Lo siguiente creará un ValidationTextBox que requiere un solo
-                string compuesto exclusivamente por caracteres de palabra (es
-                decir, sin espacios, la mayor parte de la puntuación es
+            <para>Lo siguiente creará un ValidationTextBox que requiere un solo
+                string compuesto
+                exclusivamente por caracteres de palabra (es
+                decir, sin espacios, la mayor parte de
+                la puntuación es
                 inválida).</para>
 
             <programlisting language="php"><![CDATA[
@@ -1628,22 +2053,29 @@ $form->addElement(
     <sect3 id="zend.dojo.form.elements.verticalSlider">
         <title>VerticalSlider</title>
 
-       <para>VerticalSlider es el hermano de <link
-                linkend="zend.dojo.form.elements.horizontalSlider"
-                >HorizontalSlider</link>, y opera en todos los sentidos como ese
-            elemento. La única diferencia real es que los métodos 'top*' y
+        <para>
+            VerticalSlider es el hermano de
+            <link linkend="zend.dojo.form.elements.horizontalSlider">HorizontalSlider</link>
+            , y opera en todos los sentidos como ese
+            elemento. La única diferencia real es que los
+            métodos 'top*' y
             'bottom*' son sustituidos por 'left*' y 'right*', y en lugar de
-            utilizar HorizontalRule y HorizontalRuleLabels, debe usarse
-            VerticalRule y VerticalRuleLabels.</para>
+            utilizar
+            HorizontalRule y HorizontalRuleLabels, debe usarse
+            VerticalRule y VerticalRuleLabels.
+        </para>
 
         <example id="zend.dojo.form.elements.verticalSlider.example">
             <title>Ejemplo de Uso del Elemento VerticalSlider dijit</title>
 
-           <para>Lo siguiente creará una selección deslizante vertical con
-                valores enteros desde -10 a 10. La izquierda tendrá etiquetas en
-                las marcas correspondientes al 20%, 40%, 60%, y 80%. El derecho
+            <para>Lo siguiente creará una selección deslizante vertical con
+                valores enteros desde -10
+                a 10. La izquierda tendrá etiquetas en
+                las marcas correspondientes al 20%, 40%, 60%,
+                y 80%. El derecho
                 tiene reglas en un 0, 50%, y 100%. Cada vez que se cambie el
-                valor, se actualizará el elemento oculto que almacena el valor.</para>
+                valor,
+                se actualizará el elemento oculto que almacena el valor.</para>
 
             <programlisting language="php"><![CDATA[
 $form->addElement(

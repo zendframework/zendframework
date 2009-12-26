@@ -1,33 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15978 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 15978 -->
+    <!-- Reviewed: no -->
 <sect1 id="zend.config.introduction">
     <title>Introducción</title>
-   <para>
-        <classname>Zend_Config</classname> está diseñado para simplificar el
-        acceso y el uso de datos de configuración dentro de aplicaciones. Provee
+    <para>
+        <classname>Zend_Config</classname>
+        está diseñado para simplificar el
+        acceso y el uso de datos de configuración dentro de
+        aplicaciones. Provee
         una interfaz de usuario basada en propiedades de objetos anidadas para
         acceder a datos de configuración dentro del código de la aplicación. Los
-        datos de configuración pueden venir de multitud de medios que soporten
-        almacenamiento de datos de forma jerárquica. Actualmente
-            <classname>Zend_Config</classname> provee adaptadores para datos de
-        configuración que están almacenados en archivos de texto con <link
-            linkend="zend.config.adapters.ini">
+        datos de
+        configuración pueden venir de multitud de medios que soporten
+        almacenamiento de datos de
+        forma jerárquica. Actualmente
+        <classname>Zend_Config</classname>
+        provee adaptadores para datos de
+        configuración que están almacenados en archivos de texto con
+        <link linkend="zend.config.adapters.ini">
             <classname>Zend_Config_Ini</classname>
-        </link> y <link linkend="zend.config.adapters.xml">
+        </link>
+        y
+        <link linkend="zend.config.adapters.xml">
             <classname>Zend_Config_Xml</classname>
-        </link> .</para>
+        </link>
+        .
+    </para>
     <example id="zend.config.introduction.example.using">
         <title>Usando Zend_Config Per Se</title>
-       <para>Normalmente, se espera que los usuarios usen una de las clases
-            adaptadoras como <link linkend="zend.config.adapters.ini">
+        <para>
+            Normalmente, se espera que los usuarios usen una de las clases
+            adaptadoras como
+            <link linkend="zend.config.adapters.ini">
                 <classname>Zend_Config_Ini</classname>
-            </link> o <link linkend="zend.config.adapters.xml">
+            </link>
+            o
+            <link linkend="zend.config.adapters.xml">
                 <classname>Zend_Config_Xml</classname>
-            </link> , pero si los datos de configuración están disponibles en un
-            array <acronym>PHP</acronym>, se puede simplemente pasar los datos
-            al constructor <classname>Zend_Config</classname> para utilizar una
-            interfaz simple orientada a objetos:</para>
+            </link>
+            , pero si los datos de configuración están disponibles en un
+            array
+            <acronym>PHP</acronym>
+            , se puede simplemente pasar los datos
+            al constructor
+            <classname>Zend_Config</classname>
+            para utilizar una
+            interfaz simple orientada a objetos:
+        </para>
         <programlisting language="php"><![CDATA[
 // Dado un array de datos de configuración
 $configArray = array(
@@ -58,22 +77,33 @@ $db = Zend_Db::factory($config->database->adapter,
 $db = Zend_Db::factory($config->database);
 ]]></programlisting>
     </example>
-   <para>Como se ilustra en el ejemplo de arriba,
-            <classname>Zend_Config</classname> provee una sintáxis de
+    <para>
+        Como se ilustra en el ejemplo de arriba,
+        <classname>Zend_Config</classname>
+        provee una sintáxis de
         propiedades de objetos anidados para acceder a datos de configuración
-        pasados a su constructor.</para>
-   <para>Junto al acceso a valores de datos orientado a objetos,
-            <classname>Zend_Config</classname> también tiene el método
-            <methodname>get()</methodname> que devolverá el valor por defecto
-        suministrado si el elemento de datos no existe. Por ejemplo:</para>
+        pasados a su constructor.
+    </para>
+    <para>
+        Junto al acceso a valores de datos orientado a objetos,
+        <classname>Zend_Config</classname>
+        también tiene el método
+        <methodname>get()</methodname>
+        que devolverá el valor por defecto
+        suministrado si el elemento de datos no existe. Por
+        ejemplo:
+    </para>
     <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
     <example id="zend.config.introduction.example.file.php">
         <title>Usando Zend_Config con un Archivo de Configuración PHP</title>
-       <para>A veces, es deseable usar un archivo de configuración puramente
-                <acronym>PHP</acronym>. El código siguiente ilustra cómo podemos
-            conseguir esto fácilmente:</para>
+        <para>
+            A veces, es deseable usar un archivo de configuración puramente
+            <acronym>PHP</acronym>
+            . El código siguiente ilustra cómo podemos
+            conseguir esto fácilmente:
+        </para>
         <programlisting language="php"><![CDATA[
 // config.php
 return array(

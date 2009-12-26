@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15814 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 15814 -->
+    <!-- Reviewed: no -->
 <sect1 id="zend.application.introduction">
     <title>Introducción</title>
 
-   <para>
+    <para>
         <classname>Zend_Application</classname>
         facilita la inicialización de nuestras aplicaciones
-        proporcionando recursos reutilizables, comunes y asociados con el módulo
+        proporcionando recursos reutilizables,
+        comunes y asociados con el módulo
         de la clase de arranque y control de dependencias.
-        También se ocupa de establecer el entorno de <acronym>PHP</acronym>
+        También
+        se ocupa de establecer el entorno de
+        <acronym>PHP</acronym>
         e introduce la autocarga (autoloading) por defecto.
-   </para>
+    </para>
 </sect1>

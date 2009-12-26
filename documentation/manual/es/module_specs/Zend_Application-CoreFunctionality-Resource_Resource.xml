@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15814 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 15814 -->
+    <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.resource-resource">
     <title>Zend_Application_Resource_Resource</title>
 
-   <para>
-        <classname>Zend_Application_Resource_Resource</classname> es una
+    <para>
+        <classname>Zend_Application_Resource_Resource</classname>
+        es una
         interfaz para recursos de plugin utilizados con clases bootstrap implementando
-        <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>.
+        <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>
+        .
         Se espera que los recursos de plugins permitan la configuración,
-        estar enterados del bootstrap, y aplicar un patrón de estrategia para la
+        estar enterados del
+        bootstrap, y aplicar un patrón de estrategia para la
         inicialización de recursos.
-   </para>
+    </para>
 
     <table id="zend.application.core-functionality.resource-resource.api">
         <title>Zend_Application_Resource_Resource Interface</title>
@@ -26,73 +29,130 @@
             </thead>
             <tbody>
                 <row>
-                    <entry><methodname>__construct($options = null)</methodname></entry>
-                    <entry><type>Void</type></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$options</varname>: <emphasis>opcional</emphasis>.
-                            Opciones con las cuales establecer el estado de los recursos.
-                       </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        El constructor debería permitir pasar opciones con las
-                        cuales inicializar el estado.
-                   </para></entry>
+                    <entry>
+                        <methodname>__construct($options = null)</methodname>
+                    </entry>
+                    <entry>
+                        <type>Void</type>
+                    </entry>
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$options</varname>
+                                    :
+                                    <emphasis>opcional</emphasis>
+                                    .
+                                    Opciones con las cuales establecer el estado de los recursos.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+                    <entry>
+                        <para>
+                            El constructor debería permitir pasar opciones con las
+                            cuales inicializar el estado.
+                   </para>
+                    </entry>
                 </row>
 
                 <row>
-                    <entry><methodname>setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)</methodname></entry>
-                    <entry><classname>Zend_Application_Resource_Resource</classname></entry>
-                    <entry><itemizedlist>
-                            <listitem><para>
-                                <varname>$bootstrap</varname>: <emphasis>requerido</emphasis>.
-                                Padre del bootstrap inicializando este recurso.
-                           </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Debería permitir registrar el objeto padre del bootstrap.
-                   </para></entry>
+                    <entry>
+                        <methodname>setBootstrap(Zend_Application_Bootstrap_Bootstrapper $bootstrap)</methodname>
+                    </entry>
+                    <entry>
+                        <classname>Zend_Application_Resource_Resource</classname>
+                    </entry>
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$bootstrap</varname>
+                                    :
+                                    <emphasis>requerido</emphasis>
+                                    .
+                                    Padre del bootstrap inicializando este recurso.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+                    <entry>
+                        <para>
+                            Debería permitir registrar el objeto padre del bootstrap.
+                   </para>
+                    </entry>
                 </row>
 
                 <row>
-                    <entry><methodname>getBootstrap()</methodname></entry>
-                    <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
+                    <entry>
+                        <methodname>getBootstrap()</methodname>
+                    </entry>
+                    <entry>
+                        <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
+                    </entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Recuperar la instancia del bootstrap registrado.
-                   </para></entry>
+                    <entry>
+                        <para>
+                            Recuperar la instancia del bootstrap registrado.
+                   </para>
+                    </entry>
                 </row>
 
                 <row>
-                    <entry><methodname>setOptions(array $options)</methodname></entry>
-                    <entry><classname>Zend_Application_Resource_Resource</classname></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$options</varname>: <emphasis>requerido</emphasis>.
-                            Opciones con las cuales establecer el estado.
-                       </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Establecer el estado del recurso.
-                   </para></entry>
+                    <entry>
+                        <methodname>setOptions(array $options)</methodname>
+                    </entry>
+                    <entry>
+                        <classname>Zend_Application_Resource_Resource</classname>
+                    </entry>
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$options</varname>
+                                    :
+                                    <emphasis>requerido</emphasis>
+                                    .
+                                    Opciones con las cuales establecer el estado.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+                    <entry>
+                        <para>
+                            Establecer el estado del recurso.
+                   </para>
+                    </entry>
                 </row>
 
                 <row>
-                    <entry><methodname>getOptions()</methodname></entry>
-                    <entry><type>Array</type></entry>
+                    <entry>
+                        <methodname>getOptions()</methodname>
+                    </entry>
+                    <entry>
+                        <type>Array</type>
+                    </entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Recuperar opciones registradas.
-                   </para></entry>
+                    <entry>
+                        <para>
+                            Recuperar opciones registradas.
+                   </para>
+                    </entry>
                 </row>
 
                 <row>
-                    <entry><methodname>init()</methodname></entry>
-                    <entry><type>Mixed</type></entry>
+                    <entry>
+                        <methodname>init()</methodname>
+                    </entry>
+                    <entry>
+                        <type>Mixed</type>
+                    </entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Patrón de estrategia: ejecute inicialización de los recursos.
-                   </para></entry>
+                    <entry>
+                        <para>
+                            Patrón de estrategia: ejecute inicialización de los recursos.
+                   </para>
+                    </entry>
                 </row>
             </tbody>
         </tgroup>

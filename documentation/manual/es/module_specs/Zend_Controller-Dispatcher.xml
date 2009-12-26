@@ -1,44 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16658 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 16658 -->
+    <!-- Reviewed: no -->
 <sect1 id="zend.controller.dispatcher">
     <title>El Despachador</title>
 
     <sect2 id="zend.controller.dispatcher.overview">
         <title>Introducción</title>
 
-       <para>
+        <para>
             Despachar es el proceso de tomar el objeto solicitud,
-            <classname>Zend_Controller_Request_Abstract</classname>,
+            <classname>Zend_Controller_Request_Abstract</classname>
+            ,
             extraer el nombre del módulo, el nombre del controlador, el nombre
-            de la acción, y los parámetros opcionales contenido en él, y luego
-            instanciar un controlador y llamar una acción de ese controlador.
-            Si no se encuentra algún módulo, controlador o acción, se usarán
+            de la acción, y los
+            parámetros opcionales contenido en él, y luego
+            instanciar un controlador y llamar una
+            acción de ese controlador.
+            Si no se encuentra algún módulo, controlador o acción, se
+            usarán
             los valores por defecto para ellos.
             <classname>Zend_Controller_Dispatcher_Standard</classname>
-            especifica <emphasis>index</emphasis> para cada uno de los controladores y
-            acciones por defecto y <emphasis>default</emphasis> para el valor por
+            especifica
+            <emphasis>index</emphasis>
+            para cada uno de los controladores y
+            acciones por defecto y
+            <emphasis>default</emphasis>
+            para el valor por
             defecto del módulo, pero permite al desarrollador cambiar los
-            valores por defecto para cada uno usando los métodos
-            <methodname>setDefaultController()</methodname>,
-            <methodname>setDefaultAction()</methodname>, y <methodname>setDefaultModule()</methodname>
+            valores
+            por defecto para cada uno usando los métodos
+            <methodname>setDefaultController()</methodname>
+            ,
+            <methodname>setDefaultAction()</methodname>
+            , y
+            <methodname>setDefaultModule()</methodname>
             respectivamente.
-       </para>
+        </para>
 
         <note>
             <title>Módulo por Defecto</title>
 
-           <para>
+            <para>
                 Cuando se crean aplicaciones modulares, puede encontrarse
-                queriendo también el namespace por defecto del módulo (la
-                configuración por defecto es que el módulo por defecto es
-                <emphasis>no</emphasis> namespaced).
+                queriendo también el
+                namespace por defecto del módulo (la
+                configuración por defecto es que el módulo por
+                defecto es
+                <emphasis>no</emphasis>
+                namespaced).
                 Como de 1.5.0, ahora puede hacerlo especificando el
-                <methodname>prefixDefaultModule</methodname> como <constant>TRUE</constant> tanto en el
+                <methodname>prefixDefaultModule</methodname>
+                como
+                <constant>TRUE</constant>
+                tanto en el
                 front controller como es su despachador:
-           </para>
+            </para>
 
-             <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // En su front controller:
 $front->setParam('prefixDefaultModule', true);
 
@@ -46,40 +64,50 @@ $front->setParam('prefixDefaultModule', true);
 $dispatcher->setParam('prefixDefaultModule', true);
 ]]></programlisting>
 
-           <para>
+            <para>
                 Esto le permite re-determinar un módulo existente para ser el
-                módulo por defecto para una solicitud.
+                módulo por defecto
+                para una solicitud.
            </para>
         </note>
 
-       <para>
+        <para>
             El proceso de despachar tiene lugar en un bucle en el front controller.
-            Antes de llevarse a cabo el despacho, el front controller rutea la
-            solicitud para encontrar valores especificados por el usuario para
-            el módulo, controlador, acción, y los parámetros opcionales.
+            Antes de
+            llevarse a cabo el despacho, el front controller rutea la
+            solicitud para encontrar
+            valores especificados por el usuario para
+            el módulo, controlador, acción, y los
+            parámetros opcionales.
             A continuación entra en un loop de despacho, despachando la
             solicitud.
        </para>
 
-       <para>
+        <para>
             Al comienzo de cada iteración, establece un flag en el objeto
-            solicitud indicando que la acción se ha despachado.
-            Si una acción o un plugin pre o postDispatch resetea ese flag,
+            solicitud indicando que
+            la acción se ha despachado.
+            Si una acción o un plugin pre o postDispatch resetea ese
+            flag,
             el loop de despacho continuará e intentará despachar la nueva
-            solicitud. Cambiando el controlador y/o la acción en la solicitud y
-            reseteando el flag despachado, el desarrollador puede definir
+            solicitud. Cambiando
+            el controlador y/o la acción en la solicitud y
+            reseteando el flag despachado, el
+            desarrollador puede definir
             una cadena de peticiones a realizar.
        </para>
 
-       <para>
+        <para>
             El método del controlador de acción que controla ese despacho es
-            <methodname>_forward()</methodname>; llamar a este método para cualquiera de los
-            pre/postDispatch() o métodos de acción, proporcionando un
+            <methodname>_forward()</methodname>
+            ; llamar a este método para cualquiera de los
+            pre/postDispatch() o métodos de acción,
+            proporcionando un
             controlador de acciónes, módulo y, opcionalmente cualquier parámetro
             adicional que desee enviar a la nueva acción:
-       </para>
+        </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public function fooAction()
 {
     // adelantar a otra acción en el controlador y módulo actuales:
@@ -106,29 +134,38 @@ public function bazAction()
     <sect2 id="zend.controller.dispatcher.subclassing">
         <title>Subclaseando el Despachador</title>
 
-       <para>
-            <classname>Zend_Controller_Front</classname> llamará en primer lugar
+        <para>
+            <classname>Zend_Controller_Front</classname>
+            llamará en primer lugar
             al router para determinar la primera acción en la solicitud.
-            A continuación se entra en un loop de despacho, el cual llama al
-            despachador para despachar la acción.
-       </para>
+            A
+            continuación se entra en un loop de despacho, el cual llama al
+            despachador para despachar
+            la acción.
+        </para>
 
-       <para>
+        <para>
             El despachador necesita de una variedad de datos a fin de hacer su
-            trabajo - necesita saber cómo formatear los nombres del controlador
-            y de la acción, dónde mirar para los archivos de clase del
+            trabajo - necesita
+            saber cómo formatear los nombres del controlador
+            y de la acción, dónde mirar para los
+            archivos de clase del
             controlador, cuándo el nombre de un controlador provisto es válido
-            o no, y una <acronym>API</acronym> para determinar si una determinada solicitud es
-            incluso despachable basado en la otra información disponible.
-       </para>
+            o no, y una
+            <acronym>API</acronym>
+            para determinar si una determinada solicitud es
+            incluso despachable basado en la otra
+            información disponible.
+        </para>
 
-       <para>
+        <para>
             <classname>Zend_Controller_Dispatcher_Interface</classname>
             define los siguientes métodos como necesarios para cualquier
-            implementación de un despachador:
-       </para>
+            implementación de un
+            despachador:
+        </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 interface Zend_Controller_Dispatcher_Interface
 {
     /**
@@ -284,24 +321,28 @@ interface Zend_Controller_Dispatcher_Interface
 }
 ]]></programlisting>
 
-       <para>
+        <para>
             En muchos casos, sin embargo, simplemente debe extender la clase
-            abstracta <classname>Zend_Controller_Dispatcher_Abstract</classname>,
+            abstracta
+            <classname>Zend_Controller_Dispatcher_Abstract</classname>
+            ,
             en el que cada uno de estas ya han sido definidas, o
             <classname>Zend_Controller_Dispatcher_Standard</classname>
             para modificar la funcionalidad del despachador estándar.
-       </para>
+        </para>
 
-       <para>
+        <para>
             Las posibles razones para subclasear al despachador incluye un
-            deseo de utilizar un esquema diferente para nombrar las clases o
-            métodos en sus controladores de acción, o el deseo de utilizar otro
+            deseo de utilizar un
+            esquema diferente para nombrar las clases o
+            métodos en sus controladores de acción, o el
+            deseo de utilizar otro
             paradigma de despacho como ser despachar los archivos de acción
             bajo directorios de controladores (en lugar de despacharlos a los
             métodos de clase).
        </para>
     </sect2>
 </sect1>
-<!--
+    <!--
 vim:se ts=4 sw=4 et:
 -->

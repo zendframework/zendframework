@@ -1,34 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 17227 -->
+    <!-- Reviewed: no -->
 <sect1 id="zend.pdf.drawing">
     <title>Dibujo</title>
 
     <sect2 id="zend.pdf.drawing.geometry">
         <title>Geometría</title>
-        <para><acronym>PDF</acronym> utiliza la misma geometría que PostScript. Se inicia desde la
-            parte inferior izquierda de la página y por defecto se mide en
-            puntos (1/72 de pulgada).</para>
+        <para>
+            <acronym>PDF</acronym>
+            utiliza la misma geometría que PostScript. Se inicia desde la
+            parte inferior izquierda de
+            la página y por defecto se mide en
+            puntos (1/72 de pulgada).
+        </para>
         <para>El tamaño de la página se puede recuperar desde un objeto página:</para>
         <para>
             <programlisting language="php"><![CDATA[
 $width  = $pdfPage->getWidth();
 $height = $pdfPage->getHeight();
 ]]></programlisting>
-       </para>
+        </para>
     </sect2>
 
     <sect2 id="zend.pdf.drawing.color">
         <title>Colores</title>
-        <para><acronym>PDF</acronym> tiene una poderosa capacidad de representación de colores. El
-            módulo <classname>Zend_Pdf</classname> soporta la Escala de Grises,
-            y los espacios de color RGB y CMYK. Cualquiera de ellos puede ser
+        <para>
+            <acronym>PDF</acronym>
+            tiene una poderosa capacidad de representación de colores. El
+            módulo
+            <classname>Zend_Pdf</classname>
+            soporta la Escala de Grises,
+            y los espacios de color RGB y CMYK. Cualquiera de ellos
+            puede ser
             usado en cualquier lugar, donde el objeto
-                <classname>Zend_Pdf_Color</classname> sea requerido. Las clases
-                <classname>Zend_Pdf_Color_GrayScale</classname>,
-                <classname>Zend_Pdf_Color_Rgb</classname> y
-                <classname>Zend_Pdf_Color_Cmyk</classname> proporcionan esta
-            funcionalidad:</para>
+            <classname>Zend_Pdf_Color</classname>
+            sea requerido. Las clases
+            <classname>Zend_Pdf_Color_GrayScale</classname>
+            ,
+            <classname>Zend_Pdf_Color_Rgb</classname>
+            y
+            <classname>Zend_Pdf_Color_Cmyk</classname>
+            proporcionan esta
+            funcionalidad:
+        </para>
         <programlisting language="php"><![CDATA[
 // $grayLevel (float number). 0.0 (black) - 1.0 (white)
 $color1 = new Zend_Pdf_Color_GrayScale($grayLevel);
@@ -40,8 +54,13 @@ $color2 = new Zend_Pdf_Color_Rgb($r, $g, $b);
 $color3 = new Zend_Pdf_Color_Cmyk($c, $m, $y, $k);
 ]]></programlisting>
 
-        <para>Los estilos de colores <acronym>HTML</acronym> también se proporcionan con la clase
-                <classname>Zend_Pdf_Color_Html</classname>:</para>
+        <para>
+            Los estilos de colores
+            <acronym>HTML</acronym>
+            también se proporcionan con la clase
+            <classname>Zend_Pdf_Color_Html</classname>
+            :
+        </para>
         <programlisting language="php"><![CDATA[
 $color1 = new Zend_Pdf_Color_Html('#3366FF');
 $color2 = new Zend_Pdf_Color_Html('silver');
@@ -51,10 +70,18 @@ $color3 = new Zend_Pdf_Color_Html('forestgreen');
 
     <sect2 id="zend.pdf.drawing.shape-drawing">
         <title>Dibujo de Formas</title>
-        <para>Todas las operaciones de dibujo se puede hacer en un contexto de
-            página <acronym>PDF</acronym>.</para>
-        <para>La clase <classname>Zend_Pdf_Page</classname> proporciona un
-            conjunto de primitivas de dibujo:</para>
+        <para>
+            Todas las operaciones de dibujo se puede hacer en un contexto de
+            página
+            <acronym>PDF</acronym>
+            .
+        </para>
+        <para>
+            La clase
+            <classname>Zend_Pdf_Page</classname>
+            proporciona un
+            conjunto de primitivas de dibujo:
+        </para>
         <programlisting language="php"><![CDATA[
 /**
  * Dibujar una línea desde x1,y1 hasta x2,y2.
@@ -176,12 +203,19 @@ public function drawEllipse($x1,
 
     <sect2 id="zend.pdf.drawing.text-drawing">
         <title>Dibujo de Texto</title>
-        <para>Las operaciones de dibujo de texto también existen en el contexto
-            de una página <acronym>PDF</acronym>. Puede dibujar una sola línea de texto en
-            cualquier posición en la página mediante el suministro de las
+        <para>
+            Las operaciones de dibujo de texto también existen en el contexto
+            de una página
+            <acronym>PDF</acronym>
+            . Puede dibujar una sola línea de texto en
+            cualquier posición en la página mediante el
+            suministro de las
             coordenadas X e Y de la base de referencia. La fuente y tamaño
-            actual de la letra se utilizan para operaciones de dibujo de texto
-            (ver descripción detallada más abajo).</para>
+            actual de
+            la letra se utilizan para operaciones de dibujo de texto
+            (ver descripción detallada más
+            abajo).
+        </para>
         <programlisting language="php"><![CDATA[
 /**
  * Dibujar una línea de texto en una posición específica.
@@ -204,19 +238,27 @@ $pdfPage->drawText('Hello world!', 72, 720);
 ...
 ]]></programlisting>
         </example>
-        <para>Por defecto, los strings de texto se interpretan usando el método
-            de codificación de la localización actual. Si tiene un string que
-            utiliza un método de codificación diferente (como un string UTF-8 a
+        <para>
+            Por defecto, los strings de texto se interpretan usando el método
+            de codificación de la
+            localización actual. Si tiene un string que
+            utiliza un método de codificación diferente
+            (como un string UTF-8 a
             leer desde un archivo en disco, o un string MacRoman obtenido a
             partir del legado de una base de datos), puede indicar la
-            codificación de caracteres a llamar en tiempo de dibujo y
-                <classname>Zend_Pdf</classname> se encargará de la conversión.
-            Puede proporcionar la fuente de cualquier método de codificación de
-            strings soportados por la función de <acronym>PHP</acronym>
+            codificación de caracteres a
+            llamar en tiempo de dibujo y
+            <classname>Zend_Pdf</classname>
+            se encargará de la conversión.
+            Puede proporcionar la fuente de cualquier método de
+            codificación de
+            strings soportados por la función de
+            <acronym>PHP</acronym>
             <code>
-                <ulink url="http://www.php.net/manual/function.iconv.php"
-                    >iconv()</ulink>
-            </code>:</para>
+                <ulink url="http://www.php.net/manual/function.iconv.php">iconv()</ulink>
+            </code>
+            :
+        </para>
         <example id="zend.pdf.drawing.text-drawing.example-2">
             <title>Dibujar un string codificado en UTF-8 en la página</title>
             <programlisting language="php"><![CDATA[
@@ -234,9 +276,13 @@ $pdfPage->drawText($unicodeString, 72, 720, 'UTF-8');
     <sect2 id="zend.pdf.drawing.using-fonts">
         <title>Uso de Fuentes</title>
         <para>
-            <methodname>Zend_Pdf_Page::drawText()</methodname> utiliza la fuente y
+            <methodname>Zend_Pdf_Page::drawText()</methodname>
+            utiliza la fuente y
             el tamaño actual de la fuente de la página, que se establece con el
-            método <methodname>Zend_Pdf_Page::setFont()</methodname>:</para>
+            método
+            <methodname>Zend_Pdf_Page::setFont()</methodname>
+            :
+        </para>
         <programlisting language="php"><![CDATA[
 /**
  * Establecer la fuente actual.
@@ -247,20 +293,35 @@ $pdfPage->drawText($unicodeString, 72, 720, 'UTF-8');
  */
 public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
 ]]></programlisting>
-        <para>Los documentos <acronym>PDF</acronym> soportan fuentes PostScript Type 1 y TrueType,
-            así como dos tipos especializados de <acronym>PDF</acronym>, Type 3 y fuentes
-            compuestas. También hay 14 fuentes estándar Tipo 1 incorporadas para
-            cada visor <acronym>PDF</acronym>: Courier (4 estilos), Helvetica (4 estilos), Times (4
-            estilos), Symbol y Zapf Dingbats.</para>
         <para>
-            <classname>Zend_Pdf</classname> actualmente soporta el estándar de
-            14 fuentes <acronym>PDF</acronym>, así como sus propias fuentes personalizadas
-            TrueType. Los objetos Font se obtienen a través de una de los dos
+            Los documentos
+            <acronym>PDF</acronym>
+            soportan fuentes PostScript Type 1 y TrueType,
+            así como dos tipos especializados de
+            <acronym>PDF</acronym>
+            , Type 3 y fuentes
+            compuestas. También hay 14 fuentes estándar Tipo 1 incorporadas para
+            cada visor
+            <acronym>PDF</acronym>
+            : Courier (4 estilos), Helvetica (4 estilos), Times (4
+            estilos), Symbol y Zapf Dingbats.
+        </para>
+        <para>
+            <classname>Zend_Pdf</classname>
+            actualmente soporta el estándar de
+            14 fuentes
+            <acronym>PDF</acronym>
+            , así como sus propias fuentes personalizadas
+            TrueType. Los objetos Font se obtienen a
+            través de una de los dos
             métodos de fábrica:
-                <classname>Zend_Pdf_Font::fontWithName($fontName)</classname>
-            para las 14 fuentes estándar <acronym>PDF</acronym> o
-                <classname>Zend_Pdf_Font::fontWithPath($filePath)</classname>
-            para fuentes personalizadas.</para>
+            <classname>Zend_Pdf_Font::fontWithName($fontName)</classname>
+            para las 14 fuentes estándar
+            <acronym>PDF</acronym>
+            o
+            <classname>Zend_Pdf_Font::fontWithPath($filePath)</classname>
+            para fuentes personalizadas.
+        </para>
         <example id="zend.pdf.drawing.using-fonts.example-1">
             <title>Crear un tipo de letra normal</title>
             <programlisting language="php"><![CDATA[
@@ -273,8 +334,13 @@ $pdfPage->setFont($font, 36);
 ...
 ]]></programlisting>
         </example>
-        <para>Los nombres de las 14 constantes para el tipo de letra estándar
-            de PDF se definen en la clase <classname>Zend_Pdf_Font</classname>: <itemizedlist>
+        <para>
+            Los nombres de las 14 constantes para el tipo de letra estándar
+            de PDF se definen en la
+            clase
+            <classname>Zend_Pdf_Font</classname>
+            :
+            <itemizedlist>
                 <listitem>
                     <para>Zend_Pdf_Font::FONT_COURIER</para>
                 </listitem>
@@ -318,16 +384,21 @@ $pdfPage->setFont($font, 36);
                     <para>Zend_Pdf_Font::FONT_ZAPFDINGBATS</para>
                 </listitem>
             </itemizedlist>
-       </para>
+        </para>
         <para>También puede utilizar cualquier fuente individual TrueType (que
-            generalmente tiene una extensión '.ttf') o bien una fuente OpenType
-            (con la extensión '.otf') si contiene esquemas TrueType. Actualmente
-            no están soportadas, pero está previsto para una versión futura
+            generalmente tiene una
+            extensión '.ttf') o bien una fuente OpenType
+            (con la extensión '.otf') si contiene
+            esquemas TrueType. Actualmente
+            no están soportadas, pero está previsto para una versión
+            futura
             archivos de fuentes .dfont de Mac OS X y de Microsoft TrueType
             Collection(extensión '.ttc').</para>
         <para>Para utilizar una fuente TrueType, debe proporcionar toda la ruta
-            del archivo a la fuente del programa. Si la fuente no se puede leer
-            por alguna razón, o si no es una fuente TrueType, el método de
+            del archivo a la
+            fuente del programa. Si la fuente no se puede leer
+            por alguna razón, o si no es una
+            fuente TrueType, el método de
             fábrica arrojará una excepción:</para>
         <example id="zend.pdf.drawing.using-fonts.example-2">
             <title>Crear una fuente TrueType</title>
@@ -341,13 +412,20 @@ $pdfPage->setFont($goodDogCoolFont, 36);
 ...
 ]]></programlisting>
         </example>
-        <para>Por defecto, las fuentes personalizadas serán incorporados en el
-            documento <acronym>PDF</acronym> resultante. Esto permite que los destinatarios vean la
-            página como está previsto, incluso si no tienen los tipos de letra
-            apropiados instalados en su sistema. Si le preocupa el tamaño del
+        <para>
+            Por defecto, las fuentes personalizadas serán incorporados en el
+            documento
+            <acronym>PDF</acronym>
+            resultante. Esto permite que los destinatarios vean la
+            página como está previsto, incluso
+            si no tienen los tipos de letra
+            apropiados instalados en su sistema. Si le preocupa el
+            tamaño del
             archivo, puede pedir que la fuente del programa no sea integrada
-            pasando una opción 'do not embed' ("no incluir") al método de
-            fábrica:</para>
+            pasando una
+            opción 'do not embed' ("no incluir") al método de
+            fábrica:
+        </para>
         <example id="zend.pdf.drawing.using-fonts.example-3">
             <title>Crear una fuente TrueType, pero no incluirla en el documento
                 PDF.</title>
@@ -362,18 +440,32 @@ $pdfPage->setFont($goodDogCoolFont, 36);
 ...
 ]]></programlisting>
         </example>
-        <para>Si el programa no es de fuentes incrustadas, pero el destinatario
-            del archivo <acronym>PDF</acronym> tiene instalada la fuente en su sistema, va a ver el
-            documento como estaba previsto. Si no tiene la fuente correcta
-            instalada, la aplicación del visor de <acronym>PDF</acronym> hará todo lo posible para
-            sintetizar un sustituto.</para>
-        <para>Algunas fuentes tienen normas específicas de concesión de
-            licencias que les impiden ser tenidas en cuenta en documentos <acronym>PDF</acronym>.
+        <para>
+            Si el programa no es de fuentes incrustadas, pero el destinatario
+            del archivo
+            <acronym>PDF</acronym>
+            tiene instalada la fuente en su sistema, va a ver el
+            documento como estaba previsto. Si
+            no tiene la fuente correcta
+            instalada, la aplicación del visor de
+            <acronym>PDF</acronym>
+            hará todo lo posible para
+            sintetizar un sustituto.
+        </para>
+        <para>
+            Algunas fuentes tienen normas específicas de concesión de
+            licencias que les impiden ser
+            tenidas en cuenta en documentos
+            <acronym>PDF</acronym>
+            .
             Así que no son capturados con la "guardia baja" por la presente, si
-            intenta utilizar una fuente que no puede ser incorporada, el método
-            de fábrica lanzará una excepción.</para>
+            intenta utilizar una
+            fuente que no puede ser incorporada, el método
+            de fábrica lanzará una excepción.
+        </para>
         <para>Puede seguir utilizando esas fuentes, pero debe pasar el flag de
-            no incluir como se ha descripto anteriormente, o simplemente puede
+            no incluir como se ha
+            descripto anteriormente, o simplemente puede
             suprimir la excepción:</para>
         <example id="zend.pdf.drawing.using-fonts.example-4">
             <title>No arrojar una excepción para las fuentes que no puedan ser
@@ -387,16 +479,24 @@ $font = Zend_Pdf_Font::fontWithPath(
 ...
 ]]></programlisting>
         </example>
-        <para>Esta técnica de supresión se prefiere si va a permitir a un
-            usuario final a elegir sus propios tipos de letra. Las fuentes que
-            puedan ser embebidas en el documento <acronym>PDF</acronym>, lo harán, aquellos que no
-            puedan, no.</para>
+        <para>
+            Esta técnica de supresión se prefiere si va a permitir a un
+            usuario final a elegir sus
+            propios tipos de letra. Las fuentes que
+            puedan ser embebidas en el documento
+            <acronym>PDF</acronym>
+            , lo harán, aquellos que no
+            puedan, no.
+        </para>
         <para>Los de programas de fuentes pueden ser bastante grandes, algunas
-            llegan a decenas de megabytes. Por defecto, todas las fuentes
-            incorporadas son comprimidas utilizando el esquema de compresión
+            llegan a decenas de
+            megabytes. Por defecto, todas las fuentes
+            incorporadas son comprimidas utilizando el
+            esquema de compresión
             Flate, lo que resulta en un ahorro de espacio del 50% en promedio.
             Si, por alguna razón, no desea comprimir la fuente del programa, se
-            puede desactivar con una opción:</para>
+            puede desactivar con
+            una opción:</para>
         <example id="zend.pdf.drawing.using-fonts.example-5">
             <title>No comprimir una fuente incrustada.</title>
             <programlisting language="php"><![CDATA[
@@ -407,7 +507,8 @@ $font = Zend_Pdf_Font::fontWithPath('/path/to/someReallyBigFont.ttf',
 ]]></programlisting>
         </example>
         <para>Por último, en caso necesario, puede combinar las opciones de la
-            integración mediante el operador binario OR:</para>
+            integración mediante
+            el operador binario OR:</para>
         <example id="zend.pdf.drawing.using-fonts.example-6">
             <title>La combinación de opciones de la incrustación de
                 fuentes.</title>
@@ -424,18 +525,30 @@ $font = Zend_Pdf_Font::fontWithPath(
 
     <sect2 id="zend.pdf.drawing.standard-fonts-limitations">
         <title>Limitaciones de las fuentes PDF estándar.</title>
-        <para>Las fuentes estándar <acronym>PDF</acronym> utilizan internamente varias
-            codificaciones de un solo byte (véase <ulink
-                url="http://www.adobe.com/devnet/acrobat/pdfs/pdf_reference_1-7.pdf"
-                ><acronym>PDF</acronym> Reference, Sixth Edition, version 1.7</ulink> Apéndice D
-            para más detalles). Son, en general, igual al conjunto de caracteres
-            Latin1 (excepto las fuentes ZapfDingbats y Symbol).</para>
         <para>
-            <classname>Zend_Pdf</classname> usa CP1252 (WinLatin1) para dibujar
-            el texto con las fuentes estándar.</para>
+            Las fuentes estándar
+            <acronym>PDF</acronym>
+            utilizan internamente varias
+            codificaciones de un solo byte (véase
+            <ulink url="http://www.adobe.com/devnet/acrobat/pdfs/pdf_reference_1-7.pdf">
+                <acronym>PDF</acronym>
+                Reference, Sixth Edition, version 1.7
+            </ulink>
+            Apéndice D
+            para más detalles). Son, en general, igual al conjunto de caracteres
+            Latin1
+            (excepto las fuentes ZapfDingbats y Symbol).
+        </para>
+        <para>
+            <classname>Zend_Pdf</classname>
+            usa CP1252 (WinLatin1) para dibujar
+            el texto con las fuentes estándar.
+        </para>
         <para>El texto todavía se puede proporcionar en cualquier otra
-            codificación, que debe ser especificada si ésta es distinto de una
-            fuente local actual. Realmente, sólo se dibujarán caracteres
+            codificación, que debe ser
+            especificada si ésta es distinto de una
+            fuente local actual. Realmente, sólo se dibujarán
+            caracteres
             WinLatin1.</para>
         <example id="zend.pdf.drawing.using-fonts.example-7">
             <title>Combinación de opciones de la incrustación de
@@ -453,18 +566,29 @@ $pdfPage->setFont($font, 36)
 
     <sect2 id="zend.pdf.drawing.extracting-fonts">
         <title>Extracción de las fuentes.</title>
-        <para>El módulo <classname>Zend_Pdf</classname> proporciona una
-            posibilidad de extraer las fuentes de los documentos cargados.</para>
+        <para>
+            El módulo
+            <classname>Zend_Pdf</classname>
+            proporciona una
+            posibilidad de extraer las fuentes de los documentos cargados.
+        </para>
 
         <para>Puede ser útil para las actualizaciones incrementales de un
-            documento. Sin esta funcionalidad tiene que agregar y posiblemente,
-            incrustar una fuente en un documento cada vez que desee
+            documento. Sin esta
+            funcionalidad tiene que agregar y posiblemente,
+            incrustar una fuente en un documento cada
+            vez que desee
             actualizarlo.</para>
 
-        <para>Los objetos <classname>Zend_Pdf</classname> y
-                <classname>Zend_Pdf_Page</classname> proporcionan métodos
+        <para>
+            Los objetos
+            <classname>Zend_Pdf</classname>
+            y
+            <classname>Zend_Pdf_Page</classname>
+            proporcionan métodos
             especiales para extraer todas las fuentes mencionadas en un
-            documento o una página:</para>
+            documento o una página:
+        </para>
         <example id="zend.pdf.drawing.extracting-fonts.example-1">
             <title>Extracción de las fuentes de un documento cargado.</title>
             <programlisting language="php"><![CDATA[
@@ -495,7 +619,8 @@ $firstPageFonts = $firstPage->extractFonts();
         </example>
         <example id="zend.pdf.drawing.extracting-fonts.example-2">
             <title>Extracción de la fuente de un documento cargado especificando
-                el nombre de la fuente.</title>
+                el nombre de la
+                fuente.</title>
             <programlisting language="php"><![CDATA[
 ...
 $pdf = new Zend_Pdf();
@@ -531,18 +656,25 @@ $pdf->save($docPath, true /* modo de actualización incremental */);
 ]]></programlisting>
         </example>
 
-        <para>Las fuentes extraídas pueden ser utilizadas en el lugar de
-            cualquier otra fuente con las siguientes limitaciones: <itemizedlist>
+        <para>
+            Las fuentes extraídas pueden ser utilizadas en el lugar de
+            cualquier otra fuente con las
+            siguientes limitaciones:
+            <itemizedlist>
                 <listitem>
                     <para>La fuente extraída puede ser usada sólo en el
-                        contexto del documento del que se ha extraído.</para>
+                        contexto del documento del
+                        que se ha extraído.</para>
                 </listitem>
                 <listitem>
-                    <para>Posiblemente, el programa no extraiga realmente la
-                        fuente incrustada. Así que las fuentes extraídas no
+                    <para>
+                        Posiblemente, el programa no extraiga realmente la
+                        fuente incrustada. Así que
+                        las fuentes extraídas no
                         pueden proporcionar métricas correctas y la fuente
                         original tiene que ser utilizada para los cálculos de
-                        ancho de texto: <programlisting language="php"><![CDATA[
+                        ancho de texto:
+                        <programlisting language="php"><![CDATA[
 ...
 $font = $pdf->extractFont($fontName);
 $originalFont = Zend_Pdf_Font::fontWithPath($fontPath);
@@ -560,16 +692,20 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
 }
 ...
 ]]></programlisting>
-                   </para>
+                    </para>
                 </listitem>
             </itemizedlist>
-       </para>
+        </para>
     </sect2>
 
     <sect2 id="zend.pdf.drawing.image-drawing">
         <title>Dibujo de Imágenes</title>
-        <para>La clase <classname>Zend_Pdf_Page</classname> proporciona el
-            método drawImage() para dibujar la imagen:</para>
+        <para>
+            La clase
+            <classname>Zend_Pdf_Page</classname>
+            proporciona el
+            método drawImage() para dibujar la imagen:
+        </para>
         <programlisting language="php"><![CDATA[
 /**
  * Dibujar una imagen en una posición específica de la página.
@@ -583,9 +719,11 @@ for ($charIndex = 0; $charIndex < strlen($text); $charIndex++) {
  */
 public function drawImage(Zend_Pdf_Resource_Image $image, $x1, $y1, $x2, $y2);
 ]]></programlisting>
-        <para>Los objetos imagen deben ser creados con el método
-                <classname>Zend_Pdf_Image::imageWithPath($filePath)</classname>
-            (imágenes JPG, PNG y TIFF ahora son soportadas):</para>
+        <para>
+            Los objetos imagen deben ser creados con el método
+            <classname>Zend_Pdf_Image::imageWithPath($filePath)</classname>
+            (imágenes JPG, PNG y TIFF ahora son soportadas):
+        </para>
         <example id="zend.pdf.drawing.image-drawing.example-1">
             <title>Dibujar una imagen</title>
             <programlisting language="php"><![CDATA[
@@ -599,25 +737,39 @@ $pdfPage->drawImage($image, 100, 100, 400, 300);
         </example>
 
         <para>
-            <emphasis>Importante! el soporte a JPEG requiere que se configure la
-                extensión <acronym>PHP</acronym> GD.</emphasis>
+            <emphasis>
+                Importante! el soporte a JPEG requiere que se configure la
+                extensión
+                <acronym>PHP</acronym>
+                GD.
+            </emphasis>
             <emphasis>Importante! el soporte a PNG requiere que se configure la
-                extensión ZLIB para trabajar con imágenes canal Alfa.</emphasis>
-       </para>
-        <para>Consulte la documentación de <acronym>PHP</acronym> para obtener
-            información detallada (<ulink
-                url="http://www.php.net/manual/en/ref.image.php"
-                >http://www.php.net/manual/en/ref.image.php</ulink>). (<ulink
-                url="http://www.php.net/manual/en/ref.zlib.php"
-                >http://www.php.net/manual/en/ref.zlib.php</ulink>).</para>
+                extensión ZLIB para
+                trabajar con imágenes canal Alfa.</emphasis>
+        </para>
+        <para>
+            Consulte la documentación de
+            <acronym>PHP</acronym>
+            para obtener
+            información detallada (
+            <ulink url="http://www.php.net/manual/en/ref.image.php">http://www.php.net/manual/en/ref.image.php</ulink>
+            ). (
+            <ulink url="http://www.php.net/manual/en/ref.zlib.php">http://www.php.net/manual/en/ref.zlib.php</ulink>
+            ).
+        </para>
     </sect2>
 
     <sect2 id="zend.pdf.drawing.line-drawing-style">
         <title>Estilo de Dibujo de Líneas</title>
-        <para>El estilo del dibujo de líneas está definido por el ancho de
-            línea, el color de línea y el patrón del tipo de línea. Todo esto
-            parámetros pueden ser asignados por los métodos de la clase
-                <classname>Zend_Pdf_Page</classname>:</para>
+        <para>
+            El estilo del dibujo de líneas está definido por el ancho de
+            línea, el color de línea y
+            el patrón del tipo de línea. Todo esto
+            parámetros pueden ser asignados por los métodos de
+            la clase
+            <classname>Zend_Pdf_Page</classname>
+            :
+        </para>
         <programlisting language="php"><![CDATA[
 /** Establecer el color de la línea. */
 public function setLineColor(Zend_Pdf_Color $color);
@@ -642,13 +794,21 @@ public function setLineDashingPattern($pattern, $phase = 0);
 
     <sect2 id="zend.pdf.drawing.fill-style">
         <title>Estilo Relleno</title>
-        <para>Los métodos
-            <methodname>Zend_Pdf_Page::drawRectangle()</methodname>,
-                <methodname>Zend_Pdf_Page::drawPolygon()</methodname>,
-                <methodname>Zend_Pdf_Page::drawCircle()</methodname> y
-                <methodname>Zend_Pdf_Page::drawEllipse()</methodname> toman el
-            argumento <varname>$fillType</varname> como un parámetro
-            opcional. Puede ser:</para>
+        <para>
+            Los métodos
+            <methodname>Zend_Pdf_Page::drawRectangle()</methodname>
+            ,
+            <methodname>Zend_Pdf_Page::drawPolygon()</methodname>
+            ,
+            <methodname>Zend_Pdf_Page::drawCircle()</methodname>
+            y
+            <methodname>Zend_Pdf_Page::drawEllipse()</methodname>
+            toman el
+            argumento
+            <varname>$fillType</varname>
+            como un parámetro
+            opcional. Puede ser:
+        </para>
 
         <itemizedlist>
             <listitem>
@@ -660,88 +820,134 @@ public function setLineDashingPattern($pattern, $phase = 0);
             </listitem>
             <listitem>
                 <para>Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE - llenar y
-                    trazar (comportamiento por defecto)</para>
+                    trazar (comportamiento por
+                    defecto)</para>
             </listitem>
         </itemizedlist>
 
-        <para>El método <methodname>Zend_Pdf_Page::drawPolygon()</methodname>
+        <para>
+            El método
+            <methodname>Zend_Pdf_Page::drawPolygon()</methodname>
             también tiene un parámetro adicional
-                <varname>$fillMethod</varname>:</para>
+            <varname>$fillMethod</varname>
+            :
+        </para>
         <itemizedlist>
             <listitem>
                 <para>Zend_Pdf_Page::FILL_METHOD_NON_ZERO_WINDING
                     (comportamiento por defecto)</para>
                 <para>
-                    <citetitle>PDF reference</citetitle> esta norma se describe
-                    como sigue: <blockquote>
-                        <para>La tortuosa regla del número distinto de cero
-                            determina si un punto está dentro de un camino de un
-                            rayo conceptual dibujado a partir de ese punto hasta
+                    <citetitle>PDF reference</citetitle>
+                    esta norma se describe
+                    como sigue:
+                    <blockquote>
+                        <para>
+                            La tortuosa regla del número distinto de cero
+                            determina si un punto está
+                            dentro de un camino de un
+                            rayo conceptual dibujado a partir de ese punto
+                            hasta
                             el infinito en cualquier dirección y luego de
-                            examinar los lugares en los que un segmento de la
-                            ruta atraviesa el rayo. A partir de la cuenta de 0,
+                            examinar los lugares
+                            en los que un segmento de la
+                            ruta atraviesa el rayo. A partir de la
+                            cuenta de 0,
                             la norma agrega 1 cada vez que un segmento de ruta
-                            atraviesa el rayo de izquierda a derecha y resta 1
-                            cada vez que un segmento cruza de derecha a
+                            atraviesa
+                            el rayo de izquierda a derecha y resta 1
+                            cada vez que un segmento cruza
+                            de derecha a
                             izquierda. Después de contar todos los cruces, si el
                             resultado es 0, entonces el punto está fuera del
-                            camino; otra cosa es el interior. Nota: El método
-                            que acabamos de describir no especifica qué hacer si
+                            camino; otra cosa es el
+                            interior. Nota: El método
+                            que acabamos de describir no especifica qué
+                            hacer si
                             un segmento de ruta coincide con o es tangente al
-                            rayo elegido. Dado que la dirección de los rayos es
-                            arbitraria, la regla simplemente elige un rayo que
+                            rayo elegido.
+                            Dado que la dirección de los rayos es
+                            arbitraria, la regla simplemente
+                            elige un rayo que
                             no encuentre problemas con las intersecciones. Por
                             simples caminos convexos, la regla del tortuoso
-                            número distinto de cero define el dentro y afuera
-                            como uno lo espera intuitivamente. Los casos más
+                            número distinto de cero
+                            define el dentro y afuera
+                            como uno lo espera intuitivamente. Los casos
+                            más
                             interesantes son aquellos que involucran la
-                            complejidad o las rutas auto-intersectadas como las
-                            que se muestran en la Figura 4.10 (en un <acronym>PDF</acronym> de
+                            complejidad o las rutas
+                            auto-intersectadas como las
+                            que se muestran en la Figura 4.10 (en un
+                            <acronym>PDF</acronym>
+                            de
                             referencia). Para un camino que consiste en una
-                            estrella de cinco puntas, dibujado con cinco
+                            estrella de cinco
+                            puntas, dibujado con cinco
                             segmentos conectados de líneas rectas
                             intersectándose entre sí, la regla considera que el
-                            interior será toda el área delimitada por la
+                            interior será toda el
+                            área delimitada por la
                             estrella, incluido el pentágono en el centro. Para
                             un camino compuesto por dos círculos concéntricos,
-                            las áreas de ambos círculos cerrados se consideran
-                            que están adentro, siempre que ambas se hayan
+                            las áreas de ambos
+                            círculos cerrados se consideran
+                            que están adentro, siempre que ambas se
+                            hayan
                             dibujado en la misma dirección. Si los círculos son
-                            dibujados en direcciones opuestas, sólo la forma de
-                            "doughnut" (rosquilla) formada entre ellos es el
+                            dibujados en
+                            direcciones opuestas, sólo la forma de
+                            "doughnut" (rosquilla) formada
+                            entre ellos es el
                             interior, de acuerdo a la norma, el "agujero de la
-                            rosquilla" está afuera.</para>
+                            rosquilla" está afuera.
+                        </para>
                     </blockquote>
-               </para>
+                </para>
             </listitem>
             <listitem>
                 <para>Zend_Pdf_Page::FILL_METHOD_EVEN_ODD</para>
                 <para>
-                    <citetitle>PDF reference</citetitle> describe esta norma
-                    como sigue: <blockquote>
-                        <para>Una alternativa al tortuoso número distinto de
-                            cero es la regla par-impar. Esta norma determina la
-                            "interioridad" de un punto por el dibujo de un rayo
+                    <citetitle>PDF reference</citetitle>
+                    describe esta norma
+                    como sigue:
+                    <blockquote>
+                        <para>
+                            Una alternativa al tortuoso número distinto de
+                            cero es la regla
+                            par-impar. Esta norma determina la
+                            "interioridad" de un punto por el
+                            dibujo de un rayo
                             desde ese punto en cualquier dirección y simplemente
                             contando el número de segmentos de ruta que
-                            atraviesan los rayos, independientemente de la
-                            dirección. Si este número es impar, el punto está
+                            atraviesan los rayos,
+                            independientemente de la
+                            dirección. Si este número es impar, el punto
+                            está
                             adentro, si es par, el punto está afuera. Esto
-                            produce los mismos resultados que la regla del
-                            tortuoso número distinto de cero para caminos con
+                            produce los mismos
+                            resultados que la regla del
+                            tortuoso número distinto de cero para caminos
+                            con
                             formas simples, pero produce resultados diferentes
-                            para formas más complejas. La Figura 4.11 (en un <acronym>PDF</acronym>
+                            para formas más
+                            complejas. La Figura 4.11 (en un
+                            <acronym>PDF</acronym>
                             de referencia) muestra los efectos de la aplicación
-                            de la regla par-impar a las rutas complejss. Para la
-                            estrella de cinco puntas, la regla considera que los
+                            de la regla par-impar
+                            a las rutas complejss. Para la
+                            estrella de cinco puntas, la regla
+                            considera que los
                             puntos del triángulo están dentro de la ruta, pero
-                            no el pentágono en el centro. Para los dos círculos
-                            concéntricos, sólo la forma de la "rosquilla" entre
+                            no el
+                            pentágono en el centro. Para los dos círculos
+                            concéntricos, sólo la forma
+                            de la "rosquilla" entre
                             los dos círculo está considerada adentro,
                             independientemente de las direcciones en las que se
-                            dibujen los círculos.</para>
+                            dibujen los círculos.
+                        </para>
                     </blockquote>
-               </para>
+                </para>
             </listitem>
         </itemizedlist>
     </sect2>
@@ -750,9 +956,15 @@ public function setLineDashingPattern($pattern, $phase = 0);
         <title>Transformaciones Lineales</title>
         <sect3 id="zend.pdf.drawing.linear-transformations.rotations">
             <title>Rotaciones.</title>
-            <para>La página <acronym>PDF</acronym> se puede rotar antes de aplicar cualquier
-                operación de dibujo. Se puede hacer con el método
-                    <methodname>Zend_Pdf_Page::rotate()</methodname>:</para>
+            <para>
+                La página
+                <acronym>PDF</acronym>
+                se puede rotar antes de aplicar cualquier
+                operación de dibujo. Se puede hacer con el
+                método
+                <methodname>Zend_Pdf_Page::rotate()</methodname>
+                :
+            </para>
             <programlisting language="php"><![CDATA[
 /**
  * Rotar la página.
@@ -768,8 +980,11 @@ public function rotate($x, $y, $angle);
 
         <sect3 id="zend.pdf.drawing.linear-transformations.scale">
             <title>A partir de Zend Framework 1.8, el escalado.</title>
-            <para>La escala de transformación es proporcionada por el método:
-                    <methodname>Zend_Pdf_Page::scale()</methodname>:</para>
+            <para>
+                La escala de transformación es proporcionada por el método:
+                <methodname>Zend_Pdf_Page::scale()</methodname>
+                :
+            </para>
             <programlisting language="php"><![CDATA[
 /**
  * Establecer la escala al sistema de coordenadas.
@@ -784,8 +999,12 @@ public function scale($xScale, $yScale);
 
         <sect3 id="zend.pdf.drawing.linear-transformations.translate">
             <title>A partir de Zend Framework 1.8, traducir.</title>
-            <para>El desplazamiento del sistema de coordenadas es realizado por
-                el método <methodname>Zend_Pdf_Page::translate()</methodname>:</para>
+            <para>
+                El desplazamiento del sistema de coordenadas es realizado por
+                el método
+                <methodname>Zend_Pdf_Page::translate()</methodname>
+                :
+            </para>
             <programlisting language="php"><![CDATA[
 /**
  * Traducir sistema de coordenadas.
@@ -800,8 +1019,11 @@ public function translate($xShift, $yShift);
 
         <sect3 id="zend.pdf.drawing.linear-transformations.skew">
             <title>A partir de Zend Framework 1.8, el sesgo.</title>
-            <para>El sesgo de una página se puede hacer utilizando el método
-                    <methodname>Zend_Pdf_Page::skew()</methodname>:</para>
+            <para>
+                El sesgo de una página se puede hacer utilizando el método
+                <methodname>Zend_Pdf_Page::skew()</methodname>
+                :
+            </para>
             <programlisting language="php"><![CDATA[
 /**
  * Traducir sistema de coordenadas.
@@ -820,13 +1042,18 @@ public function skew($x, $y, $xAngle, $yAngle);
     <sect2 id="zend.pdf.drawing.save-restore">
         <title>Guardar/Restaurar el estado de los gráficos.</title>
         <para>En cualquier momento el estado de la página de gráficos (fuente
-            actual, tamaño de la fuente, color de línea, color de relleno,
-            estilo de línea, rotación de la página, clip del área) se pueden
+            actual, tamaño de la
+            fuente, color de línea, color de relleno,
+            estilo de línea, rotación de la página, clip
+            del área) se pueden
             guardar y restaurarlos luego. Guardar la operación pone los datos a
             un estado de pila de gráficos, la operación de restauración se
             recupera a partir de ahí.</para>
-        <para>Existen dos métodos en la clase
-                <classname>Zend_Pdf_Page</classname> para estas operaciones:</para>
+        <para>
+            Existen dos métodos en la clase
+            <classname>Zend_Pdf_Page</classname>
+            para estas operaciones:
+        </para>
         <programlisting language="php"><![CDATA[
 /**
  * Salva el estado de los gráficos de esta página.
@@ -850,12 +1077,22 @@ public function restoreGS();
 
     <sect2 id="zend.pdf.drawing.clipping">
         <title>Señalar el área de recorte</title>
-        <para><acronym>PDF</acronym> y el módulo <classname>Zend_Pdf</classname> dan soporte de
+        <para>
+            <acronym>PDF</acronym>
+            y el módulo
+            <classname>Zend_Pdf</classname>
+            dan soporte de
             recorte a la zona de dibujo. La zona actual de Clip límita las
-            regiones de la página de los operadores afectados por la pintura. En
-            principio, es la página entera.</para>
-        <para>La clase <classname>Zend_Pdf_Page</classname> proporciona un
-            conjunto de métodos para las operaciones de recorte.</para>
+            regiones de
+            la página de los operadores afectados por la pintura. En
+            principio, es la página entera.
+        </para>
+        <para>
+            La clase
+            <classname>Zend_Pdf_Page</classname>
+            proporciona un
+            conjunto de métodos para las operaciones de recorte.
+        </para>
         <programlisting language="php"><![CDATA[
 /**
  * Intersectar el área actual de recorte con un rectángulo.
@@ -928,11 +1165,20 @@ public function clipEllipse($x1,
 
     <sect2 id="zend.pdf.drawing.styles">
         <title>Estilos</title>
-        <para>La clase <classname>Zend_Pdf_Style</classname> proporciona la
-            funcionalidad de los estilos.</para>
-        <para>Los estilos se pueden utilizar para almacenar un conjunto de
-            parámetros de estado del gráfico y aplicarlo a un página <acronym>PDF</acronym> por una
-            operación:</para>
+        <para>
+            La clase
+            <classname>Zend_Pdf_Style</classname>
+            proporciona la
+            funcionalidad de los estilos.
+        </para>
+        <para>
+            Los estilos se pueden utilizar para almacenar un conjunto de
+            parámetros de estado del
+            gráfico y aplicarlo a un página
+            <acronym>PDF</acronym>
+            por una
+            operación:
+        </para>
         <programlisting language="php"><![CDATA[
 /**
  * Establecer el estilo a utilizar para futuras operaciones de dibujo sobre esta página
@@ -950,9 +1196,14 @@ public function setStyle(Zend_Pdf_Style $style);
 public function getStyle();
 ]]></programlisting>
 
-        <para>La clase <classname>Zend_Pdf_Style</classname> proporciona un
+        <para>
+            La clase
+            <classname>Zend_Pdf_Style</classname>
+            proporciona un
             conjunto de métodos para obtener o configurar diferentes parámetros
-            de estado de los gráficos:</para>
+            de
+            estado de los gráficos:
+        </para>
         <programlisting language="php"><![CDATA[
 /**
  * Establecer el color de la línea.
@@ -1069,10 +1320,17 @@ public function getFontSize();
 
     <sect2 id="zend.pdf.drawing.alpha">
         <title>Transparencia</title>
-        <para>El módulo <classname>Zend_Pdf</classname> soporta el manejo de la
-            transparencia.</para>
-        <para>La transparencia puede ser el método
-                <methodname>Zend_Pdf_Page::setAlpha()</methodname>: <programlisting language="php"><![CDATA[
+        <para>
+            El módulo
+            <classname>Zend_Pdf</classname>
+            soporta el manejo de la
+            transparencia.
+        </para>
+        <para>
+            La transparencia puede ser el método
+            <methodname>Zend_Pdf_Page::setAlpha()</methodname>
+            :
+            <programlisting language="php"><![CDATA[
 /**
  * Establecer la transparencia.
  *
@@ -1090,7 +1348,7 @@ public function getFontSize();
  */
 public function setAlpha($alpha, $mode = 'Normal');
 ]]></programlisting>
-       </para>
+        </para>
     </sect2>
 
 </sect1>

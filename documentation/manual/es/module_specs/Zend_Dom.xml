@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 17175 -->
+    <!-- Reviewed: no -->
 <sect1 id="zend.dom.introduction">
     <title>Introducción</title>
 
     <para>
-        <classname>Zend_Dom</classname> provee herramientas para trabajar con documentos y
-        estructuras DOM. Actualmente, ofrecemos <classname>Zend_Dom_Query</classname>, el cual
+        <classname>Zend_Dom</classname>
+        provee herramientas para trabajar con documentos y
+        estructuras DOM. Actualmente, ofrecemos
+        <classname>Zend_Dom_Query</classname>
+        , el cual
         provee una interfaz unificada para consultar documentos DOM utilizando selectores
-        XPath y <acronym>CSS</acronym>.
-   </para>
+        XPath y
+        <acronym>CSS</acronym>
+        .
+    </para>
 </sect1>
-<!--
+    <!--
 vim:se ts=4 sw=4 et:
 -->

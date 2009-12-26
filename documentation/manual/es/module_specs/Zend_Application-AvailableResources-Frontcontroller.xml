@@ -1,91 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16847 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 16847 -->
+    <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
 
-   <para>
+    <para>
         Probablemente el recurso más común que se carga con
-        <classname>Zend_Application</classname> será el recurso Front Controller
+        <classname>Zend_Application</classname>
+        será el recurso Front Controller
         , que proporciona la habilidad para configurar
-        <classname>Zend_Controller_Front</classname>. Este recurso ofrece
-        la posibilidad de establecer parámetros arbitrarios del Front Controller,
+        <classname>Zend_Controller_Front</classname>
+        . Este recurso ofrece
+        la posibilidad de establecer parámetros arbitrarios del Front
+        Controller,
         especificar plugins para inicializar, y mucho más.
-   </para>
+    </para>
 
-   <para>
+    <para>
         Una vez inicializado, el recurso asigna la propiedad del
-        <varname>$frontController</varname> del bootstrap a la instancia
-        <classname>Zend_Controller_Front</classname>.
-   </para>
+        <varname>$frontController</varname>
+        del bootstrap a la instancia
+        <classname>Zend_Controller_Front</classname>
+        .
+    </para>
 
-   <para>
+    <para>
         Las claves de configuración disponibles incluyen las siguientes,
-        sin importar si son mayúsculas ó minúsculas:
+        sin importar si son
+        mayúsculas ó minúsculas:
    </para>
 
     <itemizedlist>
-        <listitem><para>
-            <emphasis><property>controllerDirectory</property></emphasis>:: ya sea un valor de string
-            especificando un único directorio controlador, o un array de
-            pares de directorio módulo/controlador.
-       </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>
+                    <property>controllerDirectory</property>
+                </emphasis>
+                :: ya sea un valor de string
+                especificando un único directorio controlador, o un array de
+                pares de directorio módulo/controlador.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>moduleControllerDirectoryName</property></emphasis>: un valor de string
-            indicando el subdirectorio bajo el cual un módulo contiene controladores.
-       </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>
+                    <property>moduleControllerDirectoryName</property>
+                </emphasis>
+                : un valor de string
+                indicando el subdirectorio bajo el cual un módulo contiene controladores.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>moduleDirectory</property></emphasis>: directorio bajo el cual pueden
-            encontrarse los módulos.
-       </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>
+                    <property>moduleDirectory</property>
+                </emphasis>
+                : directorio bajo el cual pueden
+                encontrarse los módulos.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>defaultControllerName</property></emphasis>: Nombre base del controlador por
-            defecto (normalmente, "índex").
-       </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>
+                    <property>defaultControllerName</property>
+                </emphasis>
+                : Nombre base del controlador por
+                defecto (normalmente, "índex").
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <methodname>defaultAction</methodname>: nombre base de la acción por defecto
-            (normalmente, "índex").
-       </para></listitem>
+        <listitem>
+            <para>
+                <methodname>defaultAction</methodname>
+                : nombre base de la acción por defecto
+                (normalmente, "índex").
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>defaultModule</property></emphasis>: nombre base del módulo por defecto
-            (normalmente, "default").
-       </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>
+                    <property>defaultModule</property>
+                </emphasis>
+                : nombre base del módulo por defecto
+                (normalmente, "default").
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>baseUrl</property></emphasis>: base explícita a la URL de la aplicación
-            (normalmente auto-detect).
-       </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>
+                    <property>baseUrl</property>
+                </emphasis>
+                : base explícita a la URL de la aplicación
+                (normalmente auto-detect).
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>plugins</property></emphasis>: array con los nombres de los plugins de las
-            clases de los Front Controllers.
-            El recurso instanciará a cada clase (sin argumentos al constructor)
-            y luego registra la instancia con el Front Controller.
-       </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>
+                    <property>plugins</property>
+                </emphasis>
+                : array con los nombres de los plugins de las
+                clases de los Front Controllers.
+                El recurso instanciará a cada clase (sin argumentos al constructor)
+                y luego registra la instancia con el Front Controller.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>params</property></emphasis>: array de pares clave/valor para registrarse con
-            el front controller.
-       </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>
+                    <property>params</property>
+                </emphasis>
+                : array de pares clave/valor para registrarse con
+                el front controller.
+            </para>
+        </listitem>
     </itemizedlist>
 
-   <para>
+    <para>
         Si se ingresa una clave no reconocida, ésta será registrada como un
-        parámetro de Front Controller pasándolo a <methodname>setParam()</methodname>.
-   </para>
+        parámetro de Front
+        Controller pasándolo a
+        <methodname>setParam()</methodname>
+        .
+    </para>
 
     <example id="zend.application.available-resources.frontcontroller.configExample">
         <title>Ejemplo Front Controller resource configuration</title>
 
-       <para>
-            A continuación, <acronym>INI</acronym>  es un snippet para mostrar cómo configurar
+        <para>
+            A continuación,
+            <acronym>INI</acronym>
+            es un snippet para mostrar cómo configurar
             el recurso Front Controller.
-       </para>
+        </para>
 
         <programlisting language="ini"><![CDATA[
 [production]
@@ -103,13 +157,16 @@ resources.frontController.env = APPLICATION_ENV
     </example>
     <example id="zend.application.available-resources.frontcontroller.frontControllerPropertyExample">
         <title>Recuperar el Front Controller de su arranque (bootstrap)</title>
-       <para>
+        <para>
             Una vez que el recurso de su Front Controller ha sido inicializado,
-            se puede recuperar la instancia de Front Controller a través de la
-            propiedad <varname>$frontController</varname> de su bootstrap.
-       </para>
+            se puede recuperar la
+            instancia de Front Controller a través de la
+            propiedad
+            <varname>$frontController</varname>
+            de su bootstrap.
+        </para>
 
-         <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $bootstrap->bootstrap('frontController');
 $front = $bootstrap->frontController;
 ]]></programlisting>

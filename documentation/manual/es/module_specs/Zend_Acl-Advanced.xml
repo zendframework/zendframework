@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15814 -->
-<!-- Reviewed: no -->
+    <!-- EN-Revision: 15814 -->
+    <!-- Reviewed: no -->
 <sect1 id="zend.acl.advanced">
 
     <title>Uso Avanzado</title>
@@ -9,24 +9,46 @@
 
         <title>Almacenamiento Permanente de los Datos ACL</title>
 
-       <para>
-            <classname>Zend_Acl</classname> fue diseñado de tal manera que no requiere ninguna
-            tecnología particular como bases de datos o un servidor de cache para el almacenamiento
-            de datos <acronym>ACL</acronym>. Al poseer una implementación completamente construida
-            en <acronym>PHP</acronym>, es posible construir herramientas de administración
-            personalizadas sobre <classname>Zend_Acl</classname> con relativa facilidad y
-            flexibilidad. En muchas situaciones se requiere alguna forma de mantenimiento
-            interactivo de una <acronym>ACL</acronym>, y <classname>Zend_Acl</classname> provee
-            métodos para configurar, y consultar, los controles de acceso de una aplicación.</para>
+        <para>
+            <classname>Zend_Acl</classname>
+            fue diseñado de tal manera que no requiere ninguna tecnología particular como bases de
+            datos o un servidor de cache para el almacenamiento de datos
+            <acronym>ACL</acronym>
+            . Al poseer una implementación completamente construida en
+            <acronym>PHP</acronym>
+            , es posible construir herramientas de administración personalizadas sobre
+            <classname>Zend_Acl</classname>
+            con relativa facilidad y
+            flexibilidad. En muchas situaciones se requiere alguna forma de
+            mantenimiento
+            interactivo de una
+            <acronym>ACL</acronym>
+            , y
+            <classname>Zend_Acl</classname>
+            provee
+            métodos para configurar, y consultar, los controles de acceso de una aplicación.
+        </para>
 
-       <para>El almacenamiento de los datos <acronym>ACL</acronym> es una tarea que se delega al
-            desarrollador, puesto que la utilización variará extensamente en distintas situaciones.
-            Dado que <classname>Zend_Acl</classname> es serializable, los objetos
-                <acronym>ACL</acronym> pueden serializarse con la función <ulink
-                url="http://php.net/serialize">
+        <para>
+            El almacenamiento de los datos
+            <acronym>ACL</acronym>
+            es una tarea que se delega al
+            desarrollador, puesto que la utilización variará
+            extensamente en distintas situaciones.
+            Dado que
+            <classname>Zend_Acl</classname>
+            es serializable, los objetos
+            <acronym>ACL</acronym>
+            pueden serializarse con la función
+            <ulink url="http://php.net/serialize">
                 <methodname>serialize()</methodname>
-            </ulink> de <acronym>PHP</acronym>, y los resultados pueden ser almacenados donde sea
-            que el desarrollador lo desee, en un archivo, base de datos, o mecanismo de cache</para>
+            </ulink>
+            de
+            <acronym>PHP</acronym>
+            , y los resultados pueden ser almacenados donde sea
+            que el desarrollador lo desee, en un
+            archivo, base de datos, o mecanismo de cache
+        </para>
 
     </sect2>
 
@@ -34,18 +56,32 @@
 
         <title> Escribiendo reglas condicionales ACL con aserciones </title>
 
-       <para>A veces, una regla para permitir o negar una función de acceso a un recurso no
-            debería ser absoluta sino que depende de varios criterios. Por ejemplo, supóngase que
-            debe permitirse cierto acceso, pero únicamente entre las 8:00am y 5:00pm. Otro ejemplo
-            sería negar el acceso debido a una petición que proviene de una dirección IP que se ha
-            marcado como una fuente de abusos. <classname>Zend_Acl</classname> tiene soporte para la
-            aplicación de normas basadas en cualquier condición que el desarrollador necesite.</para>
+        <para>
+            A veces, una regla para permitir o negar una función de acceso a un recurso no debería
+            ser absoluta sino que depende de varios criterios. Por ejemplo, supóngase que
+            debe
+            permitirse cierto
+            acceso, pero únicamente entre las 8:00am y 5:00pm. Otro ejemplo
+            sería
+            negar el acceso debido a una petición que proviene de una dirección IP que se ha
+            marcado
+            como una fuente de abusos.
+            <classname>Zend_Acl</classname>
+            tiene soporte para la
+            aplicación de normas basadas en cualquier condición que el
+            desarrollador necesite.
+        </para>
 
-       <para>
-            <classname>Zend_Acl</classname> provee soporte para reglas condicionales con
-                <classname>Zend_Acl_Assert_Interface</classname> . Con el fin de utilizar la regla
-            de aserción de la interfaz, un desarrollador escribe una clase que implemente el método
-                <methodname>assert()</methodname> de la interfaz:</para>
+        <para>
+            <classname>Zend_Acl</classname>
+            provee soporte para reglas condicionales con
+            <classname>Zend_Acl_Assert_Interface</classname>
+            . Con el fin de utilizar la regla
+            de aserción de la interfaz, un desarrollador escribe
+            una clase que implemente el método
+            <methodname>assert()</methodname>
+            de la interfaz:
+        </para>
 
         <programlisting language="php"><![CDATA[
 class CleanIPAssertion implements Zend_Acl_Assert_Interface
@@ -65,32 +101,48 @@ class CleanIPAssertion implements Zend_Acl_Assert_Interface
 }
 ]]></programlisting>
 
-       <para>Una vez la clase de aserción esta disponible, el desarrollador puede suministrar una
+        <para>
+            Una vez la clase de aserción esta disponible, el desarrollador puede suministrar una
             instancia de la clase de aserción cuando asigna reglas condicionales. Una regla que es
-            creada con una aserción sólo se aplica cuando el método de la aserción devuelve
-                <constant>TRUE</constant>.</para>
+            creada con una
+            aserción sólo se aplica cuando el método de la aserción devuelve
+            <constant>TRUE</constant>
+            .
+        </para>
 
         <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 $acl->allow(null, null, null, new CleanIPAssertion());
 ]]></programlisting>
 
-       <para>El código anterior crea una regla condicional que permite el acceso a todos los
+        <para>El código anterior crea una regla condicional que permite el acceso a todos los
             privilegios sobre todo, por todo el mundo, excepto cuando la IP de quien hace la
-            petición está en la "lista negra". Si una petición viene desde una IP que no está
+            petición está en la "lista
+            negra". Si una petición viene desde una IP que no está
             considerada "limpia", entonces la regla no se aplica. Dado que la regla se aplica a
-            todos los roles, todos los recursos, y todos los privilegios, una IP "no limpia" daría
+            todos los roles, todos los recursos, y todos los
+            privilegios, una IP "no limpia" daría
             lugar a una negación de acceso. Éste es un caso especial, sin embargo, y debería ser
-            entendido que en todos los otros casos (por ejemplo, cuando un rol específico, recurso,
-            o privilegio está especificado por la regla), una aserción fallida provoca que la regla
-            no se aplique, y otras reglas deberían ser usadas para determinar si el acceso está
+            entendido que en todos los otros casos (por ejemplo, cuando un rol
+            específico, recurso, o
+            privilegio está especificado por la regla), una aserción fallida provoca que la regla
+            no
+            se aplique, y otras reglas deberían ser usadas para determinar si el acceso
+            está
             permitido o denegado.</para>
 
-       <para>El método <methodname>assert()</methodname> de un objeto aserción es pasado a la
-                <acronym>ACL</acronym>, regla, recurso, y privilegio para el cual una consulta de
-            autorización (por ejemplo, <methodname>isAllowed()</methodname> ) se aplica, con el fin
-            de proporcionar un contexto para que la clase de aserción determine sus condiciones
-            cuando fuera necesario.</para>
+        <para>
+            El método
+            <methodname>assert()</methodname>
+            de un objeto aserción es pasado a la
+            <acronym>ACL</acronym>
+            , regla, recurso, y privilegio para el cual una consulta de
+            autorización (por ejemplo,
+            <methodname>isAllowed()</methodname>
+            ) se aplica, con el fin de proporcionar un contexto para que la clase de aserción
+            determine sus condiciones
+            cuando fuera necesario.
+        </para>
 
     </sect2>
 

@@ -223,6 +223,6 @@ class Zend_Barcode_Object_Itf14Test extends Zend_Barcode_Object_TestCommon
     {
         // Checksum activated => text needed
         $this->_object->setText('0000123456789');
-        $this->assertEquals(61, $this->_object->getHeight(true));
+        $this->assertEquals(62, $this->_object->getHeight(true));
     }
 }

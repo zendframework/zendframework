@@ -479,6 +479,6 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
 
     public function testGetDefaultHeight()
     {
-        $this->assertEquals(61, $this->_object->getHeight());
+        $this->assertEquals(62, $this->_object->getHeight());
     }
 }

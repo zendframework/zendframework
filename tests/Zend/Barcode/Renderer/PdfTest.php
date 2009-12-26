@@ -120,7 +120,7 @@ class Zend_Barcode_Renderer_PdfTest extends Zend_Barcode_Renderer_TestCommon
     {
         $renderer = $this->_getRendererWithWidth500AndHeight300();
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
-        $this->assertEquals(61, $barcode->getHeight());
+        $this->assertEquals(62, $barcode->getHeight());
         $renderer->setBarcode($barcode);
         $renderer->setVerticalPosition('middle');
         $renderer->draw();
@@ -131,10 +131,10 @@ class Zend_Barcode_Renderer_PdfTest extends Zend_Barcode_Renderer_TestCommon
     {
         $renderer = $this->_getRendererWithWidth500AndHeight300();
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
-        $this->assertEquals(61, $barcode->getHeight());
+        $this->assertEquals(62, $barcode->getHeight());
         $renderer->setBarcode($barcode);
         $renderer->setVerticalPosition('bottom');
         $renderer->draw();
-        $this->assertEquals(269.5, $renderer->getTopOffset());
+        $this->assertEquals(269, $renderer->getTopOffset());
     }
 }

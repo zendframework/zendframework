@@ -753,19 +753,19 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      * @param float $orientation
      */
     protected function _addText(
-        $text, 
-        $size, 
-        $position, 
-        $font, 
-        $color, 
-        $alignment = 'center', 
+        $text,
+        $size,
+        $position,
+        $font,
+        $color,
+        $alignment = 'center',
         $orientation = 0
     ) {
         if ($color === null) {
             $color = $this->_foreColor;
         }
         $this->_addInstruction(array(
-            'type'        => 'text', 
+            'type'        => 'text',
             'text'        => $text,
             'size'        => $size,
             'position'    => $position,
@@ -850,8 +850,8 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      */
     protected function _calculateWidth()
     {
-        return (int) $this->_withBorder 
-            + $this->_calculateBarcodeWidth() 
+        return (int) $this->_withBorder
+            + $this->_calculateBarcodeWidth()
             + (int) $this->_withBorder;
     }
 
@@ -867,8 +867,8 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      */
     protected function _calculateHeight()
     {
-        return (int) $this->_withBorder * 2 
-            + $this->_calculateBarcodeHeight() 
+        return (int) $this->_withBorder * 2
+            + $this->_calculateBarcodeHeight()
             + (int) $this->_withBorder * 2;
     }
 
@@ -882,7 +882,7 @@ abstract class Zend_Barcode_Object_ObjectAbstract
         $extraHeight = 0;
         if ($this->_drawText) {
             $textHeight += $this->_fontSize;
-            $extraHeight = 1;
+            $extraHeight = 2;
         }
         return ($this->_barHeight + $textHeight) * $this->_factor + $extraHeight;
     }
@@ -894,8 +894,8 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     public function getHeight($recalculate = false)
     {
         if ($this->_height === null || $recalculate) {
-            $this->_height = 
-                abs($this->_calculateHeight() * cos($this->_orientation / 180 * pi())) 
+            $this->_height =
+                abs($this->_calculateHeight() * cos($this->_orientation / 180 * pi()))
                 + abs($this->_calculateWidth() * sin($this->_orientation / 180 * pi()));
         }
         return $this->_height;
@@ -908,8 +908,8 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     public function getWidth($recalculate = false)
     {
         if ($this->_width === null || $recalculate) {
-            $this->_width = 
-                abs($this->_calculateWidth() * cos($this->_orientation / 180 * pi())) 
+            $this->_width =
+                abs($this->_calculateWidth() * cos($this->_orientation / 180 * pi()))
                 + abs($this->_calculateHeight() * sin($this->_orientation / 180 * pi()));
         }
         return $this->_width;
@@ -977,11 +977,11 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      */
     protected function _rotate($x1, $y1)
     {
-        $x2 = $x1 * cos($this->_orientation / 180 * pi()) 
-            - $y1 * sin($this->_orientation / 180 * pi()) 
+        $x2 = $x1 * cos($this->_orientation / 180 * pi())
+            - $y1 * sin($this->_orientation / 180 * pi())
             + $this->getOffsetLeft();
-        $y2 = $y1 * cos($this->_orientation / 180 * pi()) 
-            + $x1 * sin($this->_orientation / 180 * pi()) 
+        $y2 = $y1 * cos($this->_orientation / 180 * pi())
+            + $x1 * sin($this->_orientation / 180 * pi())
             + $this->getOffsetTop();
         return array(intval($x2) , intval($y2));
     }
@@ -1021,9 +1021,9 @@ abstract class Zend_Barcode_Object_ObjectAbstract
         $point4 = $this->_rotate($this->_calculateWidth() - 1, 0);
 
         $this->_addPolygon(array(
-            $point1, 
-            $point2, 
-            $point3, 
+            $point1,
+            $point2,
+            $point3,
             $point4
         ), $this->_backgroundColor);
 
@@ -1036,7 +1036,7 @@ abstract class Zend_Barcode_Object_ObjectAbstract
                 $point1 = $this->_rotate($xpos, $ypos + $bar[2] * $barLength);
                 $point2 = $this->_rotate($xpos, $ypos + $bar[3] * $barLength);
                 $point3 = $this->_rotate(
-                    $xpos + $width - 1, 
+                    $xpos + $width - 1,
                     $ypos + $bar[3] * $barLength
                 );
                 $point4 = $this->_rotate(
@@ -1098,8 +1098,8 @@ abstract class Zend_Barcode_Object_ObjectAbstract
                         $this->_fontSize * $this->_factor,
                         $this->_rotate(
                             $leftPosition,
-                            (int) $this->_withBorder * 2 
-                                + $this->_factor * ($this->_barHeight + $this->_fontSize)
+                            (int) $this->_withBorder * 2
+                                + $this->_factor * ($this->_barHeight + $this->_fontSize) + 1
                         ),
                         $this->_font,
                         $this->_foreColor,
@@ -1113,8 +1113,8 @@ abstract class Zend_Barcode_Object_ObjectAbstract
                     $this->_fontSize * $this->_factor,
                     $this->_rotate(
                         $this->_calculateWidth() / 2,
-                        (int) $this->_withBorder * 2 
-                            + $this->_factor * ($this->_barHeight + $this->_fontSize)
+                        (int) $this->_withBorder * 2
+                            + $this->_factor * ($this->_barHeight + $this->_fontSize) + 1
                     ),
                     $this->_font,
                     $this->_foreColor,
@@ -1135,7 +1135,7 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     /**
      * Each child must prepare the barcode and return
      * a table like array(
-     *     0 => array( 
+     *     0 => array(
      *         0 => int (visible(black) or not(white))
      *         1 => int (width of the bar)
      *         2 => float (0->1 position from the top of the beginning of the bar in %)

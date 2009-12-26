@@ -154,9 +154,9 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     public function testGoodUserHeight()
     {
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
-        $this->assertEquals(61, $barcode->getHeight());
+        $this->assertEquals(62, $barcode->getHeight());
         $this->_renderer->setBarcode($barcode);
-        $this->_renderer->setHeight(61);
+        $this->_renderer->setHeight(62);
         $this->assertTrue($this->_renderer->checkParams());
     }
 
@@ -166,9 +166,9 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
     public function testBadUserHeightLessThanBarcodeHeight()
     {
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
-        $this->assertEquals(61, $barcode->getHeight());
+        $this->assertEquals(62, $barcode->getHeight());
         $this->_renderer->setBarcode($barcode);
-        $this->_renderer->setHeight(60);
+        $this->_renderer->setHeight(61);
         $this->_renderer->checkParams();
     }
 
@@ -200,8 +200,8 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
                     'GD extension is required to run this test');
         }
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
-        $this->assertEquals(61, $barcode->getHeight());
-        $imageResource = imagecreatetruecolor(500, 61);
+        $this->assertEquals(62, $barcode->getHeight());
+        $imageResource = imagecreatetruecolor(500, 62);
         $this->_renderer->setResource($imageResource);
         $this->_renderer->setBarcode($barcode);
         $this->assertTrue($this->_renderer->checkParams());
@@ -217,9 +217,9 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
                     'GD extension is required to run this test');
         }
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
-        $this->assertEquals(61, $barcode->getHeight());
+        $this->assertEquals(62, $barcode->getHeight());
         $this->_renderer->setBarcode($barcode);
-        $imageResource = imagecreatetruecolor(500, 60);
+        $imageResource = imagecreatetruecolor(500, 61);
         $this->_renderer->setResource($imageResource);
         $this->_renderer->checkParams();
     }

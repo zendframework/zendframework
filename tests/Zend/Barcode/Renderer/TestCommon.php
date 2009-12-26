@@ -277,7 +277,7 @@ abstract class Zend_Barcode_Renderer_TestCommon extends PHPUnit_Framework_TestCa
         $renderer = $this->_getRendererWithWidth500AndHeight300();
         $renderer->setModuleSize(1);
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
-        $this->assertEquals(61, $barcode->getHeight());
+        $this->assertEquals(62, $barcode->getHeight());
         $renderer->setBarcode($barcode);
         $renderer->setVerticalPosition('top');
         $renderer->draw();
@@ -289,7 +289,7 @@ abstract class Zend_Barcode_Renderer_TestCommon extends PHPUnit_Framework_TestCa
         $renderer = $this->_getRendererWithWidth500AndHeight300();
         $renderer->setModuleSize(1);
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
-        $this->assertEquals(61, $barcode->getHeight());
+        $this->assertEquals(62, $barcode->getHeight());
         $renderer->setBarcode($barcode);
         $renderer->setVerticalPosition('middle');
         $renderer->draw();
@@ -301,10 +301,10 @@ abstract class Zend_Barcode_Renderer_TestCommon extends PHPUnit_Framework_TestCa
         $renderer = $this->_getRendererWithWidth500AndHeight300();
         $renderer->setModuleSize(1);
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
-        $this->assertEquals(61, $barcode->getHeight());
+        $this->assertEquals(62, $barcode->getHeight());
         $renderer->setBarcode($barcode);
         $renderer->setVerticalPosition('bottom');
         $renderer->draw();
-        $this->assertEquals(239, $renderer->getTopOffset());
+        $this->assertEquals(238, $renderer->getTopOffset());
     }
 }

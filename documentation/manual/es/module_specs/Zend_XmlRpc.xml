@@ -2,22 +2,22 @@
     <!-- EN-Revision: 19940 -->
     <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.introduction">
-    <title>IntroducciÛn</title>
+    <title>Introducci√≥n</title>
 
-	<para>
-        Desde su <ulink url="http://www.xmlrpc.com/">P·gina Web</ulink>,
+    <para>
+        Desde su <ulink url="http://www.xmlrpc.com/">P√°gina Web</ulink>,
         <acronym>XML-RPC</acronym> se describe como una  "...llamada ha procedimientos remotos usando
-        como protocolo de transmisiÛn el <acronym>HTTP</acronym>  y como codificaciÛn de datos 
-		el <acronym>XML</acronym>.
-        <acronym>XML-RPC</acronym> est· diseÒado para ser tan simple como sea posible, 
-		permitiendo al mismo tiempo estructuras complejas de datos que deben ser transmitidos, 
-		procesados y devueltos".
+        como protocolo de transmisi√≥n el <acronym>HTTP</acronym>  y como codificaci√≥n de datos
+        el <acronym>XML</acronym>.
+        <acronym>XML-RPC</acronym> est√° dise√±ado para ser tan simple como sea posible,
+        permitiendo al mismo tiempo estructuras complejas de datos que deben ser transmitidos,
+        procesados y devueltos".
     </para>
-	
-	<para>
-        Zend Framework ofrece soporte tanto para el consumo de servcios remotos 
-		<acronym>XML-RPC</acronym> como para la construcciÛn de nuevos servidores
-		<acronym>XML-RPC</acronym>.
+
+    <para>
+        Zend Framework ofrece soporte tanto para el consumo de servcios remotos
+        <acronym>XML-RPC</acronym> como para la construcci√≥n de nuevos servidores
+        <acronym>XML-RPC</acronym>.
     </para>
 </sect1>
 <!--

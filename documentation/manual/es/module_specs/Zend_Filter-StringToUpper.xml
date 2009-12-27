@@ -5,7 +5,7 @@
     <title>StringToUpper</title>
 
     <para>
-		Este filtro convierte cualquier entrada en Mayúculas
+        Este filtro convierte cualquier entrada en MayÃºculas
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -19,12 +19,12 @@ print $filter->filter('Sample');
         Like the <classname>StringToLower</classname> filter, this filter handles
         only characters from the actual locale of your server. Using different
         character sets works the same as with <classname>StringToLower</classname>.
-		
-		Al igual que <classname>StringToLower<className>, este filtro solo se encarga
-        de los caracteres localización en su servidor. Utilizando diferentes
+
+        Al igual que <classname>StringToLower<className>, este filtro solo se encarga
+        de los caracteres localizaciÃ³n en su servidor. Utilizando diferentes
         conjuntos de caracteres funciona igual que con <classname>StringToLower</classname>.
-	</para>
-	
+    </para>
+
 
     <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_StringToUpper(array('encoding' => 'UTF-8'));

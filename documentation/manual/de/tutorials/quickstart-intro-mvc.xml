@@ -2,30 +2,30 @@
 <!-- EN-Revision: 19766 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.intro">
-    <title>ZF &amp; MVC Introduction</title>
+    <title>ZF &amp; MVC Einführung</title>
 
     <sect2 id="learning.quickstart.intro.zf">
         <title>Zend Framework</title>
 
         <para>
-            Zend Framework is an open source, object oriented web application framework for PHP 5.
-            ZF is often called a 'component library', because it has many loosely coupled components
-            that you can use more or less independently. But Zend Framework also provides an
-            advanced Model-View-Controller (MVC) implementation that can be used to establish a
-            basic structure for your ZF applications. A full list of Zend Framework components along
-            with short descriptions may be found in the <ulink
-                url="http://framework.zend.com/about/components">components overview</ulink>. This
-            QuickStart will introduce you to some of ZF's most commonly used components, including
-            <classname>Zend_Controller</classname>, <classname>Zend_Layout</classname>,
-            <classname>Zend_Config</classname>, <classname>Zend_Db</classname>,
-            <classname>Zend_Db_Table</classname>, <classname>Zend_Registry</classname>, along
-            with a few view helpers.
+            Zend Framework ist ein Open Source, objektorientierter Web Anwendungs Framework für
+            PHP5. ZF wird oft eine "Komponentenbibliothek" genannt, weil er viele lose verbundene
+            Komponenten hat die man mehr oder weniger unabhängig verwenden kann. Aber Zend Framework
+            bietet auch eine fortgeschrittene Model-View-Controller (MVC) Implementation die
+            verwendet werden kann um eine Basisstruktur für eigene ZF Anwendungen zu sein. Eine
+            komplette Liste der Komponenten des Zend Frameworks mit einer kurzen Beschreibung kann
+            in der <ulink url="http://framework.zend.com/about/components">Komponenten
+                Übersicht</ulink> gefunden werden. Dieser Schnellstart zeigt einige der am meisten
+            verwendeten Komponenten vom ZF, inklusive <classname>Zend_Controller</classname>,
+            <classname>Zend_Layout</classname>, <classname>Zend_Config</classname>,
+            <classname>Zend_Db</classname>, <classname>Zend_Db_Table</classname>,
+            <classname>Zend_Registry</classname>, zusammen mit ein paar View Helfern.
         </para>
 
         <para>
-            Using these components, we will build a simple database-driven guest book application
-            within minutes. The complete source code for this application is available in the
-            following archives:
+            Durch Verwendung dieser Komponenten bauen wir eine einfache Datenbank-gesteuerte
+            Guest Book Anwendung in wenigen Minuten. Der komplette Quellcode für diese Anwendung ist
+            in den folgenden Archiven vorhanden:
         </para>
 
         <itemizedlist>
@@ -49,23 +49,24 @@
         <title>Model-View-Controller</title>
 
         <para>
-            So what exactly is this MVC pattern everyone keeps talking about, and why should you
-            care? MVC is much more than just a three-letter acronym (TLA) that you can whip out
-            anytime you want to sound smart; it has become something of a standard in the design of
-            modern web applications. And for good reason. Most web application code falls under one
-            of the following three categories: presentation, business logic, and data access. The
-            MVC pattern models this separation of concerns well. The end result is that your
-            presentation code can be consolidated in one part of your application with your business
-            logic in another and your data access code in yet another. Many developers have found
-            this well-defined separation indispensable for keeping their code organized, especially
-            when more than one developer is working on the same application.
+            Was also ist dieses MVC Pattern über das alle Welt redet, und warum sollte es verwendet
+            werden? MVC ist viel mehr als nur ein drei-wortiges Acronym (TLA) das man erwähnen kann
+            wann immer man smart erscheinen will; es ist so etwas wie ein Standard bei der
+            Erstellung von modernen Web Anwendungen. Und das aus gutem Grund. Der Code der meisten
+            Web Anwendungen fällt in einer der folgenden drei Kategorien: Präsentation, Business
+            Logik, und Datenzugriff. Das MVC Pattern modelliert diese Trennung bereits sehr gut. Das
+            Endergebnis ist, das der Präsentationscode in einem Teil der Anwendung konsolidiert
+            werden kann, die Business Logik in einem anderen Teil und der Code für den Datenzugriff
+            wieder in einem anderen. Viele Entwickler finden diese gut definierte Trennung
+            unentbehrlich um deren Code organisiert zu halten, speziell wenn mehr als ein Entwickler
+            an der gleichen Anwendung arbeitet.
         </para>
 
         <note>
-            <title>More Information</title>
+            <title>Mehr Informationen</title>
 
             <para>
-                Let's break down the pattern and take a look at the individual pieces:
+                Brechen wir das Pattern auf und schauen wir uns die individuellen Teile an:
             </para>
 
             <para>
@@ -76,39 +77,41 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Model</emphasis> - This is the part of your
-                        application that defines its basic functionality behind a set of
-                        abstractions. Data access routines and some business logic can be defined in
-                        the model.
+                        <emphasis role="strong">Modell</emphasis> - Dieser Teil der eigenen
+                        Anwendung definiert die grundsätzliche Funktionalität in einem Set von
+                        Abstraktionen. Datenzugriffs Routinen und etwas Business Logik kann im
+                        Model definiert sein.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">View</emphasis> - Views define exactly what is
-                        presented to the user. Usually controllers pass data to each view to render
-                        in some format. Views will often collect data from the user, as well. This
-                        is where you're likely to find HTML markup in your MVC applications.
+                        <emphasis role="strong">View</emphasis> - Views definieren was exakt dem
+                        Benutzer präsentiert wird. Normalerweise übergeben Controller Daten in jede
+                        View damit Sie in einem Format dargestellt werden. Views sammeln auch oft
+                        Daten vom Benutzer. Dort findet man üblicherweise HTML Markup in der eigenen
+                        Anwendung.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">Controller</emphasis> - Controllers bind the whole
-                        pattern together. They manipulate models, decide which view to display based
-                        on the user's request and other factors, pass along the data that each view
-                        will need, or hand off control to another controller entirely. Most MVC
-                        experts recommend <ulink
-                            url="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">keeping
-                        controllers as skinny as possible</ulink>.
+                        <emphasis role="strong">Controller</emphasis> - Controller verbinden das
+                        komplette Pattern. Sie manipulieren Modelle, entscheiden welche View,
+                        basieren auf der Benutzeranfrage und anderen Faktoren, angezeigt werden soll
+                        übergeben die Daten welche jede View benötigt, oder übergeben die Kontrolle
+                        komplett an andere Controller. Die meisten MVC Experten empfehlen <ulink
+                            url="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">Controller
+                            so schlank wie möglich zu halten</ulink>.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                Of course there is <ulink url="http://ootips.org/mvc-pattern.html">more to be
-                    said</ulink> about this critical pattern, but this should give you enough
-                background to understand the guestbook application we'll be building.
+                Natürlich gibt es über dieses kritische Pattern <ulink
+                    url="http://ootips.org/mvc-pattern.html">mehr zu sagen</ulink>, aber das gesagte
+                sollte genug Hintergrund vermitteln um die Guestbook Anwendung zu verstehen die wir
+                bauen wollen.
             </para>
         </note>
     </sect2>

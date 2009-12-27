@@ -2,26 +2,26 @@
 <!-- EN-Revision: 19766 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.autoloading.resources">
-    <title>Resource Autoloading</title>
+    <title>Automatisches Laden von Ressourcen</title>
 
     <para>
-        Often, when developing an application, it's either difficult to package classes in the 1:1
-        classname:filename standard Zend Framework recommends, or it's advantageous for purposes of
-        packaging not to do so. However, this means you class files will not be found by the
-        autoloader.
+        Oft ist es kompliziert, wenn eine Anwendung entwickelt wird, Klassen in den 1:1
+        Klassenname:Dateiname Standard zu packen welchen der Zend Framework empfiehlt, oder es
+        hat Vorteile für Zwecke des Packens das nicht zu tun. Das bedeutet aber das die eigenen
+        Klassendateien nicht vom Autoloader gefunden werden.
     </para>
 
     <para>
-        If you read through <link linkend="learning.autoloading.design">the design goals</link> for
-        the autoloader, the last point in that section indicated that the solution should cover this
-        situation. Zend Framework does so with
+        Wenn man <link linkend="learning.autoloading.design">die Design Ziele</link> für den
+        Autoloader durchliest, zeigt der letzte Punkt in diesem Kapitel das die Lösung diese
+        Situation abdecken könnte. Zend Framework macht das mit der
         <classname>Zend_Loader_Autoloader_Resource</classname>.
     </para>
 
     <para>
-        A resource is just a name that corresponds to a component namespace (which
-        is appended to the autoloader's namespace) and a path (which is relative to
-        the autoloader's base path). In action, you'd do something like this:
+        Eine Ressource ist nur ein Name der mit dem Namespace einer Komponente korrespondiert
+        (welche dem Namespace des Autoloaders angehängt wird) und einem Pfad (der relativ zum
+        Basispfad des Autoloaders ist). In Aktion könnte man etwas wie folgt machen:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -32,12 +32,13 @@ $loader = new Zend_Application_Module_Autoloader(array(
 ]]></programlisting>
 
     <para>
-        Once you have the loader in place, you then need to inform it of the various resource types
-        it's aware of. These resource types are simply pairs of subtree and prefix.
+        Sobald der Loader platziert ist, muss man Ihn über die verschiedenen Ressource Typen
+        informieren die er beachten soll. Dieser Ressource Typen sind einfach Paare von
+        Unterverzeichnis und Präfix.
     </para>
 
     <para>
-        As an example, consider the following tree:
+        Nehmen wir als Beispiel den folgenden Baum:
     </para>
 
     <programlisting language="text"><![CDATA[
@@ -52,7 +53,7 @@ path/to/some/resources/
 ]]></programlisting>
 
     <para>
-        Our first step is creating the resource loader:
+        Unser erster Schritt ist die Erstellung des Ressource Loaders:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -63,15 +64,15 @@ $loader = new Zend_Loader_Autoloader_Resource(array(
 ]]></programlisting>
 
     <para>
-        Next, we need to define some resource types.
-        <methodname>Zend_Loader_Autoloader_Resourse::addResourceType()</methodname> has three
-        arguments: the "type" of resource (an arbitrary string), the path under the base path in
-        which the resource type may be found, and the component prefix to use for the resource type.
-        In the above tree, we have three resource types: form (in the subdirectory "forms", with a
-        component prefix of "Form"), model (in the subdirectory "models", with a component prefix of
-        "Model"), and dbtable (in the subdirectory "<filename>models/DbTable</filename>",
-        with a component prefix of "<classname>Model_DbTable</classname>"). We'd define them as
-        follows:
+        Als nächstes müssen wir einige Ressource Typen definieren.
+        <methodname>Zend_Loader_Autoloader_Resourse::addResourceType()</methodname> hat drei
+        Argumente: den Typ ("type") der Ressource (ein eigener String), den Pfad unter dem Basispfad
+        in dem der Ressource Typ gefunden werden kann, und der Präfix der Komponente welcher für den
+        Ressource Typ zu verwenden ist. Im obigen Baum haben wir drei Ressource Typen: form
+        (im Unterverzeichnis "forms", mit dem Komponenten Präfix "Form"), model (im Unterverzeichnis
+        "models", mit dem Komponenten Präfix "Model"), und dbtable (im Unterverzeichnis
+        "<filename>models/DbTable</filename>", mit dem Komponenten Präfix
+        "<classname>Model_DbTable</classname>"). Wir definieren Sie wie folgt:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -81,7 +82,7 @@ $loader->addResourceType('form', 'forms', 'Form')
 ]]></programlisting>
 
     <para>
-        Once defined, we can simply use these classes:
+        Sobald Sie definiert sind, können diese Klassen einfach verwendet werden:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -90,20 +91,20 @@ $guestbook = new Foo_Model_Guestbook();
 ]]></programlisting>
 
     <note>
-        <title>Module Resource Autoloading</title>
+        <title>Modul Ressource Autoloading</title>
 
         <para>
-            Zend Framework's <acronym>MVC</acronym> layer encourages the use of "modules", which
-            are self-contained applications within your site. Modules typically have a number of
-            resource types by default, and Zend Framework even
-            <link linkend="project-structure.filesystem">recommends a standard directory layout
-                for modules</link>. Resource autoloaders are therefore
-            quite useful in this paradigm -- so useful that they are enabled by default when you
-            create a bootstrap class for your module that extends
-            <classname>Zend_Application_Module_Bootstrap</classname>. For more information, read
-            the <link
+            Zend Framework's <acronym>MVC</acronym> Layer empfiehlt die Verwendung von "Modulen",
+            welche eigenständigt Anwendungen in der eigenen Site sind. Typischerweise haben Module
+            standardmäßig eine Anzahl von Ressource Typen, und Zend Framework
+            <link linkend="project-structure.filesystem">empfiehlt sogar ein Standard Verzeichnis
+                Layout für Module</link>. Ressource Autoloader sind deshalb recht nützlich in diesem
+            Paradigma -- so nützlich das Sie standardmäßig aktiviert sind wenn man eine Bootstrap
+            Klasse für eigene Module erstellt welche
+            <classname>Zend_Application_Module_Bootstrap</classname> erweitert. Für weitere
+            Informationen kann in der <link
                 linkend="zend.loader.autoloader-resource.module">Zend_Loader_Autoloader_Module
-                documentation</link>.
+                Dokumentation</link> nachgelesen werden.
         </para>
     </note>
 </sect1>

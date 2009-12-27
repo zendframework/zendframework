@@ -2,17 +2,18 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-form">
-    <title>Create A Form</title>
+    <title>Erstellen eines Formulars</title>
 
     <para>
-        For our guestbook to be useful, we need a form for submitting new entries.
+        Damit unser Guestbook nützlich ist, benötigen wir ein Formular für die Übermittlung neuer
+        Einträge.
     </para>
 
     <para>
-        Our first order of business is to create the actual form class. First, create the directory
-        <filename>application/forms/</filename>. This directory will contain form classes for the
-        application. Next, we'll create a form class in
-        <filename>application/forms/Guestbook.php</filename>:
+        Unsere erste Arbeit ist die Erstellung der aktuellen Formularklasse. Zuerst muss das
+        Verzeichnis <filename>application/forms/</filename> erstellt werden. Dieses Verzeichnis
+        enthält Formularklassen für die Anwendung. Als nächstes Erstellen wir eine Formularklasse
+        in <filename>application/forms/Guestbook.php</filename>:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -22,12 +23,12 @@ class Default_Form_Guestbook extends Zend_Form
 {
     public function init()
     {
-        // Set the method for the display form to POST
+        // Setzt die Methode for das Anzeigen des Formulars mit POST
         $this->setMethod('post');
 
-        // Add an email element
+        // Ein Email Element hinzufügen
         $this->addElement('text', 'email', array(
-            'label'      => 'Your email address:',
+            'label'      => 'Deine Email Adresse:',
             'required'   => true,
             'filters'    => array('StringTrim'),
             'validators' => array(
@@ -35,18 +36,19 @@ class Default_Form_Guestbook extends Zend_Form
             )
         ));
 
-        // Add the comment element
+        // Das Kommentar Element hinzufügen
         $this->addElement('textarea', 'comment', array(
-            'label'      => 'Please Comment:',
+            'label'      => 'Bitte ein Kommentar:',
             'required'   => true,
             'validators' => array(
                 array('validator' => 'StringLength', 'options' => array(0, 20))
                 )
         ));
 
-        // Add a captcha
+        // Ein Captcha hinzufügen
         $this->addElement('captcha', 'captcha', array(
-            'label'      => 'Please enter the 5 letters displayed below:',
+            'label'      => "Bitte die 5 Buchstaben eingeben die unterhalb "
+                          . "angezeigt werden:",
             'required'   => true,
             'captcha'    => array(
                 'captcha' => 'Figlet',
@@ -55,13 +57,13 @@ class Default_Form_Guestbook extends Zend_Form
             )
         ));
 
-        // Add the submit button
+        // Den Submit Button hinzufügen
         $this->addElement('submit', 'submit', array(
             'ignore'   => true,
-            'label'    => 'Sign Guestbook',
+            'label'    => 'Im Guestbook eintragen',
         ));
 
-        // And finally add some CSRF protection
+        // Und letztendlich etwas CSRF Protektion hinzufügen
         $this->addElement('hash', 'csrf', array(
             'ignore' => true,
         ));
@@ -70,18 +72,20 @@ class Default_Form_Guestbook extends Zend_Form
 ]]></programlisting>
 
     <para>
-        The above form defines five elements: an email address field, a comment field, a CAPTCHA for
-        preventing spam submissions, a submit button, and a CSRF protection token.
+        Das obige Formular definiert fünf Elemente: ein Feld für die Email Adresse, eines für das
+        Kommentar, ein CAPTCHA um Spam Einträge zu verhindern, einen Submit Button und ein CSRF
+        Protektions Token.
     </para>
 
     <para>
-        Next, we will add a <methodname>signAction()</methodname> to our
-        <classname>GuestbookController</classname> which will process the form upon submission. To
-        create the action and related view script, execute the following:
+        Als nächstes fügen wir eine <methodname>signAction()</methodname> zu unserem
+        <classname>GuestbookController</classname> welche das Formular nach der Übertragung
+        bearbeitet. Um die Action und das betreffende View Skript zu erstellen muss das folgende
+        ausgeführt werden:
     </para>
 
     <programlisting language="shell"><![CDATA[
-# Unix-like systems:
+# Unix-artige Systeme:
 % zf.sh create action sign guestbook
 
 # DOS/Windows:
@@ -89,15 +93,16 @@ C:> zf.bat create action sign guestbook
 ]]></programlisting>
 
     <para>
-        This will create a <methodname>signAction()</methodname> method in our controller, as well
-        as the appropriate view script.
+        Das erstellt eine <methodname>signAction()</methodname> Methode in unserem Controller, sowie
+        das betreffende View Skript.
     </para>
 
     <para>
-        Let's add some logic into our guestbook controller's sign action. We need to first check if
-        we're getting a POST or a GET request; in the latter case, we'll simply display the form.
-        However, if we get a POST request, we'll want to validate the posted data against our form,
-        and, if valid, create a new entry and save it. The logic might look like this:
+        Fügen wir etwas Logik in unsere Sign Aktion des Guestbook Controller's ein. Wir müssen
+        zuerst prüfen ob wir eine POST oder eine GET Anfrage erhalten; im letzteren Fall zeigen wir
+        das Formular einfach an. Wenn wir aber eine POST Anfrage erhalten, wollten wir die
+        übermittelten Daten gegenüber unserem Formular prüfen, und wenn es gültig ist, wird ein
+        neuer Eintrag erstellt und gespeichert. Die Logik könnte wie folgt aussehen:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -105,7 +110,7 @@ C:> zf.bat create action sign guestbook
 
 class GuestbookController extends Zend_Controller_Action
 {
-    // snipping indexAction()...
+    // wir übergehen indexAction()...
 
     public function signAction()
     {
@@ -126,13 +131,15 @@ class GuestbookController extends Zend_Controller_Action
 ]]></programlisting>
 
     <para>
-        Of course, we also need to edit the view script; edit <filename>application/views/scripts/guestbook/sign.phtml</filename> to read:
+        Natürlich müssen wir das View Skript bearbeiten; es muss
+        <filename>application/views/scripts/guestbook/sign.phtml</filename> bearbeitet werden damit
+        es wie folgt aussieht:
     </para>
 
     <programlisting language="php"><![CDATA[
 <!-- application/views/scripts/guestbook/sign.phtml -->
 
-Please use the form below to sign our guestbook!
+Bitte verwende das folgende Formular um sich in unser Guestbook einzutragen!
 
 <?php
 $this->form->setAction($this->url());
@@ -140,19 +147,19 @@ echo $this->form;
 ]]></programlisting>
 
     <note>
-        <title>Better Looking Forms</title>
+        <title>Besser aussehende Formulare</title>
 
         <para>
-            No one will be waxing poetic about the beauty of this form anytime soon. No matter -
-            form appearance is fully customizable! See the <link
-                linkend="zend.form.decorators">decorators section in the reference guide</link>
-            for details.
+            Keiner wird sich irgendwann poetisch über die Schönheit dieses Formulars auslassen.
+            Kein Problem - das Aussehen des Formulars kann komplett angepasst werden! Siehe auch im
+            <link linkend="zend.form.decorators">Kapitel über Decorations vom Referenz
+                Handbuch</link> nach Details.
         </para>
 
         <para>
-            Additionally, you may be interested in <ulink
-                url="http://weierophinney.net/matthew/plugin/tag/decorators">this series of posts on
-                decorators</ulink>.
+            Zusätzlich könnte man an <ulink
+                url="http://weierophinney.net/matthew/plugin/tag/decorators">dieser Serie von
+                Einträgen über Decorators interessiert sein</ulink>.
         </para>
     </note>
 
@@ -160,8 +167,8 @@ echo $this->form;
         <title>Checkpoint</title>
 
         <para>
-            Now browse to "http://localhost/guestbook/sign". You should see the following in your
-            browser:
+            Jetzt gehen wir auf "http://localhost/guestbook/sign". Man sollte das folgende im
+            eigenen Browser sehen:
         </para>
 
         <para>

@@ -67,19 +67,7 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
      */
     public function validateText($value)
     {
-        $validator = new Zend_Validate_Barcode(array(
-            'adapter'  => 'code25',
-            'checksum' => false,
-        ));
-        if (!$validator->isValid($value)) {
-            $message = implode("\n", $validator->getMessages());
-
-            /**
-             * @see Zend_Barcode_Object_Exception
-             */
-            require_once 'Zend/Barcode/Object/Exception.php';
-            throw new Zend_Barcode_Object_Exception($message);
-        }
+        $this->_validateText($value);
     }
 
     /**
@@ -90,7 +78,7 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
     {
         $quietZone       = $this->getQuietZone();
         $startCharacter  = (2 * $this->_barThickWidth + 4 * $this->_barThinWidth) * $this->_factor;
-        $characterLength = (3 * $this->_barThinWidth + 2 * $this->_barThickWidth + 5 * $this->_barThinWidth) 
+        $characterLength = (3 * $this->_barThinWidth + 2 * $this->_barThickWidth + 5 * $this->_barThinWidth)
                          * $this->_factor;
         $encodedData     = strlen($this->getText()) * $characterLength;
         $stopCharacter   = (2 * $this->_barThickWidth + 4 * $this->_barThinWidth) * $this->_factor;
@@ -144,8 +132,8 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Get barcode checksum
-     * 
-     * @param  string $text 
+     *
+     * @param  string $text
      * @return int
      */
     public function getChecksum($text)
@@ -170,7 +158,7 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Retrieve text with checksum appended
-     * 
+     *
      * @return string
      */
     protected function _getTextWithChecksum()

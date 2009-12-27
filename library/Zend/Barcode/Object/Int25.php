@@ -43,6 +43,11 @@ class Zend_Barcode_Object_Int25 extends Zend_Barcode_Object_Code25
     private $_withBearerBars = false;
 
     /**
+     * @var $_barcodeLength integer | string
+     */
+    protected $_barcodeLength = 'even';
+
+    /**
      * Activate/deactivate drawing of bearer bars
      * @param boolean $value
      * @return Zend_Barcode_Object_Int25
@@ -70,8 +75,7 @@ class Zend_Barcode_Object_Int25 extends Zend_Barcode_Object_Code25
      */
     public function validateText($value)
     {
-        $value = (strlen($value) % 2 ? '0' . $value : $value);
-        parent::validateText($value);
+        $this->_validateText($value, array('automaticPrepend' => 0, 'validator' => 'code25'));
     }
 
     /**
@@ -146,15 +150,15 @@ class Zend_Barcode_Object_Int25 extends Zend_Barcode_Object_Code25
             // Interleave
             for ($ibar = 0; $ibar < 5; $ibar ++) {
                 // Draws char1 bar (fore color)
-                $barWidth = (substr($this->_codingMap[$char1], $ibar, 1)) 
-                          ? $this->_barThickWidth 
+                $barWidth = (substr($this->_codingMap[$char1], $ibar, 1))
+                          ? $this->_barThickWidth
                           : $this->_barThinWidth;
 
                 $barcodeTable[] = array(1, $barWidth, 0, 1);
 
                 // Left space corresponding to char2 (background color)
-                $barWidth = (substr($this->_codingMap[$char2], $ibar, 1)) 
-                          ? $this->_barThickWidth 
+                $barWidth = (substr($this->_codingMap[$char2], $ibar, 1))
+                          ? $this->_barThickWidth
                           : $this->_barThinWidth;
                 $barcodeTable[] = array(0, $barWidth, 0 , 1);
             }

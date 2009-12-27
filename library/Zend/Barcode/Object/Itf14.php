@@ -36,6 +36,12 @@ require_once 'Zend/Validate/Barcode.php';
  */
 class Zend_Barcode_Object_Itf14 extends Zend_Barcode_Object_Int25
 {
+
+    /**
+     * @var $_barcodeLength integer | string
+     */
+    protected $_barcodeLength = 14;
+
     /**
      * Constructor
      * @param array|Zend_Config $options
@@ -108,25 +114,6 @@ class Zend_Barcode_Object_Itf14 extends Zend_Barcode_Object_Int25
      */
     public function validateText($value)
     {
-        $validator = new Zend_Validate_Barcode(array(
-            'adapter'  => 'itf14',
-            'checksum' => false,
-        ));
-
-        // prepend '0'
-        if (strlen($value) < 13) {
-            $value = str_repeat('0', 13 - strlen($value)) . $value;
-        }
-
-        // add a '0' because checksum is mandatory
-        if (!$validator->isValid($value . '0')) {
-            $message = implode("\n", $validator->getMessages());
-
-            /**
-             * @see Zend_Barcode_Object_Exception
-             */
-            require_once 'Zend/Barcode/Object/Exception.php';
-            throw new Zend_Barcode_Object_Exception($message);
-        }
+        $this->_validateText($value, array('automaticPrepend' => 0, 'substituteChecksumCharacter' => 0));
     }
 }

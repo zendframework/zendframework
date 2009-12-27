@@ -98,19 +98,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
      */
     public function validateText($value)
     {
-        $validator = new Zend_Validate_Barcode(array(
-            'adapter'  => 'code39',
-            'checksum' => false,
-        ));
-
-        if (!$validator->isValid($value)) {
-            $message = implode("\n", $validator->getMessages());
-            /**
-             * @see Zend_Barcode_Object_Exception
-             */
-            require_once 'Zend/Barcode/Object/Exception.php';
-            throw new Zend_Barcode_Object_Exception($message);
-        }
+        $this->_validateText($value);
     }
 
     /**
@@ -176,8 +164,8 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Get barcode checksum
-     * 
-     * @param  string $text 
+     *
+     * @param  string $text
      * @return int
      */
     public function getChecksum($text)
@@ -194,7 +182,7 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
 
     /**
      * Get text with appended checksum
-     * 
+     *
      * @return string
      */
     protected function _getTextWithChecksum()

@@ -168,6 +168,11 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     protected $_withChecksumInText = false;
 
     /**
+     * @var $_barcodeLength integer | string
+     */
+    protected $_barcodeLength = null;
+
+    /**
      * TTF font name: can be set before instanciation of the object
      * @var string
      */
@@ -1131,6 +1136,41 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      * @return void
      */
     abstract public function validateText($value);
+
+    protected function _validateText($value, $options = array())
+    {
+        $validatorName = (isset($options['validator'])) ? $options['validator'] : $this->getType();
+
+        $validator = new Zend_Validate_Barcode(array(
+            'adapter'  => $validatorName,
+            'checksum' => false,
+        ));
+
+        $checksumCharacter = (isset($options['substituteChecksumCharacter'])) ? $options['substituteChecksumCharacter'] : '';
+
+        if (isset($options['automaticPrepend'])) {
+            if (is_int($this->_barcodeLength)) {
+                if (strlen($value) < ($this->_barcodeLength)) {
+                    $length = $this->_barcodeLength - strlen($checksumCharacter);
+                    $value = str_repeat($options['automaticPrepend'], $length - strlen($value)) . $value;
+                }
+            } else {
+                if ($this->_barcodeLength == 'even') {
+                    $value = (strlen($value) % 2 ? $options['automaticPrepend'] . $value : $value);
+                }
+            }
+        }
+
+        if (!$validator->isValid($value . $checksumCharacter)) {
+            $message = implode("\n", $validator->getMessages());
+
+            /**
+             * @see Zend_Barcode_Object_Exception
+             */
+            require_once 'Zend/Barcode/Object/Exception.php';
+            throw new Zend_Barcode_Object_Exception($message);
+        }
+    }
 
     /**
      * Each child must prepare the barcode and return

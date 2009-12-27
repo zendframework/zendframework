@@ -89,7 +89,7 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
 
     /**
      * Check renderer parameters
-     * 
+     *
      * @return void
      */
     protected function _checkParams()
@@ -176,12 +176,12 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
      * @param float $orientation
      */
     protected function _drawText(
-        $text, 
-        $size, 
-        $position, 
-        $font, 
-        $color, 
-        $alignment = 'center', 
+        $text,
+        $size,
+        $position,
+        $font,
+        $color,
+        $alignment = 'center',
         $orientation = 0
     ) {
         $page  = $this->_resource->pages[$this->_page];
@@ -193,7 +193,7 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
 
         $page->setLineColor($color);
         $page->setFillColor($color);
-        $page->setFont(Zend_Pdf_Font::fontWithPath($font), $size * $this->_moduleSize);
+        $page->setFont(Zend_Pdf_Font::fontWithPath($font), $size * $this->_moduleSize * 1.2);
 
         $width = $this->widthForStringUsingFontSize(
             $text,
@@ -201,22 +201,22 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
             $size * $this->_moduleSize
         );
 
+        $angle = pi() * $orientation / 180;
         $left = $position[0] * $this->_moduleSize + $this->_leftOffset;
         $top  = $page->getHeight() - $position[1] * $this->_moduleSize - $this->_topOffset;
 
         switch ($alignment) {
             case 'center':
-                $left -= ($width / 2) * cos(pi() * $orientation / 180);
-                $top  -= ($width / 2) * sin(pi() * $orientation / 180);
+                $left -= ($width / 2) * cos($angle);
+                $top  -= ($width / 2) * sin($angle);
                 break;
             case 'right':
                 $left -= $width;
                 break;
         }
-
-        $page->rotate($left, $top, pi() * $orientation / 180);
+        $page->rotate($left, $top, $angle);
         $page->drawText($text, $left, $top);
-        $page->rotate($left, $top, - pi() * $orientation / 180);
+        $page->rotate($left, $top, - $angle);
     }
 
     /**

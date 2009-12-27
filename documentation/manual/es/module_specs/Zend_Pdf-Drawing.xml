@@ -343,7 +343,7 @@ $pdfPage->setFont($font, 36);
             <itemizedlist>
                 <listitem>
                     <para>
-					<constant>Zend_Pdf_Font::FONT_COURIER</constant></para>
+                    <constant>Zend_Pdf_Font::FONT_COURIER</constant></para>
                 </listitem>
                 <listitem>
                     <para><constant>Zend_Pdf_Font::FONT_COURIER_BOLD</constant></para>

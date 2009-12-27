@@ -447,7 +447,7 @@ $acl->addRole(new Zend_Acl_Role('administrador'));
             sus padres.
         </para>
 
-		        <note>
+                <note>
             <para>In general, <classname>Zend_Acl</classname> obeys a given rule if and only if a more
                 specific rule does not apply.
             </para>

@@ -47,7 +47,7 @@
             <methodname>setReadOnly()</methodname> puede ser usado para evitar
         cualquier modificación posterior a un objeto
             <classname>Zend_Config</classname> que fue creado con permiso de
-        modificaciones. 
+        modificaciones.
     </para>
         <note>
             <para> Es importante no confundir tales modificaciones en memoria
@@ -60,7 +60,7 @@
                 modificar datos de configuración de distintos medios de
                 almacenamiento. </para>
         </note>
-    
+
     <para> Las clases del adaptador heredan de la clase
             <classname>Zend_Config</classname> debido a que utilizan su
         funcionalidad. </para>
@@ -87,7 +87,7 @@
             <varname>$config</varname> usando
             <methodname>$config-&gt;merge($localConfig);</methodname> . Los
         ítemes en <varname>$localConfig</varname> sobrescribirán cualquier item
-        con el mismo nombre en <varname>$config</varname> . 
+        con el mismo nombre en <varname>$config</varname> .
     </para>
         <note>
             <para> El objeto <classname>Zend_Config</classname> que está
@@ -98,5 +98,5 @@
                 usado para evitar cualquier modificación posterior después de
                 que el merge se haya completado. </para>
         </note>
-   
+
 </sect1>

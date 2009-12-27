@@ -36,7 +36,7 @@
                 <emphasis>.</emphasis> " ). Puede ser reemplazado, no
             obstante,cambiando la clave de <varname>$options</varname> llamada
                 <property>nestSeparator</property> al construir el objeto
-                <classname>Zend_Config_Ini</classname> . Por ejemplo: 
+                <classname>Zend_Config_Ini</classname> . Por ejemplo:
         </para>
             <programlisting language="php"><![CDATA[
 $options['nestSeparator'] = ':';
@@ -44,7 +44,7 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
                               'pruebas',
                               $options);
 ]]></programlisting>
-        
+
     </note>
     <example id="zend.config.adapters.ini.example.using">
         <title>Utilizando Zend_Config_Ini</title>

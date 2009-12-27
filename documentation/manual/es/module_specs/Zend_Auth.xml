@@ -148,7 +148,6 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             </listitem>
         </itemizedlist>
 
-
         <para>El desarrollador podría desear ramificar basado en el tipo de
             resultado de la autenticación a fin de realizar operaciones mas
             específicas. Algunas operaciones que los desarrolladores podrían
@@ -297,8 +296,8 @@ $result = $auth->authenticate($authAdapter);
                     persistente de identidad diferente a
                         <classname>Zend_Auth_Storage_Session</classname> , el
                     desarrollador implementa
-                        <classname>Zend_Auth_Storage_Interface</classname> : 
-                </para> 
+                        <classname>Zend_Auth_Storage_Interface</classname> :
+                </para>
                    <programlisting language="php"><![CDATA[
 class MyStorage implements Zend_Auth_Storage_Interface
 {
@@ -363,7 +362,6 @@ class MyStorage implements Zend_Auth_Storage_Interface
     }
 }
 ]]></programlisting>
-                
 
                 <para> A fin de poder usar esta clase de almacenamiento
                     personalizada,
@@ -409,7 +407,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 
         <para> El siguiente ejemplo ilustra como usar el adaptador
                 <classname>:Zend_Auth</classname> : indirectamente, a través del
-            uso de la clase <classname>Zend_Auth</classname> : 
+            uso de la clase <classname>Zend_Auth</classname> :
         </para>
             <programlisting language="php"><![CDATA[
 // Recibe una referencia a la instancia singleton de Zend_Auth
@@ -433,7 +431,6 @@ if (!$result->isValid()) {
     // $result->getIdentity() === $username
 }
 ]]></programlisting>
-       
 
         <para>Una vez que la autenticación ha sido intentada en una petición,
             como en el ejemplo anterior, es fácil verificar si existe una
@@ -449,12 +446,11 @@ if ($auth->hasIdentity()) {
         <para> Para remover una identidad del almacenamiento persistente,
             simplemente usa el metodo <methodname>clearIdentity()</methodname>
             method. Comunmente esto sería usado para implementar una operación
-            "cerrar sesión" en la aplicación: 
-        </para>    
+            "cerrar sesión" en la aplicación:
+        </para>
             <programlisting language="php"><![CDATA[
 Zend_Auth::getInstance()->clearIdentity();
 ]]></programlisting>
-        
 
         <para> Cuando el uso automático de almacenamiento persistente es
             inapropiado para un caso en particular, el desarrollador podría

@@ -3,7 +3,7 @@
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.application">
     <title>Zend_Application</title>
-    
+
     <para>
         <classname>Zend_Application</classname>
         proporciona la funcionalidad
@@ -12,7 +12,7 @@
         <acronym>PHP</acronym>
         (incluyendo autocarga), y ejecutar su aplicación bootstrap.
     </para>
-    
+
     <table id="zend.application.core-functionality.application.api.options">
         <title>Zend_Application options</title>
         <tgroup cols="2">
@@ -39,7 +39,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <emphasis>
@@ -54,7 +54,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <emphasis>
@@ -69,7 +69,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <emphasis>
@@ -87,15 +87,15 @@
             </tbody>
         </tgroup>
     </table>
-    
+
     <note>
         <title>Option names</title>
-        
+
         <para>
             Please note that option names are case insensitive.
         </para>
     </note>
-    
+
     <para>
         Típicamente, pasará toda la configuración al constructor
         <classname>Zend_Application</classname>
@@ -104,7 +104,7 @@
         referencia
         se ilustran ambos casos de uso.
     </para>
-    
+
     <table id="zend.application.core-functionality.application.api.table">
         <title>Métodos de Zend_Application</title>
         <tgroup cols="4">
@@ -138,7 +138,7 @@
                                     por sus requisitos organizacionales.
                                 </para>
                             </listitem>
-                            
+
                             <listitem>
                                 <para>
                                     <varname>$options</varname>
@@ -162,7 +162,7 @@
                                             se traerá.
                                         </para>
                                     </listitem>
-                                    
+
                                     <listitem>
                                         <para>
                                             <emphasis>
@@ -172,7 +172,7 @@
                                             de datos de configuración para su aplicación.
                                         </para>
                                     </listitem>
-                                    
+
                                     <listitem>
                                         <para>
                                             <emphasis>
@@ -199,7 +199,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>getEnvironment()</methodname>
@@ -215,7 +215,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>getAutoloader()</methodname>
@@ -232,7 +232,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>setOptions(array $options)</methodname>
@@ -267,7 +267,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>getOptions()</methodname>
@@ -287,7 +287,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>hasOption($key)</methodname>
@@ -313,7 +313,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>getOption($key)</methodname>
@@ -340,7 +340,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>setPhpSettings(array $settings, $prefix = '')</methodname>
@@ -362,7 +362,7 @@
                                     .
                                 </para>
                             </listitem>
-                            
+
                             <listitem>
                                 <para>
                                     <varname>$prefix</varname>
@@ -396,7 +396,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>setAutoloaderNamespaces(array $namespaces)</methodname>
@@ -428,7 +428,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>setBootstrap($path, $class = null)</methodname>
@@ -452,7 +452,7 @@
                                     o un array asociativo con las claves 'class' y 'path'.
                                 </para>
                             </listitem>
-                            
+
                             <listitem>
                                 <para>
                                     <varname>$class</varname>
@@ -471,7 +471,7 @@
                         </itemizedlist>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>getBootstrap()</methodname>
@@ -479,7 +479,7 @@
                     <entry>
                         <constant>NULL</constant> |
                         <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
-                        
+
                     </entry>
                     <entry>N/A</entry>
                     <entry>
@@ -488,7 +488,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>bootstrap()</methodname>
@@ -505,7 +505,7 @@
                         </para>
                     </entry>
                 </row>
-                
+
                 <row>
                     <entry>
                         <methodname>run()</methodname>

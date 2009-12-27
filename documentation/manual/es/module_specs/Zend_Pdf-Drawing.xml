@@ -525,7 +525,7 @@ $font = Zend_Pdf_Font::fontWithPath(
     </sect2>
 
     <sect2 id="zend.pdf.drawing.standard-fonts-limitations">
-        <title>Limitaciones de las fuentes PDF estándar.</title>
+        <title>Limitaciones de las fuentes PDF estándar</title>
         <para>
             Las fuentes estándar
             <acronym>PDF</acronym>

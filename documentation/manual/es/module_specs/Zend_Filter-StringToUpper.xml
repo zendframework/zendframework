@@ -20,11 +20,10 @@ print $filter->filter('Sample');
         only characters from the actual locale of your server. Using different
         character sets works the same as with <classname>StringToLower</classname>.
 
-        Al igual que <classname>StringToLower<className>, este filtro solo se encarga
+    Al igual que <classname>StringToLower</classname>, este filtro solo se encarga
         de los caracteres localización en su servidor. Utilizando diferentes
         conjuntos de caracteres funciona igual que con <classname>StringToLower</classname>.
     </para>
-
 
     <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_StringToUpper(array('encoding' => 'UTF-8'));

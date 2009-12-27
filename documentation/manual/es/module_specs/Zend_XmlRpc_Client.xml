@@ -212,7 +212,7 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                             <entry>Zend_Crypt_Math_BigInteger</entry>
                             <entry>i8</entry>
                         </row>
-                      
+
                             <row>
                                 <entry>double</entry>
                                 <entry>double</entry>

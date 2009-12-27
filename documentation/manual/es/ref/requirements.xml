@@ -3,65 +3,33 @@
     <!-- Reviewed: no -->
 <appendix id="requirements" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Requisitos de Zend Framework</title>
-    <para>
-        Zend Framework requiere un intérprete
-        <acronym>PHP</acronym>
-        5 con un servidor web
-        configurado para manejar scripts
-        <acronym>PHP</acronym>
-        correctamente.
-        Algunas características requieren extensiones adicionales o
-        características de
-        servidor web; en muchos casos el framework puede ser
-        utilizado sin ellos, aunque el
-        rendimiento puede sufrir o las
-        características auxiliares pueden no ser completamente
-        funcionales.
-        Un ejemplo de dicha dependencia es mod_rewrite en un entorno Apache,
-        que puede
-        ser utilizado para ejecutar "pretty
-        <acronym>URL</acronym>
-        " como
-        "
-        <filename>http://www.example.com/user/edit</filename>
-        ".
-        Si mod_rewrite no está habilitado, Zend Framework puede ser configurado para apoyar
-        las
-        <acronym>URL</acronym>
-        como "
-        <command>http://www.example.com?controller=user&amp;action=edit</command>
-        ".
-        La pretty
-        <acronym>URL</acronym>
-        , puede ser utilizada para acortar las
-        <acronym>URL</acronym>
-        de
-        representación textual o para la optimisation de los motores de
-        búsqueda(
-        <acronym>SEO</acronym>
-        ), pero no afectan directamente a la funcionalidad de la
-        aplicación.
-    </para>
+    <para> Zend Framework requiere un intérprete <acronym>PHP</acronym> 5 con un
+        servidor web configurado para manejar scripts <acronym>PHP</acronym>
+        correctamente. Algunas características requieren extensiones adicionales
+        o características de servidor web; en muchos casos el framework puede
+        ser utilizado sin ellos, aunque el rendimiento puede sufrir o las
+        características auxiliares pueden no ser completamente funcionales. Un
+        ejemplo de dicha dependencia es mod_rewrite en un entorno Apache, que
+        puede ser utilizado para ejecutar "pretty <acronym>URL</acronym> " como
+        " <filename>http://www.example.com/user/edit</filename> ". Si
+        mod_rewrite no está habilitado, Zend Framework puede ser configurado
+        para apoyar las <acronym>URL</acronym> como "
+            <command>http://www.example.com?controller=user&amp;action=edit</command>
+        ". La pretty <acronym>URL</acronym> , puede ser utilizada para acortar
+        las <acronym>URL</acronym> de representación textual o para la
+        optimisation de los motores de búsqueda( <acronym>SEO</acronym> ), pero
+        no afectan directamente a la funcionalidad de la aplicación. </para>
 
     <sect1 id="requirements.version">
 
         <title>Versión de PHP</title>
 
-        <para>
-            Zend recomienda
-            <acronym>PHP</acronym>
-            5.2.3 o superior por mejoras en la seguridad
-            críticas y en el rendimiento, aunque Zend
-            Framework requiere sólo
-            <acronym>PHP</acronym>
-            5.1.4 o posterior.
-        </para>
+        <para> Zend recomienda <acronym>PHP</acronym> 5.2.3 o superior por
+            mejoras en la seguridad críticas y en el rendimiento, aunque Zend
+            Framework requiere sólo <acronym>PHP</acronym> 5.1.4 o posterior. </para>
 
-        <para>
-            Zend Framework tiene una extensa colección de unidades de prueba,
-            que puede ejecutar
-            utilizando PHPUnit 3.0 o posterior.
-        </para>
+        <para> Zend Framework tiene una extensa colección de unidades de prueba,
+            que puede ejecutar utilizando PHPUnit 3.0 o posterior. </para>
 
     </sect1>
 
@@ -69,37 +37,22 @@
 
         <title>Extensiones de PHP</title>
 
-        <para>
-            Usted encontrará un cuadro con todas las extensiones que suelen
-            encontrarse en
-            <acronym>PHP</acronym>
-            y debajo cómo se usan en Zend Framework.
-            Usted debe verificar que las extensiones de
-            componentes Zend Framework que
-            estará usando en su aplicación están disponibles en sus
-            entornos
-            <acronym>PHP</acronym>
-            .
-            Muchas aplicaciones no exigirán de cada extensión que figuran a
-            continuación.
-        </para>
+        <para> Usted encontrará un cuadro con todas las extensiones que suelen
+            encontrarse en <acronym>PHP</acronym> y debajo cómo se usan en Zend
+            Framework. Usted debe verificar que las extensiones de componentes
+            Zend Framework que estará usando en su aplicación están disponibles
+            en sus entornos <acronym>PHP</acronym> . Muchas aplicaciones no
+            exigirán de cada extensión que figuran a continuación. </para>
 
-        <para>
-            Una dependencia de tipo "hard" indica que los componentes o clases
-            no pueden funcionar
-            correctamente si las respectivas extensiones no
-            están disponibles, mientras que una
-            dependencia de tipo "soft"
-            indica que el componente puede usar la extensión si está
-            disponible
-            pero funcionará correctamente si no lo está.
-            Muchos de los componentes
-            utilizarán automáticamente determinadas
-            extensiones si están disponibles para optimizar
-            el rendimiento pero
-            ejecutarán el código con una funcionalidad similar en el propio
-            componente si las extensiones no están disponibles.
-        </para>
+        <para> Una dependencia de tipo "hard" indica que los componentes o
+            clases no pueden funcionar correctamente si las respectivas
+            extensiones no están disponibles, mientras que una dependencia de
+            tipo "soft" indica que el componente puede usar la extensión si está
+            disponible pero funcionará correctamente si no lo está. Muchos de
+            los componentes utilizarán automáticamente determinadas extensiones
+            si están disponibles para optimizar el rendimiento pero ejecutarán
+            el código con una funcionalidad similar en el propio componente si
+            las extensiones no están disponibles. </para>
 
         <xi:include href="requirements-php-extensions-table.xml"/>
 
@@ -109,33 +62,21 @@
 
         <title>Componentes de Zend Framework</title>
 
-        <para>
-            Más abajo hay un cuadro que enumera todos los Componentes de
-            Zend Framework y que
-            extensión de PHP necesitan. Esto puede ayudar
-            a guiarlo para saber que extensiones son
-            necesarias para su
+        <para> Más abajo hay un cuadro que enumera todos los Componentes de Zend
+            Framework y que extensión de PHP necesitan. Esto puede ayudar a
+            guiarlo para saber que extensiones son necesarias para su
             aplicación. No todas las extensiones utilizados por Zend Framework
-            son
-            necesarias en cada aplicación.
-        </para>
+            son necesarias en cada aplicación. </para>
 
-        <para>
-            Una dependencia de tipo "hard" indica que los componentes o clases
-            no pueden funcionar
-            correctamente si las extensiones respectivas
-            no están disponibles, mientras que una
-            dependencia de tipo "soft"
-            indica que el componente puede usar la extensión si está
-            disponible,
-            pero funcionará correctamente si no lo está.
-            Muchos de los componentes
-            utilizarán automáticamente determinadas
-            extensiones si están disponibles para optimizar
-            el rendimiento,
-            pero ejecutará un código con una funcionalidad similar en el propio
-            componente si las extensiones no están disponibles.
-        </para>
+        <para> Una dependencia de tipo "hard" indica que los componentes o
+            clases no pueden funcionar correctamente si las extensiones
+            respectivas no están disponibles, mientras que una dependencia de
+            tipo "soft" indica que el componente puede usar la extensión si está
+            disponible, pero funcionará correctamente si no lo está. Muchos de
+            los componentes utilizarán automáticamente determinadas extensiones
+            si están disponibles para optimizar el rendimiento, pero ejecutará
+            un código con una funcionalidad similar en el propio componente si
+            las extensiones no están disponibles. </para>
 
         <xi:include href="requirements-zendcomponents-table.xml"/>
 
@@ -146,34 +87,22 @@
 
         <title>Dependencias de Zend Framework</title>
 
-        <para>
-            A continuación encontrará un cuadro de Componennetes de
-            Zend Framework y sus
-            dependencias a otros Componentes de Zend
-            Framework. Esto puede ser de ayuda si usted
-            necesita tener sólo
-            componentes individuales en lugar del Zend Framework completo.
-        </para>
+        <para> A continuación encontrará un cuadro de Componennetes de Zend
+            Framework y sus dependencias a otros Componentes de Zend Framework.
+            Esto puede ser de ayuda si usted necesita tener sólo componentes
+            individuales en lugar del Zend Framework completo. </para>
 
-        <para>
-            Una dependencia de tipo "hard" indica que los componentes o clases
-            no funcionarán
-            correctamente si los respectivos componentes
-            dependientes no están disponibles, mientras
-            que una dependencia de
+        <para> Una dependencia de tipo "hard" indica que los componentes o
+            clases no funcionarán correctamente si los respectivos componentes
+            dependientes no están disponibles, mientras que una dependencia de
             tipo "soft" indica que el componente puede necesitar el componente
-            dependiente en situaciones especiales o con adaptadores especiales.
-        </para>
+            dependiente en situaciones especiales o con adaptadores especiales. </para>
 
         <note>
-            <para>
-                Incluso si es posible separar componentes indiduales para usarlo
-                desde Zend
-                Framework completo, usted debe tener en cuenta que esto
-                puede conducir a problemas
-                cuando se perdieron los ficheros o los
-                componentes se utilizan dinámicamente.
-            </para>
+            <para> Incluso si es posible separar componentes indiduales para
+                usarlo desde Zend Framework completo, usted debe tener en cuenta
+                que esto puede conducir a problemas cuando se perdieron los
+                ficheros o los componentes se utilizan dinámicamente. </para>
         </note>
 
         <xi:include href="requirements-dependencies-table.xml"/>
@@ -181,13 +110,3 @@
     </sect1>
 
 </appendix>
-    <!--
-        vim:se ts=4 sw=4 et: Note: All added classes listed below... all 3 tables use this as
-        reference. Acl Auth Cache Config Console_GetOpt Controller Currency Date Db Debug Exception
-        Feed Filter Form Gdata Http InfoCard Json Layout Ldap Loader Locale Log Mail Measure Memory
-        Mime OpenId Pdf Registry Request Rest Search_Lucene Server_Reflection Service_Akismet
-        Service_Amazon Service_Audioscrobbler Service_Delicious Service_Flickr Service_Nirvanix
-        Service_Simpy Service_SlideShare Service_StrikeIron Service_Technorati Service_Yahoo Session
-        TimeSync Translate Uri Validate Version View XmlRpc
-    -->
-

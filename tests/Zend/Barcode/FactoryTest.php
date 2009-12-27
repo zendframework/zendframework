@@ -220,6 +220,14 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
                         'barcodeNamespace' => 'My_Namespace_Other'));
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
+    public function testBarcodeObjectFactoryWithUnexistantBarcode()
+    {
+        $barcode = Zend_Barcode::makeBarcode('zf123', array());
+    }
+
     public function testBarcodeRendererFactoryWithExistingBarcodeRenderer()
     {
         $renderer = new Zend_Barcode_Renderer_Image();
@@ -297,6 +305,14 @@ class Zend_Barcode_FactoryTest extends PHPUnit_Framework_TestCase
         $renderer = Zend_Barcode::makeRenderer('image',
                 array(
                         'rendererNamespace' => 'My_Namespace_Other'));
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_Error
+     */
+    public function testBarcodeRendererFactoryWithUnexistantRenderer()
+    {
+        $renderer = Zend_Barcode::makeRenderer('zend', array());
     }
 
     public function testProxyBarcodeRendererDrawAsImage()

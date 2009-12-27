@@ -67,13 +67,24 @@ abstract class Zend_Barcode_Object_TestCommon extends PHPUnit_Framework_TestCase
         $this->_object = null;
     }
 
-    public function testStaticFont()
+    public function testStaticFontAsString()
     {
         Zend_Barcode_Object_ObjectAbstract::setBarcodeFont('my_static_font.ttf');
         $this->assertEquals('', $this->_object->getFont());
         $object = $this->_getBarcodeObject();
         $this->assertEquals('my_static_font.ttf', $object->getFont());
         Zend_Barcode_Object_ObjectAbstract::setBarcodeFont('');
+    }
+
+    public function testStaticFontAsNumber()
+    {
+        for ($i = 1; $i < 5; $i++) {
+            Zend_Barcode_Object_ObjectAbstract::setBarcodeFont($i);
+            $this->assertEquals('', $this->_object->getFont());
+            $object = $this->_getBarcodeObject();
+            $this->assertEquals($i, $object->getFont());
+            Zend_Barcode_Object_ObjectAbstract::setBarcodeFont('');
+        }
     }
 
     public function testConstructorWithArray()

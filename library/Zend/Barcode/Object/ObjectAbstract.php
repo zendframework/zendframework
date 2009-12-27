@@ -613,7 +613,7 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      */
     public static function setBarcodeFont($font)
     {
-        if (is_string($font)) {
+        if (is_string($font) || (is_int($font) && $font >= 1 && $font <= 5)) {
             self::$_staticFont = $font;
         }
     }

@@ -151,9 +151,7 @@ if ($validator->isValid($email)) {
             <methodname>isValid()</methodname>
             . Cada clase de validación, puede dar apoyo a otros
             tokens en base a cada caso. Por ejemplo,
-            <emphasis>
-                %max%
-            </methodname>
+            <emphasis>%max%</emphasis>
                 es un token
                 apoyado por
                 <classname>Zend_Validate_LessThan</classname>

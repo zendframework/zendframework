@@ -231,6 +231,7 @@ if ($validator->isValid($email)) {
 }
 ]]></programlisting>
 
+</sect3>
         <sect3 id="zend.validate.set.email_address.checkacceptance">
 
             <title>Verificar si el nombre de host realmente acepta email</title>
@@ -444,7 +445,7 @@ $validator->setMessages(
         </sect3>
 </sect2>
 
-</sect2>
+
     <!--
 vim:se ts=4 sw=4 et:
 -->

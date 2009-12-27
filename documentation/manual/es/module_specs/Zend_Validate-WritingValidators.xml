@@ -247,7 +247,7 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
             en plantillas de mensajes como parámetros mágicos, al igual que con
             <property>
                 value
-            </methodname>
+            </property>
                 .
         </para>
 

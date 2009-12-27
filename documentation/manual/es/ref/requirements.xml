@@ -80,8 +80,7 @@
 
         <xi:include href="requirements-zendcomponents-table.xml"/>
 
-
-    </sect1>
+		</sect1>
 
     <sect1 id="requirements.dependencies">
 

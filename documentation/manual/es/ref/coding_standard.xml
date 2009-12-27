@@ -269,8 +269,7 @@ filterInput()
 getElementById()
 
 widgetFactory()
-]]>
-            </programlisting>
+]]></programlisting>
 
             <para> Para la programación orientada a objetos, los métodos de
                 acceso para las instancias o variables estáticas deben ir
@@ -411,12 +410,12 @@ $greeting = "Hello $name, welcome back!";
 $greeting = "Hello {$name}, welcome back!";
 ]]></programlisting>
 
-                <para> Por consistencia, esta forma no está permitida: 
-                </para>  
+                <para> Por consistencia, esta forma no está permitida:
+                </para>
                     <programlisting language="php"><![CDATA[
 $greeting = "Hello ${name}, welcome back!";
 ]]></programlisting>
-              
+
             </sect3>
 
             <sect3

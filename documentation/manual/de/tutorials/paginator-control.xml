@@ -2,61 +2,63 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.paginator.control">
-    <title>Pagination Control and ScrollingStyles</title>
+    <title>Seitenkontrolle und ScrollingStyles</title>
 
     <para>
-        Rendering the items for a page on the screen has been a good start. In the code
-        snippets in previous section we have also seen the <methodname>setCurrentPageNumber()</methodname>
-        method to set the active page number. The next step is to navigate through your pages.
-        To do this, Paginator provides you with two important tools: the ability to render the Paginator
-        with help of a View Partial, and support for so-called ScrollingStyles.
+        Die Darstellung von Elementen für eine Bildschirmseite ist ein guter Start. In den Code
+        Abschnitten der vorhergehenden Sektion haben wir die
+        <methodname>setCurrentPageNumber()</methodname> Methode gesehen um die aktive Seitenzahl zu
+        setzen. Der nächste Schritt ist die Navigation durch die Seiten. Um das zu tun bietet
+        Paginator zwei wichtige Tools: die Möglichkeit den Paginator mit Hilfe eines View Partials
+        darzustellen und Unterstützung von sogenannten ScrollingStyles.
     </para>
 
     <para>
-        The View Partial is a small view script that renders the Pagination controls, such as buttons to go
-        to the next or previous page. Which pagination controls are rendered depends on the contents of
-        the view partial. Working with the view partial requires that you have set up Zend_View.
-        To get started with the pagination control, create a new view script somewhere in
-        your view scripts path. You can name it anything you want, but we'll call it "controls.phtml" in this text.
-        The reference manual contains various examples of what might go in the view script. Here is one example.
+        Der View Partial ist ein kleines View Skript welches die Seitenkontrollen darstellt, wie
+        Buttons um zur nächsten oder vorigen Seite zu gehen. Welche Seitenkontrollen dargestellt
+        werden hängt vom Inhalt des View Partials ab. Die Arbeit mit View Partials benötigt deren
+        Einrichtung in Zend_View. Um mit den Seitenkontrollen anzufangen muss irgendwo in eigenen
+        View Skript Pfad ein neues View Skript erstellt werden. Man kann es benennen wie man will,
+        aber wir nennen es in diesem Text "controls.phtml". Das Referenz Handbuch enthält
+        verschiedene Beispiele darüber was im View Skript möglich ist. Hier ist ein Beispiel:
     </para>
 
     <programlisting language="php"><![CDATA[
 <?php if ($this->pageCount): ?>
-<!-- First page link -->
+<!-- Link zur ersten Seite -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->first)); ?>">
-    First
+    Erste
   </a> |
 <?php else: ?>
-  <span class="disabled">First</span> |
+  <span class="disabled">Erste</span> |
 <?php endif; ?>
 
-<!-- Previous page link -->
+<!-- Link zur vorherigen Seite -->
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
-    &lt; Previous
+    &lt; Vorherige
   </a> |
 <?php else: ?>
-  <span class="disabled">&lt; Previous</span> |
+  <span class="disabled">&lt; Vorherige</span> |
 <?php endif; ?>
 
-<!-- Next page link -->
+<!-- Link zur nächsten Seite -->
 <?php if (isset($this->next)): ?>
   <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
-    Next &gt;
+    Nächste &gt;
   </a> |
 <?php else: ?>
-  <span class="disabled">Next &gt;</span> |
+  <span class="disabled">Nächste &gt;</span> |
 <?php endif; ?>
 
-<!-- Last page link -->
+<!-- Link zur letzten Seite -->
 <?php if (isset($this->next)): ?>
   <a href="<?php echo $this->url(array('page' => $this->last)); ?>">
-    Last
+    Letzte
   </a>
 <?php else: ?>
-  <span class="disabled">Last</span>
+  <span class="disabled">Letzte</span>
 <?php endif; ?>
 
 </div>
@@ -64,8 +66,9 @@
 ]]></programlisting>
 
     <para>
-        The next step is to tell Zend_Paginator which view partial can be used to render
-        the navigation controls. Put the following line in your application's bootstrap file.
+        Der nächste Schritt ist es Zend_Paginator zu sagen welche View Partials verwendet werden
+        können um die Navigationskontrollen darzustellen. Die folgende Zeile ist in die Bootstrap
+        Datei der Anwendung zu geben.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -73,12 +76,13 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
 ]]></programlisting>
 
     <para>
-        The last step is probably the easiest. Make sure you have assigned your Paginator object
-        to the a script (NOT the 'controls.phtml' script!). The only thing left to do is echo the Paginator in the view script.
-        This will automatically render the Paginator using the PaginationControl view helper.
-        In this next example, the Paginator object has been assigned to the 'paginator' view variable.
-        Don't worry if you don't fully get how it all works yet. The next section will feature
-        a complete example.
+        Der letzte Schritt ist möglicherweise der einfachste. Man muss sicherstellen dass das
+        Paginator Objekt dem Skript zugeordnet ist (NICHT dem 'controls.phtml' Skript!). Das einige
+        was noch zu tun ist, ist es den Paginator im View Skript auszugeben. Das stellt automatisch
+        den Paginator dar und verwendet den PaginationControl View Helfer. Im nächsten Beispiel
+        wird das Paginator Objekt der 'paginator' View Variable zugeordnet. Keine Angst, man muss
+        jetzt nicht vollständig verstehen wie alles funktioniert. Das nächste Kapitel zeigt ein
+        komplettes Beispiel.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -86,22 +90,24 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
 ]]></programlisting>
 
     <para>
-        <classname>Zend_Paginator</classname>, together with the 'controls.phtml' view script you wrote,
-        makes sure your Paginator navigation is rendered properly. In order to decide
-        which page numbers need to be displayed on screen, Paginator uses so-called ScrollingStyles.
-        The default style is called "Sliding", which is similar to the way Yahoo's search result
-        navigation works. To mimick Google's ScrollingStyle, use the Elastic style.
-        You can set a default ScrollingStyle with the static <methodname>setDefaultScrollingStyle()</methodname> method,
-        or you can specify a ScrollingStyle dynamically when rendering the Paginator in your view script. This
-        requires manual invocation of the view helper in your view script.
+        <classname>Zend_Paginator</classname>, stellt zusammen mit dem View Skript 'controls.phtml'
+        das geschrieben wurde, sicher das die Seitenkontrollen richtig dargestellt werden. Um
+        auszuwählen welche Seitenzahlen am Schirm angezeigt werden müssen, verwendet Paginator
+        sogenannte ScrollingStyles. Der Standardstil wird "Sliding" genannt, was so ähnlich ist
+        wie die Navigation für Yahoo's Suchergebnisse arbeitet. Um Googl's ScrollingStyle zu mimen,
+        muss der Elastic Style verwendet werden. Man kann einen standardmäßigen ScrollingStyle
+        mit der statischen <methodname>setDefaultScrollingStyle()</methodname> Methode setzen, oder
+        man kann einen ScrollingStyle dynamisch spezifizieren wenn der Paginator im View Skript
+        dargestellt wird. Das benötigt den manuellen Aufruf des View Helfers im View Skript.
     </para>
 
     <programlisting language="php"><![CDATA[
-// $this->paginator is a Paginator object
+// $this->paginator ist ein Paginator Objekt
 <?php echo $this->paginationControl($this->paginator, 'Elastic', 'controls.phtml'); ?>
 ]]></programlisting>
 
     <para>
-        For a list of all available ScrollingStyles, see the reference manual.
+        Für eine Liste aller vorhandenen ScrollingStyles, kann in das Referenz Handbuch gesehen
+        werden.
     </para>
 </sect1>

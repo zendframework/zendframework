@@ -2,24 +2,27 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.paginator.together">
-    <title>Putting it all Together</title>
+    <title>Alles zusammenfügen</title>
 
     <para>
-        You have seen how to create a Paginator object, how to render the items on the current page, and
-        how to render a navigation element to browse through your pages. In this section you will
-        see how Paginator fits in with the rest of your MVC application.
+        Wir haben gesehen wie ein Paginator Objekt erstellt wurd, wie die Elemente der aktuellen
+        Seite dargestellt werden und wie ein Navigationselement dargestellt wird um durch die
+        Seiten zu navigieren. In diesem Kapitel sehen wir wie Paginator in den Rest der MVC
+        Anwendung passt.
     </para>
 
     <para>
-        In the following examples we will ignore the best practice implementation of using a Service Layer to keep
-        the example simple and easier to understand. Once you get familiar with using Service Layers, it should be easy to see
-        how Paginator can fit in with the best practice approach.
+        Im folgenden Beispiel ignorieren wir die Implementation der besten Praxis bei der ein
+        Service Layer verwendet wird um das Beispiel einfach und leichter verständlich zu machen.
+        Sobald wir mit der Verwendung von Service Layern vertraut sind, sollte es einfach sein zu
+        sehen wie Paginator in diesen Ansatz der besten Praxis passt.
     </para>
 
     <para>
-        Lets start with the controller. The sample application is simple, and we'll just put everything
-        in the IndexController and the IndexAction. Again, this is for demonstration purposes only. A real application
-        should not use controllers in this manner.
+        Beginnen wir mit dem Controller. Die Beispielanwendung ist einfach und wir geben alles
+        einfach in den IndexController und die IndexAction. Wie gesagt ist das nur zu Zwecken
+        der Demonstration. Eine echte Anwendung sollte Controller nicht in dieser Art und Weise
+        verwenden.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -27,37 +30,41 @@ class IndexController extends Zend_Controller_Action
 {
     public function indexAction()
     {
-        // Setup pagination control view script. See the pagation control tutorial page
-        // for more information about this view script.
+        // Das Seitenkontroll View Skript einrichten. Siehe das Handbuch zu
+        // Seitenkontrollen für weitere Informationen über dieses View Skript
         Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
 
-        // Fetch an already instantiated database connection from the registry
+        // Holt eine bereits instanzierte Datenbank Verbindung von der Registry
         $db = Zend_Registry::get('db');
 
-        // Create a select object which fetches blog posts, sorted decending by date of creation
+        // Erstellt ein Select Objekt welches Blog Posts holt, und absteigend
+        // anhand des Erstellungsdatums sortiert
         $select = $db->select()->from('posts')->sort('date_created DESC');
 
-        // Create a Paginator for the blog posts query
+        // Erstellt einen Paginator für die Abfrage der Blog Posts
         $paginator = Zend_Paginator::factory($select);
 
-        // Read the current page number from the request. Default to 1 if no explicit page number is provided.
+        // Die aktuelle Seitenzahl von der Anfrage lesen. Der Standardwert ist
+        // 1 wenn keine explizite Seitenzahl angegeben wurde
         $paginator->setCurrentPageNumber($this->_getParam('page', 1));
 
-        // Assign the Paginator object to the view
+        // Weist das Paginator Objekt der View zu
         $this->view->paginator = $paginator;
     }
 }
 ]]></programlisting>
 
     <para>
-        The following view script is the index.phtml view script for the IndexController's indexAction.
-        The view script can be kept simple. We're assuming the use of the default ScrollingStyle.
+        Das folgende View Skript ist das index.phtml View Skript für die indexAction des
+        IndexController's. Das View Skript kann einfach gehalten werden. Wir nehmen an das der
+        standardmäßige ScrollingStyle verwendet wird.
     </para>
 
     <programlisting language="php"><![CDATA[
 <ul>
 <?php
-// Render each the title of each post for the current page in a list-item
+// Den Titel jedes Eintrags für die aktuelle Seite
+// in einem Listen-Element darstellen
 foreach ($this->paginator as $item) {
     echo '<li>' . $item->title . '</li>';
 }
@@ -67,9 +74,8 @@ foreach ($this->paginator as $item) {
 ]]></programlisting>
 
     <para>
-        Now navigate to your project's index and see Paginator in action. What we have discussed in this
-        tutorial is just the tip of the iceberg. The reference manual and API documentation can tell
-        you more about what you can do with Zend_Paginator.
+        Jetzt zum Index des Projekts navigieren und Paginator in Aktion sehen. Was wir in diesem
+        Tutorial diskutiert haben ist nur die Spitze des Eisbergs. Das Referenz Handbuch und die API
+        Dokumentation können mehr darüber sagen das mit Zend_Paginator alles getan werden kann.
     </para>
-
 </sect1>

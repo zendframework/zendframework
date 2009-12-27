@@ -5,34 +5,34 @@
     <title>Einführung</title>
 
     <para>
-        Let's say you're creating a blogging application that will be home to your vast
-        collection of blog posts. There is a good chance that you do not want all of
-        your blog posts to appear on one single page when someone visits your blog.
-        An obvious solution would be to only display a small number of blog posts
-        on the screen at a time, and allow the user to browse through the different pages,
-        much like your favorite search engine shows you the result of your search query.
-        <classname>Zend_Paginator</classname> is designed to help you achieve the goal of dividing collections
-        of data in smaller, more manageable sets more easily, with more consistency,
-        and with less duplicate code.
+        Angenommen wir wollen eine Blogging Anwendung erstellen die das Heim unserer gewaltigen
+        Sammlung an blog Posts ist. Es gibt eine gute Chance das wir nicht wollen das alle unsere
+        Blog Posts auf einer Seite erscheinen wenn jemand unseren Blog besucht. Eine offensichtliche
+        Lösung besteht darin nur eine kleine Anzahl an Blog Posts auf dem Bildschirm zur gleichen
+        Zeit anzuzeigen, und dem Benutzer zu erlauben durch die unterschiedlichen Seiten zu
+        gehen, ähnlich wie die geliebte Suchmaschine das Ergebnis eigener Suchanfragen zeigt.
+        <classname>Zend_Paginator</classname> ist dazu gebaut dabei zu helfen dieses Ziel, der
+        Trennung von Datensammlungen in kleinere, besser managebare Sets, einfacher, konsistenter
+        und mit weniger Code Duplizierung zu erreichen.
     </para>
 
     <para>
-        <classname>Zend_Paginator</classname> uses Adapters to support various data sources and ScrollingStyles
-        to support various methods of showing the user which pages are available.
-        In later sections of this text we will have a closer look at what these things
-        are and how they can help you to make the most out of <classname>Zend_Paginator</classname>.
+        <classname>Zend_Paginator</classname> verwendet Adapter um verschiedene Datenquellen zu
+        unterstützen und Scrollingstile um verschiedene Methoden zu unterstützen die dem Benutzer
+        anzeigen welche Seiten vorhanden sind. In späteren Sektionen dieses Textes haben wir eine
+        genauere Sicht darauf was diese Dinge sind, und wie Sie helfen das meiste aus
+        <classname>Zend_Paginator</classname> herauszuholen.
     </para>
 
     <para>
-        Before going in-depth, we will have a look at some simple examples first.
-        After these simple examples, we will see how <classname>Zend_Paginator</classname> supports the most
-        common use-case; paginating database results.
+        Bevor wir in die Tiefe gehen schauen wir uns zuerst einige einfache Beispiele an. Nach
+        diesen einfachen Beispielen sehen wir wie <classname>Zend_Paginator</classname> die
+        üblichsten Fälle unterstützt; seitenweise Ausgabe von Datenbank Ergebnissen.
     </para>
 
     <para>
-        This introduction has given you a quick overview of <classname>Zend_Paginator</classname>. To get
-        started and to have a look at some code snippets, let's have a look at some
-        simple examples.
+        Diese Einführung hat einen schnellen Überblick über <classname>Zend_Paginator</classname>
+        gegeben. Um anzufangen und einen Blick auf einige Code Abschnitte zu haben, sehen wir uns
+        einige einfache Beispiele an.
     </para>
-
 </sect1>

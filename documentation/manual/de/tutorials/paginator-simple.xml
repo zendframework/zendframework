@@ -2,45 +2,46 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.paginator.simple">
-    <title>Simple Examples</title>
+    <title>Einfaches Beispiel</title>
 
     <para>
-        In this first example we won't do anything spectacular, but hopefully it will
-        give you a good idea of what Zend_Paginator is designed to do.
-        Let's say we have an array called $data with the numbers 1 to 100 in it, which
-        we want to divide over a number of pages. We can use the static <methodname>factory()</methodname>
-        method in the <classname>Zend_Paginator</classname> class to get a <classname>Zend_Paginator</classname>
-        object with our array in it.
+        In diesem ersten Beispiel wollen wir nichts spektakuläres, aber hoffentlich gibt es eine
+        gute Idee darüber wozu Zend_Paginator designt wurde. Angenommen wir haben ein Array das
+        $data heißt mit den Zahlen 1 bis 100 in Ihm, welches wir in eine Anzahl von Seiten
+        aufteilen wollen. Man kann die statische <methodname>factory()</methodname> Methode in der
+        Klasse <classname>Zend_Paginator</classname> verwenden um ein
+        <classname>Zend_Paginator</classname> Objekt mit unseren Array in Ihm zu erhalten.
     </para>
 
     <programlisting language="php"><![CDATA[
-// Create an array with numbers 1 to 100
+// Erstellt ein Array mit den Zahlen 1 bis 100
 $data = range(1, 100);
 
-// Get a Paginator object using Zend_Paginator's built-in factory.
+// Holt ein Paginator Objekt und verwendet Zend_Paginator's eingebaute Factory
 $paginator = Zend_Paginator::factory($data);
 ]]></programlisting>
 
     <para>
-        We're already almost done! The $paginator variable now contains a reference to the
-        Paginator object. By default it is setup to display 10 items per page.
-        To display the items for the currently active page, all you need to do is iterate
-        over the Paginator object with a foreach loop. The currently active page defaults
-        to the first page if it's not explicitly specified. We will see how you can select
-        a specific page later on. The snippet below will display an unordered list containing the
-        numbers 1 to 10, which are the numbers on the first page.
+        Wir sind fast fertig! Die Variable $paginator enthält jetzt eine Referenz auf das Paginator
+        Objekt. Standardmäßig ist es eingestellt 10 Elemente pro Seite anzuzeigen. Um die Elemente
+        für die aktuell aktive Seite anzuzeigen, ist alles was getan werden muss durch das
+        Paginator Objekt mit einer foreach Schleife zu iterieren. Die aktuell aktive Seite ist
+        standardmäßig die erste Seite wenn Sie nicht explizit spezifiziert wurde. Wir werden später
+        sehen wie eine spezifische Seite ausgewählt werden kann. Der folgende Abschnitt zeigt eine
+        unsortierte Liste welche die Zahlen 1 bis 10 enthält ,welche die Zahlen der ersten Seite
+        sind.
     </para>
 
     <programlisting language="php"><![CDATA[
-// Create an array with numbers 1 to 100
+// Erstellt ein Array mit den Zahlen 1 bis 100
 $data = range(1, 100);
 
-// Get a Paginator object using Zend_Paginator's built-in factory.
+// Holt ein Paginator Objekt und verwendet Zend_Paginator's eingebaute Factory
 $paginator = Zend_Paginator::factory($data);
 
 ?><ul><?php
 
-// Render each item for the current page in a list-item
+// Jedes Element der aktuellen Seite in einem Listen Element darstellen
 foreach ($paginator as $item) {
     echo '<li>' . $item . '</li>';
 }
@@ -49,23 +50,24 @@ foreach ($paginator as $item) {
 ]]></programlisting>
 
     <para>
-        Now let's try and render the items on the second page. You can use the
-        <methodname>setCurrentPageNumber()</methodname> method to select which page you want to view.
+        Jetzt versuchen wir die Elemente der zweiten Seite darzustellen. Die
+        <methodname>setCurrentPageNumber()</methodname> Methode kann verwendet werden um auszuwählen
+        welche Seite man sehen will.
     </para>
 
     <programlisting language="php"><![CDATA[
-// Create an array with numbers 1 to 100
+// Erstellt ein Array mit den Zahlen 1 bis 100
 $data = range(1, 100);
 
-// Get a Paginator object using Zend_Paginator's built-in factory.
+// Holt ein Paginator Objekt und verwendet Zend_Paginator's eingebaute Factory
 $paginator = Zend_Paginator::factory($data);
 
-// Select the second page
+// Wählt die zweite Seite
 $paginator->setCurrentPageNumber(2);
 
 ?><ul><?php
 
-// Render each item for the current page in a list-item
+// Jedes Element der aktuellen Seite in einem Listen Element darstellen
 foreach ($paginator as $item) {
     echo '<li>' . $item . '</li>';
 }
@@ -74,38 +76,38 @@ foreach ($paginator as $item) {
 ]]></programlisting>
 
     <para>
-        As expected, this little snippet will render an unordered list with the numbers
-        11 to 20 in it.
+        Wie erwartet stellt dieser kleine Abschnitt eine unsortierte Liste mit den Zahlen 11 bis 20
+        in Ihm dar.
     </para>
 
     <para>
-        These simple examples demonstrate a small portion of what can be achieved with
-        <classname>Zend_Paginator</classname>. However, a real application rarely reads its data from a plain
-        array, so the next section is dedicated to showing you how you can use Paginator
-        to paginate the results of a database query. Before reading on, make sure you're familiar with
-        the way <classname>Zend_Db_Select</classname> works!
+        Dieses einfache Beispiel demonstriert einen kleinen Teil davon was mit
+        <classname>Zend_Paginator</classname> getan werden kann. Aber eine echte Anwendung liest
+        selten in seinen Daten von einem reinen Array, deshalb ist der nächste Abschnitt dazu
+        gedacht zu zeigen wir man Paginator verwenden kann um Ergebnisse einer Datenbank Abfrage
+        seitenweise darzustellen. Bevor weitergelesen wird, sollte man sicherstellen das man sich
+        damit auskennt wie <classname>Zend_Db_Select</classname> arbeitet!
     </para>
 
     <para>
-        In the database examples we will look at a table with blog posts called 'posts'.
-        The 'posts' table has four columns: id, title, body, date_created.
-        Let's dive right in and have a look at a simple example.
+        Im Datenbank Beispiel sehen wir nach einer Tabelle mit Blog Posts welche 'posts' genannt
+        wird. Gehen wir direkt hinein und schauen uns ein einfaches Beispiel an.
     </para>
 
     <programlisting language="php"><![CDATA[
-// Create a select query. $db is a Zend_Db_Adapter object, which we assume
-// already exists in your script.
+// Eine Select Abfrage erstellen. $db ist ein Zend_Db_Adapter Objekt, von dem
+// wir annehmen das es bereits im Skript existiert
 $select = $db->select()->from('posts')->order('date_created DESC');
 
-// Get a Paginator object using Zend_Paginator's built-in factory.
+// Holt ein Paginator Objekt und verwendet Zend_Paginator's eingebaute Factory
 $paginator = Zend_Paginator::factory($select);
 
-// Select the second page
+// Wählt die zweite Seite
 $paginator->setCurrentPageNumber(2);
 
 ?><ul><?php
 
-// Render each the title of each post for the current page in a list-item
+// Jedes Element der aktuellen Seite in einem Listen Element darstellen
 foreach ($paginator as $item) {
     echo '<li>' . $item->title . '</li>';
 }
@@ -114,12 +116,11 @@ foreach ($paginator as $item) {
 ]]></programlisting>
 
     <para>
-        As you can see, this example is not that different from the previous one.
-        The only difference is that you pass a <classname>Zend_Db_Select</classname> object to the
-        Paginator's <methodname>factory()</methodname> method, rather than an array.
-        For more details on how the database adapter makes sure that your query
-        is being executed efficiently, see the Zend_Paginator chapter in the reference manual
-        on the DbSelect and DbTableSelect adapters.
+        Wie man sehen kann ist dieses Beispiel nicht sehr unterschiedlich vom vorhergehenden.
+        Der einzige Unterschied besteht darin dass man ein <classname>Zend_Db_Select</classname>
+        Objekt statt einem Array an die <methodname>factory()</methodname> Methode des Paginator's
+        übergibt. Für weitere Details darüber wie der Datenbank Adapter sicherstellt das eigene
+        Anfragen effizient ausgeführt werden, sollte in das Zend_Paginator Kapitel im Referenz
+        Handbuch bei den Adaptern DbSelect und DbTableSelect nachgesehen werden.
     </para>
-
 </sect1>

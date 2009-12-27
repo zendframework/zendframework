@@ -223,4 +223,12 @@ class Zend_Validate_IpTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->_validator->isValid(array(1 => 1)));
     }
+
+    /**
+     * @ZF-8640
+     */
+    public function testNonNewlineValidation()
+    {
+        $this->assertFalse($this->_validator->isValid("::C0A8:2\n"));
+    }
 }

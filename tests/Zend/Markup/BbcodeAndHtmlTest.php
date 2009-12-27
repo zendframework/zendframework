@@ -220,7 +220,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
 
     public function testNeverEndingAttribute() {
         $input = "[color=\"green]your text[/color]";
-        $expected = '[color=&quot;green]your text[/color]';
+        $expected = '<span>your text</span>';
         $this->assertEquals($expected, $this->_markup->render($input));
     }
 
@@ -358,6 +358,14 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
 BBCODE;
         $m->render($input);
     }
+
+    public function testAttributeWithoutValue()
+    {
+        $m = $this->_markup;
+
+        $this->assertEquals('<strong>foobar</strong>', $m->render('[b=]foobar[/b]'));
+    }
+
 }
 
 

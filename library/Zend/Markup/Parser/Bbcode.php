@@ -39,13 +39,17 @@ require_once 'Zend/Markup/Parser/ParserInterface.php';
  */
 class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
 {
-    const TAG_START = '[';
-    const TAG_END   = ']';
     const NEWLINE   = "[newline\0]";
 
     // there is a parsing difference between the default tags and single tags
     const TYPE_DEFAULT = 'default';
     const TYPE_SINGLE  = 'single';
+
+    const NAME_CHARSET = '^\[\]=\s';
+
+    const STATE_SCAN       = 0;
+    const STATE_SCANATTRS  = 1;
+    const STATE_PARSEVALUE = 2;
 
     /**
      * Token tree
@@ -90,25 +94,11 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
     protected $_buffer = '';
 
     /**
-     * The current tag we are working on
-     *
-     * @var string
-     */
-    protected $_tag = '';
-
-    /**
-     * The current tag name
-     *
-     * @var string
-     */
-    protected $_name;
-
-    /**
-     * Attributes of the tag we are working on
+     * Temporary tag storage
      *
      * @var array
      */
-    protected $_attributes = array();
+    protected $_temp;
 
     /**
      * Stoppers that we are searching for
@@ -137,6 +127,20 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
         ),
     );
 
+    /**
+     * Token array
+     *
+     * @var array
+     */
+    protected $_tokens = array();
+
+    /**
+     * State
+     *
+     * @var int
+     */
+    protected $_state = self::STATE_SCAN;
+
 
     /**
      * Prepare the parsing of a bbcode string, the real parsing is done in {@link _parse()}
@@ -162,16 +166,23 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
             throw new Zend_Markup_Parser_Exception('Value to parse cannot be left empty.');
         }
 
-        // first make we only have LF newlines
         $this->_value = str_replace(array("\r\n", "\r", "\n"), self::NEWLINE, $value);
 
-        // initialize variables
-        $this->_tree             = new Zend_Markup_TokenList();
+        // variable initialization for tokenizer
         $this->_valueLen         = strlen($this->_value);
         $this->_pointer          = 0;
         $this->_buffer           = '';
         $this->_temp             = array();
+        $this->_state            = self::STATE_SCAN;
+        $this->_tokens           = array();
+
+        $this->_tokens = array();
+
+        $this->_tokenize();
+
+        // variable initialization for treebuilder
         $this->_searchedStoppers = array();
+        $this->_tree             = new Zend_Markup_TokenList();
         $this->_current          = new Zend_Markup_Token(
             '',
             Zend_Markup_Token::TYPE_NONE,
@@ -180,314 +191,240 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
 
         $this->_tree->addChild($this->_current);
 
-        // start the parsing process
-        $this->_parse();
+        $this->_createTree();
 
         return $this->_tree;
     }
 
     /**
-     * Parse a bbcode string
+     * Tokenize
+     *
+     * @param string $input
      *
      * @return void
      */
-    protected function _parse()
+    protected function _tokenize()
     {
-        // just keep looping until the parsing is done
-        do {
-            $this->_parseTagStart();
-        } while ($this->_pointer < $this->_valueLen);
+        $attribute = '';
 
-        if (!empty($this->_buffer)) {
-            // no tag start found, add the buffer to the current tag and stop parsing
-            $token = new Zend_Markup_Token(
-                $this->_buffer,
-                Zend_Markup_Token::TYPE_NONE,
-                $this->_current
-            );
-            $this->_current->addChild($token);
-            $this->_buffer  = '';
-        }
-    }
-
-    /**
-     * Parse the start of a tag
-     *
-     * @return void
-     */
-    protected function _parseTagStart()
-    {
-        $start = strpos($this->_value, self::TAG_START, $this->_pointer);
-
-        if ($start === false) {
-            if ($this->_valueLen > $this->_pointer) {
-                $this->_buffer .= substr($this->_value, $this->_pointer);
-                $this->_pointer = $this->_valueLen;
-            }
-            return;
-        }
-
-        // add the prepended text to the buffer
-        if ($start > $this->_pointer) {
-            $this->_buffer .= substr($this->_value, $this->_pointer, $start - $this->_pointer);
-        }
-
-        $this->_pointer = $start;
-
-        // we have the start of this tag, now we need its name
-        $this->_parseTag();
-    }
-
-    /**
-     * Get the tag information
-     *
-     * @return void
-     */
-    protected function _parseTag()
-    {
-        // get the tag's name
-        $len         = strcspn($this->_value, " \n\r\t=" . self::TAG_END, $this->_pointer + 1);
-        $this->_name = substr($this->_value, $this->_pointer + 1, $len);
-
-        $this->_tag      = self::TAG_START . $this->_name;
-        $this->_pointer += $len + 1;
-
-        if (!isset($this->_value[$this->_pointer])) {
-            // this is not a tag
-            $this->_buffer .= $this->_tag;
-
-            return;
-        }
-
-        switch ($this->_value[$this->_pointer]) {
-            case self::TAG_END:
-                // ending the tag
-                $this->_tag .= self::TAG_END;
-                $this->_endTag();
-                return;
-                break;
-            case '=':
-                // we are dealing with an name-attribute
-                $this->_tag .= '=';
-                ++$this->_pointer;
-                $value = $this->_parseAttributeValue();
-
-                if (false === $value) {
-                    // this isn't a tag, just end it right here, right now
-                    $this->_buffer .= $this->_tag;
-                    return;
-                }
-
-                $this->_attributes[$this->_name] = $value;
-                break;
-            default:
-                // the tag didn't end, so get the rest of the tag.
-                break;
-        }
-
-        $this->_parseAttributes();
-    }
-
-    /**
-     * Parse attributes
-     *
-     * @return void
-     */
-    protected function _parseAttributes()
-    {
         while ($this->_pointer < $this->_valueLen) {
-            // we are looping until we find something
-            switch ($this->_value[$this->_pointer]) {
-                case self::TAG_END:
-                    // end the tag and return
-                    $this->_tag .= self::TAG_END;
-                    $this->_endTag();
-                    return;
-                    break;
-                default:
-                    // just go further
-                    if (ctype_space($this->_value[$this->_pointer])) {
-                        //@TODO: implement this speedhack later
-                        $len             = strspn($this->_value, " \n\r\t", $this->_pointer + 1);
-                        $this->_tag     .= substr($this->_value, $this->_pointer, $len - 1);
-                        $this->_tag .= $this->_value[$this->_pointer];
-                        ++$this->_pointer;
+            switch ($this->_state) {
+                case self::STATE_SCAN:
+                    $matches = array();
+                    $regex   = '#\G(?<text>[^\[]*)(?<open>\[(?<name>[' . self::NAME_CHARSET . ']+)?)?#';
+                    preg_match($regex, $this->_value, $matches, null, $this->_pointer);
+
+                    $this->_pointer += strlen($matches[0]);
+
+                    if (!empty($matches['text'])) {
+                        $this->_buffer .= $matches['text'];
+                    }
+
+                    if (!isset($matches['open'])) {
+                        // great, no tag, we are ending the string
+                        break;
+                    }
+                    if (!isset($matches['name'])) {
+                        $this->_buffer .= $matches['open'];
+                        break;
+                    }
+
+                    $this->_temp = array(
+                        'tag'        => '[' . $matches['name'],
+                        'name'       => $matches['name'],
+                        'attributes' => array()
+                    );
+
+                    if ($this->_pointer >= $this->_valueLen) {
+                        // damn, no tag
+                        $this->_buffer .= $this->_temp['tag'];
+                        break 2;
+                    }
+
+                    if ($this->_value[$this->_pointer] == '=') {
+                        $this->_pointer++;
+
+                        $this->_temp['tag'] .= '=';
+                        $this->_state        = self::STATE_PARSEVALUE;
+                        $attribute           = $this->_temp['name'];
                     } else {
-                        $this->_parseAttribute();
+                        $this->_state = self::STATE_SCANATTRS;
                     }
                     break;
+                case self::STATE_SCANATTRS:
+                    $matches = array();
+                    $regex   = '#\G((?<end>\s*\])|\s+(?<attribute>[' . self::NAME_CHARSET . ']+)(?<eq>=?))#';
+                    if (!preg_match($regex, $this->_value, $matches, null, $this->_pointer)) {
+                        break 2;
+                    }
+
+                    $this->_pointer += strlen($matches[0]);
+
+                    if (!empty($matches['end'])) {
+                        if (!empty($this->_buffer)) {
+                            $this->_tokens[] = array(
+                                'tag' => $this->_buffer,
+                                'type' => Zend_Markup_Token::TYPE_NONE
+                            );
+                            $this->_buffer = '';
+                        }
+                        $this->_temp['tag'] .= $matches['end'];
+                        $this->_temp['type'] = Zend_Markup_Token::TYPE_TAG;
+
+                        $this->_tokens[] = $this->_temp;
+                        $this->_temp     = array();
+
+                        $this->_state = self::STATE_SCAN;
+                    } else {
+                        // attribute name
+                        $attribute = $matches['attribute'];
+
+                        $this->_temp['tag'] .= $matches[0];
+
+                        $this->_temp['attributes'][$attribute] = '';
+
+                        if (empty($matches['eq'])) {
+                            $this->_state = self::STATE_SCANATTRS;
+                        } else {
+                            $this->_state = self::STATE_PARSEVALUE;
+                        }
+                    }
+                    break;
+                case self::STATE_PARSEVALUE:
+                    $matches = array();
+                    $regex   = '#\G((?<quote>"|\')(?<valuequote>[^\\2]*)\\2|(?<value>[^\]\s]+))#';
+                    if (!preg_match($regex, $this->_value, $matches, null, $this->_pointer)) {
+                        $this->_state = self::STATE_SCANATTRS;
+                        break;
+                    }
+
+                    $this->_pointer += strlen($matches[0]);
+
+                    if (!empty($matches['quote'])) {
+                        $this->_temp['attributes'][$attribute] = $matches['valuequote'];
+                    } else {
+                        $this->_temp['attributes'][$attribute] = $matches['value'];
+                    }
+                    $this->_temp['tag'] .= $matches[0];
+
+                    $this->_state = self::STATE_SCANATTRS;
+                    break;
             }
         }
 
-        // end tags without ']'
-        $this->_endTag();
-    }
-
-    /**
-     * Parse an attribute
-     *
-     * @return void
-     */
-    protected function _parseAttribute()
-    {
-        // first find the =, or a ] when the attribute is empty
-        $len = strcspn($this->_value, "=" . self::TAG_END, $this->_pointer);
-
-        // get the name and value
-        $name = substr($this->_value, $this->_pointer, $len);
-        $this->_pointer += $len;
-
-        if (isset($this->_value[$this->_pointer]) && ($this->_value[$this->_pointer] == '=')) {
-            ++$this->_pointer;
-            // ending attribute
-            $this->_tag .= $name . '=';
-
-            $value = $this->_parseAttributeValue();
-
-            $this->_attributes[trim($name)] = $value;
-        } else {
-            // empty attribute
-            $this->_tag .= $name;
-        }
-    }
-
-    /**
-     * Parse the value from an attribute
-     *
-     * @return string
-     */
-    protected function _parseAttributeValue()
-    {
-        //$delimiter = $this->_value[$this->_pointer];
-        $delimiter = substr($this->_value, $this->_pointer, 1);
-        if (($delimiter == "'") || ($delimiter == '"')) {
-            $delimiter = $this->_value[$this->_pointer];
-
-            // just find the delimiter
-            $len   = strcspn($this->_value, $delimiter, $this->_pointer + 1);
-            $value = substr($this->_value, $this->_pointer + 1, $len);
-
-            if ($this->_pointer + $len + 1 >= $this->_valueLen) {
-                // i think we just ran out of gas....
-                $this->_pointer++;
-                $this->_tag .= $delimiter;
-                return false;
-            }
-
-            $this->_pointer += $len + 2;
-
-            $this->_tag .= $delimiter . $value . $delimiter;
-        } else {
-            // find a tag end or a whitespace
-            $len   = strcspn($this->_value, " \n\r\t" . self::TAG_END, $this->_pointer);
-            $value = substr($this->_value, $this->_pointer, $len);
-
-            $this->_pointer += $len;
-
-            $this->_tag .= $value;
-        }
-        return $value;
-    }
-
-    /**
-     * End the found tag
-     *
-     * @return void
-     */
-    protected function _endTag()
-    {
-        // rule out empty tags (just '[]')
-        if (strlen($this->_name) == 0) {
-            $this->_buffer .= $this->_tag;
-            $this->_pointer++;
-            return;
-        }
-
-        // first check if the tag is a newline or a stopper without a tag
-        if (!$this->_isStopper($this->_tag, true)) {
-            if ($this->_tag == self::NEWLINE) {
-                $this->_buffer .= "\n";
-                ++$this->_pointer;
-                return;
-            } elseif ($this->_name[0] == '/') {
-                $this->_buffer .= $this->_tag;
-                ++$this->_pointer;
-                return;
-            }
-        }
-
-        // first add the buffer as token and clear the buffer
         if (!empty($this->_buffer)) {
-            $token = new Zend_Markup_Token(
-                $this->_buffer,
-                Zend_Markup_Token::TYPE_NONE,
-                '',
-                array(),
-                $this->_current
+            $this->_tokens[] = array(
+                'tag'  => $this->_buffer,
+                'type' => Zend_Markup_Token::TYPE_NONE
             );
-            $this->_current->addChild($token);
-            $this->_buffer = '';
         }
-
-        $attributes = $this->_attributes;
-
-        // check if this tag is a stopper
-        if ($this->_isStopper($this->_tag)) {
-            // we got a stopper, end the current tag and get back to the parent
-            $this->_current->setStopper($this->_tag);
-
-            $this->_removeFromSearchedStoppers($this->_current);
-
-            $this->_current = $this->_current->getParent();
-        } elseif (!empty($this->_searchedStoppers[$this->_tag])) {
-            // hell has broken loose, these stoppers are searched somewere
-            // lower in the tree
-            $oldItems = array();
-
-            while (!in_array($this->_tag, $this->_tags[$this->_current->getName()]['stoppers'])) {
-                $oldItems[]     = clone $this->_current;
-                $this->_current = $this->_current->getParent();
-            }
-
-            // ladies and gentlemen... WE GOT HIM!
-            $this->_current->setStopper($this->_tag);
-            $this->_removeFromSearchedStoppers($this->_current);
-            $this->_current = $this->_current->getParent();
-
-            // add those old items again
-            foreach (array_reverse($oldItems) as $token) {
-                /* @var $token Zend_Markup_Token */
-                $this->_current->addChild($token);
-                $token->setParent($this->_current);
-                $this->_current = $token;
-            }
-        } elseif ($this->_getType($this->_name) == self::TYPE_SINGLE) {
-            $token = new Zend_Markup_Token(
-                $this->_tag,
-                Zend_Markup_Token::TYPE_TAG,
-                $this->_name,
-                $attributes,
-                $this->_current
-            );
-            $this->_current->addChild($token);
-        } else {
-            // add the tag and jump into it
-            $token = new Zend_Markup_Token(
-                $this->_tag,
-                Zend_Markup_Token::TYPE_TAG,
-                $this->_name,
-                $attributes,
-                $this->_current
-            );
-            $this->_current->addChild($token);
-            $this->_current = $token;
-
-            $this->_addToSearchedStoppers($token);
-        }
-        ++$this->_pointer;
-        $this->_attributes = array();
     }
 
+    /**
+     * Parse the token array into a tree
+     *
+     * @param array $tokens
+     *
+     * @return void
+     */
+    public function _createTree()
+    {
+        foreach ($this->_tokens as $token) {
+            // first we want to know if this tag is a stopper, or at least a searched one
+            if ($this->_isStopper($token['tag'])) {
+                // find the stopper
+                $oldItems = array();
+
+                while (!in_array($token['tag'], $this->_tags[$this->_current->getName()]['stoppers'])) {
+                    $oldItems[]     = clone $this->_current;
+                    $this->_current = $this->_current->getParent();
+                }
+
+                // we found the stopper, so stop the tag
+                $this->_current->setStopper($token['tag']);
+                $this->_removeFromSearchedStoppers($this->_current);
+                $this->_current = $this->_current->getParent();
+
+                // add the old items again if there are any
+                if (!empty($oldItems)) {
+                    foreach (array_reverse($oldItems) as $item) {
+                        /* @var $token Zend_Markup_Token */
+                        $this->_current->addChild($item);
+                        $item->setParent($this->_current);
+                        $this->_current = $item;
+                    }
+                }
+            } else {
+                if ($token['type'] == Zend_Markup_Token::TYPE_TAG) {
+                    if ($token['tag'] == self::NEWLINE) {
+                        // this is a newline tag, add it as a token
+                        $this->_current->addChild(new Zend_Markup_Token(
+                            "\n",
+                            Zend_Markup_Token::TYPE_NONE,
+                            '',
+                            array(),
+                            $this->_current
+                        ));
+                    } elseif (isset($token['name']) && ($token['name'][0] == '/')) {
+                        // this is a stopper, add it as a empty token
+                        $this->_current->addChild(new Zend_Markup_Token(
+                            $token['tag'],
+                            Zend_Markup_Token::TYPE_NONE,
+                            '',
+                            array(),
+                            $this->_current
+                        ));
+                    } else {
+                        // add the tag
+                        $child = new Zend_Markup_Token(
+                            $token['tag'],
+                            $token['type'],
+                            $token['name'],
+                            $token['attributes'],
+                            $this->_current
+                        );
+                        $this->_current->addChild($child);
+
+                        // add stoppers for this tag, if its has stoppers
+                        if ($this->_getType($token['name']) == self::TYPE_DEFAULT) {
+                            $this->_current = $child;
+
+                            $this->_addToSearchedStoppers($this->_current);
+                        }
+                    }
+                } else {
+                    // no tag, just add it as a simple token
+                    $this->_current->addChild(new Zend_Markup_Token(
+                        $token['tag'],
+                        Zend_Markup_Token::TYPE_NONE,
+                        '',
+                        array(),
+                        $this->_current
+                    ));
+                }
+            }
+        }
+    }
+
+    /**
+     * Check if there is a tag declaration, and if it isnt there, add it
+     *
+     * @param string $name
+     *
+     * @return void
+     */
+    protected function _checkTagDeclaration($name)
+    {
+        if (!isset($this->_tags[$name])) {
+            $this->_tags[$name] = array(
+                'type'     => self::TYPE_DEFAULT,
+                'stoppers' => array(
+                    '[/' . $name . ']',
+                    '[/]'
+                )
+            );
+        }
+    }
     /**
      * Check the tag's type
      *
@@ -496,16 +433,7 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
      */
     protected function _getType($name)
     {
-        // first check if the current tag has a row for this
-        if (!isset($this->_tags[$name])) {
-            $this->_tags[$name] = array(
-                'type'     => self::TYPE_DEFAULT,
-                'stoppers' => array(
-                    self::TAG_START . '/' . $name . self::TAG_END,
-                    self::TAG_START . '/' . self::TAG_END
-                )
-            );
-        }
+        $this->_checkTagDeclaration($name);
 
         return $this->_tags[$name]['type'];
     }
@@ -516,24 +444,11 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
      * @param  string $tag
      * @return bool
      */
-    protected function _isStopper($tag, $searched = false)
+    protected function _isStopper($tag)
     {
-        // first check if the current tag has registered stoppers
-        if (!isset($this->_tags[$this->_current->getName()])) {
-            $this->_tags[$this->_current->getName()] = array(
-                'type'     => self::TYPE_DEFAULT,
-                'stoppers' => array(
-                    self::TAG_START . '/' . $this->_current->getName() . self::TAG_END,
-                    self::TAG_START . '/' . self::TAG_END
-                )
-            );
-        }
+        $this->_checkTagDeclaration($this->_current->getName());
 
-        // and now check if it is a stopper
-        $tags = $this->_tags[$this->_current->getName()]['stoppers'];
-        if (in_array($tag, $tags)
-            || (!empty($this->_searchedStoppers[$this->_tag]) && $searched)
-        ) {
+        if (!empty($this->_searchedStoppers[$tag])) {
             return true;
         }
 
@@ -548,15 +463,7 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
      */
     protected function _addToSearchedStoppers(Zend_Markup_Token $token)
     {
-        if (!isset($this->_tags[$token->getName()])) {
-            $this->_tags[$token->getName()] = array(
-                'type'     => self::TYPE_DEFAULT,
-                'stoppers' => array(
-                    self::TAG_START . '/' . $token->getName() . self::TAG_END,
-                    self::TAG_START . '/' . self::TAG_END
-                )
-            );
-        }
+        $this->_checkTagDeclaration($token->getName());
 
         foreach ($this->_tags[$token->getName()]['stoppers'] as $stopper) {
             if (!isset($this->_searchedStoppers[$stopper])) {
@@ -574,8 +481,11 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
      */
     protected function _removeFromSearchedStoppers(Zend_Markup_Token $token)
     {
+        $this->_checkTagDeclaration($token->getName());
+
         foreach ($this->_tags[$token->getName()]['stoppers'] as $stopper) {
             --$this->_searchedStoppers[$stopper];
         }
     }
+
 }

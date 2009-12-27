@@ -133,7 +133,7 @@ $select->order( ...specify sorting criteria... );
 
         <example id="zend.db.select.building.example-fluent">
 
-            <title>Ejemplo de uso de la interfaz fluida.</title>
+            <title>Ejemplo de uso de la interfaz fluida</title>
 
             <programlisting language="php"><![CDATA[
 $select = $db->select()

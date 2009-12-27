@@ -3,7 +3,7 @@
     <!-- Reviewed: no -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
-    <title>Información del Documento y Metadatos.</title>
+    <title>Información del Documento y Metadatos</title>
     <para>
         Un documento
         <acronym>PDF</acronym>

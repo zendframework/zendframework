@@ -98,7 +98,7 @@
         </para>
 
         <example id="zend.pdf.pages.example-1">
-            <title>Administración de Páginas de un Documento PDF.</title>
+            <title>Administración de Páginas de un Documento PDF</title>
             <programlisting language="php"><![CDATA[
 ...
 // Invertir el orden de las páginas.
@@ -118,7 +118,7 @@ unset($pdf->pages[$id]);
     </sect2>
 
     <sect2 id="zend.pdf.pages.cloning">
-        <title>Clonado de Páfinas.</title>
+        <title>Clonado de Páginas</title>
         <para>
             La página
             <acronym>PDF</acronym>
@@ -129,7 +129,7 @@ unset($pdf->pages[$id]);
         </para>
 
         <example id="zend.pdf.pages.example-2">
-            <title>Clonando una Página Existente.</title>
+            <title>Clonando una Página Existente</title>
             <programlisting language="php"><![CDATA[
 ...
 // Almacenar la página plantilla en una variable

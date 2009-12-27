@@ -118,9 +118,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
     <sect2 id="zend.db.statement.fetching">
 
-        <title> Extrayendo Resultados de una declaración
-                SELECT
-        </title>
+        <title> Extrayendo Resultados de una declaración SELECT </title>
 
         <para> Puede llamar a métodos del objeto de declaración para obtener
             filas desde declaraciones <acronym>SQL</acronym> que producen
@@ -336,7 +334,9 @@ echo $obj->bug_description;
 
         <title>Binding PHP Variables to Parameters</title> <para> </para> <example
         id="zend.db.statement.binding-param.example"> <title>Binding parameters from PHP
-        variables</title> <programlisting language="php"><![CDATA[ <?php ]]></programlisting>
+        variables</title> <programlisting language="php"><![CDATA[ 
+        <?php 
+        ]]></programlisting>
         </example> <para> See also <ulink
         url="http://www.php.net/PDOStatement-bindParam">PDOStatement::bindParam()</ulink>. </para>
 
@@ -348,7 +348,10 @@ echo $obj->bug_description;
 
         <title>Binding PHP Variables to Query Results</title> <para> </para> <example
         id="zend.db.statement.binding-column.example"> <title>Binding results to PHP
-        variables</title> <programlisting language="php"><![CDATA[ <?php ]]></programlisting>
+        variables</title>
+        <programlisting language="php"><![CDATA[ 
+        <?php 
+        ]]></programlisting>
         </example> <para> See also <ulink
         url="http://www.php.net/PDOStatement-bindColumn">PDOStatement::bindColumn()</ulink>. </para>
 

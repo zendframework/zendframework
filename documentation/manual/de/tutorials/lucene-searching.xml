@@ -2,14 +2,14 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.lucene.searching">
-    <title>Searching</title>
+    <title>Suchen</title>
 
     <para>
-        Searching is performed by using the <methodname>find()</methodname> method:
+        Suchen wird durch Verwendung der <methodname>find()</methodname> Methode durchgeführt:
     </para>
 
     <example id="learning.lucene.searching.search-example">
-        <title>Searching through the index</title>
+        <title>Den Index durchsuchen</title>
 
         <programlisting language="php"><![CDATA[
 $hits = $index->find($query);
@@ -21,18 +21,18 @@ foreach ($hits as $hit) {
     </example>
 
     <para>
-        This example demonstrates the usage of two special search hit properties -
-        <property>id</property> and <property>score</property>.
+        Dieses Beispiel demonstriert die Verwendung von zwei speziellen Suchtreffer Eigenschaften -
+        <property>id</property> und <property>score</property>.
     </para>
 
     <para>
-        <property>id</property> is an internal document identifier used within a Lucene index.
-        It may be used for a variety of operations, including deleting a document from the
-        index:
+        <property>id</property> ist ein interner Dokument Identifikator der im Lucene Index
+        verwendet wird. Er kann in unterschiedlichen Operationen verwendet werden, inklusive dem
+        Löschen eines Dokuments vom Index:
     </para>
 
     <example id="learning.lucene.searching.delete-example">
-        <title>Deleting an Indexed Document</title>
+        <title>Löschen eines indizierten Dokuments</title>
 
         <programlisting language="php"><![CDATA[
 $index->delete($id);
@@ -40,11 +40,11 @@ $index->delete($id);
     </example>
 
     <para>
-        Or retrieving the document from the index:
+        Oder Empfangen eines Dokuments vom Index:
     </para>
 
     <example id="learning.lucene.searching.retrieve-example">
-        <title>Retrieving an Indexed Document</title>
+        <title>Empfangen eines indizierten Dokuments</title>
 
         <programlisting language="php"><![CDATA[
 $doc = $index->getDocument($id);
@@ -52,44 +52,47 @@ $doc = $index->getDocument($id);
     </example>
 
     <note id="learning.lucene.searching.identifiers">
-        <title>Internal Document Identifiers</title>
+        <title>Interne Dokument Identifikatoren</title>
 
         <para>
-            Important note! Internal document identifiers may be changed by index optimization or
-            the auto-optimization process, but it's never changed within a single script's execution
-            unless the <methodname>addDocument()</methodname> (which may involve an
-            auto-optimization procedure) or <methodname>optimize()</methodname> methods are called.
+            Wichtiger Hinweis! Interne Dokument Identifikatoren können durch eine Index Optimierung
+            oder den automatischen Optimierungsprozess geändert werden, aber Sie werden niemals bei
+            der Ausführung eines einzelnen Skripts geändert solange die
+            <methodname>addDocument()</methodname> (welche eine automatische Optimierungsprozedur
+            beinhalten kann) oder die <methodname>optimize()</methodname> Methoden aufgerufen
+            werden.
         </para>
     </note>
 
     <para>
-        The <property>score</property> field is a hit score. Search results are ordered by score by
-        default (best results returned first).
+        Das <property>score</property> Feld sind Trefferpunkte. Such Ergebnisse werden standardmäßig
+        nach Trefferpunkten sortiert (die besten Ergebnisse werden als erstes zurückgegeben).
     </para>
 
     <para>
-        It's also possible to order result sets by specific field values. See the <link
-            linkend="zend.search.lucene.searching.sorting">
-            <classname>Zend_Search_Lucene</classname> documentation</link> for more details about
-        this possibility.
+        Es ist auch möglich Ergebnissets anhand von spezifischen Feldwerten zu sortieren. Siehe die
+        <link linkend="zend.search.lucene.searching.sorting">
+            <classname>Zend_Search_Lucene</classname> Dokumentation</link> für mehr Details über
+        diese Möglichkeit.
     </para>
 
     <para>
-        The example also demonstrates an ability to access stored fields (e.g.,
-        <command>$hit->title</command>). At the first access to any hit property other than
-        <property>id</property> or <property>score</property>, document stored fields are loaded,
-        and the corresponding field value is returned.
+        Das Beispiel demonstriert auch eine Möglichkeit um auf gespeicherte Felder zugreifen zu
+        können (z.B. <command>$hit->title</command>). Beim ersten Zugriff auf jede
+        Treffer-Eigenschaft, die sich von <property>id</property> oder <property>score</property>
+        unterscheidet, wird jedes dokumentierte gespeicherte Feld geladen, und die
+        korrespondierenden Feldwerte werden zurückgegeben.
     </para>
 
     <para>
-        This causes an ambiguity for documents having their own <property>id</property> or
-        <property>score</property> fields; as a result, it's not recommended to use these field
-        names within stored documents. Nevertheless, they still can be accessed via the
-        <methodname>getDocument()</methodname> method:
+        Das verursacht eine Doppeldeutigkeit für Dokumente die Ihre eigenen <property>id</property>
+        oder <property>score</property> Felder haben; als Ergebnis wird empfohlen diese Feldnamen
+        nicht in gespeicherten Dokumenten zu verwenden. Trotzdem kann auf Sie über die
+        <methodname>getDocument()</methodname> Methode zugegriffen werden:
     </para>
 
     <example id="learning.lucene.searching.id-score-fields">
-        <title>Accessing the original document's "id" and "score" fields</title>
+        <title>Zugriff auf die originalen "id" und "score" Felder von Dokumenten</title>
 
         <programlisting language="php"><![CDATA[
 $id    = $hit->getDocument()->id;

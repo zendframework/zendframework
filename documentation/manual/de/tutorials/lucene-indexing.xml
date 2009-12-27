@@ -2,10 +2,11 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.lucene.indexing">
-    <title>Indexing</title>
+    <title>Indizierung</title>
 
     <para>
-        Indexing is performed by adding a new document to an existing or new index:
+        Indizierung wird durch das Hinzufügen eines neuen Dokuments zu einem bestehenden oder neuen
+        Index durchgeführt:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -13,11 +14,11 @@ $index->addDocument($doc);
 ]]></programlisting>
 
     <para>
-        There are two ways to create document object. The first is to do it manually.
+        Es gibt zwei Wege Dokument Objekte zu erstellen. Der erste ist es manuell zu tun.
     </para>
 
     <example id="learning.lucene.indexing.doc-creation">
-        <title>Manual Document Construction</title>
+        <title>Manuelle Dokument Erstellung</title>
 
         <programlisting language="php"><![CDATA[
 $doc = new Zend_Search_Lucene_Document();
@@ -29,11 +30,12 @@ $doc->addField(Zend_Search_Lucene_Field::binary('avatar', $avatarData));
     </example>
 
     <para>
-        The second method is to load it from <acronym>HTML</acronym> or Microsoft Office 2007 files:
+        Die zweite Methode ist das Laden von <acronym>HTML</acronym> oder von Microsoft Office 2007
+        Dateien:
     </para>
 
     <example id="learning.lucene.indexing.doc-loading">
-        <title>Document loading</title>
+        <title>Laden vom Dokument</title>
 
         <programlisting language="php"><![CDATA[
 $doc = Zend_Search_Lucene_Document_Html::loadHTML($htmlString);
@@ -44,15 +46,16 @@ $doc = Zend_Search_Lucene_Document_Xlsx::loadXlsxFile($path);
     </example>
 
     <para>
-        If a document is loaded from one of the supported formats, it still can be extended manually
-        with new user defined fields.
+        Wenn ein Dokument von einem der unterstützten Formate geladen wird, kann es trotzdem noch
+        manuell mit einem neuen benutzerdefinierten Feld erweitert werden.
     </para>
 
     <sect2 id="learning.lucene.indexing.policy">
-        <title>Indexing Policy</title>
+        <title>Indizierungs Policy</title>
 
         <para>
-            You should define indexing policy within your application architectural design.
+            Man sollte eine Indizierungs Policy im Architektur Design der eigenen Anwendung
+            definieren.
         </para>
 
         <para>

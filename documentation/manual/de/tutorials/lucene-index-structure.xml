@@ -2,117 +2,129 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.lucene.index-structure">
-    <title>Lucene Index Structure</title>
+    <title>Lucene Index Struktur</title>
 
     <para>
-        In order to fully utilize <classname>Zend_Search_Lucene</classname>'s capabilities with
-        maximum performance, you need to understand it's internal index structure.
+        Um <classname>Zend_Search_Lucene</classname>'s Mögichkeiten mit maximaler Performance
+        kompett anzuwenden, muss man die interne Struktur des Index verstehen.
     </para>
 
     <para>
-        An <emphasis>index</emphasis> is stored as a set of files within a single directory.
+        Ein <emphasis>index</emphasis> wird als Set von Dateien in einem einzelnen Verzeichnis
+        gespeichert.
     </para>
 
     <para>
-        An <emphasis>index</emphasis> consists of any number of independent
-        <emphasis>segments</emphasis> which store information about a subset of indexed documents.
-        Each <emphasis>segment</emphasis> has its own <emphasis>terms dictionary</emphasis>, terms
-        dictionary index, and document storage (stored field values) <footnote><para>Starting with
-                Lucene 2.3, document storage files can be shared between segments; however,
-                <classname>Zend_Search_Lucene</classname> doesn't use this
-                capability</para></footnote>. All segment data is stored in
-        <filename>_xxxxx.cfs</filename> files, where <emphasis>xxxxx</emphasis> is a segment name.
+        Ein <emphasis>index</emphasis> besteht auf einer beliebigen Anzahl von unabhängigen
+        <emphasis>Segmenten</emphasis> welche Informationen über ein Subset von indizierten
+        Dokumenten speichern. Jedes <emphasis>Segment</emphasis> hat sein eigenes
+        <emphasis>Wörterbuch an Ausdrücken</emphasis>, Ausdrucks Wörterbuch Indezes, und Dokument
+        Speicher (speichert Feld Werte)
+        <footnote>
+            <para>
+                Beginnend mit Lucene 2.3, können Dokument Speicherdateien zwischen Segmenten geteilt
+                werden; trotzdem verwendet <classname>Zend_Search_Lucene</classname> diese
+                Möglichkeit nicht
+            </para>
+        </footnote>.
+        Alle Segmentdaten werden in <filename>_xxxxx.cfs</filename> Dateien gespeichert, wobei
+        <emphasis>xxxxx</emphasis> der Name des Segments ist.
     </para>
 
     <para>
-        Once an index segment file is created, it can't be updated. New documents are added to new
-        segments. Deleted documents are only marked as deleted in an optional
-        <filename>&lt;segmentname&gt;.del</filename> file.
+        Sobald die Index Segment Datei erstellt wurde kann Sie nicht mehr aktualisiert werden. Neue
+        Dokumente werden in neuen Segmenten hinzugefügt. Gelöschte Dokumente werden nur in einer
+        optionalen <filename>&lt;segmentname&gt;.del</filename> Datei als gelöscht markiert.
     </para>
 
     <para>
-        Document updating is performed as separate delete and add operations, even though it's done
-        using an <methodname>update()</methodname> <acronym>API</acronym> call
-        <footnote><para>This call is provided only by Java Lucene now, but it's planned to extend
-            the <classname>Zend_Search_Lucene</classname> <acronym>API</acronym> with similar
-            functionality</para></footnote>.
-        This simplifies adding new documents, and allows updating concurrently with search
-        operations.
+        Die Aktualisierung von Dokumenten wird als seperate Lösch- und Hinzufüge Operation
+        durchgeführt selbst wenn Sie als <acronym>API</acronym> Aufruf mit
+        <methodname>update()</methodname> durchgeführt wird <footnote><para>Dieser Aufruf wird
+        aktuell nur von Java Lucene unterstützt, es ist aber geplant die
+        <classname>Zend_Search_Lucene</classname> <acronym>API</acronym> mit Ähnlicher
+        Funktionalität zu erweitern</para></footnote>. Das vereinfacht das hinzufügen neuer
+        Dokumente und erlaubt das Aktualisieren gleichzeitig mit Such Operationen.
     </para>
 
     <para>
-        On the other hand, using several segments (one document per segment as a borderline case)
-        increases search time:
+        Auf der anderen Seite verlängert die Verwendung mehrerer Segmente (ein Dokument pro Segment
+        als extremster Fall) die Suchzeit:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                retrieving a term from a dictionary is performed for each segment;
+                Das Empfangen von Ausdrücken von einem Verzeichnis wird für jedes Segment
+                durchgeführt;
             </para>
         </listitem>
 
         <listitem>
             <para>
-                the terms dictionary index is pre-loaded for each segment (this process takes the
-                most search time for simple queries, and it also requires additional memory).
+                Der Index des Ausdrucks Verzeichnisses wird für jedes Segment vorgeladen (dieser
+                Prozess nimmt für einfache Abfragen die meiste Zeit in Anspruch, und er benötigt
+                auch zusätzlichen Speicher).
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        If the terms dictionary reaches a saturation point, then search through one segment is
-        <emphasis>N</emphasis> times faster than search through <emphasis>N</emphasis> segments
-        in most cases.
+        Wenn das Ausdrucks Verzeichnis einen Wendepunkt erreicht, dann ist die Suche durch ein
+        Segment <emphasis>N</emphasis> in den meisten Fällen mal schneller als die Suche durch
+        <emphasis>N</emphasis> Segmente.
     </para>
 
     <para>
-        <emphasis>Index optimization</emphasis> merges two or more segments into a single new one. A
-        new segment is added to the index segments list, and old segments are excluded.
+        <emphasis>Index Optimierung</emphasis> verbindet zwei oder mehr Segmente in ein einzelnes
+        Segment. Ein neues Segment wird der Liste der Index Segmente hinzugefügt, und alte Segmente
+        werden ausgeschlossen.
     </para>
 
     <para>
-        Segment list updates are performed as an atomic operation. This gives the ability of
-        concurrently adding new documents, performing index optimization, and searching through the
-        index.
+        Aktualisierungen von Segment Listen werden als atomsche Operation durchgeführt. Das gibt
+        die Möglichkeit gleichzeitig neue Dokumente hinzuzufügen, Index Operationen durchzuführen,
+        und den Index zu durchsuchen.
     </para>
 
     <para>
-        Index auto-optimization is performed after each new segment generation. It merges sets of
-        the smallest segments into larger segments, and larger segments into even larger segments,
-        if we have enough segments to merge.
+        Die automatische Optimierung des Index wird nach jeder Segment Erzeugung durchgeführt. Sie
+        verbindet Sets der kleinsten Segmente in größere Segmente, und größere Segmente in noch
+        größere Segmente, wenn wir genug Segmente zum verbinden haben.
     </para>
 
     <para>
-        Index auto-optimization is controlled by three options:
+        Die automatische Optimierung wird von drei Optionen kontrolliert:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>MaxBufferedDocs</emphasis> (the minimal number of documents required
-                before the buffered in-memory documents are written into a new segment);
+                <emphasis>MaxBufferedDocs</emphasis> (die minimale Anzahl an notwendigen Dokumenten
+                bevor die im Speicher gepufferten Dokumente in ein neues Segment geschrieben
+                werden);
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>MaxMergeDocs</emphasis> (the largest number of documents ever merged by
-                an optimization operation); and
+                <emphasis>MaxMergeDocs</emphasis> (die größte Anzahl an Dokumenten die von einer
+                Optimierungs Operation verbunden werden); und
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>MergeFactor</emphasis> (which determines how often segment indices are
-                merged by auto-optimization operations).
+                <emphasis>MergeFactor</emphasis> (welcher definiert wie oft Segment Indezes von
+                automatischen Optimierungs Operationen verbunden werden).
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        If we add one document per script execution, then <emphasis>MaxBufferedDocs</emphasis> is
-        actually not used (only one new segment with only one document is created at the end of
-        script execution, at which time the auto-optimization process starts).
+        Wenn wir pro Skript Ausführung ein Dokument hinzufügen, wird
+        <emphasis>MaxBufferedDocs</emphasis> nicht verwendet (es wird nur ein neues Segmente mit nur
+        einem Dokument am Ende der Skript Ausführung erstellt, zu einer Zeit zu welcher der
+        automatische Optimierungs Prozess startet).
     </para>
 </sect1>

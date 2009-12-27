@@ -2,16 +2,16 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.lucene.index-opening">
-    <title>Index Opening and Creation</title>
+    <title>Indezes öffnen und erstellen</title>
 
     <para>
-        All index operations (e.g., creating a new index, adding a document to the index, deleting a
-        document, searching through the index) need an index object. One can be obtained using one
-        of the following two methods.
+        Alle Index Operationen (z.B. Erstellung eines neuen Index, hinzufügen eines Dokuments zum
+        Index, löschen eines Dokuments, suchen durch den Index) benötigen ein Index Objekt. Es kann
+        empfangen werden indem eine der folgenden zwei Methoden verwendet wird.
     </para>
 
     <example id="learning.lucene.index-opening.creation">
-        <title>Lucene Index Creation</title>
+        <title>Lucene Index Erstellung</title>
 
         <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::create($indexPath);
@@ -19,7 +19,7 @@ $index = Zend_Search_Lucene::create($indexPath);
     </example>
 
     <example id="learning.lucene.index-opening.opening">
-        <title>Lucene Index Opening</title>
+        <title>Lucene Index Öffnen</title>
 
         <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);

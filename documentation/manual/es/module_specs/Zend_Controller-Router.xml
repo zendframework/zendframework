@@ -6,56 +6,35 @@
     <sect2 id="zend.controller.router.introduction">
         <title>Introducción</title>
         <para>
-            <classname>Zend_Controller_Router_Rewrite</classname>
-            Es el router
+            <classname>Zend_Controller_Router_Rewrite</classname> Es el router
             standard del Framework. Routing es el proceso de tomar la parte
-            final de una
-            <acronym>URI</acronym>
-            (la parte de la
-            <acronym>URI</acronym>
-            que viene después de la
-            <acronym>URL</acronym>
-            base) y la descomposición en parámetros para determinar qué módulo,
-            qué controlador y
-            acción de ese controlador debe recibir la solicitud.
-            Estos valores del módulo,
-            controlador, acción y otros parámetros
-            están enpaquetados en un objeto
-            <classname>Zend_Controller_Request_Http</classname>
-            el cual es
-            procesado luego por
-            <classname>Zend_Controller_Dispatcher_Standard</classname>
-            .
-            El routing ocurre sólo una vez: cuando se recibió inicialmente la
-            solicitud y antes del
-            dispatch del primer controlador.
-        </para>
+            final de una <acronym>URI</acronym> (la parte de la
+                <acronym>URI</acronym> que viene después de la
+                <acronym>URL</acronym> base) y la descomposición en parámetros
+            para determinar qué módulo, qué controlador y acción de ese
+            controlador debe recibir la solicitud. Estos valores del módulo,
+            controlador, acción y otros parámetros están enpaquetados en un
+            objeto <classname>Zend_Controller_Request_Http</classname> el cual
+            es procesado luego por
+                <classname>Zend_Controller_Dispatcher_Standard</classname> . El
+            routing ocurre sólo una vez: cuando se recibió inicialmente la
+            solicitud y antes del dispatch del primer controlador. </para>
 
         <para>
-            <classname>Zend_Controller_Router_Rewrite</classname>
-            está diseñado
+            <classname>Zend_Controller_Router_Rewrite</classname> está diseñado
             para permitir que una funcionalidad tipo mod_rewrite se pueda usar
-            en
-            estructuras
-            <acronym>PHP</acronym>
-            puras. Se basa muy vagamente en el routing de
-            Ruby on Rails (RoR) y no requiere ningún
-            conocimiento previo de
-            reescritura de la
-            <acronym>URL</acronym>
-            del webserver. Está diseñado para trabajar
-            con solo una regla mod_rewrite de Apache (one
-            of):
-        </para>
+            en estructuras <acronym>PHP</acronym> puras. Se basa muy vagamente
+            en el routing de Ruby on Rails (RoR) y no requiere ningún
+            conocimiento previo de reescritura de la <acronym>URL</acronym> del
+            webserver. Está diseñado para trabajar con solo una regla
+            mod_rewrite de Apache (one of): </para>
 
         <programlisting language="php"><![CDATA[
 RewriteEngine on
 RewriteRule !\.(js|ico|gif|jpg|png|css|html)$ index.php
 ]]></programlisting>
 
-        <para>
-            o (preferido):
-       </para>
+        <para> o (preferido): </para>
 
         <programlisting language="php"><![CDATA[
 RewriteEngine On
@@ -66,14 +45,11 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
-        <para>
-            El router rewrite también puede utilizarse con el
-            <acronym>IIS</acronym>
-            webserver (versions &lt;= 7.0) si
-            <ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink>
-            se ha instalado como una extensión Isapi con la siguiente
-            regla de reescribir:
-        </para>
+        <para> El router rewrite también puede utilizarse con el
+                <acronym>IIS</acronym> webserver (versions &lt;= 7.0) si
+                <ulink url="http://www.isapirewrite.com">Isapi_Rewrite</ulink>
+            se ha instalado como una extensión Isapi con la siguiente regla de
+            reescribir: </para>
 
         <programlisting language="php"><![CDATA[
 RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.php [I]
@@ -81,25 +57,17 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
 
         <note>
             <title>IIS Isapi_Rewrite</title>
-            <para>
-                Cuando se usa
-                <acronym>IIS</acronym>
-                ,
-                <varname>$_SERVER['REQUEST_URI']</varname>
-                puede
-                no existir, o establecerlo como un string vacío. En este caso,
-                <classname>Zend_Controller_Request_Http</classname>
+            <para> Cuando se usa <acronym>IIS</acronym> ,
+                    <varname>$_SERVER['REQUEST_URI']</varname> puede no existir,
+                o establecerlo como un string vacío. En este caso,
+                    <classname>Zend_Controller_Request_Http</classname>
                 intentará usar el valor de
-                <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname>
-                establecido por la extensión Isapi_Rewrite.
-            </para>
+                    <varname>$_SERVER['HTTP_X_REWRITE_URL']</varname>
+                establecido por la extensión Isapi_Rewrite. </para>
         </note>
 
-        <para>
-            IIS 7.0 introduce un módulo nativo de reescribir la URL, y puede ser
-            configurado como
-            sigue:
-       </para>
+        <para> IIS 7.0 introduce un módulo nativo de reescribir la URL, y puede
+            ser configurado como sigue: </para>
 
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="UTF-8"?>
@@ -144,14 +112,10 @@ url.rewrite-once = (
     <sect2 id="zend.controller.router.usage">
         <title>Usando un Router</title>
 
-        <para>
-            Para utilizar adecuadamente el router de reescritura debe
-            instanciarlo, agregar algunas
-            rutas definidas por el usuario y
-            luego inyectarlo en el controlador. El siguiente código
-            ilustra el
-            procedimiento:
-       </para>
+        <para> Para utilizar adecuadamente el router de reescritura debe
+            instanciarlo, agregar algunas rutas definidas por el usuario y luego
+            inyectarlo en el controlador. El siguiente código ilustra el
+            procedimiento: </para>
 
         <programlisting language="php"><![CDATA[
 // Crear un router
@@ -169,183 +133,130 @@ $router->addRoute(
     <sect2 id="zend.controller.router.basic">
         <title>Operación Básica del Rewrite Router</title>
 
-        <para>
-            El corazón del RewriteRouter es la definición de la rutas definidas
-            por el usuario. Las
-            rutas se agregan llamando al método addRoute
-            de RewriteRouter y pasándole una nueva
-            instancia de una clase que
-            implementó a
-            <classname>Zend_Controller_Router_Route_Interface</classname>
-            . Eg.:
-        </para>
+        <para> El corazón del RewriteRouter es la definición de la rutas
+            definidas por el usuario. Las rutas se agregan llamando al método
+            addRoute de RewriteRouter y pasándole una nueva instancia de una
+            clase que implementó a
+                <classname>Zend_Controller_Router_Route_Interface</classname> .
+            Eg.: </para>
 
         <programlisting language="php"><![CDATA[
 $router->addRoute('user',
                   new Zend_Controller_Router_Route('user/:username'));
 ]]></programlisting>
 
-        <para>
-            El Rewrite Router viene con seis tipos básicos de rutas (uno de los
-            cuales es
-            especial):
-       </para>
+        <para> El Rewrite Router viene con seis tipos básicos de rutas (uno de
+            los cuales es especial): </para>
 
         <itemizedlist mark="opencircle">
             <listitem>
                 <para>
-                    <link linkend="zend.controller.router.routes.standard">Zend_Controller_Router_Route</link>
+                    <link linkend="zend.controller.router.routes.standard"
+                        >Zend_Controller_Router_Route</link>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <link linkend="zend.controller.router.routes.static">Zend_Controller_Router_Route_Static</link>
+                    <link linkend="zend.controller.router.routes.static"
+                        >Zend_Controller_Router_Route_Static</link>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <link linkend="zend.controller.router.routes.regex">Zend_Controller_Router_Route_Regex</link>
+                    <link linkend="zend.controller.router.routes.regex"
+                        >Zend_Controller_Router_Route_Regex</link>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <link linkend="zend.controller.router.routes.hostname">Zend_Controller_Router_Route_Hostname</link>
+                    <link linkend="zend.controller.router.routes.hostname"
+                        >Zend_Controller_Router_Route_Hostname</link>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <link linkend="zend.controller.router.routes.chain">Zend_Controller_Router_Route_Chain</link>
+                    <link linkend="zend.controller.router.routes.chain"
+                        >Zend_Controller_Router_Route_Chain</link>
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <link linkend="zend.controller.router.default-routes">Zend_Controller_Router_Rewrite</link>
-                    *
-                </para>
+                    <link linkend="zend.controller.router.default-routes"
+                        >Zend_Controller_Router_Rewrite</link> * </para>
             </listitem>
         </itemizedlist>
 
-        <para>
-            Las rutas pueden ser utilizadas numerosas veces para crear una cadena
-            o un esquema de
-            aplicación de ruteo definido por el usuario.
-            Puede usar cualquier número de rutas en
-            cualquier configuración,
-            con la excepción de la ruta del Módulo, la cual debe ser
-            utilizada
-            una vez y probablemente como la ruta más genérica (es decir,
-            por defecto). Cada
-            ruta se describe en mayor detalle más adelante.
-       </para>
+        <para> Las rutas pueden ser utilizadas numerosas veces para crear una
+            cadena o un esquema de aplicación de ruteo definido por el usuario.
+            Puede usar cualquier número de rutas en cualquier configuración, con
+            la excepción de la ruta del Módulo, la cual debe ser utilizada una
+            vez y probablemente como la ruta más genérica (es decir, por
+            defecto). Cada ruta se describe en mayor detalle más adelante. </para>
 
-        <para>
-            El primer parámetro a addRoute es el nombre de la ruta.
-            Se utiliza como un manejador para
-            sacar las rutas del router
-            (por ejemplo, con fines de generación de
-            <acronym>URL</acronym>
-            ).
-            El segundo parámetro es la ruta misma.
-        </para>
+        <para> El primer parámetro a addRoute es el nombre de la ruta. Se
+            utiliza como un manejador para sacar las rutas del router (por
+            ejemplo, con fines de generación de <acronym>URL</acronym> ). El
+            segundo parámetro es la ruta misma. </para>
 
         <note>
-            <para>
-                El uso más común del nombre de ruta es por medio del
-                ayudante de
-                <acronym>URL</acronym>
-                <classname>Zend_View</classname>
-                :
-            </para>
+            <para> El uso más común del nombre de ruta es por medio del ayudante
+                de <acronym>URL</acronym>
+                <classname>Zend_View</classname> : </para>
 
             <programlisting language="php"><![CDATA[
 <a href=
 "<?php echo $this->url(array('username' => 'martel'), 'user') ?>">Martel</a>
 ]]></programlisting>
 
-            <para>
-                Que resultaría en la href:
-                <filename>user/martel</filename>
-                .
+            <para> Que resultaría en la href: <filename>user/martel</filename> .
             </para>
         </note>
 
-        <para>
-            El routing es un simple proceso de iteración a través de todas las
-            rutas provistas y la
-            equiparación de sus definiciones con la petición
-            actual de
-            <acronym>URI</acronym>
-            . Cuando se encuentra una concordancia, se devuelven
-            valores de variables desde la
-            instancia Route y se inyecta en el
-            objeto
-            <classname>Zend_Controller_Request</classname>
-            para su posterior utilización en el dispatcher así también como en
-            los controladores
-            creados por el usuario. En caso de no encontrar
-            ninguna concordancia, se comprobará la
-            siguiente ruta en la cadena.
-        </para>
+        <para> El routing es un simple proceso de iteración a través de todas
+            las rutas provistas y la equiparación de sus definiciones con la
+            petición actual de <acronym>URI</acronym> . Cuando se encuentra una
+            concordancia, se devuelven valores de variables desde la instancia
+            Route y se inyecta en el objeto
+                <classname>Zend_Controller_Request</classname> para su posterior
+            utilización en el dispatcher así también como en los controladores
+            creados por el usuario. En caso de no encontrar ninguna
+            concordancia, se comprobará la siguiente ruta en la cadena. </para>
 
-        <para>
-            Si necesita determinar en qué ruta se encontró una concordancia,
-            puede usar el método
-            <methodname>getCurrentRouteName()</methodname>
-            , que devolverá
-            el identificador usado cuando registró la ruta con el router.
-            Si quiere el
-            objeto de la ruta actual, puede usar
-            <methodname>getCurrentRoute()</methodname>
-            .
-        </para>
+        <para> Si necesita determinar en qué ruta se encontró una concordancia,
+            puede usar el método <methodname>getCurrentRouteName()</methodname>
+            , que devolverá el identificador usado cuando registró la ruta con
+            el router. Si quiere el objeto de la ruta actual, puede usar
+                <methodname>getCurrentRoute()</methodname> . </para>
 
         <note>
             <title>Matching Inverso</title>
-            <para>
-                Las rutas están equiparadas en orden inverso para asegurarse
-                que las rutas más
-                genéricas se definan primero.
-           </para>
+            <para> Las rutas están equiparadas en orden inverso para asegurarse
+                que las rutas más genéricas se definan primero. </para>
         </note>
 
         <note>
             <title>Valores Retornados</title>
-            <para>
-                Los valores retornados del routing provienen de parámetros
-                <acronym>URL</acronym>
-                o de rutas definidas por defecto por el usuario.
-                Estas variables son accesibles
-                posteriormente a través de los métodos
-                <methodname>Zend_Controller_Request::getParam()</methodname>
-                o
-                <methodname>Zend_Controller_Action::_getParam()</methodname>
-                .
+            <para> Los valores retornados del routing provienen de parámetros
+                    <acronym>URL</acronym> o de rutas definidas por defecto por
+                el usuario. Estas variables son accesibles posteriormente a
+                través de los métodos
+                    <methodname>Zend_Controller_Request::getParam()</methodname>
+                o <methodname>Zend_Controller_Action::_getParam()</methodname> .
             </para>
         </note>
 
-        <para>
-            Hay tres variables que pueden utilizarse en las rutas - 'module',
-            'controller' y
-            'action'. Estas variables especiales son utilizados por
-            <classname>Zend_Controller_Dispatcher</classname>
-            para encontrar un
-            controlador y una acción para hacer el dispatch.
-        </para>
+        <para> Hay tres variables que pueden utilizarse en las rutas - 'module',
+            'controller' y 'action'. Estas variables especiales son utilizados
+            por <classname>Zend_Controller_Dispatcher</classname> para encontrar
+            un controlador y una acción para hacer el dispatch. </para>
 
         <note>
             <title>Variables Especiales</title>
-            <para>
-                Los nombres de estas variables especiales pueden ser diferentes
-                si elige alterar los
-                valores por defecto en
-                <classname>Zend_Controller_Request_Http</classname>
-                mediante los
-                métodos
-                <methodname>setControllerKey()</methodname>
-                y
-                <methodname>setActionKey()</methodname>
-                .
-            </para>
+            <para> Los nombres de estas variables especiales pueden ser
+                diferentes si elige alterar los valores por defecto en
+                    <classname>Zend_Controller_Request_Http</classname> mediante
+                los métodos <methodname>setControllerKey()</methodname> y
+                    <methodname>setActionKey()</methodname> . </para>
         </note>
 
     </sect2>
@@ -354,31 +265,18 @@ $router->addRoute('user',
         <title>Routes por Defecto</title>
 
         <para>
-            <classname>Zend_Controller_Router_Rewrite</classname>
-            viene
+            <classname>Zend_Controller_Router_Rewrite</classname> viene
             preconfigurado con una ruta por defecto, que se comparará con
-            <acronym>URI</acronym>
-            s
-            en la forma de
-            <filename>controller/action</filename>
-            .
-            Además, se puede especificar un nombre de módulo como primer
-            elemento del path,
-            permitiendo
-            <acronym>URI</acronym>
-            s de la forma
-            <filename>module/controller/action</filename>
-            . Por último, también coincidrá
-            con cualquier parámetro adicional agregado a la
-            <acronym>URI</acronym>
-            por defecto -
-            <filename>controller/action/var1/value1/var2/value2</filename>
-            .
-        </para>
+                <acronym>URI</acronym> s en la forma de
+                <filename>controller/action</filename> . Además, se puede
+            especificar un nombre de módulo como primer elemento del path,
+            permitiendo <acronym>URI</acronym> s de la forma
+                <filename>module/controller/action</filename> . Por último,
+            también coincidrá con cualquier parámetro adicional agregado a la
+                <acronym>URI</acronym> por defecto -
+                <filename>controller/action/var1/value1/var2/value2</filename> . </para>
 
-        <para>
-            Algunos ejemplos de cómo están equiparadas las rutas:
-       </para>
+        <para> Algunos ejemplos de cómo están equiparadas las rutas: </para>
 
         <programlisting language="php"><![CDATA[
 // Asumiendo lo siguiente:
@@ -418,13 +316,10 @@ http://example/blog/archive/list/sort/alpha/date/desc
     date       == desc
 ]]></programlisting>
 
-        <para>
-            La ruta por defecto es simplemente un objeto
-            <classname>Zend_Controller_Router_Route_Module</classname>
+        <para> La ruta por defecto es simplemente un objeto
+                <classname>Zend_Controller_Router_Route_Module</classname>
             almacenado bajo el nombre de (index) por 'default' en RewriteRouter.
-            Está generado más o
-            menos así:
-        </para>
+            Está generado más o menos así: </para>
 
         <programlisting language="php"><![CDATA[
 $compat = new Zend_Controller_Router_Route_Module(array(),
@@ -433,16 +328,10 @@ $compat = new Zend_Controller_Router_Route_Module(array(),
 $this->addRoute('default', $compat);
 ]]></programlisting>
 
-        <para>
-            Si no quiere esta ruta en particular en su esquema por defecto de
-            routing, podrá anularla
-            creando su propia ruta por 'defecto'
-            (es decir, almacenar bajo el nombre de 'default') o
-            eliminarla por
-            completo usando
-            <methodname>removeDefaultRoutes()</methodname>
-            :
-        </para>
+        <para> Si no quiere esta ruta en particular en su esquema por defecto de
+            routing, podrá anularla creando su propia ruta por 'defecto' (es
+            decir, almacenar bajo el nombre de 'default') o eliminarla por
+            completo usando <methodname>removeDefaultRoutes()</methodname> : </para>
 
         <programlisting language="php"><![CDATA[
 // Eliminar cualquier ruta por defecto
@@ -454,35 +343,20 @@ $router->removeDefaultRoutes();
     <sect2 id="zend.controller.router.rewritebase">
         <title>URL Base y Subdirectorios</title>
 
-        <para>
-            El router rewrite puede ser utilizado en subdirectorios (por
+        <para> El router rewrite puede ser utilizado en subdirectorios (por
             ejemplo
-            <filename>http://domain.com/~user/application-root/</filename>
-            )
-            en cuyo caso la
-            <acronym>URL</acronym>
-            base de la aplicación
-            (
-            <filename>/user/application-root</filename>
-            ) debe ser detectada
+                <filename>http://domain.com/~user/application-root/</filename> )
+            en cuyo caso la <acronym>URL</acronym> base de la aplicación (
+                <filename>/user/application-root</filename> ) debe ser detectada
             automáticamente por
-            <classname>Zend_Controller_Request_Http</classname>
-            y usada en consecuencia.
-        </para>
+                <classname>Zend_Controller_Request_Http</classname> y usada en
+            consecuencia. </para>
 
-        <para>
-            Si la
-            <acronym>URL</acronym>
-            base se detecta incorrectamente se la puede anular con su
-            propio path de base usando
-            <classname>Zend_Controller_Request_Http</classname>
-            y llamando al
-            método
-            <methodname>setBaseUrl()</methodname>
-            (ver
-            <xref linkend="zend.controller.request.http.baseurl"/>
-            ):
-        </para>
+        <para> Si la <acronym>URL</acronym> base se detecta incorrectamente se
+            la puede anular con su propio path de base usando
+                <classname>Zend_Controller_Request_Http</classname> y llamando
+            al método <methodname>setBaseUrl()</methodname> (ver <xref
+                linkend="zend.controller.request.http.baseurl"/> ): </para>
 
         <programlisting language="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
@@ -493,18 +367,12 @@ $request->setBaseUrl('/~user/application-root/');
     <sect2 id="zend.controller.router.global.parameters">
         <title>Parámetros Globales</title>
 
-        <para>
-            Puede establecer los parámetros globales en un router que se
-            proporcionan automáticamente
-            a una ruta cuando se ensamblasn mediante
-            <methodname>setGlobalParam()</methodname>
-            . Si se establece un parámetro global
-            pero también se lo entrega directamente al método
-            de ensamblaje,
-            el parámetro del usuario sobreescribe al parámetro global.
-            Puede establecer
-            un parámetro global esta forma:
-        </para>
+        <para> Puede establecer los parámetros globales en un router que se
+            proporcionan automáticamente a una ruta cuando se ensamblasn
+            mediante <methodname>setGlobalParam()</methodname> . Si se establece
+            un parámetro global pero también se lo entrega directamente al
+            método de ensamblaje, el parámetro del usuario sobreescribe al
+            parámetro global. Puede establecer un parámetro global esta forma: </para>
 
         <programlisting language="php"><![CDATA[
 $router->setGlobalParam('lang', 'en');
@@ -521,30 +389,17 @@ $router->setGlobalParam('lang', 'en');
     </sect2>
 
     <sect2 id="zend.controller.router.add-config">
-        <title>
-            Usando
-            <classname>Zend_Config</classname>
-            con RewriteRouter
-        </title>
+        <title> Usando Zend_Config con RewriteRouter </title>
 
-        <para>
-            A veces es más conveniente para actualizar un archivo de
-            configuración con nuevas rutas
-            que modificar el código.
-            Esto es posible a través del método
-            <methodname>addConfig()</methodname>
-            .
+        <para> A veces es más conveniente para actualizar un archivo de
+            configuración con nuevas rutas que modificar el código. Esto es
+            posible a través del método <methodname>addConfig()</methodname> .
             Básicamente, se crea una configuración compatible con
-            <classname>Zend_Config</classname>
-            .
-            Y en su código lo lee y lo pasa a RewriteRouter.
-        </para>
+                <classname>Zend_Config</classname> . Y en su código lo lee y lo
+            pasa a RewriteRouter. </para>
 
-        <para>
-            Como ejemplo, considere el siguiente archivo
-            <acronym>INI</acronym>
-            :
-        </para>
+        <para> Como ejemplo, considere el siguiente archivo
+                <acronym>INI</acronym> : </para>
 
         <programlisting language="php"><![CDATA[
 [production]
@@ -567,13 +422,8 @@ routes.archive.map.1 = "year"
 ; O: routes.archive.map.year = 1
 ]]></programlisting>
 
-        <para>
-            Entonces el archivo
-            <acronym>INI</acronym>
-            puede ser leído por un objeto
-            <classname>Zend_Config</classname>
-            como sigue:
-        </para>
+        <para> Entonces el archivo <acronym>INI</acronym> puede ser leído por un
+            objeto <classname>Zend_Config</classname> como sigue: </para>
 
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/config.ini', 'production');
@@ -581,58 +431,37 @@ $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig($config, 'routes');
 ]]></programlisting>
 
-        <para>
-            En el ejemplo de arriba, le decimos el router que utilice la
-            sección 'routes' del archivo
-            <acronym>INI</acronym>
-            para utilizarlo en sus rutas.
-            Cada clave de primer nivel en esa sección será utilizada
-            para definir
-            un nombre de ruta; el ejemplo anterior define las rutas 'archive' y
-            'news'.
-            Entonces cada ruta requiere, como mínimo, una entrada a la
-            'ruta' y una o más entradas
-            por 'default'; opcionalmente puede
-            proporcionarse una o más 'reqs' (abreviación de
-            'required').
-            Dicho todo esto, estos corresponden a los tres argumentos que se le
-            suministran al objeto
-            <classname>Zend_Controller_Router_Route_Interface</classname>
-            .
-            Puede utilizarse una clave opcional 'type' para especificar el
-            tipo de clase de ruta a
-            utilizar en esa ruta en particular;
-            por defecto, usa
-            <classname>Zend_Controller_Router_Route</classname>
-            .
-            En el ejemplo de arriba, la ruta 'news' está definida para usar
-            <classname>Zend_Controller_Router_Route_Static</classname>
-            .
+        <para> En el ejemplo de arriba, le decimos el router que utilice la
+            sección 'routes' del archivo <acronym>INI</acronym> para utilizarlo
+            en sus rutas. Cada clave de primer nivel en esa sección será
+            utilizada para definir un nombre de ruta; el ejemplo anterior define
+            las rutas 'archive' y 'news'. Entonces cada ruta requiere, como
+            mínimo, una entrada a la 'ruta' y una o más entradas por 'default';
+            opcionalmente puede proporcionarse una o más 'reqs' (abreviación de
+            'required'). Dicho todo esto, estos corresponden a los tres
+            argumentos que se le suministran al objeto
+                <classname>Zend_Controller_Router_Route_Interface</classname> .
+            Puede utilizarse una clave opcional 'type' para especificar el tipo
+            de clase de ruta a utilizar en esa ruta en particular; por defecto,
+            usa <classname>Zend_Controller_Router_Route</classname> . En el
+            ejemplo de arriba, la ruta 'news' está definida para usar
+                <classname>Zend_Controller_Router_Route_Static</classname> .
         </para>
     </sect2>
 
     <sect2 id="zend.controller.router.subclassing">
         <title>Subclassing del Router</title>
 
-        <para>
-            El standard rewrite router debería proporcionarle más funcionalidad
-            si la necesita; más
-            a menudo, sólo necesitará crear un nuevo
-            tipo de ruta a fin de ofrecer funcionalidades
-            nuevas o modificadas
-            sobre las tutas provistas.
-       </para>
+        <para> El standard rewrite router debería proporcionarle más
+            funcionalidad si la necesita; más a menudo, sólo necesitará crear un
+            nuevo tipo de ruta a fin de ofrecer funcionalidades nuevas o
+            modificadas sobre las tutas provistas. </para>
 
-        <para>
-            Dicho esto, en algún momento puede encontrarse a si mismo deseando
-            usar un paradigma
-            diferente de routing. La intefaz
-            <classname>Zend_Controller_Router_Interface</classname>
-            proporciona
-            la información mínima necesaria para crear un router, y consiste en
-            un único
-            método.
-        </para>
+        <para> Dicho esto, en algún momento puede encontrarse a si mismo
+            deseando usar un paradigma diferente de routing. La intefaz
+                <classname>Zend_Controller_Router_Interface</classname>
+            proporciona la información mínima necesaria para crear un router, y
+            consiste en un único método. </para>
 
         <programlisting language="php"><![CDATA[
 interface Zend_Controller_Router_Interface
@@ -646,22 +475,12 @@ interface Zend_Controller_Router_Interface
 }
 ]]></programlisting>
 
-        <para>
-            El routing sólo ocurre una vez: cuando la petición es recibida por
-            primera vez en el
-            sistema. El propósito del router es determinar el
-            controlador, la acción, y los
-            parámetros opcionales sobre la base
-            del medio ambiente de la solicitud, y luego
-            ajustarlos en la solicitud.
-            El objeto solicitud se pasa entonces al dispatcher.
-            Si no es
-            posible trazar una ruta hacia un dispatch token,
-            el router no debe hacer nada con el
-            objeto solicitud.
-       </para>
+        <para> El routing sólo ocurre una vez: cuando la petición es recibida
+            por primera vez en el sistema. El propósito del router es determinar
+            el controlador, la acción, y los parámetros opcionales sobre la base
+            del medio ambiente de la solicitud, y luego ajustarlos en la
+            solicitud. El objeto solicitud se pasa entonces al dispatcher. Si no
+            es posible trazar una ruta hacia un dispatch token, el router no
+            debe hacer nada con el objeto solicitud. </para>
     </sect2>
 </sect1>
-    <!--
-vim:se ts=4 sw=4 et:
--->

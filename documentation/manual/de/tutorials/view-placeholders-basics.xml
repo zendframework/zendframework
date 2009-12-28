@@ -2,79 +2,80 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.view.placeholders.basics">
-    <title>Basic Placeholder Usage</title>
+    <title>Grundsätzliche Verwendung von Platzhaltern</title>
 
     <para>
-        Zend Framework defines a generic <methodname>placeholder()</methodname> view helper that you
-        may use for as many custom placeholders you need. It also provides a variety of specific
-        placeholder implementations for often-needed functionality, such as specifying the
-        <acronym>DocType</acronym> declaration, document title, and more.
+        Zend Framework definiert einen generischen <methodname>placeholder()</methodname> View
+        Helfer den man für so viele eigene Platzhalter verwenden kann wie man will. Er bietet auch
+        eine Vielzahl an Platzhalter Implementationen für oft benötigte Funktionalitäten, wie die
+        Spezifikation der <acronym>DocType</acronym> Deklaration, den Titel des Dokuments und mehr.
     </para>
 
     <para>
-        All placeholders operate in roughly the same way. They are containers, and thus allow you to
-        operate on them as collections. With them you can:
+        Alle Platzhalter arbeiten einigermaßen auf die selbe Art und Weise. Sie sind Container und
+        erlauben es deshalb das man mit Ihnen als Kollektion arbeitet. Mit Ihnen kann man:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>Append</emphasis> or <emphasis>prepend</emphasis> items to the collection.
+                <emphasis>Anhängen</emphasis> oder <emphasis>voranstellen</emphasis> von Elementen
+                an die Kollektion.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>Replace</emphasis> the entire collection with a single value.
+                <emphasis>Ersetzen</emphasis> der kompletten Kollektion mit einem einzelnen Wert.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Specify a string with which to <emphasis>prepend output</emphasis> of the collection
-                when rendering.
+                Einen String spezifizieren welcher der <emphasis>Ausgaben vorangestellt</emphasis>
+                wird wenn die Kollektion dargestellt wird.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Specify a string with which to <emphasis>append output</emphasis> of the collection
-                when rendering.
+                Einen String spezifizieren welcher der <emphasis>Ausgaben angehängt</emphasis>
+                wird wenn die Kollektion dargestellt wird.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Specify a string with which to <emphasis>separate items</emphasis> of the collection
-                when rendering.
+                Einen String spezifizieren mit dem <emphasis>Elemente geteilt</emphasis> werden wenn
+                die Kollektion dargestellt wird.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>Capture content</emphasis> into the collection.
+                <emphasis>Inhalte holen</emphasis> die sich in der Kollektion befinden.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>Render</emphasis> the aggregated content.
+                <emphasis>Darstellen</emphasis> der gesammelten Inhalte.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Typically, you will call the helper with no arguments, which will return a container on
-        which you may operate. You will then either echo this container to render it, or call
-        methods on it to configure or populate it. If the container is empty, rendering it will
-        simply return an empty string; otherwise, the content will be aggregated according to the
-        rules by which you configure it.
+        Typischerweise ruft man den Helper ohne Argumente auf, damit er einen Container zurückgibt
+        mit dem man arbeiten kann. Man gibt diesen Container aus (echo) um Ihn darzustellen, oder
+        ruft auf Ihm Methoden auf um Ihn zu konfigurieren oder auszugeben. Wenn der Container leer
+        ist, wird seine Darstellung einfach einen leeren String zurückgeben; andernfalls wird der
+        Inhalt zusammengefasst entsprechend der Regeln welche konfiguriert worden sind.
     </para>
 
     <para>
-        As an example, let's create a sidebar that consists of a number of "blocks" of content.
-        You'll likely know up-front the structure of each block; let's assume for this example that
-        it might look like this:
+        Als Beispiel erstellen wir eine Sidebar die aus einer Anzahl an "Blöcken" von Inhalten
+        besteht. Man wird normalerweise die Struktur jeden Blocks aus dem Bauch heraus wissen;
+        nehmen wir für dieses Beispiel an dass Sie wie folgt aussieht:
     </para>
 
     <programlisting language="html"><![CDATA[
@@ -96,8 +97,9 @@
 ]]></programlisting>
 
     <para>
-        The content will vary based on the controller and action, but the structure will be the
-        same. Let's first setup the sidebar in a resource method of our bootstrap:
+        Der Inhalt veriiert basieren auf dem Controller und der Aktion, aber die Struktur ist die
+        gleiche. Zuerst stellen wir die Sidebar in der Sidebar einer Ressource Methode unserer
+        Bootstrap ein:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -111,11 +113,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view = $this->getResource('View');
 
         $view->placeholder('sidebar')
-             // "prefix" -> markup to emit once, before all items in collection
+             // "prefix" -> Markup der einmalig vor allen Elementen
+             // der Kollektion auszugeben ist
              ->setPrefix("<div class=\"sidebar\">\n    <div class=\"block\">\n")
-             // "separator" -> markup to emit between items in a collection
+             // "separator" -> Markup der zwischen Elementen
+             // der Kollektion auszugeben ist
              ->setSeparator("</div>\n    <div class=\"block\">\n")
-             // "postfix" -> markup to emit once, after all items in a collection
+             // "postfix" -> Markup der einmalig nach allen Elementen
+             // der Kollektion auszugeben ist
              ->setPostfix("</div>\n</div>");
     }
 
@@ -124,46 +129,47 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
     <para>
-        The above defines a placeholder, "sidebar", that has no items. It configures the basic
-        markup structure of that placeholder, however, per our requirements.
+        Das obige definiert den Platzhalter "sidebar" der keine Elemente hat. Er konfiguriert die
+        grundsätzliche Struktur des Markups dieses Platzhalter, aber basieren auf unseren
+        Anforderungen.
     </para>
 
     <para>
-        Now, let's assume for the "user" controller that for all actions we'll want a block at the
-        top containing some information. We could accomplish this in two ways: (a) we could add the
-        content to the placeholder directly in the controller's
-        <methodname>preDispatch()</methodname> method, or (b) we could render a view script from
-        within the <methodname>preDispatch()</methodname> method. We'll use (b), as it follows a
-        more proper separation of concerns (leaving view-related logic and functionality within a
-        view script).
+        Jetzt nehmen wir für den "user" Controller an das wir für alle Aktionen einen Block ganz
+        oben wollen der einige Informationen enthält. Wir können das auf zwei Wegen erreichen: (a)
+        wir könnten den Inhalt direkt dem Platzhalter mit der Methode
+        <methodname>preDispatch()</methodname> des Controllers hinzufügen, oder (b) wir könnten ein
+        View Skript in der <methodname>preDispatch()</methodname> Methode darstellen. Wir verwenden
+        (b) da es einer besseren Trennung der Wünsche folgt (indem es View-betreffende Logik und
+        Funktionalität im View Skript behält).
     </para>
 
     <para>
-        We'll name the view script "user/_sidebar.phtml", and populate it as follows:
+        Wir benennen das View Skript "user/_sidebar.phtml", und machen es wir folgt bekannt:
     </para>
 
     <programlisting language="php"><![CDATA[
 <?php $this->placeholder('sidebar')->captureStart() ?>
-<h4>User Administration</h4>
+<h4>Benutzer Administration</h4>
 <ul>
     <li><a href="<?php $this->url(array('action' => 'list')) ?>">
-        List</a></li>
+        Liste</a></li>
     <li><a href="<?php $this->url(array('action' => 'create')) ?>">
-        Create</a></a></li>
+        Erstellen</a></a></li>
 </ul>
 <?php $this->placeholder('sidebar')->captureEnd() ?>
 ]]></programlisting>
 
     <para>
-        The above example makes use of the content capturing feature of placeholders. By default,
-        content is appended as a new item in the container, allowing us to aggregate content. This
-        example makes use of view helpers and static HTML in order to generate markup, and the
-        content is then captured and appended into the placeholder itself.
+        Das obige Beispiel verwendet das Capture Feature für den Inhalt des Platzhalters.
+        Standardmäßig wird Inhalt dem Container als neues Element angehängt, was es erlaubt Ihn zu
+        sammeln. Dieses Beispiel verwendet View Helfer und statisches HTML um Markup zu erzeugen.
+        Der Inhalt wird anschließend gefangen und dem Platzhalter selbst angehängt.
     </para>
 
     <para>
-        To invoke the above view script, we would write the following in our
-        <methodname>preDispatch()</methodname> method:
+        Um das oben stehende View Skript einzubinden würden wir das folgende in unserer
+        <methodname>preDispatch()</methodname> Methode schreiben:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -185,34 +191,34 @@ class UserController extends Zend_Controller_Action
 ]]></programlisting>
 
     <para>
-        Note that we're not capturing the rendered value; there's no need, as the entierty of that
-        view is being captured into a placeholder.
+        Es ist zu beachten das wir den dargestellten Wert nicht fangen; es gibt keine Notwendigkeit
+        dafür da die komplette View in einem Platzhalter gefangen wird.
     </para>
 
     <para>
-        Now, let's assume our "view" action in that same controller needs to present some
-        information. Within the "user/view.phtml" view script, we might have the following snippet
-        of content:
+        Nehmen wir also an das unsere "view" Aktion die im selben Controlle ist einige Informationen
+        anzeigen muss. Im View Skript "user/view.phtml" könnten wie den folgende Inhalts Abschnitt
+        haben:
     </para>
 
     <programlisting language="php"><![CDATA[
 $this->placeholder('sidebar')
-     ->append('<p>User: ' . $this->escape($this->username) .  '</p>');
+     ->append('<p>Benutzer: ' . $this->escape($this->username) .  '</p>');
 ]]></programlisting>
 
     <para>
-        This example makes use of the <methodname>append()</methodname> method, and passes it some
-        simple markup to aggregate.
+        Dieses Beispiel verwendet die <methodname>append()</methodname> Methode und übergibt Ihr
+        etwas einfachen Markup zum sammeln.
     </para>
 
     <para>
-        Finally, let's modify our layout view script, and have it render the placeholder.
+        Letztendlich verändern wir das Layout View Skript und stellen den Platzhalter dar.
     </para>
 
     <programlisting language="php"><![CDATA[
 <html>
 <head>
-    <title>My Site</title>
+    <title>Meine Site</title>
 </head>
 <body>
     <div class="content">
@@ -224,32 +230,33 @@ $this->placeholder('sidebar')
 ]]></programlisting>
 
     <para>
-        For controllers and actions that do not populate the "sidebar" placeholder, no content will
-        be rendered; for those that do, however, echoing the placeholder will render the content
-        according to the rules we created in our bootstrap, and the content we aggregated throughout
-        the application. In the case of the "/user/view" action, and assuming a username of
-        "matthew", we would get content for the sidebar as follows (formatted for readability):
+        Für Controller und Aktionen welche den "sidebar" Platzhalter nicht verwenden wird kein
+        Inhalt dargestellt; für jene die es tun wird, wenn der Platzhalter ausgegeben wird der
+        Inhalt, entsprechend der Regeln die in unserer Bootstrap erstellt wurden, dargestellt als
+        auch der Inhalt den wir über die Anwendung hinaus sammeln. Im Falle der "/user/view"
+        Aktion, und der Annahme des Benutzernamens "matthew" würden wir den folgenden Inhalt der
+        Sidebar erhalten (aus Gründen der Lesbarkeit formatiert):
     </para>
 
     <programlisting language="html"><![CDATA[
 <div class="sidebar">
     <div class="block">
-        <h4>User Administration</h4>
+        <h4>Benutzer Administration</h4>
         <ul>
-            <li><a href="/user/list">List</a></li>
-            <li><a href="/user/create">Create</a></a></li>
+            <li><a href="/user/list">Liste</a></li>
+            <li><a href="/user/create">Erstellen</a></a></li>
         </ul>
     </div>
     <div class="block">
-        <p>User: matthew</p>
+        <p>Benutzer: matthew</p>
     </div>
 </div>
 ]]></programlisting>
 
     <para>
-        There are a large number of things you can do by combining placeholders and layout scripts;
-        experiment with them, and read the <link
-            linkend="zend.view.helpers.initial.placeholder">relevant manual sections</link> for more
-        information.
+        Es gibt eine große Anzahl an Dinge die man tun kann wenn Platzhalter und Layout Skripte
+        kombiniert werden; man sollte mit Ihnen experimentieren und das <link
+            linkend="zend.view.helpers.initial.placeholder">betreffende Kapitel im Handbuch</link>
+        für weitere Informationen lesen.
     </para>
 </sect1>

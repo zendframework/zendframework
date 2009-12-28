@@ -44,28 +44,28 @@
     </para>
 
     <para>
-        To get started using Zend_Layout, first we need to inform our bootstrap to use the
-        <classname>Layout</classname> resource. This can be done by adding the following line to
-        your <filename>application/configs/application.ini</filename> file, within the
-        <constant>production</constant> section:
+        Um mit Zend_Layout zu beginnen müssen wir als erstes die Bootstrap informieren das Sie die
+        <classname>Layout</classname> Ressource verwenden soll. Das kann getan werden indem die
+        folgende Linie zur Datei <filename>application/configs/application.ini</filename> im
+        Abschnitt <constant>production</constant> hinzugefügt wird:
     </para>
 
     <programlisting language="ini"><![CDATA[
 ; application/configs/application.ini
 
-; Add to [production] section:
+; Zum Abschnitt [production] hinzufügen:
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 ]]></programlisting>
 
     <para>
-        The final INI file should look as follows:
+        Die endgültige INI Datei sollte wie folgt aussehen:
     </para>
 
     <programlisting language="ini"><![CDATA[
 ; application/configs/application.ini
 
 [production]
-; PHP settings we want to initialize
+; PHP Einstellungen die initialisiert werden sollen
 phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
 includePaths.library = APPLICATION_PATH "/../library"
@@ -86,20 +86,21 @@ phpSettings.display_errors = 1
 ]]></programlisting>
 
     <para>
-        This directive tells your application to look for layout view scripts in
-        <filename>application/layouts/scripts</filename>. Create those directories now.
+        Diese Direktive sagt der Anwendung das Sie nach Layout View Skripten unter
+        <filename>application/layouts/scripts</filename> nachschauen soll. Jetzt müssen diese
+        Verzeichnisse erstellt werden.
     </para>
 
     <para>
-        We also want to ensure we have an XHTML DocType declaration for our application. To enable
-        this, we need to add a resource to our bootstrap.
+        Wir wollen auch sicherstellen das wir eine XHTML DocType Deklaration für unsere Anwendung
+        haben. Um das zu aktivieren mussen wir eine Ressource zu unserer Bootstrap hinzufügen.
     </para>
 
     <para>
-        The simplest way to add a bootstrap resource is to simply create a protected method
-        beginning with the phrase <methodname>_init</methodname>. In this case, we want to
-        initialize the doctype, so we'll create an <methodname>_initDoctype()</methodname> method
-        within our bootstrap class:
+        Der einfachste Weg um eine Bootstrap Ressource hinzuzufügen ist es einfach eine
+        geschützte Methode zu erstellen die mit der Phrase <methodname>_init</methodname> beginnt.
+        In diesem Fall wollen wir den Doctype initialisieren, also erstellen wir eine
+        <methodname>_initDoctype()</methodname> Methode in unserer Bootstrap Klasse:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -114,34 +115,34 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
     <para>
-        Within that method, we need to hint to the view to use the appropriate doctype. But where
-        will the view object come from? The easy solution is to initialize the
-        <classname>View</classname> resource; once we have, we can pull the view object from the
-        bootstrap and use it.
+        In dieser Methode müssen wir der View sagen das Sie den richtigen DocType verwenden soll.
+        Aber wo kommt das View Objekt her? Die einfachste Lösung ist die Initialisierung der
+        <classname>View</classname> Ressource; sobald wir Sie haben können wir das View Objekt
+        aus der Bootstrap holen und verwenden.
     </para>
 
     <para>
-        To initialize the view resource, add the following line to your
-        <filename>application/configs/application.ini</filename> file, in the section marked
-        <constant>production</constant>:
+        Um die View Ressource zu initialisieren ist die folgende Zeile in der Sektion
+        <constant>production</constant> der Datei
+        <filename>application/configs/application.ini</filename> hinzuzufügen:
     </para>
 
     <programlisting language="ini"><![CDATA[
 ; application/configs/application.ini
 
-; Add to [production] section:
+; Zum Abschnitt [production] hinzufügen:
 resources.view[] =
 ]]></programlisting>
 
     <para>
-        This tells us to initialize the view with no options (the '[]' indicates that the "view" key
-        is an array, and we pass nothing to it).
+        Das sagt uns das die View ohne Optionen initialisiert werden soll ('[]' zeigt das der "view"
+        Schlüssel ein Array ist, und wir Ihm nichts übergeben).
     </para>
 
     <para>
-        Now that we have a view, let's flesh out our <methodname>_initDoctype()</methodname> method.
-        In it, we will first ensure the <classname>View</classname> resource has run, fetch the view
-        object, and then configure it:
+        Jetzt da wir die View haben, sehen wir uns die <methodname>_initDoctype()</methodname>
+        Methode an. In Ihr stellen wir zuerst sicher das die <classname>View</classname> Ressource
+        läuft, holen das View Objekt und konfigurieren es anschließend:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -159,8 +160,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 ]]></programlisting>
 
     <para>
-        Now that we've initialized <classname>Zend_Layout</classname> and set the Doctype, let's
-        create our site-wide layout:
+        Jetzt da wir <classname>Zend_Layout</classname> initialisiert und den DocType gesetzt haben
+        erstellen wir unser Site-weites Layout:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -170,13 +171,13 @@ echo $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Zend Framework Quickstart Application</title>
+  <title>Zend Framework Schnellstart Anwendung</title>
   <?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
 </head>
 <body>
 <div id="header" style="background-color: #EEEEEE; height: 30px;">
     <div id="header-logo" style="float: left">
-        <b>ZF Quickstart Application</b>
+        <b>ZF Schnellstart Anwendung</b>
     </div>
     <div id="header-navigation" style="float: right">
         <a href="<?php echo $this->url(
@@ -193,24 +194,26 @@ echo $this->doctype() ?>
 ]]></programlisting>
 
     <para>
-        We grab our application content using the <methodname>layout()</methodname> view helper, and
-        accessing the "content" key. You may render to other response segments if you wish to, but
-        in most cases, this is all that's necessary.
+        Wir holen den Inhalt der Anwendung indem der <methodname>layout()</methodname> View Helfer
+        verwendet, und auf den "content" Schlüssel zugegriffen wird. Man kann andere Antwort
+        Segmente darstellen wenn man das möchte, aber in den meisten Fällen ist das alles was
+        notwendig ist.
     </para>
 
     <para>
-        Note also the use of the <methodname>headLink()</methodname> placeholder. This is an easy
-        way to generate the HTML for &lt;link&gt; elements, as well as to keep track of them
-        throughout your application. If you need to add additional CSS sheets to support a single
-        action, you can do so, and be assured it will be present in the final rendered page.
+        Es ist zu beachten das wir auch den <methodname>headLink()</methodname> Platzhalter
+        verwenden. Das ist ein einfacher Weg um das HTML für das &lt;link&gt; Element zu erstellen,
+        sowie um es durch die Anwendung hindurch zu verfolgen. Wenn man zusätzliche CSS Blätter
+        zur Unterstützung einer einzelnen Aktion benötigt, kann das getan werden indem man
+        sicherstellt das Sie in der endgültig dargestellten Seite vorhanden sind.
     </para>
 
     <note>
         <title>Checkpoint</title>
 
         <para>
-            Now go to "http://localhost" and check out the source. You should see your XHTML header,
-            head, title, and body sections.
+            Jetzt gehen wir zu "http://localhost" und prüfen die Quelle. Man sieht den XHTML Header,
+            Kopf, Titel und Body Abschnitte.
         </para>
     </note>
 </sect1>

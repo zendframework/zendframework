@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17427 -->
+<!-- EN-Revision: 17778 -->
 <!-- Reviewed: no -->
-<sect1 id="introduction.overview">
-
+<chapter id="introduction.overview">
     <title>Übersicht</title>
 
     <para>
@@ -13,6 +12,7 @@
         Komponenten. Diese lose gekoppelte Architektur erlaubt es Entwicklern die Komponenten
         individuell zu verwenden. Wir nennen das oft auch ein "use-at-will" Design.
     </para>
+
     <para>
         Obwohl Sie separat verwendet werden können, formen die Zend Framework Komponenten in der
         Standard Bibliothek einen mächtigen und erweiterbaren Framework für Web Anwendungen wenn
@@ -28,6 +28,7 @@
         benötigt, man findet eine Zend Framework Komponente mit einer durchgehend getesteten Basis,
         die verwendet werden kann um die Entwicklungszeit drastisch zu reduzieren.
     </para>
+
     <para>
         Der prinzipielle Sponsor des Projektes 'Zend Framework' ist
         <ulink url="http://www.zend.com">Zend Technologies</ulink>, aber viele Firmen haben
@@ -36,6 +37,7 @@
         Web Services anzubieten und andere Technologien welche diese dem Zend Framework Entwicklern
         geben wollen.
     </para>
+
     <para>
         Zend Framework könnte alle diese Features nicht ausliefern und supporten ohne die Hilfe
         der lebhaften Zend Framework Community. Community Mitglieder, einschließlich Entwicklern,
@@ -44,7 +46,7 @@
             url="http://www.zftalk.com">IRC Kanälen</ulink>, und anderen Foren. Welche Frage
         man auch immer über Zend Framework hat, die Community ist immer da um diese zu beantworten.
     </para>
-</sect1>
+</chapter>
 <!--
 vim:se ts=4 sw=4 et:
 -->

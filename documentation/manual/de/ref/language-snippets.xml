@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 19777 -->
+<!-- Reviewed: no -->
 
 <!-- links -->
 <!ENTITY lang                                   'de'>
@@ -14,19 +16,19 @@
 
 <!ENTITY chapter.introduction.title             'Einführung zum Zend Framework'>
 
-<!ENTITY part.learning.title                    'Learning Zend Framework'>
-<!ENTITY part.learning.quickstart.title         'Zend Framework Quick Start'>
-<!ENTITY part.learning.autoloading.title        'Autoloading in Zend Framework'>
-<!ENTITY part.learning.plugins.title            'Plugins in Zend Framework'>
-<!ENTITY part.learning.layout.title             'Getting Started with Zend_Layout'>
-<!ENTITY part.learning.view.placeholders.title  'Getting Started Zend_View Placeholders'>
-<!ENTITY part.learning.form.decorators.title    'Understanding and Using Zend Form Decorators'>
-<!ENTITY part.learning.multiuser.title          'Getting Started with Zend_Session, Zend_Auth, and Zend_Acl'>
-<!ENTITY part.learning.lucene.title             'Getting Started with Zend_Search_Lucene'>
-<!ENTITY part.learning.paginator.title          'Getting Started with Zend_Paginator'>
+<!ENTITY part.learning.title                    'Zend Framework lernen'>
+<!ENTITY part.learning.quickstart.title         'Zend Framework Schnellstart'>
+<!ENTITY part.learning.autoloading.title        'Autoloading im Zend Framework'>
+<!ENTITY part.learning.plugins.title            'Plugins im Zend Framework'>
+<!ENTITY part.learning.layout.title             'Mit Zend_Layout beginnen'>
+<!ENTITY part.learning.view.placeholders.title  'Mit Zend_View Placeholders beginnen'>
+<!ENTITY part.learning.form.decorators.title    'Zend Form Decorator verstehen und verwenden'>
+<!ENTITY part.learning.multiuser.title          'Mit Zend_Session, Zend_Auth, und Zend_Acl beginnen'>
+<!ENTITY part.learning.lucene.title             'Mit Zend_Search_Lucene beginnen'>
+<!ENTITY part.learning.paginator.title          'Mit Zend_Paginator beginnen'>
 
-<!ENTITY part.reference.title                   'Zend Framework Reference'>
+<!ENTITY part.reference.title                   'Zend Framework Referenz'>
 
-<!ENTITY appendix.migration.title               'Zend Framework Migration Notes'>
+<!ENTITY appendix.migration.title               'Zend Framework Migrations Notizen'>
 
 <!ENTITY appendix.performance.title             'Zend Framework Performance Handbuch'>

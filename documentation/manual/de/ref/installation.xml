@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17427 -->
+<!-- EN-Revision: 17778 -->
 <!-- Reviewed: no -->
-<sect1 id="introduction.installation">
-
+<chapter id="introduction.installation">
     <title>Installation</title>
 
     <para>
@@ -27,6 +26,7 @@
                 gute Wahl für jene für die Zend Framework neu ist.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <ulink url="http://framework.zend.com/download/snapshot">Herunterladen des
@@ -39,6 +39,7 @@
                 werden.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Verwenden eines <ulink url="http://subversion.tigris.org">Subversion</ulink>
@@ -49,12 +50,14 @@
                 Anwendungsentwicklung verwendet wird, oder wenn es notwendig ist die Framework
                 Version öfter zu aktualisieren als Releases erscheinen.
             </para>
+
             <para>
                 <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">
                 Exportieren</ulink> ist nützlich wenn man eine spezielle Framework Revision
                 ohne die <filename>.svn</filename> Verzeichnisse erhalten will, wie bei der
                 Erstellung einer Arbeitskopie.
             </para>
+
             <para>
                 <ulink
                 url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">Checke
@@ -66,6 +69,7 @@
                 svn commit</ulink> Kommando in unser <acronym>SVN</acronym> Repository übertragen
                 werden.
             </para>
+
             <para>
                 Eine <ulink
                 url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">
@@ -73,6 +77,7 @@
                 <acronym>SVN</acronym> benutzen um Ihre eigenen Arbeitskopien ihrer Anwendungen
                 zu Verwalten.
             </para>
+
             <para>
                 Die <acronym>URL</acronym> für den Stamm des Zend Framework <acronym>SVN</acronym>
                 Repositories ist: <ulink
@@ -103,5 +108,4 @@
         von Ihnen in eigenen Anwendungen verwendet werden. Die folgenden Kapietl bieten eine
         komprimierten Referenz zum Zend Framework auf Basis der Komponenten.
     </para>
-
-</sect1>
+</chapter>

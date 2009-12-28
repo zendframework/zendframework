@@ -2,43 +2,45 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-layout">
-    <title>Create A Layout</title>
+    <title>Ein Layout erstellen</title>
 
     <para>
-        You may have noticed that the view scripts in the previous sections were HTML fragments- not
-        complete pages. This is by design; we want our actions to return content only related to the
-        action itself, not the application as a whole.
+        Wie man festgestellen kann waren die View Skripte im vorhergehenden Kapitel HTML Fragmente-
+        und keine kompletten Seiten. Das ist so gewünscht; wir wollen das unsere Aktionen nur den
+        Inhalt zurückgeben der für die Aktion selbst relevant ist, und nicht die Anwendung als
+        ganzes.
     </para>
 
     <para>
-        Now we must compose that generated content into a full HTML page. We'd also like to have a
-        consistent look and feel for the application. We will use a global site layout to accomplish
-        both of these tasks.
+        Jetzt müssen wir den erstellten Inhalt zu einer kompletten HTML Seite zusammenfügen. Wir
+        wollen auch ein konsistentes Aussehen und Feeling für die Anwendung haben. Wir wollen ein
+        globales Sitelayout verwenden um beide Arbeiten zu ermöglichen.
     </para>
 
     <para>
-        There are two design patterns that Zend Framework uses to implement layouts: <ulink
-            url="http://martinfowler.com/eaaCatalog/twoStepView.html">Two Step View</ulink> and
+        Es gibt zwei Design Pattern die Zend Framework verwendet um Layouts zu implementieren:
+        <ulink url="http://martinfowler.com/eaaCatalog/twoStepView.html">Two Step View</ulink> und
         <ulink
             url="http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html">Composite
-            View</ulink>. <emphasis>Two Step View</emphasis> is usually associated with the <ulink
+            View</ulink>. <emphasis>Two Step View</emphasis> wird normalerweise mit dem <ulink
             url="http://www.martinfowler.com/eaaCatalog/transformView.html">Transform View</ulink>
-        pattern; the basic idea is that your application view creates a representation that is then
-        injected into the master view for final transformation. The <emphasis>Composite
-            View</emphasis> pattern deals with a view made of one or more atomic, application views.
+        Pattern assoziiert; die grundsätzliche Idee besteht darin das die View der Anwendung eine
+        Repräsentation erstellt die dann in die Master View für letzte Transformationen injiziert
+        wird. Das <emphasis>Composite View</emphasis> Pattern arbeitet mit einer View die aus ein
+        oder mehreren atomischen Anwendungs Views gemacht ist.
     </para>
 
     <para>
-        In Zend Framework, <link linkend="zend.layout">Zend_Layout</link> combines the ideas behind
-        these patterns. Instead of each action view script needing to include site-wide artifacts,
-        they can simply focus on their own responsibilities.
+        Im Zend Framework kombiniert <link linkend="zend.layout">Zend_Layout</link> die Ideen hinter
+        diesen Pattern. Statt dass jedes Action View Skript Site-weite Artefakte einfügen muss,
+        können Sie sich einfach auf Ihre eigenen Beantwortungen konzentrieren.
     </para>
 
     <para>
-        Occasionally, however, you may need application-specific information in your site-wide view
-        script. Fortunately, Zend Framework provides a variety of view
-        <emphasis>placeholders</emphasis> to allow you to provide such information from your action
-        view scripts.
+        Natürlich benötigt man trotzdem Anwendungs-spezifische Informationen im Site-weiten View
+        Skript. Glücklicherweise bietet Zend Framework eine Anzahl von View
+        <emphasis>Platzhaltern</emphasis> die es erlauben solche Informationen von den Action View
+        Skripten zu bekommen.
     </para>
 
     <para>

@@ -199,6 +199,7 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
 
     /**
      * Validates the checksum (Modulo 10)
+     * GTIN implementation factor 3
      *
      * @param  string $value The barcode to validate
      * @return boolean
@@ -214,6 +215,36 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
                 $sum += $barcode[$length - $i] * 3;
             } else {
                 $sum += $barcode[$length - $i];
+            }
+        }
+
+        $calc     = $sum % 10;
+        $checksum = ($calc === 0) ? 0 : (10 - $calc);
+        if ($value[$length + 1] != $checksum) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Validates the checksum (Modulo 10)
+     * IDENTCODE implementation factors 9 and 4
+     *
+     * @param  string $value The barcode to validate
+     * @return boolean
+     */
+    protected function _mod10ident($value)
+    {
+        $barcode = substr($value, 0, -1);
+        $sum     = 0;
+        $length  = strlen($value) - 2;
+
+        for ($i = 0; $i < $length; $i++) {
+            if (($i % 2) === 0) {
+                $sum += $barcode[$length - $i] * 4;
+            } else {
+                $sum += $barcode[$length - $i] * 9;
             }
         }
 

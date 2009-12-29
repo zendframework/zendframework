@@ -190,9 +190,9 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
         }
 
         $this->_value  = (string) $value;
-        $this->_length = strlen($value);
-        $adapter = $this->getAdapter();
-        $result  = $adapter->checkLength($value);
+        $adapter       = $this->getAdapter();
+        $this->_length = $adapter->getLength();
+        $result        = $adapter->checkLength($value);
         if (!$result) {
             $this->_error(self::INVALID_LENGTH);
             return false;

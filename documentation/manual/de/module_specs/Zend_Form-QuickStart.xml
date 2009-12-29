@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 19873 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Schnellstart mit Zend_Form</title>
@@ -413,6 +413,15 @@ $values = $form->getValues();
 
         <programlisting language="php"><![CDATA[
 $unfiltered = $form->getUnfilteredValues();
+]]></programlisting>
+
+        <para>
+            Wenn man andererseits alle gültigen und gefilterten Werte eines teilweise gültigen
+            Formulars benötigt kann folgendes aufgerufen werden:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$values = $form->getValidValues($_POST);
 ]]></programlisting>
     </sect2>
 

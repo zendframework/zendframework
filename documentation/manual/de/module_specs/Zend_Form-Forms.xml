@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 19873 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
@@ -1497,6 +1497,27 @@ $messages = $form->getMessages('username');
             <para>
                 Alle auf diesem Weg gesetzten Fehler können übersetzt werden.
             </para>
+        </sect3>
+
+        <sect3 id="zend.form.forms.validation.values">
+            <title>Nur einen gültigen Wert empfangen</title>
+
+            <para>
+                Es gibt Szenarien in denen man dem Benutzer erlauben will in verschiedenen Schritten
+                mit einem gültigen Formular zu arbeiten. In der Zwischenzeit wird dem Benutzer
+                erlaubt das Formular mit jedem Set an Werte zu speichern. Dann, wenn alle Daten
+                spezifiziert wurden kann das Modell von der Building oder Prototyping Stufe zu einer
+                Gültigen Stufe transferiert werden.
+            </para>
+
+            <para>
+                Alle gültigen Werte die mit den übermittelten Daten übereinstimmen können empfangen
+                werden indem folgendes aufgerufen wird:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$validValues = $form->getValidValues($_POST);
+]]></programlisting>
         </sect3>
     </sect2>
 

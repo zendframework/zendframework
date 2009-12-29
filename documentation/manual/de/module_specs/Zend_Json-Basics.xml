@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 19912 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.basics">
     <title>Grundlegende Verwendung</title>
@@ -15,6 +15,33 @@ $phpNative = Zend_Json::decode($encodedValue);
 // Kodiere ihn für die Rückgabe an den Client:
 $json = Zend_Json::encode($phpNative);
 ]]></programlisting>
+
+    <sect2 id="zend.json.basics.prettyprint">
+        <title>Schön-drucken von JSON</title>
+
+        <para>
+            Manchmal ist es schwer <acronym>JSON</acronym> Daten zu durchsuchen welche von
+            <methodname>Zend_Json::encode()</methodname> erzeugt wurden da Sie keine Leerzeichen
+            oder Einrückungen enthalten. Um das einfacher zu machen erlaubt es
+            <classname>Zend_Json</classname> <acronym>JSON</acronym> schön ausgedruckt, in einem
+            menschlich-lesbaren Format, zu erhalten, indem man
+            <methodname>Zend_Json::prettyPrint()</methodname> verwendet.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Kodieren und an den Client zurückzugeben:
+$json = Zend_Json::encode($phpNative);
+if($debug) {
+    echo Zend_Json::prettyPrint($json, array("indent" => " "));
+}
+]]></programlisting>
+
+        <para>
+            Das zweite optionale Argument von <methodname>Zend_Json::prettyPrint()</methodname> ist
+            ein Optionen Array. Die Option <code>indent</code> erlaubt es einen String für die
+            Einrückung zu definieren - standardmäßig ist das ein einzelnes Tabulator Zeichen.
+        </para>
+    </sect2>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

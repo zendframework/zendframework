@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18865 -->
+<!-- EN-Revision: 19867 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisionierung verwenden</title>
@@ -23,7 +23,7 @@
     <para>
         Für weitere Information zur Google Apps Provisionierungs <acronym>API</acronym>, inklusive
         Anleitungen für das einschalten des <acronym>API</acronym> Zugriffs, kann in die
-        <ulink url="http://code.google.com/apis/calendar/overview.html">Provisionierungs
+        <ulink url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html">Provisionierungs
             <acronym>API</acronym> V2.0 Referenz</ulink> gesehen werden.
     </para>
 

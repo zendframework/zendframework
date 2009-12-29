@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19785 -->
+<!-- EN-Revision: 19819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -1596,64 +1596,5 @@ $firstIsbn = $feed->current()->getIsbn();
                 <classname>JungleBooks_Entry</classname>.
             </para>
         </sect3>
-    </sect2>
-
-    <sect2 id="zend.feed.reader.migrating.from.1.9.6.to.1.10.or.later">
-        <title>Migrating from 1.9.6 to 1.10 or later</title>
-
-        <para>
-            Mit der Einführung von Zend Framework 1.10 wurde die Behandlung für das Empfangen von
-            Autoren und Entwicklern in <classname>Zend_Feed_Reader</classname> geändert. Diese
-            Änderung war ein Weg die Behandlung solcher Daten zwischen RSS und Atom Klassen zwischen
-            den Komponenten zu harmonisieren und die Rückgabe von Autoren und Entwicklern in einer
-            besseren, verwendbareren und detailuerteren Form zu ermöglichen. Das korrigiert auch
-            einen Fehler bei dem angenommen wurde das jedes Autor Element auf einen Namen zeigt.
-            In RSS ist das falsch, da ein Autor Element aktuell nur eine Email Adresse anbieten
-            muss. Zusätzlich fügte die originale Implementation seine RSS Limits bei Atom Feeds
-            hinzu was zu einer Reduzierung der Nützlichkeit des Parsers mit diesem Format führte.
-        </para>
-
-        <para>
-            Die Änderung bedeutet das Methoden wie <methodname>getAuthors()</methodname> und
-            <methodname>getContributors</methodname> nicht länger ein einfaches Array von Strings
-            zurückgeben die von den relevanten RSS und Atom Elementen geparst wurden Statt dessen
-            ist der Rückgabewert eine Unterklasse von <classname>ArrayObject</classname> die
-            <classname>Zend_Feed_Reader_Collection_Author</classname> genannt wird und ein
-            aufzählbares multidimensionales Array an Autoren simuliert. Jedes Mitglied dieses
-            Objekts ist ein einfaches Array mit drei potentiellen Schlüsseln (wie in den
-            Quelldaten erlaubt). Diese beinhalten name, email und uri.
-        </para>
-
-        <para>
-            Das originale Verhlaten dieser Methoden würde ein einfaches Array von Strings
-            zurückgeben, wobei jeder String versucht einen einzelnen Namen zu präsentieren, aber in
-            der Realität war dies nicht möglich da es keine Regel gibt die das Format der RSS
-            Autor Strings leiten.
-        </para>
-
-        <para>
-            Die einfachste Methode der Simulation des originalen Verhaltens dieser Methoden ist die
-            Verwendung von <classname>Zend_Feed_Reader_Collection_Author</classname>'s
-            <methodname>getValues()</methodname> welche auch ein einfaches Array an Strings
-            darstellt und die "relevantesten Daten" repräsentiert. Für Autoren wird deren Name
-            angenommen. Jeder Wert in resultierenden Array wird vom "name" Wert abgeleitet welcher
-            jedem Autor angehängt ist (wenn vorhanden). In den meisten Fällen ist diese einfache
-            Änderung einfach durchzuführen wie anbei demonstriert.
-        </para>
-
-        <programlisting language="php"><![CDATA[
-/**
- * In 1.9.6
- */
-
-$feed = Zend_Feed_Reader::import('http://example.com/feed');
-$authors = $feed->getAuthors();
-
-/**
- * Äquivalent in 1.10
- */
-$feed = Zend_Feed_Reader::import('http://example.com/feed');
-$authors = $feed->getAuthors()->getValues();
-]]></programlisting>
     </sect2>
 </sect1>

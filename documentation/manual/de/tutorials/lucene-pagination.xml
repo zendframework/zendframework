@@ -2,22 +2,23 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.lucene.pagination">
-    <title>Search result pagination</title>
+    <title>Seitendarstellung von Suchergebnissen</title>
 
     <para>
-        As <link linkend="learning.lucene.searching.identifiers">mentioned above</link>, search
-        result hit objects use lazy loading for stored document fields. When any stored field is
-        accessed, the complete document is loaded.
+        Wie <link linkend="learning.lucene.searching.identifiers">vorher erwähnt</link>, verwenden
+        die Hit Objekte von Suchergebnissen Lazy Loading für gespeicherte Dokumentfelder. Wenn auf
+        ein gespeichertes Feld zugegriffen wird, wird das komplette Dokument geladen.
     </para>
 
     <para>
-        Do not retrieve all documents if you actually need to work only with some portion of them.
-        Go through the search results and store document IDs (and optionally the score) somewhere to
-        retrive documents from the index during the next script execution.
+        Man sollte nicht alle Dokumente empfangen wenn man nur mit einem Teil von Ihnen arbeiten
+        muss. Man sollte durch die Suchergebnisse gehen und die IDs der Dokumente irgendwo speichern
+        (und optional die Bewertung) um die Dokumente vom Index bei der nächsten Ausführung des
+        Skripts zu erhalten.
     </para>
 
     <example id="learning.lucene.pagination.example">
-        <title>Search result pagination example</title>
+        <title>Beispiel für die seitendarstellung von Suchergebnissen</title>
 
         <programlisting language="php"><![CDATA[
 $cacheId = md5($query);

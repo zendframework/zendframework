@@ -2,10 +2,10 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.simplest">
-    <title>Decorator Basics</title>
+    <title>Decorator Grundlagen</title>
 
     <sect2 id="learning.form.decorators.simplest.decorator-overview">
-        <title>Overview of the Decorator Pattern</title>
+        <title>Übersicht über das Decorator Pattern</title>
 
         <para>
             To begin, we'll cover some background on the <ulink

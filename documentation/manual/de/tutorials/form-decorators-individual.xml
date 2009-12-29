@@ -34,8 +34,8 @@ $element = new Zend_Form_Element('foo', array(
 ]]></programlisting>
 
     <para>
-        If we wanted to pull and render just the <classname>SimpleInput</classname> decorator, we
-        can do so using the <methodname>getDecorator()</methodname> method:
+        Wenn wir nur den <classname>SimpleInput</classname> holen und darstellen wollen, können wir
+        das tun indem wir die Methode <methodname>getDecorator()</methodname> verwenden:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -44,7 +44,8 @@ echo $decorator->render('');
 ]]></programlisting>
 
     <para>
-        This is pretty easy, but it can be made even easier; let's do it in a single line:
+        Das ist recht einfach kann aber sogar noch einfacher gemacht werden; machen wir es in einer
+        einzelnen Zeile:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -52,11 +53,12 @@ echo $element->getDecorator('SimpleInput')->render('');
 ]]></programlisting>
 
     <para>
-        Not too bad, but still a little complex. To make this easier, a shorthand notation was
-        introduced into <classname>Zend_Form</classname> in 1.7: you can render any registered
-        decorator by calling a method of the format <methodname>renderDecoratorName()</methodname>.
-        This will effectively perform what you see above, but makes the <varname>$content</varname>
-        argument optional and simplifies the usage:
+        Nicht schlecht, aber trotzdem noch etwas komplex. Um es noch einfacher zu machen wurde mit
+        1.7 eine Kurzschreibweise in <classname>Zend_Form</classname> eingeführt: man kann jeden
+        registrierten Decorator darstellen indem eine Methode des Formats
+        <methodname>renderDecoratorName()</methodname> aufgerufen wird. Das wird effektiv
+        ausgeführt wie man oben sieht, macht aber das <varname>$content</varname> Argument optional
+        und vereinfacht die Verwendung:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -64,25 +66,28 @@ echo $element->renderSimpleInput();
 ]]></programlisting>
 
     <para>
-        This is a neat trick, but how and why would you use it?
+        Das ist ein netter Trick, aber wie und warum sollte man Ihn verwenden?
     </para>
 
     <para>
-        Many developers and designers have very precise markup needs for their forms. They would
-        rather have full control over the output than rely on a more automated solution which may or
-        may not conform to their design. In other cases, the form layout may require a lot of
-        specialized markup -- grouping arbitrary elements, making some invisible unless a particular
-        link is selected, etc.
+        Viele Entwickler und Designer haben sehr präzise Notwendigkeiten für das Markup in Ihren
+        Formularen. Sie würden eher volle Kontrolle über Ihre Ausgabe haben wollen als auf eine
+        automatisiertere Lösung zu stützen welche mit Ihrem Design mehr oder weniger konform geht.
+        In anderen Fällen benötigt das Layout des Formulars ein spezialisierteres Markup --
+        gruppieren von eigenen Elementen, einige von Ihnen unsichtbar solange bis ein bestimmter
+        Link ausgewählt wurde, usw.
     </para>
 
     <para>
-        Let's utilize the ability to render individual decorators to create some specialized markup.
+        Sehen wir uns die Fähigkeit an individuelle Decorators darzustellen und ein
+        spezialisierteres Markup zu erstellen.
     </para>
 
     <para>
-        First, let's define a form. Our form will capture a user's demographic details. The markup
-        will be highly customized, and in some cases use view helpers directly instead of form
-        elements in order to achieve its goals.  Here is the basic form definition:
+        Definieren wir als erstes ein Formular. Unser Formular holt demografische Details des
+        Benutzers. Das Markup wird sehr stark anpassbar sein, und in einigen Fällen View Helfer
+        direkt verwenden statt den Formular Elementen um seine Ziele zu erreichen. Hier ist die
+        grundsätzliche Definition des Formulars:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -90,31 +95,31 @@ class My_Form_UserDemographics extends Zend_Form
 {
     public function init()
     {
-        // Add a path for my own decorators
+        // Einen Pfad für eigene Decorators hinzufügen
         $this->addElementPrefixPaths(array(
             'decorator' => array('My_Decorator' => 'My/Decorator'),
         ));
 
         $this->addElement('text', 'firstName', array(
-            'label' => 'First name: ',
+            'label' => 'Vorname: ',
         ));
         $this->addElement('text', 'lastName', array(
-            'label' => 'Last name: ',
+            'label' => 'Nachname: ',
         ));
         $this->addElement('text', 'title', array(
-            'label' => 'Title: ',
+            'label' => 'Titel: ',
         ));
         $this->addElement('text', 'dateOfBirth', array(
-            'label' => 'Date of Birth (DD/MM/YYYY): ',
+            'label' => 'Geburtsdatum (DD/MM/YYYY): ',
         ));
         $this->addElement('text', 'email', array(
-            'label' => 'Your email address: ',
+            'label' => 'Emailadresse: ',
         ));
         $this->addElement('password', 'password', array(
-            'label' => 'Password: ',
+            'label' => 'Passwort: ',
         ));
         $this->addElement('password', 'passwordConfirmation', array(
-            'label' => 'Confirm Password: ',
+            'label' => 'Passwort wiederholen: ',
         ));
     }
 }
@@ -122,74 +127,79 @@ class My_Form_UserDemographics extends Zend_Form
 
     <note>
         <para>
-            We're not defining any validators or filters at this time, as they are not relevant to
-            the discussion of decoration. In a real-world scenario, you should define them.
+            Wir definieren jetzt keine Prüfungen oder Filter, da Sie für die Diskussion der
+            Decorators nicht relevant sind. In einem Real-World Szenario sollte man Sie definieren.
         </para>
     </note>
 
     <para>
-        With that out of the way, let's consider how we might want to display this form. One common
-        idiom with first/last names is to display them on a single line; when a title is provided,
-        that is often on the same line as well.  Dates, when not using a JavaScript date chooser,
-        will often be separated into three fields displayed side by side.
+        Da dass auf dem Weg ist, besprechen wir wie dieses Formular angezeigt werden soll. Eine
+        übliche Ausdrucksweise mit Vor-/Nachnamen ist Sie in einer einzelnen Zeile anzuzeigen;
+        wenn ein Titel angegeben wird, ist er oft auch in der selben Zeile. Daten werden oft in
+        drei Felder separiert und Seite an Seite angezeigt, wen keine JavaScript Datumsauswahl
+        verwendet wird.
     </para>
 
     <para>
-        Let's use the ability to render an element's decorators one by one to accomplish this.
-        First, let's note that no explicit decorators were defined for the given elements. As a
-        refresher, the default decorators for (most) elements are:
+        Verwenden wir die Fähigkeit die Decorators eines Elements einzeln darzustellen um das zu
+        ermöglichen. Erstens ist zu beachten das keine expliziten Decorators für die angegebenen
+        Elemente definiert wurden. Als Auffrischung sind die standardmäßigen Decorators für die
+        (meisten) Elemente:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <classname>ViewHelper</classname>: utilize a view helper to render a form input
+                <classname>ViewHelper</classname>: Verwendet einen View Helfer um eine
+                Formulareingabe darzustellen
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>Errors</classname>: utilize the <classname>FormErrors</classname> view
-                helper to render validation errors
+                <classname>Errors</classname>: Verwendet den View Helfer
+                <classname>FormErrors</classname> um Prüfungsfehler darzustellen
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>Description</classname>: utilize the <classname>FormNote</classname> view
-                helper to render the element description (if any)
+                <classname>Description</classname>: Verwendet den View Helfer
+                <classname>FormNote</classname> um die Beschreibung des Elements darzustellen
+                (wenn vorhanden)
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>HtmlTag</classname>: wrap the above three items in a
-                <code>&lt;dd&gt;</code> tag
+                <classname>HtmlTag</classname>: Umschließt die obigen drei Elemente mit einem
+                <code>&lt;dd&gt;</code> Tag
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>Label</classname>: render the element label using the
-                <classname>FormLabel</classname> view helper (and wrap it in a
-                <code>&lt;dt&gt;</code> tag)
+                <classname>Label</classname>: Stellt die Überschrift des Elements dar indem es den
+                View Helfer <classname>FormLabel</classname> verwendet (und Ihn in ein
+                <code>&lt;dt&gt;</code> Tag umhüllt)
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Also, as a refresher, you can access any element of a form as if it were a class property;
-        simply reference the element by the name you assigned it.
+        Auch als Auffrischung, kann man auf jedes Element eines Formulars zugreifen wie wenn es die
+        Eigenschaft einer Klasse wäre; auf das Element muss einfach mit dem Namen verwiesen werden
+        der Ihm zugeordnet wurde.
     </para>
 
     <para>
-        Our view script might then look like this:
+        Unser View Skript könnte dann wie folgt aussehen:
     </para>
 
     <programlisting language="php"><![CDATA[
 <?php
 $form = $this->form;
-// Remove <dt> from label generation
+// Entfernt <dt> von der Erstellung der Überschrift
 foreach ($form->getElements() as $element) {
     $element->getDecorator('label')->setOption('tag', null);
 }
@@ -223,30 +233,30 @@ foreach ($form->getElements() as $element) {
         <?php echo $form->passwordConfirmation->renderLabel()
               . $form->passwordConfirmation->renderViewHelper() ?>
     </div>
-    <?php echo $this->formSubmit('submit', 'Save') ?>
+    <?php echo $this->formSubmit('submit', 'Speichern') ?>
 </form>
 ]]></programlisting>
 
     <para>
-        If you use the above view script, you'll get approximately the following HTML (approximate,
-        as the HTML below is formatted):
+        Wenn man obiges View Skript verwendet erhält man voraussichtlich das folgende HTML
+        (angenähert da das HTML von anbei formatiert ist):
     </para>
 
     <programlisting language="html"><![CDATA[
 <form method="post" action="">
     <div class="element">
-        <label for="title" tag="" class="optional">Title:</label>
+        <label for="title" tag="" class="optional">Titel:</label>
         <input type="text" name="title" id="title" value=""/>
 
-        <label for="firstName" tag="" class="optional">First name:</label>
+        <label for="firstName" tag="" class="optional">Vorname:</label>
         <input type="text" name="firstName" id="firstName" value=""/>
 
-        <label for="lastName" tag="" class="optional">Last name:</label>
+        <label for="lastName" tag="" class="optional">Nachname:</label>
         <input type="text" name="lastName" id="lastName" value=""/>
     </div>
 
     <div class="element">
-        <label for="dateOfBirth" tag="" class="optional">Date of Birth
+        <label for="dateOfBirth" tag="" class="optional">Geburtsdatum
             (DD/MM/YYYY):</label>
         <input type="text" name="dateOfBirth[day]" id="dateOfBirth-day"
             value="" size="2" maxlength="2"/>
@@ -259,27 +269,28 @@ foreach ($form->getElements() as $element) {
     </div>
 
     <div class="element">
-        <label for="password" tag="" class="optional">Password:</label>
+        <label for="password" tag="" class="optional">Passwort:</label>
         <input type="password" name="password" id="password" value=""/>
     </div>
 
     <div class="element">
         <label for="passwordConfirmation" tag="" class="" id="submit"
-            value="Save"/>
+            value="Speichern"/>
 </form>
 ]]></programlisting>
 
     <para>
-        It may not be truly pretty, but with some CSS, it could be made to look exactly how you
-        might want to see it. The main point, however, is that this form was generated using almost
-        entirely custom markup, while still leveraging decorators for the most common markup (and to
-        ensure things like escaping with htmlentities and value injection occur).
+        Ist mag nicht wirklich schön sein, aber mit etwas CSS könnte man es so verändern das es
+        exakt so aussieht wie man es haben will. Der Punkt ist, das dieses Formular erstellt wurde
+        indem fast komplett eigenes Markup verwendet wurde, wärend trotzdem Decorators für das
+        meiste gemeinsame Markup verwendet wurden (und um sicherzustellen das Dinge wie das Escaping
+        mit HtmlEntities und die Injektion von Werten stattfinden).
     </para>
 
     <para>
-        By this point in the tutorial, you should be getting fairly comfortable with the markup
-        possibilities using <classname>Zend_Form</classname>'s decorators. In the next section, we'll
-        revisit the date element from above, and demonstrate how to create a custom element
-        and decorator for composite elements.
+        Ab diesem Punkt des Tutorials sollte man sich recht gut auskennen not den Möglichkeiten
+        des Markups wenn <classname>Zend_Form</classname>'s Decorators verwendet werden. Im nächsten
+        Abschnitt sehen wir uns das Datumselement von oben nochmals an, und demonstrieren wie ein
+        eigenes Element und ein Decorator für kombinierte Elemente erstellt werden kann.
     </para>
 </sect1>

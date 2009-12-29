@@ -2,75 +2,77 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.intro">
-    <title>Building Multi-User Applications With Zend Framework</title>
+    <title>Erstellung von Multi-User Anwendungen mit Zend Framework</title>
 
     <sect2 id="learning.multiuser.intro.zf">
         <title>Zend Framework</title>
 
         <para>
-            When the original "web" was created, it was designed to be a publishing platform
-            for predominantly static content. As demand for content on the web grew, as did
-            the number of consumers on the internet for web content, the demand for using the
-            web as an application platform also grew. Since the web is inherently good at
-            delivering a simultaneous experience to many consumers from a single location,
-            it makes it an ideal environment for building dynamically driven, multi-user,
-            and more commonly today, social systems.
+            Als das Originale "Web" erstellt wurde, wurde es dazu designt eine
+            Veröffentlichungs-Platform für hauptsächlich statiche Inhalte zu sein. Als der Wunsch
+            nach Inhalt im Web wuchs, tat es auch die Anzahl der Benutzer des Internets für Web
+            Inhalte, und auch der Wunsch für die Verwendung des Webs als Anwendungsplattform
+            wuchs. Seit das Web von Natur aus gut darin ist simultane Erfahrungen an viele
+            Konsumenten von einem einzelnen Ort aus zu liefern, ist es auch die ideale Umgebung für
+            die Erstellung von dynamisch erzeugten, Multi-User und heutzutage üblicheren Sozialen
+            Systeme.
         </para>
 
         <para>
-            <acronym>HTTP</acronym> is the protocol of the web: a stateless, typically short
-            lived, request and response protocol. This protocol was designed this way because
-            the original intent of the web was to serve or publish static content. It is this
-            very design that has made the web as immensely successful as it is. It is also
-            exactly this design that brings new concerns to developers who wish to use the
-            web as an application platform.
+            <acronym>HTTP</acronym> ist das Protokoll des Webs: es ist statuslos und ein Antwort
+            Protokoll. Dieses Protokoll wurde so erstellt weil der originale Zweck des Webs das
+            anbieten und veröffentlichen von statischem Inhalt war. Es ist auch dieses Design
+            welches das Web so immens erfolgreich gemacht hat wie es ist. Es ist auch exakt dieses
+            Design welches Entwicklern neue Bedenken bereitet wenn Sie das Web als
+            Anwendungsplattform verwenden wollen.
         </para>
 
         <para>
-            These concerns and responsibilities can effectively be summed up by three questions:
+            Diese Bedenken und Verantwortlichkeiten können effektiv in drei Fragen zusammengefasst
+            werden:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    How do you distinguish one application consumer from another?
+                    Wie trennt den Benutzer einer Anwendung von einem anderen?
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    How do you identify a consumer as authentic?
+                    Wie identifiziert man einen Benutzer als authentisch?
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    How do you control what a consumer has access to?
+                    Wie kontrolliert man wozu ein Benutzer Zugriff hat?
                 </para>
             </listitem>
         </itemizedlist>
 
         <note>
-            <title>Consumer Vs. User</title>
+            <title>Konsument vs. Benutzer</title>
 
             <para>
-                Notice we use the term "consumer" instead of person. Increasingly, web applications
-                are becoming service driven. This means that not only are real people ("users") with
-                real web browsers consuming and using your application, but also other web
-                applications through machine service technologies such as <acronym>REST</acronym>,
-                <acronym>SOAP</acronym>, and <acronym>XML-RPC</acronym>. In this respect,
-                people, as well as other consuming applications, should all be treated in same with
-                regard to the concerns outlined above.
+                Es ist zu beachten das wir den Ausdruck "Benutzer" statt Person verwenden. Web
+                Anwendungen werden immer mehr von Services betrieben. Das bedeuetet das es nicht nur
+                Personen ("Benutzer") mit echten Web Browsern gibt welche die Anwendung konsumieren
+                und verwenden, sondern auch andere Web Anwendungen die durch eine Maschinen Service
+                Technologie wie <acronym>REST</acronym>, <acronym>SOAP</acronym>, und
+                <acronym>XML-RPC</acronym> darauf zugreifen. Deshalb sollten Personen, wie auch
+                andere benutzende Anwendungen, alle auf dem selben Weg behandelt werden und den
+                selben Bedenken die oben beschrieben wurden.
             </para>
-
         </note>
 
         <para>
-            In the following chapters, we'll take a look at these common problems relating to
-            authentication and authorization in detail. We will discover how 3 main components:
-            <classname>Zend_Session</classname>, <classname>Zend_Auth</classname>, and
-            <classname>Zend_Acl</classname>; provide an out-of-the-box solution as well as the
-            extension points each have that will cater to a more customized solution.
+            In den folgenden Kapiteln, sehen wir uns diese gemeinsamen Probleme an welche im Detail
+            auf Authentifizierung und Autorisierung Bezug nehmen. Wir werden die 3 Hauptkomponenten
+            kennenlernen: <classname>Zend_Session</classname>, <classname>Zend_Auth</classname>, und
+            <classname>Zend_Acl</classname>; eine sofort verwendbare Lösung anbieten sowie
+            Erweiterungspunkte welche auf eine bessere anpassbare Lösung abzielen.
         </para>
     </sect2>
 </sect1>

@@ -79,39 +79,6 @@ class Zend_Barcode_Object_Int25 extends Zend_Barcode_Object_Code25
     }
 
     /**
-     * Retrieve text to encode
-     * @return string
-     */
-    public function getText()
-    {
-        if ($this->_withChecksum) {
-            $text =  $this->_getTextWithChecksum();
-        } else {
-            $text = $this->_text;
-        }
-        return (strlen($text) % 2 ? '0' . $text : $text);
-    }
-
-    /**
-     * Retrieve text to display
-     * @return string
-     */
-    public function getTextToDisplay()
-    {
-        if ($this->_withChecksumInText) {
-            $text = $this->_getTextWithChecksum();
-            return (strlen($text) % 2 ? '0' . $text : $text);
-        }
-
-        $text = $this->_text;
-        if ($this->_withChecksum) {
-            return (strlen($text) % 2 ? $text : '0' . $text);
-        }
-
-        return (strlen($text) % 2 ? '0' . $text : $text);
-    }
-
-    /**
      * Width of the barcode (in pixels)
      * @return integer
      */

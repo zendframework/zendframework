@@ -137,7 +137,12 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
      */
     public function getTextToDisplay()
     {
-        return '*' . parent::getTextToDisplay() . '*';
+        $text = parent::getTextToDisplay();
+        if (substr($text, 0, 1) != '*' && substr($text, -1) != '*') {
+            return '*' . $text . '*';
+        } else {
+            return $text;
+        }
     }
 
     /**
@@ -178,15 +183,5 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
             $checksum += $charset[$character];
         }
         return array_search(($checksum % 43), $charset);
-    }
-
-    /**
-     * Get text with appended checksum
-     *
-     * @return string
-     */
-    protected function _getTextWithChecksum()
-    {
-        return $this->_text . $this->getChecksum($this->_text);
     }
 }

@@ -168,9 +168,17 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     protected $_withChecksumInText = false;
 
     /**
+     * Fix barcode length (numeric or string like 'even')
      * @var $_barcodeLength integer | string
      */
     protected $_barcodeLength = null;
+
+    /**
+     * Activate automatic addition of leading zeros 
+     * if barcode length is fixed
+     * @var $_addLeadingZeros boolean
+     */
+    protected $_addLeadingZeros = true;
 
     /**
      * TTF font name: can be set before instanciation of the object
@@ -494,10 +502,34 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      */
     public function getText()
     {
+        $text = $this->_text;
         if ($this->_withChecksum) {
-            return $this->_getTextWithChecksum();
+            $text .= $this->getChecksum($this->_text);
         }
-        return $this->_text;
+        return $this->_addLeadingZeros($text);
+    }
+
+    /**
+     * Automatically add leading zeros if barcode length is fixed
+     * @param string $text
+     * @param boolean $withoutChecksum
+     */
+    protected function _addLeadingZeros($text, $withoutChecksum = false)
+    {
+        if ($this->_barcodeLength && $this->_addLeadingZeros) {
+            if (is_int($this->_barcodeLength)) {
+                $length = $withoutChecksum ? ($this->_barcodeLength - 1) : $this->_barcodeLength;
+                if (strlen($text) < $length) {
+                    $text = str_repeat('0', $length - strlen($text)) . $text;
+                }
+            } else {
+                if ($this->_barcodeLength == 'even') {
+                    $omitChecksum = (int) $this->_withChecksum && $withoutChecksum;
+                    $text = ((strlen($text) - $omitChecksum) % 2 ? '0' . $text : $text);
+                }
+            }
+        }
+        return $text;
     }
 
     /**
@@ -516,9 +548,10 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     public function getTextToDisplay()
     {
         if ($this->_withChecksumInText) {
-            return $this->_getTextWithChecksum();
+            return $this->getText();
+        } else {
+            return $this->_addLeadingZeros($this->_text, true);
         }
-        return $this->_text;
     }
 
     /**

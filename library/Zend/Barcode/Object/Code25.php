@@ -155,14 +155,4 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
 
         return $checksum;
     }
-
-    /**
-     * Retrieve text with checksum appended
-     *
-     * @return string
-     */
-    protected function _getTextWithChecksum()
-    {
-        return $this->_text . $this->getChecksum($this->_text);
-    }
 }

@@ -85,28 +85,6 @@ class Zend_Barcode_Object_Itf14 extends Zend_Barcode_Object_Int25
     }
 
     /**
-     * Retrieve text to encode
-     * @return string
-     */
-    public function getText()
-    {
-        $text = $this->_getTextWithChecksum();
-        if (strlen($text) < 14) {
-            $text = str_repeat('0', 14 - strlen($text)) . $text;
-        }
-        return $text;
-    }
-
-    /**
-     * Retrieve text to display
-     * @return string
-     */
-    public function getTextToDisplay()
-    {
-        return $this->getText();
-    }
-
-    /**
      * Check allowed characters
      * @param string $value
      * @return string

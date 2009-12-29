@@ -8,12 +8,13 @@
         <title>Übersicht über das Decorator Pattern</title>
 
         <para>
-            To begin, we'll cover some background on the <ulink
-                url="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator design
-                pattern</ulink>.  One common technique is to define a common interface that both
-            your originating object and decorator will implement; your decorator than accepts the
-            originating object as a dependency, and will either proxy to it or override its methods.
-            Let's put that into code to make it more easily understood:
+            Am Beginn behandeln wir einige Hintergründe des <ulink
+                url="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator Design
+                Patterns</ulink>. Eine verbreitetere Technik ist die Definition eines gemeinsamen
+            Interfaces welche sowohl das originale Objekt als auch alle von Ihm abhängigen
+            implementieren; der Decorator akzeptiert dann das originale Objekt als abhängiges, und
+            wird entweder darauf verweisen oder seine Methoden überschreiben. Schreiben wir etwas
+            Code damit es leichter verständlich wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -76,27 +77,28 @@ class LockedWindow implements Window
 ]]></programlisting>
 
         <para>
-            You then create an object of type <classname>StandardWindow</classname>, pass it to the
-            constructor of <classname>LockedWindow</classname>, and your window instance now has
-            different behavior. The beauty is that you don't have to implement any sort of "locking"
-            functionality on your standard window class -- the decorator takes care of that for you.
-            In the meantime, you can pass your locked window around as if it were just another
-            window.
+            Wir haben ein Objekt vom Typ <classname>StandardWindow</classname> erstellt, es dem
+            Contructor von <classname>LockedWindow</classname> übergeben, und die eigene Fenster
+            Instanz hat jetzt ein anderes Verhalten. Das Schöne daran ist, das man keine Art von
+            "Locking" Funktionalität in der standardmäßigen Fenster Klasse implementieren muss --
+            der Decorator passt für einen darauf auf. In der Zwischenzeit kann das gesperrte Fenster
+            herum übergeben wie wenn ein nur ein anderes Fenster wäre.
         </para>
 
         <para>
-            One particular place where the decorator pattern is useful is for creating textual
-            representations of objects. As an example, you might have a "Person" object that, by
-            itself, has no textual representation. By using the Decorator pattern, you can create an
-            object that will act as if it were a Person, but also provide the ability to render that
-            Person textually.
+            Ein spezieller Platz an dem das Decorator Pattern nützlich ist, ist die Erstellung von
+            textuellen Repräsentationen von Objekten. Als Beispiel könnte man ein "Person" Objekt
+            haben welches, aus sich selbst heraus, keine textuelle Repräsentation hat. Durch
+            Verwendung des Decorator Patterns arbeitet es als wäre es eine Peron, bietet aber auch
+            die Möglichkeit diese Person textuell darzustellen.
         </para>
 
         <para>
-            In this particular example, we're going to use <ulink
-                url="http://en.wikipedia.org/wiki/Duck_typing">duck typing</ulink> instead of an
-            explicit interface. This allows our implementation to be a bit more flexible, while
-            still allowing the decorator object to act exactly as if it were a Person object.
+            In diesem speziellen Beispiel, werden wir ein sogenanntes <ulink
+                url="http://en.wikipedia.org/wiki/Duck_typing">Duck Typing</ulink> verwenden statt
+            einem expliziten Interface. Das erlaubt unserer Implementation etwas flexibler zu sein,
+            wärend es dem Decorator Pattern trotzdem noch erlaubt so exakt zu arbeiten als wäre es
+            ein Personen Objekt.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -122,7 +124,7 @@ class TextPerson
     public function __call($method, $args)
     {
         if (!method_exists($this->_person, $method)) {
-            throw new Exception('Invalid method called on HtmlPerson: '
+            throw new Exception('Ungültige Methode bei HtmlPerson aufgerufen: '
                 .  $method);
         }
         return call_user_func_array(array($this->_person, $method), $args);
@@ -138,38 +140,40 @@ class TextPerson
 ]]></programlisting>
 
         <para>
-            In this example, you pass your <classname>Person</classname> instance to the
-            <classname>TextPerson</classname> constructor. By using method overloading, you are able
-            to continue to call all the methods of <classname>Person</classname> -- to set the first
-            name, last name, or title -- but you also now gain a string representation via the
-            <methodname>__toString()</methodname> method.
+            In diesem Beispiel übergeben wir unsere Instanz von <classname>Person</classname> an den
+            Constructor von <classname>TextPerson</classname>. Durch Verwendung von Methoden
+            Überladung sind wir in der Lage weiterzumachen und alle Methoden von
+            <classname>Person</classname> auf Ihr aufzurufen -- um den Vornamen, den Nachnamen, oder
+            den Titel zu setzen -- aber man erhält jetzt auch eine String Repräsentation über die
+            <methodname>__toString()</methodname> Methode.
         </para>
 
         <para>
-            This latter example is getting close to how <classname>Zend_Form</classname> decorators
-            work. The key difference is that instead of a decorator wrapping the element, the
-            element has one or more decorators attached to it that it then injects itself into in
-            order to render.  The decorator then can access the element's methods and properties in
-            order to create a representation of the element -- or a subset of it.
+            Das letztere Beispiel kommt der Arbeitsweise der Decorators von
+            <classname>Zend_Form</classname> schon nahe. Der eigentliche Unterschied besteht darin,
+            das statt den Decorator in einem Element einzubetten, das Element ein oder mehrere
+            Decorators angehängt haben kann welche es dann in sich selbst injiziert und weiterhin
+            Eigenschaften um eine Repräsentation des Elements -- oder einem Subset von sich -- zu
+            erstellen.
         </para>
     </sect2>
 
     <sect2 id="learning.form.decorators.simplest.first-decorator">
-        <title>Creating Your First Decorator</title>
+        <title>Den ersten Decorator erstellen</title>
 
         <para>
-            <classname>Zend_Form</classname> decorators all implement a common interface,
-            <interfacename>Zend_Form_Decorator_Interface</interfacename>. That interface provides
-            the ability to set decorator-specific options, register and retrieve the element, and
-            render. A base decorator, <classname>Zend_Form_Decorator_Abstract</classname>, provides
-            most of the functionality you will ever need, with the exception of the rendering logic.
+            <classname>Zend_Form</classname> Decorators implementieren alle ein gemeinsames
+            Interface, die Fähigkeit decorator-spezifische Optionen zu setzen, das Element zu
+            registrieren und zu empfangen, und darzustellen. Der Basis Decorator,
+            <classname>Zend_Form_Decorator_Abstract</classname>, bietet die jede Funktionalität
+            welche man irgendwann verwenden wird, mit Ausnahme der Logik für die Darstellung.
         </para>
 
         <para>
-            Let's consider a situation where we simply want to render an element as a standard form
-            text input with a label. We won't worry about error handling or whether or not the
-            element should be wrapped within other tags for now -- just the basics. Such a decorator
-            might look like this:
+            Nehmen wir eine Situation an in der wir einfach ein Element als Standard Formular
+            Texteinfabe mit einer Überschrift darstellen wollen. Wir denken jetzt nicht an
+            Fehlerbehandlung oder ob das Element mit anderen Tags umhüllt werden soll oder nicht --
+            nur die Grundlagen. Solch ein Decorator könnte wie folgt aussehen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -193,7 +197,7 @@ class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
 ]]></programlisting>
 
         <para>
-            Let's create an element that uses this decorator:
+            Erstellen wir ein Element welches diesen Decorator verwendet:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -207,7 +211,7 @@ $element   = new Zend_Form_Element('foo', array(
 ]]></programlisting>
 
         <para>
-            Rendering this element results in the following markup:
+            Die Darstellung dieses Elements führt zum folgenden Markup:
         </para>
 
         <programlisting language="html"><![CDATA[
@@ -216,8 +220,8 @@ $element   = new Zend_Form_Element('foo', array(
 ]]></programlisting>
 
         <para>
-            You could also put this class in your library somewhere, inform your element of that
-            path, and refer to the decorator as simply "SimpleInput" as well:
+            Man könnte diese Klasse auch irgendwo in die eigene Bibliothek geben, das Element über
+            den Pfad informieren, und auf den Decorator genauso einfach als "SimpleInput" verweisen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -233,13 +237,14 @@ $element = new Zend_Form_Element('foo', array(
 ]]></programlisting>
 
         <para>
-            This gives you the benefit of re-use in other projects, and also opens the door for
-            providing alternate implementations of that decorator later.
+            Das gibt den Vorteil das er auch in anderen Projekten wiederverwendet werden kann, und
+            öffnet die Türen damit später alternative Implementationen dieses Decorators angeboten
+            werden können.
         </para>
 
         <para>
-            In the next section, we'll look at how to combine decorators in order to create
-            composite output.
+            Im nächsten Abschnitt schauen wir uns an wie Decorators kombiniert werden können um
+            kombinierte Ausgaben zu erstellen.
         </para>
     </sect2>
 </sect1>

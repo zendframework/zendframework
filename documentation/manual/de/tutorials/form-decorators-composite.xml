@@ -2,11 +2,11 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.composite">
-    <title>Creating and Rendering Composite Elements</title>
+    <title>Erstellung und Darstellung von kombinierten Elementen</title>
 
     <para>
-        In <link linkend="learning.form.decorators.individual">the last section</link>, we had an
-        example showing a "date of birth element":
+        Im <link linkend="learning.form.decorators.individual">letzten Abschnitt</link>, hatten wir
+        ein Beispiel welches ein "Element für das Geburtsdatum" gezeigt hat:
     </para>
 
 
@@ -25,83 +25,84 @@
 ]]></programlisting>
 
     <para>
-        How might you represent this element as a <classname>Zend_Form_Element</classname>?
-        How might you write a decorator to render it?
+        Wie könnte man dieses Element als <classname>Zend_Form_Element</classname> Element
+        darstellen? Wie kann man einen Decoratpr schreiben um es darzustellen?
     </para>
 
     <sect2 id="learning.form.decorators.composite.element">
-        <title>The Element</title>
+        <title>Das Element</title>
 
         <para>
-            The questions about how the element would work include:
+            Die Fragen darüber wie das Element arbeiten würde beinhalten:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    How would you set and retrieve the value?
+                    Wir würde man den Wert setzen und empfangen?
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    How would you validate the value?
+                    Wie würde der Wert geprüft werden?
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Regardless, how would you then allow for discrete form inputs for the three
-                    segments (day, month, year)?
+                    Wie würde man trotzdem getrennte Formulareingaben für diese drei Abschnitte
+                    erlauben (Tag, Monat, Jahr)?
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            The first two questions center around the form element itself: how would
-            <methodname>setValue()</methodname> and <methodname>getValue()</methodname> work?
-            There's actually another question implied by the question about the decorator: how would
-            you retrieve the discrete date segments from the element and/or set them?
+            Die ersten zwei Fragen drehen sich um das Formularelement selbst: Wie würden
+            <methodname>setValue()</methodname> und <methodname>getValue()</methodname> arbeiten?
+            Es gibt aktuell eine weitere implizite Frage durch die Frage über den Decorator: Wie
+            würde man getrennte Datenabschnitte vom Element empfangen und/oder setzen?
         </para>
 
         <para>
-            The solution is to override the <methodname>setValue()</methodname> method of your
-            element to provide some custom logic. In this particular case, our element should have
-            three discrete behaviors:
+            Die Lösung besteht darin die <methodname>setValue()</methodname> Methode des Elements zu
+            überladen um eigene Logik anzubieten. In diesem speziellen Fall sollte unser Element
+            drei getrennte Verhalten haben:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    If an integer timestamp is provided, it should be used to determine and store
-                    the day, month, and year.
+                    Wenn ein Integer Zeitpunkt angegeben wird, sollte er verwendet werden um Tag,
+                    Monat und Jahr zu erkennen und zu speichern.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    If a textual string is provided, it should be cast to a timestamp, and then that
-                    value used to determine and store the day, month, and year.
+                    Wenn ein textueller String angegeben wird sollte er in einen Zeitpunkt gecastet
+                    werden, und dieser Wert sollte verwendet werden um Tag, Monat und Jahr zu
+                    erkennen und zu speichern.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    If an array containing keys for date, month, and year is provided, those values
-                    should be stored.
+                    Wenn ein Array angegeben wird welches die Schlüssel für Tag, Monat und Jahr
+                    enthält, dann sollten diese Werte gespeichert werden.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            Internally, the day, month, and year will be stored discretely. When the value of the
-            element is retrieved, it will be done so in a normalized string format. We'll override
-            <methodname>getValue()</methodname> as well to assemble the discrete date segments into
-            a final string.
+            Intern werden Tag, Monat und Jahr getrennt gespeichert. Wenn der Wert des Elements
+            empfangen wird, wird das in einem normalisierten String Format getan. Wir überschreiben
+            <methodname>getValue()</methodname> und ordnen die getrennten Datenabschnitte dem
+            endgültigen String zu.
         </para>
 
         <para>
-            Here's what the class would look like:
+            So würde die Klasse aussehen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -166,7 +167,7 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
                  ->setMonth($value['month'])
                  ->setYear($value['year']);
         } else {
-            throw new Exception('Invalid date value provided');
+            throw new Exception('Ungültiger Datumswert angegeben');
         }
 
         return $this;
@@ -184,29 +185,31 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 ]]></programlisting>
 
         <para>
-            This class gives some nice flexibility -- we can set default values from our database, and
-            be certain that the value will be stored and represented correctly.  Additionally, we can
-            allow for the value to be set from an array passed via form input. Finally, we have discrete
-            accessors for each date segment, which we can now use in a decorator to create a composite
-            element.
+            Diese Klasse bietet einige nette Flexibilitäten -- wir können Standardwerte von unserer
+            Datenbank setzen, und sicher sein das der Wert richtig gespeichert und dargestellt wird.
+            Zusätzlich können wir erlauben den Wert von einem Array zu setzen welches über die
+            Formulareingabe übergebenen wurde. Letztendlich haben wir getrennte Zugriffe für jeden
+            Datenabschnitt, welche wir jetzt in einem Decorator verwenden können um ein kombiniertes
+            Element zu erstellen.
         </para>
     </sect2>
 
     <sect2 id="learning.form.decorators.composite.decorator">
-        <title>The Decorator</title>
+        <title>Der Decorator</title>
 
         <para>
-            Revisiting the example from the last section, let's assume that we want users to input
-            each of the year, month, and day separately. PHP fortunately allows us to use array
-            notation when creating elements, so it's still possible to capture these three entities
-            into a single value -- and we've now created a <classname>Zend_Form</classname> element
-            that can handle such an array value.
+            Bei der erneuten Betrachtung des Beispiels im letzten Abschnitt, nehmen wir wir an dass
+            wir wollen das unsere Benutzer Jahr, Monat und Tag separat eingeben. PHP erlaubt es uns
+            glücklicherweise die Array Schreibweise zu verwenden wenn Elemente erstellt werden,
+            deshalb ist es möglich diese drei Entitäten in einem einzelnen Wert zu fangen -- und wir
+            erstellen jetzt ein <classname>Zend_Form</classname> Element das solch einen Array Wert
+            verarbeiten kann.
         </para>
 
         <para>
-            The decorator is relatively simple: it will grab the day, month, and year from the
-            element, and pass each to a discrete view helper to render individual form inputs; these
-            will then be aggregated to form the final markup.
+            Der Decorator ist relativ einfach: er holt Tag, Monat und Jahr vom Element, und übergibt
+            jedes einem eigenen View Helfer um die individuellen Formular Eingaben darzustellen;
+            diese werden dann für das endgültige Markup gesammelt.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -216,13 +219,14 @@ class My_Form_Decorator_Date extends Zend_Form_Decorator_Abstract
     {
         $element = $this->getElement();
         if (!$element instanceof My_Form_Element_Date) {
-            // only want to render Date elements
+            // wir wollen nur das Date Element darstellen
             return $content;
         }
 
         $view = $element->getView();
         if (!$view instanceof Zend_View_Interface) {
-            // using view helpers, so do nothing if no view present
+            // verwenden von View Helfers, deshalb ist nichts zu tun
+            // wenn keine View vorhanden ist
             return $content;
         }
 
@@ -256,9 +260,10 @@ class My_Form_Decorator_Date extends Zend_Form_Decorator_Abstract
 ]]></programlisting>
 
     <para>
-        We now have to do a minor tweak to our form element, and tell it that we want to use the
-        above decorator as a default. That takes two steps. First, we need to inform the element of
-        the decorator path. We can do that in the constructor:
+        Jetzt müssen wir kleinere Änderungen an unserem Formular Element durchführen und Ihm sagen
+        das wir den obigen Decorator als Standard verwenden wollen. Das benötigt zwei Schritte.
+        Erstens müssen wir das Element über den Pfad des Decorators informieren. Wir können das im
+        Constructor tun:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -281,17 +286,18 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 ]]></programlisting>
 
     <para>
-        Note that this is being done in the constructor and not in <methodname>init()</methodname>.
-        This is for two reasons. First, it allows extending the element later to add logic in
-        <methodname>init</methodname> without needing to worry about calling
-        <methodname>parent::init()</methodname>. Second, it allows passing additional plugin paths
-        via configuration or within an <methodname>init</methodname> method that will then allow
-        overriding the default <classname>Date</classname> decorator with my own replacement.
+        Es ist zu beachten dass das im Constructor getan wird und nicht in
+        <methodname>init()</methodname>. Es gibt hierfür zwei Gründe. Erstens erlaubt dies das
+        Element später zu erweitern um Logik in <methodname>init</methodname> hinzuzufügen ohne das
+        man sich Gedanken über den Aufruf von <methodname>parent::init()</methodname> machen muss.
+        Zweitens erlaubt es zusätzliche Plugin Pfade über die Konfiguration zu übergeben oder in
+        einer <methodname>init</methodname> Methode die dann das Überladen des standardmäßigen
+        <classname>Date</classname> Decorators mit einem eigenen Ersatz erlaubt.
     </para>
 
     <para>
-        Next, we need to override the <methodname>loadDefaultDecorators()</methodname> method to use
-        our new <classname>Date</classname> decorator:
+        Als nächstes überladen wir die <methodname>loadDefaultDecorators()</methodname> Methode um
+        unseren neuen <classname>Date</classname> Decorator zu verwenden:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -326,27 +332,27 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 ]]></programlisting>
 
     <para>
-        What does the final output look like? Let's consider the following element:
+        Wie sieht die endgültige Ausgabe aus=? Nehmen wir das folgende Element an:
     </para>
 
     <programlisting language="php"><![CDATA[
 $d = new My_Form_Element_Date('dateOfBirth');
-$d->setLabel('Date of Birth: ')
+$d->setLabel('Geburtsdatum: ')
   ->setView(new Zend_View());
 
-// These are equivalent:
+// Das sind Äquivalente:
 $d->setValue('20 April 2009');
 $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
 ]]></programlisting>
 
     <para>
-        If you then echo this element, you get the following markup (with some slight whitespace
-        modifications for readability):
+        Wenn man dieses Element ausgibt erhält man das folgende Markup (mit einigen wenigen
+        Modifikationen an Leerzeichen für die Lesbarkeit):
     </para>
 
     <programlisting language="html"><![CDATA[
 <dt id="dateOfBirth-label"><label for="dateOfBirth" class="optional">
-    Date of Birth:
+    Geburtsdatum:
 </label></dt>
 <dd id="dateOfBirth-element">
     <input type="text" name="dateOfBirth[day]" id="dateOfBirth-day"
@@ -360,26 +366,26 @@ $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
     </sect2>
 
     <sect2 id="learning.form.decorators.composite.conclusion">
-        <title>Conclusion</title>
+        <title>Zusammenfassung</title>
 
         <para>
-            We now have an element that can render multiple related form input fields, and then
-            handle the aggregated fields as a single entity -- the <varname>dateOfBirth</varname>
-            element will be passed as an array to the element, and the element will then, as we
-            noted earlier, create the appropriate date segments and return a value we can use for
-            most backends.
+            Wir haben jetzt ein Element das mehrere zusammengehörende Formular Eingabefelder
+            darstellen kann, und die getrennten Felder anschließend als einzelne Entität behandelt
+            -- das Element <varname>dateOfBirth</varname> wird als Array an das Element übergeben,
+            und das Element wird anschließend, wie vorher erwähnt, die passenden Datenabschnitte
+            erstellen und einen Wert zurückgeben den wir für die meisten Backends verwenden können.
         </para>
 
         <para>
-            Additionally, we can use different decorators with the element. If we wanted to use a
+            Zusätzlich können wir verschiedene Decoratore mit dem Element verwenden. Wenn wir einen
             <ulink url="http://dojotoolkit.org/">Dojo</ulink> <classname>DateTextBox</classname>
-            dijit decorator -- which accepts and returns string values -- we can, with no
-            modifications to the element itself.
+            Dijit Decorator verwenden wollen -- welche Stringwerte akzeptiert und zurückgibt --
+            können wir das ohne Änderung des Elements selbst durchführen.
         </para>
 
         <para>
-            In the end, you get a uniform element API you can use to describe an element
-            representing a composite value.
+            Am Ende erhält man eine einheitliche API für ein Element welche man verwenden kann um
+            ein Element zu beschreiben welches einen kombinierten Wert repräsentiert.
         </para>
     </sect2>
 </sect1>

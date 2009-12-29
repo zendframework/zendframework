@@ -2,19 +2,20 @@
 <!-- EN-Revision: 19777 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.individual">
-    <title>Rendering Individual Decorators</title>
+    <title>Darstellung individueller Decorators</title>
 
     <para>
-        In the <link linkend="learning.form.decorators.layering">previous section</link>, we
-        looked at how you can combine decorators to create complex output. We noted that while you
-        have a ton of flexibility with this approach, it also adds some complexity and overhead. In
-        this section, we will examine how to render decorators individually in order to create
-        custom markup for forms and/or individual elements.
+        Im <link linkend="learning.form.decorators.layering">vorigen Abschnitt</link> haben wir uns
+        angesehen wie man Decorators kombinieren kann um komplexe Ausgaben zu erstellen. Wir haben
+        gesehen dass, obwohl wir eine Tonne an Flexibilität mit diesem Ansatz haben, fügt er auch
+        einiges an Komplexität und Overhead hinzu. In diesem Abschnitt behandeln wir wie Decorators
+        individuell dargestellt werden können um eigene Markups für Formulare und/oder individuelle
+        Elemente zu erstellen.
     </para>
 
     <para>
-        Once you have registered your decorators, you can later retrieve them by name from the
-        element. Let's review the previous example:
+        Sobald man die Decorators registriert hat, kann man Sie später durch Ihren Namen vom Element
+        erhalten. Sehen wir uns das vorhergehende Beispiel nochmals an:
     </para>
 
     <programlisting language="php"><![CDATA[

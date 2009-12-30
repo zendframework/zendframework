@@ -178,6 +178,20 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('active', $values['status']);
     }
 
+    public function test_RESTfulApp_GET_user_index_withQueryParams()
+    {
+        $request = $this->_buildRequest('GET', '/user/?changedSince=123456789&status=active');
+        $values = $this->_invokeRouteMatch($request);
+
+        $this->assertType('array', $values);
+        $this->assertTrue(isset($values['module']));
+        $this->assertEquals('default', $values['module']);
+        $this->assertEquals('user', $values['controller']);
+        $this->assertEquals('index', $values['action']);
+        $this->assertEquals(123456789, $values['changedSince']);
+        $this->assertEquals('active', $values['status']);
+    }
+    
     public function test_RESTfulApp_GET_project_byIdentifier()
     {
         $request = $this->_buildRequest('GET', '/project/zendframework');
@@ -191,6 +205,19 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('zendframework', $values['id']);
     }
 
+    public function test_RESTfulApp_GET_project_byIdQueryParam()
+    {
+        $request = $this->_buildRequest('GET', '/project/?id=zendframework');
+        $values = $this->_invokeRouteMatch($request);
+
+        $this->assertType('array', $values);
+        $this->assertTrue(isset($values['module']));
+        $this->assertEquals('default', $values['module']);
+        $this->assertEquals('project', $values['controller']);
+        $this->assertEquals('get', $values['action']);
+        $this->assertEquals('zendframework', $values['id']);
+    }
+    
     public function test_RESTfulApp_GET_project_byIdentifier_urlencoded()
     {
         $request = $this->_buildRequest('GET', '/project/zend+framework');

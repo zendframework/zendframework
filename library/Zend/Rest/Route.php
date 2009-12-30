@@ -130,8 +130,8 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
         $this->_setRequestKeys();
 
         $path   = $request->getPathInfo();
+        $params = $request->getParams();
         $values = array();
-        $params = array();
         $path   = trim($path, self::URI_DELIMITER);
 
         if ($path != '') {
@@ -170,7 +170,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
             //Store path count for method mapping
             $pathElementCount = count($path);
 
-            // Check for leading "special get" URI's
+            // Check for "special get" URI's
             $specialGetTarget = false;
             if ($pathElementCount && array_search($path[0], array('index', 'new')) > -1) {
                 $specialGetTarget = array_shift($path);
@@ -179,7 +179,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
                 $params['id'] = $path[$pathElementCount-2];
             } elseif ($pathElementCount == 1) {
                 $params['id'] = urldecode(array_shift($path));
-            } elseif ($pathElementCount == 0 || $pathElementCount > 1) {
+            } elseif ($pathElementCount == 0 && !isset($params['id'])) {
                 $specialGetTarget = 'index';
             }
 

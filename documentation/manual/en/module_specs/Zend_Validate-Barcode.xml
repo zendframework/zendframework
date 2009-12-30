@@ -218,9 +218,10 @@
             </para>
 
             <para>
-                This barcode is a smaller variant of UPCA. It must have a length of 6 characters and
-                supports only digits. There is no checksum within this barcode. It is commonly used
-                with small products where a UPCA barcode would not fit.
+                This barcode is a smaller variant of UPCA. It can have a length of 6, 7 or 8
+                characters and supports only digits. When the barcode is 8 chars long it includes
+                a checksum which is calculated with modulo 10. It is commonly used with small
+                products where a UPCA barcode would not fit.
             </para>
         </listitem>
     </itemizedlist>

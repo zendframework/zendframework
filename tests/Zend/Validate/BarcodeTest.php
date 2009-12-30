@@ -331,11 +331,13 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($barcode->isValid('123456789013'));
     }
 
-    public function testxxxxxxxxxxxxUPCE()
+    public function testUPCE()
     {
         $barcode = new Zend_Validate_Barcode('upce');
-        $this->assertTrue($barcode->isValid('123456'));
+        $this->assertTrue($barcode->isValid('02345673'));
+        $this->assertFalse($barcode->isValid('02345672'));
         $this->assertFalse($barcode->isValid('123'));
-        $this->assertFalse($barcode->isValid('1234567'));
+        $this->assertTrue($barcode->isValid('123456'));
+        $this->assertTrue($barcode->isValid('0234567'));
     }
 }

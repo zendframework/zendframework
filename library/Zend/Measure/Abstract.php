@@ -75,7 +75,7 @@ abstract class Zend_Measure_Abstract
      * Zend_Measure_Abstract is an abstract class for the different measurement types
      *
      * @param  $value  mixed  - Value as string, integer, real or float
-     * @param  $type   type   - OPTIONAL a Zend_Measure_Area Type
+     * @param  $type   type   - OPTIONAL a measure type f.e. Zend_Measure_Length::METER
      * @param  $locale locale - OPTIONAL a Zend_Locale Type
      * @throws Zend_Measure_Exception
      */
@@ -150,6 +150,7 @@ abstract class Zend_Measure_Abstract
      * @param integer            $round  (Optional) Rounds the value to an given precision,
      *                                              Default is -1 which returns without rounding
      * @param string|Zend_Locale $locale (Optional) Locale for number representation
+     * @return integer|string
      */
     public function getValue($round = -1, $locale = null)
     {
@@ -171,9 +172,10 @@ abstract class Zend_Measure_Abstract
      * Set a new value
      *
      * @param  integer|string      $value   Value as string, integer, real or float
-     * @param  string              $type    OPTIONAL A Zend_Measure_Acceleration Type
+     * @param  string              $type    OPTIONAL A measure type f.e. Zend_Measure_Length::METER
      * @param  string|Zend_Locale  $locale  OPTIONAL Locale for parsing numbers
      * @throws Zend_Measure_Exception
+     * @return Zend_Measure_Abstract
      */
     public function setValue($value, $type = null, $locale = null)
     {
@@ -221,8 +223,9 @@ abstract class Zend_Measure_Abstract
     /**
      * Set a new type, and convert the value
      *
-     * @param  string  $type  New type to set
+     * @param  string $type New type to set
      * @throws Zend_Measure_Exception
+     * @return Zend_Measure_Abstract
      */
     public function setType($type)
     {
@@ -302,7 +305,7 @@ abstract class Zend_Measure_Abstract
     /**
      * Compare if the value and type is equal
      *
-     * @param  Zend_Measure_Detailtype  $object  object to compare
+     * @param  Zend_Measure_Abstract $object object to compare
      * @return boolean
      */
     public function equals($object)
@@ -367,8 +370,8 @@ abstract class Zend_Measure_Abstract
     /**
      * Adds an unit to another one
      *
-     * @param $object  object of same unit type
-     * @return  Zend_Measure object
+     * @param  Zend_Measure_Abstract $object object of same unit type
+     * @return Zend_Measure_Abstract
      */
     public function add($object)
     {
@@ -382,8 +385,8 @@ abstract class Zend_Measure_Abstract
     /**
      * Substracts an unit from another one
      *
-     * @param $object  object of same unit type
-     * @return  Zend_Measure object
+     * @param  Zend_Measure_Abstract $object object of same unit type
+     * @return Zend_Measure_Abstract
      */
     public function sub($object)
     {
@@ -397,7 +400,7 @@ abstract class Zend_Measure_Abstract
     /**
      * Compares two units
      *
-     * @param $object  object of same unit type
+     * @param  Zend_Measure_Abstract $object object of same unit type
      * @return boolean
      */
     public function compare($object)

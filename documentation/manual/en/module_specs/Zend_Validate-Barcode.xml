@@ -34,9 +34,22 @@
             </para>
 
             <para>
-                This barcode has a variable length. It supports digits, alphabetical characters
-                and 7 special characters. It can have an optional checksum which is calculated with
-                modulo 43. This standard is used worldwide and common within the industry.
+                This barcode has a variable length. It supports digits, upper cased alphabetical
+                characters and 7 special characters like whitespace, point and dollar sign. It can
+                have an optional checksum which is calculated with modulo 43. This standard is used
+                worldwide and common within the industry.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>CODE39EXT</emphasis>: CODE39EXT is an extension of CODE39.
+            </para>
+
+            <para>
+                This barcode has the same properties as CODE39. Additionally it allows the usage of
+                all 128 ASCII characters. This standard is used worldwide and common within the
+                industry.
             </para>
         </listitem>
 
@@ -99,6 +112,18 @@
                 This barcode must have a length of 14 characters. It supports only digits, and the
                 last digit is always a checksum which is calculated with modulo 10. This standard is
                 used worldwide and common on the market. It is the successor for EAN13.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>EAN18</emphasis>: EAN is the shortcut for "European Article Number".
+            </para>
+
+            <para>
+                This barcode must have a length of 18 characters. It support only digits. The last
+                digit is always a checksum digit which is calculated with modulo 10. This code is often
+                used for the identification of shipping containers.
             </para>
         </listitem>
 

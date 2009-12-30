@@ -48,5 +48,5 @@ class Zend_Validate_Barcode_Ean8 extends Zend_Validate_Barcode_AdapterAbstract
      * Checksum function
      * @var string
      */
-    protected $_checksum = '_mod10';
+    protected $_checksum = '_gtin';
 }

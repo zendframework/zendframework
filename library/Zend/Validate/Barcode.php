@@ -195,12 +195,14 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
         $result        = $adapter->checkLength($value);
         if (!$result) {
             $this->_error(self::INVALID_LENGTH);
+print "x";
             return false;
         }
 
         $result = $adapter->checkChars($value);
         if (!$result) {
             $this->_error(self::INVALID_CHARS);
+print "y";
             return false;
         }
 
@@ -208,6 +210,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
             $result = $adapter->checksum($value);
             if (!$result) {
                 $this->_error(self::FAILED);
+print "z";
                 return false;
             }
         }

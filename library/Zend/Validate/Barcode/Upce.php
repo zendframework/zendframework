@@ -48,13 +48,13 @@ class Zend_Validate_Barcode_Upce extends Zend_Validate_Barcode_AdapterAbstract
      * Checksum function
      * @var string
      */
-    protected $_checksum = '_mod10';
+    protected $_checksum = '_gtin';
 
     /**
      * Constructor
      *
      * Set check flag to false
-     * 
+     *
      * @return void
      */
     public function __construct()

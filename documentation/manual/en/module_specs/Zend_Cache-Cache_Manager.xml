@@ -2,7 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.cache.manager">
     <title>The Cache Manager</title>
-    
+
     <para>
         It's the nature of applications to require a multitude of caches of any
         type often dependent on the controller, library or domain model being
@@ -15,7 +15,7 @@
         <classname>Zend_Controller_Action_Helper_Cache</classname> to allow simple
         cache access and instantiation from controllers and other helpers.
     </para>
-    
+
     <para>
         The basic operation of this component is as follows. The Cache Manager allows
         users to setup "option templates", basically options for a set of named
@@ -24,7 +24,7 @@
         a named cache (associated with an existing option template) using the method
         <methodname>Zend_Cache_Manager::getCache()</methodname>.
     </para>
-    
+
     <programlisting language="php"><![CDATA[
 $manager = new Zend_Cache_Manager;
 
@@ -56,7 +56,7 @@ $databaseCache = $manager->getCache('database');
         The Cache Manager also allows simple setting of pre-instantiated caches
         using the method <methodname>Zend_Cache_Manager::setCache()</methodname>.
     </para>
-    
+
     <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 7200,
@@ -87,7 +87,7 @@ $databaseCache = $manager->getCache('database');
         on request, you can check for the existance of a name cache configuration
         or instance using the method <methodname>Zend_Cache_Manager::hasCache()</methodname>.
     </para>
-    
+
     <programlisting language="php"><![CDATA[
 $manager = new Zend_Cache_Manager;
 
@@ -126,7 +126,7 @@ if ($manager->hasCache('database')) {
         previously set cache templates on the fly before they are instantiated
         using the method <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname>.
     </para>
-    
+
     <programlisting language="php"><![CDATA[
 $manager = new Zend_Cache_Manager;
 
@@ -183,7 +183,7 @@ $databaseCache = $manager->getCache('database');
         Helper. Both of these are described in their relevant areas of the
         Reference Guide.
     </para>
-    
+
     <para>
         Out of the box, <classname>Zend_Cache_Manager</classname> already includes
         four pre-defined cache templates called "skeleton", "default", "page" and

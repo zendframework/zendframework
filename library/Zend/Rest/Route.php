@@ -314,7 +314,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      *
      * @param array $responders
      */
-    private function _parseResponders($responders)
+    protected function _parseResponders($responders)
     {
         $modulesOnly = true;
         foreach ($responders as $responder) {
@@ -336,7 +336,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      * @param string $moduleName
      * @return bool
      */
-    private function _checkRestfulModule($moduleName)
+    protected function _checkRestfulModule($moduleName)
     {
         if ($this->_allRestful()) {
             return true;
@@ -358,7 +358,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      * @param string $controllerName
      * @return bool
      */
-    private function _checkRestfulController($moduleName, $controllerName)
+    protected function _checkRestfulController($moduleName, $controllerName)
     {
         if ($this->_allRestful()) {
             return true;
@@ -380,7 +380,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      *
      * @return bool
      */
-    private function _allRestful()
+    protected function _allRestful()
     {
         return (!$this->_restfulModules && !$this->_restfulControllers);
     }
@@ -391,7 +391,7 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
      * @param string $moduleName
      * @return bool
      */
-    private function _fullRestfulModule($moduleName)
+    protected function _fullRestfulModule($moduleName)
     {
         return (
             $this->_restfulModules

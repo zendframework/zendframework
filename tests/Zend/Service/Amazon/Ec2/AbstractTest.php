@@ -79,6 +79,17 @@ class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
             // do nothing
         }
     }
+    
+    public function testSignParamsWithSpaceEncodesWithPercentInsteadOfPlus()
+    {
+        $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
+        $ret = $class->testSign(array('Action' => 'Space Test'));
+        
+        // this is the encode signuature with urlencode - It's Invalid!
+        $invalidSignature = 'EeHAfo7cMcLyvH4SW4fEpjo51xJJ4ES1gdjRPxZTlto=';
+        
+        $this->assertNotEquals($ret, $invalidSignature);
+    }
 }
 
 class TestAmamzonAbstract extends Zend_Service_Amazon_Ec2_Abstract
@@ -87,6 +98,11 @@ class TestAmamzonAbstract extends Zend_Service_Amazon_Ec2_Abstract
     public function returnRegion()
     {
         return $this->_region;
+    }
+    
+    public function testSign($params)
+    {
+        return $this->signParameters($params);
     }
 }
 

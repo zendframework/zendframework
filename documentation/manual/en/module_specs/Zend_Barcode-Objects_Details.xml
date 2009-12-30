@@ -108,6 +108,59 @@
         </para>
     </sect3>
 
+    <sect3 id="zend.barcode.objects.details.identcode">
+        <title>Zend_Barcode_Object_Identcode</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.identcode.png" format="PNG"/>
+        </para>
+
+        <para>
+            This barcode extends <classname>Zend_Barcode_Object_Int25</classname>
+            (Code 2 of 5 Interleaved), and inherits some of its capabilities; it also has a few
+            particulars of its own.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> Identcode (Deutsche Post Identcode)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> mandatory (modulo 10 different from Code25)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> 12 characters (including checksum)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+
+        <note>
+            <para>
+                If the number of characters is not equal to 12,
+                <classname>Zend_Barcode_Object_Identcode</classname> will automatically prepend missing
+                zeros to the barcode text.
+            </para>
+        </note>
+    </sect3>
+
     <sect3 id="zend.barcode.objects.details.itf14">
         <title>Zend_Barcode_Object_Itf14</title>
 
@@ -241,6 +294,59 @@
                 If the number of characters is not even,
                 <classname>Zend_Barcode_Object_Int25</classname> will automatically prepend the
                 missing zero to the barcode text.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.leitcode">
+        <title>Zend_Barcode_Object_Leitcode</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.leitcode.png" format="PNG"/>
+        </para>
+
+        <para>
+            This barcode extends <classname>Zend_Barcode_Object_Identcode</classname>
+            (Code 2 of 5 Interleaved), and inherits some of its capabilities; it also has a few
+            particulars of its own.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> Leitcode (Deutsche Post Leitcode)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> mandatory (modulo 10 different from Code25)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> 14 characters (including checksum)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+
+        <note>
+            <para>
+                If the number of characters is not equal to 14,
+                <classname>Zend_Barcode_Object_Leitcode</classname> will automatically prepend missing
+                zeros to the barcode text.
             </para>
         </note>
     </sect3>

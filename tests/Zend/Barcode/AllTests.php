@@ -42,6 +42,8 @@ require_once 'Zend/Barcode/Object/Code39Test.php';
 require_once 'Zend/Barcode/Object/Code25Test.php';
 require_once 'Zend/Barcode/Object/Int25Test.php';
 require_once 'Zend/Barcode/Object/Itf14Test.php';
+require_once 'Zend/Barcode/Object/IdentcodeTest.php';
+require_once 'Zend/Barcode/Object/LeitcodeTest.php';
 require_once 'Zend/Barcode/Object/ErrorTest.php';
 
 require_once 'Zend/Barcode/Renderer/ImageTest.php';
@@ -72,6 +74,8 @@ class Zend_Barcode_AllTests
         $suite->addTestSuite('Zend_Barcode_Object_Code25Test');
         $suite->addTestSuite('Zend_Barcode_Object_Int25Test');
         $suite->addTestSuite('Zend_Barcode_Object_Itf14Test');
+        $suite->addTestSuite('Zend_Barcode_Object_IdentcodeTest');
+        $suite->addTestSuite('Zend_Barcode_Object_LeitcodeTest');
         $suite->addTestSuite('Zend_Barcode_Object_ErrorTest');
 
         $suite->addTestSuite('Zend_Barcode_Renderer_ImageTest');

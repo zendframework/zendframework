@@ -50,6 +50,7 @@ class Zend_Barcode_Object_Code25Test extends Zend_Barcode_Object_TestCommon
     public function testChecksum()
     {
         $this->assertSame(5, $this->_object->getChecksum('0123456789'));
+        $this->assertSame(0, $this->_object->getChecksum('13'));
     }
 
     public function testSetText()

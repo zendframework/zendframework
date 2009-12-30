@@ -9,7 +9,7 @@
         <para>
             To begin, we'll cover some background on the <ulink
                 url="http://en.wikipedia.org/wiki/Decorator_pattern">Decorator design
-                pattern</ulink>.  One common technique is to define a common interface that both
+                pattern</ulink>. One common technique is to define a common interface that both
             your originating object and decorator will implement; your decorator than accepts the
             originating object as a dependency, and will either proxy to it or override its methods.
             Let's put that into code to make it more easily understood:
@@ -148,7 +148,7 @@ class TextPerson
             This latter example is getting close to how <classname>Zend_Form</classname> decorators
             work. The key difference is that instead of a decorator wrapping the element, the
             element has one or more decorators attached to it that it then injects itself into in
-            order to render.  The decorator then can access the element's methods and properties in
+            order to render. The decorator then can access the element's methods and properties in
             order to create a representation of the element -- or a subset of it.
         </para>
     </sect2>
@@ -158,7 +158,7 @@ class TextPerson
 
         <para>
             <classname>Zend_Form</classname> decorators all implement a common interface,
-            <interfacename>Zend_Form_Decorator_Interface</interfacename>. That interface provides
+            <classname>Zend_Form_Decorator_Interface</classname>. That interface provides
             the ability to set decorator-specific options, register and retrieve the element, and
             render. A base decorator, <classname>Zend_Form_Decorator_Abstract</classname>, provides
             most of the functionality you will ever need, with the exception of the rendering logic.

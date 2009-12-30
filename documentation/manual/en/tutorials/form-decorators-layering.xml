@@ -45,15 +45,15 @@
 
         <listitem>
             <para>
-                <classname>HtmlTag</classname> (wrap all of the above in a <code>&lt;dd&gt;</code>
-                tag.
+                <classname>HtmlTag</classname> (wrap all of the above in a
+                <emphasis>&lt;dd&gt;</emphasis> tag.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <classname>Label</classname> (render the label preceding the above, wrapped in a
-                <code>&lt;dt&gt;</code> tag.
+                <emphasis>&lt;dt&gt;</emphasis> tag.
             </para>
         </listitem>
     </itemizedlist>
@@ -141,7 +141,7 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
 
     <para>
         Now, this may look all well and good, but here's the problem: as written currently, the last
-        decorator to run wins, and overwrites everything.  You'll end up with just the input, or
+        decorator to run wins, and overwrites everything. You'll end up with just the input, or
         just the label, depending on which you register last.
     </para>
 
@@ -254,8 +254,8 @@ $element = new Zend_Form_Element('foo', array(
         <listitem>
             <para>
                 '' is passed to the <classname>SimpleInput</classname> decorator, which then
-                generates a form input that it appends to the empty string: <code>&lt;input
-                    id="bar-foo" name="bar[foo]" type="text" value="test"/&gt;</code>.
+                generates a form input that it appends to the empty string: <emphasis>&lt;input
+                    id="bar-foo" name="bar[foo]" type="text" value="test"/&gt;</emphasis>.
             </para>
         </listitem>
 
@@ -264,8 +264,8 @@ $element = new Zend_Form_Element('foo', array(
                 The input is then passed as content to the <classname>SimpleLabel</classname>
                 decorator, which generates a label and prepends it to the original content; the
                 default separator is a <constant>PHP_EOL</constant> character, giving us this:
-                <code>&lt;label for="bar-foo"&gt;\n&lt;input id="bar-foo" name="bar[foo]"
-                    type="text" value="test"/&gt;</code>.
+                <emphasis>&lt;label for="bar-foo"&gt;\n&lt;input id="bar-foo" name="bar[foo]"
+                    type="text" value="test"/&gt;</emphasis>.
             </para>
         </listitem>
     </itemizedlist>
@@ -298,8 +298,8 @@ $element = new Zend_Form_Element('foo', array(
     </para>
 
     <para>
-        The above results in the markup <code>&lt;input id="bar-foo" name="bar[foo]" type="text"
-            value="test"/&gt;\n&lt;label for="bar-foo"&gt;</code>.
+        The above results in the markup <emphasis>&lt;input id="bar-foo" name="bar[foo]" type="text"
+            value="test"/&gt;\n&lt;label for="bar-foo"&gt;</emphasis>.
     </para>
 
     <para>
@@ -339,7 +339,7 @@ $element = new Zend_Form_Element('foo', array(
             <para>
                 Reusable decorators. You can create truly re-usable decorators with this technique,
                 as you don't have to worry about the complete markup, but only markup for one or a
-                few pieces of element/form metadata.
+                few pieces of element or form metadata.
             </para>
         </listitem>
 

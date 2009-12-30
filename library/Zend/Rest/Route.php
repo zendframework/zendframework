@@ -90,6 +90,27 @@ class Zend_Rest_Route extends Zend_Controller_Router_Route_Module
     }
 
     /**
+     * Instantiates route based on passed Zend_Config structure
+     */
+    public static function getInstance(Zend_Config $config)
+    {
+        $frontController = Zend_Controller_Front::getInstance();
+        $defaultsArray = array();
+        $restfulConfigArray = array();
+        foreach ($config as $key => $values) {
+        	if ($key == 'type') {
+        		// do nothing
+        	} elseif ($key == 'defaults') {
+        		$defaultsArray = $values->toArray();
+        	} else {
+        		$restfulConfigArray[$key] = explode(',', $values);
+        	}
+        }
+        $instance = new self($frontController, $defaultsArray, $restfulConfigArray);
+        return $instance;
+    }
+
+    /**
      * Matches a user submitted request. Assigns and returns an array of variables
      * on a successful match.
      *

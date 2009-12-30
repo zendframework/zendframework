@@ -96,6 +96,34 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         $route = new Zend_Rest_Route($this->_front);
         $this->assertEquals(2, $route->getVersion());
     }
+    
+    public function test_getInstance_fromINIConfig()
+    {
+    	require_once('Zend/Config/Ini.php');
+    	$config = new Zend_Config_Ini(dirname(__FILE__) . '/../Controller/_files/routes.ini', 'testing');
+    	require_once('Zend/Controller/Router/Rewrite.php');
+    	$router = new Zend_Controller_Router_Rewrite();
+    	$router->addConfig($config, 'routes');
+    	$route = $router->getRoute('rest');
+    	$this->assertType('Zend_Rest_Route', $route);
+    	$this->assertEquals('object', $route->getDefault('controller'));
+    	
+    	$request = $this->_buildRequest('GET', '/mod/project');
+    	$values = $this->_invokeRouteMatch($request, array(), $route);
+    	$this->assertEquals('mod', $values['module']);
+    	$this->assertEquals('project', $values['controller']);
+    	$this->assertEquals('index', $values['action']);
+
+    	$request = $this->_buildRequest('POST', '/mod/user');
+    	$values = $this->_invokeRouteMatch($request, array(), $route);
+    	$this->assertEquals('mod', $values['module']);
+    	$this->assertEquals('user', $values['controller']);
+    	$this->assertEquals('post', $values['action']);
+    	
+    	$request = $this->_buildRequest('GET', '/other');
+    	$values = $this->_invokeRouteMatch($request, array(), $route);
+    	$this->assertFalse($values);
+    }
 
     public function test_RESTfulApp_defaults()
     {
@@ -522,10 +550,11 @@ class Zend_Rest_RouteTest extends PHPUnit_Framework_TestCase
         return $request;
     }
 
-    private function _invokeRouteMatch($request, $config = array())
+    private function _invokeRouteMatch($request, $config = array(), $route = null)
     {
         $this->_front->setRequest($request);
-        $route = new Zend_Rest_Route($this->_front, array(), $config);
+        if ($route == null)
+        	$route = new Zend_Rest_Route($this->_front, array(), $config);
         $values = $route->match($request);
         return $values;
     }

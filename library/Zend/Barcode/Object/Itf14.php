@@ -38,60 +38,15 @@ class Zend_Barcode_Object_Itf14 extends Zend_Barcode_Object_Int25
 {
 
     /**
+     * Number of characters in the barcode
      * @var $_barcodeLength integer | string
      */
     protected $_barcodeLength = 14;
 
     /**
-     * Constructor
-     * @param array|Zend_Config $options
-     * @return void
+     * Activation of mandatory checksum
+     * to deactivate unauthorized modification
+     * @var $_mandatoryChecksum boolean
      */
-    public function __construct($options = null)
-    {
-        parent::__construct($options);
-
-        // Checksum is mandatory with Itf14
-        $this->_withChecksum = true;
-
-        // Default to true but not mandatory
-        $this->_withChecksumInText = true;
-    }
-
-    /**
-     * Activate/deactivate the automatic generation
-     * of the checksum character
-     * added to the barcode text
-     * @param boolean $value
-     * @return Zend_Barcode_Object
-     */
-    public function setWithChecksum($value)
-    {
-        // Checksum is mandatory with Itf14
-        return $this;
-    }
-
-    /**
-     * Activate/deactivate the automatic generation
-     * of the checksum character
-     * added to the barcode text
-     * @param boolean $value
-     * @return Zend_Barcode_Object
-     * @throw Zend_Barcode_Object_Exception
-     */
-    public function setWithChecksumInText($value)
-    {
-        return $this;
-    }
-
-    /**
-     * Check allowed characters
-     * @param string $value
-     * @return string
-     * @throw Zend_Barcode_Object_Exception
-     */
-    public function validateText($value)
-    {
-        $this->_validateText($value, array('automaticPrepend' => 0, 'substituteChecksumCharacter' => 0));
-    }
+    protected $_mandatoryChecksum = true;
 }

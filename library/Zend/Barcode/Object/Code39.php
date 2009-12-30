@@ -92,16 +92,6 @@ class Zend_Barcode_Object_Code39 extends Zend_Barcode_Object_ObjectAbstract
     );
 
     /**
-     * Check for invalid characters
-     * @param   string $value    Text to be ckecked
-     * @return  void
-     */
-    public function validateText($value)
-    {
-        $this->_validateText($value);
-    }
-
-    /**
      * Partial check of Code39 barcode
      * @return void
      */

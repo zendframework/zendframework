@@ -174,11 +174,24 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     protected $_barcodeLength = null;
 
     /**
-     * Activate automatic addition of leading zeros 
+     * Activate automatic addition of leading zeros
      * if barcode length is fixed
      * @var $_addLeadingZeros boolean
      */
     protected $_addLeadingZeros = true;
+
+    /**
+     * Activation of mandatory checksum
+     * to deactivate unauthorized modification
+     * @var $_mandatoryChecksum boolean
+     */
+    protected $_mandatoryChecksum = false;
+
+    /**
+     * Character used to substitute checksum character for validation
+     * @var $_substituteChecksumCharacter mixed
+     */
+    protected $_substituteChecksumCharacter = 0;
 
     /**
      * TTF font name: can be set before instanciation of the object
@@ -203,6 +216,10 @@ abstract class Zend_Barcode_Object_ObjectAbstract
             $this->setOptions($options);
         }
         $this->_type = strtolower(substr(get_class($this), strlen($this->_barcodeNamespace) + 1));
+        if ($this->_mandatoryChecksum) {
+            $this->_withChecksum = true;
+            $this->_withChecksumInText = true;
+        }
     }
 
     /**
@@ -517,14 +534,14 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     protected function _addLeadingZeros($text, $withoutChecksum = false)
     {
         if ($this->_barcodeLength && $this->_addLeadingZeros) {
+            $omitChecksum = (int) ($this->_withChecksum && $withoutChecksum);
             if (is_int($this->_barcodeLength)) {
-                $length = $withoutChecksum ? ($this->_barcodeLength - 1) : $this->_barcodeLength;
+                $length = $this->_barcodeLength - $omitChecksum;
                 if (strlen($text) < $length) {
                     $text = str_repeat('0', $length - strlen($text)) . $text;
                 }
             } else {
                 if ($this->_barcodeLength == 'even') {
-                    $omitChecksum = (int) $this->_withChecksum && $withoutChecksum;
                     $text = ((strlen($text) - $omitChecksum) % 2 ? '0' . $text : $text);
                 }
             }
@@ -606,7 +623,9 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      */
     public function setWithChecksum($value)
     {
-        $this->_withChecksum = (bool) $value;
+        if (!$this->_mandatoryChecksum) {
+            $this->_withChecksum = (bool) $value;
+        }
         return $this;
     }
 
@@ -630,7 +649,9 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      */
     public function setWithChecksumInText($value)
     {
-        $this->_withChecksumInText = (bool) $value;
+        if (!$this->_mandatoryChecksum) {
+            $this->_withChecksumInText = (bool) $value;
+        }
         return $this;
     }
 
@@ -1164,11 +1185,14 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     }
 
     /**
-     * Each child must verify allowed characters
-     *
+     * Check for invalid characters
+     * @param   string $value    Text to be ckecked
      * @return void
      */
-    abstract public function validateText($value);
+    public function validateText($value)
+    {
+        $this->_validateText($value);
+    }
 
     protected function _validateText($value, $options = array())
     {
@@ -1179,22 +1203,16 @@ abstract class Zend_Barcode_Object_ObjectAbstract
             'checksum' => false,
         ));
 
-        $checksumCharacter = (isset($options['substituteChecksumCharacter'])) ? $options['substituteChecksumCharacter'] : '';
-
-        if (isset($options['automaticPrepend'])) {
-            if (is_int($this->_barcodeLength)) {
-                if (strlen($value) < ($this->_barcodeLength)) {
-                    $length = $this->_barcodeLength - strlen($checksumCharacter);
-                    $value = str_repeat($options['automaticPrepend'], $length - strlen($value)) . $value;
-                }
-            } else {
-                if ($this->_barcodeLength == 'even') {
-                    $value = (strlen($value) % 2 ? $options['automaticPrepend'] . $value : $value);
-                }
-            }
+        $checksumCharacter = '';
+        $withChecksum = false;
+        if ($this->_mandatoryChecksum) {
+            $checksumCharacter = $this->_substituteChecksumCharacter;
+            $withChecksum = true;
         }
 
-        if (!$validator->isValid($value . $checksumCharacter)) {
+        $value = $this->_addLeadingZeros($value, $withChecksum) . $checksumCharacter;
+
+        if (!$validator->isValid($value)) {
             $message = implode("\n", $validator->getMessages());
 
             /**

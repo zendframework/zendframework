@@ -60,17 +60,6 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
     );
 
     /**
-     * Check allowed characters
-     * @param string $value
-     * @return string
-     * @throw Zend_Barcode_Object_Exception
-     */
-    public function validateText($value)
-    {
-        $this->_validateText($value);
-    }
-
-    /**
      * Width of the barcode (in pixels)
      * @return integer
      */

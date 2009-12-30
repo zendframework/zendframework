@@ -43,6 +43,7 @@ class Zend_Barcode_Object_Int25 extends Zend_Barcode_Object_Code25
     private $_withBearerBars = false;
 
     /**
+     * Number of characters in the barcode
      * @var $_barcodeLength integer | string
      */
     protected $_barcodeLength = 'even';
@@ -75,7 +76,7 @@ class Zend_Barcode_Object_Int25 extends Zend_Barcode_Object_Code25
      */
     public function validateText($value)
     {
-        $this->_validateText($value, array('automaticPrepend' => 0, 'validator' => 'code25'));
+        $this->_validateText($value, array('validator' => 'code25'));
     }
 
     /**

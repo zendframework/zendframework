@@ -56,12 +56,12 @@
                 </row>
                 <row>
                     <entry><constant>POST</constant></entry>
-                    <entry><filename>/product/ratings/:id?_method="PUT"</filename></entry>
+                    <entry><filename>/product/ratings/:id _method="PUT"</filename></entry>
                     <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
                 </row>
                 <row>
                     <entry><constant>POST</constant></entry>
-                    <entry><filename>/product/ratings/:id?_method="DELETE"</filename></entry>
+                    <entry><filename>/product/ratings/:id _method="DELETE"</filename></entry>
                     <entry>
                         <methodname>Product_RatingsController::deleteAction()</methodname>
                     </entry>
@@ -70,14 +70,16 @@
         </tgroup>
     </table>
 
+    <sect4 id="zend.rest.route_usage">
+    	<title>Zend_Rest_Route Usage</title>
+
     <para>
         To enable <classname>Zend_Rest_Route</classname> for an entire
         application, construct it with no config params and add it as the
         default route on the front controller:
     </para>
 
-    <programlisting language="php"><![CDATA[
-$front     = Zend_Controller_Front::getInstance();
+    <programlisting language="php"><![CDATA[$front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front);
 $front->getRouter()->addRoute('default', $restRoute);
 ]]></programlisting>
@@ -96,8 +98,7 @@ $front->getRouter()->addRoute('default', $restRoute);
         argument:
     </para>
 
-    <programlisting language="php"><![CDATA[
-$front     = Zend_Controller_Front::getInstance();
+    <programlisting language="php"><![CDATA[$front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array('product'));
 $front->getRouter()->addRoute('rest', $restRoute);
 ]]></programlisting>
@@ -108,14 +109,44 @@ $front->getRouter()->addRoute('rest', $restRoute);
         module array element.
     </para>
 
-    <programlisting language="php"><![CDATA[
-$front     = Zend_Controller_Front::getInstance();
+    <programlisting language="php"><![CDATA[$front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array(
     'product' => array('ratings')
 ));
 $front->getRouter()->addRoute('rest', $restRoute);
 ]]></programlisting>
 
+	</sect4>
+	
+    <sect4 id="zend.rest.route_config">
+    	<title>Zend_Rest_Route with Zend_Config_Ini</title>
+
+	<para>
+		To use Zend_Rest_Route from an INI config file, use a route type
+		parameter and set the config options:
+	</para>
+	
+	<programlisting language="ini"><![CDATA[routes.rest.type = Zend_Rest_Route
+routes.rest.defaults.controller = object
+routes.rest.mod = project,user
+]]></programlisting>
+
+	<para>The 'type' option designates the RESTful routing config type. 
+	The 'defaults' option is used to specify custom default 
+	module, controller, and/or actions for the route. All other options
+	in the config group are treated as RESTful module names, and their
+	values are RESTful controller names. The example config defines 
+	Mod_ProjectController and Mod_UserController as RESTful controllers.</para>
+
+	<para>Then use the addConfig() method of the Rewrite router object:</para>
+	
+	<programlisting language="php"><![CDATA[$config = new Zend_Config_Ini('path/to/routes.ini');
+$router = new Zend_Controller_Router_Rewrite();
+$router->addConfig($config, 'routes');
+]]></programlisting>
+
+	</sect4>
+	
     <sect4 id="zend.rest.controller">
         <title>Zend_Rest_Controller</title>
 

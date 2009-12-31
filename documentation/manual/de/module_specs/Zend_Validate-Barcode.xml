@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19986 -->
+<!-- EN-Revision: 20003 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.barcode">
     <title>Barcode</title>
@@ -18,14 +18,28 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>CODE25</emphasis>: Oft auch "Two of Five" genannt.
+                <emphasis>CODE25</emphasis>: Oft auch "Two of Five" oder "Code 25 Industrial"
+                genannt.
             </para>
 
             <para>
-                Dieser Barcode hat keine Begrenzung der Länge, muss aber eine gerade Anzahl an
-                Zeichen enthalten. Es unterstützt nur Ziffern, und die letzt Ziffer kann eine
-                optionale Checksumme sein welche durch Modulo 10 berechnet wird. Dieser Standard
-                wird weltweit verwendet und üblicherweise im Handel.
+                Dieser Barcode hat keine Begrenzung der Länge. Es unterstützt nur Ziffern, und die
+                letzte Ziffer kann eine optionale Checksumme sein welche durch Modulo 10 berechnet
+                wird. Dieser Standard sehr alt und wird heutzutage nicht oft verwendet. Übliche
+                Anwendungsfälle liegen in der Industrie.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>CODE25INTERLEAVED</emphasis>: Oft auch "Code 2 of 5 Interleaved" genannt.
+            </para>
+
+            <para>
+                Dieser Standard ist eine Variante von CODE25. Er hat keine Begrenzung der Länge,
+                muss aber eine gerade Anzahl an Zeichen enthalten. Es unterstützt nur Ziffern, und
+                die letzte Ziffer kann eine optionale Checksumme sein welche durch Modulo 10
+                berechnet wird. Dieser Standard wird weltweit verwendet und üblicherweise im Handel.
             </para>
         </listitem>
 
@@ -188,6 +202,19 @@
                 Länge von 14 Zeichen haben und basiert auf GTIN14. Er unterstützt nur Ziffern wobei
                 die letzte Ziffer die Ziffer einer Checksumme ist welche durch Modulo 10 berechnet
                 wird. Er wird weltweit verwendet, üblicherweise im Handel.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>LEITCODE</emphasis>: Leitcode wird von Deutsche Post und DHL verwendet.
+                Er ist eine spezialisierte Implementation von Code25.
+            </para>
+
+            <para>
+                Dieser Barcode muss eine Länge von 14 Zeichen haben. Er unterstützt nur Ziffern,
+                wobei die letzte Ziffer immer eine Checksumme ist welche durch Modulo 10 berechnet
+                wird. Dieser Standard wird hauptsächlich von den Firmen DP und DHL verwendet.
             </para>
         </listitem>
 

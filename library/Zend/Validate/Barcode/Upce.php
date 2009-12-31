@@ -51,18 +51,6 @@ class Zend_Validate_Barcode_Upce extends Zend_Validate_Barcode_AdapterAbstract
     protected $_checksum = '_gtin';
 
     /**
-     * Constructor
-     *
-     * Set check flag to false
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->setCheck(true);
-    }
-
-    /**
      * Overrides parent checkLength
      *
      * @param string $value Value
@@ -72,6 +60,8 @@ class Zend_Validate_Barcode_Upce extends Zend_Validate_Barcode_AdapterAbstract
     {
         if (strlen($value) != 8) {
             $this->setCheck(false);
+        } else {
+            $this->setCheck(true);
         }
 
         return parent::checkLength($value);

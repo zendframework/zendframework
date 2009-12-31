@@ -16,7 +16,7 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Ean13.php 18028 2009-09-08 20:52:23Z thomas $
+ * @version    $Id:$
  */
 
 /**
@@ -30,13 +30,13 @@ require_once 'Zend/Validate/Barcode/AdapterAbstract.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Validate_Barcode_Itf14 extends Zend_Validate_Barcode_AdapterAbstract
+class Zend_Validate_Barcode_Ean2 extends Zend_Validate_Barcode_AdapterAbstract
 {
     /**
      * Allowed barcode lengths
      * @var integer
      */
-    protected $_length = 14;
+    protected $_length = 2;
 
     /**
      * Allowed barcode characters
@@ -45,8 +45,14 @@ class Zend_Validate_Barcode_Itf14 extends Zend_Validate_Barcode_AdapterAbstract
     protected $_characters = '0123456789';
 
     /**
-     * Checksum function
-     * @var string
+     * Constructor
+     *
+     * Sets check flag to false.
+     *
+     * @return void
      */
-    protected $_checksum = '_gtin';
+    public function __construct()
+    {
+        $this->setCheck(false);
+    }
 }

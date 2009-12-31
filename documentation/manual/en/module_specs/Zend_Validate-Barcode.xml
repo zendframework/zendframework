@@ -72,9 +72,45 @@
 
             <para>
                 This barcode has a variable length. It supports digits, alphabetical characters
-                and 7 special characters. It has an checksum which is calculated with modulo 47 and
-                contains 2 characters. This standard produces a denser code than CODE39 and is more
-                secure.
+                and 7 special characters. It has an optional checksum which is calculated with
+                modulo 47 and contains 2 characters. This standard produces a denser code than
+                CODE39 and is more secure.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>CODE93EXT</emphasis>: CODE93EXT is an extension of CODE93.
+            </para>
+
+            <para>
+                This barcode has the same properties as CODE93. Additionally it allows the usage of
+                all 128 ASCII characters. This standard is used worldwide and common within the
+                industry.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>EAN2</emphasis>: EAN is the shortcut for "European Article Number".
+            </para>
+
+            <para>
+                These barcode must have 2 characters. It supports only digits and does not have a
+                checksum. This standard is mainly used as addition to EAN13 (ISBN) when printed on
+                books.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>EAN5</emphasis>: EAN is the shortcut for "European Article Number".
+            </para>
+
+            <para>
+                These barcode must have 5 characters. It supports only digits and does not have a
+                checksum. This standard is mainly used as addition to EAN13 (ISBN) when printed on
+                books.
             </para>
         </listitem>
 
@@ -84,10 +120,10 @@
             </para>
 
             <para>
-                These barcodes must have a length of 8 characters. It supports only digits, and
-                the last digit is always a checksum. This standard is used worldwide but has a very
-                limited range. It can be found on small articles where a longer barcode could not
-                be printed.
+                These barcode can have 7 or 8 characters. It supports only digits. When it has a
+                length of 8 characters it includes a checksum. This standard is used worldwide but
+                has a very limited range. It can be found on small articles where a longer barcode
+                could not be printed.
             </para>
         </listitem>
 

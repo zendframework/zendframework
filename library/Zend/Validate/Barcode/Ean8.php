@@ -36,7 +36,7 @@ class Zend_Validate_Barcode_Ean8 extends Zend_Validate_Barcode_AdapterAbstract
      * Allowed barcode lengths
      * @var integer
      */
-    protected $_length = 8;
+    protected $_length = array(7, 8);
 
     /**
      * Allowed barcode characters
@@ -49,4 +49,21 @@ class Zend_Validate_Barcode_Ean8 extends Zend_Validate_Barcode_AdapterAbstract
      * @var string
      */
     protected $_checksum = '_gtin';
+
+    /**
+     * Overrides parent checkLength
+     *
+     * @param string $value Value
+     * @return boolean
+     */
+    public function checkLength($value)
+    {
+        if (strlen($value) == 7) {
+            $this->setCheck(false);
+        } else {
+            $this->setCheck(true);
+        }
+
+        return parent::checkLength($value);
+    }
 }

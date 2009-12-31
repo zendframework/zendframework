@@ -232,11 +232,43 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
 //        $this->assertFalse($barcode->isValid('159AZG'));
     }
 
-    public function testxxxxxxxxxxxxCODE93()
+    public function testCODE93()
     {
         $barcode = new Zend_Validate_Barcode('code93');
-        $this->assertTrue($barcode->isValid('TEST93TEST93TEST93TEST93Y+'));
-        $this->assertFalse($barcode->isValid('00075678164124'));
+        $this->assertTrue($barcode->isValid('TEST93+'));
+        $this->assertFalse($barcode->isValid('Test93+'));
+
+        $barcode->setChecksum(true);
+        $this->assertTrue($barcode->isValid('CODE 93E0'));
+        $this->assertFalse($barcode->isValid('CODE 93E1'));
+    }
+
+    public function testCODE93EXT()
+    {
+        $barcode = new Zend_Validate_Barcode('code93ext');
+        $this->assertTrue($barcode->isValid('TEST93+'));
+        $this->assertTrue($barcode->isValid('Test93+'));
+
+// @TODO: CODE93 EXTENDED CHECKSUM VALIDATION MISSING
+//        $barcode->setChecksum(true);
+//        $this->assertTrue($barcode->isValid('CODE 93E0'));
+//        $this->assertFalse($barcode->isValid('CODE 93E1'));
+    }
+
+    public function testEAN2()
+    {
+        $barcode = new Zend_Validate_Barcode('ean2');
+        $this->assertTrue($barcode->isValid('12'));
+        $this->assertFalse($barcode->isValid('1'));
+        $this->assertFalse($barcode->isValid('123'));
+    }
+
+    public function testEAN5()
+    {
+        $barcode = new Zend_Validate_Barcode('ean5');
+        $this->assertTrue($barcode->isValid('12345'));
+        $this->assertFalse($barcode->isValid('1234'));
+        $this->assertFalse($barcode->isValid('123456'));
     }
 
     public function testEAN8()
@@ -245,6 +277,7 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($barcode->isValid('12345670'));
         $this->assertFalse($barcode->isValid('123'));
         $this->assertFalse($barcode->isValid('12345671'));
+        $this->assertTrue($barcode->isValid('1234567'));
     }
 
     public function testEAN12()
@@ -312,7 +345,7 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($barcode->isValid('564000000051'));
     }
 
-    public function testxxxxxxxxxxxxITF14()
+    public function testITF14()
     {
         $barcode = new Zend_Validate_Barcode('itf14');
         $this->assertTrue($barcode->isValid('00075678164125'));

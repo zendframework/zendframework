@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19993 -->
+<!-- EN-Revision: 19991 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.windowsazure.storage.table">
     <title>Zend_Service_WindowsAzure_Storage_Table</title>
 
     <para>
-        The Table service offers structured storage in the form of tables.
+        Der Table Service bietet einen strukturierten Speicher in der Form von Tabellen.
     </para>
 
     <para>
-        Table Storage is offered by Windows Azure as a REST API which is wrapped by the
-        <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class in order to provide a
-        native PHP interface to the storage account.
+        Tabellen Speicher wird von Windows Azure als REST API angeboten die von der Klasse
+        <classname>Zend_Service_WindowsAzure_Storage_Table</classname> umhüllt ist um ein natives
+        PHP Interface zum Speicher Konto zu bieten.
     </para>
 
     <para>
-        This topic lists some examples of using the
-        <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class.  Other features are
-        available in the download package, as well as a detailed API documentation of those
-        features.
+        Dieses Thema zeigt einige Beispiele der Verwendung der Klasse
+        <classname>Zend_Service_WindowsAzure_Storage_Table</classname>. Andere Features sind im
+        Download Paket enthalten sowie in den detailierten API Dokumentationen dieser Features.
     </para>
 
     <para>
-        Note that development table storage (in the Windows Azure SDK) does not support all features
-        provided by the API. Therefore, the examples listed on this page are to be used on Windows
-        Azure production table storage.
+        Es ist zu beachten das bei der Entwicklung der Tabellen Speicher (in der SDK von Windows
+        Azure) nicht alle Features unterstützt welche von dieser API angeboten werden. Deshalb sind
+        die Beispiele welche auf dieser Seite aufgeführt sind, dazu gedacht auf Windows Azure
+        Produktions Tabellen Speichern verwendet zu werden.
     </para>
 
     <sect2 id="zend.service.windowsazure.storage.table.api">
-        <title>Operations on tables</title>
+        <title>Operationen auf Tabellen</title>
 
         <para>
-            This topic lists some samples of operations that can be executed on tables.
+            Dieses Thema zeigt einige Beispiele für Operationen welche auf Tabellen ausgeführt
+            werden können.
         </para>
 
         <sect3 id="zend.service.windowsazure.storage.table.api.create">
-            <title>Creating a table</title>
+            <title>Erstellung einer Tabelle</title>
 
             <para>
-                Using the following code, a table can be created on Windows Azure production table
-                storage.
+                Bei Verwendung des folgenden Codes, kann eine Tabelle auf dem Windows Azure
+                Produktions Tabellen Speicher erstellt werden.
             </para>
 
             <example id="zend.service.windowsazure.storage.table.api.create.example">
-                <title>Creating a table</title>
+                <title>Erstellen einer Tabelle</title>
 
                 <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
@@ -51,21 +52,21 @@ $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
 );
 $result = $storageClient->createTable('testtable');
 
-echo 'New table name is: ' . $result->Name;
+echo 'Der neue Name der Tabelle ist: ' . $result->Name;
 ]]></programlisting>
             </example>
         </sect3>
 
         <sect3 id="zend.service.windowsazure.storage.table.api.list">
-            <title>Listing all tables</title>
+            <title>Ausgeben aller Tabellen</title>
 
             <para>
-                Using the following code, a list of all tables in Windows Azure production table
-                storage can be queried.
+                Bei Verwendung des folgendes Codes, kann eine Liste alle Tabellen im Windows Azure
+                Produktions Tabellen Speicher abgefragt werden.
             </para>
 
             <example id="zend.service.windowsazure.storage.table.api.list.example">
-                <title>Listing all tables</title>
+                <title>Ausgeben aller Tabellen</title>
 
                 <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
@@ -73,7 +74,7 @@ $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
 );
 $result = $storageClient->listTables();
 foreach ($result as $table) {
-    echo 'Table name is: ' . $table->Name . "\r\n";
+    echo 'Der Name der Tabelle ist: ' . $table->Name . "\r\n";
 }
 ]]></programlisting>
             </example>
@@ -81,45 +82,46 @@ foreach ($result as $table) {
     </sect2>
 
     <sect2 id="zend.service.windowsazure.storage.table.entities">
-        <title>Operations on entities</title>
+        <title>Operationen auf Entitäten</title>
 
         <para>
-            Tables store data as collections of entities. Entities are similar to rows.  An entity
-            has a primary key and a set of properties. A property is a named, typed-value pair,
-            similar to a column.
+            Tabellen speichern Daten als Sammlung von Entitäten. Entitäten sind so ähnlich wie
+            Zeilen. Eine Entität hat einen primären Schlüssel und ein Set von Eigenschaften. Eine
+            Eigenschaft ist ein benanntes, Typ-Werte Paar, ähnlich einer Spalte.
         </para>
 
         <para>
-            The Table service does not enforce any schema for tables, so two entities in the same
-            table may have different sets of properties. Developers may choose to enforce a schema
-            on the client side. A table may contain any number of entities.
+            Der Tabellen Service erzwingt kein Schema für Tabellen, deshalb können zwei Entitäten in
+            der selben Tabelle unterschiedliche Sets von Eigenschaften haben. Entwickler können
+            auswählen das ein Schema auf Seite des Clients erzwungen wird. Eine Tabelle kann eine
+            beliebige Anzahl an Entitäten enthalten.
         </para>
 
         <para>
-            <classname>Zend_Service_WindowsAzure_Storage_Table</classname> provides 2 ways of
-            working with entities:
+            <classname>Zend_Service_WindowsAzure_Storage_Table</classname> bietet 2 Wege um mit
+            Entitäten zu arbeiten:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    Enforced schema
+                    Erzwungenes Schema
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    No enforced schema
+                    Nicht erzwungenes Schema
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            All examples will make use of the following enforced schema class.
+            Alle Beispiel verwenden die folgende erwzungene Schema Klasse.
         </para>
 
         <example id="zend.service.windowsazure.storage.table.entities.schema">
-            <title>Enforced schema used in samples</title>
+            <title>Erzwungenes Schema welches in Beispielen verwendet wird</title>
 
             <programlisting language="php"><![CDATA[
 class SampleEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
@@ -333,7 +335,7 @@ public $Age;
                 To use the <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class
                 without defining a schema, you can make use of the
                 <classname>Zend_Service_WindowsAzure_Storage_DynamicTableEntity</classname> class.
-                This class inherits <classname>Zend_Service_WindowsAzure_Storage_TableEntity</code>
+                This class inherits <classname>Zend_Service_WindowsAzure_Storage_TableEntity</classname>
                 like an enforced schema class does, but contains additional logic to make it dynamic
                 and not bound to a schema.
             </para>

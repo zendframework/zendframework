@@ -289,13 +289,13 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($barcode->isValid('12345678901232'));
     }
 
-    public function testxxxxxxxxxxxxIDENTCODE()
+    public function testIDENTCODE()
     {
         $barcode = new Zend_Validate_Barcode('identcode');
         $this->assertTrue($barcode->isValid('564000000050'));
         $this->assertFalse($barcode->isValid('123'));
         $this->assertFalse($barcode->isValid('0563102430313'));
-        $this->assertFalse($barcode->isValid('563102430312'));
+        $this->assertFalse($barcode->isValid('564000000051'));
     }
 
     public function testxxxxxxxxxxxxITF14()
@@ -306,7 +306,7 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($barcode->isValid('00075678164124'));
     }
 
-    public function testxxxxxxxxxxxxLEITCODE()
+    public function testLEITCODE()
     {
         $barcode = new Zend_Validate_Barcode('leitcode');
         $this->assertTrue($barcode->isValid('21348075016401'));

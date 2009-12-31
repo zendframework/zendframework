@@ -48,5 +48,5 @@ class Zend_Validate_Barcode_Leitcode extends Zend_Validate_Barcode_AdapterAbstra
      * Checksum function
      * @var string
      */
-    protected $_checksum = '_mod10ident';
+    protected $_checksum = '_identcode';
 }

@@ -234,13 +234,13 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
      * @param  string $value The barcode to validate
      * @return boolean
      */
-    protected function _mod10ident($value)
+    protected function _identcode($value)
     {
         $barcode = substr($value, 0, -1);
         $sum     = 0;
         $length  = strlen($value) - 2;
 
-        for ($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i <= $length; $i++) {
             if (($i % 2) === 0) {
                 $sum += $barcode[$length - $i] * 4;
             } else {

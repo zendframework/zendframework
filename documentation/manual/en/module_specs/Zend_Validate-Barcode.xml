@@ -189,6 +189,19 @@
 
         <listitem>
             <para>
+                <emphasis>LEITCODE</emphasis>: Leitcode is used by Deutsche Post and DHL. It's an
+                specialized implementation of Code25.
+            </para>
+
+            <para>
+                This barcode must have a length of 14 characters. It supports only digits, and the
+                last digit is always a checksum which is calculated with modulo 10. This standard is
+                mainly used by the companies DP and DHL.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
                 <emphasis>SSCC</emphasis>: SSCC is the shortcut for "Serial Shipping Container
                 Code".
             </para>

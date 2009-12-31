@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20003 -->
+<!-- EN-Revision: 20007 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.barcode">
     <title>Barcode</title>
@@ -76,9 +76,45 @@
 
             <para>
                 Dieser Barcode hat eine variable Länge. Er unterstützt Ziffern, alphabetische
-                Zeichen und 7 spezielle Zeichen. Er enthält eine Checksumme welche durch Modulo 47
-                berechnet wird und aus 2 Zeichen besteht. Dieser Standard produziert einen
+                Zeichen und 7 spezielle Zeichen. Er enthält eine optionale Checksumme welche durch
+                Modulo 47 berechnet wird und aus 2 Zeichen besteht. Dieser Standard produziert einen
                 kompakteren Code als CODE39 und ist sicherer.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>CODE93EXT</emphasis>: CODE93EXT ist eine Erweiterung von CODE93.
+            </para>
+
+            <para>
+                Dieser Barcode hat die gleichen Eigenschaften wie CODE93. Zusätzlich erlaubt er die
+                Verwendung aller 128 ASCII Zeichen. Dieser Standard wird weltweit verwendung und ist
+                in der Industrie üblich.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>EAN2</emphasis>: EAN ist die Abkürzung für "European Article Number".
+            </para>
+
+            <para>
+                Dieser Barcode muss 2 Zeichen haben. Er unterstützt nur Ziffern und hat keine
+                Checksumme. Dieser Standard wird hauptsächlich als Zusatz zu EAN13 (ISBN) verwendet
+                wenn diese auf Bücher gedruckt werden.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>EAN5</emphasis>: EAN ist die Abkürzung für "European Article Number".
+            </para>
+
+            <para>
+                Dieser Barcode muss 5 Zeichen haben. Er unterstützt nur Ziffern und hat keine
+                Checksumme. Dieser Standard wird hauptsächlich als Zusatz zu EAN13 (ISBN) verwendet
+                wenn diese auf Bücher gedruckt werden.
             </para>
         </listitem>
 
@@ -88,10 +124,10 @@
             </para>
 
             <para>
-                Dieser Barcode muss eine Länge von 8 Zeichen haben. Er unterstützt nur Ziffern wobei
-                die letzte Ziffer immer eine Checksumme ist. Dieser Standard wird weltweit
-                verwendet, hat aber eine sehr begrenzte Reichweite. Er kann auf kleinen Artikeln
-                gefunden werden wo ein längerer Barcode nicht gedruckt werden könnte.
+                Dieser Barcode kann eine Länge von 7 oder 8 Zeichen haben. Er unterstützt nur
+                Ziffern. Wenn er 8 Zeichen lang ist enthält er eine Checksumme. Dieser Standard wird
+                weltweit verwendet, hat aber eine sehr begrenzte Reichweite. Er kann auf kleinen
+                Artikeln gefunden werden wo ein längerer Barcode nicht gedruckt werden könnte.
             </para>
         </listitem>
 

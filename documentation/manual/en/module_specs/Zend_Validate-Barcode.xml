@@ -17,14 +17,26 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>CODE25</emphasis>: Often called "two of five."
+                <emphasis>CODE25</emphasis>: Often called "two of five" or "Code25 Industrial".
             </para>
 
             <para>
-                This barcode has no length limitation, but it must contain an even amount of
-                characters. It supports only digits, and the last digit can be an optional checksum
-                which is calculated with modulo 10. This standard is used worldwide and common on
-                the market.
+                This barcode has no length limitation. It supports only digits, and the last digit
+                can be an optional checksum which is calculated with modulo 10. This standard is
+                very old and nowadays not often used. Common usecases are within the industry.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>CODE25INTERLEAVED</emphasis>: Often called "Code 2 of 5 Interleaved".
+            </para>
+
+            <para>
+                This standard is a variant of CODE25. It has no length limitation, but it must
+                contain an even amount of characters. It supports only digits, and the last digit
+                can be an optional checksum which is calculated with modulo 10. It is used worldwide
+                and common on the market.
             </para>
         </listitem>
 

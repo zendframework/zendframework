@@ -30,13 +30,13 @@ require_once 'Zend/Validate/Barcode/AdapterAbstract.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Validate_Barcode_Code25 extends Zend_Validate_Barcode_AdapterAbstract
+class Zend_Validate_Barcode_Code25interleaved extends Zend_Validate_Barcode_AdapterAbstract
 {
     /**
      * Allowed barcode lengths
      * @var integer
      */
-    protected $_length = -1;
+    protected $_length = 'even';
 
     /**
      * Allowed barcode characters

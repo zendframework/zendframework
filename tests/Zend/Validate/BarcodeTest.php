@@ -184,13 +184,27 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($barcode->isValid('0075678164125'));
     }
 
-    public function testxxxxxxxxxxxxCODE25()
+    public function testCODE25()
     {
         $barcode = new Zend_Validate_Barcode('code25');
-        $this->assertTrue($barcode->isValid('00075678164125'));
-        $this->assertFalse($barcode->isValid('123'));
+        $this->assertTrue($barcode->isValid('0123456789101213'));
+        $this->assertTrue($barcode->isValid('123'));
+        $this->assertFalse($barcode->isValid('123a'));
+
         $barcode->setChecksum(true);
-        $this->assertFalse($barcode->isValid('00075678164124'));
+        $this->assertTrue($barcode->isValid('0123456789101214'));
+        $this->assertFalse($barcode->isValid('0123456789101213'));
+    }
+
+    public function testCODE25INTERLEAVED()
+    {
+        $barcode = new Zend_Validate_Barcode('code25interleaved');
+        $this->assertTrue($barcode->isValid('0123456789101213'));
+        $this->assertFalse($barcode->isValid('123'));
+
+        $barcode->setChecksum(true);
+        $this->assertTrue($barcode->isValid('0123456789101214'));
+        $this->assertFalse($barcode->isValid('0123456789101213'));
     }
 
     public function testCODE39()

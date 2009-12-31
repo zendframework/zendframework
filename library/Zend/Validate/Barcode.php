@@ -131,7 +131,7 @@ class Zend_Validate_Barcode extends Zend_Validate_Abstract
      */
     public function setAdapter($adapter, $options = null)
     {
-        $adapter = ucfirst($adapter);
+        $adapter = ucfirst(strtolower($adapter));
         require_once 'Zend/Loader.php';
         if (Zend_Loader::isReadable('Zend/Validate/Barcode/' . $adapter. '.php')) {
             $adapter = 'Zend_Validate_Barcode_' . $adapter;

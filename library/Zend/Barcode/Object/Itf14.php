@@ -20,8 +20,8 @@
  * @version    $Id$
  */
 
-/** @see Zend_Barcode_Object_Int25 */
-require_once 'Zend/Barcode/Object/Int25.php';
+/** @see Zend_Barcode_Object_Code25interleaved */
+require_once 'Zend/Barcode/Object/Code25interleaved.php';
 
 /** @see Zend_Validate_Barcode */
 require_once 'Zend/Validate/Barcode.php';
@@ -34,7 +34,7 @@ require_once 'Zend/Validate/Barcode.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Itf14 extends Zend_Barcode_Object_Int25
+class Zend_Barcode_Object_Itf14 extends Zend_Barcode_Object_Code25interleaved
 {
 
     /**

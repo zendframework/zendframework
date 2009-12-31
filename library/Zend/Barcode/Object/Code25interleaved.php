@@ -34,7 +34,7 @@ require_once 'Zend/Validate/Barcode.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Int25 extends Zend_Barcode_Object_Code25
+class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
 {
     /**
      * Drawing of bearer bars
@@ -66,17 +66,6 @@ class Zend_Barcode_Object_Int25 extends Zend_Barcode_Object_Code25
     public function getWithBearerBars()
     {
         return $this->_withBearerBars;
-    }
-
-    /**
-     * Check allowed characters
-     * @param string $value
-     * @return string
-     * @throw Zend_Barcode_Object_Exception
-     */
-    public function validateText($value)
-    {
-        $this->_validateText($value, array('validator' => 'code25'));
     }
 
     /**

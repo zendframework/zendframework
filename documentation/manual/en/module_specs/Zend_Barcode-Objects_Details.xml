@@ -61,6 +61,90 @@
         </para>
     </sect3>
 
+    <sect3 id="zend.barcode.objects.details.code25interleaved">
+        <title>Zend_Barcode_Object_Code25interleaved</title>
+
+        <para>
+            <inlinegraphic width="101" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.int25.png" format="PNG"/>
+        </para>
+
+        <para>
+            This barcode extends <classname>Zend_Barcode_Object_Code25</classname>
+            (Code 2 of 5), and has the same particulars and options, and adds the following:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> Code 2 of 5 Interleaved
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> optional (modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> variable (always even number of characters)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Available options include:
+        </para>
+
+        <table id="zend.barcode.objects.details.code25interleaved.table">
+            <title>Zend_Barcode_Object_Code25interleaved Options</title>
+
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry>Option</entry>
+
+                        <entry>Data Type</entry>
+
+                        <entry>Default Value</entry>
+
+                        <entry>Description</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry><emphasis>withBearerBars</emphasis></entry>
+
+                        <entry><type>Boolean</type></entry>
+
+                        <entry><constant>FALSE</constant></entry>
+
+                        <entry>
+                            Draw a thick bar at the top and the bottom of the barcode.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <note>
+            <para>
+                If the number of characters is not even,
+                <classname>Zend_Barcode_Object_Code25interleaved</classname> will automatically
+                prepend the missing zero to the barcode text.
+            </para>
+        </note>
+    </sect3>
+
     <sect3 id="zend.barcode.objects.details.code39">
         <title>Zend_Barcode_Object_Code39</title>
 
@@ -117,7 +201,7 @@
         </para>
 
         <para>
-            This barcode extends <classname>Zend_Barcode_Object_Int25</classname>
+            This barcode extends <classname>Zend_Barcode_Object_Code25interleaved</classname>
             (Code 2 of 5 Interleaved), and inherits some of its capabilities; it also has a few
             particulars of its own.
         </para>
@@ -155,8 +239,8 @@
         <note>
             <para>
                 If the number of characters is not equal to 12,
-                <classname>Zend_Barcode_Object_Identcode</classname> will automatically prepend missing
-                zeros to the barcode text.
+                <classname>Zend_Barcode_Object_Identcode</classname> will automatically prepend
+                missing zeros to the barcode text.
             </para>
         </note>
     </sect3>
@@ -170,7 +254,7 @@
         </para>
 
         <para>
-            This barcode extends <classname>Zend_Barcode_Object_Int25</classname>
+            This barcode extends <classname>Zend_Barcode_Object_Code25interleaved</classname>
             (Code 2 of 5 Interleaved), and inherits some of its capabilities; it also has a few
             particulars of its own.
         </para>
@@ -208,92 +292,8 @@
         <note>
             <para>
                 If the number of characters is not equal to 14,
-                <classname>Zend_Barcode_Object_Itf14</classname> will automatically prepend missing
-                zeros to the barcode text.
-            </para>
-        </note>
-    </sect3>
-
-    <sect3 id="zend.barcode.objects.details.int25">
-        <title>Zend_Barcode_Object_Int25</title>
-
-        <para>
-            <inlinegraphic width="101" align="center" valign="middle"
-                fileref="figures/zend.barcode.objects.details.int25.png" format="PNG"/>
-        </para>
-
-        <para>
-            This barcode extends <classname>Zend_Barcode_Object_Code25</classname>
-            (Code 2 of 5), and has the same particulars and options, and adds the following:.
-        </para>
-
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <emphasis>Name:</emphasis> Code 2 of 5 Interleaved
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>Allowed characters:</emphasis> '0123456789'
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>Checksum:</emphasis> optional (modulo 10)
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>Length:</emphasis> variable (always even number of characters)
-                </para>
-            </listitem>
-        </itemizedlist>
-
-        <para>
-            Available options include:
-        </para>
-
-        <table id="zend.barcode.objects.details.int25.table">
-            <title>Zend_Barcode_Object_Int25 Options</title>
-
-            <tgroup cols="4">
-                <thead>
-                    <row>
-                        <entry>Option</entry>
-
-                        <entry>Data Type</entry>
-
-                        <entry>Default Value</entry>
-
-                        <entry>Description</entry>
-                    </row>
-                </thead>
-
-                <tbody>
-                    <row>
-                        <entry><emphasis>withBearerBars</emphasis></entry>
-
-                        <entry><type>Boolean</type></entry>
-
-                        <entry><constant>FALSE</constant></entry>
-
-                        <entry>
-                            Draw a thick bar at the top and the bottom of the barcode.
-                        </entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
-
-        <note>
-            <para>
-                If the number of characters is not even,
-                <classname>Zend_Barcode_Object_Int25</classname> will automatically prepend the
-                missing zero to the barcode text.
+                <classname>Zend_Barcode_Object_Itf14</classname> will automatically prepend
+                missing zeros to the barcode text.
             </para>
         </note>
     </sect3>
@@ -308,7 +308,7 @@
 
         <para>
             This barcode extends <classname>Zend_Barcode_Object_Identcode</classname>
-            (Code 2 of 5 Interleaved), and inherits some of its capabilities; it also has a few
+            (Deutsche Post Identcode), and inherits some of its capabilities; it also has a few
             particulars of its own.
         </para>
 
@@ -345,8 +345,8 @@
         <note>
             <para>
                 If the number of characters is not equal to 14,
-                <classname>Zend_Barcode_Object_Leitcode</classname> will automatically prepend missing
-                zeros to the barcode text.
+                <classname>Zend_Barcode_Object_Leitcode</classname> will automatically
+                prepend missing zeros to the barcode text.
             </para>
         </note>
     </sect3>

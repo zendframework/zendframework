@@ -61,6 +61,14 @@ class Zend_Barcode_Object_Code25Test extends Zend_Barcode_Object_TestCommon
         $this->assertSame('0123456789', $this->_object->getTextToDisplay());
     }
 
+    public function testSetTextWithOddNumberOfCharacters()
+    {
+        $this->_object->setText('123456789');
+        $this->assertSame('123456789', $this->_object->getRawText());
+        $this->assertSame('123456789', $this->_object->getText());
+        $this->assertSame('123456789', $this->_object->getTextToDisplay());
+    }
+
     public function testSetTextWithSpaces()
     {
         $this->_object->setText(' 0123456789 ');

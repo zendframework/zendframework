@@ -24,7 +24,7 @@ require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
 
 require_once dirname(__FILE__) . '/TestCommon.php';
 
-require_once 'Zend/Barcode/Object/Int25.php';
+require_once 'Zend/Barcode/Object/Code25interleaved.php';
 
 /**
  * @category   Zend
@@ -34,17 +34,17 @@ require_once 'Zend/Barcode/Object/Int25.php';
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Barcode_Object_Int25Test extends Zend_Barcode_Object_TestCommon
+class Zend_Barcode_Object_Code25interleavedTest extends Zend_Barcode_Object_TestCommon
 {
 
     protected function _getBarcodeObject($options = null)
     {
-        return new Zend_Barcode_Object_Int25($options);
+        return new Zend_Barcode_Object_Code25interleaved($options);
     }
 
     public function testType()
     {
-        $this->assertSame('int25', $this->_object->getType());
+        $this->assertSame('code25interleaved', $this->_object->getType());
     }
 
     public function testWithBearerBars()

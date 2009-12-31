@@ -5,57 +5,56 @@
     <title>Zend_Service_WindowsAzure_Storage_Blob</title>
 
     <para>
-        Blob Storage stores sets of binary data. Blob storage offers the following three
-        resources: the storage account, containers, and blobs.  Within your storage account,
-        containers provide a way to organize sets of blobs within your storage account.
+        Blob Speicher speichert ein Set von Binären Daten. Blog Speicher bietet die folgenden drei
+        Ressourcen an: den Speicher Account, Container und Blobs. Im eigenen Speicher Account bieten
+        Container einen Weg um Sets von Blobs im Speicher Account zu organisieren.
     </para>
 
     <para>
-        Blob Storage is offered by Windows Azure as a <acronym>REST</acronym> API which is
-        wrapped by the <classname>Zend_Service_WindowsAzure_Storage_Blob</classname> class in
-        order to provide a native PHP interface to the storage account.
+        Blog Speicher wird von Windows Azure als <acronym>REST</acronym> API angeboten welcher von
+        der Klasse <classname>Zend_Service_WindowsAzure_Storage_Blob</classname> umhüllt ist um ein
+        natives PHP Interface zum Speicher Account zu bieten.
     </para>
 
     <sect2 id="zend.service.windowsazure.storage.blob.api">
-        <title>API Examples</title>
+        <title>API Beispiele</title>
 
         <para>
-            This topic lists some examples of using the
-            <classname>Zend_Service_WindowsAzure_Storage_Blob</classname> class.  Other features are
-            available in the download package, as well as a detailed API documentation of those
-            features.
+            Dieser Abschnitt zeigt einige Beispiele der Verwendung der Klasse
+            <classname>Zend_Service_WindowsAzure_Storage_Blob</classname>. Andere Features sind im
+            Download Paket vorhanden sowie in der detailierten API Dokumentation dieser Features.
         </para>
 
         <sect3 id="zend.service.windowsazure.storage.blob.api.create-container">
-            <title>Creating a storage container</title>
+            <title>Erstellung einer Speicher Containers</title>
 
             <para>
-                Using the following code, a blob storage container can be created on development
-                storage.
+                Bei Verwendung des folgenden Codes kann ein Speicher Container auf dem Development
+                Speicher erstellt werden.
             </para>
 
             <example id="zend.service.windowsazure.storage.blob.api.create-container">
-                <title>Creating a storage container</title>
+                <title>Erstellung eines Speicher Containers</title>
 
                 <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 $result = $storageClient->createContainer('testcontainer');
 
-echo 'Container name is: ' . $result->Name;
+echo 'Der Name des Containers ist: ' . $result->Name;
 ]]></programlisting>
             </example>
         </sect3>
 
         <sect3 id="zend.service.windowsazure.storage.blob.api.delete-container">
-            <title>Deleting a storage container</title>
+            <title>Löschen eines Speicher Containers</title>
 
             <para>
-                Using the following code, a blob storage container can be removed from development
-                storage.
+                Bei Verwendung des folgenden Codes kann ein Blob Speicher Container vom Development
+                Speicher entfernt werden.
             </para>
 
             <example id="zend.service.windowsazure.storage.blob.api.delete-container">
-                <title>Deleting a storage container</title>
+                <title>Löschen eines Speicher Containers</title>
 
                 <programlisting role="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
@@ -65,71 +64,74 @@ $storageClient->deleteContainer('testcontainer');
         </sect3>
 
         <sect3 id="zend.service.windowsazure.storage.blob.api.storing-blob">
-            <title>Storing a blob</title>
+            <title>Speichern eines Blobs</title>
 
             <para>
-                Using the following code, a blob can be uploaded to a blob storage container on
-                development storage. Note that the container has already been created before.
+                Bei Verwendung des folgenden Codes kann ein Blob zu einem Blog Speicher Container
+                auf dem Development Speichers hochgeladen werden. Es ist zu beachten das der
+                Container hierfür bereits vorher erstellt worden sein muss.
             </para>
 
             <example id="zend.service.windowsazure.storage.blob.api.storing-blob">
-                <title>Storing a blob</title>
+                <title>Speichern eines Blobs</title>
 
                 <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 
-// upload /home/maarten/example.txt to Azure
+// /home/maarten/example.txt auf Azure hochladen
 $result = $storageClient->putBlob(
     'testcontainer', 'example.txt', '/home/maarten/example.txt'
 );
 
-echo 'Blob name is: ' . $result->Name;
+echo 'Der Name des Blobs ist: ' . $result->Name;
 ]]></programlisting>
             </example>
         </sect3>
 
         <sect3 id="zend.service.windowsazure.storage.blob.api.copy-blob">
-            <title>Copying a blob</title>
+            <title>Kopieren eines Blobs</title>
 
             <para>
-                Using the following code, a blob can be copied from inside the storage account.  The
-                advantage of using this method is that the copy operation occurs in the Azure cloud
-                and does not involve downloading the blob. Note that the container has already been
-                created before.
+                Bei Verwendung des folgenden Codes kann ein Blob von innerhalb des Speicher Accounts
+                kopiert werden. Der Vorteil der Verwendung dieser Methode besteht darin das die
+                Kopieroperation in der Azure Wolke stattfindet und kein Downloaden vom Blob
+                stattfinden muss. Es ist zu beachten das in diesem Fall der Container bereits vorher
+                erstellt worden sein muss.
             </para>
 
             <example id="zend.service.windowsazure.storage.blob.api.copy-blob">
-                <title>Copying a blob</title>
+                <title>Kopieren eines Blobs</title>
 
                 <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 
-// copy example.txt to example2.txt
+// Kopiert example.txt auf example2.txt
 $result = $storageClient->copyBlob(
     'testcontainer', 'example.txt', 'testcontainer', 'example2.txt'
 );
 
-echo 'Copied blob name is: ' . $result->Name;
+echo 'Der Name des kopierten Blobs ist: ' . $result->Name;
 ]]></programlisting>
             </example>
         </sect3>
 
         <sect3 id="zend.service.windowsazure.storage.blob.api.download-blob">
-            <title>Downloading a blob</title>
+            <title>Herunterladen eines Blobs</title>
 
             <para>
-                Using the following code, a blob can be downloaded from a blob storage container on
-                development storage. Note that the container has already been created before and a
-                blob has been uploaded.
+                Bei Verwendung des folgenden Codes kann ein Blob von einem Blob Speicher Container
+                auf den Development Speicher heruntergeladen werden. Es ist zu beachten das der
+                Container hierfür bereits vorher erstellt wurden sein und ein Blob darauf
+                hochgeladen sein muss.
             </para>
 
             <example id="zend.service.windowsazure.storage.blob.api.download-blob">
-                <title>Downloading a blob</title>
+                <title>Herunterladen eines Blobs</title>
 
                 <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 
-// download file to /home/maarten/example.txt
+// Lädt die Datei /home/maarten/example.txt herunter
 $storageClient->getBlob(
     'testcontainer', 'example.txt', '/home/maarten/example.txt'
 );
@@ -138,7 +140,7 @@ $storageClient->getBlob(
         </sect3>
 
         <sect3 id="zend.service.windowsazure.storage.blob.api.public-blob">
-            <title>Making a blob publicly available</title>
+            <title>Einen Blob öffentlich verfügbar machen</title>
 
             <para>
                 By default, blob storage containers on Windows Azure are protected from public

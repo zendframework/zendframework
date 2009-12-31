@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 19999 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.simplest">
     <title>Decorator Grundlagen</title>
@@ -163,7 +163,8 @@ class TextPerson
 
         <para>
             <classname>Zend_Form</classname> Decorators implementieren alle ein gemeinsames
-            Interface, die Fähigkeit decorator-spezifische Optionen zu setzen, das Element zu
+            Interface <classname>Zend_Form_Decorator_Interface</classname>. Dieses Interface
+            bietet die Fähigkeit decorator-spezifische Optionen zu setzen, das Element zu
             registrieren und zu empfangen, und darzustellen. Der Basis Decorator,
             <classname>Zend_Form_Decorator_Abstract</classname>, bietet die jede Funktionalität
             welche man irgendwann verwenden wird, mit Ausnahme der Logik für die Darstellung.

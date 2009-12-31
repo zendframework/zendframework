@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 19997 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.plugins.intro">
     <title>Einführung</title>
@@ -28,7 +28,7 @@
             <para>
                 Zusammengehörende Plugins teilen sich einen gemeinsamen Klassenpräfix. Zum Beispiel
                 wenn man eine Anzahl von View Helfern erstellt, könnten alle den Klassenpräfix
-                "Foo_View_Helper_" teilen.
+                "<classname>Foo_View_Helper_</classname>" teilen.
             </para>
         </listitem>
 
@@ -37,8 +37,9 @@
                 Alles nach dem gemeinsamen Präfix wird als <emphasis>Name des Plugins</emphasis>
                 oder <emphasis>Kurzname</emphasis> angenommen (gegenüber dem "langen Namen" welcher
                 der komplette Klassenname ist).  Wenn der Plugin Präfix zum Beispiel
-                "Foo_View_Helper_" ist, und der Klassenname "Foo_View_Helper_Bar", dann wird der
-                Name des Plugins einfach "Bar" sein.
+                "<classname>Foo_View_Helper_</classname>" ist, und der Klassenname
+                "<classname>Foo_View_Helper_Bar</classname>", dann wird der Name des Plugins einfach
+                "<classname>Bar</classname>" sein.
             </para>
         </listitem>
 

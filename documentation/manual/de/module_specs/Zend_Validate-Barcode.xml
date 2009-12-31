@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19692 -->
+<!-- EN-Revision: 19986 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.barcode">
     <title>Barcode</title>
@@ -35,10 +35,23 @@
             </para>
 
             <para>
-                Dieser Barcode hat eine variable Länge. Er unterstützt Ziffern, alphabetische
-                Zeichen und 7 spezielle Zeichen. Er kann eine optionale Checksumme enthalten welche
-                durch Modulo 43 berechnet wird. Dieser Standard wird weltweit verwendet und
-                üblicherweise in der Industrie.
+                Dieser Barcode hat eine variable Länge. Er unterstützt Ziffern, großgeschriebene
+                alphabetische Zeichen und 7 spezielle Zeichen wie Leerzeichen, Punkte und
+                Dollarzeichen. Er kann eine optionale Checksumme enthalten welche durch Modulo 43
+                berechnet wird. Dieser Standard wird weltweit verwendet und üblicherweise in der
+                Industrie.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>CODE39EXT</emphasis>: CODE39EXT ist eine Erweiterung von CODE39.
+            </para>
+
+            <para>
+                Dieser Barcode hat die gleichen Eigenschaften wie CODE39. Zusätzlich erlaubt er die
+                Verwendung aller 128 ASCII Zeichen. Dieser Standard wird weltweit verwendet und
+                ist in der Industrie üblich.
             </para>
         </listitem>
 
@@ -108,6 +121,18 @@
 
         <listitem>
             <para>
+                <emphasis>EAN18</emphasis>: EAN ist die Abkürzung für "European Article Number".
+            </para>
+
+            <para>
+                Dieser Barcode muss eine Länge von 18 Zeichen haben. Er unterstützt nur Ziffern.
+                Die letzte Ziffer ist immer eine Checksumme welche durch Modulo 10 berechnet wird.
+                Dieser Code wird ost für die Identifizierung von Transport Containern verwendet.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
                 <emphasis>GTIN12</emphasis>: GTIN ist die Abkürzung für "Global Trade Item Number".
             </para>
 
@@ -136,6 +161,19 @@
             <para>
                 Dieser Barcode verwendet den gleichen Standard wie EAN14 und ist sein Nachfolger.
                 Er wird weltweit verwendet, üblicherweise im Handel.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>IDENTCODE</emphasis>: Identcode wird von Deutsche Post und DHL verwendet.
+                Es ist eine spezialisierte Implementation von Code25.
+            </para>
+
+            <para>
+                Dieser Barcode muss eine Länge von 12 Zeichen haben. Er unterstützt nur Ziffern und
+                die letzte Ziffer ist immer eine Checksumme die mit Modulo 10 berechnet wird. Dieser
+                Standard wird hauptsächlich von den Firmen DP und DHL verwendet.
             </para>
         </listitem>
 
@@ -185,10 +223,10 @@
             </para>
 
             <para>
-                Dieser Barcode ist die kleinere Variante von UPCA. Er muss eine Länge von 6 Zeichen
-                haben und unterstützt nur Ziffern. Es gibt keine Checksumme in diesem Barcode. Er
-                wird üblicherweise bei kleinen Produkten verwendet wo ein UPCA Barcode nicht passen
-                würde.
+                Dieser Barcode ist die kleinere Variante von UPCA. Er muss eine Länge von 6, 7 oder
+                8 Zeichen haben und unterstützt nur Ziffern. Wenn der Barcode 8 Ziffern lang ist
+                enthält er eine Checksumme die durch Modulo 10 berechnet wird. Er wird üblicherweise
+                bei kleinen Produkten verwendet wo ein UPCA Barcode nicht passen würde.
             </para>
         </listitem>
     </itemizedlist>

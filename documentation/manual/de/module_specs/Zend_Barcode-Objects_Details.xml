@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19695 -->
+<!-- EN-Revision: 19980 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.barcode.objects.details">
     <title>Beschreibung der ausgelieferten Barcodes</title>
@@ -87,7 +87,7 @@
 
             <listitem>
                 <para>
-                    <emphasis>Checksum:</emphasis> Optional (Modulo 43)
+                    <emphasis>Checksumme:</emphasis> Optional (Modulo 43)
                 </para>
             </listitem>
 
@@ -108,6 +108,60 @@
         <para>
             Es gibt keine speziellen Optionen für diesen Barcode.
         </para>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.identcode">
+        <title>Zend_Barcode_Object_Identcode</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.identcode.png" format="PNG"/>
+        </para>
+
+        <para>
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Int25</classname> (Code 2 of 5
+            Interleaved), und enthält einige seiner Fähigkeiten; er hat auch selbst einige
+            spezielle.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> Identcode (Deutsche Post Identcode)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Erlaubte Zeichen:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksumme:</emphasis> zwingend (Modulo 10 aber unterschiedlich von
+                    Code25)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Länge:</emphasis> 12 Zeichen (inklusive Checksumme)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Es gibt keine speziellen Optionen für diesen Barcode.
+        </para>
+
+        <note>
+            <para>
+                Wenn die Anzahl der Zeichen nicht 12 ist, wird
+                <classname>Zend_Barcode_Object_Identcode</classname> fehlende Nullen dem Barcode
+                Text automatisch voranstellen.
+            </para>
+        </note>
     </sect3>
 
     <sect3 id="zend.barcode.objects.details.itf14">

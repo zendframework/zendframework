@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19753 -->
+<!-- EN-Revision: 20001 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.rest">
     <title>Zend_Rest_Route</title>
@@ -57,12 +57,12 @@
                 </row>
                 <row>
                     <entry><constant>POST</constant></entry>
-                    <entry><filename>/product/ratings/:id?_method="PUT"</filename></entry>
+                    <entry><filename>/product/ratings/:id _method="PUT"</filename></entry>
                     <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
                 </row>
                 <row>
                     <entry><constant>POST</constant></entry>
-                    <entry><filename>/product/ratings/:id?_method="DELETE"</filename></entry>
+                    <entry><filename>/product/ratings/:id _method="DELETE"</filename></entry>
                     <entry>
                         <methodname>Product_RatingsController::deleteAction()</methodname>
                     </entry>
@@ -71,49 +71,85 @@
         </tgroup>
     </table>
 
-    <para>
-        Um <classname>Zend_Rest_Route</classname> für eine komplette Anwendung einzuschalten muss
-        diese ohne Konfigurationsparameter erstellt und als Standardroute dem
-        Frontcontroller hinzugefügt werden:
-    </para>
+    <sect4 id="zend.rest.route_usage">
+        <title>Verwendung von Zend_Rest_Route</title>
 
-    <programlisting language="php"><![CDATA[
+        <para>
+            Um <classname>Zend_Rest_Route</classname> für eine komplette Anwendung einzuschalten
+            muss diese ohne Konfigurationsparameter erstellt und als Standardroute dem
+            Frontcontroller hinzugefügt werden:
+        </para>
+
+        <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front);
 $front->getRouter()->addRoute('default', $restRoute);
 ]]></programlisting>
 
-    <note>
+        <note>
+            <para>
+                Wenn <classname>Zend_Rest_Route</classname> keinem gültigen Modul, Controller oder
+                keiner Action entspricht gibt diese <constant>FALSE</constant> zurück und der Router
+                versucht eine Entsprechung zu finden indem die nächste Route im Router verwendet
+                wird.
+            </para>
+        </note>
+
         <para>
-            Wenn <classname>Zend_Rest_Route</classname> keinem gültigen Modul, Controller oder
-            keiner Action entspricht gibt diese <constant>FALSE</constant> zurück und der Router
-            versucht eine Entsprechung zu finden indem die nächste Route im Router verwendet wird.
+            Um <classname>Zend_Rest_Route</classname> für spezielle Module einzuschalten muss diese
+            mit einem Array von Modulnamen als 3tes Argument des Constructors erstellt werden:
         </para>
-    </note>
 
-    <para>
-        Um <classname>Zend_Rest_Route</classname> für spezielle Module einzuschalten muss diese
-        mit einem Array von Modulnamen als 3tes Argument des Constructors erstellt werden:
-    </para>
-
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array('product'));
 $front->getRouter()->addRoute('rest', $restRoute);
 ]]></programlisting>
 
-    <para>
-        Um <classname>Zend_Rest_Route</classname> für spezielle Controller einzuschalten muss ein
-        Array von Controllernamen als Wert für jedes Modul (Arrayelement) hinzugefügt werden.
-    </para>
+        <para>
+            Um <classname>Zend_Rest_Route</classname> für spezielle Controller einzuschalten muss
+            ein Array von Controllernamen als Wert für jedes Modul (Arrayelement) hinzugefügt
+            werden.
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array(
     'product' => array('ratings')
 ));
 $front->getRouter()->addRoute('rest', $restRoute);
 ]]></programlisting>
+    </sect4>
+
+    <sect4 id="zend.rest.route_config">
+        <title>Zend_Rest_Route mit Zend_Config_Ini</title>
+
+        <para>
+            Um Zend_Rest_Route von einer INI Konfigurationsdatei aus zu verwenden muss man den
+            "route" Typ Parameter verwenden und die Konfigurationsoptionen setzen:
+        </para>
+
+        <programlisting language="ini"><![CDATA[routes.rest.type = Zend_Rest_Route
+routes.rest.defaults.controller = object
+routes.rest.mod = project,user
+]]></programlisting>
+
+        <para>
+            Die 'type' Option benennt den RESTvollen Routing Konfigurationstyp. Die 'defaults'
+            Option wird verwendet um gemeinsame Standardmodule zu spezifizieren, und oder Aktionen
+            für die Route. Alle anderen Optionen in der Konfigurationsgruppe werden als RESTvolle
+            Modulnamen behandelt, und deren Werte sind RESTvolle Kontrollernamen. Die beispielhafte
+            Konfiguration definiert Mod_ProjectController und Mod_UserController als RESTvolle
+            Kontroller.
+        </para>
+
+        <para>Dann ist die addConfig() Methode des Rewrite Router Objekts zu verwenden:</para>
+
+        <programlisting language="php"><![CDATA[$config = new Zend_Config_Ini('path/to/routes.ini');
+$router = new Zend_Controller_Router_Rewrite();
+$router->addConfig($config, 'routes');
+]]></programlisting>
+    </sect4>
 
     <sect4 id="zend.rest.controller">
         <title>Zend_Rest_Controller</title>

@@ -8,51 +8,52 @@
         <title>Einführung in Sessions</title>
 
         <para>
-            The success of the web is deeply rooted in the protocol that drives the web: HTTP.  HTTP
-            over TCP is by its very nature stateless, which means that inherently the web is also
-            stateless.  While this very aspect is one of the dominating factors for why the web has
-            become such a popular medium, it also causes an interesting problem for developers that
-            want to use the web as an application platform.
+            Der Erfolg des Webs ist tief verwurzelt im Protokoll welches das Web antreibt: HTTP.
+            HTTP über TCP ist von seiner Natur her Statuslos, was bedeutet dass auch das Web selbst
+            Statuslos ist. Wärend dieser Aspekt einer der dominierenden Faktoren dafür ist warum das
+            Web ein so populäres Medium geworden ist, verursacht es auch einige interessante
+            Probleme für Entwickler welche das Web als Anwendungsplattform verwenden wollen.
         </para>
 
         <para>
-            The act of interacting with a web application is typically defined by the sum
-            of all requests sent to a web server.  Since there can be many consumers being served
-            simultaneously, the application must decide which requests belong to which consumer.  These
-            requests are typically known as a "session".
+            Das Akt der Interaktion mit einer Web Anwendung wird typischerweise definiert von der
+            Summe aller Anfragen die an den Web Server gesendet werden. Da es viele Konsumenten
+            gibt die simultan bedient werden, muss die Anwendung auswählen welche Anfragen zu
+            welchem Benutzer gehören. Diese Anfragen sind typischerweise als "session" bekannt.
         </para>
 
         <para>
-            In PHP, the session problem is solved by the session extension which utilizes some state
-            tracking, typically cookies, and some form of local storage which is exposed via the
-            $_SESSION superglobal.  In Zend Framework, the component Zend_Session adds value to the php
-            session extension making it easier to use and depend on inside object-oriented
-            applications.
+            In PHP wurde das Session Problem durch die Session Erweiterung gelöst welche eine Form
+            der Statusverfolgung, typische Cookies und eine Form des lokalen Speichers verwendet der
+            über die Superglobale $_SESSION bekanntgemacht wird. Im Zend Framework fügt die
+            Komponente Zend_Session zusätzliche Vorteile zu Php's Session Erweiterung hinzu, welche
+            es einfacher machen diese zu verwenden und auf objekt-orientierten Anwendungen beruht.
         </para>
 
     </sect2>
 
     <sect2 id="learning.multiuser.sessions.basic-usage">
-        <title>Basic Usage of Zend_Session</title>
+        <title>Grundsätzliche Verwendung von Zend_Session</title>
 
         <para>
-            The Zend_Session component is both a session manager as well as an API for
-            storing data into a session object for long-term persistence.  The Zend_Session API is
-            for managing the options and behavior of a session, like options, starting and stopping
-            a session, whereas Zend_Session_Namespace is the actual object used to store data.
+            Die Komponente Zend_Session ist sowohl ein Session Manager als auch eine API für das
+            Speichern von Daten im Session Objekt für eine Langzeit-Verfügbarkeit. Die API von
+            Zend_Session ist für das Managen der Optionen und des Verhaltens einer Session, wie
+            Optionen,, Starten und Stoppen einer Session, und Zend_Session_Namespace ist das
+            aktuelle Objekt welches zum Speichern der Daten verwendet wird.
         </para>
 
         <para>
-            While its generally good practice to start a session inside a bootstrap process, this
-            is generally not necessary as all sessions will be automatically started upon the first
-            creation of a Zend_Session_Namespace object.
+            Wärend es generell eine gute Praxis ist eine Session im Bootstrap Prozess zu starten,
+            ist dies generell nicht notwendig da alle Sessions bei der ersten Erstellung eines
+            Zend_Session_Namespace Objekts automatisch gestartet werden.
         </para>
 
         <para>
-            Zend_Application is capable of configuring Zend_Session for you as part of the
-            Zend_Application_Resource system.  To use this, assuming your project uses
-            Zend_Application to bootstrap, you would add the following code to your
-            application.ini file:
+            Zend_Application ist in der Lage Zend_Session als Teil des Zend_Application_Resource
+            Systems zu konfigurieren. Um das zu verwenden, nehmen wir an dass das Projekt
+            Zend_Application für das Bootstrappen verwendet. Man würde den folgenden Code in der
+            Datei application.ini hinzufügen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -62,26 +63,28 @@ resources.session.remember_me_seconds = 864000
 ]]></programlisting>
 
         <para>
-            As you can see, the options passed in are the same options that you'd expect to find
-            in the ext/session extension in PHP.  Those options setup the path to the session
-            files where data will be stored within the project.  Since ini files can additionally
-            use constants, the above will use the APPLICATION_PATH constant and relatively point
-            to a data session directory.
+            Wie man sieht sind die übergebenen Optionen die gleichen Optionen welche man in der
+            ext/session Erweiterung von PHP erwarten würde zu finden. Diese Optionen stellen den
+            Pfad zu den Session Dateien ein in dem Daten des Projekts gespeichert werden. Da Ini
+            Dateien zusätzlich Konstanten verwenden können, wird das obige die Konstante
+            APPLICATION_PATH verwenden und relativ auf das Verzeichnis der Sessiondaten zeigen.
         </para>
 
         <para>
-            Most Zend Framework components that use sessions need nothing more to use Zend_Session.
-            At this point, you an either use a component that consumes Zend_Session, or start
-            storing your own data inside a session with Zend_Session_Namespace.
+            Die meisten Zend Framework Komponenten welche Sessions verwenden benötigen nichts
+            zusätzliches um Zend_Session zu verwenden. An diesem Punkt verwendet man entweder eine
+            Komponente welche Zend_Session verwendet, oder startet das Speichern eigener Daten in
+            einer Session mit Zend_Session_Namespace.
         </para>
 
         <para>
-            Zend_Session_Namespace is a simple class that proxies data via an easy to use API
-            into the Zend_Session managed $_SESSION superglobal.  The reason it is called
-            Zend_Session_Namespace is that it effectively namespaces the data inside $_SESSION, thus
-            allowing multiple components and objects to safely store and retrieve data.  In the
-            following code, we'll explore how to build a simple session incrementing counter, starting
-            at 1000 and resetting itself after 1999.
+            Zend_Session_Namespace ist eine einfache Klasse welche auf Daten über eine einfach zu
+            verwendende API in der von Zend_Session gemanagten superglobalen $_SESSION verweist.
+            Der Grund warum es Zend_Session_Namespace genannt wird ist, das es die Daten in
+            $_SESSION effektiv namespaced, und es so mehreren Komponenten und Objekten erlaubt Daten
+            sicher zu speichern und zu empfangen. Im folgenden Code sehen wir wie ein einfacher
+            hochzählender Counter für Sessions erstellt werden kan der bei 1000 anfängt und sich
+            selbst nach 1999 resetiert.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -99,18 +102,19 @@ if ($mysession->counter > 1999) {
 ]]></programlisting>
 
         <para>
-            As you can see above, the session namespace object uses the magic __get, __set,
-            __isset, and __unset to allow you to seemlessly and fluently interact with the session.
-            The information stored in the above example is stored at $_SESSION['mysession']['counter'].
+            Wie man oben sieht verwendet das Session Namespace Objekt die magischen __get, __set,
+            __isset, und __unset um die einfache und flüssige Interaktion mit der Session er
+            erlauben. Die Information welche im obigen Beispiel gespeichert wird, wird unter
+            $_SESSION['mysession']['counter'] gespeichert.
         </para>
 
     </sect2>
     <sect2 id="learning.multiuser.sessions.advanced-usage">
-        <title>Advanced Usage of Zend_Session</title>
+        <title>Gehobenere Verwendung von Zend_Session</title>
 
         <para>
-            Addionally, if you wanted to use the DbTable
-            save handler for Zend_Session, you'd add the following code to your application.ini:
+            Wenn man zusätzlich den DbTable Speicher Handler für Zend_Session verwenden will, dann
+            kann man den folgenden Code in der application.ini hinzufügen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -126,9 +130,5 @@ resources.session.saveHandler.options.modifiedColumn = "modified"
 resources.session.saveHandler.options.dataColumn = "session_data"
 resources.session.saveHandler.options.lifetimeColumn = "lifetime"
 ]]></programlisting>
-
-
     </sect2>
-
-
 </sect1>

@@ -250,6 +250,18 @@
 
         <listitem>
             <para>
+                <emphasis>ROYALMAIL</emphasis>: Royalmail is used by Royal Mail.
+            </para>
+
+            <para>
+                This barcode has no defined length. It supports digits, uppercased letters, and the
+                last digit is always a checksum. This standard is mainly used by Royal Mail for
+                their Cleanmail Service. It is also called <acronym>RM4SCC</acronym>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
                 <emphasis>SSCC</emphasis>: SSCC is the shortcut for "Serial Shipping Container
                 Code".
             </para>

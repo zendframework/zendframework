@@ -362,6 +362,14 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($barcode->isValid('21348075016402'));
     }
 
+    public function testROYALMAIL()
+    {
+        $barcode = new Zend_Validate_Barcode('royalmail');
+        $this->assertTrue($barcode->isValid('SN34RD1AK'));
+        $this->assertFalse($barcode->isValid('123'));
+        $this->assertFalse($barcode->isValid('SN34RD1AW'));
+    }
+
     public function testSSCC()
     {
         $barcode = new Zend_Validate_Barcode('sscc');

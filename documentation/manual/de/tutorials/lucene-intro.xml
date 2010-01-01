@@ -2,69 +2,75 @@
 <!-- EN-Revision: 19807 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.lucene.intro">
-    <title>Zend_Search_Lucene Introduction</title>
+    <title>Einführung in Zend_Search_Lucene</title>
 
     <para>
-        The <classname>Zend_Search_Lucene</classname> component is intended to provide a
-        ready-for-use full-text search solution. It doesn't require any <acronym>PHP</acronym>
-        extensions<footnote><para>Though some <acronym>UTF-8</acronym> processing functionality
-                requires the <emphasis>mbstring</emphasis> extension to be turned
-                on</para></footnote> or additional software to be installed, and can be used
-        immediately after Zend Framework installation.
+        Die Komponente <classname>Zend_Search_Lucene</classname> ist dazu gedacht eine sofort
+        verwendbare Volltext Suchlösung anzubieten. Es benötigt keine <acronym>PHP</acronym>
+        Erweiterungen<footnote><para>Obwohl einige <acronym>UTF-8</acronym> bearbeitenden
+        Funktionalitäten die <emphasis>mbstring</emphasis> Erweiterung aktiviert
+        benötigen</para></footnote> und auch keine zusätzlich installierte Software, und kann sofort
+        nach der Installation von Zend Framework verwendet werden.
     </para>
 
     <para>
-        <classname>Zend_Search_Lucene</classname> is a pure <acronym>PHP</acronym> port of the
-        popular open source full-text search engine known as Apache Lucene. See <ulink
-            url="http://lucene.apache.org">http://lucene.apache.org/</ulink> for the details.
+        <classname>Zend_Search_Lucene</classname> ist eine reine <acronym>PHP</acronym> Portierung
+        der populären Open Source Volltext Such Maschine auch bekannt als Apache Lucene. Siehe
+        <ulink url="http://lucene.apache.org">http://lucene.apache.org/</ulink> für Details.
     </para>
 
     <para>
-        Information must be indexed to be available for searching.
-        <classname>Zend_Search_Lucene</classname> and Java Lucene use a document concept known as an
-        "atomic indexing item."
+        Die Information vor einer Suche muss indiziert werden.
+        <classname>Zend_Search_Lucene</classname> und Java Lucene verwenden ein Dokumenten Konzept
+        welches als "atomar indiziertes Element" bekannt ist.
     </para>
 
     <para>
-        Each document is a set of fields: &lt;name, value&gt; pairs where name and value are
-        <acronym>UTF-8</acronym> strings<footnote><para>Binary strings are also allowed to be used
-                as field values</para></footnote>. Any subset of the document fields may be marked
-        as "indexed" to include field data in the text indexing process.
+        Jedes Dokument ist ein Set von Feldern: &lt;name, value&gt; Paaren wobei Name und Wert
+        <acronym>UTF-8</acronym> String<footnote><para>Binäre String können auch als Feldwerte
+        verwendet werden</para></footnote> sind. Jedes Subset von Dokumentfeldern kann als
+        "indiziert" markiert werden um Felddaten in den Text-Indizierungs Prozess einzufügen.
     </para>
 
     <para>
-        Field values may or may not be tokenized while indexing. If a field is not tokenized, then
-        the field value is stored as one term; otherwise, the current analyzer is used for
-        tokenization.
+        Feldwerte können wärend des Indizierens in Token übersetzt werden. Wenn ein Feld nicht in
+        Token übersetzt wird, dann wird der Feldwert als ein Ausdruck gespeichert; andernfalls wird
+        der aktuelle Analysator für die Übersetzung in Token verwendet.
     </para>
 
     <para>
-        Several analyzers are provided within the <classname>Zend_Search_Lucene</classname> package.
-        The default analyzer works with <acronym>ASCII</acronym> text (since the
-        <acronym>UTF-8</acronym> analyzer needs the <emphasis>mbstring</emphasis> extension to be
-        turned on). It is case insensitive, and it skips numbers. Use other analyzers or create your
-        own analyzer if you need to change this behavior.
+        Verschiedene Analysatoren werden im <classname>Zend_Search_Lucene</classname> Paket
+        angeboten. Der Standard Analysator arbeitet mit <acronym>ASCII</acronym> Text (da der
+        <acronym>UTF-8</acronym> Analysator die Aktivierung der <emphasis>mbstring</emphasis>
+        Erweiterung benötigt). Er ist unabhängig von der Schreibweise und überspringt Nummern.
+        Um dieses Verhalten zu verändern kann entweder ein anderer Analysator verwendet, oder
+        ein eigener Analysator erstellt werden.
     </para>
 
     <note>
-        <title>Using analyzers during indexing and searching</title>
+        <title>Verwendung von Analysatoren wärend der Indizierung und Suche</title>
 
         <para>
-            Important note! Search queries are also tokenized using the "current analyzer", so the
-            same analyzer must be set as the default during both the indexing and searching process.
-            This will guarantee that source and searched text will be transformed into terms in the
-            same way.
+            Wichtiger Hinweis! Suchabfragen werden auch durch Verwendung des "aktuellen Analysators"
+            in Token übersetzt, so dass der selbe Analysator als Standard gesetzt sein muss, sowohl
+            für die Indizierung als auch den Suchprozess. Das garantiert das Quelle und durchsuchter
+            Text auf die selbe Art und Weise in Ausdrücke umgewandelt werden.
         </para>
     </note>
 
     <para>
-        Field values are optionally stored within an index. This allows the original field data to
-        be retrieved from the index while searching. This is the only way to associate search
-        results with the original data (internal document IDs may be changed after index
-        optimization or auto-optimization).
+        Feldwerte werden optional in einem Index gespeichert. Das erlaubt es die originalen
+        Felddaten vom Index zu empfangen wärend gesucht wird. Das ist der einzige Weg um
+        Suchregebnisse mit den originalen Daten zu assoziieren (die interne Dokumenten ID kann sich
+        wärend einer Indexoptimierung oder einer automatischen Optimierung verändern).
     </para>
 
     <para>
+        Es sollte daran gedacht werden das ein Lucene Index keine Datenbank ist. Er bietet keinen
+        Index Backup Mechanismus ausser dem Backup des Dateisystem Verzeichnisses. Er bietet keinen
+        Transaktions Mechanismus aber gleichzeitigen Indexupdates sowie gleichzeitiges
+        Aktualisieren und Lesen wird unterstützt. Er kann auch nicht mit Datenbanken in Bezug auf
+        die Geschwindigkeit beim Empfangen von Daten verglichen werden.
         The thing that should be remembered is that a Lucene index is not a database. It doesn't
         provide index backup mechanisms except backup of the file system directory. It doesn't
         provide transactional mechanisms though concurrent index update as well as concurrent update
@@ -72,32 +78,36 @@
     </para>
 
     <para>
+        Deshalb ist es eine gute Idee:
         So it's good idea:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>Not</emphasis> to use Lucene index as a storage since it may dramatically
-                decrease search hit retrieving performance. Store only unique document identifiers
-                (doc paths, <acronym>URL</acronym>s, database unique IDs) and associated data within
-                an index. E.g. title, annotation, category, language info, avatar. (Note: a field
-                may be included in indexing, but not stored, or stored, but not indexed).
+                den Lucene Index <emphasis>nicht</emphasis> als Speicher zu verwenden da sich
+                hierbei die Geschwindigkeit für das Empfangen von Suchtreffern dramatisch
+                verringern kann. Nur eindeutige Dokument Identifikatoren (Dokumentenpfade,
+                <acronym>URL</acronym>s, und eindeutige Datenbank IDs) sollen gespeichert und Daten
+                in einem Index assoziiert werden, z.B. Titel, Hinweise, Kategorie, Sprachinfos,
+                Avatar. (Zu beachten: Ein Feld kann beim Indizieren eingefügt werden, aber nicht
+                gespeichert, oder gespeichert, aber nicht indiziert).
             </para>
         </listitem>
 
         <listitem>
             <para>
-                To write functionality that can rebuild an index completely if it's corrupted for
-                any reason.
+                Um Funktionalitäten zu schreiben die einen Index komplett neu erstellen können wenn
+                er aus irgendeinem Grund korrupt ist.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Individual documents in the index may have completely different sets of fields. The same
-        fields in different documents don't need to have the same attributes. E.g. a field may be
-        indexed for one document and skipped from indexing for another. The same applies for
-        storing, tokenizing, or treating field value as a binary string.
+        Individuelle Dokumente in einem Index können komplett unterschiedliche Sets an Feldern
+        haben. Die selben Felder in unterschiedlichen Dokumenten müssen nicht die gleichen
+        Attribute haben. Z.B. kann ein Feld für ein Dokument indiziert sein und für ein anderes
+        wird die Indizierung übersprungen. Das gleiche trifft auch für das Speicher, die Umwandlung
+        in Token oder der Behandlung von Feldwerten als binärer String zu.
     </para>
 </sect1>

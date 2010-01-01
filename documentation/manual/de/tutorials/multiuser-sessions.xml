@@ -2,10 +2,10 @@
 <!-- EN-Revision: 19778 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.sessions">
-    <title>Managing User Sessions In ZF</title>
+    <title>User Session im Zend Framework managen</title>
 
     <sect2 id="learning.multiuser.sessions.intro">
-        <title>Introduction to Sessions</title>
+        <title>Einführung in Sessions</title>
 
         <para>
             The success of the web is deeply rooted in the protocol that drives the web: HTTP.  HTTP

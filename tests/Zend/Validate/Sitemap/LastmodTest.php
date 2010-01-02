@@ -69,6 +69,7 @@ class Zend_Validate_Sitemap_LastmodTest extends PHPUnit_Framework_TestCase
             '1997-05-11T18:50:09+00:00',
             '1998-06-11T01:00:09-02:00',
             '1999-11-11T22:23:52+02:00',
+            '1999-11-11T22:23+02:00',
             '2000-06-11',
             '2001-04-14',
             '2003-01-13',
@@ -93,7 +94,8 @@ class Zend_Validate_Sitemap_LastmodTest extends PHPUnit_Framework_TestCase
             '1995-05-11T18:60:09-08:45',
             '1996-05-11T18:50:09+25:00',
             '2002-13-11',
-            '2004-00-01'
+            '2004-00-01',
+            '2006-01-01\n'
         );
 
         foreach ($values as $value) {

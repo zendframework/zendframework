@@ -42,7 +42,7 @@ class Zend_Validate_Sitemap_Lastmod extends Zend_Validate_Abstract
      * Regular expression to use when validating
      *
      */
-    const LASTMOD_REGEX = '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])(T([0-1][0-9]|2[0-3])(:[0-5][0-9]){2}(\\+|-)([0-1][0-9]|2[0-3]):[0-5][0-9])?$/';
+    const LASTMOD_REGEX = '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])(T([0-1][0-9]|2[0-3])(:[0-5][0-9])(:[0-5][0-9])?(\\+|-)([0-1][0-9]|2[0-3]):[0-5][0-9])?$/';
 
     /**
      * Validation key for not valid

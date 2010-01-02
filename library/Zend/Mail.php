@@ -62,6 +62,18 @@ class Zend_Mail extends Zend_Mime_Message
     protected static $_defaultTransport = null;
 
     /**
+     * @var array
+     * @static
+     */    
+    protected static $_defaultFrom;
+
+    /**
+     * @var array
+     * @static
+     */ 
+    protected static $_defaultReplyTo;
+    
+    /**
      * Mail character set
      * @var string
      */
@@ -171,6 +183,26 @@ class Zend_Mail extends Zend_Mime_Message
     public static function setDefaultTransport(Zend_Mail_Transport_Abstract $transport)
     {
         self::$_defaultTransport = $transport;
+    }
+    
+    /**
+     * Gets the default mail transport for all following uses of
+     * unittests
+     *
+     * @todo Allow passing a string to indicate the transport to load
+     * @todo Allow passing in optional options for the transport to load
+     */
+    public static function getDefaultTransport()
+    {
+        return self::$_defaultTransport;
+    }
+    
+    /**
+     * Clear the default transport property
+     */
+    public static function clearDefaultTransport()
+    {
+        self::$_defaultTransport = null;
     }
 
     /**
@@ -713,6 +745,106 @@ class Zend_Mail extends Zend_Mime_Message
     }
 
     /**
+     * Sets Default From-email and name of the message
+     *
+     * @param  string               $email
+     * @param  string    Optional   $name
+     * @return void
+     */
+    public static function setDefaultFrom($email, $name = null)
+    {
+        self::$_defaultFrom = array('email' => $email, 'name' => $name);
+    }
+
+    /**
+     * Returns the default sender of the mail
+     * 
+     * @return null|array   Null if none was set.
+     */
+    public static function getDefaultFrom()
+    {
+        return self::$_defaultFrom;
+    }
+
+    /**
+     * Clears the default sender from the mail
+     * 
+     * @return void
+     */
+    public static function clearDefaultFrom()
+    {
+        self::$_defaultFrom = null;
+    }
+    
+    /**
+     * Sets From-name and -email based on the defaults
+     * 
+     * @return Zend_Mail Provides fluent interface
+     */
+    public function setFromToDefaultFrom() {
+        $from = self::getDefaultFrom();
+        if($from === null) {
+            require_once 'Zend/Mail/Exception.php';
+            throw new Zend_Mail_Exception(
+                'No default From Address set to use');
+        }
+        
+        $this->setFrom($from['email'], $from['name']);
+
+        return $this;
+    }
+    
+    /**
+     * Sets Default ReplyTo-address and -name of the message
+     *
+     * @param  string               $email
+     * @param  string    Optional   $name
+     * @return void
+     */
+    public static function setDefaultReplyTo($email, $name = null)
+    {
+        self::$_defaultReplyTo = array('email' => $email, 'name' => $name);
+    }
+    
+    /**
+     * Returns the default Reply-To Address and Name of the mail
+     * 
+     * @return null|array   Null if none was set.
+     */
+    public static function getDefaultReplyTo()
+    {
+        return self::$_defaultReplyTo;
+    }
+    
+    /**
+     * Clears the default ReplyTo-address and -name from the mail
+     * 
+     * @return void
+     */
+    public static function clearDefaultReplyTo()
+    {
+        self::$_defaultReplyTo = null;
+    }
+
+    /**
+     * Sets ReplyTo-name and -email based on the defaults
+     * 
+     * @return Zend_Mail Provides fluent interface
+     */
+    public function setReplyToFromDefault() {
+        $replyTo = self::getDefaultReplyTo();
+        if($replyTo === null) {
+            require_once 'Zend/Mail/Exception.php';
+            throw new Zend_Mail_Exception(
+                'No default Reply-To Address set to use');
+        }
+        
+        $this->setReplyTo($replyTo['email'], $replyTo['name']);
+
+        return $this;
+    }
+
+    /**
      * Sets the Return-Path header of the message
      *
      * @param  string    $email
@@ -1033,6 +1165,14 @@ class Zend_Mail extends Zend_Mime_Message
 
         if ($this->_date === null) {
             $this->setDate();
+        }
+
+        if(null === $this->_from && null !== self::getDefaultFrom()) {
+            $this->setFromToDefaultFrom();
+        }
+
+        if(null === $this->_replyTo && null !== self::getDefaultReplyTo()) {
+            $this->setReplyToFromDefault();
         }
 
         $transport->send($this);

@@ -121,6 +121,11 @@ class Zend_Mail_Transport_Sendmail_Mock extends Zend_Mail_Transport_Sendmail
 class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 {
 
+    public function tearDown() {
+        Zend_Mail::clearDefaultFrom();
+        Zend_Mail::clearDefaultReplyTo();
+    }
+    
     /**
      * Test case for a simple email text message with
      * multiple recipients.
@@ -838,6 +843,61 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $mail->setReplyTo('user2@example.com');
     }
 
+    public function testDefaultFrom() {
+        Zend_Mail::setDefaultFrom('john@example.com','John Doe');
+        $this->assertEquals(array('email' => 'john@example.com','name' =>'John Doe'), Zend_Mail::getDefaultFrom());
+
+        Zend_Mail::clearDefaultFrom();
+        $this->assertEquals(null, Zend_Mail::getDefaultFrom());
+        
+        Zend_Mail::setDefaultFrom('john@example.com');
+        $this->assertEquals(array('email' => 'john@example.com','name' => null), Zend_Mail::getDefaultFrom());
+    }
+
+    public function testDefaultReplyTo() {
+        Zend_Mail::setDefaultReplyTo('john@example.com','John Doe');
+        $this->assertEquals(array('email' => 'john@example.com','name' =>'John Doe'), Zend_Mail::getDefaultReplyTo());
+
+        Zend_Mail::clearDefaultReplyTo();
+        $this->assertEquals(null, Zend_Mail::getDefaultReplyTo());
+        
+        Zend_Mail::setDefaultReplyTo('john@example.com');
+        $this->assertEquals(array('email' => 'john@example.com','name' => null), Zend_Mail::getDefaultReplyTo());
+    }
+
+    public function testSettingFromDefaults() {
+        Zend_Mail::setDefaultFrom('john@example.com', 'John Doe');
+        Zend_Mail::setDefaultReplyTo('foo@example.com','Foo Bar');
+
+        $mail = new Zend_Mail();
+        $headers = $mail->setFromToDefaultFrom() // test fluent interface
+                        ->setReplyToFromDefault()
+                        ->getHeaders();
+
+        $this->assertEquals('john@example.com', $mail->getFrom());
+        $this->assertEquals('foo@example.com', $mail->getReplyTo());
+        $this->assertEquals('John Doe <john@example.com>', $headers['From'][0]);
+        $this->assertEquals('Foo Bar <foo@example.com>', $headers['Reply-To'][0]);
+    }
+
+    public function testMethodSendUsesDefaults()
+    {
+        Zend_Mail::setDefaultFrom('john@example.com', 'John Doe');
+        Zend_Mail::setDefaultReplyTo('foo@example.com','Foo Bar');
+        
+        $mail = new Zend_Mail();
+        $mail->setBodyText('Defaults Test');
+
+        $mock = new Zend_Mail_Transport_Mock();
+        $mail->send($mock);
+        $headers = $mock->headers;
+        
+        $this->assertTrue($mock->called);
+        $this->assertEquals($mock->from, 'john@example.com');
+        $this->assertEquals($headers['From'][0], 'John Doe <john@example.com>');
+        $this->assertEquals($headers['Reply-To'][0], 'Foo Bar <foo@example.com>');
+    }
+
     public static function dataSubjects()
     {
         return array(
@@ -929,4 +989,5 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
             }
         }
     }
+
 }

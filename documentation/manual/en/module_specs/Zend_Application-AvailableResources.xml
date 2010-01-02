@@ -13,6 +13,7 @@
     <xi:include href="Zend_Application-AvailableResources-Frontcontroller.xml" />
     <xi:include href="Zend_Application-AvailableResources-Layout.xml" />
     <xi:include href="Zend_Application-AvailableResources-Log.xml" />
+    <xi:include href="Zend_Application-AvailableResources-Mail.xml" />
     <xi:include href="Zend_Application-AvailableResources-Modules.xml" />
     <xi:include href="Zend_Application-AvailableResources-Navigation.xml" />
     <xi:include href="Zend_Application-AvailableResources-Router.xml" />

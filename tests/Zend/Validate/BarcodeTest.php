@@ -345,6 +345,14 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($barcode->isValid('564000000051'));
     }
 
+    public function testINTELLIGENTMAIL()
+    {
+        $barcode = new Zend_Validate_Barcode('intelligentmail');
+        $this->assertTrue($barcode->isValid('01234567094987654321'));
+        $this->assertFalse($barcode->isValid('123'));
+        $this->assertFalse($barcode->isValid('5555512371'));
+    }
+
     public function testITF14()
     {
         $barcode = new Zend_Validate_Barcode('itf14');

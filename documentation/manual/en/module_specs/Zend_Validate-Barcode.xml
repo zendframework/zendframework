@@ -223,6 +223,19 @@
 
         <listitem>
             <para>
+                <emphasis>INTELLIGENTMAIL</emphasis>: Intelligent Mail is a postal barcode.
+            </para>
+
+            <para>
+                This barcode can have a length of 20, 25, 29 or 31 characters. It supports only
+                digits, and contains no checksum. This standard is the successor of
+                <acronym>PLANET</acronym> and <acronym>POSTNET</acronym>. It is mainly used by the
+                United States Postal Services.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
                 <emphasis>ITF14</emphasis>: ITF14 is the GS1 implementation of an Interleaved Two
                 of Five bar code.
             </para>

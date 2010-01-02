@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 19912 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.basics">
     <title>Uso Básico</title>
@@ -15,6 +15,32 @@ $phpNative = Zend_Json::decode($encodedValue);
 // Codifica para retornar ao cliente:
 $json = Zend_Json::encode($phpNative);
 ]]></programlisting>
+
+    <sect2 id="zend.json.basics.prettyprint">
+        <title>Impressão Formatada do JSON</title>
+
+        <para>
+            Pode ser difícil as vezes explorar os dados <acronym>JSON</acronym> gerados por
+            <methodname>Zend_Json::encode()</methodname>, uma vez que não há espaçamento ou recuo.
+            A fim de facilitar, <classname>Zend_Json</classname> lhe permite formatar a impressão
+            dos dados <acronym>JSON</acronym> em um formato legível com
+            <methodname>Zend_Json::prettyPrint()</methodname>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Codificá-lo para retornar para o cliente:
+$json = Zend_Json::encode($phpNative);
+if($debug) {
+    echo Zend_Json::prettyPrint($json, array("indent" => " "));
+}
+]]></programlisting>
+
+        <para>
+            O segundo argumento opcional de <methodname>Zend_Json::prettyPrint()</methodname> é uma
+            matriz de opções. A opção <code>indent</code> lhe permite definir a string de recuo -
+            por padrão é um único caractere de tabulação.
+        </para>
+    </sect2>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

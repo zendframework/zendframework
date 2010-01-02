@@ -2,221 +2,223 @@
 <!-- EN-Revision: 19807 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.lucene.queries">
-    <title>Supported queries</title>
+    <title>Unterstützte Abfragen</title>
 
     <para>
-        <classname>Zend_Search_Lucene</classname> and Java Lucene support a powerful query language.
-        It allows searching for individual terms, phrases, ranges of terms; using wildcards and
-        fuzzy search; combining queries using boolean operators; and so on.
+        <classname>Zend_Search_Lucene</classname> und Java Lucene unterstützen eine mächtige
+        Abfragesprache. Sie erlaubt das Suchen nach individuellen Ausdrücken, Phrasen, Bereichen von
+        Ausdrücken; verwendung von Wildcards und Undeutliche (Fuzzy) Suchen; Kombination von
+        Abfragen durch Verwendung boolscher Operatoren; und so weiter.
     </para>
 
     <para>
-        A detailed query language description can be found in the <link
-            linkend="zend.search.lucene.query-language">
-            Zend_Search_Lucene component documentation</link>.
+        Eine detailierte Beschreibung der Abfragesprache kann in der <link
+            linkend="zend.search.lucene.query-language">Dokumentation der Komponente
+            Zend_Search_Lucene</link> gefunden werden.
     </para>
 
     <para>
-        What follows are examples of some common query types and strategies.
+        Nachfolgend sind einige Beispiel von üblichen Abfragetypen und Strategien.
     </para>
 
     <example id="learning.lucene.queries.keyword">
-        <title>Querying for a single word</title>
+        <title>Abfragen nach einem einfachen Wort</title>
 
         <programlisting language="text"><![CDATA[
 hello
 ]]></programlisting>
 
         <para>
-            Searches for the word "hello" through all document fields.
+            Sucht nach dem Wort "hello" durch alle Dokumentfelder.
         </para>
     </example>
 
     <note>
-        <title>Default search field</title>
+        <title>Standardmäßige Suchfelder</title>
 
         <para>
-            Important note! Java Lucene searches only through the "contents" field by default, but
-            <classname>Zend_Search_Lucene</classname> searches through <emphasis>all</emphasis>
-            fields. This behavior can be modified using the
-            <methodname>Zend_Search_Lucene::setDefaultSearchField($fieldName)</methodname> method.
+            Wichtige Notiz! Java Lucene sucht standardmäßig nur nach den "contents" Feldern, aber
+            <classname>Zend_Search_Lucene</classname> sucht durch <emphasis>alle</emphasis> Felder.
+            Dieses Verhalten kann geändert werden indem die Methode
+            <methodname>Zend_Search_Lucene::setDefaultSearchField($fieldName)</methodname> verwendet
+            wird.
         </para>
     </note>
 
     <example id="learning.lucene.queries.multiple-words">
-        <title>Querying for multiple words</title>
+        <title>Abfrage nach mehreren Worten</title>
 
         <programlisting language="text"><![CDATA[
 hello dolly
 ]]></programlisting>
 
         <para>
-            Searches for two words. Both words are optional; at least one of them must be present in
-            the result.
+            Sucht nach zwei Worten. Beide Worte sind optional; zumindest eines von Ihnen muss im
+            Ergebnis vorhanden sein.
         </para>
     </example>
 
     <example id="learning.lucene.queries.required-words">
-        <title>Requiring words in a query</title>
+        <title>Worte in einer Abfrage erzwingen</title>
 
         <programlisting language="text"><![CDATA[
 +hello dolly
 ]]></programlisting>
 
         <para>
-            Searches for two words; "hello" is required, "dolly" is optional.
+            Sucht nach zwei Worten; "hello" wird benötigt, "dolly" ist optional.
         </para>
     </example>
 
     <example id="learning.lucene.queries.prohibited-words">
-        <title>Prohibiting words in queried documents</title>
+        <title>Wörter in abgefragten Dokumenten verhindern</title>
 
         <programlisting language="text"><![CDATA[
 +hello -dolly
 ]]></programlisting>
 
         <para>
-            Searches for two words; "hello" is required, 'dolly' is prohibited. In other words, if
-            the document matches "hello", but contains the word "dolly", it will not be returned in
-            the set of matches.
+            Sucht nach zwei Worten; "hello" wird benötigt, "dolly" ist verboten. Mit anderen Worten,
+            wenn das Dokument auf "hello" passt aber das Wort "dolly" enthält wird es nicht im
+            gefundenen Set zurückgegeben.
         </para>
     </example>
 
     <example id="learning.lucene.queries.phrases">
-        <title>Querying for phrases</title>
+        <title>Abfrage nach Phrasen</title>
 
         <programlisting language="text"><![CDATA[
 "hello dolly"
 ]]></programlisting>
 
         <para>
-            Searches for the phrase "hello dolly"; a document only matches if that exact string is
-            present.
+            Suche nach der Phrase "hello dolly"; ein Dokument entspricht nur wenn der exakte String
+            vorhanden ist.
         </para>
     </example>
 
     <example id="learning.lucene.queries.fields">
-        <title>Querying against specific fields</title>
+        <title>Abfrage nach spezifischen Feldern</title>
 
         <programlisting language="text"><![CDATA[
 title:"The Right Way" AND text:go
 ]]></programlisting>
 
         <para>
-            Searches for the phrase "The Right Way" within the <property>title</property> field and
-            the word "go" within the <property>text</property> field.
+            Sucht die Phrase "The Right Way" im <property>title</property> Feld und das Wort "go"
+            im <property>text</property> Feld.
         </para>
     </example>
 
     <example id="learning.lucene.queries.fields-and-document">
-        <title>Querying against specific fields as well as the entire document</title>
+        <title>Abfrage nach speziellen Feldern sowie im kompletten Dokument</title>
 
         <programlisting language="text"><![CDATA[
 title:"The Right Way" AND  go
 ]]></programlisting>
 
         <para>
-            Searches for the phrase "The Right Way" within the <property>title</property> field and
-            the word "go" word appearing in any field of the document.
+            Sucht die Phrase "The Right Way" im Feld <property>title</property> und das Word "go"
+            welches in irgendeinem Feld des Dokuments vorkommt.
         </para>
     </example>
 
     <example id="learning.lucene.queries.fields-and-document-alt">
-        <title>Querying against specific fields as well as the entire document (alternate)</title>
+        <title>Abfrage nach speziellen Feldern sowie im kompletten Dokument (alternativ)</title>
 
         <programlisting language="text"><![CDATA[
 title:Do it right
 ]]></programlisting>
 
         <para>
-            Searches for the word "Do" within the <property>title</property> field and the words
-            "it" and "right" words through all fields; any single one matching will result in
-            a document match.
+            Sucht nach dem Wort "Do" im Feld <property>title</property> und die Wörter "it" und
+            "right" über alle Felder; jeder einzelne der entspricht führt zu einem passenden
+            Dokument.
         </para>
     </example>
 
     <example id="learning.lucene.queries.wildcard-question">
-        <title>Querying with the wildcard "?"</title>
+        <title>Abfrage mit der Wildcard "?"</title>
 
         <programlisting language="text"><![CDATA[
 te?t
 ]]></programlisting>
 
         <para>
-            Search for words matching the pattern "te?t", where "?" is any single character.
+            Sucht nach Worten die dem Pattern "te?t" entsprechen, wobei "?" jedes einzelne Zeichen
+            ist.
         </para>
     </example>
 
     <example id="learning.lucene.queries.wildcard-asterisk">
-        <title>Querying with the wildcard "*"</title>
+        <title>Abfrage mit dem Wildcard "*"</title>
 
         <programlisting language="text"><![CDATA[
 test*
 ]]></programlisting>
 
         <para>
-            Search for words matching the pattern "test*", where "*" is any sequence of zero or more
-            characters.
+            Sucht nach Worten welche dem Pattern "test*" entsprechen wobei "*" jede Sequenz von null
+            oder mehr Zeichen entspricht.
         </para>
     </example>
 
     <example id="learning.lucene.queries.range-inclusive">
-        <title>Querying for an inclusive range of terms</title>
+        <title>Abfrage nach einem inklusiven Bereich von Ausdrücken</title>
 
         <programlisting language="text"><![CDATA[
 mod_date:[20020101 TO 20030101]
 ]]></programlisting>
 
         <para>
-            Search for the range of terms (inclusive).
+            Sucht nach einem Bereich von Ausdrücken (inklusive).
         </para>
     </example>
 
     <example id="learning.lucene.queries.range-exclusive">
-        <title>Querying for an exclusive range of terms</title>
+        <title>Abfrage nach einem exklusiven Bereich von Ausdrücken</title>
 
         <programlisting language="text"><![CDATA[
 title:{Aida to Carmen}
 ]]></programlisting>
 
         <para>
-            Search for the range of terms (exclusive).
+            Sucht nach einem Bereich von Ausdrücken (exklusive).
         </para>
     </example>
 
     <example id="learning.lucene.queries.fuzzy">
-        <title>Fuzzy searches</title>
+        <title>Undeutliche Suchen</title>
 
         <programlisting language="text"><![CDATA[
 roam~
 ]]></programlisting>
 
         <para>
-            Fuzzy search for the word "roam".
+            Sucht undeutlich nach dem Word "roam".
         </para>
     </example>
 
     <example id="learning.lucene.queries.boolean">
-        <title>Boolean searches</title>
+        <title>Boolsche Suchen</title>
 
         <programlisting language="text"><![CDATA[
 (framework OR library) AND php
 ]]></programlisting>
 
         <para>
-            Boolean query.
+            Boolsche Abfrage.
         </para>
     </example>
 
     <para>
-        All supported queries can be constructed through <classname>Zend_Search_Lucene</classname>'s
-        <link linkend="zend.search.lucene.query-api"> query
-            construction API</link>. Moreover, query parsing and query constructing may be
-        combined:
+        Alle unterstützten Abfragen können durch <classname>Zend_Search_Lucene</classname>'s
+        <link linkend="zend.search.lucene.query-api">Abfrage Erstellungs API</link> erstellt werden.
+        Weiters können Parsen von Abfrage und Abfrage Erstellung kombiniert werden:
     </para>
 
     <example id="learning.lucene.queries.combining">
-        <title>Combining parsed and constructed queries</title>
+        <title>Kombinieren von geparsted und erstellten Abfragen</title>
 
         <programlisting language="php"><![CDATA[
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);

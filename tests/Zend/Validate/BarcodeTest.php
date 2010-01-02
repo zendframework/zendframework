@@ -353,6 +353,16 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($barcode->isValid('5555512371'));
     }
 
+    public function testISSN()
+    {
+        $barcode = new Zend_Validate_Barcode('issn');
+        $this->assertTrue($barcode->isValid('1144875X'));
+        $this->assertFalse($barcode->isValid('123'));
+        $this->assertFalse($barcode->isValid('1144874X'));
+
+        $this->assertTrue($barcode->isValid('9771144875007'));
+    }
+
     public function testITF14()
     {
         $barcode = new Zend_Validate_Barcode('itf14');

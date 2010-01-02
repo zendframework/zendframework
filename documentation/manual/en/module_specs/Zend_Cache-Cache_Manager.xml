@@ -178,7 +178,7 @@ $databaseCache = $manager->getCache('database');
 
     <para>
         To assist in making the Cache Manager more useful, it is accompanied by
-        <classname>Zend_Application_Resource_Cachemanager</classname> and also
+        <classname>Zend_Application_Resource_Cache</classname> and also
         the <classname>Zend_Controller_Action_Helper_Cache</classname> Action
         Helper. Both of these are described in their relevant areas of the
         Reference Guide.

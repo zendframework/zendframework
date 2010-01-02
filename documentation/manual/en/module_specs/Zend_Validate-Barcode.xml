@@ -250,6 +250,18 @@
 
         <listitem>
             <para>
+                <emphasis>POSTNET</emphasis>: Postnet is used by the US Postal Service.
+            </para>
+
+            <para>
+                This barcode can have a length of 6, 7, 10 or 12 characters. It supports only
+                digits, and the last digit is always a checksum. This standard is mainly used
+                by the United States Postal Services.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
                 <emphasis>ROYALMAIL</emphasis>: Royalmail is used by Royal Mail.
             </para>
 

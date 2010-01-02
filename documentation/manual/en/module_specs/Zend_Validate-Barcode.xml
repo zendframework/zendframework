@@ -250,6 +250,19 @@
 
         <listitem>
             <para>
+                <emphasis>PLANET</emphasis>: Planet is the abbreviation for Postal Alpha Numeric
+                Encoding Technique.
+            </para>
+
+            <para>
+                This barcode can have a length of 12 or 14 characters. It supports only digits, and
+                the last digit is always a checksum. This standard is mainly used by the United
+                States Postal Services.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
                 <emphasis>POSTNET</emphasis>: Postnet is used by the US Postal Service.
             </para>
 

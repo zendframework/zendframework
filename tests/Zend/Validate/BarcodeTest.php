@@ -362,6 +362,14 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($barcode->isValid('21348075016402'));
     }
 
+    public function testPLANET()
+    {
+        $barcode = new Zend_Validate_Barcode('planet');
+        $this->assertTrue($barcode->isValid('401234567891'));
+        $this->assertFalse($barcode->isValid('123'));
+        $this->assertFalse($barcode->isValid('401234567892'));
+    }
+
     public function testPOSTNET()
     {
         $barcode = new Zend_Validate_Barcode('postnet');

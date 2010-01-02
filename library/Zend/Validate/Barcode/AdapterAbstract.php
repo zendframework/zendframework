@@ -286,4 +286,30 @@ abstract class Zend_Validate_Barcode_AdapterAbstract
 
         return true;
     }
+
+    /**
+     * Validates the checksum ()
+     * POSTNET implementation
+     *
+     * @param  string $value The barcode to validate
+     * @return boolean
+     */
+    protected function _postnet($value)
+    {
+        $checksum = substr($value, -1, 1);
+        $values   = str_split(substr($value, 0, -1));
+
+        $check = 0;
+        foreach($values as $row) {
+            $check += $row;
+        }
+
+        $check %= 10;
+        $check = 10 - $check;
+        if ($check == $checksum) {
+            return true;
+        }
+
+        return false;
+    }
 }

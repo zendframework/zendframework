@@ -27,7 +27,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 require_once 'Zend/Application/Resource/ResourceAbstractTest.php';
-require_once 'Zend/Application/Resource/CacheTest.php';
+require_once 'Zend/Application/Resource/CacheManagerTest.php';
 require_once 'Zend/Application/Resource/DbTest.php';
 require_once 'Zend/Application/Resource/DojoTest.php';
 require_once 'Zend/Application/Resource/FrontcontrollerTest.php';
@@ -61,7 +61,7 @@ class Zend_Application_Resource_AllTests
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework - Zend_Application_Resource');
 
         $suite->addTestSuite('Zend_Application_Resource_ResourceAbstractTest');
-        $suite->addTestSuite('Zend_Application_Resource_CacheTest');
+        $suite->addTestSuite('Zend_Application_Resource_CacheManagerTest');
         $suite->addTestSuite('Zend_Application_Resource_DbTest');
         $suite->addTestSuite('Zend_Application_Resource_DojoTest');
         $suite->addTestSuite('Zend_Application_Resource_FrontcontrollerTest');

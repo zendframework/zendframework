@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect2 id="zend.application.available-resources.cache">
-    <title>Zend_Application_Resource_Cache</title>
+<sect2 id="zend.application.available-resources.cachemanager">
+    <title>Zend_Application_Resource_Cachemanager</title>
 
     <para>
-        <classname>Zend_Application_Resource_Cache</classname> may be
+        <classname>Zend_Application_Resource_Cachemanager</classname> may be
         utilised to configure a set of <classname>Zend_Cache</classname> option
         bundles for use when lazy loading caches using
         <classname>Zend_Cache_Manager</classname>
@@ -15,24 +15,24 @@
         to option templates used to instantiate a cache object on request.
     </para>
 
-    <example id="zend.application.available-resources.cache.configExample">
-        <title>Sample Cache resource configuration</title>
+    <example id="zend.application.available-resources.cachemanager.configExample">
+        <title>Sample Cachemanager resource configuration</title>
 
         <para>
             Below is a sample <acronym>INI</acronym> file showing how
             <classname>Zend_Cache_Manager</classname> may be configured. The format
-            is the Cache resource prefix (resources.cache) followed
-            by the name to assign to an option cache template/bundle (e.g.
-            resources.cache.database) and finally followed by a typical
+            is the Cachemanager resource prefix (resources.cachemanager) followed
+            be the name to assign to an option cache template/bundle (e.g.
+            resources.cachemanager.database) and finally followed by a typical
             <classname>Zend_Cache</classname> option.
         </para>
 
         <programlisting language="ini"><![CDATA[
-resources.cache.database.frontend.name = Core
-resources.cache.database.frontend.options.lifetime = 7200
-resources.cache.database.frontend.options.automatic_serialization = true
-resources.cache.database.backend.name = File
-resources.cache.database.backend.options.cache_dir = "/path/to/cache"
+resources.cachemanager.database.frontend.name = Core
+resources.cachemanager.database.frontend.options.lifetime = 7200
+resources.cachemanager.database.frontend.options.automatic_serialization = true
+resources.cachemanager.database.backend.name = File
+resources.cachemanager.database.backend.options.cache_dir = "/path/to/cache"
 ]]></programlisting>
 
         <para>

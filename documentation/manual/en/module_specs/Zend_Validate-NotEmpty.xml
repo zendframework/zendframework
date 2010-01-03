@@ -14,7 +14,7 @@
 
         <para>
             By default, this validator works differently than you would expect when you've worked
-            with <acronym>PHP</acronym>'s <functionname>empty()</functionname> function. In
+            with <acronym>PHP</acronym>'s <methodname>empty()</methodname> function. In
             particular, this validator will evaluate both the integer <emphasis>0</emphasis> and
             string '<emphasis>0</emphasis>' as empty.
         </para>
@@ -41,7 +41,7 @@ $result = $valid->isValid($value);
 
         <para>
             Some projects have differing opinions of what is considered an "empty" value: a string
-            with only whitespace might be considered empty, or <integer>0</integer> may be
+            with only whitespace might be considered empty, or <emphasis>0</emphasis> may be
             considered non-empty (particularly for boolean sequences). To accomodate differing
             needs, <classname>Zend_Validate_NotEmpty</classname> allows you to configure which types
             should be validated as empty and which not.

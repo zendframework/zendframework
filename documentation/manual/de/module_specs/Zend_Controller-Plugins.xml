@@ -186,7 +186,7 @@ $front->dispatch();
         <note>
             <para>
                 Plugins können jederzeit wärend der Ausführung des Frontcontrollers registriert
-                werden. Wenn trotzdem ein Event ausgeführt wurde für das das Plugin eine
+                werden. Wenn trotzdem ein Event ausgeführt wurde für dass das Plugin eine
                 registrierte Eventmethode enthält, wird diese Methode nicht getriggert.
             </para>
         </note>

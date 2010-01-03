@@ -63,7 +63,7 @@ $autoloader->registerNamespace('My_');
             <title>Namespace Präfixe</title>
 
             <para>
-                Man sollte beachten das das vorhergehende Beispiel "My_" verwendet und nicht "My".
+                Man sollte beachten dass das vorhergehende Beispiel "My_" verwendet und nicht "My".
                 Der Grund ist, das <classname>Zend_Loader_Autoloader</classname> als Autoloader für
                 generelle Anwendungsfälle gedacht ist, und deshalb nicht die Annahme macht das ein
                 angegebener Präfix eines Klassen Namespaces einen Unterstrich enthalten muß. Wenn

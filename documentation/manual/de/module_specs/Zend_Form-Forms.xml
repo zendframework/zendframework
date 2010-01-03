@@ -955,7 +955,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             <listitem><para>
                 Anzeige Gruppierungen. Wie Anzeigegruppen, können Subformen, wenn Sie als Teil
                 einer größeren Form dargestellt werden, verwendet werden um Elemente zu gruppieren.
-                Trotzdem muß darauf geachtet werden das das Hauptform Objekt keine Ahnung von den
+                Trotzdem muß darauf geachtet werden dass das Hauptform Objekt keine Ahnung von den
                 Elementen in Subformen besitzt.
             </para></listitem>
         </itemizedlist>

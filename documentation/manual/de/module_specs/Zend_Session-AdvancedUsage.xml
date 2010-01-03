@@ -126,7 +126,7 @@ php_value session.auto_start 0
                     auch immer notwendig ist, und die darunterliegende <acronym>PHP</acronym>
                     Session wird automatisch gestartet. Das bietet eine extrem simple Handhabung die
                     in den meisten Situationen gut funktioniert. Trotzdem ist man dann dafür
-                    verantwortlich darauf zu schauen das das erste
+                    verantwortlich darauf zu schauen dass das erste
                     <code>new Zend_Session_Namespace()</code> passiert <emphasis>bevor</emphasis>
                     irgendeine Ausgabe (z.B. <ulink
                         url="http://www.php.net/headers_sent">HTTP headers</ulink> ) von

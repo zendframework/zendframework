@@ -10,7 +10,7 @@
         <classname>Zend_View</classname> ist performant verglichen mit anderen View oder Templating
         Engines; da View Skripte in <acronym>PHP</acronym> geschrieben sind muß man weder den
         Overhead eines Kompilierungssystems zu <acronym>PHP</acronym> auf sich nehmen, noch muß man
-        darauf achten das das kompilierte <acronym>PHP</acronym> nicht optimiert ist. Trotzdem
+        darauf achten dass das kompilierte <acronym>PHP</acronym> nicht optimiert ist. Trotzdem
         zeigt <classname>Zend_View</classname> seine eigenen Probleme: Erweiterungen werden durch
         überladen (View Helfer) durchgeführt, und eine Anzahl von View Helfern, die dadurch
         Schlüsselfunktionalitäten bieten machen das auch, mit einem Verlust von Geschwindigkeit.

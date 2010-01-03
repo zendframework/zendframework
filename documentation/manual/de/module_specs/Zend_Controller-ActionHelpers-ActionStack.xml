@@ -17,7 +17,7 @@
 
         <para>
             Der Aufruf des <emphasis>ActionStack</emphasis> Helpers registriert das
-            <emphasis>ActionStack</emphasis> Plugin implizit -- was bedeutet das das
+            <emphasis>ActionStack</emphasis> Plugin implizit -- was bedeutet dass das
             <emphasis>ActionStack</emphasis> Plugin nicht explizit registriert werden muß um dessen
             Funktionalität zu verwenden.
         </para>

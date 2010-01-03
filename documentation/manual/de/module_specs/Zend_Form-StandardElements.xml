@@ -444,7 +444,7 @@ $form->addElement($element, 'foo');
             </para>
 
             <para>
-                Beachte, das das auch der Fall ist wenn man mehrere Formulare verwendet.
+                Beachte, dass das auch der Fall ist wenn man mehrere Formulare verwendet.
             </para>
         </note>
     </sect2>

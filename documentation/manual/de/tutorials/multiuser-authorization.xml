@@ -2,10 +2,10 @@
 <!-- EN-Revision: 19809 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.authorization">
-    <title>Building an Authorization System in Zend Framework</title>
+    <title>Erstellung eines Authorisations Systems in Zend Framework</title>
 
     <sect2 id="learning.multiuser.authorization.intro">
-        <title>Introduction to Authorization</title>
+        <title>Einführung in Authorisation</title>
 
         <para>
             After a user has been identified as being authentic, an application can go about its

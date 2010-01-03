@@ -140,8 +140,8 @@
 
         <para>
             Es gibt zwei Wege um IBAN Nummern zu prüfen. Als ersten Weg kann man ein Gebietsschema
-            angeben das das Land repräsentiert. Jede angegebene IBAN Nummer wird das gegen dieses
-            Land geprüft.
+            angeben welches das Land repräsentiert. Jede angegebene IBAN Nummer wird das gegen
+            dieses Land geprüft.
         </para>
 
         <programlisting language="php"><![CDATA[

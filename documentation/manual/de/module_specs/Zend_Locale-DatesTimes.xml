@@ -208,7 +208,7 @@ Array
             versucht alle gefundenen Probleme zu korrigieren. Anzumerken ist auch die Verwendung von
             '<constant>Zend_Locale_Format::STANDARD</constant>' als Wert für
             '<code>date_format</code>' bei der Funktion <methodname>setOptions()</methodname> um zu
-            verhindern das das klassenweit gesetzte standardmäßige Datumsformat verwendet wird. Das
+            verhindern dass das klassenweit gesetzte standardmäßige Datumsformat verwendet wird. Das
             zwingt getDate dazu das standardmäßige Datumsformat dieser <varname>$locale</varname> zu
             verwenden.
         </para>

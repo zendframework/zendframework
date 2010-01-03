@@ -61,8 +61,8 @@ class FooController extends Zend_Controller_Action
         </para></listitem>
 
         <listitem><para>
-                Antwort Body mit verschlüsselten oder formatierten automatisch vervollständigten Daten
-                setzen.
+                Antwort Body mit verschlüsselten oder formatierten automatisch vervollständigten
+                Daten setzen.
         </para></listitem>
 
         <listitem><para>
@@ -335,12 +335,13 @@ dojo.require("custom.TestNameReadStore");
     <sect4 id="zend.controller.actionhelpers.autocomplete.scriptaculous">
         <title>AutoCompletion mit Scriptaculous</title>
         <para>
-            <ulink url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
+            <ulink
+                url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>
             erwartet eine <acronym>HTML</acronym> Antwort in einem speziellen Format.
         </para>
 
         <para>
-            Der Helfer der mit dieser Bibliothek zu verwenden ist ist 'AutoCompleteScriptaculous'.
+            Der Helfer der mit dieser Bibliothek zu verwenden ist 'AutoCompleteScriptaculous'.
             Es muß einfach ein Array von Daten angegeben werden, und der Helfer wird eine
             <acronym>HTML</acronym> Antwort erstellen die mit Ajax.Autocompleter kompatibel ist.
         </para>

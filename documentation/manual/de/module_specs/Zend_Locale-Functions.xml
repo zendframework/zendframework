@@ -1740,7 +1740,7 @@ if (Zend_Locale::isLocale($input, true)) {
         <para>
             Jetzt da man in der Lage zu Erkennen ob ein vorhandenen String ein Gebietsschema ist
             kann man Gebietsschema bezogenes Verhalten in seine eigenen Klassen hinzufügen. Aber man
-            wird schnell erkennen das das immer zu den gleichen 15 Zeilen Code führt. Etwas
+            wird schnell erkennen dass das immer zu den gleichen 15 Zeilen Code führt. Etwas
             ähnliches wie das folgende Beispiel:
         </para>
 

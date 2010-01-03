@@ -128,13 +128,13 @@ http://www.google.com/books/feeds/volumes?q=keyword&amp;min-viewability=partial
         <para>
             <code>setStartIndex:</code> Spezifiziert den Index des ersten passenden
             Ergebnisses das im Ergebnisset enthalten sein sollte. Dieser Parameter verwendet
-            einen eins-basierenden Index, was bedeutet das das erste Ergebnis 1 ist, das
+            einen eins-basierenden Index, was bedeutet dass das erste Ergebnis 1 ist, das
             zweite Ergebnis 2 und so weiter. Dieser Parameter arbeitet in Verbindung mit
             dem max-results Parameter um festzustellen welche Ergebnisse zurückzugeben
             sind. Um zum Beispiel das dritte Set von 10er Ergebnissen zu erhalten,
             21-30-set, muß der <code>start-index</code> Parameter auf <code>21</code>
             und der max-results Parameter auf <code>10</code> gesetzt werden. Es ist zu
-            beachten das das kein genereller Cursor Mechanismus ist. Wenn man zuerst
+            beachten dass dies kein genereller Cursor Mechanismus ist. Wenn man zuerst
             eine Abfrage mit <code>?start-index=1&amp;max-results=10</code> und
             anschließend eine andere Anfrage mit <code>?start-index=11&amp;max-results=10</code>,
             kann der Service nicht garantieren das die Ergebnisse äquivalent sind, weil

@@ -345,7 +345,7 @@ public function submitinfocardAction()
             Empfangen von Assertion IDs für Informationskarten wenn diese von der Komponente
             bearbeitet werden. Wärend das Speichern der Assertion IDs von übertragenen
             Informationskarten nicht notwendig ist, kann das nicht Durchführen die Möglichkeit
-            eröffnen, das das Authentifizierungs Schema durch eine Replay Attacke kompromitiert
+            eröffnen, dass das Authentifizierungs Schema durch eine Replay Attacke kompromitiert
             wird.
         </para>
 

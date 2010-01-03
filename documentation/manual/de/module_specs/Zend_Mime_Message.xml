@@ -61,12 +61,12 @@
         <para>
             <classname>Zend_Mime_Message</classname> erzeugt und verwendet normalerweise sein
             eigenes <classname>Zend_Mime</classname> Objekt zur Erstellung einer Grenze. Wenn eine
-            eigene Grenze erstellt wird, oder das das Verhalten des <classname>Zend_Mime</classname>
-            Objekts geändert werden muß, welches von <classname>Zend_Mime_Message</classname>
-            verwendet wird, kann ein eigenes Zend Mime Objekt instanziiert und bei
-            <classname>Zend_Mime_Message</classname> registriert werden. Normalerweise muß das nicht
-            gemacht werden. <code>->setMime(Zend_Mime $mime)</code> setzt eine spezielle Instanz von
-            <classname>Zend_Mime</classname> welche durch diese
+            eigene Grenze erstellt wird, oder dass das Verhalten des
+            <classname>Zend_Mime</classname> Objekts geändert werden muß, welches von
+            <classname>Zend_Mime_Message</classname> verwendet wird, kann ein eigenes Zend Mime
+            Objekt instanziiert und bei <classname>Zend_Mime_Message</classname> registriert werden.
+            Normalerweise muß das nicht gemacht werden. <code>->setMime(Zend_Mime $mime)</code>
+            setzt eine spezielle Instanz von <classname>Zend_Mime</classname> welche durch diese
             <classname>Zend_Mime_Message</classname> verwendet wird.
         </para>
 

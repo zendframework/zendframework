@@ -327,7 +327,7 @@ $index->optimize();
         </para>
 
         <para>
-            Der erste ist, das das Herausgehen aus dem Sichtbereich erzwungen wird:
+            Der erste ist, dass das Herausgehen aus dem Sichtbereich erzwungen wird:
             <programlisting language="php"><![CDATA[
 $index = Zend_Search_Lucene::open($indexPath);
 

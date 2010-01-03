@@ -111,7 +111,7 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
 
         <para>
             Wenn <classname>Zend_Layout</classname> mit den <acronym>MVC</acronym> Komponenten
-            verwendet wird, registriert es ein Front Controller Plugin das das Layout als letzte
+            verwendet wird, registriert es ein Front Controller Plugin dass das Layout als letzte
             Aktion darstellt bevor die Bearbeitungsschleife beendet wird. In den meisten Fällen,
             wird das Standardplugin ausreichen, aber sollte es gewünscht sein ein eigenes zu
             schreiben, kann der Name der Pluginklasse die geladen werden soll durch die Übergabe der
@@ -215,7 +215,7 @@ $layout->setViewSuffix('php');
             </para>
 
             <para>
-                Angenommen man will das das Layout Skript mit der Endung 'html' endet, und es ist
+                Angenommen man will dass das Layout Skript mit der Endung 'html' endet, und es ist
                 gewünscht das MixedCase und camelCased Wörter mit Unterstrichen statt Bindestrichen
                 getrennt werden und der Name nicht kleingeschrieben wird. Zusätzlich ist es
                 gewünscht in einem 'layouts' Unterverzeichnis nach den Skripten nachzuschauen.

@@ -1017,7 +1017,7 @@ switch ($numPeople) {
                         <property>return</property> angegeben wird. Um diese Fälle von Fehlern zu
                         unterscheiden, sollte jede <property>case</property> Anweisung in der
                         <property>break</property> oder <property>return</property> unterlassen
-                        werden einen Kommentar enthalten der anzeigt das das break gewünschtermaßen
+                        werden einen Kommentar enthalten der anzeigt dass das break gewünschtermaßen
                         unterdrückt wurde.
                     </para>
                 </note>

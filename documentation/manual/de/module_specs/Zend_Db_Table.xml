@@ -723,7 +723,7 @@ $table->update($data, $where);
             <para>
                 Die Werte und Identifizierer im <acronym>SQL</acronym> Ausdruck werden nicht in
                 Anführungszeichen gesetzt. Wenn Werte oder Identifizierer vorhanden sind die das
-                Setzen in Anführungszeichen benötigen, ist man selbst dafür zuständig das das getan
+                Setzen in Anführungszeichen benötigen, ist man selbst dafür zuständig das dies getan
                 wird. Die <methodname>quote()</methodname>, <methodname>quoteInto()</methodname> und
                 <methodname>quoteIdentifier()</methodname> Methoden des Datenbank Adapters können
                 dafür verwendet werden.
@@ -772,7 +772,7 @@ $table->delete($where);
             <para>
                 Die Werte und Identifizierer im <acronym>SQL</acronym> Ausdruck werden nicht in
                 Anführungszeichen gesetzt. Wenn Werte oder Identifizierer vorhanden sind die das
-                Setzen in Anführungszeichen benötigen, ist man selbst dafür zuständig das das getan
+                Setzen in Anführungszeichen benötigen, ist man selbst dafür zuständig das dies getan
                 wird. Die <methodname>quote()</methodname>, <methodname>quoteInto()</methodname> und
                 <methodname>quoteIdentifier()</methodname> Methoden des Datenbank Adapters können
                 dafür verwendet werden.
@@ -1021,20 +1021,16 @@ $select->where('bug_status = ?', 'NEW');
 
 $rows = $table->fetchAll($select);
 ]]></programlisting>
-
                 </example>
-
             </para>
 
             <para>
-                Flüssige Interfaces sind über alle Komponenten hinweg implementiert, sodas das zu
-                einer mehr abgekürzteren Form umgeschrieben werden kann.
+                Flüssige Interfaces sind über alle Komponenten hinweg implementiert, sodass dies zu
+                einer abgekürzteren Form umgeschrieben werden kann.
             </para>
 
             <para>
-
                 <example id="zend.db.table.qry.rows.set.fluent.interface.example">
-
                     <title>Example of fluent interface</title>
 
                     <programlisting language="php"><![CDATA[
@@ -1043,11 +1039,8 @@ $table = new Bugs();
 $rows =
     $table->fetchAll($table->select()->where('bug_status = ?', 'NEW'));
 ]]></programlisting>
-
                 </example>
-
             </para>
-
         </sect3>
 
         <sect3 id="zend.db.table.fetch-all.usage">
@@ -1603,7 +1596,7 @@ $bugs->setMetadataCacheInClass(false);
 ]]></programlisting>
 
             <para>
-                Das Flag ist standardmäßig aktiviert, was sicherstellt das das
+                Das Flag ist standardmäßig aktiviert, was sicherstellt dass das
                 <varname>$_metadata</varname> Array nur einmal pro Instanz ausgeliefert wird.
             </para>
         </sect3>

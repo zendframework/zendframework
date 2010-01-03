@@ -27,7 +27,7 @@
 
             <para>
                 Bei der Erstellung von modularen Anwendungen kann es sein das man auch einen
-                Namespace für eigene Standard Module haben will (die Standardkonfiguration ist, das
+                Namespace für eigene Standard Module haben will (die Standardkonfiguration ist, dass
                 das Standardmodul <emphasis>keinen</emphasis> Namensraum hat). Ab 1.5.0, kann das
                 durch Spezifizierung von <property>prefixDefaultModule</property> auf
                 <constant>TRUE</constant>, entweder im Front Controller oder im Dispatcher, getan

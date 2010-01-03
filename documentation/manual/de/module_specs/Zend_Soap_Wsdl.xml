@@ -219,7 +219,7 @@
             <acronym>HTTP</acronym>).
         </para>
         <para>
-            Das '/definitions/binding/soap:binding' Element wird verwendet um zu signieren das das
+            Das '/definitions/binding/soap:binding' Element wird verwendet um zu signieren dass das
             Bindung zum <acronym>SOAP</acronym> Protokoll Format gebunden ist.
         </para>
         <para>

@@ -585,9 +585,9 @@ echo $view->currencyTextBox(
                         es gibt aktuell <ulink
                             url="http://trac.dojotoolkit.org/ticket/7183">bekannte Probleme bei der
                             Verwendung der CurrencyTextBox mit Build Layern</ulink>. Ein bekannter
-                        Work-Around ist sicherzustellen das das http-equiv Metatag des Content-Types
-                        des Dokument auf das Zeichenset utf-8 gestellt wird, was mit folgendem
-                        Aufruf gemacht wird:
+                        Work-Around ist sicherzustellen dass das http-equiv Metatag des
+                        Content-Types des Dokument auf das Zeichenset utf-8 gestellt wird, was mit
+                        folgendem Aufruf gemacht wird:
                     </para>
 
                     <programlisting language="php"><![CDATA[

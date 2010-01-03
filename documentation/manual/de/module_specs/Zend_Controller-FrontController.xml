@@ -175,7 +175,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <para>
                 Später, wenn man den Pfad zu einem speziellen Modul oder dem aktuellen Modul
                 eruieren will, kann <methodname>getModuleDirectory()</methodname> aufgerufen werden
-                und optional ein Modulname übergeben werden für das das spezielle Modulverzeichnis
+                und optional ein Modulname übergeben werden für dass das spezielle Modulverzeichnis
                 geholt werden soll.
             </para>
         </sect3>

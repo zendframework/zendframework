@@ -57,7 +57,7 @@
                 <listitem>
                     <para>
                         <methodname>userGetTopTracks()</methodname>: Gibt ein SimpleXML Objekt
-                        zurück das das aktuell am meisten gelistete Lied des Benutzers enthält.
+                        zurück welches das aktuell am meisten gelistete Lied des Benutzers enthält.
                     </para>
                 </listitem>
                 <listitem>

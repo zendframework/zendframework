@@ -220,7 +220,7 @@ public function errorAction()
 
         <para>
             Wenn mehrfache Aktionen in einer Anfrage behandelt werden, oder wenn die Aktion mehrere
-            Aufrufe zu <methodname>render()</methodname> macht, ist es möglich das das Antwort
+            Aufrufe zu <methodname>render()</methodname> macht, ist es möglich dass das Antwort
             Objekt bereits Inhalt in sich gespeichert hat. Das kann dazu führen das eine Mixtur von
             erwartetem Inhalt und Fehler Inhalt gerendert wird.
         </para>

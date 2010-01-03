@@ -103,7 +103,7 @@
             Das folgende Beispiel eines Sets von Filterregeln deklariert, daß das Feld 'month' von
             <classname>Zend_Filter_Digits</classname> gefiltert wird, und das Feld 'account' von
             <classname>Zend_Filter_StringTrim</classname> gefiltert wird. Anschließend wird ein Set
-            von Prüfregeln deklariert welches prüft das das Feld 'account' nur dann gültig ist wenn
+            von Prüfregeln deklariert welches prüft dass das Feld 'account' nur dann gültig ist wenn
             es nur alphabetische Zeichen enthält.
         </para>
 
@@ -948,7 +948,7 @@ $validators = array(
                 Metakommandos kann für alle Regeln gesetzt werden indem das
                 <varname>$options</varname> Argument für den Konstruktor von
                 <classname>Zend_Filter_Input</classname> verwendet wird. Das erlaubt das Setzen des
-                Standardwertes für alle Regeln, ohne das das Metakommando für jede Regel gesetzt
+                Standardwertes für alle Regeln, ohne dass das Metakommando für jede Regel gesetzt
                 werden muß.
             </para>
 

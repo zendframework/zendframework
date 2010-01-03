@@ -120,7 +120,7 @@
             <note>
                 <para>
                     Selbst wenn es möglich ist einzelne Komponenten für die Verwendung vom
-                    kompletten Zend Framework zu seperieren sollte man trotzdem wissen das das zu
+                    kompletten Zend Framework zu seperieren sollte man trotzdem wissen dass dies zu
                     Problemen führen kann wenn Dateien fehlen oder Komponenten dynamisch verwendet
                     werden.
                 </para>

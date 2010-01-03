@@ -78,8 +78,8 @@ echo $result->listingName;
       <para>
         <acronym>PHP</acronym>'s <ulink
             url="http://www.php.net/manual/de/function.soap-soapclient-construct.php">SOAPClient</ulink>
-        hat eine <code>trace</code> Option die dazu führt das das <acronym>XML</acronym>, das wärend
-        der letzten Transaktion getauscht wurde, gemerkt wird.
+        hat eine <code>trace</code> Option die dazu führt dass das <acronym>XML</acronym>, das
+        wärend der letzten Transaktion getauscht wurde, gemerkt wird.
         <classname>Zend_Service_StrikeIron</classname> aktiviert die <code>trace</code> Option nicht
         standardmäßig aber das kann einfach getan werden durch Spezifizierung der Option die dazu
         verwendet wird den <code>SOAPClient</code> Konstruktor zu übergeben.

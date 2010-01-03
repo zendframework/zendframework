@@ -1348,7 +1348,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>Tageszeit, Lokalisiert</entry>
                         <entry><constant>Zend_Date::MERIDIEM</constant></entry>
                         <entry>
-                            a (Ähnlich, aber keine Garantie das das Format Großgeschrieben ist)
+                            a (Ähnlich, aber keine Garantie dass das Format Großgeschrieben ist)
                         </entry>
                         <entry><emphasis><command>VORM.</command></emphasis></entry>
                     </row>

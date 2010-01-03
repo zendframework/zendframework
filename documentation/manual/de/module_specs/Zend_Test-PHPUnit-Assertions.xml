@@ -240,7 +240,7 @@
 
         <itemizedlist>
             <listitem><para>
-                <methodname>assertModule($module, $message = '')</methodname>: Nimmt an das das
+                <methodname>assertModule($module, $message = '')</methodname>: Nimmt an dass das
                 angegebene Modul in der letzten Dispatch Aktion verwendet wurde.
             </para></listitem>
             <listitem><para>

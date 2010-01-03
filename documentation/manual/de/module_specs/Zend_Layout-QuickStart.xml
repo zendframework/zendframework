@@ -101,8 +101,8 @@
         <para>
             <methodname>Zend_Layout::startMvc()</methodname> erstellt eine Instanz von
             <classname>Zend_Layout</classname> mit jeder optionalen Konfiguration die angegeben
-            wird. Anschließend wird ein Front Controller Plugin registriert das das Layout mit jedem
-            Anwendungsinhalt darstellt sobald die Dispatch Schleife fertiggestellt ist, und
+            wird. Anschließend wird ein Front Controller Plugin registriert welches das Layout mit
+            jedem Anwendungsinhalt darstellt sobald die Dispatch Schleife fertiggestellt ist, und
             registriert einen Action Helfer der den Zugriff auf das Layout Objekt vom Action
             Controller aus gestattet. Zusätzlich kann jederzeit die Layout Instanz vom View Skript
             geholt werden indem der <code>layout</code> View Helfer verwendet wird.

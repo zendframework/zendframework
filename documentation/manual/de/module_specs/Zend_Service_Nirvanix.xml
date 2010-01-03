@@ -49,8 +49,8 @@
 
         <para>
             <classname>Zend_Service_Nirvanix</classname> zielt darauf ab das Nirvanix REST Service
-            einfacher zu verwenden aber zu verstehen das das Service selbst trotzdem noch essentiell
-            ist um mit Nirvanix erfolgreich zu sein.
+            einfacher zu verwenden aber zu verstehen dass das Service selbst trotzdem noch
+            essentiell ist um mit Nirvanix erfolgreich zu sein.
         </para>
 
         <para>
@@ -232,7 +232,7 @@ $result = $imfs->renameFile(array('filePath' => '/path/to/foo.txt',
 
         <para>
             Das Ergebnis dieser Operation ist entweder ein
-            <classname>Zend_Service_Nirvanix_Response</classname> Objekt das das von Nirvanix
+            <classname>Zend_Service_Nirvanix_Response</classname> Objekt welches das von Nirvanix
             zurückgegebene <acronym>XML</acronym> wrappt, oder
             <classname>Zend_Service_Nirvanix_Exception</classname> wenn ein Fehler aufgetreten ist.
         </para>

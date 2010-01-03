@@ -26,7 +26,7 @@
         <title>Grundsätzliche Verwendung</title>
 
         <para>
-            Nehmen wir zuerst die folgende Verzeichnis Struktur und Klassendateien an, und das das
+            Nehmen wir zuerst die folgende Verzeichnis Struktur und Klassendateien an, und dass das
             oberste Verzeichnis und das Library Verzeichnis im include_path sind:
         </para>
 

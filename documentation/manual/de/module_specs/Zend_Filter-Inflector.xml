@@ -157,7 +157,7 @@ $inflector->setTarget('layouts/:script.phtml');
 
         <para>
             Zusätzlich kann es gewünscht sein einen Klassenmember für die eigene Klasse zu haben,
-            der es erlaubt das Beugungsziel zu aktualisieren -- ohne das das Ziel jedesmal direkt
+            der es erlaubt das Beugungsziel zu aktualisieren -- ohne dass das Ziel jedesmal direkt
             aktualisiert werden muß (was Methodenaufrufe erspart).
             <methodname>setTargetReference()</methodname> erlaubt es das zu tun:
         </para>

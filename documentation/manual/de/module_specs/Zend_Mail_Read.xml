@@ -748,7 +748,7 @@ $mail = new Example_Mail_Pop3_Knock(array('host'        => 'localhost',
                 Wie gesehen werden kann wird angenommen das man immer verbunden, eingeloggt und,
                 wenn es unterstützt wird, ein Ordner im Konstruktor der Basisklasse ausgewählt ist.
                 Das bedeutet, wenn eine eigene Protokollklasse verwendet wird muß immer
-                sichergestellt werden das das durchgeführt wird, da sonst die nächste Methode
+                sichergestellt werden dass das durchgeführt wird, da sonst die nächste Methode
                 fehlschlagen wird wenn der Server das im aktuellen Status nicht zulässt.
             </para>
 

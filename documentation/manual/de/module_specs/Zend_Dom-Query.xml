@@ -76,7 +76,7 @@
                     <listitem><para>
                         <emphasis>Wort Entsprechung</emphasis>: Das Attribut enthält ein Wort das
                         dem String entspricht: 'div[bar~="baz"]' würde einem Div Element mit einem
-                        "bat" Attribut entsprechen das das Wort "baz" enthält. '&lt;div bar="foo
+                        "bat" Attribut entsprechen dass das Wort "baz" enthält. '&lt;div bar="foo
                         baz"&gt;' würde passen aber '&lt;div bar="foo bazbat"&gt;' würde nicht
                         entsprechen.
                     </para></listitem>

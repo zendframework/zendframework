@@ -88,7 +88,7 @@
             <para>
                 Beide, <classname>Zend_Translate</classname> und <classname>Zend_Locale</classname>
                 implementieren eine Caching Funktionalität welche die Geschwindigkeit großartig
-                verbessern kann. In jedem der Fälle ist das das Nadelöhr typischerweise das Lesen
+                verbessern kann. In jedem der Fälle ist dass das Nadelöhr typischerweise das Lesen
                 der Dateien, nicht das effektive Nachschauen; die Verwendung eines Caches eliminiert
                 die Notwendigkeit die Übersetzungsdateien und/oder Lokalisierungsdateien zu lesen.
             </para>

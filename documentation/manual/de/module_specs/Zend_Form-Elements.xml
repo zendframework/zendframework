@@ -382,8 +382,8 @@ $element->addPrefixPath('My_Validator', 'My/Validator/', 'validate');
 ]]></programlisting>
 
             <para>
-                (Beachten Sie das das dritte Agument indiziert welcher Plugin Loader auf welcher
-                Aktion durchgeführt werden soll.)
+                (Beachten Sie dass das dritte Agument zeigt welcher Plugin Loader auf welcher
+                Aktion durchgeführt werden soll)
             </para>
         </note>
 

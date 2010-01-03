@@ -53,7 +53,7 @@ $writer = new Zend_Log_Writer_Stream('php://output');
 $logger->addWriter($writer);
 ]]></programlisting>
 
-        Es ist wichtig anzumerken das das Log mindestens einen Writer haben muß. Man kann eine
+        Es ist wichtig anzumerken dass das Log mindestens einen Writer haben muß. Man kann eine
         beliebige Anzahl von Writern hinzufügen indem man die <methodname>addWriter()</methodname>
         Methode des Log's verwendet.
       </para>
@@ -216,7 +216,7 @@ $logger->setEventItem('pid', getmypid());
 
     <para>
       Das Setzen eines neuen Eventelements mit <methodname>setEventItem()</methodname> führt dazu
-      das das neue Element an alle Writer des Loggers gesendet wird. Trotzdem garantiert das nicht
+      dass das neue Element an alle Writer des Loggers gesendet wird. Trotzdem garantiert das nicht
       das die Writer das Element aktuell auch aufzeichnet. Und zwar deswegen weil die Writer nicht
       wissen was zu tun ist solange das Formatter Objekt nicht über das neue Element informiert
       wurde. Siehe in die Sektion über Formatter um mehr darüber zu lernen.

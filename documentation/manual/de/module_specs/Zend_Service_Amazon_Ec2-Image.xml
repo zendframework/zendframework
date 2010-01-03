@@ -17,7 +17,7 @@
                 <code>register</code> Jedes <acronym>AMI</acronym> ist mit einer eideutigen ID
                 assoziiert welche vom Amazon EC2 Service über die RegisterImage Operation zur
                 Verfügung gestellt wird. Wärend der Registrierung empfängt Amazon EC2 das
-                spezifizierte Manifest des Images von Amazon S3 und überprüft das das Image dem
+                spezifizierte Manifest des Images von Amazon S3 und überprüft ob das Image dem
                 Benutzer gehört der das Image registriert.
             </para>
             <para>

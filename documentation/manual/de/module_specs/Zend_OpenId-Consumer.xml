@@ -45,7 +45,7 @@
             Der End-Benutzer initiiert den OpenID Authentifikations Prozess indem er Seine oder Ihre
             Identifikations Daten in der entsprechenden Form übermittelt. Das folgende Beispiel
             zeigt ein einfaches Formular das einen OpenID Identifikator akzeptiert. Es gilt zu
-            beachten das das Beispiel nur einen Login demonstriert.
+            beachten dass das Beispiel nur einen Login demonstriert.
         </para>
 
         <example id="zend.openid.consumer.example-1">

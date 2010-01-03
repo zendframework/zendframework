@@ -39,7 +39,7 @@
 
             <para>
                 Wenn Daten manipuliert werden überschreiten Sie manchmal die <acronym>DST</acronym>
-                Grenze (Sommer-/Winterzeit) was normalerweise dazu führt das das Datum eine Stunde
+                Grenze (Sommer-/Winterzeit) was normalerweise dazu führt dass das Datum eine Stunde
                 verliert oder hinzubekommt. Wenn zum Beispiel ein Monat zu einem Datum vor einer
                 <acronym>DST</acronym> Änderung hinzugefügt wird und das Ergebnismonat nach dieser
                 Änderung liegt, sieht es so aus als ob das Datum eine Stunde verliert oder

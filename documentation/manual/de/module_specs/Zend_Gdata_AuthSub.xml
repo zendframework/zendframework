@@ -138,7 +138,7 @@ if (isset($_GET['logout'])) {
             gilt. Inhalt der zu Http Headern ausgegeben wird sollte immer gefiltert werden.
         </para>
         <para>
-            Betreffend der Beendigung des authentifizierten Tokens wird empfohlen das das gemacht
+            Betreffend der Beendigung des authentifizierten Tokens wird empfohlen dass dies gemacht
             wird, sobald der Benutzer mit seiner Google Data Session fertig ist. Die Möglichkeit das
             jemand das Token herausfindet und für seine eigenen miesen Zwecke verwendet ist sehr
             klein, aber trotzdem ist es eine gute Praxis einen authentifizierten Zugriff auf

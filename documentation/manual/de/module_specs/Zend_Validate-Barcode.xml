@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20007 -->
+<!-- EN-Revision: 20031 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.barcode">
     <title>Barcode</title>
@@ -229,6 +229,32 @@
 
         <listitem>
             <para>
+                <emphasis>INTELLIGENTMAIL</emphasis>: Intelligent Mail ist ein postalischer Barcode.
+            </para>
+
+            <para>
+                Dieser Barcode kann eine Länge von 20, 25, 29 oder 31 Zeichen haben. Er unterstützt
+                nur Ziffern und enthält keine Checksumme. Dieser Standard ist der Nachfolger von
+                <acronym>PLANET</acronym> und <acronym>POSTNET</acronym>. Er wird hauptsächlich von
+                den United States Post Services verwendet.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>ISSN</emphasis>: <acronym>ISSN</acronym> ist die Abkürzung für
+                International Standard Serial Number.
+            </para>
+
+            <para>
+                Dieser Barcode kann eine Länge von 8 oder 13 Zeichen haben. Er unterstützt nur
+                Ziffern wobei die letzte Ziffer eine Checksumme ist welche durch Modulo 11
+                berechnet wird. Er wird weltweit für gedruckte Publikationen verwendet.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
                 <emphasis>ITF14</emphasis>: ITF14 ist die GS1 Implementation des Interleaved Two of
                 Five Barcodes.
             </para>
@@ -251,6 +277,44 @@
                 Dieser Barcode muss eine Länge von 14 Zeichen haben. Er unterstützt nur Ziffern,
                 wobei die letzte Ziffer immer eine Checksumme ist welche durch Modulo 10 berechnet
                 wird. Dieser Standard wird hauptsächlich von den Firmen DP und DHL verwendet.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>PLANET</emphasis>: Planet ist die Abkürzung für Postal Alpha Numeric
+                Encoding Technique.
+            </para>
+
+            <para>
+                Dieser Barcode kann eine Länge von 12 oder 14 Zeichen haben. Er unterstützt nur
+                Ziffern wobei die letzt Ziffer immer eine Checksumme ist. Dieser Standard wird
+                hauptsächlich von den United States Post Services verwendet.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>POSTNET</emphasis>: Postnet wird vom US Post Service verwendet.
+            </para>
+
+            <para>
+                Dieser Barcode kann eine Länge von 6, 7, 10 oder 12 Zeichen haben. Er unterstützt
+                nur Ziffern wobei die letzte Ziffer immer eine Checksumme ist. Dieser Standard wird
+                hauptsächlich von den United States Post Services verwendet.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis>ROYALMAIL</emphasis>: Royalmail wird von Royal Mail verwendet.
+            </para>
+
+            <para>
+                Dieser Barcode hat keine definierte Länge. Er unterstützt Ziffern, großgeschriebene
+                Buchstaben und die letzte Ziffer ist immer eine Checksumme. Dieser Standard wird
+                hauptsächlich von Royal Mail für deren Cleanmail Service verwendet. Er wird auch
+                <acronym>RM4SCC</acronym> genannt.
             </para>
         </listitem>
 

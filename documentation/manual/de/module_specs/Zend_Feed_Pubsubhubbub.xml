@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19990 -->
+<!-- EN-Revision: 20043 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.pubsubhubbub.introduction">
     <title>Zend_Feed_Pubsubhubbub</title>
@@ -255,7 +255,7 @@ if (!$publisher->isSuccess()) {
                 demonstrated below:
             </para>
 
-            <programlisting lang="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $storage = new Zend_Feed_Pubsubhubbub_Model_Subscription;
 
     $subscriber = new Zend_Feed_Pubsubhubbub_Subscriber;
@@ -494,7 +494,7 @@ if (!$publisher->isSuccess()) {
                 class. Using it is quite simple since most of its work is performed internally.
             </para>
 
-            <programlisting lang="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
     $storage = new Zend_Feed_Pubsubhubbub_Model_Subscription;
     $callback = new Zend_Feed_Pubsubhubbub_Subscriber_Callback;
     $callback->setStorage($storage);
@@ -574,7 +574,7 @@ if (!$publisher->isSuccess()) {
             with the parameter being the key value available from the Router. The example below
             demonstrates this using a Zend Framework controller.</para>
 
-            <programlisting lang="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class CallbackController extends Zend_Controller_Action
 {
 

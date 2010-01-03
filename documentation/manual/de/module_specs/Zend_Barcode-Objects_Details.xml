@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20006 -->
+<!-- EN-Revision: 20056 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.barcode.objects.details">
     <title>Beschreibung der ausgelieferten Barcodes</title>
@@ -140,9 +140,217 @@
 
         <note>
             <para>
-                Wenn die Anzahl der Zeichen nicht gerade ist, fügt
-                <classname>Zend_Barcode_Object_Code25interleaved</classname> fehlende Nullen
-                automatisch vor dem Barcode Text hinzu.
+                Wenn die Anzahl der Zeichen nicht gerade ist, wird
+                <classname>Zend_Barcode_Object_Code25interleaved</classname> fehlende Nullen dem Barcode
+                Text automatisch voranstellen.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.ean2">
+        <title>Zend_Barcode_Object_Ean2</title>
+
+        <para>
+            <inlinegraphic width="101" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.ean2.png" format="PNG"/>
+        </para>
+
+        <para>
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean5</classname> (EAN 5) und
+            hat die gleichen Details und Optionen, und fügt die folgenden hinzu:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> EAN-2
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Erlaubte Zeichen:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksumme:</emphasis> nur intern verwendet aber nicht dargestellt
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Länge:</emphasis> 2 Zeichen
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Es gibt keine speziellen Optionen für diesen Barcode.
+        </para>
+
+        <note>
+            <para>
+                Wenn die Anzahl der Zeichen kleiner als 2 ist, wird
+                <classname>Zend_Barcode_Object_Ean2</classname> fehlende Nullen dem Barcode
+                Text automatisch voranstellen.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.ean5">
+        <title>Zend_Barcode_Object_Ean5</title>
+
+        <para>
+            <inlinegraphic width="101" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.ean5.png" format="PNG"/>
+        </para>
+
+        <para>
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean13</classname> (EAN 13)
+            und hat eigene Details und Optionen und fügt die folgenden hinzu:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> EAN-5
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Erlaubte Zeichen:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksumme:</emphasis> nur intern verwendet aber nicht dargestellt
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Länge:</emphasis> 5 Zeichen
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Es gibt keine speziellen Optionen für diesen Barcode.
+        </para>
+
+        <note>
+            <para>
+                Wenn die Anzahl der Zeichen kleiner als 5 ist, wird
+                <classname>Zend_Barcode_Object_Ean5</classname> fehlende Nullen dem Barcode
+                Text automatisch voranstellen.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.ean8">
+        <title>Zend_Barcode_Object_Ean8</title>
+
+        <para>
+            <inlinegraphic width="101" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.ean8.png" format="PNG"/>
+        </para>
+
+        <para>
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean13</classname> (EAN 13)
+            und hat eigene Details und Optionen und fügt die folgenden hinzu:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> EAN-8
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Erlaubte Zeichen:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksumme:</emphasis> erforderlich (Modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Länge:</emphasis> 8 Zeichen (inklusive Checksumme)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Es gibt keine speziellen Optionen für diesen Barcode.
+        </para>
+
+        <note>
+            <para>
+                Wenn die Anzahl der Zeichen kleiner als 8 ist, wird
+                <classname>Zend_Barcode_Object_Ean8</classname> fehlende Nullen dem Barcode
+                Text automatisch voranstellen.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.ean13">
+        <title>Zend_Barcode_Object_Ean13</title>
+
+        <para>
+            <inlinegraphic width="101" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.ean13.png" format="PNG"/>
+        </para>
+
+        <para>
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean13</classname> (EAN 13)
+            und hat eigene Details und Optionen und fügt die folgenden hinzu:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> EAN-13
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Erlaubte Zeichen:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksumme:</emphasis> erforderlich (Modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Länge:</emphasis> 13 Zeichen (inklusive Checksumme)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Es gibt keine speziellen Optionen für diesen Barcode.
+        </para>
+
+        <note>
+            <para>
+                Wenn die Anzahl der Zeichen kleiner als 13 ist, wird
+                <classname>Zend_Barcode_Object_Ean13</classname> fehlende Nullen dem Barcode
+                Text automatisch voranstellen.
             </para>
         </note>
     </sect3>
@@ -241,7 +449,7 @@
 
         <note>
             <para>
-                Wenn die Anzahl der Zeichen nicht 12 ist, wird
+                Wenn die Anzahl der Zeichen kleiner als 12 ist, wird
                 <classname>Zend_Barcode_Object_Identcode</classname> fehlende Nullen dem Barcode
                 Text automatisch voranstellen.
             </para>
@@ -294,9 +502,9 @@
 
         <note>
             <para>
-                Wenn die Anzahl der Zeichen nicht 14 ist, wird
-                <classname>Zend_Barcode_Object_Itf14</classname> fehlende Nullen dem Barcode Text
-                automatisch anhängen.
+                Wenn die Anzahl der Zeichen kleiner als 14 ist, wird
+                <classname>Zend_Barcode_Object_Itf14</classname> fehlende Nullen dem Barcode
+                Text automatisch voranstellen.
             </para>
         </note>
     </sect3>
@@ -347,9 +555,241 @@
 
         <note>
             <para>
-                Wenn die Anzahl der Zeichen nicht 14 ist, wird
+                Wenn die Anzahl der Zeichen kleiner als 14 ist, wird
                 <classname>Zend_Barcode_Object_Leitcode</classname> fehlende Nullen dem Barcode
                 Text automatisch voranstellen.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.planet">
+        <title>Zend_Barcode_Object_Planet</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.planet.png" format="PNG"/>
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> Planet (PostaL Alpha Numeric Encoding Technique)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Erlaubte Zeichen:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksumme:</emphasis> erforderlich (Modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Länge:</emphasis> 12 oder 14 Zeichen (inklusive Checksumme)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Es gibt keine speziellen Optionen für diesen Barcode.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.postnet">
+        <title>Zend_Barcode_Object_Postnet</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.postnet.png" format="PNG"/>
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> Postnet (POSTal Numeric Encoding Technique)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Erlaubte Zeichen:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksumme:</emphasis> erforderlich (Modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Länge:</emphasis> 6, 7, 10 oder 12 Zeichen (inklusive Checksumme)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Es gibt keine speziellen Optionen für diesen Barcode.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.royalmail">
+        <title>Zend_Barcode_Object_Royalmail</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.royalmail.png" format="PNG"/>
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> Royal Mail oder RM4SCC (Royal Mail 4-State Customer
+                    Code)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Erlaubte Zeichen:</emphasis> '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksumme:</emphasis> erforderlich
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Länge:</emphasis> variabel
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Es gibt keine speziellen Optionen für diesen Barcode.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.upca">
+        <title>Zend_Barcode_Object_Upca</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.upca.png" format="PNG"/>
+        </para>
+
+        <para>
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean13</classname> (EAN 13)
+            und erweitert einige seiner Möglichkeiten; er hat auch selbst einige.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> UPC-A (Universal Product Code)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Erlaubte Zeichen:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksumme:</emphasis> erforderlich (Modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Länge:</emphasis> 12 Zeichen (inklusive Checksumme)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Es gibt keine speziellen Optionen für diesen Barcode.
+        </para>
+
+        <note>
+            <para>
+                Wenn die Anzahl der Zeichen kleiner als 12 ist, wird
+                <classname>Zend_Barcode_Object_Upca</classname> fehlende Nullen dem Barcode
+                Text automatisch voranstellen.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.upce">
+        <title>Zend_Barcode_Object_Upce</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.upce.png" format="PNG"/>
+        </para>
+
+        <para>
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Upca</classname> (UPC-A),
+            und verwendet einige seiner Fähigkeiten; er hat auch einige eigene. Das erste Zeichen
+            des zu kodierenden Textes ist das System (0 oder 1).
+            und enthält einige seiner Möglichkeiten; er hat auch einige eigene
+            Möglichkeit.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> UPC-E (Universal Product Code)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Erlaubte Zeichen:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksumme:</emphasis> erforderlich (Modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Länge:</emphasis> 8 Zeichen (inklusive Checksumme)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Es gibt keine speziellen Optionen für diesen Barcode.
+        </para>
+
+        <note>
+            <para>
+                Wenn die Anzahl der Zeichen kleiner als 8 ist, wird
+                <classname>Zend_Barcode_Object_Upce</classname> fehlende Nullen dem Barcode
+                Text automatisch voranstellen.
+            </para>
+        </note>
+
+        <note>
+            <para>
+                Wenn das erste Zeichen des zu kodierenden Textes nicht 0 oder 1 ist, ersetzt
+                <classname>Zend_Barcode_Object_Upce</classname> dieses automatisch durch 0.
             </para>
         </note>
     </sect3>

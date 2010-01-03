@@ -2,12 +2,13 @@
 <!-- EN-Revision: 19809 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.authentication">
-    <title>Authenticating Users in Zend Framework</title>
+    <title>Benutzer im Zend Framework authentifizieren</title>
 
     <sect2 id="learning.multiuser.authentication.intro">
-        <title>Introduction to Authentication</title>
+        <title>Einführung in die Authentifizierung</title>
 
         <para>
+            Sobald eine Web Anwendung 
             Once a web application has been able to distinguish one user from another by
             establishing a session, web applications typically want to validate the identity
             of a user. The process of validating a consumer as being authentic is "authentication."

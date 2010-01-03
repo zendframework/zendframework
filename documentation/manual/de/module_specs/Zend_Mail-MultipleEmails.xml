@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19426 -->
+<!-- EN-Revision: 20039 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.multiple-emails">
     <title>Versand von mehreren E-Mails über eine SMTP Verbindung</title>
@@ -11,8 +11,17 @@
         sicherzustellen das der korrekte SMTP Handschlag folgt.
     </para>
 
-    <example id="zend.mail.multiple-emails.example-1">
+    <para>
+        Optional kann auch eine standardmäßige From Emailadresse und Name definiert werden sowie ein
+        standardmäßiger reply-to Header. Das kann durch die statischen Methoden
+        <methodname>setDefaultFrom()</methodname> und <methodname>setDefaultReplyTo()</methodname>
+        getan werden. Diese Standardwerte werden verwendet wenn man keine From oder Reply-to Adresse
+        oder -Name angibt bis die Standardwerte resetiert werden (gelöscht). Das Resetieren der
+        Standardwerte kann durch die Verwendung von <methodname>clearDefaultFrom()</methodname> und
+        <methodname>clearDefaultReplyTo</methodname> durchgeführt werden.
+    </para>
 
+    <example id="zend.mail.multiple-emails.example-1">
         <title>Versand von mehreren E-Mails über eine SMTP Verbindung</title>
 
         <programlisting language="php"><![CDATA[
@@ -20,17 +29,26 @@
 $config = array('name' => 'sender.example.com');
 $transport = new Zend_Mail_Transport_Smtp('mail.example.com', $config);
 
+// Setzt From & Reply-To Adressen
+// und Namen für alle Emails die zu versenden sind
+Zend_Mail::setDefaultFrom('sender@example.com', 'John Doe');
+Zend_Mail::setDefaultReplyTo('replyto@example.com','Jane Doe');
+
 // Durch die Nachrichten gehen
 for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
-    $mail->addTo('studio@peptolab.com', 'Test');
-    $mail->setFrom('studio@peptolab.com', 'Test');
+    $mail->addTo('studio@example.com', 'Test');
+    $mail->setFrom('studio@example.com', 'Test');
     $mail->setSubject(
         'Demonstration - mit einer SMTP Verbindung mehrfache E-Mails senden'
     );
     $mail->setBodyText('...Hier die Nachricht...');
     $mail->send($transport);
 }
+
+// Resetiert die Standardwerte
+Zend_Mail::clearDefaultFrom();
+Zend_Mail::clearDefaultReplyTo();
 ]]></programlisting>
 
     </example>
@@ -59,8 +77,8 @@ $transport->setConnection($protocol);
 // Durch die Nachrichten gehen
 for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
-    $mail->addTo('studio@peptolab.com', 'Test');
-    $mail->setFrom('studio@peptolab.com', 'Test');
+    $mail->addTo('studio@example.com', 'Test');
+    $mail->setFrom('studio@example.com', 'Test');
     $mail->setSubject(
         'Demonstration - mit einer SMTP Verbindung mehrfache E-Mails senden'
     );

@@ -105,14 +105,6 @@ class Zend_Application_Resource_CacheManagerTest extends PHPUnit_Framework_TestC
         $this->assertTrue($resource->getCachemanager() instanceof Zend_Cache_Manager);
     }
 
-    public function testInitializationPushesCacheManagerToBootstrapWhenPresent()
-    {
-        $resource = new Zend_Application_Resource_Cachemanager(array());
-        $resource->setBootstrap($this->bootstrap);
-        $resource->init();
-        $this->assertSame($resource->getCachemanager(), $this->bootstrap->cacheManager);
-    }
-
     public function testShouldReturnCacheManagerWhenComplete()
     {
         $resource = new Zend_Application_Resource_Cachemanager(array());

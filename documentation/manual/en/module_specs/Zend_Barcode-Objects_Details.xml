@@ -145,6 +145,214 @@
         </note>
     </sect3>
 
+    <sect3 id="zend.barcode.objects.details.ean2">
+        <title>Zend_Barcode_Object_Ean2</title>
+
+        <para>
+            <inlinegraphic width="101" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.ean2.png" format="PNG"/>
+        </para>
+
+        <para>
+            This barcode extends <classname>Zend_Barcode_Object_Ean5</classname>
+            (EAN 5), and has the same particulars and options, and adds the following:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> EAN-2
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> only use internally but not displayed
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> 2 characters
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+
+        <note>
+            <para>
+                If the number of characters is lower than 2,
+                <classname>Zend_Barcode_Object_Ean2</classname> will automatically
+                prepend the missing zero to the barcode text.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.ean5">
+        <title>Zend_Barcode_Object_Ean5</title>
+
+        <para>
+            <inlinegraphic width="101" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.ean5.png" format="PNG"/>
+        </para>
+
+        <para>
+            This barcode extends <classname>Zend_Barcode_Object_Ean13</classname>
+            (EAN 13), and has the same particulars and options, and adds the following:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> EAN-5
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> only use internally but not displayed
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> 5 characters
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+
+        <note>
+            <para>
+                If the number of characters is lower than 5,
+                <classname>Zend_Barcode_Object_Ean5</classname> will automatically
+                prepend the missing zero to the barcode text.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.ean8">
+        <title>Zend_Barcode_Object_Ean8</title>
+
+        <para>
+            <inlinegraphic width="101" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.ean8.png" format="PNG"/>
+        </para>
+
+        <para>
+            This barcode extends <classname>Zend_Barcode_Object_Ean13</classname>
+            (EAN 13), and has the same particulars and options, and adds the following:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> EAN-8
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> mandatory (modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> 8 characters (including checksum)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+
+        <note>
+            <para>
+                If the number of characters is lower than 8,
+                <classname>Zend_Barcode_Object_Ean8</classname> will automatically
+                prepend the missing zero to the barcode text.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.ean13">
+        <title>Zend_Barcode_Object_Ean13</title>
+
+        <para>
+            <inlinegraphic width="101" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.ean13.png" format="PNG"/>
+        </para>
+
+        <para>
+            This barcode extends <classname>Zend_Barcode_Object_Ean13</classname>
+            (EAN 13), and has the same particulars and options, and adds the following:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> EAN-13
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> mandatory (modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> 13 characters (including checksum)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+
+        <note>
+            <para>
+                If the number of characters is lower than 13,
+                <classname>Zend_Barcode_Object_Ean13</classname> will automatically
+                prepend the missing zero to the barcode text.
+            </para>
+        </note>
+    </sect3>
+
     <sect3 id="zend.barcode.objects.details.code39">
         <title>Zend_Barcode_Object_Code39</title>
 
@@ -238,7 +446,7 @@
 
         <note>
             <para>
-                If the number of characters is not equal to 12,
+                If the number of characters is lower than 12,
                 <classname>Zend_Barcode_Object_Identcode</classname> will automatically prepend
                 missing zeros to the barcode text.
             </para>
@@ -291,7 +499,7 @@
 
         <note>
             <para>
-                If the number of characters is not equal to 14,
+                If the number of characters is lower than 14,
                 <classname>Zend_Barcode_Object_Itf14</classname> will automatically prepend
                 missing zeros to the barcode text.
             </para>
@@ -344,9 +552,163 @@
 
         <note>
             <para>
-                If the number of characters is not equal to 14,
+                If the number of characters is lower than 14,
                 <classname>Zend_Barcode_Object_Leitcode</classname> will automatically
                 prepend missing zeros to the barcode text.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.postnet">
+        <title>Zend_Barcode_Object_Postnet</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.postnet.png" format="PNG"/>
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> Postnet
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> mandatory (modulo 10 different from Code25)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> 6, 7, 10 or 12 characters (including checksum)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.upca">
+        <title>Zend_Barcode_Object_Upca</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.upca.png" format="PNG"/>
+        </para>
+
+        <para>
+            This barcode extends <classname>Zend_Barcode_Object_Ean13</classname>
+            (EAN-13), and inherits some of its capabilities; it also has a few
+            particulars of its own.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> UPC-A (Universal Product Code)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> mandatory (modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> 12 characters (including checksum)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+
+        <note>
+            <para>
+                If the number of characters is lower than 12,
+                <classname>Zend_Barcode_Object_Upca</classname> will automatically
+                prepend missing zeros to the barcode text.
+            </para>
+        </note>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.upce">
+        <title>Zend_Barcode_Object_Upce</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.upce.png" format="PNG"/>
+        </para>
+
+        <para>
+            This barcode extends <classname>Zend_Barcode_Object_Upca</classname>
+            (UPC-A), and inherits some of its capabilities; it also has a few
+            particulars of its own. The first character of the text to encode
+            is the system (0 or 1).
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> UPC-E (Universal Product Code)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> mandatory (modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> 8 characters (including checksum)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+
+        <note>
+            <para>
+                If the number of characters is lower than 8,
+                <classname>Zend_Barcode_Object_Upce</classname> will automatically
+                prepend missing zeros to the barcode text.
+            </para>
+        </note>
+
+        <note>
+            <para>
+                If the first character of the text to encode is not 0 or 1, 
+                <classname>Zend_Barcode_Object_Upce</classname> will automatically
+                replace it by 0.
             </para>
         </note>
     </sect3>

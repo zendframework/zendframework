@@ -1203,6 +1203,11 @@ abstract class Zend_Barcode_Object_ObjectAbstract
         $this->_validateText($value);
     }
 
+    /**
+     * Standard validation for most of barcode objects
+     * @param string $value
+     * @param array  $options
+     */
     protected function _validateText($value, $options = array())
     {
         $validatorName = (isset($options['validator'])) ? $options['validator'] : $this->getType();

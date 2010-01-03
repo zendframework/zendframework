@@ -388,9 +388,6 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
         $barcodeHeight = $this->_barcode->getHeight(true) * $this->_moduleSize;
         if ($barcodeHeight != $supportHeight) {
             switch ($this->_verticalPosition) {
-                case 'top':
-                    $this->_topOffset = 0;
-                    break;
                 case 'middle':
                     $this->_topOffset = floor(
                             ($supportHeight - $barcodeHeight) / 2);
@@ -398,19 +395,15 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
                 case 'bottom':
                     $this->_topOffset = $supportHeight - $barcodeHeight;
                     break;
+                case 'top':
                 default:
-                    require_once 'Zend/Barcode/Renderer/Exception.php';
-                    throw new Zend_Barcode_Renderer_Exception(
-                        'Invalid vertical position provided; must be one of "top", "middle", or "bottom"'
-                    );
+                    $this->_topOffset = 0;
+                    break;
             }
         }
         $barcodeWidth = $this->_barcode->getWidth(true) * $this->_moduleSize;
         if ($barcodeWidth != $supportWidth) {
             switch ($this->_horizontalPosition) {
-                case 'left':
-                    $this->_leftOffset = 0;
-                    break;
                 case 'center':
                     $this->_leftOffset = floor(
                             ($supportWidth - $barcodeWidth) / 2);
@@ -418,11 +411,10 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
                 case 'right':
                     $this->_leftOffset = $supportWidth - $barcodeWidth;
                     break;
+                case 'left':
                 default:
-                    require_once 'Zend/Barcode/Renderer/Exception.php';
-                    throw new Zend_Barcode_Renderer_Exception(
-                        'Invalid horizontal position provided; must be one of "left", "center", or "right"'
-                    );
+                    $this->_leftOffset = 0;
+                    break;
             }
         }
     }

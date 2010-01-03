@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.application.available-resources.locale">
+    <title>Zend_Application_Resource_Locale</title>
+
+    <para>
+        <classname>Zend_Application_Resource_Locale</classname> can be used to
+        set an (application-wide) locale to use in classes that use localization.
+    </para>
+
+    <para>
+        There are basically three uses of the Locale Resource Plugin.
+        With one you don't specify any options for the Resource Plugin.
+        By doing so, <classname>Zend_Locale</classname> tries to determine
+        what locale to use, and that's it.
+    </para>
+    
+    <example id="zend.application.available-resources.locale.configExample">
+        <title>Sample Locale Resource Configuration</title>
+
+        <para>
+            For the other two uses, please see the code sample below.
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+; No matter what, the nl_NL locale will be used.
+resources.locale.default = "nl_NL"
+resources.locale.force = true
+
+; Try to determine automatically first,
+; if unsuccessful, use nl_NL as fallback.
+resources.locale.default = "nl_NL"
+resources.locale.force = false
+]]></programlisting>
+
+        <para>
+            Please note that the last line could be left out, since the
+            force-directive defaults to false.
+        </para>
+    </example>
+</sect2>

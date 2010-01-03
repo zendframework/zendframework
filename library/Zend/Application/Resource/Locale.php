@@ -60,10 +60,15 @@ class Zend_Application_Resource_Locale
     {
         if (null === $this->_locale) {
             $options = $this->getOptions();
-            if (!isset($options['default'])) {
+            if(!isset($options['default'])) {
+                $this->_locale = new Zend_Locale();
+            } elseif(!isset($options['force']) ||
+                     (bool) $options['force'] == false)
+            {
+                // Don't force any locale, just go for auto detection
+                Zend_Locale::setDefault($options['default']);
                 $this->_locale = new Zend_Locale();
             } else {
-                Zend_Locale::setDefault($options['default']);
                 $this->_locale = new Zend_Locale($options['default']);
             }
 
@@ -72,6 +77,7 @@ class Zend_Application_Resource_Locale
                 : self::DEFAULT_REGISTRY_KEY;
             Zend_Registry::set($key, $this->_locale);
         }
+
         return $this->_locale;
     }
 }

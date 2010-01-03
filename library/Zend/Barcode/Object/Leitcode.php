@@ -42,10 +42,14 @@ class Zend_Barcode_Object_Leitcode extends Zend_Barcode_Object_Identcode
 {
 
     /**
-     * Number of characters in the barcode
-     * @var $_barcodeLength integer | string
+     * Default options for Leitcode barcode
+     * @return void
      */
-    protected $_barcodeLength = 14;
+    protected function _getDefaultOptions()
+    {
+        $this->_barcodeLength = 14;
+        $this->_mandatoryChecksum = true;
+    }
 
     /**
      * Retrieve text to display

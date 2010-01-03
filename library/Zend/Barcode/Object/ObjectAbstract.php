@@ -206,6 +206,7 @@ abstract class Zend_Barcode_Object_ObjectAbstract
      */
     public function __construct($options = null)
     {
+        $this->_getDefaultOptions();
         if (self::$_staticFont !== null) {
             $this->_font = self::$_staticFont;
         }
@@ -220,6 +221,14 @@ abstract class Zend_Barcode_Object_ObjectAbstract
             $this->_withChecksum = true;
             $this->_withChecksumInText = true;
         }
+    }
+
+    /**
+     * Set default options for particular object
+     * @return void
+     */
+    protected function _getDefaultOptions()
+    {
     }
 
     /**

@@ -43,10 +43,13 @@ class Zend_Barcode_Object_Code25interleaved extends Zend_Barcode_Object_Code25
     private $_withBearerBars = false;
 
     /**
-     * Number of characters in the barcode
-     * @var $_barcodeLength integer | string
+     * Default options for Code25interleaved barcode
+     * @return void
      */
-    protected $_barcodeLength = 'even';
+    protected function _getDefaultOptions()
+    {
+        $this->_barcodeLength = 'even';
+    }
 
     /**
      * Activate/deactivate drawing of bearer bars

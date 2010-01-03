@@ -38,15 +38,12 @@ class Zend_Barcode_Object_Itf14 extends Zend_Barcode_Object_Code25interleaved
 {
 
     /**
-     * Number of characters in the barcode
-     * @var $_barcodeLength integer | string
+     * Default options for Identcode barcode
+     * @return void
      */
-    protected $_barcodeLength = 14;
-
-    /**
-     * Activation of mandatory checksum
-     * to deactivate unauthorized modification
-     * @var $_mandatoryChecksum boolean
-     */
-    protected $_mandatoryChecksum = true;
+    protected function _getDefaultOptions()
+    {
+        $this->_barcodeLength = 14;
+        $this->_mandatoryChecksum = true;
+    }
 }

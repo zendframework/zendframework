@@ -42,17 +42,14 @@ class Zend_Barcode_Object_Identcode extends Zend_Barcode_Object_Code25interleave
 {
 
     /**
-     * Number of characters in the barcode
-     * @var $_barcodeLength integer | string
+     * Default options for Identcode barcode
+     * @return void
      */
-    protected $_barcodeLength = 12;
-
-    /**
-     * Activation of mandatory checksum
-     * to deactivate unauthorized modification
-     * @var $_mandatoryChecksum boolean
-     */
-    protected $_mandatoryChecksum = true;
+    protected function _getDefaultOptions()
+    {
+        $this->_barcodeLength = 12;
+        $this->_mandatoryChecksum = true;
+    }
 
     /**
      * Retrieve text to display

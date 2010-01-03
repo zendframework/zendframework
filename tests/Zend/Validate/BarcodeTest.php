@@ -402,6 +402,9 @@ class Zend_Validate_BarcodeTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($barcode->isValid('SN34RD1AK'));
         $this->assertFalse($barcode->isValid('123'));
         $this->assertFalse($barcode->isValid('SN34RD1AW'));
+
+        $this->assertTrue($barcode->isValid('012345W'));
+        $this->assertTrue($barcode->isValid('06CIOUH'));
     }
 
     public function testSSCC()

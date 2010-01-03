@@ -133,8 +133,8 @@ public function testNumericLogStreamFilterParamsPriorityDoesNotFail() {
                         array('writerName'   => 'Stream',
                               'writerParams' => array('stream' => "php://memory",
                                                       'mode' => 'a'),
-                        array('filterName' => 'Priority'),
-                        array('filterParams' => array('priority' => '4'))));
+                        'filterName' => 'Priority',
+                        'filterParams' => array('priority' => '4')));
         $resource = new Zend_Application_Resource_Log($options);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();

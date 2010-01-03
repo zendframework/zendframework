@@ -12,21 +12,23 @@
         There are basically three uses of the Locale Resource Plugin.
         With one you don't specify any options for the Resource Plugin.
         By doing so, <classname>Zend_Locale</classname> tries to determine
-        what locale to use, and that's it.
+        what locale to use, and that's it. Doing so is not adivsed. There are
+        cases in which <classname>Zend_Locale</classname> cannot detect the
+        locale of the user, resulting in an exception. For more info on how
+        locales are detected, please see the chapter on <link
+        linkend="zend.locale.selection.automatic">automatic locale detection</link>.
     </para>
     
-    <example id="zend.application.available-resources.locale.configExample">
-        <title>Sample Locale Resource Configuration</title>
+    <example id="zend.application.available-resources.locale.configExampleDetectAndFallback">
+        <title>Autodetect locale as well as setting a fallback</title>
 
         <para>
-            For the other two uses, please see the code sample below.
+            Another possibility is to automatically detect the locale to use,
+            but, when none can be found, still fall back to the pre-configured
+            locale. This is advised for any application that needs to be localized. 
         </para>
 
         <programlisting language="ini"><![CDATA[
-; No matter what, the nl_NL locale will be used.
-resources.locale.default = "nl_NL"
-resources.locale.force = true
-
 ; Try to determine automatically first,
 ; if unsuccessful, use nl_NL as fallback.
 resources.locale.default = "nl_NL"
@@ -37,5 +39,21 @@ resources.locale.force = false
             Please note that the last line could be left out, since the
             force-directive defaults to false.
         </para>
+    </example>
+    
+    <example id="zend.application.available-resources.locale.configExampleFallbackOnly">
+        <title>Setting a locale only</title>
+
+        <para>
+            The last option is to only set a preconfigured locale which is used
+            in all cases. This comes in handy when you want the same locale
+            throughout your entire application.
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+; No matter what, the nl_NL locale will be used.
+resources.locale.default = "nl_NL"
+resources.locale.force = true
+]]></programlisting>
     </example>
 </sect2>

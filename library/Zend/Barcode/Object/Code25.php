@@ -136,11 +136,7 @@ class Zend_Barcode_Object_Code25 extends Zend_Barcode_Object_ObjectAbstract
             $factor    = 4 - $factor;
         }
 
-        $checksum = 10 - ($checksum % 10);
-
-        if ($checksum == 10) {
-            $checksum = 0;
-        }
+        $checksum = (10 - ($checksum % 10)) % 10;
 
         return $checksum;
     }

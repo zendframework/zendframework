@@ -130,10 +130,7 @@ class Zend_Barcode_Object_Postnet extends Zend_Barcode_Object_ObjectAbstract
     {
         $this->_checkText($text);
         $sum = array_sum(str_split($text));
-        $checksum = 10 - ($sum % 10);
-        if ($checksum == 10) {
-            $checksum = 0;
-        }
+        $checksum = (10 - ($sum % 10)) % 10;
         return $checksum;
     }
 }

@@ -88,11 +88,7 @@ class Zend_Barcode_Object_Identcode extends Zend_Barcode_Object_Code25interleave
             $checksum += intval($text{$i - 1}) * (($i % 2) ? 4 : 9);
         }
 
-        $checksum = 10 - ($checksum % 10);
-
-        if ($checksum == 10) {
-            $checksum = 0;
-        }
+        $checksum = (10 - ($checksum % 10)) % 10;
 
         return $checksum;
     }

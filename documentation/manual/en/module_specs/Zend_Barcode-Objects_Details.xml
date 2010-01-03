@@ -559,6 +559,45 @@
         </note>
     </sect3>
 
+    <sect3 id="zend.barcode.objects.details.planet">
+        <title>Zend_Barcode_Object_Planet</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.planet.png" format="PNG"/>
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> Planet
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> mandatory (modulo 10)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> 12 or 14 characters (including checksum)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+    </sect3>
+
     <sect3 id="zend.barcode.objects.details.postnet">
         <title>Zend_Barcode_Object_Postnet</title>
 
@@ -582,7 +621,7 @@
 
             <listitem>
                 <para>
-                    <emphasis>Checksum:</emphasis> mandatory (modulo 10 different from Code25)
+                    <emphasis>Checksum:</emphasis> mandatory (modulo 10)
                 </para>
             </listitem>
 

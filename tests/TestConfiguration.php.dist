@@ -157,7 +157,7 @@ define('TESTS_ZEND_DB_ADAPTER_DB2_DATABASE', 'sample');
 
 /**
  * Zend_Db_Adapter_Sqlsrv
- * Note: Make sure that you create the "test" database and set a 
+ * Note: Make sure that you create the "test" database and set a
  * username and password
  *
  */
@@ -523,11 +523,11 @@ define('TESTS_ZEND_MAIL_SMTP_AUTH', false);
  *     dbname: "queue"
  * }
  *
- * The PlatformJobQueue adapter expects two parameters, the host and password. 
+ * The PlatformJobQueue adapter expects two parameters, the host and password.
  * The HOST string should include both the host and port (typically 10003):
  *     127.0.0.1:10003
- * When running tests against PlatformJobQueue, it's best to do so where 
- * Platform is installed on localhost and has maximum workers set to 20 
+ * When running tests against PlatformJobQueue, it's best to do so where
+ * Platform is installed on localhost and has maximum workers set to 20
  * (default is 5); do so with this zend.ini setting:
  *     zend_jq.max_num_of_request_workers=20
  *
@@ -564,7 +564,7 @@ define('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY', 'Enter API key here');
 /**
  * Zend_Service_LiveDocx configuration
  *
- * Define username and password in order to run unit tests for LiveDocX web 
+ * Define username and password in order to run unit tests for LiveDocX web
  * services.
  *
  * phpunit/phpunit will typically work.
@@ -652,7 +652,8 @@ define('TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_PROD',                'I+ebY
 /**
  * Blob storage tests
  */
-define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS',                   true);
+// Enable this tests only when you have a working account
+define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS',                   false);
 define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNONPROD',                  false);
 define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNLARGEBLOB',               true);
 define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_CONTAINER_PREFIX',           'phpazuretestblob');
@@ -662,21 +663,22 @@ define('TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOBSA_CONTAINER_PREFIX',         'phpaz
 /**
  * Table storage tests
  */
-define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNTESTS',                  true);
+// Enable this tests only when you have a working account
+define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNTESTS',                  false);
 define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_RUNONPROD',                 false);
 define('TESTS_ZEND_SERVICE_WINDOWSAZURE_TABLE_TABLENAME_PREFIX',          'phpazuretesttable');
 
 /**
  * Queue storage tests
  */
-define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNTESTS',                  true);
+define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNTESTS',                  false);
 define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_RUNONPROD',                 false);
 define('TESTS_ZEND_SERVICE_WINDOWSAZURE_QUEUE_PREFIX',                    'phpazuretestqueue');
 
 /**
  * SessionHandler tests
  */
-define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS',         true);
+define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNTESTS',         false);
 define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_RUNONPROD',        false);
 define('TESTS_ZEND_SERVICE_WINDOWSAZURE_SESSIONHANDLER_TABLENAME_PREFIX', 'phpazuretestsession');
 
@@ -705,7 +707,7 @@ define('TESTS_ZEND_SOAP_AUTODISCOVER_ONLINE_SERVER_BASEURI', false);
  * Setting CRASH_TEST_ENABLED to true will enable some tests that may
  * potentially crash PHP on some systems, due to very deep-nesting regular
  * expressions.
- * 
+ *
  * Only do this if you know what you are doing!
  */
 define('TESTS_ZEND_URI_CRASH_TEST_ENABLED', false);
@@ -713,7 +715,7 @@ define('TESTS_ZEND_URI_CRASH_TEST_ENABLED', false);
 /**
  * Zend_Validate tests
  *
- * Set ONLINE_ENABLED if you wish to run validators that require network 
+ * Set ONLINE_ENABLED if you wish to run validators that require network
  * connectivity.
  */
 define('TESTS_ZEND_VALIDATE_ONLINE_ENABLED', false);

@@ -45,27 +45,28 @@ require_once 'Zend/Service/WindowsAzure/Storage/Blob.php';
 class Zend_Service_WindowsAzure_BlobStorageTest extends PHPUnit_Framework_TestCase
 {
     static $path;
-    
+
     public function __construct()
     {
         self::$path = dirname(__FILE__).'/_files/';
     }
-    
+
     public static function main()
     {
-        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_BlobStorageTest");
-            $result = PHPUnit_TextUI_TestRunner::run($suite);
-        }
+        $suite  = new PHPUnit_Framework_TestSuite("Zend_Service_WindowsAzure_BlobStorageTest");
+        $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
-   
+
     /**
      * Test setup
      */
     protected function setUp()
     {
+        if (!TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
+            $this->markTestSkipped('Windows Azure Tests disabled');
+        }
     }
-    
+
     /**
      * Test teardown
      */
@@ -88,60 +89,56 @@ class Zend_Service_WindowsAzure_BlobStorageTest extends PHPUnit_Framework_TestCa
         } else {
             $storageClient = new Zend_Service_WindowsAzure_Storage_Blob(TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_HOST_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_ACCOUNT_DEV, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_KEY_DEV, true, Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract::retryN(10, 250));
         }
-        
+
         if (TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY) {
             $storageClient->setProxy(TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_USEPROXY, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_PORT, TESTS_ZEND_SERVICE_WINDOWSAZURE_STORAGE_PROXY_CREDENTIALS);
         }
 
         return $storageClient;
     }
-    
+
     protected static $uniqId = 0;
-    
+
     protected function generateName()
     {
         self::$uniqId++;
         return TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_CONTAINER_PREFIX . self::$uniqId;
     }
-    
+
     /**
      * Test container exists
      */
     public function testContainerExists()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName1 = $this->generateName();
-            $containerName2 = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName1);
-            $storageClient->createContainer($containerName2);
-            
-            $result = $storageClient->containerExists($containerName1);
-            $this->assertTrue($result);
-            
-            $result = $storageClient->containerExists(md5(time()));
-            $this->assertFalse($result);
-        }
+        $containerName1 = $this->generateName();
+        $containerName2 = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName1);
+        $storageClient->createContainer($containerName2);
+
+        $result = $storageClient->containerExists($containerName1);
+        $this->assertTrue($result);
+
+        $result = $storageClient->containerExists(md5(time()));
+        $this->assertFalse($result);
     }
-    
+
     /**
      * Test blob exists
      */
     public function testBlobExists()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            $storageClient->putBlob($containerName, 'WindowsAzure1.gif', self::$path . 'WindowsAzure.gif');
-            $storageClient->putBlob($containerName, 'WindowsAzure2.gif', self::$path . 'WindowsAzure.gif');
-            
-            $result = $storageClient->blobExists($containerName, 'WindowsAzure1.gif');
-            $this->assertTrue($result);
-            
-            $result = $storageClient->blobExists($containerName, md5(time()));
-            $this->assertFalse($result);
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+        $storageClient->putBlob($containerName, 'WindowsAzure1.gif', self::$path . 'WindowsAzure.gif');
+        $storageClient->putBlob($containerName, 'WindowsAzure2.gif', self::$path . 'WindowsAzure.gif');
+
+        $result = $storageClient->blobExists($containerName, 'WindowsAzure1.gif');
+        $this->assertTrue($result);
+
+        $result = $storageClient->blobExists($containerName, md5(time()));
+        $this->assertFalse($result);
     }
 
     /**
@@ -149,66 +146,58 @@ class Zend_Service_WindowsAzure_BlobStorageTest extends PHPUnit_Framework_TestCa
      */
     public function testCreateContainer()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $result = $storageClient->createContainer($containerName);
-            $this->assertEquals($containerName, $result->Name);
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $result = $storageClient->createContainer($containerName);
+        $this->assertEquals($containerName, $result->Name);
     }
-    
+
     /**
      * Test get container acl
      */
     public function testGetContainerAcl()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            $acl = $storageClient->getContainerAcl($containerName);
-            $this->assertEquals(Zend_Service_WindowsAzure_Storage_Blob::ACL_PRIVATE, $acl);        
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+        $acl = $storageClient->getContainerAcl($containerName);
+        $this->assertEquals(Zend_Service_WindowsAzure_Storage_Blob::ACL_PRIVATE, $acl);
     }
-    
+
     /**
      * Test set container acl
      */
     public function testSetContainerAcl()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            
-            $storageClient->setContainerAcl($containerName, Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC);
-            $acl = $storageClient->getContainerAcl($containerName);
-            
-            $this->assertEquals(Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC, $acl);
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+
+        $storageClient->setContainerAcl($containerName, Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC);
+        $acl = $storageClient->getContainerAcl($containerName);
+
+        $this->assertEquals(Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC, $acl);
     }
-    
+
     /**
      * Test set container acl advanced
      */
     public function testSetContainerAclAdvanced()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            
-            $storageClient->setContainerAcl(
-                $containerName,
-                Zend_Service_WindowsAzure_Storage_Blob::ACL_PRIVATE,
-                array(
-                    new Zend_Service_WindowsAzure_Storage_SignedIdentifier('ABCDEF', '2009-10-10', '2009-10-11', 'r')
-                )
-            );
-            $acl = $storageClient->getContainerAcl($containerName, true);
-            
-            $this->assertEquals(1, count($acl));
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+
+        $storageClient->setContainerAcl(
+            $containerName,
+            Zend_Service_WindowsAzure_Storage_Blob::ACL_PRIVATE,
+            array(
+                new Zend_Service_WindowsAzure_Storage_SignedIdentifier('ABCDEF', '2009-10-10', '2009-10-11', 'r')
+            )
+        );
+        $acl = $storageClient->getContainerAcl($containerName, true);
+
+        $this->assertEquals(1, count($acl));
     }
 
     /**
@@ -216,271 +205,255 @@ class Zend_Service_WindowsAzure_BlobStorageTest extends PHPUnit_Framework_TestCa
      */
     public function testSetContainerMetadata()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            
-            $storageClient->setContainerMetadata($containerName, array(
-                'createdby' => 'PHPAzure',
-            ));
-            
-            $metadata = $storageClient->getContainerMetadata($containerName);
-            $this->assertEquals('PHPAzure', $metadata['createdby']);
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+
+        $storageClient->setContainerMetadata($containerName, array(
+            'createdby' => 'PHPAzure',
+        ));
+
+        $metadata = $storageClient->getContainerMetadata($containerName);
+        $this->assertEquals('PHPAzure', $metadata['createdby']);
     }
-    
+
     /**
      * Test list containers
      */
     public function testListContainers()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName1 = 'testlist1';
-            $containerName2 = 'testlist2';
-            $containerName3 = 'testlist3';
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName1);
-            $storageClient->createContainer($containerName2);
-            $storageClient->createContainer($containerName3);
-            $result1 = $storageClient->listContainers('testlist');
-            $result2 = $storageClient->listContainers('testlist', 1);
-    
-            // cleanup first
-            $storageClient->deleteContainer($containerName1);
-            $storageClient->deleteContainer($containerName2);
-            $storageClient->deleteContainer($containerName3);
-            
-            $this->assertEquals(3, count($result1));
-            $this->assertEquals($containerName2, $result1[1]->Name);
-            
-            $this->assertEquals(1, count($result2));
-        }
+        $containerName1 = 'testlist1';
+        $containerName2 = 'testlist2';
+        $containerName3 = 'testlist3';
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName1);
+        $storageClient->createContainer($containerName2);
+        $storageClient->createContainer($containerName3);
+        $result1 = $storageClient->listContainers('testlist');
+        $result2 = $storageClient->listContainers('testlist', 1);
+
+        // cleanup first
+        $storageClient->deleteContainer($containerName1);
+        $storageClient->deleteContainer($containerName2);
+        $storageClient->deleteContainer($containerName3);
+
+        $this->assertEquals(3, count($result1));
+        $this->assertEquals($containerName2, $result1[1]->Name);
+
+        $this->assertEquals(1, count($result2));
     }
-    
+
     /**
      * Test put blob
      */
     public function testPutBlob()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            $result = $storageClient->putBlob($containerName, 'images/WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
-    
-            $this->assertEquals($containerName, $result->Container);
-            $this->assertEquals('images/WindowsAzure.gif', $result->Name);
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+        $result = $storageClient->putBlob($containerName, 'images/WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
+
+        $this->assertEquals($containerName, $result->Container);
+        $this->assertEquals('images/WindowsAzure.gif', $result->Name);
     }
-    
+
     /**
      * Test put large blob
      */
     public function testPutLargeBlob()
     {
-        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS && TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNLARGEBLOB) {
-            // Create a file > Zend_Service_WindowsAzure_Storage_Blob::MAX_BLOB_SIZE
-            $fileName = $this->_createLargeFile();
-            
-            // Execute test
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            $result = $storageClient->putLargeBlob($containerName, 'LargeFile.txt', $fileName);
-    
-            $this->assertEquals($containerName, $result->Container);
-            $this->assertEquals('LargeFile.txt', $result->Name);
-            
-            // Get block list
-            $blockList = $storageClient->getBlockList($containerName, 'LargeFile.txt');
-            $this->assertTrue(count($blockList['CommittedBlocks']) > 0);
-            
-            // Remove file
-            unlink($fileName);
+        if (!TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNLARGEBLOB) {
+            $this->markTestSkipped('Large Blob Test disabled');
         }
+
+        // Create a file > Zend_Service_WindowsAzure_Storage_Blob::MAX_BLOB_SIZE
+        $fileName = $this->_createLargeFile();
+
+        // Execute test
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+        $result = $storageClient->putLargeBlob($containerName, 'LargeFile.txt', $fileName);
+
+        $this->assertEquals($containerName, $result->Container);
+        $this->assertEquals('LargeFile.txt', $result->Name);
+
+        // Get block list
+        $blockList = $storageClient->getBlockList($containerName, 'LargeFile.txt');
+        $this->assertTrue(count($blockList['CommittedBlocks']) > 0);
+
+        // Remove file
+        unlink($fileName);
     }
-    
+
     /**
      * Test get blob
      */
     public function testGetBlob()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            $storageClient->putBlob($containerName, 'images/WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
-            
-            $fileName = tempnam('', 'tst');
-            $storageClient->getBlob($containerName, 'images/WindowsAzure.gif', $fileName);
-    
-            $this->assertTrue(file_exists($fileName));
-            $this->assertEquals(
-                file_get_contents(self::$path . 'WindowsAzure.gif'),
-                file_get_contents($fileName)
-            );
-            
-            // Remove file
-            unlink($fileName);
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+        $storageClient->putBlob($containerName, 'images/WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
+
+        $fileName = tempnam('', 'tst');
+        $storageClient->getBlob($containerName, 'images/WindowsAzure.gif', $fileName);
+
+        $this->assertTrue(file_exists($fileName));
+        $this->assertEquals(
+            file_get_contents(self::$path . 'WindowsAzure.gif'),
+            file_get_contents($fileName)
+        );
+
+        // Remove file
+        unlink($fileName);
     }
-    
+
     /**
      * Test set blob metadata
      */
     public function testSetBlobMetadata()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            $storageClient->putBlob($containerName, 'images/WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
-            
-            $storageClient->setBlobMetadata($containerName, 'images/WindowsAzure.gif', array(
-                'createdby' => 'PHPAzure',
-            ));
-            
-            $metadata = $storageClient->getBlobMetadata($containerName, 'images/WindowsAzure.gif');
-            $this->assertEquals('PHPAzure', $metadata['createdby']);
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+        $storageClient->putBlob($containerName, 'images/WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
+
+        $storageClient->setBlobMetadata($containerName, 'images/WindowsAzure.gif', array(
+            'createdby' => 'PHPAzure',
+        ));
+
+        $metadata = $storageClient->getBlobMetadata($containerName, 'images/WindowsAzure.gif');
+        $this->assertEquals('PHPAzure', $metadata['createdby']);
     }
-    
+
     /**
      * Test delete blob
      */
     public function testDeleteBlob()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            
-            $storageClient->putBlob($containerName, 'images/WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
-            $storageClient->deleteBlob($containerName, 'images/WindowsAzure.gif');
-            
-            $result = $storageClient->listBlobs($containerName);
-            $this->assertEquals(0, count($result));
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+
+        $storageClient->putBlob($containerName, 'images/WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
+        $storageClient->deleteBlob($containerName, 'images/WindowsAzure.gif');
+
+        $result = $storageClient->listBlobs($containerName);
+        $this->assertEquals(0, count($result));
     }
-    
+
     /**
      * Test list blobs
      */
     public function testListBlobs()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            
-            $storageClient->putBlob($containerName, 'images/WindowsAzure1.gif', self::$path . 'WindowsAzure.gif');
-            $storageClient->putBlob($containerName, 'images/WindowsAzure2.gif', self::$path . 'WindowsAzure.gif');
-            $storageClient->putBlob($containerName, 'images/WindowsAzure3.gif', self::$path . 'WindowsAzure.gif');
-            $storageClient->putBlob($containerName, 'images/WindowsAzure4.gif', self::$path . 'WindowsAzure.gif');
-            $storageClient->putBlob($containerName, 'images/WindowsAzure5.gif', self::$path . 'WindowsAzure.gif');
-            
-            $result1 = $storageClient->listBlobs($containerName);
-            $this->assertEquals(5, count($result1));
-            $this->assertEquals('images/WindowsAzure5.gif', $result1[4]->Name);
-            
-            $result2 = $storageClient->listBlobs($containerName, '', '', 2);
-            $this->assertEquals(2, count($result2));
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+
+        $storageClient->putBlob($containerName, 'images/WindowsAzure1.gif', self::$path . 'WindowsAzure.gif');
+        $storageClient->putBlob($containerName, 'images/WindowsAzure2.gif', self::$path . 'WindowsAzure.gif');
+        $storageClient->putBlob($containerName, 'images/WindowsAzure3.gif', self::$path . 'WindowsAzure.gif');
+        $storageClient->putBlob($containerName, 'images/WindowsAzure4.gif', self::$path . 'WindowsAzure.gif');
+        $storageClient->putBlob($containerName, 'images/WindowsAzure5.gif', self::$path . 'WindowsAzure.gif');
+
+        $result1 = $storageClient->listBlobs($containerName);
+        $this->assertEquals(5, count($result1));
+        $this->assertEquals('images/WindowsAzure5.gif', $result1[4]->Name);
+
+        $result2 = $storageClient->listBlobs($containerName, '', '', 2);
+        $this->assertEquals(2, count($result2));
     }
-    
+
     /**
      * Test copy blob
      */
     public function testCopyBlob()
     {
-    	if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = $this->generateName();
-            $storageClient = $this->createStorageInstance();
-            $storageClient->createContainer($containerName);
-            $source = $storageClient->putBlob($containerName, 'images/WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
-    
-            $this->assertEquals($containerName, $source->Container);
-            $this->assertEquals('images/WindowsAzure.gif', $source->Name);
-            
-            $destination = $storageClient->copyBlob($containerName, 'images/WindowsAzure.gif', $containerName, 'images/WindowsAzureCopy.gif');
-    
-            $this->assertEquals($containerName, $destination->Container);
-            $this->assertEquals('images/WindowsAzureCopy.gif', $destination->Name);
-        }
+        $containerName = $this->generateName();
+        $storageClient = $this->createStorageInstance();
+        $storageClient->createContainer($containerName);
+        $source = $storageClient->putBlob($containerName, 'images/WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
+
+        $this->assertEquals($containerName, $source->Container);
+        $this->assertEquals('images/WindowsAzure.gif', $source->Name);
+
+        $destination = $storageClient->copyBlob($containerName, 'images/WindowsAzure.gif', $containerName, 'images/WindowsAzureCopy.gif');
+
+        $this->assertEquals($containerName, $destination->Container);
+        $this->assertEquals('images/WindowsAzureCopy.gif', $destination->Name);
     }
-    
+
     /**
      * Test root container
      */
     public function testRootContainer()
     {
-        if (TESTS_ZEND_SERVICE_WINDOWSAZURE_BLOB_RUNTESTS) {
-            $containerName = '$root';
-            $storageClient = $this->createStorageInstance();
-            $result = $storageClient->createContainer($containerName);
-            $this->assertEquals($containerName, $result->Name);
-            
-            // ACL
-            $storageClient->setContainerAcl($containerName, Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC);
-            $acl = $storageClient->getContainerAcl($containerName);
-            
-            $this->assertEquals(Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC, $acl);
-            
-            // Metadata
-            $storageClient->setContainerMetadata($containerName, array(
-                'createdby' => 'PHPAzure',
-            ));
-            
-            $metadata = $storageClient->getContainerMetadata($containerName);
-            $this->assertEquals('PHPAzure', $metadata['createdby']);
-            
-            // List
-            $result = $storageClient->listContainers();
-            $this->assertEquals(1, count($result));
-            
-            // Put blob
-            $result = $storageClient->putBlob($containerName, 'WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
-   
-            $this->assertEquals($containerName, $result->Container);
-            $this->assertEquals('WindowsAzure.gif', $result->Name);
-            
-            // Get blob
-            $fileName = tempnam('', 'tst');
-            $storageClient->getBlob($containerName, 'WindowsAzure.gif', $fileName);
-    
-            $this->assertTrue(file_exists($fileName));
-            $this->assertEquals(
-                file_get_contents(self::$path . 'WindowsAzure.gif'),
-                file_get_contents($fileName)
-            );
-            
-            // Remove file
-            unlink($fileName);
-            
-            // Blob metadata
-            $storageClient->setBlobMetadata($containerName, 'WindowsAzure.gif', array(
-                'createdby' => 'PHPAzure',
-            ));
-            
-            $metadata = $storageClient->getBlobMetadata($containerName, 'WindowsAzure.gif');
-            $this->assertEquals('PHPAzure', $metadata['createdby']);
-            
-            // List blobs
-            $result = $storageClient->listBlobs($containerName);
-            $this->assertEquals(1, count($result));
-            
-            // Delete blob
-            $storageClient->deleteBlob($containerName, 'WindowsAzure.gif');
-            
-            $result = $storageClient->listBlobs($containerName);
-            $this->assertEquals(0, count($result));
-        }
+        $containerName = '$root';
+        $storageClient = $this->createStorageInstance();
+        $result = $storageClient->createContainer($containerName);
+        $this->assertEquals($containerName, $result->Name);
+
+        // ACL
+        $storageClient->setContainerAcl($containerName, Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC);
+        $acl = $storageClient->getContainerAcl($containerName);
+
+        $this->assertEquals(Zend_Service_WindowsAzure_Storage_Blob::ACL_PUBLIC, $acl);
+
+        // Metadata
+        $storageClient->setContainerMetadata($containerName, array(
+            'createdby' => 'PHPAzure',
+        ));
+
+        $metadata = $storageClient->getContainerMetadata($containerName);
+        $this->assertEquals('PHPAzure', $metadata['createdby']);
+
+        // List
+        $result = $storageClient->listContainers();
+        $this->assertEquals(1, count($result));
+
+        // Put blob
+        $result = $storageClient->putBlob($containerName, 'WindowsAzure.gif', self::$path . 'WindowsAzure.gif');
+
+        $this->assertEquals($containerName, $result->Container);
+        $this->assertEquals('WindowsAzure.gif', $result->Name);
+
+        // Get blob
+        $fileName = tempnam('', 'tst');
+        $storageClient->getBlob($containerName, 'WindowsAzure.gif', $fileName);
+
+        $this->assertTrue(file_exists($fileName));
+        $this->assertEquals(
+            file_get_contents(self::$path . 'WindowsAzure.gif'),
+            file_get_contents($fileName)
+        );
+
+        // Remove file
+        unlink($fileName);
+
+        // Blob metadata
+        $storageClient->setBlobMetadata($containerName, 'WindowsAzure.gif', array(
+            'createdby' => 'PHPAzure',
+        ));
+
+        $metadata = $storageClient->getBlobMetadata($containerName, 'WindowsAzure.gif');
+        $this->assertEquals('PHPAzure', $metadata['createdby']);
+
+        // List blobs
+        $result = $storageClient->listBlobs($containerName);
+        $this->assertEquals(1, count($result));
+
+        // Delete blob
+        $storageClient->deleteBlob($containerName, 'WindowsAzure.gif');
+
+        $result = $storageClient->listBlobs($containerName);
+        $this->assertEquals(0, count($result));
     }
-    
+
     /**
      * Create large file
-     * 
+     *
      * @return string Filename
      */
     private function _createLargeFile()
@@ -490,7 +463,7 @@ class Zend_Service_WindowsAzure_BlobStorageTest extends PHPUnit_Framework_TestCa
         for ($i = 0; $i < Zend_Service_WindowsAzure_Storage_Blob::MAX_BLOB_SIZE / 1024; $i++)
         {
             fwrite($fp,
-            	'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' .
+                'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' .
                 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' .
                 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' .
                 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' .

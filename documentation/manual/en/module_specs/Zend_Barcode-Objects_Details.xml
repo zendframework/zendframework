@@ -570,7 +570,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> Planet
+                    <emphasis>Name:</emphasis> Planet (PostaL Alpha Numeric Encoding Technique)
                 </para>
             </listitem>
 
@@ -609,7 +609,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> Postnet
+                    <emphasis>Name:</emphasis> Postnet (POSTal Numeric Encoding Technique)
                 </para>
             </listitem>
 
@@ -628,6 +628,45 @@
             <listitem>
                 <para>
                     <emphasis>Length:</emphasis> 6, 7, 10 or 12 characters (including checksum)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            There are no particular options for this barcode.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.barcode.objects.details.royalmail">
+        <title>Zend_Barcode_Object_Royalmail</title>
+
+        <para>
+            <inlinegraphic width="155" align="center" valign="middle"
+                fileref="figures/zend.barcode.objects.details.royalmail.png" format="PNG"/>
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Name:</emphasis> Royal Mail or RM4SCC (Royal Mail 4-State Customer Code)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Allowed characters:</emphasis> '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Checksum:</emphasis> mandatory
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>Length:</emphasis> variable
                 </para>
             </listitem>
         </itemizedlist>

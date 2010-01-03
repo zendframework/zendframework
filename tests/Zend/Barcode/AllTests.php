@@ -55,6 +55,8 @@ require_once 'Zend/Barcode/Object/UpceTest.php';
 require_once 'Zend/Barcode/Object/PostnetTest.php';
 require_once 'Zend/Barcode/Object/PlanetTest.php';
 
+require_once 'Zend/Barcode/Object/RoyalmailTest.php';
+
 require_once 'Zend/Barcode/Object/ErrorTest.php';
 
 require_once 'Zend/Barcode/Renderer/ImageTest.php';
@@ -98,6 +100,8 @@ class Zend_Barcode_AllTests
 
         $suite->addTestSuite('Zend_Barcode_Object_PostnetTest');
         $suite->addTestSuite('Zend_Barcode_Object_PlanetTest');
+
+        $suite->addTestSuite('Zend_Barcode_Object_RoyalmailTest');
 
         $suite->addTestSuite('Zend_Barcode_Renderer_ImageTest');
         $suite->addTestSuite('Zend_Barcode_Renderer_PdfTest');

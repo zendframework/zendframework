@@ -52,7 +52,7 @@
 
         <para>
             Alle drei Methoden akzeptieren auch ein Array von Email Adressen das hinzugefügt werden
-            kann, statt jeweils nur einer einzelnen.  Im Fall von <methodname>addTo()</methodname>
+            kann, statt jeweils nur einer einzelnen. Im Fall von <methodname>addTo()</methodname>
             und <methodname>addCc()</methodname>, kann dies ein assoziatives Array sein, wobei der
             Schlüssel ein menschlich lesbarer Name für den Empfänger ist.
         </para>

@@ -1301,7 +1301,7 @@ $labels = $categories->getValues();
                         <entry>Podcast</entry>
 
                         <entry>
-                            Implementiert Unterstützung fpr das Podcast 1.0 <acronym>DTD</acronym>
+                            Implementiert Unterstützung für das Podcast 1.0 <constant>DTD</constant>
                             von Apple
                         </entry>
                     </row>

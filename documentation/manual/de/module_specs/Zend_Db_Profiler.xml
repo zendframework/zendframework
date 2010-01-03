@@ -105,7 +105,8 @@ db.profiler.enabled = true
 ]]></programlisting>
 
         <para>
-            Diese Konfiguration kann durch den folgenden PHP Code angesprochen werden:
+            Diese Konfiguration kann durch den folgenden <acronym>PHP</acronym> Code angesprochen
+            werden:
         </para>
 
         <programlisting language="php"><![CDATA[

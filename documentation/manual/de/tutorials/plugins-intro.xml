@@ -36,7 +36,7 @@
             <para>
                 Alles nach dem gemeinsamen Präfix wird als <emphasis>Name des Plugins</emphasis>
                 oder <emphasis>Kurzname</emphasis> angenommen (gegenüber dem "langen Namen" welcher
-                der komplette Klassenname ist).  Wenn der Plugin Präfix zum Beispiel
+                der komplette Klassenname ist). Wenn der Plugin Präfix zum Beispiel
                 "<classname>Foo_View_Helper_</classname>" ist, und der Klassenname
                 "<classname>Foo_View_Helper_Bar</classname>", dann wird der Name des Plugins einfach
                 "<classname>Bar</classname>" sein.

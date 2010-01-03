@@ -1486,7 +1486,7 @@ class Bugs extends Zend_Db_Table_Abstract
     // ...
 }
 
-// Jede Instanz von Bugs verwenden nur den Standardmäßigen Cache fpr die Metadaten
+// Jede Instanz von Bugs verwenden nur den Standardmäßigen Cache für die Metadaten
 $bugs = new Bugs();
 ]]></programlisting>
 

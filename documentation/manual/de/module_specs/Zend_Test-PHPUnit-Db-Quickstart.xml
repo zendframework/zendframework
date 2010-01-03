@@ -260,7 +260,7 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
             Wir haben hier ein Datenset
             <classname>Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet</classname> erstellt, welches
             irgendweine Instanz von <classname>Zend_Db_Table_Abstract</classname> nimmt, und diese
-            im Datenset mit Ihrem Tabellennamen hinzufügt, in diesem Beispiel "zfbugs".  Man könnte
+            im Datenset mit Ihrem Tabellennamen hinzufügt, in diesem Beispiel "zfbugs". Man könnte
             mehrere Tabellen hinzufügen, indem die Methode <methodname>addTable()</methodname>
             verwendet wird, wenn man auf erwartete Datenbank Stati in mehr als einer Tabelle prüfen
             will.

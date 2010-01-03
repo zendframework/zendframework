@@ -2133,7 +2133,7 @@ echo $this->navigation()
 
         <para>
             Der Navigation Helfer ist ein Proxy Helfer der Aufrufe zu anderen Navigations Helfern
-            durchführt. Er kann als Einstiegspunkt fpr alle navigations-basierenden View Tasks
+            durchführt. Er kann als Einstiegspunkt für alle navigations-basierenden View Tasks
             verwendet werden. Die vorher erwähnten Navigations Helfer sind im Namespace
             <classname>Zend_View_Helper_Navigation</classname> und würden es deshalb benötigen, den
             Pfad <code>Zend/View/Helper/Navigation</code> als Helfer Pfad der View hinzuzufügen. Mit

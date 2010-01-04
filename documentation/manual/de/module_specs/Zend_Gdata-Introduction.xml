@@ -130,7 +130,7 @@
                         Getter und Setter wie <methodname>setUpdatedMin()</methodname>,
                         <methodname>setStartIndex()</methodname>, und
                         <methodname>getPublishedMin()</methodname>. Die Abfrage Klassen haben auch
-                        eine Methode um eine <acronym>URL</acronym> zu erhalten die die erstellte
+                        eine Methode um eine <acronym>URL</acronym> zu erhalten welche die erstellte
                         Abfrage repräsentieren. -- <code>getQueryUrl</code>. Alternativ kann man die
                         Abfrage String Komponente der <acronym>URL</acronym> erhalten indem die
                         <methodname>getQueryString()</methodname> Methode verwendet wird.

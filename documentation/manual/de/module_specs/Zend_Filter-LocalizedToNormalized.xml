@@ -72,7 +72,7 @@
         <para>
             Man sollte beachten das normalisierte Ausgabe immer als String angegeben sind.
             Andernfalls würde die eigene Umgebung die normalisierte Ausgabe automatisch in die
-            Schreibweise konvertieren die die eigene Umgebung anhand des gesetzen Gebietsschemas
+            Schreibweise konvertieren welche die eigene Umgebung anhand des gesetzen Gebietsschemas
             aktuell verwendet.
         </para>
     </note>

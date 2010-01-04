@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20057 -->
+<!-- EN-Revision: 20077 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.cachemanager">
     <title>Zend_Application_Resource_Cachemanager</title>
@@ -23,10 +23,10 @@
         <para>
             Anbei ist eine Beispiel <acronym>INI</acronym> Datei die zeigt wie
             <classname>Zend_Cache_Manager</classname> konfiguriert werden kann. Das Format ist der
-            Präfix der Cachemanager Ressource (resources.cachemanager) gefolgt von dem Namen der
-            einer Cache Template/Bündel Option zugeordnet werden soll (z.B.
-            resources.cachemanager.database) und letztendlich gefolgt von einer typischen
-            <classname>Zend_Cache</classname> Option.
+            Präfix der Cachemanager Ressource (<property>resources.cachemanager</property>) gefolgt
+            von dem Namen der einer Cache Template/Bündel Option zugeordnet werden soll (z.B.
+            <property>resources.cachemanager.database</property>) und letztendlich gefolgt von einer
+            typischen <classname>Zend_Cache</classname> Option.
         </para>
 
         <programlisting language="ini"><![CDATA[
@@ -40,7 +40,7 @@ resources.cachemanager.database.backend.options.cache_dir = "/path/to/cache"
         <para>
             Das Empfangen dieses Caches vom Cache Manager ist in Wirklichkeit so einfach wie
             der Zugriff auf eine Instanz des Managers und dem Aufruf von
-            <methodname>$cacheManager->getCache('database');</methodname>.
+            <command>$cacheManager->getCache('database');</command>.
         </para>
     </example>
 </sect2>

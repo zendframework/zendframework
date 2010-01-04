@@ -459,7 +459,7 @@ $container->setPages($pages);
             Das Löschen von Seiten kann mit <methodname>removePage()</methodname> oder
             <methodname>removePages()</methodname> durchgeführt werden. Die ersten Methode
             akzeptiert eine Instanz einer Seite, oder ein Integer. Der Integer korrespondiert mit
-            der <code>order</code> die die Seite hat. Die letztere Methode entfernt alle Seiten
+            der <code>order</code> welche die Seite hat. Die letztere Methode entfernt alle Seiten
             vom Container.
         </para>
 

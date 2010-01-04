@@ -249,7 +249,7 @@ Zend_Session::setOptions($config->toArray());
                     "headers already sent" zu beheben, nicht ausreichend. Die Anwendung darf die
                     Buffergröße nicht überschreiten, andernfalls wird das Problem von Zeit zu Zeit
                     wieder auftreten, wann auch immer eine Ausgabe gesendet wird (vor den
-                    <acronym>HTTP</acronym> Headern) die die Puffergröße überschreitet.
+                    <acronym>HTTP</acronym> Headern) welche die Puffergröße überschreitet.
                 </para>
             </listitem>
             <listitem>

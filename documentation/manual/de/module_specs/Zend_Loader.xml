@@ -95,7 +95,7 @@ Zend_Loader::loadClass('Container_Tree',
         </example>
 
         <para>
-            Die Zeichenkette die die Klasse definiert, wird in einen relativen Pfad
+            Die Zeichenkette welche die Klasse definiert, wird in einen relativen Pfad
             umgewandelt durch die Annahme das Verzeichnisse für das OS mit Unterstrichen
             getrennt werden und anfügen von '.php'. Im obigen Beispiel wird für Windows
             'Container_Tree' zu 'Container\\Tree.php'.

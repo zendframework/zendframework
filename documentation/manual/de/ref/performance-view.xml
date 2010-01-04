@@ -271,11 +271,11 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
             <title>Helfer bevorzugen die das Modell vor action() abfragen</title>
 
             <para>
-                In den meisten Fällen ist die Verwendung von <methodname>action()</methodname> einfach nur
-                Overkill. Wenn man die meiste Businesslogik in eigenen Modellen verschachtelt hat
-                das Modell einfach abfragt und die Ergebnisse an das View Skript übergibt, ist es
-                typischerweise schneller und sauberer einfach einen View Helfer zu schreiben der
-                das Modell holt, es abfragt und mit der Information irgendwas macht.
+                In den meisten Fällen ist die Verwendung von <methodname>action()</methodname>
+                einfach nur Overkill. Wenn man die meiste Businesslogik in eigenen Modellen
+                verschachtelt hat das Modell einfach abfragt und die Ergebnisse an das View Skript
+                übergibt, ist es typischerweise schneller und sauberer einfach einen View Helfer zu
+                schreiben der das Modell holt, es abfragt und mit der Information irgendwas macht.
             </para>
 
             <para>

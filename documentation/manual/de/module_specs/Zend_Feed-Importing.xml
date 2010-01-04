@@ -95,7 +95,7 @@ array(
     'copyright' => 'Copyright Notiz',
     'image'     => 'URL zu Bildern',
     'generator' => 'Ersteller',
-    'language'  => 'Sprache in der der Feed geschrieben ist',
+    'language'  => 'Sprache in welcher der Feed geschrieben ist',
 
     // optional, ignoriert wenn Atom verwendet wird
     'ttl'    => 'Wie lange ein Feed gecached werden kann '

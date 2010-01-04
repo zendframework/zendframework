@@ -121,7 +121,7 @@ $validators = array(
         <para>
             Jeder Schlüssel im obigen <varname>$filters</varname> Array ist der Name einer Regel die
             auf einen Filter für ein spezielles Datenfeld angewendet wird. Standardmäßig, ist der
-            Name der Regel auch der Name des Feldes der Eingabedaten auf die die Regel angewendet
+            Name der Regel auch der Name des Feldes der Eingabedaten auf welche die Regel angewendet
             werden soll.
         </para>
 
@@ -813,7 +813,7 @@ $chain->addValidator(new Zend_Validate_Digits(), true);
 $chain->addValidator(new Zend_Validate_Between(1,12), false);
 $chain->addValidator(new Zend_Validate_GreaterThan(0), true);
 
-// Prüfregeln deklarieren die die oben definierte Kette verwenden
+// Prüfregeln deklarieren welche die oben definierte Kette verwenden
 $validators = array(
     'month' => $chain
 );

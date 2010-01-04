@@ -481,7 +481,7 @@ $translate = new Zend_Translate(
 
             <note>
                 <para>
-                    Das funktioniert nur für Adapter die die Sprache nicht in der Quelldatei
+                    Das funktioniert nur für Adapter welche die Sprache nicht in der Quelldatei
                     enthalten. Die Verwendung dieser Option wird zum Beispiel mit TMX ignoriert.
                     Sprachdefinitionen im Dateinamen werden bei der Verwendung dieser Option
                     ignoriert.
@@ -715,7 +715,7 @@ $translate->translate('unbekannter String');
                 Man sollte beachten das jede Übersetzung die nicht gefunden wird mitgeloggt wird.
                 Das bedeutet alle Übersetzungen wenn ein Benutzer eine nicht unterstützte Sprache
                 anfragt. Aber auch jede Anfrage für eine Nachricht die nicht übersetzt werden kann
-                wird mitgeloggt. Es ist zu beachten das, 100 Personen die die gleiche Übersetzung
+                wird mitgeloggt. Es ist zu beachten das, 100 Personen welche die gleiche Übersetzung
                 anfragen, auch zu 100 geloggten Notizen führen.
             </para>
         </note>

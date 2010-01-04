@@ -27,7 +27,7 @@
 
         <para>
             Akismet erfordert dass alle Anfragen eine <acronym>URL</acronym> zu der
-            Ressource enthalten für die die Daten gefiltert werden. Weil Akismeth's Ursprung
+            Ressource enthalten für welche die Daten gefiltert werden. Weil Akismeth's Ursprung
             Wordpress ist, wird diese Ressource die Blog <acronym>URL</acronym> genannt. Dieser Wert
             sollte als zweites Argument an den Konstruktor übergeben werden; aber er kann zu jeder
             Zeit resetiert werden in dem der <methodname>setBlogUrl()</methodname> Methode verwendet
@@ -135,13 +135,14 @@ if ($akismet->verifyKey($apiKey) {
 
             <listitem>
                 <para>
-                    <code>comment_author</code>, der Name der Person die die Daten überträgt.
+                    <code>comment_author</code>, der Name der Person welche die Daten überträgt.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>comment_author_email</code>, die Email der Person die die Daten überträgt.
+                    <code>comment_author_email</code>, die Email der Person welche die Daten
+                    überträgt.
                 </para>
             </listitem>
 

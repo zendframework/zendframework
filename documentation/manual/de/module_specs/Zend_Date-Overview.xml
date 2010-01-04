@@ -311,7 +311,8 @@ print $date;
                     <tbody>
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Unix_Time">Zeitpunkt</ulink>
+                                <ulink
+                                    url="http://en.wikipedia.org/wiki/Unix_Time">Zeitpunkt</ulink>
                             </entry>
                             <entry>
                                 UNIX Zeitpunkt, ausgedrückt in Sekunden die vergangen sind seit dem
@@ -320,13 +321,15 @@ print $date;
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Gregorian_calendar">Jahr</ulink>
+                                <ulink
+                                    url="http://en.wikipedia.org/wiki/Gregorian_calendar">Jahr</ulink>
                             </entry>
                             <entry>Gregorianisches Kalenderjahr (z.B. 2006)</entry>
                         </row>
                         <row>
                             <entry>
-                                <ulink url="http://en.wikipedia.org/wiki/Month#Julian_and_Gregorian_calendars">Monat</ulink>
+                                <ulink
+                                    url="http://en.wikipedia.org/wiki/Month#Julian_and_Gregorian_calendars">Monat</ulink>
                             </entry>
                             <entry>
                                 Gregorianisches Kalendermonat (1-12, Lokalisierte Namen werden
@@ -371,11 +374,11 @@ print $date;
                                 Methoden für das Arbeiten mit Zeiteinheiten die kleiner als Sekunden
                                 sind. Normalerweise verwenden <classname>Zend_Date</classname>
                                 Instanzen eine Genauigkeit welche der von Millisekunden entspricht
-                                wie man durch <methodname>getFractionalPrecision()</methodname> sehen
-                                kann. Um die Genauigkeit zu Ändern kann
-                                <methodname>setFractionalPrecision($precision)</methodname> verwendet
-                                werden. Trotzdem ist die Genauigkeit praktisch auf Millisekunden
-                                begrezt da <classname>Zend_Date</classname> <ulink
+                                wie man durch <methodname>getFractionalPrecision()</methodname>
+                                sehen kann. Um die Genauigkeit zu Ändern kann
+                                <methodname>setFractionalPrecision($precision)</methodname>
+                                verwendet werden. Trotzdem ist die Genauigkeit praktisch auf
+                                Millisekunden begrezt da <classname>Zend_Date</classname> <ulink
                                     url="http://php.net/microtime">microtime()</ulink> dafür
                                 benutzt.
                             </entry>
@@ -603,7 +606,7 @@ print $date;
                                 <para>
                                     Vergleicht den Abschnitt <varname>$part</varname> des Datums
                                     <varname>$date</varname> mit dem Zeitpunkt des Objektes. Gibt 0
-                                    zurück wenn sie gleich sind, 1 wenn wenn der Abschnitt dieses
+                                    zurück wenn sie gleich sind, 1 wenn der Abschnitt dieses
                                     Objektes früher war als der Abschnitt von
                                     <varname>$date</varname> und andernfalls -1.
                                 </para>
@@ -939,11 +942,11 @@ print $date;
                                     null)</methodname></emphasis>
                             </para>
                             <para>
-                                Diese Methode gibt den Abschnitt <varname>$part</varname> vom Datum des
-                                Objektes, welches mit dem Gebietsschema <varname>$locale</varname>
-                                lokalisiert wurde, als formatierten String oder Integer zurück. Für
-                                weitere Informationen hier weiterlesen:
-                                <link linkend="id.date.basic.operations">get()</link>.
+                                Diese Methode gibt den Abschnitt <varname>$part</varname> vom Datum
+                                des Objektes, welches mit dem Gebietsschema
+                                <varname>$locale</varname> lokalisiert wurde, als formatierten
+                                String oder Integer zurück. Für weitere Informationen hier
+                                weiterlesen: <link linkend="id.date.basic.operations">get()</link>.
                             </para>
                         </entry>
                     </row>

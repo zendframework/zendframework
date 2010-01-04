@@ -502,7 +502,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initRequest()
     {
-        // Sicherstellen der der Front Controlle initialisiert wird
+        // Sicherstellen das der Front Controlle initialisiert wird
         $this->bootstrap('FrontController');
 
         // Den Front Controller von der Bootstrap Registry erhalten

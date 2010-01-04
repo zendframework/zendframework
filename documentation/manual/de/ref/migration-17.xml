@@ -376,7 +376,7 @@ $upload->addValidator('Size',
                 einfach wie anbei gezeigt verwendet werden.
             </para>
 
-            <example id="migration.17.zend.locale.example">
+            <example id="migration.17.zend.locale.islocale.example">
                 <title>Wie man isLocale() von 1.6 nach 1.7 ändern muß</title>
 
                 <programlisting language="php"><![CDATA[

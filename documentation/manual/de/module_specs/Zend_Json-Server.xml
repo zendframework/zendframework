@@ -656,7 +656,7 @@ $server->handle();
                 <classname>Zend_Json_Server</classname> führt all das im Hintergrund durch, indem
                 Reflektion auf den hinzugefügten Klassen und Funktionen verwendet wird; man sollte
                 seine eigenen Service Maps erstellen wenn man eigene Funktionalitäten anbieten will
-                die die Introspektion von Klassen und Funktionen nicht bieten kann.
+                welche die Introspektion von Klassen und Funktionen nicht bieten kann.
             </para>
 
             <para>

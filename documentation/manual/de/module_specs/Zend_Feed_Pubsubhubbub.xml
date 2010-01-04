@@ -5,13 +5,13 @@
     <title>Zend_Feed_Pubsubhubbub</title>
 
     <para>
-        <classname>Zend_Feed_Pubsubhubbub</classname> is an implementation of the PubSubHubbub Core
-        0.2 Specification (Working Draft). It offers implementations of a Pubsubhubbub Publisher and
-        Subscriber suited to Zend Framework and other PHP applications.
+        <classname>Zend_Feed_Pubsubhubbub</classname> ist eine Implementation der PubSubHubbub Core
+        0.2 Spezifikation (Working Draft). Sie bietet eine Implementation eines Pubsubhubbub
+        Publishers und Subscribers geeignet für den Zend Framework und andere PHP Anwendungen.
     </para>
 
     <sect2 id="zend.feed.pubsubhubbub.what.is.pubsubhubbub">
-        <title>What is Pubsubhubbub?</title>
+        <title>Was ist Pubsubhubbub?</title>
 
         <para>
             Pubsubhubbub is an open, simple web-scale pubsub protocol. A common use case to enable

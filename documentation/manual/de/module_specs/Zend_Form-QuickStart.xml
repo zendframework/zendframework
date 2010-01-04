@@ -235,8 +235,8 @@ $form->addElement('text', 'username', array(
 ]]></programlisting>
 
         <note><para>
-            Wenn man sieht, dass man Elemente die die gleichen Optionen in vielen Plätzen verwenden,
-            konfiguriert, kann es gewünscht sein, eine eigene
+            Wenn man sieht, dass man Elemente welche die gleichen Optionen in vielen Plätzen
+            verwenden, konfiguriert, kann es gewünscht sein, eine eigene
             <classname>Zend_Form_Element</classname> Unterklasse zu erstellen und diese stattdessen
             anzupassen; das spart viel Tipparbeit im weiteren Verlauf.
         </para></note>

@@ -604,8 +604,8 @@ $form->addDisplayGroup(
                 <title>Setzen des Dekorator Präfix Pfades für alle Anzeigegruppen</title>
 
                 <para>
-                    Standardmäßig erben Anzeigegruppen die Dekorator Pfade die die Form verwendet;
-                    wenn trotzdem in alternativen Orten nachgeschaut werden soll kann die
+                    Standardmäßig erben Anzeigegruppen die Dekorator Pfade welche die Form
+                    verwendet; wenn trotzdem in alternativen Orten nachgeschaut werden soll kann die
                     <methodname>addDisplayGroupPrefixPath()</methodname> Methode verwendet werden.
                 </para>
 

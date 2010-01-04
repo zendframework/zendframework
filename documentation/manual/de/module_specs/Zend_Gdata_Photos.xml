@@ -179,8 +179,8 @@ function getCurrentUrl()
  * Gibt die AuthSub URL zurück welche der Benutzer besuchen muß um Anfrage
  * dieser Anwendung zu authentifizieren
  *
- * Verwendet getCurrentUrl() um die nächste URL zu erhalten zu der der Benutzer
- * weitergeleitet wird nachdem er
+ * Verwendet getCurrentUrl() um die nächste URL zu erhalten zu welcher der
+ * Benutzer weitergeleitet wird nachdem er
  * sich erfolgreich beim Google Service authentifiziert hat.
  *
  * @return string AuthSub URL

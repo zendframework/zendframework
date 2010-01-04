@@ -104,8 +104,8 @@ $ip = $ec2_img->deregister('imageId');
             </para>
             <para>
                 Wenn eine oder mehrere <acronym>AMI</acronym> IDs spezifiziert werden, werden nur
-                die <acronym>AMI</acronym>s zurückgegeben die die spezifizierten IDs besitzen. Wenn
-                man eine ungültige <acronym>AMI</acronym> ID spezifiziert, wird ein Fehler
+                die <acronym>AMI</acronym>s zurückgegeben welche die spezifizierten IDs besitzen.
+                Wenn man eine ungültige <acronym>AMI</acronym> ID spezifiziert, wird ein Fehler
                 zurückgegeben. Wenn man eine <acronym>AMI</acronym> ID spezifiziert für die man
                 keinen Zugriff hat, wird diese nicht in den zurückgegebenen Ergebnissen enthalten
                 sein.

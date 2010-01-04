@@ -435,7 +435,8 @@ $hits  = $index->find($query);
             <programlisting language="querystring"><![CDATA[
 field1:test~
 ]]></programlisting>
-            Diese Abfrage trifft Dokumente die die Wörter 'test' 'text' 'best' und andere enthalten.
+            Diese Abfrage trifft Dokumente welche die Wörter 'test' 'text' 'best' und andere
+            enthalten.
         </para>
 
         <para>oder</para>

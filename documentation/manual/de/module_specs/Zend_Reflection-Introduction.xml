@@ -24,7 +24,7 @@
         </para></listitem>
 
         <listitem><para>
-            DocBlocks mit der Reflection Klasse, die die Begutachtung von DocBlocks erlauben.
+            DocBlocks mit der Reflection Klasse, welche die Begutachtung von DocBlocks erlauben.
             Das bietet die Möglichkeit zu erheben welche Typen definiert wurden, sowie deren
             Werte zu erhalten, und die Möglichkeit die Kurz- und Langbeschreibungen zu empfangen.
         </para></listitem>

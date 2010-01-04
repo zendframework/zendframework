@@ -111,7 +111,7 @@ $autodiscover->handle();
             Wenn man auf die erzeugte WSDL Datei zugreifen muß um Sie in eine Datei oder als
             <acronym>XML</acronym> String abzuspeichern, kann man die Funktionen
             <methodname>dump($filename)</methodname> oder <methodname>toXml()</methodname> verwenden
-            die die AutoDiscovery Klasse anbietet.
+            welche die AutoDiscovery Klasse anbietet.
         </para>
 
         <note id="zend.soap.autodiscovery.introduction.noserver">

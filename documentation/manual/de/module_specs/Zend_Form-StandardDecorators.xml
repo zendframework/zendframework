@@ -229,17 +229,17 @@ class Util
             </para></listitem>
 
             <listitem><para>
-                <code>markupElementLabelEnd</code>: Markup der der Elementüberschrift angehängt
+                <code>markupElementLabelEnd</code>: Markup welcher der Elementüberschrift angehängt
                 wird. Standardwert: '&lt;/b&gt;'
             </para></listitem>
 
             <listitem><para>
-                <code>markupElementLabelStart</code>: Markup der der Elementüberschrift
+                <code>markupElementLabelStart</code>: Markup welcher der Elementüberschrift
                 vorangestellt wird. Standardwert: '&lt;b&gt;'
             </para></listitem>
 
             <listitem><para>
-                <code>markupListEnd</code>: Markup der der Nachrichtenliste angehängt wird.
+                <code>markupListEnd</code>: Markup welcher der Nachrichtenliste angehängt wird.
                 Standardwert: '&lt;/ul&gt;'.
             </para></listitem>
             <listitem><para>
@@ -253,7 +253,7 @@ class Util
             </para></listitem>
 
             <listitem><para>
-                <code>markupListStart</code>: Markup der der Nachrichtenliste vorangestellt wird.
+                <code>markupListStart</code>: Markup welcher der Nachrichtenliste vorangestellt wird.
                 Standardwert: '&lt;ul class="form-errors"&gt;'
             </para></listitem>
         </itemizedlist>

@@ -14,7 +14,7 @@
 
       <para>
         Für einige StrikeIron Services können <acronym>PHP</acronym> Wrapper Klassen vorhanden sein,
-        so wie die die in <link
+        so wie jene die in <link
             linkend="zend.service.strikeiron.bundled-services">Bundled Services</link> beschrieben
         werden. Trotzdem bietet StrikeIron hunderte von Services und viele von diesen können nicht
         verwendbar sein wenn keine spezielle Wrapper Klasse erstellt wird.

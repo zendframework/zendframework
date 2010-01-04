@@ -5,7 +5,7 @@
     <title>Standard Form Elemente die mit dem With Zend Framework ausgeliefert werden</title>
 
     <para>
-        Zend Framework wird mit konkreten Element Klassen ausgeliefert die die meisten HTML
+        Zend Framework wird mit konkreten Element Klassen ausgeliefert welche die meisten HTML
         Form Elemente abdecken. Die meisten spezifizieren einfach einen speziellen View Helfer
         zur Verwendung wenn das Element dekoriert wird, aber einige bieten zusätzliche
         Funktionalitäten an. Nachfolgend ist eine Liste aller solcher Klassen, sowie eine
@@ -464,7 +464,7 @@ $form->addElement($element, 'foo');
 
         <para>
             Dieses Element bietet Schutz vor CSRF Attacken auf Forms, und stellt sicher das die
-            Daten die übertragen werden von der Benutzersession stammen die die Form erstellt hat
+            Daten die übertragen werden von der Benutzersession stammen welche die Form erstellt hat
             und nicht durch ein bösartiges Skript. Sicherheit wird ermöglicht durch das hinzufügen
             eines Hash Elements zur form und dessen Prüfung wenn die Form übermittelt wird.
         </para>
@@ -693,7 +693,7 @@ $element->setValue(array('bar', 'bat'));
         </para>
 
         <para>
-            Wie alle Elemente die die Basisklasse des Mutli Elements erweitern, können die
+            Wie alle Elemente welche die Basisklasse des Multl Elements erweitern, können die
             folgenden Methode verwendet werden um die Radio Optionen zu manipulieren die angezeigt
             werden:
         </para>

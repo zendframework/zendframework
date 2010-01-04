@@ -1074,7 +1074,7 @@ $rows = $table->fetchAll($select);
                 wie auch Count und Offset Integer Werte, verwendet werden können damit die Abfrage
                 ein spezielles Subset von Zeilen zurück gibt. Diese Werte werden in einer
                 <constant>LIMIT</constant> Klausel verwendet oder in einer ähnlichen Logik für
-                <acronym>RDBMS</acronym> Marken die die <constant>LIMIT</constant> Syntax nicht
+                <acronym>RDBMS</acronym> Marken welche die <constant>LIMIT</constant> Syntax nicht
                 unterstützen.
             </para>
 

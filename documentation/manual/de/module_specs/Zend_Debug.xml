@@ -22,7 +22,7 @@ Zend_Debug::dump($var, $label = null, $echo = true);
 
     <para>
         Das <varname>$var</varname> Argument definiert den Ausdruck oder die Variable
-        über die die <methodname>Zend_Debug::dump()</methodname> Methode Informationen ausgeben
+        über welche die <methodname>Zend_Debug::dump()</methodname> Methode Informationen ausgeben
         soll.
     </para>
 

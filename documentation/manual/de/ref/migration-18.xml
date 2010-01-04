@@ -45,7 +45,7 @@
                 <methodname>disableCache()</methodname> Methode abgeschaltet werden.
             </para>
 
-            <example id="migration.18.zend.locale.example">
+            <example id="migration.18.zend.locale.defaultcaching.example">
                 <title>Standardmäßiges Caching abschalten</title>
 
                 <programlisting language="php"><![CDATA[
@@ -55,6 +55,3 @@ Zend_Locale::disableCache(true);
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -794,7 +794,7 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
 
         <para>
             Zusätzlich zur Standardsuite von Ausnahmen die von <classname>Zend_Gdata</classname>
-            geworfen werden, können Anfragen die die Provisionierungs <acronym>API</acronym>
+            geworfen werden, können Anfragen welche die Provisionierungs <acronym>API</acronym>
             verwenden auch eine <classname>Zend_Gdata_Gapps_ServiceException</classname> werfen.
             Diese Ausnahme zeigt das ein <acronym>API</acronym> spezieller Fehler aufgetreten ist
             welche verhindert das die Anfrage fertiggestellt werden kann.

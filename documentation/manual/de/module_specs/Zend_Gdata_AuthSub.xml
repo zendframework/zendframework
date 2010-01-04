@@ -45,7 +45,7 @@
 
         <para>
             Die <acronym>PHP</acronym> Anwendung sollte einen Hyperlink zur Google
-            <acronym>URL</acronym> bieten die die Authentifizierung durchführt. Die statische
+            <acronym>URL</acronym> bieten welche die Authentifizierung durchführt. Die statische
             Funktion <methodname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</methodname> liefert die
             richtige <acronym>URL</acronym>. Die Argumente dieser Funktion inkludieren die
             <acronym>URL</acronym> zur eigenen <acronym>PHP</acronym> Anwendung so das Google den

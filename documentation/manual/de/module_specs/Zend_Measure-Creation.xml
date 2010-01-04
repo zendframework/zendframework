@@ -54,7 +54,7 @@ echo $unit;
             können nur als Zeichenketten den Klassen von <classname>Zend_Measure_*</classname>
             übergeben werden, wie z.B. Zahlen die in <ulink
                 url="http://en.wikipedia.org/wiki/Roman_numerals">Römischer Schreibweise</ulink>
-            geschrieben werden, oder extrem lange Binärwerte die die Genauigkeit von
+            geschrieben werden, oder extrem lange Binärwerte welche die Genauigkeit von
             <acronym>PHP</acronym>'s natürlichen Integer und Floattypen übersteigen würden. Da
             Integer auch als Zeichenketten geschrieben werden können sollten, sobald die Gefahr
             eines Genauigkeitverlustes durch die Limits von <acronym>PHP</acronym>'s Integer und

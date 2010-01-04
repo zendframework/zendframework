@@ -37,10 +37,11 @@
 
         <para>
           Jedes StrikeIron Web Service bietet eine standard <acronym>SOAP</acronym> (und REST)
-          <acronym>API</acronym>, die die Integration und Handhabung mehrerer Services sehr einfach
-          macht. StrikeIron managt auch die Kundenverrechnung für alle Services in einem einzelnen
-          Account, was es für Lösungsanbieter perfekt macht. Man kann mit freien WebServices unter
-          <ulink url="http://www.strikeiron.com/sdp">http://www.strikeiron.com/sdp</ulink> starten.
+          <acronym>API</acronym>, welche die Integration und Handhabung mehrerer Services sehr
+          einfach macht. StrikeIron managt auch die Kundenverrechnung für alle Services in einem
+          einzelnen Account, was es für Lösungsanbieter perfekt macht. Man kann mit freien
+          WebServices unter <ulink
+              url="http://www.strikeiron.com/sdp">http://www.strikeiron.com/sdp</ulink> starten.
         </para>
 
         <para>

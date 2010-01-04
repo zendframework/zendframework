@@ -400,9 +400,9 @@ $books->deleteVolume($entry);
         </para>
 
         <para>
-            The wichtigste Sammlung ist die My Library des Benutzers, die die Bücher repräsentiert
-            die sich der Benutzer merken, organisieren und mit anderen Teilen will. Das ist die
-            Sammlung die der Benutzer sieht wenn er auf seine oder ihre
+            The wichtigste Sammlung ist die My Library des Benutzers, welche die Bücher
+            repräsentiert die sich der Benutzer merken, organisieren und mit anderen Teilen will.
+            Das ist die Sammlung die der Benutzer sieht wenn er auf seine oder ihre
             <ulink url="http://books.google.com/books?op=library">My Library Seite</ulink>
             zugreift.
         </para>

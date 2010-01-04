@@ -261,7 +261,7 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
             <footnote>
                 <para>
                     Zurückgegebenen Ergebnisse werden trotzdem nach dem Treffer geordnet oder
-                    anhand der spezifizierten Reihenfolge, wenn wenn diese angegeben wurde.
+                    anhand der spezifizierten Reihenfolge, wenn diese angegeben wurde.
                 </para>
             </footnote>.
         </para>

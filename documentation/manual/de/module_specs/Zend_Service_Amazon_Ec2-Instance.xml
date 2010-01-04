@@ -413,7 +413,7 @@ $return = $ec2_instance->describe('instanceId');
             <title>Instanzen anhand der Image Id beschreiben</title>
             <para>
                 <code>describeByImageId</code> ist funktional identisch mit <code>describe</code>
-                gibt aber nur die Instanz zurück, die die angegebene imageId verwendet.
+                gibt aber nur die Instanz zurück, welche die angegebene imageId verwendet.
             </para>
             <para>
                 <code>describeByImageId</code>  gibt ein Array zurück das Informationen über die

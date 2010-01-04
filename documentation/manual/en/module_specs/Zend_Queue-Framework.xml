@@ -30,7 +30,7 @@ $options = array(
 
 // Create a database queue.
 // Zend_Queue will prepend Zend_Queue_Adapter_ to 'Db' for the class name.
-$queue = Zend_Queue('Db', $options);
+$queue = new Zend_Queue('Db', $options);
 ]]></programlisting>
 
     <para>

@@ -47,7 +47,7 @@ $options = array(
 );
 
 $adapter = new Custom_DbForUpdate($options);
-$queue = Zend_Queue($adapter, $options);
+$queue = new Zend_Queue($adapter, $options);
 ]]></programlisting>
 
         <para>
@@ -56,7 +56,7 @@ $queue = Zend_Queue($adapter, $options);
 
         <programlisting language="php"><![CDATA[
 $adapter = new MyCustom_Adapter($options);
-$queue   = Zend_Queue($options);
+$queue   = new Zend_Queue($options);
 $queue->setAdapter($adapter);
 echo "Adapter: ", get_class($queue->getAdapter()), "\n";
 ]]></programlisting>
@@ -76,7 +76,7 @@ $options = array(
         'type'       => 'pdo_mysql'
     )
 );
-$queue = Zend_Queue('DbForUpdate', $config); // loads Custom_DbForUpdate
+$queue = new Zend_Queue('DbForUpdate', $config); // loads Custom_DbForUpdate
 ]]></programlisting>
     </sect2>
 

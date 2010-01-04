@@ -2,20 +2,19 @@
 <!-- EN-Revision: 18817 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.wildfire.chapter">
-
     <title>Zend_Wildfire</title>
 
     <para>
-        <classname>Zend_Wildfire</classname> ist eine Komponente welche die Kommunikation zwischen
+        <classname>Zend_Wildfire</classname> ist eine Komponente, welche die Kommunikation zwischen
         <acronym>PHP</acronym> Code und <ulink url="http://www.wildfirehq.org/">Wildfire</ulink>
         Client Komponenten ermöglicht.
     </para>
 
     <para>
-        Der Zweck des Wildfire Projekt ist es standardisierte Kommunikationskanäle zwischen eine
+        Der Zweck des Wildfire Projekts ist es, standardisierte Kommunikationskanäle zwischen einer
         großen Vielzahl von Komponenten und eine dynamische und skriptfähige Plugin Architektur zu
-        entwickeln. Aktuell ist der primäre Fokus ein System anzubieten das es serverseitigem
-        <acronym>PHP</acronym> Code zu erlauben Loggingnachrichten in die
+        entwickeln. Aktuell ist der primäre Fokus ein System anzubieten, welches es serverseitigem
+        <acronym>PHP</acronym> Code erlaubt, Loggingnachrichten in die
         <ulink url="http://www.getfirebug.com/">Firebug Console</ulink> zu übertragen.
     </para>
 
@@ -24,20 +23,16 @@
             linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
         wird für den Zweck des Loggens in Firebug angeboten und es wurde ein Kommunikationsprotokoll
         entwickelt das <acronym>HTTP</acronym> Requests und Response Header verwendet um Daten
-        zwischen dem Server und der Client Komponenten zu Senden. Es ist gut für das Loggen von
-        intelligenten Daten zum Browser, die wärend der Skriptausführung erstellt wurden, ohne das
-        auf den Seiteninhalt eingegriffen wird. Mit diesem Vorgehen ist es möglich
-        <acronym>AJAX</acronym> Anfragen zu debuggen die klare <acronym>JSON</acronym> und
+        zwischen Server und Client Komponenten auszutauschen. Es eignet sich hervorragend um
+        geloggte, intelligente Daten, die wärend der Skriptausführung erstellt wurden, zum Browser
+        zu senden, ohne das in den Seiteninhalt eingegriffen wird. Mit diesem Vorgehen ist es
+        möglich, <acronym>AJAX</acronym> Anfragen zu debuggen, die klare <acronym>JSON</acronym> und
         <acronym>XML</acronym> Antworten benötigen.
     </para>
 
     <para>
         Es gibt auch eine <link
             linkend="zend.db.profiler.profilers.firebug"><classname>Zend_Db_Profiler_Firebug</classname></link>
-        Komponente um Datenbank Profilinginformationen in Firebug zu loggen.
+        Komponente, um Datenbank Profilinginformationen in Firebug zu loggen.
     </para>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

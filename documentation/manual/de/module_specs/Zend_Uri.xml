@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 18840 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 18840 -->
 <sect1 id="zend.uri.chapter">
     <title>Zend_Uri</title>
 
@@ -39,7 +39,7 @@
             <title>Erstellen einer neuen URI mit Zend_Uri::factory()</title>
 
             <programlisting language="php"><![CDATA[
-// Um eine neue URI von Grund auf zu erstellen, übergebe nur das Schema.
+// Um eine neue URI von Grund auf zu erstellen, übergebe nur das Schema
 $uri = Zend_Uri::factory('http');
 
 // $uri instanceof Zend_Uri_Http
@@ -49,9 +49,10 @@ $uri = Zend_Uri::factory('http');
         <para>
             Um eine neue <acronym>URI</acronym> von Grund auf zu erstellen, übergibt man nur das
             Schema an <methodname>Zend_Uri::factory()</methodname><footnote><para>Zum Zeitpunkt des
-            Schreiben unterstützt <classname>Zend_Uri</classname> nur <acronym>HTTP</acronym> und
-            <acronym>HTTPS</acronym> Schemata</para></footnote>. Wenn eine nicht unterstütztes
-            Schema übergeben wird, wird eine <classname>Zend_Uri_Exception</classname> ausgeworfen.
+            Schreibens unterstützt <classname>Zend_Uri</classname> nur die Schemata
+            <acronym>HTTP</acronym> und <acronym>HTTPS</acronym></para></footnote>. Wenn eine nicht
+            unterstütztes Schema übergeben wird, wird eine <classname>Zend_Uri_Exception</classname>
+            ausgeworfen.
         </para>
 
         <para>
@@ -65,7 +66,7 @@ $uri = Zend_Uri::factory('http');
         <title>Verändern einer vorhandenen URI</title>
 
         <para>
-            Um eine vorhandene <acronym>URI</acronym> zu verändern, übergibt man die komplett
+            Um eine vorhandene <acronym>URI</acronym> zu verändern, übergibt man die komplette
             <acronym>URI</acronym> an <methodname>Zend_Uri::factory()</methodname>.
         </para>
 
@@ -73,7 +74,7 @@ $uri = Zend_Uri::factory('http');
             <title>Verändern einer vorhandenen URI mit Zend_Uri::factory()</title>
 
             <programlisting language="php"><![CDATA[
-// Um eine vorhandene URI zu verändern, übergibt man sie.
+// Um eine vorhandene URI zu verändern, übergibt man diese
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 // $uri instanceof Zend_Uri_Http
@@ -100,7 +101,7 @@ $uri = Zend_Uri::factory('http://www.zend.com');
             <title>URI Validierung mit Zend_Uri::check()</title>
 
             <programlisting language="php"><![CDATA[
-// Überprüfe, ob eine übergebe URI wohlgeformt ist
+// Überprüfe, ob eine übergebene URI wohlgeformt ist
 $valid = Zend_Uri::check('http://uri.in.question');
 
 // $valid ist TRUE für eine valide URI, andernfalls FALSE
@@ -114,13 +115,14 @@ $valid = Zend_Uri::check('http://uri.in.question');
                 Standardmäßig wird <classname>Zend_Uri</classname> die folgenden Zeichen nicht
                 akzepzieren: <code>"{", "}", "|", "\", "^", "`"</code>. Diese Zeichen sind durch die
                 <acronym>RFC</acronym> als "unwise" definiert und deshalb ungültig; trotzdem,
-                akzeptieren viele Implementierungen diese Zeichen als Gültig.
+                akzeptieren viele Implementierungen diese Zeichen als gültig.
             </para>
 
             <para>
-                <classname>Zend_Uri</classname> kann so eingestellt werden das es diese "unwise"
-                Zeichen akzeptiert indem die 'allow_unwise' Option auf ein boolsches TRUE gesetzt
-                wird, durch Verwendung von <methodname>Zend_Uri::setConfig()</methodname>:
+                <classname>Zend_Uri</classname> kann so eingestellt werden, dass es diese "unwise"
+                Zeichen akzeptiert. Hierzu muss die Option 'allow_unwise' Option durch Verwendung
+                von <methodname>Zend_Uri::setConfig()</methodname> auf ein boolsches TRUE gesetzt
+                werden:
             </para>
 
             <example id="zend.uri.validation.allowunwise.example-1">
@@ -156,7 +158,7 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
         <title>Allgemeine Instanzmethoden</title>
 
         <para>
-            Jede Instant einer <classname>Zend_Uri</classname> Unterklasse (z.B.
+            Jede Instanz einer <classname>Zend_Uri</classname> Unterklasse (z.B.
             <classname>Zend_Uri_Http</classname>) hat verschiedene Instanzmethoden, die für die
             Verwendung mit jeglicher <acronym>URI</acronym> nützlich sind.
         </para>
@@ -211,7 +213,7 @@ echo $uri->getUri();  // "http://www.zend.com"
             <para>
                 <methodname>Zend_Uri::factory()</methodname> validiert immer jede übergebene
                 <acronym>URI</acronym> und wird keine <classname>Zend_Uri</classname> Unterklasse
-                instantieren, wenn die übergebene <acronym>URI</acronym> ungültig ist. Dennoch ist
+                instanzieren, wenn die übergebene <acronym>URI</acronym> ungültig ist. Dennoch ist
                 es nach der Instanzierung der <classname>Zend_Uri</classname> Unterklasse für eine
                 neue oder eine bestehende <acronym>URI</acronym> möglich, dass die
                 <acronym>URI</acronym> später ungültig wird, nachdem sie verändert worden ist.
@@ -234,6 +236,3 @@ $isValid = $uri->valid();  // TRUE
         </sect3>
   </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

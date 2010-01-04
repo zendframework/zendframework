@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 17227 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 17227 -->
 <sect1 id="zend.tag.cloud">
-
     <title>Zend_Tag_Cloud</title>
 
     <para>
@@ -30,6 +29,7 @@
                 wird.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>tagDecorator</code>: definiert den Dekorator für individuelle Tags. Das kann
@@ -40,12 +40,14 @@
                 wird.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>pluginLoader</code>: ein anderer Plugin Loader der zu verwenden ist. Muß eine
                 Instanz von <classname>Zend_Loader_PluginLoader_Interface</classname> sein.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>prefixPath</code>: Präfix Pfade die dem Plugin Loader hinzugefügt werden.
@@ -54,12 +56,14 @@
                 werden übersprungen.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>pluginLoader</code>: ein anderer Plugin Loader der verwendet wird. Muß eine
                 Instanz von <classname>Zend_Loader_PluginLoader_Interface</classname> sein.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>prefixPath</code>: Präfix Pfad der dem Plugin Loader hinzugefügt wird. Muß
@@ -68,12 +72,14 @@
                 übersprungen.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>itemList</code>: eine andere Liste von Elementen die verwendet wird. Muß
                 eine Instanz von <classname>Zend_Tag_ItemList</classname> sein.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>tags</code>: eine Liste von Tags die der Wolke zugeordnet werden. Jedes Tag
@@ -85,13 +91,13 @@
     </itemizedlist>
 
     <example id="zend.tag.cloud.example.using">
-
         <title>Verwenden von Zend_Tag_Cloud</title>
 
         <para>
-            Dieses Beispiel zeigt ein grundsätzliches Beispiel davon wie eine Tag Wolke erstellt
-            wird, und Ihr mehrere Tags hinzugefügt, und Sie letztendlich dargestellt wird.
+            Dieses Beispiel zeigt ein grundsätzliches Beispiel davon, wie eine Tag Wolke erstellt,
+            Ihr mehrere Tags hinzugefügt, und Sie letztendlich dargestellt wird.
         </para>
+
         <programlisting language="php"><![CDATA[
 // Die Wolke erstellen und Ihr statische Tags zuordnen
 $cloud = new Zend_Tag_Cloud(array(
@@ -105,9 +111,10 @@ $cloud = new Zend_Tag_Cloud(array(
     )
 ));
 
-// Die Woke darstellen
+// Die Wolke darstellen
 echo $cloud;
 ]]></programlisting>
+
         <para>
             Das gibt die Tag Wolke mit drei Tags aus, welche mit den standardmäßigen Schriftgrößen
             ausgebreitet wird.
@@ -115,7 +122,6 @@ echo $cloud;
     </example>
 
     <sect2 id="zend.tag.cloud.decorators">
-
         <title>Dekoratore</title>
 
         <para>
@@ -125,21 +131,21 @@ echo $cloud;
             <classname>Zend_Tag_Cloud</classname> liefert ein standardmäßiges Set von Dekoratoren
             für die Formatierung einer Tag Wolke in HTML. Dieses Set wird eine Tag Wolke
             standardmäßig als ul/li-Liste darstellen, und diese mit unterschiedlichen
-            Schriftgrößen, abhängig vom Gewicht der Werte Ihrer zugeordneten Tags, dargestellt.
+            Schriftgrößen, abhängig vom Gewicht der Werte Ihrer zugeordneten Tags, versehen.
         </para>
 
         <sect3 id="zend.tag.cloud.decorators.htmltag">
-
             <title>Der HTML Tag Dekorator</title>
 
             <para>
                 Der HTML Tag Dekorator stellt standardmäßig jedes Tag in einem Anker Element dar,
                 umgeben von einem li Element. Der Anker selbst ist fixiert und kann nicht geändert
-                werden, aber die umgebenden Elemente können geändert werden.
+                werden; die umgebenden Elemente können hingegen geändert werden.
             </para>
 
             <note>
                 <title>URL Parameter</title>
+
                 <para>
                     Da der HTML Tag Dekorator immer den Titel des Tags mit einem Anker umgibt,
                     sollte man einen <acronym>URL</acronym> Parameter, für jedes in Ihm verwendete
@@ -162,38 +168,41 @@ echo $cloud;
                         em, ex, px, in, cm, mm, pt, pc und &#37;.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <code>minFontSize</code>: die minimale Schriftgröße die an die Tags
-                        verteilt wird (muß ein Integer sein).
+                        <code>minFontSize</code>: definiert die minimale Schriftgröße der Tags (muß
+                        ein Integer sein).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <code>maxFontSize</code>: die maximale Schriftgröße die an die Tags
-                        verteilt wird (muß ein Integer sein).
+                        <code>maxFontSize</code>: definiert die maximale Schriftgröße der Tags (muß
+                        ein Integer sein).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <code>classList</code>: ein Array von Klassen die an die Tags verteilt
+                        <code>classList</code>: ein Array von Klassen die an die Tags vergeben
                         werden soll.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <code>htmlTags</code>: ein Array von HTML Tags die den Anker umgeben.
                         Jedes Element kann entweder ein String sein, welches als Elementtyp
                         verwendet wird, oder ein Array das eine Liste von Attributen für das
                         Element enthält, welches wiederum als Schlüssel/Werte Paar definiert ist.
-                        In diesem Fall, wird der Array Schlüssel als Elementtyp verwendet.
+                        In diesem Fall wird der Array Schlüssel als Elementtyp verwendet.
                     </para>
                 </listitem>
             </itemizedlist>
         </sect3>
 
         <sect3 id="zend.tag.cloud.decorators.htmlcloud">
-
             <title>HTML Cloud Dekorator</title>
 
             <para>
@@ -210,9 +219,10 @@ echo $cloud;
                         Tags platziert wird.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <code>htmlTags</code>: ein Array von HTML Tags welche alle Tags umgeben.
+                        <code>htmlTags</code>: ein Array von HTML Tags, welche alle Tags umgeben.
                         Jedes Element kann entweder ein String sein, welches als Elementtyp
                         verwendet wird, oder ein Array das eine Liste von Attributen für das
                         Element enthält, und als Schlüssel/Werte Paar definiert ist. In diesem
@@ -221,7 +231,5 @@ echo $cloud;
                 </listitem>
             </itemizedlist>
         </sect3>
-
     </sect2>
-
 </sect1>

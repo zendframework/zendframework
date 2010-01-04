@@ -112,8 +112,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     <para>
         Ressource Plugins implementieren
-        <classname>Zend_Application_Resource_ResourceAbstract</classname>, welche einfach definieren,
-        dass sie Injektion des Aufrufers und von Optionen erlauben, und die eine
+        <classname>Zend_Application_Resource_ResourceAbstract</classname>, welche einfach
+        definieren, dass sie Injektion des Aufrufers und von Optionen erlauben, und die eine
         <methodname>init()</methodname> Methode haben. Als Beispiel, könnte eine eigene "View"
         Bootstrap Ressource wie folgt aussehen:
     </para>
@@ -151,8 +151,8 @@ class My_Bootstrap_Resource_View
 
     <para>
         Um der Bootstrap zu sagen, dass sie das verwenden soll, würde man entweder den Klassennamen
-        des Ressource Plugins übergeben müssen, oder eine Kombination eines Plugin Loader Präfixpfades
-        und den Kurznamen des Ressource Plugins (z.B. "view"):
+        des Ressource Plugins übergeben müssen, oder eine Kombination eines Plugin Loader
+        Präfixpfades und den Kurznamen des Ressource Plugins (z.B. "view"):
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -160,8 +160,8 @@ $application = new Zend_Application(
     APPLICATION_ENV,
     array(
         'resources' => array(
-            'My_Bootstrap_Resource_View' => array(), // kompletter Klassenname; ODER
-            'view',                                  // Kurzname
+            'My_Bootstrap_Resource_View' => array(), // kompletter Klassenname
+            'view',                                  // ODER Kurzname
 
             'FrontController' => array(
                 'controllerDirectory' => APPLICATION_PATH . '/controllers',

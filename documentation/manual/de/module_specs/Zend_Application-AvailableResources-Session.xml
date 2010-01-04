@@ -12,7 +12,7 @@
 
     <para>
         Um einen Session Save Handler zu setzen, muß einfach der Optionsschlüssel
-        <property>saveHandler</property> (Groß-/Kleinschreibung beachten) an die Ressource
+        <property>saveHandler</property> (Groß- und Kleinschreibung beachten) an die Ressource
         übergeben werden. Der Wert dieser Option kann einer der folgenden sein:
     </para>
 

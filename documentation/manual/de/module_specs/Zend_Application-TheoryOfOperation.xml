@@ -512,7 +512,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $request->setBaseUrl('/foo');
         $front->setRequest($request);
 
-        // Sicherstellen das die Anfrage in der Bootstrap Registry gespeichert ist
+        // Sicherstellen das die Anfrage in der Bootstrap Registry
+        // gespeichert ist
         return $request;
     }
 }
@@ -575,7 +576,8 @@ class My_Resource_View extends Zend_Application_Resource_ResourceAbstract
 
     public function init()
     {
-        // Die View zurückgeben damit die Bootstrap Sie in der Registry speichert
+        // Die View zurückgeben damit die Bootstrap Sie
+        // in der Registry speichert
         return $this->getView();
     }
 

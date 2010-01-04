@@ -20,14 +20,14 @@
 
     <para>
         Die folgenden Konfigurationsschlüssel sind vorhanden, und sind abhängig von der
-        Groß-/Kleinschreibung:
+        Groß- oder Kleinschreibung:
     </para>
 
     <itemizedlist>
         <listitem><para>
             <emphasis><property>controllerDirectory</property></emphasis>: Entweder ein Stringwert
             der ein einzelnes Controller Verzeichnis spezifiziert, oder ein Array von
-            Modul/Controller Verzeichnis Paaren.
+            Modul und Controller Verzeichnis Paaren.
         </para></listitem>
 
         <listitem><para>
@@ -67,8 +67,8 @@
         </para></listitem>
 
         <listitem><para>
-            <emphasis><property>params</property></emphasis>: Array von Schlüssel/Wert Paaren die
-            mit dem Front Controller registriert werden sollen.
+            <emphasis><property>params</property></emphasis>: Array von Schlüssel und Wert Paaren
+            die mit dem Front Controller registriert werden sollen.
         </para></listitem>
     </itemizedlist>
 

@@ -67,7 +67,7 @@
         <title>Namen der Optionen</title>
 
         <para>
-            Beachten Sie das die Namen für die Optionen von der Groß-/Kleinschreibung abhängen.
+            Beachten Sie das die Namen für die Optionen von der Groß- und Kleinschreibung abhängen.
         </para>
     </note>
 
@@ -165,7 +165,7 @@
                         Setter Methoden passen werden an diese Methoden übergeben. Als Beispiel
                         wird die Option "phpSettings" dann an
                         <methodname>setPhpSettings()</methodname> übergeben. (Optionsnamen sind
-                        abhängig von der Groß-/Kleinschreibung.
+                        abhängig von der Groß- und Kleinschreibung.
                     </para></entry>
                 </row>
 
@@ -193,7 +193,7 @@
                     </entry>
                     <entry><para>
                         Erkennt ob eine Option mit dem spezifizierten Schlüssel registriert wurde
-                        oder nicht. Schlüssel sind unabhängig von der Groß-/Kleinschreibung.
+                        oder nicht. Schlüssel sind unabhängig von der Groß- oder Kleinschreibung.
                     </para></entry>
                 </row>
 

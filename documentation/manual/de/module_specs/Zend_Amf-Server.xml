@@ -57,7 +57,7 @@ echo $response;
 ]]></programlisting>
 
         <para>
-            <classname>Zend Amf Server</classname> erlaubt es auch Services das Sie dynamisch
+            <classname>Zend_Amf_Server</classname> erlaubt es auch Services das Sie dynamisch
             geladen werden, basierend auf dem angegebenen Verzeichnispfad. Man kann dem Server so
             viele Verzeichnisse wie man will hinzufügen. Die Reihenfolge in der man die
             Verzeichnisse zum Server hinzufügt ist die Reihenfolge in der die
@@ -509,7 +509,10 @@ private function getContactHandler(event:ResultEvent):void {
         </para>
 
         <programlisting language="php"><![CDATA[
-Zend_Amf_Parse_TypeLoader::addResourceDirectory("My", "application/library/resources/My"));
+Zend_Amf_Parse_TypeLoader::addResourceDirectory(
+    "My",
+    "application/library/resources/My"
+);
 ]]></programlisting>
 
         <para>
@@ -524,7 +527,8 @@ Zend_Amf_Parse_TypeLoader::addResourceDirectory("My", "application/library/resou
         </para>
 
         <programlisting language="php"><![CDATA[
-// Beispiel für die Implementierung von Ressourcen für die Behandlung von Mysql Ergebnis Typen
+// Beispiel für die Implementierung von Ressourcen und die Behandlung
+// von Mysql Ergebnis Typen
 class Zend_Amf_Parse_Resource_MysqlResult
 {
     /**

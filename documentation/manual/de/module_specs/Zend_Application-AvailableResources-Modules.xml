@@ -64,7 +64,7 @@ $options = array(
             eine eigene Front Controller Ressource Klasse, anbieten oder eine
             Initialisierungsmethode für eine Klasse -- solange die Ressource Plugin Klasse mit
             "Frontcontroller" endet, oder die Initialisierungsmethode "_initFrontController"
-            heißt (abhängig von der Groß-/Kleinschreibung).
+            heißt (abhängig von der Groß- und Kleinschreibung).
         </para>
     </note>
 

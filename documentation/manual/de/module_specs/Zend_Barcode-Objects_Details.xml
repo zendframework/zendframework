@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20056 -->
+<!-- EN-Revision: 20081 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.barcode.objects.details">
     <title>Beschreibung der ausgelieferten Barcodes</title>
@@ -141,8 +141,8 @@
         <note>
             <para>
                 Wenn die Anzahl der Zeichen nicht gerade ist, wird
-                <classname>Zend_Barcode_Object_Code25interleaved</classname> fehlende Nullen dem Barcode
-                Text automatisch voranstellen.
+                <classname>Zend_Barcode_Object_Code25interleaved</classname> fehlende Nullen dem
+                Barcode Text automatisch voranstellen.
             </para>
         </note>
     </sect3>
@@ -156,14 +156,15 @@
         </para>
 
         <para>
-            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean5</classname> (EAN 5) und
-            hat die gleichen Details und Optionen, und fügt die folgenden hinzu:
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean5</classname>
+            (<acronym>EAN</acronym> 5) und hat die gleichen Details und Optionen, und fügt die
+            folgenden hinzu:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> EAN-2
+                    <emphasis>Name:</emphasis> <acronym>EAN</acronym>-2
                 </para>
             </listitem>
 
@@ -208,14 +209,15 @@
         </para>
 
         <para>
-            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean13</classname> (EAN 13)
-            und hat eigene Details und Optionen und fügt die folgenden hinzu:
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean13</classname>
+            (<acronym>EAN</acronym> 13) und hat eigene Details und Optionen und fügt die folgenden
+            hinzu:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> EAN-5
+                    <emphasis>Name:</emphasis> <acronym>EAN</acronym>-5
                 </para>
             </listitem>
 
@@ -260,14 +262,15 @@
         </para>
 
         <para>
-            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean13</classname> (EAN 13)
-            und hat eigene Details und Optionen und fügt die folgenden hinzu:
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean13</classname>
+            (<acronym>EAN</acronym> 13) und hat eigene Details und Optionen und fügt die folgenden
+            hinzu:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> EAN-8
+                    <emphasis>Name:</emphasis> <acronym>EAN</acronym>-8
                 </para>
             </listitem>
 
@@ -311,15 +314,10 @@
                 fileref="figures/zend.barcode.objects.details.ean13.png" format="PNG"/>
         </para>
 
-        <para>
-            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean13</classname> (EAN 13)
-            und hat eigene Details und Optionen und fügt die folgenden hinzu:
-        </para>
-
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> EAN-13
+                    <emphasis>Name:</emphasis> <acronym>EAN</acronym>-13
                 </para>
             </listitem>
 
@@ -473,7 +471,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> ITF-14
+                    <emphasis>Name:</emphasis> <acronym>ITF</acronym>-14
                 </para>
             </listitem>
 
@@ -689,14 +687,15 @@
         </para>
 
         <para>
-            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean13</classname> (EAN 13)
-            und erweitert einige seiner Möglichkeiten; er hat auch selbst einige.
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Ean13</classname>
+            (<acronym>EAN</acronym> 13) und erweitert einige seiner Möglichkeiten; er hat auch
+            selbst einige.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> UPC-A (Universal Product Code)
+                    <emphasis>Name:</emphasis> <acronym>UPC</acronym>-A (Universal Product Code)
                 </para>
             </listitem>
 
@@ -741,9 +740,9 @@
         </para>
 
         <para>
-            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Upca</classname> (UPC-A),
-            und verwendet einige seiner Fähigkeiten; er hat auch einige eigene. Das erste Zeichen
-            des zu kodierenden Textes ist das System (0 oder 1).
+            Dieser Barcode erweitert <classname>Zend_Barcode_Object_Upca</classname>
+            (<acronym>UPC</acronym>-A), und verwendet einige seiner Fähigkeiten; er hat auch einige
+            eigene. Das erste Zeichen des zu kodierenden Textes ist das System (0 oder 1).
             und enthält einige seiner Möglichkeiten; er hat auch einige eigene
             Möglichkeit.
         </para>
@@ -751,7 +750,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> UPC-E (Universal Product Code)
+                    <emphasis>Name:</emphasis> <acronym>UPC</acronym>-E (Universal Product Code)
                 </para>
             </listitem>
 

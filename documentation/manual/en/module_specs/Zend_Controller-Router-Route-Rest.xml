@@ -56,12 +56,12 @@
                 </row>
                 <row>
                     <entry><constant>POST</constant></entry>
-                    <entry><filename>/product/ratings/:id _method="PUT"</filename></entry>
+                    <entry><filename>/product/ratings/:id?_method="PUT"</filename></entry>
                     <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
                 </row>
                 <row>
                     <entry><constant>POST</constant></entry>
-                    <entry><filename>/product/ratings/:id _method="DELETE"</filename></entry>
+                    <entry><filename>/product/ratings/:id?_method="DELETE"</filename></entry>
                     <entry>
                         <methodname>Product_RatingsController::deleteAction()</methodname>
                     </entry>
@@ -79,7 +79,8 @@
         default route on the front controller:
     </para>
 
-    <programlisting language="php"><![CDATA[$front     = Zend_Controller_Front::getInstance();
+    <programlisting language="php"><![CDATA[
+$front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front);
 $front->getRouter()->addRoute('default', $restRoute);
 ]]></programlisting>
@@ -98,7 +99,8 @@ $front->getRouter()->addRoute('default', $restRoute);
         argument:
     </para>
 
-    <programlisting language="php"><![CDATA[$front     = Zend_Controller_Front::getInstance();
+    <programlisting language="php"><![CDATA[
+$front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array('product'));
 $front->getRouter()->addRoute('rest', $restRoute);
 ]]></programlisting>
@@ -109,7 +111,8 @@ $front->getRouter()->addRoute('rest', $restRoute);
         module array element.
     </para>
 
-    <programlisting language="php"><![CDATA[$front     = Zend_Controller_Front::getInstance();
+    <programlisting language="php"><![CDATA[
+$front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array(
     'product' => array('ratings')
 ));
@@ -126,7 +129,8 @@ $front->getRouter()->addRoute('rest', $restRoute);
         parameter and set the config options:
     </para>
 
-    <programlisting language="ini"><![CDATA[routes.rest.type = Zend_Rest_Route
+    <programlisting language="ini"><![CDATA[
+routes.rest.type = Zend_Rest_Route
 routes.rest.defaults.controller = object
 routes.rest.mod = project,user
 ]]></programlisting>
@@ -140,7 +144,8 @@ routes.rest.mod = project,user
 
     <para>Then use the addConfig() method of the Rewrite router object:</para>
 
-    <programlisting language="php"><![CDATA[$config = new Zend_Config_Ini('path/to/routes.ini');
+    <programlisting language="php"><![CDATA[
+$config = new Zend_Config_Ini('path/to/routes.ini');
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig($config, 'routes');
 ]]></programlisting>

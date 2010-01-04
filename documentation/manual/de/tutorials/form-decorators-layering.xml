@@ -2,85 +2,86 @@
 <!-- EN-Revision: 19999 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.layering">
-    <title>Layering Decorators</title>
+    <title>Layeraufbau von Decorators</title>
 
     <para>
-        If you were following closely in <link linkend="learning.form.decorators.simplest">the
-            previous section</link>, you may have noticed that a decorator's
-        <methodname>render()</methodname> method takes a single argument,
-        <varname>$content</varname>. This is expected to be a string.
-        <methodname>render()</methodname> will then take this string and decide to either replace
-        it, append to it, or prepend it. This allows you to have a chain of decorators -- which
-        allows you to create decorators that render only a subset of the element's metadata, and
-        then layer these decorators to build the full markup for the element.
+        Wenn man <link linkend="learning.form.decorators.simplest">dem vorigen Abschnitt</link>
+        gut gefolgt ist, hat man festgestellt das die <methodname>render()</methodname> Methode
+        eines Decorators ein einzelnes <varname>$content</varname> Argument entgegen nimmt. Es wird
+        erwartet das dies ein String ist. <methodname>render()</methodname> nimmt dann diesen String
+        und entscheidet ob er ersetzt, vorangestellt, oder angehängt wird. Das erlaubt es eine Kette
+        von Decorators zu haben -- was es erlaubt Decorators zu erstellen welche nur ein Subset der
+        Metadaten des Elements darstellt, und diese Decorators übereinander legt um das volle Markup
+        des Elements zu bauen.
     </para>
 
     <para>
-        Let's look at how this works in practice.
+        Schauen wir uns an wie das in der Praxis arbeitet.
     </para>
 
     <para>
-        For most form element types, the following decorators are used:
+        Für die meisten Typen an Formularelementen werden die folgenden Decorators verwendet:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <classname>ViewHelper</classname> (render the form input using one of the standard
-                form view helpers).
+                <classname>ViewHelper</classname> (stellt die Formulareingabe dar indem einer der
+                standardmäßige View Helfer für Formulare verwendet wird).
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>Errors</classname> (render validation errors via an unordered list).
+                <classname>Errors</classname> (stellt Prüffehler durch eine unsortierte Liste dar).
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>Description</classname> (render any description attached to the element;
-                often used for tooltips).
+                <classname>Description</classname> (stellt alle dem Element zugeordneten
+                Beschreibungen dar; wird oft für Tooltips verwendet).
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>HtmlTag</classname> (wrap all of the above in a
-                <emphasis>&lt;dd&gt;</emphasis> tag.
+                <classname>HtmlTag</classname> (umhüllt alle oben stehenden mit einem
+                <emphasis>&lt;dd&gt;</emphasis> Tag).
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <classname>Label</classname> (render the label preceding the above, wrapped in a
-                <emphasis>&lt;dt&gt;</emphasis> tag.
+                <classname>Label</classname> (stellt das Label dar indem es dem oben stehenden
+                vorangestellt wird und umhüllt es mit einem <emphasis>&lt;dt&gt;</emphasis> Tag).
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        You'll notice that each of these decorators does just one thing, and operates on one
-        specific piece of metadata stored in the form element: the <classname>Errors</classname>
-        decorator pulls validation errors and renders them; the <classname>Label</classname>
-        decorator pulls just the label and renders it. This allows the individual decorators to be
-        very succinct, repeatable, and, more importantly, testable.
+        Man wird feststellen das jeder dieser Decorators nur ein Ding tut, und auf einem speziellen
+        Teil der Metadaten arbeitet die im Formularelement gespeichert sind: der
+        <classname>Errors</classname> Decorator holt Prüffehler und stellt Sie dar; der
+        <classname>Label</classname> Decorator holt die Überschrift und stellt Sie dar. Das erlaubt
+        einzelnen Decorators sehr bündig, wiederholbar, und viel wichtiger, testbar zu sein.
     </para>
 
     <para>
-        It's also where that <varname>$content</varname> argument comes into play: each decorator's
-        <methodname>render()</methodname> method is designed to accept content, and then either
-        replace it (usually by wrapping it), prepend to it, or append to it.
+        Hier kommt auch das <varname>$content</varname> Argument zum Einsatz: Jede
+        <methodname>render()</methodname> Methode eines Decorators ist designt um Inhalte zu
+        akzeptieren, und diesen dann entweder zu ersetzen (normalerweise indem er umhüllt wird),
+        hinten anzuhängen, oder voranzustellen.
     </para>
 
     <para>
-        So, it's best to think of the process of decoration as one of building an onion from the
-        inside out.
+        Es ist also am Besten vom Prozess der Dekoration als Erstellung einer Zwiebel zu denken, von
+        Innen nach Außen.
     </para>
 
     <para>
-        To simplify the process, we'll take a look at the example from <link
-            linkend="learning.form.decorators.simplest">the previous section</link>. Recall:
+        Um den Prozess zu vereinfachen sehen wir in der Beispiel <link
+            linkend="learning.form.decorators.simplest">des vorherigen Abschnitts</link>. Nochmals:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -104,7 +105,7 @@ class My_Decorator_SimpleInput extends Zend_Form_Decorator_Abstract
 ]]></programlisting>
 
     <para>
-        Let's now remove the label functionality, and build a separate decorator for that.
+        Jetzt entfernen wir die Funktionalität des Labels und bauen einen eigenen Decorator dafür.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -141,14 +142,14 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
 ]]></programlisting>
 
     <para>
-        Now, this may look all well and good, but here's the problem: as written currently, the last
-        decorator to run wins, and overwrites everything. You'll end up with just the input, or
-        just the label, depending on which you register last.
+        Das könnte jetzt schön und gut aussehen, aber da ist ein Problem: wie gerade geschrieben
+        gewinnt der letzte Decorator und überschreibt alles. Man endet nur mit der Eingabe oder nur
+        dem Label, abhängig davon was als letztes registriert wurde.
     </para>
 
     <para>
-        To overcome this, simply concatenate the passed in <varname>$content</varname> with the
-        markup somehow:
+        Um das zu verhindern, muss dass in <varname>$content</varname> übergebene irgendwie mit dem
+        Markup verbunden werden:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -156,11 +157,12 @@ return $content . $markup;
 ]]></programlisting>
 
     <para>
-        The problem with the above approach comes when you want to programmatically choose whether
-        the original content should precede or append the new markup. Fortunately, there's a
-        standard mechanism for this already; <classname>Zend_Form_Decorator_Abstract</classname> has
-        a concept of placement and defines some constants for matching it. Additionally, it allows
-        specifying a separator to place between the two. Let's make use of those:
+        Das Problem mit dem obigen Ansatz kommt dann wenn man programmtechnisch wählen will ob der
+        originale Inhalt das neue Markup angehängt oder vorangestellt werden soll. Glücklicherweise
+        gibt es hierfür bereits einen Standardmechanismus;
+        <classname>Zend_Form_Decorator_Abstract</classname> hat ein Konzept der Platzierung und
+        definiert einige Konstanten um es anzusprechen. Zusätzlich erlaubt es die Spezifikation
+        eines Separators der zwischen beide platziert wird. Verwenden wir Sie:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -215,12 +217,12 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
 ]]></programlisting>
 
     <para>
-        Notice in the above that I'm switching the default case for each; the assumption will be
-        that labels prepend content, and input appends.
+        Es sollte beachtet werden das wir das Standardverhalten für jeden verändern; die Annahme
+        besteht darin das die Überschrift dem Inhalt folgt und die Eingabe vorangestellt wird.
     </para>
 
     <para>
-        Now, let's create a form element that uses these:
+        Erstellen wir jetzt ein Formularelement das Sie verwendet:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -239,42 +241,45 @@ $element = new Zend_Form_Element('foo', array(
 ]]></programlisting>
 
     <para>
-        How will this work? When we call <methodname>render()</methodname>, the element will iterate
-        through the various attached decorators, calling <methodname>render()</methodname> on each.
-        It will pass an empty string to the very first, and then whatever content is created will be
-        passed to the next, and so on:
+        Wie arbeitet das? Wenn wir <methodname>render()</methodname> aufrufen, wird das Element
+        durch die verschiedenen angehängten Decorators iterieren, indem auf jedem
+        <methodname>render()</methodname> aufgerufen wird. Er übergibt einen leeren String zu dem
+        allerersten, und was auch immer für ein Inhalt erstellt wird, wird dieser an den nächsten
+        übergeben, und so weiter:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                Initial content is an empty string: ''.
+                Der initiale Inhalt ist ein leerer String: ''.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                '' is passed to the <classname>SimpleInput</classname> decorator, which then
-                generates a form input that it appends to the empty string: <emphasis>&lt;input
+                '' wird an den <classname>SimpleInput</classname> Decorator übergeben welcher dann
+                eine Formulareingabe erstellt und diese an den leeren String anhängt:
+                <emphasis>&lt;input id="bar-foo" name="bar[foo]" type="text"
+                    value="test"/&gt;</emphasis>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Die Eingabe wird dann als Inhalt an den <classname>SimpleLabel</classname> Decorator
+                übergeben, welche eine Überschrift erzeugt und diese dem originalen Inhalt
+                voranstellt; der standardmäßige Separator ist ein <constant>PHP_EOL</constant>
+                Zeichen, was uns folgendes gibt: <emphasis>&lt;label for="bar-foo"&gt;\n&lt;input
                     id="bar-foo" name="bar[foo]" type="text" value="test"/&gt;</emphasis>.
-            </para>
-        </listitem>
-
-        <listitem>
-            <para>
-                The input is then passed as content to the <classname>SimpleLabel</classname>
-                decorator, which generates a label and prepends it to the original content; the
-                default separator is a <constant>PHP_EOL</constant> character, giving us this:
-                <emphasis>&lt;label for="bar-foo"&gt;\n&lt;input id="bar-foo" name="bar[foo]"
-                    type="text" value="test"/&gt;</emphasis>.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        But wait a second! What if you wanted the label to come after the input for some reason?
-        Remember that "placement" flag? You can pass it as an option to the decorator. The easiest
-        way to do this is to pass an array of options with the decorator during element creation:
+        Einen Moment! Wenn wir wollen das aus irgendeinem Grund die Überschrift nach der Eingabe
+        kommt, was dann? Erinnern wir uns an das "placement" Flag? Man kann es als Option an den
+        Decorator übergeben. Der einfachste Weg das zu tun ist die Übergabe eines Arrays an
+        Optionen an den Decorator wärend der Erstellung des Elements:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -293,71 +298,72 @@ $element = new Zend_Form_Element('foo', array(
 ]]></programlisting>
 
     <para>
-        Notice that when passing options, you must wrap the decorator within an array; this hints to
-        the constructor that options are available. The decorator name is the first element of the
-        array, and options are passed in an array to the second element of the array.
+        Es sollte beachtet werden das der Decorator bei der Übergabe von Optionen in einem Array
+        umhüllt werden muss; das zeigt dem Constructor das Optionen vorhanden sind. Der Name des
+        Decorators ist das erste Element des Arraqs, und optionen welche in einem Array an das
+        zweite Element des Arrays übergeben werden.
     </para>
 
     <para>
-        The above results in the markup <emphasis>&lt;input id="bar-foo" name="bar[foo]" type="text"
-            value="test"/&gt;\n&lt;label for="bar-foo"&gt;</emphasis>.
+        Das oben stehende führt zum Markup <emphasis>&lt;input id="bar-foo" name="bar[foo]"
+            type="text" value="test"/&gt;\n&lt;label for="bar-foo"&gt;</emphasis>.
     </para>
 
     <para>
-        Using this technique, you can have decorators that target specific metadata of the element
-        or form and create only the markup relevant to that metadata; by using mulitiple decorators,
-        you can then build up the complete element markup. Our onion is the result.
+        Bei Verwendung dieser Technik kann man Decorators haben welche auf spezifische Metadaten
+        eines Elements oder einem Formular abzielen und nur das für diese Metadaten relevante
+        Markup erstellt; indem mehrere Decorators verwendet werden kann das komplette Markup des
+        Elements gebaut werden. Unsere Zwiebel ist das Ergebnis.
     </para>
 
     <para>
-        There are pros and cons to this approach. First, the cons:
-    </para>
-
-    <itemizedlist>
-        <listitem>
-            <para>
-                More complex to implement. You have to pay careful attention to the decorators you
-                use and what placement you utilize in order to build up the markup in the correct
-                sequence.
-            </para>
-        </listitem>
-
-        <listitem>
-            <para>
-                More resource intensive. More decorators means more objects; multiply this by the
-                number of elements you have in a form, and you may end up with some serious resource
-                usage. Caching can help here.
-            </para>
-        </listitem>
-    </itemizedlist>
-
-    <para>
-        The advantages are compelling, though:
+        Es gibt Vor- und Nachteile für diesen Ansatz. Erst die Nachteile:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                Reusable decorators. You can create truly re-usable decorators with this technique,
-                as you don't have to worry about the complete markup, but only markup for one or a
-                few pieces of element or form metadata.
+                Komplexer zu implementieren. Man muss bei den Decorators und der Platzierung die man
+                verwendet gut aufpassen um das Markup in der richtigen Sequenz zu erstellen.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Ultimate flexibility. You can theoretically generate any markup combination you want
-                from a small number of decorators.
+                Ressourcenintensiver. Mehr Decorators bedeuten auch mehr Objekte; das muss mit der
+                Anzahl der Elemente multipliziert werden die man im Formular hat, und man könnte in
+                einer schweren Ressourcenverwendung enden. Caching kann hierbei helfen.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        While the above examples are the intended usage of decorators within
-        <classname>Zend_Form</classname>, it's often hard to wrap your head around how the
-        decorators interact with one another to build the final markup. For this reason, some
-        flexibility was added in the 1.7 series to make rendering individual decorators possible --
-        which gives some Rails-like simplicity to rendering forms. We'll look at that in the next
-        section.
+        Die Vorteile sind wirklich überwältigend:
+    </para>
+
+    <itemizedlist>
+        <listitem>
+            <para>
+                Wiederverwendbare Decorators. Man kann mit dieser Technik echte wiederverwendbare
+                Decorators erstellen da man sich keine Sorgen über das komplette Markup machen muss,
+                sondern nur ein oder ein paar Teile des Elements oder der Metadaten des Formulars.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Ultimative Flexibilität. Man kann theoretisch jede Markupkombination die man will
+                von einer kleinen Anzahl an Decorators erzeugen.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        Wärend die oben stehenden Beispiele die geplante Verwendung der Decorators in
+        <classname>Zend_Form</classname> zeigen, ist es oft hart zu erkennen wie Decorators
+        untereinander interagieren um das endgültige Markup er bauen. Aus diesem Grund wurde in der
+        Serie 1.7 etwas Flexibilität hinzugefügt um die Darstellung individueller Decorators zu
+        ermöglichen -- das gibt eine Rails-artige Einfachheit der Darstellung von Formularen. Wir
+        sehen uns das im nächsten Abschnitt an.
     </para>
 </sect1>

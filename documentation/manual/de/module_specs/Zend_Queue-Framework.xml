@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18733 -->
+<!-- EN-Revision: 20063 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.queue.framework">
     <title>Framework</title>
@@ -31,7 +31,7 @@ $options = array(
 
 // Erstellt eine Datenbank Queue.
 // Zend_Queue fügt vorne Zend_Queue_Adapter_ an 'Db' für den Klassennamen an.
-$queue = Zend_Queue('Db', $options);
+$queue = new Zend_Queue('Db', $options);
 ]]></programlisting>
 
     <para>

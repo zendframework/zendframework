@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17407 -->
+<!-- EN-Revision: 19518 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.encoding">
     <title>Encodage</title>
@@ -8,10 +8,12 @@
         Par défaut, le corps des messages textes et HTML est encodé via le mécanisme
         "quoted-printable". Les en-têtes du message sont aussi encodés avec le mécanisme
         "quoted-printable" si vous ne spécifiez pas base64 avec
-        <methodname>setHeaderEncoding()</methodname>.Tous les fichiers joints sont encodés via base64 si aucun
-        autre encodage n'est spécifié lors de l'appel à <methodname>addAttachment()</methodname> ou assigné plus
-        tard à la partie <acronym>MIME</acronym> de l'objet. Les encodages 7Bit et 8Bit ne se font pour l'instant que
-        sur les données binaires.
+        <methodname>setHeaderEncoding()</methodname>. Si vous utilisez une langue qui n'est pas
+        sur des lettres de type romaines, la base64 sera plus convenable. Tous les fichiers joints
+        sont encodés via base64 si aucun autre encodage n'est spécifié lors de l'appel à
+        <methodname>addAttachment()</methodname> ou assigné plus tard à la partie
+        <acronym>MIME</acronym> de l'objet. Les encodages 7Bit et 8Bit ne se font pour l'instant
+        que sur les données binaires.
     </para>
 
      <para>
@@ -27,9 +29,10 @@
 
     <programlisting language="php"><![CDATA[
 // Par défaut Zend_Mime::ENCODING_QUOTEDPRINTABLE
-$mail = new Zend_Mail('UTF-8');
+$mail = new Zend_Mail('KOI8-R');
 
-// Bascule en encodage Base64
+// Bascule en encodage Base64 parce que le Russe exprimé en KOI8-R est
+// considérablement différent des langues basées sur des lettres romaines
 $mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
 ]]></programlisting>
 

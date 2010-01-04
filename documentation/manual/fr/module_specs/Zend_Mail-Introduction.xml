@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 19418 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
     <title>Introduction</title>
@@ -122,5 +122,23 @@ $mail->send();
                 fonctionne en mode safe.
             </para>
         </note>
+
+        <warning>
+            <title>Transport Sendmail et Windows</title>
+
+            <para>
+                Comme le spécifie le manuel PHP, la fonction <methodname>mail()</methodname> a des
+                comportements différents sous Windows ou sur les systèmes de type *nix. Utiliser
+                le transport Sendmail sous Windows ne fonctionnera pas conjointement avec
+                <methodname>addBcc()</methodname>. La fonction <methodname>mail()</methodname>
+                enverra vers le destinataire BCC de manière à ce que tous les destinataires
+                puissent voir qu'il est destinataire&#160;!
+            </para>
+
+            <para>
+                Ainsi si vous voulez utiliser BCC sur un serveur Windows, utilisez le transport
+                SMTP pour l'envoi&#160;!
+            </para>
+        </warning>
     </sect2>
 </sect1>

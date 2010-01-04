@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 19440 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.mime">
     <title>Zend_Mime</title>
@@ -31,6 +31,13 @@
                 </listitem>
 
                 <listitem>
+                     <para>
+                        <methodname>Zend_Mime::encode()</methodname>: encode
+                        une chaîne en utilisant l'encodage spécifié.
+                    </para>
+                </listitem>
+            
+                <listitem>
                     <para>
                         <methodname>Zend_Mime::encodeBase64()encodeBase64()</methodname>: encode
                         une chaîne en utilisant base64.
@@ -39,11 +46,25 @@
 
                 <listitem>
                     <para>
-                        <methodname>Zend_Mime::encodeQuotedPrintable()</methodname>: Encode une
+                        <methodname>Zend_Mime::encodeQuotedPrintable()</methodname>: encode une
                         chaîne avec le mécanisme quoted-printable.
                     </para>
                 </listitem>
-                </itemizedlist>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Mime::encodeBase64Header()</methodname>: encode
+                        une chaîne en utilisant base64 pour les entêtes émail.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>Zend_Mime::encodeQuotedPrintableHeader()</methodname>: ncode une
+                        chaîne avec le mécanisme quoted-printable pour les entêtes émail.
+                    </para>
+                </listitem>
+            </itemizedlist>
             </para>
 
         <para>
@@ -93,7 +114,26 @@
                 <listitem>
                     <para><classname>Zend_Mime::DISPOSITION_INLINE</classname>: "inline"</para>
                 </listitem>
-                </itemizedlist>
+
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::MULTIPART_ALTERNATIVE</constant>:
+                        'multipart/alternative'
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::MULTIPART_MIXED</constant>: 'multipart/mixed'
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <constant>Zend_Mime::MULTIPART_RELATED</constant>: 'multipart/related'
+                    </para>
+                </listitem>
+            </itemizedlist>
             </para>
     </sect2>
 

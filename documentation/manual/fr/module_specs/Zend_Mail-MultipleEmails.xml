@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19426 -->
+<!-- EN-Revision: 20039 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.multiple-emails">
     <title>Envoyer plusieurs émail par connexion SMTP</title>
@@ -11,6 +11,17 @@
         que le dialogue SMTP correct est respecté.
     </para>
 
+    <para>
+        Optionally, you can also define a default From email address and name,
+        as well as a default reply-to header. This can be done through the static
+        methods <methodname>setDefaultFrom()</methodname> and
+        <methodname>setDefaultReplyTo()</methodname>. These defaults will be used when you
+        don't specify a From/Reply-to Address or -Name until the defaults are reset (cleared).
+        Resetting the defaults can be done through the use of the
+        <methodname>clearDefaultFrom()</methodname> and
+        <methodname>clearDefaultReplyTo</methodname>.
+    </para>
+
     <example id="zend.mail.multiple-emails.example-1">
         <title>Envoyer plusieurs émail par connexion SMTP</title>
 
@@ -19,17 +30,25 @@
 $config = array('name' => 'sender.example.com');
 $transport = new Zend_Mail_Transport_Smtp('mail.example.com', $config);
 
+// Ajouter les nom et adresses "From" & "Reply-To" pour tous les émails
+// à envoyer
+Zend_Mail::setDefaultFrom('sender@example.com', 'John Doe');
+Zend_Mail::setDefaultReplyTo('replyto@example.com','Jane Doe');
+
 // Boucle à travers les messages
 for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
-    $mail->addTo('studio@peptolab.com', 'Test');
-    $mail->setFrom('studio@peptolab.com', 'Test');
+    $mail->addTo('studio@example.com', 'Test');
     $mail->setSubject(
         'Démonstration - Envoyer plusieurs emails par connexion SMTP'
     );
     $mail->setBodyText('...Votre message ici...');
     $mail->send($transport);
 }
+
+// Effacer les valeurs par défaut
+Zend_Mail::clearDefaultFrom();
+Zend_Mail::clearDefaultReplyTo();
 ]]></programlisting>
     </example>
 
@@ -56,8 +75,8 @@ $transport->setConnection($protocol);
 // Boucle à travers les messages
 for ($i = 0; $i < 5; $i++) {
     $mail = new Zend_Mail();
-    $mail->addTo('studio@peptolab.com', 'Test');
-    $mail->setFrom('studio@peptolab.com', 'Test');
+    $mail->addTo('studio@example.com', 'Test');
+    $mail->setFrom('studio@example.com', 'Test');
     $mail->setSubject(
         'Démonstration - Envoyer plusieurs emails par connexion SMTP'
     );

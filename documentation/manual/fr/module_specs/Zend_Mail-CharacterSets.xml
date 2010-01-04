@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 19422 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.character-sets">
     <title>Jeux de caractères</title>
@@ -21,4 +21,30 @@
             texte.
         </para>
     </note>
+
+    <example id="zend.mail.character-sets.cjk">
+        <title>Usage in CJK languages</title>
+
+        <para>
+            The following example is how to use <classname>Zend_Mail</classname> in Japanese. This is one of
+            <acronym>CJK</acronym> (aka <acronym>CJKV</acronym> ) languages. If you use Chinese, you may use
+            <acronym>HZ-GB-2312</acronym> instead of <acronym>ISO-2022-JP</acronym>.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+//We suppose that character encoding of strings is UTF-8 on PHP script.
+function myConvert($string) {
+    return mb_convert_encoding($string, 'ISO-2022-JP', 'UTF-8');
+}
+
+$mail = new Zend_Mail('ISO-2022-JP');
+//In this case, You can use ENCODING_7BIT because the ISO-2022-JP does not use MSB.
+$mail->setBodyText(myConvert('This is the text of the mail.'), null, Zend_Mime::ENCODING_7BIT);
+$mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
+$mail->setFrom('somebody@example.com', myConvert('Some Sender'));
+$mail->addTo('somebody_else@example.com', myConvert('Some Recipient'));
+$mail->setSubject(myConvert('TestSubject'));
+$mail->send();
+]]></programlisting>
+    </example>
 </sect1>

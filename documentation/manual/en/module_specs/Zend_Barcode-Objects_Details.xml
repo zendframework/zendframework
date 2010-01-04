@@ -155,13 +155,14 @@
 
         <para>
             This barcode extends <classname>Zend_Barcode_Object_Ean5</classname>
-            (EAN 5), and has the same particulars and options, and adds the following:
+            (<acronym>EAN</acronym> 5), and has the same particulars and options, and adds the
+            following:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> EAN-2
+                    <emphasis>Name:</emphasis> <acronym>EAN</acronym>-2
                 </para>
             </listitem>
 
@@ -207,13 +208,14 @@
 
         <para>
             This barcode extends <classname>Zend_Barcode_Object_Ean13</classname>
-            (EAN 13), and has the same particulars and options, and adds the following:
+            (<acronym>EAN</acronym> 13), and has the same particulars and options, and adds the
+            following:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> EAN-5
+                    <emphasis>Name:</emphasis> <acronym>EAN</acronym>-5
                 </para>
             </listitem>
 
@@ -259,13 +261,14 @@
 
         <para>
             This barcode extends <classname>Zend_Barcode_Object_Ean13</classname>
-            (EAN 13), and has the same particulars and options, and adds the following:
+            (<acronym>EAN</acronym> 13), and has the same particulars and options, and adds the
+            following:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> EAN-8
+                    <emphasis>Name:</emphasis> <acronym>EAN</acronym>-8
                 </para>
             </listitem>
 
@@ -309,15 +312,10 @@
                 fileref="figures/zend.barcode.objects.details.ean13.png" format="PNG"/>
         </para>
 
-        <para>
-            This barcode extends <classname>Zend_Barcode_Object_Ean13</classname>
-            (EAN 13), and has the same particulars and options, and adds the following:
-        </para>
-
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> EAN-13
+                    <emphasis>Name:</emphasis> <acronym>EAN</acronym>-13
                 </para>
             </listitem>
 
@@ -470,7 +468,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> ITF-14
+                    <emphasis>Name:</emphasis> <acronym>ITF</acronym>-14
                 </para>
             </listitem>
 
@@ -648,7 +646,8 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> Royal Mail or RM4SCC (Royal Mail 4-State Customer Code)
+                    <emphasis>Name:</emphasis> Royal Mail or <acronym>RM4SCC</acronym> (Royal Mail
+                    4-State Customer Code)
                 </para>
             </listitem>
 
@@ -686,14 +685,14 @@
 
         <para>
             This barcode extends <classname>Zend_Barcode_Object_Ean13</classname>
-            (EAN-13), and inherits some of its capabilities; it also has a few
+            (<acronym>EAN</acronym>-13), and inherits some of its capabilities; it also has a few
             particulars of its own.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> UPC-A (Universal Product Code)
+                    <emphasis>Name:</emphasis> <acronym>UPC</acronym>-A (Universal Product Code)
                 </para>
             </listitem>
 
@@ -739,7 +738,7 @@
 
         <para>
             This barcode extends <classname>Zend_Barcode_Object_Upca</classname>
-            (UPC-A), and inherits some of its capabilities; it also has a few
+            (<acronym>UPC</acronym>-A), and inherits some of its capabilities; it also has a few
             particulars of its own. The first character of the text to encode
             is the system (0 or 1).
         </para>
@@ -747,7 +746,7 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>Name:</emphasis> UPC-E (Universal Product Code)
+                    <emphasis>Name:</emphasis> <acronym>UPC</acronym>-E (Universal Product Code)
                 </para>
             </listitem>
 
@@ -784,7 +783,7 @@
 
         <note>
             <para>
-                If the first character of the text to encode is not 0 or 1, 
+                If the first character of the text to encode is not 0 or 1,
                 <classname>Zend_Barcode_Object_Upce</classname> will automatically
                 replace it by 0.
             </para>

@@ -8,12 +8,14 @@
         to instantiate a transport for <classname>Zend_Mail</classname> or set
         the default name and address, as well as the default replyto- name and address.
     </para>
-    
-    <para>When instantiating a transport, it's registered automatically to
-        <classname>Zend_Mail</classname>. Though, by setting the transport.register
-        directive to false, this behaviour does no more occur.
+
+    <para>
+        When instantiating a transport, it's registered automatically to
+        <classname>Zend_Mail</classname>. Though, by setting the
+        <property>transport.register</property> directive to false, this behaviour
+        does no more occur.
     </para>
-    
+
     <example id="zend.application.available-resources.mail.configExample">
         <title>Sample Mail Resource Configuration</title>
 
@@ -33,7 +35,7 @@ resources.mail.transport.register = true ; True by default
 resources.mail.defaultFrom.email = john@example.com
 resources.mail.defaultFrom.name = "John Doe"
 resources.mail.defaultReplyTo.email = Jane@example.com
-resources.mail.defaultReplyTo.name = "Jane Doe"        
+resources.mail.defaultReplyTo.name = "Jane Doe"
 ]]></programlisting>
 
     </example>

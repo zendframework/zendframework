@@ -127,7 +127,7 @@ resources.locale.default = "nl_NL"
         </para>
 
         <para>
-            In this case this single locale will be used and the the automatic detection is turned
+            In this case this single locale will be used and the automatic detection is turned
             off.
         </para>
 

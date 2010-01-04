@@ -21,10 +21,10 @@
         <para>
             Below is a sample <acronym>INI</acronym> file showing how
             <classname>Zend_Cache_Manager</classname> may be configured. The format
-            is the Cachemanager resource prefix (resources.cachemanager) followed
-            be the name to assign to an option cache template/bundle (e.g.
-            resources.cachemanager.database) and finally followed by a typical
-            <classname>Zend_Cache</classname> option.
+            is the Cachemanager resource prefix (<property>resources.cachemanager</property>)
+            followed be the name to assign to an option cache template or bundle (e.g.
+            <property>resources.cachemanager.database</property>) and finally followed by a
+            typical <classname>Zend_Cache</classname> option.
         </para>
 
         <programlisting language="ini"><![CDATA[
@@ -38,7 +38,7 @@ resources.cachemanager.database.backend.options.cache_dir = "/path/to/cache"
         <para>
             Actually retrieving this cache from the Cache Manager is as simple as
             accessing an instance of the Manager and calling
-            <methodname>$cacheManager->getCache('database');</methodname>.
+            <command>$cacheManager->getCache('database');</command>.
         </para>
     </example>
 </sect2>

@@ -8,64 +8,66 @@
         <title>Einführung in Authorisation</title>
 
         <para>
-            After a user has been identified as being authentic, an application can go about its
-            business of providing some useful and desirable resources to a consumer. In many cases,
-            applications might contain different resource types, with some resources having stricter
-            rules regarding access. This process of determining who has access to which resources is
-            the process of "authorization". Authorization in its simplest form is the composition of
-            these elements:
+            Nachdem ein Benutzer als authentisch identifiziert wurde, kann eine Anwendung mit Ihrem
+            Geschäft weitermachen und einige nützliche und gewünschte Ressourcen an den Konsumenten
+            liefern. In vielen Fällen können Anwendungen andere Ressource Typen enthalten, wobei
+            einige Ressourcen auch striktere Regeln betreffend Zugriff haben können. Dieser Prozess
+            der Erkennung, wer Zugriff zu welchen Ressourcen hat, ist der Prozess der
+            "Authorisierung". Authorisierung in seiner einfachsten Form ist die Komposition der
+            folgenden Elemente:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    the identity whom wishes to be granted access
+                    die Identität von dem der Zugriff wünscht
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    the resource the identity is asking permission to consume
+                    die Ressource für welche die Identität den Zugriff anfragt um Sie zu konsumieren
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    and optionally, what the identity is privileged to do with the resource
+                    und optional, was der Identität erlaubt ist mit der Ressource zu tun
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            In Zend Framework, the <classname>Zend_Acl</classname> component handles the task of
-            building a tree of roles, resources and privileges to manage and query authorization
-            requests against.
+            Im Zend Framework behandelt die Komponente <classname>Zend_Acl</classname> die Arbeit
+            der Erstellung eines Baums von Rollen, Ressourcen und Privilegien um
+            Authorisationsanfragen zu managen und abzufragen.
         </para>
 
     </sect2>
 
     <sect2 id="learning.multiuser.authorization.basic-usage">
-        <title>Basic Usage of Zend_Acl</title>
+        <title>Grundsätzliche Verwendung von Zend_Acl</title>
 
 <!-- explain the interaction with a User object, how -->
 
         <para>
-            When using <classname>Zend_Acl</classname>, any models can serve as roles or resources
-            by simply implementing the proper interface. To be used in a role capacity, the class
-            must implement the <classname>Zend_Acl</classname>, which requires only
-            <methodname>getRoleId()</methodname>. To be used in a resource capacity, a class must
-            implement the <classname>Zend_Acl_Resource_Interface</classname> which similarly
-            requires the class implement the <methodname>getResourceId()</methodname> method.
+            Wenn <classname>Zend_Acl</classname> verwendet wird können beliebige Modelle als Rollen
+            oder Ressourcen fungieren indem einfach das richtige Interface implementiert wird. Um
+            als Rolle verwendet zu werden muss die Klasse <classname>Zend_Acl</classname>
+            implementieren, welche nur <methodname>getRoleId()</methodname> benötigt. Um als
+            Ressource zu verwenden muss eine Klasse
+            <classname>Zend_Acl_Resource_Interface</classname> implementieren wofür die Klasse so
+            ähnlich die <methodname>getResourceId()</methodname> Methode implementieren muss.
         </para>
 
         <para>
-            Demonstrated below is a simple user model. This model can take part in our
-            <acronym>ACL</acronym> system simply by implementing the
-            <classname>Zend_Acl_Role_Interface</classname>. The method
-            <methodname>getRoleId()</methodname> will return the id "guest" when an ID is not known,
-            or it will return the role ID that was assigned to this actual user object. This value
-            can effectively come from anywhere, a static definition or perhaps dynamically from the
-            users database role itself.
+            Anbei wird ein einfaches Benutzermodell demonstriert. Dieses Modell kann einen Teil in
+            unserem <acronym>ACL</acronym> System übernehmen indem einfach
+            <classname>Zend_Acl_Role_Interface</classname> implementiert wird. Die Methode
+            <methodname>getRoleId()</methodname> gibt die Id "guest" zurück wenn die Id nicht
+            bekannt ist, oder die Id der Rolle welche mit dem aktuellen Benutzerobjekt verknüpft
+            ist. Dieser Wert kann effektiv von überall kommen, eine statische Definition oder
+            vielleicht dynamisch von der Datenbankrolle des Benutzers selbst.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -85,12 +87,12 @@ class Default_Model_User implements Zend_Acl_Role_Interface
 ]]></programlisting>
 
         <para>
-            While the concept of a user as a role is pretty straight forward, your application
-            might choose to have any other models in your system as a potential "resource" to be
-            consumed in this <acronym>ACL</acronym> system. For simplicity, we'll use the example
-            of a blog post. Since the type of the resource is tied to the type of the object,
-            this class will only return 'blogPost' as the resource ID in this system. Naturally,
-            this value can be dynamic if your system requires it to be so.
+            Wärend das Konzept eines Benutzers als Rolle recht gerade heraus ist, könnte die
+            Anwendung ein anderes Modell wählen welches im eigenen System als potentielle
+            "Ressource" im <acronym>ACL</acronym> System verwendet wird. Der Einfachheit halber
+            verwenden wir das Beispiel eines Blog Posts. Da der Typ der Ressource mit dem Typ des
+            Objekts verknüpft ist, gibt diese Klasse nur 'blogPost' als Ressource ID im System
+            zurück. Natürlich kann dieser Wert dynamisch sein wenn das System dies benötigt.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -104,42 +106,42 @@ class Default_Model_BlogPost implements Zend_Acl_Resource_Interface
 ]]></programlisting>
 
         <para>
-            Now that we have at least a role and a resource, we can go about defining the rules
-            of the <acronym>ACL</acronym> system. These rules will be consulted when the system
-            receives a query about what is possible given a certain role, resources, and optionally
-            a privilege.
+            Jetzt da wir zumindest eine Rolle und eine Ressource haben können wir mit der Definition
+            der Regeln des <acronym>ACL</acronym> Systems weitermachen. Diese Regeln werden
+            konsultiert wenn das System eine Abfrage darüber erhält was möglicherweise eine
+            bestimmte Rolle, eine Ressource und optional ein Privileg ist.
         </para>
 
         <para>
-            Lets assume the following rules:
+            Nehmen wir die folgenden Regeln an:
         </para>
 
         <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
-// setup the various roles in our system
+// Die verschiedenen Rollen im System einstellen
 $acl->addRole('guest');
-// owner inherits all of the rules of guest
+// Der Eigentümer erbt alle Regeln vom Gast
 $acl->addRole('owner', 'guest');
 
-// add the resources
+// Die Ressource hinzufügen
 $acl->addResource('blogPost');
 
-// add privileges to roles and resource combinations
+// Die Privilegien den Rollen- und Ressourcekombinationen hinzufügen
 $acl->allow('guest', 'blogPost', 'view');
 $acl->allow('owner', 'blogPost', 'post');
 $acl->allow('owner', 'blogPost', 'publish');
 ]]></programlisting>
 
         <para>
-            The above rules are quite simple: a guest role and an owner role exist; as does a
-            blogPost type resource. Guests are allowed to view blog posts, and owners are
-            allowed to post and publish blog posts. To query this system one might do any of
-            the following:
+            Die oben stehenden Regeln sund recht einfach: eine Gastrolle und eine Eigentümerrolle
+            existieren; sowie ein blogPost Ressourcetyp. Gästen ist es erlaubt Blogposts anzusehen,
+            und Eigentümern ist es erlaubt zu posten und Blogposts zu veröffentlichen. Um dieses
+            System abzufragen könnte man das folgende machen:
         </para>
 
         <programlisting language="php"><![CDATA[
-// assume the user model is of type guest resource
+// Wir nehmen an dass das Benutzermodell vom Ressourcetyp Gast ist
 $guestUser = new Default_Model_User();
 $ownerUser = new Default_Model_Owner('OwnersUsername');
 
@@ -152,28 +154,30 @@ $acl->isAllowed($ownerUser, $post, 'post'); // true
 ]]></programlisting>
 
         <para>
-            As you can see, the above rules exercise whether owners and guests can view posts,
-            which they can, or post new posts, which owners can and guests cannot. But as you
-            might expect this type of system might not be as dynamic as we wish it to be.
-            What if we want to ensure a specific owner actual owns a very specific blog post
-            before allowing him to publish it? In other words, we want to ensure that only post
-            owners have the ability to publish their own posts.
+            Wie man sieht können bei Ausführung der obigen Regeln entweder Eigentümer und Gäste
+            Posts ansehen, oder neue Posts erstellen, was Eigentümer können und Gäste nicht. Aber
+            wie man erwarten kann ist diese Art von System nicht so dynamisch wie man es wünschen
+            könnte. Was, wenn wir sicherstellen wollen das einem spezifischen Benutzer ein sehr
+            spezifischer Blogpost gehört bevor Ihm erlaubt wird Ihn zu veröffentlichen? In anderen
+            Worten wollen wir sicherstellen das nur Blogpost Eigentümer nur die Möglichkeit haben
+            Ihre eigenen Posts zu veröffentlichen.
         </para>
 
         <para>
-            This is where assertions come in. Assertions are methods that will be called out to
-            when the static rule checking is simply not enough. When registering an assertion
-            object this object will be consulted to determine, typically dynamically, if some
-            roles has access to some resource, with some optional privlidge that can only be
-            answered by the logic within the assertion. For this example, we'll use the following
-            assertion:
+            Hier kommen Annahmen zum Einsatz. Annahmen sind Methoden welche aufgerufen werden wenn
+            das prüfen einer statischen Regel einfach nicht genug ist. Wenn ein Annahmeobjekt
+            registriert wird, dann wird dieses Objekt konsultiert um, typischerweise dynamisch, zu
+            ermitteln ob einige Rollen Zugriff auf einige Ressourcen, mit einigen optionalen
+            Privilegien haben was nur durch die Logik in der Annahme beantwortet werden kann.
+            Für dieses Beispiel verwenden wir die folgende Annahme:
         </para>
 
         <programlisting language="php"><![CDATA[
 class OwnerCanPublishBlogPostAssertion implements Zend_Acl_Assert_Interface
 {
     /**
-     * This assertion should receive the actual User and BlogPost objects.
+     * Diese Annahme sollte die aktuellen Benutzer und BlogPost Objekte
+     * empfangen
      *
      * @param Zend_Acl $acl
      * @param Zend_Acl_Role_Interface $user
@@ -190,24 +194,25 @@ class OwnerCanPublishBlogPostAssertion implements Zend_Acl_Assert_Interface
             throw new Exception(__CLASS__
                               . '::'
                               . __METHOD__
-                              . ' expects the role to be'
-                              . ' an instance of User');
+                              . ' erwartet das die Rolle eine'
+                              . ' Instanz von user ist');
         }
 
         if (!$blogPost instanceof Default_Model_BlogPost) {
             throw new Exception(__CLASS__
                               . '::'
                               . __METHOD__
-                              . ' expects the resource to be'
-                              . ' an instance of BlogPost');
+                              . ' erwartet das die Ressource eine'
+                              . ' Instanz von BlogPost ist');
         }
 
-        // if role is publisher, he can always modify a post
+        // Wenn die Rolle ein publisher ist kann Sie einen Post immer verändern
         if ($user->getRoleId() == 'publisher') {
             return true;
         }
 
-        // check to ensure that everyone else is only modifying their own post
+        // Prüfen um sicherzustellen das alle anderen nur deren eigene Posts
+        // verändern
         if ($user->id != null && $blogPost->ownerUserId == $user->id) {
             return true;
         } else {
@@ -218,29 +223,30 @@ class OwnerCanPublishBlogPostAssertion implements Zend_Acl_Assert_Interface
 ]]></programlisting>
 
         <para>
-            To hook this into our <acronym>ACL</acronym> system, we would do the following:
+            Um dies mit unserem <acronym>ACL</acronym> System zu verknüpfen würden wir das folgende
+            tun:
         </para>
 
         <programlisting language="php"><![CDATA[
-// replace this:
+// Dies ersetzen:
 //   $acl->allow('owner', 'blogPost', 'publish');
-// with this:
+// Mit diesem:
 $acl->allow('owner',
             'blogPost',
             'publish',
             new OwnerCanPublishBlogPostAssertion());
 
-// lets also add the role of a "publisher" who has access to everything
+// Auch die Rolle"publisher" hinzufügen der auf alles Zugriff hat
 $acl->allow('publisher', 'blogPost', 'publish');
 ]]></programlisting>
 
         <para>
-            Now, anytime the <acronym>ACL</acronym> is consulted about whether or not an owner
-            can publish a specific blog post, this assertion will be run. This assertion will
-            ensure that unless the role type is 'publisher' the owner role must be logically
-            tied to the blog post in question. In this example, we check to see that the
-            <property>ownerUserId</property> property of the blog post matches the id of the
-            owner passed in.
+            Jetzt wird jedesmal wenn <acronym>ACL</acronym> darüber konsultiert wird ob ein
+            Benutzer einen spezifischen Blogpost veröffentlichen kann diese Annahme ausgeführt.
+            Diese Annahme stellt sicher dass, solange der Rollentyp nicht 'publisher' ist, die
+            Benutzerrolle der Anfrage logisch mit dem Blogpost verbunden sein muss. In diesem
+            Beispiel haben wir geprüft das die Eigenschaft <property>ownerUserId</property> des
+            Blogposts mit der übergebenen Id des Benutzers übereinstimmt.
         </para>
     </sect2>
 </sect1>

@@ -5,25 +5,26 @@
     <title>Der Cache Manager</title>
 
     <para>
-        It's the nature of applications to require a multitude of caches of any
-        type often dependent on the controller, library or domain model being
-        accessed. To allow for a simple means of defining <classname>Zend_Cache</classname>
-        options in advance (such as from a bootstrap) so that accessing a cache
-        object requires minimum setup within the application source code, the
-        <classname>Zend_Cache_Manager</classname> class was written. This class
-        is accompanied by <classname>Zend_Application_Resource_Cachemanager</classname>
-        ensuring bootstrap configuration is available and
-        <classname>Zend_Controller_Action_Helper_Cache</classname> to allow simple
-        cache access and instantiation from controllers and other helpers.
+        Es ist die Natur von Anwendungen eine Vielzahl an Caches jedes Types zu benötigen oft
+        abhängig vom Controller, der Bibliothek oder dem Domainmodell auf das zugegriffen wird.
+        Um die einfache Definition von <classname>Zend_Cache</classname> Optionen zu erlauben
+        (wie von der Bootstrap), damit auf ein Cacheobjekt zugegriffen werden kann und nur ein
+        minimales Setup im Sourcecode der Anwendung benötigt wird, wurde die Klasse
+        <classname>Zend_Cache_Manager</classname> geschrieben. Diese Klasse wird von
+        <classname>Zend_Application_Resource_Cachemanager</classname> verwendet um sicherzustellen
+        das die Konfiguration der Bootstrap vorhanden ist, und
+        <classname>Zend_Controller_Action_Helper_Cache</classname> um einen einfachen Zugriff und
+        eine einfache Instanzierung von Controllern und anderen Helfern zu erlauben.
     </para>
 
     <para>
-        The basic operation of this component is as follows. The Cache Manager allows
-        users to setup "option templates", basically options for a set of named
-        caches. These can be set using the method <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname>.
-        These templates do not give rise to a cache until the user attempts to retrieve
-        a named cache (associated with an existing option template) using the method
-        <methodname>Zend_Cache_Manager::getCache()</methodname>.
+        Die grundsätzliche Operation dieser Komponente ist wie folgt. Der Cache Manager erlaubt es
+        Benutzern "Option Templates" zu konfigurieren, grundsätzlich Optionen für ein Set von
+        benannten Caches. Diese können gesetzt werden indem die Methode
+        <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname> verwendet wird. Diese
+        Templates führen einen Cache nicht aus solange der Benutzer nicht versucht einen benannten
+        Cache zu empfangen (assoziiert mit einem existierenden Optionstemplate) indem die Methode
+        <methodname>Zend_Cache_Manager::getCache()</methodname> verwendet wird.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -48,14 +49,14 @@ $dbCache = array(
 $manager->setCacheTemplate('database', $dbCache);
 
 /**
- * Anywhere else where the Cache Manager is available...
+ * Überall anders wo der Cache Manager vorhanden ist...
  */
 $databaseCache = $manager->getCache('database');
 ]]></programlisting>
 
     <para>
-        The Cache Manager also allows simple setting of pre-instantiated caches
-        using the method <methodname>Zend_Cache_Manager::setCache()</methodname>.
+        Der Cache Manager erlaubt das einfache Erstellen von vor-instanzierten Caches durch
+        Verwenden der Methode <methodname>Zend_Cache_Manager::setCache()</methodname>.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -77,16 +78,16 @@ $manager = new Zend_Cache_Manager;
 $manager->setCache('database', $dbCache);
 
 /**
- * Anywhere else where the Cache Manager is available...
+ * Überall anders wo der Cache Manager vorhanden ist...
  */
 $databaseCache = $manager->getCache('database');
 ]]></programlisting>
 
     <para>
-        If for any reason, you are unsure where the Cache Manager contains a
-        pre-instantiated cache or a relevant option cache template to create one
-        on request, you can check for the existance of a name cache configuration
-        or instance using the method <methodname>Zend_Cache_Manager::hasCache()</methodname>.
+        Wenn man aus irgendeinem Grund unsicher ist ob der Cache Manager einen vor-instanzierten
+        Cache enthält oder ein relevantes Option Cache Template um einen auf Anfrage zu erstellen,
+        kann die Existenz einer benannten Cachekonfiguration oder Instanz geprüft werden indem die
+        Methode <methodname>Zend_Cache_Manager::hasCache()</methodname> verwendet wird.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -111,21 +112,21 @@ $dbCache = array(
 $manager->setCacheTemplate('database', $dbCache);
 
 /**
- * Anywhere else where the Cache Manager is available...
+ * Überall anders wo der Cache Manager vorhanden ist...
  */
 if ($manager->hasCache('database')) {
     $databaseCache = $manager->getCache('database');
 } else {
-    // create a cache from scratch if none available from Manager
+    // Erstelle einen Cache wenn keiner from Manager vorhanden ist
 }
 ]]></programlisting>
 
     <para>
-        In some scenarios, you may have defined a number of general use caches
-        using <classname>Zend_Cache_Manager</classname> but need to fine-tune
-        their options before use depending on the circumstances. You can edit
-        previously set cache templates on the fly before they are instantiated
-        using the method <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname>.
+        In einigen Szenarios könnte man eine Anzahl von generell zu verwendenden Caches definiert
+        haben indem <classname>Zend_Cache_Manager</classname> verwendet wird, aber deren Optionen
+        feintunen bevor Sie anhängig von Ihren Notwendigkeiten verwendet werden. Man kann vorher
+        gesetzte Cache Templates on the fly bearbeiten bevor Sie instanziert werden indem die
+        Methode <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname> verwendet wird.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -150,9 +151,9 @@ $dbCache = array(
 $manager->setCacheTemplate('database', $dbCache);
 
 /**
- * Anywhere else where the Cache Manager is available...
- * Here we decided to store some upcoming database queries to Memcached instead
- * of the preconfigured File backend.
+ * Überall anders wo der Cache Manager vorhanden ist...
+ * Hier haben wir entschieden einige kommende Datenbankabfragen zu Memcache zu
+ * Speichern statt dem vorkonfigurierten File Backend
  */
 $fineTuning = array(
     'backend' => array(
@@ -178,27 +179,26 @@ $databaseCache = $manager->getCache('database');
 ]]></programlisting>
 
     <para>
-        To assist in making the Cache Manager more useful, it is accompanied by
-        <classname>Zend_Application_Resource_Cachemanager</classname> and also
-        the <classname>Zend_Controller_Action_Helper_Cache</classname> Action
-        Helper. Both of these are described in their relevant areas of the
-        Reference Guide.
+        Um zu helfen den Cache Manager sinnvoller zu machen wird
+        <classname>Zend_Application_Resource_Cachemanager</classname> und auch der Action Helfer
+        <classname>Zend_Controller_Action_Helper_Cache</classname> angeboten. Beide sind in den
+        betreffenden Abschnitten des Referenz Handbuchs beschrieben.
     </para>
 
     <para>
-        Out of the box, <classname>Zend_Cache_Manager</classname> already includes
-        four pre-defined cache templates called "skeleton", "default", "page" and
-        "tagcache". The default cache is a simple File based cache using the Core
-        frontend which assumes a cache_dir called "cache" exists at the same
-        level as the conventional "public" directory of a Zend Framework application.
-        The skeleton cache is actually a NULL cache, i.e. it contains no options.
-        The remaining two caches are used to implement a default Static Page Cache
-        where static HTML/XML or even JSON may be written to static files in
-        /public. Control over a Static Page Cache is offered via
-        <classname>Zend_Controller_Action_Helper_Cache</classname>, though you may
-        alter the settings of this "page" the "tagcache" it uses to track tags using
-        <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname> or even
-        <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname> if overloading
-        all of their options.
+        <classname>Zend_Cache_Manager</classname> enthält bereits vier vordefinierte Cache Templates
+        welche "skeleton", "default", "page" und "tagcache" heißen. Der Standardcache ist ein
+        einfacher Dateibasierter Cache welcher das Core Frontend verwendet und annimmt das ein
+        cache_dir auf dem gleichen Level wie das konventionelle "public" Verzeichnis einer Zend
+        Framework Anwendung existiert und "cache" heißt. Der skeleton Cache ist aktuell ein NULL
+        Cache, er enthält also keine Optionen. Die verbleibenden zwei Caches werden verwendet um
+        einen standardmäßigen statischen Seitencache zu implementieren wobei statisches
+        HTML/XML oder sogar JSON in statische Dateien unter /public geschrieben sein können.
+        Die Kontrolle über einen statischen Seitencache wird über
+        <classname>Zend_Controller_Action_Helper_Cache</classname> angeboten, und man kann
+        die Einstellungen dieser "page" verändern und den "tagcache" den Sie verwendet um Tags
+        zu verfolgen indem <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname>
+        verwendet wird, oder sogar <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname>
+        wenn alle deren Optionen überladen werden.
     </para>
 </sect1>

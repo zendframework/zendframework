@@ -50,7 +50,6 @@ $currency = new Zend_Currency();
             Gebietsschema des eigenen Systems nicht automatisch eruiert werden kann, wird
             <classname>Zend_Currency</classname> eine Ausnahme werfen. Wenn dieses Verhalten
             auftritt, sollte man daran denken das Gebietsschema per Hand zu setzen.
-            auftritt sollte man daran denken das Gebietsschema per Hand zu setzen.
         </para>
     </note>
 

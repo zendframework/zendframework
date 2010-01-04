@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 18840 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.input">
     <title>Zend_Filter_Input</title>
@@ -366,6 +366,27 @@ $input->setOptions($options);
 ]]></programlisting>
 
             <para>
+                And you can also add a translator which gives you the ability to provide multiple
+                languages for the messages which are returned by
+                <classname>Zend_Filter_Input</classname>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+$translate = new Zend_Translate_Adapter_Array(array(
+    Zend_Filter_Input::MISSING_MESSAGE => "Where is the field?"
+);
+
+$input = new Zend_Filter_Input($filters, $validators, $data);
+$input->setTranslator($translate);
+]]></programlisting>
+
+            <para>
+                When you are using an application wide translator, then it will also be used by
+                <classname>Zend_Filter_Input</classname>. In this case you will not have to set the
+                translator manually.
+            </para>
+
+            <para>
                 Le résultat de la méthode <methodname>getUnknown()</methodname> est un tableau associatif
                 dont les clés sont des noms de champs et les valeurs sont les valeurs de champs
                 correspondants. Les noms de champs sont dans ce cas les clés du tableau au lieu des
@@ -405,6 +426,29 @@ $m = $input->getUnescaped('month'); // donnée non échappée
                     de sécurité XSS (Cross Site Scripting).
                 </para>
             </note>
+
+            <warning>
+                <title>Escaping unvalidated fields</title>
+
+                <para>
+                    As mentioned before <methodname>getEscaped()</methodname> returns only validated
+                    fields. Fields which do not have an associated validator can not be received
+                    this way. Still, there is a possible way. You can add a empty validator for all
+                    fields.
+                </para>
+
+            <programlisting language="php"><![CDATA[
+$validators = array('*' => array());
+
+$input = new Zend_Filter_Input($filters, $validators, $data, $options);
+]]></programlisting>
+
+                <para>
+                    But be warned that using this notation introduces a security leak which could
+                    be used for cross-site scripting attacks. Therefor you should always set
+                    individual validators for each field.
+                </para>
+            </warning>
 
             <para>
                 Il est possible de définir un autre filtre comme filtre par défaut pour

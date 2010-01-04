@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17208 -->
+<!-- EN-Revision: 19419 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
     <title>Introduction</title>
@@ -81,7 +81,9 @@ echo Zend_Filter::get('&', 'HtmlEntities');
             Vous pouvez aussi fournir un tableau de paramètres destinés au constructeur de la
             classe, s'ils sont nécessaires pour votre classe de filtre. <programlisting
             role="php"><![CDATA[
-echo Zend_Filter::get('"', 'HtmlEntities', array(ENT_QUOTES));
+echo Zend_Filter::filterStatic('"',
+                               'HtmlEntities',
+                               array('quotestyle' => ENT_QUOTES));
 ]]></programlisting></para>
 
         <para>

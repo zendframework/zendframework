@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19854 -->
+<!-- EN-Revision: 20076 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.available-resources" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Plugins de ressources disponibles</title>
@@ -13,7 +13,9 @@
     <xi:include href="Zend_Application-AvailableResources-Db.xml" />
     <xi:include href="Zend_Application-AvailableResources-Frontcontroller.xml" />
     <xi:include href="Zend_Application-AvailableResources-Layout.xml" />
+    <xi:include href="Zend_Application-AvailableResources-Locale.xml" />
     <xi:include href="Zend_Application-AvailableResources-Log.xml" />
+    <xi:include href="Zend_Application-AvailableResources-Mail.xml" />
     <xi:include href="Zend_Application-AvailableResources-Modules.xml" />
     <xi:include href="Zend_Application-AvailableResources-Navigation.xml" />
     <xi:include href="Zend_Application-AvailableResources-Router.xml" />

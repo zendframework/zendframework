@@ -230,7 +230,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		
         $requestBody = $this->_fillTemplate($requestBody, array(
             'BaseUrl' => $this->getBaseUrl(),
-            'TableName' => $tableName,
+            'TableName' => htmlspecialchars($tableName),
         	'Updated' => $this->isoDate(),
             'AccountName' => $this->_accountName
         ));
@@ -803,7 +803,7 @@ class Zend_Service_WindowsAzure_Storage_Table
 		        if (strtolower($azureValue->Type) == 'edm.boolean') {
 		            $value[] = ($azureValue->Value == true ? '1' : '0');
 		        } else {
-		            $value[] = $azureValue->Value;
+		            $value[] = htmlspecialchars($azureValue->Value);
 		        }
 		    }
 		    

@@ -17,7 +17,7 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://todo     name_todo
- * @version    $Id: Blob.php 35999 2009-12-21 07:56:42Z unknown $
+ * @version    $Id: Blob.php 36457 2010-01-04 07:36:33Z unknown $
  */
 
 /**
@@ -212,9 +212,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 			
 		// Create metadata headers
 		$headers = array();
-		foreach ($metadata as $key => $value) {
-		    $headers["x-ms-meta-" . strtolower($key)] = $value;
-		}
+		$headers = array_merge($headers, $this->_generateMetadataHeaders($metadata));
 		
 		// Perform request
 		$response = $this->_performRequest($containerName, '?restype=container', Zend_Http_Client::PUT, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_WRITE);			
@@ -354,12 +352,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$response = $this->_performRequest($containerName, '?restype=container', Zend_Http_Client::GET, array(), false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_CONTAINER, Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ);	
 		if ($response->isSuccessful()) {
 		    // Parse metadata
-		    $metadata = array();
-		    foreach ($response->getHeaders() as $key => $value) {
-		        if (substr(strtolower($key), 0, 10) == "x-ms-meta-") {
-		            $metadata[str_replace("x-ms-meta-", '', strtolower($key))] = $value;
-		        }
-		    }
+		    $metadata = $this->_parseMetadataHeaders($response->getHeaders());
 
 		    // Return container
 		    return new Zend_Service_WindowsAzure_Storage_BlobContainer(
@@ -419,9 +412,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		    
 		// Create metadata headers
 		$headers = array();
-		foreach ($metadata as $key => $value) {
-		    $headers["x-ms-meta-" . strtolower($key)] = $value;
-		}
+		$headers = array_merge($headers, $this->_generateMetadataHeaders($metadata)); 
 		
 		// Additional headers?
 		foreach ($additionalHeaders as $key => $value) {
@@ -559,9 +550,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 
 		// Create metadata headers
 		$headers = array();
-		foreach ($metadata as $key => $value) {
-		    $headers["x-ms-meta-" . strtolower($key)] = $value;
-		}
+		$headers = array_merge($headers, $this->_generateMetadataHeaders($metadata)); 
 		
 		// Additional headers?
 		foreach ($additionalHeaders as $key => $value) {
@@ -753,9 +742,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		
 	    // Create metadata headers
 		$headers = array();
-		foreach ($metadata as $key => $value) {
-		    $headers["x-ms-meta-" . strtolower($key)] = $value;
-		}
+		$headers = array_merge($headers, $this->_generateMetadataHeaders($metadata)); 
 		
 		// Additional headers?
 		foreach ($additionalHeaders as $key => $value) {
@@ -880,9 +867,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 
 		// Create metadata headers
 		$headers = array();
-		foreach ($metadata as $key => $value) {
-		    $headers["x-ms-meta-" . strtolower($key)] = $value;
-		}
+		$headers = array_merge($headers, $this->_generateMetadataHeaders($metadata)); 
 		
 		// Additional headers?
 		foreach ($additionalHeaders as $key => $value) {
@@ -996,12 +981,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		$response = $this->_performRequest($resourceName, '', Zend_Http_Client::HEAD, $headers, false, null, Zend_Service_WindowsAzure_Storage::RESOURCE_BLOB, Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::PERMISSION_READ);
 		if ($response->isSuccessful()) {
 		    // Parse metadata
-		    $metadata = array();
-		    foreach ($response->getHeaders() as $key => $value) {
-		        if (substr(strtolower($key), 0, 10) == "x-ms-meta-") {
-		            $metadata[str_replace("x-ms-meta-", '', strtolower($key))] = $value;
-		        }
-		    }
+		    $metadata = $this->_parseMetadataHeaders($response->getHeaders());
 
 		    // Return blob
 			return new Zend_Service_WindowsAzure_Storage_BlobInstance(
@@ -1079,9 +1059,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
 		    
 		// Create metadata headers
 		$headers = array();
-		foreach ($metadata as $key => $value) {
-		    $headers["x-ms-meta-" . strtolower($key)] = $value;
-		}
+		$headers = array_merge($headers, $this->_generateMetadataHeaders($metadata)); 
 		
 		// Additional headers?
 		foreach ($additionalHeaders as $key => $value) {

@@ -17,7 +17,7 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Storage.php 35999 2009-12-21 07:56:42Z unknown $
+ * @version    $Id: Storage.php 36457 2010-01-04 07:36:33Z unknown $
  */
 
 /**
@@ -422,6 +422,53 @@ class Zend_Service_WindowsAzure_Storage
         }
         
         return $xml;
+	}
+	
+	/**
+	 * Generate metadata headers
+	 * 
+	 * @param array $metadata
+	 * @return HTTP headers containing metadata
+	 */
+	protected function _generateMetadataHeaders($metadata = array())
+	{
+		// Validate
+		if (!is_array($metadata)) {
+			return array();
+		}
+		
+		// Return headers
+		$headers = array();
+		foreach ($metadata as $key => $value) {
+			if (strpos($value, "\r") !== false || strpos($value, "\n") !== false) {
+				throw new Zend_Service_WindowsAzure_Exception('Metadata cannot contain newline characters.');
+			}
+		    $headers["x-ms-meta-" . strtolower($key)] = $value;
+		}
+		return $headers;
+	}
+	
+	/**
+	 * Parse metadata errors
+	 * 
+	 * @param array $headers HTTP headers containing metadata
+	 * @return array
+	 */
+	protected function _parseMetadataHeaders($headers = array())
+	{
+		// Validate
+		if (!is_array($headers)) {
+			return array();
+		}
+		
+		// Return metadata
+		$metadata = array();
+		foreach ($headers as $key => $value) {
+		    if (substr(strtolower($key), 0, 10) == "x-ms-meta-") {
+		        $metadata[str_replace("x-ms-meta-", '', strtolower($key))] = $value;
+		    }
+		}
+		return $metadata;
 	}
 	
 	/**

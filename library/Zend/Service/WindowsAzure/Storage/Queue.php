@@ -142,9 +142,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 			
 		// Create metadata headers
 		$headers = array();
-		foreach ($metadata as $key => $value) {
-		    $headers["x-ms-meta-" . strtolower($key)] = $value;
-		}
+		$headers = array_merge($headers, $this->_generateMetadataHeaders($metadata)); 
 		
 		// Perform request
 		$response = $this->_performRequest($queueName, '', Zend_Http_Client::PUT, $headers);			
@@ -178,12 +176,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 		$response = $this->_performRequest($queueName, '?comp=metadata', Zend_Http_Client::GET);	
 		if ($response->isSuccessful()) {
 		    // Parse metadata
-		    $metadata = array();
-		    foreach ($response->getHeaders() as $key => $value) {
-		        if (substr(strtolower($key), 0, 10) == "x-ms-meta-") {
-		            $metadata[str_replace("x-ms-meta-", '', strtolower($key))] = $value;
-		        }
-		    }
+		    $metadata = $this->_parseMetadataHeaders($response->getHeaders());
 
 		    // Return queue
 		    $queue = new Zend_Service_WindowsAzure_Storage_QueueInstance(
@@ -239,9 +232,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 		    
 		// Create metadata headers
 		$headers = array();
-		foreach ($metadata as $key => $value) {
-		    $headers["x-ms-meta-" . strtolower($key)] = $value;
-		}
+		$headers = array_merge($headers, $this->_generateMetadataHeaders($metadata)); 
 		
 		// Perform request
 		$response = $this->_performRequest($queueName, '?comp=metadata', Zend_Http_Client::PUT, $headers);

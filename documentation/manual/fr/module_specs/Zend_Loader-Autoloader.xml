@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 18840 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader">
     <title>L'autoloader</title>
@@ -128,6 +128,171 @@ $autoloader->suppressNotFoundWarnings(true);
         <programlisting language="php"><![CDATA[
 $autoloader->setFallbackAutoloader(true);
 ]]></programlisting>
+    </sect2>
+
+    <sect2 id="zend.loader.autoloader.zf-version">
+        <title>Selecting a Zend Framework version</title>
+
+        <para>
+            Typically, you will use the version of Zend Framework that the autoloader you
+            instantiate came with. However, when developing a project, it's often useful to track
+            specific versions, major or minor branches, or just the latest version.
+            <classname>Zend_Loader_Autoloader</classname>, as of version 1.10, offers some features
+            to help manage this task.
+        </para>
+
+        <para>
+            Imagine the following scenario:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    During <emphasis>development</emphasis>, you want to track the latest version of
+                    Zend Framework you have installed, so that you can ensure the application works
+                    when you upgrade between versions.
+                </para>
+
+                <para>
+                    When pushing to <emphasis>Quality Assurance</emphasis>, however, you need to
+                    have slightly more stability, so you want to use the latest installed revision
+                    of a specific minor version.
+                </para>
+
+                <para>
+                    Finally, when you push to <emphasis>production</emphasis>, you want to pin to a
+                    specific installed version, to ensure no breakage occurs if or when you add new
+                    versions of Zend Framework to you server.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            The autoloader allows you to do this with the method
+            <methodname>setZfPath()</methodname>. This method takes two arguments, a
+            <emphasis>path</emphasis> to a set of Zend Framework installations, and a
+            <emphasis>version</emphasis> to use. Once invoked, it prepends a path to the
+            <constant>include_path</constant> pointing to the appropriate Zend Framework
+            installation library.
+        </para>
+
+        <para>
+            The directory you specify as your <emphasis>path</emphasis> should have a tree such as
+            the following:
+        </para>
+
+        <programlisting language="text"><![CDATA[
+ZendFramework/
+|-- 1.9.2/
+|   |-- library/
+|-- ZendFramework-1.9.1-minimal/
+|   |-- library/
+|-- 1.8.4PL1/
+|   |-- library/
+|-- 1.8.4/
+|   |-- library/
+|-- ZendFramework-1.8.3/
+|   |-- library/
+|-- 1.7.8/
+|   |-- library/
+|-- 1.7.7/
+|   |-- library/
+|-- 1.7.6/
+|   |-- library/
+]]></programlisting>
+
+        <para>
+            (where <emphasis>path</emphasis> points to the directory "ZendFramework" in the above
+            example)
+        </para>
+
+        <para>
+            Note that each subdirectory should contain the directory <filename>library</filename>,
+            which contains the actual Zend Framework library code. The individual subdirectory names
+            may be version numbers, or simply be the untarred contents of a standard Zend Framework
+            distribution tarball/zipfile.
+        </para>
+
+        <para>
+            Now, let's address the use cases. In the first use case, in
+            <emphasis>development</emphasis>, we want to track the latest source install. We can do
+            that by passing "latest" as the version:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$autoloader->setZfPath($path, 'latest');
+]]></programlisting>
+
+        <para>
+            In the example from above, this will map to the directory
+            <filename>ZendFramework/1.9.2/library/</filename>; you can verify this by checking the
+            return value of <methodname>getZfPath()</methodname>.
+        </para>
+
+        <para>
+            In the second situation, for <emphasis>quality assurance</emphasis>, let's say we want
+            to pin to the 1.8 minor release, using the latest install you have for that release. You
+            can do so as follows:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$autoloader->setZfPath($path, '1.8');
+]]></programlisting>
+
+        <para>
+            In this case, it will find the directory
+            <filename>ZendFramework/1.8.4PL1/library/</filename>.
+        </para>
+
+        <para>
+            In the final case, for <emphasis>production</emphasis>, we'll pin to a specific version
+            -- 1.7.7, since that was what was available when Quality Assurance tested prior to our
+            release.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$autoloader->setZfPath($path, '1.7.7');
+]]></programlisting>
+
+        <para>
+            Predictably, it finds the directory <filename>ZendFramework/1.7.7/library/</filename>.
+        </para>
+
+        <para>
+            You can also specify these values in the configuration file you use with
+            <filename>Zend_Application</filename>. To do so, you'd specify the following
+            information:
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+[production]
+autoloaderZfPath = "path/to/ZendFramework"
+autoloaderZfVersion = "1.7.7"
+
+[qa]
+autoloaderZfVersion = "1.8"
+
+[development]
+autoloaderZfVersion = "latest"
+]]></programlisting>
+
+        <para>
+            Note the different environment sections, and the different version specified in each
+            environment; these factors will allow <classname>Zend_Application</classname> to
+            configure the autoloader appropriately.
+        </para>
+
+        <warning>
+            <title>Performance implications</title>
+
+            <para>
+                For best performance, either do not use this feature, or specify a specific Zend
+                Framework version (i.e., not "latest", a major revision such as "1", or a minor
+                revision such as "1.8"). Otherwise, the autoloader will need to scan the provided
+                path for directories matching the criteria -- a somewhat expensive operation to
+                perform on each request.
+            </para>
+        </warning>
     </sect2>
 
     <sect2 id="zend.loader.autoloader.interface">

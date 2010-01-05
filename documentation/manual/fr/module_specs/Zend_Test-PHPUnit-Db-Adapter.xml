@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17985 -->
+<!-- EN-Revision: 19418 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.db.adapter">
     <title>Utiliser l'adaptateur de tests</title>
@@ -84,6 +84,8 @@ echo $qp->getQuerY(); // SELECT * FROM bugs
     <para>
         L'adaptateur de tests définit aussi les méthodes
         <methodname>listTables()</methodname>, <methodname>describeTables()</methodname> et
-        <methodname>lastInsertId()</methodname>.
+        <methodname>lastInsertId()</methodname>. De plus en utilisant
+        <methodname>setQuoteIdentifierSymbol()</methodname> vous pouvez spécifier quel symbole
+        utilisé pour l'échappement, par défaut aucun n'est utilisé.
     </para>
 </sect2>

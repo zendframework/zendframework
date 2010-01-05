@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17110 -->
+<!-- EN-Revision: 19669 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.plurals">
-
     <title>Notation des pluriels pour Translation</title>
 
     <para>
@@ -29,7 +28,6 @@
     </para>
 
     <sect2 id="zend.translate.plurals.traditional">
-
         <title>Méthode traditionnelle</title>
 
         <para>
@@ -38,7 +36,6 @@
         </para>
 
         <example id="zend.translate.plurals.traditional.example1">
-
             <title>Exemple avec la méthode traditionnelle</title>
 
             <para>
@@ -55,13 +52,10 @@
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->plural('Car', 'Cars', $number);
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.translate.plurals.modern">
-
         <title>Méthode moderne de traduction du pluriel</title>
 
         <para>
@@ -75,7 +69,6 @@ $translate->plural('Car', 'Cars', $number);
         </para>
 
         <example id="zend.translate.plurals.modern.example1">
-
             <title>Exemple de la méthode moderne de traduction du pluriel</title>
 
             <para>
@@ -86,7 +79,6 @@ $translate->plural('Car', 'Cars', $number);
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->translate(array('Car', 'Cars', $number));
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -94,7 +86,6 @@ $translate->translate(array('Car', 'Cars', $number));
         </para>
 
         <example id="zend.translate.plurals.modern.example2">
-
             <title>Exemple de la méthode moderne de traduction du pluriel utilisant un langage source différent</title>
 
             <para>
@@ -109,7 +100,6 @@ $translate->translate(array('Car',
                             $number,
                             'ru'));
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -120,11 +110,9 @@ $translate->translate(array('Car',
         <para>
             Si vous omettez la langue, l'anglais sera utilisé et tout pluriel superflu sera ignoré.
         </para>
-
     </sect2>
 
     <sect2 id="zend.translate.plurals.source">
-
         <title>Fichiers sources de pluriels</title>
 
         <para>
@@ -186,7 +174,6 @@ $translate->translate(array('Car',
         </para>
 
         <sect3 id="zend.translate.plurals.source.array">
-
             <title>Source tableau contenant des pluriels</title>
 
             <para>
@@ -225,11 +212,9 @@ array(
                 Si votre langue supporte plusieurs pluriels, ajoutez les simplement dans le tableau à la
                 suite du premier pluriel.
             </para>
-
         </sect3>
 
         <sect3 id="zend.translate.plurals.source.csv">
-
             <title>Csv et pluriels</title>
 
             <para>
@@ -246,11 +231,9 @@ array(
                 tout les pluriels suivants doivent être ajoutés après, mais sans traduction.
                 Notez que le délimiteur est nécessaire pour les pluriels vides.
             </para>
-
         </sect3>
 
         <sect3 id="zend.translate.plurals.source.gettext">
-
             <title>Gettext et pluriels</title>
 
             <para>
@@ -259,18 +242,84 @@ array(
             </para>
 
             <note>
-
                 <para>
                     Notez que gettext ne gère pas les langues à plusieurs pluriels, utilisez
                     un autre adaptateur dans ce cas là.
                 </para>
-
             </note>
-
         </sect3>
-
     </sect2>
 
+    <sect2 id="zend.translate.plurals.customrules">
+        <title>Custom plural rules</title>
+
+        <para>
+            In rare cases it could be useful to be able to define own plural rules. See chinese for
+            example. This language defines two plural rules. Per default it does not use plurals.
+            But in rare cases it uses a rule like <emphasis>(number == 1) ? 0 : 1</emphasis>.
+        </para>
+
+        <para>
+            Also when you want to use a language which has no known plural rules, and would want to
+            define your own rules.
+        </para>
+
+        <para>
+            This can be done by using <methodname>Zend_Translate_Plural::setRule()</methodname>.
+            The method expects two parameters which must be given. A rule, which is simply a
+            callback to a self defined method. And a locale for which the rule will be used.
+        </para>
+
+        <para>
+            Your rule could look like this:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+public function MyRule($number) {
+    return ($number == 10) ? 0 : 1;
+}
+]]></programlisting>
+
+        <para>
+            As you see, your rule must accept one parameter. It is the number which you will use to
+            return which plural the translation has to use. In our example we defined that when we
+            get a '10' the plural definition 0 has to be used, in all other cases we're using 1.
+        </para>
+
+        <para>
+            Your rules can be as simple or as complicated as you want. You must only return an
+            integer value. The plural definition 0 stands for singular translation, and 1 stands for
+            the first plural rule.
+        </para>
+
+        <para>
+            To activate your rule, and to link it to the wished locale, you have to call it like
+            this:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+Zend_Translate_Plural::setPlural('MyPlural', 'zh');
+]]></programlisting>
+
+        <para>
+            Now we linked our plural definition to the chinese language.
+        </para>
+
+        <para>
+            You can define one plural rule for every language. But you should be aware that you set
+            the plural rules before you are doing translations.
+        </para>
+
+        <note>
+            <title>Define custom plurals only when needed</title>
+
+            <para>
+                <classname>Zend_Translate</classname> defines plurals for most known languages.
+                You should not define own plurals when you are not in need. The default rules work
+                most of time.
+            </para>
+        </note>
+    </sect2>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

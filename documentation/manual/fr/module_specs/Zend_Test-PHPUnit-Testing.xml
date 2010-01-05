@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 19418 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.testing">
     <title>Tester vos contrôleurs et vos applications MVC</title>
@@ -16,7 +16,7 @@
     </para>
 
     <programlisting language="php"><![CDATA[
-class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+class IndexControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
 
@@ -35,7 +35,7 @@ class IndexControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
     </para>
 
     <programlisting language="php"><![CDATA[
-class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
+class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 {
     // ...
 
@@ -76,4 +76,52 @@ class FooControllerTest extends Zend_Test_PHPUnit_Controller_TestCase
 ]]></programlisting>
 
     <para>Maintenant que la requête est construite, il est temps de créer des assertions.</para>
+
+    <sect3 id="zend.test.phpunit.testing.redirector">
+        <title>Controller Tests and the Redirector Action Helper</title>
+
+        <important>
+            <para>
+                The redirect action helper issues an <methodname>exit()</methodname> statement
+                when using the method <methodname>gotoAndExit()</methodname>
+                and will then obviously also stops a test running for this method.
+                For testability of your application dont use that method on the
+                redirector!
+            </para>
+        </important>
+
+        <para>
+            Due to its nature the redirector action helper plugin issues a redirect
+            and exists after this. Because you cannot test parts of an application
+            that issue exit calls <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>
+            automatically disables the exit part of the redirector which can cause
+            different behaviours in tests and the real application. To make sure
+            redirect work correctly you should it them in the following way:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class MyController extends Zend_Controller_Action
+{
+    public function indexAction()
+    {
+        if($someCondition == true) {
+            return $this->_redirect(...);
+        } else if($anotherCondition == true) {
+            $this->_redirector->gotoSimple("foo");
+            return;
+        }
+
+        // do some stuff here
+    }
+}
+]]></programlisting>
+
+        <important>
+            <para>
+                Depending on your application this is not enough as additional action, <methodname>preDispatch()</methodname> or
+                <methodname>postDispatch()</methodname> logic might be executed. This cannot be handled in a good way with
+                Zend Test currently.
+            </para>
+        </important>
+    </sect3>
 </sect2>

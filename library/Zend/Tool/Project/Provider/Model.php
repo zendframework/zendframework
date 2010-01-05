@@ -102,7 +102,8 @@ class Zend_Tool_Project_Provider_Model extends Zend_Tool_Project_Provider_Abstra
 
         // determine if testing is enabled in the project
         $testingEnabled = false; //Zend_Tool_Project_Provider_Test::isTestingEnabled($this->_loadedProfile);
-
+        $testModelResource = null;
+        
         if (self::hasResource($this->_loadedProfile, $name, $module)) {
             throw new Zend_Tool_Project_Provider_Exception('This project already has a model named ' . $name);
         }
@@ -118,7 +119,6 @@ class Zend_Tool_Project_Provider_Model extends Zend_Tool_Project_Provider_Abstra
             $modelResource = self::createResource($this->_loadedProfile, $name, $module);
 
             if ($testingEnabled) {
-                $testModelResource = null;
                 // $testModelResource = Zend_Tool_Project_Provider_Test::createApplicationResource($this->_loadedProfile, $name, 'index', $module);
             }
 

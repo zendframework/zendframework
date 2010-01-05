@@ -149,7 +149,7 @@
         <title>Zend_Barcode_Object_Ean2</title>
 
         <para>
-            <inlinegraphic width="101" align="center" valign="middle"
+            <inlinegraphic width="41" align="center" valign="middle"
                 fileref="figures/zend.barcode.objects.details.ean2.png" format="PNG"/>
         </para>
 
@@ -202,7 +202,7 @@
         <title>Zend_Barcode_Object_Ean5</title>
 
         <para>
-            <inlinegraphic width="101" align="center" valign="middle"
+            <inlinegraphic width="68" align="center" valign="middle"
                 fileref="figures/zend.barcode.objects.details.ean5.png" format="PNG"/>
         </para>
 
@@ -255,7 +255,7 @@
         <title>Zend_Barcode_Object_Ean8</title>
 
         <para>
-            <inlinegraphic width="101" align="center" valign="middle"
+            <inlinegraphic width="82" align="center" valign="middle"
                 fileref="figures/zend.barcode.objects.details.ean8.png" format="PNG"/>
         </para>
 
@@ -308,7 +308,7 @@
         <title>Zend_Barcode_Object_Ean13</title>
 
         <para>
-            <inlinegraphic width="101" align="center" valign="middle"
+            <inlinegraphic width="113" align="center" valign="middle"
                 fileref="figures/zend.barcode.objects.details.ean13.png" format="PNG"/>
         </para>
 
@@ -402,7 +402,7 @@
         <title>Zend_Barcode_Object_Identcode</title>
 
         <para>
-            <inlinegraphic width="155" align="center" valign="middle"
+            <inlinegraphic width="137" align="center" valign="middle"
                 fileref="figures/zend.barcode.objects.details.identcode.png" format="PNG"/>
         </para>
 
@@ -561,7 +561,7 @@
         <title>Zend_Barcode_Object_Planet</title>
 
         <para>
-            <inlinegraphic width="155" align="center" valign="middle"
+            <inlinegraphic width="286" align="center" valign="middle"
                 fileref="figures/zend.barcode.objects.details.planet.png" format="PNG"/>
         </para>
 
@@ -600,7 +600,7 @@
         <title>Zend_Barcode_Object_Postnet</title>
 
         <para>
-            <inlinegraphic width="155" align="center" valign="middle"
+            <inlinegraphic width="286" align="center" valign="middle"
                 fileref="figures/zend.barcode.objects.details.postnet.png" format="PNG"/>
         </para>
 
@@ -639,7 +639,7 @@
         <title>Zend_Barcode_Object_Royalmail</title>
 
         <para>
-            <inlinegraphic width="155" align="center" valign="middle"
+            <inlinegraphic width="158" align="center" valign="middle"
                 fileref="figures/zend.barcode.objects.details.royalmail.png" format="PNG"/>
         </para>
 
@@ -679,7 +679,7 @@
         <title>Zend_Barcode_Object_Upca</title>
 
         <para>
-            <inlinegraphic width="155" align="center" valign="middle"
+            <inlinegraphic width="115" align="center" valign="middle"
                 fileref="figures/zend.barcode.objects.details.upca.png" format="PNG"/>
         </para>
 
@@ -732,7 +732,7 @@
         <title>Zend_Barcode_Object_Upce</title>
 
         <para>
-            <inlinegraphic width="155" align="center" valign="middle"
+            <inlinegraphic width="71" align="center" valign="middle"
                 fileref="figures/zend.barcode.objects.details.upce.png" format="PNG"/>
         </para>
 

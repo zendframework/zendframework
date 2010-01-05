@@ -97,10 +97,9 @@ class Zend_Barcode_Object_Upce extends Zend_Barcode_Object_Ean13
     {
         $quietZone       = $this->getQuietZone();
         $startCharacter  = (3 * $this->_barThinWidth) * $this->_factor;
-        $middleCharacter = (5 * $this->_barThinWidth) * $this->_factor;
-        $stopCharacter   = (3 * $this->_barThinWidth) * $this->_factor;
-        $encodedData     = (7 * $this->_barThinWidth) * $this->_factor * 12;
-        return $quietZone + $startCharacter + $middleCharacter + $encodedData + $stopCharacter + $quietZone;
+        $stopCharacter   = (6 * $this->_barThinWidth) * $this->_factor;
+        $encodedData     = (7 * $this->_barThinWidth) * $this->_factor * 6;
+        return $quietZone + $startCharacter + $encodedData + $stopCharacter + $quietZone;
     }
 
     /**

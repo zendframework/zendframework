@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+/** Zend_Amf_Constants */
+require_once 'Zend/Amf/Constants.php';
+
 /** @see Zend_Amf_Parse_Serializer */
 require_once 'Zend/Amf/Parse/Serializer.php';
 

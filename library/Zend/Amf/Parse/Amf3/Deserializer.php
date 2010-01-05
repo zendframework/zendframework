@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+/** Zend_Amf_Constants */
+require_once 'Zend/Amf/Constants.php';
+
 /** Zend_Amf_Parse_Deserializer */
 require_once 'Zend/Amf/Parse/Deserializer.php';
 

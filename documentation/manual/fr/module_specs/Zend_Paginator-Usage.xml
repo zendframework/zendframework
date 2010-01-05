@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17274 -->
+<!-- EN-Revision: 19418 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.usage">
     <title>Utilisation</title>
@@ -166,30 +166,42 @@ $paginator->setCurrentPageNumber($this->_getParam('page'));
         <para>
             <programlisting language="php"><![CDATA[
 $this->view->paginator = $paginator;
-]]></programlisting></para>
-        </sect2>
+]]></programlisting>
+        </para>
+    </sect2>
 
-        <sect2 id="zend.paginator.usage.dbselect">
-            <title>The DbSelect and DbTableSelect adapter</title>
-            <para>
-                The usage of most adapters is pretty straight-forward. However, the
-                database adapters require a more detailed explanation. Contrary to popular
-                believe, these adapters do NOT fetch all records from the database in order to count them.
-                Instead, the adapters manipulates the original query to produce the corresponding
-                COUNT query. Paginator then executes that COUNT query to get the number of rows.
-                This does require an extra round-trip to the database, but this is many times
-                faster than fetching an entire result set and using count(). Especially with
-                large collections of data.
-            </para>
+    <sect2 id="zend.paginator.usage.dbselect">
+        <title>The DbSelect and DbTableSelect adapter</title>
+        <para>
+            The usage of most adapters is pretty straight-forward. However, the
+            database adapters require a more detailed explanation regarding
+            the retrieval and count of the data from the database.
+        </para>
 
-            <para>
-                The database adapters will try and build the most efficient query that will execute
-                on pretty much all modern databases. However, depending on your database or even your
-                own schema setup, there might be more efficient ways to get a rowcount. For this scenario
-                the database adapters allow you to set a custom COUNT query. For example,
-                if you keep track of the count of blog posts in a separate table, you could achieve a
-                faster count query with the following setup:
-            </para>
+        <para>
+            To use the DbSelect and DbTableSelect adapters you don't have to retrieve the data upfront from
+            the database. Both adapters do the retrieval for you, aswell as the counting of the total pages.
+            If additional work has to be done on the database results the adapter <methodname>getItems()</methodname> method
+            has to be extended in your application.
+        </para>
+
+        <para>
+            Additionally these adapters do <emphasis>not</emphasis> fetch all records from the database
+            Instead, the adapters manipulates the original query to produce the corresponding
+            COUNT query. Paginator then executes that COUNT query to get the number of rows.
+            This does require an extra round-trip to the database, but this is many times
+            faster than fetching an entire result set and using count(). Especially with
+            large collections of data.
+        </para>
+
+        <para>
+            The database adapters will try and build the most efficient query that will execute
+            on pretty much all modern databases. However, depending on your database or even your
+            own schema setup, there might be more efficient ways to get a rowcount. For this scenario
+            the database adapters allow you to set a custom COUNT query. For example,
+            if you keep track of the count of blog posts in a separate table, you could achieve a
+            faster count query with the following setup:
+        </para>
 
             <programlisting language="php"><![CDATA[
 $adapter = new Zend_Paginator_Adapter_DbSelect($db->select()->from('posts'));
@@ -200,16 +212,16 @@ $adapter->setRowCount(
 $paginator = new Zend_Paginator($adapter);
 ]]></programlisting>
 
-            <para>
-                This approach will probably not give you a huge performance gain on
-                small collections and/or simple select queries. However, with complex
-                queries and large collections, a similar approach could give you a
-                significant performance boost.
-            </para>
-        </sect2>
+        <para>
+            This approach will probably not give you a huge performance gain on
+            small collections and/or simple select queries. However, with complex
+            queries and large collections, a similar approach could give you a
+            significant performance boost.
+        </para>
+    </sect2>
 
-        <sect2 id="zend.paginator.rendering">
-            <title>Rendre des pages avec les scripts de vue</title>
+    <sect2 id="zend.paginator.rendering">
+        <title>Rendre des pages avec les scripts de vue</title>
 
         <para>
             Le script de vue va être utilisé pour rendre les éléments de la page (bien sûr si
@@ -231,7 +243,7 @@ $paginator = new Zend_Paginator($adapter);
 <?php if (count($this->paginator)): ?>
 <ul>
 <?php foreach ($this->paginator as $item): ?>
-  <li><?= $item; ?></li>
+  <li><?php echo $item; ?></li>
 <?php endforeach; ?>
 </ul>
 <?php endif; ?>
@@ -399,7 +411,7 @@ Voir http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
 <?php foreach ($this->pagesInRange as $page): ?>
   <?php if ($page != $this->current): ?>
     <a href="<?php echo $this->url(array('page' => $page)); ?>">
-        <?= $page; ?>
+        <?php echo $page; ?>
     </a> |
   <?php else: ?>
     <?php echo $page; ?> |
@@ -465,7 +477,8 @@ of <?= $this->totalItemCount; ?>
 
 </div>
 <?php endif; ?>
-]]></programlisting></para>
+]]></programlisting>
+            </para>
 
             <para>
                 Pagination Dropdown :<programlisting language="php"><![CDATA[
@@ -474,7 +487,7 @@ of <?= $this->totalItemCount; ?>
 <?php foreach ($this->pagesInRange as $page): ?>
   <?php $selected = ($page == $this->current) ? ' selected="selected"' : ''; ?>
   <option value="<?php echo $this->url(array('page' => $page)); ?>"
-          <?= $selected ?>>
+          <?php echo $selected ?>>
     <?php echo $page; ?>
   </option>
 <?php endforeach; ?>
@@ -489,11 +502,12 @@ $('paginationControl').observe('change', function() {
     window.location = this.options[this.selectedIndex].value;
 })
 </script>
-]]></programlisting></para>
-            </sect3>
+]]></programlisting>
+            </para>
+        </sect3>
 
-            <sect3 id="zend.paginator.usage.rendering.properties">
-                <title>Liste des propriétés</title>
+        <sect3 id="zend.paginator.usage.rendering.properties">
+            <title>Liste des propriétés</title>
 
             <para>
                 Les options suivantes sont disponibles pour contrôler la pagination dans les

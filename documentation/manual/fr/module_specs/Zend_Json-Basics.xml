@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19911 -->
+<!-- EN-Revision: 19912 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.basics">
     <title>Utilisation de base</title>
@@ -27,12 +27,13 @@ $json = Zend_Json::encode($phpNatif);
         </para>
         
         <programlisting language="php"><![CDATA[
-    // Encode it to return to the client:
-    $json = Zend_Json::encode($phpNative);
-    if($debug) {
-    echo Zend_Json::prettyPrint($json, array("indent" => " "));
-    }
-    ]]></programlisting>
+// Encode it to return to the client:
+$json = Zend_Json::encode($phpNative);
+if($debug) {
+echo Zend_Json::prettyPrint($json, array("indent" => " "));
+}
+]]></programlisting>
+
         <para>
             Second optional argument of <methodname>Zend_Json::prettyPrint()</methodname> is an option array. 
             Option <code>indent</code> allows to set indentation string - by default it's a single tab character.

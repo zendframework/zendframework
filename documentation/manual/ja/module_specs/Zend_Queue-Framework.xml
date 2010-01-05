@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18733 -->
+<!-- EN-Revision: 20063 -->
 <sect1 id="zend.queue.framework">
     <title>フレームワーク</title>
 
@@ -31,7 +31,7 @@ $options = array(
 
 // データベース待ち行列を作成します。
 // Zend_Queue はクラス名として Zend_Queue_Adapter_ の後に 'Db' を付加します。
-$queue = Zend_Queue('Db', $options);
+$queue = new Zend_Queue('Db', $options);
 ]]></programlisting>
 
     <para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19692 -->
+<!-- EN-Revision: 20020 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -196,12 +196,9 @@ if ($validator->isValid($iban)) {
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.not_empty">
-        <title>NotEmpty</title>
-        <para>
-           <code>$value</code> が空の値でない場合にのみ <constant>TRUE</constant> を返します。
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-NotEmpty.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-NotEmpty.xml" /></xi:fallback>
+    </xi:include>
 
     <xi:include href="Zend_Validate-PostCode.xml">
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-PostCode.xml" /></xi:fallback>

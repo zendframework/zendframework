@@ -163,4 +163,56 @@ class Zend_Gdata_YouTube_VideoQueryTest extends PHPUnit_Framework_TestCase
             'safeSearch.');
     }
 
+    /**
+     * @group ZF-8720
+     * @expectedException Zend_Gdata_App_InvalidArgumentException
+     */
+    public function testVideoQuerySetLocationException()
+    {
+        $yt = new Zend_Gdata_YouTube();
+        $query = $yt->newVideoQuery();
+        $location = 'foobar';
+        $this->assertNull($query->setLocation($location));
+    }
+
+    /**
+     * @group ZF-8720
+     * @expectedException Zend_Gdata_App_InvalidArgumentException
+     */
+    public function testVideoQuerySetLocationExceptionV2()
+    {
+        $yt = new Zend_Gdata_YouTube();
+        $query = $yt->newVideoQuery();
+        $location = '-100x,-200y';
+        $this->assertNull($query->setLocation($location));
+    }
+
+    /**
+     * @group ZF-8720
+     * @expectedException Zend_Gdata_App_InvalidArgumentException
+     */
+    public function testVideoQuerySetLocationExceptionV3()
+    {
+        $yt = new Zend_Gdata_YouTube();
+        $query = $yt->newVideoQuery();
+        $location = '-100x,-200y!';
+        $this->assertNull($query->setLocation($location));
+    }
+
+    /**
+     * @group ZF-8720
+     */
+    public function testQueryExclamationMarkRemoveBug()
+    {
+        $yt = new Zend_Gdata_YouTube();
+        $query = $yt->newVideoQuery();
+
+        $location = '37.42307,-122.08427';
+        $this->assertNull($query->setLocation($location));
+        $this->assertEquals($location, $query->getLocation());
+
+        $location = '37.42307,-122.08427!';
+        $this->assertNull($query->setLocation($location));
+        $this->assertEquals($location, $query->getLocation());
+    }
 }

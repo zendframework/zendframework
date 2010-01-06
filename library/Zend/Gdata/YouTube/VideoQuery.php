@@ -140,7 +140,7 @@ class Zend_Gdata_YouTube_VideoQuery extends Zend_Gdata_Query
                     $temp = trim($param);
                     // strip off the optional exclamation mark for numeric check
                     if (substr($temp, -1) == '!') {
-                        $temp = substr($temp, -1);
+                        $temp = substr($temp, 0, -1);
                     }
                     if (!is_numeric($temp)) {
                         require_once 'Zend/Gdata/App/InvalidArgumentException.php';

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.currency.calculation">
+    <title>Calculating with currencies</title>
+
+    <para>
+        When working with currencies you will sometimes also have to calculate with them.
+        <classname>Zend_Currency</classname> allows you to do this with some simple methods.
+        The following methods are supported for calculation:
+    </para>
+
+    <itemizedlist mark='opencircle'>
+        <listitem>
+            <para>
+                <emphasis><methodname>add()</methodname></emphasis>: This method adds the given
+                currency to the existing currency object.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><methodname>sub()</methodname></emphasis>: This method substracts the
+                given currency from the existing currency object.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><methodname>div()</methodname></emphasis>: This method divides the
+                given currency from the existing currency object.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><methodname>mul()</methodname></emphasis>: This method multiplies the
+                given currency with the existing currency object.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><methodname>mod()</methodname></emphasis>: This method calculates the
+                remaining value (modulo) from dividing the given currency from the existing
+                currency object.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><methodname>compare()</methodname></emphasis>: This method compares
+                the given currency with the existing currency object. When both values are
+                equal it returns '0'. When the existing currency value is greater than the
+                given, this method will return 1. Otherwise you will get '-1' returned.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><methodname>equals()</methodname></emphasis>: This method compares
+                the given currency with the existing currency object. When both values are
+                equal it returns <constant>TRUE</constant>, otherwise
+                <constant>FALSE</constant>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><methodname>isMore()</methodname></emphasis>: This method compares
+                the given currency with the existing currency object. When the existing
+                currency is greater than the given one, you will get <constant>TRUE</constant>
+                in return, otherwise <constant>FALSE</constant>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><methodname>isLess()</methodname></emphasis>: This method compares
+                the given currency with the existing currency object. When the existing
+                currency is less than the given one, you will get <constant>TRUE</constant>
+                in return, otherwise <constant>FALSE</constant>.
+            </para>
+        </listitem>
+    </itemizedlist>
+
+    <para>
+        As you can see the multiple methods allow any kind of calculation with
+        <classname>Zend_Currency</classname>. See the next snippets as example:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$currency = new Zend_Currency(
+    array(
+        'value'    => 1000,
+        'currency' => 'USD',
+    )
+);
+
+print $currency; // Could return '$ 1.000,00'
+
+$currency->add(500);
+print $currency; // Could return '$ 1.500,00'
+]]></programlisting>
+
+    <programlisting language="php"><![CDATA[
+$currency_2 = new Zend_Currency(
+    array(
+        'value'    => 500,
+        'currency' => 'USD',
+    )
+);
+
+if ($currency->isMore($currency_2)) {
+    print "First is more";
+}
+
+$currency->div(5);
+print $currency; // Could return '$ 200,00'
+]]></programlisting>
+</sect1>

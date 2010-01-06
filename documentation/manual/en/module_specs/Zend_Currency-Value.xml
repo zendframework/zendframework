@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.currency.value">
+    <title>How much is my currency?</title>
+
+    <para>
+        When you are working with currencies then you normally want to display an amount of
+        money. And when you work with different currencies then you have to do this with three
+        different things. The amount you want to display, the precision you want to use, and
+        probably the exchange rate.
+    </para>
+
+    <sect2 id="zend.currency.value.money">
+        <title>Working with currency values</title>
+
+        <para>
+            The currency value, a.k.a. the money, you want to use can easily be set by using the
+            <property>value</property> option.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$currency = new Zend_Currency(
+    array(
+        'value'    => 1000,
+        'currency' => 'USD',
+    )
+);
+
+print $currency; // Could return '$ 1.000'
+]]></programlisting>
+
+        <para>
+            Using the <methodname>setFormat()</methodname> method with this array option, and
+            also by using the <methodname>setValue()</methodname> method you can set the value
+            afterwards.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$currency = new Zend_Currency(
+    array(
+        'value'    => 1000,
+        'currency' => 'USD',
+    )
+);
+
+print $currency->setValue(2000); // Could return '$ 2.000'
+]]></programlisting>
+
+        <para>
+            With the <methodname>getValue()</methodname> method you will get the actual set
+            value.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.currency.value.precision">
+        <title>Using precision on currencies</title>
+
+        <para>
+            When working with currencies they you probably also have to handle precision.
+            Most currencies use a precision of 2. This means that when you have 100 US dollars
+            you could also have 50 cents. The related value is simply a floating value.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$currency = new Zend_Currency(
+    array(
+        'value'    => 1000.50,
+        'currency' => 'USD',
+    )
+);
+
+print $currency; // Could return '$ 1.000,50'
+]]></programlisting>
+
+        <para>
+            Of course, as the default precision is 2, you will get '00' for the decimal value
+            when there is no precision to display.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$currency = new Zend_Currency(
+    array(
+        'value'    => 1000,
+        'currency' => 'USD',
+    )
+);
+
+print $currency; // Could return '$ 1.000,00'
+]]></programlisting>
+
+        <para>
+            To get rid of this default precision you could simply use the
+            <property>precision</property> option and set it to '0'. And you can set any other
+            precision you want to use between 0 and 9. All values will be rounded or streched
+            when they don't fit the set precision.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$currency = new Zend_Currency(
+    array(
+        'value'     => 1000,30,
+        'currency'  => 'USD',
+        'precision' => 0
+    )
+);
+
+print $currency; // Could return '$ 1.000'
+]]></programlisting>
+    </sect2>
+</sect1>

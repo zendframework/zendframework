@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.currency.additional">
+    <title>Additional informations on Zend_Currency</title>
+
+    <sect2 id="zend.currency.additional.informations">
+        <title>Currency informations</title>
+
+        <para>
+            Sometimes it is necessary to get informations which are related to a currency.
+            <classname>Zend_Currency</classname> provides you with several methods to get this
+            informations. Available methods include the following:
+        </para>
+
+        <itemizedlist mark='opencircle'>
+            <listitem>
+                <para>
+                    <emphasis><methodname>getCurrencyList()</methodname></emphasis>: Returns a list
+                    of all currencies which are used in the given region as array. Defaults to the
+                    objects locale when no region has been given.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><methodname>getLocale()</methodname></emphasis>: Returns the set
+                    locale for the actual currency.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><methodname>getName()</methodname></emphasis>: Returns the full name
+                    for the actual currency. When there is no full name available for the actual
+                    currency, it will return the abbreviation for it.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><methodname>getRegionList()</methodname></emphasis>: Returns a list
+                    of all regions where this currency is used as array. Defaults to the objects
+                    currency when no currency has been given.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><methodname>getService()</methodname></emphasis>: Returns the set
+                    exchange service object for the actual currency.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><methodname>getShortName()</methodname></emphasis>: Returns the
+                    abbreviation for the actual currency.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><methodname>getSymbol()</methodname></emphasis>: Returns the currency
+                    sign for the currency. When the currency has no symbol, then it will return the
+                    abbreviation for it.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><methodname>getValue()</methodname></emphasis>: Returns the set
+                    value for the actual currency.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Let's see some code snippets as example:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$currency = new Zend_Currency();
+
+var_dump($currency->getValue());
+// returns 0
+
+var_dump($currency->getRegionList());
+// could return an array with all regions where USD is used
+
+var_dump($currency->getRegionList('EUR'));
+// returns an array with all regions where EUR is used
+
+var_dump($currency->getName());
+// could return 'US Dollar'
+
+var_dump($currency->getName('EUR'));
+// returns 'Euro'
+]]></programlisting>
+
+        <para>
+            As you can see, several methods allow to use additional parameters to override the
+            actual object to get informations for other currencies. Omitting this parameters will
+            return informations from the actual set currency.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.currency.additional.cache">
+        <title>Currency Performance Optimization</title>
+
+        <para>
+            <classname>Zend_Currency</classname>'s performance can be optimized using
+            <classname>Zend_Cache</classname>. The static method
+            <methodname>Zend_Currency::setCache($cache)</methodname> accepts one option: a
+            <classname>Zend_Cache</classname> adapter. If the cache adapter is set, the localization
+            data which is used by <classname>Zend_Currency</classname> will be cached. Additionally
+            there are some static methods for manipulating the cache:
+            <methodname>getCache()</methodname>, <methodname>hasCache()</methodname>,
+            <methodname>clearCache()</methodname> and <methodname>removeCache()</methodname>.
+        </para>
+
+        <example id="zend.currency.usage.cache.example">
+            <title>Caching currencies</title>
+
+            <programlisting language="php"><![CDATA[
+// creating a cache object
+$cache = Zend_Cache::factory('Core',
+                             'File',
+                             array('lifetime' => 120,
+                                   'automatic_serialization' => true),
+                             array('cache_dir'
+                                       => dirname(__FILE__) . '/_files/'));
+Zend_Currency::setCache($cache);
+]]></programlisting>
+        </example>
+    </sect2>
+</sect1>

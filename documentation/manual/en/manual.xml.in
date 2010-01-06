@@ -4,7 +4,7 @@
 [
     <!ENTITY % xinclude SYSTEM "../en/xinclude.mod">
     %xinclude;
-    
+
     <!-- Add translated specific definitions and snippets -->
     <!ENTITY % language-snippets SYSTEM "./ref/language-snippets.xml">
     %language-snippets;
@@ -274,7 +274,7 @@
                 </xi:fallback>
             </xi:include>
         </chapter>
-        
+
         <chapter id="learning.paginator">
             <title>&part.learning.paginator.title;</title>
             <xi:include href="tutorials/paginator-intro.xml">
@@ -626,6 +626,46 @@
             <xi:include href="module_specs/Zend_Currency-Usage.xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Currency-Usage.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Currency-Options.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Currency-Options.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Currency-Description.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Currency-Description.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Currency-Position.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Currency-Position.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Currency-Number.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Currency-Number.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Currency-Value.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Currency-Value.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Currency-Calculation.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Currency-Calculation.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Currency-Exchange.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Currency-Exchange.xml" />
+                </xi:fallback>
+            </xi:include>
+            <xi:include href="module_specs/Zend_Currency-Additional.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Currency-Additional.xml" />
                 </xi:fallback>
             </xi:include>
         </chapter>

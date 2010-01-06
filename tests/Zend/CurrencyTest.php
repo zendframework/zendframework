@@ -92,13 +92,13 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
 
         try {
             $currency = new Zend_Currency('de_XX');
-            $this->fail("locale should always include region and therefor not been recognised");
+            $this->fail("Locale without region should not been recognised");
         } catch (Zend_Currency_Exception $e) {
             // success
         }
+
         try {
             $currency = new Zend_Currency('xx_XX');
-            $this->fail("unknown locale should not have been recognised");
         } catch (Zend_Currency_Exception $e) {
             // success
         }
@@ -407,13 +407,6 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
             $this->assertContains("Unknown script", $e->getMessage());
         }
 
-        try {
-            $USD->setFormat(array('unknown' => 'unknown'));
-            $this->fail("Exception expected");
-        } catch (Zend_Currency_Exception $e) {
-            $this->assertContains("Unknown option", $e->getMessage());
-        }
-
         $USD->setFormat(array('precision' => null));
 
         try {
@@ -549,8 +542,8 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
     public function testToString()
     {
         $USD = new Zend_Currency('USD','en_US');
-        $this->assertSame('US Dollar', $USD->toString());
-        $this->assertSame('US Dollar', $USD->__toString());
+        $this->assertSame('$0.00', $USD->toString());
+        $this->assertSame('$0.00', $USD->__toString());
     }
 
     /**
@@ -630,5 +623,164 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
 
         $currency = new Zend_Currency("USD", "de_DE");
         $this->assertEquals('2,3000 $', $currency->toCurrency(2.3, array('precision' => 4)));
+    }
+
+    /**
+     * Testing options at initiation
+     */
+    public function testOptionsWithConstructor()
+    {
+        $currency = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT'));
+        $this->assertEquals('de_AT', $currency->getLocale());
+        $this->assertEquals('EUR', $currency->getShortName());
+    }
+
+    /**
+     * Testing value at initiation
+     */
+    public function testValueWithConstructor()
+    {
+        $currency = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
+        $this->assertEquals('de_AT', $currency->getLocale());
+        $this->assertEquals('EUR', $currency->getShortName());
+        $this->assertEquals('€ 100,00', $currency->toCurrency());
+    }
+
+    /**
+     * Add values
+     */
+    public function testAddValues()
+    {
+        $currency = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT'));
+        $currency->add(100);
+        $this->assertEquals('€ 100,00', $currency->toCurrency());
+
+        $currency->add(100)->add(100);
+        $this->assertEquals('€ 300,00', $currency->toCurrency());
+    }
+
+    /**
+     * Substract values
+     */
+    public function testSubValues()
+    {
+        $currency = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT'));
+        $currency->sub(100);
+        $this->assertEquals('-€ 100,00', $currency->toCurrency());
+
+        $currency->sub(100)->sub(100);
+        $this->assertEquals('-€ 300,00', $currency->toCurrency());
+    }
+
+    /**
+     * Multiply values
+     */
+    public function testMulValues()
+    {
+        $currency = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT'));
+        $currency->add(100);
+        $currency->mul(2);
+        $this->assertEquals('€ 200,00', $currency->toCurrency());
+
+        $currency->mul(2)->mul(2);
+        $this->assertEquals('€ 800,00', $currency->toCurrency());
+    }
+
+    /**
+     * Divide values
+     */
+    public function testDivValues()
+    {
+        $currency = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT'));
+        $currency->add(800);
+        $currency->div(2);
+        $this->assertEquals('€ 400,00', $currency->toCurrency());
+
+        $currency->div(2)->div(2);
+        $this->assertEquals('€ 100,00', $currency->toCurrency());
+    }
+
+    /**
+     * Modulo values
+     */
+    public function testModValues()
+    {
+        $currency = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT'));
+        $currency->add(801);
+        $currency->mod(2);
+        $this->assertEquals('€ 1,00', $currency->toCurrency());
+    }
+
+    /**
+     * Compare values
+     */
+    public function testCompareValues()
+    {
+        $currency  = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
+        $currency2 = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
+        $this->assertEquals(0, $currency->compare($currency2));
+
+        $currency3 = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 101));
+        $this->assertEquals(-1, $currency->compare($currency3));
+
+        $currency4 = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 99));
+        $this->assertEquals(1, $currency->compare($currency4));
+    }
+
+    /**
+     * Equals values
+     */
+    public function testEqualsValues()
+    {
+        $currency  = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
+        $currency2 = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
+        $this->assertTrue($currency->equals($currency2));
+
+        $currency3 = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 101));
+        $this->assertFalse($currency->equals($currency3));
+    }
+
+    /**
+     * IsMore values
+     */
+    public function testIsMoreValues()
+    {
+        $currency  = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
+        $currency2 = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
+        $this->assertFalse($currency->isMore($currency2));
+
+        $currency3 = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 99));
+        $this->assertTrue($currency->isMore($currency3));
+    }
+
+    /**
+     * IsLess values
+     */
+    public function testIsLessValues()
+    {
+        $currency  = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
+        $currency2 = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
+        $this->assertFalse($currency->isLess($currency2));
+
+        $currency3 = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 101));
+        $this->assertTrue($currency->isLess($currency3));
+    }
+
+    /**
+     * Exchange tests
+     */
+    public function testExchangeValues()
+    {
+        $currency  = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
+        $currency2 = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
+
+        require_once 'Currency/ExchangeTest.php';
+
+        $this->assertEquals(null, $currency->getService());
+        $currency->setService(new ExchangeTest());
+        $this->assertTrue($currency->getService() instanceof Zend_Currency_CurrencyInterface);
+
+        $currency->setService('ExchangeTest');
+        $this->assertTrue($currency->getService() instanceof Zend_Currency_CurrencyInterface);
     }
 }

@@ -151,7 +151,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <title>Specifying the Page Title</title>
 
         <para>
-            Often, a site will include the site or business name as  part of the page title, and
+            Often, a site will include the site or business name as part of the page title, and
             then add additional information based on the location within the site. As an example,
             the zend.com website includes the string "Zend.com" on all pages, and the prepends
             information based on the page: "Zend Server - Zend.com". Within Zend Framework, the
@@ -231,11 +231,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <title>Specifying Stylesheets with HeadLink</title>
 
         <para>
-            Good CSS developers will often create a general stylesheet for sitewide styles, and
-            individual stylesheets for specific sections or pages of the website, and load these
-            latter conditionally so as to decrease the amount of data needing to be transferred on
-            each request. The <methodname>headLink()</methodname> placeholder makes such conditional
-            aggregation of stylesheets trivial within your application.
+            Good <acronym>CSS</acronym> developers will often create a general stylesheet for
+            sitewide styles, and individual stylesheets for specific sections or pages of the
+            website, and load these latter conditionally so as to decrease the amount of data
+            needing to be transferred on each request. The <methodname>headLink()</methodname>
+            placeholder makes such conditional aggregation of stylesheets trivial within your
+            application.
         </para>
 
         <para>
@@ -244,18 +245,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             with are <methodname>appendStylesheet()</methodname> and
             <methodname>prependStylesheet()</methodname>. Each takes up to four arguments,
             <varname>$href</varname> (the relative path to the stylesheet),
-            <varname>$media</varname> (the MIME type, which defaults to "text/css"),
-            <varname>$conditionalStylesheet</varname> (which can be used to specify a "condition"
-            under which the stylesheet will be evaluated), and <varname>$extras</varname> (an
-            associative array of key/value pairs, commonly used to specify a key for "media"). In
-            most cases, you will only need to specify the first argument, the relative path to the
-            stylesheet.
+            <varname>$media</varname> (the <acronym>MIME</acronym> type, which defaults to
+            "text/css"), <varname>$conditionalStylesheet</varname> (which can be used to specify a
+            "condition" under which the stylesheet will be evaluated), and
+            <varname>$extras</varname> (an associative array of key and value pairs, commonly used
+            to specify a key for "media"). In most cases, you will only need to specify the first
+            argument, the relative path to the stylesheet.
         </para>
 
         <para>
             In our example, we'll assume that all pages need to load the stylesheet located in
-            "/styles/site.css" (relative to the document root); we'll specify this in our
-            <methodname>_initPlaceholders()</methodname> bootstrap method.
+            "<filename>/styles/site.css</filename>" (relative to the document root); we'll specify
+            this in our <methodname>_initPlaceholders()</methodname> bootstrap method.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -333,20 +334,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         </para>
 
         <para>
-            Also like <methodname>headLink()</methodname>, <methodname>headScript</methodname>
+            Also like <methodname>headLink()</methodname>, <methodname>headScript()</methodname>
             provides "virtual" methods via overloading as a convenience when specifying items to
             aggregate; common methods include <methodname>prependFile()</methodname>,
             <methodname>appendFile()</methodname>, <methodname>prependScript()</methodname>, and
             <methodname>appendScript()</methodname>. The first two allow you to specify files that
-            will be referenced in a <code>&lt;script&gt;</code> tag's <varname>src</varname>
+            will be referenced in a <code>&lt;script&gt;</code> tag's <varname>$src</varname>
             attribute; the latter two will take the content provided and render it as literal
             JavaScript within a <code>&lt;script&gt;</code> tag.
         </para>
 
         <para>
-            In this example, we'll specify that a script, "/js/site.js" needs to be loaded on every
-            page; we'll update our <methodname>_initPlaceholders()</methodname> bootstrap method to
-            do this.
+            In this example, we'll specify that a script, "<filename>/js/site.js</filename>" needs
+            to be loaded on every page; we'll update our
+            <methodname>_initPlaceholders()</methodname> bootstrap method to do this.
         </para>
 
         <programlisting language="php"><![CDATA[

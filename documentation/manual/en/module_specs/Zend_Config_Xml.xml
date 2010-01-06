@@ -180,7 +180,7 @@ $config = new Zend_Config_Xml($string, 'staging');
             With the namespace enabled, you can now use <acronym>PHP</acronym> constants within
             your configuration files. Additionally, the <emphasis>extends</emphasis>
             attribute was moved to the new namespace and is deprecated in the
-            <constant>NULL</constant> namespace. It will be completly removed there in
+            <constant>NULL</constant> namespace. It will be completely removed there in
             Zend Framework 2.0.
         </para>
         <programlisting language="xml"><![CDATA[

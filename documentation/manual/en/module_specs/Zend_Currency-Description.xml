@@ -53,7 +53,7 @@
 
                     <entry>
                         The full name for this currency will be rendered. For US Dollar the full
-                        full name would be "US Dollar"
+                        name would be "US Dollar"
                     </entry>
                 </row>
             </tbody>

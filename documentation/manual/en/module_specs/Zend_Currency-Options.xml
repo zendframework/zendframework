@@ -79,7 +79,7 @@
                 <emphasis><property>display</property></emphasis>: Defines which part of the
                 currency should be used for displaying the currency representation. There are 4
                 representations which can be used and which are all described in <link
-                    linkend="zend.currency.usage.description">this
+                    linkend="zend.currency.description">this
                     table</link>.
             </para>
         </listitem>
@@ -117,7 +117,7 @@
                 <emphasis><property>position</property></emphasis>: Defines the position at
                 which the currency description should be displayed. The supported positions are
                 described <link
-                    linkend="zend.currency.usage.position">this this section</link>.
+                    linkend="zend.currency.position">this section</link>.
             </para>
         </listitem>
 

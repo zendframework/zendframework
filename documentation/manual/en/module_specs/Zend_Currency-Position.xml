@@ -80,8 +80,8 @@ print $currency; // Could return '100 $';
 ]]></programlisting>
 
         <para>
-            Note that in the second snippet the position of USD is fixed regardless of the
-            used locale or currency.
+            Note that in the second snippet the position of <acronym>USD</acronym> is fixed
+            regardless of the used locale or currency.
         </para>
     </example>
 </sect1>

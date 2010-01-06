@@ -90,8 +90,8 @@ print $currency->add($currency2);
 ]]></programlisting>
 
     <para>
-        The above example will return '$ 3.000' because the 1.000 EUR will be converted by a
-        rate of 2 to 2.000 USD.
+        The above example will return '$ 3.000' because the 1.000 <acronym>EUR</acronym> will be
+        converted by a rate of 2 to 2.000 <acronym>USD</acronym>.
     </para>
 
     <note>

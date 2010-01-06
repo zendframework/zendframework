@@ -38,6 +38,11 @@ class Zend_Feed_Element implements ArrayAccess
     protected $_element;
 
     /**
+     * @var string Character encoding to utilize
+     */
+    protected $_encoding = 'UTF-8';
+
+    /**
      * @var Zend_Feed_Element
      */
     protected $_parentElement;
@@ -148,6 +153,27 @@ class Zend_Feed_Element implements ArrayAccess
         return $this->_element->ownerDocument->saveXML($this->_element);
     }
 
+    /**
+     * Get encoding
+     *
+     * @return string
+     */
+    public function getEncoding()
+    {
+        return $this->_encoding;
+    }
+
+    /**
+     * Set encoding
+     *
+     * @param  string $value Encoding to use
+     * @return Zend_Feed_Element
+     */
+    public function setEncoding($value)
+    {
+        $this->_encoding = (string) $value;
+        return $this;
+    }
 
     /**
      * Map variable access onto the underlying entry representation.
@@ -205,11 +231,11 @@ class Zend_Feed_Element implements ArrayAccess
             if (strpos($var, ':') !== false) {
                 list($ns, $elt) = explode(':', $var, 2);
                 $node = $this->_element->ownerDocument->createElementNS(Zend_Feed::lookupNamespace($ns),
-                    $var, htmlspecialchars($val, ENT_NOQUOTES, 'UTF-8'));
+                    $var, htmlspecialchars($val, ENT_NOQUOTES, $this->getEncoding()));
                 $this->_element->appendChild($node);
             } else {
                 $node = $this->_element->ownerDocument->createElement($var,
-                    htmlspecialchars($val, ENT_NOQUOTES, 'UTF-8'));
+                    htmlspecialchars($val, ENT_NOQUOTES, $this->getEncoding()));
                 $this->_element->appendChild($node);
             }
         } elseif (count($nodes) > 1) {

@@ -1089,11 +1089,16 @@ EOJ;
             return '';
         }
 
+        $enc = 'UTF-8';
+        if ($this->view instanceof Zend_View_Abstract) {
+            $enc = $this->view->getEncoding();
+        }
+
         $html = array();
         foreach ($layers as $path) {
             $html[] = sprintf(
                 '<script type="text/javascript" src="%s"></script>',
-                htmlentities($path, ENT_QUOTES)
+                htmlspecialchars($path, ENT_QUOTES, $enc)
             );
         }
 

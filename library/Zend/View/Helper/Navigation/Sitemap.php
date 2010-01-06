@@ -262,10 +262,17 @@ class Zend_View_Helper_Navigation_Sitemap
      */
     protected function _xmlEscape($string)
     {
+        $enc = 'UTF-8';
+        if ($this->view instanceof Zend_View_Interface
+            && method_exists($this->view, 'getEncoding')
+        ) {
+            $enc = $this->view->getEncoding();
+        }
+
         // TODO: remove check when minimum PHP version is >= 5.2.3
         if (version_compare(PHP_VERSION, '5.2.3', '>=')) {
             // do not encode existing HTML entities
-            return htmlspecialchars($string, ENT_QUOTES, 'UTF-8', false);
+            return htmlspecialchars($string, ENT_QUOTES, $enc, false);
         } else {
             $string = preg_replace('/&(?!(?:#\d++|[a-z]++);)/ui', '&amp;', $string);
             $string = str_replace(array('<', '>', '\'', '"'), array('&lt;', '&gt;', '&#39;', '&quot;'), $string);

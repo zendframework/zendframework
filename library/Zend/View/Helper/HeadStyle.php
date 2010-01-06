@@ -323,6 +323,12 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
     {
         $attrString = '';
         if (!empty($item->attributes)) {
+            $enc = 'UTF-8';
+            if ($this->view instanceof Zend_View_Interface
+                && method_exists($this->view, 'getEncoding')
+            ) {
+                $enc = $this->view->getEncoding();
+            }
             foreach ($item->attributes as $key => $value) {
                 if (!in_array($key, $this->_optionalAttributes)) {
                     continue;
@@ -345,7 +351,7 @@ class Zend_View_Helper_HeadStyle extends Zend_View_Helper_Placeholder_Container_
                         $value = substr($value, 0, -1);
                     }
                 }
-                $attrString .= sprintf(' %s="%s"', $key, htmlspecialchars($value));
+                $attrString .= sprintf(' %s="%s"', $key, htmlspecialchars($value, ENT_COMPAT, $enc));
             }
         }
 

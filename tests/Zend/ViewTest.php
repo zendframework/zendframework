@@ -451,14 +451,15 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test set/getEncoding()
+     * @group ZF-8715
      */
     public function testSetGetEncoding()
     {
         $view = new Zend_View();
-        $this->assertEquals('ISO-8859-1', $view->getEncoding());
-
-        $view->setEncoding('UTF-8');
         $this->assertEquals('UTF-8', $view->getEncoding());
+
+        $view->setEncoding('ISO-8859-1');
+        $this->assertEquals('ISO-8859-1', $view->getEncoding());
     }
 
     public function testEmptyPropertiesReturnAppropriately()

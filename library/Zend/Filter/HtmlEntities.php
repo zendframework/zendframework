@@ -44,7 +44,7 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
      *
      * @var string
      */
-    protected $_charSet;
+    protected $_encoding;
 
     /**
      * Corresponds to the forth htmlentities() argument
@@ -76,8 +76,11 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
             $options['quotestyle'] = ENT_COMPAT;
         }
 
-        if (!isset($options['charset'])) {
-            $options['charset'] = 'ISO-8859-1';
+        if (!isset($options['encoding'])) {
+            $options['encoding'] = 'UTF-8';
+        }
+        if (isset($options['charset'])) {
+            $options['encoding'] = $options['charset'];
         }
 
         if (!isset($options['doublequote'])) {
@@ -85,7 +88,7 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
         }
 
         $this->setQuoteStyle($options['quotestyle']);
-        $this->setCharSet($options['charset']);
+        $this->setEncoding($options['encoding']);
         $this->setDoubleQuote($options['doublequote']);
     }
 
@@ -111,26 +114,52 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
         return $this;
     }
 
+
+    /**
+     * Get encoding
+     *
+     * @return string
+     */
+    public function getEncoding()
+    {
+         return $this->_encoding;
+    }
+
+    /**
+     * Set encoding
+     *
+     * @param  string $value
+     * @return Zend_Filter_HtmlEntities
+     */
+    public function setEncoding($value)
+    {
+        $this->_encoding = (string) $value;
+        return $this;
+    }
+
     /**
      * Returns the charSet option
+     *
+     * Proxies to {@link getEncoding()}
      *
      * @return string
      */
     public function getCharSet()
     {
-        return $this->_charSet;
+        return $this->getEncoding();
     }
 
     /**
      * Sets the charSet option
+     *
+     * Proxies to {@link setEncoding()}
      *
      * @param  string $charSet
      * @return Zend_Filter_HtmlEntities Provides a fluent interface
      */
     public function setCharSet($charSet)
     {
-        $this->_charSet = $charSet;
-        return $this;
+        return $this->setEncoding($charSet);
     }
 
     /**
@@ -166,6 +195,6 @@ class Zend_Filter_HtmlEntities implements Zend_Filter_Interface
      */
     public function filter($value)
     {
-        return htmlentities((string) $value, $this->_quoteStyle, $this->_charSet, $this->_doubleQuote);
+        return htmlentities((string) $value, $this->getQuoteStyle(), $this->getEncoding(), $this->getDoubleQuote());
     }
 }

@@ -101,11 +101,12 @@ class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that getCharSet() returns expected default value
      *
+     * @group ZF-8715
      * @return void
      */
     public function testGetCharSet()
     {
-        $this->assertEquals('ISO-8859-1', $this->_filter->getCharSet());
+        $this->assertEquals('UTF-8', $this->_filter->getCharSet());
     }
 
     /**

@@ -746,7 +746,7 @@ switch ($numPeople) {
  *
  * LİSANS: Lisans bilgisi
  *
- * @copyright  2005 Zend Technologies
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://www.zend.com/license/3_0.txt   PHP License 3.0
  * @version    $Id:$
  * @link       http://dev.zend.com/package/PackageName
@@ -769,7 +769,7 @@ switch ($numPeople) {
  *
  * Sınıfın uzun açıklaması (eğer varsa)
  *
- * @copyright  2005 Zend Technologies
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://www.zend.com/license/3_0.txt   PHP License 3.0
  * @version    Release: @package_version@
  * @link       http://dev.zend.com/package/PackageName

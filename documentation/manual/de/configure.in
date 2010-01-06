@@ -1,5 +1,5 @@
 AC_INIT(Makefile.in)
-AC_COPYRIGHT([Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)])
+AC_COPYRIGHT([Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)])
 
 FOP=fop
 XSLTPROC=xsltproc

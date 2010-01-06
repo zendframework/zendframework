@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Text_Table
- * @copyright Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  * @version   $Id$
  */
@@ -30,7 +30,7 @@ require_once 'Zend/Text/Table/Decorator/Interface.php';
  * @category  Zend
  * @package   Zend_Text_Table
  * @uses      Zend_Text_Table_Decorator_Interface
- * @copyright Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Text_Table_Decorator_Unicode implements Zend_Text_Table_Decorator_Interface

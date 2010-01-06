@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Feed_Writer_Entry_Rss
- * @copyright  Copyright (c) 2009 Padraic Brady
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
  
@@ -26,7 +26,7 @@ require_once 'Zend/Feed/Writer/Extension/RendererInterface.php';
  /**
  * @category   Zend
  * @package    Zend_Feed_Writer_Entry_Rss
- * @copyright  Copyright (c) 2009 Padraic Brady
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Feed_Writer_Extension_RendererAbstract

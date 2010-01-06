@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Amf
  * @subpackage Parse_Amf0
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -32,7 +32,7 @@ require_once 'Zend/Amf/Parse/Serializer.php';
  * @uses       Zend_Amf_Parse_Serializer
  * @package    Zend_Amf
  * @subpackage Parse_Amf0
- * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer

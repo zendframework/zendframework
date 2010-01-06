@@ -69,8 +69,9 @@ class Default_Form_Guestbook extends Zend_Form
 ]]></programlisting>
 
     <para>
-        The above form defines five elements: an email address field, a comment field, a CAPTCHA for
-        preventing spam submissions, a submit button, and a CSRF protection token.
+        The above form defines five elements: an email address field, a comment field, a
+        <acronym>CAPTCHA</acronym> for preventing spam submissions, a submit button, and a
+        <acronym>CSRF</acronym> protection token.
     </para>
 
     <para>
@@ -94,9 +95,10 @@ C:> zf.bat create action sign guestbook
 
     <para>
         Let's add some logic into our guestbook controller's sign action. We need to first check if
-        we're getting a POST or a GET request; in the latter case, we'll simply display the form.
-        However, if we get a POST request, we'll want to validate the posted data against our form,
-        and, if valid, create a new entry and save it. The logic might look like this:
+        we're getting a <acronym>POST</acronym> or a <acronym>GET</acronym> request; in the latter
+        case, we'll simply display the form. However, if we get a <acronym>POST</acronym> request,
+        we'll want to validate the posted data against our form, and, if valid, create a new entry
+        and save it. The logic might look like this:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -125,7 +127,8 @@ class GuestbookController extends Zend_Controller_Action
 ]]></programlisting>
 
     <para>
-        Of course, we also need to edit the view script; edit <filename>application/views/scripts/guestbook/sign.phtml</filename> to read:
+        Of course, we also need to edit the view script; edit
+        <filename>application/views/scripts/guestbook/sign.phtml</filename> to read:
     </para>
 
     <programlisting language="php"><![CDATA[

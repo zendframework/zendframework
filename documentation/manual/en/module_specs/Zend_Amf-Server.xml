@@ -498,7 +498,7 @@ private function getContactHandler(event:ResultEvent):void {
 Zend_Amf_Parse_TypeLoader::addResourceDirectory(
     "My",
     "application/library/resources/My"
-));
+);
 ]]></programlisting>
 
         <para>

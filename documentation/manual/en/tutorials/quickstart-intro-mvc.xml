@@ -77,7 +77,7 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Model</emphasis> - This is the part of your
+                        <emphasis>Model</emphasis> - This is the part of your
                         application that defines its basic functionality behind a set of
                         abstractions. Data access routines and some business logic can be defined in
                         the model.
@@ -86,7 +86,7 @@
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">View</emphasis> - Views define exactly what is
+                        <emphasis>View</emphasis> - Views define exactly what is
                         presented to the user. Usually controllers pass data to each view to render
                         in some format. Views will often collect data from the user, as well. This
                         is where you're likely to find <acronym>HTML</acronym> markup in your
@@ -96,7 +96,7 @@
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">Controller</emphasis> - Controllers bind the whole
+                        <emphasis>Controller</emphasis> - Controllers bind the whole
                         pattern together. They manipulate models, decide which view to display based
                         on the user's request and other factors, pass along the data that each view
                         will need, or hand off control to another controller entirely. Most

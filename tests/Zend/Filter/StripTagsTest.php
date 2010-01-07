@@ -405,14 +405,15 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures that a comment is not removed when comments are allowed
+     * Ensures that a comment IS removed when comments are flagged as allowed
      *
+     * @group ZF-8473
      * @return void
      */
-    public function testFilterCommentAllowed()
+    public function testSpecifyingCommentsAllowedStillStripsComments()
     {
         $input    = '<!-- a comment -->';
-        $expected = '<!-- a comment -->';
+        $expected = '';
         $this->_filter->setCommentsAllowed(true);
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
@@ -420,25 +421,29 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures that a comment containing tags is untouched when comments are allowed
      *
+     * @group ZF-8473
      * @return void
      */
-    public function testFilterCommentAllowedContainsTags()
+    public function testSpecifyingCommentsAllowedStripsCommentsContainingTags()
     {
         $input    = '<!-- a comment <br /> <h1>SuperLarge</h1> -->';
-        $expected = '<!-- a comment <br /> <h1>SuperLarge</h1> -->';
+        $expected = '';
         $this->_filter->setCommentsAllowed(true);
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
 
     /**
-     * Ensures expected behavior when comments are allowed and a comment contains tags and linebreaks
+     * Ensures expected behavior when comments are marked as allowed (in our 
+     * case, this should have no effect) and a comment contains tags and 
+     * linebreaks
      *
+     * @group ZF-8473
      * @return void
      */
-    public function testFilterCommentsAllowedContainsTagsLinebreaks()
+    public function testSpecifyingCommentsAllowedFiltersCommentsContainingTagsAndLinebreaks()
     {
         $input    = "<br> test <p> text </p> with <!-- comments --> and <!-- hidd\n\nen <br> -->";
-        $expected = " test  text  with <!-- comments --> and <!-- hidd\n\nen <br> -->";
+        $expected = " test  text  with  and ";
         $this->_filter->setCommentsAllowed(true);
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
@@ -446,26 +451,28 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
     /**
      * Ensures expected behavior when comments are allowed but nested
      *
+     * @group ZF-8473
      * @return void
      */
-    public function testFilterCommentsAllowedNested()
+    public function testSpecifyingCommentsAllowedShouldStillStripNestedComments()
     {
         $input    = '<a> <!-- <b> <!-- <c> --> <d> --> <e>';
-        $expected = ' <!-- <b> <!-- <c> -->  -- ';
+        $expected = '   ';
         $this->_filter->setCommentsAllowed(true);
         $this->assertEquals($expected, $this->_filter->filter($input));
     }
 
     /**
-     * Ensures that space is allowed between the double-hyphen '--' and the ending delimiter '>'
+     * Ensures that space between double-hyphen and closing bracket still matches as a comment delimiter
      *
+     * @group ZF-8473
      * @see    http://www.w3.org/TR/1999/REC-html401-19991224/intro/sgmltut.html#h-3.2.4
      * @return void
      */
     public function testFilterCommentsAllowedDelimiterEndingWhiteSpace()
     {
         $input    = '<a> <!-- <b> --  > <c>';
-        $expected = ' <!-- <b> --  > ';
+        $expected = '  ';
         $this->_filter->setCommentsAllowed(true);
         $this->assertEquals($expected, $this->_filter->filter($input));
     }

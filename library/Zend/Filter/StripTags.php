@@ -45,8 +45,10 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
      *
      * If false (the default), then comments are removed from the input string.
      *
-     * @var boolean
+     * This setting is now deprecated, and ignored internally.
+     *
      * @deprecated
+     * @var boolean
      */
     public $commentsAllowed = false;
 
@@ -112,6 +114,11 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
 
     /**
      * Returns the commentsAllowed option
+     *
+     * This setting is now deprecated and ignored internally.
+     *
+     * @deprecated
+     * @return bool
      */
     public function getCommentsAllowed()
     {
@@ -121,7 +128,10 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
     /**
      * Sets the commentsAllowed option
      *
-     * @param boolean $commentsAllowed
+     * This setting is now deprecated and ignored internally.
+     *
+     * @deprecated
+     * @param  boolean $commentsAllowed
      * @return Zend_Filter_StripTags Provides a fluent interface
      */
     public function setCommentsAllowed($commentsAllowed)
@@ -227,16 +237,8 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
      */
     public function filter($value)
     {
-        $valueCopy = (string) $value;
-
-        // If comments are allowed, then replace them with unique identifiers
-        if ($this->getCommentsAllowed()) {
-            preg_match_all('/<\!--.*?--\s*>/s' , (string) $valueCopy, $matches);
-            $comments = array_unique($matches[0]);
-            foreach ($comments as $k => $v) {
-                $valueCopy = str_replace($v, self::UNIQUE_ID_PREFIX . $k, $valueCopy);
-            }
-        }
+        // Strip HTML comments first
+        $valueCopy = preg_replace('#<!--(?:[^<]+|<(?!\!--))*?(--\s*>)#us', '', (string) $value);
 
         // Initialize accumulator for filtered data
         $dataFiltered = '';
@@ -258,13 +260,6 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
             }
             // Add the filtered pre-tag text and filtered tag to the data buffer
             $dataFiltered .= $preTag . $tagFiltered;
-        }
-
-        // If comments are allowed, then replace the unique identifiers with the corresponding comments
-        if ($this->getCommentsAllowed()) {
-            foreach ($comments as $k => $v) {
-                $dataFiltered = str_replace(self::UNIQUE_ID_PREFIX . $k, $v, $dataFiltered);
-            }
         }
 
         // Return the filtered data

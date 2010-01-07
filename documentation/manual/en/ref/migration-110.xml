@@ -120,7 +120,7 @@ $authors = $feed->getAuthors()->getValues();
         </sect3>
     </sect2>
 
-    <sect2 id="migration.19.zend.filter.html-entities">
+    <sect2 id="migration.110.zend.filter.html-entities">
         <title>Zend_Filter_HtmlEntities</title>
 
         <para>
@@ -138,6 +138,22 @@ $authors = $feed->getAuthors()->getValues();
             directly within the <methodname>filter()</methodname> method, these members are
             retrieved by their explicit accessors. If you were extending the filter in the past,
             please check your code and unit tests to ensure everything still continues to work.
+        </para>
+    </sect2>
+
+    <sect2 id="migration.110.zend.filter.strip-tags">
+        <title>Zend_Filter_StripTags</title>
+
+        <para>
+            <classname>Zend_Filter_StripTags</classname> contains a flag,
+            <varname>commentsAllowed</varname>, that, in previous versions, allowed you to
+            optionally whitelist HTML comments in HTML text filtered by the class. However, this
+            opens code enabling the flag to <acronym>XSS</acronym> attacks, particularly in Internet
+            Explorer (which allows specifying conditional functionality via HTML comments). Starting
+            in version 1.9.7 (and backported to versions 1.8.5 and 1.7.9), the
+            <varname>commentsAllowed</varname> flag no longer has any meaning, and all HTML
+            comments, including those containing other HTML tags or nested commments, will be
+            stripped from the final output of the filter.
         </para>
     </sect2>
 

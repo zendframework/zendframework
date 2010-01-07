@@ -4,7 +4,7 @@
     <title>Zend Framework 1.9</title>
 
     <para>
-        When upgrading from a previous release to Zend Framework 1.9 or higher you
+        When upgrading from a release of Zend Framework earlier than 1.9.0 to any 1.9 release, you
         should note the following migration notes.
     </para>
 
@@ -342,6 +342,41 @@ $container = new Zend_Navigation(array(
 </ul>
 ]]></programlisting>
     </sect2>
+
+    <para>
+        Additionally, users of the 1.9 series may be affected by other changes starting in version
+        1.9.7. These are all security fixes that also have potential backwards compatibility
+        implications.
+    </para>
+
+    <sect2 id="migration.19.zend.dojo.editor">
+        <title>Zend_Dojo_View_Helper_Editor</title>
+
+        <para>
+            A slight change was made in the 1.9 series to modify the default usage of the Editor
+            dijit to use <acronym>div</acronym> tags instead of a <acronym>textarea</acronym> tag;
+            the latter usage has <ulink
+                url="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">security
+            implications</ulink>, and usage of <acronym>div</acronym> tags is recommended by the
+            Dojo project.
+        </para>
+
+        <para>
+            In order to still allow graceful degradation, a new <varname>degrade</varname> option
+            was added to the view helper; this would allow developers to optionally use a
+            <acronym>textarea</acronym> instead. However, this opens applications developed with
+            that usage to <acronym>XSS</acronym> vectors. In 1.9.7, we have removed this option.
+            Graceful degradation is still supported, however, via a <acronym>noscript</acronym> tag
+            that embeds a <acronym>textarea</acronym>. This solution addressess all security
+            concerns.
+        </para>
+
+        <para>
+            The takeaway is that if you were using the <varname>degrade</varname> flag, it will
+            simply be ignored at this time.
+        </para>
+    </sect2>
+
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

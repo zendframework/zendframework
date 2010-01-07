@@ -196,6 +196,7 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-6753
+     * @group ZF-8127
      */
     public function testHelperShouldUseDivByDefault()
     {
@@ -205,29 +206,12 @@ class Zend_Dojo_View_Helper_EditorTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-6753
+     * @group ZF-8127
      */
-    public function testHelperShouldNotUseTextareaByDefault()
+    public function testHelperShouldOnlyUseTextareaInNoscriptTag()
     {
         $html = $this->helper->editor('foo');
-        $this->assertNotRegexp('#</?textarea[^>]*>#', $html, $html);
-    }
-
-    /**
-     * @group ZF-6753
-     */
-    public function testHelperShouldAllowDegradationViaTextareaOnDemand()
-    {
-        $html = $this->helper->editor('foo', '', array('degrade' => true));
-        $this->assertRegexp('#</?textarea[^>]*>#', $html, $html);
-    }
-
-    /**
-     * @group ZF-6753
-     */
-    public function testWhenDegradingHelperShouldUseDijitEditorDojoType()
-    {
-        $html = $this->helper->editor('foo', '', array('degrade' => true));
-        $this->assertRegexp('#</?textarea[^>]*(dojoType="dijit.Editor")[^>]*>#', $html, $html);
+        $this->assertRegexp('#<noscript><textarea[^>]*>#', $html, $html);
     }
 }
 

@@ -101,9 +101,9 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
 
         <para>
             On success, <methodname>Zend_OpenId_Consumer::login()</methodname> does not
-            return, instead performing an <acronym>HTTP</acronym> redirection. However, if there is an error
-            it may return false. Errors may occur due to an invalid identity, unresponsive
-            provider, communication error, etc.
+            return, instead performing an <acronym>HTTP</acronym> redirection. However, if there is
+            an error it may return <constant>FALSE</constant>. Errors may occur due to an invalid
+            identity, unresponsive provider, communication error, etc.
         </para>
 
         <para>
@@ -611,10 +611,10 @@ if (!$consumer->login($_POST['openid_identifier'],
             As you can see, the <classname>Zend_OpenId_Extension_Sreg</classname>
             constructor accepts an array of OpenID fields. This array has the names of
             fields as indexes to a flag indicating whether the field is required;
-            <emphasis>true</emphasis> means the field is required and
-            <emphasis>false</emphasis> means the field is optional. The
-            <classname>Zend_OpenId_Consumer::login</classname> method accepts an extension or an array of
-            extensions as its fourth argument.
+            <constant>TRUE</constant> means the field is required and
+            <constant>FALSE</constant> means the field is optional. The
+            <classname>Zend_OpenId_Consumer::login</classname> method accepts an extension or an
+            array of extensions as its fourth argument.
         </para>
 
         <para>
@@ -657,7 +657,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
             data itself. However, if the object is created with the same list of
             required fields as on the second step, it will automatically check for the
             existence of required data. In this case, <classname>Zend_OpenId_Consumer::verify</classname>
-            will return <emphasis>false</emphasis> if any of the required fields are
+            will return <constant>FALSE</constant> if any of the required fields are
             missing.
         </para>
 

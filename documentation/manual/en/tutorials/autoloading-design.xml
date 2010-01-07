@@ -53,9 +53,9 @@
             <listitem>
                 <para>
                     <emphasis>Provide namespace matching</emphasis>. If the class
-                    namespace prefix is not in a list of registered namespaces, return false
-                    immediately. This allows for more optimistic matching, as well as fallback to
-                    other autoloaders.
+                    namespace prefix is not in a list of registered namespaces, return
+                    <constant>FALSE</constant> immediately. This allows for more optimistic
+                    matching, as well as fallback to other autoloaders.
                 </para>
             </listitem>
 

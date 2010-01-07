@@ -40,7 +40,8 @@ Zend_Registry::set('index', $value);
         </para>
 
         <para>
-            The index can be a scalar (<constant>NULL</constant>, string, or number), like an ordinary array.
+            The index can be a scalar (<constant>NULL</constant>, string, or number), like an
+            ordinary array.
         </para>
 
     </sect2>

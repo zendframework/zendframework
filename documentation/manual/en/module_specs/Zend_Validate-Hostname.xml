@@ -111,7 +111,7 @@ $validator =
     );
 ]]></programlisting>
 
-        Alternatively you can either pass TRUE or FALSE to
+        Alternatively you can either pass <constant>TRUE</constant> or <constant>FALSE</constant> to
         <methodname>setValidateIdn()</methodname> to enable or disable IDN validation.
         If you are trying to match an IDN hostname which isn't currently supported it is likely
         it will fail validation if it has any international characters in it. Where a ccTLD file
@@ -144,7 +144,7 @@ $validator =
     );
 ]]></programlisting>
 
-        Alternatively you can either pass TRUE or FALSE to
+        Alternatively you can either pass <constant>TRUE</constant> or <constant>FALSE</constant> to
         <methodname>setValidateTld()</methodname> to enable or disable TLD validation.
     </para>
 

@@ -107,7 +107,7 @@ $form = new Zend_Form($config);
             <listitem><para>
                 <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: adds a
                 prefix/path association to the loader specified by $type. If
-                $type is null, it will attempt to add the path to all loaders,
+                $type is <constant>NULL</constant>, it will attempt to add the path to all loaders,
                 by appending the prefix with each of "_Element" and
                 "_Decorator"; and appending the path with "Element/" and
                 "Decorator/". If you have all your extra form element classes
@@ -368,8 +368,8 @@ $form->setElementDecorators(array(
                     set the specified decorators on those elements only. You
                     may also pass a third argument, a flag indicating whether
                     this list of elements is for inclusion or exclusion
-                    purposes. If the flag is false, it will decorate all elements
-                    <emphasis>except</emphasis> those in the passed list.
+                    purposes. If the flag is <constant>FALSE</constant>, it will decorate all
+                    elements <emphasis>except</emphasis> those in the passed list.
                     As with standard usage of the method, any decorators passed
                     will overwrite any previously set decorators in each
                     element.
@@ -1415,8 +1415,8 @@ $json = $form->processAjax($data);
 
         <para>
             You can then simply send the <acronym>JSON</acronym> response to the client. If the
-            form is valid, this will be a boolean true response. If not, it will
-            be a javascript object containing key/message pairs, where each
+            form is valid, this will be a boolean <constant>TRUE</constant> response. If not, it
+            will be a javascript object containing key/message pairs, where each
             'message' is an array of validation error messages.
         </para>
 

@@ -331,7 +331,7 @@ $json = (string) $data; // cast to string == cast to JSON
                 <listitem><para>
                     <methodname>getItem($id)</methodname>: retrieve an item with the given
                     identifier from the collection; the item returned will be an
-                    associative array. If no item matches, a null value is
+                    associative array. If no item matches, a <constant>NULL</constant> value is
                     returned.
                 </para></listitem>
 

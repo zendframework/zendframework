@@ -240,7 +240,7 @@ $server->handle();
                 <listitem><para><methodname>setAutoEmitResponse($flag)</methodname>:
                         Indicate whether the server should automatically emit
                         the response and all headers; by default, this is
-                        true.</para></listitem>
+                        <constant>TRUE</constant>.</para></listitem>
                 <listitem><para><methodname>autoEmitResponse()</methodname>: Determine if
                         auto-emission of the response is enabled.</para></listitem>
                 <listitem><para><methodname>getServiceMap()</methodname>: Retrieve the
@@ -510,13 +510,16 @@ $server->handle();
                         describing the purpose of the service).</para></listitem>
                 <listitem><para><methodname>getDescription()</methodname>: Get the service
                         description.</para></listitem>
-                <listitem><para><methodname>setDojoCompatible($flag)</methodname>: Set a
-                        flag indicating whether or not the SMD is compatible
-                        with Dojo toolkit. When true, the generated <acronym>JSON</acronym> SMD
-                        will be formatted to comply with the format that Dojo's
-                        JSON-RPC client expects.</para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setDojoCompatible($flag)</methodname>: Set a flag indicating
+                        whether or not the SMD is compatible with Dojo toolkit. When
+                        <constant>TRUE</constant>, the generated <acronym>JSON</acronym> SMD will
+                        be formatted to comply with the format that Dojo's JSON-RPC client expects.
+                    </para>
+                </listitem>
                 <listitem><para><methodname>isDojoCompatible()</methodname>: Returns the
-                        value of the Dojo compatibility flag (false, by
+                        value of the Dojo compatibility flag (<constant>FALSE</constant>, by
                         default).</para></listitem>
                 <listitem><para><methodname>addService($service)</methodname>: Add a service
                         to the map. May be an array of information to pass to

@@ -273,10 +273,13 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            The <methodname>loadHTML()</methodname> and <methodname>loadHTMLFile()</methodname> methods of <classname>Zend_Search_Lucene_Document_Html</classname> class
-            also have second optional argument. If it's set to true, then body content is also stored within index and can
-            be retrieved from the index. By default, the body is tokenized and indexed, but not stored.
+            The <methodname>loadHTML()</methodname> and <methodname>loadHTMLFile()</methodname>
+            methods of <classname>Zend_Search_Lucene_Document_Html</classname> class also have
+            second optional argument. If it's set to <constant>TRUE</constant>, then body content is
+            also stored within index and can be retrieved from the index. By default, the body is
+            tokenized and indexed, but not stored.
         </para>
+
         <para>
             The third parameter of <methodname>loadHTML()</methodname> and <methodname>loadHTMLFile()</methodname> methods optionally specifies source HTML
             document encoding. It's used if encoding is not specified using Content-type HTTP-EQUIV meta tag.
@@ -388,9 +391,11 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            The <methodname>loadDocxFile()</methodname> methods of <classname>Zend_Search_Lucene_Document_Docx</classname> class
-            also have second optional argument. If it's set to true, then body content is also stored within index and can
-            be retrieved from the index. By default, the body is tokenized and indexed, but not stored.
+            The <methodname>loadDocxFile()</methodname> methods of
+            <classname>Zend_Search_Lucene_Document_Docx</classname> class also have second optional
+            argument. If it's set to <constant>TRUE</constant>, then body content is also stored
+            within index and can be retrieved from the index. By default, the body is tokenized and
+            indexed, but not stored.
         </para>
 
         <para>
@@ -476,9 +481,11 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            The <methodname>loadPptxFile()</methodname> methods of <classname>Zend_Search_Lucene_Document_Pptx</classname> class
-            also have second optional argument. If it's set to true, then body content is also stored within index and can
-            be retrieved from the index. By default, the body is tokenized and indexed, but not stored.
+            The <methodname>loadPptxFile()</methodname> methods of
+            <classname>Zend_Search_Lucene_Document_Pptx</classname> class also have second optional
+            argument. If it's set to <constant>TRUE</constant>, then body content is also stored
+            within index and can be retrieved from the index. By default, the body is tokenized and
+            indexed, but not stored.
         </para>
 
         <para>
@@ -561,9 +568,11 @@ $index->addDocument($doc);
         </para>
 
         <para>
-            The <methodname>loadXlsxFile()</methodname> methods of <classname>Zend_Search_Lucene_Document_Xlsx</classname> class
-            also have second optional argument. If it's set to true, then body content is also stored within index and can
-            be retrieved from the index. By default, the body is tokenized and indexed, but not stored.
+            The <methodname>loadXlsxFile()</methodname> methods of
+            <classname>Zend_Search_Lucene_Document_Xlsx</classname> class also have second optional
+            argument. If it's set to <constant>TRUE</constant>, then body content is also stored
+            within index and can be retrieved from the index. By default, the body is tokenized and
+            indexed, but not stored.
         </para>
 
         <para>

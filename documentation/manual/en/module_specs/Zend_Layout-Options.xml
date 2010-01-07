@@ -36,10 +36,11 @@
 
         <listitem><para>
                 <emphasis>mvcSuccessfulActionOnly</emphasis>: when using the
-                <acronym>MVC</acronym>, if an action throws an exception and this flag is true, the
-                layout will not be rendered (this is to prevent double-rendering
-                of the layout when the <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler
-                plugin</link> is in use). By default, the flat is true.
+                <acronym>MVC</acronym>, if an action throws an exception and this flag is
+                <constant>TRUE</constant>, the layout will not be rendered (this is to prevent
+                double-rendering of the layout when the <link
+                    linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler
+                    plugin</link> is in use). By default, the flat is <constant>TRUE</constant>.
                 Accessors are <methodname>setMvcSuccessfulActionOnly()</methodname> and
                 <methodname>getMvcSuccessfulActionOnly()</methodname>.
         </para></listitem>

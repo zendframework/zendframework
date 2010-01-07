@@ -170,8 +170,9 @@ if ($akismet->verifyKey($apiKey) {
         </para>
 
         <para>
-            The <methodname>isSpam()</methodname> method will return either true or
-            false, or throw an exception if the <acronym>API</acronym> key is invalid.
+            The <methodname>isSpam()</methodname> method will return either
+            <constant>TRUE</constant> or <constant>FALSE</constant>, or throw an exception if the
+            <acronym>API</acronym> key is invalid.
         </para>
 
         <example id="zend.service.akismet.isspam.example-1">

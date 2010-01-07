@@ -96,7 +96,8 @@ $filter->setAdapter('openssl');
             <listitem>
                 <para>
                     <emphasis>salt</emphasis>: If the key should be used as salt value. The key used
-                    for encryption will then itself also be encrypted. Default is false.
+                    for encryption will then itself also be encrypted. Default is
+                    <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>

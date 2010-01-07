@@ -671,7 +671,7 @@ echo $view->editor('foo');
                     <para>
                         That said, there may be times when you want an Editor widget that can
                         gracefully degrade to a <acronym>TEXTAREA</acronym>. In such situations, you
-                        can do so by passing a boolean <constant>true</constant> value to the
+                        can do so by passing a boolean <constant>TRUE</constant> value to the
                         <varname>degrade</varname> parameter:
                     </para>
 

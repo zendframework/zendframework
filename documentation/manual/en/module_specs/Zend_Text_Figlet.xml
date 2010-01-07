@@ -52,8 +52,8 @@
             <listitem>
                 <para>
                     <code>handleParagraphs</code> - A boolean which indicates,
-                    how new lines are handled. When set to true, single new lines
-                    are ignored and instead treated as single spaces. Only multiple
+                    how new lines are handled. When set to <constant>TRUE</constant>, single new
+                    lines are ignored and instead treated as single spaces. Only multiple
                     new lines will be handled as such. The default value is
                     <constant>FALSE</constant>.
                 </para>

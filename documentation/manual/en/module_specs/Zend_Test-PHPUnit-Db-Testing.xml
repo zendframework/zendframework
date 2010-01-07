@@ -154,8 +154,8 @@
                         <entry>
                             Create a DataTable Object that is filled with the data from a given
                             <classname>Zend_Db_Table_Rowset_Abstract</classname> instance. The table
-                            the rowset is connected to is chosen when <varname>$tableName</varname> is
-                            null.
+                            the rowset is connected to is chosen when <varname>$tableName</varname>
+                            is <constant>NULL</constant>.
                         </entry>
                     </row>
 

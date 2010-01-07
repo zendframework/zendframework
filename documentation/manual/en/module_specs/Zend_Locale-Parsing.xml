@@ -240,8 +240,8 @@ print $number;
         <title>Number testing</title>
 
         <para>
-            <methodname>isNumber($value, array $options = array())</methodname> checks if a given string is a number and returns
-            true or false.
+            <methodname>isNumber($value, array $options = array())</methodname> checks if a given
+            string is a number and returns <constant>TRUE</constant> or <constant>FALSE</constant>.
         </para>
 
         <example id="zend.locale.number.test.example-1">
@@ -313,8 +313,9 @@ print $number;
         <title>Floating point value testing</title>
 
         <para>
-            <methodname>isFloat($value, array $options = array())</methodname> checks if a given string is a floating point value
-            and returns true or false.
+            <methodname>isFloat($value, array $options = array())</methodname> checks if a given
+            string is a floating point value and returns <constant>TRUE</constant> or
+            <constant>FALSE</constant>.
         </para>
 
         <example id="zend.locale.float.test.example-1">
@@ -377,12 +378,12 @@ print $number;
     </sect2>
 
     <sect2 id="zend.locale.integer.test">
-
         <title>Integer value testing</title>
 
         <para>
-            <methodname>isInteger($value, array $options = array())</methodname> checks if a given string is a integer value and
-            returns true or false.
+            <methodname>isInteger($value, array $options = array())</methodname> checks if a given
+            string is a integer value and returns <constant>TRUE</constant> or
+            <constant>FALSE</constant>.
         </para>
 
         <example id="zend.locale.integer.test.example-1">

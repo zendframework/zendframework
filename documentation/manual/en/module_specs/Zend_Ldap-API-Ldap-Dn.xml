@@ -176,11 +176,13 @@
                 </row>
                 <row>
                     <entry><code>void setCaseFold(string|null $caseFold)</code></entry>
+
                     <entry>
                         Sets the case-folding option to the current DN instance. If
-                        <varname>$caseFold</varname> is null the default case-folding setting
-                        (<constant>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</constant> by default or set
-                        via <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> will be set for
+                        <varname>$caseFold</varname> is <constant>NULL</constant> the default
+                        case-folding setting (<constant>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</constant>
+                        by default or set via
+                        <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> will be set for
                         the current instance.
                     </entry>
                 </row>

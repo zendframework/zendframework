@@ -74,26 +74,29 @@ $response = Zend_Http_Response::factory($str);
     <sect2 id="zend.http.response.testers">
         <title>Boolean Tester Methods</title>
         <para>
-            Once a <classname>Zend_Http_Response</classname> object is instantiated, it provides several
-            methods that can be used to test the type of the response. These all
-            return Boolean true or false:
+            Once a <classname>Zend_Http_Response</classname> object is instantiated, it provides
+            several methods that can be used to test the type of the response. These all
+            return Boolean <constant>TRUE</constant> or <constant>FALSE</constant>:
             <itemizedlist>
                 <listitem>
                     <para>
-                        <code>Boolean isSuccessful()</code>: Whether the request was successful or not. Returns
-                        TRUE for <acronym>HTTP</acronym> 1xx and 2xx response codes
+                        <code>Boolean isSuccessful()</code>: Whether the request was successful or
+                        not. Returns <constant>TRUE</constant> for <acronym>HTTP</acronym> 1xx and
+                        2xx response codes
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>Boolean isError()</code>: Whether the response code implies an error or not. Returns
-                        TRUE for <acronym>HTTP</acronym> 4xx (client errors) and 5xx (server errors) response codes
+                        <code>Boolean isError()</code>: Whether the response code implies an error
+                        or not. Returns <constant>TRUE</constant> for <acronym>HTTP</acronym> 4xx
+                        (client errors) and 5xx (server errors) response codes
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-                        <code>Boolean isRedirect()</code>: Whether the response is a redirection response or not. Returns
-                        TRUE for <acronym>HTTP</acronym> 3xx response codes
+                        <code>Boolean isRedirect()</code>: Whether the response is a redirection
+                        response or not. Returns <constant>TRUE</constant> for
+                        <acronym>HTTP</acronym> 3xx response codes
                     </para>
                 </listitem>
             </itemizedlist>
@@ -152,10 +155,11 @@ if ($response->isError()) {
                 </listitem>
                 <listitem>
                     <para>
-                        <code>string getHeadersAsString($status_line = true, $br = "\n")</code>: Get the entire
-                        set of headers as a string. If $status_line is true (default), the first status
-                        line (eg. "HTTP/1.1 200 OK") will also be returned. Lines are broken with the
-                        $br parameter (Can be, for example, "&lt;br /&gt;")
+                        <code>string getHeadersAsString($status_line = true, $br = "\n")</code>: Get
+                        the entire set of headers as a string. If $status_line is
+                        <constant>TRUE</constant> (default), the first status line (eg. "HTTP/1.1
+                        200 OK") will also be returned. Lines are broken with the $br parameter (Can
+                        be, for example, "&lt;br /&gt;")
                     </para>
                 </listitem>
                 <listitem>
@@ -246,12 +250,14 @@ echo $body;
                 </listitem>
                 <listitem>
                     <para>
-                        <code>string Zend_Http_Response::responseCodeAsText($code = null, $http11 = true)</code>:
-                        Get the standard <acronym>HTTP</acronym> response message for a response code $code. For example,
-                        will return "Internal Server Error" if $code is 500. If $http11 is true (default),
-                        will return <acronym>HTTP</acronym>/1.1 standard messages - otherwise <acronym>HTTP</acronym>/1.0 messages will be returned.
-                        If $code is not specified, this method will return all known <acronym>HTTP</acronym> response codes as an
-                        associative (code => message) array.
+                        <code>string Zend_Http_Response::responseCodeAsText($code = null, $http11 =
+                        true)</code>: Get the standard <acronym>HTTP</acronym> response message for
+                        a response code $code. For example, will return "Internal Server Error" if
+                        $code is 500. If $http11 is <constant>TRUE</constant> (default), will return
+                        <acronym>HTTP</acronym>/1.1 standard messages - otherwise
+                        <acronym>HTTP</acronym>/1.0 messages will be returned. If $code is not
+                        specified, this method will return all known <acronym>HTTP</acronym>
+                        response codes as an associative (code => message) array.
                     </para>
                 </listitem>
             </itemizedlist>

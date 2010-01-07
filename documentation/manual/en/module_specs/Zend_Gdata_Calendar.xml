@@ -671,8 +671,9 @@ $newEvent = $service->insertEvent($event);
                 QuickAdd is a feature which allows events to be created using free-form text entry.
                 For example, the string "Dinner at Joe's Diner on Thursday" would create an event
                 with the title "Dinner", location "Joe's Diner", and date "Thursday". To take
-                advantage of QuickAdd, create a new <code>QuickAdd</code> property set to "true"
-                and store the freeform text as a <code>content</code> property.
+                advantage of QuickAdd, create a new <code>QuickAdd</code> property set to
+                <constant>TRUE</constant> and store the freeform text as a <code>content</code>
+                property.
             </para>
             <programlisting language="php"><![CDATA[
 // Create a new entry using the calendar service's magic factory method

@@ -191,10 +191,11 @@ foreach($list as $bucket) {
 ]]></programlisting>
         </example>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>isBucketAvailable()</methodname> check if the bucket exists and returns true
-                    if it does.
+                    <methodname>isBucketAvailable()</methodname> check if the bucket exists and returns
+                    <constant>TRUE</constant> if it does.
                 </para>
             </listitem>
         </itemizedlist>
@@ -331,7 +332,7 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
                             </listitem>
                         </varlistentry>
                         </variablelist>
-                        The function will return false if the key does not correspond to any existing object.
+                        The function will return <constant>FALSE</constant> if the key does not correspond to any existing object.
                 </para>
             </listitem>
             <listitem>

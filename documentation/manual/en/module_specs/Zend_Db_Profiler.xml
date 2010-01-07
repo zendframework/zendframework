@@ -171,7 +171,7 @@ $profiler = $db->getProfiler();
                 <para>
                     <methodname>getLastQueryProfile()</methodname> returns the last (most
                     recent) query profile, regardless of whether or not the query
-                    has finished (if it hasn't, the end time will be null)
+                    has finished (if it hasn't, the end time will be <constant>NULL</constant>)
                 </para>
             </listitem>
 
@@ -277,7 +277,7 @@ echo "Longest query: \n" . $longestQuery . "\n";
             <para>
                 <methodname>setFilterElapsedSecs()</methodname> allows the developer to set
                 a minimum query time before a query is profiled. To remove the
-                filter, pass the method a null value.
+                filter, pass the method a <constant>NULL</constant> value.
             </para>
 
             <programlisting language="php"><![CDATA[

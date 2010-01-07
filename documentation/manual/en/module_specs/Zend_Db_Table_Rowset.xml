@@ -172,8 +172,9 @@ $row9->save();
                 knowing its position; don't forget however that positions start with index zero. The
                 first parameter for <methodname>getRow()</methodname> is an integer for the position
                 asked. The second optional parameter is a boolean; it tells the Rowset iterator if
-                it must seek to that position in the same time, or not (default is false). This
-                method returns a <classname>Zend_Db_Table_Row</classname> object by default. If the
+                it must seek to that position in the same time, or not (default is
+                <constant>FALSE</constant>). This method returns a
+                <classname>Zend_Db_Table_Row</classname> object by default. If the
                 position requested does not exist, an exception will be thrown. Here is an example:
             </para>
 

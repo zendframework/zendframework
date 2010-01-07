@@ -103,7 +103,7 @@ foreach ($twitterTrends as $trend) {
                 <para>
                     <code>show_user</code> specifies whether to add "&gt;user&lt;:" to the
                     beginning of the tweet. This is useful for readers that do not display Atom's
-                    author field. The default is "false".
+                    author field. The default is "<constant>FALSE</constant>".
                 </para>
             </listitem>
 

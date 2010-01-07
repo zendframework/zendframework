@@ -42,7 +42,7 @@ class Util
         </para>
 
         <para>
-            The Callback decorator allows specifying a null value for the
+            The Callback decorator allows specifying a <constant>NULL</constant> value for the
             placement option, which will replace the original content with
             the callback return value; 'prepend' and 'append' are still
             valid as well.
@@ -230,7 +230,7 @@ class Util
         <itemizedlist>
             <listitem><para>
                 <code>ignoreSubForms</code>: whether or not to disable recursion
-                into subforms. Default value: false (i.e., allow recursion).
+                into subforms. Default value: <constant>FALSE</constant> (i.e., allow recursion).
             </para></listitem>
 
             <listitem><para>
@@ -504,7 +504,7 @@ $element->setDecorators(array(array('ViewScript',
             <para>
                 You may find it useful for the view script to replace the
                 content provided to the decorator -- for instance, if you want
-                to wrap it. You can do so by specifying a boolean false value
+                to wrap it. You can do so by specifying a boolean <constant>FALSE</constant> value
                 for the decorator's 'placement' option:
             </para>
 

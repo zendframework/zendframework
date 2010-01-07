@@ -68,21 +68,21 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>clear</entry>
                         <entry>all</entry>
                         <entry>
-                            If set to true, the already read translations will be cleared. This can
-                            be used instead of creating a new instance when reading new translation
-                            data
+                            If set to <constant>TRUE</constant>, the already read translations will
+                            be cleared. This can be used instead of creating a new instance when
+                            reading new translation data
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>disableNotices</entry>
                         <entry>all</entry>
                         <entry>
-                            If set to true, all notices regarding not available translations will
-                            be disabled. You should set this option to true in production
-                            environment
+                            If set to <constant>TRUE</constant>, all notices regarding not available
+                            translations will be disabled. You should set this option to
+                            <constant>TRUE</constant> in production environment
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>ignore</entry>
@@ -105,7 +105,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             An instance of <classname>Zend_Log</classname> where untranslated
                             messages and notices will be written to
                         </entry>
-                        <entry><emphasis>null</emphasis></entry>
+                        <entry><emphasis><constant>NULL</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>logMessage</entry>
@@ -120,34 +120,42 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                     <row>
                         <entry>logUntranslated</entry>
                         <entry>all</entry>
+
                         <entry>
-                            When this option is set to true, all message IDs which can not be
-                            translated will be written into the attached log
+                            When this option is set to <constant>TRUE</constant>, all message IDs
+                            which can not be translated will be written into the attached log
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>reload</entry>
                         <entry>all</entry>
+
                         <entry>
-                            When this option is set to true, then files are reloaded into the cache.
-                            This option can be used to recreate the cache, or to add translations
-                            to already cached data after the cache has already been created.
+                            When this option is set to <constant>TRUE</constant>, then files are
+                            reloaded into the cache. This option can be used to recreate the cache,
+                            or to add translations to already cached data after the cache has
+                            already been created.
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>scan</entry>
                         <entry>all</entry>
+
                         <entry>
-                            If set to null, no scanning of the directory structure will be done.
-                            If set to <constant>Zend_Translate::LOCALE_DIRECTORY</constant> the
+                            If set to <constant>NULL</constant>, no scanning of the directory
+                            structure will be done. If set to
+                            <constant>Zend_Translate::LOCALE_DIRECTORY</constant> the
                             locale will be detected within the directory. If set to
                             <constant>Zend_Translate::LOCALE_FILENAME</constant> the locale will
                             be detected within the filename. See <xref
                                 linkend="zend.translate.additional.detection" /> for details
                         </entry>
-                        <entry><emphasis>null</emphasis></entry>
+
+                        <entry><emphasis><constant>NULL</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>delimiter</entry>
@@ -178,13 +186,15 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                     <row>
                         <entry>useId</entry>
                         <entry>Xliff</entry>
+
                         <entry>
                             If you set this option to <constant>FALSE</constant>, then the source
                             string will be used as message Id. The default for this option is
                             <constant>TRUE</constant>, which means that the Id from the trans-unit
                             element will be used as message Id
                         </entry>
-                        <entry><emphasis>true</emphasis></entry>
+
+                        <entry><emphasis><constant>TRUE</constant></emphasis></entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -616,7 +626,8 @@ $translate = new Zend_Translate(
             whether translation is fixed to the declared language or a lower set of translations
             can be used. If you have a text which can be returned for 'en' but not for 'en_US' you
             will normally get the translation returned, but by setting <varname>$original</varname> to
-            true, <methodname>isTranslated()</methodname> will return false.
+            <constant>TRUE</constant>, <methodname>isTranslated()</methodname> will return
+            <constant>FALSE</constant>.
         </para>
 
         <example id="zend.translate.additional.istranslated.example">

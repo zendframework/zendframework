@@ -39,8 +39,10 @@
                     <entry><code>uri</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
-                        <acronym>URI</acronym> to page. This can be any string or null.
+                        <acronym>URI</acronym> to page. This can be any string or
+                        <constant>NULL</constant>.
                     </entry>
                 </row>
             </tbody>

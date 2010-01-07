@@ -535,9 +535,10 @@ $compressed = $filter->filter('filename.zip');
             <listitem>
                 <para>
                     <emphasis>Mode</emphasis>: A mode to use for compression. Supported are either
-                    'null' which means no compression at all, 'Gz' which makes use of
-                    <acronym>PHP</acronym>'s Zlib extension and 'Bz2' which makes use of
-                    <acronym>PHP</acronym>'s Bz2 extension. The default value is 'null'.
+                    '<constant>NULL</constant>' which means no compression at all, 'Gz' which makes
+                    use of <acronym>PHP</acronym>'s Zlib extension and 'Bz2' which makes use of
+                    <acronym>PHP</acronym>'s Bz2 extension. The default value is
+                    '<constant>NULL</constant>'.
                 </para>
             </listitem>
 

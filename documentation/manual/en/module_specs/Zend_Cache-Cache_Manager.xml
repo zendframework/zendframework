@@ -190,8 +190,8 @@ $databaseCache = $manager->getCache('database');
         "tagcache". The default cache is a simple File based cache using the Core
         frontend which assumes a cache_dir called "cache" exists at the same
         level as the conventional "public" directory of a Zend Framework application.
-        The skeleton cache is actually a NULL cache, i.e. it contains no options.
-        The remaining two caches are used to implement a default Static Page Cache
+        The skeleton cache is actually a <constant>NULL</constant> cache, i.e. it contains no
+        options. The remaining two caches are used to implement a default Static Page Cache
         where static HTML/XML or even JSON may be written to static files in
         /public. Control over a Static Page Cache is offered via
         <classname>Zend_Controller_Action_Helper_Cache</classname>, though you may

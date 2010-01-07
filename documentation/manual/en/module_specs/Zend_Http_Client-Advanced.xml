@@ -19,7 +19,7 @@
             redirecting on a 301 or 302 response, all GET and POST parameters
             are reset, and a GET request is sent to the new location. This
             behavior can be changed by setting the 'strictredirects' configuration
-            parameter to boolean TRUE:
+            parameter to boolean <constant>TRUE</constant>:
             <example id="zend.http.client.redirections.example-1">
                 <title>Forcing RFC 2616 Strict Redirections on 301 and 302 Responses</title>
                 <programlisting language="php"><![CDATA[
@@ -143,14 +143,15 @@ $client->setHeaders(array(
 
     <sect2 id="zend.http.client.file_uploads">
         <title>File Uploads</title>
+
         <para>
             You can upload files through HTTP using the setFileUpload method.
             This method takes a file name as the first parameter, a form name
             as the second parameter, and data as a third optional parameter.
-            If the third data parameter is null, the first file name parameter
+            If the third data parameter is <constant>NULL</constant>, the first file name parameter
             is considered to be a real file on disk, and Zend_Http_Client will
             try to read this file and upload it. If the data parameter is not
-            null, the first file name parameter will be sent as the file name,
+            <constant>NULL</constant>, the first file name parameter will be sent as the file name,
             but no actual file needs to exist on the disk.
             The second form name parameter is always required, and is equivalent
             to the "name" attribute of an &gt;input&lt; tag, if the file was to
@@ -372,10 +373,11 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
         </para>
 
         <para>
-        In order to receive data from the server as stream, use <methodname>setStream()</methodname>.
-        Optional argument specifies the filename where the data will be stored. If the argument is just
-        TRUE (default), temporary file will be used and will be deleted once response object is destroyed.
-        Setting argument to FALSE disables the streaming functionality.
+            In order to receive data from the server as stream, use
+            <methodname>setStream()</methodname>. Optional argument specifies the filename where the
+            data will be stored. If the argument is just <constant>TRUE</constant> (default),
+            temporary file will be used and will be deleted once response object is destroyed.
+            Setting argument to <constant>FALSE</constant> disables the streaming functionality.
         </para>
 
         <para>

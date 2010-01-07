@@ -515,7 +515,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             when submitting the image using the <methodname>setImageValue()</methodname> accessor
             (or 'imageValue' configuration key). When the value set for the
             element matches the <code>imageValue</code>, then the accessor
-            <methodname>isChecked()</methodname> will return true.
+            <methodname>isChecked()</methodname> will return <constant>TRUE</constant>.
         </para>
 
         <para>
@@ -552,7 +552,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             which validates against the array keys of registered options. You
             can disable this behavior by either calling
             <methodname>setRegisterInArrayValidator(false)</methodname>, or by passing a
-            false value to the <code>registerInArrayValidator</code>
+            <constant>FALSE</constant> value to the <code>registerInArrayValidator</code>
             configuration key.
         </para>
 
@@ -652,7 +652,7 @@ $element->setValue(array('bar', 'bat'));
             which validates against the array keys of registered options. You
             can disable this behavior by either calling
             <methodname>setRegisterInArrayValidator(false)</methodname>, or by passing a
-            false value to the <code>registerInArrayValidator</code>
+            <constant>FALSE</constant> value to the <code>registerInArrayValidator</code>
             configuration key.
         </para>
     </sect2>
@@ -691,7 +691,7 @@ $element->setValue(array('bar', 'bat'));
             which validates against the array keys of registered options. You
             can disable this behavior by either calling
             <methodname>setRegisterInArrayValidator(false)</methodname>, or by passing a
-            false value to the <code>registerInArrayValidator</code>
+            <constant>FALSE</constant> value to the <code>registerInArrayValidator</code>
             configuration key.
         </para>
 
@@ -756,7 +756,7 @@ $element->setValue(array('bar', 'bat'));
             which validates against the array keys of registered options. You
             can disable this behavior by either calling
             <methodname>setRegisterInArrayValidator(false)</methodname>, or by passing a
-            false value to the <code>registerInArrayValidator</code>
+            <constant>FALSE</constant> value to the <code>registerInArrayValidator</code>
             configuration key.
         </para>
 

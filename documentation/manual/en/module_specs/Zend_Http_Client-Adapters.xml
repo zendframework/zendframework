@@ -81,7 +81,7 @@
                             <entry>persistent</entry>
                             <entry>Whether to use persistent <acronym>TCP</acronym> connections</entry>
                             <entry>boolean</entry>
-                            <entry>false</entry>
+                            <entry><constant>FALSE</constant></entry>
                         </row>
                         <row>
                             <entry>ssltransport</entry>
@@ -93,13 +93,13 @@
                             <entry>sslcert</entry>
                             <entry>Path to a <acronym>PEM</acronym> encoded <acronym>SSL</acronym> certificate</entry>
                             <entry>string</entry>
-                            <entry>null</entry>
+                            <entry><constant>NULL</constant></entry>
                         </row>
                         <row>
                             <entry>sslpassphrase</entry>
                             <entry>Passphrase for the <acronym>SSL</acronym> certificate file</entry>
                             <entry>string</entry>
-                            <entry>null</entry>
+                            <entry><constant>NULL</constant></entry>
                         </row>
                     </tbody>
                 </tgroup>

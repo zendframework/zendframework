@@ -536,9 +536,10 @@
             <para>
                 <methodname>Zend_Pdf::resolveDestination()</methodname> method also takes
                 an optional boolean parameter <varname>$refreshPageCollectionHashes</varname>,
-                which is true by default. It forces <classname>Zend_Pdf</classname> object
-                to refresh internal page collection hashes since document pages list may be
-                updated by user using <varname>Zend_Pdf::$pages</varname> property
+                which is <constant>TRUE</constant> by default. It forces
+                <classname>Zend_Pdf</classname> object to refresh internal page collection hashes
+                since document pages list may be updated by user using
+                <varname>Zend_Pdf::$pages</varname> property
                 (<link linkend="zend.pdf.pages">Working with Pages</link>).
                 It may be turned off for performance reasons,
                 if it's known that document pages list wasn't changed since last method
@@ -807,7 +808,8 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
             <para>
                 <methodname>Zend_Pdf_Action_URI::create($uri[, $isMap])</methodname> method has
                 to be used to create a URI action (see API documentation for the details).
-                Optional <varname>$isMap</varname> parameter is set to false by default.
+                Optional <varname>$isMap</varname> parameter is set to <constant>FALSE</constant>
+                by default.
             </para>
 
             <para>
@@ -881,13 +883,14 @@ printf("Actions in a tree: %d\n", $actionsCount++);
 
             <para>
                 <methodname>Zend_Pdf_Target Zend_Pdf::getOpenAction()</methodname> method
-                returns current document open action (or null if open action is not set).
+                returns current document open action (or <constant>NULL</constant> if open action
+                is not set).
             </para>
 
             <para>
                 <methodname>setOpenAction(Zend_Pdf_Target $openAction = null)</methodname>
                 method sets document open action or clean it if <varname>$openAction</varname>
-                is null.
+                is <constant>NULL</constant>.
             </para>
         </sect3>
     </sect2>
@@ -948,8 +951,8 @@ $pdf->save($path, true);
 
             <listitem>
                 <para>
-                    <methodname>boolean isOpen()</methodname> - true if outline is open
-                    by default.
+                    <methodname>boolean isOpen()</methodname> - <constant>TRUE</constant> if outline
+                    is open by default.
                 </para>
             </listitem>
 
@@ -961,8 +964,8 @@ $pdf->save($path, true);
 
             <listitem>
                 <para>
-                    <methodname>boolean isItalic()</methodname> - true if outline item
-                    is displayed in italic.
+                    <methodname>boolean isItalic()</methodname> - <constant>TRUE</constant> if
+                    outline item is displayed in italic.
                 </para>
             </listitem>
 
@@ -975,8 +978,8 @@ $pdf->save($path, true);
 
             <listitem>
                 <para>
-                    <methodname>boolean isBold()</methodname> - true if outline item
-                    is displayed in bold.
+                    <methodname>boolean isBold()</methodname> - <constant>TRUE</constant> if outline
+                    item is displayed in bold.
                 </para>
             </listitem>
 
@@ -990,14 +993,14 @@ $pdf->save($path, true);
             <listitem>
                 <para>
                     <methodname>Zend_Pdf_Color_Rgb getColor()</methodname> - get outline
-                    text color (null means black).
+                    text color (<constant>NULL</constant> means black).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setColor(Zend_Pdf_Color_Rgb $color)</methodname> - set
-                    outline text color (null means black).
+                    outline text color (<constant>NULL</constant> means black).
                 </para>
             </listitem>
 
@@ -1012,7 +1015,7 @@ $pdf->save($path, true);
                 <para>
                     <methodname>setTarget(Zend_Pdf_Target|string $target)</methodname> - set
                     outline target (action or destination). String may be used to identify
-                    named destination. Null means 'no target'.
+                    named destination. <constant>NULL</constant> means 'no target'.
                 </para>
             </listitem>
 
@@ -1094,8 +1097,9 @@ $pdf->save($path, true);
         <note>
             <para>
                 All outline items with unresolved destinations (or destinations of GoTo
-                actions) are updated while document saving by setting their targets to null.
-                So document will not be corrupted by removing pages referenced by outlines.
+                actions) are updated while document saving by setting their targets to
+                <constant>NULL</constant>. So document will not be corrupted by removing pages
+                referenced by outlines.
             </para>
         </note>
     </sect2>

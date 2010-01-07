@@ -122,7 +122,7 @@ $valid = Zend_Uri::check('http://uri.in.question');
 
             <para>
                 <classname>Zend_Uri</classname> can be set to accept these "unwise" characters by
-                setting the 'allow_unwise' option to boolean TRUE using
+                setting the 'allow_unwise' option to boolean <constant>TRUE</constant> using
                 <methodname>Zend_Uri::setConfig()</methodname>:
             </para>
 
@@ -148,9 +148,9 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
             <note>
                 <para>
                     <methodname>Zend_Uri::setConfig()</methodname> sets configuration options
-                    globally. It is recommended to reset the 'allow_unwise' option to 'false',
-                    like in the example above, unless you are certain you want to always allow
-                    unwise characters globally.
+                    globally. It is recommended to reset the 'allow_unwise' option to
+                    '<constant>FALSE</constant>', like in the example above, unless you are certain
+                    you want to always allow unwise characters globally.
                 </para>
             </note>
         </sect3>

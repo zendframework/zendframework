@@ -30,9 +30,12 @@ $return = $ec2_kp->create('my-new-key');
             prevent it from being used with new instances. Instances currently
             running with the keypair will still allow you to access them.
         </para>
+
         <para>
-            <code>delete</code> returns boolean true or false
+            <code>delete</code> returns boolean <constant>TRUE</constant> or
+            <constant>FALSE</constant>
         </para>
+
         <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->delete('my-new-key');

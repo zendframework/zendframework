@@ -369,7 +369,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
 
                     <row>
                         <entry><methodname>autoload($class)</methodname></entry>
-                        <entry><code>string|false</code></entry>
+                        <entry><code>string|<constant>FALSE</constant></code></entry>
                         <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$class</varname>, <emphasis>required</emphasis>.
@@ -499,8 +499,8 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                             Set or retrieve the value of the flag used to
                             indicate whether the default autoloader
                             implementation should suppress "file not found"
-                            warnings. If no arguments or a null value is passed,
-                            returns a boolean indicating the status of the flag;
+                            warnings. If no arguments or a <constant>NULL</constant> value is
+                            passed, returns a boolean indicating the status of the flag;
                             if a boolean is passed, the flag is set to that
                             value and the autoloader instance is returned (to
                             allow method chaining).
@@ -530,7 +530,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                             Retrieve the value of the flag used to indicate whether
                             or not the default autoloader should be used as a
                             fallback or catch-all autoloader for all namespaces.
-                            By default, this is false.
+                            By default, this is <constant>FALSE</constant>.
                         </para></entry>
                     </row>
 

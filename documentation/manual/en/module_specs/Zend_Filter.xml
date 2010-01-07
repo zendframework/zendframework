@@ -186,8 +186,8 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                 <listitem>
                     <para>
                         <emphasis><methodname>Zend_Filter::hasDefaultNamespaces()</methodname></emphasis>:
-                        Returns true when one or more default namespaces are set, and false when no
-                        default namespaces are set.
+                        Returns <constant>TRUE</constant> when one or more default namespaces are
+                        set, and <constant>FALSE</constant> when no default namespaces are set.
                     </para>
                 </listitem>
             </itemizedlist>

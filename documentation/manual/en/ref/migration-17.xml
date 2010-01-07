@@ -458,7 +458,8 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
                 <para>
                     Per default the old behaviour is still active, but throws a user warning.
                     When you have changed your code to the new behaviour you should also change
-                    the compatibility mode to false so that no warning is thrown anymore.
+                    the compatibility mode to <constant>FALSE</constant> so that no warning is
+                    thrown anymore.
                 </para>
             </note>
         </sect3>
@@ -494,7 +495,8 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
 
             <para>
                 To get rid of these notices you can simply set the new option
-                'disableNotices' to true. It defaults to false.
+                'disableNotices' to <constant>TRUE</constant>. It defaults to
+                <constant>FALSE</constant>.
             </para>
 
             <example id="migration.17.zend.translate.example">

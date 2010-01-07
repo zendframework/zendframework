@@ -419,7 +419,7 @@ echo "hometown: " . $userProfile->hometown->text . "\n";
               </row>
               <row>
                 <entry>Video private?</entry>
-                <entry>false</entry>
+                <entry><constant>FALSE</constant></entry>
               </row>
               <row>
                 <entry>Video location</entry>

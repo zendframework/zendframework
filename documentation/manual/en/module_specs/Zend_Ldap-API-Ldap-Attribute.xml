@@ -23,8 +23,8 @@
 
         <varlistentry>
             <term><code>boolean</code></term>
-            <listitem><para><constant>TRUE</constant> will be converted to <code>'TRUE'</code> and
-            <constant>FALSE</constant> to <code>'FALSE'</code></para></listitem>
+            <listitem><para><constant>TRUE</constant> will be converted to <emphasis>'<constant>TRUE</constant>'</emphasis> and
+            <constant>FALSE</constant> to <emphasis>'<constant>FALSE</constant>'</emphasis></para></listitem>
         </varlistentry>
 
         <varlistentry>
@@ -51,12 +51,12 @@
 
     <variablelist>
         <varlistentry>
-            <term><code>'TRUE'</code></term>
+            <term><emphasis>'<constant>TRUE</constant>'</emphasis></term>
             <listitem><para>Converted to <constant>TRUE</constant>.</para></listitem>
         </varlistentry>
 
         <varlistentry>
-            <term><code>'FALSE'</code></term>
+            <term><emphasis>'<constant>FALSE</constant>'</emphasis></term>
             <listitem><para>Converted to <constant>FALSE</constant>.</para></listitem>
         </varlistentry>
 

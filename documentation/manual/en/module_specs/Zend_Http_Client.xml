@@ -39,16 +39,18 @@ $client->setConfig($config);
             </example>
 
             <note>
-                <para>Zend_Http_Client uses Zend_Uri_Http to validate URLs. This means
-                that some special characters like the pipe symbol ('|') or the
-                caret symbol ('^') will not be accepted in the URL by default.
-
-                This can be modified by setting the 'allow_unwise' option of
-                Zend_Uri to 'true'. See <xref linkend="zend.uri.validation.allowunwise" />
-                for more information.</para>
+                <para>
+                    Zend_Http_Client uses Zend_Uri_Http to validate URLs. This means
+                    that some special characters like the pipe symbol ('|') or the
+                    caret symbol ('^') will not be accepted in the URL by default.
+                    This can be modified by setting the 'allow_unwise' option of
+                    Zend_Uri to '<constant>TRUE</constant>'. See <xref
+                        linkend="zend.uri.validation.allowunwise" /> for more information.
+                </para>
             </note>
         </para>
     </sect2>
+
     <sect2 id="zend.http.client.configuration">
         <title>Configuration Parameters</title>
         <para>
@@ -75,16 +77,21 @@ $client->setConfig($config);
                         </row>
                         <row>
                             <entry>strict</entry>
-                            <entry>Whether perform validation on header names. When set to false, validation functions will be skipped.
-                            Usually this should not be changed</entry>
+
+                            <entry>
+                                Whether perform validation on header names. When set to
+                                <constant>FALSE</constant>, validation functions will be skipped.
+                                Usually this should not be changed
+                            </entry>
+
                             <entry>boolean</entry>
-                            <entry>true</entry>
+                            <entry><constant>TRUE</constant></entry>
                         </row>
                         <row>
                             <entry>strictredirects</entry>
                             <entry>Whether to strictly follow the <acronym>RFC</acronym> when redirecting (see <xref linkend="zend.http.client.redirections" />)</entry>
                             <entry>boolean</entry>
-                            <entry>false</entry>
+                            <entry><constant>FALSE</constant></entry>
                         </row>
                         <row>
                             <entry>useragent</entry>
@@ -115,14 +122,21 @@ $client->setConfig($config);
                             <entry>Whether to enable keep-alive connections with the server. Useful and might improve performance if several
                             consecutive requests to the same server are performed.</entry>
                             <entry>boolean</entry>
-                            <entry>false</entry>
+                            <entry><constant>FALSE</constant></entry>
                         </row>
                         <row>
                             <entry>storeresponse</entry>
-                            <entry>Whether to store last response for later retrieval with <methodname>getLastResponse()</methodname>. If set to false
-                            <methodname>getLastResponse()</methodname> will return null.</entry>
+
+                            <entry>
+                                Whether to store last response for later retrieval with
+                                <methodname>getLastResponse()</methodname>. If set to
+                                <constant>FALSE</constant>
+                                <methodname>getLastResponse()</methodname> will return
+                                <constant>NULL</constant>.
+                            </entry>
+
                             <entry>boolean</entry>
-                            <entry>true</entry>
+                            <entry><constant>TRUE</constant></entry>
                         </row>
                     </tbody>
                 </tgroup>

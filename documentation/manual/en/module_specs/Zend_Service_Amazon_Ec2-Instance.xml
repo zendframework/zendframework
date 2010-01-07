@@ -331,7 +331,8 @@ $return = $ec2_instance->run(array('imageId' => 'ami-509320',
                 to reboot terminated instances are ignored.
             </para>
             <para>
-                <code>reboot</code> returns boolean true or false
+                <code>reboot</code> returns boolean <constant>TRUE</constant> or
+                <constant>FALSE</constant>
             </para>
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
@@ -348,9 +349,12 @@ $return = $ec2_instance->reboot('instanceId');
                 operation is idempotent; if you terminate an instance more
                 than once, each call will succeed.
             </para>
+
             <para>
-                <code>terminate</code> returns boolean true or false
+                <code>terminate</code> returns boolean <constant>TRUE</constant> or
+                <constant>FALSE</constant>
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
@@ -396,10 +400,13 @@ $return = $ec2_instance->describe('instanceId');
 
         <note>
             <title>Terminated Instances</title>
-            <para>Recently terminated instances might appear in the returned results.
-                This interval is usually less than one hour. If you do not want terminated
-                instances to be returned, pass in a second variable of boolean true to
-                <code>describe</code> and the terminated instances will be ignored.</para>
+
+            <para>
+                Recently terminated instances might appear in the returned results. This interval is
+                usually less than one hour. If you do not want terminated instances to be returned,
+                pass in a second variable of boolean <constant>TRUE</constant> to
+                <code>describe</code> and the terminated instances will be ignored.
+            </para>
         </note>
 
         <example id="zend.service.amazon.ec2.instance.utility.describebyimageid">
@@ -421,10 +428,14 @@ $return = $ec2_instance->describeByImageId('imageId');
 
             <note>
                 <title>Terminated Instances</title>
-                <para>Recently terminated instances might appear in the returned results.
-                This interval is usually less than one hour. If you do not want terminated
-                instances to be returned, pass in a second variable of boolean true to
-                <code>describe</code> and the terminated instances will be ignored.</para>
+
+                <para>
+                    Recently terminated instances might appear in the returned results. This
+                    interval is usually less than one hour. If you do not want terminated
+                    instances to be returned, pass in a second variable of boolean
+                    <constant>TRUE</constant> to <code>describe</code> and the terminated instances
+                    will be ignored.
+                </para>
             </note>
 
         <example id="zend.service.amazon.ec2.instance.utility.consoleOutput">
@@ -454,16 +465,19 @@ $return = $ec2_instance->consoleOutput('instanceId');
 
         <example id="zend.service.amazon.ec2.instance.utility.confirmproduct">
             <title>Confirm Product Code on an Instance</title>
+
             <para>
-                <code>confirmProduct</code> returns true if the specified product code
-                is attached to the specified instance. The operation returns false if
-                the product code is not attached to the instance.
+                <code>confirmProduct</code> returns <constant>TRUE</constant> if the specified
+                product code is attached to the specified instance. The operation returns
+                <constant>FALSE</constant> if the product code is not attached to the instance.
             </para>
+
             <para>
-                The <code>confirmProduct</code> operation can only be executed by the
-                owner of the <acronym>AMI</acronym>. This feature is useful when an <acronym>AMI</acronym> owner is providing
-                support and wants to verify whether a user's instance is eligible.
+                The <code>confirmProduct</code> operation can only be executed by the owner of the
+                <acronym>AMI</acronym>. This feature is useful when an <acronym>AMI</acronym> owner
+                is providing support and wants to verify whether a user's instance is eligible.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');

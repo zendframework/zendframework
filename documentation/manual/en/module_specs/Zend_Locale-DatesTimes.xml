@@ -361,12 +361,14 @@ print_r ($date);
         <title>Testing Dates</title>
 
         <para>
-            Use <methodname>checkDateFormat($inputString, array('date_format' => $format, $locale))</methodname> to check if a given string
-            contains all expected date parts. The <methodname>checkDateFormat()</methodname> method uses <methodname>getDate()</methodname>, but without
-            the option <code>'fixdate'</code> to avoid returning true when the input fails to conform to the date
-            format. If errors are detected in the input, such as swapped values for months and days, the
-            option <code>'fixdate'</code> method will apply heuristics to "correct" dates before determining their
-            validity.
+            Use <methodname>checkDateFormat($inputString, array('date_format' => $format,
+                $locale))</methodname> to check if a given string contains all expected date parts.
+            The <methodname>checkDateFormat()</methodname> method uses
+            <methodname>getDate()</methodname>, but without the option <code>'fixdate'</code> to
+            avoid returning <constant>TRUE</constant> when the input fails to conform to the date
+            format. If errors are detected in the input, such as swapped values for months and days,
+            the option <code>'fixdate'</code> method will apply heuristics to "correct" dates before
+            determining their validity.
         </para>
 
         <example id="zend.locale.date.test.example-1">

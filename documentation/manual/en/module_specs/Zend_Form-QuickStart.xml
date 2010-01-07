@@ -169,7 +169,7 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
         <para>
             (The second parameter is used to indicate whether or not failure of
             this validator should prevent later validators from running; by
-            default, this is false.)
+            default, this is <constant>FALSE</constant>.)
         </para>
 
         <para>
@@ -358,7 +358,7 @@ $form->addElement('text', 'username', array('order' => 10));
             After a form is submitted, you will need to check and see if it
             passes validations. Each element is checked against the data
             provided; if a key matching the element name is not present, and
-            the item is marked as required, validations are run with a null
+            the item is marked as required, validations are run with a <constant>NULL</constant>
             value.
         </para>
 

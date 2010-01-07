@@ -54,21 +54,27 @@
                             <varname>$domain</varname>: The cookie's domain (eg. '.example.com') (required)
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
-                            <varname>$expires</varname>: Cookie expiration time, as UNIX time stamp (optional, defaults to null).
-                            If not set, cookie will be treated as a 'session cookie' with no expiration time.
+                                <varname>$expires</varname>: Cookie expiration time, as UNIX time
+                                stamp (optional, defaults to <constant>NULL</constant>). If not set,
+                                cookie will be treated as a 'session cookie' with no expiration
+                                time.
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
                             <varname>$path</varname>: Cookie path, eg. '/foo/bar/' (optional, defaults to '/')
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
-                            <varname>$secure</varname>: Boolean, Whether the cookie is to be sent over secure (HTTPS)
-                            connections only (optional, defaults to boolean FALSE)
+                                <varname>$secure</varname>: Boolean, Whether the cookie is to be
+                                sent over secure (HTTPS) connections only (optional, defaults to
+                                boolean <constant>FALSE</constant>)
                             </para>
                         </listitem>
                     </itemizedlist>
@@ -166,10 +172,12 @@ echo $cookie;
                     <code>string getPath()</code>: Get the cookie's path, which defaults to '/'
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                    <code>int getExpiryTime()</code>: Get the cookie's expiration time, as UNIX time stamp. If
-                    the cookie has no expiration time set, will return NULL.
+                        <code>int getExpiryTime()</code>: Get the cookie's expiration time, as UNIX
+                        time stamp. If the cookie has no expiration time set, will return
+                        <constant>NULL</constant>.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -179,15 +187,19 @@ echo $cookie;
             <itemizedlist>
                 <listitem>
                     <para>
-                    <code>boolean isSecure()</code>: Check whether the cookie is set to be sent over secure
-                    connections only. Generally speaking, if true the cookie should only be sent over <acronym>HTTPS</acronym>.
+                        <code>boolean isSecure()</code>: Check whether the cookie is set to be sent
+                        over secure connections only. Generally speaking, if
+                        <constant>TRUE</constant> the cookie should only be sent over
+                        <acronym>HTTPS</acronym>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                    <code>boolean isExpired(int $time = null)</code>: Check whether the cookie is expired or not.
-                    If the cookie has no expiration time, will always return true. If $time is provided, it will
-                    override the current time stamp as the time to check the cookie against.
+                        <code>boolean isExpired(int $time = null)</code>: Check whether the cookie
+                        is expired or not. If the cookie has no expiration time, will always return
+                        <constant>TRUE</constant>. If $time is provided, it will override the
+                        current time stamp as the time to check the cookie against.
                     </para>
                 </listitem>
                 <listitem>
@@ -247,12 +259,16 @@ echo ($cookie->isSessionCookie() ? 'Yes' : 'No');
                     match if the <acronym>URL</acronym>'s scheme (HTTP or <acronym>HTTPS</acronym>), domain and path all match.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                    <code>boolean $matchSessionCookies</code>: Whether session cookies should be matched or not.
-                    Defaults to true. If set to false, cookies with no expiration time will never match.
+                        <code>boolean $matchSessionCookies</code>: Whether session cookies should be
+                        matched or not. Defaults to <constant>TRUE</constant>. If set to
+                        <constant>FALSE</constant>, cookies with no expiration time will never
+                        match.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                     <code>int $now</code>: Time (represented as UNIX time stamp) to check a cookie against
@@ -442,13 +458,16 @@ $cookie->match('http://www.example.com/', true, time() + (3 * 3600));
                             connection type (secure or non-secure), domain and path to match against.
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
-                            <varname>$matchSessionCookies</varname> is a boolean telling whether to match session
-                            cookies or not. Session cookies are cookies that have no specified expiration
-                            time. Defaults to true.
+                                <varname>$matchSessionCookies</varname> is a boolean telling whether
+                                to match session cookies or not. Session cookies are cookies that
+                                have no specified expiration time. Defaults to
+                                <constant>TRUE</constant>.
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
                             <varname>$ret_as</varname> specifies the return type as described above. If not

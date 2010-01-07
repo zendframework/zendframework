@@ -138,19 +138,24 @@ $pdf->save($pdfPath);
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <emphasis>true</emphasis> - The document has been fully trapped; no further trapping is needed.
+                                <emphasis><constant>TRUE</constant></emphasis> - The document has
+                                been fully trapped; no further trapping is needed.
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
-                                <emphasis>false</emphasis> - The document has not yet been trapped; any desired trapping must still be done.
+                                <emphasis><constant>FALSE</constant></emphasis> - The document has
+                                not yet been trapped; any desired trapping must still be done.
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
-                                <emphasis>null</emphasis> - Either it is unknown whether the document has been
-                                trapped or it has been partly but not yet fully trapped; some
-                                additional trapping may still be needed.
+                                <emphasis><constant>NULL</constant></emphasis> - Either it is
+                                unknown whether the document has been trapped or it has been partly
+                                but not yet fully trapped; some additional trapping may still be
+                                needed.
                             </para>
                         </listitem>
                     </itemizedlist>

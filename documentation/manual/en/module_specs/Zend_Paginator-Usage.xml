@@ -104,7 +104,7 @@ $paginator = Zend_Paginator::factory($array);
 
         <note>
             <para>
-                In the case of the Null adapter, in lieu of a data collection
+                In the case of the <classname>Null</classname> adapter, in lieu of a data collection
                 you must supply an item count to its constructor.
             </para>
         </note>

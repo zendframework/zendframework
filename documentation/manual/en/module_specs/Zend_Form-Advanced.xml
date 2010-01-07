@@ -173,7 +173,7 @@
             <listitem>
                 <para>
                     <methodname>Zend_Form::setIsArray($flag)</methodname>: By setting the
-                    flag true, you can indicate that an entire form should be
+                    flag <constant>TRUE</constant>, you can indicate that an entire form should be
                     treated as an array. By default, the form's name will be
                     used as the name of the array, unless
                     <methodname>setElementsBelongTo()</methodname> has been called. If the
@@ -573,7 +573,7 @@ class RegistrationController extends Zend_Controller_Action
             <para>
                 Now, let's figure out how to process and display the various sub
                 forms. We can use <methodname>getCurrentSubForm()</methodname> to determine
-                if any sub forms have been submitted (false return values
+                if any sub forms have been submitted (<constant>FALSE</constant> return values
                 indicate none have been displayed or submitted), and
                 <methodname>getNextSubForm()</methodname> to retrieve a form to display. We
                 can then use the form's <methodname>prepareSubForm()</methodname> method to

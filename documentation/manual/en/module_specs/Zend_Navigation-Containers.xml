@@ -514,7 +514,7 @@ $container->removePages();      // removes all pages
             pages matching the given <code>$page->$property == $value</code>.
             The first method, <methodname>findOneBy()</methodname>, will return a
             single page matching the property with the given value, or
-            null if it cannot be found. The second method will return
+            <constant>NULL</constant> if it cannot be found. The second method will return
             all pages with a property matching the given value. The third
             method will call one of the two former methods depending on the
             <varname>$all</varname> flag.

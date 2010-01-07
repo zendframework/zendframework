@@ -581,7 +581,8 @@ $select = $db->select()
                     <para>
                         All rows from the left operand table are included, matching rows from the
                         right operand table included, and the columns from the right operand table
-                        are filled with NULLs if no row exists matching the left table.
+                        are filled with <constant>NULL</constant> if no row exists matching the left
+                        table.
                     </para>
 
                     <para>
@@ -598,8 +599,8 @@ $select = $db->select()
                     <para>
                         Right outer join is the complement of left outer join. All rows from the
                         right operand table are included, matching rows from the left operand table
-                        included, and the columns from the left operand table are filled with NULLs
-                        if no row exists matching the right table.
+                        included, and the columns from the left operand table are filled with
+                        <constant>NULL</constant>'s if no row exists matching the right table.
                     </para>
 
                     <para>
@@ -619,7 +620,8 @@ $select = $db->select()
                         A full outer join is like combining a left outer join and a right outer
                         join. All rows from both tables are included, paired with each other on the
                         same row of the result set if they satisfy the join condition, and
-                        otherwise paired with NULLs in place of columns from the other table.
+                        otherwise paired with <constant>NULL</constant>'s in place of columns from
+                        the other table.
                     </para>
 
                     <para>

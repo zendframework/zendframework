@@ -82,8 +82,8 @@
             <listitem><para>
                 <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: adds
                 a prefix/path association to the loader specified by
-                <varname>$type</varname>. If <varname>$type</varname> is null, it will
-                attempt to add the path to all loaders, by appending the prefix
+                <varname>$type</varname>. If <varname>$type</varname> is <constant>NULL</constant>,
+                it will attempt to add the path to all loaders, by appending the prefix
                 with each of "_Validate", "_Filter", and "_Decorator"; and
                 appending the path with "Validate/", "Filter/", and
                 "Decorator/". If you have all your extra form element classes
@@ -565,7 +565,7 @@ class My_Validate_PasswordConfirmation extends Zend_Validate_Abstract
 
         <para>
             Validators are processed in order. Each validator is processed,
-            unless a validator created with a true
+            unless a validator created with a <constant>TRUE</constant>
             <code>breakChainOnFailure</code> value fails its validation. Be
             sure to specify your validators in a reasonable order.
         </para>
@@ -588,7 +588,7 @@ $messages = $element->getMessages();
         <para>
             In addition to validators, you can specify that an element is
             required, using <methodname>setRequired(true)</methodname>. By default, this
-            flag is false, meaning that your validator chain will be skipped if
+            flag is <constant>FALSE</constant>, meaning that your validator chain will be skipped if
             no value is passed to <methodname>isValid()</methodname>. You can modify this
             behavior in a number of ways:
         </para>
@@ -597,11 +597,11 @@ $messages = $element->getMessages();
             <listitem>
                 <para>
                     By default, when an element is required, a flag,
-                    'allowEmpty', is also true. This means that if a value
+                    'allowEmpty', is also <constant>TRUE</constant>. This means that if a value
                     evaluating to empty is passed to <methodname>isValid()</methodname>, the
                     validators will be skipped. You can toggle this flag using
                     the accessor <methodname>setAllowEmpty($flag)</methodname>; when the
-                    flag is false and a value is passed, the validators
+                    flag is <constant>FALSE</constant> and a value is passed, the validators
                     will still run.
                 </para>
             </listitem>
@@ -620,7 +620,7 @@ $messages = $element->getMessages();
 
                 <para>
                     If you do not want this behavior, you can turn it off by
-                    passing a false value to
+                    passing a <constant>FALSE</constant> value to
                     <methodname>setAutoInsertNotEmptyValidator($flag)</methodname>; this
                     will prevent <methodname>isValid()</methodname> from placing the
                     'NotEmpty' validator in the validator chain.
@@ -681,8 +681,8 @@ $messages = $element->getMessages();
                     <methodname>setAllowEmpty($flag)</methodname> and
                     <methodname>getAllowEmpty()</methodname> allow you to modify the
                     behaviour of optional elements (i.e., elements where the
-                    required flag is false). When the 'allow empty' flag is
-                    true, empty values will not be passed to the validator
+                    required flag is <constant>FALSE</constant>). When the 'allow empty' flag is
+                    <constant>TRUE</constant>, empty values will not be passed to the validator
                     chain.
             </para></listitem>
 
@@ -690,7 +690,7 @@ $messages = $element->getMessages();
                     <methodname>setAutoInsertNotEmptyValidator($flag)</methodname> allows
                     you to specify whether or not a 'NotEmpty' validator will be
                     prepended to the validator chain when the element is
-                    required. By default, this flag is true.
+                    required. By default, this flag is <constant>TRUE</constant>.
             </para></listitem>
 
             <listitem><para>
@@ -1086,22 +1086,25 @@ echo $element->renderHtmlTag("This is the html tag content");
                 <emphasis>required</emphasis>: flag indicating whether or not
                 the element is required when performing form validation. Uses
                 the <methodname>setRequired()</methodname> and
-                <methodname>getRequired()</methodname> accessors. This flag is false by default.
+                <methodname>getRequired()</methodname> accessors. This flag is
+                <constant>FALSE</constant> by default.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>allowEmpty</emphasis>: flag indicating whether or not
                 a non-required (optional) element should attempt to validate
-                empty values. If it is set to true and the required flag is false, empty
-                values are not passed to the validator chain and are presumed true.
-                Uses the <methodname>setAllowEmpty()</methodname> and
-                <methodname>getAllowEmpty()</methodname> accessors. This flag is true by default.
+                empty values. If it is set to <constant>TRUE</constant> and the required flag is
+                <constant>FALSE</constant>, empty values are not passed to the validator chain and
+                are presumed <constant>TRUE</constant>. Uses the
+                <methodname>setAllowEmpty()</methodname> and
+                <methodname>getAllowEmpty()</methodname> accessors. This flag is
+                <constant>TRUE</constant> by default.
             </para></listitem>
 
             <listitem><para>
                 <emphasis>autoInsertNotEmptyValidator</emphasis>: flag
                 indicating whether or not to insert a 'NotEmpty' validator when
-                the element is required. By default, this flag is true. Set the
+                the element is required. By default, this flag is <constant>TRUE</constant>. Set the
                 flag with <methodname>setAutoInsertNotEmptyValidator($flag)</methodname> and
                 determine the value with
                 <methodname>autoInsertNotEmptyValidator()</methodname>.

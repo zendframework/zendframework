@@ -182,8 +182,8 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>
         <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> is less than the maximum
-            boundary.
+            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> is less than
+            the maximum boundary.
         </para>
     </sect2>
 
@@ -193,8 +193,8 @@ if ($validator->isValid($iban)) {
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>
         <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> matches against a regular
-            expression pattern.
+            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> matches
+            against a regular expression pattern.
         </para>
     </sect2>
 

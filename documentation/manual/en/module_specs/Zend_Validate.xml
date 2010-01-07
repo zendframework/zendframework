@@ -307,8 +307,8 @@ if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) 
                 <listitem>
                     <para>
                         <emphasis><methodname>Zend_Validate::hasDefaultNamespaces()</methodname></emphasis>:
-                        Returns true when one or more default namespaces are set, and false when no
-                        default namespaces are set.
+                        Returns <constant>TRUE</constant> when one or more default namespaces are
+                        set, and <constant>FALSE</constant> when no default namespaces are set.
                     </para>
                 </listitem>
             </itemizedlist>

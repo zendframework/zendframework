@@ -38,10 +38,12 @@
         to be given back to the <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link>
         object by calling <code>-&gt;setParts($partsArray)</code>.</para>
 
-        <para>The function <code>-&gt;isMultiPart()</code> will return true if
-        more than one part is registered with the <classname>Zend_Mime_Message</classname> object and thus
-        the object would generate a Multipart-Mime-Message when generating the
-        actual output.</para>
+        <para>
+            The function <code>-&gt;isMultiPart()</code> will return <constant>TRUE</constant> if
+            more than one part is registered with the <classname>Zend_Mime_Message</classname>
+            object and thus the object would generate a Multipart-Mime-Message when generating the
+            actual output.
+        </para>
     </sect2>
 
     <sect2 id="zend.mime.message.bondary">

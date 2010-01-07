@@ -1293,7 +1293,7 @@ print $date->toString("'Format:D M j G:i:s T Y='D M j G:i:s T Y");
                         <entry>Leapyear, boolean</entry>
                         <entry><constant>Zend_Date::LEAPYEAR</constant></entry>
                         <entry>no equivalent</entry>
-                        <entry><emphasis>true</emphasis></entry>
+                        <entry><emphasis><constant>TRUE</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>o</entry>

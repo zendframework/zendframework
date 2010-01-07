@@ -123,9 +123,10 @@ if (!$adapter->receive()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>ignoreNoFile</emphasis>: If this option is set to true, all
-                    validators will ignore files that have not been uploaded by the form. The
-                    default value is false which results in an error if no files were specified.
+                    <emphasis>ignoreNoFile</emphasis>: If this option is set to
+                    <constant>TRUE</constant>, all validators will ignore files that have not been
+                    uploaded by the form. The default value is <constant>FALSE</constant> which
+                    results in an error if no files were specified.
                 </para>
             </listitem>
         </itemizedlist>
@@ -257,7 +258,7 @@ $upload->receive();
         <para>
             By default file names will be returned with the complete path. If you only need the file
             name without path, you can set the second parameter, <varname>$path</varname>, which
-            will truncate the file path when set to false.
+            will truncate the file path when set to <constant>FALSE</constant>.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example1">
@@ -287,7 +288,8 @@ $names = $upload->getFileName('foo');
         <para>
             <methodname>getFileSize()</methodname> returns per default the real filesize in SI
             notation which means you will get <code>2kB</code> instead of <code>2048</code>. If you
-            need only the plain size set the <code>useByteString</code> option to false.
+            need only the plain size set the <code>useByteString</code> option to
+            <constant>FALSE</constant>.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
@@ -483,8 +485,8 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis>done</emphasis>: Returns true when the upload is finished and
-                        false otherwise.
+                        <emphasis>done</emphasis>: Returns <constant>TRUE</constant> when the upload
+                        is finished and <constant>FALSE</constant> otherwise.
                     </para>
                 </listitem>
 

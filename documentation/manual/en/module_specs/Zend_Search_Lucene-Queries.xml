@@ -205,9 +205,11 @@ $hits  = $index->find($query);
                         <constant>FALSE</constant> is used to define prohibited term.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <constant>NULL</constant> is used to define a term that is neither required nor prohibited.
+                        <constant>NULL</constant> is used to define a term that is neither required
+                        nor prohibited.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -335,9 +337,11 @@ $hits  = $index->find($query);
                         <constant>FALSE</constant> is used to define prohibited subquery.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <constant>NULL</constant> is used to define a subquery that is neither required nor prohibited.
+                        <constant>NULL</constant> is used to define a subquery that is neither
+                        required nor prohibited.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -514,18 +518,21 @@ Zend_Search_Lucene_Search_Query_Phrase(
 ]]></programlisting>
 
         <para>
-            The <varname>$terms</varname> parameter is an array of strings that contains a set of phrase terms.
-            If it's omitted or equal to null, then an empty query is constructed.
+            The <varname>$terms</varname> parameter is an array of strings that contains a set of
+            phrase terms. If it's omitted or equal to <constant>NULL</constant>, then an empty query
+            is constructed.
         </para>
 
         <para>
-            The <varname>$offsets</varname> parameter is an array of integers that contains offsets of terms in a phrase.
-            If it's omitted or equal to null, then the terms' positions are assumed to be sequential with no gaps.
+            The <varname>$offsets</varname> parameter is an array of integers that contains offsets
+            of terms in a phrase. If it's omitted or equal to <constant>NULL</constant>, then the
+            terms' positions are assumed to be sequential with no gaps.
         </para>
 
         <para>
-            The <varname>$field</varname> parameter is a string that indicates the document field to search.
-            If it's omitted or equal to null, then the default field is searched.
+            The <varname>$field</varname> parameter is a string that indicates the document field
+            to search. If it's omitted or equal to <constant>NULL</constant>, then the default field
+            is searched.
         </para>
 
         <para>
@@ -682,7 +689,8 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            Either (but not both) of the boundary terms may be set to null. <classname>Zend_Search_Lucene</classname> searches from the beginning or
+            Either (but not both) of the boundary terms may be set to <constant>NULL</constant>.
+            <classname>Zend_Search_Lucene</classname> searches from the beginning or
             up to the end of the dictionary for the specified field(s) in this case:
             <programlisting language="php"><![CDATA[
 // searches for ['20020101' TO ...]

@@ -32,8 +32,10 @@
                 network access to each other. Instances will reject network access
                 attempts from other instances in a different security group.
             </para>
+
             <para>
-                <code>create</code> returns boolean true or false
+                <code>create</code> returns boolean <constant>TRUE</constant> or
+                <constant>FALSE</constant>
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -78,8 +80,10 @@ $return = $ec2_sg->describe('mygroup');
                 has a rule that allows access from security group A, security group A
                 cannot be deleted until the allow rule is removed.
             </para>
+
             <para>
-                <code>delete</code> returns boolean true or false.
+                <code>delete</code> returns boolean <constant>TRUE</constant> or
+                <constant>FALSE</constant>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -111,8 +115,10 @@ $return = $ec2_sg->delete('mygroup');
                 as quickly as possible. However, depending on the number of instances, a
                 small delay might occur.
             </para>
+
             <para>
-                <code>authorizeIp</code> returns boolean true or false
+                <code>authorizeIp</code> returns boolean <constant>TRUE</constant> or
+                <constant>FALSE</constant>
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -136,8 +142,10 @@ $return = $ec2_sg->authorizeIp('mygroup',
                 as quickly as possible. However, depending on the number of instances, a
                 small delay might occur.
             </para>
+
             <para>
-                <code>authorizeGroup</code> returns boolean true or false.
+                <code>authorizeGroup</code> returns boolean <constant>TRUE</constant> or
+                <constant>FALSE</constant>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -170,8 +178,10 @@ $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
                 as quickly as possible. However, depending on the number of instances, a
                 small delay might occur.
             </para>
+
             <para>
-                <code>revokeIp</code> returns boolean true or false
+                <code>revokeIp</code> returns boolean <constant>TRUE</constant> or
+                <constant>FALSE</constant>
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -197,8 +207,10 @@ $return = $ec2_sg->revokeIp('mygroup',
                 as quickly as possible. However, depending on the number of instances, a
                 small delay might occur.
             </para>
+
             <para>
-                <code>revokeGroup</code> returns boolean true or false.
+                <code>revokeGroup</code> returns boolean <constant>TRUE</constant> or
+                <constant>FALSE</constant>.
             </para>
 
             <programlisting language="php"><![CDATA[

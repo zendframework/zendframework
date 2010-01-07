@@ -1285,7 +1285,7 @@ $localelist = Zend_Locale::getLocaleList();
         <note>
             <para>
                 Note that the locales are returned as key of the array you will receive. The value is always
-                a boolean true.
+                a boolean <constant>TRUE</constant>.
             </para>
         </note>
     </sect2>
@@ -1320,10 +1320,11 @@ if (Zend_Locale::isLocale($input)) {
         </para>
 
         <para>
-            You should also note that any given locale string will automatically be degraded if the region
-            part does not exist for this locale. In our previous example the language <code>'to'</code> does not
-            exist in the region <code>'RU'</code>, but you will still get true returned as <classname>Zend_Locale</classname> can
-            work with the given input.
+            You should also note that any given locale string will automatically be degraded if the
+            region part does not exist for this locale. In our previous example the language
+            <code>'to'</code> does not exist in the region <code>'RU'</code>, but you will still get
+            <constant>TRUE</constant> returned as <classname>Zend_Locale</classname> can work with
+            the given input.
         </para>
 
         <para>

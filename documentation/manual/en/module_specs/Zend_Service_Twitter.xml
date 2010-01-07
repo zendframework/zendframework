@@ -773,7 +773,8 @@ $response2 = $twitter->block->exists('blockeduser', true);
                     <listitem>
                         <para>
                             <code>returnResult</code> specifies whether or not return the user
-                            object instead of just true or false.
+                            object instead of just <constant>TRUE</constant> or
+                            <constant>FALSE</constant>.
                         </para>
                     </listitem>
                 </itemizedlist>

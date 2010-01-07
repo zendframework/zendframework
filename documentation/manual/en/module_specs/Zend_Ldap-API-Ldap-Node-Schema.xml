@@ -74,8 +74,8 @@
                     </entry>
                     <entry>
                         Returns an array representation of the current node. If
-                        <code>$includeSystemAttributes</code> is <code>false</code>
-                        (defaults to <code>true</code>), the system specific attributes are
+                        <code>$includeSystemAttributes</code> is <constant>FALSE</constant>
+                        (defaults to <constant>TRUE</constant>), the system specific attributes are
                         stripped from the array. Unlike
                         <code>Zend_Ldap_Node_Schema::getAttributes()</code>, the resulting
                         array contains the DN with key <code>'dn'</code>.
@@ -108,12 +108,13 @@
                     </entry>
                     <entry>
                         Checks whether a given attribute exists. If
-                        <code>$emptyExists</code> is <code>false</code>, empty attributes
+                        <code>$emptyExists</code> is <constant>FALSE</constant>, empty attributes
                         (containing only array()) are treated as non-existent returning
-                        <code>false</code>. If <code>$emptyExists</code> is true, empty
-                        attributes are treated as existent returning <code>true</code>. In
-                        this case the method returns <code>false</code> only if the
-                        attribute name is missing in the key-collection.
+                        <constant>FALSE</constant>. If <code>$emptyExists</code> is
+                        <constant>TRUE</constant>, empty attributes are treated as existent
+                        returning <constant>TRUE</constant>. In this case the method returns
+                        <constant>FALSE</constant> only if the attribute name is missing in the
+                        key-collection.
                     </entry>
                 </row>
                 <row>
@@ -123,7 +124,7 @@
                     </entry>
                     <entry>
                         Checks if the given value(s) exist in the attribute. The
-                        method returns <code>true</code> only if all values in
+                        method returns <constant>TRUE</constant> only if all values in
                         <code>$value</code> are present in the attribute. Comparison is
                         done strictly (respecting the data type).
                     </entry>
@@ -152,8 +153,8 @@
                     </entry>
                     <entry>
                         Gets all attributes of node. If
-                        <code>$includeSystemAttributes</code> is <code>false</code>
-                        (defaults to <code>true</code>) the system specific attributes are
+                        <code>$includeSystemAttributes</code> is <constant>FALSE</constant>
+                        (defaults to <constant>TRUE</constant>) the system specific attributes are
                         stripped from the array.
                     </entry>
                 </row>

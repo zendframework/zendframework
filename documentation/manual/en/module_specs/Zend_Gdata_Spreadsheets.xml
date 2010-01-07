@@ -175,7 +175,7 @@ echo $customEntry->getColumnName() . " = " . $customEntry->getText();
                 corresponding rows in the GUI; that is, they're in order by
                 row number. To get rows in reverse order, set the reverse
                 properties of the <classname>Zend_Gdata_Spreadsheets_ListQuery</classname>
-                object to true:
+                object to <constant>TRUE</constant>:
             </para>
 
             <programlisting language="php"><![CDATA[

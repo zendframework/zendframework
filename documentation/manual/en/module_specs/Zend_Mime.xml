@@ -20,10 +20,12 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>Zend_Mime::isPrintable()</methodname>: Returns TRUE if the given string contains no unprintable characters,
-                FALSE otherwise.
+                    <methodname>Zend_Mime::isPrintable()</methodname>: Returns
+                    <constant>TRUE</constant> if the given string contains no unprintable
+                    characters, <constant>FALSE</constant> otherwise.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>Zend_Mime::encode()</methodname>: Encodes a string with specified encoding.

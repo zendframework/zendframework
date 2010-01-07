@@ -35,8 +35,10 @@ $ip = $ec2_img->register('imageLocation');
                 <code>deregister</code>, Deregisters an <acronym>AMI</acronym>. Once deregistered, instances
                 of the <acronym>AMI</acronym> can no longer be launched.
             </para>
+
             <para>
-                <code>deregister</code> returns boolean true or false.
+                <code>deregister</code> returns boolean <constant>TRUE</constant> or
+                <constant>FALSE</constant>.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -162,9 +164,12 @@ $ip = $ec2_img->describe();
                 </tgroup>
             </table>
             </para>
+
             <para>
-                <code>modifyAttribute</code> returns boolean true or false.
+                <code>modifyAttribute</code> returns boolean <constant>TRUE</constant> or
+                <constant>FALSE</constant>.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
 // modify the launchPermission of an AMI

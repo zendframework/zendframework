@@ -616,7 +616,7 @@ $labels = $categories->getValues();
                             Returns either the first author known, or with the
                             optional <varname>$index</varname> parameter any specific
                             index on the array of Authors as described above (returning
-                            null if an invalid index).
+                            <constant>NULL</constant> if an invalid index).
                         </entry>
                     </row>
 
@@ -682,11 +682,13 @@ $labels = $categories->getValues();
 
                         <entry>
                             Returns a <classname>Zend_Feed_Reader_Collection_Category</classname>
-                            object containing the details of any categories associated with the overall feed.
-                            The supported fields include "term" (the machine readable category name), "scheme"
-                            (the categorisation scheme/domain for this category), and "label" (a html decoded human readable
-                            category name). Where any of the three fields are absent from the field, they are either
-                            set to the closest available alternative or, in the case of "scheme", set to NULL.
+                            object containing the details of any categories associated with the
+                            overall feed. The supported fields include "term" (the machine readable
+                            category name), "scheme" (the categorisation scheme/domain for this
+                            category), and "label" (a html decoded human readable category name).
+                            Where any of the three fields are absent from the field, they are either
+                            set to the closest available alternative or, in the case of "scheme",
+                            set to <constant>NULL</constant>.
                         </entry>
                     </row>
         </tbody>
@@ -946,7 +948,7 @@ $labels = $categories->getValues();
                             Returns either the first author known, or with the
                             optional <varname>$index</varname> parameter any specific
                             index on the array of Authors as described above (returning
-                            null if an invalid index).
+                            <constant>NULL</constant> if an invalid index).
                         </entry>
                     </row>
 
@@ -1031,11 +1033,13 @@ $labels = $categories->getValues();
 
                         <entry>
                             Returns a <classname>Zend_Feed_Reader_Collection_Category</classname>
-                            object containing the details of any categories associated with the entry.
-                            The supported fields include "term" (the machine readable category name), "scheme"
-                            (the categorisation scheme/domain for this category), and "label" (a html decoded human readable
-                            category name). Where any of the three fields are absent from the field, they are either
-                            set to the closest available alternative or, in the case of "scheme", set to NULL.
+                            object containing the details of any categories associated with the
+                            entry. The supported fields include "term" (the machine readable
+                            category name), "scheme" (the categorisation scheme/domain for this
+                            category), and "label" (a html decoded human readable category name).
+                            Where any of the three fields are absent from the field, they are either
+                            set to the closest available alternative or, in the case of "scheme",
+                            set to <constant>NULL</constant>.
                         </entry>
                     </row>
                 </tbody>

@@ -1179,10 +1179,9 @@ $rows = $table->fetchAll($select);
                 there may be certain cases where you require the flexibility of the
                 <classname>Zend_Db_Table_Row</classname> component and do not require a writable or
                 deletable row. for this specific user case, it is possible to retrieve a row/rowset
-                by passing a false value to setIntegrityCheck. The resulting row/rowset will be
-                returned as a 'locked' row (meaning the save(), delete() and any field-setting
-                methods will throw an
-                exception).
+                by passing a <constant>FALSE</constant> value to setIntegrityCheck. The resulting
+                row/rowset will be returned as a 'locked' row (meaning the save(), delete() and any
+                field-setting methods will throw an exception).
             </para>
 
             <example id="zend.db.table.qry.rows.set.integrity.example">

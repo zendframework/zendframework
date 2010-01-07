@@ -23,7 +23,7 @@
         <para>
             In order to use this log writer, Zend Monitor must be both installed and enabled.
             However, it is designed such that if Zend Monitor is not detected, it will simply act as
-            a null logger.
+            a <constant>NULL</constant> logger.
         </para>
     </note>
 
@@ -114,7 +114,7 @@ $log->info('Exception occurred', array(
 
         <para>
             As noted previously, if the Monitor API is not detected in your PHP installation, the
-            logger will simply act as a null logger.
+            logger will simply act as a <constant>NULL</constant> logger.
         </para>
     </note>
 </sect2>

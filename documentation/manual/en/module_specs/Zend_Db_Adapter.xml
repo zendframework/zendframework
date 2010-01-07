@@ -949,7 +949,7 @@ $db->insert('bugs', $data);
                 the database. Therefore, they follow the same rules that an
                 <acronym>SQL</acronym> <acronym>INSERT</acronym> statement follows: if the column
                 has a <acronym>DEFAULT</acronym> clause, the column takes that value in the row
-                created, otherwise the column is left in a <acronym>NULL</acronym> state.
+                created, otherwise the column is left in a <constant>NULL</constant> state.
             </para>
 
             <para>
@@ -1657,9 +1657,12 @@ try {
                     <row>
                         <entry><constant>NULLABLE</constant></entry>
                         <entry>(boolean)</entry>
+
                         <entry>
-                            True if the column accepts <acronym>SQL</acronym> NULLs, false if the
-                            column has a NOT NULL constraint.
+                            <constant>TRUE</constant> if the column accepts <acronym>SQL</acronym>
+                            <constant>NULL</constant>'s, <constant>FALSE</constant> if the
+                            column has a <constant>NOT</constant> <constant>NULL</constant>
+                            constraint.
                         </entry>
                     </row>
                     <row>
@@ -1689,15 +1692,20 @@ try {
                     <row>
                         <entry><constant>UNSIGNED</constant></entry>
                         <entry>(boolean)</entry>
+
                         <entry>
-                            True if an integer-based type is reported as
+                            <constant>TRUE</constant> if an integer-based type is reported as
                             <constant>UNSIGNED</constant>.
                         </entry>
                     </row>
                     <row>
                         <entry><constant>PRIMARY</constant></entry>
                         <entry>(boolean)</entry>
-                        <entry>True if the column is part of the primary key of this table.</entry>
+
+                        <entry>
+                            <constant>TRUE</constant> if the column is part of the primary key of
+                            this table.
+                        </entry>
                     </row>
                     <row>
                         <entry><constant>PRIMARY_POSITION</constant></entry>
@@ -1707,7 +1715,10 @@ try {
                     <row>
                         <entry><constant>IDENTITY</constant></entry>
                         <entry>(boolean)</entry>
-                        <entry>True if the column uses an auto-generated value.</entry>
+
+                        <entry>
+                            <constant>TRUE</constant> if the column uses an auto-generated value.
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -1791,7 +1802,7 @@ $db->closeConnection();
             <title>Does Zend_Db Support Persistent Connections?</title>
             <para>
                 Yes, persistence is supported through the addition of
-                the <property>persistent</property> flag set to true in the
+                the <property>persistent</property> flag set to <constant>TRUE</constant> in the
                 configuration (not driver_configuration) of an adapter
                 in <classname>Zend_Db</classname>.
             </para>

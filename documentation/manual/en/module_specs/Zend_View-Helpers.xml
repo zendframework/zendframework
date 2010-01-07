@@ -87,10 +87,10 @@
                 <methodname>form($name, $attribs, $content)</methodname>: Generates an
                 <acronym>XHTML</acronym> form. All <varname>$attribs</varname> are escaped and
                 rendered as <acronym>XHTML</acronym> attributes of the form tag. If
-                <varname>$content</varname> is present and not a boolean false, then that content is
-                rendered within the start and close form tags; if <varname>$content</varname>
-                is a boolean false (the default), only the opening form tag is
-                generated.
+                <varname>$content</varname> is present and not a boolean <constant>FALSE</constant>,
+                then that content is rendered within the start and close form tags; if
+                <varname>$content</varname> is a boolean <constant>FALSE</constant> (the default),
+                only the opening form tag is generated.
             </para></listitem>
 
             <listitem><para>
@@ -295,8 +295,8 @@ echo $this->formCheckbox('foo',
                 unordered and ordered lists based on the <varname>$items</varname>
                 passed to it. If <varname>$items</varname> is a multidimensional
                 array, a nested list will be built. If the <varname>$escape</varname>
-                flag is true (default), individual items will be escaped using
-                the view objects registered escaping mechanisms; pass a false
+                flag is <constant>TRUE</constant> (default), individual items will be escaped using
+                the view objects registered escaping mechanisms; pass a <constant>FALSE</constant>
                 value if you want to allow markup in your lists.
             </para></listitem>
 

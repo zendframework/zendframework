@@ -74,8 +74,9 @@ $ip = $ec2_eip->describe('ip1');
         <para>
             <code>release</code> will release an Elastic IP to Amazon.
         </para>
+
         <para>
-            Returns a boolean true or false.
+            Returns a boolean <constant>TRUE</constant> or <constant>FALSE</constant>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -90,8 +91,9 @@ $ec2_eip->release('ipaddress');
             <code>associate</code> will assign an Elastic IP to an
             already running instance.
         </para>
+
         <para>
-            Returns a boolean true or false.
+            Returns a boolean <constant>TRUE</constant> or <constant>FALSE</constant>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -107,8 +109,9 @@ $ec2_eip->associate('instance_id', 'ipaddress');
             If you terminate an Instance it will automaticly disassociate the Elastic
             IP address for you.
         </para>
+
         <para>
-            Returns a boolean true or false.
+            Returns a boolean <constant>TRUE</constant> or <constant>FALSE</constant>.
         </para>
 
         <programlisting language="php"><![CDATA[

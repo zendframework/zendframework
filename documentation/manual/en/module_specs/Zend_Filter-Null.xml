@@ -15,7 +15,7 @@
         <para>
             Per default this filter works like <acronym>PHP</acronym>'s
             <methodname>empty()</methodname> method; in other words, if
-            <methodname>empty()</methodname> returns a boolean true, then a
+            <methodname>empty()</methodname> returns a boolean <constant>TRUE</constant>, then a
             <constant>NULL</constant> value will be returned.
         </para>
 

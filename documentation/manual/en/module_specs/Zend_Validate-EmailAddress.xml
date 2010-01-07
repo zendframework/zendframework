@@ -212,13 +212,13 @@ $validator = new Zend_Validate_EmailAddress(
         </para>
 
         <para>
-            Sometimes validation for MX records returns false, even if emails are accepted. The
-            reason behind this behaviour is, that servers can accept emails even if they do not
-            provide a MX record. In this case they can provide A, A6 or <constant>AAAA</constant>
-            records. To allow <classname>Zend_Validate_EmailAddress</classname> to check also for
-            these other records, you need to set deep MX validation. This can be done at initiation
-            by setting the <property>deep</property> option or by using
-            <methodname>setOptions()</methodname>.
+            Sometimes validation for MX records returns <constant>FALSE</constant>, even if emails
+            are accepted. The reason behind this behaviour is, that servers can accept emails even
+            if they do not provide a MX record. In this case they can provide A, A6 or
+            <constant>AAAA</constant> records. To allow
+            <classname>Zend_Validate_EmailAddress</classname> to check also for these other records,
+            you need to set deep MX validation. This can be done at initiation by setting the
+            <property>deep</property> option or by using <methodname>setOptions()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[

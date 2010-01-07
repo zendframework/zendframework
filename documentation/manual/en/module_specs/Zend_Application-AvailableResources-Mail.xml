@@ -12,8 +12,8 @@
     <para>
         When instantiating a transport, it's registered automatically to
         <classname>Zend_Mail</classname>. Though, by setting the
-        <property>transport.register</property> directive to false, this behaviour
-        does no more occur.
+        <property>transport.register</property> directive to <constant>FALSE</constant>, this
+        behaviour does no more occur.
     </para>
 
     <example id="zend.application.available-resources.mail.configExample">

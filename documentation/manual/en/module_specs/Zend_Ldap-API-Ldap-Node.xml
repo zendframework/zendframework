@@ -119,7 +119,8 @@
                     <entry>
                         Marks this node as to be deleted. Node will be deleted on
                         calling <methodname>Zend_Ldap_Node::update()</methodname> if
-                        <methodname>Zend_Ldap_Node::willBeDeleted()</methodname> is true.
+                        <methodname>Zend_Ldap_Node::willBeDeleted()</methodname> is
+                        <constant>TRUE</constant>.
                     </entry>
                 </row>
                 <row>
@@ -306,12 +307,13 @@
                     </entry>
                     <entry>
                         Checks whether a given attribute exists. If
-                        <varname>$emptyExists</varname> is <constant>FALSE</constant> empty attributes
-                        (containing only array()) are treated as non-existent returning
-                        <constant>FALSE</constant>. If <varname>$emptyExists</varname> is true empty
-                        attributes are treated as existent returning <constant>TRUE</constant>. In
-                        this case the method returns <constant>FALSE</constant> only if the
-                        attribute name is missing in the key-collection.
+                        <varname>$emptyExists</varname> is <constant>FALSE</constant> empty
+                        attributes (containing only array()) are treated as non-existent returning
+                        <constant>FALSE</constant>. If <varname>$emptyExists</varname> is
+                        <constant>TRUE</constant> empty attributes are treated as existent returning
+                        <constant>TRUE</constant>. In this case the method returns
+                        <constant>FALSE</constant> only if the attribute name is missing in the
+                        key-collection.
                     </entry>
                 </row>
                 <row>

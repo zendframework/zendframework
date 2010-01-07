@@ -330,8 +330,8 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
         <note>
             <para>
                 Note that due to the fact that the options for the LowerCase filter are optional,
-                you must give a null as second parameter (the options) when you want to limit it to
-                a single file element.
+                you must give a <constant>NULL</constant> as second parameter (the options) when you
+                want to limit it to a single file element.
             </para>
         </note>
 
@@ -362,7 +362,7 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
             <listitem>
                 <para>
                     <code>overwrite</code>: Sets if the old file overwrites the new one if it
-                    already exists. The default value is false.
+                    already exists. The default value is <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -509,8 +509,8 @@ $upload->addFilter('UpperCase', 'ISO-8859-1');
         <note>
             <para>
                 Note that due to the fact that the options for the UpperCase filter are optional,
-                you must give a null as second parameter (the options) when you want to limit it to
-                a single file element.
+                you must give a <constant>NULL</constant> as second parameter (the options) when you
+                want to limit it to a single file element.
             </para>
         </note>
 

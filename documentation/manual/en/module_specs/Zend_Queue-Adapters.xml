@@ -564,7 +564,7 @@ $queue = new Zend_Queue('Db', $options);
                                     <para>
                                         <varname>preserved</varname> - whether or not to retain the
                                         job within the Job Queue history. By default, off; pass a
-                                        true value to retain it.
+                                        <constant>TRUE</constant> value to retain it.
                                     </para>
                                 </listitem>
 
@@ -606,9 +606,10 @@ $queue = new Zend_Queue('Db', $options);
                                 <listitem>
                                     <para>
                                         <varname>application_id</varname> - the application
-                                        identifier of the job. By default, this is null, indicating
-                                        that one will be automatically assigned by the queue, if the
-                                        queue was assigned an application ID.
+                                        identifier of the job. By default, this is
+                                        <constant>NULL</constant>, indicating that one will be
+                                        automatically assigned by the queue, if the queue was
+                                        assigned an application ID.
                                     </para>
                                 </listitem>
                             </itemizedlist>

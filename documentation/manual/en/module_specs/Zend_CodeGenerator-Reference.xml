@@ -486,10 +486,10 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
 
             <para>
-                There are several problems that might occur when trying to set null, booleans or
-                arrays as default values. For this the value holder object
-                <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname> can be used,
-                for example:
+                There are several problems that might occur when trying to set
+                <constant>NULL</constant>, booleans or arrays as default values. For this the value
+                holder object <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname>
+                can be used, for example:
             </para>
 
             <programlisting language="php"><![CDATA[

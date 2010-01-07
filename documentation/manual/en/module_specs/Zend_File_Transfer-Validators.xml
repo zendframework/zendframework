@@ -355,8 +355,8 @@ if ($upload->isValid()) {
             problems found. To get this information, you can use the methods
             <methodname>getMessages()</methodname> which returns all validation messages as array,
             <methodname>getErrors()</methodname> which returns all error codes, and
-            <methodname>hasErrors()</methodname> which returns true as soon as a validation error
-            has been found.
+            <methodname>hasErrors()</methodname> which returns <constant>TRUE</constant> as soon as
+            a validation error has been found.
         </para>
 
     </sect2>
@@ -503,9 +503,9 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
 
         <para>
             In some cases it is useful to match in a case-sensitive fashion. So the constructor
-            allows a second parameter called <varname>$case</varname> which, if set to true,
-            validates the extension by comparing it with the specified values in a case-sensitive
-            fashion.
+            allows a second parameter called <varname>$case</varname> which, if set to
+            <constant>TRUE</constant>, validates the extension by comparing it with the specified
+            values in a case-sensitive fashion.
         </para>
 
         <example id="zend.file.transfer.validators.excludeextension.example">
@@ -694,8 +694,8 @@ $upload->addValidator('Exists',
 
         <para>
             In some cases it is useful to test in a case-sensitive fashion. Therefore the
-            constructor takes a second parameter <varname>$case</varname>, which, if set to true,
-            will validate the extension in a case-sensitive fashion.
+            constructor takes a second parameter <varname>$case</varname>, which, if set to
+            <constant>TRUE</constant>, will validate the extension in a case-sensitive fashion.
         </para>
 
         <example id="zend.file.transfer.validators.extension.example">
@@ -761,7 +761,8 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
 
                 <para>
                     This option defines whether the user sees '10864' or '10MB'. The default value
-                    is true, so '10MB' is returned if you did not specify otherwise.
+                    is <constant>TRUE</constant>, so '10MB' is returned if you did not specify
+                    otherwise.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1299,7 +1300,7 @@ $upload->addValidator('Sha1',
 
                 <para>
                     With this option you can define if the user gets '10864' or '10MB'. Default
-                    value is true which returns '10MB'.
+                    value is <constant>TRUE</constant> which returns '10MB'.
                 </para>
             </listitem>
         </itemizedlist>

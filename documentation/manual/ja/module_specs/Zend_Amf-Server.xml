@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17136 -->
+<!-- EN-Revision: 20106 -->
 <sect1 id="zend.amf.server">
     <title>Zend_Amf_Server</title>
 
@@ -359,8 +359,8 @@ echo $response;
 
         <para>
             <acronym>SOAP</acronym> と同様、
-            <acronym>AMF</acronym> でもクライアントとサーバの間でオブジェクトをやりとりすることができます。
-            これにより、クライアントとサーバの間での柔軟性と一貫性を確保することができます。
+            <acronym>AMF</acronym> でもクライアントとサーバの間でオブジェクトをやりとりできます。
+            これにより、クライアントとサーバの間での柔軟性と一貫性を確保できます。
         </para>
 
         <para>
@@ -502,7 +502,7 @@ private function getContactHandler(event:ResultEvent):void {
 Zend_Amf_Parse_TypeLoader::addResourceDirectory(
     "My",
     "application/library/resources/My"
-));
+);
 ]]></programlisting>
 
         <para>
@@ -700,7 +700,7 @@ private function onFault(fault:Object):void {
 
         <para>
             <classname>Zend_Amf_Server</classname> では、認証と認可のフックを指定して
-            サービスへのアクセス制御をすることができます。この仕組みは、
+            サービスへのアクセスを制御できます。この仕組みは、
             <link linkend="zend.auth"><classname>Zend_Auth</classname></link> および
             <link linkend="zend.acl"><classname>Zend_Acl</classname></link>
             コンポーネントが提供するものを使用しています。

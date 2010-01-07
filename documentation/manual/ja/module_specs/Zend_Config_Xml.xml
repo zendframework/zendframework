@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16945 -->
+<!-- EN-Revision: 20101 -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
     <para>
@@ -170,7 +170,7 @@ $config = new Zend_Config_Xml($string, 'staging');
         <title>Zend_Config XML 名前空間</title>
         <para>
             <classname>Zend_Config</classname> は独自の <acronym>XML</acronym>
-            名前空間を持っており、パース処理に機能を追加することができます。
+            名前空間を持っており、パース処理に機能を追加できます。
             これを使用するには、名前空間 <acronym>URI</acronym>
             <filename>http://framework.zend.com/xml/zend-config-xml/1.0/</filename>
             をルートノードで定義しなければなりません。

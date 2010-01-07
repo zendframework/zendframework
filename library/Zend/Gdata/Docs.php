@@ -37,6 +37,16 @@ require_once 'Zend/Gdata/Docs/DocumentListFeed.php';
 require_once 'Zend/Gdata/Docs/DocumentListEntry.php';
 
 /**
+ * @see Zend_Gdata_App_Extension_Category
+ */
+require_once 'Zend/Gdata/App/Extension/Category.php';
+
+/**
+ * @see Zend_Gdata_App_Extension_Title
+ */
+require_once 'Zend/Gdata/App/Extension/Title.php';
+
+/**
  * Service class for interacting with the Google Document List data API
  * @link http://code.google.com/apis/documents/
  *
@@ -50,19 +60,29 @@ class Zend_Gdata_Docs extends Zend_Gdata
 {
 
     const DOCUMENTS_LIST_FEED_URI = 'http://docs.google.com/feeds/documents/private/full';
+    const DOCUMENTS_FOLDER_FEED_URI = 'http://docs.google.com/feeds/folders/private/full';
+    const DOCUMENTS_CATEGORY_SCHEMA = 'http://schemas.google.com/g/2005#kind';
+    const DOCUMENTS_CATEGORY_TERM = 'http://schemas.google.com/docs/2007#folder';
     const AUTH_SERVICE_NAME = 'writely';
 
     protected $_defaultPostUri = self::DOCUMENTS_LIST_FEED_URI;
 
     private static $SUPPORTED_FILETYPES = array(
+      'TXT'=>'text/plain',
       'CSV'=>'text/csv',
+      'TSV'=>'text/tab-separated-values',
+      'TAB'=>'text/tab-separated-values',
+      'HTML'=>'text/html',
+      'HTM'=>'text/html',
       'DOC'=>'application/msword',
       'ODS'=>'application/vnd.oasis.opendocument.spreadsheet',
       'ODT'=>'application/vnd.oasis.opendocument.text',
       'RTF'=>'application/rtf',
       'SXW'=>'application/vnd.sun.xml.writer',
-      'TXT'=>'text/plain',
-      'XLS'=>'application/vnd.ms-excel');
+      'XLS'=>'application/vnd.ms-excel',
+      'XLSX'=>'application/vnd.ms-excel',
+      'PPT'=>'application/vnd.ms-powerpoint',
+      'PPS'=>'application/vnd.ms-powerpoint');
 
     /**
      * Create Gdata_Docs object
@@ -232,6 +252,33 @@ class Zend_Gdata_Docs extends Zend_Gdata
 
         // Send the data to the server.
         return $this->insertDocument($fs, $uri);
+    }
+
+    /**
+     * Creates a new folder in Google Docs
+     *
+     * @param string $folderName The folder name to create
+     * @param string|null $folderResourceId The parent folder to create it in
+     *        ("folder%3Amy_parent_folder")
+     * @return Zend_Gdata_Entry The folder entry created.
+     * @todo ZF-8732: This should return a *subclass* of Zend_Gdata_Entry, but
+     *       the appropriate type doesn't exist yet.
+     */
+    public function createFolder($folderName, $folderResourceId=null) {
+        $category = new Zend_Gdata_App_Extension_Category(self::DOCUMENTS_CATEGORY_TERM, 
+                                                          self::DOCUMENTS_CATEGORY_SCHEMA);
+        $title = new Zend_Gdata_App_Extension_Title($folderName);
+        $entry = new Zend_Gdata_Entry();
+
+        $entry->setCategory(array($category));
+        $entry->setTitle($title);
+
+        $uri = self::DOCUMENTS_LIST_FEED_URI;
+        if ($folderResourceId != null) {
+            $uri = self::DOCUMENTS_FOLDER_FEED_URI . '/' . $folderResourceId;
+        }
+
+        return $this->insertEntry($entry, $uri);
     }
 
     /**

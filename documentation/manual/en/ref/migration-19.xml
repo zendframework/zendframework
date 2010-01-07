@@ -377,6 +377,26 @@ $container = new Zend_Navigation(array(
         </para>
     </sect2>
 
+    <sect2 id="migration.19.zend.filter.html-entities">
+        <title>Zend_Filter_HtmlEntities</title>
+
+        <para>
+            In order to default to a more secure character encoding,
+            <classname>Zend_Filter_HtmlEntities</classname> now defaults to <acronym>UTF-8</acronym>
+            instead of <acronym>ISO-8859-1</acronym>.
+        </para>
+
+        <para>
+            Additionally, because the actual mechanism is dealing with character encodings and not
+            character sets, two new methods have been added, <methodname>setEncoding()</methodname>
+            and <methodname>getEncoding()</methodname>. The previous methods
+            <methodname>setCharSet()</methodname> and <methodname>setCharSet()</methodname> are now
+            deprecated and proxy to the new methods. Finally, instead of using the protected members
+            directly within the <methodname>filter()</methodname> method, these members are
+            retrieved by their explicit accessors. If you were extending the filter in the past,
+            please check your code and unit tests to ensure everything still continues to work.
+        </para>
+    </sect2>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

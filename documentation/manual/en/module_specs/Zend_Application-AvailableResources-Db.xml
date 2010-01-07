@@ -7,7 +7,10 @@
         <classname>Zend_Application_Resource_Db</classname> will initialize a
         <classname>Zend_Db</classname> adapter based on the options passed to it. By
         default, it also sets the adapter as the default adapter for use with
-        <classname>Zend_Db_Table</classname>.
+        <classname>Zend_Db_Table</classname>. If you want to use mutliple databases
+        simultaneously, you can use the <link
+        linkend="zend.application.available-resources.multidb">Multidb Resource
+        Plugin</link>.
     </para>
 
     <para>

@@ -204,13 +204,13 @@ foreach ($form->getElements() as $element) {
     </div>
     <div class="element">
         <?php echo $form->dateOfBirth->renderLabel() ?>
-        <?php echo $this->formText('dateOfBirth['day']', '', array(
+        <?php echo $this->formText('dateOfBirth[day]', '', array(
             'size' => 2, 'maxlength' => 2)) ?>
         /
-        <?php echo $this->formText('dateOfBirth['month']', '', array(
+        <?php echo $this->formText('dateOfBirth[month]', '', array(
             'size' => 2, 'maxlength' => 2)) ?>
         /
-        <?php echo $this->formText('dateOfBirth['year']', '', array(
+        <?php echo $this->formText('dateOfBirth[year]', '', array(
             'size' => 4, 'maxlength' => 4)) ?>
     </div>
     <div class="element">

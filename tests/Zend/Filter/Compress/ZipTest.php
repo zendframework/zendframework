@@ -159,7 +159,7 @@ class Zend_Filter_Compress_ZipTest extends PHPUnit_Framework_TestCase
     public function testZipGetSetOptions()
     {
         $filter = new Zend_Filter_Compress_Zip();
-        $this->assertEquals(array('archive' => null, 'target' => '.'), $filter->getOptions());
+        $this->assertEquals(array('archive' => null, 'target' => null), $filter->getOptions());
 
         $this->assertEquals(null, $filter->getOptions('archive'));
 
@@ -193,7 +193,7 @@ class Zend_Filter_Compress_ZipTest extends PHPUnit_Framework_TestCase
     public function testZipGetSetTarget()
     {
         $filter = new Zend_Filter_Compress_Zip();
-        $this->assertEquals('.', $filter->getTarget());
+        $this->assertNull($filter->getTarget());
         $filter->setTarget('Testfile.txt');
         $this->assertEquals('Testfile.txt', $filter->getTarget());
         $this->assertEquals('Testfile.txt', $filter->getOptions('target'));
@@ -300,6 +300,55 @@ class Zend_Filter_Compress_ZipTest extends PHPUnit_Framework_TestCase
     {
         $filter = new Zend_Filter_Compress_Zip();
         $this->assertEquals('Zip', $filter->toString());
+    }
+
+    /**
+     * @group
+     * @expectedException Zend_Filter_Exception
+     */
+    public function testDecompressWillThrowExceptionWhenDecompressingWithNoTarget()
+    {
+        $filter  = new Zend_Filter_Compress_Zip(
+            array(
+                'archive' => dirname(__FILE__) . '/../_files/compressed.zip',
+                'target'  => dirname(__FILE__) . '/../_files/_compress'
+            )
+        );
+
+        $content = $filter->compress('compress me');
+        $this->assertEquals(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files'
+                            . DIRECTORY_SEPARATOR . 'compressed.zip', $content);
+
+        $filter  = new Zend_Filter_Compress_Zip(
+            array(
+                'archive' => dirname(__FILE__) . '/../_files/compressed.zip'
+            )
+        );
+        $content = $filter->decompress($content);
+        $this->assertEquals(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '_files' . DIRECTORY_SEPARATOR, $content);
+        $content = file_get_contents(dirname(__FILE__) . '/../_files/zip.tmp');
+        $this->assertEquals('compress me', $content);
+    }
+    
+    /**
+     * @group RS
+     * @expectedException Zend_Filter_Exception
+     */
+    public function testDecompressWillThrowExceptionWhenDetectingUpwardDirectoryTraversal()
+    {
+        if (version_compare(PHP_VERSION, '5.2.8', '>=')) {
+            $this->markTestSkipped('This test is to run on PHP less than 5.2.8');
+            return;
+        }
+        
+        $filter  = new Zend_Filter_Compress_Zip(
+            array(
+                'archive' => dirname(__FILE__) . '/../_files/compressed.zip',
+                'target'  => dirname(__FILE__) . '/../_files/evil.zip'
+                )
+            );
+        
+        $filter->decompress(dirname(__FILE__) . '/../_files/evil.zip');
     }
 }
 

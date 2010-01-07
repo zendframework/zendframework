@@ -19,10 +19,9 @@
 
         <para>
             After you have installed Zend Server, the Framework files may be found
-            under <filename>/Applications/ZendServer/share/ZendFramework</filename> on Mac
-            OSX, <filename>C:\Program Files\Zend\ZendServer\share\ZendFramework</filename> on
-            Windows, and <filename>/usr/local/zend/share/ZendFramework</filename> on Linux.
-            The <constant>include_path</constant> will already be configured to include
+            under <filename>/usr/local/zend/share/ZendFramework</filename> on Mac OSX and Linux,
+            and <filename>C:\Program Files\Zend\ZendServer\share\ZendFramework</filename> on
+            Windows. The <constant>include_path</constant> will already be configured to include
             Zend Framework.
         </para>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19778 -->
+<!-- EN-Revision: 20109 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.view.placeholders.standard">
     <title>Standard Platzhalter</title>
@@ -237,11 +237,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         <title>Stylesheets mit HeadLink spezifizieren</title>
 
         <para>
-            Gute CSS entwickler erstellen oft ein generisches Stylesheet für Siteweite Stile, und
-            individuelle Stylesheets für spezifische Sektionen oder Seite der Website, und laden die
-            zweiteren über Konditionen um die Menge der Daten zu verringern die bei jeder Anfrage
-            übertragen werden müssen. Der <methodname>headLink()</methodname> Platzhalter macht die
-            Sammlung von solchen konditionellen Stylesheets in der Anwendung trivial.
+            Gute <acronym>CSS</acronym> Entwickler erstellen oft ein generisches Stylesheet für
+            Siteweite Stile, und individuelle Stylesheets für spezifische Sektionen oder Seite der
+            Website, und laden die zweiteren über Konditionen um die Menge der Daten zu verringern
+            die bei jeder Anfrage übertragen werden müssen. Der <methodname>headLink()</methodname>
+            Platzhalter macht die Sammlung von solchen konditionellen Stylesheets in der Anwendung
+            trivial.
         </para>
 
         <para>
@@ -250,18 +251,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             denen wir uns befassen sind <methodname>appendStylesheet()</methodname> und
             <methodname>prependStylesheet()</methodname>. Jede nimmt bis zu vier Argumente,
             <varname>$href</varname> (den relativen Pfad zum Stylesheet), <varname>$media</varname>
-            (den MIME Typ, der standardmäßig "text/css" ist),
+            (den <acronym>MIME</acronym> Typ, der standardmäßig "text/css" ist),
             <varname>$conditionalStylesheet</varname> (kann verwendet werden um eine "Kondition" zu
             spezifizieren bei dem das Stylesheet evaluiert wird), und <varname>$extras</varname>
-            (ein assoziatives Array von Schlüssel/Werte Paare, üblicherweise verwendet um einen
+            (ein assoziatives Array von Schlüssel und Werte Paare, üblicherweise verwendet um einen
             Schlüssel für "media" zu definieren). In den meisten Fällen muss man nur das erste
             Argument spezifizieren, den relativen Pfad zum Stylesheet.
         </para>
 
         <para>
             In unserem Beispiel nehmen wir an das alle Seiten das Stylesheet laden mussen welches in
-            "/styles/site.css" vorhanden ist (relativ zum Dokument Root); wir spezifizieren dass in
-            unserer Bootstrap Methode <methodname>_initPlaceholders()</methodname>.
+            "<filename>/styles/site.css</filename>" vorhanden ist (relativ zum Dokument Root); wir
+            spezifizieren dass in unserer Bootstrap Methode
+            <methodname>_initPlaceholders()</methodname>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -341,20 +343,21 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         </para>
 
         <para>
-            So wie <methodname>headLink()</methodname> bietet <methodname>headScript</methodname>
+            So wie <methodname>headLink()</methodname> bietet <methodname>headScript()</methodname>
             "virtuelle" Methoden durch Überladen als Bequemlichkeit wenn Elemente spezifiziert
             werden um Sie zu sammeln; übliche Methoden sind <methodname>prependFile()</methodname>,
             <methodname>appendFile()</methodname>, <methodname>prependScript()</methodname>, und
             <methodname>appendScript()</methodname>. Die ersten zwei erlauben es Dateien zu
-            spezifizieren auf die im <varname>src</varname> Attribut des <code>&lt;script&gt;</code>
-            Tags referenziert wird; die letzteren zwei nehmen den angegebenen Inhalt und stellen Ihn
-            als literales JavaScript im <code>&lt;script&gt;</code> Tag dar.
+            spezifizieren auf die im <varname>$src</varname> Attribut des
+            <code>&lt;script&gt;</code> Tags referenziert wird; die letzteren zwei nehmen den
+            angegebenen Inhalt und stellen Ihn als literales JavaScript im
+            <code>&lt;script&gt;</code> Tag dar.
         </para>
 
         <para>
-            In diesem Beispiel spezifizieren wir ein Skript, "/js/site.js" muss bei jeder Seite
-            geladen werden; wir aktualisieren die <methodname>_initPlaceholders()</methodname>
-            Methode in der Bootstrap um das zu tun.
+            In diesem Beispiel spezifizieren wir ein Skript, "<filename>/js/site.js</filename>"
+            muss bei jeder Seite geladen werden; wir aktualisieren die
+            <methodname>_initPlaceholders()</methodname> Methode in der Bootstrap um das zu tun.
         </para>
 
         <programlisting language="php"><![CDATA[

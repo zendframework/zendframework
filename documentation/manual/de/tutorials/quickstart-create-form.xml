@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 20106 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-form">
     <title>Erstellen eines Formulars</title>
@@ -73,8 +73,8 @@ class Default_Form_Guestbook extends Zend_Form
 
     <para>
         Das obige Formular definiert fünf Elemente: ein Feld für die Email Adresse, eines für das
-        Kommentar, ein CAPTCHA um Spam Einträge zu verhindern, einen Submit Button und ein CSRF
-        Protektions Token.
+        Kommentar, ein <acronym>CAPTCHA</acronym> um Spam Einträge zu verhindern, einen Submit
+        Button und ein <acronym>CSRF</acronym> Protektions Token.
     </para>
 
     <para>
@@ -99,10 +99,11 @@ C:> zf.bat create action sign guestbook
 
     <para>
         Fügen wir etwas Logik in unsere Sign Aktion des Guestbook Controller's ein. Wir müssen
-        zuerst prüfen ob wir eine POST oder eine GET Anfrage erhalten; im letzteren Fall zeigen wir
-        das Formular einfach an. Wenn wir aber eine POST Anfrage erhalten, wollten wir die
-        übermittelten Daten gegenüber unserem Formular prüfen, und wenn es gültig ist, wird ein
-        neuer Eintrag erstellt und gespeichert. Die Logik könnte wie folgt aussehen:
+        zuerst prüfen ob wir eine <acronym>POST</acronym> oder eine <acronym>GET</acronym> Anfrage
+        erhalten; im letzteren Fall zeigen wir das Formular einfach an. Wenn wir aber eine
+        <acronym>POST</acronym> Anfrage erhalten, wollten wir die übermittelten Daten gegenüber
+        unserem Formular prüfen, und wenn es gültig ist, wird ein neuer Eintrag erstellt und
+        gespeichert. Die Logik könnte wie folgt aussehen:
     </para>
 
     <programlisting language="php"><![CDATA[

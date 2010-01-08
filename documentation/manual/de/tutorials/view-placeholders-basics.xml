@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 20109 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.view.placeholders.basics">
     <title>Grundsätzliche Verwendung von Platzhaltern</title>
@@ -8,7 +8,8 @@
         Zend Framework definiert einen generischen <methodname>placeholder()</methodname> View
         Helfer den man für so viele eigene Platzhalter verwenden kann wie man will. Er bietet auch
         eine Vielzahl an Platzhalter Implementationen für oft benötigte Funktionalitäten, wie die
-        Spezifikation der <acronym>DocType</acronym> Deklaration, den Titel des Dokuments und mehr.
+        Spezifikation der <emphasis>DocType</emphasis> Deklaration, den Titel des Dokuments und
+        mehr.
     </para>
 
     <para>
@@ -82,9 +83,10 @@
 <div class="sidebar">
     <div class="block">
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus consectetur aliquet
-            odio ac consectetur. Nulla quis eleifend tortor. Pellentesque varius, odio quis bibendum
-            consequat, diam lectus porttitor quam, et aliquet mauris orci eu augue.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+            consectetur aliquet odio ac consectetur. Nulla quis eleifend
+            tortor. Pellentesque varius, odio quis bibendum consequat, diam
+            lectus porttitor quam, et aliquet mauris orci eu augue.
         </p>
     </div>
     <div class="block">
@@ -145,7 +147,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     </para>
 
     <para>
-        Wir benennen das View Skript "user/_sidebar.phtml", und machen es wir folgt bekannt:
+        Wir benennen das View Skript "<filename>user/_sidebar.phtml</filename>", und machen es wir
+        folgt bekannt:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -163,8 +166,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     <para>
         Das obige Beispiel verwendet das Capture Feature für den Inhalt des Platzhalters.
         Standardmäßig wird Inhalt dem Container als neues Element angehängt, was es erlaubt Ihn zu
-        sammeln. Dieses Beispiel verwendet View Helfer und statisches HTML um Markup zu erzeugen.
-        Der Inhalt wird anschließend gefangen und dem Platzhalter selbst angehängt.
+        sammeln. Dieses Beispiel verwendet View Helfer und statisches <acronym>HTML</acronym> um
+        Markup zu erzeugen. Der Inhalt wird anschließend gefangen und dem Platzhalter selbst
+        angehängt.
     </para>
 
     <para>
@@ -197,8 +201,8 @@ class UserController extends Zend_Controller_Action
 
     <para>
         Nehmen wir also an das unsere "view" Aktion die im selben Controlle ist einige Informationen
-        anzeigen muss. Im View Skript "user/view.phtml" könnten wie den folgende Inhalts Abschnitt
-        haben:
+        anzeigen muss. Im View Skript "<filename>user/view.phtml</filename>" könnten wie den
+        folgende Inhalts Abschnitt haben:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -233,9 +237,10 @@ $this->placeholder('sidebar')
         Für Controller und Aktionen welche den "sidebar" Platzhalter nicht verwenden wird kein
         Inhalt dargestellt; für jene die es tun wird, wenn der Platzhalter ausgegeben wird der
         Inhalt, entsprechend der Regeln die in unserer Bootstrap erstellt wurden, dargestellt als
-        auch der Inhalt den wir über die Anwendung hinaus sammeln. Im Falle der "/user/view"
-        Aktion, und der Annahme des Benutzernamens "matthew" würden wir den folgenden Inhalt der
-        Sidebar erhalten (aus Gründen der Lesbarkeit formatiert):
+        auch der Inhalt den wir über die Anwendung hinaus sammeln. Im Falle der
+        "<filename>/user/view</filename>" Aktion, und der Annahme des Benutzernamens "matthew"
+        würden wir den folgenden Inhalt der Sidebar erhalten (aus Gründen der Lesbarkeit
+        formatiert):
     </para>
 
     <programlisting language="html"><![CDATA[

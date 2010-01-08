@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15681 -->
-<!-- Reviewed: 15681 -->
+<!-- EN-Revision: 20100 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.currency.introduction">
     <title>Einführung in Zend_Currency</title>
 
     <para>
-        <classname>Zend_Currency</classname> ist Teil des starken Supports für I18n des Zend
-        Frameworks. Es behandelt alle Vorgänge betreffend Währungen, Darstellung von Geld und
-        Formatierung. Außerdem bietet es zusätzliche informative Methoden, welche lokalisierte
-        Informationen zu Währungen und Informationen darüber enthalten, welche Währung in welcher
-        Region verwendet wird.
+        <classname>Zend_Currency</classname> ist Teil der starken Unterstützung für I18n im Zend
+        Framework. Es behandelt alle Themen bezüglich Währung, Darstellung von Geld, Formatierung,
+        Wechselkurs Services und Berechnung.
     </para>
 
     <sect2 id="zend.currency.introduction.list">
         <title>Warum sollte man Zend_Currency verwenden?</title>
 
         <para>
-            <classname>Zend_Currency</classname> bietet die folgenden Funktionen für die
-            Manipulation von Währungen.
+            <classname>Zend_Currency</classname> bietet die folgenden Vorteile:
         </para>
 
         <itemizedlist mark='opencircle'>
             <listitem>
                 <para>
-                    <emphasis>Kompletter Support für Gebietsschemata</emphasis>
+                    <emphasis>Komplette Unterstützung für Gebietsschemata</emphasis>
                 </para>
 
                 <para>
-                    <classname>Zend_Currency</classname> arbeitet mit allen vorhandenen
-                    Gebietsschemata und kennt über 100 verschiedene lokalisierte Währungen. Das
-                    beinhaltet zum Beispiel Namen von Währungen, Abkürzungen, Währungssymbole und
-                    mehr.
+                    Diese Komponente arbeitet mit allen vorhandenen Gebietsschemata und weiß deshalb
+                    über mehr als 100 unterschiedliche lokalisierte Währungen bescheid. Das
+                    enthält Informationen wie die Namen von Währungen, deren Abkürzungen,
+                    Währungszeichen und viele andere.
                 </para>
             </listitem>
 
@@ -40,22 +37,20 @@
                 </para>
 
                 <para>
-                    <classname>Zend_Currency</classname> enthält nicht den Wert der Währung. Das ist
-                    der Grund, warum dessen Funktionalität nicht in
-                    <classname>Zend_Locale_Format</classname> vorhanden ist.
-                    <classname>Zend_Currency</classname> bietet den Vorteil, dass bereits definierte
-                    Währungsdarstellungen wieder verwendet werden können.
+                    <classname>Zend_Currency</classname> bietet den Vorteil das bereits definierte
+                    Darstellungen für Währungen wiederverwendet werden können. Man könnte also 2
+                    unterschiedliche Darstellungen für die gleiche Währung haben.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>Fluent Interface</emphasis>
+                    <emphasis>Währungen Kalkulieren</emphasis>
                 </para>
 
                 <para>
-                    <classname>Zend_Currency</classname> beinhaltet das Fluent Interface, wo es
-                    möglich ist.
+                    <classname>Zend_Currency</classname> erlaubt es mit Währungswerten zu rechnen.
+                    Hierfür bietet sie ein Interface zu Währungsumrechnungs Services.
                 </para>
             </listitem>
 
@@ -65,9 +60,10 @@
                 </para>
 
                 <para>
-                    <classname>Zend_Currency</classname> enthält zusätzliche Methoden, die
-                    Informationen darüber anbieten, in welcher Region eine Währung verwendet wird,
-                    oder welche Währung in einer bestimmten Region verwendet wird.
+                    <classname>Zend_Currency</classname> enthält verschiedene zusätzliche Methoden
+                    welche Informationen über Details zu Währungen bieten wie z.B.: Welche Währung
+                    wird in einer bestimmten Region verwendet, oder Was sind die bekannten
+                    Abkürzungen einer Währung.
                 </para>
             </listitem>
         </itemizedlist>

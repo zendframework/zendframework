@@ -7,19 +7,21 @@
     <para>
         <classname>Zend_Feed_Pubsubhubbub</classname> ist eine Implementation der PubSubHubbub Core
         0.2 Spezifikation (Working Draft). Sie bietet eine Implementation eines Pubsubhubbub
-        Publishers und Subscribers geeignet für den Zend Framework und andere PHP Anwendungen.
+        Publizisten und Abonnenten geeignet für den Zend Framework und andere PHP Anwendungen.
     </para>
 
     <sect2 id="zend.feed.pubsubhubbub.what.is.pubsubhubbub">
         <title>Was ist Pubsubhubbub?</title>
 
         <para>
-            Pubsubhubbub is an open, simple web-scale pubsub protocol. A common use case to enable
-            blogs (Publishers) to "push" updates from their RSS or Atom feeds (Topics) to end
-            Subscribers. These Subscribers will have subscribed to the blog's RSS or Atom feed via a
-            Hub, a central server which is notified of any updates by the Publisher and which then
-            distributes these updates to all Subscribers. Any feed may advertise that it supports
-            one or more Hubs using an Atom namespaced link element with a rel attribute of "hub".
+            Pubsubhubbub ist ein offenes, einfaches Web-skalierbares Pubsub Protokoll. Der normale
+            Anwendungsfall ist es Blogs (Publizist) zu erlauben Aktualisierungen von deren RSS oder
+            Atom Feeds (Themen) an Abonnenten zu "senden". Diese Abonenten müssen dem RSS oder Atom
+            Feed des Blogs über einen Hub abonniert haben. Das ist ein zentraler Server der
+            benachrichtigt wird wenn es Aktualisierungen des Publizisten gibt und diese anschließend
+            an alle Abonnenten verteilt. Jeder Feed kann bekanntgeben das er ein oder mehrere Hubs
+            unterstützen indem ein Atom Namespaced Linkelement mit dem Rel Attribut "hub" verwendet
+            wird.
         </para>
 
         <para>

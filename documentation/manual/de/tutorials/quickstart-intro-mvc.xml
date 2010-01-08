@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20000 -->
+<!-- EN-Revision: 20106 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.intro">
     <title>Zend Framework &amp; MVC Einführung</title>
@@ -79,31 +79,31 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis role="strong">Modell</emphasis> - Dieser Teil der eigenen
-                        Anwendung definiert die grundsätzliche Funktionalität in einem Set von
-                        Abstraktionen. Datenzugriffs Routinen und etwas Business Logik kann im
-                        Model definiert sein.
+                        <emphasis>Modell</emphasis> - Dieser Teil der eigenen Anwendung definiert
+                        die grundsätzliche Funktionalität in einem Set von Abstraktionen.
+                        Datenzugriffs Routinen und etwas Business Logik kann im Model definiert
+                        sein.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">View</emphasis> - Views definieren was exakt dem
-                        Benutzer präsentiert wird. Normalerweise übergeben Controller Daten in jede
-                        View damit Sie in einem Format dargestellt werden. Views sammeln auch oft
-                        Daten vom Benutzer. Dort findet man üblicherweise <acronym>HTML</acronym>
-                        Markup in der eigenen <acronym>MVC</acronym> Anwendung.
+                        <emphasis>View</emphasis> - Views definieren was exakt dem Benutzer
+                        präsentiert wird. Normalerweise übergeben Controller Daten in jede View
+                        damit Sie in einem Format dargestellt werden. Views sammeln auch oft Daten
+                        vom Benutzer. Dort findet man üblicherweise <acronym>HTML</acronym> Markup
+                        in der eigenen <acronym>MVC</acronym> Anwendung.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis role="strong">Controller</emphasis> - Controller verbinden das
-                        komplette Pattern. Sie manipulieren Modelle, entscheiden welche View,
-                        basieren auf der Benutzeranfrage und anderen Faktoren, angezeigt werden soll
-                        übergeben die Daten welche jede View benötigt, oder übergeben die Kontrolle
-                        komplett an andere Controller. Die meisten <acronym>MVC</acronym> Experten
-                        empfehlen <ulink
+                        <emphasis>Controller</emphasis> - Controller verbinden das komplette
+                        Pattern. Sie manipulieren Modelle, entscheiden welche View, basieren auf der
+                        Benutzeranfrage und anderen Faktoren, angezeigt werden soll übergeben die
+                        Daten welche jede View benötigt, oder übergeben die Kontrolle komplett an
+                        andere Controller. Die meisten <acronym>MVC</acronym> Experten empfehlen
+                        <ulink
                             url="http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model">Controller
                             so schlank wie möglich zu halten</ulink>.
                     </para>

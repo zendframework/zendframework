@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 20106 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.paginator.simple">
     <title>Einfaches Beispiel</title>
 
     <para>
         In diesem ersten Beispiel wollen wir nichts spektakuläres, aber hoffentlich gibt es eine
-        gute Idee darüber wozu Zend_Paginator designt wurde. Angenommen wir haben ein Array das
-        $data heißt mit den Zahlen 1 bis 100 in Ihm, welches wir in eine Anzahl von Seiten
-        aufteilen wollen. Man kann die statische <methodname>factory()</methodname> Methode in der
-        Klasse <classname>Zend_Paginator</classname> verwenden um ein
+        gute Idee darüber wozu <classname>Zend_Paginator</classname> designt wurde. Angenommen wir
+        haben ein Array das $data heißt mit den Zahlen 1 bis 100 in Ihm, welches wir in eine Anzahl
+        von Seiten aufteilen wollen. Man kann die statische <methodname>factory()</methodname>
+        Methode in der Klasse <classname>Zend_Paginator</classname> verwenden um ein
         <classname>Zend_Paginator</classname> Objekt mit unseren Array in Ihm zu erhalten.
     </para>
 
@@ -120,7 +120,7 @@ foreach ($paginator as $item) {
         Der einzige Unterschied besteht darin dass man ein <classname>Zend_Db_Select</classname>
         Objekt statt einem Array an die <methodname>factory()</methodname> Methode des Paginator's
         übergibt. Für weitere Details darüber wie der Datenbank Adapter sicherstellt das eigene
-        Anfragen effizient ausgeführt werden, sollte in das Zend_Paginator Kapitel im Referenz
-        Handbuch bei den Adaptern DbSelect und DbTableSelect nachgesehen werden.
+        Anfragen effizient ausgeführt werden, sollte in das <classname>Zend_Paginator</classname>
+        Kapitel im Referenz Handbuch bei den Adaptern DbSelect und DbTableSelect nachgesehen werden.
     </para>
 </sect1>

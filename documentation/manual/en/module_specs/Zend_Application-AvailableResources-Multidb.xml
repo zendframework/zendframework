@@ -56,37 +56,18 @@ $defaultDb = $resource->getDb();
 ]]></programlisting>
    </example>
    
-       <example id="zend.application.available-resources.multidb.retrieveSpecificDb">
+       <example id="zend.application.available-resources.multidb.retrieveDefaultDb">
         <title>Retrieving the default database adapter</title>
 
         <para>
             Additionally, you can retrieve the default database adapter
             by using the method <methodname>getDefaultDb()</methodname>.
             If you have not set a default adapter, the first configured db
-            adapter will be returned. Unless you specify 
-            <!-- @TODO: Should I use 'acronym' here? - Freeaqingme -->
-            <acronym>false</acronym> as first parameter, then <acronym>null</acronym>
+            adapter will be returned. Unless you specify <constant>false</constant>
+            as first parameter, then <constant>null</constant>
             will be returned when no default database adapter was set.
          </para>   
 
-        <programlisting language="php"><![CDATA[
-$resource = $bootstrap->getPluginResource('multidb');
-$db1 = $resource->getDb('db1');
-$db2 = $resource->getDb('db2');
-$defaultDb = $resource->getDb();
-]]></programlisting>
-   </example>
-
-       <example id="zend.application.available-resources.multidb.retrieveDefaultDb">
-        <title>Retrieving the default database adapter</title>
-
-        <para>
-            Additionally, you can use
-            <methodname>getDefaultDb()</methodname> to retrieve the db that
-            was set as default. If you haven't set one, it will return the first
-            one in the stack.
-        </para>
-        
         <para>Below is an example that assumes the Multidb resource plugin has been configured
             with the INI sample above:</para>
 
@@ -99,4 +80,5 @@ $db1 = $resource->getDefaultDb();
 $null = $resource->getDefaultDb(false); // null
 ]]></programlisting>
     </example>
+    
 </sect2>

@@ -122,11 +122,14 @@ abstract class Zend_View_Helper_Placeholder_Container_Standalone extends Zend_Vi
      */
     protected function _escape($string)
     {
-        if ($this->view instanceof Zend_View_Interface) {
-            return $this->view->escape($string);
+        $enc = 'UTF-8';
+        if ($this->view instanceof Zend_View_Interface
+            && method_exists($this->view, 'getEncoding')
+        ) {
+            $enc = $this->view->getEncoding();
         }
 
-        return htmlentities((string) $string, null, 'UTF-8');
+        return htmlspecialchars((string) $string, ENT_COMPAT, $enc);
     }
 
     /**

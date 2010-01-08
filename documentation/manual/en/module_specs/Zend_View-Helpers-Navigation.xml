@@ -2163,6 +2163,28 @@ echo $this->navigation()
 ]]></programlisting>
         </example>
 
+        <note>
+            <title>UTF-8 encoding used by default</title>
+
+            <para>
+                By default, Zend Framework uses <acronym>UTF-8</acronym> as its default encoding,
+                and, specific to this case, <classname>Zend_View</classname> does as well. Character
+                encoding can be set differently on the view object itself using the
+                <methodname>setEncoding()</methodname> method (or the the
+                <varname>encoding</varname> instantiation parameter). However, since
+                <classname>Zend_View_Interface</classname> does not define accessors for encoding,
+                it's possible that if you are using a custom view implementation with the Dojo view
+                helper, you will not have a <methodname>getEncoding()</methodname> method, which is
+                what the view helper uses internally for determining the character set in which to
+                encode.
+            </para>
+
+            <para>
+                If you do not want to utilize <acronym>UTF-8</acronym> in such a situation, you will
+                need to implement a <methodname>getEncoding()</methodname> method in your custom
+                view implementation.
+            </para>
+        </note>
     </sect4>
 
     <sect4 id="zend.view.helpers.initial.navigation.navigation">

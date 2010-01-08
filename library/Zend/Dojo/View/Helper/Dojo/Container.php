@@ -1090,7 +1090,9 @@ EOJ;
         }
 
         $enc = 'UTF-8';
-        if ($this->view instanceof Zend_View_Abstract) {
+        if ($this->view instanceof Zend_View_Interface
+            && method_exists($this->view, 'getEncoding')
+        ) {
             $enc = $this->view->getEncoding();
         }
 

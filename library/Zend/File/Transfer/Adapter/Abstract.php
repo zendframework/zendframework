@@ -112,7 +112,8 @@ abstract class Zend_File_Transfer_Adapter_Abstract
     protected $_options = array(
         'ignoreNoFile'  => false,
         'useByteString' => true,
-        'magicFile'     => null
+        'magicFile'     => null,
+        'detectInfos'   => true,
     );
 
     /**
@@ -1183,26 +1184,41 @@ abstract class Zend_File_Transfer_Adapter_Abstract
         $files  = $this->_getFiles($files);
         $result = array();
         foreach($files as $key => $value) {
-            if (file_exists($value['name'])) {
-                $size = sprintf("%u", @filesize($value['name']));
-            } else if (file_exists($value['tmp_name'])) {
-                $size = sprintf("%u", @filesize($value['tmp_name']));
+            if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
+                if ($value['options']['useByteString']) {
+                    $result[$key] = self::_toByteString($value['size']);
+                } else {
+                    $result[$key] = $value['size'];
+                }
             } else if (empty($value['options']['ignoreNoFile'])) {
                 require_once 'Zend/File/Transfer/Exception.php';
                 throw new Zend_File_Transfer_Exception("File '{$value['name']}' does not exist");
             } else {
                 continue;
             }
-
-            if ($value['options']['useByteString']) {
-                $result[$key] = self::_toByteString($size);
-            } else {
-                $result[$key] = $size;
-            }
         }
 
         if (count($result) == 1) {
             return current($result);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Internal method to detect the size of a file
+     *
+     * @param  array $value File infos
+     * @return string Filesize of given file
+     */
+    protected function _detectFileSize($value)
+    {
+        if (file_exists($value['name'])) {
+            $result = sprintf("%u", @filesize($value['name']));
+        } else if (file_exists($value['tmp_name'])) {
+            $result = sprintf("%u", @filesize($value['tmp_name']));
+        } else {
+            return null;
         }
 
         return $result;
@@ -1221,45 +1237,61 @@ abstract class Zend_File_Transfer_Adapter_Abstract
         $files  = $this->_getFiles($files);
         $result = array();
         foreach($files as $key => $value) {
-            if (file_exists($value['name'])) {
-                $file = $value['name'];
-            } else if (file_exists($value['tmp_name'])) {
-                $file = $value['tmp_name'];
+            if (file_exists($value['name']) || file_exists($value['tmp_name'])) {
+                $result[$key] = $value['type'];
             } else if (empty($value['options']['ignoreNoFile'])) {
                 require_once 'Zend/File/Transfer/Exception.php';
                 throw new Zend_File_Transfer_Exception("File '{$value['name']}' does not exist");
             } else {
                 continue;
             }
-
-            if (class_exists('finfo', false)) {
-                $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
-                if (!empty($value['options']['magicFile'])) {
-                    $mime = new finfo($const, $value['options']['magicFile']);
-                } else {
-                    $mime = new finfo($const);
-                }
-
-                if ($mime !== false) {
-                    $result[$key] = $mime->file($file);
-                }
-
-                unset($mime);
-            }
-
-            if (empty($result[$key])) {
-                if (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
-                    $result[$key] = mime_content_type($file);
-                }
-            }
-
-            if (empty($result[$key])) {
-                $result[$key] = 'application/octet-stream';
-            }
         }
 
         if (count($result) == 1) {
             return current($result);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Internal method to detect the mime type of a file
+     *
+     * @param  array $value File infos
+     * @return string Mimetype of given file
+     */
+    protected function _detectMimeType($value)
+    {
+        if (file_exists($value['name'])) {
+            $file = $value['name'];
+        } else if (file_exists($value['tmp_name'])) {
+            $file = $value['tmp_name'];
+        } else {
+            return null;
+        }
+
+        if (class_exists('finfo', false)) {
+            $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
+            if (!empty($magicFile)) {
+                $mime = new finfo($const, $magicFile);
+            } else {
+                $mime = new finfo($const);
+            }
+
+            if ($mime !== false) {
+                $result = $mime->file($file);
+            }
+
+            unset($mime);
+        }
+
+        if (empty($result) && (function_exists('mime_content_type')
+            && ini_get('mime_magic.magicfile'))) {
+            $result = mime_content_type($file);
+        }
+
+        if (empty($result)) {
+            $result = 'application/octet-stream';
         }
 
         return $result;

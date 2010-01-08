@@ -734,11 +734,11 @@ class Zend_File_Transfer_Adapter_AbstractTest extends PHPUnit_Framework_TestCase
     {
         $options = $this->adapter->getOptions();
         $this->assertTrue($options['baz']['useByteString']);
-        $this->assertEquals('8B', $this->adapter->getFileSize('baz.text'));
+        $this->assertEquals('1.14kB', $this->adapter->getFileSize('baz.text'));
         $this->adapter->setOptions(array('useByteString' => false));
         $options = $this->adapter->getOptions();
         $this->assertFalse($options['baz']['useByteString']);
-        $this->assertEquals(8, $this->adapter->getFileSize('baz.text'));
+        $this->assertEquals(1172, $this->adapter->getFileSize('baz.text'));
     }
 
     public function testMimeTypeButNoFileFound()

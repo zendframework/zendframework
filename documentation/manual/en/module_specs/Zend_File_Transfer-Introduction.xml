@@ -203,7 +203,6 @@ $upload->receive();
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.informations">
-
         <title>Additional File Informations</title>
 
         <para>
@@ -309,6 +308,16 @@ $size = $upload->getFileSize();
 
         </example>
 
+        <note>
+            <title>Client given filesize</title>
+
+            <para>
+                Note that the filesize which is given by the client is not seen as save input.
+                Therefor the real size of the file will be detected and returned instead of the
+                filesize sent by the client.
+            </para>
+        </note>
+
         <para>
             <methodname>getHash()</methodname> accepts the name of a hash algorithm as first
             parameter. For a list of known algorithms refer to
@@ -333,6 +342,8 @@ $names = $upload->getHash('crc32', 'foo');
         </example>
 
         <note>
+            <title>Return value</title>
+
             <para>
                 Note that if the given file or form name contains more than one file, the returned
                 value will be an array.
@@ -360,12 +371,40 @@ $names = $upload->getMimeType('foo');
         </example>
 
         <note>
+            <title>Client given mimetype</title>
+
+            <para>
+                Note that the mimetype which is given by the client is not seen as save input.
+                Therefor the real mimetype of the file will be detected and returned instead of the
+                filesize sent by the client.
+            </para>
+        </note>
+
+        <warning>
+            <title>Possible exception</title>
+
             <para>
                 Note that this method uses the fileinfo extension if it is available. If this
                 extension can not be found, it uses the mimemagic extension. When no extension was
-                found it uses the mimetype given by the fileserver when the file was uploaded.
+                found it raises an exception.
             </para>
-        </note>
+        </warning>
+
+        <warning>
+            <title>Original data within $_FILES</title>
+
+            <para>
+                Due to security reasons also the original data within $_FILES will be overridden
+                as soon as <classname>Zend_File_Transfer</classname> is initiated. When you want
+                to omit this behaviour and have the original data simply set the
+                <property>detectInfos</property> option to false at initiation.
+            </para>
+
+            <para>
+                This option will have no effect after you initiated
+                <classname>Zend_File_Transfer</classname>.
+            </para>
+        </warning>
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.uploadprogress">

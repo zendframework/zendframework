@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 18423 -->
+    <!-- EN-Revision: 20115 -->
     <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.reference">
     <title>Referencias de Zend_CodeGenerator</title>
@@ -616,7 +616,7 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
 
             <para>
-                There are several problems that might occur when trying to set null, booleans or
+                There are several problems that might occur when trying to set <constant>NULL</constant>, booleans or
                 arrays as default values. For this the value holder object
                 <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname>
                 can be used,

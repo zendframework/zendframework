@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 16845 -->
+    <!-- EN-Revision: 20111 -->
     <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.db">
     <title>Zend_Application_Resource_Db</title>
@@ -13,6 +13,10 @@
         defecto para usarlo con
         <classname>Zend_Db_Table</classname>
         .
+		 <classname>Zend_Db_Table</classname>. If you want to use mutliple databases
+        simultaneously, you can use the <link
+        linkend="zend.application.available-resources.multidb">Multidb Resource
+        Plugin</link>.
     </para>
 
     <para>Se reconocen las siguientes configuraciones claves:</para>

@@ -63,7 +63,7 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
      * Example 2: translate('%1\$s + %2\$s', array($value1, $value2), $locale);
      *
      * @param  string $messageid Id of the message to be translated
-     * @return string Translated message
+     * @return string|Zend_View_Helper_Translate Translated message
      */
     public function translate($messageid = null)
     {

@@ -73,6 +73,29 @@ $authors = $feed->getAuthors()->getValues();
     <sect2 id="migration.110.zend.file.transfer">
         <title>Zend_File_Transfer</title>
 
+        <sect3 id="migration.110.zend.file.transfer.files">
+            <title>Security change</title>
+
+            <para>
+                For security reasons <classname>Zend_File_Transfer</classname> does no longer store
+                the original mimetype and filesize which is given from the requesting client into
+                its internal storage. Instead the real values will be detected at initiation.
+            </para>
+
+            <para>
+                Additionally the original values within <varname>$_FILES</varname> will be
+                overridden within the real values at initiation. This makes also
+                <varname>$_FILES</varname> secure.
+            </para>
+
+            <para>
+                When you are in need of the original values you can eighter store them before
+                initiating <classname>Zend_File_Transfer</classname> or use the
+                <property>disableInfos</property> option at initiation. Note that this option is
+                useless when its given after initiation.
+            </para>
+        </sect3>
+
         <sect3 id="migration.110.zend.file.transfer.count">
             <title>Count validation</title>
 

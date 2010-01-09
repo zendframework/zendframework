@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17409 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Resumo</title>
@@ -316,10 +316,11 @@ $index->addDocument($doc);
             Os métodos <methodname>loadHTML()</methodname> e
             <methodname>loadHTMLFile()</methodname> da classe
             <classname>Zend_Search_Lucene_Document_Html</classname> também possuem um segundo
-            argumento opcional. Se for definido como true, o conteúdo do corpo é também armazenado
-            no índice e pode ser recuperado a partir do índice. Por padrão, o corpo é marcado e
-            indexado, mas não armazenado.
+            argumento opcional. Se for definido como <constant>TRUE</constant>, o conteúdo do corpo
+            é também armazenado no índice e pode ser recuperado a partir do índice. Por padrão, o
+            corpo é marcado e indexado, mas não armazenado.
         </para>
+
         <para>
             O terceiro parâmetro dos métodos <methodname>loadHTML()</methodname> e
             <methodname>loadHTMLFile()</methodname> especifica opcionalmente a codificação do
@@ -449,9 +450,9 @@ $index->addDocument($doc);
         <para>
             O método <methodname>loadDocxFile()</methodname> da classe
             <classname>Zend_Search_Lucene_Document_Docx</classname> também possui um segundo
-            argumento opcional. Se for definido como true, o conteúdo do corpo é também armazenado
-            no índice e pode ser recuperado a partir do índice. Por padrão, o corpo é marcado e
-            indexado, mas não armazenado.
+            argumento opcional. Se for definido como <constant>TRUE</constant>, o conteúdo do corpo
+            é também armazenado no índice e pode ser recuperado a partir do índice. Por padrão, o
+            corpo é marcado e indexado, mas não armazenado.
         </para>
 
         <para>
@@ -548,9 +549,9 @@ $index->addDocument($doc);
         <para>
             O método <methodname>loadPptxFile()</methodname> da classe
             <classname>Zend_Search_Lucene_Document_Pptx</classname> também possui um segundo
-            argumento opcional. Se for definido como true, o conteúdo do corpo é também armazenado
-            no índice e pode ser recuperado a partir do índice. Por padrão, o corpo é marcado e
-            indexado, mas não armazenado.
+            argumento opcional. Se for definido como <constant>TRUE</constant>, o conteúdo do corpo
+            é também armazenado no índice e pode ser recuperado a partir do índice. Por padrão, o
+            corpo é marcado e indexado, mas não armazenado.
         </para>
 
         <para>
@@ -644,9 +645,9 @@ $index->addDocument($doc);
         <para>
             O método <methodname>loadXlsxFile()</methodname> da classe
             <classname>Zend_Search_Lucene_Document_Xlsx</classname> também possui um segundo
-            argumento opcional. Se for definido como true, o conteúdo do corpo é também armazenado
-            no índice e pode ser recuperado a partir do índice. Por padrão, o corpo é marcado e
-            indexado, mas não armazenado.
+            argumento opcional. Se for definido como <constant>TRUE</constant>, o conteúdo do corpo
+            é também armazenado no índice e pode ser recuperado a partir do índice. Por padrão, o
+            corpo é marcado e indexado, mas não armazenado.
         </para>
 
         <para>

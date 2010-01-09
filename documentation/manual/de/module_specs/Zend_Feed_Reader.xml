@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19819 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -627,8 +627,8 @@ $labels = $categories->getValues();
                         <entry>
                             Gibt entweder den ersten bekannten Author zurück, oder mit dem
                             optionalen Parameter <varname>$index</varname> jeden spezifischen
-                            Index des Arrays von Authoren wie vorher beschrieben (gibt null bei
-                            einem ungültigen Index zurück).
+                            Index des Arrays von Authoren wie vorher beschrieben (gibt
+                            <constant>NULL</constant> bei einem ungültigen Index zurück).
                         </entry>
                     </row>
 
@@ -701,8 +701,8 @@ $labels = $categories->getValues();
                             (dem Schema der Kategorisierung für diese Kategorie), und "label" (ein
                             Html dekodierter menschlich lesbarer Kategoriename). Wenn irgendeines
                             der drei Felder abwesend ist, werden Sie entweder auf die näheste
-                            vorhandene Alternative gesetzt, oder im Fall von "scheme", auf NULL
-                            gesetzt.
+                            vorhandene Alternative gesetzt, oder im Fall von "scheme", auf
+                            <constant>NULL</constant> gesetzt.
                         </entry>
                     </row>
                 </tbody>
@@ -966,8 +966,8 @@ $labels = $categories->getValues();
                         <entry>
                             Gibt entweder den ersten bekannten Autor zurück, oder mit dem
                             optionalen Parameter <varname>$index</varname> jeden spezifischen Index
-                            aus dem Array der Authoren wie vorher beschrieben (gibt null zurück wenn
-                            der Index ungültig ist).
+                            aus dem Array der Authoren wie vorher beschrieben (gibt
+                            <constant>NULL</constant> zurück wenn der Index ungültig ist).
                         </entry>
                     </row>
 
@@ -1058,7 +1058,8 @@ $labels = $categories->getValues();
                             der Kategorisierung für diese Kategorie), und "label" (ein Html
                             dekodierter menschlich lesbarer Name der Kategorie). Wenn eines der drei
                             Felder nicht vorhanden ist, werden Sie entweder auf den näheste
-                            vorhandene Alternative, oder im Fall von "scheme", auf NULL gesetzt.
+                            vorhandene Alternative, oder im Fall von "scheme", auf
+                            <constant>NULL</constant> gesetzt.
                         </entry>
                     </row>
                 </tbody>

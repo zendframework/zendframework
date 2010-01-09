@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.options">
     <title>Zend_Layout Konfigurations Optionen</title>
@@ -45,11 +45,12 @@
             <para>
                 <emphasis>mvcSuccessfulActionOnly</emphasis>: Wenn <acronym>MVC</acronym> verwendet
                 wird, dann wird das Layout nicht dargestellt wenn eine Aktion eine Ausnahme wirft
-                und dieses Flag true ist (das wird verwendet um zu verhindern dass das Layout
-                doppelt dargestellt wird wenn das <link
+                und dieses Flag <constant>TRUE</constant> ist (das wird verwendet um zu verhindern
+                dass das Layout doppelt dargestellt wird wenn das <link
                     linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler
-                    Plugin</link> verwendet wird. Standardmäßig ist dieses Flag true.
-                Zugriffsmethoden sind <methodname>setMvcSuccessfulActionOnly()</methodname> und
+                    Plugin</link> verwendet wird. Standardmäßig ist dieses Flag
+                <constant>TRUE</constant>. Zugriffsmethoden sind
+                <methodname>setMvcSuccessfulActionOnly()</methodname> und
                 <methodname>getMvcSuccessfulActionOnly()</methodname>.
             </para>
         </listitem>

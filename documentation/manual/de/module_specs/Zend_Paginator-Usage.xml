@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19418 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.usage">
     <title>Verwendung</title>
@@ -103,8 +103,8 @@ $paginator = Zend_Paginator::factory($array);
 
         <note>
             <para>
-                Im Falle des Null Adapters, muß dem Konstruktor eine Elementanzahl mitgegeben werden
-                da keine Datensammlung vorliegt.
+                Im Falle des <constant>NULL</constant> Adapters, muß dem Konstruktor eine
+                Elementanzahl mitgegeben werden da keine Datensammlung vorliegt.
             </para>
         </note>
 

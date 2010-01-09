@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19150 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.functions">
-
     <title>Zend_Locale verwenden</title>
 
     <para>
@@ -12,7 +11,6 @@
     </para>
 
     <sect2 id="zend.locale.copying">
-
         <title>Kopieren, Klonen und Serialisieren von Gebietsschema Objekten</title>
 
         <para>
@@ -25,6 +23,7 @@
 
         <example id="zend.locale.copying.example-1">
             <title>Klonen</title>
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('ar');
 
@@ -1673,7 +1672,7 @@ $localelist = Zend_Locale::getLocaleList();
         <note>
             <para>
                 Es ist zu beachten das die Gebietsschemata als Schlüssel des Arrays das man erhält
-                zurück gegeben werden. Der Wert ist immer ein Boolsches True.
+                zurück gegeben werden. Der Wert ist immer ein Boolsches <constant>TRUE</constant>.
             </para>
         </note>
     </sect2>
@@ -1713,7 +1712,7 @@ if (Zend_Locale::isLocale($input)) {
             Man sollte auch beachten das jeder angegebene Gebietsschema String automatisch
             degradiert wird wenn der Regionsabschnitt für dieses Gebietsschema nicht existiert. In
             unserem vorherigen Beispiel existiert die Region <code>'RU'</code> nicht für die Sprache
-            <code>'to'</code>, aber es wird trotzdem true zurückgegeben da
+            <code>'to'</code>, aber es wird trotzdem <constant>TRUE</constant> zurückgegeben da
             <classname>Zend_Locale</classname> mit der vorhandenen Eingabe arbeiten kann.
         </para>
 

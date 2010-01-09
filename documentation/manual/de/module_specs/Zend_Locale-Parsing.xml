@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.parsing">
-
     <title>Normalisierung und Lokalisierung</title>
 
     <para>
@@ -23,6 +22,7 @@
         können.
         <note>
             <title>Standard "root" Gebietsschema</title>
+
             <para>
                 Wenn kein Gebietsschema spezifiziert wurde, wird die Normalisierung und
                 Lokalisierung das Standard "root" Gebietsschema verwenden, was zu unerwarteten
@@ -256,20 +256,20 @@ $number = Zend_Locale_Format::toNumber(13547.3,
 print $number;
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.locale.number.test">
-
         <title>Testen von Zahlen</title>
 
         <para>
             <methodname>isNumber($value, array $options = array())</methodname> prüft ob eine
-            gegebene Zeichenkette eine Zahl enthält und gibt wahr oder falsch zurück.
+            gegebene Zeichenkette eine Zahl enthält und gibt <constant>TRUE</constant> oder
+            <constant>FALSE</constant> zurück.
         </para>
 
         <example id="zend.locale.number.test.example-1">
             <title>Testen von Zahlen</title>
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale();
 if (Zend_Locale_Format::isNumber('13.445,36', array('locale' => 'de_AT')) {
@@ -279,11 +279,9 @@ if (Zend_Locale_Format::isNumber('13.445,36', array('locale' => 'de_AT')) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.locale.float.normalize">
-
         <title>Gleitkommazahlen normalisieren</title>
 
         <para>
@@ -327,20 +325,20 @@ $number = Zend_Locale_Format::toFloat(13547.3655,
 print $number;
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.locale.float.test">
-
         <title>Testen von Gleitkommazahlen</title>
 
         <para>
             <methodname>isFloat($value, array $options = array())</methodname> prüft ob eine
-            gegebene Zeichenkette eine Gleitkommazahl enthält und gibt wahr oder falsch zurück.
+            gegebene Zeichenkette eine Gleitkommazahl enthält und gibt <constant>TRUE</constant>
+            oder <constant>FALSE</constant> zurück.
         </para>
 
         <example id="zend.locale.float.test.example-1">
             <title>Testen von Gleitkommazahlen</title>
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 if (Zend_Locale_Format::isFloat('13.445,36', array('locale' => $locale)) {
@@ -350,11 +348,9 @@ if (Zend_Locale_Format::isFloat('13.445,36', array('locale' => $locale)) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.locale.integer.normalize">
-
         <title>Integer Zahlen normalisieren</title>
 
         <para>
@@ -397,20 +393,20 @@ $number = Zend_Locale_Format::toInteger(13547.3655,
 print $number;
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.locale.integer.test">
-
         <title>Testen von Integer Zahlen</title>
 
         <para>
             <methodname>isInteger($value, array $options = array())</methodname> prüft ob eine
-            gegebene Zeichenkette eine Integer Zahl enthält und gibt wahr oder falsch zurück.
+            gegebene Zeichenkette eine Integer Zahl enthält und gibt <constant>TRUE</constant> oder
+            <constant>FALSE</constant> zurück.
         </para>
 
         <example id="zend.locale.integer.test.example-1">
             <title>Testen von Integer Zahlen</title>
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
@@ -420,11 +416,9 @@ if (Zend_Locale_Format::isInteger('13.445', array('locale' => $locale)) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.locale.numbersystems">
-
         <title>Konvertieren von Zahlensystemen</title>
 
         <para>

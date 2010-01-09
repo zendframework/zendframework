@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19419 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
-
     <title>Einführung</title>
 
     <para>
@@ -13,7 +12,6 @@
     </para>
 
     <sect2 id="zend.filter.introduction.definition">
-
         <title>Was ist ein Filter?</title>
 
         <para>
@@ -184,14 +182,12 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                 <listitem>
                     <para>
                         <emphasis><methodname>Zend_Filter::hasDefaultNamespaces()</methodname></emphasis>:
-                        Gibt true zurück wenn ein oder mehrere standardmäßige Namespaces gesetzt
-                        sind, und false wenn keine standardmäßigen Namespaces gesetzt sind.
+                        Gibt <constant>TRUE</constant> zurück wenn ein oder mehrere standardmäßige
+                        Namespaces gesetzt sind, und <constant>FALSE</constant> wenn keine
+                        standardmäßigen Namespaces gesetzt sind.
                     </para>
                 </listitem>
             </itemizedlist>
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

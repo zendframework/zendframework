@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.spreadsheets">
     <title>Google Tabellenkalkulation verwenden</title>
@@ -14,8 +14,8 @@
     </para>
 
     <para>
-        Siehe
-        <ulink url="http://code.google.com/apis/spreadsheets/overview.html">http://code.google.com/apis/spreadsheets/overview.html</ulink>
+        Siehe <ulink
+            url="http://code.google.com/apis/spreadsheets/overview.html">http://code.google.com/apis/spreadsheets/overview.html</ulink>
         für weitere Informationen über die Google's Tabellenkalkulations <acronym>API</acronym>.
     </para>
 
@@ -175,8 +175,8 @@ echo $customEntry->getColumnName() . " = " . $customEntry->getText();
                 Standardmäßig werden die Zeilen im Feed in der gleichen Reihenfolge angezeigt wie in
                 den entsprechenden Zeilen im GUI; das ist die Reihenfolge anhand der Zeilennummer.
                 Um Zeilen in einer umgekehrten Reihenfolge zu erhalten, muß die reverse Eigenschaft
-                des <classname>Zend_Gdata_Spreadsheets_ListQuery</classname> Objektes auf true
-                gesetzt werden:
+                des <classname>Zend_Gdata_Spreadsheets_ListQuery</classname> Objektes auf
+                <constant>TRUE</constant> gesetzt werden:
             </para>
 
             <programlisting language="php"><![CDATA[

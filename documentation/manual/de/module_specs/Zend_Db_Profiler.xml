@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19484 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Db_Profiler</title>
@@ -175,7 +175,7 @@ $profiler = $db->getProfiler();
                 <para>
                     <methodname>getLastQueryProfile()</methodname> gibt das Profil der letzten
                     (neuesten) Abfrage zurück, gleichgültig ob die Abfrage beendet werden konnte
-                    oder nicht (wenn nicht, wird die Endzeit null sein)
+                    oder nicht (wenn nicht, wird die Endzeit <constant>NULL</constant> sein)
                 </para>
             </listitem>
 
@@ -281,7 +281,8 @@ echo "Longest query: \n" . $longestQuery . "\n";
             <para>
                 <methodname>setFilterElapsedSecs()</methodname> ermöglicht dem Entwickler, eine
                 minimale Laufzeit anzugeben, bevor eine Abfrage aufzeichnet werden soll. Um den
-                Filter zu entfernen, muss nur der Wert null an die Methode übergeben werden.
+                Filter zu entfernen, muss nur der Wert <constant>NULL</constant> an die Methode
+                übergeben werden.
             </para>
 
             <programlisting language="php"><![CDATA[

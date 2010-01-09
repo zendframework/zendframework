@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19251 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node-rootdse">
     <title>Zend_Ldap_Node_RootDse</title>
@@ -120,10 +120,10 @@
                         <varname>$emptyExists</varname> <constant>FALSE</constant> ist werden leere
                         Attribute (welche nur array() enthalten) als nicht existierend betrachtet
                         und geben <constant>FALSE</constant> zurück. Wenn
-                        <varname>$emptyExists</varname> true ist werden leere Attribute als existent
-                        betrachtet und geben <varname>$emptyExists</varname> zurück. In diesem Fall
-                        gibt die Methode nur dann <constant>FALSE</constant> zurück wenn der Name
-                        des Attributs in der Sammlung der Schlüssel fehlt.
+                        <varname>$emptyExists</varname> <constant>TRUE</constant> ist werden leere
+                        Attribute als existent betrachtet und geben <varname>$emptyExists</varname>
+                        zurück. In diesem Fall gibt die Methode nur dann <constant>FALSE</constant>
+                        zurück wenn der Name des Attributs in der Sammlung der Schlüssel fehlt.
                     </entry>
                 </row>
                 <row>

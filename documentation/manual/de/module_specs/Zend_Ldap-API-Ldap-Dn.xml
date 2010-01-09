@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-dn">
     <title>Zend_Ldap_Dn</title>
@@ -173,30 +173,36 @@
                         <code>Zend_Ldap_Dn insert(integer $index, array
                         $value)</code>
                     </entry>
+
                     <entry>
                         Fügt einen DN Teil nach dem Index <varname>$index</varname> in den aktuellen
                         DN ein. Diese Operation manipuliert die aktuelle Instanz.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>void setCaseFold(string|null $caseFold)</code></entry>
+
                     <entry>
                         Setzt die Option für die Schreibweise auf der aktuellen DN Instanz. Wenn
-                        <varname>$caseFold</varname> null ist dann wird die standardmäßige
-                        Einstellung der Schreibweise (standardmäßig ist
+                        <varname>$caseFold</varname> <constant>NULL</constant> ist dann wird die
+                        standardmäßige Einstellung der Schreibweise (standardmäßig ist
                         <constant>Zend_Ldap_Dn::ATTR_CASEFOLD_NONE</constant> oder über
                         <methodname>Zend_Ldap_Dn::setDefaultCaseFold()</methodname> gesetzt)
                         für die aktuelle Instanz gesetzt.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>string toString(string|null $caseFold)</code></entry>
                     <entry>Gibt den DN als String zurück.</entry>
                 </row>
+
                 <row>
                     <entry><code>array toArray(string|null $caseFold)</code></entry>
                     <entry>Gibt den DN als Array zurück.</entry>
                 </row>
+
                 <row>
                     <entry><code>string __toString()</code></entry>
                     <entry>

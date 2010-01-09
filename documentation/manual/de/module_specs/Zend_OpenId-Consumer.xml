@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19074 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer Grundlagen</title>
+
     <para>
         <classname>Zend_OpenId_Consumer</classname> kann verwendet werden um OpenID
         Authentifizierung auf Webseiten zu implementieren.
@@ -10,6 +11,7 @@
 
     <sect2 id="zend.openid.consumer.authentication">
         <title>OpenID Authentifikation</title>
+
         <para>
             Aus der Sicht eines Website Entwicklers, geschieht die Authentifikation von OpenID in
             drei Schritten:
@@ -103,8 +105,9 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
         <para>
             Bei Erfolg wird <methodname>Zend_OpenId_Consumer::login()</methodname> nicht
             zurückkommen, sondern eine <acronym>HTTP</acronym> Umleitung durchführt. Trotzdem wird
-            im Falle eine Fehler ein false zurückgeben wird. Fehler können durch eine ungültige
-            Identität, einen Provider der nicht antwortet, Kommunikations Fehler, usw. auftreten.
+            im Falle eine Fehler ein <constant>FALSE</constant> zurückgeben wird. Fehler können
+            durch eine ungültige Identität, einen Provider der nicht antwortet, Kommunikations
+            Fehler, usw. auftreten.
         </para>
 
         <para>
@@ -619,7 +622,7 @@ if (!$consumer->login($_POST['openid_identifier'],
             Wie man sieht akzeptiert der <classname>Zend_OpenId_Extension_Sreg</classname>
             Konstruktor ein Array von OpenId Feldern. Das Array hat den Namen der Felder als Indezes
             zu einem Flag das anzeigt ob das Feld benötigt wird oder nicht.
-            <emphasis>true</emphasis> bedeutet der Wert wird benötigt und <emphasis>false</emphasis>
+            <constant>TRUE</constant> bedeutet der Wert wird benötigt und <constant>FALSE</constant>
             bedeutet das Feld ist optional. Die Methode
             <classname>Zend_OpenId_Consumer::login</classname> akzeptiert eine Erweiterung oder ein
             Array von Erweiterungen als sein viertes Argument.
@@ -667,7 +670,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
             prüfen. Trotzdem, wenn das Objekt mit der gleichen Liste an benötigten Feldern wie im
             zweiten Schritt erstellt wird, wird es automatisch die Existenz der benötigten Daten
             prüfen. In diesem Fall wird <classname>Zend_OpenId_Consumer::verify</classname>
-            <emphasis>false</emphasis> zurückgeben wenn irgendeines der benötigten Felder fehlt.
+            <constant>FALSE</constant> zurückgeben wenn irgendeines der benötigten Felder fehlt.
         </para>
 
         <para>
@@ -688,6 +691,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 
     <sect2 id="zend.openid.consumer.auth">
         <title>Integration mit Zend_Auth</title>
+
         <para>
             Zend Framework bietet eine spezielle Klasse für die Unterstützung von Benutzer
             Authentifikation: <classname>Zend_Auth</classname>. Diese Klasse kann zusammen mit
@@ -706,6 +710,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 
         <example id="zend.openid.consumer.example-7">
             <title>Zend_Auth Adapter für OpenID</title>
+
             <programlisting language="php"><![CDATA[
 class OpenIdAdapter implements Zend_Auth_Adapter_Interface {
     private $_id = null;
@@ -781,6 +786,7 @@ if ((isset($_POST['openid_action']) &&
 
     <sect2 id="zend.openid.consumer.mvc">
         <title>Integration mit Zend_Controller</title>
+
         <para>
             Zuletzt ein paar Worte über die Integration in Model-View-Controller Anwendungen: Solche
             Zend Framework Anwendungen werden implementiert durch Verwenden der
@@ -803,6 +809,3 @@ if ((isset($_POST['openid_action']) &&
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

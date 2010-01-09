@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20057 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.cache.manager">
     <title>Der Cache Manager</title>
@@ -190,11 +190,11 @@ $databaseCache = $manager->getCache('database');
         welche "skeleton", "default", "page" und "tagcache" heißen. Der Standardcache ist ein
         einfacher Dateibasierter Cache welcher das Core Frontend verwendet und annimmt das ein
         cache_dir auf dem gleichen Level wie das konventionelle "public" Verzeichnis einer Zend
-        Framework Anwendung existiert und "cache" heißt. Der skeleton Cache ist aktuell ein NULL
-        Cache, er enthält also keine Optionen. Die verbleibenden zwei Caches werden verwendet um
-        einen standardmäßigen statischen Seitencache zu implementieren wobei statisches
-        HTML/XML oder sogar JSON in statische Dateien unter /public geschrieben sein können.
-        Die Kontrolle über einen statischen Seitencache wird über
+        Framework Anwendung existiert und "cache" heißt. Der Skeleton Cache ist aktuell ein
+        <constant>NULL</constant> Cache, er enthält also keine Optionen. Die verbleibenden zwei
+        Caches werden verwendet um einen standardmäßigen statischen Seitencache zu implementieren
+        wobei statisches HTML/XML oder sogar JSON in statische Dateien unter /public geschrieben
+        sein können. Die Kontrolle über einen statischen Seitencache wird über
         <classname>Zend_Controller_Action_Helper_Cache</classname> angeboten, und man kann
         die Einstellungen dieser "page" verändern und den "tagcache" den Sie verwendet um Tags
         zu verfolgen indem <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname>

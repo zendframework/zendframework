@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19173 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -936,7 +936,7 @@ $db->insert('bugs', $data);
                 übergeben. Daher folgen sie den selben Regeln denen eine <acronym>SQL</acronym>
                 <acronym>INSERT</acronym> Anweisung folgt: wenn die Spalte eine
                 <acronym>DEFAULT</acronym> Klausel hat, so bekommt die Spalte der neuen Zeile diesen
-                Wert. Andernfalls behält sie den Status <acronym>NULL</acronym>.
+                Wert. Andernfalls behält sie den Status <constant>NULL</constant>.
             </para>
 
             <para>
@@ -1639,9 +1639,11 @@ try {
                     <row>
                         <entry><constant>NULLABLE</constant></entry>
                         <entry>(boolean)</entry>
+
                         <entry>
-                            <constant>TRUE</constant> wenn die Spalte <acronym>SQL</acronym> NULL
-                            akzeptiert, <constant>FALSE</constant> wenn die Spalte eine NOT NULL
+                            <constant>TRUE</constant> wenn die Spalte <acronym>SQL</acronym>
+                            <constant>NULL</constant> akzeptiert, <constant>FALSE</constant> wenn
+                            die Spalte eine <constant>NOT</constant> <constant>NULL</constant>
                             Bedingung hat.
                         </entry>
                     </row>
@@ -1666,6 +1668,7 @@ try {
                     <row>
                         <entry><constant>PRECISION</constant></entry>
                         <entry>(integer)</entry>
+
                         <entry>
                             Präzision des Typs <acronym>SQL</acronym> NUMERIC oder
                             <constant>DECIMAL</constant>.
@@ -1675,6 +1678,7 @@ try {
                     <row>
                         <entry><constant>UNSIGNED</constant></entry>
                         <entry>(boolean)</entry>
+
                         <entry>
                             <constant>TRUE</constant> wenn ein Integer-basierender Typ als
                             <constant>UNSIGNED</constant> angegeben wird.
@@ -1684,6 +1688,7 @@ try {
                     <row>
                         <entry><constant>PRIMARY</constant></entry>
                         <entry>(boolean)</entry>
+
                         <entry>
                             <constant>TRUE</constant> wenn die Spalte Teil des Primärschlüsssels der
                             Tabelle ist.
@@ -1693,6 +1698,7 @@ try {
                     <row>
                         <entry><constant>PRIMARY_POSITION</constant></entry>
                         <entry>(integer)</entry>
+
                         <entry>
                             Ordinale Position (1-basierend) der Spalte des Primärschlüssels.
                         </entry>
@@ -1701,8 +1707,10 @@ try {
                     <row>
                         <entry><constant>IDENTITY</constant></entry>
                         <entry>(boolean)</entry>
+
                         <entry>
-                            <constant>TRUE</constant> wenn die Spalte einen auto-increment Wert nutzt.
+                            <constant>TRUE</constant> wenn die Spalte einen auto-increment Wert
+                            nutzt.
                         </entry>
                     </row>
                 </tbody>
@@ -1793,8 +1801,9 @@ $db->closeConnection();
 
             <para>
                 Ja, Persistenz wird durch das Hinzufügen des <property>persistent</property> Flags
-                in der Konfiguration (nicht driver_configuration) und dessen Setzen auf true bei
-                einem Adapter in <classname>Zend_Db</classname> unterstützt.
+                in der Konfiguration (nicht driver_configuration) und dessen Setzen auf
+                <constant>TRUE</constant> bei einem Adapter in <classname>Zend_Db</classname>
+                unterstützt.
             </para>
 
             <example id="zend.db.adapter.connecting.persistence.example">

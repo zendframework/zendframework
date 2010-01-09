@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.youtube">
     <title>Verwenden der YouTube Daten API</title>
@@ -20,6 +20,7 @@
 
     <sect2 id="zend.gdata.youtube.authentication">
         <title>Authentifizierung</title>
+
         <para>
             Die YouTube Daten <acronym>API</acronym> erlaubt aktuell einen nur-lesenden Zugriff auf
             öffentliche Daten, welcher keine Authentifizierung benötigt. Für alle schreibenden
@@ -457,7 +458,7 @@ echo "Heimatstadt: " . $userProfile->hometown->text . "\n";
                     </row>
                     <row>
                         <entry>Video private?</entry>
-                        <entry>false</entry>
+                        <entry><constant>FALSE</constant></entry>
                     </row>
                     <row>
                         <entry>Video location</entry>

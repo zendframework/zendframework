@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19418 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dijit">
     <title>Dijit-Spezifische View Helfer</title>
@@ -650,7 +650,7 @@ echo $view->editor('foo');
                         Deshalb kann es Zeiten geben in denen man ein Editor Widget benötigt das
                         korrekt zu einer <acronym>TEXTAREA</acronym> degradiert. In solchen
                         Situationen kann man dass durchführen indem die Eigenschaft
-                        <varname>degrade</varname> auf <constant>true</constant> gesetzt wird:
+                        <varname>degrade</varname> auf <constant>TRUE</constant> gesetzt wird:
                     </para>
 
                     <programlisting language="php"><![CDATA[

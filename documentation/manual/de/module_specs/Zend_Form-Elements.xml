@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19554 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.elements">
     <title>Erstellen von Form Elementen mit Hilfe von Zend_Form_Element</title>
@@ -83,12 +83,12 @@
 
             <listitem><para>
                 <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: Fügt eine
-                Präfix/Pfad Assoziation hinzu, Wenn <varname>$type</varname> null ist, wird versucht
-                den Pfad zu allen Loadern hinzuzufügen durch anhängen des Präfix von jedem
-                "_Validate", "_Filter", und "_Decorator"; und anhängen des Pfades an "Validate/",
-                "Filter/", und "Decorator/". Wenn alle extra Formular Elementklassen unter einer
-                üblichen Hirarchie stehen, ist das die bequemste Methode für das Setzen von
-                grundsätzlichen Präfixen.
+                Präfix/Pfad Assoziation hinzu, Wenn <varname>$type</varname>
+                <constant>FALSE</constant> ist, wird versucht den Pfad zu allen Loadern hinzuzufügen
+                durch anhängen des Präfix von jedem "_Validate", "_Filter", und "_Decorator"; und
+                anhängen des Pfades an "Validate/", "Filter/", und "Decorator/". Wenn alle extra
+                Formular Elementklassen unter einer üblichen Hirarchie stehen, ist das die bequemste
+                Methode für das Setzen von grundsätzlichen Präfixen.
             </para></listitem>
 
             <listitem><para>
@@ -680,7 +680,8 @@ $messages = $element->getMessages();
                     <methodname>getAllowEmpty()</methodname> erlauben es das Verhalten von
                     optionalen Elementen (z.B. Elementen in denen das 'required' Flag
                     <constant>FALSE</constant> ist) zu ändern. Wenn das 'allowEmpty' Flag
-                    <constant>TRUE</constant> ist, werden leere Werte nicht an die Prüfkette übergeben.
+                    <constant>TRUE</constant> ist, werden leere Werte nicht an die Prüfkette
+                    übergeben.
             </para></listitem>
 
             <listitem><para>
@@ -1525,6 +1526,3 @@ class My_Element_Text extends Zend_Form_Element
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->

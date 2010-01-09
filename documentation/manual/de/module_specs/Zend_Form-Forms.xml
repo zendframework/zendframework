@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19873 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.forms">
     <title>Erstellen von Form durch Verwendung von Zend_Form</title>
@@ -106,11 +106,12 @@ $form = new Zend_Form($config);
 
             <listitem><para>
                 <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: Fügt eine
-                Präfix/Pfad Assoziation zum durch $type spezifizierten Loader hinzu. Wenn $type null
-                ist, versucht es den Pfad allen Loadern hinzuzufügen, durch anhängen des Präfix an
-                jedes "_Element" und "_Decorator"; und anhängen des Pfades an "Element/" und
-                "Decorator/". Wenn man alle Extra Form Elementklassen in einer normalen Hierarchie
-                sind, ist das die übliche Methode für das Setzen eines Basispräfix für Sie.
+                Präfix/Pfad Assoziation zum durch $type spezifizierten Loader hinzu. Wenn $type
+                <constant>NULL</constant> ist, versucht es den Pfad allen Loadern hinzuzufügen,
+                durch anhängen des Präfix an jedes "_Element" und "_Decorator"; und anhängen des
+                Pfades an "Element/" und "Decorator/". Wenn man alle Extra Form Elementklassen in
+                einer normalen Hierarchie sind, ist das die übliche Methode für das Setzen eines
+                Basispräfix für Sie.
             </para></listitem>
 
             <listitem><para>
@@ -356,10 +357,10 @@ $form->setElementDecorators(array(
                     sein; standardmäßig setzt so ein Array den spezifizierten Dekrator nur auf diese
                     Elemente. Man kann auch einen dritten Parameter angeben, ein Flag das anzeigt ob
                     diese Liste von Elementen einbezogen oder ausgegrenzt werden sollen. Wenn das
-                    Flag false ist, werden alle Elemente dekoriert <emphasis>ausser</emphasis> denen
-                    die in der Liste übergeben wurden. Die normale Verwendung der Methode besteht
-                    darin, das alle übergebenen Dekoratore alle vorher gesetzten Dekoratore in jedem
-                    Element überschreiben.
+                    Flag <constant>FALSE</constant> ist, werden alle Elemente dekoriert
+                    <emphasis>ausser</emphasis> denen die in der Liste übergeben wurden. Die normale
+                    Verwendung der Methode besteht darin, das alle übergebenen Dekoratore alle
+                    vorher gesetzten Dekoratore in jedem Element überschreiben.
                 </para>
 
                 <para>
@@ -1386,9 +1387,9 @@ $json = $form->processAjax($data);
 
         <para>
             Man kann dann einfach die <acronym>JSON</acronym> Antwort an den Client senden. Wenn die
-            Form gültig ist, wird das eine boolsche true Antwort sein. Wenn nicht, wird es ein
-            Javascript Objekt sein das Schlüssel/Nachricht Paare enthält, wobei jede Nachricht
-            'message' ein Array von Prüf-Fehlermeldungen enthält.
+            Form gültig ist, wird das eine boolsche <constant>TRUE</constant> Antwort sein. Wenn
+            nicht, wird es ein Javascript Objekt sein das Schlüssel/Nachricht Paare enthält, wobei
+            jede Nachricht 'message' ein Array von Prüf-Fehlermeldungen enthält.
         </para>
 
         <para>

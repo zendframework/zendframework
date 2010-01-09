@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17598 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data Envelopes</title>
@@ -358,8 +358,8 @@ $json = (string) $data; // Casten zu einem String == casten zu JSON
                     <para>
                         <methodname>getItem($id)</methodname>: Gibt ein Element mit dem angegebenen
                         Identifikator von der Kollektion zurück; das zurückgegebene Element ist ein
-                        assoziatives Array. Wenn kein Element passt, wird ein null Wert
-                        zurückgegeben.
+                        assoziatives Array. Wenn kein Element passt, wird ein
+                        <constant>NULL</constant> Wert zurückgegeben.
                     </para>
                 </listitem>
 

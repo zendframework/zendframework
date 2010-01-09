@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19452 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - Fortgeschrittende Nutzung</title>
@@ -21,9 +21,10 @@
             Zend_Http_Client genau dasselbe - beim Umleiten einer 301 oder 302 Antwort, werden alle
             GET und POST Parameter zurückgesetzt und eine GET Anfrage wird an die neue Stelle
             versandt. Dieses Verhalten kann durch Setzen des 'strictredirects'
-            Konfigurationsparameters auf das boolesche TRUE geändert werden.
+            Konfigurationsparameters auf das boolesche <constant>TRUE</constant> geändert werden.
             <example id="zend.http.client.redirections.example-1">
                 <title>Strikte Umleitung von 301 und 302 Antworten nach RFC 2616 erzwingen</title>
+
                 <programlisting language="php"><![CDATA[
 // Strikte Umleitungen
 $client->setConfig(array('strictredirects' => true);
@@ -146,23 +147,25 @@ $client->setHeaders(array(
 
     <sect2 id="zend.http.client.file_uploads">
         <title>Dateiuploads</title>
+
         <para>
             Man kann Dateien über HTTP hochladen, indem man die setFileUpload Methode verwendet.
             Diese Methode nimmt einen Dateinamen als ersten Parameter, einen Formularnamen als
             zweiten Parameter und Daten als einen dritten, optionalen Parameter entgegen. Wenn der
-            dritte Parameter null ist, wird angenommen, dass der erste Dateinamen Parameter auf
-            eine echte Datei auf der Platte verweist, und Zend_Http_Client wird versuchen die Datei
-            zu lesen und hochzuladen. Wenn der Daten Parameter nicht null ist, wird der erste
-            Dateinamen Parameter als der Dateiname versendet, aber die Datei muss nicht wirklich auf
-            der Platte existieren. Der zweite Formularnamen Parameter wird immer benötigt und ist
-            gleichbedeutend mit dem "name" Attribut eines &gt;input&lt; Tags, wenn die Datei durch
-            ein HTML Formular hochgeladen worden ist. Ein vierter optionaler Parameter gibt den
-            Content-type der Datei an. Wenn er nicht angegeben wird, liest Zend_Http_Client die
-            Datei von der Platte und verwendet die mime_content_type Funktion, um den Content-type
-            der Datei zu erraten, wenn er verfügbar ist. Auf jeden Fall ist der Standard MIME Typ
-            'application/octet-stream'.
+            dritte Parameter <constant>NULL</constant> ist, wird angenommen, dass der erste
+            Dateinamen Parameter auf eine echte Datei auf der Platte verweist, und Zend_Http_Client
+            wird versuchen die Datei zu lesen und hochzuladen. Wenn der Daten Parameter nicht
+            <constant>NULL</constant> ist, wird der erste Dateinamen Parameter als der Dateiname
+            versendet, aber die Datei muss nicht wirklich auf der Platte existieren. Der zweite
+            Formularnamen Parameter wird immer benötigt und ist gleichbedeutend mit dem "name"
+            Attribut eines &gt;input&lt; Tags, wenn die Datei durch ein HTML Formular hochgeladen
+            worden ist. Ein vierter optionaler Parameter gibt den Content-type der Datei an. Wenn er
+            nicht angegeben wird, liest Zend_Http_Client die Datei von der Platte und verwendet die
+            mime_content_type Funktion, um den Content-type der Datei zu erraten, wenn er verfügbar
+            ist. Auf jeden Fall ist der Standard MIME Typ 'application/octet-stream'.
             <example id="zend.http.client.file_uploads.example-1">
                 <title>Verwendung von setFileUpload um Dateien hochzuladen</title>
+
                 <programlisting language="php"><![CDATA[
 // Hochladen beliebiger Daten als Datei
 $text = 'this is some plain text';
@@ -385,10 +388,10 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
         <para>
             Um Daten vom Server als Stream zu Empfangen kann <methodname>setStream()</methodname>
             verwendet werden. Das optionale Argument spezifiziert den Dateinamen unter dem die Daten
-            gespeichert werden. Wenn das Argument einfach nur TRUE ist (Standard), wird eine
-            temporäre Datei verwenden und gelöscht sobald das Antwort Objekt zerstört wird.
-            Wenn das Argument auf FALSE gesetzt wird, ist die Streaming-Funktionalität
-            ausgeschaltet.
+            gespeichert werden. Wenn das Argument einfach nur <constant>TRUE</constant> ist
+            (Standard), wird eine temporäre Datei verwenden und gelöscht sobald das Antwort Objekt
+            zerstört wird. Wenn das Argument auf <constant>FALSE</constant> gesetzt wird, ist die
+            Streaming-Funktionalität ausgeschaltet.
         </para>
 
         <para>

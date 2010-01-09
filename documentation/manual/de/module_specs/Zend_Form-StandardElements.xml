@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17663 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Standard Form Elemente die mit dem With Zend Framework ausgeliefert werden</title>
@@ -516,7 +516,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             Zugriffsmethode <methodname>setImageValue()</methodname> verwendet wird (oder der
             'imageValue Konfigurations Schlüssel). Wenn der Wert der für das Element gesetzt ist,
             mit <code>imageValue</code> übereinstimmt, gibt <methodname>isChecked()</methodname>
-            true zurück.
+            <constant>TRUE</constant> zurück.
         </para>
 
         <para>
@@ -550,8 +550,8 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
             Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
             werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
-            aufgerufen, oder indem ein false Wert an den <code>registerInArrayValidator</code>
-            Konfigurationsschlüssel übergeben wird.
+            aufgerufen, oder indem ein <constant>FALSE</constant> Wert an den
+            <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben wird.
         </para>
 
         <para>
@@ -651,8 +651,8 @@ $element->setValue(array('bar', 'bat'));
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
             Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
             werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
-            aufgerufen, oder indem ein false Wert an den <code>registerInArrayValidator</code>
-            Konfigurationsschlüssel übergeben wird.
+            aufgerufen, oder indem ein <constant>FALSE</constant> Wert an den
+            <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben wird.
         </para>
     </sect2>
 
@@ -688,8 +688,8 @@ $element->setValue(array('bar', 'bat'));
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
             Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
             werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
-            aufgerufen, oder indem ein false Wert an den <code>registerInArrayValidator</code>
-            Konfigurationsschlüssel übergeben wird.
+            aufgerufen, oder indem ein <constant>FALSE</constant> Wert an den
+            <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben wird.
         </para>
 
         <para>
@@ -756,8 +756,8 @@ $element->setValue(array('bar', 'bat'));
             Standardmäßig registriert dieses Element die <code>InArray</code> Prüfung welche gegen
             Arrayschlüssel von registrierten Optionen prüft. Dieses Verhalten kann deaktiviert
             werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
-            aufgerufen, oder indem ein false Wert an den <code>registerInArrayValidator</code>
-            Konfigurationsschlüssel übergeben wird.
+            aufgerufen, oder indem ein <constant>FALSE</constant> Wert an den
+            <code>registerInArrayValidator</code> Konfigurationsschlüssel übergeben wird.
         </para>
 
         <para>
@@ -845,6 +845,3 @@ $element->setValue(array('bar', 'bat'));
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->

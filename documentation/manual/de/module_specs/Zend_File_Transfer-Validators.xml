@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17685 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.validators">
-
     <title>Prüfungen für Zend_File_Transfer</title>
 
     <para>
@@ -306,7 +305,6 @@ $upload->addValidator('Size', false, 20000)
        ->addValidator('Count', false, 2)
        ->addValidator('Filessize', false, 25000);
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -344,7 +342,6 @@ if ($upload->isValid()) {
     print "Prüfung fehlgeschlagen";
 }
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -359,10 +356,9 @@ if ($upload->isValid()) {
             gefundenen Probleme zu erhalten. Um diese Information zu erhalten können die Methoden
             <methodname>getMessages()</methodname>, welche alle Prüfmeldungen als Array zurückgibt,
             <methodname>getErrors()</methodname> welche alle Fehlercodes zurückgibt, und
-            <methodname>hasErrors()</methodname> welche true zurückgibt sobald ein Prüffehler
-            gefunden wurde, verwendet werden.
+            <methodname>hasErrors()</methodname> welche <constant>TRUE</constant> zurückgibt sobald
+            ein Prüffehler gefunden wurde, verwendet werden.
         </para>
-
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.count">
@@ -426,7 +422,6 @@ $upload->addValidator('Count', false, 2);
 // Die Anzahl der Dateien auf maximal 5 und mindestens 1 Datei limitieren
 $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -513,7 +508,8 @@ $upload->addValidator('Crc32', false, array('3b3652f', 'e612b69'));
         <para>
             In einigen Fällen ist es nützlich auch auf Klein/Großschreibung zu testen. Deshalb
             erlaubt der Constructor einen zweiten Parameter <varname>$case</varname> der, wenn er
-            auf true gesetzt wird, die Erweiterungen abhängig von der Klein/Großschreibung prüft.
+            auf <constant>TRUE</constant> gesetzt wird, die Erweiterungen abhängig von der Klein-
+            oder Großschreibung prüft.
         </para>
 
         <example id="zend.file.transfer.validators.excludeextension.example">
@@ -661,8 +657,8 @@ $upload->addValidator('Exists',
                       false,
                       array('\home\images', '\home\uploads'));
 ]]></programlisting>
-
         </example>
+
         <note>
             <para>
                 Beachte das diese Prüfung checkt ob die spezifizierte Datei in allen angegebenen
@@ -706,8 +702,9 @@ $upload->addValidator('Exists',
 
         <para>
             In einigen Fällen ist es nützlich auch auf Klein/Großschreibung zu testen. Hierfür nimmt
-            der Constructor einen zweiten Parameter <varname>$case</varname> der, wenn er auf true
-            gesetzt wird, die Erweiterungen abhängig von der Klein/Großschreibung prüft.
+            der Constructor einen zweiten Parameter <varname>$case</varname> der, wenn er auf
+            <constant>TRUE</constant> gesetzt wird, die Erweiterungen abhängig von der Klein-
+            oder Großschreibung prüft.
         </para>
 
         <example id="zend.file.transfer.validators.extension.example">
@@ -729,7 +726,6 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
     print 'Nicht gültig da MO und mo Kleinschreibungsmäßig nicht passen';
 }
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -775,8 +771,8 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
 
                 <para>
                     Diese Option definiert ob der Benutzer '10864' oder '10MB' sieht. Der
-                    Standardwert ist true weshalb '10MB' zurückgegeben wird wenn nicht anders
-                    angegeben.
+                    Standardwert ist <constant>TRUE</constant> weshalb '10MB' zurückgegeben wird
+                    wenn nicht anders angegeben.
                 </para>
             </listitem>
         </itemizedlist>
@@ -822,7 +818,6 @@ $upload->addValidator('FilesSize',
                             'max' => '4MB',
                             'bytestring' => false));
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -1253,6 +1248,7 @@ $upload->addValidator('NotExists',
 ]]></programlisting>
 
         </example>
+
         <note>
             <para>
                 Beachte das diese Prüfung checkt ob die Datei in allen angegebenen Verzeichnissen
@@ -1331,7 +1327,7 @@ $upload->addValidator('Sha1',
 
                 <para>
                     Mit dieser Option kann definiert werden ob der Benutzer '10864' oder '10MB'
-                    erhält. Der Standardwert ist true was '10MB' zurückgibt.
+                    erhält. Der Standardwert ist <constant>TRUE</constant> was '10MB' zurückgibt.
                 </para>
             </listitem>
         </itemizedlist>
@@ -1419,10 +1415,6 @@ $upload->addValidator('WordCount', false, 2000);
 // und mindestens 1000 Wörter
 $upload->addValidator('WordCount', false, array('min' => 1000, 'max' => 5000));
 ]]></programlisting>
-
         </example>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19150 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node">
     <title>Zend_Ldap_Node</title>
@@ -119,23 +119,30 @@
                         <methodname>Zend_Ldap_Node::update()</methodname> is called.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>Zend_Ldap_Node delete()</code></entry>
+
                     <entry>
                         Markiert den Node als gelöscht. Nodes werden beim Aufruf von
                         <methodname>Zend_Ldap_Node::update()</methodname> gelöscht, wenn
-                        <methodname>Zend_Ldap_Node::willBeDeleted()</methodname> true ist.
+                        <methodname>Zend_Ldap_Node::willBeDeleted()</methodname>
+                        <constant>TRUE</constant> ist.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>boolean willBeMoved()</code></entry>
+
                     <entry>
                         Sagt ob dieser Node verschoben wird sobald
                         <methodname>Zend_Ldap_Node::update()</methodname> aufgerufen wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>Zend_Ldap_Node update(Zend_Ldap $ldap)</code></entry>
+
                     <entry>
                         Sendet alle wartenden Änderungen an den <acronym>LDAP</acronym> Server. Wenn
                         <varname>$ldap</varname> unterdrückt wird, dann wird die aktuelle
@@ -302,27 +309,32 @@
                         internen Format (keine Konvertierung).
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>boolean existsAttribute(string $name, boolean
                         $emptyExists)</code>
                     </entry>
+
                     <entry>
                         Prüft ob ein angegebenes Attribut existiert. Wenn
                         <varname>$emptyExists</varname> <constant>FALSE</constant> ist werden leere
                         Attrbute (welche nur array() enthalten) als nicht-existent betrachtet und es
                         wird <constant>FALSE</constant> zurückgegeben. Wenn
-                        <varname>$emptyExists</varname> true ist werden leere Attribute als existent
-                        betrachtet und es wird <constant>TRUE</constant> zurückgegeben. In diesem
-                        Fall gibt die Methode nur dann <constant>FALSE</constant> zurck wenn der
-                        Name des Attributs in der Sammlung der Schlüssel fehlt.
+                        <varname>$emptyExists</varname> <constant>TRUE</constant> ist werden leere
+                        Attribute als existent betrachtet und es wird <constant>TRUE</constant>
+                        zurückgegeben. In diesem Fall gibt die Methode nur dann
+                        <constant>FALSE</constant> zurck wenn der Name des Attributs in der Sammlung
+                        der Schlüssel fehlt.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>boolean attributeHasValue(string $name, mixed|array
                         $value)</code>
                     </entry>
+
                     <entry>
                         Prüft ob die angegebenen Werte im Attribut existieren. Die Methode gibt nur
                         dann <constant>TRUE</constant> zurück wenn alle Werte von
@@ -330,8 +342,10 @@
                         strikt durchgeführt (er respektiert den Datentyp).
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>integer count()</code></entry>
+
                     <entry>
                         Gibt die Anzahl der Attribute im Node zurück. Implementiert Countable.
                     </entry>

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19419 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
 
     <sect2 id="zend.http.client.adapters.overview">
         <title>Verbindungsadapter</title>
+
         <para>
             <classname>Zend_Http_Client</classname> basiert auf einem Design mit
             Verbindungsadaptern. Der Verbindungsadapter ist das Objekt, welches für die Ausführung
@@ -15,6 +16,7 @@
             selben Interface auf seine eigenen Bedürfnisse anzupassen, ohne dass man die gesamte
             <acronym>HTTP</acronym> Client Klasse erweitern oder ersetzen muss.
         </para>
+
         <para>
             Derzeit stellt die <classname>Zend_Http_Client</classname> Klasse vier eingebaute
             Verbindungsadapter bereit:
@@ -60,12 +62,14 @@
             native <acronym>PHP</acronym> Funktion fsockopen(), um die Verbindung aufzubauen, dafür
             werden keine besonderen Extensions oder Einstellungen benötigt.
         </para>
+
         <para>
             Der Socket Adapter erlaubt verschiedene zusätzliche Konfigurations Optionen die gesetzt
             werden können durch Verwendung von <classname>Zend_Http_Client->setConfig()</classname>
             oder deren Übergabe an den Konstruktor des Clients.
             <table id="zend.http.client.adapter.socket.configuration.table">
                 <title>Zend_Http_Client_Adapter_Socket Konfigurations Parameter</title>
+
                 <tgroup cols="4">
                     <thead>
                         <row>
@@ -75,38 +79,48 @@
                             <entry>Standardwert</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry>persistent</entry>
+
                             <entry>
                                 Ob eine persistente <acronym>TCP</acronym> Verbindung verwendet
                                 werden soll oder nicht
                             </entry>
+
                             <entry>boolean</entry>
-                            <entry>false</entry>
+                            <entry><constant>FALSE</constant></entry>
                         </row>
+
                         <row>
                             <entry>ssltransport</entry>
                             <entry>Der Transport Layer für SSL (z.B. 'sslv2', 'tls')</entry>
                             <entry>string</entry>
                             <entry>ssl</entry>
                         </row>
+
                         <row>
                             <entry>sslcert</entry>
+
                             <entry>
                                 Pfad zu einem <acronym>PEM</acronym> verschlüsselten
                                 <acronym>SSL</acronym> Zertifikat
                             </entry>
+
                             <entry>string</entry>
-                            <entry>null</entry>
+                            <entry><constant>NULL</constant></entry>
                         </row>
+
                         <row>
                             <entry>sslpassphrase</entry>
+
                             <entry>
                                 Die PassPhrase für die <acronym>SSL</acronym> zertifizierte Datei
                             </entry>
+
                             <entry>string</entry>
-                            <entry>null</entry>
+                            <entry><constant>NULL</constant></entry>
                         </row>
                     </tbody>
                 </tgroup>
@@ -114,12 +128,14 @@
 
             <note>
                 <title>Persistente TCP Verbindungen</title>
+
                 <para>
                     Die Verwendung persistenter <acronym>TCP</acronym> Verbindungen kann
                     <acronym>HTTP</acronym> Anfragen potentiell schneller machen - aber in den
                     meisten Fällen, wird es nur einen kleinen positiven Effekt haben und könnte den
                     <acronym>HTTP</acronym> Server überladen zu dem man sich verbindet.
                 </para>
+
                 <para>
                     Es wird empfohlen persistente <acronym>TCP</acronym> Verbindungen nur dann zu
                     verwenden wenn man sich zu dem gleichen Server sehr oft verbindet, und man
@@ -128,6 +144,7 @@
                     Verbindungen auf beiden, der Geschwindigkeit des Clients und dem Serverload
                     gemessen wird bevor diese Option verwendet wird.
                 </para>
+
                 <para>
                     Zusätzlich, wenn persistente Verbindungen verwendet werden, sollte man
                     Keep-Alive <acronym>HTTP</acronym> Anfragen aktivieren wie in <xref
@@ -138,10 +155,12 @@
 
             <note>
                 <title>HTTPS SSL Stream Parameter</title>
+
                 <para>
                     <code>ssltransport, sslcert</code> und <code>sslpassphrase</code> sind nur
                     relevant wenn <acronym>HTTPS</acronym> für die Verbindung verwendet wird.
                 </para>
+
                 <para>
                     Wärend die Standard <acronym>SSL</acronym> Einstellungen für die meisten
                     Anwendungen funktionieren, kann es notwendig sein diese zu Ändern wenn der
@@ -153,8 +172,10 @@
                 </para>
             </note>
         </para>
+
         <example id="zend.http.client.adapters.socket.example-1">
             <title>Den Stream-Typen für eine HTTPS Verbindung einstellen</title>
+
             <programlisting language="php"><![CDATA[
 // Konfigurationsparameter setzen
 $config = array(
@@ -169,15 +190,18 @@ $client = new Zend_Http_Client('https://www.example.com', $config);
 $response = $client->request();
 ]]></programlisting>
         </example>
+
         <para>
             Ein ähnliches Ergebnis erzielt man mit folgendem Code:
         </para>
+
         <para>
             <methodname>fsockopen('tls://www.example.com', 443)</methodname>
         </para>
 
         <sect3 id="zend.http.client.adapters.socket.streamcontext">
             <title>Anpassen und Zugreifen auf den Socket Adapter Stream Kontext</title>
+
             <para>
                 Beginnend mit Zend Framework 1.9 bietet
                 <classname>Zend_Http_Client_Adapter_Socket</classname> direkten Zugriff auf den

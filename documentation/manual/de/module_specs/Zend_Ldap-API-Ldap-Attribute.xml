@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-attribute">
     <title>Zend_Ldap_Attribute</title>
@@ -25,8 +25,13 @@
 
         <varlistentry>
             <term><code>boolean</code></term>
-            <listitem><para><constant>TRUE</constant> wird zu <code>'TRUE'</code> konvertiert und
-            <constant>FALSE</constant> zu <code>'FALSE'</code></para></listitem>
+            <listitem>
+                <para>
+                    <constant>TRUE</constant> wird zu
+                    <emphasis>'<constant>TRUE</constant>'</emphasis> konvertiert und
+                    <constant>FALSE</constant> zu <emphasis>'<constant>FALSE</constant>'</emphasis>
+                </para>
+            </listitem>
         </varlistentry>
 
         <varlistentry>
@@ -60,12 +65,12 @@
 
     <variablelist>
         <varlistentry>
-            <term><code>'TRUE'</code></term>
+            <term><emphasis>'<constant>TRUE</constant>'</emphasis></term>
             <listitem><para>Wird zu <constant>TRUE</constant> konvertiert.</para></listitem>
         </varlistentry>
 
         <varlistentry>
-            <term><code>'FALSE'</code></term>
+            <term><emphasis>'<constant>FALSE</constant>'</emphasis></term>
             <listitem><para>Wird zu <constant>FALSE</constant> konvertiert.</para></listitem>
         </varlistentry>
 

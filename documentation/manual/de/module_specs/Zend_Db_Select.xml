@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19726 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
     <title>Zend_Db_Select</title>
@@ -593,8 +593,8 @@ $select = $db->select()
                     <para>
                         Alle Zeilen der links vom Operanden stehenden Tabelle sind enthalten,
                         passende Zeilen der rechts stehenden Tabelle sind ebenfalls enthalten. Die
-                        Spalten der rechts stehenden Tabelle werden mit NULL aufgefüllt, wenn keine
-                        zu der linken Tabelle passenden Zeilen existieren.
+                        Spalten der rechts stehenden Tabelle werden mit <constant>NULL</constant>
+                        aufgefüllt, wenn keine zu der linken Tabelle passenden Zeilen existieren.
                     </para>
 
                     <para>
@@ -612,8 +612,8 @@ $select = $db->select()
                         Right Outer Join ist das Gegenstück zu Left Outer Join. Alle Zeilen der
                         rechts vom Operanden stehenden Tabelle sind enthalten, passende Zeilen der
                         links stehenden Tabelle sind ebenfalls enthalten. Die Spalten der links
-                        stehenden Tabelle werden mit NULL aufgefüllt, wenn keine zu der rechten
-                        Tabelle passenden Zeilen existieren.
+                        stehenden Tabelle werden mit <constant>NULL</constant> aufgefüllt, wenn
+                        keine zu der rechten Tabelle passenden Zeilen existieren.
                     </para>
 
                     <para>
@@ -633,8 +633,8 @@ $select = $db->select()
                         Ein Full Outer Join ist wie eine Kombination eines Left Outer Join mit
                         einem Right Outer Join. Alle Zeilen beider Tabellen sind enthalten, gepaart
                         miteinander in der gleichen Zeile des Ergebnissatzes wenn die Join
-                        Bedingung erfüllt wird, oder wenn nicht, mit NULL an Stelle der Spalten der
-                        anderen Tabelle.
+                        Bedingung erfüllt wird, oder wenn nicht, mit <constant>NULL</constant>'s an
+                        Stelle der Spalten der anderen Tabelle.
                     </para>
 
                     <para>

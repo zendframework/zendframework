@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19555 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.zendmonitor">
     <title>Auf den Zend Server Montior schreiben</title>
@@ -25,7 +25,7 @@
         <para>
             Um diesen Log Writer zu verwenden muss Zend Monitor sowohl installiert als auch
             aktiviert sein. Trotzdem ist er so designt dass, wenn Zend Monitor nicht gefunden wurde,
-            er einfach als Null Logger agiert.
+            er einfach als <constant>NULL</constant> Logger agiert.
         </para>
     </note>
 
@@ -118,7 +118,7 @@ $log->info('Exception gefunden', array(
 
         <para>
             Wie vorher erwähnt fungiert der Logger, wenn die Monitor API in der eigenen PHP
-            Anwendung nicht erkannt wurde, als Null Logger.
+            Anwendung nicht erkannt wurde, als <constant>NULL</constant> Logger.
         </para>
     </note>
 </sect2>

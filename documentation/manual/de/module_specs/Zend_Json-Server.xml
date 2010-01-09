@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19477 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPC Server</title>
@@ -297,8 +297,8 @@ $server->handle();
                 <listitem>
                     <para>
                         <methodname>setAutoEmitResponse($flag)</methodname>: Zeigt ob der Server die
-                        Antworten und alle Header automatisch ausgeben sollte; standardmäßig ist das
-                        aktiviert.
+                        Antworten und alle Header automatisch ausgeben sollte; standardmäßig ist sie
+                        <constant>TRUE</constant>.
                     </para>
                 </listitem>
                 <listitem>
@@ -751,15 +751,15 @@ $server->handle();
                     <para>
                         <methodname>setDojoCompatible($flag)</methodname>: Setzt ein Flag das
                         indiziert ob das SMD mit dem Dojo Toolkit kompatibel ist oder nicht. Wenn es
-                        true ist, dann ist das erzeugte <acronym>JSON</acronym> SMD so formatiert
-                        das es dem Format entspricht das Dojo's JSON-RPC Client
+                        <constant>TRUE</constant> ist, dann ist das erzeugte <acronym>JSON</acronym>
+                        SMD so formatiert das es dem Format entspricht das Dojo's JSON-RPC Client
                         erwartet.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
                         <methodname>isDojoCompatible()</methodname>: Gibt den Wert des
-                        Dojokompatibilitätsflags zurück (Standardmäßig false).
+                        Dojokompatibilitätsflags zurück (Standardmäßig <constant>FALSE</constant>).
                     </para>
                 </listitem>
                 <listitem>

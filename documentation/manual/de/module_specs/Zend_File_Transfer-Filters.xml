@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.filters">
-
     <title>Filter für Zend_File_Transfer</title>
 
     <para>
@@ -23,23 +22,27 @@
                 <code>Decrypt</code>: Dieser Filter kann verschlüsselte Dateien entschlüsseln.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>Encrypt</code>: Dieser Filter kann Dateien verschlüsseln.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>LowerCase</code>: Dieser Filter kann den Inhalt einer Textdatei auf
                 Kleinschreibung ändern.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>Rename</code>: Dieser Filter kann Dateien umbenennen, den Ort ändern und sogar
                 das Überschreiben von existierenden Dateien erzwingen.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>UpperCase</code>: Dieser Filter kann den Inhalt einer Textdatei auf
@@ -178,7 +181,6 @@ $upload = new Zend_File_Transfer();
 $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
        ->addFilter('Rename', 'C:\picture\newgif', 'file2');
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -225,7 +227,6 @@ $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addFilter('Decrypt',
     array('adapter' => 'mcrypt', 'key' => 'mykey'));
 ]]></programlisting>
-
         </example>
 
         <example id="zend.file.transfer.filters.decrypt.example2">
@@ -241,7 +242,6 @@ $upload->addFilter('Decrypt',
           'private' => '/path/to/privatekey.pem',
           'envelope' => '/path/to/envelopekey.pem'));
 ]]></programlisting>
-
         </example>
     </sect2>
 
@@ -278,7 +278,6 @@ $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addFilter('Encrypt',
     array('adapter' => 'mcrypt', 'key' => 'mykey'));
 ]]></programlisting>
-
         </example>
 
         <example id="zend.file.transfer.filters.encrypt.example2">
@@ -293,7 +292,6 @@ $upload->addFilter('Encrypt',
     array('adapter' => 'openssl',
           'public' => '/path/to/publickey.pem'));
 ]]></programlisting>
-
         </example>
     </sect2>
 
@@ -330,14 +328,13 @@ $upload->addFilter('LowerCase', null, 'uploadfile1');
 // auf ISO-8859-1 gesetzt wird
 $upload->addFilter('LowerCase', 'ISO-8859-1');
 ]]></programlisting>
-
         </example>
 
         <note>
             <para>
                 Da die Optionen für den LowerCase Filter optional sind muß man darauf achten das man
-                als zweiten Parameter eine null (die Optionen) geben muß wenn man Ihn auf ein
-                einzelnes Dateielement einschränken will.
+                als zweiten Parameter eine <constant>NULL</constant> (die Optionen) geben muß wenn
+                man Ihn auf ein einzelnes Dateielement einschränken will.
             </para>
         </note>
 
@@ -369,7 +366,8 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
             <listitem>
                 <para>
                     <code>overwrite</code>: Definiert ob die alte Datei von der neuen überschrieben
-                    wird wenn diese bereits existiert. Der Standardwert ist false.
+                    wird wenn diese bereits existiert. Der Standardwert ist
+                    <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -395,7 +393,6 @@ $upload->addFilter('Rename', 'C:\mypics\new');
 // Setzt einen neuen Zielpfad nur für uploadfile1
 $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -406,7 +403,6 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
         </para>
 
         <table id="zend.file.transfer.filters.rename.notations">
-
             <title>Verschiedene Schreibweisen des Rename Filters und deren Bedeutung</title>
 
             <tgroup cols="2" align="left">
@@ -415,16 +411,19 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                         <entry>
                             Schreibweise
                         </entry>
+
                         <entry>
                             Beschreibung
                         </entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>
                             <methodname>addFile('C:\uploads')</methodname>
                         </entry>
+
                         <entry>
                             Spezifiziert einen neuen Pfad für alle Dateien wenn der angegebene
                             String ein Verzeichnis ist. Es ist zu beachten das man eine Exception
@@ -432,10 +431,12 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                             Parameter.
                         </entry>
                     </row>
+
                     <row>
                         <entry>
                             <methodname>addFile('C:\uploads\file.ext')</methodname>
                         </entry>
+
                         <entry>
                             Spezifiziert einen neuen Pfad und Dateinamen für alle Dateien wenn der
                             angegebene String nicht als Verzeichnis erkannt wird. Es ist zu beachten
@@ -443,11 +444,13 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                             existiert, siehe den overwriting Parameter.
                         </entry>
                     </row>
+
                     <row>
                         <entry>
                             <methodname>addFile(array('C:\uploads\file.ext',
                                 'overwrite' => true))</methodname>
                         </entry>
+
                         <entry>
                             Spezifiziert einen neuen Pfad und Dateinamen für alle Dateien wenn der
                             angegebene String nicht als Verzeichnis erkannt wird, und überschreibt
@@ -456,11 +459,13 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                             wurde.
                         </entry>
                     </row>
+
                     <row>
                         <entry>
                             <methodname>addFile(array('source' => 'C:\temp\uploads', 'target' =>
                                 'C:\uploads'))</methodname>
                         </entry>
+
                         <entry>
                             Spezifiziert einen neuen Pfad für alle Dateien im alten Pfad wenn die
                             angegebenen Strings als Verzeichnis erkannt werden. Es ist zu beachten
@@ -468,11 +473,13 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                             overwriting Parameter.
                         </entry>
                     </row>
+
                     <row>
                         <entry>
                             <methodname>addFile(array('source' => 'C:\temp\uploads', 'target' =>
                                 'C:\uploads', 'overwrite' => true))</methodname>
                         </entry>
+
                         <entry>
                             Spezifiziert einen neuen Pfad für alle Dateien im alten Pfad wenn die
                             angegebenen Strings als Verzeichnis erkant werden und überschreibt alle
@@ -482,9 +489,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
                 </tbody>
             </tgroup>
-
         </table>
-
     </sect2>
 
     <sect2 id="zend.file.transfer.filters.uppercase">
@@ -520,20 +525,14 @@ $upload->addFilter('UpperCase', null, 'uploadfile1');
 // auf ISO-8859-1 gesetzt wird
 $upload->addFilter('UpperCase', 'ISO-8859-1');
 ]]></programlisting>
-
         </example>
 
         <note>
             <para>
                 Da die Optionen für den UpperCase Filter optional sind muß man darauf achten das man
-                als zweiten Parameter eine null (die Optionen) geben muß wenn man Ihn auf ein
-                einzelnes Dateielement einschränken will.
+                als zweiten Parameter eine <constant>NULL</constant> (die Optionen) geben muß wenn
+                man Ihn auf ein einzelnes Dateielement einschränken will.
             </para>
         </note>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->

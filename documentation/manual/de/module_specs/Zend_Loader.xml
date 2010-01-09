@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
-
     <title>Dynamisches Laden von Dateien und Klassen</title>
 
     <para>
@@ -12,6 +11,7 @@
 
     <tip>
         <title>Zend_Loader vs. require_once()</title>
+
         <para>
             Die <classname>Zend_Loader</classname> Methoden werden am Besten verwendet wenn der
             Dateiname der Verwendet wird variabel ist. Wenn er zum Beispiel auf einem Parameter
@@ -24,7 +24,6 @@
     </tip>
 
     <sect2 id="zend.loader.load.file">
-
         <title>Dateien laden</title>
 
         <para>
@@ -32,12 +31,13 @@
             <acronym>PHP</acronym> Datei. Die geladene Datei kann jeden <acronym>PHP</acronym> Code
             enthalten. Diese Methode ist ein Wrapper für die <acronym>PHP</acronym> Funktion
             <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>.
-            Diese Methode gibt bei einem Fehler ein boosches false zurück,
+            Diese Methode gibt bei einem Fehler ein boosches <constant>FALSE</constant> zurück,
             zum Beispiel wenn die definierte Datei nicht existiert.
         </para>
 
         <example id="zend.loader.load.file.example">
             <title>Beispiel der loadFile() Methode</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 ]]></programlisting>
@@ -70,11 +70,9 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
             <ulink url="http://php.net/include_once"><methodname>include()</methodname></ulink>
             verwendet.
         </para>
-
     </sect2>
 
     <sect2 id="zend.loader.load.class">
-
         <title>Klassen laden</title>
 
         <para>
@@ -84,6 +82,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <example id="zend.loader.load.class.example">
             <title>Beispiel der loadClass() Methode</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Loader::loadClass('Container_Tree',
     array(

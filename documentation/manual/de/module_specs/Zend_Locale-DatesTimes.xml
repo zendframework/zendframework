@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17406 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.date.datesandtimes">
-
     <title>Arbeiten mit Daten und Zeiten</title>
 
     <para>
@@ -19,7 +18,6 @@
     </para>
 
     <sect2 id="zend.locale.date.normalize">
-
         <title>Daten und Zeiten normalisieren</title>
 
         <para>
@@ -376,11 +374,9 @@ $date = Zend_Locale_Format::getDate('41.10.20',
 print_r ($date);
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.locale.date.test">
-
         <title>Testen von Daten</title>
 
         <para>
@@ -388,15 +384,16 @@ print_r ($date);
                 $locale))</methodname> kann benutzt werden um zu prüfen ob eine Zeichenkette alle
             erwarteten Datumsteile enthält. Die Methode <methodname>checkDateFormat()</methodname>
             benutzt <methodname>getDate()</methodname> aber ohne die Verwendung der Option
-            <code>'fixdate'</code> um zu verhindern das wahr zurück gegeben wird wenn die Eingabe
-            nicht dem Datumsformat entspricht. Wenn Fehler in der Eingabe gefunden werden, wie zum
-            Beispiel getauschte Werte für Monat oder Jahr, wendet die Option <code>'fixdate'</code>
-            eine Heuristik an um das "richtige" Datum zu eruieren bevor dieses auf Gültigkeit
-            geprüft wird.
+            <code>'fixdate'</code> um zu verhindern das <constant>TRUE</constant> zurück gegeben
+            wird wenn die Eingabe nicht dem Datumsformat entspricht. Wenn Fehler in der Eingabe
+            gefunden werden, wie zum Beispiel getauschte Werte für Monat oder Jahr, wendet die
+            Option <code>'fixdate'</code> eine Heuristik an um das "richtige" Datum zu eruieren
+            bevor dieses auf Gültigkeit geprüft wird.
         </para>
 
         <example id="zend.locale.date.test.example-1">
             <title>Testen von Daten</title>
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 // Standard Datumsformate für 'de_AT' benutzen... ist es ein gültiges Datum ?

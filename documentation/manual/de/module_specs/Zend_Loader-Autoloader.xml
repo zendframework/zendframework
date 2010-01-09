@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18840 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader">
     <title>Der Autoloader</title>
@@ -370,7 +370,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
 
                     <row>
                         <entry><methodname>autoload($class)</methodname></entry>
-                        <entry><code>string|false</code></entry>
+                        <entry><code>string|<constant>FALSE</constant></code></entry>
                         <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$class</varname>, <emphasis>Benötigt</emphasis>.
@@ -501,10 +501,10 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                             Setzt oder Empfängt den Wert des Flags das verwendet wird um anzuzeigen
                             ob die standardmäßige Autoloader Implementation "file not found"
                             Warnungen unterdrücken soll oder nicht. Wenn keine Argumente oder ein
-                            null Wert übergeben wird, wird ein Boolscher Wert zurückgegeben der den
-                            Status des Flags anzeigt; wenn ein Boolean übergeben wurde, wird das
-                            Flag auf den Wert gesetzt und die Autoloader Instanz wird zurückgegeben
-                            (um die Verkettung von Methoden zu erlauben).
+                            <constant>NULL</constant> Wert übergeben wird, wird ein Boolscher Wert
+                            zurückgegeben der den Status des Flags anzeigt; wenn ein Boolean
+                            übergeben wurde, wird das Flag auf den Wert gesetzt und die Autoloader
+                            Instanz wird zurückgegeben (um die Verkettung von Methoden zu erlauben).
                         </para></entry>
                     </row>
 
@@ -527,21 +527,25 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                         <entry><methodname>isFallbackAutoloader()</methodname></entry>
                         <entry><type>Boolean</type></entry>
                         <entry>N/A</entry>
+
                         <entry><para>
                             Empfängt den Wert des Flags das verwendet wird um anzuzeigen ob der
                             standardmäßige Autoloader als Fallback, oder Catch-All Autoloader
-                            für alle Namespaces verwendet wird. Standardmäßig ist er false.
+                            für alle Namespaces verwendet wird. Standardmäßig ist er
+                            <constant>FALSE</constant>.
                         </para></entry>
                     </row>
 
                     <row>
                         <entry><methodname>getClassAutoloaders($class)</methodname></entry>
                         <entry><type>Array</type></entry>
+
                         <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$class</varname>, <emphasis>Benötigt</emphasis>.
                             </para></listitem>
                         </itemizedlist></entry>
+
                         <entry><para>
                             Gibt eine Liste von Namespaced Autoloadern zurück die der angegebenen
                             Klasse potentiell entsprechen. Wenn keine passt, werden alle globalen

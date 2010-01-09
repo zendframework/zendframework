@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19150 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
+
     <para>
         Dieser Filter verschlüsselt beliebige Strings mit den angegebenen Einstellungen. Hierfür
         verwendet er Adapter. Aktuell gibt es Adapter für die <code>Mcrypt</code> und
@@ -44,6 +45,7 @@ $filter->setAdapter('openssl');
 
     <sect3 id="zend.filter.set.encrypt.mcrypt">
         <title>Verschlüsselung mit Mcrypt</title>
+
         <para>
             Wenn man die <code>Mcrypt</code> Erweiterung installiert hat, kann man den
             <code>Mcrypt</code> Adapter verwenden. Dieser Adapter unterstützt bei der
@@ -103,7 +105,7 @@ $filter->setAdapter('openssl');
                 <para>
                     <emphasis>salt</emphasis>: Ob der Schlüssel als Salt Wert verwendet wird. Der
                     Schlüssel der für die Verschlüsselung verwendet wird, wird selbst auch
-                    verschlüsselt. Der Standardwert ist false.
+                    verschlüsselt. Der Standardwert ist <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -287,6 +289,3 @@ print $encrypted;
 ]]></programlisting>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

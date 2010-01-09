@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19873 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Schnellstart mit Zend_Form</title>
@@ -173,7 +173,7 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
         <para>
             Es kann auch gewünscht sein, ein Element als benötigt zu spezifizieren. Das kann durch
             Verwendung eines Accessors getan werden, oder durch die Übergabe einer Option bei der
-            Erstellung des Elemetns. Im ersteren Fall:
+            Erstellung des Elements. Im ersteren Fall:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -357,7 +357,8 @@ $form->addElement('text', 'username', array('order' => 10));
             Nachdem ein Formular übermittelt wurde, muss diese geprüft werden, um zu sehen ob sie
             alle Prüfungen besteht. Jedes Element wird gegen die angegebenen Daten geprüft; wenn ein
             Schlüssel, der dem Elementnamen entspricht, nicht vorhanden ist, und das Element als
-            benötigt markiert ist, werden die Prüfungen mit einem <constant>NULL</constant> Wert ausgeführt.
+            benötigt markiert ist, werden die Prüfungen mit einem <constant>NULL</constant> Wert
+            ausgeführt.
         </para>
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18216 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.null">
     <title>Null</title>
@@ -17,8 +17,8 @@
         <para>
             Standardmäßig arbeitet dieser Filter wie <acronym>PHP</acronym>'s
             <methodname>empty()</methodname> Methode; in anderen Worten, wenn
-            <methodname>empty()</methodname> ein boolsches true zurückgibt, dann wird ein
-            <constant>NULL</constant> Wert zurückgegeben.
+            <methodname>empty()</methodname> ein boolsches <constant>TRUE</constant> zurückgibt,
+            dann wird ein <constant>NULL</constant> Wert zurückgegeben.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -133,6 +133,3 @@ $filter = new Zend_Filter_Null(array(
         </para>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

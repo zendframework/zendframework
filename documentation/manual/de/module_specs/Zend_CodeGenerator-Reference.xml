@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18423 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.reference">
     <title>Zend_CodeGenerator Referenz</title>
@@ -479,8 +479,9 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
 
             <para>
-                Es gibt einige Probleme die auftreten können wenn man versucht null, boolsche Werte
-                oder Arrays als Standardwerte zu setzen. Hierfür kann das Wert-Halte-Objekt
+                Es gibt einige Probleme die auftreten können wenn man versucht
+                <constant>NULL</constant>, boolsche Werte oder Arrays als Standardwerte zu setzen.
+                Hierfür kann das Wert-Halte-Objekt
                 <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname> verwendet
                 werden. Zum Beispiel:
             </para>

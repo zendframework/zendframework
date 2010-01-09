@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.interactive-features">
     <title>Interaktive Features</title>
@@ -541,10 +541,10 @@
             <para>
                 Die Methode <methodname>Zend_Pdf::resolveDestination()</methodname> nimmt auch einen
                 optionalen booleschen Parameter <varname>$refreshPageCollectionHashes</varname>, der
-                standardmäßig true ist. Er zwingt das <classname>Zend_Pdf</classname> Objekt die
-                Hashes der internen Kollektion der Seiten neu zu laden da die Liste der Seiten des
-                Dokuments vom Benutzer aktualisiert sein könnte indem die Eigenschaft
-                <varname>Zend_Pdf::$pages</varname> verwendet wird
+                standardmäßig <constant>TRUE</constant> ist. Er zwingt das
+                <classname>Zend_Pdf</classname> Objekt die Hashes der internen Kollektion der Seiten
+                neu zu laden da die Liste der Seiten des Dokuments vom Benutzer aktualisiert sein
+                könnte indem die Eigenschaft <varname>Zend_Pdf::$pages</varname> verwendet wird
                 (<link linkend="zend.pdf.pages">Arbeiten mit Seiten</link>). Das kann aus Gründen
                 der Performance ausgeschaltet werden, wenn bekannt ist das die Liste der Seiten des
                 Dokuments seit der letzten Anfragemethode nicht geändert wurde.
@@ -815,7 +815,7 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
                 Die Methode <methodname>Zend_Pdf_Action_URI::create($uri[, $isMap])</methodname>
                 muss verwendet werden um eine URI Aktion zu erstellen (siehe die API Dokumentation
                 für Details). Der optionale <varname>$isMap</varname> Parameter wird
-                standardmäßig auf false gesetzt.
+                standardmäßig auf <constant>FALSE</constant> gesetzt.
             </para>
 
             <para>
@@ -889,14 +889,14 @@ printf("Aktionen im Baum: %d\n", $actionsCount++);
 
             <para>
                 Die <methodname>Zend_Pdf_Target Zend_Pdf::getOpenAction()</methodname> Methode gibt
-                die aktuelle Dokument Öffnen Aktion zurück (oder null wenn die Öffnen Aktion nicht
-                gesetzt ist).
+                die aktuelle Dokument Öffnen Aktion zurück (oder <constant>NULL</constant> wenn die
+                Öffnen Aktion nicht gesetzt ist).
             </para>
 
             <para>
                 Die <methodname>setOpenAction(Zend_Pdf_Target $openAction = null)</methodname>
                 Methode setzt eine Dokument Öffnen Aktion oder löscht diese wenn
-                <varname>$openAction</varname> null ist.
+                <varname>$openAction</varname> <constant>NULL</constant> ist.
             </para>
         </sect3>
     </sect2>
@@ -961,8 +961,8 @@ $pdf->save($path, true);
 
             <listitem>
                 <para>
-                    <methodname>boolean isOpen()</methodname> - true wenn Outline standardmäßig
-                    geöffnet ist.
+                    <methodname>boolean isOpen()</methodname> - <constant>TRUE</constant> wenn
+                    Outline standardmäßig geöffnet ist.
                 </para>
             </listitem>
 
@@ -974,8 +974,8 @@ $pdf->save($path, true);
 
             <listitem>
                 <para>
-                    <methodname>boolean isItalic()</methodname> - true wenn das Outline Element
-                    schräg dargestellt wird.
+                    <methodname>boolean isItalic()</methodname> - <constant>TRUE</constant> wenn
+                    das Outline Element schräg dargestellt wird.
                 </para>
             </listitem>
 
@@ -988,8 +988,8 @@ $pdf->save($path, true);
 
             <listitem>
                 <para>
-                    <methodname>boolean isBold()</methodname> - true wenn das Outline Element
-                    dick dargestellt wird.
+                    <methodname>boolean isBold()</methodname> - <constant>TRUE</constant> wenn das
+                    Outline Element dick dargestellt wird.
                 </para>
             </listitem>
 
@@ -1002,14 +1002,14 @@ $pdf->save($path, true);
             <listitem>
                 <para>
                     <methodname>Zend_Pdf_Color_Rgb getColor()</methodname> - holt die Outline Text
-                    Farbe (null bedeutet schwarz).
+                    Farbe (<constant>NULL</constant> bedeutet schwarz).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <methodname>setColor(Zend_Pdf_Color_Rgb $color)</methodname> - setzt die Outline
-                    Text Farbe (null bedeutet schwarz).
+                    Text Farbe (<constant>NULL</constant> bedeutet schwarz).
                 </para>
             </listitem>
 
@@ -1024,7 +1024,8 @@ $pdf->save($path, true);
                 <para>
                     <methodname>setTarget(Zend_Pdf_Target|string $target)</methodname> - setzt ein
                     Outline Ziel (Aktion oder Ziel). Ein String kann verwendet werden um ein
-                    benanntes Ziel zu identifizieren. Null bedeutet 'kein Ziel'.
+                    benanntes Ziel zu identifizieren. <constant>NULL</constant> bedeutet
+                    'kein Ziel'.
                 </para>
             </listitem>
 
@@ -1108,9 +1109,9 @@ $pdf->save($path, true);
         <note>
             <para>
                 Alle Outline Elemente mit unlösbaren Zielen (oder Zielen auf GoTo Aktionen) werden
-                aktualisiert wärend das dokument gespeichert wird, indem dessen Ziele auf null
-                gesetzt werden. Damit wird das Dokument nicht durch entfernen von Seiten korrupiert
-                auf die durch Outlines referenziert wird.
+                aktualisiert wärend das dokument gespeichert wird, indem dessen Ziele auf
+                <constant>NULL</constant> gesetzt werden. Damit wird das Dokument nicht durch
+                Entfernen von Seiten korrupiert auf die durch Outlines referenziert wird.
             </para>
         </note>
     </sect2>

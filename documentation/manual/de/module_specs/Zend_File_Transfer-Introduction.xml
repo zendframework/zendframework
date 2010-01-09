@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19150 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
-
     <title>Zend_File_Transfer</title>
 
     <para>
@@ -15,6 +14,7 @@
 
     <note>
         <title>Einschränkungen</title>
+
         <para>
             Die aktuelle Implementation von <classname>Zend_File_Transfer</classname>
             ist auf <acronym>HTTP</acronym> Post Uploads limitiert. Andere Adapter die Downloads und
@@ -26,6 +26,7 @@
 
     <note>
         <title>Formulare</title>
+
         <para>
             Wenn man <classname>Zend_Form</classname> verwendet sollte man die
             <acronym>API</acronym>s die von <classname>Zend_Form</classname> zur Verfügung gestellt
@@ -46,6 +47,7 @@
 
     <example id="zend.file.transfer.introduction.example">
         <title>Einfaches Formular für File-Uploads</title>
+
         <para>
             Dieses Beispiel zeigt einen einfachen Dateiupload. Das erste Teil ist das Dateiformular.
             In unserem Beispiel gibt es nur eine Datei welche wir hochladen wollen.
@@ -90,11 +92,11 @@ if (!$adapter->receive()) {
             <methodname>receive()</methodname> Methode aufgerufen. Wenn irgendwelche Uploadfehler
             auftreten werden diese als Ausnahme zurückgegeben.
         </para>
-
     </example>
 
     <note>
         <title>Achtung</title>
+
         <para>
             Dieses Beispiel ist nur für die Demonstration der grundsätzlichen <acronym>API</acronym>
             von <classname>Zend_File_Transfer</classname>. Man sollte dieses Code Beispiel
@@ -105,7 +107,6 @@ if (!$adapter->receive()) {
     </note>
 
     <sect2 id="zend.file.transfer.introduction.adapters">
-
         <title>Von Zend_File_Transfer unterstützte Adapter</title>
 
         <para>
@@ -117,7 +118,6 @@ if (!$adapter->receive()) {
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.options">
-
         <title>Optionen für Zend_File_Transfer</title>
 
         <para>
@@ -131,17 +131,16 @@ if (!$adapter->receive()) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>ignoreNoFile</emphasis>: Wenn diese Option auf true gesetzt ist,
-                    ignorieren alle Prüfer Dateien die nicht vom Formular hochgeladen wurde. Der
-                    Standardwert ist false, was einen Fehler verursacht wenn die Datei nicht
-                    spezifiziert wurde.
+                    <emphasis>ignoreNoFile</emphasis>: Wenn diese Option auf
+                    <constant>TRUE</constant> gesetzt ist, ignorieren alle Prüfer Dateien die nicht
+                    vom Formular hochgeladen wurde. Der Standardwert ist <constant>FALSE</constant>,
+                    was einen Fehler verursacht wenn die Datei nicht spezifiziert wurde.
                 </para>
             </listitem>
         </itemizedlist>
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.checking">
-
         <title>Dateien prüfen</title>
 
         <para>
@@ -206,12 +205,10 @@ foreach ($files as $file => $info) {
 
 $upload->receive();
 ]]></programlisting>
-
         </example>
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.informations">
-
         <title>Zusätzliche Dateiinformationen</title>
 
         <para>
@@ -267,7 +264,8 @@ $upload->receive();
         <para>
             Standardmäßig werden Dateinamen mit dem kompletten Pfad zurückgegeben. Wenn man nur den
             Dateinamen ohne Pfad benötigt, kann der zweite Parameter <varname>$path</varname>
-            gesetzt werden, welcher den Dateinamen ausschneidet wenn er auf false gesetzt wird.
+            gesetzt werden, welcher den Dateinamen ausschneidet wenn er auf
+            <constant>FALSE</constant> gesetzt wird.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example1">
@@ -283,7 +281,6 @@ $names = $upload->getFileName();
 // Gibt den Dateinamen des Formularelements 'foo' zurück
 $names = $upload->getFileName('foo');
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -299,7 +296,7 @@ $names = $upload->getFileName('foo');
             <methodname>getFileSize()</methodname> gibt standardmäßig die echte Dateigröße in SI
             Schreibweise zurück was bedeutet das man <code>2kB</code> statt <code>2048</code>
             erhält. Wenn man die reine Größe benötigt muß man die <code>useByteString</code> Option
-            auf false setzen.
+            auf <constant>FALSE</constant> setzen.
         </para>
 
         <example id="zend.file.transfer.introduction.informations.example.getfilesize">
@@ -317,7 +314,6 @@ $size = $upload->getFileSize();
 $upload->setOption(array('useByteString' => false));
 $size = $upload->getFileSize();
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -342,7 +338,6 @@ $hash = $upload->getHash('md5');
 // Gibt den Has für das 'foo' Formularelement zurück
 $names = $upload->getHash('crc32', 'foo');
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -383,7 +378,6 @@ $names = $upload->getMimeType('foo');
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.uploadprogress">
-
         <title>Fortschritt für Datei Uploads</title>
 
         <para>
@@ -416,7 +410,6 @@ $names = $upload->getMimeType('foo');
         </para>
 
         <sect3 id="zend.file.transfer.introduction.uploadprogress.progressadapter">
-
             <title>Verwenden eines Progressbar Adapters</title>
 
             <para>
@@ -435,7 +428,6 @@ $names = $upload->getMimeType('foo');
             </para>
 
             <example id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1">
-
                 <title>
                     Verwenden eines Progressbar Adapters um den aktuellen Status zu erhalten
                 </title>
@@ -449,7 +441,6 @@ while (!$upload['done']) {
     $upload = Zend_File_Transfer_Adapter_Http:getProgress($upload);
 }
 ]]></programlisting>
-
             </example>
 
             <para>
@@ -460,7 +451,6 @@ while (!$upload['done']) {
         </sect3>
 
         <sect3 id="zend.file.transfer.introduction.uploadprogress.manually">
-
             <title>getProgress() händisch verwenden</title>
 
             <para>
@@ -507,8 +497,8 @@ while (!$upload['done']) {
 
                 <listitem>
                     <para>
-                        <emphasis>done</emphasis>: Gibt true zurück wenn der Upload abgeschlossen
-                        wurde, andernfalls false.
+                        <emphasis>done</emphasis>: Gibt <constant>TRUE</constant> zurück wenn der
+                        Upload abgeschlossen wurde, andernfalls <constant>FALSE</constant>.
                     </para>
                 </listitem>
 
@@ -553,7 +543,6 @@ while (!$upload['done']) {
             </para>
 
             <example id="zend.file.transfer.introduction.uploadprogress.manually.example1">
-
                 <title>Händische Verwendung des Datei Fortschritts</title>
 
                 <programlisting language="php"><![CDATA[
@@ -565,14 +554,7 @@ while (!$upload['done']) {
     // Tu was zu tun ist
 }
 ]]></programlisting>
-
             </example>
-
         </sect3>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->

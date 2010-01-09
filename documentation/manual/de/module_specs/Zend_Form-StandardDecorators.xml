@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardDecorators">
     <title>Standard Formular Dekoratoren die mit dem Zend Framework ausgeliefert werden</title>
@@ -41,9 +41,9 @@ class Util
         </para>
 
         <para>
-            Der Callback Dekorator erlaubt es, einen Null Wert für die 'placement' Option zu
-            spezifizieren, welche den originalen Inhalt, mit dem, vom Callback zurückgegebenen Wert,
-            ersetzt; 'prepend' und 'append' sind genauso gültig.
+            Der Callback Dekorator erlaubt es, einen <constant>NULL</constant> Wert für die
+            'placement' Option zu spezifizieren, welche den originalen Inhalt, mit dem, vom Callback
+            zurückgegebenen Wert, ersetzt; 'prepend' und 'append' sind genauso gültig.
         </para>
     </sect2>
 
@@ -225,7 +225,7 @@ class Util
         <itemizedlist>
             <listitem><para>
                 <code>ignoreSubForms</code>: Ob die Rekursion im Unterformular ausgeschaltet werden
-                soll oder nicht. Standardwert: false (erlaubt Rekursion).
+                soll oder nicht. Standardwert: <constant>FALSE</constant> (erlaubt Rekursion).
             </para></listitem>
 
             <listitem><para>

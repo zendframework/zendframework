@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19440 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.mime">
     <title>Zend_Mime</title>
@@ -26,9 +26,9 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <methodname>Zend_Mime::isPrintable()</methodname>: Gibt TRUE zurück, wenn
-                        der String keine nicht druckbaren Zeichen enthält, ansonsten wird FALSE
-                        zurückgegeben.
+                        <methodname>Zend_Mime::isPrintable()</methodname>: Gibt
+                        <constant>TRUE</constant> zurück, wenn der String keine nicht druckbaren
+                        Zeichen enthält, ansonsten wird <constant>FALSE</constant> zurückgegeben.
                     </para>
                 </listitem>
 

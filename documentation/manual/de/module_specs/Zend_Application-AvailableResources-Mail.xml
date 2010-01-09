@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20077 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.mail">
     <title>Zend_Application_Resource_Mail</title>
@@ -13,8 +13,8 @@
     <para>
         Wenn ein Transport instanziert wird, wird er automatisch bei
         <classname>Zend_Mail</classname> registriert. Aber durch das Setzen der
-        <property>transport.register</property> Direktive auf false, findet dieses Verhalten nicht
-        mehr statt.
+        <property>transport.register</property> Direktive auf <constant>FALSE</constant>, findet
+        dieses Verhalten nicht mehr statt.
     </para>
 
     <example id="zend.application.available-resources.mail.configExample">

@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.calendar">
     <title>Google Kalender verwenden</title>
+
     <para>
         Die <classname>Zend_Gdata_Calendar</classname> Klasse kann verwendet werden um Events im
         Online Google Kalender Service zu sehen, erstellen, updaten und löschen.
     </para>
+
     <para>
         Siehe <ulink
             url="http://code.google.com/apis/calendar/overview.html">http://code.google.com/apis/calendar/overview.html</ulink>
         für weitere Informationen über die Google Kalender <acronym>API</acronym>.
     </para>
+
     <sect2 id="zend.gdata.calendar.connecting">
         <title>Zum Kalender Service verbinden</title>
+
         <para>
             Die Google Kalender <acronym>API</acronym> basiert, wie alle GData
             <acronym>API</acronym>s, auf dem Atom Publishing Protocol (APP), einem
@@ -21,14 +25,17 @@
             zwischen einem Client und den Google Kalender Servern läuft über <acronym>HTTP</acronym>
             und erlaubt sowohl authentifizierte als auch unauthentifizierte Verbindungen.
         </para>
+
         <para>
             Bevor irgendeine Transaktion stattfinden kann, muß diese Verbindung erstellt werden. Die
             Erstellung einer Verbindung zu den Kalender Server beinhaltet zwei Schritte: Erstellung
             eines <acronym>HTTP</acronym> Clients und das binden einer
             <classname>Zend_Gdata_Calendar</classname> Instanz an diesen Client.
         </para>
+
         <sect3 id="zend.gdata.calendar.connecting.authentication">
             <title>Authentifizierung</title>
+
             <para>
                 Die Google Kalender <acronym>API</acronym> erlaubt den Zugriff auf beide,
                 öffentliche und private, Kalender Feeds. Öfentliche Foods benötigen keine
@@ -37,6 +44,7 @@
                 aber eine authentifizierte Verbindung zu den Kalender Servern. Es gibt drei
                 Authentifizierungs Schemas die von Google Kalender unterstützt werden:
             </para>
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -47,6 +55,7 @@
                         nicht anwendbar sind.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>AuthSub</firstterm> erlaubt die Authentifizierung zu den Kalender
@@ -55,6 +64,7 @@
                         einer idealen Wahl für Web basierende Anwendungen macht.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>MagicCookie</firstterm> erlaubt die Authentifizierung basieren
@@ -66,6 +76,7 @@
                     </para>
                 </listitem>
             </itemizedlist>
+
             <para>
                 Die <classname>Zend_Gdata</classname> Bibliothek bietet Unterstützung für alle drei
                 Authentifizierungs Schemas. Der Rest dieses Kapitels nimmt an das die vorhandenen
@@ -77,14 +88,17 @@
                     im Google Data <acronym>API</acronym> Entwickler Guide</ulink> gesehen werden.
             </para>
         </sect3>
+
         <sect3 id="zend.gdata.calendar.connecting.service">
             <title>Eine Service Instanz erstellen</title>
+
             <para>
                 Um mit dem Google Kalender zu interagieren, bietet diese Bibliothek die
                 <classname>Zend_Gdata_Calendar</classname> Service Klasse. Diese Klasse bietet ein
                 übliches Interface zu den Google Data und Atom Publishing Protocol Modellen und
                 assistiert in der Behandlung der Anfragen zum und von den Kalender Servern.
             </para>
+
             <para>
                 Sobald ein Authentifizierung Schema ausgewählt wurde, besteht der nächste Schritt
                 darin eine Instanz von <classname>Zend_Gdata_Calendar</classname> zu erstellen. Der
@@ -95,10 +109,12 @@
                 angegeben werden, wird automatisch eine unauthentifizierte Instanz von
                 <classname>Zend_Http_Client</classname> erstellt.
             </para>
+
             <para>
                 Das folgende Beispiel zeigt wie man eine Kalender Service Klasse erstellt und dabei
                 die ClientAuth Authentifizierung verwendet:
             </para>
+
             <programlisting language="php"><![CDATA[
 // Parameter für die ClientAuth Authentifizierung
 $service = Zend_Gdata_Calendar::AUTH_SERVICE_NAME;
@@ -111,10 +127,12 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 // Erstellt eine Instanz des Kalender Services
 $service = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
+
             <para>
                 Ein Kalender Service der AuthSub verwendet, kann ähnlich erstellt werden, durch eine
                 etwas längere Schreibweise:
             </para>
+
             <programlisting language="php"><![CDATA[
 /*
  * Empfängt die aktuelle URL so das der AuthSub Server weiß wohin er den
@@ -203,10 +221,12 @@ session_start();
 // zum AuthSub Server um wenn das notwendig ist.
 $service = new Zend_Gdata_Calendar(getAuthSubHttpClient());
 ]]></programlisting>
+
             <para>
                 Schlußendlich, kann ein nicht authentifizierter Server erstellt werden um Ihn
                 entweder mit öffentlichen Feeds oder MagicCookie Authentifizierung zu verwenden:
             </para>
+
             <programlisting language="php"><![CDATA[
 // Erstellt eine Instanz des Kalender Services wobei ein nicht
 // authentifizierter HTTP Client verwendet wird
@@ -221,14 +241,17 @@ $service = new Zend_Gdata_Calendar();
             </para>
         </sect3>
     </sect2>
+
     <sect2 id="zend.gdata.calendar_retrieval">
         <title>Eine Kalender Liste empfangen</title>
+
         <para>
             Der Kalender Service unterstützt den Empfang einer Liste von Kalendern für den
             authentifizierten Benutzer. Das ist die gleiche Liste von Kalendern welche im Google
             Kalender UI angezeigt werden, ausser das jene die als "<code>hidden</code>" markiert
             sind, auch vorhanden sind.
         </para>
+
         <para>
             Die Kalender Liste ist immer privat und es muß über eine authentifizierte Verbindung
             darauf zugegriffen werden. Es ist nicht möglich eine Kalender Liste eines anderen
@@ -237,6 +260,7 @@ $service = new Zend_Gdata_Calendar();
             das die notwendigen Zugriffsrechte vorhanden sind, wird fehlschlagen und in einem 401
             (Authentifizierung benötigt) Statuc Code resultieren.
         </para>
+
         <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Calendar::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -265,8 +289,10 @@ foreach ($listFeed as $calendar) {
 echo "</ul>";
 ]]></programlisting>
     </sect2>
+
     <sect2 id="zend.gdata.event_retrieval">
         <title>Events erhalten</title>
+
         <para>
             Wie die Liste der Kalender können auch die Events empfangen werden durch Verwendung der
             <classname>Zend_Gdata_Calendar</classname> Service Klasse. Die zurückgegebene Event
@@ -275,8 +301,10 @@ echo "</ul>";
             erlauben die in der Instanz des Event Feeds enthaltenen Accessoren und der Iterator das
             individuelle Events inspiziert werden können.
         </para>
+
         <sect3 id="zend.gdata.event_retrieval.queries">
             <title>Abfragen</title>
+
             <para>
                 Wenn Events mit der Kalender <acronym>API</acronym> empfangen werden, werden
                 speziell erstellte Abfrage <acronym>URL</acronym>s verwendet um zu beschreiben
@@ -289,6 +317,7 @@ echo "</ul>";
                 enthalten. Trotzdem gibt es drei Parameter die es Wert sind speziell genannt zu
                 werden:
             </para>
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -299,6 +328,7 @@ echo "</ul>";
                         wurde).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>Visibility</firstterm> spezifiziert ob der öffentliche oder
@@ -307,6 +337,7 @@ echo "</ul>";
                         ist nur der öffentliche Feed vorhanden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>Projection</firstterm> spezifiziert wieviele Daten vom Server
@@ -321,8 +352,10 @@ echo "</ul>";
                 </listitem>
             </itemizedlist>
         </sect3>
+
         <sect3 id="zend.gdata.event_retrieval.start_time">
             <title>Events in der Reihenfolge Ihres Startzeitpunktes erhalten</title>
+
             <para>
                 Das folgende Beispiel zeigt die Verwendung der
                 <classname>Zend_Gdata_Query</classname> Klasse und spezifiziert den privat
@@ -334,6 +367,7 @@ echo "</ul>";
                 Events werden chronologisch anhand des Startzeitpunktes angefragt und nur Events die
                 in der Zukunft stattfinden werden zurückgegeben.
             </para>
+
             <programlisting language="php"><![CDATA[
 $query = $service->newEventQuery();
 $query->setUser('default');
@@ -358,6 +392,7 @@ foreach ($eventFeed as $event) {
 }
 echo "</ul>";
 ]]></programlisting>
+
             <para>
                 Zusätzliche Eigenschaften wie ID, Autor, Wann, Event Status, Sichtbarkeit, Web
                 Inhalt, und Inhalt, sowie andere sind innerhalb von
@@ -368,8 +403,10 @@ echo "</ul>";
                     Referenz</ulink> für eine komplette Liste.
             </para>
         </sect3>
+
         <sect3 id="zend.gdata.event_retrieval.date_range">
             <title>Events in einem speziellen Datumsbereich empfangen</title>
+
             <para>
                 Um alle Events in einem gewünschten Bereich auszugeben, zum Beispiel vom 1. Dezember
                 2006 bis zum 15. Dezember 2006, müssen die folgenden zwei Zeilen im vorhergehenden
@@ -378,35 +415,43 @@ echo "</ul>";
                 <code>futureevents</code> die Werte von <code>startMin</code> und
                 <code>startMax</code> überschreibt.
             </para>
+
             <programlisting language="php"><![CDATA[
 $query->setStartMin('2006-12-01');
 $query->setStartMax('2006-12-16');
 ]]></programlisting>
+
             <para>
                 Es ist zu beachten das <code>startMin</code> inklusive ist, wobei
                 <code>startMax</code> exklusive ist. Als Ergebnis, werden nur die Events bis
                 2006-12-15 23:59:59 zurückgegeben.
             </para>
         </sect3>
+
         <sect3 id="zend.gdata.event_retrieval.fulltext">
             <title>Events durch eine Volltext Abfrage erhalten</title>
+
             <para>
                 Um alle Events auszugeben welche ein spezielles Wort, zum Beispiel "Hundefutter"
                 enthalten, muß die <methodname>setQuery()</methodname> Methode verwendet werden wenn
                 die Abfrage erstellt wird.
             </para>
+
             <programlisting language="php"><![CDATA[
 $query->setQuery("Hundefutter");
 ]]></programlisting>
         </sect3>
+
         <sect3 id="zend.gdata.event_retrieval.individual">
             <title>Individuelle Events erhalten</title>
+
             <para>
                 Individuelle Events können empfangen werden indem deren Event ID als Teil der
                 Abfrage spezifiziert wird. Statt <methodname>getCalendarEventFeed()</methodname>
                 auszurufen, sollte <methodname>getCalendarEventEntry()</methodname> aufgerufen
                 werden.
             </para>
+
             <programlisting language="php"><![CDATA[
 $query = $service->newEventQuery();
 $query->setUser('default');
@@ -420,6 +465,7 @@ try {
     echo "Fehler: " . $e->getMessage();
 }
 ]]></programlisting>
+
             <para>
                 In einer ähnlichen Weise kann Sie, wenn die Event <acronym>URL</acronym> bekannt
                 ist, direkt an <methodname>getCalendarEntry()</methodname> übergeben werden um ein
@@ -427,6 +473,7 @@ try {
                 die Event <acronym>URL</acronym> alle notwendigen Informationen enthält um das Event
                 zu erhalten.
             </para>
+
             <programlisting language="php"><![CDATA[
 $eventURL = "http://www.google.com/calendar/feeds/default/private"
           . "/full/g829on5sq4ag12se91d10uumko";
@@ -439,10 +486,13 @@ try {
 ]]></programlisting>
         </sect3>
     </sect2>
+
     <sect2 id="zend.gdata.calendar.creating_events">
         <title>Events erstellen</title>
+
         <sect3 id="zend.gdata.calendar.creating_events.single">
             <title>Ein einmal vorkommendes Event erstellen</title>
+
             <para>
                 Events werden einem Kalender hinzugefügt indem eine Instanz von
                 <classname>Zend_Gdata_EventEntry</classname> erstellt wird, und diese mit den
@@ -451,7 +501,9 @@ try {
                 transparent in <acronym>XML</acronym> zu konvertieren und diese an den Kalender
                 Server zu senden.
             </para>
+
             <para>Mindestens die folgenden Attribute sollten gesetzt werden:</para>
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -459,6 +511,7 @@ try {
                         innerhalb der Google Kalender UI angezeigt wird.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>When</firstterm> zeigt die Dauer des Events und, optional, jede
@@ -467,9 +520,11 @@ try {
                     </para>
                 </listitem>
             </itemizedlist>
+
             <para>
                 Andere nützliche Attribute die optional gesetzt werden können sind unter anderem:
             </para>
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -477,6 +532,7 @@ try {
                         das Event erstellt hat.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>Content</firstterm> liefert zusätzliche Information über das
@@ -484,34 +540,40 @@ try {
                         Kalenders angefragt werden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>EventStatus</firstterm> zeigt an ob ein Event bestätigt, in
                         Wartestellung oder abgebrochen wurde.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>Hidden</firstterm> entfernt das Event von der Google Kalender UI.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>Transparency</firstterm> zeigt ob das Event Zeit auf der
                         Frei/Belegt Liste des Benutzers benötigt.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>WebContent</firstterm> erlaubt es externe Inhalte zu verlinken
                         und innerhalb eines Events anzubieten.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>Where</firstterm> indiziert den Ort des Events.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>Visibility</firstterm> erlaubt es das Event vor der öffentlichen
@@ -519,6 +581,7 @@ try {
                     </para>
                 </listitem>
             </itemizedlist>
+
             <para>
                 Für eine komplette Liste an Event Attributen, kann in die <ulink
                     url="http://framework.zend.com/apidoc/core/">Zend Framework
@@ -530,11 +593,13 @@ try {
                 Versuch diese stattdessen als Strings oder Primitivvariablen bekanntzugeben wird in
                 einem Fehler wärend der Konvertierung in <acronym>XML</acronym> führen.
             </para>
+
             <para>
                 Sobald das Event bekanntgegeben wurde, kann es zum Kalender Server hochgeladen
                 werden durch seine Übergabe als Argument zur <methodname>insertEvent()</methodname>
                 Funktion des Kalender Services.
             </para>
+
             <programlisting language="php"><![CDATA[
 // Erstellt einen neuen Eintrag und verwendet die magische Factory
 // Methode vom Kalender Service
@@ -564,8 +629,10 @@ $event->when = array($when);
 $newEvent = $service->insertEvent($event);
 ]]></programlisting>
         </sect3>
+
         <sect3 id="zend.gdata.calendar.creating_events.schedulers_reminders">
             <title>Event Planungen und Erinnerungen</title>
+
             <para>
                 Die Startzeit und Dauer eines Events werden durch die Werte seiner <code>when</code>
                 Eigenschaften, <code>startTime</code>, <code>endTime</code>, und
@@ -573,6 +640,7 @@ $newEvent = $service->insertEvent($event);
                 kontrollieren die Dauer des Events, wärend die <code>valueString</code> Eigenschaft
                 aktuell nicht verwendet wird.
             </para>
+
             <para>
                 Jeden Tag wiederkehrende Events können geplant werden indem nur das Datum
                 spezifiziert und die Zeit ausgelassen wird wenn <code>startTime</code> und
@@ -582,6 +650,7 @@ $newEvent = $service->insertEvent($event);
                     url="http://www.ietf.org/rfc/rfc3339.txt">RFC3339</ulink> Format angegeben
                 werden.
             </para>
+
             <programlisting language="php"><![CDATA[
 // Plane ein Event das am 05. Dezember 2007 um 14h PST stattfindet
 // (UTC-8) mit der Dauer einer Stunde.
@@ -592,11 +661,13 @@ $when->endTime="2007-12-05T15:00:00:00-08:00";
 // Die "when" Eigenschaft an das Event binden
 $event->when = array($when);
 ]]></programlisting>
+
             <para>
                 Das <code>when</code> Attribut kontrolliert auch wann Erinnerungen an einen Benutzer
                 gesendet werden. Erinnerungen werden in einem Array gespeichert und jedes Event kann
                 abgefragt werden um die Erinnerungen herauszufinden die mit Ihm verbunden sind.
             </para>
+
             <para>
                 Damit ein <code>reminder</code> gültig ist, muß er zwei Attribute gesetzt haben:
                 <code>method</code> und eine Zeit. <code>Method</code> akzeptiert einen der
@@ -608,6 +679,7 @@ $event->when = array($when);
                 vorhandene Einheit konvertiert werden. Zum Beispiel, 1 Stunde und 30 Minuten sollten
                 als 90 Minuten angegeben werden.
             </para>
+
             <programlisting language="php"><![CDATA[
 // Erstellt ein Erinnerungs Objekt. Es sollte eine Email an den Benutzer
 // senden, 10 Minuten vor dem Event.
@@ -620,8 +692,10 @@ $when = $event->when[0];
 $when->reminders = array($reminder);
 ]]></programlisting>
         </sect3>
+
         <sect3 id="zend.gdata.calendar.creating_events.recurring">
             <title>Wiederkehrende Events erstellen</title>
+
             <para>
                 Wiederkehrende Events werden auf dem gleichen Weg erstellt wie einmal stattfindende
                 Events, ausser das ein Wiederholungs "recurrence" Attribut statt dem "where"
@@ -630,6 +704,7 @@ $when->reminders = array($reminder);
                 Eigenschaften definiert werden kann die im iCalender Standard (<ulink
                     url="http://www.ietf.org/rfc/rfc2445.txt">RFC 2445</ulink>) beschrieben sind.
             </para>
+
             <para>
                 Ausnahmen im Wiederholungs Pattern werden normalerweise durch ein ausgeprägtes
                 <code>recurrenceException</code> Attribut spezifiziert. Trotzdem bietet der
@@ -637,6 +712,7 @@ $when->reminders = array($reminder);
                 Möglichkeit das jedes von Ihnen verwendet werden kann und für jedes davon muß das
                 gehandhabt werden.
             </para>
+
             <para>
                 Durch die Komplexität des analysierens des Wiederholungs Patterns, sind weitere
                 Informationen hierüber ausserhalb des Umfangs dieses Dokuments. Trotzdem können
@@ -645,6 +721,7 @@ $when->reminders = array($reminder);
                     normale Elemente des Google Data <acronym>API</acronym> Entwickler
                     Leitfadens</ulink> gefunden werden, sowie in der <acronym>RFC</acronym> 2445.
             </para>
+
             <programlisting language="php"><![CDATA[
 // Erstelle einen neuen Eintrag und verwendet die magische
 // Factory Methode des Kalender Services
@@ -674,17 +751,20 @@ $event->recurrence = $service->newRecurrence($recurrence);
 $newEvent = $service->insertEvent($event);
 ]]></programlisting>
         </sect3>
+
         <sect3 id="zend.gdata.calendar.creating_events.quickadd">
             <title>QuickAdd verwenden</title>
+
             <para>
                 QuickAdd ist ein Feature das es erlaubt Events zu erstellen indem ein frei
                 definierter Texteintrag verwendet wird. Zum Beispie lwürde der String "Abendessen
                 bei Joe's Dinner am Dienstag" ein Event erstellen mit dem Titel "Abendessen", dem
                 Ort "Joe's Dinner", und dem Datum "Dienstag". Um die Vorteile von QuickAdd zu
-                verwenden, muß eine neue <code>QuickAdd</code> Eigenschaft erstellt, auf "true"
-                gesetzt und der frei definierbare Text als <code>content</code> Eigenschaft
-                gespeichert werden.
+                verwenden, muß eine neue <code>QuickAdd</code> Eigenschaft erstellt, auf
+                <constant>TRUE</constant> gesetzt und der frei definierbare Text als
+                <code>content</code> Eigenschaft gespeichert werden.
             </para>
+
             <programlisting language="php"><![CDATA[
  // Erstelle einen neuen Eintrag und verwendet die magische
  // Factory Methode des Kalender Services
@@ -701,8 +781,10 @@ $newEvent = $service->insertEvent($event);
 ]]></programlisting>
         </sect3>
     </sect2>
+
     <sect2 id="zend.gdata.calendar.modifying_events">
         <title>Events bearbeiten</title>
+
         <para>
             Sobald eine Instanz eines Events erstellt wurde, können die Attribute des Events lokal
             auf dem selben Weg wie bei der Erstellung des Events geänder werden. Sobald alle
@@ -710,6 +792,7 @@ $newEvent = $service->insertEvent($event);
             des Events die Änderungen an den Kalender Server und gibt eine Kopie des Events zurück
             wie es auf dem Server erstellt wurde.
         </para>
+
         <para>
             Im Fall das ein anderer Benutzer das Event modifiziert hat seitdem die lokale Kopie
             empfangen wurde, wird die <methodname>save()</methodname> Methode fehlschlagen und einen
@@ -717,6 +800,7 @@ $newEvent = $service->insertEvent($event);
             Events vom Server empfangen werden bevor ein erneuter Versuch stattfindet die Änderungen
             wieder zu speichern.
         </para>
+
         <programlisting language="php"><![CDATA[
 // Das erste Event auf der Liste der Events eines Benutzers erhalten
 $event = $eventFeed[0];
@@ -732,14 +816,17 @@ try {
 }
 ]]></programlisting>
     </sect2>
+
     <sect2 id="zend.gdata.calendar.deleting_events">
         <title>Events löschen</title>
+
         <para>
             Kalender Events können entweder durch den Aufruf der <methodname>delete()</methodname>
             Methode des Kalender Services, und des Angebens der Bearbeitungs <acronym>URL</acronym>
             des Events durchgeführt werden, oder durch Aufruf der eigenen
             <methodname>delete()</methodname> Methode des Events.
         </para>
+
         <para>
             In jedem Fall, wird das gelöschte Event trotzdem noch am Privaten Event Feed des
             Benutzers aufscheinen wenn ein <code>updateMin</code> Abfrage Parameter angegeben wurde.
@@ -747,6 +834,7 @@ try {
             <code>eventStatus</code> Eigenschaft auf
             "http://schemas.google.com/g/2005#event.canceled" gesetzt haben.
         </para>
+
         <programlisting language="php"><![CDATA[
 // Option 1: Events können direkt gelöscht werden
 $event->delete();
@@ -758,13 +846,16 @@ $event->delete();
 $service->delete($event->getEditLink()->href);
 ]]></programlisting>
     </sect2>
+
     <sect2 id="zend.gdata.calendar.comments">
         <title>Auf Event Kommentare zugreifen</title>
+
         <para>
             Den die komplette Event Ansicht verwendet wird, werden Kommentare nicht direkt innerhalb
             eines Events gespeichert. Stattdessen enthält jedes Event eine <acronym>URL</acronym>
             zum dazugehörigen Kommentar Feed welcher manuell angefragt werden muß.
         </para>
+
         <para>
             Das Arbeiten mit Kommentaren ist fundamental ähnlich zum Arbeiten mit Events, mit dem
             einzigen signifikanten Unterschied das eine andere Feed und Event Klasse verwendet
@@ -773,6 +864,7 @@ $service->delete($event->getEditLink()->href);
             der <code>author</code> Eigenschaft und der Kommentar Text in der <code>content</code>
             Eigenschaft gespeichert.
         </para>
+
         <programlisting language="php"><![CDATA[
 // Die normale URL vom ersten Event der Feed Liste des Benutzers extrahieren
 $event = $eventFeed[0];

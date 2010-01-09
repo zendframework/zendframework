@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19111 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node-schema">
     <title>Zend_Ldap_Node_Schema</title>
@@ -29,6 +29,7 @@
                     <entry>Beschreibung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><code>Zend_Ldap_Dn getDn()</code></entry>
@@ -73,12 +74,14 @@
                         <code>array toArray(boolean
                         $includeSystemAttributes)</code>
                     </entry>
+
                     <entry>
                         Gibt eine Array Darstellung des aktuellen Nodes zurück. Wenn
-                        <code>$includeSystemAttributes</code> <code>false</code> ist (Standardmäßig
-                        ist es <code>true</code>) werden die System spezifischen Attribute vom Array
-                        entfernt. Anders als <code>Zend_Ldap_Node_Schema::getAttributes()</code>
-                        enthält das resultierende Array den DN mit dem Schlüssel <code>'dn'</code>.
+                        <code>$includeSystemAttributes</code> <constant>FALSE</constant> ist
+                        (Standardmäßig ist es <constant>TRUE</constant>) werden die System
+                        spezifischen Attribute vom Array entfernt. Anders als
+                        <code>Zend_Ldap_Node_Schema::getAttributes()</code> enthält das
+                        resultierende Array den DN mit dem Schlüssel <code>'dn'</code>.
                     </entry>
                 </row>
                 <row>
@@ -101,72 +104,87 @@
                         Ihrem internen Format (keine Konvertierung).
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>boolean existsAttribute(string $name, boolean
                         $emptyExists)</code>
                     </entry>
+
                     <entry>
                         Prüft ob ein angegebenes Attribut existiert. Wenn <code>$emptyExists</code>
-                        <code>false</code> ist werden leere Attribute (welche nur array() enthalten)
-                        als nicht existierend betrachtet und geben <code>false</code> zurück. Wenn
-                        <code>$emptyExists</code> true ist werden leere Attribute als existent
-                        betrachtet und geben <code>true</code> zurück. In diesem Fall gibt die
-                        Methode nur dann <code>false</code> zurück wenn der Name des
-                        Attributs in der Sammlung der Schlüssel fehlt.
+                        <constant>FALSE</constant> ist werden leere Attribute (welche nur array()
+                        enthalten) als nicht existierend betrachtet und geben
+                        <constant>FALSE</constant> zurück. Wenn <code>$emptyExists</code>
+                        <constant>TRUE</constant> ist werden leere Attribute als existent betrachtet
+                        und geben <constant>TRUE</constant> zurück. In diesem Fall gibt die Methode
+                        nur dann <constant>FALSE</constant> zurück wenn der Name des Attributs in
+                        der Sammlung der Schlüssel fehlt.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>boolean attributeHasValue(string $name, mixed|array
                         $value)</code>
                     </entry>
+
                     <entry>
                         Prüft ob angegebene Werte im Attribut existieren. Die Methode gibt nur dann
-                        <code>true</code> zurück wenn alle Werte in <code>$value</code> auch im
-                        Attribut enthalten sind. Der Vergleich wird strikt durchgeführt (er
+                        <constant>FALSE</constant> zurück wenn alle Werte in <code>$value</code>
+                        auch im Attribut enthalten sind. Der Vergleich wird strikt durchgeführt (er
                         respektiert den Datentyp).
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>integer count()</code></entry>
+
                     <entry>
                         Gibt die Anzahl der Attribute im Node zurück. Implementiert Countable.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>mixed getAttribute(string $name, integer|null
                         $index)</code>
                     </entry>
+
                     <entry>
                         Holt ein <acronym>LDAP</acronym> Attribut. Datenkonvertierung wird
                         angewendet indem <code>Zend_Ldap_Attribute::getAttribute()</code> verwendet
                         wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>array getAttributes(boolean
                         $includeSystemAttributes)</code>
                     </entry>
+
                     <entry>
                         Holt alle Attribute des Nodes. Wenn <code>$includeSystemAttributes</code>
-                        <code>false</code> ist (der Standardwert ist <code>true</code>) werden
-                        System spezifische Attribute vom Array entfernt.
+                        <constant>FALSE</constant> ist (der Standardwert ist
+                        <constant>TRUE</constant>) werden systemspezifische Attribute vom Array
+                        entfernt.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>array|integer getDateTimeAttribute(string $name,
                         integer|null $index)</code>
                     </entry>
+
                     <entry>
                         Holt ein <acronym>LDAP</acronym> date/time Attribut. Datenkonvertierung wird
                         angewendet indem <code>Zend_Ldap_Attribute::getDateTimeAttribute()</code>
                         verwendet wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>Zend_Ldap_Node_Schema reload(Zend_Ldap

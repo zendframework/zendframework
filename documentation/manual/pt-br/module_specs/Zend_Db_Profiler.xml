@@ -1,300 +1,599 @@
 <sect1 id="zend.db.profiler">
 
+
+
     <title>Zend_Db_Profiler</title>
+
+
 
     <sect2 id="zend.db.profiler.introduction">
 
+
+
         <title>Introdução</title>
 
-        <para>
-                <code>Zend_Db_Profiler</code> pode ser habilitado para permitir o profilling(análise de desempenho) de suas consultas(instruções SQL).
-            Neste profiler(analisador) incluem-se as consultas processadas pelo adaptador e o tempo gasto em suas execuções,
-            permitindo inspecionar as consultas que foram executadas, sem a necessidade de adicionar código ou classes extras de depuração. O seu uso avançado permite também que o desenvolvedor filtre quais consultas serão analisadas.
-        </para>
+
 
         <para>
-            Habilite o profiler para todos as consultas passando uma directiva
-            para o construtor do adaptador, ou solicitando ao adaptador para
-            habilitá-lo depois.
+
+                <code>Zend_Db_Profiler</code> pode ser habilitado para permitir o profilling(análise de desempenho) de suas consultas(instruções SQL).
+
+            Neste profiler(analisador) incluem-se as consultas processadas pelo adaptador e o tempo gasto em suas execuções,
+
+            permitindo inspecionar as consultas que foram executadas, sem a necessidade de adicionar código ou classes extras de depuração. O seu uso avançado permite também que o desenvolvedor filtre quais consultas serão analisadas.
+
         </para>
+
+
+
+        <para>
+
+            Habilite o profiler para todos as consultas passando uma directiva
+
+            para o construtor do adaptador, ou solicitando ao adaptador para
+
+            habilitá-lo depois.
+
+        </para>
+
+
 
         <programlisting role="php"><![CDATA[<?php
+
 require_once 'Zend/Db.php';
 
+
+
 $params = array (
+
     'host'     => '127.0.0.1',
+
     'username' => 'malory',
+
     'password' => '******',
+
     'dbname'   => 'camelot',
+
     'profiler' => true  // ligando o profiller; mude para false para desabilitá-lo(padrão)
+
 );
+
+
 
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 
+
+
 // desligando o profiller:
+
 $db->getProfiler()->setEnabled(false);
 
+
+
 // ligando o profiller:
+
 $db->getProfiler()->setEnabled(true);]]>
+
         </programlisting>
+
     </sect2>
+
+
 
     <sect2 id="zend.db.profiler.using">
 
+
+
         <title>Usando o Profiler</title>
 
+
+
         <para>
+
             A qualquer momento, capture o profiler usando o método
+
             <code>getProfiler()</code> do adaptador.
+
         </para>
+
+
 
         <programlisting role="php"><![CDATA[<?php
+
 $profiler = $db->getProfiler();]]>
+
         </programlisting>
 
+
+
         <para>
+
             Com isto, é retornado uma instância do objeto <code>Zend_Db_Profiler</code>. Com
+
             esta instância, o desenvolvedor pode examinar suas consultas usando uma variedade de métodos:
+
         </para>
 
+
+
         <itemizedlist>
+
             <listitem>
+
                 <para>
+
                     <code>getTotalNumQueries()</code> retorna o número total
+
                     de consultas que foram analisadas.
+
                 </para>
+
             </listitem>
+
             <listitem>
+
                 <para>
+
                     <code>getTotalElapsedSecs()</code> retorna o número total
+
                     de segundos gastos em todas as consultas analisadas.
+
                 </para>
+
             </listitem>
+
             <listitem>
+
                 <para>
+
                     <code>getQueryProfiles()</code> retorna um array com todas as
+
                     análises das consultas.
+
                 </para>
+
             </listitem>
+
             <listitem>
+
                 <para>
+
                     <code>getLastQueryProfile</code> retorna a última (mais recente)
+
                     consulta analisada, independente ou não se esta consulta foi finalizada(se não, o tempo final será nulo)
+
                 </para>
+
             </listitem>
+
             <listitem>
+
                 <para>
+
                     <code>clear()</code> limpa qualquer análise antiga da pilha de execução.
+
                 </para>
+
             </listitem>
+
         </itemizedlist>
 
+
+
         <para>
+
             O valor retornado pelo <code>getLastQueryProfile()</code> e os
+
             elementos individuais do <code>getQueryProfiles()</code> são
+
             objetos do <code>Zend_Db_Profiler_Query</code>, que provê a
+
             habilidade de inspecionar suas consultas individualmente:
+
         </para>
 
+
+
         <itemizedlist>
+
             <listitem>
+
                 <para>
+
                     <code>getQuery()</code> retorna o texto SQL da consulta.
+
                     O texto SQL de uma instrução preparada (prepared statement) com seus parâmetros é o texto
+
                     no momento em que a consulta foi preparada, contendo apenas os seus parâmetros, e não os seus valores
+
                     usados quando a instrução é executada.
+
                 </para>
+
             </listitem>
+
             <listitem>
+
                 <para>
+
                     <code>getQueryParams()</code> retorna um array de valores dos parâmetros que são usados
+
                     quando for executada uma query preparada.
+
                     Nisto incluem-se ambos parâmetros e argumentos acoplados do método <code>execute()</code> da instrução.
+
                     As chaves do array são os posicionais (1-baseado) ou nomeados(string) índices de parâmetro.
+
                 </para>
+
             </listitem>
+
             <listitem>
+
                 <para>
+
+
 
                     <code>getElapsedSecs()</code> retorna o número de segundos que a consulta executou.
+
                 </para>
+
             </listitem>
+
         </itemizedlist>
 
+
+
         <para>
+
             A informação fornecida pelo <code>Zend_Db_Profiler</code> é útil para analisar os gargalos
+
             das aplicações, e para depurar consultas que foram executadas. Por exemplo, para ver a última
+
             consulta que foi executada:
+
         </para>
 
+
+
         <programlisting role="php"><![CDATA[<?php
+
 $query = $profiler->getLastQueryProfile();
 
+
+
 echo $query->getQuery();]]>
+
         </programlisting>
+
+
 
         <para>
+
             Talvez uma página qualquer esteja gerando lentidão. Use o profiler para determinar
+
             primeiro o total de segundos gastos em todas as consultas, e então
+
             examine-as para encontrar aquele que demorou mais tempo para executar.
+
         </para>
 
+
+
         <programlisting role="php"><![CDATA[<?php
+
 $totalTime    = $profiler->getTotalElapsedSecs();
+
 $queryCount   = $profiler->getTotalNumQueries();
+
 $longestTime  = 0;
+
 $longestQuery = null;
 
+
+
 foreach ($profiler->getQueryProfiles() as $query) {
+
     if ($query->getElapsedSecs() > $longestTime) {
+
         $longestTime  = $query->getElapsedSecs();
+
         $longestQuery = $query->getQuery();
+
     }
+
 }
 
+
+
 echo 'Executado: ' . $queryCount . ' consultas em ' . $totalTime . ' seconds' . "\n";
+
 echo 'Tamanho médio da query' . $totalTime / $queryCount . ' seconds' . "\n";
+
 echo 'consultas por segundo: ' . $queryCount / $totalTime . "\n";
+
 echo 'Query que demorou mais tempo: ' . $longestTime . "\n";
+
 echo "Query mais longa: \n" . $longestQuery . "\n";]]>
+
         </programlisting>
 
+
+
     </sect2>
+
+
 
     <sect2 id="zend.db.profiler.advanced">
 
+
+
         <title>Uso Avançado do Profiller</title>
 
+
+
         <para>
+
             Além da inspeção de consultas, o profiler também permite ao devenvolvedor
+
             filtrar quais consultas sejam analisadas. Os seguintes métodos
+
             operam em uma instância de <code>Zend_Db_Profiler</code>.
+
         </para>
 
+
+
         <sect3 id="zend.db.profiler.advanced.filtertime">
+
             <title>Filtro por tempo decorrido das consultas</title>
 
+
+
             <para>
+
                 <code>setFilterElapsedSecs()</code> permite ao desenvolvedor setar um
+
                 tempo mínimo para uma consulta antes de ela ser analisada.
+
                 Para remover o filtro, passe para o método um valor nulo.
+
             </para>
 
+
+
             <programlisting role="php"><![CDATA[<?php
+
 // Apenas consultas analisadas que levam ao menos 5 segundos:
+
 $profiler->setFilterElapsedSecs(5);
 
+
+
 // Todas as consultas analisadas, não importando o tamanho:
+
 $profiler->setFilterElapsedSecs(null);]]>
+
             </programlisting>
+
         </sect3>
+
+
 
         <sect3 id="zend.db.profiler.advanced.filtertype">
+
             <title>Filtro pelo tipo de consulta</title>
 
+
+
             <para>
+
                 <code>setFilterQueryType()</code> permite ao desenvolvedor setar
+
                 quais tipos de consultas deverão ser analisadas; para analisar
+
                 múltiplos tipos, lógicos ou todas. Os tipos de consultas são definidas
+
                 segundo as constantes de <code>Zend_Db_Profiler</code>
+
             </para>
+
+
 
             <itemizedlist>
+
                 <listitem>
+
                     <para>
+
                         <code>Zend_Db_Profiler::CONNECT</code>: operações de conexão,
+
                         ou seleção de base de dados.
+
                     </para>
+
                 </listitem>
+
                 <listitem>
+
                     <para>
+
                         <code>Zend_Db_Profiler::QUERY</code>: consultas gerais da
+
                         base de dados que não se encaixam com outro tipos.
+
                     </para>
+
                 </listitem>
+
                 <listitem>
+
                     <para>
+
                         <code>Zend_Db_Profiler::INSERT</code>: qualquer consulta que
+
                         adicionar novos dados para a base de dados, geralmente um INSERT SQL.
+
                     </para>
+
                 </listitem>
+
                 <listitem>
+
                     <para>
+
                         <code>Zend_Db_Profiler::UPDATE</code>: qualquer consulta que
+
                         atualiza dados existentes, geralmente um UPDATE SQL.
+
                     </para>
+
                 </listitem>
+
                 <listitem>
+
                     <para>
+
                         <code>Zend_Db_Profiler::DELETE</code>: qualquer consulta que
+
                         exclui dados existentes, geralmente um DELETE SQL.
+
                     </para>
+
                 </listitem>
+
                 <listitem>
+
                     <para>
+
                         <code>Zend_Db_Profiler::SELECT</code>: qualquer consulta que
+
                         retorna dados existentes, geralmente um SELECT SQL.
+
                     </para>
+
                 </listitem>
+
                 <listitem>
+
                     <para>
+
                         <code>Zend_Db_Profiler::TRANSACTION</code>: qualquer
+
                         operação transacional, como a inicialição da transação, commit ou rollback.
+
                     </para>
+
                 </listitem>
+
             </itemizedlist>
 
+
+
             <para>
+
                 Assim como usando o <code>setFilterElapsedSecs()</code>, você pode remover
+
                 quaisquer filtros existentes passando <code>null</code> como único argumento.
+
             </para>
 
+
+
             <programlisting role="php"><![CDATA[<?php
+
 // Analisa somente consultas usando SELECT
+
 $profiler->setFilterQueryType(Zend_Db_Profiler::SELECT);
 
+
+
 // Analisa as consultas SELECT, INSERT e UPDATE
+
 $profiler->setFilterQueryType(Zend_Db_Profiler::SELECT | Zend_Db_Profiler::INSERT | Zend_Db_Profiler::UPDATE);
 
+
+
 // Analisa a instrução DELETE (então podemos descobrir porque os dados continuam desaparecendo)
+
 $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 
+
+
 // Remove totos os filtros
+
 $profiler->setFilterQueryType(null);]]>
+
             </programlisting>
 
+
+
         </sect3>
+
+
 
         <sect3 id="zend.db.profiler.advanced.getbytype">
+
             <title>Retorna análises por tipo de consulta</title>
 
+
+
             <para>
+
                 Usando o <code>setFilterQueryType()</code>, podemos resumir as análises geradas.
+
                 Entretanto, às vezes é mais útil manter todas as análises e visualizar somente
+
                 aquelas que você precisa num determinado momento. Outra funcionalidade do
+
                 <code>getQueryProfiles()</code> é a capacidade de fazer esta filtragem
+
                 "on-the-fly" (execução de código em tempo de execução),
+
                 passando o tipo da consulta(ou uma combinação lógica de tipos) em seu primeiro argumento;
+
                 veja na <xref linkend="zend.db.profiler.advanced.filtertype" />
+
                 uma lista de todas as constantes dos tipos de consultas.
+
             </para>
 
+
+
             <programlisting role="php"><![CDATA[<?php
+
 // Retorna apenas consultas SELECT analisadas
+
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT);
 
+
+
 // Retorna apenas anásiles de consultas SELECT, INSERT e UPDATE.
+
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT | Zend_Db_Profiler::INSERT | Zend_Db_Profiler::UPDATE);
 
+
+
 // Retorna as análises feitas na instrução DELETE (então podemos descobrir porque os dados continuam desaparecendo)
+
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);]]>
+
             </programlisting>
 
+
+
         </sect3>
+
+
 
     </sect2>
 
+
+
 </sect1>
+
 <!--
+
 vim:se ts=4 sw=4 et:
+
 -->

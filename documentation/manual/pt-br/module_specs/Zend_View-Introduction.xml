@@ -1,100 +1,199 @@
 <sect1 id="zend.view.introduction">
 
+
+
     <title>Introdução</title>
 
+
+
     <para>
+
         Zend_View é uma classe para trabalhar com a parte de visualização do padrão de projeto MVC.  Basicamente ela existe para  separar o script de visualização dos controladores e modelos.  Ela fornece um sistema de assistentes, filtros de saída e escape de variáveis.
+
     </para>
 
+
+
     <para>
+
         Zend_View é um sistema de template agnóstico; você pode usar o PHP como sua linguagem de template, ou criar instâncias de outros sistemas de template e manipulá-las dentro do seu script de visualização.
+
     </para>
 
+
+
     <para>
+
         Essencialmente, o funcionamento do Zend_View acontece em duas etapas principais:
+
+
 
         1.  Seu script controlador cria uma instância de Zend_View, atribuindo-lhe variáveis.
 
+
+
         2. O controlador instrui o Zend_View a rederizar uma determinada visualização , passando o controle ao script de visualização, responsável pela geração da saída a ser visualizada.
+
     </para>
+
+
 
     <sect2 id="zend.view.introduction.controller">
 
+
+
         <title>Script Controlador</title>
 
+
+
         <para>
+
             Neste exemplo simples, suponhamos que seu controlador tenha uma listagem contendo dados sobre livros, que queremos renderizar para uma visualização. O controlador poderia ser algo como isto:
+
         </para>
 
+
+
         <programlisting role="php"><![CDATA[<?php
+
 // use um modelo para obter dados sobre autores e títulos dos livros.
+
 $data = array(
+
     array(
+
         'author' => 'Hernando de Soto',
+
         'title' => 'The Mystery of Capitalism'
+
     ),
+
     array(
+
         'author' => 'Henry Hazlitt',
+
         'title' => 'Economics in One Lesson'
+
     ),
+
     array(
+
         'author' => 'Milton Friedman',
+
         'title' => 'Free to Choose'
+
     )
+
 );
 
+
+
 // atribua os dados à instância de Zend_View
+
 Zend_Loader::loadClass('Zend_View');
+
 $view = new Zend_View();
+
 $view->books = $data;
 
+
+
 // renderize uma visualização chamada "booklist.php"
+
 echo $view->render('booklist.php');
+
 ?>]]>
+
         </programlisting>
 
+
+
     </sect2>
+
+
 
     <sect2 id="zend.view.introduction.view">
 
+
+
         <title>Script Visualizador</title>
 
+
+
         <para>
+
             Agora necessitaremos do script de visualização associado, "booklist.php". Trata-se de um script PHP como qualquer outro, com uma exceção:  ele executa dentro do escopo da instância de Zend_View instance, o que implica que as referências a $this apontam para as propriedades e métodos da instância Zend_View.  (Variáveis atribuídas à instância pelo controlador são propriedades públicas da instância de Zend_View.)  Deste modo, um script de visualição muito básico poderia se parecer com isto:
+
         </para>
+
+
 
         <programlisting role="php"><![CDATA[<?php if ($this->books): ?>
 
+
+
     <!-- Uma tabela contendo alguns livros. -->
+
     <table>
+
         <tr>
+
             <th>Autor</th>
+
             <th>Título</th>
+
         </tr>
 
+
+
         <?php foreach ($this->books as $key => $val): ?>
+
         <tr>
+
             <td><?php echo $this->escape($val['author']) ?></td>
+
             <td><?php echo $this->escape($val['title']) ?></td>
+
         </tr>
+
         <?php endforeach; ?>
+
+
 
     </table>
 
+
+
 <?php else: ?>
+
+
 
     <p>Não existem livros a serem exibidos.</p>
 
+
+
 <?php endif; ?>]]>
+
         </programlisting>
 
+
+
         <para>
+
             Observe a forma como empregamos o método "escape()" para escapar o conteúdo das variáveis para a saída.
+
         </para>
+
+
 
     </sect2>
 
+
+
 </sect1>
+
 <!--
+
 vim:se ts=4 sw=4 et:
+
 -->

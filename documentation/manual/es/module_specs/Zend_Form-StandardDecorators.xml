@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20115 -->
     <!-- Reviewed: no -->
 <sect1 id="zend.form.standardDecorators">
     <title>Decoradores de Formulario (Form Decorartors) estándar contenidos en
@@ -40,7 +40,7 @@ class Util
             reemplazará, antepondrá o postpondrá el contenido original con el
             que devuelva. </para>
 
-        <para> El decorador Callback permite especificar un valor null para la
+        <para> El decorador Callback permite especificar un valor <constant>NULL</constant> para la
             opción placement (colocación), que reemplazará el contenido original
             con el valor devuelto de la llamada de retorno; 'prepend'
             (anteponer) y 'append' (postponer) siguen siendo válidas. </para>
@@ -496,7 +496,7 @@ $element->setDecorators(array(array('ViewScript',
             <para> Resulta interesante que el script de vista reemplace el
                 contenido provisto por el decorador -- por ejemplo, si desea
                 encapsularlo. Puede hacer esto especificando un valor booleano
-                false en la opción 'placement' del decorador: </para>
+                <constant>FALSE</constant>  en la opción 'placement' del decorador: </para>
 
             <programlisting language="php"><![CDATA[
 // En la creación del decorador:

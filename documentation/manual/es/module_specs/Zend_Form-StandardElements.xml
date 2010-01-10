@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17663 -->
+<!-- EN-Revision: 20115 -->
     <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
     <title>Elementos Enviados en el Formulario Estandard de Zend
@@ -498,7 +498,7 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
             de llaves de las opciones registradas. Se puede desactivar esta
             caracteristica llamando a
                 <methodname>setRegisterInArrayValidator(false)</methodname> , o
-            pasando un valor falso a la configuración de llaves
+            pasando un valor <constant>FALSE</constant> a la configuración de llaves
                 <methodname>registerInArrayValidator</methodname> . </para>
 
         <para>Se puede manipular las opciones de checkbox usando los siguinetes
@@ -630,7 +630,7 @@ $element->setValue(array('bar', 'bat'));
             de llaves de opciones registradas. se puede deshabilitar esta
             caracteristica llamando a
                 <methodname>setRegisterInArrayValidator(false)</methodname> , o
-            pasando un valor falso a la configuracion de llaves
+            pasando un valor <constant>FALSE</constant> a la configuracion de llaves
                 <methodname>registerInArrayValidator</methodname> . </para>
     </sect2>
 
@@ -665,7 +665,7 @@ $element->setValue(array('bar', 'bat'));
             de llaves de opciones registradas. se puede deshabilitar esta
             caracteristica llamando a
                 <methodname>setRegisterInArrayValidator(false)</methodname> , o
-            pasando un valor falso a la configuracion de llaves
+            pasando un valor <constant>FALSE</constant> a la configuracion de llaves
                 <methodname>registerInArrayValidator</methodname> .
             configuration key. </para>
 
@@ -745,7 +745,7 @@ $element->setValue(array('bar', 'bat'));
             de llaves de opciones registradas. se puede deshabilitar esta
             caracteristica llamando a
                 <methodname>setRegisterInArrayValidator(false)</methodname> , o
-            pasando un valor falso a la configuracion de llaves
+            pasando un valor <constant>FALSE</constant> a la configuracion de llaves
                 <methodname>registerInArrayValidator</methodname> .
             configuration key. </para>
 

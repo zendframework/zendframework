@@ -1,39 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20115 -->
     <!-- Reviewed: no -->
 <sect1 id="zend.pdf.save">
     <title>Guardar Cambios a Documentos PDF</title>
-    <para>
-        Hay dos métodos que guardan los cambios a los documentos
-        <acronym>PDF</acronym>
-        : los métodos son
-        <methodname>Zend_Pdf::save()</methodname>
-        y
-        <methodname>Zend_Pdf::render()</methodname>
-        .
-    </para>
+    <para> Hay dos métodos que guardan los cambios a los documentos
+            <acronym>PDF</acronym> : los métodos son
+            <methodname>Zend_Pdf::save()</methodname> y
+            <methodname>Zend_Pdf::render()</methodname> . </para>
 
     <para>
         <methodname>Zend_Pdf::save($filename, $updateOnly = false)</methodname>
-        guarda el documento
-        <acronym>PDF</acronym>
-        en un archivo. Si $updateOnly
-        es verdadero, sólo entonces el nuevo segmento del archivo
-        <acronym>PDF</acronym>
-        se agrega al archivo. De lo contrario, el
-        archivo es sobreescrito.
-    </para>
+        guarda el documento <acronym>PDF</acronym> en un archivo. Si $updateOnly
+        es <constant>TRUE</constant>, sólo entonces el nuevo segmento del archivo
+            <acronym>PDF</acronym> se agrega al archivo. De lo contrario, el
+        archivo es sobreescrito. </para>
 
     <para>
         <methodname>Zend_Pdf::render($newSegmentOnly = false)</methodname>
-        regresa
-        el documento
-        <acronym>PDF</acronym>
-        como un string. Si $newSegmentOnly
-        es verdadero, entonces sólo el nuevo segmento del archivo
-        <acronym>PDF</acronym>
-        es devuelto.
-    </para>
+        regresa el documento <acronym>PDF</acronym> como un string. Si
+        $newSegmentOnly es verdadero, entonces sólo el nuevo segmento del
+        archivo <acronym>PDF</acronym> es devuelto. </para>
 
     <example id="zend.pdf.save.example-1">
         <title>Guardando Documentos PDF</title>

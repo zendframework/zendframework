@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 18940 -->
+<!-- EN-Revision: 20096 -->
     <!-- Reviewed: no -->
 <appendix id="coding-standard">
     <title>Estándares de codificación de Zend Framework para PHP</title>
@@ -410,9 +410,8 @@ $greeting = "Hello $name, welcome back!";
 $greeting = "Hello {$name}, welcome back!";
 ]]></programlisting>
 
-                <para> Por consistencia, esta forma no está permitida:
-                </para>
-                    <programlisting language="php"><![CDATA[
+                <para> Por consistencia, esta forma no está permitida: </para>
+                <programlisting language="php"><![CDATA[
 $greeting = "Hello ${name}, welcome back!";
 ]]></programlisting>
 

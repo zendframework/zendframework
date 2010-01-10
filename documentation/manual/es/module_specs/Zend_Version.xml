@@ -16,7 +16,7 @@
         El método estático <methodname>Zend_Version::compareVersion($version)</methodname>
         esta basada en la función <ulink
             url="http://php.net/version_compare"><methodname>version_compare()</methodname></ulink>
-			de <acronym>PHP</acronym>.
+            de <acronym>PHP</acronym>.
         Este método devuelve -1 si la versíón especificada es mayor    
         que la versión instalada de Zend Framework, 0 si son iguales 
         y +1 si la versión especificada es más reciente que la

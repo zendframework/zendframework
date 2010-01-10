@@ -164,7 +164,7 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
         if ($type >= self::SPACE) {
             $type -= self::SPACE;
             if (is_string($value) && (preg_match('/^\s+$/s', $value))) {
-                $this->_error(self::INVALID);
+                $this->_error(self::IS_EMPTY);
                 return false;
             }
         }
@@ -173,7 +173,7 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
         if ($type >= self::NULL) {
             $type -= self::NULL;
             if (is_null($value)) {
-                $this->_error(self::INVALID);
+                $this->_error(self::IS_EMPTY);
                 return false;
             }
         }
@@ -182,7 +182,7 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
         if ($type >= self::EMPTY_ARRAY) {
             $type -= self::EMPTY_ARRAY;
             if (is_array($value) && ($value == array())) {
-                $this->_error(self::INVALID);
+                $this->_error(self::IS_EMPTY);
                 return false;
             }
         }
@@ -191,7 +191,7 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
         if ($type >= self::ZERO) {
             $type -= self::ZERO;
             if (is_string($value) && ($value == '0')) {
-                $this->_error(self::INVALID);
+                $this->_error(self::IS_EMPTY);
                 return false;
             }
         }
@@ -200,7 +200,7 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
         if ($type >= self::STRING) {
             $type -= self::STRING;
             if (is_string($value) && ($value == '')) {
-                $this->_error(self::INVALID);
+                $this->_error(self::IS_EMPTY);
                 return false;
             }
         }
@@ -209,7 +209,7 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
         if ($type >= self::FLOAT) {
             $type -= self::FLOAT;
             if (is_float($value) && ($value == 0.0)) {
-                $this->_error(self::INVALID);
+                $this->_error(self::IS_EMPTY);
                 return false;
             }
         }
@@ -218,7 +218,7 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
         if ($type >= self::INTEGER) {
             $type -= self::INTEGER;
             if (is_int($value) && ($value == 0)) {
-                $this->_error(self::INVALID);
+                $this->_error(self::IS_EMPTY);
                 return false;
             }
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 19726 -->
+<!-- EN-Revision: 20115 -->
     <!-- Reviewed: no -->
 <sect1 id="zend.db.select">
 
@@ -440,7 +440,7 @@ $select = $db->select()
             <example id="zend.db.select.building.columns-atomic.example">
 
                 <title> Ejemplos agregando columnas con el método
-                        columns()</title>
+                    columns()</title>
 
                 <programlisting language="php"><![CDATA[
 // Construir la consulta:
@@ -583,7 +583,7 @@ $select = $db->select()
                     <para>Todas las filas de tabla a la izquierda del operando
                         son incluidas, pareando las filas de la tabla a la
                         derecha del operando, y las columnas de la tabla a la
-                        derecha del operando son rellenadas con NULLs si no
+                        derecha del operando son rellenadas con <constant>NULL</constant>s si no
                         existen filas que coincidan con la tabla a la
                         izquierda.</para>
 
@@ -602,7 +602,7 @@ $select = $db->select()
                         la tabla a la derecha del operando son incluidas,
                         pareando las filas de la tabla a la izquierda del
                         operando incluidas, y las columnas de la tabla a la
-                        izquierda del operando son rellenadas con NULLs si no
+                        izquierda del operando son rellenadas con <constant>NULL</constant>s si no
                         existen filas que coincidan con la tabla de la
                         derecha.</para>
 
@@ -623,7 +623,7 @@ $select = $db->select()
                         la derecha. Todas las filas de ambas tablas son
                         incluidas, vinculadas entre sí en la misma fila si
                         satisfacen la condición de unión, y en otro caso, se
-                        vinculan con valores nulos en lugar de columnas de la
+                        vinculan con valores <constant>NULL</constant>'s en lugar de columnas de la
                         otra tabla.</para>
 
                     <para> Algunos <acronym>RDBMS</acronym> no soportan este
@@ -1335,8 +1335,7 @@ $result = $stmt->fetchAll();
 
         <sect3 id="zend.db.select.execute.tostring">
 
-            <title> Convertiendo un Objeto Select a un String
-                    SQL</title>
+            <title> Convertiendo un Objeto Select a un String SQL</title>
 
             <para> Si necesita acceder a una represantación en un string de la
                 consulta <acronym>SQL</acronym> correspondiente al objeto

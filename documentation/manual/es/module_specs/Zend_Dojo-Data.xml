@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 17598 -->
+<!-- EN-Revision: 20176 -->
     <!-- Reviewed: no -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: Envolturas de dojo.data</title>
@@ -66,8 +66,7 @@ $data->setIdentifier('id')
                 <methodname>addItems()</methodname> . </para>
 
         <example id="zend.dojo.data.usage.append">
-            <title> Agregando datos a Zend_Dojo_Data
-            </title>
+            <title> Agregando datos a Zend_Dojo_Data </title>
 
             <programlisting language="php"><![CDATA[
 $data = new Zend_Dojo_Data($identifier, $items);
@@ -119,9 +118,9 @@ $data->addItems($someMoreItems);
 
             <listitem>
                 <para> Objectos implementando la interfaz
-                        <methodname>Traversable</methodname> , que incluye las
-                    interfaces <methodname>Iterator</methodname> y
-                        <methodname>ArrayAccess</methodname> . </para>
+                    <classname>Traversable</classname> , que incluye las
+                    interfaces <classname>Iterator</classname> y
+                    <classname>ArrayAccess</classname> . </para>
             </listitem>
         </itemizedlist>
 
@@ -129,9 +128,7 @@ $data->addItems($someMoreItems);
             el item, llame a <methodname>setLabel()</methodname> : </para>
 
         <example id="zend.dojo.data.usage.label">
-            <title> Especificando la etiqueta de un campo en
-                    Zend_Dojo_Data
-            </title>
+            <title> Especificando la etiqueta de un campo en Zend_Dojo_Data </title>
 
             <programlisting language="php"><![CDATA[
 $data->setLabel('name');
@@ -157,11 +154,11 @@ $data->fromJson($json);
 
         <para> Algunos componentes de Dojo requieren metadatos adicionales junto
             al conjunto de datos de dojo.data. Como ejemplo,
-                <methodname>dojox.grid.Grid</methodname> puede tirar datos
+            <command>dojox.grid.Grid</command> puede tirar datos
             dinámicamente desde un
-                <methodname>dojox.data.QueryReadStore</methodname> . Para que la
+            <command>dojox.data.QueryReadStore</command> . Para que la
             paginación funcione correctamente, cada conjunto de datos de regreso
-            debería contener una clave <methodname>numRows</methodname> con el
+            debería contener una clave <property>numRows</property> con el
             número total de filas que podrían ser devueltas por la consulta. Con
             estos datos, la plantilla sabe cuando seguir haciendo pequeños
             pedidos de subconjuntos de datos al servidor y cuando dejar de hacer
@@ -207,9 +204,9 @@ $data->clearMetadata();
 
         <para>
             <classname>Zend_Dojo_Data</classname> implementa las interfaces
-                <methodname>ArrayAccess</methodname> ,
-                <methodname>Iterator</methodname> , y
-                <methodname>Countable</methodname> . Por lo tanto, puede usar la
+            <classname>ArrayAccess</classname> ,
+            <classname>Iterator</classname> , y
+            <classname>Countable</classname> . Por lo tanto, puede usar la
             recopilación de datos casi como si fuera un array. </para>
 
         <para> Todos los items son referenciados por el identificador de campo.
@@ -281,7 +278,7 @@ $json = (string) $data; // conversión a string == conversión a JSON
                         varios items a la vez, sobrescribiendo cualquier item
                         que figurase anteriormente en el objeto.
                             <varname>$items</varname> debe ser un array o un
-                        objeto <methodname>Traversable</methodname> . </para>
+                        objeto <classname>Traversable</classname> . </para>
                 </listitem>
 
                 <listitem>
@@ -314,7 +311,7 @@ $json = (string) $data; // conversión a string == conversión a JSON
                         los nuevos items tiene un identificador concordante a un
                         identificador ya existente en la colección.
                             <varname>$items</varname> debe ser un array o un
-                        objeto <methodname>Traversable</methodname> . </para>
+                        objeto <classname>Traversable</classname> . </para>
                 </listitem>
 
                 <listitem>
@@ -335,7 +332,7 @@ $json = (string) $data; // conversión a string == conversión a JSON
                         <methodname>getItem($id)</methodname> : recupera un item
                         con el identificador dado de la colección; el item
                         retornado será un array asociativo. Si ningún item
-                        coincide, se devolverá un valor null. </para>
+                        coincide, se devolverá un valor <constant>NULL</constant>. </para>
                 </listitem>
 
                 <listitem>

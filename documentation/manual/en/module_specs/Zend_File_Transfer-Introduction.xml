@@ -376,7 +376,7 @@ $names = $upload->getMimeType('foo');
             <para>
                 Note that the mimetype which is given by the client is not seen as save input.
                 Therefor the real mimetype of the file will be detected and returned instead of the
-                filesize sent by the client.
+                mimetype sent by the client.
             </para>
         </note>
 

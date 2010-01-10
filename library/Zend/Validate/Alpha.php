@@ -72,11 +72,13 @@ class Zend_Validate_Alpha extends Zend_Validate_Abstract
     {
         if ($allowWhiteSpace instanceof Zend_Config) {
             $allowWhiteSpace = $allowWhiteSpace->toArray();
+        }
+
+        if (is_array($allowWhiteSpace)) {
             if (array_key_exists('allowWhiteSpace', $allowWhiteSpace)) {
                 $allowWhiteSpace = $allowWhiteSpace['allowWhiteSpace'];
             } else {
-                require_once 'Zend/Validate/Exception.php';
-                throw new Zend_Validate_Exception("Missing option 'allowWhiteSpace'");
+                $allowWhiteSpace = false;
             }
         }
 

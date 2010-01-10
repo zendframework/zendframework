@@ -66,6 +66,9 @@ class Zend_Validate_GreaterThan extends Zend_Validate_Abstract
     {
         if ($min instanceof Zend_Config) {
             $min = $min->toArray();
+        }
+
+        if (is_array($min)) {
             if (array_key_exists('min', $min)) {
                 $min = $min['min'];
             } else {

@@ -65,6 +65,9 @@ class Zend_Validate_LessThan extends Zend_Validate_Abstract
     {
         if ($max instanceof Zend_Config) {
             $max = $max->toArray();
+        }
+
+        if (is_array($max)) {
             if (array_key_exists('max', $max)) {
                 $max = $max['max'];
             } else {

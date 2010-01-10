@@ -59,12 +59,10 @@ class Zend_Validate_Int extends Zend_Validate_Abstract
     {
         if ($locale instanceof Zend_Config) {
             $locale = $locale->toArray();
-            if (array_key_exists('locale', $locale)) {
+        }
+
+        if (is_array($locale) && array_key_exists('locale', $locale)) {
                 $locale = $locale['locale'];
-            } else {
-                require_once 'Zend/Validate/Exception.php';
-                throw new Zend_Validate_Exception("Missing option 'locale'");
-            }
         }
 
         if ($locale === null) {

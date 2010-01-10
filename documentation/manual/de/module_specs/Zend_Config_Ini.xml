@@ -20,7 +20,8 @@
         <title>Die Ini Datei parsen</title>
 
         <para>
-            <classname>Zend_Config_Ini</classname> verwendet die <acronym>PHP</acronym> Funktion <ulink
+            <classname>Zend_Config_Ini</classname> verwendet die <acronym>PHP</acronym> Funktion
+            <ulink
                 url="http://php.net/parse_ini_file"><methodname>parse_ini_file()</methodname></ulink>.
             Deren Dokumentation klärt über spezielle Verhaltensweisen auf, die sich auch auf
             <classname>Zend_Config_Ini</classname> auswirken, z. B. wie die besonderen Werte

@@ -6,6 +6,7 @@
 
     <sect2 id="zend.console.getopt.configuration.addrules">
         <title>Regeln für das Hinzufügen von Optionen</title>
+
         <para>
             Man kann mehr Optionsregeln hinzufügen, zusätzlich zu denen die
             schon im <classname>Zend_Console_Getopt</classname> Constructor definiert wurden,
@@ -18,8 +19,10 @@
             <link linkend="zend.console.getopt.rules">Definieren von GetOpt Regeln</link>
             für Details über die Syntax für die Definition von Optionen.
         </para>
+
         <example id="zend.console.getopt.configuration.addrules.example">
             <title>Verwenden von addRules()</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->addRules(
@@ -113,6 +116,7 @@ $opts->setAliases(
 
     <sect2 id="zend.console.getopt.configuration.addargs">
         <title>Argument Listen hinzufügen</title>
+
         <para>
             Standardmäßig verwendet <classname>Zend_Console_Getopt</classname>
             <varname>$_SERVER['argv']</varname> für die Analyse des Arrays von
@@ -126,8 +130,10 @@ $opts->setAliases(
             Array von Zeichenketten, und die letztere Methode substituiert das Array für
             seine aktuellen Argumente.
         </para>
+
         <example id="zend.console.getopt.configuration.addargs.example">
             <title>Verwenden von addArguments() und setArguments()</title>
+
             <programlisting language="php"><![CDATA[
 // Normalerweise verwendet der Constructor $_SERVER['argv']
 $opts = new Zend_Console_Getopt('abp:');
@@ -143,6 +149,7 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
 
     <sect2 id="zend.console.getopt.configuration.config">
         <title>Konfiguration hinzufügen</title>
+
         <para>
             Der dritte Parameter des <classname>Zend_Console_Getopt</classname> Constructors
             ist ein Array von Optionen zur Konfiguration welche das Verhalten der
@@ -151,8 +158,10 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
             werden, oder es können auch individuelle Optionen mit der
             <methodname>setOption()</methodname> Methode verwendet werden.
         </para>
+
         <note>
             <title>Klarstellung des Ausdrucks "Option"</title>
+
             <para>
                 Der Ausdruck "Option" wird für die Konfiguration der
                 <classname>Zend_Console_Getopt</classname> Klasse verwendet um der Terminologie zu
@@ -161,11 +170,13 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
                 Klasse analysiert werden.
             </para>
         </note>
+
         <para>
             Die aktuell unterstützten Optionen sind durch Konstanten in der Klasse definiert.
             Diese Optionen, bzw deren konstanter Bezeichner (mit wörtlichem Wert in
             Großschreibweise) sind anbei gelistet:
         </para>
+
         <itemizedlist>
             <listitem>
                 <para>
@@ -177,16 +188,18 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
                     Diese Konfigurationsoption ist standardmäßig <constant>TRUE</constant>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_IGNORECASE</constant> ("ignoreCase"),
                     wenn es <constant>TRUE</constant> ist, werden Flags als Aliase voneinander
-                    betrachtet wenn Sie sich nur in der Groß-/Kleinschreibung unterscheiden.
+                    betrachtet wenn Sie sich nur in der Groß- oder Kleinschreibung unterscheiden.
                     Das bedeutet das <command>-a</command> und <command>-A</command> als
                     gleiche Flags angesehen werden. Diese Konfigurationsoption ist
                     standardmäßig <constant>FALSE</constant>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_Console_Getopt::CONFIG_RULEMODE</constant> ("ruleMode") kann

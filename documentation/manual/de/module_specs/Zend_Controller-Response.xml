@@ -38,7 +38,8 @@ $response->sendResponse();
                 sein Ihn aufzurufen. Wenn man trotzdem die Antwort manipulieren will oder Sie beim
                 Testen verwenden will, kann dieses Verhalten durch das Setzen des
                 <property>returnResponse</property> Flags mit
-                <methodname>Zend_Controller_Front::returnResponse(true)</methodname> geändert werden:
+                <methodname>Zend_Controller_Front::returnResponse(true)</methodname> geändert
+                werden:
             </para>
 
             <programlisting language="php"><![CDATA[$front->returnResponse(true);

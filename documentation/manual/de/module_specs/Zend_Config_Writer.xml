@@ -38,7 +38,7 @@
     <para>
         Der <acronym>INI</acronym> Writer hat zwei Modi für die Darstellung bezüglich Sektionen.
         Standardmäßig wird die Top-Level Konfiguration immer in Sektionsnamen geschrieben. Durch den
-        Aufruf von <command>$writer->setRenderWithoutSections()</command> werden alle Optionen in
+        Aufruf von <command>$writer->setRenderWithoutSections();</command> werden alle Optionen in
         den globalen Namespace der <acronym>INI</acronym> Datei geschrieben und es werden keine
         Sektionen angehängt.
     </para>

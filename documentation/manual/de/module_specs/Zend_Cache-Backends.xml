@@ -417,7 +417,7 @@ $cache = Zend_Cache::factory('Core', 'Two Levels');
                           <entry><constant>FALSE</constant></entry>
                           <entry>
                               Wenn <constant>TRUE</constant>, wird das fast_backend Argument als
-                              kompletter Klassenname verwendet; wenn <constant>false</constant>,
+                              kompletter Klassenname verwendet; wenn <constant>FALSE</constant>,
                               wird das frontend Argument als Ende des
                               "<classname>Zend_Cache_Backend_</classname>[...]" Klassennamens
                               verwendet

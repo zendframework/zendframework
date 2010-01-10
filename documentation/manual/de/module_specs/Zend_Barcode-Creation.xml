@@ -73,8 +73,8 @@ $renderer = Zend_Barcode::factory(
 
             <para>
                 Man kann ein <classname>Zend_Config</classname> Objekt an die Factory übergeben um
-                die notwendigen Objekte zu erstellen. Das folgende Beispiel ist funktionell identisch
-                mit dem vorherigen.
+                die notwendigen Objekte zu erstellen. Das folgende Beispiel ist funktionell
+                identisch mit dem vorherigen.
             </para>
 
             <programlisting language="php"><![CDATA[

@@ -46,8 +46,8 @@
                     <methodname>gotoSimple()</methodname> übergeben wird. Verwendet die
                     <acronym>API</acronym> von
                     <methodname>Zend_Controller_Action::_forward()</methodname>:
-                    <methodname>setGotoSimple($action, $controller = null, $module = null, array $params =
-                    array())</methodname>
+                    <methodname>setGotoSimple($action, $controller = null, $module = null, array
+                        $params = array())</methodname>
                 </para>
             </listitem>
 
@@ -55,8 +55,8 @@
                 <para>
                     <methodname>setGotoRoute()</methodname> kann verwendet werden um eine
                     <acronym>URL</acronym> basierend auf einer registrierten Route zu setzen.
-                    Übergeben in einem Array von Schlüssel/Werte Paaren und einem Routernamen, wird
-                    die <acronym>URL</acronym> anhand des Routertyps und der Definition
+                    Übergeben in einem Array von Schlüssel und Werte Paaren und einem Routernamen,
+                    wird die <acronym>URL</acronym> anhand des Routertyps und der Definition
                     zusammengebaut.
                 </para>
             </listitem>

@@ -6,6 +6,7 @@
 
     <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
         <title>Einführung</title>
+
         <para>
             Der <emphasis>FlashMessenger</emphasis> Helfer erlaubt es Nachrichten zu übergeben die
             ein Benutzer bei der nächsten Anfrage sehen können soll. Um das durchführen zu können,
@@ -24,10 +25,11 @@
 
     <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
         <title>Beispiel einer standardmäßigen Verwendung</title>
+
         <para>
             Das Anwendungsbeispiel von unten zeigt die Verwendung einer Flash Nachricht und Ihre
-            Grundlagen. Wenn die Aktion <filename>/some/my</filename> aufgerufen wird, fügt Sie die Flash
-            Nachricht "Eintrag gespeichert!" hinzu. Eine weitere Anfrage zu der Aktion
+            Grundlagen. Wenn die Aktion <filename>/some/my</filename> aufgerufen wird, fügt Sie die
+            Flash Nachricht "Eintrag gespeichert!" hinzu. Eine weitere Anfrage zu der Aktion
             <filename>/some/my-next-request</filename> empfängt Sie (und löscht Sie auch).
         </para>
 

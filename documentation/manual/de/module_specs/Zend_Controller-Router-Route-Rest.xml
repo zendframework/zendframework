@@ -177,7 +177,7 @@ $router->addConfig($config, 'routes');
             <listitem>
                 <para>
                     <emphasis><methodname>getAction()</methodname></emphasis> -
-                    Sollte eine einzelne  Ressource empfangen die von einer <acronym>URI</acronym>
+                    Sollte eine einzelne Ressource empfangen die von einer <acronym>URI</acronym>
                     identifiziert wird und diese mit der Vew verknüpfen.
                 </para>
             </listitem>

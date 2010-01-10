@@ -8,9 +8,9 @@
 <!ENTITY php.manual.link                        'http://www.php.net/manual/de/'>
 
 <!-- manual.xml.in -->
-<!ENTITY book.title                             'Zend Framework's Referenzhandbuch'>
-<!ENTITY book.pdf1.title                        'Zend Framework's Referenzhandbuch: Band 1'>
-<!ENTITY book.pdf2.title                        'Zend Framework's Referenzhandbuch: Band 2'>
+<!ENTITY book.title                             "Zend Framework's Referenzhandbuch">
+<!ENTITY book.pdf1.title                        "Zend Framework's Referenzhandbuch: Band 1">
+<!ENTITY book.pdf2.title                        "Zend Framework's Referenzhandbuch: Band 2">
 <!ENTITY book.subtitle                          'Zend Framework'>
 <!ENTITY book.edition                           'Referenzhandbuch für den Zend Framework'>
 
@@ -22,13 +22,13 @@
 <!ENTITY part.learning.plugins.title            'Plugins im Zend Framework'>
 <!ENTITY part.learning.layout.title             'Einstieg in Zend_Layout'>
 <!ENTITY part.learning.view.placeholders.title  'Einstieg in Zend_View Platzhalter'>
-<!ENTITY part.learning.form.decorators.title    'Zend_Form's Gestalter (Decorator) verstehen und verwenden'>
+<!ENTITY part.learning.form.decorators.title    "Zend_Form's Gestalter (Decorator) verstehen und verwenden">
 <!ENTITY part.learning.multiuser.title          'Einstieg in Zend_Session, Zend_Auth, und Zend_Acl'>
 <!ENTITY part.learning.lucene.title             'Einstieg in Zend_Search_Lucene'>
 <!ENTITY part.learning.paginator.title          'Einstieg in Zend_Paginator'>
 
-<!ENTITY part.reference.title                   'Zend Framework's Referenz'>
+<!ENTITY part.reference.title                   "Zend Framework's Referenz">
 
-<!ENTITY appendix.migration.title               'Zend Framework's Migrationshinweise'>
+<!ENTITY appendix.migration.title               "Zend Framework's Migrationshinweise">
 
-<!ENTITY appendix.performance.title             'Zend Framework's Performanceratgeber'>
+<!ENTITY appendix.performance.title             "Zend Framework's Performanceratgeber">

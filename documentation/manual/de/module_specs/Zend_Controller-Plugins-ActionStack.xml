@@ -37,7 +37,8 @@
                 <methodname>getRegistryKey()</methodname> und
                 <methodname>setRegistryKey()</methodname>. Diese können verwendet werden um
                 anzuzeigen welcher Registryschlüssel verwendet wird wenn der Stack herausgenommen
-                wird. Der Standardwert ist '<classname>Zend_Controller_Plugin_ActionStack</classname>'.
+                wird. Der Standardwert ist
+                '<classname>Zend_Controller_Plugin_ActionStack</classname>'.
             </para>
         </listitem>
 

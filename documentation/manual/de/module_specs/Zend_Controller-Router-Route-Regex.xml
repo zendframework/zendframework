@@ -61,10 +61,10 @@ $values = array(
 
     <note>
         <para>
-            Diese Routeklasse verwendet das '<emphasis>#</emphasis>' Zeichen als Begrenzer. Das bedeutet das
-            ein Hashzeichen ('#') kommentiert werden muß aber keine Schrägstriche ('/') in der
-            Routendefinition. Da das '#' Zeichen (Anker genannt) selben an einen Webserver übergeben
-            wird, wird man dieses Zeichen selten in der eigenen regex verwenden.
+            Diese Routeklasse verwendet das '<emphasis>#</emphasis>' Zeichen als Begrenzer. Das
+            bedeutet das ein Hashzeichen ('#') kommentiert werden muß aber keine Schrägstriche ('/')
+            in der Routendefinition. Da das '#' Zeichen (Anker genannt) selben an einen Webserver
+            übergeben wird, wird man dieses Zeichen selten in der eigenen regex verwenden.
         </para>
     </note>
 

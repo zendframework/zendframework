@@ -177,7 +177,7 @@ echo $chainedRoute->assemble();
 ]]></programlisting>
 
         <para>
-            Wenn man Chain-Routen mit <classname>Zend_Config</classname> konfiguriert und will das
+            Wenn man Chain-Routen mit <classname>Zend_Config</classname> konfiguriert und will dass
             das Trennzeichen ein anderes als ein Unterstrich ist, dann muss man dises Trennzeichen
             separat spezifizieren:
         </para>
@@ -214,6 +214,3 @@ echo $this->_router->assemble(array(), 'chainName_separator_subRouteName');
 ]]></programlisting>
     </sect4>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

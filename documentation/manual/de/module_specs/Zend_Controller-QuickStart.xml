@@ -6,17 +6,19 @@
 
     <sect2 id="zend.controller.quickstart.introduction">
         <title>Einführung</title>
+
         <para>
             <classname>Zend_Controller</classname> ist das Herz des <acronym>MVC</acronym> Systems
             des Zend Frameworks. <acronym>MVC</acronym> bedeutet <ulink
                 url="http://de.wikipedia.org/wiki/Model_View_Controller">Model-View-Controller</ulink>
-            und ist ein Entwurfsmuster, das darauf abzielt, Anwendungslogik von Anzeigelogik zu trennen.
-            <classname>Zend_Controller_Front</classname> implementiert ein <ulink
+            und ist ein Entwurfsmuster, das darauf abzielt, Anwendungslogik von Anzeigelogik zu
+            trennen. <classname>Zend_Controller_Front</classname> implementiert ein <ulink
                 url="http://www.martinfowler.com/eaaCatalog/frontController.html">Front-Controller</ulink>-Entwurfsmuster,
             das vorschreibt, dass alle Anfragen vom Front-Controller abgefangen und abhängig von der
             angeforderten <acronym>URL</acronym> an individuelle Action-Controller weitergeleitet
             werden.
         </para>
+
         <para>
             Das <classname>Zend_Controller</classname> System wurde im Sinne der
             Erweiterungsmöglichkeiten entwickelt, entweder durch Erstellen von Subklassen, welche

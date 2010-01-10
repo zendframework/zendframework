@@ -3,6 +3,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
+
     <para>
         <classname>Zend_Config_Xml</classname> ermöglicht es Entwicklern, Konfigurations-Daten in
         einfachen <acronym>XML</acronym> Dateien zu speichern und sie mit einer Syntax auszulesen,
@@ -17,16 +18,20 @@
         der Wert des Attributs entspricht dabei dem Namen der Sektion, von der Daten geerbt werden
         sollen.
     </para>
+
     <note>
         <title>Rückgabe Typen</title>
+
         <para>
             Konfigurations-Daten, die in <classname>Zend_Config_Xml</classname> eingelesen wurden,
             werden immer als Strings zurück gegeben. Die Konvertierung der Daten von Strings in
             andere Datentypen ist Aufgabe der Entwickler und von deren Bedürfnissen abhängig.
         </para>
     </note>
+
     <example id="zend.config.adapters.xml.example.using">
         <title>Zend_Config_Xml benutzen</title>
+
         <para>
             Dieses Beispiel zeigt die grundlegende Nutzung von
             <classname>Zend_Config_Xml</classname> um Konfigurations-Daten aus einer
@@ -186,14 +191,15 @@ $config = new Zend_Config_Xml($string, 'staging');
             Wenn der Namespace aktiviert ist, können <acronym>PHP</acronym> Konstanten in den
             Konfigurationsdateien verwendet werden. Zusätzlich ist das <emphasis>extends</emphasis>
             Attribut in den neuen Namespace gewandert und in im <constant>NULL</constant> Namespace
-            nicht mehr erlaubt. Es wird mit ZF 2.0 komplett entfernt.
+            nicht mehr erlaubt. Es wird mit Zend Framework 2.0 komplett entfernt.
         </para>
         <programlisting language="xml"><![CDATA[
 $string = <<<EOT
 <?xml version="1.0"?>
 <config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
     <production>
-        <includePath><zf:const zf:name="APPLICATION_PATH"/>/library</includePath>
+        <includePath>
+            <zf:const zf:name="APPLICATION_PATH"/>/library</includePath>
         <db>
             <adapter value="pdo_mysql"/>
             <params>

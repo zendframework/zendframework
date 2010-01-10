@@ -46,7 +46,7 @@ $router->addRoute('user', $hostnameRoute->chain($plainPathRoute);
         Hostnamerouten können verwendet werden wie sie sind, sollten es aber nie. Der Grund dahinter
         ist, das Hostnamerouten alleine jedem Pfad entsprechen würden. Was man also tun muß, ist
         eine Pfadroute an die Hostnameroute zu ketten. Das wird, wie im Beispiel, getan indem
-        <command>$hostnameRoute->chain($pathRoute)</command> aufgerufen wird. Indem das getan
+        <command>$hostnameRoute->chain($pathRoute);</command> aufgerufen wird. Indem das getan
         wird, wird <varname>$hostnameRoute</varname> nicht geändert, aber eine neue Route
         (<classname>Zend_Controller_Router_Route_Chain</classname>), welche dann dem Router
         übergeben werden kann, wird zurückgegeben.

@@ -3,6 +3,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.theory">
     <title>Die Theorie des Cachens</title>
+
     <para>
         Es gibt 3 Schlüsselkonzepte in <classname>Zend_Cache</classname>. Eines ist die eindeutige
         Identifizierung (ein String), die benutzt wird, um Cache Datensätze zu identifizieren. Das
@@ -11,7 +12,7 @@
         Konzept ist die bedingte Ausführung, so das Teile des Codes komplett übersprungen werden
         können, was die Leistung steigert. Die Haupt-Frontend Funktion (eg.
         <methodname>Zend_Cache_Core::get()</methodname>) ist immer so gestaltet, das
-        <constant>false</constant> zurückgegeben wird, wenn ein Cache fehlt. Aber nur, wenn das für
+        <constant>FALSE</constant> zurückgegeben wird, wenn ein Cache fehlt. Aber nur, wenn das für
         die Natur des Frontends Sinn macht. Das erlaubt es Endbenutzern, die Teile des Codes, die
         gecached (oder übersprungen) werden sollen, in
         <emphasis><methodname>if()</methodname>{ ... }</emphasis> Anweisungen zu umhüllen, wobei
@@ -19,11 +20,13 @@
         muss das erstellte auf alle Fälle gespeichert werden (z.B.
         <methodname>Zend_Cache_Core::save()</methodname>).
     </para>
+
     <note><para>
         Das Design der bedingten Ausführung des erzeugten Codes ist in einigen Frontends nicht
         notwendig (<emphasis>Function</emphasis>, zum Beispiel) wenn die komplette Logik im
         verwendeten Frontend integriert ist.
     </para></note>
+
     <note><para>
         'Cache hit' ist ein Ausdruck für eine Bedingung, wenn ein Cache Datensatz gefunden wurde, er
         gültig und 'frisch' ist (in anderen Worten, er ist noch nicht abgelaufen). 'Cache miss' ist
@@ -31,12 +34,15 @@
         normalerweise tun würde) und anschließend cachen. Wenn ein 'Cache hit' geschieht muß, auf
         der anderen Seite, das Backend automatisch den Datensatz vom Cache transparent holen.
     </para></note>
+
     <sect2 id="zend.cache.factory">
         <title>Die Zend_Cache Factory Methode</title>
+
         <para>
             Ein guter Weg, um eine verwendbare Instanz eines <classname>Zend_Cache</classname>
             Frontends zu erstellen, wird im folgenden Beispiel gegeben:
         </para>
+
         <programlisting language="php"><![CDATA[
 // Wir wählen ein Backend (zum Beispiel 'File' oder 'Sqlite'...)
 $backendName = '[...]';
@@ -57,20 +63,25 @@ $cache = Zend_Cache::factory($frontendName,
                              $frontendOptions,
                              $backendOptions);
 ]]></programlisting>
+
         <para>
-            In den folgenden Beispielen wird angenommen, dass die <varname>$cache</varname> Variable ein
-            gültiges, initiiertes Frontend wie gezeigt enthält und dass verstanden wird, wie
+            In den folgenden Beispielen wird angenommen, dass die <varname>$cache</varname> Variable
+            ein gültiges, initiiertes Frontend wie gezeigt enthält und dass verstanden wird, wie
             Parameter an das ausgewählte Backend übergeben werden.
         </para>
-        <note><para>
-            Immer <methodname>Zend_Cache::factory()</methodname> benutzen, um eine Frontend Instanz zu
-            bekommen. Das selbstständige Instantiieren von Frontends und Backends funktioniert nicht
-            so wie erwartet.
-        </para></note>
+
+        <note>
+            <para>
+                Immer <methodname>Zend_Cache::factory()</methodname> benutzen, um eine Frontend
+                Instanz zu bekommen. Das selbstständige Instantiieren von Frontends und Backends
+                funktioniert nicht so wie erwartet.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.cache.tags">
         <title>Markierte Datensätze</title>
+
         <para>
             Markierungen sind ein Weg um Cache Datensätze zu kategorisieren. Wenn der Cache mit der
             <methodname>save()</methodname> Methode abgespeichert werden soll, kann ein Array mit

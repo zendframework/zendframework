@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20176 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data Envelopes</title>
@@ -129,8 +129,9 @@ $data->addItems($someMoreItems);
 
             <listitem>
                 <para>
-                    Objekte die das <code>Traversable</code> implementieren, welches die Interfaces
-                    <code>Iterator</code> und <code>ArrayAccess</code> enthält.
+                    Objekte die das <classname>Traversable</classname> implementieren, welches die
+                    Interfaces <classname>Iterator</classname> und
+                    <classname>ArrayAccess</classname> enthält.
                 </para>
             </listitem>
         </itemizedlist>
@@ -169,10 +170,10 @@ $data->fromJson($json);
         <para>
             Einige Dojo Komponenten benötigen zusätzliche Metadaten zusammen mit dem
             dojo.data Payload zurückgegeben werden. Als Beispiel kann
-            <code>dojox.grid.Grid</code> Daten dynamisch von einem
-            <code>dojox.data.QueryReadStore</code> herausziehen. Damit die
+            <command>dojox.grid.Grid</command> Daten dynamisch von einem
+            <command>dojox.data.QueryReadStore</command> herausziehen. Damit die
             Seitenweise Darstellung richtig funktioniert, sollte jeder zurückgegebene
-            Payload einen <code>numRows</code> Schlüssel mit der kompletten Anzahl
+            Payload einen <property>numRows</property> Schlüssel mit der kompletten Anzahl
             an Zeilen enthalten, die von der Abfrage zurückgegeben wird. Mit diesen Daten
             weiß der Grid (a) wann er weitere kleine Anfragen an den Server
             abschicken muß für Subsets von Daten, und (b) wann er aufhören soll
@@ -222,8 +223,9 @@ $data->clearMetadata();
 
         <para>
             <classname>Zend_Dojo_Data</classname> implementiert die Interfaces
-            <code>ArrayAccess</code>, <code>Iterator</code> und <code>Countable</code>. Deshalb kann
-            man die Datenkollektion genauso verwenden kann wie wenn Sie ein Array wäre.
+            <command>ArrayAccess</command>, <command>Iterator</command> und
+            <command>Countable</command>. Deshalb kann man die Datenkollektion genauso verwenden
+            kann wie wenn Sie ein Array wäre.
         </para>
 
         <para>
@@ -302,8 +304,8 @@ $json = (string) $data; // Casten zu einem String == casten zu JSON
                     <para>
                         <methodname>setItems($items)</methodname>: Setzt mehrere Elemente auf
                         einmal, und überschreibt alle vorher im Objekt gesetzten.
-                        <varname>$items</varname> sollte ein Array oder ein <code>Traversable</code>
-                        Objekt sein.
+                        <varname>$items</varname> sollte ein Array oder ein
+                        <command>Traversable</command> Objekt sein.
                     </para>
                 </listitem>
 
@@ -335,8 +337,8 @@ $json = (string) $data; // Casten zu einem String == casten zu JSON
                         hinzu, indem Sie allen aktuellen Elementen angefügt werden. Wirft eine
                         Ausnahme wenn irgendeines der neuen Elemente einen Identifikator hat der zu
                         einem bereits in der Kollektion vorhandenen Identifikator passt.
-                        <varname>$items</varname> sollte ein Array oder ein <code>Traversable</code>
-                        Objekt sein.
+                        <varname>$items</varname> sollte ein Array oder ein
+                        <command>Traversable</command> Objekt sein.
                     </para>
                 </listitem>
 

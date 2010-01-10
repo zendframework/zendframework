@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20160 -->
+<!-- EN-Revision: 20176 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.multidb">
     <title>Zend_Application_Resource_Multidb</title>
@@ -64,14 +64,14 @@ $defaultDb = $resource->getDb();
             Zusätzlich kann der standardmäßige Datenbankadapter empfangen werden indem die Methode
             <methodname>getDefaultDb()</methodname> verwendet wird. Wenn man keinen standardmäßigen
             Adapter gesetzt hat, wird der erste konfigurierte Db Adapter zurückgegeben. Wenn man
-            <constant>false</constant> als ersten Parameter spezifiziert dann wird
-            <constant>null</constant> zurückgegeben wenn kein standardmäßiger Datenbankadapter
+            <constant>FALSE</constant> als ersten Parameter spezifiziert dann wird
+            <constant>NULL</constant> zurückgegeben wenn kein standardmäßiger Datenbankadapter
             gesetzt wurde.
          </para>
 
         <para>
             Anbei ist ein Beispiel welches annimmt dass das Multidb Ressource Plugin mit dem
-            obigen INI Beispiel konfiguriert wurde:
+            obigen <acronym>INI</acronym> Beispiel konfiguriert wurde:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 20176 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.decorators">
     <title>Dijit-Spezifische Formular Dekoratore</title>
@@ -13,10 +13,10 @@
     </para>
 
     <para>
-        Alle Dijit Dekoratore schauen nach der <code>dijitParams</code> Eigenschaft des gegebenen
-        Elements das dekoriert werden soll, und gibt Sie als <varname>$params</varname> Array an den
-        verwendeten Dijit View Helfer; diese werden dann von den anderen Eigenschaften seperiert
-        damit keine Duplikation von Informationen stattfindet.
+        Alle Dijit Dekoratore schauen nach der <property>dijitParams</property> Eigenschaft des
+        gegebenen Elements das dekoriert werden soll, und gibt Sie als <varname>$params</varname>
+        Array an den verwendeten Dijit View Helfer; diese werden dann von den anderen Eigenschaften
+        seperiert damit keine Duplikation von Informationen stattfindet.
     </para>
 
     <sect3 id="zend.dojo.form.decorators.dijitElement">
@@ -24,11 +24,11 @@
 
         <para>
             Die der <link linkend="zend.form.standardDecorators.viewHelper">ViewHelper
-                Dekorator</link> erwartet DijitElement eine <code>helper</code> Eigenschaft im
-            Elemente welche dann verwendet wird wenn der View Helfer sich um die Darstellung
+                Dekorator</link> erwartet DijitElement eine <property>helper</property> Eigenschaft
+            im Elemente welche dann verwendet wird wenn der View Helfer sich um die Darstellung
             kümmert. Dijit Parameter werden typischerweise direkt vom Element geholt, können aber
-            auch als Optionen über den <code>dijitParams</code> Schlüssel übergeben werden (der Wert
-            des Schlüssels sollte ein assoziatives Array von Optionen sein).
+            auch als Optionen über den <property>dijitParams</property> Schlüssel übergeben werden
+            (der Wert des Schlüssels sollte ein assoziatives Array von Optionen sein).
         </para>
 
         <para>
@@ -68,11 +68,11 @@ $element->setDecorators(array(
         </para>
 
         <para>
-            Da dijit.form.Form keine dijit Parameter für die Konfiguration benötigt, besteht der
-            grundsätzliche Unterschied darin das dem Dijit Fomular Viewhelfer eine DOM ID übergeben
-            werden muß um sicherzustellen das die programtechnische Dijiterstellung funktionieren
-            kann. Der Dekorator stellt das sicher indem der Formularname als Identifikator übergeben
-            wird.
+            Da <command>dijit.form.Form</command> keine dijit Parameter für die Konfiguration
+            benötigt, besteht der grundsätzliche Unterschied darin das dem Dijit Fomular Viewhelfer
+            eine <acronym>DOM</acronym> ID übergeben werden muß um sicherzustellen das die
+            programtechnische Dijiterstellung funktionieren kann. Der Dekorator stellt das sicher
+            indem der Formularname als Identifikator übergeben wird.
         </para>
     </sect3>
 
@@ -80,9 +80,10 @@ $element->setDecorators(array(
         <title>DijitContainer-basierende Dekoratore</title>
 
         <para>
-            Der <code>DijitContainer</code> Dekorator ist in Wirklichkeit eine abstrakte Klasse von
-            der eine Anzahl an anderen Dekoratoren erbt. Er bietet die selbe Funktionalität wie
-            <link linkend="zend.dojo.form.decorators.dijitElement">DijitElement</link> mit der
+            Der <classname>DijitContainer</classname> Dekorator ist in Wirklichkeit eine abstrakte
+            Klasse von der eine Anzahl an anderen Dekoratoren erbt. Er bietet die selbe
+            Funktionalität wie <link
+                linkend="zend.dojo.form.decorators.dijitElement">DijitElement</link> mit der
             zusätzlichen Unterstützung des Titels. Viele Layout Dijits benötigen den Titel oder
             können Ihn verwenden; DijitContainer verwendet die Legend Eigenschaft des Elements wenn
             Sie vorhanden ist, und kann auch die 'legend' oder die 'titel' Dekoratoroption
@@ -91,7 +92,8 @@ $element->setDecorators(array(
         </para>
 
         <para>
-            Nachfolgend ist eine Liste an Dekoratoren die von <code>DijitContainer</code> erben:
+            Nachfolgend ist eine Liste an Dekoratoren die von <classname>DijitContainer</classname>
+            erben:
         </para>
 
         <itemizedlist>
@@ -132,6 +134,3 @@ $subForm->setDecorators(array(
         </example>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

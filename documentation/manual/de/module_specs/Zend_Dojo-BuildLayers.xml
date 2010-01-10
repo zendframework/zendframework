@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19768 -->
+<!-- EN-Revision: 20176 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.build-layers">
     <title>Support für den Build Layer von Zend_Dojo</title>
@@ -19,7 +19,7 @@
 
         <para>
             Um einen Build Layer zu erstellen würde man traditioneller Weise eine JavaScript Datei
-            erstellen die <code>dojo.require</code> Anweisungen für jede Abhängigkeit hat, und
+            erstellen die <command>dojo.require</command> Anweisungen für jede Abhängigkeit hat, und
             optional einigen zusätzlichen Code den man ausführen will wen das Skript geladen wird.
             Als Beispiel:
         </para>
@@ -63,10 +63,11 @@ $view->dojo()->registerModulePath('custom', '../custom/')
 ]]></programlisting>
 
         <para>
-            Aber da <classname>Zend_Dojo</classname> die verschiedenen <code>dojo.require</code>
-            Anweisungen zusammenfügt, wie kann man das eigene Layer Skript erstellen? Man könnte
-            jede Seite öffnen, die erstellten <code>dojo.require</code> Anweisungen anschauen und
-            Sie herausschneiden und in eine Layer Skript Datei manuell einfügen.
+            Aber da <classname>Zend_Dojo</classname> die verschiedenen
+            <command>dojo.require</command> Anweisungen zusammenfügt, wie kann man das eigene Layer
+            Skript erstellen? Man könnte jede Seite öffnen, die erstellten
+            <command>dojo.require</command> Anweisungen anschauen und Sie herausschneiden und in
+            eine Layer Skript Datei manuell einfügen.
         </para>
 
         <para>
@@ -208,11 +209,12 @@ $build->setLayerName("custom.main");
                 <title>Einfügen von onLoad Events im erstellten Layer</title>
 
                 <para>
-                    <code>dojo.addOnLoad</code> ist eine nützliche Utility für die Spezifikation
-                    von Actions welche getriggert werden sollen wenn der <acronym>DOM</acronym>
-                    fertig geladen wurde. Der <methodname>dojo()</methodname> View Helfer kann
-                    diese Statements über seine Methoden <methodname>addOnLoad()</methodname> und
-                    <methodname>onLoadCapture*()</methodname> erstellen. In einigen Fällen macht es
+                    <command>dojo.addOnLoad</command> ist eine nützliche Utility für die
+                    Spezifikation von Actions welche getriggert werden sollen wenn der
+                    <acronym>DOM</acronym> fertig geladen wurde. Der <methodname>dojo()</methodname>
+                    View Helfer kann diese Statements über seine Methoden
+                    <methodname>addOnLoad()</methodname> und
+                    <methodname>onLoadCapture()</methodname> erstellen. In einigen Fällen macht es
                     Sinn diese in die eigene Layer Datei zu geben statt diese über das eigene View
                     Skript darzustellen.
                 </para>
@@ -247,10 +249,10 @@ $build->setConsumeOnLoad(true);
                 <para>
                     Der <methodname>dojo()</methodname> View Helfer enthält Methoden für das
                     Fangen von jeglichem JavaScript um diesen im &lt;script&gt; einzufügen, welches
-                    die verschiedenen <code>dojo.require</code> und <code>dojo.addOnLoad</code>
-                    Anweisungen enthält. Das kann bei der Erstellung von standardmäßigen
-                    Datenspeichern oder Objekten mit globaler Sichtbarkeit nützlich sein welche
-                    in der gesamten Anwendung verwendet werden.
+                    die verschiedenen <command>dojo.require</command> und
+                    <command>dojo.addOnLoad</command> Anweisungen enthält. Das kann bei der
+                    Erstellung von standardmäßigen Datenspeichern oder Objekten mit globaler
+                    Sichtbarkeit nützlich sein welche in der gesamten Anwendung verwendet werden.
                 </para>
 
                 <para>

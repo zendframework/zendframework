@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20176 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit-Specifische Fomularelemente</title>
@@ -63,9 +63,9 @@
     </itemizedlist>
 
     <para>
-        Dijit Parameter werden in der öffentlichen <code>dijitParams</code> Eigenschaft gespeichert.
-        Deshalb kann ein existierendes Formularelement einfach dijit-aktiviert werden indem diese
-        Eigenschaft auf dem Element gesetzt wird; man hat in diesem Fall nur nicht die
+        Dijit Parameter werden in der öffentlichen <property>dijitParams</property> Eigenschaft
+        gespeichert. Deshalb kann ein existierendes Formularelement einfach dijit-aktiviert werden
+        indem diese Eigenschaft auf dem Element gesetzt wird; man hat in diesem Fall nur nicht die
         Zugriffsmethoden um die Parameter zu manipulieren.
     </para>
 
@@ -93,7 +93,7 @@ $element->addDecorator('DijitElement')
 
     <para>
         Eine Variante von DijitElement, DijitMulti, bietet die Funktionalität des abstrakten
-        <code>Multi</code> Formularelements, das es Entwicklern erlaubt 'multiOptions' zu
+        <classname>Multi</classname> Formularelements, das es Entwicklern erlaubt 'multiOptions' zu
         spezifizieren -- typischerweise Select-Optionen oder Radio-Optionen.
     </para>
 
@@ -133,8 +133,8 @@ $element->addDecorator('DijitElement')
         </itemizedlist>
 
         <para>
-            Zusätzlich werden nur die Dekoratore <code>DijitElement</code> und
-            <code>DtDdWrapper</code> für Buttonelemente benutzt.
+            Zusätzlich werden nur die Dekoratore <classname>DijitElement</classname> und
+            <classname>DtDdWrapper</classname> für Buttonelemente benutzt.
         </para>
 
         <example id="zend.dojo.form.elements.button.example">
@@ -241,7 +241,8 @@ $form->addElement(
             <para>
                 ComboBoxen geben die Labelwerte, und nicht die Werte der Option zurück, was zu einem
                 Problem bei den Annahmen führen kann. Aus diesem Grund registieren Sie die
-                <code>InArray</code> Prüfung nicht automatisch (obwohl FilteringSelects das macht).
+                <classname>InArray</classname> Prüfung nicht automatisch (obwohl FilteringSelects
+                das macht).
             </para>
         </note>
 
@@ -327,11 +328,11 @@ $form->addElement(
 
         <para>
             Standardmäßig, wenn kein dojo.data Speicher im Element registriert wurde, registriert
-            dieses Element eine <code>InArray</code> Prüfung welche die Arrayschlüssel gegen
-            registrierte Optionen prüft. Dieses Verhalten kann deaktiviert werden indem entweder
-            <methodname>setRegisterInArrayValidator(false)</methodname> ausgerufen, oder ein
-            <constant>FALSE</constant> Wert an den Registrierungsschlüssel
-            <code>registerInArrayValidator</code> übergeben wird.
+            dieses Element eine <classname>InArray</classname> Prüfung welche die Arrayschlüssel
+            gegen registrierte Optionen prüft. Dieses Verhalten kann deaktiviert werden indem
+            entweder <methodname>setRegisterInArrayValidator(false)</methodname> ausgerufen, oder
+            ein <constant>FALSE</constant> Wert an den Registrierungsschlüssel
+            <property>registerInArrayValidator</property> übergeben wird.
         </para>
 
         <example id="zend.dojo.form.elements.comboBox.selectExample">
@@ -381,10 +382,9 @@ $form->addElement(
         </example>
 
         <para>
-            Das obige Beispiel könnte auch <code>FilteringSelect</code> statt <code>ComboBox</code>
-            verwenden.
+            Das obige Beispiel könnte auch <classname>FilteringSelect</classname> statt
+            <classname>ComboBox</classname> verwenden.
         </para>
-
     </sect3>
 
     <sect3 id="zend.dojo.form.elements.currencyTextBox">
@@ -1168,11 +1168,12 @@ $form->addElement(
         </para>
 
         <para>
-            Standardmäßig registriert dieses Element eine <code>InArray</code> Prüfung welche die
-            Arrayschlüssel gegen registrierte Optionen prüft. Dieses Verhalten kann deaktiviert
-            werden indem entweder <methodname>setRegisterInArrayValidator(false)</methodname>
-            ausgerufen, oder ein <constant>FALSE</constant> Wert an den Registrierungsschlüssel
-            <code>registerInArrayValidator</code> übergeben wird.
+            Standardmäßig registriert dieses Element eine <classname>InArray</classname> Prüfung
+            welche die Arrayschlüssel gegen registrierte Optionen prüft. Dieses Verhalten kann
+            deaktiviert werden indem entweder
+            <methodname>setRegisterInArrayValidator(false)</methodname> ausgerufen, oder ein
+            <constant>FALSE</constant> Wert an den Registrierungsschlüssel
+            <property>registerInArrayValidator</property> übergeben wird.
         </para>
 
         <example id="zend.dojo.form.elements.radioButton.example">

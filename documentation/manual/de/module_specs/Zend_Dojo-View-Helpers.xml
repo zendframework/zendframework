@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20116 -->
+<!-- EN-Revision: 20176 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dijit">
     <title>Dijit-Spezifische View Helfer</title>
@@ -155,8 +155,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
         </para>
 
         <para>
-            Alle Dijit Layoutelemente haben die Signatur <code>string ($id = null, $content = '',
-                array $params = array(), array $attribs = array())</code>. In allen Fällen wird,
+            Alle Dijit Layoutelemente haben die Signatur <command>string ($id = null, $content = '',
+                array $params = array(), array $attribs = array())</command>. In allen Fällen wird,
             wenn man keine Argumente übergibt, das Helferobjekt selbst zurückgegeben. Das gibt
             einem Zugriff auf die <methodname>captureStart()</methodname> und
             <methodname>captureEnd()</methodname> Methoden, welche es erlauben Inhalte zu holen
@@ -316,11 +316,12 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>captureStart($id, array $params = array(), array $attribs =
-                        array())</code>: Beginnt die Erfassung von Inhalt um Ihn in einem Container
-                    einzufügen. <varname>$params</varname> referiert auf die Dijit Parameters die
-                    mit dem Container verwendet werden, wärend <varname>$attribs</varname> auf alle
-                    generellen HTML Attribute die verwendet werden, zeigt.
+                    <command>captureStart($id, array $params = array(), array $attribs =
+                        array())</command>: Beginnt die Erfassung von Inhalt um Ihn in einem
+                    Container einzufügen. <varname>$params</varname> referiert auf die Dijit
+                    Parameters die mit dem Container verwendet werden, wärend
+                    <varname>$attribs</varname> auf alle generellen HTML Attribute die verwendet
+                    werden, zeigt.
                 </para>
 
                 <para>
@@ -399,8 +400,8 @@ echo $view->borderContainer()->captureEnd('masterLayout');
 
         <para>
             Die folgenden Dijit Formularelemente sind im Zend Framework vorhanden. Ausser wo es
-            beschrieben wird, haben alle die Signatur <code>string ($id, $value = '', array $params
-                = array(), array $attribs = array())</code>.
+            beschrieben wird, haben alle die Signatur <command>string ($id, $value = '', array
+                $params = array(), array $attribs = array())</command>.
         </para>
 
         <itemizedlist>
@@ -461,15 +462,16 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     der Liste der vorhandenen Optionen ist, und trotzdem eine gültige Eingabe
                     angenommen wird. Sie akzeptiert ein optionales fünftes Argument, ein
                     assoziatives Array <varname>$options</varname>; wenn es angegeben wird, wird
-                    ComboBox als <code>select</code> dargestellt. Es ist auch zu beachten das die
-                    verschiedenen <emphasis>Labelwerte</emphasis> des <varname>$options</varname>
-                    Arrays im Formular zurückgegeben werden -- nicht die Werte selbst.
+                    ComboBox als <emphasis>select</emphasis> dargestellt. Es ist auch zu beachten
+                    dass die verschiedenen <emphasis>Labelwerte</emphasis> des
+                    <varname>$options</varname> Arrays im Formular zurückgegeben werden -- nicht
+                    die Werte selbst.
                 </para>
 
                 <para>
                     Alternativ kann eine Information übergeben werden die einen dojo.data
                     Datenspeicher bezeichnet der mit diesem Element zu verwenden ist. Wenn er
-                    angegeben wird, wird die ComboBox als Texteingabe (<code>input</code>)
+                    angegeben wird, wird die ComboBox als Texteingabe (<emphasis>input</emphasis>)
                     dargestellt, und wird seine Optionen über den Datenspeicher holen.
                 </para>
 
@@ -624,9 +626,10 @@ echo $view->dateTextBox(
             <listitem>
                 <para>
                     <emphasis>Editor</emphasis>: dijit.Editor. Bietet einen WYSIGYG Editor über den
-                    Benutzer Inhalte erstellen oder bearbieten können. <code>dijit.Editor</code> ist
-                    ein pluginfähiger, erweiterbarer Editor mit einer Vielzahl an Parametern die für
-                    die Anpassung verwendet werden können; siehe <ulink
+                    Benutzer Inhalte erstellen oder bearbieten können.
+                    <command>dijit.Editor</command> ist ein pluginfähiger, erweiterbarer Editor mit
+                    einer Vielzahl an Parametern die für die Anpassung verwendet werden können;
+                    siehe <ulink
                         url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">in
                         die dijit.Editor Dokumentation</ulink> für weitere Details.
                 </para>
@@ -764,8 +767,8 @@ echo $view->editor('foo');
                     <listitem><para>
                         <emphasis>attribs</emphasis> (Optional): HTML Attribute die mit den
                         Maßstäben/Labels verwendet werden. Diese sollten dem Format der
-                        <code>params</code> Option folgen und können ein assoziatives Array mit den
-                        Schlüsseln 'container' und 'labels' sein.
+                        <property>params</property> Option folgen und können ein assoziatives Array
+                        mit den Schlüsseln 'container' und 'labels' sein.
                     </para></listitem>
                 </itemizedlist>
 
@@ -905,7 +908,8 @@ echo $view->passwordTextBox(
                     RadioButton akzeptiert ein optionales fünftes Argument,
                     <varname>$options</varname>, ein assoziatives Array von Werte/Label Paaren das
                     als Radiooptionen verwendet wird. Diese können auch als
-                    <varname>$attribs</varname> Schlüssel <code>Optionen</code> angegeben werden.
+                    <varname>$attribs</varname> Schlüssel <property>options</property> angegeben
+                    werden.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -928,8 +932,8 @@ echo $view->radioButton(
                     <emphasis>SimpleTextarea</emphasis>: dijit.form.SimpleTextarea. Diese
                     funktionieren wie normale Textareas, werden aber gestylt indem das aktuelle
                     dijit Thema verwendet wird. Es müssen weder die rows noch die columns Attribute
-                    spezifiziert werden; verwende stattdessen <code>ems</code> oder Prozente für die
-                    Breite und Höhe.
+                    spezifiziert werden; verwende stattdessen <property>ems</property> oder Prozente
+                    für die Breite und Höhe.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -1088,33 +1092,34 @@ echo $view->validationTextBox(
             oder experimentelle Dijits von Dojox verwenden. Wärend Zend Framework nicht jeden Dijit
             direkt unterstützen kann, bietet es einiges an direkter rudimentärer Unterstützung für
             jeden Dijit, und es bietet einiges an rudimentärer Unterstützung für beliebige Dijit
-            Typen über den <code>CustomDijit</code> View Helfer.
+            Typen über den <classname>CustomDijit</classname> View Helfer.
         </para>
 
         <para>
-            Die <acronym>API</acronym> des <code>CustomDijit</code> View Helfers ist genauso wie die
-            jedes anderen Dijits, mit einem grundsätzlichen Unterschied: Das dritten "params"
-            Argument <emphasis>muss</emphasis> das Attribut "dojotype" enthalten. Der Wert dieses
-            Attributs sollte die Dijit Klasse sein die man verwenden will.
+            Die <acronym>API</acronym> des <classname>CustomDijit</classname> View Helfers ist
+            genauso wie die jedes anderen Dijits, mit einem grundsätzlichen Unterschied: Das dritten
+            "params" Argument <emphasis>muss</emphasis> das Attribut "dojotype" enthalten. Der Wert
+            dieses Attributs sollte die Dijit Klasse sein die man verwenden will.
         </para>
 
         <para>
-            <code>CustomDijit</code> erweitert den Basis <code>DijitContainer</code> View Helfer,
-            welches er erlaubt Inhalte zu fangen (durch Verwendung der
-            <methodname>captureStart()</methodname>/<methodname>captureEnd()</methodname>
-            Methodenpaare). <methodname>captureStart()</methodname> erwartet auch das man das
-            "dojoType" Attribut als sein "params" Argument übergibt.
+            <classname>CustomDijit</classname> erweitert den Basis
+            <classname>DijitContainer</classname> View Helfer, welches er erlaubt Inhalte zu fangen
+            (durch Verwendung der <methodname>captureStart()</methodname> und
+            <methodname>captureEnd()</methodname> Methodenpaare).
+            <methodname>captureStart()</methodname> erwartet auch das man das "dojoType" Attribut
+            als sein "params" Argument übergibt.
         </para>
 
         <example id="zend.dojo.view.dijit.custom.example">
             <title>Verwendung von CustomDijit um ein dojox.layout.ContentPane darzustellen</title>
 
             <para>
-                <code>dojox.layout.ContentPane</code> ist eine Next-Generation Erweiterung von
-                <code>dijit.layout.ContentPane</code> und bietet ein Superset der Möglichkeiten
-                dieser Klasse. Bis seine Funktionalitäten stabil sind, wird es weiterhin in Dojox
-                leben. Wenn man es trotzdem im heutigen Zend Framework verwenden will, kann man
-                den <code>CustomDijit</code> View Helfer verwenden.
+                <command>dojox.layout.ContentPane</command> ist eine Next-Generation Erweiterung von
+                <command>dijit.layout.ContentPane</command> und bietet ein Superset der
+                Möglichkeiten dieser Klasse. Bis seine Funktionalitäten stabil sind, wird es
+                weiterhin in Dojox leben. Wenn man es trotzdem im heutigen Zend Framework verwenden
+                will, kann man den <classname>CustomDijit</classname> View Helfer verwenden.
             </para>
 
             <para>
@@ -1153,11 +1158,11 @@ Das ist der Inhalt der Ebene
 ]]></programlisting>
 
             <para>
-                Man kann <code>CustomDijit</code> auch einfach erweitern um Unterstützung für
-                eigene Dijits zu bieten. Wenn man, als Beispiel,
-                <code>dijit.layout.ContentPane</code> erweitern will um eine eigene
-                <code>foo.ContentPane</code> Klasse zu erstellen, kann man den folgenden Helfer
-                erstellen um Ihn zu unterstützen:
+                Man kann <classname>CustomDijit</classname> auch einfach erweitern um Unterstützung
+                für eigene Dijits zu bieten. Wenn man, als Beispiel,
+                <command>dijit.layout.ContentPane</command> erweitern will um eine eigene
+                <command>foo.ContentPane</command> Klasse zu erstellen, kann man den folgenden
+                Helfer erstellen um Ihn zu unterstützen:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -1178,11 +1183,8 @@ class My_View_Helper_FooContentPane
             <para>
                 Solange der eigene Dijit der gleichen grundsätzlichen <acronym>API</acronym> wie
                 offizielle Dijits folgt, sollte die Verwendung oder Erweiterung von
-                <code>CustomDijit</code> korrekt funktionieren.
+                <classname>CustomDijit</classname> korrekt funktionieren.
             </para>
         </example>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,133 +1,67 @@
 <sect1 id="zend.pdf.introduction">
-
     <!-- @todo review and revise upon completion of refactoring -->
-
     <title>Introdução.</title>
-
     <para>
-
     O módulo Zend_Pdf é um motor para manipulação de PDF (Portable Document Format) totalmente escrito em PHP 5.
-
     Ele pode carregar documentos existentes, criar novos documentos, modificar e salvar documentos modificados.
-
     Dessa forma, este módulo pode ajudar qualquer aplicação baseada em PHP a preparar dinamicamente documentos
-
     em PDF através da modificação de um template já existente ou pela geração de um documento a partir de rabiscos.
 
-
-
     O módulo Zend_Pdf dá suporte às seguintes características:
-
     <itemizedlist>
-
         <listitem>
-
             <para>
-
             Criação de um novo documento ou carregar um já existente.
-
             <footnote>
-
                 <para>
-
                 Documentos PDF V1.4 (Acrobat 5) agora tem suporte para carga (loading).
-
                 </para>
-
             </footnote>
-
             </para>
-
         </listitem>
-
         <listitem>
-
             <para>
-
             Recuperação de revisão específica do documento.
-
             </para>
-
         </listitem>
-
         <listitem>
-
             <para>
-
             Manipulação das páginas do documento. Mudança de ordem, adição de novas páginas e remoção de páginas do documento.
-
             </para>
-
         </listitem>
-
         <listitem>
-
             <para>
-
             Diferentes formas primitivas de desenho (linhas, retângulos, polígonos, círculos, elipses e áreas).
-
             </para>
-
         </listitem>
-
         <listitem>
-
             <para>
-
             Desenho de texto usando qualquer uma das 14 fontes padrões (built-in) ou suas próprias fontes TrueType personalizadas.
-
             </para>
-
         </listitem>
-
         <listitem>
-
             <para>
-
             Rotações.
-
             </para>
-
         </listitem>
-
         <listitem>
-
             <para>
-
             Desenho de imagens.
-
             <footnote>
-
                 <para>
-
                 Imagens nos formatos JPG, PNG [até 8bit por canal+Alpha] e TIFF são suportadas.
-
                 </para>
-
             </footnote>
-
             </para>
-
         </listitem>
-
         <listitem>
-
             <para>
-
              Atualização incremental dos arquivos PFD.
-
             </para>
-
         </listitem>
-
     </itemizedlist>
-
     </para>
-
 </sect1>
-
 <!--
-
 vim:se ts=4 sw=4 et:
-
 -->

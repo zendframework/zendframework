@@ -1,397 +1,199 @@
 <sect1 id="zend.pdf.info">
-
     <!-- @todo review and revise upon completion of refactoring -->
-
     <title>Informação do Documento e Metadados.</title>
-
     <para>
-
         Um documento PDF deve incluir informações gerais como o título do documento, autor, e datas de criação e modificação.
-
     </para>
-
     <para>
-
         Historicamente essas informações são armazenadas com o uso de estruturas especiais. Esta estrutura está
-
         disponível para leitura e escrita como um array associativo usando a propriedade pública <code>properties</code>
-
         dos obejtos Zend_Pdf:
-
             <programlisting role="php"><![CDATA[<?php
-
 $pdf = Zend_Pdf::load($pdfPath);
 
-
-
 echo $pdf->properties['Title'] . "\n";
-
 echo $pdf->properties['Author'] . "\n";
 
-
-
 $pdf->properties['Title'] = 'New Title.';
-
 $pdf->save($pdfPath);
-
 ]]>
-
             </programlisting>
 
-
-
     </para>
-
     <para>
-
-
 
         As seguintes chaves são definidas pelo padrão PDF v1.4 (Acrobat 5):
 
-
-
         <itemizedlist>
-
             <listitem>
-
                 <para>
-
                     <emphasis>Title</emphasis> - texto, opcional, o título do documento.
-
                 </para>
-
             </listitem>
-
             <listitem>
-
                 <para>
-
                     <emphasis>Author</emphasis> - texto, opcional, o nome da pessoa que criou o documento.
-
                 </para>
-
             </listitem>
-
             <listitem>
-
                 <para>
-
                     <emphasis>Subject</emphasis> - texto, opcional, o assunto do documento.
-
                 </para>
-
             </listitem>
-
             <listitem>
-
                 <para>
-
                     <emphasis>Keywords</emphasis> -  texto, opcional, palavras-chave associadas ao documento.
-
                 </para>
-
             </listitem>
-
             <listitem>
-
                 <para>
-
                     <emphasis>Creator</emphasis> -  texto, opcional, se o documento foi convertido para o formato PDF a
-
                     partir de outro formato, o nome da aplicação (por exemplo, Adobe FrameMaker®) que criou o documento original.
-
                 </para>
-
             </listitem>
-
             <listitem>
-
                 <para>
-
                     <emphasis>Producer</emphasis> -  texto, opcional, se o documento foi convertido para o formato PDF a
-
                     partir de outro formato, o nome da aplicação (por exemplo, Adobe Distiller®) que converteu o converteu.
-
                 </para>
-
             </listitem>
-
             <listitem>
-
                 <para>
-
                     <emphasis>CreationDate</emphasis> -  texto, opcional, a data e a hora na qual o documento foi criado, na seguinte forma:
-
                     "D:YYYYMMDDHHmmSSOHH'mm'", onde:
-
                     <itemizedlist>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>YYYY</emphasis> é o ano.
-
                             </para>
-
                         </listitem>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>MM</emphasis> é o mês.
-
                             </para>
-
                         </listitem>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>DD</emphasis> é o dia (01–31).
-
                             </para>
-
                         </listitem>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>HH</emphasis> é a hora (00–23).
-
                             </para>
-
                         </listitem>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>mm</emphasis> é o minuto(00–59).
-
                             </para>
-
                         </listitem>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>SS</emphasis> é o segundo (00–59).
-
                             </para>
-
                         </listitem>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>O</emphasis> é a relação da hora local com a hora Universal(UT),
-
                                 denotada pelos caracteres +, −, ou Z (veja abaixo).
-
                             </para>
-
                         </listitem>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>HH</emphasis> seguido por ' é o valor absoluto da diferença da hora Universal
-
                                 em horas (00–23).
-
                             </para>
-
                         </listitem>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>mm</emphasis>  seguido por ' é o valor absoluto da diferença da hora Universal
-
                                 em minutos (00–59).
-
                             </para>
-
                         </listitem>
-
                     </itemizedlist>
-
                     O apóstrofo (') depois do HH e do  mm é parte da sintaxe. Todos os campos depois do ano
-
                     são opcionais . (O préfixo D:, embora também seja opcional, é fortemente recomendado.)
-
                     Os valores padrões para MM e DD são, para ambos, 01; todos os outros campos numéricos
-
                     têm valor padrão zero. Um sinal positivo(+) no valor de um campo significa que a hora local
-
                     é mais tarde que a hora Universal, e um sinal negativo(−) indica que é mais cedo. A letra Z
-
                     indica que a hora é igual a hora Universal. Se nenhuma informação for específicada, a relação
-
                     da hora com a hora Universal é considerada desconhecida. Sendo ou não conhecido o fuso
-
                     horário, o resto da data deve ser especificado em "local time".
-
                 </para>
-
                 <para>
-
                     Por exemplo, 23 de Dezembro de 1998, 7:52 da noite, U.S. Pacific Standard Time, é
-
                     representado pela string "D:199812231952−08'00'".
-
                 </para>
-
             </listitem>
-
             <listitem>
-
                 <para>
-
                     <emphasis>ModDate</emphasis> - texto, opcional, a data e a hora da atualização mais recente no
-
                     documento, na mesma forma de <emphasis>CreationDate</emphasis>.
-
                 </para>
-
             </listitem>
-
             <listitem>
-
                 <para>
-
                     <emphasis>Trapped</emphasis> - boolean, opcional, indica se o documento foi modificado para a
-
                     inclusão de informações "trapped".
-
                     <itemizedlist>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>true</emphasis> - The document has been fully trapped; no further trapping is needed.
-
                             </para>
-
                         </listitem>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>false</emphasis> - The document has not yet been trapped; any desired trapping must still be done.
-
                             </para>
-
                         </listitem>
-
                         <listitem>
-
                             <para>
-
                                 <emphasis>null</emphasis> - Either it is unknown whether the document has been
-
                                 trapped or it has been partly but not yet fully trapped; some
-
                                 additional trapping may still be needed.
-
                             </para>
-
                         </listitem>
-
                     </itemizedlist>
-
                 </para>
-
             </listitem>
-
         </itemizedlist>
-
     </para>
 
-
-
     <para>
-
         Desde a versão de PDF v 1.6 os metadados podem ser armazenados no documento XML especial anexado
-
         ao documento PDF
-
         (XMP - <ulink url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>).
-
     </para>
 
-
-
     <para>
-
         Este documento XML pode ser recuperado e anexado ao PDF com os métodos <code>Zend_Pdf::getMetadata()</code> e
-
         <code>Zend_Pdf::setMetadata($metadata)</code>:
-
             <programlisting role="php"><![CDATA[<?php
-
 $pdf = Zend_Pdf::load($pdfPath);
-
 $metadata = $pdf->getMetadata();
-
 $metadataDOM = new DOMDocument();
-
 $metadataDOM->loadXML($metadata);
 
-
-
 $xpath = new DOMXPath($metadataDOM);
-
 $pdfPreffixNamespaceURI = $xpath->query('/rdf:RDF/rdf:Description')->item(0)->lookupNamespaceURI('pdf');
-
 $xpath->registerNamespace('pdf', $pdfPreffixNamespaceURI);
 
-
-
 $titleNode = $xpath->query('/rdf:RDF/rdf:Description/pdf:Title')->item(0);
-
 $title = $titleNode->nodeValue;
-
 ...
 
-
-
 $titleNode->nodeValue = 'New title';
-
 $pdf->setMetadata($metadataDOM->saveXML());
-
 $pdf->save($pdfPath);
-
 ]]>
-
             </programlisting>
-
     </para>
-
-
 
     <para>
-
         Propriedades comuns são duplicadas na estrutura Info e nos Metadados do documento (se presente).
-
         Agora é responsabilidade  da aplicação do usuário mantê-los sincronizados.
-
     </para>
-
 </sect1>
-
 <!--
-
 vim:se ts=4 sw=4 et:
-
 -->

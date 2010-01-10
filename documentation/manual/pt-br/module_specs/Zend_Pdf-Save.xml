@@ -1,80 +1,40 @@
 <sect1 id="zend.pdf.save">
-
     <title>Salvar mudanças no documento PDF.</title>
-
     <para>
-
     Existem dois métodos que fornecem a persistência para mudanças feitas no documento PDF. Eles são os métodos
-
     <code>Zend_Pdf::save()</code>e o <code>Zend_Pdf::render()</code>.
-
     </para>
 
-
-
     <para>
-
     O <code>Zend_Pdf::save($filename, $updateOnly = false)</code> salva do documento PDF em um arquivo. Se o argumento $updateOnly
-
     for verdadeiro, então apenas os novos segmentos do PDF serão acrescentados ao arquivo. De outra forma, o arquivo é sobrescrito.
-
     </para>
-
-
 
     <para>
-
     O <code>Zend_Pdf::render($newSegmentOnly = false)</code> retorna o documento PDF como um texto(string). Se
-
     $newSegmentOnly for verdadeiro, então apenas os novos segmentos do PDF serão retornados.
-
     </para>
-
-
 
     <example id="zend.pdf.save.example-1">
-
         <title>Salvar um documento PDF.</title>
-
         <programlisting role="php"><![CDATA[<?php
-
 ...
-
 // Load PDF document.
-
 $pdf = Zend_Pdf::load($fileName);
-
 ...
-
 // Update document
-
 $pdf->save($fileName, true);
-
 // Save document as a new file
-
 $pdf->save($newFileName);
 
-
-
 // Return PDF document as a string.
-
 $pdfString = $pdf->render();
 
-
-
 ...]]>
-
         </programlisting>
-
     </example>
 
-
-
 </sect1>
-
 <!--
-
 vim:se ts=4 sw=4 et:
-
 -->
-

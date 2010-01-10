@@ -397,7 +397,7 @@ $names = $upload->getMimeType('foo');
                 Due to security reasons also the original data within $_FILES will be overridden
                 as soon as <classname>Zend_File_Transfer</classname> is initiated. When you want
                 to omit this behaviour and have the original data simply set the
-                <property>detectInfos</property> option to false at initiation.
+                <property>detectInfos</property> option to <constant>FALSE</constant> at initiation.
             </para>
 
             <para>

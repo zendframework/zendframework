@@ -654,7 +654,8 @@
 
             <listitem>
                 <para>
-                    <emphasis>Caracteres permitidos:</emphasis> '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+                    <emphasis>Caracteres permitidos:</emphasis>
+                    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
                 </para>
             </listitem>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20116 -->
+<!-- EN-Revision: 20161 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.19">
     <title>Zend Framework 1.9</title>
@@ -366,37 +366,80 @@ $container = new Zend_Navigation(array(
 ]]></programlisting>
     </sect2>
 
-    <para>
-        Zusätzlich können Benutzer der Serie 1.9 von anderen Änderungen beginnend in Version 1.9.7
-        betroffen sein. Das sind alles Sicherheitsbehebungen welche auch potentiell Probleme mit
-        Rückwärtskompatibilität haben können.
-    </para>
-
-    <sect2 id="migration.19.zend.dojo.editor">
-        <title>Zend_Dojo_View_Helper_Editor</title>
+    <sect2 id="migration.19.security">
+        <title>Sicherheitsfixes ab 1.9.7</title>
 
         <para>
-            Eine kleine Änderung wurde in der Serie 1.9 gemacht um die Standardverwendung des dijit
-            Editors zu modifizieren um <acronym>div</acronym> Tags statt einem
-            <acronym>textarea</acronym> Tag zu verwenden; die letztere Verwendung bringt <ulink
-                url="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">Sicherheits
-                Probleme</ulink> mit sich, und die Verwendung von <acronym>div</acronym> Tags wird
-            vom Dojo Projekt empfohlen.
+            Zusätzlich können Benutzer der Serie 1.9 von anderen Änderungen beginnend in Version
+            1.9.7 betroffen sein. Das sind alles Sicherheitsbehebungen welche auch potentiell
+            Probleme mit Rückwärtskompatibilität haben können.
         </para>
 
-        <para>
-            Um trotzdem eine erfolgreiche Degration zu erlauben, wurde dem View Helper eine neue
-            Option <varname>degrade</varname> hinzugefügt; diese erlaubt es Entwicklern statt dessen
-            optional ein <acronym>textarea</acronym> zu verwenden. Trotzdem öffnet dies Anwendungen
-            die damit entwickelt wurden <acronym>XSS</acronym> Vektoren. In 1.9.7 wurde diese Option
-            entfernt. Die erfolgreiche Degration wird trotzdem, über das <acronym>noscript</acronym>
-            Tag unterstützt welches eine <acronym>textarea</acronym> enthält. Diese Lösung
-            adressiert Sicherheitsbedenken.
-        </para>
+        <sect3 id="migration.19.security.zend.dojo.editor">
+            <title>Zend_Dojo_View_Helper_Editor</title>
 
-        <para>
-            Die Folgerung ist, das wenn man das <varname>degrade</varname> Flag verwendet, dieses
-            ab diesem Zeitpunkt einfach ignoriert wird.
-        </para>
+            <para>
+                Eine kleine Änderung wurde in der Serie 1.9 gemacht um die Standardverwendung des
+                dijit Editors zu modifizieren um <acronym>div</acronym> Tags statt einem
+                <acronym>textarea</acronym> Tag zu verwenden; die letztere Verwendung bringt <ulink
+                    url="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">Sicherheits
+                    Probleme</ulink> mit sich, und die Verwendung von <acronym>div</acronym> Tags
+                wird vom Dojo Projekt empfohlen.
+            </para>
+
+            <para>
+                Um trotzdem eine erfolgreiche Degration zu erlauben, wurde dem View Helper eine neue
+                Option <varname>degrade</varname> hinzugefügt; diese erlaubt es Entwicklern statt
+                dessen optional ein <acronym>textarea</acronym> zu verwenden. Trotzdem öffnet dies
+                Anwendungen die damit entwickelt wurden <acronym>XSS</acronym> Vektoren. In 1.9.7
+                wurde diese Option entfernt. Die erfolgreiche Degration wird trotzdem, über das
+                <acronym>noscript</acronym> Tag unterstützt welches eine <acronym>textarea</acronym>
+                enthält. Diese Lösung adressiert Sicherheitsbedenken.
+            </para>
+
+            <para>
+                Die Folgerung ist, das wenn man das <varname>degrade</varname> Flag verwendet,
+                dieses ab diesem Zeitpunkt einfach ignoriert wird.
+            </para>
+        </sect3>
+
+        <sect3 id="migration.19.security.zend.filter.html-entities">
+            <title>Zend_Filter_HtmlEntities</title>
+
+            <para>
+                Um zu einem höheren Sicherheitsstandard für die Zeichenkodierung zu kommen, ist der
+                Standardwert von <classname>Zend_Filter_HtmlEntities</classname> jetzt
+                <acronym>UTF-8</acronym> statt <acronym>ISO-8859-1</acronym>.
+            </para>
+
+            <para>
+                Zusätzlich, weil der aktuelle Mechanismus mit Zeichenkodierung handelt und nicht mit
+                Zeichensets, wurden zwei Methoden hinzugefügt.
+                <methodname>setEncoding()</methodname> und <methodname>getEncoding()</methodname>.
+                Die vorhergehenden Methoden <methodname>setCharSet()</methodname> und
+                <methodname>setCharSet()</methodname> sind jetzt deprecated und verweisen auf die
+                neuen Methoden. Letztendlich, statt die geschützten Mitglieder in der
+                <methodname>filter()</methodname> Methode direkt zu verwenden, werden Sie durch Ihre
+                expliziten Zugriffsmethoden empfangen. Wenn man den Filter in der Vergangenheit
+                erweitert hat, sollte man seinen Code und seine Unittests prüfen um sicherzustellen
+                das weiterhin alles funktioniert.
+            </para>
+        </sect3>
+
+        <sect3 id="migration.19.security.zend.filter.strip-tags">
+            <title>Zend_Filter_StripTags</title>
+
+            <para>
+                <classname>Zend_Filter_StripTags</classname> enthielt in voehergehenden Versionen
+                ein <varname>commentsAllowed</varname> Flag, welches es erlaubt hat HTML Kommentare
+                in von dieser Klasse gefiltertem HTML Text als erlaubt zu markieren. Aber das öffnet
+                den Weg für <acronym>XSS</acronym> Attacken, speziell im Internet Explorer (der es
+                erlaubt konditionelle Funktionalität über HMTL Kommentare zu spezifizieren).
+                Beginnend mit Version 1.9.7 (und retour mit den Versionen 1.8.5 und 1.7.9), hat das
+                <varname>commentsAllowed</varname> Flag keine Bedeutung meht, und alle HTML
+                Kommentare, inklusive denen die andere HTML Tags oder untergeordnete Kommentare
+                enthalten, werden von der endgültigen Aufgabe des Filters entfernt.
+            </para>
+        </sect3>
     </sect2>
 </sect1>

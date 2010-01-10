@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20121 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.response">
     <title>Zend_Http_Response</title>
@@ -16,7 +16,7 @@
         </para>
 
         <para>
-            In den meisten Fällen wird ein Zend_Http_Response Objekt über die factory() Methode
+            In den meisten Fällen wird ein Zend_Http_Response Objekt über die fromString() Methode
             instanziert, die einen String liest, der eine HTTP Rückantwort enthält und ein
             Zend_Http_Response Objekt zurückgibt.
             <example id="zend.http.response.introduction.example-1">
@@ -34,7 +34,7 @@ fwrite($sock, $req);
 while ($buff = fread($sock, 1024))
     $str .= $sock;
 
-$response = Zend_Http_Response::factory($str);
+$response = Zend_Http_Response::fromString($str);
 ]]></programlisting>
             </example>
         </para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17987 -->
+<!-- EN-Revision: 20143 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() View Helfer</title>
@@ -116,6 +116,29 @@ $this->dojo()->enable()
             sind und das man die Aktion des Endpunktes für das FilteringSelect erstellt hat!
         </para>
     </example>
+
+    <note>
+        <title>Standardmäßig wird die UTF-8 Kodierung verwendet</title>
+
+        <para>
+            Standardmäßig verwendet Zend Framework <acronym>UTF-8</acronym> als seine
+            Standardkodierung, und speziell in diesem Fall, macht das
+            <classname>Zend_View</classname> genauso. Die Zeichenkodierung kann im View Objekt
+            selbst auf etwas anderes gesetzt werden indem die Methode
+            <methodname>setEncoding()</methodname> verwendet wird (oder der Parameter
+            <varname>encoding</varname> bei der Instanzierung angegeben wird). Trotzdem, da
+            <classname>Zend_View_Interface</classname> keine Zugriffsmethoden für die Kodierung
+            anbietet ist es möglich dass, wenn man eine eigene View Implementation verwendet, man
+            keine <methodname>getEncoding()</methodname> Methode hat, welche der View Helfer intern
+            für die Erkennung des Zeichensets verwendet in das kodiert werden soll.
+        </para>
+
+        <para>
+            Wenn man <acronym>UTF-8</acronym> in solch einer Situation nicht verwenden will, muss
+            man in der eigenen View Implementation eine <methodname>getEncoding()</methodname>
+            Methode implementieren.
+        </para>
+    </note>
 
     <sect3 id="zend.dojo.view.dojo.declarative">
         <title>Programtechnische und Deklarative Verwendung von Dojo</title>

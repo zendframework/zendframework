@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19819 -->
+<!-- EN-Revision: 20142 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
@@ -68,8 +68,71 @@ $authors = $feed->getAuthors()->getValues();
 ]]></programlisting>
     </sect2>
 
+    <sect2 id="migration.110.zend.filter.html-entities">
+        <title>Zend_Filter_HtmlEntities</title>
+
+        <para>
+            Um zu einem höheren Sicherheitsstandard für die Zeichenkodierung zu kommen, ist der
+            Standardwert von <classname>Zend_Filter_HtmlEntities</classname> jetzt
+            <acronym>UTF-8</acronym> statt <acronym>ISO-8859-1</acronym>.
+        </para>
+
+        <para>
+            Zusätzlich, weil der aktuelle Mechanismus mit Zeichenkodierung handelt und nicht mit
+            Zeichensets, wurden zwei Methoden hinzugefügt. <methodname>setEncoding()</methodname>
+            und <methodname>getEncoding()</methodname>. Die vorhergehenden Methoden
+            <methodname>setCharSet()</methodname> und <methodname>setCharSet()</methodname> sind
+            jetzt deprecated und verweisen auf die neuen Methoden. Letztendlich, statt die
+            geschützten Mitglieder in der <methodname>filter()</methodname> Methode direkt zu
+            verwenden, werden Sie durch Ihre expliziten Zugriffsmethoden empfangen. Wenn man den
+            Filter in der Vergangenheit erweitert hat, sollte man seinen Code und seine Unittests
+            prüfen um sicherzustellen das weiterhin alles funktioniert.
+        </para>
+    </sect2>
+
+    <sect2 id="migration.110.zend.filter.strip-tags">
+        <title>Zend_Filter_StripTags</title>
+
+        <para>
+            <classname>Zend_Filter_StripTags</classname> enthielt in voehergehenden Versionen ein
+            <varname>commentsAllowed</varname> Flag, welches es erlaubt hat HTML Kommentare in von
+            dieser Klasse gefiltertem HTML Text als erlaubt zu markieren. Aber das öffnet den Weg
+            für <acronym>XSS</acronym> Attacken, speziell im Internet Explorer (der es erlaubt
+            konditionelle Funktionalität über HMTL Kommentare zu spezifizieren). Beginnend mit
+            Version 1.9.7 (und retour mit den Versionen 1.8.5 und 1.7.9), hat das
+            <varname>commentsAllowed</varname> Flag keine Bedeutung meht, und alle HTML Kommentare,
+            inklusive denen die andere HTML Tags oder untergeordnete Kommentare enthalten, werden
+            von der endgültigen Aufgabe des Filters entfernt.
+        </para>
+    </sect2>
+
     <sect2 id="migration.110.zend.file.transfer">
         <title>Zend_File_Transfer</title>
+
+        <sect3 id="migration.110.zend.file.transfer.files">
+            <title>Sicherheitsänderung</title>
+
+            <para>
+                Aus Gründen der Sicherheit speichert <classname>Zend_File_Transfer</classname> nicht
+                länger die originalen Mimetypen und Dateigrößen welche vom anfragenden Client
+                angegeben wurden in seinem internen Speicher. Stattdessen werden die echten Werte
+                bei der Instanzierung erkannt.
+            </para>
+
+            <para>
+                Zusätzlich werden die originalen Werte in <varname>$_FILES</varname> bei der
+                Instanzierung mit den echten Werten überschrieben. Das macht auch
+                <varname>$_FILES</varname> sicher.
+            </para>
+
+            <para>
+                Wenn man die originalen Werte benötigt, kann man diese entweder vor der
+                Instanzierung von <classname>Zend_File_Transfer</classname> speichern, oder bei der
+                Instanzierung die Option <property>disableInfos</property> verwenden. Es ist zu
+                beachten das diese Option sinnlos ist wenn Sie nach der Instanzierung verwendet
+                wird.
+            </para>
+        </sect3>
 
         <sect3 id="migration.110.zend.file.transfer.count">
             <title>Count Prüfung</title>
@@ -276,6 +339,3 @@ My_Validator extends Zend_Validate_Abstract
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

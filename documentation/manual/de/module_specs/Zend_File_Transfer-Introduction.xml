@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20174 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
     <title>Zend_File_Transfer</title>
@@ -316,6 +316,16 @@ $size = $upload->getFileSize();
 ]]></programlisting>
         </example>
 
+        <note>
+            <title>Vom Client angegebene Dateigröße</title>
+
+            <para>
+                Es ist zu beachten das die Dateigröße welche vom Client angegeben wird, nicht als
+                sichere Eingabe angesehen wird. Deswegen wird die echte Größe der Datei erkannt und
+                statt der Dateigröße zurückgegeben welche vom Client geschickt wurde.
+            </para>
+        </note>
+
         <para>
             <methodname>getHash()</methodname> akzeptiert den Namen eines Hash Algorithmus als
             ersten Parameter. Für eine Liste bekannter Algorithmen kann in
@@ -341,6 +351,8 @@ $names = $upload->getHash('crc32', 'foo');
         </example>
 
         <note>
+            <title>Rückgabewert</title>
+
             <para>
                 Es ist zu beachten das der zurückgegebene Wert ein Array ist, wenn die Datei oder
                 der Formularname mehr als eine Datei enthält.
@@ -368,13 +380,41 @@ $names = $upload->getMimeType('foo');
         </example>
 
         <note>
+            <title>Vom Client angegebener MimeTyp</title>
+
+            <para>
+                Es ist zu beachten das der MimeTyp welcher vom Client angegeben wird, nicht als
+                sichere Eingabe betrachtet wird. Deswegen wird der echte MimeTyp der Datei erkannt
+                und statt dem Mimetyp welcher vom Client geschickt wird, zurückgegeben.
+            </para>
+        </note>
+
+        <warning>
+            <title>Mögliche Exception</title>
+
             <para>
                 Beachte das diese Methode die fileinfo Erweiterung verwendet wenn Sie vorhanden ist.
                 Wenn diese Erweiterung nicht gefunden werden kann wird die mimemagic Erweiterung
-                verwendet. Wenn keine Erweiterung gefunden wird, dann wird der Mimetyp verwendet der
-                vom Dateiserver wärend des Hochladens der Datei angegeben wurde.
+                verwendet. Wenn keine Erweiterung gefunden wird dann wird eine Exception geworfen.
             </para>
-        </note>
+        </warning>
+
+        <warning>
+            <title>Originale Daten in $_FILES</title>
+
+            <para>
+                Aus Sicherheitsgründen werden auch die originalen Daten in $_FILES überschrieben
+                sobald <classname>Zend_File_Transfer</classname> initiiert wird. Wenn man dieses
+                Verhalten unterdrücken will und die originalen Daten benötigt, kann bei der
+                Instanzierung die Option <property>detectInfos</property> einfach auf
+                <constant>FALSE</constant> gesetzt werden.
+            </para>
+
+            <para>
+                Diese Option hat keinen Effekt nachdem <classname>Zend_File_Transfer</classname>
+                instanziert wurde.
+            </para>
+        </warning>
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.uploadprogress">

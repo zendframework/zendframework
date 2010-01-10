@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 20128 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.individual">
     <title>Darstellung individueller Decorators</title>
@@ -216,13 +216,13 @@ foreach ($form->getElements() as $element) {
     </div>
     <div class="element">
         <?php echo $form->dateOfBirth->renderLabel() ?>
-        <?php echo $this->formText('dateOfBirth['day']', '', array(
+        <?php echo $this->formText('dateOfBirth[day]', '', array(
             'size' => 2, 'maxlength' => 2)) ?>
         /
-        <?php echo $this->formText('dateOfBirth['month']', '', array(
+        <?php echo $this->formText('dateOfBirth[month]', '', array(
             'size' => 2, 'maxlength' => 2)) ?>
         /
-        <?php echo $this->formText('dateOfBirth['year']', '', array(
+        <?php echo $this->formText('dateOfBirth[year]', '', array(
             'size' => 4, 'maxlength' => 4)) ?>
     </div>
     <div class="element">

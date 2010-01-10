@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20111 -->
+<!-- EN-Revision: 20160 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.multidb">
     <title>Zend_Application_Resource_Multidb</title>
@@ -55,9 +55,9 @@ $db1 = $resource->getDb('db1');
 $db2 = $resource->getDb('db2');
 $defaultDb = $resource->getDb();
 ]]></programlisting>
-   </example>
+    </example>
 
-       <example id="zend.application.available-resources.multidb.retrieveDefaultDb">
+    <example id="zend.application.available-resources.multidb.retrieveDefaultDb">
         <title>Den standardmäßigen Datenbankadapter empfangen</title>
 
         <para>

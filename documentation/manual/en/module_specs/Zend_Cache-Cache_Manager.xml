@@ -17,9 +17,9 @@
     </para>
 
     <para>
-        The basic operation of this component is as follows. The Cache Manager allows
-        users to setup "option templates", basically options for a set of named
-        caches. These can be set using the method <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname>.
+        The basic operation of this component is as follows. The Cache Manager allows users to setup
+        "option templates", basically options for a set of named caches. These can be set using the
+        method <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname>.
         These templates do not give rise to a cache until the user attempts to retrieve
         a named cache (associated with an existing option template) using the method
         <methodname>Zend_Cache_Manager::getCache()</methodname>.
@@ -192,10 +192,10 @@ $databaseCache = $manager->getCache('database');
         level as the conventional "public" directory of a Zend Framework application.
         The skeleton cache is actually a <constant>NULL</constant> cache, i.e. it contains no
         options. The remaining two caches are used to implement a default Static Page Cache
-        where static HTML/XML or even JSON may be written to static files in
-        /public. Control over a Static Page Cache is offered via
-        <classname>Zend_Controller_Action_Helper_Cache</classname>, though you may
-        alter the settings of this "page" the "tagcache" it uses to track tags using
+        where static <acronym>HTML</acronym>, <acronym>XML</acronym> or even <acronym>JSON</acronym>
+        may be written to static files in <filename>/public</filename>. Control over a Static Page
+        Cache is offered via <classname>Zend_Controller_Action_Helper_Cache</classname>, though you
+        may alter the settings of this "page" the "tagcache" it uses to track tags using
         <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname> or even
         <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname> if overloading
         all of their options.

@@ -161,8 +161,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
 
         <para>
             All dijit layout elements have the
-            signature <code>string ($id = null, $content = '', array $params =
-                array(), array $attribs = array())</code>. In all caess, if you
+            signature <command>string ($id = null, $content = '', array $params =
+                array(), array $attribs = array())</command>. In all caess, if you
             pass no arguments, the helper object itself will be returned. This
             gives you access to the <methodname>captureStart()</methodname> and
             <methodname>captureEnd()</methodname> methods, which allow you to capture
@@ -327,8 +327,8 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>captureStart($id, array $params = array(), array $attribs =
-                        array())</code>: begin capturing content to include in a container.
+                    <command>captureStart($id, array $params = array(), array $attribs =
+                        array())</command>: begin capturing content to include in a container.
                     <varname>$params</varname> refers to the dijit params to use with
                     the container, while <varname>$attribs</varname> refer to any
                     general HTML attributes to use.
@@ -411,9 +411,9 @@ echo $view->borderContainer()->captureEnd('masterLayout');
 
         <para>
             The following dijit form elements are available in Zend Framework.
-            Except where noted, all have the signature <code>string ($id,
+            Except where noted, all have the signature <command>string ($id,
                 $value = '', array $params = array(), array $attribs =
-                array())</code>.
+                array())</command>.
         </para>
 
         <itemizedlist>
@@ -477,7 +477,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     the list of available options, and it will still consider
                     it valid input. It accepts an optional fifth argument, an
                     associative array <varname>$options</varname>; if provided,
-                    ComboBox will be rendered as a <code>select</code>. Note
+                    ComboBox will be rendered as a <emphasis>select</emphasis>. Note
                     also that the <emphasis>label values</emphasis> of the
                     <varname>$options</varname> array will be returned in the form --
                     not the values themselves.
@@ -486,7 +486,7 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                 <para>
                     Alternately, you may pass information regarding a dojo.data
                     datastore to use with the element. If provided, the
-                    ComboBox will be rendered as a text <code>input</code>, and
+                    ComboBox will be rendered as a text <emphasis>input</emphasis>, and
                     will pull its options via that datastore.
                 </para>
 
@@ -648,7 +648,7 @@ echo $view->dateTextBox(
                 <para>
                     <emphasis>Editor</emphasis>: dijit.Editor. Provides a
                     WYSIWYG editor via which users may create or edit content.
-                    <code>dijit.Editor</code> is a pluggable, extensible editor
+                    <command>dijit.Editor</command> is a pluggable, extensible editor
                     with a variety of parameters you can utilize for customization; see <ulink
                         url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">the
                         dijit.Editor documentation</ulink> for more details.
@@ -791,7 +791,7 @@ echo $view->editor('foo');
                     <listitem><para>
                         <emphasis>attribs</emphasis> (optional): HTML
                         attributes to use with the rules/labels. This should
-                        follow the <code>params</code> option format and be an
+                        follow the <property>params</property> option format and be an
                         associative array with the keys 'container' and
                         'labels'.
                     </para></listitem>
@@ -939,7 +939,7 @@ echo $view->passwordTextBox(
                     RadioButton accepts an optional fifth argument,
                     <varname>$options</varname>, an associative array of value/label
                     pairs used as the radio options. You may also pass these as
-                    the <varname>$attribs</varname> key <code>options</code>.
+                    the <varname>$attribs</varname> key <property>options</property>.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -962,7 +962,7 @@ echo $view->radioButton(
                     <emphasis>SimpleTextarea</emphasis>: dijit.form.SimpleTextarea.
                     These act like normal textareas, but are styled using the
                     current dijit theme. You do not need to specify either the
-                    rows or columns attributes; use <code>ems</code> or
+                    rows or columns attributes; use <property>ems</property> or
                     percentages for the width and height, instead.
                 </para>
 
@@ -1127,20 +1127,20 @@ echo $view->validationTextBox(
             custom dijits, or using experimental dijits from Dojox. While Zend
             Framework cannot support every dijit directly, it does provide some
             rudimentary support for arbitrary dijit types via the
-            <code>CustomDijit</code> view helper.
+            <classname>CustomDijit</classname> view helper.
         </para>
 
         <para>
-            The <code>CustomDijit</code> view helper's <acronym>API</acronym> is exactly that of
-            any other dijit, with one major difference: the third "params"
+            The <classname>CustomDijit</classname> view helper's <acronym>API</acronym> is exactly
+            that of any other dijit, with one major difference: the third "params"
             argument <emphasis>must</emphasis> contain the attribute "dojotype".
             The value of this attribute should be the Dijit class you plan to
             use.
         </para>
 
         <para>
-            <code>CustomDijit</code> extends the base
-            <code>DijitContainer</code> view helper, which also allows it to
+            <classname>CustomDijit</classname> extends the base
+            <classname>DijitContainer</classname> view helper, which also allows it to
             capture content (using the
             <methodname>captureStart()</methodname>/<methodname>captureEnd()</methodname> pair of
             methods). <methodname>captureStart()</methodname> also expects that you pass the
@@ -1151,12 +1151,12 @@ echo $view->validationTextBox(
             <title>Using CustomDijit to render a dojox.layout.ContentPane</title>
 
             <para>
-                <code>dojox.layout.ContentPane</code> is a next-generation
-                iteration of <code>dijit.layout.ContentPane</code>, and provides
+                <command>dojox.layout.ContentPane</command> is a next-generation
+                iteration of <command>dijit.layout.ContentPane</command>, and provides
                 a superset of that class's capabilities. Until it's
                 functionality stabilizes, it will continue to live in Dojox.
                 However, if you want to use it in Zend Framework today, you can,
-                using the <code>CustomDijit</code> view helper.
+                using the <classname>CustomDijit</classname> view helper.
             </para>
 
             <para>
@@ -1195,10 +1195,10 @@ This is the content of the pane
 ]]></programlisting>
 
             <para>
-                You can also extend <code>CustomDijit</code> easily to create
+                You can also extend <classname>CustomDijit</classname> easily to create
                 support for your own custom dijits. As an example, if you
-                extended <code>dijit.layout.ContentPane</code> to create your
-                own <code>foo.ContentPane</code> class, you could create the
+                extended <command>dijit.layout.ContentPane</command> to create your
+                own <command>foo.ContentPane</command> class, you could create the
                 following helper to support it:
             </para>
 
@@ -1219,7 +1219,7 @@ class My_View_Helper_FooContentPane
 
             <para>
                 As long as your custom dijit follows the same basic <acronym>API</acronym> as
-                official dijits, using or extending <code>CustomDijit</code>
+                official dijits, using or extending <classname>CustomDijit</classname>
                 should work correctly.
             </para>
         </example>

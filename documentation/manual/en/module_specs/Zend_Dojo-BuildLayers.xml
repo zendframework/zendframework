@@ -18,7 +18,7 @@
 
         <para>
             In order to create a build layer, you would traditionally create a
-            JavaScript file that has <code>dojo.require</code> statements for
+            JavaScript file that has <command>dojo.require</command> statements for
             each dependency, and optionally some additional code that might run
             when the script is loaded. As an example:
         </para>
@@ -64,9 +64,9 @@ $view->dojo()->registerModulePath('custom', '../custom/')
 
         <para>
             But since <classname>Zend_Dojo</classname> aggregates your various
-            <code>dojo.require</code> statements, how do you create your layer
+            <command>dojo.require</command> statements, how do you create your layer
             script? You could open each page and view the generated
-            <code>dojo.require</code> statements, and cut and paste them into a
+            <command>dojo.require</command> statements, and cut and paste them into a
             layer script file manually.
         </para>
 
@@ -211,12 +211,12 @@ $build->setLayerName("custom.main");
                 <title>Including onLoad events in the generated layer</title>
 
                 <para>
-                    <code>dojo.addOnLoad</code> is a useful utility for
+                    <command>dojo.addOnLoad</command> is a useful utility for
                     specifying actions that should trigger when the <acronym>DOM</acronym> has
                     finished loading. The <methodname>dojo()</methodname> view helper can
                     create these statements via its
                     <methodname>addOnLoad()</methodname> and
-                    <methodname>onLoadCapture*()</methodname> methods. In some
+                    <methodname>onLoadCapture()</methodname> methods. In some
                     cases, it makes sense to push these into your layer file
                     instead of rendering them via your view scripts.
                 </para>
@@ -253,7 +253,7 @@ $build->setConsumeOnLoad(true);
                     The <methodname>dojo()</methodname> view helper includes methods for
                     capturing arbitrary JavaScript to include in the
                     &lt;script&gt; tag containing the various
-                    <code>dojo.require</code> and <code>dojo.addOnLoad</code>
+                    <command>dojo.require</command> and <command>dojo.addOnLoad</command>
                     statements. This can be useful when creating default data
                     stores or globally scoped objects used throughout your
                     application.

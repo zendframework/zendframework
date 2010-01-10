@@ -49,7 +49,7 @@
     </itemizedlist>
 
     <para>
-        Dijit parameters are stored in the <code>dijitParams</code> public
+        Dijit parameters are stored in the <property>dijitParams</property> public
         property. Thus, you can dijit-enable an existing form element simply by
         setting this property on the element; you simply will not have the
         above accessors to facilitate manipulating the parameters.
@@ -79,7 +79,7 @@ $element->addDecorator('DijitElement')
 
     <para>
         A variant on DijitElement, DijitMulti, provides the functionality of
-        the <code>Multi</code> abstract form element, allowing the developer to
+        the <classname>Multi</classname> abstract form element, allowing the developer to
         specify 'multiOptions' -- typically select options or radio options.
     </para>
 
@@ -115,8 +115,8 @@ $element->addDecorator('DijitElement')
         </itemizedlist>
 
         <para>
-            Additionally, only the decorators <code>DijitElement</code> and
-            <code>DtDdWrapper</code> are utilized for Button elements.
+            Additionally, only the decorators <classname>DijitElement</classname> and
+            <classname>DtDdWrapper</classname> are utilized for Button elements.
         </para>
 
         <example id="zend.dojo.form.elements.button.example">
@@ -212,7 +212,7 @@ $form->addElement(
             <para>
                 ComboBoxes return the label values, and not the option values,
                 which can lead to a disconnect in expectations. For this reason,
-                ComboBoxes do not auto-register an <code>InArray</code>
+                ComboBoxes do not auto-register an <classname>InArray</classname>
                 validator (though FilteringSelects do).
             </para>
         </note>
@@ -281,11 +281,11 @@ $form->addElement(
 
         <para>
             By default, if no dojo.data store is registered with the element,
-            this element registers an <code>InArray</code> validator which
+            this element registers an <classname>InArray</classname> validator which
             validates against the array keys of registered options. You can
             disable this behavior by either calling
             <methodname>setRegisterInArrayValidator(false)</methodname>, or by passing a
-            <constant>FALSE</constant> value to the <code>registerInArrayValidator</code>
+            <constant>FALSE</constant> value to the <property>registerInArrayValidator</property>
             configuration key.
         </para>
 
@@ -336,8 +336,8 @@ $form->addElement(
         </example>
 
         <para>
-            The above examples could also utilize <code>FilteringSelect</code>
-            instead of <code>ComboBox</code>.
+            The above examples could also utilize <classname>FilteringSelect</classname>
+            instead of <classname>ComboBox</classname>.
         </para>
     </sect3>
 
@@ -1061,11 +1061,11 @@ $form->addElement(
         </para>
 
         <para>
-            By default, this element registers an <code>InArray</code> validator
+            By default, this element registers an <classname>InArray</classname> validator
             which validates against the array keys of registered options. You
             can disable this behavior by either calling
             <methodname>setRegisterInArrayValidator(false)</methodname>, or by passing a
-            <constant>FALSE</constant> value to the <code>registerInArrayValidator</code>
+            <constant>FALSE</constant> value to the <property>registerInArrayValidator</property>
             configuration key.
         </para>
 

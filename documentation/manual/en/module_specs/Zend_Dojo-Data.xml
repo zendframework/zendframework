@@ -118,9 +118,9 @@ $data->addItems($someMoreItems);
             </para></listitem>
 
             <listitem><para>
-                Objects implementing the <code>Traversable</code> interface
-                ,which includes the interfaces <code>Iterator</code> and
-                <code>ArrayAccess</code>.
+                Objects implementing the <classname>Traversable</classname> interface
+                ,which includes the interfaces <classname>Iterator</classname> and
+                <classname>ArrayAccess</classname>.
             </para></listitem>
         </itemizedlist>
 
@@ -157,10 +157,10 @@ $data->fromJson($json);
 
         <para>
             Some Dojo components require additional metadata along with
-            the dojo.data payload. As an example, <code>dojox.grid.Grid</code>
+            the dojo.data payload. As an example, <command>dojox.grid.Grid</command>
             can pull data dynamically from a
-            <code>dojox.data.QueryReadStore</code>. For pagination to work
-            correctly, each return payload should contain a <code>numRows</code>
+            <command>dojox.data.QueryReadStore</command>. For pagination to work
+            correctly, each return payload should contain a <property>numRows</property>
             key with the total number of rows that could be returned by the
             query. With this data, the grid knows when to continue making small
             requests to the server for subsets of data and when to stop
@@ -209,8 +209,8 @@ $data->clearMetadata();
 
         <para>
             <classname>Zend_Dojo_Data</classname> implements the interfaces
-            <code>ArrayAccess</code>, <code>Iterator</code>, and
-            <code>Countable</code>. You can therefore use the data
+            <classname>ArrayAccess</classname>, <classname>Iterator</classname>, and
+            <classname>Countable</classname>. You can therefore use the data
             collection almost as if it were an array.
         </para>
 
@@ -289,7 +289,7 @@ $json = (string) $data; // cast to string == cast to JSON
                     <methodname>setItems($items)</methodname>: set multiple items at once,
                     overwriting any items that were previously set in the
                     object. <varname>$items</varname> should be an array or a
-                    <code>Traversable</code> object.
+                    <classname>Traversable</classname> object.
                 </para></listitem>
 
                 <listitem><para>
@@ -315,7 +315,7 @@ $json = (string) $data; // cast to string == cast to JSON
                     appending them to any current items. Will raise an exception
                     if any of the new items have an identifier matching an
                     identifier already in the collection. <varname>$items</varname>
-                    should be an array or a <code>Traversable</code> object.
+                    should be an array or a <classname>Traversable</classname> object.
                 </para></listitem>
 
                 <listitem><para>

@@ -125,8 +125,8 @@ $front->getRouter()->addRoute('rest', $restRoute);
         <title>Zend_Rest_Route with Zend_Config_Ini</title>
 
     <para>
-        To use Zend_Rest_Route from an INI config file, use a route type
-        parameter and set the config options:
+        To use <classname>Zend_Rest_Route</classname> from an <acronym>INI</acronym> config file,
+        use a route type parameter and set the config options:
     </para>
 
     <programlisting language="ini"><![CDATA[
@@ -135,14 +135,18 @@ routes.rest.defaults.controller = object
 routes.rest.mod = project,user
 ]]></programlisting>
 
-    <para>The 'type' option designates the RESTful routing config type.
-    The 'defaults' option is used to specify custom default
-    module, controller, and/or actions for the route. All other options
-    in the config group are treated as RESTful module names, and their
-    values are RESTful controller names. The example config defines
-    Mod_ProjectController and Mod_UserController as RESTful controllers.</para>
+    <para>
+        The 'type' option designates the RESTful routing config type. The 'defaults' option is used
+        to specify custom default module, controller, and/or actions for the route. All other
+        options in the config group are treated as RESTful module names, and their values are
+        RESTful controller names. The example config defines
+        <classname>Mod_ProjectController</classname> and <classname>Mod_UserController</classname>
+        as RESTful controllers.
+    </para>
 
-    <para>Then use the addConfig() method of the Rewrite router object:</para>
+    <para>
+        Then use the <methodname>addConfig()</methodname> method of the Rewrite router object:
+    </para>
 
     <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('path/to/routes.ini');

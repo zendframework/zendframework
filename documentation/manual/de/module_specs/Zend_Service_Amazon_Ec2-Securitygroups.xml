@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.securitygroups">
     <title>Zend_Service_Amazon_Ec2: Sicherheitsgruppen</title>
@@ -9,10 +9,12 @@
         spezifizieren welcher zufließende (z.B. hereinkommende) Netzwerkverkehr an die Instanz
         zugestellt werden soll. Jeder andere zufließende Verkehr wird weggeworfen.
     </para>
+
     <para>
         Man kann die Regeln für Gruppen jederzeit verändern. Die neuen Regeln werden automatisch
         für alle laufenden Instanzen, und Instanzen die in Zukunft gestartet werden, erzwungen.
     </para>
+
     <note>
         <title>Maximale Sicherheitsgruppen</title>
         <para>Man kann bis zu 100 Sicherheitsgruppen erstellen.</para>
@@ -23,6 +25,7 @@
 
         <example id="zend.service.amazon.ec2.securitygroups.maintenance.create">
             <title>Eine neue Sicherheitsgruppe erstellen</title>
+
             <para>
                 <code>create</code> erstellt eine neue Sicherheitsgruppe. Jede Instanz wird in
                 einer Sicherheitsgruppe gestartet. Wenn wärend dem Start keine Sicherheitsgruppe
@@ -31,8 +34,10 @@
                 unbegrenzten Netzwerkzugriff. Instanzen verhindern jeden Versuch eines
                 Netzwerkzugriffs von anderen Instanzen aus unterschiedlichen Sicherheitsgruppen.
             </para>
+
             <para>
-                <code>create</code> gibt ein boolsches true oder false zurück
+                <code>create</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -44,10 +49,12 @@ $return = $ec2_sg->create('mygroup', 'my group description');
 
         <example id="zend.service.amazon.ec2.securitygroups.maintenance.describe">
             <title>Eine Sicherheitsgruppe beschreiben</title>
+
             <para>
                 <code>describe</code> gibt Informationen über die Sicherheitsgruppen zurück welche
                 einem selbst gehören.
             </para>
+
             <para>
                 Wenn Namen von Sicherheitsgruppen spezifiziert werden, werden Informationen über
                 diese Sicherheitsgruppen zurückgegeben. Andernfalls, werden Informationen über
@@ -78,8 +85,10 @@ $return = $ec2_sg->describe('mygroup');
                 A erlaubt, kann Sicherheitsgruppe A nicht gelöscht werden, bis die betreffende
                 Regel entfernt wurde.
             </para>
+
             <para>
-                <code>delete</code> gibt ein boolsches true oder false zurück.
+                <code>delete</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -95,10 +104,12 @@ $return = $ec2_sg->delete('mygroup');
 
         <example id="zend.service.amazon.ec2.securitygroups.authorize.ip">
             <title>Authorisierung durch die IP</title>
+
             <para>
                 <code>authorizeIp</code> fügt einer Sicherheitsgruppe eine Erlaubnis hinzu
                 basierend auf einer IP Adresse, dem Protokoll Typ und einem Port Bereich.
             </para>
+
             <para>
                 Erlaubnisse werden spezifiziert durch das IP Protokoll (TCP, UDP oder ICMP), der
                 Quelle der Anfrage (durch IP Bereich oder einem Amazon EC2 Benutzer-Gruppe Paar),
@@ -106,13 +117,16 @@ $return = $ec2_sg->delete('mygroup');
                 ICMP Codes und Typen (für ICMP). Wenn ICMP authorisiert wird kann -1 als Wildcard in
                 den Typ- und Codefeldern verwendet werden.
             </para>
+
             <para>
                 Änderungen einer Erlaubnis werden Instanzen über die Sicherheitsgruppe so schnell
                 wie möglich mitgeteilt. Abhängig von der Anzahl der Instanzen, kann es trotzdem zu
                 einer kleinen Verzögerung kommen.
             </para>
+
             <para>
-                <code>authorizeIp</code> gibt ein boolsches true oder false zurück
+                <code>authorizeIp</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -128,16 +142,20 @@ $return = $ec2_sg->authorizeIp('mygroup',
 
         <example id="zend.service.amazon.ec2.securitygroups.authorize.group">
             <title>Authorisierung durch die Gruppe</title>
+
             <para>
                 <code>authorizeGroup</code> fügt die Erlaubnis für eine Sicherheitsgruppe hinzu.
             </para>
+
             <para>
                 Änderungen einer Erlaubnis werden Instanzen über die Sicherheitsgruppe so schnell
                 wie möglich mitgeteilt. Abhängig von der Anzahl der Instanzen, kann es trotzdem zu
                 einer kleinen Verzögerung kommen.
             </para>
+
             <para>
-                <code>authorizeGroup</code> gibt ein boolsches true oder false zurück.
+                <code>authorizeGroup</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -153,6 +171,7 @@ $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
 
         <example id="zend.service.amazon.ec2.securitygroups.revoke.ip">
             <title>Entziehen durch die IP</title>
+
             <para>
                 <code>revokeIp</code> entzieht den Zugriff zu einer Sicherheitsgruppe basieren
                 auf einer IP Adresse, einem Protokoll Typ und einem Port Bereich. Der Zugriff
@@ -166,13 +185,16 @@ $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
                 ICMP Codes und Typen (für ICMP). Wenn ICMP authorisiert wird kann -1 als Wildcard in
                 den Typ- und Codefeldern verwendet werden.
             </para>
+
             <para>
                 Änderungen einer Erlaubnis werden Instanzen über die Sicherheitsgruppe so schnell
                 wie möglich mitgeteilt. Abhängig von der Anzahl der Instanzen, kann es trotzdem zu
                 einer kleinen Verzögerung kommen.
             </para>
+
             <para>
-                <code>revokeIp</code> gibt ein boolsches true oder false zurück
+                <code>revokeIp</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -188,18 +210,22 @@ $return = $ec2_sg->revokeIp('mygroup',
 
         <example id="zend.service.amazon.ec2.securitygroups.revoke.group">
             <title>Entziehen durch die Gruppe</title>
+
             <para>
                 <code>revokeGroup</code> fübt eine Erlaubnis zu einer Sicherheitsgruppe hinzu.
                 Die Erlaubnis die entzogen werden soll muß mit den gleichen Werten spezifiziert
                 werden mit denen die Erlaubnis erteilt wurde.
             </para>
+
             <para>
                 Änderungen einer Erlaubnis werden Instanzen über die Sicherheitsgruppe so schnell
                 wie möglich mitgeteilt. Abhängig von der Anzahl der Instanzen, kann es trotzdem zu
                 einer kleinen Verzögerung kommen.
             </para>
+
             <para>
-                <code>revokeGroup</code> gibt ein boolsches true oder false zurück.
+                <code>revokeGroup</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück.
             </para>
 
             <programlisting language="php"><![CDATA[

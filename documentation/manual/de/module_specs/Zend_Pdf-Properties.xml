@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
     <title>Dokument Informationen und Metadaten</title>
+
     <para>
         Ein <acronym>PDF</acronym> Dokument kann generelle Informationen wie den Titel, Author, und
         Erstellungs- sowie Modifikationsdatum enthalten.
     </para>
+
     <para>
         Historisch wird diese Information durch das Verwenden einer speziellen Info Struktur
         gespeichert. Diese struktur kann als assoziatives Array mithilfe der öffentlichen
@@ -24,6 +26,7 @@ $pdf->save($pdfPath);
 ]]></programlisting>
 
     </para>
+
     <para>
         Die folgenden Schlüssel sind im <acronym>PDF</acronym> v1.4 (Acrobat 5) Standard definiert:
 
@@ -150,23 +153,26 @@ $pdf->save($pdfPath);
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <emphasis>true</emphasis> - Das Dokument wurde vollständig
-                                eingeschlossen; weiteres einschließen ist nicht notwendig.
+                                <emphasis><constant>TRUE</constant></emphasis> - Das Dokument wurde
+                                vollständig eingeschlossen; weiteres einschließen ist nicht
+                                notwendig.
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
-                                <emphasis>false</emphasis> - Das Dokument wurde bisher noch nicht
-                                eingeschlossen, wenn das Einschließen gewümscht wird muß es noch
-                                getan werden.
+                                <emphasis><constant>FALSE</constant></emphasis> - Das Dokument wurde
+                                bisher noch nicht eingeschlossen, wenn das Einschließen gewümscht
+                                wird muß es noch getan werden.
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
-                                <emphasis>null</emphasis> - Entweder ist nicht bekannt ob das
-                                Dokument eingeschlossen wurde, oder es wurde bisher erst teilweise
-                                aber noch nicht vollständig eingeschlosssen; etwas zusätzliches
-                                Einschließen ist trotzdem noch notwendig.
+                                <emphasis><constant>NULL</constant></emphasis> - Entweder ist nicht
+                                bekannt ob das Dokument eingeschlossen wurde, oder es wurde bisher
+                                erst teilweise aber noch nicht vollständig eingeschlosssen; etwas
+                                zusätzliches Einschließen ist trotzdem noch notwendig.
                             </para>
                         </listitem>
                     </itemizedlist>

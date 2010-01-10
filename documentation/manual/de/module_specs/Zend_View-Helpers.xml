@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19577 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>View Helfer</title>
@@ -24,6 +24,7 @@
 
     <note>
         <title>Betrachte den Fall</title>
+
         <para>
             Namen von Helfern sind immer camelCased, bzw. beginnen Sie nie mit einem
             großgeschriebenen Zeichen. Der Klassenname selbst ist MixedCased, aber die Methode die
@@ -84,10 +85,10 @@
                 <methodname>form($name, $attribs, $content)</methodname>: Erzeugt eine
                 <acronym>XHTML</acronym> Form. Alle <varname>$attribs</varname> werden als
                 <acronym>XHTML</acronym> Attribute des Form Tags escaped und dargestellt. Wenn
-                <varname>$content</varname> vorhanden und kein boolsches false ist, dann wird dieser
-                Inhalt innerhalb der Start und End Form Tags dargestellt werden; wenn
-                <varname>$content</varname> ein boolsches false ist (der Standard), wird nur das
-                beginnende Formtag erzeugt.
+                <varname>$content</varname> vorhanden und kein boolsches <constant>FALSE</constant>
+                ist, dann wird dieser Inhalt innerhalb der Start und End Form Tags dargestellt
+                werden; wenn <varname>$content</varname> ein boolsches <constant>FALSE</constant>
+                ist (der Standard), wird nur das beginnende Formtag erzeugt.
             </para></listitem>
 
             <listitem><para>
@@ -286,9 +287,10 @@ echo $this->formCheckbox('foo',
                 ungeordnete und geordnete Listen welche auf den <varname>$items</varname> basieren
                 die übergeben wurden. Wenn <varname>$items</varname> ein multidimensionales Array
                 ist, wird eine verschachtelte Liste gebaut. Wenn das <varname>$escape</varname> Flag
-                true ist (standard), werden individuelle Abschnitte escaped durch Verwendung des
-                Escaping Mechanismus der im View Objekt registriert wurde; ein false Wert wird
-                übergeben wenn Markups in den Listen gewünscht werden.
+                <constant>TRUE</constant> ist (standard), werden individuelle Abschnitte escaped
+                durch Verwendung des Escaping Mechanismus der im View Objekt registriert wurde; ein
+                <constant>FALSE</constant> Wert wird übergeben wenn Markups in den Listen gewünscht
+                werden.
             </para></listitem>
 
         </itemizedlist>

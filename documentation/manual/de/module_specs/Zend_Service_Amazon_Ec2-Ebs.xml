@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16443 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.ebs">
     <title>Zend_Service_Amazon_Ec2: Elastischer Block Speicher (EBS)</title>
@@ -12,11 +12,13 @@
         Device Namen und bieten ein Block Device Interface. Man kann ein File System auf Amazon EBS
         Volums laden, oder Sie genauso verwenden wie man ein Block Device verwenden würde.
     </para>
+
     <para>
         Man kann bis zu zwanzig Amazon EBS Volums jeder Größe erstellen (von einem GiB bis zu einem
         TiB). Jedes Amazon EBS Volume kann jeder Amazon EC2 Instanz angehängt werden welche in der
         selben Availability Zone ist, oder kann auch un-angehängt bleiben.
     </para>
+
     <para>
         Amazon EBS bietet die Möglichkeit einen Snapshot der eigenen Amazon EBS Volums auf Amazon
         S3 zu erstellen. Man kann diese Snapshots als Startpunkt für neue Amazon EBS Volums
@@ -28,6 +30,7 @@
 
         <example id="zend.service.amazon.ec2.ebs.creating.volume">
             <title>Ein neues EBS Volume erstellen</title>
+
             <para>
                 Um ein brandneues EBS Volume zu erstellen benötigt man die Größe und die Zone in
                 der das EBS Volume sein soll.
@@ -172,13 +175,15 @@ $return = $ec2_ebs->attachVolume('volumeId', 'instanceid', '/dev/sdh');
 
         <example id="zend.service.amazon.ec2.ebs.attachdetach.detach">
             <title>Ein EBS Volume entfernen</title>
+
             <para>
-                <code>detachVolume</code> entferne ein EBS Volume von einer laufenden Instanz.
+                <code>detachVolume</code> entfernt ein EBS Volume von einer laufenden Instanz.
                 <code>detachVolume</code> benötigt die Spezifikation der volumeId mit der
                 optionalen instanceId und dem device name die beim Anhängen des Volumes angegeben
                 wurden. Wenn man das Entfernen erzwingen will kann man den vierten Parameter
-                auf true setzen und er wird das Volume zwangsweise entfernen.
+                auf <constant>TRUE</constant> setzen und er wird das Volume zwangsweise entfernen.
             </para>
+
             <para>
                 <code>detachVolume</code> gibt ein Array zurück das Statusinformationen über das
                 EBS Volume enthält. Diese sind volumeId, instanceId, device, status und attachTime.
@@ -190,7 +195,8 @@ $return = $ec2_ebs->detachVolume('volumeId');
 ]]></programlisting>
         </example>
         <note>
-            <title>Erzwingene Entfernung</title>
+            <title>Erzwungene Entfernung</title>
+
             <para>
                 Man sollte eine Entfernung nur dann erzwingen wenn der vorhergehende
                 Entfernungsversuch nicht sauber durchgeführt wurde (Loggen in eine Instanz, das
@@ -209,11 +215,14 @@ $return = $ec2_ebs->detachVolume('volumeId');
 
         <example id="zend.service.amazon.ec2.ebs.deleting.volume">
             <title>Löschen eines EBS Volums</title>
+
             <para>
                 <code>deleteVolume</code> löscht ein entferntes EBS Volume.
             </para>
+
             <para>
-                <code>deleteVolume</code> gibt ein boolsches true oder false zurück.
+                <code>deleteVolume</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -224,11 +233,14 @@ $return = $ec2_ebs->deleteVolume('volumeId');
 
         <example id="zend.service.amazon.ec2.ebs.deleting.snapshot">
             <title>Löschen eines EBS Volume Snapshots</title>
+
             <para>
                 <code>deleteSnapshot</code> löscht einen EBS Volume Snapshot.
             </para>
+
             <para>
-                <code>deleteSnapshot</code> gibt ein boolsches true oder false zurück.
+                <code>deleteSnapshot</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück.
             </para>
 
             <programlisting language="php"><![CDATA[

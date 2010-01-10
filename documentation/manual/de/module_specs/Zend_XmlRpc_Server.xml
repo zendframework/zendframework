@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19674 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
@@ -473,7 +473,7 @@ $server->setClass('Services_PricingService',
                 für den Constructor zu limitieren. Das kann für Dependency Injection beim
                 Constructor verwendet werden. Um die Injektion auf Constructoren zu begrenzen muss
                 <methodname>sendArgumentsToAllMethods</methodname> aufgerufen und
-                <code>false</code> als Argument übergeben werden. Dies deaktiviert das
+                <constant>FALSE</constant> als Argument übergeben werden. Dies deaktiviert das
                 Standardverhalten mit dem alle Argumente in die entfernte Methode injiziert werden.
                 Im nächsten Beispiel werden die Instanzen von
                 <classname>ProductRepository</classname> und

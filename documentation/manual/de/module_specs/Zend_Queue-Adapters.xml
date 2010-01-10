@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19320 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.queue.adapters">
     <title>Adapter</title>
@@ -578,7 +578,8 @@ $queue = new Zend_Queue('Db', $options);
                                     <para>
                                         <varname>preserved</varname> - Ob der Job in der History
                                         der Job Queue behalten werden soll. Standardmäßig aus;
-                                        wenn ein true Wert übergeben wird, dann wird er behalten.
+                                        wenn ein <constant>TRUE</constant> Wert übergeben wird, dann
+                                        wird er behalten.
                                     </para>
                                 </listitem>
 
@@ -623,9 +624,10 @@ $queue = new Zend_Queue('Db', $options);
                                 <listitem>
                                     <para>
                                         <varname>application_id</varname> - Der Identifikator der
-                                        Anwendung für den Job. Standardmäßig ist er null, was
-                                        anzeigt das automatisch einer von der Queue zugeordnet
-                                        wird, wenn die Queue einer Anwendungs ID zugeordnet wird.
+                                        Anwendung für den Job. Standardmäßig ist er
+                                        <constant>NULL</constant>, was anzeigt das automatisch einer
+                                        von der Queue zugeordnet wird, wenn die Queue einer
+                                        Anwendungs ID zugeordnet wird.
                                     </para>
                                 </listitem>
                             </itemizedlist>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20020 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Standard Prüfklassen</title>
@@ -11,6 +11,7 @@
 
     <sect2 id="zend.validate.set.alnum">
         <title>Alnum</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> nur
             alphabetische und digitale Zeichen enthält. Dieser Prüfer enthält eine Option um
@@ -30,6 +31,7 @@
 
     <sect2 id="zend.validate.set.alpha">
         <title>Alpha</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> nur
             alphabetische Zeichen enthält. Dieser Prüfer enthält eine Option um auszuwählen ob

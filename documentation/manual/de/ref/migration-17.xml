@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19523 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.17">
     <title>Zend Framework 1.7</title>
@@ -466,8 +466,8 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
                 <para>
                     Standardmäßig ist das alte Verhalten noch immer aktiv, wirft aber eine User
                     Notice. Wenn man den eigenen Code zum neuen Verhalten geändert hat sollte man
-                    auch den Compatibility Mode auf false setzen damit keine Notices mehr geworfen
-                    werden.
+                    auch den Compatibility Mode auf <constant>FALSE</constant> setzen damit keine
+                    Notices mehr geworfen werden.
                 </para>
             </note>
          </sect3>
@@ -504,7 +504,7 @@ $locale = Zend_Locale::getOrder(Zend_Locale::BROWSER);
 
             <para>
                 Um diese Notizen wegzubekommen kann man einfach die neue Option 'disableNotices' auf
-                true setzen. Der Standardwert ist false.
+                <constant>TRUE</constant> setzen. Der Standardwert ist <constant>FALSE</constant>.
             </para>
 
             <example id="migration.17.zend.translate.example">
@@ -591,6 +591,3 @@ $view->setLfiProtection(false);
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

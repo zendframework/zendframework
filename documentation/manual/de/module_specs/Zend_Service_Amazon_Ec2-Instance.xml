@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.instance">
     <title>Zend_Service_Amazon_Ec2: Instanzen</title>
@@ -323,18 +323,23 @@ $return = $ec2_instance->run(array('imageId' => 'ami-509320',
 
         <example id="zend.service.amazon.ec2.instance.operations.reboot">
             <title>Neu booten von EC2 Instanzen</title>
+
             <para>
                 <code>reboot</code> bootet eine oder mehrere Instanzen.
             </para>
+
             <para>
                 Diese Operation ist asynchron; die queuet nur die Anfrage eine spezifizierte
                 Instanz(en) zu rebooten. Die Operation wird erfolgreich sein wenn die Instanzen
                 gültig sind und dem Benutzer gehören. Anfragen um beendete Instanzen zu rebooten
                 werden ignoriert.
             </para>
+
             <para>
-                <code>reboot</code> gibt ein boolsches true oder false zurück
+                <code>reboot</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
@@ -345,14 +350,18 @@ $return = $ec2_instance->reboot('instanceId');
 
         <example id="zend.service.amazon.ec2.instance.operations.terminate">
             <title>Beenden von EC2 Instanzen</title>
+
             <para>
                 <code>terminate</code> führt eine oder mehrere Instanzen herunter. Diese Operation
                 ist idempotent; wenn eine Instanz mehr als einmal terminiert wird, wird jeder
                 Aufruf erfolgreich sein.
             </para>
+
             <para>
-                <code>terminate</code> gibt ein boolsches true oder false zurück
+                <code>terminate</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
@@ -400,25 +409,29 @@ $return = $ec2_instance->describe('instanceId');
 
         <note>
             <title>Beendete Instanzen</title>
+
             <para>
                 Kürzlich beendete Instanzen können in den zurückgegebenen Ergebnissen
                 vorkommen. Das Interval ist normalerweise weniger als eine Stunde. Wenn man
                 nicht will das beendete Instanzen zurückgegeben werden, muß eine zweite
-                Variable, ein boolsches true, an <code>describe</code> übergeben werden,
-                und die beendete Instanz wird ignoriert.
+                Variable, ein boolsches <constant>TRUE</constant>, an <code>describe</code>
+                übergeben werden, und die beendete Instanz wird ignoriert.
             </para>
         </note>
 
         <example id="zend.service.amazon.ec2.instance.utility.describebyimageid">
             <title>Instanzen anhand der Image Id beschreiben</title>
+
             <para>
                 <code>describeByImageId</code> ist funktional identisch mit <code>describe</code>
                 gibt aber nur die Instanz zurück, welche die angegebene imageId verwendet.
             </para>
+
             <para>
                 <code>describeByImageId</code>  gibt ein Array zurück das Informationen über die
                 Instanzen enthält, die von der übergebenen imageId gestartet wurden.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
@@ -428,26 +441,30 @@ $return = $ec2_instance->describeByImageId('imageId');
 
         <note>
             <title>Beendete Instanzen</title>
+
             <para>
                 Kürzlich beendete Instanzen können in den zurückgegebenen Ergebnissen
                 vorkommen. Das Interval ist normalerweise weniger als eine Stunde. Wenn man
                 nicht will das beendete Instanzen zurückgegeben werden, muß eine zweite
-                Variable, ein boolsches true, an <code>describe</code> übergeben werden,
-                und die beendete Instanz wird ignoriert.
+                Variable, ein boolsches <constant>TRUE</constant>, an <code>describe</code>
+                übergeben werden, und die beendete Instanz wird ignoriert.
             </para>
         </note>
 
         <example id="zend.service.amazon.ec2.instance.utility.consoleOutput">
             <title>Empfangen von Konsolen-Ausgaben</title>
+
             <para>
                 <code>consoleOutput</code> empfänge die Ausgabe der Konsole für eine spezifizierte
                 Instanz.
             </para>
+
             <para>
                 Die Ausgabe der Konsole einer Instanz wird gepuffert und kurz nach dem Booten, neu
                 Booten, und Beenden der Instanz gesendet. Amazon EC2 sichert die letzten 64 KB
                 Ausgabe, welche zumindest eine Stunde nach dem letzten Senden verfügbar sein ist.
             </para>
+
             <para>
                 <code>consoleOutput</code> gibt ein Array zurück das
                 <code>instanceId</code>, <code>timestamp</code> von der letzten Ausgabe enthält und
@@ -458,47 +475,51 @@ $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->consoleOutput('instanceId');
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.instance.utility.confirmproduct">
             <title>Produktcode an einer Instanz bestätigen</title>
+
             <para>
-                <code>confirmProduct</code> gibt true zurück wenn der spezifizierte Produktcode
-                der spezifizierten Instanz angehängt ist. Die Operation gibt false zurück wenn
-                der Produktcode der Instanz nicht angehängt ist.
+                <code>confirmProduct</code> gibt <constant>TRUE</constant> zurück wenn der
+                spezifizierte Produktcode der spezifizierten Instanz angehängt ist. Die Operation
+                gibt <constant>FALSE</constant> zurück wenn der Produktcode der Instanz nicht
+                angehängt ist.
             </para>
+
             <para>
                 Die <code>confirmProduct</code> Operation kann nur von dem Eigentümer der
                 <acronym>AMI</acronym> ausgeführt werden. Dieses Feature ist nützlich wenn ein
                 <acronym>AMI</acronym> Eigentümer Support anbietet und sicherstellen will ob die
                 Instanz eines Benutzer korrekt ist.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->confirmProduct('productCode', 'instanceId');
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.instance.utility.monitor">
             <title>Einschalten des CloudWatch Monitorings für Instanzen</title>
+
             <para>
                 <code>monitor</code> gibt die Liste von Instanzn und deren aktuellen Status vom
                 CloudWatch Monitorings zurück. Wenn die Instant das Monitoring aktuell nicht
                 aktiviert hat, dann wird es eingeschaltet.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->monitor('instanceId');
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.instance.utility.unmonitor">
             <title>Ausschalten des CloudWatch Monitorings für Instanzen</title>
+
             <para>
                 <code>monitor</code> gibt die Liste von Instanzn und deren aktuellen Status vom
                 CloudWatch Monitorings zurück. Wenn die Instant das Monitoring aktuell aktiviert

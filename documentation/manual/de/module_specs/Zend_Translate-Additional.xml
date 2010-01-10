@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19457 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.additional">
     <title>Zusätzliche Features für Übersetzungen</title>
@@ -68,23 +68,30 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                     <row>
                         <entry>clear</entry>
                         <entry>all</entry>
+
                         <entry>
-                            Wenn true gesetzt wird, werden bereits gelesene Übersetzungen entfernt.
-                            Das kann statt dem Erstellen einer neuen Instanz verwendet werden wenn
-                            neue Übersetzungsdaten gelesen werden
+                            Wenn <constant>TRUE</constant> gesetzt wird, werden bereits gelesene
+                            Übersetzungen entfernt. Das kann statt dem Erstellen einer neuen Instanz
+                            verwendet werden wenn neue Übersetzungsdaten gelesen werden
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
+
                     <row>
                         <entry>disableNotices</entry>
                         <entry>all</entry>
+
                         <entry>
-                            Wenn es auf true gesetzt wird, werden alle Notizen betreffend nicht
-                            vorhandenen Übersetzungen ausgeschaltet. Man sollte diese Option in
-                            einer Produktionsumgebung auf true setzen
+                            Wenn es auf <constant>TRUE</constant> gesetzt wird, werden alle Notizen
+                            betreffend nicht vorhandenen Übersetzungen ausgeschaltet. Man sollte
+                            diese Option in einer Produktivumgebung auf <constant>TRUE</constant>
+                            setzen
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
+
                     <row>
                         <entry>ignore</entry>
                         <entry>all</entry>
@@ -106,7 +113,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             Eine Instanz von <classname>Zend_Log</classname> wohin nicht
                             übersetzbare Meldungen und Notizen geschrieben werden
                         </entry>
-                        <entry><emphasis>null</emphasis></entry>
+                        <entry><emphasis><constant>NULL</constant></emphasis></entry>
                     </row>
                     <row>
                         <entry>logMessage</entry>
@@ -118,77 +125,99 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             <emphasis>Untranslated message within '%locale%': %message%</emphasis>
                         </entry>
                     </row>
+
                     <row>
                         <entry>logUntranslated</entry>
                         <entry>all</entry>
+
                         <entry>
-                            Wenn diese Option auf true gesetzt wird, werden alle Nachrichten Id's
-                            die nicht übersetzt werden können in das angehängte Log geschrieben
+                            Wenn diese Option auf <constant>TRUE</constant> gesetzt wird, werden
+                            alle Nachrichten Id's die nicht übersetzt werden können in das
+                            angehängte Log geschrieben
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
+
                     <row>
                         <entry>reload</entry>
                         <entry>all</entry>
+
                         <entry>
-                            Wenn diese Option auf true gesetzt wird, werden die Dateien in den Cache
-                            nachgeladen. Diese Option kann verwendet werden um den Cache wieder
-                            herzustellen, oder Übersetzungen zu bereits gecachten Daten hinzuzufügen
-                            nachdem der Cache bereits erstellt wurde.
+                            Wenn diese Option auf <constant>TRUE</constant> gesetzt wird, werden die
+                            Dateien in den Cache nachgeladen. Diese Option kann verwendet werden um
+                            den Cache wieder herzustellen, oder Übersetzungen zu bereits gecachten
+                            Daten hinzuzufügen nachdem der Cache bereits erstellt wurde.
                         </entry>
-                        <entry><emphasis>false</emphasis></entry>
+
+                        <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
+
                     <row>
                         <entry>scan</entry>
                         <entry>all</entry>
+
                         <entry>
-                            Wenn null gesetzt wird, wird die Verzechnisstruktur nicht gescannt. Wenn
+                            Wenn <constant>NULL</constant> gesetzt wird, wird die Verzechnisstruktur
+                            nicht gescannt. Wenn
                             <constant>Zend_Translate::LOCALE_DIRECTORY</constant> gesetzt wird,
                             wird das Gebietsschema im Verzeichnis gesucht. Wenn
                             <constant>Zend_Translate::LOCALE_FILENAME</constant> gesetzt wird,
                             wird das Gebietsschema im Dateinamen gesucht. Siehe
                             <xref linkend="zend.translate.additional.detection" /> für Details
                         </entry>
-                        <entry><emphasis>null</emphasis></entry>
+
+                        <entry><emphasis><constant>NULL</constant></emphasis></entry>
                     </row>
+
                     <row>
                         <entry>delimiter</entry>
                         <entry>Csv</entry>
+
                         <entry>
                             Definiert welches Zeichen als Trenner für Quelle und Übersetzung
                             verwendet wird
                         </entry>
+
                         <entry><emphasis>;</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>enclosure</entry>
                         <entry>Csv</entry>
+
                         <entry>
                             Definiert die maximale Länge einer CSV Zeile. Auf 0 gesetzt wird sie
                             automatisch erkannt
                         </entry>
+
                         <entry><emphasis>"</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>length</entry>
                         <entry>Csv</entry>
+
                         <entry>
                             Definiert das zu verwendende Einschließungszeichen. Standard ist das
                             doppelte Hochkomma
                         </entry>
+
                         <entry><emphasis>0</emphasis></entry>
                     </row>
 
                     <row>
                         <entry>useId</entry>
                         <entry>Xliff</entry>
+
                         <entry>
                             Wenn diese Option auf <constant>FALSE</constant> gesetzt wird, dann wird
                             der Source String als Message Id verwendet. Der Standardwert dieser
                             Option ist <constant>TRUE</constant>, was bedeutet dass die Id vom
                             trans-unit Element als Message Id verwendet wird
                         </entry>
-                        <entry><emphasis>true</emphasis></entry>
+
+                        <entry><emphasis><constant>TRUE</constant></emphasis></entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -639,12 +668,14 @@ $translate = new Zend_Translate(
             fix für die definierte Sprache ist oder ob ein kleineres Set von Übersetzungen verwendet
             werden kann. Wenn ein Text, welcher für 'en' zurückgegeben werden kann, aber nicht für
             'en_US', dann wird die Übersetzung normalerweise zurückgegeben, aber wenn
-            <varname>$original</varname> auf true gesetzt ist, gibt die
-            <methodname>isTranslated()</methodname> Methode in solche Fällen false zurück.
+            <varname>$original</varname> auf <constant>TRUE</constant> gesetzt ist, gibt die
+            <methodname>isTranslated()</methodname> Methode in solche Fällen
+            <constant>FALSE</constant> zurück.
         </para>
 
         <example id="zend.translate.additional.istranslated.example">
             <title>Prüfen ob ein Text übersetzbar ist</title>
+
             <programlisting language="php"><![CDATA[
 $english = array(
     'message1' => 'Nachricht 1',
@@ -753,11 +784,9 @@ $translate->setOptions(array(
 $translate->translate('unknown string');
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.translate.additional.sourcedata">
-
         <title>Zugang zu Quelldaten</title>
 
         <para>
@@ -816,10 +845,5 @@ $source = $translate->getMessages();
 print_r($source);
 ]]></programlisting>
         </example>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

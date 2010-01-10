@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-api">
     <title>Abfrage Erzeugungs API</title>
@@ -19,6 +19,7 @@ $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 
     <sect2 id="zend.search.lucene.queries.exceptions">
         <title>Abfrageparser Ausnahmen</title>
+
         <para>
             Der Abfrageparser kann zwei Typen von Ausnahmen erstellen.
             <itemizedlist>
@@ -28,6 +29,7 @@ $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
                         irgendwas im Abfrageparser selbst falsch läuft.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <classname>Zend_Search_Lucene_Search_QueryParserException</classname> wird
@@ -35,6 +37,7 @@ $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
                     </para>
                 </listitem>
             </itemizedlist>
+
             Es ist eine gute Idee die
             <classname>Zend_Search_Lucene_Search_QueryParserException</classname>s abzufangen und
             richtig abzuarbeiten:
@@ -549,20 +552,21 @@ Zend_Search_Lucene_Search_Query_Phrase(
 
         <para>
             Der <varname>$terms</varname> Parameter ist ein Array von Strings die ein Set von
-            Phrasen Strings enthalten. Wenn er ausgelassen wird oder null ist, wird eine leere
-            Abfrage erstellt.
+            Phrasen Strings enthalten. Wenn er ausgelassen wird oder <constant>NULL</constant> ist,
+            wird eine leere Abfrage erstellt.
         </para>
 
         <para>
             Der <varname>$offsets</varname> Parameter ist von ganzen Zahlen, welche den Offset von
-            Begriffen in einer Phrase enthalten. Wenn er ausgelassen wird oder null ist, werden die
-            Positionen der Begriffe als sequentiell, ohne Zwischenräume, angenommen.
+            Begriffen in einer Phrase enthalten. Wenn er ausgelassen wird oder
+            <constant>TRUE</constant> ist, werden die Positionen der Begriffe als sequentiell, ohne
+            Zwischenräume, angenommen.
         </para>
 
         <para>
             Der <varname>$field</varname> Parameter ist ein String, der das zu durchsuchende
-            Dokumentenfeld angibt. Wenn dies ausgelassen wird oder null entspricht, wird das
-            Standardfeld durchsucht.
+            Dokumentenfeld angibt. Wenn dies ausgelassen wird oder <constant>TRUE</constant>
+            entspricht, wird das Standardfeld durchsucht.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -729,9 +733,9 @@ $hits  = $index->find($query);
         </para>
 
         <para>
-            Jede (aber nicht beide) der Begrenzungsausdrücke kann auf null gesetzt werden.
-            <classname>Zend_Search_Lucene</classname> sucht vom Anfang oder bis zum Ende des
-            Verzeichnisses für die spezifizierten Feld(er) für diesen Fall:
+            Jede (aber nicht beide) der Begrenzungsausdrücke kann auf <constant>TRUE</constant>
+            gesetzt werden. <classname>Zend_Search_Lucene</classname> sucht vom Anfang oder bis zum
+            Ende des Verzeichnisses für die spezifizierten Feld(er) für diesen Fall:
             <programlisting language="php"><![CDATA[
 // Sucht nach ['20020101' TO ...]
 $from = new Zend_Search_Lucene_Index_Term('20020101', 'mod_date');
@@ -742,8 +746,4 @@ $hits  = $index->find($query);
 ]]></programlisting>
         </para>
      </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

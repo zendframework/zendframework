@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18176 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDL Zugriffsmethoden</title>
@@ -353,17 +353,19 @@
                                 implementiert oder einen String mit dem Namen dieser Klasse. Für
                                 Rückwärtskompatibilität mit den dem Boolean
                                 <varname>$extractComplexType</varname> werden Variablen auf dem
-                                folgenden Weg geparst: Bei true, wird
+                                folgenden Weg geparst: Bei <constant>TRUE</constant>, wird
                                 <classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>
-                                verwendet, und bei false
+                                verwendet, und bei <constant>FALSE</constant>
                                 <classname>Zend_Soap_Wsdl_Strategy_AnyType</classname>.
                             </para>
                         </footnote>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>PHP Void &lt;-&gt; Leerer Typ.</para>
                 </listitem>
+
                 <listitem>
                     <para>Wenn der Typ auf irgendeinem Grund zu keinem dieser Typen passt, dann wird
                     <code>xsd:anyType</code> verwendet.</para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19782 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.autoloading.design">
     <title>Ziele und Design</title>
@@ -56,9 +56,9 @@
             <listitem>
                 <para>
                     <emphasis>Namespace Abgleich anbieten</emphasis>: Wenn der Namespace Präfix der
-                    Klasse nicht in der Liste der registrierten Namespaces ist, wird sofort false
-                    zurückgegeben. Das erlaubt es einen optimistischeren Abgleich anzubieten, sowie
-                    als Fallback für andere Autoloader zu fungieren.
+                    Klasse nicht in der Liste der registrierten Namespaces ist, wird sofort
+                    <constant>FALSE</constant> zurückgegeben. Das erlaubt es einen optimistischeren
+                    Abgleich anzubieten, sowie als Fallback für andere Autoloader zu fungieren.
                 </para>
             </listitem>
 

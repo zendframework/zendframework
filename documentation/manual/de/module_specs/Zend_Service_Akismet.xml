@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18818 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.akismet">
     <title>Zend_Service_Akismet</title>
@@ -167,8 +167,9 @@ if ($akismet->verifyKey($apiKey) {
         </para>
 
         <para>
-            Die <methodname>isSpam()</methodname> Methode gibt true oder false zurück, oder wirft
-            eine Ausnahme wenn der <acronym>API</acronym> Schlüssel nicht gültig ist.
+            Die <methodname>isSpam()</methodname> Methode gibt <constant>TRUE</constant> oder
+            <constant>FALSE</constant> zurück, oder wirft eine Exception wenn der
+            <acronym>API</acronym> Schlüssel nicht gültig ist.
         </para>
 
         <example id="zend.service.akismet.isspam.example-1">

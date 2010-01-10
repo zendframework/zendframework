@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19419 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.email_address">
-
     <title>Email Adresse</title>
 
     <para>
@@ -218,10 +217,10 @@ $validator = new Zend_Validate_EmailAddress(
         </para>
 
         <para>
-            Manchmal gibt die Prüfung auf MX Records false zurück, selbst wenn Emails akzeptiert
-            werden. Der Hintergrund dieses Verhaltens ist, das der Server Emails akzeptieren kann,
-            selbst wenn er keinen MX Record anbietet. In diesem Fall kann er A, A6 oder
-            <constant>AAAA</constant> Records anbieten. Um es
+            Manchmal gibt die Prüfung auf MX Records <constant>FALSE</constant> zurück, selbst wenn
+            Emails akzeptiert werden. Der Hintergrund dieses Verhaltens ist, das der Server Emails
+            akzeptieren kann, selbst wenn er keinen MX Record anbietet. In diesem Fall kann er A, A6
+            oder <constant>AAAA</constant> Records anbieten. Um es
             <classname>Zend_Validate_EmailAddress</classname> zu erlauben auch auf diese anderen
             Records zu prüfen, muss man die tiefe MX Prüfung einschalten. Das kann man durch Setzen
             der <property>deep</property> Option bei der Initialisierung, oder durch Verwendung von

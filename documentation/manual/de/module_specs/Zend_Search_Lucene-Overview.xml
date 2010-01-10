@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17409 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.overview">
     <title>Überblick</title>
 
     <sect2 id="zend.search.lucene.introduction">
         <title>Einführung</title>
+
         <para>
             <classname>Zend_Search_Lucene</classname> ist eine komplett in <acronym>PHP</acronym> 5
             geschriebene Textsuchmaschine für viele Zwecke. Da es seinen Index im Dateisystem ablegt
@@ -19,12 +20,14 @@
                         Klassifizierte Suche - die besten Ergebnisse werden zuerst zurückgegeben
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         Viele mächtige Abfragearten: Phrasensuche, Platzhaltersuche, Boolsche Suche,
                         Näherungssuche, Bereichssuche und viele andere.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         Suche anhand eines bestimmten Feldes (z.B. Titel, Autor, Inhalt)
@@ -40,10 +43,12 @@
 
         <note>
             <title/>
+
             <para>
                 Frühere <classname>Zend_Search_Lucene</classname> Implementationen unterstützen das
                 Lucene Indexformat 1.4 (1.9) - 2.1.
             </para>
+
             <para>
                 Beginnend mit Zend Framework 1.5 werden, nach dem
                 <classname>Zend_Search_Lucene</classname> Update, alle Indezes die mit einem pre-2.1
@@ -318,10 +323,12 @@ $index->addDocument($doc);
         <para>
             Die <methodname>loadHTML()</methodname> und <methodname>loadHTMLFile()</methodname>
             Methoden der <classname>Zend_Search_Lucene_Document_Html</classname> Klasse haben auch
-            ein zweites optionales Argument. Wenn es auf true gesetzt wird, wird der Inhalt vom Body
-            auch innerhalb des Index gespeichert und kann vom Index empfangen werden. Standardmäßig
-            wird der Body nur Tokenized und Indiziert, aber nicht gespeichert.
+            ein zweites optionales Argument. Wenn es auf <constant>TRUE</constant> gesetzt wird,
+            wird der Inhalt vom Body auch innerhalb des Index gespeichert und kann vom Index
+            empfangen werden. Standardmäßig wird der Body nur Tokenized und Indiziert, aber nicht
+            gespeichert.
         </para>
+
         <para>
             Der dritte Parameter der <methodname>loadHTML()</methodname> und
             <methodname>loadHTMLFile()</methodname> Methoden spezifiziert optional die Kodierung des
@@ -452,9 +459,9 @@ $index->addDocument($doc);
         <para>
             Die Methode <methodname>loadDocxFile()</methodname> der
             <classname>Zend_Search_Lucene_Document_Docx</classname> Klasse hat auch ein zweites
-            optionales Argument. Wenn es auf true gesetzt wird, wird der Inhalt auch mit einem Index
-            gespeichert und kann vom Index empfangen werden. Standardmäßig wird der Inhalt
-            gesplittet und indiziert, aber nicht gespeichert.
+            optionales Argument. Wenn es auf <constant>TRUE</constant> gesetzt wird, wird der Inhalt
+            auch mit einem Index gespeichert und kann vom Index empfangen werden. Standardmäßig wird
+            der Inhalt gesplittet und indiziert, aber nicht gespeichert.
         </para>
 
         <para>
@@ -553,9 +560,9 @@ $index->addDocument($doc);
         <para>
             Die Methode <methodname>loadPptxFile()</methodname> der
             <classname>Zend_Search_Lucene_Document_Pptx</classname> Klasse hat auch ein zweites
-            optionales Argument. Wenn es auf true gesetzt wird, wird der Inhalt auch mit einem Index
-            gespeichert und kann vom Index empfangen werden. Standardmäßig wird der Inhalt
-            gesplittet und indiziert, aber nicht gespeichert.
+            optionales Argument. Wenn es auf <constant>TRUE</constant> gesetzt wird, wird der Inhalt
+            auch mit einem Index gespeichert und kann vom Index empfangen werden. Standardmäßig wird
+            der Inhalt gesplittet und indiziert, aber nicht gespeichert.
         </para>
 
         <para>
@@ -651,9 +658,9 @@ $index->addDocument($doc);
         <para>
             Die Methode <methodname>loadXlsxFile()</methodname> der
             <classname>Zend_Search_Lucene_Document_Xlsx</classname> Klasse hat auch ein zweites
-            optionales Argument. Wenn es auf true gesetzt wird, wird der Inhalt auch mit einem Index
-            gespeichert und kann vom Index empfangen werden. Standardmäßig wird der Inhalt
-            gesplittet und indiziert, aber nicht gespeichert.
+            optionales Argument. Wenn es auf <constant>TRUE</constant> gesetzt wird, wird der Inhalt
+            auch mit einem Index gespeichert und kann vom Index empfangen werden. Standardmäßig wird
+            der Inhalt gesplittet und indiziert, aber nicht gespeichert.
         </para>
 
         <para>

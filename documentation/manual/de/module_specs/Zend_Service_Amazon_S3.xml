@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19418 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.s3">
     <title>Zend_Service_Amazon_S3</title>
@@ -212,7 +212,7 @@ foreach($list as $bucket) {
             <listitem>
                 <para>
                     <methodname>isBucketAvailable()</methodname> prüft ob das Bucket existiert und
-                    gibt true zurück wenn das der Fall ist.
+                    gibt <constant>TRUE</constant> zurück wenn das der Fall ist.
                 </para>
             </listitem>
         </itemizedlist>
@@ -408,8 +408,8 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
                         </varlistentry>
                     </variablelist>
 
-                    Die Funktion gibt false zurück wenn der Schlüssel keinem der existierenden
-                    Objekte entspricht.
+                    Die Funktion gibt <constant>FALSE</constant> zurück wenn der Schlüssel keinem
+                    der existierenden Objekte entspricht.
                 </para>
             </listitem>
 

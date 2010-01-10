@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19577 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
     <title>Einführung</title>
@@ -302,8 +302,9 @@ if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) 
                 <listitem>
                     <para>
                         <emphasis><methodname>Zend_Validate::hasDefaultNamespaces()</methodname></emphasis>:
-                        Gibt true zurück wenn ein oder mehrere standardmäßige Namespaces gesetzt
-                        sind, und false wenn keine standardmäßigen Namespaces gesetzt sind.
+                        Gibt <constant>TRUE</constant> zurück wenn ein oder mehrere standardmäßige
+                        Namespaces gesetzt sind, und <constant>FALSE</constant> wenn keine
+                        standardmäßigen Namespaces gesetzt sind.
                     </para>
                 </listitem>
             </itemizedlist>

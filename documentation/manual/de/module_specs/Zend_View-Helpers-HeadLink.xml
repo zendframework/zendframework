@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19438 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headlink">
     <title>HeadLink Helfer</title>
@@ -46,10 +46,11 @@
 
     <para>
         Der <varname>$media</varname> Wert ist standardmäßig 'screen', kann aber jeder gültige Media
-        Wert sein. <varname>$conditionalStylesheet</varname> ist ein String oder boolsches false und
-        wird verwendet um wärend der Darstellung zu erkennen ob spezielle Kommentare inkludiert
-        werden sollen um das Laden dieser Stylesheets auf diversen Plattformen zu verhindern.
-        <varname>$extras</varname> ist ein Array von extra Werten die man dem Tag hinzufügen will.
+        Wert sein. <varname>$conditionalStylesheet</varname> ist ein String oder boolsches
+        <constant>FALSE</constant> und wird verwendet um wärend der Darstellung zu erkennen ob
+        spezielle Kommentare inkludiert werden sollen um das Laden dieser Stylesheets auf diversen
+        Plattformen zu verhindern. <varname>$extras</varname> ist ein Array von extra Werten die man
+        dem Tag hinzufügen will.
     </para>
 
     <para>

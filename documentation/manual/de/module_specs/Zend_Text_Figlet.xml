@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
+
     <para>
         <classname>Zend_Text_Figlet</classname> ist eine Komponente die es Entwicklern erlaubt einen
         sogenannten FIGlet Text zu erstellen. Ein FIGlet Text ist ein String der eine
@@ -12,8 +13,10 @@
         unter <ulink url="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</ulink>
         herunterladen.
     </para>
+
     <note>
         <title>Komprimierte Schriftarten</title>
+
         <para>
             <classname>Zend_Text_Figlet</classname> unterstützt gezippte Schriftarten. Das bedeutet
             das man eine <code>.flf</code> Datei nehmen und diese gzip-pen kann. Um
@@ -23,14 +26,17 @@
             aktiviert sein.
         </para>
     </note>
+
     <note>
         <title>Encoding</title>
+
         <para>
             <classname>Zend_Text_Figlet</classname> erwartet das Strings standardmäßig UTF-8 kodiert
             sind. Wenn das nicht der Fall ist, kann die Zeichenkodierung als zweiter Parameter an
             die <methodname>render()</methodname> Methode übergeben werden.
         </para>
     </note>
+
     <para>
         Man kann mehrere Optionen für ein FIGlet definieren. Wenn ein
         <classname>Zend_Text_Figlet</classname> instanziiert wird, kann ein Array oder eine Instanz
@@ -44,6 +50,7 @@
                     verwendet.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>outputWidth</code> - Definiert die maximale Breite des Ausgabestrings. Das
@@ -52,15 +59,17 @@
                     können. Der Standardwert ist 80.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>handleParagraphs</code> - Ein boolscher Wert welcher anzeigt wie neue
-                    Zeilen zu handhaben sind. Wenn er auf true gesetzt wird, werden einzelne neue
-                    Zeilen ignoriert und stattdessen als einzelnes Leerzeichen behandelt. Nur
-                    mehrere neue Zeilen werden als solche behandelt. Der Standardwert ist
-                    <constant>FALSE</constant>.
+                    Zeilen zu handhaben sind. Wenn er auf <constant>TRUE</constant> gesetzt wird,
+                    werden einzelne neue Zeilen ignoriert und stattdessen als einzelnes Leerzeichen
+                    behandelt. Nur mehrere neue Zeilen werden als solche behandelt. Der
+                    Standardwert ist <constant>FALSE</constant>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>justification</code> - Kann einer der Werte von
@@ -71,6 +80,7 @@
                     dem Wert <code>rightToLeft</code> definiert.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>rightToLeft</code> - Definiert in welche Richtung geschrieben wird. Das
@@ -81,6 +91,7 @@
                     geschrieben wird automatisch nach rechts gerückt.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>smushMode</code> - Ein Integer-Bitfeld welches definiert wie einzelne
@@ -97,20 +108,25 @@
             </listitem>
         </itemizedlist>
     </para>
+
     <example id="zend.text.figlet.example.using">
         <title>Verwendung von Zend_Text_Figlet</title>
+
         <para>
             Dieses Beispiel zeigt die einfache Verwendung von
             <classname>Zend_Text_Figlet</classname> um einen einfachen FIGlet Text zu erstellen:
         </para>
+
         <programlisting language="php"><![CDATA[
 $figlet = new Zend_Text_Figlet();
 echo $figlet->render('Zend');
 ]]></programlisting>
+
         <para>
             Angenommen es wird eine Monospace Schriftart verwenden dann würde das Beispiel wie folgt
             aussehen:
         </para>
+
         <programlisting language="text"><![CDATA[
   ______    ______    _  __   ______
  |__  //   |  ___||  | \| || |  __ \\
@@ -121,6 +137,3 @@ echo $figlet->render('Zend');
 ]]></programlisting>
     </example>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.images">
     <title>Zend_Service_Amazon_Ec2: Amazon Maschinen Images (AMI)</title>
+
     <para>
         Amazon Maschinen Images (AMIs) sind mit einer bereits wachsenden Listen von
         Betriebssystemen vorkonfiguriert.
@@ -13,6 +14,7 @@
 
         <example id="zend.service.amazon.ec2.images.register">
             <title>Ein AMI mit EC2 registrieren</title>
+
             <para>
                 <code>register</code> Jedes <acronym>AMI</acronym> ist mit einer eideutigen ID
                 assoziiert welche vom Amazon EC2 Service über die RegisterImage Operation zur
@@ -20,6 +22,7 @@
                 spezifizierte Manifest des Images von Amazon S3 und überprüft ob das Image dem
                 Benutzer gehört der das Image registriert.
             </para>
+
             <para>
                 <code>register</code> gibt die imageId für das registrierte Image zurück.
             </para>
@@ -32,13 +35,16 @@ $ip = $ec2_img->register('imageLocation');
 
         <example id="zend.service.amazon.ec2.images.deregister">
             <title>De-Registrieren einer AMI von EC2</title>
+
             <para>
                 <code>deregister</code>, de-registriert ein <acronym>AMI</acronym>. Einmal
                 de-registriert können Instanzen dieses <acronym>AMI</acronym> nicht mehr gestartet
                 werden.
             </para>
+
             <para>
-                <code>deregister</code> gibt ein boolsches true oder false zurück.
+                <code>deregister</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -49,6 +55,7 @@ $ip = $ec2_img->deregister('imageId');
 
         <example id="zend.service.amazon.ec2.images.describe">
             <title>Beschreiben einer AMI</title>
+
             <para>
                 <code>describe</code> gibt Informationen über <acronym>AMI</acronym>s, AKIs und ARIs
                 zurück die für den Benutzer verfügbar sind. Die zurückgegebenen Informationen
@@ -58,6 +65,7 @@ $ip = $ec2_img->deregister('imageId');
                 gehören der die Anfrage stellt, und private Images die anderen Benutzern gehören
                 welche dem Benutzer explizit die Rechte zum Starten gegeben haben.
             </para>
+
             <para>
             <table id="zend.service.amazon.ec2.images.describe-table">
                 <title>Die Rechte für das Starten fallen in drei Kategorien</title>
@@ -143,7 +151,9 @@ $ip = $ec2_img->describe();
 
         <example id="zend.service.amazon.ec2.images.attribute.modify">
             <title>Image Attribute verändern</title>
+
             <para>Ein Attribut eines <acronym>AMI</acronym> verändern</para>
+
             <para>
             <table id="zend.service.amazon.ec2.images.attribute.modify-table">
                 <title>Gültige Attribute</title>
@@ -157,6 +167,7 @@ $ip = $ec2_img->describe();
                     <tbody>
                         <row>
                             <entry><code>launchPermission</code></entry>
+
                             <entry><para>
                                 Kontrolliert wer die Berechtigung hat das <acronym>AMI</acronym> zu
                                 starten. Startberechtigung kann spezifischen Benutzern durch das
@@ -164,8 +175,10 @@ $ip = $ec2_img->describe();
                             </para><para>Um das <acronym>AMI</acronym> öffentlich zu machen, sollte
                                 man die add Gruppe hinzufügen.</para></entry>
                         </row>
+
                         <row>
                             <entry><code>productCodes</code></entry>
+
                             <entry><para>
                                 Assoziiert einen Produktcode mit <acronym>AMIs</acronym>. Das
                                 erlaubt es Entwicklern Benutzer für die Verwendung von
@@ -179,9 +192,12 @@ $ip = $ec2_img->describe();
                 </tgroup>
             </table>
             </para>
+
             <para>
-                <code>modifyAttribute</code> gibt ein boolsches true oder false zurück.
+                <code>modifyAttribute</code> gibt ein boolsches <constant>TRUE</constant> oder
+                <constant>FALSE</constant> zurück.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_img = new Zend_Service_Amazon_Ec2_Image('aws_key','aws_secret_key');
 // Ändert die Startberechtigung (launchPermission) eines AMI

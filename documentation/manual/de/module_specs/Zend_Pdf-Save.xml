@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.save">
     <title>Änderungen an PDF Dokumenten speichern</title>
+
     <para>
         Es gibt zwei Methoden die Änderungen an <acronym>PDF</acronym> Dokumenten speichern: Die
         <methodname>Zend_Pdf::save()</methodname> und <methodname>Zend_Pdf::render()</methodname>
@@ -11,19 +12,21 @@
 
     <para>
         Die <methodname>Zend_Pdf::save($filename, $updateOnly = false)</methodname> Methode
-        speichert das <acronym>PDF</acronym> Dokument in einer Datei. Wenn $updateOnly auf true
-        gesetzt wird, wird das neue <acronym>PDF</acronym> Segment nur an die Datei angehängt,
-        ansonsten wird die Datei überschrieben.
+        speichert das <acronym>PDF</acronym> Dokument in einer Datei. Wenn $updateOnly auf
+        <constant>TRUE</constant> gesetzt wird, wird das neue <acronym>PDF</acronym> Segment nur
+        an die Datei angehängt, ansonsten wird die Datei überschrieben.
     </para>
 
     <para>
         Die <methodname>Zend_Pdf::render($newSegmentOnly = false)</methodname> Methode gibt das
-        <acronym>PDF</acronym> Dokument als Zeichenkette zurück. Wenn $newSegmentOnly auf true
-        gesetzt wird, wird nur das neue <acronym>PDF</acronym> Dateisegment zurückgegeben.
+        <acronym>PDF</acronym> Dokument als Zeichenkette zurück. Wenn $newSegmentOnly auf
+        <constant>TRUE</constant> gesetzt wird, wird nur das neue <acronym>PDF</acronym>
+        Dateisegment zurückgegeben.
     </para>
 
     <example id="zend.pdf.save.example-1">
         <title>Speichern von PDF Dokumenten</title>
+
         <programlisting language="php"><![CDATA[
 ...
 // Lade das PDF Dokument.
@@ -40,8 +43,4 @@ $pdfString = $pdf->render();
 ...
 ]]></programlisting>
     </example>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

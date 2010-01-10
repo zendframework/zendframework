@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19568 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.hostname">
     <title>Hostname</title>
@@ -115,12 +115,12 @@ $validator =
     );
 ]]></programlisting>
 
-        Alternativ kann entweder TRUE oder FALSE an <methodname>setValidateIdn()</methodname>
-        übergeben werden, um die IDN Prüfung ein- oder auszuschalten.
-        Wenn ein IDN Hostname geprüft wird, der aktuell nicht unterstützt wird, ist es sicher das
-        die Prüfung fehlschlagen wird wenn er irgendwelche internationalen Zeichen hat. Wo keine
-        ccTLD Datei in Zend/Validate/Hostname existiert, welche die zusätzlichen Zeichen definiert,
-        wird eine normale Hostnamen Prüfung durchgeführt.
+        Alternativ kann entweder <constant>TRUE</constant> oder <constant>FALSE</constant> an
+        <methodname>setValidateIdn()</methodname> übergeben werden, um die IDN Prüfung ein- oder
+        auszuschalten. Wenn ein IDN Hostname geprüft wird, der aktuell nicht unterstützt wird, ist
+        sicher das die Prüfung fehlschlagen wird wenn er irgendwelche internationalen Zeichen hat.
+        Wo keine ccTLD Datei in Zend/Validate/Hostname existiert, welche die zusätzlichen Zeichen
+        definiert, wird eine normale Hostnamen Prüfung durchgeführt.
     </para>
 
     <para>
@@ -150,8 +150,8 @@ $validator =
     );
 ]]></programlisting>
 
-        Alternativ kann entweder TRUE oder FALSE übergeben an
-        <methodname>setValidateTld()</methodname> übergeben werden um die TLD Prüfung ein- oder
+        Alternativ kann entweder <constant>TRUE</constant> oder <constant>FALSE</constant> übergeben
+        an <methodname>setValidateTld()</methodname> übergeben werden um die TLD Prüfung ein- oder
         auszuschalten.
     </para>
 
@@ -159,8 +159,4 @@ $validator =
         Es sollte beachtet werden das TLDs nur geprüft werden wenn es erlaubt ist DNS Hostnamen zu
         prüfen.
     </para>
-
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

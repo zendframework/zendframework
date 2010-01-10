@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.elasticip">
     <title>Zend_Service_Amazon_Ec2: Elastische IP Adressen</title>
@@ -74,11 +74,13 @@ $ip = $ec2_eip->describe('ip1');
 
     <example id="zend.service.amazon.ec2.elasticip.release">
         <title>Freigeben einer elastischen IP</title>
+
         <para>
             <code>release</code> gibt eine elastische IP wieder für Amazon frei.
         </para>
+
         <para>
-            Gibt ein boolsches true oder false zurück.
+            Gibt ein boolsches <constant>TRUE</constant> oder <constant>FALSE</constant> zurück.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -89,12 +91,14 @@ $ec2_eip->release('ipaddress');
 
     <example id="zend.service.amazon.ec2.elasticip.associate">
         <title>Verknüpft eine elastische IP zu einer Instanz</title>
+
         <para>
             <code>associate</code> verknüpft eine elastische IP mit einer bereits laufenden
             Instanz.
         </para>
+
         <para>
-            Gibt ein boolsches true oder false zurück.
+            Gibt ein boolsches <constant>TRUE</constant> oder <constant>FALSE</constant> zurück.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -105,13 +109,15 @@ $ec2_eip->associate('instance_id', 'ipaddress');
 
     <example id="zend.service.amazon.ec2.elasticip.disassociate">
         <title>Entfernt die Verknüpfung einer elastischen IP von einer Instanz</title>
+
         <para>
             <code>disassocate</code> entfernt die Verknüpfung einer elastischen IP von einer
             Instanz. Wenn man eine Instanz beendet wird diese automatisch die elastischen IP
             Adressen wieder freigeben.
         </para>
+
         <para>
-            Gibt ein boolsches true oder false zurück.
+            Gibt ein boolsches <constant>TRUE</constant> oder <constant>FALSE</constant> zurück.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -119,5 +125,4 @@ $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 $ec2_eip->disassociate('ipaddress');
 ]]></programlisting>
     </example>
-
 </sect1>

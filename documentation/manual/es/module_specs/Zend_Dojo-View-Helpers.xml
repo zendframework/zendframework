@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!-- EN-Revision: 19418 -->
+<!-- EN-Revision: 20176 -->
     <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dijit">
     <title>Ayudantes de Vistas Específicos de Dijit</title>
@@ -169,7 +169,7 @@ $view->addHelperPath('Zend/Dojo/View/Helper', 'Zend_Dojo_View_Helper');
                 > lea más sobre ellos en el manual de Dojo</ulink> . </para>
 
         <para> Todos los elementos de los esquemas dijit tienen la firma
-            <command>string ($id = null, $content = '', array $params =
+                <command>string ($id = null, $content = '', array $params =
                 array(), array $attribs = array())</command> . En todos los
             casos, si no pasa argumentos, será devuelto el mismo objeto
             ayudante. Esto le da acceso a los métodos
@@ -469,16 +469,16 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                     opciones disponibles, y que todavía considera válido el
                     input. Opcionalmente acepta un quinto argumento, un array
                     asociativo <varname>$options</varname> ; si lo hay, ComboBox
-                    será presentado como un <emphasis>select</emphasis> .
-                    Note también que la <emphasis>label values</emphasis> del
-                    array <varname>$options</varname> será devuelto al form -- y
+                    será presentado como un <emphasis>select</emphasis> . Note
+                    también que la <emphasis>label values</emphasis> del array
+                        <varname>$options</varname> será devuelto al form -- y
                     no los valores en si mismos. </para>
 
                 <para> Alternativamente, puede pasar información sobre un
                     datastrore dojo.data para utilizar con el elemento. Si la
                     hay, el ComboBox será presentado como un texto
-                    <emphasis>input</emphasis> , y traerá sus opciones
-                    vía ese datastore. </para>
+                        <emphasis>input</emphasis> , y traerá sus opciones vía
+                    ese datastore. </para>
 
                 <para> Para especificar un datastore, proporcionar una de las
                     siguientes <varname>$params</varname> combinaciones de
@@ -638,12 +638,13 @@ echo $view->dateTextBox(
 
             <listitem>
                 <para>
-                    <emphasis>Editor</emphasis> : <command>dijit.Editor</command>. Proporciona un
-                    editor WYSIWYG mediante el cual los usuarios pueden crear o
-                    editar el contenido. <command>dijit.Editor</command>
-                    es un editor pluggable y extensible, con una variedad de
-                    parámetros que puede utilizar para personalización; para más
-                    detalles vea <ulink
+                    <emphasis>Editor</emphasis> :
+                        <command>dijit.Editor</command>. Proporciona un editor
+                    WYSIWYG mediante el cual los usuarios pueden crear o editar
+                    el contenido. <command>dijit.Editor</command> es un editor
+                    pluggable y extensible, con una variedad de parámetros que
+                    puede utilizar para personalización; para más detalles vea
+                        <ulink
                         url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text"
                         >la documentación de dijit.Editor</ulink> . </para>
 
@@ -656,22 +657,19 @@ echo $view->editor('foo');
 
                     <para> The Editor dijit uses an <acronym>HTML</acronym>
                         <acronym>DIV</acronym> by default. The
-                        <command>dijit._editor.RichText</command>
-                        documentation indicates that having it built on an
+                        <classname>dijit._editor.RichText</classname> <ulink
+                            url="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">documentation</ulink> indicates that having it built on an
                             <acronym>HTML</acronym>
                         <acronym>TEXTAREA</acronym> can potentially have
                         security implications. </para>
 
-                    <para> That said, there may be times when you want an Editor
-                        widget that can gracefully degrade to a
-                            <acronym>TEXTAREA</acronym> . In such situations,
-                        you can do so by passing a boolean
-                            <constant>true</constant> value to the
-                            <varname>degrade</varname> parameter: </para>
-
-                    <programlisting language="php"><![CDATA[
-echo $this->editor('foo', '', array('degrade' => true));
-]]></programlisting>
+                    <para> In order to allow graceful degradation in
+                        environments where Javascript is unavailable,
+                        <classname>Zend_Dojo_View_Helper_Editor</classname>
+                        also wraps a <acronym>textarea</acronym> within a
+                        <acronym>noscript</acronym> tag; the content of this
+                        <acronym>textarea</acronym> will be properly escaped
+                        to avoid security vulnerability vectors. </para>
                 </note>
             </listitem>
 

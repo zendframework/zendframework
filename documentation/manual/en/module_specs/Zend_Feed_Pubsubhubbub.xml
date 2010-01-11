@@ -291,7 +291,7 @@ if (!$publisher->isSuccess()) {
             
                     <programlisting language="sql"><![CDATA[
 CREATE TABLE IF NOT EXISTS `subscription` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `topic_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hub_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_time` datetime DEFAULT NULL,
@@ -302,7 +302,7 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   `expiration_time` datetime DEFAULT NULL,
   `subscription_state` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 ]]></programlisting>
 
             <para>

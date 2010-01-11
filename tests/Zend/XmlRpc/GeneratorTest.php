@@ -41,8 +41,8 @@ class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
      */
     public function testCreatingSingleElement(Zend_XmlRpc_Generator_GeneratorAbstract $generator)
     {
-        $generator->startElement('element');
-        $generator->endElement('element');
+        $generator->openElement('element');
+        $generator->closeElement('element');
         $this->assertXml('<element/>', $generator);
     }
 
@@ -51,8 +51,8 @@ class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
      */
     public function testCreatingSingleElementWithValue(Zend_XmlRpc_Generator_GeneratorAbstract $generator)
     {
-        $generator->startElement('element', 'value');
-        $generator->endElement('element');
+        $generator->openElement('element', 'value');
+        $generator->closeElement('element');
         $this->assertXml('<element>value</element>', $generator);
     }
 
@@ -61,12 +61,12 @@ class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
      */
     public function testCreatingComplexXmlDocument(Zend_XmlRpc_Generator_GeneratorAbstract $generator)
     {
-        $generator->startElement('root');
-        $generator->startElement('children');
-        $generator->startElement('child', 'child1')->endElement('child');
-        $generator->startElement('child', 'child2')->endElement('child');
-        $generator->endElement('children');
-        $generator->endElement('root');
+        $generator->openElement('root');
+        $generator->openElement('children');
+        $generator->openElement('child', 'child1')->closeElement('child');
+        $generator->openElement('child', 'child2')->closeElement('child');
+        $generator->closeElement('children');
+        $generator->closeElement('root');
         $this->assertXml(
             '<root><children><child>child1</child><child>child2</child></children></root>',
             $generator
@@ -78,7 +78,7 @@ class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
      */
     public function testFlushingGeneratorFlushesEverything(Zend_XmlRpc_Generator_GeneratorAbstract $generator)
     {
-        $generator->startElement('test')->endElement('test');
+        $generator->openElement('test')->closeElement('test');
         $this->assertXml('<test/>', $generator);
         $this->assertContains('<test/>', $generator->flush());
         $this->assertSame('', (string)$generator);
@@ -89,7 +89,7 @@ class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
      */
     public function testSpecialCharsAreEncoded(Zend_XmlRpc_Generator_GeneratorAbstract $generator)
     {
-        $generator->startElement('element', '<>&"\'€')->endElement('element');
+        $generator->openElement('element', '<>&"\'€')->closeElement('element');
         $variant1 = '<element>&lt;&gt;&amp;"\'€</element>';
         $variant2 = '<element>&lt;&gt;&amp;&quot;\'€</element>';
         try {
@@ -104,7 +104,7 @@ class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
      */
     public function testDifferentEncodings(Zend_XmlRpc_Generator_GeneratorAbstract $generator)
     {
-        $generator->startElement('element', '€')->endElement('element');
+        $generator->openElement('element', '€')->closeElement('element');
         $this->assertXml('<element>&#8364;</element>', $generator);
     }
 
@@ -113,8 +113,8 @@ class Zend_XmlRpc_GeneratorTest extends PHPUnit_Framework_TestCase
      */
     public function testFluentInterfacesProvided(Zend_XmlRpc_Generator_GeneratorAbstract $generator)
     {
-        $this->assertSame($generator, $generator->startElement('foo'));
-        $this->assertSame($generator, $generator->endElement('foo'));
+        $this->assertSame($generator, $generator->openElement('foo'));
+        $this->assertSame($generator, $generator->closeElement('foo'));
     }
 
     public function assertXml($expected, $actual)

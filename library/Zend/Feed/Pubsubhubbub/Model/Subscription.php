@@ -54,6 +54,8 @@ class Zend_Feed_Pubsubhubbub_Model_Subscription
         $result = $this->_db->find($data['id']);
         if ($result) {
             $data['created_time'] = $result->current()->created_time;
+            $now = new Zend_Date;
+            $data['last_modified'] = $now->get('yyyy-MM-dd HH:mm:ss');
             $this->_db->update(
                 $data,
                 $this->_db->getAdapter()->quoteInto('id = ?', $data['id'])

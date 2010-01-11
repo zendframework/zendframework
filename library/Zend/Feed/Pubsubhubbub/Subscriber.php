@@ -759,7 +759,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
             'lease_seconds'      => $expires,
             'verify_token'       => hash('sha256', $params['hub.verify_token']),
             'secret'             => null,
-            'expiration_time'    => isset($params['hub.lease_seconds']) ? time() + $params['hub.lease_seconds'] : null,
+            'expiration_time'    => $expires,
             'subscription_state' => Zend_Feed_Pubsubhubbub::SUBSCRIPTION_NOTVERIFIED,
         );
         $this->getStorage()->setSubscription($data);

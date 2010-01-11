@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16845 -->
+<!-- EN-Revision: 20111 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.db">
     <title>Zend_Application_Resource_Db</title>
 
     <para>
         <classname>Zend_Application_Resource_Db</classname> initialisera un adaptateur
-        <classname>Zend_Db</classname> basé sur les options qui lui seront fournis. Par défaut, il
-        spécifiera aussi cet adaptateur comme adaptateur par défaut à utiliser avec
-        <classname>Zend_Db_Table</classname>.
+        <classname>Zend_Db</classname> basé sur les options qui lui seront fournis. Par
+        défaut, il spécifiera aussi cet adaptateur comme adaptateur par défaut à utiliser
+        avec <classname>Zend_Db_Table</classname>. Si vous souhaitez utiliser simultanément
+        de multiples bases de données, vous pouvez utiliser la <link
+        linkend="zend.application.available-resources.multidb">plugin de ressource Multidb</link>.
     </para>
 
     <para>

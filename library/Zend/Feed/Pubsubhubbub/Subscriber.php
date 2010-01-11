@@ -748,14 +748,14 @@ class Zend_Feed_Pubsubhubbub_Subscriber
         $expires = null;
         if (isset($params['hub.lease_seconds'])) {
             $expires = $now->add($params['hub.lease_seconds'], Zend_Date::SECOND)
-                ->get('YYYY-MM-dd HH:mm:ss');
+                ->get('yyyy-MM-dd HH:mm:ss');
         }
         $data = array(
             'id'                 => $key,
             'topic_url'          => $params['hub.topic'],
             'hub_url'            => $hubUrl,
-            'created_time'       => $now->get('YYYY-MM-dd HH:mm:ss'),
-            'last_modified'      => $now->get('YYYY-MM-dd HH:mm:ss'),
+            'created_time'       => $now->get('yyyy-MM-dd HH:mm:ss'),
+            'last_modified'      => $now->get('yyyy-MM-dd HH:mm:ss'),
             'lease_seconds'      => $expires,
             'verify_token'       => hash('sha256', $params['hub.verify_token']),
             'secret'             => null,

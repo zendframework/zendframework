@@ -560,6 +560,21 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
         $v2 = new Zend_Validate_NotEmpty();
         $this->assertFalse($this->_validator->isValid($v2));
     }
+
+    /**
+     * @ZF-8767
+     *
+     * @return void
+     */
+    public function testZF8767()
+    {
+        $valid = new Zend_Validate_NotEmpty(Zend_Validate_NotEmpty::STRING);
+
+        $this->assertFalse($valid->isValid(''));
+        $messages = $valid->getMessages();
+        $this->assertTrue(array_key_exists('isEmpty', $messages));
+        $this->assertContains("can't be empty", $messages['isEmpty']);
+    }
 }
 
 // Call Zend_Validate_NotEmptyTest::main() if this source file is executed directly.

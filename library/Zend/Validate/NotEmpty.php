@@ -226,8 +226,9 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
         // BOOLEAN (false)
         if ($type >= self::BOOLEAN) {
             $type -= self::BOOLEAN;
-            if (is_bool($value)) {
-                return $value;
+            if (is_bool($value) && ($value == false)) {
+                $this->_error(self::IS_EMPTY);
+                return false;
             }
         }
 

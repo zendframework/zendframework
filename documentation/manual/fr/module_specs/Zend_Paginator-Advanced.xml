@@ -213,7 +213,7 @@ var_dump($paginator->getPageItemCache());
 ]]></programlisting>
         </para>
     </sect2>
-        
+
     <sect2 id="zend.paginator.advanced.aggregator">
         <title>Zend_Paginator_AdapterAggregate Interface</title>
 

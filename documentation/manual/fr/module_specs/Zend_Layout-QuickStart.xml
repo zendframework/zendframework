@@ -69,7 +69,7 @@
     <?php echo $this->headStyle() ?>
 </head>
 <body>
-    <?= $this->render('header.phtml') ?>
+    <?php echo $this->render('header.phtml') ?>
 
     <div id="nav"><?php echo $this->placeholder('nav') ?></div>
 

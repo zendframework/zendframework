@@ -66,14 +66,12 @@ $authors = $feed->getAuthors();
  */
 $feed = Zend_Feed_Reader::import('http://example.com/feed');
 $authors = $feed->getAuthors()->getValues();
-
-
 ]]></programlisting>
     </sect2>
 
     <sect2 id="migration.110.zend.file.transfer">
         <title>Zend_File_Transfer</title>
- 
+
         <sect3 id="migration.110.zend.file.transfer.files">
             <title>Security change</title>
 

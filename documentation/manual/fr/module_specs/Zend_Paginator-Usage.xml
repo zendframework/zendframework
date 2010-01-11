@@ -438,8 +438,8 @@ Voir http://developer.yahoo.com/ypatterns/pattern.php?pattern=itempagination
 
 <?php if ($this->pageCount): ?>
 <div class="paginationControl">
-<?php echo $this->firstItemNumber; ?> - <?= $this->lastItemNumber; ?>
-of <?= $this->totalItemCount; ?>
+<?php echo $this->firstItemNumber; ?> - <?php echo $this->lastItemNumber; ?>
+of <?php echo $this->totalItemCount; ?>
 
 <!-- First page link -->
 <?php if (isset($this->previous)): ?>

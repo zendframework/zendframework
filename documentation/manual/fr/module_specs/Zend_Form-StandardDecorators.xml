@@ -465,7 +465,7 @@ $element->setDecorators(array(array('ViewScript',
         <para>Le script de vue pourrait alors ressembler à cela :</para>
 
         <programlisting language="php"><![CDATA[
-<div class="<?= $this->class ?>">
+<div class="<?php echo $this->class ?>">
     <?php echo $this->formLabel($this->element->getName(),
                                 $this->element->getLabel()) ?>
     <?php echo $this->{$this->element->helper}(

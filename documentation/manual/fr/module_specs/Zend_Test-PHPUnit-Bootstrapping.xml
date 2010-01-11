@@ -34,7 +34,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     {
         // Assign and instantiate in one step:
         $this->bootstrap = new Zend_Application(
-            'testing', 
+            'testing',
             APPLICATION_PATH . '/configs/application.ini'
         );
         parent::setUp();

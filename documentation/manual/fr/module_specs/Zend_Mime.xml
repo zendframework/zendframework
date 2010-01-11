@@ -36,7 +36,7 @@
                         une chaîne en utilisant l'encodage spécifié.
                     </para>
                 </listitem>
-            
+
                 <listitem>
                     <para>
                         <methodname>Zend_Mime::encodeBase64()encodeBase64()</methodname>: encode

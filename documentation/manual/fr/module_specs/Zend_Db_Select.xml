@@ -761,7 +761,7 @@ $select = $db->select()
                 Vous pouvez fournir un tableau en tant que second paramètre de la méthode
                 <methodname>where()</methodname> quand vous utilisez l'opérateur SQL "IN".
             </para>
- 
+
             <example id="zend.db.select.building.where.example-array">
                 <title>Exemple d'un paramètre de type tableau pour la méthode where()</title>
 

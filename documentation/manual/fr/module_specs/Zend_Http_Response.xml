@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20121 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.response">
     <title>Zend_Http_Response</title>
@@ -16,7 +16,7 @@
 
         <para>
             Dans la plupart des cas, un objet <classname>Zend_Http_Response</classname> sera
-            instancié en utilisant la méthode <methodname>factory()</methodname>, qui lit une chaîne contenant
+            instancié en utilisant la méthode <methodname>fromString()</methodname>, qui lit une chaîne contenant
             une réponse HTTP, et retourne un nouvel objet <classname>Zend_Http_Response</classname>
             : <example id="zend.http.response.introduction.example-1">
                     <title>Instancier un objet Zend_Http_Response en utilisant la méthode
@@ -34,7 +34,7 @@ fwrite($sock, $req);
 while ($buff = fread($sock, 1024))
     $str .= $sock;
 
-$response = Zend_Http_Response::factory($str);
+$response = Zend_Http_Response::fromString($str);
 ]]></programlisting>
                 </example>
             </para>

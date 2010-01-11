@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19150 -->
+<!-- EN-Revision: 20174 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
     <title>Zend_File_Transfer</title>
@@ -315,6 +315,16 @@ $size = $upload->getFileSize();
 ]]></programlisting>
         </example>
 
+        <note>
+            <title>Client given filesize</title>
+
+            <para>
+                Note that the filesize which is given by the client is not seen as save input.
+                Therefor the real size of the file will be detected and returned instead of the
+                filesize sent by the client.
+            </para>
+        </note>
+
         <para>
             <methodname>getHash()</methodname> accepte le nom de l'algorithme de hachage en tant que
             premier paramètre. Pour avoir une liste des algorithmes connus, regardez <ulink
@@ -340,6 +350,8 @@ $names = $upload->getHash('crc32', 'foo');
         </example>
 
         <note>
+            <title>Valeur retournée</title>
+
             <para>
                 Notez que si un fichier ou un élément de formulaire donné contient plus d'un
                 fichier, la valeur retournée sera un tableau.
@@ -365,14 +377,41 @@ $names = $upload->getMimeType('foo');
 ]]></programlisting>
         </example>
 
-        <note>
+         <note>
+            <title>Client given mimetype</title>
+
+             <para>
+                Note that the mimetype which is given by the client is not seen as save input.
+                Therefor the real mimetype of the file will be detected and returned instead of the
+                mimetype sent by the client.
+            </para>
+        </note>
+
+        <warning>
+            <title>Exception possible</title>
+
             <para>
                 Notez que cette méthode utilise l'extension fileinfo si elle est disponible.
                 Si elle n'est pas trouvé, elle utilise l'extension mimemagic. Quand aucune extension
-                n'est fournie, elle utilise le type <acronym>MIME</acronym> donné par le serveur quand le fichier a été
-                uploadé.
+                n'est fournie, une exception est levée.
             </para>
-        </note>
+        </warning>
+
+        <warning>
+            <title>Original data within $_FILES</title>
+
+            <para>
+                Due to security reasons also the original data within $_FILES will be overridden
+                as soon as <classname>Zend_File_Transfer</classname> is initiated. When you want
+                to omit this behaviour and have the original data simply set the
+                <property>detectInfos</property> option to <constant>FALSE</constant> at initiation.
+            </para>
+
+            <para>
+                This option will have no effect after you initiated
+                <classname>Zend_File_Transfer</classname>.
+            </para>
+        </warning>
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.uploadprogress">

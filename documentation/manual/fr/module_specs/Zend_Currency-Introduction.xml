@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 15681 -->
+<!-- EN-Revision: 20100 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.currency.introduction">
     <title>Introduction à Zend_Currency</title>
@@ -7,18 +7,15 @@
     <para>
         <classname>Zend_Currency</classname> est une partie du coeur de l'i18n
         ("internationalisation") de Zend Framework. Elle permet le traitement de toutes les
-        questions liées à la monnaie, à la représentation de l'argent et de son formatage. Elle
-        fournit aussi les méthodes supplémentaires qui incluent des informations régionalisées sur
-        des devises, des informations sur quelle monnaie est utilisée dans quelle région et
-        autres.
+        questions liées à la monnaie, à la représentation de l'argent, son formatage, les
+        services d'échange et les calculs.
     </para>
 
     <sect2 id="zend.currency.introduction.list">
-        <title>Pourquoi utiliser Zend_Currency&#160;?</title>
+        <title>Pourquoi devriez-vous utiliser Zend_Currency&#160;?</title>
 
         <para>
-            <classname>Zend_Currency</classname> offre les fonctions suivantes pour manipuler
-            les monnaies.
+            <classname>Zend_Currency</classname> voues offre les bénéfices suivants&#160;:
         </para>
 
         <itemizedlist mark="opencircle">
@@ -28,9 +25,9 @@
                 </para>
 
                 <para>
-                    <classname>Zend_Currency</classname> fonctionne avec toutes les régions
-                    disponibles et a donc la capacité de connaître plus de 100 informations de
-                    monnaie localisées différentes. Cela inclut par exemple des noms de monnaie,
+                    Ce composant fonctionne avec toutes les régions disponibles et a donc la
+                    capacité de connaître plus de 100 informations de monnaie localisées
+                    différentes. Cela inclut par exemple des noms de monnaie,
                     des abréviations, des signes d'argent et plus.
                 </para>
             </listitem>
@@ -41,20 +38,20 @@
                 </para>
 
                 <para>
-                    <classname>Zend_Currency</classname> n'inclut pas la valeur de la
-                    monnaie. C'est la raison pour laquelle cette fonctionnalité n'est pas inclus
-                    dans <classname>Zend_Locale_Format</classname>. Mais cela a un avantage, les
+                    <classname>Zend_Currency</classname> a l'avantage que les
                     représentations de monnaie qui ont déjà été définies peuvent être
-                    réutilisés.
+                    réutilisés. Vous pouvez ainsi deux représentations différentes de la
+                    même monnaie.
                 </para>
             </listitem>
 
             <listitem>
-                <para><emphasis>Interface fluide</emphasis></para>
+                <para><emphasis>Calculs avec les monnaies</emphasis></para>
 
                 <para>
-                    <classname>Zend_Currency</classname> inclue une interface fluide quand
-                    cela est possible.
+                    <classname>Zend_Currency</classname> vous permet de faire des calculs
+                    avec les valeurs de monnaie. De plus il vous fournit une interface pour
+                    l'échange de devises.
                 </para>
             </listitem>
 
@@ -62,7 +59,7 @@
                 <para><emphasis>Méthodes additionnelles</emphasis></para>
 
                 <para>
-                    <classname>Zend_Currency</classname> inclue des méthodes additionnelles
+                    <classname>Zend_Currency</classname> inclue plusieurs méthodes additionnelles
                     qui donnent des informations concernant les régions dans lesquelles une monnaie
                     est utilisée ou quelle monnaie est utilisée dans une région spécifiée.
                 </para>

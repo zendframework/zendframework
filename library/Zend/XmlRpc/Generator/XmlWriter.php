@@ -49,35 +49,36 @@ class Zend_XmlRpc_Generator_XmlWriter extends Zend_XmlRpc_Generator_GeneratorAbs
         $this->_xmlWriter->startDocument('1.0', $this->_encoding);
     }
 
+
     /**
-     * Start XML element
+     * Open a new XML element
      *
-     * Method opens a new XML element with an element name and an optional value
-     *
-     * @param string $name
-     * @param string $value
-     * @return Zend_XmlRpc_Generator_XmlWriter Fluent interface
+     * @param string $name XML element name
+     * @return void
      */
-    public function startElement($name, $value = null)
+    protected function _openElement($name)
     {
         $this->_xmlWriter->startElement($name);
-
-        if ($value !== null) {
-            $this->_xmlWriter->text($value);
-        }
-
-        return $this;
     }
 
     /**
-     * End of an XML element
+     * Write XML text data into the currently opened XML element
      *
-     * Called to mark the end of an XML element
+     * @param string $text XML text data
+     * @return void
+     */
+    protected function _writeTextData($text)
+    {
+        $this->_xmlWriter->text($text);
+    }
+
+    /**
+     * Close an previously opened XML element
      *
      * @param string $name
-     * @return Zend_XmlRpc_Generator_XmlWriter Fluent interface
+     * @return void
      */
-    public function endElement($name)
+    protected function _closeElement($name)
     {
         $this->_xmlWriter->endElement();
 

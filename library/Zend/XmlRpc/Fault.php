@@ -286,11 +286,11 @@ class Zend_XmlRpc_Fault
         $value = Zend_XmlRpc_Value::getXmlRpcValue($faultStruct);
 
         $generator = Zend_XmlRpc_Value::getGenerator();
-        $generator->startElement('methodResponse')
-                  ->startElement('fault');
-        $value->saveXml();
-        $generator->endElement('fault')
-                  ->endElement('methodResponse');
+        $generator->openElement('methodResponse')
+                  ->openElement('fault');
+        $value->generateXml();
+        $generator->closeElement('fault')
+                  ->closeElement('methodResponse');
 
         return $generator->flush();
     }

@@ -225,13 +225,13 @@ class Zend_XmlRpc_Response
     {
         $value = $this->_getXmlRpcReturn();
         $generator = Zend_XmlRpc_Value::getGenerator();
-        $generator->startElement('methodResponse')
-                  ->startElement('params')
-                  ->startElement('param');
+        $generator->openElement('methodResponse')
+                  ->openElement('params')
+                  ->openElement('param');
         $value->generateXml();
-        $generator->endElement('param')
-                  ->endElement('params')
-                  ->endElement('methodResponse');
+        $generator->closeElement('param')
+                  ->closeElement('params')
+                  ->closeElement('methodResponse');
 
         return $generator->flush();
     }

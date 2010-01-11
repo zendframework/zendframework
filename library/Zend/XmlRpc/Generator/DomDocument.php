@@ -43,40 +43,39 @@ class Zend_XmlRpc_Generator_DomDocument extends Zend_XmlRpc_Generator_GeneratorA
     /**
      * Start XML element
      *
-     * Creates a new XML element and appends it to the document tree
-     *
      * @param string $name
-     * @param string $value
-     * @return Zend_XmlRpc_Generator_DomDocument Fluent interface
+     * @return void
      */
-    public function startElement($name, $value = null)
+    protected function _openElement($name)
     {
         $newElement = $this->_dom->createElement($name);
 
         $this->_currentElement = $this->_currentElement->appendChild($newElement);
-
-        if ($value !== null) {
-            $this->_currentElement->appendChild($this->_dom->createTextNode($value));
-        }
-
-        return $this;
     }
 
     /**
-     * End of an XML element
+     * Write XML text data into the currently opened XML element
+     *
+     * @param string $text
+     */
+    protected function _writeTextData($text)
+    {
+        $this->_currentElement->appendChild($this->_dom->createTextNode($text));
+    }
+
+    /**
+     * Close an previously opened XML element
      *
      * Resets $_currentElement to the next parent node in the hierarchy
      *
      * @param string $name
-     * @return Zend_XmlRpc_Generator_DomDocument Fluent interface
+     * @return void
      */
-    public function endElement($name)
+    protected function _closeElement($name)
     {
         if (isset($this->_currentElement->parentNode)) {
             $this->_currentElement = $this->_currentElement->parentNode;
         }
-
-        return $this;
     }
 
     /**

@@ -408,21 +408,21 @@ class Zend_XmlRpc_Request
         $method = $this->getMethod();
 
         $generator = Zend_XmlRpc_Value::getGenerator();
-        $generator->startElement('methodCall')
-                  ->startElement('methodName', $method)
-                  ->endElement('methodName');
+        $generator->openElement('methodCall')
+                  ->openElement('methodName', $method)
+                  ->closeElement('methodName');
 
         if (is_array($args) && count($args)) {
-            $generator->startElement('params');
+            $generator->openElement('params');
 
             foreach ($args as $arg) {
-                $generator->startElement('param');
+                $generator->openElement('param');
                 $arg->generateXml();
-                $generator->endElement('param');
+                $generator->closeElement('param');
             }
-            $generator->endElement('params');
+            $generator->closeElement('params');
         }
-        $generator->endElement('methodCall');
+        $generator->closeElement('methodCall');
 
         return $generator->flush();
     }

@@ -26,6 +26,8 @@
 abstract class Zend_XmlRpc_Generator_GeneratorAbstract
 {
     /**
+     * XML encoding string
+     *
      * @var string
      */
     protected $_encoding;
@@ -46,24 +48,37 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
      *
      * Method opens a new XML element with an element name and an optional value
      * 
-     * @param string $name
-     * @param string $value
+     * @param string $name XML tag name
+     * @param string $value Optional value of the XML tag
      * @return Zend_XmlRpc_Generator_Abstract Fluent interface
      */
-    abstract public function startElement($name, $value = null);
+    public function openElement($name, $value = null)
+    {
+        $this->_openElement($name);
+        if ($value !== null) {
+            $this->_writeTextData($value);
+        }
+
+        return $this;
+    }
 
     /**
      * End of an XML element
      *
      * Method marks the end of an XML element
      *
-     * @param string $name
+     * @param string $name XML tag name
      * @return Zend_XmlRpc_Generator_Abstract Fluent interface
      */
-    abstract public function endElement($name);
+    public function closeElement($name)
+    {
+        $this->_closeElement($name);
+
+        return $this;
+    }
 
     /**
-     * Returns XML as a string
+     * Return XML as a string
      *
      * @return string
      */
@@ -111,4 +126,25 @@ abstract class Zend_XmlRpc_Generator_GeneratorAbstract
     {
         return preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $xml);
     }
+
+    /**
+     * Start XML element
+     *
+     * @param string $name XML element name
+     */
+    abstract protected function _openElement($name);
+
+    /**
+     * Write XML text data into the currently opened XML element
+     *
+     * @param string $text
+     */
+    abstract protected function _writeTextData($text);
+
+    /**
+     * End XML element
+     * 
+     * @param string $name
+     */
+    abstract protected function _closeElement($name);
 }

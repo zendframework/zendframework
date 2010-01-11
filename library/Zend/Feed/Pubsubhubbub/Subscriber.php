@@ -24,6 +24,11 @@
 require_once 'Zend/Feed/Pubsubhubbub.php';
 
 /**
+ * @see Zend_Date
+ */
+require_once 'Zend/Date.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -732,20 +737,26 @@ class Zend_Feed_Pubsubhubbub_Subscriber
             $params['hub.lease_seconds'] = $this->getLeaseSeconds();
         }
 
-        // TODO: hub.secret not currently supported
+        // hub.secret not currently supported
         $optParams = $this->getParameters();
         foreach ($optParams as $name => $value) {
             $params[$name] = $value;
         }
         
         // store subscription to storage
+        $now = new Zend_Date;
+        $expires = null;
+        if (isset($params['hub.lease_seconds'])) {
+            $expires = $now->add($params['hub.lease_seconds'], Zend_Date::SECOND)
+                ->get('YYYY-MM-dd HH:mm:ss');
+        }
         $data = array(
             'id'                 => $key,
             'topic_url'          => $params['hub.topic'],
             'hub_url'            => $hubUrl,
-            'created_time'       => time(),
-            'last_modified'      => time(),
-            'lease_seconds'      => isset($params['hub.lease_seconds']) ? $params['hub.lease_seconds'] : null,
+            'created_time'       => $now->get('YYYY-MM-dd HH:mm:ss'),
+            'last_modified'      => $now->get('YYYY-MM-dd HH:mm:ss'),
+            'lease_seconds'      => $expires,
             'verify_token'       => hash('sha256', $params['hub.verify_token']),
             'secret'             => null,
             'expiration_time'    => isset($params['hub.lease_seconds']) ? time() + $params['hub.lease_seconds'] : null,

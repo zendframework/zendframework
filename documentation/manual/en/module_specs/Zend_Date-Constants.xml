@@ -123,13 +123,13 @@
                 <tbody>
                     <row>
                         <entry><constant>Zend_Date::DAY</constant></entry>
-                        <entry>Day (as a number, two digit)</entry>
+                        <entry>Day (as number, two digits)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>13</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::DAY_SHORT</constant></entry>
-                        <entry>Day (as a number, one or two digit)</entry>
+                        <entry>Day (as number, one or two digits)</entry>
                         <entry>2009-02-06T14:53:27+01:00</entry>
                         <entry><emphasis>6</emphasis></entry>
                     </row>
@@ -142,8 +142,7 @@
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_SHORT</constant></entry>
                         <entry>
-                            Weekday (Name of the day, localized, abbreviated, the first three
-                            digits)
+                            Weekday (Name of the day, localized, abbreviated, two to four chars)
                         </entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>Fri</emphasis> for Friday</entry>
@@ -151,7 +150,7 @@
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_NAME</constant></entry>
                         <entry>
-                            Weekday (Name of the day, localized, abbreviated, the first two digits)
+                            Weekday (Name of the day, localized, abbreviated, one or two chars)
                         </entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>Fr</emphasis> for Friday</entry>
@@ -159,7 +158,7 @@
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_NARROW</constant></entry>
                         <entry>
-                            Weekday (Name of the day, localized, abbreviated, only the first digit)
+                            Weekday (Name of the day, localized, abbreviated, one char)
                         </entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>F</emphasis> for Friday</entry>
@@ -181,7 +180,7 @@
                     </row>
                     <row>
                         <entry><constant>Zend_Date::DAY_OF_YEAR</constant></entry>
-                        <entry>Day (as a number, one or two digit)</entry>
+                        <entry>Day (as a number, one or two digits)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>43</emphasis>
                         </entry>
@@ -210,7 +209,7 @@
                 <tbody>
                     <row>
                         <entry><constant>Zend_Date::WEEK</constant></entry>
-                        <entry>Week (as a number, 1-53)</entry>
+                        <entry>Week (as number, 1-53)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>8</emphasis></entry>
                     </row>
@@ -241,26 +240,26 @@
                     <row>
                         <entry><constant>Zend_Date::MONTH_NAME_SHORT</constant></entry>
                         <entry>
-                            Month (Name of the month, localized, abbreviated, three digit)
+                            Month (Name of the month, localized, abbreviated, two to four chars)
                         </entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>Feb</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MONTH_NAME_NARROW</constant></entry>
-                        <entry>Month (Name of the month, localized, abbreviated, one digit)</entry>
+                        <entry>Month (Name of the month, localized, abbreviated, one or two chars)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>F</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MONTH</constant></entry>
-                        <entry>Month (Number of the month, two digit)</entry>
+                        <entry>Month (Number of the month, two digits)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>02</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MONTH_SHORT</constant></entry>
-                        <entry>Month (Number of the month, one or two digit)</entry>
+                        <entry>Month (Number of the month, one or two digits)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>2</emphasis></entry>
                     </row>
@@ -302,14 +301,14 @@
                     </row>
                     <row>
                         <entry><constant>Zend_Date::YEAR_SHORT</constant></entry>
-                        <entry>Year (number, two digit)</entry>
+                        <entry>Year (number, two digits)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>09</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::YEAR_SHORT_8601</constant></entry>
                         <entry>
-                            Year according to <acronym>ISO</acronym> 8601 (number, two digit)
+                            Year according to <acronym>ISO</acronym> 8601 (number, two digits)
                         </entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>09</emphasis></entry>
@@ -343,49 +342,49 @@
                 <tbody>
                     <row>
                         <entry><constant>Zend_Date::HOUR</constant></entry>
-                        <entry>Hour (00-23, two digit)</entry>
+                        <entry>Hour (00-23, two digits)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>14</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::HOUR_SHORT</constant></entry>
-                        <entry>Hour (0-23, one or two digit)</entry>
+                        <entry>Hour (0-23, one or two digits)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>14</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::HOUR_SHORT_AM</constant></entry>
-                        <entry>Hour (1-12, one or two digit)</entry>
+                        <entry>Hour (1-12, one or two digits)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>2</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::HOUR_AM</constant></entry>
-                        <entry>Hour (01-12, two digit)</entry>
+                        <entry>Hour (01-12, two digits)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>02</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MINUTE</constant></entry>
-                        <entry>Minute (00-59, two digit)</entry>
+                        <entry>Minute (00-59, two digits)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>53</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MINUTE_SHORT</constant></entry>
-                        <entry>Minute (0-59, one or two digit)</entry>
+                        <entry>Minute (0-59, one or two digits)</entry>
                         <entry>2009-02-13T14:03:27+01:00</entry>
                         <entry><emphasis>3</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::SECOND</constant></entry>
-                        <entry>Second (00-59, two digit)</entry>
+                        <entry>Second (00-59, two digits)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>27</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::SECOND_SHORT</constant></entry>
-                        <entry>Second (0-59, one or two digit)</entry>
+                        <entry>Second (0-59, one or two digits)</entry>
                         <entry>2009-02-13T14:53:07+01:00</entry>
                         <entry><emphasis>7</emphasis></entry>
                     </row>

@@ -116,7 +116,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
         } elseif ($this->isValidHubVerification($httpGetData)) {
             $data = $this->_currentSubscriptionData;
             $this->getHttpResponse()->setBody($httpGetData['hub_challenge']);
-            $data['verified'] = 1;
+            $data['subscription_state'] = Zend_Feed_Pubsubhubbub::SUBSCRIPTION_VERIFIED;
             $this->getStorage()->setSubscription($data);
         /**
          * Hey, C'mon! We tried everything else!

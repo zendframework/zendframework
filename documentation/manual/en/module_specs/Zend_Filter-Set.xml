@@ -42,6 +42,7 @@
         </para>
     </sect2>
 
+    <xi:include href="Zend_Filter-Boolean.xml" />
     <xi:include href="Zend_Filter-Callback.xml" />
     <xi:include href="Zend_Filter-Compress.xml" />
     <xi:include href="Zend_Filter-Decryption.xml" />

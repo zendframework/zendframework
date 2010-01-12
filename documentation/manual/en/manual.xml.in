@@ -1461,7 +1461,7 @@
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Oauth-Introduction.xml" />
                 </xi:fallback>
-            <xi:include>
+            </xi:include>
         </chapter>
 
         <chapter id="zend.openid">

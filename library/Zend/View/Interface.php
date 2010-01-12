@@ -130,7 +130,7 @@ interface Zend_View_Interface
     /**
      * Processes a view script and returns the output.
      *
-     * @param string $name The script script name to process.
+     * @param string $name The script name to process.
      * @return string The script output.
      */
     public function render($name);

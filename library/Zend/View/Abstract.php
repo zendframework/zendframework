@@ -19,13 +19,13 @@
  * @version    $Id$
  */
 
-/** Zend_Loader */
+/** @see Zend_Loader */
 require_once 'Zend/Loader.php';
 
-/** Zend_Loader_PluginLoader */
+/** @see Zend_Loader_PluginLoader */
 require_once 'Zend/Loader/PluginLoader.php';
 
-/** Zend_View_Interface */
+/** @see Zend_View_Interface */
 require_once 'Zend/View/Interface.php';
 
 /**
@@ -561,7 +561,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
     {
         return $this->getPluginLoader('helper')->getPaths();
     }
-    
+
     /**
      * Registers a helper object, bypassing plugin loader
      *
@@ -867,7 +867,7 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
     /**
      * Processes a view script and returns the output.
      *
-     * @param string $name The script script name to process.
+     * @param string $name The script name to process.
      * @return string The script output.
      */
     public function render($name)

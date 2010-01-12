@@ -17,6 +17,10 @@
 
     <itemizedlist>
         <listitem>
+            <para>Intercept exceptions raised when no route matched</para>
+        </listitem>
+
+        <listitem>
             <para>Intercept exceptions raised due to missing controllers or action methods</para>
         </listitem>
 
@@ -28,8 +32,7 @@
     <para>
         In other words, the <emphasis>ErrorHandler</emphasis> plugin is designed to
         handle <acronym>HTTP</acronym> 404-type errors (page missing) and 500-type errors (internal
-        error). It is not intended to catch exceptions raised in other plugins
-        or routing.
+        error). It is not intended to catch exceptions raised in other plugins.
     </para>
 
     <para>
@@ -124,6 +127,13 @@ class ErrorController extends Zend_Controller_Action
         <itemizedlist>
             <listitem>
                 <para>
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE</constant>,
+                    indicating no route matched.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
                     <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</constant>,
                     indicating the controller was not found.
                 </para>
@@ -145,7 +155,7 @@ class ErrorController extends Zend_Controller_Action
         </itemizedlist>
 
         <para>
-            You can then test for either of the first two types, and, if so,
+            You can then test for either of the first three types, and, if so,
             indicate a 404 page:
         </para>
 
@@ -157,6 +167,7 @@ class ErrorController extends Zend_Controller_Action
         $errors = $this->_getParam('error_handler');
 
         switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 error -- controller or action not found
@@ -186,6 +197,7 @@ public function errorAction()
         $errors = $this->_getParam('error_handler');
 
         switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 error -- controller or action not found
@@ -289,6 +301,7 @@ class ErrorController extends Zend_Controller_Action
         $errors = $this->_getParam('error_handler');
 
         switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 error -- controller or action not found

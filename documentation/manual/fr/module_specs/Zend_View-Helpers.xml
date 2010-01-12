@@ -379,6 +379,9 @@ array('us' => 'Etats-Unis', 'fr' => 'France', 'de' => 'Allemagne').
         <xi:include href="Zend_View-Helpers-BaseUrl.xml">
             <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-BaseUrl.xml" /></xi:fallback>
         </xi:include>
+        <xi:include href="Zend_View-Helpers-Currency.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Currency.xml" /></xi:fallback>
+        </xi:include>
         <xi:include href="Zend_View-Helpers-Cycle.xml">
             <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Cycle.xml" /></xi:fallback>
         </xi:include>

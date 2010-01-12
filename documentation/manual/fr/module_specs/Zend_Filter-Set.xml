@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20136 -->
+<!-- EN-Revision: 20223 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Classes de filtre standards</title>
@@ -47,6 +47,11 @@
         </para>
     </sect2>
 
+    <xi:include href="Zend_Filter-Boolean.xml">
+        <xi:fallback>
+            <xi:include href="../../en/module_specs/Zend_Filter-Boolean.xml" />
+        </xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Filter-Callback.xml" />
     <xi:include href="Zend_Filter-Compress.xml" />
     <xi:include href="Zend_Filter-Decryption.xml" />

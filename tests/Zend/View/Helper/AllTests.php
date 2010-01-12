@@ -28,6 +28,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 require_once 'Zend/View/Helper/ActionTest.php';
 require_once 'Zend/View/Helper/BaseUrlTest.php';
+require_once 'Zend/View/Helper/CurrencyTest.php';
 require_once 'Zend/View/Helper/CycleTest.php';
 require_once 'Zend/View/Helper/DeclareVarsTest.php';
 require_once 'Zend/View/Helper/DoctypeTest.php';
@@ -95,6 +96,7 @@ class Zend_View_Helper_AllTests
 
         $suite->addTestSuite('Zend_View_Helper_ActionTest');
         $suite->addTestSuite('Zend_View_Helper_BaseUrlTest');
+        $suite->addTestSuite('Zend_View_Helper_CurrencyTest');
         $suite->addTestSuite('Zend_View_Helper_CycleTest');
         $suite->addTestSuite('Zend_View_Helper_DeclareVarsTest');
         $suite->addTestSuite('Zend_View_Helper_DoctypeTest');

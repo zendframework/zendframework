@@ -396,9 +396,9 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
         $adapter = new Zend_Form_Element_FileTest_MockAdapter();
         $element->setTransferAdapter($adapter);
 
-        $this->assertEquals('8B', $element->getFileSize('baz.text'));
+        $this->assertEquals('1.14kB', $element->getFileSize('baz.text'));
         $adapter->setOptions(array('useByteString' => false));
-        $this->assertEquals(8, $element->getFileSize('baz.text'));
+        $this->assertEquals(1172, $element->getFileSize('baz.text'));
     }
 
     public function testMimeType()

@@ -907,7 +907,15 @@ class Zend_Controller_Front
             */
             $this->_plugins->routeStartup($this->_request);
 
-            $router->route($this->_request);
+            try {
+                $router->route($this->_request);
+            }  catch (Exception $e) {
+                if ($this->throwExceptions()) {
+                    throw $e;
+                }
+
+                $this->_response->setException($e);
+            }
 
             /**
             * Notify plugins of router completion

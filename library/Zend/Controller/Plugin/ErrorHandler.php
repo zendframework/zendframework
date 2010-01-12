@@ -47,6 +47,11 @@ class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstrac
     const EXCEPTION_NO_ACTION = 'EXCEPTION_NO_ACTION';
 
     /**
+     * Const - No route exception; no routing was possible
+     */
+    const EXCEPTION_NO_ROUTE = 'EXCEPTION_NO_ROUTE';
+
+    /**
      * Const - Other Exception; exceptions thrown by application controllers
      */
     const EXCEPTION_OTHER = 'EXCEPTION_OTHER';
@@ -187,8 +192,28 @@ class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstrac
     }
 
     /**
-     * postDispatch() plugin hook -- check for exceptions and dispatch error
-     * handler if necessary
+     * Route shutdown hook -- Ccheck for router exceptions
+     * 
+     * @param Zend_Controller_Request_Abstract $request 
+     */
+    public function routeShutdown(Zend_Controller_Request_Abstract $request)
+    {
+        $this->_handleError($request);
+    }
+
+    /**
+     * Post dispatch hook -- check for exceptions and dispatch error handler if
+     * necessary
+     *
+     * @param Zend_Controller_Request_Abstract $request
+     */
+    public function postDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $this->_handleError($request);
+    }
+
+    /**
+     * Handle errors and exceptions
      *
      * If the 'noErrorHandler' front controller flag has been set,
      * returns early.
@@ -196,7 +221,7 @@ class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstrac
      * @param  Zend_Controller_Request_Abstract $request
      * @return void
      */
-    public function postDispatch(Zend_Controller_Request_Abstract $request)
+    protected function _handleError(Zend_Controller_Request_Abstract $request)
     {
         $frontController = Zend_Controller_Front::getInstance();
         if ($frontController->getParam('noErrorHandler')) {
@@ -225,6 +250,13 @@ class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstrac
             $exceptionType    = get_class($exception);
             $error->exception = $exception;
             switch ($exceptionType) {
+                case 'Zend_Controller_Router_Exception':
+                    if (404 == $exception->getCode()) {
+                        $error->type = self::EXCEPTION_NO_ROUTE;
+                    } else {
+                        $error->type = self::EXCEPTION_OTHER;
+                    }
+                    break;
                 case 'Zend_Controller_Dispatcher_Exception':
                     $error->type = self::EXCEPTION_NO_CONTROLLER;
                     break;

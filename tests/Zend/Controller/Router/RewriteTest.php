@@ -263,10 +263,15 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
 
         $this->_router->addRoute('default', new Zend_Controller_Router_Route(':controller/:action'));
 
-        $token = $this->_router->route($request);
+        try {
+            $token = $this->_router->route($request);
+            $this->fail('An expected Zend_Controller_Router_Exception was not raised');
+        } catch (Zend_Controller_Router_Exception $expected) {
+            $this->assertEquals('No route matched the request', $expected->getMessage());
+        }
 
-        $this->assertNull($token->getControllerName());
-        $this->assertNull($token->getActionName());
+        $this->assertNull($request->getControllerName());
+        $this->assertNull($request->getActionName());
     }
 
     public function testDefaultRouteMatched()
@@ -381,7 +386,12 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit_Framework_TestCase
         $request = new Zend_Controller_Router_RewriteTest_Request('http://localhost/ctrl/act');
         $this->_router->removeDefaultRoutes();
 
-        $token = $this->_router->route($request);
+        try {
+            $token = $this->_router->route($request);
+            $this->fail('An expected Zend_Controller_Router_Exception was not raised');
+        } catch (Zend_Controller_Router_Exception $expected) {
+            $this->assertEquals('No route matched the request', $expected->getMessage());
+        }
 
         $routes = $this->_router->getRoutes();
         $this->assertEquals(0, count($routes));

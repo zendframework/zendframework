@@ -1792,6 +1792,11 @@
                     <xi:include href="../en/module_specs/Zend_Service_Delicious.xml" />
                 </xi:fallback>
             </xi:include>
+            <xi:include href="module_specs/Zend_Service_DeveloperGarden.xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Service_DeveloperGarden.xml" />
+                </xi:fallback>
+            </xi:include>
             <xi:include href="module_specs/Zend_Service_Flickr.xml">
                 <xi:fallback>
                     <xi:include href="../en/module_specs/Zend_Service_Flickr.xml" />

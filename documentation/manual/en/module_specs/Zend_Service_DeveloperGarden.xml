@@ -1,0 +1,888 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.service.developergarden">
+    <title>Zend_Service_DeveloperGarden</title>
+    
+    <sect2 id="zend.service.developergarden.introduction">
+        <title>Introduction to DeveloperGarden</title>
+        
+        <para>
+            DeveloperGarden is the name for the &quot;Open Development services&quot; of the German
+            Telekom. The &quot;Open Development services&quot; are a set of <acronym>SOAP</acronym>
+            API Services.
+        </para>
+        
+        <para>
+            The family of <classname>Zend_Service_DeveloperGarden</classname> components provides a
+            clean and simple interface to the <ulink
+                url="http://www.developergarden.com">DeveloperGarden API</ulink> and additionally
+            offers functionality to improve handling and performance.
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <link linkend="zend.service.developergarden.baseuserservice">BaseUserService</link>: 
+                    Class to manage API quota and user accounting details.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <link linkend="zend.service.developergarden.iplocation">IpLocation</link>: 
+                    Locale the given IP and returns geo coordinates. Works only with IPs allocated 
+                    in the network of the german telekom.
+                    </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <link linkend="zend.service.developergarden.localsearch">LocalSearch</link>: 
+                    Allows you to search with options nearby or around a given geo coordinate or city.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <link linkend="zend.service.developergarden.sendsms">SendSms</link>: Send a Sms 
+                    or Flash Sms to a given number.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <link linkend="zend.service.developergarden.smsvalidation">SmsValidation</link>: 
+                    You can validate a number to use it with SendSms for also supply a back channel.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <link linkend="zend.service.developergarden.voicecall">VoiceCall</link>: 
+                    Initiates a call between two numbers.
+                 </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <link linkend="zend.service.developergarden.conferencecall">ConferenceCall</link>: 
+                    You can configure a whole conference room with participants for an adhoc
+                    conference or you can also schedule your conference.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            The backend SOAP API is documented 
+            <ulink url="http://www.developergarden.com/openapi/dokumentation/">here</ulink>.
+        </para>
+
+        <sect3 id="zend.service.developergarden.account">
+            <title>Sign Up for an Account</title>
+
+            <para>
+                Before you can start using the DeveloperGarden API, you must first 
+                <ulink url="http://www.developergarden.com/register">sign up</ulink> for an account.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.service.developergarden.environment">
+            <title>The Environment</title>
+
+            <para>
+                With the DeveloperGarden API you have the possibility to choose 3 different
+                environments to work on.
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis>production</emphasis>: In Production environement you have to pay
+                        for calls, sms and other payable services.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>sandbox</emphasis>: In the Sandbox mode you can use the same
+                        features with some limitations like in the production just without to pay
+                        for them. Normally during development you can test your application.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>mock</emphasis>: The Mock environment allows you to build your
+                        application and have results but you don not initiate any action on the API
+                        side.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                For every environment and service are some special features (options) available for
+                testing. Please look <ulink
+                    url="http://www.developergarden.com/openapi/dokumentation/">here</ulink> for
+                details.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.service.developergarden.config">
+            <title>Your configuration</title>
+
+            <para>
+                You can pass to all classes an array of configuration values. Possible values are:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis>username</emphasis>: Your DeveloperGarden API username.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>password</emphasis>: Your DeveloperGarden API password.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <emphasis>environment</emphasis>: The environment that you selected.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <example id="zend.service.developergarden.config.example">
+                <title>Configuration Example</title>
+
+                <programlisting language="php"><![CDATA[
+require_once 'Zend/Service/DeveloperGarden/SendSms.php';
+$config = array(
+    'username'    => 'yourUsername',
+    'password'    => 'yourPassword',
+    'environment' => Zend_Service_DeveloperGarden_SendSms::ENV_PRODUCTION,
+);
+$service = new Zend_Service_DeveloperGarden_SendSms($config);
+]]></programlisting>
+            </example>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.service.developergarden.baseuserservice">
+        <title>BaseUserService</title>
+        
+        <para>
+            The class can be used to set and get quota values for the services and to fetch 
+            account details.
+        </para>
+
+        <para>
+            The <methodname>getAccountBalance()</methodname> method is there to fetch an array
+            of account id's with the current balance status (credits).
+        </para>
+
+        <example id="zend.service.developergarden.baseuserservice.getaccountbalance.example">
+            <title>Get account balance example</title>
+
+            <programlisting language="php"><![CDATA[
+$service = new Zend_Service_DeveloperGarden_BaseUserService($config);
+print_r($service->getAccountBalance());
+]]></programlisting>
+        </example>
+
+        <sect3 id="zend.service.developergarden.baseuserservice.getquotainformation">
+            <title>Get quota information</title>
+
+            <para>
+                You can fetch quota informations for a specific service module with the
+                provided methods.
+            </para>
+
+            <example id="zend.service.developergarden.baseuserservice.getquotainformation.example">
+                <title>Get quota information example</title>
+
+                <programlisting language="php"><![CDATA[
+$service = new Zend_Service_DeveloperGarden_BaseUserService($config);
+$result = $service->getSmsQuotaInformation(
+    Zend_Service_DeveloperGarden_BaseUserService::ENV_PRODUCTION
+);
+echo 'Sms Quota:<br />';
+echo 'Max Quota: ', $result->getMaxQuota(), '<br />';
+echo 'Max User Quota: ', $result->getMaxUserQuota(), '<br />';
+echo 'Quota Level: ', $result->getQuotaLevel(), '<br />';
+]]></programlisting>
+            </example>
+            
+            <para>
+                You get a <classname>Result</classname> object that contains all information that
+                you need, optional you can pass to the <methodname>QuotaInformation</methodname>
+                method the environment constant to fetch the quota for the specific environment.
+            </para>
+
+            <para>
+                Here a list of all <methodname>getQuotaInformation</methodname> methods:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>getConfernceCallQuotaInformation()</methodname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getIPLocationQuotaInformation()</methodname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getLocalSearchQuotaInformation()</methodname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getSmsQuotaInformation()</methodname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getVoiceCallQuotaInformation()</methodname>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+        
+        <sect3 id="zend.service.developergarden.baseuserservice.changequotainformation">
+            <title>Change quota information</title>
+
+            <para>
+                To change the current quota use one of the <methodname>changeQuotaPool</methodname>
+                methods.  First parameter is the new pool value and the second one is the
+                environment.
+            </para>
+
+            <example id="zend.service.developergarden.baseuserservice.changequotainformation.example">
+                <title>Change quota information example</title>
+
+                <programlisting language="php"><![CDATA[
+$service = new Zend_Service_DeveloperGarden_BaseUserService($config);
+$result = $service->changeSmsQuotaPool(
+    1000, 
+    Zend_Service_DeveloperGarden_BaseUserService::ENV_PRODUCTION
+);
+if (!$result->hasError()) {
+    echo 'updated Quota Pool';
+}
+]]></programlisting>
+            </example>
+            
+            <para>
+                Here a list of all <methodname>changeQuotaPool</methodname> methods:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <methodname>changeConferenceCallQuotaPool()</methodname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>changeIPLocationQuotaPool()</methodname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>changeLocalSearchQuotaPool()</methodname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>changeSmsQuotaPool()</methodname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>changeVoiceCallQuotaPool()</methodname>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.service.developergarden.iplocation">
+        <title>IP Location</title>
+
+        <para>
+            This service allows you to retrieve location information for a given IP address.
+        </para>
+
+        <para>
+            There are some limitations:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>The IP address must be in the T-Home network</para>
+            </listitem>
+
+            <listitem>
+                <para>Just the next big city will be resolved</para>
+            </listitem>
+
+            <listitem>
+                <para>IPv6 is not supported yet</para>
+            </listitem>
+        </itemizedlist>
+
+        <example id="zend.service.developergarden.iplocation.locateip.example">
+            <title>Locate a given IP</title>
+
+            <programlisting language="php"><![CDATA[
+$service = new Zend_Service_DeveloperGarden_IpLocation($config);
+$service->setEnvironment(
+    Zend_Service_DeveloperGarden_IpLocation::ENV_MOCK
+);
+$ip = new Zend_Service_DeveloperGarden_IpLocation_IpAddress('127.0.0.1');
+print_r($service->locateIp($ip));
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.service.developergarden.localsearch">
+        <title>Local Search</title>
+
+        <para>
+            The Local Search service provides the local search machine <ulink
+                url="http://www.suchen.de">suchen.de</ulink> via a the web service interface.  For
+            more details, refer to <ulink
+                url="http://www.developergarden.com/static/docu/en/ch04s02s06.html">the
+                documentation</ulink>.
+        </para>
+
+        <example id="zend.service.developergarden.localsearch.example">
+            <title>Locate a Restaurant</title>
+
+            <programlisting language="php"><![CDATA[
+$service = new Zend_Service_DeveloperGarden_LocalSearch($config);
+$search  = new Zend_Service_DeveloperGarden_LocalSearch_SearchParameters();
+/**
+ * @see http://www.developergarden.com/static/docu/en/ch04s02s06s04.html
+ */
+$search->setWhat('pizza')
+       ->setWhere('jena');
+print_r($service->localSearch($search));
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.service.developergarden.sendsms">
+        <title>Send SMS</title>
+
+        <para>
+            The Send SMS service is used to send normal and Flash SMS to any number.
+        </para>
+
+        <para>
+            The following restrictions apply to the use of the SMS service:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    An SMS or Flash SMS in the production environment must not be longer than
+                    765 characters and must not be sent to more than 10 recipients.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    An SMS or Flash SMS in the sandbox environment is shortened and enhanced by a
+                    note in the DeveloperGarden. The maximum length of the message sent is 160
+                    characters.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    In the sandbox environment, a maximum of 10 SMS can be sent per day.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    The following characters are counted twice: 
+                    <literal>| ^ € { } [ ] ~ \ LF</literal> (line break)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    If an SMS or Flash SMS is longer than 160 characters, one message is charged for
+                    each 153 characters (quota and credit).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Delivery cannot be guaranteed for SMS or Flash SMS to landline numbers.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    The sender can exist of a maximum of 11 characters. Permitted characters are
+                    letters and numbers.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    The specification of a phone number as the sender is only permitted if the phone
+                    number has been validated. (See: <link
+                        linkend="zend.service.developergarden.smsvalidation">SMS Validation</link>)
+                </para>
+            </listitem>
+        </itemizedlist>      
+
+        <example id="zend.service.developergarden.sendsms.example">
+            <title>Sending an SMS</title>
+
+            <programlisting language="php"><![CDATA[
+$service = new Zend_Service_DeveloperGarden_SendSms($config);
+$sms = $service->createSms(
+    '+49-172-123456; +49-177-789012', 
+    'your test message', 
+    'yourname'
+);
+print_r($service->send($sms));]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.service.developergarden.smsvalidation">
+        <title>SMS Validation</title>
+
+        <para>
+            The SMS Validation service allows the validation of physical phone number to be used
+            as the sender of an SMS.
+        </para>
+
+        <para>
+            First, call <methodname>setValidationKeyword()</methodname> to receive an SMS
+            with a keyword.
+        </para>
+
+        <para>
+            After you get your keyword, you have to use the <methodname>validate()</methodname> to
+            validate your number with the keyword against the service.
+        </para>
+
+        <para>
+            With the method <methodname>getValidatedNumbers()</methodname>, you will get a list
+            of all already validated numbers and the status of each.
+        </para>
+
+        <example id="zend.service.developergarden.smsvalidation.request.example">
+            <title>Request validation keyword</title>
+
+            <programlisting language="php"><![CDATA[
+$service = new Zend_Service_DeveloperGarden_SmsValidation($config);
+print_r($service->sendValidationKeyword('+49-172-123456'));
+]]></programlisting>
+        </example>
+
+        <example id="zend.service.developergarden.smsvalidation.validate.example">
+            <title>Validate a number with a keyword</title>
+
+            <programlisting language="php"><![CDATA[
+$service = new Zend_Service_DeveloperGarden_SmsValidation($config);
+print_r($service->validate('TheKeyWord', '+49-172-123456'));
+]]></programlisting>
+        </example>
+
+        <para>
+            To invalidate a validated number, call the method <methodname>inValidate()</methodname>.
+        </para>
+    </sect2>
+
+    <sect2 id="zend.service.developergarden.voicecall">
+        <title>Voice Call</title>
+
+        <para>
+            The Voice Call service is used for setting up a voice connection between two telephone
+            connections. For specific details please read the <ulink
+                url="http://www.developergarden.com/static/docu/en/ch04s02.html">API
+                Documentation</ulink>.
+        </para>
+
+        <para>
+            Normally the Service works as followed:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Call the first participant.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    If the connection is successful, call the second participant.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    If second participant connects succesfully, both participants are connected.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    The call is open until one of the participants hangs up or the expire mechanism
+                    intercepts.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <example id="zend.service.developergarden.voicecall.call.example">
+            <title>Call two numbers</title>
+
+            <programlisting language="php"><![CDATA[
+$service = new Zend_Service_DeveloperGarden_VoiceCall($config);
+$aNumber = '+49-30-000001';
+$bNumber = '+49-30-000002';
+$expiration  = 30;  // seconds
+$maxDuration = 300; // 5 mins
+$newCall = $service->newCall($aNumber, $bNumber, $expiration, $maxDuration);
+echo $newCall->getSessionId();
+]]></programlisting>
+        </example>
+
+        <para>
+            If the call is initiated, you can ask the result object for the session ID and
+            use this session ID for an additional call to the <methodname>callStatus</methodname>
+            or <methodname>tearDownCall()</methodname> methods. The second parameter on the
+            <methodname>callStatus()</methodname> method call extends the expiration for this call.
+        </para>
+
+        <example id="zend.service.developergarden.voicecall.teardown.example">
+            <title>Call two numbers, ask for status, and cancel</title>
+
+            <programlisting language="php"><![CDATA[
+$service = new Zend_Service_DeveloperGarden_VoiceCall($config);
+$aNumber = '+49-30-000001';
+$bNumber = '+49-30-000002';
+$expiration  = 30; // seconds
+$maxDuration = 300; // 5 mins
+
+$newCall = $service->newCall($aNumber, $bNumber, $expiration, $maxDuration);
+
+$sessionId = $newCall->getSessionId();
+
+$service->callStatus($sessionId, true); // extend the call
+
+sleep(10); // sleep 10s and then tearDown
+
+$service->tearDownCall($sessionId); 
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.service.developergarden.conferencecall">
+        <title>ConferenceCall</title>
+
+        <para>
+            Conference Call allows you to setup and start a phone conference.
+        </para>
+        
+        <para>
+            The following features are available:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Conferences with an immediate start
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Conferences with a defined start date
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Recurring conference series
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Adding, removing, and muting of participants from a conference
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Templates for conferences
+                </para>
+            </listitem>
+        </itemizedlist>
+        
+        <para>
+            Here is a list of currently implemented API methods:
+        </para>
+        
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <methodname>createConference()</methodname> creates a new conference                    
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>updateConference()</methodname> updates an existing conference
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>commitConference()</methodname> saves the conference, and, if no date
+                    is configured, immediately starts the conference 
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>removeConference()</methodname> removes a conference
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getConferenceList()</methodname> returns a list of all configured
+                    conferences
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getConferenceStatus()</methodname> displays information for an
+                    existing conference
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getParticipantStatus()</methodname> displays status information
+                    about a conference participant
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>newParticipant()</methodname> creates a new participant                    
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>addParticipant()</methodname> adds a participant to a conference
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>updateParticipant()</methodname> updates a participant,
+                    usually to mute or redial the participant
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>removeParticipant()</methodname> removes a participant from a
+                    conference
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getRunningConference()</methodname> requests the running instance of 
+                    a planned conference
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>createConferenceTemplate()</methodname> creates a new conference 
+                    template
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getConferenceTemplate()</methodname> requests an existing conference
+                    template
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>updateConferenceTemplate()</methodname> updates existing conference
+                    template details                    
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>removeConferenceTemplate()</methodname> removes a conference template
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getConferenceTemplateList()</methodname> requests all conference
+                    templates of an owner
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>addConferenceTemplateParticipant()</methodname> adds a conference
+                    participant to conference template
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getConferenceTemplateParticipant()</methodname> displays details of
+                    a participant of a conference template
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>updateConferenceTemplateParticipant()</methodname> updates 
+                    participant details within a conference template
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>removeConferenceTemplateParticipant()</methodname> removes
+                    a participant from a conference template
+                </para>
+            </listitem>
+        </itemizedlist>
+        
+        <example id="zend.service.developergarden.conferencecall.example">
+            <title>Ad-Hoc conference</title>
+
+            <programlisting language="php"><![CDATA[
+$client = new Zend_Service_DeveloperGarden_ConferenceCall($config);
+
+$conferenceDetails = new Zend_Service_DeveloperGarden_ConferenceCall_ConferenceDetail(
+    'Zend-Conference',                    // name for the conference
+    'this is my private zend conference', // description
+    60                                    // duration in seconds
+);
+
+$conference = $client->createConference('MyName', $conferenceDetails);
+
+$part1 = new Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail(
+    'Jon',
+    'Doe',
+    '+49-123-4321',
+    'your.name@example.com',
+    true
+);
+
+$client->newParticipant($conference->getConferenceId(), $part1);
+// add a second, third ... participant
+
+$client->commitConference($conference->getConferenceId());
+]]></programlisting>
+        </example>
+    </sect2>
+
+    <sect2 id="zend.service.developergarden.performance">
+        <title>Performance and Caching</title>
+
+        <para>
+            You can setup various caching options to improve the performance for resolving WSDL and
+            authentication tokens.
+        </para>
+
+        <para>
+            First of all, you can setup the internal SoapClient (PHP) caching values.
+        </para>
+        
+        <example id="zend.service.developergarden.performance.wsdlcache.example">
+            <title>WSDL cache options</title>
+
+            <programlisting language="php"><![CDATA[
+Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setWsdlCache([PHP CONSTANT]);
+]]></programlisting>
+        </example>
+
+        <para>
+            The <constant>[PHP CONSTANT]</constant> can be one of the following values:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <constant>WSDL_CACHE_DISC</constant>: enabled disc caching
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <constant>WSDL_CACHE_MEMORY</constant>: enabled memory caching
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <constant>WSDL_CACHE_BOTH</constant>: enabled disc and memory caching
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <constant>WSDL_CACHE_NONE</constant>: disabled both caching
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            If you want also to cache the result for calls to the SecuritTokenServer
+            you can setup a <classname>Zend_Cache</classname> instance and pass it to the 
+            <methodname>setCache()</methodname>.
+        </para>
+
+        <example id="zend.service.developergarden.performance.cache.example">
+            <title>SecurityTokenServer cache option</title>
+
+            <programlisting language="php"><![CDATA[
+$cache = Zend_Cache::factory('Core', ...);
+Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache);
+]]></programlisting>
+        </example>
+    </sect2>
+</sect1>

@@ -551,7 +551,7 @@ abstract class Zend_Pdf_Font
                 break;
 
             default:
-                require_once 'Zend/Pdf/Excaption.php';
+                require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception("Unknown font name: $name",
                                              Zend_Pdf_Exception::BAD_FONT_NAME);
         }

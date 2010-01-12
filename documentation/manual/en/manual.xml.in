@@ -1686,6 +1686,23 @@
             </xi:include>
         </chapter>
 
+        <chapter id="zend.serializer">
+            <title>Zend_Serializer</title>
+            <xi:include href="module_specs/Zend_Serializer-Introduction.xml">
+                <xi:fallback>
+                    <xi:include
+                        href="../en/module_specs/Zend_Serializer-Introduction.xml" />
+                </xi:fallback>
+            </xi:include>
+
+            <xi:include href="module_specs/Zend_Serializer-Adapter.xml">
+                <xi:fallback>
+                    <xi:include
+                        href="../en/module_specs/Zend_Serializer-Adapter.xml" />
+                </xi:fallback>
+            </xi:include>
+        </chapter>
+
         <chapter id="zend.server">
             <title>Zend_Server</title>
             <xi:include href="module_specs/Zend_Server.xml">

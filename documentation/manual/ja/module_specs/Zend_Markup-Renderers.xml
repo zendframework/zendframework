@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<!-- EN-Revision: 19777 -->
+<sect1 id="zend.markup.renderers">
+    <title>Zend_Markup レンダラー</title>
+ 
+    <para>
+        <classname>Zend_Markup</classname> には現在ひとつのレンダラー、
+        <acronym>HTML</acronym> レンダラーが同梱されています。
+    </para>
+ 
+    <sect2 id="zend.markup.renderers.add">
+        <title>自作のタグの追加</title>
+ 
+        <para>
+            自作のタグを追加することによって、<classname>Zend_Markup</classname> レンダラーに
+            自作の機能の追加できます。 タグ構造とともに、
+            あなたが望むいかなる機能も追加ができます。
+            簡潔なタグから複雑なタグ構造まで。 'foo' タグでの単純な例:
+        </para>
+ 
+        <programlisting language="php"><![CDATA[
+// Zend_Markup_Parser_BbCode をパーサーとして、
+// Zend_Markup_Renderer_Html のインスタンスを生成します。
+$bbcode = Zend_Markup::factory('Bbcode');
+ 
+// これは単純な 'foo' タグが作成されるでしょう
+// 第一引数は自身のタグ名を定義します。
+// 第二引数はタグの定数で定義された整数を引数に取ります。
+// 第三引数は、タグについて、タググループと(この例では)開始ならびに終了タグのように
+// 他のことを配列にて定義します。
+$bbcode->addTag(
+    'foo',
+    Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE
+        | Zend_Markup_Renderer_RendererAbstract::TAG_NORMAL,
+    array(
+        'start' => '-bar-',
+        'end'   => '-baz-',
+        'group' => 'inline',
+    )
+);
+ 
+// これは 'my -bar-tag-baz-' と出力されるでしょう。
+echo $bbcode->render('my [foo]tag[/foo]');
+]]></programlisting>
+ 
+        <para>
+            あなたの作成したタグは、あなたのパーサーがタグ構造もサポートするときに
+            機能することに注意してください。現在、 BBCode はこれをサポートします。
+            Textile はカスタムタグをサポートしません。
+        </para>
+    </sect2>
+</sect1>

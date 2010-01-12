@@ -71,6 +71,7 @@ require_once 'Zend/Measure/AllTests.php';
 require_once 'Zend/Memory/AllTests.php';
 require_once 'Zend/MimeTest.php';
 require_once 'Zend/Mime/AllTests.php';
+require_once 'Zend/Oauth/AllTests.php';
 require_once 'Zend/OpenIdTest.php';
 require_once 'Zend/OpenId/AllTests.php';
 require_once 'Zend/Paginator/AllTests.php';
@@ -205,6 +206,7 @@ class Zend_AllTests
         $suite->addTest(Zend_Measure_AllTests::suite());
         $suite->addTestSuite('Zend_MimeTest');
         $suite->addTest(Zend_Mime_AllTests::suite());
+        $suite->addTest(Zend_Oauth_AllTests::suite());
         $suite->addTest(Zend_Paginator_AllTests::suite());
         $suite->addTest(Zend_Pdf_AllTests::suite());
         $suite->addTestSuite('Zend_RegistryTest');

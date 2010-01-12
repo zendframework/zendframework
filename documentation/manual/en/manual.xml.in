@@ -1455,6 +1455,15 @@
             </xi:include>
         </chapter>
 
+        <chapter id="zend.oauth">
+            <title>Zend_Oauth</title>
+            <xi:include href="module_specs/Zend_Oauth-Introduction.xml" parse="xml">
+                <xi:fallback>
+                    <xi:include href="../en/module_specs/Zend_Oauth-Introduction.xml" />
+                </xi:fallback>
+            <xi:include>
+        </chapter>
+
         <chapter id="zend.openid">
             <title>Zend_OpenId</title>
             <xi:include href="module_specs/Zend_OpenId-Introduction.xml">

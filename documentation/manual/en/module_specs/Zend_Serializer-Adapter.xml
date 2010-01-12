@@ -82,6 +82,8 @@
         </para>
 
         <table>
+            <title>Zend_Serializer_Adapter_Wddx Options</title>
+
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -127,6 +129,8 @@
         </para>
 
         <table>
+            <title>Zend_Serializer_Adapter_Json Options</title>
+
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -212,6 +216,8 @@
         </para>
 
         <table>
+            <title>Zend_Serializer_Adapter_PythonPickle Options</title>
+
             <tgroup cols="4">
                  <thead>
                       <row>
@@ -246,6 +252,8 @@
         </para>
 
         <table>
+            <title>Datatype merging (PHP to Python)</title>
+
             <tgroup cols="2">
                  <thead>
                       <row>
@@ -312,6 +320,8 @@
         </para>
 
         <table>
+            <title>Datatype merging (Python to PHP)</title>
+
             <tgroup cols="2">
                  <thead>
                       <row>

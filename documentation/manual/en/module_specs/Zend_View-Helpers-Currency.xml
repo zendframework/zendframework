@@ -108,7 +108,7 @@ $this->currency()->setCurrency($currency)->currency(1234.56);
         also use it directly.
     </para>
 
-    <example id="zend.view.helpers.initial.currency.directly">
+    <example id="zend.view.helpers.initial.currency.directly.example-1">
         <title>Direct usage</title>
 
         <programlisting language="php"><![CDATA[
@@ -127,7 +127,7 @@ echo $helper->currency(1234.56); // this returns '€ 1.234,56'
         accepts some options which may be used to change the behaviour and output of the helper.
     </para>
 
-    <example id="zend.view.helpers.initial.currency.directly">
+    <example id="zend.view.helpers.initial.currency.directly.example-2">
         <title>Direct usage</title>
 
         <programlisting language="php"><![CDATA[

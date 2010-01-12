@@ -131,6 +131,9 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
                 return;
             }
         }
+        if (!$this->getDataContainer()->getDescription()) {
+            return;
+        }
         $subtitle = $dom->createElement('description');
         $root->appendChild($subtitle);
         $text = $dom->createCDATASection($this->getDataContainer()->getDescription());

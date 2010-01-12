@@ -1692,7 +1692,7 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
 
         $options = $this->getOptions();
         $options['validators'] = array(
-            array('notEmpty', true, array('bar')),
+            array('notEmpty', true, array(Zend_Validate_NotEmpty::ALL)),
             array('digits', true, array('bar')),
         );
         $this->element->setOptions($options);
@@ -1711,7 +1711,7 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
         $options = $this->getOptions();
         $options['validators'] = array(
             array(
-                'options'             => array('bar'),
+                'options'             => array(Zend_Validate_NotEmpty::ALL),
                 'breakChainOnFailure' => true,
                 'validator'           => 'notEmpty',
             ),

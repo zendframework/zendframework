@@ -45,6 +45,7 @@ require_once 'Zend/Validate/IdenticalTest.php';
 require_once 'Zend/Validate/InArrayTest.php';
 require_once 'Zend/Validate/IntTest.php';
 require_once 'Zend/Validate/IpTest.php';
+require_once 'Zend/Validate/IsbnTest.php';
 require_once 'Zend/Validate/LessThanTest.php';
 require_once 'Zend/Validate/MessageTest.php';
 require_once 'Zend/Validate/NotEmptyTest.php';
@@ -100,6 +101,7 @@ class Zend_Validate_AllTests
         $suite->addTestSuite('Zend_Validate_InArrayTest');
         $suite->addTestSuite('Zend_Validate_IntTest');
         $suite->addTestSuite('Zend_Validate_IpTest');
+        $suite->addTestSuite('Zend_Validate_IsbnTest');
         $suite->addTestSuite('Zend_Validate_LessThanTest');
         $suite->addTestSuite('Zend_Validate_MessageTest');
         $suite->addTestSuite('Zend_Validate_NotEmptyTest');

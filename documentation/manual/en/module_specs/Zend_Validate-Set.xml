@@ -178,6 +178,7 @@ if ($validator->isValid($iban)) {
     </sect2>
 
     <xi:include href="Zend_Validate-Ip.xml" />
+    <xi:include href="Zend_Validate-Isbn.xml" />
 
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>

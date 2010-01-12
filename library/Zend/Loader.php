@@ -60,8 +60,20 @@ class Zend_Loader
             throw new Zend_Exception('Directory argument must be a string or an array');
         }
 
-        // autodiscover the path from the class name
-        $file = str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
+        // Autodiscover the path from the class name
+        // Implementation is PHP namespace-aware, and based on 
+        // Framework Interop Group reference implementation:
+        // http://groups.google.com/group/php-standards/web/psr-0-final-proposal
+        $className = ltrim($class, '\\');
+        $file      = '';
+        $namespace = '';
+        if ($lastNsPos = strripos($className, '\\')) {
+            $namespace = substr($className, 0, $lastNsPos);
+            $className = substr($className, $lastNsPos + 1);
+            $file      = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+        }
+        $file .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+
         if (!empty($dirs)) {
             // use the autodiscovered path
             $dirPath = dirname($file);

@@ -113,6 +113,72 @@ Zend_Loader::loadClass('Container_Tree',
             ('-'), underscore ('_'), and period ('.').
         </para>
 
+        <note>
+            <title>Loading Classes from PHP Namespaces</title>
+
+            <para>
+                Starting in version 1.10.0, Zend Framework now allows loading classes from PHP
+                namespaces. This support follows the same guidelines and implementation as that
+                found in the <link
+                    linkend="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
+                Framework Interop Group PSR-0</link> reference implementation.
+            </para>
+
+            <para>
+                Under this guideline, the following rules apply:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Each namespace separator is converted to a
+                        <constant>DIRECTORY_SEPARATOR</constant> when loading from the file system.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Each "_" character in the <emphasis>CLASS NAME</emphasis> is converted to a
+                        <constant>DIRECTORY_SEPARATOR</constant>.  The "_" character has no special
+                        meaning in the namespace.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        The fully-qualified namespace and class is suffixed with ".php" when loading
+                        from the file system.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                As examples:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <classname>\Doctrine\Common\IsolatedClassLoader</classname> =&gt;
+                        <filename>/path/to/project/lib/vendor/Doctrine/Common/IsolatedClassLoader.php</filename>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <classname>\namespace\package\Class_Name</classname> =&gt;
+                        <filename>/path/to/project/lib/vendor/namespace/package/Class/Name.php</filename>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <classname>\namespace\package_name\Class_Name</classname> =&gt;
+                        <filename>/path/to/project/lib/vendor/namespace/package_name/Class/Name.php</filename>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </note>
     </sect2>
 
     <sect2 id="zend.loader.load.isreadable">

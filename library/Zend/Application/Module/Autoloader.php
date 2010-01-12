@@ -60,6 +60,10 @@ class Zend_Application_Module_Autoloader extends Zend_Loader_Autoloader_Resource
                 'namespace' => 'Model_DbTable',
                 'path'      => 'models/DbTable',
             ),
+            'mappers' => array(
+                'namespace' => 'Model_Mapper',
+                'path'      => 'models/mappers',
+            ),
             'form'    => array(
                 'namespace' => 'Form',
                 'path'      => 'forms',

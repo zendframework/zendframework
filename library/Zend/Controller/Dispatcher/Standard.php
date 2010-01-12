@@ -296,9 +296,7 @@ class Zend_Controller_Dispatcher_Standard extends Zend_Controller_Dispatcher_Abs
                     $curObLevel = ob_get_level();
                 } while ($curObLevel > $obLevel);
             }
-
-            require_once 'Zend/Controller/Exception.php';
-            throw new Zend_Controller_Exception($e->getMessage(), $e->getCode(), $e);
+            throw $e;
         }
 
         if (empty($disableOb)) {

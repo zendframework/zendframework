@@ -128,13 +128,24 @@ class Zend_Application_Resource_LogTest extends PHPUnit_Framework_TestCase
         $this->assertContains($message, stream_get_contents($stream));
     }
     
-public function testNumericLogStreamFilterParamsPriorityDoesNotFail() {
-        $options = array('stream' =>
-                        array('writerName'   => 'Stream',
-                              'writerParams' => array('stream' => "php://memory",
-                                                      'mode' => 'a'),
-                        'filterName' => 'Priority',
-                        'filterParams' => array('priority' => '4')));
+    /**
+     * @group ZF-8602
+     */
+    public function testNumericLogStreamFilterParamsPriorityDoesNotFail()
+    {
+        $options = array(
+            'stream' => array(
+                'writerName'   => 'Stream',
+                'writerParams' => array(
+                    'stream' => "php://memory",
+                    'mode'   => 'a'
+                ),
+                'filterName' => 'Priority',
+                'filterParams' => array(
+                    'priority' => '4'
+                ),
+            ),
+        );
         $resource = new Zend_Application_Resource_Log($options);
         $resource->setBootstrap($this->bootstrap);
         $resource->init();

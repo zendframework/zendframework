@@ -78,12 +78,12 @@ class Zend_Log_Filter_Priority extends Zend_Log_Filter_Abstract
         ), $config);
 
         // Add support for constants
-        if (is_string($config['priority'])) {
+        if (!is_numeric($config['priority'])) {
             $config['priority'] = constant($config['priority']);
         }
 
         return new self(
-            $config['priority'], 
+            (int) $config['priority'], 
             $config['operator']
         );
     }

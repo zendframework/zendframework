@@ -133,9 +133,9 @@ $autoloader->setFallbackAutoloader(true);
             <para>
                 Starting in version 1.10.0, Zend Framework now allows loading classes from PHP
                 namespaces. This support follows the same guidelines and implementation as that
-                found in the <link
-                    linkend="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
-                Framework Interop Group PSR-0</link> reference implementation.
+                found in the <ulink
+                    url="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
+                Framework Interop Group PSR-0</ulink> reference implementation.
             </para>
 
             <para>

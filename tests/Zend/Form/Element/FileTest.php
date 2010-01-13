@@ -31,6 +31,8 @@ require_once 'Zend/Form/Element/File.php';
 require_once 'Zend/File/Transfer/Adapter/Abstract.php';
 require_once 'Zend/Validate/File/Upload.php';
 require_once 'Zend/Form/SubForm.php';
+require_once 'Zend/Form.php';
+require_once 'Zend/Registry.php';
 require_once 'Zend/View.php';
 
 /**
@@ -66,6 +68,8 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        Zend_Registry::_unsetInstance();
+        Zend_Form::setDefaultTranslator(null);
         $this->element = new Zend_Form_Element_File('foo');
     }
 

@@ -85,7 +85,13 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->clearRegistry();
-        $this->helper = new Zend_View_Helper_Currency();
+        require_once 'Zend/Cache.php';
+        $this->_cache = Zend_Cache::factory('Core', 'File',
+                 array('lifetime' => 120, 'automatic_serialization' => true),
+                 array('cache_dir' => dirname(__FILE__) . '/../../_files/'));
+        Zend_Currency::setCache($this->_cache);
+
+        $this->helper = new Zend_View_Helper_Currency('de_AT');
     }
 
     /**
@@ -97,6 +103,7 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->helper);
+        $this->_cache->clean(Zend_Cache::CLEANING_MODE_ALL);
         $this->clearRegistry();
     }
 

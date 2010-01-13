@@ -237,8 +237,7 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
                 $plugin->routeStartup($request);
             } catch (Exception $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
-                    require_once 'Zend/Controller/Exception.php';
-                    throw new Zend_Controller_Exception($e->getMessage(), $e->getCode(), $e);
+                    throw $e;
                 } else {
                     $this->getResponse()->setException($e);
                 }
@@ -261,8 +260,7 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
                 $plugin->routeShutdown($request);
             } catch (Exception $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
-                    require_once 'Zend/Controller/Exception.php';
-                    throw new Zend_Controller_Exception($e->getMessage(), $e->getCode(), $e);
+                    throw $e;
                 } else {
                     $this->getResponse()->setException($e);
                 }
@@ -289,8 +287,7 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
                 $plugin->dispatchLoopStartup($request);
             } catch (Exception $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
-                    require_once 'Zend/Controller/Exception.php';
-                    throw new Zend_Controller_Exception($e->getMessage(), $e->getCode(), $e);
+                    throw $e;
                 } else {
                     $this->getResponse()->setException($e);
                 }
@@ -312,8 +309,7 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
                 $plugin->preDispatch($request);
             } catch (Exception $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
-                    require_once 'Zend/Controller/Exception.php';
-                    throw new Zend_Controller_Exception($e->getMessage(), $e->getCode(), $e);
+                    throw $e;
                 } else {
                     $this->getResponse()->setException($e);
                 }
@@ -335,8 +331,7 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
                 $plugin->postDispatch($request);
             } catch (Exception $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
-                    require_once 'Zend/Controller/Exception.php';
-                    throw new Zend_Controller_Exception($e->getMessage(), $e->getCode(), $e);
+                    throw $e;
                 } else {
                     $this->getResponse()->setException($e);
                 }
@@ -358,8 +353,7 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
                 $plugin->dispatchLoopShutdown();
             } catch (Exception $e) {
                 if (Zend_Controller_Front::getInstance()->throwExceptions()) {
-                    require_once 'Zend/Controller/Exception.php';
-                    throw new Zend_Controller_Exception($e->getMessage(), $e->getCode(), $e);
+                    throw $e;
                 } else {
                     $this->getResponse()->setException($e);
                 }

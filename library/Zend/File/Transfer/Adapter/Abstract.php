@@ -401,6 +401,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                         $options   = $validatorInfo;
                         $this->addValidator($validator, $breakChainOnFailure, $options, $files);
                     } else {
+                        $file = $files;
                         switch (true) {
                             case (0 == $argc):
                                 break;
@@ -411,9 +412,11 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                             case (3 <= $argc):
                                 $options = array_shift($validatorInfo);
                             case (4 <= $argc):
-                                $files = array_shift($validatorInfo);
+                                if (!empty($validatorInfo)) {
+                                    $file = array_shift($validatorInfo);
+                                }
                             default:
-                                $this->addValidator($validator, $breakChainOnFailure, $options, $files);
+                                $this->addValidator($validator, $breakChainOnFailure, $options, $file);
                                 break;
                         }
                     }
@@ -473,21 +476,20 @@ abstract class Zend_File_Transfer_Adapter_Abstract
      */
     public function getValidators($files = null)
     {
-        $files = $this->_getFiles($files, true, true);
-
-        if (empty($files)) {
+        if ($files == null) {
             return $this->_validators;
         }
 
+        $files      = $this->_getFiles($files, true, true);
         $validators = array();
         foreach ($files as $file) {
             if (!empty($this->_files[$file]['validators'])) {
                 $validators += $this->_files[$file]['validators'];
             }
         }
-        $validators = array_unique($validators);
 
-        $result = array();
+        $validators = array_unique($validators);
+        $result     = array();
         foreach ($validators as $validator) {
             $result[$validator] = $this->_validators[$validator];
         }

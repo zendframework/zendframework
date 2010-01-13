@@ -279,12 +279,12 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
      * @var array
      */
     protected $_groups = array(
-        'block'        => array('block', 'inline', 'block_empty', 'inline_empty', 'list'),
-        'inline'       => array('inline', 'inline_empty'),
+        'block'        => array('block', 'inline', 'block-empty', 'inline-empty', 'list'),
+        'inline'       => array('inline', 'inline-empty'),
         'list'         => array('list-item'),
-        'list-item'    => array('inline', 'inline_empty', 'list'),
-        'block_empty'  => array(),
-        'inline_empty' => array(),
+        'list-item'    => array('inline', 'inline-empty', 'list'),
+        'block-empty'  => array(),
+        'inline-empty' => array(),
     );
 
     /**

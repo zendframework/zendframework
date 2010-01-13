@@ -192,7 +192,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      *
      * @return void
      */
-    protected function removeDefaultTags()
+    protected function clearTags()
     {
         $this->_tags = array();
     }

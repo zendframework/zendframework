@@ -85,12 +85,6 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
     protected $_delimiters;
 
     /**
-     * Front controller instance
-     * @var Zend_Controller_Front
-     */
-    protected $_frontController;
-
-    /**
      * @var Zend_Filter_Inflector
      */
     protected $_inflector;
@@ -252,7 +246,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
              * @see Zend_Controller_Action_Exception
              */
             require_once 'Zend/Controller/Action/Exception.php';
-            throw new Zend_Controller_Action_Exception('ViewRenderer cannot locate module directory');
+            throw new Zend_Controller_Action_Exception('ViewRenderer cannot locate module directory for module "' . $module . '"');
         }
         $this->_moduleDir = dirname($moduleDir);
         return $this->_moduleDir;
@@ -387,7 +381,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         $inflector = $this->getInflector();
         $this->_setInflectorTarget($this->getViewBasePathSpec());
 
-        $dispatcher = $this->_frontController->getDispatcher();
+        $dispatcher = $this->getFrontController()->getDispatcher();
         $request = $this->getRequest();
 
         $parts = array(
@@ -843,7 +837,7 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
     {
         $inflector  = $this->getInflector();
         $request    = $this->getRequest();
-        $dispatcher = $this->_frontController->getDispatcher();
+        $dispatcher = $this->getFrontController()->getDispatcher();
         $module     = $dispatcher->formatModuleName($request->getModuleName());
         $controller = $request->getControllerName();
         $action     = $dispatcher->formatActionName($request->getActionName());

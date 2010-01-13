@@ -75,11 +75,7 @@ abstract class Zend_Controller_Action_Helper_Abstract
      */
     public function getFrontController()
     {
-        if (null === $this->_frontController) {
-            $this->_frontController = Zend_Controller_Front::getInstance();
-        }
-
-        return $this->_frontController;
+        return Zend_Controller_Front::getInstance();
     }
 
     /**

@@ -43,6 +43,7 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
         if (!function_exists('gd_info')) {
             $this->markTestSkipped('Zend_Barcode_Renderer_ImageTest requires the GD extension');
         }
+        parent::setUp();
     }
 
     protected function _getRendererObject($options = null)

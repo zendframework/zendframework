@@ -62,6 +62,11 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        Zend_Controller_Action_HelperBroker::resetHelpers();
+        $front = Zend_Controller_Front::getInstance();
+        $front->resetInstance();
+        $front->setControllerDirectory('.', 'default');
+
         $this->_controller = new Zend_Controller_ActionTest_TestController(
             new Zend_Controller_Request_Http(),
             new Zend_Controller_Response_Cli(),
@@ -70,10 +75,7 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
                 'bar' => 'baz'
             )
         );
-        $front = Zend_Controller_Front::getInstance();
-        $front->resetInstance();
-        $front->setControllerDirectory('.');
-        Zend_Controller_Action_HelperBroker::resetHelpers();
+
         $redirector = $this->_controller->getHelper('redirector');
         $redirector->setExit(false);
     }

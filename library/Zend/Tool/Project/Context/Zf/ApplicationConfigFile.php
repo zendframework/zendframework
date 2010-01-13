@@ -127,6 +127,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
             }
             
             if ($insideSection) {
+                // if its blank, or a section heading
                 if ((trim($contentLine) == null) || ($contentLines[$contentLineIndex + 1][0] == '[')) {
                     $newLines[] = $key . ' = ' . $value . "\n";
                     $insideSection = null;
@@ -179,15 +180,65 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
         return $this;
     }
     
-//    public function removeStringItem($key, $section = 'production')
-//    {
-//        
-//    }
-//    
-//    public function removeItem($item, $section = 'production')
-//    {
-//        
-//    }
+    public function removeStringItem($key, $section = 'production')
+    {
+        $contentLines = file($this->getPath());
+        
+        $newLines = array();
+        $insideSection = false;
+        
+        foreach ($contentLines as $contentLineIndex => $contentLine) {
+            
+            if ($insideSection === false && preg_match('#^\[' . $section . '#', $contentLine)) {
+                $insideSection = true;
+            }
+            
+            if ($insideSection) {
+                // if its blank, or a section heading
+                if ((trim($contentLine) == null) || ($contentLines[$contentLineIndex + 1][0] == '[')) {
+                    $insideSection = null;
+                }
+            }
+            
+            if (!preg_match('#' . $key . '\s?=.*#', $contentLine)) { 
+                $newLines[] = $contentLine;
+            }
+        }
+
+        $this->_content = implode('', $newLines);
+    }
+    
+    public function removeItem($item, $section = 'production')
+    {
+        $stringItems = array();
+        $stringValues = array();
+        $configKeyNames = array();
+        
+        $rii = new RecursiveIteratorIterator(
+            new RecursiveArrayIterator($item),
+            RecursiveIteratorIterator::SELF_FIRST
+            );
+        
+        $lastDepth = 0;
+        
+        // loop through array structure recursively to create proper keys
+        foreach ($rii as $name => $value) {
+            $lastDepth = $rii->getDepth();
+            
+            if (is_array($value)) {
+                array_push($configKeyNames, $name);
+            } else {
+                $stringItems[] = implode('.', $configKeyNames) . '.' . $name;
+                $stringValues[] = $value;
+            }
+        }
+        
+        foreach ($stringItems as $stringItemIndex => $stringItem) {
+            $this->removeStringItem($stringItem, $section);
+        }
+        
+        return $this;
+    }
     
     protected function _getDefaultContents()
     {

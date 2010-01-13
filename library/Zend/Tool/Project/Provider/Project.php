@@ -116,69 +116,69 @@ class Zend_Tool_Project_Provider_Project
     {
         $data = <<<EOS
 <?xml version="1.0" encoding="UTF-8"?>
-    <projectProfile type="default" version="1.10">
-        <projectDirectory>
-            <projectProfileFile />
-            <applicationDirectory>
-                <apisDirectory enabled="false" />
-                <configsDirectory>
-                    <applicationConfigFile type="ini" />
-                </configsDirectory>
-                <controllersDirectory>
-                    <controllerFile controllerName="Index">
-                        <actionMethod actionName="index" />
-                    </controllerFile>
-                    <controllerFile controllerName="Error" />
-                </controllersDirectory>
-                <formsDirectory enabled="false" />
-                <layoutsDirectory enabled="false" />
-                <modelsDirectory />
-                <modulesDirectory enabled="false" />
-                <viewsDirectory>
-                    <viewScriptsDirectory>
-                        <viewControllerScriptsDirectory forControllerName="Index">
-                            <viewScriptFile forActionName="index" />
-                        </viewControllerScriptsDirectory>
-                        <viewControllerScriptsDirectory forControllerName="Error">
-                            <viewScriptFile forActionName="error" />
-                        </viewControllerScriptsDirectory>
-                    </viewScriptsDirectory>
-                    <viewHelpersDirectory />
-                    <viewFiltersDirectory enabled="false" />
-                </viewsDirectory>
-                <bootstrapFile />
-            </applicationDirectory>
-            <dataDirectory enabled="false">
-                <cacheDirectory enabled="false" />
-                <searchIndexesDirectory enabled="false" />
-                <localesDirectory enabled="false" />
-                <logsDirectory enabled="false" />
-                <sessionsDirectory enabled="false" />
-                <uploadsDirectory enabled="false" />
-            </dataDirectory>
-            <libraryDirectory>
-                <zfStandardLibraryDirectory enabled="false" />
-            </libraryDirectory>
-            <publicDirectory>
-                <publicStylesheetsDirectory enabled="false" />
-                <publicScriptsDirectory enabled="false" />
-                <publicImagesDirectory enabled="false" />
-                <publicIndexFile />
-                <htaccessFile />
-            </publicDirectory>
-            <projectProvidersDirectory enabled="false" />
-            <temporaryDirectory enabled="false" />
-            <testsDirectory>
-                <testPHPUnitConfigFile />
-                <testApplicationDirectory>
-                    <testApplicationBootstrapFile />
-                </testApplicationDirectory>
-                <testLibraryDirectory>
-                    <testLibraryBootstrapFile />
-                </testLibraryDirectory>
-            </testsDirectory>
-        </projectDirectory>
-    </projectProfile>
+<projectProfile type="default" version="1.10">
+    <projectDirectory>
+        <projectProfileFile />
+        <applicationDirectory>
+            <apisDirectory enabled="false" />
+            <configsDirectory>
+                <applicationConfigFile type="ini" />
+            </configsDirectory>
+            <controllersDirectory>
+                <controllerFile controllerName="Index">
+                    <actionMethod actionName="index" />
+                </controllerFile>
+                <controllerFile controllerName="Error" />
+            </controllersDirectory>
+            <formsDirectory enabled="false" />
+            <layoutsDirectory enabled="false" />
+            <modelsDirectory />
+            <modulesDirectory enabled="false" />
+            <viewsDirectory>
+                <viewScriptsDirectory>
+                    <viewControllerScriptsDirectory forControllerName="Index">
+                        <viewScriptFile forActionName="index" />
+                    </viewControllerScriptsDirectory>
+                    <viewControllerScriptsDirectory forControllerName="Error">
+                        <viewScriptFile forActionName="error" />
+                    </viewControllerScriptsDirectory>
+                </viewScriptsDirectory>
+                <viewHelpersDirectory />
+                <viewFiltersDirectory enabled="false" />
+            </viewsDirectory>
+            <bootstrapFile />
+        </applicationDirectory>
+        <dataDirectory enabled="false">
+            <cacheDirectory enabled="false" />
+            <searchIndexesDirectory enabled="false" />
+            <localesDirectory enabled="false" />
+            <logsDirectory enabled="false" />
+            <sessionsDirectory enabled="false" />
+            <uploadsDirectory enabled="false" />
+        </dataDirectory>
+        <libraryDirectory>
+            <zfStandardLibraryDirectory enabled="false" />
+        </libraryDirectory>
+        <publicDirectory>
+            <publicStylesheetsDirectory enabled="false" />
+            <publicScriptsDirectory enabled="false" />
+            <publicImagesDirectory enabled="false" />
+            <publicIndexFile />
+            <htaccessFile />
+        </publicDirectory>
+        <projectProvidersDirectory enabled="false" />
+        <temporaryDirectory enabled="false" />
+        <testsDirectory>
+            <testPHPUnitConfigFile />
+            <testApplicationDirectory>
+                <testApplicationBootstrapFile />
+            </testApplicationDirectory>
+            <testLibraryDirectory>
+                <testLibraryBootstrapFile />
+            </testLibraryDirectory>
+        </testsDirectory>
+    </projectDirectory>
+</projectProfile>
 EOS;
         return $data;
     }

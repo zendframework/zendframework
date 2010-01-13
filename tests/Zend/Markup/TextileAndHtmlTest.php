@@ -169,7 +169,7 @@ class Zend_Markup_TextileAndHtmlTest extends PHPUnit_Framework_TestCase
     {
         $m = $this->_markup;
         $this->assertEquals("<p></p>", $m->render('!'));
-        $this->assertEquals("<p>*</p>", $m->render('*'));
+        $this->assertEquals("<p></p>", $m->render('*'));
     }
 
     public function testAcronymOnEofDoesNotThrowNotice()

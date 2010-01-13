@@ -97,10 +97,10 @@ class Zend_Markup_Token
      * @return void
      */
     public function __construct(
-        $tag, 
-        $type, 
-        $name = '', 
-        array $attributes = array(), 
+        $tag,
+        $type,
+        $name = '',
+        array $attributes = array(),
         Zend_Markup_Token $parent = null
     ) {
         $this->_tag        = $tag;
@@ -197,6 +197,18 @@ class Zend_Markup_Token
     public function getAttributes()
     {
         return $this->_attributes;
+    }
+
+    /**
+     * Add an attribute
+     *
+     * @return Zend_Markup_Token
+     */
+    public function addAttribute($name, $value)
+    {
+        $this->_attributes[$name] = $value;
+
+        return $this;
     }
 
     /**

@@ -21,6 +21,11 @@
  */
 
 /**
+ * @see Zend_config
+ */
+require_once 'Zend/Config.php';
+
+/**
  * Defines the basic rendering functionality
  *
  * @category   Zend
@@ -73,15 +78,26 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      */
     protected $_groups = array();
 
+    /**
+     * Plugin loader for tags
+     *
+     * @var Zend_Loader_PluginLoader
+     */
+    protected $_pluginLoader;
 
     /**
      * Constructor
      *
-     * @param  array $options
+     * @param array|Zend_Config $options
+     *
      * @return void
      */
-    public function __construct(array $options = array())
+    public function __construct($options = array())
     {
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        }
+
         if (isset($options['parser'])) {
             $this->setParser($options['parser']);
         }
@@ -113,6 +129,16 @@ abstract class Zend_Markup_Renderer_RendererAbstract
     }
 
     /**
+     * Get the plugin loader
+     *
+     * @return Zend_Loader_PluginLoader
+     */
+    public function getPluginLoader()
+    {
+        return $this->_pluginLoader;
+    }
+
+    /**
      * Add a new tag
      *
      * @param  string $name
@@ -136,9 +162,11 @@ abstract class Zend_Markup_Renderer_RendererAbstract
         // check the type
         if ($type & self::TYPE_CALLBACK) {
             // add a callback tag
-            if (!isset($info['callback']) || !is_callable($info['callback'])) {
+            if (isset($info['callback']) && !($info['callback'] instanceof Zend_Markup_Renderer_TagInterface)) {
                 require_once 'Zend/Markup/Renderer/Exception.php';
-                throw new Zend_Markup_Renderer_Exception("No valid callback defined for tag '$name'.");
+                throw new Zend_Markup_Renderer_Exception("Not a valid tag callback.");
+            } else {
+                $info['callback'] = null;
             }
 
             $info['type'] = $type;
@@ -296,11 +324,13 @@ abstract class Zend_Markup_Renderer_RendererAbstract
             return $this->_filter($token->getTag()) . $this->_render($token) . $token->getStopper();
         }
 
-        $tag = $this->_tags[$token->getName()];
+        $tag  = $this->_tags[$token->getName()];
+        $name = $token->getName();
 
         // alias processing
         while ($tag['type'] & self::TYPE_ALIAS) {
-            $tag = $this->_tags[$tag['name']];
+            $name = $tag['name'];
+            $tag  = $this->_tags[$name];
         }
 
         // check if the tag has content
@@ -315,10 +345,21 @@ abstract class Zend_Markup_Renderer_RendererAbstract
 
         // callback
         if ($tag['type'] & self::TYPE_CALLBACK) {
-            if ($tag['type'] & self::TAG_NORMAL) {
-                return call_user_func_array($tag['callback'], array($token, $this->_render($token)));
+            // load the callback if the tag doesn't exist
+            if (!($tag['callback'] instanceof Zend_Markup_Renderer_TagInterface)) {
+                $class = $this->getPluginLoader()->load($name);
+
+                $tag['callback'] = new $class;
+
+                if (!($tag['callback'] instanceof Zend_Markup_Renderer_TagInterface)) {
+                    require_once 'Zend/Markup/Renderer/Exception.php';
+                    throw new Zend_Markup_Renderer_Exception("Callback for tag '$name' found, but it isn't valid.");
+                }
             }
-            return call_user_func_array($tag['callback'], array($token));
+            if ($tag['type'] & self::TAG_NORMAL) {
+                return $tag['callback']->convert($token, $this->_render($token));
+            }
+            return $tag['callback']->convert($token, null);
         }
         // replace
         if ($tag['type'] & self::TAG_NORMAL) {

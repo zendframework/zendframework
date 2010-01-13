@@ -146,9 +146,14 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
      */
     public function testAddTags()
     {
+        $this->_markup->getPluginLoader()->addPrefixPath(
+            'Zend_Markup_Test_Renderer_Html',
+            'Zend/Markup/Test/Renderer/Html'
+        );
+
         $this->_markup->addTag('bar',
             Zend_Markup_Renderer_RendererAbstract::TYPE_CALLBACK | Zend_Markup_Renderer_RendererAbstract::TAG_NORMAL,
-            array('callback' => 'markupTestCallback', 'group' => 'inline'));
+            array('group' => 'inline'));
         $this->_markup->addTag('suppp',
             Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE | Zend_Markup_Renderer_RendererAbstract::TAG_NORMAL,
             array('start' => '<sup>', 'end' => '</sup>', 'group' => 'inline'));
@@ -366,18 +371,6 @@ BBCODE;
         $this->assertEquals('<strong>foobar</strong>', $m->render('[b=]foobar[/b]'));
     }
 
-}
-
-
-function markupTestCallback($token, $text)
-{
-    $bar = $token->getAttribute('bar');
-
-    if (!empty($bar)) {
-        $bar = '=' . $bar;
-    }
-
-    return "[foo{$bar}]" . $text . '[/foo]';
 }
 
 // Call Zend_Markup_BbcodeAndHtmlTest::main()

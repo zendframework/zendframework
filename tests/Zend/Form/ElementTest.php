@@ -36,6 +36,7 @@ require_once 'Zend/Form.php';
 require_once 'Zend/Form/Decorator/Abstract.php';
 require_once 'Zend/Form/Decorator/HtmlTag.php';
 require_once 'Zend/Loader/PluginLoader.php';
+require_once 'Zend/Registry.php';
 require_once 'Zend/Translate.php';
 require_once 'Zend/Validate/NotEmpty.php';
 require_once 'Zend/Validate/EmailAddress.php';
@@ -59,6 +60,7 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        Zend_Registry::_unsetInstance();
         Zend_Form::setDefaultTranslator(null);
 
         if (isset($this->error)) {

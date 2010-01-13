@@ -166,7 +166,6 @@ class Zend_Filter implements Zend_Filter_Interface
     public static function filterStatic($value, $classBaseName, array $args = array(), $namespaces = array())
     {
         require_once 'Zend/Loader.php';
-        require_once 'Zend/Loader/Autoloader.php';
         $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, array('Zend_Filter'));
         foreach ($namespaces as $namespace) {
             $className = $namespace . '_' . ucfirst($classBaseName);
@@ -175,6 +174,8 @@ class Zend_Filter implements Zend_Filter_Interface
                     $file = str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
                     if (Zend_Loader::isReadable($file)) {
                         Zend_Loader::loadClass($className);
+                    } else {
+                        continue;
                     }
                 } catch (Zend_Exception $ze) {
                     continue;

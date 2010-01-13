@@ -70,7 +70,9 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
                 'bar' => 'baz'
             )
         );
-        Zend_Controller_Front::getInstance()->resetInstance();
+        $front = Zend_Controller_Front::getInstance();
+        $front->resetInstance();
+        $front->setControllerDirectory('.');
         Zend_Controller_Action_HelperBroker::resetHelpers();
         $redirector = $this->_controller->getHelper('redirector');
         $redirector->setExit(false);

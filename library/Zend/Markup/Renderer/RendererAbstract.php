@@ -85,6 +85,9 @@ abstract class Zend_Markup_Renderer_RendererAbstract
         if (isset($options['parser'])) {
             $this->setParser($options['parser']);
         }
+        if (isset($options['useDefaultTags']) && ($options['useDefaultTags'] == false)) {
+            $this->removeDefaultTags();
+        }
     }
 
     /**
@@ -170,6 +173,28 @@ abstract class Zend_Markup_Renderer_RendererAbstract
             }
         }
         return $this;
+    }
+
+    /**
+     * Remove a tag
+     *
+     * @param string $name
+     *
+     * @return void
+     */
+    protected function removeTag($name)
+    {
+        unset($this->_tags[$name]);
+    }
+
+    /**
+     * Remove the default tags
+     *
+     * @return void
+     */
+    protected function removeDefaultTags()
+    {
+        $this->_tags = array();
     }
 
     /**

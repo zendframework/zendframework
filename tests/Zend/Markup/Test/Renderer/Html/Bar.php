@@ -21,9 +21,9 @@
  */
 
 /**
- * @see Zend_Markup_Renderer_Html_HtmlAbstract
+ * @see Zend_Markup_Renderer_TokenConverterInterface
  */
-require_once 'Zend/Markup/Renderer/Html/HtmlAbstract.php';
+require_once 'Zend/Markup/Renderer/TokenConverterInterface.php';
 
 /**
  * Tag interface
@@ -34,7 +34,7 @@ require_once 'Zend/Markup/Renderer/Html/HtmlAbstract.php';
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Markup_Test_Renderer_Html_Bar implements Zend_Markup_Renderer_TagInterface
+class Zend_Markup_Test_Renderer_Html_Bar implements Zend_Markup_Renderer_TokenConverterInterface
 {
 
     /**

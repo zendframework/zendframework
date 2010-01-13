@@ -371,6 +371,20 @@ BBCODE;
         $this->assertEquals('<strong>foobar</strong>', $m->render('[b=]foobar[/b]'));
     }
 
+    public function testRemoveTag()
+    {
+        $this->_markup->removeTag('b');
+
+        $this->assertEquals('[b]bar[/b]', $this->_markup->render('[b]bar[/b]'));
+    }
+
+    public function testClearTags()
+    {
+        $this->_markup->clearTags();
+
+        $this->assertEquals('[i]foo[/i]', $this->_markup->render('[i]foo[/i]'));
+    }
+
 }
 
 // Call Zend_Markup_BbcodeAndHtmlTest::main()

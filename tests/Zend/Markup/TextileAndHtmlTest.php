@@ -90,7 +90,7 @@ class Zend_Markup_TextileAndHtmlTest extends PHPUnit_Framework_TestCase
     	$m = $this->_markup;
 
         $this->assertEquals('<p><strong>foo</strong></p>', $m->render('*foo*'));
-        $this->assertEquals('<p><strong>foo</strong></p>', $m->render('**foo**'));
+        $this->assertEquals('<p><strong>foo</strong> bar</p>', $m->render('**foo** bar'));
         $this->assertEquals('<p><em>foo</em></p>', $m->render('_foo_'));
         $this->assertEquals('<p><em>foo</em></p>', $m->render('__foo__'));
         $this->assertEquals('<p><cite>foo</cite></p>', $m->render('??foo??'));
@@ -177,7 +177,16 @@ class Zend_Markup_TextileAndHtmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<p>ZFC(</p>', $this->_markup->render('ZFC('));
     }
 
+    public function testListCombinedWithText()
+    {
+        $text = <<<TESTLIST
+* foo
+* bar
+baz
 
+TESTLIST;
+        $this->assertEquals('<p><ul><li>foo</li><li>bar</li></ul>baz</p>', $this->_markup->render($text));
+    }
 }
 
 // Call Zend_Markup_BbcodeTest::main() if this source file is executed directly.

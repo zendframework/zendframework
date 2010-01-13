@@ -24,6 +24,10 @@
  * @see Zend_config
  */
 require_once 'Zend/Config.php';
+/**
+ * @see Zend_Markup_Renderer_TokenConverterInterface
+ */
+require_once 'Zend/Markup/Renderer/TokenConverterInterface.php';
 
 /**
  * Defines the basic rendering functionality
@@ -162,9 +166,14 @@ abstract class Zend_Markup_Renderer_RendererAbstract
         // check the type
         if ($type & self::TYPE_CALLBACK) {
             // add a callback tag
-            if (isset($info['callback']) && !($info['callback'] instanceof Zend_Markup_Renderer_TagInterface)) {
-                require_once 'Zend/Markup/Renderer/Exception.php';
-                throw new Zend_Markup_Renderer_Exception("Not a valid tag callback.");
+            if (isset($info['callback'])) {
+                if (!($info['callback'] instanceof Zend_Markup_Renderer_TokenConverterInterface)) {
+                    require_once 'Zend/Markup/Renderer/Exception.php';
+                    throw new Zend_Markup_Renderer_Exception("Not a valid tag callback.");
+                }
+                if (method_exists($info['callback'], 'setRenderer')) {
+                    $info['callback']->setRenderer($this);
+                }
             } else {
                 $info['callback'] = null;
             }
@@ -210,7 +219,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      *
      * @return void
      */
-    protected function removeTag($name)
+    public function removeTag($name)
     {
         unset($this->_tags[$name]);
     }
@@ -220,7 +229,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      *
      * @return void
      */
-    protected function clearTags()
+    public function clearTags()
     {
         $this->_tags = array();
     }
@@ -346,14 +355,18 @@ abstract class Zend_Markup_Renderer_RendererAbstract
         // callback
         if ($tag['type'] & self::TYPE_CALLBACK) {
             // load the callback if the tag doesn't exist
-            if (!($tag['callback'] instanceof Zend_Markup_Renderer_TagInterface)) {
+            if (!($tag['callback'] instanceof Zend_Markup_Renderer_TokenConverterInterface)) {
                 $class = $this->getPluginLoader()->load($name);
 
                 $tag['callback'] = new $class;
 
-                if (!($tag['callback'] instanceof Zend_Markup_Renderer_TagInterface)) {
+                if (!($tag['callback'] instanceof Zend_Markup_Renderer_TokenConverterInterface)) {
                     require_once 'Zend/Markup/Renderer/Exception.php';
                     throw new Zend_Markup_Renderer_Exception("Callback for tag '$name' found, but it isn't valid.");
+                }
+
+                if (method_exists($tag['callback'], 'setRenderer')) {
+                    $tag['callback']->setRenderer($this);
                 }
             }
             if ($tag['type'] & self::TAG_NORMAL) {

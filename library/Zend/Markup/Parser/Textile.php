@@ -370,14 +370,6 @@ class Zend_Markup_Parser_Textile implements Zend_Markup_Parser_ParserInterface
                     break;
             }
         }
-
-        if (!empty($buffer)) {
-            $this->_tokens[] = array(
-                'tag'  => $buffer,
-                'type' => Zend_Markup_Token::TYPE_NONE
-            );
-            $buffer = '';
-        }
     }
 
     /**

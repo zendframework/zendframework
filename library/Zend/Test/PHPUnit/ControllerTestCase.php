@@ -185,13 +185,19 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
             $request->setRequestUri($url);
         }
         $request->setPathInfo(null);
+
         $controller = $this->getFrontController();
         $this->frontController
              ->setRequest($request)
              ->setResponse($this->getResponse())
              ->throwExceptions(false)
              ->returnResponse(false);
-        $this->frontController->dispatch();
+
+        if ($this->bootstrap instanceof Zend_Application) {
+            $this->bootstrap->run();
+        } else {
+            $this->frontController->dispatch();
+        }
     }
 
     /**

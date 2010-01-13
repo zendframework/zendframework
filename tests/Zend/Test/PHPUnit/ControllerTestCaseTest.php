@@ -757,6 +757,30 @@ class Zend_Test_PHPUnit_ControllerTestCaseTest extends PHPUnit_Framework_TestCas
             $this->testCase->getFrontController()
         );
     }
+
+    /**
+     * @group ZF-8193
+     */
+    public function testWhenApplicationObjectUsedAsBootstrapTestCaseShouldExecuteBootstrapRunMethod()
+    {
+        require_once 'Zend/Application.php';
+        $application = new Zend_Application('testing', array(
+            'resources' => array(
+                'frontcontroller' => array(
+                    'controllerDirectory' => dirname(__FILE__) . '/_files/application/controllers',
+                ),
+            ),
+        ));
+        $this->testCase->bootstrap = $application;
+        $this->testCase->bootstrap();
+        $this->testCase->dispatch('/');
+        $front = $application->getBootstrap()->getResource('frontcontroller');
+        $boot  = $front->getParam('bootstrap');
+        $type  = is_object($boot)
+               ? get_class($boot)
+               : gettype($boot);
+        $this->assertTrue($boot === $this->testCase->bootstrap->getBootstrap(), $type);
+    }
 }
 
 // Concrete test case class for testing purposes

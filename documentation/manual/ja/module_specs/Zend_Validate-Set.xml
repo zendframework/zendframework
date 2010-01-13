@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20020 -->
+<!-- EN-Revision: 20229 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -187,6 +187,9 @@ if ($validator->isValid($iban)) {
 
     <xi:include href="Zend_Validate-Ip.xml">
         <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Ip.xml" /></xi:fallback>
+    </xi:include>
+    <xi:include href="Zend_Validate-Isbn.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Isbn.xml" /></xi:fallback>
     </xi:include>
 
     <sect2 id="zend.validate.set.less_than">

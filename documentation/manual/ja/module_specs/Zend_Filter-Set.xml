@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19380 -->
+<!-- EN-Revision: 20223 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -44,6 +44,9 @@
         </para>
     </sect2>
 
+    <xi:include href="Zend_Filter-Boolean.xml">
+        <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Boolean.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Filter-Callback.xml" />
     <xi:include href="Zend_Filter-Compress.xml">
         <xi:fallback ><xi:include href="../../en/module_specs/Zend_Filter-Compress.xml" /></xi:fallback>
@@ -115,8 +118,6 @@
             ただし明示的に許可したタグは取り除きません。
             どのタグを許可するかだけではなく、すべてのタグにおいてどの属性を許可するか、
             特定のタグだけで許可する属性は何かなども指定できます。
-            また、コメント (<command>&lt;!-- ... --&gt;</command>)
-            を除去するかそのまま残すかも指定できます。
         </para>
     </sect2>
 

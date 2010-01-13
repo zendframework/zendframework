@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19819 -->
+<!-- EN-Revision: 20142 -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
 
@@ -72,6 +72,31 @@ $authors = $feed->getAuthors()->getValues();
 
     <sect2 id="migration.110.zend.file.transfer">
         <title>Zend_File_Transfer</title>
+
+        <!-- TODO : to be translated -->
+        <sect3 id="migration.110.zend.file.transfer.files">
+            <title>Security change</title>
+
+            <para>
+                For security reasons <classname>Zend_File_Transfer</classname> does no longer store
+                the original mimetype and filesize which is given from the requesting client into
+                its internal storage. Instead the real values will be detected at initiation.
+            </para>
+
+            <para>
+                Additionally the original values within <varname>$_FILES</varname> will be
+                overridden within the real values at initiation. This makes also
+                <varname>$_FILES</varname> secure.
+            </para>
+
+            <para>
+                When you are in need of the original values you can eighter store them before
+                initiating <classname>Zend_File_Transfer</classname> or use the
+                <property>disableInfos</property> option at initiation. Note that this option is
+                useless when its given after initiation.
+            </para>
+        </sect3>
+
         <sect3 id="migration.110.zend.file.transfer.count">
             <title>Count 検証</title>
 
@@ -116,6 +141,44 @@ $authors = $feed->getAuthors()->getValues();
                 利点として、正しいつづりを得るために、本来の文字列を翻訳する必要はもうありません。
             </para>
         </sect3>
+    </sect2>
+
+    <!-- TODO : to be translated -->
+    <sect2 id="migration.110.zend.filter.html-entities">
+        <title>Zend_Filter_HtmlEntities</title>
+
+        <para>
+            In order to default to a more secure character encoding,
+            <classname>Zend_Filter_HtmlEntities</classname> now defaults to <acronym>UTF-8</acronym>
+            instead of <acronym>ISO-8859-1</acronym>.
+        </para>
+
+        <para>
+            Additionally, because the actual mechanism is dealing with character encodings and not
+            character sets, two new methods have been added, <methodname>setEncoding()</methodname>
+            and <methodname>getEncoding()</methodname>. The previous methods
+            <methodname>setCharSet()</methodname> and <methodname>setCharSet()</methodname> are now
+            deprecated and proxy to the new methods. Finally, instead of using the protected members
+            directly within the <methodname>filter()</methodname> method, these members are
+            retrieved by their explicit accessors. If you were extending the filter in the past,
+            please check your code and unit tests to ensure everything still continues to work.
+        </para>
+    </sect2>
+
+    <sect2 id="migration.110.zend.filter.strip-tags">
+        <title>Zend_Filter_StripTags</title>
+
+        <para>
+            <classname>Zend_Filter_StripTags</classname> contains a flag,
+            <varname>commentsAllowed</varname>, that, in previous versions, allowed you to
+            optionally whitelist HTML comments in HTML text filtered by the class. However, this
+            opens code enabling the flag to <acronym>XSS</acronym> attacks, particularly in Internet
+            Explorer (which allows specifying conditional functionality via HTML comments). Starting
+            in version 1.9.7 (and backported to versions 1.8.5 and 1.7.9), the
+            <varname>commentsAllowed</varname> flag no longer has any meaning, and all HTML
+            comments, including those containing other HTML tags or nested commments, will be
+            stripped from the final output of the filter.
+        </para>
     </sect2>
 
     <sect2 id="migration.110.zend.translate">

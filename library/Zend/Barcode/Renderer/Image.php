@@ -79,6 +79,16 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
      */
     protected $_userWidth = 0;
 
+    public function __construct($options = null)
+    {
+        if (!function_exists('gd_info')) {
+            require_once 'Zend/Barcode/Renderer/Exception.php';
+            throw new Zend_Barcode_Renderer_Exception('Zend_Barcode_Renderer_Image requires the GD extension');
+        }
+
+        parent::__construct($options);
+    }
+
     /**
      * Set height of the result image
      * @param null|integer $value

@@ -38,6 +38,13 @@ require_once 'Zend/Barcode/Object/Code39.php';
 class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
 {
 
+    public function setUp()
+    {
+        if (!function_exists('gd_info')) {
+            $this->markTestSkipped('Zend_Barcode_Renderer_ImageTest requires the GD extension');
+        }
+    }
+
     protected function _getRendererObject($options = null)
     {
         return new Zend_Barcode_Renderer_Image($options);

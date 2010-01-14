@@ -54,7 +54,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
      *
      * @var array
      */
-    protected $_tags = array(
+    protected $_markups = array(
         'b' => array(
             'type'   => 10, // self::TYPE_REPLACE | self::TAG_NORMAL
             'tag'    => 'strong',
@@ -337,14 +337,20 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
     }
 
     /**
-     * Initialize the default filters
+     * Set the default filter
      *
      * @return void
      */
-    public function addDefaultFilters()
+    public function setDefaultFilter(Zend_Filter_Interface $filter = null)
     {
-        $this->getFilterChain()->addFilter(new Zend_Filter_HtmlEntities());
-        $this->getFilterChain()->addFilter(new Zend_Filter_Callback('nl2br'));
+        if (empty($filter)) {
+            $this->_defaultFilter = new Zend_Filter();
+
+            $this->_defaultFilter->addFilter(new Zend_Filter_HtmlEntities());
+            $this->_defaultFilter->addFilter(new Zend_Filter_Callback('nl2br'));
+        } else {
+            $this->_defaultFilter = $filter;
+        }
     }
 
     /**

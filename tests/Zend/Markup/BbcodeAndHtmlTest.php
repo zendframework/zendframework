@@ -152,16 +152,16 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
             'Zend/Markup/Test/Renderer/Html'
         );
 
-        $this->_markup->addTag('bar',
+        $this->_markup->addMarkup('bar',
             Zend_Markup_Renderer_RendererAbstract::TYPE_CALLBACK | Zend_Markup_Renderer_RendererAbstract::TAG_NORMAL,
             array('group' => 'inline'));
-        $this->_markup->addTag('suppp',
+        $this->_markup->addMarkup('suppp',
             Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE | Zend_Markup_Renderer_RendererAbstract::TAG_NORMAL,
             array('start' => '<sup>', 'end' => '</sup>', 'group' => 'inline'));
-        $this->_markup->addTag('zend',
+        $this->_markup->addMarkup('zend',
             Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE | Zend_Markup_Renderer_RendererAbstract::TAG_SINGLE,
             array('replace' => 'Zend Framework', 'group' => 'inline'));
-        $this->_markup->addTag('line', Zend_Markup_Renderer_RendererAbstract::TYPE_ALIAS,
+        $this->_markup->addMarkup('line', Zend_Markup_Renderer_RendererAbstract::TYPE_ALIAS,
             array('name' => 'hr'));
 
         $this->assertEquals('[foo=blaat]hell<sup>test</sup>blaat[/foo]',
@@ -374,14 +374,14 @@ BBCODE;
 
     public function testRemoveTag()
     {
-        $this->_markup->removeTag('b');
+        $this->_markup->removeMarkup('b');
 
         $this->assertEquals('[b]bar[/b]', $this->_markup->render('[b]bar[/b]'));
     }
 
     public function testClearTags()
     {
-        $this->_markup->clearTags();
+        $this->_markup->clearMarkups();
 
         $this->assertEquals('[i]foo[/i]', $this->_markup->render('[i]foo[/i]'));
     }
@@ -390,7 +390,7 @@ BBCODE;
     {
         $m = $this->_markup;
 
-        $m->addFilter(new Zend_Filter_StringToUpper());
+        $m->addDefaultFilter(new Zend_Filter_StringToUpper());
 
         $this->assertEquals('<strong>HELLO</strong>', $m->render('[b]hello[/b]'));
     }

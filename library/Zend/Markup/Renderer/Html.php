@@ -25,6 +25,14 @@
  */
 require_once 'Zend/Uri.php';
 /**
+ * @see Zend_Filter_HtmlEntities
+ */
+require_once 'Zend/Filter/HtmlEntities.php';
+/**
+ * @see Zend_Filter_Callback
+ */
+require_once 'Zend/Filter/Callback.php';
+/**
  * @see Zend_Markup_Renderer_RendererAbstract
  */
 require_once 'Zend/Markup/Renderer/RendererAbstract.php';
@@ -326,7 +334,23 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
         ));
 
         parent::__construct($options);
+
+        if (!isset($options['addDefaultFilters']) || ($options['addDefaultFilters'] == false)) {
+            $this->addDefaultFilters();
+        }
     }
+
+    /**
+     * Initialize the default filters
+     *
+     * @return void
+     */
+    public function addDefaultFilters()
+    {
+        $this->getFilterChain()->addFilter(new Zend_Filter_HtmlEntities());
+        $this->getFilterChain()->addFilter(new Zend_Filter_Callback('nl2br'));
+    }
+
     /**
      * Execute a replace token
      *
@@ -449,17 +473,4 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
         return false;
     }
 
-    /**
-     * Filter method, used for converting newlines to <br /> tags
-     *
-     * @param  string $value
-     * @return string
-     */
-    protected function _filter($value)
-    {
-        if ($this->_filter) {
-            return nl2br(htmlentities($value, ENT_QUOTES));
-        }
-        return $value;
-    }
 }

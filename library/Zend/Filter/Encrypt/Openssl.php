@@ -57,11 +57,13 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
 
     /**
      * Class constructor
+     * Available options
+     *   'public'     => public key
+     *   'private'    => private key
+     *   'envelope'   => envelope key
+     *   'passphrase' => passphrase
      *
-     * @param string|array $oldfile   File which should be renamed/moved
-     * @param string|array $newfile   New filename, when not set $oldfile will be used as new filename
-     *                                for $value when filtering
-     * @param boolean      $overwrite If set to true, it will overwrite existing files
+     * @param string|array $options Options for this adapter
      */
     public function __construct($options = array())
     {
@@ -74,16 +76,25 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
             $options = $options->toArray();
         }
 
-        $this->setPublicKey($options);
+        if (!is_array($options)) {
+            $options = array('public' => $options);
+        }
+
+        if (array_key_exists('passphrase', $options)) {
+            $this->setPassphrase($options['passphrase']);
+            unset($options['passphrase']);
+        }
+
+        $this->_setKeys($options);
     }
 
     /**
-     * Returns the set encryption options
+     * Sets the encryption keys
      *
      * @param  string|array $keys Key with type association
      * @return Zend_Filter_Encrypt_Openssl
      */
-    protected function setKeys($keys)
+    protected function _setKeys($keys)
     {
         if (!is_array($keys)) {
             require_once 'Zend/Filter/Exception.php';
@@ -125,8 +136,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
                     $this->_keys['envelope'][$key] = $cert;
                     break;
                 default:
-                    require_once 'Zend/Filter/Exception.php';
-                    throw new Zend_Filter_Exception("Unknown key type '{$type}'");
+                    break;
             }
         }
 
@@ -162,7 +172,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
             $key = array('public' => $key);
         }
 
-        return $this->setKeys($key);
+        return $this->_setKeys($key);
     }
 
     /**
@@ -199,7 +209,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
             $this->setPassphrase($passphrase);
         }
 
-        return $this->setKeys($key);
+        return $this->_setKeys($key);
     }
 
     /**
@@ -231,7 +241,7 @@ class Zend_Filter_Encrypt_Openssl implements Zend_Filter_Encrypt_Interface
             $key = array('envelope' => $key);
         }
 
-        return $this->setKeys($key);
+        return $this->_setKeys($key);
     }
 
     /**

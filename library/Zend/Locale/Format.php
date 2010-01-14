@@ -719,6 +719,10 @@ class Zend_Locale_Format
      */
     public static function convertPhpToIsoFormat($format)
     {
+        if ($format === null) {
+            return null;
+        }
+
         $convert = array('d' => 'dd'  , 'D' => 'EE'  , 'j' => 'd'   , 'l' => 'EEEE', 'N' => 'eee' , 'S' => 'SS'  ,
                          'w' => 'e'   , 'z' => 'D'   , 'W' => 'ww'  , 'F' => 'MMMM', 'm' => 'MM'  , 'M' => 'MMM' ,
                          'n' => 'M'   , 't' => 'ddd' , 'L' => 'l'   , 'o' => 'YYYY', 'Y' => 'yyyy', 'y' => 'yy'  ,
@@ -732,6 +736,7 @@ class Zend_Locale_Format
                 $values[$key] = $convert[$value];
             }
         }
+
         return join($values);
     }
 
@@ -1047,6 +1052,7 @@ class Zend_Locale_Format
                 }
             }
         }
+
         return false;
     }
 
@@ -1064,6 +1070,7 @@ class Zend_Locale_Format
             require_once 'Zend/Locale/Exception.php';
             throw new Zend_Locale_Exception("failed to receive data from locale $locale");
         }
+
         return $format;
     }
 
@@ -1087,6 +1094,7 @@ class Zend_Locale_Format
             $options['format_type'] = 'iso';
             $options['date_format'] = self::getDateFormat($options['locale']);
         }
+
         return self::_parseDate($date, $options);
     }
 

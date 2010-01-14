@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20043 -->
+<!-- EN-Revision: 20191 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.pubsubhubbub.introduction">
     <title>Zend_Feed_Pubsubhubbub</title>
@@ -287,6 +287,27 @@ if (!$publisher->isSuccess()) {
                 resulting class implements the interface
                 <classname>Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface</classname>.
             </para>
+
+            <para>
+                An example schema (MySQL) for a subscription table accessible by the provided model
+                may look similar to:
+            </para>
+
+            <programlisting language="sql"><![CDATA[
+CREATE TABLE IF NOT EXISTS `subscription` (
+  `id` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `topic_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `hub_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_time` datetime DEFAULT NULL,
+  `last_modified` datetime DEFAULT NULL,
+  `lease_seconds` bigint(20) DEFAULT NULL,
+  `verify_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `secret` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `expiration_time` datetime DEFAULT NULL,
+  `subscription_state` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+]]></programlisting>
 
             <para>
                 Behind the scenes, the Subscriber above will send a request to the Hub endpoint containing the

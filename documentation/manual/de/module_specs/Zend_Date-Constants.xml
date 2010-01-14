@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20206 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.date.constants">
     <title>Konstanten für generelle Datums Funktionen</title>
@@ -138,7 +138,7 @@
                     </row>
                     <row>
                         <entry><constant>Zend_Date::DAY_SHORT</constant></entry>
-                        <entry>Tag (als Zahl, eine oder zwei Ziffern)</entry>
+                        <entry>Tag (als Zahl, ein oder zwei Ziffern)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>6</emphasis></entry>
                     </row>
@@ -150,28 +150,33 @@
                     </row>
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_SHORT</constant></entry>
+
                         <entry>
-                            Wochentag (Name des Tages, Lokalisiert, Abgekürzt, die ersten drei
+                            Wochentag (Name des Tages, Lokalisiert, Abgekürzt, zwei bis vier
                             Zeichen)
                         </entry>
+
                         <entry>2009-02-06T14:53:27+01:00</entry>
                         <entry><emphasis>Fre</emphasis> für Freitag</entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_NAME</constant></entry>
+
                         <entry>
-                            Wochentag (Name des Tages, Lokalisiert, Abgekürzt, die ersten zwei
+                            Wochentag (Name des Tages, Lokalisiert, Abgekürzt, ein oder zwei
                             Zeichen)
                         </entry>
+
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>Fr</emphasis> für Freitag</entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::WEEKDAY_NARROW</constant></entry>
+
                         <entry>
-                            Wochentag (Name des Tages, Lokalisiert, Abgekürzt, nur das erste
-                            Zeichen)
+                            Wochentag (Name des Tages, Lokalisiert, Abgekürzt, ein Zeichen)
                         </entry>
+
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>F</emphasis> für Freitag</entry>
                     </row>
@@ -191,7 +196,7 @@
                     </row>
                     <row>
                         <entry><constant>Zend_Date::DAY_OF_YEAR</constant></entry>
-                        <entry>Tag (als Zahl, eine oder zwei Ziffern)</entry>
+                        <entry>Tag (als Zahl, ein oder zwei Ziffern)</entry>
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>43</emphasis></entry>
                     </row>
@@ -249,13 +254,21 @@
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MONTH_NAME_SHORT</constant></entry>
-                        <entry>Monat (Name des Monats, Lokalisiert, Abgekürzt, drei Zeichen)</entry>
+
+                        <entry>
+                            Monat (Name des Monats, Lokalisiert, Abgekürzt, zwei bis vier Zeichen)
+                        </entry>
+
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>Feb</emphasis></entry>
                     </row>
                     <row>
                         <entry><constant>Zend_Date::MONTH_NAME_NARROW</constant></entry>
-                        <entry>Monat (Name des Monats, Lokalisiert, Abgekürzt, ein Zeichen)</entry>
+
+                        <entry>
+                            Monat (Name des Monats, Lokalisiert, Abgekürzt, ein oder Zeichen)
+                        </entry>
+
                         <entry>2009-02-13T14:53:27+01:00</entry>
                         <entry><emphasis>F</emphasis></entry>
                     </row>

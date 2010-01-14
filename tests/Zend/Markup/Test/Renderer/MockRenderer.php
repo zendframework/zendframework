@@ -47,12 +47,8 @@ class Zend_Markup_Test_Renderer_MockRenderer extends Zend_Markup_Renderer_Render
      *
      * @return void
      */
-    public function setDefaultFilter(Zend_Filter_Interface $filter = null)
+    public function addDefaultFilters()
     {
-        if (empty($filter)) {
-            $this->_defaultFilter = new Zend_Filter();
-        } else {
-            $this->_defaultFilter = $filter;
-        }
+        $this->_defaultFilter = new Zend_Filter();
     }
 }

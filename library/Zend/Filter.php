@@ -32,6 +32,10 @@ require_once 'Zend/Filter/Interface.php';
  */
 class Zend_Filter implements Zend_Filter_Interface
 {
+
+    const CHAIN_APPEND  = 'append';
+    const CHAIN_PREPEND = 'prepend';
+
     /**
      * Filter chain
      *
@@ -47,15 +51,52 @@ class Zend_Filter implements Zend_Filter_Interface
     protected static $_defaultNamespaces = array();
 
     /**
-     * Adds a filter to the end of the chain
+     * Adds a filter to the chain
+     *
+     * @param  Zend_Filter_Interface $filter
+     * @param  string $placement
+     * @return Zend_Filter Provides a fluent interface
+     */
+    public function addFilter(Zend_Filter_Interface $filter, $placement = self::CHAIN_APPEND)
+    {
+        if ($placement == self::CHAIN_PREPEND) {
+            array_unshift($this->_filters, $filter);
+        } else {
+            $this->_filters[] = $filter;
+        }
+        return $this;
+    }
+
+    /**
+     * Add a filter to the end of the chain
      *
      * @param  Zend_Filter_Interface $filter
      * @return Zend_Filter Provides a fluent interface
      */
-    public function addFilter(Zend_Filter_Interface $filter)
+    public function appendFilter(Zend_Filter_Interface $filter)
     {
-        $this->_filters[] = $filter;
-        return $this;
+        return $this->addFilter($filter, self::CHAIN_APPEND);
+    }
+
+    /**
+     * Add a filter to the start of the chain
+     *
+     * @param  Zend_Filter_Interface $filter
+     * @return Zend_Filter Provides a fluent interface
+     */
+    public function prependFilter(Zend_Filter_Interface $filter)
+    {
+        return $this->addFilter($filter, self::CHAIN_PREPEND);
+    }
+
+    /**
+     * Get all the filters
+     *
+     * @return array
+     */
+    public function getFilters()
+    {
+        return $this->_filters;
     }
 
     /**

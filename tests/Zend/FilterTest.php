@@ -96,6 +96,19 @@ class Zend_FilterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensures that filters can be prepended and will be executed in the
+     * expected order
+     */
+    public function testFilterPrependOrder()
+    {
+        $this->_filter->appendFilter(new Zend_FilterTest_StripUpperCase())
+                      ->prependFilter(new Zend_FilterTest_LowerCase());
+        $value = 'AbC';
+        $valueExpected = 'abc';
+        $this->assertEquals($valueExpected, $this->_filter->filter($value));
+    }
+
+    /**
      * Ensures that we can call the static method get()
      * to instantiate a named validator by its class basename
      * and it returns the result of filter() with the input.

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20243 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader">
     <title>Der Autoloader</title>
@@ -124,6 +124,75 @@ $autoloader->suppressNotFoundWarnings(true);
         <programlisting language="php"><![CDATA[
 $autoloader->setFallbackAutoloader(true);
 ]]></programlisting>
+
+        <note>
+            <title>Klassen von PHP Namespaces laden</title>
+
+            <para>
+                Beginnend mit Version 1.10.0 erlaubt Zend Framework das Laden von Klassen aus PHP
+                Namespaces. Diese Unterstützung folgt den gleichen Richtlinien und Implementationen
+                wie Sie in der <ulink
+                    linkend="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
+                Framework Interop Group PSR-0</ulink> Referenz Implementation gefunden werden
+                können.
+            </para>
+
+            <para>
+                Mit dieser Richtlinie werden die folgenden Regeln angewandt:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Jeder Separator für Namespaces wird zu einem
+                        <constant>DIRECTORY_SEPARATOR</constant> konvertiert wenn er vom Dateisystem
+                        geladen wird.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Jedes "_" Zeichen im <emphasis>CLASS NAME</emphasis> wird zu einem
+                        <constant>DIRECTORY_SEPARATOR</constant> konvertiert. Das "_" Zeichen hat
+                        keine spezielle Bedeutung im Namespace.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Dem voll-qualifizierte Namespace und der Klasse wird ".php" angehängt wenn
+                        Sie vom Dateisystem geladen werden.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                Als Beispiel:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <classname>\Doctrine\Common\IsolatedClassLoader</classname> =&gt;
+                        <filename>/path/to/project/lib/vendor/Doctrine/Common/IsolatedClassLoader.php</filename>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <classname>\namespace\package\Class_Name</classname> =&gt;
+                        <filename>/path/to/project/lib/vendor/namespace/package/Class/Name.php</filename>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <classname>\namespace\package_name\Class_Name</classname> =&gt;
+                        <filename>/path/to/project/lib/vendor/namespace/package_name/Class/Name.php</filename>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </note>
     </sect2>
 
     <sect2 id="zend.loader.autoloader.zf-version">

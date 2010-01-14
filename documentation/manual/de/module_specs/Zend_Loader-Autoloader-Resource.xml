@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20250 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader-resource">
     <title>Ressource Autoloader</title>
@@ -148,11 +148,15 @@ $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
         </para>
 
         <programlisting language="text"><![CDATA[
-api/         => Api
 forms/       => Form
 models/      => Model
     DbTable/ => Model_DbTable
+    mappers/ => Model_Mapper
 plugins/     => Plugin
+services/    => Service
+views/
+    helpers  => View_Helper
+    filters  => View_Filter
 ]]></programlisting>
 
         <para>

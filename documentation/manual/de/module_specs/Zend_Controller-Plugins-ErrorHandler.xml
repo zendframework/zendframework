@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20249 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
@@ -18,6 +18,10 @@
 
     <itemizedlist>
         <listitem>
+            <para>Abfangen von Ausnahmen welche auftreten wenn keine passende Route existiert</para>
+        </listitem>
+
+        <listitem>
             <para>
                 Abfangen von Ausnahmen die durch fehlende Controller oder Aktionsmethoden auftreten
             </para>
@@ -31,8 +35,8 @@
     <para>
         Mit anderen Worten ist das <emphasis>ErrorHandler</emphasis> Plugin kreiert worden um
         <acronym>HTTP</acronym> 404 Fehler zu behandeln (fehlende Seite) und 500 Fehler (interner
-        Fehler). Es ist nicht dazu gedacht Ausnahmen zu fangen die in anderen Plugins oder durch das
-        Routen verursacht werden.
+        Fehler). Es ist nicht dazu gedacht Ausnahmen zu fangen die in anderen Plugins verursacht
+        werden.
     </para>
 
     <para>
@@ -125,6 +129,13 @@
         <itemizedlist>
             <listitem>
                 <para>
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE</constant>,
+                    zeigt das keine passende Route existiert.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
                     <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</constant>,
                     zeigt das der Controller nicht gefunden wurde.
                 </para>
@@ -146,7 +157,8 @@
         </itemizedlist>
 
         <para>
-            Man kann auf eine der ersten Typen testen, und wenn dem so ist, eine 404 Seite anzeigen:
+            Man kann auf jeden der ersten drei Typen testen, und wenn dem so ist, eine 404 Seite
+            anzeigen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -157,6 +169,7 @@ class ErrorController extends Zend_Controller_Action
         $errors = $this->_getParam('error_handler');
 
         switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 Fehler -- Controller oder Aktion nicht gefunden
@@ -186,6 +199,7 @@ public function errorAction()
         $errors = $this->_getParam('error_handler');
 
         switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 Fehler -- Controller oder Aktion nicht gefunden
@@ -289,6 +303,7 @@ class ErrorController extends Zend_Controller_Action
         $errors = $this->_getParam('error_handler');
 
         switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 Fehler -- Controller oder Aktion nicht gefunden
@@ -318,6 +333,3 @@ EOH;
 ]]></programlisting>
     </sect4>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

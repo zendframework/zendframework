@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 20275 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.markup.renderers">
     <title>Zend_Markup Renderer</title>
@@ -49,5 +49,97 @@ echo $bbcode->render('my [foo]tag[/foo]');
             Parser diese auch in einer Tag Struktur unterstützt. Aktuell unterstützt dies nur
             BBCode. Textile hat keine Unterstützung für eigene Tags.
         </para>
+    </sect2>
+
+    <sect2 id="zend.markup.renderers.list">
+        <title>Liste der Tags</title>
+
+        <table id="zend.markup.renderers.list.tags">
+            <title>Liste der Tags</title>
+
+            <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                <thead>
+                    <row>
+                        <entry>Beispiel Eingabe (BBCode)</entry>
+
+                        <entry>Beispiel Ausgabe</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry>[b]foo[/b]</entry>
+
+                        <entry><![CDATA[<strong>foo</strong>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[i]foo[/i]</entry>
+
+                        <entry><![CDATA[<em>foo</em>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[cite]foo[/cite]</entry>
+
+                        <entry><![CDATA[<cite>foo</cite>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[del]foo[/del]</entry>
+
+                        <entry><![CDATA[<del>foo</del>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[ins]foo[/ins]</entry>
+
+                        <entry><![CDATA[<ins>foo</ins>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[sup]foo[/sup]</entry>
+
+                        <entry><![CDATA[<sup>foo</sup>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[sub]foo[/sub]</entry>
+
+                        <entry><![CDATA[<sub>foo</sub>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[span]foo[/span]</entry>
+
+                        <entry><![CDATA[<span>foo</span>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[acronym title="PHP Hypertext Preprocessor]PHP[/acronym]</entry>
+
+                        <entry><![CDATA[<acronym title="PHP Hypertext Preprocessor">PHP</acronym>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[url=http://framework.zend.com/]Zend Framework[/url]</entry>
+
+                        <entry><![CDATA[<a href="http://framework.zend.com/">Zend Framework</a>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[h1]foobar[/h1]</entry>
+
+                        <entry><![CDATA[<h1>foobar</h1>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[img]http://framework.zend.com/images/logo.gif[/img]</entry>
+
+                        <entry><![CDATA[<img src="http://framework.zend.com/images/logo.gif" />]]></entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
     </sect2>
 </sect1>

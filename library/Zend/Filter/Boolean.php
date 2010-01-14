@@ -258,7 +258,7 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
             }
         }
 
-        // STRING FALSE (Localized)
+        // STRING FALSE ('false')
         if ($type >= self::FALSE_STRING) {
             $type -= self::FALSE_STRING;
             if (is_string($value) && (strtolower($value) == 'false')) {
@@ -347,10 +347,10 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
 
     /**
      * Determine the value of a localized string, and compare it to a given value
-     * 
-     * @param  string $value 
-     * @param  boolean $yes 
-     * @param  array $locale 
+     *
+     * @param  string $value
+     * @param  boolean $yes
+     * @param  array $locale
      * @return boolean
      */
     protected function _getLocalizedQuestion($value, $yes, $locale)

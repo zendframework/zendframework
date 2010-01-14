@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20275 -->
+<!-- EN-Revision: 20289 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.markup.renderers">
     <title>Zend_Markup Renderer</title>
@@ -31,12 +31,11 @@ $bbcode = Zend_Markup::factory('Bbcode');
 // wie die Gruppe des Tags, und (in diesem Fall) ein Start und Ende Tag
 $bbcode->addTag(
     'foo',
-    Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE
-        | Zend_Markup_Renderer_RendererAbstract::TAG_NORMAL,
+    Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
     array(
         'start' => '-bar-',
         'end'   => '-baz-',
-        'group' => 'inline',
+        'group' => 'inline'
     )
 );
 
@@ -49,6 +48,70 @@ echo $bbcode->render('my [foo]tag[/foo]');
             Parser diese auch in einer Tag Struktur unterstützt. Aktuell unterstützt dies nur
             BBCode. Textile hat keine Unterstützung für eigene Tags.
         </para>
+
+        <para>
+            Einige Renderer (wie der HTML Renderer) enthalten auch Unterstützung für einen 'tag'
+            Parameter. Dieser ersetzt die 'start' und 'end' Parameter, und er stellt die Tags
+            inklusive einiger Standardattribute und dem schließenden Tag dar.
+        </para>
+
+        <sect3 id="zend.markup.renderers.add.callback">
+            <title>Ein Callback Tag hinzufügen</title>
+
+            <para>
+                Durch das Hinzufügen eines Callback Tags kann man viel mehr tun als nur das einfache
+                Ersetzen von Tags. Zum Beispiel kann man den Inhalt ändern, die Parameter verwenden
+                um die Ausgabe zu beeinflussen, usw.
+            </para>
+
+            <para>
+                Ein Callback ist eine Klasse welche das
+                <classname>Zend_Markup_Renderer_TokenInterface</classname> Interface implementiert.
+                Ein Beispiel einer einfachen Callback Klasse:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterInterface
+{
+
+    public function convert(Zend_Markup_Token $token, $text)
+    {
+        return '!up!' . strtoupper($text) . '!up!';
+    }
+
+}
+]]></programlisting>
+
+            <para>
+                Jetzt kann man das 'upper' Tag, mit einem Callback einer Instanz der Klasse
+                <classname>My_Markup_Renderer_Html_Upper</classname> hinzufügen. Ein einfaches
+                Beispiel:
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// Erstellt eine Instanz von Zend_Markup_Renderer_Html,
+// mit Zend_Markup_Parser_BbCode als seinen Parser
+$bbcode = Zend_Markup::factory('Bbcode');
+
+// Das erstellt ein einfaches 'foo' Tag
+// Der erste Parameter definiert den Namen des Tags
+// Der zweite Parameter nimmt ein Integer welches den Tagtyp definiert
+// Der dritte Parameter ist ein Array welches andere Dinge über ein Tag
+// definiert, wie die Gruppe des Tags und (in diesem Fall) ein Start und Ende
+// Tag
+$bbcode->addTag(
+    'upper',
+    Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
+    array(
+        'callback' => new My_Markup_Renderer_Html_Upper(),
+        'group'    => 'inline'
+    )
+);
+
+// Jetzt wird die folgende Ausgabe erstellt: 'my !up!TAG!up!'
+echo $bbcode->render('my [upper]tag[/upper]');
+]]></programlisting>
+        </sect3>
     </sect2>
 
     <sect2 id="zend.markup.renderers.list">

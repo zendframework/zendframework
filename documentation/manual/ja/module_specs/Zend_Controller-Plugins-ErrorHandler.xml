@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20249 -->
 <sect3 id="zend.controller.plugins.standard.errorhandler">
     <title>Zend_Controller_Plugin_ErrorHandler</title>
 
@@ -18,6 +18,10 @@
 
     <itemizedlist>
         <listitem>
+            <para>一致したルートが見つからない場合に発生する例外</para>
+        </listitem>
+
+        <listitem>
             <para>コントローラやアクションメソッドが見つからない場合に発生する例外</para>
         </listitem>
 
@@ -30,7 +34,7 @@
         言い換えると、<emphasis>ErrorHandler</emphasis> プラグインが想定しているのは、<acronym>HTTP</acronym>
         404 型のエラー (ページが存在しない) と 500 型のエラー (内部エラー)
         ということになります。
-        他のプラグインやルーティング時に発生したそれ以外の例外の処理は、想定していません。
+        他のプラグインで発生した例外の処理は、想定していません。
     </para>
 
     <para>
@@ -128,6 +132,13 @@ class ErrorController extends Zend_Controller_Action
         <itemizedlist>
             <listitem>
                 <para>
+                    <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE</constant>
+                    は、一致したルートが見つからなかったことを表します。
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
                     <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER</constant>
                     は、コントローラが見つからなかったことを表します。
                 </para>
@@ -149,7 +160,7 @@ class ErrorController extends Zend_Controller_Action
         </itemizedlist>
 
         <para>
-            最初のふたつの型であった場合に、404 ページを返せばいいわけです。
+            最初の３つの型であった場合に、404 ページを返せばいいわけです。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -160,6 +171,7 @@ class ErrorController extends Zend_Controller_Action
         $errors = $this->_getParam('error_handler');
 
         switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 エラー -- コントローラあるいはアクションが見つかりません
@@ -189,6 +201,7 @@ public function errorAction()
         $errors = $this->_getParam('error_handler');
 
         switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 エラー -- コントローラあるいはアクションが見つかりません
@@ -293,6 +306,7 @@ class ErrorController extends Zend_Controller_Action
         $errors = $this->_getParam('error_handler');
 
         switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
             case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
                 // 404 エラー -- コントローラあるいはアクションが見つかりません

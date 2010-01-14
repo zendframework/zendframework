@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20142 -->
+<!-- EN-Revision: 20249 -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
 
@@ -10,6 +10,48 @@
     </para>
 
     <!-- TODO : to be translated -->
+    <sect2 id="migration.110.zend.controller.front">
+        <title>Zend_Controller_Front</title>
+
+        <para>
+            A wrong behaviour was fixed, when there was no module route and no route
+            matched the given request. Previously, the router returned an unmodified
+            request object, so the front controller just displayed the default controller
+            and action. Since Zend Framework 1.10, the router will correctly as noted
+            in the router interface, throw an exception if no route matches. The error
+            plugin will then catch that exception and forward to the error controller.
+            You can then test for that specific error with the constant
+            <constant></constant>:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+/**
+ * Before 1.10
+ */
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+    // ...
+
+/**
+ * With 1.10
+ */
+    public function errorAction()
+    {
+        $errors = $this->_getParam('error_handler');
+
+        switch ($errors->type) {
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
+            case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ACTION:
+    // ...
+]]></programlisting>
+    </sect2>
+
     <sect2 id="migration.110.zend.feed.reader">
         <title>Zend_Feed_Reader</title>
 
@@ -73,7 +115,6 @@ $authors = $feed->getAuthors()->getValues();
     <sect2 id="migration.110.zend.file.transfer">
         <title>Zend_File_Transfer</title>
 
-        <!-- TODO : to be translated -->
         <sect3 id="migration.110.zend.file.transfer.files">
             <title>Security change</title>
 

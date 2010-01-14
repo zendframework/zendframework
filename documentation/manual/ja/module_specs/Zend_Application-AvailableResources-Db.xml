@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16845 -->
+<!-- EN-Revision: 20111 -->
 <sect2 id="zend.application.available-resources.db">
     <title>Zend_Application_Resource_Db</title>
 
@@ -9,6 +9,10 @@
         それに渡されるオプションに基づいて<classname>Zend_Db</classname>アダプタを初期化します。
         デフォルトで、<classname>Zend_Db_Table</classname>用のデフォルト・アダプタとして、
         アダプタを設定します。
+        <!-- TODO : to be translated -->
+        If you want to use mutliple databases simultaneously, you can use the <link
+        linkend="zend.application.available-resources.multidb">Multidb Resource
+        Plugin</link>.
     </para>
 
     <para>

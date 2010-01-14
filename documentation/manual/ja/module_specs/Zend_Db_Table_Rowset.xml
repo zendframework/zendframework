@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18822 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.db.table.rowset">
 
     <title>Zend_Db_Table_Rowset</title>
@@ -178,7 +178,7 @@ $row9->save();
                 <methodname>getRow()</methodname> の最初のパラメータは、位置を表す整数値です。
                 2 番目のパラメータはオプションで、boolean 値を指定します。
                 これは、Rowset イテレータも同時にその場所に移動させるのかどうかを表します
-                (デフォルトは false です)。このメソッドはデフォルトでは
+                (デフォルトは <constant>FALSE</constant> です)。このメソッドはデフォルトでは
                 <classname>Zend_Db_Table_Row</classname> オブジェクトを返します。
                 指定した位置が存在しない場合は例外をスローします。
                 例を示します。

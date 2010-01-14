@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19484 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.db.profiler" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>Zend_Db_Profiler</title>
@@ -178,7 +178,7 @@ $profiler = $db->getProfiler();
                     <methodname>getLastQueryProfile()</methodname> は、最後に
                     (直近に) 実行されたクエリの情報を (そのクエリが
                     完了したか否かにかかわらず) 返します
-                    (クエリが完了していない場合は、終了時刻が null となります)。
+                    (クエリが完了していない場合は、終了時刻が <constant>NULL</constant> となります)。
                 </para>
             </listitem>
             <listitem>
@@ -281,7 +281,7 @@ echo "一番時間のかかっているクエリ: \n" . $longestQuery . "\n";
             <para>
                 <methodname>setFilterElapsedSecs()</methodname> は、クエリの情報を取得する条件として
                 実行所要時間の最小値を指定します。このフィルタを削除するには、
-                メソッドに null 値を渡します。
+                メソッドに <constant>NULL</constant> 値を渡します。
             </para>
 
             <programlisting language="php"><![CDATA[

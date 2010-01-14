@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19139 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.db.table">
 
     <title>Zend_Db_Table</title>
@@ -1203,7 +1203,7 @@ $rows = $table->fetchAll($select);
                 制約を強要して正しい形式の SELECT クエリを作成することです。
                 しかし時には、<classname>Zend_Db_Table_Row</classname> の柔軟性が必要であって
                 行を更新したり削除したりすることはないということもあります。
-                そんな場合には、setIntegrityCheck に false
+                そんな場合には、setIntegrityCheck に <constant>FALSE</constant>
                 を渡して行/行セットを取得できます。
                 この場合に返される行/行セットは 'ロックされた' 行
                 (save()、delete() やフィールドの設定用メソッドを実行すると例外が発生する)

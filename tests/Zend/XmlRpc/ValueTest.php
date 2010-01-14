@@ -135,7 +135,8 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
     public function testMarshalI4FromOverlongNativeThrowsException()
     {
         $this->setExpectedException('Zend_XmlRpc_Value_Exception', 'Overlong integer given');
-        Zend_XmlRpc_Value::getXmlRpcValue(PHP_INT_MAX + 1, Zend_XmlRpc_Value::XMLRPC_TYPE_I4);
+        $x = Zend_XmlRpc_Value::getXmlRpcValue(PHP_INT_MAX + 5000, Zend_XmlRpc_Value::XMLRPC_TYPE_I4);
+        var_dump($x);
     }
 
     /**
@@ -144,7 +145,7 @@ class Zend_XmlRpc_ValueTest extends PHPUnit_Framework_TestCase
     public function testMarshalIntegerFromOverlongNativeThrowsException()
     {
         $this->setExpectedException('Zend_XmlRpc_Value_Exception', 'Overlong integer given');
-        Zend_XmlRpc_Value::getXmlRpcValue(PHP_INT_MAX + 1, Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER);
+        Zend_XmlRpc_Value::getXmlRpcValue(PHP_INT_MAX + 5000, Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER);
     }
 
     // BigInteger

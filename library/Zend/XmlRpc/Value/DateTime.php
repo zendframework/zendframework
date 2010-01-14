@@ -71,6 +71,7 @@ class Zend_XmlRpc_Value_DateTime extends Zend_XmlRpc_Value_Scalar
         } else {
             $timestamp = strtotime($value);
             if ($timestamp === false || $timestamp == -1) { // cannot convert the value to a timestamp
+                require_once 'Zend/XmlRpc/Value/Exception.php';
                 throw new Zend_XmlRpc_Value_Exception('Cannot convert given value \''. $value .'\' to a timestamp');
             }
 

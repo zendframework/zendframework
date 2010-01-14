@@ -209,6 +209,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
             'type'    => 9, // self::TYPE_REPLACE | self::TAG_SINGLE
             'tag'     => 'hr',
             'group'   => 'block',
+            'empty'   => true,
         ),
         // aliases
         'bold' => array(
@@ -277,8 +278,8 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
         ),
         'color' => array(
             'type' => 16,
-            'name' => 'span'
-        )
+            'name' => 'span',
+        ),
     );
 
     /**

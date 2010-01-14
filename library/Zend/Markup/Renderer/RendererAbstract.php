@@ -44,9 +44,6 @@ require_once 'Zend/Markup/Renderer/TokenConverterInterface.php';
  */
 abstract class Zend_Markup_Renderer_RendererAbstract
 {
-    const TAG_SINGLE    = 1;
-    const TAG_NORMAL    = 2;
-
     const TYPE_CALLBACK = 4;
     const TYPE_REPLACE  = 8;
     const TYPE_ALIAS    = 16;
@@ -228,7 +225,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
                 'name' => $options['name']
             );
         } else {
-            if ($type & self::TAG_SINGLE) {
+            if ($type && array_key_exists('empty', $options) && $options['empty']) {
                 // add a single replace tag
                 $options['type']   = $type;
                 $options['filter'] = $filter;
@@ -372,55 +369,56 @@ abstract class Zend_Markup_Renderer_RendererAbstract
             return $return;
         }
 
-        $name = $this->_getTagName($token);
-        $tag  = $this->_markups[$name];
+        $name   = $this->_getMarkupName($token);
+        $markup = (!$name) ? false : $this->_markups[$name];
+        $empty  = (is_array($markup) && array_key_exists('empty', $markup) && $markup['empty']);
 
         // check if the tag has content
-        if (($tag['type'] & self::TAG_NORMAL) && !$token->hasChildren()) {
+        if (!$empty && !$token->hasChildren()) {
             return '';
         }
 
         // check for the context
-        if (!in_array($tag['group'], $this->_groups[$this->_group])) {
+        if (is_array($markup) && !in_array($markup['group'], $this->_groups[$this->_group])) {
             $oldToken  = $this->_token;
-            $return = $this->_filter($token->getTag()) . $this->_render($token) . $token->getStopper();
+            $return    = $this->_filter($token->getTag()) . $this->_render($token) . $token->getStopper();
             $this->_token = $oldToken;
             return $return;
         }
 
         // check for the filter
-        if (!isset($tag['filter'])
-        || (!($tag['filter'] instanceof Zend_Filter_Interface) && ($tag['filter'] !== false))) {
+        if (!isset($markup['filter'])
+            || (!($markup['filter'] instanceof Zend_Filter_Interface) && ($markup['filter'] !== false))) {
             $this->_markups[$name]['filter'] = $this->getDefaultFilter();
         }
 
         // callback
-        if ($tag['type'] & self::TYPE_CALLBACK) {
+        if (is_array($markup) && ($markup['type'] & self::TYPE_CALLBACK)) {
             // load the callback if the tag doesn't exist
-            if (!($tag['callback'] instanceof Zend_Markup_Renderer_TokenConverterInterface)) {
+            if (!($markup['callback'] instanceof Zend_Markup_Renderer_TokenConverterInterface)) {
                 $class = $this->getPluginLoader()->load($name);
 
-                $tag['callback'] = new $class;
+                $markup['callback'] = new $class;
 
-                if (!($tag['callback'] instanceof Zend_Markup_Renderer_TokenConverterInterface)) {
+                if (!($markup['callback'] instanceof Zend_Markup_Renderer_TokenConverterInterface)) {
                     require_once 'Zend/Markup/Renderer/Exception.php';
                     throw new Zend_Markup_Renderer_Exception("Callback for tag '$name' found, but it isn't valid.");
                 }
 
-                if (method_exists($tag['callback'], 'setRenderer')) {
-                    $tag['callback']->setRenderer($this);
+                if (method_exists($markup['callback'], 'setRenderer')) {
+                    $markup['callback']->setRenderer($this);
                 }
             }
-            if ($tag['type'] & self::TAG_NORMAL) {
-                return $tag['callback']->convert($token, $this->_render($token));
+            if ($markup['type'] && !$empty) {
+                return $markup['callback']->convert($token, $this->_render($token));
             }
-            return $tag['callback']->convert($token, null);
+            return $markup['callback']->convert($token, null);
         }
         // replace
-        if ($tag['type'] & self::TAG_NORMAL) {
-            return $this->_executeReplace($token, $tag);
+        if ($markup['type'] && !$empty) {
+            return $this->_executeReplace($token, $markup);
         }
-        return $this->_executeSingleReplace($token, $tag);
+        return $this->_executeSingleReplace($token, $markup);
     }
 
     /**
@@ -445,16 +443,38 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      *
      * @return string
      */
-    protected function _getTagName(Zend_Markup_Token $token)
+    protected function _getMarkupName(Zend_Markup_Token $token)
     {
         $name = $token->getName();
+        if (empty($name)) {
+            return false;
+        }
 
         // process the aliases
-        while ($this->_markups[$name]['type'] & self::TYPE_ALIAS) {
+        while (($type = $this->_getMarkupType($name)) 
+               && ($type & self::TYPE_ALIAS)
+        ) {
             $name = $this->_markups[$name]['name'];
         }
 
         return $name;
+    }
+
+    /**
+     * Retrieve markup type
+     * 
+     * @param  string $name 
+     * @return false|int
+     */
+    protected function _getMarkupType($name)
+    {
+        if (!isset($this->_markups[$name])) {
+            return false;
+        }
+        if (!isset($this->_markups[$name]['type'])) {
+            return false;
+        }
+        return $this->_markups[$name]['type'];
     }
 
     /**

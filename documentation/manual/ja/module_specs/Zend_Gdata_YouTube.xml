@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.gdata.youtube">
     <title>YouTube Data API の使用法</title>
 
@@ -9,7 +9,7 @@
         認証済みでないリクエストを Google Data フィードに実行し、
         人気のある動画やコメント、YouTube 登録ユーザの公開情報
         (たとえばプレイリストや購読内容、コンタクトなど)
-        を取得することができます。
+        を取得できます。
     </para>
 
     <para>
@@ -59,7 +59,7 @@ $yt = new Zend_Gdata_YouTube($httpClient,
         <para>
             YouTube data <acronym>API</acronym> はさまざまなフィードを提供しており、
             たとえば標準の動画一覧や関連する動画一覧、動画への返信一覧、
-            アップロードした動画の一覧、お気に入りの動画一覧などを取得することができます。
+            アップロードした動画の一覧、お気に入りの動画一覧などを取得できます。
             たとえばアップロードした動画一覧のフィードは、
             指定したユーザがアップロードしたすべての動画を返します。
             どのようなフィードが取得できるのかについては
@@ -72,7 +72,7 @@ $yt = new Zend_Gdata_YouTube($httpClient,
 
             <para>
                 指定した条件にマッチする動画の一覧を、YouTubeQuery
-                クラスを用いて取得することができます。
+                クラスを用いて取得できます。
                 たとえば次のクエリは、メタデータに "cat" という単語を含む動画を探し、
                 その結果の 10 番目から 1 ページあたり 20 件ずつ表示します。
                 また、閲覧回数順に表示します。
@@ -286,7 +286,7 @@ $commentFeed = $yt->getVideoCommentFeed(null,
 
         <para>
             YouTube data <acronym>API</acronym> を使用すると、
-            プロファイルやプレイリスト、購読内容といったユーザ情報を取得することができます。
+            プロファイルやプレイリスト、購読内容といったユーザ情報を取得できます。
         </para>
 
         <sect3 id="zend.gdata.youtube.playlists.user">
@@ -334,7 +334,7 @@ $playlistVideoFeed = $yt->getPlaylistVideoFeed($feedUrl);
         <title>指定したユーザの購読内容の一覧の取得</title>
 
         <para>
-            ユーザは、チャンネルやタグ、お気に入りなどの内容を購読することができます。
+            ユーザは、チャンネルやタグ、お気に入りなどの内容を購読できます。
             <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_SubscriptionEntry.html">Zend_Gdata_YouTube_SubscriptionEntry</ulink>
             を使用して、それらの購読内容を表します。
         </para>
@@ -360,7 +360,7 @@ foreach ($subscriptionFeed as $subscriptionEntry) {
         <title>ユーザのプロファイルの取得</title>
 
         <para>
-            任意の YouTube ユーザの公開プロファイル情報を取得することができます。
+            任意の YouTube ユーザの公開プロファイル情報を取得できます。
             ユーザ 'liz' のプロファイルを取得するには、次のようにします。
         </para>
                   <example id="zend.gdata.youtube.profile.example">
@@ -431,7 +431,7 @@ echo "出身地: " . $userProfile->hometown->text . "\n";
               </row>
               <row>
                 <entry>Video private?</entry>
-                <entry>false</entry>
+                <entry><constant>FALSE</constant></entry>
               </row>
               <row>
                 <entry>Video location</entry>
@@ -453,7 +453,7 @@ echo "出身地: " . $userProfile->hometown->text . "\n";
         <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_Extension_MediaGroup.html">Zend_Gdata_YouTube_Extension_MediaGroup</ulink>
         オブジェクトを使用して動画のすべてのメタデータを保持します。
         以下で説明するヘルパーメソッドを使用すると、
-        メディアグループオブジェクトのことを気にせず動画のメタデータを設定することができます。
+        メディアグループオブジェクトのことを気にせず動画のメタデータを設定できます。
         $uploadUrl は、新しいエントリを投稿する場所です。
         これは、認証済みユーザの名前 $userName で指定することもできますし、
         シンプルに 'default' と指定して現在の認証済みユーザを自動的に利用することもできます。

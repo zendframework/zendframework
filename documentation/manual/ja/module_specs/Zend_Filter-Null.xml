@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18216 -->
+<!-- EN-Revision: 20115 -->
 <sect2 id="zend.filter.set.null">
     <title>Null</title>
 
@@ -17,7 +17,7 @@
         <para>
             デフォルトではこのフィルタは<acronym>PHP</acronym>の
             <methodname>empty()</methodname>メソッドのように動作します。
-            言い換えると、もし<methodname>empty()</methodname>がブールの true を返す場合、
+            言い換えると、もし<methodname>empty()</methodname>がブールの <constant>TRUE</constant> を返す場合、
             <constant>NULL</constant>値が返されます。
         </para>
 

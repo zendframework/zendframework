@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.form.standardDecorators">
     <title>Zend Framework に同梱されている標準のデコレータ</title>
 
@@ -17,7 +17,7 @@
         <para>
             Callback デコレータは、コンテンツをレンダリングする際に任意のコールバックを実行します。
             コールバックは、デコレータのオプション 'callback' で指定します。
-            <acronym>PHP</acronym> のコールバック型の値を指定することができます。
+            <acronym>PHP</acronym> のコールバック型の値を指定できます。
             指定するコールバックは、3 つの引数
             <code>$content</code> (デコレータに渡されたコンテンツ)、
             <code>$element</code> (処理する項目)、
@@ -45,8 +45,8 @@ class Util
         </para>
 
         <para>
-            Callback デコレータの placement オプションに null 値を指定すると、
-            元のコンテンツをコールバックの返り値で上書きします。
+            Callback デコレータにより <constant>NULL</constant> 値を placement オプションに指定できます。
+            それは、元のコンテンツをコールバックの返り値で上書きします。
             'prepend' や 'append' を指定した場合も正しく動作します。
         </para>
     </sect2>
@@ -170,7 +170,7 @@ class Util
             File 要素には特殊な記法があり、
             複数の file 要素やサブフォームを利用する際にそれを使用します。
             File デコレータは <classname>Zend_Form_Element_File</classname>
-            が使用するもので、複数の file 要素を一度のメソッドコールで設定することができます。
+            が使用するもので、複数の file 要素を一度のメソッドコールで設定できます。
             自動的に使用され、要素名を自動的に修正します。
         </para>
     </sect2>
@@ -230,13 +230,13 @@ class Util
 ]]></programlisting>
 
         <para>
-            さまざまなオプションを渡すことで、生成される出力を変更することができます。
+            さまざまなオプションを渡すことで、生成される出力を変更できます。
         </para>
 
         <itemizedlist>
             <listitem><para>
                 <code>ignoreSubForms</code>: サブフォームの再帰を無効にするかどうか。
-                デフォルト値: false (再帰を許可する)
+                デフォルト値: <constant>FALSE</constant> (再帰を許可する)
             </para></listitem>
 
             <listitem><para>
@@ -271,7 +271,7 @@ class Util
         </itemizedlist>
 
         <para>
-            FormErrors デコレータは、コンテンツの前と後の両方に追加することができます。
+            FormErrors デコレータは、コンテンツの前と後の両方に追加できます。
         </para>
     </sect2>
 
@@ -299,7 +299,7 @@ class Util
 
         <para>
             デフォルトでは、このデコレータは要素の src プロパティを使用します。
-            これは、<methodname>setImage()</methodname> で画像ソースとして指定することができます。
+            これは、<methodname>setImage()</methodname> で画像ソースとして指定できます。
             さらに、要素のラベルは alt タグとして使用します。また
             <code>imageValue</code> (Image 要素のアクセサ
             <methodname>setImageValue()</methodname> および
@@ -376,7 +376,7 @@ class Util
         <para>
             デフォルトでは、Label デコレータは元のコンテンツの先頭に結果を追加します。
             'placement' オプションを 'append' にすると、
-            コンテンツの末尾に追加することができます。
+            コンテンツの末尾に追加できます。
         </para>
     </sect2>
 
@@ -408,7 +408,7 @@ $form->setDecorators(array(
         <para>
             大半の要素のレンダリングには <classname>Zend_View</classname>
             ヘルパーを使用します。これを行うのが ViewHelper デコレータです。
-            このデコレータでは、'helper' タグで明示的にビューヘルパーを指定することができます。
+            このデコレータでは、'helper' タグで明示的にビューヘルパーを指定できます。
             指定しなかった場合は、要素のクラス名の最後の部分をもとに使用するヘルパーを決定します。
             この最後の部分の先頭に 'form' をつけたものを使います。
             たとえば 'Zend_Form_Element_Text' の場合は 'formText'
@@ -433,7 +433,7 @@ $form->setDecorators(array(
             これにより、作成する要素をよりきめ細やかに設定できるようになります。
             またビュースクリプトでデザインを行ったり
             使用するモジュールにあわせて設定を簡単にオーバーライドしたりできるようになります
-            (各モジュールで、要素のビュースクリプトを必要に応じてオーバーライドすることができます)。
+            (各モジュールで、要素のビュースクリプトを必要に応じてオーバーライドできます)。
             ViewScript デコレータが、この問題を解決します。
         </para>
 
@@ -510,7 +510,7 @@ $element->setDecorators(array(array('ViewScript',
                 デコレータに渡されたコンテンツをビュースクリプトで置換したいこともあるでしょう。
                 たとえばコンテンツをラップしたい場合などです。
                 その場合は、デコレータのオプション 'placement'
-                に false を設定します。
+                に <constant>FALSE</constant> を設定します。
             </para>
 
             <programlisting language="php"><![CDATA[

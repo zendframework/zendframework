@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.service.amazon.ec2.keypairs">
     <title>Zend_Service_Amazon_Ec2: Keypairs</title>
     <para>
@@ -31,7 +31,8 @@ $return = $ec2_kp->create('my-new-key');
             keypairで現在実行中のインスタンスは、今まで通りそれらに接続可能です。
         </para>
         <para>
-            <code>delete</code>はブール値のtrueまたはfalseを返します。
+            <code>delete</code>はブール値の <constant>TRUE</constant>
+            または <constant>FALSE</constant> を返します。
         </para>
         <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19419 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.filter.introduction">
 
     <title>導入</title>
@@ -181,8 +181,8 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
                 <listitem>
                     <para>
                         <emphasis><methodname>Zend_Filter::hasDefaultNamespaces()</methodname></emphasis>:
-                        デフォルトの名前空間が設定されている場合は true、
-                        設定されていない場合は false を返します。
+                        デフォルトの名前空間が設定されている場合は <constant>TRUE</constant> 、
+                        設定されていない場合は <constant>FALSE</constant> を返します。
                     </para>
                 </listitem>
             </itemizedlist>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19150 -->
+<!-- EN-Revision: 20115 -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
     <para>
@@ -108,7 +108,7 @@ $filter->setAdapter('openssl');
                 <para>
                     <emphasis>salt</emphasis>: キーを salt 値として使用するかどうか。
                     使用すると、暗号化に使用するキー自体も暗号化されます。
-                    デフォルトは false です。
+                    デフォルトは <constant>FALSE</constant> です。
                 </para>
             </listitem>
         </itemizedlist>

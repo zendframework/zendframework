@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19873 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.form.quickstart">
     <title>Zend_Form クイックスタート</title>
 
@@ -172,8 +172,8 @@ $username->addValidator('regex', false, array('/^[a-z]/i'));
 
         <para>
             (2 番目のパラメータの意味は、
-            このバリデータの検証に失敗した場合にそれ以降のバリデータを実行するか否かを表します。
-            デフォルトではこの設定は false です)
+            このバリデータの検証に失敗した場合にそれ以降のバリデータの実行を防止するか否かを表します。
+            デフォルトではこの設定は <constant>FALSE</constant> です)
         </para>
 
         <para>
@@ -374,7 +374,7 @@ $form->addElement('text', 'username', array('order' => 10));
             各要素に入力されたデータについてチェックを行います。
             要素名にマッチするキーが存在しない場合、
             もしその項目が必須指定されているのなら
-            null 値が指定されたものとしてバリデーションを行います。
+            <constant>NULL</constant> 値が指定されたものとしてバリデーションを行います。
         </para>
 
         <para>

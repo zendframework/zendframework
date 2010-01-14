@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.gdata.spreadsheets">
     <title>Google Spreadsheets の使用法</title>
 
@@ -170,7 +170,7 @@ echo $customEntry->getColumnName() . " = " . $customEntry->getText();
                 デフォルトでは、フィード内の行の並び順は GUI
                 で見たときの行の並び順と同じです。つまり行番号順ということです。
                 行を逆順で取得するには、<classname>Zend_Gdata_Spreadsheets_ListQuery</classname>
-                オブジェクトの reverse プロパティを true に設定します。
+                オブジェクトの reverse プロパティを <constant>TRUE</constant> に設定します。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -247,7 +247,7 @@ $insertedListEntry = $spreadsheetService->insertRow($rowData,
             <para>
                 <classname>Zend_Gdata_Spreadsheets_ListEntry</classname>
                 オブジェクトを取得したら、Spreadsheet サービスの
-                <code>updateRow</code> メソッドを使用してその中身を更新することができます。
+                <code>updateRow</code> メソッドを使用してその中身を更新できます。
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -341,7 +341,7 @@ foreach($cellFeed as $cellEntry) {
 
             <para>
                 ワークシートの最初のカラムのセルを取得したいとしましょう。
-                次のようにすると、最初のカラムだけを含むセルフィードを取得することができます。
+                次のようにすると、最初のカラムだけを含むセルフィードを取得できます。
             </para>
 
             <programlisting language="php"><![CDATA[

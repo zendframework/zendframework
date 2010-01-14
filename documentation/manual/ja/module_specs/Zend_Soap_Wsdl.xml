@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18176 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.soap.wsdl">
     <title>WSDLアクセッサ</title>
 
@@ -312,8 +312,8 @@
                                 どんな複雑な型ストラテジーでも、クラスの名前を持つ文字列でもとります。
                                 <code>$extractComplexType</code>との後方互換性のために、
                                 ブール変数は、以下の方法で解析されます:
-                                もしtrueなら、<classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>、
-                                もしfalseなら、<classname>Zend_Soap_Wsdl_Strategy_AnyType</classname>。
+                                もし <constant>TRUE</constant> なら、<classname>Zend_Soap_Wsdl_Strategy_DefaultComplexType</classname>、
+                                もし <constant>FALSE</constant> なら、<classname>Zend_Soap_Wsdl_Strategy_AnyType</classname>。
                             </para>
                         </footnote>
                     </para>
@@ -405,7 +405,7 @@ $soapMyClassType = $wsdl->getType('MyClass');
                     <para>クラス<classname>Zend_Soap_Wsdl_Strategy_Composite</classname>:
                     このストラテジーは、<methodname>connectTypeToStrategy($type, $strategy)</methodname>メソッドを通じて
                     希望するストラテジーに<acronym>PHP</acronym>の複雑な型（クラス名）を接続することによって、
-                    すべてのストラテジーを結合することができます。
+                    すべてのストラテジーを結合できます。
                     完全なタイプマップを、<code>$type</code> -> <code>$strategy</code> のペアを持つ配列として
                     コンストラクタに与えられます。
                     もし未知の型の追加が必要であれば、第２パラメータで使われるデフォルト・ストラテジーを指定します。

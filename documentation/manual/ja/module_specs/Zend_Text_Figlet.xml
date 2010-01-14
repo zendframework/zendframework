@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
     <para>
@@ -11,7 +11,7 @@
         デフォルトで <classname>Zend_Text_Figlet</classname>
         に同梱されているフォントは標準フォント 1 つだけですが、
         <ulink url="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</ulink>
-        からその他のフォントをダウンロードすることができます。
+        からその他のフォントをダウンロードできます。
     </para>
     <note>
         <title>圧縮されたフォント</title>
@@ -34,7 +34,7 @@
         </para>
     </note>
     <para>
-        FIGlet 用のさまざまなオプションを指定することができます。
+        FIGlet 用のさまざまなオプションを指定できます。
         <classname>Zend_Text_Figlet</classname> のインスタンスを作成する際に、
         配列あるいは <classname>Zend_Config</classname> のインスタンスで指定します。
 
@@ -57,7 +57,7 @@
             <listitem>
                 <para>
                     <code>handleParagraphs</code> - 改行の処理方法を示す boolean 値。
-                    true を指定すると、単一の改行文字を無視してひとつの空白文字として扱います。
+                    <constant>TRUE</constant> を指定すると、単一の改行文字を無視してひとつの空白文字として扱います。
                     ほんとうに改行させたい場合は、改行文字を 2 つ続けます。
                     デフォルトは <constant>FALSE</constant> です。
                 </para>
@@ -87,7 +87,7 @@
                 <para>
                     <code>smushMode</code> - 整数値。
                     各文字の並べ方を定義します。
-                    <classname>Zend_Text_Figlet::SM_*</classname> の複数の値の和を指定することができます。
+                    <classname>Zend_Text_Figlet::SM_*</classname> の複数の値の和を指定できます。
                     SM_EQUAL, SM_LOWLINE,
                     SM_HIERARCHY, SM_PAIR, SM_BIGX, SM_HARDBLANK, SM_KERN そして
                     SM_SMUSH といったモードがあります。値 0 は、

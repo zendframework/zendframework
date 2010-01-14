@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19419 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - 接続アダプタ</title>
 
@@ -80,7 +80,7 @@
                             <entry>persistent</entry>
                             <entry>持続的な <acronym>TCP</acronym> 接続を使用するかどうか</entry>
                             <entry>boolean</entry>
-                            <entry>false</entry>
+                            <entry><constant>FALSE</constant></entry>
                         </row>
                         <row>
                             <entry>ssltransport</entry>
@@ -92,13 +92,13 @@
                             <entry>sslcert</entry>
                             <entry><acronym>PEM</acronym> でエンコードした、<acronym>SSL</acronym> 証明書ファイルへのパス</entry>
                             <entry>文字列</entry>
-                            <entry>null</entry>
+                            <entry><constant>NULL</constant></entry>
                         </row>
                         <row>
                             <entry>sslpassphrase</entry>
                             <entry><acronym>SSL</acronym> 証明書ファイルのパスフレーズ</entry>
                             <entry>文字列</entry>
-                            <entry>null</entry>
+                            <entry><constant>NULL</constant></entry>
                         </row>
                     </tbody>
                 </tgroup>

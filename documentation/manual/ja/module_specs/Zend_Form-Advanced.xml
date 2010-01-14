@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17987 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.form.advanced">
     <title>Zend_Form の高度な使用法</title>
 
@@ -143,7 +143,7 @@
 
         <para>
             上の例では、住所をそれぞれ個別に受け取ることができます。
-            このフォームを送信すると、受け取り側では 3 つの要素を取得することができます。
+            このフォームを送信すると、受け取り側では 3 つの要素を取得できます。
             'save' が送信ボタン、そしてふたつの配列 'shipping' と 'billing'
             の中にはさまざまなキーとそれに対応する要素が含まれています。
         </para>
@@ -174,7 +174,7 @@
             <listitem>
                 <para>
                     <methodname>Zend_Form::setIsArray($flag)</methodname>:
-                    このフラグを true にすると、フォーム全体を配列として扱うことができます。
+                    このフラグを <constant>TRUE</constant> にすると、フォーム全体を配列として扱うことができます。
                     デフォルトでは、<methodname>setElementsBelongTo()</methodname>
                     がコールされていない限りはフォーム名を配列の名前とします。
                     フォームに名前が設定されていない場合や
@@ -191,7 +191,7 @@
             <listitem><para>
                     <methodname>Zend_Form::setElementsBelongTo($array)</methodname>:
                     このメソッドを使用すると、フォームの全要素が属する
-                    配列の名前を指定することができます。現在設定されている値を調べるには
+                    配列の名前を指定できます。現在設定されている値を調べるには
                     <methodname>getElementsBelongTo()</methodname> アクセサを使用します。
             </para></listitem>
         </itemizedlist>
@@ -212,7 +212,7 @@
             現在、複数ページのフォームは
             <classname>Zend_Form</classname> では公式にはサポートしていません。
             しかし、それを実装するための機能の大半はサポートしており、
-            ほんの少し手を加えるだけでこの機能を実現することができます。
+            ほんの少し手を加えるだけでこの機能を実現できます。
         </para>
 
         <para>
@@ -565,18 +565,18 @@ class RegistrationController extends Zend_Controller_Action
                     $this-&gt;getCurrentSubForm();</command>"
                 で現在のサブフォームを取得してそれを検証したり
                 "<command>$next = $this-&gt;getNextSubForm();</command>"
-                で次に表示するフォームを取得したりすることができます。
+                で次に表示するフォームを取得したりできます。
             </para>
 
             <para>
                 では、実際にサブフォームを処理したり表示したりする方法を考えてみましょう。
                 <methodname>getCurrentSubForm()</methodname> を使用すれば、
                 今送信されてきたデータがどのサブフォームのものなのかがわかります
-                (false が返された場合は、まだ何も表示あるいは送信されていないことを表します)。
+                (<constant>FALSE</constant> が返された場合は、まだ何も表示あるいは送信されていないことを表します)。
                 また、<methodname>getNextSubForm()</methodname>
-                を使用すれば次に表示すべきフォームを取得することができます。
+                を使用すれば次に表示すべきフォームを取得できます。
                 そして、フォームの <methodname>prepareSubForm()</methodname>
-                メソッドを使用すれば、フォームを表示するための準備をすることができます。
+                メソッドを使用すれば、フォームを表示するための準備を行えます。
             </para>
 
             <para>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.gdata.calendar">
     <title>Google Calendar の使用法</title>
     <para>
@@ -33,7 +33,7 @@
             <title>認証</title>
             <para>
                 Google Calendar <acronym>API</acronym> を使用すると、公開カレンダーだけでなく
-                プライベートカレンダーのフィードにもアクセスすることができます。
+                プライベートカレンダーのフィードにもアクセスできます。
                 公開フィードには認証は不要ですが、
                 認証しない場合は読み込み専用となり、機能が制限されます。
                 プライベートフィードでは完全な機能が使用できますが、
@@ -195,7 +195,7 @@ function getAuthSubHttpClient()
     }
 
     // この時点で AuthSub による認証がすんでいるので、
-    // 認証済みの HTTP クライアントのインスタンスを作成することができます
+    // 認証済みの HTTP クライアントのインスタンスを作成できます
 
     // 認証済みの HTTP クライアントを作成します
     $client = Zend_Gdata_AuthSub::getHttpClient($_SESSION['sessionToken']);
@@ -212,7 +212,7 @@ session_start();
 // 必要に応じてユーザを AuthSub サーバにリダイレクトします
 $service = new Zend_Gdata_Calendar(getAuthSubHttpClient());
 ]]></programlisting>
-            <para>未認証のサーバを作成して、公開フィードへのアクセスや MagicCookie 認証で使用することができます。</para>
+            <para>未認証のサーバを作成して、公開フィードへのアクセスや MagicCookie 認証で使用できます。</para>
             <programlisting language="php"><![CDATA[
 // Calendar サービスのインスタンスを、
 // 未認証の HTTP クライアントで作成します
@@ -258,7 +258,7 @@ try {
             の新しいインスタンスを作成します。この中には、使用できるカレンダーの一覧が
             <classname>Zend_Gdata_Calendar_ListEntry</classname>
             のインスタンスとして格納されています。
-            フィードを取得したら、それを使用して中身を取得することができます。
+            フィードを取得したら、それを使用して中身を取得できます。
         </para>
         <programlisting language="php"><![CDATA[
 echo "<h1>カレンダーリストのフィード</h1>";
@@ -275,13 +275,13 @@ echo "</ul>";
         <para>
             カレンダーリストと同様、イベントも
             <classname>Zend_Gdata_Calendar</classname>
-            クラスで取得することができます。
+            クラスで取得できます。
             返されるイベントリストの型は
             <classname>Zend_Gdata_Calendar_EventFeed</classname>
             で、各イベントは
             <classname>Zend_Gdata_Calendar_EventEntry</classname>
             のインスタンスとして格納されています。
-            先ほどの例と同様の方法で、個々のイベントの情報を取得することができます。
+            先ほどの例と同様の方法で、個々のイベントの情報を取得できます。
         </para>
         <sect3 id="zend.gdata.event_retrieval.queries">
             <title>クエリ</title>
@@ -671,7 +671,7 @@ $when->reminders = array($reminder);
             <para>
                 繰り返しパターンの例外は、別途
                 <code>recurrenceException</code> 属性で指定します。
-                しかし、iCalendar の標準規格では第二の繰り返しパターンを定義することができます。
+                しかし、iCalendar の標準規格では第二の繰り返しパターンを定義できます。
                 どちらかを使用するといいでしょう。
             </para>
             <para>
@@ -714,8 +714,8 @@ $newEvent = $service->insertEvent($event);
                 たとえば、"Dinner at Joe's Diner on Thursday" という文字列を指定すると、
                 タイトルが "Dinner"、場所が "Joe's Diner"、日付が "Thursday"
                 のイベントが作成されます。QuickAdd 機能を使用するには、
-                <code>QuickAdd</code> プロパティを "true" に設定し、
-                テキストを <code>content</code> プロパティに指定します。
+                <code>QuickAdd</code> プロパティを <constant>TRUE</constant> に設定し、
+                任意のテキストを <code>content</code> プロパティに指定します。
             </para>
             <programlisting language="php"><![CDATA[
 // カレンダーサービスのマジックメソッドで、新規エントリを作成します

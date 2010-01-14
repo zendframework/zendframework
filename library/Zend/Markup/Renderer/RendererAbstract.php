@@ -124,11 +124,20 @@ abstract class Zend_Markup_Renderer_RendererAbstract
         if (isset($options['parser'])) {
             $this->setParser($options['parser']);
         }
-        if (isset($options['useDefaultTags']) && ($options['useDefaultTags'] == false)) {
+        if (isset($options['prependFilter'])) {
+            $this->addFilter($options['prependFilter']);
+        }
+        if (isset($options['useDefaultTags']) && ($options['useDefaultTags'] === false)) {
             $this->removeDefaultTags();
         }
+        if (!isset($options['useDefaultFilters']) || ($options['useDefaultFilters'] === true)) {
+            $this->addDefaultFilters();
+        }
         if (isset($options['filter'])) {
-            $this->getFilterChain()->addFilter($options['filter']);
+            $this->addFilter($options['filter']);
+        }
+        if (isset($options['appendFilter'])) {
+            $this->addFilter($options['appendFilter']);
         }
     }
 
@@ -182,12 +191,13 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      * Add a filter
      *
      * @param Zend_Filter_Interface $filter
+     * @param string $filter
      *
      * @return void
      */
-    public function addFilter(Zend_Filter_Interface $filter)
+    public function addFilter(Zend_Filter_Interface $filter, $placement = Zend_Filter::CHAIN_APPEND)
     {
-        $this->getFilterChain()->addFilter($filter);
+        $this->getFilterChain()->addFilter($filter, $placement);
     }
 
     /**
@@ -488,5 +498,12 @@ abstract class Zend_Markup_Renderer_RendererAbstract
     {
         return $tag['replace'];
     }
+
+    /**
+     * Initialize the default filters
+     *
+     * @return void
+     */
+    abstract public function addDefaultFilters();
 
 }

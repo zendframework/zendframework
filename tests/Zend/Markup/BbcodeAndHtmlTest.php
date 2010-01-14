@@ -27,6 +27,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 }
 
 require_once 'Zend/Markup.php';
+require_once 'Zend/Filter/StringToUpper.php';
 
 /**
  * @category   Zend
@@ -383,6 +384,15 @@ BBCODE;
         $this->_markup->clearTags();
 
         $this->assertEquals('[i]foo[/i]', $this->_markup->render('[i]foo[/i]'));
+    }
+
+    public function testAddFilters()
+    {
+        $m = $this->_markup;
+
+        $m->addFilter(new Zend_Filter_StringToUpper());
+
+        $this->assertEquals('<strong>HELLO</strong>', $m->render('[b]hello[/b]'));
     }
 
 }

@@ -334,10 +334,6 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
         ));
 
         parent::__construct($options);
-
-        if (!isset($options['addDefaultFilters']) || ($options['addDefaultFilters'] == false)) {
-            $this->addDefaultFilters();
-        }
     }
 
     /**

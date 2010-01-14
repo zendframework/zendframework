@@ -42,8 +42,8 @@ require_once 'Zend/Markup/Renderer/RendererAbstract.php';
 class Zend_Markup_Test_Renderer_MockRenderer extends Zend_Markup_Renderer_RendererAbstract
 {
 
-    public function _filter($text)
+    public function addDefaultFilters()
     {
-        return $text;
+        // we don't do anything here
     }
 }

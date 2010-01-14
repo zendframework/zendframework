@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20243 -->
+<!-- EN-Revision: 20282 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.autoloader">
     <title>Der Autoloader</title>
@@ -547,7 +547,7 @@ $autoloader->pushAutoloader($foo, 'Foo_');
                     </row>
 
                     <row>
-                        <entry><methodname>getRegisteredNamespace()</methodname></entry>
+                        <entry><methodname>getRegisteredNamespaces()</methodname></entry>
                         <entry><type>Array</type></entry>
                         <entry>N/A</entry>
                         <entry><para>

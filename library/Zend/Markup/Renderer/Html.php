@@ -343,7 +343,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
      */
     public function setDefaultFilter(Zend_Filter_Interface $filter = null)
     {
-        if (empty($filter)) {
+        if (null === $filter) {
             $this->_defaultFilter = new Zend_Filter();
 
             $this->_defaultFilter->addFilter(new Zend_Filter_HtmlEntities());

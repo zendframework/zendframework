@@ -395,6 +395,19 @@ BBCODE;
         $this->assertEquals('<strong>HELLO</strong>', $m->render('[b]hello[/b]'));
     }
 
+    public function testProvideFilterChainToTag()
+    {
+        $m = $this->_markup;
+
+        $filter = new Zend_Filter_HtmlEntities();
+
+        $this->_markup->addMarkup('suppp',
+            Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE | Zend_Markup_Renderer_RendererAbstract::TAG_NORMAL,
+            array('start' => '<sup>', 'end' => '</sup>', 'group' => 'inline', 'filter' => $filter));
+        $this->assertEquals("filter<br />\n<sup>filter\n&amp;\nfilter</sup>",
+            $m->render("filter\n[suppp]filter\n&\nfilter[/suppp]"));
+    }
+
 }
 
 // Call Zend_Markup_BbcodeAndHtmlTest::main()

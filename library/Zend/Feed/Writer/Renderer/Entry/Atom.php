@@ -24,6 +24,8 @@
  */
 require_once 'Zend/Feed/Writer/Renderer/RendererAbstract.php';
 
+require_once 'Zend/Feed/Writer/Renderer/Feed/Atom/Source.php';
+
 /**
  * @category   Zend
  * @package    Zend_Feed_Writer
@@ -57,6 +59,7 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
         $entry = $this->_dom->createElementNS(Zend_Feed_Writer::NAMESPACE_ATOM_10, 'entry');
         $this->_dom->appendChild($entry);
         
+        $this->_setSource($this->_dom, $entry);
         $this->_setTitle($this->_dom, $entry);
         $this->_setDescription($this->_dom, $entry);
         $this->_setDateCreated($this->_dom, $entry);
@@ -346,5 +349,24 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
             }
             $root->appendChild($category);
         }
+    }
+    
+    /**
+     * Append Source element (Atom 1.0 Feed Metadata)
+     *
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
+    protected function _setSource(DOMDocument $dom, DOMElement $root)
+    {
+        $source = $this->getDataContainer()->getSource();
+        if (!$source) {
+            return;
+        }
+        $renderer = new Zend_Feed_Writer_Renderer_Feed_Atom_Source($source);
+        $element = $renderer->render()->getElement();
+        $imported = $dom->importNode($element, true);
+        $root->appendChild($imported); 
     }
 }

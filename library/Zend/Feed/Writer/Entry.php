@@ -29,6 +29,8 @@ require_once 'Zend/Date.php';
  */
 require_once 'Zend/Uri.php';
 
+require_once 'Zend/Feed/Writer/Source.php';
+
 /**
  * @category   Zend
  * @package    Zend_Feed_Writer
@@ -706,6 +708,45 @@ class Zend_Feed_Writer_Entry
         require_once 'Zend/Feed/Exception.php';
         throw new Zend_Feed_Exception('Method: ' . $method
             . ' does not exist and could not be located on a registered Extension');
+    }
+    
+    /**
+     * Creates a new Zend_Feed_Writer_Source data container for use. This is NOT
+     * added to the current feed automatically, but is necessary to create a
+     * container with some initial values preset based on the current feed data.
+     *
+     * @return Zend_Feed_Writer_Source
+     */
+    public function createSource()
+    {
+        $source = new Zend_Feed_Writer_Source;
+        if ($this->getEncoding()) {
+            $source->setEncoding($this->getEncoding());
+        }
+        $source->setType($this->getType());
+        return $source;
+    }
+
+    /**
+     * Appends a Zend_Feed_Writer_Entry object representing a new entry/item
+     * the feed data container's internal group of entries.
+     *
+     * @param Zend_Feed_Writer_Source $source
+     */
+    public function setSource(Zend_Feed_Writer_Source $source)
+    {
+        $this->_data['source'] = $source;
+    }
+    
+    /**
+     * @return Zend_Feed_Writer_Source
+     */
+    public function getSource()
+    {
+        if (isset($this->_data['source'])) {
+            return $this->_data['source'];
+        }
+        return null;
     }
 
     /**

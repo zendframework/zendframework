@@ -386,7 +386,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
     protected function _adjustPosition($supportHeight, $supportWidth)
     {
         $barcodeHeight = $this->_barcode->getHeight(true) * $this->_moduleSize;
-        if ($barcodeHeight != $supportHeight) {
+        if ($barcodeHeight != $supportHeight && $this->_topOffset == 0) {
             switch ($this->_verticalPosition) {
                 case 'middle':
                     $this->_topOffset = floor(
@@ -402,7 +402,7 @@ abstract class Zend_Barcode_Renderer_RendererAbstract
             }
         }
         $barcodeWidth = $this->_barcode->getWidth(true) * $this->_moduleSize;
-        if ($barcodeWidth != $supportWidth) {
+        if ($barcodeWidth != $supportWidth && $this->_leftOffset == 0) {
             switch ($this->_horizontalPosition) {
                 case 'center':
                     $this->_leftOffset = floor(

@@ -97,10 +97,15 @@ if ($validator->isValid($isbn)) {
 }
 ]]></programlisting>
 
-        <para>
-            Note that this will return false if <varname>$isbn</varname> doesn't contain a separator
-            <emphasis>or</emphasis> if it's an invalid <acronym>ISBN</acronym> value.
-        </para>
+        <note>
+            <title>Values without separator</title>
+
+            <para>
+                This will return <constant>FALSE</constant> if <varname>$isbn</varname> doesn't
+                contain a separator <emphasis>or</emphasis> if it's an invalid
+                <acronym>ISBN</acronym> value.
+            </para>
+        </note>
 
         <para>
             Valid separators include:

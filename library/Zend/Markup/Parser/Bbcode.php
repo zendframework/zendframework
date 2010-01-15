@@ -176,8 +176,6 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
         $this->_state            = self::STATE_SCAN;
         $this->_tokens           = array();
 
-        $this->_tokens = array();
-
         $this->_tokenize();
 
         // variable initialization for treebuilder

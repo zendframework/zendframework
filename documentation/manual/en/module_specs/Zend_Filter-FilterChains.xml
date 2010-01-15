@@ -12,7 +12,7 @@
         username:
 
         <programlisting language="php"><![CDATA[
-<// Create a filter chain and add filters to the chain
+// Create a filter chain and add filters to the chain
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new Zend_Filter_Alpha())
             ->addFilter(new Zend_Filter_StringToLower());
@@ -32,6 +32,30 @@ $username = $filterChain->filter($_POST['username']);
         filter chain.
     </para>
 
+    <sect2 id="zend.filter.filter_chains.order">
+        <title>Changing filter chain order</title>
+        
+        <para>
+            Since 1.10, the <classname>Zend_Filter</classname> chain also
+            supports altering the chain by prepending or appending filters. For
+            example, the next piece of code does exactly the same as the other
+            username filter chain example:
+        </para>
+        
+        <programlisting language="php"><![CDATA[
+// Create a filter chain and add filters to the chain
+$filterChain = new Zend_Filter();
+
+// this filter will be appended to the filter chain
+$filterChain->appendFilter(new Zend_Filter_StringToLower());
+
+// this filter will be prepended at the beginning of the filter chain.
+$filterChain->prependFilter(new Zend_Filter_Alpha());
+
+// Filter the username
+$username = $filterChain->filter($_POST['username']);
+]]></programlisting>
+    </sect2>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

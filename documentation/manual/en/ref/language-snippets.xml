@@ -3,8 +3,8 @@
 
 <!-- links -->
 <!ENTITY lang                                   'en'>
-<!ENTITY zf.manual.link                         'http://framework.zend.com/manual/&lang;/'>
-<!ENTITY php.manual.link                        'http://www.php.net/manual/&lang;/'>
+<!ENTITY zf.manual.link                         'http://framework.zend.com/manual/en'>
+<!ENTITY php.manual.link                        'http://www.php.net/manual/en'>
 
 <!-- manual.xml.in -->
 <!ENTITY book.title                             'Programmer&#39;s Reference Guide'>
@@ -31,3 +31,24 @@
 <!ENTITY appendix.migration.title               'Zend Framework Migration Notes'>
 
 <!ENTITY appendix.performance.title             'Zend Framework Performance Guide'>
+
+<!-- requirements table -->
+<!ENTITY requirements.extensions.table.title    'PHP Extensions Used in Zend Framework by Component'>
+<!ENTITY requirements.zendcomponents.table.title 'Zend Framework Components and the PHP Extensions they use'>
+<!ENTITY requirements.dependencies.table.title  'Zend Framework Components and their dependency to other Zend Framework Components'>
+
+<!ENTITY requirements.php.extensions            '<acronym>PHP</acronym> Extension'>
+<!ENTITY requirements.dependency.type           'Dependency Type'>
+<!ENTITY requirements.used.by.zf.components     'Used by Zend Framework Components'>
+<!ENTITY requirements.zf.component              'Zend Framework Component'>
+<!ENTITY requirements.dependent.zf.components   'Dependent Zend Framework Component'>
+
+<!ENTITY requirements.hard                      'Hard'>
+<!ENTITY requirements.soft                      'Soft'>
+<!ENTITY requirements.fix                       'Fix'>
+<!ENTITY requirements.sub                       'Sub'>
+
+<!ENTITY requirements.all.components            'All Components'>
+<!ENTITY requirements.virtually.all.components  'Virtually all components'>
+<!ENTITY requirements.all.pdo.adapters          'All <acronym>PDO</acronym> database adapters'>
+

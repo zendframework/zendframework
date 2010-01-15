@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE table
+[
+        <!-- Add translated specific definitions and snippets -->
+    <!ENTITY % language-snippets SYSTEM "./language-snippets.xml">
+    %language-snippets;
+
+    <!-- Fallback to English definitions and snippets (in case of missing translation) -->
+    <!ENTITY % language-snippets.default SYSTEM "../../en/ref/language-snippets.xml">
+    %language-snippets.default;
+]>
 <!-- Reviewed: no -->
 <table frame='all' id="requirements.zendcomponents.table-1">
-    <title>Zend Framework Components and the PHP Extensions they use</title>
+    <title>&requirements.zendcomponents.table.title;</title>
     <tgroup cols='3'>
         <thead>
             <row>
-                <entry>Zend Framework Components</entry>
-                <entry>Dependency Type</entry>
-                <entry><acronym>PHP</acronym> Extension</entry>
+                <entry>&requirements.zendcomponents.table.title;</entry>
+                <entry>&requirements.dependency.type;</entry>
+                <entry>&requirements.php.extensions;</entry>
             </row>
         </thead>
         <tbody>
@@ -15,14 +25,14 @@
                 <entry morerows="2" valign="middle">
                     <emphasis>All Components</emphasis>
                 </entry>
-                <entry morerows="2" valign="middle">Hard</entry>
+                <entry morerows="2" valign="middle">&requirements.hard;</entry>
                 <entry>
-                    <ulink url="http://www.php.net/manual/en/ref.pcre.php">pcre</ulink>
+                    <ulink url="&php.manual.link;/ref.pcre.php">pcre</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
-                    <ulink url="http://www.php.net/manual/en/ref.spl.php">SPL</ulink>
+                    <ulink url="&php.manual.link;/ref.spl.php">SPL</ulink>
                 </entry>
             </row>
             <row>
@@ -32,7 +42,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.acl.html">
+                            url="&zf.manual.link;/zend.acl.html">
                             <classname>Zend_Acl</classname></ulink>
                     </emphasis>
                 </entry>
@@ -43,123 +53,123 @@
                 <entry morerows="2" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.amf.html">
+                            url="&zf.manual.link;/zend.amf.html">
                             <classname>Zend_Amf</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.datetime.php">date</ulink>
+                        url="&php.manual.link;/ref.datetime.php">date</ulink>
                 </entry>
             </row>
             <row>
-                <entry morerows="1" valign="middle">Soft</entry>
+                <entry morerows="1" valign="middle">&requirements.soft;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.simplexml.php">SimpleXML</ulink>
+                        url="&php.manual.link;/ref.simplexml.php">SimpleXML</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.auth.html"><classname>Zend_Auth</classname></ulink>
+                            url="&zf.manual.link;/zend.auth.html"><classname>Zend_Auth</classname></ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="1" valign="middle">Hard</entry>
+                <entry morerows="1" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.ctype.php">ctype</ulink>
+                        url="&php.manual.link;/ref.ctype.php">ctype</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.hash.php">hash</ulink>
+                        url="&php.manual.link;/ref.hash.php">hash</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="3" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.cache.html">
+                            url="&zf.manual.link;/zend.cache.html">
                             <classname>Zend_Cache</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="3" valign="middle">Hard</entry>
+                <entry morerows="3" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.apc.php">apc</ulink>
+                        url="&php.manual.link;/ref.apc.php">apc</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.memcache.php">memcache</ulink>
+                        url="&php.manual.link;/ref.memcache.php">memcache</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.sqlite.php">sqlite</ulink>
+                        url="&php.manual.link;/ref.sqlite.php">sqlite</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.zlib.php">zlib</ulink>
+                        url="&php.manual.link;/ref.zlib.php">zlib</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.captcha.html">
+                            url="&zf.manual.link;/zend.captcha.html">
                             <classname>Zend_Captcha</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.image.php">gd</ulink>
+                        url="&php.manual.link;/ref.image.php">gd</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.config.html">
+                            url="&zf.manual.link;/zend.config.html">
                             <classname>Zend_Config</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="1" valign="middle">Hard</entry>
+                <entry morerows="1" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.simplexml.php">SimpleXML</ulink>
+                        url="&php.manual.link;/ref.simplexml.php">SimpleXML</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.console.getopt.html">
+                            url="&zf.manual.link;/zend.console.getopt.html">
                             <classname>Zend_Console_Getopt</classname>
                         </ulink>
                     </emphasis>
@@ -171,43 +181,43 @@
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.controller.html">
+                            url="&zf.manual.link;/zend.controller.html">
                             <classname>Zend_Controller</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="1" valign="middle">Hard</entry>
+                <entry morerows="1" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                        url="&php.manual.link;/language.oop5.reflection.php">Reflection</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.session.php">session</ulink>
+                        url="&php.manual.link;/ref.session.php">session</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.currency.html">
+                            url="&zf.manual.link;/zend.currency.html">
                             <classname>Zend_Currency</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
+                        url="&php.manual.link;/ref.iconv.php">iconv</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.date.html">
+                            url="&zf.manual.link;/zend.date.html">
                             <classname>Zend_Date</classname>
                         </ulink>
                     </emphasis>
@@ -219,33 +229,33 @@
                 <entry morerows="8" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.db.html">
+                            url="&zf.manual.link;/zend.db.html">
                             <classname>Zend_Db</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="8" valign="middle">Hard</entry>
+                <entry morerows="8" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.ibm-db2.php">ibm_db2</ulink>
+                        url="&php.manual.link;/ref.ibm-db2.php">ibm_db2</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.mysqli.php">mysqli</ulink>
+                        url="&php.manual.link;/ref.mysqli.php">mysqli</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.oci8.php">oci8</ulink>
+                        url="&php.manual.link;/ref.oci8.php">oci8</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.pdo.php">pdo</ulink>
+                        url="&php.manual.link;/ref.pdo.php">pdo</ulink>
                 </entry>
             </row>
             <row>
@@ -254,32 +264,32 @@
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.pdo-mysql.php">pdo_mysql</ulink>
+                        url="&php.manual.link;/ref.pdo-mysql.php">pdo_mysql</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.pdo-oci.php">pdo_oci</ulink>
+                        url="&php.manual.link;/ref.pdo-oci.php">pdo_oci</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.pdo-pgsql.php">pdo_pgsql</ulink>
+                        url="&php.manual.link;/ref.pdo-pgsql.php">pdo_pgsql</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.pdo-sqlite.php">pdo_sqlite</ulink>
+                        url="&php.manual.link;/ref.pdo-sqlite.php">pdo_sqlite</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.debug.html">
+                            url="&zf.manual.link;/zend.debug.html">
                             <classname>Zend_Debug</classname>
                         </ulink>
                     </emphasis>
@@ -291,7 +301,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.dojo.html">
+                            url="&zf.manual.link;/zend.dojo.html">
                             <classname>Zend_Dojo</classname>
                         </ulink>
                     </emphasis>
@@ -303,22 +313,22 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.dom.html">
+                            url="&zf.manual.link;/zend.dom.html">
                             <classname>Zend_Dom</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.exception.html">
+                            url="&zf.manual.link;/zend.exception.html">
                             <classname>Zend_Exception</classname>
                         </ulink>
                     </emphasis>
@@ -330,48 +340,48 @@
                 <entry morerows="3" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.feed.html">
+                            url="&zf.manual.link;/zend.feed.html">
                             <classname>Zend_Feed</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="3" valign="middle">Hard</entry>
+                <entry morerows="3" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink>
+                        url="&php.manual.link;/ref.mbstring.php">mbstring</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.simplexml.php">SimpleXML</ulink>
+                        url="&php.manual.link;/ref.simplexml.php">SimpleXML</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.file.transfer.html">
+                            url="&zf.manual.link;/zend.file.transfer.html">
                             <classname>Zend_File_Transfer</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="1" valign="middle">Soft</entry>
+                <entry morerows="1" valign="middle">&requirements.soft;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.apc.php">apc</ulink>
+                        url="&php.manual.link;/ref.apc.php">apc</ulink>
                 </entry>
             </row>
             <row>
@@ -381,29 +391,29 @@
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.filter.html">
+                            url="&zf.manual.link;/zend.filter.html">
                             <classname>Zend_Filter</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                        url="&php.manual.link;/language.oop5.reflection.php">Reflection</ulink>
                 </entry>
             </row>
             <row>
-                <entry>Soft</entry>
+                <entry>&requirements.soft;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.zlib.php">zlib</ulink>
+                        url="&php.manual.link;/ref.zlib.php">zlib</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.form.html">
+                            url="&zf.manual.link;/zend.form.html">
                             <classname>Zend_Form</classname>
                         </ulink>
                     </emphasis>
@@ -415,61 +425,61 @@
                 <entry morerows="2" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.gdata.html">
+                            url="&zf.manual.link;/zend.gdata.html">
                             <classname>Zend_Gdata</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="2" valign="middle">Hard</entry>
+                <entry morerows="2" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.ctype.php">ctype</ulink>
+                        url="&php.manual.link;/ref.ctype.php">ctype</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="2" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.http.html">
+                            url="&zf.manual.link;/zend.http.html">
                             <classname>Zend_Http</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="2" valign="middle">Hard</entry>
+                <entry morerows="2" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.ctype.php">ctype</ulink>
+                        url="&php.manual.link;/ref.ctype.php">ctype</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.curl.php">curl</ulink>
+                        url="&php.manual.link;/ref.curl.php">curl</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.mime-magic.php">mime_magic</ulink>
+                        url="&php.manual.link;/ref.mime-magic.php">mime_magic</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.infocard.html">
+                            url="&zf.manual.link;/zend.infocard.html">
                             <classname>Zend_InfoCard</classname>
                         </ulink>
                     </emphasis>
@@ -481,29 +491,29 @@
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.json.html">
+                            url="&zf.manual.link;/zend.json.html">
                             <classname>Zend_Json</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Soft</entry>
+                <entry>&requirements.soft;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.json.php">json</ulink>
+                        url="&php.manual.link;/ref.json.php">json</ulink>
                 </entry>
             </row>
             <row>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                        url="&php.manual.link;/language.oop5.reflection.php">Reflection</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.layout.html">
+                            url="&zf.manual.link;/zend.layout.html">
                             <classname>Zend_Layout</classname>
                         </ulink>
                     </emphasis>
@@ -515,7 +525,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.ldap.html">
+                            url="&zf.manual.link;/zend.ldap.html">
                             <classname>Zend_Ldap</classname>
                         </ulink>
                     </emphasis>
@@ -523,14 +533,14 @@
                 <entry>---</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.ldap.php">ldap</ulink>
+                        url="&php.manual.link;/ref.ldap.php">ldap</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.loader.html">
+                            url="&zf.manual.link;/zend.loader.html">
                             <classname>Zend_Loader</classname>
                         </ulink>
                     </emphasis>
@@ -542,71 +552,71 @@
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.locale.html">
+                            url="&zf.manual.link;/zend.locale.html">
                             <classname>Zend_Locale</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Soft</entry>
+                <entry>&requirements.soft;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.bc.php">bcmath</ulink>
+                        url="&php.manual.link;/ref.bc.php">bcmath</ulink>
                 </entry>
             </row>
             <row>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
+                        url="&php.manual.link;/ref.iconv.php">iconv</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="2" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.log.html">
+                            url="&zf.manual.link;/zend.log.html">
                             <classname>Zend_Log</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="2" valign="middle">Hard</entry>
+                <entry morerows="2" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                        url="&php.manual.link;/language.oop5.reflection.php">Reflection</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.mail.html">
+                            url="&zf.manual.link;/zend.mail.html">
                             <classname>Zend_Mail</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Soft</entry>
+                <entry>&requirements.soft;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.posix.php">posix</ulink>
+                        url="&php.manual.link;/ref.posix.php">posix</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.measure.html">
+                            url="&zf.manual.link;/zend.measure.html">
                             <classname>Zend_Measure</classname>
                         </ulink>
                     </emphasis>
@@ -618,7 +628,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.memory.html">
+                            url="&zf.manual.link;/zend.memory.html">
                             <classname>Zend_Memory</classname>
                         </ulink>
                     </emphasis>
@@ -630,22 +640,22 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.mime.html">
+                            url="&zf.manual.link;/zend.mime.html">
                             <classname>Zend_Mime</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
+                        url="&php.manual.link;/ref.iconv.php">iconv</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.openid.html">
+                            url="&zf.manual.link;/zend.openid.html">
                             <classname>Zend_OpenId</classname>
                         </ulink>
                     </emphasis>
@@ -657,7 +667,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.paginator.html">
+                            url="&zf.manual.link;/zend.paginator.html">
                             <classname>Zend_Paginator</classname>
                         </ulink>
                     </emphasis>
@@ -669,40 +679,40 @@
                 <entry morerows="3" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.pdf.html">
+                            url="&zf.manual.link;/zend.pdf.html">
                             <classname>Zend_Pdf</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="3" valign="middle">Hard</entry>
+                <entry morerows="3" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.ctype.php">ctype</ulink>
+                        url="&php.manual.link;/ref.ctype.php">ctype</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.image.php">gd</ulink>
+                        url="&php.manual.link;/ref.image.php">gd</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
+                        url="&php.manual.link;/ref.iconv.php">iconv</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.zlib.php">zlib</ulink>
+                        url="&php.manual.link;/ref.zlib.php">zlib</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.progressbar.html">
+                            url="&zf.manual.link;/zend.progressbar.html">
                             <classname>Zend_ProgressBar</classname>
                         </ulink>
                     </emphasis>
@@ -714,7 +724,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.registry.html">
+                            url="&zf.manual.link;/zend.registry.html">
                             <classname>Zend_Registry</classname>
                         </ulink>
                     </emphasis>
@@ -726,7 +736,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.request.html">
+                            url="&zf.manual.link;/zend.request.html">
                             <classname>Zend_Request</classname>
                         </ulink>
                     </emphasis>
@@ -738,101 +748,101 @@
                 <entry morerows="4" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.rest.html">
+                            url="&zf.manual.link;/zend.rest.html">
                             <classname>Zend_Rest</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="4" valign="middle">Hard</entry>
+                <entry morerows="4" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.ctype.php">ctype</ulink>
+                        url="&php.manual.link;/ref.ctype.php">ctype</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                        url="&php.manual.link;/language.oop5.reflection.php">Reflection</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.simplexml.php">SimpleXML</ulink>
+                        url="&php.manual.link;/ref.simplexml.php">SimpleXML</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="4" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.search.lucene.html">
+                            url="&zf.manual.link;/zend.search.lucene.html">
                             <classname>Zend_Search_Lucene</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Soft</entry>
+                <entry>&requirements.soft;</entry>
                 <entry>
                     <ulink
                         url="http://pecl.php.net/package/Bitset">bitset</ulink>
                 </entry>
             </row>
             <row>
-                <entry morerows="3" valign="middle">Hard</entry>
+                <entry morerows="3" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.ctype.php">ctype</ulink>
+                        url="&php.manual.link;/ref.ctype.php">ctype</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
+                        url="&php.manual.link;/ref.iconv.php">iconv</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.server.reflection.html">
+                            url="&zf.manual.link;/zend.server.reflection.html">
                             <classname>Zend_Server_Reflection</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                        url="&php.manual.link;/language.oop5.reflection.php">Reflection</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.akismet.html">
+                            url="&zf.manual.link;/zend.service.akismet.html">
                             <classname>Zend_Service_Akismet</classname>
                         </ulink>
                     </emphasis>
@@ -844,103 +854,103 @@
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.amazon.html">
+                            url="&zf.manual.link;/zend.service.amazon.html">
                             <classname>Zend_Service_Amazon</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="1" valign="middle">Hard</entry>
+                <entry morerows="1" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="2" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.audioscrobbler.html">
+                            url="&zf.manual.link;/zend.service.audioscrobbler.html">
                             <classname>Zend_Service_Audioscrobbler</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="2" valign="middle">Hard</entry>
+                <entry morerows="2" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
+                        url="&php.manual.link;/ref.iconv.php">iconv</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.simplexml.php">SimpleXML</ulink>
+                        url="&php.manual.link;/ref.simplexml.php">SimpleXML</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.delicious.html">
+                            url="&zf.manual.link;/zend.service.delicious.html">
                             <classname>Zend_Service_Delicious</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="1" valign="middle">Hard</entry>
+                <entry morerows="1" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="2" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.flickr.html">
+                            url="&zf.manual.link;/zend.service.flickr.html">
                             <classname>Zend_Service_Flickr</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="2" valign="middle">Hard</entry>
+                <entry morerows="2" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
+                        url="&php.manual.link;/ref.iconv.php">iconv</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.nirvanix.html">
+                            url="&zf.manual.link;/zend.service.nirvanix.html">
                             <classname>Zend_Service_Nirvanix</classname>
                         </ulink>
                     </emphasis>
@@ -952,16 +962,16 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.recaptcha.html">
+                            url="&zf.manual.link;/zend.service.recaptcha.html">
                             <classname>Zend_Service_ReCaptcha</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.mcrypt.php">mcrypt</ulink>
+                            url="&php.manual.link;/ref.mcrypt.php">mcrypt</ulink>
                     </emphasis>
                 </entry>
             </row>
@@ -969,28 +979,28 @@
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.simpy.html">
+                            url="&zf.manual.link;/zend.service.simpy.html">
                             <classname>Zend_Service_Simpy</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="1" valign="middle">Hard</entry>
+                <entry morerows="1" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.slideshare.html">
+                            url="&zf.manual.link;/zend.service.slideshare.html">
                             <classname>Zend_Service_SlideShare</classname>
                         </ulink>
                     </emphasis>
@@ -1002,22 +1012,22 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.strikeiron.html">
+                            url="&zf.manual.link;/zend.service.strikeiron.html">
                             <classname>Zend_Service_StrikeIron</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.soap.php">soap</ulink>
+                        url="&php.manual.link;/ref.soap.php">soap</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.technorati.html">
+                            url="&zf.manual.link;/zend.service.technorati.html">
                             <classname>Zend_Service_Technorati</classname>
                         </ulink>
                     </emphasis>
@@ -1029,7 +1039,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.twitter.html">
+                            url="&zf.manual.link;/zend.service.twitter.html">
                             <classname>Zend_Service_Twitter</classname>
                         </ulink>
                     </emphasis>
@@ -1041,66 +1051,66 @@
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.service.yahoo.html">
+                            url="&zf.manual.link;/zend.service.yahoo.html">
                             <classname>Zend_Service_Yahoo</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="1" valign="middle">Hard</entry>
+                <entry morerows="1" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.session.html">
+                            url="&zf.manual.link;/zend.session.html">
                             <classname>Zend_Session</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.session.php">session</ulink>
+                        url="&php.manual.link;/ref.session.php">session</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="2" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.soap.html">
+                            url="&zf.manual.link;/zend.soap.html">
                             <classname>Zend_Soap</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="2" valign="middle">Hard</entry>
+                <entry morerows="2" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                            url="&php.manual.link;/ref.dom.php">dom</ulink>
                     </emphasis>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.simplexml.php">SimpleXML</ulink>
+                        url="&php.manual.link;/ref.simplexml.php">SimpleXML</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://www.php.net/manual/en/ref.soap.php">soap</ulink>
+                            url="&php.manual.link;/ref.soap.php">soap</ulink>
                     </emphasis>
                 </entry>
             </row>
@@ -1108,7 +1118,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.test.html">
+                            url="&zf.manual.link;/zend.test.html">
                             <classname>Zend_Test</classname>
                         </ulink>
                     </emphasis>
@@ -1120,7 +1130,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.text.html">
+                            url="&zf.manual.link;/zend.text.html">
                             <classname>Zend_Text</classname>
                         </ulink>
                     </emphasis>
@@ -1132,7 +1142,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.timesync.html">
+                            url="&zf.manual.link;/zend.timesync.html">
                             <classname>Zend_TimeSync</classname>
                         </ulink>
                     </emphasis>
@@ -1144,58 +1154,58 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.translate.html">
+                            url="&zf.manual.link;/zend.translate.html">
                             <classname>Zend_Translate</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.xml.php">xml</ulink>
+                        url="&php.manual.link;/ref.xml.php">xml</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.uri.html">
+                            url="&zf.manual.link;/zend.uri.html">
                             <classname>Zend_Uri</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.ctype.php">ctype</ulink>
+                        url="&php.manual.link;/ref.ctype.php">ctype</ulink>
                 </entry>
             </row>
             <row>
                 <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.validate.html">
+                            url="&zf.manual.link;/zend.validate.html">
                             <classname>Zend_Validate</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="1" valign="middle">Hard</entry>
+                <entry morerows="1" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.ctype.php">ctype</ulink>
+                        url="&php.manual.link;/ref.ctype.php">ctype</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                        url="&php.manual.link;/language.oop5.reflection.php">Reflection</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.version.html">
+                            url="&zf.manual.link;/zend.version.html">
                             <classname>Zend_Version</classname>
                         </ulink>
                     </emphasis>
@@ -1207,22 +1217,22 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.validate.html">
+                            url="&zf.manual.link;/zend.validate.html">
                             <classname>Zend_Validate</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry>Hard</entry>
+                <entry>&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                        url="&php.manual.link;/language.oop5.reflection.php">Reflection</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.wildfire.html">
+                            url="&zf.manual.link;/zend.wildfire.html">
                             <classname>Zend_Wildfire</classname>
                         </ulink>
                     </emphasis>
@@ -1234,39 +1244,39 @@
                 <entry morerows="4" valign="middle">
                     <emphasis>
                         <ulink
-                            url="http://framework.zend.com/manual/en/zend.xmlrpc.html">
+                            url="&zf.manual.link;/zend.xmlrpc.html">
                             <classname>Zend_XmlRpc</classname>
                         </ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="4" valign="middle">Hard</entry>
+                <entry morerows="4" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.dom.php">dom</ulink>
+                        url="&php.manual.link;/ref.dom.php">dom</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.iconv.php">iconv</ulink>
+                        url="&php.manual.link;/ref.iconv.php">iconv</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.libxml.php">libxml</ulink>
+                        url="&php.manual.link;/ref.libxml.php">libxml</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/language.oop5.reflection.php">Reflection</ulink>
+                        url="&php.manual.link;/language.oop5.reflection.php">Reflection</ulink>
                 </entry>
             </row>
             <row>
                 <entry>
                     <ulink
-                        url="http://www.php.net/manual/en/ref.simplexml.php">SimpleXML</ulink>
+                        url="&php.manual.link;/ref.simplexml.php">SimpleXML</ulink>
                 </entry>
             </row>
         </tbody>

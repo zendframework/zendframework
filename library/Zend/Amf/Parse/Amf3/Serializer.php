@@ -323,10 +323,6 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      */
     public function writeArray(array $array)
     {
-        if($this->writeObjectReference($array)){
-            return $this;
-        }
-
         // have to seperate mixed from numberic keys.
         $numeric = array();
         $string  = array();
@@ -364,7 +360,8 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      * @param mixed $object object to check for reference
      * @return Boolean true, if the reference was written, false otherwise
      */
-    protected function writeObjectReference($object){
+    protected function writeObjectReference($object)
+    {
         $ref = array_search($object, $this->_referenceObjects,true);
         //quickly handle object references
         if($ref !== false){

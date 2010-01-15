@@ -316,6 +316,9 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
                 return;
             }
         }
+        if (!$content) {
+            return;
+        }
         $element = $dom->createElement('content');
         $element->setAttribute('type', 'html');
         $cdata = $dom->createCDATASection($content);
@@ -365,6 +368,7 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
             return;
         }
         $renderer = new Zend_Feed_Writer_Renderer_Feed_Atom_Source($source);
+        $renderer->setType($this->getType());
         $element = $renderer->render()->getElement();
         $imported = $dom->importNode($element, true);
         $root->appendChild($imported); 

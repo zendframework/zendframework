@@ -80,5 +80,31 @@ class Zend_Feed_Writer_Renderer_Feed_Atom_Source
         }
         return $this;
     }
+    
+    /**
+     * Set feed generator string
+     * 
+     * @param  DOMDocument $dom 
+     * @param  DOMElement $root 
+     * @return void
+     */
+    protected function _setGenerator(DOMDocument $dom, DOMElement $root)
+    {
+        if(!$this->getDataContainer()->getGenerator()) {
+            return;
+        }
+
+        $gdata = $this->getDataContainer()->getGenerator();
+        $generator = $dom->createElement('generator');
+        $root->appendChild($generator);
+        $text = $dom->createTextNode($gdata['name']);
+        $generator->appendChild($text);
+        if (array_key_exists('uri', $gdata)) {
+            $generator->setAttribute('uri', $gdata['uri']);
+        }
+        if (array_key_exists('version', $gdata)) {
+            $generator->setAttribute('version', $gdata['version']);
+        }
+    }
 
 }

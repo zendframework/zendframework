@@ -5,145 +5,146 @@
     <title>Boolean</title>
 
     <para>
-        This filter changes a given input to be a <constant>BOOLEAN</constant> value. This is often
-        useful when working with databases or when processing form values.
+        Dieser Filter ändert eine gegebene Eingabe auf einen <constant>BOOLEAN</constant> Wert. Das
+        ist oft nützlich wenn man mit Datenbanken arbeitet oder wenn Formularwerte bearbeitet
+        werden.
     </para>
 
     <sect3 id="zend.filter.set.boolean.default">
-        <title>Default behaviour for Zend_Filter_Boolean</title>
+        <title>Standardverhalten von Zend_Filter_Boolean</title>
 
         <para>
-            By default, this filter works by casting the input to a <constant>BOOLEAN</constant>
-            value; in other words, it operates in a similar fashion to calling <command>(boolean)
-            $value</command>.
+            Standardmäßig arbeitet dieser Filter indem er Eingabe auf <constant>BOOLEAN</constant>
+            Werte castet; in anderen Worte, er arbeitet in ähnlicher Weise wie der Aufruf von
+            <command>(boolean) $value</command>.
         </para>
 
         <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Boolean();
 $value  = '';
 $result = $filter->filter($value);
-// returns false
+// gibt false zurück
 ]]></programlisting>
 
         <para>
-            This means that without providing any configuration,
-            <classname>Zend_Filter_Boolean</classname> accepts all input types and returns a
-            <constant>BOOLEAN</constant> just as you would get by type casting to
-            <constant>BOOLEAN</constant>.
+            Dies bedeuetet dass <classname>Zend_Filter_Boolean</classname> ohne die Angabe einer
+            Konfiguration alle Eingabetypen akteptiert und ein <constant>BOOLEAN</constant>
+            zurückgibt wie man es durch Typcasting zu <constant>BOOLEAN</constant> erhält.
         </para>
     </sect3>
 
     <sect3 id="zend.filter.set.boolean.types">
-        <title>Changing behaviour for Zend_Filter_Boolean</title>
+        <title>Das Verhalten von Zend_Filter_Boolean ändern</title>
 
         <para>
-            Sometimes casting with <command>(boolean)</command> will not suffice.
-            <classname>Zend_Filter_Boolean</classname> allows you to configure specific types to
-            convert, as well as which to omit.
+            Manchmal ist das Casten mit <command>(boolean)</command> nicht ausreichend.
+            <classname>Zend_Filter_Boolean</classname> erlaubt es spezifische Typen zu konfigurieren
+            welche konvertiert werden, und jene die ignoriert werden.
         </para>
 
         <para>
-            The following types can be handled:
+            Die folgenden Typen können behandelt werden:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>boolean</emphasis>: Returns a boolean value as is.
+                    <emphasis>boolean</emphasis>: Gibt einen boolschen Wert so wie er ist zurück.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>integer</emphasis>: Converts an integer <emphasis>0</emphasis> value
-                    to <constant>FALSE</constant>.
+                    <emphasis>integer</emphasis>: Konvertiert den Integerwert <emphasis>0</emphasis>
+                    zu <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>float</emphasis>: Converts a float <emphasis>0.0</emphasis> value
-                    to <constant>FALSE</constant>.
+                    <emphasis>float</emphasis>: Konvertiert den Gleitkommawert
+                    <emphasis>0.0</emphasis> zu <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>string</emphasis>: Converts an empty string <emphasis>''</emphasis> to
+                    <emphasis>string</emphasis>: Konvertiert einen leeren String
+                    <emphasis>''</emphasis> zu <constant>FALSE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>zero</emphasis>: Konvertiert einen String der ein einzelnes Null
+                    Zeichen (<emphasis>'0'</emphasis>) enthält zu <constant>FALSE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>empty_array</emphasis>: Konvertiert ein leeres
+                    <emphasis>array</emphasis> zu <constant>FALSE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>null</emphasis>: Konvertiert den Wert <constant>NULL</constant> zu
                     <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>zero</emphasis>: Converts a string containing the single character
-                    zero (<emphasis>'0'</emphasis>) to <constant>FALSE</constant>.
+                    <emphasis>php</emphasis>: Konvertiert Werte so wie diese mit
+                    <acronym>PHP</acronym> zu <constant>BOOLEAN</constant> konvertiert werden.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>empty_array</emphasis>: Converts an empty <emphasis>array</emphasis>
-                    to <constant>FALSE</constant>.
+                    <emphasis>false_string</emphasis>: Konvertiert einen String der das Wort
+                    "false" enthält zu einem boolschen <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>null</emphasis>: Converts a <constant>NULL</constant> value
-                    to <constant>FALSE</constant>.
+                    <emphasis>yes</emphasis>: Konvertiert einen lokalisierten String welcher das
+                    Wort "nein" enthält zu <constant>FALSE</constant>.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis>php</emphasis>: Converts values according to <acronym>PHP</acronym>
-                    when casting them to <constant>BOOLEAN</constant>.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>false_string</emphasis>: Converts a string containing the word "false"
-                    to a boolean <constant>FALSE</constant>.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>yes</emphasis>: Converts a localized string which contains the word
-                    "no" to <constant>FALSE</constant>.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>all</emphasis>: Converts all above types to
+                    <emphasis>all</emphasis>: Konvertiert alle obigen Typen zu
                     <constant>BOOLEAN</constant>.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>
-            All other given values will return <constant>TRUE</constant> by default.
+            Alle anderen angegebenen Werte geben standardmäßig <constant>TRUE</constant> zurück.
         </para>
 
         <para>
-            There are several ways to select which of the above types are filtered. You can give one
-            or multiple types and add them, you can give an array, you can use constants, or you can
-            give a textual string. See the following examples:
+            Es gibt verschiedene Wege um auszuwählen welche der oben stehenden Typen gefiltert
+            werden. Man kann ein oder mehrere Typen angeben und Sie hinzufügen, man kann ein Array
+            angeben, man kann die Konstanten verwenden, oder man kann einen textuellen String
+            angeben. Siehe die folgenden Beispiele:
         </para>
 
         <programlisting language="php"><![CDATA[
-// converts 0 to false
+// Konvertiert 0 zu false
 $filter = new Zend_Filter_Boolean(Zend_Filter_Boolean::INTEGER);
 
-// converts 0 and '0' to false
+// Konvertiert 0 und '0' zu false
 $filter = new Zend_Filter_Boolean(
     Zend_Filter_Boolean::INTEGER + Zend_Filter_Boolean::ZERO
 );
 
-// converts 0 and '0' to false
+// Konvertiert 0 und '0' zu false
 $filter = new Zend_Filter_Boolean(array(
     'type' => array(
         Zend_Filter_Boolean::INTEGER,
@@ -151,7 +152,7 @@ $filter = new Zend_Filter_Boolean(array(
     ),
 ));
 
-// converts 0 and '0' to false
+// Konvertiert 0 und '0' zu false
 $filter = new Zend_Filter_Boolean(array(
     'type' => array(
         'integer',
@@ -161,26 +162,27 @@ $filter = new Zend_Filter_Boolean(array(
 ]]></programlisting>
 
         <para>
-            You can also give an instance of <classname>Zend_Config</classname> to set the desired
-            types. To set types after instantiation, use the <methodname>setType()</methodname>
-            method.
+            Man kann auch eine Instanz von <classname>Zend_Config</classname> angeben um die
+            gewünschten Typen zu setzen. Um Typen nach der Instanzierung zu setzen kann die Methode
+            <methodname>setType()</methodname> verwendet werden.
         </para>
     </sect3>
 
     <sect3 id="zend.filter.set.boolean.localized">
-        <title>Localized booleans</title>
+        <title>Lokalisierte Boolsche Werte</title>
 
         <para>
-            As mentioned previously, <classname>Zend_Filter_Boolean</classname> can also recognise
-            localized "yes" and "no" strings. This means that you can ask your customer in a form
-            for "yes" or "no" within his native language and
-            <classname>Zend_Filter_Boolean</classname> will convert the response to the appropriate
-            boolean value.
+            Wie vorher erwähnt erkennt <classname>Zend_Filter_Boolean</classname> auch die
+            lokalisierten Strings für "Ja" und "Nein". Das bedeutet das man den Kunden in einem
+            Formular nach "Ja" oder "Nein" in seiner eigenen Sprache fragen kann und
+            <classname>Zend_Filter_Boolean</classname> die Antworten zu richtigen boolschen Werten
+            konvertieren wird.
         </para>
 
         <para>
-            To set the desired locale, you can either use the <property>locale</property> option, or
-            the method <methodname>setLocale()</methodname>.
+            Um das gewünschte Gebietsschema zu setzen kann man entweder die Option
+            <property>locale</property> verwenden oder die Methode
+            <methodname>setLocale()</methodname> verwenden.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -189,39 +191,39 @@ $filter = new Zend_Filter_Boolean(array(
     'locale' => 'de',
 ));
 
-// returns false
+// Gibt false zurück
 echo $filter->filter('nein');
 
 $filter->setLocale('en');
 
-// returns true
+// Gibt true zurück
 $filter->filter('yes');
 ]]></programlisting>
     </sect3>
 
     <sect3 id="zend.filter.set.boolean.casting">
-        <title>Disable casting</title>
+        <title>Casten ausschalten</title>
 
         <para>
-            Sometimes it is necessary to recognise only <constant>TRUE</constant> or
-            <constant>FALSE</constant> and return all other values without changes.
-            <classname>Zend_Filter_Boolean</classname> allows you to do this by setting the
-            <property>casting</property> option to <constant>FALSE</constant>.
+            Machmal ist es nützlich nur <constant>TRUE</constant> oder <constant>FALSE</constant>
+            zu erkennen und alle anderen Werte ohne Änderung zurückzugeben.
+            <classname>Zend_Filter_Boolean</classname> erlaubt dies indem die Option
+            <property>casting</property> auf <constant>FALSE</constant> gesetzt wird.
         </para>
 
         <para>
-            In this case <classname>Zend_Filter_Boolean</classname> will work as described in the
-            following table, which shows which values return true or false. All other given values
-            are returned without change when <property>casting</property> is set to
-            <constant>FALSE</constant>
+            In diesem Fall arbeitet <classname>Zend_Filter_Boolean</classname> wie in der folgenden
+            Tabelle beschrieben, die zeigt welche Werte true oder false zurückgeben. Alle anderen
+            angegebenen Werte werden ohne Änderung zurückgegeben wenn <property>casting</property>
+            auf <constant>FALSE</constant> gesetzt wird.
         </para>
 
         <table id="zend.filter.set.boolean.casting.table">
-            <title>Usage without casting</title>
+            <title>Verwendung ohne Casten</title>
             <tgroup cols="3">
                 <thead>
                     <row>
-                        <entry>Type</entry>
+                        <entry>Typ</entry>
 
                         <entry>True</entry>
 
@@ -306,8 +308,8 @@ $filter->filter('yes');
         </table>
 
         <para>
-            The following example shows the behaviour when changing the <property>casting</property>
-            option:
+            Das folgende Beispiel zeigt das Verhalten wenn die Option
+            <property>casting</property> verändert wird:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -316,17 +318,14 @@ $filter = new Zend_Filter_Boolean(array(
     'casting' => false,
 ));
 
-// returns false
+// Gibt false zurück
 echo $filter->filter(0);
 
-// returns true
+// Gibt true zurück
 echo $filter->filter(1);
 
-// returns the value
+// Gibt den Wert zurück
 echo $filter->filter(2);
 ]]></programlisting>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -2,32 +2,36 @@
 <!-- EN-Revision: 20225 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.serializer.introduction">
-    <title>Introduction</title>
+    <title>Einführung</title>
 
     <para>
-        <classname>Zend_Serializer</classname> provides an adapter based interface to simply
-        generate storable representation of php types by different facilities, and recover.
+        <classname>Zend_Serializer</classname> bietet ein Adapter-basierendes Interface um
+        eine speicherbare Repräsentation von PHP Typen durch unterschiedliche Arten zu bieten und
+        diese wiederherzustellen.
     </para>
 
     <example id="zend.serializer.introduction.example.dynamic">
-        <title>Using <classname>Zend_Serializer</classname> dynamic interface</title>
+        <title>
+            Verwenden des dynamischen Interfaces von <classname>Zend_Serializer</classname>
+        </title>
 
         <para>
-            To instantiate a serializer you should use the factory method with the name of the
-            adapter:
+            Um einen Serializer zu instanzieren sollte man die Factory Methode mit dem Namen des
+            Adapters verwenden:
         </para>
 
         <programlisting language="php"><![CDATA[
 $serializer = Zend_Serializer::factory('PhpSerialize');
-// Now $serializer is an instance of Zend_Serializer_Adapter_AdapterInterface,
-// specifically Zend_Serializer_Adapter_PhpSerialize
+// Jetzt ist $serializer eine Instanz von
+// Zend_Serializer_Adapter_AdapterInterface, im speziellen
+// Zend_Serializer_Adapter_PhpSerialize
 
 try {
     $serialized = $serializer->serialize($data);
-    // now $serialized is a string
+    // jetzt ist $serialized ein String
 
     $unserialized = $serializer->unserialize($serialized);
-    // now $data == $unserialized
+    // Jetzt ist $data == $unserialized
 } catch (Zend_Serializer_Exception $e) {
     echo $e;
 }
@@ -35,20 +39,21 @@ try {
     </example>
 
     <para>
-        The method <methodname>serialize</methodname> generates a storable string. To regenerate
-        this serialized data you can simply call the method <methodname>unserialize</methodname>.
+        Die Methode <methodname>serialize</methodname> erzeugt einen speicherbaren String. Um diese
+        serialisierten Daten wiederherzustellen kann einfach die Methode
+        <methodname>unserialize</methodname> aufgerufen werden.
     </para>
 
     <para>
-        Any time an error is encountered serializing or unserializing,
-        <classname>Zend_Serializer</classname> will throw a
+        Jedesmal wenn ein Fehler bei der  Serialisierung oder Deserialisierung festgestellt wird
+        wirft <classname>Zend_Serializer</classname> eine
         <classname>Zend_Serializer_Exception</classname>.
     </para>
 
     <para>
-        To configure a given serializer adapter, you can optionally add an array or an instance of
-        <classname>Zend_Config</classname> to the <methodname>factory</methodname> or to the
-        <methodname>un-/serialize</methodname> methods:
+        Um einen gegebenen Serialisierungs-Adapter zu konfigurieren kann optional ein Array oder
+        eine Instanz von <classname>Zend_Config</classname> an die <methodname>factory</methodname>
+        oder die Methoden <methodname>un-/serialize</methodname> übergeben werden:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -58,33 +63,38 @@ $serializer = Zend_Serializer::factory('Wddx', array(
 
 try {
     $serialized = $serializer->serialize($data, array('comment' => 'change comment'));
-    $unserialized = $serializer->unserialize($serialized, array(/* options for unserialize */));
+    $unserialized = $serializer->unserialize(
+        $serialized,
+        array(/* Optionen für die Deserialisierung */)
+    );
 } catch (Zend_Serializer_Exception $e) {
     echo $e;
 }
 ]]></programlisting>
 
     <para>
-        Options passed to the <methodname>factory</methodname> are valid for the instantiated
-        object. You can change these options using the <methodname>setOption(s)</methodname> method.
-        To change one or more options only for a single call, pass them as the second argument to
-        either the <methodname>serialize</methodname> or <methodname>unserialize</methodname>
-        method.
+        Optionen welche an <methodname>factory</methodname> übergeben werden sind für das
+        instanzierte Objekt gültig. Man kann diese Optionen verändern indem die
+        <methodname>setOption(s)</methodname> Methoden verwendet werden. Um ein oder mehrere
+        Optionen für einen einzelnen Aufruf zu verändern, können diese als zweites Argument
+        an die Methoden <methodname>serialize</methodname> oder <methodname>unserialize</methodname>
+        übergeben werden.
     </para>
 
     <sect2 id="zend.serializer.introduction.example.static.php">
-        <title>Using the Zend_Serializer static interface</title>
+        <title>Das statische Interface von Zend_Serializer verwenden</title>
 
         <para>
-            You can register a specific serializer adapter as a default serialization adapter for
-            use with <classname>Zend_Serializer</classname>. By default, the
-            <classname>PhpSerialize</classname> adapter will be registered, but you can change this
-            option using the <methodname>setDefaultAdapter()</methodname> static method.
+            Man kann einen spezifischen Serialisierungs-Adapter als standardmäßigen
+            Serialisierungs-Adapter für die Verwendung mit <classname>Zend_Serializer</classname>
+            registrieren. Standardmäßig wird der Adapter <classname>PhpSerialize</classname>
+            registriert. Aber man kann das verändern indem die statische Methode
+            <methodname>setDefaultAdapter()</methodname> verwendet wird.
         </para>
 
         <programlisting language="php"><![CDATA[
 Zend_Serializer::setDefaultAdapter('PhpSerialize', $options);
-// or
+// oder
 $serializer = Zend_Serializer::factory('PhpSerialize', $options);
 Zend_Serializer::setDefaultAdapter($serializer);
 
@@ -97,6 +107,3 @@ try {
 ]]></programlisting>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

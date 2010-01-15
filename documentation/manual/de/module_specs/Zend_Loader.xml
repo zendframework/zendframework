@@ -191,7 +191,6 @@ Zend_Loader::loadClass('Container_Tree',
     </sect2>
 
     <sect2 id="zend.loader.load.isreadable">
-
         <title>Testen ob eine Datei gelesen werden kann</title>
 
         <para>
@@ -202,6 +201,7 @@ Zend_Loader::loadClass('Container_Tree',
 
         <example id="zend.loader.load.isreadable.example">
             <title>Beispiel der isReadable() Methode</title>
+
             <programlisting language="php"><![CDATA[
 if (Zend_Loader::isReadable($filename)) {
     // Mach was mit $filename
@@ -217,11 +217,9 @@ if (Zend_Loader::isReadable($filename)) {
             Diese <acronym>PHP</acronym> Funktion durchsucht den <code>include_path</code> nicht,
             wärend <methodname>Zend_Loader::isReadable()</methodname> dies macht.
         </para>
-
     </sect2>
 
     <sect2 id="zend.loader.load.autoload">
-
         <title>Verwenden von Autoloaders</title>
 
         <para>
@@ -238,6 +236,7 @@ if (Zend_Loader::isReadable($filename)) {
 
         <example id="zend.loader.load.autoload.example">
             <title>Beispiel für das registrieren der Autoloader Callback Methode</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Loader::registerAutoload();
 ]]></programlisting>
@@ -263,6 +262,7 @@ Zend_Loader::registerAutoload();
                 Beispiel für das registrieren der Autoload Callback Methode von einer
                 erweiterten Klasse
             </title>
+
             <para>
                 Wegen der Semantik der Referenzen von statischen Funktionen in
                 <acronym>PHP</acronym>, muß Code für beide <methodname>loadClass()</methodname> und
@@ -272,6 +272,7 @@ Zend_Loader::registerAutoload();
                 <methodname>self::loadClass()</methodname> an die Elternklasse delegiert, ruft Sie
                 die Methode des Namens in der Elternklasse und nicht in der Subklasse auf.
             </para>
+
             <programlisting language="php"><![CDATA[
 class My_Loader extends Zend_Loader
 {
@@ -302,10 +303,5 @@ Zend_Loader::registerAutoload('My_Loader');
             <constant>FALSE</constant> ist, wird die Registrierung des Callback des Autoloaders vom
             SPL Autoload Stack entfernt.
         </para>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

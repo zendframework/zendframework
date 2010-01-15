@@ -2,152 +2,154 @@
 <!-- EN-Revision: 20234 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.currency">
-    <title>Currency Helper</title>
+    <title>Currency Helfer</title>
 
     <para>
-        Displaying localized currency values is a common task; the
-        <classname>Zend_Currency</classname> view helper is intended to simply this task.  See the
-        <link linkend="zend.currency.introduction">Zend Currency documentation</link> for specifics
-        on this localization feature. In this section, we will focus simply on usage of the view
-        helper.
+        Das anzeigen von lokalisierten Währungswerten ist eine übliche Aufgabe; der View Helfer
+        <classname>Zend_Currency</classname> dient dazu diese Aufgabe zu vereinfachen. Siehe auch
+        die <link linkend="zend.currency.introduction">Dokumentation von Zend Currency</link> für
+        Details über dieses Lokalisierungs-Feature. In diesem Abschnitt fokusieren wir uns nur auf
+        die Verwendung des View Helfers.
     </para>
 
     <para>
-        There are several ways to initiate the <emphasis>Currency</emphasis> view helper:
+        Es gibt verschiedene Wege um den <emphasis>Currency</emphasis> View Helfer zu initiieren:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                Registered, through a previously registered instance in
-                <classname>Zend_Registry</classname>.
+                Registriert, über eine vorher in <classname>Zend_Registry</classname> registrierte
+                Instanz:
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Afterwards, through the fluent interface.
+                Im Nachhinein, über das Fluent Interface.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Directly, through instantiating the class.
+                Direkt, über Instanzierung der Klasse.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        A registered instance of <classname>Zend_Currency</classname> is the preferred usage for
-        this helper. Doing so, you can select the currency to be used prior to adding the adapter to
-        the registry.
+        Eine registrierte Instanz von <classname>Zend_Currency</classname> ist der vorgeschlagene
+        Weg für diesen Helfer. Wenn man dies macht kann die Währung welche verwendet werden soll
+        ausgewählt werden bevor der Adapter der Registry hinzugefügt wird.
     </para>
 
     <para>
-        There are several ways to select the desired currency. First, you may simply provide a
-        currency string; alternately, you may specify a locale.  The preferred way is to use a
-        locale as this information is automatically detected and selected via the HTTP client
-        headers provided when a user accesses your application, and ensures the currency provided
-        will match their locale.
+        Es gibt verschiedene Wege die gewünschte Währung auszuwählen. Erstens kann man einfach einen
+        Währungs-String übergeben; alternativ kann man ein Gebietsschema spezifizieren. Der
+        vorgeschlagene Weg ist die Verwendung eines Gebietsschemas, da diese Information automatisch
+        erkannt und über den HTTP Client Header ausgewählt wird wenn ein Benutzer auf die Anwendung
+        zugreift. Und es stellt sicher das die angebotene Währung mit seinem Gebietsschema
+        übereinstimmt.
     </para>
 
     <note>
         <para>
-            We are speaking of "locales" instead of "languages" because a language may vary based on
-            the geographical region in which it is used. For example, English is spoken in different
-            dialects: British English, American English, etc. As a currency always correlates to a
-            country you must give a fully-qualified locale, which means providing both the language
-            <emphasis>and</emphasis> region. Therefore, we say "locale" instead of "language."
+            Wir sprechen von "Gebietsschemas" statt von "Sprachen" weil Sprachen, basierend auf der
+            geographischen Region in welcher Sie verwendet werden, sehr unterschiedlich sein können.
+            Zum Beispiel wird Englisch in unterschiedlichen Dialekten gesprochen: Brittisches
+            Englisch, Amerikanisches Englisch, usw. Da eine Währung immer mit einem Land
+            korreliert muss ein voll-qualifiziertes Gebietsschema angegeben werden. Dies bedeutet
+            dass beides, sowohl die Sprache <emphasis>als auch</emphasis> die Region angegeben
+            werden müssen. Deswegen sagen wir "Gebietsschema" statt "Sprache".
         </para>
     </note>
 
     <example id="zend.view.helpers.initial.currency.registered">
-        <title>Registered instance</title>
+        <title>Registrierte Instanz</title>
 
         <para>
-            To use a registered instance, simply create an instance of
-            <classname>Zend_Currency</classname> and register it within
-            <classname>Zend_Registry</classname> using <classname>Zend_Currency</classname> as its
-            key.
+            Um eine registrierte Instanz zu verwenden muss einfach eine Instanz von
+            <classname>Zend_Currency</classname> erstellt und in
+            <classname>Zend_Registry</classname> registriert werden, wobei der Schlüssel
+            <classname>Zend_Currency</classname> zu verwenden ist.
         </para>
 
         <programlisting language="php"><![CDATA[
-// our example currency
+// Unsere Beispielwährung
 $currency = new Zend_Currency('de_AT');
 Zend_Registry::set('Zend_Currency', $currency);
 
-// within your view
+// In der View
 echo $this->currency(1234.56);
-// this returns '€ 1.234,56'
+// Gibt '€ 1.234,56' zurück
 ]]></programlisting>
     </example>
 
     <para>
-        If you are more familiar with the fluent interface, then you can also create an instance
-        within your view and configure the helper afterwards.
+        Wenn man das Fluent Interface verwenden will, kann man auch eine Instanz in der View
+        erstellen und den Helfer im Nachhinein konfigurieren.
     </para>
 
     <example id="zend.view.helpers.initial.currency.afterwards">
-        <title>Within the view</title>
+        <title>In der View</title>
 
         <para>
-            To use the fluent interface, create an instance of <classname>Zend_Currency</classname>,
-            call the helper without a parameter, and call the <methodname>setCurrency()</methodname>
-            method.
+            Um das Fluent Interface zu verwenden muss eine Instanz von
+            <classname>Zend_Currency</classname> erstellt, der Helfer ohne Parameter aufgerufen, und
+            dann die Methode <methodname>setCurrency()</methodname> aufgerufen werden.
         </para>
 
         <programlisting language="php"><![CDATA[
-// within your view
+// In der View
 $currency = new Zend_Currency('de_AT');
 $this->currency()->setCurrency($currency)->currency(1234.56);
-// this returns '€ 1.234,56'
+// Gibt '€ 1.234,56' zurück
 ]]></programlisting>
     </example>
 
     <para>
-        If you are using the helper without <classname>Zend_View</classname> then you can
-        also use it directly.
+        Wenn man den Helfer ohne <classname>Zend_View</classname> verwenden will kann man Ihn auch
+        direkt verwenden.
     </para>
 
     <example id="zend.view.helpers.initial.currency.directly.example-1">
-        <title>Direct usage</title>
+        <title>Direkte Verwendung</title>
 
         <programlisting language="php"><![CDATA[
-// our example currency
+// Unsere Beispielwährung
 $currency = new Zend_Currency('de_AT');
 
-// initiate the helper
+// Den Helfer initiieren
 $helper = new Zend_View_Helper_Currency($currency);
-echo $helper->currency(1234.56); // this returns '€ 1.234,56'
+echo $helper->currency(1234.56); // Gibt '€ 1.234,56' zurück
 ]]></programlisting>
     </example>
 
     <para>
-        As already seen, the <methodname>currency()</methodname> method is used to return the
-        currency string. Just call it with the value you want to display as a currency.  It also
-        accepts some options which may be used to change the behaviour and output of the helper.
+        Wie bereits gesehen wird die Methode <methodname>currency()</methodname> verwendet um den
+        Währungs-String zurückzugeben. Sie muss nur mit dem Wert aufgerufen werden den man als
+        Währung angezeigt haben will. Sie akzeptiert auch einige Optionen welche verwendet werden
+        können um das Verhalten des Helfers bei der Ausgabe zu ändern.
     </para>
 
     <example id="zend.view.helpers.initial.currency.directly.example-2">
-        <title>Direct usage</title>
+        <title>Direkte Verwendung</title>
 
         <programlisting language="php"><![CDATA[
-// our example currency
+// Unsere Beispielwährung
 $currency = new Zend_Currency('de_AT');
 
-// initiate the helper
+// Den Helfer initiieren
 $helper = new Zend_View_Helper_Currency($currency);
-echo $helper->currency(1234.56); // this returns '€ 1.234,56'
+echo $helper->currency(1234.56); // Gibt '€ 1.234,56' zurück
 echo $helper->currency(1234.56, array('precision' => 1));
-// this returns '€ 1.234,6'
+// Gibt '€ 1.234,6' zurück
 ]]></programlisting>
     </example>
 
     <para>
-        For details about the available options, search for <classname>Zend_Currency</classname>'s
-        <methodname>toCurrency()</methodname> method.
+        Für Details über die vorhandenen Optionen sollte man in
+        <classname>Zend_Currency</classname>'s <methodname>toCurrency()</methodname> Methode
+        nachsehen.
     </para>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

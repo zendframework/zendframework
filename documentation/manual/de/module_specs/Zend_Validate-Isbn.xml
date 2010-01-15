@@ -5,60 +5,61 @@
     <title>Isbn</title>
 
     <para>
-        <classname>Zend_Validate_Isbn</classname> allows you to validate an
-        <acronym>ISBN-10</acronym> or <acronym>ISBN-13</acronym> value.
+        <classname>Zend_Validate_Isbn</classname> erlaubt es einen
+        <acronym>ISBN-10</acronym> oder <acronym>ISBN-13</acronym> Wert zu prüfen.
     </para>
 
     <sect3 id="zend.validate.set.isbn.basic">
-        <title>Basic usage</title>
+        <title>Einfache Verwendung</title>
 
         <para>
-            A basic example of usage is below:
+            Ein einfaches Verwendungsbeispiel ist anbei zu finden:
         </para>
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Isbn();
 if ($validator->isValid($isbn)) {
-    // isbn is valid
+    // ISBN gültig
 } else {
-    // isbn is not valid
+    // ISBN ungültig
 }
 ]]></programlisting>
 
         <para>
-            This will validate any <acronym>ISBN-10</acronym> and <acronym>ISBN-13</acronym> without
-            separator.
+            Das prüft jeden <acronym>ISBN-10</acronym> und <acronym>ISBN-13</acronym> Wert ohne
+            Trennzeichen.
         </para>
     </sect3>
 
     <sect3 id="zend.validate.set.isbn.type-explicit">
-        <title>Setting an explicit ISBN validation type</title>
+        <title>Einen expliziten ISBN Prüfungstyp setzen</title>
 
         <para>
-            An example of an <acronym>ISBN</acronym> type restriction is below:
+            Ein Beispiel für die Begrenzung auf einen <acronym>ISBN</acronym> Typ ist anbei zu
+            finden:
         </para>
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Isbn();
 $validator->setType(Zend_Validate_Isbn::ISBN13);
-// OR
+// ODER
 $validator = new Zend_Validate_Isbn(array(
     'type' => Zend_Validate_Isbn::ISBN13,
 ));
 
 if ($validator->isValid($isbn)) {
-    // this is a valid ISBN-13 value
+    // Das ist ein gültiger ISBN-13 Wert
 } else {
-    // this is an invalid ISBN-13 value
+    // Das ist ein ungültiger ISBN-13 Wert
 }
 ]]></programlisting>
 
         <para>
-            The above will validate only <acronym>ISBN-13</acronym> values.
+            Das vorherige prüft nur auf <acronym>ISBN-13</acronym> Werte.
         </para>
 
         <para>
-            Valid types include:
+            Folgende gültige Typen sind vorhanden:
         </para>
 
         <itemizedlist>
@@ -77,49 +78,47 @@ if ($validator->isValid($isbn)) {
     </sect3>
 
     <sect3 id="zend.validate.set.isbn.separator">
-        <title>Specifying a separator restriction</title>
+        <title>Eine Begrenzung auf ein Trennzeichen spezifizieren</title>
 
         <para>
-            An example of separator restriction is below:
+            Ein Beispiel für die Begrenzung auf ein Trennzeichen ist anbei zu finden:
         </para>
 
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Isbn();
 $validator->setSeparator('-');
-// OR
+// ODER
 $validator = new Zend_Validate_Isbn(array(
     'separator' => '-',
 ));
 
 if ($validator->isValid($isbn)) {
-    // this is a valid ISBN with separator
+    // Das ist eine gültige ISBN mit Trennzeichen
 } else {
-    // this is an invalid ISBN with separator
+    // Das ist eine ungültige ISBN mit Trennzeichen
 }
 ]]></programlisting>
 
         <para>
-            Note that this will return false if <varname>$isbn</varname> doesn't contain a separator
-            <emphasis>or</emphasis> if it's an invalid <acronym>ISBN</acronym> value.
+            Es ist zu beachten das dies <constant>FALSE</constant> zurückgibt wenn
+            <varname>$isbn</varname> kein Trennzeichen <emphasis>oder</emphasis> einen ungültigen
+            <acronym>ISBN</acronym> Wert enthält.
         </para>
 
         <para>
-            Valid separators include:
+            Gültige Separatoren sind:
         </para>
 
         <itemizedlist>
             <listitem>
-                <para>"" (empty) (default)</para>
+                <para>"" (Leer) (Standardwert)</para>
             </listitem>
             <listitem>
-                <para>"-" (hyphen)</para>
+                <para>"-" (Bindestrich)</para>
             </listitem>
             <listitem>
-                <para>" " (space)</para>
+                <para>" " (Leerzeichen)</para>
             </listitem>
         </itemizedlist>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

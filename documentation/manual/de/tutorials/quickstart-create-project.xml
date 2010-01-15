@@ -379,7 +379,7 @@ class ErrorController extends Zend_Controller_Action
         </p>
 
         <p>
-            Helpful Links: <br />
+            Hilfreiche Links: <br />
             <a href="http://framework.zend.com/">Zend Framework Website</a> |
             <a href="http://framework.zend.com/manual/en/">Zend Framework
                 Handbuch</a>

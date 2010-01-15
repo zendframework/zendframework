@@ -2,7 +2,6 @@
 <!-- EN-Revision: 20223 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
-
     <title>Standard Filter Klassen</title>
 
     <para>
@@ -26,7 +25,6 @@
                 <classname>Zend_Locale</classname> spezifiziert.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.filter.set.alpha">

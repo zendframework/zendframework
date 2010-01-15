@@ -184,7 +184,7 @@ $filter = new Zend_Filter_Boolean(array(
 
         <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Boolean(array(
-    'type'   => Zend_Filter_Boolean::ALL, 
+    'type'   => Zend_Filter_Boolean::ALL,
     'locale' => 'de',
 ));
 
@@ -210,9 +210,9 @@ $filter->filter('yes');
 
         <para>
             In this case <classname>Zend_Filter_Boolean</classname> will work as described in the
-            following table, which shows which values return true or false. All other given values
-            are returned without change when <property>casting</property> is set to
-            <constant>FALSE</constant>
+            following table, which shows which values return <constant>TRUE</constant> or
+            <constant>FALSE</constant>. All other given values are returned without change when
+            <property>casting</property> is set to <constant>FALSE</constant>
         </para>
 
         <table id="zend.filter.set.boolean.casting.table">
@@ -288,17 +288,17 @@ $filter->filter('yes');
                     <row>
                         <entry>Zend_Filter_Boolean::FALSE_STRING</entry>
 
-                        <entry>"false"</entry>
+                        <entry>"false" (case independently)</entry>
 
-                        <entry>"true"</entry>
+                        <entry>"true" (case independently)</entry>
                     </row>
 
                     <row>
                         <entry>Zend_Filter_Boolean::YES</entry>
 
-                        <entry>localized "yes"</entry>
+                        <entry>localized "yes" (case independently)</entry>
 
-                        <entry>localized "no"</entry>
+                        <entry>localized "no" (case independently)</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -311,7 +311,7 @@ $filter->filter('yes');
 
         <programlisting language="php"><![CDATA[
 $filter = new Zend_Filter_Boolean(array(
-    'type'    => Zend_Filter_Boolean::ALL, 
+    'type'    => Zend_Filter_Boolean::ALL,
     'casting' => false,
 ));
 

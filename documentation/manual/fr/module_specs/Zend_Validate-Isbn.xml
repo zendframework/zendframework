@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.isbn">
+    <title>Isbn</title>
+
+    <para>
+        <classname>Zend_Validate_Isbn</classname> permet de valider des valeurs
+        <acronym>ISBN-10</acronym> ou <acronym>ISBN-13</acronym>.
+    </para>
+
+    <sect3 id="zend.validate.set.isbn.basic">
+        <title>Utilisation classique</title>
+
+        <para>
+            Voici un exemple banal:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Isbn();
+if ($validator->isValid($isbn)) {
+    // isbn valide
+} else {
+    // isbn non valide
+}
+]]></programlisting>
+
+        <para>
+            Ceci valide tout <acronym>ISBN-10</acronym> et <acronym>ISBN-13</acronym> sans
+            séparateur.
+        </para>
+    </sect3>
+
+    <sect3 id="zend.validate.set.isbn.type-explicit">
+        <title>Configurer un type de validation ISBN explicite</title>
+
+        <para>
+            Voici comment effectuer une restriction de type de l'<acronym>ISBN</acronym> :
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Isbn();
+$validator->setType(Zend_Validate_Isbn::ISBN13);
+// OU
+$validator = new Zend_Validate_Isbn(array(
+    'type' => Zend_Validate_Isbn::ISBN13,
+));
+
+if ($validator->isValid($isbn)) {
+    // ISBN-13 valide
+} else {
+    // ISBN-13 invalide
+}
+]]></programlisting>
+
+        <para>
+            Seules les valeurs de <acronym>ISBN-13</acronym> sont validée ci-dessus.
+        </para>
+
+        <para>
+            Les types valides sont:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para><constant>Zend_Validate_Isbn::AUTO</constant> (défaut)</para>
+            </listitem>
+
+            <listitem>
+                <para><constant>Zend_Validate_Isbn::ISBN10</constant></para>
+            </listitem>
+
+            <listitem>
+                <para><constant>Zend_Validate_Isbn::ISBN13</constant></para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.validate.set.isbn.separator">
+        <title>Spécifier une restriction de séparateur</title>
+
+        <para>
+            Voici un exemple de restriction de séparateur:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_Isbn();
+$validator->setSeparator('-');
+// OU
+$validator = new Zend_Validate_Isbn(array(
+    'separator' => '-',
+));
+
+if ($validator->isValid($isbn)) {
+    // ISBN valide avec séparateur
+} else {
+    // ISBN invalide avec séparateur
+}
+]]></programlisting>
+
+        <note>
+            <title>Valeurs sans séparateur</title>
+
+            <para>
+                La valeur <constant>FALSE</constant> est retournée si <varname>$isbn</varname>
+                ne contient pas de séparateur <emphasis>ou</emphasis> si le séparateur n'est
+                pas valide.
+            </para>
+        </note>
+
+        <para>
+            Séparateurs valides:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>"" (vide) (défaut)</para>
+            </listitem>
+            <listitem>
+                <para>"-" (tiret)</para>
+            </listitem>
+            <listitem>
+                <para>" " (espace)</para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

@@ -438,7 +438,7 @@ $target->setAzurePropertyType('Age', 'Edm.Int64');
 
                 <para>
                     Bei Verwendung des folgenden Codes kann eine Entität in eine Tabelle hinzugefügt
-                    werden welceh "testtable" heißt. Es ist zu beachten das die Tabelle vorher schon
+                    werden welche "testtable" heißt. Es ist zu beachten das die Tabelle vorher schon
                     erstellt worden sein muss.
                 </para>
 
@@ -464,15 +464,18 @@ echo 'Etag: ' . $result->getEtag() . "\n";
             </sect4>
 
             <sect4 id="zend.service.windowsazure.storage.table.entities.api.retrieve-by-id">
-                <title>Retrieving an entity by partition key and row key</title>
+                <title>Empfangen einer Entität durch Partitionsschlüssel und Zeilenschlüssel</title>
 
                 <para>
-                    Using the following code, an entity can be retrieved by partition key and row
-                    key.  Note that the table and entity have already been created before.
+                    Durch Verwendung des folgenden Codes kann eine Entität durch seinen
+                    Partitions- und Zeilenschlüssel. Es ist zu beachten das die Tabelle und die
+                    Entität bereits vorher erstellt worden sein müssen.
                 </para>
 
                 <example id="zend.service.windowsazure.storage.table.entities.api.retrieve-by-id.example">
-                    <title>Retrieving an entity by partition key and row key</title>
+                    <title>
+                        Empfangen einer Entität durch dessen Partitions- und Zeilenschlüssel
+                    </title>
 
                     <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
@@ -486,7 +489,7 @@ $entity= $storageClient->retrieveEntityById(
             </sect4>
 
             <sect4 id="zend.service.windowsazure.storage.table.entities.api.updating">
-                <title>Updating an entity</title>
+                <title>Eine Entität aktualisieren</title>
 
                 <para>
                     Bei Verwendung des folgenden Codes kann eine Entität aktualisiert werden. Es ist

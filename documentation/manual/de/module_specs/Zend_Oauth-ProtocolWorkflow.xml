@@ -31,49 +31,56 @@
     </para>
 
     <para>
-        In the meantime TweetExpress has been busy. Before gaining your approval from Twitter, it
-        has sent a HTTP request to Twitter's service asking for a new unauthorized Request Token.
-        This token is not User specific from Twitter's perspective, but TweetExpress may use it
-        specifically for the current User and should associate it with their account and store it
-        for future use. TweetExpress now redirects the User to Twitter so they can approve
-        TweetExpress' access. The URL for this redirect will be signed using TweetExpress' Consumer
-        Secret and it will contain the unauthorized Request Token as a parameter.
+        In der Zwischenzeit was TweenExpress beschäftigt. Bevor das Einverständnis von Twitter
+        gegeben wird, hat es eine HTTP Anfrage an den Service von Twitter geschickt und nach einem
+        neuen unauthorisierten Anfrage Token gefragt. Dieser Token ist aus der Perspektive von
+        Twitter nicht Benutzerspezifisch, aber TweetExpress man Ihn spezifisch für den aktuellen
+        Benutzer verwenden und sollte Ihn mit seinem Account verknüpfen und Ihn für eine
+        künftige Verwendung speichern. TweetExpress leitet den Benutzer nun zu Twitter um damit er
+        den Zugriff von TweetExpress erlauben kann. Die URL für diese Umleitung wird signiert indem
+        das Konsumentengeheimnis von TweetExpress verwendet wird und Sie enthält den
+        unauthorisierten Anfrage Token als Parameter.
     </para>
 
     <para>
-        At this point the User may be asked to log into Twitter and will now be faced with a Twitter
-        screen asking if they approve this request by TweetExpress to access Twitter's API on the
-        User's behalf. Twitter will record the response which we'll assume was positive. Based on
-        the User's approval, Twitter will record the current unauthorized Request Token as having
-        been approved by the User (thus making it User specific) and will generate a new value in
-        the form of a verification code. The User is now redirected back to a specific callback URL
-        used by TweetExpress (this callback URL may be registered with Twitter or dynamically set
-        using an oauth_callback parameter in requests). The redirect URL will contain the newly
-        generated verification code.
+        An diesem Punkt kann der Benutzer gefragt werden sich in Twitter anzumelden und wird jetzt
+        mit einem Twitter Bildschirm konfrontiert welcher Ihn fragt ob er diese Anfrage von
+        TweetExpress für den Zugriff auf die API von Twitter im Auftrag des Benutzers gestattet.
+        Twitter speichert die Antwort von der wir annehmen das Sie positiv war. Basierend auf dem
+        Einverständnis des Benutzers speichert Twitter den aktuell unauthorisierten Anfrage Token
+        als vom Benutzer akzeptiert (was Ihn Benutzerspezifisch macht) und erzeugt einen neuen Wert
+        in der Form eines Überprüfungscodes. Der Benutzer wird jetzt auf eine spezifische Callback
+        URL zurückgeleitet welche von TweetExpress verwendet wird (diese Callback URL kann bei
+        Twitter registriert sein, oder dynamisch gesetzt werden indem bei den Anfragen ein
+        oauth_callback Parameter verwendet wird). Die Umleitungs-URL wird den neu erzeugten
+        Überprüfungscode enthalten.
     </para>
 
     <para>
-        TweetExpress' callback URL will trigger an examination of the response to determine whether
-        the User has granted their approval to Twitter. Assuming so, it may now exchange it's
-        unauthorized Request Token for a fully authorized Access Token by sending a request back to
-        Twitter including the Request Token and the received verification code.  Twitter should now
-        send back a response containing this Access Token which must be used in all requests used to
-        access Twitter's API on behalf of the User. Twitter will only do this once they have
-        confirmed the attached Request Token has not already been used to retrieve another Access
-        Token. At this point, TweetExpress may confirm the receipt of the approval to the User and
-        delete the original Request Token which is no longer needed.
+        Die Callback URL von TweetExpress löst eine Überprüfung der Anfrage aus um zu erkennen ob
+        der Benutzer seine Zustimmung an Twitter gegeben hat. Wir nehmen an das dies der Fall war,
+        dann kann jetzt sein nicht authorisierter Anfrage Token gegen einen voll authorisierten
+        Anfrage Token getauscht werden indem eine Anfrage an Twitter zurückgesendet wird inklusive
+        dem Anfrage Token und dem empfangenen Überprüfungscode. Twitter sollte jetzt eine Antwort
+        zurücksenden welche diesen Zugriffstoken enthält welcher in allen Anfragen verwendet werden
+        muss um Zugriff auf die API von Twitter im Auftrag des Benutzers zu erhalten. Twitter macht
+        das nur einmal sobald bestätigt wurde das der angehängte Anfrage Token noch nicht verwendet
+        wurde um einen anderen Anfrage Token zu erhalten. Ab diesem Punkt kann TweetExpress dem
+        Benutzer die Anfrage der Akzeptanz bestätigen und den originalen Anfrage Token löschen da
+        er nicht länger benötigt wird.
     </para>
 
     <para>
-        From this point forward, TweetExpress may use Twitter's API to post new tweets on the User's
-        behalf simply by accessing the API endpoints with a request that has been digitally signed
-        (via HMAC-SHA1) with a combination of TweetExpress' Consumer Secret and the Access Key being
-        used.
+        Ab diesem Punkt kann TweetExpress die API von Twitter verwenden um neue Tweets im Sinne des
+        Benutzers zu schicken indem einfach auf die Endpunkte der API mit einer Anfrage zugegriffen
+        wird welche digital signiert wurde (über HMAC-SHA1) mit einer Kombination von dem
+        Konsumenten Geheimnis von TweetExpress und dem Zugriffsschlüssel der verwendet wird.
     </para>
 
     <para>
-        Although Twitter do not currently expire Access Tokens, the User is free to deauthorize
-        TweetExpress from their Twitter account settings.  Once deauthorized, TweetExpress' access
-        will be cut off and their Access Token rendered invalid.
+        Auch wenn Twitter den Zugriffstoken nicht ablaufen lässt, steht es dem Benutzer frei
+        TweetExpress zu de-authorisieren damit es nicht mehr auf seine Einstellungen des Twitter
+        Accounts zugreifen kann. Sobald er de-authorisiert wurde, wird der Zugriff von TweetExpress
+        abgeschnitten und sein eigener Zugriffstoken wird als ungültig dargestellt.
     </para>
 </sect2>

@@ -71,10 +71,6 @@
         Transaktions Mechanismus aber gleichzeitigen Indexupdates sowie gleichzeitiges
         Aktualisieren und Lesen wird unterstützt. Er kann auch nicht mit Datenbanken in Bezug auf
         die Geschwindigkeit beim Empfangen von Daten verglichen werden.
-        The thing that should be remembered is that a Lucene index is not a database. It doesn't
-        provide index backup mechanisms except backup of the file system directory. It doesn't
-        provide transactional mechanisms though concurrent index update as well as concurrent update
-        and read are supported. It doesn't compare with databases in data retrieving speed.
     </para>
 
     <para>

@@ -719,31 +719,34 @@ public function setLineDashingPattern($pattern, $phase = 0);
                     <citetitle>Die PDF Referenz</citetitle> beschreibt diese Regel wie folgt:
                     <blockquote>
                     <para>
-                        The nonzero winding number rule determines whether a given point is inside
-                        a path by conceptually drawing a ray from that point to infinity in any
-                        direction and then examining the places where a segment of the path crosses
-                        the ray. Starting with a count of 0, the rule adds 1 each time a path
-                        segment crosses the ray from left to right and subtracts 1 each time a
-                        segment crosses from right to left. After counting all the crossings, if the
-                        result is 0 then the point is outside the path; otherwise it is inside.
+                        Die Regel der nicht-Null Fensternummer erkennt ob ein gegebener Punkt in
+                        einem Pfad liegt, indem konzeptuell ein Strahl von diesem Punkt in die
+                        Unendlichkeit in jede Richtung gezeichnet wird und dann die Plätze
+                        betrachtet werden an denen der Pfad den Strahl kreuzt. Beginnend mit der
+                        Anzahl 0, fügt die Regel jedesmal 1 hinzu wenn ein Pfadsegment den Strahl
+                        von links nach rechts kreuzt, und substrahiert jedesmal 1 wenn ein Segment
+                        von rechts nach links kreuzt. Wenn nach dem Zählen aller Kreuzungen das
+                        Ergebnis ß ist, dann ist der Punkt ausserhalb des Pfades; andernfalls ist
+                        er innerhalb.
 
-                        Note: The method just described does not specify what to do if a path
-                        segment coincides with or is tangent to the chosen ray. Since the direction
-                        of the ray is arbitrary, the rule simply chooses a ray that does not
-                        encounter such problem intersections. For simple convex paths, the nonzero
-                        winding number rule defines the inside and outside as one would intuitively
-                        expect. The more interesting cases are those involving complex or
-                        self-intersecting paths like the ones shown in Figure 4.10 (in a
-                        <acronym>PDF</acronym> Reference).
+                        Beachte: Die gerade beschriebene Methode spezifiziert nicht was zu tun ist
+                        wenn ein Pfadsegment mit dem gewählten Strahl übereinstimmt oder ihn
+                        tangiert. Da die Richtung des Strahls beliebig ist wählt die Regel einen
+                        Strahl der solche problematischen Schnittpunkte nicht verursacht. Für
+                        einfache konvexe Pfade, definierte die Regel der nicht-Null Fensternummer
+                        das Innen und Aussen wie man es intuitiv erwarten würde. Die interessanteren
+                        Fälle sind jene die komplexe oder selbst-schneidenden Pfade wie jene in
+                        Figur 4.10 gezeigt (in der <acronym>PDF</acronym> Referenz).
 
-                        For a path consisting of a five-pointed star, drawn with five connected
-                        straight line segments intersecting each other, the rule considers the
-                        inside to be the entire area enclosed by the star, including the pentagon in
-                        the center. For a path composed of two concentric circles, the areas
-                        enclosed by both circles are considered to be inside, provided that both are
-                        drawn in the same direction. If the circles are drawn in opposite
-                        directions, only the "doughnut" shape between them is inside, according to
-                        the rule; the "doughnut hole" is outside.
+                        Für einen Pfad der aus einem fünf-punktigen Stern besteht, und mit fünf
+                        verbundenen geraden Linien besteht die sich gegenseitig schneiden, nimmt die
+                        Regel an dass das Innen die komplette Fläche ist, welche vom Stern
+                        eingeschlossen wird, inklusive dem Pentagon in der Mitte. Für einen Pfad der
+                        aus zwei konzentrischen Kreisen besteht, wird angenommen das die Fläche
+                        welche von beiden Kreisen eingeschlossen wird innen ist, wobei beide in der
+                        selben Richtung gezeichnet sein müssen. Wenn die Kreise in entgegengesetzten
+                        Richtungen gezeichnet werden, wird nur die "Donut" Form zwischen Ihnen als
+                        Innen angenommen, entsprechend der Regel; das "Donut Loch" ist Aussen.
                     </para>
                     </blockquote>
                 </para>
@@ -754,20 +757,23 @@ public function setLineDashingPattern($pattern, $phase = 0);
                     <citetitle>Die PDF Referenz</citetitle> beschreibt diese Regel wie folgt:
                     <blockquote>
                     <para>
-                        An alternative to the nonzero winding number rule is the even-odd rule. This
-                        rule determines the "insideness" of a point by drawing a ray from that point
-                        in any direction and simply counting the number of path segments that cross
-                        the ray, regardless of direction. If this number is odd, the point is
-                        inside; if even, the point is outside. This yields the same results as the
-                        nonzero winding number rule for paths with simple shapes, but produces
-                        different results for more complex shapes.
+                        Eine alternative zur Regel der nicht-Null Fensternummer ist die
+                        gerade-ungerade Regel. Diese Regel erkennt die "Innenhaftigkeit" eines
+                        Punktes indem ein Strahl von diesem Punkt in jede Richtung gezeichnet wird
+                        und einfach die Anzahl der Pfadsegmente gezählt wird, welche den Strahl
+                        kreuzen, unabhängig von der Richtung. Wenn die Anzahl ungerade ist, dann ist
+                        der Punkt innerhalb; ist Sie gerade ist der Punkt ausserhalb. Das verursacht
+                        die gleichen Resultate wie die Regel der nicht-Null Fensternummer für Pfade
+                        mit einfachen Formen, produziert aber unterschiedliche Resultate für
+                        komplexere Formen.
 
-                        Figure 4.11 (in a <acronym>PDF</acronym> Reference) shows the effects of
-                        applying the even-odd rule to complex paths. For the five-pointed star, the
-                        rule considers the triangular points to be inside the path, but not the
-                        pentagon in the center. For the two concentric circles, only the "doughnut"
-                        shape between the two circles is considered inside, regardless of the
-                        directions in which the circles are drawn.
+                        Figur 4.11 (in der <acronym>PDF</acronym> Referenz) zeigt die Effekte wenn
+                        die gerade-ungerade Regel auf komplexe Pfade angewendet wird. Für den
+                        Fünf-punktigen Stern nimmt die Regel an dass die Triangularpunkte innerhalb
+                        des Pfades liegen, aber nicht das Pentagon im Zentrum. Für die zwei
+                        konzentrischen Kreise, wird nur von der "Donut" Form angenommen das Sie
+                        innerhalb liegt, unabhängig von der Richtung in welcher die Kreise
+                        gezeichnet werden.
                     </para>
                 </blockquote>
             </para>
@@ -1114,7 +1120,6 @@ public function getFontSize();
     </sect2>
 
     <sect2 id="zend.pdf.drawing.alpha">
-
         <title>Transparenz</title>
 
         <para>
@@ -1145,5 +1150,4 @@ public function setAlpha($alpha, $mode = 'Normal');
 ]]></programlisting>
         </para>
     </sect2>
-
 </sect1>

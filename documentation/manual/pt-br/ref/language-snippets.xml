@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 19995 -->
+<!-- EN-Revision: 20313 -->
 <!-- Reviewed: no -->
 
 <!-- links -->
 <!ENTITY lang                                   'pt-br'>
-<!ENTITY zf.manual.link                         'http://framework.zend.com/manual/en/'>
-<!ENTITY php.manual.link                        'http://www.php.net/manual/pt_BR/'>
+<!ENTITY zf.manual.link                         'http://framework.zend.com/manual/en'>
+<!ENTITY php.manual.link                        'http://www.php.net/manual/pt_BR'>
 
 <!-- manual.xml.in -->
 <!ENTITY book.title                             'Guia de Referência do Programador'>
@@ -32,3 +32,24 @@
 <!ENTITY appendix.migration.title               'Notas de Migração do Zend Framework'>
 
 <!ENTITY appendix.performance.title             'Guia de Desempenho do Zend Framework'>
+
+<!-- requirements table -->
+<!ENTITY requirements.extensions.table.title    'Extensões do PHP Usadas no Zend Framework por Componente'>
+<!ENTITY requirements.zendcomponents.table.title 'Componentes do Zend Framework e as Extensões do PHP utilizadas'>
+<!ENTITY requirements.dependencies.table.title  'Componentes do Zend Framework e suas dependências com outros componentes do Zend Framework'>
+
+<!ENTITY requirements.php.extensions            'Extensão do <acronym>PHP</acronym>'>
+<!ENTITY requirements.dependency.type           'Tipo de Dependência'>
+<!ENTITY requirements.used.by.zf.components     'Utilizado pelos componentes do Zend Framework'>
+<!ENTITY requirements.zf.component              'Componente do Zend Framework'>
+<!ENTITY requirements.dependent.zf.components   'Dependente do Componente do Zend Framework'>
+
+<!ENTITY requirements.hard                      'Forte'>
+<!ENTITY requirements.soft                      'Fraco'>
+<!ENTITY requirements.fix                       'Fix'>
+<!ENTITY requirements.sub                       'Sub'>
+
+<!ENTITY requirements.all.components            'Todos os Componentes'>
+<!ENTITY requirements.virtually.all.components  'Virtualmente todos os componentes'>
+<!ENTITY requirements.all.pdo.adapters          'Todos os adaptadores de banco de dados <acronym>PDO</acronym>'>
+

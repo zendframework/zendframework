@@ -102,33 +102,43 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
         // prepare separator and pattern list
         $sep      = quotemeta($this->_separator);
         $patterns = array();
+        $lengths  = array();
 
         // check for ISBN-10
         if ($this->_type == self::ISBN10 || $this->_type == self::AUTO) {
             if (empty($sep)) {
-                $pattern = '^[0-9]{9}[0-9X]{1}$';
+                $pattern = '/^[0-9]{9}[0-9X]{1}$/';
+                $length  = 10;
             } else {
-                $pattern = "^[0-9]{1,7}[{$sep}]{1}[0-9]{1,7}[{$sep}]{1}[0-9]{1,7}[{$sep}]{1}[0-9X]{1}\${13}";
+                $pattern = "/^[0-9]{1,7}[{$sep}]{1}[0-9]{1,7}[{$sep}]{1}[0-9]{1,7}[{$sep}]{1}[0-9X]{1}$/";
+                $length  = 13;
             }
+
             $patterns[$pattern] = self::ISBN10;
+            $lengths[$pattern]  = $length;
         }
 
         // check for ISBN-13
         if ($this->_type == self::ISBN13 || $this->_type == self::AUTO) {
             if (empty($sep)) {
-                $pattern = '^[0-9]{13}$';
+                $pattern = '/^[0-9]{13}$/';
+                $length  = 13;
             } else {
-                $pattern = "^[0-9]{1,9}[{$sep}]{1}[0-9]{1,5}[{$sep}]{1}[0-9]{1,9}[{$sep}]{1}[0-9]{1,9}[{$sep}]{1}[0-9]{1}\${17}";
+                $pattern = "/^[0-9]{1,9}[{$sep}]{1}[0-9]{1,5}[{$sep}]{1}[0-9]{1,9}[{$sep}]{1}[0-9]{1,9}[{$sep}]{1}[0-9]{1}$/";
+                $length  = 17;
             }
+
             $patterns[$pattern] = self::ISBN13;
+            $lengths[$pattern]  = $length;
         }
 
         // check pattern list
         foreach ($patterns as $pattern => $type) {
-            if (ereg($pattern, $this->_value) == 1) {
+            if ((strlen($this->_value) == $lengths[$pattern]) && preg_match($pattern, $this->_value)) {
                 return $type;
             }
         }
+
         return null;
     }
 

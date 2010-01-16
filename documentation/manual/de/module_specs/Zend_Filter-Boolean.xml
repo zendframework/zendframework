@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20223 -->
+<!-- EN-Revision: 20306 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.boolean">
     <title>Boolean</title>
@@ -213,9 +213,10 @@ $filter->filter('yes');
 
         <para>
             In diesem Fall arbeitet <classname>Zend_Filter_Boolean</classname> wie in der folgenden
-            Tabelle beschrieben, die zeigt welche Werte true oder false zurückgeben. Alle anderen
-            angegebenen Werte werden ohne Änderung zurückgegeben wenn <property>casting</property>
-            auf <constant>FALSE</constant> gesetzt wird.
+            Tabelle beschrieben, die zeigt welche Werte <constant>TRUE</constant> oder
+            <constant>FALSE</constant> zurückgeben. Alle anderen angegebenen Werte werden ohne
+            Änderung zurückgegeben wenn <property>casting</property> auf <constant>FALSE</constant>
+            gesetzt wird.
         </para>
 
         <table id="zend.filter.set.boolean.casting.table">
@@ -291,17 +292,17 @@ $filter->filter('yes');
                     <row>
                         <entry>Zend_Filter_Boolean::FALSE_STRING</entry>
 
-                        <entry>"false"</entry>
+                        <entry>"false" (unabhängig von der Schreibweise)</entry>
 
-                        <entry>"true"</entry>
+                        <entry>"true" (unabhängig von der Schreibweise)</entry>
                     </row>
 
                     <row>
                         <entry>Zend_Filter_Boolean::YES</entry>
 
-                        <entry>localized "yes"</entry>
+                        <entry>localized "yes" (unabhängig von der Schreibweise)</entry>
 
-                        <entry>localized "no"</entry>
+                        <entry>localized "no" (unabhängig von der Schreibweise)</entry>
                     </row>
                 </tbody>
             </tgroup>

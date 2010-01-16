@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18786 -->
+<!-- EN-Revision: 20313 -->
 <!-- Reviewed: no -->
 <appendix id="requirements" xmlns:xi="http://www.w3.org/2001/XInclude">
-
     <title>Zend Framework Voraussetzungen</title>
 
     <sect1 id="requirements.introduction">
-
         <title>Einführung</title>
 
         <para>
@@ -28,7 +26,6 @@
         </para>
 
         <sect2 id="requirements.version">
-
             <title>PHP Version</title>
 
             <para>
@@ -41,11 +38,9 @@
                 Zend Framework hat eine sehr umfangreiche Sammlung von automatisierten Tests, welche
                 mit PHPUnit 3.3.0 oder einer späteren Version, ausgeführt werden können.
             </para>
-
         </sect2>
 
         <sect2 id="requirements.extensions">
-
             <title>PHP Erweiterungen</title>
 
             <para>
@@ -67,11 +62,10 @@
                 Komponente selbst ausführen wenn die Erweiterung nicht vorhanden ist.
             </para>
 
-            <xi:include href="requirements-php-extensions-table.xml" />
+            <xi:include href="../../en/requirements-php-extensions-table.xml" />
         </sect2>
 
         <sect2 id="requirements.zendcomponents">
-
             <title>Zend Framework Komponenten</title>
 
             <para>
@@ -92,11 +86,10 @@
                 Komponente selbst ausführen wenn die Erweiterung nicht vorhanden ist.
             </para>
 
-            <xi:include href="requirements-zendcomponents-table.xml" />
+            <xi:include href="../../en/requirements-zendcomponents-table.xml" />
         </sect2>
 
         <sect2 id="requirements.dependencies">
-
             <title>Zend Framework Abhängigkeiten</title>
 
             <para>
@@ -126,10 +119,7 @@
                 </para>
             </note>
 
-            <xi:include href="requirements-dependencies-table.xml" />
+            <xi:include href="../../en/requirements-dependencies-table.xml" />
         </sect2>
     </sect1>
 </appendix>
-<!--
-vim:se ts=4 sw=4 et:
--->

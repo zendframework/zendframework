@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 19995 -->
+<!-- EN-Revision: 20313 -->
 <!-- Reviewed: no -->
 
 <!-- links -->
@@ -32,3 +32,23 @@
 <!ENTITY appendix.migration.title               "Zend Framework's Migrationshinweise">
 
 <!ENTITY appendix.performance.title             "Zend Framework's Performanceratgeber">
+
+<!-- requirements table -->
+<!ENTITY requirements.extensions.table.title    'PHP Erweiterungen die in Zend Framework verwendet werden laut Komponente'>
+<!ENTITY requirements.zendcomponents.table.title 'Zend Framework Komponenten und die PHP Erweiterungen welche Sie verwenden'>
+<!ENTITY requirements.dependencies.table.title  'Zend Framework Komponenten und deren Abhängigkeit zu anderen Zend Framework Komponenten'>
+
+<!ENTITY requirements.php.extensions            '<acronym>PHP</acronym> Erweiterung'>
+<!ENTITY requirements.dependency.type           'Typ der Abhängigkeit'>
+<!ENTITY requirements.used.by.zf.components     'Verwendet von Zend Framework Komponenten'>
+<!ENTITY requirements.zf.component              'Zend Framework Komponente'>
+<!ENTITY requirements.dependent.zf.components   'Abhängige Zend Framework Komponente'>
+
+<!ENTITY requirements.hard                      'Hard'>
+<!ENTITY requirements.soft                      'Soft'>
+<!ENTITY requirements.fix                       'Fix'>
+<!ENTITY requirements.sub                       'Sub'>
+
+<!ENTITY requirements.all.components            'Alle Komponenten'>
+<!ENTITY requirements.virtually.all.components  'Virtuell alle Komponenten'>
+<!ENTITY requirements.all.pdo.adapters          'Alle <acronym>PDO</acronym> Datenbank Adapter'>

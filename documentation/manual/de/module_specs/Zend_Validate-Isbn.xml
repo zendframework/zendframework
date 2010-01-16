@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20229 -->
+<!-- EN-Revision: 20301 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.isbn">
     <title>Isbn</title>
@@ -99,11 +99,15 @@ if ($validator->isValid($isbn)) {
 }
 ]]></programlisting>
 
-        <para>
-            Es ist zu beachten das dies <constant>FALSE</constant> zurückgibt wenn
-            <varname>$isbn</varname> kein Trennzeichen <emphasis>oder</emphasis> einen ungültigen
-            <acronym>ISBN</acronym> Wert enthält.
-        </para>
+        <note>
+            <title>Werte ohne Trennzeichen</title>
+
+            <para>
+                Es ist zu beachten das dies <constant>FALSE</constant> zurückgibt wenn
+                <varname>$isbn</varname> kein Trennzeichen <emphasis>oder</emphasis> einen
+                ungültigen <acronym>ISBN</acronym> Wert enthält.
+            </para>
+        </note>
 
         <para>
             Gültige Separatoren sind:

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 20309 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.filter_chains">
-
     <title>Filter Ketten</title>
 
     <para>
@@ -33,7 +32,27 @@ $username = $filterChain->filter($_POST['username']);
         Filterkette verwendet werden.
     </para>
 
+    <sect2 id="zend.filter.filter_chains.order">
+        <title>Ändern der Reihenfolge der Filterkette</title>
+
+        <para>
+            Seit 1.10 unterstützt die <classname>Zend_Filter</classname> Kette auch das Ändern der
+            Kette durch voranstellen oder anhängen von Filtern. Zum Beispiel macht der nächste
+            Code exakt das gleiche wie das andere Beispiel für die Filterkette des Benutzernamens:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// Eine Filterkette erstellen und die Filter der Kette hinzufügen
+$filterChain = new Zend_Filter();
+
+// Dieser Filter wird der Filterkette angehängt
+$filterChain->appendFilter(new Zend_Filter_StringToLower());
+
+// Dieser Filter wird am Beginn der Kette vorangestellt
+$filterChain->prependFilter(new Zend_Filter_Alpha());
+
+// Nach dem Benutzernamen filtern
+$username = $filterChain->filter($_POST['username']);
+]]></programlisting>
+    </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

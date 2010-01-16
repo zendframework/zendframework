@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.queue.example">
+    <title>Примеры использования</title>
+
+    <para>
+        The below example of <classname>Zend_Queue</classname> shows a variety of
+        features, including queue creation, queue retrieval, message retrieval,
+        message deletion, and sending messages.
+		
+		Приведённый ниже пример показывает варианты использования 
+		<classname>Zend_Queue</classname>: создание очереди сообщений, 
+		получение, отправку и удаление сообщений.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+// Конфигурационные параметры
+// @see Zend_Queue_Adapater::__construct()
+$options = array(
+    'name' => 'queue1',
+);
+
+// Создание очереди на основе массива
+$queue = new Zend_Queue('Array', $options);
+
+// Получение списка очередей
+foreach ($queue->getQueues() as $name) {
+    echo $name, "\n";
+}
+
+// Создание новой очереди
+$queue2 = $queue->createQueue('queue2');
+
+// Подсчёт количества сообщений в очереди (реализует интерфейс Countable из SPL)
+echo count($queue);
+
+// Получение 5 сообщений из очереди
+$messages = $queue->receive(5);
+
+foreach ($messages as $i => $message) {
+    echo $message->body, "\n";
+
+    // Сообщение обработано, его можно удалить
+    $queue->deleteMessage($message);
+}
+
+// Отправка сообщения в текущую очередь
+$queue->send('My Test Message');
+
+// Удаление созданной очереди и всех сообщений в ней
+$queue->deleteQueue('queue2');
+]]></programlisting>
+</sect1>

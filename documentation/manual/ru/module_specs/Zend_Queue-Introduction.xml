@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.queue.introduction">
+    <title>Введение</title>
+
+    <para>
+        <classname>Zend_Queue</classname> представляет собой фабрику 
+		для создания подключений к  очередям сообщений.
+    </para>
+
+    <para>
+		Очередь сообщений – это средство для распределенной обработки данных. 
+		Например, приложение для поиска работы может принимать резюме из 
+		множества различных источников.
+    </para>
+
+    <para>
+        Вы можете создать очередь "<filename>/queue/applications</filename>", 
+		у которой будут отправитель и получатель. Отправителем может быть любой 
+		источник информации, который может подключаться к службе сообщений либо 
+		напрямую, либо через приложение, имеющее доступ к ней.
+    </para>
+
+    <para>
+        Отправитель отсылает сообщение в очередь:
+    </para>
+
+    <programlisting language="xml"><![CDATA[
+<resume>
+    <name>Вася Пупкин</name>
+    <location>
+        <city>Москва</city>
+        <state>Московская область</state>
+    </location>
+    <skills>
+        <programming>PHP</programming>
+        <programming>Perl</programming>
+    </skills>
+</resume>
+]]></programlisting>
+
+    <para>
+        Получатель или обработчик очереди получает сообщение и обработает данные из резюме.
+    </para>
+
+    <para>
+	Существует много паттернов, которые могут быть применены к очередям сообщений для того,
+	чтобы абстрагировать поток сообщений от кода и предоставить метрики, 
+	трансформации и мониторинг очередей сообщений.
+	
+        <ulink
+            url="http://www.amazon.com/Enterprise-Integration-Patterns-Designing-Addison-Wesley/dp/0321200683">Enterprise
+            Integration Patterns: Designing, Building, and Deploying Messaging Solutions
+            (Addison-Wesley Signature Series)</ulink> (ISBN-10 0321127420; ISBN-13 978-0321127426) 
+	- хорошая книга об использовании очередей сообщений.
+    </para>
+</sect1>

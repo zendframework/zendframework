@@ -33,6 +33,16 @@ require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
 class Zend_Feed_Writer_Extension_DublinCore_Renderer_Feed
     extends Zend_Feed_Writer_Extension_RendererAbstract
 {
+
+    /**
+     * Set to TRUE if a rendering method actually renders something. This
+     * is used to prevent premature appending of a XML namespace declaration
+     * until an element which requires it is actually appended.
+     *
+     * @var bool
+     */
+    protected $_called = false;
+    
     /**
      * Render feed
      * 
@@ -43,8 +53,10 @@ class Zend_Feed_Writer_Extension_DublinCore_Renderer_Feed
         if (strtolower($this->getType()) == 'atom') {
             return;
         }
-        $this->_appendNamespaces();
         $this->_setAuthors($this->_dom, $this->_base);
+        if ($this->_called) {
+            $this->_appendNamespaces();
+        }
     }
     
     /**
@@ -79,5 +91,6 @@ class Zend_Feed_Writer_Extension_DublinCore_Renderer_Feed
                 $root->appendChild($author);  
             }
         }
+        $this->_called = true;
     }
 }

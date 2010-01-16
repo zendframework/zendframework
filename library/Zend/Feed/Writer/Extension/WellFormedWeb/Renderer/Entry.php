@@ -33,6 +33,16 @@ require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
 class Zend_Feed_Writer_Extension_WellFormedWeb_Renderer_Entry
     extends Zend_Feed_Writer_Extension_RendererAbstract
 {
+
+    /**
+     * Set to TRUE if a rendering method actually renders something. This
+     * is used to prevent premature appending of a XML namespace declaration
+     * until an element which requires it is actually appended.
+     *
+     * @var bool
+     */
+    protected $_called = false;
+    
     /**
      * Render entry
      * 
@@ -43,8 +53,10 @@ class Zend_Feed_Writer_Extension_WellFormedWeb_Renderer_Entry
         if (strtolower($this->getType()) == 'atom') {
             return; // RSS 2.0 only
         }
-        $this->_appendNamespaces();
         $this->_setCommentFeedLinks($this->_dom, $this->_base);
+        if ($this->_called) {
+            $this->_appendNamespaces();
+        }
     }
     
     /**
@@ -79,5 +91,6 @@ class Zend_Feed_Writer_Extension_WellFormedWeb_Renderer_Entry
                 $root->appendChild($flink);
             }
         }
+        $this->_called = true;
     }
 }

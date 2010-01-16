@@ -33,6 +33,16 @@ require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
 class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
     extends Zend_Feed_Writer_Extension_RendererAbstract
 {
+
+    /**
+     * Set to TRUE if a rendering method actually renders something. This
+     * is used to prevent premature appending of a XML namespace declaration
+     * until an element which requires it is actually appended.
+     *
+     * @var bool
+     */
+    protected $_called = false;
+    
     /**
      * Render entry
      * 
@@ -43,10 +53,12 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
         if (strtolower($this->getType()) == 'rss') {
             return; // Atom 1.0 only
         }
-        $this->_appendNamespaces();
         $this->_setCommentLink($this->_dom, $this->_base);
         $this->_setCommentFeedLinks($this->_dom, $this->_base);
         $this->_setCommentCount($this->_dom, $this->_base);
+        if ($this->_called) {
+            $this->_appendNamespaces();
+        }
     }
     
     /**
@@ -82,6 +94,7 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
             $clink->setAttribute('thr:count', $count);
         }
         $root->appendChild($clink);
+        $this->_called = true;
     }
     
     /**
@@ -107,6 +120,7 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
                 $flink->setAttribute('thr:count', $count);
             }
             $root->appendChild($flink);
+            $this->_called = true;
         }
     }
 
@@ -126,5 +140,6 @@ class Zend_Feed_Writer_Extension_Threading_Renderer_Entry
         $tcount = $this->_dom->createElement('thr:total');
         $tcount->nodeValue = $count;
         $root->appendChild($tcount);
+        $this->_called = true;
     }
 }

@@ -33,6 +33,16 @@ require_once 'Zend/Feed/Writer/Extension/RendererAbstract.php';
 class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
     extends Zend_Feed_Writer_Extension_RendererAbstract
 {
+    
+    /**
+     * Set to TRUE if a rendering method actually renders something. This
+     * is used to prevent premature appending of a XML namespace declaration
+     * until an element which requires it is actually appended.
+     *
+     * @var bool
+     */
+    protected $_called = false;
+    
     /**
      * Render feed
      * 
@@ -40,7 +50,6 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
      */
     public function render()
     {
-        $this->_appendNamespaces();
         $this->_setAuthors($this->_dom, $this->_base);
         $this->_setBlock($this->_dom, $this->_base);
         $this->_setCategories($this->_dom, $this->_base);
@@ -52,6 +61,9 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         $this->_setOwners($this->_dom, $this->_base);
         $this->_setSubtitle($this->_dom, $this->_base);
         $this->_setSummary($this->_dom, $this->_base);
+        if ($this->_called) {
+            $this->_appendNamespaces();
+        }
     }
     
     /**
@@ -84,6 +96,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
             $el->appendChild($text);
             $root->appendChild($el);
         }
+        $this->_called = true;
     }
     
     /**
@@ -103,6 +116,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         $text = $dom->createTextNode($block);
         $el->appendChild($text);
         $root->appendChild($el);
+        $this->_called = true;
     }
     
     /**
@@ -134,6 +148,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
                 }
             }
         }
+        $this->_called = true;
     }
     
     /**
@@ -152,6 +167,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         $el = $dom->createElement('itunes:image');
         $el->setAttribute('href', $image);
         $root->appendChild($el);
+        $this->_called = true;
     }
     
     /**
@@ -171,6 +187,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         $text = $dom->createTextNode($duration);
         $el->appendChild($text);
         $root->appendChild($el);
+        $this->_called = true;
     }
     
     /**
@@ -190,6 +207,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         $text = $dom->createTextNode($explicit);
         $el->appendChild($text);
         $root->appendChild($el);
+        $this->_called = true;
     }
     
     /**
@@ -209,6 +227,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         $text = $dom->createTextNode(implode(',', $keywords));
         $el->appendChild($text);
         $root->appendChild($el);
+        $this->_called = true;
     }
     
     /**
@@ -228,6 +247,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         $text = $dom->createTextNode($url);
         $el->appendChild($text);
         $root->appendChild($el);
+        $this->_called = true;
     }
     
     /**
@@ -255,6 +275,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
             $el->appendChild($name);
             $el->appendChild($email);
         }
+        $this->_called = true;
     }
     
     /**
@@ -274,6 +295,7 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         $text = $dom->createTextNode($subtitle);
         $el->appendChild($text);
         $root->appendChild($el);
+        $this->_called = true;
     }
     
     /**
@@ -293,5 +315,6 @@ class Zend_Feed_Writer_Extension_ITunes_Renderer_Feed
         $text = $dom->createTextNode($summary);
         $el->appendChild($text);
         $root->appendChild($el);
+        $this->_called = true;
     }
 }

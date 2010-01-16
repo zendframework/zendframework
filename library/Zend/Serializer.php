@@ -81,9 +81,7 @@ class Zend_Serializer
     public static function getAdapterLoader() 
     {
         if (self::$_adapterLoader === null) {
-            $loader = new Zend_Loader_PluginLoader();
-            $loader->addPrefixPath('Zend_Serializer_Adapter', dirname(__FILE__).'/Serializer/Adapter');
-            self::$_adapterLoader = $loader;
+            self::$_adapterLoader = self::_getDefaultAdapterLoader();
         }
         return self::$_adapterLoader;
     }
@@ -97,6 +95,29 @@ class Zend_Serializer
     public static function setAdapterLoader(Zend_Loader_PluginLoader $pluginLoader) 
     {
         self::$_adapterLoader = $pluginLoader;
+    }
+    
+    /**
+     * Resets the internal adapter plugin loader
+     *
+     * @return Zend_Loader_PluginLoader
+     */
+    public static function resetAdapterLoader()
+    {
+        self::$_adapterLoader = self::_getDefaultAdapterLoader();
+        return self::$_adapterLoader;
+    }
+    
+    /**
+     * Returns a default adapter plugin loader
+     *
+     * @return Zend_Loader_PluginLoader
+     */
+    protected static function _getDefaultAdapterLoader()
+    {
+        $loader = new Zend_Loader_PluginLoader();
+        $loader->addPrefixPath('Zend_Serializer_Adapter', dirname(__FILE__).'/Serializer/Adapter');
+        return $loader;
     }
 
     /**

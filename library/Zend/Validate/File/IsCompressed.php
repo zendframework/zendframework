@@ -60,28 +60,48 @@ class Zend_Validate_File_IsCompressed extends Zend_Validate_File_MimeType
     {
         if ($mimetype instanceof Zend_Config) {
             $mimetype = $mimetype->toArray();
-        } else if (empty($mimetype)) {
-            $mimetype = array(
-                'application/x-tar',
-                'application/x-cpio',
-                'application/x-debian-package',
-                'application/x-archive',
-                'application/x-arc',
-                'application/x-arj',
-                'application/x-lharc',
-                'application/x-lha',
-                'application/x-rar',
-                'application/zip',
-                'application/zoo',
-                'application/x-eet',
-                'application/x-java-pack200',
-                'application/x-compress',
-                'application/x-gzip',
-                'application/x-bzip2'
-            );
         }
 
-        $this->setMimeType($mimetype);
+        $temp    = array();
+        $default = array(
+            'application/x-tar',
+            'application/x-cpio',
+            'application/x-debian-package',
+            'application/x-archive',
+            'application/x-arc',
+            'application/x-arj',
+            'application/x-lharc',
+            'application/x-lha',
+            'application/x-rar',
+            'application/zip',
+            'application/zoo',
+            'application/x-eet',
+            'application/x-java-pack200',
+            'application/x-compress',
+            'application/x-gzip',
+            'application/x-bzip2'
+        );
+
+        if (is_array($mimetype)) {
+            $temp = $mimetype;
+            if (array_key_exists('magicfile', $temp)) {
+                unset($temp['magicfile']);
+            }
+
+            if (array_key_exists('headerCheck', $temp)) {
+                unset($temp['headerCheck']);
+            }
+
+            if (empty($temp)) {
+                $mimetype += $default;
+            }
+        }
+
+        if (empty($mimetype)) {
+            $mimetype = $default;
+        }
+
+        parent::__construct($mimetype);
     }
 
     /**

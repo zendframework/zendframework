@@ -123,10 +123,12 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
 
         if (isset($mimetype['magicfile'])) {
             $this->setMagicFile($mimetype['magicfile']);
+            unset($mimetype['magicfile']);
         }
 
         if (isset($mimetype['headerCheck'])) {
-            $this->enableHeaderCheck(true);
+            $this->enableHeaderCheck($mimetype['headerCheck']);
+            unset($mimetype['headerCheck']);
         }
 
         $this->setMimeType($mimetype);

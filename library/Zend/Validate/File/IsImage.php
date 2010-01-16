@@ -60,32 +60,52 @@ class Zend_Validate_File_IsImage extends Zend_Validate_File_MimeType
     {
         if ($mimetype instanceof Zend_Config) {
             $mimetype = $mimetype->toArray();
-        } else if (empty($mimetype)) {
-            $mimetype = array(
-                'image/x-quicktime',
-                'image/jp2',
-                'image/x-xpmi',
-                'image/x-portable-bitmap',
-                'image/x-portable-greymap',
-                'image/x-portable-pixmap',
-                'image/x-niff',
-                'image/tiff',
-                'image/png',
-                'image/x-unknown',
-                'image/gif',
-                'image/x-ms-bmp',
-                'application/dicom',
-                'image/vnd.adobe.photoshop',
-                'image/vnd.djvu',
-                'image/x-cpi',
-                'image/jpeg',
-                'image/x-ico',
-                'image/x-coreldraw',
-                'image/svg+xml'
-            );
         }
 
-        $this->setMimeType($mimetype);
+        $temp    = array();
+        $default = array(
+            'image/x-quicktime',
+            'image/jp2',
+            'image/x-xpmi',
+            'image/x-portable-bitmap',
+            'image/x-portable-greymap',
+            'image/x-portable-pixmap',
+            'image/x-niff',
+            'image/tiff',
+            'image/png',
+            'image/x-unknown',
+            'image/gif',
+            'image/x-ms-bmp',
+            'application/dicom',
+            'image/vnd.adobe.photoshop',
+            'image/vnd.djvu',
+            'image/x-cpi',
+            'image/jpeg',
+            'image/x-ico',
+            'image/x-coreldraw',
+            'image/svg+xml'
+        );
+
+        if (is_array($mimetype)) {
+            $temp = $mimetype;
+            if (array_key_exists('magicfile', $temp)) {
+                unset($temp['magicfile']);
+            }
+
+            if (array_key_exists('headerCheck', $temp)) {
+                unset($temp['headerCheck']);
+            }
+
+            if (empty($temp)) {
+                $mimetype += $default;
+            }
+        }
+
+        if (empty($mimetype)) {
+            $mimetype = $default;
+        }
+
+        parent::__construct($mimetype);
     }
 
     /**

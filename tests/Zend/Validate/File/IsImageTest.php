@@ -176,6 +176,19 @@ class Zend_Validate_File_IsImageTest extends PHPUnit_Framework_TestCase
         $error = $validator->getMessages();
         $this->assertTrue(array_key_exists('fileIsImageFalseType', $error));
     }
+
+    public function testOptionsAtConstructor()
+    {
+        $validator = new Zend_Validate_File_IsImage(array(
+            'image/gif',
+            'image/jpg',
+            'magicfile' => __FILE__,
+            'headerCheck' => true));
+
+        $this->assertEquals(__FILE__, $validator->getMagicFile());
+        $this->assertTrue($validator->getHeaderCheck());
+        $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
+    }
 }
 
 // Call Zend_Validate_File_IsImage::main() if this source file is executed directly.

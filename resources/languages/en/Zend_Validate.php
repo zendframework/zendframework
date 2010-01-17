@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 20350
+ * EN-Revision: 20359
  */
 return array(
     // Zend_Validate_Alnum
@@ -101,7 +101,7 @@ return array(
 
     // Zend_Validate_File_ExcludeMimeType
     "File '%value%' has a false mimetype of '%type%'" => "File '%value%' has a false mimetype of '%type%'",
-    "The mimetype of file '%value%' could not been detected" => "The mimetype of file '%value%' could not been detected",
+    "The mimetype of file '%value%' could not be detected" => "The mimetype of file '%value%' could not be detected",
     "File '%value%' can not be read" => "File '%value%' can not be read",
 
     // Zend_Validate_File_Exists

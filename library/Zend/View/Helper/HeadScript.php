@@ -424,7 +424,7 @@ class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container
         }
 
         $type = ($this->_autoEscape) ? $this->_escape($item->type) : $item->type;
-        $html  = $indent . '<script type="' . $type . '"' . $attrString . '>';
+        $html  = '<script type="' . $type . '"' . $attrString . '>';
         if (!empty($item->source)) {
               $html .= PHP_EOL . $indent . '    ' . $escapeStart . PHP_EOL . $item->source . $indent . '    ' . $escapeEnd . PHP_EOL . $indent;
         }
@@ -434,7 +434,9 @@ class Zend_View_Helper_HeadScript extends Zend_View_Helper_Placeholder_Container
             && !empty($item->attributes['conditional'])
             && is_string($item->attributes['conditional']))
         {
-            $html = '<!--[if ' . $item->attributes['conditional'] . ']> ' . $html . '<![endif]-->';
+            $html = $indent . '<!--[if ' . $item->attributes['conditional'] . ']> ' . $html . '<![endif]-->';
+        } else {
+            $html = $indent . $html;
         }
 
         return $html;

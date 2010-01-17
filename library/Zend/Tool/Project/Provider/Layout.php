@@ -77,12 +77,10 @@ class Zend_Tool_Project_Provider_Layout extends Zend_Tool_Project_Provider_Abstr
         
         $layoutPath = 'APPLICATION_PATH "/layouts/scripts/"';
         
-        $quoteValue = (preg_match('#"\'#', $layoutPath)) ? false : true;
-        
         if ($this->_registry->getRequest()->isPretend()) {
             $this->_registry->getResponse()->appendContent('Would add "resources.layout.layoutPath" key to the application config file.');
         } else {
-            $applicationConfigResource->addStringItem('resources.layout.layoutPath', $layoutPath, 'production', $quoteValue);
+            $applicationConfigResource->addStringItem('resources.layout.layoutPath', $layoutPath, 'production', false);
             $applicationConfigResource->create(); 
             
             $layoutScriptFile = self::createResource($profile);

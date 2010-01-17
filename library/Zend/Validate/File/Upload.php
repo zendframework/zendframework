@@ -59,8 +59,8 @@ class Zend_Validate_File_Upload extends Zend_Validate_Abstract
         self::NO_FILE        => "File '%value%' was not uploaded",
         self::NO_TMP_DIR     => "No temporary directory was found for file '%value%'",
         self::CANT_WRITE     => "File '%value%' can't be written",
-        self::EXTENSION      => "The extension returned an error while uploading the file '%value%'",
-        self::ATTACK         => "File '%value%' was illegal uploaded, possible attack",
+        self::EXTENSION      => "A PHP extension returned an error while uploading the file '%value%'",
+        self::ATTACK         => "File '%value%' was illegally uploaded. This could be a possible attack",
         self::FILE_NOT_FOUND => "File '%value%' was not found",
         self::UNKNOWN        => "Unknown error while uploading file '%value%'"
     );

@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 20359
+ * EN-Revision: 20360
  */
 return array(
     // Zend_Validate_Alnum
@@ -131,12 +131,12 @@ return array(
 
     // Zend_Validate_File_IsCompressed
     "File '%value%' is not compressed, '%type%' detected" => "File '%value%' is not compressed, '%type%' detected",
-    "The mimetype of file '%value%' could not been detected" => "The mimetype of file '%value%' could not been detected",
+    "The mimetype of file '%value%' could not be detected" => "The mimetype of file '%value%' could not be detected",
     "File '%value%' can not be read" => "File '%value%' can not be read",
 
     // Zend_Validate_File_IsImage
     "File '%value%' is no image, '%type%' detected" => "File '%value%' is no image, '%type%' detected",
-    "The mimetype of file '%value%' could not been detected" => "The mimetype of file '%value%' could not been detected",
+    "The mimetype of file '%value%' could not be detected" => "The mimetype of file '%value%' could not be detected",
     "File '%value%' can not be read" => "File '%value%' can not be read",
 
     // Zend_Validate_File_Md5
@@ -146,7 +146,7 @@ return array(
 
     // Zend_Validate_File_MimeType
     "File '%value%' has a false mimetype of '%type%'" => "File '%value%' has a false mimetype of '%type%'",
-    "The mimetype of file '%value%' could not been detected" => "The mimetype of file '%value%' could not been detected",
+    "The mimetype of file '%value%' could not be detected" => "The mimetype of file '%value%' could not be detected",
     "File '%value%' can not be read" => "File '%value%' can not be read",
 
     // Zend_Validate_File_NotExists
@@ -169,8 +169,8 @@ return array(
     "File '%value%' was not uploaded" => "File '%value%' was not uploaded",
     "No temporary directory was found for file '%value%'" => "No temporary directory was found for file '%value%'",
     "File '%value%' can't be written" => "File '%value%' can't be written",
-    "The extension returned an error while uploading the file '%value%'" => "The extension returned an error while uploading the file '%value%'",
-    "File '%value%' was illegal uploaded, possible attack" => "File '%value%' was illegal uploaded, possible attack",
+    "A PHP extension returned an error while uploading the file '%value%'" => "A PHP extension returned an error while uploading the file '%value%'",
+    "File '%value%' was illegally uploaded. This could be a possible attack" => "File '%value%' was illegally uploaded. This could be a possible attack",
     "File '%value%' was not found" => "File '%value%' was not found",
     "Unknown error while uploading file '%value%'" => "Unknown error while uploading file '%value%'",
 

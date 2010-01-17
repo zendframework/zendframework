@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect1 id="zend.log.factory">
+    <title>Utiliser la fabrique pour créer des logs</title>
+
+    <para>
+        En plus de pouvoir instancier les objets directement, il est possible d'utiliser une fabrique,
+        la méthode <methodname>factory()</methodname> d'une instance Log, et il est possible de configurer
+        les objets d'écriture (writers) et leurs filtres. En utilisant la fabrique, vous pouvez attacher
+        plusieurs objets d'écriture dont la configuration peut être passée sous forme de tableau ou d'objet
+        <classname>Zend_Config</classname>.
+    </para>
+
+    <para>
+        Un exemple:
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$logger = Zend_Log::factory(array(
+    array(
+        'writerName'   => 'Stream',
+        'writerParams' => array(
+            'stream'   => '/tmp/zend.log',
+        ),
+        'filterName'   => 'Priority',
+        'filterParams' => array(
+            'priority' => Zend_Log::WARN,
+        ),
+    ),
+    array(
+        'writerName'   => 'Firebug',
+        'filterName'   => 'Priority',
+        'filterParams' => array(
+            'priority' => Zend_Log::INFO,
+        ),
+    ),
+));
+]]></programlisting>
+
+    <para>
+        Le code ci-dessus instancie un objet journal et 2 objets d'écriture dont un vers un
+        fichier local, puis un vers Firebug. Chacun possède un filtre.
+    </para>
+
+    <para>
+        Chaque objet d'écriture support les options suivantes:
+    </para>
+
+    <variablelist>
+        <varlistentry>
+            <term>writerName (requis)</term>
+
+            <listitem>
+                <para>
+                    Le nom "court" de l'objet d'écriture; le nom sans le préfixe. Voyez
+                    "writerNamespace" pour plus de détails, des exemples sont : "Mock", 
+                    "Stream", "Firebug".
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>writerParams (optionnel)</term>
+
+            <listitem>
+                <para>
+                    Tableau associatif de paramètre à utiliser à l'instanciation de l'objet d'écriture.
+                    Chaque méthode <methodname>factory()</methodname> fera suivre ces paramètres.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>writerNamespace (optionnel)</term>
+
+            <listitem>
+                <para>
+                    Le préfixe de classe ou espace de nom(namespace) à utiliser pour créer le nom de classe
+                    complet de l'objet d'écriture. Par défault : "Zend_Log_Writer".
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>filterName (optionnel)</term>
+
+            <listitem>
+                <para>
+                    Le nom "court" d'un filtre à utiliser sur l'objet d'écriture. Voyez "filterNamespace"
+                    pour plus de détails. Exemples: "Message", "Priority".
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>filterParams (optionnel)</term>
+
+            <listitem>
+                <para>
+                    Tableau associatif de paramètre à utiliser à l'instanciation de l'objet filtre.
+                    Chaque méthode <methodname>factory()</methodname> fera suivre ces paramètres.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>filterNamespace (optionnel)</term>
+
+            <listitem>
+                <para>
+                    Le préfixe de classe ou espace de nom(namespace) à utiliser pour créer le nom de classe
+                    complet de l'objet filtre. Par défault : "Zend_Log_Filter".
+                </para>
+            </listitem>
+        </varlistentry>
+    </variablelist>
+
+    <para>
+        Chaque objet d'écriture et chaque filtre possède des options.
+    </para>
+
+    <sect2 id="zend.log.factory.writer-options">
+        <title>Options pour les objets d'écriture</title>
+
+        <sect3 id="zend.log.factory.writer-options.db">
+            <title>Zend_Log_Writer_Db Options</title>
+
+            <variablelist>
+                <varlistentry>
+                    <term>db</term>
+
+                    <listitem>
+                        <para>
+                            Une instance de <classname>Zend_Db_Adapter</classname>
+                        </para>
+                    </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                    <term>table</term>
+
+                    <listitem>
+                        <para>
+                            Nom de la table à utiliser.
+                        </para>
+                    </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                    <term>columnMap</term>
+
+                    <listitem>
+                        <para>
+                            Tableau associatif de correspondance entre les noms des colonnes de la table
+                            et les champs des évènements du journal.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.firebug">
+            <title>Zend_Log_Writer_Firebug Options</title>
+
+            <para>
+                Aucune option n'est acceptée par cet objet d'écriture.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.mail">
+            <title>Zend_Log_Writer_Mail Options</title>
+
+            <para>
+                <classname>Zend_Log_Writer_Mail</classname> actuellement (en 1.10) n'implémente pas la
+                fabrique, et renverra une exception si vous tentez de l'utiliser via
+                <methodname>Zend_Log::factory()</methodname>.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.mock">
+            <title>Zend_Log_Writer_Mock Options</title>
+
+            <para>
+                Aucune option n'est acceptée par cet objet d'écriture.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.null">
+            <title>Zend_Log_Writer_Null Options</title>
+
+            <para>
+                Aucune option n'est acceptée par cet objet d'écriture.
+            </para>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.stream">
+            <title>Zend_Log_Writer_Stream Options</title>
+
+            <variablelist>
+                <varlistentry>
+                    <term>stream|url</term>
+
+                    <listitem>
+                        <para>
+                            Un identifiant de flux PHP valide vers lequel journaliser.
+                        </para>
+                    </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                    <term>mode</term>
+
+                    <listitem>
+                        <para>
+                            Le mode I/O (Lecture/Ecriture) à utiliser; défaut : "a" pour "append".
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.syslog">
+            <title>Zend_Log_Writer_Syslog Options</title>
+
+            <variablelist>
+                <varlistentry>
+                    <term>application</term>
+
+                    <listitem>
+                        <para>
+                            Nom de l'application utilisé par le journaliseur syslog.
+                        </para>
+                    </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                    <term>facility</term>
+
+                    <listitem>
+                        <para>
+                            Facility utilisée par le journal syslog.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </sect3>
+
+        <sect3 id="zend.log.factory.writer-options.zendmonitor">
+            <title>Zend_Log_Writer_ZendMonitor Options</title>
+
+            <para>
+               Aucune option n'est acceptée par cet objet d'écriture.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.log.factory.filter-options">
+        <title>Options des filtres</title>
+
+        <sect3 id="zend.log.factory.filter-options.message">
+            <title>Zend_Log_Filter_Message Options</title>
+
+            <variablelist>
+                <varlistentry>
+                    <term>regexp</term>
+
+                    <listitem>
+                        <para>
+                            Expression régulière à faire correspondre par rapport au message du journal.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </sect3>
+
+        <sect3 id="zend.log.factory.filter-options.priority">
+            <title>Zend_Log_Filter_Priority Options</title>
+
+            <variablelist>
+                <varlistentry>
+                    <term>priority</term>
+
+                    <listitem>
+                        <para>
+                            La priorité maximale à journaliser.
+                        </para>
+                    </listitem>
+                </varlistentry>
+
+                <varlistentry>
+                    <term>operator</term>
+
+                    <listitem>
+                        <para>
+                            L'opérateur de comparaison (supérieur ou inférieur) à utiliser pour la comparaison,
+                            "&lt;=" est utilisé par défaut.
+                        </para>
+                    </listitem>
+                </varlistentry>
+            </variablelist>
+        </sect3>
+
+        <sect3 id="zend.log.factory.filter-options.suppress">
+            <title>Zend_Log_Writer_Suppress Options</title>
+
+            <para>
+                Aucune option n'est acceptée par cet objet d'écriture.
+            </para>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.log.factory.custom">
+        <title>Créer des objets d'écriture et des filtres configurés</title>
+
+        <para>
+            SI vous souhaitez créer vos propres objets d'écriture du journal, ou vos propres filtres, il est
+            possible de les rendre compatibles avec <methodname>Zend_Log::factory()</methodname> facilement.
+        </para>
+
+        <para>
+            Vous devez au minimum implémenter
+            <interfacename>Zend_Log_FactoryInterface</interfacename>, qui attend une méthode statique
+            <methodname>factory()</methodname> accéptant un seul argument,
+            <varname>$config</varname>, de types tableau ou instance de
+            <classname>Zend_Config</classname>. Si vos objets étendent
+            <classname>Zend_Log_Writer_Abstract</classname>, ou vos filtres étendent
+            <classname>Zend_Log_Filter_Abstract</classname>, alors ce sera tout.
+        </para>
+
+        <para>
+            Après, définissez la correspondance entre les options de configuration et les arguments du
+            constructeur. Par exemple :
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
+{
+    public function __construct($bar, $baz)
+    {
+        // ...
+    }
+
+    public static function factory($config)
+    {
+        if ($config instanceof Zend_Config) {
+            $config = $config->toArray();
+        }
+        if (!is_array($config)) {
+            throw new Exception(
+                'factory attend un tableau ou un Zend_Config'
+            );
+        }
+
+        $default = array(
+            'bar' => null,
+            'baz' => null,
+        );
+        $config = array_merge($default, $config);
+
+        return new self(
+            $config['bar'],
+            $config['baz']
+        );
+    }
+}
+]]></programlisting>
+
+        <para>
+            Aussi, il est possible d'appeler les setters après l'instanciation, mais avant de retourner
+            l'instance:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+class My_Log_Writer_Foo extends Zend_Log_Writer_Abstract
+{
+    public function __construct($bar = null, $baz = null)
+    {
+        // ...
+    }
+
+    public function setBar($value)
+    {
+        // ...
+    }
+
+    public function setBaz($value)
+    {
+        // ...
+    }
+
+    public static function factory($config)
+    {
+        if ($config instanceof Zend_Config) {
+            $config = $config->toArray();
+        }
+        if (!is_array($config)) {
+            throw new Exception(
+                'factory attend un tableau ou un Zend_Config'
+            );
+        }
+
+        $writer = new self();
+        if (isset($config['bar'])) {
+            $writer->setBar($config['bar']);
+        }
+        if (isset($config['baz'])) {
+            $writer->setBaz($config['baz']);
+        }
+        return $writer;
+    }
+}
+]]></programlisting>
+    </sect2>
+</sect1>

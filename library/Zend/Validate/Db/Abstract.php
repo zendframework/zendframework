@@ -44,8 +44,10 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
     /**
      * @var array Message templates
      */
-    protected $_messageTemplates = array(self::ERROR_NO_RECORD_FOUND => 'No record matching %value% was found',
-                                         self::ERROR_RECORD_FOUND    => 'A record matching %value% was found');
+    protected $_messageTemplates = array(
+        self::ERROR_NO_RECORD_FOUND => 'No record matching %value% was found',
+        self::ERROR_RECORD_FOUND    => 'A record matching %value% was found',
+    );
 
     /**
      * @var string

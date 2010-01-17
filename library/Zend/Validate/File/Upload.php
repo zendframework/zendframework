@@ -53,16 +53,16 @@ class Zend_Validate_File_Upload extends Zend_Validate_Abstract
      * @var array Error message templates
      */
     protected $_messageTemplates = array(
-        self::INI_SIZE       => "The file '%value%' exceeds the defined ini size",
-        self::FORM_SIZE      => "The file '%value%' exceeds the defined form size",
-        self::PARTIAL        => "The file '%value%' was only partially uploaded",
-        self::NO_FILE        => "The file '%value%' was not uploaded",
-        self::NO_TMP_DIR     => "No temporary directory was found for the file '%value%'",
-        self::CANT_WRITE     => "The file '%value%' can't be written",
+        self::INI_SIZE       => "File '%value%' exceeds the defined ini size",
+        self::FORM_SIZE      => "File '%value%' exceeds the defined form size",
+        self::PARTIAL        => "File '%value%' was only partially uploaded",
+        self::NO_FILE        => "File '%value%' was not uploaded",
+        self::NO_TMP_DIR     => "No temporary directory was found for file '%value%'",
+        self::CANT_WRITE     => "File '%value%' can't be written",
         self::EXTENSION      => "The extension returned an error while uploading the file '%value%'",
-        self::ATTACK         => "The file '%value%' was illegal uploaded, possible attack",
-        self::FILE_NOT_FOUND => "The file '%value%' was not found",
-        self::UNKNOWN        => "Unknown error while uploading the file '%value%'"
+        self::ATTACK         => "File '%value%' was illegal uploaded, possible attack",
+        self::FILE_NOT_FOUND => "File '%value%' was not found",
+        self::UNKNOWN        => "Unknown error while uploading file '%value%'"
     );
 
     /**

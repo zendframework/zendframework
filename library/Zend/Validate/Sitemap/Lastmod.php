@@ -56,7 +56,7 @@ class Zend_Validate_Sitemap_Lastmod extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_VALID => "'%value%' is not a valid sitemap lastmod",
+        self::NOT_VALID => "'%value%' is no valid sitemap lastmod",
     );
 
     /**

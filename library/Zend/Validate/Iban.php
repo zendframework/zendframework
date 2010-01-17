@@ -44,9 +44,9 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOTSUPPORTED => "'%value%' does not have IBAN",
-        self::FALSEFORMAT  => "'%value%' has a false format",
-        self::CHECKFAILED  => "'%value%' has failed the IBAN check"
+        self::NOTSUPPORTED => "Unknown country within the IBAN '%value%'",
+        self::FALSEFORMAT  => "'%value%' has a false IBAN format",
+        self::CHECKFAILED  => "'%value%' has failed the IBAN check",
     );
 
     /**

@@ -48,7 +48,7 @@ class Zend_Validate_File_Size extends Zend_Validate_Abstract
     protected $_messageTemplates = array(
         self::TOO_BIG   => "Maximum allowed size for file '%value%' is '%max%' but '%size%' detected",
         self::TOO_SMALL => "Minimum expected size for file '%value%' is '%min%' but '%size%' detected",
-        self::NOT_FOUND => "The file '%value%' could not be found"
+        self::NOT_FOUND => "File '%value%' could not be found",
     );
 
     /**

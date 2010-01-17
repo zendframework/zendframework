@@ -433,8 +433,8 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Ensures expected behavior when comments are marked as allowed (in our
-     * case, this should have no effect) and a comment contains tags and
+     * Ensures expected behavior when comments are marked as allowed (in our 
+     * case, this should have no effect) and a comment contains tags and 
      * linebreaks
      *
      * @group ZF-8473
@@ -522,36 +522,6 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
     "alert(&quot;Gotcha&quot;); return false;">http://framework.zend.com/issues</a>';
         $filtered = $this->_filter->filter($input);
         $this->assertNotContains('onclick', $filtered);
-    }
-
-    /**
-     * @ZF-8828
-     */
-    public function testFilterIsoChars()
-    {
-        $input    = 'äöü<!-- a comment -->äöü';
-        $expected = 'äöüäöü';
-        $this->assertEquals($expected, $this->_filter->filter($input));
-
-        $input    = 'äöü<!-- a comment -->äöü';
-        $input    = iconv("UTF-8", "ISO-8859-1", $input);
-        $output   = $this->_filter->filter($input);
-        $this->assertFalse(empty($output));
-    }
-
-    /**
-     * @ZF-8828
-     */
-    public function testFilterIsoCharsInComment()
-    {
-        $input    = 'äöü<!--üßüßüß-->äöü';
-        $expected = 'äöüäöü';
-        $this->assertEquals($expected, $this->_filter->filter($input));
-
-        $input    = 'äöü<!-- a comment -->äöü';
-        $input    = iconv("UTF-8", "ISO-8859-1", $input);
-        $output   = $this->_filter->filter($input);
-        $this->assertFalse(empty($output));
     }
 }
 

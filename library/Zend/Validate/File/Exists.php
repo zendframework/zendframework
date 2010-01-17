@@ -43,7 +43,7 @@ class Zend_Validate_File_Exists extends Zend_Validate_Abstract
      * @var array Error message templates
      */
     protected $_messageTemplates = array(
-        self::DOES_NOT_EXIST => "The file '%value%' does not exist"
+        self::DOES_NOT_EXIST => "File '%value%' does not exist",
     );
 
     /**

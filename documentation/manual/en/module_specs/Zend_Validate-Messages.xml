@@ -1,578 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.messages">
-
     <title>Validation Messages</title>
 
     <para>
         Each validator which is based on <classname>Zend_Validate</classname> provides
         one or multiple messages in the case of a failed validation. You can use
-        this information for setting own messages or when you have to translate
-        the messages a validator can return. The following table lists all
-        available messages which are returned by each validator.
+        this information to set your own messages, or to translate existing messages which a
+        validator could return to something different.
     </para>
 
-    <table id="zend.validate.messages.table">
-        <title>Available Validation Messages</title>
-        <tgroup cols="3">
-            <thead>
-                <row>
-                    <entry>Validator</entry>
-                    <entry>Constant</entry>
-                    <entry>Message</entry>
-                </row>
-            </thead>
-            <tbody>
-                <row>
-                    <entry morerows="1" valign="middle">Alnum</entry>
-                    <entry><constant>NOT_ALNUM</constant></entry>
-                    <entry>'%value%' has not only alphabetic and digit characters</entry>
-                </row>
-                <row>
-                    <entry><constant>STRING_EMPTY</constant></entry>
-                    <entry>'%value%' is an empty string</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">Alpha</entry>
-                    <entry><constant>NOT_ALPHA</constant></entry>
-                    <entry>'%value%' has not only alphabetic characters</entry>
-                </row>
-                <row>
-                    <entry><constant>STRING_EMPTY</constant></entry>
-                    <entry>'%value%' is an empty string</entry>
-                </row>
-                <row>
-                    <entry>Barcode</entry>
-                    <entry>---</entry>
-                    <entry>messages are thrown by a subclass</entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">Barcode_Ean13</entry>
-                    <entry><constant>INVALID</constant></entry>
-                    <entry>'%value%' is an invalid <constant>EAN</constant>-13 barcode</entry>
-                </row>
-                <row>
-                    <entry><constant>INVALID_LENGTH</constant></entry>
-                    <entry>'%value%' should be 13 characters</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_NUMERIC</constant></entry>
-                    <entry>'%value%' should contain only numeric characters</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">Barcode_UpcA</entry>
-                    <entry><constant>INVALID</constant></entry>
-                    <entry>'%value%' is an invalid <constant>UPC</constant>-A barcode</entry>
-                </row>
-                <row>
-                    <entry><constant>INVALID_LENGTH</constant></entry>
-                    <entry>'%value%' should be 12 characters</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">Between</entry>
-                    <entry><constant>NOT_BETWEEN</constant></entry>
-                    <entry>'%value%' is not between '%min%' and '%max%', inclusively</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_BETWEEN_STRICT</constant></entry>
-                    <entry>'%value%' is not strictly between '%min%' and '%max%'</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">Ccnum</entry>
-                    <entry><constant>LENGTH</constant></entry>
-                    <entry>'%value%' must contain between 13 and 19 digits</entry>
-                </row>
-                <row>
-                    <entry><constant>CHECKSUM</constant></entry>
-                    <entry>Luhn algorithm (mod-10 checksum) failed on '%value%'</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">Date</entry>
-                    <entry><constant>FALSEFORMAT</constant></entry>
-                    <entry>'%value%' does not fit given date format</entry>
-                </row>
-                <row>
-                    <entry><constant>INVALID</constant></entry>
-                    <entry>'%value%' does not appear to be a valid date</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">Db_Abstract</entry>
-                    <entry><constant>ERROR_NO_RECORD_FOUND</constant></entry>
-                    <entry>No record matching %value% was found</entry>
-                </row>
-                <row>
-                    <entry><constant>ERROR_RECORD_FOUND</constant></entry>
-                    <entry>A record matching %value% was found</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">Digits</entry>
-                    <entry><constant>NOT_DIGITS</constant></entry>
-                    <entry>'%value%' contains not only digit characters</entry>
-                </row>
-                <row>
-                    <entry><constant>STRING_EMPTY</constant></entry>
-                    <entry>'%value%' is an empty string</entry>
-                </row>
-                <row>
-                    <entry morerows="7" valign="middle">EmailAddress</entry>
-                    <entry><constant>INVALID</constant></entry>
-                    <entry>
-                        '%value%' is not a valid email address in the basic format
-                        local-part@hostname
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>INVALID_FORMAT</constant></entry>
-                    <entry>'%value%' is not a valid email address in the basic format local-part@hostname</entry>
-                </row>
-                <row>
-                    <entry><constant>INVALID_HOSTNAME</constant></entry>
-                    <entry>'%hostname%' is not a valid hostname for email address '%value%'</entry>
-                </row>
-                <row>
-                    <entry><constant>INVALID_MX_RECORD</constant></entry>
-                    <entry>
-                        '%hostname%' does not appear to have a valid MX record for the email address
-                        '%value%'
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>DOT_ATOM</constant></entry>
-                    <entry>'%localPart%' not matched against dot-atom format</entry>
-                </row>
-                <row>
-                    <entry><constant>QUOTED_STRING</constant></entry>
-                    <entry>'%localPart%' not matched against quoted-string format</entry>
-                </row>
-                <row>
-                    <entry><constant>INVALID_LOCAL_PART</constant></entry>
-                    <entry>
-                        '%localPart%' is not a valid local part for email address '%value%'
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>LENGTH_EXCEEDED</constant></entry>
-                    <entry>'%value%' exceeds the allowed length</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">File_Count</entry>
-                    <entry><constant>TOO_MUCH</constant></entry>
-                    <entry>
-                        Too much files, maximum '%max%' are allowed but '%count%' are given
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>TOO_LESS</constant></entry>
-                    <entry>
-                        Too less files, minimum '%min%' are expected but '%count%' are given
-                    </entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">File_Crc32</entry>
-                    <entry><constant>DOES_NOT_MATCH</constant></entry>
-                    <entry>The file '%value%' does not match the given crc32 hashes</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_DETECTED</constant></entry>
-                    <entry>There was no crc32 hash detected for the given file</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_FOUND</constant></entry>
-                    <entry>The file '%value%' could not be found</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">File_ExcludeExtension</entry>
-                    <entry><constant>FALSE_EXTENSION</constant></entry>
-                    <entry>The file '%value%' has a false extension</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_FOUND</constant></entry>
-                    <entry>The file '%value%' was not found</entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">File_ExcludeMimeType</entry>
-                    <entry><constant>FALSE_TYPE</constant></entry>
-                    <entry>The file '%value%' has a false mimetype of '%type%'</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_DETECTED</constant></entry>
-                    <entry>The mimetype of file '%value%' could not been detected</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_READABLE</constant></entry>
-                    <entry>The file '%value%' can not be read</entry>
-                </row>
-                <row>
-                    <entry>File_Exists</entry>
-                    <entry><constant>DOES_NOT_EXIST</constant></entry>
-                    <entry>The file '%value%' does not exist</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">File_Extension</entry>
-                    <entry><constant>FALSE_EXTENSION</constant></entry>
-                    <entry>The file '%value%' has a false extension</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_FOUND</constant></entry>
-                    <entry>The file '%value%' was not found</entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">File_FilesSize</entry>
-                    <entry><constant>TOO_BIG</constant></entry>
-                    <entry>
-                        All files in sum should have a maximum size of '%max%' but '%size%' were
-                        detected
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>TOO_SMALL</constant></entry>
-                    <entry>
-                        All files in sum should have a minimum size of '%min%' but '%size%' were
-                        detected
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_READABLE</constant></entry>
-                    <entry>One or more files can not be read</entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">File_Hash</entry>
-                    <entry><constant>DOES_NOT_MATCH</constant></entry>
-                    <entry>The file '%value%' does not match the given hashes</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_DETECTED</constant></entry>
-                    <entry>There was no hash detected for the given file</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_FOUND</constant></entry>
-                    <entry>The file '%value%' could not be found</entry>
-                </row>
-                <row>
-                    <entry morerows="5" valign="middle">File_ImageSize</entry>
-                    <entry><constant>WIDTH_TOO_BIG</constant></entry>
-                    <entry>
-                        Maximum allowed width for image '%value%' should be '%maxwidth%' but
-                        '%width%' detected
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>WIDTH_TOO_SMALL</constant></entry>
-                    <entry>
-                        Minimum expected width for image '%value%' should be '%minwidth%' but
-                        '%width%' detected
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>HEIGHT_TOO_BIG</constant></entry>
-                    <entry>
-                        Maximum allowed height for image '%value%' should be '%maxheight%' but
-                        '%height%' detected
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>HEIGHT_TOO_SMALL</constant></entry>
-                    <entry>
-                        Minimum expected height for image '%value%' should be '%minheight%' but
-                        '%height%' detected
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_DETECTED</constant></entry>
-                    <entry>The size of image '%value%' could not be detected</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_READABLE</constant></entry>
-                    <entry>The image '%value%' can not be read</entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">File_IsCompressed</entry>
-                    <entry><constant>FALSE_TYPE</constant></entry>
-                    <entry>The file '%value%' is not compressed, '%type%' detected</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_DETECTED</constant></entry>
-                    <entry>The mimetype of file '%value%' could not been detected</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_READABLE</constant></entry>
-                    <entry>The file '%value%' can not be read</entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">File_IsImage</entry>
-                    <entry><constant>FALSE_TYPE</constant></entry>
-                    <entry>The file '%value%' is no image, '%type%' detected</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_DETECTED</constant></entry>
-                    <entry>The mimetype of file '%value%' could not been detected</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_READABLE</constant></entry>
-                    <entry>The file '%value%' can not be read</entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">File_Md5</entry>
-                    <entry><constant>DOES_NOT_MATCH</constant></entry>
-                    <entry>The file '%value%' does not match the given md5 hashes</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_DETECTED</constant></entry>
-                    <entry>There was no md5 hash detected for the given file</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_FOUND</constant></entry>
-                    <entry>The file '%value%' could not be found</entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">File_MimeType</entry>
-                    <entry><constant>FALSE_TYPE</constant></entry>
-                    <entry>The file '%value%' has a false mimetype of '%type%'</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_DETECTED</constant></entry>
-                    <entry>The mimetype of file '%value%' could not been detected</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_READABLE</constant></entry>
-                    <entry>The file '%value%' can not be read</entry>
-                </row>
-                <row>
-                    <entry>File_NotExists</entry>
-                    <entry><constant>DOES_EXIST</constant></entry>
-                    <entry>The file '%value%' does exist</entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">File_Sha1</entry>
-                    <entry><constant>DOES_NOT_MATCH</constant></entry>
-                    <entry>The file '%value%' does not match the given sha1 hashes</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_DETECTED</constant></entry>
-                    <entry>There was no sha1 hash detected for the given file</entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_FOUND</constant></entry>
-                    <entry>The file '%value%' could not be found</entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">File_Size</entry>
-                    <entry><constant>TOO_BIG</constant></entry>
-                    <entry>
-                        Maximum allowed size for file '%value%' is '%max%' but '%size%' detected
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>TOO_SMALL</constant></entry>
-                    <entry>
-                        Minimum expected size for file '%value%' is '%min%' but '%size%' detected
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_FOUND</constant></entry>
-                    <entry>The file '%value%' could not be found</entry>
-                </row>
-                <row>
-                    <entry morerows="9" valign="middle">File_Upload</entry>
-                    <entry><constant>INI_SIZE</constant></entry>
-                    <entry>The file '%value%' exceeds the defined ini size</entry>
-                </row>
-                <row>
-                    <entry><constant>FORM_SIZE</constant></entry>
-                    <entry>The file '%value%' exceeds the defined form size</entry>
-                </row>
-                <row>
-                    <entry><constant>PARTIAL</constant></entry>
-                    <entry>The file '%value%' was only partially uploaded</entry>
-                </row>
-                <row>
-                    <entry><constant>NO_FILE</constant></entry>
-                    <entry>The file '%value%' was not uploaded</entry>
-                </row>
-                <row>
-                    <entry><constant>NO_TMP_DIR</constant></entry>
-                    <entry>No temporary directory was found for the file '%value%'</entry>
-                </row>
-                <row>
-                    <entry><constant>CANT_WRITE</constant></entry>
-                    <entry>The file '%value%' can't be written</entry>
-                </row>
-                <row>
-                    <entry><constant>EXTENSION</constant></entry>
-                    <entry>
-                        The extension returned an error while uploading the file '%value%'
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>ATTACK</constant></entry>
-                    <entry>The file '%value%' was illegal uploaded, possible attack</entry>
-                </row>
-                <row>
-                    <entry><constant>FILE_NOT_FOUND</constant></entry>
-                    <entry>The file '%value%' was not found</entry>
-                </row>
-                <row>
-                    <entry><constant>UNKNOWN</constant></entry>
-                    <entry>Unknown error while uploading the file '%value%'</entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">File_WordCount</entry>
-                    <entry><constant>TOO_MUCH</constant></entry>
-                    <entry>
-                        Too much words, maximum '%max%' are allowed but '%count%' were counted
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>TOO_LESS</constant></entry>
-                    <entry>
-                        Too less words, minimum '%min%' are expected but '%count%' were counted
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>NOT_FOUND</constant></entry>
-                    <entry>The file '%value%' could not be found</entry>
-                </row>
-                <row>
-                    <entry>Float</entry>
-                    <entry><constant>NOT_FLOAT</constant></entry>
-                    <entry>'%value%' does not appear to be a float</entry>
-                </row>
-                <row>
-                    <entry>GreaterThan</entry>
-                    <entry><constant>NOT_GREATER</constant></entry>
-                    <entry>'%value%' is not greater than '%min%'</entry>
-                </row>
-                <row>
-                    <entry>Hex</entry>
-                    <entry><constant>NOT_HEX</constant></entry>
-                    <entry>'%value%' has not only hexadecimal digit characters</entry>
-                </row>
-                <row>
-                    <entry morerows="7" valign="middle">Hostname</entry>
-                    <entry><constant>IP_ADDRESS_NOT_ALLOWED</constant></entry>
-                    <entry>
-                        '%value%' appears to be an IP address, but IP addresses are not allowed
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>UNKNOWN_TLD</constant></entry>
-                    <entry>
-                        '%value%' appears to be a <acronym>DNS</acronym> hostname but cannot match <acronym>TLD</acronym> against known
-                        list
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>INVALID_DASH</constant></entry>
-                    <entry>
-                        '%value%' appears to be a <acronym>DNS</acronym> hostname but contains a dash (-) in an invalid
-                        position
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>INVALID_HOSTNAME_SCHEMA</constant></entry>
-                    <entry>
-                        '%value%' appears to be a <acronym>DNS</acronym> hostname but cannot match against hostname
-                        schema for <acronym>TLD</acronym> '%tld%'
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>UNDECIPHERABLE_TLD</constant></entry>
-                    <entry>
-                        '%value%' appears to be a <acronym>DNS</acronym> hostname but cannot extract <acronym>TLD</acronym> part
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>INVALID_HOSTNAME</constant></entry>
-                    <entry>
-                        '%value%' does not match the expected structure for a <acronym>DNS</acronym> hostname
-                    </entry>
-                </row>
-                <row>
-                    <entry><constant>INVALID_LOCAL_NAME</constant></entry>
-                    <entry>'%value%' does not appear to be a valid local network name</entry>
-                </row>
-                <row>
-                    <entry><constant>LOCAL_NAME_NOT_ALLOWED</constant></entry>
-                    <entry>
-                        '%value%' appears to be a local network name but local network names are not
-                        allowed
-                    </entry>
-                </row>
-                <row>
-                    <entry morerows="2" valign="middle">Iban</entry>
-                    <entry><constant>NOTSUPPORTED</constant></entry>
-                    <entry>'%value%' does not have <acronym>IBAN</acronym></entry>
-                </row>
-                <row>
-                    <entry><constant>FALSEFORMAT</constant></entry>
-                    <entry>'%value%' has a false format</entry>
-                </row>
-                <row>
-                    <entry><constant>CHECKFAILED</constant></entry>
-                    <entry>'%value%' has failed the <acronym>IBAN</acronym> check</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">Identical</entry>
-                    <entry><constant>NOT_SAME</constant></entry>
-                    <entry>The token '%token%' does not match the given token '%value%'</entry>
-                </row>
-                <row>
-                    <entry><constant>MISSING_TOKEN</constant></entry>
-                    <entry>No token was provided to match against</entry>
-                </row>
-                <row>
-                    <entry>InArray</entry>
-                    <entry><constant>NOT_IN_ARRAY</constant></entry>
-                    <entry>'%value%' was not found in the haystack</entry>
-                </row>
-                <row>
-                    <entry>Int</entry>
-                    <entry><constant>NOT_INT</constant></entry>
-                    <entry>'%value%' does not appear to be an integer</entry>
-                </row>
-                <row>
-                    <entry>Ip</entry>
-                    <entry><constant>NOT_IP_ADDRESS</constant></entry>
-                    <entry>'%value%' does not appear to be a valid IP address</entry>
-                </row>
-                <row>
-                    <entry>LessThan</entry>
-                    <entry><constant>NOT_LESS</constant></entry>
-                    <entry>'%value%' is not less than '%max%'</entry>
-                </row>
-                <row>
-                    <entry>NotEmpty</entry>
-                    <entry><constant>IS_EMPTY</constant></entry>
-                    <entry>Value is required and can't be empty</entry>
-                </row>
-                <row>
-                    <entry>Regex</entry>
-                    <entry><constant>NOT_MATCH</constant></entry>
-                    <entry>'%value%' does not match against pattern '%pattern%'</entry>
-                </row>
-                <row>
-                    <entry morerows="1" valign="middle">StringLength</entry>
-                    <entry><constant>TOO_SHORT</constant></entry>
-                    <entry>'%value%' is less than %min% characters long</entry>
-                </row>
-                <row>
-                    <entry><constant>TOO_LONG</constant></entry>
-                    <entry>'%value%' is greater than %max% characters long</entry>
-                </row>
-            </tbody>
-        </tgroup>
-    </table>
-
     <para>
-        Additionally you can retrieve all message templates of a validator with
-        the method <methodname>getMessageTemplates()</methodname>. It returns you an array
-        with the messages a validator could return in the case of a failed validation.
+        These validation messages are constants which can be found at top of each validator class.
+        Let's look into <classname>Zend_Validate_GreaterThan</classname> for an descriptive example:
     </para>
 
     <programlisting language="php"><![CDATA[
-$validator = new Zend_Validate_Alnum();
+protected $_messageTemplates = array(
+    self::NOT_GREATER => "'%value%' is not greater than '%min%'",
+);
+]]></programlisting>
+
+    <para>
+        As you can see the constant <constant>self::NOT_GREATER</constant> refers to the failure and
+        is used as key, and the message itself is used as value of the message array.
+    </para>
+
+    <para>
+        You can retrieve all message templates from a validator by using the
+        <methodname>getMessageTemplates()</methodname> method. It returns you the above array which
+        contains all messages a validator could return in the case of a failed validation.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_GreaterThan();
 $messages  = $validator->getMessageTemplates();
 ]]></programlisting>
+
+    <para>
+        Using the <methodname>setMessage()</methodname> method you can set another message to be
+        returned in case of the specified failure.
+    </para>
+
+    <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_GreaterThan();
+$validator->setMessage('Please enter a lower value', Zend_Validate_GreaterThan::NOT_GREATER);
+]]></programlisting>
+
+    <para>
+        The second parameter defines the failure which will be overridden. When you omit this
+        parameter, then the given message will be set for all possible failures of this validator.
+    </para>
+
+    <sect2 id="zend.validate.messages.pretranslated">
+        <title>Using pre-translated validation messages</title>
+
+        <para>
+            Zend Framework is shipped with more than 45 different validators with more than 200
+            failure messages. It can be a tendious task to translate all of these messages. But for
+            your convinience Zend Framework comes with already pre-translated validation messages.
+            You can find them within the path <filename>/resources/languages</filename> in your
+            Zend Framework installation.
+        </para>
+
+        <note>
+            <title>Used path</title>
+
+            <para>
+                The resource files are outside of the library path because all of your translations
+                should also be outside of this path.
+            </para>
+        </note>
+
+        <para>
+            So to translate all validation messages to german for example, all you have to do is to
+            attach a translator to <classname>Zend_Validate</classname> using these resource files.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$translator = new Zend_Translate(
+    'array',
+    '/resources/languages',
+    $language,
+    array('scan' => Zend_Locale::LOCALE_DIRECTORY)
+);
+Zend_Validate_Abstract::setDefaultTranslator($translator);
+]]></programlisting>
+
+        <note>
+            <title>Used translation adapter</title>
+
+            <para>
+                As translation adapter Zend Framework choosed the array adapter. It is simple to
+                edit and created very fast.
+            </para>
+        </note>
+
+        <note>
+            <title>Supported languages</title>
+
+            <para>
+                This feature is very young, so the amount of supported languages may not be
+                complete. New languages will be added with each release. Additionally feel free to
+                use the existing resource files to make your own translations.
+            </para>
+
+            <para>
+                You could also use these resource files to rewrite existing translations. So you
+                are not in need to create these files manually yourself.
+            </para>
+        </note>
+    </sect2>
 
     <sect2 id="zend.validate.messages.limitation">
         <title>Limit the size of a validation message</title>
@@ -603,13 +141,14 @@ Zend_Validate::setMessageLength(100);
 ]]></programlisting>
 
         <note>
+            <title>Where is this parameter used?</title>
+
             <para>
-                Note that the set message length is used for all validators, even for self defined ones
+                The set message length is used for all validators, even for self defined ones,
                 as long as they extend <classname>Zend_Validate_Abstract</classname>.
             </para>
         </note>
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

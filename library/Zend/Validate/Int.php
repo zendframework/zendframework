@@ -44,8 +44,8 @@ class Zend_Validate_Int extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID => "Invalid type given, value should be a string or a integer",
-        self::NOT_INT => "'%value%' does not appear to be an integer"
+        self::INVALID => "Invalid type given, value should be string or integer",
+        self::NOT_INT => "'%value%' does not appear to be an integer",
     );
 
     protected $_locale;

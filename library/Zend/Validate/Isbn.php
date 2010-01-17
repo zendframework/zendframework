@@ -43,7 +43,7 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID => "'%value%' is an invalid ISBN",
+        self::INVALID => "'%value%' is no valid ISBN number",
     );
 
     /**

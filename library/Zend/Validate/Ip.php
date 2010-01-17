@@ -40,7 +40,7 @@ class Zend_Validate_Ip extends Zend_Validate_Abstract
      */
     protected $_messageTemplates = array(
         self::INVALID        => "Invalid type given, value should be a string",
-        self::NOT_IP_ADDRESS => "'%value%' does not appear to be a valid IP address"
+        self::NOT_IP_ADDRESS => "'%value%' does not appear to be a valid IP address",
     );
 
     /**

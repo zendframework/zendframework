@@ -67,10 +67,10 @@ class Zend_Validate_CreditCard extends Zend_Validate_Abstract
         self::CHECKSUM       => "Luhn algorithm (mod-10 checksum) failed on '%value%'",
         self::CONTENT        => "'%value%' must contain only digits",
         self::INVALID        => "Invalid type given, value should be a string",
-        self::LENGTH         => "'%value%' contains a invalid amount of digits",
+        self::LENGTH         => "'%value%' contains an invalid amount of digits",
         self::PREFIX         => "'%value%' is not from an allowed institute",
         self::SERVICE        => "Validation of '%value%' has been failed by the service",
-        self::SERVICEFAILURE => "The service returned a failure while validating '%value%'"
+        self::SERVICEFAILURE => "The service returned a failure while validating '%value%'",
     );
 
     /**

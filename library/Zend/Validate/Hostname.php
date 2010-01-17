@@ -70,7 +70,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         self::INVALID_HOSTNAME        => "'%value%' does not match the expected structure for a DNS hostname",
         self::INVALID_LOCAL_NAME      => "'%value%' does not appear to be a valid local network name",
         self::LOCAL_NAME_NOT_ALLOWED  => "'%value%' appears to be a local network name but local network names are not allowed",
-        self::CANNOT_DECODE_PUNYCODE  => "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded"
+        self::CANNOT_DECODE_PUNYCODE  => "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded",
     );
 
     /**

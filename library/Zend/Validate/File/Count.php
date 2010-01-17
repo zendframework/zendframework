@@ -46,7 +46,7 @@ class Zend_Validate_File_Count extends Zend_Validate_Abstract
      */
     protected $_messageTemplates = array(
         self::TOO_MANY => "Too many files, maximum '%max%' are allowed but '%count%' are given",
-        self::TOO_FEW  => "Too few files, minimum '%min%' are expected but '%count%' are given"
+        self::TOO_FEW  => "Too few files, minimum '%min%' are expected but '%count%' are given",
     );
 
     /**

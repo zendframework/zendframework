@@ -44,8 +44,8 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::INVALID  => "Invalid type given, value should be a string or a integer",
-        self::NO_MATCH => "'%value%' does not appear to be an postal code"
+        self::INVALID  => "Invalid type given, value should be string or integer",
+        self::NO_MATCH => "'%value%' does not appear to be an postal code",
     );
 
     /**

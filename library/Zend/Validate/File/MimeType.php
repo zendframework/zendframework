@@ -46,9 +46,9 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
      * @var array Error message templates
      */
     protected $_messageTemplates = array(
-        self::FALSE_TYPE   => "The file '%value%' has a false mimetype of '%type%'",
+        self::FALSE_TYPE   => "File '%value%' has a false mimetype of '%type%'",
         self::NOT_DETECTED => "The mimetype of file '%value%' could not been detected",
-        self::NOT_READABLE => "The file '%value%' can not be read"
+        self::NOT_READABLE => "File '%value%' can not be read",
     );
 
     /**

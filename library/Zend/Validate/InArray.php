@@ -38,7 +38,7 @@ class Zend_Validate_InArray extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_IN_ARRAY => "'%value%' was not found in the haystack"
+        self::NOT_IN_ARRAY => "'%value%' was not found in the haystack",
     );
 
     /**

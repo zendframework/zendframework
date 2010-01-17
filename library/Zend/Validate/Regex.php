@@ -40,7 +40,7 @@ class Zend_Validate_Regex extends Zend_Validate_Abstract
      */
     protected $_messageTemplates = array(
         self::INVALID   => "Invalid type given, value should be string, integer or float",
-        self::NOT_MATCH => "'%value%' does not match against pattern '%pattern%'"
+        self::NOT_MATCH => "'%value%' does not match against pattern '%pattern%'",
     );
 
     /**

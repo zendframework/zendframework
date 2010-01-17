@@ -1427,7 +1427,7 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
     {
         $quoteArr = array_flip(self::$_quoteString);
 
-        if ($str{0} == '"') {
+        if ($str[0] == '"') {
             $quoteArr['\\"'] = '"';
         } else {
             $quoteArr["\\'"] = "'";
@@ -1473,17 +1473,17 @@ class Zend_Serializer_Adapter_PythonPickle extends Zend_Serializer_Adapter_Adapt
             }
 
             for ($i=0; $i<$nbytes; $i++) {
-                $long = bcadd($long, bcmul(ord($data{$i}), bcpow(256, $i, 0)));
+                $long = bcadd($long, bcmul(ord($data[$i]), bcpow(256, $i, 0)));
             }
-            if (0x80 <= ord($data{$nbytes-1})) {
+            if (0x80 <= ord($data[$nbytes-1])) {
                 $long = bcsub($long, bcpow(2, $nbytes * 8));
             }
 
         } else {
             for ($i=0; $i<$nbytes; $i++) {
-                $long+= ord($data{$i}) * pow(256, $i);
+                $long+= ord($data[$i]) * pow(256, $i);
             }
-            if (0x80 <= ord($data{$nbytes-1})) {
+            if (0x80 <= ord($data[$nbytes-1])) {
                 $long-= pow(2, $nbytes * 8);
                 // $long-= 1 << ($nbytes * 8);
             }

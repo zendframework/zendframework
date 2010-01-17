@@ -157,7 +157,7 @@ class Zend_Validate_AlnumTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid('#'));
         $messages = $this->_validator->getMessages();
         $arrayExpected = array(
-            Zend_Validate_Alnum::NOT_ALNUM => '\'#\' has not only alphabetic and digit characters'
+            Zend_Validate_Alnum::NOT_ALNUM => '\'#\' contains characters which are non alphabetic and no digits'
             );
         $this->assertThat($messages, $this->identicalTo($arrayExpected));
     }

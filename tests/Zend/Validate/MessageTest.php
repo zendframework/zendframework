@@ -80,7 +80,7 @@ class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
         $inputInvalid = 'abcdefghij';
         $this->assertFalse($this->_validator->isValid($inputInvalid));
         $messages = $this->_validator->getMessages();
-        $this->assertEquals("'$inputInvalid' is greater than 8 characters long", current($messages));
+        $this->assertEquals("'$inputInvalid' is more than 8 characters long", current($messages));
 
         $this->_validator->setMessage(
             'Your value is too long',
@@ -285,7 +285,7 @@ class Zend_Validate_MessageTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_validator->isValid($inputInvalid));
 
         $messages = $this->_validator->getMessages();
-        $this->assertEquals("'$inputInvalid' is greater than 8 characters long", current($messages));
+        $this->assertEquals("'$inputInvalid' is more than 8 characters long", current($messages));
 
         $errors = $this->_validator->getErrors();
         $this->assertEquals(Zend_Validate_StringLength::TOO_LONG, current($errors));

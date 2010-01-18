@@ -152,6 +152,9 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
         $path = $uri->getPath();
         if (substr($path, -1, 1) == '/') $path .= 'x';
         $path = dirname($path);
+        if ($path == DIRECTORY_SEPARATOR) {
+            $path = '/';
+        }
 
         $cookie = Zend_Http_Cookie::fromString('foo=bar', (string) $uri);
         if (! $cookie instanceof Zend_Http_Cookie) {

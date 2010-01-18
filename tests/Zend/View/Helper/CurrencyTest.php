@@ -137,7 +137,7 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
         try {
             $helper = new Zend_View_Helper_Currency('something');
         } catch (Exception $e) {
-            $this->assertContains('not found', $e->getMessage());
+            $this->assertContains('No region found', $e->getMessage());
         }
     }
 
@@ -146,7 +146,7 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
         try {
             $this->helper->setCurrency('something');
         } catch (Exception $e) {
-            $this->assertContains('not found', $e->getMessage());
+            $this->assertContains('No region found', $e->getMessage());
         }
     }
 

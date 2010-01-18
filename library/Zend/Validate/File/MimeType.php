@@ -314,8 +314,8 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
             unset($mime);
         }
 
-        if (empty($this->_type)) &&
-            (function_exists('mime_content_type') && ini_get('mime_magic.magicfile')) {
+        if (empty($this->_type) &&
+            (function_exists('mime_content_type') && ini_get('mime_magic.magicfile'))) {
                 $this->_type = mime_content_type($value);
         }
 

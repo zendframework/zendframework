@@ -49,7 +49,7 @@ class Zend_Service_WindowsAzure_Credentials_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Service_WindowsAzure_Credentials test suite');
 
         $suite->addTestSuite('Zend_Service_WindowsAzure_Credentials_SharedKeyTest');
         $suite->addTestSuite('Zend_Service_WindowsAzure_Credentials_SharedKeyLiteTest');

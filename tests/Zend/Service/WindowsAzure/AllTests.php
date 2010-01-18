@@ -59,9 +59,9 @@ class Zend_Service_WindowsAzure_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
+        $suite = new PHPUnit_Framework_TestSuite('Zend_Service_WindowsAzure test suite');
 
-        $suite->addTest(Zend_Service_WindowsAzure_Credentials_AllTests::suite());
+        $suite->addTestSuite(Zend_Service_WindowsAzure_Credentials_AllTests::suite());
         
         $suite->addTestSuite('Zend_Service_WindowsAzure_RetryPolicyTest');
         $suite->addTestSuite('Zend_Service_WindowsAzure_StorageTest');

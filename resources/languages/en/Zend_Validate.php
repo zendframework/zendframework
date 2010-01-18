@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 20360
+ * EN-Revision: 20377
  */
 return array(
     // Zend_Validate_Alnum
@@ -64,7 +64,7 @@ return array(
     // Zend_Validate_Date
     "Invalid type given, value should be string, integer, array or Zend_Date" => "Invalid type given, value should be string, integer, array or Zend_Date",
     "'%value%' does not appear to be a valid date" => "'%value%' does not appear to be a valid date",
-    "'%value%' does not fit the date format '%format'" => "'%value%' does not fit the date format '%format'",
+    "'%value%' does not fit the date format '%format%'" => "'%value%' does not fit the date format '%format%'",
 
     // Zend_Validate_Db_Abstract
     "No record matching %value% was found" => "No record matching %value% was found",

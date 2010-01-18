@@ -699,14 +699,14 @@ abstract class Zend_Translate_Adapter {
         }
 
         $locale = (string) $locale;
-        if (isset($this->_translate[$locale][$messageId]) === true) {
+        if ((is_string($messageId) || is_int($messageId)) && isset($this->_translate[$locale][$messageId])) {
             // return original translation
             return true;
         } else if ((strlen($locale) != 2) and ($original === false)) {
             // faster than creating a new locale and separate the leading part
             $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
 
-            if (isset($this->_translate[$locale][$messageId]) === true) {
+            if ((is_string($messageId) || is_int($messageId)) && isset($this->_translate[$locale][$messageId])) {
                 // return regionless translation (en_US -> en)
                 return true;
             }

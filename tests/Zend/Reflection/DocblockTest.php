@@ -129,13 +129,12 @@ EOS;
 
         $classDocblock = $classReflection->getDocblock();
 
-        $expectedString = "Docblock [ /* Docblock */ ] {
-
-  - Tags [1] {
-    Docblock Tag [ * @author ]
-  }
-}
-";
+        $expectedString = 'Docblock [ /* Docblock */ ] {' . PHP_EOL
+                        . PHP_EOL
+                        . '  - Tags [1] {' . PHP_EOL
+                        . '    Docblock Tag [ * @author ]' . PHP_EOL
+                        . '  }' . PHP_EOL
+                        . '}' . PHP_EOL;
 
         $this->assertEquals($expectedString, (string)$classDocblock);
     }

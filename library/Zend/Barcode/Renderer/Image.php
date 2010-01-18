@@ -435,6 +435,14 @@ class Zend_Barcode_Renderer_Image extends Zend_Barcode_Renderer_RendererAbstract
             }
             imagestring($this->_resource, $font, $positionX, $positionY, $text, $color);
         } else {
+            
+            if (!function_exists('imagettfbbox')) {
+                require_once 'Zend/Barcode/Renderer/Exception.php';
+                throw new Zend_Barcode_Renderer_Exception(
+                    'A font was provided, but this instance of PHP does not have TTF (FreeType) support'
+                    );
+            }
+            
             $box = imagettfbbox($size, 0, $font, $text);
             switch ($alignment) {
                 case 'left':

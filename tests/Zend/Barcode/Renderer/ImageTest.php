@@ -40,7 +40,7 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
 
     public function setUp()
     {
-        if (!function_exists('gd_info')) {
+        if (!extension_loaded('gd')) {
             $this->markTestSkipped('Zend_Barcode_Renderer_ImageTest requires the GD extension');
         }
         parent::setUp();
@@ -58,10 +58,6 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
 
     public function testGoodImageResource()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
         $imageResource = imagecreatetruecolor(1, 1);
         $this->_renderer->setResource($imageResource);
     }
@@ -130,10 +126,8 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
 
     public function testDrawReturnResource()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
+        $this->_checkTTFRequirement();
+        
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
         $this->_renderer->setBarcode($barcode);
         $resource = $this->_renderer->draw();
@@ -144,10 +138,8 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
 
     public function testDrawWithExistantResourceReturnResource()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
+        $this->_checkTTFRequirement();
+        
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
         $this->_renderer->setBarcode($barcode);
         $imageResource = imagecreatetruecolor(500, 500);
@@ -203,10 +195,6 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
 
     public function testGoodHeightOfUserResource()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
         $imageResource = imagecreatetruecolor(500, 62);
@@ -220,10 +208,6 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
      */
     public function testBadHeightOfUserResource()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
         $this->assertEquals(62, $barcode->getHeight());
         $this->_renderer->setBarcode($barcode);
@@ -234,10 +218,6 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
 
     public function testGoodWidthOfUserResource()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
         $imageResource = imagecreatetruecolor(211, 500);
@@ -251,10 +231,6 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
      */
     public function testBadWidthOfUserResource()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
         $this->assertEquals(211, $barcode->getWidth());
         $this->_renderer->setBarcode($barcode);
@@ -268,10 +244,6 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
      */
     public function testNoFontWithOrientation()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
         Zend_Barcode::setBarcodeFont('');
         $barcode = new Zend_Barcode_Object_Code39(array('text' => '0123456789'));
         $barcode->setOrientation(1);
@@ -289,64 +261,69 @@ class Zend_Barcode_Renderer_ImageTest extends Zend_Barcode_Renderer_TestCommon
      */
     public function testRendererWithUnkownInstructionProvideByObject()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
         parent::testRendererWithUnkownInstructionProvideByObject();
     }
 
     public function testHorizontalPositionToLeft()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
+        $this->_checkTTFRequirement();
+        
         parent::testHorizontalPositionToLeft();
     }
 
     public function testHorizontalPositionToCenter()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
+        $this->_checkTTFRequirement();
+        
         parent::testHorizontalPositionToCenter();
     }
 
     public function testHorizontalPositionToRight()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
+        $this->_checkTTFRequirement();
+        
         parent::testHorizontalPositionToRight();
     }
 
     public function testVerticalPositionToTop()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
+        $this->_checkTTFRequirement();
+        
         parent::testVerticalPositionToTop();
     }
 
     public function testVerticalPositionToMiddle()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
+        $this->_checkTTFRequirement();
+        
         parent::testVerticalPositionToMiddle();
     }
 
     public function testVerticalPositionToBottom()
     {
-        if (! extension_loaded('gd')) {
-            $this->markTestSkipped(
-                    'GD extension is required to run this test');
-        }
+        $this->_checkTTFRequirement();
+        
         parent::testVerticalPositionToBottom();
+    }
+    
+    public function testLeftOffsetOverrideHorizontalPosition()
+    {
+        $this->_checkTTFRequirement();
+        
+        parent::testLeftOffsetOverrideHorizontalPosition();
+    }
+    
+    public function testTopOffsetOverrideVerticalPosition()
+    {
+        $this->_checkTTFRequirement();
+        
+        parent::testTopOffsetOverrideVerticalPosition();
+    } 
+    
+    protected function _checkTTFRequirement()
+    {
+        if (!function_exists('imagettfbbox')) {
+            $this->markTestSkipped('TTF (FreeType) support is required in order to run this test');
+        }
     }
 }

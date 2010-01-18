@@ -456,10 +456,10 @@ class Zend_View_Helper_HeadLinkTest extends PHPUnit_Framework_TestCase
 
         $test = $this->helper->toString();
 
-        $expected = '<link href="/test1.css" media="screen" rel="stylesheet" type="text/css" >
-<link href="/test4.css" media="screen" rel="stylesheet" type="text/css" >
-<link href="/test2.css" media="screen" rel="stylesheet" type="text/css" >
-<link href="/test3.css" media="screen" rel="stylesheet" type="text/css" >';
+        $expected = '<link href="/test1.css" media="screen" rel="stylesheet" type="text/css" >' . PHP_EOL
+                  . '<link href="/test4.css" media="screen" rel="stylesheet" type="text/css" >' . PHP_EOL
+                  . '<link href="/test2.css" media="screen" rel="stylesheet" type="text/css" >' . PHP_EOL
+                  . '<link href="/test3.css" media="screen" rel="stylesheet" type="text/css" >';
 
         $this->assertEquals($expected, $test);
     }

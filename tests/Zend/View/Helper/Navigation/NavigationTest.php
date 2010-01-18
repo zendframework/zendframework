@@ -370,7 +370,7 @@ class Zend_View_Helper_Navigation_NavigationTest
                   . '    <li>' . $nl
                   . '        <a id="menu-p1" href="p1">Page 1</a>' . $nl
                   . '    </li>' . $nl
-                  . '    <li>' . PHP_EOL
+                  . '    <li>' . $nl
                   . '        <a id="menu-p2" href="p2">Page 2</a>' . $nl
                   . '    </li>' . $nl
                   . '</ul>';

@@ -637,11 +637,11 @@ class Zend_View_Helper_Navigation_LinksTest
 
             $this->_helper->setRenderFlag($newFlag);
             $expectedOutput = '<link '
-                      . 'rel="' . $type . '" '
-                      . 'href="http://www.example.com/">' . PHP_EOL
-                      . '<link '
-                      . 'rev="' . $type . '" '
-                      . 'href="http://www.example.com/">';
+                              . 'rel="' . $type . '" '
+                              . 'href="http://www.example.com/">' . constant($this->_helperName.'::EOL')
+                            . '<link '
+                              . 'rev="' . $type . '" '
+                              . 'href="http://www.example.com/">';
             $actualOutput = $this->_helper->render();
 
             $expected[$type] = $expectedOutput;
@@ -664,7 +664,8 @@ class Zend_View_Helper_Navigation_LinksTest
         $active->active = true;
 
         // test data
-        $expected = '<link rel="next" href="page2" title="Page 2">' . PHP_EOL
+        $expected = '<link rel="next" href="page2" title="Page 2">'
+                  . constant($this->_helperName.'::EOL')
                   . '<link rel="prev" href="page1" title="Page 1">';
         $actual = $this->_helper->render();
 
@@ -681,7 +682,8 @@ class Zend_View_Helper_Navigation_LinksTest
         $active->active = true;
 
         // build expected and actual result
-        $expected = '  <link rel="next" href="page2" title="Page 2">' . PHP_EOL
+        $expected = '  <link rel="next" href="page2" title="Page 2">'
+                  . constant($this->_helperName.'::EOL')
                   . '  <link rel="prev" href="page1" title="Page 1">';
         $actual = $this->_helper->render();
 

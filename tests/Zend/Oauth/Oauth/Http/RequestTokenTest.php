@@ -39,10 +39,10 @@ class Zend_Oauth_Http_RequestTokenTest extends PHPUnit_Framework_TestCase
         $expectedParams = array (
             'oauth_consumer_key' => '1234567890',
             'oauth_nonce' => 'e807f1fcf82d132f9bb018ca6738a19f',
-            'oauth_signature_method' => 'HMAC-SHA1',
             'oauth_timestamp' => '12345678901',
+            'oauth_signature_method' => 'HMAC-SHA1',
             'oauth_version' => '1.0',
-            'oauth_callback_url' => 'http://www.example.com/local',
+            'oauth_callback' => 'http://www.example.com/local',
             'oauth_signature' => '6fb42da0e32e07b61c9f0251fe627a9c'
         );
         $this->assertEquals($expectedParams, $request->assembleParams());
@@ -54,10 +54,10 @@ class Zend_Oauth_Http_RequestTokenTest extends PHPUnit_Framework_TestCase
         $expectedParams = array (
             'oauth_consumer_key' => '1234567890',
             'oauth_nonce' => 'e807f1fcf82d132f9bb018ca6738a19f',
-            'oauth_signature_method' => 'HMAC-SHA1',
             'oauth_timestamp' => '12345678901',
+            'oauth_signature_method' => 'HMAC-SHA1',
             'oauth_version' => '1.0',
-            'oauth_callback_url' => 'oob', // out-of-band when missing callback - 1.0a
+            'oauth_callback' => 'oob', // out-of-band when missing callback - 1.0a
             'oauth_signature' => '6fb42da0e32e07b61c9f0251fe627a9c'
 
         );
@@ -73,13 +73,13 @@ class Zend_Oauth_Http_RequestTokenTest extends PHPUnit_Framework_TestCase
         $expectedParams = array (
             'oauth_consumer_key' => '1234567890',
             'oauth_nonce' => 'e807f1fcf82d132f9bb018ca6738a19f',
-            'oauth_signature_method' => 'HMAC-SHA1',
             'oauth_timestamp' => '12345678901',
+            'oauth_signature_method' => 'HMAC-SHA1',
             'oauth_version' => '1.0',
-            'oauth_callback_url' => 'http://www.example.com/local',
-            'oauth_signature' => '6fb42da0e32e07b61c9f0251fe627a9c',
+            'oauth_callback' => 'http://www.example.com/local',
             'custom_param1' => 'foo',
-            'custom_param2' => 'bar'
+            'custom_param2' => 'bar',
+            'oauth_signature' => '6fb42da0e32e07b61c9f0251fe627a9c'
         );
         $this->assertEquals($expectedParams, $request->assembleParams());
     }

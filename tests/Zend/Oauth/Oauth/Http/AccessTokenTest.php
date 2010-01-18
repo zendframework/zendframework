@@ -59,6 +59,8 @@ class Zend_Oauth_Http_AccessTokenTest extends PHPUnit_Framework_TestCase
             'oauth_timestamp' => '12345678901',
             'oauth_token' => '0987654321',
             'oauth_version' => '1.0',
+            'custom_param1'=>'foo',
+            'custom_param2'=>'bar',
             'oauth_signature' => '6fb42da0e32e07b61c9f0251fe627a9c'
         );
         $this->assertEquals($expectedParams, $request->assembleParams());

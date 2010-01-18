@@ -174,7 +174,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
             $this->_markup->render('[suppp]test aap[/suppp]test'));
     }
 
-    public function testHtmlUrlTitleIsRenderedCorrectly() 
+    public function testHtmlUrlTitleIsRenderedCorrectly()
     {
         $this->assertEquals(
             '<a href="http://exampl.com" title="foo">test</a>',
@@ -182,7 +182,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testValueLessAttributeDoesNotThrowNotice() 
+    public function testValueLessAttributeDoesNotThrowNotice()
     {
         // Notice: Uninitialized string offset: 42
         // in Zend/Markup/Parser/Bbcode.php on line 316
@@ -207,12 +207,12 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
         $this->_markup->render('[url="http://framework.zend.com/"title');
     }
 
-    public function testHrTagWorks() 
+    public function testHrTagWorks()
     {
         $this->assertEquals('foo<hr />bar', $this->_markup->render('foo[hr]bar'));
     }
 
-    public function testFunkyCombos() 
+    public function testFunkyCombos()
     {
         $expected = '<span style="text-decoration: underline;">a[/b][hr]b'
                   . '<strong>c</strong></span><strong>d</strong>[/u]e';
@@ -220,26 +220,26 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $outcome);
     }
 
-    public function testImgSrcsConstraints() 
+    public function testImgSrcsConstraints()
     {
         $this->assertEquals('F/\!ZLrFz',$this->_markup->render('F[img]/\!ZLrFz[/img]'));
     }
 
-    public function testColorConstraintsAndJs() 
+    public function testColorConstraintsAndJs()
     {
         $input = "<kokx> i think you mean? [color=\"onclick='foobar();'\"]your text[/color] DASPRiD";
         $expected = "&lt;kokx&gt; i think you mean? <span>your text</span> DASPRiD";
         $this->assertEquals($expected, $this->_markup->render($input));
     }
 
-    public function testNeverEndingAttribute() 
+    public function testNeverEndingAttribute()
     {
         $input = "[color=\"green]your text[/color]";
         $expected = '<span>your text</span>';
         $this->assertEquals($expected, $this->_markup->render($input));
     }
 
-    public function testTreatmentNonTags() 
+    public function testTreatmentNonTags()
     {
         $input = '[span][acronym][h1][h2][h3][h4][h5][h6][nothing]'
                . '[/h6][/h5][/h4][/h3][/h2][/h1][/acronym][/span]';
@@ -248,7 +248,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->_markup->render($input));
     }
 
-    public function testListItems() 
+    public function testListItems()
     {
         $input = "[list][*]Foo*bar (item 1)\n[*]Item 2\n[*]Trimmed (Item 3)\n[/list]";
         $expected = "<ul><li>Foo*bar (item 1)</li><li>Item 2</li><li>Trimmed (Item 3)</li></ul>";
@@ -274,7 +274,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testHtmlTags() 
+    public function testHtmlTags()
     {
         $m = $this->_markup;
 
@@ -318,7 +318,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
                                 $this->_markup->render('[b]foo[i]bar[/b]kokx[/i]'));
     }
 
-    public function testHtmlAliases() 
+    public function testHtmlAliases()
     {
         $m = $this->_markup;
 
@@ -419,6 +419,28 @@ BBCODE;
             array('start' => '<sup>', 'end' => '</sup>', 'group' => 'inline', 'filter' => $filter));
         $this->assertEquals("filter<br />\n<sup>filter\n&amp;\nfilter</sup>",
             $m->render("filter\n[suppp]filter\n&\nfilter[/suppp]"));
+    }
+
+    public function testSetFilterForExistingMarkup()
+    {
+        $m = $this->_markup;
+
+        $filter = new Zend_Filter_StringToUpper();
+
+        $m->setFilter($filter, 'strong');
+
+        $this->assertEquals('<strong>FOO&BAR</strong>baz', $m->render('[b]foo&bar[/b]baz'));
+    }
+
+    public function testAddFilterForExistingMarkup()
+    {
+        $m = $this->_markup;
+
+        $filter = new Zend_Filter_StringToUpper();
+
+        $m->addFilter($filter, 'i', Zend_Filter::CHAIN_PREPEND);
+
+        $this->assertEquals('<em>FOO&amp;BAR</em>baz', $m->render('[i]foo&bar[/i]baz'));
     }
 
 }

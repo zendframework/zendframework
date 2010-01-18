@@ -226,13 +226,13 @@ abstract class Zend_Markup_Renderer_RendererAbstract
             );
         } else {
             if ($type && array_key_exists('empty', $options) && $options['empty']) {
-                // add a single replace tag
+                // add a single replace markup
                 $options['type']   = $type;
                 $options['filter'] = $filter;
 
                 $this->_markups[$name] = $options;
             } else {
-                // add a replace tag
+                // add a replace markup
                 $options['type']   = $type;
                 $options['filter'] = $filter;
 
@@ -437,7 +437,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
     }
 
     /**
-     * Get the tag name
+     * Get the markup name
      *
      * @param Zend_Markup_Token
      *
@@ -450,8 +450,19 @@ abstract class Zend_Markup_Renderer_RendererAbstract
             return false;
         }
 
-        // process the aliases
-        while (($type = $this->_getMarkupType($name)) 
+        return $this->_resolveMarkupName($name);
+    }
+
+    /**
+     * Resolve aliases for a markup name
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    protected function _resolveMarkupName($name)
+    {
+        while (($type = $this->_getMarkupType($name))
                && ($type & self::TYPE_ALIAS)
         ) {
             $name = $this->_markups[$name]['name'];
@@ -462,8 +473,8 @@ abstract class Zend_Markup_Renderer_RendererAbstract
 
     /**
      * Retrieve markup type
-     * 
-     * @param  string $name 
+     *
+     * @param  string $name
      * @return false|int
      */
     protected function _getMarkupType($name)
@@ -546,9 +557,84 @@ abstract class Zend_Markup_Renderer_RendererAbstract
     }
 
     /**
+     * Get the filter for an existing markup
+     *
+     * @param string $markup
+     *
+     * @return Zend_Filter_Interface
+     */
+    public function getFilter($markup)
+    {
+        $markup = $this->_resolveMarkupName($markup);
+
+        if (!isset($this->_markups[$markup]['filter'])
+            || !($this->_markups[$markup]['filter'] instanceof Zend_Filter_Interface)
+        ) {
+            if (isset($this->_markups[$markup]['filter']) && $this->_markups[$markup]['filter']) {
+                $this->_markups[$markup]['filter'] = $this->getDefaultFilter();
+            }
+        }
+
+        return $this->_markups[$markup]['filter'];
+    }
+
+    /**
+     * Add a filter for an existing markup
+     *
+     * @param Zend_Filter_Interface $filter
+     * @param string $markup
+     * @param string $placement
+     *
+     * @return Zend_Markup_Renderer_RendererAbstract
+     */
+    public function addFilter(Zend_Filter_Interface $filter, $markup, $placement = Zend_Filter::CHAIN_APPEND)
+    {
+        $markup = $this->_resolveMarkupName($markup);
+
+        $oldFilter = $this->getFilter($markup);
+
+        // if this filter is the default filter, clone it first
+        if ($oldFilter === $this->getDefaultFilter()) {
+            $oldFilter = clone $oldFilter;
+        }
+
+        if (!($oldFilter instanceof Zend_Filter)) {
+            $this->_markups[$markup]['filter'] = new Zend_Filter();
+
+            if ($oldFilter instanceof Zend_Filter_Interface) {
+                $this->_markups[$markup]['filter']->addFilter($oldFilter);
+            }
+        } else {
+            $this->_markups[$markup]['filter'] = $oldFilter;
+        }
+
+        $this->_markups[$markup]['filter']->addFilter($filter, $placement);
+
+        return $this;
+    }
+
+    /**
+     * Set the filter for an existing
+     *
+     * @param Zend_Filter_Interface $filter
+     * @param string $markup
+     *
+     * @return Zend_Markup_Renderer_RendererAbstract
+     */
+    public function setFilter(Zend_Filter_Interface $filter, $markup)
+    {
+        $markup = $this->_resolveMarkupName($markup);
+
+        $this->_markups[$markup]['filter'] = $filter;
+
+        return $this;
+    }
+
+    /**
      * Set the default filters
      *
      * @return void
      */
     abstract public function addDefaultFilters();
+
 }

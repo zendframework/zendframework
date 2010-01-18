@@ -323,6 +323,9 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      */
     public function writeArray(array $array)
     {
+	// arrays aren't reference here but still counted
+        $this->_referenceObjects[] = $array;
+
         // have to seperate mixed from numberic keys.
         $numeric = array();
         $string  = array();

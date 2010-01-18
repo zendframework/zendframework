@@ -372,7 +372,7 @@ class Zend_Filter_InputTest extends PHPUnit_Framework_TestCase
         $messages = $input->getMessages();
         $this->assertType('array', $messages);
         $this->assertEquals(array('field2'), array_keys($messages));
-        $this->assertEquals("'123' has not only alphabetic characters",
+        $this->assertEquals("'123' contains non alphabetic characters",
             current($messages['field2']));
     }
 

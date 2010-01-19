@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EN-Revision: 20115 -->
+<!-- Reviewed: no -->
+<sect1 id="zend.search.lucene.query-api">
+    <title>API de construction de requêtes</title>
+    <para>
+        En plus du parsage automatique d'une requête en chaîne de caractères, il est également possible de construire
+        cette requête à l'aide de l'<acronym>API</acronym> de requête.
+    </para>
+    <para>
+        Les requêtes utilisateur peuvent être combinées avec les requêtes créées à travers l'API de requêtes.
+        Utilisez simplement le parseur de requêtes pour construire une requête à partir d'une chaîne :
+        <programlisting language="php"><![CDATA[
+$query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
+]]></programlisting>
+    </para>
+    <sect2 id="zend.search.lucene.queries.exceptions">
+        <title>Les Exceptions du parseur de requêtes</title>
+        <para>
+        Le parseur de requêtes peut générer deux types d'exceptions :
+        <itemizedlist>
+            <listitem>
+                <para>
+                    Une <classname>Zend_Search_Lucene_Exception</classname> est levée si quelque-chose d'anormal se produit dans le
+                    parseur même.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    Une <classname>Zend_Search_Lucene_Search_QueryParserException</classname> est levée s'il y a une erreur dans la syntaxe de la requête.
+                </para>
+            </listitem>
+        </itemizedlist>
+        C'est une bonne idée d'attraper les <classname>Zend_Search_Lucene_Search_QueryParserException</classname>s et
+        de les traiter de manière appropriée :
+        <programlisting language="php"><![CDATA[
+try {
+    $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
+} catch (Zend_Search_Lucene_Search_QueryParserException $e) {
+    echo "Query syntax error: " . $e->getMessage() . "\n";
+}
+]]></programlisting>
+        </para>
+        <para>
+            La même technique devrait être utilisée pour la méthode find() d'un objet <classname>Zend_Search_Lucene</classname>.
+        </para>
+        <para>
+            Depuis la version 1.5, les exceptions de parsage de requête sont supprimées par défaut. Si la requête ne
+            respecte pas le langage de requêtes, elle est "tokenizée" à l'aide de l'analyseur par défaut et tous les
+            termes "tokenizés" sont utilisés dans la recherche.
+            Pour activer les exceptions, utilisez <methodname>Zend_Search_Lucene_Search_QueryParser::dontSuppressQueryParsingExceptions()</methodname>.
+            Les méthodes <methodname>Zend_Search_Lucene_Search_QueryParser::suppressQueryParsingExceptions()</methodname> et
+            <methodname>Zend_Search_Lucene_Search_QueryParser::queryParsingExceptionsSuppressed()</methodname>
+            sont également destinées à gérer le comportement de gestion des exceptions.
+        </para>
+    </sect2>
+    <sect2 id="zend.search.lucene.queries.term-query">
+        <title>Term Query</title>
+        <para>
+            Term queries can be used for searching with a single term.
+        </para>
+        <para>
+        Query string:
+        </para>
+        <programlisting language="querystring"><![CDATA[
+word1
+]]></programlisting>
+        <para>or</para>
+        <para>
+        Query construction by <acronym>API</acronym>:
+        </para>
+        <programlisting language="php"><![CDATA[
+$term  = new Zend_Search_Lucene_Index_Term('word1', 'field1');
+$query = new Zend_Search_Lucene_Search_Query_Term($term);
+$hits  = $index->find($query);
+]]></programlisting>
+        <para>
+            The term field is optional. <classname>Zend_Search_Lucene</classname> searches through all indexed fields in each document if the field is not specified:
+            <programlisting language="php"><![CDATA[
+// Search for 'word1' in all indexed fields
+$term  = new Zend_Search_Lucene_Index_Term('word1');
+$query = new Zend_Search_Lucene_Search_Query_Term($term);
+$hits  = $index->find($query);
+]]></programlisting>
+        </para>
+    </sect2>
+    <sect2 id="zend.search.lucene.queries.multiterm-query">
+        <title>Multi-Term Query</title>
+        <para>
+            Multi-term queries can be used for searching with a set of terms.
+        </para>
+        <para>
+            Each term in a set can be defined as <emphasis>required</emphasis>,
+            <emphasis>prohibited</emphasis>, or <emphasis>neither</emphasis>.
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis>required</emphasis> means that documents not matching this term will not match
+                        the query;
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>prohibited</emphasis> means that documents matching this term will not match
+                        the query;
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>neither</emphasis>, in which case matched documents are neither prohibited
+                        from, nor required to, match the term. A document must match at least 1 term, however, to
+                        match the query.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            If optional terms are added to a query with required terms,
+            both queries will have the same result set but the optional terms may affect the score of the matched documents.
+        </para>
+        <para>
+            Both search methods can be used for multi-term queries.
+        </para>
+        <para>
+            Query string:
+        </para>
+        <programlisting language="querystring"><![CDATA[
++word1 author:word2 -word3
+]]></programlisting>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    '+' is used to define a required term.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    '-' is used to define a prohibited term.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    'field:' prefix is used to indicate a document field for a search.
+                    If it's omitted, then all fields are searched.
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>or</para>
+        <para>
+        Query construction by <acronym>API</acronym>:
+        </para>
+        <programlisting language="php"><![CDATA[
+$query = new Zend_Search_Lucene_Search_Query_MultiTerm();
+$query->addTerm(new Zend_Search_Lucene_Index_Term('word1'), true);
+$query->addTerm(new Zend_Search_Lucene_Index_Term('word2', 'author'),
+                null);
+$query->addTerm(new Zend_Search_Lucene_Index_Term('word3'), false);
+$hits  = $index->find($query);
+]]></programlisting>
+        <para>
+            It's also possible to specify terms list within MultiTerm query constructor:
+            <programlisting language="php"><![CDATA[
+$terms = array(new Zend_Search_Lucene_Index_Term('word1'),
+               new Zend_Search_Lucene_Index_Term('word2', 'author'),
+               new Zend_Search_Lucene_Index_Term('word3'));
+$signs = array(true, null, false);
+$query = new Zend_Search_Lucene_Search_Query_MultiTerm($terms, $signs);
+$hits  = $index->find($query);
+]]></programlisting>
+        </para>
+        <para>
+            The <varname>$signs</varname> array contains information about the term type:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <constant>TRUE</constant> is used to define required term.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>FALSE</constant> is used to define prohibited term.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>NULL</constant> is used to define a term that is neither required
+                        nor prohibited.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </sect2>
+    <sect2 id="zend.search.lucene.queries.boolean-query">
+        <title>Boolean Query</title>
+        <para>
+            Boolean queries allow to construct query using other queries and boolean operators.
+        </para>
+        <para>
+            Each subquery in a set can be defined as <emphasis>required</emphasis>,
+            <emphasis>prohibited</emphasis>, or <emphasis>optional</emphasis>.
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <emphasis>required</emphasis> means that documents not matching this subquery will not match
+                        the query;
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>prohibited</emphasis> means that documents matching this subquery will not match
+                        the query;
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <emphasis>optional</emphasis>, in which case matched documents are neither prohibited
+                        from, nor required to, match the subquery. A document must match at least 1 subquery, however, to
+                        match the query.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            If optional subqueries are added to a query with required subqueries,
+            both queries will have the same result set but the optional subqueries may affect the score of the matched documents.
+        </para>
+        <para>
+            Both search methods can be used for boolean queries.
+        </para>
+        <para>
+            Query string:
+        </para>
+        <programlisting language="querystring"><![CDATA[
++(word1 word2 word3) author:(word4 word5) -word6
+]]></programlisting>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    '+' is used to define a required subquery.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    '-' is used to define a prohibited subquery.
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    'field:' prefix is used to indicate a document field for a search.
+                    If it's omitted, then all fields are searched.
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>or</para>
+        <para>
+        Query construction by <acronym>API</acronym>:
+        </para>
+        <programlisting language="php"><![CDATA[
+$query = new Zend_Search_Lucene_Search_Query_Boolean();
+$subquery1 = new Zend_Search_Lucene_Search_Query_MultiTerm();
+$subquery1->addTerm(new Zend_Search_Lucene_Index_Term('word1'));
+$subquery1->addTerm(new Zend_Search_Lucene_Index_Term('word2'));
+$subquery1->addTerm(new Zend_Search_Lucene_Index_Term('word3'));
+$subquery2 = new Zend_Search_Lucene_Search_Query_MultiTerm();
+$subquery2->addTerm(new Zend_Search_Lucene_Index_Term('word4', 'author'));
+$subquery2->addTerm(new Zend_Search_Lucene_Index_Term('word5', 'author'));
+$term6 = new Zend_Search_Lucene_Index_Term('word6');
+$subquery3 = new Zend_Search_Lucene_Search_Query_Term($term6);
+$query->addSubquery($subquery1, true  /* required */);
+$query->addSubquery($subquery2, null  /* optional */);
+$query->addSubquery($subquery3, false /* prohibited */);
+$hits  = $index->find($query);
+]]></programlisting>
+        <para>
+            It's also possible to specify subqueries list within Boolean query constructor:
+            <programlisting language="php"><![CDATA[
+...
+$subqueries = array($subquery1, $subquery2, $subquery3);
+$signs = array(true, null, false);
+$query = new Zend_Search_Lucene_Search_Query_Boolean($subqueries, $signs);
+$hits  = $index->find($query);
+]]></programlisting>
+        </para>
+        <para>
+            The <varname>$signs</varname> array contains information about the subquery type:
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <constant>TRUE</constant> is used to define required subquery.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>FALSE</constant> is used to define prohibited subquery.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <constant>NULL</constant> is used to define a subquery that is neither
+                        required nor prohibited.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <para>
+            Each query which uses boolean operators can be rewritten using signs notation and constructed using API. For example:
+            <programlisting language="querystring"><![CDATA[
+word1 AND (word2 AND word3 AND NOT word4) OR word5
+]]></programlisting>
+            is equivalent to
+            <programlisting language="querystring"><![CDATA[
+(+(word1) +(+word2 +word3 -word4)) (word5)
+]]></programlisting>
+        </para>
+    </sect2>
+    <sect2 id="zend.search.lucene.queries.wildcard">
+        <title>Wildcard Query</title>
+        <para>
+            Wildcard queries can be used to search for documents containing strings matching specified patterns.
+        </para>
+        <para>
+            The '?' symbol is used as a single character wildcard.
+        </para>
+        <para>
+            The '*' symbol is used as a multiple character wildcard.
+        </para>
+        <para>
+            Query string:
+            <programlisting language="querystring"><![CDATA[
+field1:test*
+]]></programlisting>
+        </para>
+        <para>or</para>
+        <para>
+            Query construction by API:
+            <programlisting language="php"><![CDATA[
+$pattern = new Zend_Search_Lucene_Index_Term('test*', 'field1');
+$query = new Zend_Search_Lucene_Search_Query_Wildcard($pattern);
+$hits  = $index->find($query);
+]]></programlisting>
+        </para>
+        <para>
+            The term field is optional. <classname>Zend_Search_Lucene</classname> searches through all fields on each document if a field is not specified:
+            <programlisting language="php"><![CDATA[
+$pattern = new Zend_Search_Lucene_Index_Term('test*');
+$query = new Zend_Search_Lucene_Search_Query_Wildcard($pattern);
+$hits  = $index->find($query);
+]]></programlisting>
+        </para>
+    </sect2>
+    <sect2 id="zend.search.lucene.queries.fuzzy">
+        <title>Fuzzy Query</title>
+        <para>
+            Fuzzy queries can be used to search for documents containing strings matching terms similar to specified term.
+        </para>
+        <para>
+            Query string:
+            <programlisting language="querystring"><![CDATA[
+field1:test~
+]]></programlisting>
+            This query matches documents containing 'test' 'text' 'best' words and others.
+        </para>
+        <para>or</para>
+        <para>
+            Query construction by API:
+            <programlisting language="php"><![CDATA[
+$term = new Zend_Search_Lucene_Index_Term('test', 'field1');
+$query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
+$hits  = $index->find($query);
+]]></programlisting>
+        </para>
+        <para>
+            Optional similarity can be specified after "~" sign.
+        </para>
+        <para>
+            Query string:
+            <programlisting language="querystring"><![CDATA[
+field1:test~0.4
+]]></programlisting>
+        </para>
+        <para>or</para>
+        <para>
+            Query construction by API:
+            <programlisting language="php"><![CDATA[
+$term = new Zend_Search_Lucene_Index_Term('test', 'field1');
+$query = new Zend_Search_Lucene_Search_Query_Fuzzy($term, 0.4);
+$hits  = $index->find($query);
+]]></programlisting>
+        </para>
+        <para>
+            The term field is optional. <classname>Zend_Search_Lucene</classname> searches through all fields on each document if a field is not specified:
+            <programlisting language="php"><![CDATA[
+$term = new Zend_Search_Lucene_Index_Term('test');
+$query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
+$hits  = $index->find($query);
+]]></programlisting>
+        </para>
+    </sect2>
+    <sect2 id="zend.search.lucene.queries.phrase-query">
+        <title>Phrase Query</title>
+        <para>
+            Phrase Queries can be used to search for a phrase within documents.
+        </para>
+        <para>
+            Phrase Queries are very flexible and allow the user or developer to search for exact phrases as well as 'sloppy' phrases.
+        </para>
+        <para>
+            Phrases can also contain gaps or terms in the same places; they can be generated by
+            the analyzer for different purposes. For example, a term can be duplicated to increase the term
+            its weight, or several synonyms can be placed into a single position.
+        </para>
+        <programlisting language="php"><![CDATA[
+$query1 = new Zend_Search_Lucene_Search_Query_Phrase();
+// Add 'word1' at 0 relative position.
+$query1->addTerm(new Zend_Search_Lucene_Index_Term('word1'));
+// Add 'word2' at 1 relative position.
+$query1->addTerm(new Zend_Search_Lucene_Index_Term('word2'));
+// Add 'word3' at 3 relative position.
+$query1->addTerm(new Zend_Search_Lucene_Index_Term('word3'), 3);
+...
+$query2 = new Zend_Search_Lucene_Search_Query_Phrase(
+                array('word1', 'word2', 'word3'), array(0,1,3));
+...
+// Query without a gap.
+$query3 = new Zend_Search_Lucene_Search_Query_Phrase(
+                array('word1', 'word2', 'word3'));
+...
+$query4 = new Zend_Search_Lucene_Search_Query_Phrase(
+                array('word1', 'word2'), array(0,1), 'annotation');
+]]></programlisting>
+        <para>
+            A phrase query can be constructed in one step with a class constructor or step by step with
+            <methodname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</methodname> method calls.
+        </para>
+        <para>
+            <classname>Zend_Search_Lucene_Search_Query_Phrase</classname> class constructor takes three optional arguments:
+        </para>
+        <programlisting language="php"><![CDATA[
+Zend_Search_Lucene_Search_Query_Phrase(
+    [array $terms[, array $offsets[, string $field]]]
+);
+]]></programlisting>
+        <para>
+            The <varname>$terms</varname> parameter is an array of strings that contains a set of
+            phrase terms. If it's omitted or equal to <constant>NULL</constant>, then an empty query
+            is constructed.
+        </para>
+        <para>
+            The <varname>$offsets</varname> parameter is an array of integers that contains offsets
+            of terms in a phrase. If it's omitted or equal to <constant>NULL</constant>, then the
+            terms' positions are assumed to be sequential with no gaps.
+        </para>
+        <para>
+            The <varname>$field</varname> parameter is a string that indicates the document field
+            to search. If it's omitted or equal to <constant>NULL</constant>, then the default field
+            is searched.
+        </para>
+        <para>
+            Thus:
+        </para>
+        <programlisting language="php"><![CDATA[
+$query =
+    new Zend_Search_Lucene_Search_Query_Phrase(array('zend', 'framework'));
+]]></programlisting>
+        <para>
+            will search for the phrase 'zend framework' in all fields.
+        </para>
+        <programlisting language="php"><![CDATA[
+$query = new Zend_Search_Lucene_Search_Query_Phrase(
+                 array('zend', 'download'), array(0, 2)
+             );
+]]></programlisting>
+        <para>
+            will search for the phrase 'zend ????? download' and match 'zend platform download', 'zend studio
+            download', 'zend core download', 'zend framework download', and so on.
+        </para>
+        <programlisting language="php"><![CDATA[
+$query = new Zend_Search_Lucene_Search_Query_Phrase(
+                 array('zend', 'framework'), null, 'title'
+             );
+]]></programlisting>
+        <para>
+            will search for the phrase 'zend framework' in the 'title' field.
+        </para>
+        <para>
+            <methodname>Zend_Search_Lucene_Search_Query_Phrase::addTerm()</methodname> takes two arguments, a
+            required <classname>Zend_Search_Lucene_Index_Term</classname> object and an optional position:
+        </para>
+        <programlisting language="php"><![CDATA[
+Zend_Search_Lucene_Search_Query_Phrase::addTerm(
+    Zend_Search_Lucene_Index_Term $term[, integer $position]
+);
+]]></programlisting>
+        <para>
+            The <varname>$term</varname> parameter describes the next term in the phrase. It must indicate the same field as previous terms, or an exception will be thrown.
+        </para>
+        <para>
+            The <varname>$position</varname> parameter indicates the term position in the phrase.
+        </para>
+        <para>
+            Thus:
+        </para>
+        <programlisting language="php"><![CDATA[
+$query = new Zend_Search_Lucene_Search_Query_Phrase();
+$query->addTerm(new Zend_Search_Lucene_Index_Term('zend'));
+$query->addTerm(new Zend_Search_Lucene_Index_Term('framework'));
+]]></programlisting>
+        <para>
+            will search for the phrase 'zend framework'.
+         </para>
+        <programlisting language="php"><![CDATA[
+$query = new Zend_Search_Lucene_Search_Query_Phrase();
+$query->addTerm(new Zend_Search_Lucene_Index_Term('zend'), 0);
+$query->addTerm(new Zend_Search_Lucene_Index_Term('framework'), 2);
+]]></programlisting>
+        <para>
+            will search for the phrase 'zend ????? download' and match 'zend platform download', 'zend studio
+            download', 'zend core download', 'zend framework download', and so on.
+        </para>
+        <programlisting language="php"><![CDATA[
+$query = new Zend_Search_Lucene_Search_Query_Phrase();
+$query->addTerm(new Zend_Search_Lucene_Index_Term('zend', 'title'));
+$query->addTerm(new Zend_Search_Lucene_Index_Term('framework', 'title'));
+]]></programlisting>
+        <para>
+            will search for the phrase 'zend framework' in the 'title' field.
+        </para>
+        <para>
+            The slop factor sets the number of other words permitted between specified words in the query phrase. If set to zero,
+            then the corresponding query is an exact phrase search. For larger values this works like the WITHIN or NEAR
+            operators.
+        </para>
+        <para>
+            The slop factor is in fact an edit distance, where the edits correspond to moving terms in the query
+            phrase. For example, to switch the order of two words requires two moves (the
+            first move places the words atop one another), so to permit re-orderings of phrases, the slop factor
+            must be at least two.
+        </para>
+        <para>
+            More exact matches are scored higher than sloppier matches; thus, search results are sorted by
+            exactness. The slop is zero by default, requiring exact matches.
+        </para>
+        <para>
+            The slop factor can be assigned after query creation:
+        </para>
+        <programlisting language="php"><![CDATA[
+// Query without a gap.
+$query =
+    new Zend_Search_Lucene_Search_Query_Phrase(array('word1', 'word2'));
+// Search for 'word1 word2', 'word1 ... word2'
+$query->setSlop(1);
+$hits1 = $index->find($query);
+// Search for 'word1 word2', 'word1 ... word2',
+// 'word1 ... ... word2', 'word2 word1'
+$query->setSlop(2);
+$hits2 = $index->find($query);
+]]></programlisting>
+    </sect2>
+    <sect2 id="zend.search.lucene.queries.range">
+        <title>Range Query</title>
+        <para>
+            <link linkend="zend.search.lucene.query-language.range">Range queries</link> are intended for searching terms within specified interval.
+        </para>
+        <para>
+            Query string:
+            <programlisting language="querystring"><![CDATA[
+mod_date:[20020101 TO 20030101]
+title:{Aida TO Carmen}
+]]></programlisting>
+        </para>
+        <para>or</para>
+        <para>
+            Query construction by API:
+            <programlisting language="php"><![CDATA[
+$from = new Zend_Search_Lucene_Index_Term('20020101', 'mod_date');
+$to   = new Zend_Search_Lucene_Index_Term('20030101', 'mod_date');
+$query = new Zend_Search_Lucene_Search_Query_Range(
+                 $from, $to, true // inclusive
+             );
+$hits  = $index->find($query);
+]]></programlisting>
+        </para>
+        <para>
+            Term fields are optional. <classname>Zend_Search_Lucene</classname> searches through all fields if the field is not specified:
+            <programlisting language="php"><![CDATA[
+$from = new Zend_Search_Lucene_Index_Term('Aida');
+$to   = new Zend_Search_Lucene_Index_Term('Carmen');
+$query = new Zend_Search_Lucene_Search_Query_Range(
+                 $from, $to, false // non-inclusive
+             );
+$hits  = $index->find($query);
+]]></programlisting>
+        </para>
+        <para>
+            Either (but not both) of the boundary terms may be set to <constant>NULL</constant>.
+            <classname>Zend_Search_Lucene</classname> searches from the beginning or
+            up to the end of the dictionary for the specified field(s) in this case:
+            <programlisting language="php"><![CDATA[
+// searches for ['20020101' TO ...]
+$from = new Zend_Search_Lucene_Index_Term('20020101', 'mod_date');
+$query = new Zend_Search_Lucene_Search_Query_Range(
+                 $from, null, true // inclusive
+             );
+$hits  = $index->find($query);
+]]></programlisting>
+        </para>
+    </sect2>
+</sect1>
+<!--
+vim:se ts=4 sw=4 et:
+-->

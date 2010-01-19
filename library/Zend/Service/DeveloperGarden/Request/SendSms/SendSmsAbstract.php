@@ -261,7 +261,7 @@ abstract class Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
         $number   = $this->getNumber();
         $retValue = 0;
         if (!empty($number)) {
-            $retValue = count(split(',', $number));
+            $retValue = count(explode(',', $number));
         }
         return $retValue;
     }

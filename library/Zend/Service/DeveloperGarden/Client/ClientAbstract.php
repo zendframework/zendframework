@@ -358,7 +358,7 @@ abstract class Zend_Service_DeveloperGarden_Client_ClientAbstract
     {
         $r = new ReflectionClass(__CLASS__);
         foreach ($r->getConstants() as $k => $v) {
-            $s = split('_', $k, 2);
+            $s = explode('_', $k, 2);
             if (!isset(self::$_consts[$s[0]])) {
                 self::$_consts[$s[0]] = array();
             }

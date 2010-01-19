@@ -3727,6 +3727,49 @@
                 </entry>
             </row>
             <row>
+                <entry morerows="1" valign="middle">
+                    <emphasis>
+                        <ulink
+                            url="&zf.manual.link;/zend.serializer.html">
+                            <classname>Zend_Serializer</classname>
+                        </ulink>
+                    </emphasis>
+                </entry>
+                <entry morerows="1" valign="middle">&requirements.hard;</entry>
+                <entry>
+                    <ulink
+                        url="&zf.manual.link;/zend.exception.html">
+                        <classname>Zend_Exception</classname>
+                    </ulink>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <ulink
+                        url="&zf.manual.link;/zend.loader.html">
+                        <classname>Zend_Loader</classname>
+                    </ulink>
+                </entry>
+            </row>
+            <row>
+                <entry morerows="1" valign="middle">&requirements.soft;</entry>
+                <entry>
+                    <ulink
+                        url="&zf.manual.link;/zend.json.html">
+                        <classname>Zend_Json</classname>
+                    </ulink>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <ulink
+                        url="&zf.manual.link;/zend.amf.html">
+                        <classname>Zend_Amf</classname>
+                    </ulink>
+                </entry>
+            </row>
+            
+            <row>
                 <entry>
                     <emphasis>
                         <ulink

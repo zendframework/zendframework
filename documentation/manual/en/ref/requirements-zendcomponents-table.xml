@@ -824,6 +824,44 @@
                 </entry>
             </row>
             <row>
+                <entry morerows="3" valign="middle">
+                    <emphasis>
+                        <ulink
+                            url="&zf.manual.link;/zend.serializer.html">
+                            <classname>Zend_Serializer</classname>
+                        </ulink>
+                    </emphasis>
+                </entry>
+                <entry morerows="2" valign="middle">&requirements.hard;</entry>
+                <entry>
+                    <ulink
+                        url="&php.manual.link;/ref.wddx.php">wddx</ulink>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <ulink
+                        url="&php.manual.link;/ref.simplexml.php">SimpleXml</ulink>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <emphasis>
+                        <ulink
+                            url="http://opensource.dynamoid.com">igbinary</ulink>
+                    </emphasis>
+                </entry>
+            </row>
+            <row>
+                <entry>&requirements.soft;</entry>
+                <entry>
+                    <emphasis>
+                        <ulink
+                            url="&php.manual.link;/ref.json.php">json</ulink>
+                    </emphasis>
+                </entry>
+            </row>
+            <row>
                 <entry>
                     <emphasis>
                         <ulink

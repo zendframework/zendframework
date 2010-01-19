@@ -550,6 +550,21 @@
                 <entry>
                     <emphasis>
                         <ulink
+                            url="http://opensource.dynamoid.com">igbinary</ulink>
+                    </emphasis>
+                </entry>
+                <entry>&requirements.hard;</entry>
+                <entry>
+                        <ulink
+                            url="&zf.manual.link;/zend.serializer.html">
+                            <classname>Zend_Serializer_Adapter_Igbinary</classname>
+                        </ulink>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <emphasis>
+                        <ulink
                             url="&php.manual.link;/ref.imap.php">imap</ulink>
                     </emphasis>
                 </entry>
@@ -577,18 +592,30 @@
                 <entry><classname>Zend_Db_Adapter_Firebird</classname></entry>
             </row>
             <row>
-                <entry>
+                <entry morerows="1" valign="middle">
                     <emphasis>
                         <ulink
                             url="&php.manual.link;/ref.json.php">json</ulink>
                     </emphasis>
                 </entry>
-                <entry>&requirements.soft;</entry>
+                <entry morerows="1" valign="middle">&requirements.soft;</entry>
                 <entry>
-                    <ulink
-                        url="&zf.manual.link;/zend.json.html">
-                        <classname>Zend_Json</classname>
-                    </ulink>
+                    <emphasis>
+	                    <ulink
+	                        url="&zf.manual.link;/zend.json.html">
+	                        <classname>Zend_Json</classname>
+	                    </ulink>
+                    </emphasis>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <emphasis>
+                        <ulink
+                            url="&zf.manual.link;/zend.serializer.html">
+                            <classname>Zend_Serializer_Adapter_Json</classname>
+                        </ulink>
+                    </emphasis>
                 </entry>
             </row>
             <row>
@@ -1082,13 +1109,13 @@
                 <entry>---</entry>
             </row>
             <row>
-                <entry morerows="6" valign="middle">
+                <entry morerows="7" valign="middle">
                     <emphasis>
                         <ulink
                             url="&php.manual.link;/ref.simplexml.php">SimpleXML</ulink>
                     </emphasis>
                 </entry>
-                <entry morerows="5" valign="middle">&requirements.hard;</entry>
+                <entry morerows="6" valign="middle">&requirements.hard;</entry>
                 <entry>
                     <ulink
                         url="&zf.manual.link;/zend.config.adapters.xml.html">
@@ -1109,6 +1136,14 @@
                     <ulink
                         url="&zf.manual.link;/zend.rest.client.html">
                         <classname>Zend_Rest_Client</classname>
+                    </ulink>
+                </entry>
+            </row>
+            <row>
+                <entry>
+                    <ulink
+                        url="&zf.manual.link;/zend.serializer.adapter.html">
+                        <classname>Zend_Serializer_Adapter_Wddx</classname>
                     </ulink>
                 </entry>
             </row>
@@ -1262,8 +1297,13 @@
                             url="&php.manual.link;/ref.wddx.php">wddx</ulink>
                     </emphasis>
                 </entry>
-                <entry>---</entry>
-                <entry>---</entry>
+                <entry>&requirements.hard;</entry>
+                <entry>
+                    <ulink
+                        url="&zf.manual.link;/zend.serializer.adapter.html">
+                        <classname>Zend_Serializer_Adapter_Wddx</classname>
+                    </ulink>
+                </entry>
             </row>
             <row>
                 <entry morerows="2" valign="middle">

@@ -21,7 +21,7 @@
  */
 
 /**
- * NL-Revision: 20360
+ * EN-Revision: 20377
  */
 return array(
     // Zend_Validate_Alnum
@@ -41,7 +41,7 @@ return array(
     "Invalid type given, value should be string" => "Ongeldig type opgegeven, waarde moet een string zijn",
 
     // Zend_Validate_Between
-    "'%value%' is not between '%min%' and '%max%', inclusively" => "'%value%' is niet tussen '%min%' en '%max%'",
+    "'%value%' is not between '%min%' and '%max%', inclusively" => "'%value%' is niet tussen of gelijk aan '%min%' en '%max%'",
     "'%value%' is not strictly between '%min%' and '%max%'" => "'%value%' is niet tussen '%min%' en '%max%'",
 
     // Zend_Validate_Callback
@@ -58,17 +58,17 @@ return array(
     "Invalid type given, value should be a string" => "Ongeldig type opgegeven, waarde moet een string zijn",
     "'%value%' contains an invalid amount of digits" => "'%value%' bevat een ongeldige hoeveelheid cijfers",
     "'%value%' is not from an allowed institute" => "'%value%' is niet afkomstig van een toegestaan instituut",
-    "Validation of '%value%' has been failed by the service" => "Validatie van '%value%' is mislukt door de service",
+    "Validation of '%value%' has been failed by the service" => "Validatie door de service van '%value%' is mislukt",
     "The service returned a failure while validating '%value%'" => "De service heeft een foutmelding teruggegeven bij het valideren van '%value%'",
 
     // Zend_Validate_Date
-    "Invalid type given, value should be string, integer, array or Zend_Date" => "Ongeldig type opgegeven, waarde moet een string, integer array of Zend_Date zijn",
+    "Invalid type given, value should be string, integer, array or Zend_Date" => "Ongeldig type opgegeven, waarde moet een string, integer, array of Zend_Date zijn",
     "'%value%' does not appear to be a valid date" => "'%value%' lijkt geen geldige datum te zijn",
-    "'%value%' does not fit the date format '%format'" => "'%value%' past niet in het datumformaat '%format'",
+    "'%value%' does not fit the date format '%format%'" => "'%value%' past niet in het datumformaat '%format%'",
 
     // Zend_Validate_Db_Abstract
     "No record matching %value% was found" => "Er kon geen record gevonden wat overeenkomt met %value%",
-    "A record matching %value% was found" => "Een record wat overeenkomt met %value%",
+    "A record matching %value% was found" => "Een record wat overeenkomt met %value% is gevonden",
 
     // Zend_Validate_Digits
     "Invalid type given, value should be string, integer or float" => "Ongeldig type opgegeven, waarde moet een string, integer of float zijn",

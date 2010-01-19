@@ -444,23 +444,15 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
      */
     public function testPhpVersionBug()
     {
-        if (!version_compare(phpversion(), '5.3.0', '>=')) {
-            $this->markTestSkipped('PHP Version must be 5.3.0 or higher');
-        }
-
         try {
-            $file = '_files/ZF-8462.pdf';
+            $file = dirname(__FILE__) . '/_files/ZF-8462.pdf';
             $pdf = Zend_Pdf::load($file);
         } catch (Zend_Pdf_Exception $e) {
-            // skip this Exception because that should happen
-            $error = error_get_last();
-            if ($error !== null && $error['type'] == E_WARNING) {
-                $this->fail('The expected bug exists. Please verify.');
+            if (strpos($e->getMessage(), 'Cross-reference streams are not supported yet.') !== false) {
+                // Skip expected exception
+                return;
             }
-            // nothing happen no bug?
-            return;
+            throw $e;
         }
-
-        $this->fail('An expected Exception has never been raised.');
     }
 }

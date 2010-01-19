@@ -66,7 +66,7 @@ foreach ($hits as $hit) {
         </para>
 
         <para>
-            Chaque segment d'index et un portion de données entièrement indépendante. Ainsi
+            Chaque segment d'index et une portion de données entièrement indépendante. Ainsi
             plus un index contient de segments, plus il sera gourmand en mémoire et en temps de
             calcul lors de la recherche.
         </para>

@@ -64,7 +64,7 @@
                 使用できない場合は、同等の機能をコンポーネント自身で提供します。
             </para>
 
-            <xi:include href="requirements-php-extensions-table.xml" />
+            <xi:include href="../../en/ref/requirements-php-extensions-table.xml" />
         </sect2>
 
         <sect2 id="requirements.zendcomponents">
@@ -90,7 +90,7 @@
                 使用できない場合は、同等の機能をコンポーネント自身で提供します。
             </para>
 
-            <xi:include href="requirements-zendcomponents-table.xml" />
+            <xi:include href="../../en/ref/requirements-zendcomponents-table.xml" />
         </sect2>
 
         <sect2 id="requirements.dependencies">
@@ -122,7 +122,7 @@
                 </para>
             </note>
 
-            <xi:include href="requirements-dependencies-table.xml" />
+            <xi:include href="../../en/ref/requirements-dependencies-table.xml" />
         </sect2>
 
     </sect1>

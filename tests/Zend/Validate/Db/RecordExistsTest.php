@@ -243,4 +243,14 @@ class Zend_Validate_Db_RecordExistsTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('No database available');
         }
     }
+
+    /**
+     * @return ZF-8863
+     */
+    public function testExcludeConstructor()
+    {
+        Zend_Db_Table_Abstract::setDefaultAdapter($this->_adapterHasResult);
+        $validator = new Zend_Validate_Db_RecordExists('users', 'field1', 'id != 1');
+        $this->assertTrue($validator->isValid('value3'));
+    }
 }

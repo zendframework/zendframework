@@ -101,11 +101,11 @@ abstract class Zend_Validate_Db_Abstract extends Zend_Validate_Abstract
             $temp['table'] = array_shift($options);
             $temp['field'] = array_shift($options);
             if (!empty($options)) {
-                $options['exclude'] = array_shift($options);
+                $temp['exclude'] = array_shift($options);
             }
 
             if (!empty($options)) {
-                $options['adapter'] = array_shift($options);
+                $temp['adapter'] = array_shift($options);
             }
 
             $options = $temp;

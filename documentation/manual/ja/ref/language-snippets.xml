@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19995 -->
+<!-- EN-Revision: 20313 -->
 <!-- links -->
 <!ENTITY lang                                   'ja'>
-<!ENTITY zf.manual.link                         'http://framework.zend.com/manual/ja/'>
-<!ENTITY php.manual.link                        'http://www.php.net/manual/ja/'>
+<!ENTITY zf.manual.link                         'http://framework.zend.com/manual/ja'>
+<!ENTITY php.manual.link                        'http://www.php.net/manual/ja'>
 
 <!-- manual.xml.in -->
 <!ENTITY book.title                             'プログラマ向けリファレンスガイド'>
@@ -31,3 +31,24 @@
 <!ENTITY appendix.migration.title               'Zend Framework 移行上の注意'>
 
 <!ENTITY appendix.performance.title             'Zend Framework パフォーマンスガイド'>
+
+<!-- requirements table -->
+<!ENTITY requirements.extensions.table.title    'Zend Framework で各コンポーネントが使用する PHP 拡張'>
+<!ENTITY requirements.zendcomponents.table.title 'Zend Framework のコンポーネントと、使用している PHP 拡張'>
+<!ENTITY requirements.dependencies.table.title  'Zend Framework のコンポーネントと、それが依存する他のZend Framework コンポーネント'>
+
+<!ENTITY requirements.php.extensions            '<acronym>PHP</acronym> 拡張'>
+<!ENTITY requirements.dependency.type           '依存形式'>
+<!ENTITY requirements.used.by.zf.components     '使用する Zend Framework コンポーネント'>
+<!ENTITY requirements.zf.component              'Zend Framework コンポーネント'>
+<!ENTITY requirements.dependent.zf.components   '依存する Zend Framework コンポーネント'>
+
+<!ENTITY requirements.hard                      'ハード'>
+<!ENTITY requirements.soft                      'ソフト'>
+<!ENTITY requirements.fix                       '固定'>
+<!ENTITY requirements.sub                       'Sub'>
+
+<!ENTITY requirements.all.components            'コンポーネント全て'>
+<!ENTITY requirements.virtually.all.components  '事実上全てのコンポーネント'>
+<!ENTITY requirements.all.pdo.adapters          '<acronym>PDO</acronym> データベースアダプタ全て'>
+

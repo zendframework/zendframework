@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19418 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.paginator.usage">
     <title>使用法</title>
 
@@ -100,7 +100,7 @@ $paginator = Zend_Paginator::factory($array);
 
         <note>
             <para>
-                Null アダプタの場合は、
+                <classname>Null</classname> アダプタの場合は、
                 データコレクションのかわりに要素数をコンストラクタで指定します。
             </para>
         </note>

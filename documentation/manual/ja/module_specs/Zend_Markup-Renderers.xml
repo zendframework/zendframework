@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 20289 -->
 <sect1 id="zend.markup.renderers">
     <title>Zend_Markup レンダラー</title>
  
@@ -31,23 +31,179 @@ $bbcode = Zend_Markup::factory('Bbcode');
 // 他のことを配列にて定義します。
 $bbcode->addTag(
     'foo',
-    Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE
-        | Zend_Markup_Renderer_RendererAbstract::TAG_NORMAL,
+    Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
     array(
         'start' => '-bar-',
         'end'   => '-baz-',
-        'group' => 'inline',
+        'group' => 'inline'
     )
 );
  
 // これは 'my -bar-tag-baz-' と出力されるでしょう。
 echo $bbcode->render('my [foo]tag[/foo]');
 ]]></programlisting>
- 
+
         <para>
             あなたの作成したタグは、あなたのパーサーがタグ構造もサポートするときに
             機能することに注意してください。現在、 BBCode はこれをサポートします。
             Textile はカスタムタグをサポートしません。
         </para>
+
+        <!-- TODO : to be translated -->
+        <para>
+            Some renderers (like the HTML renderer) also have support for a
+            'tag' parameter. This replaces the 'start' and 'end' parameters, and
+            it renders the tags including some default attributes and the
+            closing tag. 
+        </para>
+        
+        <sect3 id="zend.markup.renderers.add.callback">
+            <title>Add a callback tag</title>
+            
+            <para>
+                By adding a callback tag, you can do a lot more then just a
+                simple replace of the tags. For instance, you can change the
+                contents, use the parameters to influence the output etc.
+            </para>
+            
+            <para>
+                A callback is a class that implements the
+                <classname>Zend_Markup_Renderer_TokenInterface</classname>
+                interface. An example of a callback class:
+            </para>
+            
+            <programlisting language="php"><![CDATA[
+class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterInterface
+{
+
+    public function convert(Zend_Markup_Token $token, $text)
+    {
+        return '!up!' . strtoupper($text) . '!up!';
+    }
+
+}
+]]></programlisting>
+
+            <para>
+                Now you can add the 'upper' tag, with as callback, an instance
+                of the <classname>My_Markup_Renderer_Html_Upper</classname>
+                class. A simple example:
+            </para>
+            
+            <programlisting language="php"><![CDATA[
+// Creates instance of Zend_Markup_Renderer_Html,
+// with Zend_Markup_Parser_BbCode as its parser
+$bbcode = Zend_Markup::factory('Bbcode');
+
+// this will create a simple 'foo' tag
+// The first parameter defines the tag's name.
+// The second parameter takes an integer that defines the tags type.
+// The third parameter is an array that defines other things about a
+// tag, like the tag's group, and (in this case) a start and end tag.
+$bbcode->addTag(
+    'upper',
+    Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
+    array(
+        'callback' => new My_Markup_Renderer_Html_Upper(),
+        'group'    => 'inline'
+    )
+);
+
+// now, this will output: 'my !up!TAG!up!'
+echo $bbcode->render('my [upper]tag[/upper]');
+]]></programlisting>
+        </sect3>
+    </sect2>
+
+    <sect2 id="zend.markup.renderers.list">
+        <title>List of tags</title>
+
+        <table id="zend.markup.renderers.list.tags">
+            <title>List of tags</title>
+
+            <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                <thead>
+                    <row>
+                        <entry>Sample input (bbcode)</entry>
+
+                        <entry>Sample output</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry>[b]foo[/b]</entry>
+
+                        <entry><![CDATA[<strong>foo</strong>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[i]foo[/i]</entry>
+
+                        <entry><![CDATA[<em>foo</em>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[cite]foo[/cite]</entry>
+
+                        <entry><![CDATA[<cite>foo</cite>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[del]foo[/del]</entry>
+
+                        <entry><![CDATA[<del>foo</del>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[ins]foo[/ins]</entry>
+
+                        <entry><![CDATA[<ins>foo</ins>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[sup]foo[/sup]</entry>
+
+                        <entry><![CDATA[<sup>foo</sup>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[sub]foo[/sub]</entry>
+
+                        <entry><![CDATA[<sub>foo</sub>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[span]foo[/span]</entry>
+
+                        <entry><![CDATA[<span>foo</span>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[acronym title="PHP Hypertext Preprocessor]PHP[/acronym]</entry>
+
+                        <entry><![CDATA[<acronym title="PHP Hypertext Preprocessor">PHP</acronym>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[url=http://framework.zend.com/]Zend Framework[/url]</entry>
+
+                        <entry><![CDATA[<a href="http://framework.zend.com/">Zend Framework</a>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[h1]foobar[/h1]</entry>
+
+                        <entry><![CDATA[<h1>foobar</h1>]]></entry>
+                    </row>
+
+                    <row>
+                        <entry>[img]http://framework.zend.com/images/logo.gif[/img]</entry>
+
+                        <entry><![CDATA[<img src="http://framework.zend.com/images/logo.gif" />]]></entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
     </sect2>
 </sect1>

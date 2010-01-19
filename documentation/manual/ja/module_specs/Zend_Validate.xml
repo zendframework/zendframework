@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19577 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.validate.introduction">
 
     <title>導入</title>
@@ -298,8 +298,8 @@ iif (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12))
                 <listitem>
                     <para>
                         <emphasis><methodname>Zend_Validate::hasDefaultNamespaces()</methodname></emphasis>:
-                        デフォルトの名前空間が設定されている場合は true、
-                        設定されていない場合は false を返します。
+                        デフォルトの名前空間が設定されている場合は <constant>TRUE</constant> 、
+                        設定されていない場合は <constant>FALSE</constant> を返します。
                     </para>
                 </listitem>
             </itemizedlist>

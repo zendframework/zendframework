@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.registry.using">
 
     <title>レジストリの使用法</title>
@@ -36,7 +36,7 @@ Zend_Registry::set('index', $value);
         </example>
 
         <para>
-            値としては、オブジェクトや配列、スカラーを指定することができます。
+            値としては、オブジェクトや配列、スカラーを指定できます。
             レジストリの特定のエントリに保存されている値を変更するには、
             <methodname>set()</methodname> を使用して新しい値を指定します。
         </para>

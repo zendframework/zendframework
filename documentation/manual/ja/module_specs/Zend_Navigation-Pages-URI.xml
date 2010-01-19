@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17356 -->
+<!-- EN-Revision: 20115 -->
 <sect2 id="zend.navigation.pages.uri">
     <title>Zend_Navigation_Page_Uri</title>
 
@@ -43,7 +43,7 @@
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
                     <entry>
-                        画面への<acronym>URI</acronym>。さまざまな文字列またはnullになりうる。
+                        画面への<acronym>URI</acronym>。さまざまな文字列または <constant>NULL</constant> になりうる。
                     </entry>
                 </row>
             </tbody>

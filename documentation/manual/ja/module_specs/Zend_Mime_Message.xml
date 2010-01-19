@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.mime.message">
     <title>Zend_Mime_Message</title>
 
@@ -10,7 +10,7 @@
       <para><classname>Zend_Mime_Message</classname> は <acronym>MIME</acronym> 準拠のメッセージを表すものであり、
       ひとつあるいは複数の部分に分かれたメッセージ (<link
       linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link> オブジェクトで表されます)
-      を保持することができます。<classname>Zend_Mime_Message</classname> では、<classname>Zend_Mime_Part</classname> を使用して
+      を保持できます。<classname>Zend_Mime_Message</classname> では、<classname>Zend_Mime_Part</classname> を使用して
       <acronym>MIME</acronym> 準拠のマルチパートメッセージを作成します。
       エンコーディングやバウンダリの処理も透過的に行われます。
       与えられた文字列から <classname>Zend_Mime_Message</classname> オブジェクトを再構成することも可能です
@@ -41,9 +41,11 @@
         <code>-&gt;setParts($partsArray)</code> をコールして配列を
         <link linkend="zend.mime.part"><classname>Zend_Mime_Part</classname></link> オブジェクトに書き戻さなければなりません。</para>
 
-        <para>関数 <code>-&gt;isMultiPart()</code> は、<classname>Zend_Mime_Message</classname>
-        オブジェクトに複数のパートが登録されている場合に true を返します。
-        この場合、実際の出力はマルチパート Mime メッセージとなります。</para>
+        <para>
+            関数 <code>-&gt;isMultiPart()</code> は、<classname>Zend_Mime_Message</classname>
+            オブジェクトに複数のパートが登録されている場合に <constant>TRUE</constant> を返します。
+            この場合、実際の出力はマルチパート Mime メッセージとなります。
+        </para>
         </sect2>
 
     <sect2 id="zend.mime.message.bondary">
@@ -74,7 +76,7 @@
         オブジェクトの作成 (実験段階)</title>
 
         <para><acronym>MIME</acronym> に準拠したメッセージを含む文字列をもとにして、
-        <classname>Zend_Mime_Message</classname> オブジェクトを構築することができます。
+        <classname>Zend_Mime_Message</classname> オブジェクトを構築できます。
         <classname>Zend_Mime_Message</classname> には、このような文字列をパースして
         <classname>Zend_Mime_Message</classname> オブジェクトを返す
         静的なファクトリメソッドが用意されています。</para>
@@ -82,7 +84,7 @@
         <para><methodname>Zend_Mime_Message::createFromMessage($str, $boundary)</methodname>
         は、渡された文字列をデコードして <classname>Zend_Mime_Message</classname>
         オブジェクトを返します。<code>-&gt;getParts()</code>
-        を使用すると、その中身を確認することができます。</para>
+        を使用すると、その中身を確認できます。</para>
     </sect2>
 </sect1>
 <!--

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19440 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.mime.mime">
     <title>Zend_Mime</title>
 
@@ -23,8 +23,8 @@
             <listitem>
                 <para>
                     <methodname>Zend_Mime::isPrintable()</methodname>:
-                    指定した文字列の中に表示できない文字がなければ TRUE、
-                    それ以外の場合に FALSE を返します。
+                    指定した文字列の中に表示できない文字がなければ <constant>TRUE</constant> 、
+                    それ以外の場合に <constant>FALSE</constant> を返します。
                 </para>
             </listitem>
             <listitem>

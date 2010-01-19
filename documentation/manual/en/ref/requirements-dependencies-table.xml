@@ -3727,7 +3727,7 @@
                 </entry>
             </row>
             <row>
-                <entry morerows="1" valign="middle">
+                <entry morerows="3" valign="middle">
                     <emphasis>
                         <ulink
                             url="&zf.manual.link;/zend.serializer.html">

@@ -556,7 +556,7 @@
                 <entry>&requirements.hard;</entry>
                 <entry>
                         <ulink
-                            url="&zf.manual.link;/zend.serializer.html">
+                            url="&zf.manual.link;/zend.serializer.adapter.html">
                             <classname>Zend_Serializer_Adapter_Igbinary</classname>
                         </ulink>
                 </entry>
@@ -612,7 +612,7 @@
                 <entry>
                     <emphasis>
                         <ulink
-                            url="&zf.manual.link;/zend.serializer.html">
+                            url="&zf.manual.link;/zend.serializer.adapter.html">
                             <classname>Zend_Serializer_Adapter_Json</classname>
                         </ulink>
                     </emphasis>

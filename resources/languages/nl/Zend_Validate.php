@@ -208,7 +208,7 @@ return array(
     "'%value%' has failed the IBAN check" => "'%value%' is geen geldige IBAN",
 
     // Zend_Validate_Identical
-    "The token '%token%' does not match the given token '%value%'" => "Het token '%value%' komt niet overeen met de opgegeven token '%value%'",
+    "The token '%token%' does not match the given token '%value%'" => "Het token '%token%' komt niet overeen met de opgegeven token '%value%'",
     "No token was provided to match against" => "Er is geen token opgegeven om mee te matchen",
 
     // Zend_Validate_InArray

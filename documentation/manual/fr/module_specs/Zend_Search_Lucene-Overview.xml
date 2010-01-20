@@ -23,7 +23,7 @@
 
                 <listitem>
                     <para>
-                        Plusieurs puissants types de requêtes : phrase, booléen, astérisque,
+                        Plusieurs puissants types de requêtes : phrase, booléen, joker (wildcard),
                         proximité, intervalle et bien d'autres.
                     </para>
                 </listitem>
@@ -56,7 +56,7 @@
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.documents-and-fields">
-        <title>Objet "Document" and "Field"</title>
+        <title>Objet "Document" et "Field"</title>
 
         <para>
             <classname>Zend_Search_Lucene</classname> travaille avec des documents comme

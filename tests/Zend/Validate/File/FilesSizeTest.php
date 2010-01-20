@@ -195,8 +195,30 @@ class Zend_Validate_File_FilesSizeTest extends PHPUnit_Framework_TestCase
         $handler = set_error_handler(array($this, 'errorHandler'), E_USER_NOTICE);
         $validator = new Zend_Validate_File_FilesSize(1000, 10000);
         restore_error_handler();
-// @todo: Preperation for 2.0... needs to be cleared with the dev-team
-//        $this->assertTrue($this->multipleOptionsDetected);
+    }
+
+    /**
+     * Ensures that the validator returns size infos
+     *
+     * @return void
+     */
+    public function testFailureMessage()
+    {
+        $validator = new Zend_Validate_File_FilesSize(array('min' => 9999, 'max' => 10000));
+        $this->assertFalse($validator->isValid(array(
+            dirname(__FILE__) . '/_files/testsize.mo',
+            dirname(__FILE__) . '/_files/testsize.mo',
+            dirname(__FILE__) . '/_files/testsize2.mo')));
+        $this->assertContains('9.76kB', current($validator->getMessages()));
+        $this->assertContains('1.55kB', current($validator->getMessages()));
+
+        $validator = new Zend_Validate_File_FilesSize(array('min' => 9999, 'max' => 10000, 'bytestring' => false));
+        $this->assertFalse($validator->isValid(array(
+            dirname(__FILE__) . '/_files/testsize.mo',
+            dirname(__FILE__) . '/_files/testsize.mo',
+            dirname(__FILE__) . '/_files/testsize2.mo')));
+        $this->assertContains('9999', current($validator->getMessages()));
+        $this->assertContains('1588', current($validator->getMessages()));
     }
 
     public function errorHandler($errno, $errstr)

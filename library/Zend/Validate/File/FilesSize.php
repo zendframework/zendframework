@@ -128,12 +128,14 @@ class Zend_Validate_File_FilesSize extends Zend_Validate_File_Size
 
             // limited to 2GB files
             $size += @filesize($files);
-            $this->_setSize($size);
+            $this->_size = $size;
             if (($max !== null) && ($max < $size)) {
                 if ($this->useByteString()) {
-                    $this->setMax($this->_toByteString($max));
+                    $this->_max  = $this->_toByteString($max);
+                    $this->_size = $this->_toByteString($size);
                     $this->_throw($file, self::TOO_BIG);
-                    $this->setMax($max);
+                    $this->_max  = $max;
+                    $this->_size = $size;
                 } else {
                     $this->_throw($file, self::TOO_BIG);
                 }
@@ -143,9 +145,11 @@ class Zend_Validate_File_FilesSize extends Zend_Validate_File_Size
         // Check that aggregate files are >= minimum size
         if (($min !== null) && ($size < $min)) {
             if ($this->useByteString()) {
-                $this->setMin($this->_toByteString($min));
+                $this->_min  = $this->_toByteString($min);
+                $this->_size = $this->_toByteString($size);
                 $this->_throw($file, self::TOO_SMALL);
-                $this->setMin($min);
+                $this->_min  = $min;
+                $this->_size = $size;
             } else {
                 $this->_throw($file, self::TOO_SMALL);
             }

@@ -198,6 +198,24 @@ class Zend_Validate_File_SizeTest extends PHPUnit_Framework_TestCase
         $validator->setMax('0.000000000000001 YB');
         $this->assertEquals('1.13GB', $validator->getMax());
     }
+
+    /**
+     * Ensures that the validator returns size infos
+     *
+     * @return void
+     */
+    public function testFailureMessage()
+    {
+        $validator = new Zend_Validate_File_Size(array('min' => 9999, 'max' => 10000));
+        $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/testsize.mo'));
+        $this->assertContains('9.76kB', current($validator->getMessages()));
+        $this->assertContains('794B', current($validator->getMessages()));
+
+        $validator = new Zend_Validate_File_Size(array('min' => 9999, 'max' => 10000, 'bytestring' => false));
+        $this->assertFalse($validator->isValid(dirname(__FILE__) . '/_files/testsize.mo'));
+        $this->assertContains('9999', current($validator->getMessages()));
+        $this->assertContains('794', current($validator->getMessages()));
+    }
 }
 
 // Call Zend_Validate_File_SizeTest::main() if this source file is executed directly.

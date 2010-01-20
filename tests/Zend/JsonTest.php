@@ -711,7 +711,7 @@ class Zend_JsonTest extends PHPUnit_Framework_TestCase
         }
 
         Zend_Json::$useBuiltinEncoderDecoder = true;
-        $this->assertEquals("[1.20, 1.68]", Zend_Json_Encode::encode(array(
+        $this->assertEquals("[1.20, 1.68]", Zend_Json_Encoder::encode(array(
             (float)"1,20", (float)"1,68"
         )));
     }

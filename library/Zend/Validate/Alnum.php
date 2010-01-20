@@ -40,7 +40,7 @@ class Zend_Validate_Alnum extends Zend_Validate_Abstract
      * Whether to allow white space characters; off by default
      *
      * @var boolean
-     * @depreciated
+     * @deprecated
      */
     public $allowWhiteSpace;
 

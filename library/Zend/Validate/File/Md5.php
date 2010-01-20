@@ -123,7 +123,7 @@ class Zend_Validate_File_Md5 extends Zend_Validate_File_Hash
      * Adds the md5 hash for one or multiple files
      *
      * @param  string|array $options
-     * @param  string       $algorithm (Depreciated) Algorithm to use, fixed to md5
+     * @param  string       $algorithm (Deprecated) Algorithm to use, fixed to md5
      * @return Zend_Validate_File_Hash Provides a fluent interface
      */
     public function addHash($options)

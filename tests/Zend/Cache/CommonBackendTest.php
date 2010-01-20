@@ -37,7 +37,7 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase {
+abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase {
 
     protected $_instance;
     protected $_className;

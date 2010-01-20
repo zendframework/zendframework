@@ -65,6 +65,15 @@ class Zend_Validate_File_IsCompressedTest extends PHPUnit_Framework_TestCase
      */
     public function testBasic()
     {
+        if (!extension_loaded('fileinfo') &&
+            function_exists('mime_content_type') && ini_get('mime_magic.magicfile') &&
+            (mime_content_type(dirname(__FILE__) . '/_files/test.zip') == 'text/plain')
+            ) {
+            $this->markTestSkipped('This PHP Version has no finfo, has mime_content_type, '
+                . ' but mime_content_type exhibits buggy behavior on this system.'
+                );
+        }
+        
         $valuesExpected = array(
             array(null, true),
             array('zip', true),

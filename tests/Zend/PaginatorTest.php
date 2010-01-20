@@ -166,7 +166,7 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
 
     protected function _getTmpDir()
     {
-        $tmpDir = sys_get_temp_dir() . '/zend_paginator';
+        $tmpDir = rtrim(sys_get_temp_dir(), '/\\') . DIRECTORY_SEPARATOR . 'zend_paginator';
         if (file_exists($tmpDir)) {
             $this->_rmDirRecursive($tmpDir);
         }
@@ -185,6 +185,7 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
                 $this->_rmDirRecursive($file->getPathname());
             }
         }
+        unset($file, $dir); // required on windows to remove file handle
         if (!rmdir($path)) {
             throw new Exception('Unable to remove temporary directory ' . $path
                                 . '; perhaps it has a nested structure?');

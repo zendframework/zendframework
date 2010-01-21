@@ -56,7 +56,7 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
     <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
-    protected function _initRequest(array $options = array())
+    protected function _initRequest()
     {
         // Ensure front controller instance is present, and fetch it
         $this->bootstrap('FrontController');

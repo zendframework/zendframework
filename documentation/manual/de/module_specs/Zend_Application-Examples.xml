@@ -58,7 +58,7 @@ resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
     <programlisting language="php"><![CDATA[
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
-    protected function _initRequest(array $options = array())
+    protected function _initRequest()
     {
         // Sicherstellen das eine Front Controller Instanz vorhanden ist
         // und diese holen

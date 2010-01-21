@@ -1406,6 +1406,145 @@ class Zend_Pdf_Page
     }
 
     /**
+     * Draw a rounded rectangle.
+     *
+     * Fill types:
+     * Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle and stroke (default)
+     * Zend_Pdf_Page::SHAPE_DRAW_STROKE      - stroke rectangle
+     * Zend_Pdf_Page::SHAPE_DRAW_FILL        - fill rectangle
+     *
+     * radius is an integer representing radius of the four corners, or an array
+     * of four integers representing the radius starting at top left, going
+     * clockwise
+     *
+     * @param float $x1
+     * @param float $y1
+     * @param float $x2
+     * @param float $y2
+     * @param integer|array $radius
+     * @param integer $fillType
+     * @return Zend_Pdf_Page
+     */
+    public function drawRoundedRectangle($x1, $y1, $x2, $y2, $radius, 
+                                         $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE)
+    {
+
+        $this->_addProcSet('PDF');
+
+        if(!is_array($radius)) {
+            $radius = array($radius, $radius, $radius, $radius);
+        } else {
+            for ($i = 0; $i < 4; $i++) {
+                if(!isset($radius[$i])) {
+                    $radius[$i] = 0;
+                }
+            }
+        }
+
+        $topLeftX      = $x1;
+        $topLeftY      = $y2;
+        $topRightX     = $x2;
+        $topRightY     = $y2;
+        $bottomRightX  = $x2;
+        $bottomRightY  = $y1;
+        $bottomLeftX   = $x1;
+        $bottomLeftY   = $y1;
+        
+        //draw top side
+        $x1Obj = new Zend_Pdf_Element_Numeric($topLeftX + $radius[0]);
+        $y1Obj = new Zend_Pdf_Element_Numeric($topLeftY);
+        $this->_contents .= $x1Obj->toString() . ' ' . $y1Obj->toString() . " m\n";
+        $x1Obj = new Zend_Pdf_Element_Numeric($topRightX - $radius[1]);
+        $y1Obj = new Zend_Pdf_Element_Numeric($topRightY);
+        $this->_contents .= $x1Obj->toString() . ' ' . $y1Obj->toString() . " l\n";
+
+        //draw top right corner if needed
+        if ($radius[1] != 0) {        
+            $x1Obj = new Zend_Pdf_Element_Numeric($topRightX);
+            $y1Obj = new Zend_Pdf_Element_Numeric($topRightY);
+            $x2Obj = new Zend_Pdf_Element_Numeric($topRightX);
+            $y2Obj = new Zend_Pdf_Element_Numeric($topRightY);
+            $x3Obj = new Zend_Pdf_Element_Numeric($topRightX);
+            $y3Obj = new Zend_Pdf_Element_Numeric($topRightY - $radius[1]);
+            $this->_contents .= $x1Obj->toString() . ' ' . $y1Obj->toString() . ' '
+                              . $x2Obj->toString() . ' ' . $y2Obj->toString() . ' '
+                              . $x3Obj->toString() . ' ' . $y3Obj->toString() . ' '
+                              . " c\n";
+        }
+
+        //draw right side
+        $x1Obj = new Zend_Pdf_Element_Numeric($bottomRightX);
+        $y1Obj = new Zend_Pdf_Element_Numeric($bottomRightY + $radius[2]);
+        $this->_contents .= $x1Obj->toString() . ' ' . $y1Obj->toString() . " l\n";
+
+        //draw bottom right corner if needed
+        if ($radius[2] != 0) {        
+            $x1Obj = new Zend_Pdf_Element_Numeric($bottomRightX);
+            $y1Obj = new Zend_Pdf_Element_Numeric($bottomRightY);
+            $x2Obj = new Zend_Pdf_Element_Numeric($bottomRightX);
+            $y2Obj = new Zend_Pdf_Element_Numeric($bottomRightY);
+            $x3Obj = new Zend_Pdf_Element_Numeric($bottomRightX - $radius[2]);
+            $y3Obj = new Zend_Pdf_Element_Numeric($bottomRightY);
+            $this->_contents .= $x1Obj->toString() . ' ' . $y1Obj->toString() . ' '
+                              . $x2Obj->toString() . ' ' . $y2Obj->toString() . ' '
+                              . $x3Obj->toString() . ' ' . $y3Obj->toString() . ' '
+                              . " c\n";
+        }
+
+        //draw bottom side
+        $x1Obj = new Zend_Pdf_Element_Numeric($bottomLeftX + $radius[3]);
+        $y1Obj = new Zend_Pdf_Element_Numeric($bottomLeftY);
+        $this->_contents .= $x1Obj->toString() . ' ' . $y1Obj->toString() . " l\n";
+
+        //draw bottom left corner if needed
+        if ($radius[3] != 0) {        
+            $x1Obj = new Zend_Pdf_Element_Numeric($bottomLeftX);
+            $y1Obj = new Zend_Pdf_Element_Numeric($bottomLeftY);
+            $x2Obj = new Zend_Pdf_Element_Numeric($bottomLeftX);
+            $y2Obj = new Zend_Pdf_Element_Numeric($bottomLeftY);
+            $x3Obj = new Zend_Pdf_Element_Numeric($bottomLeftX);
+            $y3Obj = new Zend_Pdf_Element_Numeric($bottomLeftY + $radius[3]);
+            $this->_contents .= $x1Obj->toString() . ' ' . $y1Obj->toString() . ' '
+                              . $x2Obj->toString() . ' ' . $y2Obj->toString() . ' '
+                              . $x3Obj->toString() . ' ' . $y3Obj->toString() . ' '
+                              . " c\n";
+        }
+
+        //draw left side
+        $x1Obj = new Zend_Pdf_Element_Numeric($topLeftX);
+        $y1Obj = new Zend_Pdf_Element_Numeric($topLeftY - $radius[0]);
+        $this->_contents .= $x1Obj->toString() . ' ' . $y1Obj->toString() . " l\n";
+
+        //draw top left corner if needed
+        if ($radius[0] != 0) {        
+            $x1Obj = new Zend_Pdf_Element_Numeric($topLeftX);
+            $y1Obj = new Zend_Pdf_Element_Numeric($topLeftY);
+            $x2Obj = new Zend_Pdf_Element_Numeric($topLeftX);
+            $y2Obj = new Zend_Pdf_Element_Numeric($topLeftY);
+            $x3Obj = new Zend_Pdf_Element_Numeric($topLeftX + $radius[0]);
+            $y3Obj = new Zend_Pdf_Element_Numeric($topLeftY);
+            $this->_contents .= $x1Obj->toString() . ' ' . $y1Obj->toString() . ' '
+                              . $x2Obj->toString() . ' ' . $y2Obj->toString() . ' '
+                              . $x3Obj->toString() . ' ' . $y3Obj->toString() . ' '
+                              . " c\n";
+        }
+
+        switch ($fillType) {
+            case Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE:
+                $this->_contents .= " B*\n";
+                break;
+            case Zend_Pdf_Page::SHAPE_DRAW_FILL:
+                $this->_contents .= " f*\n";
+                break;
+            case Zend_Pdf_Page::SHAPE_DRAW_STROKE:
+                $this->_contents .= " S\n";
+                break;
+        }
+
+        return $this;
+    }
+
+    /**
      * Draw a line of text at the specified position.
      *
      * @param string $text

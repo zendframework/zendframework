@@ -96,7 +96,13 @@ class Zend_Pdf_DrawingTest extends PHPUnit_Framework_TestCase
         $page2->setFillColor(new Zend_Pdf_Color_GrayScale(0.8))
               ->setLineColor(new Zend_Pdf_Color_GrayScale(0.2))
               ->setLineDashingPattern(array(3, 2, 3, 4), 1.6)
-              ->drawRectangle(60, 400, 400, 350);
+              ->drawRectangle(60, 400, 500, 350);
+
+        // Draw rounded rectangle
+        $page2->setFillColor(new Zend_Pdf_Color_GrayScale(0.9))
+              ->setLineColor(new Zend_Pdf_Color_GrayScale(0.5))
+              ->setLineDashingPattern(Zend_Pdf_Page::LINE_DASHING_SOLID)
+              ->drawRoundedRectangle(425, 350, 475, 400, 20);
 
         // Draw circle
         $page2->setLineDashingPattern(Zend_Pdf_Page::LINE_DASHING_SOLID)
@@ -132,7 +138,7 @@ class Zend_Pdf_DrawingTest extends PHPUnit_Framework_TestCase
 
         // Draw line
         $page2->setLineWidth(0.5)
-              ->drawLine(60, 375, 400, 375);
+              ->drawLine(60, 375, 500, 375);
 
         // -----------------------------------------------------------------------------------
         $page3->translate(200, 10)
@@ -152,7 +158,14 @@ class Zend_Pdf_DrawingTest extends PHPUnit_Framework_TestCase
         $page3->setFillColor(new Zend_Pdf_Color_GrayScale(0.8))
               ->setLineColor(new Zend_Pdf_Color_GrayScale(0.2))
               ->setLineDashingPattern(array(3, 2, 3, 4), 1.6)
-              ->drawRectangle(60, 400, 400, 350);
+              ->drawRectangle(60, 400, 500, 350);
+
+        // Draw rounded rectangle
+        $page2->setFillColor(new Zend_Pdf_Color_GrayScale(0.9))
+              ->setLineColor(new Zend_Pdf_Color_GrayScale(0.5))
+              ->setLineDashingPattern(Zend_Pdf_Page::LINE_DASHING_SOLID)
+              ->drawRoundedRectangle(425, 350, 475, 400, 20);
+
 
         // Draw circle
         $page3->setLineDashingPattern(Zend_Pdf_Page::LINE_DASHING_SOLID)
@@ -188,7 +201,7 @@ class Zend_Pdf_DrawingTest extends PHPUnit_Framework_TestCase
 
         // Draw line
         $page3->setLineWidth(0.5)
-              ->drawLine(60, 375, 400, 375);
+              ->drawLine(60, 375, 500, 375);
 
 
         $pdf->save(dirname(__FILE__) . '/_files/output.pdf');

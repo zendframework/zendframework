@@ -91,6 +91,30 @@ public function drawRectangle($x1, $y1, $x2, $y2,
 ]]></programlisting>
         <programlisting language="php"><![CDATA[
 /**
+ * Draw a rounded rectangle.
+ *
+ * Fill types:
+ * Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle and stroke (default)
+ * Zend_Pdf_Page::SHAPE_DRAW_STROKE      - stroke rectangle
+ * Zend_Pdf_Page::SHAPE_DRAW_FILL        - fill rectangle
+ *
+ * radius is an integer representing radius of the four corners, or an array
+ * of four integers representing the radius starting at top left, going
+ * clockwise
+ *
+ * @param float $x1
+ * @param float $y1
+ * @param float $x2
+ * @param float $y2
+ * @param integer|array $radius
+ * @param integer $fillType
+ * @return Zend_Pdf_Page
+ */
+public function drawRoundedRectangle($x1, $y1, $x2, $y2, $radius, 
+                       $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE);
+]]></programlisting>
+        <programlisting language="php"><![CDATA[
+/**
  * Draw a polygon.
  *
  * If $fillType is Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE or

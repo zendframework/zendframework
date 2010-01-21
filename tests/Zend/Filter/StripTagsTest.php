@@ -553,6 +553,16 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
         $output   = $this->_filter->filter($input);
         $this->assertFalse(empty($output));
     }
+
+    /**
+     * @ZF-8828
+     */
+    public function testFilterSplitCommentTags()
+    {
+        $input    = 'äöü<!-->üßüßüß<-->äöü';
+        $expected = 'äöüäöü';
+        $this->assertEquals($expected, $this->_filter->filter($input));
+    }
 }
 
 // Call Zend_Filter_StripTagsTest::main() if this source file is executed directly.

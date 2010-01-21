@@ -16,61 +16,20 @@
         mini-applications.  Modules mimic the directory structure that the <command>zf</command>
         tool sets up under <filename>application/</filename>, and all classes inside them are
         assumed to begin with a common prefix, the module name.  <filename>application/</filename>
-        is itself a module -- the "default" module. As such, let's setup autoloading for resources
-        within this directory, giving them a prefix of "Default". We can do this by creating another
-        bootstrap resource.
+        is itself a module -- the "default" or "application" module. As such, we'll want to setup autoloading for resources
+        within this directory.
     </para>
 
     <para>
         <classname>Zend_Application_Module_Autoloader</classname> provides the functionality needed
         to map the various resources under a module to the appropriate directories, and provides a
-        standard naming mechanism as well. In our bootstrap resource, we'll instantiate this, and be
-        done. The method looks like this:
+        standard naming mechanism as well. An instance of the class is created by default during
+        initialization of the bootstrap object; your application bootstrap will be default use the
+        module prefix "Application". As such, our models, forms, and table classes will all begin
+        with the class prefix "Application_".
     </para>
 
-    <programlisting language="php"><![CDATA[
-// application/Bootstrap.php
-
-// Add this method to the Bootstrap class:
-
-    protected function _initAutoload()
-    {
-        $autoloader = new Zend_Application_Module_Autoloader(array(
-            'namespace' => 'Default_',
-            'basePath'  => dirname(__FILE__),
-        ));
-        return $autoloader;
-    }
-]]></programlisting>
-
-    <para>
-        The final bootstrap class will look as follows:
-    </para>
-
-    <programlisting language="php"><![CDATA[
-// application/Bootstrap.php
-
-class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
-{
-    protected function _initAutoload()
-    {
-        $autoloader = new Zend_Application_Module_Autoloader(array(
-            'namespace' => 'Default',
-            'basePath'  => dirname(__FILE__),
-        ));
-        return $autoloader;
-    }
-
-    protected function _initDoctype()
-    {
-        $this->bootstrap('view');
-        $view = $this->getResource('view');
-        $view->doctype('XHTML1_STRICT');
-    }
-}
-]]></programlisting>
-
-    <para>
+   <para>
         Now, let's consider what makes up a guestbook. Typically, they are simply a list of entries
         with a <emphasis>comment</emphasis>, <emphasis>timestamp</emphasis>, and, often,
         <emphasis>email address</emphasis>. Assuming we store them in a database, we may also want a
@@ -82,7 +41,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     <programlisting language="php"><![CDATA[
 // application/models/Guestbook.php
 
-class Default_Model_Guestbook
+class Application_Model_Guestbook
 {
     protected $_comment;
     protected $_created;
@@ -391,7 +350,7 @@ Data Loaded.
 /**
  * This is the DbTable class for the guestbook table.
  */
-class Default_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
+class Application_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
 {
     /** Table name */
     protected $_name    = 'guestbook';
@@ -399,8 +358,8 @@ class Default_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
 ]]></programlisting>
 
     <para>
-        Note the class prefix: <classname>Default_Model_DbTable</classname>. The class prefix
-        "Default" from our autoloader is the first segment, and then we have the component,
+        Note the class prefix: <classname>Application_Model_DbTable</classname>. The class prefix
+        for our module, "Application", is the first segment, and then we have the component,
         "Model_DbTable"; the latter is mapped to the <filename>models/DbTable/</filename> directory
         of the module.
     </para>
@@ -413,15 +372,15 @@ class Default_Model_DbTable_Guestbook extends Zend_Db_Table_Abstract
     <para>
         Now let's create a <ulink url="http://martinfowler.com/eaaCatalog/dataMapper.html">Data
             Mapper</ulink>. A <emphasis>Data Mapper</emphasis> maps a domain object to the database.
-        In our case, it will map our model, <classname>Default_Model_Guestbook</classname>, to our
-        data source, <classname>Default_Model_DbTable_Guestbook</classname>. A typical API for a
-        data mapper is as follows:
+        In our case, it will map our model, <classname>Application_Model_Guestbook</classname>, to
+        our data source, <classname>Application_Model_DbTable_Guestbook</classname>. A typical API
+        for a data mapper is as follows:
     </para>
 
     <programlisting language="php"><![CDATA[
 // application/models/GuestbookMapper.php
 
-class Default_Model_GuestbookMapper
+class Application_Model_GuestbookMapper
 {
     public function save($model);
     public function find($id, $model);
@@ -438,7 +397,7 @@ class Default_Model_GuestbookMapper
     <programlisting language="php"><![CDATA[
 // application/models/GuestbookMapper.php
 
-class Default_Model_GuestbookMapper
+class Application_Model_GuestbookMapper
 {
     protected $_dbTable;
 
@@ -457,12 +416,12 @@ class Default_Model_GuestbookMapper
     public function getDbTable()
     {
         if (null === $this->_dbTable) {
-            $this->setDbTable('Default_Model_DbTable_Guestbook');
+            $this->setDbTable('Application_Model_DbTable_Guestbook');
         }
         return $this->_dbTable;
     }
 
-    public function save(Default_Model_Guestbook $guestbook)
+    public function save(Application_Model_Guestbook $guestbook)
     {
         $data = array(
             'email'   => $guestbook->getEmail(),
@@ -478,7 +437,7 @@ class Default_Model_GuestbookMapper
         }
     }
 
-    public function find($id, Default_Model_Guestbook $guestbook)
+    public function find($id, Application_Model_Guestbook $guestbook)
     {
         $result = $this->getDbTable()->find($id);
         if (0 == count($result)) {
@@ -496,7 +455,7 @@ class Default_Model_GuestbookMapper
         $resultSet = $this->getDbTable()->fetchAll();
         $entries   = array();
         foreach ($resultSet as $row) {
-            $entry = new Default_Model_Guestbook();
+            $entry = new Application_Model_Guestbook();
             $entry->setId($row->id)
                   ->setEmail($row->email)
                   ->setComment($row->comment)
@@ -521,7 +480,7 @@ class Default_Model_GuestbookMapper
     <programlisting language="php"><![CDATA[
 // application/models/Guestbook.php
 
-class Default_Model_Guestbook
+class Application_Model_Guestbook
 {
     protected $_comment;
     protected $_created;
@@ -619,7 +578,7 @@ class Default_Model_Guestbook
     public function getMapper()
     {
         if (null === $this->_mapper) {
-            $this->setMapper(new Default_Model_GuestbookMapper());
+            $this->setMapper(new Application_Model_GuestbookMapper());
         }
         return $this->_mapper;
     }
@@ -685,7 +644,7 @@ class GuestbookController extends Zend_Controller_Action
 {
     public function indexAction()
     {
-        $guestbook = new Default_Model_Guestbook();
+        $guestbook = new Application_Model_Guestbook();
         $this->view->entries = $guestbook->fetchAll();
     }
 }

@@ -17,7 +17,7 @@
     <programlisting language="php"><![CDATA[
 // application/forms/Guestbook.php
 
-class Default_Form_Guestbook extends Zend_Form
+class Application_Form_Guestbook extends Zend_Form
 {
     public function init()
     {
@@ -111,11 +111,11 @@ class GuestbookController extends Zend_Controller_Action
     public function signAction()
     {
         $request = $this->getRequest();
-        $form    = new Default_Form_Guestbook();
+        $form    = new Application_Form_Guestbook();
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $model = new Default_Model_Guestbook($form->getValues());
+                $model = new Application_Model_Guestbook($form->getValues());
                 $model->save();
                 return $this->_helper->redirector('index');
             }

@@ -70,7 +70,7 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
      *
      * @param string|Zend_Locale|array|Zend_Config $options
      */
-    public function __construct($options)
+    public function __construct($options = null)
     {
         if ($options instanceof Zend_Config) {
             $options = $options->toArray();

@@ -69,6 +69,7 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
      * Zend_Config object containing the keys "locale" and/or "format".
      *
      * @param string|Zend_Locale|array|Zend_Config $options
+     * @throws Zend_Validate_Exception On empty format
      */
     public function __construct($options = null)
     {
@@ -104,6 +105,8 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
 
     /**
      * Returns the set locale
+     *
+     * @return string|Zend_Locale The set locale
      */
     public function getLocale()
     {
@@ -114,6 +117,9 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
      * Sets the locale to use
      *
      * @param string|Zend_Locale $locale
+     * @throws Zend_Validate_Exception On unrecognised region
+     * @throws Zend_Validate_Exception On not detected format
+     * @return Zend_Validate_PostCode  Provides fluid interface
      */
     public function setLocale($locale = null)
     {
@@ -138,7 +144,6 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
         }
 
         $this->setFormat($format);
-
         return $this;
     }
 
@@ -156,6 +161,8 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
      * Sets a self defined postal format as regex
      *
      * @param string $format
+     * @throws Zend_Validate_Exception On empty format
+     * @return Zend_Validate_PostCode  Provides fluid interface
      */
     public function setFormat($format)
     {
@@ -173,6 +180,7 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
         }
 
         $this->_format = $format;
+        return $this;
     }
 
     /**

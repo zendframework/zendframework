@@ -188,7 +188,7 @@ if (false !== $geoData) {
 
 $microtime = microtime(true);
 
-if (false !== @file_get_contents(Zend_Service_LiveDocx_MailMerge::ENDPOINT)) {
+if (false !== file_get_contents(Zend_Service_LiveDocx_MailMerge::WSDL)) {
     $duration = microtime(true) - $microtime;
     $result = TEST_PASS;
 } else {

@@ -84,11 +84,15 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_string($test));
     }
 
+    /**
+     * @group ZF-6281
+     */
     public function testTransformShouldReturnMultiplePathsWhenExpressionContainsCommas()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('#foo, #bar');
-        $this->assertTrue(is_array($test));
-        $this->assertEquals(2, count($test));
+        $this->assertTrue(is_string($test));
+        $this->assertContains('|', $test);
+        $this->assertEquals(2, count(explode('|', $test)));
     }
 
     public function testTransformShouldRecognizeHashSymbolAsId()
@@ -106,7 +110,7 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
     public function testTransformShouldAssumeSpacesToIndicateRelativeXpathQueries()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('div#foo .bar');
-        $this->assertContains(' | ', $test);
+        $this->assertContains('|', $test);
         $expected = array(
             "//div[@id='foo']//*[contains(@class, ' bar ')]",
             "//div[@id='foo'][contains(@class, ' bar ')]",
@@ -122,16 +126,21 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("//div[@id='foo']/span", $test);
     }
 
+    /**
+     * @group ZF-6281
+     */
     public function testMultipleComplexCssSpecificationShouldTransformToExpectedXpath()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('div#foo span.bar, #bar li.baz a');
-        $this->assertTrue(is_array($test));
+        $this->assertTrue(is_string($test));
+        $this->assertContains('|', $test);
+        $actual   = explode('|', $test);
         $expected = array(
             "//div[@id='foo']//span[contains(@class, ' bar ')]",
             "//*[@id='bar']//li[contains(@class, ' baz ')]//a",
         );
-        $this->assertEquals(count($expected), count($test));
-        foreach ($test as $path) {
+        $this->assertEquals(count($expected), count($actual));
+        foreach ($actual as $path) {
             $this->assertContains($path, $expected);
         }
     }
@@ -139,7 +148,7 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
     public function testClassNotationWithoutSpecifiedTagShouldResultInMultipleQueries()
     {
         $test = Zend_Dom_Query_Css2Xpath::transform('div.foo .bar a .baz span');
-        $this->assertContains(' | ', $test);
+        $this->assertContains('|', $test);
         $segments = array(
             "//div[contains(@class, ' foo ')]//*[contains(@class, ' bar ')]//a//*[contains(@class, ' baz ')]//span",
             "//div[contains(@class, ' foo ')]//*[contains(@class, ' bar ')]//a[contains(@class, ' baz ')]//span",

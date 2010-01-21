@@ -33,7 +33,7 @@ class Zend_Dom_Query_Css2Xpath
      * Transform CSS expression to XPath
      *
      * @param  string $path
-     * @return string|array
+     * @return string
      */
     public static function transform($path)
     {
@@ -49,7 +49,7 @@ class Zend_Dom_Query_Css2Xpath
                     $expressions = array_merge($expressions, $xpath);
                 }
             }
-            return $expressions;
+            return implode('|', $expressions);
         }
 
         $paths    = array('//');
@@ -80,7 +80,7 @@ class Zend_Dom_Query_Css2Xpath
         if (1 == count($paths)) {
             return $paths[0];
         }
-        return implode(' | ', $paths);
+        return implode('|', $paths);
     }
 
     /**

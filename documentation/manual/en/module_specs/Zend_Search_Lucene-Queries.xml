@@ -262,7 +262,7 @@ $hits  = $index->find($query);
             Query string:
         </para>
         <programlisting language="querystring"><![CDATA[
-+(word1 word2 word3) author:(word4 word5) -word6
++(word1 word2 word3) (author:word4 author:word5) -(word6)
 ]]></programlisting>
 
         <itemizedlist>

@@ -313,13 +313,56 @@ class Zend_Feed_Reader_Entry_AtomTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Entry Content', $entry->getContent());
     }
 
+    /**
+     * TEXT
+     * @group ZFRATOMCONTENT
+     */
     public function testGetsContentFromAtom10()
     {
         $feed = Zend_Feed_Reader::importString(
             file_get_contents($this->_feedSamplePath . '/content/plain/atom10.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals('Entry Content', $entry->getContent());
+        $this->assertEquals('Entry Content &amp;', $entry->getContent());
+    }
+    
+    /**
+     * HTML Escaped
+     * @group ZFRATOMCONTENT
+     */
+    public function testGetsContentFromAtom10Html()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath . '/content/plain/atom10_Html.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('<p>Entry Content &amp;</p>', $entry->getContent());
+    }
+    
+    /**
+     * HTML CDATA Escaped
+     * @group ZFRATOMCONTENT
+     */
+    public function testGetsContentFromAtom10HtmlCdata()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath . '/content/plain/atom10_HtmlCdata.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('<p>Entry Content &amp;</p>', $entry->getContent());
+    }
+    
+    /**
+     * XHTML
+     * @group ZFRATOMCONTENT
+     */
+    public function testGetsContentFromAtom10XhtmlNamespaced()
+    {
+        $feed = Zend_Feed_Reader::importString(
+            file_get_contents($this->_feedSamplePath . '/content/plain/atom10_Xhtml.xml')
+        );
+        $entry = $feed->current();
+        $this->assertEquals('<p class="x:"><em>Entry Content &amp;x:</em></p>', $entry->getContent());
     }
 
     /**

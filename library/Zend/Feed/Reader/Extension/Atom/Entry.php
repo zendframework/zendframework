@@ -127,20 +127,56 @@ class Zend_Feed_Reader_Extension_Atom_Entry
         if (array_key_exists('content', $this->_data)) {
             return $this->_data['content'];
         }
-
-        $content = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:content)');
-
-        if ($content) {
-            $content =  html_entity_decode($content, ENT_QUOTES, $this->getEncoding());
+        
+        $content = null;
+        
+        $el = $this->getXpath()->query($this->getXpathPrefix() . '/atom:content');
+        if($el->length > 0) {
+            $el = $el->item(0);
+            $type = $el->getAttribute('type');
+            switch ($type) {
+                case '':
+                case 'text':
+                case 'text/plain':
+                case 'html':
+                case 'text/html':
+                    $content = $el->nodeValue;
+                break;
+                case 'xhtml':
+                    $this->getXpath()->registerNamespace('xhtml', 'http://www.w3.org/1999/xhtml');
+                    $xhtml = $this->getXpath()->query(
+                        $this->getXpathPrefix() . '/atom:content/xhtml:div'
+                    )->item(0);
+                    $xhtml->setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
+                    $d = new DOMDocument('1.0', $this->getEncoding());
+                    $xhtmls = $d->importNode($xhtml, true);
+                    $d->appendChild($xhtmls);
+                    $content = $this->_collectXhtml($d->saveXML());
+                break;
+            }
         }
 
         if (!$content) {
             $content = $this->getDescription();
         }
 
-        $this->_data['content'] = $content;
+        $this->_data['content'] = trim($content);
 
         return $this->_data['content'];
+    }
+    
+    /**
+     * Parse out XHTML to remove the namespacing
+     */
+    protected function _collectXhtml($xhtml)
+    {
+        $matches = array(
+            "/<\?xml[^<]+/",
+            "/<div.*xmlns=[^<]+/",
+            "/<\/div>\s*$/"
+        );
+        $cleaned = preg_replace($matches, '', $xhtml);
+        return $cleaned;
     }
 
     /**

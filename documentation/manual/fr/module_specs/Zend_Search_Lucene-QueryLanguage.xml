@@ -108,109 +108,112 @@ te?t
 ]]></programlisting>
         </para>
         <para>
-            Multiple character wildcard searches look for 0 or more characters when matching strings against terms. For example, to search for test,
-            tests or tester, you can use the search:
+            La rechercher par joker sur plusieurs caractères recherche pour 0 ou plus caractères quand elle fait correspondre
+            une chaîne avec les termes de recherche. Par exemple, pour trouver test, tests ou tester, on peut utiliser la recherche :
             <programlisting language="querystring"><![CDATA[
 test*
 ]]></programlisting>
         </para>
         <para>
-            You can use "?", "*" or both at any place of the term:
+            Vous pouvez utiliser "?", "*" ou les deux n'importe où dans un terme :
             <programlisting language="querystring"><![CDATA[
 *wr?t*
 ]]></programlisting>
-            It searches for "write", "wrote", "written", "rewrite", "rewrote" and so on.
+            Cela va chercher "write", "wrote", "written", "rewrite", "rewrote", etc.
         </para>
         <para>
-            Starting from ZF 1.7.7 wildcard patterns need some non-wildcard prefix. Default prefix length is 3 (like in Java Lucene).
-            So "*", "te?t", "*wr?t*" terms will cause an exception<footnote>
-            <para>Please note, that it's not a <code>Zend_Search_Lucene_Search_QueryParserException</code>, but a
-            <code>Zend_Search_Lucene_Exception</code>. It's thrown during query rewrite (execution) operation.</para></footnote>.
+            Depuis la version 1.7.7 du ZF, les termes avec joker requierent un préfixe. La longueur
+            par défaut du préfixe est de 3 (comme dans Java Lucene). Ainsi les termes "*", "te?t" ou "wr?t"
+            causeront une exception<footnote>
+            <para>Veuillez noter qu'il ne s'agit pas d'une <code>Zend_Search_Lucene_Search_QueryParserException</code>,
+            mais d'une <code>Zend_Search_Lucene_Exception</code>. Elle est levée pendant l'opération de réécriture de la requête (exécution).</para></footnote>.
         </para>
         <para>
-            It can be altered using <code>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</code> and
-            <code>Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength()</code> methods.
+            Ce paramètre peut être modifié à l'aide des méthodes <code>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</code>
+            et <code>Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength()</code>.
         </para>
     </sect2>
     <sect2 id="zend.search.lucene.query-language.modifiers">
-        <title>Term Modifiers</title>
+        <title>Modificateurs de termes</title>
         <para>
-            Lucene supports modifying query terms to provide a wide range of searching options.
+            Lucene supporte la modification des termes pour fournir un large panel d'options de recherche.
         </para>
         <para>
-            "~" modifier can be used to specify proximity search for phrases or fuzzy search for individual terms.
+            Le modificateur "~" peut être utilisé pour spécifier des recherches de proximité dans les phrases ou
+            des recherches floues pour les termes individuels.
         </para>
     </sect2>
     <sect2 id="zend.search.lucene.query-language.range">
-        <title>Range Searches</title>
+        <title>Recherche par intervalle</title>
         <para>
-            Range queries allow the developer or user to match documents whose field(s) values are between the lower and upper bound specified by the range query.
-            Range Queries can be inclusive or exclusive of the upper and lower bounds. Sorting is performed lexicographically.
+            Dans une requêtes par intervalle, le développeur ou l'utilisateur peut rechercher des documents dont la valeur du/des champ(s) se trouve entre
+            la borne inférieur et la borne supérieur de l'intervalle. Les requêtes d'intervalle peuvent être inclusives ou exclusives pour les bornes supérieures ou inférieures.
+            Le tri est effectué de manière lexicographique.
             <programlisting language="querystring"><![CDATA[
 mod_date:[20020101 TO 20030101]
 ]]></programlisting>
-            This will find documents whose mod_date fields have values between 20020101 and 20030101, inclusive. Note that Range Queries are not
-            reserved for date fields. You could also use range queries with non-date fields:
+            Cela va trouver les documents dont la valeur du champ mod_date se trouve entre 20020101 et 20030101, bornes incluses.
+            Notez que les requêtes d'intervalles ne sont pas réservées aux champs de date. Vous pouvez également les utiliser pour d'autres types de champ.
             <programlisting language="querystring"><![CDATA[
 title:{Aida TO Carmen}
 ]]></programlisting>
-            This will find all documents whose titles would be sorted between Aida and Carmen, but not including Aida and Carmen.
+            Cela va trouver tous les documents dont le titre serait triés entre Aida et Carmen, sans inclure ni Aida, ni Carmen.
         </para>
         <para>
-            Inclusive range queries are denoted by square brackets. Exclusive range queries are denoted by curly brackets.
+            Les requêtes d'intervalles inclusives utilisent des crochets. Les exclusives utilisent des accolades.
         </para>
         <para>
-            If field is not specified then <classname>Zend_Search_Lucene</classname> searches for specified interval through all fields by default.
+            Si aucun champ n'est spécifié, par défaut <classname>Zend_Search_Lucene</classname> cherchera l'intervalle spécifié dans tous les champs.
             <programlisting language="querystring"><![CDATA[
 {Aida TO Carmen}
 ]]></programlisting>
         </para>
     </sect2>
     <sect2 id="zend.search.lucene.query-language.fuzzy">
-        <title>Fuzzy Searches</title>
+        <title>Recherches floues</title>
         <para>
-            <classname>Zend_Search_Lucene</classname> as well as Java Lucene supports fuzzy searches based on the Levenshtein Distance, or Edit Distance algorithm.
-            To do a fuzzy search use the tilde, "~", symbol at the end of a Single word Term. For example to search for a term similar
-            in spelling to "roam" use the fuzzy search:
+            <classname>Zend_Search_Lucene</classname> tout comme Java Lucene supporte les recherches floues basées sur les algorithmes "Levenshtein Distance" ou "Edit Distance".
+            Pour effectuer une recherche floue, utilisez le symbole tilde "~" à la fin du mot pour un terme simple. Par exemple
+            pour chercher un terme similaire à "roam", utilisez la recherche floue suivante :
             <programlisting language="querystring"><![CDATA[
 roam~
 ]]></programlisting>
-            This search will find terms like foam and roams.
-            Additional (optional) parameter can specify the required similarity. The value is between 0 and 1, with a value closer to 1 only terms
-            with a higher similarity will be matched. For example:
+            Cette recherche va trouver des termes tels que foam ou roams.
+            Un paramètre additionnel (et optionnel) peut spécifier la similarité requise. La valeur doit se trouver
+            entre 0 et 1. Avec une valeur proche de 1, seuls les termes très similaires vont correspondre. Par exemple :
             <programlisting language="querystring"><![CDATA[
 roam~0.8
 ]]></programlisting>
-            The default that is used if the parameter is not given is 0.5.
+            Si le paramètre n'est pas fourni, la valeur par défaut est à 0.5.
         </para>
     </sect2>
     <sect2 id="zend.search.lucene.query-language.matched-terms-limitations">
-        <title>Matched terms limitation</title>
+        <title>Limitation des termes correspondants</title>
         <para>
-            Wildcard, range and fuzzy search queries may match too many terms. It may cause incredible search performance downgrade.
+            Les recherches floues, par intervalle ou par joker peuvent correspondre à trop de termes. Cela peut
+            causer d'énormes baisses de performances.
         </para>
         <para>
-            So Zend_Search_Lucene sets a limit of matching terms per query (subquery). This limit can be retrieved and set using
-            <code>Zend_Search_Lucene::getTermsPerQueryLimit()</code>/<code>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</code>
-            methods.
+            Du coup, Zend_Search_Lucene définit une limite dans le nombre de correspondances par requêtes (ou sous-requêtes).
+            Cette limite peut être récupérée et définie à l'aide des méthodes <code>Zend_Search_Lucene::getTermsPerQueryLimit()</code>/<code>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</code>.
         </para>
         <para>
-            Default matched terms per query limit is 1024.
+            La limite du nombre de correspondances par requête est de 1024.
         </para>
     </sect2>
     <sect2 id="zend.search.lucene.query-language.proximity-search">
-        <title>Proximity Searches</title>
+        <title>Recherches de proximité</title>
         <para>
-            Lucene supports finding words from a phrase that are within a specified word distance in a string. To do a proximity search
-            use the tilde, "~", symbol at the end of the phrase. For example to search for a "Zend" and
-            "Framework" within 10 words of each other in a document use the search:
+            Lucene permet de trouver des mots dans une phrase qui se trouvent à une certaine distance les uns des autres dans une chaîne.
+            Pour effectuer une recherche de proximité, utilisez le symbole tilde "~" à la fin de la phrase. Par exemple pour retrouver
+            "Zend" et "Framework" avec 10 mots entre eux dans un document, utilisez la recherche :
             <programlisting language="querystring"><![CDATA[
 "Zend Framework"~10
 ]]></programlisting>
         </para>
     </sect2>
     <sect2 id="zend.search.lucene.query-language.boosting">
-        <title>Boosting a Term</title>
+        <title>Booster un terme</title>
         <para>
             Java Lucene and <classname>Zend_Search_Lucene</classname> provide the relevance level of matching documents based
             on the terms found. To boost the relevance of a term use the caret, "^", symbol with a boost factor (a number)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20473 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-api">
     <title>API de construction de requêtes</title>
@@ -237,7 +237,7 @@ $hits  = $index->find($query);
             Requête par chaîne de caractères:
         </para>
         <programlisting language="querystring"><![CDATA[
-+(word1 word2 word3) author:(word4 word5) -word6
++(word1 word2 word3) (author:word4 author:word5) -(word6)
 ]]></programlisting>
         <itemizedlist>
             <listitem>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20469 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.drawing">
     <title>Dessiner</title>
@@ -85,6 +85,31 @@ $color3 = new Zend_Pdf_Color_Html('forestgreen');
  */
 public function drawLine($x1, $y1, $x2, $y2);
 ]]></programlisting></para>
+
+         <programlisting language="php"><![CDATA[
+ /**
+ * Draw a rounded rectangle.
+ *
+ * Fill types:
+ * Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle and stroke (default)
+ * Zend_Pdf_Page::SHAPE_DRAW_STROKE      - stroke rectangle
+ * Zend_Pdf_Page::SHAPE_DRAW_FILL        - fill rectangle
+ *
+ * radius is an integer representing radius of the four corners, or an array
+ * of four integers representing the radius starting at top left, going
+ * clockwise
+ *
+ * @param float $x1
+ * @param float $y1
+ * @param float $x2
+ * @param float $y2
+ * @param integer|array $radius
+ * @param integer $fillType
+ * @return Zend_Pdf_Page
+ */
+public function drawRoundedRectangle($x1, $y1, $x2, $y2, $radius, 
+                       $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE);
+]]></programlisting>
 
         <para>
             <programlisting language="php"><![CDATA[

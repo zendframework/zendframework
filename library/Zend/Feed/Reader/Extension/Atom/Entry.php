@@ -147,14 +147,19 @@ class Zend_Feed_Reader_Extension_Atom_Entry
                     $xhtml = $this->getXpath()->query(
                         $this->getXpathPrefix() . '/atom:content/xhtml:div'
                     )->item(0);
-                    $xhtml->setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
+                    //$xhtml->setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
                     $d = new DOMDocument('1.0', $this->getEncoding());
                     $xhtmls = $d->importNode($xhtml, true);
                     $d->appendChild($xhtmls);
-                    $content = $this->_collectXhtml($d->saveXML());
+                    $content = $this->_collectXhtml(
+                        $d->saveXML(),
+                        $d->lookupPrefix('http://www.w3.org/1999/xhtml')
+                    );
                 break;
             }
         }
+        
+        //var_dump($content); exit;
 
         if (!$content) {
             $content = $this->getDescription();
@@ -168,15 +173,18 @@ class Zend_Feed_Reader_Extension_Atom_Entry
     /**
      * Parse out XHTML to remove the namespacing
      */
-    protected function _collectXhtml($xhtml)
+    protected function _collectXhtml($xhtml, $prefix)
     {
+        if (!empty($prefix)) $prefix = $prefix . ':';
         $matches = array(
-            "/<\?xml[^<]+/",
-            "/<div.*xmlns=[^<]+/",
-            "/<\/div>\s*$/"
+            "/<\?xml[^<]*>[^<]*<" . $prefix . "div[^<]*/",
+            "/<\/" . $prefix . "div>\s*$/"
         );
-        $cleaned = preg_replace($matches, '', $xhtml);
-        return $cleaned;
+        $xhtml = preg_replace($matches, '', $xhtml);
+        if (!empty($prefix)) {
+            $xhtml = preg_replace("/(<[\/]?)" . $prefix . "([a-zA-Z]+)/", '$1$2', $xhtml);
+        }
+        return $xhtml;
     }
 
     /**

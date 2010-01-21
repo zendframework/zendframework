@@ -60,7 +60,7 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
         $this->_validEntry->setDateCreated(1234567000);
         $this->_validEntry->setLink('http://www.example.com/1');
         $this->_validEntry->addAuthor('Jane', 'jane@example.com', 'http://www.example.com/jane');
-        $this->_validEntry->setContent('This is test entry content.');
+        $this->_validEntry->setContent('<p class="xhtml:">This is test content for <em>xhtml:</em></p>');
         $this->_validWriter->addEntry($this->_validEntry);
     }
 
@@ -123,12 +123,15 @@ class Zend_Feed_Writer_Renderer_Entry_AtomTest extends PHPUnit_Framework_TestCas
         $this->assertEquals('This is a test entry description.', $entry->getDescription());
     }
 
-    public function testEntryContentHasBeenSet()
+    /**
+     * @group ZFWATOMCONTENT
+     */
+    public function testEntryContentHasBeenSet_Xhtml()
     {
         $renderer = new Zend_Feed_Writer_Renderer_Feed_Atom($this->_validWriter);
         $feed = Zend_Feed_Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
-        $this->assertEquals('This is test entry content.', $entry->getContent());
+        $this->assertEquals('<p class="xhtml:">This is test content for <em>xhtml:</em></p>', $entry->getContent());
     }
     
     /**

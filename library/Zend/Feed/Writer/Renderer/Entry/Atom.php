@@ -320,10 +320,39 @@ class Zend_Feed_Writer_Renderer_Entry_Atom
             return;
         }
         $element = $dom->createElement('content');
-        $element->setAttribute('type', 'html');
-        $cdata = $dom->createCDATASection($content);
-        $element->appendChild($cdata);
+        $element->setAttribute('type', 'xhtml');
+        $xhtmlElement = $this->_loadXhtml($content);
+        $xhtml = $dom->importNode($xhtmlElement, true);
+        $element->appendChild($xhtml);
         $root->appendChild($element);
+    }
+    
+    /**
+     * Load a HTML string and attempt to normalise to XML
+     */
+    protected function _loadXhtml($content)
+    {
+        $xhtml = '';
+        if (class_exists('tidy', false)) {
+            $tidy = new tidy;
+            $config = array(
+                'output-xhtml' => true,
+                'show-body-only' => true
+            );
+            $encoding = str_replace('-', '', $this->getEncoding());
+            $tidy->parseString($content, $config, $encoding);
+            $tidy->cleanRepair();
+            $xhtml = (string) $tidy;
+        } else {
+            $xhtml = $content;
+        }
+        $xhtml = preg_replace(array(
+            "/(<[\/]?)([a-zA-Z]+)/"   
+        ), '$1xhtml:$2', $xhtml);
+        $dom = new DOMDocument('1.0', $this->getEncoding());
+        $dom->loadXML('<xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml">'
+            . $xhtml . '</xhtml:div>');
+        return $dom->documentElement;
     }
     
     /**

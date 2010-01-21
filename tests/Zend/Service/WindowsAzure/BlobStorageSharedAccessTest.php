@@ -20,22 +20,24 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_BlobStorageSharedAccessTest::main');
-}
-
 /**
  * Test helpers
  */
 require_once dirname(__FILE__) . '/../../../TestHelper.php';
-require_once dirname(__FILE__) . '/../../../TestConfiguration.php.dist';
-require_once 'PHPUnit/Framework/TestCase.php';
 
-/** Zend_Service_WindowsAzure_Storage_Blob */
+/**
+ * @see Zend_Service_WindowsAzure_Storage_Blob 
+ */
 require_once 'Zend/Service/WindowsAzure/Storage/Blob.php';
 
-/** Zend_Service_WindowsAzure_Credentials_SharedAccessSignature */
+/**
+ * @see Zend_Service_WindowsAzure_Credentials_SharedAccessSignature 
+ */
 require_once 'Zend/Service/WindowsAzure/Credentials/SharedAccessSignature.php';
+
+if (!defined('PHPUnit_MAIN_METHOD')) {
+    define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_BlobStorageSharedAccessTest::main');
+}
 
 /**
  * @category   Zend

@@ -55,7 +55,11 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
     {
         if (null === $this->_transport) {
             $options = $this->getOptions();
-            
+            foreach($options as $key => $option) {
+                $options[strtolower($key)] = $option;         
+            }
+            $this->setOptions($options);
+
             if(isset($options['transport']) &&
                !is_numeric($options['transport']))
             {

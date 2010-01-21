@@ -154,6 +154,23 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($options['defaultfrom'], Zend_Mail::getDefaultFrom());
         $this->assertEquals($options['defaultreplyto'], Zend_Mail::getDefaultReplyTo());
     }
+
+    /**
+    * @group ZF-8811
+    */
+    public function testDefaultsCaseSensivity() {
+        $options = array('defaultFroM'    => array('email' => 'f00@example.com', 'name' => null),
+                         'defAultReplyTo' => array('email' => 'j0hn@example.com', 'name' => null));
+        $resource = new Zend_Application_Resource_Mail(array());
+        $resource->setBootstrap($this->bootstrap);
+        $resource->setOptions($options);
+
+        $resource->init();
+        $this->assertNull(Zend_Mail::getDefaultTransport());
+        $this->assertEquals($options['defaultFroM'], Zend_Mail::getDefaultFrom());
+        $this->assertEquals($options['defAultReplyTo'], Zend_Mail::getDefaultReplyTo());
+
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_LogTest::main') {

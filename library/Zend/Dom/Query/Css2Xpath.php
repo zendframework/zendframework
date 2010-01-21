@@ -53,6 +53,7 @@ class Zend_Dom_Query_Css2Xpath
         }
 
         $paths    = array('//');
+        $path     = preg_replace('|\s+>\s+|', '>', $path);
         $segments = preg_split('/\s+/', $path);
         foreach ($segments as $key => $segment) {
             $pathSegment = self::_tokenize($segment);

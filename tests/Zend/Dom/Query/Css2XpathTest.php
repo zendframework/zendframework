@@ -183,6 +183,15 @@ class Zend_Dom_Query_Css2XpathTest extends PHPUnit_Framework_TestCase
         $test = Zend_Dom_Query_Css2Xpath::transform('tag#id @attribute');
         $this->assertEquals("//tag[@id='id']//@attribute", $test);
     }
+
+    /**
+     * @group ZF-8006
+     */
+    public function testShouldAllowWhitespaceInDescendentSelectorExpressions()
+    {
+        $test = Zend_Dom_Query_Css2Xpath::transform('child > leaf');
+        $this->assertEquals("//child/leaf", $test);
+    }
 }
 
 // Call Zend_Dom_Query_Css2XpathTest::main() if this source file is executed directly.

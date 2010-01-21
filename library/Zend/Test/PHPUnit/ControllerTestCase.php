@@ -1141,7 +1141,9 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
             if (isset($step['object'])
                 && $step['object'] instanceof PHPUnit_Framework_TestCase
             ) {
-                if (version_compare(PHPUnit_Runner_Version::id(), '3.3.3', 'lt')) {
+                if (version_compare(PHPUnit_Runner_Version::id(), '3.3.0', 'lt')) {
+                    break;
+                } elseif (version_compare(PHPUnit_Runner_Version::id(), '3.3.3', 'lt')) {
                     $step['object']->incrementAssertionCounter();
                 } else {
                     $step['object']->addToAssertionCount(1);

@@ -98,7 +98,11 @@ class Zend_Feed_Writer_Renderer_Feed_Rss
             if ($this->getDataContainer()->getEncoding()) {
                 $entry->setEncoding($this->getDataContainer()->getEncoding());
             }
-            $renderer = new Zend_Feed_Writer_Renderer_Entry_Rss($entry);
+            if ($entry instanceof Zend_Feed_Writer_Entry) {
+                $renderer = new Zend_Feed_Writer_Renderer_Entry_Rss($entry);
+            } else {
+                continue;
+            }
             if ($this->_ignoreExceptions === true) {
                 $renderer->ignoreExceptions();
             }

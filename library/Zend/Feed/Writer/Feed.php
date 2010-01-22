@@ -40,6 +40,11 @@ require_once 'Zend/Feed/Writer.php';
 require_once 'Zend/Feed/Writer/Entry.php';
 
 /**
+ * @see Zend_Feed_Writer_Deleted
+ */
+require_once 'Zend/Feed/Writer/Deleted.php';
+
+/**
  * @see Zend_Feed_Writer_Renderer_Feed_Atom
  */
 require_once 'Zend/Feed/Writer/Renderer/Feed/Atom.php';
@@ -90,6 +95,34 @@ implements Iterator, Countable
         }
         $entry->setType($this->getType());
         return $entry;
+    }
+
+    /**
+     * Appends a Zend_Feed_Writer_Deleted object representing a new entry tombstone
+     * to the feed data container's internal group of entries.
+     *
+     * @param Zend_Feed_Writer_Deleted $entry
+     */
+    public function addTombstone(Zend_Feed_Writer_Deleted $deleted)
+    {
+        $this->_entries[] = $deleted;
+    }
+    
+    /**
+     * Creates a new Zend_Feed_Writer_Deleted data container for use. This is NOT
+     * added to the current feed automatically, but is necessary to create a
+     * container with some initial values preset based on the current feed data.
+     *
+     * @return Zend_Feed_Writer_Deleted
+     */
+    public function createTombstone()
+    {
+        $deleted = new Zend_Feed_Writer_Deleted;
+        if ($this->getEncoding()) {
+            $deleted->setEncoding($this->getEncoding());
+        }
+        $deleted->setType($this->getType());
+        return $deleted;
     }
 
     /**

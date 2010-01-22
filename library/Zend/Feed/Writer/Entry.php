@@ -109,6 +109,10 @@ class Zend_Feed_Writer_Entry
                 }
                 $author['uri'] = $name['uri'];
             }
+        /**
+         * @deprecated
+         * Array notation (above) is preferred and will be the sole supported input from ZF 2.0
+         */
         } else {
             if (empty($name['name']) || !is_string($name['name'])) {
                 require_once 'Zend/Feed/Exception.php';

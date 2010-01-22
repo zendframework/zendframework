@@ -31,6 +31,9 @@ require_once 'Zend/Feed/Writer/Renderer/RendererInterface.php';
 /** @see Zend_Feed_Writer_Renderer_Entry_Atom */
 require_once 'Zend/Feed/Writer/Renderer/Entry/Atom.php';
 
+/** @see Zend_Feed_Writer_Renderer_Entry_Atom_Deleted */
+require_once 'Zend/Feed/Writer/Renderer/Entry/Atom/Deleted.php';
+
 /** @see Zend_Feed_Writer_Renderer_RendererAbstract */
 require_once 'Zend/Feed/Writer/Renderer/RendererAbstract.php';
 
@@ -100,7 +103,16 @@ class Zend_Feed_Writer_Renderer_Feed_Atom
             if ($this->getDataContainer()->getEncoding()) {
                 $entry->setEncoding($this->getDataContainer()->getEncoding());
             }
-            $renderer = new Zend_Feed_Writer_Renderer_Entry_Atom($entry);
+            if ($entry instanceof Zend_Feed_Writer_Entry) {
+                $renderer = new Zend_Feed_Writer_Renderer_Entry_Atom($entry);
+            } else {
+                if (!$this->_dom->documentElement->hasAttribute('xmlns:at')) {
+                    $this->_dom->documentElement->setAttribute(
+                        'xmlns:at', 'http://purl.org/atompub/tombstones/1.0'
+                    );
+                }
+                $renderer = new Zend_Feed_Writer_Renderer_Entry_Atom_Deleted($entry);
+            }
             if ($this->_ignoreExceptions === true) {
                 $renderer->ignoreExceptions();
             }

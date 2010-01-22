@@ -53,6 +53,7 @@ require_once 'Zend/Feed/Reader/Integration/H-OnlineComAtom10Test.php';
 
 require_once 'Zend/Feed/Writer/FeedTest.php';
 require_once 'Zend/Feed/Writer/EntryTest.php';
+require_once 'Zend/Feed/Writer/DeletedTest.php';
 require_once 'Zend/Feed/Writer/Renderer/Feed/AtomTest.php';
 require_once 'Zend/Feed/Writer/Renderer/Feed/RssTest.php';
 require_once 'Zend/Feed/Writer/Renderer/Entry/AtomTest.php';
@@ -120,6 +121,7 @@ class Zend_Feed_AllTests
         
         $suite->addTestSuite('Zend_Feed_Writer_FeedTest');
         $suite->addTestSuite('Zend_Feed_Writer_EntryTest');
+        $suite->addTestSuite('Zend_Feed_Writer_DeletedTest');
         $suite->addTestSuite('Zend_Feed_Writer_Renderer_Feed_AtomTest');
         $suite->addTestSuite('Zend_Feed_Writer_Renderer_Feed_RssTest');
         $suite->addTestSuite('Zend_Feed_Writer_Renderer_Entry_AtomTest');

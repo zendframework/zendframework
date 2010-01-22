@@ -426,7 +426,7 @@ class Zend_Feed_Writer_EntryTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetIdReturnsNullIfDateNotSet()
+    public function testGetIdReturnsNullIfNotSet()
     {
         $entry = new Zend_Feed_Writer_Entry;
         $this->assertTrue(is_null($entry->getId()));

@@ -54,7 +54,29 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        $this->_locale = setlocale(LC_ALL, 0); //backup locale
+
+        require_once 'Zend/Registry.php';
+        if (Zend_Registry::isRegistered('Zend_Locale')) {
+            Zend_Registry::getInstance()->offsetUnset('Zend_Locale');
+        }
+
         $this->_validator = new Zend_Validate_Float();
+    }
+
+    public function tearDown()
+    {
+        //restore locale
+        if (is_string($this->_locale) && strpos($this->_locale, ';')) {
+            $locales = array();
+            foreach (explode(';', $this->_locale) as $l) {
+                $tmp = explode('=', $l);
+                $locales[$tmp[0]] = $tmp[1];
+            }
+            setlocale(LC_ALL, $locales);
+            return;
+        }
+        setlocale(LC_ALL, $this->_locale);
     }
 
     /**
@@ -113,5 +135,35 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
         Zend_Registry::set('Zend_Locale', new Zend_Locale('de'));
         $valid = new Zend_Validate_Float();
         $this->assertTrue($valid->isValid('123,456'));
+    }
+
+    /**
+     * @ZF-7987
+     */
+    public function testNoZendLocaleButPhpLocale()
+    {
+        setlocale(LC_ALL, 'de');
+        $valid = new Zend_Validate_Float();
+        $this->assertTrue($valid->isValid(123,456));
+    }
+
+    /**
+     * @ZF-7987
+     */
+    public function testLocaleDeFloatType()
+    {
+        $this->_validator->setLocale('de');
+        $this->assertEquals('de', $this->_validator->getLocale());
+        $this->assertEquals(true, $this->_validator->isValid(10.5));
+    }
+
+    /**
+     * @ZF-7987
+     */
+    public function testPhpLocaleDeFloatType()
+    {
+        setlocale(LC_ALL, 'de');
+        $valid = new Zend_Validate_Float();
+        $this->assertTrue($valid->isValid(10.5));
     }
 }

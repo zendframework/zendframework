@@ -112,6 +112,10 @@ class Zend_Validate_Float extends Zend_Validate_Abstract
             return false;
         }
 
+        if (is_float($value)) {
+            return true;
+        }
+
         $this->_setValue($value);
         if ($this->_locale === null) {
             $locale        = localeconv();

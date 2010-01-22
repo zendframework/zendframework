@@ -805,7 +805,6 @@ class Zend_Locale
             }
         }
 
-        require_once 'Zend/Locale.php';
         if ($locale === null) {
             $locale = new Zend_Locale();
         }

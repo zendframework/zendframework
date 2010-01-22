@@ -6,7 +6,7 @@
 
     <para>
         <classname>Zend_Serializer</classname> Adapter erzeugen eine Brücke für unterschiedliche
-        Methoden der Serialisierung mit sehr wenig Einsatz.
+        Methoden der Serialisierung mit geringen Aufwand.
     </para>
 
     <para>
@@ -77,8 +77,8 @@
             Zusätzlich wird die PHP Erweiterung <ulink
                 url="http://php.net/manual/book.simplexml.php">SimpleXML</ulink> verwendet um zu
             prüfen ob ein von  <methodname>wddx_unserialize()</methodname> zurückgegebener
-            <constant>NULL</constant> Wert auf einer serialisierten <constant>NULL</constant>
-            kommt, oder von ungültigen Daten.
+            <constant>NULL</constant> Wert auf einem serialisierten <constant>NULL</constant> Wert
+            basiert, oder auf invaliden Daten.
         </para>
 
         <para>
@@ -211,7 +211,7 @@
         <para>
             Dieser Adapter konvertiert PHP Typen in eine <ulink
                 url="http://docs.python.org/library/pickle.html">Python Pickle</ulink> String
-            Repräsentation. Mit Ihm können die serialisierte Daten mit Python gelesen werden und
+            Repräsentation. Mit Ihm können die serialisierten Daten mit Python gelesen werden und
             Pickled Daten von Python mit PHP gelesen werden.
         </para>
 
@@ -244,7 +244,7 @@
                           <entry>0</entry>
 
                           <entry>
-                               Die Version des Pickle Protokolle das bei
+                               Die Version des Pickle Protokolls das bei
                                <methodname>serialize</methodname> verwendet wird
                           </entry>
                       </row>
@@ -253,7 +253,7 @@
         </table>
 
         <para>
-            Der Wechseln von Datentypen (PHP zu Python) findet wie folgt statt:
+            Der Wechsel von Datentypen (PHP zu Python) findet wie folgt statt:
         </para>
 
         <table>
@@ -321,7 +321,7 @@
         </table>
 
         <para>
-            Der Wechseln von Datentypen (Python zu PHP) findet wie folgt statt:
+            Der Wechsel von Datentypen (Python zu PHP) findet wie folgt statt:
         </para>
 
         <table>

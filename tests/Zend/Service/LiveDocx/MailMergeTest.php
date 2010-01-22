@@ -378,13 +378,7 @@ class Zend_Service_LiveDocx_MailMergeTest extends PHPUnit_Framework_TestCase
         $expectedResults = array('bmp' , 'gif' , 'jpg' , 'png' , 'tiff');
         $this->assertEquals($expectedResults, $this->phpLiveDocx->getImageFormats());
     }
-
-    public function testGetDocumentAccessOptions()
-    {
-        $expectedResults = array('AllowAuthoring' , 'AllowAuthoringFields' , 'AllowContentAccessibility' , 'AllowDocumentAssembly' , 'AllowExtractContents' , 'AllowGeneralEditing' , 'AllowHighLevelPrinting' , 'AllowLowLevelPrinting' , 'AllowAll');
-        $this->assertEquals($expectedResults, $this->phpLiveDocx->getDocumentAccessOptions());
-    }
-    
+   
     // -------------------------------------------------------------------------
 
     public function testGetBitmaps()

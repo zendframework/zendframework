@@ -185,6 +185,7 @@ class Zend_Cache_Manager
                 . ' an associative array or instance of Zend_Config');
         }
         $this->_optionTemplates[$name] = $options;
+        return $this;
     }
 
     /**

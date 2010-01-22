@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19320 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.queue.adapters">
     <title>アダプタ</title>
 
@@ -558,7 +558,7 @@ $queue = new Zend_Queue('Db', $options);
                                     <para>
                                         <varname>preserved</varname> - ジョブ・キュー・ヒストリの
                                         内部でジョブを保持するべきかどうか。デフォルトはoff。
-                                        保持するためには、true値を渡します。
+                                        保持するためには、 <constant>TRUE</constant> を渡します。
                                     </para>
                                 </listitem>
 
@@ -599,7 +599,7 @@ $queue = new Zend_Queue('Db', $options);
                                 <listitem>
                                     <para>
                                         <varname>application_id</varname> - ジョブのアプリケーション識別子。
-                                        デフォルトでnullで、キューがアプリケーションIDを割り当てられたら、
+                                        デフォルトは <constant>NULL</constant> で、キューがアプリケーションIDを割り当てられたら、
                                         アプリケーションIDがキューによって自動的に割り当てられることを
                                         示します。
                                     </para>

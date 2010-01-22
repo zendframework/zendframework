@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20243 -->
 <sect1 id="zend.loader.load">
 
     <title>ファイルやクラスの動的な読み込み</title>
@@ -31,7 +31,7 @@
             このメソッドは <acronym>PHP</acronym> 関数
             <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>
             のラッパーで、失敗した場合 (たとえば指定したファイルが存在しないなど)
-            には false を返します。
+            には <constant>FALSE</constant> を返します。
         </para>
 
         <example id="zend.loader.load.file.example">
@@ -115,6 +115,73 @@ Zend_Loader::loadClass('Container_Tree',
             英数字とハイフン ('-')、アンダースコア ('_') そしてピリオド ('.') だけです。
         </para>
 
+        <!-- TODO : to be translated -->
+        <note>
+            <title>Loading Classes from PHP Namespaces</title>
+
+            <para>
+                Starting in version 1.10.0, Zend Framework now allows loading classes from PHP
+                namespaces. This support follows the same guidelines and implementation as that
+                found in the <ulink
+                    url="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PHP
+                Framework Interop Group PSR-0</ulink> reference implementation.
+            </para>
+
+            <para>
+                Under this guideline, the following rules apply:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        Each namespace separator is converted to a
+                        <constant>DIRECTORY_SEPARATOR</constant> when loading from the file system.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        Each "_" character in the <emphasis>CLASS NAME</emphasis> is converted to a
+                        <constant>DIRECTORY_SEPARATOR</constant>.  The "_" character has no special
+                        meaning in the namespace.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        The fully-qualified namespace and class is suffixed with ".php" when loading
+                        from the file system.
+                    </para>
+                </listitem>
+            </itemizedlist>
+
+            <para>
+                As examples:
+            </para>
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <classname>\Doctrine\Common\IsolatedClassLoader</classname> =&gt;
+                        <filename>/path/to/project/lib/vendor/Doctrine/Common/IsolatedClassLoader.php</filename>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <classname>\namespace\package\Class_Name</classname> =&gt;
+                        <filename>/path/to/project/lib/vendor/namespace/package/Class/Name.php</filename>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <classname>\namespace\package_name\Class_Name</classname> =&gt;
+                        <filename>/path/to/project/lib/vendor/namespace/package_name/Class/Name.php</filename>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </note>
     </sect2>
 
     <sect2 id="zend.loader.load.isreadable">
@@ -178,7 +245,7 @@ Zend_Loader::registerAutoload();
 
         <para>
             <classname>Zend_Loader</classname> クラスを継承した場合は、<methodname>registerAutoload()</methodname>
-            に引数を追加することができます。この引数で、どのクラスから
+            に引数を追加できます。この引数で、どのクラスから
             <methodname>autoload()</methodname> メソッドを登録するのかを指定します。
         </para>
 

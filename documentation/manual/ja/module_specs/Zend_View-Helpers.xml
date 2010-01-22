@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19425 -->
+<!-- EN-Revision: 20227 -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>ビューヘルパー</title>
 
@@ -45,11 +45,11 @@
 
     <para>
         ビュースクリプト内でヘルパーを使用するには、
-        <code>$this->helperName()</code> をコールします。これをコールすると、裏側では
+        <command>$this->helperName()</command> をコールします。これをコールすると、裏側では
         <classname>Zend_View</classname> が <classname>Zend_View_Helper_HelperName</classname> クラスを読み込み、
         そのクラスのインスタンスを作成して <methodname>helperName()</methodname> メソッドをコールします。
         オブジェクトのインスタンスは <classname>Zend_View</classname> インスタンスの中に残り続け、
-        後で <code>$this->helperName()</code> がコールされたときには再利用されます。
+        後で <command>$this->helperName()</command> がコールされたときには再利用されます。
     </para>
 
     <sect2 id="zend.view.helpers.initial">
@@ -67,7 +67,7 @@
         <itemizedlist>
 
             <listitem><para>
-                <code>declareVars():</code>
+                <methodname>declareVars():</methodname>
                 <methodname>strictVars()</methodname> を使用する際に同時に使用します。
                 このヘルパーを使用すると、テンプレート変数を宣言できます。
                 この変数は、すでにビュースクリプトで設定されているものでもいないものでもかまいません。
@@ -77,7 +77,7 @@
             </para></listitem>
 
             <listitem><para>
-                <code>fieldset($name, $content, $attribs):</code>
+                <methodname>fieldset($name, $content, $attribs):</methodname>
                 <acronym>XHTML</acronym> の fieldset を作成します。<varname>$attribs</varname> に
                 'legend' というキーが含まれる場合、その値をフィールドセットの説明として使用します。
                 フィールドセットで囲む内容は、このヘルパーに渡した
@@ -85,23 +85,23 @@
             </para></listitem>
 
             <listitem><para>
-                <code>form($name, $attribs, $content):</code>
+                <methodname>form($name, $attribs, $content):</methodname>
                 <acronym>XHTML</acronym> の form を作成します。すべての <varname>$attribs</varname>
                 はエスケープされ、form タグの <acronym>XHTML</acronym> 属性としてレンダリングされます。
-                <varname>$content</varname> が存在してその値が false 以外の場合は、
+                <varname>$content</varname> が存在してその値が <constant>FALSE</constant> 以外の場合は、
                 その内容がフォームの開始タグと終了タグの間にレンダリングされます。
-                <varname>$content</varname> が false (デフォルト) の場合は、
+                <varname>$content</varname> が <constant>FALSE</constant> (既定値) の場合は、
                 フォームの開始タグのみを作成します。
             </para></listitem>
 
             <listitem><para>
-                <code>formButton($name, $value, $attribs):</code> &lt;button /&gt; 要素を作成します。
+                <methodname>formButton($name, $value, $attribs):</methodname> &lt;button /&gt; 要素を作成します。
             </para></listitem>
 
             <listitem>
                 <para>
-                    <code>formCheckbox($name, $value, $attribs,
-                        $options):</code>
+                    <methodname>formCheckbox($name, $value, $attribs,
+                        $options):</methodname>
                     &lt;input type="checkbox" /&gt; 要素を作成します。
                 </para>
 
@@ -179,7 +179,7 @@ echo $this->formCheckbox('foo',
 
             <listitem>
                 <para>
-                    <code>formErrors($errors, $options):</code>
+                    <methodname>formErrors($errors, $options):</methodname>
                     エラーの表示用に、<acronym>XHTML</acronym> の順序なしリストを作成します。
                     <varname>$errors</varname> は、文字列あるいは文字列の配列となります。
                     <varname>$options</varname> は、リストの開始タグの属性として設定したい内容です。
@@ -212,27 +212,27 @@ echo $this->formCheckbox('foo',
             </listitem>
 
             <listitem><para>
-                <code>formFile($name, $attribs):</code>
+                <methodname>formFile($name, $attribs):</methodname>
                 type="file" /&gt; 要素を作成します。
             </para></listitem>
 
             <listitem><para>
-                <code>formHidden($name, $value, $attribs):</code> &lt;input
+                <methodname>formHidden($name, $value, $attribs):</methodname> &lt;input
                 type="hidden" /&gt; 要素を作成します。
             </para></listitem>
 
             <listitem><para>
-                <code>formLabel($name, $value, $attribs):</code>
-                &lt;label&gt; 要素を作成します。<code>for</code> 属性の値は
+                <methodname>formLabel($name, $value, $attribs):</methodname>
+                &lt;label&gt; 要素を作成します。<property>for</property> 属性の値は
                 <varname>$name</varname> に、そしてラベルのテキストは
                 <varname>$value</varname> になります。
-                <varname>attribs</varname> に <code>disable</code>
+                <property>attribs</property> に <emphasis>disable</emphasis>
                 を渡すと、結果を何も返しません。
             </para></listitem>
 
             <listitem><para>
-                <code>formMultiCheckbox($name, $value, $attribs, $options,
-                    $listsep):</code> チェックボックスのリストを作成します。
+                <methodname>formMultiCheckbox($name, $value, $attribs, $options,
+                    $listsep):</methodname> チェックボックスのリストを作成します。
                 <varname>$options</varname> は連想配列で、任意の深さにできます。
                 <varname>$value</varname> は単一の値か複数の値の配列で、これが
                 <varname>$options</varname> 配列のキーにマッチします。
@@ -244,12 +244,12 @@ echo $this->formCheckbox('foo',
             </para></listitem>
 
             <listitem><para>
-                <code>formPassword($name, $value, $attribs):</code> &lt;input
+                <methodname>formPassword($name, $value, $attribs):</methodname> &lt;input
                 type="password" /&gt; 要素を作成します。
             </para></listitem>
 
             <listitem><para>
-                <code>formRadio($name, $value, $attribs, $options):</code>
+                <methodname>formRadio($name, $value, $attribs, $options):</methodname>
                 一連の &lt;input type="radio" /&gt; 要素を、
                 $options の要素ごとに作成します。$options は、
                 ラジオボタンの値をキー、ラベルを値とする配列となります。
@@ -257,12 +257,12 @@ echo $this->formCheckbox('foo',
             </para></listitem>
 
             <listitem><para>
-                <code>formReset($name, $value, $attribs):</code> &lt;input
+                <methodname>formReset($name, $value, $attribs):</methodname> &lt;input
                 type="reset" /&gt; 要素を作成します。
             </para></listitem>
 
             <listitem><para>
-                <code>formSelect($name, $value, $attribs, $options):</code>
+                <methodname>formSelect($name, $value, $attribs, $options):</methodname>
                 &lt;select&gt;...&lt;/select&gt; ブロックを作成します。
                 $options の要素ごとに &lt;option&gt; を作成します。
                 $options は、選択肢の値をキー、
@@ -271,35 +271,35 @@ echo $this->formCheckbox('foo',
             </para></listitem>
 
             <listitem><para>
-                <code>formSubmit($name, $value, $attribs):</code> &lt;input
+                <methodname>formSubmit($name, $value, $attribs):</methodname> &lt;input
                 type="submit" /&gt; 要素を作成します。
             </para></listitem>
 
             <listitem><para>
-                <code>formText($name, $value, $attribs):</code> &lt;input
+                <methodname>formText($name, $value, $attribs):</methodname> &lt;input
                 type="text" /&gt; 要素を作成します。
             </para></listitem>
 
             <listitem><para>
-                <code>formTextarea($name, $value, $attribs):</code>
+                <methodname>formTextarea($name, $value, $attribs):</methodname>
                 &lt;textarea&gt;...&lt;/textarea&gt; ブロックを作成します。
             </para></listitem>
 
             <listitem><para>
-                <code>url($urlOptions, $name, $reset):</code>
+                <methodname>url($urlOptions, $name, $reset):</methodname>
                 指定したルートにもとづく <acronym>URL</acronym> 文字列を作成します。
                 <varname>$urlOptions</varname> は、そのルートで使用する
                 キー/値 のペアの配列となります。
             </para></listitem>
 
             <listitem><para>
-                <code>htmlList($items, $ordered, $attribs, $escape):</code>
+                <methodname>htmlList($items, $ordered, $attribs, $escape):</methodname>
                 <varname>$items</varname> で渡した内容をもとに
                 順序つきリストあるいは順序なしリストを作成します。
                 <varname>$items</varname> が多次元配列の場合は、入れ子状のリストとなります。
-                <varname>$escape</varname> フラグを true (デフォルト) にすると、
+                <varname>$escape</varname> フラグを <constant>TRUE</constant> (既定値) にすると、
                 各項目はビューオブジェクトに登録されているエスケープ方式でエスケープされます。
-                リスト内でマークアップを行いたい場合は false を渡します。
+                リスト内でマークアップを行いたい場合は <constant>FALSE</constant> を渡します。
             </para></listitem>
 
         </itemizedlist>
@@ -355,6 +355,9 @@ echo $this->formCheckbox('foo',
 
         <xi:include href="Zend_View-Helpers-Action.xml" />
         <xi:include href="Zend_View-Helpers-BaseUrl.xml" />
+        <xi:include href="Zend_View-Helpers-Currency.xml">
+            <xi:fallback><xi:include href="../../en/module_specs/Zend_View-Helpers-Currency.xml" /></xi:fallback>
+        </xi:include>
         <xi:include href="Zend_View-Helpers-Cycle.xml" />
         <xi:include href="Zend_View-Helpers-Partial.xml" />
         <xi:include href="Zend_View-Helpers-Placeholder.xml" />
@@ -481,7 +484,7 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
         </para>
 
         <para>
-            <code>SpecialPurpose</code> ヘルパーのコードの例を示します。
+            <classname>SpecialPurpose</classname> ヘルパーのコードの例を示します。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -498,7 +501,7 @@ class My_View_Helper_SpecialPurpose extends Zend_View_Helper_Abstract
 ]]></programlisting>
 
         <para>
-            そして、ビュースクリプト内で <code>SpecialPurpose</code>
+            そして、ビュースクリプト内で <classname>SpecialPurpose</classname>
             ヘルパーを必要なだけコールします。いちどインスタンスが作成された後は、
             <classname>Zend_View</classname> インスタンスの中でそれが持続します。
         </para>

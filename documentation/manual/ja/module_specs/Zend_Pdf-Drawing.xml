@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20469 -->
 <sect1 id="zend.pdf.drawing">
     <title>描画</title>
 
@@ -27,7 +27,7 @@ $height = $pdfPage->getHeight();
         <acronym>PDF</acronym> には、色を表現するためのさまざまな方法があります。<classname>Zend_Pdf</classname> では、
         グレイスケール、RGB および CMYK 色空間をサポートしています。
         <classname>Zend_Pdf_Color</classname> オブジェクトが要求される箇所では、
-        これらのどれでも使用することができます。それぞれの色空間に対応する機能を提供するのが
+        これらのどれでも使用できます。それぞれの色空間に対応する機能を提供するのが
         <classname>Zend_Pdf_Color_GrayScale</classname>、<classname>Zend_Pdf_Color_Rgb</classname> および
         <classname>Zend_Pdf_Color_Cmyk</classname> クラスです。
         </para>
@@ -90,6 +90,31 @@ public function drawLine($x1, $y1, $x2, $y2);
  */
 public function drawRectangle($x1, $y1, $x2, $y2,
                     $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE);
+]]></programlisting>
+        <!-- TODO : to be translated -->
+        <programlisting language="php"><![CDATA[
+/**
+ * Draw a rounded rectangle.
+ *
+ * Fill types:
+ * Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE - fill rectangle and stroke (default)
+ * Zend_Pdf_Page::SHAPE_DRAW_STROKE      - stroke rectangle
+ * Zend_Pdf_Page::SHAPE_DRAW_FILL        - fill rectangle
+ *
+ * radius is an integer representing radius of the four corners, or an array
+ * of four integers representing the radius starting at top left, going
+ * clockwise
+ *
+ * @param float $x1
+ * @param float $y1
+ * @param float $x2
+ * @param float $y2
+ * @param integer|array $radius
+ * @param integer $fillType
+ * @return Zend_Pdf_Page
+ */
+public function drawRoundedRectangle($x1, $y1, $x2, $y2, $radius, 
+                       $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE);
 ]]></programlisting>
         <programlisting language="php"><![CDATA[
 /**
@@ -182,7 +207,7 @@ public function drawEllipse($x1,
         <para>
         テキストに対する描画操作も、<acronym>PDF</acronym> のページに対して行われます。
         ベースラインの x 座標および y 座標を指定することで、
-        ページ内の任意の場所にテキストを 1 行描画することができます。
+        ページ内の任意の場所にテキストを 1 行描画できます。
         現在のフォントおよびフォントサイズを使用して、描画操作が行われます
         (詳細は、以下を参照ください)。
         </para>
@@ -213,7 +238,7 @@ $pdfPage->drawText('Hello world!', 72, 720);
         テキストの文字列が解釈されます。異なるエンコーディングを使用している場合
         (例えば、ディスク上のファイルから UTF-8 の文字列を読み込んだり
         レガシーなデータベースから MacRoman の文字列を取得したりなど) は、
-        描画の際に文字エンコーディングを指定することができます。
+        描画の際に文字エンコーディングを指定できます。
         そうすることで、<classname>Zend_Pdf</classname> が変換処理を行います。<acronym>PHP</acronym> の
         <code><ulink url="http://www.php.net/manual/function.iconv.php">iconv()</ulink></code>
         関数がサポートしているエンコーディングなら、すべて入力として使用することが可能です。
@@ -350,7 +375,7 @@ $pdfPage->setFont($goodDogCoolFont, 36);
         デフォルトでは、独自のフォントは <acronym>PDF</acronym> ドキュメントに埋め込まれます。
         そのため、閲覧者のシステムにそのフォントがインストールされていなくても、
         ページをきちんと閲覧できるようになります。ファイルの大きさが気になる場合は、
-        ファクトリーメソッドのオプションで「フォントを埋め込まない」ことを指定することができます。
+        ファクトリーメソッドのオプションで「フォントを埋め込まない」ことを指定できます。
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-3">
             <title>TrueType を作成するが、PDF ドキュメントには埋め込まない</title>
@@ -398,7 +423,7 @@ $font = Zend_Pdf_Font::fontWithPath(
         <para>
         フォントのサイズは比較的大きく、中には 10 メガバイトに達するものもあります。
         デフォルトでは埋め込みフォントは Flate 圧縮され、平均して 50% ほどサイズを節約できます。
-        何らかの理由でフォントを圧縮したくない場合は、以下のオプションで圧縮を無効にすることができます。
+        何らかの理由でフォントを圧縮したくない場合は、以下のオプションで圧縮を無効にできます。
         </para>
         <example id="zend.pdf.drawing.using-fonts.example-5">
             <title>埋め込みフォントを圧縮しない</title>
@@ -668,7 +693,7 @@ public function setLineDashingPattern($pattern, $phase = 0);
 
         <para>
         <methodname>Zend_Pdf_Page::drawPolygon()</methodname> メソッドには、さらにパラメータ
-        <varname>$fillMethod</varname> を指定することができます。
+        <varname>$fillMethod</varname> を指定できます。
         </para>
         <itemizedlist>
             <listitem>
@@ -810,7 +835,7 @@ public function skew($x, $y, $xAngle, $yAngle);
         <para>
         好きな時点でのグラフィックの状態
         (現在のフォント、フォントサイズ、線の色、塗りつぶしの色、線の形式、
-        ページの回転、クリップ領域) を保存/復元することができます。
+        ページの回転、クリップ領域) を保存/復元できます。
         保存操作はグラフィックの状態をスタックに保存し、復元の際にはそこから取り出されます。
         </para>
         <para>

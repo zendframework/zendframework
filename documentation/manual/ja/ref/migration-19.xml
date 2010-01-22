@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19425 -->
+<!-- EN-Revision: 20161 -->
 <sect1 id="migration.19">
     <title>Zend Framework 1.9</title>
 
     <para>
-        以前のバージョンから Zend Framework 1.9 またはそれ以降に更新する際は、
+        1.9.0 よりも前にリリースされた Zend Framework から 1.9 のどのリリースに更新する際でも、
         下記の移行上の注意点に注意すべきです。
     </para>
 
@@ -143,7 +143,7 @@ $client->setFileUpload('file2.txt',
                 バージョン1.9から始まりますが、
                 protected メソッド <methodname>_getParametersRecursive()</methodname> はもはや
                 <classname>Zend_Http_Client</classname> に使われず、廃止されます。
-                それを使うと、E_NOTICE メッセージが<acronym>PHP</acronym>によって発生する原因になります。
+                それを使うと、 <constant>E_NOTICE</constant> メッセージが<acronym>PHP</acronym>によって発生する原因になります。
             </para>
 
             <para>
@@ -153,7 +153,7 @@ $client->setFileUpload('file2.txt',
             </para>
 
             <para>
-                また、この<classname>_getParametersRecursive</classname>は protected メソッドなので、
+                また、この<methodname>_getParametersRecursive</methodname>は protected メソッドなので、
                 この変化は<classname>Zend_Http_Client</classname>をサブクラスとするユーザーに
                 影響を及ぼすだけです。
             </para>
@@ -187,36 +187,68 @@ $client->setFileUpload('file2.txt',
                     </thead>
                     <tbody>
                         <row>
-                            <entry>getLanguageTranslationList($locale)</entry>
-                            <entry>getTranslationList('language', $locale)</entry>
+                            <entry>
+                                <methodname>getLanguageTranslationList($locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslationList('language', $locale)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getScriptTranslationList($locale)</entry>
-                            <entry>getTranslationList('script', $locale)</entry>
+                            <entry>
+                                <methodname>getScriptTranslationList($locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslationList('script', $locale)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getCountryTranslationList($locale)</entry>
-                            <entry>getTranslationList('territory', $locale, 2)</entry>
+                            <entry>
+                                <methodname>getCountryTranslationList($locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslationList('territory', $locale, 2)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getTerritoryTranslationList($locale)</entry>
-                            <entry>getTranslationList('territory', $locale, 1)</entry>
+                            <entry>
+                                <methodname>getTerritoryTranslationList($locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslationList('territory', $locale, 1)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getLanguageTranslation($value, $locale)</entry>
-                            <entry>getTranslation($value, 'language', $locale)</entry>
+                            <entry>
+                                <methodname>getLanguageTranslation($value, $locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslation($value, 'language', $locale)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getScriptTranslation($value, $locale)</entry>
-                            <entry>getTranslation($value, 'script', $locale)</entry>
+                            <entry>
+                                <methodname>getScriptTranslation($value, $locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslation($value, 'script', $locale)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getCountryTranslation($value, $locale)</entry>
-                            <entry>getTranslation($value, 'country', $locale)</entry>
+                            <entry>
+                                <methodname>getCountryTranslation($value, $locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslation($value, 'country', $locale)</methodname>
+                            </entry>
                         </row>
                         <row>
-                            <entry>getTerritoryTranslation($value, $locale)</entry>
-                            <entry>getTranslation($value, 'territory', $locale)</entry>
+                            <entry>
+                                <methodname>getTerritoryTranslation($value, $locale)</methodname>
+                            </entry>
+                            <entry>
+                                <methodname>getTranslation($value, 'territory', $locale)</methodname>
+                            </entry>
                         </row>
                     </tbody>
                 </tgroup>
@@ -231,14 +263,14 @@ $client->setFileUpload('file2.txt',
             1.9のリリースより前は、
             メニュー・ヘルパー (<classname>Zend_View_Helper_Navigation_Menu</classname>) は、
             サブメニューを正しく生成しませんでした。
-            <code>onlyActiveBranch</code> が <constant>TRUE</constant> で、
-            オプションの <code>renderParents</code> が <constant>FALSE</constant> のとき、
-            もし、最も深いアクティブなページが <code>minDepth</code> オプションより低い階層にあると、
+            <property>onlyActiveBranch</property> が <constant>TRUE</constant> で、
+            オプションの <property>renderParents</property> が <constant>FALSE</constant> のとき、
+            もし、最も深いアクティブなページが <property>minDepth</property> オプションより低い階層にあると、
             何もレンダリングされないでしょう。
         </para>
 
         <para>
-            より簡単に言うと、もし <code>minDepth</code> が <code>1</code> に設定され、
+            より簡単に言うと、もし <property>minDepth</property> が '1' に設定され、
             アクティブなページが最初のレベルのページの一つなら、
             以下の例が示すように、何もレンダリングされないでしょう。
         </para>
@@ -295,7 +327,7 @@ $container = new Zend_Navigation(array(
         <para>
             リリース1.9以降では、ページの子供がある限り、
             <classname>Zend_View_Helper_Navigation_Menu</classname> の <methodname>_renderDeepestMenu()</methodname>
-            メソッドは <code>minDepth</code> の１階層下のアクティブページを受け取ります。
+            メソッドは <property>minDepth</property> の１階層下のアクティブページを受け取ります。
         </para>
 
         <para>
@@ -312,6 +344,83 @@ $container = new Zend_Navigation(array(
     </li>
 </ul>
 ]]></programlisting>
+    </sect2>
+
+    <!-- TODO : to be translated -->
+    <sect2 id="migration.19.security">
+        <title>Security fixes as with 1.9.7</title>
+
+        <para>
+            Additionally, users of the 1.9 series may be affected by other changes starting in
+            version 1.9.7. These are all security fixes that also have potential backwards
+            compatibility implications.
+        </para>
+
+        <sect3 id="migration.19.security.zend.dojo.editor">
+            <title>Zend_Dojo_View_Helper_Editor</title>
+
+            <para>
+                A slight change was made in the 1.9 series to modify the default usage of the Editor
+                dijit to use <acronym>div</acronym> tags instead of a <acronym>textarea</acronym>
+                tag; the latter usage has <ulink
+                    url="http://api.dojotoolkit.org/jsdoc/HEAD/dijit._editor.RichText">security
+                implications</ulink>, and usage of <acronym>div</acronym> tags is recommended by the
+                Dojo project.
+            </para>
+
+            <para>
+                In order to still allow graceful degradation, a new <varname>degrade</varname>
+                option was added to the view helper; this would allow developers to optionally use a
+                <acronym>textarea</acronym> instead. However, this opens applications developed with
+                that usage to <acronym>XSS</acronym> vectors. In 1.9.7, we have removed this option.
+                Graceful degradation is still supported, however, via a <acronym>noscript</acronym>
+                tag that embeds a <acronym>textarea</acronym>. This solution addressess all security
+                concerns.
+            </para>
+
+            <para>
+                The takeaway is that if you were using the <varname>degrade</varname> flag, it will
+                simply be ignored at this time.
+            </para>
+        </sect3>
+
+        <sect3 id="migration.19.security.zend.filter.html-entities">
+            <title>Zend_Filter_HtmlEntities</title>
+
+            <para>
+                In order to default to a more secure character encoding,
+                <classname>Zend_Filter_HtmlEntities</classname> now defaults to
+                <acronym>UTF-8</acronym> instead of <acronym>ISO-8859-1</acronym>.
+            </para>
+
+            <para>
+                Additionally, because the actual mechanism is dealing with character encodings and
+                not character sets, two new methods have been added,
+                <methodname>setEncoding()</methodname> and <methodname>getEncoding()</methodname>.
+                The previous methods <methodname>setCharSet()</methodname> and
+                <methodname>setCharSet()</methodname> are now deprecated and proxy to the new
+                methods. Finally, instead of using the protected members directly within the
+                <methodname>filter()</methodname> method, these members are retrieved by their
+                explicit accessors. If you were extending the filter in the past, please check your
+                code and unit tests to ensure everything still continues to work.
+            </para>
+        </sect3>
+
+        <sect3 id="migration.19.security.zend.filter.strip-tags">
+            <title>Zend_Filter_StripTags</title>
+
+            <para>
+                <classname>Zend_Filter_StripTags</classname> contains a flag,
+                <varname>commentsAllowed</varname>, that, in previous versions, allowed you to
+                optionally whitelist HTML comments in HTML text filtered by the class. However, this
+                opens code enabling the flag to <acronym>XSS</acronym> attacks, particularly in
+                Internet Explorer (which allows specifying conditional functionality via HTML
+                comments). Starting in version 1.9.7 (and backported to versions 1.8.5 and 1.7.9),
+                the <varname>commentsAllowed</varname> flag no longer has any meaning, and all HTML
+                comments, including those containing other HTML tags or nested commments, will be
+                stripped from the final output of the filter.
+            </para>
+        </sect3>
     </sect2>
 </sect1>
 <!--

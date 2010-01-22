@@ -108,13 +108,13 @@ foreach ($messages as $i => $message) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><methodname>create()</methodname></emphasis> - create a queue
+                    <emphasis><methodname>createQueue()</methodname></emphasis> - create a queue
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><methodname>delete()</methodname></emphasis> - delete a queue
+                    <emphasis><methodname>deleteQueue()</methodname></emphasis> - delete a queue
                 </para>
             </listitem>
 

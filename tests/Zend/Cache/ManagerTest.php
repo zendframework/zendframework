@@ -167,6 +167,24 @@ class Zend_Cache_ManagerTest extends PHPUnit_Framework_TestCase
         $manager->setCacheTemplate('myCache', $config);
         $this->assertSame($config, $manager->getCacheTemplate('myCache'));
     }
+    
+    public function testSetsConfigTemplateWithoutMultipartNameNormalisation()
+    {
+        $manager = new Zend_Cache_Manager;
+        $config = array(
+            'frontend' => array(
+                'name' => 'Core',
+                'options' => array(
+                    'automatic_serialization' => true
+                )
+            ),
+            'backend' => array(
+                'name' => 'BlackHole'
+            )
+        );
+        $manager->setCacheTemplate('myCache', $config);
+        $this->assertSame($config, $manager->getCacheTemplate('myCache'));
+    }
 
     public function testSetsOptionsTemplateUsingZendConfig()
     {

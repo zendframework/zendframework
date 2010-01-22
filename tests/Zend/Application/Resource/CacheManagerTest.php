@@ -129,6 +129,7 @@ class Zend_Application_Resource_CacheManagerTest extends PHPUnit_Framework_TestC
         $this->assertEquals('/foo', $cacheTemplate['backend']['options']['cache_dir']);
 
     }
+    
     public function testShouldCreateNewCacheTemplateIfConfigNotMatchesADefaultTemplate()
     {
         $options = array(
@@ -144,6 +145,21 @@ class Zend_Application_Resource_CacheManagerTest extends PHPUnit_Framework_TestC
         $manager = $resource->init();
         $cacheTemplate = $manager->getCacheTemplate('foo');
         $this->assertSame($options['foo'], $cacheTemplate);
+    }
+    
+    public function testShouldNotMeddleWithFrontendOrBackendCapitalisation()
+    {
+        $options = array(
+            'foo' => array(
+                'backend' => array(
+                    'name' => 'BlackHole'
+                )
+            )
+        );
+        $resource = new Zend_Application_Resource_Cachemanager($options);
+        $manager = $resource->init();
+        $cacheTemplate = $manager->getCacheTemplate('foo');
+        $this->assertEquals('BlackHole', $cacheTemplate['backend']['name']);
     }
 
 }

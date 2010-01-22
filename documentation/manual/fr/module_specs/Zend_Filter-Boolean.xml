@@ -129,7 +129,7 @@ $result = $filter->filter($value);
         </para>
 
         <para>
-            Pour préciser les optiosn ci-dessus, plusieurs manières sont données : utilisez des chaines, 
+            Pour préciser les optiosn ci-dessus, plusieurs manières sont données : utilisez des chaines,
             des constantes, ajoutez les, utilisez des tableaux... Voyez l'exemple:
         </para>
 

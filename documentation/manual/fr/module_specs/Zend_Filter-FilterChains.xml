@@ -33,14 +33,14 @@ $identifiant = $filtreChaine->filter($_POST['identifiant']);
 
     <sect2 id="zend.filter.filter_chains.order">
         <title>Changing filter chain order</title>
-        
+
         <para>
             Since 1.10, the <classname>Zend_Filter</classname> chain also
             supports altering the chain by prepending or appending filters. For
             example, the next piece of code does exactly the same as the other
             username filter chain example:
         </para>
-        
+
         <programlisting language="php"><![CDATA[
 // Create a filter chain and add filters to the chain
 $filterChain = new Zend_Filter();

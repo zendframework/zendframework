@@ -47,28 +47,28 @@ echo $bbcode->render('my [foo]tag[/foo]');
             Notez que créer vos propres tags n'est utile que si l'analyseur syntaxique en tient compte.
             Actuellement, seul BBCode supporte cela. Textile ne supporte pas les tags personnalisés.
         </para>
-        
+
         <para>
             Certains moteurs de rendu (comme le moteur HTML) supporte un paramètre nommé 'tag'.
             Cela remplace les paramètres 'start' et 'end', et il rend le tag avec des attributs
-            par défaut ainsi que le tag de fin. 
+            par défaut ainsi que le tag de fin.
         </para>
-        
+
         <sect3 id="zend.markup.renderers.add.callback">
             <title>Ajout d'un tag de rappel(callback)</title>
-            
+
             <para>
                 Ajouter des tags de rappel permet de faire bien plus que de simples
                 remplacements. Par exemple, vous pouvez changer le contenu, utiliser
                 des paramètres pour changer la sortie, etc.
             </para>
-            
+
             <para>
                 Un rappel est une classe qui implémente
                 <classname>Zend_Markup_Renderer_TokenInterface</classname>
                 Voici un exemple de classe de tag de rappel:
             </para>
-            
+
             <programlisting language="php"><![CDATA[
 class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterInterface
 {
@@ -86,7 +86,7 @@ class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterI
                 une instance de <classname>My_Markup_Renderer_Html_Upper</classname>.
                 Voici un exemple:
             </para>
-            
+
             <programlisting language="php"><![CDATA[
 // Créer une instance de Zend_Markup_Renderer_Html,
 // avec Zend_Markup_Parser_BbCode comme analyseur
@@ -111,7 +111,7 @@ echo $bbcode->render('my [upper]tag[/upper]');
 ]]></programlisting>
         </sect3>
     </sect2>
-    
+
     <sect2 id="zend.markup.renderers.list">
         <title>Liste de tags</title>
 

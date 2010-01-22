@@ -5,7 +5,7 @@
     <title>Utilisation, API et possibilités d'extension</title>
 
     <para>
-        Le Quickstart permet déja de se rendre compte des capacités de tests d'une base de données avec 
+        Le Quickstart permet déja de se rendre compte des capacités de tests d'une base de données avec
         PHPUnit et Zend Framework. Cette section donne un aperçu de l'<acronym>API</acronym> de
         <classname>Zend_Test_PHPUnit_Db</classname> ainsi que de son fonctionnement interne.
     </para>
@@ -81,7 +81,7 @@
                 <para>
                     Après que votre test ait fini, <methodname>tearDown()</methodname> est appelée.
                     Cette méthode n'exécute aucune action du la base de données elle-même car les
-                    actions à mener sont efféctuées en <methodname>setUp()</methodname> (vider les 
+                    actions à mener sont efféctuées en <methodname>setUp()</methodname> (vider les
                     tables).
                 </para>
             </listitem>
@@ -136,7 +136,7 @@
                         <entry><methodname>getAdapter()</methodname></entry>
 
                         <entry>
-                            Méthode permettant l'accès à l'instance de 
+                            Méthode permettant l'accès à l'instance de
                             <classname>Zend_Db_Adapter_Abstract</classname> qui est encapsulée dans
                             la connexion efféctuée par PHPUnit au moyen de
                             <methodname>getConnection()</methodname>.
@@ -164,7 +164,7 @@
                         </entry>
 
                         <entry>
-                            Créer un objet qui représente les données contenues dans une instance de 
+                            Créer un objet qui représente les données contenues dans une instance de
                             <classname>Zend_Db_Table_Abstract</classname> donnée. La récupération des
                             données est faite grâce à <methodname>fetchAll()</methodname>, les paramètres
                             additionnels peuvent servir à limiter les données retournées.

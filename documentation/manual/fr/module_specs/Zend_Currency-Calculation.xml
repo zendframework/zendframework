@@ -59,7 +59,7 @@
             <para>
                 <emphasis><methodname>equals()</methodname></emphasis>: Compare la valeur de
                 la monnaie à celle actuellement stockée en mémoire dans l'objet. Si les deux
-                valeurs sont égales, <constant>TRUE</constant> est retourné, 
+                valeurs sont égales, <constant>TRUE</constant> est retourné,
                 <constant>FALSE</constant> sinon.
             </para>
         </listitem>

@@ -14,7 +14,7 @@
         <title>Comportement par défaut de Zend_Validate_NotEmpty</title>
 
         <para>
-            Par défaut, ce validateur fonctionne différement de la fonction 
+            Par défaut, ce validateur fonctionne différement de la fonction
             <acronym>PHP</acronym> <methodname>empty()</methodname>. En particulier, ce validateur va
             évaluer l'entier <emphasis>0</emphasis> et la chaine '<emphasis>0</emphasis>' comme vides.
         </para>

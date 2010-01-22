@@ -3,7 +3,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.serializer.adapter">
     <title>Zend_Serializer_Adapter</title>
-    
+
     <para>
         Les adaptateurs <classname>Zend_Serializer</classname> servent à changer les méthodes
         de sérialisation facilement.
@@ -106,7 +106,7 @@
                           <entry></entry>
 
                           <entry>
-                            Un commentaire qui apparait dans l'en-tête du paquet. 
+                            Un commentaire qui apparait dans l'en-tête du paquet.
                           </entry>
                       </row>
                   </tbody>
@@ -412,7 +412,7 @@
              </tgroup>
         </table>
     </sect2>
-    
+
     <sect2 id="zend.serializer.adapter.phpcode">
         <title>Zend_Serializer_Adapter_PhpCode</title>
 

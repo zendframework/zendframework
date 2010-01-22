@@ -75,7 +75,7 @@ if ($validator->isValid($ip)) {
             <title>Comportement par défaut</title>
 
             <para>
-                Le comportement par défaut de <classname>Zend_Validate_Ip</classname> est de valider 
+                Le comportement par défaut de <classname>Zend_Validate_Ip</classname> est de valider
                 les deux standards.
             </para>
         </note>

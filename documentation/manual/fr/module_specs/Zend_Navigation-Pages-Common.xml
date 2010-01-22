@@ -88,7 +88,7 @@
                         la page. Par exemple <code>'alternate' => 'format/plain.html'</code>.
                         Pour une fléxibilité maximale, il n'y a pas de restrictions quant aux
                         valeurs, elles peuvent être autre chose qu'une chaine. Concernant
-                        <code>rel</code> et <code>rev</code>, voyez la section de documentation 
+                        <code>rel</code> et <code>rev</code>, voyez la section de documentation
                         <link linkend="zend.view.helpers.initial.navigation.links">sur l'aide
                         de vue Links.</link>.
                     </entry>

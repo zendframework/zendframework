@@ -54,7 +54,7 @@ $logger = Zend_Log::factory(array(
             <listitem>
                 <para>
                     Le nom "court" de l'objet d'écriture; le nom sans le préfixe. Voyez
-                    "writerNamespace" pour plus de détails, des exemples sont : "Mock", 
+                    "writerNamespace" pour plus de détails, des exemples sont : "Mock",
                     "Stream", "Firebug".
                 </para>
             </listitem>

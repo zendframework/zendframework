@@ -23,8 +23,9 @@
         <para>
             Ci-dessous vous trouverez un extrait de fichier <acronym>INI</acronym> montrant
             comment <classname>Zend_Cache_Manager</classname> peut être configuré. Le
-            format est le préfixe de la ressource Cachemanager ("resources.cachemanager")
-            suivi par le nom d'un modèle (par exemple resources.cachemanager.database) et
+            format est le préfixe de la ressource Cachemanager
+            (<property>resources.cachemanager</property>) suivi par le nom d'un modèle (par
+            exemple <property>resources.cachemanager.database</property>) et
             finalement suivi par une option habituelle de <classname>Zend_Cache</classname>.
         </para>
 
@@ -39,7 +40,7 @@ resources.cachemanager.database.backend.options.cache_dir = "/path/to/cache"
         <para>
             Ensuite reécupérer ce cache à partir du gestionnaire est aussi simple que
             d'accéder à l'instance du gestionnaire et d'appeler
-            <methodname>$cacheManager->getCache('database')</methodname>.
+            <command>$cacheManager->getCache('database');</command>.
         </para>
     </example>
 </sect2>

@@ -14,8 +14,8 @@
     <para>
         Lors de l'instanciation d'un transport, il est automatiquement enregistré
         avec <classname>Zend_Mail</classname>. Cependant en paramétrant la directive
-        <property>transport.register</property> à false, ce comportement
-        n'apparait pas.
+        <property>transport.register</property> à <constant>FALSE</constant>, ce
+        comportement n'apparait pas.
     </para>
 
     <example id="zend.application.available-resources.mail.configExample">

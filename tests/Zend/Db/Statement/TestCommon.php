@@ -324,7 +324,7 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
         } catch (Zend_Exception $e) {
             $this->assertType('Zend_Db_Statement_Exception', $e,
                 'Expecting object of type Zend_Db_Statement_Exception, got '.get_class($e));
-            $this->assertContains('invalid fetch mode', $e->getMessage());
+            $this->assertRegExp('#invalid fetch mode#i', $e->getMessage());
         }
     }
 

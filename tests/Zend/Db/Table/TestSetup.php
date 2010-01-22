@@ -64,6 +64,7 @@ abstract class Zend_Db_Table_TestSetup extends Zend_Db_TestSetup
         if ($this->_runtimeIncludePath) {
             $this->_restoreIncludePath();
         }
+        parent::tearDown();
     }
 
     protected function _getTable($tableClass, $options = array())

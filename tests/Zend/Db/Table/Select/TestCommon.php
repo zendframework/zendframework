@@ -62,6 +62,7 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         if ($this->_runtimeIncludePath) {
             $this->_restoreIncludePath();
         }
+        parent::tearDown();
     }
 
     protected function _getTable($tableClass, $options = array())

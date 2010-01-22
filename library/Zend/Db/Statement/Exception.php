@@ -43,7 +43,7 @@ class Zend_Db_Statement_Exception extends Zend_Db_Exception
      */
     public function hasChainedException()
     {
-        return ($this->_previous !== null);
+        return ($this->getPrevious() !== null);
     }
 
     /**
@@ -51,6 +51,6 @@ class Zend_Db_Statement_Exception extends Zend_Db_Exception
      */
     public function getChainedException()
     {
-        return $this->_previous;
+        return $this->getPrevious();
     }
 }

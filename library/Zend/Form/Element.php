@@ -215,10 +215,10 @@ class Zend_Form_Element implements Zend_Validate_Interface
 
     /**
      * Is a specific decorator being rendered via the magic renderDecorator()?
-     * 
+     *
      * This is to allow execution of logic inside the render() methods of child
      * elements during the magic call while skipping the parent render() method.
-     * 
+     *
      * @var bool
      */
     protected $_isPartialRendering = false;
@@ -2063,15 +2063,15 @@ class Zend_Form_Element implements Zend_Validate_Interface
             throw new Zend_Form_Exception(sprintf('Validator instance already exists for validator "%s"', $origName));
         }
 
+        $messages = false;
+        if (isset($validator['options']['messages'])) {
+            $messages = $validator['options']['messages'];
+            unset($validator['options']['messages']);
+        }
+
         if (empty($validator['options'])) {
             $instance = new $name;
         } else {
-            $messages = false;
-            if (isset($validator['options']['messages'])) {
-                $messages = $validator['options']['messages'];
-                unset($validator['options']['messages']);
-            }
-
             $r = new ReflectionClass($name);
             if ($r->hasMethod('__construct')) {
                 $numeric = false;
@@ -2093,16 +2093,15 @@ class Zend_Form_Element implements Zend_Validate_Interface
             } else {
                 $instance = $r->newInstance();
             }
-
-            if ($messages) {
-                if (is_array($messages)) {
-                    $instance->setMessages($messages);
-                } elseif (is_string($messages)) {
-                    $instance->setMessage($messages);
-                }
-            }
         }
 
+        if ($messages) {
+            if (is_array($messages)) {
+                $instance->setMessages($messages);
+            } elseif (is_string($messages)) {
+                $instance->setMessage($messages);
+            }
+        }
         $instance->zfBreakChainOnFailure = $validator['breakChainOnFailure'];
 
         if ($origName != $name) {

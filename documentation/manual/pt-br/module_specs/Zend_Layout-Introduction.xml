@@ -7,7 +7,7 @@
     <para>
         <classname>Zend_Layout</classname> implementa um clássico padrão de projeto
         Two Step View, permitindo aos desenvolvedores empacotar o conteúdo da aplicação
-        dentro de outra view, geramente representando o template do site. Tais templates
+        dentro de outra view, geralmente representando o template do site. Tais templates
         são freqüentemente denominados de <emphasis>layouts</emphasis> por outros projetos,
         e Zend Framework adotou esse termo por consistência.
     </para>

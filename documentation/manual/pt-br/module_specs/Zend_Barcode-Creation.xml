@@ -104,7 +104,7 @@ $renderer = Zend_Barcode::factory($config);
         </para>
 
         <example id="zend.barcode.creation.drawing.example-1">
-            <title>Desenhando um código de barras com o objeto rendererizador</title>
+            <title>Desenhando um código de barras com o objeto renderizador</title>
 
             <programlisting language="php"><![CDATA[
 // Somente o texto a ser escrito é necessário

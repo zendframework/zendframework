@@ -196,7 +196,7 @@ $doc->addField(Zend_Search_Lucene_Field::UnStored('contents', $contents));
                 <para>
                     Campos do tipo <code>Binary</code> não são avaliados nem indexados, mas são
                     armazenados para serem retornados em resultados de pesquisas. Eles podem ser
-                    usados para armazenar qulaquer tipo de dado que possa ser codificados em uma
+                    usados para armazenar qualquer tipo de dado que possa ser codificados em uma
                     string binária, por exemplo, um ícone.
                 </para>
             </listitem>

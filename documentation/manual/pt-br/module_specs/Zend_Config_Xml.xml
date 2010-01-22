@@ -178,7 +178,7 @@ $config = new Zend_Config_Xml($string, 'staging');
         </para>
 
         <para>
-            Com o namespace abilitado, você pode usar constantes do <acronym>PHP</acronym> dentro de
+            Com o namespace habilitado, você pode usar constantes do <acronym>PHP</acronym> dentro de
             arquivos de configuração. Além disso, o atributo <emphasis>extends</emphasis> foi
             transferido para um novo namespace e está depreciado no namespace
             <constant>NULL</constant>. Ele será completamente removido no Zend Framework 2.0.

@@ -13,7 +13,7 @@
         <title>Scripts de Layout</title>
 
         <para>
-            Em ambos os casos, entrentanto, você precisará criar um script de layout.
+            Em ambos os casos, entretanto, você precisará criar um script de layout.
             Scripts de layout simplesmente utilizam <classname>Zend_View</classname> (ou
             qualquer outra implementação de view que você esteja usando). Variáveis de layout são
             registradas com um <link linkend="zend.view.helpers.initial.placeholder">marcador</link>
@@ -267,7 +267,7 @@ echo $layout->render();
             você tenha configurado; por exemplo, se você está usando posicionamento absoluto,
             você pode ser capaz de ter a navegação exibida mais tarde no documento, mas ainda
             mostrar-se no topo; o mesmo poderia ser dito para a barra lateral ou o cabeçalho.
-            A mecância real de puxar o conteúdo permanece a mesma, entretanto.
+            A mecânica real de puxar o conteúdo permanece a mesma, entretanto.
         </para>
     </sect2>
 </sect1>

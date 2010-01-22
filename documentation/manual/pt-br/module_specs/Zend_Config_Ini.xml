@@ -34,7 +34,7 @@
         <title>Separador de Chave</title>
 
         <para>
-            Por padrão, o caractere separador de chave é o carácter de período
+            Por padrão, o caractere separador de chave é o caractere de período
             ("<emphasis>.</emphasis>"). Isso pode ser alterado, de qualquer modo, alterando a chave
             <property>nestSeparator</property> de <varname>$options</varname> na construção do
             objeto <classname>Zend_Config_Ini</classname>. Por exemplo:

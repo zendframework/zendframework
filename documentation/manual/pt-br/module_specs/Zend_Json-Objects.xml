@@ -20,7 +20,7 @@
             uma exceção será lançada.
         </para>
         <para>
-            Descodificar objetos <acronym>JSON</acronym> traz uma ligeria dificuldade, entretanto,
+            Descodificar objetos <acronym>JSON</acronym> traz uma ligeira dificuldade, entretanto,
             desde que os objetos do JavaScript correspondam o mais próximo de uma matriz
             associativa do <acronym>PHP</acronym>. Alguns sugerem que um identificador da classe
             deve ser passado, e um exemplo do objeto dessa classe deve ser criado e populado com

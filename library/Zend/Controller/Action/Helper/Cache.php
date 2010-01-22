@@ -173,6 +173,7 @@ class Zend_Controller_Action_Helper_Cache
     public function setManager(Zend_Cache_Manager $manager)
     {
         $this->_manager = $manager;
+        return $this;
     }
 
     /**

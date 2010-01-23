@@ -755,7 +755,6 @@ class Zend_Feed_Pubsubhubbub_Subscriber
             'topic_url'          => $params['hub.topic'],
             'hub_url'            => $hubUrl,
             'created_time'       => $now->get('yyyy-MM-dd HH:mm:ss'),
-            'last_modified'      => $now->get('yyyy-MM-dd HH:mm:ss'),
             'lease_seconds'      => $expires,
             'verify_token'       => hash('sha256', $params['hub.verify_token']),
             'secret'             => null,

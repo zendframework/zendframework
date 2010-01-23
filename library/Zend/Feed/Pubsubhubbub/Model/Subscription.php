@@ -55,9 +55,10 @@ class Zend_Feed_Pubsubhubbub_Model_Subscription
         if ($result) {
             $data['created_time'] = $result->current()->created_time;
             $now = new Zend_Date;
-            $data['last_modified'] = $now->get('yyyy-MM-dd HH:mm:ss');
-            $data['expiration_time'] = $now->add($result->current()->lease_seconds, Zend_Date::SECOND)
+            if ($data['lease_seconds']) {
+                $data['expiration_time'] = $now->add($data['lease_seconds'], Zend_Date::SECOND)
                 ->get('yyyy-MM-dd HH:mm:ss');
+            }
             $this->_db->update(
                 $data,
                 $this->_db->getAdapter()->quoteInto('id = ?', $data['id'])

@@ -295,7 +295,6 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   `topic_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hub_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_time` datetime DEFAULT NULL,
-  `last_modified` datetime DEFAULT NULL,
   `lease_seconds` bigint(20) DEFAULT NULL,
   `verify_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `secret` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,

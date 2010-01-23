@@ -412,7 +412,7 @@ $a = 'Beispiel String';
                 <para>
                     Wenn ein literaler String selbst Apostrophe enthält, ist es gestattet den String
                     mit Anführungszeichen oder "doppeltes Anführungszeichen" abzugrenzen. Das ist
-                    speziell für <acronym>SQL</acronym> Anweisungen nützlich:
+                    speziell für <constant>SQL</constant> Anweisungen nützlich:
                 </para>
 
                 <programlisting language="php"><![CDATA[

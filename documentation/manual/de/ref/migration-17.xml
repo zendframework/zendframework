@@ -423,7 +423,7 @@ if (Zend_Locale::isLocale($locale, false)) {
             </example>
         </sect3>
 
-        <sect3 id="migration.17.zend.locale.getdefault">
+        <sect3 id="migration.17.zend.locale.islocale.getdefault">
             <title>Änderungen bei der Verwendung von getDefault()</title>
 
             <para>
@@ -542,18 +542,18 @@ $language = new Zend_Translate('gettext',
 
         <note>
             <para>
-                Die Änderung der API in <classname>Zend_View</classname> sind nur dann zu beachten
-                wenn man zum Release 1.7.5 oder höher hochrüstet.
+                Die Änderung der <acronym>API</acronym> in <classname>Zend_View</classname> sind nur
+                dann zu beachten wenn man zum Release 1.7.5 oder höher hochrüstet.
             </para>
         </note>
 
         <para>
             Vor dem 1.7.5 Release wurde das Zend Framework Team darauf aufmerksam gemacht das eine
-            potentielle Local File Inclusion (LFI) Schwäche in der
+            potentielle Local File Inclusion (<acronym>LFI</acronym>) Schwäche in der
             <methodname>Zend_View::render()</methodname> Methode existiert. Vor 1.7.5, erlaubte die
             Methode standardmäßig, die Fähigkeit View Skripte zu spezifizieren die Schreibweisen für
             Eltern-Verzeichnisse enthalten (z.B. "../" oder "..\"). Das öffnet die Möglichkeit für
-            eine LFI Attacke wenn ungefilterte Benutzereingaben an die
+            eine <acronym>LFI</acronym> Attacke wenn ungefilterte Benutzereingaben an die
             <methodname>render()</methodname> Methode übergeben werden:
         </para>
 
@@ -567,7 +567,7 @@ echo $view->render($_GET['foobar']); // LFI Einbruch
             View Skript angefragt wird.
         </para>
 
-        <sect3 id="zend.view.migration.zf5748.disabling">
+        <sect3 id="migration.17.zend.view.disabling">
             <title>Ausschalten des LFI Schutzes für die render() Methode</title>
 
             <para>

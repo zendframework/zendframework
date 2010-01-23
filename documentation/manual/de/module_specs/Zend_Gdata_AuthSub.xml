@@ -64,9 +64,9 @@
         <para>
             Um den Token dann zu verwenden muß
             <methodname>Zend_Gdata_AuthSub::getHttpClient()</methodname> aufgerufen werden. Diese
-            Funktion gibt eine Instanz von Zend_Http_Client zurück, mit gültigen Headern gesetzt,
-            sodas eine nachfolgende Anfrage der Anwendung, die diesen Http Clienten verwenden, auch
-            authentifiziert sind.
+            Funktion gibt eine Instanz von <classname>Zend_Http_Client</classname> zurück, mit
+            gültigen Headern gesetzt, sodas eine nachfolgende Anfrage der Anwendung, die diesen Http
+            Clienten verwenden, auch authentifiziert sind.
         </para>
 
         <para>

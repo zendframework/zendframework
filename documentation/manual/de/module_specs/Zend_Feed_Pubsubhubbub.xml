@@ -64,13 +64,14 @@
         </para>
 
         <para>
-            A Publisher is responsible for notifying all supported Hubs (many can be supported to
-            add redundancy to the system) of any updates to its feeds, whether they be Atom or RSS
-            based. This is achieved by pinging the supported Hub Servers with the URL of the updated
-            feed. In Pubsubhubbub terminology, any updatable resource capable of being subscribed
-            to is referred to as a Topic. Once a ping is received, the Hub will request the updated
-            feed, process it for updated items, and forward all updates to all Subscribers
-            subscribed to that feed.
+            Ein Publizist ist verantwortlich für die Mitteilung aller Aktualisierungen seines Feeds
+            an alle unterstützten Hubs (es können viele unterstützt werden um Redundanz zu einem
+            System hinzuzufügen), egal ob es sich um Atom oder RSS basierte handelt. Das wird getan
+            indem die unterstützten Hub Server mit der URL des aktualisierten Feeds gepingt werden.
+            In der Pubsubhubbub Terminologie wird jede aktualisierbare Ressource welche in der Lage
+            ist abonniert zu werden als Thema bezeichnet. Sobald ein Ping empfangen wird, frägt der
+            Hub den aktualisierten Feed ab, bearbeitet die aktualisierten Elemente, und leitet alle
+            Aktualisierungen an alle Abonnenten weiter die diesen Feed abonniert haben.
         </para>
 
         <para>

@@ -73,9 +73,10 @@ $result = $valid->isValid($value);
 
             <listitem>
                 <para>
-                    <emphasis>float</emphasis>: Gibt <constant>FALSE</constant> zurück wenn eine
-                    Gleitkommazahl angegeben ist. Standardmäßig ist diese Prüfung nicht aktiviert
-                    und gibt bei jeder Gleitkommazahl <constant>TRUE</constant> zurück.
+                    <emphasis>float</emphasis>: Gibt <constant>FALSE</constant> zurück wenn die
+                    Gleitkommazahl <emphasis>0.0</emphasis> angegeben ist. Standardmäßig ist diese
+                    Prüfung nicht aktiviert und gibt bei jeder Gleitkommazahl
+                    <constant>TRUE</constant> zurück.
                 </para>
             </listitem>
 

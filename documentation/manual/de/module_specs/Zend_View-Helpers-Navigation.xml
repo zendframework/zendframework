@@ -724,9 +724,11 @@ Nichts, weil die tiefste aktive Seite nicht auf Level 10 oder tiefer ist.
                 Dieses Beispiel zeigt wir eigene Breakcrumbs durch Verwendung eines partiellen
                 View Skripts dargestellt werden können. Durch den Aufruf von
                 <methodname>setPartial()</methodname> kann man ein partielles View Skript
-                spezifizieren das verwendet wird wenn die <methodname>renderPartial()</methodname>
-                Methode aufgerufen wird. Diese Methode findest die tiefste aktive Seite und übergibt
-                ein Array von Seiten die zur aktiven Seite des partiellen View Skripts weiterleitet.
+                spezifizieren das verwendet wird wenn die <methodname>render()</methodname>
+                Methode aufgerufen wird. Wenn ein partielles spezifiziert ist wird die Methode
+                <methodname>renderPartial()</methodname> aufgerufen. Diese Methode findest die
+                tiefste aktive Seite und übergibt ein Array von Seiten die zur aktiven Seite des
+                partiellen View Skripts weiterleitet.
             </para>
 
             <para>
@@ -1020,14 +1022,14 @@ Produkte, Foo Server, FAQ
             </listitem>
             <listitem>
                 <para>
-                    <methodname>searchRel{Start|Next|Prev|Chapter|Section|Subsection}()</methodname>
+                    <code>searchRel{Start|Next|Prev|Chapter|Section|Subsection}()</code>
                     durchsucht einen Container um vorwärtsgerichtete Beziehungen zu Startseite,
                     nächster Seite, voriger Seite, Kapitel, Sektion und Untersektion zu finden.
                 </para>
             </listitem>
             <listitem>
                 <para>
-                    <methodname>searchRev{Section|Subsection}()</methodname> durchsucht einen
+                    <code>searchRev{Section|Subsection}()</code> durchsucht einen
                     Container um rückwärtsgerichtete Beziehungen zu Sektionen oder Untersektionen zu
                     finden.
                 </para>
@@ -1900,7 +1902,7 @@ foreach ($this->container as $page) {
                     <code>{get|set}UseSchemaValidation()</code> empfängt/setzt ein Flag das
                     anzeigt ob der Helfer eine <acronym>XML</acronym> Schema Prüfung verwenden soll
                     wenn die DOM Sitemap erzeugt wird. Der Standardwert ist
-                    <constant>FALSE</constant>.
+                    <constant>FALSE</constant>. Wenn <constant>TRUE</constant>.
                 </para>
            </listitem>
            <listitem>

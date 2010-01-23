@@ -108,6 +108,12 @@ $valid = Zend_Uri::check('http://uri.in.question');
 ]]></programlisting>
         </example>
 
+        <para>
+            <methodname>Zend_Uri::check()</methodname> gibt einen Boolschen Wert zurück was bequemer
+            ist als <methodname>Zend_Uri::factory()</methodname> zu verwenden und die Exception zu
+            fangen.
+        </para>
+
         <sect3 id="zend.uri.validation.allowunwise">
             <title>"Unwise" Zeichen in URIs erlauben</title>
 

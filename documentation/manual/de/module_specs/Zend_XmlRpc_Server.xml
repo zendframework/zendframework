@@ -135,13 +135,15 @@ echo $server->handle();
             <listitem>
                 <para>
                     <emphasis><property>dateTime.iso8601</property></emphasis>, ein String, der das
-                    Format YYYYMMDDTHH:mm:ss besitzt
+                    Format <command>YYYYMMDDTHH:mm:ss</command> besitzt
                 </para>
             </listitem>
 
             <listitem><para><emphasis>base64</emphasis>, base64-kodierte Daten</para></listitem>
 
-            <listitem><para>struct, jegliches assoziatives Array</para></listitem>
+            <listitem>
+                <para><emphasis>struct</emphasis>, jegliches assoziatives Array</para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -553,8 +555,8 @@ echo $server->handle();
 ]]></programlisting>
         </example>
 
-        <example id="zend.xmlrpc.server.use.example-faults">
-            <title>Bestimmen von Exceptions als valide Fehler-Antwort</title>
+        <example id="zend.xmlrpc.server.use.exception-faults">
+            <title>Bestimmen von Exceptions als gültige Fehler-Antwort</title>
 
             <para>
                 Im nächsten Beispiel wird gezeigt, wie man jede Exception, die von
@@ -716,14 +718,14 @@ $server->setResponseClass('Services_Response');
 
 echo $server->handle($request);
 ]]></programlisting>
-
-            <note>
-                <para>
-                    Die Datei des Server Caches sollte ausserhalb des Document Roots platziert
-                    werden.
-                </para>
-            </note>
         </example>
+
+        <note>
+            <para>
+                Die Datei des Server Caches sollte ausserhalb des Document Roots platziert
+                werden.
+            </para>
+        </note>
 
         <example id="zend.xmlrpc.server.performance.xmlgen">
             <title>Optimizing XML generation</title>

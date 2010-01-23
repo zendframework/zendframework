@@ -98,7 +98,7 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
         Prüfers da IDN Prüfung standardmäßig eingeschaltet ist. Wenn IDN Prüfung ausgeschaltet
         werden soll, kann das entweder durch die Übergabe eines Parameters im
         <classname>Zend_Validate_Hostname</classname> Konstruktor, oder über die
-        <code>$validator->setValidateIdn()</code> Methode gemacht werden.
+        <methodname>setValidateIdn()</methodname> Methode gemacht werden.
     </para>
 
     <para>

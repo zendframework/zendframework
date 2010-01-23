@@ -19,51 +19,53 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>appendFile($src, $type = 'text/javascript', $attrs = array())</code>
+                <command>appendFile($src, $type = 'text/javascript', $attrs = array())</command>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>offsetSetFile($index, $src, $type = 'text/javascript', $attrs =
-                    array())</code>
+                <command>offsetSetFile($index, $src, $type = 'text/javascript', $attrs =
+                    array())</command>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>prependFile($src, $type = 'text/javascript', $attrs = array())</code>
+                <command>prependFile($src, $type = 'text/javascript', $attrs = array())</command>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setFile($src, $type = 'text/javascript', $attrs = array())</code>
+                <command>setFile($src, $type = 'text/javascript', $attrs = array())</command>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>appendScript($script, $type = 'text/javascript', $attrs = array())</code>
+                <command>appendScript($script, $type = 'text/javascript', $attrs =
+                    array())</command>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>offsetSetScript($index, $script, $type = 'text/javascript', $attrs =
-                    array())</code>
+                <command>offsetSetScript($index, $script, $type = 'text/javascript', $attrs =
+                    array())</command>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>prependScript($script, $type = 'text/javascript', $attrs = array())</code>
+                <command>prependScript($script, $type = 'text/javascript', $attrs =
+                    array())</command>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setScript($script, $type = 'text/javascript', $attrs = array())</code>
+                <command>setScript($script, $type = 'text/javascript', $attrs = array())</command>
             </para>
         </listitem>
     </itemizedlist>
@@ -108,8 +110,8 @@ $this->headScript()->appendFile(
 
     <para>
         Letztendlich kann die <methodname>headScript()</methodname> Methode verwendet werden um
-        Skript Elemente schnell hinzuzufügen; die Signatur hierfür ist <code>headScript($mode =
-            'FILE', $spec, $placement = 'APPEND')</code>. Der <varname>$mode</varname> ist
+        Skript Elemente schnell hinzuzufügen; die Signatur hierfür ist <methodname>headScript($mode
+            = 'FILE', $spec, $placement = 'APPEND')</methodname>. Der <varname>$mode</varname> ist
         entweder 'FILE' oder 'SCRIPT', anhängig davon ob das Skript verlinkt oder definiert wird.
         <varname>$spec</varname> ist entweder die Skriptdatei die verlinkt wird, oder der Skriptcode
         selbst. <varname>$placement</varname> sollte entweder 'APPEND', 'PREPEND' oder 'SET' sein.

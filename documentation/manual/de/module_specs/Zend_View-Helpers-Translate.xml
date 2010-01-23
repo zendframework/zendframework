@@ -2,7 +2,6 @@
 <!-- EN-Revision: 19433 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.translate">
-
     <title>Übersetzungs Helfer</title>
 
     <para>
@@ -10,14 +9,14 @@
         übersetzen sollte ganz einfach <link
             linkend="zend.translate.introduction">Zend Translate</link> verwendet werden, und um
         <classname>Zend Translate</classname> in der eigenen View zu integrieren sollte der
-        <classname>Translate</classname> View Helfer verwendet werden.
+        <emphasis>Translate</emphasis> View Helfer verwendet werden.
     </para>
 
     <para>
         In allen folgenden Beispielen verwenden wir den einfachen Array Übersetzungs Adapter.
         Natürlich kann jede Instanz von <classname>Zend_Translate</classname> und genauso jede
         Subklasse von <classname>Zend_Translate_Adapter</classname> verwendet werden. Es gibt
-        verschiedene Wege den <classname>Translate</classname> View Helfer zu initiieren:
+        verschiedene Wege den <emphasis>Translate</emphasis> View Helfer zu initiieren:
     </para>
 
     <itemizedlist>

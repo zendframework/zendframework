@@ -2,7 +2,6 @@
 <!-- EN-Revision: 17406 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.sourcecreation">
-
     <title>Erstellen von Quelldateien</title>
 
     <para>
@@ -20,7 +19,6 @@
     </note>
 
     <sect2 id="zend.translate.sourcecreation.array">
-
         <title>Erstellung von Array Quelldateien</title>
 
         <para>
@@ -73,7 +71,6 @@ $translate = new Zend_Translate('array', '/path/to/myarray.php', 'de');
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.gettext">
-
         <title>Erstellung von Gettext Quellen</title>
 
         <para>
@@ -130,11 +127,9 @@ $translate->addTranslation('/path/to/german.mo', 'de');
 $translate = new Zend_Translate('gettext', '/path/to/english.mo', 'en');
 print_r($translate->getAdapterInfo());
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.tmx">
-
         <title>Erstellung von TMX Quellen</title>
 
         <para>
@@ -186,7 +181,6 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.csv">
-
         <title>Erstellung von CSV Quellen</title>
 
         <para>
@@ -254,19 +248,15 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
         </example>
 
         <note>
-
             <para>
                 Wenn nicht-ASCII Zeichen in der CSV Datei verwendet werden, wie z.B. Umlaute oder
                 UTF-8 Zeichen, dann sollte man immer Hochkommas verwenden. Das Weglassen der
                 Hochkommas kann zu fehlenden Zeichen in der Übersetzung führen.
             </para>
-
         </note>
-
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.ini">
-
         <title>Erstellung von INI Quelldateien</title>
 
         <para>
@@ -295,7 +285,7 @@ $translate->addTranslation('/path/to/other.ini', 'it');
             <acronym>INI</acronym> Dateien haben diverse Einschränkungen. Wenn ein Wert in einer INI
             Datei irgendein nicht alphanummerisches Zeichen enthält, muß er in doppelte
             Anführungszeichen (<code>"</code>) eingeklammert werden. Es gibt auch reservierte Wörter
-            welche nicht als Schlüssel für <acronym>INI</acronym> Dateien verwendet werden dürfen.
+            welche nicht als Schlüssel für Ini Dateien verwendet werden dürfen.
             Diese enthalten: <constant>NULL</constant>, <code>yes</code>, <code>no</code>,
             <constant>TRUE</constant> und <constant>FALSE</constant>. Die Werte
             <constant>NULL</constant>, <code>no</code> und <constant>FALSE</constant> führen zu
@@ -304,10 +294,5 @@ $translate->addTranslation('/path/to/other.ini', 'it');
             verwendet werden und haben im Wert eine spezielle Bedeutung. Diese sollten nicht
             verwendet werden da Sie zu unerwartetem Verhalten führen.
         </para>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

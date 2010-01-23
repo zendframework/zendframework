@@ -28,25 +28,25 @@
     <itemizedlist>
         <listitem>
             <para>
-                <code>appendStyle($content, $attributes = array())</code>
+                <command>appendStyle($content, $attributes = array())</command>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>offsetSetStyle($index, $content, $attributes = array())</code>
+                <command>offsetSetStyle($index, $content, $attributes = array())</command>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>prependStyle($content, $attributes = array())</code>
+                <command>prependStyle($content, $attributes = array())</command>
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <code>setStyle($content, $attributes = array())</code>
+                <command>setStyle($content, $attributes = array())</command>
             </para>
         </listitem>
     </itemizedlist>

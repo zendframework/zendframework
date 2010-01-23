@@ -206,9 +206,9 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                     Trotzdem kann das selbst sogar zu Problemen führen. Erstens werden Server die
                     <command>system.methodSignature</command> nicht unterstützen fehlerhafte
                     Anfragen protokollieren, und <classname>Zend_XmlRpc_Client</classname> wird
-                    selbst einen Ausweg nehmen und den Wert auf ein Array casten. Zusätzlich
-                    bedeutet dass das jeder Aufruf mit einem Array Argument zu einem zusätzlichen
-                    Aufruf beim Remote Server führt.
+                    selbst einen Ausweg nehmen und den Wert auf einen <acronym>XML-RPC</acronym>
+                    Arraytyp casten. Zusätzlich bedeutet dass das jeder Aufruf mit einem Array
+                    Argument zu einem zusätzlichen Aufruf beim Remote Server führt.
                 </para>
 
                 <para>

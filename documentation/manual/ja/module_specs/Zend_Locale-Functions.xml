@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19150 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.locale.functions">
 
     <title>Zend_Locale の使用法</title>
@@ -1625,7 +1625,7 @@ $localelist = Zend_Locale::getLocaleList();
         <note>
             <para>
                 返された配列のキーがロケール名となっていることに注意しましょう。
-                キーに対応する値は、常に true です。
+                キーに対応する値は、常に <constant>TRUE</constant> です。
             </para>
         </note>
     </sect2>
@@ -1665,7 +1665,7 @@ if (Zend_Locale::isLocale($input)) {
             指定したロケールに地域部が存在しない場合でも、
             自動的に地域部をはずして検出してくれることにもお気づきでしょう。
             先ほどの例では、言語 <code>'to'</code> は地域
-            <code>'RU'</code> 内に存在しません。しかし、返される結果は true となります。
+            <code>'RU'</code> 内に存在しません。しかし、返される結果は <constant>TRUE</constant> となります。
             <classname>Zend_Locale</classname> は指定した入力を処理できるからです。
         </para>
 

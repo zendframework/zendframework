@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19873 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.form.forms">
     <title>Zend_Form によるフォームの作成</title>
 
@@ -108,7 +108,7 @@ $form = new Zend_Form($config);
             <listitem><para>
                 <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>:
                 プレフィックスとパスの関連づけを、$type で指定したローダーに指定します。
-                $type が null の場合はそのパスをすべてのローダーに追加します。この場合、
+                $type が <constant>NULL</constant> の場合はそのパスをすべてのローダーに追加します。この場合、
                 プレフィックスの後に "_Element" および
                 "_Decorator" を追加し、パスに "Element/" および
                 "Decorator/" を追加します。追加のフォーム要素クラス群をすべて同じ階層に配置した場合は、
@@ -365,7 +365,7 @@ $form->setElementDecorators(array(
                     3 番目の引数を渡すこともできます。
                     これは、設定「したい」要素なのか設定「したくない」
                     要素なのかを表すフラグとなります。
-                    false を渡すと、指定した
+                    <constant>FALSE</constant> を渡すと、指定した
                     <emphasis>以外の</emphasis> すべての要素にデコレータを設定します。
                     このメソッドの標準的な使用法と同様、
                     各要素にそれまで設定されていたすべてのデコレータを上書きします。
@@ -1345,7 +1345,7 @@ $json = $form->processAjax($data);
 
         <para>
             こうすれば、単純に <acronym>JSON</acronym> レスポンスをクライアントに返すことができます。
-            フォームの検証に成功した場合は、この結果は true となります。
+            フォームの検証に成功した場合は、この結果は <constant>TRUE</constant> となります。
             失敗した場合は、キーとメッセージのペアを含む javascript
             オブジェクトを返します。個々の 'message'
             が検証エラーメッセージの配列となります。

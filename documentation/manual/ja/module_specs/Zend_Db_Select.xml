@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19726 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.db.select">
 
     <title>Zend_Db_Select</title>
@@ -596,7 +596,7 @@ $select = $db->select()
                         右側のテーブルの条件にマッチする行が含まれます。
                         右側のテーブルからのカラムのうち、
                         左側のテーブルに対応する行がないものについては
-                        NULL で埋められます。
+                        <constant>NULL</constant> で埋められます。
                     </para>
 
                     <para>
@@ -616,7 +616,7 @@ $select = $db->select()
                         左側のテーブルの条件にマッチする行が含まれます。
                         左側のテーブルからのカラムのうち、
                         右側のテーブルに対応する行がないものについては
-                        NULL で埋められます。
+                        <constant>NULL</constant> で埋められます。
                     </para>
 
                     <para>
@@ -636,7 +636,7 @@ $select = $db->select()
                         完全外部結合は、左外部結合と右外部結合を組み合わせたようなものです。
                         両側のテーブルのすべての行が含まれます。
                         結合条件を満たす組み合わせがあった場合はそれらが同一行にまとめられ、
-                        それ以外の場合は、対応するデータがないカラムについては NULL で埋められます。
+                        それ以外の場合は、対応するデータがないカラムについては <constant>NULL</constant> で埋められます。
                     </para>
 
                     <para>

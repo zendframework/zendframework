@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20063 -->
+<!-- EN-Revision: 20522 -->
 <sect1 id="zend.queue.framework">
     <title>フレームワーク</title>
 
@@ -105,13 +105,13 @@ foreach ($messages as $i => $message) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><methodname>create()</methodname></emphasis> - 待ち行列を作成
+                    <emphasis><methodname>createQueue()</methodname></emphasis> - 待ち行列を作成
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><methodname>delete()</methodname></emphasis> - 待ち行列を削除
+                    <emphasis><methodname>deleteQueue()</methodname></emphasis> - 待ち行列を削除
                 </para>
             </listitem>
 

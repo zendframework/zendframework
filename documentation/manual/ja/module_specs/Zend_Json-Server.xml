@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19477 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPCサーバー</title>
 
@@ -252,7 +252,7 @@ $server->handle();
                 </para></listitem>
                 <listitem><para><methodname>setAutoEmitResponse($flag)</methodname>:
                     サーバーがレスポンスとすべてのヘッダを自動的に送り出さなければならないかどうか示します;
-                    デフォルトで、これはtrueです。
+                    デフォルトで、これは <constant>TRUE</constant> です。
                 </para></listitem>
                 <listitem><para><methodname>autoEmitResponse()</methodname>:
                     レスポンスの自動送出が使用可能かどうか決定します。
@@ -569,12 +569,12 @@ $server->handle();
                 </para></listitem>
                 <listitem><para><methodname>setDojoCompatible($flag)</methodname>:
                     SMDがDojoツールキットと互換かどうか示すフラグを設定します。
-                    trueの場合、生成された<acronym>JSON</acronym> SMDは、
+                    <constant>TRUE</constant> の場合、生成された<acronym>JSON</acronym> SMDは、
                     DojoのJSON-RPCクライアントが期待する形式に従ってフォーマットされます。
                 </para></listitem>
                 <listitem><para><methodname>isDojoCompatible()</methodname>:
                     Dojo互換性フラグの値を返します。
-                    (デフォルトではfalseです)
+                    (デフォルトでは <constant>FALSE</constant> です)
                 </para></listitem>
                 <listitem><para><methodname>addService($service)</methodname>:
                     マップするサービスを追加します。

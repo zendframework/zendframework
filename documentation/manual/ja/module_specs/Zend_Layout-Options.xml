@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.layout.options">
     <title>Zend_Layout の設定オプション</title>
 
@@ -42,12 +42,12 @@
 
         <listitem><para>
                 <emphasis>mvcSuccessfulActionOnly</emphasis>:
-                <acronym>MVC</acronym> とともに使用します。このフラグを true にすると、
+                <acronym>MVC</acronym> とともに使用します。このフラグを <constant>TRUE</constant> にすると、
                 アクションが例外をスローした際にレイアウトをレンダリングしません
                 (これにより、
                 <link linkend="zend.controller.plugins.standard.errorhandler">ErrorHandler
                 プラグイン</link> を使用している際の二重レンダリング問題を回避します)。
-                デフォルトでは、このフラグは true です。
+                デフォルトでは、このフラグは <constant>TRUE</constant> です。
                 アクセサは <methodname>setMvcSuccessfulActionOnly()</methodname> と
                 <methodname>getMvcSuccessfulActionOnly()</methodname> です。
         </para></listitem>

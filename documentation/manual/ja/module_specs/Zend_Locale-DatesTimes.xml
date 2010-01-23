@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17406 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.locale.date.datesandtimes">
 
     <title>日付および時刻の扱い</title>
@@ -382,7 +382,7 @@ print_r ($date);
             指定した文字列が期待通りの日付を含むかどうかを調べます。
             <methodname>checkDateFormat()</methodname> メソッドは <methodname>getDate()</methodname> を使用します。
             しかし、オプション <code>'fixdate'</code> は使用しません。これを使用すると、
-            入力が日付書式を満たしていない場合にも true を返してしまうからです。
+            入力が日付書式を満たしていない場合にも <constant>TRUE</constant> を返してしまうからです。
             月と日の位置が入れ替わっているなどのエラーが入力で検出された場合、
             オプション <code>'fixdate'</code> は
             経験則によってそれを "修正" してから検証します。

@@ -62,7 +62,7 @@
                 Komponente selbst ausführen wenn die Erweiterung nicht vorhanden ist.
             </para>
 
-            <xi:include href="../../en/requirements-php-extensions-table.xml" />
+            <xi:include href="../../en/ref/requirements-php-extensions-table.xml" />
         </sect2>
 
         <sect2 id="requirements.zendcomponents">
@@ -86,7 +86,7 @@
                 Komponente selbst ausführen wenn die Erweiterung nicht vorhanden ist.
             </para>
 
-            <xi:include href="../../en/requirements-zendcomponents-table.xml" />
+            <xi:include href="../../en/ref/requirements-zendcomponents-table.xml" />
         </sect2>
 
         <sect2 id="requirements.dependencies">
@@ -119,7 +119,7 @@
                 </para>
             </note>
 
-            <xi:include href="../../en/requirements-dependencies-table.xml" />
+            <xi:include href="../../en/ref/requirements-dependencies-table.xml" />
         </sect2>
     </sect1>
 </appendix>

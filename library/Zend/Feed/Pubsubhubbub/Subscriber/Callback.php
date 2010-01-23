@@ -117,6 +117,9 @@ class Zend_Feed_Pubsubhubbub_Subscriber_Callback
             $data = $this->_currentSubscriptionData;
             $this->getHttpResponse()->setBody($httpGetData['hub_challenge']);
             $data['subscription_state'] = Zend_Feed_Pubsubhubbub::SUBSCRIPTION_VERIFIED;
+            if (isset($httpGetData['hub_lease_seconds'])) {
+                $data['lease_seconds'] = $httpGetData['hub_lease_seconds'];
+            }
             $this->getStorage()->setSubscription($data);
         /**
          * Hey, C'mon! We tried everything else!

@@ -38,7 +38,7 @@
                 <title>Automatic output</title>
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
-$mystring = "1.234.567,89 Meter";
+$mystring = "1.234.567,89";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 $locale);
@@ -73,7 +73,7 @@ echo $unit;
                 <title>Output a value</title>
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
-$mystring = "1.234.567,89 Meter";
+$mystring = "1.234.567,89";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 $locale);

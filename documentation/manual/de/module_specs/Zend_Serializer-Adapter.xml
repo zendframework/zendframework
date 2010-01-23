@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20234 -->
+<!-- EN-Revision: 20533 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.serializer.adapter">
     <title>Zend_Serializer_Adapter</title>
 
     <para>
         <classname>Zend_Serializer</classname> Adapter erzeugen eine Brücke für unterschiedliche
-        Methoden der Serialisierung mit geringen Aufwand.
+        Methoden der Serialisierung mit geringem Aufwand.
     </para>
 
     <para>
@@ -78,7 +78,7 @@
                 url="http://php.net/manual/book.simplexml.php">SimpleXML</ulink> verwendet um zu
             prüfen ob ein von  <methodname>wddx_unserialize()</methodname> zurückgegebener
             <constant>NULL</constant> Wert auf einem serialisierten <constant>NULL</constant> Wert
-            basiert, oder auf invaliden Daten.
+            basiert, oder auf ungültigen Daten.
         </para>
 
         <para>
@@ -244,7 +244,7 @@
                           <entry>0</entry>
 
                           <entry>
-                               Die Version des Pickle Protokolls das bei
+                               Die Version des Pickle Protokolls welches bei
                                <methodname>serialize</methodname> verwendet wird
                           </entry>
                       </row>

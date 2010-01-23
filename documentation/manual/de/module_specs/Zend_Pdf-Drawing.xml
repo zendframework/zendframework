@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20469 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.drawing">
     <title>Zeichnen</title>
@@ -96,6 +96,31 @@ public function drawLine($x1, $y1, $x2, $y2);
  */
 public function drawRectangle($x1, $y1, $x2, $y2,
                     $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE);
+]]></programlisting>
+        <programlisting language="php"><![CDATA[
+/**
+ * Zeichne ein gerundetes Rechteck.
+ *
+ * Füllarten:
+ * Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE - fülle und strichliere
+ *                                             das Rechteck (Standard)
+ * Zend_Pdf_Page::SHAPE_DRAW_STROKE          - strichele das Rechteck
+ * Zend_Pdf_Page::SHAPE_DRAW_FILL            - fülle das Rechteck
+ *
+ * radius ist ein Integer der den Radius der vier Ecken repräsentiert, oder ein
+ * Arraay von vier Integern welche den Radius beginnend mit Links oben
+ * repräsentieren, und im Uhrzeigersinn weitergehen
+ *
+ * @param float $x1
+ * @param float $y1
+ * @param float $x2
+ * @param float $y2
+ * @param integer|array $radius
+ * @param integer $fillType
+ * @return Zend_Pdf_Page
+ */
+public function drawRoundedRectangle($x1, $y1, $x2, $y2, $radius,
+                       $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE);
 ]]></programlisting>
         <programlisting language="php"><![CDATA[
 /**

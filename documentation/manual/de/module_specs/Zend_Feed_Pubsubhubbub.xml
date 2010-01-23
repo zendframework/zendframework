@@ -37,28 +37,30 @@
         </para>
 
         <para>
-            The protocol does not exist in isolation. Pubsub systems have been around for a while,
-            such as the familiar Jabber Publish-Subscribe protocol, XEP-0060, or the less well known
-            rssCloud (described in 2001).  However these have not achieved widespread adoption typically
-            due to either their complexity, poor timing or lack of suitability for web applications.
-            rssCloud, which was recently revived as a response to the appearance of Pubsubhubbub, has
-            also seen its usage increase significantly though it lacks a formal specification and
-            currently does not support Atom 1.0 feeds.
+            Das Protokoll existiert nicht isoliert. PubSub Systems gibt es schon seit einiger Zeit,
+            wie auch das übliche Jabber Publish-Subscribe Protokoll, XEP-0060, oder das nicht so
+            bekannte rssCloud (beschrieben 2001). Trotzdem haben diese keine keine breite Anwendung
+            gefunden weil Sie entweder komplex sind, ein schlechtes Timing haben, oder nicht für
+            Web Anwendungen verwendbar sind. Bei rssCloud, welches zuletzt als Antwort auf das
+            Erscheinen von Pubsubhubbub revidiert wurde, wurde auch eine signifikante Steigerung
+            gesehen obwohl es an einer formalen Spezifikation fehlt und es aktuell keine Atom 1.0
+            Feeds unterstützt.
         </para>
 
         <para>
-            Perhaps surprisingly given its relative early age, Pubsubhubbub is already in use including
-            in Google Reader, Feedburner, and there are plugins available for Wordpress blogs.
+            Warscheinlich überraschend weil es noch relativ Jung ist, ist Pubsubhubbub trotzdem
+            bereits in Verwendung unter anderem bei Google Reader, Feedburner und es sind Plugins
+            für Wordpress Blogs vorhanden.
         </para>
     </sect2>
 
     <sect2 id="zend.feed.pubsubhubbub.architecture">
-        <title>Architecture</title>
+        <title>Architektur</title>
 
         <para>
-            <classname>Zend_Feed_Pubsubhubbub</classname> implements two sides of the Pubsubhubbub
-            0.2 Specification: a Publisher and a Subscriber. It does not currently implement a Hub
-            Server though this is in progress for a future Zend Framework release.
+            <classname>Zend_Feed_Pubsubhubbub</classname> implementiert zwei Seiten der Pubsubhubbub
+            0.2 Spezifikation: einen Publizisten und einen Abonnenten. Es implementiert aktuell
+            keinen Hub Server. Dieser ist aber in Arbeit für ein zukünftiges Zend Framework Release.
         </para>
 
         <para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20063 -->
+<!-- EN-Revision: 20522 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.queue.framework">
     <title>Framework</title>
@@ -107,13 +107,14 @@ foreach ($messages as $i => $message) {
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis><methodname>create()</methodname></emphasis> - Erstellt eine Queue
+                    <emphasis><methodname>createQueue()</methodname></emphasis> - Erstellt eine
+                    Queue
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <emphasis><methodname>delete()</methodname></emphasis> - Löscht eine Queue
+                    <emphasis><methodname>deleteQueue()</methodname></emphasis> - Löscht eine Queue
                 </para>
             </listitem>
 

@@ -730,7 +730,7 @@ class Zend_Feed_Pubsubhubbub_Subscriber
             $params['hub.callback'] = $this->getCallbackUrl()
                 . '?xhub.subscription=' . Zend_Feed_Pubsubhubbub::urlencode($key);
         } else {
-            $params['hub.callback'] = $this->getCallbackUrl()
+            $params['hub.callback'] = rtrim($this->getCallbackUrl(), '/')
                 . '/' . Zend_Feed_Pubsubhubbub::urlencode($key);
         }
         if ($mode == 'subscribe' && !is_null($this->getLeaseSeconds())) {

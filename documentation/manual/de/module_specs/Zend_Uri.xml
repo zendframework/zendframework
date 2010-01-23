@@ -153,9 +153,9 @@ Zend_Uri::setConfig(array('allow_unwise' => false));
             <note>
                 <para>
                     <methodname>Zend_Uri::setConfig()</methodname> setzt Konfigurationsoptionen
-                    global. Es wird empfohlen die 'allow_unwise' Option auf
-                    '<constant>FALSE</constant>' zurückzusetzen wie im obigen Beispiel, solange man
-                    unwise Zeichen immer global erlauben will.
+                    global. Es wird, wie im obigen Beispiel, empfohlen die 'allow_unwise' Option auf
+                    '<constant>FALSE</constant>' zurückzusetzen, solange man unwise Zeichen immer
+                    global erlauben will.
                 </para>
             </note>
         </sect3>

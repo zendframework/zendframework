@@ -11,16 +11,16 @@
 
     <para>
         Viele Sprachen teilen das Arbeiten mit Zeiten und Kalendern in zwei Klassen. Aber Zend
-        Framework strebt nach extremer Vereinfachung und die Entwickler zu zwingen verschiedene
-        Objekte mit verschiedenen Methoden für Zeiten und Daten zu verwenden ist in vielen
+        Framework strebt nach extremer Vereinfachung und die Entwickler zu zwingen, verschiedene
+        Objekte mit verschiedenen Methoden für Zeiten und Daten zu verwenden, ist in vielen
         Situationen eine Belastung. Da die Methoden von <classname>Zend_Date</classname> das
-        Arbeiten mit vieldeutigen Daten unterstützen die möglicherweise nicht alle Datumsabschnitte
+        Arbeiten mit vieldeutigen Daten unterstützen, die möglicherweise nicht alle Datumsabschnitte
         beinhalten (Zeitalter, Jahr, Monat, Tag, Stunde, Minute, Sekunde, Zeitzone), können
         Entwickler die Flexibilität und die einfache Handhabung der selben Klasse und der selben
-        Methode geniessen um die gleichen Änderungen durchzuführen (zum Beispiel Addieren,
+        Methode geniessen, um die gleichen Änderungen durchzuführen (zum Beispiel Addieren,
         Subtrahieren, Vergleichen, Verbinden von Datumsabschnitten, und vieles mehr). Das Aufteilen
         der Handhabung dieser Datumsabschnitte in verschiedene Klassen würde Komplikationen
-        hervorrufen wenn einfaches gemeinsames Arbeiten und eine kleine Lernkurve gewünscht sind.
+        hervorrufen, wenn einfaches gemeinsames Arbeiten und eine kleine Lernkurve gewünscht sind.
         Eine einzige Klasse reduziert die Verdopplung von Code für gleichartige Arbeiten, ohne die
         Notwendigkeit einer komplexen Ableitungshirarchie.
     </para>
@@ -38,15 +38,14 @@
                     Alle Daten und Zeiten, selbst die mehrdeutigen (z.B. kein Jahr), sind intern
                     dargestellt in absoluten Momenten der Zeit, repräsentiert als
                     <acronym>UNIX</acronym> Zeitpunkt welcher die Differenz zwischen der gewünschten
-                    Zeit und dem 01.Jänner 1970 00:00:00 <acronym>GMT</acronym> darstellt. Das ist
-                    nur deshalb möglich weil <classname>Zend_Date</classname> nicht durch
-                    <acronym>UNIX</acronym> Zeitpunkte limitiert ist und auch nicht durch Integer
-                    Zahlen. Die BCMath Erweiterung wird benötigt um extrem große Daten ausserhalb
-                    des Bereichs vom Freitag dem 13.Dezember 1901 20:45:54 <acronym>GMT</acronym>
-                    bis zum 19.Jänner 2038 03:14:07 <acronym>GMT</acronym> zu unterstützen.
-                    Zusätzlich können kleine Mathematikfehler aufgrund der inhärenten Beschränkungen
-                    des Float-Datentyps sowie durch Rundung auftreten, es sei denn, die BCMath
-                    Extension wird verwendet.
+                    Zeit und dem 01. Januar 1970 00:00:00 <acronym>GMT</acronym> darstellt. Das ist
+                    nur deshalb möglich, weil <classname>Zend_Date</classname> nicht durch
+                    <acronym>UNIX</acronym> Zeitpunkte oder Integer-Zahlen limitert ist. Die BCMath
+                    Erweiterung wird benötigt, um extrem große Daten außerhalb des Bereichs vom
+                    Freitag dem 13.Dezember 1901 20:45:54 <acronym>GMT</acronym> bis zum 19. Januar
+                    2038 03:14:07 <acronym>GMT</acronym> zu unterstützen. Zusätzlich können kleine
+                    Mathematikfehler aufgrund der inhärenten Beschränkungen des Float-Datentyps
+                    sowie durch Rundung auftreten, es sei denn, die BCMath Extension wird verwendet.
                 </para>
             </listitem>
 
@@ -56,9 +55,9 @@
                 </para>
 
                 <para>
-                    Deswegen wird eine Objektinstanz welche drei Stunden repräsentiert
-                    ausgedrückt als drei Stunden nach dem 01.Jänner.1970 00:00:00
-                    <acronym>GMT</acronym> bzw. 0 + 3 * 60 * 60 = 10800 dargestellt.
+                    Deswegen wird eine Objektinstanz, welche drei Stunden repräsentiert, als drei
+                    Stunden nach dem 01. Januar 1970 00:00:00 <acronym>GMT</acronym> bzw.
+                    0 + 3 * 60 * 60 = 10800 dargestellt.
                 </para>
             </listitem>
 
@@ -68,11 +67,10 @@
                 </para>
 
                 <para>
-                    Wo es möglich ist verwendet <classname>Zend_Date</classname> normalerweise
-                    <acronym>PHP</acronym> Funktionen um die Geschwindigkeit zu erhöhen.
+                    Wo es möglich ist, verwendet <classname>Zend_Date</classname> normalerweise
+                    <acronym>PHP</acronym> Funktionen, um die Geschwindigkeit zu erhöhen.
                 </para>
             </listitem>
         </itemizedlist>
      </sect2>
 </sect1>
-<!--vim:se ts=4 sw=4 et:-->

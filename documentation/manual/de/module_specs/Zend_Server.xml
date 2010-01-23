@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 17175 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 17175 -->
 <sect1 id="zend.server.introduction">
     <title>Einführung</title>
+
     <para>
         Die <classname>Zend_Server</classname> Klassenfamilie stellt Funktionalitäten für die
         verschiedenen Serverklassen bereit, inklusive <classname>Zend_XmlRpc_Server</classname>,
         <classname>Zend_Rest_Server</classname>, <classname>Zend_Json_Server</classname> und
         <classname>Zend_Soap_Wsdl</classname>. <classname>Zend_Server_Interface</classname> stellt
-        eine Interface bereit, das <acronym>PHP</acronym> 5's <code>SoapServer</code> Klasse
-        immitiert; alle Server Klassen sollten dieses Interface implementieren, um einen Standard
+        eine Interface bereit, welches <acronym>PHP</acronym> 5's <code>SoapServer</code> Klasse
+        immitiert; alle Server Klassen sollten dieses Interface implementieren, um eine Standard
         Server <acronym>API</acronym> bereit zu stellen.
     </para>
+
     <para>
         Der <classname>Zend_Server_Reflection</classname> Baum stellt einen Standardmechanismus
         bereit, um Funktion und Klassen Introspektion für die Verwendung als Rückfragen mit den
@@ -20,6 +22,3 @@
         <methodname>loadFunctions()</methodname> Methoden bereit.
     </para>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

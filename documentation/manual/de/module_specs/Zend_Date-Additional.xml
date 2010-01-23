@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 17750 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 17750 -->
 <sect1 id="zend.date.additional">
     <title>Funktionierende Beispiele</title>
 
     <para>
-        In diesem Kapitel werden wir verschiedene zusätzliche Funkionen beschreiben welche auch
-        durch <classname>Zend_Date</classname> verfügbar sind. Natürlich haben alle beschriebene
-        Funktionen auch Beispiele um die Arbeitsweise, und die einfache <acronym>API</acronym> für
-        die richtige Benutzung von Ihnen, zu zeigen.
+        In diesem Kapitel werden verschiedene zusätzliche Funkionen beschrieben welche auch durch
+        <classname>Zend_Date</classname> verfügbar sind. Natürlich sind für alle beschriebenen
+        Funktionen auch Beispiele vorhanden, um die Arbeitsweise und die einfache
+        <acronym>API</acronym> für die richtige Benutzung zu zeigen.
     </para>
 
     <sect2 id="zend.date.additional.checking">
@@ -16,44 +16,45 @@
 
         <para>
             Normalerweise werden die meisten Daten als Zeichenketten übergeben. Aber das Problem
-            mit Zeichenketten ist das man nicht sicher sein kann ob eine Zeichenkette ein echtes
+            mit Zeichenketten ist, dass man nicht sicher sein kann, ob eine Zeichenkette ein echtes
             Datum enthält. Hierfür gibt es in <classname>Zend_Date</classname> eine eigene
             statische Funktion um Datums-Zeichenketten zu prüfen.
             <classname>Zend_Locale</classname> hat eine eigene Funktion
-            <methodname>getDate($date, $locale)</methodname> welche ein Datum analysiert und
+            <methodname>getDate($date, $locale)</methodname>, welche ein Datum analysiert und
             die gültigen normalisierten Datumsabschnitte zurück gibt. Ein Monatsname wird zum
-            Beispiel erkannt und anschließend nur die Nummer des Monats zurück gegeben. Aber da
-            <classname>Zend_Locale</classname> nichts über Daten weiß, da es eine Klasse zum
-            Normalisieren und Lokalisieren ist, haben wir eine eigene Funktion
-            <methodname>isDate($date)</methodname> integriert welche das für uns prüft.
+            Beispiel erkannt und anschließend nur die Nummer des Monats zurück gegeben. Da
+            <classname>Zend_Locale</classname> lediglich eine Klasse zum Normalisieren und
+            Lokalisieren ist und somit keine Kenntnis über die Daten hat, wurde die Funktion
+            <methodname>isDate($date)</methodname> integriert, welche dies prüfen kann.
         </para>
 
         <para>
             <methodname>isDate($date, $format, $locale)</methodname> nimmt bis zu drei Parameter
-            entgegen und benötigt mindestens einen Parameter. Deshalb ist alles was wir für das
-            Prüfen eines Datums benötigen natürlich das Datum selbst als Zeichenkette. Der zweite
-            Parameter kann das Format sein, in welchem das Datum erwartet wird. Wenn kein Format
-            angegeben wurde, wird das Standardformat des verwendeten Gebietsschemas benutzt. Für
-            Details darüber wie Formate aussehen müssen kann im Kapitel über
+            entgegen und benötigt mindestens einen Parameter. Deshalb ist alles, was für die Prüfung
+            eines Datums benötigt wird, das Datum selbst als Zeichenkette. Der zweite Parameter kann
+            das Format sein, in welchem das Datum erwartet wird. Wenn kein Format angegeben wurde,
+            wird das Standardformat des verwendeten Gebietsschemas benutzt. Details darüber, wie
+            Formate aussehen müssen, sind im Kapitel über
             <link linkend="zend.date.constants.selfdefinedformats">selbst definierte Formate</link>
-            nachgeschaut werden.
+            nachzulesen.
         </para>
 
         <para>
-            Der dritte Parameter ist auch optional genauso wie der zweite Parameter und kann
-            verwendet werden um ein Gebietsschema anzugeben. Das gebietsschema wird benötigt um
-            Monats- und Wochentagsnamen zu normalisieren. Mit dem dritten Parameter sind wir also in
-            der Lage Daten zu erkennen wie '<command>01.Jänner.2000</command>' oder
-            '<command>01.January.2000</command>' abhängig von dem angegebenen Gebietsschema.
+            Der dritte Parameter ist, wie schon der zweite Parameter, optional und kann für die
+            Angabe eines Gebietsschemas verwendet werden. Das Gebietsschema wird zur Normalisierung
+            von Monats- und Wochentagsnamen benötigt. Mit der Angabe des dritten Parameters ist es
+            also möglich, Daten wie '<command>01.Jänner.2000</command>' oder
+            '<command>01.January.2000</command>' abhängig vom angegebenen Gebietsschema, zu
+            erkennen.
         </para>
 
         <para>
-            <methodname>isDate()</methodname> prüft natürlich auch ob ein Datum existiert.
+            <methodname>isDate()</methodname> prüft auch ob ein Datum existiert.
             <classname>Zend_Date</classname> selbst prüft die Daten nicht. Deshalb ist es möglich
             ein Datum wie zum Beispiel '<command>31.Februar.2000</command>' mit
-            <classname>Zend_Date</classname> zu erstellen weil <classname>Zend_Date</classname> das
-            Datum automatisch korrigiert und ein gültiges Datum zurück gibt. In unserem Fall den
-            '<command>03.März.2000</command>'. Auf der anderen Seite führt
+            <classname>Zend_Date</classname> zu erstellen, da <classname>Zend_Date</classname> das
+            Datum automatisch korrigiert und eine gültige Datumsangabe zurück gibt. In unserem Fall
+            den '<command>03.März.2000</command>'. Auf der anderen Seite führt
             <methodname>isDate()</methodname> diese Prüfung durch und gibt beim
             '<command>31.Februar.2000</command>' <constant>FALSE</constant> zurück, weil sie weiß
             das dieses Datum unmöglich ist.
@@ -94,19 +95,19 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
         <title>Sonnenaufgang und Sonnenuntergang</title>
 
         <para>
-            <classname>Zend_Date</classname> beinhaltet auch Funktionen um Informationen von der
-            Sonne zu erhalten. Oft ist es notwendig die Zeit für Sonnenaugang oder Sonnenuntergang
+            <classname>Zend_Date</classname> beinhaltet auch Funktionen um Informationen zur
+            Sonne zu erhalten. Oft ist es notwendig, die Zeit für Sonnenaugang oder Sonnenuntergang
             für einen bestimmten Tag zu erhalten. Das ist mit <classname>Zend_Date</classname> sehr
-            einfach weil nur der gewünschte Tag angegeben werden muß, und zusätzlich die Ortsangabe
-            für den Sonnenaufgang oder Sonnenuntergang berechnet werden soll.
+            einfach, da nur der gewünschte Tag und die Ortsangabe für den Sonnenaufgang oder
+            Sonnenuntergang angegeben werden muss.
         </para>
 
         <para>
-            Da die meisten Personen die genaue Ortsangabe Ihrer Stadt nicht kennen haben wir auch
-            eine Helferklasse spendiert die für etwa 250 Haupt- und Großstädte der ganzen Welt die
-            Daten der Ortsangaben bereithält. Die meisten Personen können Städte in Ihrer näheren
-            Umgebung benutzen, da die Differenz für Ortsangaben welche nahe beineinander liegen nur
-            in Sekunden gemessen werden kann.
+            Da die meisten Personen die genaue Ortsangabe Ihrer Stadt nicht kennen, wird eine
+            eine Helferklasse bereitgestellt, die für etwa 250 Haupt- und Großstädte der ganzen Welt
+            die Daten der Ortsangaben bereithält. Die meisten Personen können Städte in Ihrer
+            näheren Umgebung benutzen, da die Differenz für Ortsangaben, welche nahe beineinander
+            liegen, nur in Sekunden gemessen werden kann.
         </para>
 
         <para>
@@ -127,11 +128,11 @@ print_r (Zend_Date_Cities::getCityList());
             Die Ortsangabe selbst erhält man mit der Funktion
             <methodname>Zend_Date_Cities::city()</methodname>. Sie akzeptiert den Namen einer Stadt
             wie durch die Funktion <methodname>Zend_Date_Cities::getCityList()</methodname>
-            angegeben und optional als zweiten Parameter den zu setzenden Horizont.
+            angegeben und optional als zweiten Parameter für den zu setzenden Horizont.
         </para>
 
         <para>
-            Es gibt 4 vordefinierte Horizonte welche mit einer Ortsangabe benutzt werden können um
+            Es gibt 4 vordefinierte Horizonte, welche mit einer Ortsangabe benutzt werden können, um
             den genauen Zeitpunkt von Sonnenauf- und -untergang zu erhalten. Der
             '<varname>$horizon</varname>' Parameter ist in allen Funktionen immer optional. Wenn er
             nicht gesetzt wird, wird der '<property>effective</property>' Horizont benutzt.
@@ -199,12 +200,12 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
         </example>
 
         <para>
-            Da nun alle benötigten Daten angegeben werde können ist der nächste Schritt die
-            Erstellung eines <classname>Zend_Date</classname> Objekts mit dem Tag für welchen
+            Da nun alle benötigten Daten angegeben werden können, ist der nächste Schritt die
+            Erstellung eines <classname>Zend_Date</classname> Objekts mit dem Tag, für welchen
             Sonnenauf- oder -untergang berechnet werden sollen. Für die Berechnung stehen 3
             Funktionen bereit. Die Berechnung des Sonnenaufganges ist mit
             '<methodname>getSunset()</methodname>', des Sonnenuntergangs mit
-            '<methodname>getSunrise()</methodname>' und alle möglichen Informationen welche die
+            '<methodname>getSunrise()</methodname>' und alle möglichen Informationen, welche die
             Sonne betreffen mit '<methodname>getSunInfo()</methodname>' möglich. Nach der
             Berechnung wird das <classname>Zend_Date</classname> Objekt mit der berechneten Zeit
             zurückgegeben.
@@ -238,35 +239,35 @@ foreach ($info as $sun) {
 
         <para>
             Zeitzonen sind genauso wichtig wie die Datumsangaben selbst. Es gibt einige Zeitzonen
-            abhängig davon wo auf der Welt der Benutzer lebt. Deshalb bedeutet das Arbeiten mit
-            Daten auch immer das eine gültige Zeitzone gesetzt ist. Das klingt eventuell
+            abhängig vom Aufenthaltsort des Nutzers. Deshalb bedeutet das Arbeiten mit
+            Daten auch immer, dass eine gültige Zeitzone gesetzt ist. Das klingt eventuell
             kompliziert, ist aber viel einfacher als erwartet. Wie schon im ersten Kapitel von
-            <classname>Zend_Date</classname> erwähnt muß immer eine Standardzeitzone ersetzt werden.
-            Entweder durch <filename>php.ini</filename> oder durch Definition in der Bootstrap
-            Datei.
+            <classname>Zend_Date</classname> erwähnt, muss immer eine Standardzeitzone gesetzt
+            werden. Dies kann entweder in der <filename>php.ini</filename> oder durch Definition in
+            der Bootstrap Datei durchgeführt werden.
         </para>
 
         <para>
-            Ein <classname>Zend_Date</classname> Objekt speichert natürlich die aktuelle Zeitzone.
+            Ein <classname>Zend_Date</classname> Objekt speichert die aktuelle Zeitzone.
             Selbst wenn die Zeitzone nach der Erstellung des Objektes geändert wird, merkt sich das
-            Objekt die originale Zeitzone und arbeitet mit Ihr. Es ist also nicht notwendig die
+            Objekt die originale Zeitzone und arbeitet mit dieser. Es ist also nicht notwendig, die
             Zeitzone im Code mithilfe von <acronym>PHP</acronym> Funktionen zu ändern.
-            <classname>Zend_Date</classname> hat zwei eingebaute Funktionen die es ermöglichen damit
-            zu Arbeiten.
+            <classname>Zend_Date</classname> hat zwei eingebaute Funktionen, die es ermöglichen
+            damit zu arbeiten.
         </para>
 
         <para>
             <methodname>getTimezone()</methodname> gibt die aktuell gesetzte Zeitzone des
-            <classname>Zend_Date</classname> Objektes zurück. Man sollte in Erinnerung behalten das
-            <classname>Zend_Date</classname> nicht mit den <acronym>PHP</acronym> Internas gekoppelt
-            ist. Deshalb ist die zurückgegebene Zeitzone nicht die des <acronym>PHP</acronym>
-            Skripts sondern jene des Objektes. <methodname>setTimezone($zone)</methodname> ist die
-            zweite Funktion und ermöglicht es eine neue Zeitzone für
-            <classname>Zend_Date</classname> zu setzen. Eine angegebene Zeitzone wird immer geprüft.
-            Wenn diese nicht existiert wird eine Ausnahme geworfen. Zusätzlich kann die Zeitzone des
-            aktuellen Skripts oder des Systems für das Datumsobjekt gesetzt werden indem
-            <methodname>setTimezone()</methodname> ohne den Parameter zone aufgerufen wird. Das wird
-            auch automatisch gemacht wenn das Datumsobjekt erstellt wird.
+            <classname>Zend_Date</classname> Objektes zurück. Man sollte in Erinnerung behalten,
+            dass <classname>Zend_Date</classname> nicht mit den <acronym>PHP</acronym> Internas
+            gekoppelt ist. Deshalb ist die zurückgegebene Zeitzone nicht die des
+            <acronym>PHP</acronym> Skripts, sondern jene des Objektes.
+            <methodname>setTimezone($zone)</methodname> ist die zweite Funktion und ermöglicht es
+            eine neue Zeitzone für <classname>Zend_Date</classname> zu setzen. Eine angegebene
+            Zeitzone wird immer geprüft. Wenn diese nicht existiert, wird eine Ausnahme geworfen.
+            Zusätzlich kann die Zeitzone des aktuellen Skripts oder des Systems für das Datumsobjekt
+            gesetzt werden, indem <methodname>setTimezone()</methodname> ohne den Parameter zone
+            aufgerufen wird. Das wird auch automatisch gemacht, wenn das Datumsobjekt erstellt wird.
         </para>
 
         <example id="zend.date.additional.timezones.example-1">
@@ -274,8 +275,8 @@ foreach ($info as $sun) {
 
             <programlisting language="php"><![CDATA[
 // Setzen einer Standardzeitzone... das muß in der Bootstrap Datei
-// oder php.ini gemacht werden. Wir setzen Sie hier nur der Vollständigkeit
-// halber um ein komplettes Beispiel zu erhalten.
+// oder php.ini gemacht werden. Wir setzen diese hier nur der Vollständigkeit
+// halber, um ein komplettes Beispiel zu erhalten.
 date_default_timezone_set('Europe/Vienna');
 
 // Erstellen des Datumsobjektes
@@ -300,18 +301,18 @@ print $date->getIso();
 
         <para>
             <classname>Zend_Date</classname> nimmt immer die aktuelle Zeitzone für das Erstellen
-            eines Objektes wie in den ersten Zeilen des Beispiels gezeigt. Das Ändern der Zeitzone
+            eines Objektes, wie in den ersten Zeilen des Beispiels gezeigt. Das Ändern der Zeitzone
             für ein erstelltes Objekt hat einen Effekt auf das Datum selbst. Daten sind immer
             relativ zu einer Zeitzone. Das Ändern der Zeitzone für ein
             <classname>Zend_Date</classname> Objekt ändert nicht die Zeit des
-            <classname>Zend_Date</classname> Objektes selbst. Man muß sich in Erinnerung halten das
-            Daten intern immer als Zeitpunkte und in der <acronym>GMT</acronym> gespeichert werden.
-            Eine Zeitzone bedeutet also wieviele Stunden subtrahiert oder addiert werden müssen um
-            die aktuelle globale Zeit für die eigene Zeitzone und Region er erhalten.
+            <classname>Zend_Date</classname> Objektes selbst. Man muß sich in Erinnerung halten,
+            dass Daten intern immer als Zeitpunkte und in der <acronym>GMT</acronym> gespeichert
+            werden. Eine Zeitzone bedeutet also wieviele Stunden subtrahiert oder addiert werden
+            müssen, um die aktuelle globale Zeit für die eigene Zeitzone und Region zu erhalten.
         </para>
 
         <para>
-            Das koppeln der Zeitzone innerhalb von <classname>Zend_Date</classname> hat einen
+            Das Koppeln der Zeitzone innerhalb von <classname>Zend_Date</classname> hat einen
             anderen positiven Nebeneffekt. Es ist möglich verschiedene Daten mit verschiedenen
             Zeitzonen zu haben.
         </para>
@@ -321,8 +322,8 @@ print $date->getIso();
 
             <programlisting language="php"><![CDATA[
 // Setzen einer Standardzeitzone... das muß in der Bootstrap Datei oder
-// php.ini gemacht werden. Wir setzen Sie hier nur der Vollständigkeit
-// halber um ein komplettes Beispiel zu erhalten.
+// php.ini gemacht werden. Wir setzen diese hier nur der Vollständigkeit
+// halber, um ein komplettes Beispiel zu erhalten.
 date_default_timezone_set('Europe/Vienna');
 
 // Erstellen des Datumsobjektes

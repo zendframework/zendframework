@@ -13,9 +13,9 @@
 
     <note>
         <para>
-            Alle Beispiele in diesem Kapitel verwenden einen öfentlichen, generellen
+            Alle Beispiele in diesem Kapitel verwenden einen öffentlichen, generellen
             Zeitserver: <emphasis>0.europe.pool.ntp.org</emphasis>.
-            Man sollte einen öffentlichen, generellen Zeitserver verwenden der in der Nähe
+            Man sollte einen öffentlichen, generellen Zeitserver verwenden, der in der Nähe
             des eigenen Anwendungsservers steht. Siehe
             <ulink url="http://www.pool.ntp.org">http://www.pool.ntp.org</ulink> für Informationen.
         </para>
@@ -26,8 +26,8 @@
         <title>Generelle Anfragen von Zeitserver</title>
 
         <para>
-            Die Anfrage der Zeit von einem Zeitserver ist einfach. Zuerst gibt man den Zeitserver an
-            von dem man die Zeit anfragen will.
+            Die Anfrage der Zeit von einem Zeitserver ist einfach. Zuerst gibt man den Zeitserver,
+            von dem man die Zeit anfragen will, an.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -41,9 +41,9 @@ print $server->getDate()->getIso();
             der Syntax des Timeservers geprüft. In unserem Beispiel wird also
             '<emphasis>0.pool.ntp.org</emphasis>' geprüft und als möglicherweise richtige Adresse
             für einen Zeitserver erkannt. Wenn jetzt <methodname>getDate()</methodname> aufgerufen
-            wird, wird der aktuell gesetzte Zeitserver angefragt und er gibt seine eigene Zeit
+            wird, wird der aktuell gesetzte Zeitserver angefragt und dieser gibt dessen eigene Zeit
             zurück. <classname>Zend_TimeSync</classname> berechnet darauf die Differenz zur
-            aktuellen Zeit des Servers auf dem das Skript läuft und gibt ein
+            aktuellen Zeit des Servers, auf dem das Skript läuft, und gibt ein
             <classname>Zend_Date</classname> Objekt mit der korrigierten Zeit zurück.
         </para>
 
@@ -60,17 +60,17 @@ print $server->getDate()->getIso();
         <title>Mehrere Zeitserver</title>
 
         <para>
-            Nicht alle Zeitserver sind immer erreichbar und geben Ihr Zeit zurück. Server können
-            wärend Ihrer Wartung nicht erreichbar sein. Senn die Zeit nicht vom Zeitserver angefragt
-            werden kann, erhält man eine Ausnahme.
+            Nicht alle Zeitserver sind immer erreichbar und geben eine Zeit zurück. Server können
+            wärend Wartungsarbeiten nicht erreichbar sein. Wenn die Zeit nicht vom Zeitserver
+            angefragt werden kann, erhält man eine Exception.
         </para>
 
         <para>
-            <classname>Zend_TimeSync</classname> ist eine einfache Lösung die mehrere Zeitserver
+            <classname>Zend_TimeSync</classname> ist eine einfache Lösung, die mehrere Zeitserver
             behandeln kann und einen automatischen Fallback Mechanismus bietet. Es gibt zwei
-            unterstützte Wege; man kann entweder ein Array von Zeitserver angeben wenn die Instanz
+            unterstützte Wege; man kann entweder ein Array von Zeitservern angeben wenn die Instanz
             erstellt wird, oder zusätzliche Zeitserver zur Instanz durch Verwendung der
-            <methodname>addServer()</methodname> Methode hinzufügen.
+            Methode <methodname>addServer()</methodname> hinzufügen.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -83,7 +83,7 @@ print $server->getDate()->getIso();
 ]]></programlisting>
 
         <para>
-            Es gibt keine Begrenzung in der Anzahl an Zeitservern die hinzugefügt werden können.
+            Es gibt keine Begrenzung in der Anzahl an Zeitservern, die hinzugefügt werden können.
             Wenn ein Zeitserver nicht erreicht werden kann, dann fällt
             <classname>Zend_TimeSync</classname> zurück und versucht den nächsten Zeitserver zu
             erreichen.
@@ -106,8 +106,8 @@ print $server->getDate()->getIso();
 ]]></programlisting>
 
         <para>
-            Die Benennung der Zeitserver gibt die Möglichkeit das ein spezieller Zeitserver
-            angefragt werden kann wie man später in diesem Kapitel sieht.
+            Die Benennung der Zeitserver gibt die Möglichkeit, dass ein spezieller Zeitserver
+            angefragt werden kann, wie man später in diesem Kapitel sieht.
         </para>
 
     </sect2>
@@ -119,15 +119,15 @@ print $server->getDate()->getIso();
         <para>
             Es gibt verschiedene Typen von Zeitservern. Die meisten öffentlichen Zeitserver
             verwenden <emphasis>NTP</emphasis> als Protokoll. Es sind auch
-            andere Zeit Synchronisations Prtokolle vorhanden.
+            andere Zeit Synchronisationsprotokolle vorhanden.
         </para>
 
         <para>
             Man kann das richtige Prokoll mit der Adresse des Zeitservers setzen. Aktuell gibt
-            es zwei Prokolle die von <classname>Zend_TimeSync</classname> unterstützt werden:
+            es zwei Prokolle, die von <classname>Zend_TimeSync</classname> unterstützt werden:
             <emphasis>NTP</emphasis> und <emphasis>SNTP</emphasis>. Das
             Standardprotokoll ist <emphasis>NTP</emphasis>. Wenn man nur <emphasis>NTP</emphasis>
-            verwendet kann das Protkoll in der Adresse, wie im vorherigen Beispiel gezeigt,
+            verwendet, kann man das Protokoll in der Adresse, wie im vorherigen Beispiel gezeigt,
             unterdrücken.
         </para>
 
@@ -153,14 +153,13 @@ print $server->getDate()->getIso();
         <title>Ports für Zeitserver verwenden</title>
 
         <para>
-            Wie bei jedes Protkoll im World Wide Web, verwenden das
-            <emphasis>NTP</emphasis> und <emphasis>SNTP</emphasis>
-            Protokoll Standardports. NTP verwendet den Port <emphasis>123</emphasis>,
-            und SNTP den Port <emphasis>37</emphasis>.
+            Wie bei jedes Protkoll im World Wide Web, verwenden die Protokolle
+            <emphasis>NTP</emphasis> und <emphasis>SNTP</emphasis> Standardports. NTP verwendet den
+            Port <emphasis>123</emphasis>, SNTP hingegen den Port <emphasis>37</emphasis>.
         </para>
 
         <para>
-            Aber manchmal differiert der Port den das Protokoll verwendet von Standard. Der zu
+            Aber manchmal weicht der, für ein Protokoll verwendete Port vom Standard ab. Der zu
             verwendende Port kann mit der Adresse für jeden Server definiert werden. Es muß nur
             die Nummer des Ports nach der Adresse hinzugefügt werden. Wenn kein Port definiert
             wurde, dann verwendet <classname>Zend_TimeSync</classname> den Standardport.
@@ -182,26 +181,26 @@ print $server->getDate()->getIso();
 
         <para>
             Es gibt nur eine Option in <classname>Zend_TimeSync</classname> die intern verwendet
-            wird: <emphasis>timeout</emphasis>. Man kann aber beliebige selbstdefinierte
-            Optionen verwenden wenn man will und diese auch Abfragen.
+            wird: <emphasis>timeout</emphasis>. Wenn gewünscht, können beliebige selbstdefinierte
+            Optionen verwendent und abgefragt werden.
         </para>
 
         <para>
             Die Option <emphasis>timeout</emphasis> definiert die Anzahl an Sekunden
-            nach der eine Verbindung als Abgebrochen erkannt wird wenn keine Antwort kommt. Der
+            nach der eine Verbindung als abgebrochen erkannt wird, wenn keine Antwort kommt. Der
             Standardwert ist <emphasis>1</emphasis>, was bedeutet das
-            <classname>Zend_TimeSync</classname> auf den nächsten Zeitserver zurückfällt wenn der
+            <classname>Zend_TimeSync</classname> auf den nächsten Zeitserver zurückfällt, wenn der
             angefragte Server nicht in einer Sekunde antwortet.
         </para>
 
         <para>
             Mit der <methodname>setOptions()</methodname> Methode kann jede Option gesetzt werden.
-            Diese Funktion akzeptiert ein Array wobei die Schlüssel die zu setzende Option sind und
+            Diese Funktion akzeptiert ein Array, wobei die Schlüssel die zu setzende Option sind und
             der Wert der Wert dieser Option. Jede vorher gesetzte Option wird mit dem neuen Wert
-            überschrieben. Wenn man wissen will welche Optionen gesetzt sind, kann die
+            überschrieben. Wenn man wissen will, welche Optionen gesetzt sind, kann die
             <methodname>getOptions()</methodname> Methode verwendet werden. Sie akzeptiert entweder
-            einen Schlüssel welcher die gegebene Option zurückgibt wenn diese gesetzt ist, oder,
-            wenn kein Schlüssel angegeben wird, gibt Sie alle gesetzten Optionen zurück.
+            einen Schlüssel, der die gegebene Option zurückgibt sofern diese gesetzt ist, oder,
+            wenn kein Schlüssel angegeben wird, gibt sie alle gesetzten Optionen zurück.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -216,7 +215,7 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
 ]]></programlisting>
 
         <para>
-            Wie man sieht sind die Optionen für <classname>Zend_TimeSync</classname> statisch. Jede
+            Wie man sieht, sind die Optionen für <classname>Zend_TimeSync</classname> statisch. Jede
             Instanz von <classname>Zend_TimeSync</classname> verwendet die gleichen Optionen.
         </para>
 
@@ -228,11 +227,11 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
 
         <para>
             <classname>Zend_TimeSync</classname>'s Standardverhalten für die Anfrage einer Zeit ist
-            diese vom ersten gegebenen Server anzufragen. Manchmal ist es aber sinnvoll einen
-            anderen Zeitserver zu setzen von dem die Zeit abgefragt werden soll. Das kann mit der
+            diese vom ersten gegebenen Server anzufragen. Manchmal ist es aber sinnvoll, einen
+            anderen Zeitserver zu setzen, von dem die Zeit abgefragt werden soll. Das kann mit der
             <methodname>setServer()</methodname> Methode getan werden. Um den zu verwendenden
-            Zeitserver zu definieren muß einfach der Alias als Parameter in dieser Methode gesetzt
-            werden. Und um den aktuell verwendeten Zeitserver zu erhalten kann die
+            Zeitserver zu definieren, muss einfach der Alias als Parameter in dieser Methode gesetzt
+            werden. Und um den aktuell verwendeten Zeitserver zu erhalten, kann die
             <methodname>getServer()</methodname> Methode aufgerufen werden. Wenn kein Parameter
             angegeben wird, wird der aktuelle Zeitserver zurückgegeben.
         </para>
@@ -253,7 +252,7 @@ $server = $server->setServer('additional');
         <title>Informationen von Zeitservern</title>
 
         <para>
-            Zeitserver bieten nicht nur die Zeit selbst sondern auch zusätzliche Informationen.
+            Zeitserver bieten nicht nur die Zeit selbst, sondern auch zusätzliche Informationen.
             Man kann diese Informationen mit der <methodname>getInfo()</methodname> Methode
             erhalten.
         </para>
@@ -266,8 +265,8 @@ print_r ($server->getInfo());
 ]]></programlisting>
 
         <para>
-            Die zurückgegebenen Informationen unterscheiden sich im verwendeten Protokoll und sie
-            unterscheiden sich auch im verwendeten Server.
+            Die zurückgegebenen Informationen unterscheiden sich im verwendeten Protokoll und im
+            verwendeten Server.
         </para>
 
     </sect2>
@@ -277,8 +276,8 @@ print_r ($server->getInfo());
         <title>Behandeln von Ausnahmen</title>
 
         <para>
-            Ausnahmen werden für alle Zeitserver gesammelt und werden als Array zurückgegeben. Es
-            ist also möglich durch alle geworfenen Ausnahmen zu laufen wie im folgenden Beispiel
+            Ausnahmen werden für alle Zeitserver gesammelt und als Array zurückgegeben. Es ist also
+            möglich, durch alle geworfenen Ausnahmen zu laufen, wie im folgenden Beispiel gezeigt:
             gezeigt:
         </para>
 

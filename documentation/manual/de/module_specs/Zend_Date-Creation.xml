@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 18427 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 18427 -->
 <sect1 id="zend.date.creation">
     <title>Erstellen von Datumswerten</title>
 
     <para>
-        <classname>Zend_Date</classname> unterstützt viele verschiedene Wege um eine neue Instanz
+        <classname>Zend_Date</classname> unterstützt viele verschiedene Wege, um eine neue Instanz
         von sich selbst zu erstellen. Da es verschiedene Notwendigkeiten gibt, werden die bequemsten
         Wege in diesem Kapitel gezeigt.
     </para>
@@ -14,21 +14,21 @@
         <title>Erstellen des aktuellen Datums</title>
 
         <para>
-            Der einfachste Weg der Erstellung eines Datumsobjektes ist es ein aktuelles Datum zu
+            Der einfachste Weg der Erstellung eines Datumsobjektes ist es, ein aktuelles Datum zu
             erstellen. Man kann entweder eine neue Instanz mit <command>new Zend_Date()</command>
-            erstellen, oder die bequemere statische Methode
-            <methodname>Zend_Date::now()</methodname> verwenden wobei beide das aktuelle Datum als
-            neue Instanz von <classname>Zend_Date</classname> zurückgeben. Das aktuelle Datum
-            enthält immer das aktuelle Datum und die Zeit für die aktuell gesetzte Zeitzone.
+            erstellen oder die bequemere statische Methode <methodname>Zend_Date::now()</methodname>
+            verwenden, wobei beide das aktuelle Datum als neue Instanz von
+            <classname>Zend_Date</classname> zurückgeben. Das aktuelle Datum enthält immer das
+            Datum und die Zeit der aktuell gesetzten Zeitzone.
         </para>
 
         <example id="zend.date.creation.actual.example-1">
             <title>Datum durch Instanz erstellen</title>
 
             <para>
-                Datumserstellung durch Erzeugen einer neuen Instanz bedeutet das man keinen
-                Parameter angeben muß. Natürlich gibt es mehrere Parameter die später beschrieben
-                werden aber normalerweise ist das der einfachste und meist genutzte Weg um das
+                Datumserstellung durch Erzeugen einer neuen Instanz bedeutet, dass man keinen
+                Parameter angeben muß. Natürlich gibt es mehrere Parameter, die später beschrieben
+                werden. Normalerweise ist das jedoch der einfachste und meist genutzte Weg, um das
                 aktuelle Datum als <classname>Zend_Date</classname> Instanz zu erhalten.
             </para>
 
@@ -41,12 +41,12 @@ $date = new Zend_Date();
             <title>Statische Erstellung eines Datums</title>
 
             <para>
-                Machmal ist es einfacher eine statische Methode für die Erstellung eines Datums zu
+                Machmal ist es einfacher, eine statische Methode für die Erstellung eines Datums zu
                 verwenden. Hierfür kann die <emphasis><methodname>now()</methodname></emphasis>
                 Methode verwendet werden. Sie gibt eine neue Instanz von
-                <classname>Zend_Date</classname> auf die gleiche Art und Weise zurück wie wenn man
-                <command>new Zend_Date()</command> Verwenden würde. Es wird aber immer das aktuelle
-                Datum zurückgegeben und das kann auch nur durch die Angabe von optionalen
+                <classname>Zend_Date</classname> auf die gleiche Art und Weise zurück, wie wenn man
+                <command>new Zend_Date()</command> verwenden würde. Es wird aber immer das aktuelle
+                Datum zurückgegeben. Dieses Verhalten kann auch nur durch die Angabe von optionalen
                 Parametern geändert werden.
             </para>
 
@@ -60,20 +60,21 @@ $date = Zend_Date::now();
         <title>Erstellen von Datumswerten von einer Datenbank</title>
 
         <para>
-            Datenbanken werden oft verwendet um Datumswerte zu speichern. Aber das Problem ist, das
-            jede Datenbank Ihre Datumswerte in einem anderen Weg ausgibt. <emphasis>MsSQL</emphasis>
-            Datenbanken verwenden eine etwas andere Standardausgabe von Datumswerten als
-            <emphasis>MySQL</emphasis> Datenbanken. Aber zur Vereinfachung macht es
+            Datenbanken werden oft verwendet, um Datumswerte zu speichern. Das Problem ist dabei,
+            dass jede Datenbank Ihre Datumswerte in einer anderen Form ausgibt.
+            <emphasis>MsSQL</emphasis> Datenbanken verwenden eine etwas andere Standardausgabe von
+            Datumswerten als <emphasis>MySQL</emphasis> Datenbanken. Zur Vereinfachung macht es
             <classname>Zend_Date</classname> sehr simpel ein Datum von einem Datumswert einer
             Datenbank zu erstellen.
         </para>
 
         <para>
-            Natürlich kann jeder Datenbank gesagt werden das Sie die Ausgabe einer definierten
-            Spalte in einen speziellen Wert konvertiert. Zum Beispiel können ein
-            <emphasis>datetime</emphasis> Wert so konvertiert werden das ein Minutenwert ausgegeben
-            wird. Aber das benötigt viel Zeit und oft müssen Datumswerte auf eine andere Art und
-            Weise bearbeitet werden als bei der Erstellung der Datenbankabfrage gedacht wurde.
+            Natürlich kann jeder Datenbank mitgeteilt werden, dass diese die Ausgabe einer
+            definierten Spalte in einen speziellen Wert konvertiert. Zum Beispiel können ein
+            <emphasis>datetime</emphasis> Wert so konvertiert werden, dass ein Minutenwert
+            ausgegeben wird. Aber das benötigt viel Zeit und oft müssen Datumswerte auf eine andere
+            Art und Weise bearbeitet werden, als bei der Erstellung der Datenbankabfrage gedacht
+            wurde.
         </para>
 
         <para>
@@ -85,12 +86,13 @@ $date = Zend_Date::now();
             <title>Schnelle Erstellung eines Datums von Datumswerten einer Datenbank</title>
 
             <para>
-                Von allen Datenbanken ist bekannt das Sie Abfragen so schnell wie möglich
-                bearbeiten. Sie wurden erstellt um schnell zu arbeiten und zu antworten. Der
-                Schnellste Weg um Datumswerte zu bearbeiten ist es aus der Datenbank Unit Timestamps
-                zu erhalten. Alle Datenbanken speichern Datumswerte intern als Timestamps (nicht
-                Unix Timestamps). Das bedeutet das die Zeit für die Erstellung eines Timestamps
-                durch eine Abfrage viel kleiner ist als die Konvertierung in ein spezielles Format.
+                Von allen Datenbanken ist bekannt, dass Abfragen so schnell wie möglich bearbeitet
+                werden. Sie wurden erstellt um schnell zu arbeiten und zu antworten. Der
+                schnellste Weg um Datumswerte zu bearbeiten ist es aus der Datenbank
+                <acronym>UNIX</acronym> Timestamps zu erhalten. Alle Datenbanken speichern
+                Datumswerte intern als Timestamps (nicht UNIX Timestamps). Das bedeutet, dass die
+                Zeit für die Erstellung eines Timestamps durch eine Abfrage viel kleiner ist, als
+                die Konvertierung in ein spezielles Format.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -103,18 +105,18 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
             <title>Bequeme Erstellung eines Datums von Datumswerten einer Datenbank</title>
 
             <para>
-                Die Standardausgabe von allen Datenbanken ist leicht unterschiedlich selbst wenn
-                diese auf den ersten Blick gleich ausschauen. Aber alle sind Teil des
-                <acronym>ISO</acronym> Standards und durch Ihn beschrieben. Deshalb liegt der
-                einfachste Weg ein Datum zu erstellen in der Verwendung von
-                <constant>Zend_Date::ISO_8601</constant>. Datenbanken von denen bekannt ist das
-                Sie durch <constant>Zend_Date::ISO_8601</constant> erkannt werden sind zum
+                Die Standardausgabe von allen Datenbanken ist leicht unterschiedlich, selbst wenn
+                diese auf den ersten Blick gleich aussehen. Aber alle sind Teil des
+                <acronym>ISO</acronym> Standards und durch diesen beschrieben. Deshalb liegt der
+                einfachste Weg ein Datum zu erstellen, in der Verwendung von
+                <constant>Zend_Date::ISO_8601</constant>. Datenbanken, von denen bekannt ist, dass
+                diese durch <constant>Zend_Date::ISO_8601</constant> erkannt werden, sind zum
                 Beispiel <emphasis>MySQL</emphasis> und <emphasis>MsSQL</emphasis>. Aber alle
                 Datenbanken können eine <acronym>ISO-8601</acronym> Repräsentation von Datumsspalten
-                ausgeben. <acronym>ISO-8601</acronym> hat den großen Vorteil das es menschlich
-                lesbar ist. Der Nachteil ist das <acronym>ISO-8601</acronym> mehr Zeit zur
-                Berechnung benötigt als ein einfacher Unix Timestamp. Es soll auch erwähnt werden
-                das Unix Timestamps nur für Datumswerte nach dem 1 Jänner 1970 unterstützt werden.
+                ausgeben. <acronym>ISO-8601</acronym> hat den großen Vorteil, dass es menschlich
+                lesbar ist. Der Nachteil ist, dass <acronym>ISO-8601</acronym> mehr Zeit zur
+                Berechnung benötigt, als ein einfacher UNIX Timestamp. Es soll auch erwähnt werden
+                das UNIX Timestamps nur für Datumswerte nach dem 1. Januar 1970 unterstützt werden.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -176,8 +178,8 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
 
             <para>
                 Normalerweise wird ein komplettes Datumsarray für die Erstellung einer neuen Instanz
-                des Datums angegeben werden. Aber wenn nicht alle Werte angegeben werden, werden die
-                nicht angegebenen Arraywerte genullt. Das bedeutet das wenn z.B. keine Stunde
+                des Datums angegeben werden. Wenn nicht alle Werte angegeben werden, werden die
+                nicht angegebenen Arraywerte genullt. Das bedeutet, dass wenn z.B. keine Stunde
                 angegeben wird, die Stunde <emphasis>0</emphasis> verwendet wird.
             </para>
 

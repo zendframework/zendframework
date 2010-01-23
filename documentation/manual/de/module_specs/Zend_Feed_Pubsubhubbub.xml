@@ -75,27 +75,29 @@
         </para>
 
         <para>
-            A Subscriber is any party or application which subscribes to one or more Hubs to receive
-            updates from a Topic hosted by a Publisher. The Subscriber never directly communicates
-            with the Publisher since the Hub acts as an intermediary, accepting subscriptions and
-            sending updates to subscribed Subscribers. The Subscriber therefore communicates only
-            with the Hub, either to subscribe/unsubscribe to Topics, or when it receives updates
-            from the Hub. This communication design ("Fat Pings") effectively removes the possibility of
-            a "Thundering Herd" issue. This occurs in a pubsub system where the Hub merely informs
-            Subscribers that an update is available, prompting all Subscribers to immediately retrieve
-            the feed from the Publisher giving rise to a traffic spike. In Pubsubhubbub, the Hub
-            distributes the actual update in a "Fat Ping" so the Publisher is not subjected to any
-            traffic spike.
+            Ein Abonnent ist jedes Mitglied oder jede Anwendung welche einen oder mehrere Hubs
+            abonniert um Aktuslisierungen von einem Thema zu empfangen welches von einem Publizisten
+            gehostet wird. Der Abonnent kommuniziert niemals direkt mit dem Publizisten da der Hub
+            als Zwischenglied fungiert welches Abos akzeptiert und Aktualisierungen an Abonnenten
+            sendet. Der Abonnent kommuniziert seinerseits nur mit dem Hub um Themen entweder zu
+            abonnieren und Abos zu entfernen, oder wenn er Aktualisierungen vom Hub empfängt. Dieses
+            Design der Kommunikation ("Fat Pings") entfernt effektiverweise die Möglichkeit eines
+            "Thundering Herd" Problems. Dieses findet in einem Pubsub System statt in dem der Hub
+            Abonnenten über eine vorhandene Aktualisierung informiert, und alle Abonnenten dazu
+            auffordert den Feed sofort vom Publizisten zu empfangen, was zu einer Verkehrsspitze
+            führt. In Pubsubhubbub verteilt der Hub das aktuelle Update in einem "Fat Ping" so dass
+            der Publizist keine Verkehrsspitze aushalten muss.
         </para>
 
         <para>
-            <classname>Zend_Feed_Pubsubhubbub</classname> implements Pubsubhubbub Publishers and
-            Subscribers with the
-            classes <classname>Zend_Feed_Pubsubhubbub_Publisher</classname> and
-            <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname>. In addition, the Subscriber
-            implementation may handle any feed updates forwarded from a Hub by using
-            <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>.  These classes, their
-            use cases, and APIs are covered in subsequent sections.
+            <classname>Zend_Feed_Pubsubhubbub</classname> implementiert Pubsubhubbub Publizisten und
+            Abonnenten mit den Klassen <classname>Zend_Feed_Pubsubhubbub_Publisher</classname> und
+            <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname>. Zusätzlich kann die
+            Implementation des Abonnenten alle Feed Aktualisierungen behandeln die von einem Hub
+            weitergeleitet werden indem
+            <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> verwendet wird. Diese
+            Klassen, deren Verwendungszweck, und die APIs werden in den weiterführenden Abschnitten
+            behandelt.
         </para>
     </sect2>
 

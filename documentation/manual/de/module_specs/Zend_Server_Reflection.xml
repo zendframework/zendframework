@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 17175 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 17175 -->
 <sect1 id="zend.server.reflection">
     <title>Zend_Server_Reflection</title>
 
@@ -11,15 +11,17 @@
             <classname>Zend_Server_Reflection</classname> stellt einen Standardmechanismus für
             Funktion und Klassen Introspektion für die Verwendung der Serverklassen bereit. Es
             basiert auf der <acronym>PHP</acronym> 5 Reflection <acronym>API</acronym> und erweitert
-            es, um Methoden für die Erhaltung von Parameter und Rückgabewerttypen und Beschreibung,
-            eine komplette Liste mit Funktion und Methoden Prototypen (d.h. alle möglichen, gültigen
-            Aufrufkombinationen) sowie Funktions- und Methodenbeschreibungen bereit zu stellen.
+            diese, um Methoden für die Erhaltung von Parameter und Rückgabewerttypen und
+            Beschreibung, eine komplette Liste mit Funktion und Methoden Prototypen (d.h.
+            alle möglichen, gültigen Aufrufkombinationen) sowie Funktions- und
+            Methodenbeschreibungen bereit zu stellen.
         </para>
         <para>
             Normalerweise wird diese Funktionalität nur von Entwicklern von Serverklassen für das
             Framework verwendet.
         </para>
     </sect2>
+
     <sect2 id="zend.server.reflection.usage">
         <title>Verwendung</title>
 
@@ -65,6 +67,3 @@ $reflection->getNamespace();
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -2,7 +2,7 @@
 <!-- EN-Revision: 20232 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.oauth.introduction.security-architecture">
-    <title>Security Architecture</title>
+    <title>Architektur der Sicherheit</title>
 
     <para>
         OAuth was designed specifically to operate over an insecure HTTP connection and so the use

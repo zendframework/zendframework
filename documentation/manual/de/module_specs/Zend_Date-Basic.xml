@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 17597 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 17597 -->
 <sect1 id="zend.date.basic">
-
     <title>Basis Methoden</title>
 
     <para>
@@ -16,31 +15,31 @@
     </para>
 
     <para>
-        Das Setzen eines Datums ohne Zeit bedeutet das die Zeit auf 00:00:00 gesetzt wird. Genauso
-        bedeutet das Setzen einer Zeit ohne Datum das Intern das Datum auf 01.01.1970 gesetzt wird
-        inklusive der Anzahl an Sekunden welche der vergangenen Stunden, Minuten und Sekunden der
-        angegebenen Zeit entsprechen. Normalerweise messen Personen Dinge von einem Startpunkt aus,
-        wie das Jahr 0 A.D. Trotzdem, verwenden die meisten Softwaresysteme die erste Sekunde des
-        Jahres 1970 als Startpunkt und bezeichnen Zeiten als Abstand zum Zeitpunkt durch Zählen der
-        Anzahl an Sekunden die seit diesem dem Startpunkt vergangen sind.
+        Das Setzen eines Datums ohne Zeit bedeutet, dass die Zeit auf 00:00:00 gesetzt wird. Genauso
+        bedeutet das Setzen einer Zeit ohne Datum, dass intern das Datum auf 01.01.1970 inklusive
+        der Anzahl an Sekunden welche der vergangenen Stunden, Minuten und Sekunden der angegebenen
+        Zeit entsprechen, gesetzt wird . Normalerweise messen Personen Dinge von einem Startpunkt
+        aus, wie das Jahr 0 A.D. Trotzdem verwenden die meisten Softwaresysteme die erste Sekunde
+        des Jahres 1970 als Startpunkt und bezeichnen Zeiten als Abstand zum Zeitpunkt durch Zählen
+        der Anzahl an Sekunden, die seit diesem dem Startpunkt vergangen sind.
     </para>
 
     <sect2 id="zend.date.basic.creation">
-
         <title>Aktuelles Datum</title>
 
         <para>
-            Ohne jegliche Argumente bedeutet die Erstellung einer Instanz das ein Objekt mit dem
+            Ohne jegliche Argumente bedeutet die Erstellung einer Instanz, dass ein Objekt mit dem
             aktuellen Gebietsschema und dem aktuellen lokalen Datum zurückgegeben wird, durch
             Verwendung von <acronym>PHP</acronym>'s <methodname>time()</methodname> Funktion um den
             aktuellen <ulink url="http://en.wikipedia.org/wiki/Unix_Time">UNIX Zeitpunkt</ulink> für
-            das Objekt zu erhalten. Man muß sicherstellen das die <acronym>PHP</acronym> Umgebung
+            das Objekt zu erhalten. Man muß sicherstellen, dass die <acronym>PHP</acronym> Umgebung
             die richtige <link linkend="zend.date.setdefaulttimezone">Standardzeitzone</link>
             gesetzt hat.
         </para>
 
         <example id="zend.date.basic.creation.example-1">
             <title>Erstellen des aktuellen Datums</title>
+
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -48,11 +47,9 @@ $date = new Zend_Date();
 print $date;
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.date.basic.functions">
-
         <title>Zend_Date durch Beispiele</title>
 
         <para>
@@ -63,18 +60,18 @@ print $date;
         </para>
 
         <sect3 id="zend.date.simple.functions.get">
-
             <title>Ein Datum ausgeben</title>
 
             <para>
                 Ein Datum in einem <classname>Zend_Date</classname> Objekt kann als Integer oder
-                lokalisierte Zeichenkette ausgegeben werden indem man die
-                <methodname>get()</methodname> Methode verwendet. Es gibt viele Optionen welche
+                lokalisierte Zeichenkette ausgegeben werden, indem man die
+                <methodname>get()</methodname> Methode verwendet. Es gibt viele Optionen, welche
                 in einer späteren Sektion beschrieben werden.
             </para>
 
             <example id="zend.date.simple.functions.get.example-1">
                 <title>get() - Ausgabe eines Datums</title>
+
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -82,11 +79,9 @@ $date = new Zend_Date();
 print $date->get();
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.date.simple.functions.set">
-
             <title>Setzen eines Datums</title>
 
             <para>
@@ -98,6 +93,7 @@ print $date->get();
 
             <example id="zend.date.simple.functions.set.example-1">
                 <title>set() - Setzen eines Datums</title>
+
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -106,11 +102,9 @@ $date->set('13:00:00',Zend_Date::TIMES);
 print $date->get(Zend_Date::W3C);
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.date.simple.functions.add">
-
             <title>Addieren und Subtrahieren von Daten</title>
 
             <para>
@@ -124,6 +118,7 @@ print $date->get(Zend_Date::W3C);
 
             <example id="zend.date.simple.functions.add.example-1">
                 <title>add() - Addieren von Daten</title>
+
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -137,11 +132,9 @@ echo "Datum über get() = ", $date->get(Zend_Date::W3C), "\n";
 echo "Datum über toString() = ", $date, "\n";
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.date.simple.functions.compare">
-
             <title>Vergleichen von Daten</title>
 
             <para>
@@ -155,6 +148,7 @@ echo "Datum über toString() = ", $date, "\n";
 
             <example id="zend.date.simple.functions.compare.example-1">
                 <title>compare() - Vergleichen von Daten</title>
+
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -174,6 +168,7 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
 
             <example id="zend.date.simple.functions.compare.example-2">
                 <title>equals() - Identifizieren eines Datums oder Datumsabschnittes</title>
+
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -185,12 +180,6 @@ if ($date->equals(10, Zend_Date::HOUR)) {
 }
 ]]></programlisting>
             </example>
-
         </sect3>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

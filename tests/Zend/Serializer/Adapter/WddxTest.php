@@ -177,3 +177,31 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
     }
 
 }
+
+
+/**
+ * @category   Zend
+ * @package    Zend_Serializer
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class Zend_Serializer_Adapter_WddxSkipTest extends PHPUnit_Framework_TestCase
+{
+    public $message = null;
+
+    public function setUp()
+    {
+        $message = 'Skipped Zend_Serializer_Adapter_WddxTest';
+        if ($this->message) {
+            $message.= ': ' . $this->message;
+        }
+        $this->markTestSkipped($message);
+    }
+
+    public function testEmpty()
+    {
+        // this is here only so we have at least one test
+    }
+}
+

@@ -5,18 +5,20 @@
     <title>Zend_Application_Resource_Multidb</title>
 
     <para>
-        <classname>Zend_Application_Resource_Multidb</classname> is used to initialize
-        multiple Database connections. You can use the same options as you can with
-        the <link linkend="zend.application.available-resources.db">Db Resource Plugin</link>.
-        However, for specifying a default connection, you can also use the 'default' directive.
+        <classname>Zend_Application_Resource_Multidb</classname> est utilisé pour initialiser de
+        multiples connexions vers des bases de données. Vous pouvez utiliser les mêmes options
+        qu'avec le <link
+            linkend="zend.application.available-resources.db">plugin de ressource Db</link>.
+        Cependant, pour spécifier une connexion par défaut, vous pouvez aussi utiliser la directive
+        'default'.
     </para>
 
     <example id="zend.application.available-resources.multidb.configexample">
-        <title>Setting up multiple Db Connections</title>
+        <title>Paramétrer de multiples connexions vers des bases de données</title>
 
         <para>
-            Below is an example <acronym>INI</acronym> configuration that can be used to initialize
-            two Db Connections.
+            Ci-dessous vous avez un exemple de configuration <acronym>INI</acronym> montrant
+            l'initialisation de deux connexions.
         </para>
 
         <programlisting language="ini"><![CDATA[
@@ -37,16 +39,16 @@ resources.multidb.db2.default = true
     </example>
 
     <example id="zend.application.available-resources.multidb.retrieveSpecificDb">
-        <title>Retrieving a specific database adapter</title>
+        <title>Récupérer un adaptateur de bases de données spécifique</title>
 
         <para>
-            When using this resource plugin you usually will want to retrieve
-            a specific database. This can be done by using the resource's
-            <methodname>getDb()</methodname>. The method
-            <methodname>getDb()</methodname> returns an instance of a class that
-            extends <classname>Zend_Db_Adapter_Abstract</classname>. If you have not
-            set a default database, an exception will be thrown when this method
-            is called without specifying a parameter.
+            Lorsque vous utilisez ce plugin de ressource, vous aurez sans doute besoin de
+            récupérer un adaptateur spécifique. Ceci peut être réalisé en utilisant la
+            méthode <methodname>getDb()</methodname>. La méthode
+            <methodname>getDb()</methodname> retourne l'instance d'une classe qui étend
+            <classname>Zend_Db_Adapter_Abstract</classname>. Si vous n'avez pas activé
+            un adaptateur par défaut, une exception sera levée lorsque vous appelerez
+            cette méthode sans lui fournir de paramètre.
          </para>
 
         <programlisting language="php"><![CDATA[
@@ -58,27 +60,26 @@ $defaultDb = $resource->getDb();
     </example>
 
     <example id="zend.application.available-resources.multidb.retrieveDefaultDb">
-        <title>Retrieving the default database adapter</title>
+        <title>Récupérer l'adaptateur de base de données par défaut</title>
 
         <para>
-            Additionally, you can retrieve the default database adapter
-            by using the method <methodname>getDefaultDb()</methodname>.
-            If you have not set a default adapter, the first configured db
-            adapter will be returned. Unless you specify <constant>FALSE</constant>
-            as first parameter, then <constant>NULL</constant>
-            will be returned when no default database adapter was set.
+            De plus, vous pouvez récupérer l'adaptateur par défaut en utilisant la méthode
+            <methodname>getDefaultDb()</methodname>. Si vous n'avez pas activé d'adaptateur
+            par défaut, le premier configuré sera retourné. Si vous spécifiez
+            <constant>FALSE</constant> en tant que premier paramètre, alors vous récupérez
+            <constant>NULL</constant> si adaptateur par défaut n'est configuré.
          </para>
 
         <para>
-            Below is an example that assumes the Multidb resource plugin has been configured
-            with the <acronym>INI</acronym> sample above:
+            Ci-dessous vous avez un exemple qui suppose que le plugin de ressource Multidb
+            a été configuré avec l'exemple <acronym>INI</acronym> ci-dessus&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
 $resource = $bootstrap->getPluginResource('multidb');
 $db2 = $resource->getDefaultDb();
 
-// Same config, but now without a default db:
+// Même config, mais maintenant sans adaptateur par défaut :
 $db1 = $resource->getDefaultDb();
 $null = $resource->getDefaultDb(false); // null
 ]]></programlisting>

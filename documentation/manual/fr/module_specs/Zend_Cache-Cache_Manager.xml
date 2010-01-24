@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20374 -->
+<!-- EN-Revision: 20176 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.cache.manager">
     <title>Le gestionnaire de Cache</title>
 
     <para>
         Une application comporte par nature plusieurs caches de types différents fonctions du
-        contrôleur ou du model accédé. Afin de faciliter la création et la manipulation des caches
-        par exemple en bootstrap, <classname>Zend_Cache_Manager</classname> a été créee. Cette classe
-        est accompagnée de <classname>Zend_Application_Resource_Cachemanager</classname> pour tout ce qui
-        concerne le bootstrap et <classname>Zend_Controller_Action_Helper_Cache</classname> afin d'accéder
-        aux caches depuis les contrôleurs et autres aides d'action.
+        contrôleur ou du modèle accédé. Afin de faciliter la création et la manipulation des
+        options de <classname>Zend_Cache</classname> au plus tôt (par exemple en bootstrap),
+        <classname>Zend_Cache_Manager</classname> a été créée. Cette
+        classe est accompagnée de <classname>Zend_Application_Resource_Cachemanager</classname>
+        pour tout ce qui concerne le bootstrap et
+        <classname>Zend_Controller_Action_Helper_Cache</classname> afin d'accéder aux caches
+        depuis les contrôleurs et autres aides d'action.
     </para>
 
     <para>
-        Le gestionnaire de cache utilise des templates, ce sont en fait des ensembles de configurations
-        valides pour un cache. Ces templates s'enregistrent grâce à
-        <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname> et ne donnent naissance à un objet de
-        cache que lorsque <methodname>Zend_Cache_Manager::getCache()</methodname> sera appelée.
+        Le gestionnaire de cache utilise des templates, ce sont en fait des ensembles de
+        configurations valides pour un cache. Ces templates s'enregistrent grâce à
+        <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname> et ne donnent naissance
+        à un objet de cache que lorsque <methodname>Zend_Cache_Manager::getCache()</methodname>
+        sera appelée.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -49,7 +52,7 @@ $databaseCache = $manager->getCache('database');
 
     <para>
         Le gestionnaire autorise aussi l'enregistrement d'objets de cache préalablement
-        crées, ceci grâce à la méthode <methodname>Zend_Cache_Manager::setCache()</methodname>.
+        créés, ceci grâce à la méthode <methodname>Zend_Cache_Manager::setCache()</methodname>.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -114,8 +117,11 @@ if ($manager->hasCache('database')) {
 ]]></programlisting>
 
     <para>
-        Il est possible de modifier la configuration d'un template de cache après l'avoir saisie,
-        ceci au moyen de <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname>.
+        Dans certains cas, vous pouvez avoir défini un certain de cas d'utilisation avec
+        <classname>Zend_Cache_Manager</classname>, mais vous avez besoin de préciser un option
+        dans un cas particulier. Il est alors possible de modifier la configuration d'un template
+        de cache après l'avoir saisie, ceci au moyen de
+        <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname>.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -176,16 +182,16 @@ $databaseCache = $manager->getCache('database');
 
     <para>
         Aussi, <classname>Zend_Cache_Manager</classname> inclut déja quatre templates prédéfinis
-        "skeleton", "default", "page" et "tagcache". Le cache "default" utilise des fichiers comme stockage
-        et un Core comme frontend, il s'attend à posséder un dossier cache_dir appelé "cache" au même niveau
-        que le dossier normalisé "public" dans une application Zend Framework.
-        Le cache "skeleton" est un cache <constant>NULL</constant>, il ne comporte pas d'options.
-        Les 2 autres caches sont utilisés avec des pages statiques dans lesquelles du
+        "skeleton", "default", "page" et "tagcache". Le cache "default" utilise des fichiers
+        comme stockage et un Core comme frontend, il s'attend à posséder un dossier cache_dir
+        appelé "cache" au même niveau que le dossier normalisé "public" dans une application Zend
+        Framework. Le cache "skeleton" est un cache <constant>NULL</constant>, il ne comporte pas
+        d'options. Les 2 autres caches sont utilisés avec des pages statiques dans lesquelles du
         <acronym>HTML</acronym>, <acronym>XML</acronym> ou encore <acronym>JSON</acronym>
         peut être stocké dans des fichiers statiques dans <filename>/public</filename>.
         Le contrôle sur les pages statiques est assuré par
-        <classname>Zend_Controller_Action_Helper_Cache</classname>, même si vous pouvez changer les options
-        "page", "tagcache" (par exemple) en utilisant
+        <classname>Zend_Controller_Action_Helper_Cache</classname>, même si vous pouvez changer
+        les options "page", "tagcache" (par exemple) en utilisant
         <methodname>Zend_Cache_Manager::setTemplateOptions()</methodname> ou même
         <methodname>Zend_Cache_Manager::setCacheTemplate()</methodname>.
     </para>

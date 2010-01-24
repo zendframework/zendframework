@@ -212,6 +212,20 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
         $this->_adapter->unserialize($value);
     }
 
+    /**
+     * ZF-8911 and PHP-Bug #46496
+     * This bug effects php < 5.2.7
+     *
+     * No workaround implemented !!! - This test failes on php < 5.2.7
+     */
+    public function testSerializeStringUtf8() {
+        $value    = "\xc2\xbf"; // &Xi;
+        $expected = '<wddxPacket version=\'1.0\'><header/>'
+                  . "<data><string>\xc2\xbf</string></data></wddxPacket>";
+        $data = $this->_adapter->serialize($value);
+        $this->assertEquals($expected, $data);
+    }
+
 }
 
 
@@ -239,5 +253,6 @@ class Zend_Serializer_Adapter_WddxSkipTest extends PHPUnit_Framework_TestCase
     {
         // this is here only so we have at least one test
     }
+
 }
 

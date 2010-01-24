@@ -257,6 +257,20 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<ul><li>blaat</li></ul>', $this->_markup->render('[list][*]blaat[/*][/list]'));
     }
 
+    public function testListDisallowingPlaintext()
+    {
+        $input = "[list]\ntest[*]Foo[/*]\n[/list]";
+        $expected = "<ul><li>Foo</li></ul>";
+        $this->assertEquals($expected, $this->_markup->render($input));
+    }
+
+    public function testFailureAfterCodeTag()
+    {
+        $input = "[code][b][/code][list][*]Foo[/*][/list]";
+        $expected = "<code>[b]</code><ul><li>Foo</li></ul>";
+        $this->assertEquals($expected, $this->_markup->render($input));
+    }
+
     public function testListTypes()
     {
         $types = array(

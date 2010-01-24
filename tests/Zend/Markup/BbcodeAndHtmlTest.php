@@ -253,6 +253,8 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
         $input = "[list][*]Foo*bar (item 1)\n[*]Item 2\n[*]Trimmed (Item 3)\n[/list]";
         $expected = "<ul><li>Foo*bar (item 1)</li><li>Item 2</li><li>Trimmed (Item 3)</li></ul>";
         $this->assertEquals($expected, $this->_markup->render($input));
+
+        $this->assertEquals('<ul><li>blaat</li></ul>', $this->_markup->render('[list][*]blaat[/*][/list]'));
     }
 
     public function testListTypes()

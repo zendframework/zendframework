@@ -119,7 +119,7 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
         ),
         '*' => array(
             'type'     => self::TYPE_DEFAULT,
-            'stoppers' => array(self::NEWLINE),
+            'stoppers' => array(self::NEWLINE, '[/*]', '[/]'),
         ),
         'hr' => array(
             'type'     => self::TYPE_SINGLE,

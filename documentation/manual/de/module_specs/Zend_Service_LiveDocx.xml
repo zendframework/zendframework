@@ -8,12 +8,12 @@
         <title>Einführung in LiveDocx</title>
 
         <para>
-            LiveDocx ist ein <acronym>SOAP</acronym> Service der es Entwicklern erlaubt Word
-            Dokumente zu erstellen indem strukturierte Daten von PHP mit einem Template kombiniert
-            werden, die in einer Word Bearbeitung erstellt wurden. Das resultierende Dokument kann
+            LiveDocx ist ein <acronym>SOAP</acronym>-Service, der es Entwicklern erlaubt, MS Word
+            Dokumente zu erstellen, indem strukturierte Daten von PHP mit einem Template kombiniert
+            werden, die in einer MS Word-kompatiblen Anwendung erstellt wurden. Das resultierende Dokument kann
             als <acronym>PDF</acronym>, <acronym>DOCX</acronym>, <acronym>DOC</acronym>,
             <acronym>HTML</acronym> oder <acronym>RTF</acronym> Datei gespeichert werden. LiveDocx
-            implementiert <ulink url="http://en.wikipedia.org/wiki/Mail_merge">mail-merge</ulink>
+            implementiert <ulink url="http://en.wikipedia.org/wiki/Mail_merge">Mail-Merge</ulink>
             in PHP.
         </para>
 
@@ -26,8 +26,8 @@
 
         <para>
             Wenn man, zusätzlich zu diesem Kapitel des Handbuchs, daran interessiert ist mehr
-            über <classname>Zend_Service_LiveDocx</classname> und das dahinterliegende
-            <acronym>SOAP</acronym> Service LiveDocx zu lernen, kann man bei den folgenden
+            über <classname>Zend_Service_LiveDocx</classname> und den dahinterliegenden
+            <acronym>SOAP</acronym>-Service LiveDocx zu lernen, kann man bei den folgenden
             Ressourcen nachsehen:
         </para>
 
@@ -37,8 +37,8 @@
                     <emphasis>Mitgelieferte Beispielanwendungen</emphasis>. Es gibt eine große
                     Anzahl an Beispielanwendungen im Verzeichnis
                     <emphasis>/demos/Zend/Service/LiveDocx</emphasis> der Zend Framework
-                    Distributiondatei, oder der Trunk Version die vom standardmäßigen SVN
-                    repository ausgecheckt werden kann. Diese sind dazu gedacht schnell, in nur
+                    Distributionsdatei, oder der Trunk Version die vom standardmäßigen SVN
+                    Repository ausgecheckt werden kann. Diese sind dazu gedacht, schnell, in nur
                     ein paar Minuten, mit <classname>Zend_Service_LiveDocx</classname> zurecht zu
                     kommen.
                 </para>
@@ -75,10 +75,10 @@
                 Bevor man damit beginnt LiveDocx zu verwenden muss man sich zuerst für einen Account
                 <ulink
                     url="https://www.livedocx.com/user/account_registration.aspx">anmelden</ulink>.
-                Der Account ist komplett kostenlos, und mann muss nur einen
+                Der Account ist komplett kostenlos, und es muss nur einen
                 <emphasis>Benutzernamen</emphasis>, ein <emphasis>Passwort</emphasis> und eine
-                <emphasis>E-Mail Adresse</emphasis> spezifizieren. Die Anmeldedaten werden mit der
-                Email Adresse verknüpft, welche man angibt, deshalb sollte man vorsichtig tippen.
+                <emphasis>E-Mail Adresse</emphasis> eingegeben werden. Die Anmeldedaten werden mit der
+                E-Mail-Adresse verknüpft, die man angibt, deshalb sollte man vorsichtig tippen.
             </para>
         </sect3>
 
@@ -89,20 +89,20 @@
                 LiveDocx unterscheidet zwischen den folgenden Ausdrücken: 1)
                 <emphasis>Template</emphasis> und 2) <emphasis>Dokument</emphasis>. Um die
                 Dokumentation und auch die aktuelle API vollständig zu verstehen, ist es wichtig
-                das jeder Programmierer der LiveDocx ausliefert, den Unterschied versteht.
+                dass jeder Programmierer der LiveDocx ausliefert, den Unterschied versteht.
             </para>
 
             <para>
-                Der Ausdruck <emphasis>Template</emphasis> wird verwendet um auf eine Eingabedatei
-                zu verweisen, die in einem Word Prozessor erstellt wurde, und Formatierungen sowie
+                Der Ausdruck <emphasis>Template</emphasis> wird verwendet, um auf eine Eingabedatei
+                zu verweisen, die in einer Textverarbeitung erstellt wurde und Formatierungen sowie
                 Textfelder enthält. Man kann ein <ulink
                     url="http://www.phplivedocx.org/wp-content/uploads/2009/01/license-agreement-template.docx">Beispieltemplate</ulink>
-                downloaden, welches als <acronym>DOCX</acronym> Datei gespeichert ist. Der Ausdruck
-                <emphasis>Dokument</emphasis> wird verwendet um auf eine Ausgabedatei zu verweisen
+                herunterladen, welches als <acronym>DOCX</acronym> Datei gespeichert ist. Der Ausdruck
+                <emphasis>Dokument</emphasis> wird verwendet, um auf eine Ausgabedatei zu verweisen,
                 welche die Templatedatei enthält, zusammen mit Daten - z.B. das fertiggestellte
                 Dokument. Man kann ein <ulink
                     url="http://www.phplivedocx.org/wp-content/uploads/2009/01/license-agreement-document.pdf">Beispieldokument</ulink>
-                downloaden, welches als <acronym>PDF</acronym> Datei gespeichert ist.
+                herunterlaen, welches als <acronym>PDF</acronym> Datei gespeichert ist.
             </para>
         </sect3>
 
@@ -273,7 +273,7 @@
         <title>Zend_Service_LiveDocx_MailMerge</title>
 
         <para>
-             <classname>Zend_Service_LiveDocx_MailMerge</classname> ist das mail-merge Objekt in der
+             <classname>Zend_Service_LiveDocx_MailMerge</classname> ist das Mail-Merge-Objekt in der
              <classname>Zend_Service_LiveDocx</classname> Familie.
         </para>
 
@@ -300,14 +300,14 @@
             </para>
 
             <para>
-                Daten werden in ein Template eingefügt um ein Dokument zu erstellen (<ulink
+                Daten werden in ein Template eingefügt, um ein Dokument zu erstellen (<ulink
                     url="figures/zend.service.livedocx.mailmerge.generation-diabasic_zoom.png">größer
                     darstellen</ulink>).
             </para>
 
             <para>
-                Ein Template das in einer Word Bearbeitungsanwendung, wie Microsoft Word, erstellt
-                wird, wurd in LiveDocx geladen. Daten werden kann in das Template eingesetzt, und
+                Ein Template, das in einer Textverarbeitungsanwendung, wie Microsoft Word, erstellt
+                wird, wird in LiveDocx geladen. Daten werden in das Template eingesetzt und
                 das resultierende Dokument wird in jedes der unterstützten Formate gespeichert.
             </para>
         </sect3>
@@ -335,8 +335,8 @@
 
             <para>
                 Durch Verwendung dieses Dialogs kann man die benötigten Merge-Felder in das eigene
-                Dokument einfügen. Anbei ist ein Screenshot der Lizenz Vereinbarung in Microsoft
-                Word 2007. Die Merge Felder sind als <code>{ MERGEFIELD FieldName }</code> markiert:
+                Dokument einfügen. Anbei ist ein Screenshot der Lizenzvereinbarung in Microsoft
+                Word 2007. Die Merge-Felder sind als <code>{ MERGEFIELD FieldName }</code> markiert:
             </para>
 
             <para>
@@ -356,7 +356,7 @@
             </para>
 
             <para>
-                Im nächsten Schritt veröffentlichen wir die Merge-Felder mit textuellen Daten von
+                Im nächsten Schritt vereinen wir die Merge-Felder mit textuellen Daten von
                 PHP.
             </para>
 
@@ -398,9 +398,9 @@ file_put_contents('document.pdf', $document);
 ]]></programlisting>
 
             <para>
-                Das resultierende Dokument wird auf die Festplatte in die Datei
+                Das resultierende Dokument wird auf der Festplatte in die Datei
                 <emphasis>document.pdf</emphasis> geschrieben. Diese Datei kann nun weiter
-                bearbeitet, per Email versendet oder einfach angezeigt werden, wie anbei im
+                bearbeitet, per E-Eail versendet oder einfach angezeigt werden, wie anbei im
                 <emphasis>Document Viewer 2.26.1</emphasis> auf <emphasis>Ubuntu 9.04</emphasis>
                 gezeigt:
             </para>
@@ -424,31 +424,31 @@ file_put_contents('document.pdf', $document);
 
             <para>
                 <classname>Zend_Service_LiveDocx_MailMerge</classname> erlaubt es Entwicklern eine
-                beliebige Anzahl an Text Feldern in ein Template einzufügen. Diese textfelder werden
-                mit Daten gefüllt wenn <emphasis>createDocument()</emphasis> aufgerufen wird.
+                beliebige Anzahl an Text-Feldern in ein Template einzufügen. Diese Text-Felder werden
+                mit Daten gefüllt, wenn <emphasis>createDocument()</emphasis> aufgerufen wird.
             </para>
 
             <para>
-                Zusätzlich zu Textfeldern ist es auch mäglich spezielle Regionen eines Dokuments
-                zu spezifizieren, welche wiederholt werden sollen.
+                Zusätzlich zu Text-Felder ist es auch möglich spezielle Regionen eines Dokuments
+                zu spezifizieren, die wiederholt werden sollen.
             </para>
 
             <para>
-                In einer Telefonrechnung ist es z.b. notwendig eine Liste aller Verbindungen,
-                inklusive der Zielnummern, der Dauer und den Kosten jedes Anrufs auszudrucken.
+                In einer Telefonrechnung ist es z.b. notwendig, eine Liste aller Verbindungen,
+                inklusive der Zielnummern, der Dauer und den Kosten jedes Anrufs abzubilden,.
                 Diese Funktion der wiederholten Zeile kann mit sogenannten Blöcken erzielt werden.
             </para>
 
             <para>
                 <emphasis>Blöcke</emphasis> sind einfach Regionen eines Dokuments, welche wiederholt
                 werden wenn <methodname>createDocument()</methodname> aufgerufen wird. In einem
-                Block kann eine beliebige Anzahl an <emphasis>Block Feldern</emphasis> spezifiziert
+                Block kann eine beliebige Anzahl an <emphasis>Block-Feldern</emphasis> spezifiziert
                 werden.
             </para>
 
             <para>
-                Blöcke bestehen aus zwei zusammenhängenden Dokument-Zielen mit einem eindeutigen
-                Namen. Der folgende Screenshot zeigt diese Ziele und deren Namen in Rot:
+                Blöcke bestehen aus zwei zusammenhängenden Sprungmarken mit eindeutigen
+                Namen. Der folgende Screenshot zeigt diese Sprungmarken und deren Namen in Rot:
             </para>
 
             <para>
@@ -555,9 +555,9 @@ file_put_contents('document.pdf', $document);
             </para>
 
             <para>
-                Das resultierende Dokument wird auf die Festplatte in die Datei
+                Das resultierende Dokument wird auf der Festplatte in die Datei
                 <emphasis>document.pdf</emphasis> geschrieben. Diese Datei kann anschließend
-                nachbearbietet, per Email gesendet, oder einfach dargestellt werden, wie anbei im
+                nachbearbietet, per E-Mail gesendet, oder einfach dargestellt werden, wie anbei im
                 <emphasis>Document Viewer 2.26.1</emphasis> unter <emphasis>Ubuntu 9.04</emphasis>
                 gezeigt:
             </para>
@@ -607,7 +607,7 @@ file_put_contents('document.pdf', $document);
 
             <para>
                 <varname>$fromPage</varname> ist die untere Grenze der Seitenzahl des Bereichs an
-                Seiten die als Bild zurückgegeben werden soll, und <varname>$toPage</varname> ist
+                Seiten, die als Bilder zurückgegeben werden sollen und <varname>$toPage</varname> ist
                 die obere Grenze der Seitenzahlen. <varname>$zoomFactor</varname> ist die Größe
                 der Bilder, als Prozentwert, relativ zur originalen Seitengröße. Der Bereich dieses
                 Parameters ist von 10 bis 400. <varname>$format</varname> ist das Format des
@@ -652,7 +652,7 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
 
             <para>
                 Das produziert zwei Bilder (<filename>documentPage1.png</filename> und
-                <filename>documentPage2.png</filename>) und schreibt diese auf der Festplatte
+                <filename>documentPage2.png</filename>) und schreibt diese auf die Festplatte
                 in das gleiche Verzeichnis wie die ausführbare PHP Datei.
             </para>
 
@@ -685,16 +685,16 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
             <title>Lokale vs. Remote Templates</title>
 
             <para>
-                Templates können <emphasis>lokal</emphasis>, auf der Client Maschine, gespeichert
-                werden, oder <emphasis>remote</emphasis> auf dem Server. Jede Variante hat Vorteile
+                Templates können <emphasis>lokal</emphasis> auf der Client-Maschine gespeichert
+                werden oder <emphasis>remote</emphasis> auf dem Server. Jede Variante hat Vorteile
                 und Nachteile.
             </para>
 
             <para>
-                Im Falle das ein Templage lokal gespeichert ist, muss es bei jeder Anfrage vom
+                Im Falle, dass ein Template lokal gespeichert ist, muss es bei jeder Anfrage vom
                 Client auf den Server transferiert werden. Wenn sich der Inhalt vom Templates
                 selten ändert, ist dieser Weg sehr ineffizient. Ähnlich auch, wenn das Template eine
-                Größe von mehreren Megabyte hat, kann es eine beträchtliche Zeit dauern es auf den
+                Größe von mehreren Megabyte hat, kann es eine beträchtliche Zeit dauern, es auf den
                 Server zu transferieren. Lokale Templates sind in Situationen sinnvoll in denen der
                 Inhalt des Templates konstant geändert wird.
             </para>
@@ -715,11 +715,11 @@ $phpLiveDocx->setLocalTemplate('./template.docx');
 ]]></programlisting>
 
             <para>
-                Im Fall das ein Template remote gespeichert ist, wird es nur einmal auf den Server
+                Im Falle, dass ein Template remote gespeichert ist, wird es nur einmal auf den Server
                 geladen und anschließend bei allen nachfolgenden Anfragen darauf referenziert.
-                Natürlich ist das viel schneller als ein lokales Template zu verwenden, da das
+                Natürlich ist es viel schneller, als ein lokales Template zu verwenden, da das
                 Template nicht bei jeder Anfrage übertragen werden muss. Für Anwendungen bei denen
-                die Geschwindigkeit kritisch ist, wird es Empfohlen die Remote Template Methode zu
+                die Geschwindigkeit kritisch ist, wird es empfohlen die Remote-Template Methode zu
                 verwenden.
             </para>
 
@@ -766,8 +766,8 @@ $phpLiveDocx->setRemoteTemplate('template.docx');
                 <title>Ein Array an Feldnamen vom Template erhalten</title>
 
                 <para>
-                    Der folgende Code retourniert und zeigt ein Array aller Feldnamen im
-                    spezifizierten Template an. Diese Funktionalität ist nützlich, wenn man eine
+                    Der folgende Code gibt ein Array aller Feldnamen im
+                    spezifizierten Template zurück und zeigt diese an. Diese Funktionalität ist nützlich, wenn man eine
                     Anwendung erstellt, in welcher der End-Benutzer das Template aktualisieren kann.
                 </para>
 
@@ -791,7 +791,7 @@ foreach ($fieldNames as $fieldName) {
                 <title>Ein Array an Block Feldnamen vom Template erhalten</title>
 
                 <para>
-                    Der folgende Code retourniert und zeigt ein Array aller Block Feldnamen im
+                    Der folgende Code zeigt ein Array aller Block-Feldnamen im
                     spezifizierten Template an. Diese Funktionalität ist nützlich, wenn man eine
                     Anwendung erstellt, in welcher der End-Benutzer das Template aktualisieren kann.
                     Bevor solche Templates veröffentlicht werden können, ist es notwendig die Namen
@@ -823,12 +823,12 @@ foreach ($blockNames as $blockName) {
                 </title>
 
                 <para>
-                    Der folgende Code retourniert und zeigt ein Array aller auf dem Server
-                    installierten Schriftarten an. Diese Methode kann verwendet werden um eine Liste
-                    von Schriftarten anzuzeigen welche in einem Template verwendet werden können.
-                    Das ist nützlich um den Endbenutzer über die auf dem Server installierten
+                    Der folgende Code zeigt ein Array aller auf dem Server
+                    installierten Schriftarten an. Diese Methode kann verwendet werden, um eine Liste
+                    von Schriftarten anzuzeigen, welche in einem Template verwendet werden können.
+                    Das ist nützlich, um den Endbenutzer über die auf dem Server installierten
                     Schriften zu informieren, da nur diese Schriftarten in einem Template verwendet
-                    werden können. Im Falle das ein Template Schriften enthänt, welche auf dem
+                    werden können. Im Falle, dass ein Template Schriften enthält, welche auf dem
                     Server nicht enthalten sind, wird eine andere Schriftart verwendet. Dies kann
                     zu unerwünschten Ergebnissen führen.
                 </para>
@@ -853,9 +853,9 @@ Zend_Debug::dump($phpLiveDocx->getFontNames());
                 <title>Ein Array an unterstützten Dateiformaten für Templates erhalten</title>
 
                 <para>
-                    Der folgende Code retourniert und zeigt ein Array aller unterstützten
-                    Dateiformate für Templates. Diese Methode ist partiell nützlich im Fall das
-                    eine Kombinationsbox angezeigt werden soll, welche es dem Endbenutzer erlaubt
+                    Der folgende Code zeigt ein Array aller unterstützten
+                    Dateiformate für Templates. Diese Methode ist partiell nützlich im Fall, dass
+                    eine Auswahlliste angezeigt werden soll, welche es dem Endbenutzer erlaubt,
                     das Eingabeformat für den Erstellungsprozess des Dokuments auszuwählen.
                 </para>
 
@@ -879,9 +879,9 @@ Zend_Debug::dump($phpLiveDocx->getTemplateFormats());
                 <title>Ein Array an unterstützten Dateiformaten für Dokumente erhalten</title>
 
                 <para>
-                    Der folgende Code retourniert und zeigt ein Array aller unterstützten
+                    Der folgende Code zeigt ein Array aller unterstützten
                     Dateiformate für Dokumente. Diese Methode ist partiell nützlich im Fall das
-                    eine Kombinationsliste angezeigt werden soll, welche es dem Endbenutzer erlaubt
+                    eine Auswahlliste angezeigt werden soll, welche es dem Endbenutzer erlaubt,
                     das Ausgabeformat für den Erstellungsprozess des Dokuments auszuwählen.
                 </para>
 
@@ -899,9 +899,9 @@ Zend_Debug::dump($phpLiveDocx->getDocumentFormats());
                 <title>Ein Array an unterstützten Dateiformaten für Bilder erhalten</title>
 
                 <para>
-                    Der folgende Code retourniert und zeigt ein Array aller unterstützten
+                    Der folgende Code zeigt ein Array aller unterstützten
                     Dateiformate für Bilder. Diese Methode ist partiell nützlich im Fall das
-                    eine Kombinationsliste angezeigt werden soll, welche es dem Endbenutzer erlaubt
+                    eine Auswahlliste angezeigt werden soll, welche es dem Endbenutzer erlaubt
                     das Ausgabeformat für den Erstellungsprozess des Dokuments auszuwählen.
                 </para>
 

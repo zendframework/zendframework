@@ -1,7 +1,7 @@
-#!/usr/bin/php
 <?php
 
 require_once dirname(__FILE__) . '/../../common.php';
+
 
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 

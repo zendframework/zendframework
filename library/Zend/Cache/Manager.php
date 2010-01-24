@@ -91,7 +91,7 @@ class Zend_Cache_Manager
             ),
         ),
         // Tag Cache
-        'tagCache' => array(
+        'tagcache' => array(
             'frontend' => array(
                 'name'    => 'Core',
                 'options' => array(
@@ -155,7 +155,7 @@ class Zend_Cache_Manager
                 || !$this->_optionTemplates[$name]['backend']['options']['tag_cache'] instanceof Zend_Cache_Core)
             ) {
                 $this->_optionTemplates[$name]['backend']['options']['tag_cache']
-                    = $this->getCache('tagCache');
+                    = $this->getCache('tagcache');
             }
             $this->_caches[$name] = Zend_Cache::factory(
                 $this->_optionTemplates[$name]['frontend']['name'],

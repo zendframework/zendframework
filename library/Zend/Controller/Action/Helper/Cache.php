@@ -160,8 +160,21 @@ class Zend_Controller_Action_Helper_Cache
             && !empty($this->_tags[$controller][$action])) {
                 $tags = array_unique($this->_tags[$controller][$action]);
             }
-            $this->getCache('page')->start($reqUri, $tags);
+            $this->getCache('page')->start($this->_encodeCacheId($reqUri), $tags);
         }
+    }
+    
+    /**
+     * Encode a Cache ID as hexadecimal. This is a workaround because Backend ID validation
+     * is trapped in the Frontend classes. Will try to get this reversed for ZF 2.0
+     * because it's a major annoyance to have IDs so restricted!
+     *
+     * @return string
+     * @param string $requestUri
+     */
+    protected function _encodeCacheId($requestUri)
+    {
+        return bin2hex($requestUri);
     }
 
     /**

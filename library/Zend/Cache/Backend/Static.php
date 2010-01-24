@@ -117,6 +117,8 @@ class Zend_Cache_Backend_Static
     {
         if (empty($id)) {
             $id = $this->_detectId();
+        } else {
+            $id = $this->_decodeId($id);
         }
         if (!$this->_verifyPath($id)) {
             Zend_Cache::throwException('Invalid cache id: does not match expected public_dir path');
@@ -130,7 +132,7 @@ class Zend_Cache_Backend_Static
             $fileName = $this->_options['index_filename'];
         }
         $pathName = $this->_options['public_dir'] . dirname($id);
-        $file     = $pathName . '/' . $fileName . $this->_options['file_extension'];
+        $file     = rtrim($pathName, '/') . '/' . $fileName . $this->_options['file_extension'];
         if (file_exists($file)) {
             $content = file_get_contents($file);
             return $content;
@@ -147,6 +149,7 @@ class Zend_Cache_Backend_Static
      */
     public function test($id)
     {
+        $id = $this->_decodeId($id);
         if (!$this->_verifyPath($id)) {
             Zend_Cache::throwException('Invalid cache id: does not match expected public_dir path');
         }
@@ -180,6 +183,8 @@ class Zend_Cache_Backend_Static
         clearstatcache();
         if (is_null($id) || strlen($id) == 0) {
             $id = $this->_detectId();
+        } else {
+            $id = $this->_decodeId($id);
         }
 
         $fileName = basename($id);
@@ -435,6 +440,7 @@ class Zend_Cache_Backend_Static
      * @param  string $string Cache id or tag
      * @throws Zend_Cache_Exception
      * @return void
+     * @deprecated Not usable until perhaps ZF 2.0
      */
     protected static function _validateIdOrTag($string)
     {
@@ -470,5 +476,13 @@ class Zend_Cache_Backend_Static
             return octdec($val);
         }
         return $val;
+    }
+    
+    /**
+     * Decode a request URI from the provided ID
+     */
+    protected function _decodeId($id)
+    {
+        return pack('H*', $id);;
     }
 }

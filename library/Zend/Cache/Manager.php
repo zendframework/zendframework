@@ -78,7 +78,7 @@ class Zend_Cache_Manager
         // Static Page HTML Cache
         'page' => array(
             'frontend' => array(
-                'name'    => 'Output',
+                'name'    => 'Capture',
                 'options' => array(
                     'ignore_user_abort' => true,
                 ),

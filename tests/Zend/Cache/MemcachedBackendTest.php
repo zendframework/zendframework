@@ -55,13 +55,18 @@ class Zend_Cache_MemcachedBackendTest extends Zend_Cache_CommonExtendedBackendTe
 
     public function setUp($notag = true)
     {
-        $server = array(
+        $serverValid = array(
             'host' => TESTS_ZEND_CACHE_MEMCACHED_HOST,
             'port' => TESTS_ZEND_CACHE_MEMCACHED_PORT,
             'persistent' => TESTS_ZEND_CACHE_MEMCACHED_PERSISTENT
         );
+        $serverFail = array(
+            'host' => 'not.exist',
+            'port' => TESTS_ZEND_CACHE_MEMCACHED_PORT,
+            'persistent' => TESTS_ZEND_CACHE_MEMCACHED_PERSISTENT
+        );
         $options = array(
-            'servers' => array(0 => $server)
+            'servers' => array($serverValid, $serverFail)
         );
         $this->_instance = new Zend_Cache_Backend_Memcached($options);
         parent::setUp($notag);
@@ -154,6 +159,12 @@ class Zend_Cache_MemcachedBackendTest extends Zend_Cache_CommonExtendedBackendTe
     public function testGetMetadatas($notag = false)
     {
         parent::testGetMetadatas(true);
+    }
+
+    public function testGetFillingPercentage()
+    {
+        $this->_instance->setDirectives(array('logging' => false));
+        parent::testGetFillingPercentage();
     }
 
 }

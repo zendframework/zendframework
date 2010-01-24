@@ -383,22 +383,23 @@ class Zend_Cache_Backend_Memcached extends Zend_Cache_Backend implements Zend_Ca
         $memSize = 0;
         $memUsed = 0;
         foreach ($mems as $key => $mem) {
-            if ($mem === false) {
-                Zend_Cache::throwException('can\'t get stat from ' . $key);
-            } else {
-                $eachSize = $mem['limit_maxbytes'];
-                if ($eachSize == 0) {
-                    Zend_Cache::throwException('can\'t get memory size from ' . $key);
-                }
-
-                $eachUsed = $mem['bytes'];
-                if ($eachUsed > $eachSize) {
-                    $eachUsed = $eachSize;
-                }
-
-                $memSize += $eachSize;
-                $memUsed += $eachUsed;
+            if ($mem === false || !$mem['limit_maxbytes']) {
+                $this->_log('can\'t get stat from ' . $key);
+                continue;
             }
+
+            $eachSize = $mem['limit_maxbytes'];
+            $eachUsed = $mem['bytes'];
+            if ($eachUsed > $eachSize) {
+                $eachUsed = $eachSize;
+            }
+
+            $memSize += $eachSize;
+            $memUsed += $eachUsed;
+        }
+
+        if (!$memSize || !$memUsed) {
+            Zend_Cache::throwException('Can\'t get filling percentage');
         }
 
         return ((int) (100. * ($memUsed / $memSize)));

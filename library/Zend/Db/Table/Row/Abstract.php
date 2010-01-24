@@ -293,13 +293,14 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess
      }
 
      /**
-      * Does nothing
+      * Proxy to __unset
       * Required by the ArrayAccess implementation
       *
       * @param string $offset
       */
      public function offsetUnset($offset)
      {
+         return $this->__unset($offset);
      }
 
     /**

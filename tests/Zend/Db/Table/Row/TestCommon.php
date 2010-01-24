@@ -319,6 +319,30 @@ abstract class Zend_Db_Table_Row_TestCommon extends Zend_Db_Table_TestSetup
         }
     }
 
+    /**
+     * @group ZF-8902
+     */
+    public function testTableRowOffsetUnset()
+    {
+        $table = $this->_table['bugs'];
+        $bug_description = $this->_db->foldCase('bug_description');
+
+        $rowset = $table->find(1);
+        $this->assertType('Zend_Db_Table_Rowset_Abstract', $rowset,
+            'Expecting object of type Zend_Db_Table_Rowset_Abstract, got '.get_class($rowset));
+        $row1 = $rowset->current();
+        $this->assertType('Zend_Db_Table_Row_Abstract', $row1,
+            'Expecting object of type Zend_Db_Table_Row_Abstract, got '.get_class($row1));
+
+        try {
+            $this->assertTrue($row1->offsetExists($bug_description));
+            $row1->offsetUnset($bug_description);
+            $this->assertFalse($row1->offsetExists($bug_description));
+        } catch (Zend_Exception $e) {
+            $this->fail("Caught exception of type \"".get_class($e)."\" where no exception was expected.  Exception message: \"".$e->getMessage()."\"\n");
+        }
+    }
+
     public function testTableRowSetFromArray()
     {
         $table = $this->_table['bugs'];

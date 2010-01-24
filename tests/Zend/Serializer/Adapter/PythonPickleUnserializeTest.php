@@ -1,10 +1,28 @@
 <?php
 /**
- * @package    Zend_Cache
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Serializer
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
-/** @see Zend_Serializer_Adapter_PythonPickle */
+/**
+ * @see Zend_Serializer_Adapter_PythonPickle
+ */
 require_once 'Zend/Serializer/Adapter/PythonPickle.php';
 
 /**
@@ -13,8 +31,11 @@ require_once 'Zend/Serializer/Adapter/PythonPickle.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
+ * @category   Zend
  * @package    Zend_Serializer
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framework_TestCase
 {
@@ -31,7 +52,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->_adapter = null;
     }
 
-    public function testUnserializeNone() {
+    public function testUnserializeNone()
+    {
         $value    = "N.";
         $expected = null;
 
@@ -39,7 +61,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeNewTrue() {
+    public function testUnserializeNewTrue()
+    {
         $value    = "\x80\x02\x88.";
         $expected = true;
 
@@ -47,7 +70,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeNewFalse() {
+    public function testUnserializeNewFalse()
+    {
         $value    = "\x80\x02\x89.";
         $expected = false;
 
@@ -55,7 +79,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeIntTrue() {
+    public function testUnserializeIntTrue()
+    {
         $value    = "I01\r\n.";
         $expected = true;
 
@@ -63,7 +88,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeIntFalse() {
+    public function testUnserializeIntFalse()
+    {
         $value    = "I00\r\n.";
         $expected = false;
 
@@ -71,7 +97,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeInt() {
+    public function testUnserializeInt()
+    {
         $value    = "I1\r\n.";
         $expected = 1;
 
@@ -79,7 +106,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeBinInt() {
+    public function testUnserializeBinInt()
+    {
         $value    = "\x80\x02J\xc7\xcf\xff\xff.";
         $expected = -12345;
 
@@ -87,7 +115,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeBinInt1() {
+    public function testUnserializeBinInt1()
+    {
         $value    = "\x80\x02K\x02.";
         $expected = 2;
 
@@ -95,7 +124,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeBinInt2() {
+    public function testUnserializeBinInt2()
+    {
         $value    = "\x80\x02M\x00\x01.";
         $expected = 256;
 
@@ -103,7 +133,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeLong() {
+    public function testUnserializeLong()
+    {
         $value    = "L9876543210L\r\n.";
         $expected = '9876543210';
 
@@ -111,7 +142,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeLong1() {
+    public function testUnserializeLong1()
+    {
         $value    = "\x80\x02\x8a\x05\xea\x16\xb0\x4c\x02.";
         $expected = '9876543210';
 
@@ -119,7 +151,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeLong4Positiv() {
+    public function testUnserializeLong4Positiv()
+    {
         $value    = "\x80\x02\x8b\x07\x00\x00\x00"
                   . str_pad("\xff", 7, "\x7f")
                   . ".";
@@ -129,7 +162,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeLong4Negativ() {
+    public function testUnserializeLong4Negativ()
+    {
         $value    = "\x80\x02\x8b\x07\x00\x00\x00"
                   . str_pad("\x00", 7, "\x9f")
                   . ".";
@@ -139,7 +173,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeLong4InfBcMath() {
+    public function testUnserializeLong4InfBcMath()
+    {
         $value    = "\x80\x02\x8b\x08\x00\x00\x00"
                   . str_pad("\x00", 8, "\x9f")
                   . ".";
@@ -153,7 +188,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeFloat() {
+    public function testUnserializeFloat()
+    {
         $value    = "F-12345.6789\r\n.";
         $expected = -12345.6789;
 
@@ -161,7 +197,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeBinFloat() {
+    public function testUnserializeBinFloat()
+    {
         $value    = "\x80\x02G\xc0\xc8\x1c\xd6\xe6\x31\xf8\xa1.";
         $expected = -12345.6789;
 
@@ -169,7 +206,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeString() {
+    public function testUnserializeString()
+    {
         $value    = "S'test'\r\np0\r\n.";
         $expected = 'test';
 
@@ -177,7 +215,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeStringDoubleQuotes() {
+    public function testUnserializeStringDoubleQuotes()
+    {
         $value    = "S\"'t'e's't'\"\r\np0\r\n.";
         $expected = "'t'e's't'";
 
@@ -185,7 +224,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeStringWithSpecialChars() {
+    public function testUnserializeStringWithSpecialChars()
+    {
         $value    = "S'\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x08\\t\\n\\x0b\\x0c\\r\\x0e\\x0f"
                   . "\\x10\\x11\\x12\\x13\\x14\\x15\\x16\\x17\\x18\\x19\\x1a\\x1b\\x1c\\x1d\\x1e\\x1f"
                   . "\\xff\\\\\"\\''\r\n"
@@ -198,7 +238,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeBinString() {
+    public function testUnserializeBinString()
+    {
         $value    = "\x80\x02T\x00\x01\x00\x00"
                   . "01234567890123456789012345678901234567890123456789"
                   . "01234567890123456789012345678901234567890123456789"
@@ -216,7 +257,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeShortBinString() {
+    public function testUnserializeShortBinString()
+    {
         $value    = "\x80\x02U\x04"
                   . "test"
                   . "q\x00.";
@@ -226,7 +268,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeUnicode() {
+    public function testUnserializeUnicode()
+    {
         $value    = "Vtest\\u0400\r\n" // test + ` + E
                   . "p0\r\n"
                   . ".";
@@ -236,7 +279,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeBinUnicode() {
+    public function testUnserializeBinUnicode()
+    {
         $value    = "\x80\x02" . "X\x07\x00\x00\x00" . "test\xd0\x80\n.";
         $expected = "test\xd0\x80\n"; // test + ` + E + \n
 
@@ -244,7 +288,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeListAppend() {
+    public function testUnserializeListAppend()
+    {
         $value = "(lp0\r\n"
                . "I1\r\n"
                . "aI2\r\n"
@@ -256,7 +301,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeEmptyListAppends() {
+    public function testUnserializeEmptyListAppends()
+    {
         $value    = "\x80\x02]q\x00(K\x01K\x02K\x03e.";
         $expected = array(1,2,3);
 
@@ -264,7 +310,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeDictSetItem() {
+    public function testUnserializeDictSetItem()
+    {
         $value = "(dp0\r\n"
                . "S'test1'\r\n"
                . "p1\r\n"
@@ -281,7 +328,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeEmptyDictSetItems() {
+    public function testUnserializeEmptyDictSetItems()
+    {
         $value    = "\x80\x02}q\x00(U\x05test1q\x01K\x01K\x00K\x02U\x05test3q\x02h\x02u.";
         $expected = array('test1' => 1, 0 => 2, 'test3' => 'test3');
 
@@ -289,7 +337,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeTuple() {
+    public function testUnserializeTuple()
+    {
         $value    = "(I1\r\n"
                   . "I2\r\n"
                   . "I3\r\n"
@@ -301,7 +350,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeTuple1() {
+    public function testUnserializeTuple1()
+    {
         $value    = "\x80\x02K\x01\x85q\x00.";
         $expected = array(1);
 
@@ -309,7 +359,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeTuple2() {
+    public function testUnserializeTuple2()
+    {
         $value    = "\x80\x02K\x01K\x02\x86q\x00.";
         $expected = array(1,2);
 
@@ -317,7 +368,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserializeTuple3() {
+    public function testUnserializeTuple3()
+    {
         $value    = "\x80\x02K\x01K\x02K\x03\x87q\x00.";
         $expected = array(1,2,3);
 
@@ -325,7 +377,8 @@ class Zend_Serializer_Adapter_PythonPickleUnserializeTest extends PHPUnit_Framew
         $this->assertEquals($expected, $data);
     }
 
-    public function testUnserialzeInvalid() {
+    public function testUnserialzeInvalid()
+    {
         $value = 'not a serialized string';
         $this->setExpectedException('Zend_Serializer_Exception');
         $this->_adapter->unserialize($value);

@@ -1,10 +1,28 @@
 <?php
 /**
- * @package    Zend_Cache
+ * Zend Framework
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://framework.zend.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@zend.com so we can send you a copy immediately.
+ *
+ * @category   Zend
+ * @package    Zend_Serializer
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
-/** @see Zend_Serializer_Adapter_PythonPickle */
+/**
+ * @see Zend_Serializer_Adapter_PythonPickle
+ */
 require_once 'Zend/Serializer/Adapter/PythonPickle.php';
 
 /**
@@ -13,8 +31,11 @@ require_once 'Zend/Serializer/Adapter/PythonPickle.php';
 require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
+ * @category   Zend
  * @package    Zend_Serializer
  * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit_Framework_TestCase
 {
@@ -31,7 +52,8 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit
         $this->_adapter = null;
     }
 
-    public function testSerializeNull() {
+    public function testSerializeNull()
+    {
         $value      = null;
         $expected   = 'N.';
 
@@ -39,7 +61,8 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeTrue() {
+    public function testSerializeTrue()
+    {
         $value      = true;
         $expected   = "I01\r\n.";
 
@@ -47,7 +70,8 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeFalse() {
+    public function testSerializeFalse()
+    {
         $value      = false;
         $expected   = "I00\r\n.";
 
@@ -55,7 +79,8 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeInt() {
+    public function testSerializeInt()
+    {
         $value      = -12345;
         $expected   = "I-12345\r\n.";
 
@@ -63,7 +88,8 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeFloat() {
+    public function testSerializeFloat()
+    {
         $value      = -12345.6789;
         $expected   = "F-12345.6789\r\n.";
 
@@ -71,7 +97,8 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeString() {
+    public function testSerializeString()
+    {
         $value      = 'test';
         $expected   = "S'test'\r\np0\r\n.";
 
@@ -79,7 +106,8 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeStringWithSpecialChars() {
+    public function testSerializeStringWithSpecialChars()
+    {
         $value      = "\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f"
                     . "\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f"
                     . "\xff\\\"'";
@@ -92,7 +120,8 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeArrayList() {
+    public function testSerializeArrayList()
+    {
         $value      = array('1', '2', 'test');
         $expected   = "(lp0\r\n"
                     . "S'1'\r\n"
@@ -107,7 +136,8 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeArrayDict() {
+    public function testSerializeArrayDict()
+    {
         $value    = array('1', '2', 'three' => 'test');
         $expected = "(dp0\r\n"
                   . "I0\r\n"
@@ -126,7 +156,8 @@ class Zend_Serializer_Adapter_PythonPickleSerializeProtocol0Test extends PHPUnit
         $this->assertEquals($expected, $data);
     }
 
-    public function testSerializeObject() {
+    public function testSerializeObject()
+    {
         $value = new StdClass();
         $value->test  = 'test';
         $value->test2 = 2;

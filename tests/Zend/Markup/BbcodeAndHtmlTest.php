@@ -271,6 +271,13 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->_markup->render($input));
     }
 
+    public function testInvalidationAfterInvalidTag()
+    {
+        $input = "[b][list][*]Foo[/*][/list][/b]";
+        $expected = "<strong>[list][*]Foo[/*][/list]</strong>";
+        $this->assertEquals($expected, $this->_markup->render($input));
+    }
+
     public function testListTypes()
     {
         $types = array(

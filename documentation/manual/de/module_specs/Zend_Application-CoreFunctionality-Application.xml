@@ -87,7 +87,7 @@
                     <entry>
                         <methodname>__construct($environment, $options = null)</methodname>
                     </entry>
-                    <entry><type>void</type></entry>
+                    <entry><type>Void</type></entry>
                     <entry><itemizedlist>
                             <listitem><para>
                                 <varname>$environment</varname>: <emphasis>Benötigt</emphasis>,.

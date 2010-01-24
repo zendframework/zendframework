@@ -3,10 +3,12 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.introduction">
     <title>Einführung</title>
+
     <para>
         Die <classname>Zend_Console_Getopt</classname> Klasse hilft Kommandozeilen Anwendungen
         Ihre Optionen und Argumente zu Analysieren.
     </para>
+
     <para>
         Benutzer können Kommandozeilen Argumente definieren wenn die Anwendung
         ausgeführt wird. Diese Argumente haben für die Anwendung die Bedeutung,
@@ -18,6 +20,7 @@
         erlaubt <command>-c</command> unterschiedliche Features in <command>grep</command>,
         <command>ls</command>, und <command>tar</command>.
      </para>
+
     <para>
         Anbei sind einige Definitionen von Ausdrücken. Die übliche Verwendung der
         Ausdrücke variiert, aber diese Dokumentation wird die anbei beschriebenen
@@ -97,7 +100,7 @@
     <note>
         <title>Getopt ist kein Framework für eine Anwendung</title>
         <para>
-            <classname>Zend_Console_Getopt</classname> kann <emphasis>NICHT</emphasis>
+            <classname>Zend_Console_Getopt</classname> kann <emphasis>nicht</emphasis>
             die Bedeutung der Flags und Parameter interpretieren, noch implementiert
             diese Klasse einen Anwendungsworkflow oder ruft Anwendungscode auf.
             Diese Aktionen müssen im eigenen Anwendungscode integriert werden.

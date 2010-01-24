@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20191 -->
+<!-- EN-Revision: 20552 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.pubsubhubbub.introduction">
     <title>Zend_Feed_Pubsubhubbub</title>
@@ -105,37 +105,43 @@
         <title>Zend_Feed_Pubsubhubbub_Publisher</title>
 
         <para>
-            In Pubsubhubbub, the Publisher is the party who publishes a live feed and frequently updates
-            it with new content. This may be a blog, an aggregator, or even a web service with a public
-            feed based API. In order for these updates to be pushed to Subscribers, the Publisher
-            must notify all of its supported Hubs that an update has occured using a simple HTTP POST
-            request containing the URI or the updated Topic (i.e the updated RSS or Atom feed). The Hub
-            will confirm receipt of the notification, fetch the updated feed, and forward any updates to
-            any Subscribers who have subscribed to that Hub for updates from the relevant feed.
+            In Pubsubhubbub ist der Publizist der Teilnehmer welcher einen lebenden Feed
+            veröffentlicht und Ihn regelmäßig mit neuem Inhalt aktualisiert. Das kann ein Blog, eine
+            Sammlung, oder sogar ein Webservice mit einer öffentlichen Feed basierenden API sein.
+            Damit diese Aktualisierungen zu den Abonnenten geschickt werden können, muss der
+            Publizist alle seine unterstützten Hubs darüber informieren das eine Aktualisierung
+            stattgefunden hat, indem eine einfache HTTP POST Anfrage verwendet wird, welche die URI
+            oder das aktualisierte Thema enthält (z.B. den aktualisierten RSS oder Atom Feed). Der
+            Hub bestätigt den Empfang der Benachrichtigung, holt den aktualisierten Feed, und leitet
+            alle Aktualisierungen an alle Abonnenten weiter welche sich bei diesem Hub für
+            Aktualisierungen für den relevanten Feed angemeldet haben.
         </para>
 
         <para>
-            By design, this means the Publisher has very little to do except send these Hub pings
-            whenever its feeds change. As a result, the Publisher implementation is extremely
-            simple to use and requires very little work to setup and use when feeds are updated.
+            Vom Design her bedeutet dies dass der Publizist sehr wenig zu tun hat ausser diese Hub
+            Pings jedesmal zu senden wenn sich seine Feeds ändern. Als Ergebnis hiervon ist die
+            Implementation des Publizisten extrem einfach zu verwenden und benötigt sehr wenig
+            Arbeit für die Einrichtung und Verwendung wenn Feeds aktualisiert werden.
         </para>
 
         <para>
-            <classname>Zend_Feed_Pubsubhubbub_Publisher</classname> implements a full Pubsubhubbub
-            Publisher. Its setup for use is also simple, requiring mainly that it is configured with
-            the URI endpoint for all Hubs to be notified of updates, and the URIs of all Topics to
-            be included in the notifications.
+            <classname>Zend_Feed_Pubsubhubbub_Publisher</classname> implementiert einen kompletten
+            Pubsubhubbub Publizisten. Sein Setup ist sehr einfach und hauptsächlich müssen bei Ihm
+            nur die URI Endpunkte für alle Hubs konfiguriert werden welche bei Aktualisierungen
+            benachrichtigt werden müssen, und die URIs aller Themen die in Benachrichtigungen
+            einzubinden sind.
         </para>
 
         <para>
-            The following example shows a Publisher notifying a collection of Hubs about updates to
-            a pair of local RSS and Atom feeds. The class retains a collection of errors which
-            include the Hub URLs, so the notification can be re-attempted later and/or logged if any
-            notifications happen to fail. Each resulting error array also includes a "response" key
-            containing the related HTTP response object. In the event of any errors, it is strongly
-            recommended to attempt the operation for failed Hub Endpoints at least once more at a
-            future time. This may require the use of either a scheduled task for this purpose or
-            a job queue though such extra steps are optional.
+            Das folgende Beispiel zeigt einen Publizisten der eine Sammlung von Hubs über
+            Aktualisierungen zu einem Paar von lokalen RSS und Atom Feeds benachrichtigt. Die Klasse
+            enthält eine Anzahl von Fehlern welche die URLs des Hubs enthalten, damit
+            Benachrichtigungen stäter wieder ausgeführt oder protokolliert werden können wenn
+            irgendeine Benachrichtigung fehlschlägt. Jedes resultierende Fehlerarray enthält auch
+            einen "response" Schlüssel welche das betreffende HTTP Antwortobjekt enthält. In Falle
+            irgendeines Fehlers wird empfohlen die Operation für den fehlgeschlagenen Hub Endpunkt
+            in Zukunft zumindest noch einmal zu versuchen. Das kann die Verwendung einer geplanten
+            Aufgabe für diesen Zweck oder einer Job Queue wenn solche extra Schritte optional sind.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -151,7 +157,7 @@ $publisher->addUpdatedTopicUrls(array(
 $publisher->notifyAll();
 
 if (!$publisher->isSuccess()) {
-    // check for errors
+    // Auf Fehler prüfen
     $errors     = $publisher->getErrors();
     $failedHubs = array()
     foreach ($errors as $error) {
@@ -159,32 +165,34 @@ if (!$publisher->isSuccess()) {
     }
 }
 
-// reschedule notifications for the failed Hubs in $failedHubs
+// Benachrichtigung für fehlgeschlagene Hubs in $failedHubs nochmals planen
 ]]></programlisting>
 
         <para>
-            If you prefer having more concrete control over the Publisher, the methods
-            <methodname>addHubUrls()</methodname> and <methodname>addUpdatedTopicUrls()</methodname>
-            pass each array value to the singular <methodname>addHubUrl()</methodname> and
-            <methodname>addUpdatedTopicUrl()</methodname> public methods.  There are also matching
-            <methodname>removeUpdatedTopicUrl()</methodname> and
-            <methodname>removeHubUrl()</methodname> methods.
+            Wenn man eine konkretere Kontrolle über den Publizisten bevorzugt, gibt es die Methoden
+            <methodname>addHubUrls()</methodname> und <methodname>addUpdatedTopicUrls()</methodname>
+            welche jeden Arraywert an die einzelnen öffentlichen Methoden
+            <methodname>addHubUrl()</methodname> und <methodname>addUpdatedTopicUrl()</methodname>
+            übergeben. Es gibt auch passende <methodname>removeUpdatedTopicUrl()</methodname> und
+            <methodname>removeHubUrl()</methodname> Methoden.
         </para>
 
         <para>
-            You can also skip setting Hub URIs, and notify each in turn using the
-            <methodname>notifyHub()</methodname> method which accepts the URI of a Hub endpoint as
-            its only argument.
+            Man kann das Setzen der Hub URIs auch überspringen und jeden in Folge benachrichtigen
+            indem die Methode <methodname>notifyHub()</methodname> verwendet wird welche die URI
+            eines Hub Endpunkts als sein einziges Argument akzeptiert.
         </para>
 
         <para>
-            There are no other tasks to cover. The Publisher implementation is very simple since
-            most of the feed processing and distribution is handled by the selected Hubs. It is
-            however important to detect errors and reschedule notifications as soon as possible
-            (with a reasonable maximum number of retries) to ensure notifications reach all
-            Subscribers. In many cases as a final alternative, Hubs may frequently poll your
-            feeds to offer some additional tolerance for failures both in terms of their own
-            temporary downtime or Publisher errors/downtime.
+            Es gibt keine anderen Aufgaben die abzudecken sind. Die Implementation des Publizisten
+            ist sehr einfach da das meiste der Feedbearbeitung und Verteilung von den ausgewählten
+            Hubs durchgeführt wird. Es ist trotzdem wichtig Fehler zu erkennen und
+            Benachrichtigungen wieder so früh wie möglich zu planen (mit einer vernünftigen
+            maximalen Anzahl an Versuchen) um sicherzustellen das Benachrichtigungen alle
+            Abonnenten erreichen. In vielen Fällen können Hubs, als endgültige Alternative, den
+            eigenen Feed regelmäßig abfragen um zusätzliche Toleranzen bei Fehlern anzubieten
+            sowohl wegen deren eigenen temporären Downtime als auch den Fehlern und der Downtime
+            des Publizisten.
         </para>
     </sect2>
 
@@ -304,7 +312,6 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   `topic_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hub_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_time` datetime DEFAULT NULL,
-  `last_modified` datetime DEFAULT NULL,
   `lease_seconds` bigint(20) DEFAULT NULL,
   `verify_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `secret` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,

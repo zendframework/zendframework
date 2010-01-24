@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20554 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.creation">
     <title>Création d'une mesure</title>
@@ -71,29 +71,6 @@ $unit = new Zend_Measure_Number($machaine, Zend_Measure_Number::BINARY);
 echo $unit;
 ]]></programlisting>
         </example>
-
-        <para>
-            Habituellement, <classname>Zend_Measure_*</classname> peut automatiquement
-            extraire la mesure désirée incluse dans une chaîne arbitraire. Seulement le premier
-            nombre identifiable, indiqué en utilisant les chiffres européens/latins standard (0, 1,
-            2, 3, 4, 5, 6, 7, 8, 9), sera employé pour la création de la mesure. S'il y a des
-            chiffres plus loin dans la chaîne, ceux-ci seront ignorés.
-        </para>
-
-        <example id="zend.measure.creation.string.example-2">
-            <title>Saisie de texte arbitraire contenant des mesures</title>
-
-            <programlisting language="php"><![CDATA[
-$machaine = "Ma maison a une superficie de 125m².";
-$unite = new Zend_Measure_Area($machaine, Zend_Measure_Area::STANDARD);
-echo $unite; // affiche "125 m²";
-
-$machaine = "Ma maison a une superficie de 125m²,"
-          . " elle comprend 5 pièces de 25m² chacune.";
-$unite = new Zend_Measure_Area($machaine, Zend_Measure_Area::STANDARD);
-echo $unite; // affiche "125 m² in size";
-]]></programlisting>
-        </example>
     </sect2>
 
     <sect2 id="zend.measure.creation.localized">
@@ -115,12 +92,12 @@ echo $unite; // affiche "125 m² in size";
 
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
-$machaine = "The boat is 1,234.50 long.";
+$machaine = "1,234.50";
 $unite = new Zend_Measure_Length($machaine,
                                  Zend_Measure_Length::STANDARD, $locale);
 echo $unite; // affiche "1.234 m"
 
-$machaine = "The boat is 1,234.50 long.";
+$machaine = "1,234.50";
 $unite = new Zend_Measure_Length($machaine,
                                  Zend_Measure_Length::STANDARD, 'en_US');
 echo $unite; // affiche "1234.50 m"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 20554 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.output">
     <title>Récupérer des mesures</title>
@@ -36,7 +36,7 @@
 
                     <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
-$machaine = "1.234.567,89 Meter";
+$machaine = "1.234.567,89";
 $unite = new Zend_Measure_Length($machaine,
                                  Zend_Measure_Length::STANDARD,
                                  $locale);
@@ -67,7 +67,7 @@ echo $unite; // affiche "1234567.89 m"
 
                     <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
-$machaine = "1.234.567,89 Meter";
+$machaine = "1.234.567,89";
 $unite = new Zend_Measure_Length($machaine,
                                  Zend_Measure_Length::STANDARD,
                                  $locale);

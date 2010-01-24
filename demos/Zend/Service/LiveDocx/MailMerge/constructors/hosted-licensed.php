@@ -17,8 +17,8 @@ print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
 $phpLiveDocx->setWsdl('https://api.example.com/1.2/mailmerge.asmx?WSDL')
-            ->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
-            ->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
+            ->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+            ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
 
 $phpLiveDocx->getTemplateFormats(); // then call methods as usual
 

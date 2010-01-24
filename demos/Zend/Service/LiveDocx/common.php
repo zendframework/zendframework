@@ -17,3 +17,11 @@ $autoloader = Zend_Loader_Autoloader::getInstance();
 Zend_Locale::setDefault(Demos_Zend_Service_LiveDocx_Helper::LOCALE);
 $locale = new Zend_Locale(Zend_Locale::ZFDEFAULT);
 Zend_Registry::set('Zend_Locale', $locale);
+
+// Ensure LiveDocx credentials are available
+if (false === Demos_Zend_Service_LiveDocx_Helper::credentialsAvailable()) {
+    echo Demos_Zend_Service_LiveDocx_Helper::wrapLine(
+            Demos_Zend_Service_LiveDocx_Helper::credentialsHowTo()
+    );
+    exit();
+}

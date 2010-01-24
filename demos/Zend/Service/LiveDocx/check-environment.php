@@ -203,8 +203,8 @@ $counter ++;
 
 // -----------------------------------------------------------------------------
 
-if (defined('Demos_Zend_Service_LiveDocx_Helper::USERNAME') &&
-    defined('Demos_Zend_Service_LiveDocx_Helper::PASSWORD')) {
+if (defined('DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME') &&
+    defined('DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD')) {
     $result = TEST_PASS;
 } else {
     $result = TEST_FAIL;
@@ -223,8 +223,8 @@ try {
     $microtime = microtime(true);
     $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge(
         array (
-            'username' => Demos_Zend_Service_LiveDocx_Helper::USERNAME,
-            'password' => Demos_Zend_Service_LiveDocx_Helper::PASSWORD
+            'username' => DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME,
+            'password' => DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD
         )
     );
     $duration = microtime(true) - $microtime;

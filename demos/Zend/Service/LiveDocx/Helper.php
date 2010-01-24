@@ -34,32 +34,77 @@ require_once 'Zend/Date.php';
 class Demos_Zend_Service_LiveDocx_Helper
 {
     /**
-     * LiveDocx demonstration username
-     * 
-     * IMPORTANT: These login credentials may be used for demonstration purposes only.
-     *            Getting your own username and password takes less than 1 minute.
-     *            Goto http://is.gd/5dK5A to sign up.
+     * Name of configuration file stored in /demos/Zend/Service/LiveDocx/
      */
-    const USERNAME = 'zfdemos';
-    
-    /**
-     * LiveDocx demonstration password
-     *
-     * IMPORTANT: These login credentials may be used for demonstration purposes only.
-     *            Getting your own username and password takes less than 1 minute.
-     *            Goto http://is.gd/5dK5A to sign up.
-     */    
-    const PASSWORD = 'fkj3487o4zf35';
-    
+    const CONFIGURATION_FILE = 'configuration.php';
+        
     /**
      * Line length in characters (used to wrap long lines)
      */
     const LINE_LENGTH = 80;
     
     /**
-     * Default Locale
+     * Default locale
      */
     const LOCALE = 'en_US';
+    
+    /**
+     * Return true, if configuration file exists and constants
+     * DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME and
+     * DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD have been set.
+     *  
+     * @return boolean
+     */
+    public static function credentialsAvailable()
+    {
+        $ret = false;
+        
+        $filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . self::CONFIGURATION_FILE;
+        if (is_file($filename) && is_readable($filename)) {
+            include_once $filename;
+            if (defined('DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME') &&
+                defined('DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD') &&
+                false !== DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME  &&
+                false !== DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD ) {
+                    $ret = true;
+                }
+        }
+        
+        return $ret;
+    } 
+    
+    /**
+     * Return instructions on how to register to use LiveDocx service and enter
+     * username and password into configuration file.
+     * 
+     * @return string
+     */
+    public static function credentialsHowTo()
+    {
+        $ret  = PHP_EOL;
+        $ret .= sprintf('ERROR: LIVEDOCX USERNAME AND PASSWORD HAVE NOT BEEN SET.%s', PHP_EOL);
+        $ret .= PHP_EOL;
+        $ret .= sprintf('1. Using a web browser, register to use the LiveDocx service at:%s', PHP_EOL);
+        $ret .= sprintf('   https://www.livedocx.com/user/account_registration.aspx%s', PHP_EOL);
+        $ret .= sprintf('   (takes less than 1 minute).%s', PHP_EOL);
+        $ret .= PHP_EOL;
+        $ret .= sprintf('2. Change directory into:%s', PHP_EOL);
+        $ret .= sprintf('   %s%s', dirname(__FILE__), PHP_EOL);
+        $ret .= PHP_EOL;
+        $ret .= sprintf('3. Copy %s.dist to %s.%s', self::CONFIGURATION_FILE, self::CONFIGURATION_FILE, PHP_EOL);
+        $ret .= PHP_EOL;
+        $ret .= sprintf('4. Open %s in a text editor and enter the username and password%s', self::CONFIGURATION_FILE, PHP_EOL);
+        $ret .= sprintf('   you obtained in step 1 (lines 43 and 44).%s', PHP_EOL);
+        $ret .= PHP_EOL;
+        $ret .= sprintf('5. Save and close configuration.php.%s', PHP_EOL);
+        $ret .= PHP_EOL;
+        $ret .= sprintf('Congratulations!%s', PHP_EOL);
+        $ret .= PHP_EOL;
+        $ret .= sprintf('You have now set up the Zend_Service_LiveDocx demo applications.%s', PHP_EOL);
+        $ret .= PHP_EOL;
+        
+        return $ret;
+    }
     
     /**
      * Decorator to format return value of list methods

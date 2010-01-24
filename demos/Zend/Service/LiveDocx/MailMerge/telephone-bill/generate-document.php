@@ -6,8 +6,8 @@ require_once dirname(__FILE__) . '/../../common.php';
 
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
-$phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
-            ->setPassword(Demos_Zend_Service_LiveDocx_Helper::PASSWORD);
+$phpLiveDocx->setUsername(DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME)
+            ->setPassword(DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD);
 
 /*
  * ALTERNATIVE: Specify username and password in constructor
@@ -16,8 +16,8 @@ $phpLiveDocx->setUsername(Demos_Zend_Service_LiveDocx_Helper::USERNAME)
 /*
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge(
     array (
-        'username' => Demos_Zend_Service_LiveDocx_Helper::USERNAME,
-        'password' => Demos_Zend_Service_LiveDocx_Helper::PASSWORD
+        'username' => DEMOS_ZEND_SERVICE_LIVEDOCX_USERNAME,
+        'password' => DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD
     )
 );
 */

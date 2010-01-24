@@ -1,6 +1,0 @@
-Zend_Service_LiveDocx Demonstration Applications
-------------------------------------------------
-
-Before these demonstration applications can be used, you may need set the path
-to your locally installed Zend Framework Standard Trunk in lines 7 and 8 of
-"common.php". By default, this is set up automatically.

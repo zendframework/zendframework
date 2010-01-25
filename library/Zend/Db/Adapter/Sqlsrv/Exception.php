@@ -58,6 +58,6 @@ class Zend_Db_Adapter_Sqlsrv_Exception extends Zend_Db_Adapter_Exception
             $code    = (int)    $message['code'];
             $message = (string) $message['message'];
        }
-       parent::__construct($message, new Exception($message, $code));
+       parent::__construct($message, $code, new Exception($message, $code));
    }
 }

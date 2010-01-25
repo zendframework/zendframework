@@ -66,9 +66,9 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
 
         $this->_instance->setDirectives(array('logging' => true));
 
-        $this->_instance->save('bar : data to cache', '/bar', array('tag3', 'tag4'));
-        $this->_instance->save('bar2 : data to cache', '/bar2', array('tag3', 'tag1'));
-        $this->_instance->save('bar3 : data to cache', '/bar3', array('tag2', 'tag3'));
+        $this->_instance->save('bar : data to cache', bin2hex('/bar'), array('tag3', 'tag4'));
+        $this->_instance->save('bar2 : data to cache', bin2hex('/bar2'), array('tag3', 'tag1'));
+        $this->_instance->save('bar3 : data to cache', bin2hex('/bar3'), array('tag2', 'tag3'));
     }
 
     public function tearDown()
@@ -87,9 +87,9 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
     public function testRemoveCorrectCall()
     {
         $this->assertTrue($this->_instance->remove('/bar'));
-        $this->assertFalse($this->_instance->test('/bar'));
+        $this->assertFalse($this->_instance->test(bin2hex('/bar')));
         $this->assertFalse($this->_instance->remove('/barbar'));
-        $this->assertFalse($this->_instance->test('/barbar'));
+        $this->assertFalse($this->_instance->test(bin2hex('/barbar')));
     }
 
     public function testOptionsSetTagCache()
@@ -100,27 +100,27 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
 
     public function testSaveCorrectCall()
     {
-        $res = $this->_instance->save('data to cache', '/foo', array('tag1', 'tag2'));
+        $res = $this->_instance->save('data to cache', bin2hex('/foo'), array('tag1', 'tag2'));
         $this->assertTrue($res);
     }
 
     public function testSaveWithNullLifeTime()
     {
         $this->_instance->setDirectives(array('lifetime' => null));
-        $res = $this->_instance->save('data to cache', '/foo', array('tag1', 'tag2'));
+        $res = $this->_instance->save('data to cache', bin2hex('/foo'), array('tag1', 'tag2'));
         $this->assertTrue($res);
     }
 
     public function testSaveWithSpecificLifeTime()
     {
         $this->_instance->setDirectives(array('lifetime' => 3600));
-        $res = $this->_instance->save('data to cache', '/foo', array('tag1', 'tag2'), 10);
+        $res = $this->_instance->save('data to cache', bin2hex('/foo'), array('tag1', 'tag2'), 10);
         $this->assertTrue($res);
     }
 
     public function testTestWithAnExistingCacheId()
     {
-        $res = $this->_instance->test('/bar');
+        $res = $this->_instance->test(bin2hex('/bar'));
         if (!$res) {
             $this->fail('test() return false');
         }
@@ -129,13 +129,13 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
 
     public function testTestWithANonExistingCacheId()
     {
-        $this->assertFalse($this->_instance->test('/barbar'));
+        $this->assertFalse($this->_instance->test(bin2hex('/barbar')));
     }
 
     public function testTestWithAnExistingCacheIdAndANullLifeTime()
     {
         $this->_instance->setDirectives(array('lifetime' => null));
-        $res = $this->_instance->test('/bar');
+        $res = $this->_instance->test(bin2hex('/bar'));
         if (!$res) {
             $this->fail('test() return false');
         }
@@ -144,61 +144,61 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
 
     public function testGetWithANonExistingCacheId()
     {
-        $this->assertFalse($this->_instance->load('/barbar'));
+        $this->assertFalse($this->_instance->load(bin2hex('/barbar')));
     }
 
     public function testGetWithAnExistingCacheId()
     {
-        $this->assertEquals('bar : data to cache', $this->_instance->load('/bar'));
+        $this->assertEquals('bar : data to cache', $this->_instance->load(bin2hex('/bar')));
     }
 
     public function testGetWithAnExistingCacheIdAndUTFCharacters()
     {
         $data = '"""""' . "'" . '\n' . 'ééééé';
-        $this->_instance->save($data, '/foo');
-        $this->assertEquals($data, $this->_instance->load('/foo'));
+        $this->_instance->save($data, bin2hex('/foo'));
+        $this->assertEquals($data, $this->_instance->load(bin2hex('/foo')));
     }
 
     public function testCleanModeMatchingTags()
     {
         $this->assertTrue($this->_instance->clean('matchingTag', array('tag3')));
-        $this->assertFalse($this->_instance->test('/bar'));
-        $this->assertFalse($this->_instance->test('/bar2'));
+        $this->assertFalse($this->_instance->test(bin2hex('/bar')));
+        $this->assertFalse($this->_instance->test(bin2hex('/bar2')));
     }
 
     public function testCleanModeMatchingTags2()
     {
         $this->assertTrue($this->_instance->clean('matchingTag', array('tag3', 'tag4')));
-        $this->assertFalse($this->_instance->test('/bar'));
+        $this->assertFalse($this->_instance->test(bin2hex('/bar')));
     }
 
     public function testCleanModeNotMatchingTags()
     {
         $this->assertTrue($this->_instance->clean('notMatchingTag', array('tag3')));
-        $this->assertTrue($this->_instance->test('/bar'));
-        $this->assertTrue($this->_instance->test('/bar2'));
+        $this->assertTrue($this->_instance->test(bin2hex('/bar')));
+        $this->assertTrue($this->_instance->test(bin2hex('/bar2')));
     }
 
     public function testCleanModeNotMatchingTags2()
     {
         $this->assertTrue($this->_instance->clean('notMatchingTag', array('tag4')));
-        $this->assertTrue($this->_instance->test('/bar'));
-        $this->assertFalse($this->_instance->test('/bar2'));
+        $this->assertTrue($this->_instance->test(bin2hex('/bar')));
+        $this->assertFalse($this->_instance->test(bin2hex('/bar2')));
     }
 
     public function testCleanModeNotMatchingTags3()
     {
         $this->assertTrue($this->_instance->clean('notMatchingTag', array('tag4', 'tag1')));
-        $this->assertTrue($this->_instance->test('/bar'));
-        $this->assertTrue($this->_instance->test('/bar2'));
-        $this->assertFalse($this->_instance->test('/bar3'));
+        $this->assertTrue($this->_instance->test(bin2hex('/bar')));
+        $this->assertTrue($this->_instance->test(bin2hex('/bar2')));
+        $this->assertFalse($this->_instance->test(bin2hex('/bar3')));
     }
 
     public function testCleanModeAll()
     {
         $this->assertTrue($this->_instance->clean('all'));
-        $this->assertFalse($this->_instance->test('bar'));
-        $this->assertFalse($this->_instance->test('bar2'));
+        $this->assertFalse($this->_instance->test(bin2hex('bar')));
+        $this->assertFalse($this->_instance->test(bin2hex('bar2')));
     }
 
 

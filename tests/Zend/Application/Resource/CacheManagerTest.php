@@ -162,6 +162,26 @@ class Zend_Application_Resource_CacheManagerTest extends PHPUnit_Framework_TestC
         $this->assertEquals('BlackHole', $cacheTemplate['backend']['name']);
     }
 
+    public function testEmptyBackendOptionsShouldNotResultInError()
+    {
+        $options = array(
+            'foo' => array(
+                'frontend' => array(
+                    'name' => 'Core',
+                    'options' => array(
+                        'lifetime' => 7200,
+                    ),
+                ),
+                'backend' => array(
+                    'name' => 'black.hole',
+                ),
+            ),
+        );
+        $resource = new Zend_Application_Resource_Cachemanager($options);
+        $manager = $resource->init();
+        $cache = $manager->getCache('foo');
+        $this->assertTrue($cache instanceof Zend_Cache_Core);
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_CacheManagerTest::main') {

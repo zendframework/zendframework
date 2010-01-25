@@ -166,8 +166,8 @@ class Zend_Cache_Manager
             $this->_caches[$name] = Zend_Cache::factory(
                 $this->_optionTemplates[$name]['frontend']['name'],
                 $this->_optionTemplates[$name]['backend']['name'],
-                $this->_optionTemplates[$name]['frontend']['options'],
-                $this->_optionTemplates[$name]['backend']['options']
+                isset($this->_optionTemplates[$name]['frontend']['options']) ? $this->_optionTemplates[$name]['frontend']['options'] : array(),
+                isset($this->_optionTemplates[$name]['backend']['options']) ? $this->_optionTemplates[$name]['backend']['options'] : array()
             );
             return $this->_caches[$name];
         }

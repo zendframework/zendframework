@@ -164,9 +164,7 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
         $name      = $element->getFullyQualifiedName();
 
         $dijitParams = $this->getDijitParams();
-        if ($element->isRequired()) {
-            $dijitParams['required'] = true;
-        }
+        $dijitParams['required'] = $element->isRequired();
 
         $id = $element->getId();
         if ($view->dojo()->hasDijit($id)) {

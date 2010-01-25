@@ -213,6 +213,16 @@ class Zend_Dojo_Form_Decorator_DijitElementTest extends PHPUnit_Framework_TestCa
         $html = $this->decorator->render('');
         $this->assertContains('required="', $html);
     }
+
+    /**
+     * @group ZF-7660
+     */
+    public function testRenderingShouldRenderRequiredFlagAlways()
+    {
+        $this->element->setRequired(false);
+        $html = $this->decorator->render('');
+        $this->assertContains('required="false"', $html, $html);
+    }
 }
 
 // Call Zend_Dojo_Form_Decorator_DijitElementTest::main() if this source file is executed directly.

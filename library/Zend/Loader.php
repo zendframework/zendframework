@@ -173,6 +173,11 @@ class Zend_Loader
      */
     public static function isReadable($filename)
     {
+        // Phar occasionally fails when using fopen()
+        if (strpos($filename, 'phar://') !== false) {
+            return is_readable($filename);
+        }
+
         if (!$fh = @fopen($filename, 'r', true)) {
             return false;
         }

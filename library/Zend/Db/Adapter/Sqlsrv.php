@@ -148,11 +148,11 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
             foreach ($this->_config['driver_options'] as $option => $value) {
                 // A value may be a constant.
                 if (is_string($value)) {
-                    $constantValue = @constant(strtoupper($value));
-                    if ($constantValue === null) {
-                        $connectionInfo[$option] = $value;
+                    $constantName = strtoupper($value);
+                    if (defined($constantName)) {
+                        $connectionInfo[$option] = constant($constantName);
                     } else {
-                        $connectionInfo[$option] = $constantValue;
+                        $connectionInfo[$option] = $value;
                     }
                 }
             }

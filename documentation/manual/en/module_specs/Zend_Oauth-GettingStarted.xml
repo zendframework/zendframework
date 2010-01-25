@@ -78,7 +78,7 @@ $consumer = new Zend_Oauth_Consumer($config);
         preferred method including RSA-SHA1. For RSA-SHA1, you should also configure
         RSA private and public keys via the rsaPrivateKey and rsaPublicKey configuration
         fields or the <methodname>setRsaPrivateKey()</methodname> and
-        <nethodname>setRsaPublicKey()</methodname> methods.
+        <methodname>setRsaPublicKey()</methodname> methods.
     </para>
     
     <para>

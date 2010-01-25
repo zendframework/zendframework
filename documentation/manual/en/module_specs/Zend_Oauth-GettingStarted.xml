@@ -162,7 +162,7 @@ $config = array(
     'consumerSecret' => 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
 );
 
-$statusMessage = 'I'm posting to Twitter using Zend_Oauth!';
+$statusMessage = 'I\'m posting to Twitter using Zend_Oauth!';
 
 $token = unserialize($_SESSION['TWITTER_ACCESS_TOKEN']);
 $client = $token->getHttpClient($configuration);

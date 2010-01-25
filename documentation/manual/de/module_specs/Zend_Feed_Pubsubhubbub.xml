@@ -358,28 +358,34 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                             <entry>
                                 <para>
-                                    The URI used by a Hub to contact the Subscriber and either request
-                                    confirmation of a (un)subscription request or send updates from
-                                    subscribed feeds. The appended query string contains a custom
-                                    parameter (hence the xhub designation). It is a query string
-                                    parameter preserved by the Hub and resent with all Subscriber
-                                    requests. Its purpose is to allow the Subscriber to identify and
-                                    look up the subscription associated with any Hub request in a
-                                    backend storage medium.  This is a non-standard parameter used by
-                                    this component in preference to encoding a subscription key in the
-                                    URI path which is more difficult to implement in a Zend Framework
-                                    application.
+                                    Die URI welche von einem Hub verwendet wird um den Abonnenten
+                                    zu kontaktieren und entweder eine Bestätigung für eine Anfrage
+                                    oder das Löschen eines Abos abzufragen oder Aktualisierungen für
+                                    abonnierte Feeds zu senden. Der angehängte Abfragestring enthält
+                                    einen eigenen Parameter (demzufolge der Zweck von xhub). Es ist
+                                    ein Parameter für einen Abfragestring welcher vom Hub
+                                    aufbewahrt um mit allen Anfragen des Abonnenten wieder versendet
+                                    wird. Sein Zweck ist es dem Abonnenten zu erlauben sich zu
+                                    identifizieren und die Abos zu betrachten welche mit einer
+                                    beliebigen Hubanfrage in einem Backend-Speichermedium assoziiert
+                                    sind. Das ist kein Standardparameter welcher von dieser
+                                    Komponente verwendet wird statt einen Aboschlüssel im URI Pfad
+                                    zu kodieren, was in einer Zend Framework Anwendung viel
+                                    komplizierter zu implementieren wäre.
                                 </para>
 
                                 <para>
-                                    Nevertheless, since not all Hubs support query string parameters,
-                                    we still strongly recommend adding the subscription key as a path component
-                                    in the form http://www.mydomain.com/hubbub/callback/5536df06b5dcb966edab3a4c4d56213c16a8184.
-                                    To accomplish this, it requires defining a route capable of parsing out the final
-                                    value of the key and then retrieving the value and passing it to the Subscriber
-                                    Callback object. The value would be passed into the method
-                                    <methodname>Zend_Pubsubhubbub_Subscriber_Callback::setSubscriptionKey()</methodname>.
-                                    A detailed example is offered later.
+                                    Trotzdem, da nicht alle Hubs Parameter für den Abfragestring
+                                    unterstützen wird empfohlen den Aboschlüssel als Pfadkomponente
+                                    in der Form von
+                                    http://www.mydomain.com/hubbub/callback/5536df06b5dcb966edab3a4c4d56213c16a8184
+                                    hinzuzufügen. Um das zu bewerkstelligen, wird die Definition
+                                    einer Route benötigt welche in der Lage ist den endgültigen
+                                    Wert des Schlüssels herauszuparsen den Wert zu erhalten und Ihn
+                                    an das Callback Objekt des Abonnenten zu übergeben. Der Wert
+                                    würde an die Methode
+                                    <methodname>Zend_Pubsubhubbub_Subscriber_Callback::setSubscriptionKey()</methodname>
+                                    übergeben. Ein detailiertes Beispiel wird später gezeigt.
                                 </para>
                             </entry>
                         </row>
@@ -391,13 +397,15 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                             <entry>
                                 <para>
-                                    The number of seconds for which the Subscriber would like a new
-                                    subscription to remain valid for (i.e. a TTL). Hubs may enforce their own maximum
-                                    subscription period. All subscriptions should be renewed by simply
-                                    re-subscribing before the subscription period ends to ensure
-                                    continuity of updates. Hubs should additionally attempt to automatically
-                                    refresh subscriptions before they expire by contacting Subscribers (handled
-                                    automatically by the Callback class).
+                                    Die Anzahl an Sekunden für welche der Abonnenten will dass
+                                    ein neues Abo gültig bleibt (z.B. ein TTL). Hubs können Ihre
+                                    eigene maximale Abodauer erzwingen. Alle Abos sollten erneuert
+                                    werden indem einfach erneut abonniert wird bevor die Abodauer
+                                    endet um die Kontinuierlichkeit der Aktualisierungen zu
+                                    gewährleisten. Hubs sollten zusätzlich versuchen Abos
+                                    automatisch zu aktualisieren bevor diese auslaufen indem die
+                                    Abonnenten kontaktiert werden (dies wird automatisch von der
+                                    Callback Klasse behandelt).
                                 </para>
                             </entry>
                         </row>
@@ -409,8 +417,9 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                             <entry>
                                 <para>
-                                    Simple value indicating this is a subscription request.
-                                    Unsubscription requests would use the "unsubscribe" value.
+                                    Ein einfacher Wert welche anzeigt das dies eine Aboanfrage ist.
+                                    Anfragen für das Löschen von Abos würden den Wert
+                                    "unsubscribe" verwenden.
                                 </para>
                             </entry>
                         </row>
@@ -422,8 +431,8 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                             <entry>
                                 <para>
-                                    The URI of the topic (i.e. Atom or RSS feed) which the Subscriber
-                                    wishes to subscribe to for updates.
+                                    Die URI des Themas (z.B. Atom oder RSS Feed) welche der Abonnent
+                                    zu abonnieren wünscht damit er Aktualisierungen bekommt.
                                 </para>
                             </entry>
                         </row>
@@ -435,10 +444,10 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                             <entry>
                                 <para>
-                                    Indicates to the Hub the preferred mode of verifying subscriptions
-                                    or unsubscriptions. It is repeated twice in order of preference. Technically
-                                    this component does not distinguish between the two modes and treats both
-                                    equally.
+                                    Zeigt dem Hub die bevorzugte Methode der Prüfung von Abos und
+                                    dem Löschen von Abos. Sie wird im Normalfall zwei mal
+                                    wiederholt. Technisch gesehen unterscheidet diese Komponente
+                                    nicht zwischen den zwei Modi und behandelt beide gleich.
                                 </para>
                             </entry>
                         </row>
@@ -450,10 +459,10 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                             <entry>
                                 <para>
-                                    Indicates to the Hub the preferred mode of verifying subscriptions
-                                    or unsubscriptions. It is repeated twice in order of preference. Technically
-                                    this component does not distinguish between the two modes and treats both
-                                    equally.
+                                    Zeigt dem Hub die bevorzugte Methode der Prüfung von Abos und
+                                    dem Löschen von Abos. Sie wird im Normalfall zwei mal
+                                    wiederholt. Technisch gesehen unterscheidet diese Komponente
+                                    nicht zwischen den zwei Modi und behandelt beide gleich.
                                 </para>
                             </entry>
                         </row>
@@ -465,10 +474,10 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                             <entry>
                                 <para>
-                                    A verification token returned to the Subscriber by the Hub when it
-                                    is confirming a subscription or unsubscription. Offers a measure of
-                                    reliance that the confirmation request originates from the correct
-                                    Hub to prevent misuse.
+                                    Ein Prüftoken welcher dem Abonnenten vom Hub zurückgegeben wird
+                                    wenn er ein Abos oder das Löschen eines Abos bestätigt. Bietet
+                                    ein Maß an Vertrauen dass die Bestätigung der Anfrage vom
+                                    aktuellen Hub kommt um Missbrauch zu vermeiden.
                                 </para>
                             </entry>
                         </row>

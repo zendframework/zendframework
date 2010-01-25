@@ -52,8 +52,9 @@ class Zend_Cache_Frontend_Capture extends Zend_Cache_Core
      * @param  string  $id Cache id
      * @return mixed True if the cache is hit (false else) with $echoData=true (default) ; string else (datas)
      */
-    public function start($id, $tags)
+    public function start($id, array $tags)
     {
+        $this->_tags = $tags;
         ob_start(array($this, '_flush'));
         ob_implicit_flush(false);
         $this->_idStack[] = $id;

@@ -160,7 +160,7 @@ class Zend_Controller_Action_Helper_Cache
             && !empty($this->_tags[$controller][$action])) {
                 $tags = array_unique($this->_tags[$controller][$action]);
             }
-            $this->getCache('page')->start($this->_encodeCacheId($reqUri), $tags);
+            $this->getCache(Zend_Cache_Manager::PAGECACHE)->start($this->_encodeCacheId($reqUri), $tags);
         }
     }
     

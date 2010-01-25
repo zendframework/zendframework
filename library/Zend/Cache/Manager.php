@@ -34,6 +34,11 @@ class Zend_Cache_Manager
      * Constant holding reserved name for default Page Cache
      */
     const PAGECACHE = 'page';
+    
+    /**
+     * Constant holding reserved name for default Page Tag Cache
+     */
+    const PAGETAGCACHE = 'pagetag';
 
     /**
      * Array of caches stored by the Cache Manager instance
@@ -91,11 +96,12 @@ class Zend_Cache_Manager
             ),
         ),
         // Tag Cache
-        'tagcache' => array(
+        'pagetag' => array(
             'frontend' => array(
                 'name'    => 'Core',
                 'options' => array(
                     'automatic_serialization' => true,
+                    'lifetime' => null
                 ),
             ),
             'backend' => array(
@@ -155,7 +161,7 @@ class Zend_Cache_Manager
                 || !$this->_optionTemplates[$name]['backend']['options']['tag_cache'] instanceof Zend_Cache_Core)
             ) {
                 $this->_optionTemplates[$name]['backend']['options']['tag_cache']
-                    = $this->getCache('tagcache');
+                    = $this->getCache(self::PAGETAGCACHE );
             }
             $this->_caches[$name] = Zend_Cache::factory(
                 $this->_optionTemplates[$name]['frontend']['name'],

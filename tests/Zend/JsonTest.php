@@ -747,6 +747,14 @@ class Zend_JsonTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($target, Zend_Json::encode($source));
     }
     
+    /**
+     * @group ZF-8918
+     * @expectedException Zend_Json_Exception
+     */
+    public function testDecodingInvalidJsonShouldRaiseAnException()
+    {
+        Zend_Json::decode(' some string ');
+    }
 }
 
 /**

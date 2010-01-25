@@ -31,13 +31,16 @@ $consumer = new Zend_Oauth_Consumer($config);
     <para>
         The callbackUrl is the URI we want Twitter to request from our server
         when sending information. We'll look at this later. The siteUrl is the
-        base URI of Twitter's OAuth API endpoints. These utilise a convention
-        which maps to the three OAuth endpoints (as standard) for requesting a
+        base URI of Twitter's OAuth API endpoints. The full list of endpoints include
+        http://twitter.com/oauth/request_token, http://twitter.com/oauth/access_token,
+        and http://twitter.com/oauth/authorize. The base siteUrl utilises a convention
+        which maps to these three OAuth endpoints (as standard) for requesting a
         request token, access token or authorization. If the actual endpoints of
         any service differ from the standard set, these three URIs can be separately
-        set using the methods <methodname></methodname>,
-        <methodname></methodname>,
-        and <methodname></methodname>.
+        set using the methods <methodname>setRequestTokenUrl()</methodname>,
+        <methodname>setAccessTokenUrl()</methodname>,
+        and <methodname>setAuthorizeUrl()</methodname> or the configuration fields requestTokenUrl,
+        accessTokenUrl and authorizeUrl.
     </para>
     
     <para>
@@ -50,6 +53,32 @@ $consumer = new Zend_Oauth_Consumer($config);
     <para>
         All of these configuration options may be set using method calls simply
         by converting from, e.g. callbackUrl to setCallbackUrl().
+    </para>
+    
+    <para>
+        In addition, you should note several other configuration values not
+        explicitly used: requestMethod and requestScheme. By default, <classname>
+        Zend_Oauth_Consumer</classname> sends requests as POST (except for a
+        redirect which uses GET). The customised client (see later) also includes its
+        authorization by way of a header. Some services may, at their discretion,
+        require alternatives. You can reset the requestMethod (which defaults
+        to Zend_Oauth::POST) to Zend_Oauth::GET, for example, and reset the
+        requestScheme from its default of Zend_Oauth::REQUEST_SCHEME_HEADER to one
+        of Zend_Oauth::REQUEST_SCHEME_POSTBODY or
+        Zend_Oauth::REQUEST_SCHEME_QUERYSTRING. Typically the defaults should work
+        fine apart from some exceptional cases. Please refer to the service provider's
+        documentation for more details.
+    </para>
+    
+    <para>
+        The second area of customisation is how <acronym>HMAC</acronym> operates
+        when calculating/comparing them for all requests. This is configured using
+        the signatureMethod configuration field or <methodname>setSignatureMethod()
+        </methodname>. By default this is HMAC-SHA1. You can set it also to a provider's
+        preferred method including RSA-SHA1. For RSA-SHA1, you should also configure
+        RSA private and public keys via the rsaPrivateKey and rsaPublicKey configuration
+        fields or the <methodname>setRsaPrivateKey()</methodname> and
+        <nethodname>setRsaPublicKey()</methodname> methods.
     </para>
     
     <para>
@@ -178,4 +207,9 @@ if (isset($data->text)) {
 }
 echo $result;
 ]]></programlisting>
+
+    <para>As a note on the customised client, this can be passed to most
+    Zend Framework service or other classes using <classname>Zend_Http_Client
+    </classname> displacing the default client they would otherwise use.</para>
+
 </sect2>

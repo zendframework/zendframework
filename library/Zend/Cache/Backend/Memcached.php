@@ -219,13 +219,14 @@ class Zend_Cache_Backend_Memcached extends Zend_Cache_Backend implements Zend_Ca
         } else {
             $flag = 0;
         }
-        // #ZF-5702 : we try add() first becase set() seems to be slower
-        if (!($result = $this->_memcache->add($id, array($data, time(), $lifetime), $flag, $lifetime))) {
-            $result = $this->_memcache->set($id, array($data, time(), $lifetime), $flag, $lifetime);
-        }
+
+        // ZF-8856: using set because add needs a second request if item already exists
+        $result = @$this->_memcache->set($id, array($data, time(), $lifetime), $flag, $lifetime);
+
         if (count($tags) > 0) {
             $this->_log("Zend_Cache_Backend_Memcached::save() : tags are unsupported by the Memcached backend");
         }
+
         return $result;
     }
 

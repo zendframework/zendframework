@@ -21,6 +21,10 @@
  */
 
 /**
+ * @see Zend_Markup_Renderer_Html
+ */
+require_once 'Zend/Markup/Renderer/Html.php';
+/**
  * @see Zend_Markup_Renderer_Html_HtmlAbstract
  */
 require_once 'Zend/Markup/Renderer/Html/HtmlAbstract.php';
@@ -47,10 +51,14 @@ class Zend_Markup_Renderer_Html_Img extends Zend_Markup_Renderer_Html_HtmlAbstra
      */
     public function convert(Zend_Markup_Token $token, $text)
     {
-        $url = $text;
+        $uri = $text;
+
+        if (!preg_match('/^([a-z][a-z+\-.]*):/i', $uri)) {
+            $uri = 'http://' . $uri;
+        }
 
         // check if the URL is valid
-        if (!Zend_Uri::check($url)) {
+        if (!Zend_Markup_Renderer_Html::isValidUri($uri)) {
             return $text;
         }
 
@@ -65,7 +73,7 @@ class Zend_Markup_Renderer_Html_Img extends Zend_Markup_Renderer_Html_HtmlAbstra
             }
         }
 
-        return "<img src=\"{$url}\" alt=\"{$alt}\"" . Zend_Markup_Renderer_Html::renderAttributes($token) . " />";
+        return "<img src=\"{$uri}\" alt=\"{$alt}\"" . Zend_Markup_Renderer_Html::renderAttributes($token) . " />";
     }
 
 }

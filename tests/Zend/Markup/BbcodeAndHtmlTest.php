@@ -106,13 +106,12 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
             $this->_markup->render('[url]http://framework.zend.com/[/url]'));
         $this->assertEquals('<a href="http://framework.zend.com/">foo</a>',
             $this->_markup->render('[url=http://framework.zend.com/]foo[/url]'));
-        $this->assertEquals('bar', $this->_markup->render('[url="invalid"]bar[/url]'));
+        $this->assertEquals('bar', $this->_markup->render('[url="javascript:alert(1)"]bar[/url]'));
 
         $this->assertEquals('<img src="http://framework.zend.com/images/logo.png" alt="logo" />',
             $this->_markup->render('[img]http://framework.zend.com/images/logo.png[/img]'));
         $this->assertEquals('<img src="http://framework.zend.com/images/logo.png" alt="Zend Framework" />',
             $this->_markup->render('[img alt="Zend Framework"]http://framework.zend.com/images/logo.png[/img]'));
-        $this->assertEquals('invalid', $this->_markup->render('[img]invalid[/img]'));
 
     }
 
@@ -466,6 +465,15 @@ BBCODE;
         $this->assertEquals('<em>FOO&amp;BAR</em>baz', $m->render('[i]foo&bar[/i]baz'));
     }
 
+    public function testValidUri()
+    {
+        $this->assertTrue(Zend_Markup_Renderer_Html::isValidUri("http://www.example.com"));
+        $this->assertTrue(!Zend_Markup_Renderer_Html::isValidUri("www.example.com"));
+        $this->assertTrue(!Zend_Markup_Renderer_Html::isValidUri("http:///test"));
+        $this->assertTrue(Zend_Markup_Renderer_Html::isValidUri("https://www.example.com"));
+        $this->assertTrue(Zend_Markup_Renderer_Html::isValidUri("magnet:?xt=urn:bitprint:XZBS763P4HBFYVEMU5OXQ44XK32OMLIN.HGX3CO3BVF5AG2G34MVO3OHQLRSUF4VJXQNLQ7A &xt=urn:ed2khash:aa52fb210465bddd679d6853b491ccce&"));
+        $this->assertTrue(!Zend_Markup_Renderer_Html::isValidUri("javascript:alert(1)"));
+    }
 }
 
 // Call Zend_Markup_BbcodeAndHtmlTest::main()

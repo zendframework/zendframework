@@ -21,6 +21,10 @@
  */
 
 /**
+ * @see Zend_Markup_Renderer_Html
+ */
+require_once 'Zend/Markup/Renderer/Html.php';
+/**
  * @see Zend_Markup_Renderer_Html_HtmlAbstract
  */
 require_once 'Zend/Markup/Renderer/Html/HtmlAbstract.php';
@@ -48,21 +52,23 @@ class Zend_Markup_Renderer_Html_Url extends Zend_Markup_Renderer_Html_HtmlAbstra
     public function convert(Zend_Markup_Token $token, $text)
     {
         if ($token->hasAttribute('url')) {
-            $url = $token->getAttribute('url');
+            $uri = $token->getAttribute('url');
         } else {
-            $url = $text;
+            $uri = $text;
         }
 
-        //if (subs)
+        if (!preg_match('/^([a-z][a-z+\-.]*):/i', $uri)) {
+            $uri = 'http://' . $uri;
+        }
 
         // check if the URL is valid
-        if (!Zend_Uri::check($url)) {
+        if (!Zend_Markup_Renderer_Html::isValidUri($uri)) {
             return $text;
         }
 
         $attributes = Zend_Markup_Renderer_Html::renderAttributes($token);
 
-        return "<a href=\"{$url}\"{$attributes}>{$text}</a>";
+        return "<a href=\"{$uri}\"{$attributes}>{$text}</a>";
     }
 
 }

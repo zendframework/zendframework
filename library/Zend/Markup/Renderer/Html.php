@@ -21,10 +21,6 @@
  */
 
 /**
- * @see Zend_Uri
- */
-require_once 'Zend/Uri.php';
-/**
  * @see Zend_Filter_HtmlEntities
  */
 require_once 'Zend/Filter/HtmlEntities.php';
@@ -472,4 +468,43 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
         return false;
     }
 
+    /**
+     * Check if the URI is valid
+     *
+     * @param string $uri
+     *
+     * @return bool
+     */
+    public static function isValidUri($uri)
+    {
+        if (!preg_match('/^([a-z][a-z+\-.]*):/i', $uri, $matches)) {
+            return false;
+        }
+
+        $scheme = strtolower($matches[1]);
+
+        switch ($scheme) {
+            case 'javascript':
+                // JavaScript scheme is not allowed for security reason
+                return false;
+
+            case 'http':
+            case 'https':
+            case 'ftp':
+                $components = @parse_url($uri);
+
+                if ($components === false) {
+                    return false;
+                }
+
+                if (!isset($components['host'])) {
+                    return false;
+                }
+
+                return true;
+
+            default:
+                return true;
+        }
+    }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20554 -->
 <sect1 id="zend.measure.creation">
 
     <title>計測値の作成</title>
@@ -81,27 +81,6 @@ echo $unit;
 ]]></programlisting>
         </example>
 
-        <para>
-            通常は、任意の文字列に埋め込まれた計測値を
-            <classname>Zend_Measure_*</classname> が自動的に抽出します。
-            標準の European/Latin 数値 (0,1,2,3,4,5,6,7,8,9)
-            として認識可能な値が最初に見つかった時点で、それを用いて値を作成します。
-            文字列内に数値が複数あった場合は、それ以降のものは無視されます。
-        </para>
-
-        <example id="zend.measure.creation.string.example-2">
-            <title>計測値を含む任意の入力テキスト</title>
-            <programlisting language="php"><![CDATA[
-$mystring = "My house is 125m² in size";
-$unit = new Zend_Measure_Area($mystring, Zend_Measure_Area::STANDARD);
-echo $unit; // 出力は "125 m² in size" となります
-
-$mystring = "My house is 125m² in size, it has 5 rooms of 25m² each.";
-$unit = new Zend_Measure_Area($mystring, Zend_Measure_Area::STANDARD);
-echo $unit; // 出力は "125 m² in size" となります
-]]></programlisting>
-        </example>
-
     </sect2>
 
     <sect2 id="zend.measure.creation.localized">
@@ -124,13 +103,13 @@ echo $unit; // 出力は "125 m² in size" となります
             <title>ローカライズされた文字列</title>
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
-$mystring = "The boat is 1,234.50 long.";
+$mystring = "1,234.50";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 $locale);
 echo $unit; // 出力は "1.234 m" となります
 
-$mystring = "The boat is 1,234.50 long.";
+$mystring = "1,234.50";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 'en_US');

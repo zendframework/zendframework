@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 20554 -->
 <sect1 id="zend.measure.output">
 
     <title>計測値の出力</title>
 
     <para>
-        計測値は、さまざまな方法で出力することができます。
+        計測値は、さまざまな方法で出力できます。
     </para>
 
     <para>
@@ -39,7 +39,7 @@
                 <title>自動的な出力</title>
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
-$mystring = "1.234.567,89 Meter";
+$mystring = "1.234.567,89";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 $locale);
@@ -74,7 +74,7 @@ echo $unit;
                 <title>値の出力</title>
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
-$mystring = "1.234.567,89 Meter";
+$mystring = "1.234.567,89";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 $locale);
@@ -86,7 +86,7 @@ echo $unit->getValue();
 
         <para>
             <methodname>getValue()</methodname> メソッドには、オプションのパラメータ
-            '<code>round</code>' を指定することができます。
+            '<code>round</code>' を指定できます。
             これは、出力結果の精度を設定するものです。標準の精度は
             '<code>2</code>' です。
         </para>

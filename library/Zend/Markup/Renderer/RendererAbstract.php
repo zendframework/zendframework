@@ -295,19 +295,6 @@ abstract class Zend_Markup_Renderer_RendererAbstract
     {
         $return    = '';
 
-        // save old values to reset them after the work is done
-        $oldFilter = $this->_filter;
-        $oldGroup  = $this->_group;
-
-        // check filter and group usage in this tag
-        if (isset($this->_markups[$token->getName()])) {
-            $this->_filter = $this->getFilter($token->getName());
-
-            if ($group = $this->_getGroup($token)) {
-                $this->_group = $group;
-            }
-        }
-
         $this->_token = $token;
 
         // if this tag has children, execute them
@@ -316,10 +303,6 @@ abstract class Zend_Markup_Renderer_RendererAbstract
                 $return .= $this->_execute($child);
             }
         }
-
-        // reset to the old values
-        $this->_filter = $oldFilter;
-        $this->_group  = $oldGroup;
 
         return $return;
     }
@@ -378,8 +361,8 @@ abstract class Zend_Markup_Renderer_RendererAbstract
 
         // check for the context
         if (is_array($markup) && !in_array($markup['group'], $this->_groups[$this->_group])) {
-            $oldToken  = $this->_token;
-            $return    = $this->_filter($token->getTag()) . $this->_render($token) . $token->getStopper();
+            $oldToken = $this->_token;
+            $return   = $this->_filter($token->getTag()) . $this->_render($token) . $token->getStopper();
             $this->_token = $oldToken;
             return $return;
         }
@@ -388,6 +371,19 @@ abstract class Zend_Markup_Renderer_RendererAbstract
         if (!isset($markup['filter'])
             || (!($markup['filter'] instanceof Zend_Filter_Interface) && ($markup['filter'] !== false))) {
             $this->_markups[$name]['filter'] = $this->getDefaultFilter();
+        }
+
+        // save old values to reset them after the work is done
+        $oldFilter = $this->_filter;
+        $oldGroup  = $this->_group;
+
+        $return = '';
+
+        // set the filter and the group
+        $this->_filter = $this->getFilter($name);
+
+        if ($group = $this->_getGroup($token)) {
+            $this->_group = $group;
         }
 
         // callback
@@ -408,15 +404,24 @@ abstract class Zend_Markup_Renderer_RendererAbstract
                 }
             }
             if ($markup['type'] && !$empty) {
-                return $markup['callback']->convert($token, $this->_render($token));
+                $return = $markup['callback']->convert($token, $this->_render($token));
+            } else {
+                $return = $markup['callback']->convert($token, null);
             }
-            return $markup['callback']->convert($token, null);
+        } else {
+            // replace
+            if ($markup['type'] && !$empty) {
+                $return = $this->_executeReplace($token, $markup);
+            } else {
+                $return = $this->_executeSingleReplace($token, $markup);
+            }
         }
-        // replace
-        if ($markup['type'] && !$empty) {
-            return $this->_executeReplace($token, $markup);
-        }
-        return $this->_executeSingleReplace($token, $markup);
+
+        // reset to the old values
+        $this->_filter = $oldFilter;
+        $this->_group  = $oldGroup;
+
+        return $return;
     }
 
     /**

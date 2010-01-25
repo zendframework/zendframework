@@ -3,10 +3,10 @@
 include_once './common.php';
 
 define('TEST_PASS',       'PASS');
-define('TEST_FAIL',       'FAIL');  
+define('TEST_FAIL',       'FAIL');
 
 define('MIN_PHP_VERSION', '5.2.4');
-define('MIN_ZF_VERSION',  '1.8.0');
+define('MIN_ZF_VERSION',  '1.10.0beta');
 
 define('SOCKET_TIMEOUT',   5); // seconds
 
@@ -98,7 +98,7 @@ $counter ++;
 
 // -----------------------------------------------------------------------------
 
-if (1 === version_compare(Zend_Version::VERSION, MIN_ZF_VERSION)) {
+if (1 === Zend_Version::compareVersion(PHP_VERSION, MIN_PHP_VERSION)) {
     $result = TEST_PASS;
 } else {
     $result = TEST_FAIL;
@@ -226,10 +226,11 @@ try {
             'password' => DEMOS_ZEND_SERVICE_LIVEDOCX_PASSWORD
         )
     );
+    $phpLiveDocx->logIn();
     $duration = microtime(true) - $microtime;
 } catch (Zend_Service_LiveDocx_Exception $e) {
     $duration = -1;
-    $errorMessage = $e->getMessage();    
+    $errorMessage = $e->getMessage();
 }
 
 if (is_null($errorMessage)) {
@@ -239,7 +240,7 @@ if (is_null($errorMessage)) {
     $failed = true;
 }
 
-printLine($counter, sprintf('Instantiating Zend_Service_LiveDocx_MailMerge object (%01.2fs)', $duration), $result);
+printLine($counter, sprintf('Logging into backend service (%01.2fs)', $duration), $result);
 
 $counter ++;
 
@@ -265,13 +266,13 @@ print(Demos_Zend_Service_LiveDocx_Helper::wrapLine(PHP_EOL . $message . PHP_EOL 
 function printLine($counter, $testString, $testResult)
 {
     $lineLength = Demos_Zend_Service_LiveDocx_Helper::LINE_LENGTH;
-    
+
     //                        counter     result
     $padding = $lineLength - (4 + strlen(TEST_PASS));
-    
+
     $counter    = sprintf('%2s: ', $counter);
     $testString = str_pad($testString, $padding, '.', STR_PAD_RIGHT);
-    
+
     printf('%s%s%s%s', $counter, $testString, $testResult, PHP_EOL);
 }
 

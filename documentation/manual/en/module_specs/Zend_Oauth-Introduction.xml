@@ -42,4 +42,5 @@
 
     <xi:include href="Zend_Oauth-ProtocolWorkflow.xml" />
     <xi:include href="Zend_Oauth-SecurityArchitecture.xml" />
+    <xi:include href="Zend_Oauth-GettingStarted.xml" />
 </sect1>

@@ -25,6 +25,10 @@
  */
 require_once 'Zend/Filter/HtmlEntities.php';
 /**
+ * @see Zend_Filter_PregReplace
+ */
+require_once 'Zend/Filter/PregReplace.php';
+/**
  * @see Zend_Filter_Callback
  */
 require_once 'Zend/Filter/Callback.php';
@@ -44,239 +48,6 @@ require_once 'Zend/Markup/Renderer/RendererAbstract.php';
  */
 class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
 {
-
-    /**
-     * Tag info
-     *
-     * @var array
-     */
-    protected $_markups = array(
-        'b' => array(
-            'type'   => 10, // self::TYPE_REPLACE | self::TAG_NORMAL
-            'tag'    => 'strong',
-            'group'  => 'inline',
-            'filter' => true,
-        ),
-        'u' => array(
-            'type'        => 10,
-            'tag'         => 'span',
-            'attributes'  => array(
-                'style' => 'text-decoration: underline;',
-            ),
-            'group'       => 'inline',
-            'filter'      => true,
-        ),
-        'i' => array(
-            'type'   => 10,
-            'tag'    => 'em',
-            'group'  => 'inline',
-            'filter' => true,
-        ),
-        'cite' => array(
-            'type'   => 10,
-            'tag'    => 'cite',
-            'group'  => 'inline',
-            'filter' => true,
-        ),
-        'del' => array(
-            'type'   => 10,
-            'tag'    => 'del',
-            'group'  => 'inline',
-            'filter' => true,
-        ),
-        'ins' => array(
-            'type'   => 10,
-            'tag'    => 'ins',
-            'group'  => 'inline',
-            'filter' => true,
-        ),
-        'sub' => array(
-            'type'   => 10,
-            'tag'    => 'sub',
-            'group'  => 'inline',
-            'filter' => true,
-        ),
-        'sup' => array(
-            'type'   => 10,
-            'tag'    => 'sup',
-            'group'  => 'inline',
-            'filter' => true,
-        ),
-        'span' => array(
-            'type'   => 10,
-            'tag'    => 'span',
-            'group'  => 'inline',
-            'filter' => true,
-        ),
-        'acronym'  => array(
-            'type'   => 10,
-            'tag'    => 'acronym',
-            'group'  => 'inline',
-            'filter' => true,
-        ),
-        // headings
-        'h1' => array(
-            'type'   => 10,
-            'tag'    => 'h1',
-            'group'  => 'inline',
-            'filter' => false,
-        ),
-        'h2' => array(
-            'type'   => 10,
-            'tag'    => 'h2',
-            'group'  => 'inline',
-            'filter' => false,
-        ),
-        'h3' => array(
-            'type'   => 10,
-            'tag'    => 'h3',
-            'group'  => 'inline',
-            'filter' => false,
-        ),
-        'h4' => array(
-            'type'   => 10,
-            'tag'    => 'h4',
-            'group'  => 'inline',
-            'filter' => false,
-        ),
-        'h5' => array(
-            'type'   => 10,
-            'tag'    => 'h5',
-            'group'  => 'inline',
-            'filter' => false,
-        ),
-        'h6' => array(
-            'type'   => 10,
-            'tag'    => 'h6',
-            'group'  => 'inline',
-            'filter' => false,
-        ),
-        // callback tags
-        'url' => array(
-            'type'     => 6, // self::TYPE_CALLBACK | self::TAG_NORMAL
-            'callback' => null,
-            'group'    => 'inline',
-            'filter'   => true,
-        ),
-        'img' => array(
-            'type'     => 6,
-            'callback' => null,
-            'group'    => 'inline-empty',
-            'filter'   => true,
-        ),
-        'code' => array(
-            'type'     => 6,
-            'callback' => null,
-            'group'    => 'block-empty',
-            'filter'   => false,
-        ),
-        'p' => array(
-            'type'   => 10,
-            'tag'    => 'p',
-            'group'  => 'block',
-            'filter' => true,
-        ),
-        'ignore' => array(
-            'type'   => 10,
-            'start'  => '',
-            'end'    => '',
-            'group'  => 'block-empty',
-            'filter' => true,
-        ),
-        'quote' => array(
-            'type'   => 10,
-            'tag'    => 'blockquote',
-            'group'  => 'block',
-            'filter' => true,
-        ),
-        'list' => array(
-            'type'     => 6,
-            'callback' => null,
-            'group'    => 'list',
-            'filter'   => false,
-        ),
-        '*' => array(
-            'type'   => 10,
-            'tag'    => 'li',
-            'group'  => 'list-item',
-            'filter' => false,
-        ),
-        'hr' => array(
-            'type'    => 9, // self::TYPE_REPLACE | self::TAG_SINGLE
-            'tag'     => 'hr',
-            'group'   => 'block',
-            'empty'   => true,
-        ),
-        // aliases
-        'bold' => array(
-            'type' => 16,
-            'name' => 'b',
-        ),
-        'strong' => array(
-            'type' => 16,
-            'name' => 'b',
-        ),
-        'italic' => array(
-            'type' => 16,
-            'name' => 'i',
-        ),
-        'em' => array(
-            'type' => 16,
-            'name' => 'i',
-        ),
-        'emphasized' => array(
-            'type' => 16,
-            'name' => 'i',
-        ),
-        'underline' => array(
-            'type' => 16,
-            'name' => 'u',
-        ),
-        'citation' => array(
-            'type' => 16,
-            'name' => 'cite',
-        ),
-        'deleted' => array(
-            'type' => 16,
-            'name' => 'del',
-        ),
-        'insert' => array(
-            'type' => 16,
-            'name' => 'ins',
-        ),
-        'strike' => array(
-            'type' => 16,
-            'name' => 's',
-        ),
-        's' => array(
-            'type' => 16,
-            'name' => 'del',
-        ),
-        'subscript' => array(
-            'type' => 16,
-            'name' => 'sub',
-        ),
-        'superscript' => array(
-            'type' => 16,
-            'name' => 'sup',
-        ),
-        'a' => array(
-            'type' => 16,
-            'name' => 'url',
-        ),
-        'image' => array(
-            'type' => 16,
-            'name' => 'img',
-        ),
-        'li' => array(
-            'type' => 16,
-            'name' => '*',
-        ),
-        'color' => array(
-            'type' => 16,
-            'name' => 'span',
-        ),
-    );
 
     /**
      * Element groups
@@ -330,7 +101,245 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
             'Zend_Markup_Renderer_Html' => 'Zend/Markup/Renderer/Html/'
         ));
 
+        $this->_defineDefaultMarkups();
+
         parent::__construct($options);
+    }
+
+    /**
+     * Define the default markups
+     *
+     * @return void
+     */
+    protected function _defineDefaultMarkups()
+    {
+        $this->_markups = array(
+            'b' => array(
+                'type'   => 10, // self::TYPE_REPLACE | self::TAG_NORMAL
+                'tag'    => 'strong',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'u' => array(
+                'type'        => 10,
+                'tag'         => 'span',
+                'attributes'  => array(
+                    'style' => 'text-decoration: underline;',
+                ),
+                'group'       => 'inline',
+                'filter'      => true,
+            ),
+            'i' => array(
+                'type'   => 10,
+                'tag'    => 'em',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'cite' => array(
+                'type'   => 10,
+                'tag'    => 'cite',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'del' => array(
+                'type'   => 10,
+                'tag'    => 'del',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'ins' => array(
+                'type'   => 10,
+                'tag'    => 'ins',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'sub' => array(
+                'type'   => 10,
+                'tag'    => 'sub',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'sup' => array(
+                'type'   => 10,
+                'tag'    => 'sup',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'span' => array(
+                'type'   => 10,
+                'tag'    => 'span',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            'acronym'  => array(
+                'type'   => 10,
+                'tag'    => 'acronym',
+                'group'  => 'inline',
+                'filter' => true,
+            ),
+            // headings
+            'h1' => array(
+                'type'   => 10,
+                'tag'    => 'h1',
+                'group'  => 'inline',
+                'filter' => false,
+            ),
+            'h2' => array(
+                'type'   => 10,
+                'tag'    => 'h2',
+                'group'  => 'inline',
+                'filter' => false,
+            ),
+            'h3' => array(
+                'type'   => 10,
+                'tag'    => 'h3',
+                'group'  => 'inline',
+                'filter' => false,
+            ),
+            'h4' => array(
+                'type'   => 10,
+                'tag'    => 'h4',
+                'group'  => 'inline',
+                'filter' => false,
+            ),
+            'h5' => array(
+                'type'   => 10,
+                'tag'    => 'h5',
+                'group'  => 'inline',
+                'filter' => false,
+            ),
+            'h6' => array(
+                'type'   => 10,
+                'tag'    => 'h6',
+                'group'  => 'inline',
+                'filter' => false,
+            ),
+            // callback tags
+            'url' => array(
+                'type'     => 6, // self::TYPE_CALLBACK | self::TAG_NORMAL
+                'callback' => null,
+                'group'    => 'inline',
+                'filter'   => true,
+            ),
+            'img' => array(
+                'type'     => 6,
+                'callback' => null,
+                'group'    => 'inline-empty',
+                'filter'   => true,
+            ),
+            'code' => array(
+                'type'     => 6,
+                'callback' => null,
+                'group'    => 'block-empty',
+                'filter'   => false,
+            ),
+            'p' => array(
+                'type'   => 10,
+                'tag'    => 'p',
+                'group'  => 'block',
+                'filter' => true,
+            ),
+            'ignore' => array(
+                'type'   => 10,
+                'start'  => '',
+                'end'    => '',
+                'group'  => 'block-empty',
+                'filter' => true,
+            ),
+            'quote' => array(
+                'type'   => 10,
+                'tag'    => 'blockquote',
+                'group'  => 'block',
+                'filter' => true,
+            ),
+            'list' => array(
+                'type'     => 6,
+                'callback' => null,
+                'group'    => 'list',
+                'filter'   => new Zend_Filter_PregReplace('/.*/is', ''),
+            ),
+            '*' => array(
+                'type'   => 10,
+                'tag'    => 'li',
+                'group'  => 'list-item',
+                'filter' => true,
+            ),
+            'hr' => array(
+                'type'    => 9, // self::TYPE_REPLACE | self::TAG_SINGLE
+                'tag'     => 'hr',
+                'group'   => 'block',
+                'empty'   => true,
+            ),
+            // aliases
+            'bold' => array(
+                'type' => 16,
+                'name' => 'b',
+            ),
+            'strong' => array(
+                'type' => 16,
+                'name' => 'b',
+            ),
+            'italic' => array(
+                'type' => 16,
+                'name' => 'i',
+            ),
+            'em' => array(
+                'type' => 16,
+                'name' => 'i',
+            ),
+            'emphasized' => array(
+                'type' => 16,
+                'name' => 'i',
+            ),
+            'underline' => array(
+                'type' => 16,
+                'name' => 'u',
+            ),
+            'citation' => array(
+                'type' => 16,
+                'name' => 'cite',
+            ),
+            'deleted' => array(
+                'type' => 16,
+                'name' => 'del',
+            ),
+            'insert' => array(
+                'type' => 16,
+                'name' => 'ins',
+            ),
+            'strike' => array(
+                'type' => 16,
+                'name' => 's',
+            ),
+            's' => array(
+                'type' => 16,
+                'name' => 'del',
+            ),
+            'subscript' => array(
+                'type' => 16,
+                'name' => 'sub',
+            ),
+            'superscript' => array(
+                'type' => 16,
+                'name' => 'sup',
+            ),
+            'a' => array(
+                'type' => 16,
+                'name' => 'url',
+            ),
+            'image' => array(
+                'type' => 16,
+                'name' => 'img',
+            ),
+            'li' => array(
+                'type' => 16,
+                'name' => '*',
+            ),
+            'color' => array(
+                'type' => 16,
+                'name' => 'span',
+            ),
+        );
     }
 
     /**
@@ -350,46 +359,46 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
      * Execute a replace token
      *
      * @param  Zend_Markup_Token $token
-     * @param  array $tag
+     * @param  array $markup
      * @return string
      */
-    protected function _executeReplace(Zend_Markup_Token $token, $tag)
+    protected function _executeReplace(Zend_Markup_Token $token, $markup)
     {
-        if (isset($tag['tag'])) {
-            if (!isset($tag['attributes'])) {
-                $tag['attributes'] = array();
+        if (isset($markup['tag'])) {
+            if (!isset($markup['attributes'])) {
+                $markup['attributes'] = array();
             }
-            $attrs = self::renderAttributes($token, $tag['attributes']);
-            return "<{$tag['tag']}{$attrs}>{$this->_render($token)}</{$tag['tag']}>";
+            $attrs = self::renderAttributes($token, $markup['attributes']);
+            return "<{$markup['tag']}{$attrs}>{$this->_render($token)}</{$markup['tag']}>";
         }
 
-        return parent::_executeReplace($token, $tag);
+        return parent::_executeReplace($token, $markup);
     }
 
     /**
      * Execute a single replace token
      *
      * @param  Zend_Markup_Token $token
-     * @param  array $tag
+     * @param  array $markup
      * @return string
      */
-    protected function _executeSingleReplace(Zend_Markup_Token $token, $tag)
+    protected function _executeSingleReplace(Zend_Markup_Token $token, $markup)
     {
-        if (isset($tag['tag'])) {
-            if (!isset($tag['attributes'])) {
-                $tag['attributes'] = array();
+        if (isset($markup['tag'])) {
+            if (!isset($markup['attributes'])) {
+                $markup['attributes'] = array();
             }
-            $attrs = self::renderAttributes($token, $tag['attributes']);
-            return "<{$tag['tag']}{$attrs} />";
+            $attrs = self::renderAttributes($token, $markup['attributes']);
+            return "<{$markup['tag']}{$attrs} />";
         }
-        return parent::_executeSingleReplace($token, $tag);
+        return parent::_executeSingleReplace($token, $markup);
     }
 
     /**
      * Render some attributes
      *
      * @param  Zend_Markup_Token $token
-     * @param  array $tag
+     * @param  array $attributes
      * @return string
      */
     public static function renderAttributes(Zend_Markup_Token $token, array $attributes = array())

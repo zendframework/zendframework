@@ -301,9 +301,7 @@ abstract class Zend_Markup_Renderer_RendererAbstract
 
         // check filter and group usage in this tag
         if (isset($this->_markups[$token->getName()])) {
-            if (isset($this->_markups[$token->getName()]['filter'])) {
-                $this->_filter = $this->_markups[$token->getName()]['filter'];
-            }
+            $this->_filter = $this->getFilter($token->getName());
 
             if ($group = $this->_getGroup($token)) {
                 $this->_group = $group;
@@ -572,6 +570,8 @@ abstract class Zend_Markup_Renderer_RendererAbstract
         ) {
             if (isset($this->_markups[$markup]['filter']) && $this->_markups[$markup]['filter']) {
                 $this->_markups[$markup]['filter'] = $this->getDefaultFilter();
+            } else {
+                return false;
             }
         }
 

@@ -200,75 +200,83 @@ if (!$publisher->isSuccess()) {
         <title>Zend_Feed_Pubsubhubbub_Subscriber</title>
 
         <para>
-            In Pubsubhubbub, the Subscriber is the party who wishes to receive updates to any Topic (RSS
-            or Atom feed). They achieve this by subscribing to one or more of the Hubs advertised by
-            that Topic, usually as a set of one or more Atom 1.0 links with a rel attribute of "hub". The
-            Hub from that point forward will send an Atom or RSS feed containing all updates to that
-            Subscriber's Callback URL when it receives an update notification from the Publisher. In
-            this way, the Subscriber need never actually visit the original feed (though it's still
-            recommended at some level to ensure updates are retrieved if ever a Hub goes offline). All
-            subscription requests must contain the URI of the Topic being subscribed and a Callback URL
-            which the Hub will use to confirm the subscription and to forward updates.
+            In Pubsubhubbub ist der Abonnent ein Teilnehmer welcher Aktualisierungen zu irgendeinem
+            Thema (einem RSS oder Atom Feed) empfangen will. Er kann das bewerkstelligen indem er
+            einen oder mehrere Hubs abonniert welche von diesem Thema beworben werden, normalerweise
+            als ein Set von ein oder mehreren Atom 1.0 Links mit dem Rel Attribut "hub". Ab diesem
+            Punkt sendet der Hub, wenn er eine Benachrichtigung über eine Aktualisierung des
+            Publizisten empfängt, einen Atom oder RSS Feed, welcher alle Aktualisierungen enthält,
+            zur Callback URL des Abonnenten. Über diesen Weg muss der Abonnent niemals den
+            originalen Feed besuchen (obwohl es trotzdem empfohlen wird um sicherzustellen das
+            Aktualisierungen empfangen werden wenn ein Hub jemals offline geht). Alle Anfragen für
+            Abos müssen die URI des Themas enthalten welches abonniert werden soll, und eine
+            Callback URL welche der Hub verwendet um das Abo zu bestätigen und um Aktualisierungen
+            weiterzuleiten.
         </para>
 
         <para>
-            The Subsciber therefore has two roles. To create and manage subscriptions, including
-            subscribing for new Topics with a Hub, unsubscribing (if necessary), and periodically
-            renewing subscriptions since they may have a limited validity as set by the Hub. This is handled
-            by <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname>.
+            Der Abonnent hat deswegen zwei Rollen. Abos zu erstellen und zu managen, inklusive der
+            Abonnierung von neuen Themen mit einem Hub, dem kündigen von Abos (wenn notwendig), und
+            periodisch Abos zu erneuern da diese eine begrenzte Gültigkeit haben können was durch
+            den Hub gesetzt wird. Dies wird von
         </para>
 
         <para>
-            The second role is to accept updates sent by a Hub to the Subscriber's Callback URL, i.e.
-            the URI the Subscriber has assigned to handle updates. The Callback URL also handles events
-            where the Hub contacts the Subscriber to confirm all subscriptions and unsubscriptions.
-            This is handled by using an instance of
-            <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> when the Callback URL is
-            accessed.
+            Die zweite Rolle ist es Aktualisierungen zu akzeptieren welche vom Hub zur Callback
+            URL des Abonnenten gesendet werden, wenn z.B. die URI des Abonnenten zugeordnet wurde
+            um Aktualisierungen zu behandeln. Die Callback URL behandelt auch Events wenn der Hub
+            den Abonnenten kontaktiert um alle Abos zu das Löschen von Abos zu bestätigen. Dies wird
+            behandelt indem eine Instanz von
+            <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> verwendet wird wenn
+            auf die Callback URL zugegriffen wird.
         </para>
 
         <important>
             <para>
-                <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname> implements the Pubsubhubbub 0.2
-                Specification. As this is a new specification version not all Hubs currently implement
-                it. The new specification allows the Callback URL to include a query string which is
-                used by this class, but not supported by all Hubs. In the interests of maximising
-                compatibility it is therefore recommended that the query string component of the
-                Subscriber Callback URI be presented as a path element, i.e. recognised as a
-                parameter in the route associated with the Callback URI and used by the application's
-                Router.
+                <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname> implementiert die
+                Pubsubhubbub Spezifikation 0.2. Da dies eine Version der Spezifikation ist
+                implementieren Sie aktuell nicht alle Hubs. Die neue Spezifikation erlaubt der
+                Callback URL einen Abfragestring einzubinden welcher von dieser Klasse verwendet,
+                aber nicht von allen Hubs unterstützt wird. Im Interesse einer maximalen
+                Kompatibilität wird deshalb empfohlen die Komponente des Abfragestrings der
+                Callback URI des Abonnenten als Pfadelement darzustellen, z.B. als Parameter in der
+                Route erkannt und mit der Callback URI assoziiert und vom Router der Anwendung
+                verwendet.
             </para>
         </important>
 
         <sect3 id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing">
-            <title>Subscribing and Unsubscribing</title>
+            <title>Abonnieren und Abos löschen</title>
 
             <para>
-                <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname> implements a full Pubsubhubbub
-                Subscriber capable of subscribing to, or unsubscribing from, any Topic via any Hub
-                advertised by that Topic.  It operates in conjunction with
-                <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> which accepts requests
-                from a Hub to confirm all subscription or unsubscription attempts (to prevent
-                third-party misuse).
+                <classname>Zend_Feed_Pubsubhubbub_Subscriber</classname> implementiert einen
+                kompletten Pubsubhubbub Abonnenten der in der Lage ist jedes Thema über jeden Hub
+                der von diesem Thema vermittelt wird zu abonnieren und Abos zu löschen. Er arbeitet
+                in Verbindung mit <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>
+                welcher Anfragen von einem Hub akzeptiert um alle Aboanfragen und das Löschen von
+                Abos zu bestätigen (um Missbrauch durch andere zu verhindern).
             </para>
 
             <para>
-                Any subscription (or unsubscription) requires the relevant information before
-                proceeding, i.e. the URI of the Topic (Atom or RSS feed) to be subscribed to for
-                updates, and the URI of the endpoint for the Hub which will handle the subscription and
-                forwarding of the updates. The lifetime of a subscription may be determined by the
-                Hub but most Hubs should support automatic subscription refreshes by checking with
-                the Subscriber. This is supported by <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>
-                and requires no other work on your part. It is still strongly recommended that you use
-                the Hub sourced subscription time to live (ttl) to schedule the creation of new subscriptions
-                (the process is identical to that for any new subscription) to refresh it with the Hub.
-                While it should not be necessary per se, it covers cases where a Hub may not support
-                automatic subscription refreshing and rules out Hub errors for additional redundancy.
+                Jedes Abo (oder Löschen eines Abos) benötigt die betreffende Information bevor
+                es bearbeitet werden kann, z.B. die URI des Themas (Atom oder RSS Feed) das für
+                Aktualisierungen abonniert werden soll, und die URI des Endpunkts für den Hub
+                welcher die Anmeldung auf das Abo bearbeitet und die Aktualisierungen weiterleitet.
+                Die Lebenszeit eines Abos kann durch den Hub ermittelt werden, aber die meisten
+                Hubs sollten die automatische Auffrischung des Abos unterstützen indem der
+                Abonnenten geprüft wird. Das wird von
+                <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> unterstützt und
+                benötigt keine weitere Arbeit. Es wird trotzdem empfohlen dass man die vom Hub
+                kommende Lebenszeit des Abos (time to live, ttl) verwendet um die Erstellung neuer
+                Abos zu planen (der Prozess ist identisch mit dem eines neuen Abos) um es beim Hub
+                zu aktualisieren. Wärend das per se nicht notwendig ist, deckt es Fälle ab in denen
+                ein Hub die automatische Aktualisierung des Abos nicht unterstützt und deckt damit
+                Fehler des Hubs mit zusätzlicher Redundanz ab.
             </para>
 
             <para>
-                With the relevant information to hand, a subscription can be attempted as
-                demonstrated below:
+                Mit der relevanten Information an der Hand kann eine Abonnierung wie anbei gezeigt
+                versucht werden:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -283,27 +291,29 @@ if (!$publisher->isSuccess()) {
     ]]></programlisting>
 
             <para>
-                In order to store subscriptions and offer access to this data for general use,
-                the component requires a database (a schema is provided later in this section).
-                By default, it is assumed the table name is "subscription" and it utilises
-                <classname>Zend_Db_Table_Abstract</classname> in the background meaning it
-                will use the default adapter you have set for your application. You may also
-                pass a specific custom <classname>Zend_Db_Table_Abstract</classname> instance
-                into the associated model <classname>Zend_Feed_Pubsubhubbub_Model_Subscription</classname>.
-                This custom adapter may be as simple in intent as changing the table name to use or as
-                complex as you deem necessary.
+                Um Abos zu speichern und Zugriff auf dessen Daten für eine generelle Verwendung zu
+                Speichern benötigt die Komponente eine Datenbank (ein Schema wird später in diesem
+                Abschnitt angeboten). Standardmäßig wird angenommen das der Name der Tabelle
+                "subscription" ist und im Hintergrund <classname>Zend_Db_Table_Abstract</classname>
+                anwendet, was bedeutet das der Standardadapter verwendet wird welcher in der
+                Anwendung gesetzt ist. Man kann auch eine eigene spezielle Instanz von
+                <classname>Zend_Db_Table_Abstract</classname> in das assoziierte Modell von
+                <classname>Zend_Feed_Pubsubhubbub_Model_Subscription</classname> übergeben. Dieser
+                eigene Adapter kann so einfach wie gewünscht sein indem der Name der Tabelle welche
+                zu verwenden ist geändert wird, oder so komplex wie es notwendig ist.
             </para>
 
             <para>
-                While this Model is offered as a default ready-to-roll solution, you may create your
-                own Model using any other backend or database layer (e.g. Doctrine) so long as the
-                resulting class implements the interface
-                <classname>Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface</classname>.
+                Wärend das Modell als standardmäßige bereits verwendbare Lösung angeboten wird, kann
+                man sein eigenes Modell verwenden indem irgendein anderes Backend oder
+                Datenbanklayer (z.B. Doctrine) verwendet wird, solange die resultierende Klasse das
+                Interface <classname>Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface</classname>
+                implementiert.
             </para>
 
             <para>
-                An example schema (MySQL) for a subscription table accessible by the provided model
-                may look similar to:
+                Ein Beispielschema (MySQL) für eine Abotabelle auf welche vom angebotenen Modell aus
+                zugegriffen werden kann, könnte wie folgt aussehen:
             </para>
 
             <programlisting language="sql"><![CDATA[
@@ -322,21 +332,21 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 ]]></programlisting>
 
             <para>
-                Behind the scenes, the Subscriber above will send a request to the Hub endpoint containing the
-                following parameters (based on the previous example):
+                Im Hintergrund sendet der Abonnent eine Anfrage an den Endpunkt des Hubs welche die
+                folgenden Parameter enthält (basierend auf dem vorhergehenden Beispiel):
             </para>
 
             <table id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing.table">
-                <title>Subscription request parameters</title>
+                <title>Anfrageparameter beim Abonnieren</title>
 
                 <tgroup cols="3">
                     <thead>
                         <row>
                             <entry>Parameter</entry>
 
-                            <entry>Value</entry>
+                            <entry>Wert</entry>
 
-                            <entry>Explanation</entry>
+                            <entry>Beschreibung</entry>
                         </row>
                     </thead>
 

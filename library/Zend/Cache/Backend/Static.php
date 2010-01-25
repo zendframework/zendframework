@@ -192,23 +192,21 @@ class Zend_Cache_Backend_Static
             $fileName = $this->_options['index_filename'];
         }
 
-        $pathName = $this->_options['public_dir'] . dirname($id);
-        if (!file_exists($pathName)) {
-            mkdir($pathName, $this->_octdec($this->_options['cache_file_umask']), true);
-        }
+        $pathName = realpath($this->_options['public_dir']) . dirname($id);
+        $this->_createDirectoriesFor($pathName);
 
         if (is_null($id) || strlen($id) == 0) {
             $dataUnserialized = unserialize($data);
             $data = $dataUnserialized['data'];
         }
 
-        $file = $pathName . '/' . $fileName . $this->_options['file_extension'];
+        $file = rtrim($pathName, '/') . '/' . $fileName . $this->_options['file_extension'];
         if ($this->_options['file_locking']) {
             $result = file_put_contents($file, $data, LOCK_EX);
         } else {
             $result = file_put_contents($file, $data);
         }
-        @chmod($file, $this->_options['cache_file_umask']);
+        @chmod($file, $this->_octdec($this->_options['cache_file_umask']));
 
         if (count($tags) > 0) {
             if (is_null($this->_tagged) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
@@ -223,6 +221,21 @@ class Zend_Cache_Backend_Static
             $this->getInnerCache()->save($this->_tagged, self::INNER_CACHE_NAME);
         }
         return (bool) $result;
+    }
+    
+    /**
+     * Recursively create the directories needed to write the static file
+     */
+    protected function _createDirectoriesFor($path)
+    {
+        $parts = explode('/', $path);
+        $directory = '';
+        foreach ($parts as $part) {
+            $directory = rtrim($directory, '/') . '/' . $part;
+            if (!is_dir($directory)) {
+                mkdir($directory, $this->_octdec($this->_options['cache_file_umask']));
+            }
+        }
     }
 
     /**

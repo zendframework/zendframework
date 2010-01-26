@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19809 -->
+<!-- EN-Revision: 20649 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.authorization">
     <title>Erstellung eines Authorisations Systems in Zend Framework</title>
@@ -53,11 +53,12 @@
         <para>
             Wenn <classname>Zend_Acl</classname> verwendet wird können beliebige Modelle als Rollen
             oder Ressourcen fungieren indem einfach das richtige Interface implementiert wird. Um
-            als Rolle verwendet zu werden muss die Klasse <classname>Zend_Acl</classname>
-            implementieren, welche nur <methodname>getRoleId()</methodname> benötigt. Um als
-            Ressource zu verwenden muss eine Klasse
-            <classname>Zend_Acl_Resource_Interface</classname> implementieren wofür die Klasse so
-            ähnlich die <methodname>getResourceId()</methodname> Methode implementieren muss.
+            als Rolle verwendet zu werden muss die Klasse
+            <classname>Zend_Acl_Role_Interface</classname> implementieren, welche nur
+            <methodname>getRoleId()</methodname> benötigt. Um als Ressource zu verwenden muss eine
+            Klasse <classname>Zend_Acl_Resource_Interface</classname> implementieren wofür die
+            Klasse so ähnlich die <methodname>getResourceId()</methodname> Methode implementieren
+            muss.
         </para>
 
         <para>

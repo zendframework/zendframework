@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19999 -->
+<!-- EN-Revision: 20649 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.layering">
     <title>Layeraufbau von Decorators</title>
@@ -135,7 +135,7 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
         $id      = htmlentities($element->getId());
         $label   = htmlentities($element->getLabel());
 
-        $markup = sprint($this->_format, $id, $label);
+        $markup = sprintf($this->_format, $id, $label);
         return $markup;
     }
 }

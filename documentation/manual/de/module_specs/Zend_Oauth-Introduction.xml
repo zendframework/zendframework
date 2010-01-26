@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20232 -->
+<!-- EN-Revision: 20604 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.oauth.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Einführung zu OAuth</title>
@@ -46,4 +46,5 @@
 
     <xi:include href="Zend_Oauth-ProtocolWorkflow.xml" />
     <xi:include href="Zend_Oauth-SecurityArchitecture.xml" />
+    <xi:include href="Zend_Oauth-GettingStarted.xml" />
 </sect1>

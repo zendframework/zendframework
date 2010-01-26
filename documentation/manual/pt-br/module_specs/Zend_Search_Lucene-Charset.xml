@@ -1,51 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 17175 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.charset">
-  <title>Conjuntos de Caracteres</title>
+    <title>Conjunto de Caractere</title>
 
-  <sect2 id="zend.search.lucene.charset.description">
-    <title>Suporte aos conjuntos de caracteres UTF-8 e byte-simples.</title>
+    <sect2 id="zend.search.lucene.charset.description">
+        <title>Suporte ao conjunto de caractere UTF-8 e byte-simples</title>
 
-    <para>Zend_Search_Lucene foi projetado para trabalhar com conjuntos de
-    caracteres UTF-8. Arquivos de índice armazenam dados unicode no formato de
-    codificação "UTF-8 modificado" usado pelo Java. O núcleo do
-    Zend_Search_Lucene suporta-os plenamente, com uma exceção: <footnote>
-        <para>Zend_Search_Lucene suporta somente os caracteres do Plano
-        Multilingual Básico (BMP) (de 0x0000 a 0xFFFF), não suportando os
-        caracteres suplementares (caracteres acima de 0xFFFF)</para>
+        <para>
+            <classname>Zend_Search_Lucene</classname> trabalha internamente com o conjunto de
+            caractere UTF-8. Arquivos de índice armazenam dados unicode no formato de codificação
+            "UTF-8 modificado" usado pelo Java. O núcleo do
+            <classname>Zend_Search_Lucene</classname> suporta esta codificação plenamente, com uma
+            exceção.
+            <footnote>
+               <para>
+                   <classname>Zend_Search_Lucene</classname> suporta somente os caracteres do Plano
+                   Multilingual Básico (BMP) (de 0x0000 a 0xFFFF), não suportando os caracteres
+                   suplementares (caracteres acima de 0xFFFF)
+               </para>
 
-        <para>O Java 2 representa estes caracteres como um par de valores do
-        tipo char (16 bits), o primeiro vem da faixa superior (0xD800-0xDBFF),
-        o segundo, da faixa inferior (0xDC00-0xDFFF). Logo eles são
-        codificados como caracteres usuais UTF-8 em seis bytes. A
-        representação padrão UTF-8 utiliza quatro bytes para caracteres
-        suplementares.</para>
-      </footnote></para>
+               <para>
+                   O Java 2 representa estes caracteres como um par de valores do tipo char
+                   (16 bits), o primeiro vem da faixa superior (0xD800-0xDBFF), o segundo, da faixa
+                   inferior (0xDC00-0xDFFF). Logo eles são codificados como caracteres usuais UTF-8
+                   em seis bytes. A representação padrão UTF-8 utiliza quatro bytes para caracteres
+                   suplementares.
+               </para>
+            </footnote>
+        </para>
 
-    <para>Em todo caso, tanto os analizadores de texto, quanto os
-    interpretadores e processadores de consultas, utilizam a função
-    ctype_alpha() para tokenizar os textos e as consultas. A função
-    ctype_alpha() não suporta UTF-8 e sua substituição deve ser considerada em
-    um futuro próximo.</para>
+        <para>
+            Actual input data encoding may be specified through <classname>Zend_Search_Lucene</classname> <acronym>API</acronym>. Data will
+            be automatically converted into UTF-8 encoding.
+        </para>
+    </sect2>
 
-    <para>Por enquanto, recomendamos a conversão dos dados para a
-    representação ASCII. <footnote>
-        <para>Se os dados estiverem em formato UTF-8 ou, obrigatoriamente,
-        contiverem caracteres inexistentes em ASCII.</para>
-      </footnote> (isso vale tanto para consultas, quanto para armazenagem de
-    documentos fonte):</para>
+    <sect2 id="zend.search.lucene.charset.default_analyzer">
+        <title>Default text analyzer</title>
+        <para>
+            However, the default text analyzer (which is also used within query parser) uses
+            ctype_alpha() for tokenizing text and queries.
+        </para>
 
-    <programlisting role="php">&lt;?php
+        <para>
+            ctype_alpha() is not UTF-8 compatible, so the analyzer converts text to 'ASCII//TRANSLIT' encoding before
+            indexing. The same processing is transparently performed during query parsing.
+            <footnote>
+               <para>
+                   Conversion to 'ASCII//TRANSLIT' may depend on current locale and OS.
+               </para>
+            </footnote>
+        </para>
+
+        <note>
+            <title/>
+            <para>
+                Default analyzer doesn't treats numbers as parts of terms. Use corresponding 'Num' analyzer if you don't want words
+                to be broken by numbers.
+            </para>
+        </note>
+    </sect2>
+
+    <sect2 id="zend.search.lucene.charset.utf_analyzer">
+        <title>UTF-8 compatible text analyzers</title>
+
+        <para>
+            <classname>Zend_Search_Lucene</classname> also contains a set of UTF-8 compatible analyzers: <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8</classname>,
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num</classname>, <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive</classname>,
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive</classname>.
+        </para>
+
+        <para>
+             Any of this analyzers can be enabled with the code like this:
+
+            <programlisting language="php"><![CDATA[
+Zend_Search_Lucene_Analysis_Analyzer::setDefault(
+    new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
+]]></programlisting>
+        </para>
+
+        <warning>
+            <title/>
+            <para>
+                UTF-8 compatible analyzers were improved in Zend Framework 1.5. Early versions of analyzers assumed
+                all non-ascii characters are letters. New analyzers implementation has more accurate behavior.
+            </para>
+            <para>
+                This may need you to re-build index to have data and search queries tokenized in the same way, otherwise search engine
+                may return wrong result sets.
+            </para>
+        </warning>
+
+        <para>
+            All of these analyzers need PCRE (Perl-compatible regular expressions) library to be compiled with UTF-8 support turned on.
+            PCRE UTF-8 support is turned on for the PCRE library sources bundled with <acronym>PHP</acronym> source code distribution, but if shared library is used
+            instead of bundled with <acronym>PHP</acronym> sources, then UTF-8 support state may depend on you operating system.
+        </para>
+
+        <para>
+             Use the following code to check, if PCRE UTF-8 support is enabled:
+
+            <programlisting language="php"><![CDATA[
+if (@preg_match('/\pL/u', 'a') == 1) {
+    echo "PCRE unicode support is turned on.\n";
+} else {
+    echo "PCRE unicode support is turned off.\n";
+}
+]]></programlisting>
+        </para>
+
+        <para>
+            Case insensitive versions of UTF-8 compatible analyzers also need <ulink url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink> extension to be enabled.
+        </para>
+
+        <para>
+            If you don't want mbstring extension to be turned on, but need case insensitive search, you may use the following approach: normalize source data before indexing
+            and query string before searching by converting them to lowercase:
+
+            <programlisting language="php"><![CDATA[
+// Indexing
+setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
+
+...
+
+Zend_Search_Lucene_Analysis_Analyzer::setDefault(
+    new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
+
+...
+
 $doc = new Zend_Search_Lucene_Document();
-...
-$docText = iconv('ISO-8859-1', 'ASCII//TRANSLIT', $docText);
-$doc-&gt;addField(Zend_Search_Lucene_Field::UnStored('contents', $docText));
+
+$doc->addField(Zend_Search_Lucene_Field::UnStored('contents',
+                                                  strtolower($contents)));
+
+// Title field for search through (indexed, unstored)
+$doc->addField(Zend_Search_Lucene_Field::UnStored('title',
+                                                  strtolower($title)));
+
+// Title field for retrieving (unindexed, stored)
+$doc->addField(Zend_Search_Lucene_Field::UnIndexed('_title', $title));
+]]></programlisting>
+
+            <programlisting language="php"><![CDATA[
+// Searching
+setlocale(LC_CTYPE, 'de_DE.iso-8859-1');
 
 ...
 
-$query = iconv('', 'ASCII//TRANSLIT', $query);
-$hits = $index-&gt;find($query);
-?&gt;</programlisting>
-  </sect2>
+Zend_Search_Lucene_Analysis_Analyzer::setDefault(
+    new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8());
+
+...
+
+$hits = $index->find(strtolower($query));
+]]></programlisting>
+        </para>
+    </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

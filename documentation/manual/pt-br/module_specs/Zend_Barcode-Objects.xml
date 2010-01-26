@@ -37,7 +37,7 @@
         </listitem>
 
         <listitem>
-            <para>Através de setters individuais para cada tipo de configuração.</para>
+            <para>Através de métodos de acesso individuais para cada tipo de configuração.</para>
         </listitem>
     </itemizedlist>
 
@@ -59,7 +59,7 @@ $config  = new Zend_Config($options);
 $barcode = new Zend_Barcode_Object_Code39();
 $barcode->setConfig($config);
 
-// Caso 4: setters individuais
+// Caso 4: métodos de acesso individuais
 $barcode = new Zend_Barcode_Object_Code39();
 $barcode->setText('ZEND-FRAMEWORK')
         ->setBarHeight(40);
@@ -73,10 +73,11 @@ $barcode->setText('ZEND-FRAMEWORK')
             Na lista seguinte, os valores não têm unidades; usaremos o termo "unidade". Por exemplo,
             o valor padrão da "barra fina" é "1 unidade". As unidades reais dependem do suporte de
             renderização (veja <link linkend="zend.barcode.renderers">a documentação dos
-                renderizadores</link> para mais informações). Os setters são nomeados mudando a
-            letra inicial da opção para maiúscula e colocando o prefixo "set" (por exemplo
-            "barHeight" se torna "setBarHeight"). Todas as opções têm um getter correspondente com
-            prefixo "get" (por exemplo "getBarHeight"). As opções disponíveis são:
+                renderizadores</link> para mais informações). Os métodos de acesso são nomeados
+            mudando a letra inicial da opção para maiúscula e colocando o prefixo "set" (por exemplo
+            "barHeight" se torna "setBarHeight"). Todas as opções têm um método de leitura
+            correspondente com prefixo "get" (por exemplo "getBarHeight"). As opções disponíveis
+            são:
         </para>
 
         <table id="zend.barcode.objects.common.options.table">
@@ -324,17 +325,17 @@ Zend_Barcode::render(
     </sect2>
 
     <sect2 id="zend.barcode.objects.common.getters">
-        <title>Getters Adicionais Comuns</title>
+        <title>Métodos de Leitura Comuns Adicionais</title>
 
         <para></para>
 
         <table id="zend.barcode.objects.common.getters.table">
-            <title>Getters Comuns</title>
+            <title>Métodos de Leitura Comuns</title>
 
             <tgroup cols="3">
                 <thead>
                     <row>
-                        <entry>Getter</entry>
+                        <entry>Método de Leitura</entry>
 
                         <entry>Tipo de Dado</entry>
 

@@ -486,39 +486,41 @@ CREATE TABLE IF NOT EXISTS `subscription` (
             </table>
 
             <para>
-                You can modify several of these parameters to indicate a different preference.  For
-                example, you can set a different lease seconds value using
-                <methodname>Zend_Pubsubhubbub_Subscriber::setLeaseSeconds()</methodname> or show a
-                preference for the async verify mode by using <code>
-                    setPreferredVerificationMode(Zend_Feed_Pubsubhubbub::VERIFICATION_MODE_ASYNC)</code>.
-                However the Hubs retain the capability to enforce their own preferences and for this
-                reason the component is deliberately designed to work across almost any set of options
-                with minimum end-user configuration required. Conventions are great when they work!
+                Man kann verschiedene dieser Parameter verändern um eine andere Vorliebe anzuzeigen.
+                Zum Beispiel kann man eine anderen Wert der Gültigkeit in Sekunden setzen indem man
+                <methodname>Zend_Pubsubhubbub_Subscriber::setLeaseSeconds()</methodname> verwendet,
+                oder eine Vorliebe für eine asynchrone Prüfung zeigen indem
+                <code>setPreferredVerificationMode(Zend_Feed_Pubsubhubbub::VERIFICATION_MODE_ASYNC)</code>
+                verwendet wird. Trotzdem bleiben die Hubs in der Lage Ihre eigenen Vorlieben zu
+                erzwingen, und aus diesem Grund wurde die Komponente so designt dass Sie mit fast
+                jedem Set an Optionen arbeitet und eine minimale Konfiguration des End-Benutzers
+                erfordert. Konventionen sind toll wenn Sie funktionieren!
             </para>
 
             <note>
                 <para>
-                    While Hubs may require the use of a specific verification mode (both are supported
-                    by <classname>Zend_Pubsubhubbub</classname>), you may indicate a specific preference
-                    using the <methodname>setPreferredVerificationMode()</methodname> method. In "sync"
-                    (synchronous) mode, the Hub attempts to confirm a subscription as soon as it is
-                    received, and before responding to the subscription request. In "async"
-                    (asynchronous) mode, the Hub will return a response to the subscription request
-                    immediately, and its verification request may occur at a later time. Since
-                    <classname>Zend_Pubsubhubbub</classname> implements the Subscriber verification role
-                    as a separate callback class and requires the use of a backend storage medium, it
-                    actually supports both transparently though in terms of end-user performance,
-                    asynchronous verification is very much preferred to eliminate the impact of a
-                    poorly performing Hub tying up end-user server resources and connections for
-                    too long.
+                    Wärend Hubs die Verwendung eines spezifischen Prüfmodus benötigen können (beide
+                    werden von <classname>Zend_Pubsubhubbub</classname> unterstützt), kann eine
+                    spezifische die zu bevorzugen ist durch Verwendung der Method
+                    <classname>Zend_Pubsubhubbub</classname> angezeigt werden. Im Modus "sync"
+                    (synchron) versucht der Hub eine Aboanfrage sofort zu bestätigen sobald diese
+                    empfangen, und noch bevor auf die Aboanfrage geantwortet wird. Im Modus "async"
+                    (asynchron) gibt der Hub sofort eine Antwort auf die Aboanfrage zurück, und die
+                    Prüfanfrage kann später stattfinden. Da <classname>Zend_Pubsubhubbub</classname>
+                    die Rolle der Aboprüfung als eigene Callback Klasse implementiert, und die
+                    Verwendung eines Backend Speichermediums, unterstützt Sie beide transparent im
+                    Sinne der Geschwindigkeit des Endbenutzers. Die acynchrone Prüfung ist stark zu
+                    bevorzugen um die Nachteile eines schlecht performenden Hubs zu eliminieren,
+                    und die Server Ressourcen des End-Benutzers und die Verbindungen nicht zu lange
+                    zu binden.
                 </para>
             </note>
 
             <para>
-                Unsubscribing from a Topic follows the exact same pattern as the previous example, with
-                the exception that we should call <methodname>unsubscribeAll()</methodname> instead. The
-                parameters included are identical to a subscription request with the exception that
-                "hub.mode" is set to "unsubscribe".
+                Das Löschen eines Abos folgt exakt dem gleichen Pattern wie im vorherigen Beispiel,
+                mit der Ausnahme das stattdessen <methodname>unsubscribeAll()</methodname>
+                aufgerufen wird. Die enthaltenen Parameter  sind identisch mit einer Aboanfrage mit
+                der Ausnahme das "hub.mode" auf "unsubscribe" gesetzt wird.
             </para>
 
             <para>

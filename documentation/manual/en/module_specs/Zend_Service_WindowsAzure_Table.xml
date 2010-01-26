@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect1 id="zend.service.windowsazure.storage.table">
+<sect2 id="zend.service.windowsazure.storage.table">
     <title>Zend_Service_WindowsAzure_Storage_Table</title>
 
     <para>
@@ -26,14 +26,14 @@
         Azure production table storage.
     </para>
 
-    <sect2 id="zend.service.windowsazure.storage.table.api">
+    <sect3 id="zend.service.windowsazure.storage.table.api">
         <title>Operations on tables</title>
 
         <para>
             This topic lists some samples of operations that can be executed on tables.
         </para>
 
-        <sect3 id="zend.service.windowsazure.storage.table.api.create">
+        <sect4 id="zend.service.windowsazure.storage.table.api.create">
             <title>Creating a table</title>
 
             <para>
@@ -53,9 +53,9 @@ $result = $storageClient->createTable('testtable');
 echo 'New table name is: ' . $result->Name;
 ]]></programlisting>
             </example>
-        </sect3>
+        </sect4>
 
-        <sect3 id="zend.service.windowsazure.storage.table.api.list">
+        <sect4 id="zend.service.windowsazure.storage.table.api.list">
             <title>Listing all tables</title>
 
             <para>
@@ -76,10 +76,10 @@ foreach ($result as $table) {
 }
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </sect4>
+    </sect3>
 
-    <sect2 id="zend.service.windowsazure.storage.table.entities">
+    <sect3 id="zend.service.windowsazure.storage.table.entities">
         <title>Operations on entities</title>
 
         <para>
@@ -147,7 +147,7 @@ class SampleEntity extends Zend_Service_WindowsAzure_Storage_TableEntity
             <classname>Zend_Service_WindowsAzure_Storage_DynamicTableEntity</classname>.
         </para>
 
-        <sect3 id="zend.service.windowsazure.storage.table.entities.enforced">
+        <sect4 id="zend.service.windowsazure.storage.table.entities.enforced">
             <title>Enforced schema entities</title>
 
             <para>
@@ -323,9 +323,9 @@ public $Age;
                     </para>
                 </listitem>
             </itemizedlist>
-        </sect3>
+        </sect4>
 
-        <sect3 id="zend.service.windowsazure.storage.table.entities.dynamic">
+        <sect4 id="zend.service.windowsazure.storage.table.entities.dynamic">
             <title>No enforced schema entities (a.k.a. DynamicEntity)</title>
 
             <para>
@@ -414,12 +414,12 @@ $target->setAzurePropertyType('Age', 'Edm.Int64');
                 <classname>Zend_Service_WindowsAzure_Storage_TableEntity</classname> if no specific
                 class is passed into Table Storage methods.
             </para>
-        </sect3>
+        </sect4>
 
-        <sect3 id="zend.service.windowsazure.storage.table.entities.api">
+        <sect4 id="zend.service.windowsazure.storage.table.entities.api">
             <title>Entities API examples</title>
 
-            <sect4 id="zend.service.windowsazure.storage.table.entities.api.insert">
+            <sect5 id="zend.service.windowsazure.storage.table.entities.api.insert">
                 <title>Inserting an entity</title>
 
                 <para>
@@ -446,9 +446,9 @@ echo 'Timestamp: ' . $result->getTimestamp() . "\n";
 echo 'Etag: ' . $result->getEtag() . "\n";
 ]]></programlisting>
                 </example>
-            </sect4>
+            </sect5>
 
-            <sect4 id="zend.service.windowsazure.storage.table.entities.api.retrieve-by-id">
+            <sect5 id="zend.service.windowsazure.storage.table.entities.api.retrieve-by-id">
                 <title>Retrieving an entity by partition key and row key</title>
 
                 <para>
@@ -468,9 +468,9 @@ $entity= $storageClient->retrieveEntityById(
 );
 ]]></programlisting>
                 </example>
-            </sect4>
+            </sect5>
 
-            <sect4 id="zend.service.windowsazure.storage.table.entities.api.updating">
+            <sect5 id="zend.service.windowsazure.storage.table.entities.api.updating">
                 <title>Updating an entity</title>
 
                 <para>
@@ -518,9 +518,9 @@ $entity->Name = 'New name';
 $result = $storageClient->updateEntity('testtable', $entity, true);
 ]]></programlisting>
                 </example>
-            </sect4>
+            </sect5>
 
-            <sect4 id="zend.service.windowsazure.storage.table.entities.api.delete">
+            <sect5 id="zend.service.windowsazure.storage.table.entities.api.delete">
                 <title>Deleting an entity</title>
 
                 <para>
@@ -541,10 +541,10 @@ $entity = $storageClient->retrieveEntityById(
 $result = $storageClient->deleteEntity('testtable', $entity);
 ]]></programlisting>
                 </example>
-            </sect4>
-        </sect3>
+            </sect5>
+        </sect4>
 
-        <sect3 id="zend.service.windowsazure.storage.table.entities.querying">
+        <sect4 id="zend.service.windowsazure.storage.table.entities.querying">
             <title>Performing queries</title>
 
             <para>
@@ -618,9 +618,9 @@ foreach ($entities as $entity) {
 }
 ]]></programlisting>
             </example>
-        </sect3>
+        </sect4>
 
-        <sect3 id="zend.service.windowsazure.storage.table.entities.batch">
+        <sect4 id="zend.service.windowsazure.storage.table.entities.batch">
             <title>Batch operations</title>
 
             <para>
@@ -657,10 +657,10 @@ foreach ($entities as $entity) {
 $batch->commit();
 ]]></programlisting>
             </example>
-        </sect3>
-    </sect2>
+        </sect4>
+    </sect3>
 
-    <sect2 id="zend.service.windowsazure.storage.table.sessionhandler">
+    <sect3 id="zend.service.windowsazure.storage.table.sessionhandler">
         <title>Table storage session handler</title>
 
         <para>
@@ -730,9 +730,9 @@ if (!isset($_SESSION['firstVisit'])) {
         <warning>
             <para>
                 The <classname>Zend_Service_WindowsAzure_SessionHandler</classname> session handler
-                should be registered before a call to <functionname>session_start()</functionname>
+                should be registered before a call to <methodname>session_start()</methodname>
                 is made!
             </para>
         </warning>
-    </sect2>
-</sect1>
+    </sect3>
+</sect2>

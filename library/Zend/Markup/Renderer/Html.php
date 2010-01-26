@@ -351,7 +351,7 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
     {
         $this->_defaultFilter = new Zend_Filter();
 
-        $this->_defaultFilter->addFilter(new Zend_Filter_HtmlEntities());
+        $this->_defaultFilter->addFilter(new Zend_Filter_HtmlEntities(array('encoding' => self::getEncoding())));
         $this->_defaultFilter->addFilter(new Zend_Filter_Callback('nl2br'));
     }
 
@@ -438,9 +438,11 @@ class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract
          */
         foreach ($attributes as $attribute => $value) {
             if (isset($tokenAttributes[$attribute]) && !empty($tokenAttributes[$attribute])) {
-                $return .= ' ' . $attribute . '="' . htmlentities($tokenAttributes[$attribute], ENT_QUOTES) . '"';
+                $return .= ' ' . $attribute . '="' . htmlentities($tokenAttributes[$attribute],
+                                                                  ENT_QUOTES,
+                                                                  self::getEncoding()) . '"';
             } elseif (!empty($value)) {
-                $return .= ' ' . $attribute . '="' . htmlentities($value, ENT_QUOTES) . '"';
+                $return .= ' ' . $attribute . '="' . htmlentities($value, ENT_QUOTES, self::getEncoding()) . '"';
             }
         }
 

@@ -74,8 +74,8 @@ class Zend_Markup_Renderer_Html_Img extends Zend_Markup_Renderer_Html_HtmlAbstra
         }
 
         // run the URI and alt through htmlentities
-        $uri = htmlentities($uri, ENT_QUOTES, 'UTF-8');
-        $alt = htmlentities($alt, ENT_QUOTES, 'UTF-8');
+        $uri = htmlentities($uri, ENT_QUOTES, 'UTF-8', Zend_Markup_Renderer_Html::getEncoding());
+        $alt = htmlentities($alt, ENT_QUOTES, 'UTF-8', Zend_Markup_Renderer_Html::getEncoding());
 
 
         return "<img src=\"{$uri}\" alt=\"{$alt}\"" . Zend_Markup_Renderer_Html::renderAttributes($token) . " />";

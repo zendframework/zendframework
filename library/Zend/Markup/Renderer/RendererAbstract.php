@@ -104,6 +104,13 @@ abstract class Zend_Markup_Renderer_RendererAbstract
      */
     protected $_token;
 
+    /**
+     * Encoding
+     *
+     * @var string
+     */
+    protected static $_encoding = 'UTF-8';
+
 
     /**
      * Constructor
@@ -118,6 +125,9 @@ abstract class Zend_Markup_Renderer_RendererAbstract
             $options = $options->toArray();
         }
 
+        if (isset($options['encoding'])) {
+            $this->setEncoding($options['encoding']);
+        }
         if (isset($options['parser'])) {
             $this->setParser($options['parser']);
         }
@@ -162,6 +172,30 @@ abstract class Zend_Markup_Renderer_RendererAbstract
     public function getPluginLoader()
     {
         return $this->_pluginLoader;
+    }
+
+    /**
+     * Set the renderer's encoding
+     *
+     * @param string $encoding
+     *
+     * @return Zend_Markup_Renderer_RendererAbstract
+     */
+    public static function setEncoding($encoding)
+    {
+        self::$_encoding = $encoding;
+
+        return $this;
+    }
+
+    /**
+     * Get the renderer's encoding
+     *
+     * @return string
+     */
+    public static function getEncoding()
+    {
+        return self::$_encoding;
     }
 
     /**

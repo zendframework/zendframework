@@ -474,6 +474,15 @@ BBCODE;
         $this->assertTrue(Zend_Markup_Renderer_Html::isValidUri("magnet:?xt=urn:bitprint:XZBS763P4HBFYVEMU5OXQ44XK32OMLIN.HGX3CO3BVF5AG2G34MVO3OHQLRSUF4VJXQNLQ7A &xt=urn:ed2khash:aa52fb210465bddd679d6853b491ccce&"));
         $this->assertTrue(!Zend_Markup_Renderer_Html::isValidUri("javascript:alert(1)"));
     }
+
+    public function testXssInImgAndUrl()
+    {
+        $this->assertEquals('<a href="http://google.com/&quot;&lt;script&gt;alert(1)&lt;/script&gt;">...</a>',
+            $this->_markup->render('[url=\'http://google.com/"<script>alert(1)</script>\']...[/url]'));
+        $this->assertEquals('<img src="http://google.com/&amp;quot;&amp;lt;script&amp;gt;alert(1)&amp;lt;/script&amp;gt;" alt="/script&amp;gt;" />',
+            $this->_markup->render('[img]http://google.com/"<script>alert(1)</script>[/img]'));
+    }
+
 }
 
 // Call Zend_Markup_BbcodeAndHtmlTest::main()

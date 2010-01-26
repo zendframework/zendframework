@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17340 -->
+<!-- EN-Revision: 19777 -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta ヘルパー</title>
 
     <para>
-        HTML の <code>&lt;meta&gt;</code> 要素は、
+        HTML の <emphasis>&lt;meta&gt;</emphasis> 要素は、
         HTML ドキュメントに関するメタ情報を扱います。
         たとえばキーワードや文字セット、キャッシュ方式などです。
         Meta タグには 'http-equiv' 形式と 'name' 形式があり、
@@ -14,27 +14,51 @@
     </para>
 
     <para>
-        <code>HeadMeta</code> ヘルパーは、
+        <classname>HeadMeta</classname> ヘルパーは、
         meta タグを設定したり追加したりするための次のようなメソッドを提供します。
     </para>
 
     <itemizedlist>
-        <listitem><para><code>appendName($keyValue, $content,
-                    $conditionalName)</code></para></listitem>
-        <listitem><para><code>offsetSetName($index, $keyValue, $content,
-                    $conditionalName)</code></para></listitem>
-        <listitem><para><code>prependName($keyValue, $content,
-                    $conditionalName)</code></para></listitem>
-        <listitem><para><code>setName($keyValue, $content,
-                    $modifiers)</code></para></listitem>
-        <listitem><para><code>appendHttpEquiv($keyValue, $content,
-                    $conditionalHttpEquiv)</code></para></listitem>
-        <listitem><para><code>offsetSetHttpEquiv($index, $keyValue, $content,
-                    $conditionalHttpEquiv)</code></para></listitem>
-        <listitem><para><code>prependHttpEquiv($keyValue, $content,
-                    $conditionalHttpEquiv)</code></para></listitem>
-        <listitem><para><code>setHttpEquiv($keyValue, $content,
-                    $modifiers)</code></para></listitem>
+        <listitem>
+            <para>
+                <command>appendName($keyValue, $content, $conditionalName)</command>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <command>offsetSetName($index, $keyValue, $content, $conditionalName)</command>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <command>prependName($keyValue, $content, $conditionalName)</command>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <command>setName($keyValue, $content, $modifiers)</command>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <command>appendHttpEquiv($keyValue, $content, $conditionalHttpEquiv)</command>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <commande>offsetSetHttpEquiv($index, $keyValue, $content, $conditionalHttpEquiv)</commande>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <command>prependHttpEquiv($keyValue, $content, $conditionalHttpEquiv)</command>
+            </para>
+        </listitem>
+        <listitem>
+            <para>
+                <command>setHttpEquiv($keyValue, $content, $modifiers)</command>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -47,9 +71,9 @@
 
     <para>
         ヘルパーメソッド <methodname>headMeta()</methodname> で meta タグを設定することもできます。
-        このメソッドのシグネチャは <code>headMeta($content,
+        このメソッドのシグネチャは <command>headMeta($content,
             $keyValue, $keyType = 'name', $modifiers = array(), $placement =
-            'APPEND')</code>
+            'APPEND')</command>
         です。<varname>$keyValue</varname> には、
         <varname>$keyType</varname> ('name' あるいは 'http-equiv')
         で指定したキーのコンテンツを指定します。
@@ -59,17 +83,17 @@
     </para>
 
     <para>
-        <code>HeadMeta</code> は <methodname>append()</methodname> や
+        <classname>HeadMeta</classname> は <methodname>append()</methodname> や
         <methodname>offsetSet()</methodname>、<methodname>prepend()</methodname>、そして <methodname>set()</methodname>
         をそれぞれオーバーライドして、上にあげた特別なメソッドを使用させるようにします。
-        内部的には、各項目を <code>stdClass</code> のトークンとして保管し、
+        内部的には、各項目を <property>stdClass</property> のトークンとして保管し、
         あとで <methodname>itemToString()</methodname> メソッドでシリアライズします。
         これはスタック内の項目についてチェックを行い、
         オプションでそれを修正したものを返します。
     </para>
 
     <para>
-        <code>HeadMeta</code> ヘルパーは、
+        <classname>HeadMeta</classname> ヘルパーは、
         <link linkend="zend.view.helpers.initial.placeholder">Placeholder
         ヘルパー</link> の具象実装です。
     </para>
@@ -78,7 +102,7 @@
         <title>HeadMeta ヘルパーの基本的な使用法</title>
 
         <para>
-            meta タグは、いつでも好きなときに指定することができます。
+            meta タグは、いつでも好きなときに指定できます。
             一般的には、クライアント側でのキャッシュの制御方法や
             SEO 用キーワードなどを指定します。
         </para>
@@ -117,6 +141,17 @@ $this->headMeta()->appendHttpEquiv('expires',
 $this->headMeta()->appendHttpEquiv('Content-Type',
                                    'text/html; charset=UTF-8')
                  ->appendHttpEquiv('Content-Language', 'en-US');
+]]></programlisting>
+
+        <!-- TODO : to be translated -->
+         <para>
+            If you are serving an HTML5 document, you should provide the character
+            set like this:
+        </para>
+
+        <programlisting language="php"><![CDATA[
+// HTML5 で文字セットを設定します
+$this->headMeta()->setCharset('UTF-8'); // <meta charset="UTF-8"> のように見えます
 ]]></programlisting>
 
         <para>

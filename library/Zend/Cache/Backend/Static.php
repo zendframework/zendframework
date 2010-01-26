@@ -55,6 +55,7 @@ class Zend_Cache_Backend_Static
         'cache_file_umask' => 0644,
         'debug_header'     => false,
         'tag_cache'        => null,
+        'disable_caching'  => false
     );
 
     /**
@@ -180,6 +181,9 @@ class Zend_Cache_Backend_Static
      */
     public function save($data, $id, $tags = array(), $specificLifetime = false)
     {
+        if ($this->_options['disable_caching']) {
+            return true;
+        }
         clearstatcache();
         if (is_null($id) || strlen($id) == 0) {
             $id = $this->_detectId();

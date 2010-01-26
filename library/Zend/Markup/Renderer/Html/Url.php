@@ -68,6 +68,9 @@ class Zend_Markup_Renderer_Html_Url extends Zend_Markup_Renderer_Html_HtmlAbstra
 
         $attributes = Zend_Markup_Renderer_Html::renderAttributes($token);
 
+        // run the URI through htmlentities
+        $uri = htmlentities($uri, ENT_QUOTES, 'UTF-8');
+
         return "<a href=\"{$uri}\"{$attributes}>{$text}</a>";
     }
 

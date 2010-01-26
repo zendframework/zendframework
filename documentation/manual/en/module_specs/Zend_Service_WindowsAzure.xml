@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect1 id="zend.service.windowsazure">
+<sect1 id="zend.service.windowsazure" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_WindowsAzure</title>
 
     <sect2 id="zend.service.windowsazure.introduction">

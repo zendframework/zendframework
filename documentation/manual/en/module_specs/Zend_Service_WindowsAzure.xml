@@ -112,4 +112,8 @@
             an in-premise web server.
         </para>
   </sect2>
+
+  <xi:include href="Zend_Service_WindowsAzure_Blob.xml" />
+  <xi:include href="Zend_Service_WindowsAzure_Table.xml" />
+  <xi:include href="Zend_Service_WindowsAzure_Queue.xml" />
 </sect1>

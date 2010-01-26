@@ -15,6 +15,7 @@ require_once 'Zend/Controller/Request/Http.php';
 require_once 'Zend/Controller/Response/Http.php';
 require_once 'Zend/Cache.php';
 require_once 'Zend/Cache/Core.php';
+require_once 'Zend/Cache/Backend.php';
 
 /**
  * Test class for Zend_Controller_Action_Helper_Cache
@@ -110,7 +111,9 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit_Framework_TestCase
     public function testRemovePageCallsPageCacheRemoveRecursiveMethodCorrectly()
     {
         $helper = new Zend_Controller_Action_Helper_Cache;
-        $cache = new Mock_Zend_Cache_Page_2;
+        $cache = new Mock_Zend_Cache_Page_1;
+        $backend = new Mock_Zend_Cache_Page_2;
+        $cache->setBackend($backend);
         $helper->setCache('page', $cache);
         $this->assertEquals('verified', $helper->removePage('/foo', true));
     }
@@ -130,7 +133,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit_Framework_TestCase
         $helper->setCache('page', $cache);
         $helper->direct(array('baz'));
         $helper->preDispatch();
-        $this->assertEquals('verified', $cache->res);
+        $this->assertEquals('verified', $cache->ranStart);
     }
 
     public function testPreDispatchCallsCachesStartMethodWithTags()
@@ -140,7 +143,7 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit_Framework_TestCase
         $helper->setCache('page', $cache);
         $helper->direct(array('baz'), array('tag1','tag2'));
         $helper->preDispatch();
-        $this->assertEquals('verified', $cache->res);
+        $this->assertEquals('verified', $cache->ranStart);
     }
 
     public function testPreDispatchDoesNotCallCachesStartMethodWithBadAction()
@@ -183,9 +186,9 @@ class Mock_Zend_Cache_Page_1 extends Zend_Cache_Core
         if ($id == '/foo') {return 'verified';}
     }
 }
-class Mock_Zend_Cache_Page_2 extends Zend_Cache_Core
+class Mock_Zend_Cache_Page_2 extends Zend_Cache_Backend
 {
-    public function removeRecursive($id)
+    public function removeRecursively($id)
     {
         if ($id == '/foo') {return 'verified';}
     }
@@ -201,16 +204,26 @@ class Mock_Zend_Cache_Page_3 extends Zend_Cache_Core
 class Mock_Zend_Cache_Page_4 extends Zend_Cache_Core
 {
     public $res;
-    public function start($id, array $tags = array()) {if ($id == '/foo') {
-        $this->res = 'verified';
-    }}
+    public $ranStart;
+    public function start($id, array $tags = array()) 
+    {
+        $this->ranStart = 'verified';
+        if ($id == '/foo') {
+            $this->res = 'verified';
+        }
+    }
 }
 class Mock_Zend_Cache_Page_6 extends Zend_Cache_Core
 {
     public $res;
-    public function start($id, array $tags = array()) {if ($id == '/foo' && $tags == array('tag1','tag2')) {
-        $this->res = 'verified';
-    }}
+    public $ranStart;
+    public function start($id, array $tags = array()) 
+    {
+        $this->ranStart = 'verified';
+        if ($id == '/foo' && $tags == array('tag1','tag2')) {
+            $this->res = 'verified';
+        }
+    }
 }
 
 /**class Mock_Zend_Cache_Page_5 extends Zend_Cache_Core

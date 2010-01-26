@@ -5,7 +5,7 @@
     <title>Extending Zend_Tool</title>
 
     <sect2 id="zend.tool.extending.overview">
-        <title>Overview of Zend_Tool</title>
+        <title>Übersicht über Zend_Tool</title>
 
         <para>
             <classname>Zend_Tool_Framework</classname> is a framework for exposing common

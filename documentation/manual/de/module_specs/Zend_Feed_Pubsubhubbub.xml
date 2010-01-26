@@ -524,31 +524,35 @@ CREATE TABLE IF NOT EXISTS `subscription` (
             </para>
 
             <para>
-                By default, a new instance of <classname>Zend_Pubsubhubbub_Subscriber</classname> will
-                attempt to use a database backed storage medium which defaults to using the default
-                <classname>Zend_Db</classname> adapter with a table name of "subscription".
-                It is recommended to set a custom storage solution where these defaults are not apt either
-                by passing in a new Model supporting the required interface or by passing a new instance
-                of <classname>Zend_Db_Table_Abstract</classname> to the default Model's constructor to change
-                the used table name.
+                Standardmäßig versucht eine neue Instanz von
+                <classname>Zend_Pubsubhubbub_Subscriber</classname> ein Datenbank Backend
+                Speichermedium zu verwenden mit Standardwerten um den standardmäßigen
+                <classname>Zend_Db</classname> Adapter mit dem Tabellennamen "subscription" zu
+                verwenden. Es wird empfohlen eine eigene Speicherlösung zu setzen welche diese
+                Standardwerte nicht verwendet, entweder duch übergabe eines neuen Modells welches
+                das benötigte Interface unterstützt, oder durch Übergabe einer neuen Instanz von
+                <classname>Zend_Db_Table_Abstract</classname> an dem Constructor des standardmäßigen
+                Modells um den verwendeten Tabellennamen zu verändern.
             </para>
         </sect3>
 
         <sect3 id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.handling.hub.callbacks">
-            <title>Handling Subscriber Callbacks</title>
+            <title>Callbacks von Abonnenten behandeln</title>
 
             <para>
-                Whenever a subscription or unsubscription request is made, the Hub must verify the
-                request by forwarding a new verification request to the Callback URL set in the
-                subscription/unsubscription parameters. To handle these Hub requests, which will include
-                all future communications containing Topic (feed) updates, the Callback URL should trigger the
-                execution of an instance of <classname>Zend_Pubsubhubbub_Subscriber_Callback</classname>
-                to handle the request.
+                Wann auch immer eine Aboanfrage oder eine Anfrage auf Löschen eines Abos gemacht
+                wird muss der Hub die Anfrage prüfen indem er eine neue Prüfanfrage an die Callback
+                URL weiterleitet welche in den Abo/Abo löschen Parametern gesetzt ist. Um diese Hub
+                Anfragen zu behandeln, welche alle zukünftigen Kommunikationen enthalten können wie
+                z.B. Themenaktualisierungen (Feed), sollte die Callback URL die Ausführung einer
+                Instanz von <classname>Zend_Pubsubhubbub_Subscriber_Callback</classname> auslösen um
+                die Anfrage zu behandeln.
             </para>
 
             <para>
-                The Callback class should be configured to use the same storage medium as the Subscriber
-                class. Using it is quite simple since most of its work is performed internally.
+                Die Callback Klasse sollte konfiguriert werden dass Sie das selbe Speichermedium wie
+                die Subscriber Klasse verwendet. Ihre Verwendung ist sehr einfach da die meiste
+                Arbeit intern erledigt wird.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -559,52 +563,58 @@ CREATE TABLE IF NOT EXISTS `subscription` (
     $callback->sendResponse();
 
     /**
-     * Check if the callback resulting in the receipt of a feed update.
-     * Otherwise it was either a (un)sub verification request or invalid request.
-     * Typically we need do nothing other than add feed update handling - the rest
-     * is handled internally by the class.
+     * Prüfe ob der resultierende Callback das Ergebnis eines Feed Updates ist.
+     * Andernfalls war es entweder eine (De-)Abo-Prüfanfrage oder ungültig.
+     * Typischerweise müssen wir nicht mehr tun als die Behandlung der
+     * Aktualisierungen vom Feed hinzuzufügen - der Rest wird intern von der
+     * Klasse behandelt.
      */
     if ($callback->hasFeedUpdate()) {
         $feedString = $callback->getFeedUpdate();
         /**
-         *  Process the feed update asynchronously to avoid a Hub timeout.
+         * Die Aktualisierung des Feeds asynchron bearbeiten um ein Timeout
+         * des Hubs zu vermeiden.
          */
     }
     ]]></programlisting>
 
             <note>
                 <para>
-                    It should be noted that
-                    <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> may independently
-                    parse any incoming query string and other parameters.  This is necessary since PHP
-                    alters the structure and keys of a query string when it is parsed into the
-                    <varname>$_GET</varname> or <varname>$_POST</varname> superglobals.  For example,
-                    all duplicate keys are ignored and periods are converted to underscores.
-                    Pubsubhubbub features both of these in the query strings it generates.
+                    Es sollte beachtet werden dass
+                    <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> jeden
+                    hereinkommenden Anfragestring und andere Parameter unabhängig parsen kann. Dies
+                    ist notwendig da PHP die Struktur und Schlüssel eines Abfragestrings ändert wenn
+                    diese in die Superglobals <varname>$_GET</varname> oder
+                    <varname>$_POST</varname> geparst wird. Zum Beispiel werden alle doppelten
+                    Schlüssel ignoriert und Punkte werden in Unterstriche konvertiert.
+                    Pubsubhubbub unterstützt beide in den Abfragestring die es erzeugt.
                 </para>
             </note>
 
             <important>
                 <para>
-                    It is essential that developers recognise that Hubs are only concerned with sending
-                    requests and receiving a response which verifies its receipt. If a feed update is
-                    received, it should never be processed on the spot since this leaves the Hub waiting
-                    for a response. Rather, any processing should be offloaded to another process or
-                    deferred until after a response has been returned to the Hub. One symptom of a
-                    failure to promptly complete Hub requests is that a Hub may continue to attempt
-                    delivery of the update/verification request leading to duplicated update attempts
-                    being processed by the Subscriber. This appears problematic - but in reality a
-                    Hub may apply a timeout of just a few seconds, and if no response is received within
-                    that time it may disconnect (assuming a delivery failure) and retry later. Note that
-                    Hubs are expected to distribute vast volumes of updates so their resources are
-                    stretched - please do process feeds asynchronously (e.g. in a separate process or
-                    a job queue or even a cron scheduled task) as much as possible.
+                    Es ist wichtig das Entwickler erkennen das Hubs nur mit dem Senden von Anfragen
+                    und dem Empfangen einer Antwort beschäftigt sind welche den Empfang prüft. Wenn
+                    eine Feedaktualisierung empfangen wird sollte Sie niemals nachfolgend bearbeitet
+                    werden da Sie den Hub auf eine Antwort warten lässt. Stattdessen sollte jede
+                    Bearbeitung auf einen anderen Prozess ausgelagert werden oder verzögert bis eine
+                    Antwort zum Hub zurückgesendet wird. Ein Symptom des Fehlers Hubanfragen sofort
+                    zu komplettieren besteht darin das ein Hub weitere Versuche durchführen kann die
+                    Aktualisierungs- oder Prüfanfrage zuzustellen was zu doppelten
+                    Aktualisierungsversuchen führen kann die vom Abonnenten bearbeitet werden. Das
+                    scheint problematisch zu sein -- aber in Wirklichkeit kann ein Hub ein Timeout
+                    von ein paar Sekunden anwenden, und wenn keine Antwort in dieser Zeit empfangen
+                    wird kann er trennen (in der annahme eines Zustellfehlers) und es später nochmal
+                    versuchen. Es ist zu beachten das von Hubs erwartet wird das Wie große Mengen an
+                    Aktualisierungen verteilen und Ihre Ressources deswegen gestreckt sind - bitte
+                    bearbeiten Sie Feeds asynchron (z.B. in einem separaten Prozess oder einer Job
+                    Queue oder sogar in einem geplanten Cron Task) soweit das möglich ist.
                 </para>
             </important>
         </sect3>
 
         <sect3 id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.setting.up.and.using.a.callback.url.route">
-            <title>Setting Up And Using A Callback URL Route</title>
+            <title>Eine Callback URL Route einstellen und verwenden</title>
 
             <para>
                 As noted earlier, the <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>

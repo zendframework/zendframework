@@ -5,35 +5,35 @@
     <title>Zend_Service_DeveloperGarden</title>
 
     <sect2 id="zend.service.developergarden.introduction">
-        <title>Introduction to DeveloperGarden</title>
+        <title>Einführung in DeveloperGarden</title>
 
         <para>
-            DeveloperGarden is the name for the &quot;Open Development services&quot; of the German
-            Telekom. The &quot;Open Development services&quot; are a set of <acronym>SOAP</acronym>
-            API Services.
+            DeveloperGarden ist der Name für die &quot;Open Development services&quot; der Deutschen
+            Telekom. Die &quot;Open Development services&quot; sind ein Set von
+            <acronym>SOAP</acronym> API Services.
         </para>
 
         <para>
-            The family of <classname>Zend_Service_DeveloperGarden</classname> components provides a
-            clean and simple interface to the <ulink
-                url="http://www.developergarden.com">DeveloperGarden API</ulink> and additionally
-            offers functionality to improve handling and performance.
+            Die Familie der <classname>Zend_Service_DeveloperGarden</classname> Komponenten bietet
+            ein klares und einfaches Interface zur <ulink
+                url="http://www.developergarden.com">DeveloperGarden API</ulink> und bietet
+            zusätzlich Funktionalitäten um die Behandlung und Geschwindigkeit zu verbessern.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
                     <link linkend="zend.service.developergarden.baseuserservice">BaseUserService</link>:
-                    Class to manage API quota and user accounting details.
+                    Klasse um API Anteile sowie Details von Benutzerzugangsdaten zu managen.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <link linkend="zend.service.developergarden.iplocation">IpLocation</link>:
-                    Locale the given IP and returns geo coordinates. Works only with IPs allocated
-                    in the network of the german telekom.
-                    </para>
+                    Lokalisiert die angegebene IP und gibt deren Geo Koordinaten zurück. Arbeitet
+                    nur mit IPs welche dem Netzwerk der deutschen Telekom zugeordnet sind.
+                </para>
             </listitem>
 
             <listitem>

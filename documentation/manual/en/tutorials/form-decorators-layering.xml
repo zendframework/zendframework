@@ -133,7 +133,7 @@ class My_Decorator_SimpleLabel extends Zend_Form_Decorator_Abstract
         $id      = htmlentities($element->getId());
         $label   = htmlentities($element->getLabel());
 
-        $markup = sprint($this->_format, $id, $label);
+        $markup = sprintf($this->_format, $id, $label);
         return $markup;
     }
 }

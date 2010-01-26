@@ -108,6 +108,7 @@ class Zend_Cache_Manager
                 'name'    => 'File',
                 'options' => array(
                     'cache_dir' => '../cache',
+                    'cache_file_umask' => 0644
                 ),
             ),
         ),

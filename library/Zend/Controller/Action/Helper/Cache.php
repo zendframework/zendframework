@@ -115,9 +115,11 @@ class Zend_Controller_Action_Helper_Cache
     public function removePage($relativeUrl, $recursive = false)
     {
         if ($recursive) {
-            return $this->getCache('page')->removeRecursive($relativeUrl);
+            return $this->getCache(Zend_Cache_Manager::PAGECACHE)
+                ->getBackend()->removeRecursive($relativeUrl);
         } else {
-            return $this->getCache('page')->remove($relativeUrl);
+            return $this->getCache(Zend_Cache_Manager::PAGECACHE)
+                ->getBackend()->remove($relativeUrl);
         }
     }
 
@@ -132,7 +134,7 @@ class Zend_Controller_Action_Helper_Cache
      */
     public function removePagesTagged(array $tags)
     {
-        return $this->getCache('page')
+        return $this->getCache(Zend_Cache_Manager::PAGECACHE)
             ->clean(Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG, $tags);
     }
 
@@ -160,7 +162,8 @@ class Zend_Controller_Action_Helper_Cache
             && !empty($this->_tags[$controller][$action])) {
                 $tags = array_unique($this->_tags[$controller][$action]);
             }
-            $this->getCache(Zend_Cache_Manager::PAGECACHE)->start($this->_encodeCacheId($reqUri), $tags);
+            $this->getCache(Zend_Cache_Manager::PAGECACHE)
+                ->start($this->_encodeCacheId($reqUri), $tags);
         }
     }
     

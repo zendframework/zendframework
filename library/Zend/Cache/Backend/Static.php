@@ -52,7 +52,7 @@ class Zend_Cache_Backend_Static
         'file_extension'   => '.html',
         'index_filename'   => 'index',
         'file_locking'     => true,
-        'cache_file_umask' => 0600,
+        'cache_file_umask' => 0644,
         'debug_header'     => false,
         'tag_cache'        => null,
     );
@@ -254,7 +254,7 @@ class Zend_Cache_Backend_Static
             $fileName = $this->_options['index_filename'];
         }
         $pathName = $this->_options['public_dir'] . dirname($id);
-        $file     = $pathName . '/' . $fileName . $this->_options['file_extension'];
+        $file     = realpath($pathName) . '/' . $fileName . $this->_options['file_extension'];
         if (!file_exists($file)) {
             return false;
         }

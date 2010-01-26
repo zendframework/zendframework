@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 20573 -->
+<!-- Reviewed: no -->
+<sect1 id="learning.autoloading.conclusion">
+    <title>Conclusion</title>
+
+    <para>
+        Zend Framework encourage l'utilisation de l'auto-chargement, et l'initialise même par
+        défaut dans <classname>Zend_Application</classname>. Nous espérons que ce tutoriel vous
+        a apporté toutes les informations sur l'utilisation de
+        <classname>Zend_Loader_Autoloader</classname>, ainsi que sur son extension pour ajouter
+        des autochargeurs personnalisés.
+    </para>
+
+    <para>
+        Pour plus d'informations sur son utilisation, lisez les sections du manuel sur <link
+            linkend="zend.loader.autoloader">Zend_Loader_Autoloader</link> et <link
+            linkend="zend.loader.autoloader-resource">Zend_Loader_Autoloader_Resource</link>.
+    </para>
+</sect1>

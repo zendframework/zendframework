@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 20573 -->
+<!-- Reviewed: no -->
+<sect1 id="learning.layout.conclusions">
+    <title>Zend_Layout: Conclusions</title>
+
+    <para>
+        <classname>Zend_Layout</classname> est une simple surcouche à
+        <classname>Zend_View</classname> en proposant un pattern Two-Step View, offrant
+        la fléxibilité de créer un design applicatif dans lequel le contenu est injecté.
+    </para>
+
+    <para>
+        Si vous regardez de près les exemple, vous sentirez peut-être que les fonctionnalités
+        sont limitées    : comment modifier le titre de la page, injecter un tag script
+        optionnel ou même créer une sidebar? Ces questions concernent le concept de
+        "Composite View" -- et trouveront réponse dans le chapitre suivant couvrant des
+        "placeholders."
+    </para>
+</sect1>

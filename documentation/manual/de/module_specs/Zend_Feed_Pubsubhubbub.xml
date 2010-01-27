@@ -617,29 +617,40 @@ CREATE TABLE IF NOT EXISTS `subscription` (
             <title>Eine Callback URL Route einstellen und verwenden</title>
 
             <para>
-                As noted earlier, the <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>
-                class receives the combined key associated with any subscription from the Hub via one
-                of two methods. The technically preferred method is to add this key to the Callback
-                URL employed by the Hub in all future requests using a query string parameter with
-                the key "xhub.subscription". However, for historical reasons, primarily that this was
-                not supported in Pubsubhubbub 0.1 (it was recently added in 0.2 only), it is strongly
-                recommended to use the most compatible means of adding this key to the Callback URL
-                by appending it to the URL's path.
+                Wie vorher erwähnt empfängt die Klasse
+                <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> den kombinierten
+                Schlüssel welche mit jedem Abo assoziiert ist vom Hub über eine oder zwei Methoden.
+                Die technisch bevorzugte Methode ist das Hinzufügen dieses Schlüssels zur Callback
+                URL welcher für den Hub in allen zukünftigen Anfragen tätig ist indem ein
+                Stringparameter in der Abfrage mit dem Schlüssel "xhub.subscription" verwendet wird.
+                Trotzdem, aus historischen Gründen, weil es in Pubsubhubbub 0.1 nicht unterstützt
+                wurde (es wurde kürzlich nur in 0.2 hinzugefügt) ist es stärkstens empfohlen das
+                kompatibelste zu verwenden und den Schlüssel der Callback URL hinzuzugefügen indem
+                er den URL Pfaden angehängt wird.
             </para>
 
-            <para>Thus the URL http://www.example.com/callback?xhub.subscription=key would become
-            http://www.example.com/callback/key.</para>
+            <para>
+                Deshalb würde die URL http://www.example.com/callback?xhub.subscription=key zu
+                http://www.example.com/callback/key werden.
+            </para>
 
-            <para>Since the query string method is the default in anticipation of a greater level
-            of future support for the full 0.2 specification, this requires some additional work
-            to implement.</para>
+            <para>
+                Da die Abfragestring Methode der Standard in der Vermeidung eines größeren Levels
+                der zukünftigen Unterstützung der kompletten 0.2 Spezifikation ist, benötigt es
+                etwas zusätzliche Arbeit um Sie zu implementieren.
+            </para>
 
-            <para>The first step to to make the <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname>
-            class aware of the path contained subscription key. It's manually injected therefore
-            since it also requires manually defining a route for this purpose. This is achieved simply by
-            called the method <methodname>Zend_Feed_Pubsubhubbub_Subscriber_Callback::setSubscriptionKey()</methodname>
-            with the parameter being the key value available from the Router. The example below
-            demonstrates this using a Zend Framework controller.</para>
+            <para>
+                Der erste Schritt besteht darin der Klasse
+                <classname>Zend_Feed_Pubsubhubbub_Subscriber_Callback</classname> dem Pfad bewusst
+                zu machen welcher den Aboschlüssel enthält. Er wird hierfür manuell injiziert, da
+                man für diesen Zweck auch eine Route manuell definieren muss. Das wird erzielt indem
+                einfach die Methode
+                <methodname>Zend_Feed_Pubsubhubbub_Subscriber_Callback::setSubscriptionKey()</methodname>
+                mit dem Parameter aufgerufen wird welcher der Schlüsselwert ist der vom Router
+                kommt. Das folgende Beispiel zeigt dies durch Verwendung eines Zend Framework
+                Controllers.
+            </para>
 
             <programlisting language="php"><![CDATA[
 class CallbackController extends Zend_Controller_Action
@@ -651,8 +662,8 @@ class CallbackController extends Zend_Controller_Action
         $callback = new Zend_Feed_Pubsubhubbub_Subscriber_Callback;
         $callback->setStorage($storage);
         /**
-         * Inject subscription key parsing from URL path using
-         * a parameter from Router.
+         * Injiziert den Aboschlüssel welcher er vom URL Pfad geparst wird
+         * indem ein Parameter vom Router verwendet wird
          */
         $subscriptionKey = $this->_getParam('subkey');
         $callback->setSubscriptionKey($subscriptionKey);
@@ -660,15 +671,17 @@ class CallbackController extends Zend_Controller_Action
         $callback->sendResponse();
 
         /**
-         * Check if the callback resulting in the receipt of a feed update.
-         * Otherwise it was either a (un)sub verification request or invalid request.
-         * Typically we need do nothing other than add feed update handling - the rest
-         * is handled internally by the class.
+         * Prüfen ob der Callback als Ergebnis den Empfang eines Feed Updates
+         * enthält. Anderfalls war es entweder eine De-Aboprüfungsanfrage oder
+         * eine ungültige Anfrage. Typischerweise muss nichts anderes getan
+         * werden als das Handling der Feedaktualisierungen hinzuzufügen - der
+         * Rest wird intern von der Klasse behandelt.
          */
         if ($callback->hasFeedUpdate()) {
             $feedString = $callback->getFeedUpdate();
             /**
-             *  Process the feed update asynchronously to avoid a Hub timeout.
+             * Die Aktualisierung des Feeds asynchron behandeln um Hub
+             * Timeouts zu vermeiden.
              */
         }
     }
@@ -676,19 +689,20 @@ class CallbackController extends Zend_Controller_Action
 }
     ]]></programlisting>
 
-        <para>Actually adding the route which would map the path-appended key
-        to a parameter for retrieval from a controller can be accomplished using
-        a Route configuration such as the INI formatted example below for use
-        with <classname>Zend_Application</classname> bootstrapping.</para>
+        <para>
+            Aktuell kann das Hinzufügen der Route zu einem Parameter welcher den Schlüssel der an
+            den Pfad angehängt wird mappen würde durchgeführt werden indem eine Routenkonfiguration
+            wie im kommenden INI formatierten Beispiel für die Verwendung mit dem Bootstrapping von
+            <classname>Zend_Application</classname> verwendet wird.
+        </para>
 
         <programlisting language="dosini"><![CDATA[
-; Callback Route to enable appending a PuSH Subscription's lookup key
+; Callback Route fürs Hinzufügen einer PuSH Aboschlüssel Abfrage zu aktivieren
 resources.router.routes.callback.route = "callback/:subkey"
 resources.router.routes.callback.defaults.module = "default"
 resources.router.routes.callback.defaults.controller = "callback"
 resources.router.routes.callback.defaults.action = "index"
 ]]></programlisting>
-
         </sect3>
     </sect2>
 </sect1>

@@ -5,82 +5,90 @@
     <title>Zend_Db_Adapter</title>
 
     <para>
-        <classname>Zend_Db</classname> e suas classes relacionadas provêem uma interface de banco de dados
-        <acronym>SQL</acronym> simples para Zend Framework. 
-        <classname>Zend_Db_Adapter</classname> é a classe básica que você usa para conectar sua aplicação
-        <acronym>PHP</acronym>a um <acronym>SGBDR</acronym>. Há uma classe adaptadora diferente
-        para cada marca de <acronym>SGBDR</acronym>.
+        <classname>Zend_Db</classname> e suas classes relacionadas provêem uma interface de banco
+        de dados <acronym>SQL</acronym> simples para Zend Framework. 
+        <classname>Zend_Db_Adapter</classname> é a classe básica que você usa para conectar sua
+        aplicação <acronym>PHP</acronym>a um <acronym>SGBDR</acronym>. Há uma classe adaptadora
+        diferente para cada marca de <acronym>SGBDR</acronym>.
     </para>
 
     <para>
         Os adaptadores <classname>Zend_Db</classname> criam uma ponte entre extensões 
-        <acronym>PHP</acronym> específicas de cada fabricante para uma interface comum que ajudam você a escrever aplicações
-        <acronym>PHP</acronym> uma vez e distribui-las com múltiplas marcas de 
-        <acronym>SGBDR</acronym> com muito pouco esforço.
+        <acronym>PHP</acronym> específicas de cada fabricante para uma interface comum que ajuda
+        você a escrever aplicações <acronym>PHP</acronym> uma vez e distribui-las com múltiplas
+        marcas de <acronym>SGBDR</acronym> com muito pouco esforço.
     </para>
 
     <para>
         A interface da classe adaptadora é similar à interface da extensão
         <ulink url="http://www.php.net/pdo">PHP Data Objects</ulink>.
-        <classname>Zend_Db</classname> provê classes adaptadoras para drivers <acronym>PDO</acronym>
-        das seguintes marcas de <acronym>SGBDR</acronym>:
+        <classname>Zend_Db</classname> provê classes adaptadoras para drivers
+        <acronym>PDO</acronym> das seguintes marcas de <acronym>SGBDR</acronym>:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                IBM DB2 e Informix Dynamic Server (IDS), usando a extensão <acronym>PHP</acronym>
+                IBM DB2 e Informix Dynamic Server (IDS), usando a extensão
+                <acronym>PHP</acronym>
                 <ulink url="http://www.php.net/pdo-ibm">pdo_ibm</ulink>                 
             </para>
         </listitem>
 
         <listitem>
             <para>
-                MySQL, usando a extensão <acronym>PHP</acronym> <ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink>                
+                MySQL, usando a extensão <acronym>PHP</acronym>
+                <ulink url="http://www.php.net/pdo-mysql">pdo_mysql</ulink>                
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Microsoft <acronym>SQL</acronym> Server, usando a extensão <acronym>PHP</acronym> <ulink
-                    url="http://www.php.net/pdo-dblib">pdo_dblib</ulink>                 
+                Microsoft <acronym>SQL</acronym> Server, usando a extensão <acronym>PHP</acronym>
+                <ulink url="http://www.php.net/pdo-dblib">pdo_dblib</ulink>                 
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Oracle, usando a extensão <acronym>PHP</acronym> <ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink>                
+                Oracle, usando a extensão <acronym>PHP</acronym>
+                <ulink url="http://www.php.net/pdo-oci">pdo_oci</ulink>                
             </para>
         </listitem>
 
         <listitem>
             <para>
-                PostgreSQL, usando a extensão <acronym>PHP</acronym> <ulink url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink>                
+                PostgreSQL, usando a extensão <acronym>PHP</acronym>
+                <ulink url="http://www.php.net/pdo-pgsql">pdo_pgsql</ulink>                
             </para>
         </listitem>
 
         <listitem>
             <para>
-                SQLite, usando a extensão <acronym>PHP</acronym> <ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink>                
+                SQLite, usando a extensão <acronym>PHP</acronym>
+                <ulink url="http://www.php.net/pdo-sqlite">pdo_sqlite</ulink>                
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Além disso, <classname>Zend_Db</classname> provê classes adaptadoras que utilizam extensões de bancos de dados
+        Além disso, <classname>Zend_Db</classname> provê classes adaptadoras que utilizam extensões
+        de bancos de dados
         <acronym>PHP</acronym> para as seguintes marcas de <acronym>SGBDR</acronym>:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                MySQL, usando a extensão <acronym>PHP</acronym> <ulink url="http://www.php.net/mysqli">mysqli</ulink>                
+                MySQL, usando a extensão <acronym>PHP</acronym>
+                <ulink url="http://www.php.net/mysqli">mysqli</ulink>                
             </para>
         </listitem>
 
         <listitem>
             <para>
-                Oracle, usando a extensão <acronym>PHP</acronym> <ulink url="http://www.php.net/oci8">oci8</ulink>                
+                Oracle, usando a extensão <acronym>PHP</acronym>
+                <ulink url="http://www.php.net/oci8">oci8</ulink>                
             </para>
         </listitem>
 
@@ -101,10 +109,11 @@
 
     <note>
         <para>
-            Cada classe acaptadora <classname>Zend_Db</classname> usa uma extensão <acronym>PHP</acronym>. Você
-            deve ter a respectiva extensão <acronym>PHP</acronym> habilitada em seu ambiente
-            <acronym>PHP</acronym> para usar uma classe adaptadora <classname>Zend_Db</classname>. Por
-            exemplo, se você usa qualquer uma das classes adaptadoras <acronym>PDO</acronym> do <classname>Zend_Db</classname>
+            Cada classe adaptadora <classname>Zend_Db</classname> usa uma extensão
+            <acronym>PHP</acronym>. Você deve ter a respectiva extensão <acronym>PHP</acronym>
+            habilitada em seu ambiente <acronym>PHP</acronym> para usar uma classe adaptadora
+            <classname>Zend_Db</classname>. Por exemplo, se você usa qualquer uma das classes 
+            adaptadoras <acronym>PDO</acronym> do <classname>Zend_Db</classname>
             , você precisa habilitar tanto a extensão <acronym>PDO</acronym> quanto o driver
             <acronym>PDO</acronym> para a marca de <acronym>SGBDR</acronym> que você usa.
         </para>
@@ -114,9 +123,9 @@
         <title>Conectando-se a um Banco de Dados Usando uma Adaptadora</title>
 
         <para>
-            Esta seção descreve como criar uma instância de uma classe adaptadora de banco de dados.
-            Isso corresponde a fazer uma conexão com seu servidor <acronym>SGBDR</acronym> a partir de 
-            sua aplicação <acronym>PHP</acronym>.
+            Esta seção descreve como criar uma instância de uma classe adaptadora de banco de
+            dados. Isso corresponde a fazer uma conexão com seu servidor <acronym>SGBDR</acronym> a
+            partir de sua aplicação <acronym>PHP</acronym>.
         </para>
 
         <sect3 id="zend.db.adapter.connecting.constructor">
@@ -155,9 +164,9 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
             <para>
                 O primeiro argumento é um string que identifica o nome base da
-                classe adaptadora. Por exemplo, a string '<classname>Pdo_Mysql</classname>' corresponde
-                à classe <classname>Zend_Db_Adapter_Pdo_Mysql</classname>. O segundo argumento
-                é a mesma matriz de parâmetros que você teria passado para 
+                classe adaptadora. Por exemplo, a string '<classname>Pdo_Mysql</classname>'
+                corresponde à classe <classname>Zend_Db_Adapter_Pdo_Mysql</classname>. O segundo
+                argumento é a mesma matriz de parâmetros que você teria passado para 
                 o construtor da adaptadora.
             </para>
 
@@ -185,14 +194,16 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
             <para>
                 Se você criar sua própria classe que estende
                 <classname>Zend_Db_Adapter_Abstract</classname>, mas não nomear sua 
-                classe com o prefixo de pacote "<classname>Zend_Db_Adapter</classname>", você pode usar
-                o método <methodname>factory()</methodname> para carregar sua adaptadora se você 
-                especificar a parte principal da classe adaptadora com a
+                classe com o prefixo de pacote "<classname>Zend_Db_Adapter</classname>", você pode
+                usar o método <methodname>factory()</methodname> para carregar sua adaptadora se
+                você especificar a parte principal da classe adaptadora com a
                 chave 'adapterNamespace' na matriz de parâmetros.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example2">
-                <title>Usando o Método de Fábrica da Adaptadora para uma Classe Adaptadora Personalizada</title>
+                <title>
+                Usando o Método de Fábrica da Adaptadora para uma Classe Adaptadora Personalizada
+                </title>
                 <programlisting language="php"><![CDATA[
 // Nós não precisamos carregar o arquivo da classe adaptadora
 // porque ele será carregado para nós pelo método de fábrica do Zend_Db.
@@ -234,8 +245,9 @@ $db = Zend_Db::factory('Pdo_Mysql', array(
 
                 <para>
                     No exemplo abaixo, um objeto <classname>Zend_Config</classname> é criado
-                    a partir de um matriz. Você pode também carregar dados a partir de um arquivo externo usando classes tais
-                    como <link linkend="zend.config.adapters.ini">Zend_Config_Ini</link>
+                    a partir de um matriz. Você pode também carregar dados a partir de um arquivo
+                    externo usando classes tais como 
+                    <link linkend="zend.config.adapters.ini">Zend_Config_Ini</link>
                     e <link linkend="zend.config.adapters.xml">Zend_Config_Xml</link>.
                 </para>
 
@@ -262,8 +274,8 @@ $db = Zend_Db::factory($config->database);
                 O segundo argumento do método <methodname>factory()</methodname> pode ser 
                 um matriz associativo contendo entradas correspondentes aos
                 parâmetros da adaptadora. Esse argumento é opcional. Se o primeiro
-                argumento é do tipo <classname>Zend_Config</classname>, é assumido que ele contém todos os
-                parâmetros, e o segundo argumento é ignorado
+                argumento é do tipo <classname>Zend_Config</classname>, é assumido que ele contém
+                todos os parâmetros, e o segundo argumento é ignorado
             </para>
         </sect3>
 
@@ -281,8 +293,8 @@ $db = Zend_Db::factory($config->database);
                         <emphasis>host</emphasis>:
                         uma string contendo um hostname ou endereço IP do
                         servidor de banco de dados. Se o banco de dados está rodando no
-                        mesmo servidor anfitrião da aplicação <acronym>PHP</acronym>, você pode usar
-                        'localhost' ou '127.0.0.1'.
+                        mesmo servidor anfitrião da aplicação <acronym>PHP</acronym>, você pode
+                        usar 'localhost' ou '127.0.0.1'.
                     </para>
                 </listitem>
 
@@ -312,11 +324,11 @@ $db = Zend_Db::factory($config->database);
                 <listitem>
                     <para>
                         <emphasis>port</emphasis>:
-                        alguns servidores <acronym>SGBDR</acronym> podem aceitar conexões de rede em um
-                        número de porta especificado pelo administrador. O parâmetro port
+                        alguns servidores <acronym>SGBDR</acronym> podem aceitar conexões de rede
+                        em um número de porta especificado pelo administrador. O parâmetro port
                         permite que você especifique a porta a qual sua 
-                        aplicação <acronym>PHP</acronym> se conecta, para casar com a porta configurada
-                        no servidor <acronym>SGBDR</acronym>.
+                        aplicação <acronym>PHP</acronym> se conecta, para casar com a porta
+                        configurada no servidor <acronym>SGBDR</acronym>.
                     </para>
                 </listitem>
 
@@ -331,7 +343,8 @@ $db = Zend_Db::factory($config->database);
                     <para>
                         <emphasis>options</emphasis>:
                         este parâmetro é um matriz associativo de opções
-                        que são genéricas para todas as classes <classname>Zend_Db_Adapter</classname>.
+                        que são genéricas para todas as classes
+                        <classname>Zend_Db_Adapter</classname>.
                     </para>
                 </listitem>
 
@@ -364,8 +377,8 @@ $db = Zend_Db::factory($config->database);
                     <constant>Zend_Db::CASE_FOLDING</constant>.
                     Ela corresponde ao atributo <constant>ATTR_CASE</constant> nos
                     drivers de banco de dados <acronym>PDO</acronym> e IBM DB2, ajustando a caixa
-                    das chaves de string nos conjuntos de resultado de consulta. A opção leva os valores
-                    <constant>Zend_Db::CASE_NATURAL</constant> (padrão),
+                    das chaves de string nos conjuntos de resultado de consulta. A opção leva os
+                    valores <constant>Zend_Db::CASE_NATURAL</constant> (padrão),
                     <constant>Zend_Db::CASE_UPPER</constant>, e
                     <constant>Zend_Db::CASE_LOWER</constant>.
                 </para>
@@ -469,8 +482,8 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
 
             <para>
                 Criar uma instância de uma classe adaptadora não abre uma conexão
-                com o servidor <acronym>SGBDR</acronym> imediatamente. A adaptadora guarda os parâmetros
-                de conexão, e a estabelece por demanda, na primeira
+                com o servidor <acronym>SGBDR</acronym> imediatamente. A adaptadora guarda os
+                parâmetros de conexão, e a estabelece por demanda, na primeira
                 vez que você precisar executar uma consulta. Isso garante que 
                 criar um objeto adaptador é rápido é barato. Você pode
                 criar uma instância de uma adaptadora mesmo se não estiver certo
@@ -482,8 +495,8 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 Se você precisa forçar a adaptador a se conectar ao <acronym>SGBDR</acronym>, use
                 o método <methodname>getConnection()</methodname>. Esse método retorna
                 um objeto para a conexão como representado pela respectiva
-                extensão de banco de dados <acronym>PHP</acronym>. Por exemplo, se você usar qualquer uma
-                das classes adaptadoras para drivers <acronym>PDO</acronym>, então
+                extensão de banco de dados <acronym>PHP</acronym>. Por exemplo, se você usar
+                qualquer uma das classes adaptadoras para drivers <acronym>PDO</acronym>, então
                 <methodname>getConnection()</methodname> retorna o objeto <acronym>PDO</acronym>,
                 depois de iniciá-lo como uma conexão ativa para o banco de dados especificado.
             </para>
@@ -505,9 +518,10 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 objeto <classname>Zend_Db_Select</classname>. Por padrão, adaptadoras têm permissão
                 de serem serializadas, se você não quiser isso, deve considerar passar a
                 opção <constant>Zend_Db::ALLOW_SERIALIZATION</constant> com
-                <constant>FALSE</constant>, veja o exemplo abaixo. Em respeito ao princípio de conexões
-                preguiçosas, a adaptadora não reconectará a si própria depois de ser revertida sua serialização. Você deve
-                então chamar <methodname>getConnection()</methodname> por conta própria. Você pode fazer a 
+                <constant>FALSE</constant>, veja o exemplo abaixo. Em respeito ao princípio de
+                conexões preguiçosas, a adaptadora não reconectará a si própria depois de ser
+                revertida sua serialização. Você deve então chamar
+                <methodname>getConnection()</methodname> por conta própria. Você pode fazer a 
                 adaptadora se autorreconectar pela passagem de
                 <constant>Zend_Db::AUTO_RECONNECT_ON_UNSERIALIZE</constant> com
                 <constant>TRUE</constant> como uma opção da adaptadora.
@@ -578,9 +592,10 @@ try {
         </itemizedlist>
 
         <para>
-            O seguinte pseudocódigo de linguagem de definição de dados <acronym>SQL</acronym> descreve as
-            tabeas neste banco de dados de exemplo. Estas tabelas de exemplo são extensivamente usadas
-            pelos testes unitários automatizados de <classname>Zend_Db</classname>.
+            O seguinte pseudocódigo de linguagem de definição de dados <acronym>SQL</acronym>
+            descreve as tabelas neste banco de dados de exemplo. Estas tabelas de exemplo são
+            extensivamente usadas pelos testes unitários automatizados de
+            <classname>Zend_Db</classname>.
         </para>
 
         <programlisting language="sql"><![CDATA[
@@ -642,14 +657,15 @@ CREATE TABLE bugs_products (
             <title>Buscando um Conjunto Completo de Resultados</title>
 
             <para>
-                Você pode rodar uma consulta <acronym>SQL</acronym> <acronym>SELECT</acronym> e recuperar
-                seus resultados em um passo usando o método <methodname>fetchAll()</methodname>.
+                Você pode rodar uma consulta <acronym>SQL</acronym> <acronym>SELECT</acronym> e
+                recuperar seus resultados em um passo usando o método
+                <methodname>fetchAll()</methodname>.
             </para>
 
             <para>
                 O primeiro argumento para este método é uma string contendo uma
-                declaração <acronym>SELECT</acronym>. Como alternativa, o primeiro argumento pode ser um
-                objeto da classe <link linkend="zend.db.select">Zend_Db_Select</link>.
+                declaração <acronym>SELECT</acronym>. Como alternativa, o primeiro argumento pode
+                ser um objeto da classe <link linkend="zend.db.select">Zend_Db_Select</link>.
                 A classe adaptadora converte automaticamente esse objeto em uma representação de string
                 da declaração <acronym>SELECT</acronym>.
             </para>
@@ -692,8 +708,8 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         <emphasis>Zend_Db::FETCH_ASSOC</emphasis>:
                         retorna dados em um matriz de matrizs associativos.
-                        As chaves de matriz são nomes de coluna, como strings. Este é o modo padrão de busca
-                        para classes <classname>Zend_Db_Adapter</classname>.
+                        As chaves de matriz são nomes de coluna, como strings. Este é o modo padrão
+                        de busca para classes <classname>Zend_Db_Adapter</classname>.
                     </para>
                     <para>
                         Note que se sua lista de seleção contém mais de uma 
@@ -701,8 +717,8 @@ $result = $db->fetchAll($sql, 2);
                         duas tabelas diferentes em um <acronym>JOIN</acronym>, pode haver somente uma
                         entrada na matriz associativo para o nome dado.
                         Se você usa o modo <acronym>FETCH_ASSOC</acronym>, deve especificar
-                        apelidos de coluna em sua consulta <acronym>SELECT</acronym> para garantir que os
-                        nomes resultem em chaves de matriz únicas.
+                        apelidos de coluna em sua consulta <acronym>SELECT</acronym> para garantir
+                        que os nomes resultem em chaves de matriz únicas.
                     </para>
                     <para>
                         Por padrão, essas strings são devolvidas como foram
@@ -745,8 +761,8 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         <emphasis>Zend_Db::FETCH_OBJ</emphasis>:
                         retorna dados em um matriz de objetos. A classe padrão
-                        é a classe interna <acronym>PHP</acronym> stdClass. Colunas do conjunto de resultados
-                        estão disponíveis como propriedades públicas do
+                        é a classe interna <acronym>PHP</acronym> stdClass. Colunas do conjunto de
+                        resultados estão disponíveis como propriedades públicas do
                         objeto.
                     </para>
                 </listitem>
@@ -827,13 +843,13 @@ echo $result[0];
                 de pares chave-valor, como um matriz associativo com uma entrada única
                 por linha. A chave desse matriz associativo é tomada da
                 primeira coluna devolvida pela consulta <acronym>SELECT</acronym>. O valor é tomado
-                da segunda coluna devolvida pela consulta <acronym>SELECT</acronym>. Quaisquer outras
-                colunas devolvidas pela consulta são descartadas.
+                da segunda coluna devolvida pela consulta <acronym>SELECT</acronym>. Quaisquer
+                outras colunas devolvidas pela consulta são descartadas.
             </para>
 
             <para>
-                Você deve projetar a conuslta <acronym>SELECT</acronym> de modo que a primeira coluna
-                devolvida tenha valores únicos. Se há valores duplicados na
+                Você deve projetar a conuslta <acronym>SELECT</acronym> de modo que a primeira
+                coluna devolvida tenha valores únicos. Se há valores duplicados na
                 primeira coluna, entradas na matriz associativo serão
                 sobrescritas.
             </para>
@@ -879,11 +895,11 @@ echo $result->bug_description;
 
             <para>
                 O método <methodname>fetchOne()</methodname> é como uma combinação
-                do método <methodname>fetchRow()</methodname> com o método <methodname>fetchCol()</methodname>,
-                no que ele retorna dados somente para a primeira linha buscada a partir
-                do conjunto de resultados, e retorna somente o valor da primeira
-                coluna naquela linha. Portanto ele retorna somente um único
-                valor escalar, nem um matriz nem um objeto.
+                do método <methodname>fetchRow()</methodname> com o método 
+                <methodname>fetchCol()</methodname>, no que ele retorna dados somente
+                para a primeira linha buscada a partir do conjunto de resultados, e retorna
+                somente o valor da primeira coluna naquela linha. Portanto ele retorna somente
+                um único valor escalar, nem um matriz nem um objeto.
             </para>
 
             <example id="zend.db.adapter.select.fetchone.example">
@@ -952,10 +968,10 @@ $db->insert('bugs', $data);
                 Você pode precisar que valores na matriz de dados sejam tratados como expressões 
                 <acronym>SQL</acronym>, caso no qual elas não devam sofrer quoting. Por
                 padrão, todos os valores de dados passados como strings são tratados como
-                literais string. Para especificar que o valor é uma expressão <acronym>SQL</acronym>
-                e portanto não deve sofrer quoting, passe o valor
-                na matriz de dados como um objeto do tipo <classname>Zend_Db_Expr</classname> em vez de
-                texto claro.
+                literais string. Para especificar que o valor é uma expressão 
+                <acronym>SQL</acronym> e portanto não deve sofrer quoting, passe o valor
+                na matriz de dados como um objeto do tipo <classname>Zend_Db_Expr</classname>
+                em vez de texto claro.
             </para>
 
             <example id="zend.db.adapter.write.insert.example2">
@@ -978,10 +994,10 @@ $db->insert('bugs', $data);
             <title>Recuperando um Valor Gerado</title>
 
             <para>
-                Algumas marcas de <acronym>SGBDR</acronym> suportam autoincremento de chaves primárias.
-                Uma tabela definida desse modo gera um valor de chave primária
-                automaticamente durante um <acronym>INSERT</acronym> de uma nova linha. O valor de retorno
-                do método <methodname>insert()</methodname> <emphasis>não</emphasis> é
+                Algumas marcas de <acronym>SGBDR</acronym> suportam autoincremento de chaves
+                primárias. Uma tabela definida desse modo gera um valor de chave primária
+                automaticamente durante um <acronym>INSERT</acronym> de uma nova linha. O valor de
+                retorno do método <methodname>insert()</methodname> <emphasis>não</emphasis> é
                 o último ID incluído, porque a tabela pode não ter uma 
                 coluna de autoincremento. Em vez disso, o valor de retorno é o 
                 número de linhas afetadas (geralmente 1).
@@ -1005,8 +1021,8 @@ $id = $db->lastInsertId();
             </example>
 
             <para>
-                Algumas marcas de <acronym>SGBDR</acronym> suportam um objeto de sequencia, que gera
-                valores únicos para servir como valores da chave primária. Para suportar
+                Algumas marcas de <acronym>SGBDR</acronym> suportam um objeto de sequencia, que 
+                gera valores únicos para servir como valores da chave primária. Para suportar
                 sequencias, o método <methodname>lastInsertId()</methodname> aceita dois
                 argumentos string opcionais. Esses argumentos denominam a tabela e
                 a coluna, assumindo que você tenha seguido a convenção de que uma 
@@ -1049,13 +1065,13 @@ $id = $db->lastSequenceId('bugs_id_gen');
             </example>
 
             <para>
-                Para as marcas de <acronym>SGBDR</acronym> que não suportam sequencias, incluindo MySQL,
-                Microsoft <acronym>SQL</acronym> Server, e SQLite, os argumentos para 
+                Para as marcas de <acronym>SGBDR</acronym> que não suportam sequencias, incluindo
+                MySQL, Microsoft <acronym>SQL</acronym> Server, e SQLite, os argumentos para 
                 o método <methodname>lastInsertId()</methodname> são ignorados, e o valor devolvido
-                é o valor mais recente gerado para qualquer tabela por operações <acronym>INSERT</acronym>
-                durante a conexão atual. Para essas marcas de <acronym>SGBDR</acronym>,
-                o método <methodname>lastSequenceId()</methodname> sempre devolve
-                <constant>NULL</constant>.
+                é o valor mais recente gerado para qualquer tabela por operações
+                <acronym>INSERT</acronym> durante a conexão atual. Para essas marcas de
+                <acronym>SGBDR</acronym>, o método <methodname>lastSequenceId()</methodname> sempre
+                devolve <constant>NULL</constant>.
             </para>
 
             <note>
@@ -1075,8 +1091,8 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 </para>
                 <para>
                     Usar um modo de isolamento de transação forte tal como
-                    "repeatable read" pode mitigar esse risco, mas algumas marcas de <acronym>SGBDR</acronym>
-                    não suportam o isolamento de transação necessário para 
+                    "repeatable read" pode mitigar esse risco, mas algumas marcas de 
+                    <acronym>SGBDR</acronym> não suportam o isolamento de transação necessário para 
                     isso, ou sua aplicação pode usar um modo de isolamento 
                     de transação baixo por projeto.
                 </para>
@@ -1084,8 +1100,8 @@ $id = $db->lastSequenceId('bugs_id_gen');
                 <para>
 					Além disso, usar uma expressão como "MAX (id) +1" para gerar
                     um novo valor para uma chave primária não é seguro, porque dois clientes
-                    poderiam fazer esta consulta simultanamente, e em seguida, ambos usariam o mesma
-                    valor calculado para sua próxima operação <acronym>INSERT</acronym>.                    
+                    poderiam fazer esta consulta simultanamente, e em seguida, ambos usariam 
+                    o mesmo valor calculado para sua próxima operação <acronym>INSERT</acronym>.                    
                 </para>
 
                 <para>
@@ -1105,7 +1121,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
             <title>Updating Data</title>
 
             <para>
-				Você pode atualizar linhas em uma tabela de banco de dados usando o
+                Você pode atualizar linhas em uma tabela de banco de dados usando o
                 método <methodname>update()</methodname> de uma adaptadora. Esse método leva
                 três argumentos: o primeiro é o nome da tabela, o
                 segundo é um matriz associativo mapeando as colunas a serem alteradas para os novos
@@ -1113,13 +1129,14 @@ $id = $db->lastSequenceId('bugs_id_gen');
             </para>
 
             <para>
-				Os valores na matriz de dados são tratados como sequências de caracteres.
+                Os valores na matriz de dados são tratados como sequências de caracteres.
                 Veja <xref linkend="zend.db.adapter.write.insert" />
-                para obter informações sobre como utilizar expressões <acronym>SQL</acronym> na matriz de dados.                
+                para obter informações sobre como utilizar expressões <acronym>SQL</acronym> na
+                matriz de dados.                
             </para>
 
             <para>
-				O terceiro argumento é uma string contendo uma expressão <acronym>SQL</acronym>
+                O terceiro argumento é uma string contendo uma expressão <acronym>SQL</acronym>
                 que é usada como critério para as linhas a serem alteradas. Os valores
                 e identificadores nesse argumento não são citados ou escapados.
                 Você é responsável por garantir que o conteúdo dinâmico seja
@@ -1206,8 +1223,8 @@ $n = $db->update('bugs', $data, $where);
             <title>Excluindo Dados</title>
             <para>
 				Você pode excluir linhas de uma tabela de banco de dados usando o
-                método <methodname>delete()</methodname>methodName>. Esse método leva dois argumentos:
-                O primeiro é uma string com o nome da tabela.
+                método <methodname>delete()</methodname>methodName>. Esse método leva dois
+                argumentos: O primeiro é uma string com o nome da tabela.
                 
             </para>
 
@@ -1260,19 +1277,12 @@ $n = $db->delete('bugs', 'bug_id = 3');
         <title>Citando Valores e Identificadores</title>
 
         <para>
-            When you form <acronym>SQL</acronym> queries, often it is the case that you need to
-            include the values of <acronym>PHP</acronym> variables in <acronym>SQL</acronym>
-            expressions. This is risky, because if the value in a <acronym>PHP</acronym> string
-            contains certain symbols, such as the quote symbol, it could result in invalid
-            <acronym>SQL</acronym>. For example, notice the imbalanced quote characters in the
-            following query:
-            
-			Quando você monta consultas <acronym>SQL</acronym>, muitas vezes é o caso de você precisar
-            incluir os valores de variáveis<acronym>PHP</acronym> em expressões <acronym>SQL</acronym>.
-            Isso é arriscado, porque se o valor em uma string <acronym>PHP</acronym>
-            contém certos símbolos, como o símbolo de citação, isso pode resultar em 
-            <acronym>SQL</acronym> inválido. Por exemplo, observe os apóstrofos não balanceados na
-            seguinte consulta:
+			Quando você monta consultas <acronym>SQL</acronym>, muitas vezes é o caso de você
+			precisar incluir os valores de variáveis<acronym>PHP</acronym> em expressões
+			<acronym>SQL</acronym>. Isso é arriscado, porque se o valor em uma string
+			<acronym>PHP</acronym> contém certos símbolos, como o símbolo de citação, isso pode
+			resultar em <acronym>SQL</acronym> inválido. Por exemplo, observe os apóstrofos não
+			balanceados na seguinte consulta:
             
             <programlisting language="php"><![CDATA[
 $name = "O'Reilly";
@@ -1286,23 +1296,25 @@ echo $sql;
         <para>
 			Ainda pior é o risco de tais erros de código possam ser explorados
             deliberadamente por uma pessoa que está tentando manipular a função
-            de sua aplicação web. Se eles podem especificar o valor de uma variável <acronym>PHP</acronym>
-            través do uso de um parâmetro <acronym>HTTP</acronym> ou outro mecanismo, 
-            eles podem ser capazes de fazer suas consultas <acronym>SQL</acronym> fazerem coisas que você
-            não pretendia que elas fizessem, tais retornar dados para a pessoa
-            que não deveria ter o privilégio de lê-los. Essa é uma técnica grave e generalizada
-            para violar a segurança do aplicativo, conhecido como "SQL Injection" (veja <ulink
-                 url="http://en.wikipedia.org/wiki/SQL_Injection">http://en.wikipedia.org/wiki/SQL_Injection</ulink>).                
+            de sua aplicação web. Se eles podem especificar o valor de uma variável
+            <acronym>PHP</acronym> através do uso de um parâmetro <acronym>HTTP</acronym> ou
+            outro mecanismo, eles podem ser capazes de fazer suas consultas <acronym>SQL</acronym>
+            fazerem coisas que você não pretendia que elas fizessem, tais retornar dados para a
+            pessoa que não deveria ter o privilégio de lê-los. Essa é uma técnica grave e
+            generalizada para violar a segurança do aplicativo, conhecido como "SQL Injection"
+            (veja <ulink url="http://en.wikipedia.org/wiki/SQL_Injection">
+            http://en.wikipedia.org/wiki/SQL_Injection
+            </ulink>).                
         </para>
 
         <para>
-            A classe adaptadora <classname>Zend_Db</classname> fornece funções convenientes para ajudar
-            a reduzir as vulnerabilidades para ataques de Injeção de <acronym>SQL</acronym> em seu
-            código <acronym>PHP</acronym>. A solução é escapar caracteres especiais tais como apóstrofos
-            em valores <acronym>PHP</acronym> antes deles serem interpolados em suas
-            strings <acronym>SQL</acronym>. Isso protege tanto contra manipulação acidental quanto deliberada
-            de strings <acronym>SQL</acronym> por variáveis <acronym>PHP</acronym> que
-            contém caracteres especiais.            
+            A classe adaptadora <classname>Zend_Db</classname> fornece funções convenientes para
+            ajudar a reduzir as vulnerabilidades para ataques de Injeção de <acronym>SQL</acronym>
+            em seu código <acronym>PHP</acronym>. A solução é escapar caracteres especiais tais
+            como apóstrofos em valores <acronym>PHP</acronym> antes deles serem interpolados em
+            suas strings <acronym>SQL</acronym>. Isso protege tanto contra manipulação acidental
+            quanto deliberada de strings <acronym>SQL</acronym> por variáveis 
+            <acronym>PHP</acronym> que contém caracteres especiais.            
         </para>
 
         <sect3 id="zend.db.adapter.quoting.quote">
@@ -1337,7 +1349,9 @@ echo $sql;
                 delimitadores de citação em torno da cadeia. Isso é diferente de
                 algumas funções que escapam caracteres especiais, mas não adicionam
                 os delimitadores de citação, por exemplo 
-                <ulink url="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</ulink>.                    
+                <ulink url="http://www.php.net/mysqli_real_escape_string">
+                mysql_real_escape_string()
+                </ulink>.                    
             </para>
 
             <para>
@@ -1355,7 +1369,7 @@ SELECT * FROM atable WHERE intColumn = '123'
             </para>
 
             <para>
-				Você pode usar o segundo argumento opcional para o
+                Você pode usar o segundo argumento opcional para o
                 método <methodname>quote()</methodname> para aplicar citação seletivamente para
                 o tipo de dados <acronym>SQL</acronym> que você especificar.                
             </para>
@@ -1371,7 +1385,7 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             </example>
 
             <para>
-				Cada classe <classname>Zend_Db_Adapter</classname> tem codificada os nomes de 
+                Cada classe <classname>Zend_Db_Adapter</classname> tem codificada os nomes de 
                 tipos de dados <acronym>SQL</acronym> numéricos para a respectiva marca de
                 <acronym>SGBDR</acronym>. Você também pode usar as constantes
                 <constant>Zend_Db::INT_TYPE</constant>, <constant>Zend_Db::BIGINT_TYPE</constant>,
@@ -1394,21 +1408,21 @@ $sql = 'SELECT * FROM atable WHERE intColumn = '
             <para>
 				O uso mais típico de citação é para interpolar uma variável <acronym>PHP</acronym>
                 em uma expressão ou declaração <acronym>SQL</acronym>. Você pode usar o
-                método <methodname>quoteInto()</methodname> para fazer isso em uma única etapa. Esse
-                método leva dois argumentos: o primeiro argumento é uma string
+                método <methodname>quoteInto()</methodname> para fazer isso em uma única etapa. 
+                Esse método leva dois argumentos: o primeiro argumento é uma string
                 contendo um símbolo marcador (?), e o
                 segundo argumento é um valor ou variável <acronym>PHP</acronym> que deve ser
                 substituída pelo marcador.                
             </para>
 
             <para>
-				O símbolo marcador é o mesmo símbolo usado por muitas marcas de <acronym>SGBDR</acronym>
-                para parâmetros posicionais, mas o
+				O símbolo marcador é o mesmo símbolo usado por muitas marcas de 
+				<acronym>SGBDR</acronym> para parâmetros posicionais, mas o
                 método <methodname>quoteInto()</methodname> apenas emula parâmetros de consulta.
                 O método simplesmente interpola o valor para a string,
                 escapa caracteres especiais, e aplica apóstrofos em torno dele.
-                Parâmetros de consulta verdadeiros mantêm a separação entre a string <acronym>SQL</acronym>
-                e os parâmetros assim que a declaração é analisada no
+                Parâmetros de consulta verdadeiros mantêm a separação entre a string
+                <acronym>SQL</acronym> e os parâmetros assim que a declaração é analisada no
                 servidor <acronym>SGBDR</acronym>.                
             </para>
 
@@ -1424,7 +1438,8 @@ echo $sql;
 
             <para>
 				Você pode usar o terceiro parâmetro opcional de
-                <methodname>quoteInto()</methodname> para especificar o tipo de dados <acronym>SQL</acronym>.
+                <methodname>quoteInto()</methodname> para especificar o tipo de dados
+                <acronym>SQL</acronym>.
                 Tipos de dados numéricos não são citados, e outros tipos são citados.                
             </para>
 
@@ -1445,25 +1460,27 @@ echo $sql;
             <title>Usando quoteIdentifier()</title>
 
             <para>
-				Os valores não são a única parte da sintaxe <acronym>SQL</acronym> que pode precisar
-                ser variável. Se você usar variáveis <acronym>PHP</acronym> para nomear tabelas, colunas,
-                ou outros identificadores em suas declarações <acronym>SQL</acronym>, pode ser necessário
-                citar essas strings também. Por padrão, identificadores <acronym>SQL</acronym> têm
-                regras de sintaxe como <acronym>PHP</acronym> e a maioria das outras linguagens de programação.
+				Os valores não são a única parte da sintaxe <acronym>SQL</acronym> que pode
+				precisar ser variável. Se você usar variáveis <acronym>PHP</acronym> para nomear
+				tabelas, colunas, ou outros identificadores em suas declarações
+				<acronym>SQL</acronym>, pode ser necessário citar essas strings também. Por padrão,
+				identificadores <acronym>SQL</acronym> têm regras de sintaxe como
+				<acronym>PHP</acronym> e a maioria das outras linguagens de programação.
                 Por exemplo, os identificadores não devem conter espaços, certas
                 pontuações ou caracteres especiais, ou ainda caracteres internacionais.
-                Certas palavras também são reservadas para a sintaxe <acronym>SQL</acronym>, e não devem
-                ser usadas como identificadores.                
+                Certas palavras também são reservadas para a sintaxe <acronym>SQL</acronym>,
+                e não devem ser usadas como identificadores.                
             </para>
 
             <para>
 				No entanto, <acronym>SQL</acronym> tem um recurso chamado
-                <emphasis>identificadores delimitados</emphasis>, que permite escolhas mais amplas para a
-                grafia de identificadores. Se você colocar um identificador <acronym>SQL</acronym> no
-                tipo adequado de aspas, pode usar identificadores com dados que seriam inválidos
-                sem as aspas. Identificadores delimitados podem conter espaços,
-                pontuação, ou caracteres internacionais. Você também pode usar palavras reservadas
-                da <acronym>SQL</acronym> se colocá-las em identificadores delimitados.                
+                <emphasis>identificadores delimitados</emphasis>, que permite escolhas mais amplas
+                para a grafia de identificadores. Se você colocar um identificador
+                <acronym>SQL</acronym> no tipo adequado de aspas, pode usar identificadores
+                com dados que seriam inválidos sem as aspas. Identificadores delimitados podem
+                conter espaços, pontuação, ou caracteres internacionais. Você também pode usar
+                palavras reservadas da <acronym>SQL</acronym> se colocá-las em identificadores
+                delimitados.                
             </para>
 
             <para>
@@ -1471,10 +1488,10 @@ echo $sql;
                 <methodname>quote()</methodname>, mas ele aplica caracteres delimitadores  
                 de identificador para a string de acordo com o tipo de adaptador que você
                 usar. Por exemplo, a <acronym>SQL</acronym> padrão usa aspas duplas (")
-                para delimitadores de identificador, e a maioria das marcas de <acronym>SGBDR</acronym>
-                marcas usam esse símbolo. O MySQL usa crase (`) por padrão. O
-                método <methodname>quoteIdentifier()</methodname> também escapa caracteres especiais
-                dentro do argumento string.                
+                para delimitadores de identificador, e a maioria das marcas de 
+                <acronym>SGBDR</acronym> marcas usam esse símbolo. O MySQL usa crase (`) por
+                padrão. O método <methodname>quoteIdentifier()</methodname> também escapa
+                caracteres especiais dentro do argumento string.                
             </para>
 
             <example id="zend.db.adapter.quoting.quote-identifier.example">
@@ -1491,16 +1508,16 @@ echo $sql
             </example>
 
             <para>
-				Identificadores delimitados <acronym>SQL</acronym>  são sensíveis à caixa, ao contrário 
-				de identificadores não citados. Portanto, se você usar identificadores delimitados, você
-                deve usar a ortografia do identificador exatamente como ela é armazenada
-                no seu esquema, incluindo a caixa das letras.                
+                Identificadores delimitados <acronym>SQL</acronym>  são sensíveis à caixa, ao 
+				contrário de identificadores não citados. Portanto, se você usar identificadores
+				delimitados, você deve usar a ortografia do identificador exatamente como ela é
+				armazenada no seu esquema, incluindo a caixa das letras.
             </para>
 
             <para>
-				Na maioria dos casos onde <acronym>SQL</acronym> é gerada dentro
-                de classes <classname>Zend_Db</classname>, o padrão é que todos os identificadores sejam
-                delimitados automaticamente. Você pode alterar esse comportamento com a opção
+                Na maioria dos casos onde <acronym>SQL</acronym> é gerada dentro
+                de classes <classname>Zend_Db</classname>, o padrão é que todos os identificadores
+                sejam delimitados automaticamente. Você pode alterar esse comportamento com a opção
                 <constant>Zend_Db::AUTO_QUOTE_IDENTIFIERS </constant>. Especifique essa opção
                 ao instanciar o adaptador.                
                 Veja <xref linkend="zend.db.adapter.connecting.parameters.example2" />.
@@ -1528,8 +1545,8 @@ echo $sql
 
         <para>
 			De forma alternativa, você pode especificar o início e resolução de uma
-            transação, e assim controlar quantas consultas <acronym>SQL</acronym> estão incluídas em
-            um único grupo que é confirmado (ou revertido) como uma única
+            transação, e assim controlar quantas consultas <acronym>SQL</acronym> estão incluídas
+            em um único grupo que é confirmado (ou revertido) como uma única
             transação. Use o método <methodname>beginTransaction()</methodname> para
             iniciar uma transação. Posteriormente declarações <acronym>SQL</acronym> são executadas 
             no contexto da mesma transação, até que você o resolva explicitamente.            
@@ -1624,7 +1641,9 @@ try {
                     <row>
                         <entry><constant>SCHEMA_NAME</constant></entry>
                         <entry>(string)</entry>
-                        <entry>Nome do esquema do banco de dados no qual essa tabela existe.</entry>
+                        <entry>
+                        Nome do esquema do banco de dados no qual essa tabela existe.
+                        </entry>
                     </row>
                     <row>
                         <entry><constant>TABLE_NAME</constant></entry>
@@ -1657,7 +1676,8 @@ try {
                         <entry>
                             <constant>TRUE</constant> se a coluna aceita <acronym>SQL</acronym>
                             <constant>NULL</constant>'s, <constant>FALSE</constant> se a
-                            coluna tem uma restrição <constant>NOT</constant> <constant>NULL</constant>.
+                            coluna tem uma restrição <constant>NOT</constant>
+                            <constant>NULL</constant>.
                         </entry>
                         
                     </row>
@@ -1673,7 +1693,8 @@ try {
                         <entry><constant>SCALE</constant></entry>
                         <entry>(integer)</entry>
                         <entry>
-                            Escala de tipo <acronym>SQL</acronym> NUMERIC ou <constant>DECIMAL</constant>.
+                            Escala de tipo <acronym>SQL</acronym> NUMERIC ou
+                            <constant>DECIMAL</constant>.
                         </entry>
                     </row>
                     <row>
@@ -1688,15 +1709,16 @@ try {
                         <entry><constant>UNSIGNED</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>
-                            <constant>TRUE</constant> se um tipo baseado em inteiro for informado como 
-                            <constant>UNSIGNED</constant>.
+                            <constant>TRUE</constant> se um tipo baseado em inteiro for informado 
+                            como <constant>UNSIGNED</constant>.
                         </entry>
                     </row>
                     <row>
                         <entry><constant>PRIMARY</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>
-                            <constant>TRUE</constant> se a coluna é parte da chave primária dessa tabela.
+                            <constant>TRUE</constant> se a coluna é parte da chave primária dessa
+                            tabela.
                         </entry>
                     </row>
                     <row>
@@ -1747,8 +1769,9 @@ try {
         </note>
 
         <para>
-            Se não houver nenhum tabela que se encaixe com o nome da tabela e nome de esquema opcional 
-            especificado, então <methodname>describeTable()</methodname> retorna uma matriz vazia.
+            Se não houver nenhum tabela que se encaixe com o nome da tabela e nome de esquema 
+            opcional especificado, então <methodname>describeTable()</methodname> retorna uma
+            matriz vazia.
         </para>
 
     </sect2>
@@ -1765,11 +1788,11 @@ try {
         </para>
 
         <para>            
-			No entanto, se você tem um script de longa duração <acronym>PHP</acronym> que inicia muitas
-            conexões de banco de dados, talvez seja necessário encerrar a conexão, para evitar
-            um esgotamento da capacidade de seu servidor <acronym>SGBDR</acronym>. Você pode usar o
-            método <methodname>closeConnection()</methodname> da classe adaptadora fechar explicitamente
-            a conexão de dados subjacente.            
+			No entanto, se você tem um script de longa duração <acronym>PHP</acronym> que inicia
+			muitas conexões de banco de dados, talvez seja necessário encerrar a conexão, para 
+			evitar um esgotamento da capacidade de seu servidor <acronym>SGBDR</acronym>. Você pode
+			usar o método <methodname>closeConnection()</methodname> da classe adaptadora fechar
+			explicitamente a conexão de dados subjacente.            
         </para>
 
         <para>
@@ -1777,8 +1800,8 @@ try {
             servidor <acronym>SGBDR</acronym> com o método <methodname>isConnected()</methodname>.
             Isso significa que um recurso de conexão foi iniciado e não foi fechado. Essa
             função não é atualmente capaz de testar, por exemplo, um fechamento do lado servidor
-            da conexão. Ela é usada internamente para fechar a conexão. Isso permite que você feche a
-            conexão várias vezes sem erros. Já era o caso antes de 1.7.2 para adaptadores
+            da conexão. Ela é usada internamente para fechar a conexão. Isso permite que você feche
+            a conexão várias vezes sem erros. Já era o caso antes de 1.7.2 para adaptadores
             <acronym>PDO</acronym>, mas não para os outros.            
         </para>
 
@@ -1792,9 +1815,9 @@ $db->closeConnection();
         <note>
             <title>Zend_Db Suporta Conexões Persistentes?</title>
             <para>
-				Sim, a persistência é suportada através da adição da 
-                propriedade <property>persistent</property> definida como <constant>TRUE</constant> na
-                configuração (não em driver_configuration) de um adaptador
+                Sim, a persistência é suportada através da adição da 
+                propriedade <property>persistent</property> definida como <constant>TRUE</constant>
+                na configuração (não em driver_configuration) de um adaptador
                 em <classname>Zend_Db</classname>.                  
            </para>
 
@@ -1812,11 +1835,6 @@ $db = Zend_Db::factory('Oracle', array(
             </example>
 
             <para>
-                Please note that using persistent connections can cause an
-                excess of idle connections on the <acronym>SGBDR</acronym> server, which causes
-                more problems than any performance gain you might achieve by
-                reducing the overhead of making connections.
-                
 				Por favor, note que o uso de conexões persistentes pode causar um
                 excesso de conexões inativas no servidor <acronym>SGBDR</acronym>, o que leva a
                 mais problemas do que qualquer ganho de desempenho que você possa obter por
@@ -1847,25 +1865,26 @@ $db = Zend_Db::factory('Oracle', array(
 
         <para>
 			Pode haver casos em que você precisa acessar  o objeto de conexão
-            diretamente, como provido pela extensão de banco de dados <acronym>PHP</acronym>. Algumas
-            dessas extensões podem oferecer recursos que não são cobertos por
+            diretamente, como provido pela extensão de banco de dados <acronym>PHP</acronym>. 
+            Algumas dessas extensões podem oferecer recursos que não são cobertos por
             métodos de <classname>Zend_Db_Adapter_Abstract</classname>.            
         </para>
 
         <para>
-			Por exemplo, todas as declarações <acronym>SQL</acronym> rodadas por <classname>Zend_Db</classname>
-            são preparadas, então executado. No entanto, algumas funções de banco de dados são incompatíveis com
-            declarações preparadas. Instruções DDL como CREATE e ALTER não podem
-            ser preparadas no MySQL. Além disso, declarações <acronym>SQL</acronym> não se beneficiam do
-            <ulink url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">MySQL Query
-                Cache </ulink>, antes do MySQL 5.1.17.                
+			Por exemplo, todas as declarações <acronym>SQL</acronym> rodadas por 
+			<classname>Zend_Db</classname> são preparadas, então executadas. No entanto, algumas 
+			funções de banco de dados são incompatíveis com declarações preparadas. Instruções DDL
+			como CREATE e ALTER não podem ser preparadas no MySQL. Além disso, declarações
+			<acronym>SQL</acronym> não se beneficiam do 
+			<ulink url="http://dev.mysql.com/doc/refman/5.1/en/query-cache-how.html">
+            MySQL Query Cache </ulink>, antes do MySQL 5.1.17.                
         </para>
 
         <para>
-			A maioria das extensões de banco de dados <acronym>PHP</acronym> fornecem um método para executar
-            declarações <acronym>SQL</acronym> sem prepará-los. Por exemplo, em
-            <acronym>PDO</acronym>, esse método é <methodname>exec()</methodname>. Você pode acessar
-            o objeto de conexão na extensão <acronym>PHP</acronym> diretamente usando
+			A maioria das extensões de banco de dados <acronym>PHP</acronym> fornecem um método
+			para executar declarações <acronym>SQL</acronym> sem prepará-los. Por exemplo, em
+            <acronym>PDO</acronym>, esse método é <methodname>exec()</methodname>. Você pode 
+            acessar o objeto de conexão na extensão <acronym>PHP</acronym> diretamente usando
             <methodname>getConnection()</methodname>.            
         </para>
 
@@ -1877,19 +1896,14 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         </example>
 
         <para>           
-			A maioria das extensões de banco de dados <acronym>PHP</acronym> fornecem um método para executar
-            declarações <acronym>SQL</acronym> sem prepará-los. Por exemplo, em
-            <acronym>PDO</acronym>, esse método é <methodname>exec()</methodname>. Você pode acessar
-            o objeto de conexão na extensão <acronym>PHP</acronym> diretamente usando
+			A maioria das extensões de banco de dados <acronym>PHP</acronym> fornecem um método
+			para executar declarações <acronym>SQL</acronym> sem prepará-los. Por exemplo, em
+            <acronym>PDO</acronym>, esse método é <methodname>exec()</methodname>. Você pode 
+            acessar o objeto de conexão na extensão <acronym>PHP</acronym> diretamente usando
             <methodname>getConnection()</methodname>.            
         </para>
 
         <para>
-            In future versions of <classname>Zend_Db</classname>, there will be opportunities to
-            add method entry points for functionality that is common to
-            the supported <acronym>PHP</acronym> database extensions. This will not affect
-            backward compatibility.
-            
 			Em versões futuras de <classname>Zend_Db</classname>, haverá oportunidades de
             adicionar pontos de entrada de método para funcionalidades que são comuns às
             extensões de banco de dados <acronym>PHP</acronym> suportadas . Isso não afetará
@@ -1902,9 +1916,10 @@ $result = $db->getConnection()->exec('DROP TABLE bugs');
         <title>Recuperanco a Versão do Servidor</title>
 
         <para>
-			Desde a versão 1.7.2, você pode recuperar a versão do servidor no estilo de sintaxe <acronym>PHP</acronym>
-            para ser capaz de usar <methodname>version_compare()</methodname>. Se a
-            informação não estiver disponível, você receberá <constant>NULL</constant>.            
+			Desde a versão 1.7.2, você pode recuperar a versão do servidor no estilo de sintaxe
+			<acronym>PHP</acronym> para ser capaz de usar 
+			<methodname>version_compare()</methodname>. Se a informação não estiver disponível,
+			você receberá <constant>NULL</constant>.            
         </para>
 
         <example id="zend.db.adapter.server-version.example">
@@ -1938,8 +1953,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-                        Especifique esse adaptador para o método <methodname>factory()</methodname> com
-                        o nome 'Db2'.
+                        Especifique esse adaptador para o método <methodname>factory()</methodname>
+                        com o nome 'Db2'.
                     </para>
                 </listitem>
                 <listitem>
@@ -2026,10 +2041,10 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
 						Por padrão, os campos LOB são devolvidos como objetos OCI-Lob. Você pode
-                        recuperá-los como string para todas as solicitações, utilizando as opções do driver
-                        '<property>lob_as_string</property>' ou para uma solicitação particular, usando
-                        <methodname>setLobAsString(boolean)</methodname> no adaptador ou na
-                        declaração.                        
+                        recuperá-los como string para todas as solicitações, utilizando as opções
+                        do driver '<property>lob_as_string</property>' ou para uma solicitação 
+                        particular, usando <methodname>setLobAsString(boolean)</methodname> no 
+                        adaptador ou na declaração.                        
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2040,8 +2055,8 @@ if (!is_null($version)) {
             <itemizedlist>
                 <listitem>
                     <para>
-						Especifique esse adaptador para o método <methodname>factory()</methodname> com
-                        o nome 'Sqlsrv'.                        
+						Especifique esse adaptador para o método <methodname>factory()</methodname>
+						com o nome 'Sqlsrv'.                        
                     </para>
                 </listitem>
                 <listitem>
@@ -2052,11 +2067,11 @@ if (!is_null($version)) {
                 <listitem>
                     <para>
 						Microsoft <acronym>SQL</acronym> Server não suporta sequências, assim
-                        <methodname>lastInsertId()</methodname> ignora o argumento de chave primária e
-                        retorna o último valor gerado para uma chave de autoincremento se um nome de tabela
-                        for especificado ou o último id retornado por uma consulta de inserção. O
-                        método <methodname>lastSequenceId()</methodname> retorna
-                        <constant>NULL</constant>.                        
+                        <methodname>lastInsertId()</methodname> ignora o argumento de chave 
+                        primária e retorna o último valor gerado para uma chave de autoincremento
+                        se um nome de tabela for especificado ou o último id retornado por uma 
+                        consulta de inserção. O método <methodname>lastSequenceId()</methodname>
+                        retorna <constant>NULL</constant>.                        
                     </para>
                 </listitem>
                 <listitem>
@@ -2071,15 +2086,16 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-						Você pode especificar <property>driver_options</property> como uma chave na matriz de opções.
-                        O valor pode ser uma coisa qualquer coisa daqui <ulink
-                            url="http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx">http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx</ulink>.
+						Você pode especificar <property>driver_options</property> como uma chave na
+						matriz de opções. O valor pode ser uma coisa qualquer coisa daqui <ulink
+                            url="http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx">
+                            http://msdn.microsoft.com/en-us/library/cc296161(SQL.90).aspx</ulink>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-						Você pode usar <methodname>setTransactionIsolationLevel()</methodname> para definir
-                        nível de isolamento para a conexão atual. O valor pode ser                        
+						Você pode usar <methodname>setTransactionIsolationLevel()</methodname> para
+						definir nível de isolamento para a conexão atual. O valor pode ser                        
                         <constant>SQLSRV_TXN_READ_UNCOMMITTED</constant>,
                         <constant>SQLSRV_TXN_READ_COMMITTED</constant>,
                         <constant>SQLSRV_TXN_REPEATABLE_READ</constant>,
@@ -2089,11 +2105,6 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        As of Zend Framework 1.9, the minimal supported build of the
-                        <acronym>PHP</acronym> <acronym>SQL</acronym> Server extension from
-                        Microsoft is 1.0.1924.0. and the <acronym>MSSQL</acronym> Server Native
-                        Client version 9.00.3042.00.
-                        
 						A partir de Zend Framework 1.9, a distribuição mínima suportada da 
                         extesnão <acronym>PHP</acronym> para <acronym>SQL</acronym> Server
                         da Microsoft é a 1.0.1924.0. e o <acronym>MSSQL</acronym> Server Native
@@ -2152,26 +2163,21 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        If you are working with unicode strings in an encoding other than UCS-2
-                        (such as UTF-8), you may have to perform a conversion in your application
-                        code or store the data in a binary column. Please refer to <ulink
-                            url="http://support.microsoft.com/kb/232580">Microsoft's Knowledge
-                            Base</ulink> for more information.
-                            
-						Se você está trabalhando com strings Unicode em uma codificação diferente de UCS-2
-                        (tal como UTF-8), você pode ter que realizar uma conversão no código de sua
-                        aplicação ou armazenar os dados em uma coluna binária. Por favor, consulte a <ulink
-                            url = "http://support.microsoft.com/kb/232580"> Base de Conhecimento da Microsoft</ulink> para mais informações.                            
+						Se você está trabalhando com strings Unicode em uma codificação diferente 
+						de UCS-2 (tal como UTF-8), você pode ter que realizar uma conversão no 
+						código de sua aplicação ou armazenar os dados em uma coluna binária. Por 
+						favor, consulte a <ulink url = "http://support.microsoft.com/kb/232580">
+						Base de Conhecimento da Microsoft</ulink> para mais informações.                            
                     </para>
                 </listitem>
                 <listitem>
                     <para>
 						<classname>Zend_Db_Adapter_Pdo_Mssql</classname> configura
-                        <constant>QUOTED_IDENTIFIER ON</constant> imediatamente depois de conectar-se a um
-                        banco de dados <acronym>SQL</acronym> Server. Isso faz com que o driver utilize o
-                        símbolo delimitador de identificador da <acronym>SQL</acronym> padrão ( ")
-                        em vez dos colchetes que a sintaxe <acronym>SQL</acronym> Server
-                        utiliza para delimitar identificadores.                        
+                        <constant>QUOTED_IDENTIFIER ON</constant> imediatamente depois de 
+                        conectar-se a um banco de dados <acronym>SQL</acronym> Server. Isso
+                        faz com que o driver utilize o símbolo delimitador de identificador 
+                        da <acronym>SQL</acronym> padrão ( ") em vez dos colchetes que a sintaxe
+                        <acronym>SQL</acronym> Server utiliza para delimitar identificadores.                        
                     </para>
                 </listitem>
                 <listitem>
@@ -2179,14 +2185,15 @@ if (!is_null($version)) {
 						Você pode especificar <property>pdoType</property> como uma chave na
                         matriz de opções. O valor pode ser "mssql" (o padrão),
                         "dblib", "FreeTDS", ou "Sybase". Essa opção afeta
-                        o prefixo <acronym>DSN</acronym> que o adaptador usa quando constrói a string
-                        <acronym>DSN</acronym>. Tanto "FreeTDS" quanto "sybase" implicam um prefixo
-                        de "sybase:", que é usado para o conjunto de bibliotecas
+                        o prefixo <acronym>DSN</acronym> que o adaptador usa quando constrói a 
+                        string <acronym>DSN</acronym>. Tanto "FreeTDS" quanto "sybase" implicam
+                        um prefixo de "sybase:", que é usado para o conjunto de bibliotecas
                         <ulink url="http://www.freetds.org/">FreeTDS</ulink>.
                         Veja também
                         <ulink url="http://www.php.net/manual/en/ref.pdo-dblib.connection.php">
                         http://www.php.net/manual/en/ref.pdo-dblib.connection.php </ulink>
-                        Para obter mais informações sobre os prefixos <acronym>DSN</acronym> utilizados neste driver.                        
+                        Para obter mais informações sobre os prefixos <acronym>DSN</acronym> 
+                        utilizados neste driver.                        
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2305,7 +2312,7 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-                        Para cpnectar-se com um banco de dados SQLite em memória,
+                        Para conectar-se com um banco de dados SQLite em memória,
                         especifique <command>'dbname' => ':memory:'</command> na
                         matriz de parâmetros quando criar uma instância do
                         adaptador <classname>Pdo_Sqlite</classname>.
@@ -2335,35 +2342,37 @@ if (!is_null($version)) {
                 </listitem>
                 <listitem>
                     <para>
-						Firebird/Interbase não suporta chaves de autoincremento,
+                        Firebird/Interbase não suporta chaves de autoincremento,
                         portanto, você deve especificar o nome de uma sequência para
                         <methodname>lastInsertId()</methodname> ou
-                        <methodname>lastSequenceId()</methodname>.                        
+                        <methodname>lastSequenceId()</methodname>.
                     </para>
                 </listitem>
                 <listitem>
                     <para>
-						Atualmente, a opção <constant>Zend_Db::CASE_FOLDING</constant>
+                        Atualmente, a opção <constant>Zend_Db::CASE_FOLDING</constant>
                         não é suportada pelo adaptador Firebird/InterBase.
                         Identificadores não citadas são automaticamente devolvidos em
-                        maiúsculas.                        
+                        maiúsculas.
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para>O nome do adaptador é <classname>ZendX_Db_Adapter_Firebird</classname>.</para>
+                    <para>O nome do adaptador é <classname>ZendX_Db_Adapter_Firebird</classname>.
+                    </para>
                     <para>
                         Lembre-se de usar o parâmetro adapterNamespace com o valor
                         <classname>ZendX_Db_Adapter</classname>.
                     </para>
                     <para>
-						Recomendamos a atualização de <filename>gds32.dll</filename> (ou 
-                        equivalente Linux) empacotado junto com PHP, para a mesma versão do servidor. Para
-                        Firebird o equivalente de <filename>gds32.dll</filename> é
+                        Recomendamos a atualização de <filename>gds32.dll</filename> (ou 
+                        equivalente Linux) empacotado junto com PHP, para a mesma versão do 
+                        servidor. Para Firebird o equivalente de <filename>gds32.dll</filename> é
                         <filename>fbclient.dll</filename>.                        
                     </para>
                     <para>
-                        Por padrão todos os identificadores (nomes de tabela, campos) são devolvidos em caixa
+                        Por padrão todos os identificadores (nomes de tabela, campos) são 
+                        devolvidos em caixa
                         alta.
                     </para>
                 </listitem>

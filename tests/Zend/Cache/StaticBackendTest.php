@@ -118,6 +118,13 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
         $this->assertTrue($res);
     }
 
+    public function testSaveWithSpecificExtension()
+    {
+        $res = $this->_instance->save(array('data to cache', 'xml'), bin2hex('/foo'), array('tag1'));
+        $this->assertTrue($this->_instance->test(bin2hex('/foo')));
+        unlink($this->_instance->getOption('public_dir') . '/foo.xml');
+    }
+
     public function testTestWithAnExistingCacheId()
     {
         $res = $this->_instance->test(bin2hex('/bar'));

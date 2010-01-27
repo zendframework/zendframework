@@ -101,7 +101,13 @@ class Zend_Cache_Backend_Static
         if ($name == 'tag_cache') {
             return $this->getInnerCache();
         } else {
-            return parent::getOption($name);
+            if (in_array($name, $this->_options)) {
+                return $this->_options[$name];
+            }
+            if ($name == 'lifetime') {
+                return parent::getLifetime();
+            }
+            return null;
         }
     }
 
@@ -159,8 +165,20 @@ class Zend_Cache_Backend_Static
         if (empty($fileName)) {
             $fileName = $this->_options['index_filename'];
         }
+        if (is_null($this->_tagged) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
+            $this->_tagged = $tagged;
+        } elseif (!$this->_tagged) {
+            return false;
+        }
         $pathName = $this->_options['public_dir'] . dirname($id);
-        $file     = $pathName . '/' . $fileName . $this->_options['file_extension'];
+        
+        // Switch extension if needed
+        if (isset($this->_tagged[$id])) {
+            $extension = $this->_tagged[$id]['extension'];
+        } else {
+            $extension = $this->_options['file_extension'];
+        }
+        $file     = $pathName . '/' . $fileName . $extension;
         if (file_exists($file)) {
             return true;
         }
@@ -184,6 +202,11 @@ class Zend_Cache_Backend_Static
         if ($this->_options['disable_caching']) {
             return true;
         }
+        $extension = null;
+        if (is_array($data)) {
+            $extension = '.' . ltrim($data[1], '.');
+            $data = $data[0];
+        }
         clearstatcache();
         if (is_null($id) || strlen($id) == 0) {
             $id = $this->_detectId();
@@ -203,8 +226,9 @@ class Zend_Cache_Backend_Static
             $dataUnserialized = unserialize($data);
             $data = $dataUnserialized['data'];
         }
-
-        $file = rtrim($pathName, '/') . '/' . $fileName . $this->_options['file_extension'];
+        $ext = $this->_options['file_extension'];
+        if ($extension) $ext = $extension;
+        $file = rtrim($pathName, '/') . '/' . $fileName . $ext;
         if ($this->_options['file_locking']) {
             $result = file_put_contents($file, $data, LOCK_EX);
         } else {
@@ -221,7 +245,8 @@ class Zend_Cache_Backend_Static
             if (!isset($this->_tagged[$id])) {
                 $this->_tagged[$id] = array();
             }
-            $this->_tagged[$id] = array_unique(array_merge($this->_tagged[$id], $tags));
+            $this->_tagged[$id]['tags'] = array_unique(array_merge($this->_tagged[$id], $tags));
+            $this->_tagged[$id]['extension'] = $ext;
             $this->getInnerCache()->save($this->_tagged, self::INNER_CACHE_NAME);
         }
         return (bool) $result;
@@ -341,7 +366,7 @@ class Zend_Cache_Backend_Static
                 foreach ($tags as $tag) {
                     $urls = array_keys($this->_tagged);
                     foreach ($urls as $url) {
-                        if (in_array($tag, $this->_tagged[$url])) {
+                        if (in_array($tag, $this->_tagged[$url]['tags'])) {
                             $this->remove($url);
                             unset($this->_tagged[$url]);
                         }
@@ -382,7 +407,7 @@ class Zend_Cache_Backend_Static
                 }
                 $urls = array_keys($this->_tagged);
                 foreach ($urls as $url) {
-                    $difference = array_diff($tags, $this->_tagged[$url]);
+                    $difference = array_diff($tags, $this->_tagged[$url]['tags']);
                     if (count($tags) == count($difference)) {
                         $this->remove($url);
                         unset($this->_tagged[$url]);

@@ -64,6 +64,13 @@ class Zend_Controller_Action_Helper_Cache
      * @var array
      */
     protected $_tags = array();
+    
+    /**
+     * Indexed map of Extensions by Controller and Action
+     *
+     * @var array
+     */
+    protected $_extensions = array();
 
     /**
      * Track output buffering condition
@@ -78,7 +85,7 @@ class Zend_Controller_Action_Helper_Cache
      * @param array $tags
      * @return void
      */
-    public function direct(array $actions, array $tags = array())
+    public function direct(array $actions, array $tags = array(), $extension = null)
     {
         $controller = $this->getRequest()->getControllerName();
         $actions = array_unique($actions);
@@ -98,6 +105,14 @@ class Zend_Controller_Action_Helper_Cache
                 foreach ($tags as $tag) {
                     $this->_tags[$controller][$action][] = $tag;
                 }
+            }
+        }
+        if ($extension) {
+            if (!isset($this->_extensions[$controller])) {
+                $this->_extensions[$controller] = array();
+            }
+            foreach ($actions as $action) {
+                $this->_extensions[$controller][$action] = $extension;
             }
         }
     }
@@ -166,8 +181,12 @@ class Zend_Controller_Action_Helper_Cache
             && !empty($this->_tags[$controller][$action])) {
                 $tags = array_unique($this->_tags[$controller][$action]);
             }
+            $extension = null;
+            if ($this->_extensions[$controller][$action]) {
+                $extension = $this->_extensions[$controller][$action];
+            }
             $this->getCache(Zend_Cache_Manager::PAGECACHE)
-                ->start($this->_encodeCacheId($reqUri), $tags);
+                ->start($this->_encodeCacheId($reqUri), $tags, $extension);
         }
     }
     

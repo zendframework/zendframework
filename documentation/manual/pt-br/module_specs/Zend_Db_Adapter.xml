@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19173 -->
+<!-- EN-Revision: 20115 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -938,7 +938,7 @@ $db->insert('bugs', $data);
                 o banco de dados. Portanto, elas seguem as mesmas regras que uma
                 declaração <acronym>SQL</acronym> <acronym>INSERT</acronym> segue: se a coluna
                 tem uma cláusula <acronym>DEFAULT</acronym>, a coluna leva o valor na linha
-                criada, caso contrário é deixado em um estado <acronym>NULL</acronym>.
+                criada, caso contrário é deixado em um estado <constant>NULL</constant>.
             </para>
 
             <para>
@@ -1655,9 +1655,11 @@ try {
                         <entry><constant>NULLABLE</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>
-                            True se a coluna aceita <acronym>SQL</acronym> NULLs, false se a 
-                            coluna não tem uma restrição NOT NULL.
+                            <constant>TRUE</constant> se a coluna aceita <acronym>SQL</acronym>
+                            <constant>NULL</constant>'s, <constant>FALSE</constant> se a
+                            coluna tem uma restrição <constant>NOT</constant> <constant>NULL</constant>.
                         </entry>
+                        
                     </row>
                     <row>
                         <entry><constant>LENGTH</constant></entry>
@@ -1686,14 +1688,16 @@ try {
                         <entry><constant>UNSIGNED</constant></entry>
                         <entry>(boolean)</entry>
                         <entry>
-                            True se um tipo baseado em inteiro for informado como 
+                            <constant>TRUE</constant> se um tipo baseado em inteiro for informado como 
                             <constant>UNSIGNED</constant>.
                         </entry>
                     </row>
                     <row>
                         <entry><constant>PRIMARY</constant></entry>
                         <entry>(boolean)</entry>
-                        <entry>True se a coluna é parte da chave primária dessa tabela.</entry>
+                        <entry>
+                            <constant>TRUE</constant> se a coluna é parte da chave primária dessa tabela.
+                        </entry>
                     </row>
                     <row>
                         <entry><constant>PRIMARY_POSITION</constant></entry>
@@ -1703,7 +1707,9 @@ try {
                     <row>
                         <entry><constant>IDENTITY</constant></entry>
                         <entry>(boolean)</entry>
-                        <entry>True se a coluna usa um valor autogerado.</entry>
+                        <entry>
+                            <constant>TRUE</constant> se a coluna usa um valor autogerado.
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -1787,13 +1793,13 @@ $db->closeConnection();
             <title>Zend_Db Suporta Conexões Persistentes?</title>
             <para>
 				Sim, a persistência é suportada através da adição da 
-                propriedade <property> persistent</property> definida como true na
+                propriedade <property>persistent</property> definida como <constant>TRUE</constant> na
                 configuração (não em driver_configuration) de um adaptador
                 em <classname>Zend_Db</classname>.                  
            </para>
 
             <example id="zend.db.adapter.connecting.persistence.example">
-                <title>Usando a Propriedade Persitence com o Adaptador Oracle</title>
+                <title>Usando a Propriedade Persistence com o Adaptador Oracle</title>
                 <programlisting language="php"><![CDATA[
 $db = Zend_Db::factory('Oracle', array(
     'host'       => '127.0.0.1',

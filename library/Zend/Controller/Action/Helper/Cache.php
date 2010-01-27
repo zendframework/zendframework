@@ -182,7 +182,7 @@ class Zend_Controller_Action_Helper_Cache
                 $tags = array_unique($this->_tags[$controller][$action]);
             }
             $extension = null;
-            if ($this->_extensions[$controller][$action]) {
+            if (isset($this->_extensions[$controller][$action])) {
                 $extension = $this->_extensions[$controller][$action];
             }
             $this->getCache(Zend_Cache_Manager::PAGECACHE)

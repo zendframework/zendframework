@@ -81,7 +81,7 @@
             Available options include:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.wddx.table.options">
             <title>Zend_Serializer_Adapter_Wddx Options</title>
 
             <tgroup cols="4">
@@ -128,7 +128,7 @@
             Available options include:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.json.table.options">
             <title>Zend_Serializer_Adapter_Json Options</title>
 
             <tgroup cols="4">
@@ -215,7 +215,7 @@
             Available options include:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.pythonpickle.table.options">
             <title>Zend_Serializer_Adapter_PythonPickle Options</title>
 
             <tgroup cols="4">
@@ -251,7 +251,7 @@
             Datatype merging (PHP to Python) occurs as follows:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.pythonpickle.table.php2python">
             <title>Datatype merging (PHP to Python)</title>
 
             <tgroup cols="2">
@@ -319,7 +319,7 @@
             Datatype merging (Python to PHP) occurs per the following:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.pythonpickle.table.python2php">
             <title>Datatype merging (Python to PHP)</title>
 
             <tgroup cols="2">

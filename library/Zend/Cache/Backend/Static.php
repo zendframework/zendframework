@@ -47,15 +47,16 @@ class Zend_Cache_Backend_Static
      * @var array
      */
     protected $_options = array(
-        'public_dir'       => null,
-        'sub_dir'          => 'html',
-        'file_extension'   => '.html',
-        'index_filename'   => 'index',
-        'file_locking'     => true,
-        'cache_file_umask' => 0644,
-        'debug_header'     => false,
-        'tag_cache'        => null,
-        'disable_caching'  => false
+        'public_dir'            => null,
+        'sub_dir'               => 'html',
+        'file_extension'        => '.html',
+        'index_filename'        => 'index',
+        'file_locking'          => true,
+        'cache_file_umask'      => 0600,
+        'cache_directory_umask' => 0700,
+        'debug_header'          => false,
+        'tag_cache'             => null,
+        'disable_caching'       => false
     );
 
     /**
@@ -232,6 +233,7 @@ class Zend_Cache_Backend_Static
         if ($extension) $ext = $extension;
         $file = rtrim($pathName, '/') . '/' . $fileName . $ext;
         if ($this->_options['file_locking']) {
+            file_put_contents('/var/www/data.dump', $file.$data);
             $result = file_put_contents($file, $data, LOCK_EX);
         } else {
             $result = file_put_contents($file, $data);
@@ -262,7 +264,7 @@ class Zend_Cache_Backend_Static
         foreach ($parts as $part) {
             $directory = rtrim($directory, '/') . '/' . $part;
             if (!is_dir($directory)) {
-                mkdir($directory, $this->_octdec($this->_options['cache_file_umask']));
+                mkdir($directory, $this->_octdec($this->_options['cache_directory_umask']));
             }
         }
     }

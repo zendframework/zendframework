@@ -157,7 +157,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
                 O primeiro argumento é um string que identifica o nome base da
                 classe adaptadora. Por exemplo, a string '<classname>Pdo_Mysql</classname>' corresponde
                 à classe <classname>Zend_Db_Adapter_Pdo_Mysql</classname>. O segundo argumento
-                é o mesmo matriz de parâmetros que você teria passado para 
+                é a mesma matriz de parâmetros que você teria passado para 
                 o construtor da adaptadora.
             </para>
 
@@ -173,7 +173,7 @@ $db = new Zend_Db_Adapter_Pdo_Mysql(array(
 
 // Carrega automaticamente a classe Zend_Db_Adapter_Pdo_Mysql
 // e cria uma instância dela.
-$db = Zend_Db::factory('Pdo_Mysql', matriz(
+$db = Zend_Db::factory('Pdo_Mysql', array(
     'host'     => '127.0.0.1',
     'username' => 'webuser',
     'password' => 'xxxxxxxx',
@@ -188,7 +188,7 @@ $db = Zend_Db::factory('Pdo_Mysql', matriz(
                 classe com o prefixo de pacote "<classname>Zend_Db_Adapter</classname>", você pode usar
                 o método <methodname>factory()</methodname> para carregar sua adaptadora se você 
                 especificar a parte principal da classe adaptadora com a
-                chave 'adapterNamespace' no matriz de parâmetros.
+                chave 'adapterNamespace' na matriz de parâmetros.
             </para>
 
             <example id="zend.db.adapter.connecting.factory.example2">
@@ -199,7 +199,7 @@ $db = Zend_Db::factory('Pdo_Mysql', matriz(
 
 // Carrega automaticamente a classe MyProject_Db_Adapter_Pdo_Mysql e cria
 // uma instância dela.
-$db = Zend_Db::factory('Pdo_Mysql', matriz(
+$db = Zend_Db::factory('Pdo_Mysql', array(
     'host'             => '127.0.0.1',
     'username'         => 'webuser',
     'password'         => 'xxxxxxxx',
@@ -241,10 +241,10 @@ $db = Zend_Db::factory('Pdo_Mysql', matriz(
 
                 <programlisting language="php"><![CDATA[
 $config = new Zend_Config(
-    matriz(
-        'database' => matriz(
+    array(
+        'database' => array(
             'adapter' => 'Mysqli',
-            'params'  => matriz(
+            'params'  => array(
                 'host'     => '127.0.0.1',
                 'dbname'   => 'test',
                 'username' => 'webuser',
@@ -371,11 +371,11 @@ $db = Zend_Db::factory($config->database);
                 </para>
 
                 <programlisting language="php"><![CDATA[
-$options = matriz(
+$options = array(
     Zend_Db::CASE_FOLDING => Zend_Db::CASE_UPPER
 );
 
-$params = matriz(
+$params = array(
     'host'           => '127.0.0.1',
     'username'       => 'webuser',
     'password'       => 'xxxxxxxx',
@@ -404,11 +404,11 @@ $db = Zend_Db::factory('Db2', $params);
                 </para>
 
                 <programlisting language="php"><![CDATA[
-$options = matriz(
+$options = array(
     Zend_Db::AUTO_QUOTE_IDENTIFIERS => false
 );
 
-$params = matriz(
+$params = array(
     'host'           => '127.0.0.1',
     'username'       => 'webuser',
     'password'       => 'xxxxxxxx',
@@ -424,11 +424,11 @@ $db = Zend_Db::factory('Pdo_Mysql', $params);
                 <title>Passando Opções de Driver PDO para a a Fábrica</title>
 
                 <programlisting language="php"><![CDATA[
-$pdoParams = matriz(
+$pdoParams = array(
     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
 );
 
-$params = matriz(
+$params = array(
     'host'           => '127.0.0.1',
     'username'       => 'webuser',
     'password'       => 'xxxxxxxx',
@@ -447,11 +447,11 @@ echo $db->getConnection()
                 <title>Passando Opções de Serialização para a Fábrica</title>
 
                 <programlisting language="php"><![CDATA[
-$options = matriz(
+$options = array(
     Zend_Db::ALLOW_SERIALIZATION => false
 );
 
-$params = matriz(
+$params = array(
     'host'           => '127.0.0.1',
     'username'       => 'webuser',
     'password'       => 'xxxxxxxx',
@@ -699,7 +699,7 @@ $result = $db->fetchAll($sql, 2);
                         Note que se sua lista de seleção contém mais de uma 
                         coluna com o mesmo nome, por exemplo se elas são de
                         duas tabelas diferentes em um <acronym>JOIN</acronym>, pode haver somente uma
-                        entrada no matriz associativo para o nome dado.
+                        entrada na matriz associativo para o nome dado.
                         Se você usa o modo <acronym>FETCH_ASSOC</acronym>, deve especificar
                         apelidos de coluna em sua consulta <acronym>SELECT</acronym> para garantir que os
                         nomes resultem em chaves de matriz únicas.
@@ -728,7 +728,7 @@ $result = $db->fetchAll($sql, 2);
                         retorna dados em um matriz de matrizs. As chaves de matriz são
                         tanto strings como as usadas no modo FETCH_ASSOC, como
                         inteiros como os usados no modo FETCH_NUM. Note que o 
-                        número de elementos no matriz é o dobro do que  
+                        número de elementos na matriz é o dobro do que  
                         seria se você usasse FETCH_ASSOC
                         ou FETCH_NUM.
                     </para>
@@ -834,7 +834,7 @@ echo $result[0];
             <para>
                 Você deve projetar a conuslta <acronym>SELECT</acronym> de modo que a primeira coluna
                 devolvida tenha valores únicos. Se há valores duplicados na
-                primeira coluna, entradas no matriz associativo serão
+                primeira coluna, entradas na matriz associativo serão
                 sobrescritas.
             </para>
 
@@ -923,7 +923,7 @@ echo $result;
             <example id="zend.db.adapter.write.insert.example">
                 <title>Incluindo em uma Tabela</title>
                 <programlisting language="php"><![CDATA[
-$data = matriz(
+$data = array(
     'created_on'      => '2007-03-22',
     'bug_description' => 'Something wrong',
     'bug_status'      => 'NEW'
@@ -934,7 +934,7 @@ $db->insert('bugs', $data);
             </example>
 
             <para>
-                Colunas que você excluir do matriz de dados não serão especificadas para
+                Colunas que você excluir da matriz de dados não serão especificadas para
                 o banco de dados. Portanto, elas seguem as mesmas regras que uma
                 declaração <acronym>SQL</acronym> <acronym>INSERT</acronym> segue: se a coluna
                 tem uma cláusula <acronym>DEFAULT</acronym>, a coluna leva o valor na linha
@@ -945,23 +945,23 @@ $db->insert('bugs', $data);
                 Por padrão, os valores em seu matriz de dados são incluídos usando
                 parâmetros. ISso reduz o risco de alguns tipos de problemas de
                 segurança. Você não precisa aplicar escaping ou quoting para valores
-                no matriz de dados.
+                na matriz de dados.
             </para>
 
             <para>
-                Você pode precisar que valores no matriz de dados sejam tratados como expressões 
+                Você pode precisar que valores na matriz de dados sejam tratados como expressões 
                 <acronym>SQL</acronym>, caso no qual elas não devam sofrer quoting. Por
                 padrão, todos os valores de dados passados como strings são tratados como
                 literais string. Para especificar que o valor é uma expressão <acronym>SQL</acronym>
                 e portanto não deve sofrer quoting, passe o valor
-                no matriz de dados como um objeto do tipo <classname>Zend_Db_Expr</classname> em vez de
+                na matriz de dados como um objeto do tipo <classname>Zend_Db_Expr</classname> em vez de
                 texto claro.
             </para>
 
             <example id="zend.db.adapter.write.insert.example2">
                 <title>Incluindo Expressões em uma Tabela</title>
                 <programlisting language="php"><![CDATA[
-$data = matriz(
+$data = array(
     'created_on'      => new Zend_Db_Expr('CURDATE()'),
     'bug_description' => 'Something wrong',
     'bug_status'      => 'NEW'
@@ -1113,9 +1113,9 @@ $id = $db->lastSequenceId('bugs_id_gen');
             </para>
 
             <para>
-				Os valores no matriz de dados são tratados como sequências de caracteres.
+				Os valores na matriz de dados são tratados como sequências de caracteres.
                 Veja <xref linkend="zend.db.adapter.write.insert" />
-                para obter informações sobre como utilizar expressões <acronym>SQL</acronym> no matriz de dados.                
+                para obter informações sobre como utilizar expressões <acronym>SQL</acronym> na matriz de dados.                
             </para>
 
             <para>
@@ -1136,7 +1136,7 @@ $id = $db->lastSequenceId('bugs_id_gen');
             <example id="zend.db.adapter.write.update.example">
                 <title>Atualizando Linhas</title>
                 <programlisting language="php"><![CDATA[
-$data = matriz(
+$data = array(
     'updated_on'      => '2007-03-23',
     'bug_status'      => 'FIXED'
 );
@@ -1166,7 +1166,7 @@ $n = $db->update('bugs', $data, 'bug_id = 2');
             <example id="zend.db.adapter.write.update.example-array">
                 <title>Atualizando Linhas Usando um matriz de Expressões</title>
                 <programlisting language="php"><![CDATA[
-$data = matriz(
+$data = array(
     'updated_on'      => '2007-03-23',
     'bug_status'      => 'FIXED'
 );
@@ -1185,7 +1185,7 @@ $n = $db->update('bugs', $data, $where);
             <example id="zend.db.adapter.write.update.example-arrayofarrays">
                 <title>Atualizando Linhas Usando um matriz de matrizs</title>
                 <programlisting language="php"><![CDATA[
-$data = matriz(
+$data = array(
     'updated_on'      => '2007-03-23',
     'bug_status'      => 'FIXED'
 );
@@ -1795,7 +1795,7 @@ $db->closeConnection();
             <example id="zend.db.adapter.connecting.persistence.example">
                 <title>Usando a Propriedade Persitence com o Adaptador Oracle</title>
                 <programlisting language="php"><![CDATA[
-$db = Zend_Db::factory('Oracle', matriz(
+$db = Zend_Db::factory('Oracle', array(
     'host'       => '127.0.0.1',
     'username'   => 'webuser',
     'password'   => 'xxxxxxxx',

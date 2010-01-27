@@ -203,10 +203,12 @@ class Zend_Cache_Backend_Static
             return true;
         }
         $extension = null;
-        if (is_array($data)) {
+        if ($this->_isSerialized($data)) {
+            $data = unserialize($data);
             $extension = '.' . ltrim($data[1], '.');
             $data = $data[0];
         }
+        
         clearstatcache();
         if (is_null($id) || strlen($id) == 0) {
             $id = $this->_detectId();
@@ -263,6 +265,20 @@ class Zend_Cache_Backend_Static
                 mkdir($directory, $this->_octdec($this->_options['cache_file_umask']));
             }
         }
+    }
+    
+    /**
+     * Detect serialization of data (cannot predict since this is the only way
+     * to obey the interface yet pass in another parameter).
+     *
+     * In future, ZF 2.0, check if we can just avoid the interface restraints.
+     *
+     * This format is the only valid one possible for the class, so it's simple
+     * to just run a regular expression for the starting serialized format.
+     */
+    protected function _isSerialized($data)
+    {
+        return preg_match("/a:2:\{i:0;s:\d+:\"/", $data);
     }
 
     /**

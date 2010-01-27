@@ -120,24 +120,24 @@ class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
     
     public function testSaveWithSpecificExtension()
     {
-        $res = $this->_instance->save(array('data to cache', 'xml'), bin2hex('/foo2'));
+        $res = $this->_instance->save(serialize(array('data to cache', 'xml')), bin2hex('/foo2'));
         $this->assertTrue($this->_instance->test(bin2hex('/foo2')));
         unlink($this->_instance->getOption('public_dir') . '/foo2.xml');
     }
 
     public function testSaveWithSpecificExtensionWithTag()
     {
-        $res = $this->_instance->save(array('data to cache', 'xml'), bin2hex('/foo'), array('tag1'));
+        $res = $this->_instance->save(serialize(array('data to cache', 'xml')), bin2hex('/foo'), array('tag1'));
         $this->assertTrue($this->_instance->test(bin2hex('/foo')));
         unlink($this->_instance->getOption('public_dir') . '/foo.xml');
     }
     
     public function testRemovalWithSpecificExtension()
     {
-        $res = $this->_instance->save(array('data to cache', 'xml'), bin2hex('/foo'), array('tag1'));
-        $this->assertTrue($this->_instance->test(bin2hex('/foo')));
-        $this->assertTrue($this->_instance->remove('/foo'));
-        $this->assertFalse($this->_instance->test(bin2hex('/foo')));
+        $res = $this->_instance->save(serialize(array('data to cache', 'xml')), bin2hex('/foo3'), array('tag1'));
+        $this->assertTrue($this->_instance->test(bin2hex('/foo3')));
+        $this->assertTrue($this->_instance->remove('/foo3'));
+        $this->assertFalse($this->_instance->test(bin2hex('/foo3')));
     }
 
     public function testTestWithAnExistingCacheId()

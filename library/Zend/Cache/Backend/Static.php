@@ -236,19 +236,17 @@ class Zend_Cache_Backend_Static
         }
         @chmod($file, $this->_octdec($this->_options['cache_file_umask']));
 
-        if (count($tags) > 0) {
-            if (is_null($this->_tagged) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
-                $this->_tagged = $tagged;
-            } elseif (is_null($this->_tagged)) {
-                $this->_tagged = array();
-            }
-            if (!isset($this->_tagged[$id])) {
-                $this->_tagged[$id] = array();
-            }
-            $this->_tagged[$id]['tags'] = array_unique(array_merge($this->_tagged[$id], $tags));
-            $this->_tagged[$id]['extension'] = $ext;
-            $this->getInnerCache()->save($this->_tagged, self::INNER_CACHE_NAME);
+        if (is_null($this->_tagged) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
+            $this->_tagged = $tagged;
+        } elseif (is_null($this->_tagged)) {
+            $this->_tagged = array();
         }
+        if (!isset($this->_tagged[$id])) {
+            $this->_tagged[$id] = array();
+        }
+        $this->_tagged[$id]['tags'] = array_unique(array_merge($this->_tagged[$id], $tags));
+        $this->_tagged[$id]['extension'] = $ext;
+        $this->getInnerCache()->save($this->_tagged, self::INNER_CACHE_NAME);
         return (bool) $result;
     }
     
@@ -279,11 +277,21 @@ class Zend_Cache_Backend_Static
             Zend_Cache::throwException('Invalid cache id: does not match expected public_dir path');
         }
         $fileName = basename($id);
+        if (is_null($this->_tagged) && $tagged = $this->getInnerCache()->load(self::INNER_CACHE_NAME)) {
+            $this->_tagged = $tagged;
+        } elseif (!$this->_tagged) {
+            return false;
+        }
+        if (isset($this->_tagged[$id])) {
+            $extension = $this->_tagged[$id]['extension'];
+        } else {
+            $extension = $this->_options['file_extension'];
+        }
         if (empty($fileName)) {
             $fileName = $this->_options['index_filename'];
         }
         $pathName = $this->_options['public_dir'] . dirname($id);
-        $file     = realpath($pathName) . '/' . $fileName . $this->_options['file_extension'];
+        $file     = realpath($pathName) . '/' . $fileName . $extension;
         if (!file_exists($file)) {
             return false;
         }

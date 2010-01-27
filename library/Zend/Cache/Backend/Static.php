@@ -208,7 +208,7 @@ class Zend_Cache_Backend_Static
             $extension = '.' . ltrim($data[1], '.');
             $data = $data[0];
         }
-        
+
         clearstatcache();
         if (is_null($id) || strlen($id) == 0) {
             $id = $this->_detectId();
@@ -246,7 +246,7 @@ class Zend_Cache_Backend_Static
         if (!isset($this->_tagged[$id])) {
             $this->_tagged[$id] = array();
         }
-        $this->_tagged[$id]['tags'] = array_unique(array_merge($this->_tagged[$id], $tags));
+        $this->_tagged[$id]['tags'] = array_unique(array_merge($this->_tagged[$id]['tags'], $tags));
         $this->_tagged[$id]['extension'] = $ext;
         $this->getInnerCache()->save($this->_tagged, self::INNER_CACHE_NAME);
         return (bool) $result;

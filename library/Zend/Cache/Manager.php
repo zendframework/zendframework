@@ -86,7 +86,7 @@ class Zend_Cache_Manager
                 'name'    => 'Capture',
                 'options' => array(
                     'ignore_user_abort' => true,
-                    'automatic_serialization' => true
+//                    'automatic_serialization' => true
                 ),
             ),
             'backend' => array(

@@ -1325,11 +1325,14 @@ class Zend_Form_Element implements Zend_Validate_Interface
         $this->_messages = array();
         $this->_errors   = array();
         $result          = true;
-        $translator      = $this->getTranslator();
         $isArray         = $this->isArray();
         foreach ($this->getValidators() as $key => $validator) {
             if (method_exists($validator, 'setTranslator')) {
-                $validator->setTranslator($translator);
+                $validator->setTranslator($this->getTranslator());
+            }
+
+            if (method_exists($validator, 'setDisableTranslator')) {
+                $validator->setDisableTranslator($this->translatorIsDisabled());
             }
 
             if ($isArray && is_array($value)) {

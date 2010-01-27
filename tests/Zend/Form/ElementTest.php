@@ -2025,6 +2025,30 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
             $this->markTestIncomplete('Error occurs for PHP 5.1.4 on Windows');
         }
     }
+
+    /**
+     * @ZF-8882
+     */
+    public function testErrorMessagesShouldNotBeTranslatedWhenTranslatorIsDisabled()
+    {
+        $translations = array(
+            'foo' => 'Foo message',
+        );
+        $translate = new Zend_Translate('array', $translations);
+        $this->element->setTranslator($translate)
+                      ->addErrorMessage('foo')
+                      ->addValidator('Alpha');
+        $this->assertFalse($this->element->isValid(123));
+        $messages = $this->element->getMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertEquals('Foo message', array_shift($messages));
+
+        $this->element->setDisableTranslator(true);
+        $this->assertFalse($this->element->isValid(123));
+        $messages = $this->element->getMessages();
+        $this->assertEquals(1, count($messages));
+        $this->assertEquals('foo', array_shift($messages));
+    }
 }
 
 class Zend_Form_ElementTest_Decorator extends Zend_Form_Decorator_Abstract

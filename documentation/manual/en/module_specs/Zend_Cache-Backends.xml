@@ -482,6 +482,219 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
             There is no option for this backend.
         </para>
     </sect2>
+    
+    <sect2 id="zend.cache.backends.static">
+        <title>Zend_Cache_Backend_Static</title>
+        <para>
+            This backend works in concert with <classname>
+            Zend_Cache_Frontend_Capture</classname> (the two must be used
+            together) to save the output from requests as static files. This
+            means the static files are served directly on subsequent requests
+            without any involvement of PHP or the Zend Framework at all.
+        </para>
+        <para>
+            The benefits of this cache include a large throughput increase since
+            all subsequent requests return the static file and don't need any
+            dynamic processing. Of course this also has some disadvantages. The
+            only way to retry the dynamic request is to purge the cached file
+            from elsewhere in the application (or via a cronjob if timed). It
+            is also restricted to single-server applications where only one
+            filesystem is used. Nevertheless, it can be a powerful means of
+            getting more performance without incurring the cost of a proxy on
+            single machines.
+        </para>
+        <para>
+            Before describing its options, you should note this needs some
+            changes to the default .htaccess file in order for requests to be
+            directed to the static files if they exist. Here's an example of
+            a simple application caching some content, including two specific
+            feeds which need additional treatment to serve a correct
+            Content-Type header:
+        </para>
+        <programlisting language="text"><![CDATA[
+AddType application/rss+xml .xml
+AddType application/atom+xml .xml
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} feed/rss$
+RewriteCond %{DOCUMENT_ROOT}/cached/%{REQUEST_URI}.xml -f
+RewriteRule .* cached/%{REQUEST_URI}.xml [L,T=application/rss+xml]
+
+RewriteCond %{REQUEST_URI} feed/atom$
+RewriteCond %{DOCUMENT_ROOT}/cached/%{REQUEST_URI}.xml -f
+RewriteRule .* cached/%{REQUEST_URI}.xml [L,T=application/atom+xml]
+
+RewriteCond %{DOCUMENT_ROOT}/cached/%{REQUEST_URI}.(html|xml|json|opml|svg) -f
+RewriteRule .* cached/%{REQUEST_URI}.%1 [L]
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+
+RewriteRule ^.*$ index.php [NC,L]
+]]></programlisting>
+        <para>
+            The above assumes static files are cached to the directory ./public/cached.
+            We'll cover the option setting this location, "public_dir", below.
+        </para>
+        <para>
+            Due to the nature of static file caching, the backend class offers two
+            additional methods: <methodname>remove()</methodname> and <methodname>
+            removeRecursively()</methodname>. Both accept a request URI, which when
+            mapped to the "public_dir" where static files are cached, and has a
+            pre-stored extension appended, provides the name of either a static
+            file to delete, or a directory path to delete recursively. Due to the
+            restraints of <classname>Zend_Cache_Backend_Interface</classname>, all
+            other methods such as <classname>save()</classname> accept an ID which
+            is calculated by applying bin2hex() to a request URI.
+        </para>
+        <para>
+            Given the level at which static caching operates, static file caching
+            is addressed for simpler use with the <classname>
+            Zend_Controller_Action_Helper_Cache</classname> action helper. This helper
+            assists in setting which actions of a controller to cache, with what tags,
+            and with which extension. It also offers methods for purging the cache by
+            request URI or tag. Static file caching is also assisted by <classname>
+            Zend_Cache_Manager</classname> which includes pre-configured configuration
+            templates for a static cache (as Zend_Cache_Manager::PAGECACHE or "page").
+            The defaults therein can be configured as needed to set up a "public_dir"
+            location for caching, etc.
+        </para>
+        <note>
+            <para>
+                It should be noted that the static cache actually uses a secondary
+                cache to store tags (obviously we can't store them elsewhere since
+                a static cache does not invoke PHP if working correctly). This is
+                just a standard Core cache, and should use a persistent backend such
+                as File or TwoLevels (to take advantage of memory storage without
+                sacrificing permanent persistance). The backend includes the option
+                "tag_cache" to set this up (it is obligatory), or the <methodname>
+                setInnerCache()</methodname> method.
+            </para>
+        </note>
+        <table id="zend.cache.backends.static.table">
+            <title>Static Backend Options</title>
+            <tgroup cols="4">
+                 <thead>
+                      <row>
+                        <entry>Option</entry>
+                        <entry>Data Type</entry>
+                        <entry>Default Value</entry>
+                        <entry>Description</entry>
+                    </row>
+                 </thead>
+                 <tbody>
+                      <row>
+                          <entry><emphasis>public_dir</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>NULL</entry>
+                          <entry>
+                              Directory where to store static files. This must exist
+                              in your public directory.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>file_locking</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
+                          <entry>
+                            Enable or disable file_locking : Can avoid cache corruption under
+                            bad circumstances but it doesn't help on multithread webservers
+                            or on <acronym>NFS</acronym> filesystems...
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>read_control</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry><constant>TRUE</constant></entry>
+                          <entry>
+                            Enable / disable read control : if enabled, a control key is
+                            embedded in the cache file and this key is compared with the
+                            one calculated after the reading.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>read_control_type</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>'crc32'</entry>
+                          <entry>
+                            Type of read control (only if read control is enabled). Available values
+                            are : 'md5' (best but slowest), 'crc32' (lightly less safe but faster,
+                            better choice), 'adler32' (new choice, faster than crc32),
+                            'strlen' for a length only test (fastest).
+                        </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>cache_file_umask</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0700</entry>
+                          <entry>
+                              umask for cached files.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>cache_directory_umask</emphasis></entry>
+                          <entry><type>Integer</type></entry>
+                          <entry>0700</entry>
+                          <entry>
+                              Umask for directories created within public_dir.
+                        </entry>
+                      </row>
+                      
+                      <row>
+                          <entry><emphasis>file_extension</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>'.html'</entry>
+                          <entry>
+                              Default file extension for static files created. This
+                              can be configured on the fly, see <methodname>
+                              Zend_Cache_Backend_Static::save()</methodname> though
+                              generally it's recommended to rely on <classname>
+                              Zend_Controller_Action_Helper_Cache</classname> when
+                              doing so since it's simpler that way than messing with
+                              arrays/serialization manually.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>index_filename</emphasis></entry>
+                          <entry><type>String</type></entry>
+                          <entry>'index'</entry>
+                          <entry>
+                              If a request URI does not contain sufficient information
+                              to construct a static file (usually this means an index
+                              call, e.g. URI of '/'), the index_filename is used instead.
+                              So '' or '/' would map to 'index.html' (assuming the default
+                              file_extension is '.html').
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>tag_cache</emphasis></entry>
+                          <entry><type>Object</type></entry>
+                          <entry>NULL</entry>
+                          <entry>
+                              Used to set an 'inner' cache utilised to store tags
+                              and file extensions associated with static files. This
+                              MUST be set or the static cache cannot be tracked and
+                              managed.
+                          </entry>
+                      </row>
+                      <row>
+                          <entry><emphasis>disable_caching</emphasis></entry>
+                          <entry><type>Boolean</type></entry>
+                          <entry>FALSE</entry>
+                          <entry>
+                              If set to TRUE, static files will not be cached. This
+                              will force all requests to be dynamic even if marked
+                              to be cached in Controllers. Useful for debugging.
+                          </entry>
+                      </row>
+                  </tbody>
+              </tgroup>
+          </table>
+    </sect2>
+    
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

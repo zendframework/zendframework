@@ -291,6 +291,8 @@ class Zend_Locale
                 throw new Zend_Locale_Exception("Unknown locale '" . (string) $locale . "' can not be set as default!");
             }
         }
+
+        self::$_auto = self::getBrowser() + self::getEnvironment() + self::getDefault();
     }
 
     /**

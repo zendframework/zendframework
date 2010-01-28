@@ -248,6 +248,9 @@ class Zend_Cache_Backend_Static
         if (!isset($this->_tagged[$id])) {
             $this->_tagged[$id] = array();
         }
+        if (!isset($this->_tagged[$id]['tags'])) {
+            $this->_tagged[$id]['tags'] = array();
+        }
         $this->_tagged[$id]['tags'] = array_unique(array_merge($this->_tagged[$id]['tags'], $tags));
         $this->_tagged[$id]['extension'] = $ext;
         $this->getInnerCache()->save($this->_tagged, self::INNER_CACHE_NAME);
@@ -392,7 +395,7 @@ class Zend_Cache_Backend_Static
                 foreach ($tags as $tag) {
                     $urls = array_keys($this->_tagged);
                     foreach ($urls as $url) {
-                        if (in_array($tag, $this->_tagged[$url]['tags'])) {
+                        if (isset($this->_tagged[$url]['tags']) && in_array($tag, $this->_tagged[$url]['tags'])) {
                             $this->remove($url);
                             unset($this->_tagged[$url]);
                         }

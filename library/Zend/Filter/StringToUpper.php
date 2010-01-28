@@ -58,7 +58,7 @@ class Zend_Filter_StringToUpper implements Zend_Filter_Interface
         }
 
         if (array_key_exists('encoding', $options)) {
-            $this->setEncoding($options);
+            $this->setEncoding($options['encoding']);
         }
     }
 

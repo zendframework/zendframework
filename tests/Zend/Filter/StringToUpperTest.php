@@ -117,4 +117,25 @@ class Zend_Filter_StringToUpperTest extends PHPUnit_Framework_TestCase
             $this->assertContains('is not supported', $e->getMessage());
         }
     }
+
+    /**
+     * @ZF-8989
+     */
+    public function testInitiationWithEncoding()
+    {
+        $valuesExpected = array(
+            'ü'     => 'Ü',
+            'ñ'     => 'Ñ',
+            'üñ123' => 'ÜÑ123'
+        );
+
+        try {
+            $filter = new Zend_Filter_StringToUpper(array('encoding' => 'UTF-8'));
+            foreach ($valuesExpected as $input => $output) {
+                $this->assertEquals($output, $filter->filter($input));
+            }
+        } catch (Zend_Filter_Exception $e) {
+            $this->assertContains('mbstring is required', $e->getMessage());
+        }
+    }
 }

@@ -597,14 +597,14 @@ $result = $cache->foobar2('1', '2');
                     when the output buffering it uses is cleaned. In order for this to operate
                     correctly, it must be the final output buffer in the request. To guarantee
                     this, the output buffering used by the Dispatcher needs to be disabled by
-                    calling <classname>Zend_Controller_Front<classname>'s <methodname>setParam()
-                    <methodname> method, for example, $front->setParam('disableOutputBuffering',
-                    true)</classname> or adding
+                    calling <classname>Zend_Controller_Front</classname>'s <methodname>setParam()
+                    </methodname> method, for example, $front->setParam('disableOutputBuffering',
+                    true) or adding
                     "resources.frontcontroller.params.disableOutputBuffering = true"
                     to your bootstrap configuration file (assumed INI) if using
-                    </classname>Zend_Application</classname>.
+                    <classname>Zend_Application</classname>.
                 </para>
-            <note>
+            </note>
         </sect3>
         <sect3 id="zend.cache.frontends.page.options">
             <title>Available Options</title>

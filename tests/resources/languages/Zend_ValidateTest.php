@@ -140,4 +140,18 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    public function testAllTranslated()
+    {
+        foreach ($this->_translations['en'] as $enK => $enV) {
+            foreach ($this->_translations as $lang => $translation) {
+                if ($lang == 'en') {
+                    continue;
+                }
+
+                $this->assertTrue(isset($translation[$enK]),
+                    $lang . ': Message "' . $enK . '" not translated');
+            }
+        }
+    }
+
 }

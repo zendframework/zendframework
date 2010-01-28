@@ -8,7 +8,7 @@
         generate storable representation of php types by different facilities, and recover.
     </para>
 
-    <sect2 id="zend.serializer.introduction.dynamic">
+    <example id="zend.serializer.introduction.example.dynamic">
         <title>Using <classname>Zend_Serializer</classname> dynamic interface</title>
 
         <para>
@@ -31,7 +31,7 @@ try {
     echo $e; 
 } 
 ]]></programlisting>
-    </sect2>
+    </example>
 
     <para>
         The method <methodname>serialize</methodname> generates a storable string. To regenerate
@@ -71,7 +71,7 @@ try {
         method.
     </para>
 
-    <sect2 id="zend.serializer.introduction.static.php">
+    <sect2 id="zend.serializer.introduction.example.static.php">
         <title>Using the Zend_Serializer static interface</title>
 
         <para>

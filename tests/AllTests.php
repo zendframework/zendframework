@@ -27,6 +27,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 }
 
 require_once 'Zend/AllTests.php';
+require_once 'resources/AllTests.php';
 
 /**
  * @category   Zend
@@ -89,6 +90,7 @@ class AllTests
         $suite = new PHPUnit_Framework_TestSuite('Zend Framework');
 
         $suite->addTest(Zend_AllTests::suite());
+        $suite->addTest(resources_AllTests::suite());
 
         return $suite;
     }

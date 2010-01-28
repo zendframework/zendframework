@@ -249,7 +249,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            tf(t in d) - <methodname>Zend_Search_Lucene_Search_Similarity::tf($freq)</methodname> - 
+            tf(t in d) - <methodname>Zend_Search_Lucene_Search_Similarity::tf($freq)</methodname> -
             um fator de pontuação baseado na frequência de um termo ou frase em um documento.
         </para>
 

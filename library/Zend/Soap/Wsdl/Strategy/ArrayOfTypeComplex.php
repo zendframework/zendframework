@@ -48,7 +48,7 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
     {
         if(in_array($type, $this->_inProcess)) {
             require_once "Zend/Soap/Wsdl/Exception.php";
-            throw new Zend_Soap_Wsdl_Exception("Infinite recursion, cannot nest '".$type."' into itsself.");
+            throw new Zend_Soap_Wsdl_Exception("Infinite recursion, cannot nest '".$type."' into itself.");
         }
         $this->_inProcess[$type] = $type;
 
@@ -123,7 +123,7 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
     }
 
     /**
-     * From a nested defintion with type[], get the singular PHP Type
+     * From a nested definition with type[], get the singular PHP Type
      *
      * @param  string $type
      * @return string

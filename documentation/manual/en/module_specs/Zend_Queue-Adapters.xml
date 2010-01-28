@@ -412,7 +412,7 @@ $queue = new Zend_Queue('Db', $options);
 
             <para>
                 The database <emphasis>CREATE TABLE ( ... )</emphasis> <acronym>SQL</acronym>
-                statement can be found in <filename>Zend/Queue/Adapter/Db/queue.sql</filename>.
+                statement can be found in <filename>Zend/Queue/Adapter/Db/mysql.sql</filename>.
             </para>
         </sect3>
 

@@ -525,6 +525,8 @@ RewriteCond %{REQUEST_URI} feed/atom$
 RewriteCond %{DOCUMENT_ROOT}/cached/%{REQUEST_URI}.xml -f
 RewriteRule .* cached/%{REQUEST_URI}.xml [L,T=application/atom+xml]
 
+RewriteCond %{DOCUMENT_ROOT}/cached/index.html -f
+RewriteRule ^/*$ cached/index.html [L]
 RewriteCond %{DOCUMENT_ROOT}/cached/%{REQUEST_URI}.(html|xml|json|opml|svg) -f
 RewriteRule .* cached/%{REQUEST_URI}.%1 [L]
 

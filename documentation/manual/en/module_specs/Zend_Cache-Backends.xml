@@ -486,11 +486,10 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
     <sect2 id="zend.cache.backends.static">
         <title>Zend_Cache_Backend_Static</title>
         <para>
-            This backend works in concert with <classname>
-            Zend_Cache_Frontend_Capture</classname> (the two must be used
-            together) to save the output from requests as static files. This
-            means the static files are served directly on subsequent requests
-            without any involvement of PHP or the Zend Framework at all.
+            This backend works in concert with <classname>Zend_Cache_Frontend_Capture</classname>
+            (the two must be used together) to save the output from requests as static files. This
+            means the static files are served directly on subsequent requests without any
+            involvement of <acronym>PHP</acronym> or Zend Framework at all.
         </para>
         <para>
             The benefits of this cache include a large throughput increase since
@@ -505,7 +504,7 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
         </para>
         <para>
             Before describing its options, you should note this needs some
-            changes to the default .htaccess file in order for requests to be
+            changes to the default <filename>.htaccess</filename> file in order for requests to be
             directed to the static files if they exist. Here's an example of
             a simple application caching some content, including two specific
             feeds which need additional treatment to serve a correct
@@ -538,42 +537,42 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
         <para>
-            The above assumes static files are cached to the directory ./public/cached.
-            We'll cover the option setting this location, "public_dir", below.
+            The above assumes static files are cached to the directory
+            <filename>./public/cached</filename>. We'll cover the option setting this location,
+            "public_dir", below.
         </para>
         <para>
-            Due to the nature of static file caching, the backend class offers two
-            additional methods: <methodname>remove()</methodname> and <methodname>
-            removeRecursively()</methodname>. Both accept a request URI, which when
-            mapped to the "public_dir" where static files are cached, and has a
-            pre-stored extension appended, provides the name of either a static
+            Due to the nature of static file caching, the backend class offers two additional
+            methods: <methodname>remove()</methodname> and
+            <methodname>removeRecursively()</methodname>. Both accept a request
+            <acronym>URI</acronym>, which when mapped to the "public_dir" where static files are
+            cached, and has a pre-stored extension appended, provides the name of either a static
             file to delete, or a directory path to delete recursively. Due to the
             restraints of <classname>Zend_Cache_Backend_Interface</classname>, all
-            other methods such as <classname>save()</classname> accept an ID which
-            is calculated by applying bin2hex() to a request URI.
+            other methods such as <methodname>save()</methodname> accept an ID which
+            is calculated by applying <methodname>bin2hex()</methodname> to a request
+            <acronym>URI</acronym>.
         </para>
         <para>
-            Given the level at which static caching operates, static file caching
-            is addressed for simpler use with the <classname>
-            Zend_Controller_Action_Helper_Cache</classname> action helper. This helper
-            assists in setting which actions of a controller to cache, with what tags,
-            and with which extension. It also offers methods for purging the cache by
-            request URI or tag. Static file caching is also assisted by <classname>
-            Zend_Cache_Manager</classname> which includes pre-configured configuration
-            templates for a static cache (as Zend_Cache_Manager::PAGECACHE or "page").
-            The defaults therein can be configured as needed to set up a "public_dir"
+            Given the level at which static caching operates, static file caching is addressed for
+            simpler use with the <classname>Zend_Controller_Action_Helper_Cache</classname> action
+            helper. This helper assists in setting which actions of a controller to cache, with what
+            tags, and with which extension. It also offers methods for purging the cache by request
+            <acronym>URI</acronym> or tag. Static file caching is also assisted by
+            <classname>Zend_Cache_Manager</classname> which includes pre-configured configuration
+            templates for a static cache (as <constant>Zend_Cache_Manager::PAGECACHE</constant> or
+            "page"). The defaults therein can be configured as needed to set up a "public_dir"
             location for caching, etc.
         </para>
         <note>
             <para>
-                It should be noted that the static cache actually uses a secondary
-                cache to store tags (obviously we can't store them elsewhere since
-                a static cache does not invoke PHP if working correctly). This is
-                just a standard Core cache, and should use a persistent backend such
-                as File or TwoLevels (to take advantage of memory storage without
-                sacrificing permanent persistance). The backend includes the option
-                "tag_cache" to set this up (it is obligatory), or the <methodname>
-                setInnerCache()</methodname> method.
+                It should be noted that the static cache actually uses a secondary cache to store
+                tags (obviously we can't store them elsewhere since a static cache does not invoke
+                <acronym>PHP</acronym> if working correctly). This is just a standard Core cache, and
+                should use a persistent backend such as File or TwoLevels (to take advantage of
+                memory storage without sacrificing permanent persistance). The backend includes the
+                option "tag_cache" to set this up (it is obligatory), or the
+                <methodname>setInnerCache()</methodname> method.
             </para>
         </note>
         <table id="zend.cache.backends.static.table">
@@ -591,7 +590,7 @@ RewriteRule ^.*$ index.php [NC,L]
                       <row>
                           <entry><emphasis>public_dir</emphasis></entry>
                           <entry><type>String</type></entry>
-                          <entry>NULL</entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               Directory where to store static files. This must exist
                               in your public directory.
@@ -648,15 +647,15 @@ RewriteRule ^.*$ index.php [NC,L]
                       <row>
                           <entry><emphasis>file_extension</emphasis></entry>
                           <entry><type>String</type></entry>
-                          <entry>'.html'</entry>
+                          <entry>'<filename>.html</filename>'</entry>
                           <entry>
-                              Default file extension for static files created. This
-                              can be configured on the fly, see <methodname>
-                              Zend_Cache_Backend_Static::save()</methodname> though
-                              generally it's recommended to rely on <classname>
-                              Zend_Controller_Action_Helper_Cache</classname> when
+                              Default file extension for static files created. This can be
+                              configured on the fly, see
+                              <methodname>Zend_Cache_Backend_Static::save()</methodname> though
+                              generally it's recommended to rely on
+                              <classname>Zend_Controller_Action_Helper_Cache</classname> when
                               doing so since it's simpler that way than messing with
-                              arrays/serialization manually.
+                              arrays or serialization manually.
                           </entry>
                       </row>
                       <row>
@@ -664,31 +663,31 @@ RewriteRule ^.*$ index.php [NC,L]
                           <entry><type>String</type></entry>
                           <entry>'index'</entry>
                           <entry>
-                              If a request URI does not contain sufficient information
-                              to construct a static file (usually this means an index
-                              call, e.g. URI of '/'), the index_filename is used instead.
-                              So '' or '/' would map to 'index.html' (assuming the default
-                              file_extension is '.html').
+                              If a request <acronym>URI</acronym> does not contain sufficient
+                              information to construct a static file (usually this means an index
+                              call, e.g. <acronym>URI</acronym> of '/'), the index_filename is used
+                              instead. So '' or '/' would map to '<filename>index.html</filename>'
+                              (assuming the default file_extension is '<filename>.html</filename>').
                           </entry>
                       </row>
                       <row>
                           <entry><emphasis>tag_cache</emphasis></entry>
                           <entry><type>Object</type></entry>
-                          <entry>NULL</entry>
+                          <entry><constant>NULL</constant></entry>
                           <entry>
                               Used to set an 'inner' cache utilised to store tags
                               and file extensions associated with static files. This
-                              MUST be set or the static cache cannot be tracked and
-                              managed.
+                              <emphasis>must</emphasis> be set or the static cache cannot be tracked
+                              and managed.
                           </entry>
                       </row>
                       <row>
                           <entry><emphasis>disable_caching</emphasis></entry>
                           <entry><type>Boolean</type></entry>
-                          <entry>FALSE</entry>
+                          <entry><constant>FALSE</constant></entry>
                           <entry>
-                              If set to TRUE, static files will not be cached. This
-                              will force all requests to be dynamic even if marked
+                              If set to <constant>TRUE</constant>, static files will not be cached.
+                              This will force all requests to be dynamic even if marked
                               to be cached in Controllers. Useful for debugging.
                           </entry>
                       </row>

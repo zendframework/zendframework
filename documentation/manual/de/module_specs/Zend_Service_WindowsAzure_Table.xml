@@ -428,7 +428,7 @@ $target->setAzurePropertyType('Age', 'Edm.Int64');
                 automatisch mit <classname>Zend_Service_WindowsAzure_Storage_TableEntity</classname>
                 wenn an die Tabellen Speicher Methoden keine spezielle Klasse übergeben wurde.
             </para>
-        </sect3>
+        </sect4>
 
         <sect4 id="zend.service.windowsazure.storage.table.entities.api">
             <title>API Beispiele für Entitäten</title>

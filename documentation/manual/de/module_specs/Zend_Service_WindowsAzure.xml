@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20657 -->
+<!-- EN-Revision: 20675 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.windowsazure" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_WindowsAzure</title>
@@ -113,5 +113,9 @@
             Windows Azure zugreifen, unabhängig davon ob Sie auf der Windows Azure Plattform oder
             auf einem unabhängigen Web Server gehostet wird.
         </para>
-  </sect2>
+    </sect2>
+
+    <xi:include href="Zend_Service_WindowsAzure_Blob.xml" />
+    <xi:include href="Zend_Service_WindowsAzure_Table.xml" />
+    <xi:include href="Zend_Service_WindowsAzure_Queue.xml" />
 </sect1>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20225 -->
+<!-- EN-Revision: 20733 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.serializer.introduction">
     <title>Einführung</title>
@@ -81,7 +81,7 @@ try {
         übergeben werden.
     </para>
 
-    <sect2 id="zend.serializer.introduction.example.static.php">
+    <example id="zend.serializer.introduction.example.static.php">
         <title>Das statische Interface von Zend_Serializer verwenden</title>
 
         <para>
@@ -105,5 +105,5 @@ try {
     echo $e;
 }
 ]]></programlisting>
-    </sect2>
+    </example>
 </sect1>

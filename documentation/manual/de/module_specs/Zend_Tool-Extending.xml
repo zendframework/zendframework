@@ -2,7 +2,7 @@
 <!-- EN-Revision: 19778 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.extending">
-    <title>Extending Zend_Tool</title>
+    <title>Zend_Tool erweitern</title>
 
     <sect2 id="zend.tool.extending.overview">
         <title>Übersicht über Zend_Tool</title>

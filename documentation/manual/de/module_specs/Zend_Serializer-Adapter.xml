@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20533 -->
+<!-- EN-Revision: 20686 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.serializer.adapter">
     <title>Zend_Serializer_Adapter</title>
@@ -85,7 +85,7 @@
             Vorhandene Optionen sind:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.wddx.table.options">
             <title>Optionen für Zend_Serializer_Adapter_Wddx</title>
 
             <tgroup cols="4">
@@ -132,7 +132,7 @@
             Vorhandene Optionen sind:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.json.table.options">
             <title>Optionen für Zend_Serializer_Adapter_Json</title>
 
             <tgroup cols="4">
@@ -219,7 +219,7 @@
             Vorhandene Optionen sind:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.pythonpickle.table.options">
             <title>Optionen für Zend_Serializer_Adapter_PythonPickle</title>
 
             <tgroup cols="4">
@@ -256,7 +256,7 @@
             Der Wechsel von Datentypen (PHP zu Python) findet wie folgt statt:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.pythonpickle.table.php2python">
             <title>Wechseln des Datentyps (PHP zu Python)</title>
 
             <tgroup cols="2">
@@ -324,7 +324,7 @@
             Der Wechsel von Datentypen (Python zu PHP) findet wie folgt statt:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.pythonpickle.table.python2php">
             <title>Wechseln des Datentyps (PHP zu Python)</title>
 
             <tgroup cols="2">

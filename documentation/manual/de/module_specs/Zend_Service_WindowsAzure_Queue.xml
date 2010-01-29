@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19992 -->
+<!-- EN-Revision: 20679 -->
 <!-- Reviewed: no -->
-<sect1 id="zend.service.windowsazure.storage.queue">
+<sect2 id="zend.service.windowsazure.storage.queue">
     <title>Zend_Service_WindowsAzure_Storage_Queue</title>
 
     <para>
@@ -24,7 +24,7 @@
         um ein natives PHP Interface zum Speicher Account zu bieten.
     </para>
 
-    <sect2 id="zend.service.windowsazure.storage.queue.api">
+    <sect3 id="zend.service.windowsazure.storage.queue.api">
         <title>API Beispiele</title>
 
         <para>
@@ -34,7 +34,7 @@
             dieser Features.
         </para>
 
-        <sect3 id="zend.service.windowsazure.storage.queue.api.create-queue">
+        <sect4 id="zend.service.windowsazure.storage.queue.api.create-queue">
             <title>Erstellung einer Queue</title>
 
             <para>
@@ -52,9 +52,9 @@ $result = $storageClient->createQueue('testqueue');
 echo 'Der Name der Queue ist: ' . $result->Name;
 ]]></programlisting>
             </example>
-        </sect3>
+        </sect4>
 
-        <sect3 id="zend.service.windowsazure.storage.queue.api.delete-queue">
+        <sect4 id="zend.service.windowsazure.storage.queue.api.delete-queue">
             <title>Löschen einer Queue</title>
 
             <para>
@@ -70,9 +70,9 @@ $storageClient = new Zend_Service_WindowsAzure_Storage_Queue();
 $storageClient->deleteQueue('testqueue');
 ]]></programlisting>
             </example>
-        </sect3>
+        </sect4>
 
-        <sect3 id="zend.service.windowsazure.storage.queue.api.storing-queue">
+        <sect4 id="zend.service.windowsazure.storage.queue.api.storing-queue">
             <title>Hinzufügen einer Nachricht zu einer Queue</title>
 
             <para>
@@ -92,9 +92,9 @@ $storageClient = new Zend_Service_WindowsAzure_Storage_Queue();
 $storageClient->putMessage('testqueue', 'Das ist eine Testnachricht', 3600);
 ]]></programlisting>
             </example>
-        </sect3>
+        </sect4>
 
-        <sect3 id="zend.service.windowsazure.storage.queue.api.read-queue">
+        <sect4 id="zend.service.windowsazure.storage.queue.api.read-queue">
             <title>Lesen einer Nachricht von einer Queue</title>
 
             <para>
@@ -143,9 +143,9 @@ foreach ($messages as $message) {
 }
 ]]></programlisting>
             </example>
-        </sect3>
+        </sect4>
 
-        <sect3 id="zend.service.windowsazure.storage.queue.api.peek-queue">
+        <sect4 id="zend.service.windowsazure.storage.queue.api.peek-queue">
             <title>Prüfen ob es Nachrichten in der Queue gibt</title>
 
             <para>
@@ -177,6 +177,6 @@ foreach ($messages as $message) {
                 können. Um das zu tun sollte stattdessen <methodname>getMessages()</methodname>
                 verwendet werden.
             </para>
-        </sect3>
-    </sect2>
-</sect1>
+        </sect4>
+    </sect3>
+</sect2>

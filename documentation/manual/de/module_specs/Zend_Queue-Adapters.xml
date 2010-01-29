@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20714 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.queue.adapters">
     <title>Adapter</title>
@@ -419,7 +419,7 @@ $queue = new Zend_Queue('Db', $options);
             <para>
                 Das Datenbank <acronym>SQL</acronym> Statement
                 <emphasis>CREATE TABLE ( ... )</emphasis> kann in
-                <filename>Zend/Queue/Adapter/Db/queue.sql</filename> gefunden werden.
+                <filename>Zend/Queue/Adapter/Db/mysql.sql</filename> gefunden werden.
             </para>
         </sect3>
 

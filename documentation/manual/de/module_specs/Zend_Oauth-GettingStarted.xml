@@ -5,18 +5,18 @@
     <title>Beginnen</title>
 
     <para>
-        With the OAuth protocol explained, let's show a simple example of it with
-        source code. Our new Consumer will be handling Twitter Status submissions.
-        To do so, it will need to be registered with Twitter in order to receive
-        an OAuth Consumer Key and Consumer Secret. This are utilised to obtain
-        an Access Token before we use the Twitter API to post a status message.
+        Da das OAuth Protokoll jetzt erklärt wurde sehen wir uns ein einfaches Beispiel mit
+        Quellcode an. Unser neuer Konsument wird Twitter Statusübertragungen verwenden. Um das tun
+        zu können muss er bei Twitter registriert sein um einen OAuth Konsumentenschlüssel und ein
+        Konsumentengeheimnis zu empfangen. Diese werden verwendet um einen Zugriffstoken zu
+        erhalten bevor wir die Twitter API verwenden um eine Statusmeldung zu schicken.
     </para>
 
     <para>
-        Assuming we have obtained a key and secret, we can start the OAuth workflow
-        by setting up a <classname>Zend_Oauth_Consumer</classname> instance as
-        follows passing it a configuration (either an array or <classname>
-        Zend_Config</classname> object).
+        Angenommen wir haben einen Schlüssel und ein Geheimnis bekommen, dann können wir den OAuth
+        Workflow starten indem eine <classname>Zend_Oauth_Consumer</classname> Instanz wie folgt
+        eingerichtet und eine Konfiguration übergeben wird (entweder ein Array oder ein
+        <classname>Zend_Config</classname> Objekt).
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -30,61 +30,61 @@ $consumer = new Zend_Oauth_Consumer($config);
 ]]></programlisting>
 
     <para>
-        The callbackUrl is the URI we want Twitter to request from our server
-        when sending information. We'll look at this later. The siteUrl is the
-        base URI of Twitter's OAuth API endpoints. The full list of endpoints include
-        http://twitter.com/oauth/request_token, http://twitter.com/oauth/access_token,
-        and http://twitter.com/oauth/authorize. The base siteUrl utilises a convention
-        which maps to these three OAuth endpoints (as standard) for requesting a
-        request token, access token or authorization. If the actual endpoints of
-        any service differ from the standard set, these three URIs can be separately
-        set using the methods <methodname>setRequestTokenUrl()</methodname>,
-        <methodname>setAccessTokenUrl()</methodname>,
-        and <methodname>setAuthorizeUrl()</methodname> or the configuration fields requestTokenUrl,
-        accessTokenUrl and authorizeUrl.
+        callbackUrl ist die URI von der wir wollen das Sie Twitter von unserem Server anfragt wenn
+        Informationen gesendet werden. Wir sehen uns das später an. siteUrl ist die Basis URL der
+        OAuth API Endpunkte von Twitter. Die komplette Liste der Endpunkt enthält
+        http://twitter.com/oauth/request_token, http://twitter.com/oauth/access_token und
+        http://twitter.com/oauth/authorize. Die grundsätzliche siteUrl verwendet eine Konvention
+        welche auf diese drei OAuth Endpunkte verweist (als Standard) um einen Anfragetoken, den
+        Zugriffstoken oder die Authorisierung zu erhalten. Wenn sich der aktuelle Endpunkt eines
+        beliebigen Services vom Standardset unterscheidet, dann können diese drei URIs separat
+        gesetzt werden indem die Methoden <methodname>setRequestTokenUrl()</methodname>,
+        <methodname>setAccessTokenUrl()</methodname>, und
+        <methodname>setAuthorizeUrl()</methodname>, oder die Konfigurationsfelder requestTokenUrl,
+        accessTokenUrl und authorizeUrl verwendet werden.
     </para>
 
     <para>
-        The consumerKey and consumerSecret are retrieved from Twitter when your
-        application is registered for OAuth access. These also apply to any OAuth
-        enabled service, so each one will provide a key and secret for your
-        application.
+        consumerKey und consumerSecret werden von Twitter empfangen wenn sich die eigene Anwendung
+        für den OAuth Zugriff registriert. Das wird auch bei jedem OAuth aktivierten Service so
+        angewendet, so dass jeder einen Schlüssel und ein Geheimnis für die eigene Anwendung
+        anbietet.
     </para>
 
     <para>
-        All of these configuration options may be set using method calls simply
-        by converting from, e.g. callbackUrl to setCallbackUrl().
+        Alle diese Konfigurationsoptionen müssen durch Verwendung von Methodenaufrufen gesetzt
+        werden indem Sie einfach von callbackUrl auf setCallbackUrl() konvertiert werden.
     </para>
 
     <para>
-        In addition, you should note several other configuration values not
-        explicitly used: requestMethod and requestScheme. By default, <classname>
-        Zend_Oauth_Consumer</classname> sends requests as POST (except for a
-        redirect which uses GET). The customised client (see later) also includes its
-        authorization by way of a header. Some services may, at their discretion,
-        require alternatives. You can reset the requestMethod (which defaults
-        to Zend_Oauth::POST) to Zend_Oauth::GET, for example, and reset the
-        requestScheme from its default of Zend_Oauth::REQUEST_SCHEME_HEADER to one
-        of Zend_Oauth::REQUEST_SCHEME_POSTBODY or
-        Zend_Oauth::REQUEST_SCHEME_QUERYSTRING. Typically the defaults should work
-        fine apart from some exceptional cases. Please refer to the service provider's
-        documentation for more details.
+        Zusätzlich sollte beachtet werden das verschiedene andere Konfigurationswerte nicht explizit
+        verwendet werden: requestMethod und requestScheme. Standardmäßig sendet
+        <classname>Zend_Oauth_Consumer</classname> Anfragen als POST (ausgenommen bei einer
+        Weiterleitung welche GET verwendet). Der konsumierende Client (siehe später) enthält auch
+        seine Authorisierung in Art eines Headers. Einige Services können, zu Ihrer Diskretion,
+        Alternativen benötigen. Man kann requestMethod (welche standardmäßig Zend_Oauth::POST ist)
+        zum Beispiel auf Zend_Oauth::GET resetieren, und requestScheme von seinem Standardwert
+        Zend_Oauth::REQUEST_SCHEME_HEADER entweder auf Zend_Oauth::REQUEST_SCHEME_POSTBODY oder auf
+        Zend_Oauth::REQUEST_SCHEME_QUERYSTRING. Typischerweise sollten die Standardwerte bis auf ein
+        paar bestimmte Ausnahmen problemlos funktionieren. Für Details sehen Sie bitte in die
+        Dokumentation des Service Providers.
     </para>
 
     <para>
-        The second area of customisation is how <acronym>HMAC</acronym> operates
-        when calculating/comparing them for all requests. This is configured using
-        the signatureMethod configuration field or <methodname>setSignatureMethod()
-        </methodname>. By default this is HMAC-SHA1. You can set it also to a provider's
-        preferred method including RSA-SHA1. For RSA-SHA1, you should also configure
-        RSA private and public keys via the rsaPrivateKey and rsaPublicKey configuration
-        fields or the <methodname>setRsaPrivateKey()</methodname> and
-        <methodname>setRsaPublicKey()</methodname> methods.
+        Der zweite Teil der Anpassung definiert wie <acronym>HMAC</acronym> arbeitet wenn es für
+        alle Anfragen berechnet und verglichen wird. Das wird durch Verwendung des
+        Konfigurationsfeldes signatureMethod oder durch
+        <methodname>setSignatureMethod()</methodname> konfiguriert. Standardmäßig ist es HMAC-SHA1.
+        Man kann es auch auf die vom Provider bevorzugte Methode setzen inklusive RSA-SHA1. Für
+        RSA-SHA1 sollte man die privaten und öffentlichen RSA Schlüssel über die
+        Konfigurationsfelder rsaPrivateKey und rsaPublicKey oder die Methoden
+        <methodname>setRsaPrivateKey()</methodname> und <methodname>setRsaPublicKey()</methodname>
+        konfigurieren.
     </para>
 
     <para>
-        The first part of the OAuth workflow is obtaining a request token. This
-        is accomplished using:
+        Der erste Teil des OAuth Workflows holt sich einen Anfragetoken. Das wird bewerkstelligt
+        indem folgendes verwendet wird:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -96,16 +96,15 @@ $config = array(
 );
 $consumer = new Zend_Oauth_Consumer($config);
 
-// fetch a request token
+// Holt den Anfragetoken
 $token = $consumer->getRequestToken();
 ]]></programlisting>
 
     <para>
-        The new request token (an instance of <classname>Zend_Oauth_Token_Request
-        </classname>) is unauthorized. In order to exchange it for an authorized
-        token with which we can access the Twitter API, we need the user to authorize
-        it. We accomplish this by redirecting the user to Twitter's authorize endpoint
-        via:
+        Der neue Anfragetoken (eine Instanz von <classname>Zend_Oauth_Token_Request</classname>)
+        ist nicht authorisiert. Um Ihn mit einem authorisierten Token zu wechseln mit dem wir auf
+        die Twitter API zugreifen können, muss Ihn der Benutzer authorisieren. Wir bewerkstelligen
+        das indem der Benutzer auf den Authorisierungsendpunkt von Twitter umgeleitet wird:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -117,39 +116,40 @@ $config = array(
 );
 $consumer = new Zend_Oauth_Consumer($config);
 
-// fetch a request token
+// Holt den Anfragetoken
 $token = $consumer->getRequestToken();
 
-// persist the token to storage
+// Den token im Speicher fixieren
 $_SESSION['TWITTER_REQUEST_TOKEN'] = serialize($token);
 
-// redirect the user
+// Den Benutzer umleiten
 $consumer->redirect();
 ]]></programlisting>
 
     <para>
-        The user will now be redirected to Twitter. They will be asked to authorize
-        the request token attached to the redirect URI's query string. Assuming they
-        agree, and complete the authorization, they will be again redirected, this
-        time to our Callback URL as previously set (note that the callback URL is
-        also registered with Twitter when we registered our application).
+        Der Benutzer wird jetzt auf Twitter umgeleitet. Er wird gefragt den Anfragetoken zu
+        authorisieren, welcher an den Anfragestring der umgeleiteten URI angehängt ist. Angenommen
+        er akzeptiert und vervollständigt die Authorisierung, dann wird er wieder umgeleitet. Dieses
+        Mal auf unsere Callback URL die vorher gesetzt wurde (Beachte das die Callback URL auch in
+        Twitter registriert wurde als wir unsere Anwendung registriert haben).
     </para>
 
     <para>
-        Before redirecting the user, we should persist the request token to storage.
-        For simplicity I'm just using the user's session, but you can easily use a
-        database for the same purpose, so long as you tie the request token to the
-        current user so it can be retrieved when they return to our application.
+        Bevor der Benutzer umgeleitet wird, sollten wir den Anfragetoken im Speicher fixieren. Der
+        Einfachheit halber verwenden wir nur die Session des Benutzer, aber man kann sehr einfach
+        eine Datenbank für den gleichen Zweck verwenden, solange der Anfragetoken mit dem aktuellen
+        Benutzer verbunden bleibt, damit er empfangen werden kann wenn dieser zu unserer Anwendung
+        zurückkommt.
     </para>
 
     <para>
-        The redirect URI from Twitter will contain an authorized Access Token. We
-        can include code to parse out this access token as follows - this source
-        code would exist within the executed code of our callback URI. Once parsed
-        we can discard the previous request token, and instead persist the access
-        token for future use with the Twitter API. Again, we're simply persisting
-        to the user session, but in reality an access token can have a long lifetime
-        so it should really be stored to a database.
+        Die umgeleitete URI von Twitter enthält einen authorisierten Zugriffstoken. Wir können Code
+        einbauen um diesen Zugriffstoken wie folgt herauszuschneiden - dieser Sourcecode würde im
+        ausgeführten Code unserer Callback URI existieren. Sobald er herausgeschnitten wurde können
+        wir den vorherigen Anfragetoken entfernen, und statt dessen den Zugriffstoken für die
+        zukünftige Verendung mit der API von Twitter fixieren. Nochmals, wir fixieren einfach die
+        Session des Benutzer, aber in Wirklichkeit kann ein Zugriffstoken eine lange Lebenszeit
+        haben, und sollte deshalb wirklich in einer Datenbank abgespeichert werden.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -165,23 +165,23 @@ if (!empty($_GET) && isset($_SESSION['TWITTER_REQUEST_TOKEN'])) {
     $token = $consumer->getAccessToken($_GET, unserialize($_SESSION['TWITTER_REQUEST_TOKEN']));
     $_SESSION['TWITTER_ACCESS_TOKEN'] = serialize($token);
 
-    // Now that we have an Access Token, we can discard the Request Token
+    // Jetzt da wir den Zugriffstoken haben können wir den Anfragetoken löschen
     $_SESSION['TWITTER_REQUEST_TOKEN'] = null;
 } else {
-    // Mistaken request? Some malfeasant trying something?
-    exit('Invalid callback request. Oops. Sorry.');
+    // Fehlgeschlagene Anfrage? Ein Gauner versucht etwas?
+    exit('Ungültige Callback Anfrage. Oops. Entschuldigung.');
 }
 ]]></programlisting>
 
     <para>
-        Success! We have an authorized access token - so it's time to actually
-        use the Twitter API. Since the access token must be included with every
-        single API request, Zend_Oauth_Consumer offers a ready-to-go HTTP client
-        (a subclass of <classname>Zend_Http_Client</classname>) to use either
-        by itself or by passing it as a custom HTTP Client to another library or
-        component. Here's an example of using it standalone. This can be done
-        from anywhere in your application, so long as you can access the OAuth
-        configuration and retrieve the final authorized access token.
+        Erfolg! Wir haben einen authorisierten Zugriffstoken - zu dieser Zeit verwenden wir schon
+        die API von Twitter. Da dieser Zugriffstoken bei jeder einzelnen API Anfrage enthalten sein
+        muss, bietet Zend_Oauth_Consumer einen fix-fertigen HTTP Client an (eine Subklasse von
+        <classname>Zend_Http_Client</classname>) welcher entweder für sich verwendet werden, oder
+        der als eigener HTTP Client an eine andere Bibliothek oder Komponente übergeben werden kann.
+        Hier ist ein Beispiel für die eigenständige Verwendung. Das kann von überall aus der
+        Anwendung heraus getan werden, solange man Zugriff auf die OAuth Konfiguration hat, und den
+        endgültigen authorisierten Zugriffstoken empfangen kann.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -192,7 +192,7 @@ $config = array(
     'consumerSecret' => 'tFB0fyWLSMf74lkEu9FTyoHXcazOWpbrAjTCCK48A'
 );
 
-$statusMessage = 'I\'m posting to Twitter using Zend_Oauth!';
+$statusMessage = 'Ich sende über Twitter und verwende Zend_Oauth!';
 
 $token = unserialize($_SESSION['TWITTER_ACCESS_TOKEN']);
 $client = $token->getHttpClient($configuration);
@@ -209,8 +209,10 @@ if (isset($data->text)) {
 echo $result;
 ]]></programlisting>
 
-    <para>As a note on the customised client, this can be passed to most
-    Zend Framework service or other classes using <classname>Zend_Http_Client
-    </classname> displacing the default client they would otherwise use.</para>
-
+    <para>
+        Als Notiz zum eigenen Client, kann dieser an den meisten Services von Zend Framework
+        übergeben werden, oder an andere Klassen welche <classname>Zend_Http_Client</classname>
+        verwenden um damit den Standardclient zu ersetzen welcher andernfalls verwendet werden
+        würde.
+    </para>
 </sect2>

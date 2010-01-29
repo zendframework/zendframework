@@ -5,76 +5,88 @@
     <title>Architektur der Sicherheit</title>
 
     <para>
-        OAuth was designed specifically to operate over an insecure HTTP connection and so the use
-        of HTTPS is not required though obviously it would be desireable if available. Should a
-        HTTPS connection be feasible, OAuth offers a signature method implementation called
-        PLAINTEXT which may be utilised. Over a typical unsecured HTTP connection, the use of
-        PLAINTEXT must be avoided and an alternate scheme using. The OAuth specification defines two
-        such signature methods: HMAC-SHA1 and RSA-SHA1. Both are fully supported by
-        <classname>Zend_Oauth</classname>.
+        OAuth wurde speziell designt um über eine unsichere HTTP Verbindung zu arbeiten und deshalb
+        ist die Verwendung von HTTPS nicht notwendig obwohl es natürlich wünschenswert wäre wenn es
+        vorhanden ist. Sollte eine HTTPS Verbindung möglich sein bietet OAuth die Implementation
+        einer Signaturmethode an welche PLAINTEXT heißt und verwendet werden kann. Über eine
+        typische unsichere HTTP Verbindung muss die Verwendung von PLAINTEXT verhindert werden und
+        ein alternatives Schema wird verwendet. Die OAuth Spezifikation definiert zwei solcher
+        Signaturmethoden: HMAC-SHA1 und RSA-SHA1. Beide werden von <classname>Zend_Oauth</classname>
+        vollständig unterstützt.
     </para>
 
     <para>
-        These signature methods are quite easy to understand. As you can imagine, a PLAINTEXT
-        signature method does nothing that bears mentioning since it relies on HTTPS. If you were to
-        use PLAINTEXT over HTTP, you are left with a significant problem: there's no way to be sure
-        that the content of any OAuth enabled request (which would include the OAuth Access Token)
-        was altered en route. This is because unsecured HTTP requests are always at risk of
-        eavesdropping, Man In The Middle (MITM) attacks, or other risks whereby a request can be
-        retooled so to speak to perform tasks on behalf of the attacker by masquerading as the
-        origin application without being noticed by the service provider.
+        Diese Signaturmethoden sind recht einfach zu verstehen. Wie man sich vorstellen kann macht
+        die PLAINTEXT Signaturmethode nichts das erwähnenswert wäre da Sie auf HTTPS aufsetzt. Wenn
+        man aber PLAINTEXT über HTTP verwenden würde, dann würde ein signifikantes Problem bestehen:
+        Es gibt keinen Weg um sicherzustellen das der Inhalt einer OAuth-aktivierten Anfrage (welche
+        einen OAuth Zugriffstoken enthalten würde) beim Routen verändert wurde. Das ist der Fall
+        weil unsichere HTTP Anfragen immer das Risiko des Lauschens, von Man In The Middle (MITM)
+        Attacken, oder andere Risiken haben können in denen eine Anfrage weiterbearbeitet werden
+        könnten und damit Arbeiten im Sinne des Angreifers ausgeführt werden indem sich dieser
+        als Originalanwendung maskiert ohne das dies vom Serviceprovider bemerkt wird.
     </para>
 
     <para>
-        HMAC-SHA1 and RSA-SHA1 alleviate this risk by digitally signing all OAuth requests with the
-        original application's registered Consumer Secret. Assuming only the Consumer and the
-        Provider know what this secret is, a middle-man can alter requests all they wish - but they
-        will not be able to validly sign them and unsigned or invalidly signed requests would be
-        discarded by both parties. Digital signatures therefore offer a guarantee that validly
-        signed requests do come from the expected party and have not been altered en route. This is
-        the core of why OAuth can operate over an unsecure connection.
+        HMAC-SHA1 und RSA-SHA1 vermindern dieses Risiko indem alle OAuth Anfragen mit dem originalen
+        von der Anwendung registrierten Konsumentengeheimnis digital signiert werden. Angenommen nur
+        der Konsument und der Provider wissen was das Geheimnis ist, dann kann ein Mann in der Mitte
+        soviele Anfragen verändern wie er will - aber er wird nicht in der Lage sein sie gültig zu
+        signieren und unsignierte oder ungültig signierte Anfragen würden von beiden Parteien
+        ausgeschieden werden. Digitale Signaturen bieten deshalb eine Garantie das gültig signierte
+        Anfragen von der erwarteten Partei kommen und beim Routen nicht verändert wurden. Das ist
+        der Kern warum OAuth über eine unsichere Verbindung arbeiten kann.
     </para>
 
     <para>
-        How these digital signatures operate depends on the method used, i.e. HMAC-SHA1, RSA-SHA1 or
-        perhaps another method defined by the service provider. HMAC-SHA1 is a simple mechanism
-        which generates a Message Authentication Code (MAC) using a cryptographic hash function
-        (i.e. SHA1) in combination with a secret key known only to the message sender and receiver
-        (i.e. the OAuth Consumer Secret and the authorized Access Key combined). This hashing
-        mechanism is applied to the parameters and content of any OAuth requests which are
-        concatenated into a "base signature string" as defined by the OAuth specification.
+        Wie diese digitalen Signaturen arbeiten hängt von der verwendeten Methode ab, z.B.
+        HMAC-SHA1, RSA-SHA1 oder möglicherweise eine andere Methode welche vom Serviceprovider
+        definiert wird. HMAC-SHA1 ist ein einfacher Mechanismus welcher einen Nachrichten
+        Authentifizierungscode (MAC) erzeugt indem eine kryptographische Hash Funktion (z.B. SHA1)
+        in Verbindung mit einem geheimen Schlüssel verwendet wird der nur dem Sender und dem
+        Empfänger der Nachricht bekannt sind (z.b. das Konsumentengeheimnis von OAuth kombiniert
+        mit dem authorisierten Zugriffsschlüssel). Dieser Hashing Mechanismus wird den Parametern
+        und dem Inhalt aller OAuth Anfragen angehängt und zu einem "Basissignatur String"
+        zusammengefügt wie es von der OAuth Spezifikation definiert ist.
     </para>
 
     <para>
-        RSA-SHA1 operates on similar principles except that the shared secret is, as you would
-        expect, each parties' RSA private key. Both sides would have the other's public key with
-        which to verify digital signatures. This does pose a level of risk compared to HMAC-SHA1
-        since the RSA method does not use the Access Key as part of the shared secret.  This means
-        that if the RSA private key of any Consumer is compromised, then all Access Tokens assigned
-        to that Consumer are also. RSA imposes an all or nothing scheme. In general, the majority of
-        service providers offering OAuth authorization have therefore tended to use HMAC-SHA1 by
-        default, and those who offer RSA-SHA1 may offer fallback support to HMAC-SHA1.
+        RSA-SHA1 operiert auf ähnlichen Prinzipien ausser dass das Geheimnis welches geteilt wird,
+        wie man es erwarten würde, der private RSA Schlüssel jeder Partei ist. Beide Seiten haben
+        den öffentlichen Schlüssel des anderen mit dem die digitalen Signaturen geprüft werden. Das
+        führt verglichen mit HMAC-SHA1 zu einem Riskolevel da die RSA Methode keinen
+        Zugriffsschlüssel als teil des geteilten Geheimnisses verwendet. Dies bedeutet dass wenn
+        der private RSA Schlüssel eines Konsumenten kompromitiert ist, sind es alle zugeordneten
+        Zugriffstoken dieses Konsumenten auch. RSA führt zu einem alles oder gar nichts Schema.
+        Generell tendiert die Mehrheit der Serviceprovider welche OAuth Authorisierung anbieten
+        dazu HMAC-SHA1 standardmäßig zu verwenden, und jene welche RSA-SHA1 anbieten können eine
+        Fallback Unterstützung für HMAC-SHA1 anbieten.
     </para>
 
     <para>
-        While digital signatures add to OAuth's security they are still vulnerable to other forms of
-        attack, such as replay attacks which copy earlier requests which were intercepted and
-        validly signed at that time.  An attacker can now resend the exact same request to a
-        Provider at will at any time and intercept its results. This poses a significant risk but it
-        is quiet simple to defend against - add a unique string (i.e. a nonce) to all requests which
-        changes per request (thus continually changing the signature string) but which can never be
-        reused because Providers actively track used nonces within the a certain window defined by
-        the timestamp also attached to a request. You might first suspect that once you stop
-        tracking a particular nonce, the replay could work but this ignore the timestamp which can
-        be used to determine a request's age at the time it was validly signed. One can assume that
-        a week old request used in an attempted replay should be summarily discarded!
+        Wärend digitale Signaturen zur Sicherheit von OAuth beitragen sind Sie trotzdem für andere
+        Formen von Attacken angreifbar, wie Replay Attacken welche vorhergehende Anfragen
+        aufgezeichnet und zu einer Zeit geprüft und signiert wurden. Ein Angreifen können jetzt
+        exakt die gleiche Anfrage zum Provider wie er will und zu jeder Zeit senden und seine
+        Ergebnisse auffangen. Das führt zu einem signifikanten Risiko aber es ist recht einfach
+        sich davor zu schützen - einen eindeutigen String (z.b. eine Nonce) bei allen Anfragen
+        hinzufügen welcher sich bei jeder Anfrage ändert (dies verändert laufend den Signaturstring)
+        kann aber niemals wiederverwendet werden weil Provider verwendete Nonces zusammen mit einem
+        bestimmten Fenster aktiv verfolgen welches vom Timestamp definiert wird der einer Anfrage
+        auch angehängt wird. Man würde erwarten das wenn die Verfolgung einer bestimmten Nonce
+        gestoppt wird, das wiederabspielen funktionieren würde, aber das ignoriert den Timestamp
+        der verwendet werden kann um das Alter einer Anfrage zu ermitteln zu welcher Sie digital
+        signiert wurde. Man kann also annehmen dass die eine Woche alte Anfrage in einem
+        Wiederholungsversuch abgespielt wird, auf ähnliche Weise verworfen wird.
     </para>
 
     <para>
-        As a final point, this is not an exhaustive look at the security architecture in OAuth. For
-        example, what if HTTP requests which contain both the Access Token and the Consumer Secret
-        are eavesdropped? The system relies on at one in the clear transmission of each unless HTTPS
-        is active, so the obvious conclusion is that where feasible HTTPS is to be preferred leaving
-        unsecured HTTP in place only where it is not possible or affordable to do so.
+        Als letzter Punkt erwähnt, ist dies keine exzessive Ansicht der Sicherheitsarchitektur in
+        OAuth. Was passiert zum Beispiel wenn HTTP Anfragen welche sowohl den Zugriffstoken als auch
+        das Geheimnis des Konsumenten enthalten abgehört werden? Das System ist auf der einen Seite
+        von einer klaren Übermittlung von allem abhängig solange HTTPS nicht aktiv ist. Deshalb ist
+        die naheliegende Feststellung das HTTPS, dort wo es möglich ist zu bevorzugen ist und HTTP
+        nur an solchen Orten eingesetzt wird so es nicht anders möglich oder nicht erschwinglich
+        ist.
     </para>
 </sect2>

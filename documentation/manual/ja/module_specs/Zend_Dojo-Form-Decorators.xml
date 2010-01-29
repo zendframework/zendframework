@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17134 -->
+<!-- EN-Revision: 20176 -->
 <sect2 id="zend.dojo.form.decorators">
-    <title>Dijitに特有のフォーム・デコレーター</title>
+    <title>Dijit に特有のフォーム・デコレーター</title>
 
     <para>
-        大部分のフォーム要素はDijit要素デコレーター
-        （要素からdijitパラメータをとって来ます）
+        大部分のフォーム要素は Dijit 要素デコレーター
+        （要素から dijit パラメータをとって来ます）
         を使うことができ、
         要素で特定されたビュー・ヘルパーに、
-        これらと他のメタデータを渡すことができます。
+        これらと他のメタデータを渡せます。
         しかしながら、フォームやサブ・フォーム及び表示グループをデコレートするために、
-        いろいろなレイアウトdijitsに該当するデコレーターのセットがあります。
+        いろいろなレイアウト dijits に該当するデコレーターのセットがあります。
     </para>
 
     <para>
         dijitデコレーターの全てで、
-        デコレートされた与えられた要素の<code>dijitParams</code>プロパティを探して、
-        <varname>$params</varname>配列として使用されるdijitビュー・ヘルパーに押し付けます;
+        デコレートされた与えられた要素の <property>dijitParams</property> プロパティを探して、
+        <varname>$params</varname> 配列として使用される dijit ビュー・ヘルパーに押し付けます;
         それから、情報の重複が起こらないように、これらは他のどの特性からも分離されます。
     </para>
 
     <sect3 id="zend.dojo.form.decorators.dijitElement">
-        <title>Dijit要素デコレーター</title>
+        <title>Dijit 要素デコレーター</title>
 
         <para>
-            ちょうど<link linkend="zend.form.standardDecorators.viewHelper">Viewヘルパ・デコレーター</link>のように、
+            ちょうど <link linkend="zend.form.standardDecorators.viewHelper">View ヘルパ・デコレーター</link>のように、
             レンダリングのときにビュー・ヘルパーとして使用される要素で、
-            Dijit要素は<code>helper</code>プロパティを予期します。
-            Dijitパラメータは一般的に直接要素から引き出されますが、
-            <code>dijitParams</code>キー（そのキーの値は、任意の連想配列でしょう）による、
+            Dijit 要素は <property>helper</property> プロパティを予期します。
+            Dijit パラメータは一般的に直接要素から引き出されますが、
+            <property>dijitParams</property> キー（そのキーの値は、任意の連想配列でしょう）による、
             オプションとして渡されるかもしれません。
         </para>
 
         <para>
-            各々の要素がユニークなID（要素の<methodname>getId()</methodname>メソッドから取得されるように）
+            各々の要素がユニークな ID （要素の <methodname>getId()</methodname> メソッドから取得されるように）
             を持つことは、重要です。
-            繰り返しが<methodname>dojo()</methodname>ビュー・ヘルパーの範囲内で検出されるならば、
+            繰り返しが <methodname>dojo()</methodname> ビュー・ヘルパーの範囲内で検出されるならば、
             デコレーターは通知の引き金を引いて、
-            識別子に<methodname>uniqid()</methodname>からの戻りを追加することによってユニークなIDを作成します。
+            識別子に <methodname>uniqid()</methodname> からの戻りを追加することによってユニークな ID を作成します。
         </para>
 
         <para>
@@ -48,7 +48,7 @@
         </para>
 
         <example id="zend.dojo.form.decorators.dijitElement.usage">
-            <title>Dijit要素デコレーターの使用法</title>
+            <title>Dijit 要素デコレーターの使用法</title>
 
             <programlisting language="php"><![CDATA[
 $element->setDecorators(array(
@@ -62,39 +62,39 @@ $element->setDecorators(array(
     </sect3>
 
     <sect3 id="zend.dojo.form.decorators.dijitForm">
-        <title>Dijitフォーム・デコレーター</title>
+        <title>Dijit フォーム・デコレーター</title>
 
         <para>
-            Dijitフォーム・デコレーターは、
+            Dijit フォーム・デコレーターは、
             <link linkend="zend.form.standardDecorators.form">フォーム・デコレーター</link>と非常に似ています;
             実際、それが
-            同じビュー・ヘルパー名 ('form')を利用するので、実際、基本的に入れ替えて使うことができます。
+            同じビュー・ヘルパー名 ('form') を利用するので、実際、基本的に入れ替えて使うことができます。
         </para>
 
         <para>
-            設定のためにdijit.form.Formは少しもdijitパラメータを必要としないので、
-            プログラムされたdijitの生成が確実に機能できるように、
-            DOM IDが渡されるdijitフォーム・ビュー・ヘルパーが必要とすることが主な違いです。
+            設定のために <command>dijit.form.Form</command> は少しも dijit パラメータを必要としないので、
+            プログラムされた dijit の生成が確実に機能できるように、
+            <acronym>DOM</acronym> ID が渡される dijit フォーム・ビュー・ヘルパーが必要とすることが主な違いです。
             識別子としてフォーム名を渡すことによって、デコレーターはこれを確実にします。
         </para>
     </sect3>
 
     <sect3 id="zend.dojo.form.decorators.dijitContainer">
-        <title>DijitContainerベースのデコレーター</title>
+        <title>DijitContainer ベースのデコレーター</title>
 
         <para>
-            <code>DijitContainer</code>デコレーターは、実は、
+            <classname>DijitContainer</classname> デコレーターは、実は、
             いろいろな他のデコレーターが由来する抽象クラスです。
-            タイトル・サポートの追加で、それは<link
-                linkend="zend.dojo.form.decorators.dijitElement">Dijit要素</link>の同じ機能を提供します。
-            多くのレイアウトdijitはタイトルを要求するか、利用することができます;
-            利用できるのであれば、DijitContainerは要素の説明プロパティを利用して、
+            タイトル・サポートの追加で、それは <link
+                linkend="zend.dojo.form.decorators.dijitElement">Dijit要素</link> の同じ機能を提供します。
+            多くのレイアウト dijit はタイトルを要求するか、利用できます;
+            利用できるのであれば、 DijitContainer は要素の説明プロパティを利用して、
             渡されるならば、 'legend' もしくは 'title' デコレーター・オプションのどちらかを利用することもできます。
             対応する翻訳による翻訳アダプターが存在するならば、タイトルは翻訳されます。
         </para>
 
         <para>
-            以下は、<code>DijitContainer</code>から継承するデコレーターの一覧です:
+            以下は、 <classname>DijitContainer</classname> から継承するデコレーターの一覧です:
         </para>
 
         <itemizedlist>
@@ -108,7 +108,7 @@ $element->setDecorators(array(
         </itemizedlist>
 
         <example id="zend.dojo.form.decorators.dijitContainer.usage">
-            <title>Dijitコンテナ・デコレーター使用法</title>
+            <title>Dijit コンテナ・デコレーター使用法</title>
 
             <programlisting language="php"><![CDATA[
 // フォームで TabContainer を使う:

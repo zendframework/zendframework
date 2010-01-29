@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20714 -->
 <sect1 id="zend.queue.adapters">
     <title>アダプタ</title>
 
@@ -408,7 +408,7 @@ $queue = new Zend_Queue('Db', $options);
 
             <para>
                 データベース<emphasis>CREATE TABLE ( ... )</emphasis> <acronym>SQL</acronym>
-                文が<filename>Zend/Queue/Adapter/Db/queue.sql</filename>にあります。
+                文が<filename>Zend/Queue/Adapter/Db/mysql.sql</filename>にあります。
             </para>
         </sect3>
 

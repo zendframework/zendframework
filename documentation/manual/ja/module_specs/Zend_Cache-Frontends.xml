@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17136 -->
+<!-- EN-Revision: 20725 -->
 <sect1 id="zend.cache.frontends">
     <title><classname>Zend_Cache</classname> のフロントエンド</title>
 
@@ -282,7 +282,7 @@ if (!($cache->start('mypage'))) {
 echo 'これはキャッシュされません ('.time().').';
 ]]></programlisting>
             <para>
-                この形式を使用すると、既存のプロジェクトに簡単に出力キャッシュ処理を追加することができます。
+                この形式を使用すると、既存のプロジェクトに簡単に出力キャッシュ処理を追加できます。
                 コードのリファクタリングもほとんど行わずにすませられるでしょう。
             </para>
         </sect3>
@@ -497,7 +497,7 @@ $result = $cache->foobar2('1', '2');
                 <classname>Zend_Cache_Frontend_File</classname> を使用すると、その「設定オブジェクト」
                 をキャッシュすることができ (これにより、
                 <acronym>XML</acronym> ファイルを毎回パースする必要がなくなります)、さらに「マスタファイル」
-                との間で強力な依存性を保持することができます。そのため、<acronym>XML</acronym>
+                との間で強力な依存性を保持できます。そのため、<acronym>XML</acronym>
                 設定ファイルが更新されると、即時にキャッシュが無効になります。
             </para>
         </sect3>
@@ -592,6 +592,21 @@ $result = $cache->foobar2('1', '2');
                 (キャッシュにヒットし、かつブラウザがそのバージョンを既に持っている場合に
                 <acronym>HTTP</acronym> 304 Not Modified を送信するようにします)。
             </para>
+            <!-- TODO : to be translated -->
+            <note>
+                <para>
+                    This frontend operates by registering a callback function to be called
+                    when the output buffering it uses is cleaned. In order for this to operate
+                    correctly, it must be the final output buffer in the request. To guarantee
+                    this, the output buffering used by the Dispatcher needs to be disabled by
+                    calling <classname>Zend_Controller_Front</classname>'s <methodname>setParam()
+                    </methodname> method, for example, $front->setParam('disableOutputBuffering',
+                    true) or adding
+                    "resources.frontcontroller.params.disableOutputBuffering = true"
+                    to your bootstrap configuration file (assumed INI) if using
+                    <classname>Zend_Application</classname>.
+                </para>
+            </note>
         </sect3>
         <sect3 id="zend.cache.frontends.page.options">
             <title>使用可能なオプション</title>

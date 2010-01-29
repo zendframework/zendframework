@@ -41,7 +41,7 @@
         (i.e. SHA1) in combination with a secret key known only to the message sender and receiver
         (i.e. the OAuth Consumer Secret and the authorized Access Key combined). This hashing
         mechanism is applied to the parameters and content of any OAuth requests which are
-        concatenated into a "base signature string" as defined by the OAuth specification. 
+        concatenated into a "base signature string" as defined by the OAuth specification.
     </para>
 
     <para>

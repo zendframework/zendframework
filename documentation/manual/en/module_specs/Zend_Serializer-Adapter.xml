@@ -2,7 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.serializer.adapter">
     <title>Zend_Serializer_Adapter</title>
-    
+
     <para>
         <classname>Zend_Serializer</classname> adapters create a bridge for different methods of
         serializing with very little effort.
@@ -106,7 +106,7 @@
                           <entry></entry>
 
                           <entry>
-                            An optional comment that appears in the packet header. 
+                            An optional comment that appears in the packet header.
                           </entry>
                       </row>
                   </tbody>
@@ -412,7 +412,7 @@
              </tgroup>
         </table>
     </sect2>
-    
+
     <sect2 id="zend.serializer.adapter.phpcode">
         <title>Zend_Serializer_Adapter_PhpCode</title>
 

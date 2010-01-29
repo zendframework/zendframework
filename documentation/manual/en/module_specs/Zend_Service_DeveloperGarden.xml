@@ -2,16 +2,16 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.service.developergarden">
     <title>Zend_Service_DeveloperGarden</title>
-    
+
     <sect2 id="zend.service.developergarden.introduction">
         <title>Introduction to DeveloperGarden</title>
-        
+
         <para>
             DeveloperGarden is the name for the &quot;Open Development services&quot; of the German
             Telekom. The &quot;Open Development services&quot; are a set of <acronym>SOAP</acronym>
             API Services.
         </para>
-        
+
         <para>
             The family of <classname>Zend_Service_DeveloperGarden</classname> components provides a
             clean and simple interface to the <ulink
@@ -22,50 +22,50 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.baseuserservice">BaseUserService</link>: 
+                    <link linkend="zend.service.developergarden.baseuserservice">BaseUserService</link>:
                     Class to manage API quota and user accounting details.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.iplocation">IpLocation</link>: 
-                    Locale the given IP and returns geo coordinates. Works only with IPs allocated 
+                    <link linkend="zend.service.developergarden.iplocation">IpLocation</link>:
+                    Locale the given IP and returns geo coordinates. Works only with IPs allocated
                     in the network of the german telekom.
                     </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.localsearch">LocalSearch</link>: 
+                    <link linkend="zend.service.developergarden.localsearch">LocalSearch</link>:
                     Allows you to search with options nearby or around a given geo coordinate or city.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.sendsms">SendSms</link>: Send a Sms 
+                    <link linkend="zend.service.developergarden.sendsms">SendSms</link>: Send a Sms
                     or Flash Sms to a given number.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.smsvalidation">SmsValidation</link>: 
+                    <link linkend="zend.service.developergarden.smsvalidation">SmsValidation</link>:
                     You can validate a number to use it with SendSms for also supply a back channel.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.voicecall">VoiceCall</link>: 
+                    <link linkend="zend.service.developergarden.voicecall">VoiceCall</link>:
                     Initiates a call between two numbers.
                  </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.conferencecall">ConferenceCall</link>: 
+                    <link linkend="zend.service.developergarden.conferencecall">ConferenceCall</link>:
                     You can configure a whole conference room with participants for an adhoc
                     conference or you can also schedule your conference.
                 </para>
@@ -73,7 +73,7 @@
         </itemizedlist>
 
         <para>
-            The backend SOAP API is documented 
+            The backend SOAP API is documented
             <ulink url="http://www.developergarden.com/openapi/dokumentation/">here</ulink>.
         </para>
 
@@ -81,7 +81,7 @@
             <title>Sign Up for an Account</title>
 
             <para>
-                Before you can start using the DeveloperGarden API, you must first 
+                Before you can start using the DeveloperGarden API, you must first
                 <ulink url="http://www.developergarden.com/register">sign up</ulink> for an account.
             </para>
         </sect3>
@@ -172,9 +172,9 @@ $service = new Zend_Service_DeveloperGarden_SendSms($config);
 
     <sect2 id="zend.service.developergarden.baseuserservice">
         <title>BaseUserService</title>
-        
+
         <para>
-            The class can be used to set and get quota values for the services and to fetch 
+            The class can be used to set and get quota values for the services and to fetch
             account details.
         </para>
 
@@ -214,7 +214,7 @@ echo 'Max User Quota: ', $result->getMaxUserQuota(), '<br />';
 echo 'Quota Level: ', $result->getQuotaLevel(), '<br />';
 ]]></programlisting>
             </example>
-            
+
             <para>
                 You get a <classname>Result</classname> object that contains all information that
                 you need, optional you can pass to the <methodname>QuotaInformation</methodname>
@@ -257,7 +257,7 @@ echo 'Quota Level: ', $result->getQuotaLevel(), '<br />';
                 </listitem>
             </itemizedlist>
         </sect3>
-        
+
         <sect3 id="zend.service.developergarden.baseuserservice.changequotainformation">
             <title>Change quota information</title>
 
@@ -273,7 +273,7 @@ echo 'Quota Level: ', $result->getQuotaLevel(), '<br />';
                 <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_BaseUserService($config);
 $result = $service->changeSmsQuotaPool(
-    1000, 
+    1000,
     Zend_Service_DeveloperGarden_BaseUserService::ENV_PRODUCTION
 );
 if (!$result->hasError()) {
@@ -281,7 +281,7 @@ if (!$result->hasError()) {
 }
 ]]></programlisting>
             </example>
-            
+
             <para>
                 Here a list of all <methodname>changeQuotaPool</methodname> methods:
             </para>
@@ -421,7 +421,7 @@ print_r($service->localSearch($search));
 
             <listitem>
                 <para>
-                    The following characters are counted twice: 
+                    The following characters are counted twice:
                     <literal>| ^ € { } [ ] ~ \ LF</literal> (line break)
                 </para>
             </listitem>
@@ -453,7 +453,7 @@ print_r($service->localSearch($search));
                         linkend="zend.service.developergarden.smsvalidation">SMS Validation</link>)
                 </para>
             </listitem>
-        </itemizedlist>      
+        </itemizedlist>
 
         <example id="zend.service.developergarden.sendsms.example">
             <title>Sending an SMS</title>
@@ -461,8 +461,8 @@ print_r($service->localSearch($search));
             <programlisting language="php"><![CDATA[
 $service = new Zend_Service_DeveloperGarden_SendSms($config);
 $sms = $service->createSms(
-    '+49-172-123456; +49-177-789012', 
-    'your test message', 
+    '+49-172-123456; +49-177-789012',
+    'your test message',
     'yourname'
 );
 print_r($service->send($sms));]]></programlisting>
@@ -595,7 +595,7 @@ $service->callStatus($sessionId, true); // extend the call
 
 sleep(10); // sleep 10s and then tearDown
 
-$service->tearDownCall($sessionId); 
+$service->tearDownCall($sessionId);
 ]]></programlisting>
         </example>
     </sect2>
@@ -606,7 +606,7 @@ $service->tearDownCall($sessionId);
         <para>
             Conference Call allows you to setup and start a phone conference.
         </para>
-        
+
         <para>
             The following features are available:
         </para>
@@ -642,15 +642,15 @@ $service->tearDownCall($sessionId);
                 </para>
             </listitem>
         </itemizedlist>
-        
+
         <para>
             Here is a list of currently implemented API methods:
         </para>
-        
+
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>createConference()</methodname> creates a new conference                    
+                    <methodname>createConference()</methodname> creates a new conference
                 </para>
             </listitem>
 
@@ -663,7 +663,7 @@ $service->tearDownCall($sessionId);
             <listitem>
                 <para>
                     <methodname>commitConference()</methodname> saves the conference, and, if no date
-                    is configured, immediately starts the conference 
+                    is configured, immediately starts the conference
                 </para>
             </listitem>
 
@@ -696,7 +696,7 @@ $service->tearDownCall($sessionId);
 
             <listitem>
                 <para>
-                    <methodname>newParticipant()</methodname> creates a new participant                    
+                    <methodname>newParticipant()</methodname> creates a new participant
                 </para>
             </listitem>
 
@@ -722,14 +722,14 @@ $service->tearDownCall($sessionId);
 
             <listitem>
                 <para>
-                    <methodname>getRunningConference()</methodname> requests the running instance of 
+                    <methodname>getRunningConference()</methodname> requests the running instance of
                     a planned conference
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>createConferenceTemplate()</methodname> creates a new conference 
+                    <methodname>createConferenceTemplate()</methodname> creates a new conference
                     template
                 </para>
             </listitem>
@@ -744,7 +744,7 @@ $service->tearDownCall($sessionId);
             <listitem>
                 <para>
                     <methodname>updateConferenceTemplate()</methodname> updates existing conference
-                    template details                    
+                    template details
                 </para>
             </listitem>
 
@@ -777,7 +777,7 @@ $service->tearDownCall($sessionId);
 
             <listitem>
                 <para>
-                    <methodname>updateConferenceTemplateParticipant()</methodname> updates 
+                    <methodname>updateConferenceTemplateParticipant()</methodname> updates
                     participant details within a conference template
                 </para>
             </listitem>
@@ -789,7 +789,7 @@ $service->tearDownCall($sessionId);
                 </para>
             </listitem>
         </itemizedlist>
-        
+
         <example id="zend.service.developergarden.conferencecall.example">
             <title>Ad-Hoc conference</title>
 
@@ -831,7 +831,7 @@ $client->commitConference($conference->getConferenceId());
         <para>
             First of all, you can setup the internal SoapClient (PHP) caching values.
         </para>
-        
+
         <example id="zend.service.developergarden.performance.wsdlcache.example">
             <title>WSDL cache options</title>
 
@@ -872,7 +872,7 @@ Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setWsdlCache([PHP CONSTA
 
         <para>
             If you want also to cache the result for calls to the SecuritTokenServer
-            you can setup a <classname>Zend_Cache</classname> instance and pass it to the 
+            you can setup a <classname>Zend_Cache</classname> instance and pass it to the
             <methodname>setCache()</methodname>.
         </para>
 

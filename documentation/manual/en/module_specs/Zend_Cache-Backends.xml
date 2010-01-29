@@ -482,7 +482,7 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
             There is no option for this backend.
         </para>
     </sect2>
-    
+
     <sect2 id="zend.cache.backends.static">
         <title>Zend_Cache_Backend_Static</title>
         <para>
@@ -644,7 +644,7 @@ RewriteRule ^.*$ index.php [NC,L]
                               Umask for directories created within public_dir.
                         </entry>
                       </row>
-                      
+
                       <row>
                           <entry><emphasis>file_extension</emphasis></entry>
                           <entry><type>String</type></entry>
@@ -696,7 +696,7 @@ RewriteRule ^.*$ index.php [NC,L]
               </tgroup>
           </table>
     </sect2>
-    
+
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

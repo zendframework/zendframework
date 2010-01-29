@@ -47,29 +47,29 @@ echo $bbcode->render('my [foo]tag[/foo]');
             it with a tag structure. Currently, only BBCode supports this. Textile doesn't have
             support for custom tags.
         </para>
-        
+
         <para>
             Some renderers (like the HTML renderer) also have support for a
             'tag' parameter. This replaces the 'start' and 'end' parameters, and
             it renders the tags including some default attributes and the
-            closing tag. 
+            closing tag.
         </para>
-        
+
         <sect3 id="zend.markup.renderers.add.callback">
             <title>Add a callback tag</title>
-            
+
             <para>
                 By adding a callback tag, you can do a lot more then just a
                 simple replace of the tags. For instance, you can change the
                 contents, use the parameters to influence the output etc.
             </para>
-            
+
             <para>
                 A callback is a class that implements the
                 <classname>Zend_Markup_Renderer_TokenInterface</classname>
                 interface. An example of a callback class:
             </para>
-            
+
             <programlisting language="php"><![CDATA[
 class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterInterface
 {
@@ -87,7 +87,7 @@ class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterI
                 of the <classname>My_Markup_Renderer_Html_Upper</classname>
                 class. A simple example:
             </para>
-            
+
             <programlisting language="php"><![CDATA[
 // Creates instance of Zend_Markup_Renderer_Html,
 // with Zend_Markup_Parser_BbCode as its parser
@@ -112,7 +112,7 @@ echo $bbcode->render('my [upper]tag[/upper]');
 ]]></programlisting>
         </sect3>
     </sect2>
-    
+
     <sect2 id="zend.markup.renderers.list">
         <title>List of tags</title>
 

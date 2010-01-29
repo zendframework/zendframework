@@ -283,12 +283,12 @@ if (!$publisher->isSuccess()) {
                 resulting class implements the interface
                 <classname>Zend_Feed_Pubsubhubbub_Model_SubscriptionInterface</classname>.
             </para>
-            
+
             <para>
                 An example schema (MySQL) for a subscription table accessible by the provided model
                 may look similar to:
             </para>
-            
+
                     <programlisting language="sql"><![CDATA[
 CREATE TABLE IF NOT EXISTS `subscription` (
   `id` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',

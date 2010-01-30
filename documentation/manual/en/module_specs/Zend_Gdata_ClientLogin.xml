@@ -10,8 +10,8 @@
     </para>
 
     <para>
-        See
-        <ulink url="http://code.google.com/apis/accounts/AuthForInstalledApps.html"> http://code.google.com/apis/accounts/AuthForInstalledApps.html </ulink>
+        See <ulink
+            url="http://code.google.com/apis/accounts/AuthForInstalledApps.html"> http://code.google.com/apis/accounts/AuthForInstalledApps.html </ulink>
         for more information about Google Data ClientLogin authentication.
     </para>
 
@@ -64,19 +64,19 @@
         </para>
 
         <para>
-          The optional sixth parameter is a string ID for a
-          <trademark>CAPTCHA</trademark> challenge that has been issued by
-          the server. It is only necessary when logging in after receiving
-          a <trademark>CAPTCHA</trademark> challenge from a previous
-          login attempt.
+            The optional sixth parameter is a string ID for a
+            <trademark>CAPTCHA</trademark> challenge that has been issued by
+            the server. It is only necessary when logging in after receiving
+            a <trademark>CAPTCHA</trademark> challenge from a previous
+            login attempt.
         </para>
 
         <para>
-          The optional seventh parameter is a user's response to a
-          <trademark>CAPTCHA</trademark> challenge that has been issued by
-          the server. It is only necessary when logging in after receiving
-          a <trademark>CAPTCHA</trademark> challenge from a previous
-          login attempt.
+            The optional seventh parameter is a user's response to a
+            <trademark>CAPTCHA</trademark> challenge that has been issued by
+            the server. It is only necessary when logging in after receiving
+            a <trademark>CAPTCHA</trademark> challenge from a previous
+            login attempt.
         </para>
 
         <para>
@@ -101,7 +101,6 @@ try {
 
 $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.gdata.clientlogin.terminating">
@@ -114,7 +113,5 @@ $cal = new Zend_Gdata_Calendar($client);
             to a Google account, and therefore these can be used repeatedly
             in the future.
         </para>
-
     </sect2>
-
 </sect1>

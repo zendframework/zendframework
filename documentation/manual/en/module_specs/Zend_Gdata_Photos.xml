@@ -25,6 +25,7 @@
 
     <note>
         <title>Authentication</title>
+
         <para>
             The <acronym>API</acronym> provides authentication via AuthSub (recommended)
             and ClientAuth. <acronym>HTTP</acronym> connections must be authenticated for write
@@ -34,26 +35,30 @@
 
     <sect2 id="zend.gdata.photos.connecting">
         <title>Connecting To The Service</title>
+
         <para>
-            The Picasa Web Albums <acronym>API</acronym>, like all GData <acronym>API</acronym>s, is based off of the Atom Publishing Protocol (APP),
-            an <acronym>XML</acronym> based format for managing web-based resources. Traffic between a client and the
-            servers occurs over <acronym>HTTP</acronym> and allows for both authenticated and unauthenticated connections.
+            The Picasa Web Albums <acronym>API</acronym>, like all GData <acronym>API</acronym>s, is
+            based off of the Atom Publishing Protocol (APP), an <acronym>XML</acronym> based format
+            for managing web-based resources. Traffic between a client and the servers occurs over
+            <acronym>HTTP</acronym> and allows for both authenticated and unauthenticated connections.
         </para>
 
         <para>
-            Before any transactions can occur, this connection needs to be made. Creating a connection to the
-            Picasa servers involves two steps: creating an <acronym>HTTP</acronym> client and binding a
-            <classname>Zend_Gdata_Photos</classname>
+            Before any transactions can occur, this connection needs to be made. Creating a
+            connection to the Picasa servers involves two steps: creating an <acronym>HTTP</acronym>
+            client and binding a <classname>Zend_Gdata_Photos</classname>
             service instance to that client.
         </para>
 
         <sect3 id="zend.gdata.photos.connecting.authentication">
             <title>Authentication</title>
+
             <para>
-                The Google Picasa <acronym>API</acronym> allows access to both public and private photo feeds. Public feeds
-                do not require authentication, but are read-only and offer reduced functionality. Private feeds
-                offers the most complete functionality but requires an authenticated connection to the Picasa
-                servers. There are three authentication schemes that are supported by Google Picasa :
+                The Google Picasa <acronym>API</acronym> allows access to both public and private
+                photo feeds. Public feeds do not require authentication, but are read-only and offer
+                reduced functionality. Private feeds offers the most complete functionality but
+                requires an authenticated connection to the Picasa servers. There are three
+                authentication schemes that are supported by Google Picasa :
             </para>
 
             <itemizedlist>
@@ -67,6 +72,7 @@
                         authentication schemes are insufficient.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>AuthSub</firstterm>
@@ -88,30 +94,37 @@
                 appropriate authenticated connection. For more information,
                 please see section the
                 <link linkend="zend.gdata.introduction.authentication">Authentication section</link>
-                of this manual or the
-                <ulink url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the Google Data <acronym>API</acronym> Developer's Guide</ulink>.
+                of this manual or the <ulink
+                    url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in the
+                    Google Data <acronym>API</acronym> Developer's Guide</ulink>.
             </para>
         </sect3>
 
         <sect3 id="zend.gdata.photos.connecting.service">
             <title>Creating A Service Instance</title>
+
             <para>
                 In order to interact with the servers, this library provides the
-                <classname>Zend_Gdata_Photos</classname> service class. This class provides a common interface to the
-                Google Data and Atom Publishing Protocol models and assists in marshaling requests to and from
-                the servers.
+                <classname>Zend_Gdata_Photos</classname> service class. This class provides a common
+                interface to the Google Data and Atom Publishing Protocol models and assists in
+                marshaling requests to and from the servers.
             </para>
 
             <para>
                 Once deciding on an authentication scheme, the next step is to create an instance of
                 <classname>Zend_Gdata_Photos</classname>. The class constructor takes an instance of
-                <classname>Zend_Http_Client</classname> as a single argument. This provides an interface for AuthSub
-                and ClientAuth authentication, as both of these require creation of a special authenticated
-                <acronym>HTTP</acronym> client. If no arguments are provided, an unauthenticated instance of
-                <classname>Zend_Http_Client</classname> will be automatically created.
+                <classname>Zend_Http_Client</classname> as a single argument. This provides an
+                interface for AuthSub and ClientAuth authentication, as both of these require
+                creation of a special authenticated <acronym>HTTP</acronym> client. If no arguments
+                are provided, an unauthenticated instance of <classname>Zend_Http_Client</classname>
+                will be automatically created.
             </para>
 
-            <para>The example below shows how to create a service class using ClientAuth authentication:</para>
+            <para>
+                The example below shows how to create a service class using ClientAuth
+                authentication:
+            </para>
+
             <programlisting language="php"><![CDATA[
 // Parameters for ClientAuth authentication
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
@@ -125,7 +138,11 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
 $service = new Zend_Gdata_Photos($client);
 ]]></programlisting>
 
-            <para>A service instance using AuthSub can be created in a similar, though slightly more lengthy fashion:</para>
+            <para>
+                A service instance using AuthSub can be created in a similar, though slightly more
+                lengthy fashion:
+            </para>
+
             <programlisting language="php"><![CDATA[
 session_start();
 
@@ -214,7 +231,10 @@ function getAuthSubHttpClient()
 $service = new Zend_Gdata_Photos(getAuthSubHttpClient());
 ]]></programlisting>
 
-            <para>Finally, an unauthenticated server can be created for use with public feeds:</para>
+            <para>
+                Finally, an unauthenticated server can be created for use with public feeds:
+            </para>
+
             <programlisting language="php"><![CDATA[
 // Create an instance of the service using an unauthenticated HTTP client
 $service = new Zend_Gdata_Photos();
@@ -224,36 +244,39 @@ $service = new Zend_Gdata_Photos();
 
     <sect2 id="zend.gdata.photos.queries">
         <title>Understanding and Constructing Queries</title>
+
         <para>
-            The primary method to request data from the service is by constructing a query. There are query
-            classes for each of the following types:
+            The primary method to request data from the service is by constructing a query. There
+            are query classes for each of the following types:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <firstterm>User</firstterm>
-                    is used to specify the user whose data is being searched for, and is specified as a username.
-                    If no user is provided, "default" will be used instead to indicate the currently authenticated
-                    user (if authenticated).
+                    <firstterm>User</firstterm> is used to specify the user whose data is being
+                    searched for, and is specified as a username. if no user is provided, "default"
+                    will be used instead to indicate the currently authenticated user (if
+                    authenticated).
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>Album</firstterm>
-                    is used to specify the album which is being searched for, and is specified as either an id,
-                    or an album name.
+                    <firstterm>Album</firstterm> is used to specify the album which is being
+                    searched for, and is specified as either an id, or an album name.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>Photo</firstterm>
-                    is used to specify the photo which is being searched for, and is specified as an id.
+                    <firstterm>Photo</firstterm> is used to specify the photo which is being
+                    searched for, and is specified as an id.
                 </para>
             </listitem>
         </itemizedlist>
 
         <para>A new <code>UserQuery</code> can be constructed as followed:</para>
+
         <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -264,86 +287,91 @@ $query->setUser("sample.user");
 ]]></programlisting>
 
         <para>
-            For each query, a number of parameters limiting the search can be requested, or specified,
-            with get(Parameter) and set(Parameter), respectively. They are as follows:
+            for each query, a number of parameters limiting the search can be requested, or
+            specified, with get(Parameter) and set(Parameter), respectively. They are as follows:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <firstterm>Projection</firstterm>
-                    sets the format of the data returned in the feed, as either "api" or "base". Normally,
-                    "api" is desired. The default is "api".
+                    <firstterm>Projection</firstterm> sets the format of the data returned in the
+                    feed, as either "api" or "base". Normally, "api" is desired. The default is
+                    "api".
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>Type</firstterm>
-                    sets the type of element to be returned, as either "feed" or "entry". The default is "feed".
+                    <firstterm>Type</firstterm> sets the type of element to be returned, as either
+                    "feed" or "entry". The default is "feed".
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>Access</firstterm>
-                    sets the visibility of items to be returned, as "all", "public", or "private". The default is
-                    "all". Non-public elements will only be returned if the query is searching for the
-                    authenticated user.
+                    <firstterm>Access</firstterm> sets the visibility of items to be returned, as
+                    "all", "public", or "private". The default is "all". Non-public elements will
+                    only be returned if the query is searching for the authenticated user.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>Tag</firstterm>
-                    sets a tag filter for returned items. When a tag is set, only items tagged with this value
-                    will return.
+                    <firstterm>Tag</firstterm> sets a tag filter for returned items. When a tag is
+                    set, only items tagged with this value will return.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>Kind</firstterm>
-                    sets the kind of elements to return. When kind is specified, only entries that match this
-                    value will be returned.
+                    <firstterm>Kind</firstterm> sets the kind of elements to return. When kind is
+                    specified, only entries that match this value will be returned.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>ImgMax</firstterm>
-                    sets the maximum image size for entries returned. Only image entries smaller than this value
-                    will be returned.
+                    <firstterm>ImgMax</firstterm> sets the maximum image size for entries returned.
+                    Only image entries smaller than this value will be returned.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>Thumbsize</firstterm>
-                    sets the thumbsize of entries that are returned. Any retrieved entry will have a thumbsize
-                    equal to this value.
+                    <firstterm>Thumbsize</firstterm> sets the thumbsize of entries that are
+                    returned. Any retrieved entry will have a thumbsize equal to this value.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>User</firstterm>
-                    sets the user whose data is being searched for. The default is "default".
+                    <firstterm>User</firstterm> sets the user whose data is being searched for. The
+                    default is "default".
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>AlbumId</firstterm>
-                    sets the id of the album being searched for. This element only applies to album and photo queries.
-                    In the case of photo queries, this specifies the album that contains the requested photo. The
-                    album id is mutually exclusive with the album's name. Setting one unsets the other.
+                    <firstterm>AlbumId</firstterm> sets the id of the album being searched for. This
+                    element only applies to album and photo queries. In the case of photo queries,
+                    this specifies the album that contains the requested photo. The album id is
+                    mutually exclusive with the album's name. Setting one unsets the other.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>AlbumName</firstterm>
-                    sets the name of the album being searched for. This element only applies to the album and photo
-                    queries. In the case of photo queries, this specifies the album that contains the requested photo.
-                    The album name is mutually exclusive with the album's id. Setting one unsets the other.
+                    <firstterm>AlbumName</firstterm> sets the name of the album being searched for.
+                    This element only applies to the album and photo queries. In the case of photo
+                    queries, this specifies the album that contains the requested photo. The album
+                    name is mutually exclusive with the album's id. Setting one unsets the other.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <firstterm>PhotoId</firstterm>
-                    sets the id of the photo being searched for. This element only applies to photo queries.
+                    <firstterm>PhotoId</firstterm> sets the id of the photo being searched for. This
+                    element only applies to photo queries.
                 </para>
             </listitem>
         </itemizedlist>
@@ -351,6 +379,7 @@ $query->setUser("sample.user");
 
     <sect2 id="zend.gdata.photos.retrieval">
         <title>Retrieving Feeds And Entries</title>
+
         <para>
             The service has functions to retrieve a feed, or individual entries, for users, albums,
             and individual photos.
@@ -358,12 +387,18 @@ $query->setUser("sample.user");
 
         <sect3 id="zend.gdata.photos.user_retrieval">
             <title>Retrieving A User</title>
+
             <para>
-                The service supports retrieving a user feed and list of the user's content. If the requested
-                user is also the authenticated user, entries marked as "<code>hidden</code>" will also be returned.
+                The service supports retrieving a user feed and list of the user's content. If the
+                requested user is also the authenticated user, entries marked as
+                "<code>hidden</code>" will also be returned.
             </para>
 
-            <para>The user feed can be accessed by passing the username to the <code>getUserFeed</code> method:</para>
+            <para>
+                The user feed can be accessed by passing the username to the
+                <code>getUserFeed</code> method:
+            </para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -377,6 +412,7 @@ try {
 ]]></programlisting>
 
             <para>Or, the feed can be accessed by constructing a query, first:</para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -392,7 +428,10 @@ try {
 }
 ]]></programlisting>
 
-            <para>Constructing a query also provides the ability to request a user entry object:</para>
+            <para>
+                Constructing a query also provides the ability to request a user entry object:
+            </para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -412,11 +451,16 @@ try {
 
         <sect3 id="zend.gdata.photos.album_retrieval">
             <title>Retrieving An Album</title>
-            <para>The service supports retrieving an album feed and a list of the album's content.</para>
 
             <para>
-                The album feed is accessed by constructing a query object and passing it to <code>getAlbumFeed</code>:
+                The service supports retrieving an album feed and a list of the album's content.
             </para>
+
+            <para>
+                The album feed is accessed by constructing a query object and passing it to
+                <code>getAlbumFeed</code>:
+            </para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -434,11 +478,15 @@ try {
 ]]></programlisting>
 
             <para>
-                Alternatively, the query object can be given an album name with <code>setAlbumName</code>. Setting
-                the album name is mutually exclusive with setting the album id, and setting one will unset the other.
+                Alternatively, the query object can be given an album name with
+                <code>setAlbumName</code>. Setting the album name is mutually exclusive with setting
+                the album id, and setting one will unset the other.
             </para>
 
-            <para>Constructing a query also provides the ability to request an album entry object:</para>
+            <para>
+                Constructing a query also provides the ability to request an album entry object:
+            </para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -459,11 +507,17 @@ try {
 
         <sect3 id="zend.gdata.photos.photo_retrieval">
             <title>Retrieving A Photo</title>
-            <para>The service supports retrieving a photo feed and a list of associated comments and tags.</para>
 
             <para>
-                The photo feed is accessed by constructing a query object and passing it to <code>getPhotoFeed</code>:
+                The service supports retrieving a photo feed and a list of associated comments and
+                tags.
             </para>
+
+            <para>
+                The photo feed is accessed by constructing a query object and passing it to
+                <code>getPhotoFeed</code>:
+            </para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -481,7 +535,10 @@ try {
 }
 ]]></programlisting>
 
-            <para>Constructing a query also provides the ability to request a photo entry object:</para>
+            <para>
+                Constructing a query also provides the ability to request a photo entry object:
+            </para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -503,13 +560,18 @@ try {
 
         <sect3 id="zend.gdata.photos.comment_retrieval">
             <title>Retrieving A Comment</title>
+
             <para>
-                The service supports retrieving comments from a feed of a different type. By setting a query
-                to return a kind of "comment", a feed request can return comments associated with a specific user,
-                album, or photo.
+                The service supports retrieving comments from a feed of a different type. By setting
+                a query to return a kind of "comment", a feed request can return comments associated
+                with a specific user, album, or photo.
             </para>
 
-            <para>Performing an action on each of the comments on a given photo can be accomplished as follows:</para>
+            <para>
+                Performing an action on each of the comments on a given photo can be accomplished
+                as follows:
+            </para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -537,12 +599,18 @@ try {
 
         <sect3 id="zend.gdata.photos.tag_retrieval">
             <title>Retrieving A Tag</title>
+
             <para>
-                The service supports retrieving tags from a feed of a different type. By setting a query
-                to return a kind of "tag", a feed request can return tags associated with a specific photo.
+                The service supports retrieving tags from a feed of a different type. By setting a
+                query to return a kind of "tag", a feed request can return tags associated with a
+                specific photo.
             </para>
 
-            <para>Performing an action on each of the tags on a given photo can be accomplished as follows:</para>
+            <para>
+                Performing an action on each of the tags on a given photo can be accomplished as
+                follows:
+            </para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -567,16 +635,18 @@ try {
 }
 ]]></programlisting>
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.photos.creation">
         <title>Creating Entries</title>
+
         <para>The service has functions to create albums, photos, comments, and tags.</para>
 
         <sect3 id="zend.gdata.photos.album_creation">
             <title>Creating An Album</title>
+
             <para>The service supports creating a new album for an authenticated user:</para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -591,7 +661,9 @@ $service->insertAlbumEntry($entry);
 
         <sect3 id="zend.gdata.photos.photo_creation">
             <title>Creating A Photo</title>
+
             <para>The service supports creating a new photo for an authenticated user:</para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -618,7 +690,9 @@ $service->insertPhotoEntry($entry, $albumEntry);
 
         <sect3 id="zend.gdata.photos.comment_creation">
             <title>Creating A Comment</title>
+
             <para>The service supports creating a new comment for a photo:</para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -642,7 +716,9 @@ $service->insertCommentEntry($entry, $photoEntry);
 
         <sect3 id="zend.gdata.photos.tag_creation">
             <title>Creating A Tag</title>
+
             <para>The service supports creating a new tag for a photo:</para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -662,16 +738,18 @@ $photoEntry = $service->getPhotoEntry($photoQuery);
 $service->insertTagEntry($entry, $photoEntry);
 ]]></programlisting>
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.photos.deletion">
         <title>Deleting Entries</title>
+
         <para>The service has functions to delete albums, photos, comments, and tags.</para>
 
         <sect3 id="zend.gdata.photos.album_deletion">
             <title>Deleting An Album</title>
+
             <para>The service supports deleting an album for an authenticated user:</para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -690,7 +768,9 @@ $service->deleteAlbumEntry($entry, true);
 
         <sect3 id="zend.gdata.photos.photo_deletion">
             <title>Deleting A Photo</title>
+
             <para>The service supports deleting a photo for an authenticated user:</para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -710,7 +790,9 @@ $service->deletePhotoEntry($entry, true);
 
         <sect3 id="zend.gdata.photos.comment_deletion">
             <title>Deleting A Comment</title>
+
             <para>The service supports deleting a comment for an authenticated user:</para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -732,7 +814,9 @@ $service->deleteCommentEntry($entry, true);
 
         <sect3 id="zend.gdata.photos.tag_deletion">
             <title>Deleting A Tag</title>
+
             <para>The service supports deleting a tag for an authenticated user:</para>
+
             <programlisting language="php"><![CDATA[
 $service = Zend_Gdata_Photos::AUTH_SERVICE_NAME;
 $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
@@ -761,17 +845,21 @@ $service->deleteTagEntry($tagEntry, true);
 
         <sect3 id="zend.gdata.photos.optimistic_concurrenty">
             <title>Optimistic Concurrency (Notes On Deletion)</title>
+
             <para>
-                GData feeds, including those of the Picasa Web Albums service, implement optimistic concurrency,
-                a versioning system that prevents users from overwriting changes, inadvertently. When
-                deleting a entry through the service class, if the entry has been modified since it was
-                last fetched, an exception will be thrown, unless explicitly set otherwise (in which case
-                the deletion is retried on the updated entry).
+                GData feeds, including those of the Picasa Web Albums service, implement optimistic
+                concurrency, a versioning system that prevents users from overwriting changes,
+                inadvertently. When deleting a entry through the service class, if the entry has
+                been modified since it was last fetched, an exception will be thrown, unless
+                explicitly set otherwise (in which case the deletion is retried on the updated
+                entry).
             </para>
 
             <para>
-                An example of how to handle versioning during a deletion is shown by <code>deleteAlbumEntry</code>:
+                An example of how to handle versioning during a deletion is shown by
+                <code>deleteAlbumEntry</code>:
             </para>
+
             <programlisting language="php"><![CDATA[
 // $album is the albumEntry to be deleted
 try {
@@ -787,6 +875,5 @@ try {
 }
 ]]></programlisting>
         </sect3>
-
     </sect2>
 </sect1>

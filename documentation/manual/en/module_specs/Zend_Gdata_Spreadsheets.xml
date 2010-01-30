@@ -12,13 +12,14 @@
     </para>
 
     <para>
-        See
-        <ulink url="http://code.google.com/apis/spreadsheets/overview.html">http://code.google.com/apis/spreadsheets/overview.html</ulink>
+        See <ulink
+            url="http://code.google.com/apis/spreadsheets/overview.html">http://code.google.com/apis/spreadsheets/overview.html</ulink>
         for more information about the Google Spreadsheets <acronym>API</acronym>.
     </para>
 
     <sect2 id="zend.gdata.spreadsheets.creating">
         <title>Create a Spreadsheet</title>
+
         <para>
             The Spreadsheets data <acronym>API</acronym> does not currently provide a way to
             programmatically create or delete a spreadsheet.
@@ -27,6 +28,7 @@
 
     <sect2 id="zend.gdata.spreadsheets.listspreadsheets">
         <title>Get a List of Spreadsheets</title>
+
         <para>
             You can get a list of spreadsheets for a particular user by using
             the <code>getSpreadsheetFeed</code> method of the Spreadsheets
@@ -46,6 +48,7 @@ $feed = $spreadsheetService->getSpreadsheetFeed();
 
      <sect2 id="zend.gdata.spreadsheets.listworksheets">
         <title>Get a List of Worksheets</title>
+
         <para>
             A given spreadsheet may contain multiple worksheets. For each
             spreadsheet, there's a worksheets metafeed listing all the
@@ -73,18 +76,19 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
             objects (<code>$feed->entries</code>), each of which represents a
             single worksheet.
         </para>
-
     </sect2>
 
     <sect2 id="zend.gdata.spreadsheets.listfeeds">
         <title>Interacting With List-based Feeds</title>
+
         <para>
             A given worksheet generally contains multiple rows, each
             containing multiple cells. You can request data from the
             worksheet either as a list-based feed, in which each entry
             represents a row, or as a cell-based feed, in which each
-            entry represents a single cell. For information on cell-based
-            feeds, see <link linkend="zend.gdata.spreadsheets.cellfeeds">Interacting with cell-based feeds</link>.
+            entry represents a single cell. For information on cell-based feeds, see <link
+                linkend="zend.gdata.spreadsheets.cellfeeds">Interacting with cell-based
+                feeds</link>.
         </para>
 
         <para>
@@ -121,6 +125,7 @@ $feed = $spreadsheetService->getWorksheetFeed($query);
 
         <sect3 id="zend.gdata.spreadsheets.listfeeds.get">
             <title>Get a List-based Feed</title>
+
             <para>
                 To retrieve a worksheet's list feed, use the
                 <code>getListFeed</code> method of the Spreadsheets service.
@@ -143,9 +148,9 @@ $listFeed = $spreadsheetService->getListFeed($query);
             </para>
 
             <para>
-              Each <classname>Zend_Gdata_Spreadsheets_ListEntry</classname> contains an
-              array, <code>custom</code>, which contains the data for that
-              row. You can extract and display this array:
+                Each <classname>Zend_Gdata_Spreadsheets_ListEntry</classname> contains an
+                array, <code>custom</code>, which contains the data for that
+                row. You can extract and display this array:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -156,9 +161,9 @@ foreach($rowData as $customEntry) {
 ]]></programlisting>
 
             <para>
-              An alternate version of this array, <code>customByName</code>,
-              allows direct access to an entry's cells by name. This is
-              convenient when trying to access a specific header:
+                An alternate version of this array, <code>customByName</code>,
+                allows direct access to an entry's cells by name. This is
+                convenient when trying to access a specific header:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -291,7 +296,6 @@ $spreadsheetService->deleteRow($listEntry);
 $listEntry->delete();
 ]]></programlisting>
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.spreadsheets.cellfeeds">
@@ -308,6 +312,7 @@ $listEntry->delete();
 
         <sect3 id="zend.gdata.spreadsheets.cellfeeds.get">
             <title>Get a Cell-based Feed</title>
+
             <para>
                 To retrieve a worksheet's cell feed, use the
                 <code>getCellFeed</code> method of the Spreadsheets service.
@@ -337,7 +342,6 @@ foreach($cellFeed as $cellEntry) {
   echo "$row, $col = $val\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.spreadsheets.cellfeeds.cellrangequery">
@@ -386,7 +390,5 @@ $updatedCell = $spreadsheetService->updateCell($row,
                 the data in a cell, even if the cell is empty.
             </para>
         </sect3>
-
     </sect2>
-
 </sect1>

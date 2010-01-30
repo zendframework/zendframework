@@ -6,7 +6,8 @@
     <para>
         The <classname>Zend_Gdata_App_Exception</classname> class is a base class
         for exceptions thrown by <classname>Zend_Gdata</classname>. You can catch any exception
-        thrown by <classname>Zend_Gdata</classname> by catching <classname>Zend_Gdata_App_Exception</classname>.
+        thrown by <classname>Zend_Gdata</classname> by catching
+        <classname>Zend_Gdata_App_Exception</classname>.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -29,6 +30,7 @@ try {
                     indicates that the user's account credentials were not valid.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <classname>Zend_Gdata_App_BadMethodCallException</classname>
@@ -37,6 +39,7 @@ try {
                     the CodeSearch service does not support <methodname>post()</methodname>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <classname>Zend_Gdata_App_HttpException</classname>
@@ -47,6 +50,7 @@ try {
                     enough details.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <classname>Zend_Gdata_App_InvalidArgumentException</classname>
@@ -56,25 +60,26 @@ try {
                     or fetching a Blogger feed without specifying
                     any blog name.
                 </para>
-              </listitem>
-              <listitem>
+            </listitem>
+
+            <listitem>
                 <para>
-                  <classname>Zend_Gdata_App_CaptchaRequiredException</classname>
-                  is thrown when a ClientLogin attempt receives a
-                  <trademark>CAPTCHA</trademark> challenge from the
-                  authentication service. This exception contains a token
-                  ID and a <acronym>URL</acronym> to a <trademark>CAPTCHA</trademark>
-                  challenge image. The image is a visual puzzle that
-                  should be displayed to the user. After
-                  collecting the user's response to the challenge
-                  image, the response can be included with the next
-                  ClientLogin attempt.The user can alternatively be
-                  directed to this website:
-                  <ulink url="https://www.google.com/accounts/DisplayUnlockCaptcha"/>
-                  Further information can be found in the
-                  <link linkend="zend.gdata.clientlogin">ClientLogin documentation</link>.
+                    <classname>Zend_Gdata_App_CaptchaRequiredException</classname>
+                    is thrown when a ClientLogin attempt receives a
+                    <trademark>CAPTCHA</trademark> challenge from the
+                    authentication service. This exception contains a token
+                    ID and a <acronym>URL</acronym> to a <trademark>CAPTCHA</trademark>
+                    challenge image. The image is a visual puzzle that
+                    should be displayed to the user. After
+                    collecting the user's response to the challenge
+                    image, the response can be included with the next
+                    ClientLogin attempt.The user can alternatively be
+                    directed to this website:
+                    <ulink url="https://www.google.com/accounts/DisplayUnlockCaptcha"/>
+                    Further information can be found in the
+                    <link linkend="zend.gdata.clientlogin">ClientLogin documentation</link>.
                 </para>
-              </listitem>
+            </listitem>
         </itemizedlist>
     </para>
 
@@ -97,5 +102,4 @@ try {
     // Google Data servers cannot be contacted.
     die($httpEx->getMessage);}
 ]]></programlisting>
-
 </sect1>

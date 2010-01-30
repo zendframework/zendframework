@@ -22,17 +22,18 @@
     <para>
         For more information on the Google Apps Provisioning <acronym>API</acronym>, including
         instructions for enabling <acronym>API</acronym> access, refer to the <ulink
-        url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html">Provisioning
-        <acronym>API</acronym> V2.0 Reference</ulink>.
+            url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html">Provisioning
+            <acronym>API</acronym> V2.0 Reference</ulink>.
     </para>
 
     <note>
         <title>Authentication</title>
+
         <para>
             The Provisioning <acronym>API</acronym> does not support authentication via AuthSub
             and anonymous access is not permitted. All <acronym>HTTP</acronym> connections must
             be authenticated using ClientAuth authentication.
-            </para>
+        </para>
     </note>
 
     <sect2 id="zend.gdata.gapps.domain">
@@ -59,7 +60,6 @@
 $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.domain.query">
@@ -89,9 +89,7 @@ $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
 $query = $gdata->newUserQuery($arg);
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.gapps.users">
@@ -139,7 +137,6 @@ $user = $gdata->insertUser($user);
                 Optionally, the password can be provided as an SHA-1 digest if
                 <code>login->passwordHashFunction</code> is set to 'SHA-1'.
             </para>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.users.retrieving">
@@ -195,7 +192,6 @@ echo 'Has Agreed To Terms: ' .
                 ServiceExceptions will be covered in <xref
                 linkend="zend.gdata.gapps.exceptions" />.
             </para>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.users.retrievingAll">
@@ -236,7 +232,6 @@ foreach ($feed as $user) {
         ' ' . $user->name->familyName . ")\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.users.updating">
@@ -275,7 +270,6 @@ $user = $user->save();
                     manner as stored passwords are not made available via the
                     Provisioning <acronym>API</acronym> for security reasons.
                 </para>
-
             </sect4>
 
             <sect4 id="zend.gdata.gapps.users.updating.forcingPasswordChange">
@@ -299,7 +293,6 @@ $user = $user->save();
                     <code>login->changePasswordAtNextLogin</code> property to
                     <constant>FALSE</constant>.
                 </para>
-
             </sect4>
 
             <sect4 id="zend.gdata.gapps.users.updating.suspendingAccount">
@@ -310,8 +303,8 @@ $user = $user->save();
                     their user account by instead
                     <emphasis>suspending</emphasis> their user account.
                     Accounts can be suspended or restored by using the
-                    <methodname>suspendUser()</methodname> and <methodname>restoreUser()</methodname>
-                    convenience methods:
+                    <methodname>suspendUser()</methodname> and
+                    <methodname>restoreUser()</methodname> convenience methods:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -336,7 +329,6 @@ $user = $user->save();
                     <code>login->suspended</code> property to
                     <constant>FALSE</constant>.
                 </para>
-
             </sect4>
 
             <sect4 id="zend.gdata.gapps.users.updating.grantingAdminRights">
@@ -359,9 +351,7 @@ $user = $user->save();
                     property to <constant>FALSE</constant> revokes their
                     administrative rights.
                 </para>
-
             </sect4>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.users.deleting">
@@ -386,9 +376,7 @@ $user->delete();
             <programlisting language="php"><![CDATA[
 $gdata->deleteUser('foo');
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.gapps.nicknames">
@@ -431,7 +419,6 @@ $nickname->login = $gdata->newLogin('foo');
 $nickname->nickname = $gdata->newNickname('bar');
 $nickname = $gdata->insertNickname($nickname);
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.nicknames.retrieving">
@@ -473,7 +460,6 @@ echo 'Owner: ' . $nickname->login->username . "\n";
                 will be discussed in <xref linkend="zend.gdata.gapps.exceptions"
                 />.
             </para>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.nicknames.retrievingUser">
@@ -513,11 +499,11 @@ foreach ($feed as $nickname) {
     echo '  * ' . $nickname->nickname->name . "\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.nicknames.retrievingAll">
             <title>Retrieving all nicknames in a domain</title>
+
             <para>
                 To retrieve all nicknames in a feed, simply call the
                 convenience method <methodname>retrieveAllNicknames()</methodname>
@@ -550,7 +536,6 @@ foreach ($feed as $nickname) {
         $nickname->login->username . "\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.nicknames.deleting">
@@ -575,9 +560,7 @@ $nickname->delete();
             <programlisting language="php"><![CDATA[
 $gdata->deleteNickname('bar');
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.gapps.emailLists">
@@ -619,12 +602,10 @@ $list = $gdata->newEmailListEntry();
 $list->emailList = $gdata->newEmailList('friends');
 $list = $gdata->insertEmailList($list);
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.emailList.retrieve">
-            <title>Retrieving all email lists to which a recipient is
-            subscribed</title>
+            <title>Retrieving all email lists to which a recipient is subscribed</title>
 
             <para>
                 To retrieve all email lists to which a particular recipient is
@@ -641,8 +622,8 @@ foreach ($feed as $list) {
 ]]></programlisting>
 
             <para>
-                This will create a <classname>Zend_Gdata_Gapps_EmailListFeed</classname> object which
-                holds each email list associated with the specified recipient.
+                This will create a <classname>Zend_Gdata_Gapps_EmailListFeed</classname> object
+                which holds each email list associated with the specified recipient.
             </para>
 
             <para>
@@ -661,7 +642,6 @@ foreach ($feed as $list) {
     echo '  * ' . $list->emailList->name . "\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.emailLists.retrievingAll">
@@ -681,8 +661,8 @@ foreach ($feed as $list) {
 ]]></programlisting>
 
             <para>
-                This will create a <classname>Zend_Gdata_Gapps_EmailListFeed</classname> object which
-                holds each email list on the domain.
+                This will create a <classname>Zend_Gdata_Gapps_EmailListFeed</classname> object
+                which holds each email list on the domain.
             </para>
 
             <para>
@@ -697,7 +677,6 @@ foreach ($feed as $list) {
     echo '  * ' . $list->emailList->name . "\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.emailList.deleting">
@@ -711,9 +690,7 @@ foreach ($feed as $list) {
             <programlisting language="php"><![CDATA[
 $gdata->deleteEmailList('friends');
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.gapps.emailListRecipients">
@@ -737,7 +714,6 @@ $gdata->deleteEmailList('friends');
             <programlisting language="php"><![CDATA[
 $gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.emailListRecipients.retrieving">
@@ -777,7 +753,6 @@ foreach ($feed as $recipient) {
                 This will create a <classname>Zend_Gdata_Gapps_EmailListRecipientFeed</classname>
                 object which holds each recipient for the selected email list.
             </para>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.emailListRecipients.removing">
@@ -792,9 +767,7 @@ foreach ($feed as $recipient) {
             <programlisting language="php"><![CDATA[
 $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.gapps.exceptions">
@@ -802,7 +775,8 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
 
         <para>
             In addition to the standard suite of exceptions thrown by
-            <classname>Zend_Gdata</classname>, requests using the Provisioning <acronym>API</acronym> may also throw a
+            <classname>Zend_Gdata</classname>, requests using the Provisioning
+            <acronym>API</acronym> may also throw a
             <classname>Zend_Gdata_Gapps_ServiceException</classname>. These exceptions
             indicate that a <acronym>API</acronym> specific error occurred which prevents the
             request from completing.
@@ -815,7 +789,7 @@ $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
             list of known error codes is provided in the Zend Framework <acronym>API</acronym>
             documentation under <classname>Zend_Gdata_Gapps_Error</classname>. Additionally, the
             authoritative error list is available online at <ulink
-            url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html#appendix_d">Google
+                url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html#appendix_d">Google
             Apps Provisioning <acronym>API</acronym> V2.0 Reference: Appendix D</ulink>.
         </para>
 
@@ -848,7 +822,5 @@ function retrieveUser ($username) {
     return $user;
 }
 ]]></programlisting>
-
     </sect2>
-
 </sect1>

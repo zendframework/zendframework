@@ -5,11 +5,13 @@
 
     <sect2 id="zend.http.client.redirections">
         <title>HTTP Redirections</title>
+
         <para>
-            By default, <classname>Zend_Http_Client</classname> automatically handles <acronym>HTTP</acronym> redirections,
-            and will follow up to 5 redirections. This can be changed by setting
-            the 'maxredirects' configuration parameter.
+            By default, <classname>Zend_Http_Client</classname> automatically handles
+            <acronym>HTTP</acronym> redirections, and will follow up to 5 redirections. This can be
+            changed by setting the 'maxredirects' configuration parameter.
         </para>
+
         <para>
             According to the HTTP/1.1 RFC, HTTP 301 and 302 responses should be
             treated by the client by resending the same request to the
@@ -22,6 +24,7 @@
             parameter to boolean <constant>TRUE</constant>:
             <example id="zend.http.client.redirections.example-1">
                 <title>Forcing RFC 2616 Strict Redirections on 301 and 302 Responses</title>
+
                 <programlisting language="php"><![CDATA[
 // Strict Redirections
 $client->setConfig(array('strictredirects' => true));
@@ -31,6 +34,7 @@ $client->setConfig(array('strictredirects' => false));
 ]]></programlisting>
             </example>
         </para>
+
         <para>
             You can always get the number of redirections done after sending a
             request using the getRedirectionsCount() method.
@@ -39,13 +43,16 @@ $client->setConfig(array('strictredirects' => false));
 
     <sect2 id="zend.http.client.cookies">
         <title>Adding Cookies and Using Cookie Persistence</title>
+
         <para>
             Zend_Http_Client provides an easy interface for adding cookies
             to your request, so that no direct header modification is
             required. This is done using the setCookie() method. This method
             can be used in several ways:
+
             <example id="zend.http.client.cookies.example-1">
                 <title>Setting Cookies Using setCookie()</title>
+
                 <programlisting language="php"><![CDATA[
 // Easy and simple: by providing a cookie name and cookie value
 $client->setCookie('flavor', 'chocolate chips');
@@ -59,9 +66,11 @@ $cookie = Zend_Http_Cookie::fromString('flavor=chocolate%20chips');
 $client->setCookie($cookie);
 ]]></programlisting>
             </example>
+
             For more information about Zend_Http_Cookie objects, see
             <xref linkend="zend.http.cookies" />.
         </para>
+
         <para>
             Zend_Http_Client also provides the means for cookie stickiness -
             that is having the client internally store all sent and received
@@ -69,8 +78,10 @@ $client->setCookie($cookie);
             is useful, for example when you need to log in to a remote site
             first and receive and authentication or session ID cookie before
             sending further requests.
+
             <example id="zend.http.client.cookies.example-2">
                 <title>Enabling Cookie Stickiness</title>
+
                 <programlisting language="php"><![CDATA[
 // To turn cookie stickiness on, set a Cookie Jar
 $client->setCookieJar();
@@ -90,6 +101,7 @@ $client->setUri('http://example.com/read_member_news.php');
 $client->request('GET');
 ]]></programlisting>
             </example>
+
             For more information about the Zend_Http_CookieJar class, see
             <xref linkend="zend.http.cookies.cookiejar" />.
         </para>
@@ -97,12 +109,15 @@ $client->request('GET');
 
     <sect2 id="zend.http.client.custom_headers">
         <title>Setting Custom Request Headers</title>
+
         <para>
             Setting custom headers can be done by using the setHeaders() method.
             This method is quite diverse and can be used in several ways, as
             the following example shows:
+
             <example id="zend.http.client.custom_headers.example-1">
                 <title>Setting A Single Custom Request Header</title>
+
                 <programlisting language="php"><![CDATA[
 // Setting a single header, overwriting any previous value
 $client->setHeaders('Host', 'www.example.com');
@@ -119,11 +134,14 @@ $client->setHeaders('Cookie', array(
 ]]></programlisting>
             </example>
         </para>
+
         <para>
             setHeader() can also be easily used to set multiple headers in one
             call, by providing an array of headers as a single parameter:
+
             <example id="zend.http.client.custom_headers.example-2">
                 <title>Setting Multiple Custom Request Headers</title>
+
                 <programlisting language="php"><![CDATA[
 // Setting multiple headers, overwriting any previous value
 $client->setHeaders(array(
@@ -175,6 +193,7 @@ $client->setFileUpload('/tmp/Backup.tar.gz', 'bufile');
 $client->request('POST');
 ]]></programlisting>
             </example>
+
             In the first example, the $text variable is uploaded and will be
             available as $_FILES['upload'] on the server side. In the second
             example, the existing file /tmp/Backup.tar.gz is uploaded to the
@@ -182,8 +201,10 @@ $client->request('POST');
             will be guesses automatically if possible - and if not, the content
             type will be set to 'application/octet-stream'.
         </para>
+
         <note>
             <title>Uploading files</title>
+
             <para>
                 When uploading files, the <acronym>HTTP</acronym> request content-type is
                 automatically set to multipart/form-data. Keep in mind that
@@ -193,8 +214,10 @@ $client->request('POST');
             </para>
         </note>
     </sect2>
+
     <sect2 id="zend.http.client.raw_post_data">
         <title>Sending Raw POST Data</title>
+
         <para>
             You can use a Zend_Http_Client to send raw POST data using the
             setRawData() method. This method takes two parameters: the first
@@ -202,8 +225,10 @@ $client->request('POST');
             parameter is the content-type of the data. While this parameter is
             optional, you should usually set it before sending the request -
             either using setRawData(), or with another method: setEncType().
+
             <example id="zend.http.client.raw_post_data.example-1">
                 <title>Sending Raw POST Data</title>
+
                 <programlisting language="php"><![CDATA[
 $xml = '<book>' .
        '  <title>Islands in the Stream</title>' .
@@ -217,11 +242,14 @@ $client->setRawData($xml, 'text/xml')->request('POST');
 $client->setRawData($xml)->setEncType('text/xml')->request('POST');
 ]]></programlisting>
             </example>
+
             The data should be available on the server side through PHP's
             $HTTP_RAW_POST_DATA variable or through the php://input stream.
         </para>
+
         <note>
             <title>Using raw POST data</title>
+
             <para>
                 Setting raw POST data for a request will override any POST
                 parameters or file uploads. You should not try to use both on
@@ -233,6 +261,7 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
 
     <sect2 id="zend.http.client.http_authentication">
         <title>HTTP Authentication</title>
+
         <para>
             Currently, Zend_Http_Client only supports basic HTTP authentication.
             This feature is utilized using the <methodname>setAuth()</methodname>
@@ -242,8 +271,10 @@ $client->setRawData($xml)->setEncType('text/xml')->request('POST');
             authentication type parameter. As mentioned, currently only basic
             authentication is supported (digest authentication support is
             planned).
+
             <example id="zend.http.client.http_authentication.example-1">
                 <title>Setting HTTP Authentication User and Password</title>
+
                 <programlisting language="php"><![CDATA[
 // Using basic authentication
 $client->setAuth('shahar', 'myPassword!', Zend_Http_Client::AUTH_BASIC);
@@ -260,6 +291,7 @@ $client->setUri('http://christer:secret@example.com');
 
     <sect2 id="zend.http.client.multiple_requests">
         <title>Sending Multiple Requests With the Same Client</title>
+
         <para>
             <classname>Zend_Http_Client</classname> was also designed specifically to handle several
             consecutive requests with the same object. This is useful in cases
@@ -267,6 +299,7 @@ $client->setUri('http://christer:secret@example.com');
             when accessing a specific <acronym>HTTP</acronym> resource requires logging in and
             obtaining a session cookie, for example.
         </para>
+
         <para>
             When performing several requests to the same host, it is highly
             recommended to enable the 'keepalive' configuration flag. This way,
@@ -275,6 +308,7 @@ $client->setUri('http://christer:secret@example.com');
             object is destroyed. This prevents the overhead of opening and
             closing <acronym>TCP</acronym> connections to the server.
         </para>
+
         <para>
             When you perform several requests with the same client, but want
             to make sure all the request-specific parameters are cleared, you
@@ -282,8 +316,10 @@ $client->setUri('http://christer:secret@example.com');
             POST parameters, request body and request-specific headers are
             reset and are not reused in the next request.
         </para>
+
         <note>
             <title>Resetting parameters</title>
+
             <para>
                 Note that non-request specific headers are not reset by default
                 when the <methodname>resetParameters()</methodname> method is used.
@@ -291,11 +327,13 @@ $client->setUri('http://christer:secret@example.com');
                 allows you to set-and-forget headers like 'Accept-language' and
                 'Accept-encoding'
             </para>
+
             <para>
-            To clean all headers and other data except for URI and method, use
-            <methodname>resetParameters(true)</methodname>.
+                To clean all headers and other data except for URI and method, use
+                <methodname>resetParameters(true)</methodname>.
             </para>
         </note>
+
         <para>
             Another feature designed specifically for consecutive requests is
             the Cookie Jar object. Cookie Jars allow you to automatically save
@@ -304,6 +342,7 @@ $client->setUri('http://christer:secret@example.com');
             through an authentication request before sending the actual data
             fetching request.
         </para>
+
         <para>
             If your application requires one authentication request per user,
             and consecutive requests might be performed in more than one script
@@ -311,8 +350,10 @@ $client->setUri('http://christer:secret@example.com');
             object in the user's session. This way, you will only need to
             authenticate the user once every session.
         </para>
+
         <example id="zend.http.client.multiple_requests.example-1">
             <title>Performing consecutive requests with one client</title>
+
             <programlisting language="php"><![CDATA[
 // First, instantiate the client
 $client = new Zend_Http_Client('http://www.example.com/fetchdata.php', array(
@@ -348,28 +389,35 @@ $_SESSION['cookiejar'] = $client->getCookieJar();
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.http.client.streaming">
         <title>Data Streaming</title>
+
         <para>
-            By default, <classname>Zend_Http_Client</classname> accepts and returns data as PHP strings.
-            However, in many cases there are big files to be sent or received, thus keeping them
-            in memory might be unnecessary or too expensive. For these cases, <classname>Zend_Http_Client</classname>
-            supports reading data from files (and in general, PHP streams) and writing data to files (streams).
+            By default, <classname>Zend_Http_Client</classname> accepts and returns data as PHP
+            strings. However, in many cases there are big files to be sent or received, thus keeping
+            them in memory might be unnecessary or too expensive. For these cases,
+            <classname>Zend_Http_Client</classname> supports reading data from files (and in
+            general, PHP streams) and writing data to files (streams).
         </para>
+
         <para>
             In order to use stream to pass data to <classname>Zend_Http_Client</classname>,
-            use <methodname>setRawData()</methodname> method with data argument being stream resource
-            (e.g., result of <methodname>fopen()</methodname>).
+            use <methodname>setRawData()</methodname> method with data argument being stream
+            resource (e.g., result of <methodname>fopen()</methodname>).
+
             <example id="zend.http.client.streaming.example-1">
                 <title>Sending file to HTTP server with streaming</title>
+
                 <programlisting language="php"><![CDATA[
 $fp = fopen("mybigfile.zip", "r");
 $client->setRawData($fp, 'application/zip')->request('PUT');
 ]]></programlisting>
             </example>
         </para>
+
         <para>
-        Only PUT requests currently support sending streams to HTTP server.
+            Only PUT requests currently support sending streams to HTTP server.
         </para>
 
         <para>
@@ -381,17 +429,20 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
         </para>
 
         <para>
-        When using streaming, <methodname>request()</methodname> method will return object of class
-        <classname>Zend_Http_Client_Response_Stream</classname>, which has two useful methods:
-        <methodname>getStreamName()</methodname> will return the name of the file where the response is stored,
-        and <methodname>getStream()</methodname> will return stream from which the response could be read.
+            When using streaming, <methodname>request()</methodname> method will return object of
+            class <classname>Zend_Http_Client_Response_Stream</classname>, which has two useful
+            methods: <methodname>getStreamName()</methodname> will return the name of the file where
+            the response is stored, and <methodname>getStream()</methodname> will return stream from
+            which the response could be read.
         </para>
 
         <para>
-        You can either write the response to pre-defined file, or use temporary file for storing it and
-        send it out or write it to another file using regular stream functions.
-        <example id="zend.http.client.streaming.example-2">
+            You can either write the response to pre-defined file, or use temporary file for storing
+            it and send it out or write it to another file using regular stream functions.
+
+            <example id="zend.http.client.streaming.example-2">
                 <title>Receiving file from HTTP server with streaming</title>
+
                 <programlisting language="php"><![CDATA[
 $client->setStreaming(); // will use temp file
 $response = $client->request('GET');
@@ -405,6 +456,5 @@ $client->setStreaming("my/downloads/myfile)->request('GET');
 ]]></programlisting>
             </example>
         </para>
-
     </sect2>
 </sect1>

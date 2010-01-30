@@ -2,16 +2,16 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.introduction">
     <title>Introduction</title>
+
     <para>
         Google Data <acronym>API</acronym>s provide programmatic interface to some of Google's
-        online services. The Google data Protocol is based upon the
-        <ulink url="http://ietfreport.isoc.org/idref/draft-ietf-atompub-protocol/">Atom Publishing Protocol</ulink>
-        and allows client applications to retrieve data matching queries,
+        online services. The Google data Protocol is based upon the <ulink
+            url="http://ietfreport.isoc.org/idref/draft-ietf-atompub-protocol/">Atom Publishing
+            Protocol</ulink> and allows client applications to retrieve data matching queries,
         post data, update data and delete data using standard <acronym>HTTP</acronym> and the
-        Atom syndication formation.
-
-        The <classname>Zend_Gdata</classname> component is a <acronym>PHP</acronym> 5 interface for accessing Google Data
-        from <acronym>PHP</acronym>. The <classname>Zend_Gdata</classname> component also supports accessing other services
+        Atom syndication formation. The <classname>Zend_Gdata</classname> component is a
+        <acronym>PHP</acronym> 5 interface for accessing Google Data from <acronym>PHP</acronym>.
+        The <classname>Zend_Gdata</classname> component also supports accessing other services
         implementing the Atom Publishing Protocol.
     </para>
 
@@ -32,6 +32,7 @@
                     is a popular online calendar application.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link linkend="zend.gdata.spreadsheets">Google Spreadsheets</link>
@@ -39,6 +40,7 @@
                     can be used as a simple data store for your applications.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link linkend="zend.gdata.docs">Google Documents List</link>
@@ -46,6 +48,7 @@
                     and presentations stored in a Google account.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link linkend="zend.gdata.gapps">Google Provisioning</link>
@@ -54,6 +57,7 @@
                     Google Apps hosted domain.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link linkend="zend.gdata.gbase">Google Base</link>
@@ -61,6 +65,7 @@
                     delete items in Google Base.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link linkend="zend.gdata.youtube">YouTube</link>
@@ -69,25 +74,30 @@
                     and more.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link linkend="zend.gdata.photos">Picasa Web Albums</link>
                     provides an online photo sharing application.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <ulink url="http://code.google.com/apis/blogger/developers_guide_php.html">Google Blogger</ulink>
-                    is a popular Internet provider of
+                    <ulink
+                        url="http://code.google.com/apis/blogger/developers_guide_php.html">Google
+                        Blogger</ulink> is a popular Internet provider of
                     "push-button publishing" and syndication.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Google CodeSearch
                     allows you to search public source code from many projects.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Google Notebook
@@ -99,6 +109,7 @@
 
     <note>
         <title>Unsupported services</title>
+
         <para>
             <classname>Zend_Gdata</classname> does not provide an interface to any other Google
             service, such as Search, Gmail, Translation, or Maps.
@@ -108,8 +119,10 @@
 
     <sect2 id="zend.gdata.introduction.structure">
         <title>Structure of Zend_Gdata</title>
+
         <para>
             <classname>Zend_Gata</classname> is composed of several types of classes:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -121,6 +134,7 @@
                         entries, update entries and delete entries.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         Query classes - inheriting from <classname>Zend_Gdata_Query</classname>.
@@ -139,6 +153,7 @@
                         method.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         Feed classes - inheriting from <classname>Zend_Gdata_App_Feed</classname>.
@@ -151,11 +166,13 @@
                         data returned from services.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         Entry classes - inheriting from <classname>Zend_Gdata_App_Entry</classname>.
                         These also include other classes such as
-                        <classname>Zend_Gdata_Entry</classname>, and <classname>Zend_Gdata_Spreadsheets_ListEntry</classname>.
+                        <classname>Zend_Gdata_Entry</classname>, and
+                        <classname>Zend_Gdata_Spreadsheets_ListEntry</classname>.
                         These classes represent entries retrieved from
                         services or used for constructing data to send to
                         services. In addition to being able to set the
@@ -168,12 +185,14 @@
                         to delete an entry from the server.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         Other Data model classes - inheriting from
                         <classname>Zend_Gdata_App_Extension</classname>. These include classes such
                         as <classname>Zend_Gdata_App_Extension_Title</classname> (representing the
-                        atom:title <acronym>XML</acronym> element), <classname>Zend_Gdata_Extension_When</classname>
+                        atom:title <acronym>XML</acronym> element),
+                        <classname>Zend_Gdata_Extension_When</classname>
                         (representing the gd:when <acronym>XML</acronym> element used by the
                         GData Event "Kind"), and
                         <classname>Zend_Gdata_Extension_Cell</classname> (representing the gs:cell
@@ -200,19 +219,20 @@
 
     <sect2 id="zend.gdata.introduction.services">
         <title>Interacting with Google Services</title>
+
         <para>
             Google data services are based upon the Atom Publishing Protocol
             (APP) and the Atom syndication format. To interact with APP or
             Google services using the <classname>Zend_Gdata</classname> component, you need to use
-            the service classes such as <classname>Zend_Gdata_App</classname>, <classname>Zend_Gdata</classname>,
-            <classname>Zend_Gdata_Spreadsheets</classname>, etc. These service classes provide
-            methods to retrieve data from services as feeds, insert new
-            entries into feeds, update entries, and delete entries.
+            the service classes such as <classname>Zend_Gdata_App</classname>,
+            <classname>Zend_Gdata</classname>, <classname>Zend_Gdata_Spreadsheets</classname>, etc.
+            These service classes provide methods to retrieve data from services as feeds, insert
+            new entries into feeds, update entries, and delete entries.
         </para>
 
         <para>
-            Note: A full example of working with <classname>Zend_Gdata</classname> is available in the
-            <code>demos/Zend/Gdata</code> directory. This example is runnable
+            Note: A full example of working with <classname>Zend_Gdata</classname> is available in
+            the <code>demos/Zend/Gdata</code> directory. This example is runnable
             from the command-line, but the methods contained within are easily
             portable to a web application.
         </para>
@@ -220,6 +240,7 @@
 
     <sect2 id="zend.gdata.introduction.magicfactory">
         <title>Obtaining instances of Zend_Gdata classes</title>
+
         <para>
             The Zend Framework naming standards require that all classes be
             named based upon the directory structure in which they are located.
@@ -230,12 +251,13 @@
             This causes a lot of typing if you're trying to construct a new
             instance of a spreadsheet cell element!
         </para>
+
         <para>
             We've implemented a magic factory method in all service classes
-            (such as <classname>Zend_Gdata_App</classname>, <classname>Zend_Gdata</classname>, <classname>Zend_Gdata_Spreadsheets</classname>) that
-            should make constructing new instances of data model, query and
-            other classes much easier. This magic factory is implemented by
-            using the magic <code>__call</code> method to intercept all attempts
+            (such as <classname>Zend_Gdata_App</classname>, <classname>Zend_Gdata</classname>,
+            <classname>Zend_Gdata_Spreadsheets</classname>) that should make constructing new
+            instances of data model, query and other classes much easier. This magic factory is
+            implemented by using the magic <code>__call</code> method to intercept all attempts
             to call <code>$service->newXXX(arg1, arg2, ...)</code>. Based off
             the value of XXX, a search is performed in all registered 'packages'
             for the desired class. Here's some examples:
@@ -266,6 +288,7 @@ $entry->cell = $cell;
 
     <sect2 id="zend.gdata.introduction.authentication">
         <title>Google Data Client Authentication</title>
+
         <para>
             Most Google Data services require client applications to
             authenticate against the Google server before accessing
@@ -280,34 +303,34 @@ $entry->cell = $cell;
             Most other types of queries against Google Data services do not
             require authentication.
         </para>
-
     </sect2>
 
     <sect2 id="zend.gdata.introduction.dependencies">
         <title>Dependencies</title>
+
         <para>
             <classname>Zend_Gdata</classname> makes use of
             <link linkend="zend.http.client">Zend_Http_Client</link> to send
             requests to google.com and fetch results. The response to most
             Google Data requests is returned as a subclass of the
-            <classname>Zend_Gdata_App_Feed</classname> or <classname>Zend_Gdata_App_Entry</classname> classes.
+            <classname>Zend_Gdata_App_Feed</classname> or
+            <classname>Zend_Gdata_App_Entry</classname> classes.
         </para>
 
         <para>
-            <classname>Zend_Gdata</classname> assumes your <acronym>PHP</acronym> application is running on a host that
-            has a direct connection to the Internet.
+            <classname>Zend_Gdata</classname> assumes your <acronym>PHP</acronym> application is
+            running on a host that has a direct connection to the Internet.
             The <classname>Zend_Gdata</classname> client operates by contacting Google Data servers.
         </para>
-
     </sect2>
 
     <sect2 id="zend.gdata.introduction.creation">
         <title>Creating a new Gdata client</title>
 
         <para>
-            Create a new object of class <classname>Zend_Gdata_App</classname>, <classname>Zend_Gdata</classname>, or one
-            of the subclasses available that offer helper methods for
-            service-specific behavior.
+            Create a new object of class <classname>Zend_Gdata_App</classname>,
+            <classname>Zend_Gdata</classname>, or one of the subclasses available that offer helper
+            methods for service-specific behavior.
         </para>
 
         <para>
@@ -351,7 +374,6 @@ $gdata->setMinorProtocolVersion(null);
             Also see the sections on authentication for methods to
             create an authenticated <classname>Zend_Http_Client</classname> object.
         </para>
-
     </sect2>
 
     <sect2 id="zend.gdata.introduction.parameters">
@@ -359,10 +381,10 @@ $gdata->setMinorProtocolVersion(null);
 
         <para>
             You can specify parameters to customize queries with <classname>Zend_Gdata</classname>.
-            Query parameters are specified using subclasses of <classname>Zend_Gdata_Query</classname>.
-            The <classname>Zend_Gdata_Query</classname> class includes methods to set all query
-            parameters used throughout GData services. Individual services,
-            such as Spreadsheets, also provide query classes to defined
+            Query parameters are specified using subclasses of
+            <classname>Zend_Gdata_Query</classname>. The <classname>Zend_Gdata_Query</classname>
+            class includes methods to set all query parameters used throughout GData services.
+            Individual services, such as Spreadsheets, also provide query classes to defined
             parameters which are custom to the particular service and feeds.
             Spreadsheets includes a CellQuery class to query the Cell Feed
             and a ListQuery class to query the List Feed, as different
@@ -377,6 +399,7 @@ $gdata->setMinorProtocolVersion(null);
                     The <code>q</code> parameter specifies a full-text
                     query. The value of the parameter is a string.
                 </para>
+
                 <para>
                     Set this parameter with the <methodname>setQuery()</methodname>
                     function.
@@ -399,6 +422,7 @@ $gdata->setMinorProtocolVersion(null);
                     feeds in other formats, using query <acronym>URL</acronym>s generated by the
                     <classname>Zend_Gdata_Query</classname> class and its subclasses.
                 </para>
+
                 <para>
                     Set this parameter with the <methodname>setAlt()</methodname>
                     function.
@@ -412,9 +436,9 @@ $gdata->setMinorProtocolVersion(null);
                     an integer. The number of entries returned in the feed
                     will not exceed this value.
                 </para>
+
                 <para>
-                    Set this parameter with the <methodname>setMaxResults()</methodname>
-                    function.
+                    Set this parameter with the <methodname>setMaxResults()</methodname> function.
                 </para>
             </listitem>
 
@@ -424,6 +448,7 @@ $gdata->setMinorProtocolVersion(null);
                     ordinal number of the first entry returned in the feed.
                     Entries before this number are skipped.
                 </para>
+
                 <para>
                     Set this parameter with the <methodname>setStartIndex()</methodname>
                     function.
@@ -440,22 +465,22 @@ $gdata->setMinorProtocolVersion(null);
                     no entries updated after the date specified by
                     <code>updatedMax</code> are included.
                 </para>
+
                 <para>
                     You can use numeric timestamps, or a variety of
                     date/time string representations as the value for
                     these parameters.
                 </para>
+
                 <para>
                     Set this parameter with the <methodname>setUpdatedMin()</methodname>
                     and <methodname>setUpdatedMax()</methodname> functions.
                 </para>
             </listitem>
-
         </itemizedlist>
 
         <para>
-            There is a <code>get</code> function for each
-            <code>set</code> function.
+            There is a <code>get</code> function for each <code>set</code> function.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -490,7 +515,6 @@ $query->maxResults = 10;
 $query->resetParameters();      // clears all parameters
 // ...get a different feed...
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.gdata.introduction.getfeed">
@@ -518,7 +542,6 @@ $feed = $gdata->getFeed($query);
             functions help you to get feeds from the <acronym>URI</acronym> that is
             appropriate for the respective service.
         </para>
-
     </sect2>
 
     <sect2 id="zend.gdata.introduction.paging">
@@ -564,7 +587,6 @@ $feed = $gdata->retrieveAllEntriesForFeed($gdata->getFeed($query));
             time to complete on large feeds. You may need to increase <acronym>PHP</acronym>'s
             execution time limit by calling <methodname>set_time_limit()</methodname>.
         </para>
-
     </sect2>
 
     <sect2 id="zend.gdata.introduction.usefeedentry">
@@ -663,18 +685,18 @@ echo 'The <id> of the resulting entry is: ' . $entryResult->id->text;
 
         <para>
             To post entries, you must be using an authenticated
-            <classname>Zend_Http_Client</classname> that you created using the <classname>Zend_Gdata_AuthSub</classname>
-            or <classname>Zend_Gdata_ClientLogin</classname> classes.
+            <classname>Zend_Http_Client</classname> that you created using the
+            <classname>Zend_Gdata_AuthSub</classname> or
+            <classname>Zend_Gdata_ClientLogin</classname> classes.
         </para>
-
     </sect2>
 
     <sect2 id="zend.gdata.introduction.delete">
         <title>Deleting Entries on Google Servers</title>
 
         <para>
-            Option 1: The <classname>Zend_Gdata</classname> object has a function <methodname>delete()</methodname>
-            with which you can delete entries from Google Data
+            Option 1: The <classname>Zend_Gdata</classname> object has a function
+            <methodname>delete()</methodname> with which you can delete entries from Google Data
             services. Pass the edit <acronym>URL</acronym> value from
             a feed entry to the <methodname>delete()</methodname> method.
         </para>
@@ -700,10 +722,9 @@ foreach ($feed as $feedEntry) {
 
         <para>
             To delete entries, you must be using an authenticated
-            <classname>Zend_Http_Client</classname> that you created using the <classname>Zend_Gdata_AuthSub</classname>
-            or <classname>Zend_Gdata_ClientLogin</classname> classes.
+            <classname>Zend_Http_Client</classname> that you created using the
+            <classname>Zend_Gdata_AuthSub</classname> or
+            <classname>Zend_Gdata_ClientLogin</classname> classes.
         </para>
-
     </sect2>
-
 </sect1>

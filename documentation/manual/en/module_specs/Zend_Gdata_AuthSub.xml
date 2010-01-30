@@ -10,7 +10,8 @@
     </para>
 
     <para>
-        See <ulink url="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</ulink>
+        See <ulink
+            url="http://code.google.com/apis/accounts/AuthForWebApps.html">http://code.google.com/apis/accounts/AuthForWebApps.html</ulink>
         for more information about Google Data AuthSub authentication.
     </para>
 
@@ -32,9 +33,10 @@
 
     <note>
         <title>Registered applications</title>
+
         <para>
-            <classname>Zend_Gdata</classname> currently does not support use of secure tokens, because
-            the AuthSub authentication does not support passing a digital certificate
+            <classname>Zend_Gdata</classname> currently does not support use of secure tokens,
+            because the AuthSub authentication does not support passing a digital certificate
             to acquire a secure token.
         </para>
     </note>
@@ -47,8 +49,8 @@
             Google <acronym>URL</acronym> that performs authentication. The static function
             <methodname>Zend_Gdata_AuthSub::getAuthSubTokenUri()</methodname>
             provides the correct <acronym>URL</acronym>. The arguments to this function include
-            the <acronym>URL</acronym> to your <acronym>PHP</acronym> application so that Google can redirect the
-            user's browser back to your application after the user's
+            the <acronym>URL</acronym> to your <acronym>PHP</acronym> application so that Google can
+            redirect the user's browser back to your application after the user's
             credentials have been verified.
         </para>
 
@@ -104,7 +106,6 @@ $client = Zend_Gdata_AuthSub::getHttpClient($_SESSION['cal_token']);
 // Create a Gdata object using the authenticated Http Client
 $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.gdata.authsub.logout">
@@ -132,23 +133,23 @@ if (isset($_GET['logout'])) {
 }
 ]]></programlisting>
 
-    <note>
-        <title>Security notes</title>
-        <para>
-            The treatment of the <varname>$php_self</varname> variable in the
-            example above is a general security guideline, it is not
-            specific to <classname>Zend_Gdata</classname>. You should always filter content you
-            output to http headers.
-        </para>
-        <para>
-            Regarding revoking authentication tokens, it is recommended to
-            do this when the user is finished with her Google Data session.
-            The possibility that someone can intercept the token and use
-            it for malicious purposes is very small, but nevertheless it is
-            a good practice to terminate authenticated access to any service.
-        </para>
-    </note>
+        <note>
+            <title>Security notes</title>
 
+            <para>
+                The treatment of the <varname>$php_self</varname> variable in the
+                example above is a general security guideline, it is not
+                specific to <classname>Zend_Gdata</classname>. You should always filter content you
+                output to http headers.
+            </para>
+
+            <para>
+                Regarding revoking authentication tokens, it is recommended to
+                do this when the user is finished with her Google Data session.
+                The possibility that someone can intercept the token and use
+                it for malicious purposes is very small, but nevertheless it is
+                a good practice to terminate authenticated access to any service.
+            </para>
+        </note>
     </sect2>
-
 </sect1>

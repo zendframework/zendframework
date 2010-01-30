@@ -66,8 +66,8 @@
 
         <para>
             Note, Information cards can only be <code>HTTP POST</code>ed to
-            <acronym>SSL</acronym>-encrypted <acronym>URL</acronym>s. Please consult your web server's documentation
-            on how to set up <acronym>SSL</acronym> encryption.
+            <acronym>SSL</acronym>-encrypted <acronym>URL</acronym>s. Please consult your web
+            server's documentation on how to set up <acronym>SSL</acronym> encryption.
         </para>
     </sect2>
 
@@ -140,8 +140,8 @@ if (isset($_POST['xmlToken'])) {
 
         <para>
             In the example above, we first create an instance of the
-            <classname>Zend_Auth_Adapter_InfoCard</classname> and pass the <acronym>XML</acronym> data posted
-            by the card selector into it. Once an instance has been created you
+            <classname>Zend_Auth_Adapter_InfoCard</classname> and pass the <acronym>XML</acronym>
+            data posted by the card selector into it. Once an instance has been created you
             must then provide at least one <acronym>SSL</acronym> certificate public/private key
             pair used by the web server that received the <code>HTTP
             POST</code>. These files are used to validate the destination
@@ -163,9 +163,9 @@ if (isset($_POST['xmlToken'])) {
         <para>
             It is also possible to use the <classname>Zend_InfoCard</classname> component as a
             standalone component by interacting with the
-            <classname>Zend_InfoCard</classname> class directly. Using the <classname>Zend_InfoCard</classname>
-            class is very similar to its use with the <classname>Zend_Auth</classname>
-            component. An example of its use is shown below:
+            <classname>Zend_InfoCard</classname> class directly. Using the
+            <classname>Zend_InfoCard</classname> class is very similar to its use with the
+            <classname>Zend_Auth</classname> component. An example of its use is shown below:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -209,8 +209,8 @@ if (isset($_POST['xmlToken'])) {
             In the example above, we use the <classname>Zend_InfoCard</classname> component
             independently to validate the token provided by the user. As was the
             case with the <classname>Zend_Auth_Adapter_InfoCard</classname>, we create an
-            instance of <classname>Zend_InfoCard</classname> and then set one or more <acronym>SSL</acronym>
-            certificate public/private key pairs used by the web server. Once
+            instance of <classname>Zend_InfoCard</classname> and then set one or more
+            <acronym>SSL</acronym> certificate public/private key pairs used by the web server. Once
             configured, we can use the <methodname>process()</methodname> method to process
             the information card and return the results.
         </para>
@@ -242,9 +242,9 @@ if (isset($_POST['xmlToken'])) {
             you will need to extract them explicitly using this method (simply
             pass it the full <acronym>URI</acronym> of the claim to retrieve its value from within
             the information card). Generally speaking however, the
-            <classname>Zend_InfoCard</classname> component will set the default <acronym>URI</acronym> for
-            claims to be the one used the most frequently within the information
-            card itself and the simplified property-access method can be used.
+            <classname>Zend_InfoCard</classname> component will set the default
+            <acronym>URI</acronym> for claims to be the one used the most frequently within the
+            information card itself and the simplified property-access method can be used.
         </para>
 
         <para>
@@ -350,11 +350,11 @@ public function submitinfocardAction()
             To prevent this, one must implement the
             <classname>Zend_InfoCard_Adapter_Interface</classname> and set an
             instance of this interface prior to calling either the
-            <methodname>process()</methodname> (standalone) or <methodname>authenticate()</methodname>
-            method as a <classname>Zend_Auth</classname> adapter. To set this interface,
-            the <methodname>setAdapter()</methodname> method should be used. In the example below,
-            we set a <classname>Zend_InfoCard</classname> adapter and use it in our
-            application:
+            <methodname>process()</methodname> (standalone) or
+            <methodname>authenticate()</methodname> method as a <classname>Zend_Auth</classname>
+            adapter. To set this interface, the <methodname>setAdapter()</methodname> method should
+            be used. In the example below, we set a <classname>Zend_InfoCard</classname> adapter and
+            use it in our application:
         </para>
 
         <programlisting language="php"><![CDATA[

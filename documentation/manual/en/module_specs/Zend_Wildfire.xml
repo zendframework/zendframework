@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.wildfire.chapter">
+    <title>Zend_Wildfire</title>
 
-  <title>Zend_Wildfire</title>
+    <para>
+        <classname>Zend_Wildfire</classname> is a component that facilitates communication
+        between <acronym>PHP</acronym> code and
+        <ulink url="http://www.wildfirehq.org/">Wildfire</ulink> client components.
+    </para>
 
-  <para>
-    <classname>Zend_Wildfire</classname> is a component that facilitates communication
-    between <acronym>PHP</acronym> code and
-    <ulink url="http://www.wildfirehq.org/">Wildfire</ulink> client components.
-  </para>
-  <para>
-    The purpose of the Wildfire Project is to develop standardized communication channels between
-    a large variety of components and a dynamic and scriptable plugin architecture. At this time,
-    the primary focus is to provide a system that allows server-side <acronym>PHP</acronym> code
-    to inject logging messages into the
-    <ulink url="http://www.getfirebug.com/">Firebug Console</ulink>.
+    <para>
+        The purpose of the Wildfire Project is to develop standardized communication channels
+        between a large variety of components and a dynamic and scriptable plugin architecture. At
+        this time, the primary focus is to provide a system that allows server-side
+        <acronym>PHP</acronym> code to inject logging messages into the
+        <ulink url="http://www.getfirebug.com/">Firebug Console</ulink>.
   </para>
   <para>
     The

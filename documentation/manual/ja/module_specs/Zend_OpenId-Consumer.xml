@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19074 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer の基本</title>
     <para>
@@ -107,7 +107,7 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
         <para>
             成功した場合は <methodname>Zend_OpenId_Consumer::login()</methodname>
             は何も返さずに <acronym>HTTP</acronym> リダイレクトを行います。
-            エラーが発生した場合は false を返します。
+            エラーが発生した場合は <constant>FALSE</constant> を返します。
             エラーが発生するのは、たとえば識別子が無効だったり
             プロバイダが死んでいたり、通信障害が発生したりした場合などです。
         </para>
@@ -631,8 +631,8 @@ if (!$consumer->login($_POST['openid_identifier'],
             見てのとおり、<classname>Zend_OpenId_Extension_Sreg</classname>
             のコンストラクタに渡すのは問い合わせたいフィールドの配列です。
             この配列のインデックスはフィールド名、値はフラグとなります。
-            <emphasis>true</emphasis> はそのフィールドが必須であること、そして
-            <emphasis>false</emphasis> はそのフィールドがオプションであることを表します。
+            <constant>TRUE</constant> はそのフィールドが必須であること、そして
+            <constant>FALSE</constant> はそのフィールドがオプションであることを表します。
             <classname>Zend_OpenId_Consumer::login</classname> の 4 番目の引数には、
             extension あるいは extension のリストを指定することができます。
         </para>
@@ -679,7 +679,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
             必要なデータの存在は自動的にチェックされます。
             この場合、必須フィールドのいずれかが存在しなければ
             <classname>Zend_OpenId_Consumer::verify</classname> は
-            <emphasis>false</emphasis> を返します。
+            <constant>FALSE</constant> を返します。
         </para>
 
         <para>

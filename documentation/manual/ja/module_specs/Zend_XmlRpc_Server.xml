@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19674 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
 
@@ -463,7 +463,7 @@ $server->setClass('Services_PricingService',
                 <classname>Zend_XmlRpc_Server</classname> allows to restrict argument passing to
                 constructors only. This can be used for constructor dependency injection.
                 To limit injection to constructors, call <methodname>sendArgumentsToAllMethods</methodname>
-                and pass <code>false</code> as an argument. This disables the default behavior of all arguments
+                and pass <constant>FALSE</constant> as an argument. This disables the default behavior of all arguments
                 being injected into the remote method. In the example below the instance of
                 <classname>ProductRepository</classname> and <classname>PurchaseRepository</classname> is only
                 injected into the constructor of <classname>Services_PricingService2</classname>.

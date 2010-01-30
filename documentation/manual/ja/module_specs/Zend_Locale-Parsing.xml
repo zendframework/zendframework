@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.locale.parsing">
 
     <title>正規化および地域化</title>
@@ -46,7 +46,7 @@
             このマニュアルにおける数値関連の説明はすべて、特にことわりがない限り
             <ulink url="http://en.wikipedia.org/wiki/Arabic_numerals">アラビア数字 (0,1,2,3,4,5,6,7,8,9)</ulink>
             を想定したものです。オプションの配列で 'locale'
-            を指定し、桁区切り文字および小数点を定義することができます。
+            を指定し、桁区切り文字および小数点を定義できます。
             また、配列に 'precision' を指定すると、
             あふれた桁を結果から取り除きます。
         </para>
@@ -177,7 +177,7 @@ print $number;
 
         <para>
             オプション 'number_format' を使用すると、
-            独自の数値書式を定義することができます。
+            独自の数値書式を定義できます。
             書式を指定するには、以下の <acronym>CLDR</acronym> 書式を使用します。
             ロケールを元に、桁区切りや小数点、その他の数値記号を取得します。
             たとえば、ドイツ語では小数点として
@@ -261,7 +261,7 @@ print $number;
 
         <para>
             <methodname>isNumber($value, array $options = array())</methodname> は、指定した文字列が数値であるかどうかを
-            true あるいは false で返します。
+            <constant>TRUE</constant> あるいは <constant>FALSE</constant> で返します。
         </para>
 
         <example id="zend.locale.number.test.example-1">
@@ -335,7 +335,7 @@ print $number;
         <para>
             <methodname>isFloat($value, array $options = array())</methodname> は、
             指定した文字列が浮動小数点値であるかどうかを
-            true あるいは false で返します。
+            <constant>TRUE</constant> あるいは <constant>FALSE</constant> で返します。
         </para>
 
         <example id="zend.locale.float.test.example-1">
@@ -405,7 +405,7 @@ print $number;
         <para>
             <methodname>isInteger($value, array $options = array())</methodname> は、
             指定した文字列が整数値であるかどうかを
-            true あるいは false で返します。
+            <constant>TRUE</constant> あるいは <constant>FALSE</constant> で返します。
         </para>
 
         <example id="zend.locale.integer.test.example-1">

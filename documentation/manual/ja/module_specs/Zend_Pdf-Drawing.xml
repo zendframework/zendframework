@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20469 -->
+<!-- EN-Revision: 20760 -->
 <sect1 id="zend.pdf.drawing">
     <title>描画</title>
 
@@ -113,7 +113,7 @@ public function drawRectangle($x1, $y1, $x2, $y2,
  * @param integer $fillType
  * @return Zend_Pdf_Page
  */
-public function drawRoundedRectangle($x1, $y1, $x2, $y2, $radius, 
+public function drawRoundedRectangle($x1, $y1, $x2, $y2, $radius,
                        $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE);
 ]]></programlisting>
         <programlisting language="php"><![CDATA[

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19452 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.http.client.advanced">
     <title>Zend_Http_Client - 高度な使用法</title>
 
@@ -21,7 +21,7 @@
             つまり、301 や 302 によるリダイレクト指示を受けると、
             GET パラメータや POST パラメータをすべてリセットした上で新しい場所に
             GET リクエストを送信します。この振る舞いを変更するには、設定パラメータ
-            'strictredirects' を TRUE に設定します。
+            'strictredirects' を <constant>TRUE</constant> に設定します。
             <example id="zend.http.client.redirections.example-1">
                 <title>301 や 302 のレスポンスに対する RFC 2616 準拠のリダイレクト</title>
                 <programlisting language="php"><![CDATA[
@@ -146,10 +146,10 @@ $client->setHeaders(array(
             ファイルを <acronym>HTTP</acronym> でアップロードするには setFileUpload メソッドを使用します。
             このメソッドの最初の引数はファイル名、二番目の引数はフォーム名、
             そしてオプションの三番目の引数がデータとなります。
-            三番目のパラメータが null の場合は、
+            三番目のパラメータが <constant>NULL</constant> の場合は、
             最初のパラメータに指定したファイル名のファイルがあるものとみなされ、
             Zend_Http_Client がそれを読み込んでアップロードしようとします。
-            三番目のパラメータが null 以外の場合は、
+            三番目のパラメータが <constant>NULL</constant> 以外の場合は、
             ファイル名は最初のパラメータを使用しますが実際の内容はディスク上に存在する必要がなくなります。
             二番目のパラメータのフォーム名は常に必須です。HTML フォームでアップロードする場合、これは
             &gt;input&lt; タグの "name" 属性と等しくなります。
@@ -366,10 +366,10 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
         </para>
 
         <para>
-        In order to receive data from the server as stream, use <methodname>setStream()</methodname>.
-        Optional argument specifies the filename where the data will be stored. If the argument is just
-        TRUE (default), temporary file will be used and will be deleted once response object is destroyed.
-        Setting argument to FALSE disables the streaming functionality.
+            In order to receive data from the server as stream, use <methodname>setStream()</methodname>.
+            Optional argument specifies the filename where the data will be stored. If the argument is just
+            <constant>TRUE</constant> (default), temporary file will be used and will be deleted once response object is destroyed.
+            Setting argument to <constant>FALSE</constant> disables the streaming functionality.
         </para>
 
         <para>

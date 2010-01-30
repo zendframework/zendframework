@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20289 -->
+<!-- EN-Revision: 20760 -->
 <sect1 id="zend.markup.renderers">
     <title>Zend_Markup レンダラー</title>
  
@@ -54,24 +54,24 @@ echo $bbcode->render('my [foo]tag[/foo]');
             Some renderers (like the HTML renderer) also have support for a
             'tag' parameter. This replaces the 'start' and 'end' parameters, and
             it renders the tags including some default attributes and the
-            closing tag. 
+            closing tag.
         </para>
-        
+
         <sect3 id="zend.markup.renderers.add.callback">
             <title>Add a callback tag</title>
-            
+
             <para>
                 By adding a callback tag, you can do a lot more then just a
                 simple replace of the tags. For instance, you can change the
                 contents, use the parameters to influence the output etc.
             </para>
-            
+
             <para>
                 A callback is a class that implements the
                 <classname>Zend_Markup_Renderer_TokenInterface</classname>
                 interface. An example of a callback class:
             </para>
-            
+
             <programlisting language="php"><![CDATA[
 class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterInterface
 {
@@ -89,7 +89,7 @@ class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterI
                 of the <classname>My_Markup_Renderer_Html_Upper</classname>
                 class. A simple example:
             </para>
-            
+
             <programlisting language="php"><![CDATA[
 // Creates instance of Zend_Markup_Renderer_Html,
 // with Zend_Markup_Parser_BbCode as its parser
@@ -116,17 +116,17 @@ echo $bbcode->render('my [upper]tag[/upper]');
     </sect2>
 
     <sect2 id="zend.markup.renderers.list">
-        <title>List of tags</title>
+        <title>タグ一覧</title>
 
         <table id="zend.markup.renderers.list.tags">
-            <title>List of tags</title>
+            <title>タグ一覧</title>
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
                 <thead>
                     <row>
-                        <entry>Sample input (bbcode)</entry>
+                        <entry>入力例 (bbcode)</entry>
 
-                        <entry>Sample output</entry>
+                        <entry>出力例</entry>
                     </row>
                 </thead>
 

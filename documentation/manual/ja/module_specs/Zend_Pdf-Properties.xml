@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20115 -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
     <title>ドキュメントの情報およびメタデータ</title>
     <para>
         <acronym>PDF</acronym> ドキュメントには、そのドキュメントに関する情報
         (たとえばタイトルや作者、作成日、更新日など)
-        を含めることができます。
+        を含められます。
     </para>
     <para>
         歴史的に、この情報は特別な Info 構造体に格納されるようになっています。
@@ -151,19 +151,19 @@ $pdf->save($pdfPath);
                     <itemizedlist>
                         <listitem>
                             <para>
-                                <emphasis>true</emphasis> - ドキュメントは完全にトラッピングされています。
+                                <emphasis><constant>TRUE</constant></emphasis> - ドキュメントは完全にトラッピングされています。
                                 これ以上のトラッピングは不要です。
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <emphasis>false</emphasis> - ドキュメントはまだトラッピングされていません。
+                                <emphasis><constant>FALSE</constant></emphasis> - ドキュメントはまだトラッピングされていません。
                                 必要なトラッピングを行わなければなりません。
                             </para>
                         </listitem>
                         <listitem>
                             <para>
-                                <emphasis>null</emphasis> -
+                                <emphasis><constant>NULL</constant></emphasis> -
                                 ドキュメントがトラッピングされているかどうかが判別不可能、
                                 あるいは一部だけトラッピングされている状態です。
                                 さらなるトラッピングが必要かもしれません。
@@ -178,7 +178,7 @@ $pdf->save($pdfPath);
     <para>
         <acronym>PDF</acronym> v 1.6 以降では、メタデータを特別な <acronym>XML</acronym> 形式
         (XMP - <ulink url="http://www.adobe.com/products/xmp/">Extensible Metadata Platform</ulink>)
-        で表して <acronym>PDF</acronym> に添付することができます。
+        で表して <acronym>PDF</acronym> に添付できます。
     </para>
 
     <para>

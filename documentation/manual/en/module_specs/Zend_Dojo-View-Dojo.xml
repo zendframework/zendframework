@@ -9,8 +9,7 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>Specifying either a CDN or a local path to a Dojo
-                install.</para></listitem>
+        <listitem><para>Specifying either a CDN or a local path to a Dojo install.</para></listitem>
         <listitem><para>Specifying paths to custom Dojo modules.</para></listitem>
         <listitem><para>Specifying dojo.require statements.</para></listitem>
         <listitem><para>Specifying dijit stylesheet themes to use.</para></listitem>
@@ -254,22 +253,28 @@ $view->dojo()->addStylesheetModule('dijit.themes.tundra');
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Groups required files into <emphasis>layers</emphasis>; a layer
-                lumps all required files into a single JS file. (Hence the name
-                of this section.)
-            </para></listitem>
+            <listitem>
+                <para>
+                    Groups required files into <emphasis>layers</emphasis>; a layer
+                    lumps all required files into a single JS file. (Hence the name
+                    of this section.)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                "Interns" non-javascript files used by dijits (typically,
-                template files). These are also grouped in the same JS file as
-                the layer.
-            </para></listitem>
+            <listitem>
+                <para>
+                    "Interns" non-javascript files used by dijits (typically,
+                    template files). These are also grouped in the same JS file as
+                    the layer.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Passes the file through ShrinkSafe, which strips whitespace and
-                comments, as well as shortens variable names.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Passes the file through ShrinkSafe, which strips whitespace and
+                    comments, as well as shortens variable names.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -305,29 +310,77 @@ $view->dojo()->addLayer('/js/foo/foo.js');
         </para>
 
         <itemizedlist>
-            <listitem><para><methodname>setView(Zend_View_Interface $view)</methodname>: set
-                    a view instance in the container.</para></listitem>
-            <listitem><para><methodname>enable()</methodname>: explicitly enable Dojo
-                    integration.</para></listitem>
-            <listitem><para><methodname>disable()</methodname>: disable Dojo
-                    integration.</para></listitem>
-            <listitem><para><methodname>isEnabled()</methodname>: determine whether or not
-                    Dojo integration is enabled.</para></listitem>
-            <listitem><para><methodname>requireModule($module)</methodname>: setup a
-                    <property>dojo.require</property> statement.</para></listitem>
-            <listitem><para><methodname>getModules()</methodname>: determine what modules
-                    have been required.</para></listitem>
-            <listitem><para><methodname>registerModulePath($module, $path)</methodname>:
-                    register a custom Dojo module path.</para></listitem>
-            <listitem><para><methodname>getModulePaths()</methodname>: get list of
-                    registered module paths.</para></listitem>
-            <listitem><para><methodname>addLayer($path)</methodname>: add a layer (custom
-                    build) path to use.</para></listitem>
-            <listitem><para><methodname>getLayers()</methodname>: get a list of all
-                    registered layer paths (custom builds).</para></listitem>
-            <listitem><para><methodname>removeLayer($path)</methodname>: remove the layer
+            <listitem>
+                <para>
+                    <methodname>setView(Zend_View_Interface $view)</methodname>: set a view instance
+                    in the container.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>enable()</methodname>: explicitly enable Dojo integration.</para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>disable()</methodname>: disable Dojo integration.</para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>isEnabled()</methodname>: determine whether or not Dojo integration
+                    is enabled.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>requireModule($module)</methodname>: setup a
+                    <property>dojo.require</property> statement.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getModules()</methodname>: determine what modules have been
+                    required.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>registerModulePath($module, $path)</methodname>:
+                    register a custom Dojo module path.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getModulePaths()</methodname>: get list of registered module paths.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>addLayer($path)</methodname>: add a layer (custom build) path to
+                    use.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getLayers()</methodname>: get a list of all registered layer paths
+                    (custom builds).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>removeLayer($path)</methodname>: remove the layer
                     that matches <varname>$path</varname> from the list of registered
-                    layers (custom builds).</para></listitem>
+                    layers (custom builds).
+                </para>
+            </listitem>
+
             <listitem>
                 <para>
                     <methodname>setCdnBase($url)</methodname>: set the base <acronym>URL</acronym>
@@ -336,75 +389,190 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     to be the <acronym>URL</acronym> string prior to the version number.
                 </para>
             </listitem>
-            <listitem><para><methodname>getCdnBase()</methodname>: retrieve the base CDN url
-                    to utilize.</para></listitem>
-            <listitem><para><methodname>setCdnVersion($version = null)</methodname>: set
-                    which version of Dojo to utilize from the CDN.</para></listitem>
-            <listitem><para><methodname>getCdnVersion()</methodname>: retrieve what
-                    version of Dojo from the CDN will be used.</para></listitem>
-            <listitem><para><methodname>setCdnDojoPath($path)</methodname>: set the relative
+
+            <listitem>
+                <para>
+                    <methodname>getCdnBase()</methodname>: retrieve the base CDN url to utilize.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setCdnVersion($version = null)</methodname>: set
+                    which version of Dojo to utilize from the CDN.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getCdnVersion()</methodname>: retrieve what
+                    version of Dojo from the CDN will be used.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setCdnDojoPath($path)</methodname>: set the relative
                     path to the dojo.js or dojo.xd.js file on a CDN; typically,
                     one of the <constant>Zend_Dojo::CDN_DOJO_PATH_AOL</constant> or
                     <constant>Zend_Dojo::CDN_DOJO_PATH_GOOGLE</constant>, but it only
-                    needs to be the path string following the version
-                    number.</para></listitem>
-            <listitem><para><methodname>getCdnDojoPath()</methodname>: retrieve the last
-                    path segment of the CDN url pointing to the dojo.js
-                    file.</para></listitem>
-            <listitem><para><methodname>useCdn()</methodname>: tell the container to
-                    utilize the CDN; implicitly enables integration.</para></listitem>
-            <listitem><para><methodname>setLocalPath($path)</methodname>: tell the container
+                    needs to be the path string following the version number.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getCdnDojoPath()</methodname>: retrieve the last
+                    path segment of the CDN url pointing to the dojo.js file.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>useCdn()</methodname>: tell the container to
+                    utilize the CDN; implicitly enables integration.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setLocalPath($path)</methodname>: tell the container
                     the path to a local Dojo install (should be a path relative
                     to the server, and contain the dojo.js file itself);
-                    implicitly enables integration.</para></listitem>
-            <listitem><para><methodname>getLocalPath()</methodname>: determine what local
-                    path to Dojo is being used.</para></listitem>
-            <listitem><para><methodname>useLocalPath()</methodname>: is the integration
-                    utilizing a Dojo local path?</para></listitem>
-            <listitem><para><methodname>setDjConfig(array $config)</methodname>: set
-                    dojo/dijit configuration values (expects assoc
-                    array).</para></listitem>
-            <listitem><para><methodname>setDjConfigOption($option, $value)</methodname>: set
-                    a single dojo/dijit configuration value.</para></listitem>
-            <listitem><para><methodname>getDjConfig()</methodname>: get all dojo/dijit
-                    configuration values.</para></listitem>
-            <listitem><para><methodname>getDjConfigOption($option, $default =
-                    null)</methodname>: get a single dojo/dijit configuration
-                    value.</para></listitem>
-            <listitem><para><methodname>addStylesheetModule($module)</methodname>: add a
-                    stylesheet based on a module theme.</para></listitem>
-            <listitem><para><methodname>getStylesheetModules()</methodname>: get stylesheets
-                    registered as module themes.</para></listitem>
-            <listitem><para><methodname>addStylesheet($path)</methodname>: add a local
-                    stylesheet for use with Dojo.</para></listitem>
-            <listitem><para><methodname>getStylesheets()</methodname>: get local Dojo
-                    stylesheets.</para></listitem>
-            <listitem><para><methodname>addOnLoad($spec, $function = null)</methodname>: add
+                    implicitly enables integration.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getLocalPath()</methodname>: determine what local
+                    path to Dojo is being used.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>useLocalPath()</methodname>: is the integration
+                    utilizing a Dojo local path?
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setDjConfig(array $config)</methodname>: set
+                    dojo/dijit configuration values (expects assoc array).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>setDjConfigOption($option, $value)</methodname>: set
+                    a single dojo/dijit configuration value.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getDjConfig()</methodname>: get all dojo/dijit configuration values.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getDjConfigOption($option, $default = null)</methodname>: get a
+                    single dojo/dijit configuration value.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>addStylesheetModule($module)</methodname>: add a
+                    stylesheet based on a module theme.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getStylesheetModules()</methodname>: get stylesheets
+                    registered as module themes.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>addStylesheet($path)</methodname>: add a local
+                    stylesheet for use with Dojo.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>getStylesheets()</methodname>: get local Dojo stylesheets.</para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>addOnLoad($spec, $function = null)</methodname>: add
                     a lambda for dojo.onLoad to call. If one argument is passed,
                     it is assumed to be either a function name or a javascript
                     closure. If two arguments are passed, the first is assumed
                     to be the name of an object instance variable and the second
                     either a method name in that object or a closure to utilize
-                    with that object.</para></listitem>
-            <listitem><para><methodname>prependOnLoad($spec, $function = null)</methodname>:
+                    with that object.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>prependOnLoad($spec, $function = null)</methodname>:
                     exactly like <methodname>addOnLoad()</methodname>, excepts prepends to
-                    beginning of onLoad stack.</para></listitem>
-            <listitem><para><methodname>getOnLoadActions()</methodname>: retrieve all
+                    beginning of onLoad stack.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>getOnLoadActions()</methodname>: retrieve all
                     dojo.onLoad actions registered with the container. This will
-                    be an array of arrays.</para></listitem>
-            <listitem><para><methodname>onLoadCaptureStart($obj = null)</methodname>:
+                    be an array of arrays.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>onLoadCaptureStart($obj = null)</methodname>:
                     capture data to be used as a lambda for dojo.onLoad(). If
                     $obj is provided, the captured JS code will be considered a
-                    closure to use with that Javascript object.</para></listitem>
-            <listitem><para><methodname>onLoadCaptureEnd($obj = null)</methodname>: finish
-                    capturing data for use with dojo.onLoad().</para></listitem>
-            <listitem><para><methodname>javascriptCaptureStart()</methodname>:
+                    closure to use with that Javascript object.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>onLoadCaptureEnd($obj = null)</methodname>: finish
+                    capturing data for use with dojo.onLoad().
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>javascriptCaptureStart()</methodname>:
                     capture arbitrary javascript to be included with Dojo JS
-                    (onLoad, require, etc. statements).</para></listitem>
-            <listitem><para><methodname>javascriptCaptureEnd()</methodname>: finish
-                    capturing javascript.</para></listitem>
-            <listitem><para><methodname>__toString()</methodname>: cast the container to a
-                    string; renders all HTML style and script elements.</para></listitem>
+                    (onLoad, require, etc. statements).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>javascriptCaptureEnd()</methodname>: finish capturing javascript.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>__toString()</methodname>: cast the container to a
+                    string; renders all HTML style and script elements.
+                </para>
+            </listitem>
         </itemizedlist>
     </sect3>
 </sect2>

@@ -27,28 +27,36 @@
             </para>
 
             <itemizedlist>
-                <listitem><para>
+                <listitem>
+                    <para>
                         <varname>$id</varname>: the container name or DOM ID.
-                </para></listitem>
+                    </para>
+                </listitem>
 
-                <listitem><para>
+                <listitem>
+                    <para>
                         <varname>$content</varname>: the content to wrap in the
                         layout container.
-                </para></listitem>
+                    </para>
+                </listitem>
 
-                <listitem><para>
+                <listitem>
+                    <para>
                         <varname>$params</varname> (optional): dijit-specific
                         parameters. Basically, any non-HTML attribute that can
                         be used to configure the dijit layout container.
-                </para></listitem>
+                    </para>
+                </listitem>
 
-                <listitem><para>
+                <listitem>
+                    <para>
                         <varname>$attribs</varname> (optional): any additional HTML
                         attributes that should be used to render the container
                         div. If the key 'id' is passed in this array, it will
                         be used for the form element DOM id, and
                         <varname>$id</varname> will be used for its name.
-                </para></listitem>
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>
@@ -71,21 +79,27 @@
             </para>
 
             <itemizedlist>
-                <listitem><para>
+                <listitem>
+                    <para>
                         <varname>$id</varname>: the container name or DOM ID.
-                </para></listitem>
+                    </para>
+                </listitem>
 
-                <listitem><para>
+                <listitem>
+                    <para>
                         <varname>$attribs</varname> (optional): any additional HTML
                         attributes that should be used to render the container
                         div.
-                </para></listitem>
+                    </para>
+                </listitem>
 
-                <listitem><para>
+                <listitem>
+                    <para>
                         <varname>$content</varname> (optional): the content to wrap
                         in the form. If none is passed, an empty string will be
                         used.
-                </para></listitem>
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>
@@ -104,28 +118,35 @@
             </para>
 
             <itemizedlist>
-                <listitem><para>
+                <listitem>
+                    <para>
                         <varname>$id</varname>: the element name or DOM ID.
-                </para></listitem>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                        <varname>$value</varname> (optional): the current value of
-                        the element.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <varname>$value</varname> (optional): the current value of the element.
+                    </para>
+                </listitem>
 
-                <listitem><para>
+                <listitem>
+                    <para>
                         <varname>$params</varname> (optional): dijit-specific
                         parameters. Basically, any non-HTML attribute that can
                         be used to configure a dijit.
-                </para></listitem>
+                    </para>
+                </listitem>
 
-                <listitem><para>
+                <listitem>
+                    <para>
                         <varname>$attribs</varname> (optional): any additional HTML
                         attributes that should be used to render the dijit. If
                         the key 'id' is passed in this array, it will be used
                         for the form element DOM id, and <varname>$id</varname> will
                         be used for its name.
-                </para></listitem>
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>
@@ -441,15 +462,19 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                 </para>
 
                 <itemizedlist>
-                    <listitem><para>
+                    <listitem>
+                        <para>
                             an indexed array with two values, a checked value
                             and unchecked value, in that order; or
-                    </para></listitem>
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
+                    <listitem>
+                        <para>
                             an associative array with the keys 'checkedValue'
                             and 'unCheckedValue'.
-                    </para></listitem>
+                        </para>
+                    </listitem>
                 </itemizedlist>
 
                 <para>
@@ -503,24 +528,30 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                         </para>
 
                         <itemizedlist>
-                            <listitem><para>
-                                <emphasis>store</emphasis>: the name of the
-                                javascript variable representing the datastore
-                                (this could be the name you would like for it
-                                to use).
-                            </para></listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>store</emphasis>: the name of the
+                                    javascript variable representing the datastore
+                                    (this could be the name you would like for it
+                                    to use).
+                                </para>
+                            </listitem>
 
-                            <listitem><para>
-                                <emphasis>type</emphasis>: the datastore type
-                                to use; e.g., 'dojo.data.ItemFileReadStore'.
-                            </para></listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>type</emphasis>: the datastore type
+                                    to use; e.g., 'dojo.data.ItemFileReadStore'.
+                                </para>
+                            </listitem>
 
-                            <listitem><para>
-                                <emphasis>params</emphasis> (optional): an
-                                associative array of key/value pairs to use to
-                                configure the datastore. The 'url' param is a
-                                typical example.
-                            </para></listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>params</emphasis> (optional): an
+                                    associative array of key/value pairs to use to
+                                    configure the datastore. The 'url' param is a
+                                    typical example.
+                                </para>
+                            </listitem>
                         </itemizedlist>
                     </listitem>
 
@@ -530,22 +561,28 @@ echo $view->borderContainer()->captureEnd('masterLayout');
                         </para>
 
                         <itemizedlist>
-                            <listitem><para>
-                                <emphasis>store</emphasis>: a string indicating
-                                the datastore name to use.
-                            </para></listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>store</emphasis>: a string indicating
+                                    the datastore name to use.
+                                </para>
+                            </listitem>
 
-                            <listitem><para>
-                                <emphasis>storeType</emphasis>: a string indicating
-                                the datastore dojo.data type to use (e.g.,
-                                'dojo.data.ItemFileReadStore').
-                            </para></listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>storeType</emphasis>: a string indicating
+                                    the datastore dojo.data type to use (e.g.,
+                                    'dojo.data.ItemFileReadStore').
+                                </para>
+                            </listitem>
 
-                            <listitem><para>
-                                <emphasis>storeParams</emphasis>: an
-                                associative array of key/value pairs with which
-                                to configure the datastore.
-                            </para></listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>storeParams</emphasis>: an
+                                    associative array of key/value pairs with which
+                                    to configure the datastore.
+                                </para>
+                            </listitem>
                         </itemizedlist>
                     </listitem>
                 </itemizedlist>
@@ -713,25 +750,33 @@ echo $view->editor('foo');
                 </para>
 
                 <itemizedlist>
-                    <listitem><para>
-                        'intermediateChanges' can be set to indicate whether or not
-                        to fire onChange events while the handle is being dragged.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            'intermediateChanges' can be set to indicate whether or not
+                            to fire onChange events while the handle is being dragged.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        'clickSelect' can be set to allow clicking a location
-                        on the slider to set the value.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            'clickSelect' can be set to allow clicking a location
+                            on the slider to set the value.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        'pageIncrement' can specify the value by which to
-                        increase/decrease when pageUp and pageDown are used.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            'pageIncrement' can specify the value by which to
+                            increase/decrease when pageUp and pageDown are used.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        'showButtons' can be set to allow displaying buttons on
-                        either end of the slider for manipulating the value.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            'showButtons' can be set to allow displaying buttons on
+                            either end of the slider for manipulating the value.
+                        </para>
+                    </listitem>
                 </itemizedlist>
 
                 <para>
@@ -749,22 +794,28 @@ echo $view->editor('foo');
                 </para>
 
                 <itemizedlist>
-                    <listitem><para>
-                        <emphasis>container</emphasis>: name of the container.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>container</emphasis>: name of the container.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        <emphasis>labels</emphasis> (optional): an array of
-                        labels to utilize. Use empty strings on either end to
-                        provide labels for inner values only. Required when
-                        specifying one of the 'Labels' dijit variants.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>labels</emphasis> (optional): an array of
+                            labels to utilize. Use empty strings on either end to
+                            provide labels for inner values only. Required when
+                            specifying one of the 'Labels' dijit variants.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        <emphasis>dijit</emphasis> (optional): one of
-                        HorizontalRule, HorizontalRuleLabels, VerticalRule, or
-                        VerticalRuleLabels, Defaults to one of the Rule dijits.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>dijit</emphasis> (optional): one of
+                            HorizontalRule, HorizontalRuleLabels, VerticalRule, or
+                            VerticalRuleLabels, Defaults to one of the Rule dijits.
+                        </para>
+                    </listitem>
 
                     <listitem>
                         <para>
@@ -774,27 +825,33 @@ echo $view->editor('foo');
                         </para>
 
                         <itemizedlist>
-                            <listitem><para>
-                                <emphasis>container</emphasis> (optional):
-                                array of parameters and attributes for the rule
-                                container.
-                            </para></listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>container</emphasis> (optional):
+                                    array of parameters and attributes for the rule
+                                    container.
+                                </para>
+                            </listitem>
 
-                            <listitem><para>
-                                <emphasis>labels</emphasis> (optional):
-                                array of parameters and attributes for the
-                                labels list container.
-                            </para></listitem>
+                            <listitem>
+                                <para>
+                                    <emphasis>labels</emphasis> (optional):
+                                    array of parameters and attributes for the
+                                    labels list container.
+                                </para>
+                            </listitem>
                         </itemizedlist>
                     </listitem>
 
-                    <listitem><para>
-                        <emphasis>attribs</emphasis> (optional): HTML
-                        attributes to use with the rules/labels. This should
-                        follow the <property>params</property> option format and be an
-                        associative array with the keys 'container' and
-                        'labels'.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>attribs</emphasis> (optional): HTML
+                            attributes to use with the rules/labels. This should
+                            follow the <property>params</property> option format and be an
+                            associative array with the keys 'container' and
+                            'labels'.
+                        </para>
+                    </listitem>
                 </itemizedlist>
 
                 <programlisting language="php"><![CDATA[
@@ -1075,28 +1132,36 @@ echo $view->timeTextBox(
                 </para>
 
                 <itemizedlist>
-                    <listitem><para>
-                        <emphasis>invalidMessage</emphasis>: a message to
-                        display when an invalid entry is detected.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>invalidMessage</emphasis>: a message to
+                            display when an invalid entry is detected.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        <emphasis>promptMessage</emphasis>: a tooltip help
-                        message to use.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>promptMessage</emphasis>: a tooltip help
+                            message to use.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        <emphasis>regExp</emphasis>: a regular expression to
-                        use to validate the text. Regular expression does not
-                        require boundary markers.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>regExp</emphasis>: a regular expression to
+                            use to validate the text. Regular expression does not
+                            require boundary markers.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        <emphasis>required</emphasis>: whether or not the
-                        element is required. If so, and the element is embedded
-                        in a dijit.form.Form, it will be flagged as invalid and
-                        prevent submission.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>required</emphasis>: whether or not the
+                            element is required. If so, and the element is embedded
+                            in a dijit.form.Form, it will be flagged as invalid and
+                            prevent submission.
+                        </para>
+                    </listitem>
                 </itemizedlist>
 
                 <programlisting language="php"><![CDATA[

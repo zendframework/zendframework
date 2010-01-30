@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.definition">
-
     <title>Zend_Db_Table_Definition</title>
 
     <sect2 id="zend.db.table.definition.introduction">
-
         <title>Introduction</title>
 
         <para>
@@ -13,11 +11,9 @@
             describe the relationships and configuration options that should be used when
             <classname>Zend_Db_Table</classname> is used via concrete instantiation.
         </para>
-
     </sect2>
 
     <sect2 id="zend.db.table.definition.usage">
-
         <title>Basic Usage</title>
 
         <para>
@@ -36,7 +32,6 @@
         </para>
 
         <example id="zend.db.table.definition.example1">
-
             <title>Describing the Definition of a Database Data Model</title>
 
             <programlisting language="php"><![CDATA[
@@ -72,7 +67,6 @@ $definition = new Zend_Db_Table_Definition(array(
         )
     ));
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -91,7 +85,6 @@ $definition = new Zend_Db_Table_Definition(array(
         </para>
 
         <example id="zend.db.table.definition.example2">
-
             <title>Interacting with the described definition</title>
 
             <programlisting language="php"><![CDATA[
@@ -117,13 +110,10 @@ foreach ($authors as $author) {
     }
 }
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.db.table.definition.advanced-usage">
-
         <title>Advanced Usage</title>
 
         <para>
@@ -142,7 +132,6 @@ foreach ($authors as $author) {
         </para>
 
         <example id="zend.db.table.definition.example3">
-
             <title>Interacting A Mixed Use Zend_Db_Table Definition</title>
 
             <programlisting language="php"><![CDATA[
@@ -202,9 +191,6 @@ foreach ($authors as $author) {
     }
 }
 ]]></programlisting>
-
         </example>
-
     </sect2>
-
 </sect1>

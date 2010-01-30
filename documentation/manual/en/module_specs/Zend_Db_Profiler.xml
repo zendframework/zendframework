@@ -200,6 +200,7 @@ $profiler = $db->getProfiler();
                     statement is executed.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getQueryParams()</methodname> returns an array of
@@ -210,6 +211,7 @@ $profiler = $db->getProfiler();
                     parameter indices.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getElapsedSecs()</methodname> returns the number of
@@ -258,11 +260,9 @@ echo 'Queries per second: ' . $queryCount / $totalTime . "\n";
 echo 'Longest query length: ' . $longestTime . "\n";
 echo "Longest query: \n" . $longestQuery . "\n";
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.db.profiler.advanced">
-
         <title>Advanced Profiler Usage</title>
 
         <para>
@@ -306,12 +306,14 @@ $profiler->setFilterElapsedSecs(null);
                         operations, or selecting a database.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::QUERY</constant>: general database
                         queries that do not match other types.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::INSERT</constant>: any query that
@@ -319,6 +321,7 @@ $profiler->setFilterElapsedSecs(null);
                         <acronym>INSERT</acronym>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::UPDATE</constant>: any query that
@@ -326,6 +329,7 @@ $profiler->setFilterElapsedSecs(null);
                         <acronym>UPDATE</acronym>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::DELETE</constant>: any query that
@@ -333,6 +337,7 @@ $profiler->setFilterElapsedSecs(null);
                         <constant>DELETE</constant>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::SELECT</constant>: any query that
@@ -340,6 +345,7 @@ $profiler->setFilterElapsedSecs(null);
                         <acronym>SELECT</acronym>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Db_Profiler::TRANSACTION</constant>: any
@@ -370,7 +376,6 @@ $profiler->setFilterQueryType(Zend_Db_Profiler::DELETE);
 // Remove all filters
 $profiler->setFilterQueryType(null);
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.db.profiler.advanced.getbytype">
@@ -399,9 +404,7 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::SELECT |
 // Retrieve DELETE query profiles
 $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.db.profiler.profilers">
@@ -414,7 +417,6 @@ $profiles = $profiler->getQueryProfiles(Zend_Db_Profiler::DELETE);
         </para>
 
         <xi:include href="Zend_Db_Profiler-Firebug.xml" />
-
     </sect2>
 </sect1>
 <!--

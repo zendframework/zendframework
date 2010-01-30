@@ -42,22 +42,28 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <emphasis>element types</emphasis>: provide an element type to
-                match: 'div', 'a', 'span', 'h2', etc.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>element types</emphasis>: provide an element type to
+                    match: 'div', 'a', 'span', 'h2', etc.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>style attributes</emphasis>: <acronym>CSS</acronym> style attributes to
-                match: '.error', 'div.error', 'label.required', etc. If an
-                element defines more than one style, this will match as long as
-                the named style is present anywhere in the style declaration.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>style attributes</emphasis>: <acronym>CSS</acronym> style attributes
+                    to match: '.error', 'div.error', 'label.required', etc. If an
+                    element defines more than one style, this will match as long as
+                    the named style is present anywhere in the style declaration.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>id attributes</emphasis>: element ID attributes to
-                match: '#content', 'div#nav', etc.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>id attributes</emphasis>: element ID attributes to
+                    match: '#content', 'div#nav', etc.
+                </para>
+            </listitem>
 
             <listitem>
                 <para>
@@ -67,36 +73,44 @@
                 </para>
 
                 <itemizedlist>
-                    <listitem><para>
-                        <emphasis>exact match</emphasis>: the attribute exactly
-                        matches the string: 'div[bar="baz"]' would match a div
-                        element with a "bar" attribute that exactly matches the
-                        value "baz".
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>exact match</emphasis>: the attribute exactly
+                            matches the string: 'div[bar="baz"]' would match a div
+                            element with a "bar" attribute that exactly matches the
+                            value "baz".
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        <emphasis>word match</emphasis>: the attribute contains
-                        a word matching the string: 'div[bar~="baz"]' would match a div
-                        element with a "bar" attribute that contains the
-                        word "baz". '&lt;div bar="foo baz"&gt;' would match, but '&lt;div
-                                bar="foo bazbat"&gt;' would not.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>word match</emphasis>: the attribute contains
+                            a word matching the string: 'div[bar~="baz"]' would match a div
+                            element with a "bar" attribute that contains the
+                            word "baz". '&lt;div bar="foo baz"&gt;' would match, but '&lt;div
+                            bar="foo bazbat"&gt;' would not.
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
-                        <emphasis>substring match</emphasis>: the attribute contains
-                        the string: 'div[bar*="baz"]' would match a div
-                        element with a "bar" attribute that contains the
-                        string "baz" anywhere within it.
-                    </para></listitem>
+                    <listitem>
+                        <para>
+                            <emphasis>substring match</emphasis>: the attribute contains
+                            the string: 'div[bar*="baz"]' would match a div
+                            element with a "bar" attribute that contains the
+                            string "baz" anywhere within it.
+                        </para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>
-                <emphasis>direct descendents</emphasis>: utilize '&gt;' between
-                selectors to denote direct descendents. 'div > span' would
-                select only 'span' elements that are direct descendents of a
-                'div'. Can also be used with any of the selectors above.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>direct descendents</emphasis>: utilize '&gt;' between
+                    selectors to denote direct descendents. 'div > span' would
+                    select only 'span' elements that are direct descendents of a
+                    'div'. Can also be used with any of the selectors above.
+                </para>
+            </listitem>
 
             <listitem>
                 <para>
@@ -177,48 +191,64 @@ foreach ($results as $result) {
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <methodname>setDocumentXml($document)</methodname>: specify an
-                    <acronym>XML</acronym> string to query against.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setDocumentXml($document)</methodname>: specify an
+                        <acronym>XML</acronym> string to query against.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setDocumentXhtml($document)</methodname>: specify an
-                    <acronym>XHTML</acronym> string to query against.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setDocumentXhtml($document)</methodname>: specify an
+                        <acronym>XHTML</acronym> string to query against.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setDocumentHtml($document)</methodname>: specify an HTML
-                    string to query against.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setDocumentHtml($document)</methodname>: specify an HTML
+                        string to query against.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setDocument($document)</methodname>: specify a
-                    string to query against; <classname>Zend_Dom_Query</classname> will
-                    then attempt to autodetect the document type.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setDocument($document)</methodname>: specify a
+                        string to query against; <classname>Zend_Dom_Query</classname> will
+                        then attempt to autodetect the document type.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getDocument()</methodname>: retrieve the original document
-                    string provided to the object.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getDocument()</methodname>: retrieve the original document
+                        string provided to the object.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getDocumentType()</methodname>: retrieve the document
-                    type of the document provided to the object; will be one of
-                    the <constant>DOC_XML</constant>, <constant>DOC_XHTML</constant>, or
-                    <constant>DOC_HTML</constant> class constants.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getDocumentType()</methodname>: retrieve the document
+                        type of the document provided to the object; will be one of
+                        the <constant>DOC_XML</constant>, <constant>DOC_XHTML</constant>, or
+                        <constant>DOC_HTML</constant> class constants.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>query($query)</methodname>: query the document using
-                    <acronym>CSS</acronym> selector notation.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>query($query)</methodname>: query the document using
+                        <acronym>CSS</acronym> selector notation.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>queryXpath($xPathQuery)</methodname>: query the document
-                    using XPath notation.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>queryXpath($xPathQuery)</methodname>: query the document
+                        using XPath notation.
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
 
@@ -235,22 +265,28 @@ foreach ($results as $result) {
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <methodname>getCssQuery()</methodname>: return the <acronym>CSS</acronym>
-                    selector query used to produce the result (if any).
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getCssQuery()</methodname>: return the <acronym>CSS</acronym>
+                        selector query used to produce the result (if any).
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getXpathQuery()</methodname>: return the XPath query
-                    used to produce the result. Internally,
-                    <classname>Zend_Dom_Query</classname> converts <acronym>CSS</acronym> selector
-                    queries to XPath, so this value will always be populated.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getXpathQuery()</methodname>: return the XPath query
+                        used to produce the result. Internally,
+                        <classname>Zend_Dom_Query</classname> converts <acronym>CSS</acronym>
+                        selector queries to XPath, so this value will always be populated.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getDocument()</methodname>: retrieve the DOMDocument the
-                    selection was made against.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getDocument()</methodname>: retrieve the DOMDocument the
+                        selection was made against.
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
     </sect2>

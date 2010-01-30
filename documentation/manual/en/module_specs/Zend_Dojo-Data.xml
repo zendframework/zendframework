@@ -93,17 +93,15 @@ $data->addItems($someMoreItems);
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Associative arrays
-            </para></listitem>
+            <listitem><para>Associative arrays</para></listitem>
 
-            <listitem><para>
-                Objects implementing a <methodname>toArray()</methodname> method
-            </para></listitem>
+            <listitem>
+                <para>Objects implementing a <methodname>toArray()</methodname> method</para>
+            </listitem>
 
-            <listitem><para>
-                Any other objects (will serialize via get_object_vars())
-            </para></listitem>
+            <listitem>
+                <para>Any other objects (will serialize via get_object_vars())</para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -113,15 +111,15 @@ $data->addItems($someMoreItems);
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Arrays
-            </para></listitem>
+            <listitem><para>Arrays</para></listitem>
 
-            <listitem><para>
-                Objects implementing the <classname>Traversable</classname> interface
-                ,which includes the interfaces <classname>Iterator</classname> and
-                <classname>ArrayAccess</classname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Objects implementing the <classname>Traversable</classname> interface
+                    ,which includes the interfaces <classname>Iterator</classname> and
+                    <classname>ArrayAccess</classname>.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -285,97 +283,122 @@ $json = (string) $data; // cast to string == cast to JSON
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <methodname>setItems($items)</methodname>: set multiple items at once,
-                    overwriting any items that were previously set in the
-                    object. <varname>$items</varname> should be an array or a
-                    <classname>Traversable</classname> object.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setItems($items)</methodname>: set multiple items at once,
+                        overwriting any items that were previously set in the
+                        object. <varname>$items</varname> should be an array or a
+                        <classname>Traversable</classname> object.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setItem($item, $id = null)</methodname>: set an individual
-                    item, optionally passing an explicit identifier. Overwrites
-                    the item if it is already in the collection. Valid items
-                    include associative arrays, objects implementing
-                    <methodname>toArray()</methodname>, or any object with public
-                    properties.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setItem($item, $id = null)</methodname>: set an individual
+                        item, optionally passing an explicit identifier. Overwrites
+                        the item if it is already in the collection. Valid items
+                        include associative arrays, objects implementing
+                        <methodname>toArray()</methodname>, or any object with public properties.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addItem($item, $id = null)</methodname>: add an individual
-                    item, optionally passing an explicit identifier. Will raise
-                    an exception if the item already exists in the collection.
-                    Valid items include associative arrays, objects implementing
-                    <methodname>toArray()</methodname>, or any object with public
-                    properties.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addItem($item, $id = null)</methodname>: add an individual
+                        item, optionally passing an explicit identifier. Will raise
+                        an exception if the item already exists in the collection.
+                        Valid items include associative arrays, objects implementing
+                        <methodname>toArray()</methodname>, or any object with public properties.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addItems($items)</methodname>: add multiple items at once,
-                    appending them to any current items. Will raise an exception
-                    if any of the new items have an identifier matching an
-                    identifier already in the collection. <varname>$items</varname>
-                    should be an array or a <classname>Traversable</classname> object.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addItems($items)</methodname>: add multiple items at once,
+                        appending them to any current items. Will raise an exception
+                        if any of the new items have an identifier matching an
+                        identifier already in the collection. <varname>$items</varname>
+                        should be an array or a <classname>Traversable</classname> object.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getItems()</methodname>: retrieve all items as an array of
-                    arrays.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getItems()</methodname>: retrieve all items as an array of
+                        arrays.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>hasItem($id)</methodname>: determine whether an item with
-                    the given identifier exists in the collection.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>hasItem($id)</methodname>: determine whether an item with
+                        the given identifier exists in the collection.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getItem($id)</methodname>: retrieve an item with the given
-                    identifier from the collection; the item returned will be an
-                    associative array. If no item matches, a <constant>NULL</constant> value is
-                    returned.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getItem($id)</methodname>: retrieve an item with the given
+                        identifier from the collection; the item returned will be an associative
+                        array. If no item matches, a <constant>NULL</constant> value is returned.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>removeItem($id)</methodname>: remove an item with the given
-                    identifier from the collection.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>removeItem($id)</methodname>: remove an item with the given
+                        identifier from the collection.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>clearItems()</methodname>: remove all items from the
-                    collection.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>clearItems()</methodname>: remove all items from the collection.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setIdentifier($identifier)</methodname>: set the name of the
-                    field that represents the unique identifier for each item in
-                    the collection.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setIdentifier($identifier)</methodname>: set the name of the
+                        field that represents the unique identifier for each item in
+                        the collection.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getIdentifier()</methodname>: retrieve the name of the
-                    identifier field.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getIdentifier()</methodname>: retrieve the name of the
+                        identifier field.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setLabel($label)</methodname>: set the name of a field
-                    to be used as a display label for an item.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setLabel($label)</methodname>: set the name of a field
+                        to be used as a display label for an item.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getLabel()</methodname>: retrieve the label field name.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getLabel()</methodname>: retrieve the label field name.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>toArray()</methodname>: cast the object to an array. At a minimum,
-                    the array will contain the keys 'identifier',
-                    'items', and 'label' if a label field has been set
-                    in the object.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>toArray()</methodname>: cast the object to an array. At a
+                        minimum, the array will contain the keys 'identifier',
+                        'items', and 'label' if a label field has been set in the object.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>toJson()</methodname>: cast the object to a <acronym>JSON</acronym>
-                    representation.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>toJson()</methodname>: cast the object to a
+                        <acronym>JSON</acronym> representation.
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
     </sect2>

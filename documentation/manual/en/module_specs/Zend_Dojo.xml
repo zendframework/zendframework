@@ -15,6 +15,7 @@
         <listitem><para>dojo.data compatibility</para></listitem>
         <listitem><para>View helper to help setup the Dojo environment</para></listitem>
         <listitem><para>Dijit-specific <classname>Zend_View</classname> helpers</para></listitem>
+
         <listitem>
             <para>Dijit-specific <classname>Zend_Form</classname> elements and decorators</para>
         </listitem>

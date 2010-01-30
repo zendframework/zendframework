@@ -21,19 +21,25 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            Firefox Browser ideally version 3 but version 2 is also supported.
-        </para></listitem>
+        <listitem>
+            <para>
+                Firefox Browser ideally version 3 but version 2 is also supported.
+            </para>
+        </listitem>
 
-        <listitem> <para>
-            Firebug Firefox Extension which you can download from <ulink
-                url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
-        </para></listitem>
+        <listitem>
+            <para>
+                Firebug Firefox Extension which you can download from <ulink
+                    url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            FirePHP Firefox Extension which you can download from <ulink
-                url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.
-        </para></listitem>
+        <listitem>
+            <para>
+                FirePHP Firefox Extension which you can download from <ulink
+                    url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">

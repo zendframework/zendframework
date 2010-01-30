@@ -27,7 +27,7 @@
                 switch back to the default mode of supporting only <acronym>ISO</acronym> date
                 format tokens. For a list of supported format codes, see
                 <link linkend="zend.date.constants.phpformats">Self-Defined OUTPUT Formats
-        Using PHP's date() Format Specifiers</link>
+                    Using PHP's date() Format Specifiers</link>
             </para>
         </sect3>
 
@@ -166,6 +166,7 @@
 
         <example id="zend.date.values.example-1">
             <title>User-Specified Input Date Format</title>
+
             <programlisting language="php"><![CDATA[
 $date1 = new Zend_Date('Feb 31, 2007', null, 'en_US');
 echo $date1, "\n"; // outputs "Mar 3, 2007 12:00:00 AM"
@@ -239,6 +240,7 @@ $date = new Zend_Date('31.Feb.2007');
 
         <example id="zend.date.basic.example-1">
             <title>Operating on Parts of Dates</title>
+
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date(); // $date's timestamp === time()
 
@@ -273,6 +275,7 @@ print $date;
 
             <table id="id.date.basic.parts.table">
                 <title>Date Parts</title>
+
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -280,67 +283,81 @@ print $date;
                             <entry>Explanation</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry>
                                 <ulink
                                     url="http://en.wikipedia.org/wiki/Unix_Time">Timestamp</ulink>
                             </entry>
+
                             <entry>
                                 UNIX timestamp, expressed in seconds elapsed since January 1st, 1970
                                 00:00:00 <acronym>GMT</acronym>.
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <ulink
                                     url="http://en.wikipedia.org/wiki/Gregorian_calendar">Year</ulink>
                             </entry>
+
                             <entry>Gregorian calendar year (e.g. 2006)</entry>
                         </row>
+
                         <row>
                             <entry>
                                 <ulink
                                     url="http://en.wikipedia.org/wiki/Month#Julian_and_Gregorian_calendars">Month</ulink>
                             </entry>
+
                             <entry>
                                 Gregorian calendar month (1-12, localized names supported)
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <ulink
                                     url="http://en.wikipedia.org/wiki/24-hour_clock">24 hour
                                     clock</ulink>
                             </entry>
+
                             <entry>
                                 Hours of the day (0-23) denote the hours elapsed, since the start of
                                 the day.
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/Minute">minute</ulink>
                             </entry>
+
                             <entry>
                                 Minutes of the hour (0-59) denote minutes elapsed, since the start
                                 of the hour.
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/Second">Second</ulink>
                             </entry>
+
                             <entry>
                                 Seconds of the minute (0-59) denote the elapsed seconds, since the
                                 start of the minute.
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <ulink
                                     url="http://en.wikipedia.org/wiki/Millisecond">millisecond</ulink>
                             </entry>
+
                             <entry>
                                 Milliseconds denote thousandths of a second (0-999).
                                 <classname>Zend_Date</classname> supports two additional methods
@@ -355,10 +372,12 @@ print $date;
                                     url="http://php.net/microtime">microtime()</ulink>.
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/Day">Day</ulink>
                             </entry>
+
                             <entry>
                                 <constant>Zend_Date::DAY_SHORT</constant> is extracted from
                                 <varname>$date</varname> if the <varname>$date</varname> operand is
@@ -372,10 +391,12 @@ print $date;
                                 assumed)
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/Week">Week</ulink>
                             </entry>
+
                             <entry>
                                 <constant>Zend_Date::WEEK</constant> is extracted from
                                 <varname>$date</varname> if the <varname>$date</varname> operand is
@@ -383,8 +404,10 @@ print $date;
                                 Otherwise an exception is raised. (Gregorian calendar assumed)
                             </entry>
                         </row>
+
                         <row>
                             <entry>Date</entry>
+
                             <entry>
                                 <constant>Zend_Date::DAY_MEDIUM</constant> is extracted from
                                 <varname>$date</varname> if the <varname>$date</varname> operand is
@@ -395,8 +418,10 @@ print $date;
                                 the object's locale.
                             </entry>
                         </row>
+
                         <row>
                             <entry>Weekday</entry>
+
                             <entry>
                                 Weekdays are represented numerically as 0 (for Sunday) through 6
                                 (for Saturday). <constant>Zend_Date::WEEKDAY_DIGIT</constant> is
@@ -412,8 +437,10 @@ print $date;
                                 assumed)
                             </entry>
                         </row>
+
                         <row>
                             <entry>DayOfYear</entry>
+
                             <entry>
                                 In <classname>Zend_Date</classname>, the day of the year represents
                                 the number of calendar days elapsed since the start of the year
@@ -421,10 +448,12 @@ print $date;
                                 the nearest whole number. (Gregorian calendar assumed)
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <ulink url="http://www.faqs.org/rfcs/rfc822.html">Arpa</ulink>
                             </entry>
+
                             <entry>
                                 Arpa dates (i.e. <acronym>RFC</acronym> 822 formatted dates) are
                                 supported. Output uses either a "GMT" or "Local differential
@@ -437,10 +466,12 @@ print $date;
                                 correct. Example: Mon, 31 Dec 06 23:59:59 <acronym>GMT</acronym>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <ulink url="http://en.wikipedia.org/wiki/ISO_8601">Iso</ulink>
                             </entry>
+
                             <entry>
                                 Only complete <acronym>ISO</acronym> 8601 dates are supported for
                                 output. Example: 2009-02-14T00:31:30+01:00
@@ -463,6 +494,7 @@ print $date;
 
             <table id="id.date.basic.operations.table">
                 <title>Basic Operations</title>
+
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -470,14 +502,17 @@ print $date;
                             <entry>Explanation</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry><methodname>get()</methodname></entry>
+
                             <entry>
                                 <para>
                                     <emphasis><methodname>get($part = null, $locale =
                                         null)</methodname></emphasis>
                                 </para>
+
                                 <para>
                                     Use <methodname>get($part)</methodname> to retrieve the date
                                     <varname>$part</varname> of this object's date localized to
@@ -498,13 +533,16 @@ print $date;
                                 </note>
                             </entry>
                         </row>
+
                         <row>
                             <entry><methodname>set()</methodname></entry>
+
                             <entry>
                                 <para>
                                     <emphasis><methodname>set($date, $part = null, $locale =
                                         null)</methodname></emphasis>
                                 </para>
+
                                 <para>
                                     Sets the <varname>$part</varname> of the current object to the
                                     corresponding value for that part found in the input
@@ -513,13 +551,16 @@ print $date;
                                 </para>
                             </entry>
                         </row>
+
                         <row>
                             <entry><methodname>add()</methodname></entry>
+
                             <entry>
                                 <para>
                                     <emphasis><methodname>add($date, $part = null, $locale =
                                         null)</methodname></emphasis>
                                 </para>
+
                                 <para>
                                     Adds the <varname>$part</varname> of <varname>$date</varname>
                                     having a locale <varname>$locale</varname> to the current
@@ -527,13 +568,16 @@ print $date;
                                 </para>
                             </entry>
                         </row>
+
                         <row>
                             <entry><methodname>sub()</methodname></entry>
+
                             <entry>
                                 <para>
                                     <emphasis><methodname>sub($date, $part = null, $locale =
                                         null)</methodname></emphasis>
                                 </para>
+
                                 <para>
                                     Subtracts the <varname>$part</varname> of
                                     <varname>$date</varname> having a locale
@@ -541,13 +585,16 @@ print $date;
                                 </para>
                             </entry>
                         </row>
+
                         <row>
                             <entry><methodname>copyPart()</methodname></entry>
+
                             <entry>
                                 <para>
                                     <emphasis><methodname>copyPart($part, $locale =
                                         null)</methodname></emphasis>
                                 </para>
+
                                 <para>
                                     Returns a cloned object, with only <varname>$part</varname> of
                                     the object's date copied to the clone, with the clone have its
@@ -556,13 +603,16 @@ print $date;
                                 </para>
                             </entry>
                         </row>
+
                         <row>
                             <entry><methodname>compare()</methodname></entry>
+
                             <entry>
                                 <para>
                                     <emphasis><methodname>compare($date, $part = null, $locale =
                                         null)</methodname></emphasis>
                                 </para>
+
                                 <para>
                                     compares <varname>$part</varname> of <varname>$date</varname> to
                                     this object's timestamp, returning 0 if they are equal, 1 if
@@ -587,6 +637,7 @@ print $date;
 
         <table id="zend.date.others.comparison.table">
             <title>Date Comparison Methods</title>
+
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -594,14 +645,17 @@ print $date;
                         <entry>Explanation</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><methodname>equals()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>equals($date, $part = null, $locale =
                                     null)</methodname></emphasis>
                             </para>
+
                             <para>
                                 returns <constant>TRUE</constant>, if <varname>$part</varname> of
                                 <varname>$date</varname> having locale <varname>$locale</varname> is
@@ -610,13 +664,16 @@ print $date;
                             </para>
                         </entry>
                     </row>
+
                     <row>
                         <entry><methodname>isEarlier()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>isEarlier($date, $part = null, $locale =
                                     null)</methodname></emphasis>
                             </para>
+
                             <para>
                                 returns <constant>TRUE</constant>, if <varname>$part</varname> of
                                 this object's date is earlier than <varname>$part</varname> of
@@ -624,13 +681,16 @@ print $date;
                             </para>
                         </entry>
                     </row>
+
                     <row>
                         <entry><methodname>isLater()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>isLater($date, $part = null, $locale =
                                     null)</methodname></emphasis>
                             </para>
+
                             <para>
                                 returns <constant>TRUE</constant>, if <varname>$part</varname> of
                                 this object's date is later than <varname>$part</varname> of
@@ -638,48 +698,60 @@ print $date;
                             </para>
                         </entry>
                     </row>
+
                     <row>
                         <entry><methodname>isToday()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>isToday()</methodname></emphasis>
                             </para>
+
                             <para>
                                 Tests if today's year, month, and day match this object's date
                                 value, using this object's timezone.
                             </para>
                         </entry>
                     </row>
+
                     <row>
                         <entry><methodname>isTomorrow()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>isTomorrow()</methodname></emphasis>
                             </para>
+
                             <para>
                                 Tests if tomorrow's year, month, and day match this object's date
                                 value, using this object's timezone.
                             </para>
                         </entry>
                     </row>
+
                     <row>
                         <entry><methodname>isYesterday()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>isYesterday()</methodname></emphasis>
                             </para>
+
                             <para>
                                 Tests if yesterday's year, month, and day match this object's date
                                 value, using this object's timezone.
                             </para>
                         </entry>
                     </row>
+
                     <row>
                         <entry><methodname>isLeapYear()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>isLeapYear()</methodname></emphasis>
                             </para>
+
                             <para>
                                 Use <methodname>isLeapYear()</methodname> to determine if the
                                 current object is a leap year, or use
@@ -690,13 +762,16 @@ print $date;
                             </para>
                         </entry>
                     </row>
+
                     <row>
                         <entry><methodname>isDate()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>isDate($date, $format = null, $locale =
                                     null)</methodname></emphasis>
                             </para>
+
                             <para>
                                 This method checks if a given date is a real date and returns
                                 <constant>TRUE</constant> if all checks are ok. It works like
@@ -721,6 +796,7 @@ print $date;
 
         <table id="zend.date.others.gettingparts.table">
             <title>Date Output Methods</title>
+
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -728,14 +804,17 @@ print $date;
                         <entry>Explanation</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><methodname>toString()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>toString($format = null, $locale =
                                     null)</methodname></emphasis>
                             </para>
+
                             <para>
                                 Invoke directly or via the magic method
                                 <methodname>__toString()</methodname>. The
@@ -749,12 +828,15 @@ print $date;
                             </para>
                         </entry>
                     </row>
+
                     <row>
                         <entry><methodname>toArray()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>toArray()</methodname></emphasis>
                             </para>
+
                             <para>
                                 Returns an array representation of the selected date according to
                                 the conventions of the object's locale. The returned array is
@@ -851,12 +933,15 @@ print $date;
                             </itemizedlist>
                         </entry>
                     </row>
+
                     <row>
                         <entry><methodname>toValue()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>toValue($part = null)</methodname></emphasis>
                             </para>
+
                             <para>
                                 Returns an integer representation of the selected date
                                 <varname>$part</varname> according to the conventions of the
@@ -881,15 +966,18 @@ print $date;
                             </note>
                         </entry>
                     </row>
+
                     <row>
                         <entry>
                             <link linkend="id.date.basic.operations">get()</link>
                         </entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>get($part = null, $locale =
                                     null)</methodname></emphasis>
                             </para>
+
                             <para>
                                 This method returns the <varname>$part</varname> of object's date
                                 localized to <varname>$locale</varname> as a formatted string or
@@ -898,12 +986,15 @@ print $date;
                             </para>
                         </entry>
                     </row>
+
                     <row>
                         <entry><methodname>now()</methodname></entry>
+
                         <entry>
                             <para>
                                 <emphasis><methodname>now($locale = null)</methodname></emphasis>
                             </para>
+
                             <para>
                                 This convenience function is equivalent to <command>new
                                 Zend_Date()</command>. It returns the current date as a
@@ -927,6 +1018,7 @@ print $date;
 
         <table id="zend.date.others.fractions.table">
             <title>Date Output Methods</title>
+
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -934,6 +1026,7 @@ print $date;
                         <entry>Explanation</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>
@@ -941,14 +1034,17 @@ print $date;
                                 <emphasis><methodname>getFractionalPrecision()</methodname></emphasis>
                             </para>
                         </entry>
+
                         <entry>Return the precision of the part seconds</entry>
                     </row>
+
                     <row>
                         <entry>
                             <para>
                                 <emphasis><methodname>setFractionalPrecision()</methodname></emphasis>
                             </para>
                         </entry>
+
                         <entry>Set the precision of the part seconds</entry>
                     </row>
                 </tbody>
@@ -966,6 +1062,7 @@ print $date;
 
         <table id="zend.date.other.sun.table">
             <title>Miscellaneous Methods</title>
+
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -973,6 +1070,7 @@ print $date;
                         <entry>Explanation</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>
@@ -980,22 +1078,27 @@ print $date;
                                 <emphasis><methodname>getSunrise($location)</methodname></emphasis>
                             </para>
                         </entry>
+
                         <entry>Return the date's time of sunrise</entry>
                     </row>
+
                     <row>
                         <entry>
                             <para>
                                 <emphasis><methodname>getSunset($location)</methodname></emphasis>
                             </para>
                         </entry>
+
                         <entry>Return the date's time of sunset</entry>
                     </row>
+
                     <row>
                         <entry>
                             <para>
                                 <emphasis><methodname>getSunInfo($location)</methodname></emphasis>
                             </para>
                         </entry>
+
                         <entry>Return an array with the date's sun dates</entry>
                     </row>
                 </tbody>

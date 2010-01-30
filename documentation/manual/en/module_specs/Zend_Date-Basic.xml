@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.date.basic">
-
     <title>Basic Methods</title>
 
     <para>
@@ -23,7 +22,6 @@
     </para>
 
     <sect2 id="zend.date.basic.creation">
-
         <title>Current Date</title>
 
         <para>
@@ -32,12 +30,12 @@
             <methodname>time()</methodname> function to obtain the <ulink
                 url="http://en.wikipedia.org/wiki/Unix_Time">UNIX timestamp</ulink>
             for the object. Make sure your <acronym>PHP</acronym> environment has the correct
-            <link linkend="zend.date.setdefaulttimezone">default timezone</link>
-            .
+            <link linkend="zend.date.setdefaulttimezone">default timezone</link>.
         </para>
 
         <example id="zend.date.basic.creation.example-1">
             <title>Creating the Current Date</title>
+
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -45,11 +43,9 @@ $date = new Zend_Date();
 print $date;
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.date.basic.functions">
-
         <title>Zend_Date by Example</title>
 
         <para>
@@ -59,7 +55,6 @@ print $date;
         </para>
 
         <sect3 id="zend.date.simple.functions.get">
-
             <title>Output a Date</title>
 
             <para>
@@ -70,6 +65,7 @@ print $date;
 
             <example id="zend.date.simple.functions.get.example-1">
                 <title>get() - Output a Date</title>
+
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -77,11 +73,9 @@ $date = new Zend_Date();
 print $date->get();
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.date.simple.functions.set">
-
             <title>Setting a Date</title>
 
             <para>
@@ -92,6 +86,7 @@ print $date->get();
 
             <example id="zend.date.simple.functions.set.example-1">
                 <title>set() - Set a Date</title>
+
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -100,11 +95,9 @@ $date->set('13:00:00',Zend_Date::TIMES);
 print $date->get(Zend_Date::W3C);
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.date.simple.functions.add">
-
             <title>Adding and Subtracting Dates</title>
 
             <para>
@@ -117,6 +110,7 @@ print $date->get(Zend_Date::W3C);
 
             <example id="zend.date.simple.functions.add.example-1">
                 <title>add() - Adding Dates</title>
+
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -129,11 +123,9 @@ echo "Date via get() = ", $date->get(Zend_Date::W3C), "\n";
 echo "Date via toString() = ", $date, "\n";
 ]]></programlisting>
             </example>
-
         </sect3>
 
         <sect3 id="zend.date.simple.functions.compare">
-
             <title>Comparison of Dates</title>
 
             <para>
@@ -146,6 +138,7 @@ echo "Date via toString() = ", $date, "\n";
 
             <example id="zend.date.simple.functions.compare.example-1">
                 <title>compare() - Compare Dates</title>
+
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -165,6 +158,7 @@ if ($date->compare(10, Zend_Date::MINUTE) == -1) {
 
             <example id="zend.date.simple.functions.compare.example-2">
                 <title>equals() - Identify a Date or Date Part</title>
+
                 <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 
@@ -176,11 +170,8 @@ if ($date->equals(10, Zend_Date::HOUR)) {
 }
 ]]></programlisting>
             </example>
-
         </sect3>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

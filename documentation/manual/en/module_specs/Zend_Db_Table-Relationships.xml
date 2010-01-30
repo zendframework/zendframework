@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.relationships">
-
     <title>Zend_Db_Table Relationships</title>
 
     <sect2 id="zend.db.table.relationships.introduction">
-
         <title>Introduction</title>
 
         <para>
@@ -18,11 +16,9 @@
             The <classname>Zend_Db_Table_Row</classname> class has methods for querying related rows
             in other tables.
         </para>
-
     </sect2>
 
     <sect2 id="zend.db.table.relationships.defining">
-
         <title>Defining Relationships</title>
 
         <para>
@@ -103,14 +99,12 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </para>
 
         <note>
-
             <para>
                 Skip declaration of <varname>$_dependentTables</varname> if you use referential
                 integrity constraints in the <acronym>RDBMS</acronym> server to implement cascading
                 operations. See <xref linkend="zend.db.table.relationships.cascading" /> for more
                 information.
             </para>
-
         </note>
 
         <para>
@@ -203,11 +197,9 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 </para>
             </listitem>
         </itemizedlist>
-
     </sect2>
 
     <sect2 id="zend.db.table.relationships.fetching.dependent">
-
         <title>Fetching a Dependent Rowset</title>
 
         <para>
@@ -232,7 +224,6 @@ $row->findDependentRowset($table, [$rule]);
         </para>
 
         <example id="zend.db.table.relationships.fetching.dependent.example">
-
             <title>Fetching a Dependent Rowset</title>
 
             <para>
@@ -247,7 +238,6 @@ $user1234 = $accountsRowset->current();
 
 $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -264,7 +254,6 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
         </para>
 
         <example id="zend.db.table.relationships.fetching.dependent.example-by">
-
             <title>Fetching a Dependent Rowset By a Specific Rule</title>
 
             <para>
@@ -281,7 +270,6 @@ $user1234 = $accountsRowset->current();
 
 $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -290,9 +278,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
         </para>
 
         <para>
-
             <example id="zend.db.table.relationships.fetching.dependent.example-by-select">
-
                 <title>Fetching a Dependent Rowset using a Zend_Db_Table_Select</title>
 
                 <para>
@@ -312,7 +298,6 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                                                      'Engineer',
                                                      $select);
 ]]></programlisting>
-
             </example>
 
             Alternatively, you can query rows from a dependent table using a special mechanism
@@ -343,7 +328,6 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
         </para>
 
         <note>
-
             <para>
                 Some application frameworks, such as Ruby on Rails, use a mechanism called
                 "inflection" to allow the spelling of identifiers to change depending on usage. For
@@ -351,11 +335,9 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                 mechanism. The table identity and the rule key named in the method call must match
                 the spelling of the class and rule key exactly.
             </para>
-
         </note>
 
         <example id="zend.db.table.relationships.fetching.dependent.example-magic">
-
             <title>Fetching Dependent Rowsets using the Magic Method</title>
 
             <para>
@@ -375,13 +357,10 @@ $bugsReportedBy = $user1234->findBugs();
 // Specify the reference rule
 $bugsAssignedTo = $user1234->findBugsByEngineer();
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.db.table.relationships.fetching.parent">
-
         <title>Fetching a Parent Row</title>
 
         <para>
@@ -405,7 +384,6 @@ $row->findParentRow($table, [$rule]);
         </para>
 
         <example id="zend.db.table.relationships.fetching.parent.example">
-
             <title>Fetching the Parent Row</title>
 
             <para>
@@ -421,7 +399,6 @@ $bug1 = $bugsRowset->current();
 
 $reporter = $bug1->findParentRow('Accounts');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -437,7 +414,6 @@ $reporter = $bug1->findParentRow('Accounts');
         </para>
 
         <example id="zend.db.table.relationships.fetching.parent.example-by">
-
             <title>Fetching a Parent Row By a Specific Rule</title>
 
             <para>
@@ -454,7 +430,6 @@ $bug1 = $bugsRowset->current();
 
 $engineer = $bug1->findParentRow('Accounts', 'Engineer');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -486,16 +461,13 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
         </para>
 
         <note>
-
             <para>
                 The table identity and the rule key named in the method call must match the
                 spelling of the class and rule key exactly.
             </para>
-
         </note>
 
         <example id="zend.db.table.relationships.fetching.parent.example-magic">
-
             <title>Fetching the Parent Row using the Magic Method</title>
 
             <para>
@@ -515,13 +487,10 @@ $reporter = $bug1->findParentAccounts();
 // Specify the reference rule
 $engineer = $bug1->findParentAccountsByEngineer();
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.db.table.relationships.fetching.many-to-many">
-
         <title>Fetching a Rowset via a Many-to-many Relationship</title>
 
         <para>
@@ -562,7 +531,6 @@ $row->findManyToManyRowset($table,
         </para>
 
         <example id="zend.db.table.relationships.fetching.many-to-many.example">
-
             <title>Fetching a Rowset with the Many-to-many Method</title>
 
             <para>
@@ -579,7 +547,6 @@ $bug1234 = $bugsRowset->current();
 $productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -614,7 +581,6 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         </para>
 
         <example id="zend.db.table.relationships.fetching.many-to-many.example-by">
-
             <title>Fetching a Rowset with the Many-to-many Method By a Specific Rule</title>
 
             <para>
@@ -632,7 +598,6 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts',
                                                  'Bug');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -676,16 +641,13 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         </para>
 
         <note>
-
             <para>
                 The table identities and the rule keys named in the method call must match the
                 spelling of the class and rule key exactly.
             </para>
-
         </note>
 
         <example id="zend.db.table.relationships.fetching.many-to-many.example-magic">
-
             <title>Fetching Rowsets using the Magic Many-to-many Method</title>
 
             <para>
@@ -704,17 +666,13 @@ $products = $bug1234->findProductsViaBugsProducts();
 // Specify the reference rule
 $products = $bug1234->findProductsViaBugsProductsByBug();
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.db.table.relationships.cascading">
-
         <title>Cascading Write Operations</title>
 
         <note>
-
             <title>Declare DRI in the database:</title>
 
             <para>
@@ -742,7 +700,6 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
                 Most importantly, do not declare cascading operations both in the
                 <acronym>RDBMS</acronym> and in your <classname>Zend_Db_Table</classname> class.
             </para>
-
         </note>
 
         <para>
@@ -752,7 +709,6 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-delete">
-
             <title>Example of a Cascading Delete</title>
 
             <para>
@@ -769,7 +725,6 @@ $product1234->delete();
 // Automatically cascades to Bugs table
 // and deletes dependent rows.
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -796,7 +751,6 @@ $product1234->delete();
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-declaration">
-
             <title>Example Declaration of Cascading Operations</title>
 
             <para>
@@ -829,11 +783,9 @@ class BugsProducts extends Zend_Db_Table_Abstract
     );
 }
 ]]></programlisting>
-
         </example>
 
         <sect3 id="zend.db.table.relationships.cascading.notes">
-
             <title>Notes Regarding Cascading Operations</title>
 
             <para>
@@ -899,11 +851,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 row to a parent table in one operation, and insert row(s) to a dependent table in a
                 separate operation.
             </para>
-
         </sect3>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

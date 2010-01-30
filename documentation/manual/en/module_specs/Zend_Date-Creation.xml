@@ -32,7 +32,6 @@
             <programlisting language="php"><![CDATA[
 $date = new Zend_Date();
 ]]></programlisting>
-
         </example>
 
         <example id="zend.date.creation.actual.example-2">
@@ -124,41 +123,16 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
         </para>
 
         <itemizedlist mark='opencircle'>
-            <listitem>
-                <para>
-                    <emphasis>day</emphasis>: day of the date as number
-                </para>
-            </listitem>
+            <listitem><para><emphasis>day</emphasis>: day of the date as number</para></listitem>
 
             <listitem>
-                <para>
-                    <emphasis>month</emphasis>: month of the date as number
-                </para>
+                <para><emphasis>month</emphasis>: month of the date as number</para>
             </listitem>
 
-            <listitem>
-                <para>
-                    <emphasis>year</emphasis>: full year of the date
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>hour</emphasis>: hour of the date
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>minute</emphasis>: minute of the date
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>second</emphasis>: second of the date
-                </para>
-            </listitem>
+            <listitem><para><emphasis>year</emphasis>: full year of the date</para></listitem>
+            <listitem><para><emphasis>hour</emphasis>: hour of the date</para></listitem>
+            <listitem><para><emphasis>minute</emphasis>: minute of the date</para></listitem>
+            <listitem><para><emphasis>second</emphasis>: second of the date</para></listitem>
         </itemizedlist>
 
         <example id="zend.date.creation.array.example">

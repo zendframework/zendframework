@@ -13,6 +13,7 @@
 
     <example id="zend.debug.dumping.example">
         <title>Example of dump() method</title>
+
         <programlisting language="php"><![CDATA[
 Zend_Debug::dump($var, $label = null, $echo = true);
 ]]></programlisting>
@@ -51,11 +52,13 @@ Zend_Debug::dump($var, $label = null, $echo = true);
 
     <tip>
         <title>Debugging with Zend_Log</title>
+
         <para>
             Using <methodname>Zend_Debug::dump()</methodname> is best for ad hoc
             debugging during software development. You can add code to dump
             a variable and then remove the code very quickly.
         </para>
+
         <para>
             Also consider the <link linkend="zend.log.overview">Zend_Log</link>
             component when writing more permanent debugging code. For example,
@@ -64,7 +67,6 @@ Zend_Debug::dump($var, $label = null, $echo = true);
             output the string returned by <methodname>Zend_Debug::dump()</methodname>.
         </para>
     </tip>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

@@ -139,25 +139,30 @@ print_r (Zend_Date_Cities::getCityList());
                         <entry>Usage</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>effective</entry>
                         <entry>Standard horizon</entry>
+
                         <entry>
                             Expects the world to be a ball. This horizon is always used if non is
                             defined.
                         </entry>
                     </row>
+
                     <row>
                         <entry>civil</entry>
                         <entry>Common horizon</entry>
                         <entry>Often used in common medias like TV or radio</entry>
                     </row>
+
                     <row>
                         <entry>nautic</entry>
                         <entry>Nautic horizon</entry>
                         <entry>Often used in sea navigation</entry>
                     </row>
+
                     <row>
                         <entry>astronomic</entry>
                         <entry>Astronomic horizon</entry>
@@ -200,6 +205,7 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
 
         <example id="zend.date.additional.sunrise-sunset.example-3">
             <title>Calculating Sun Information</title>
+
             <programlisting language="php"><![CDATA[
 // Get the location for a defined city
 $city = Zend_Date_Cities::city('Vienna');

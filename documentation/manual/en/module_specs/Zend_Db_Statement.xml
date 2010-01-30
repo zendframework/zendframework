@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.db.statement">
-
     <title>Zend_Db_Statement</title>
 
     <para>
@@ -18,7 +17,6 @@
     </para>
 
     <sect2 id="zend.db.statement.creating">
-
         <title>Creating a Statement</title>
 
         <para>
@@ -32,6 +30,7 @@
 
         <example id="zend.db.statement.creating.example1">
             <title>Creating a SQL statement object with query()</title>
+
             <programlisting language="php"><![CDATA[
 $stmt = $db->query(
             'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?',
@@ -58,17 +57,16 @@ $stmt = $db->query(
 
         <example id="zend.db.statement.creating.example2">
             <title>Using a SQL statement constructor</title>
+
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 
 $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.db.statement.executing">
-
         <title>Executing a Statement</title>
 
         <para>
@@ -87,6 +85,7 @@ $stmt = new Zend_Db_Statement_Mysqli($db, $sql);
 
         <example id="zend.db.statement.executing.example1">
             <title>Executing a statement with positional parameters</title>
+
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE reported_by = ? AND bug_status = ?';
 
@@ -105,6 +104,7 @@ $stmt->execute(array('goofy', 'FIXED'));
 
         <example id="zend.db.statement.executing.example2">
             <title>Executing a statement with named parameters</title>
+
             <programlisting language="php"><![CDATA[
 $sql = 'SELECT * FROM bugs WHERE ' .
        'reported_by = :reporter AND bug_status = :status';
@@ -121,11 +121,9 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
             the <classname>Zend_Db_Statement</classname> classes for non-PDO extensions may support
             only one type of parameter or the other.
         </para>
-
     </sect2>
 
     <sect2 id="zend.db.statement.fetching">
-
         <title>Fetching Results from a SELECT Statement</title>
 
         <para>
@@ -139,7 +137,6 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
         </para>
 
         <sect3 id="zend.db.statement.fetching.fetch">
-
             <title>Fetching a Single Row from a Result Set</title>
 
             <para>
@@ -159,6 +156,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         corresponding data formats.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>Cursor orientation</emphasis>
@@ -168,6 +166,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
                         the result set, in the order returned by the <acronym>RDBMS</acronym>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>Offset</emphasis> is the third
@@ -189,6 +188,7 @@ $stmt->execute(array(':reporter' => 'goofy', ':status' => 'FIXED'));
 
             <example id="zend.db.statement.fetching.fetch.example">
                 <title>Using fetch() in a loop</title>
+
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
@@ -202,11 +202,9 @@ while ($row = $stmt->fetch()) {
                 See also <ulink
                    url="http://www.php.net/PDOStatement-fetch">PDOStatement::fetch()</ulink>.
             </para>
-
         </sect3>
 
         <sect3 id="zend.db.statement.fetching.fetchall">
-
             <title>Fetching a Complete Result Set</title>
 
             <para>
@@ -221,6 +219,7 @@ while ($row = $stmt->fetch()) {
 
             <example id="zend.db.statement.fetching.fetchall.example">
                 <title>Using fetchAll()</title>
+
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
@@ -234,11 +233,9 @@ echo $rows[0]['bug_description'];
                 See also <ulink
                     url="http://www.php.net/PDOStatement-fetchAll">PDOStatement::fetchAll()</ulink>.
             </para>
-
         </sect3>
 
         <sect3 id="zend.db.statement.fetching.fetch-mode">
-
             <title>Changing the Fetch Mode</title>
 
             <para>
@@ -258,6 +255,7 @@ echo $rows[0]['bug_description'];
 
             <example id="zend.db.statement.fetching.fetch-mode.example">
                 <title>Setting the fetch mode</title>
+
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT * FROM bugs');
 
@@ -273,11 +271,9 @@ echo $rows[0][0];
                 See also <ulink
                     url="http://www.php.net/PDOStatement-setFetchMode">PDOStatement::setFetchMode()</ulink>.
             </para>
-
         </sect3>
 
         <sect3 id="zend.db.statement.fetching.fetchcolumn">
-
             <title>Fetching a Single Column from a Result Set</title>
 
             <para>
@@ -300,6 +296,7 @@ echo $rows[0][0];
 
             <example id="zend.db.statement.fetching.fetchcolumn.example">
                 <title>Using fetchColumn()</title>
+
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 
@@ -311,11 +308,9 @@ $bug_status = $stmt->fetchColumn(2);
                 See also <ulink
                     url="http://www.php.net/PDOStatement-fetchColumn">PDOStatement::fetchColumn()</ulink>.
             </para>
-
         </sect3>
 
         <sect3 id="zend.db.statement.fetching.fetchobject">
-
             <title>Fetching a Row as an Object</title>
 
             <para>
@@ -329,6 +324,7 @@ $bug_status = $stmt->fetchColumn(2);
 
             <example id="zend.db.statement.fetching.fetchobject.example">
                 <title>Using fetchObject()</title>
+
                 <programlisting language="php"><![CDATA[
 $stmt = $db->query('SELECT bug_id, bug_description, bug_status FROM bugs');
 
@@ -342,9 +338,7 @@ echo $obj->bug_description;
                 See also <ulink
                     url="http://www.php.net/PDOStatement-fetchObject">PDOStatement::fetchObject()</ulink>.
             </para>
-
         </sect3>
-
     </sect2>
 
     <!--
@@ -391,5 +385,4 @@ echo $obj->bug_description;
 
     </sect2>
     -->
-
 </sect1>

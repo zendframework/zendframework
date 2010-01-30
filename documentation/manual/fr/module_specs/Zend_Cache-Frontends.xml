@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17136 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.frontends">
     <title>Les frontends Zend_Cache</title>
@@ -651,6 +651,21 @@ $res = $cache->foobar2('1', '2');
                 (le système émettra un en-tête "<acronym>HTTP</acronym> 304 Not Modified" si le
                 cache est trouvé, et si le navigateur a déjà la bonne version).
             </para>
+
+            <note>
+                <para>
+                    This frontend operates by registering a callback function to be called
+                    when the output buffering it uses is cleaned. In order for this to operate
+                    correctly, it must be the final output buffer in the request. To guarantee
+                    this, the output buffering used by the Dispatcher needs to be disabled by
+                    calling <classname>Zend_Controller_Front</classname>'s <methodname>setParam()
+                    </methodname> method, for example, $front->setParam('disableOutputBuffering',
+                    true) or adding
+                    "resources.frontcontroller.params.disableOutputBuffering = true"
+                    to your bootstrap configuration file (assumed INI) if using
+                    <classname>Zend_Application</classname>.
+                </para>
+            </note>
         </sect3>
 
         <sect3 id="zend.cache.frontends.page.options">

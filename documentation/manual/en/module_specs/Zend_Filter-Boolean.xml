@@ -221,9 +221,7 @@ $filter->filter('yes');
                 <thead>
                     <row>
                         <entry>Type</entry>
-
                         <entry>True</entry>
-
                         <entry>False</entry>
                     </row>
                 </thead>
@@ -231,73 +229,55 @@ $filter->filter('yes');
                 <tbody>
                     <row>
                         <entry>Zend_Filter_Boolean::BOOLEAN</entry>
-
                         <entry><constant>TRUE</constant></entry>
-
                         <entry><constant>FALSE</constant></entry>
                     </row>
 
                     <row>
                         <entry>Zend_Filter_Boolean::INTEGER</entry>
-
                         <entry>0</entry>
-
                         <entry>1</entry>
                     </row>
 
                     <row>
                         <entry>Zend_Filter_Boolean::FLOAT</entry>
-
                         <entry>0.0</entry>
-
                         <entry>1.0</entry>
                     </row>
 
                     <row>
                         <entry>Zend_Filter_Boolean::STRING</entry>
-
                         <entry>""</entry>
-
                         <entry />
                     </row>
 
                     <row>
                         <entry>Zend_Filter_Boolean::ZERO</entry>
-
                         <entry>"0"</entry>
-
                         <entry>"1"</entry>
                     </row>
 
                     <row>
                         <entry>Zend_Filter_Boolean::EMPTY_ARRAY</entry>
-
                         <entry>array()</entry>
-
                         <entry />
                     </row>
 
                     <row>
                         <entry>Zend_Filter_Boolean::NULL</entry>
-
                         <entry><constant>NULL</constant></entry>
-
                         <entry />
                     </row>
 
                     <row>
                         <entry>Zend_Filter_Boolean::FALSE_STRING</entry>
-
                         <entry>"false" (case independently)</entry>
-
                         <entry>"true" (case independently)</entry>
                     </row>
 
                     <row>
                         <entry>Zend_Filter_Boolean::YES</entry>
-
                         <entry>localized "yes" (case independently)</entry>
-
                         <entry>localized "no" (case independently)</entry>
                     </row>
                 </tbody>

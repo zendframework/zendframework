@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.callback">
     <title>Callback</title>
+
     <para>
         This filter allows you to use own methods in conjunction with
         <classname>Zend_Filter</classname>. You don't have to create a new filter when you already
@@ -71,5 +72,4 @@ $value = MyMethod('Hello', 'param1', 'param2');
             an exception.
         </para>
     </note>
-
 </sect2>

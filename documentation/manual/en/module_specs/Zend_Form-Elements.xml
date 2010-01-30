@@ -20,18 +20,20 @@
             </itemizedlist>
         </listitem>
 
-        <listitem><para>
-            filtering (how is the element escaped or normalized prior to
-            validation and/or for output?)
-        </para></listitem>
+        <listitem>
+            <para>
+                filtering (how is the element escaped or normalized prior to
+                validation and/or for output?)
+            </para>
+        </listitem>
 
-        <listitem><para>
-            rendering (how is the element displayed?)
-        </para></listitem>
+        <listitem>
+            <para>rendering (how is the element displayed?)</para>
+        </listitem>
 
-        <listitem><para>
-            metadata and attributes (what information further qualifies the element?)
-        </para></listitem>
+        <listitem>
+            <para>metadata and attributes (what information further qualifies the element?)</para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -66,37 +68,45 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>setPluginLoader($loader, $type)</methodname>:
-                <varname>$loader</varname> is the plugin loader object itself, while
-                <varname>$type</varname> is one of the types specified above. This
-                sets the plugin loader for the given type to the newly
-                specified loader object.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setPluginLoader($loader, $type)</methodname>:
+                    <varname>$loader</varname> is the plugin loader object itself, while
+                    <varname>$type</varname> is one of the types specified above. This
+                    sets the plugin loader for the given type to the newly
+                    specified loader object.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>getPluginLoader($type)</methodname>: retrieves the plugin
-                loader associated with <varname>$type</varname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>getPluginLoader($type)</methodname>: retrieves the plugin
+                    loader associated with <varname>$type</varname>.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: adds
-                a prefix/path association to the loader specified by
-                <varname>$type</varname>. If <varname>$type</varname> is <constant>NULL</constant>,
-                it will attempt to add the path to all loaders, by appending the prefix
-                with each of "_Validate", "_Filter", and "_Decorator"; and
-                appending the path with "Validate/", "Filter/", and
-                "Decorator/". If you have all your extra form element classes
-                under a common hierarchy, this is a convenience method for
-                setting the base prefix for them.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: adds
+                    a prefix/path association to the loader specified by
+                    <varname>$type</varname>. If <varname>$type</varname> is
+                    <constant>NULL</constant>, it will attempt to add the path to all loaders, by
+                    appending the prefix with each of "_Validate", "_Filter", and "_Decorator"; and
+                    appending the path with "Validate/", "Filter/", and
+                    "Decorator/". If you have all your extra form element classes
+                    under a common hierarchy, this is a convenience method for
+                    setting the base prefix for them.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>addPrefixPaths(array $spec)</methodname>: allows you to add
-                many paths at once to one or more plugin loaders. It expects
-                each array item to be an array with the keys 'path', 'prefix',
-                and 'type'.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addPrefixPaths(array $spec)</methodname>: allows you to add
+                    many paths at once to one or more plugin loaders. It expects
+                    each array item to be an array with the keys 'path', 'prefix',
+                    and 'type'.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -214,14 +224,18 @@ $filtered = $element->getValue();
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                passing in a concrete filter instance
-            </para></listitem>
+            <listitem>
+                <para>
+                    passing in a concrete filter instance
+                </para>
+            </listitem>
 
-            <listitem><para>
-                providing a filter name – either a short name or fully
-                qualified class name
-            </para></listitem>
+            <listitem>
+                <para>
+                    providing a filter name – either a short name or fully
+                    qualified class name
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -287,33 +301,47 @@ $unfiltered = $element->getUnfilteredValue();
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>addFilter($nameOfFilter, array $options = null)</methodname>
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addFilter($nameOfFilter, array $options = null)</methodname>
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>addFilters(array $filters)</methodname>
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addFilters(array $filters)</methodname>
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setFilters(array $filters)</methodname> (overwrites all filters)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setFilters(array $filters)</methodname> (overwrites all filters)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>getFilter($name)</methodname> (retrieve a filter object by name)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>getFilter($name)</methodname> (retrieve a filter object by name)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>getFilters()</methodname> (retrieve all filters)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>getFilters()</methodname> (retrieve all filters)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>removeFilter($name)</methodname> (remove filter by name)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>removeFilter($name)</methodname> (remove filter by name)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>clearFilters()</methodname> (remove all filters)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>clearFilters()</methodname> (remove all filters)
+                </para>
+            </listitem>
         </itemizedlist>
     </sect2>
 
@@ -332,14 +360,18 @@ $unfiltered = $element->getUnfilteredValue();
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                passing in a concrete validator instance
-            </para></listitem>
+            <listitem>
+                <para>
+                    passing in a concrete validator instance
+                </para>
+            </listitem>
 
-            <listitem><para>
-                providing a validator name – either a short name or fully
-                qualified class name
-            </para></listitem>
+            <listitem>
+                <para>
+                    providing a validator name – either a short name or fully
+                    qualified class name
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -669,59 +701,80 @@ $messages = $element->getMessages();
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setRequired($flag)</methodname> and
                     <methodname>isRequired()</methodname> allow you to set and retrieve the
                     status of the 'required' flag. When set to boolean <constant>TRUE</constant>,
                     this flag requires that the element be in the data processed by
                     <classname>Zend_Form</classname>.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setAllowEmpty($flag)</methodname> and
                     <methodname>getAllowEmpty()</methodname> allow you to modify the
                     behaviour of optional elements (i.e., elements where the
                     required flag is <constant>FALSE</constant>). When the 'allow empty' flag is
                     <constant>TRUE</constant>, empty values will not be passed to the validator
                     chain.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setAutoInsertNotEmptyValidator($flag)</methodname> allows
                     you to specify whether or not a 'NotEmpty' validator will be
                     prepended to the validator chain when the element is
                     required. By default, this flag is <constant>TRUE</constant>.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>addValidator($nameOrValidator, $breakChainOnFailure = false, array $options =
-                    null)</code>
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>addValidator($nameOrValidator, $breakChainOnFailure = false, array
+                        $options = null)</code>
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>addValidators(array $validators)</methodname>
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addValidators(array $validators)</methodname>
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setValidators(array $validators)</methodname> (overwrites all
-                validators)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setValidators(array $validators)</methodname> (overwrites all
+                    validators)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>getValidator($name)</methodname> (retrieve a validator object by name)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>getValidator($name)</methodname> (retrieve a validator object by
+                    name)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>getValidators()</methodname> (retrieve all validators)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>getValidators()</methodname> (retrieve all validators)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>removeValidator($name)</methodname> (remove validator by name)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>removeValidator($name)</methodname> (remove validator by name)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>clearValidators()</methodname> (remove all validators)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>clearValidators()</methodname> (remove all validators)
+                </para>
+            </listitem>
         </itemizedlist>
 
         <sect3 id="zend.form.elements.validators.errors">
@@ -736,59 +789,79 @@ $messages = $element->getMessages();
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <methodname>addErrorMessage($message)</methodname>: add an error message
-                    to display on form validation errors. You may call this more
-                    than once, and new messages are appended to the stack.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addErrorMessage($message)</methodname>: add an error message
+                        to display on form validation errors. You may call this more
+                        than once, and new messages are appended to the stack.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addErrorMessages(array $messages)</methodname>: add multiple
-                    error messages to display on form validation errors.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addErrorMessages(array $messages)</methodname>: add multiple
+                        error messages to display on form validation errors.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setErrorMessages(array $messages)</methodname>: add multiple
-                    error messages to display on form validation errors,
-                    overwriting all previously set error messages.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setErrorMessages(array $messages)</methodname>: add multiple
+                        error messages to display on form validation errors,
+                        overwriting all previously set error messages.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getErrorMessages()</methodname>: retrieve the list of
-                    custom error messages that have been defined.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getErrorMessages()</methodname>: retrieve the list of
+                        custom error messages that have been defined.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>clearErrorMessages()</methodname>: remove all custom error
-                    messages that have been defined.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>clearErrorMessages()</methodname>: remove all custom error
+                        messages that have been defined.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>markAsError()</methodname>: mark the element as having
-                    failed validation.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>markAsError()</methodname>: mark the element as having
+                        failed validation.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>hasErrors()</methodname>: determine whether the element has
-                    either failed validation or been marked as invalid.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>hasErrors()</methodname>: determine whether the element has
+                        either failed validation or been marked as invalid.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addError($message)</methodname>: add a message to the custom
-                    error messages stack and flag the element as invalid.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addError($message)</methodname>: add a message to the custom
+                        error messages stack and flag the element as invalid.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addErrors(array $messages)</methodname>: add several
-                    messages to the custom error messages stack and flag the
-                    element as invalid.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addErrors(array $messages)</methodname>: add several
+                        messages to the custom error messages stack and flag the
+                        element as invalid.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setErrors(array $messages)</methodname>: overwrite the
-                    custom error messages stack with the provided messages and
-                    flag the element as invalid.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setErrors(array $messages)</methodname>: overwrite the
+                        custom error messages stack with the provided messages and
+                        flag the element as invalid.
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>
@@ -825,38 +898,48 @@ $messages = $element->getMessages();
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <emphasis>ViewHelper</emphasis>: specifies a view helper to use
-                to render the element. The 'helper' element attribute can be
-                used to specify which view helper to use. By default,
-                <classname>Zend_Form_Element</classname> specifies the 'formText' view
-                helper, but individual subclasses specify different helpers.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>ViewHelper</emphasis>: specifies a view helper to use
+                    to render the element. The 'helper' element attribute can be
+                    used to specify which view helper to use. By default,
+                    <classname>Zend_Form_Element</classname> specifies the 'formText' view
+                    helper, but individual subclasses specify different helpers.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>Errors</emphasis>: appends error messages to the
-                element using <classname>Zend_View_Helper_FormErrors</classname>. If none are
-                present, nothing is appended.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>Errors</emphasis>: appends error messages to the
+                    element using <classname>Zend_View_Helper_FormErrors</classname>. If none are
+                    present, nothing is appended.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>Description</emphasis>: appends the element
-                description. If none is present, nothing is appended. By
-                default, the description is rendered in a &lt;p&gt; tag with a
-                class of 'description'.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>Description</emphasis>: appends the element
+                    description. If none is present, nothing is appended. By
+                    default, the description is rendered in a &lt;p&gt; tag with a
+                    class of 'description'.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>HtmlTag</emphasis>: wraps the element and errors in
-                an HTML &lt;dd&gt; tag.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>HtmlTag</emphasis>: wraps the element and errors in
+                    an HTML &lt;dd&gt; tag.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>Label</emphasis>: prepends a label to the element
-                using <classname>Zend_View_Helper_FormLabel</classname>, and wraps it in a
-                &lt;dt&gt; tag. If no label is provided, just the definition term tag is
-                rendered.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>Label</emphasis>: prepends a label to the element
+                    using <classname>Zend_View_Helper_FormLabel</classname>, and wraps it in a
+                    &lt;dt&gt; tag. If no label is provided, just the definition term tag is
+                    rendered.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <note>
@@ -930,8 +1013,7 @@ $this->addDecorators(array(
 
         <para>
             For more information on decorators, read the <link
-                linkend="zend.form.decorators">Zend_Form_Decorator
-                section</link>.
+                linkend="zend.form.decorators">Zend_Form_Decorator section</link>.
         </para>
 
         <note>
@@ -989,34 +1071,49 @@ $fooBar  = $element->getDecorator('FooBar');
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>addDecorator($nameOrDecorator, array $options = null)</methodname>
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addDecorator($nameOrDecorator, array $options = null)</methodname>
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>addDecorators(array $decorators)</methodname>
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addDecorators(array $decorators)</methodname>
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setDecorators(array $decorators)</methodname> (overwrites all
-                decorators)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setDecorators(array $decorators)</methodname> (overwrites all
+                    decorators)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>getDecorator($name)</methodname> (retrieve a decorator object by name)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>getDecorator($name)</methodname> (retrieve a decorator object by
+                    name)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>getDecorators()</methodname> (retrieve all decorators)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>getDecorators()</methodname> (retrieve all decorators)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>removeDecorator($name)</methodname> (remove decorator by name)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>removeDecorator($name)</methodname> (remove decorator by name)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>clearDecorators()</methodname> (remove all decorators)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>clearDecorators()</methodname> (remove all decorators)
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -1051,64 +1148,81 @@ echo $element->renderHtmlTag("This is the html tag content");
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <emphasis>name</emphasis>: the element name. Uses the
-                <methodname>setName()</methodname> and <methodname>getName()</methodname> accessors.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>name</emphasis>: the element name. Uses the
+                    <methodname>setName()</methodname> and <methodname>getName()</methodname>
+                    accessors.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>label</emphasis>: the element label. Uses the
-                <methodname>setLabel()</methodname> and <methodname>getLabel()</methodname>
-                accessors.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>label</emphasis>: the element label. Uses the
+                    <methodname>setLabel()</methodname> and <methodname>getLabel()</methodname>
+                    accessors.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>order</emphasis>: the index at which an element
-                should appear in the form. Uses the <methodname>setOrder()</methodname> and
-                <methodname>getOrder()</methodname> accessors.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>order</emphasis>: the index at which an element
+                    should appear in the form. Uses the <methodname>setOrder()</methodname> and
+                    <methodname>getOrder()</methodname> accessors.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>value</emphasis>: the current element value. Uses the
-                <methodname>setValue()</methodname> and <methodname>getValue()</methodname>
-                accessors.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>value</emphasis>: the current element value. Uses the
+                    <methodname>setValue()</methodname> and <methodname>getValue()</methodname>
+                    accessors.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>description</emphasis>: a description of the element;
-                often used to provide tooltip or javascript contextual hinting
-                describing the purpose of the element. Uses the
-                <methodname>setDescription()</methodname> and
-                <methodname>getDescription()</methodname> accessors.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>description</emphasis>: a description of the element;
+                    often used to provide tooltip or javascript contextual hinting
+                    describing the purpose of the element. Uses the
+                    <methodname>setDescription()</methodname> and
+                    <methodname>getDescription()</methodname> accessors.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>required</emphasis>: flag indicating whether or not
-                the element is required when performing form validation. Uses
-                the <methodname>setRequired()</methodname> and
-                <methodname>getRequired()</methodname> accessors. This flag is
-                <constant>FALSE</constant> by default.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>required</emphasis>: flag indicating whether or not
+                    the element is required when performing form validation. Uses
+                    the <methodname>setRequired()</methodname> and
+                    <methodname>getRequired()</methodname> accessors. This flag is
+                    <constant>FALSE</constant> by default.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>allowEmpty</emphasis>: flag indicating whether or not
-                a non-required (optional) element should attempt to validate
-                empty values. If it is set to <constant>TRUE</constant> and the required flag is
-                <constant>FALSE</constant>, empty values are not passed to the validator chain and
-                are presumed <constant>TRUE</constant>. Uses the
-                <methodname>setAllowEmpty()</methodname> and
-                <methodname>getAllowEmpty()</methodname> accessors. This flag is
-                <constant>TRUE</constant> by default.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>allowEmpty</emphasis>: flag indicating whether or not
+                    a non-required (optional) element should attempt to validate
+                    empty values. If it is set to <constant>TRUE</constant> and the required flag is
+                    <constant>FALSE</constant>, empty values are not passed to the validator chain
+                    and are presumed <constant>TRUE</constant>. Uses the
+                    <methodname>setAllowEmpty()</methodname> and
+                    <methodname>getAllowEmpty()</methodname> accessors. This flag is
+                    <constant>TRUE</constant> by default.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>autoInsertNotEmptyValidator</emphasis>: flag
-                indicating whether or not to insert a 'NotEmpty' validator when
-                the element is required. By default, this flag is <constant>TRUE</constant>. Set the
-                flag with <methodname>setAutoInsertNotEmptyValidator($flag)</methodname> and
-                determine the value with
-                <methodname>autoInsertNotEmptyValidator()</methodname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>autoInsertNotEmptyValidator</emphasis>: flag
+                    indicating whether or not to insert a 'NotEmpty' validator when
+                    the element is required. By default, this flag is <constant>TRUE</constant>. Set
+                    the flag with <methodname>setAutoInsertNotEmptyValidator($flag)</methodname> and
+                    determine the value with
+                    <methodname>autoInsertNotEmptyValidator()</methodname>.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -1118,24 +1232,32 @@ echo $element->renderHtmlTag("This is the html tag content");
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <emphasis>setAttrib($name, $value)</emphasis>: add an attribute
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>setAttrib($name, $value)</emphasis>: add an attribute
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>setAttribs(array $attribs)</emphasis>: like
-                addAttribs(), but overwrites
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>setAttribs(array $attribs)</emphasis>: like
+                    addAttribs(), but overwrites
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>getAttrib($name)</emphasis>: retrieve a single
-                attribute value
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>getAttrib($name)</emphasis>: retrieve a single
+                    attribute value
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <emphasis>getAttribs()</emphasis>: retrieve all attributes as
-                key/value pairs
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>getAttribs()</emphasis>: retrieve all attributes as
+                    key/value pairs
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -1175,18 +1297,23 @@ $element->class = 'text;
         </para>
 
         <itemizedlist>
-            <listitem><para>Configuration:</para>
+            <listitem>
+                <para>Configuration:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para><methodname>setOptions(array $options)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>setConfig(Zend_Config $config)</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>I18n:</para>
+            <listitem>
+                <para>I18n:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
@@ -1194,17 +1321,22 @@ $element->class = 'text;
                                 = null)</methodname>
                         </para>
                     </listitem>
+
                     <listitem><para><methodname>getTranslator()</methodname></para></listitem>
+
                     <listitem>
                         <para><methodname>setDisableTranslator($flag)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>translatorIsDisabled()</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Properties:</para>
+            <listitem>
+                <para>Properties:</para>
+
                 <itemizedlist>
                     <listitem><para><methodname>setName($name)</methodname></para></listitem>
                     <listitem><para><methodname>getName()</methodname></para></listitem>
@@ -1213,9 +1345,11 @@ $element->class = 'text;
                     <listitem><para><methodname>getUnfilteredValue()</methodname></para></listitem>
                     <listitem><para><methodname>setLabel($label)</methodname></para></listitem>
                     <listitem><para><methodname>getLabel()</methodname></para></listitem>
+
                     <listitem>
                         <para><methodname>setDescription($description)</methodname></para>
                     </listitem>
+
                     <listitem><para><methodname>getDescription()</methodname></para></listitem>
                     <listitem><para><methodname>setOrder($order)</methodname></para></listitem>
                     <listitem><para><methodname>getOrder()</methodname></para></listitem>
@@ -1223,27 +1357,35 @@ $element->class = 'text;
                     <listitem><para><methodname>getRequired()</methodname></para></listitem>
                     <listitem><para><methodname>setAllowEmpty($flag)</methodname></para></listitem>
                     <listitem><para><methodname>getAllowEmpty()</methodname></para></listitem>
+
                     <listitem>
                         <para><methodname>setAutoInsertNotEmptyValidator($flag)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>autoInsertNotEmptyValidator()</methodname></para>
                     </listitem>
+
                     <listitem><para><methodname>setIgnore($flag)</methodname></para></listitem>
                     <listitem><para><methodname>getIgnore()</methodname></para></listitem>
                     <listitem><para><methodname>getType()</methodname></para></listitem>
+
                     <listitem>
                         <para><methodname>setAttrib($name, $value)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>setAttribs(array $attribs)</methodname></para>
                     </listitem>
+
                     <listitem><para><methodname>getAttrib($name)</methodname></para></listitem>
                     <listitem><para><methodname>getAttribs()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Plugin loaders and paths:</para>
+            <listitem>
+                <para>Plugin loaders and paths:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
@@ -1251,21 +1393,26 @@ $element->class = 'text;
                                 $type)</code>
                         </para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>getPluginLoader($type)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>
                         </para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>addPrefixPaths(array $spec)</methodname></para>
                     </listitem>
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Validation:</para>
+            <listitem>
+                <para>Validation:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
@@ -1273,37 +1420,49 @@ $element->class = 'text;
                                 array())</code>
                         </para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>addValidators(array $validators)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>setValidators(array $validators)</methodname></para>
                     </listitem>
+
                     <listitem><para><methodname>getValidator($name)</methodname></para></listitem>
                     <listitem><para><methodname>getValidators()</methodname></para></listitem>
+
                     <listitem>
                         <para><methodname>removeValidator($name)</methodname></para>
                     </listitem>
+
                     <listitem><para><methodname>clearValidators()</methodname></para></listitem>
+
                     <listitem>
                         <para><methodname>isValid($value, $context = null)</methodname></para>
                     </listitem>
+
                     <listitem><para><methodname>getErrors()</methodname></para></listitem>
                     <listitem><para><methodname>getMessages()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Filters:</para>
+            <listitem>
+                <para>Filters:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para><methodname>addFilter($filter, $options = array())</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>addFilters(array $filters)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>setFilters(array $filters)</methodname></para>
                     </listitem>
+
                     <listitem><para><methodname>getFilter($name)</methodname></para></listitem>
                     <listitem><para><methodname>getFilters()</methodname></para></listitem>
                     <listitem><para><methodname>removeFilter($name)</methodname></para></listitem>
@@ -1311,31 +1470,41 @@ $element->class = 'text;
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Rendering:</para>
+            <listitem>
+                <para>Rendering:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
                             <methodname>setView(Zend_View_Interface $view = null)</methodname>
                         </para>
                     </listitem>
+
                     <listitem><para><methodname>getView()</methodname></para></listitem>
+
                     <listitem>
                         <para>
                             <methodname>addDecorator($decorator, $options = null)</methodname>
                         </para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>addDecorators(array $decorators)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>setDecorators(array $decorators)</methodname></para>
                     </listitem>
+
                     <listitem><para><methodname>getDecorator($name)</methodname></para></listitem>
                     <listitem><para><methodname>getDecorators()</methodname></para></listitem>
+
                     <listitem>
                         <para><methodname>removeDecorator($name)</methodname></para>
                     </listitem>
+
                     <listitem><para><methodname>clearDecorators()</methodname></para></listitem>
+
                     <listitem>
                         <para>
                             <methodname>render(Zend_View_Interface $view = null)</methodname>
@@ -1358,14 +1527,18 @@ $element->class = 'text;
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                If 'set' + key refers to a <classname>Zend_Form_Element</classname>
-                method, then the value provided will be passed to that method.
-            </para></listitem>
+            <listitem>
+                <para>
+                    If 'set' + key refers to a <classname>Zend_Form_Element</classname>
+                    method, then the value provided will be passed to that method.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Otherwise, the value will be used to set an attribute.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Otherwise, the value will be used to set an attribute.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -1373,10 +1546,12 @@ $element->class = 'text;
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <code>prefixPath</code> will be passed to
-                <methodname>addPrefixPaths()</methodname>
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>prefixPath</code> will be passed to
+                    <methodname>addPrefixPaths()</methodname>
+                </para>
+            </listitem>
 
             <listitem>
                 <para>
@@ -1384,20 +1559,17 @@ $element->class = 'text;
                 </para>
 
                 <itemizedlist>
-                    <listitem><para>
+                    <listitem>
+                        <para>
                             <code>setAttrib</code> (though
-                            <code>setAttribs</code> <emphasis>will</emphasis>
-                            work)
-                    </para></listitem>
+                            <code>setAttribs</code> <emphasis>will</emphasis> work)
+                        </para>
+                    </listitem>
 
                     <listitem><para><code>setConfig</code></para></listitem>
-
                     <listitem><para><code>setOptions</code></para></listitem>
-
                     <listitem><para><code>setPluginLoader</code></para></listitem>
-
                     <listitem><para><code>setTranslator</code></para></listitem>
-
                     <listitem><para><code>setView</code></para></listitem>
                 </itemizedlist>
             </listitem>
@@ -1448,13 +1620,17 @@ decorators.label.decorator = "Label"
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Elements that share common validators and/or filters
-            </para></listitem>
+            <listitem>
+                <para>
+                    Elements that share common validators and/or filters
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Elements that have custom decorator functionality
-            </para></listitem>
+            <listitem>
+                <para>
+                    Elements that have custom decorator functionality
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

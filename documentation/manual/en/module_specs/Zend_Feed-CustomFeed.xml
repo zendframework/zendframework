@@ -18,6 +18,7 @@
 
     <example id="zend.feed.custom-feed.example.extending">
         <title>Extending the Atom Entry Class with Custom Namespaces</title>
+
         <programlisting language="php"><![CDATA[
 /**
  * The custom entry class automatically knows the feed URI (optional) and
@@ -89,7 +90,6 @@ $entry->myUpdated();
 $entry->myUpdated;
 ]]></programlisting>
     </example>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

@@ -66,49 +66,21 @@ $form->setAttrib('id', 'login');
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                button
-            </para></listitem>
+            <listitem><para>button</para></listitem>
 
-            <listitem><para>
-                checkbox (or many checkboxes at once with multiCheckbox)
-            </para></listitem>
+            <listitem>
+                <para>checkbox (or many checkboxes at once with multiCheckbox)</para>
+            </listitem>
 
-            <listitem><para>
-                hidden
-            </para></listitem>
-
-            <listitem><para>
-                image
-            </para></listitem>
-
-            <listitem><para>
-                password
-            </para></listitem>
-
-            <listitem><para>
-                radio
-            </para></listitem>
-
-            <listitem><para>
-                reset
-            </para></listitem>
-
-            <listitem><para>
-                select (both regular and multi-select types)
-            </para></listitem>
-
-            <listitem><para>
-                submit
-            </para></listitem>
-
-            <listitem><para>
-                text
-            </para></listitem>
-
-            <listitem><para>
-                textarea
-            </para></listitem>
+            <listitem><para>hidden</para></listitem>
+            <listitem><para>image</para></listitem>
+            <listitem><para>password</para></listitem>
+            <listitem><para>radio</para></listitem>
+            <listitem><para>reset</para></listitem>
+            <listitem><para>select (both regular and multi-select types)</para></listitem>
+            <listitem><para>submit</para></listitem>
+            <listitem><para>text</para></listitem>
+            <listitem><para>textarea</para></listitem>
         </itemizedlist>
 
         <para>
@@ -237,12 +209,14 @@ $form->addElement('text', 'username', array(
 ));
 ]]></programlisting>
 
-        <note><para>
-            If you find you are setting up elements using the same options in
-            many locations, you may want to consider creating your own
-            <classname>Zend_Form_Element</classname> subclass and utilizing that class
-            instead; this will save you typing in the long-run.
-        </para></note>
+        <note>
+            <para>
+                If you find you are setting up elements using the same options in
+                many locations, you may want to consider creating your own
+                <classname>Zend_Form_Element</classname> subclass and utilizing that class
+                instead; this will save you typing in the long-run.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.form.quickstart.render">
@@ -417,8 +391,8 @@ $unfiltered = $form->getUnfilteredValues();
 ]]></programlisting>
 
         <para>
-            If you on the other hand need all the valid and filtered values of a partially valid form,
-            you can call:
+            If you on the other hand need all the valid and filtered values of a partially valid
+            form, you can call:
         </para>
 
         <programlisting language="php"><![CDATA[

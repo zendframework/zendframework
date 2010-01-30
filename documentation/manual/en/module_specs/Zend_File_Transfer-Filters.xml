@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.filters">
-
     <title>Filters for Zend_File_Transfer</title>
 
     <para>
@@ -21,22 +20,26 @@
                 <code>Decrypt</code>: This filter can decrypt a encrypted file.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>Encrypt</code>: This filter can encrypt a file.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>LowerCase</code>: This filter can lowercase the content of a textfile.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>Rename</code>: This filter can rename files, change the location and even
                 force overwriting of existing files.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>UpperCase</code>: This filter can uppercase the content of a textfile.
@@ -179,7 +182,6 @@ $upload = new Zend_File_Transfer();
 $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
        ->addFilter('Rename', 'C:\picture\newgif', 'file2');
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -189,7 +191,6 @@ $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
                 different options for the same filter.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.file.transfer.filters.decrypt">
@@ -224,7 +225,6 @@ $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addFilter('Decrypt',
     array('adapter' => 'mcrypt', 'key' => 'mykey'));
 ]]></programlisting>
-
         </example>
 
         <example id="zend.file.transfer.filters.decrypt.example2">
@@ -240,7 +240,6 @@ $upload->addFilter('Decrypt',
           'private' => '/path/to/privatekey.pem',
           'envelope' => '/path/to/envelopekey.pem'));
 ]]></programlisting>
-
         </example>
     </sect2>
 
@@ -276,7 +275,6 @@ $upload = new Zend_File_Transfer_Adapter_Http();
 $upload->addFilter('Encrypt',
     array('adapter' => 'mcrypt', 'key' => 'mykey'));
 ]]></programlisting>
-
         </example>
 
         <example id="zend.file.transfer.filters.encrypt.example2">
@@ -291,7 +289,6 @@ $upload->addFilter('Encrypt',
     array('adapter' => 'openssl',
           'public' => '/path/to/publickey.pem'));
 ]]></programlisting>
-
         </example>
     </sect2>
 
@@ -324,7 +321,6 @@ $upload->addFilter('LowerCase', null, 'uploadfile1');
 // Adds a filter to lowercase with encoding set to ISO-8859-1
 $upload->addFilter('LowerCase', 'ISO-8859-1');
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -334,7 +330,6 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
                 want to limit it to a single file element.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.file.transfer.filters.rename">
@@ -387,7 +382,6 @@ $upload->addFilter('Rename', 'C:\mypics\new');
 // Set a new destination path only for uploadfile1
 $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -397,46 +391,47 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
         </para>
 
         <table id="zend.file.transfer.filters.rename.notations">
-
             <title>Different notations of the rename filter and their meaning</title>
 
             <tgroup cols="2" align="left">
                 <thead>
                     <row>
-                        <entry>
-                            notation
-                        </entry>
-                        <entry>
-                            description
-                        </entry>
+                        <entry>notation</entry>
+                        <entry>description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>
                             <methodname>addFile('C:\uploads')</methodname>
                         </entry>
+
                         <entry>
                             Specifies a new location for all files when the given string is a
                             directory. Note that you will get an exception when the file already
                             exists, see the overwriting parameter.
                         </entry>
                     </row>
+
                     <row>
                         <entry>
                             <methodname>addFile('C:\uploads\file.ext')</methodname>
                         </entry>
+
                         <entry>
                             Specifies a new location and filename for all files when the given
                             string is not detected as directory. Note that you will get an exception
                             when the file already exists, see the overwriting parameter.
                         </entry>
                     </row>
+
                     <row>
                         <entry>
                             <methodname>addFile(array('C:\uploads\file.ext', 'overwrite' =>
                                 true)</methodname>)
                         </entry>
+
                         <entry>
                             Specifies a new location and filename for all files when the given
                             string is not detected as directory and overwrites an existing file with
@@ -444,22 +439,26 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                             file was overwritten.
                         </entry>
                     </row>
+
                     <row>
                         <entry>
                             <methodname>addFile(array('source' => 'C:\temp\uploads', 'target' =>
                                 'C:\uploads')</methodname>)
                         </entry>
+
                         <entry>
                             Specifies a new location for all files in the old location when the
                             given strings are detected as directory. Note that you will get an
                             exception when the file already exists, see the overwriting parameter.
                         </entry>
                     </row>
+
                     <row>
                         <entry>
                             addFile(array('source' => 'C:\temp\uploads', 'target' => 'C:\uploads',
                             'overwrite' => true))
                         </entry>
+
                         <entry>
                             Specifies a new location for all files in the old location when the
                             given strings are detected as directory and overwrites and existing file
@@ -469,9 +468,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
                 </tbody>
             </tgroup>
-
         </table>
-
     </sect2>
 
     <sect2 id="zend.file.transfer.filters.uppercase">
@@ -503,7 +500,6 @@ $upload->addFilter('UpperCase', null, 'uploadfile1');
 // Adds a filter to uppercase with encoding set to ISO-8859-1
 $upload->addFilter('UpperCase', 'ISO-8859-1');
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -513,9 +509,7 @@ $upload->addFilter('UpperCase', 'ISO-8859-1');
                 want to limit it to a single file element.
             </para>
         </note>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 tw=80 et:

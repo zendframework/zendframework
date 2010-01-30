@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.introduction">
-
     <title>Zend_File_Transfer</title>
 
     <para>
@@ -14,6 +13,7 @@
 
     <note>
         <title>Limitation</title>
+
         <para>
             The current implementation of <classname>Zend_File_Transfer</classname> is limited to
             <acronym>HTTP</acronym> Post Uploads. Other adapters supporting downloads and other
@@ -26,6 +26,7 @@
 
     <note>
         <title>Forms</title>
+
         <para>
             When you are using <classname>Zend_Form</classname> you should use the
             <acronym>API</acronym>s provided by <classname>Zend_Form</classname> and not
@@ -45,10 +46,12 @@
 
     <example id="zend.file.transfer.introduction.example">
         <title>Simple Form for Uploading Files</title>
+
         <para>
             This example illustrates basic file uploading.
             The first part is the file form. In our example there is one file to upload.
         </para>
+
         <programlisting language="xml"><![CDATA[
 <form enctype="multipart/form-data" action="/file/upload" method="POST">
     <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
@@ -57,16 +60,19 @@
     <input type="submit" value="Upload File" />
 </form>
 ]]></programlisting>
+
         <para>
            For convenience, you can use <link
                linkend="zend.form.standardElements.file">Zend_Form_Element_File</link> instead of
            building the HTML manually.
         </para>
+
         <para>
             The next step is to create the receiver of the upload. In our example the receiver is
             located at <code>/file/upload</code>. So next we will create the <code>file</code>
             controller and the <code>upload</code> action.
         </para>
+
         <programlisting language="php"><![CDATA[
 $adapter = new Zend_File_Transfer_Adapter_Http();
 
@@ -77,17 +83,18 @@ if (!$adapter->receive()) {
     echo implode("\n", $messages);
 }
 ]]></programlisting>
+
         <para>
             This code listing demonstrates the simplest usage of
             <classname>Zend_File_Transfer</classname>. A local destination is set with the
             <code>setDestination</code> method, then the <methodname>receive()</methodname> method
             is called. if there are any upload errors, an error will be returned.
         </para>
-
     </example>
 
     <note>
         <title>Attention</title>
+
         <para>
             This example is suitable only for demonstrating the basic <acronym>API</acronym> of
             <classname>Zend_File_Transfer</classname>. You should <emphasis>never</emphasis> use
@@ -97,7 +104,6 @@ if (!$adapter->receive()) {
     </note>
 
     <sect2 id="zend.file.transfer.introduction.adapters">
-
         <title>Supported Adapters for Zend_File_Transfer</title>
 
         <para>
@@ -109,7 +115,6 @@ if (!$adapter->receive()) {
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.options">
-
         <title>Options for Zend_File_Transfer</title>
 
         <para>
@@ -133,7 +138,6 @@ if (!$adapter->receive()) {
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.checking">
-
         <title>Checking Files</title>
 
         <para>
@@ -198,7 +202,6 @@ foreach ($files as $file => $info) {
 
 $upload->receive();
 ]]></programlisting>
-
         </example>
     </sect2>
 
@@ -273,7 +276,6 @@ $names = $upload->getFileName();
 // Returns the file names from the 'foo' form element
 $names = $upload->getFileName('foo');
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -305,7 +307,6 @@ $size = $upload->getFileSize();
 $upload->setOption(array('useByteString' => false));
 $size = $upload->getFileSize();
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -338,7 +339,6 @@ $hash = $upload->getHash('md5');
 // Returns the hash for the 'foo' form element
 $names = $upload->getHash('crc32', 'foo');
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -367,7 +367,6 @@ $mime = $upload->getMimeType();
 // Returns the mimetype for the 'foo' form element
 $names = $upload->getMimeType('foo');
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -408,7 +407,6 @@ $names = $upload->getMimeType('foo');
     </sect2>
 
     <sect2 id="zend.file.transfer.introduction.uploadprogress">
-
         <title>Progress for file uploads</title>
 
         <para>
@@ -438,7 +436,6 @@ $names = $upload->getMimeType('foo');
         </para>
 
         <sect3 id="zend.file.transfer.introduction.uploadprogress.progressadapter">
-
             <title>Using a progressbar adapter</title>
 
             <para>
@@ -455,7 +452,6 @@ $names = $upload->getMimeType('foo');
             </para>
 
             <example id="zend.file.transfer.introduction.uploadprogress.progressadapter.example1">
-
                 <title>Using the progressbar adapter to retrieve the actual state</title>
 
                 <programlisting language="php"><![CDATA[
@@ -467,18 +463,15 @@ while (!$upload['done']) {
     $upload = Zend_File_Transfer_Adapter_Http:getProgress($upload);
 }
 ]]></programlisting>
-
             </example>
 
             <para>
                 The complete handling is done by <methodname>getProgress()</methodname> for you in
                 the background.
             </para>
-
         </sect3>
 
         <sect3 id="zend.file.transfer.introduction.uploadprogress.manually">
-
             <title>Using getProgress() manually</title>
 
             <para>
@@ -568,7 +561,6 @@ while (!$upload['done']) {
             </para>
 
             <example id="zend.file.transfer.introduction.uploadprogress.manually.example1">
-
                 <title>Manual usage of the file progress</title>
 
                 <programlisting language="php"><![CDATA[
@@ -580,13 +572,9 @@ while (!$upload['done']) {
     // do whatever you need
 }
 ]]></programlisting>
-
             </example>
-
         </sect3>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 tw=80 et:

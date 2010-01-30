@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.localizedtonormalized">
-
     <title>LocalizedToNormalized</title>
 
     <para>
@@ -74,7 +73,6 @@
     </note>
 
     <sect3 id="zend.filter.set.localizedtonormalized.numbers">
-
         <title>Normalization for numbers</title>
 
         <para>
@@ -147,11 +145,9 @@ $filter->filter('123.456');
 $filter->filter('123.456,78901');
 // returns the value '123456.79'
 ]]></programlisting>
-
     </sect3>
 
     <sect3 id="zend.filter.set.localizedtonormalized.dates">
-
         <title>Normalization for date and time</title>
 
         <para>
@@ -186,9 +182,7 @@ $filter->filter('11:22:33');
 // returns array('hour' => '33', 'minute' => '22', 'second' => '11')
 ]]></programlisting>
     </sect3>
-
 </sect2>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

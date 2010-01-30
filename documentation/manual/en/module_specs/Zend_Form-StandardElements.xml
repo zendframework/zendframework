@@ -232,7 +232,6 @@ if (!$form->foo->receive()) {
 
 $location = $form->foo->getFileName();
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -570,15 +569,16 @@ $form->addElement('hash', 'no_csrf_foo', array('salt' => 'unique'));
                 <para><methodname>addMultiOptions(array $options)</methodname></para>
             </listitem>
 
-            <listitem><para><methodname>setMultiOptions(array $options)</methodname>
-                    (overwrites existing options)</para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setMultiOptions(array $options)</methodname> (overwrites existing
+                    options)
+                </para>
+            </listitem>
 
             <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
-
             <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
-
             <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
-
             <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
 
@@ -630,15 +630,16 @@ $element->setValue(array('bar', 'bat'));
                 <para><methodname>addMultiOptions(array $options)</methodname></para>
             </listitem>
 
-            <listitem><para><methodname>setMultiOptions(array $options)</methodname>
-                    (overwrites existing options)</para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setMultiOptions(array $options)</methodname> (overwrites existing
+                    options)
+                </para>
+            </listitem>
 
             <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
-
             <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
-
             <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
-
             <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
 
@@ -710,15 +711,16 @@ $element->setValue(array('bar', 'bat'));
                 <para><methodname>addMultiOptions(array $options)</methodname></para>
             </listitem>
 
-            <listitem><para><methodname>setMultiOptions(array $options)</methodname>
-                    (overwrites existing options)</para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setMultiOptions(array $options)</methodname>
+                    (overwrites existing options)
+                </para>
+            </listitem>
 
             <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
-
             <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
-
             <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
-
             <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
     </sect2>
@@ -774,15 +776,16 @@ $element->setValue(array('bar', 'bat'));
                 <para><methodname>addMultiOptions(array $options)</methodname></para>
             </listitem>
 
-            <listitem><para><methodname>setMultiOptions(array $options)</methodname>
-                    (overwrites existing options)</para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setMultiOptions(array $options)</methodname>
+                    (overwrites existing options)
+                </para>
+            </listitem>
 
             <listitem><para><methodname>getMultiOption($option)</methodname></para></listitem>
-
             <listitem><para><methodname>getMultiOptions()</methodname></para></listitem>
-
             <listitem><para><methodname>removeMultiOption($option)</methodname></para></listitem>
-
             <listitem><para><methodname>clearMultiOptions()</methodname></para></listitem>
         </itemizedlist>
 

@@ -39,7 +39,6 @@
             is a standalone replacement for <classname>Zend_Feed</classname>'s Builder architecture
             and is not compatible with those classes.
         </para>
-
     </sect2>
 
     <sect2 id="zend.feed.writer.architecture">
@@ -175,13 +174,13 @@ $out = $feed->export('atom');
 </programlisting>
 
         <para>
-            This is a perfectly valid Atom 1.0 example. It should be noted that omitting an obligatory point
-            of data, such as a title, will trigger an <classname>Exception</classname> when
-            rendering as Atom 1.0. This will differ for RSS 2.0 since a title may be omitted so long
-            as a description is present. This gives rise to Exceptions that differ between the two
-            standards depending on the renderer in use. By design,
-            <classname>Zend_Feed_Writer</classname> will not render an invalid feed for either
-            standard unless the end-user deliberately elects to ignore all Exceptions.
+            This is a perfectly valid Atom 1.0 example. It should be noted that omitting an
+            obligatory point of data, such as a title, will trigger an
+            <classname>Exception</classname> when rendering as Atom 1.0. This will differ for RSS
+            2.0 since a title may be omitted so long as a description is present. This gives rise to
+            Exceptions that differ between the two standards depending on the renderer in use. By
+            design, <classname>Zend_Feed_Writer</classname> will not render an invalid feed for
+            either standard unless the end-user deliberately elects to ignore all Exceptions.
         </para>
     </sect2>
 
@@ -226,21 +225,21 @@ $out = $feed->export('atom');
                     <row>
                         <entry><methodname>setId()</methodname></entry>
 
-                        <entry>Set a unique ID associated with this feed. For Atom 1.0
-                        this is an atom:id element, whereas for RSS 2.0 it is added
-                        as a guid element. These are optional so long as a link is
-                        added, i.e. the link is set as the ID.</entry>
+                        <entry>
+                            Set a unique ID associated with this feed. For Atom 1.0
+                            this is an atom:id element, whereas for RSS 2.0 it is added
+                            as a guid element. These are optional so long as a link is
+                            added, i.e. the link is set as the ID.
+                        </entry>
                     </row>
 
                     <row>
                         <entry><methodname>setTitle()</methodname></entry>
-
                         <entry>Set the title of the feed.</entry>
                     </row>
 
                     <row>
                         <entry><methodname>setDescription()</methodname></entry>
-
                         <entry>Set the text description of the feed.</entry>
                     </row>
 
@@ -310,8 +309,9 @@ $out = $feed->export('atom');
                         <entry><methodname>getDateModified()</methodname></entry>
 
                         <entry>
-                            Sets the date on which this feed was last modified. The expected parameter
-                            may be a UNIX timestamp or a <classname>Zend_Date</classname> object.
+                            Sets the date on which this feed was last modified. The expected
+                            parameter may be a UNIX timestamp or a <classname>Zend_Date</classname>
+                            object.
                         </entry>
                     </row>
 
@@ -337,10 +337,7 @@ $out = $feed->export('atom');
 
                     <row>
                         <entry><methodname>setCopyright()</methodname></entry>
-
-                        <entry>
-                            Sets a copyright notice associated with the feed.
-                        </entry>
+                        <entry>Sets a copyright notice associated with the feed.</entry>
                     </row>
 
                     <row>
@@ -350,8 +347,9 @@ $out = $feed->export('atom');
                             Accepts an array of Pubsubhubbub Hub Endpoints to be rendered in
                             the feed as Atom links so that PuSH Subscribers may subscribe to
                             your feed. Note that you must implement a Pubsubhubbub Publisher in
-                            order for real-time updates to be enabled. A Publisher may be implemented
-                            using <classname>Zend_Feed_Pubsubhubbub_Publisher</classname>.
+                            order for real-time updates to be enabled. A Publisher may be
+                            implemented using
+                            <classname>Zend_Feed_Pubsubhubbub_Publisher</classname>.
                         </entry>
                     </row>
 
@@ -359,12 +357,13 @@ $out = $feed->export('atom');
                         <entry><methodname>setCategories()</methodname></entry>
 
                         <entry>
-                            Accepts an array of categories for rendering, where each element is itself
-                            an array whose possible keys include "term", "label" and "scheme". The "term"
-                            is a typically a category name suitable for inclusion in a URI. The "label"
-                            may be a human readable category name supporting special characters (it is encoded
-                            during rendering) and is a required key. The "scheme" (called the domain in RSS)
-                            is optional but must be a valid URI.
+                            Accepts an array of categories for rendering, where each element is
+                            itself an array whose possible keys include "term", "label" and
+                            "scheme". The "term" is a typically a category name suitable for
+                            inclusion in a URI. The "label" may be a human readable category name
+                            supporting special characters (it is encoded during rendering) and is a
+                            required key. The "scheme" (called the domain in RSS) is optional but
+                            must be a valid URI.
                         </entry>
                     </row>
                 </tbody>
@@ -376,8 +375,8 @@ $out = $feed->export('atom');
         <title>Setting Entry Data Points</title>
 
         <para>
-            Here's a summary of the Core <acronym>API</acronym> for Entries/Items. You should note it
-            comprises not only the basic <acronym>RSS</acronym> and Atom standards, but also
+            Here's a summary of the Core <acronym>API</acronym> for Entries/Items. You should note
+            it comprises not only the basic <acronym>RSS</acronym> and Atom standards, but also
             accounts for a number of included Extensions bundled with
             <classname>Zend_Feed_Writer</classname>. The naming of these
             Extension sourced methods remain fairly generic - all Extension
@@ -401,13 +400,11 @@ $out = $feed->export('atom');
 
                     <row>
                         <entry><methodname>setTitle()</methodname></entry>
-
                         <entry>Set the title of the feed.</entry>
                     </row>
 
                     <row>
                         <entry><methodname>setDescription()</methodname></entry>
-
                         <entry>Set the text description of the feed.</entry>
                     </row>
 
@@ -477,8 +474,9 @@ $out = $feed->export('atom');
                         <entry><methodname>getDateModified()</methodname></entry>
 
                         <entry>
-                            Sets the date on which this feed was last modified. The expected parameter
-                            may be a UNIX timestamp or a <classname>Zend_Date</classname> object.
+                            Sets the date on which this feed was last modified. The expected
+                            parameter may be a UNIX timestamp or a <classname>Zend_Date</classname>
+                            object.
                         </entry>
                     </row>
 
@@ -504,10 +502,7 @@ $out = $feed->export('atom');
 
                     <row>
                         <entry><methodname>setCopyright()</methodname></entry>
-
-                        <entry>
-                            Sets a copyright notice associated with the feed.
-                        </entry>
+                        <entry>Sets a copyright notice associated with the feed.</entry>
                     </row>
 
                     <row>
@@ -517,8 +512,9 @@ $out = $feed->export('atom');
                             Accepts an array of Pubsubhubbub Hub Endpoints to be rendered in
                             the feed as Atom links so that PuSH Subscribers may subscribe to
                             your feed. Note that you must implement a Pubsubhubbub Publisher in
-                            order for real-time updates to be enabled. A Publisher may be implemented
-                            using <classname>Zend_Feed_Pubsubhubbub_Publisher</classname>.
+                            order for real-time updates to be enabled. A Publisher may be
+                            implemented using
+                            <classname>Zend_Feed_Pubsubhubbub_Publisher</classname>.
                         </entry>
                     </row>
 
@@ -526,12 +522,13 @@ $out = $feed->export('atom');
                         <entry><methodname>setCategories()</methodname></entry>
 
                         <entry>
-                            Accepts an array of categories for rendering, where each element is itself
-                            an array whose possible keys include "term", "label" and "scheme". The "term"
-                            is a typically a category name suitable for inclusion in a URI. The "label"
-                            may be a human readable category name supporting special characters (it is encoded
-                            during rendering) and is a required key. The "scheme" (called the domain in RSS)
-                            is optional but must be a valid URI.
+                            Accepts an array of categories for rendering, where each element is
+                            itself an array whose possible keys include "term", "label" and
+                            "scheme". The "term" is a typically a category name suitable for
+                            inclusion in a URI. The "label" may be a human readable category name
+                            supporting special characters (it is encoded during rendering) and is a
+                            required key. The "scheme" (called the domain in RSS) is optional but
+                            must be a valid URI.
                         </entry>
                     </row>
                 </tbody>

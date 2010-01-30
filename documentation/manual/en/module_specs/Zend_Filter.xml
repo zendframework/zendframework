@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.introduction">
-
     <title>Introduction</title>
 
     <para>
@@ -12,7 +11,6 @@
     </para>
 
     <sect2 id="zend.filter.introduction.definition">
-
         <title>What is a filter?</title>
 
         <para>
@@ -44,11 +42,9 @@
             <classname>Zend_Filter</classname>, means to perform some transformations upon input
             data.
         </para>
-
     </sect2>
 
     <sect2 id="zend.filter.introduction.using">
-
         <title>Basic usage of filters</title>
 
         <para>
@@ -69,13 +65,10 @@ $htmlEntities = new Zend_Filter_HtmlEntities();
 echo $htmlEntities->filter('&'); // &amp;
 echo $htmlEntities->filter('"'); // &quot;
 ]]></programlisting>
-
         </para>
-
     </sect2>
 
     <sect2 id="zend.filter.introduction.static">
-
         <title>Using the static staticFilter() method</title>
 
         <para>
@@ -93,7 +86,6 @@ echo $htmlEntities->filter('"'); // &quot;
             <programlisting language="php"><![CDATA[
 echo Zend_Filter::filterStatic('&', 'HtmlEntities');
 ]]></programlisting>
-
         </para>
 
         <para>
@@ -105,7 +97,6 @@ echo Zend_Filter::filterStatic('"',
                                'HtmlEntities',
                                array('quotestyle' => ENT_QUOTES));
 ]]></programlisting>
-
         </para>
 
         <para>
@@ -123,7 +114,6 @@ echo Zend_Filter::filterStatic('"',
         </para>
 
         <sect3 id="zend.filter.introduction.static.namespaces">
-
             <title>Namespaces</title>
 
             <para>

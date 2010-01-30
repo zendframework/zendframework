@@ -106,9 +106,9 @@
 
         <para>
             The following example filter rule set that declares the field
-            'month' is filtered by <classname>Zend_Filter_Digits</classname>, and the field 'account'
-            is filtered by <classname>Zend_Filter_StringTrim</classname>. Then a validation rule set
-            declares that the field 'account' is valid only if it contains only
+            'month' is filtered by <classname>Zend_Filter_Digits</classname>, and the field
+            'account' is filtered by <classname>Zend_Filter_StringTrim</classname>. Then a
+            validation rule set declares that the field 'account' is valid only if it contains only
             alphabetical characters.
         </para>
 
@@ -144,6 +144,7 @@ $validators = array(
 ]]></programlisting>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     An object instance of one of the classes that implement
@@ -157,6 +158,7 @@ $validators = array(
 ]]></programlisting>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     An array, to declare a chain of filters or validators.
@@ -202,11 +204,9 @@ $filters = array(
     'month' => 'Digits'
 );
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.filter.input.running">
-
         <title>Creating the Filter and Validator Processor</title>
 
         <para>
@@ -252,11 +252,9 @@ $input->setData($newData);
             validation rules. Using this method, you can run the same rules
             against different sets of input data.
         </para>
-
     </sect2>
 
     <sect2 id="zend.filter.input.results">
-
         <title>Retrieving Validated Fields and other Reports</title>
 
         <para>
@@ -267,7 +265,6 @@ $input->setData($newData);
         </para>
 
         <sect3 id="zend.filter.input.results.isvalid">
-
             <title>Querying if the input is valid</title>
 
             <para>
@@ -295,11 +292,9 @@ if ($input->isValid('month')) {
   echo "Field 'month' is OK\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.filter.input.results.reports">
-
             <title>Getting Invalid, Missing, or Unknown Fields</title>
 
             <itemizedlist>
@@ -310,6 +305,7 @@ if ($input->isValid('month')) {
                         checks.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>Missing</emphasis> fields are
@@ -320,6 +316,7 @@ if ($input->isValid('month')) {
                         on metacommands).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>Unknown</emphasis> fields are
@@ -423,11 +420,9 @@ $input->setTranslator($translate);
                 names, because no rule mentions the fields considered to be
                 unknown fields.
             </para>
-
         </sect3>
 
         <sect3 id="zend.filter.input.results.escaping">
-
             <title>Getting Valid Fields</title>
 
             <para>
@@ -531,13 +526,10 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
                 <classname>Zend_Filter_Input</classname> and implement new methods in your subclass
                 to get values in different ways.
             </para>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.filter.input.metacommands">
-
         <title>Using Metacommands to Control Filter or Validator Rules</title>
 
         <para>
@@ -549,7 +541,6 @@ $input->setDefaultEscapeFilter(new Zend_Filter_StringTrim());
         </para>
 
         <sect3 id="zend.filter.input.metacommands.fields">
-
             <title>The FIELDS metacommand</title>
 
             <para>
@@ -619,11 +610,9 @@ $validators = array(
                 <methodname>getInvalid()</methodname>, not any of the fields named in
                 the 'fields' metacommand.
             </para>
-
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.presence">
-
             <title>The PRESENCE metacommand</title>
 
             <para>
@@ -651,11 +640,9 @@ $validators = array(
             <para>
                 The default value of this metacommand is 'optional'.
             </para>
-
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.default">
-
             <title>The DEFAULT_VALUE metacommand</title>
 
             <para>
@@ -708,11 +695,9 @@ echo $input->month; // echoes 1
             <para>
                 There is no default value for this metacommand.
             </para>
-
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.allow-empty">
-
             <title>The ALLOW_EMPTY metacommand</title>
 
             <para>
@@ -774,11 +759,9 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
 $input = new Zend_Filter_Input($filters, $validators, $data);
 $input->setOptions($options);
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.break-chain">
-
             <title>The BREAK_CHAIN metacommand</title>
 
             <para>
@@ -845,11 +828,9 @@ $validators = array(
 );
 $input = new Zend_Filter_Input(null, $validators);
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.messages">
-
             <title>The MESSAGES metacommand</title>
 
             <para>
@@ -965,11 +946,9 @@ $validators = array(
     )
 );
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.filter.input.metacommands.global">
-
             <title>Using options to set metacommands for all rules</title>
 
             <para>
@@ -1001,13 +980,10 @@ $input = new Zend_Filter_Input($filters, $validators, $data, $options);
                 The 'fields', 'messages', and 'default' metacommands cannot be
                 set using this technique.
             </para>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.filter.input.namespaces">
-
         <title>Adding Filter Class Namespaces</title>
 
         <para>
@@ -1083,9 +1059,7 @@ $input->addFilterPrefixPath('Foo_Namespace', 'Foo/Namespace');
                 reservation of the keyword <code>namespace</code>.
             </para>
         </note>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

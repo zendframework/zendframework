@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.validators">
-
     <title>Validators for Zend_File_Transfer</title>
 
     <para>
@@ -303,7 +302,6 @@ $upload->addValidator('Size', false, 20000)
        ->addValidator('Count', false, 2)
        ->addValidator('Filessize', false, 25000);
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -340,7 +338,6 @@ if ($upload->isValid()) {
     print "Validation failure";
 }
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -358,7 +355,6 @@ if ($upload->isValid()) {
             <methodname>hasErrors()</methodname> which returns <constant>TRUE</constant> as soon as
             a validation error has been found.
         </para>
-
     </sect2>
 
     <sect2 id="zend.file.transfer.validators.count">
@@ -421,8 +417,8 @@ $upload->addValidator('Count', false, 2);
 // Limit the amount of files to maximum 5 and minimum 1 file
 $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
 ]]></programlisting>
-
         </example>
+
         <note>
             <para>
                 Note that this validator stores the number of checked files internally. The file
@@ -436,8 +432,8 @@ $upload->addValidator('Count', false, array('min' =>1, 'max' => 5));
 
         <para>
             The <code>Crc32</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension from <acronym>PHP</acronym> with the crc32 algorithm.
-            It supports the following options:
+            This validator uses the hash extension from <acronym>PHP</acronym> with the crc32
+            algorithm. It supports the following options:
         </para>
 
         <itemizedlist>
@@ -528,8 +524,8 @@ $upload->addValidator('ExcludeExtension',
                       false,
                       array('php', 'exe', 'case' => true));
 ]]></programlisting>
-
         </example>
+
         <note>
             <para>
                 Note that this validator only checks the file extension. It does not check the
@@ -570,10 +566,11 @@ $upload->addValidator('ExcludeExtension',
         </itemizedlist>
 
         <para>
-            This validator accepts multiple <acronym>MIME</acronym> types, either as a comma-delimited string, or as
-            an array. You may also use the methods <methodname>setMimeType()</methodname>,
-            <methodname>addMimeType()</methodname>, and <methodname>getMimeType()</methodname> to
-            set and retrieve the <acronym>MIME</acronym> types.
+            This validator accepts multiple <acronym>MIME</acronym> types, either as a
+            comma-delimited string, or as an array. You may also use the methods
+            <methodname>setMimeType()</methodname>, <methodname>addMimeType()</methodname>, and
+            <methodname>getMimeType()</methodname> to set and retrieve the <acronym>MIME</acronym>
+            types.
         </para>
 
         <example id="zend.file.transfer.validators.excludemimetype.example">
@@ -595,18 +592,19 @@ $upload->addValidator('ExcludeMimeType', false, 'image');
         </example>
 
         <para>
-            The above example shows that it is also possible to disallow groups of <acronym>MIME</acronym> types.
-            For example, to disallow all images, just use 'image' as the <acronym>MIME</acronym> type. This can be used
-            for all groups of <acronym>MIME</acronym> types like 'image', 'audio', 'video', 'text', etc.
+            The above example shows that it is also possible to disallow groups of
+            <acronym>MIME</acronym> types. For example, to disallow all images, just use 'image' as
+            the <acronym>MIME</acronym> type. This can be used for all groups of
+            <acronym>MIME</acronym> types like 'image', 'audio', 'video', 'text', etc.
         </para>
 
         <note>
             <para>
-                Note that disallowing groups of <acronym>MIME</acronym> types will disallow all members of this group
-                even if this is not intentional. When you disallow 'image' you will disallow all
-                types of images like 'image/jpeg' or 'image/vasa'. When you are not sure if you want
-                to disallow all types, you should disallow only specific <acronym>MIME</acronym> types instead of
-                complete groups.
+                Note that disallowing groups of <acronym>MIME</acronym> types will disallow all
+                members of this group even if this is not intentional. When you disallow 'image' you
+                will disallow all types of images like 'image/jpeg' or 'image/vasa'. When you are
+                not sure if you want to disallow all types, you should disallow only specific
+                <acronym>MIME</acronym> types instead of complete groups.
             </para>
         </note>
     </sect2>
@@ -649,8 +647,8 @@ $upload->addValidator('Exists',
                       false,
                       array('\home\images', '\home\uploads'));
 ]]></programlisting>
-
         </example>
+
         <note>
             <para>
                 Note that this validator checks whether the specified file exists in all of the
@@ -716,8 +714,8 @@ if (!$upload->isValid('C:\temp\myfile.MO')) {
     print 'Not valid because MO and mo do not match with case sensitivity;
 }
 ]]></programlisting>
-
         </example>
+
         <note>
             <para>
                 Note that this validator only checks the file extension. It does not check the
@@ -805,8 +803,8 @@ $upload->addValidator('FilesSize',
                             'max' => '4MB',
                             'bytestring' => false));
 ]]></programlisting>
-
         </example>
+
         <note>
             <para>
                 Note that this validator internally stores the file size of checked files. The file
@@ -1033,8 +1031,8 @@ $upload->addValidator('Hash',
 
         <para>
             The <code>Md5</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension for <acronym>PHP</acronym> with the md5 algorithm.
-            It supports the following options:
+            This validator uses the hash extension for <acronym>PHP</acronym> with the md5
+            algorithm. It supports the following options:
         </para>
 
         <itemizedlist>
@@ -1072,15 +1070,15 @@ $upload->addValidator('Md5',
         <title>MimeType Validator</title>
 
         <para>
-            The <code>MimeType</code> validator checks the <acronym>MIME</acronym> type of transferred files.
-            It supports the following options:
+            The <code>MimeType</code> validator checks the <acronym>MIME</acronym> type of
+            transferred files. It supports the following options:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>*</code>: Sets any key or use a numeric array. Sets the <acronym>MIME</acronym> type to
-                    validate against.
+                    <code>*</code>: Sets any key or use a numeric array. Sets the
+                    <acronym>MIME</acronym> type to validate against.
                 </para>
 
                 <para>
@@ -1221,8 +1219,8 @@ $upload->addValidator('NotExists', false,
                             '\home\uploads')
                      );
 ]]></programlisting>
-
         </example>
+
         <note>
             <para>
                 Note that this validator checks if the file does not exist in all of the provided
@@ -1237,8 +1235,8 @@ $upload->addValidator('NotExists', false,
 
         <para>
             The <code>Sha1</code> validator checks the content of a transferred file by hashing it.
-            This validator uses the hash extension for <acronym>PHP</acronym> with the sha1 algorithm.
-            It supports the following options:
+            This validator uses the hash extension for <acronym>PHP</acronym> with the sha1
+            algorithm. It supports the following options:
         </para>
 
         <itemizedlist>
@@ -1385,7 +1383,6 @@ $upload->addValidator('WordCount', false, 2000);
 // Limit the amount of words within files to maximum 5000 and minimum 1000 words
 $upload->addValidator('WordCount', false, array('min' => 1000, 'max' => 5000));
 ]]></programlisting>
-
         </example>
     </sect2>
 </sect1>

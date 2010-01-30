@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
+
     <para>
         This filter will encrypt any given string with the provided setting. Therefor it makes use
         of Adapters. Actually there are adapters for the <code>Mcrypt</code> and
@@ -41,6 +42,7 @@ $filter->setAdapter('openssl');
 
     <sect3 id="zend.filter.set.encrypt.mcrypt">
         <title>Encryption with Mcrypt</title>
+
         <para>
             When you have installed the <code>Mcrypt</code> extension you can use the
             <code>Mcrypt</code> adapter. This adapter supports the following options at initiation:
@@ -158,6 +160,7 @@ print $encrypted;
 
     <sect3 id="zend.filter.set.encrypt.openssl">
         <title>Encryption with OpenSSL</title>
+
         <para>
             When you have installed the <code>OpenSSL</code> extension you can use the
             <code>OpenSSL</code> adapter. This adapter supports the following options at initiation:
@@ -269,7 +272,6 @@ print $encrypted;
 ]]></programlisting>
     </sect3>
 </sect2>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

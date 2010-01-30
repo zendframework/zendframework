@@ -424,47 +424,56 @@ if(isset($links->atom)) {
             all links using the ArrayObject's iterator.
         </para>
 
-                <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
 
 foreach ($links as $link) {
     echo $link['uri'], "\n";
 }
 ]]></programlisting>
-
   </sect2>
 
   <sect2 id="zend.feed.reader.attribute-collections">
         <title>Attribute Collections</title>
 
-        <para>In an attempt to simplify return types, with Zend Framework 1.10 return
-        types from the various feed and entry level methods may include an object
-        of type <classname>Zend_Feed_Reader_Collection_CollectionAbstract</classname>.
-        Despite the special class name which I'll explain below, this is just a simple
-        subclass of SPL's <classname>ArrayObject</classname>.</para>
+        <para>
+            In an attempt to simplify return types, with Zend Framework 1.10 return
+            types from the various feed and entry level methods may include an object
+            of type <classname>Zend_Feed_Reader_Collection_CollectionAbstract</classname>.
+            Despite the special class name which I'll explain below, this is just a simple
+            subclass of SPL's <classname>ArrayObject</classname>.
+        </para>
 
-        <para>The main purpose here is to allow the presentation of as much data as possible
-        from the requested elements, while still allowing access to the most relevant
-        data as a simple array. This also enforces a standard approach to returning
-        such data which previously may have wandered between arrays and objects.</para>
+        <para>
+            The main purpose here is to allow the presentation of as much data as possible
+            from the requested elements, while still allowing access to the most relevant
+            data as a simple array. This also enforces a standard approach to returning
+            such data which previously may have wandered between arrays and objects.
+        </para>
 
-        <para>The new class type acts identically to <classname>ArrayObject</classname>
-        with the sole addition being a new method <methodname>getValues()</methodname>
-        which returns a simple flat array containing the most relevant information.</para>
+        <para>
+            The new class type acts identically to <classname>ArrayObject</classname>
+            with the sole addition being a new method <methodname>getValues()</methodname>
+            which returns a simple flat array containing the most relevant information.
+        </para>
 
-        <para>A simple example of this is
-        <methodname>Zend_Feed_Reader_FeedInterface::getCategories()</methodname>.
-        When used with any RSS or Atom feed, this method will return category data as
-        a container object called <classname>Zend_Feed_Reader_Collection_Category</classname>.
-        The container object will contain, per category, three fields of data: term, scheme and
-        label. The "term" is the basic category name, often machine readable (i.e. plays nice
-        with URIs). The scheme represents a categorisation scheme (usually a URI identifier) also
-        known as a "domain" in RSS 2.0. The "label" is a human readable category name which supports
-        html entities. In RSS 2.0, there is no label attribute so it is always set to the same value as
-        the term for convenience.</para>
+        <para>
+            A simple example of this is
+            <methodname>Zend_Feed_Reader_FeedInterface::getCategories()</methodname>. When used with
+            any RSS or Atom feed, this method will return category data as a container object called
+            <classname>Zend_Feed_Reader_Collection_Category</classname>. The container object will
+            contain, per category, three fields of data: term, scheme and label. The "term" is the
+            basic category name, often machine readable (i.e. plays nice with URIs). The scheme
+            represents a categorisation scheme (usually a URI identifier) also known as a "domain"
+            in RSS 2.0. The "label" is a human readable category name which supports html entities.
+            In RSS 2.0, there is no label attribute so it is always set to the same value as the
+            term for convenience.
+        </para>
 
-        <para>To access category labels by themselves in a simple value array,
-        you might commit to something like:</para>
+        <para>
+            To access category labels by themselves in a simple value array,
+            you might commit to something like:
+        </para>
 
         <programlisting language="php"><![CDATA[
 $feed = Zend_Feed_Reader::import('http://www.example.com/atom.xml');
@@ -475,26 +484,31 @@ foreach ($categories as $cat) {
 }
 ]]></programlisting>
 
-    <para>It's a contrived example, but the point is that the labels are tied up with
-    other information.</para>
+        <para>
+            It's a contrived example, but the point is that the labels are tied up with
+            other information.
+        </para>
 
-    <para>However, the container class allows you to access the "most relevant" data
-    as a simple array using the <methodname>getValues()</methodname> method. The concept
-    of "most relevant" is obviously a judgement call. For categories it means the category labels
-    (not the terms or schemes) while for authors it would be the authors' names
-    (not their email addresses or URIs). The simple array is flat (just values) and passed
-    through <methodname>array_unique()</methodname> to remove duplication.</para>
+        <para>
+            However, the container class allows you to access the "most relevant" data
+            as a simple array using the <methodname>getValues()</methodname> method. The concept
+            of "most relevant" is obviously a judgement call. For categories it means the category
+            labels (not the terms or schemes) while for authors it would be the authors' names
+            (not their email addresses or URIs). The simple array is flat (just values) and passed
+            through <methodname>array_unique()</methodname> to remove duplication.
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $feed = Zend_Feed_Reader::import('http://www.example.com/atom.xml');
 $categories = $feed->getCategories();
 $labels = $categories->getValues();
 ]]></programlisting>
 
-    <para>The above example shows how to extract only labels and nothing else thus
-    giving simple access to the category labels without any additional work to extract
-    that data by itself.</para>
-
+        <para>
+            The above example shows how to extract only labels and nothing else thus
+            giving simple access to the category labels without any additional work to extract
+            that data by itself.
+        </para>
   </sect2>
 
   <sect2 id="zend.feed.reader.retrieve-info">
@@ -517,17 +531,19 @@ $labels = $categories->getValues();
             information you want.
         </para>
 
-        <note><para>
-            While determining common ground between feed types is itself complex, it
-            should be noted that RSS in particular is a constantly disputed "specification".
-            This has its roots in the original RSS 2.0 document which contains ambiguities
-            and does not detail the correct treatment of all elements. As a result, this
-            component rigorously applies the RSS 2.0.11 Specification published by the
-            RSS Advisory Board and its accompanying RSS Best Practices Profile. No
-            other interpretation of RSS 2.0 will be supported though exceptions may
-            be allowed where it does not directly prevent the application of the two
-            documents mentioned above.
-        </para></note>
+        <note>
+            <para>
+                While determining common ground between feed types is itself complex, it
+                should be noted that RSS in particular is a constantly disputed "specification".
+                This has its roots in the original RSS 2.0 document which contains ambiguities
+                and does not detail the correct treatment of all elements. As a result, this
+                component rigorously applies the RSS 2.0.11 Specification published by the
+                RSS Advisory Board and its accompanying RSS Best Practices Profile. No
+                other interpretation of RSS 2.0 will be supported though exceptions may
+                be allowed where it does not directly prevent the application of the two
+                documents mentioned above.
+            </para>
+        </note>
 
         <para>
             Of course, we don't live in an ideal world so there may be times the
@@ -559,19 +575,16 @@ $labels = $categories->getValues();
                 <tbody>
                     <row>
                         <entry><methodname>getId()</methodname></entry>
-
                         <entry>Returns a unique ID associated with this feed</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getTitle()</methodname></entry>
-
                         <entry>Returns the title of the feed</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getDescription()</methodname></entry>
-
                         <entry>Returns the text description of the feed.</entry>
                     </row>
 
@@ -602,10 +615,11 @@ $labels = $categories->getValues();
                         <entry><methodname>getAuthors()</methodname></entry>
 
                         <entry>
-                            Returns an object of type <classname>Zend_Feed_Reader_Collection_Author</classname>
-                            which is an <classname>ArrayObject</classname> whose elements are each simple
-                            arrays containing any combination of the keys "name", "email" and
-                            "uri". Where irrelevant to the source data, some of these keys may be omitted.
+                            Returns an object of type
+                            <classname>Zend_Feed_Reader_Collection_Author</classname> which is an
+                            <classname>ArrayObject</classname> whose elements are each simple arrays
+                            containing any combination of the keys "name", "email" and "uri". Where
+                            irrelevant to the source data, some of these keys may be omitted.
                         </entry>
                     </row>
 
@@ -661,18 +675,15 @@ $labels = $categories->getValues();
 
                     <row>
                         <entry><methodname>getCopyright()</methodname></entry>
-
-                        <entry>
-                            Returns any copyright notice associated with the feed.
-                        </entry>
+                        <entry>Returns any copyright notice associated with the feed.</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getHubs()</methodname></entry>
 
                         <entry>
-                            Returns an array of all Hub Server <acronym>URI</acronym> endpoints which
-                            are advertised by the feed for use with the Pubsubhubbub
+                            Returns an array of all Hub Server <acronym>URI</acronym> endpoints
+                            which are advertised by the feed for use with the Pubsubhubbub
                             Protocol, allowing subscriptions to the feed for real-time updates.
                         </entry>
                     </row>
@@ -691,9 +702,9 @@ $labels = $categories->getValues();
                             set to <constant>NULL</constant>.
                         </entry>
                     </row>
-        </tbody>
-      </tgroup>
-    </table>
+                </tbody>
+            </tgroup>
+        </table>
 
         <para>
             Given the variety of feeds in the wild, some of these methods will
@@ -815,19 +826,16 @@ $labels = $categories->getValues();
 
                     <row>
                         <entry><methodname>key()</methodname></entry>
-
                         <entry>Returns the current entry index</entry>
                     </row>
 
                     <row>
                         <entry><methodname>next()</methodname></entry>
-
                         <entry>Increments the entry index value by one</entry>
                     </row>
 
                     <row>
                         <entry><methodname>rewind()</methodname></entry>
-
                         <entry>Resets the entry index to 0</entry>
                     </row>
 
@@ -896,19 +904,16 @@ $labels = $categories->getValues();
                 <tbody>
                     <row>
                         <entry><methodname>getId()</methodname></entry>
-
                         <entry>Returns a unique ID for the current entry.</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getTitle()</methodname></entry>
-
                         <entry>Returns the title of the current entry.</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getDescription()</methodname></entry>
-
                         <entry>Returns a description of the current entry.</entry>
                     </row>
 
@@ -934,10 +939,11 @@ $labels = $categories->getValues();
                         <entry><methodname>getAuthors()</methodname></entry>
 
                         <entry>
-                            Returns an object of type <classname>Zend_Feed_Reader_Collection_Author</classname>
-                            which is an <classname>ArrayObject</classname> whose elements are each simple
-                            arrays containing any combination of the keys "name", "email" and
-                            "uri". Where irrelevant to the source data, some of these keys may be omitted.
+                            Returns an object of type
+                            <classname>Zend_Feed_Reader_Collection_Author</classname> which is an
+                            <classname>ArrayObject</classname> whose elements are each simple arrays
+                            containing any combination of the keys "name", "email" and "uri". Where
+                            irrelevant to the source data, some of these keys may be omitted.
                         </entry>
                     </row>
 
@@ -1240,19 +1246,18 @@ $labels = $categories->getValues();
                     <row>
                         <entry>DublinCore (Feed and Entry)</entry>
 
-                        <entry>Implements support for Dublin Core Metadata Element Set 1.0
-                        and 1.1 </entry>
+                        <entry>
+                            Implements support for Dublin Core Metadata Element Set 1.0 and 1.1
+                        </entry>
                     </row>
 
                     <row>
                         <entry>Content (Entry only)</entry>
-
                         <entry>Implements support for Content 1.0</entry>
                     </row>
 
                     <row>
                         <entry>Atom (Feed and Entry)</entry>
-
                         <entry>Implements support for Atom 0.3 and Atom 1.0</entry>
                     </row>
 
@@ -1266,15 +1271,16 @@ $labels = $categories->getValues();
 
                     <row>
                         <entry>WellFormedWeb</entry>
-
                         <entry>Implements support for the Well Formed Web CommentAPI 1.0</entry>
                     </row>
 
                     <row>
                         <entry>Thread</entry>
 
-                        <entry>Implements support for Atom Threading Extensions as described
-                        in <acronym>RFC</acronym> 4685</entry>
+                        <entry>
+                            Implements support for Atom Threading Extensions as described
+                            in <acronym>RFC</acronym> 4685
+                        </entry>
                     </row>
 
                     <row>
@@ -1306,12 +1312,15 @@ $labels = $categories->getValues();
                 <tbody>
                     <row>
                         <entry>Syndication</entry>
+
                         <entry>
                             Implements Syndication 1.0 support for <acronym>RSS</acronym> feeds
                         </entry>
                     </row>
+
                     <row>
                         <entry>CreativeCommons</entry>
+
                         <entry>
                             A <acronym>RSS</acronym> module that adds an element at the
                             &lt;channel&gt; or &lt;item&gt; level that specifies which Creative

@@ -11,6 +11,7 @@
 
     <example id="zend.feed.modifying-feed.example.modifying">
         <title>Modifying an Existing Feed Entry</title>
+
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
 $entry = $feed->current();
@@ -20,11 +21,13 @@ $entry->author->email = 'my_email@example.com';
 
 echo $entry->saveXML();
 ]]></programlisting>
+
         <para>
             This will output a full (includes <code>&lt;?xml ... &gt;</code> prologue)
             <acronym>XML</acronym> representation of the new entry, including any necessary
             <acronym>XML</acronym> namespaces.
         </para>
+
         <para>
             Note that the above will work even if the existing entry does not already have an author
             tag. You can use as many levels of <code>-&gt;</code> access as you like before getting
@@ -44,6 +47,7 @@ echo $entry->saveXML();
 
     <example id="zend.feed.modifying-feed.example.creating">
         <title>Creating an Atom Entry with Elements of Custom Namespaces</title>
+
         <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom();
 // id is always assigned by the server in Atom

@@ -10,24 +10,32 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            Validation, including retrieving error codes and messages
-        </para></listitem>
+        <listitem>
+            <para>
+                Validation, including retrieving error codes and messages
+            </para>
+        </listitem>
 
-        <listitem><para>
-            Value aggregation, including populating items and retrieving both
-            filtered and unfiltered values from all items
-        </para></listitem>
+        <listitem>
+            <para>
+                Value aggregation, including populating items and retrieving both
+                filtered and unfiltered values from all items
+            </para>
+        </listitem>
 
-        <listitem><para>
-            Iteration over all items, in the order in which they are entered or
-            based on the order hints retrieved from each item
-        </para></listitem>
+        <listitem>
+            <para>
+                Iteration over all items, in the order in which they are entered or
+                based on the order hints retrieved from each item
+            </para>
+        </listitem>
 
-        <listitem><para>
-            Rendering of the entire form, either via a single decorator that
-            performs custom rendering or by iterating over each item in the form
-        </para></listitem>
+        <listitem>
+            <para>
+                Rendering of the entire form, either via a single decorator that
+                performs custom rendering or by iterating over each item in the form
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -73,6 +81,7 @@ $form = new Zend_Form($config);
 
     <sect2 id="zend.form.forms.plugins">
         <title>Plugin Loaders</title>
+
         <para>
             <classname>Zend_Form</classname> makes use of
             <classname>Zend_Loader_PluginLoader</classname> to allow developers to specify
@@ -92,35 +101,43 @@ $form = new Zend_Form($config);
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>setPluginLoader($loader, $type)</methodname>: $loader is the
-                plugin loader object itself, while type is one of the types
-                specified above. This sets the plugin loader for the given type
-                to the newly specified loader object.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setPluginLoader($loader, $type)</methodname>: $loader is the
+                    plugin loader object itself, while type is one of the types
+                    specified above. This sets the plugin loader for the given type
+                    to the newly specified loader object.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>getPluginLoader($type)</methodname>: retrieves the plugin loader
-                associated with $type.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>getPluginLoader($type)</methodname>: retrieves the plugin loader
+                    associated with $type.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: adds a
-                prefix/path association to the loader specified by $type. If
-                $type is <constant>NULL</constant>, it will attempt to add the path to all loaders,
-                by appending the prefix with each of "_Element" and
-                "_Decorator"; and appending the path with "Element/" and
-                "Decorator/". If you have all your extra form element classes
-                under a common hierarchy, this is a convenience method for
-                setting the base prefix for them.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addPrefixPath($prefix, $path, $type = null)</methodname>: adds a
+                    prefix/path association to the loader specified by $type. If
+                    $type is <constant>NULL</constant>, it will attempt to add the path to all
+                    loaders, by appending the prefix with each of "_Element" and
+                    "_Decorator"; and appending the path with "Element/" and
+                    "Decorator/". If you have all your extra form element classes
+                    under a common hierarchy, this is a convenience method for
+                    setting the base prefix for them.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>addPrefixPaths(array $spec)</methodname>: allows you to add many
-                paths at once to one or more plugin loaders. It expects each
-                array item to be an array with the keys 'path', 'prefix', and
-                'type'.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addPrefixPaths(array $spec)</methodname>: allows you to add many
+                    paths at once to one or more plugin loaders. It expects each
+                    array item to be an array with the keys 'path', 'prefix', and
+                    'type'.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -130,25 +147,29 @@ $form = new Zend_Form($config);
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>addElementPrefixPath($prefix, $path, $type = null)</methodname>:
-                Just like <methodname>addPrefixPath()</methodname>, you must specify a class
-                prefix and a path. <varname>$type</varname>, when specified, must be
-                one of the plugin loader types specified by
-                <classname>Zend_Form_Element</classname>; see the <link
-                    linkend="zend.form.elements.loaders">element plugins
-                    section</link> for more information on valid
-                <varname>$type</varname> values. If no <varname>$type</varname> is
-                specified, the method will assume it is a general prefix for all
-                types.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addElementPrefixPath($prefix, $path, $type = null)</methodname>:
+                    Just like <methodname>addPrefixPath()</methodname>, you must specify a class
+                    prefix and a path. <varname>$type</varname>, when specified, must be
+                    one of the plugin loader types specified by
+                    <classname>Zend_Form_Element</classname>; see the <link
+                        linkend="zend.form.elements.loaders">element plugins
+                        section</link> for more information on valid
+                    <varname>$type</varname> values. If no <varname>$type</varname> is
+                    specified, the method will assume it is a general prefix for all
+                    types.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>addDisplayGroupPrefixPath($prefix, $path)</methodname>:
-                Just like <methodname>addPrefixPath()</methodname>, you must specify a class
-                prefix and a path; however, since display groups only support
-                decorators as plugins, no <varname>$type</varname> is necessary.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addDisplayGroupPrefixPath($prefix, $path)</methodname>:
+                    Just like <methodname>addPrefixPath()</methodname>, you must specify a class
+                    prefix and a path; however, since display groups only support
+                    decorators as plugins, no <varname>$type</varname> is necessary.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -164,6 +185,7 @@ $form = new Zend_Form($config);
 
     <sect2 id="zend.form.forms.elements">
         <title>Elements</title>
+
         <para>
             <classname>Zend_Form</classname> provides several accessors for adding and
             removing form elements from a form. These can take element object
@@ -416,32 +438,32 @@ $form->setElementDecorators(
 ]]></programlisting>
             </example>
 
-                <note>
-                    <title>Some Decorators are Inappropriate for Some Elements</title>
+            <note>
+                <title>Some Decorators are Inappropriate for Some Elements</title>
 
-                    <para>
-                        While <methodname>setElementDecorators()</methodname> may seem like
-                        a good solution, there are some cases where it may
-                        actually end up with unexpected results. For example,
-                        the various button elements (Submit, Button, Reset)
-                        currently use the label as the value of the button,
-                        and only use ViewHelper and DtDdWrapper decorators --
-                        preventing an additional labels, errors, and hints from
-                        being rendered. The example above would duplicate some
-                        content (the label) for button elements.
-                    </para>
+                <para>
+                    While <methodname>setElementDecorators()</methodname> may seem like
+                    a good solution, there are some cases where it may
+                    actually end up with unexpected results. For example,
+                    the various button elements (Submit, Button, Reset)
+                    currently use the label as the value of the button,
+                    and only use ViewHelper and DtDdWrapper decorators --
+                    preventing an additional labels, errors, and hints from
+                    being rendered. The example above would duplicate some
+                    content (the label) for button elements.
+                </para>
 
-                    <para>
-                        You can use the inclusion/exclusion array to overcome
-                        this issue as noted in the previous example.
-                    </para>
+                <para>
+                    You can use the inclusion/exclusion array to overcome
+                    this issue as noted in the previous example.
+                </para>
 
-                    <para>
-                        So, use this method wisely, and realize that you may
-                        need to exclude some elements or manually change some elements' decorators
-                        to prevent unwanted output.
-                    </para>
-                </note>
+                <para>
+                    So, use this method wisely, and realize that you may
+                    need to exclude some elements or manually change some elements' decorators
+                    to prevent unwanted output.
+                </para>
+            </note>
 
             <example id="zend.form.forms.elements.global.filters">
                 <title>Setting Filters for All Elements</title>
@@ -465,77 +487,114 @@ $form->setElementFilters(array('StringTrim'));
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <methodname>createElement($element, $name = null, $options = null)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>createElement($element, $name = null, $options =
+                            null)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addElement($element, $name = null, $options = null)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addElement($element, $name = null, $options = null)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addElements(array $elements)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addElements(array $elements)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setElements(array $elements)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setElements(array $elements)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getElement($name)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getElement($name)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getElements()</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getElements()</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>removeElement($name)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>removeElement($name)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>clearElements()</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>clearElements()</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setDefaults(array $defaults)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setDefaults(array $defaults)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setDefault($name, $value)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setDefault($name, $value)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getValue($name)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getValue($name)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getValues()</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getValues()</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getUnfilteredValue($name)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getUnfilteredValue($name)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getUnfilteredValues()</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getUnfilteredValues()</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setElementFilters(array $filters)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setElementFilters(array $filters)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setElementDecorators(array $decorators)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setElementDecorators(array $decorators)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addElementPrefixPath($prefix, $path, $type = null)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addElementPrefixPath($prefix, $path, $type = null)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addElementPrefixPaths(array $spec)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addElementPrefixPaths(array $spec)</methodname>
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
     </sect2>
@@ -709,50 +768,72 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <methodname>addDisplayGroup(array $elements, $name, $options
-                        = null)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addDisplayGroup(array $elements, $name, $options
+                            = null)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addDisplayGroups(array $groups)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addDisplayGroups(array $groups)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setDisplayGroups(array $groups)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setDisplayGroups(array $groups)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getDisplayGroup($name)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getDisplayGroup($name)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getDisplayGroups()</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getDisplayGroups()</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>removeDisplayGroup($name)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>removeDisplayGroup($name)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>clearDisplayGroups()</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>clearDisplayGroups()</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setDisplayGroupDecorators(array $decorators)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setDisplayGroupDecorators(array $decorators)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addDisplayGroupPrefixPath($prefix, $path)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addDisplayGroupPrefixPath($prefix, $path)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setDefaultDisplayGroupClass($class)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setDefaultDisplayGroupClass($class)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getDefaultDisplayGroupClass($class)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getDefaultDisplayGroupClass($class)</methodname>
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
 
@@ -765,7 +846,9 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
             </para>
 
             <itemizedlist>
-                <listitem><para>Configuration:</para>
+                <listitem>
+                    <para>Configuration:</para>
+
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -779,7 +862,9 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     </itemizedlist>
                 </listitem>
 
-                <listitem><para>Metadata:</para>
+                <listitem>
+                    <para>Metadata:</para>
+
                     <itemizedlist>
                         <listitem>
                             <para><methodname>setAttrib($key, $value)</methodname></para>
@@ -794,7 +879,6 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                         </listitem>
 
                         <listitem><para><methodname>getAttrib($key)</methodname></para></listitem>
-
                         <listitem><para><methodname>getAttribs()</methodname></para></listitem>
 
                         <listitem>
@@ -802,9 +886,7 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                         </listitem>
 
                         <listitem><para><methodname>clearAttribs()</methodname></para></listitem>
-
                         <listitem><para><methodname>setName($name)</methodname></para></listitem>
-
                         <listitem><para><methodname>getName()</methodname></para></listitem>
 
                         <listitem>
@@ -818,14 +900,14 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                         </listitem>
 
                         <listitem><para><methodname>getLegend()</methodname></para></listitem>
-
                         <listitem><para><methodname>setOrder($order)</methodname></para></listitem>
-
                         <listitem><para><methodname>getOrder()</methodname></para></listitem>
                     </itemizedlist>
                 </listitem>
 
-                <listitem><para>Elements:</para>
+                <listitem>
+                    <para>Elements:</para>
+
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -850,7 +932,6 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                         </listitem>
 
                         <listitem><para><methodname>getElement($name)</methodname></para></listitem>
-
                         <listitem><para><methodname>getElements()</methodname></para></listitem>
 
                         <listitem>
@@ -861,7 +942,9 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     </itemizedlist>
                 </listitem>
 
-                <listitem><para>Plugin loaders:</para>
+                <listitem>
+                    <para>Plugin loaders:</para>
+
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -882,7 +965,9 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     </itemizedlist>
                 </listitem>
 
-                <listitem><para>Decorators:</para>
+                <listitem>
+                    <para>Decorators:</para>
+
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -912,7 +997,9 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     </itemizedlist>
                 </listitem>
 
-                <listitem><para>Rendering:</para>
+                <listitem>
+                    <para>Rendering:</para>
+
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -930,7 +1017,9 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
                     </itemizedlist>
                 </listitem>
 
-                <listitem><para>I18n:</para>
+                <listitem>
+                    <para>I18n:</para>
+
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -962,24 +1051,30 @@ $form->setDefaultDisplayGroupClass('My_DisplayGroup');
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Creating logical element groups. Since sub forms are simply
-                forms, you can validate subforms as individual entities.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Creating logical element groups. Since sub forms are simply
+                    forms, you can validate subforms as individual entities.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Creating multi-page forms. Since sub forms are simply forms, you
-                can display a separate sub form per page, building up multi-page
-                forms where each form has its own validation logic. Only once
-                all sub forms validate would the form be considered complete.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Creating multi-page forms. Since sub forms are simply forms, you
+                    can display a separate sub form per page, building up multi-page
+                    forms where each form has its own validation logic. Only once
+                    all sub forms validate would the form be considered complete.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Display groupings. Like display groups, sub forms, when rendered
-                as part of a larger form, can be used to group elements. Be
-                aware, however, that the master form object will have no
-                awareness of the elements in sub forms.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Display groupings. Like display groups, sub forms, when rendered
+                    as part of a larger form, can be used to group elements. Be
+                    aware, however, that the master form object will have no
+                    awareness of the elements in sub forms.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -1045,37 +1140,53 @@ $form->setSubFormDecorators(array(
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <methodname>addSubForm(Zend_Form $form, $name, $order = null)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addSubForm(Zend_Form $form, $name, $order = null)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addSubForms(array $subForms)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addSubForms(array $subForms)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setSubForms(array $subForms)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setSubForms(array $subForms)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getSubForm($name)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getSubForm($name)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getSubForms()</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getSubForms()</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>removeSubForm($name)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>removeSubForm($name)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>clearSubForms()</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>clearSubForms()</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setSubFormDecorators(array $decorators)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setSubFormDecorators(array $decorators)</methodname>
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
     </sect2>
@@ -1307,33 +1418,47 @@ $fooBar  = $form->getDecorator('FooBar');
         </para>
 
         <itemizedlist>
-                <listitem><para>
-                    <methodname>addDecorator($decorator, $options = null)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addDecorator($decorator, $options = null)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addDecorators(array $decorators)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addDecorators(array $decorators)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setDecorators(array $decorators)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setDecorators(array $decorators)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getDecorator($name)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getDecorator($name)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getDecorators()</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getDecorators()</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>removeDecorator($name)</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>removeDecorator($name)</methodname>
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>clearDecorators()</methodname>
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>clearDecorators()</methodname>
+                    </para>
+                </listitem>
         </itemizedlist>
 
         <para>
@@ -1474,54 +1599,72 @@ $messages = $form->getMessages('username');
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <methodname>addErrorMessage($message)</methodname>: add an error message
-                    to display on form validation errors. You may call this more
-                    than once, and new messages are appended to the stack.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addErrorMessage($message)</methodname>: add an error message
+                        to display on form validation errors. You may call this more
+                        than once, and new messages are appended to the stack.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addErrorMessages(array $messages)</methodname>: add multiple
-                    error messages to display on form validation errors.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addErrorMessages(array $messages)</methodname>: add multiple
+                        error messages to display on form validation errors.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setErrorMessages(array $messages)</methodname>: add multiple
-                    error messages to display on form validation errors,
-                    overwriting all previously set error messages.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setErrorMessages(array $messages)</methodname>: add multiple
+                        error messages to display on form validation errors,
+                        overwriting all previously set error messages.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getErrorMessages()</methodname>: retrieve the list of
-                    custom error messages that have been defined.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getErrorMessages()</methodname>: retrieve the list of
+                        custom error messages that have been defined.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>clearErrorMessages()</methodname>: remove all custom error
-                    messages that have been defined.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>clearErrorMessages()</methodname>: remove all custom error
+                        messages that have been defined.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>markAsError()</methodname>: mark the form as having
-                    failed validation.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>markAsError()</methodname>: mark the form as having
+                        failed validation.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addError($message)</methodname>: add a message to the custom
-                    error messages stack and flag the form as invalid.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addError($message)</methodname>: add a message to the custom
+                        error messages stack and flag the form as invalid.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>addErrors(array $messages)</methodname>: add several
-                    messages to the custom error messages stack and flag the
-                    form as invalid.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>addErrors(array $messages)</methodname>: add several
+                        messages to the custom error messages stack and flag the
+                        form as invalid.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>setErrors(array $messages)</methodname>: overwrite the
-                    custom error messages stack with the provided messages and
-                    flag the form as invalid.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setErrors(array $messages)</methodname>: overwrite the
+                        custom error messages stack with the provided messages and
+                        flag the form as invalid.
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>
@@ -1558,7 +1701,9 @@ $validValues = $form->getValidValues($_POST);
         </para>
 
         <itemizedlist>
-            <listitem><para>Configuration and Options:</para>
+            <listitem>
+                <para>Configuration and Options:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para><methodname>setOptions(array $options)</methodname></para>
@@ -1570,7 +1715,9 @@ $validValues = $form->getValidValues($_POST);
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Plugin Loaders and paths:</para>
+            <listitem>
+                <para>Plugin Loaders and paths:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
@@ -1610,7 +1757,9 @@ $validValues = $form->getValidValues($_POST);
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Metadata:</para>
+            <listitem>
+                <para>Metadata:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para><methodname>setAttrib($key, $value)</methodname></para>
@@ -1625,28 +1774,21 @@ $validValues = $form->getValidValues($_POST);
                     </listitem>
 
                     <listitem><para><methodname>getAttrib($key)</methodname></para></listitem>
-
                     <listitem><para><methodname>getAttribs()</methodname></para></listitem>
-
                     <listitem><para><methodname>removeAttrib($key)</methodname></para></listitem>
-
                     <listitem><para><methodname>clearAttribs()</methodname></para></listitem>
-
                     <listitem><para><methodname>setAction($action)</methodname></para></listitem>
-
                     <listitem><para><methodname>getAction()</methodname></para></listitem>
-
                     <listitem><para><methodname>setMethod($method)</methodname></para></listitem>
-
                     <listitem><para><methodname>getMethod()</methodname></para></listitem>
-
                     <listitem><para><methodname>setName($name)</methodname></para></listitem>
-
                     <listitem><para><methodname>getName()</methodname></para></listitem>
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Elements:</para>
+            <listitem>
+                <para>Elements:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
@@ -1664,11 +1806,8 @@ $validValues = $form->getValidValues($_POST);
                     </listitem>
 
                     <listitem><para><methodname>getElement($name)</methodname></para></listitem>
-
                     <listitem><para><methodname>getElements()</methodname></para></listitem>
-
                     <listitem><para><methodname>removeElement($name)</methodname></para></listitem>
-
                     <listitem><para><methodname>clearElements()</methodname></para></listitem>
 
                     <listitem>
@@ -1680,7 +1819,6 @@ $validValues = $form->getValidValues($_POST);
                     </listitem>
 
                     <listitem><para><methodname>getValue($name)</methodname></para></listitem>
-
                     <listitem><para><methodname>getValues()</methodname></para></listitem>
 
                     <listitem>
@@ -1701,7 +1839,9 @@ $validValues = $form->getValidValues($_POST);
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Sub forms:</para>
+            <listitem>
+                <para>Sub forms:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
@@ -1719,11 +1859,8 @@ $validValues = $form->getValidValues($_POST);
                     </listitem>
 
                     <listitem><para><methodname>getSubForm($name)</methodname></para></listitem>
-
                     <listitem><para><methodname>getSubForms()</methodname></para></listitem>
-
                     <listitem><para><methodname>removeSubForm($name)</methodname></para></listitem>
-
                     <listitem><para><methodname>clearSubForms()</methodname></para></listitem>
 
                     <listitem>
@@ -1734,7 +1871,9 @@ $validValues = $form->getValidValues($_POST);
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Display groups:</para>
+            <listitem>
+                <para>Display groups:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
@@ -1771,7 +1910,9 @@ $validValues = $form->getValidValues($_POST);
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Validation</para>
+            <listitem>
+                <para>Validation</para>
+
                 <itemizedlist>
                     <listitem>
                         <para><methodname>populate(array $values)</methodname></para>
@@ -1799,7 +1940,9 @@ $validValues = $form->getValidValues($_POST);
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>Rendering:</para>
+            <listitem>
+                <para>Rendering:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
@@ -1824,7 +1967,6 @@ $validValues = $form->getValidValues($_POST);
                     </listitem>
 
                     <listitem><para><methodname>getDecorator($name)</methodname></para></listitem>
-
                     <listitem><para><methodname>getDecorators()</methodname></para></listitem>
 
                     <listitem>
@@ -1841,7 +1983,9 @@ $validValues = $form->getValidValues($_POST);
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>I18n:</para>
+            <listitem>
+                <para>I18n:</para>
+
                 <itemizedlist>
                     <listitem>
                         <para>
@@ -1888,20 +2032,26 @@ $validValues = $form->getValidValues($_POST);
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>prefixPaths</code> will be passed to
                     <methodname>addPrefixPaths()</methodname>
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>elementPrefixPaths</code> will be passed to
-                <methodname>addElementPrefixPaths()</methodname>
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>elementPrefixPaths</code> will be passed to
+                    <methodname>addElementPrefixPaths()</methodname>
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>displayGroupPrefixPaths</code> will be passed to
-                <methodname>addDisplayGroupPrefixPaths()</methodname>
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>displayGroupPrefixPaths</code> will be passed to
+                    <methodname>addDisplayGroupPrefixPaths()</methodname>
+                </para>
+            </listitem>
 
             <listitem>
                 <para>the following setters cannot be set in this way:</para>
@@ -1912,17 +2062,11 @@ $validValues = $form->getValidValues($_POST);
                     </listitem>
 
                     <listitem><para><code>setConfig</code></para></listitem>
-
                     <listitem><para><code>setDefault</code></para></listitem>
-
                     <listitem><para><code>setOptions</code></para></listitem>
-
                     <listitem><para><code>setPluginLoader</code></para></listitem>
-
                     <listitem><para><code>setSubForms</code></para></listitem>
-
                     <listitem><para><code>setTranslator</code></para></listitem>
-
                     <listitem><para><code>setView</code></para></listitem>
                 </itemizedlist>
             </listitem>
@@ -1985,23 +2129,31 @@ decorators.form.decorator = "Form"
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                You can unit test your form easily to ensure validations and
-                rendering perform as expected.
-            </para></listitem>
+            <listitem>
+                <para>
+                    You can unit test your form easily to ensure validations and
+                    rendering perform as expected.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Fine-grained control over individual elements.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Fine-grained control over individual elements.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Re-use of form objects, and greater portability (no need to
-                track config files).
-            </para></listitem>
+            <listitem>
+                <para>
+                    Re-use of form objects, and greater portability (no need to
+                    track config files).
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Implementing custom functionality.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Implementing custom functionality.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

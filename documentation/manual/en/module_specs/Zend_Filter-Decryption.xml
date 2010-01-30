@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
+
     <para>
         This filter will decrypt any given string with the provided setting. Therefor it makes use
         of Adapters. Actually there are adapters for the <code>Mcrypt</code> and
@@ -16,6 +17,7 @@
 
     <sect3 id="zend.filter.set.decrypt.mcrypt">
         <title>Decryption with Mcrypt</title>
+
         <para>
             For decrypting content which was previously encrypted with <code>Mcrypt</code> you need
             to have the options with which the encryption has been called.
@@ -61,6 +63,7 @@ print $decrypted;
 
     <sect3 id="zend.filter.set.decrypt.openssl">
         <title>Decryption with OpenSSL</title>
+
         <para>
             Decryption with <code>OpenSSL</code> is as simple as encryption. But you need to have
             all data from the person who encrypted the content.

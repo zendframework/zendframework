@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.introduction">
     <title>Introduction</title>
+
     <para>
         <classname>Zend_Feed</classname> provides functionality for consuming <acronym>RSS</acronym>
         and Atom feeds. It provides a natural syntax for accessing elements of feeds, feed
@@ -28,6 +29,7 @@
 
     <note>
         <title>Be aware</title>
+
         <para>
             Many <acronym>RSS</acronym> feeds have different channel and item properties available.
             The <acronym>RSS</acronym> specification provides for many optional properties, so be
@@ -37,6 +39,7 @@
 
     <example id="zend.feed.introduction.example.rss">
         <title>Putting Zend_Feed to Work on RSS Feed Data</title>
+
         <programlisting language="php"><![CDATA[
 // Fetch the latest Slashdot headlines
 try {

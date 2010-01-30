@@ -61,8 +61,8 @@ $result = $filter->filter($value);
 
             <listitem>
                 <para>
-                    <emphasis>integer</emphasis>: Converts an integer <emphasis>0</emphasis> value to
-                    <constant>NULL</constant>.
+                    <emphasis>integer</emphasis>: Converts an integer <emphasis>0</emphasis> value
+                    to <constant>NULL</constant>.
                 </para>
             </listitem>
 

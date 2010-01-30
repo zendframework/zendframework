@@ -299,23 +299,29 @@ class Foo
             </para>
 
             <itemizedlist>
-                <listitem><para>
+                <listitem>
+                    <para>
                         <emphasis>String</emphasis>. The string may be a filter
                         class name, or a class name segment minus any prefix set
                         in the inflector's plugin loader (by default, minus the
                         'Zend_Filter' prefix).
-                </para></listitem>
+                    </para>
+                </listitem>
 
-                <listitem><para>
+                <listitem>
+                    <para>
                         <emphasis>Filter object</emphasis>. Any object instance
                         implementing <classname>Zend_Filter_Interface</classname> may be
                         passed as a filter.
-                </para></listitem>
+                    </para>
+                </listitem>
 
-                <listitem><para>
+                <listitem>
+                    <para>
                         <emphasis>Array</emphasis>. An array of one or more
                         strings or filter objects as defined above.
-                </para></listitem>
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <programlisting language="php"><![CDATA[
@@ -354,13 +360,17 @@ $inflector->setFilterRule('script', array(
             </para>
 
             <itemizedlist>
-                <listitem><para>
+                <listitem>
+                    <para>
                         <emphasis>':' prefix</emphasis>: filter rules.
-                </para></listitem>
+                    </para>
+                </listitem>
 
-                <listitem><para>
+                <listitem>
+                    <para>
                         <emphasis>No prefix</emphasis>: static rule.
-                </para></listitem>
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <example id="zend.filter.inflector.rules.multiple.example">
@@ -391,40 +401,50 @@ $inflector->addRules(array(
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setPluginLoader()</methodname> can be used when you have
                     configured your own plugin loader and wish to use it with
                     <classname>Zend_Filter_Inflector</classname>;
                     <methodname>getPluginLoader()</methodname> retrieves the currently set
                     one.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setThrowTargetExceptionsOn()</methodname> can be used to
                     control whether or not <methodname>filter()</methodname> throws an
                     exception when a given replacement identifier passed to it
                     is not found in the target. By default, no exceptions are
                     thrown. <methodname>isThrowTargetExceptionsOn()</methodname> will tell
                     you what the current value is.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>getRules($spec = null)</methodname> can be used to retrieve all
                     registered rules for all variables, or just the rules for a
                     single variable.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>getRule($spec, $index)</methodname> fetches a single rule
                     for a given variable; this can be useful for fetching a
                     specific filter rule for a variable that has a filter chain.
                     <varname>$index</varname> must be passed.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>clearRules()</methodname> will clear all currently
                     registered rules.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
     </sect2>
 
@@ -439,32 +459,42 @@ $inflector->addRules(array(
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>target</code> specifies the inflection target.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>filterPrefixPath</code> specifies one or more filter
                     prefix/path pairs for use with the inflector.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>throwTargetExceptionsOn</code> should be a boolean
                     indicating whether or not to throw exceptions when a
                     replacement identifier is still present after inflection.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>targetReplacementIdentifier</code> specifies the
                     character to use when identifying replacement variables in
                     the target string.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>rules</code> specifies an array of inflection rules;
                     it should consist of keys that specify either values or
                     arrays of values, consistent with <methodname>addRules()</methodname>.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <example id="zend.filter.inflector.config.example">

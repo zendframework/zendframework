@@ -189,12 +189,14 @@
                 </para>
             </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>Zend_Form::setElementsBelongTo($array)</methodname>:
                     Using this method, you can specify the name of an array to
                     which all elements of the form belong. You can determine the
                     name using the <methodname>getElementsBelongTo()</methodname> accessor.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

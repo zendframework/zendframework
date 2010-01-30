@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.compress">
     <title>Compress and Decompress</title>
+
     <para>
         These two filters are capable of compressing and decompressing strings, files, and
         directories. They make use of adapters and support the following compression formats:
@@ -442,9 +443,9 @@ $compressed = $filter->filter('filename.zip');
             <title>Rar compression not supported</title>
 
             <para>
-                Due to restrictions with the Rar compression format, there is no compression available
-                for free. When you want to compress files into a new Rar archive, you must provide a
-                callback to the adapter that can invoke a Rar compression program.
+                Due to restrictions with the Rar compression format, there is no compression
+                available for free. When you want to compress files into a new Rar archive, you must
+                provide a callback to the adapter that can invoke a Rar compression program.
             </para>
         </note>
 

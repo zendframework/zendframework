@@ -41,5 +41,4 @@ $filtered = $filter->filter($path);
 // returns '/www/non/existing/path'
 // even when file_exists or realpath would return false
 ]]></programlisting>
-
 </sect2>

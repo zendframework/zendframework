@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
-
     <title>Standard Filter Classes</title>
 
     <para>
@@ -10,6 +9,7 @@
 
     <sect2 id="zend.filter.set.alnum">
         <title>Alnum</title>
+
         <para>
             Returns the string <varname>$value</varname>, removing all but alphabetic and digit
             characters. This filter includes an option to also allow white space characters.
@@ -28,6 +28,7 @@
 
     <sect2 id="zend.filter.set.alpha">
         <title>Alpha</title>
+
         <para>
             Returns the string <varname>$value</varname>, removing all but alphabetic characters.
             This filter includes an option to also allow white space characters.
@@ -36,6 +37,7 @@
 
     <sect2 id="zend.filter.set.basename">
         <title>BaseName</title>
+
         <para>
             Given a string containing a path to a file, this filter will return the base
             name of the file
@@ -49,6 +51,7 @@
 
     <sect2 id="zend.filter.set.digits">
         <title>Digits</title>
+
         <para>
             Returns the string <varname>$value</varname>, removing all but digit characters.
         </para>
@@ -56,6 +59,7 @@
 
     <sect2 id="zend.filter.set.dir">
         <title>Dir</title>
+
         <para>
             Returns directory name component of path.
         </para>
@@ -65,6 +69,7 @@
 
     <sect2 id="zend.filter.set.htmlentities">
         <title>HtmlEntities</title>
+
         <para>
             Returns the string <varname>$value</varname>, converting characters to their
             corresponding <acronym>HTML</acronym> entity equivalents where they exist.
@@ -73,6 +78,7 @@
 
     <sect2 id="zend.filter.set.int">
         <title>Int</title>
+
         <para>
             Returns (int) <varname>$value</varname>
         </para>
@@ -88,6 +94,7 @@
 
     <sect2 id="zend.filter.set.stringtrim">
         <title>StringTrim</title>
+
         <para>
             Returns the string <varname>$value</varname> with characters stripped from the
             beginning and end.
@@ -96,6 +103,7 @@
 
     <sect2 id="zend.filter.set.stripnewlines">
         <title>StripNewlines</title>
+
         <para>
             Returns the string <varname>$value</varname> without any newline control characters.
         </para>
@@ -103,6 +111,7 @@
 
     <sect2 id="zend.filter.set.striptags">
         <title>StripTags</title>
+
         <para>
             This filter returns the input string, with all HTML and <acronym>PHP</acronym> tags
             stripped from it, except those that have been explicitly allowed. In addition to the
@@ -110,7 +119,6 @@
             allowed across all allowed tags and for specific tags only.
         </para>
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

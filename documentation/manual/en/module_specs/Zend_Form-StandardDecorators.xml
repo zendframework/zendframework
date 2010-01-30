@@ -228,40 +228,54 @@ class Util
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <code>ignoreSubForms</code>: whether or not to disable recursion
-                into subforms. Default value: <constant>FALSE</constant> (i.e., allow recursion).
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>ignoreSubForms</code>: whether or not to disable recursion into
+                    subforms. Default value: <constant>FALSE</constant> (i.e., allow recursion).
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>markupElementLabelEnd</code>: Markup to append to element
-                labels. Default value: '&lt;/b&gt;'
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>markupElementLabelEnd</code>: Markup to append to element
+                    labels. Default value: '&lt;/b&gt;'
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>markupElementLabelStart</code>: Markup to prepend to
-                element labels. Default value: '&lt;b&gt;'
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>markupElementLabelStart</code>: Markup to prepend to
+                    element labels. Default value: '&lt;b&gt;'
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>markupListEnd</code>: Markup to append error message lists
-                with. Default value: '&lt;/ul&gt;'.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>markupListEnd</code>: Markup to append error message lists
+                    with. Default value: '&lt;/ul&gt;'.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>markupListItemEnd</code>: Markup to append individual
-                error messages with. Default value: '&lt;/li&gt;'
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>markupListItemEnd</code>: Markup to append individual
+                    error messages with. Default value: '&lt;/li&gt;'
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>markupListItemStart</code>: Markup to prepend individual
-                error messages with. Default value: '&lt;li&gt;'
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>markupListItemStart</code>: Markup to prepend individual
+                    error messages with. Default value: '&lt;li&gt;'
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>markupListStart</code>: Markup to append error message
-                lists with. Default value: '&lt;ul class="form-errors"&gt;'
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>markupListStart</code>: Markup to append error message
+                    lists with. Default value: '&lt;ul class="form-errors"&gt;'
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -337,33 +351,41 @@ class Util
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>optionalPrefix</code>: set the text to prefix the
                     label with when the element is optional. Use the
                     <methodname>setOptionalPrefix()</methodname> and
                     <methodname>getOptionalPrefix()</methodname> accessors to manipulate it.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>optionalSuffix</code>: set the text to append the
                     label with when the element is optional. Use the
                     <methodname>setOptionalSuffix()</methodname> and
                     <methodname>getOptionalSuffix()</methodname> accessors to manipulate it.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>requiredPrefix</code>: set the text to prefix the
                     label with when the element is required. Use the
                     <methodname>setRequiredPrefix()</methodname> and
                     <methodname>getRequiredPrefix()</methodname> accessors to manipulate it.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>requiredSuffix</code>: set the text to append the
                     label with when the element is required. Use the
                     <methodname>setRequiredSuffix()</methodname> and
                     <methodname>getRequiredSuffix()</methodname> accessors to manipulate it.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -441,24 +463,32 @@ $form->setDecorators(array(
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>element</code>: the element being decorated
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>content</code>: the content passed to the decorator
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>decorator</code>: the decorator object itself
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     Additionally, all options passed to the decorator via
                     <methodname>setOptions()</methodname> that are not used internally (such
                     as placement, separator, etc.) are passed to the view script
                     as view variables.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

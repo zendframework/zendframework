@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19695 -->
+<!-- EN-Revision: 20764 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.barcode.objects" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Objetos Zend_Barcode</title>
@@ -87,11 +87,8 @@ $barcode->setText('ZEND-FRAMEWORK')
                 <thead>
                     <row>
                         <entry>Opção</entry>
-
                         <entry>Tipo de Dado</entry>
-
                         <entry>Valor Padrão</entry>
-
                         <entry>Descrição</entry>
                     </row>
                 </thead>
@@ -99,9 +96,7 @@ $barcode->setText('ZEND-FRAMEWORK')
                 <tbody>
                     <row>
                         <entry><emphasis>barcodeNamespace</emphasis></entry>
-
                         <entry><type>String</type></entry>
-
                         <entry><classname>Zend_Barcode_Object</classname></entry>
 
                         <entry>
@@ -112,38 +107,28 @@ $barcode->setText('ZEND-FRAMEWORK')
 
                     <row>
                         <entry><emphasis>barHeight</emphasis></entry>
-
                         <entry><type>Integer</type></entry>
-
                         <entry>50</entry>
-
                         <entry>Altura das barras</entry>
                     </row>
+
                     <row>
                         <entry><emphasis>barThickWidth</emphasis></entry>
-
                         <entry><type>Integer</type></entry>
-
                         <entry>3</entry>
-
                         <entry>Largura da barra grossa</entry>
                     </row>
 
                     <row>
                         <entry><emphasis>barThinWidth</emphasis></entry>
-
                         <entry><type>Integer</type></entry>
-
                         <entry>1</entry>
-
                         <entry>Largura da barra fina</entry>
                     </row>
 
                     <row>
                         <entry><emphasis>factor</emphasis></entry>
-
                         <entry><type>Integer</type></entry>
-
                         <entry>1</entry>
 
                         <entry>
@@ -154,9 +139,7 @@ $barcode->setText('ZEND-FRAMEWORK')
 
                     <row>
                         <entry><emphasis>foreColor</emphasis></entry>
-
                         <entry><type>Integer</type></entry>
-
                         <entry>0 (preto)</entry>
 
                         <entry>
@@ -167,9 +150,7 @@ $barcode->setText('ZEND-FRAMEWORK')
 
                     <row>
                         <entry><emphasis>backgroundColor</emphasis></entry>
-
                         <entry><type>Integer</type> ou <type>String</type></entry>
-
                         <entry>16777125 (branco)</entry>
 
                         <entry>
@@ -180,29 +161,21 @@ $barcode->setText('ZEND-FRAMEWORK')
 
                     <row>
                         <entry><emphasis>reverseColor</emphasis></entry>
-
                         <entry><type>Boolean</type></entry>
-
                         <entry><constant>FALSE</constant></entry>
-
                         <entry>Permite-lhe trocar a cor da barra e do fundo</entry>
                     </row>
 
                     <row>
                         <entry><emphasis>orientation</emphasis></entry>
-
                         <entry><type>Integer</type></entry>
-
                         <entry>0</entry>
-
                         <entry>Orientação do código de barras</entry>
                     </row>
 
                     <row>
                         <entry><emphasis>font</emphasis></entry>
-
                         <entry><type>String</type> ou <type>Integer</type></entry>
-
                         <entry><constant>NULL</constant></entry>
 
                         <entry>
@@ -213,19 +186,14 @@ $barcode->setText('ZEND-FRAMEWORK')
 
                     <row>
                         <entry><emphasis>fontSize</emphasis></entry>
-
                         <entry><type>Integer</type></entry>
-
                         <entry>10</entry>
-
                         <entry>Tamanho da fonte (não aplicável à fontes numéricas)</entry>
                     </row>
 
                     <row>
                         <entry><emphasis>withBorder</emphasis></entry>
-
                         <entry><type>Boolean</type></entry>
-
                         <entry><constant>FALSE</constant></entry>
 
                         <entry>
@@ -235,19 +203,14 @@ $barcode->setText('ZEND-FRAMEWORK')
 
                     <row>
                         <entry><emphasis>drawText</emphasis></entry>
-
                         <entry><type>Boolean</type></entry>
-
                         <entry><constant>TRUE</constant></entry>
-
                         <entry>Define se o texto será mostrado abaixo do código de barras</entry>
                     </row>
 
                     <row>
                         <entry><emphasis>stretchText</emphasis></entry>
-
                         <entry><type>Boolean</type></entry>
-
                         <entry><constant>FALSE</constant></entry>
 
                         <entry>
@@ -257,9 +220,7 @@ $barcode->setText('ZEND-FRAMEWORK')
 
                     <row>
                         <entry><emphasis>withChecksum</emphasis></entry>
-
                         <entry><type>Boolean</type></entry>
-
                         <entry><constant>FALSE</constant></entry>
 
                         <entry>
@@ -269,21 +230,15 @@ $barcode->setText('ZEND-FRAMEWORK')
 
                     <row>
                         <entry><emphasis>withChecksumInText</emphasis></entry>
-
                         <entry><type>Boolean</type></entry>
-
                         <entry><constant>FALSE</constant></entry>
-
                         <entry>Indica se o checksum será exibido na representação textual</entry>
                     </row>
 
                     <row>
                         <entry><emphasis>text</emphasis></entry>
-
                         <entry><type>String</type></entry>
-
                         <entry><constant>NULL</constant></entry>
-
                         <entry>O texto que será reproduzido como um código de barras</entry>
                     </row>
                 </tbody>
@@ -336,9 +291,7 @@ Zend_Barcode::render(
                 <thead>
                     <row>
                         <entry>Método de Leitura</entry>
-
                         <entry>Tipo de Dado</entry>
-
                         <entry>Descrição</entry>
                     </row>
                 </thead>
@@ -346,7 +299,6 @@ Zend_Barcode::render(
                 <tbody>
                     <row>
                         <entry><methodname>getType()</methodname></entry>
-
                         <entry><type>String</type></entry>
 
                         <entry>
@@ -358,17 +310,12 @@ Zend_Barcode::render(
 
                     <row>
                         <entry><methodname>getRawText()</methodname></entry>
-
                         <entry><type>String</type></entry>
-
-                        <entry>
-                            Retorna o texto original fornecido pelo objeto
-                        </entry>
+                        <entry>Retorna o texto original fornecido pelo objeto</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getTextToDisplay()</methodname></entry>
-
                         <entry><type>String</type></entry>
 
                         <entry>
@@ -379,7 +326,6 @@ Zend_Barcode::render(
 
                     <row>
                         <entry><methodname>getQuietZone()</methodname></entry>
-
                         <entry><type>Integer</type></entry>
 
                         <entry>
@@ -390,17 +336,12 @@ Zend_Barcode::render(
 
                     <row>
                         <entry><methodname>getInstructions()</methodname></entry>
-
                         <entry><type>Array</type></entry>
-
-                        <entry>
-                            Retorna as instruções de desenho como uma matriz
-                        </entry>
+                        <entry>Retorna as instruções de desenho como uma matriz</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getHeight($recalculate = false)</methodname></entry>
-
                         <entry><type>Integer</type></entry>
 
                         <entry>
@@ -411,7 +352,6 @@ Zend_Barcode::render(
 
                     <row>
                         <entry><methodname>getWidth($recalculate = false)</methodname></entry>
-
                         <entry><type>Integer</type></entry>
 
                         <entry>
@@ -422,7 +362,6 @@ Zend_Barcode::render(
 
                     <row>
                         <entry><methodname>getOffsetTop($recalculate = false)</methodname></entry>
-
                         <entry><type>Integer</type></entry>
 
                         <entry>
@@ -433,7 +372,6 @@ Zend_Barcode::render(
 
                     <row>
                         <entry><methodname>getOffsetLeft($recalculate = false)</methodname></entry>
-
                         <entry><type>Integer</type></entry>
 
                         <entry>

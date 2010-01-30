@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19695 -->
+<!-- EN-Revision: 20764 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.barcode.renderers">
     <title>Renderizadores do Zend_Barcode</title>
@@ -78,11 +78,8 @@ $renderer->setTopOffset(10);
                 <thead>
                     <row>
                         <entry>Opção</entry>
-
                         <entry>Tipo de Dado</entry>
-
                         <entry>Valor Padrão</entry>
-
                         <entry>Descrição</entry>
                     </row>
                 </thead>
@@ -90,10 +87,9 @@ $renderer->setTopOffset(10);
                 <tbody>
                     <row>
                         <entry><emphasis>rendererNamespace</emphasis></entry>
-
                         <entry><type>String</type></entry>
-
                         <entry><classname>Zend_Barcode_Renderer</classname></entry>
+
                         <entry>
                             Namespace do renderizador; por exemplo, caso precise estender os
                             renderizadores.
@@ -102,9 +98,7 @@ $renderer->setTopOffset(10);
 
                     <row>
                         <entry><emphasis>horizontalPosition</emphasis></entry>
-
                         <entry><type>String</type></entry>
-
                         <entry>"left"</entry>
 
                         <entry>
@@ -117,9 +111,7 @@ $renderer->setTopOffset(10);
 
                     <row>
                         <entry><emphasis>verticalPosition</emphasis></entry>
-
                         <entry><type>String</type></entry>
-
                         <entry>"top"</entry>
 
                         <entry>
@@ -132,9 +124,7 @@ $renderer->setTopOffset(10);
 
                     <row>
                         <entry><emphasis>leftOffset</emphasis></entry>
-
                         <entry><type>Integer</type></entry>
-
                         <entry>0</entry>
 
                         <entry>
@@ -145,9 +135,7 @@ $renderer->setTopOffset(10);
 
                     <row>
                         <entry><emphasis>topOffset</emphasis></entry>
-
                         <entry><type>Integer</type></entry>
-
                         <entry>0</entry>
 
                         <entry>
@@ -158,9 +146,7 @@ $renderer->setTopOffset(10);
 
                     <row>
                         <entry><emphasis>automaticRenderError</emphasis></entry>
-
                         <entry><type>Boolean</type></entry>
-
                         <entry><constant>TRUE</constant></entry>
 
                         <entry>
@@ -173,26 +159,16 @@ $renderer->setTopOffset(10);
 
                     <row>
                         <entry><emphasis>moduleSize</emphasis></entry>
-
                         <entry><type>Float</type></entry>
-
                         <entry>1</entry>
-
-                        <entry>
-                            Tamanho de um módulo de renderização no suporte.
-                        </entry>
+                        <entry>Tamanho de um módulo de renderização no suporte.</entry>
                     </row>
 
                     <row>
                         <entry><emphasis>barcode</emphasis></entry>
-
                         <entry><classname>Zend_Barcode_Object</classname></entry>
-
                         <entry><constant>NULL</constant></entry>
-
-                        <entry>
-                            O objeto código de barras a ser renderizado.
-                        </entry>
+                        <entry>O objeto código de barras a ser renderizado.</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -223,11 +199,8 @@ $renderer->setTopOffset(10);
                 <thead>
                     <row>
                         <entry>Opção</entry>
-
                         <entry>Tipo de Dado</entry>
-
                         <entry>Valor Padrão</entry>
-
                         <entry>Descrição</entry>
                     </row>
                 </thead>
@@ -235,9 +208,7 @@ $renderer->setTopOffset(10);
                 <tbody>
                     <row>
                         <entry><emphasis>height</emphasis></entry>
-
                         <entry><type>Integer</type></entry>
-
                         <entry>0</entry>
 
                         <entry>
@@ -248,9 +219,7 @@ $renderer->setTopOffset(10);
 
                     <row>
                         <entry><emphasis>width</emphasis></entry>
-
                         <entry><type>Integer</type></entry>
-
                         <entry>0</entry>
 
                         <entry>
@@ -261,9 +230,7 @@ $renderer->setTopOffset(10);
 
                     <row>
                         <entry><emphasis>imageType</emphasis></entry>
-
                         <entry><type>String</type></entry>
-
                         <entry>"png"</entry>
 
                         <entry>

@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18817 -->
+<!-- EN-Revision: 20764 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.wildfire.chapter">
+    <title>Zend_Wildfire</title>
 
-  <title>Zend_Wildfire</title>
+    <para>
+        <classname>Zend_Wildfire</classname> é um componente que facilita a comunicação entre o
+        código <acronym>PHP</acronym> e os componentes do cliente
+        <ulink url="http://www.wildfirehq.org/">Wildfire</ulink>.
+    </para>
 
-  <para>
-    <classname>Zend_Wildfire</classname> é um componente que facilita a comunicação
-    entre o código <acronym>PHP</acronym> e os componentes do cliente
-    <ulink url="http://www.wildfirehq.org/">Wildfire</ulink>.
-  </para>
-  <para>
-    O objetivo do projeto Wildfire é desenvolver canais de comunicação padronizados entre uma
-    grande variedade de componentes e uma arquitetura de plugin dinâmica e scriptável. Neste
-    momento o foco principal é fornecer um sistema para permitir que o código
-    <acronym>PHP</acronym> no lado do servidor injete mensagens de log no
-    <ulink url="http://www.getfirebug.com/">console do Firebug</ulink>.
-  </para>
-  <para>
-    O componente
-    <link linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
-    é fornecido com a finalidade de registro no Firebug, e um protocolo de comunicação que usa
-    requisições <acronym>HTTP</acronym> e cabeçalhos de resposta para enviar dados entre o servidor
-    e componentes de cliente também foi desenvolvido. É ótimo para registro de dados de
-    inteligência para o navegador que são gerados durante a execução do script, sem interferir no
-    conteúdo da página. Com esta abordagem, é possível depurar solicitações <acronym>AJAX</acronym>
-    que necessitem de respostas bem formatadas de <acronym>JSON</acronym> e <acronym>XML</acronym>.
-  </para>
-  <para>
-    Há também um componente <link linkend="zend.db.profiler.profilers.firebug">
+    <para>
+        O objetivo do projeto Wildfire é desenvolver canais de comunicação padronizados entre uma
+        grande variedade de componentes e uma arquitetura de plugin dinâmica e scriptável. Neste
+        momento o foco principal é fornecer um sistema para permitir que o código
+        <acronym>PHP</acronym> no lado do servidor injete mensagens de log no
+        <ulink url="http://www.getfirebug.com/">console do Firebug</ulink>.
+    </para>
+
+    <para>
+        O componente
+        <link
+            linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
+        é fornecido com a finalidade de registro no Firebug, e um protocolo de comunicação que usa
+        requisições <acronym>HTTP</acronym> e cabeçalhos de resposta para enviar dados entre o
+        servidor e componentes de cliente também foi desenvolvido. É ótimo para registro de dados de
+        inteligência para o navegador que são gerados durante a execução do script, sem interferir
+        no conteúdo da página. Com esta abordagem, é possível depurar solicitações
+        <acronym>AJAX</acronym> que necessitem de respostas bem formatadas de
+        <acronym>JSON</acronym> e <acronym>XML</acronym>.
+    </para>
+
+    <para>
+        Há também um componente <link linkend="zend.db.profiler.profilers.firebug">
         <classname>Zend_Db_Profiler_Firebug</classname></link> para registrar informações de
-    profiling do banco de dados no Firebug.
-  </para>
-
+        profiling do banco de dados no Firebug.
+    </para>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

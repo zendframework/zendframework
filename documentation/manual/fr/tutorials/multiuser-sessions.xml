@@ -26,7 +26,6 @@
             dans $_SESSION. Dans Zend Framework, le composant Zend_Session ajoute de la valeur au système
             de session de PHP notamment une manipulation objet.
         </para>
-
     </sect2>
 
     <sect2 id="learning.multiuser.sessions.basic-usage">
@@ -96,8 +95,8 @@ if ($mysession->counter > 1999) {
             __isset, et __unset pour proposer une API intuitive. Les informations stockées dans
             notre exemple le sont en réalité dans $_SESSION['mysession']['counter'].
         </para>
-
     </sect2>
+
     <sect2 id="learning.multiuser.sessions.advanced-usage">
         <title>Utilisation avancée de Zend_Session</title>
 
@@ -119,9 +118,5 @@ resources.session.saveHandler.options.modifiedColumn = "modified"
 resources.session.saveHandler.options.dataColumn = "session_data"
 resources.session.saveHandler.options.lifetimeColumn = "lifetime"
 ]]></programlisting>
-
-
     </sect2>
-
-
 </sect1>

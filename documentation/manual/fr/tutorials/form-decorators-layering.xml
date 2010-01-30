@@ -265,8 +265,8 @@ $element = new Zend_Form_Element('foo', array(
         <listitem>
             <para>
                 Ce contenu généré est alors passé comme contenu original pour le décorateur
-				<classname>SimpleLabel</classname> qui génère un libéllé et le place avant le contenu
-				original avec comme séparateur <constant>PHP_EOL</constant>, ce qui donne:
+                <classname>SimpleLabel</classname> qui génère un libéllé et le place avant le contenu
+                original avec comme séparateur <constant>PHP_EOL</constant>, ce qui donne:
                 <emphasis>&lt;label for="bar-foo"&gt;\n&lt;input id="bar-foo" name="bar[foo]"
                     type="text" value="test"/&gt;</emphasis>.
             </para>

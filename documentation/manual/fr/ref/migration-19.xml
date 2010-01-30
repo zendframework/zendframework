@@ -297,7 +297,6 @@ echo $this->navigation()->menu()->renderMenu($container, array(
 ]]></programlisting>
     </sect2>
 
-
     <sect2 id="migration.19.security">
         <title>Security fixes as with 1.9.7</title>
 

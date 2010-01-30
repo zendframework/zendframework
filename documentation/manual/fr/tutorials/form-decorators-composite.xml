@@ -9,7 +9,6 @@
         avions un exemple traitant un élément "date de naissance":
     </para>
 
-
     <programlisting language="php"><![CDATA[
 <div class="element">
     <?php echo $form->dateOfBirth->renderLabel() ?>

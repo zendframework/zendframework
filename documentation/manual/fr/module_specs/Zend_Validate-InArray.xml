@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17894 -->
+<!-- EN-Revision: 18438 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.in_array">
 
@@ -7,7 +7,7 @@
 
     <para>
         <classname>Zend_Validate_InArray</classname> vous permet de valider qu'une entrée est bien présente
-        dans un tableau. Ceci fonctionne aussi avec des tableau multidimensionnels.
+        dans un tableau. Ceci fonctionne aussi avec des tableaux multidimensionnels.
     </para>
 
     <sect3 id="zend.validate.set.in_array.basic">
@@ -33,12 +33,14 @@ if ($validator->isValid('value')) {
 
         <note>
             <para>
-                Par défaut la validation est non stricte et ne valide pas les multiple dimensions.
+                Par défaut la validation est non stricte et ne valide pas les multiples dimensions.
             </para>
         </note>
 
         <para>
-            Notez que <methodname>setHaystack()</methodname> est aussi disponible.
+            Bien sûr vous pouvez fournir le tableau à valider plus tard en utilisant la méthode
+            <methodname>setHaystack()</methodname>. La méthode
+            <methodname>getHaystack()</methodname> retourne le tableau actuellement fourni.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -46,9 +48,9 @@ $validator = new Zend_Validate_InArray();
 $validator->setHaystack(array('key' => 'value', 'otherkey' => 'othervalue'));
 
 if ($validator->isValid('value')) {
-    // value trouvée
+    // valeur trouvée
 } else {
-    // value non trouvée
+    // valeur non trouvée
 }
 ]]></programlisting>
     </sect3>
@@ -63,7 +65,7 @@ if ($validator->isValid('value')) {
         </para>
 
         <para>
-            Pour spécifier une validation stricte à l'instanciation de l'objet, agissez comme suit:
+            Pour spécifier une validation stricte à l'instanciation de l'objet, agissez comme suit&#160;:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -75,9 +77,9 @@ $validator = new Zend_Validate_InArray(
 );
 
 if ($validator->isValid('value')) {
-    // value trouvée
+    // valeur trouvée
 } else {
-    // value non trouvée
+    // valeur non trouvée
 }
 ]]></programlisting>
 
@@ -87,7 +89,9 @@ if ($validator->isValid('value')) {
         </para>
 
         <para>
-            La méthode <methodname>setStrict()</methodname> est aussi disponible.
+            Bien sûr vous pouvez la méthode <methodname>setStrict()</methodname> pour changer ce
+            réglage et la méthode <methodname>getStrict()</methodname> vous retournera le réglage
+            en cours.
         </para>
 
         <note>
@@ -99,7 +103,7 @@ if ($validator->isValid('value')) {
     </sect3>
 
     <sect3 id="zend.validate.set.in_array.recursive">
-        <title>Validation de tableaux recursifs</title>
+        <title>Validation de tableaux récursifs</title>
 
         <para>
             En plus de la validation type <acronym>PHP</acronym> <methodname>in_array()</methodname>, ce validateur peut
@@ -107,7 +111,7 @@ if ($validator->isValid('value')) {
         </para>
 
         <para>
-            Pour celà, utilisez l'option <emphasis>recursive</emphasis>.
+            Pour cela, utilisez l'option <emphasis>recursive</emphasis>.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -130,17 +134,46 @@ if ($validator->isValid('value')) {
 ]]></programlisting>
 
         <para>
-            Votre tableau sera parcouru récursivement à la recherche de votre valeur.
-        </para>
+            Votre tableau sera parcouru récursivement à la recherche de votre valeur. De plus
+            vous pouvez utiliser la méthode <methodname>setRecursive()</methodname> pour
+            paramétrer cette option plus tard et la méthode
+            <methodname>getRecursive()</methodname> pour la retrouver.
+         </para>
+
+        <programlisting language="php"><![CDATA[
+$validator = new Zend_Validate_InArray(
+    array(
+        'firstDimension' => array('key' => 'value',
+                                  'otherkey' => 'othervalue'),
+        'secondDimension' => array('some' => 'real',
+                                   'different' => 'key')
+    )
+);
+$validator->setRecursive(true);
+
+if ($validator->isValid('value')) {
+    // valeur trouvée
+} else {
+    // valeur non trouvée
+}
+]]></programlisting>
+
+         <note>
+            <title>Réglage par défaut pour la récursivité</title>
+
+             <para>
+                Par défaut, la récursivité n'est pas activée.
+             </para>
+         </note>
 
         <note>
+            <title>Options pour la "haystack"</title>
+
             <para>
-                Par défaut, la récursivité n'est pas activée.
+                Lorsque vous utilisez les clés <property>haystack</property>,
+                <property>strict</property> ou <property>recursive</property> à l'intérieur
+                de votre pile, vous devez alors envelopper la clé <property>haystack</property>.
             </para>
         </note>
     </sect3>
-
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20225 -->
+<!-- EN-Revision: 20760 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.serializer.introduction">
     <title>Introduction</title>
@@ -71,7 +71,7 @@ try {
         <methodname>serialize</methodname> ou <methodname>unserialize</methodname>.
     </para>
 
-    <sect2 id="zend.serializer.introduction.example.static.php">
+    <example id="zend.serializer.introduction.example.static.php">
         <title>Utiliser l'interface statique de Zend_Serializer</title>
 
         <para>
@@ -94,8 +94,5 @@ try {
     echo $e;
 }
 ]]></programlisting>
-    </sect2>
+    </example>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20234 -->
+<!-- EN-Revision: 20686 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.serializer.adapter">
     <title>Zend_Serializer_Adapter</title>
@@ -81,7 +81,7 @@
             Les options disponibles sont:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.wddx.table.options">
             <title>Options Zend_Serializer_Adapter_Wddx</title>
 
             <tgroup cols="4">
@@ -128,7 +128,7 @@
             Les options disponibles sont:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.json.table.options">
             <title>Options Zend_Serializer_Adapter_Json</title>
 
             <tgroup cols="4">
@@ -215,7 +215,7 @@
             Les options disponibles sont:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.pythonpickle.table.options">
             <title>Options Zend_Serializer_Adapter_PythonPickle</title>
 
             <tgroup cols="4">
@@ -251,7 +251,7 @@
             Le transtypage (PHP vers Python) se comporte comme suit:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.pythonpickle.table.php2python">
             <title>Le transtypage (PHP vers Python)</title>
 
             <tgroup cols="2">
@@ -319,7 +319,7 @@
             Le transtypage (Python vers PHP) se comporte comme suit:
         </para>
 
-        <table>
+        <table id="zend.serializer.adapter.pythonpickle.table.python2php">
             <title>Transtypage (Python vers PHP):</title>
 
             <tgroup cols="2">

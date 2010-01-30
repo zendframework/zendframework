@@ -45,22 +45,19 @@
     <itemizedlist>
         <listitem>
             <para>
-                <methodname>setErrorHandlerModule()</methodname> sets the controller module
-                to use.
+                <methodname>setErrorHandlerModule()</methodname> sets the controller module to use.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <methodname>setErrorHandlerController()</methodname> sets the controller
-                to use.
+                <methodname>setErrorHandlerController()</methodname> sets the controller to use.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <methodname>setErrorHandlerAction()</methodname> sets the controller action
-                to use.
+                <methodname>setErrorHandlerAction()</methodname> sets the controller action to use.
             </para>
         </listitem>
 
@@ -253,6 +250,7 @@ $this->getResponse()->clearBody();
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-1">
             <title>Standard Usage</title>
+
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
@@ -261,6 +259,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler());
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-2">
             <title>Setting a Different Error Handler</title>
+
             <programlisting language="php"><![CDATA[
 $front = Zend_Controller_Front::getInstance();
 $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
@@ -273,6 +272,7 @@ $front->registerPlugin(new Zend_Controller_Plugin_ErrorHandler(array(
 
         <example id="zend.controller.plugins.standard.errorhandler.examples.example-3">
             <title>Using Accessors</title>
+
             <programlisting language="php"><![CDATA[
 $plugin = new Zend_Controller_Plugin_ErrorHandler();
 $plugin->setErrorHandlerModule('mystuff')

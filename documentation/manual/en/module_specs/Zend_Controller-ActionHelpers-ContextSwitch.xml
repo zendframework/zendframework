@@ -18,23 +18,31 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 Disable layouts, if enabled.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Set an alternate view suffix, effectively requiring a separate
                 view script for the context.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Send appropriate response headers for the context desired.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Optionally, call specified callbacks to setup the context and/or
                 perform post-processing.
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -93,14 +101,18 @@ class NewsController extends Zend_Controller_Action
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 Set the 'Content-Type' response header to '<filename>text/xml</filename>'.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Change the view suffix to '<filename>xml.phtml</filename>' (or, if you use an
                 alternate view suffix, 'xml.[your suffix]').
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -117,15 +129,19 @@ class NewsController extends Zend_Controller_Action
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 Via <acronym>URL</acronym> parameter: <filename>/news/list/format/xml</filename>
                 (recall, the default routing schema allows for arbitrary key to value pairs
                 following the action)
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Via <constant>GET</constant> parameter: <command>/news/list?format=xml</command>
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -198,33 +214,43 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
 
         <itemizedlist>
             <listitem>
-                <para><emphasis>suffix</emphasis>: the suffix to prepend to the
-                default view suffix as registered in the ViewRenderer.</para>
+                <para>
+                    <emphasis>suffix</emphasis>: the suffix to prepend to the
+                    default view suffix as registered in the ViewRenderer.
+                </para>
             </listitem>
 
             <listitem>
-                <para><emphasis>headers</emphasis>: an array of header to value
-                    pairs you wish sent as part of the response.</para>
+                <para>
+                    <emphasis>headers</emphasis>: an array of header to value
+                    pairs you wish sent as part of the response.
+                </para>
             </listitem>
 
             <listitem>
-                <para><emphasis>callbacks</emphasis>: an array containing one or
-                more of the keys 'init' or 'post', pointing to valid <acronym>PHP</acronym>
-                callbacks that can be used for context initialization and post
-                processing.</para>
+                <para>
+                    <emphasis>callbacks</emphasis>: an array containing one or
+                    more of the keys 'init' or 'post', pointing to valid <acronym>PHP</acronym>
+                    callbacks that can be used for context initialization and post
+                    processing.
+                </para>
 
-                <para>Initialization callbacks occur when the context is
-                detected by <emphasis>ContextSwitch</emphasis>. You can use it to
-                perform arbitrary logic that should occur. As an example,
-                the <acronym>JSON</acronym> context uses a callback to disable the ViewRenderer
-                when the automatic <acronym>JSON</acronym> serialization is on.</para>
+                <para>
+                    Initialization callbacks occur when the context is
+                    detected by <emphasis>ContextSwitch</emphasis>. You can use it to
+                    perform arbitrary logic that should occur. As an example,
+                    the <acronym>JSON</acronym> context uses a callback to disable the ViewRenderer
+                    when the automatic <acronym>JSON</acronym> serialization is on.
+                </para>
 
-                <para>Post processing occurs during the action's
-                <methodname>postDispatch()</methodname> routine, and can be used to perform
-                arbitrary logic. As an example, the <acronym>JSON</acronym> context uses a callback
-                to determine if the automatic <acronym>JSON</acronym> serialization is on; if so,
-                it serializes the view variables to <acronym>JSON</acronym> and sends the response,
-                but if not, it re-enables the ViewRenderer.</para>
+                <para>
+                    Post processing occurs during the action's
+                    <methodname>postDispatch()</methodname> routine, and can be used to perform
+                    arbitrary logic. As an example, the <acronym>JSON</acronym> context uses a
+                    callback to determine if the automatic <acronym>JSON</acronym> serialization is
+                    on; if so, it serializes the view variables to <acronym>JSON</acronym> and sends
+                    the response, but if not, it re-enables the ViewRenderer.
+                </para>
             </listitem>
         </itemizedlist>
 
@@ -233,54 +259,73 @@ $this->_helper->contextSwitch()->setAutoJsonSerialization(false);
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>addContext($context, array $spec)</methodname>: add a new
-                context. Throws an exception if the context already exists.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addContext($context, array $spec)</methodname>: add a new
+                    context. Throws an exception if the context already exists.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setContext($context, array $spec)</methodname>: add a new
-                context or overwrite an existing context. Uses the same
-                specification as <methodname>addContext()</methodname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setContext($context, array $spec)</methodname>: add a new
+                    context or overwrite an existing context. Uses the same
+                    specification as <methodname>addContext()</methodname>.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>addContexts(array $contexts)</methodname>: add many contexts at
-                once. The <varname>$contexts</varname> array should be an array of
-                context to specification pairs. If any of the contexts already
-                exists, it will throw an exception.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>addContexts(array $contexts)</methodname>: add many contexts at
+                    once. The <varname>$contexts</varname> array should be an array of
+                    context to specification pairs. If any of the contexts already
+                    exists, it will throw an exception.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setContexts(array $contexts)</methodname>: add new contexts and
+            <listitem>
+                <para>
+                    <methodname>setContexts(array $contexts)</methodname>: add new contexts and
                 overwrite existing ones. Uses the same specification as
                 <methodname>addContexts()</methodname>.
-            </para></listitem>
+            </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+            <para>
                 <methodname>hasContext($context)</methodname>: returns <constant>TRUE</constant> if
                 the context exists, <constant>FALSE</constant> otherwise.
-            </para></listitem>
+            </para>
+            </listitem>
 
-            <listitem><para> <methodname>getContext($context)</methodname>: retrieve a
+            <listitem>
+                <para>
+                    <methodname>getContext($context)</methodname>: retrieve a
                     single context by name. Returns an array following the
                     specification used in <methodname>addContext()</methodname>.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>getContexts()</methodname>: retrieve all contexts. Returns an
-                array of context to specification pairs.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>getContexts()</methodname>: retrieve all contexts. Returns an
+                    array of context to specification pairs.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>removeContext($context)</methodname>: remove a single context by
-                name. Returns <constant>TRUE</constant> if successful, <constant>FALSE</constant>
-                if the context was not found.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>removeContext($context)</methodname>: remove a single context by
+                    name. Returns <constant>TRUE</constant> if successful,
+                    <constant>FALSE</constant> if the context was not found.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>clearContexts()</methodname>: remove all contexts.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>clearContexts()</methodname>: remove all contexts.
+                </para>
+            </listitem>
         </itemizedlist>
     </sect4>
 
@@ -390,51 +435,65 @@ class FooController extends Zend_Controller_Action
                 </para>
             </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setActionContext($action, $context)</methodname>: marks one
                     or more contexts as available to an action. If mappings
                     already exists, it replaces them with those specified.
                     <varname>$context</varname> may be a single context, or an array
                     of contexts.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>addActionContexts(array $contexts)</methodname>: add several
                     action to context pairings at once. <varname>$contexts</varname>
                     should be an associative array of action to context pairs. It
                     proxies to <methodname>addActionContext()</methodname>, meaning that if
                     pairings already exist, it appends to them.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setActionContexts(array $contexts)</methodname>: acts like
                     <methodname>addActionContexts()</methodname>, but overwrites existing
                     action to context pairs.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>hasActionContext($action, $context)</methodname>: determine
                     if a particular action has a given context.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>getActionContexts($action = null)</methodname>: returns
                     either all contexts for a given action, or all
                     action to context pairs.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>removeActionContext($action, $context)</methodname>: remove
                     one or more contexts from a given action.
                     <varname>$context</varname> may be a single context or an array of
                     contexts.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>clearActionContexts($action = null)</methodname>: remove all
                     contexts from a given action, or from all actions with
                     contexts.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
     </sect4>
 

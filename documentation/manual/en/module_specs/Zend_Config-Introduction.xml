@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.config.introduction">
     <title>Introduction</title>
+
     <para>
         <classname>Zend_Config</classname> is designed to simplify the access to, and the use of,
         configuration data within applications. It provides a nested object property based user
@@ -12,8 +13,10 @@
             linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> and
         <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>.
     </para>
+
     <example id="zend.config.introduction.example.using">
         <title>Using Zend_Config</title>
+
         <para>
             Normally it is expected that users would use one of the adapter classes such as <link
                 linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link> or
@@ -22,6 +25,7 @@
             simply pass the data to the <classname>Zend_Config</classname> constructor in order to
             utilize a simple object-oriented interface:
         </para>
+
         <programlisting language="php"><![CDATA[
 // Given an array of configuration data
 $configArray = array(
@@ -52,24 +56,30 @@ $db = Zend_Db::factory($config->database->adapter,
 $db = Zend_Db::factory($config->database);
 ]]></programlisting>
     </example>
+
     <para>
         As illustrated in the example above, <classname>Zend_Config</classname> provides nested
         object property syntax to access configuration data passed to its constructor.
     </para>
+
     <para>
         Along with the object oriented access to the data values,
         <classname>Zend_Config</classname> also has <methodname>get()</methodname> which will
         return the supplied default value if the data element doesn't exist. For example:
     </para>
+
     <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
+
     <example id="zend.config.introduction.example.file.php">
         <title>Using Zend_Config with a PHP Configuration File</title>
+
         <para>
             It is often desirable to use a pure <acronym>PHP</acronym>-based configuration file.
             The following code illustrates how easily this can be accomplished:
         </para>
+
         <programlisting language="php"><![CDATA[
 // config.php
 return array(
@@ -85,6 +95,7 @@ return array(
     )
 );
 ]]></programlisting>
+
         <programlisting language="php"><![CDATA[
 // Configuration consumption
 $config = new Zend_Config(require 'config.php');

@@ -43,7 +43,6 @@
 
                 <itemizedlist>
                     <listitem><para>Errors due to missing controllers or actions</para></listitem>
-
                     <listitem><para>Errors occurring within action controllers</para></listitem>
                 </itemizedlist>
 
@@ -238,6 +237,7 @@ class My_Controller_Action extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
+
                         <para>
                             The example above intercepts any undefined action
                             method called and redirects it to the default action

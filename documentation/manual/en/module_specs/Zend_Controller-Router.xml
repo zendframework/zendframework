@@ -2,8 +2,10 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>The Standard Router</title>
+
     <sect2 id="zend.controller.router.introduction">
         <title>Introduction</title>
+
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> is the standard
             framework router. Routing is the process of taking a <acronym>URI</acronym> endpoint
@@ -56,6 +58,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
 
         <note>
             <title>IIS Isapi_Rewrite</title>
+
             <para>
                 When using <acronym>IIS</acronym>, <varname>$_SERVER['REQUEST_URI']</varname> will
                 either not exist, or be set as an empty string. In this case,
@@ -160,30 +163,35 @@ $router->addRoute('user',
                         linkend="zend.controller.router.routes.standard">Zend_Controller_Router_Route</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.static">Zend_Controller_Router_Route_Static</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.regex">Zend_Controller_Router_Route_Regex</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.hostname">Zend_Controller_Router_Route_Hostname</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.chain">Zend_Controller_Router_Route_Chain</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
@@ -243,6 +251,7 @@ $router->addRoute('user',
 
         <note>
             <title>Reverse Matching</title>
+
             <para>
                 Routes are matched in reverse order so make sure your most
                 generic routes are defined first.
@@ -251,6 +260,7 @@ $router->addRoute('user',
 
         <note>
             <title>Returned Values</title>
+
             <para>
                 Values returned from routing come from <acronym>URL</acronym> parameters or user
                 defined route defaults. These variables are later accessible
@@ -268,6 +278,7 @@ $router->addRoute('user',
 
         <note>
             <title>Special Variables</title>
+
             <para>
                 The names of these special variables may be different if you
                 choose to alter the defaults in
@@ -359,7 +370,6 @@ $this->addRoute('default', $compat);
 // Remove any default routes
 $router->removeDefaultRoutes();
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.controller.router.rewritebase">
@@ -385,7 +395,6 @@ $router->removeDefaultRoutes();
         <programlisting language="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.controller.router.global.parameters">

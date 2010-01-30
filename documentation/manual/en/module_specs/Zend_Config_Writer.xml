@@ -23,11 +23,13 @@
                 <classname>Zend_Config_Writer_Array</classname>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <classname>Zend_Config_Writer_Ini</classname>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <classname>Zend_Config_Writer_Xml</classname>
@@ -62,10 +64,12 @@
 
     <example id="zend.config.writer.example.using">
         <title>Using Zend_Config_Writer</title>
+
         <para>
             This example illustrates the basic use of
             <classname>Zend_Config_Writer_Xml</classname> to create a new config file:
         </para>
+
         <programlisting language="php"><![CDATA[
 // Create the config object
 $config = new Zend_Config(array(), true);
@@ -97,6 +101,7 @@ $writer->setConfig($config)
 $writer = new Zend_Config_Writer_Xml();
 $writer->write('config.xml', $config);
 ]]></programlisting>
+
         <para>
             This will create an <acronym>XML</acronym> config file with the sections production
             and staging, where staging extends production.
@@ -105,9 +110,11 @@ $writer->write('config.xml', $config);
 
     <example id="zend.config.writer.modifying">
         <title>Modifying an Existing Config</title>
+
         <para>
             This example demonstrates how to edit an existing config file.
         </para>
+
         <programlisting language="php"><![CDATA[
 // Load all sections from an existing config file, while skipping the extends.
 $config = new Zend_Config_Ini('config.ini',
@@ -127,6 +134,7 @@ $writer->write();
 
     <note>
         <title>Loading a Config File</title>
+
         <para>
             When loading an existing config file for modifications it is very
             important to load all sections and to skip the extends, so that

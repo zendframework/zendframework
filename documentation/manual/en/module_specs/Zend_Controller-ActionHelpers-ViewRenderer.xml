@@ -288,12 +288,14 @@ $this->_helper->viewRenderer('foo');
 $this->_helper->viewRenderer('form', 'html', true);
 ]]></programlisting>
 
-                <note><para>
+                <note>
+                    <para>
                         <methodname>setRender()</methodname> and <methodname>direct()</methodname>
                         don't actually render the view script, but instead set hints
                         that <methodname>postDispatch()</methodname> and
                         <methodname>render()</methodname> will use to render the view.
-                </para></note>
+                    </para>
+                </note>
             </listitem>
         </itemizedlist>
 
@@ -420,14 +422,16 @@ $viewRenderer =
                 </para>
             </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setInflector($inflector, $reference)</methodname> allows you
                     to set a custom inflector for use with the
                     <emphasis>ViewRenderer</emphasis>. If <varname>$reference</varname> is
                     <constant>TRUE</constant>, it will set the suffix and module directory as static
                     references to <emphasis>ViewRenderer</emphasis> properties, as well
                     as the target.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <note>
@@ -509,11 +513,13 @@ $viewRenderer =
                     <methodname>render()</methodname> method.
                 </para>
 
-                <note><para>
-                    Once the view has been rendered to the response object, it
-                    sets the <emphasis>noRender</emphasis> to prevent accidentally
-                    rendering the same view script multiple times.
-                </para></note>
+                <note>
+                    <para>
+                        Once the view has been rendered to the response object, it
+                        sets the <emphasis>noRender</emphasis> to prevent accidentally
+                        rendering the same view script multiple times.
+                    </para>
+                </note>
 
                 <note>
                     <para>
@@ -658,6 +664,7 @@ class Foo_BarController extends Zend_Controller_Action
 
         <note>
             <title>Naming Conventions: Word Delimiters in Controller and Action Names</title>
+
             <para>
                 If your controller or action name is composed of several
                 words, the dispatcher requires that these are separated on

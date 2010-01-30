@@ -51,7 +51,6 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-
     </example>
 
     <example id="zend.controller.actionhelpers.actionstack.simple2">

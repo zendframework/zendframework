@@ -19,6 +19,7 @@
             <colspec colname='method' />
             <colspec colname='URI' />
             <colspec colname='route' />
+
             <thead>
                 <row>
                     <entry>Method</entry>
@@ -26,42 +27,51 @@
                     <entry>Module_Controller::action</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><constant>GET</constant></entry>
                     <entry><filename>/product/ratings/</filename></entry>
                     <entry><methodname>Product_RatingsController::indexAction()</methodname></entry>
                 </row>
+
                 <row>
                     <entry><constant>GET</constant></entry>
                     <entry><filename>/product/ratings/:id</filename></entry>
                     <entry><methodname>Product_RatingsController::getAction()</methodname></entry>
                 </row>
+
                 <row>
                     <entry><constant>POST</constant></entry>
                     <entry><filename>/product/ratings</filename></entry>
                     <entry><methodname>Product_RatingsController::postAction()</methodname></entry>
                 </row>
+
                 <row>
                     <entry><constant>PUT</constant></entry>
                     <entry><filename>/product/ratings/:id</filename></entry>
                     <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
                 </row>
+
                 <row>
                     <entry><constant>DELETE</constant></entry>
                     <entry><filename>/product/ratings/:id</filename></entry>
+
                     <entry>
                         <methodname>Product_RatingsController::deleteAction()</methodname>
                     </entry>
                 </row>
+
                 <row>
                     <entry><constant>POST</constant></entry>
                     <entry><filename>/product/ratings/:id?_method=PUT</filename></entry>
                     <entry><methodname>Product_RatingsController::putAction()</methodname></entry>
                 </row>
+
                 <row>
                     <entry><constant>POST</constant></entry>
                     <entry><filename>/product/ratings/:id?_method=DELETE</filename></entry>
+
                     <entry>
                         <methodname>Product_RatingsController::deleteAction()</methodname>
                     </entry>
@@ -73,87 +83,83 @@
     <sect4 id="zend.rest.route_usage">
         <title>Zend_Rest_Route Usage</title>
 
-    <para>
-        To enable <classname>Zend_Rest_Route</classname> for an entire
-        application, construct it with no config params and add it as the
-        default route on the front controller:
-    </para>
+        <para>
+            To enable <classname>Zend_Rest_Route</classname> for an entire
+            application, construct it with no config params and add it as the
+            default route on the front controller:
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front);
 $front->getRouter()->addRoute('default', $restRoute);
 ]]></programlisting>
 
-    <note>
+        <note>
+            <para>
+                If <classname>Zend_Rest_Route</classname> cannot match a valid
+                module, controller, or action, it will return <constant>FALSE</constant> and the
+                router will attempt to match using the next route in the router.
+            </para>
+        </note>
+
         <para>
-            If <classname>Zend_Rest_Route</classname> cannot match a valid
-            module, controller, or action, it will return <constant>FALSE</constant> and the router
-            will attempt to match using the next route in the router.
+            To enable <classname>Zend_Rest_Route</classname> for specific modules,
+            construct it with an array of module names as the 3rd constructor argument:
         </para>
-    </note>
 
-    <para>
-        To enable <classname>Zend_Rest_Route</classname> for specific modules,
-        construct it with an array of module names as the 3rd constructor
-        argument:
-    </para>
-
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array('product'));
 $front->getRouter()->addRoute('rest', $restRoute);
 ]]></programlisting>
 
-    <para>
-        To enable <classname>Zend_Rest_Route</classname> for specific
-        controllers, add an array of controller names as the value of each
-        module array element.
-    </para>
+        <para>
+            To enable <classname>Zend_Rest_Route</classname> for specific
+            controllers, add an array of controller names as the value of each module array element.
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $front     = Zend_Controller_Front::getInstance();
 $restRoute = new Zend_Rest_Route($front, array(), array(
     'product' => array('ratings')
 ));
 $front->getRouter()->addRoute('rest', $restRoute);
 ]]></programlisting>
-
     </sect4>
 
     <sect4 id="zend.rest.route_config">
         <title>Zend_Rest_Route with Zend_Config_Ini</title>
 
-    <para>
-        To use <classname>Zend_Rest_Route</classname> from an <acronym>INI</acronym> config file,
-        use a route type parameter and set the config options:
-    </para>
+        <para>
+            To use <classname>Zend_Rest_Route</classname> from an <acronym>INI</acronym> config
+            file, use a route type parameter and set the config options:
+        </para>
 
-    <programlisting language="ini"><![CDATA[
+        <programlisting language="ini"><![CDATA[
 routes.rest.type = Zend_Rest_Route
 routes.rest.defaults.controller = object
 routes.rest.mod = project,user
 ]]></programlisting>
 
-    <para>
-        The 'type' option designates the RESTful routing config type. The 'defaults' option is used
-        to specify custom default module, controller, and/or actions for the route. All other
-        options in the config group are treated as RESTful module names, and their values are
-        RESTful controller names. The example config defines
-        <classname>Mod_ProjectController</classname> and <classname>Mod_UserController</classname>
-        as RESTful controllers.
-    </para>
+        <para>
+            The 'type' option designates the RESTful routing config type. The 'defaults' option is
+            used to specify custom default module, controller, and/or actions for the route. All
+            other options in the config group are treated as RESTful module names, and their values
+            are RESTful controller names. The example config defines
+            <classname>Mod_ProjectController</classname> and
+            <classname>Mod_UserController</classname> as RESTful controllers.
+        </para>
 
-    <para>
-        Then use the <methodname>addConfig()</methodname> method of the Rewrite router object:
-    </para>
+        <para>
+            Then use the <methodname>addConfig()</methodname> method of the Rewrite router object:
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('path/to/routes.ini');
 $router = new Zend_Controller_Router_Rewrite();
 $router->addConfig($config, 'routes');
 ]]></programlisting>
-
     </sect4>
 
     <sect4 id="zend.rest.controller">
@@ -175,6 +181,7 @@ $router->addConfig($config, 'routes');
                     Should retrieve an index of resources and assign it to view.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis><methodname>getAction()</methodname></emphasis> -
@@ -182,12 +189,14 @@ $router->addConfig($config, 'routes');
                     and assign it to view.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis><methodname>postAction()</methodname></emphasis> -
                     Should accept a new single resource and persist its state.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis><methodname>putAction()</methodname></emphasis> -
@@ -195,6 +204,7 @@ $router->addConfig($config, 'routes');
                     and persist its state.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis><methodname>deleteAction()</methodname></emphasis> -
@@ -202,7 +212,6 @@ $router->addConfig($config, 'routes');
                 </para>
             </listitem>
         </itemizedlist>
-
     </sect4>
 </sect3>
 <!--

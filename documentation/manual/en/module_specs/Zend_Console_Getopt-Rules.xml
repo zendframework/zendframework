@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.rules">
     <title>Declaring Getopt Rules</title>
+
     <para>
         The constructor for the <classname>Zend_Console_Getopt</classname> class takes
         from one to three arguments. The first argument
@@ -9,11 +10,13 @@
         This class supports alternative syntax forms for declaring the options.
         See the sections below for the format and usage of these syntax forms.
     </para>
+
     <para>
         The constructor takes two more arguments, both of which are optional.
         The second argument may contain the command-line arguments.
         This defaults to <varname>$_SERVER['argv']</varname>.
     </para>
+
     <para>
         The third argument of the constructor may contain an
         configuration options to customize the behavior of
@@ -24,6 +27,7 @@
 
     <sect2 id="zend.console.getopt.rules.short">
         <title>Declaring Options with the Short Syntax</title>
+
         <para>
             <classname>Zend_Console_Getopt</classname> supports a compact syntax similar
             to that used by <acronym>GNU</acronym> Getopt (see <ulink
@@ -34,18 +38,22 @@
             character (<emphasis>:</emphasis>) indicates a flag that requires a
             parameter.
         </para>
+
         <example id="zend.console.getopt.rules.short.example">
             <title>Using the Short Syntax</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 ]]></programlisting>
         </example>
+
         <para>
             The example above shows using <classname>Zend_Console_Getopt</classname>
             to declare that options may be given as <command>-a</command>,
             <command>-b</command>, or <command>-p</command>. The latter flag
             requires a parameter.
         </para>
+
         <para>
             The short syntax is limited to flags of a single character.
             Aliases, parameter types, and help strings are not supported
@@ -55,6 +63,7 @@ $opts = new Zend_Console_Getopt('abp:');
 
     <sect2 id="zend.console.getopt.rules.long">
         <title>Declaring Options with the Long Syntax</title>
+
         <para>
             A different syntax with more features is also available. This
             syntax allows you to specify aliases for flags, types of option
@@ -63,6 +72,7 @@ $opts = new Zend_Console_Getopt('abp:');
             the options, the long syntax uses an associative array as the
             first argument to the constructor.
         </para>
+
         <para>
             The key of each element of the associative array is a string with
             a format that names the flag, with any aliases, separated by the
@@ -71,34 +81,41 @@ $opts = new Zend_Console_Getopt('abp:');
             ("<emphasis>=</emphasis>") with a letter that stands for the
             <emphasis>type</emphasis> of the parameter:
         </para>
+
         <itemizedlist>
             <listitem>
                 <para>
                     "<emphasis>=s</emphasis>" for a string parameter
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     "<emphasis>=w</emphasis>" for a word parameter
                     (a string containing no whitespace)
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     "<emphasis>=i</emphasis>" for an integer parameter
                 </para>
             </listitem>
         </itemizedlist>
+
         <para>
             If the parameter is optional, use a dash ("<emphasis>-</emphasis>")
             instead of the equals symbol.
         </para>
+
         <para>
             The value of each element in the associative array is a help string
             to describe to a user how to use your program.
         </para>
+
         <example id="zend.console.getopt.rules.long.example">
             <title>Using the Long Syntax</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt(
   array(
@@ -109,6 +126,7 @@ $opts = new Zend_Console_Getopt(
 );
 ]]></programlisting>
         </example>
+
         <para>
             In the example declaration above, there are three options.
             <command>--apple</command> and <command>-a</command> are aliases for each
@@ -119,5 +137,4 @@ $opts = new Zend_Console_Getopt(
             for each other, and the option may take an optional string parameter.
         </para>
     </sect2>
-
 </sect1>

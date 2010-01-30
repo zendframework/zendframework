@@ -2,10 +2,12 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.introduction">
     <title>Introduction</title>
+
     <para>
         The <classname>Zend_Console_Getopt</classname> class helps command-line
         applications to parse their options and arguments.
     </para>
+
     <para>
         Users may specify command-line arguments when
         they execute your application. These arguments have meaning to the
@@ -17,10 +19,12 @@
         features in <command>grep</command>, <command>ls</command>, and
         <command>tar</command>.
     </para>
+
     <para>
         Below are a few definitions of terms. Common usage of the terms
         varies, but this documentation will use the definitions below.
     </para>
+
     <itemizedlist>
         <listitem>
             <para>
@@ -30,12 +34,14 @@
                 resources on which the command operates.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 "option": an argument that signifies that the command
                 should change its default behavior in some way.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 "flag": the first part of an option, identifies
@@ -48,6 +54,7 @@
                 Long flags cannot be clustered.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 "parameter": the secondary part of an option; a data value
@@ -58,6 +65,7 @@
                 <command>--user</command> almost always requires
                 a following parameter.
             </para>
+
             <para>
                 A parameter may be given as a separate argument following a
                 flag argument, or as part of the same argument string,
@@ -69,6 +77,7 @@
                 by <classname>Zend_Console_Getopt</classname>.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 "cluster": multiple single-character flags combined
@@ -81,6 +90,7 @@
             </para>
         </listitem>
     </itemizedlist>
+
     <para>
         For example, in <command>mysql --user=root mydatabase</command>,
         <command>mysql</command> is a <emphasis>command</emphasis>,
@@ -90,14 +100,17 @@
         and <command>mydatabase</command> is an argument but not an option
         by our definition.
     </para>
+
     <para>
         <classname>Zend_Console_Getopt</classname> provides an interface to declare
         which flags are valid for your application, output an error and usage
         message if they use an invalid flag, and report to your application
         code which flags the user specified.
     </para>
+
     <note>
         <title>Getopt is not an Application Framework</title>
+
         <para>
             <classname>Zend_Console_Getopt</classname> does <emphasis>not</emphasis>
             interpret the meaning of flags and parameters, nor does this class
@@ -110,6 +123,7 @@
             another <acronym>PHP</acronym> class.
         </para>
     </note>
+
     <para>
         The following sections describe usage of <classname>Zend_Console_Getopt</classname>.
     </para>

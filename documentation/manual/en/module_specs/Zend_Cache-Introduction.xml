@@ -2,9 +2,11 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.introduction">
     <title>Introduction</title>
+
     <para>
         <classname>Zend_Cache</classname> provides a generic way to cache any data.
     </para>
+
     <para>
       Caching in Zend Framework is operated by frontends while cache records are stored through
       backend adapters (<emphasis>File</emphasis>, <emphasis>Sqlite</emphasis>,
@@ -12,14 +14,17 @@
       is easy to delete specific types of records afterwards (for example: "delete all cache records
       marked with a given tag").
     </para>
+
     <para>
         The core of the module (<classname>Zend_Cache_Core</classname>) is generic, flexible and
         configurable. Yet, for your specific needs there are cache frontends that extend
         <classname>Zend_Cache_Core</classname> for convenience: <emphasis>Output</emphasis>,
         <emphasis>File</emphasis>, <emphasis>Function</emphasis> and <emphasis>Class</emphasis>.
     </para>
+
     <example id="zend.cache.introduction.example-1">
         <title>Getting a Frontend with Zend_Cache::factory()</title>
+
         <para>
             <methodname>Zend_Cache::factory()</methodname> instantiates correct objects and ties
             them together. In this first example, we will use <emphasis>Core</emphasis> frontend
@@ -46,6 +51,7 @@ $cache = Zend_Cache::factory('Core',
 
     <note>
         <title>Frontends and Backends Consisting of Multiple Words</title>
+
         <para>
             Some frontends and backends are named using multiple words, such
             as 'ZendPlatform'. When specifying them to the factory, separate
@@ -91,16 +97,20 @@ print_r($result);
 
     <example id="zend.cache.introduction.example-3">
         <title>Caching Output with Zend_Cache Output Frontend</title>
+
         <para>
             We 'mark up' sections in which we want to cache output by adding some conditional logic,
             encapsulating the section within <methodname>start()</methodname> and
             <methodname>end()</methodname> methods (this resembles the first example and is the core
             strategy for caching).
-        </para><para>
+        </para>
+
+        <para>
             Inside, output your data as usual - all output will be cached when execution hits the
             <methodname>end()</methodname> method. On the next run, the whole section will be
             skipped in favor of fetching data from cache (as long as the cache record is valid).
         </para>
+
         <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 30,                   // cache lifetime of 30 seconds
@@ -126,22 +136,27 @@ if(!$cache->start('mypage')) {
 
 echo 'This is never cached ('.time().').';
 ]]></programlisting>
-       <para>
-           Notice that we output the result of <methodname>time()</methodname> twice; this is
-           something dynamic for demonstration purposes. Try running this and then refreshing
-           several times; you will notice that the first number doesn't change while second changes
-           as time passes. That is because the first number was output in the cached section and is
-           saved among other output. After half a minute (we've set lifetime to 30 seconds) the
-           numbers should match again because the cache record expired -- only to be cached again.
-           You should try this in your browser or console.
-       </para>
+
+        <para>
+            Notice that we output the result of <methodname>time()</methodname> twice; this is
+            something dynamic for demonstration purposes. Try running this and then refreshing
+            several times; you will notice that the first number doesn't change while second changes
+            as time passes. That is because the first number was output in the cached section and is
+            saved among other output. After half a minute (we've set lifetime to 30 seconds) the
+            numbers should match again because the cache record expired -- only to be cached again.
+            You should try this in your browser or console.
+        </para>
     </example>
-    <note><para>
-        When using <classname>Zend_Cache</classname>, pay attention to the important cache
-        identifier (passed to <methodname>save()</methodname> and <methodname>start()</methodname>).
-        It must be unique for every resource you cache, otherwise unrelated cache records may wipe
-        each other or, even worse, be displayed in place of the other.
-    </para></note>
+
+    <note>
+        <para>
+            When using <classname>Zend_Cache</classname>, pay attention to the important cache
+            identifier (passed to <methodname>save()</methodname> and
+            <methodname>start()</methodname>). It must be unique for every resource you cache,
+            otherwise unrelated cache records may wipe each other or, even worse, be displayed in
+            place of the other.
+        </para>
+    </note>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

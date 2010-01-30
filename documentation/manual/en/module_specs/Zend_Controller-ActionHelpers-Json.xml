@@ -15,9 +15,11 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 Disables layouts if currently enabled.
-        </para></listitem>
+            </para>
+        </listitem>
 
         <listitem>
             <para>
@@ -32,18 +34,24 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
 ]]></programlisting>
         </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Disables the ViewRenderer if currently enabled.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Sets the 'Content-Type' response header to '<filename>application/json</filename>'.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 By default, immediately returns the response, without waiting
                 for the action to finish execution.
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>

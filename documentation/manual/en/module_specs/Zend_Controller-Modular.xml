@@ -5,6 +5,7 @@
 
     <sect2 id="zend.controller.modular.introduction">
         <title>Introduction</title>
+
         <para>
             The Conventional Modular directory structure allows you to separate
             different <acronym>MVC</acronym> applications into self-contained units, and re-use
@@ -63,6 +64,7 @@ application/
 
         <note>
             <title>No Namespacing in the Default Module</title>
+
             <para>
                 Note that in the default module, controllers do not need a
                 namespace prefix. Thus, in the example above, the controllers in
@@ -169,11 +171,13 @@ $front->setModuleControllerDirectoryName('con');
 $front->addModuleDirectory('/path/to/application/modules');
 ]]></programlisting>
 
-        <note><para>
-            You can indicate that no controller subdirectory be used for your
-            modules by passing an empty value to
-            <methodname>setModuleControllerDirectoryName()</methodname>.
-        </para></note>
+        <note>
+            <para>
+                You can indicate that no controller subdirectory be used for your
+                modules by passing an empty value to
+                <methodname>setModuleControllerDirectoryName()</methodname>.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.controller.modular.router">

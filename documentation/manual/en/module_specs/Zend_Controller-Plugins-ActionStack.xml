@@ -20,32 +20,40 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>getRegistry()</methodname> and <methodname>setRegistry()</methodname>.
                 Internally, <emphasis>ActionStack</emphasis> uses a
                 <classname>Zend_Registry</classname> instance to store the stack. You can
                 substitute a different registry instance or retrieve it with
                 these accessors.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>getRegistryKey()</methodname> and
                 <methodname>setRegistryKey()</methodname>.
                 These can be used to indicate which registry key to use when
                 pulling the stack. Default value is
                 '<classname>Zend_Controller_Plugin_ActionStack</classname>'.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>getStack()</methodname> allows you to retrieve the stack of
                 actions in its entirety.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>pushStack()</methodname> and <methodname>popStack()</methodname> allow
                 you to add to and pull from the stack, respectively.
                 <methodname>pushStack()</methodname> accepts a request object.
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>

@@ -202,24 +202,30 @@ $front->dispatch();
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>getPlugin($class)</methodname> allows you to retrieve a
                     plugin by class name. If no plugins match, it returns
                     <constant>FALSE</constant>. If more than one plugin of that class
                     is registered, it returns an array.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>getPlugins()</methodname> retrieves the entire plugin stack.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>unregisterPlugin($plugin)</methodname> allows you to remove
                     a plugin from the stack. You may pass a plugin object, or
                     the class name of the plugin you wish to unregister. If you
                     pass the class name, any plugins of that class will be
                     removed.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
     </sect2>
 

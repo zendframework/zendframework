@@ -47,7 +47,7 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
         A typical use case might look like the following:
     </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Creating a Zend_View instance
 $view = new Zend_View();
 

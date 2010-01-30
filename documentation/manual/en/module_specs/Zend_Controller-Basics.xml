@@ -28,162 +28,162 @@
         working knowledge of the process is helpful.
     </para>
 
-        <itemizedlist>
-            <listitem>
+    <itemizedlist>
+        <listitem>
+            <para>
+                <classname>Zend_Controller_Front</classname> orchestrates the entire
+                workflow of the <classname>Zend_Controller</classname> system. It is
+                an interpretation of the FrontController pattern.
+                <classname>Zend_Controller_Front</classname> processes all requests
+                received by the server and is ultimately responsible for
+                delegating requests to ActionControllers
+                (<classname>Zend_Controller_Action</classname>).
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend_Controller_Request_Abstract</classname> (often
+                referred to as the <emphasis>Request Object</emphasis>) represents
+                the request environment and provides methods for setting and
+                retrieving the controller and action names and any request
+                parameters. Additionally it keeps track of whether or not
+                the action it contains has been dispatched by
+                <classname>Zend_Controller_Dispatcher</classname>. Extensions to the
+                abstract request object can be used to encapsulate the
+                entire request environment, allowing routers to pull
+                information from the request environment in order to set the
+                controller and action names.
+            </para>
+
+            <para>
+                By default, <classname>Zend_Controller_Request_Http</classname> is
+                used, which provides access to the entire <acronym>HTTP</acronym> request
+                environment.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend_Controller_Router_Interface</classname> is used to
+                define routers. Routing is the process of examining the
+                request environment to determine which controller, and
+                action of that controller, should receive the request. This
+                controller, action, and optional parameters are then set in
+                the request object to be processed by
+                <classname>Zend_Controller_Dispatcher_Standard</classname>. Routing
+                occurs only once: when the request is initially received and
+                before the first controller is dispatched.
+            </para>
+
+            <para>
+                The default router,
+                <classname>Zend_Controller_Router_Rewrite</classname>, takes a
+                <acronym>URI</acronym> endpoint as specified in
+                <classname>Zend_Controller_Request_Http</classname> and decomposes it
+                into a controller, action, and parameters based on the path information
+                in the <acronym>URL</acronym>. As an example, the <acronym>URL</acronym>
+                <filename>http://localhost/foo/bar/key/value</filename> would be
+                decoded to use the <emphasis>foo</emphasis> controller,
+                <emphasis>bar</emphasis> action, and specify a parameter
+                <emphasis>key</emphasis> with a value of <emphasis>value</emphasis>.
+            </para>
+
+            <para>
+                <classname>Zend_Controller_Router_Rewrite</classname> can also be used
+                to match arbitrary paths; see <link
+                    linkend="zend.controller.router">the router documentation</link>
+                for more information.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend_Controller_Dispatcher_Interface</classname> is used to
+                define dispatchers. Dispatching is the process of pulling
+                the controller and action from the request object and
+                mapping them to a controller file (or class) and action method in
+                the controller class. If the controller or action do not
+                exist, it handles determining default controllers and
+                actions to dispatch.
+            </para>
+
+            <para>
+                The actual dispatching process consists of instantiating the
+                controller class and calling the action method in that
+                class. Unlike routing, which occurs only once, dispatching
+                occurs in a loop. If the request object's dispatched status
+                is reset at any point, the loop will be repeated, calling
+                whatever action is currently set in the request object. The
+                first time the loop finishes with the request object's
+                dispatched status set (<type>Boolean</type> <constant>TRUE</constant>),
+                it will finish processing.
+            </para>
+
+            <para>
+                The default dispatcher is
+                <classname>Zend_Controller_Dispatcher_Standard</classname>. It defines
+                controllers as MixedCasedClasses ending in the word
+                Controller, and action methods as camelCasedMethods ending
+                in the word Action:
+                <methodname>FooController::barAction()</methodname>. In this case, the
+                controller would be referred to as <emphasis>foo</emphasis> and
+                the action as <emphasis>bar</emphasis>.
+            </para>
+
+            <note>
+                <title>Case Naming Conventions</title>
+
                 <para>
-                    <classname>Zend_Controller_Front</classname> orchestrates the entire
-                    workflow of the <classname>Zend_Controller</classname> system. It is
-                    an interpretation of the FrontController pattern.
-                    <classname>Zend_Controller_Front</classname> processes all requests
-                    received by the server and is ultimately responsible for
-                    delegating requests to ActionControllers
-                    (<classname>Zend_Controller_Action</classname>).
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <classname>Zend_Controller_Request_Abstract</classname> (often
-                    referred to as the <emphasis>Request Object</emphasis>) represents
-                    the request environment and provides methods for setting and
-                    retrieving the controller and action names and any request
-                    parameters. Additionally it keeps track of whether or not
-                    the action it contains has been dispatched by
-                    <classname>Zend_Controller_Dispatcher</classname>. Extensions to the
-                    abstract request object can be used to encapsulate the
-                    entire request environment, allowing routers to pull
-                    information from the request environment in order to set the
-                    controller and action names.
-                </para>
-
-                <para>
-                    By default, <classname>Zend_Controller_Request_Http</classname> is
-                    used, which provides access to the entire <acronym>HTTP</acronym> request
-                    environment.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <classname>Zend_Controller_Router_Interface</classname> is used to
-                    define routers. Routing is the process of examining the
-                    request environment to determine which controller, and
-                    action of that controller, should receive the request. This
-                    controller, action, and optional parameters are then set in
-                    the request object to be processed by
-                    <classname>Zend_Controller_Dispatcher_Standard</classname>. Routing
-                    occurs only once: when the request is initially received and
-                    before the first controller is dispatched.
-                </para>
-
-                <para>
-                    The default router,
-                    <classname>Zend_Controller_Router_Rewrite</classname>, takes a
-                    <acronym>URI</acronym> endpoint as specified in
-                    <classname>Zend_Controller_Request_Http</classname> and decomposes it
-                    into a controller, action, and parameters based on the path information
-                    in the <acronym>URL</acronym>. As an example, the <acronym>URL</acronym>
-                    <filename>http://localhost/foo/bar/key/value</filename> would be
-                    decoded to use the <emphasis>foo</emphasis> controller,
-                    <emphasis>bar</emphasis> action, and specify a parameter
-                    <emphasis>key</emphasis> with a value of <emphasis>value</emphasis>.
-                </para>
-
-                <para>
-                    <classname>Zend_Controller_Router_Rewrite</classname> can also be used
-                    to match arbitrary paths; see <link
-                        linkend="zend.controller.router">the router documentation</link>
-                    for more information.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <classname>Zend_Controller_Dispatcher_Interface</classname> is used to
-                    define dispatchers. Dispatching is the process of pulling
-                    the controller and action from the request object and
-                    mapping them to a controller file (or class) and action method in
-                    the controller class. If the controller or action do not
-                    exist, it handles determining default controllers and
-                    actions to dispatch.
-                </para>
-
-                <para>
-                    The actual dispatching process consists of instantiating the
-                    controller class and calling the action method in that
-                    class. Unlike routing, which occurs only once, dispatching
-                    occurs in a loop. If the request object's dispatched status
-                    is reset at any point, the loop will be repeated, calling
-                    whatever action is currently set in the request object. The
-                    first time the loop finishes with the request object's
-                    dispatched status set (<type>Boolean</type> <constant>TRUE</constant>),
-                    it will finish processing.
-                </para>
-
-                <para>
-                    The default dispatcher is
-                    <classname>Zend_Controller_Dispatcher_Standard</classname>. It defines
-                    controllers as MixedCasedClasses ending in the word
-                    Controller, and action methods as camelCasedMethods ending
-                    in the word Action:
-                    <methodname>FooController::barAction()</methodname>. In this case, the
-                    controller would be referred to as <emphasis>foo</emphasis> and
-                    the action as <emphasis>bar</emphasis>.
-                </para>
-
-                <note>
-                    <title>Case Naming Conventions</title>
-
-                    <para>
-                        Since humans are notoriously inconsistent at
-                        maintaining case sensitivity when typing links, Zend
-                        Framework actually normalizes path information to
-                        lowercase. This, of course, will affect how you name
-                        your controller and actions... or refer to them in
-                        links.
-                    </para>
-
-                    <para>
-                        If you wish to have your controller class or action
-                        method name have multiple MixedCasedWords or
-                        camelCasedWords, you will need to separate those words
-                        on the url with either a '-' or '.' (though you can
-                        configure the character used).
-                    </para>
-
-                    <para>
-                        As an example, if you were going to the action in
-                        <methodname>FooBarController::bazBatAction()</methodname>, you'd
-                        refer to it on the url as <filename>/foo-bar/baz-bat</filename>
-                        or <filename>/foo.bar/baz.bat</filename>.
-                    </para>
-                </note>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <classname>Zend_Controller_Action</classname> is the base action
-                    controller component. Each controller is a single class
-                    that extends the <classname>Zend_Controller_Action</classname> class
-                    and should contain one or more action methods.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <classname>Zend_Controller_Response_Abstract</classname> defines a
-                    base response class used to collect and return responses
-                    from the action controllers. It collects both headers and
-                    body content.
+                    Since humans are notoriously inconsistent at
+                    maintaining case sensitivity when typing links, Zend
+                    Framework actually normalizes path information to
+                    lowercase. This, of course, will affect how you name
+                    your controller and actions... or refer to them in
+                    links.
                 </para>
 
                 <para>
-                    The default response class is
-                    <classname>Zend_Controller_Response_Http</classname>, which is
-                    suitable for use in an <acronym>HTTP</acronym> environment.
+                    If you wish to have your controller class or action
+                    method name have multiple MixedCasedWords or
+                    camelCasedWords, you will need to separate those words
+                    on the url with either a '-' or '.' (though you can
+                    configure the character used).
                 </para>
-            </listitem>
-        </itemizedlist>
+
+                <para>
+                    As an example, if you were going to the action in
+                    <methodname>FooBarController::bazBatAction()</methodname>, you'd
+                    refer to it on the url as <filename>/foo-bar/baz-bat</filename>
+                    or <filename>/foo.bar/baz.bat</filename>.
+                </para>
+            </note>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend_Controller_Action</classname> is the base action
+                controller component. Each controller is a single class
+                that extends the <classname>Zend_Controller_Action</classname> class
+                and should contain one or more action methods.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <classname>Zend_Controller_Response_Abstract</classname> defines a
+                base response class used to collect and return responses
+                from the action controllers. It collects both headers and
+                body content.
+            </para>
+
+            <para>
+                The default response class is
+                <classname>Zend_Controller_Response_Http</classname>, which is
+                suitable for use in an <acronym>HTTP</acronym> environment.
+            </para>
+        </listitem>
+    </itemizedlist>
 
     <para>
         The workflow of <classname>Zend_Controller</classname> is relatively simple. A

@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.fetching">
     <title>Fetching Options and Arguments</title>
+
     <para>
         After you have declared the options that the
         <classname>Zend_Console_Getopt</classname> object should recognize, and supply
@@ -10,6 +11,7 @@
         a given command-line invocation of your program. The class implements
         magic methods so you can query for options by name.
     </para>
+
     <para>
         The parsing of the data is deferred until the first query you make
         against the <classname>Zend_Console_Getopt</classname> object to find out if an
@@ -20,6 +22,7 @@
 
     <sect2 id="zend.console.getopt.fetching.exceptions">
         <title>Handling Getopt Exceptions</title>
+
         <para>
             If the user gave any invalid options on the command-line,
             the parsing function throws a <classname>Zend_Console_Getopt_Exception</classname>.
@@ -32,8 +35,10 @@
             which returns as a string the formatted set of usage messages for
             all declared options.
         </para>
+
         <example id="zend.console.getopt.fetching.exceptions.example">
             <title>Catching Getopt Exceptions</title>
+
             <programlisting language="php"><![CDATA[
 try {
     $opts = new Zend_Console_Getopt('abp:');
@@ -44,20 +49,24 @@ try {
 }
 ]]></programlisting>
         </example>
+
         <para>
             Cases where parsing throws an exception include:
         </para>
+
         <itemizedlist>
             <listitem>
                 <para>
                     Option given is not recognized.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Option requires a parameter but none was given.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Option parameter is of the wrong type.
@@ -70,6 +79,7 @@ try {
 
     <sect2 id="zend.console.getopt.fetching.byname">
         <title>Fetching Options by Name</title>
+
         <para>
             You can use the <methodname>getOption()</methodname> method to query the value
             of an option. If the option had a parameter, this method returns
@@ -77,22 +87,27 @@ try {
             the user did specify it on the command-line, the method returns
             <constant>TRUE</constant>. Otherwise the method returns <constant>NULL</constant>.
         </para>
+
         <example id="zend.console.getopt.fetching.byname.example.setoption">
             <title>Using getOption()</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $b = $opts->getOption('b');
 $p_parameter = $opts->getOption('p');
 ]]></programlisting>
         </example>
+
         <para>
             Alternatively, you can use the magic <methodname>__get()</methodname> function
             to retrieve the value of an option as if it were a class member
             variable. The <methodname>__isset()</methodname> magic method is also
             implemented.
         </para>
+
         <example id="zend.console.getopt.fetching.byname.example.magic">
             <title>Using __get() and __isset() Magic Methods</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 if (isset($opts->b)) {
@@ -101,6 +116,7 @@ if (isset($opts->b)) {
 $p_parameter = $opts->p; // null if not set
 ]]></programlisting>
         </example>
+
         <para>
             If your options are declared with aliases, you may use any of the
             aliases for an option in the methods above.
@@ -109,10 +125,12 @@ $p_parameter = $opts->p; // null if not set
 
     <sect2 id="zend.console.getopt.fetching.reporting">
         <title>Reporting Options</title>
+
         <para>
             There are several methods to report the full set of
             options given by the user on the current command-line.
         </para>
+
         <itemizedlist>
             <listitem>
                 <para>
@@ -122,6 +140,7 @@ $p_parameter = $opts->p; // null if not set
                     is the literal string "<constant>TRUE</constant>".
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     As an array: use the <methodname>toArray()</methodname> method. The options
@@ -129,12 +148,14 @@ $p_parameter = $opts->p; // null if not set
                     strings followed by parameter strings, if any.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     As a string containing <acronym>JSON</acronym> data: use the
                     <methodname>toJson()</methodname> method.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     As a string containing <acronym>XML</acronym> data: use the
@@ -142,6 +163,7 @@ $p_parameter = $opts->p; // null if not set
                 </para>
             </listitem>
         </itemizedlist>
+
         <para>
             In all of the above dumping methods, the flag string is the
             first string in the corresponding list of aliases. For example,
@@ -154,6 +176,7 @@ $p_parameter = $opts->p; // null if not set
 
     <sect2 id="zend.console.getopt.fetching.remainingargs">
         <title>Fetching Non-option Arguments</title>
+
         <para>
             After option arguments and their parameters have been
             parsed from the command-line, there may be additional arguments
@@ -161,14 +184,17 @@ $p_parameter = $opts->p; // null if not set
             <methodname>getRemainingArgs()</methodname> method. This method returns
             an array of the strings that were not part of any options.
         </para>
+
         <example id="zend.console.getopt.fetching.remainingargs.example">
             <title>Using getRemainingArgs()</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setArguments(array('-p', 'p_parameter', 'filename'));
 $args = $opts->getRemainingArgs(); // returns array('filename')
 ]]></programlisting>
         </example>
+
         <para>
             <classname>Zend_Console_Getopt</classname> supports the <acronym>GNU</acronym>
             convention that an argument consisting of a double-dash signifies the end of
@@ -178,5 +204,4 @@ $args = $opts->getRemainingArgs(); // returns array('filename')
             For example: "<command>rm -- -filename-with-dash</command>".
         </para>
     </sect2>
-
 </sect1>

@@ -506,7 +506,6 @@ $parameter->setDefaultValue(
                 Internally <methodname>setDefaultValue()</methodname> also converts the values
                 which can't be expressed in <acronym>PHP</acronym> into the value holder.
             </para>
-
         </sect3>
 
         <sect3 id="zend.codegenerator.reference.concrete.php-property">

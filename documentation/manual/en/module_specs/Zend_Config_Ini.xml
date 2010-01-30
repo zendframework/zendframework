@@ -43,7 +43,6 @@ $config = new Zend_Config_Ini('/path/to/config.ini',
                               'staging',
                               $options);
 ]]></programlisting>
-
     </note>
 
     <example id="zend.config.adapters.ini.example.using">
@@ -94,52 +93,63 @@ echo $config->database->params->dbname; // prints "dbname"
     </example>
 
     <note>
-    <table id="zend.config.adapters.ini.table">
-        <title>Zend_Config_Ini Constructor Parameters</title>
-        <tgroup cols="2">
-            <thead>
-                  <row>
-                    <entry>Parameter</entry>
-                    <entry>Notes</entry>
-                </row>
-            </thead>
-            <tbody>
-                <row>
-                    <entry><varname>$filename</varname></entry>
-                    <entry>The <acronym>INI</acronym> file to load.</entry>
-                </row>
-                <row>
-                    <entry><varname>$section</varname></entry>
-                    <entry>The [section] within the ini file that is to be loaded. Setting
-                        this parameter to <constant>NULL</constant> will load all sections.
-                        Alternatively, an array of section names may be supplied to load
-                        multiple sections.
-                    </entry>
-                </row>
-                <row>
-                    <entry><varname>$options</varname> (default <constant>FALSE</constant>)</entry>
-                    <entry>Options array. The following keys are supported:
-                        <itemizedlist>
-                            <listitem>
-                                <para>
-                                    <emphasis><property>allowModifications</property></emphasis>:
-                                    Set to <constant>TRUE</constant> to allow
-                                    subsequent modification of loaded configuration data in-memory.
-                                    Defaults to <constant>NULL</constant>
-                                </para>
-                            </listitem>
-                            <listitem>
-                                <para>
-                                    <emphasis><property>nestSeparator</property></emphasis>: Set to
-                                    the character to be used as the nest separator. Defaults to "."
-                                </para>
-                            </listitem>
-                        </itemizedlist>
-                    </entry>
-                </row>
-            </tbody>
-        </tgroup>
-    </table>
+        <table id="zend.config.adapters.ini.table">
+            <title>Zend_Config_Ini Constructor Parameters</title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Parameter</entry>
+                        <entry>Notes</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry><varname>$filename</varname></entry>
+                        <entry>The <acronym>INI</acronym> file to load.</entry>
+                    </row>
+
+                    <row>
+                        <entry><varname>$section</varname></entry>
+
+                        <entry>
+                            The [section] within the ini file that is to be loaded. Setting
+                            this parameter to <constant>NULL</constant> will load all sections.
+                            Alternatively, an array of section names may be supplied to load
+                            multiple sections.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry>
+                            <varname>$options</varname> (default <constant>FALSE</constant>)
+                        </entry>
+
+                        <entry>
+                            Options array. The following keys are supported:
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <emphasis><property>allowModifications</property></emphasis>:
+                                        Set to <constant>TRUE</constant> to allow
+                                        subsequent modification of loaded configuration data in-memory.
+                                        Defaults to <constant>NULL</constant>
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <emphasis><property>nestSeparator</property></emphasis>: Set to
+                                        the character to be used as the nest separator. Defaults to "."
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
     </note>
 </sect1>
 <!--

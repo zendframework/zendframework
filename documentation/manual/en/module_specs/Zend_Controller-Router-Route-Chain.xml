@@ -13,6 +13,7 @@
 
     <note>
         <title>Parameter Priority</title>
+
         <para>
             When chaining routes together, the parameters of the outer route
             have a higher priority than the parameters of the inner route. Thus
@@ -179,6 +180,7 @@ echo $chainedRoute->assemble();
     </www-imprint>
 </routes>
 ]]></programlisting>
+
         <para>
             When you configure chain routes with <classname>Zend_Config</classname> and
             want the chain name separator to be different from a dash, you

@@ -5,6 +5,7 @@
 
     <sect2 id="zend.controller.quickstart.introduction">
         <title>Introduction</title>
+
         <para>
             <classname>Zend_Controller</classname> is the heart of Zend Framework's
             <acronym>MVC</acronym> system. <acronym>MVC</acronym> stands for <ulink
@@ -17,6 +18,7 @@
             intercepted by the front controller and dispatched to individual
             Action Controllers based on the <acronym>URL</acronym> requested.
         </para>
+
         <para>
             The <classname>Zend_Controller</classname> system was built with extensibility
             in mind, either by subclassing the existing classes, writing new
@@ -58,7 +60,6 @@ html/
     .htaccess
     index.php
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.docroot">
@@ -337,9 +338,11 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 <listitem>
                     <para><filename>http://example.com/</filename></para>
                 </listitem>
+
                 <listitem>
                     <para><filename>http://example.com/index</filename></para>
                 </listitem>
+
                 <listitem>
                     <para><filename>http://example.com/index/index</filename></para>
                 </listitem>

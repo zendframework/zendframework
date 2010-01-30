@@ -5,6 +5,7 @@
 
     <sect2 id="zend.controller.actionhelper.introduction">
         <title>Introduction</title>
+
         <para>
             Action Helpers allow developers to inject runtime and/or on-demand
             functionality into any Action Controllers that extend

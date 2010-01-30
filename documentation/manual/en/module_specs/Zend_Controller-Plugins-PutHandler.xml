@@ -41,5 +41,4 @@ public function putAction()
 }
 ...
 ]]></programlisting>
-
 </sect3>

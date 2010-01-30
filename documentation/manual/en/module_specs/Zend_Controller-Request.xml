@@ -2,8 +2,10 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>The Request Object</title>
+
     <sect2 id="zend.controller.request.introduction">
         <title>Introduction</title>
+
         <para>
             The request object is a simple value object that is passed between
             <classname>Zend_Controller_Front</classname> and the router, dispatcher, and
@@ -14,30 +16,37 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                The module name is accessed by
-                <methodname>getModuleName()</methodname> and
-                <methodname>setModuleName()</methodname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    The module name is accessed by <methodname>getModuleName()</methodname> and
+                    <methodname>setModuleName()</methodname>.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                The controller name is accessed by
-                <methodname>getControllerName()</methodname> and
-                <methodname>setControllerName()</methodname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    The controller name is accessed by <methodname>getControllerName()</methodname>
+                    and <methodname>setControllerName()</methodname>.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                The name of the action to call within that controller is
-                accessed by <methodname>getActionName()</methodname> and
-                <methodname>setActionName()</methodname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    The name of the action to call within that controller is
+                    accessed by <methodname>getActionName()</methodname> and
+                    <methodname>setActionName()</methodname>.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Parameters to be accessible by the action are an associative array
-                of key and value pairs that are retrieved by <methodname>getParams()</methodname>
-                and set with <methodname>setParams()</methodname>, or individually by
-                <methodname>getParam()</methodname> and <methodname>setParam()</methodname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Parameters to be accessible by the action are an associative array
+                    of key and value pairs that are retrieved by
+                    <methodname>getParams()</methodname> and set with
+                    <methodname>setParams()</methodname>, or individually by
+                    <methodname>getParam()</methodname> and <methodname>setParam()</methodname>.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -86,6 +95,7 @@
 
             <note>
                 <title>Superglobal Data</title>
+
                 <para>
                     When accessing superglobal data through
                     <classname>Zend_Controller_Request_Http</classname> as public member
@@ -109,6 +119,7 @@
 
             <note>
                 <title>GET and POST Data</title>
+
                 <para>
                     Be cautious when accessing data from the request object as
                     it is not filtered in any way. The router and dispatcher
@@ -172,6 +183,7 @@
 
             <note>
                 <title>Apache Quirks</title>
+
                 <para>
                     If you are using Apache's 404 handler to pass incoming
                     requests to the front controller, or using a PT flag with
@@ -222,6 +234,7 @@ $front->setRequest($request);
 
             <note>
                 <title>URL Detection is Case Sensitive</title>
+
                 <para>
                     Automatic base <acronym>URL</acronym> detection is case sensitive, so make sure
                     your <acronym>URL</acronym> will match a subdirectory name in a filesystem (even
@@ -251,7 +264,6 @@ $controller->setControllerDirectory('./application/controllers')
            ->setBaseUrl('/projects/myapp'); // set the base url!
 $response   = $controller->dispatch();
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.controller.request.http.method">
@@ -297,8 +309,10 @@ $response   = $controller->dispatch();
             </para>
 
             <itemizedlist>
-                <listitem><para>Prototype and Scriptaculous (and libraries derived
-                        from Prototype)</para></listitem>
+                <listitem>
+                    <para>Prototype and Scriptaculous (and libraries derived from Prototype)</para>
+                </listitem>
+
                 <listitem><para>Yahoo! UI Library</para></listitem>
                 <listitem><para>jQuery</para></listitem>
                 <listitem><para>MochiKit</para></listitem>

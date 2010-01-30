@@ -5,6 +5,7 @@
 
     <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
         <title>Introduction</title>
+
         <para>
             The <emphasis>FlashMessenger</emphasis> helper allows you to pass messages
             that the user may need to see on the next request. To accomplish
@@ -17,11 +18,11 @@
             <link linkend="zend.session.advanced_usage.starting_a_session">Zend_Session</link>
             documentation for more details on its usage.)
         </para>
-
     </sect4>
 
     <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
         <title>Basic Usage Example</title>
+
         <para>
             The usage example below shows the use of the flash messenger at its
             most basic. When the action <filename>/some/my</filename> is called, it adds

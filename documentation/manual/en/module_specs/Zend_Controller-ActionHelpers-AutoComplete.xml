@@ -23,7 +23,7 @@
         Basic usage for each implementation is the same:
     </para>
 
-        <programlisting language="php"><![CDATA[
+   <programlisting language="php"><![CDATA[
 class FooController extends Zend_Controller_Action
 {
     public function barAction()
@@ -49,21 +49,14 @@ class FooController extends Zend_Controller_Action
     </para>
 
     <itemizedlist>
-        <listitem><para>
-                Disables layouts and ViewRenderer.
-        </para></listitem>
+        <listitem><para>Disables layouts and ViewRenderer.</para></listitem>
+        <listitem><para>Sets appropriate response headers.</para></listitem>
 
-        <listitem><para>
-                Sets appropriate response headers.
-        </para></listitem>
+        <listitem>
+            <para>Sets response body with encoded or formatted autocompletion data.</para>
+        </listitem>
 
-        <listitem><para>
-                Sets response body with encoded or formatted autocompletion data.
-        </para></listitem>
-
-        <listitem><para>
-                Sends response.
-        </para></listitem>
+        <listitem><para>Sends response.</para></listitem>
     </itemizedlist>
 
     <para>
@@ -71,41 +64,51 @@ class FooController extends Zend_Controller_Action
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>disableLayouts()</methodname> can be used to disable layouts and
                 the ViewRenderer. Typically, this is called within
                 <methodname>prepareAutoCompletion()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>encodeJson($data, $keepLayouts = false)</methodname> will encode
                 data to <acronym>JSON</acronym>, optionally enabling or disabling layouts.
                 Typically, this is called within
                 <methodname>prepareAutoCompletion()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>prepareAutoCompletion($data, $keepLayouts = false)</methodname>
                 is used to prepare data in the response format necessary for the
                 concrete implementation, optionally enabling or disabling
                 layouts. The return value will vary based on the implementation.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>sendAutoCompletion($data, $keepLayouts = false)</methodname>
                 is used to send data in the response format necessary for the
                 concrete implementation. It calls
                 <methodname>prepareAutoCompletion()</methodname>, and then sends the
                 response.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>direct($data, $sendNow = true, $keepLayouts =
                     false)</methodname> is used when calling the helper as a method of
                 the helper broker. The <varname>$sendNow</varname> flag is used to
                 determine whether to call <methodname>sendAutoCompletion()</methodname> or
                 <methodname>prepareAutoCompletion()</methodname>, respectively.
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -331,6 +334,7 @@ dojo.require("custom.TestNameReadStore");
 
     <sect4 id="zend.controller.actionhelpers.autocomplete.scriptaculous">
         <title>AutoCompletion with Scriptaculous</title>
+
         <para>
             <ulink
                 url="http://wiki.script.aculo.us/scriptaculous/show/Ajax.Autocompleter">Scriptaculous</ulink>

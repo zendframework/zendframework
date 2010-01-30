@@ -42,6 +42,7 @@ $router->addRoute('user', $route);
 
     <note>
         <title>Character Usage</title>
+
         <para>
             The current implementation allows you to use any character (except a
             slash) as a variable identifier, but it is strongly recommended that
@@ -154,7 +155,6 @@ $router->addRoute('archive', $route);
             <methodname>showAction()</methodname> of the class
             <classname>ArchiveController</classname>.
         </para>
-
     </sect4>
 
     <sect4 id="zend.controller.router.routes.standard.variable-requirements">
@@ -204,12 +204,14 @@ $router->addRoute('archive', $route);
                     Put it into the registry with the key <classname>Zend_Translate</classname>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Set it via the static method
                     <methodname>Zend_Controller_Router_Route::setDefaultTranslator()</methodname>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Pass it as fourth parameter to the constructor.
@@ -230,17 +232,20 @@ $router->addRoute('archive', $route);
                     Put it into the registry with the key <classname>Zend_Locale</classname>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Set it via the static method
                     <methodname>Zend_Controller_Router_Route::setDefaultLocale()</methodname>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Pass it as fifth parameter to the constructor.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Pass it as <command>@locale</command> parameter to the assemble
@@ -262,6 +267,7 @@ $router->addRoute('archive', $route);
 
         <note>
             <title>Message IDs and separate language file</title>
+
             <para>
                 Occasionally a message ID which you want to use in one
                 of your routes is already used in a view script or somewhere

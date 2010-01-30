@@ -36,7 +36,7 @@ echo $foo->generate();
             The above code will result in the following:
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Sample generated class
  *
@@ -136,7 +136,7 @@ class Foo
             <classname>Zend_CodeGenerator_Php_Method</classname> instances.
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => 'Sample generated class',
@@ -214,7 +214,7 @@ echo $foo->generate();
             The above generates the following output:
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Sample generated class
  *
@@ -379,6 +379,7 @@ file_put_contents($path, $generator->generate());
 
     <example id="zend.codegenerator.examples.reflection-class">
         <title>Seeding PHP class generation via reflection</title>
+
         <para>
             You may add code to an existing class. To do so, first use the
             static <methodname>fromReflection()</methodname> method to map the class into a

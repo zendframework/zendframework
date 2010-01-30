@@ -5,6 +5,7 @@
 
     <sect2 id="zend.controller.action.introduction">
         <title>Introduction</title>
+
         <para>
             <classname>Zend_Controller_Action</classname> is an abstract class you may use
             for implementing Action Controllers for use with the Front
@@ -219,11 +220,12 @@ class FooController extends Zend_Controller_Action
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <emphasis>Request Object</emphasis>: <methodname>getRequest()</methodname>
-                may be used to retrieve the request object used to call the
-                action.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>Request Object</emphasis>: <methodname>getRequest()</methodname>
+                    may be used to retrieve the request object used to call the action.
+                </para>
+            </listitem>
 
             <listitem>
                 <para>
@@ -384,7 +386,8 @@ string render(string $action = null,
                 <varname>$name</varname>.
             </para>
 
-            <note><para>
+            <note>
+                <para>
                     Since controller and action names may contain word delimiter
                     characters such as '_', '.', and '-', <methodname>render()</methodname>
                     normalizes these to '-' when determining the script name. Internally,
@@ -395,7 +398,8 @@ string render(string $action = null,
                     contains camelCasing, please remember that this will result
                     in '-' separated words when determining the view script
                     file name.
-            </para></note>
+                </para>
+            </note>
 
             <para>
                 Some examples:

@@ -16,6 +16,7 @@
 
     <table id="zend.application.core-functionality.bootstrap-bootstrapper.methods-table">
         <title>Zend_Application_Bootstrap_Bootstrapper Interface</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -25,101 +26,131 @@
                     <entry>Description</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><methodname>__construct($application)</methodname></entry>
                     <entry><type>Void</type></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$application</varname>: <emphasis>required</emphasis>.
-                            Should accept a <classname>Zend_Application</classname> or a
-                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
-                            object as the sole argument.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Constructor. Accepts a single argument, which should be a
-                        <classname>Zend_Application</classname> object, or another bootstrap
-                        object.
-                    </para></entry>
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$application</varname>: <emphasis>required</emphasis>.
+                                    Should accept a <classname>Zend_Application</classname> or a
+                                    <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
+                                    object as the sole argument.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>
+                            Constructor. Accepts a single argument, which should be a
+                            <classname>Zend_Application</classname> object, or another bootstrap
+                            object.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$options</varname>: <emphasis>required</emphasis>.
-                            Array of options to set.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Typically, any option that has a matching setter will
-                        invoke that setter; otherwise, the option will simply be
-                        stored for later retrieval.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$options</varname>: <emphasis>required</emphasis>.
+                                    Array of options to set.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>
+                            Typically, any option that has a matching setter will
+                            invoke that setter; otherwise, the option will simply be
+                            stored for later retrieval.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>getApplication()</methodname></entry>
+
                     <entry>
                         <classname>Zend_Application</classname> |
                         <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                     </entry>
+
                     <entry>N/A</entry>
-                    <entry><para>
-                        Retrieve the application or bootstrap object passed via the
-                        constructor.
-                    </para></entry>
+
+                    <entry>
+                        <para>
+                            Retrieve the application or bootstrap object passed via the
+                            constructor.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>getEnvironment()</methodname></entry>
                     <entry><type>String</type></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Retrieve the environment string registered with the
-                        parent application or bootstrap object.
-                    </para></entry>
+
+                    <entry>
+                        <para>
+                            Retrieve the environment string registered with the
+                            parent application or bootstrap object.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>getClassResources()</methodname></entry>
                     <entry><type>Array</type></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Retrieve a list of available resource initializer names
-                        as defined in the class. This may be implementation
-                        specific.
-                    </para></entry>
+
+                    <entry>
+                        <para>
+                            Retrieve a list of available resource initializer names
+                            as defined in the class. This may be implementation specific.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>bootstrap($resource = null)</methodname></entry>
+                    <entry><type>Mixed</type></entry>
                     <entry>
-                        <type>Mixed</type>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$resource</varname>: <emphasis>optional</emphasis>.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
                     </entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$resource</varname>: <emphasis>optional</emphasis>.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        If <varname>$resource</varname> is empty, execute all
-                        bootstrap resources. If a string, execute that single
-                        resource; if an array, execute each resource in the
-                        array.
-                    </para></entry>
+
+                    <entry>
+                        <para>
+                            If <varname>$resource</varname> is empty, execute all
+                            bootstrap resources. If a string, execute that single
+                            resource; if an array, execute each resource in the array.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>run()</methodname></entry>
                     <entry><type>Void</type></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Defines what application logic to run after
-                        bootstrapping.
-                    </para></entry>
+
+                    <entry>
+                        <para>Defines what application logic to run after bootstrapping.</para>
+                    </entry>
                 </row>
             </tbody>
         </tgroup>

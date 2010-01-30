@@ -28,17 +28,20 @@
                     Supports both Basic and Digest authentication.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Issues challenges in all supported schemes, so client can respond with any
                     scheme it supports.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Supports proxy authentication.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Includes support for authenticating against text files and provides an
@@ -59,22 +62,22 @@
                     attack protection.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Authentication with integrity checking, or "auth-int".
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Authentication-Info <acronym>HTTP</acronym> header.
                 </para>
             </listitem>
         </itemizedlist>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.design_overview">
-
         <title>Design Overview</title>
 
         <para>
@@ -86,11 +89,9 @@
             are then compared to the values submitted by the client to determine whether
             authentication is successful.
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.configuration_options">
-
         <title>Configuration Options</title>
 
         <para>
@@ -101,6 +102,7 @@
 
         <table id="zend.auth.adapter.configuration_options.table">
             <title>Configuration Options</title>
+
             <tgroup cols="3">
                 <thead>
                     <row>
@@ -109,50 +111,62 @@
                         <entry>Description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><emphasis><property>accept_schemes</property></emphasis></entry>
                         <entry>Yes</entry>
+
                         <entry>
                             Determines which authentication schemes the adapter will accept from
                             the client. Must be a space-separated list containing
                             <emphasis>'basic'</emphasis> and/or <emphasis>'digest'</emphasis>.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>realm</property></emphasis></entry>
                         <entry>Yes</entry>
+
                         <entry>
                             Sets the authentication realm; usernames should be unique within a
                             given realm.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>digest_domains</property></emphasis></entry>
+
                         <entry>
                             Yes, when <property>accept_schemes</property> contains
                             <emphasis>digest</emphasis>
                         </entry>
+
                         <entry>
                             Space-separated list of <acronym>URI</acronym>s for which the same
                             authentication information is valid. The <acronym>URI</acronym>s need
                             not all point to the same server.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>nonce_timeout</property></emphasis></entry>
+
                         <entry>
                             Yes, when <property>accept_schemes</property> contains
                             <emphasis>digest</emphasis>
                         </entry>
+
                         <entry>
                             Sets the number of seconds for which the nonce is valid. See notes
                             below.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>proxy_auth</property></emphasis></entry>
                         <entry>No</entry>
+
                         <entry>
                             Disabled by default. Enable to perform Proxy authentication, instead
                             of normal origin server authentication.
@@ -173,11 +187,9 @@
                 implemented.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.http.resolvers">
-
         <title>Resolvers</title>
 
         <para>
@@ -196,7 +208,6 @@
         </para>
 
         <sect3 id="zend.auth.adapter.http.resolvers.file">
-
             <title>File Resolver</title>
 
             <para>
@@ -242,13 +253,10 @@ $resolver->setFile($path);
             <para>
                 If the given path is empty or not readable, an exception is thrown.
             </para>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.http.basic_usage">
-
         <title>Basic Usage</title>
 
         <para>
@@ -313,9 +321,7 @@ if (!$result->isValid()) {
     // Bad userame/password, or canceled password prompt
 }
 ]]></programlisting>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

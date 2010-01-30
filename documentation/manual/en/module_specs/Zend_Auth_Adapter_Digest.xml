@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.digest">
-
     <title>Digest Authentication</title>
 
     <sect2 id="zend.auth.adapter.digest.introduction">
-
         <title>Introduction</title>
 
         <para>
@@ -28,11 +26,13 @@
                     username, such as "<emphasis><filename>joe.user</filename></emphasis>"
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     realm, such as "<emphasis>Administrative Area</emphasis>"
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <acronym>MD5</acronym> hash of the username, realm, and password, separated
@@ -49,11 +49,9 @@
         <programlisting language="txt"><![CDATA[
 someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.digest.specifics">
-
         <title>Specifics</title>
 
         <para>
@@ -67,16 +65,19 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
                     filename - Filename against which authentication queries are performed
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     realm - Digest authentication realm
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     username - Digest authentication user
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     password - Password for the user of the realm
@@ -87,11 +88,9 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
         <para>
             These parameters must be set prior to calling <methodname>authenticate()</methodname>.
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.digest.identity">
-
         <title>Identity</title>
 
         <para>
@@ -122,9 +121,7 @@ Array
 )
 */
 ]]></programlisting>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

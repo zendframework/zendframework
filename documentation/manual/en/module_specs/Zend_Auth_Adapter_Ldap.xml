@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.ldap">
-
     <title>LDAP Authentication</title>
 
     <sect2 id="zend.auth.adapter.ldap.introduction">
-
         <title>Introduction</title>
 
         <para>
@@ -26,11 +24,9 @@
             information for troubleshooting authentication problems, and example options for both
             Active Directory and OpenLDAP servers.
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.ldap.usage">
-
         <title>Usage</title>
 
         <para>
@@ -135,11 +131,9 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
             domain name used by Windows, we provide it here for name canonicalization purposes
             (described in the <emphasis>Username Canonicalization</emphasis> section below).
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.ldap.api">
-
         <title>The API</title>
 
         <para>
@@ -200,6 +194,7 @@ Array
 
         <note>
             <title>What is a Distinguished Name?</title>
+
             <para>
                 A DN or "distinguished name" is a string that represents the path to an object
                 within the <acronym>LDAP</acronym> directory. Each comma-separated component is an
@@ -230,6 +225,7 @@ Array
 
         <note>
             <title>The Gory Details: What Happens in the Authenticate Method?</title>
+
             <para>
                 When the <methodname>authenticate()</methodname> method is called, the adapter
                 iterates over each set of server options, sets them on the internal
@@ -263,11 +259,9 @@ Array
             <methodname>setUsername()</methodname> and <methodname>setPassword()</methodname>
             methods.
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.ldap.server-options">
-
         <title>Server Options</title>
 
         <para>
@@ -279,6 +273,7 @@ Array
 
         <table id="zend.auth.adapter.ldap.server-options.table">
             <title>Server Options</title>
+
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -286,16 +281,20 @@ Array
                         <entry>Description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><emphasis><property>host</property></emphasis></entry>
+
                         <entry>
                             The hostname of <acronym>LDAP</acronym> server that these options
                             represent. This option is required.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>port</property></emphasis></entry>
+
                         <entry>
                             The port on which the <acronym>LDAP</acronym> server is listening. If
                             <emphasis>useSsl</emphasis> is <constant>TRUE</constant>, the default
@@ -304,8 +303,10 @@ Array
                             value is 389.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>useStartTls</property></emphasis></entry>
+
                         <entry>
                             Whether or not the <acronym>LDAP</acronym> client should use
                             <acronym>TLS</acronym> (aka <acronym>SSL</acronym>v2) encrypted
@@ -320,8 +321,10 @@ Array
                             mechanism.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>useSsl</property></emphasis></entry>
+
                         <entry>
                             Whether or not the <acronym>LDAP</acronym> client should use
                             <acronym>SSL</acronym> encrypted transport. The
@@ -333,8 +336,10 @@ Array
                             description above).
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>username</property></emphasis></entry>
+
                         <entry>
                             The DN of the account used to perform account DN lookups.
                             <acronym>LDAP</acronym> servers that require the username to be in DN
@@ -346,16 +351,20 @@ Array
                             based on the <emphasis>Principle of Least Privilege</emphasis>).
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>password</property></emphasis></entry>
+
                         <entry>
                             The password of the account used to perform account DN lookups. If this
                             option is not supplied, the <acronym>LDAP</acronym> client will attempt
                             an "anonymous bind" when performing account DN lookups.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>bindRequiresDn</property></emphasis></entry>
+
                         <entry>
                             Some <acronym>LDAP</acronym> servers require that the username used to
                             bind be in DN form like
@@ -376,8 +385,10 @@ Array
                             accounts. See the <property>accountFilterFormat</property> option.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>baseDn</property></emphasis></entry>
+
                         <entry>
                             The DN under which all accounts being authenticated are located. This
                             option is required. if you are uncertain about the correct
@@ -391,10 +402,12 @@ Array
                             however.
                         </entry>
                     </row>
+
                     <row>
                         <entry>
                             <emphasis><property>accountCanonicalForm</property></emphasis>
                         </entry>
+
                         <entry>
                             A value of 2, 3 or 4 indicating the form to which account names should
                             be canonicalized after successful authentication. Values are as
@@ -422,8 +435,10 @@ Array
                             may be awkward for the application's high-level logic).
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>accountDomainName</property></emphasis></entry>
+
                         <entry>
                             The <acronym>FQDN</acronym> domain name for which the target
                             <acronym>LDAP</acronym> server is an authority (e.g.,
@@ -440,10 +455,12 @@ Array
                             use-cases that require generating the principal name form.
                         </entry>
                     </row>
+
                     <row>
                         <entry>
                             <emphasis><property>accountDomainNameShort</property></emphasis>
                         </entry>
+
                         <entry>
                             The 'short' domain for which the target <acronym>LDAP</acronym> server
                             is an authority (e.g., <acronym>FOO</acronym>). Note that there is a
@@ -457,8 +474,10 @@ Array
                             <filename>FOO\alice</filename>) are not supported.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>accountFilterFormat</property></emphasis></entry>
+
                         <entry>
                             The <acronym>LDAP</acronym> search filter used to search for accounts.
                             This string is a <ulink
@@ -475,8 +494,10 @@ Array
                                 '(&amp;(objectClass=user)(sAMAccountName=%s))</emphasis>'.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>optReferrals</property></emphasis></entry>
+
                         <entry>
                             If set to <constant>TRUE</constant>, this option indicates to the
                             <acronym>LDAP</acronym> client that referrals should be followed. The
@@ -502,11 +523,9 @@ Array
                 that the OpenLDAP client can validate the server's identity.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.ldap.debugging">
-
         <title>Collecting Debugging Messages</title>
 
         <para>
@@ -518,6 +537,7 @@ Array
 
         <table id="zend.auth.adapter.ldap.debugging.table">
             <title>Debugging Messages</title>
+
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -525,28 +545,31 @@ Array
                         <entry>Description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>Index 0</entry>
+
                         <entry>
                             A generic, user-friendly message that is suitable for displaying to
                             users (e.g., "Invalid credentials"). If the authentication is
                             successful, this string is empty.
                         </entry>
                     </row>
+
                     <row>
                         <entry>Index 1</entry>
+
                         <entry>
                             A more detailed error message that is not suitable to be displayed to
                             users but should be logged for the benefit of server operators. If the
                             authentication is successful, this string is empty.
                         </entry>
                     </row>
+
                     <row>
                         <entry>Indexes 2 and higher</entry>
-                        <entry>
-                            All log messages in order starting at index 2.
-                        </entry>
+                        <entry>All log messages in order starting at index 2.</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -558,15 +581,12 @@ Array
             indexes 2 and higher could be logged as well (although the final message always includes
             the string from index 1).
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.ldap.options-common-server-specific">
-
         <title>Common Options for Specific Servers</title>
 
         <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.active-directory">
-
             <title>Options for Active Directory</title>
 
             <para>
@@ -576,6 +596,7 @@ Array
             <table
                 id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table">
                 <title>Options for Active Directory</title>
+
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -583,29 +604,34 @@ Array
                             <entry>Additional Notes</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry><emphasis><property>host</property></emphasis></entry>
-                            <entry>
-                                As with all servers, this option is required.
-                            </entry>
+                            <entry>As with all servers, this option is required.</entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>useStartTls</property></emphasis></entry>
+
                             <entry>
                                 For the sake of security, this should be <constant>TRUE</constant>
                                 if the server has the necessary certificate installed.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>useSsl</property></emphasis></entry>
+
                             <entry>
                                 Possibly used as an alternative to <emphasis>useStartTls</emphasis>
                                 (see above).
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>baseDn</property></emphasis></entry>
+
                             <entry>
                                 As with all servers, this option is required. By default AD places
                                 all user accounts under the <emphasis>Users</emphasis> container
@@ -615,10 +641,12 @@ Array
                                 would be.
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <emphasis><property>accountCanonicalForm</property></emphasis>
                             </entry>
+
                             <entry>
                                 You almost certainly want this to be 3 for backslash style names
                                 (e.g., <filename>FOO\alice</filename>), which are most familiar to
@@ -630,20 +658,24 @@ Array
                                 (See also note below.)
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <emphasis><property>accountDomainName</property></emphasis>
                             </entry>
+
                             <entry>
                                 This is required with AD unless
                                 <property>accountCanonicalForm</property> 2 is used, which, again,
                                 is discouraged.
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <emphasis><property>accountDomainNameShort</property></emphasis>
                             </entry>
+
                             <entry>
                                 The NetBIOS name of the domain that users are in and for which the
                                 AD server is an authority. This is required if the backslash style
@@ -664,11 +696,9 @@ Array
                     be the source of security issues, so always try to use qualified account names.
                 </para>
             </note>
-
         </sect3>
 
         <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.openldap">
-
             <title>Options for OpenLDAP</title>
 
             <para>
@@ -678,6 +708,7 @@ Array
 
             <table id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table">
                 <title>Options for OpenLDAP</title>
+
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -685,61 +716,74 @@ Array
                             <entry>Additional Notes</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry><emphasis><property>host</property></emphasis></entry>
-                            <entry>
-                                As with all servers, this option is required.
-                            </entry>
+                            <entry>As with all servers, this option is required.</entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>useStartTls</property></emphasis></entry>
+
                             <entry>
                                 For the sake of security, this should be <constant>TRUE</constant>
                                 if the server has the necessary certificate installed.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>useSsl</property></emphasis></entry>
+
                             <entry>
                                 Possibly used as an alternative to <property>useStartTls</property>
                                 (see above).
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>username</property></emphasis></entry>
+
                             <entry>
                                 Required and must be a DN, as OpenLDAP requires that usernames be
                                 in DN form when performing a bind. Try to use an unprivileged
                                 account.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>password</property></emphasis></entry>
+
                             <entry>
                                 The password corresponding to the username above, but this may be
                                 omitted if the <acronym>LDAP</acronym> server permits an anonymous
                                 binding to query user accounts.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>bindRequiresDn</property></emphasis></entry>
+
                             <entry>
                                 Required and must be <constant>TRUE</constant>, as OpenLDAP
                                 requires that usernames be in DN form when performing a bind.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>baseDn</property></emphasis></entry>
+
                             <entry>
                                 As with all servers, this option is required and indicates the DN
                                 under which all accounts being authenticated are located.
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <emphasis><property>accountCanonicalForm</property></emphasis>
                             </entry>
+
                             <entry>
                                 Optional, but the default value is 4 (principal style names like
                                 <filename>alice@foo.net</filename>), which may not be ideal if your
@@ -748,20 +792,24 @@ Array
                                 value 3.
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <emphasis><property>accountDomainName</property></emphasis>
                             </entry>
+
                             <entry>
                                 Required unless you're using
                                 <property>accountCanonicalForm</property> 2, which is not
                                 recommended.
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <emphasis><property>accountDomainNameShort</property></emphasis>
                             </entry>
+
                             <entry>
                                 If AD is not also being used, this value is not required.
                                 Otherwise, if <property>accountCanonicalForm</property> 3 is used,
@@ -772,7 +820,7 @@ Array
                                 <property>accountDomainNameShort</property> value might be
                                 <acronym>FOO</acronym>).
                             </entry>
-                      </row>
+                        </row>
                     </tbody>
                 </tgroup>
             </table>

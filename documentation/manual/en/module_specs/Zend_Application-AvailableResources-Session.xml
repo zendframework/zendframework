@@ -16,23 +16,29 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            <type>String</type>: A string indicating a class implementing
-            <classname>Zend_Session_SaveHandler_Interface</classname> that should be
-            instantiated.
-        </para></listitem>
+        <listitem>
+            <para>
+                <type>String</type>: A string indicating a class implementing
+                <classname>Zend_Session_SaveHandler_Interface</classname> that should be
+                instantiated.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <type>Array</type>: An array with the keys "class" and, optionally,
-            "options", indicating a class implementing
-            <classname>Zend_Session_SaveHandler_Interface</classname> that should be
-            instantiated and an array of options to provide to its constructor.
-        </para></listitem>
+        <listitem>
+            <para>
+                <type>Array</type>: An array with the keys "class" and, optionally,
+                "options", indicating a class implementing
+                <classname>Zend_Session_SaveHandler_Interface</classname> that should be
+                instantiated and an array of options to provide to its constructor.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <classname>Zend_Session_SaveHandler_Interface</classname>: an object
-            implementing this interface.
-        </para></listitem>
+        <listitem>
+            <para>
+                <classname>Zend_Session_SaveHandler_Interface</classname>: an object
+                implementing this interface.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>

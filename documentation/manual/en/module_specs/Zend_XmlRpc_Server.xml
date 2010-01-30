@@ -114,6 +114,7 @@ echo $server->handle();
 
     <sect2 id="zend.xmlrpc.server.conventions">
         <title>Conventions</title>
+
         <para>
             <classname>Zend_XmlRpc_Server</classname> allows the developer to attach functions and
             class method calls as dispatchable <acronym>XML-RPC</acronym> methods. Via
@@ -454,9 +455,10 @@ $server->setClass('Services_PricingService',
 ]]></programlisting>
 
             <para>
-                The arguments passed at <methodname>setClass()</methodname> at server construction time are
-                injected into the method call <command>pricing.calculate()</command> on remote invokation.
-                In the example above, only the argument <code>$purchaseId</code> is expected from the client.
+                The arguments passed at <methodname>setClass()</methodname> at server construction
+                time are injected into the method call <command>pricing.calculate()</command> on
+                remote invokation. In the example above, only the argument <code>$purchaseId</code>
+                is expected from the client.
             </para>
         </example>
 
@@ -648,8 +650,7 @@ echo $server->handle($request);
             <title>Cache server definitions between requests</title>
 
             <para>
-                The example below illustrates caching server definitions
-                between requests.
+                The example below illustrates caching server definitions between requests.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -689,7 +690,6 @@ echo $server->handle($request);
         </note>
 
         <example id="zend.xmlrpc.server.performance.xmlgen">
-
             <title>Optimizing XML generation</title>
 
             <para>

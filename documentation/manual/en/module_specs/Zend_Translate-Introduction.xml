@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.introduction">
-
     <title>Introduction</title>
 
     <para>
@@ -24,6 +23,7 @@
                 The usage of gettext for example is very complicated.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>PHP supports only gettext and native array:</emphasis>
@@ -32,6 +32,7 @@
                 because there is no native support.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>No detection of the default language:</emphasis>
@@ -40,6 +41,7 @@
                 the different web browsers.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Gettext is not thread-safe:</emphasis>
@@ -53,8 +55,8 @@
 
     <para>
         <classname>Zend_Translate</classname> does not have the above problems. This is why we
-        recommend using <classname>Zend_Translate</classname> instead of <acronym>PHP</acronym>'s native functions.
-        The benefits of <classname>Zend_Translate</classname> are:
+        recommend using <classname>Zend_Translate</classname> instead of <acronym>PHP</acronym>'s
+        native functions. The benefits of <classname>Zend_Translate</classname> are:
     </para>
 
     <itemizedlist>
@@ -66,6 +68,7 @@
                 and CSV files.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Thread-safe gettext:</emphasis>
@@ -73,11 +76,12 @@
                 There are no problems using it in multi-threaded environments.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Easy and generic <acronym>API</acronym>:</emphasis>
-                The <acronym>API</acronym> of <classname>Zend_Translate</classname> is very simple and requires only a
-                handful of functions.
+                The <acronym>API</acronym> of <classname>Zend_Translate</classname> is very simple
+                and requires only a handful of functions.
                 So it's easy to learn and easy to maintain.
                 All source formats are handled the same way, so if the format
                 of your source files change from Gettext to TMX,
@@ -85,6 +89,7 @@
                 storage adapter.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Detection of the user's standard language:</emphasis>
@@ -92,17 +97,18 @@
                 detected and used by <classname>Zend_Translate</classname>.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Automatic source detection:</emphasis>
-                <classname>Zend_Translate</classname> is capable of detecting and integrating multiple source files
-                and additionally detect the locale to be used depending on directory or filenames.
+                <classname>Zend_Translate</classname> is capable of detecting and integrating
+                multiple source files and additionally detect the locale to be used depending on
+                directory or filenames.
             </para>
         </listitem>
     </itemizedlist>
 
     <sect2 id="zend.translate.introduction.adapters">
-
         <title>Starting multi-lingual</title>
 
         <para>
@@ -121,16 +127,19 @@
                     Decide which adapter you want to use;
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Create your view and integrate <classname>Zend_Translate</classname> in your code;
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Create the source file from your code;
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Translate your source file to the desired language.
@@ -143,9 +152,7 @@
             Read through the next few pages to create your own
             multi-lingual web application.
         </para>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

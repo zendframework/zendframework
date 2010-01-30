@@ -68,6 +68,7 @@ $options = array(
 
     <example id="zend.application.available-resources.modules.configExample">
         <title>Configuring Modules</title>
+
         <para>
             You can specify module-specific configuration using the module name
             as a prefix or sub-section in your configuration file.

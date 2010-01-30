@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.refining">
-
     <title>Refining Access Controls</title>
 
     <sect2 id="zend.acl.refining.precise">
-
         <title>Precise Access Controls</title>
 
         <para>
@@ -122,11 +120,9 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
      "allowed" : "denied";
 // denied
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.acl.refining.removing">
-
         <title>Removing Access Controls</title>
 
         <para>
@@ -182,9 +178,7 @@ echo $acl->isAllowed('marketing', 'latest', 'anything') ?
      "allowed" : "denied";
 // allowed
 ]]></programlisting>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

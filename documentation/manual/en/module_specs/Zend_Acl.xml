@@ -21,6 +21,7 @@
                 to which access is controlled.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 a <emphasis>role</emphasis> is an object
@@ -43,6 +44,7 @@
 
     <sect2 id="zend.acl.introduction.resources">
         <title>Resources</title>
+
         <para>
             Creating a resource in <classname>Zend_Acl</classname> is very simple.
             <classname>Zend_Acl</classname> provides the resource,
@@ -53,6 +55,7 @@
             <classname>Zend_Acl_Resource</classname> is provided by <classname>Zend_Acl</classname>
             as a basic resource implementation for developers to extend as needed.
         </para>
+
         <para>
             <classname>Zend_Acl</classname> provides a tree structure to which multiple resources
             can be added. Since resources are stored in such a tree structure, they can be
@@ -66,6 +69,7 @@
             each building that requires such an exception. A resource may inherit from only one
             parent resource, though this parent resource can have its own parent resource, etc.
         </para>
+
         <para>
             <classname>Zend_Acl</classname> also supports privileges on resources (e.g., "create",
             "read", "update", "delete"), so the developer can assign rules that affect all
@@ -75,6 +79,7 @@
 
     <sect2 id="zend.acl.introduction.roles">
         <title>Roles</title>
+
         <para>
             As with resources, creating a role is also very simple. All roles must implement
             <classname>Zend_Acl_Role_Interface</classname>. This interface consists of a single
@@ -82,6 +87,7 @@
             <classname>Zend_Acl_Role</classname> is provided by <classname>Zend_Acl</classname> as
             a basic role implementation for developers to extend as needed.
         </para>
+
         <para>
             In <classname>Zend_Acl</classname>, a role may inherit from one or more roles. This is
             to support inheritance of rules among roles. For example, a user role, such as "sally",
@@ -89,13 +95,16 @@
             developer can assign rules to "editor" and "administrator" separately, and "sally"
             would inherit such rules from both, without having to assign rules directly to "sally".
         </para>
+
         <para>
             Though the ability to inherit from multiple roles is very useful, multiple inheritance
             also introduces some degree of complexity. The following example illustrates the
             ambiguity condition and how <classname>Zend_Acl</classname> solves it.
         </para>
+
         <example id="zend.acl.introduction.roles.example.multiple_inheritance">
             <title>Multiple Inheritance among Roles</title>
+
             <para>
                 The following code defines three base roles - "guest",
                 "member", and "admin" - from which other roles may
@@ -107,6 +116,7 @@
                 the queried role inherits (herein, "guest", "member", and
                 "admin"):
             </para>
+
             <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
@@ -124,6 +134,7 @@ $acl->allow('member', 'someResource');
 
 echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
 ]]></programlisting>
+
             <para>
                 Since there is no rule specifically defined for the "someUser" role and
                 "someResource", <classname>Zend_Acl</classname> must search for rules that may be
@@ -132,6 +143,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 <classname>Zend_Acl</classname> finds that there is a rule specifying that "member"
                 is allowed access to "someResource".
             </para>
+
             <para>
                 If <classname>Zend_Acl</classname> were to continue examining the rules defined for
                 other parent roles, however, it would find that "guest" is denied access to
@@ -139,6 +151,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 "someUser" is both denied and allowed access to "someResource", by reason of having
                 inherited conflicting rules from different parent roles.
             </para>
+
             <para>
                 <classname>Zend_Acl</classname> resolves this ambiguity by completing a query when
                 it finds the first rule that is directly applicable to the query. In this case,
@@ -146,6 +159,7 @@ echo $acl->isAllowed('someUser', 'someResource') ? 'allowed' : 'denied';
                 print "allowed".
             </para>
         </example>
+
         <note>
             <para>
                 When specifying multiple parents for a role, keep in mind that the last parent
@@ -196,38 +210,42 @@ $acl = new Zend_Acl();
         </para>
 
         <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
-          <title>Access Controls for an Example CMS</title>
-          <tgroup cols="3">
-            <thead>
-              <row>
-                <entry>Name</entry>
-                <entry>Unique Permissions</entry>
-                <entry>Inherit Permissions From</entry>
-              </row>
-            </thead>
-            <tbody>
-              <row>
-                <entry>Guest</entry>
-                <entry>View</entry>
-                <entry>N/A</entry>
-              </row>
-              <row>
-                <entry>Staff</entry>
-                <entry>Edit, Submit, Revise</entry>
-                <entry>Guest</entry>
-              </row>
-              <row>
-                <entry>Editor</entry>
-                <entry>Publish, Archive, Delete</entry>
-                <entry>Staff</entry>
-              </row>
-              <row>
-                <entry>Administrator</entry>
-                <entry>(Granted all access)</entry>
-                <entry>N/A</entry>
-              </row>
-            </tbody>
-          </tgroup>
+            <title>Access Controls for an Example CMS</title>
+            <tgroup cols="3">
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Unique Permissions</entry>
+                        <entry>Inherit Permissions From</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry>Guest</entry>
+                        <entry>View</entry>
+                        <entry>N/A</entry>
+                    </row>
+
+                    <row>
+                        <entry>Staff</entry>
+                        <entry>Edit, Submit, Revise</entry>
+                        <entry>Guest</entry>
+                    </row>
+
+                    <row>
+                        <entry>Editor</entry>
+                        <entry>Publish, Archive, Delete</entry>
+                        <entry>Staff</entry>
+                    </row>
+
+                    <row>
+                        <entry>Administrator</entry>
+                        <entry>(Granted all access)</entry>
+                        <entry>N/A</entry>
+                    </row>
+                </tbody>
+            </tgroup>
         </table>
 
         <para>
@@ -258,7 +276,6 @@ $acl->addRole(new Zend_Acl_Role('editor'), 'staff');
 // Administrator does not inherit access controls
 $acl->addRole(new Zend_Acl_Role('administrator'));
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.acl.introduction.defining">
@@ -319,7 +336,6 @@ $acl->allow('administrator');
             The <constant>NULL</constant> values in the above <methodname>allow()</methodname> calls
             are used to indicate that the allow rules apply to all resources.
         </para>
-
     </sect2>
 
     <sect2 id="zend.acl.introduction.querying">
@@ -365,7 +381,6 @@ echo $acl->isAllowed('administrator', null, 'update') ?
      "allowed" : "denied";
 // allowed because administrator is allowed all privileges
 ]]></programlisting>
-
     </sect2>
 </sect1>
 <!--

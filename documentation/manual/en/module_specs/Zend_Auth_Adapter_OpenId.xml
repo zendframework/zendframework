@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.openid">
-
     <title>Open ID Authentication</title>
 
     <sect2 id="zend.auth.adapter.openid.introduction">
-
         <title>Introduction</title>
+
         <para>
             The <classname>Zend_Auth_Adapter_OpenId</classname> adapter can be used to authenticate
             users using remote OpenID servers. This authentication method assumes that the user
@@ -15,6 +14,7 @@
             using a password or some other method. This password is never provided to
             the web application.
         </para>
+
         <para>
             The OpenID identity is just a <acronym>URI</acronym> that points to a web site
             with information about a user, along with special tags that
@@ -22,6 +22,7 @@
             You can read more about OpenID at the
             <ulink url="http://www.openid.net/">OpenID official site</ulink>.
         </para>
+
         <para>
             The <classname>Zend_Auth_Adapter_OpenId</classname> class wraps
             the <classname>Zend_OpenId_Consumer</classname> component, which implements the
@@ -40,6 +41,7 @@
 
     <sect2 id="zend.auth.adapter.openid.specifics">
         <title>Specifics</title>
+
         <para>
             As is the case for all <classname>Zend_Auth</classname> adapters, the
             <classname>Zend_Auth_Adapter_OpenId</classname> class implements
@@ -129,7 +131,6 @@ if ((isset($_POST['openid_action']) &&
             in more detail in the <classname>Zend_OpenId_Consumer</classname>
             chapter.
         </para>
-
     </sect2>
 </sect1>
 <!--

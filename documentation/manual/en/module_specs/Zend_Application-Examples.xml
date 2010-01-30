@@ -93,11 +93,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 When instantiating the <classname>Zend_Application</classname> object
             </para>
         </listitem>
+
         <listitem>
             <para>
                 During initialization of the bootstrap object
             </para>
         </listitem>
+
         <listitem>
             <para>
                 By explicitly enabling them via method calls to the bootstrap

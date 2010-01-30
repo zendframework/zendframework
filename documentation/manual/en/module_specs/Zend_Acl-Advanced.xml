@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.advanced">
-
     <title>Advanced Usage</title>
 
     <sect2 id="zend.acl.advanced.storing">
-
         <title>Storing ACL Data for Persistence</title>
 
         <para>
@@ -27,11 +25,9 @@
             stored anywhere the developer should desire, such as a file, database, or caching
             mechanism.
         </para>
-
     </sect2>
 
     <sect2 id="zend.acl.advanced.assertions">
-
         <title>Writing Conditional ACL Rules with Assertions</title>
 
         <para>
@@ -96,9 +92,7 @@ $acl->allow(null, null, null, new CleanIPAssertion());
             (i.e., <methodname>isAllowed()</methodname>) applies, in order to provide a context for
             the assertion class to determine its conditions where needed.
         </para>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

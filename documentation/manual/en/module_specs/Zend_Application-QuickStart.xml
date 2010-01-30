@@ -162,21 +162,27 @@ $application->bootstrap()
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Create an <filename>application/Bootstrap.php</filename> file, with the
-                class <classname>Bootstrap</classname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Create an <filename>application/Bootstrap.php</filename> file, with the
+                    class <classname>Bootstrap</classname>.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Create an <filename>application/configs/application.ini</filename>
-                configuration file with the base configuration necessary for
-                <classname>Zend_Application</classname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Create an <filename>application/configs/application.ini</filename>
+                    configuration file with the base configuration necessary for
+                    <classname>Zend_Application</classname>.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Modify your <filename>public/index.php</filename> to utilize
-                <classname>Zend_Application</classname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Modify your <filename>public/index.php</filename> to utilize
+                    <classname>Zend_Application</classname>.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

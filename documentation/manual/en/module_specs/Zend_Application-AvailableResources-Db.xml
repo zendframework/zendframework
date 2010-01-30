@@ -18,20 +18,26 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            <emphasis><property>adapter</property></emphasis>: <classname>Zend_Db</classname>
-            adapter type.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>adapter</property></emphasis>: <classname>Zend_Db</classname>
+                adapter type.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>params</property></emphasis>: associative array of configuration
-            parameters to use when retrieving the adapter instance.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>params</property></emphasis>: associative array of configuration
+                parameters to use when retrieving the adapter instance.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>isDefaultTableAdapter</property></emphasis>: whether or not to
-            establish this adapter as the default table adapter.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>isDefaultTableAdapter</property></emphasis>: whether or not to
+                establish this adapter as the default table adapter.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.application.available-resources.db.configExample">

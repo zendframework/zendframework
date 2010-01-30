@@ -36,6 +36,7 @@
                 the requested bootstrap class.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <classname>Zend_Application_Bootstrap</classname>: provides
@@ -46,6 +47,7 @@
                 bootstrap resources on demand.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <classname>Zend_Application_Resource</classname> provides an
@@ -70,6 +72,7 @@
                 The current environment
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Options for bootstrapping
@@ -88,36 +91,43 @@
                 Any extra include_paths to set
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Any additional autoloader namespaces to register
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Any <filename>php.ini</filename> settings to initialize
             </para>
         </listitem>
+
         <listitem>
             <para>
                 The class name for the bootstrap class (if not "Bootstrap")
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Resource prefix to path pairs to use
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Any resources to use (by class name or short name)
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Additional path to a configuration file to load
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Additional configuration options

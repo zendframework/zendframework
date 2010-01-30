@@ -19,6 +19,7 @@
 
     <table id="zend.application.core-functionality.resource-resourceabstract.api">
         <title>Zend_Application_Resource_ResourceAbstract Methods</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -28,20 +29,28 @@
                     <entry>Description</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><methodname>__construct($options = null)</methodname></entry>
                     <entry><type>Void</type></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$options</varname>: <emphasis>optional</emphasis>.
-                            Options with which to set resource state.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        The constructor should allow passing options with
-                        which to initialize state.
-                    </para></entry>
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$options</varname>: <emphasis>optional</emphasis>.
+                                    Options with which to set resource state.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>
+                            The constructor should allow passing options with which to initialize
+                            state.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
@@ -49,48 +58,55 @@
                         <methodname>setBootstrap(Zend_Application_Bootstrap_Bootstrapper
                             $bootstrap)</methodname>
                     </entry>
+
                     <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
-                    <entry><itemizedlist>
-                            <listitem><para>
-                                <varname>$bootstrap</varname>: <emphasis>required</emphasis>.
-                                Parent bootstrap initializing this resource.
-                            </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Should allow registering the parent bootstrap object.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$bootstrap</varname>: <emphasis>required</emphasis>.
+                                    Parent bootstrap initializing this resource.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>Should allow registering the parent bootstrap object.</para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>getBootstrap()</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Retrieve the registered bootstrap instance.
-                    </para></entry>
+                    <entry><para>Retrieve the registered bootstrap instance.</para></entry>
                 </row>
 
                 <row>
                     <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application_Resource_ResourceAbstract</classname></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$options</varname>: <emphasis>required</emphasis>.
-                            Options with which to set state.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Set resource state.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$options</varname>: <emphasis>required</emphasis>.
+                                    Options with which to set state.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry><para>Set resource state.</para></entry>
                 </row>
 
                 <row>
                     <entry><methodname>getOptions()</methodname></entry>
                     <entry><type>Array</type></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Retrieve registered options.
-                    </para></entry>
+                    <entry><para>Retrieve registered options.</para></entry>
                 </row>
             </tbody>
         </tgroup>

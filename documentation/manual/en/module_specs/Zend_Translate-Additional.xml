@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.additional">
-
     <title>Additional features for translation</title>
 
     <para>
@@ -10,7 +9,6 @@
     </para>
 
     <sect2 id="zend.translate.additional.options">
-
         <title>Options for adapters</title>
 
         <para>
@@ -30,6 +28,7 @@
 
         <example id="zend.translate..additional.options.example">
             <title>Using translation options</title>
+
             <programlisting language="php"><![CDATA[
 // define ':' as separator for the translation source files
 $options = array('delimiter' => ':');
@@ -63,30 +62,38 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                         <entry>Default value</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>clear</entry>
                         <entry>all</entry>
+
                         <entry>
                             If set to <constant>TRUE</constant>, the already read translations will
                             be cleared. This can be used instead of creating a new instance when
                             reading new translation data
                         </entry>
+
                         <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
+
                     <row>
                         <entry>disableNotices</entry>
                         <entry>all</entry>
+
                         <entry>
                             If set to <constant>TRUE</constant>, all notices regarding not available
                             translations will be disabled. You should set this option to
                             <constant>TRUE</constant> in production environment
                         </entry>
+
                         <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
+
                     <row>
                         <entry>ignore</entry>
                         <entry>all</entry>
+
                         <entry>
                             All directories and files beginning with this prefix will be ignored
                             when searching for files. This value defaults to
@@ -96,27 +103,32 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
                             <code>'tmpFiles'</code> would be ignored as well as all subsequent
                             directories
                         </entry>
+
                         <entry><emphasis>.</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>log</entry>
                         <entry>all</entry>
+
                         <entry>
                             An instance of <classname>Zend_Log</classname> where untranslated
                             messages and notices will be written to
                         </entry>
+
                         <entry><emphasis><constant>NULL</constant></emphasis></entry>
                     </row>
+
                     <row>
                         <entry>logMessage</entry>
                         <entry>all</entry>
-                        <entry>
-                            The message which will be written into the log
-                        </entry>
+                        <entry>The message which will be written into the log</entry>
+
                         <entry>
                             <emphasis>Untranslated message within '%locale%': %message%</emphasis>
                         </entry>
                     </row>
+
                     <row>
                         <entry>logUntranslated</entry>
                         <entry>all</entry>
@@ -128,6 +140,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                         <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
+
                     <row>
                         <entry>reload</entry>
                         <entry>all</entry>
@@ -141,6 +154,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                         <entry><emphasis><constant>FALSE</constant></emphasis></entry>
                     </row>
+
                     <row>
                         <entry>scan</entry>
                         <entry>all</entry>
@@ -157,32 +171,42 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                         <entry><emphasis><constant>NULL</constant></emphasis></entry>
                     </row>
+
                     <row>
                         <entry>delimiter</entry>
                         <entry>Csv</entry>
+
                         <entry>
                             Defines which sign is used as delimiter for separating source and
                             translation
                         </entry>
+
                         <entry><emphasis>;</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>enclosure</entry>
                         <entry>Csv</entry>
+
                         <entry>
                             Defines the enclosure character to be used. Defaults to a doublequote
                         </entry>
+
                         <entry><emphasis>"</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>length</entry>
                         <entry>Csv</entry>
+
                         <entry>
                             Defines the maximum length of a csv line. When set to 0 it will be
                             detected automatically
                         </entry>
+
                         <entry><emphasis>0</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>useId</entry>
                         <entry>Xliff</entry>
@@ -202,23 +226,22 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
         <para>
             When you want to have self defined options, you are also able to use them within all
-            adapters. The <methodname>setOptions()</methodname> method can be used to define your option.
-            <methodname>setOptions()</methodname> needs an array with the options you want to set. If an given
-            option exists it will be signed over. You can define as much options as needed as they
-            will not be checked by the adapter. Just make sure not to overwrite any existing option
-            which is used by an adapter.
+            adapters. The <methodname>setOptions()</methodname> method can be used to define your
+            option. <methodname>setOptions()</methodname> needs an array with the options you want
+            to set. If an given option exists it will be signed over. You can define as much options
+            as needed as they will not be checked by the adapter. Just make sure not to overwrite
+            any existing option which is used by an adapter.
         </para>
 
         <para>
             To return the option you can use the <methodname>getOptions()</methodname> method. When
-            <methodname>getOptions()</methodname> is called without a parameter it will return all options set.
-            When the optional parameter is given you will only get the specified option.
+            <methodname>getOptions()</methodname> is called without a parameter it will return all
+            options set. When the optional parameter is given you will only get the specified
+            option.
         </para>
-
     </sect2>
 
     <sect2 id="zend.translate.additional.languages">
-
         <title>Handling languages</title>
 
         <para>
@@ -226,33 +249,35 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
         </para>
 
         <para>
-            The <methodname>getLocale()</methodname> method can be used to get the currently set language. It
-            can either hold an instance of <classname>Zend_Locale</classname> or the identifier of
-            a locale.
+            The <methodname>getLocale()</methodname> method can be used to get the currently set
+            language. It can either hold an instance of <classname>Zend_Locale</classname> or the
+            identifier of a locale.
         </para>
 
         <para>
-            The <methodname>setLocale()</methodname> method sets a new standard language for translation. This
-            prevents the need of setting the optional language parameter more than once to the
-            <methodname>translate()</methodname> method. If the given language does not exist, or no
-            translation data is available for the language, <methodname>setLocale()</methodname> tries to
-            downgrade to the language without the region if any was given. A language of
-            <code>en_US</code> would be downgraded to <code>en</code>. When even the downgraded
-            language can not be found an exception will be thrown.
+            The <methodname>setLocale()</methodname> method sets a new standard language for
+            translation. This prevents the need of setting the optional language parameter more than
+            once to the <methodname>translate()</methodname> method. If the given language does not
+            exist, or no translation data is available for the language,
+            <methodname>setLocale()</methodname> tries to downgrade to the language without the
+            region if any was given. A language of <code>en_US</code> would be downgraded to
+            <code>en</code>. When even the downgraded language can not be found an exception will be
+            thrown.
         </para>
 
         <para>
-            The <methodname>isAvailable()</methodname> method checks if a given language is already available.
-            It returns <constant>TRUE</constant> if data for the given language exist.
+            The <methodname>isAvailable()</methodname> method checks if a given language is already
+            available. It returns <constant>TRUE</constant> if data for the given language exist.
         </para>
 
         <para>
-            And finally the <methodname>getList()</methodname> method can be used to get all currently set
-            languages for an adapter returned as array.
+            And finally the <methodname>getList()</methodname> method can be used to get all
+            currently set languages for an adapter returned as array.
         </para>
 
         <example id="zend.translate.additional.languages.example">
             <title>Handling languages with adapters</title>
+
             <programlisting language="php"><![CDATA[
 // returns the currently set language
 $actual = $translate->getLocale();
@@ -275,16 +300,16 @@ if ($translate->isAvailable("fr")) {
         </example>
 
         <sect3 id="zend.translate.additional.languages.automatic">
-
             <title>Automatical handling of languages</title>
 
             <para>
                 Note that as long as you only add new translation sources with the
-                <methodname>addTranslation()</methodname> method <classname>Zend_Translate</classname> will
-                automatically set the best fitting language for your environment when you use one
-                of the automatic locales which are '<code>auto</code>' or '<code>browser</code>'.
-                So normally you will not need to call <methodname>setLocale()</methodname>. This should only be
-                used in conjunction with automatic source detection.
+                <methodname>addTranslation()</methodname> method
+                <classname>Zend_Translate</classname> will automatically set the best fitting
+                language for your environment when you use one of the automatic locales which are
+                '<code>auto</code>' or '<code>browser</code>'. So normally you will not need to call
+                <methodname>setLocale()</methodname>. This should only be used in conjunction with
+                automatic source detection.
             </para>
 
             <para>
@@ -294,6 +319,7 @@ if ($translate->isAvailable("fr")) {
 
             <example id="zend.translate.additional.languages.automatic.example">
                 <title>Automatically language detection</title>
+
                 <programlisting language="php"><![CDATA[
 // Let's expect the browser returns these language settings:
 // HTTP_ACCEPT_LANGUAGE = "de_AT=1;fr=1;en_US=0.8";
@@ -336,14 +362,14 @@ $translate->setLocale('it_IT');
             </example>
 
             <para>
-                After setting a language manually with the <methodname>setLocale()</methodname> method the
-                automatic detection will be switched off and overridden.
+                After setting a language manually with the <methodname>setLocale()</methodname>
+                method the automatic detection will be switched off and overridden.
             </para>
 
             <para>
                 If you want to use it again, you can set the language
-                <emphasis>auto</emphasis> with <methodname>setLocale()</methodname> which will reactivate
-                the automatic detection for <classname>Zend_Translate</classname>.
+                <emphasis>auto</emphasis> with <methodname>setLocale()</methodname> which will
+                reactivate the automatic detection for <classname>Zend_Translate</classname>.
             </para>
 
             <para>
@@ -372,13 +398,10 @@ if (!$translate->isAvailable($locale->getLanguage())) {
 
 $translate->getLocale();
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.translate.additional.detection">
-
         <title>Automatic source detection</title>
 
         <para>
@@ -401,6 +424,7 @@ $translate->getLocale();
 
         <example id="zend.translate.additional.languages.directory.example">
             <title>Scanning a directory structure for sources</title>
+
             <programlisting language="php"><![CDATA[
 // assuming we have the following structure
 //  /language/
@@ -438,7 +462,6 @@ $translate = new Zend_Translate('tmx', '/language');
         </para>
 
         <sect3 id="zend.translate.additional.detection.directory">
-
             <title>Language through naming directories</title>
 
             <para>
@@ -455,6 +478,7 @@ $translate = new Zend_Translate('tmx', '/language');
 
             <example id="zend.translate.additional.detection.directory.example">
                 <title>Directory scanning for languages</title>
+
                 <programlisting language="php"><![CDATA[
 // assuming we have the following structure
 //  /language/
@@ -490,11 +514,9 @@ $translate = new Zend_Translate(
                     undefined and it is recommended to use file detection in such situations.
                 </para>
             </note>
-
         </sect3>
 
         <sect3 id="zend.translate.additional.detection.filename">
-
             <title>Language through filenames</title>
 
             <para>
@@ -507,6 +529,7 @@ $translate = new Zend_Translate(
 
             <example id="zend.translate.additional.detection.filename.example">
                 <title>Filename scanning for languages</title>
+
                 <programlisting language="php"><![CDATA[
 // assuming we have the following structure
 //  /language/
@@ -524,7 +547,6 @@ $translate = new Zend_Translate(
             </example>
 
             <sect4 id="zend.translate.additional.detection.filename.complete">
-
                 <title>Complete filename</title>
 
                 <para>
@@ -538,11 +560,9 @@ $translate = new Zend_Translate(
 /languages/de.mo
 /languages/es.mo
 ]]></programlisting>
-
             </sect4>
 
             <sect4 id="zend.translate.additional.detection.filename.extension">
-
                 <title>Extension of the file</title>
 
                 <para>
@@ -557,11 +577,9 @@ $translate = new Zend_Translate(
 /languages/view.de
 /languages/view.es
 ]]></programlisting>
-
             </sect4>
 
             <sect4 id="zend.translate.additional.detection.filename.token">
-
                 <title>Filename tokens</title>
 
                 <para>
@@ -602,36 +620,33 @@ $translate = new Zend_Translate(
 /languages/view-en_it.mo -> detects italian because '_' will be used before '-'
 /languages/view_en.it.mo -> detects italian because '.' will be used before '_'
 ]]></programlisting>
-
             </sect4>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.translate.additional.istranslated">
-
         <title>Checking for translations</title>
 
         <para>
             Normally text will be translated without any computation. But sometimes it is necessary
-            to know if a text is translated or not, therefor the <methodname>isTranslated()</methodname>
-            method can be used.
+            to know if a text is translated or not, therefor the
+            <methodname>isTranslated()</methodname> method can be used.
         </para>
 
         <para>
-            <methodname>isTranslated($messageId, $original = false, $locale = null)</methodname> takes
-            the text you want to check as its first parameter, and as optional third parameter the
-            locale for which you want to do the check. The optional second parameter declares
+            <methodname>isTranslated($messageId, $original = false, $locale = null)</methodname>
+            takes the text you want to check as its first parameter, and as optional third parameter
+            the locale for which you want to do the check. The optional second parameter declares
             whether translation is fixed to the declared language or a lower set of translations
             can be used. If you have a text which can be returned for 'en' but not for 'en_US' you
-            will normally get the translation returned, but by setting <varname>$original</varname> to
-            <constant>TRUE</constant>, <methodname>isTranslated()</methodname> will return
+            will normally get the translation returned, but by setting <varname>$original</varname>
+            to <constant>TRUE</constant>, <methodname>isTranslated()</methodname> will return
             <constant>FALSE</constant>.
         </para>
 
         <example id="zend.translate.additional.istranslated.example">
             <title>Checking if a text is translatable</title>
+
             <programlisting language="php"><![CDATA[
 $english = array(
     'message1' => 'Nachricht 1',
@@ -654,11 +669,9 @@ if ($translate->isTranslated('message1', false, 'de')) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.translate.additional.logging">
-
         <title>How to log not found translations</title>
 
         <para>
@@ -675,6 +688,7 @@ if ($translate->isTranslated('message1', false, 'de')) {
 
         <example id="zend.translate.additional.logging.example">
             <title>Log translations</title>
+
             <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', $path, 'de');
 
@@ -721,6 +735,7 @@ $translate->translate('unknown string');
 
         <example id="zend.translate.additional.logging.example2">
             <title>Self defined log messages</title>
+
             <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', $path, 'de');
 
@@ -737,11 +752,9 @@ $translate->setOptions(array(
 $translate->translate('unknown string');
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.translate.additional.sourcedata">
-
         <title>Accessing source data</title>
 
         <para>
@@ -750,27 +763,28 @@ $translate->translate('unknown string');
         </para>
 
         <para>
-            The <methodname>getMessageIds($locale = null)</methodname> method returns all known message IDs as
-            array.
+            The <methodname>getMessageIds($locale = null)</methodname> method returns all known
+            message IDs as array.
         </para>
 
         <para>
-            The <methodname>getMessages($locale = null)</methodname> method returns the complete translation
-            source as an array. The message ID is used as key and the translation data as value.
+            The <methodname>getMessages($locale = null)</methodname> method returns the complete
+            translation source as an array. The message ID is used as key and the translation data
+            as value.
         </para>
 
         <para>
-            Both methods accept an optional parameter <varname>$locale</varname> which, if set, returns
-            the translation data for the specified language. If this parameter is not given, the
-            actual set language will be used. Keep in mind that normally all translations should be
-            available in all languages. Which means that in a normal situation you will not have to
-            set this parameter.
+            Both methods accept an optional parameter <varname>$locale</varname> which, if set,
+            returns the translation data for the specified language. If this parameter is not given,
+            the actual set language will be used. Keep in mind that normally all translations should
+            be available in all languages. Which means that in a normal situation you will not have
+            to set this parameter.
         </para>
 
         <para>
-            Additionally the <methodname>getMessages()</methodname> method can be used to return the complete
-            translation dictionary using the pseudo-locale 'all'. This will return all available
-            translation data for each added locale.
+            Additionally the <methodname>getMessages()</methodname> method can be used to return the
+            complete translation dictionary using the pseudo-locale 'all'. This will return all
+            available translation data for each added locale.
         </para>
 
         <note>
@@ -782,6 +796,7 @@ $translate->translate('unknown string');
 
         <example id="zend.translate.additional.sourcedata.example">
             <title>Handling languages with adapters</title>
+
             <programlisting language="php"><![CDATA[
 // returns all known message IDs
 $messageIds = $translate->getMessageIds();
@@ -796,9 +811,7 @@ $source = $translate->getMessages();
 print_r($source);
 ]]></programlisting>
         </example>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

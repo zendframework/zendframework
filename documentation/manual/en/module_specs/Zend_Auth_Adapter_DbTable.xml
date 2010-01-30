@@ -2,8 +2,10 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.dbtable">
     <title>Database Table Authentication</title>
+
     <sect2 id="zend.auth.adapter.dbtable.introduction">
         <title>Introduction</title>
+
         <para>
             <classname>Zend_Auth_Adapter_DbTable</classname> provides the ability to
             authenticate against credentials stored in a database table. Because
@@ -27,6 +29,7 @@
                     performed.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis><property>identityColumn</property></emphasis>: This is the name of
@@ -35,6 +38,7 @@
                     a username or e-mail address.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis><property>credentialColumn</property></emphasis>: This is the name
@@ -45,6 +49,7 @@
                     option.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis><property>credentialTreatment</property></emphasis>: In many cases,
@@ -64,6 +69,7 @@
 
         <example id="zend.auth.adapter.dbtable.introduction.example.basic_usage">
             <title>Basic Usage</title>
+
             <para>
                 As explained in the introduction, the
                 <classname>Zend_Auth_Adapter_DbTable</classname> constructor requires an
@@ -129,6 +135,7 @@ $authAdapter
     ->setCredentialColumn('password')
 ;
 ]]></programlisting>
+
             <para>
                 At this point, the authentication adapter instance is ready to
                 accept authentication queries. In order to formulate an
@@ -172,14 +179,17 @@ Array
     [real_name] => My Real Name
 )
 ]]></programlisting>
+
             <para>
                 Since the table row contains the credential value, it is
                 important to secure the values against unintended access.
             </para>
         </example>
     </sect2>
+
     <sect2 id="zend.auth.adapter.dbtable.advanced.storing_result_row">
         <title>Advanced Usage: Persisting a DbTable Result Object</title>
+
         <para>
             By default, <classname>Zend_Auth_Adapter_DbTable</classname> returns the
             identity supplied back to the auth object upon successful
@@ -190,6 +200,7 @@ Array
             <emphasis>stdClass</emphasis> object. The following code snippet illustrates
             its use:
         </para>
+
         <programlisting language="php"><![CDATA[
 // authenticate with Zend_Auth_Adapter_DbTable
 $result = $this->_auth->authenticate($adapter);
@@ -219,8 +230,10 @@ if ($result->isValid()) {
 }
 ]]></programlisting>
     </sect2>
+
     <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
         <title>Advanced Usage By Example</title>
+
         <para>
             While the primary purpose of <classname>Zend_Auth</classname> (and consequently
             <classname>Zend_Auth_Adapter_DbTable</classname>) is primarily
@@ -231,11 +244,13 @@ if ($result->isValid()) {
              sometimes makes sense to solve what could look like an
              authorization problem within the authentication adapter.
         </para>
+
         <para>
             With that disclaimer out of the way, <classname>Zend_Auth_Adapter_DbTable</classname>
             has some built in mechanisms that can be leveraged for additional checks at
             authentication time to solve some common user problems.
         </para>
+
         <programlisting language="php"><![CDATA[
 // The status field value of an account is not equal to "compromised"
 $adapter = new Zend_Auth_Adapter_DbTable(
@@ -254,6 +269,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
     'password',
     'MD5(?) AND active = "TRUE"'
 ]]></programlisting>
+
         <para>
             Another scenario can be the implementation of a salting mechanism.
             Salting is a term referring to a technique which can highly improve
@@ -262,18 +278,22 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             to accomplish a successful brute force attack on the database using
             pre-computed hash values from a dictionary.
         </para>
+
         <para>
             Therefore, we need to modify our table to store our salt string:
         </para>
+
         <programlisting language="php"><![CDATA[
 $sqlAlter = "ALTER TABLE [users] "
           . "ADD COLUMN [password_salt] "
           . "AFTER [password]";
 ]]></programlisting>
+
         <para>
             Here's a simple way to generate a salt string for every user at
             registration:
         </para>
+
         <programlisting language="php"><![CDATA[
 for ($i = 0; $i < 50; $i++) {
     $dynamicSalt .= chr(rand(33, 126));
@@ -292,6 +312,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
     . "', ?, password_salt))"
 );
 ]]></programlisting>
+
         <note>
             <para>
                 You can improve security even more by using a static salt value
@@ -300,6 +321,7 @@ $adapter = new Zend_Auth_Adapter_DbTable(
                 server is intact your data is still unusable for the attacker.
             </para>
         </note>
+
         <para>
             Another alternative is to use the <methodname>getDbSelect()</methodname> method
             of the <classname>Zend_Auth_Adapter_DbTable</classname> after the adapter has been
@@ -311,11 +333,13 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             as those values are placed into the select object at
             <methodname>authenticate()</methodname> time.
         </para>
+
         <para>
             An example of a situation where one might want to use the
             <methodname>getDbSelect()</methodname> method would check the status of a user, in
             other words to see if that user's account is enabled.
         </para>
+
         <programlisting language="php"><![CDATA[
 // Continuing with the example from above
 $adapter = new Zend_Auth_Adapter_DbTable(

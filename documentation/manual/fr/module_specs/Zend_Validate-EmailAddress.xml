@@ -289,7 +289,7 @@ $validator->hostnameValidator->setValidateIdn(false);
             Par défaut un nom de domaine sera vérifié grâce à une liste de TLDs connus. Ceci est
             activé par défaut, quoique vous puissiez le mettre hors service en changeant le paramètre
             via l'objet <classname>Zend_Validate_Hostname</classname> interne qui existe dans
-            <classname>Zend_Validate_EmailAddress</classname>. 
+            <classname>Zend_Validate_EmailAddress</classname>.
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -629,7 +629,7 @@ echo $server->handle($request);
 ]]></programlisting>
         </example>
     </sect2>
-     
+
     <sect2 id="zend.xmlrpc.server.performance">
         <title>Optimisation des performances</title>
 

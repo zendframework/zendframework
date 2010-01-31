@@ -446,8 +446,9 @@ class Zend_CodeGenerator_Php_Parameter extends Zend_CodeGenerator_Php_Abstract
 ]]></programlisting>
 
             <para>
-                Plusieurs problèmes peuvent apparaitre lorsque l'on veut paramétrer un null, un
-                booléen ou un tableau en tant que valeur par défaut. Pour ceci le conteneur
+                Plusieurs problèmes peuvent apparaitre lorsque l'on veut paramétrer un
+                <constant>NULL</constant>, un booléen ou un tableau en tant que valeur par
+                défaut. Pour ceci le conteneur
                 <classname>Zend_CodeGenerator_Php_ParameterDefaultValue</classname> peut être
                 utilisé, par exemple&#160;:
             </para>

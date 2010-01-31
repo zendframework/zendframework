@@ -654,16 +654,17 @@ $res = $cache->foobar2('1', '2');
 
             <note>
                 <para>
-                    This frontend operates by registering a callback function to be called
-                    when the output buffering it uses is cleaned. In order for this to operate
-                    correctly, it must be the final output buffer in the request. To guarantee
-                    this, the output buffering used by the Dispatcher needs to be disabled by
-                    calling <classname>Zend_Controller_Front</classname>'s <methodname>setParam()
-                    </methodname> method, for example, $front->setParam('disableOutputBuffering',
-                    true) or adding
-                    "resources.frontcontroller.params.disableOutputBuffering = true"
-                    to your bootstrap configuration file (assumed INI) if using
-                    <classname>Zend_Application</classname>.
+                    Ce frontend opére en enregistrant une fonction de rappel qui doit être appelée
+                    quand le buffer de sortie qu'il utilise est nettoyé. Dans le but de fonctionner
+                    correctement, il doit être le buffer de sortie final de la requête. Pour
+                    garantir ceci, le buffer de sortie utilisé par le distributeur (Dispatcher)
+                    nécessite d'être désactivé en appelant la méthode
+                    <methodname>setParam()</methodname> de
+                    <classname>Zend_Controller_Front</classname>, par exemple
+                    <command>$front->setParam('disableOutputBuffering', true);</command> ou en
+                    ajoutant "resources.frontcontroller.params.disableOutputBuffering = true"
+                    à votre fichier d'amorçage (présumé de type <acronym>INI</acronym>) si vous
+                    utilisez <classname>Zend_Application</classname>.
                 </para>
             </note>
         </sect3>

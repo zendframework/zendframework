@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.project.create-a-project">
-
     <title>Create A Project</title>
 
     <note>
@@ -46,6 +45,7 @@
 
     <table id="zend.tool.project.project-provider-table">
         <title>Project Provider Options</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -55,20 +55,13 @@
                     <entry><acronym>CLI</acronym> Usage</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
-                    <entry>
-                        Project
-                    </entry>
-                    <entry>
-                        Create / Show
-                    </entry>
-                    <entry>
-                        create - [path=null, profile='default']
-                    </entry>
-                    <entry>
-                        <command>zf create project some/path</command>
-                    </entry>
+                    <entry>Project</entry>
+                    <entry>Create / Show</entry>
+                    <entry>create - [path=null, profile='default']</entry>
+                    <entry><command>zf create project some/path</command></entry>
                 </row>
             </tbody>
         </tgroup>

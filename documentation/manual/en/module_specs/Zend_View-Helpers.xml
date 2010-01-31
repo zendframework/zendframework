@@ -65,45 +65,51 @@
         </para>
 
         <itemizedlist>
-
-            <listitem><para>
-                <methodname>declareVars()</methodname>: Primarily for use when using
-                <methodname>strictVars()</methodname>, this helper can be used to declare
-                template variables that may or may not already be set in the
-                view object, as well as to set default values. Arrays passed as
-                arguments to the method will be used to set default values;
-                otherwise, if the variable does not exist, it is set to an empty
-                string.
-            </para></listitem>
-
-            <listitem><para>
-                <methodname>fieldset($name, $content, $attribs)</methodname>: Creates an
-                <acronym>XHTML</acronym> fieldset. If <varname>$attribs</varname> contains a
-                'legend' key, that value will be used for the fieldset legend. The
-                fieldset will surround the <varname>$content</varname> as provided to
-                the helper.
-            </para></listitem>
-
-            <listitem><para>
-                <methodname>form($name, $attribs, $content)</methodname>: Generates an
-                <acronym>XHTML</acronym> form. All <varname>$attribs</varname> are escaped and
-                rendered as <acronym>XHTML</acronym> attributes of the form tag. If
-                <varname>$content</varname> is present and not a boolean <constant>FALSE</constant>,
-                then that content is rendered within the start and close form tags; if
-                <varname>$content</varname> is a boolean <constant>FALSE</constant> (the default),
-                only the opening form tag is generated.
-            </para></listitem>
-
-            <listitem><para>
-                <methodname>formButton($name, $value, $attribs)</methodname>: Creates an
-                &lt;button /&gt; element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>declareVars()</methodname>: Primarily for use when using
+                    <methodname>strictVars()</methodname>, this helper can be used to declare
+                    template variables that may or may not already be set in the
+                    view object, as well as to set default values. Arrays passed as
+                    arguments to the method will be used to set default values;
+                    otherwise, if the variable does not exist, it is set to an empty string.
+                </para>
+            </listitem>
 
             <listitem>
                 <para>
-                    <methodname>formCheckbox($name, $value, $attribs,
-                        $options)</methodname>: Creates an &lt;input type="checkbox"
-                    /&gt; element.
+                    <methodname>fieldset($name, $content, $attribs)</methodname>: Creates an
+                    <acronym>XHTML</acronym> fieldset. If <varname>$attribs</varname> contains a
+                    'legend' key, that value will be used for the fieldset legend. The
+                    fieldset will surround the <varname>$content</varname> as provided to
+                    the helper.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>form($name, $attribs, $content)</methodname>: Generates an
+                    <acronym>XHTML</acronym> form. All <varname>$attribs</varname> are escaped and
+                    rendered as <acronym>XHTML</acronym> attributes of the form tag. If
+                    <varname>$content</varname> is present and not a boolean
+                    <constant>FALSE</constant>, then that content is rendered within the start and
+                    close form tags; if <varname>$content</varname> is a boolean
+                    <constant>FALSE</constant> (the default), only the opening form tag is
+                    generated.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formButton($name, $value, $attribs)</methodname>: Creates an
+                    &lt;button /&gt; element.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>formCheckbox($name, $value, $attribs, $options)</methodname>:
+                    Creates an &lt;input type="checkbox" /&gt; element.
                 </para>
 
                 <para>
@@ -193,114 +199,145 @@ echo $this->formCheckbox('foo',
                 </para>
 
                 <itemizedlist>
-                    <listitem><para>
+                    <listitem>
+                        <para>
                             <methodname>setElementStart($string)</methodname>; default is
                             '&lt;ul class="errors"%s"&gt;&lt;li&gt;', where %s
                             is replaced with the attributes as specified in
                             <varname>$options</varname>.
-                    </para></listitem>
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
+                    <listitem>
+                        <para>
                             <methodname>setElementSeparator($string)</methodname>; default
                             is '&lt;/li&gt;&lt;li&gt;'.
-                    </para></listitem>
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
+                    <listitem>
+                        <para>
                             <methodname>setElementEnd($string)</methodname>; default is
                             '&lt;/li&gt;&lt;/ul&gt;'.
-                    </para></listitem>
+                        </para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>
-                <methodname>formFile($name, $attribs)</methodname>: Creates an
-                &lt;input type="file" /&gt; element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formFile($name, $attribs)</methodname>: Creates an
+                    &lt;input type="file" /&gt; element.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formHidden($name, $value, $attribs)</methodname>: Creates an
-                &lt;input type="hidden" /&gt; element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formHidden($name, $value, $attribs)</methodname>: Creates an
+                    &lt;input type="hidden" /&gt; element.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formLabel($name, $value, $attribs)</methodname>: Creates a
-                &lt;label&gt; element, setting the <property>for</property> attribute to
-                <varname>$name</varname>, and the actual label text to
-                <varname>$value</varname>. If <emphasis>disable</emphasis> is passed in
-                <property>attribs</property>, nothing will be returned.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formLabel($name, $value, $attribs)</methodname>: Creates a
+                    &lt;label&gt; element, setting the <property>for</property> attribute to
+                    <varname>$name</varname>, and the actual label text to
+                    <varname>$value</varname>. If <emphasis>disable</emphasis> is passed in
+                    <property>attribs</property>, nothing will be returned.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formMultiCheckbox($name, $value, $attribs, $options,
-                    $listsep)</methodname>: Creates a list of checkboxes.
-                <varname>$options</varname> should be an associative array, and may be
-                arbitrarily deep. <varname>$value</varname> may be a single value or
-                an array of selected values that match the keys in the
-                <varname>$options</varname> array. <varname>$listsep</varname> is an HTML
-                break ("&lt;br /&gt;") by default. By default, this element is
-                treated as an array; all checkboxes share the same name, and are
-                submitted as an array.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formMultiCheckbox($name, $value, $attribs, $options,
+                        $listsep)</methodname>: Creates a list of checkboxes.
+                    <varname>$options</varname> should be an associative array, and may be
+                    arbitrarily deep. <varname>$value</varname> may be a single value or
+                    an array of selected values that match the keys in the
+                    <varname>$options</varname> array. <varname>$listsep</varname> is an HTML
+                    break ("&lt;br /&gt;") by default. By default, this element is
+                    treated as an array; all checkboxes share the same name, and are
+                    submitted as an array.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formPassword($name, $value, $attribs)</methodname>: Creates an
-                &lt;input type="password" /&gt; element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formPassword($name, $value, $attribs)</methodname>: Creates an
+                    &lt;input type="password" /&gt; element.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formRadio($name, $value, $attribs, $options)</methodname>:
-                Creates a series of &lt;input type="radio" /&gt; elements, one
-                for each of the $options elements. In the $options array, the
-                element key is the radio value, and the element value is the
-                radio label. The $value radio will be preselected for you.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formRadio($name, $value, $attribs, $options)</methodname>:
+                    Creates a series of &lt;input type="radio" /&gt; elements, one
+                    for each of the $options elements. In the $options array, the
+                    element key is the radio value, and the element value is the
+                    radio label. The $value radio will be preselected for you.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formReset($name, $value, $attribs)</methodname>: Creates an
-                &lt;input type="reset" /&gt; element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formReset($name, $value, $attribs)</methodname>: Creates an
+                    &lt;input type="reset" /&gt; element.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formSelect($name, $value, $attribs, $options)</methodname>:
-                Creates a &lt;select&gt;...&lt;/select&gt; block, with one
-                &lt;option&gt;one for each of the $options elements. In the
-                $options array, the element key is the option value, and the
-                element value is the option label. The $value option(s) will be
-                preselected for you.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formSelect($name, $value, $attribs, $options)</methodname>:
+                    Creates a &lt;select&gt;...&lt;/select&gt; block, with one
+                    &lt;option&gt;one for each of the $options elements. In the
+                    $options array, the element key is the option value, and the
+                    element value is the option label. The $value option(s) will be
+                    preselected for you.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formSubmit($name, $value, $attribs)</methodname>: Creates an
-                &lt;input type="submit" /&gt; element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formSubmit($name, $value, $attribs)</methodname>: Creates an
+                    &lt;input type="submit" /&gt; element.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formText($name, $value, $attribs)</methodname>: Creates an
-                &lt;input type="text" /&gt; element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formText($name, $value, $attribs)</methodname>: Creates an
+                    &lt;input type="text" /&gt; element.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formTextarea($name, $value, $attribs)</methodname>: Creates a
-                &lt;textarea&gt;...&lt;/textarea&gt; block.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formTextarea($name, $value, $attribs)</methodname>: Creates a
+                    &lt;textarea&gt;...&lt;/textarea&gt; block.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>url($urlOptions, $name, $reset)</methodname>: Creates a
-                <acronym>URL</acronym> string based on a named route.
-                <varname>$urlOptions</varname> should be an associative array of key/value pairs
-                used by the particular route.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>url($urlOptions, $name, $reset)</methodname>: Creates a
+                    <acronym>URL</acronym> string based on a named route.
+                    <varname>$urlOptions</varname> should be an associative array of key/value pairs
+                    used by the particular route.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>htmlList($items, $ordered, $attribs, $escape)</methodname>: generates
-                unordered and ordered lists based on the <varname>$items</varname>
-                passed to it. If <varname>$items</varname> is a multidimensional
-                array, a nested list will be built. If the <varname>$escape</varname>
-                flag is <constant>TRUE</constant> (default), individual items will be escaped using
-                the view objects registered escaping mechanisms; pass a <constant>FALSE</constant>
-                value if you want to allow markup in your lists.
-            </para></listitem>
-
+            <listitem>
+                <para>
+                    <methodname>htmlList($items, $ordered, $attribs, $escape)</methodname>:
+                    generates unordered and ordered lists based on the <varname>$items</varname>
+                    passed to it. If <varname>$items</varname> is a multidimensional
+                    array, a nested list will be built. If the <varname>$escape</varname>
+                    flag is <constant>TRUE</constant> (default), individual items will be escaped
+                    using the view objects registered escaping mechanisms; pass a
+                    <constant>FALSE</constant> value if you want to allow markup in your lists.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -417,7 +454,6 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 // "Zend/View/Helper/HelperName.php" using class name
 // "Zend_View_Helper_HelperName".
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.view.helpers.custom">
@@ -428,50 +464,59 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
         </para>
 
         <itemizedlist>
+            <listitem>
+                <para>
+                    While not strictly necessary, we recommend either implementing
+                    <classname>Zend_View_Helper_Interface</classname> or extending
+                    <classname>Zend_View_Helper_Abstract</classname> when creating your
+                    helpers. Introduced in 1.6.0, these simply define a
+                    <methodname>setView()</methodname> method; however, in upcoming releases, we
+                    plan to implement a strategy pattern that will simplify much of
+                    the naming schema detailed below. Building off these now will
+                    help you future-proof your code.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                While not strictly necessary, we recommend either implementing
-                <classname>Zend_View_Helper_Interface</classname> or extending
-                <classname>Zend_View_Helper_Abstract</classname> when creating your
-                helpers. Introduced in 1.6.0, these simply define a
-                <methodname>setView()</methodname> method; however, in upcoming releases, we
-                plan to implement a strategy pattern that will simplify much of
-                the naming schema detailed below. Building off these now will
-                help you future-proof your code.
-            </para></listitem>
+            <listitem>
+                <para>
+                    The class name must, at the very minimum, end with the helper
+                    name itself, using MixedCaps. E.g., if you were writing a
+                    helper called "specialPurpose", the class name would minimally
+                    need to be "SpecialPurpose". You may, and should, give the class
+                    name a prefix, and it is recommended that you use 'View_Helper'
+                    as part of that prefix: "My_View_Helper_SpecialPurpose". (You
+                    will need to pass in the prefix, with or without the trailing
+                    underscore, to <methodname>addHelperPath()</methodname> or
+                    <methodname>setHelperPath()</methodname>).
+                </para>
+            </listitem>
 
-            <listitem><para>
-                The class name must, at the very minimum, end with the helper
-                name itself, using MixedCaps. E.g., if you were writing a
-                helper called "specialPurpose", the class name would minimally
-                need to be "SpecialPurpose". You may, and should, give the class
-                name a prefix, and it is recommended that you use 'View_Helper'
-                as part of that prefix: "My_View_Helper_SpecialPurpose". (You
-                will need to pass in the prefix, with or without the trailing
-                underscore, to <methodname>addHelperPath()</methodname> or
-                <methodname>setHelperPath()</methodname>).
-            </para></listitem>
+            <listitem>
+                <para>
+                    The class must have a public method that matches the
+                    helper name; this is the method that will be called when
+                    your template calls "$this->specialPurpose()". In our
+                    "specialPurpose" helper example, the required method
+                    declaration would be "public function specialPurpose()".
+                </para>
+            </listitem>
 
-            <listitem><para>
-                The class must have a public method that matches the
-                helper name; this is the method that will be called when
-                your template calls "$this->specialPurpose()". In our
-                "specialPurpose" helper example, the required method
-                declaration would be "public function specialPurpose()".
-            </para></listitem>
+            <listitem>
+                <para>
+                    In general, the class should not echo or print or otherwise
+                    generate output. Instead, it should return values to be
+                    printed or echoed. The returned values should be escaped
+                    appropriately.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                In general, the class should not echo or print or otherwise
-                generate output. Instead, it should return values to be
-                printed or echoed. The returned values should be escaped
-                appropriately.
-            </para></listitem>
-
-            <listitem><para>
-                The class must be in a file named after the helper class. Again
-                using our "specialPurpose" helper example, the file has to be
-                named "SpecialPurpose.php".
-            </para></listitem>
+            <listitem>
+                <para>
+                    The class must be in a file named after the helper class. Again
+                    using our "specialPurpose" helper example, the file has to be
+                    named "SpecialPurpose.php".
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -514,6 +559,7 @@ echo $this->specialPurpose();
         <para>
             The output would look something like this:
         </para>
+
         <programlisting language="php"><![CDATA[
 I have seen 'The Jerk' 1 time(s).
 I have seen 'The Jerk' 2 time(s).

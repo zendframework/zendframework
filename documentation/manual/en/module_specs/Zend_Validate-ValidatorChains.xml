@@ -54,14 +54,12 @@ $validatorChain->addValidator(
                     true)
                ->addValidator(new Zend_Validate_Alnum());
 ]]></programlisting>
-
     </para>
 
     <para>
         Any object that implements <classname>Zend_Validate_Interface</classname> may be used in a
         validator chain.
     </para>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

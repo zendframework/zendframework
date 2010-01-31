@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.sourcecreation">
-
     <title>Creating source files</title>
 
     <para>
@@ -19,7 +18,6 @@
     </note>
 
     <sect2 id="zend.translate.sourcecreation.array">
-
         <title>Creating Array source files</title>
 
         <para>
@@ -47,8 +45,8 @@ $translate->addTranslation($deutsch, 'de');
 
         <para>
             Since release 1.5 it is also supported to have arrays included within an external file.
-            You just have to provide the filename and <classname>Zend_Translate</classname> will automatically
-            include it and look for the array. See the following example for details:
+            You just have to provide the filename and <classname>Zend_Translate</classname> will
+            automatically include it and look for the array. See the following example for details:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -67,13 +65,10 @@ $translate = new Zend_Translate('array', '/path/to/myarray.php', 'de');
                 Files which do not return an array will fail to be included.
                 Also any output within this file will be ignored and suppressed.
             </para>
-
         </note>
-
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.gettext">
-
         <title>Creating Gettext source files</title>
 
         <para>
@@ -96,8 +91,8 @@ $translate->addTranslation('/path/to/german.mo', 'de');
         <para>
             As you can see the adapters are used exactly the same way,
             with one small difference:
-            change <emphasis>array</emphasis> to <emphasis>gettext</emphasis>. All other usages are exactly
-            the same as with all other adapters.
+            change <emphasis>array</emphasis> to <emphasis>gettext</emphasis>. All other usages are
+            exactly the same as with all other adapters.
             With the gettext adapter you no longer have to be aware of
             gettext's standard directory structure,
             bindtextdomain and textdomain.
@@ -114,6 +109,7 @@ $translate->addTranslation('/path/to/german.mo', 'de');
                  You can set only one encoding for your source file,
                  so one of your languages probably will not display correctly.
             </para>
+
             <para>
                  UTF-8 is a portable format which supports all languages.
                  When using UTF-8 for all languages, you will eliminate
@@ -135,11 +131,9 @@ $translate->addTranslation('/path/to/german.mo', 'de');
 $translate = new Zend_Translate('gettext', '/path/to/english.mo', 'en');
 print_r($translate->getAdapterInfo());
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.tmx">
-
         <title>Creating TMX source files</title>
 
         <para>
@@ -153,6 +147,7 @@ print_r($translate->getAdapterInfo());
 
         <example id="zend.translate.sourcecreation.tmx.example">
             <title>Example TMX file</title>
+
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" ?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
@@ -193,7 +188,6 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.csv">
-
         <title>Creating CSV source files</title>
 
         <para>
@@ -204,6 +198,7 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
 
         <example id="zend.translate.sourcecreation.csv.example">
             <title>Example CSV file</title>
+
             <programlisting language="txt"><![CDATA[
 ﻿#Example csv file
 message1;Nachricht1
@@ -242,6 +237,7 @@ $translate->addTranslation('path/to/other.csv', 'fr');
 
         <example id="zend.translate.sourcecreation.csv.example2">
             <title>Second CSV file example</title>
+
             <programlisting language="txt"><![CDATA[
 ﻿# Example CSV file
 "message,1",Nachricht1
@@ -261,29 +257,26 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
         </example>
 
         <note>
-
             <para>
                 When you are using non-ASCII characters within your CSV file, like umlauts or UTF-8
                 chars, then you should always use enclosure. Omitting the enclosure can lead to
                 missing characters in your translation.
             </para>
-
         </note>
-
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.ini">
-
         <title>Creating INI source files</title>
 
         <para>
-            <acronym>INI</acronym> source files are human readable but normally not very small as they also
-            include other data beside translations. If you have data which shall be
+            <acronym>INI</acronym> source files are human readable but normally not very small as
+            they also include other data beside translations. If you have data which shall be
             editable by your customers you can use the <acronym>INI</acronym> adapter.
         </para>
 
         <example id="zend.translate.sourcecreation.ini.example">
             <title>Example INI file</title>
+
             <programlisting language="txt"><![CDATA[
 [Test]
 ;TestPage Comment
@@ -299,18 +292,18 @@ $translate->addTranslation('/path/to/other.ini', 'it');
         </example>
 
         <para>
-            <acronym>INI</acronym> files have several restrictions. If a value in the ini file contains any
-            non-alphanumeric characters it needs to be enclosed in double-quotes (<code>"</code>).
-            There are also reserved words which must not be used as keys for ini files.
-            These include: <constant>NULL</constant>, <code>yes</code>, <code>no</code>, <constant>TRUE</constant>,
-            and <constant>FALSE</constant>. Values <constant>NULL</constant>, <code>no</code> and <constant>FALSE</constant> results
-            in <code>""</code>, <code>yes</code> and <constant>TRUE</constant> results in <code>1</code>. Characters <code>{}|&amp;~![()"</code> must not be used anywhere
-            in the key and have a special meaning in the value. Do not use them as it will
-            produce unexpected behaviour.
+            <acronym>INI</acronym> files have several restrictions. If a value in the ini file
+            contains any non-alphanumeric characters it needs to be enclosed in double-quotes
+            (<code>"</code>). There are also reserved words which must not be used as keys for ini
+            files. These include: <constant>NULL</constant>, <code>yes</code>, <code>no</code>,
+            <constant>TRUE</constant>, and <constant>FALSE</constant>. Values
+            <constant>NULL</constant>, <code>no</code> and <constant>FALSE</constant> results in
+            <code>""</code>, <code>yes</code> and <constant>TRUE</constant> results in
+            <code>1</code>. Characters <code>{}|&amp;~![()"</code> must not be used anywhere in the
+            key and have a special meaning in the value. Do not use them as it will produce
+            unexpected behaviour.
         </para>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

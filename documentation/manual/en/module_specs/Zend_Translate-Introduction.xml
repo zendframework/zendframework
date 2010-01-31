@@ -130,7 +130,8 @@
 
             <listitem>
                 <para>
-                    Create your view and integrate <classname>Zend_Translate</classname> in your code;
+                    Create your view and integrate <classname>Zend_Translate</classname> in your
+                    code;
                 </para>
             </listitem>
 

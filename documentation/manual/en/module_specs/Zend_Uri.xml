@@ -63,8 +63,8 @@ $uri = Zend_Uri::factory('http');
         <title>Manipulating an Existing URI</title>
 
         <para>
-            To manipulate an existing <acronym>URI</acronym>, pass the entire <acronym>URI</acronym> to
-            <methodname>Zend_Uri::factory()</methodname>.
+            To manipulate an existing <acronym>URI</acronym>, pass the entire <acronym>URI</acronym>
+            to <methodname>Zend_Uri::factory()</methodname>.
         </para>
 
         <example id="zend.uri.manipulation.example-1">

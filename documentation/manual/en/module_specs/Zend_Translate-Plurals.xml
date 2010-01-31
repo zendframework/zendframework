@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.plurals">
-
     <title>Plural notations for Translation</title>
 
     <para>
@@ -32,7 +31,6 @@
     </para>
 
     <sect2 id="zend.translate.plurals.traditional">
-
         <title>Traditional plural translations</title>
 
         <para>
@@ -42,7 +40,6 @@
         </para>
 
         <example id="zend.translate.plurals.traditional.example1">
-
             <title>Example of traditional plural translations</title>
 
             <para>
@@ -61,13 +58,10 @@
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->plural('Car', 'Cars', $number);
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.translate.plurals.modern">
-
         <title>Modern plural translations</title>
 
         <para>
@@ -84,7 +78,6 @@ $translate->plural('Car', 'Cars', $number);
         </para>
 
         <example id="zend.translate.plurals.modern.example1">
-
             <title>Example of modern plural translations</title>
 
             <para>
@@ -96,7 +89,6 @@ $translate->plural('Car', 'Cars', $number);
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->translate(array('Car', 'Cars', $number));
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -105,7 +97,6 @@ $translate->translate(array('Car', 'Cars', $number));
         </para>
 
         <example id="zend.translate.plurals.modern.example2">
-
             <title>Example of modern plural translations using a different source language</title>
 
             <para>
@@ -121,7 +112,6 @@ $translate->translate(array('Car',
                             $number,
                             'ru'));
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -134,11 +124,9 @@ $translate->translate(array('Car',
             When you omit the plural language then english will be used per default and any
             additional plural definition will be ignored.
         </para>
-
     </sect2>
 
     <sect2 id="zend.translate.plurals.source">
-
         <title>Plural source files</title>
 
         <para>
@@ -147,6 +135,7 @@ $translate->translate(array('Car',
 
         <table id="zend.translate.plurals.source.supportedadapters">
             <title>Plural support</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -154,39 +143,48 @@ $translate->translate(array('Car',
                         <entry>Plurals supported</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>Array</entry>
                         <entry><emphasis>yes</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Csv</entry>
                         <entry><emphasis>yes</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Gettext</entry>
                         <entry><emphasis>yes</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Ini</entry>
                         <entry><emphasis>no</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Qt</entry>
                         <entry><emphasis>no</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Tbx</entry>
                         <entry><emphasis>no</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Tmx</entry>
                         <entry><emphasis>no</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>Xliff</entry>
                         <entry><emphasis>no</emphasis></entry>
                     </row>
+
                     <row>
                         <entry>XmlTm</entry>
                         <entry><emphasis>no</emphasis></entry>
@@ -200,7 +198,6 @@ $translate->translate(array('Car',
         </para>
 
         <sect3 id="zend.translate.plurals.source.array">
-
             <title>Array source with plural definitions</title>
 
             <para>
@@ -241,11 +238,9 @@ array(
                 the array below the first plural form. When your source language suppors more
                 plural forms, than simply add a new empty translation.
             </para>
-
         </sect3>
 
         <sect3 id="zend.translate.plurals.source.csv">
-
             <title>Csv source with plural definitions</title>
 
             <para>
@@ -263,11 +258,9 @@ array(
                 below but without translation. Note that you must add a delimiter to empty
                 source plurals.
             </para>
-
         </sect3>
 
         <sect3 id="zend.translate.plurals.source.gettext">
-
             <title>Gettext source with plural definitions</title>
 
             <para>
@@ -276,18 +269,14 @@ array(
             </para>
 
             <note>
-
                 <para>
                     Note that gettext does not support the usage of source languages which are not
                     using english plural forms. When you plan to use a source language which
                     supports other plural forms like russian for example, then you can not use
                     gettext sources.
                 </para>
-
             </note>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.translate.plurals.customrules">

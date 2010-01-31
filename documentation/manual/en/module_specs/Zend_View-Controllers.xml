@@ -10,7 +10,6 @@
     </para>
 
     <sect2 id="zend.view.controllers.assign">
-
         <title>Assigning Variables</title>
 
         <para>
@@ -72,11 +71,9 @@ $view->assign('a', "Hay");
 $view->assign('b', "Bee");
 $view->assign('c', "Sea");
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.view.controllers.render">
-
         <title>Rendering a View Script</title>
 
         <para>
@@ -94,11 +91,9 @@ $view->b = "Bee";
 $view->c = "Sea";
 echo $view->render('someView.php');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.view.controllers.script-paths">
-
         <title>View Script Paths</title>
 
         <para>

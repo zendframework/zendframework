@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.view.scripts">
-
     <title>View Scripts</title>
 
     <para>
@@ -53,7 +52,6 @@
 ]]></programlisting>
 
     <sect2 id="zend.view.scripts.escaping">
-
         <title>Escaping Output</title>
 
         <para>
@@ -109,7 +107,6 @@ echo $view->render(...);
             escaped as its first parameter, and all other parameters should
             be optional.
         </para>
-
     </sect2>
 
     <sect2 id="zend.view.scripts.templates">
@@ -179,7 +176,6 @@ if ($this->books) {
 <!-- nobooks.tpl -->
 <p>There are no books to display.</p>
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.view.scripts.templates.interface">

@@ -72,42 +72,54 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            <classname>Zend_Tool_Framework</classname> - The framework which exposes
-            tooling capabilities.
-        </para></listitem>
+        <listitem>
+            <para>
+                <classname>Zend_Tool_Framework</classname> - The framework which exposes
+                tooling capabilities.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>Tooling Client</emphasis> - A developer tool that connects
-            to and consumes <classname>Zend_Tool_Framework</classname>.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>Tooling Client</emphasis> - A developer tool that connects
+                to and consumes <classname>Zend_Tool_Framework</classname>.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>Client</emphasis> - The subsystem of
-            <classname>Zend_Tool_Framework</classname> that exposes an interface such that
-            tooling clients can connect, query and execute commands.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>Client</emphasis> - The subsystem of
+                <classname>Zend_Tool_Framework</classname> that exposes an interface such that
+                tooling clients can connect, query and execute commands.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>Console Client / Command Line Interface /
-            <filename>zf.php</filename></emphasis> - The tooling client for the command line.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>Console Client / Command Line Interface /
+                <filename>zf.php</filename></emphasis> - The tooling client for the command line.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>Provider</emphasis> - A subsystem and a collection of
-            built-in functionality that the framework exports.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>Provider</emphasis> - A subsystem and a collection of
+                built-in functionality that the framework exports.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>Manifest</emphasis> - A subsystem for defining,
-            organizing, and disseminating provider requirement data.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>Manifest</emphasis> - A subsystem for defining,
+                organizing, and disseminating provider requirement data.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <classname>Zend_Tool_Project</classname> Provider - A set of providers
-            specifically for creating and maintaining Zend Framework-based
-            projects.
-        </para></listitem>
+        <listitem>
+            <para>
+                <classname>Zend_Tool_Project</classname> Provider - A set of providers
+                specifically for creating and maintaining Zend Framework-based projects.
+            </para>
+        </listitem>
     </itemizedlist>
 </sect1>
-

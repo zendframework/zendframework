@@ -41,6 +41,7 @@
                     provider being accessible by the name "hello".
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     If your provider has a method <methodname>getName()</methodname>
@@ -48,6 +49,7 @@
                     the name.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     If your provider has "Provider" as prefix, e.g. it is called
@@ -58,9 +60,11 @@
         </itemizedlist>
 
         <note>
-            <para>The IncludePathLoader does not follow symlinks, that means
-            you cannot link provider functionality into your include paths,
-            they have to be physically present in the include paths.</para>
+            <para>
+                The IncludePathLoader does not follow symlinks, that means
+                you cannot link provider functionality into your include paths,
+                they have to be physically present in the include paths.
+            </para>
         </note>
 
         <example id="zend.tool.framework.writing-providers.loading.example">
@@ -89,7 +93,6 @@ class My_Component_Manifest
     }
 }
 ]]></programlisting>
-
         </example>
     </sect2>
 
@@ -155,8 +158,9 @@ class My_Component_HelloProvider
 ]]></programlisting>
 
         <para>
-            As you can see one has to extend the <classname>Zend_Tool_Framework_Provider_Abstract</classname>
-            to gain access to the Registry which holds the <classname>Zend_Tool_Framework_Client_Response</classname>
+            As you can see one has to extend the
+            <classname>Zend_Tool_Framework_Provider_Abstract</classname> to gain access to the
+            Registry which holds the <classname>Zend_Tool_Framework_Client_Response</classname>
             instance.
         </para>
     </sect2>
@@ -204,7 +208,6 @@ class My_Component_HelloProvider
                 line, so that <command>zf say hello</command> will still work, and default
                 to the name "Ralph".
             </para>
-
         </sect3>
 
         <sect3 id="zend.tool.framework.writing-providers.advanced.prompt">
@@ -285,7 +288,6 @@ class My_Component_HelloProvider
 % zf --pretend say hello Ralph
 I would say hello Ralph.
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.tool.framework.writing-providers.advanced.verbosedebug">
@@ -350,9 +352,9 @@ class My_Component_HelloProvider
             </para>
 
             <para>
-                The storage allows to save arbitrary data for later reference. This can be useful for batch
-                processing tasks or for re-runs of your tasks. You can access the storage in a similar way
-                like the configuration:
+                The storage allows to save arbitrary data for later reference. This can be useful
+                for batch processing tasks or for re-runs of your tasks. You can access the storage
+                in a similar way like the configuration:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -393,6 +395,5 @@ class Zend_Tool_Framework_Client_Storage
                 </para>
             </important>
         </sect3>
-
     </sect2>
 </sect1>

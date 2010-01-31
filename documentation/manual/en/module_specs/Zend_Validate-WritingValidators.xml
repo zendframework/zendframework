@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.writing_validators">
-
     <title>Writing Validators</title>
 
     <para>
-        <classname>Zend_Validate</classname> supplies a set of commonly needed validators, but inevitably, developers will
-        wish to write custom validators for their particular needs. The task of writing a custom
-        validator is described in this section.
+        <classname>Zend_Validate</classname> supplies a set of commonly needed validators, but
+        inevitably, developers will wish to write custom validators for their particular needs. The
+        task of writing a custom validator is described in this section.
     </para>
 
     <para>
@@ -15,8 +14,8 @@
         <methodname>isValid()</methodname> and <methodname>getMessages()</methodname>, that may
         be implemented by user classes in order to create custom validation objects. An object that
         implements <classname>Zend_Validate_Interface</classname> interface may be added to a
-        validator chain with <methodname>Zend_Validate::addValidator()</methodname>. Such objects may
-        also be used with <link
+        validator chain with <methodname>Zend_Validate::addValidator()</methodname>. Such objects
+        may also be used with <link
             linkend="zend.filter.input"><classname>Zend_Filter_Input</classname></link>.
     </para>
 
@@ -33,23 +32,24 @@
         Basic validation failure message functionality is implemented in
         <classname>Zend_Validate_Abstract</classname>. To include this functionality when creating a
         validation class, simply extend <classname>Zend_Validate_Abstract</classname>. In the
-        extending class you would implement the <methodname>isValid()</methodname> method logic and define the
-        message variables and message templates that correspond to the types of validation failures
-        that can occur. If a value fails your validation tests, then <methodname>isValid()</methodname> should
-        return <constant>FALSE</constant>. If the value passes your validation tests, then
-        <methodname>isValid()</methodname> should return <constant>TRUE</constant>.
+        extending class you would implement the <methodname>isValid()</methodname> method logic and
+        define the message variables and message templates that correspond to the types of
+        validation failures that can occur. If a value fails your validation tests, then
+        <methodname>isValid()</methodname> should return <constant>FALSE</constant>. If the value
+        passes your validation tests, then <methodname>isValid()</methodname> should return
+        <constant>TRUE</constant>.
     </para>
 
     <para>
-        In general, the <methodname>isValid()</methodname> method should not throw any exceptions, except where
-        it is impossible to determine whether or not the input value is valid. A few examples of
-        reasonable cases for throwing an exception might be if a file cannot be opened, an <acronym>LDAP</acronym>
-        server could not be contacted, or a database connection is unavailable, where such a thing
-        may be required for validation success or failure to be determined.
+        In general, the <methodname>isValid()</methodname> method should not throw any exceptions,
+        except where it is impossible to determine whether or not the input value is valid. A few
+        examples of reasonable cases for throwing an exception might be if a file cannot be opened,
+        an <acronym>LDAP</acronym> server could not be contacted, or a database connection is
+        unavailable, where such a thing may be required for validation success or failure to be
+        determined.
     </para>
 
     <example id="zend.validate.writing_validators.example.simple">
-
         <title>Creating a Simple Validation Class</title>
 
         <para>
@@ -90,11 +90,9 @@ class MyValid_Float extends Zend_Validate_Abstract
             class only defines one failure message, it is not necessary to provide
             <methodname>_error()</methodname> with the name of the failure message template.
         </para>
-
     </example>
 
     <example id="zend.validate.writing_validators.example.conditions.dependent">
-
         <title>Writing a Validation Class having Dependent Conditions</title>
 
         <para>
@@ -108,9 +106,11 @@ class MyValid_Float extends Zend_Validate_Abstract
             <listitem>
                 <para>The input value is not numeric.</para>
             </listitem>
+
             <listitem>
                 <para>The input value is less than the minimum allowed value.</para>
             </listitem>
+
             <listitem>
                 <para>The input value is more than the maximum allowed value.</para>
             </listitem>
@@ -166,28 +166,26 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
 ]]></programlisting>
 
         <para>
-            The public properties <varname>$minimum</varname> and <varname>$maximum</varname> have been
-            established to provide the minimum and maximum boundaries, respectively, for a value to
-            successfully validate. The class also defines two message variables that correspond to
-            the public properties and allow <property>min</property> and <property>max</property> to
-            be used in message templates as magic parameters, just as with
-            <property>value</property>.
+            The public properties <varname>$minimum</varname> and <varname>$maximum</varname> have
+            been established to provide the minimum and maximum boundaries, respectively, for a
+            value to successfully validate. The class also defines two message variables that
+            correspond to the public properties and allow <property>min</property> and
+            <property>max</property> to be used in message templates as magic parameters, just as
+            with <property>value</property>.
         </para>
 
         <para>
-            Note that if any one of the validation checks in <methodname>isValid()</methodname> fails, an
-            appropriate failure message is prepared, and the method immediately returns
-            <constant>FALSE</constant>. These validation rules are therefore sequentially dependent. That
-            is, if one test should fail, there is no need to test any subsequent validation rules.
-            This need not be the case, however. The following example illustrates how to write a
-            class having independent validation rules, where the validation object may return
-            multiple reasons why a particular validation attempt failed.
+            Note that if any one of the validation checks in <methodname>isValid()</methodname>
+            fails, an appropriate failure message is prepared, and the method immediately returns
+            <constant>FALSE</constant>. These validation rules are therefore sequentially dependent.
+            That is, if one test should fail, there is no need to test any subsequent validation
+            rules. This need not be the case, however. The following example illustrates how to
+            write a class having independent validation rules, where the validation object may
+            return multiple reasons why a particular validation attempt failed.
         </para>
-
     </example>
 
     <example id="zend.validate.writing_validators.example.conditions.independent">
-
         <title>Validation with Independent Conditions, Multiple Reasons for Failure</title>
 
         <para>
@@ -197,18 +195,10 @@ class MyValid_NumericBetween extends Zend_Validate_Abstract
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>is at least 8 characters in length,</para>
-            </listitem>
-            <listitem>
-                <para>contains at least one uppercase letter,</para>
-            </listitem>
-            <listitem>
-                <para>contains at least one lowercase letter,</para>
-            </listitem>
-            <listitem>
-                <para>and contains at least one digit character.</para>
-            </listitem>
+            <listitem><para>is at least 8 characters in length,</para></listitem>
+            <listitem><para>contains at least one uppercase letter,</para></listitem>
+            <listitem><para>contains at least one lowercase letter,</para></listitem>
+            <listitem><para>and contains at least one digit character.</para></listitem>
         </itemizedlist>
 
         <para>
@@ -262,16 +252,14 @@ class MyValid_PasswordStrength extends Zend_Validate_Abstract
 ]]></programlisting>
 
         <para>
-            Note that the four criteria tests in <methodname>isValid()</methodname> do not immediately return
-            <constant>FALSE</constant>. This allows the validation class to provide <emphasis>all</emphasis>
-            of the reasons that the input password failed to meet the validation requirements. if,
-            for example, a user were to input the string "#$%" as a password,
-            <methodname>isValid()</methodname> would cause all four validation failure messages to be returned
-            by a subsequent call to <methodname>getMessages()</methodname>.
+            Note that the four criteria tests in <methodname>isValid()</methodname> do not
+            immediately return <constant>FALSE</constant>. This allows the validation class to
+            provide <emphasis>all</emphasis> of the reasons that the input password failed to meet
+            the validation requirements. if, for example, a user were to input the string "#$%" as a
+            password, <methodname>isValid()</methodname> would cause all four validation failure
+            messages to be returned by a subsequent call to <methodname>getMessages()</methodname>.
         </para>
-
     </example>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

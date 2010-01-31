@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.using">
-
     <title>Using Translation Adapters</title>
 
     <para>
@@ -35,6 +34,7 @@ print "Here is line two\n";
 
     <example id="zend.translate.using.example2">
         <title>Example of multi-lingual PHP code</title>
+
         <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate('gettext', '/my/path/source-de.mo', 'de');
 $translate->addTranslation('/path/to/translation/fr-source.mo', 'fr');
@@ -143,7 +143,6 @@ print $translate->_(2) . "\n";
     </para>
 
     <sect2 id="zend.translate.using.structure">
-
         <title>Translation Source Structures</title>
 
         <para>
@@ -178,6 +177,7 @@ print $translate->_(2) . "\n";
                     in one directory. No splitting of related files.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Language structured source
@@ -201,6 +201,7 @@ print $translate->_(2) . "\n";
                     only one directory. Also the usage of multiple files is transparent.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Application structured source
@@ -226,6 +227,7 @@ print $translate->_(2) . "\n";
                     problematic.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Gettext structured source
@@ -255,6 +257,7 @@ print $translate->_(2) . "\n";
                     for people who have not used gettext before.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                    File structured source
@@ -272,6 +275,7 @@ print $translate->_(2) . "\n";
 /application/controllers/MyController.en
 /library/
 ]]></programlisting>
+
                 <para>
                     Positive: translation files are localted near their source.
                 </para>
@@ -293,9 +297,7 @@ print $translate->_(2) . "\n";
             So now, that we know which structure we want to have,
             we should create our translation source files.
         </para>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

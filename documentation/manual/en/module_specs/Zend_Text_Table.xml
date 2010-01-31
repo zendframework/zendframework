@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.text.table.introduction">
     <title>Zend_Text_Table</title>
+
     <para>
         <classname>Zend_Text_Table</classname> is a component to create text based tables
         on the fly with different decorators. This can be helpful, if you either
@@ -10,8 +11,10 @@
         <classname>Zend_Text_Table</classname> supports multi-line columns, colspan and
         align as well.
     </para>
+
     <note>
         <title>Encoding</title>
+
         <para>
             <classname>Zend_Text_Table</classname> expects your strings to be UTF-8 encoded
             by default. If this is not the case, you can either supply the character
@@ -24,6 +27,7 @@
             this with <methodname>Zend_Text_Table::setOutputCharset($charset)</methodname>.
         </para>
     </note>
+
     <para>
         A <classname>Zend_Text_Table</classname> object consists of rows, which contain
         columns, represented by <classname>Zend_Text_Table_Row</classname> and
@@ -37,6 +41,7 @@
                     all columns width their widths in characters.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>decorator</code>: The decorator to use for the
@@ -45,12 +50,14 @@
                     of a custom decorator object.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>padding</code>: The left and right padding withing
                     the columns in characters. The default padding is zero.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>AutoSeparate</code>: The way how the rows are
@@ -58,26 +65,32 @@
                     separation between all rows. This is defined as a bitmask
                     containing one ore more of the following constants of
                     <classname>Zend_Text_Table</classname>:
+
                     <itemizedlist>
                         <listitem>
                             <para><constant>Zend_Text_Table::AUTO_SEPARATE_NONE</constant></para>
                         </listitem>
+
                         <listitem>
                             <para><constant>Zend_Text_Table::AUTO_SEPARATE_HEADER</constant></para>
                         </listitem>
+
                         <listitem>
                             <para><constant>Zend_Text_Table::AUTO_SEPARATE_FOOTER</constant></para>
                         </listitem>
+
                         <listitem>
                             <para><constant>Zend_Text_Table::AUTO_SEPARATE_ALL</constant></para>
                         </listitem>
                     </itemizedlist>
+
                     Where header is always the first row, and the footer is
                     always the last row.
                 </para>
             </listitem>
         </itemizedlist>
     </para>
+
     <para>
         Rows are simply added to the table by creating a new instance of
         <classname>Zend_Text_Table_Row</classname>, and appending it to the table via the
@@ -86,6 +99,7 @@
         will automatically converted to a row object, containing multiple column
         objects.
     </para>
+
     <para>
         The same way you can add columns to the rows. Create a new instance of
         <classname>Zend_Text_Table_Column</classname> and then either set the column
@@ -102,11 +116,13 @@
                     <constant>ALIGN_LEFT</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>ALIGN_CENTER</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>ALIGN_RIGHT</constant>
@@ -122,17 +138,21 @@
         with the column object as parameter. Alternatively you can directly
         give a string to the <code>appendColumn</code> method.
     </para>
+
     <para>
         To finally render the table, you can either use the <code>render</code>
         method of the table, or use the magic method <code>__toString</code>
         by doing <code>echo $table;</code> or <code>$tableString = (string) $table</code>.
     </para>
+
     <example id="zend.text.table.example.using">
         <title>Using Zend_Text_Table</title>
+
         <para>
             This example illustrates the basic use of <classname>Zend_Text_Table</classname>
             to create a simple table:
         </para>
+
         <programlisting language="php"><![CDATA[
 $table = new Zend_Text_Table(array('columnWidths' => array(10, 20)));
 
@@ -149,9 +169,11 @@ $table->appendRow($row);
 
 echo $table;
 ]]></programlisting>
+
         <para>
             This will result in the following output:
         </para>
+
         <programlisting language="text"><![CDATA[
 ┌──────────┬────────────────────┐
 │Zend      │Framework           │

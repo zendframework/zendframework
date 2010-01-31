@@ -53,6 +53,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
         <table id="zend.translate.additional.options.alloptions">
             <title>Options for translation adapters</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>

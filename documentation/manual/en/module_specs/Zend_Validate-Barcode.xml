@@ -170,8 +170,8 @@
 
             <para>
                 This barcode must have a length of 18 characters. It support only digits. The last
-                digit is always a checksum digit which is calculated with modulo 10. This code is often
-                used for the identification of shipping containers.
+                digit is always a checksum digit which is calculated with modulo 10. This code is
+                often used for the identification of shipping containers.
             </para>
         </listitem>
 

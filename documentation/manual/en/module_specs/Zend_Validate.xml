@@ -29,11 +29,9 @@
             meet one or both of the requirements, it would be useful to know
             which of the requirements the username fails to meet.
         </para>
-
     </sect2>
 
     <sect2 id="zend.validate.introduction.using">
-
         <title>Basic usage of validators</title>
 
         <para>
@@ -85,13 +83,10 @@ if ($validator->isValid($email)) {
     }
 }
 ]]></programlisting>
-
         </para>
-
     </sect2>
 
     <sect2 id="zend.validate.introduction.messages">
-
         <title>Customizing messages</title>
 
         <para>
@@ -153,7 +148,6 @@ $validator->setMessages( array(
         'The string \'%value%\' is too long'
 ));
 ]]></programlisting>
-
         </para>
 
         <para>
@@ -179,11 +173,9 @@ if (!validator->isValid('word')) {
 }
 ]]></programlisting>
         </para>
-
     </sect2>
 
     <sect2 id="zend.validate.introduction.static">
-
         <title>Using the static is() method</title>
 
         <para>
@@ -203,7 +195,6 @@ if (Zend_Validate::is($email, 'EmailAddress')) {
     // Yes, email appears to be valid
 }
 ]]></programlisting>
-
         </para>
 
         <para>
@@ -215,7 +206,6 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
     // Yes, $value is between 1 and 12
 }
 ]]></programlisting>
-
         </para>
 
         <para>
@@ -241,7 +231,6 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
         </para>
 
         <sect3 id="zend.validate.introduction.static.namespaces">
-
             <title>Namespaces</title>
 
             <para>
@@ -316,7 +305,6 @@ if (Zend_Validate::is($value, 'OtherValidator', array('min' => 1, 'max' => 12)) 
     </sect2>
 
     <sect2 id="zend.validate.introduction.translation">
-
         <title>Translating messages</title>
 
         <para>
@@ -380,7 +368,6 @@ if (!$validator->isTranslatorDisabled()) {
             <methodname>setMessage()</methodname>. But doing so, you should keep in mind, that the
             translator works also on messages you set your own.
         </para>
-
     </sect2>
 </sect1>
 <!--

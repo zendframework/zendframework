@@ -25,7 +25,6 @@
         <para>
             Through the command line, simply run <command>zf show version</command>.
         </para>
-
     </sect2>
 
     <sect2 id="zend.tool.framework.system-providers.manifest">

@@ -20,10 +20,8 @@
 
     <para>
         Essentially, using <classname>Zend_View</classname> happens in two major steps:
-
         1. Your controller script creates an instance of
         <classname>Zend_View</classname> and assigns variables to that instance.
-
         2. The controller tells the <classname>Zend_View</classname> to render a particular
         view, thereby handing control over the view script, which
         generates the view output.
@@ -63,11 +61,9 @@ $view->books = $data;
 // and render a view script called "booklist.php"
 echo $view->render('booklist.php');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.view.introduction.view">
-
         <title>View Script</title>
 
         <para>
@@ -111,7 +107,6 @@ echo $view->render('booklist.php');
             Note how we use the "escape()" method to apply output
             escaping to variables.
         </para>
-
     </sect2>
 
     <sect2 id="zend.view.introduction.options">
@@ -144,36 +139,44 @@ base/path/
                 </para>
             </listitem>
 
-            <listitem><para>
-                <property>encoding</property>: indicate the character encoding to use
-                with <methodname>htmlentities()</methodname>,
-                <methodname>htmlspecialchars()</methodname>, and other operations. Defaults
-                to ISO-8859-1 (latin1). May be set via
-                <methodname>setEncoding()</methodname> or the <property>encoding</property> option
-                to the constructor.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>encoding</property>: indicate the character encoding to use
+                    with <methodname>htmlentities()</methodname>,
+                    <methodname>htmlspecialchars()</methodname>, and other operations. Defaults
+                    to ISO-8859-1 (latin1). May be set via
+                    <methodname>setEncoding()</methodname> or the <property>encoding</property>
+                    option to the constructor.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <property>escape</property>: indicate a callback to be used by
-                <methodname>escape()</methodname>. May be set via
-                <methodname>setEscape()</methodname> or the <property>escape</property> option to
-                the constructor.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>escape</property>: indicate a callback to be used by
+                    <methodname>escape()</methodname>. May be set via
+                    <methodname>setEscape()</methodname> or the <property>escape</property> option
+                    to the constructor.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <property>filter</property>: indicate a filter to use after rendering
-                a view script. May be set via <methodname>setFilter()</methodname>,
-                <methodname>addFilter()</methodname>, or the <property>filter</property> option to
-                the constructor.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>filter</property>: indicate a filter to use after rendering
+                    a view script. May be set via <methodname>setFilter()</methodname>,
+                    <methodname>addFilter()</methodname>, or the <property>filter</property> option
+                    to the constructor.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <property>strictVars</property>: force <classname>Zend_View</classname> to emit
-                notices and warnings when uninitialized view variables are
-                accessed. This may be set by calling
-                <methodname>strictVars(true)</methodname> or passing the
-                <property>strictVars</property> option to the constructor.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>strictVars</property>: force <classname>Zend_View</classname> to emit
+                    notices and warnings when uninitialized view variables are
+                    accessed. This may be set by calling
+                    <methodname>strictVars(true)</methodname> or passing the
+                    <property>strictVars</property> option to the constructor.
+                </para>
+            </listitem>
         </itemizedlist>
     </sect2>
 

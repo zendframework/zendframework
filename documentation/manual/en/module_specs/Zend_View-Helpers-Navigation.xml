@@ -330,11 +330,13 @@ $this->navigation()->addPage(array(
                     The domain for the site is <code>www.example.com</code>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Interesting page properties are marked with a comment.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Unless otherwise is stated in other examples, the user
@@ -344,6 +346,7 @@ $this->navigation()->addPage(array(
                     under <code>Foo Server</code>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     The assumed <acronym>ACL</acronym> and router setup is shown below the
@@ -610,6 +613,7 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
                    <code>' &amp;gt; '</code>.
                </para>
            </listitem>
+
            <listitem>
                <para>
                    <code>{get|set}LinkLast()</code> gets/sets whether the
@@ -617,6 +621,7 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
                    Default is <constant>FALSE</constant>.
                </para>
            </listitem>
+
            <listitem>
                <para>
                    <code>{get|set}Partial()</code> gets/sets a partial view
@@ -634,12 +639,14 @@ Zend_View_Helper_Navigation_HelperAbstract::setDefaultRole('member');
                    script is found.
                </para>
            </listitem>
+
            <listitem>
                <para>
                    <methodname>renderStraight()</methodname> is the default render
                    method.
                </para>
            </listitem>
+
            <listitem>
                <para>
                    <methodname>renderPartial()</methodname> is used for rendering
@@ -821,6 +828,7 @@ Products, Foo Server, FAQ
                     relation: the first page in the container.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>searchRelNext()</methodname>, forward 'next'
@@ -828,6 +836,7 @@ Products, Foo Server, FAQ
                     the page after the active page.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>searchRelPrev()</methodname>, forward 'prev'
@@ -835,6 +844,7 @@ Products, Foo Server, FAQ
                     the active page.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>searchRelChapter()</methodname>, forward 'chapter'
@@ -842,6 +852,7 @@ Products, Foo Server, FAQ
                     relation or the active page if it's on level 0.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>searchRelSection()</methodname>, forward 'section'
@@ -849,6 +860,7 @@ Products, Foo Server, FAQ
                     the active page is on level 0 (a 'chapter').
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>searchRelSubsection()</methodname>, forward 'subsection'
@@ -856,6 +868,7 @@ Products, Foo Server, FAQ
                     the active pages is on level 1 (a 'section').
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>searchRevSection()</methodname>, reverse 'section'
@@ -863,6 +876,7 @@ Products, Foo Server, FAQ
                     active page is on level 1 (a 'section').
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>searchRevSubsection()</methodname>, reverse 'subsection'
@@ -913,6 +927,7 @@ Products, Foo Server, FAQ
             helper's render constants to determine if the relation that belongs
             to the render constant should be rendered.
         </para>
+
         <para>
             See the
             <link linkend="zend.view.helpers.initial.navigation.links.example3">example
@@ -925,81 +940,97 @@ Products, Foo Server, FAQ
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_ALTERNATE</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_STYLESHEET</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_START</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_NEXT</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_PREV</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_CONTENTS</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_INDEX</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_GLOSSARY</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_COPYRIGHT</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_CHAPTER</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_SECTION</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_SUBSECTION</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_APPENDIX</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_HELP</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_BOOKMARK</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_CUSTOM</constant>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <constant>Zend_View_Helper_Navigation_Link::RENDER_ALL</constant>
@@ -1027,18 +1058,21 @@ Products, Foo Server, FAQ
                     below on how to set the render flag.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>findAllRelations()</methodname> finds all relations of
                     all types for a given page.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>findRelation()</methodname> finds all relations of a given
                     type from a given page.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>searchRel{Start|Next|Prev|Chapter|Section|Subsection}()</code>
@@ -1047,6 +1081,7 @@ Products, Foo Server, FAQ
                     chapters, sections, and subsections.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>searchRev{Section|Subsection}()</code> traverses
@@ -1054,6 +1089,7 @@ Products, Foo Server, FAQ
                     subsections.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>renderLink()</methodname> renders a single <code>link</code>
@@ -1209,6 +1245,7 @@ Output:
                     used in <methodname>renderMenu()</methodname>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>{get|set}OnlyActiveBranch()</code> gets/sets a flag
@@ -1216,6 +1253,7 @@ Output:
                     should be rendered.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>{get|set}RenderParents()</code> gets/sets a flag
@@ -1225,6 +1263,7 @@ Output:
                     rendered.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>{get|set}Partial()</code> gets/sets a partial view
@@ -1242,6 +1281,7 @@ Output:
                     script is found.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>htmlify()</methodname> overrides the method from the
@@ -1249,22 +1289,26 @@ Output:
                     if the page has no <code>href</code>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>renderMenu($container = null, $options = array())</methodname>
                     is the default render method, and will render a container as
                     a HTML <code>UL</code> list.
                 </para>
+
                 <para>
                     If <varname>$container</varname> is not given, the container
                     registered in the helper will be rendered.
                 </para>
+
                 <para>
                     <varname>$options</varname> is used for overriding options
                     specified temporarily without rsetting the values in the
                     helper instance. It is an associative array where each key
                     corresponds to an option in the helper.
                 </para>
+
                 <para>
                     Recognized options:
                 </para>
@@ -1277,6 +1321,7 @@ Output:
                             value.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>minDepth</code>; minimum depth. Expcects
@@ -1284,6 +1329,7 @@ Output:
                             minimum depth).
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>maxDepth</code>; maximum depth. Expcects
@@ -1291,6 +1337,7 @@ Output:
                             maximum depth).
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>ulClass</code>; <acronym>CSS</acronym> class for
@@ -1298,6 +1345,7 @@ Output:
                             <type>String</type>.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>onlyActiveBranch</code>; whether only
@@ -1305,6 +1353,7 @@ Output:
                             a <type>Boolean</type> value.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>renderParents</code>; whether parents
@@ -1319,12 +1368,14 @@ Output:
                     will be used.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>renderPartial()</methodname> is used for rendering the menu
                     using a partial view script.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>renderSubMenu()</methodname> renders the deepest menu level
@@ -1816,6 +1867,7 @@ foreach ($this->container as $page) {
 
         <table id="zend.view.helpers.initial.navigation.sitemap.elements">
             <title>Sitemap XML elements</title>
+
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -1823,16 +1875,20 @@ foreach ($this->container as $page) {
                         <entry>Description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><code>loc</code></entry>
+
                         <entry>
                             Absolute <acronym>URL</acronym> to page. An absolute
                             <acronym>URL</acronym> will be generated by the helper.
                         </entry>
                     </row>
+
                     <row>
                         <entry><code>lastmod</code></entry>
+
                         <entry>
                             <para>
                                 The date of last modification of the file, in <ulink
@@ -1840,6 +1896,7 @@ foreach ($this->container as $page) {
                                 format. This time portion can be omitted if desired, and only use
                                 YYYY-MM-DD.
                             </para>
+
                             <para>
                                 The helper will try to retrieve the
                                 <code>lastmod</code> value from the page's
@@ -1849,8 +1906,10 @@ foreach ($this->container as $page) {
                             </para>
                         </entry>
                     </row>
+
                     <row>
                         <entry><code>changefreq</code></entry>
+
                         <entry>
                             <para>
                                 How frequently the page is likely to change.
@@ -1879,14 +1938,17 @@ foreach ($this->container as $page) {
                             </para>
                         </entry>
                     </row>
+
                     <row>
                         <entry><code>priority</code></entry>
+
                         <entry>
                             <para>
                                 The priority of this <acronym>URL</acronym> relative to other
                                 <acronym>URL</acronym>s on your site. Valid values range from
                                 0.0 to 1.0.
                             </para>
+
                             <para>
                                 The helper will try to retrieve the
                                 <code>priority</code> value from the page's
@@ -1916,6 +1978,7 @@ foreach ($this->container as $page) {
                     Default is <constant>FALSE</constant>.
                 </para>
            </listitem>
+
            <listitem>
                 <para>
                     <code>{get|set}UseXmlDeclaration()</code> gets/sets a
@@ -1923,6 +1986,7 @@ foreach ($this->container as $page) {
                     included when rendering. Default is <constant>TRUE</constant>.
                 </para>
            </listitem>
+
            <listitem>
                 <para>
                     <code>{get|set}UseSitemapValidators()</code> gets/sets a
@@ -1931,6 +1995,7 @@ foreach ($this->container as $page) {
                     <constant>TRUE</constant>.
                 </para>
            </listitem>
+
            <listitem>
                 <para>
                     <code>{get|set}UseSchemaValidation()</code> gets/sets a
@@ -1939,6 +2004,7 @@ foreach ($this->container as $page) {
                     <constant>FALSE</constant>. If <constant>TRUE</constant>.
                 </para>
            </listitem>
+
            <listitem>
                 <para>
                     <code>{get|set}ServerUrl()</code> gets/sets server <acronym>URL</acronym>
@@ -1947,12 +2013,14 @@ foreach ($this->container as $page) {
                     specified, it will be determined by the helper.
                 </para>
            </listitem>
+
            <listitem>
                 <para>
                     <methodname>url()</methodname> is used to generate absolute
                     <acronym>URL</acronym>s to pages.
                 </para>
            </listitem>
+
            <listitem>
                 <para>
                     <methodname>getDomSitemap()</methodname> generates a DOMDocument
@@ -2226,6 +2294,7 @@ echo $this->navigation()
                    container, <acronym>ACL</acronym>/role and translator.
                </para>
            </listitem>
+
            <listitem>
                <para>
                    <code>{get|set}InjectContainer()</code> gets/sets a flag
@@ -2233,6 +2302,7 @@ echo $this->navigation()
                    proxied helpers. Default is <constant>TRUE</constant>.
                </para>
            </listitem>
+
            <listitem>
                <para>
                    <code>{get|set}InjectAcl()</code> gets/sets a flag
@@ -2240,6 +2310,7 @@ echo $this->navigation()
                    proxied helpers. Default is <constant>TRUE</constant>.
                </para>
            </listitem>
+
            <listitem>
                <para>
                    <code>{get|set}InjectTranslator()</code> gets/sets a flag
@@ -2247,12 +2318,14 @@ echo $this->navigation()
                    proxied helpers. Default is <constant>TRUE</constant>.
                </para>
            </listitem>
+
            <listitem>
                <para>
                    <code>{get|set}DefaultProxy()</code> gets/sets the default
                    proxy. Default is <code>'menu'</code>.
                </para>
            </listitem>
+
            <listitem>
                <para>
                    <methodname>render()</methodname> proxies to the render method of

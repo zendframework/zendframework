@@ -15,17 +15,17 @@
         this time, the primary focus is to provide a system that allows server-side
         <acronym>PHP</acronym> code to inject logging messages into the
         <ulink url="http://www.getfirebug.com/">Firebug Console</ulink>.
-  </para>
+    </para>
 
     <para>
         The <link
             linkend="zend.log.writers.firebug"><classname>Zend_Log_Writer_Firebug</classname></link>
-        component is provided for the purpose of logging to Firebug, and a communication protocol has
-        been developed that uses <acronym>HTTP</acronym> request and response headers to send data
-        between the server and client components. It is great for logging intelligence data to the
-        browser that is generated during script execution, without interfering with the page content.
-        With this approach, it is possible to debug <acronym>AJAX</acronym> requests that require clean
-        <acronym>JSON</acronym> and <acronym>XML</acronym> responses.
+        component is provided for the purpose of logging to Firebug, and a communication protocol
+        has been developed that uses <acronym>HTTP</acronym> request and response headers to send
+        data between the server and client components. It is great for logging intelligence data to
+        the browser that is generated during script execution, without interfering with the page
+        content. With this approach, it is possible to debug <acronym>AJAX</acronym> requests that
+        require clean <acronym>JSON</acronym> and <acronym>XML</acronym> responses.
     </para>
 
     <para>

@@ -157,6 +157,7 @@ echo "$acctname\n";
 
             <table id="zend.ldap.using.theory-of-operation.account-name-canonicalization.table">
                 <title>Options for accountCanonicalForm</title>
+
                 <tgroup cols="3">
                     <thead>
                         <row>
@@ -165,32 +166,28 @@ echo "$acctname\n";
                             <entry>Example</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
-                            <entry>
-                                <constant>ACCTNAME_FORM_DN</constant>
-                            </entry>
+                            <entry><constant>ACCTNAME_FORM_DN</constant></entry>
                             <entry>1</entry>
                             <entry>CN=Alice Baker,CN=Users,DC=example,DC=com</entry>
                         </row>
+
                         <row>
-                            <entry>
-                                <constant>ACCTNAME_FORM_USERNAME</constant>
-                            </entry>
+                            <entry><constant>ACCTNAME_FORM_USERNAME</constant></entry>
                             <entry>2</entry>
                             <entry>abaker</entry>
                         </row>
+
                         <row>
-                            <entry>
-                                <constant>ACCTNAME_FORM_BACKSLASH</constant>
-                            </entry>
+                            <entry><constant>ACCTNAME_FORM_BACKSLASH</constant></entry>
                             <entry>3</entry>
                             <entry>EXAMPLE\abaker</entry>
                         </row>
+
                         <row>
-                            <entry>
-                                <constant>ACCTNAME_FORM_PRINCIPAL</constant>
-                            </entry>
+                            <entry><constant>ACCTNAME_FORM_PRINCIPAL</constant></entry>
                             <entry>4</entry>
                             <entry><filename>abaker@example.com</filename></entry>
                         </row>

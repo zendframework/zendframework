@@ -13,56 +13,63 @@
                     <entry>Description</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry>
-                        <emphasis><code>array decode(string $string)</code>
-                        </emphasis>
+                        <emphasis><code>array decode(string $string)</code></emphasis>
                     </entry>
+
                     <entry>
                         Decodes the string <varname>$string</varname> into an array of
                         <acronym>LDIF</acronym> items.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>string encode(scalar|array|Zend_Ldap_Node
                         $value, array $options)</code> </emphasis>
                     </entry>
+
                     <entry>
-                        Encode <varname>$value</varname> into a <acronym>LDIF</acronym> representation.
-                        <varname>$options</varname> is an array that may contain the following
-                        keys:
+                        Encode <varname>$value</varname> into a <acronym>LDIF</acronym>
+                        representation. <varname>$options</varname> is an array that may contain the
+                        following keys:
+
                         <variablelist>
                             <varlistentry>
                                 <term><code>'sort'</code></term>
+
                                 <listitem>
                                     <para>
                                         Sort the given attributes with <code>dn</code>
                                         following <code>objectClass</code> and following all other
-                                        attributes sorted alphabetically. <constant>TRUE</constant> by
-                                        default.
+                                        attributes sorted alphabetically. <constant>TRUE</constant>
+                                        by default.
                                     </para>
                                 </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term><code>'version'</code></term>
+
                                 <listitem>
                                     <para>
-                                        The <acronym>LDIF</acronym> format version. <code>1</code> by
-                                        default.
+                                        The <acronym>LDIF</acronym> format version. <code>1</code>
+                                        by default.
                                     </para>
                                 </listitem>
                             </varlistentry>
 
                             <varlistentry>
                                 <term><code>'wrap'</code></term>
+
                                 <listitem>
-                                <para>
-                                    The line-length. <code>78</code> by default to
-                                    conform to the <acronym>LDIF</acronym> specification.
-                                </para>
+                                    <para>
+                                        The line-length. <code>78</code> by default to
+                                        conform to the <acronym>LDIF</acronym> specification.
+                                    </para>
                                 </listitem>
                             </varlistentry>
                         </variablelist>
@@ -72,4 +79,3 @@
         </tgroup>
     </table>
 </sect3>
-

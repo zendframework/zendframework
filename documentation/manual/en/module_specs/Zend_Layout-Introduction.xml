@@ -16,35 +16,47 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 Automate selection and rendering of layouts when used with the
                 Zend Framework <acronym>MVC</acronym> components.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Provide separate scope for layout related variables and content.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Allow configuration, including layout name, layout script
                 resolution (inflection), and layout script path.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Allow disabling layouts, changing layout scripts, and other
                 states; allow these actions from within action controllers and
                 view scripts.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Follow same script resolution rules (inflection) as the <link
                 linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>,
                 but allow them to also use different rules.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Allow usage without Zend Framework <acronym>MVC</acronym> components.
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 </sect1>
 <!--

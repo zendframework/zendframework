@@ -13,6 +13,7 @@
 
         <example>
             <title>Create simple LDAP filters</title>
+
             <programlisting language="php"><![CDATA[
 $f1  = Zend_Ldap_Filter::equals('name', 'value');         // (name=value)
 $f2  = Zend_Ldap_Filter::begins('name', 'value');         // (name=value*)
@@ -29,6 +30,7 @@ $f10 = Zend_Ldap_Filter::any('name');                     // (name=*)
 
         <example>
             <title>Create more complex LDAP filters</title>
+
             <programlisting language="php"><![CDATA[
 $f1 = Zend_Ldap_Filter::ends('name', 'value')->negate(); // (!(name=*value))
 
@@ -42,7 +44,6 @@ $f5 = Zend_Ldap_Filter::andFilter($f2, $f3, $f4);
 // (|(name=value)(name=value*)(name=*value))
 $f6 = Zend_Ldap_Filter::orFilter($f2, $f3, $f4);
 ]]></programlisting>
-
         </example>
     </sect2>
 

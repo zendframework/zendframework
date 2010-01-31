@@ -1,53 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.log.writers" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Writers</title>
-  <para>
-    A Writer is an object that inherits from <classname>Zend_Log_Writer_Abstract</classname>. A Writer's
-    responsibility is to record log data to a storage backend.
-  </para>
+    <title>Writers</title>
 
-  <sect2 id="zend.log.writers.stream">
-    <title>Writing to Streams</title>
     <para>
-      <classname>Zend_Log_Writer_Stream</classname> sends log
-      data to a <ulink url="http://www.php.net/stream">PHP stream</ulink>.
+        A Writer is an object that inherits from <classname>Zend_Log_Writer_Abstract</classname>.
+        A Writer's responsibility is to record log data to a storage backend.
     </para>
 
-    <para>
-      To write log data to the PHP output buffer, use the URL <code>php://output</code>. Alternatively,
-      you can send log data directly to a stream like <constant>STDERR</constant>
-      (<code>php://stderr</code>).
+    <sect2 id="zend.log.writers.stream">
+        <title>Writing to Streams</title>
 
-      <programlisting language="php"><![CDATA[
+        <para>
+            <classname>Zend_Log_Writer_Stream</classname> sends log
+            data to a <ulink url="http://www.php.net/stream">PHP stream</ulink>.
+        </para>
+
+        <para>
+            To write log data to the PHP output buffer, use the URL <code>php://output</code>.
+            Alternatively, you can send log data directly to a stream like
+            <constant>STDERR</constant> (<code>php://stderr</code>).
+
+            <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('php://output');
 $logger = new Zend_Log($writer);
 
 $logger->info('Informational message');
 ]]></programlisting>
-    </para>
+        </para>
 
-    <para>
-      To write data to a file, use one of the
-      <ulink url="http://www.php.net/manual/en/wrappers.php#wrappers.file">Filesystem
-      URLs</ulink>:
+        <para>
+            To write data to a file, use one of the
+            <ulink url="http://www.php.net/manual/en/wrappers.php#wrappers.file">Filesystem
+            URLs</ulink>:
 
-      <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Stream('/path/to/logfile');
 $logger = new Zend_Log($writer);
 
 $logger->info('Informational message');
 ]]></programlisting>
 
-      By default, the stream opens in the append mode (<code>"a"</code>).
-      To open it with a different mode, the <classname>Zend_Log_Writer_Stream</classname> constructor
-      accepts an optional second parameter for the mode.
-    </para>
+            By default, the stream opens in the append mode (<code>"a"</code>).
+            To open it with a different mode, the <classname>Zend_Log_Writer_Stream</classname>
+            constructor accepts an optional second parameter for the mode.
+        </para>
 
-    <para>
-      The constructor of <classname>Zend_Log_Writer_Stream</classname> also accepts an existing stream resource:
+        <para>
+            The constructor of <classname>Zend_Log_Writer_Stream</classname> also accepts an
+            existing stream resource:
 
-      <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $stream = @fopen('/path/to/logfile', 'a', false);
 if (! $stream) {
     throw new Exception('Failed to open stream');
@@ -59,20 +62,22 @@ $logger = new Zend_Log($writer);
 $logger->info('Informational message');
 ]]></programlisting>
 
-      You cannot specify the mode for existing stream resources. Doing so
-      causes a <classname>Zend_Log_Exception</classname> to be thrown.
-    </para>
-  </sect2>
+            You cannot specify the mode for existing stream resources. Doing so
+            causes a <classname>Zend_Log_Exception</classname> to be thrown.
+        </para>
+    </sect2>
 
-  <sect2 id="zend.log.writers.database">
-    <title>Writing to Databases</title>
-    <para>
-      <classname>Zend_Log_Writer_Db</classname> writes log information to a database table using
-      <classname>Zend_Db</classname>. The constructor of <classname>Zend_Log_Writer_Db</classname> receives
-      a <classname>Zend_Db_Adapter</classname> instance, a table name, and a mapping of database
-      columns to event data items:
+    <sect2 id="zend.log.writers.database">
+        <title>Writing to Databases</title>
 
-      <programlisting language="php"><![CDATA[
+        <para>
+            <classname>Zend_Log_Writer_Db</classname> writes log information to a database table
+            using <classname>Zend_Db</classname>. The constructor of
+            <classname>Zend_Log_Writer_Db</classname> receives a
+            <classname>Zend_Db_Adapter</classname> instance, a table name, and a mapping of database
+            columns to event data items:
+
+            <programlisting language="php"><![CDATA[
 $params = array ('host'     => '127.0.0.1',
                  'username' => 'malory',
                  'password' => '******',
@@ -87,42 +92,43 @@ $logger = new Zend_Log($writer);
 $logger->info('Informational message');
 ]]></programlisting>
 
-      The example above writes a single row of log data to the database table named
-      <code>log_table_name</code> table. The database column named <code>lvl</code>
-      receives the priority number and the column named <code>msg</code> receives the
-      log message.
-    </para>
+            The example above writes a single row of log data to the database table named
+            <code>log_table_name</code> table. The database column named <code>lvl</code>
+            receives the priority number and the column named <code>msg</code> receives the
+            log message.
+        </para>
+    </sect2>
 
-  </sect2>
+    <xi:include href="Zend_Log-Writers-Firebug.xml" />
+    <xi:include href="Zend_Log-Writers-Mail.xml" />
+    <xi:include href="Zend_Log-Writers-Syslog.xml" />
+    <xi:include href="Zend_Log-Writers-ZendMonitor.xml" />
 
-  <xi:include href="Zend_Log-Writers-Firebug.xml" />
-  <xi:include href="Zend_Log-Writers-Mail.xml" />
-  <xi:include href="Zend_Log-Writers-Syslog.xml" />
-  <xi:include href="Zend_Log-Writers-ZendMonitor.xml" />
+    <sect2 id="zend.log.writers.null">
+        <title>Stubbing Out the Writer</title>
 
-  <sect2 id="zend.log.writers.null">
-    <title>Stubbing Out the Writer</title>
-    <para>
-      The <classname>Zend_Log_Writer_Null</classname> is a stub that does not write log data to anything.
-      It is useful for disabling logging or stubbing out logging during tests:
+        <para>
+            The <classname>Zend_Log_Writer_Null</classname> is a stub that does not write log data
+            to anything. It is useful for disabling logging or stubbing out logging during tests:
 
-      <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $writer = new Zend_Log_Writer_Null;
 $logger = new Zend_Log($writer);
 
 // goes nowhere
 $logger->info('Informational message');
 ]]></programlisting>
-    </para>
-  </sect2>
+        </para>
+    </sect2>
 
-  <sect2 id="zend.log.writers.mock">
-    <title>Testing with the Mock</title>
-    <para>
-      The <classname>Zend_Log_Writer_Mock</classname> is a very simple writer that records
-      the raw data it receives in an array exposed as a public property.
+    <sect2 id="zend.log.writers.mock">
+        <title>Testing with the Mock</title>
 
-      <programlisting language="php"><![CDATA[
+        <para>
+            The <classname>Zend_Log_Writer_Mock</classname> is a very simple writer that records
+            the raw data it receives in an array exposed as a public property.
+
+            <programlisting language="php"><![CDATA[
 $mock = new Zend_Log_Writer_Mock;
 $logger = new Zend_Log($mock);
 
@@ -138,22 +144,22 @@ var_dump($mock->events[0]);
 //    [priorityName] => INFO
 // )
 ]]></programlisting>
-    </para>
+        </para>
 
-    <para>
-      To clear the events logged by the mock, simply set <code>$mock->events = array()</code>.
-    </para>
-  </sect2>
+        <para>
+            To clear the events logged by the mock, simply set <code>$mock->events = array()</code>.
+        </para>
+    </sect2>
 
-  <sect2 id="zend.log.writers.compositing">
-    <title>Compositing Writers</title>
+    <sect2 id="zend.log.writers.compositing">
+        <title>Compositing Writers</title>
 
-    <para>
-      There is no composite Writer object. However, a Log instance can write
-      to any number of Writers. To do this, use the <methodname>addWriter()</methodname>
-      method:
+        <para>
+            There is no composite Writer object. However, a Log instance can write
+            to any number of Writers. To do this, use the <methodname>addWriter()</methodname>
+            method:
 
-      <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $writer1 = new Zend_Log_Writer_Stream('/path/to/first/logfile');
 $writer2 = new Zend_Log_Writer_Stream('/path/to/second/logfile');
 
@@ -164,6 +170,6 @@ $logger->addWriter($writer2);
 // goes to both writers
 $logger->info('Informational message');
 ]]></programlisting>
-    </para>
-  </sect2>
+        </para>
+    </sect2>
 </sect1>

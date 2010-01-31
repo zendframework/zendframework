@@ -5,10 +5,12 @@
 
     <sect2 id="zend.json.advanced.objects1">
         <title>JSON Objects</title>
+
         <para>
-            When encoding <acronym>PHP</acronym> objects as <acronym>JSON</acronym>, all public properties of that object
-            will be encoded in a <acronym>JSON</acronym> object.
+            When encoding <acronym>PHP</acronym> objects as <acronym>JSON</acronym>, all public
+            properties of that object will be encoded in a <acronym>JSON</acronym> object.
         </para>
+
         <para>
             <acronym>JSON</acronym> does not allow object references, so care should be taken not to
             encode objects with recursive references. If you have issues with
@@ -17,28 +19,32 @@
             parameter to check for recursion; if an object is serialized twice, an
             exception will be thrown.
         </para>
+
         <para>
             Decoding <acronym>JSON</acronym> objects poses an additional difficulty, however, since
-            Javascript objects correspond most closely to <acronym>PHP</acronym>'s associative array.
-            Some suggest that a class identifier should be passed, and an object
+            Javascript objects correspond most closely to <acronym>PHP</acronym>'s associative
+            array. Some suggest that a class identifier should be passed, and an object
             instance of that class should be created and populated with the
             key/value pairs of the <acronym>JSON</acronym> object; others feel this could pose a
             substantial security risk.
         </para>
+
         <para>
-            By default, <classname>Zend_Json</classname> will decode <acronym>JSON</acronym> objects as
-            associative arrays. However, if you desire an object returned, you can
-            specify this:
+            By default, <classname>Zend_Json</classname> will decode <acronym>JSON</acronym> objects
+            as associative arrays. However, if you desire an object returned, you can specify this:
         </para>
+
         <programlisting language="php"><![CDATA[
 // Decode JSON objects as PHP objects
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 ]]></programlisting>
+
         <para>
             Any objects thus decoded are returned as <code>StdClass</code> objects
             with properties corresponding to the key/value pairs in the <acronym>JSON</acronym>
             notation.
         </para>
+
         <para>
             The recommendation of Zend Framework is that the individual
             developer should decide how to decode <acronym>JSON</acronym> objects. If an object of a
@@ -53,9 +59,9 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         <para>
             If you are encoding <acronym>PHP</acronym> objects by default the encoding mechanism
             can only access public properties of these objects. When a method
-            <methodname>toJson()</methodname> is implemented on an object to encode, <classname>Zend_Json</classname>
-            calls this method and expects the object to return a <acronym>JSON</acronym> representation
-            of its internal state.
+            <methodname>toJson()</methodname> is implemented on an object to encode,
+            <classname>Zend_Json</classname> calls this method and expects the object to return a
+            <acronym>JSON</acronym> representation of its internal state.
         </para>
     </sect2>
 
@@ -63,13 +69,13 @@ $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
         <title>Internal Encoder/Decoder</title>
 
         <para>
-            <classname>Zend_Json</classname> has two different modes depending if ext/json is enabled in
-            your <acronym>PHP</acronym> installation or not. If ext/json is installed by default
-            <methodname>json_encode()</methodname> and <methodname>json_decode()</methodname> functions
-            are used for encoding and decoding <acronym>JSON</acronym>. If ext/json is not installed
-            a Zend Framework implementation in <acronym>PHP</acronym> code is used for en-/decoding.
-            This is considerably slower than using the php extension, but behaves
-            exactly the same.
+            <classname>Zend_Json</classname> has two different modes depending if ext/json is
+            enabled in your <acronym>PHP</acronym> installation or not. If ext/json is installed by
+            default <methodname>json_encode()</methodname> and
+            <methodname>json_decode()</methodname> functions are used for encoding and decoding
+            <acronym>JSON</acronym>. If ext/json is not installed a Zend Framework implementation in
+            <acronym>PHP</acronym> code is used for en-/decoding. This is considerably slower than
+            using the php extension, but behaves exactly the same.
         </para>
 
         <para>
@@ -86,21 +92,22 @@ Zend_Json::$useBuiltinEncoderDecoder = true:
         <title>JSON Expressions</title>
 
         <para>
-            Javascript makes heavy use of anonymnous function callbacks, which
-            can be saved within <acronym>JSON</acronym> object variables. Still they only work if not
+            Javascript makes heavy use of anonymnous function callbacks, which can be saved
+            within <acronym>JSON</acronym> object variables. Still they only work if not
             returned inside double qoutes, which <classname>Zend_Json</classname> naturally does.
-            With the Expression support for <classname>Zend_Json</classname> support you can encode <acronym>JSON</acronym>
-            objects with valid javascript callbacks. This works for both <methodname>json_encode()</methodname>
-            or the internal encoder.
+            With the Expression support for <classname>Zend_Json</classname> support you can encode
+            <acronym>JSON</acronym> objects with valid javascript callbacks. This works for both
+            <methodname>json_encode()</methodname> or the internal encoder.
         </para>
 
         <para>
-            A javascript callback is represented using the <classname>Zend_Json_Expr</classname> object.
-            It implements the value object pattern and is immutable. You can set the javascript
-            expression as the first constructor argument. By default <classname>Zend_Json::encode</classname>
-            does not encode javascript callbacks, you have to pass the option <code>'enableJsonExprFinder' = true</code>
-            into the <code>encode</code> function. If enabled the expression support works for all nested expressions
-            in large object structures. A usage example would look like:
+            A javascript callback is represented using the <classname>Zend_Json_Expr</classname>
+            object. It implements the value object pattern and is immutable. You can set the
+            javascript expression as the first constructor argument. By default
+            <classname>Zend_Json::encode</classname> does not encode javascript callbacks, you have
+            to pass the option <code>'enableJsonExprFinder' = true</code> into the
+            <code>encode</code> function. If enabled the expression support works for all nested
+            expressions in large object structures. A usage example would look like:
         </para>
 
         <programlisting language="php"><![CDATA[

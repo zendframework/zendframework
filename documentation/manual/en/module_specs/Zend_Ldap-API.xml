@@ -22,9 +22,11 @@
                         <entry>Description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><property>host</property></entry>
+
                         <entry>
                             The default hostname of <acronym>LDAP</acronym> server if not
                             supplied to <methodname>connect()</methodname> (also may be used
@@ -32,15 +34,19 @@
                             <methodname>bind()</methodname>).
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>port</property></entry>
+
                         <entry>
                             Default port of <acronym>LDAP</acronym> server if not supplied to
                             <methodname>connect()</methodname>.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>useStartTls</property></entry>
+
                         <entry>
                             Whether or not the <acronym>LDAP</acronym> client should use
                             <acronym>TLS</acronym> (aka <acronym>SSLv2</acronym>) encrypted
@@ -55,8 +61,10 @@
                             this newer mechanism.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>useSsl</property></entry>
+
                         <entry>
                             Whether or not the <acronym>LDAP</acronym> client should use
                             <acronym>SSL</acronym> encrypted transport. The
@@ -64,8 +72,10 @@
                             options are mutually exclusive.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>username</property></entry>
+
                         <entry>
                             The default credentials username. Some servers require that this
                             be in DN form. This must be given in DN form if the
@@ -73,15 +83,19 @@
                             should be possible with simple usernames.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>password</property></entry>
+
                         <entry>
                             The default credentials password (used only with username
                             above).
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>bindRequiresDn</property></entry>
+
                         <entry>
                             If <constant>TRUE</constant>, this instructs
                             <classname>Zend_Ldap</classname> to retrieve the DN for the
@@ -89,16 +103,20 @@
                             already in DN form. The default value is <constant>FALSE</constant>.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>baseDn</property></entry>
+
                         <entry>
                             The default base DN used for searching (e.g., for accounts).
                             This option is required for most account related operations and should
                             indicate the DN under which accounts are located.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountCanonicalForm</property></entry>
+
                         <entry>
                             A small integer indicating the form to which account names
                             should be canonicalized. See the <link
@@ -107,23 +125,29 @@
                             section below.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountDomainName</property></entry>
+
                         <entry>
-                            The <acronym>FQDN</acronym> domain for which the target <acronym>LDAP</acronym> server
-                            is an authority (e.g., example.com).
+                            The <acronym>FQDN</acronym> domain for which the target
+                            <acronym>LDAP</acronym> server is an authority (e.g., example.com).
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountDomainNameShort</property></entry>
+
                         <entry>
                             The 'short' domain for which the target <acronym>LDAP</acronym> server
                             is an authority. This is usually used to specify the NetBIOS
                             domain name for Windows networks but may also be used by non-AD servers.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountFilterFormat</property></entry>
+
                         <entry>
                             The <acronym>LDAP</acronym> search filter used to search for accounts.
                             This string is a <ulink
@@ -137,8 +161,10 @@
                             Users of custom schemas may need to change this option.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>allowEmptyPassword</property></entry>
+
                         <entry>
                             Some <acronym>LDAP</acronym> servers can be configured to accept an
                             empty string password as an anonymous bind. This behavior is almost
@@ -147,16 +173,20 @@
                             empty string password to be submitted during the bind.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>optReferrals</property></entry>
+
                         <entry>
                             If set to <constant>TRUE</constant>, this option indicates to the
                             <acronym>LDAP</acronym> client that referrals should be followed.
                             The default value is <constant>FALSE</constant>.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>tryUsernameSplit</property></entry>
+
                         <entry>
                             If set to <constant>FALSE</constant>, this option indicates that the
                             given username should not be split at the first <emphasis>@</emphasis>

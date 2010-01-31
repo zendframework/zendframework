@@ -5,13 +5,13 @@
 
     <para>
         <classname>Zend_Json_Server</classname> is a <ulink
-            url="http://groups.google.com/group/json-rpc/">JSON-RPC</ulink>
-        server implementation. It supports both the
-        <ulink url="http://json-rpc.org/wiki/specification">JSON-RPC
-            version 1 specification</ulink> as well as the
-        <ulink url="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">version 2 specification</ulink>;
-        additionally, it provides a <acronym>PHP</acronym> implementation of the
-        <ulink url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">Service
+            url="http://groups.google.com/group/json-rpc/">JSON-RPC</ulink> server implementation.
+        It supports both the <ulink url="http://json-rpc.org/wiki/specification">JSON-RPC
+            version 1 specification</ulink> as well as the <ulink
+            url="http://groups.google.com/group/json-rpc/web/json-rpc-1-2-proposal">version 2
+            specification</ulink>; additionally, it provides a <acronym>PHP</acronym> implementation
+        of the <ulink
+            url="http://groups.google.com/group/json-schema/web/service-mapping-description-proposal">Service
             Mapping Description (SMD) specification</ulink>
         for providing service metadata to service consumers.
     </para>
@@ -26,14 +26,17 @@
 
     <itemizedlist>
         <listitem><para>Instantiate the server object</para></listitem>
-        <listitem><para>Attach one or more functions and/or classes/objects to
-                the server object</para></listitem>
+
+        <listitem>
+            <para>Attach one or more functions and/or classes/objects to the server object</para>
+        </listitem>
+
         <listitem><para>handle() the request</para></listitem>
     </itemizedlist>
 
     <para>
-        <classname>Zend_Json_Server</classname> utilizes <xref linkend="zend.server.reflection" /> to
-        perform reflection on any attached classes or functions, and uses that
+        <classname>Zend_Json_Server</classname> utilizes <xref linkend="zend.server.reflection" />
+        to perform reflection on any attached classes or functions, and uses that
         information to build both the SMD and enforce method call signatures. As
         such, it is imperative that any attached functions and/or class methods
         have full <acronym>PHP</acronym> docblocks documenting, minimally:
@@ -213,39 +216,95 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><methodname>addFunction($function)</methodname>: Specify a
-                        userland function to attach to the server.</para></listitem>
-                <listitem><para><methodname>setClass($class)</methodname>: Specify a class
+                <listitem>
+                    <para>
+                        <methodname>addFunction($function)</methodname>: Specify a
+                        userland function to attach to the server.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setClass($class)</methodname>: Specify a class
                         or object to attach to the server; all public methods of
-                        that item will be exposed as JSON-RPC methods.</para></listitem>
-                <listitem><para><code>fault($fault = null, $code = 404, $data =
-                        null)</code>: Create and return a
-                        <classname>Zend_Json_Server_Error</classname> object.</para></listitem>
-                <listitem><para><methodname>handle($request = false)</methodname>: Handle a
+                        that item will be exposed as JSON-RPC methods.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>fault($fault = null, $code = 404, $data = null)</code>: Create and
+                        return a <classname>Zend_Json_Server_Error</classname> object.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>handle($request = false)</methodname>: Handle a
                         JSON-RPC request; optionally, pass a
                         <classname>Zend_Json_Server_Request</classname> object to utilize
-                        (creates one by default).</para></listitem>
-                <listitem><para><methodname>getFunctions()</methodname>: Return a list of
-                        all attached methods.</para></listitem>
-                <listitem><para><code>setRequest(Zend_Json_Server_Request
-                        $request)</code>: Specify a request object for the
-                        server to utilize.</para></listitem>
-                <listitem><para><methodname>getRequest()</methodname>: Retrieve the request
-                        object used by the server.</para></listitem>
-                <listitem><para><code>setResponse(Zend_Json_Server_Response
-                        $response)</code>: Set the response object for the
-                        server to utilize.</para></listitem>
-                <listitem><para><methodname>getResponse()</methodname>: Retrieve the
-                        response object used by the server.</para></listitem>
-                <listitem><para><methodname>setAutoEmitResponse($flag)</methodname>:
+                        (creates one by default).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getFunctions()</methodname>: Return a list of
+                        all attached methods.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>setRequest(Zend_Json_Server_Request $request)</code>: Specify a
+                        request object for the server to utilize.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getRequest()</methodname>: Retrieve the request
+                        object used by the server.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>setResponse(Zend_Json_Server_Response $response)</code>: Set the
+                        response object for the server to utilize.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getResponse()</methodname>: Retrieve the
+                        response object used by the server.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setAutoEmitResponse($flag)</methodname>:
                         Indicate whether the server should automatically emit
                         the response and all headers; by default, this is
-                        <constant>TRUE</constant>.</para></listitem>
-                <listitem><para><methodname>autoEmitResponse()</methodname>: Determine if
-                        auto-emission of the response is enabled.</para></listitem>
-                <listitem><para><methodname>getServiceMap()</methodname>: Retrieve the
+                        <constant>TRUE</constant>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>autoEmitResponse()</methodname>: Determine if
+                        auto-emission of the response is enabled.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getServiceMap()</methodname>: Retrieve the
                         service map description in the form of a
-                        <classname>Zend_Json_Server_Smd</classname> object</para></listitem>
+                        <classname>Zend_Json_Server_Smd</classname> object
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
 
@@ -258,8 +317,8 @@ $server->handle();
                 you to set necessary portions of the JSON-RPC request, including
                 the request ID, parameters, and JSON-RPC specification version.
                 It has the ability to load itself via <acronym>JSON</acronym> or a set of options,
-                and can render itself as <acronym>JSON</acronym> via the <methodname>toJson()</methodname>
-                method.
+                and can render itself as <acronym>JSON</acronym> via the
+                <methodname>toJson()</methodname> method.
             </para>
 
             <para>
@@ -267,55 +326,121 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><methodname>setOptions(array $options)</methodname>: Specify
+                <listitem>
+                    <para>
+                        <methodname>setOptions(array $options)</methodname>: Specify
                         object configuration. <varname>$options</varname> may contain
                         keys matching any 'set' method:
                         <methodname>setParams()</methodname>, <methodname>setMethod()</methodname>,
                         <methodname>setId()</methodname>, and
-                        <methodname>setVersion()</methodname>.</para></listitem>
-                <listitem><para><methodname>addParam($value, $key = null)</methodname>: Add
+                        <methodname>setVersion()</methodname>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>addParam($value, $key = null)</methodname>: Add
                         a parameter to use with the method call. Parameters can be
-                        just the values, or can optionally include the parameter
-                        name.</para></listitem>
-                <listitem><para><methodname>addParams(array $params)</methodname>: Add
+                        just the values, or can optionally include the parameter name.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>addParams(array $params)</methodname>: Add
                         multiple parameters at once; proxies to
-                        <methodname>addParam()</methodname></para></listitem>
-                <listitem><para><methodname>setParams(array $params)</methodname>: Set all
-                        parameters at once; overwrites any existing
-                        parameters.</para></listitem>
-                <listitem><para><methodname>getParam($index)</methodname>: Retrieve a
-                        parameter by position or name.</para></listitem>
-                <listitem><para><methodname>getParams()</methodname>: Retrieve all
-                        parameters at once.</para></listitem>
-                <listitem><para><methodname>setMethod($name)</methodname>: Set the method to
-                        call.</para></listitem>
-                <listitem><para><methodname>getMethod()</methodname>: Retrieve the method
-                        that will be called.</para></listitem>
-                <listitem><para><methodname>isMethodError()</methodname>: Determine whether
-                        or not the request is malformed and would result in an
-                        error.</para></listitem>
-                <listitem><para><methodname>setId($name)</methodname>: Set the request
-                        identifier (used by the client to match requests to
-                        responses).</para></listitem>
-                <listitem><para><methodname>getId()</methodname>: Retrieve the request
-                        identifier.</para></listitem>
-                <listitem><para><methodname>setVersion($version)</methodname>: Set the
+                        <methodname>addParam()</methodname>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setParams(array $params)</methodname>: Set all
+                        parameters at once; overwrites any existing parameters.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getParam($index)</methodname>: Retrieve a
+                        parameter by position or name.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getParams()</methodname>: Retrieve all parameters at once.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setMethod($name)</methodname>: Set the method to call.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getMethod()</methodname>: Retrieve the method
+                        that will be called.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>isMethodError()</methodname>: Determine whether
+                        or not the request is malformed and would result in an error.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setId($name)</methodname>: Set the request
+                        identifier (used by the client to match requests to responses).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getId()</methodname>: Retrieve the request identifier.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setVersion($version)</methodname>: Set the
                         JSON-RPC specification version the request conforms to.
-                        May be either '1.0' or '2.0'.</para></listitem>
-                <listitem><para><methodname>getVersion()</methodname>: Retrieve the JSON-RPC
-                        specification version used by the
-                        request.</para></listitem>
-                <listitem><para><methodname>loadJson($json)</methodname>: Load the request
-                        object from a <acronym>JSON</acronym> string.</para></listitem>
-                <listitem><para><methodname>toJson()</methodname>: Render the request as
-                        a <acronym>JSON</acronym> string.</para></listitem>
+                        May be either '1.0' or '2.0'.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getVersion()</methodname>: Retrieve the JSON-RPC
+                        specification version used by the request.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>loadJson($json)</methodname>: Load the request
+                        object from a <acronym>JSON</acronym> string.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>toJson()</methodname>: Render the request as
+                        a <acronym>JSON</acronym> string.
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>
                 An <acronym>HTTP</acronym> specific version is available via
                 <classname>Zend_Json_Server_Request_Http</classname>. This class will
-                retrieve the request via <code>php://input</code>, and allows
-                access to the raw <acronym>JSON</acronym> via the <methodname>getRawJson()</methodname> method.
+                retrieve the request via <code>php://input</code>, and allows access to the raw
+                <acronym>JSON</acronym> via the <methodname>getRawJson()</methodname> method.
             </para>
         </sect3>
 
@@ -336,33 +461,87 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><methodname>setResult($value)</methodname>: Set the response
-                    result.</para></listitem>
-                <listitem><para><methodname>getResult()</methodname>: Retrieve the response
-                    result.</para></listitem>
-                <listitem><para><code>setError(Zend_Json_Server_Error
-                    $error)</code>: Set an error object. If set, this will be
-                    used as the response when serializing to <acronym>JSON</acronym>.</para></listitem>
-                <listitem><para><methodname>getError()</methodname>: Retrieve the error
-                    object, if any.</para></listitem>
-                <listitem><para><methodname>isError()</methodname>: Whether or not the
-                    response is an error response.</para></listitem>
-                <listitem><para><methodname>setId($name)</methodname>: Set the request
-                    identifier (so the client may match the response with
-                    the original request).</para></listitem>
-                <listitem><para><methodname>getId()</methodname>: Retrieve the request
-                    identifier.</para></listitem>
-                <listitem><para><methodname>setVersion($version)</methodname>: Set the
-                    JSON-RPC version the response conforms to.</para></listitem>
-                <listitem><para><methodname>getVersion()</methodname>: Retrieve the JSON-RPC
-                    version the response conforms to.</para></listitem>
-                <listitem><para><methodname>toJson()</methodname>: Serialize the response to
-                    <acronym>JSON</acronym>. If the response is an error response, serializes the
-                    error object.</para></listitem>
-                <listitem><para><methodname>setServiceMap($serviceMap)</methodname>: Set the
-                    service map object for the response.</para></listitem>
-                <listitem><para><methodname>getServiceMap()</methodname>: Retrieve the
-                    service map object, if any.</para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setResult($value)</methodname>: Set the response result.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getResult()</methodname>: Retrieve the response result.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>setError(Zend_Json_Server_Error $error)</code>: Set an error object.
+                        If set, this will be used as the response when serializing to
+                        <acronym>JSON</acronym>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getError()</methodname>: Retrieve the error object, if any.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>isError()</methodname>: Whether or not the response is an error
+                        response.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setId($name)</methodname>: Set the request identifier (so the
+                        client may match the response with the original request).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getId()</methodname>: Retrieve the request identifier.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setVersion($version)</methodname>: Set the
+                        JSON-RPC version the response conforms to.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getVersion()</methodname>: Retrieve the JSON-RPC
+                        version the response conforms to.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>toJson()</methodname>: Serialize the response to
+                        <acronym>JSON</acronym>. If the response is an error response, serializes
+                        the error object.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setServiceMap($serviceMap)</methodname>: Set the
+                        service map object for the response.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getServiceMap()</methodname>: Retrieve the
+                        service map object, if any.
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>
@@ -397,25 +576,59 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><methodname>setCode($code)</methodname>: Set the error code;
-                    if the code is not in the accepted XML-RPC error code range,
-                    -32000 will be assigned.</para></listitem>
-                <listitem><para><methodname>getCode()</methodname>: Retrieve the current
-                    error code.</para></listitem>
-                <listitem><para><methodname>setMessage($message)</methodname>: Set the error
-                    message.</para></listitem>
-                <listitem><para><methodname>getMessage()</methodname>: Retrieve the current
-                    error message.</para></listitem>
-                <listitem><para><methodname>setData($data)</methodname>: Set auxiliary data
-                    further qualifying the error, such as a
-                    backtrace.</para></listitem>
-                <listitem><para><methodname>getData()</methodname>: Retrieve any current
-                    auxiliary error data.</para></listitem>
-                <listitem><para><methodname>toArray()</methodname>: Cast the error to an
-                    array. The array will contain the keys 'code', 'message',
-                    and 'data'.</para></listitem>
-                <listitem><para><methodname>toJson()</methodname>: Cast the error to a
-                    JSON-RPC error representation.</para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>setCode($code)</methodname>: Set the error code;
+                        if the code is not in the accepted XML-RPC error code range,
+                        -32000 will be assigned.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getCode()</methodname>: Retrieve the current error code.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setMessage($message)</methodname>: Set the error message.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getMessage()</methodname>: Retrieve the current error message.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setData($data)</methodname>: Set auxiliary data
+                        further qualifying the error, such as a backtrace.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getData()</methodname>: Retrieve any current auxiliary error
+                        data.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>toArray()</methodname>: Cast the error to an
+                        array. The array will contain the keys 'code', 'message', and 'data'.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>toJson()</methodname>: Cast the error to a
+                        JSON-RPC error representation.
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
 
@@ -474,42 +687,99 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><methodname>setOptions(array $options)</methodname>: Setup
+                <listitem>
+                    <para>
+                        <methodname>setOptions(array $options)</methodname>: Setup
                         an SMD object from an array of options. All mutators
-                        (methods beginning with 'set') can be used as
-                        keys.</para></listitem>
-                <listitem><para><methodname>setTransport($transport)</methodname>: Set the
-                        transport used to access the service; only POST is
-                        currently supported.</para></listitem>
-                <listitem><para><methodname>getTransport()</methodname>: Get the current
-                        service transport.</para></listitem>
-                <listitem><para><methodname>setEnvelope($envelopeType)</methodname>: Set the
+                        (methods beginning with 'set') can be used as keys.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setTransport($transport)</methodname>: Set the
+                        transport used to access the service; only POST is currently supported.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getTransport()</methodname>: Get the current service transport.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setEnvelope($envelopeType)</methodname>: Set the
                         request envelope that should be used to access the
                         service. Currently, supports the constants
                         <constant>Zend_Json_Server_Smd::ENV_JSONRPC_1</constant> and
-                        <constant>Zend_Json_Server_Smd::ENV_JSONRPC_2</constant>.</para></listitem>
-                <listitem><para><methodname>getEnvelope()</methodname>: Get the current
-                        request envelope.</para></listitem>
-                <listitem><para><methodname>setContentType($type)</methodname>: Set the
-                        content type requests should use (by default, this is
-                        'application/json').</para></listitem>
-                <listitem><para><methodname>getContentType()</methodname>: Get the current
-                        content type for requests to the service.</para></listitem>
-                <listitem><para><methodname>setTarget($target)</methodname>: Set the <acronym>URL</acronym>
-                        endpoint for the service.</para></listitem>
-                <listitem><para><methodname>getTarget()</methodname>: Get the <acronym>URL</acronym> endpoint
-                        for the service.</para></listitem>
-                <listitem><para><methodname>setId($id)</methodname>: Typically, this is the
-                        <acronym>URL</acronym> endpoint of the service (same as the
-                        target).</para></listitem>
-                <listitem><para><methodname>getId()</methodname>: Retrieve the service ID
-                        (typically the <acronym>URL</acronym> endpoint of the
-                        service).</para></listitem>
-                <listitem><para><methodname>setDescription($description)</methodname>: Set a
+                        <constant>Zend_Json_Server_Smd::ENV_JSONRPC_2</constant>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getEnvelope()</methodname>: Get the current request envelope.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setContentType($type)</methodname>: Set the
+                        content type requests should use (by default, this is 'application/json').
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getContentType()</methodname>: Get the current
+                        content type for requests to the service.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setTarget($target)</methodname>: Set the <acronym>URL</acronym>
+                        endpoint for the service.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getTarget()</methodname>: Get the <acronym>URL</acronym>
+                        endpoint for the service.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setId($id)</methodname>: Typically, this is the
+                        <acronym>URL</acronym> endpoint of the service (same as the target).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getId()</methodname>: Retrieve the service ID
+                        (typically the <acronym>URL</acronym> endpoint of the service).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setDescription($description)</methodname>: Set a
                         service description (typically narrative information
-                        describing the purpose of the service).</para></listitem>
-                <listitem><para><methodname>getDescription()</methodname>: Get the service
-                        description.</para></listitem>
+                        describing the purpose of the service).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getDescription()</methodname>: Get the service description.
+                    </para>
+                </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setDojoCompatible($flag)</methodname>: Set a flag indicating
@@ -518,31 +788,76 @@ $server->handle();
                         be formatted to comply with the format that Dojo's JSON-RPC client expects.
                     </para>
                 </listitem>
-                <listitem><para><methodname>isDojoCompatible()</methodname>: Returns the
-                        value of the Dojo compatibility flag (<constant>FALSE</constant>, by
-                        default).</para></listitem>
-                <listitem><para><methodname>addService($service)</methodname>: Add a service
+
+                <listitem>
+                    <para>
+                        <methodname>isDojoCompatible()</methodname>: Returns the value of the
+                        Dojo compatibility flag (<constant>FALSE</constant>, by default).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>addService($service)</methodname>: Add a service
                         to the map. May be an array of information to pass to
                         the constructor of
                         <classname>Zend_Json_Server_Smd_Service</classname>, or an
-                        instance of that class.</para></listitem>
-                <listitem><para><methodname>addServices(array $services)</methodname>: Add
-                        multiple services at once.</para></listitem>
-                <listitem><para><methodname>setServices(array $services)</methodname>: Add
-                        multiple services at once, overwriting any previously
-                        set services.</para></listitem>
-                <listitem><para><methodname>getService($name)</methodname>: Get a service by
-                        its name.</para></listitem>
-                <listitem><para><methodname>getServices()</methodname>: Get all attached
-                        services.</para></listitem>
-                <listitem><para><methodname>removeService($name)</methodname>: Remove a
-                        service from the map.</para></listitem>
-                <listitem><para><methodname>toArray()</methodname>: Cast the service map to
-                        an array.</para></listitem>
-                <listitem><para><methodname>toDojoArray()</methodname>: Cast the service map
-                        to an array compatible with Dojo Toolkit.</para></listitem>
-                <listitem><para><methodname>toJson()</methodname>: Cast the service map to a
-                        <acronym>JSON</acronym> representation.</para></listitem>
+                        instance of that class.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>addServices(array $services)</methodname>: Add
+                        multiple services at once.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setServices(array $services)</methodname>: Add
+                        multiple services at once, overwriting any previously set services.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getService($name)</methodname>: Get a service by its name.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getServices()</methodname>: Get all attached services.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>removeService($name)</methodname>: Remove a
+                        service from the map.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>toArray()</methodname>: Cast the service map to an array.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>toDojoArray()</methodname>: Cast the service map
+                        to an array compatible with Dojo Toolkit.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>toJson()</methodname>: Cast the service map to a
+                        <acronym>JSON</acronym> representation.
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>
@@ -551,65 +866,157 @@ $server->handle();
             </para>
 
             <itemizedlist>
-                <listitem><para><methodname>setOptions(array $options)</methodname>: Set
+                <listitem>
+                    <para>
+                        <methodname>setOptions(array $options)</methodname>: Set
                         object state from an array. Any mutator (methods
-                        beginning with 'set') may be used as a key and set via
-                        this method.</para></listitem>
-                <listitem><para><methodname>setName($name)</methodname>: Set the service
-                        name (typically, the function or method name).</para></listitem>
-                <listitem><para><methodname>getName()</methodname>: Retrieve the service
-                        name.</para></listitem>
-                <listitem><para><methodname>setTransport($transport)</methodname>: Set the
+                        beginning with 'set') may be used as a key and set via this method.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setName($name)</methodname>: Set the service
+                        name (typically, the function or method name).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getName()</methodname>: Retrieve the service name.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setTransport($transport)</methodname>: Set the
                         service transport (currently, only transports supported
-                        by <classname>Zend_Json_Server_Smd</classname> are allowed).</para></listitem>
-                <listitem><para><methodname>getTransport()</methodname>: Retrieve the
-                        current transport.</para></listitem>
-                <listitem><para><methodname>setTarget($target)</methodname>: Set the <acronym>URL</acronym>
+                        by <classname>Zend_Json_Server_Smd</classname> are allowed).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getTransport()</methodname>: Retrieve the current transport.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setTarget($target)</methodname>: Set the <acronym>URL</acronym>
                         endpoint of the service (typically, this will be the
-                        same as the overall SMD to which the service is
-                        attached).</para></listitem>
-                <listitem><para><methodname>getTarget()</methodname>: Get the <acronym>URL</acronym> endpoint
-                        of the service.</para></listitem>
-                <listitem><para><methodname>setEnvelope($envelopeType)</methodname>: Set the
+                        same as the overall SMD to which the service is attached).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getTarget()</methodname>: Get the <acronym>URL</acronym>
+                        endpoint of the service.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setEnvelope($envelopeType)</methodname>: Set the
                         service envelope (currently, only envelopes supported
-                        by <classname>Zend_Json_Server_Smd</classname> are allowed).</para></listitem>
-                <listitem><para><methodname>getEnvelope()</methodname>: Retrieve the service
-                        envelope type.</para></listitem>
-                <listitem><para><code>addParam($type, array $options = array(),
+                        by <classname>Zend_Json_Server_Smd</classname> are allowed).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getEnvelope()</methodname>: Retrieve the service envelope type.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <code>addParam($type, array $options = array(),
                             $order = null)</code>: Add a parameter to the
                         service. By default, only the parameter type is
                         necessary. However, you may also specify the order, as
-                        well as options such as:</para>
+                        well as options such as:
+                    </para>
+
                     <itemizedlist>
-                        <listitem><para><emphasis>name</emphasis>: the parameter
-                            name</para></listitem>
-                        <listitem><para><emphasis>optional</emphasis>: whether
-                            or not the parameter is optional</para></listitem>
-                        <listitem><para><emphasis>default</emphasis>: a default
-                            value for the parameter</para></listitem>
-                        <listitem><para><emphasis>description</emphasis>: text
-                            describing the parameter</para></listitem>
+                        <listitem>
+                            <para>
+                                <emphasis>name</emphasis>: the parameter name
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <emphasis>optional</emphasis>: whether or not the parameter is
+                                optional
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <emphasis>default</emphasis>: a default value for the parameter
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <emphasis>description</emphasis>: text describing the parameter
+                            </para>
+                        </listitem>
                     </itemizedlist>
                 </listitem>
-                <listitem><para><methodname>addParams(array $params)</methodname>: Add
-                    several parameters at once; each param should be an assoc
-                    array containing minimally the key 'type' describing the
-                    parameter type, and optionally the key 'order'; any other
-                    keys will be passed as <varname>$options</varname> to
-                    <methodname>addOption()</methodname>.</para></listitem>
-                <listitem><para><methodname>setParams(array $params)</methodname>: Set many
-                    parameters at once, overwriting any existing
-                    parameters.</para></listitem>
-                <listitem><para><methodname>getParams()</methodname>: Retrieve all currently
-                    set parameters.</para></listitem>
-                <listitem><para><methodname>setReturn($type)</methodname>: Set the return
-                    value type of the service.</para></listitem>
-                <listitem><para><methodname>getReturn()</methodname>: Get the return value
-                    type of the service.</para></listitem>
-                <listitem><para><methodname>toArray()</methodname>: Cast the service to an
-                    array.</para></listitem>
-                <listitem><para><methodname>toJson()</methodname>: Cast the service to a
-                    <acronym>JSON</acronym> representation.</para></listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>addParams(array $params)</methodname>: Add
+                        several parameters at once; each param should be an assoc
+                        array containing minimally the key 'type' describing the
+                        parameter type, and optionally the key 'order'; any other
+                        keys will be passed as <varname>$options</varname> to
+                        <methodname>addOption()</methodname>.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setParams(array $params)</methodname>: Set many
+                        parameters at once, overwriting any existing parameters.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getParams()</methodname>: Retrieve all currently set parameters.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>setReturn($type)</methodname>: Set the return
+                        value type of the service.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>getReturn()</methodname>: Get the return value type of the
+                        service.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>toArray()</methodname>: Cast the service to an array.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <methodname>toJson()</methodname>: Cast the service to a
+                        <acronym>JSON</acronym> representation.
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
     </sect2>

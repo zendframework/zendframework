@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.ldif">
     <title>Serializing LDAP data to and from LDIF</title>
+
     <sect2 id="zend.ldap.ldif.encode">
         <title>Serialize a LDAP entry to LDIF</title>
 
@@ -62,7 +63,6 @@ cn;lang-en: Rodney Ogasawara
 title;lang-en: Sales, Director
 */
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.ldap.ldif.decode">
@@ -123,7 +123,6 @@ $data = array(
 );
 */
 ]]></programlisting>
-
     </sect2>
 </sect1>
 

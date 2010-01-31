@@ -28,50 +28,59 @@
                     <entry>Description</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><code>Zend_Ldap_Dn getDn()</code></entry>
                     <entry>Gets the DN of the current node as a Zend_Ldap_Dn.</entry>
                 </row>
+
                 <row>
                     <entry><code>string getDnString(string $caseFold)</code></entry>
                     <entry>Gets the DN of the current node as a string.</entry>
                 </row>
+
                 <row>
                     <entry><code>array getDnArray(string $caseFold)</code></entry>
                     <entry>Gets the DN of the current node as an array.</entry>
                 </row>
+
                 <row>
                     <entry><code>string getRdnString(string $caseFold)</code></entry>
                     <entry>Gets the <acronym>RDN</acronym> of the current node as a string.</entry>
                 </row>
+
                 <row>
                     <entry><code>array getRdnArray(string $caseFold)</code></entry>
                     <entry>Gets the <acronym>RDN</acronym> of the current node as an array.</entry>
                 </row>
+
                 <row>
                     <entry><code>array getObjectClass()</code></entry>
                     <entry>Returns the objectClass of the node.</entry>
                 </row>
+
                 <row>
                     <entry><code>string toString()</code></entry>
+
                     <entry>
                         Returns the DN of the current node - proxies to
                         <code>Zend_Ldap_Dn::getDnString()</code>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>string __toString()</code></entry>
+
                     <entry>
                         Casts to string representation - proxies to
                         <code>Zend_Ldap_Dn::toString()</code>.
                     </entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>array toArray(boolean
-                        $includeSystemAttributes)</code>
-                    </entry>
+                    <entry><code>array toArray(boolean $includeSystemAttributes)</code></entry>
+
                     <entry>
                         Returns an array representation of the current node. If
                         <code>$includeSystemAttributes</code> is <constant>FALSE</constant>
@@ -81,31 +90,30 @@
                         array contains the DN with key <code>'dn'</code>.
                     </entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>string toJson(boolean
-                        $includeSystemAttributes)</code>
-                    </entry>
+                    <entry><code>string toJson(boolean $includeSystemAttributes)</code></entry>
+
                     <entry>
                         Returns a <acronym>JSON</acronym> representation of the current node using
                         <code>Zend_Ldap_Node_Schema::toArray()</code>.
                     </entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>array getData(boolean
-                        $includeSystemAttributes)</code>
-                    </entry>
+                    <entry><code>array getData(boolean $includeSystemAttributes)</code></entry>
+
                     <entry>
                         Returns the node's attributes. The array contains all
                         attributes in its internal format (no conversion).
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>boolean existsAttribute(string $name, boolean
-                        $emptyExists)</code>
+                        <code>boolean existsAttribute(string $name, boolean $emptyExists)</code>
                     </entry>
+
                     <entry>
                         Checks whether a given attribute exists. If
                         <code>$emptyExists</code> is <constant>FALSE</constant>, empty attributes
@@ -117,11 +125,12 @@
                         key-collection.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>boolean attributeHasValue(string $name, mixed|array
-                        $value)</code>
+                        <code>boolean attributeHasValue(string $name, mixed|array $value)</code>
                     </entry>
+
                     <entry>
                         Checks if the given value(s) exist in the attribute. The
                         method returns <constant>TRUE</constant> only if all values in
@@ -129,28 +138,31 @@
                         done strictly (respecting the data type).
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>integer count()</code></entry>
+
                     <entry>
-                        Returns the number of attributes in the node. Implements
-                        Countable.
+                        Returns the number of attributes in the node. Implements Countable.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>mixed getAttribute(string $name, integer|null
-                        $index)</code>
+                        <code>mixed getAttribute(string $name, integer|null $index)</code>
                     </entry>
+
                     <entry>
                         Gets a <acronym>LDAP</acronym> attribute. Data conversion is applied using
                         <code>Zend_Ldap_Attribute::getAttribute()</code>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>array getAttributes(boolean
-                        $includeSystemAttributes)</code>
+                        <code>array getAttributes(boolean $includeSystemAttributes)</code>
                     </entry>
+
                     <entry>
                         Gets all attributes of node. If
                         <code>$includeSystemAttributes</code> is <constant>FALSE</constant>
@@ -158,40 +170,47 @@
                         stripped from the array.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>array|integer getDateTimeAttribute(string $name,
                         integer|null $index)</code>
                     </entry>
+
                     <entry>
-                        Gets a <acronym>LDAP</acronym> date/time attribute. Data conversion is applied
-                        using
-                        <code>Zend_Ldap_Attribute::getDateTimeAttribute()</code>.
+                        Gets a <acronym>LDAP</acronym> date/time attribute. Data conversion is
+                        applied using <code>Zend_Ldap_Attribute::getDateTimeAttribute()</code>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Node_Schema reload(Zend_Ldap
-                        $ldap)</code>
+                        <code>Zend_Ldap_Node_Schema reload(Zend_Ldap $ldap)</code>
                     </entry>
+
                     <entry>
                         Reloads the current node's attributes from the given <acronym>LDAP</acronym>
                         server.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Node_Schema create(Zend_Ldap
                         $ldap)</code> </emphasis>
                     </entry>
+
                     <entry>Factory method to create the Schema node.</entry>
                 </row>
+
                 <row>
                     <entry><code>array getAttributeTypes()</code></entry>
                     <entry>Gets the attribute types as an array of <code/>.</entry>
                 </row>
+
                 <row>
                     <entry><code>array getObjectClasses()</code></entry>
+
                     <entry>
                         Gets the object classes as an array of
                         <code>Zend_Ldap_Node_Schema_ObjectClass_Interface</code>.
@@ -211,27 +230,33 @@
                     <entry>Description</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><code>string getName()</code></entry>
                     <entry>Gets the attribute name.</entry>
                 </row>
+
                 <row>
                     <entry><code>string getOid()</code></entry>
                     <entry>Gets the attribute <acronym>OID</acronym>.</entry>
                 </row>
+
                 <row>
                     <entry><code>string getSyntax()</code></entry>
                     <entry>Gets the attribute syntax.</entry>
                 </row>
+
                 <row>
                     <entry><code>int|null getMaxLength()</code></entry>
                     <entry>Gets the attribute maximum length.</entry>
                 </row>
+
                 <row>
                     <entry><code>boolean isSingleValued()</code></entry>
                     <entry>Returns if the attribute is single-valued.</entry>
                 </row>
+
                 <row>
                     <entry><code>string getDescription()</code></entry>
                     <entry>Gets the attribute description</entry>
@@ -250,76 +275,74 @@
                     <entry>Description</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><code>string getName()</code></entry>
                     <entry>Returns the objectClass name.</entry>
                 </row>
+
                 <row>
                     <entry><code>string getOid()</code></entry>
                     <entry>Returns the objectClass <acronym>OID</acronym>.</entry>
                 </row>
+
                 <row>
                     <entry><code>array getMustContain()</code></entry>
-                    <entry>
-                        Returns the attributes that this objectClass must
-                        contain.
-                    </entry>
+                    <entry>Returns the attributes that this objectClass must contain.</entry>
                 </row>
+
                 <row>
                     <entry><code>array getMayContain()</code></entry>
-                    <entry>
-                        Returns the attributes that this objectClass may
-                        contain.
-                    </entry>
+                    <entry>Returns the attributes that this objectClass may contain.</entry>
                 </row>
+
                 <row>
                     <entry><code>string getDescription()</code></entry>
                     <entry>Returns the attribute description</entry>
                 </row>
+
                 <row>
                     <entry><code>integer getType()</code></entry>
+
                     <entry>
-                        Returns the objectClass type. The method returns one of the
-                        following values:
+                        Returns the objectClass type. The method returns one of the following
+                        values:
+
                         <variablelist>
                             <varlistentry>
-                                <term>
-                                <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_UNKNOWN</code></term>
+                                <term><code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_UNKNOWN</code></term>
                                 <listitem><para>for unknown class types</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
-                                <term>
-                                <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_STRUCTURAL</code></term>
+                                <term><code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_STRUCTURAL</code></term>
                                 <listitem><para>for structural classes</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
-                                <term>
-                                <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_ABSTRACT</code></term>
+                                <term><code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_ABSTRACT</code></term>
                                 <listitem><para>for abstract classes</para></listitem>
                             </varlistentry>
 
                             <varlistentry>
-                                <term>
-                                <code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_AUXILIARY</code></term>
+                                <term><code>Zend_Ldap_Node_Schema::OBJECTCLASS_TYPE_AUXILIARY</code></term>
                                 <listitem><para>for auxiliary classes</para></listitem>
                             </varlistentry>
                         </variablelist>
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>array getParentClasses()</code></entry>
+
                     <entry>
                         Returns the parent objectClasses of this class. This
                         includes structural, abstract and auxiliary objectClasses.
                     </entry>
                 </row>
             </tbody>
-
         </tgroup>
-
     </table>
 
     <para>
@@ -344,16 +367,16 @@
                     <entry>Description</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><code>array getData()</code></entry>
-                    <entry>
-                        Gets all the underlying data from the schema information
-                        node.
-                    </entry>
+                    <entry>Gets all the underlying data from the schema information node.</entry>
                 </row>
+
                 <row>
                     <entry><code>integer count()</code></entry>
+
                     <entry>
                         Returns the number of attributes in this schema information
                         node. Implements Countable.
@@ -381,23 +404,24 @@
                         <entry>Description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><code>array getLdapSyntaxes()</code></entry>
                         <entry>Gets the <acronym>LDAP</acronym> syntaxes.</entry>
                     </row>
+
                     <row>
                         <entry><code>array getMatchingRules()</code></entry>
                         <entry>Gets the matching rules.</entry>
                     </row>
+
                     <row>
                         <entry><code>array getMatchingRuleUse()</code></entry>
                         <entry>Gets the matching rule use.</entry>
                     </row>
                 </tbody>
-
             </tgroup>
-
         </table>
 
         <table
@@ -411,15 +435,16 @@
                         <entry>Description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>
                             <code>Zend_Ldap_Node_Schema_AttributeType_OpenLdap|null
-                            getParent()</code>
+                                getParent()</code>
                         </entry>
+
                         <entry>
-                            Returns the parent attribute type in the inheritance
-                            tree if one exists.
+                            Returns the parent attribute type in the inheritance tree if one exists.
                         </entry>
                     </row>
                 </tbody>
@@ -437,9 +462,11 @@
                         <entry>Description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><code>array getParents()</code></entry>
+
                         <entry>
                             Returns the parent object classes in the inheritance
                             tree if one exists. The returned array is an array of
@@ -456,6 +483,7 @@
 
         <note>
             <title>Schema browsing on ActiveDirectory servers</title>
+
             <para>
                 Due to restrictions on Microsoft ActiveDirectory servers regarding
                 the number of entries returned by generic search routines and due to the
@@ -503,4 +531,3 @@
         </table>
     </sect4>
 </sect3>
-

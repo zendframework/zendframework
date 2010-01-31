@@ -8,33 +8,40 @@
         may be set by calling the appropriate accessors, passing an array or
         <classname>Zend_Config</classname> object to the constructor or
         <methodname>startMvc()</methodname>, passing an array of options to
-        <methodname>setOptions()</methodname>, or passing a <classname>Zend_Config</classname> object
-        to <methodname>setConfig()</methodname>.
+        <methodname>setOptions()</methodname>, or passing a <classname>Zend_Config</classname>
+        object to <methodname>setConfig()</methodname>.
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>layout</emphasis>: the layout to use. Uses the
                 current inflector to resolve the name provided to the
                 appropriate layout view script. By default, this value is
                 'layout' and resolves to 'layout.phtml'. Accessors
                 are <methodname>setLayout()</methodname> and <methodname>getLayout()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>layoutPath</emphasis>: the base path to layout view
                 scripts. Accessors are <methodname>setLayoutPath()</methodname> and
                 <methodname>getLayoutPath()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>contentKey</emphasis>: the layout variable used for
                 default content (when used with the <acronym>MVC</acronym>). Default value is
                 'content'. Accessors are <methodname>setContentKey()</methodname> and
                 <methodname>getContentKey()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>mvcSuccessfulActionOnly</emphasis>: when using the
                 <acronym>MVC</acronym>, if an action throws an exception and this flag is
                 <constant>TRUE</constant>, the layout will not be rendered (this is to prevent
@@ -43,44 +50,52 @@
                     plugin</link> is in use). By default, the flat is <constant>TRUE</constant>.
                 Accessors are <methodname>setMvcSuccessfulActionOnly()</methodname> and
                 <methodname>getMvcSuccessfulActionOnly()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
-                <emphasis>view</emphasis>: the view object to use when
-                rendering. When used with the <acronym>MVC</acronym>, <classname>Zend_Layout</classname> will
-                attempt to use the view object registered with <link
-                    linkend="zend.controller.actionhelpers.viewrenderer">the
-                    ViewRenderer</link> if no view object has been passed to it
-                explicitly. Accessors are <methodname>setView()</methodname> and
-                <methodname>getView()</methodname>.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>view</emphasis>: the view object to use when rendering. When used with the
+                <acronym>MVC</acronym>, <classname>Zend_Layout</classname> will attempt to use the
+                view object registered with <link
+                    linkend="zend.controller.actionhelpers.viewrenderer">the ViewRenderer</link> if
+                no view object has been passed to it explicitly. Accessors are
+                <methodname>setView()</methodname> and <methodname>getView()</methodname>.
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>helperClass</emphasis>: the action helper class to use
-                when using <classname>Zend_Layout</classname> with the <acronym>MVC</acronym> components. By
-                default, this is
+                when using <classname>Zend_Layout</classname> with the <acronym>MVC</acronym>
+                components. By default, this is
                 <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>.
                 Accessors are <methodname>setHelperClass()</methodname> and
                 <methodname>getHelperClass()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>pluginClass</emphasis>: the front controller plugin
-                class to use when using <classname>Zend_Layout</classname> with the <acronym>MVC</acronym>
-                components. By default, this is
+                class to use when using <classname>Zend_Layout</classname> with the
+                <acronym>MVC</acronym> components. By default, this is
                 <classname>Zend_Layout_Controller_Plugin_Layout</classname>. Accessors
                 are <methodname>setPluginClass()</methodname> and
                 <methodname>getPluginClass()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>inflector</emphasis>: the inflector to use when
                 resolving layout names to layout view script paths; see <link
                     linkend="zend.layout.advanced.inflector">the
                     <classname>Zend_Layout</classname> inflector documentation for more
                     details</link>. Accessors are <methodname>setInflector()</methodname>
                 and <methodname>getInflector()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <note>
@@ -168,8 +183,8 @@ $layout = Zend_Layout::startMvc($config);
             <para>
                 Sometimes you need to configure the <classname>Zend_Layout</classname>
                 object after it has already been instantiated;
-                <methodname>setOptions()</methodname> and <methodname>setConfig()</methodname> give you
-                a quick and easy way to do so:
+                <methodname>setOptions()</methodname> and <methodname>setConfig()</methodname> give
+                you a quick and easy way to do so:
             </para>
 
             <programlisting language="php"><![CDATA[

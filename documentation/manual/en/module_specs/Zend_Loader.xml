@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
-
     <title>Loading Files and Classes Dynamically</title>
 
     <para>
-        The <classname>Zend_Loader</classname> class includes methods to help you load files dynamically.
+        The <classname>Zend_Loader</classname> class includes methods to help you load files
+        dynamically.
     </para>
 
     <tip>
         <title>Zend_Loader vs. require_once()</title>
+
         <para>
             The <classname>Zend_Loader</classname> methods are best used if the filename you need to
             load is variable. For example, if it is based on a parameter from
             user input or method argument. If you are loading a file or a
             class whose name is constant, there is no benefit to using
-            <classname>Zend_Loader</classname> over using traditional <acronym>PHP</acronym> functions such as
-            <ulink url="http://php.net/require_once"><methodname>require_once()</methodname></ulink>.
+            <classname>Zend_Loader</classname> over using traditional <acronym>PHP</acronym>
+            functions such as <ulink
+                url="http://php.net/require_once"><methodname>require_once()</methodname></ulink>.
         </para>
     </tip>
 
     <sect2 id="zend.loader.load.file">
-
         <title>Loading Files</title>
 
         <para>
-            The static method <methodname>Zend_Loader::loadFile()</methodname> loads a <acronym>PHP</acronym>
-            file. The file loaded may contain any <acronym>PHP</acronym> code.
-            The method is a wrapper for the <acronym>PHP</acronym> function
+            The static method <methodname>Zend_Loader::loadFile()</methodname> loads a
+            <acronym>PHP</acronym> file. The file loaded may contain any <acronym>PHP</acronym>
+            code. The method is a wrapper for the <acronym>PHP</acronym> function
             <ulink url="http://php.net/include"><methodname>include()</methodname></ulink>.
             This method returns boolean <constant>FALSE</constant> on failure, for example
             if the specified file does not exist.
@@ -35,6 +36,7 @@
 
         <example id="zend.loader.load.file.example">
             <title>Example of the loadFile() Method</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 ]]></programlisting>
@@ -50,25 +52,24 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
         </para>
 
         <para>
-            The <varname>$dirs</varname> argument specifies which directories to search for
-            the file in. If the value is <constant>NULL</constant>, only the <code>include_path</code>
+            The <varname>$dirs</varname> argument specifies which directories to search for the
+            file in. If the value is <constant>NULL</constant>, only the <code>include_path</code>
             is searched; if the value is a string or an array, the directory or directories
             specified will be searched, followed by the <code>include_path</code>.
         </para>
 
         <para>
             The <varname>$once</varname> argument is a boolean. If <constant>TRUE</constant>,
-            <methodname>Zend_Loader::loadFile()</methodname> uses the <acronym>PHP</acronym> function
-            <ulink url="http://php.net/include"><methodname>include_once()</methodname></ulink>
+            <methodname>Zend_Loader::loadFile()</methodname> uses the <acronym>PHP</acronym>
+            function <ulink
+                url="http://php.net/include"><methodname>include_once()</methodname></ulink>
             for loading the file, otherwise the <acronym>PHP</acronym> function
             <ulink url="http://php.net/include_once"><methodname>include()</methodname></ulink>
             is used.
         </para>
-
     </sect2>
 
     <sect2 id="zend.loader.load.class">
-
         <title>Loading Classes</title>
 
         <para>
@@ -78,6 +79,7 @@ Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 
         <example id="zend.loader.load.class.example">
             <title>Example of the loadClass() Method</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Loader::loadClass('Container_Tree',
     array(
@@ -104,7 +106,8 @@ Zend_Loader::loadClass('Container_Tree',
 
         <para>
             If the file is not found or the class does not exist after the load,
-            <methodname>Zend_Loader::loadClass()</methodname> throws a <classname>Zend_Exception</classname>.
+            <methodname>Zend_Loader::loadClass()</methodname> throws a
+            <classname>Zend_Exception</classname>.
         </para>
 
         <para>
@@ -182,7 +185,6 @@ Zend_Loader::loadClass('Container_Tree',
     </sect2>
 
     <sect2 id="zend.loader.load.isreadable">
-
         <title>Testing if a File is Readable</title>
 
         <para>
@@ -193,6 +195,7 @@ Zend_Loader::loadClass('Container_Tree',
 
         <example id="zend.loader.load.isreadable.example">
             <title>Example of isReadable() method</title>
+
             <programlisting language="php"><![CDATA[
 if (Zend_Loader::isReadable($filename)) {
     // do something with $filename
@@ -208,25 +211,25 @@ if (Zend_Loader::isReadable($filename)) {
             The <acronym>PHP</acronym> function does not search the <code>include_path</code>,
             while <methodname>Zend_Loader::isReadable()</methodname> does.
         </para>
-
     </sect2>
 
     <sect2 id="zend.loader.load.autoload">
-
         <title>Using the Autoloader</title>
 
         <para>
             The <classname>Zend_Loader</classname> class contains a method you can register with the
-            <acronym>PHP</acronym> SPL autoloader. <methodname>Zend_Loader::autoload()</methodname> is the
-            callback method. As a convenience, <classname>Zend_Loader</classname> provides the
-            <methodname>registerAutoload()</methodname> function to register its
+            <acronym>PHP</acronym> SPL autoloader. <methodname>Zend_Loader::autoload()</methodname>
+            is the callback method. As a convenience, <classname>Zend_Loader</classname> provides
+            the <methodname>registerAutoload()</methodname> function to register its
             <methodname>autoload()</methodname> method. If the <code>spl_autoload</code>
             extension is not present in your <acronym>PHP</acronym> environment, then the
-            <methodname>registerAutoload()</methodname> method throws a <classname>Zend_Exception</classname>.
+            <methodname>registerAutoload()</methodname> method throws a
+            <classname>Zend_Exception</classname>.
         </para>
 
         <example id="zend.loader.load.autoload.example">
             <title>Example of registering the autoloader callback method</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Loader::registerAutoload();
 ]]></programlisting>
@@ -249,6 +252,7 @@ Zend_Loader::registerAutoload();
         <example id="zend.loader.load.autoload.example-extended">
             <title>Example of registering the autoload callback method from an
                 extended class</title>
+
             <para>
                 Because of the semantics of static function references in <acronym>PHP</acronym>,
                 you must implement code for both <methodname>loadClass()</methodname>
@@ -258,6 +262,7 @@ Zend_Loader::registerAutoload();
                 call <methodname>self::loadClass()</methodname>, then it calls the
                 method of that name in the parent class, not the subclass.
             </para>
+
             <programlisting language="php"><![CDATA[
 class My_Loader extends Zend_Loader
 {
@@ -288,9 +293,7 @@ Zend_Loader::registerAutoload('My_Loader');
             <constant>FALSE</constant>, the autoload callback is unregistered from the
             SPL autoload stack.
         </para>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

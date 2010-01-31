@@ -51,6 +51,11 @@ require_once 'Zend/Mail/Transport/Smtp.php';
 require_once 'Zend/Date.php';
 
 /**
+ * Zend_Config
+ */
+require_once 'Zend/Config.php';
+
+/**
  * Mock mail transport class for testing purposes
  *
  * @category   Zend
@@ -896,6 +901,46 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($mock->from, 'john@example.com');
         $this->assertEquals($headers['From'][0], 'John Doe <john@example.com>');
         $this->assertEquals($headers['Reply-To'][0], 'Foo Bar <foo@example.com>');
+    }
+    
+    /**
+     * @group ZF-9011
+     */
+    public function testSendmailTransportShouldAcceptConfigAndArrayAsConstructor()
+    {
+        $mail = new Zend_Mail("UTF-8");
+        $mail->setBodyText('My Nice Test Text');
+        $mail->addTo('foobar@example.com');
+        $mail->setSubject('hello world!');
+
+        $params = array('envelope'=> '-tjohn@example.com', 'foo' => '-fbar');
+        $expected = '-tjohn@example.com -fbar';
+        
+        $transportMock = new Zend_Mail_Transport_Sendmail_Mock($params);
+        $this->assertEquals($expected, $transportMock->parameters);
+
+        $transportMock = new Zend_Mail_Transport_Sendmail_Mock(new Zend_Config($params));
+        $this->assertEquals($expected, $transportMock->parameters);
+    }
+    
+    /**
+     * @group ZF-9011
+     */
+    public function testSendmailTransportThrowsExceptionWithInvalidParams()
+    {
+        $mail = new Zend_Mail("UTF-8");
+        $mail->setBodyText('My Nice Test Text');
+        $mail->addTo('foobar@example.com');
+        $mail->setSubject('hello world!');
+
+        $transport = new Zend_Mail_Transport_Sendmail();
+        $transport->parameters = true;
+        try {
+            $mail->send();
+            $this->fail('Exception should have been thrown, but wasn\'t');    	
+        } catch(Zend_Mail_Transport_Exception $e) {
+        	// do nothing
+        }
     }
 
     public static function dataSubjects()

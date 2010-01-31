@@ -34,8 +34,7 @@
 
     <para>
         The <classname>Doctype</classname> helper is a concrete implementation of the
-        <link linkend="zend.view.helpers.initial.placeholder">Placeholder
-            helper</link>.
+        <link linkend="zend.view.helpers.initial.placeholder">Placeholder helper</link>.
     </para>
 
     <example id="zend.view.helpers.initial.doctype.basicusage">
@@ -60,7 +59,6 @@ $doctypeHelper->doctype('XHTML1_STRICT');
         <programlisting language="php"><![CDATA[
 <?php echo $this->doctype() ?>
 ]]></programlisting>
-
     </example>
 
     <example id="zend.view.helpers.initial.doctype.retrieving">

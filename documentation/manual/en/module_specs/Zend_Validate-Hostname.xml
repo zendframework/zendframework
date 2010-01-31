@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.hostname">
-
     <title>Hostname</title>
 
     <para>
-        <classname>Zend_Validate_Hostname</classname> allows you to validate a hostname against a set of known
-        specifications. It is possible to check for three different types of hostnames: a DNS
-        Hostname (i.e. domain.com), IP address (i.e. 1.2.3.4), and Local hostnames (i.e. localhost).
-        By default only DNS hostnames are matched.
+        <classname>Zend_Validate_Hostname</classname> allows you to validate a hostname against a
+        set of known specifications. It is possible to check for three different types of hostnames:
+        a DNS Hostname (i.e. domain.com), IP address (i.e. 1.2.3.4), and Local hostnames (i.e.
+        localhost). By default only DNS hostnames are matched.
     </para>
 
     <para>
@@ -32,7 +31,6 @@ if ($validator->isValid($hostname)) {
 
         This will match the hostname <varname>$hostname</varname> and on failure populate
         <methodname>getMessages()</methodname> with useful error messages.
-
     </para>
 
     <para>
@@ -41,16 +39,19 @@ if ($validator->isValid($hostname)) {
 
     <para>
         You may find you also want to match IP addresses, Local hostnames, or a combination of all
-        allowed types. This can be done by passing a parameter to <classname>Zend_Validate_Hostname</classname> when you
-        instantiate it. The parameter should be an integer which determines what types of hostnames
-        are allowed. You are encouraged to use the <classname>Zend_Validate_Hostname</classname> constants to do this.
+        allowed types. This can be done by passing a parameter to
+        <classname>Zend_Validate_Hostname</classname> when you instantiate it. The parameter should
+        be an integer which determines what types of hostnames are allowed. You are encouraged to
+        use the <classname>Zend_Validate_Hostname</classname> constants to do this.
     </para>
 
     <para>
         The Zend_Validate_Hostname constants are: <constant>ALLOW_DNS</constant> to allow only DNS
-        hostnames, <constant>ALLOW_IP</constant> to allow IP addresses, <constant>ALLOW_LOCAL</constant> to allow
-        local network names, and <constant>ALLOW_ALL</constant> to allow all three types. To just check for
-        IP addresses you can use the example below:
+        hostnames, <constant>ALLOW_IP</constant> to allow IP addresses,
+        <constant>ALLOW_LOCAL</constant> to allow local network names, and
+        <constant>ALLOW_ALL</constant> to allow all three types. To just check for IP addresses you
+        can use the example below:
+
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_IP);
 if ($validator->isValid($hostname)) {
@@ -65,14 +66,14 @@ if ($validator->isValid($hostname)) {
     </para>
 
     <para>
-        As well as using <constant>ALLOW_ALL</constant> to accept all hostnames types you can combine
-        these types to allow for combinations. For example, to accept DNS and Local hostnames
-        instantiate your Zend_Validate_Hostname object as so:
+        As well as using <constant>ALLOW_ALL</constant> to accept all hostnames types you can
+        combine these types to allow for combinations. For example, to accept DNS and Local
+        hostnames instantiate your Zend_Validate_Hostname object as so:
+
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
                                         Zend_Validate_Hostname::ALLOW_IP);
 ]]></programlisting>
-
     </para>
 
     <para>
@@ -82,8 +83,8 @@ $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
     <para>
         Some Country Code Top Level Domains (ccTLDs), such as 'de' (Germany), support international
         characters in domain names. These are known as International Domain Names (IDN). These
-        domains can be matched by <classname>Zend_Validate_Hostname</classname> via extended characters that are used in
-        the validation process.
+        domains can be matched by <classname>Zend_Validate_Hostname</classname> via extended
+        characters that are used in the validation process.
     </para>
 
     <para>
@@ -151,7 +152,6 @@ $validator =
     <para>
         Please note TLDs are only validated if you allow DNS hostnames to be validated.
     </para>
-
 </sect2>
 <!--
 vim:se ts=4 sw=4 et:

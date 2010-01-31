@@ -19,13 +19,13 @@
 
     <note>
         <title>PartialLoop Counter</title>
+
         <para>
             The <classname>PartialLoop</classname> view helper assigns a variable to the view named
             <emphasis>partialCounter</emphasis> which passes the current position of the array to
             the view script. This provides an easy way to have alternating colors on table rows for
             example.
         </para>
-
     </note>
 
     <example id="zend.view.helpers.initial.partial.usage">
@@ -64,47 +64,52 @@
     <li>Subject: view partials</li>
 </ul>
 ]]></programlisting>
-
     </example>
-        <note>
-            <title>What is a model?</title>
 
-            <para>
-                A model used with the <classname>Partial</classname> view helper can be
-                one of the following:
-            </para>
+    <note>
+        <title>What is a model?</title>
 
-            <itemizedlist>
-                <listitem><para>
-                        <emphasis>Array</emphasis>. If an array is passed, it
-                        should be associative, as its key/value pairs are
-                        assigned to the view with keys as view variables.
-                </para></listitem>
+        <para>
+            A model used with the <classname>Partial</classname> view helper can be
+            one of the following:
+        </para>
 
-                <listitem><para>
-                        <emphasis>Object implementing toArray()
-                            method</emphasis>. If an object is passed an has a
-                        <methodname>toArray()</methodname> method, the results of
-                        <methodname>toArray()</methodname> will be assigned to the view
-                        object as view variables.
-                </para></listitem>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Array</emphasis>. If an array is passed, it
+                    should be associative, as its key/value pairs are
+                    assigned to the view with keys as view variables.
+                </para>
+            </listitem>
 
-                <listitem><para>
-                        <emphasis>Standard object</emphasis>. Any other object
-                        will assign the results of
-                        <methodname>object_get_vars()</methodname> (essentially all public
-                        properties of the object) to the view object.
-                </para></listitem>
-            </itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis>Object implementing toArray() method</emphasis>. If an object is
+                    passed an has a <methodname>toArray()</methodname> method, the results of
+                    <methodname>toArray()</methodname> will be assigned to the view
+                    object as view variables.
+                </para>
+            </listitem>
 
-            <para>
-                If your model is an object, you may want to have it passed
-                <emphasis>as an object</emphasis> to the partial script, instead
-                of serializing it to an array of variables. You can do this by
-                setting the 'objectKey' property of the appropriate helper:
-            </para>
+            <listitem>
+                <para>
+                    <emphasis>Standard object</emphasis>. Any other object
+                    will assign the results of
+                    <methodname>object_get_vars()</methodname> (essentially all public
+                    properties of the object) to the view object.
+                </para>
+            </listitem>
+        </itemizedlist>
 
-            <programlisting language="php"><![CDATA[
+        <para>
+            If your model is an object, you may want to have it passed
+            <emphasis>as an object</emphasis> to the partial script, instead
+            of serializing it to an array of variables. You can do this by
+            setting the 'objectKey' property of the appropriate helper:
+        </para>
+
+        <programlisting language="php"><![CDATA[
 // Tell partial to pass objects as 'model' variable
 $view->partial()->setObjectKey('model');
 
@@ -113,15 +118,15 @@ $view->partial()->setObjectKey('model');
 $view->partialLoop()->setObjectKey('model');
 ]]></programlisting>
 
-            <para>
-                This technique is particularly useful when passing
-                <classname>Zend_Db_Table_Rowset</classname>s to
-                <methodname>partialLoop()</methodname>, as you then have full access to your
-                row objects within the view scripts, allowing you to call
-                methods on them (such as retrieving values from parent or
-                dependent rows).
-            </para>
-        </note>
+        <para>
+            This technique is particularly useful when passing
+            <classname>Zend_Db_Table_Rowset</classname>s to
+            <methodname>partialLoop()</methodname>, as you then have full access to your
+            row objects within the view scripts, allowing you to call
+            methods on them (such as retrieving values from parent or
+            dependent rows).
+        </para>
+    </note>
 
     <example id="zend.view.helpers.initial.partial.partialloop">
         <title>Using PartialLoop to Render Iterable Models</title>

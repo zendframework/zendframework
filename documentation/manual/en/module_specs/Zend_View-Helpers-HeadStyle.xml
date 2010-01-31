@@ -69,6 +69,7 @@
 
         <example id="zend.view.helpers.initial.headstyle.conditional">
             <title>Headstyle With Conditional Comments</title>
+
             <programlisting language="php"><![CDATA[
 // adding scripts
 $this->headStyle()->appendStyle($styles, array('conditional' => 'lt IE 7'));
@@ -194,18 +195,22 @@ body {
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     The style declarations will be appended to the stack. If you
                     wish for them to replace the stack or be added to the top,
                     you will need to pass 'SET' or 'PREPEND', respectively, as
                     the first argument to <methodname>captureStart()</methodname>.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     If you wish to specify any additional attributes for the
                     <emphasis>&lt;style&gt;</emphasis> tag, pass them in an array as
                     the second argument to <methodname>captureStart()</methodname>.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
     </example>
 </sect3>

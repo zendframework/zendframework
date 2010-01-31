@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.cycle">
-
     <title>Cycle Helper</title>
 
     <para>
-      The <classname>Cycle</classname> helper is used to alternate a set of values.
+        The <classname>Cycle</classname> helper is used to alternate a set of values.
     </para>
 
     <example id="zend.view.helpers.initial.cycle.basicusage">
-
         <title>Cycle Helper Basic Usage</title>
 
         <para>
@@ -44,11 +42,9 @@ $this->cycle()->prev();
    <td>Second</td>
 </tr>
 ]]></programlisting>
-
     </example>
 
     <example id="zend.view.helpers.initial.cycle.advanceusage">
-
         <title>Working with two or more cycles</title>
 
        <para>
@@ -56,7 +52,6 @@ $this->cycle()->prev();
            cycle method. <command>$this->cycle(array("#F0F0F0","#FFFFFF"),'cycle2')</command>. You
            can also use setName($name) function.
         </para>
-
     </example>
 
     <programlisting language="php"><![CDATA[
@@ -69,7 +64,6 @@ $this->cycle()->prev();
 </tr>
 <?php endforeach;?>
 ]]></programlisting>
-
 </sect3>
 <!--
 vim:se ts=4 sw=4 et:

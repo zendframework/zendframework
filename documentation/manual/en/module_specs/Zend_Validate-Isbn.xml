@@ -112,15 +112,9 @@ if ($validator->isValid($isbn)) {
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>"" (empty) (default)</para>
-            </listitem>
-            <listitem>
-                <para>"-" (hyphen)</para>
-            </listitem>
-            <listitem>
-                <para>" " (space)</para>
-            </listitem>
+            <listitem><para>"" (empty) (default)</para></listitem>
+            <listitem><para>"-" (hyphen)</para></listitem>
+            <listitem><para>" " (space)</para></listitem>
         </itemizedlist>
     </sect3>
 </sect2>

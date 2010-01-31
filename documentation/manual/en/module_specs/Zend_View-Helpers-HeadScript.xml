@@ -129,8 +129,7 @@ $this->headScript()->appendFile(
 
     <para>
         The <classname>HeadScript</classname> helper is a concrete implementation of the
-        <link linkend="zend.view.helpers.initial.placeholder">Placeholder
-            helper</link>.
+        <link linkend="zend.view.helpers.initial.placeholder">Placeholder helper</link>.
     </para>
 
     <note>
@@ -232,24 +231,30 @@ $('foo_form').action = action;
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     The script will be appended to the stack. If you wish for it
                     to replace the stack or be added to the top, you will need
                     to pass 'SET' or 'PREPEND', respectively, as the first
                     argument to <methodname>captureStart()</methodname>.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     The script <acronym>MIME</acronym> type is assumed to be 'text/javascript'; if
                     you wish to specify a different type, you will need to pass it
                     as the second argument to <methodname>captureStart()</methodname>.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     If you wish to specify any additional attributes for the
                     <emphasis>&lt;script&gt;</emphasis> tag, pass them in an array as
                     the third argument to <methodname>captureStart()</methodname>.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
     </example>
 </sect3>

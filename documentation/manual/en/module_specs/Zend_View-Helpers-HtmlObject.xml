@@ -21,18 +21,21 @@
                 Generates markup for embedding Flash files.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>htmlObject()</methodname>
                 Generates markup for embedding a custom Object.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>htmlPage()</methodname>
                 Generates markup for embedding other (X)HTML pages.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <methodname>htmlQuicktime()</methodname>
@@ -47,7 +50,6 @@
     </para>
 
     <example id="zend.view.helpers.initial.object.flash">
-
         <title>Flash helper</title>
 
         <para>
@@ -70,7 +72,6 @@
         codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
 </object>
 ]]></programlisting>
-
     </example>
 
     <para>

@@ -103,8 +103,7 @@
 
     <para>
         The <classname>HeadMeta</classname> helper is a concrete implementation of the
-        <link linkend="zend.view.helpers.initial.placeholder">Placeholder
-            helper</link>.
+        <link linkend="zend.view.helpers.initial.placeholder">Placeholder helper</link>.
     </para>
 
     <example id="zend.view.helpers.initial.headmeta.basicusage">
@@ -152,8 +151,7 @@ $this->headMeta()->appendHttpEquiv('Content-Type',
 ]]></programlisting>
 
         <para>
-            If you are serving an HTML5 document, you should provide the character
-            set like this:
+            If you are serving an HTML5 document, you should provide the character set like this:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -173,8 +171,7 @@ $this->headMeta()->appendHttpEquiv('Refresh',
 ]]></programlisting>
 
         <para>
-            When you're ready to place your meta tags in the layout, simply echo
-            the helper:
+            When you're ready to place your meta tags in the layout, simply echo the helper:
         </para>
 
         <programlisting language="php"><![CDATA[

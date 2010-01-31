@@ -17,6 +17,7 @@
             element in a Sitemap <acronym>XML</acronym> document. Valid values are: 'always',
             'hourly', 'daily', 'weekly', 'monthly', 'yearly', or 'never'.
         </para>
+
         <para>
             Returns <constant>TRUE</constant> if and only if the value is a string
             and is equal to one of the frequencies specified above.
@@ -32,6 +33,7 @@
             contain a <acronym>W3C</acronym> date string, optionally discarding information
             about time.
         </para>
+
         <para>
             Returns <constant>TRUE</constant> if and only if the given value is
             a string and is valid according to the protocol.

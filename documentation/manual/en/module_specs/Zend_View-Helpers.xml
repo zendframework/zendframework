@@ -23,6 +23,7 @@
 
     <note>
         <title>Watch the Case</title>
+
         <para>
             Helper names are always camelCased, i.e., they never begin with an
             uppercase character. The class name itself is MixedCased, but the

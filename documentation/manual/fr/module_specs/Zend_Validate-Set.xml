@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 20229 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Classes de validation standard</title>
@@ -38,19 +38,9 @@
         </note>
     </sect2>
 
-    <sect2 id="zend.validate.set.barcode">
-        <title>Barcode</title>
-
-        <para>
-            Ce validateur est instancié avec le type de code-barres suivant lequel vous
-            souhaitez valider une valeur. Il supporte actuellement les types de code-barres
-            "<code>UPC-A</code>" (Universal Product Code) et "<code>EAN-13</code>" (European Article
-            Number), et la méthode <methodname>isValid()</methodname> retourne <constant>TRUE</constant> si et seulement
-            si la valeur fournie est validée par l'algorithme de validation du code-barres. Vous
-            devez retirer tous les caractères exceptés les nombres compris entre zéro et neuf (0-9)
-            de la valeur à tester avant de la fournir au validateur.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-Barcode.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Barcode.xml" /></xi:fallback>
+    </xi:include>
 
     <sect2 id="zend.validate.set.between">
         <title>Between</title>
@@ -64,6 +54,9 @@
         </para>
     </sect2>
 
+    <xi:include href="Zend_Validate-Callback.xml" />
+    <xi:include href="Zend_Validate-CreditCard.xml" />
+
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
 
@@ -72,6 +65,14 @@
             url="http://fr.wikipedia.org/wiki/Luhn">l'algorithme de Luhn ("module 10")</ulink> pour
             les numéros de cartes de crédits.
         </para>
+
+        <note>
+            <para>
+                Le validateur <classname>Ccnum</classname> a été déprécié en faveur du validateur
+                <classname>CreditCard</classname>. Pour des raisons de sécurité, vous devriez
+                utiliser CreditCard au lieu de Ccnum.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.validate.set.date">
@@ -87,9 +88,7 @@
         </para>
     </sect2>
 
-    <xi:include href="Zend_Validate-Db.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Db.xml" /></xi:fallback>
-    </xi:include>
+    <xi:include href="Zend_Validate-Db.xml" />
 
     <sect2 id="zend.validate.set.digits">
         <title>Digits</title>
@@ -190,15 +189,8 @@ if ($validator->isValid($iban)) {
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.in_array">
-        <title>InArray</title>
-
-        <para>
-            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> est contenue
-            dans un tableau. Si l'option stricte est à <constant>TRUE</constant>, alors le type de
-            <varname>$value</varname> est aussi vérifié.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-Identical.xml" />
+    <xi:include href="Zend_Validate-InArray.xml" />
 
     <sect2 id="zend.validate.set.int">
         <title>Int</title>
@@ -212,14 +204,8 @@ if ($validator->isValid($iban)) {
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.ip">
-        <title>Ip</title>
-
-        <para>
-            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> est une adresse
-            IP valide.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-Ip.xml" />
+    <xi:include href="Zend_Validate-Isbn.xml" />
 
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>
@@ -230,14 +216,8 @@ if ($validator->isValid($iban)) {
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.not_empty">
-        <title>NotEmpty</title>
-
-        <para>
-            Retourne <constant>TRUE</constant> si et seulement si <varname>$value</varname> est une valeur
-            non vide.
-        </para>
-    </sect2>
+    <xi:include href="Zend_Validate-NotEmpty.xml" />
+    <xi:include href="Zend_Validate-PostCode.xml" />
 
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>
@@ -248,9 +228,7 @@ if ($validator->isValid($iban)) {
         </para>
     </sect2>
 
-    <xi:include href="Zend_Validate-Sitemap.xml">
-        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Sitemap.xml" /></xi:fallback>
-    </xi:include>
+    <xi:include href="Zend_Validate-Sitemap.xml" />
 
     <sect2 id="zend.validate.set.string_length">
         <title>StringLength</title>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 19606 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.xmlrpc.client">
     <title>Zend_XmlRpc_Client</title>
@@ -121,35 +121,45 @@ $result = $client->call('test.sayHello', array($arg1, $arg2));
                             <entry>integer</entry>
                             <entry>int</entry>
                         </row>
-
+                        <row>
+                            <entry>Zend_Crypt_Math_BigInteger</entry>
+                            <entry>i8</entry>
+                        </row>
                         <row>
                             <entry>double</entry>
                             <entry>double</entry>
                         </row>
-
                         <row>
                             <entry>boolean</entry>
                             <entry>boolean</entry>
                         </row>
-
                         <row>
                             <entry>string</entry>
                             <entry>string</entry>
                         </row>
-
+                        <row>
+                            <entry>null</entry>
+                            <entry>nil</entry>
+                        </row>
                         <row>
                             <entry>array</entry>
                             <entry>array</entry>
                         </row>
-
                         <row>
                             <entry>associative array</entry>
                             <entry>struct</entry>
                         </row>
-
                         <row>
                             <entry>object</entry>
                             <entry>array</entry>
+                        </row>
+                        <row>
+                            <entry>Zend_Date</entry>
+                            <entry>dateTime.iso8601</entry>
+                        </row>
+                        <row>
+                            <entry>DateTime</entry>
+                            <entry>dateTime.iso8601</entry>
                         </row>
                     </tbody>
                 </tgroup>
@@ -249,49 +259,73 @@ $result = $client->call('foo.bar', array(array()));
                     <tbody>
                         <row>
                             <entry>int</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_INTEGER</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Integer</classname></entry>
                         </row>
 
                         <row>
+                            <entry>i8</entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_I8</constant></entry>
+                            <entry><classname>Zend_XmlRpc_Value_BigInteger</classname></entry>
+                        </row>
+
+                        <row>
+                            <entry>ex:i8</entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_APACHEI8</constant></entry>
+                            <entry><classname>Zend_XmlRpc_Value_BigInteger</classname></entry>
+                        </row>
+
+                        <row>
                             <entry>double</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_DOUBLE</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Double</classname></entry>
                         </row>
 
                         <row>
                             <entry>boolean</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BOOLEAN</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_BOOLEAN</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Boolean</classname></entry>
                         </row>
 
                         <row>
                             <entry>string</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_STRING</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_String</classname></entry>
                         </row>
 
                         <row>
+                            <entry>nil</entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_NIL</constant></entry>
+                            <entry><classname>Zend_XmlRpc_Value_Nil</classname></entry>
+                        </row>
+
+                        <row>
+                            <entry>ex:nil</entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_APACHENIL</constant></entry>
+                            <entry><classname>Zend_XmlRpc_Value_Nil</classname></entry>
+                        </row>
+
+                        <row>
                             <entry>base64</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_BASE64</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Base64</classname></entry>
                         </row>
 
                         <row>
                             <entry>dateTime.iso8601</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_DATETIME</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_DateTime</classname></entry>
                         </row>
 
                         <row>
                             <entry>array</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_ARRAY</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_ARRAY</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Array</classname></entry>
                         </row>
 
                         <row>
                             <entry>struct</entry>
-                            <entry><classname>Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT</classname></entry>
+                            <entry><constant>Zend_XmlRpc_Value::XMLRPC_TYPE_STRUCT</constant></entry>
                             <entry><classname>Zend_XmlRpc_Value_Struct</classname></entry>
                         </row>
                     </tbody>
@@ -300,7 +334,7 @@ $result = $client->call('foo.bar', array(array()));
 
             <para>
                 <note>
-                        <title>Conversion automatique</title>
+                    <title>Conversion automatique</title>
 
                     <para>
                         Lorsque vous créez un objet <classname>Zend_XmlRpc_Value</classname>,
@@ -338,10 +372,10 @@ $result = $client->call('foo.bar', array(array()));
             <programlisting language="php"><![CDATA[
 $client = new Zend_XmlRpc_Client('http://framework.zend.com/xmlrpc');
 
-$server = $client->getProxy();
+$service = $client->getProxy();
 // Proxy l'espace de nom par défaut
 
-$hello = $server->test->sayHello(1, 2);
+$hello = $service->test->sayHello(1, 2);
 // test.Hello(1, 2) retourne "hello"
 ]]></programlisting>
         </example>
@@ -514,8 +548,8 @@ $request->setParams(array('foo', 'bar'));
 
 $client->doRequest($request);
 
-// $server->getLastRequest() retoure instanceof Zend_XmlRpc_Request
-// $server->getLastResponse() retourne instanceof Zend_XmlRpc_Response
+// $client->getLastRequest() retoure instanceof Zend_XmlRpc_Request
+// $client->getLastResponse() retourne instanceof Zend_XmlRpc_Response
 ]]></programlisting>
         </example>
 

@@ -17,7 +17,7 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: BlobContainer.php 24352 2009-07-24 06:44:32Z unknown $
+ * @version    $Id$
  */
 
 /**

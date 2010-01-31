@@ -16,6 +16,7 @@
  * @package    Zend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id$
  */
 
 if (version_compare(PHP_VERSION, '5.3.0', '<')) {

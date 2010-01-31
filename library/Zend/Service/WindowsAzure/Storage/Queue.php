@@ -17,7 +17,7 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://todo     name_todo
- * @version    $Id: Blob.php 24241 2009-07-22 09:43:13Z unknown $
+ * @version    $Id$
  */
 
 /**

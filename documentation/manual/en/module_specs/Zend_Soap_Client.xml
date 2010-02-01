@@ -4,7 +4,8 @@
     <title>Zend_Soap_Client</title>
 
     <para>
-        The <classname>Zend_Soap_Client</classname> class simplifies <acronym>SOAP</acronym> client development for <acronym>PHP</acronym> programmers.
+        The <classname>Zend_Soap_Client</classname> class simplifies <acronym>SOAP</acronym> client
+        development for <acronym>PHP</acronym> programmers.
     </para>
 
     <para>
@@ -12,115 +13,151 @@
     </para>
 
     <para>
-        Under the WSDL mode, the <classname>Zend_Soap_Client</classname> component uses a WSDL document to define transport
-        layer options.
+        Under the WSDL mode, the <classname>Zend_Soap_Client</classname> component uses a WSDL
+        document to define transport layer options.
     </para>
 
     <para>
-        The WSDL description is usually provided by the web service the client will access. If the WSDL description is not
-        made available, you may want to use <classname>Zend_Soap_Client</classname> in non-WSDL mode.
-        Under this mode, all <acronym>SOAP</acronym> protocol options have to be set explicitly on the <classname>Zend_Soap_Client</classname> class.
+        The WSDL description is usually provided by the web service the client will access. If the
+        WSDL description is not made available, you may want to use
+        <classname>Zend_Soap_Client</classname> in non-WSDL mode. Under this mode, all
+        <acronym>SOAP</acronym> protocol options have to be set explicitly on the
+        <classname>Zend_Soap_Client</classname> class.
     </para>
 
     <sect2 id="zend.soap.client.constructor">
         <title>Zend_Soap_Client Constructor</title>
+
         <para>
             The <classname>Zend_Soap_Client</classname> constructor takes two parameters:
+
             <itemizedlist>
                 <listitem>
                     <para>
                         <varname>$wsdl</varname> - the <acronym>URI</acronym> of a WSDL file.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <varname>$options</varname> - options to create <acronym>SOAP</acronym> client object.
+                        <varname>$options</varname> - options to create <acronym>SOAP</acronym>
+                        client object.
                     </para>
                 </listitem>
             </itemizedlist>
 
-            Both of these parameters may be set later using <methodname>setWsdl($wsdl)</methodname> and
-            <methodname>setOptions($options)</methodname> methods respectively.
+            Both of these parameters may be set later using <methodname>setWsdl($wsdl)</methodname>
+            and <methodname>setOptions($options)</methodname> methods respectively.
         </para>
 
         <note>
             <title>Important!</title>
+
             <para>
-                If you use <classname>Zend_Soap_Client</classname> component in non-WSDL mode, you <emphasis>must</emphasis> set
-                the 'location' and 'uri' options.
+                If you use <classname>Zend_Soap_Client</classname> component in non-WSDL mode, you
+                <emphasis>must</emphasis> set the 'location' and 'uri' options.
             </para>
         </note>
 
         <para>
             The following options are recognized:
+
             <itemizedlist>
                 <listitem>
                     <para>
-                        'soap_version' ('soapVersion') - soap version to use (SOAP_1_1 or <acronym>SOAP</acronym>_1_2).
+                        'soap_version' ('soapVersion') - soap version to use (SOAP_1_1 or
+                        <acronym>SOAP</acronym>_1_2).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        'classmap' ('classMap') - can be used to map some WSDL types to <acronym>PHP</acronym> classes.
+                        'classmap' ('classMap') - can be used to map some WSDL types to
+                        <acronym>PHP</acronym> classes.
                     </para>
+
                     <para>
-                        The option must be an array with WSDL types as keys and names of <acronym>PHP</acronym> classes as values.
+                        The option must be an array with WSDL types as keys and names of
+                        <acronym>PHP</acronym> classes as values.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        'encoding' - internal character encoding (UTF-8 is always used as an external encoding).
+                        'encoding' - internal character encoding (UTF-8 is always used as an
+                        external encoding).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        'wsdl' which is equivalent to <methodname>setWsdl($wsdlValue)</methodname> call.
+                        'wsdl' which is equivalent to <methodname>setWsdl($wsdlValue)</methodname>
+                        call.
                     </para>
+
                     <para>
-                        Changing this option may switch <classname>Zend_Soap_Client</classname> object to or from WSDL mode.
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        'uri' - target namespace for the <acronym>SOAP</acronym> service (required for non-WSDL-mode, doesn't work for WSDL mode).
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        'location' - the <acronym>URL</acronym> to request (required for non-WSDL-mode, doesn't work for WSDL mode).
+                        Changing this option may switch <classname>Zend_Soap_Client</classname>
+                        object to or from WSDL mode.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        'style' - request style (doesn't work for WSDL mode): <constant>SOAP_RPC</constant> or <constant>SOAP_DOCUMENT</constant>.
+                        'uri' - target namespace for the <acronym>SOAP</acronym> service (required
+                        for non-WSDL-mode, doesn't work for WSDL mode).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        'use' - method to encode messages (doesn't work for WSDL mode): <constant>SOAP_ENCODED</constant> or
-                        <constant>SOAP_LITERAL</constant>.
+                        'location' - the <acronym>URL</acronym> to request (required for
+                        non-WSDL-mode, doesn't work for WSDL mode).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        'login' and 'password' - login and password for an <acronym>HTTP</acronym> authentication.
+                        'style' - request style (doesn't work for WSDL mode):
+                        <constant>SOAP_RPC</constant> or <constant>SOAP_DOCUMENT</constant>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        'proxy_host', 'proxy_port', 'proxy_login', and 'proxy_password' - an <acronym>HTTP</acronym> connection through a proxy server.
+                        'use' - method to encode messages (doesn't work for WSDL mode):
+                        <constant>SOAP_ENCODED</constant> or <constant>SOAP_LITERAL</constant>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        'local_cert' and 'passphrase' - <acronym>HTTPS</acronym> client certificate authentication options.
+                        'login' and 'password' - login and password for an <acronym>HTTP</acronym>
+                        authentication.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        'compression' - compression options; it's a combination of <constant>SOAP_COMPRESSION_ACCEPT</constant>,
-                        <constant>SOAP_COMPRESSION_GZIP</constant> and <constant>SOAP_COMPRESSION_DEFLATE</constant> options which
-                        may be used like this:
+                        'proxy_host', 'proxy_port', 'proxy_login', and 'proxy_password' - an
+                        <acronym>HTTP</acronym> connection through a proxy server.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        'local_cert' and 'passphrase' - <acronym>HTTPS</acronym> client certificate
+                        authentication options.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        'compression' - compression options; it's a combination of
+                        <constant>SOAP_COMPRESSION_ACCEPT</constant>,
+                        <constant>SOAP_COMPRESSION_GZIP</constant> and
+                        <constant>SOAP_COMPRESSION_DEFLATE</constant> options which may be used like
+                        this:
+
                         <programlisting language="php"><![CDATA[
 // Accept response compression
 $client = new Zend_Soap_Client("some.wsdl",
@@ -146,15 +183,18 @@ $client = new Zend_Soap_Client("some.wsdl",
         <title>Performing SOAP Requests</title>
 
         <para>
-            After we've created a <classname>Zend_Soap_Client</classname> object we are ready to perform <acronym>SOAP</acronym> requests.
+            After we've created a <classname>Zend_Soap_Client</classname> object we are ready to
+            perform <acronym>SOAP</acronym> requests.
         </para>
+
         <para>
-            Each web service method is mapped to the virtual <classname>Zend_Soap_Client</classname> object method which takes
-            parameters with common <acronym>PHP</acronym> types.
+            Each web service method is mapped to the virtual <classname>Zend_Soap_Client</classname>
+            object method which takes parameters with common <acronym>PHP</acronym> types.
         </para>
 
         <para>
             Use it like in the following example:
+
             <programlisting language="php"><![CDATA[
 //****************************************************************
 //                Server code

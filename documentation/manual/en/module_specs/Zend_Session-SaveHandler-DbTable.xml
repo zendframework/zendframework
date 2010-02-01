@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.session.savehandler.dbtable">
     <title>Zend_Session_SaveHandler_DbTable</title>
+
     <para>
         The basic setup for <classname>Zend_Session_SaveHandler_DbTable</classname> must at least
         have four columns, denoted in the config array or <classname>Zend_Config</classname> object:
@@ -12,8 +13,10 @@
         (<command>modified + lifetime > time();</command>);
         and data, which is the serialized data stored in the session
     </para>
+
     <example id="zend.session.savehandler.dbtable.basic">
             <title>Basic Setup</title>
+
             <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
   `id` char(32),
@@ -23,6 +26,7 @@ CREATE TABLE `session` (
   PRIMARY KEY (`id`)
 );
 ]]></programlisting>
+
         <programlisting language="php"><![CDATA[
 //get your database connection ready
 $db = Zend_Db::factory('Pdo_Mysql', array(
@@ -53,12 +57,15 @@ Zend_Session::start();
 //now you can use Zend_Session like any other time
 ]]></programlisting>
     </example>
+
     <para>
         You can also use Multiple Columns in your primary key for
         <classname>Zend_Session_SaveHandler_DbTable</classname>.
     </para>
+
     <example id="zend.session.savehandler.dbtable.multi-column-key">
         <title>Using a Multi-Column Primary Key</title>
+
         <programlisting language="SQL"><![CDATA[
 CREATE TABLE `session` (
     `session_id` char(32) NOT NULL,
@@ -70,6 +77,7 @@ CREATE TABLE `session` (
     PRIMARY KEY (`Session_ID`, `save_path`, `name`)
 );
 ]]></programlisting>
+
         <programlisting language="php"><![CDATA[
 //setup your DB connection like before
 //NOTE: this config is also passed to Zend_Db_Table so anything specific

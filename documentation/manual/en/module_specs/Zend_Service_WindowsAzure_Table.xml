@@ -332,9 +332,10 @@ public $Age;
                 To use the <classname>Zend_Service_WindowsAzure_Storage_Table</classname> class
                 without defining a schema, you can make use of the
                 <classname>Zend_Service_WindowsAzure_Storage_DynamicTableEntity</classname> class.
-                This class inherits <classname>Zend_Service_WindowsAzure_Storage_TableEntity</classname>
-                like an enforced schema class does, but contains additional logic to make it dynamic
-                and not bound to a schema.
+                This class inherits
+                <classname>Zend_Service_WindowsAzure_Storage_TableEntity</classname> like an
+                enforced schema class does, but contains additional logic to make it dynamic and not
+                bound to a schema.
             </para>
 
             <para>
@@ -378,7 +379,10 @@ public $Age;
             </para>
 
             <example id="zend.service.windowsazure.storage.table.entities.dynamic.schema">
-                <title>Dynamicaly adding properties to Zend_Service_WindowsAzure_Storage_DynamicTableEntity</title>
+                <title>
+                    Dynamicaly adding properties
+                    Zend_Service_WindowsAzure_Storage_DynamicTableEntity
+                </title>
 
                 <programlisting language="php"><![CDATA[
 $target = new Zend_Service_WindowsAzure_Storage_DynamicTableEntity(
@@ -393,8 +397,11 @@ $target->Age  = 25;     // Will add property "Age" of type "Edm.Int32"
                 Optionally, a property type can be enforced:
             </para>
 
-            <example id="zend.service.windowsazure.storage.table.entities.dynamic.schema-forcedproperties">
-                <title>Forcing property types on Zend_Service_WindowsAzure_Storage_DynamicTableEntity</title>
+            <example
+                id="zend.service.windowsazure.storage.table.entities.dynamic.schema-forcedproperties">
+                <title>
+                    Forcing property types on Zend_Service_WindowsAzure_Storage_DynamicTableEntity
+                </title>
 
                 <programlisting language="php"><![CDATA[
 $target = new Zend_Service_WindowsAzure_Storage_DynamicTableEntity(
@@ -456,7 +463,8 @@ echo 'Etag: ' . $result->getEtag() . "\n";
                     key.  Note that the table and entity have already been created before.
                 </para>
 
-                <example id="zend.service.windowsazure.storage.table.entities.api.retrieve-by-id.example">
+                <example
+                    id="zend.service.windowsazure.storage.table.entities.api.retrieve-by-id.example">
                     <title>Retrieving an entity by partition key and row key</title>
 
                     <programlisting language="php"><![CDATA[
@@ -501,7 +509,8 @@ $result = $storageClient->updateEntity('testtable', $entity);
                     newer data.
                 </para>
 
-                <example id="zend.service.windowsazure.storage.table.entities.api.updating.example-etag">
+                <example
+                    id="zend.service.windowsazure.storage.table.entities.api.updating.example-etag">
                     <title>Updating an entity (with Etag check)</title>
 
                     <programlisting language="php"><![CDATA[

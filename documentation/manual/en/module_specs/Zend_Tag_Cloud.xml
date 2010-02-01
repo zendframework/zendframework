@@ -83,6 +83,7 @@
             This example illustrates a basic example of how to create a tag
             cloud, add multiple tags to it and finally render it.
         </para>
+
         <programlisting language="php"><![CDATA[
 // Create the cloud and assign static tags to it
 $cloud = new Zend_Tag_Cloud(array(

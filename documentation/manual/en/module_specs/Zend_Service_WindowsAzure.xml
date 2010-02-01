@@ -65,7 +65,6 @@
                 documentation</ulink> for detailed description of the service. You will need to be
             familiar with basic concepts in order to use this service.
         </para>
-
     </sect2>
 
     <sect2 id="zend.service.windowsazure.features">
@@ -111,9 +110,9 @@
             Windows Azure's features, no matter if it is hosted on the Windows Azure platform or on
             an in-premise web server.
         </para>
-  </sect2>
+    </sect2>
 
-  <xi:include href="Zend_Service_WindowsAzure_Blob.xml" />
-  <xi:include href="Zend_Service_WindowsAzure_Table.xml" />
-  <xi:include href="Zend_Service_WindowsAzure_Queue.xml" />
+    <xi:include href="Zend_Service_WindowsAzure_Blob.xml" />
+    <xi:include href="Zend_Service_WindowsAzure_Table.xml" />
+    <xi:include href="Zend_Service_WindowsAzure_Queue.xml" />
 </sect1>

@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer Basics</title>
+
     <para>
         <classname>Zend_OpenId_Consumer</classname> can be used to implement OpenID
         authentication for web sites.
@@ -9,6 +10,7 @@
 
     <sect2 id="zend.openid.consumer.authentication">
         <title>OpenID Authentication</title>
+
         <para>
             From a web site developer's point of view, the OpenID authentication
             process consists of three steps:
@@ -50,6 +52,7 @@
 
         <example id="zend.openid.consumer.example-1">
             <title>The Simple OpenID Login form</title>
+
             <programlisting language="php"><![CDATA[
 <html><body>
 <form method="post" action="example-1_2.php"><fieldset>
@@ -61,16 +64,18 @@
         </example>
 
         <para>
-            This form passes the OpenID identity on submission to the following <acronym>PHP</acronym>
-            script that performs the second step of authentication. The
-            <acronym>PHP</acronym> script need only call the <methodname>Zend_OpenId_Consumer::login()</methodname> method in this step.
-            The first argument of this
-            method is an accepted OpenID identity, and the second is the <acronym>URL</acronym> of a script
-            that handles the third and last step of authentication.
+            This form passes the OpenID identity on submission to the following
+            <acronym>PHP</acronym> script that performs the second step of authentication. The
+            <acronym>PHP</acronym> script need only call the
+            <methodname>Zend_OpenId_Consumer::login()</methodname> method in this step. The first
+            argument of this method is an accepted OpenID identity, and the second is the
+            <acronym>URL</acronym> of a script that handles the third and last step of
+            authentication.
         </para>
 
         <example id="zend.openid.consumer.example-1_2">
             <title>The Authentication Request Handler</title>
+
             <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
@@ -116,6 +121,7 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
 
         <example id="zend.openid.consumer.example-1_3">
             <title>The Authentication Response Verifier</title>
+
             <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if ($consumer->verify($_GET, $id)) {
@@ -129,8 +135,8 @@ if ($consumer->verify($_GET, $id)) {
         <para>
             This check is performed using the <classname>Zend_OpenId_Consumer::verify</classname>
             method, which takes an array of
-            the <acronym>HTTP</acronym> request's arguments and checks that this response is properly
-            signed by the OpenID provider. It may assign
+            the <acronym>HTTP</acronym> request's arguments and checks that this response is
+            properly signed by the OpenID provider. It may assign
             the claimed OpenID identity that was entered by end user in the
             first step using a second, optional argument.
         </para>
@@ -138,6 +144,7 @@ if ($consumer->verify($_GET, $id)) {
 
     <sect2 id="zend.openid.consumer.combine">
         <title>Combining all Steps in One Page</title>
+
         <para>
             The following example combines all three steps in one script. It doesn't
             provide any new functionality. The advantage of using just one script is that
@@ -149,6 +156,7 @@ if ($consumer->verify($_GET, $id)) {
 
         <example id="zend.openid.consumer.example-2">
             <title>The Complete OpenID Login Script</title>
+
             <programlisting language="php"><![CDATA[
 <?php
 $status = "";
@@ -197,18 +205,20 @@ if (isset($_POST['openid_action']) &&
 
     <sect2 id="zend.openid.consumer.realm">
         <title>Consumer Realm</title>
+
         <para>
             When an OpenID-enabled site passes authentication requests to a
-            provider, it identifies itself with a realm <acronym>URL</acronym>. This <acronym>URL</acronym> may be
-            considered a root of a trusted site. If the user trusts the realm <acronym>URL</acronym>, he or she
-            should also trust matched and subsequent <acronym>URL</acronym>s.
+            provider, it identifies itself with a realm <acronym>URL</acronym>. This
+            <acronym>URL</acronym> may be considered a root of a trusted site. If the user trusts
+            the realm <acronym>URL</acronym>, he or she should also trust matched and subsequent
+            <acronym>URL</acronym>s.
         </para>
 
         <para>
-            By default, the realm <acronym>URL</acronym> is automatically set to the <acronym>URL</acronym> of the
-            directory in which the login script resides. This default value is useful for most, but
-            not all, cases. Sometimes an entire domain, and not a directory should be trusted. Or even a
-            combination of several servers in one domain.
+            By default, the realm <acronym>URL</acronym> is automatically set to the
+            <acronym>URL</acronym> of the directory in which the login script resides. This default
+            value is useful for most, but not all, cases. Sometimes an entire domain, and not a
+            directory should be trusted. Or even a combination of several servers in one domain.
         </para>
 
         <para>
@@ -220,6 +230,7 @@ if (isset($_POST['openid_action']) &&
 
         <example id="zend.openid.consumer.example-3_2">
             <title>Authentication Request for Specified Realm</title>
+
             <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if (!$consumer->login($_POST['openid_identifier'],
@@ -238,6 +249,7 @@ if (!$consumer->login($_POST['openid_identifier'],
 
     <sect2 id="zend.openid.consumer.check">
         <title>Immediate Check</title>
+
         <para>
             In some cases, an application need only check if a user is already
             logged in to a trusted OpenID server without any interaction with the
@@ -252,6 +264,7 @@ if (!$consumer->login($_POST['openid_identifier'],
 
         <example id="zend.openid.consumer.example-4">
             <title>Immediate Check without Interaction</title>
+
             <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
@@ -268,33 +281,37 @@ if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
 
     <sect2 id="zend.openid.consumer.storage">
         <title>Zend_OpenId_Consumer_Storage</title>
+
         <para>
             There are three steps in the OpenID authentication procedure, and each
-            step is performed by a separate <acronym>HTTP</acronym> request. To store information between
-            requests, <classname>Zend_OpenId_Consumer</classname> uses internal storage.
+            step is performed by a separate <acronym>HTTP</acronym> request. To store information
+            between requests, <classname>Zend_OpenId_Consumer</classname> uses internal storage.
         </para>
 
         <para>
             Developers do not necessarily have to be aware of this storage because by default
-            <classname>Zend_OpenId_Consumer</classname> uses file-based storage under the temporary directory-
-            similar to <acronym>PHP</acronym> sessions. However, this storage may be not suitable in all
-            cases. Some developers may want to store information in a database, while others may
-            need to use common storage suitable for server farms. Fortunately,
-            developers may easily replace the default storage with their own. To specify a custom storage mechanism,
-            one need only extend the <classname>Zend_OpenId_Consumer_Storage</classname> class and pass this subclass
-            to the <classname>Zend_OpenId_Consumer</classname> constructor in the first argument.
+            <classname>Zend_OpenId_Consumer</classname> uses file-based storage under the temporary
+            directory- similar to <acronym>PHP</acronym> sessions. However, this storage may be not
+            suitable in all cases. Some developers may want to store information in a database,
+            while others may need to use common storage suitable for server farms. Fortunately,
+            developers may easily replace the default storage with their own. To specify a custom
+            storage mechanism, one need only extend the
+            <classname>Zend_OpenId_Consumer_Storage</classname> class and pass this subclass to the
+            <classname>Zend_OpenId_Consumer</classname> constructor in the first argument.
         </para>
 
         <para>
             The following example demonstrates a simple storage mechanism that uses
             <classname>Zend_Db</classname> as its backend and exposes three groups of functions.
-            The first group contains functions for working with associations, while the second group caches
-            discovery information, and the third group can be used to check whether a response is unique. This
-            class can easily be used with existing or new databases; if the required tables don't exist, it will create them.
+            The first group contains functions for working with associations, while the second group
+            caches discovery information, and the third group can be used to check whether a
+            response is unique. This class can easily be used with existing or new databases; if the
+            required tables don't exist, it will create them.
         </para>
 
         <example id="zend.openid.consumer.example-5">
             <title>Database Storage</title>
+
             <programlisting language="php"><![CDATA[
 class DbStorage extends Zend_OpenId_Consumer_Storage
 {
@@ -507,12 +524,13 @@ $consumer = new Zend_OpenId_Consumer($storage);
 
     <sect2 id="zend.openid.consumer.sreg">
         <title>Simple Registration Extension</title>
+
         <para>
             In addition to authentication, the OpenID standard can be used for
-            lightweight profile exchange to make information about a user portable across multiple sites. This feature is not covered by the OpenID
-            authentication specification, but by the OpenID Simple Registration
-            Extension protocol. This protocol allows OpenID-enabled sites to ask for
-            information about end users from OpenID providers. Such information may
+            lightweight profile exchange to make information about a user portable across multiple
+            sites. This feature is not covered by the OpenID authentication specification, but by
+            the OpenID Simple Registration Extension protocol. This protocol allows OpenID-enabled
+            sites to ask for information about end users from OpenID providers. Such information may
             include:
         </para>
 
@@ -523,6 +541,7 @@ $consumer = new Zend_OpenId_Consumer($storage);
                     - any UTF-8 string that the end user uses as a nickname
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>email</emphasis>
@@ -530,12 +549,14 @@ $consumer = new Zend_OpenId_Consumer($storage);
                     of RFC2822
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>fullname</emphasis>
                     - a UTF-8 string representation of the user's full name
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>dob</emphasis>
@@ -543,35 +564,40 @@ $consumer = new Zend_OpenId_Consumer($storage);
                     representation uses fewer than the specified number of digits in this format
                     should be zero-padded. In other words, the length of this value must always be
                     10. If the end user does not want to reveal any particular
-                    part of this value (i.e., year, month or day), it must be set to zero. For example,
-                    if the user wants to specify that his date of birth falls in 1980,
+                    part of this value (i.e., year, month or day), it must be set to zero. For
+                    example, if the user wants to specify that his date of birth falls in 1980,
                     but not specify the month or day, the value returned should be '1980-00-00'.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>gender</emphasis>
                     - the user's gender: "M" for male, "F" for female
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>postcode</emphasis>
                     - a UTF-8 string that conforms to the postal system of the user's country
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>country</emphasis>
                     - the user's country of residence as specified by ISO3166
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>language</emphasis>
                     - the user's preferred language as specified by ISO639
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>timezone</emphasis>
@@ -592,6 +618,7 @@ $consumer = new Zend_OpenId_Consumer($storage);
 
         <example id="zend.openid.consumer.example-6_2">
             <title>Sending Requests with a Simple Registration Extension</title>
+
             <programlisting language="php"><![CDATA[
 $sreg = new Zend_OpenId_Extension_Sreg(array(
     'nickname'=>true,
@@ -621,12 +648,13 @@ if (!$consumer->login($_POST['openid_identifier'],
             On the third step of authentication, the
             <classname>Zend_OpenId_Extension_Sreg</classname> object should be passed to
             <classname>Zend_OpenId_Consumer::verify</classname>. Then on successful authentication
-            the <classname>Zend_OpenId_Extension_Sreg::getProperties</classname> method will return an
-            associative array of requested fields.
+            the <classname>Zend_OpenId_Extension_Sreg::getProperties</classname> method will return
+            an associative array of requested fields.
         </para>
 
         <example id="zend.openid.consumer.example-6_3">
             <title>Verifying Responses with a Simple Registration Extension</title>
+
             <programlisting language="php"><![CDATA[
 $sreg = new Zend_OpenId_Extension_Sreg(array(
     'nickname'=>true,
@@ -655,8 +683,8 @@ if ($consumer->verify($_GET, $id, $sreg)) {
             If the <classname>Zend_OpenId_Extension_Sreg</classname> object was created without any
             arguments, the user code should check for the existence of the required
             data itself. However, if the object is created with the same list of
-            required fields as on the second step, it will automatically check for the
-            existence of required data. In this case, <classname>Zend_OpenId_Consumer::verify</classname>
+            required fields as on the second step, it will automatically check for the existence
+            of required data. In this case, <classname>Zend_OpenId_Consumer::verify</classname>
             will return <constant>FALSE</constant> if any of the required fields are
             missing.
         </para>
@@ -679,6 +707,7 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 
     <sect2 id="zend.openid.consumer.auth">
         <title>Integration with Zend_Auth</title>
+
         <para>
             Zend Framework provides a special class to support user
             authentication: <classname>Zend_Auth</classname>. This class can be used together
@@ -691,12 +720,13 @@ if ($consumer->verify($_GET, $id, $sreg)) {
 
         <para>
             The big difference between this adapter and existing ones, is that
-            it works on two <acronym>HTTP</acronym> requests and includes a dispatch code to perform the
-            second or third step of OpenID authentication.
+            it works on two <acronym>HTTP</acronym> requests and includes a dispatch code to perform
+            the second or third step of OpenID authentication.
         </para>
 
         <example id="zend.openid.consumer.example-7">
             <title>Zend_Auth Adapter for OpenID</title>
+
             <programlisting language="php"><![CDATA[
 <?php
 class OpenIdAdapter implements Zend_Auth_Adapter_Interface {
@@ -773,6 +803,7 @@ if ((isset($_POST['openid_action']) &&
 
     <sect2 id="zend.openid.consumer.mvc">
         <title>Integration with Zend_Controller</title>
+
         <para>
             Finally a couple of words about integration into
             Model-View-Controller applications: such Zend Framework applications are
@@ -786,9 +817,9 @@ if ((isset($_POST['openid_action']) &&
             capabilities but it performs <acronym>HTTP</acronym> redirections on success of
             <classname>Zend_OpenId_Consumer::login</classname> and
             <classname>Zend_OpenId_Consumer::check</classname>. These redirections may work
-            incorrectly or not at all if some data was already sent to the
-            web browser. To properly perform <acronym>HTTP</acronym> redirection in <acronym>MVC</acronym> code the real
-            <classname>Zend_Controller_Response_Http</classname> should be sent to
+            incorrectly or not at all if some data was already sent to the web browser. To
+            properly perform <acronym>HTTP</acronym> redirection in <acronym>MVC</acronym> code the
+            real <classname>Zend_Controller_Response_Http</classname> should be sent to
             <classname>Zend_OpenId_Consumer::login</classname> or
             <classname>Zend_OpenId_Consumer::check</classname> as the last argument.
         </para>

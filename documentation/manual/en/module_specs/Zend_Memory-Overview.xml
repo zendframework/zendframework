@@ -5,6 +5,7 @@
 
     <sect2 id="zend.memory.introduction">
         <title>Introduction</title>
+
         <para>
             The <classname>Zend_Memory</classname> component is intended to manage data in an
             environment with limited memory.
@@ -31,11 +32,13 @@
 
         <example id="zend.memory.introduction.example-1">
             <title>Using Zend_Memory component</title>
+
             <para>
                 <methodname>Zend_Memory::factory()</methodname> instantiates the memory
                 manager object with specified backend options.
             </para>
-                <programlisting language="php"><![CDATA[
+
+            <programlisting language="php"><![CDATA[
 $backendOptions = array(
     'cache_dir' => './tmp/' // Directory where to put the swapped memory blocks
 );
@@ -62,21 +65,24 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
     </sect2>
 
     <sect2 id="zend.memory.theory-of-operation">
-
         <title>Theory of Operation</title>
 
         <para>
             <classname>Zend_Memory</classname> component operates with the following concepts:
+
             <itemizedlist>
                 <listitem>
                     <para>Memory manager</para>
                 </listitem>
+
                 <listitem>
                     <para>Memory container</para>
                 </listitem>
+
                 <listitem>
                     <para>Locked memory object</para>
                 </listitem>
+
                 <listitem>
                     <para>Movable memory object</para>
                 </listitem>
@@ -84,7 +90,6 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
         </para>
 
         <sect3 id="zend.memory.theory-of-operation.manager">
-
             <title>Memory manager</title>
 
             <para>
@@ -92,11 +97,9 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
                 by request of user application and returns them wrapped into
                 a memory container object.
             </para>
-
         </sect3>
 
         <sect3 id="zend.memory.theory-of-operation.container">
-
             <title>Memory container</title>
 
             <para>
@@ -131,11 +134,9 @@ $memObject->value = substr($memObject->value, $start, $length);
                     method instead of accessing the value property directly.
                 </para>
             </note>
-
         </sect3>
 
         <sect3 id="zend.memory.theory-of-operation.locked">
-
             <title>Locked memory</title>
 
             <para>
@@ -143,11 +144,9 @@ $memObject->value = substr($memObject->value, $start, $length);
                 Data stored in locked memory are never swapped to the cache
                 backend.
             </para>
-
         </sect3>
 
         <sect3 id="zend.memory.theory-of-operation.movable">
-
             <title>Movable memory</title>
 
             <para>
@@ -161,9 +160,6 @@ $memObject->value = substr($memObject->value, $start, $length);
                 See <xref linkend="zend.memory.memory-manager.settings.min-size" />
                 for more details.
             </para>
-
         </sect3>
-
     </sect2>
-
 </sect1>

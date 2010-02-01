@@ -208,8 +208,9 @@ if (isset($data->text)) {
 echo $result;
 ]]></programlisting>
 
-    <para>As a note on the customised client, this can be passed to most
-    Zend Framework service or other classes using <classname>Zend_Http_Client
-    </classname> displacing the default client they would otherwise use.</para>
-
+    <para>
+        As a note on the customised client, this can be passed to most
+        Zend Framework service or other classes using <classname>Zend_Http_Client
+        </classname> displacing the default client they would otherwise use.
+    </para>
 </sect2>

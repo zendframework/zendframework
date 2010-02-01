@@ -25,6 +25,7 @@
 
     <table id="zend.navigation.pages.uri.options">
         <title>URI page options</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -34,6 +35,7 @@
                     <entry>Description</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><code>uri</code></entry>

@@ -9,6 +9,7 @@
         <para>
             Create movable memory objects using the <methodname>create([$data])</methodname>
             method of the memory manager:
+
             <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting>
@@ -26,6 +27,7 @@ $memObject = $memoryManager->create($data);
         <para>
             Create locked memory objects using the <methodname>createLocked([$data])</methodname>
             method of the memory manager:
+
             <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting>

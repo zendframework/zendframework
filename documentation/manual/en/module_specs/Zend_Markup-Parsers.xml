@@ -107,7 +107,6 @@
                 <thead>
                     <row>
                         <entry>Sample input</entry>
-
                         <entry>Sample output</entry>
                     </row>
                 </thead>
@@ -115,80 +114,76 @@
                 <tbody>
                     <row>
                         <entry>*foo*</entry>
-
                         <entry><![CDATA[<strong>foo</strong>]]></entry>
                     </row>
 
                     <row>
                         <entry>_foo_</entry>
-
                         <entry><![CDATA[<em>foo</em>]]></entry>
                     </row>
 
                     <row>
                         <entry>??foo??</entry>
-
                         <entry><![CDATA[<cite>foo</cite>]]></entry>
                     </row>
 
                     <row>
                         <entry>-foo-</entry>
-
                         <entry><![CDATA[<del>foo</del>]]></entry>
                     </row>
 
                     <row>
                         <entry>+foo+</entry>
-
                         <entry><![CDATA[<ins>foo</ins>]]></entry>
                     </row>
 
                     <row>
                         <entry>^foo^</entry>
-
                         <entry><![CDATA[<sup>foo</sup>]]></entry>
                     </row>
 
                     <row>
                         <entry>~foo~</entry>
-
                         <entry><![CDATA[<sub>foo</sub>]]></entry>
                     </row>
 
                     <row>
                         <entry>%foo%</entry>
-
                         <entry><![CDATA[<span>foo</span>]]></entry>
                     </row>
 
                     <row>
                         <entry>PHP(PHP Hypertext Preprocessor)</entry>
 
-                        <entry><![CDATA[<acronym title="PHP Hypertext Preprocessor">PHP</acronym>]]></entry>
+                        <entry>
+                            <![CDATA[<acronym title="PHP Hypertext Preprocessor">PHP</acronym>]]>
+                        </entry>
                     </row>
 
                     <row>
                         <entry>"Zend Framework":http://framework.zend.com/</entry>
 
-                        <entry><![CDATA[<a href="http://framework.zend.com/">Zend Framework</a>]]></entry>
+                        <entry>
+                            <![CDATA[<a href="http://framework.zend.com/">Zend Framework</a>]]>
+                        </entry>
                     </row>
 
                     <row>
                         <entry>h1. foobar</entry>
-
                         <entry><![CDATA[<h1>foobar</h1>]]></entry>
                     </row>
 
                     <row>
                         <entry>h6. foobar</entry>
-
                         <entry><![CDATA[<h6>foobar</h6>]]></entry>
                     </row>
 
                     <row>
                         <entry>!http://framework.zend.com/images/logo.gif!</entry>
 
-                        <entry><![CDATA[<img src="http://framework.zend.com/images/logo.gif" />]]></entry>
+                        <entry>
+                            <![CDATA[<img src="http://framework.zend.com/images/logo.gif" />]]>
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>

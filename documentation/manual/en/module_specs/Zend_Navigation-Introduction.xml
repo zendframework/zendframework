@@ -19,6 +19,7 @@
 
         <sect3 id="zend.navigation.introduction.pages">
             <title>Pages</title>
+
             <para>
                 A page (<classname>Zend_Navigation_Page</classname>) in
                 <classname>Zend_Navigation</classname> –
@@ -38,6 +39,7 @@
 
         <sect3 id="zend.navigation.introduction.containers">
             <title>Containers</title>
+
             <para>
                 A navigation container
                 (<classname>Zend_Navigation_Container</classname>) is a

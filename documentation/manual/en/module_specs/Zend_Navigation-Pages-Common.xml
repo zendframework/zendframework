@@ -25,6 +25,7 @@
 
     <table id="zend.navigation.pages.common.options">
         <title>Common page options</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -34,55 +35,64 @@
                     <entry>Description</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><code>label</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
-                    <entry>
-                        A page label, such as 'Home' or 'Blog'.
-                    </entry>
+                    <entry>A page label, such as 'Home' or 'Blog'.</entry>
                 </row>
+
                 <row>
                     <entry><code>id</code></entry>
                     <entry><type>String</type> | <code>int</code></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         An id tag/attribute that may be used when rendering
                         the page, typically in an anchor element.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>class</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         A <acronym>CSS</acronym> class that may be used when rendering the page,
                         typically in an anchor element.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>title</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         A short page description, typically for using
                         as the <code>title</code> attribute in an anchor.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>target</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Specifies a target that may be used for the page,
                         typically in an anchor element.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>rel</code></entry>
                     <entry><type>Array</type></entry>
                     <entry><methodname>array()</methodname></entry>
+
                     <entry>
                         Specifies forward relations for the page.
                         Each element in the array is a key-value pair, where the
@@ -96,19 +106,27 @@
                         section on the Links helper.</link>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>rev</code></entry>
                     <entry><type>Array</type></entry>
                     <entry><methodname>array()</methodname></entry>
+
                     <entry>
                         Specifies reverse relations for the page. Works exactly
                         like <code>rel</code>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>order</code></entry>
-                    <entry><type>String</type> | <code>int</code> | <constant>NULL</constant></entry>
+
+                    <entry>
+                        <type>String</type> | <code>int</code> | <constant>NULL</constant>
+                    </entry>
+
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Works like order for elements in
                         <link linkend="zend.form.quickstart.render">
@@ -122,30 +140,41 @@
                         the page was added to the container will be used.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>resource</code></entry>
-                    <entry><type>String</type> | <classname>Zend_Acl_Resource_Interface</classname> | <constant>NULL</constant></entry>
+
+                    <entry>
+                        <type>String</type> | <classname>Zend_Acl_Resource_Interface</classname>
+                        | <constant>NULL</constant>
+                    </entry>
+
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         <acronym>ACL</acronym> resource to associate with the page. Read more in
                         <link linkend="zend.view.helpers.initial.navigation.acl">the
                         section on <acronym>ACL</acronym> integration in view helpers.</link>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>privilege</code></entry>
                     <entry><type>String</type> | <constant>NULL</constant></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         <acronym>ACL</acronym> privilege to associate with the page. Read more in
                         <link linkend="zend.view.helpers.initial.navigation.acl">the
                         section on <acronym>ACL</acronym> integration in view helpers.</link>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>active</code></entry>
                     <entry><code>bool</code></entry>
                     <entry><constant>FALSE</constant></entry>
+
                     <entry>
                         Whether the page should be considered active for the
                         current request. If active is <constant>FALSE</constant> or not
@@ -153,20 +182,29 @@
                         request object upon calling <code>$page->isActive()</code>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>visible</code></entry>
                     <entry><code>bool</code></entry>
                     <entry><constant>TRUE</constant></entry>
+
                     <entry>
                         Whether page should be visible for the user, or just
                         be a part of the structure. Invisible pages are skipped
                         by view helpers.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>pages</code></entry>
-                    <entry><type>Array</type> | <classname>Zend_Config</classname> | <constant>NULL</constant></entry>
+
+                    <entry>
+                        <type>Array</type> | <classname>Zend_Config</classname> |
+                        <constant>NULL</constant>
+                    </entry>
+
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Child pages of the page. This could be an <type>Array</type>
                         or <classname>Zend_Config</classname> object containing either page
@@ -181,6 +219,7 @@
 
     <note>
         <title>Custom properties</title>
+
         <para>
             All pages support setting and getting of custom properties by
             use of the magic methods <methodname>__set($name, $value)</methodname>,
@@ -191,6 +230,7 @@
             can be serialized/deserialized successfully even if the pages
             contains properties that are not native in the page class.
         </para>
+
         <para>
             Both native and custom properties can be set using
             <code>$page->set($name, $value)</code> and retrieved using

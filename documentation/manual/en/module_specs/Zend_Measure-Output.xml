@@ -9,33 +9,30 @@
     </para>
 
     <para>
-        <link linkend="zend.measure.output.auto"><code>Automatic output</code>
-        </link>
+        <link linkend="zend.measure.output.auto"><code>Automatic output</code></link>
     </para>
 
     <para>
-        <link linkend="zend.measure.output.value"><code>Outputting values</code>
-        </link>
+        <link linkend="zend.measure.output.value"><code>Outputting values</code></link>
     </para>
 
     <para>
-        <link linkend="zend.measure.output.unit"><code>Output with unit of measurement</code>
-        </link>
+        <link linkend="zend.measure.output.unit"><code>Output with unit of measurement</code></link>
     </para>
 
     <para>
-        <link linkend="zend.measure.output.unit"><code>Output as localized string</code>
-        </link>
+        <link linkend="zend.measure.output.unit"><code>Output as localized string</code></link>
     </para>
 
     <sect2 id="zend.measure.output.auto">
-
         <title>Automatic output</title>
 
         <para>
             <classname>Zend_Measure</classname> supports outputting of strings automatically.
+
             <example id="zend.measure.output.auto.example-1">
                 <title>Automatic output</title>
+
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
@@ -50,27 +47,24 @@ echo $unit;
 
         <note>
             <title>Measurement output</title>
+
             <para>
                 Output can be achieved simply by using
-                <ulink url="http://php.net/echo"><code>echo</code>
-                </ulink>
-                or
-                <ulink url="http://php.net/print"><code>print</code>
-                </ulink>
-                .
+                <ulink url="http://php.net/echo"><code>echo</code></ulink> or
+                <ulink url="http://php.net/print"><code>print</code></ulink>.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.measure.output.value">
-
         <title>Outputting values</title>
 
         <para>
             The value of a measurement can be output using <methodname>getValue()</methodname>.
+
             <example id="zend.measure.output.value.example-1">
                 <title>Output a value</title>
+
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
@@ -84,19 +78,21 @@ echo $unit->getValue();
         </para>
 
         <para>
-            The <methodname>getValue()</methodname> method accepts an optional parameter '<code>round</code>' which allows to
-            define a precision for the generated output. The standard precision is '<code>2</code>'.
+            The <methodname>getValue()</methodname> method accepts an optional parameter
+            '<code>round</code>' which allows to define a precision for the generated output. The
+            standard precision is '<code>2</code>'.
         </para>
     </sect2>
 
     <sect2 id="zend.measure.output.unit">
-
         <title>Output with unit of measurement</title>
 
         <para>
             The function <methodname>getType()</methodname> returns the current unit of measurement.
+
             <example id="zend.measure.output.unit.example-1">
                 <title>Outputting units</title>
+
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
@@ -108,21 +104,17 @@ echo $unit->getType();
 ]]></programlisting>
             </example>
         </para>
-
     </sect2>
 
     <sect2 id="zend.measure.output.localized">
-
         <title>Output as localized string</title>
 
         <para>
-            Outputting a string in a format common in the users' country is usually desirable. For example, the
-            measurement "1234567.8" would become "1.234.567,8" for Germany. This functionality will be supported in a
-            future release.
+            Outputting a string in a format common in the users' country is usually desirable. For
+            example, the measurement "1234567.8" would become "1.234.567,8" for Germany. This
+            functionality will be supported in a future release.
         </para>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

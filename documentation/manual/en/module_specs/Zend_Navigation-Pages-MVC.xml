@@ -4,9 +4,9 @@
     <title>Zend_Navigation_Page_Mvc</title>
 
     <para>
-        <acronym>MVC</acronym> pages are defined using <acronym>MVC</acronym> parameters known from the
-        <classname>Zend_Controller</classname> component. An <acronym>MVC</acronym> page will use
-        <classname>Zend_Controller_Action_Helper_Url</classname> internally
+        <acronym>MVC</acronym> pages are defined using <acronym>MVC</acronym> parameters known from
+        the <classname>Zend_Controller</classname> component. An <acronym>MVC</acronym> page will
+        use <classname>Zend_Controller_Action_Helper_Url</classname> internally
         in the <methodname>getHref()</methodname> method to generate hrefs, and
         the <methodname>isActive()</methodname> method will intersect the
         <classname>Zend_Controller_Request_Abstract</classname> params
@@ -15,6 +15,7 @@
 
     <table id="zend.navigation.pages.mvc.options">
         <title>MVC page options</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -24,58 +25,48 @@
                     <entry>Description</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><code>action</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
-                    <entry>
-                        Action name to use when generating
-                        href to the page.
-                    </entry>
+                    <entry>Action name to use when generating href to the page.</entry>
                 </row>
+
                 <row>
                     <entry><code>controller</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
-                    <entry>
-                        Controller name to use when generating
-                        href to the page.
-                    </entry>
+                    <entry>Controller name to use when generating href to the page.</entry>
                 </row>
+
                 <row>
                     <entry><code>module</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
-                    <entry>
-                        Module name to use when generating
-                        href to the page.
-                    </entry>
+                    <entry>Module name to use when generating href to the page.</entry>
                 </row>
+
                 <row>
                     <entry><code>params</code></entry>
                     <entry><type>Array</type></entry>
                     <entry><methodname>array()</methodname></entry>
-                    <entry>
-                        User params to use when generating href to the page.
-                    </entry>
+                    <entry>User params to use when generating href to the page.</entry>
                 </row>
                 <row>
                     <entry><code>route</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
-                    <entry>
-                        Route name to use when generating
-                        href to the page.
-                    </entry>
+                    <entry>Route name to use when generating href to the page.</entry>
                 </row>
                 <row>
                     <entry><code>reset_params</code></entry>
                     <entry><code>bool</code></entry>
                     <entry><constant>TRUE</constant></entry>
+
                     <entry>
-                        Whether user params should be reset
-                        when generating href to the page.
+                        Whether user params should be reset when generating href to the page.
                     </entry>
                 </row>
             </tbody>
@@ -195,8 +186,8 @@ $page->isActive(); // returns false
 
         <para>
             Routes can be used with <acronym>MVC</acronym> pages. If a page has a route, this
-            route will be used in <methodname>getHref()</methodname> to generate the <acronym>URL</acronym>
-            for the page.
+            route will be used in <methodname>getHref()</methodname> to generate the
+            <acronym>URL</acronym> for the page.
         </para>
 
         <para>

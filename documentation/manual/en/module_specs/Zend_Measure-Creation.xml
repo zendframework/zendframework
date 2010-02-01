@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.creation">
-
     <title>Creation of Measurements</title>
 
     <para>
-        When creating a measurement object, <classname>Zend_Measure_*</classname> methods expect the input/original measurement
-        data value as the first parameter. This can be a
-        <link linkend="zend.measure.creation.number"><code>numeric argument</code>
-        </link>
-        , a
-        <link linkend="zend.measure.creation.string"><type>String</type>
-        </link>
-        without units, or a
-        <link linkend="zend.measure.creation.localized"><code>localized string</code> with unit(s) specified.
-        </link>
-        The second parameter defines the type of the measurement. Both parameters are mandatory. The language may
-        optionally be specified as the third parameter.
+        When creating a measurement object, <classname>Zend_Measure_*</classname> methods expect the
+        input/original measurement data value as the first parameter. This can be a
+        <link linkend="zend.measure.creation.number"><code>numeric argument</code></link>, a
+        <link linkend="zend.measure.creation.string"><type>String</type></link> without units, or a
+        <link linkend="zend.measure.creation.localized"><code>localized string</code> with unit(s)
+            specified.</link> The second parameter defines the type of the measurement. Both
+        parameters are mandatory. The language may optionally be specified as the third parameter.
     </para>
 
     <sect2 id="zend.measure.creation.number">
-
         <title>Creating measurements from integers and floats</title>
 
         <para>
             In addition to integer data values, floating point types may be used, but
-            <ulink url="http://www.php.net/float">"simple decimal fractions like 0.1 or 0.7 cannot be converted into their internal binary counterparts without a little loss of precision,"</ulink>
-            sometimes giving surprising results. Also, do not compare two "float" type numbers for equality.
+            <ulink url="http://www.php.net/float">"simple decimal fractions like 0.1 or 0.7 cannot
+                be converted into their internal binary counterparts without a little loss of
+                precision,"</ulink> sometimes giving surprising results. Also, do not compare two
+            "float" type numbers for equality.
         </para>
 
         <example id="zend.measure.creation.number.example-1">
             <title>Creation using integer and floating values</title>
+
             <programlisting language="php"><![CDATA[
 $measurement = 1234.7;
 $unit = new Zend_Measure_Length((integer)$measurement,
@@ -43,28 +39,28 @@ echo $unit;
 // outputs '1234.7 m' (meters)
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.measure.creation.string">
-
         <title>Creating measurements from strings</title>
 
         <para>
             Many measurements received as input to Zend Framework applications can only be passed
             to <classname>Zend_Measure_*</classname> classes as strings, such as numbers written
             using <ulink url="http://en.wikipedia.org/wiki/Roman_numerals">roman numerals</ulink>
-            or extremely large binary values that exceed the precision of <acronym>PHP</acronym>'s native integer
-            and float types. Since integers can be denoted using strings, if there is any risk of
-            losing precision due to limitations of <acronym>PHP</acronym>'s native integer and float types, using
-            strings instead. <classname>Zend_Measure_Number</classname> uses the BCMath extension
-            to support arbitrary precision, as shown in the example below, to avoid limitations in
-            many <acronym>PHP</acronym> functions, such as
-            <ulink url="http://php.net/bin2dec"><methodname>bin2dec()</methodname></ulink>.
+            or extremely large binary values that exceed the precision of <acronym>PHP</acronym>'s
+            native integer and float types. Since integers can be denoted using strings, if there is
+            any risk of losing precision due to limitations of <acronym>PHP</acronym>'s native
+            integer and float types, using strings instead.
+            <classname>Zend_Measure_Number</classname> uses the BCMath extension to support
+            arbitrary precision, as shown in the example below, to avoid limitations in many
+            <acronym>PHP</acronym> functions, such as <ulink
+                url="http://php.net/bin2dec"><methodname>bin2dec()</methodname></ulink>.
         </para>
 
         <example id="zend.measure.creation.string.example-1">
             <title>Creation using strings</title>
+
             <programlisting language="php"><![CDATA[
 $mystring = "10010100111010111010100001011011101010001";
 $unit = new Zend_Measure_Number($mystring, Zend_Measure_Number::BINARY);
@@ -75,20 +71,22 @@ echo $unit;
     </sect2>
 
     <sect2 id="zend.measure.creation.localized">
-
         <title>Measurements from localized strings</title>
 
         <para>
-            When a string is entered in a localized notation, the correct interpretation can not be determined without
-            knowing the intended locale. The division of decimal digits with "." and grouping of thousands with "," is
-            common in the English language, but not so in other languages. For example, the English number "1,234.50"
-            would be interpreted as meaning "1.2345" in German. To deal with such problems, the locale-aware
-            <classname>Zend_Measure_*</classname> family of classes offer the possibility to specify a language or region to
-            disambiguate the input data and properly interpret the intended semantic value.
+            When a string is entered in a localized notation, the correct interpretation can not be
+            determined without knowing the intended locale. The division of decimal digits with "."
+            and grouping of thousands with "," is common in the English language, but not so in
+            other languages. For example, the English number "1,234.50" would be interpreted as
+            meaning "1.2345" in German. To deal with such problems, the locale-aware
+            <classname>Zend_Measure_*</classname> family of classes offer the possibility to specify
+            a language or region to disambiguate the input data and properly interpret the intended
+            semantic value.
         </para>
 
         <example id="zend.measure.creation.localized.example-1">
             <title>Localized string</title>
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1,234.50";
@@ -106,10 +104,11 @@ echo $unit; // outputs "1234.50 m"
         </example>
 
         <para>
-            Since Zend Framework 1.7.0 <classname>Zend_Measure</classname> does also support the usage of an application
-            wide locale. You can simply set a <classname>Zend_Locale</classname> instance to the registry like shown
-            below. With this notation you can forget about setting the locale manually with each instance when
-            you want to use the same locale multiple times.
+            Since Zend Framework 1.7.0 <classname>Zend_Measure</classname> does also support the
+            usage of an application wide locale. You can simply set a
+            <classname>Zend_Locale</classname> instance to the registry like shown below. With this
+            notation you can forget about setting the locale manually with each instance when you
+            want to use the same locale multiple times.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -120,9 +119,7 @@ Zend_Registry::set('Zend_Locale', $locale);
 // somewhere in your application
 $length = new Zend_Measure_Length(Zend_Measure_Length::METER();
 ]]></programlisting>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

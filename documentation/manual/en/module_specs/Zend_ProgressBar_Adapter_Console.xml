@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.console">
     <title>Zend_ProgressBar_Adapter_Console</title>
+
     <para>
         <classname>Zend_ProgressBar_Adapter_Console</classname> is a text-based adapter
         for terminals. It can automatically detect terminal widths but supports
@@ -9,19 +10,23 @@
         the progressbar and as well customize the order of them. You can also
         define the style of the progressbar itself.
     </para>
+
     <note>
         <title>Automatic console width recognition</title>
+
         <para>
             <code>shell_exec</code> is required for this feature to work on
             *nix based systems. On windows, there is always a fixed terminal
             width of 80 character, so no recognition is required there.
         </para>
     </note>
+
     <para>
         You can set the adapter options either via the <code>set*</code> methods
         or give an array or a <classname>Zend_Config</classname> instance with options as first
         parameter to the constructor. The available options are:
     </para>
+
     <itemizedlist>
         <listitem>
             <para>
@@ -30,12 +35,14 @@
                 <code>php://stderr</code> or a path to a file.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>width</code>: Either an integer or the <constant>AUTO</constant>
                 constant of <classname>Zend_Console_ProgressBar</classname>.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>elements</code>: Either <constant>NULL</constant> for default
@@ -49,12 +56,14 @@
                         <constant>ELEMENT_PERCENT</constant>: The current value in percent.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>ELEMENT_BAR</constant>: The visual bar which display
                         the percentage.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>ELEMENT_ETA</constant>: The automatic calculated ETA.
@@ -63,6 +72,7 @@
                         accurate results.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>ELEMENT_TEXT</constant>: An optional status message
@@ -71,30 +81,35 @@
                 </listitem>
             </itemizedlist>
         </listitem>
+
         <listitem>
             <para>
                 <code>textWidth</code>: Width in characters of the
                 <constant>ELEMENT_TEXT</constant> element. Default is 20.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>charset</code>: Charset of the
                 <constant>ELEMENT_TEXT</constant> element. Default is utf-8.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>barLeftChar</code>: A string which is used left-hand
                 of the indicator in the progressbar.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>barRightChar</code>: A string which is used right-hand
                 of the indicator in the progressbar.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>barIndicatorChar</code>: A string which is used for

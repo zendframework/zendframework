@@ -158,31 +158,35 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
         </para>
 
         <para>
-            Increasing number of segments reduces quality of the index, but index optimization restores it.
-            Optimization essentially merges several segments into a new one. This process also doesn't update segments.
-            It generates one new large segment and updates segment list ('segments' file).
+            O aumento do número de segmentos reduz a qualidade do índice, mas uma otimização do
+            índice resolverá o problema. Essencialmente, a otimização mescla vários segmentos em um
+            novo. Além disso, este processo não atualiza os segmentos. Ele gera um novo grande
+            segmento e atualiza a lista de segmentos (arquivo 'segments').
         </para>
 
         <para>
-            Full index optimization can be trigger by calling the <methodname>Zend_Search_Lucene::optimize()</methodname> method. It merges all
-            index segments into one new segment:
+            A otimização completa do índice pode ser feita chamando o método
+            <methodname>Zend_Search_Lucene::optimize()</methodname>. Ele funde todos os segmentos de
+            índice em um novo segmento:
         </para>
 
         <programlisting language="php"><![CDATA[
-// Open existing index
+// Abre um índice existente
 $index = Zend_Search_Lucene::open('/data/my-index');
 
-// Optimize index.
+// Otimiza o índice
 $index->optimize();
 ]]></programlisting>
 
         <para>
-            Automatic index optimization is performed to keep indexes in a consistent state.
+            A otimização automática do índice é realizada para manter os índices em um estado
+            consistente.
         </para>
 
         <para>
-            Automatic optimization is an iterative process managed by several index options. It merges very small segments
-            into larger ones, then merges these larger segments into even larger segments and so on.
+            A otimização automática é um processo iterativo controlado por várias opções de índice.
+            Ele funde segmentos muito pequenos para obter outros maiores, então mescla esses
+            segmentos em segmentos ainda maiores e assim por diante.
         </para>
 
         <sect3 id="zend.search.lucene.index-creation.optimization.maxbuffereddocs">

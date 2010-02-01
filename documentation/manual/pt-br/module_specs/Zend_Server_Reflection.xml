@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20818 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.server.reflection">
     <title>Zend_Server_Reflection</title>
@@ -15,11 +15,13 @@
             dos protótipos de funções e métodos (ex.: todas as possíveis combinações de chamada
             válidas), e as descrições de funções e métodos.
         </para>
+
         <para>
             Normalmente, esta funcionalidade só será usada por desenvolvedores de classes de
             servidor para o framework.
         </para>
     </sect2>
+
     <sect2 id="zend.server.reflection.usage">
         <title>Utilização</title>
 

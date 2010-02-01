@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20764 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.wildfire.chapter">
     <title>Zend_Wildfire</title>
@@ -32,9 +32,9 @@
     </para>
 
     <para>
-        Há também um componente <link linkend="zend.db.profiler.profilers.firebug">
-        <classname>Zend_Db_Profiler_Firebug</classname></link> para registrar informações de
-        profiling do banco de dados no Firebug.
+        Há também um componente <link
+            linkend="zend.db.profiler.profilers.firebug"><classname>Zend_Db_Profiler_Firebug</classname></link>
+        para registrar informações de profiling do banco de dados no Firebug.
     </para>
 </sect1>
 <!--

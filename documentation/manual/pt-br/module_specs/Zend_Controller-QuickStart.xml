@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16705 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.quickstart">
     <title>Guia de Início Rápido do Zend_Controller</title>
 
     <sect2 id="zend.controller.quickstart.introduction">
         <title>Introdução</title>
+
         <para>
             <classname>Zend_Controller</classname> é o coração do sistema <acronym>MVC</acronym>
             do Zend Framework. <acronym>MVC</acronym> significa <ulink
@@ -17,6 +18,7 @@
             frontal e despachados individualmente para ações baseadas no
             <acronym>URL</acronym> requerido.
         </para>
+
         <para>
             O sistema <classname>Zend_Controller</classname> foi construído com a extensibilidade
             em mente, tanto por derivação das classes existentes, como escrevendo novas classes
@@ -57,7 +59,6 @@ html/
     .htaccess
     index.php
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.docroot">
@@ -327,9 +328,11 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                 <listitem>
                     <para><filename>http://example.com/</filename></para>
                 </listitem>
+
                 <listitem>
                     <para><filename>http://example.com/index</filename></para>
                 </listitem>
+
                 <listitem>
                     <para><filename>http://example.com/index/index</filename></para>
                 </listitem>

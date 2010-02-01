@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19432 -->
+<!-- EN-Revision: 20794 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.version.reading">
-
     <title>Obtendo a Versão do Zend Framework</title>
 
     <para>
@@ -23,12 +22,12 @@
 
     <example id="zend.version.reading.example">
         <title>Exemplo do método compareVersion()</title>
+
         <programlisting language="php"><![CDATA[
 // retorna -1, 0 ou 1
 $cmp = Zend_Version::compareVersion('2.0.0');
 ]]></programlisting>
     </example>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

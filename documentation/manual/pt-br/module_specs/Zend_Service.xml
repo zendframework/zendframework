@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20818 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.introduction">
     <title>Introdução</title>
+
     <para>
         <classname>Zend_Service</classname> é uma classe abstrata que serve como base para
         implementações para web service, como <acronym>SOAP</acronym> ou REST.
     </para>
+
     <para>
         Se você precisar de suporte básico para serviços REST baseados em <acronym>XML</acronym>,
         você pode olhar em <link
             linkend="zend.rest.client"><classname>Zend_Rest_Client</classname></link>.
     </para>
+
     <para>
         Além de ser capaz de estender o <classname>Zend_Service</classname> e usar o
         <classname>Zend_Rest_Client</classname> para web services baseados em REST, Zend
@@ -21,56 +24,45 @@
 
     <itemizedlist>
         <listitem>
-            <para>
-                <link linkend="zend.service.akismet">Akismet</link>
-            </para>
+            <para><link linkend="zend.service.akismet">Akismet</link></para>
         </listitem>
+
         <listitem>
-            <para>
-                <link linkend="zend.service.amazon">Amazon</link>
-            </para>
+            <para><link linkend="zend.service.amazon">Amazon</link></para>
         </listitem>
+
         <listitem>
-            <para>
-                <link linkend="zend.service.audioscrobbler">Audioscrobbler</link>
-            </para>
+            <para><link linkend="zend.service.audioscrobbler">Audioscrobbler</link></para>
         </listitem>
+
         <listitem>
-            <para>
-                <link linkend="zend.service.delicious">Del.icio.us</link>
-            </para>
+            <para><link linkend="zend.service.delicious">Del.icio.us</link></para>
         </listitem>
+
         <listitem>
-            <para>
-                <link linkend="zend.service.flickr">Flickr</link>
-            </para>
+            <para><link linkend="zend.service.flickr">Flickr</link></para>
         </listitem>
+
         <listitem>
-            <para>
-                <link linkend="zend.service.simpy">Simpy</link>
-            </para>
+            <para><link linkend="zend.service.simpy">Simpy</link></para>
         </listitem>
+
         <listitem>
-            <para>
-                <link linkend="zend.service.slideshare">SlideShare</link>
-            </para>
+            <para><link linkend="zend.service.slideshare">SlideShare</link></para>
         </listitem>
+
         <listitem>
-            <para>
-                <link linkend="zend.service.strikeiron">StrikeIron</link>
-            </para>
+            <para><link linkend="zend.service.strikeiron">StrikeIron</link></para>
         </listitem>
+
         <listitem>
-            <para>
-                <link linkend="zend.service.yahoo">Yahoo!</link>
-            </para>
+            <para><link linkend="zend.service.yahoo">Yahoo!</link></para>
         </listitem>
     </itemizedlist>
 
     <para>
         Mais serviços serão adicionados no futuro.
     </para>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

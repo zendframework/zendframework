@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Reviewed: no 17600 -->
+<!-- EN-Revision: 20766 -->
+<!-- Reviewed: no -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Analisando o Desempenho com Firebug</title>
 
@@ -23,21 +24,25 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            Navegador Firefox preferencialmetne na versão 3 mas a versão 2 também é suportada.
-        </para></listitem>
+        <listitem>
+            <para>
+                Navegador Firefox preferencialmente na versão 3, mas a versão 2 também é suportada.
+            </para>
+        </listitem>
 
-        <listitem> <para>
-            Firebug Firefox Extension que você pode baixar de <ulink
-                url="https://addons.mozilla.org/en-US/firefox/addon/1843">
-                https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
-        </para></listitem>
+        <listitem>
+            <para>
+                Firebug Firefox Extension que você pode baixar de <ulink
+                    url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            FirePHP Firefox Extension que você pode baixar de <ulink
-                url="https://addons.mozilla.org/en-US/firefox/addon/6149">
-                https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.
-        </para></listitem>
+        <listitem>
+            <para>
+                FirePHP Firefox Extension que você pode baixar de <ulink
+                    url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20101 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.xml">
     <title>Zend_Config_Xml</title>
+
     <para>
         <classname>Zend_Config_Xml</classname> permite aos desenvolvedores armazenarem os dados de
         configuração em um formato <acronym>XML</acronym> simples e lê-los através de uma sintaxe
@@ -16,16 +17,20 @@
         <emphasis>extends</emphasis>, e o valor deste atributo corresponde à seção a que a
         informação deve ser herdada.
     </para>
+
     <note>
         <title>Tipo de Retorno</title>
+
         <para>
             Os dados de configuração lidos em <classname>Zend_Config_Xml</classname> são sempre
             retornados como strings. A conversão de dados de strings para outros tipos é deixado
             para os desenvolvedores de acordo com suas necessidades específicas.
         </para>
     </note>
+
     <example id="zend.config.adapters.xml.example.using">
         <title>Usando o Zend_Config_Xml</title>
+
         <para>
             Este exemplo ilustra uma utilização básica de <classname>Zend_Config_Xml</classname>
             para carregar dados de configuração de um arquivo <acronym>XML</acronym>. Neste
@@ -37,6 +42,7 @@
             mais complexas. Suponha-se, então, que os dados de configuração a seguir estão
             contidos em <filename>/path/to/config.xml</filename>:
         </para>
+
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
@@ -63,11 +69,13 @@
     </staging>
 </configdata>
 ]]></programlisting>
+
         <para>
             Em seguida, suponha que o desenvolvedor do aplicativo necessite dos dados de
             configuração de testes do arquivo <acronym>XML</acronym>. É o simples caso de carregar
             esses dados especificando o arquivo <acronym>XML</acronym> e a seção de testes:
         </para>
+
         <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Xml('/path/to/config.xml', 'staging');
 
@@ -75,8 +83,10 @@ echo $config->database->params->host;   // prints "dev.example.com"
 echo $config->database->params->dbname; // prints "dbname"
 ]]></programlisting>
     </example>
+
     <example id="zend.config.adapters.xml.example.attributes">
         <title>Usando os Atributos de Tag no Zend_Config_Xml</title>
+
         <para>
             <classname>Zend_Config_Xml</classname> também suporta outras duas maneiras para definir
             os nós na configuração. Ambas fazem uso de atributos. A partir do momento que os
@@ -85,6 +95,7 @@ echo $config->database->params->dbname; // prints "dbname"
             ser utilizados. A primeira maneira usar os atributos é adicionar um nó pai, assim eles
             serão interpretados como um filho deste nó:
         </para>
+
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
@@ -102,11 +113,13 @@ echo $config->database->params->dbname; // prints "dbname"
     </staging>
 </configdata>
 ]]></programlisting>
+
         <para>
             A outra maneira não encurta realmente a configuração, mas a torna mais fácil para
             manter, pois você não tem que escrever o nome da tag duas vezes. Você simplesmente cria
             uma tag vazia com o valor no atributo <emphasis>value</emphasis>:
         </para>
+
         <programlisting language="xml"><![CDATA[
 <?xml version="1.0"?>
 <configdata>
@@ -134,14 +147,17 @@ echo $config->database->params->dbname; // prints "dbname"
 </configdata>
 ]]></programlisting>
     </example>
-<note>
+
+    <note>
         <title>Strings XML</title>
+
         <para>
             <classname>Zend_Config_Xml</classname> é capaz de carregar uma string
             <acronym>XML</acronym> diretamente, por exemplo, uma que foi recuperada de um banco de
             dados. A string é passada como primeiro parâmetro para o construtor e deve começar com
             os caracteres <emphasis>'&lt;?xml'</emphasis>:
         </para>
+
         <programlisting language="xml"><![CDATA[
 $string = <<<EOT
 <?xml version="1.0"?>
@@ -167,8 +183,10 @@ EOT;
 $config = new Zend_Config_Xml($string, 'staging');
 ]]></programlisting>
     </note>
-<note>
+
+    <note>
         <title>Namespace XML do Zend_Config</title>
+
         <para>
             <classname>Zend_Config</classname> vem com sua próprio namespace <acronym>XML</acronym>,
             que adiciona funcionalidade adicional ao processo de análise. Para aproveitá-la, você
@@ -183,6 +201,7 @@ $config = new Zend_Config_Xml($string, 'staging');
             transferido para um novo namespace e está depreciado no namespace
             <constant>NULL</constant>. Ele será completamente removido no Zend Framework 2.0.
         </para>
+
         <programlisting language="xml"><![CDATA[
 $string = <<<EOT
 <?xml version="1.0"?>

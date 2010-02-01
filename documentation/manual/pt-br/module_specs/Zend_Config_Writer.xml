@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19691 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
@@ -23,11 +23,13 @@
                 <classname>Zend_Config_Writer_Array</classname>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <classname>Zend_Config_Writer_Ini</classname>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <classname>Zend_Config_Writer_Xml</classname>
@@ -62,11 +64,13 @@
 
     <example id="zend.config.writer.example.using">
         <title>Usando o Zend_Config_Writer</title>
+
         <para>
             Este exemplo ilustra a utilização básica de
             <classname>Zend_Config_Writer_Xml</classname>
             para criar um novo arquivo de configuração:
         </para>
+
         <programlisting language="php"><![CDATA[
 // Cria o objeto de configuração
 $config = new Zend_Config(array(), true);
@@ -98,6 +102,7 @@ $writer->setConfig($config)
 $writer = new Zend_Config_Writer_Xml();
 $writer->write('config.xml', $config);
 ]]></programlisting>
+
         <para>
             Isso criará um arquivo de configuração <acronym>XML</acronym> com as seções de produção
             e de testes, onde testes estende produção.
@@ -106,9 +111,11 @@ $writer->write('config.xml', $config);
 
     <example id="zend.config.writer.modifying">
         <title>Modificando uma Configuração Existente</title>
+
         <para>
             Este exemplo demonstra como editar um arquivo de configuração existente.
         </para>
+
         <programlisting language="php"><![CDATA[
 // Carrega todas as seções de um arquivo de configuração
 // existente, enquanto pula o que é estendido.
@@ -129,6 +136,7 @@ $writer->write();
 
     <note>
         <title>Carregando um Arquivo de Configuração</title>
+
         <para>
             Ao carregar um arquivo de configuração existente para modificações, é muito importante
             que se carregue todas as seções e que se pule tudo o que é estendido, para que valores

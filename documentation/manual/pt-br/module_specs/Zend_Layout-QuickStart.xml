@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.quickstart">
     <title>Guia Rápido Zend_Layout</title>
@@ -216,13 +216,17 @@ $layout = Zend_Layout::getMvcInstance();
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     Escopo de variáveis de layout.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     Isolamento do view script de layout de outros scripts view.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -257,7 +261,7 @@ echo $layout->render();
             um exemplo de um script de layout.
         </para>
 
-         <para>
+        <para>
             <inlinegraphic align="center" valign="middle"
                 fileref="figures/zend.layout.quickstart.example.png" format="PNG" />
         </para>

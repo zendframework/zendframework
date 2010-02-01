@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.options">
     <title>Opções de Configuração Zend_Layout</title>
@@ -14,27 +14,34 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>layout</emphasis>: o layout a ser usado. Utiliza o inflector atual para
                 resolver o nome fornecido para o view script de layout apropriado. Por padrão,
                 esse valor é 'layout' e resolve para 'layout.phtml'. Os acessores são
                 <methodname>setLayout()</methodname> e <methodname>getLayout()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>layoutPath</emphasis>: o caminho base para os view scripts
                 de layout. Os acessores são <methodname>setLayoutPath()</methodname> e
                 <methodname>getLayoutPath()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>contentKey</emphasis>: a variável de layout usada para o conteúdo
                 padrão (quando usado com o <acronym>MVC</acronym>). O valor padrão é 'content'.
                 Os acessores são <methodname>setContentKey()</methodname> e
                 <methodname>getContentKey()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>mvcSuccessfulActionOnly</emphasis>: quando usar o
                 <acronym>MVC</acronym>, se uma ação lança uma exceção e esse marco
                 é <constant>TRUE</constant>, o layout não será renderizado (isso é para
@@ -43,43 +50,52 @@
                 estiver em uso). Por padrão, o marco é <constant>TRUE</constant>. Os acessores são
                 <methodname>setMvcSuccessfulActionOnly()</methodname> e
                 <methodname>getMvcSuccessfulActionOnly()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>view</emphasis>: O objeto view para ser usado na renderização.
                 Quando usado com o <acronym>MVC</acronym>, <classname>Zend_Layout</classname>
                 tentará usar o objeto view registrado com o
                 <link linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>
                 se nenhum objeto view tiver sido passado explicitamente. Os acessores são
                 <methodname>setView()</methodname> e <methodname>getView()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>helperClass</emphasis>: a classe action helper para usar quando
                 <classname>Zend_Layout</classname> estiver utilizando os componentes
                 <acronym>MVC</acronym>. Por padrão, ela é
                 <classname>Zend_Layout_Controller_Action_Helper_Layout</classname>.
                 Os acessores são <methodname>setHelperClass()</methodname> e
                 <methodname>getHelperClass()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>pluginClass</emphasis>: a classe front controller plugin para usar
                 quando <classname>Zend_Layout</classname> estiver utilizando os componentes
                 <acronym>MVC</acronym>. Por padrão, ela é
                 <classname>Zend_Layout_Controller_Plugin_Layout</classname>. Os acessores são
                 <methodname>setPluginClass()</methodname> e
                 <methodname>getPluginClass()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>inflector</emphasis>: o inflector a ser usado quando resolver
                 nomes para caminhos de view scripts de layout; veja
                 <link linkend="zend.layout.advanced.inflector">a documentação
                 <classname>Zend_Layout</classname> inflector para mais detalhes</link>. Os
                 acessores são <methodname>setInflector()</methodname> e
                 <methodname>getInflector()</methodname>.
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <note>
@@ -129,9 +145,7 @@ $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');
                 a instância de <classname>Zend_Layout</classname>.
             </para>
 
-            <para>
-                Primeiro, dê uma olhada na passagem de uma matriz:
-            </para>
+            <para>Primeiro, dê uma olhada na passagem de uma matriz:</para>
 
             <programlisting language="php"><![CDATA[
 // Usando um construtor:
@@ -141,9 +155,7 @@ $layout = new Zend_Layout($options);
 $layout = Zend_Layout::startMvc($options);
 ]]></programlisting>
 
-            <para>
-                E agora usando um objeto config:
-            </para>
+            <para>E agora usando um objeto config:</para>
 
             <programlisting language="php"><![CDATA[
 $config = new Zend_Config_Ini('/path/to/layout.ini', 'layout');

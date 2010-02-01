@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.introduction">
     <title>Introdução</title>
@@ -12,40 +12,48 @@
         e Zend Framework adotou esse termo por consistência.
     </para>
 
-    <para>
-        Os objetivos globais de <classname>Zend_Layout</classname> são os seguintes:
-    </para>
+    <para>Os objetivos globais de <classname>Zend_Layout</classname> são os seguintes:</para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 Automatizar seleção e renderização de layouts quando usado com os componentes
                 <acronym>MVC</acronym> do Zend Framework.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Fornecer escopo separado para variáveis relacionadas ao layout e ao conteúdo.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Permitir configuração, incluindo o nome do layout, a resolução do script de
                 layout (inflection), e o caminho do script de layout.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Permitir a desabilitação de layouts, mudança de scripts de layout,
                 e outros estados; permitir essas ações de dentro de action controllers
                 e view scripts.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 Seguir as mesmas regras de resolução de script (inflection) que <link
                 linkend="zend.controller.actionhelpers.viewrenderer">ViewRenderer</link>,
                 mas permitir também o uso de regras diferentes.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
-                Permitir o uso sem os componentes <acronym>MVC</acronym> do Zend Framework.
-        </para></listitem>
+        <listitem>
+            <para>Permitir o uso sem os componentes <acronym>MVC</acronym> do Zend Framework.</para>
+        </listitem>
     </itemizedlist>
 </sect1>
 <!--

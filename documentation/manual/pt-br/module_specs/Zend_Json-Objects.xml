@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.advanced">
     <title>Uso Avançado do Zend_Json</title>
 
     <sect2 id="zend.json.advanced.objects1">
         <title>Objetos JSON</title>
+
         <para>
             Quando codificamos objetos <acronym>PHP</acronym> como <acronym>JSON</acronym>, todas
             as propriedades públicas desse objeto estarão codificadas em um objeto
             <acronym>JSON</acronym>.
         </para>
+
         <para>
             <acronym>JSON</acronym> não permite referências de objeto, por isso deve-se tomar
             cuidado para não codificar objetos com referências recursivas. Se você tiver problemas
@@ -19,6 +21,7 @@
             opcional para verificar a recursividade; se um objeto for serializado duplamente,
             uma exceção será lançada.
         </para>
+
         <para>
             Descodificar objetos <acronym>JSON</acronym> traz uma ligeira dificuldade, entretanto,
             desde que os objetos do JavaScript correspondam o mais próximo de uma matriz
@@ -27,20 +30,24 @@
             os pares chave/valor do objeto <acronym>JSON</acronym>; outros pensam que isto poderia
             gerar um risco substancial da segurança.
         </para>
+
         <para>
             Por padrão, <classname>Zend_Json</classname> irá descodificar objetos
             <acronym>JSON</acronym> como matriz associativas. Entretanto, se você deseja que o
             retorne um objeto, você pode especificar isto:
         </para>
+
         <programlisting language="php"><![CDATA[
 // Descodifique objetos JSON como objetos PHP
 $phpNative = Zend_Json::decode($encodedValue, Zend_Json::TYPE_OBJECT);
 ]]></programlisting>
+
         <para>
             Todos os objetos descodificados assim são retornados como objetos de
             <code>StdClass</code> com as propriedades que correspondem aos pares chave/valor na
             notação de <acronym>JSON</acronym>.
         </para>
+
         <para>
             A recomendação do Zend Framework é que o desenvolvedor deve decidir-se como
             descodificar objetos <acronym>JSON</acronym>. Se um objeto de um tipo especificado for

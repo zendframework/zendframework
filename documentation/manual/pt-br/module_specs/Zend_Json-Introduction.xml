@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.introduction">
     <title>Introdução</title>
+
     <para>
         <classname>Zend_Json</classname> provê métodos convenientes para serialização do
         <acronym>PHP</acronym> nativo para <acronym>JSON</acronym> e a descodificação
@@ -10,6 +11,7 @@
         <acronym>JSON</acronym>, <ulink url="http://www.json.org/">visite o site do projeto
         <acronym>JSON</acronym></ulink>.
     </para>
+
     <para>
         <acronym>JSON</acronym>, JavaScript Object Notation, pode ser usado para o intercâmbio de
         dados leves entre o JavaScript e outras linguagens. Desde que o <acronym>JSON</acronym>
@@ -29,7 +31,6 @@
         vantajosa função que resulta em mais dados específicos do aplicativo de
         processamento de dados.
     </para>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

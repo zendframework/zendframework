@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.advanced">
     <title>Uso Avançado de Zend_Layout</title>
@@ -15,33 +15,41 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>Custom view objects</emphasis>.
-                <classname>Zend_Layout</classname> permite a você utilizar qualquer classe
-                que implemente <classname>Zend_View_Interface</classname>.
-        </para></listitem>
+                <classname>Zend_Layout</classname> permite a você utilizar qualquer classe que
+                implemente <classname>Zend_View_Interface</classname>.
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>Custom front controller plugins</emphasis>.
                 <classname>Zend_Layout</classname> vem embarcado com um front controller plugin
                 padrão que automatiza a renderização de layouts antes de retornar a resposta.
                 Você pode substituir por seu próprio plugin.
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>Custom action helpers</emphasis>.
-                <classname>Zend_Layout</classname> vem embarcado com um action helper
-                padrão que deve servir para a maioria das necessidades já que é um
-                proxy mudo para o próprio objeto de layout.
-        </para></listitem>
+                <classname>Zend_Layout</classname> vem embarcado com um action helper padrão que
+                deve servir para a maioria das necessidades já que é um proxy mudo para o próprio
+                objeto de layout.
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <emphasis>Custom layout script path resolution</emphasis>.
                 <classname>Zend_Layout</classname> permite a você usar seu próprio
                 <link linkend="zend.filter.inflector">inflector</link> para resolução do
                 caminho do script de layout, ou simplesmente modificar o inflector
                 anexado para especificar suas próprias regras de inflexão.
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <sect2 id="zend.layout.advanced.view">
@@ -159,13 +167,13 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                    'foo' será transformado em 'foo.phtml'.
-            </para></listitem>
+            <listitem>
+                <para>'foo' será transformado em 'foo.phtml'.</para>
+            </listitem>
 
-            <listitem><para>
-                    'FooBarBaz' será transformado em 'foo-bar-baz.phtml'.
-            </para></listitem>
+            <listitem>
+                <para>'FooBarBaz' será transformado em 'foo-bar-baz.phtml'.</para>
+            </listitem>
         </itemizedlist>
 
         <para>

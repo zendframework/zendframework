@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.xml2json">
     <title>Conversão de XML para JSON</title>
+
     <para>
         <classname>Zend_Json</classname> fornece um conveniente método para transformar dados
         formatados em <acronym>XML</acronym> para o formato <acronym>JSON</acronym>. Este recurso
@@ -19,9 +20,10 @@
         Tem também um parâmetro de entrada opcional do tipo booleano que instrui a lógica de
         conversão para ignorar ou não os atributos <acronym>XML</acronym> durante o processo de
         conversão. Se esse parâmetro de entrada opcional não é dado, então o comportamento padrão
-        é ignorar os atributos <acronym>XML</acronym>.
-        Esta chamada de função é feita como mostrado abaixo:
+        é ignorar os atributos <acronym>XML</acronym>. Esta chamada de função é feita como mostrado
+        abaixo:
     </para>
+
     <programlisting language="php"><![CDATA[
 // a função fromXml simplesmente recebe uma String contendo conteúdo
 // em XML como entrada.
@@ -121,7 +123,6 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         Mais detalhes sobre o recurso xml2json podem ser encontrados na proposta original em si.
         Dê uma olhada na <ulink url="http://tinyurl.com/2tfa8z">proposta Zend_xml2json</ulink>.
     </para>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

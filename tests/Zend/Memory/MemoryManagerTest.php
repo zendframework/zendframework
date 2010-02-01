@@ -90,6 +90,18 @@ class Zend_Memory_MemoryManagerTest extends PHPUnit_Framework_TestCase
 
 
     /**
+     * tests the Memory Manager backends naming processing
+     *
+     * @group ZF-9023
+     */
+    public function testBackendNamingProcessing()
+    {
+        /** 'File' backend */
+        $backendOptions = array('cache_dir' => $this->cacheDir); // Directory where to put the cache files
+        $memoryManager = Zend_Memory::factory('fIlE', $backendOptions);
+    }
+
+    /**
      * tests the Memory Manager settings
      */
     public function testSettings()

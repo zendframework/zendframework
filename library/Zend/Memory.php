@@ -53,10 +53,18 @@ class Zend_Memory
             return new Zend_Memory_Manager();
         }
 
-        // because lowercase will fail
-        $backend = @ucfirst(strtolower($backend));
+        // Look through available backendsand
+        // (that allows to specify it in any case)
+        $backendIsFound = false;
+        foreach (Zend_Cache::$availableBackends as $zendCacheBackend) {
+            if (strcasecmp($backend, $zendCacheBackend) == 0) {
+                $backend = $zendCacheBackend;
+                $backendIsFound = true;
+                break;
+            }
+        }
 
-        if (!in_array($backend, Zend_Cache::$availableBackends)) {
+        if (!$backendIsFound) {
             require_once 'Zend/Memory/Exception.php';
             throw new Zend_Memory_Exception("Incorrect backend ($backend)");
         }

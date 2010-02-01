@@ -89,7 +89,12 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
     public function getContents()
     {
         if ($this->_content === null) {
-            $this->_content = $this->_getDefaultContents();
+            if (file_exists($this->getPath())) {
+                $this->_content = file_get_contents($this->getPath());
+            } else {
+                $this->_content = $this->_getDefaultContents();
+            }
+            
         }
         
         return $this->_content;
@@ -111,11 +116,17 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
      */
     public function addStringItem($key, $value, $section = 'production', $quoteValue = true)
     {
-        if ($quoteValue) {
+        
+        
+        if ($quoteValue === null) {
+            $quoteValue = preg_match('#[\"\']#', $value) ? false : true;
+        }
+        
+        if ($quoteValue == true) {
             $value = '"' . $value . '"';
         }
         
-        $contentLines = file($this->getPath());
+        $contentLines = preg_split('#[\n\r]#', $this->getContents());
         
         $newLines = array();
         $insideSection = false;
@@ -128,8 +139,8 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
             
             if ($insideSection) {
                 // if its blank, or a section heading
-                if ((trim($contentLine) == null) || ($contentLines[$contentLineIndex + 1][0] == '[')) {
-                    $newLines[] = $key . ' = ' . $value . "\n";
+                if ((trim($contentLine) == null) || (isset($contentLines[$contentLineIndex + 1]{0}) && $contentLines[$contentLineIndex + 1]{0} == '[')) {
+                    $newLines[] = $key . ' = ' . $value;
                     $insideSection = null;
                 }
             }
@@ -137,7 +148,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
             $newLines[] = $contentLine;
         }
 
-        $this->_content = implode('', $newLines);
+        $this->_content = implode("\n", $newLines);
         return $this;
     }
     
@@ -242,8 +253,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
     
     protected function _getDefaultContents()
     {
-        // resources.log.zendmonitor.writerName = "ZendMonitor"
-        
+
         $contents =<<<EOS
 [production]
 phpSettings.display_startup_errors = 0
@@ -267,6 +277,7 @@ phpSettings.display_errors = 1
 resources.frontController.params.displayExceptions = 1
 
 EOS;
+
         return $contents;
     }
     

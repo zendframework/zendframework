@@ -47,7 +47,7 @@ class Zend_Tool_Project_Provider_DbAdapter
     
     protected $_sectionName = 'production';
     
-    public function configure($dsn = null, $interactivelyPrompt = false, $sectionName = 'production')
+    public function configure($dsn = null, /* $interactivelyPrompt = false, */ $sectionName = 'production')
     {
         $profile = $this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
         
@@ -78,7 +78,7 @@ class Zend_Tool_Project_Provider_DbAdapter
         } elseif ($interactivelyPrompt) {
             $this->_promptForConfig();
         } else {
-            echo 'Nothing to do!';
+            $this->_registry->getResponse()->appendContent('Nothing to do!');
         }
         
         
@@ -96,107 +96,44 @@ class Zend_Tool_Project_Provider_DbAdapter
         
         parse_str($dsn, $dsnVars);
 
-        $dbConfigValues = array();
+        // parse_str suffers when magic_quotes is enabled
+        if (get_magic_quotes_gpc()) {
+            array_walk_recursive(&$dsnVars, array($this, '_cleanMagicQuotesInValues'));
+        }
+        
+        $dbConfigValues = array('resources' => array('db' => null));
         
         if (isset($dsnVars['adapter'])) {
-            $dbConfigValues['adapter'] = $dsnVars['adapter'];
+            $dbConfigValues['resources']['db']['adapter'] = $dsnVars['adapter'];
             unset($dsnVars['adapter']);
         }
         
-        $dbConfigValues['params'] = $dsnVars;
+        $dbConfigValues['resources']['db']['params'] = $dsnVars;
         
         $isPretend = $this->_registry->getRequest()->isPretend();
-        
-        $content = $this->_writeToApplicationConfig($dbConfigValues, $isPretend);
+
+        // get the config resource
+        $applicationConfig = $this->_loadedProfile->search('ApplicationConfigFile');
+        $applicationConfig->addItem($dbConfigValues, $this->_sectionName, null);
         
         $response = $this->_registry->getResponse();
         
         if ($isPretend) {
             $response->appendContent('A db configuration for the ' . $this->_sectionName
-                . ' would be written to the application config file with the following contents: '
+                . ' section would be written to the application config file with the following contents: '
                 );
-            $response->appendContent($content);
+            $response->appendContent($applicationConfig->getContents());
         } else {
+            $applicationConfig->create();
             $response->appendContent('A db configuration for the ' . $this->_sectionName
-                . ' has been written to the application config file.'
+                . ' section has been written to the application config file.'
                 );
         }
     }
     
-    protected function _promptForConfig()
+    protected function _cleanMagicQuotesInValues(&$value, $key)
     {
-        echo '//@todo';
-    }
-
-    protected function _promtForConfigPdoMysql()
-    {
-        $r = array(
-            'username' => 'Username',
-            'password' => 'Password',
-            'dbname'   => 'Database',
-            'driver_options' => array(
-                
-                )
-            );
-    }
-
-    protected function _writeToApplicationConfig($configValues, $isPretend = false)
-    {
-        $configKeyNames = array('resources', 'db');
-        
-        $newDbLines = array();
-        
-        $rii = new RecursiveIteratorIterator(
-            new RecursiveArrayIterator($configValues),
-            RecursiveIteratorIterator::SELF_FIRST
-            );
-        
-        $lastDepth = 0;
-        
-        foreach ($rii as $name => $value) {
-            if ($lastDepth > $rii->getDepth()) {
-                array_pop($configKeyNames);
-            }
-            
-            $lastDepth = $rii->getDepth();
-            
-            if (is_array($value)) {
-                array_push($configKeyNames, $name);
-            } else {
-                $newDbLines[] = implode('.', $configKeyNames) . '.' . $name . ' = "' . $value . "\"\n";
-            }
-        }
-        
-        $originalLines = file($this->_appConfigFilePath);
-        
-        $newLines = array();
-        $insideSection = false;
-        
-        foreach ($originalLines as $originalLineIndex => $originalLine) {
-            
-            if ($insideSection === false && preg_match('#^\[' . $this->_sectionName . '#', $originalLine)) {
-                $insideSection = true;
-            }
-            
-            if ($insideSection) {
-                if ((trim($originalLine) == null) || ($originalLines[$originalLineIndex + 1][0] == '[')) {
-                    foreach ($newDbLines as $newDbLine) {
-                        $newLines[] = $newDbLine;
-                    }
-                    $insideSection = null;
-                }
-            }
-            
-            $newLines[] = $originalLine;
-        }
-
-        $newConfigContents = implode('', $newLines);
-        
-        if (!$isPretend) {
-            file_put_contents($this->_appConfigFilePath, $newConfigContents);
-        }
-        
-        return $newConfigContents;
+        $value = stripslashes($value);
     }
     
 }

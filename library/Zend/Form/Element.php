@@ -18,13 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Filter */
+/** @see Zend_Filter */
 require_once 'Zend/Filter.php';
 
-/** Zend_Form */
+/** @see Zend_Form */
 require_once 'Zend/Form.php';
 
-/** Zend_Validate_Interface */
+/** @see Zend_Validate_Interface */
 require_once 'Zend/Validate/Interface.php';
 
 /**
@@ -232,6 +232,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
      * - Zend_Config: Zend_Config with options for configuring element
      *
      * @param  string|array|Zend_Config $spec
+     * @param  array|Zend_Config $options
      * @return void
      * @throws Zend_Form_Exception if no element name after initialization
      */

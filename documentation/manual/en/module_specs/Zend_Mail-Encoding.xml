@@ -2,22 +2,25 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.encoding">
     <title>Encoding</title>
+
     <para>
-        Text and HTML message bodies are encoded with the quotedprintable mechanism by default. Message headers
-        are also encoded with the quotedprintable mechanism if you do not specify base64 in <methodname>setHeaderEncoding()</methodname>.
-        If you use language that is not Roman letters-based, the base64 would be more suitable.
-        All other attachments are encoded via base64 if no other encoding is given in the <methodname>addAttachment()</methodname>
-        call or assigned to the <acronym>MIME</acronym> part object later. 7Bit and 8Bit encoding currently only pass on the
-        binary content data.
+        Text and HTML message bodies are encoded with the quotedprintable mechanism by default.
+        Message headers are also encoded with the quotedprintable mechanism if you do not specify
+        base64 in <methodname>setHeaderEncoding()</methodname>. If you use language that is not
+        Roman letters-based, the base64 would be more suitable. All other attachments are encoded
+        via base64 if no other encoding is given in the <methodname>addAttachment()</methodname>
+        call or assigned to the <acronym>MIME</acronym> part object later. 7Bit and 8Bit encoding
+        currently only pass on the binary content data.
     </para>
 
     <para>
-        Header Encoding, especially the encoding of the subject, is a tricky topic. <classname>Zend_Mime</classname> currently implements
-        its own algorithm to encode quoted printable headers according to RFC-2045.
-        This due to the problems of <code>iconv_mime_encode</code> and <code>mb_encode_mimeheader</code>
-        with regards to certain charsets. This algorithm only breaks the header at spaces, which might lead to headers
-        that far exceed the suggested length of 76 chars. For this cases it is suggested to switch to BASE64
-        header encoding same as the following example describes:
+        Header Encoding, especially the encoding of the subject, is a tricky topic.
+        <classname>Zend_Mime</classname> currently implements its own algorithm to encode quoted
+        printable headers according to RFC-2045. This due to the problems of
+        <code>iconv_mime_encode</code> and <code>mb_encode_mimeheader</code> with regards to certain
+        charsets. This algorithm only breaks the header at spaces, which might lead to headers that
+        far exceed the suggested length of 76 chars. For this cases it is suggested to switch to
+        BASE64 header encoding same as the following example describes:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -30,8 +33,8 @@ $mail->setHeaderEncoding(Zend_Mime::ENCODING_BASE64);
 ]]></programlisting>
 
     <para>
-        <classname>Zend_Mail_Transport_Smtp</classname> encodes lines starting with one dot or two dots so that the mail
-        does not violate the SMTP protocol.
+        <classname>Zend_Mail_Transport_Smtp</classname> encodes lines starting with one dot or two
+        dots so that the mail does not violate the SMTP protocol.
     </para>
 </sect1>
 <!--

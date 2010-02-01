@@ -2,24 +2,31 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.sending">
     <title>Sending via SMTP</title>
+
     <para>
-        To send mail via SMTP, <classname>Zend_Mail_Transport_Smtp</classname> needs to be created and registered with
-        <classname>Zend_Mail</classname> before the <methodname>send()</methodname> method is called. For all remaining
-        <methodname>Zend_Mail::send()</methodname> calls in the current script, the SMTP transport will then be used:
+        To send mail via SMTP, <classname>Zend_Mail_Transport_Smtp</classname> needs to be created
+        and registered with <classname>Zend_Mail</classname> before the
+        <methodname>send()</methodname> method is called. For all remaining
+        <methodname>Zend_Mail::send()</methodname> calls in the current script, the SMTP transport
+        will then be used:
     </para>
+
     <example id="zend.mail.sending.example-1">
         <title>Sending E-Mail via SMTP</title>
+
         <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Smtp('mail.example.com');
 Zend_Mail::setDefaultTransport($tr);
 ]]></programlisting>
     </example>
+
     <para>
         The <methodname>setDefaultTransport()</methodname> method and the constructor of
-        <classname>Zend_Mail_Transport_Smtp</classname> are not expensive. These two lines can be processed at script
-        setup time (e.g., config.inc or similar) to configure the behavior of the <classname>Zend_Mail</classname> class
-        for the rest of the script. This keeps configuration information out of the application logic - whether
-        mail is sent via SMTP or <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>, what mail server
+        <classname>Zend_Mail_Transport_Smtp</classname> are not expensive. These two lines can be
+        processed at script setup time (e.g., config.inc or similar) to configure the behavior of
+        the <classname>Zend_Mail</classname> class for the rest of the script. This keeps
+        configuration information out of the application logic - whether mail is sent via SMTP or
+        <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>, what mail server
         is used, etc.
     </para>
 </sect1>

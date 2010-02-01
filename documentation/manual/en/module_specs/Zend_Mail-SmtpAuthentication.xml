@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.smtp-authentication">
-  <title>SMTP Authentication</title>
+    <title>SMTP Authentication</title>
 
-  <para><classname>Zend_Mail</classname> supports the use of SMTP authentication, which
-  can be enabled be passing the 'auth' parameter to the configuration array in
-  the <classname>Zend_Mail_Transport_Smtp</classname> constructor. The available
-  built-in authentication methods are PLAIN, LOGIN and CRAM-MD5 which all
-  expect a 'username' and 'password' value in the configuration array.</para>
+    <para>
+        <classname>Zend_Mail</classname> supports the use of SMTP authentication, which
+        can be enabled be passing the 'auth' parameter to the configuration array in
+        the <classname>Zend_Mail_Transport_Smtp</classname> constructor. The available
+        built-in authentication methods are PLAIN, LOGIN and CRAM-MD5 which all
+        expect a 'username' and 'password' value in the configuration array.
+    </para>
 
-  <example id="zend.mail.smtp-authentication.example-1">
-    <title>Enabling authentication within Zend_Mail_Transport_Smtp</title>
+    <example id="zend.mail.smtp-authentication.example-1">
+        <title>Enabling authentication within Zend_Mail_Transport_Smtp</title>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $config = array('auth' => 'login',
                 'username' => 'myusername',
                 'password' => 'password');
@@ -26,16 +28,17 @@ $mail->addTo('recipient@test.com', 'Some Recipient');
 $mail->setSubject('TestSubject');
 $mail->send($transport);
 ]]></programlisting>
-  </example>
+    </example>
 
-  <note>
-    <title>Authentication types</title>
+    <note>
+        <title>Authentication types</title>
 
-    <para>
-        The authentication type is case-insensitive but has no punctuation.
-        E.g. to use CRAM-MD5 you would pass 'auth' => 'crammd5' in the
-        <classname>Zend_Mail_Transport_Smtp</classname> constructor.</para>
-  </note>
+        <para>
+            The authentication type is case-insensitive but has no punctuation.
+            E.g. to use CRAM-MD5 you would pass 'auth' => 'crammd5' in the
+            <classname>Zend_Mail_Transport_Smtp</classname> constructor.
+        </para>
+    </note>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

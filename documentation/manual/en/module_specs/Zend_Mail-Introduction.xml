@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.introduction">
-
     <title>Introduction</title>
 
     <sect2 id="zend.mail.introduction.getting-started">
-
         <title>Getting started</title>
 
         <para>
-            <classname>Zend_Mail</classname> provides generalized functionality to compose and send both text and <acronym>MIME</acronym>-compliant
-            multipart e-mail messages. Mail can be sent with <classname>Zend_Mail</classname> via the default <classname>Zend_Mail_Transport_Sendmail</classname>
-            transport or via <classname>Zend_Mail_Transport_Smtp</classname>.
+            <classname>Zend_Mail</classname> provides generalized functionality to compose and send
+            both text and <acronym>MIME</acronym>-compliant multipart e-mail messages. Mail can be
+            sent with <classname>Zend_Mail</classname> via the default
+            <classname>Zend_Mail_Transport_Sendmail</classname> transport or via
+            <classname>Zend_Mail_Transport_Smtp</classname>.
         </para>
 
         <example id="zend.mail.introduction.example-1">
-
             <title>Simple E-Mail with Zend_Mail</title>
 
             <para>
-                A simple e-mail consists of some recipients, a subject, a body and a sender. To send such a mail using
-                <classname>Zend_Mail_Transport_Sendmail</classname>, do the following:
+                A simple e-mail consists of some recipients, a subject, a body and a sender. To send
+                such a mail using <classname>Zend_Mail_Transport_Sendmail</classname>, do the
+                following:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -31,32 +31,36 @@ $mail->addTo('somebody_else@example.com', 'Some Recipient');
 $mail->setSubject('TestSubject');
 $mail->send();
 ]]></programlisting>
-
         </example>
 
         <note>
             <title>Minimum definitions</title>
+
             <para>
-                In order to send an e-mail with <classname>Zend_Mail</classname> you have to specify at least one recipient, a
-                sender (e.g., with <methodname>setFrom()</methodname>), and a message body (text and/or HTML).
+                In order to send an e-mail with <classname>Zend_Mail</classname> you have to specify
+                at least one recipient, a sender (e.g., with <methodname>setFrom()</methodname>),
+                and a message body (text and/or HTML).
             </para>
         </note>
 
         <para>
-            For most mail attributes there are "get" methods to read the information stored in the mail object. For
-            further details, please refer to the <acronym>API</acronym> documentation. A special one is <methodname>getRecipients()</methodname>.
-            It returns an array with all recipient e-mail addresses that were added prior to the method call.
+            For most mail attributes there are "get" methods to read the information stored in the
+            mail object. for further details, please refer to the <acronym>API</acronym>
+            documentation. A special one is <methodname>getRecipients()</methodname>. It returns an
+            array with all recipient e-mail addresses that were added prior to the method call.
         </para>
 
         <para>
-            For security reasons, <classname>Zend_Mail</classname> filters all header fields to prevent header injection with
-            newline (<code>\n</code>) characters.
-            Double quotation is changed to single quotation and angle brackets to square brackets in the name of
-            sender and recipients. If the marks are in email address, the marks will be removed.
+            For security reasons, <classname>Zend_Mail</classname> filters all header fields to
+            prevent header injection with newline (<code>\n</code>) characters.
+            Double quotation is changed to single quotation and angle brackets to square brackets in
+            the name of sender and recipients. If the marks are in email address, the marks will be
+            removed.
         </para>
 
         <para>
-            You also can use most methods of the <classname>Zend_Mail</classname> object with a convenient fluent interface.
+            You also can use most methods of the <classname>Zend_Mail</classname> object with a
+            convenient fluent interface.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -67,29 +71,32 @@ $mail->setBodyText('This is the text of the mail.')
     ->setSubject('TestSubject')
     ->send();
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.mail.introduction.sendmail">
-
         <title>Configuring the default sendmail transport</title>
 
         <para>
-            The default transport for a <classname>Zend_Mail</classname> instance is <classname>Zend_Mail_Transport_Sendmail</classname>.
-            It is essentially a wrapper to the <acronym>PHP</acronym> <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> function.
-            If you wish to pass additional parameters to the <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> function,
-            simply create a new transport instance and pass your parameters to the constructor. The new transport instance
-            can then act as the default <classname>Zend_Mail</classname> transport, or it can be passed to the <methodname>send()</methodname>
-            method of <classname>Zend_Mail</classname>.
+            The default transport for a <classname>Zend_Mail</classname> instance is
+            <classname>Zend_Mail_Transport_Sendmail</classname>. It is essentially a wrapper to the
+            <acronym>PHP</acronym> <ulink
+                url="http://php.net/mail"><methodname>mail()</methodname></ulink> function. If you
+            wish to pass additional parameters to the <ulink
+                url="http://php.net/mail"><methodname>mail()</methodname></ulink> function, simply
+            create a new transport instance and pass your parameters to the constructor. The new
+            transport instance can then act as the default <classname>Zend_Mail</classname>
+            transport, or it can be passed to the <methodname>send()</methodname> method of
+            <classname>Zend_Mail</classname>.
         </para>
 
         <example id="zend.mail.introduction.sendmail.example-1">
-
-            <title>Passing additional parameters to the Zend_Mail_Transport_Sendmail transport</title>
+            <title>
+                Passing additional parameters to the Zend_Mail_Transport_Sendmail transport
+            </title>
 
             <para>
-                This example shows how to change the Return-Path of the <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink>
-                function.
+                This example shows how to change the Return-Path of the <ulink
+                    url="http://php.net/mail"><methodname>mail()</methodname></ulink> function.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -103,14 +110,15 @@ $mail->addTo('somebody_else@example.com', 'Some Recipient');
 $mail->setSubject('TestSubject');
 $mail->send();
 ]]></programlisting>
-
         </example>
 
         <note>
             <title>Safe mode restrictions</title>
+
             <para>
-                The optional additional parameters will be cause the <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> function to fail
-                if <acronym>PHP</acronym> is running in safe mode.
+                The optional additional parameters will be cause the <ulink
+                    url="http://php.net/mail"><methodname>mail()</methodname></ulink> function to
+                fail if <acronym>PHP</acronym> is running in safe mode.
             </para>
         </note>
 
@@ -119,8 +127,8 @@ $mail->send();
 
             <para>
                 As the PHP manual states the <methodname>mail()</methodname> function has different
-                behaviour on Windows and on *nix based systems. Using the Sendmail
-                Transport on Windows will not work in combination with <methodname>addBcc()</methodname>.
+                behaviour on Windows and on *nix based systems. Using the Sendmail Transport
+                on Windows will not work in combination with <methodname>addBcc()</methodname>.
                 The <methodname>mail()</methodname> function will sent to the BCC recipient such
                 that all the other recipients can see him as recipient!
             </para>
@@ -130,9 +138,7 @@ $mail->send();
                 transport for sending!
             </para>
         </warning>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

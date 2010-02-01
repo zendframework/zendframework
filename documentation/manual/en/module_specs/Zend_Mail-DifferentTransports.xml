@@ -2,14 +2,17 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.different-transports">
     <title>Using Different Transports</title>
+
     <para>
-        In case you want to send different e-mails through different connections, you can also pass the
-        transport object directly to <methodname>send()</methodname> without a prior call to
-        <methodname>setDefaultTransport()</methodname>. The passed object will override the default transport for the
-        actual <methodname>send()</methodname> request.
+        In case you want to send different e-mails through different connections, you can also pass
+        the transport object directly to <methodname>send()</methodname> without a prior call to
+        <methodname>setDefaultTransport()</methodname>. The passed object will override the default
+        transport for the actual <methodname>send()</methodname> request.
     </para>
+
     <example id="zend.mail.different-transports.example-1">
         <title>Using Different Transports</title>
+
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 // build message...
@@ -20,10 +23,13 @@ $mail->send($tr2);
 $mail->send();  // use default again
 ]]></programlisting>
     </example>
+
     <note>
         <title>Additional transports</title>
+
         <para>
-            Additional transports can be written by implementing <classname>Zend_Mail_Transport_Interface</classname>.
+            Additional transports can be written by implementing
+            <classname>Zend_Mail_Transport_Interface</classname>.
         </para>
     </note>
 </sect1>

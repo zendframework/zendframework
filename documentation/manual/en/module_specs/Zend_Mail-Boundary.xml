@@ -12,6 +12,7 @@
 
     <example id="zend.mail.boundary.example-1">
         <title>Changing the MIME Boundary</title>
+
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setMimeBoundary('=_' . md5(microtime(1) . $someId++));

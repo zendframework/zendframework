@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.registry.using">
-
     <title>Using the Registry</title>
 
     <para>
@@ -13,20 +12,21 @@
 
     <para>
         The typical method to use registries with Zend Framework is through static methods in the
-        <classname>Zend_Registry</classname> class. Alternatively, the registry can be used as an array object,
-        so you can access elements stored within it with a convenient array-like interface.
+        <classname>Zend_Registry</classname> class. Alternatively, the registry can be used as an
+        array object, so you can access elements stored within it with a convenient array-like
+        interface.
     </para>
 
     <sect2 id="zend.registry.using.storing">
-
         <title>Setting Values in the Registry</title>
 
         <para>
-            Use the static method <methodname>set()</methodname> to store an entry in the registry, .
+            Use the static method <methodname>set()</methodname> to store an entry in the registry.
         </para>
 
         <example id="zend.registry.using.storing.example">
             <title>Example of set() Method Usage</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
 ]]></programlisting>
@@ -43,11 +43,9 @@ Zend_Registry::set('index', $value);
             The index can be a scalar (<constant>NULL</constant>, string, or number), like an
             ordinary array.
         </para>
-
     </sect2>
 
     <sect2 id="zend.registry.using.retrieving">
-
         <title>Getting Values from the Registry</title>
 
         <para>
@@ -57,6 +55,7 @@ Zend_Registry::set('index', $value);
 
         <example id="zend.registry.using.retrieving.example">
             <title>Example of get() Method Usage</title>
+
             <programlisting language="php"><![CDATA[
 $value = Zend_Registry::get('index');
 ]]></programlisting>
@@ -64,11 +63,13 @@ $value = Zend_Registry::get('index');
 
         <para>
             The <methodname>getInstance()</methodname> method returns the singleton registry object.
-            This registry object is iterable, making all values stored in the registry easily accessible.
+            This registry object is iterable, making all values stored in the registry easily
+            accessible.
         </para>
 
         <example id="zend.registry.using.retrieving.example-iterating">
             <title>Example of Iterating over the Registry</title>
+
             <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
@@ -78,11 +79,9 @@ foreach ($registry as $index => $value) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.registry.using.constructing">
-
         <title>Constructing a Registry Object</title>
 
         <para>
@@ -107,6 +106,7 @@ foreach ($registry as $index => $value) {
 
         <example id="zend.registry.using.constructing.example">
             <title>Example of Constructing a Registry</title>
+
             <programlisting language="php"><![CDATA[
 $registry = new Zend_Registry(array('index' => $value));
 ]]></programlisting>
@@ -115,12 +115,13 @@ $registry = new Zend_Registry(array('index' => $value));
         <para>
             Once such a <classname>Zend_Registry</classname> object is instantiated,
             you can use it by calling any array object method or by setting it
-            as the singleton instance for <classname>Zend_Registry</classname> with the static method
-            <methodname>setInstance()</methodname>.
+            as the singleton instance for <classname>Zend_Registry</classname> with the static
+            method <methodname>setInstance()</methodname>.
         </para>
 
         <example id="zend.registry.using.constructing.example-setinstance">
             <title>Example of Initializing the Singleton Registry</title>
+
             <programlisting language="php"><![CDATA[
 $registry = new Zend_Registry(array('index' => $value));
 
@@ -129,14 +130,13 @@ Zend_Registry::setInstance($registry);
         </example>
 
         <para>
-            The <methodname>setInstance()</methodname> method throws a <classname>Zend_Exception</classname>
-            if the static registry has already been initialized.
+            The <methodname>setInstance()</methodname> method throws a
+            <classname>Zend_Exception</classname> if the static registry has already been
+            initialized.
         </para>
-
     </sect2>
 
     <sect2 id="zend.registry.using.array-access">
-
         <title>Accessing the Registry as an Array</title>
 
         <para>
@@ -146,6 +146,7 @@ Zend_Registry::setInstance($registry);
 
         <example id="zend.registry.using.array-access.example">
             <title>Example of Array Access</title>
+
             <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
@@ -154,11 +155,9 @@ $registry['index'] = $value;
 var_dump( $registry['index'] );
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.registry.using.array-object">
-
         <title>Accessing the Registry as an Object</title>
 
         <para>
@@ -168,22 +167,26 @@ var_dump( $registry['index'] );
             You must specifically construct the registry
             object using the <constant>ArrayObject::ARRAY_AS_PROPS</constant> option
             and initialize the static instance to enable this functionality.
+
             <note>
                 <para>You must set the <constant>ArrayObject::ARRAY_AS_PROPS</constant> option
                 <emphasis>before</emphasis> the static registry has been accessed for
                 the first time.</para>
             </note>
         </para>
-            <warning>
-                <title>Known Issues with the ArrayObject::ARRAY_AS_PROPS Option</title>
 
-                <para>
-                    Some versions of <acronym>PHP</acronym> have proven very buggy when using the registry with the <constant>ArrayObject::ARRAY_AS_PROPS</constant> option.
-                </para>
-            </warning>
+        <warning>
+            <title>Known Issues with the ArrayObject::ARRAY_AS_PROPS Option</title>
+
+            <para>
+                Some versions of <acronym>PHP</acronym> have proven very buggy when using the
+                registry with the <constant>ArrayObject::ARRAY_AS_PROPS</constant> option.
+            </para>
+        </warning>
 
         <example id="zend.registry.using.array-object.example">
             <title>Example of Object Access</title>
+
             <programlisting language="php"><![CDATA[
 // in your application bootstrap:
 $registry = new Zend_Registry(array(), ArrayObject::ARRAY_AS_PROPS)
@@ -204,11 +207,9 @@ $registry->index = $value;
 var_dump($registry->index);
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.registry.using.isset">
-
         <title>Querying if an Index Exists</title>
 
         <para>
@@ -218,6 +219,7 @@ var_dump($registry->index);
 
         <example id="zend.registry.using.isset.example-isregistered">
             <title>Example of isRegistered() Method Usage</title>
+
             <programlisting language="php"><![CDATA[
 if (Zend_Registry::isRegistered($index)) {
     $value = Zend_Registry::get($index);
@@ -233,6 +235,7 @@ if (Zend_Registry::isRegistered($index)) {
 
         <example id="zend.registry.using.isset.example-isset">
             <title>Example of isset() Method Usage</title>
+
             <programlisting language="php"><![CDATA[
 $registry = Zend_Registry::getInstance();
 
@@ -247,11 +250,9 @@ if (isset($registry->index)) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.registry.using.subclassing">
-
         <title>Extending the Registry</title>
 
         <para>
@@ -261,6 +262,7 @@ if (isset($registry->index)) {
             specify this class to instantiate for the singleton in the static registry.
             Use the static method <methodname>setClassName()</methodname> to specify
             the class.
+
             <note>
                 <para>The class must be a subclass of <classname>Zend_Registry</classname>.</para>
             </note>
@@ -268,6 +270,7 @@ if (isset($registry->index)) {
 
         <example id="zend.registry.using.subclassing.example">
             <title>Example of Specifying the Singleton Registry's Class Name</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Registry::setClassName('My_Registry');
 
@@ -281,11 +284,9 @@ Zend_Registry::set('index', $value);
             It is therefore recommended that you specify the class name for your
             static registry in your application bootstrap.
         </para>
-
     </sect2>
 
     <sect2 id="zend.registry.using.unsetting">
-
         <title>Unsetting the Static Registry</title>
 
         <para>
@@ -296,6 +297,7 @@ Zend_Registry::set('index', $value);
 
         <warning>
             <title>Data Loss Risk</title>
+
             <para>
                 When you use <methodname>_unsetInstance()</methodname>,
                 all data in the static registry are
@@ -315,6 +317,7 @@ Zend_Registry::set('index', $value);
 
         <example id="zend.registry.using.unsetting.example">
             <title>Example of _unsetInstance() Method Usage</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Registry::set('index', $value);
 
@@ -326,9 +329,7 @@ Zend_Registry::setClassName('My_Registry');
 Zend_Registry::set('index', $value);
 ]]></programlisting>
         </example>
-
     </sect2>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

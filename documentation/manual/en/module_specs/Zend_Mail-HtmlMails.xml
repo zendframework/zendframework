@@ -2,14 +2,18 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.html-mails">
     <title>HTML E-Mail</title>
+
     <para>
-        To send an e-mail in HTML format, set the body using the method <methodname>setBodyHTML()</methodname> instead of
-        <methodname>setBodyText()</methodname>. The <acronym>MIME</acronym> content type will automatically be set to <code>text/html</code>
-        then. If you use both HTML and Text bodies, a multipart/alternative <acronym>MIME</acronym> message will automatically be
-        generated:
+        To send an e-mail in HTML format, set the body using the method
+        <methodname>setBodyHTML()</methodname> instead of <methodname>setBodyText()</methodname>.
+        The <acronym>MIME</acronym> content type will automatically be set to <code>text/html</code>
+        then. If you use both HTML and Text bodies, a multipart/alternative <acronym>MIME</acronym>
+        message will automatically be generated:
     </para>
+
     <example id="zend.mail.html-mails.example-1">
         <title>Sending HTML E-Mail</title>
+
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('My Nice Test Text');

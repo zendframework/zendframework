@@ -7,18 +7,20 @@
         <title>Introduction</title>
 
         <para>
-            <classname>Zend_Server_Reflection</classname> provides a standard mechanism for performing
-            function and class introspection for use with server classes. It is
-            based on <acronym>PHP</acronym> 5's Reflection <acronym>API</acronym>, augmenting it with methods
-            for retrieving parameter and return value types and descriptions, a
+            <classname>Zend_Server_Reflection</classname> provides a standard mechanism for
+            performing function and class introspection for use with server classes. It is
+            based on <acronym>PHP</acronym> 5's Reflection <acronym>API</acronym>, augmenting it
+            with methods for retrieving parameter and return value types and descriptions, a
             full list of function and method prototypes (i.e., all possible
             valid calling combinations), and function/method descriptions.
         </para>
+
         <para>
             Typically, this functionality will only be used by developers of
             server classes for the framework.
         </para>
     </sect2>
+
     <sect2 id="zend.server.reflection.usage">
         <title>Usage</title>
 

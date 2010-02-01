@@ -2,14 +2,17 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.service.introduction">
     <title>Introduction</title>
+
     <para>
         <classname>Zend_Service</classname> is an abstract class which serves as a
         foundation for web service implementations, such as <acronym>SOAP</acronym> or REST.
     </para>
+
     <para>
         If you need support for generic, <acronym>XML</acronym>-based REST services, you may want
         to look at <link linkend="zend.rest.client"><classname>Zend_Rest_Client</classname></link>.
     </para>
+
     <para>
         In addition to being able to extend the <classname>Zend_Service</classname> and
         use <classname>Zend_Rest_Client</classname> for REST-based web services, Zend also
@@ -23,41 +26,49 @@
                 <link linkend="zend.service.akismet">Akismet</link>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.service.amazon">Amazon</link>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.service.audioscrobbler">Audioscrobbler</link>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.service.delicious">Del.icio.us</link>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.service.flickr">Flickr</link>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.service.simpy">Simpy</link>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.service.slideshare">SlideShare</link>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.service.strikeiron">StrikeIron</link>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.service.yahoo">Yahoo!</link>
@@ -68,7 +79,6 @@
     <para>
         Additional services are coming in the future.
     </para>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

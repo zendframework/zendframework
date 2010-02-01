@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.cloudwatch">
     <title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title>
+
     <para>
         Amazon CloudWatch is an easy-to-use web service that provides
         comprehensive monitoring for Amazon Elastic Compute Cloud (Amazon
@@ -16,6 +17,7 @@
 
         <example id="zend.service.amazon.ec2.cloudwatch.usage.list">
             <title>Listing Aviable Metrics</title>
+
             <para>
                 <methodname>listMetrics()</methodname> returns a list of up to 500 valid metrics for
                 which there is recorded data available to a you and a NextToken string
@@ -30,10 +32,12 @@ $return = $ec2_ebs->listMetrics();
 
         <example id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics">
             <title>Return Statistics for a given metric</title>
+
             <para>
                 <methodname>getMetricStatistics()</methodname> Returns data for one or more
                 statistics of given a metric.
             </para>
+
             <para>
                 <note>
                     <para>
@@ -47,14 +51,17 @@ $return = $ec2_ebs->listMetrics();
                     </para>
                 </note>
             </para>
+
             <para>
                 <methodname>getMetricStatistics()</methodname> only requires two parameters but it
                 also has four additional parameters that are optional.
             </para>
+
             <itemizedlist>
                 <listitem>
                     <para><emphasis>Required:</emphasis></para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>MeasureName</emphasis> The measure name that corresponds to
@@ -63,10 +70,11 @@ $return = $ec2_ebs->listMetrics();
                         DiskReadBytes, DiskReadOps, DiskWriteBytes. Valid Elastic
                         Load Balancing Metrics are Latency, RequestCount, HealthyHostCount
                         UnHealthyHostCount. <ulink
-                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">
-                            For more information click here</ulink>
+                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">For
+                            more information click here</ulink>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>Statistics</emphasis> The statistics to be returned for the given
@@ -74,13 +82,15 @@ $return = $ec2_ebs->listMetrics();
                         specify this as a string or as an array of values. If you don't specify one
                         it will default to Average instead of failing out. If you specify an
                         incorrect option it will just skip it. <ulink
-                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-Amazon-CloudWatch-statistics.html">
-                            For more information click here</ulink>
+                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-Amazon-CloudWatch-statistics.html">For
+                            more information click here</ulink>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para><emphasis>Optional:</emphasis></para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>Dimensions</emphasis> Amazon CloudWatch allows you to specify one
@@ -89,6 +99,7 @@ $return = $ec2_ebs->listMetrics();
                         given measure name and time range.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>Unit</emphasis> The standard unit of Measurement for a given
@@ -100,15 +111,18 @@ $return = $ec2_ebs->listMetrics();
                         to always equals one when the unit is count/second.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>StartTime</emphasis> The timestamp of the first datapoint to
                         return, inclusive. For example, 2008-02-26T19:00:00+00:00. We round your
                         value down to the nearest minute. You can set your start time for more than
                         two weeks in the past. However, you will only get data for the past two
-                        weeks. (in <acronym>ISO</acronym> 8601 format). Constraints: Must be before EndTime.
+                        weeks. (in <acronym>ISO</acronym> 8601 format). Constraints: Must be before
+                        EndTime.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>EndTime</emphasis> The timestamp to use for determining the last

@@ -4,34 +4,39 @@
     <title>Zend_Service_StrikeIron: Bundled Services</title>
 
     <para>
-      <classname>Zend_Service_StrikeIron</classname> comes with wrapper classes for three popular StrikeIron services.
+        <classname>Zend_Service_StrikeIron</classname> comes with wrapper classes for three popular
+        StrikeIron services.
     </para>
 
     <sect2 id="zend.service.strikeiron.bundled-services.zip-code-information">
-      <title>ZIP Code Information</title>
+        <title>ZIP Code Information</title>
 
-      <para>
-        <classname>Zend_Service_StrikeIron_ZipCodeInfo</classname> provides a client for StrikeIron's
-        Zip Code Information Service. For more information on this service, visit these
-        StrikeIron resources:
+        <para>
+            <classname>Zend_Service_StrikeIron_ZipCodeInfo</classname> provides a client for
+            StrikeIron's Zip Code Information Service. For more information on this service, visit
+            these StrikeIron resources:
 
-        <itemizedlist>
-          <listitem>
-            <para>
-              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=267">Zip Code Information Service Page</ulink>
-            </para>
-          </listitem>
-          <listitem>
-            <para>
-              <ulink url="http://sdpws.strikeiron.com/zf1.StrikeIron/sdpZIPCodeInfo?WSDL">Zip Code Information Service WSDL</ulink>
-            </para>
-          </listitem>
-        </itemizedlist>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                      <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=267">Zip Code
+                          Information Service Page</ulink>
+                    </para>
+                </listitem>
 
-        The service contains a <methodname>getZipCode()</methodname> method that will retrieve information
-        about a United States ZIP code or Canadian postal code:
+                <listitem>
+                    <para>
+                      <ulink
+                          url="http://sdpws.strikeiron.com/zf1.StrikeIron/sdpZIPCodeInfo?WSDL">Zip
+                          Code Information Service WSDL</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
 
-        <programlisting language="php"><![CDATA[
+            The service contains a <methodname>getZipCode()</methodname> method that will retrieve
+            information about a United States ZIP code or Canadian postal code:
+
+            <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -68,36 +73,40 @@ if ($zips->count == 0) {
 // http://www.strikeiron.com/exampledata/StrikeIronZipCodeInformation_v3.pdf
 $status = $response->serviceStatus;
 ]]></programlisting>
-      </para>
+        </para>
     </sect2>
 
     <sect2 id="zend.service.strikeiron.bundled-services.us-address-verification">
-      <title>U.S. Address Verification</title>
+        <title>U.S. Address Verification</title>
 
-      <para>
-        <classname>Zend_Service_StrikeIron_USAddressVerification</classname> provides a client for
-        StrikeIron's U.S. Address Verification Service. For more information on this
-        service, visit these StrikeIron resources:
+        <para>
+            <classname>Zend_Service_StrikeIron_USAddressVerification</classname> provides a client
+            for StrikeIron's U.S. Address Verification Service. For more information on this
+            service, visit these StrikeIron resources:
 
-        <itemizedlist>
-          <listitem>
-            <para>
-              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=198">U.S. Address Verification Service Page</ulink>
-            </para>
-          </listitem>
-          <listitem>
-            <para>
-              <ulink url="http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL">U.S. Address Verification Service WSDL</ulink>
-            </para>
-          </listitem>
-        </itemizedlist>
-      </para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=198">U.S. Address
+                            Verification Service Page</ulink>
+                    </para>
+                </listitem>
 
-      <para>
-        The service contains a <methodname>verifyAddressUSA()</methodname> method that will verify
-        an address in the United States:
+                <listitem>
+                    <para>
+                        <ulink
+                            url="http://ws.strikeiron.com/zf1.StrikeIron/USAddressVerification4_0?WSDL">U.S.
+                            Address Verification Service WSDL</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
 
-        <programlisting language="php"><![CDATA[
+        <para>
+            The service contains a <methodname>verifyAddressUSA()</methodname> method that will
+            verify an address in the United States:
+
+            <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -129,36 +138,41 @@ if ($result->addressErrorNumber != 0) {
     $valid = ($result->valid == 'VALID');
 }
 ]]></programlisting>
-      </para>
+        </para>
     </sect2>
 
     <sect2 id="zend.service.strikeiron.bundled-services.sales-use-tax-basic">
-      <title>Sales &amp; Use Tax Basic</title>
+        <title>Sales &amp; Use Tax Basic</title>
 
-      <para>
-        <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname> provides a client for
-        StrikeIron's Sales &amp; Use Tax Basic service. For more information on this
-        service, visit these StrikeIron resources:
+        <para>
+            <classname>Zend_Service_StrikeIron_SalesUseTaxBasic</classname> provides a client for
+            StrikeIron's Sales &amp; Use Tax Basic service. For more information on this
+            service, visit these StrikeIron resources:
 
-        <itemizedlist>
-          <listitem>
-            <para>
-              <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=351">Sales &amp; Use Tax Basic Service Page</ulink>
-            </para>
-          </listitem>
-          <listitem>
-            <para>
-              <ulink url="http://ws.strikeiron.com/zf1.StrikeIron/taxdatabasic4?WSDL">Sales &amp; Use Tax Basic Service WSDL</ulink>
-            </para>
-          </listitem>
-        </itemizedlist>
-      </para>
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <ulink url="http://www.strikeiron.com/ProductDetail.aspx?p=351">Sales &amp;
+                            Use Tax Basic Service Page</ulink>
+                    </para>
+                </listitem>
 
-      <para>
-        The service contains two methods, <methodname>getTaxRateUSA()</methodname> and <methodname>getTaxRateCanada()</methodname>,
-        that will retrieve sales and use tax data for the United States and Canada, respectively.
+                <listitem>
+                    <para>
+                        <ulink
+                            url="http://ws.strikeiron.com/zf1.StrikeIron/taxdatabasic4?WSDL">Sales
+                            &amp; Use Tax Basic Service WSDL</ulink>
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
 
-        <programlisting language="php"><![CDATA[
+        <para>
+            The service contains two methods, <methodname>getTaxRateUSA()</methodname> and
+            <methodname>getTaxRateCanada()</methodname>, that will retrieve sales and use tax data
+            for the United States and Canada, respectively.
+
+            <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -175,6 +189,6 @@ $rateInfo = $taxBasic->getTaxRateUS(array('zip_code' => 95014));
 print_r($rateInfo);               // show all properties
 echo $rateInfo->state_sales_tax;  // or just the state sales tax
 ]]></programlisting>
-      </para>
+        </para>
     </sect2>
 </sect1>

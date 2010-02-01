@@ -16,12 +16,14 @@
 
     <sect2 id="zend.service.amazon.ec2.zones.regions">
         <title>Amazon EC2 Regions</title>
+
         <para>
             Amazon EC2 provides multiple regions so you can launch Amazon EC2
             instances in locations that meet your requirements. For example,
             you might want to launch instances in Europe to be closer to your
             European customers or to meet legal requirements.
         </para>
+
         <para>
             Each Amazon EC2 region is designed to be completely isolated from
             the other Amazon EC2 regions. This achieves the greatest possible
@@ -31,12 +33,14 @@
 
         <example id="zend.service.amazon.ec2.zones.regions.example">
             <title>Viewing the available regions</title>
+
             <para>
                 <code>describe</code> is used to find out which regions your account has access to.
             </para>
+
             <para>
-                <code>describe</code> will return an array containing information about which regions
-                are available. Each array will contain regionName and regionUrl.
+                <code>describe</code> will return an array containing information about which
+                regions are available. Each array will contain regionName and regionUrl.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -52,6 +56,7 @@ foreach($regions as $region) {
 
     <sect2 id="zend.service.amazon.ec2.zones.availability">
         <title>Amazon EC2 Availability Zones</title>
+
         <para>
             When you launch an instance, you can optionally specify an Availability
             Zone. If you do not specify an Availability Zone, Amazon EC2 selects one
@@ -66,10 +71,12 @@ foreach($regions as $region) {
 
         <example id="zend.service.amazon.ec2.zones.availability.example">
             <title>Viewing the available zones</title>
+
             <para>
                 <code>describe</code> is used to find out which what the status is of each
                 availability zone.
             </para>
+
             <para>
                 <code>describe</code> will return an array containing information about which zones
                 are available. Each array will contain zoneName and zoneState.

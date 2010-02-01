@@ -64,9 +64,9 @@
         </para>
 
         <para>
-            The adapter simply uses the <ulink url="http://php.net/manual/book.wddx.php">wddx_*()</ulink>
-            PHP functions. Please read the php manual to determine how you may enable them in your
-            PHP installation.
+            The adapter simply uses the <ulink
+                url="http://php.net/manual/book.wddx.php">wddx_*()</ulink> PHP functions. Please
+            read the php manual to determine how you may enable them in your PHP installation.
         </para>
 
         <para>
@@ -88,11 +88,8 @@
                  <thead>
                       <row>
                           <entry>Option</entry>
-
                           <entry>Data Type</entry>
-
                           <entry>Default Value</entry>
-
                           <entry>Description</entry>
                     </row>
                  </thead>
@@ -100,14 +97,9 @@
                  <tbody>
                       <row>
                           <entry><emphasis>comment</emphasis></entry>
-
                           <entry><type>string</type></entry>
-
                           <entry></entry>
-
-                          <entry>
-                            An optional comment that appears in the packet header.
-                          </entry>
+                          <entry>An optional comment that appears in the packet header.</entry>
                       </row>
                   </tbody>
              </tgroup>
@@ -135,11 +127,8 @@
                  <thead>
                       <row>
                         <entry>Option</entry>
-
                         <entry>Data Type</entry>
-
                         <entry>Default Value</entry>
-
                         <entry>Description</entry>
                     </row>
                  </thead>
@@ -147,38 +136,23 @@
                  <tbody>
                       <row>
                           <entry><emphasis>cycleCheck</emphasis></entry>
-
                           <entry><type>boolean</type></entry>
-
                           <entry>false</entry>
-
-                          <entry>
-                               See <xref linkend= "zend.json.advanced.objects1"/>
-                          </entry>
+                          <entry>See <xref linkend="zend.json.advanced.objects1"/></entry>
                       </row>
 
                       <row>
                           <entry><emphasis>objectDecodeType</emphasis></entry>
-
                           <entry><type>Zend_Json::TYPE_*</type></entry>
-
                           <entry>Zend_Json::TYPE_ARRAY</entry>
-
-                          <entry>
-                               See <xref linkend= "zend.json.advanced.objects1"/>
-                          </entry>
+                          <entry>See <xref linkend= "zend.json.advanced.objects1"/></entry>
                       </row>
 
                       <row>
                           <entry><emphasis>enableJsonExprFinder</emphasis></entry>
-
                           <entry><type>boolean</type></entry>
-
                           <entry>false</entry>
-
-                          <entry>
-                               See <xref linkend= "zend.json.advanced.expr"/>
-                          </entry>
+                          <entry>See <xref linkend= "zend.json.advanced.expr"/></entry>
                       </row>
                   </tbody>
              </tgroup>
@@ -222,11 +196,8 @@
                  <thead>
                       <row>
                         <entry>Option</entry>
-
                         <entry>Data Type</entry>
-
                         <entry>Default Value</entry>
-
                         <entry>Description</entry>
                     </row>
                  </thead>
@@ -234,13 +205,12 @@
                  <tbody>
                       <row>
                           <entry><emphasis>protocol</emphasis></entry>
-
                           <entry><type>integer</type> (0 | 1 | 2 | 3)</entry>
-
                           <entry>0</entry>
 
                           <entry>
-                               The Pickle protocol version used on <methodname>serialize</methodname>
+                               The Pickle protocol version used on
+                               <methodname>serialize</methodname>
                           </entry>
                       </row>
                   </tbody>
@@ -258,7 +228,6 @@
                  <thead>
                       <row>
                         <entry>PHP Type</entry>
-
                         <entry>Python Type</entry>
                     </row>
                  </thead>
@@ -266,49 +235,41 @@
                  <tbody>
                       <row>
                           <entry><type>NULL</type></entry>
-
                           <entry><type>None</type></entry>
                       </row>
 
                       <row>
                           <entry><type>boolean</type></entry>
-
                           <entry><type>boolean</type></entry>
                       </row>
 
                       <row>
                           <entry><type>integer</type></entry>
-
                           <entry><type>integer</type></entry>
                       </row>
 
                       <row>
                           <entry><type>float</type></entry>
-
                           <entry><type>float</type></entry>
                       </row>
 
                       <row>
                           <entry><type>string</type></entry>
-
                           <entry><type>string</type></entry>
                       </row>
 
                       <row>
                           <entry><type>array</type></entry>
-
                           <entry><type>list</type></entry>
                       </row>
 
                       <row>
                           <entry><type>associative array</type></entry>
-
                           <entry><type>dictionary</type></entry>
                       </row>
 
                       <row>
                           <entry><type>object</type></entry>
-
                           <entry><type>dictionary</type></entry>
                       </row>
                   </tbody>
@@ -326,7 +287,6 @@
                  <thead>
                       <row>
                         <entry>Python-Type</entry>
-
                         <entry>PHP-Type</entry>
                     </row>
                  </thead>
@@ -334,19 +294,16 @@
                  <tbody>
                       <row>
                           <entry><type>None</type></entry>
-
                           <entry><type>NULL</type></entry>
                       </row>
 
                       <row>
                           <entry><type>boolean</type></entry>
-
                           <entry><type>boolean</type></entry>
                       </row>
 
                       <row>
                           <entry><type>integer</type></entry>
-
                           <entry><type>integer</type></entry>
                       </row>
 
@@ -354,58 +311,48 @@
                           <entry><type>long</type></entry>
 
                           <entry>
-                              <type>integer</type>
-                              | <type>float</type>
-                              | <type>string</type>
+                              <type>integer</type> | <type>float</type> | <type>string</type>
                               | <classname>Zend_Serializer_Exception</classname>
                           </entry>
                       </row>
 
                       <row>
                           <entry><type>float</type></entry>
-
                           <entry><type>float</type></entry>
                       </row>
 
                       <row>
                           <entry><type>string</type></entry>
-
                           <entry><type>string</type></entry>
                       </row>
 
                       <row>
                           <entry><type>bytes</type></entry>
-
                           <entry><type>string</type></entry>
                       </row>
 
                       <row>
                           <entry><type>Unicode string</type></entry>
-
                           <entry><type>UTF-8 string</type></entry>
                       </row>
 
                       <row>
                           <entry><type>list</type></entry>
-
                           <entry><type>array</type></entry>
                       </row>
 
                       <row>
                           <entry><type>tuple</type></entry>
-
                           <entry><type>array</type></entry>
                       </row>
 
                       <row>
                           <entry><type>dictionary</type></entry>
-
                           <entry><type>associative array</type></entry>
                       </row>
 
                       <row>
                           <entry>All other types</entry>
-
                           <entry><classname>Zend_Serializer_Exception</classname></entry>
                       </row>
                   </tbody>

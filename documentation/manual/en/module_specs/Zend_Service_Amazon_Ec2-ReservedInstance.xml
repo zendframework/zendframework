@@ -8,6 +8,7 @@
         for each instance to reserve and receive a significant discount on the hourly
         usage charge for that instance.
     </para>
+
     <para>
         Amazon <acronym>EC2</acronym> Reserved Instances are based on instance type and location
         (region and Availability Zone) for a specified period of time (e.g.,
@@ -16,36 +17,45 @@
 
     <sect2 id="zend.service.amazon.ec2.reserved.instance.howitworks">
         <title>How Reserved Instances are Applied</title>
+
         <para>
             Reserved Instances are applied to instances that meet the type/location
             criteria during the specified period. In this example, a user is running
             the following instances:
         </para>
+
         <itemizedlist>
             <listitem>
                 <para>(4) m1.small instances in Availability Zone us-east-1a</para>
             </listitem>
+
             <listitem>
                 <para>(4) c1.medium instances in Availability Zone us-east-1b</para>
             </listitem>
+
             <listitem>
                 <para>(2) c1.xlarge instances in Availability Zone us-east-1b</para>
             </listitem>
         </itemizedlist>
+
         <para>
             The user then purchases the following Reserved Instances.
         </para>
+
         <itemizedlist>
             <listitem>
                 <para>(2) m1.small instances in Availability Zone us-east-1a</para>
             </listitem>
+
             <listitem>
                 <para>(2) c1.medium instances in Availability Zone us-east-1a</para>
             </listitem>
+
             <listitem>
                 <para>(2) m1.xlarge instances in Availability Zone us-east-1a</para>
             </listitem>
         </itemizedlist>
+
         <para>
             Amazon <acronym>EC2</acronym> applies the two m1.small Reserved Instances to two of the
             instances in Availability Zone us-east-1a. Amazon <acronym>EC2</acronym> doesn't apply
@@ -57,27 +67,31 @@
 
     <sect2 id="zend.service.amazon.ec2.reserved.instance.operations">
         <title>Reserved Instances Usage</title>
+
         <example id="zend.service.amazon.ec2.reserved.instance.operations.describe">
             <title>Describes Reserved Instances that you purchased</title>
+
             <para>
                 <methodname>describeInstances()</methodname> will return information about a
                 reserved instance or instances that you purchased.
             </para>
+
             <para>
                 <methodname>describeInstances()</methodname> returns a multi-demential array that
                 contains reservedInstancesId, instanceType, availabilityZone, duration, fixedPrice,
                 usagePrice, productDescription, instanceCount and state.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->describeInstances('instanceId');
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.reserved.instance.offerings.describe">
             <title>Describe current Reserved Instance Offerings available</title>
+
             <para>
                 <methodname>describeOfferings()</methodname> Describes Reserved Instance offerings
                 that are available for purchase. With Amazon <acronym>EC2</acronym> Reserved
@@ -85,11 +99,13 @@ $return = $ec2_instance->describeInstances('instanceId');
                 for a period of time (without getting insufficient capacity errors) and pay a lower
                 usage rate for the actual time used.
             </para>
+
             <para>
                 <methodname>describeOfferings()</methodname> returns a multi-demential array that
                 contains reservedInstancesId, instanceType, availabilityZone, duration, fixedPrice,
                 usagePrice and productDescription.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
                                                      'aws_secret_key');
@@ -99,6 +115,7 @@ $return = $ec2_instance->describeOfferings();
 
         <example id="zend.service.amazon.ec2.reserved.instance.offerings.purchase">
             <title>Turn off CloudWatch Monitoring on an Instance(s)</title>
+
             <para>
                 <methodname>purchaseOffering()</methodname> Purchases a Reserved Instance for use
                 with your account. With Amazon <acronym>EC2</acronym> Reserved Instances, you
@@ -106,15 +123,16 @@ $return = $ec2_instance->describeOfferings();
                 of time (without getting insufficient capacity errors) and pay a lower usage rate
                 for the actual time used.
             </para>
+
             <para>
                 <methodname>purchaseOffering()</methodname> returns the reservedInstanceId.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Reserved('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->purchaseOffering('offeringId', 'instanceCount');
 ]]></programlisting>
-
         </example>
     </sect2>
 </sect1>

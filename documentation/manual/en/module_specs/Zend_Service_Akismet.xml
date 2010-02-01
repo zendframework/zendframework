@@ -253,9 +253,9 @@ $akismet->submitSpam($data));
         <para>
             <methodname>Zend_Service_Akismet::submitHam()</methodname> takes the same data
             array as passed to <methodname>isSpam()</methodname> or
-            <methodname>submitSpam()</methodname>, and, like <methodname>submitSpam()</methodname>, does
-            not return a value. An exception will be raised if the <acronym>API</acronym> key used
-            is invalid.
+            <methodname>submitSpam()</methodname>, and, like <methodname>submitSpam()</methodname>,
+            does not return a value. An exception will be raised if the <acronym>API</acronym> key
+            used is invalid.
         </para>
 
         <example id="zend.service.akismet.submitham.example-1">
@@ -324,12 +324,12 @@ $akismet->submitHam($data));
 
             <listitem>
                 <para>
-                    <methodname>getUserAgent()</methodname> and <methodname>setUserAgent()</methodname>
-                    allow you to retrieve and modify the <acronym>HTTP</acronym> user agent used to
-                    make the request. Note: this is not the user_agent used in
-                    data submitted to the service, but rather the value provided
-                    in the <acronym>HTTP</acronym> User-Agent header when making a request to the
-                    service.
+                    <methodname>getUserAgent()</methodname> and
+                    <methodname>setUserAgent()</methodname> allow you to retrieve and modify the
+                    <acronym>HTTP</acronym> user agent used to make the request. Note: this is not
+                    the user_agent used in data submitted to the service, but rather the value
+                    provided in the <acronym>HTTP</acronym> User-Agent header when making a request
+                    to the service.
                 </para>
 
                 <para>
@@ -343,7 +343,6 @@ $akismet->submitHam($data));
         </itemizedlist>
     </sect2>
 </sect1>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

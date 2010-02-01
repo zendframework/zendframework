@@ -117,6 +117,7 @@ foreach ($twitterTrends as $trend) {
                 </para>
             </listitem>
         </itemizedlist>
+
         <example id="zend.service.twitter.search.search.json">
             <title>JSON Search Example</title>
 
@@ -134,7 +135,8 @@ $searchResults  = $twitterSearch->search('zend', array('lang' => 'en'));
             <title>ATOM Search Example</title>
 
             <para>
-                The following code sample will return a <classname>Zend_Feed_Atom</classname> object.
+                The following code sample will return a <classname>Zend_Feed_Atom</classname>
+                object.
             </para>
 
             <programlisting language="php"><![CDATA[

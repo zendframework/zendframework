@@ -17,6 +17,7 @@
             database instances. Additionally, you might want to run <acronym>CPU</acronym> instance
             types for <acronym>CPU</acronym>-intensive data processing tasks.
         </para>
+
         <para>
             One of the advantages of EC2 is that you pay by the instance hour,
             which makes it convenient and inexpensive to test the performance of
@@ -27,13 +28,16 @@
 
         <note>
             <title>Instance Types</title>
+
             <para>
                 The instance types are defined as constants in the code. Column eight
                 in the table is the defined constant name
             </para>
         </note>
+
         <table id="zend.service.amazon.ec2.instance.types-table">
             <title>Available Instance Types</title>
+
             <tgroup cols="8">
                 <thead>
                     <row>
@@ -47,126 +51,127 @@
                         <entry>Constant Name</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><code>Small</code></entry>
-                        <entry><para>
-                            1 <constant>EC2</constant> Compute Unit (1 virtual core with 1 <constant>EC2</constant>
-                            Compute Unit)
-                        </para></entry>
-                        <entry><para>
-                            1.7 GB
-                        </para></entry>
-                        <entry><para>
-                            160 GB instance storage (150 GB plus 10 GB root
-                            partition)
-                        </para></entry>
-                        <entry><para>
-                            32-bit
-                        </para></entry>
-                        <entry><para>
-                            Moderate
-                        </para></entry>
-                        <entry><para>
-                            m1.small
-                        </para></entry>
+
+                        <entry>
+                            <para>
+                                1 <constant>EC2</constant> Compute Unit (1 virtual core with 1
+                                <constant>EC2</constant> Compute Unit)
+                            </para>
+                        </entry>
+
+                        <entry><para>1.7 GB</para></entry>
+
+                        <entry>
+                            <para>160 GB instance storage (150 GB plus 10 GB root partition)</para>
+                        </entry>
+
+                        <entry><para>32-bit</para></entry>
+                        <entry><para>Moderate</para></entry>
+                        <entry><para>m1.small</para></entry>
                         <entry><constant>Zend_Service_Amazon_Ec2_Instance::SMALL</constant></entry>
                     </row>
+
                     <row>
                         <entry><code>Large</code></entry>
-                        <entry><para>
-                            4 <constant>EC2</constant> Compute Units (2 virtual cores with 2 <constant>EC2</constant>
-                            Compute Units each)
-                        </para></entry>
-                        <entry><para>
-                            7.5 GB
-                        </para></entry>
-                        <entry><para>
-                            850 GB instance storage (2 x 420 GB plus 10
-                            GB root partition)
-                        </para></entry>
-                        <entry><para>
-                            64-bit
-                        </para></entry>
-                        <entry><para>
-                            High
-                        </para></entry>
-                        <entry><para>
-                            m1.large
-                        </para></entry>
+
+                        <entry>
+                            <para>
+                                4 <constant>EC2</constant> Compute Units (2 virtual cores with 2
+                                <constant>EC2</constant> Compute Units each)
+                            </para>
+                        </entry>
+
+                        <entry><para>7.5 GB</para></entry>
+
+                        <entry>
+                            <para>
+                                850 GB instance storage (2 x 420 GB plus 10 GB root partition)
+                            </para>
+                        </entry>
+
+                        <entry><para>64-bit</para></entry>
+                        <entry><para>High</para></entry>
+                        <entry><para>m1.large</para></entry>
                         <entry><constant>Zend_Service_Amazon_Ec2_Instance::LARGE</constant></entry>
                     </row>
+
                     <row>
                         <entry><code>Extra Large</code></entry>
-                        <entry><para>
-                            8 <constant>EC2</constant> Compute Units (4 virtual cores with 2 <constant>EC2</constant>
-                            Compute Units each)
-                        </para></entry>
-                        <entry><para>
-                            15 GB
-                        </para></entry>
-                        <entry><para>
-                            1,690 GB instance storage (4 x 420 GB plus 10
-                            GB root partition)
-                        </para></entry>
-                        <entry><para>
-                            64-bit
-                        </para></entry>
-                        <entry><para>
-                            High
-                        </para></entry>
-                        <entry><para>
-                            m1.xlarge
-                        </para></entry>
+                        <entry>
+                            <para>
+                                8 <constant>EC2</constant> Compute Units (4 virtual cores with 2
+                                <constant>EC2</constant> Compute Units each)
+                            </para>
+                        </entry>
+
+                        <entry><para>15 GB</para></entry>
+
+                        <entry>
+                            <para>
+                                1,690 GB instance storage (4 x 420 GB plus 10 GB root partition)
+                            </para>
+                        </entry>
+
+                        <entry><para>64-bit</para></entry>
+                        <entry><para>High</para></entry>
+                        <entry><para>m1.xlarge</para></entry>
                         <entry><constant>Zend_Service_Amazon_Ec2_Instance::XLARGE</constant></entry>
                     </row>
+
                     <row>
                         <entry><code>High-CPU Medium</code></entry>
-                        <entry><para>
-                            5 <constant>EC2</constant> Compute Units (2 virtual cores with 2.5 <constant>EC2</constant>
-                            Compute Units each)
-                        </para></entry>
-                        <entry><para>
-                            1.7 GB
-                        </para></entry>
-                        <entry><para>
-                            350 GB instance storage (340 GB plus 10
-                            GB root partition)
-                        </para></entry>
-                        <entry><para>
-                            32-bit
-                        </para></entry>
-                        <entry><para>
-                            Moderate
-                        </para></entry>
-                        <entry><para>
-                            c1.medium
-                        </para></entry>
-                        <entry><constant>Zend_Service_Amazon_Ec2_Instance::HCPU_MEDIUM</constant></entry>
+
+                        <entry>
+                            <para>
+                                5 <constant>EC2</constant> Compute Units (2 virtual cores with 2.5
+                                <constant>EC2</constant> Compute Units each)
+                            </para>
+                        </entry>
+
+                        <entry><para>1.7 GB</para></entry>
+
+                        <entry>
+                            <para>350 GB instance storage (340 GB plus 10 GB root partition)</para>
+                        </entry>
+
+                        <entry><para>32-bit</para></entry>
+                        <entry><para>Moderate</para></entry>
+                        <entry><para>c1.medium</para></entry>
+
+                        <entry>
+                            <constant>Zend_Service_Amazon_Ec2_Instance::HCPU_MEDIUM</constant>
+                        </entry>
                     </row>
+
                     <row>
                         <entry><code>High-CPU Extra Large</code></entry>
-                        <entry><para>
-                            20 <constant>EC2</constant> Compute Units (8 virtual cores with 2.5 <constant>EC2</constant>
-                            Compute Units each)
-                        </para></entry>
-                        <entry><para>
-                            7 GB
-                        </para></entry>
-                        <entry><para>
-                            1,690 GB instance storage (4 x 420 GB plus 10
-                            GB root partition)
-                        </para></entry>
-                        <entry><para>
-                            64-bit
-                        </para></entry>
-                        <entry><para>
-                            High
-                        </para></entry>
-                        <entry><para>
-                            c1.xlarge
-                        </para></entry>
-                        <entry><constant>Zend_Service_Amazon_Ec2_Instance::HCPU_XLARGE</constant></entry>
+
+                        <entry>
+                            <para>
+                                20 <constant>EC2</constant> Compute Units (8 virtual cores with 2.5
+                                <constant>EC2</constant> Compute Units each)
+                            </para>
+                        </entry>
+
+                        <entry><para>7 GB</para></entry>
+
+                        <entry>
+                            <para>
+                                1,690 GB instance storage (4 x 420 GB plus 10 GB root partition)
+                            </para>
+                        </entry>
+
+                        <entry><para>64-bit</para></entry>
+                        <entry><para>High</para></entry>
+                        <entry><para>c1.xlarge</para></entry>
+
+                        <entry>
+                            <constant>Zend_Service_Amazon_Ec2_Instance::HCPU_XLARGE</constant>
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -175,139 +180,208 @@
 
     <sect2 id="zend.service.amazon.ec2.instance.operations">
         <title>Running Amazon EC2 Instances</title>
+
         <para>
             This section describes the operation methods for maintaining Amazon EC2 Instances.
         </para>
 
         <example id="zend.service.amazon.ec2.instance.operations.run">
             <title>Starting New Ec2 Instances</title>
+
             <para>
                 <code>run</code> will launch a specified number of EC2 Instances.
                 <code>run</code> takes an array of parameters to start, below is a table
                 containing the valid values.
             </para>
+
             <para>
-            <table id="zend.service.amazon.ec2.instance.operations.run-table">
-                <title>Valid Run Options</title>
-                <tgroup cols="3">
-                    <thead>
-                        <row>
-                            <entry>Name</entry>
-                            <entry>Description</entry>
-                            <entry>Required</entry>
-                        </row>
-                    </thead>
-                    <tbody>
-                        <row>
-                            <entry><code>imageId</code></entry>
-                            <entry><para>
-                                ID of the <acronym>AMI</acronym> with which to launch instances.
-                            </para></entry>
-                            <entry><para>Yes</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>minCount</code></entry>
-                            <entry><para>
-                                Minimum number of instances to launch. Default: 1
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>maxCount</code></entry>
-                            <entry><para>
-                                Maximum number of instances to launch. Default: 1
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>keyName</code></entry>
-                            <entry><para>
-                                Name of the key pair with which to launch instances.
-                                If you do not provide a key, all instances will
-                                be inaccessible.
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>securityGroup</code></entry>
-                            <entry><para>
-                                Names of the security groups with which to associate
-                                the instances.
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>userData</code></entry>
-                            <entry><para>
-                                The user data available to the launched instances.
-                                This should not be Base64 encoded.
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>instanceType</code></entry>
-                            <entry><para>
-                                Specifies the instance type. Default: m1.small
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>placement</code></entry>
-                            <entry><para>
-                                Specifies the availability zone in which to
-                                launch the instance(s). By default, Amazon
-                                <constant>EC2</constant> selects an availability zone for you.
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>kernelId</code></entry>
-                            <entry><para>
-                                The ID of the kernel with which to launch
-                                the instance.
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>ramdiskId</code></entry>
-                            <entry><para>
-                                The ID of the <acronym>RAM</acronym> disk with which to launch
-                                the instance.
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>blockDeviceVirtualName</code></entry>
-                            <entry><para>
-                                Specifies the virtual name to map to the
-                                corresponding device name. For example:
-                                instancestore0
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>blockDeviceName</code></entry>
-                            <entry><para>
-                                 Specifies the device to which you are
-                                 mapping a virtual name. For example: sdb
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>monitor</code></entry>
-                            <entry><para>
-                                 Turn on <acronym>AWS</acronym> CloudWatch Instance Monitoring
-                            </para></entry>
-                            <entry><para>No</para></entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
+                <table id="zend.service.amazon.ec2.instance.operations.run-table">
+                    <title>Valid Run Options</title>
+
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Description</entry>
+                                <entry>Required</entry>
+                            </row>
+                        </thead>
+
+                        <tbody>
+                            <row>
+                                <entry><code>imageId</code></entry>
+
+                                <entry>
+                                    <para>
+                                        ID of the <acronym>AMI</acronym> with which to launch
+                                        instances.
+                                    </para>
+                                </entry>
+
+                                <entry><para>Yes</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>minCount</code></entry>
+
+                                <entry>
+                                    <para>Minimum number of instances to launch. Default: 1</para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>maxCount</code></entry>
+
+                                <entry>
+                                    <para>Maximum number of instances to launch. Default: 1</para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>keyName</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Name of the key pair with which to launch instances.
+                                        If you do not provide a key, all instances will
+                                        be inaccessible.
+                                    </para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>securityGroup</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Names of the security groups with which to associate
+                                        the instances.
+                                    </para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>userData</code></entry>
+
+                                <entry>
+                                    <para>
+                                        The user data available to the launched instances.
+                                        This should not be Base64 encoded.
+                                    </para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>instanceType</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Specifies the instance type. Default: m1.small
+                                    </para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>placement</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Specifies the availability zone in which to
+                                        launch the instance(s). By default, Amazon
+                                        <constant>EC2</constant> selects an availability zone for
+                                        you.
+                                    </para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>kernelId</code></entry>
+
+                                <entry>
+                                    <para>
+                                        The ID of the kernel with which to launch
+                                        the instance.
+                                    </para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>ramdiskId</code></entry>
+
+                                <entry>
+                                    <para>
+                                        The ID of the <acronym>RAM</acronym> disk with which to
+                                        launch the instance.
+                                    </para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>blockDeviceVirtualName</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Specifies the virtual name to map to the
+                                        corresponding device name. For example:
+                                        instancestore0
+                                    </para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>blockDeviceName</code></entry>
+
+                                <entry>
+                                    <para>
+                                         Specifies the device to which you are
+                                         mapping a virtual name. For example: sdb
+                                    </para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+                            <row>
+                                <entry><code>monitor</code></entry>
+
+                                <entry>
+                                    <para>
+                                         Turn on <acronym>AWS</acronym> CloudWatch Instance
+                                         Monitoring
+                                    </para>
+                                </entry>
+
+                                <entry><para>No</para></entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
             </para>
+
             <para>
                 <code>run</code> will return information about each instance
                 that is starting up.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
@@ -316,34 +390,37 @@ $return = $ec2_instance->run(array('imageId' => 'ami-509320',
                                    'securityGroup' => array('web',
                                                             'default')));
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.instance.operations.reboot">
             <title>Rebooting an Ec2 Instances</title>
+
             <para>
                 <code>reboot</code> will reboot one or more instances.
             </para>
+
             <para>
                 This operation is asynchronous; it only queues a request to
                 reboot the specified instance(s). The operation will succeed
                 if the instances are valid and belong to the user. Requests
                 to reboot terminated instances are ignored.
             </para>
+
             <para>
                 <code>reboot</code> returns boolean <constant>TRUE</constant> or
                 <constant>FALSE</constant>
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->reboot('instanceId');
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.instance.operations.terminate">
             <title>Terminating an Ec2 Instances</title>
+
             <para>
                 <code>terminate</code> shuts down one or more instances. This
                 operation is idempotent; if you terminate an instance more
@@ -361,6 +438,7 @@ $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
 $return = $ec2_instance->terminate('instanceId');
 ]]></programlisting>
         </example>
+
         <note>
             <title>Terminated Instances</title>
             <para>Terminated instances will remain visible after termination
@@ -370,6 +448,7 @@ $return = $ec2_instance->terminate('instanceId');
 
     <sect2 id="zend.service.amazon.ec2.instance.utility">
         <title>Amazon Instance Utilities</title>
+
         <para>
             In this section you will find out how to retreive information, the console
             output and see if an instance contains a product code.
@@ -377,9 +456,11 @@ $return = $ec2_instance->terminate('instanceId');
 
         <example id="zend.service.amazon.ec2.instance.utility.describe">
             <title>Describing Instances</title>
+
             <para>
                 <code>describe</code> returns information about instances that you own.
             </para>
+
             <para>
                 If you specify one or more instance IDs, Amazon EC2 returns information
                 for those instances. If you do not specify instance IDs, Amazon EC2
@@ -387,10 +468,12 @@ $return = $ec2_instance->terminate('instanceId');
                 instance ID, a fault is returned. If you specify an instance that you do
                 not own, it will not be included in the returned results.
             </para>
+
             <para>
                 <code>describe</code> will return an array containing information on the
                 instance.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
@@ -411,14 +494,17 @@ $return = $ec2_instance->describe('instanceId');
 
         <example id="zend.service.amazon.ec2.instance.utility.describebyimageid">
             <title>Describing Instances By Image Id</title>
+
             <para>
                 <code>describeByImageId</code> is functionally the same as <code>describe</code>
                 but it will only return the instances that are using the provided imageId.
             </para>
+
             <para>
                 <code>describeByImageId</code> will return an array containing information on the
                 instances thare were started by the passed in imageId
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
@@ -426,41 +512,44 @@ $return = $ec2_instance->describeByImageId('imageId');
 ]]></programlisting>
         </example>
 
-            <note>
-                <title>Terminated Instances</title>
+        <note>
+            <title>Terminated Instances</title>
 
-                <para>
-                    Recently terminated instances might appear in the returned results. This
-                    interval is usually less than one hour. If you do not want terminated
-                    instances to be returned, pass in a second variable of boolean
-                    <constant>TRUE</constant> to <code>describe</code> and the terminated instances
-                    will be ignored.
-                </para>
-            </note>
+            <para>
+                Recently terminated instances might appear in the returned results. This
+                interval is usually less than one hour. If you do not want terminated
+                instances to be returned, pass in a second variable of boolean
+                <constant>TRUE</constant> to <code>describe</code> and the terminated instances
+                will be ignored.
+            </para>
+        </note>
 
         <example id="zend.service.amazon.ec2.instance.utility.consoleOutput">
             <title>Retreiving Console Output</title>
+
             <para>
                 <code>consoleOutput</code> retrieves console output for the specified
                 instance.
             </para>
+
             <para>
                 Instance console output is buffered and posted shortly after instance
                 boot, reboot, and termination. Amazon EC2 preserves the most recent
                 64 KB output which will be available for at least one hour after the
                 most recent post.
             </para>
+
             <para>
                 <code>consoleOutput</code> returns an array containing the
                 <code>instanceId</code>, <code>timestamp</code> from the last output
                 and the <code>output</code> from the console.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->consoleOutput('instanceId');
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.instance.utility.confirmproduct">
@@ -483,37 +572,38 @@ $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->confirmProduct('productCode', 'instanceId');
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.instance.utility.monitor">
             <title>Turn on CloudWatch Monitoring on an Instance(s)</title>
+
             <para>
                 <code>monitor</code> returns the list of instances and their
                 current state of the CloudWatch Monitoring. If the instance
                 does not currently have Monitoring enabled it will be turned on.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->monitor('instanceId');
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.instance.utility.unmonitor">
             <title>Turn off CloudWatch Monitoring on an Instance(s)</title>
+
             <para>
                 <code>monitor</code> returns the list of instances and their
                 current state of the CloudWatch Monitoring. If the instance
                 currently has Monitoring enabled it will be turned off.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->unmonitor('instanceId');
 ]]></programlisting>
-
         </example>
     </sect2>
 </sect1>

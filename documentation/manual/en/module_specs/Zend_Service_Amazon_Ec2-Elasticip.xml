@@ -28,9 +28,11 @@
 
     <example id="zend.service.amazon.ec2.elasticip.allocate">
         <title>Allocating a new Elastic IP</title>
+
         <para>
             <code>allocate</code> will assign your account a new Elastic IP Address.
         </para>
+
         <para>
             <code>allocate</code> returns the newly allocated ip.
         </para>
@@ -46,11 +48,13 @@ print $ip;
 
     <example id="zend.service.amazon.ec2.elasticip.describe">
         <title>Describing Allocated Elastic IP Addresses</title>
+
         <para>
             <code>describe</code> has an optional paramater to describe all
             of your allocated Elastic IP addresses or just some of your
             allocated addresses.
         </para>
+
         <para>
             <code>describe</code> returns an array that contains information on each Elastic IP
             Address which contains the publicIp and the instanceId if it is assocated.
@@ -71,6 +75,7 @@ $ip = $ec2_eip->describe('ip1');
 
     <example id="zend.service.amazon.ec2.elasticip.release">
         <title>Releasing Elastic IP</title>
+
         <para>
             <code>release</code> will release an Elastic IP to Amazon.
         </para>
@@ -87,6 +92,7 @@ $ec2_eip->release('ipaddress');
 
     <example id="zend.service.amazon.ec2.elasticip.associate">
         <title>Associates an Elastic IP to an Instance</title>
+
         <para>
             <code>associate</code> will assign an Elastic IP to an
             already running instance.
@@ -104,6 +110,7 @@ $ec2_eip->associate('instance_id', 'ipaddress');
 
     <example id="zend.service.amazon.ec2.elasticip.disassociate">
         <title>Disassociate an Elastic IP from an instance</title>
+
         <para>
             <code>disassociate</code> will disassociate an Elastic IP from an instance.
             If you terminate an Instance it will automaticly disassociate the Elastic
@@ -119,5 +126,4 @@ $ec2_eip = new Zend_Service_Amazon_Ec2_Elasticip('aws_key','aws_secret_key');
 $ec2_eip->disassociate('ipaddress');
 ]]></programlisting>
     </example>
-
 </sect1>

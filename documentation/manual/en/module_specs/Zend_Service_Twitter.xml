@@ -92,6 +92,7 @@
 
         <example id="zend.service.twitter.authentication.example">
             <title>Creating the Twitter Class</title>
+
             <para>
                 The following code sample is how you create the Twitter service, pass in your
                 username and password, and verify that they are correct.
@@ -419,12 +420,14 @@ $response   = $twitter->user->friends();
                             return a list of friends.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>since</code> narrows the returned results to just those statuses
                             created after the specified date/time (up to 24 hours old).
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>page</code> specifies which page you want to return.
@@ -526,6 +529,7 @@ $response   = $twitter->directMessage->messages();
                             created after the specified date/time (up to 24 hours old).
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>page</code> specifies which page you want to return.
@@ -591,7 +595,6 @@ $twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response   = $twitter->directMessage->new('myfriend', 'mymessage');
 ]]></programlisting>
                 </example>
-
             </listitem>
 
             <listitem>
@@ -625,6 +628,7 @@ $response   = $twitter->directMessage->destroy(123548);
 
                 <example id="zend.service.twitter.friendship.create">
                     <title>Creating friend</title>
+
                     <programlisting language="php"><![CDATA[
 $twitter    = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response   = $twitter->friendship->create('mynewfriend');

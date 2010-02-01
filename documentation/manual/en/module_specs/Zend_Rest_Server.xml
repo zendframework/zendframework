@@ -61,6 +61,7 @@ $server->handle();
 
         <note>
             <title>Numeric index</title>
+
             <para>
                 Numeric arguments use a 1-based index.
             </para>
@@ -93,6 +94,7 @@ $server->handle();
 
         <example id="zend.rest.server.customstatus.example-1">
             <title>Returning Custom Status</title>
+
             <programlisting language="php"><![CDATA[
 /**
  * Say Hello
@@ -158,7 +160,6 @@ $server->handle();
         </para>
     </sect2>
 </sect1>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

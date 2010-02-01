@@ -2,21 +2,25 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.keypairs">
     <title>Zend_Service_Amazon_Ec2: Keypairs</title>
+
     <para>
         Keypairs are used to access instances.
     </para>
 
     <example id="zend.service.amazon.ec2.keypairs.create">
         <title>Creating a new Amazon Keypair</title>
+
         <para>
             <code>create</code>, creates a new 2048 bit RSA key pair and
             returns a unique ID that can be used to reference this key
             pair when launching new instances.
         </para>
+
         <para>
             <code>create</code> returns an array which contains the keyName,
             keyFingerprint and keyMaterial.
         </para>
+
         <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->create('my-new-key');
@@ -25,6 +29,7 @@ $return = $ec2_kp->create('my-new-key');
 
     <example id="zend.service.amazon.ec2.keypairs.delete">
         <title>Deleting an Amazon Keypair</title>
+
         <para>
             <code>delete</code>, will delete the key pair. This will only
             prevent it from being used with new instances. Instances currently
@@ -44,14 +49,17 @@ $return = $ec2_kp->delete('my-new-key');
 
     <example id="zend.service.amazon.ec2.describe">
         <title>Describe an Amazon Keypair</title>
+
         <para>
             <code>describe</code> returns information about key pairs available to you.
             If you specify key pairs, information about those key pairs is returned. Otherwise,
             information for all registered key pairs is returned.
         </para>
+
         <para>
             <code>describe</code> returns an array which contains keyName and keyFingerprint
         </para>
+
         <programlisting language="php"><![CDATA[
 $ec2_kp = new Zend_Service_Amazon_Ec2_Keypair('aws_key','aws_secret_key');
 $return = $ec2_kp->describe('my-new-key');

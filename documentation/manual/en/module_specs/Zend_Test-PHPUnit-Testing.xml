@@ -75,8 +75,7 @@ class FooControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
     <para>
-        Now that the request is made, it's time to start making assertions
-        against it.
+        Now that the request is made, it's time to start making assertions against it.
     </para>
 
     <sect3 id="zend.test.phpunit.testing.redirector">
@@ -120,9 +119,10 @@ class MyController extends Zend_Controller_Action
 
         <important>
             <para>
-                Depending on your application this is not enough as additional action, <methodname>preDispatch()</methodname> or
-                <methodname>postDispatch()</methodname> logic might be executed. This cannot be handled in a good way with
-                Zend Test currently.
+                Depending on your application this is not enough as additional action,
+                <methodname>preDispatch()</methodname> or <methodname>postDispatch()</methodname>
+                logic might be executed. This cannot be handled in a good way with Zend Test
+                currently.
             </para>
         </important>
     </sect3>

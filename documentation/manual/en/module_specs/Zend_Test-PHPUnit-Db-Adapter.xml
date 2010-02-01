@@ -62,8 +62,8 @@ $adapter->appendStatementToStack(
 ]]></programlisting>
 
     <para>
-        By default the query profiler is enabled, so that you can retrieve the executed SQL statements
-        and their bound parameters to check for the correctness of the execution.
+        By default the query profiler is enabled, so that you can retrieve the executed SQL
+        statements and their bound parameters to check for the correctness of the execution.
     </para>
 
     <programlisting language="php"><![CDATA[

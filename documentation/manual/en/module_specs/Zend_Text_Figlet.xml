@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.text.figlet">
     <title>Zend_Text_Figlet</title>
+
     <para>
         <classname>Zend_Text_Figlet</classname> is a component which enables developers to
         create a so called FIGlet text. A FIGlet text is a string, which is
@@ -10,8 +11,10 @@
         <classname>Zend_Text_Figlet</classname>, but you can download additional fonts at
         <ulink url="http://www.figlet.org/fontdb.cgi">http://www.figlet.org</ulink>.
     </para>
+
     <note>
         <title>Compressed fonts</title>
+
         <para>
             <classname>Zend_Text_Figlet</classname> supports gzipped fonts. This means that
             you can take an <code>.flf</code> file and gzip it. To allow
@@ -20,14 +23,17 @@
             gzipped fonts, you have to have enabled the GZIP extension of <acronym>PHP</acronym>.
         </para>
     </note>
+
     <note>
         <title>Encoding</title>
+
         <para>
             <classname>Zend_Text_Figlet</classname> expects your strings to be UTF-8 encoded
             by default. If this is not the case, you can supply the character
             encoding as second parameter to the <methodname>render()</methodname> method.
         </para>
     </note>
+
     <para>
         You can define multiple options for a FIGlet. When instantiating
         <classname>Zend_Text_Figlet</classname>, you can supply an array or an instance of
@@ -41,6 +47,7 @@
                     used.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>outputWidth</code> - Defines the maximum width of the
@@ -49,6 +56,7 @@
                     in an undefined behaviour. The default value is 80.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>handleParagraphs</code> - A boolean which indicates,
@@ -58,15 +66,18 @@
                     <constant>FALSE</constant>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>justification</code> - May be one of the values of
                     <classname>Zend_Text_Figlet::JUSTIFICATION_*</classname>. There is
-                    <constant>JUSTIFICATION_LEFT</constant>, <constant>JUSTIFICATION_CENTER</constant>
-                    and <constant>JUSTIFICATION_RIGHT</constant> The default justification
+                    <constant>JUSTIFICATION_LEFT</constant>,
+                    <constant>JUSTIFICATION_CENTER</constant> and
+                    <constant>JUSTIFICATION_RIGHT</constant> The default justification
                     is defined by the <code>rightToLeft</code> value.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>rightToLeft</code> - Defines in which direction the
@@ -78,6 +89,7 @@
                     automatically right-aligned.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>smushMode</code> - An integer bitfield which defines,
@@ -96,19 +108,24 @@
             </listitem>
         </itemizedlist>
     </para>
+
     <example id="zend.text.figlet.example.using">
         <title>Using Zend_Text_Figlet</title>
+
         <para>
             This example illustrates the basic use of <classname>Zend_Text_Figlet</classname>
             to create a simple FIGlet text:
         </para>
+
         <programlisting language="php"><![CDATA[
 $figlet = new Zend_Text_Figlet();
 echo $figlet->render('Zend');
 ]]></programlisting>
+
         <para>
             Assuming you are using a monospace font, this would look as follows:
         </para>
+
         <programlisting language="text"><![CDATA[
   ______    ______    _  __   ______
  |__  //   |  ___||  | \| || |  __ \\

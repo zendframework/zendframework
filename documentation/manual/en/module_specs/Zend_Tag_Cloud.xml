@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.tag.cloud">
-
     <title>Zend_Tag_Cloud</title>
 
     <para>
@@ -30,6 +29,7 @@
                 decorators constructor.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>tagDecorator</code>: defines the decorator for individual
@@ -41,6 +41,7 @@
                 decorators constructor.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>pluginLoader</code>: a different plugin loader to use.
@@ -48,6 +49,7 @@
                 <classname>Zend_Loader_PluginLoader_Interface</classname>.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>prefixPath</code>: prefix paths to add to the plugin
@@ -56,12 +58,14 @@
                 elements will be skipped.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>itemList</code>: a different item list to use. Must be an
                 instance of <classname>Zend_Tag_ItemList</classname>.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>tags</code>: a list of tags to assign to the cloud. Each
@@ -73,7 +77,6 @@
     </itemizedlist>
 
     <example id="zend.tag.cloud.example.using">
-
         <title>Using Zend_Tag_Cloud</title>
 
         <para>
@@ -96,6 +99,7 @@ $cloud = new Zend_Tag_Cloud(array(
 // Render the cloud
 echo $cloud;
 ]]></programlisting>
+
         <para>
             This will output the tag cloud with the three tags, spread with
             the default font-sizes.
@@ -103,7 +107,6 @@ echo $cloud;
     </example>
 
     <sect2 id="zend.tag.cloud.decorators">
-
         <title>Decorators</title>
 
         <para>
@@ -117,7 +120,6 @@ echo $cloud;
         </para>
 
         <sect3 id="zend.tag.cloud.decorators.htmltag">
-
             <title>HTML Tag decorator</title>
 
             <para>
@@ -128,6 +130,7 @@ echo $cloud;
 
             <note>
                 <title>URL parameter</title>
+
                 <para>
                     As the HTML tag decorator always surounds the tag title with
                     an anchor, you should define an <acronym>URL</acronym> parameter for every
@@ -151,24 +154,28 @@ echo $cloud;
                         em, ex, px, in, cm, mm, pt, pc and &#37;.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <code>minFontSize</code>: the minimum font-size
                         distributed through the tags (must be an integer).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <code>maxFontSize</code>: the maximum font-size
                         distributed through the tags (must be an integer).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <code>classList</code>: an arry of classes distributed
                         through the tags.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <code>htmlTags</code>: an array of HTML tags surounding
@@ -183,7 +190,6 @@ echo $cloud;
         </sect3>
 
         <sect3 id="zend.tag.cloud.decorators.htmlcloud">
-
             <title>HTML Cloud decorator</title>
 
             <para>
@@ -200,19 +206,17 @@ echo $cloud;
                         is placed between all tags.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <code>htmlTags</code>: an array of HTML tags surounding
                         all tags. Each element can either be a string, which
                         is used as element type then, or an array containing
                         an attribute list for the element, defined as key/value
-                        pair. In this case, the array key is used as element
-                        type.
+                        pair. In this case, the array key is used as element type.
                     </para>
                 </listitem>
             </itemizedlist>
         </sect3>
-
     </sect2>
-
 </sect1>

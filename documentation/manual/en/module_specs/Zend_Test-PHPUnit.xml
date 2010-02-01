@@ -4,8 +4,8 @@
     <title>Zend_Test_PHPUnit</title>
 
     <para>
-        <classname>Zend_Test_PHPUnit</classname> provides a TestCase for <acronym>MVC</acronym> applications
-        that contains assertions for testing against a variety of
+        <classname>Zend_Test_PHPUnit</classname> provides a TestCase for <acronym>MVC</acronym>
+        applications that contains assertions for testing against a variety of
         responsibilities. Probably the easiest way to understand what it can do
         is to see an example.
     </para>
@@ -19,14 +19,18 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                The login form should be displayed to non-authenticated users.
-            </para></listitem>
+            <listitem>
+                <para>
+                    The login form should be displayed to non-authenticated users.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                When a user logs in, they should be redirected to their profile
-                page, and that profile page should show relevant information.
-            </para></listitem>
+            <listitem>
+                <para>
+                    When a user logs in, they should be redirected to their profile
+                    page, and that profile page should show relevant information.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

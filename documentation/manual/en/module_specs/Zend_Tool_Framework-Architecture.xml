@@ -109,7 +109,6 @@ abstract class Zend_Tool_Framework_Provider_Abstract
     );
 }
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.tool.framework.architecture.loaders">
@@ -405,6 +404,5 @@ abstract class Zend_Tool_Framework_Client_Abstract
                 url="http://framework.zend.com/svn/framework/standard/branches/release-1.8/library/Zend/Tool/Framework/Client/Console.php">source
                 code</ulink>.
         </para>
-
     </sect2>
 </sect1>

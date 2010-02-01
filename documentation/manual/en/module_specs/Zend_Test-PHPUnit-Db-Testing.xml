@@ -5,9 +5,9 @@
 
     <para>
         The Quickstart already gave a good introduction on how database testing can be done using
-        PHPUnit and the Zend Framework. This section gives an overview over the <acronym>API</acronym> that the
-        <classname>Zend_Test_PHPUnit_Db</classname> component comes with and how it works
-        internally.
+        PHPUnit and the Zend Framework. This section gives an overview over the
+        <acronym>API</acronym> that the <classname>Zend_Test_PHPUnit_Db</classname> component comes
+        with and how it works internally.
     </para>
 
     <note>
@@ -130,7 +130,8 @@
                             Create a PHPUnit Database Extension compatible Connection instance from
                             a <classname>Zend_Db_Adapter_Abstract</classname> instance. This method
                             should be used in for testcase setup when implementing the abstract
-                            <methodname>getConnection()</methodname> method of the database testcase.
+                            <methodname>getConnection()</methodname> method of the database
+                            testcase.
                         </entry>
                     </row>
 
@@ -179,8 +180,8 @@
                         </entry>
 
                         <entry>
-                            Create a DataSet containing the given <varname>$tables</varname>, an array of
-                            <classname>Zend_Db_Table_Abstract</classname> instances.
+                            Create a DataSet containing the given <varname>$tables</varname>, an
+                            array of <classname>Zend_Db_Table_Abstract</classname> instances.
                         </entry>
                     </row>
                 </tbody>
@@ -192,8 +193,8 @@
         <title>Integrating Database Testing with the ControllerTestCase</title>
 
         <para>
-            Because <acronym>PHP</acronym> does not support multiple inheritance it is not possible to use the
-            Controller and Database testcases in conjunction. However you can use the
+            Because <acronym>PHP</acronym> does not support multiple inheritance it is not possible
+            to use the Controller and Database testcases in conjunction. However you can use the
             <classname>Zend_Test_PHPUnit_Db_SimpleTester</classname> database tester in your
             controller test-case to setup a database enviroment fixture for each new controller
             test. The Database TestCase in general is only a set of convenience functions which can
@@ -237,8 +238,9 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
 ]]></programlisting>
 
             <para>
-                Now the Flat <acronym>XML</acronym> dataset "initialUserFixture.xml" is used to set the database into
-                an initial state before each test, exactly as the DatabaseTestCase works internally.
+                Now the Flat <acronym>XML</acronym> dataset "initialUserFixture.xml" is used to set
+                the database into an initial state before each test, exactly as the DatabaseTestCase
+                works internally.
             </para>
         </example>
     </sect3>

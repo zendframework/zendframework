@@ -55,6 +55,7 @@
                     current working directory is.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <filename>ZendFramework/library</filename> is in your
@@ -70,7 +71,6 @@
                 to work as <filename>./path/to/zf.php</filename> some command.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.tool.framework.clitool.setup-starnix">
@@ -147,7 +147,7 @@
             <filename>/home/username/bin/</filename> for example) you would issue a
             command similar to this: </para>
 
-        <programlisting language="sh"><![CDATA[
+            <programlisting language="sh"><![CDATA[
 ln -s /usr/local/share/ZendFramework/bin/zf.sh /usr/local/bin/zf
 
 # OR (for example)
@@ -158,7 +158,6 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
             This will create a link which you should be able to access globally
             on the command line.
         </para>
-
     </sect2>
 
     <sect2 id="zend.tool.framework.clitool.setup-windows">
@@ -232,7 +231,6 @@ C:\WAMP\PHP\bin
             <filename>C:\Path\To\ZendFramework\library</filename> is in your
             <property>include_path</property>.
         </para>
-
     </sect2>
 
     <sect2 id="zend.tool.framework.clitool.setup-othernotes">

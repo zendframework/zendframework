@@ -13,48 +13,63 @@
         <title>Testing a UserController</title>
 
         <para>
-            Let's consider a standard task for a website: authenticating and registering users. In our example, we'll define a UserController for handling this, and have the following requirements:
+            Let's consider a standard task for a website: authenticating and registering users. In
+            our example, we'll define a UserController for handling this, and have the following
+            requirements:
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                If a user is not authenticated, they will always be redirected
-                to the login page of the controller, regardless of the action
-                specified.
-            </para></listitem>
+            <listitem>
+                <para>
+                    If a user is not authenticated, they will always be redirected
+                    to the login page of the controller, regardless of the action
+                    specified.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                The login form page will show both the login form and the
-                registration form.
-            </para></listitem>
+            <listitem>
+                <para>
+                    The login form page will show both the login form and the
+                    registration form.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Providing invalid credentials should result in returning to the
-                login form.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Providing invalid credentials should result in returning to the login form.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Valid credentials should result in redirecting to the user
-                profile page.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Valid credentials should result in redirecting to the user profile page.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                The profile page should be customized to contain the user's
-                username.
-            </para></listitem>
+            <listitem>
+                <para>
+                    The profile page should be customized to contain the user's username.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Authenticated users who visit the login page should be
-                redirected to their profile page.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Authenticated users who visit the login page should be
+                    redirected to their profile page.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                On logout, a user should be redirected to the login page.
-            </para></listitem>
+            <listitem>
+                <para>
+                    On logout, a user should be redirected to the login page.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                With invalid data, registration should fail.
-            </para></listitem>
+            <listitem>
+                <para>
+                    With invalid data, registration should fail.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

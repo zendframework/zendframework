@@ -10,6 +10,7 @@
 
     <table id="zend.tool.project.project-provider">
         <title>Project Provider Options</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -19,89 +20,56 @@
                     <entry><acronym>CLI</acronym> Usage</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
-                    <entry>
-                        Controller
-                    </entry>
-                    <entry>
-                        Create
-                    </entry>
-                    <entry>
-                        create - [name, indexActionIncluded=true]
-                    </entry>
-                    <entry>
-                        <command>zf create controller foo</command>
-                    </entry>
+                    <entry>Controller</entry>
+                    <entry>Create</entry>
+                    <entry>create - [name, indexActionIncluded=true]</entry>
+                    <entry><command>zf create controller foo</command></entry>
                 </row>
+
                 <row>
-                    <entry>
-                        Action
-                    </entry>
-                    <entry>
-                        Create
-                    </entry>
-                    <entry>
-                        create - [name, controllerName=index, viewIncluded=true]
-                    </entry>
+                    <entry>Action</entry>
+                    <entry>Create</entry>
+                    <entry>create - [name, controllerName=index, viewIncluded=true]</entry>
+
                     <entry>
                         <command>zf create action bar foo</command>
                         (or <command>zf create action --name bar --controlller-name=foo</command>)
                     </entry>
                 </row>
+
                 <row>
-                    <entry>
-                        Controller
-                    </entry>
-                    <entry>
-                        Create
-                    </entry>
-                    <entry>
-                        create - [name, indexActionIncluded=true]
-                    </entry>
-                    <entry>
-                        <command>zf create controller foo</command>
-                    </entry>
+                    <entry>Controller</entry>
+                    <entry>Create</entry>
+                    <entry>create - [name, indexActionIncluded=true]</entry>
+                    <entry><command>zf create controller foo</command></entry>
                 </row>
+
                 <row>
-                    <entry>
-                        Profile
-                    </entry>
-                    <entry>
-                        Show
-                    </entry>
-                    <entry>
-                        show - []
-                    </entry>
-                    <entry>
-                        <command>zf show profile</command>
-                    </entry>
+                    <entry>Profile</entry>
+                    <entry>Show</entry>
+                    <entry>show - []</entry>
+                    <entry><command>zf show profile</command></entry>
                 </row>
+
                 <row>
-                    <entry>
-                        View
-                    </entry>
-                    <entry>
-                        Create
-                    </entry>
-                    <entry>
-                        create - [controllerName,actionNameOrSimpleName]
-                    </entry>
+                    <entry>View</entry>
+                    <entry>Create</entry>
+                    <entry>create - [controllerName,actionNameOrSimpleName]</entry>
+
                     <entry>
                         <command>zf create view foo bar</command>
                         (or <command>zf create view -c foo -a bar</command>)
                     </entry>
                 </row>
+
                 <row>
-                    <entry>
-                        Test
-                    </entry>
-                    <entry>
-                        Create / Enable / Disable
-                    </entry>
-                    <entry>
-                        create - [libraryClassName]
-                    </entry>
+                    <entry>Test</entry>
+                    <entry>Create / Enable / Disable</entry>
+                    <entry>create - [libraryClassName]</entry>
+
                     <entry>
                         <command>zf create test My_Foo_Baz</command> /
                         <command>zf disable test</command> /

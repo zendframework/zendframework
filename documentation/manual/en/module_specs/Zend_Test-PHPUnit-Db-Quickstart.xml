@@ -95,10 +95,10 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
                 <para>
                     DataSets have to implement the interface
                     <classname>PHPUnit_Extensions_Database_DataSet_IDataSet</classname>.
-                    There is a wide range of <acronym>XML</acronym> and YAML configuration file types included in
-                    PHPUnit which allows to specifiy how the tables and datasets should look
-                    like and you should look into the PHPUnit documentation to get the latest
-                    information on these dataset specifications.
+                    There is a wide range of <acronym>XML</acronym> and YAML configuration file
+                    types included in PHPUnit which allows to specifiy how the tables and datasets
+                    should look like and you should look into the PHPUnit documentation to get the
+                    latest information on these dataset specifications.
                 </para>
             </listitem>
         </itemizedlist>
@@ -109,7 +109,8 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
 
         <para>
             In the previous setup for the database testcase we have specified a seed file for the
-            database fixture. We now create this file specified in the Flat <acronym>XML</acronym> format:
+            database fixture. We now create this file specified in the Flat <acronym>XML</acronym>
+            format:
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -202,10 +203,11 @@ class BugsTest extends Zend_Test_PHPUnit_DatabaseTestCase
             given data. For this we create a
             <classname>Zend_Test_PHPUnit_Db_DataSet_QueryDataSet</classname> instance and give
             it a database connection. We will then tell this dataset that it contains a table
-            "zfbugs" which is given by an <acronym>SQL</acronym> statement. This current/actual state of the
-            database is compared to the expected database state which is contained in another
-            <acronym>XML</acronym> file "bugsInsertIntoAssertions.xml". This <acronym>XML</acronym> file is a slight deviation from
-            the one given above and contains another row with the expected data:
+            "zfbugs" which is given by an <acronym>SQL</acronym> statement. This current/actual
+            state of the database is compared to the expected database state which is contained in
+            another <acronym>XML</acronym> file "bugsInsertIntoAssertions.xml". This
+            <acronym>XML</acronym> file is a slight deviation from the one given above and contains
+            another row with the expected data:
         </para>
 
         <programlisting language="xml"><![CDATA[

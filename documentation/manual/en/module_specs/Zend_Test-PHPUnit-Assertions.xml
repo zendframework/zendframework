@@ -34,60 +34,72 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>assertQuery($path, $message = '')</methodname>: assert that
-                one or more DOM elements matching the given <acronym>CSS</acronym> selector are
-                present. If a <varname>$message</varname> is present, it will be
-                prepended to any failed assertion message.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertQuery($path, $message = '')</methodname>: assert that
+                    one or more DOM elements matching the given <acronym>CSS</acronym> selector are
+                    present. If a <varname>$message</varname> is present, it will be
+                    prepended to any failed assertion message.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>assertQueryContentContains($path, $match, $message =
-                    '')</code>: assert that one or more DOM elements matching
-                the given <acronym>CSS</acronym> selector are present, and that at least one
-                contains the content provided in <varname>$match</varname>. If a
-                <varname>$message</varname> is present, it will be prepended to any
-                failed assertion message.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>assertQueryContentContains($path, $match, $message =
+                        '')</code>: assert that one or more DOM elements matching
+                    the given <acronym>CSS</acronym> selector are present, and that at least one
+                    contains the content provided in <varname>$match</varname>. If a
+                    <varname>$message</varname> is present, it will be prepended to any
+                    failed assertion message.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>assertQueryContentRegex($path, $pattern, $message =
-                    '')</code>: assert that one or more DOM elements matching
-                the given <acronym>CSS</acronym> selector are present, and that at least one
-                matches the regular expression provided in
-                <varname>$pattern</varname>. If a <varname>$message</varname> is present,
-                it will be prepended to any failed assertion message.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>assertQueryContentRegex($path, $pattern, $message =
+                        '')</code>: assert that one or more DOM elements matching
+                    the given <acronym>CSS</acronym> selector are present, and that at least one
+                    matches the regular expression provided in
+                    <varname>$pattern</varname>. If a <varname>$message</varname> is present,
+                    it will be prepended to any failed assertion message.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>assertQueryCount($path, $count, $message =
-                    '')</code>: assert that there are exactly
-                <varname>$count</varname> DOM elements matching the given <acronym>CSS</acronym>
-                selector present. If a <varname>$message</varname> is present, it
-                will be prepended to any failed assertion message.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>assertQueryCount($path, $count, $message =
+                        '')</code>: assert that there are exactly
+                    <varname>$count</varname> DOM elements matching the given <acronym>CSS</acronym>
+                    selector present. If a <varname>$message</varname> is present, it
+                    will be prepended to any failed assertion message.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>assertQueryCountMin($path, $count, $message =
-                    '')</code>: assert that there are at least
-                <varname>$count</varname> DOM elements matching the given <acronym>CSS</acronym>
-                selector present. If a <varname>$message</varname> is present, it
-                will be prepended to any failed assertion message.
-                <emphasis>Note:</emphasis> specifying a value of 1 for
-                <varname>$count</varname> is the same as simply using
-                <methodname>assertQuery()</methodname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>assertQueryCountMin($path, $count, $message =
+                        '')</code>: assert that there are at least
+                    <varname>$count</varname> DOM elements matching the given <acronym>CSS</acronym>
+                    selector present. If a <varname>$message</varname> is present, it
+                    will be prepended to any failed assertion message.
+                    <emphasis>Note:</emphasis> specifying a value of 1 for
+                    <varname>$count</varname> is the same as simply using
+                    <methodname>assertQuery()</methodname>.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>assertQueryCountMax($path, $count, $message =
-                    '')</code>: assert that there are no more than
-                <varname>$count</varname> DOM elements matching the given <acronym>CSS</acronym>
-                selector present. If a <varname>$message</varname> is present, it
-                will be prepended to any failed assertion message.
-                <emphasis>Note:</emphasis> specifying a value of 1 for
-                <varname>$count</varname> is the same as simply using
-                <methodname>assertQuery()</methodname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>assertQueryCountMax($path, $count, $message =
+                        '')</code>: assert that there are no more than
+                    <varname>$count</varname> DOM elements matching the given <acronym>CSS</acronym>
+                    selector present. If a <varname>$message</varname> is present, it
+                    will be prepended to any failed assertion message.
+                    <emphasis>Note:</emphasis> specifying a value of 1 for
+                    <varname>$count</varname> is the same as simply using
+                    <methodname>assertQuery()</methodname>.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -112,36 +124,68 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>assertXpath($path, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertNotXpath($path, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertXpathContentContains($path, $match, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertNotXpathContentContains($path, $match, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertXpathContentRegex($path, $pattern, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertNotXpathContentRegex($path, $pattern, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertXpathCount($path, $count, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertNotXpathCount($path, $count, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertXpathCountMin($path, $count, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertNotXpathCountMax($path, $count, $message = '')</methodname>
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertXpath($path, $message = '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertNotXpath($path, $message = '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertXpathContentContains($path, $match, $message =
+                        '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertNotXpathContentContains($path, $match, $message =
+                        '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertXpathContentRegex($path, $pattern, $message = '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertNotXpathContentRegex($path, $pattern, $message =
+                        '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertXpathCount($path, $count, $message = '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertNotXpathCount($path, $count, $message = '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertXpathCountMin($path, $count, $message = '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertNotXpathCountMax($path, $count, $message = '')</methodname>
+                </para>
+            </listitem>
         </itemizedlist>
     </sect3>
 
@@ -155,41 +199,53 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>assertRedirect($message = '')</methodname>: assert simply that
-                a redirect has occurred.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertRedirect($message = '')</methodname>: assert simply that
+                    a redirect has occurred.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertNotRedirect($message = '')</methodname>: assert that no
-                redirect has occurred.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertNotRedirect($message = '')</methodname>: assert that no
+                    redirect has occurred.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertRedirectTo($url, $message = '')</methodname>: assert that
-                a redirect has occurred, and that the value of the Location
-                header is the <varname>$url</varname> provided.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertRedirectTo($url, $message = '')</methodname>: assert that
+                    a redirect has occurred, and that the value of the Location
+                    header is the <varname>$url</varname> provided.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertNotRedirectTo($url, $message = '')</methodname>: assert that
-                a redirect has either NOT occurred, or that the value of the Location
-                header is NOT the <varname>$url</varname> provided.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertNotRedirectTo($url, $message = '')</methodname>: assert that
+                    a redirect has either NOT occurred, or that the value of the Location
+                    header is NOT the <varname>$url</varname> provided.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertRedirectRegex($pattern, $message = '')</methodname>:
-                assert that a redirect has occurred, and that the value of the
-                Location header matches the regular expression provided by
-                <varname>$pattern</varname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertRedirectRegex($pattern, $message = '')</methodname>:
+                    assert that a redirect has occurred, and that the value of the
+                    Location header matches the regular expression provided by
+                    <varname>$pattern</varname>.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertNotRedirectRegex($pattern, $message = '')</methodname>:
-                assert that a redirect has either NOT occurred, or that the value of the
-                Location header does NOT match the regular expression provided by
-                <varname>$pattern</varname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertNotRedirectRegex($pattern, $message = '')</methodname>:
+                    assert that a redirect has either NOT occurred, or that the value of the
+                    Location header does NOT match the regular expression provided by
+                    <varname>$pattern</varname>.
+                </para>
+            </listitem>
         </itemizedlist>
     </sect3>
 
@@ -205,27 +261,35 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>assertResponseCode($code, $message = '')</methodname>: assert
-                that the response resulted in the given <acronym>HTTP</acronym> response code.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertResponseCode($code, $message = '')</methodname>: assert
+                    that the response resulted in the given <acronym>HTTP</acronym> response code.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertHeader($header, $message = '')</methodname>: assert
-                that the response contains the given header.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertHeader($header, $message = '')</methodname>: assert
+                    that the response contains the given header.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>assertHeaderContains($header, $match, $message =
-                '')</code>: assert that the response contains the given header
-                and that its content contains the given string.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>assertHeaderContains($header, $match, $message = '')</code>: assert that
+                    the response contains the given header and that its content contains the given
+                    string.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>assertHeaderRegex($header, $pattern, $message =
-                '')</code>: assert that the response contains the given header
-            and that its content matches the given regex.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>assertHeaderRegex($header, $pattern, $message = '')</code>: assert that
+                    the response contains the given header and that its content matches the given
+                    regex.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -245,23 +309,34 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>assertModule($module, $message = '')</methodname>: Assert that
-                the given module was used in the last dispatched action.
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertController($controller, $message = '')</methodname>:
-                Assert that the given controller was selected in the last
-                dispatched action.
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertAction($action, $message = '')</methodname>: Assert that
-                the given action was last dispatched.
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertRoute($route, $message = '')</methodname>: Assert that
-                the given named route was matched by the router.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertModule($module, $message = '')</methodname>: Assert that
+                    the given module was used in the last dispatched action.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertController($controller, $message = '')</methodname>:
+                    Assert that the given controller was selected in the last
+                    dispatched action.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertAction($action, $message = '')</methodname>: Assert that
+                    the given action was last dispatched.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertRoute($route, $message = '')</methodname>: Assert that
+                    the given named route was matched by the router.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

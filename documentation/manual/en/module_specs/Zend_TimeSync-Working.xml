@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.timesync.working">
-
     <title>Working with Zend_TimeSync</title>
 
     <para>
@@ -12,14 +11,14 @@
 
     <note>
         <para>
-            All examples in this chapter use a public, generic time server: <emphasis>0.europe.pool.ntp.org</emphasis>. You should use a public, generic time server which is close to your application server.
-            See <ulink url="http://www.pool.ntp.org">http://www.pool.ntp.org</ulink> for
-            information.
+            All examples in this chapter use a public, generic time server:
+            <emphasis>0.europe.pool.ntp.org</emphasis>. You should use a public, generic time server
+            which is close to your application server. See <ulink
+                url="http://www.pool.ntp.org">http://www.pool.ntp.org</ulink> for information.
         </para>
     </note>
 
     <sect2 id="zend.timesync.working.generic">
-
         <title>Generic Time Server Request</title>
 
         <para>
@@ -45,26 +44,27 @@ print $server->getDate()->getIso();
         </para>
 
         <para>
-            For details about <classname>Zend_Date</classname> and its methods see the
-            <link linkend="zend.date.introduction"><classname>Zend_Date</classname> documentation</link>.
+            For details about <classname>Zend_Date</classname> and its methods see the <link
+                linkend="zend.date.introduction"><classname>Zend_Date</classname>
+                documentation</link>.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.multiple">
-
         <title>Multiple Time Servers</title>
 
         <para>
-            Not all time servers are always available to return their time. Servers may be unavailable during maintenance, for example.
-            When the time cannot be requested from the time server, you will get an exception.
+            Not all time servers are always available to return their time. Servers may be
+            unavailable during maintenance, for example. When the time cannot be requested from the
+            time server, you will get an exception.
         </para>
 
         <para>
-            <classname>Zend_TimeSync</classname> is a simple solution that can handle multiple time servers and supports an
-            automatic fallback mechanism. There are two supported ways; you can either specify an array
-            of time servers when creating the instance, or you can add additional time servers to the instance
-            using the <methodname>addServer()</methodname> method.
+            <classname>Zend_TimeSync</classname> is a simple solution that can handle multiple time
+            servers and supports an automatic fallback mechanism. There are two supported ways; you
+            can either specify an array of time servers when creating the instance, or you can add
+            additional time servers to the instance using the <methodname>addServer()</methodname>
+            method.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -78,13 +78,15 @@ print $server->getDate()->getIso();
 
         <para>
             There is no limit to the number of time servers you can add. When a time server can not
-            be reached, <classname>Zend_TimeSync</classname> will fallback and try to connect to the next time server.
+            be reached, <classname>Zend_TimeSync</classname> will fallback and try to connect to the
+            next time server.
         </para>
 
         <para>
-            When you supply more than one time server- which is considered a best practice for <classname>Zend_TimeSync</classname>- you should name
-            each server. You can name your servers with array keys, with the second
-            parameter at instantiation, or with the second parameter when adding another time server.
+            When you supply more than one time server- which is considered a best practice for
+            <classname>Zend_TimeSync</classname>- you should name each server. You can name your
+            servers with array keys, with the second parameter at instantiation, or with the second
+            parameter when adding another time server.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -100,11 +102,9 @@ print $server->getDate()->getIso();
             Naming the time servers allows you to request a specific time server as we will see
             later in this chapter.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.protocol">
-
         <title>Protocols of Time Servers</title>
 
         <para>
@@ -115,9 +115,10 @@ print $server->getDate()->getIso();
 
         <para>
             You set the proper protocol in the address of the time server. There are two
-            protocols which are supported by <classname>Zend_TimeSync</classname>: <emphasis>NTP</emphasis> and <emphasis>SNTP</emphasis>. The default protocol is
-            <emphasis>NTP</emphasis>. If you are using <emphasis>NTP</emphasis>, you can omit the protocol
-            in the address as demonstrated in the previous examples.
+            protocols which are supported by <classname>Zend_TimeSync</classname>:
+            <emphasis>NTP</emphasis> and <emphasis>SNTP</emphasis>. The default protocol is
+            <emphasis>NTP</emphasis>. If you are using <emphasis>NTP</emphasis>, you can omit the
+            protocol in the address as demonstrated in the previous examples.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -130,14 +131,12 @@ print $server->getDate()->getIso();
 ]]></programlisting>
 
         <para>
-            <classname>Zend_TimeSync</classname> can handle mixed time servers. So you are not restricted to
-            only one protocol; you can add any server independently from its protocol.
+            <classname>Zend_TimeSync</classname> can handle mixed time servers. So you are not
+            restricted to only one protocol; you can add any server independently from its protocol.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.ports">
-
         <title>Using Ports for Time Servers</title>
 
         <para>
@@ -147,9 +146,10 @@ print $server->getDate()->getIso();
         </para>
 
         <para>
-            But sometimes the port that the protocols use differs from the standard one. You can define the port which
-            has to be used for each server within the address. Just add the number of the port after the
-            address. If no port is defined, then <classname>Zend_TimeSync</classname> will use the standard port.
+            But sometimes the port that the protocols use differs from the standard one. You can
+            define the port which has to be used for each server within the address. Just add the
+            number of the port after the address. If no port is defined, then
+            <classname>Zend_TimeSync</classname> will use the standard port.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -159,31 +159,32 @@ $server->addServer('sntp:\\internal.myserver.com:399', 'additional');
 
 print $server->getDate()->getIso();
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.options">
-
         <title>Time Servers Options</title>
 
         <para>
-            There is only one option within <classname>Zend_TimeSync</classname> which will be used internally: <emphasis>timeout</emphasis>.
-            You can set any self-defined option you are in need of and request it, however.
+            There is only one option within <classname>Zend_TimeSync</classname> which will be used
+            internally: <emphasis>timeout</emphasis>. You can set any self-defined option you are in
+            need of and request it, however.
         </para>
 
         <para>
             The option <emphasis>timeout</emphasis> defines the number of seconds after which
             a connection is detected as broken when there was no response. The default value is
             <emphasis>1</emphasis>, which means that <classname>Zend_TimeSync</classname> will
-            fallback to the next time server if the requested time server does not respond in one second.
+            fallback to the next time server if the requested time server does not respond in one
+            second.
         </para>
 
         <para>
-            With the <methodname>setOptions()</methodname> method, you can set any option. This function accepts an array where the
-            key is the option to set and the value is the value of that option. Any previously set option will
-            be overwritten by the new value. If you want to know which options are set, use the
-            <methodname>getOptions()</methodname> method. It accepts either a key which returns the given option if specified,
-            or, if no key is set, it will return all set options.
+            With the <methodname>setOptions()</methodname> method, you can set any option. This
+            function accepts an array where the key is the option to set and the value is the value
+            of that option. Any previously set option will be overwritten by the new value. If you
+            want to know which options are set, use the <methodname>getOptions()</methodname>
+            method. It accepts either a key which returns the given option if specified, or, if no
+            key is set, it will return all set options.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -201,21 +202,20 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
             As you can see, the options for <classname>Zend_TimeSync</classname> are static. Each
             instance of <classname>Zend_TimeSync</classname> will use the same options.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.different">
-
         <title>Using Different Time Servers</title>
 
         <para>
-            <classname>Zend_TimeSync</classname>'s default behavior for requesting a time is to request it from the first given server.
-            But sometimes it is useful to set a different time server from which to request the time.
-            This can be done with the <methodname>setServer()</methodname> method. To define the used time server
-            set the alias as a parameter within the method. To get the actual used time server
-            call the <methodname>getServer()</methodname> method. It accepts an alias as a parameter which
-            defines the time server to be returned. If no parameter is given, the current time server will
-            be returned.
+            <classname>Zend_TimeSync</classname>'s default behavior for requesting a time is to
+            request it from the first given server. But sometimes it is useful to set a different
+            time server from which to request the time. This can be done with the
+            <methodname>setServer()</methodname> method. To define the used time server set the
+            alias as a parameter within the method. To get the actual used time server call the
+            <methodname>getServer()</methodname> method. It accepts an alias as a parameter which
+            defines the time server to be returned. If no parameter is given, the current time
+            server will be returned.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -226,11 +226,9 @@ $server->addServer('sntp:\\internal.myserver.com', 'additional');
 $actual = $server->getServer();
 $server = $server->setServer('additional');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.informations">
-
         <title>Information from Time Servers</title>
 
         <para>
@@ -249,11 +247,9 @@ print_r ($server->getInfo());
             The returned information differs with the protocol used and can also differ with the
             server used.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.exceptions">
-
         <title>Handling Exceptions</title>
 
         <para>

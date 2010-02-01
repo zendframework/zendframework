@@ -4,26 +4,27 @@
     <title>Zend_Service_StrikeIron: Advanced Uses</title>
 
     <para>
-      This section describes the more advanced uses of <classname>Zend_Service_StrikeIron</classname>.
+        This section describes the more advanced uses of
+        <classname>Zend_Service_StrikeIron</classname>.
     </para>
 
     <sect2 id="zend.service.strikeiron.advanced-uses.services-by-wsdl">
-      <title>Using Services by WSDL</title>
+        <title>Using Services by WSDL</title>
 
-      <para>
-        Some StrikeIron services may have a <acronym>PHP</acronym> wrapper class available,
-        such as those described in
-        <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>.
-        However, StrikeIron offers hundreds of services and many of these
-        may be usable even without creating a special wrapper class.
-      </para>
+        <para>
+            Some StrikeIron services may have a <acronym>PHP</acronym> wrapper class available,
+            such as those described in
+            <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>.
+            However, StrikeIron offers hundreds of services and many of these
+            may be usable even without creating a special wrapper class.
+        </para>
 
-      <para>
-        To try a StrikeIron service that does not have a wrapper class available,
-        give the <code>wsdl</code> option to <methodname>getService()</methodname>
-        instead of the <code>class</code> option:
+        <para>
+            To try a StrikeIron service that does not have a wrapper class available,
+            give the <code>wsdl</code> option to <methodname>getService()</methodname>
+            instead of the <code>class</code> option:
 
-        <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $strikeIron = new Zend_Service_StrikeIron(array('username' => 'your-username',
                                                 'password' => 'your-password'));
 
@@ -37,58 +38,59 @@ echo $result->listingName;
 
 // Zend Technologies USA Inc
 ]]></programlisting>
-      </para>
+        </para>
 
-      <para>
-        Using StrikeIron services from the WSDL will require at least some understanding
-        of the WSDL files. StrikeIron has many resources on its site to help with this.
-        Also,
-        <ulink url="http://janschneider.de">Jan Schneider</ulink> from the
-        <ulink url="http://horde.org">Horde project</ulink> has written a
-        <ulink url="http://janschneider.de/news/25/268">small <acronym>PHP</acronym> routine</ulink> that
-        will format a WSDL file into more readable HTML.
-      </para>
+        <para>
+            Using StrikeIron services from the WSDL will require at least some understanding
+            of the WSDL files. StrikeIron has many resources on its site to help with this. Also,
+            <ulink url="http://janschneider.de">Jan Schneider</ulink> from the <ulink
+                url="http://horde.org">Horde project</ulink> has written a <ulink
+                url="http://janschneider.de/news/25/268">small <acronym>PHP</acronym>
+                routine</ulink> that will format a WSDL file into more readable HTML.
+        </para>
 
-      <para>
-        Please note that only the services
-        described in the <link linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>
-        section are officially supported.
-      </para>
-
+        <para>
+            Please note that only the services described in the <link
+                linkend="zend.service.strikeiron.bundled-services">Bundled Services</link>
+            section are officially supported.
+        </para>
     </sect2>
 
     <sect2 id="zend.service.strikeiron.viewing-soap-transactions">
-      <title>Viewing SOAP Transactions</title>
+        <title>Viewing SOAP Transactions</title>
 
-      <para>
-        All communication with StrikeIron is done using the <acronym>SOAP</acronym> extension. It
-        is sometimes useful to view the <acronym>XML</acronym> exchanged with StrikeIron for debug
-        purposes.
-      </para>
+        <para>
+            All communication with StrikeIron is done using the <acronym>SOAP</acronym> extension.
+            It is sometimes useful to view the <acronym>XML</acronym> exchanged with StrikeIron for
+            debug purposes.
+        </para>
 
-      <para>
-        Every StrikeIron client (subclass of <classname>Zend_Service_StrikeIron_Base</classname>)
-        contains a <methodname>getSoapClient()</methodname> method to return the underlying instance of
-        <code>SOAPClient</code> used to communicate with StrikeIron.
-      </para>
+        <para>
+            Every StrikeIron client (subclass of
+            <classname>Zend_Service_StrikeIron_Base</classname>) contains a
+            <methodname>getSoapClient()</methodname> method to return the underlying instance of
+            <code>SOAPClient</code> used to communicate with StrikeIron.
+        </para>
 
-      <para>
-        <acronym>PHP</acronym>'s
-        <ulink url="http://www.php.net/manual/en/function.soap-soapclient-construct.php">SOAPClient</ulink>
-        has a <code>trace</code> option that causes it to remember the <acronym>XML</acronym> exchanged during the last transaction.
-        <classname>Zend_Service_StrikeIron</classname> does not enable the <code>trace</code> option by default but this
-        can easily by changed by specifying the options that will be passed to the <code>SOAPClient</code> constructor.
-      </para>
+        <para>
+            <acronym>PHP</acronym>' <ulink
+                url="http://www.php.net/manual/en/function.soap-soapclient-construct.php">SOAPClient</ulink>
+            has a <code>trace</code> option that causes it to remember the <acronym>XML</acronym>
+            exchanged during the last transaction. <classname>Zend_Service_StrikeIron</classname>
+            does not enable the <code>trace</code> option by default but this can easily by changed
+            by specifying the options that will be passed to the <code>SOAPClient</code>
+            constructor.
+        </para>
 
-      <para>
-        To view a SOAP transaction, call the <methodname>getSoapClient()</methodname> method
-        to get the <code>SOAPClient</code> instance and then call the appropriate
-        methods like
-        <ulink url="http://www.php.net/manual/en/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></ulink>
-        and
-        <ulink url="http://www.php.net/manual/en/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>:
+        <para>
+            To view a SOAP transaction, call the <methodname>getSoapClient()</methodname> method
+            to get the <code>SOAPClient</code> instance and then call the appropriate methods like
+            <ulink
+                url="http://www.php.net/manual/en/function.soap-soapclient-getlastrequest.php"><methodname>__getLastRequest()</methodname></ulink>
+            and <ulink
+                url="http://www.php.net/manual/en/function.soap-soapclient-getlastresponse.php"><methodname>__getLastRequest()</methodname></ulink>:
 
-        <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $strikeIron =
     new Zend_Service_StrikeIron(array('username' => 'your-username',
                                       'password' => 'your-password',
@@ -105,7 +107,6 @@ $soapClient = $taxBasic->getSoapClient();
 echo $soapClient->__getLastRequest();
 echo $soapClient->__getLastResponse();
 ]]></programlisting>
-      </para>
-
+        </para>
     </sect2>
 </sect1>

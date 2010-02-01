@@ -31,10 +31,12 @@
 
     <example id="zend.tag.example.using">
         <title>Using Zend_Tag</title>
+
         <para>
             This example illustrates how to create a list of tags and spread
             absolute weight values on them.
         </para>
+
         <programlisting language="php"><![CDATA[
 // Create the item list
 $list = new Zend_Tag_ItemList();
@@ -52,6 +54,7 @@ foreach ($list as $item) {
     printf("%s: %d\n", $item->getTitle(), $item->getParam('weightValue'));
 }
 ]]></programlisting>
+
         <para>
             This will output the three items Code, Zend Framework and <acronym>PHP</acronym> with
             the absolute values 10, 1 and 2.

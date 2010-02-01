@@ -117,25 +117,29 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            Do not provide alternate implementations of the Request and
-            Response objects; they will not be used.
-            <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> uses custom
-            request and response objects,
-            <classname>Zend_Controller_Request_HttpTestCase</classname> and
-            <classname>Zend_Controller_Response_HttpTestCase</classname>, respectively.
-            These objects provide methods for setting up the request
-            environment in targeted ways, and pulling response artifacts in
-            specific ways.
-        </para></listitem>
+        <listitem>
+            <para>
+                Do not provide alternate implementations of the Request and
+                Response objects; they will not be used.
+                <classname>Zend_Test_PHPUnit_ControllerTestCase</classname> uses custom
+                request and response objects,
+                <classname>Zend_Controller_Request_HttpTestCase</classname> and
+                <classname>Zend_Controller_Response_HttpTestCase</classname>, respectively.
+                These objects provide methods for setting up the request
+                environment in targeted ways, and pulling response artifacts in
+                specific ways.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            Do not expect to test server specifics. In other words, the tests
-            are not a guarantee that the code will run on a specific server
-            configuration, but merely that the application should run as
-            expected should the router be able to route the given request. To
-            this end, do not set server-specific headers in the request object.
-        </para></listitem>
+        <listitem>
+            <para>
+                Do not expect to test server specifics. In other words, the tests
+                are not a guarantee that the code will run on a specific server
+                configuration, but merely that the application should run as
+                expected should the router be able to route the given request. To
+                this end, do not set server-specific headers in the request object.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>

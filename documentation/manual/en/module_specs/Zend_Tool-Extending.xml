@@ -19,12 +19,11 @@
 
         <para>
             <classname>Zend_Tool_Project</classname> builds on and extends the capabilities of
-            <classname>Zend_Tool_Framework</classname> to that of managing a "project". In general, a
-            "project" is a planned endeavor or an initiative. In the computer world, projects generally
-            are a collection of resources. These resources can be files, directories, databases,
-            schemas, images, styles, and more.
+            <classname>Zend_Tool_Framework</classname> to that of managing a "project". In general,
+            a "project" is a planned endeavor or an initiative. In the computer world, projects
+            generally are a collection of resources. These resources can be files, directories,
+            databases, schemas, images, styles, and more.
         </para>
-
     </sect2>
 
     <sect2 id="zend.tool.extending.zend-tool-framework">
@@ -51,8 +50,8 @@
                         <emphasis>Base client functionality</emphasis> and a concrete
                         console implementation that connect external tools and
                         interfaces to the <classname>Zend_Tool_Framework</classname>. The Console
-                        client may be used in <acronym>CLI</acronym> environments such as unix shells and
-                        the Windows console.
+                        client may be used in <acronym>CLI</acronym> environments such as unix
+                        shells and the Windows console.
                     </para>
                 </listitem>
 
@@ -91,58 +90,69 @@
             </para>
 
             <itemizedlist>
+                <listitem>
+                    <para>
+                        <classname>Zend_Tool_Framework</classname> - The framework which exposes
+                        tooling capabilities.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <classname>Zend_Tool_Framework</classname> - The framework which exposes
-                    tooling capabilities.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Tooling Client</emphasis> - A developer tool that connects
+                        to and consumes <classname>Zend_Tool_Framework</classname>.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <emphasis>Tooling Client</emphasis> - A developer tool that connects
-                    to and consumes <classname>Zend_Tool_Framework</classname>.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Client</emphasis> - The subsystem of
+                        <classname>Zend_Tool_Framework</classname> that exposes an interface such
+                        that tooling clients can connect, query and execute commands.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <emphasis>Client</emphasis> - The subsystem of
-                    <classname>Zend_Tool_Framework</classname> that exposes an interface such that
-                    tooling clients can connect, query and execute commands.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Console Client / Command Line Interface /
+                        <filename>zf.php</filename></emphasis> - The tooling client for the command
+                        line. </para>
+                </listitem>
 
-                <listitem><para>
-                    <emphasis>Console Client / Command Line Interface /
-                    <filename>zf.php</filename></emphasis> - The tooling client for the command line.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Provider</emphasis> - A subsystem and a collection of
+                        built-in functionality that the framework exports.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <emphasis>Provider</emphasis> - A subsystem and a collection of
-                    built-in functionality that the framework exports.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Manifest</emphasis> - A subsystem for defining,
+                        organizing, and disseminating provider requirement data.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <emphasis>Manifest</emphasis> - A subsystem for defining,
-                    organizing, and disseminating provider requirement data.
-                </para></listitem>
-
-                <listitem><para>
-                    <classname>Zend_Tool_Project</classname> Provider - A set of providers
-                    specifically for creating and maintaining Zend Framework-based
-                    projects.
-                </para></listitem>
-
+                <listitem>
+                    <para>
+                        <classname>Zend_Tool_Project</classname> Provider - A set of providers
+                        specifically for creating and maintaining Zend Framework-based
+                        projects.
+                    </para>
+                </listitem>
             </itemizedlist>
-
         </sect3>
 
         <sect3 id="zend.tool.extending.zend-tool-framework.cli-client">
             <title>Understanding the CLI Client</title>
 
             <para>
-                The <acronym>CLI</acronym>, or command line tool (internally known as the console tool),
-                is currently the primary interface for dispatching <classname>Zend_Tool</classname>
-                requests. With the <acronym>CLI</acronym> tool, developers can issue tooling requests
-                inside the "command line windows", also commonly known as a "terminal"
-                window. This environment is predominant in the *nix environment, but
-                also has a common implementation in windows with the
+                The <acronym>CLI</acronym>, or command line tool (internally known as the console
+                tool), is currently the primary interface for dispatching
+                <classname>Zend_Tool</classname> requests. With the <acronym>CLI</acronym> tool,
+                developers can issue tooling requests inside the "command line windows", also
+                commonly known as a "terminal" window. This environment is predominant in the *nix
+                environment, but also has a common implementation in windows with the
                 <filename>cmd.exe</filename>, console2 and also with the Cygwin project.
             </para>
 
@@ -153,8 +163,8 @@
                     To issue tooling requests via the command line client, you first
                     need to set up the client so that your system can handle the "zf"
                     command. The command line client, for all intents and purposes, is
-                    the <filename>.sh</filename> or <filename>.bat</filename> file that is provided with
-                    your Zend Framework distribution. In trunk, it can be found here:
+                    the <filename>.sh</filename> or <filename>.bat</filename> file that is provided
+                    with your Zend Framework distribution. In trunk, it can be found here:
                     <ulink
                         url="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</ulink>.
                 </para>
@@ -188,6 +198,7 @@
                             current working directory is.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <filename>ZendFramework/library</filename> is in your
@@ -203,7 +214,6 @@
                         to work as <filename>./path/to/zf.php</filename> some command.
                     </para>
                 </note>
-
             </sect4>
 
             <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-starnix">
@@ -211,9 +221,9 @@
 
                 <para>
                     The most common setup in the *nix environment, is to copy the
-                    <filename>zf.sh</filename> and <filename>zf.php</filename> into the same directory
-                    as your <acronym>PHP</acronym> binary. This can generally be found in one of the
-                    following places:
+                    <filename>zf.sh</filename> and <filename>zf.php</filename> into the same
+                    directory as your <acronym>PHP</acronym> binary. This can generally be found in
+                    one of the following places:
                 </para>
 
                 <programlisting language="text"><![CDATA[
@@ -224,23 +234,26 @@
 ]]></programlisting>
 
                 <para>
-                    To find out the location of your <acronym>PHP</acronym> binary, you can execute 'which
-                    php' on the command line. This will return the location of the <acronym>PHP</acronym>
-                    binary you will be using to run <acronym>PHP</acronym> scripts in this environment.
+                    To find out the location of your <acronym>PHP</acronym> binary, you can execute
+                    'which php' on the command line. This will return the location of the
+                    <acronym>PHP</acronym> binary you will be using to run <acronym>PHP</acronym>
+                    scripts in this environment.
                 </para>
 
                 <para>
                     The next order of business is to ensure that Zend Framework
                     library is set up correctly inside of the system <acronym>PHP</acronym>
                     <property>include_path</property>. To find out where your
-                    <property>include_path</property> is located, you can execute <command>php -i</command>
-                    and look for the <property>include_path</property> variable, or more succinctly,
-                    execute <command>php -i | grep include_path</command>. Once you have found where
+                    <property>include_path</property> is located, you can execute
+                    <command>php -i</command> and look for the <property>include_path</property>
+                    variable, or more succinctly, execute
+                    <command>php -i | grep include_path</command>. Once you have found where
                     your <property>include_path</property> is located (this will generally be
-                    something like <filename>/usr/lib/php</filename>, <filename>/usr/share/php</filename>,
-                    <filename>/usr/local/lib/php</filename>, or similar), ensure that the contents of the
-                    <filename>/library/</filename> directory are put
-                    inside your <property>include_path</property> specified directory.
+                    something like <filename>/usr/lib/php</filename>,
+                    <filename>/usr/share/php</filename>, <filename>/usr/local/lib/php</filename>, or
+                    similar), ensure that the contents of the <filename>/library/</filename>
+                    directory are put inside your <property>include_path</property> specified
+                    directory.
                 </para>
 
                 <para>
@@ -266,12 +279,12 @@
 
                 <para>
                     <emphasis>Alternative Setup</emphasis> involves keeping the Zend
-                    Framework download together as is, and creating a link from a <constant>PATH</constant>
-                    location to the <filename>zf.sh</filename>. What this means is you can
-                    place the contents of the ZendFramework download into a location
-                    such as <filename>/usr/local/share/ZendFramework</filename>, or more locally
-                    like <filename>/home/username/lib/ZendFramework</filename>, and creating a
-                    symbolic link to the <filename>zf.sh</filename>.
+                    Framework download together as is, and creating a link from a
+                    <constant>PATH</constant> location to the <filename>zf.sh</filename>. What this
+                    means is you can place the contents of the ZendFramework download into a
+                    location such as <filename>/usr/local/share/ZendFramework</filename>, or more
+                    locally like <filename>/home/username/lib/ZendFramework</filename>, and creating
+                    a symbolic link to the <filename>zf.sh</filename>.
                 </para>
 
                 <para>
@@ -280,7 +293,7 @@
                     <filename>/home/username/bin/</filename> for example) you would issue a
                     command similar to this: </para>
 
-                <programlisting language="sh"><![CDATA[
+                    <programlisting language="sh"><![CDATA[
 ln -s /usr/local/share/ZendFramework/bin/zf.sh /usr/local/bin/zf
 
 # OR (for example)
@@ -291,7 +304,6 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
                     This will create a link which you should be able to access globally
                     on the command line.
                 </para>
-
             </sect4>
 
             <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-windows">
@@ -300,8 +312,8 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
                 <para>
                     The most common setup in the Windows Win32 environment, is to copy
                     the <filename>zf.bat</filename> and <filename>zf.php</filename> into the same
-                    directory as your <acronym>PHP</acronym> binary. This can generally be found in one of
-                    the following places:
+                    directory as your <acronym>PHP</acronym> binary. This can generally be found in
+                    one of the following places:
                 </para>
 
                 <programlisting language="text"><![CDATA[
@@ -322,12 +334,14 @@ C:\WAMP\PHP\bin
                     The next order of business is to ensure that Zend Framework
                     library is set up correctly inside of the system <acronym>PHP</acronym>
                     <property>include_path</property>. To find out where your
-                    <property>include_path</property> is located, you can type <command>php -i</command> and
-                    look for the <property>include_path</property> variable, or more succinctly
-                    execute <command>php -i | grep include_path</command> if you have Cygwin setup with
+                    <property>include_path</property> is located, you can type
+                    <command>php -i</command> and look for the <property>include_path</property>
+                    variable, or more succinctly execute
+                    <command>php -i | grep include_path</command> if you have Cygwin setup with
                     grep available. Once you have found where your
                     <property>include_path</property> is located (this will generally be
-                    something like <filename>C:\PHP\pear</filename>, <filename>C:\PHP\share</filename>,
+                    something like <filename>C:\PHP\pear</filename>,
+                    <filename>C:\PHP\share</filename>,
                     <filename>C:\Program%20Files\ZendServer\share</filename> or similar), ensure
                     that the contents of the library/ directory are put inside your
                     <property>include_path</property> specified directory.
@@ -365,7 +379,6 @@ C:\WAMP\PHP\bin
                     <filename>C:\Path\To\ZendFramework\library</filename> is in your
                     <property>include_path</property>.
                 </para>
-
             </sect4>
 
             <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-othernotes">
@@ -382,8 +395,8 @@ C:\WAMP\PHP\bin
                 <para>
                     The first is <constant>ZEND_TOOL_INCLUDE_PATH_PREPEND</constant>, which will
                     prepend the value of this environment variable to the system
-                    (<filename>php.ini</filename>) <property>include_path</property> before loading the
-                    client.
+                    (<filename>php.ini</filename>) <property>include_path</property> before loading
+                    the client.
                 </para>
 
                 <para>
@@ -394,7 +407,6 @@ C:\WAMP\PHP\bin
                     command line tool.
                 </para>
             </sect4>
-
         </sect3>
 
         <sect3 id="zend.tool.extending.zend-tool-framework.providers-and-manifests">
@@ -420,8 +432,8 @@ C:\WAMP\PHP\bin
                     or <classname>Zend_Tool_Framework_Manifest_ProviderManifestable</classname>.
                     Instances of the provider interface make up for the real functionality
                     and all their public methods are accessible as provider actions.
-                    The ProviderManifestable interface however requires the implementation of a method
-                    <methodname>getProviders()</methodname> which returns an array of
+                    The ProviderManifestable interface however requires the implementation of a
+                    method <methodname>getProviders()</methodname> which returns an array of
                     instantiated provider interface instances.
                 </para>
 
@@ -438,6 +450,7 @@ C:\WAMP\PHP\bin
                             provider being accessible by the name "hello".
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             If your provider has a method <methodname>getName()</methodname>
@@ -445,6 +458,7 @@ C:\WAMP\PHP\bin
                             the name.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             If your provider has "Provider" as prefix, e.g. it is called
@@ -460,7 +474,8 @@ C:\WAMP\PHP\bin
                     they have to be physically present in the include paths.</para>
                 </note>
 
-                <example id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading.example">
+                <example
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading.example">
                     <title>Exposing Your Providers with a Manifest</title>
 
                     <para>
@@ -486,7 +501,6 @@ class My_Component_Manifest
     }
 }
 ]]></programlisting>
-
                 </example>
             </sect4>
 
@@ -532,11 +546,11 @@ Hello from my provider!
                 <title>The response object</title>
 
                 <para>
-                    As discussed in the architecture section Zend Tool allows to hook different clients for
-                    using your Zend Tool providers. To keep compliant with different clients you should
-                    use the response object to return messages from your providers instead of using
-                    <methodname>echo()</methodname> or a similiar output mechanism. Rewritting our hello
-                    provider with this knowledge it looks like:
+                    As discussed in the architecture section Zend Tool allows to hook different
+                    clients for using your Zend Tool providers. To keep compliant with different
+                    clients you should use the response object to return messages from your
+                    providers instead of using <methodname>echo()</methodname> or a similiar output
+                    mechanism. Rewritting our hello provider with this knowledge it looks like:
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -552,16 +566,18 @@ class My_Component_HelloProvider
 ]]></programlisting>
 
                 <para>
-                    As you can see one has to extend the <classname>Zend_Tool_Framework_Provider_Abstract</classname>
-                    to gain access to the Registry which holds the <classname>Zend_Tool_Framework_Client_Response</classname>
-                    instance.
+                    As you can see one has to extend the
+                    <classname>Zend_Tool_Framework_Provider_Abstract</classname> to gain access to
+                    the Registry which holds the
+                    <classname>Zend_Tool_Framework_Client_Response</classname> instance.
                 </para>
             </sect4>
 
             <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced">
                 <title>Advanced Development Information</title>
 
-                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.variables">
+                <sect5
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.variables">
                     <title>Passing Variables to a Provider</title>
 
                     <para>
@@ -582,7 +598,7 @@ class My_Component_HelloProvider
                         would probably do this in OO code:
                     </para>
 
-                <programlisting language="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     implements Zend_Tool_Framework_Provider_Interface
 {
@@ -595,16 +611,16 @@ class My_Component_HelloProvider
 
                     <para>
                         The above example can then be called via the command line
-                        <command>zf say hello Joe</command>. "Joe" will be supplied to the provider as
-                        a parameter of the method call. Also note, as you see that the
+                        <command>zf say hello Joe</command>. "Joe" will be supplied to the provider
+                        as a parameter of the method call. Also note, as you see that the
                         parameter is optional, that means it is also optional on the command
                         line, so that <command>zf say hello</command> will still work, and default
                         to the name "Ralph".
                     </para>
-
                 </sect5>
 
-                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.prompt">
+                <sect5
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.prompt">
                     <title>Prompt the User for Input</title>
 
                     <para>
@@ -636,7 +652,8 @@ class My_Component_HelloProvider
                     </para>
                 </sect5>
 
-                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.pretendable">
+                <sect5
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.pretendable">
                     <title>Pretending to execute a Provider Action</title>
 
                     <para>
@@ -682,10 +699,10 @@ class My_Component_HelloProvider
 % zf --pretend say hello Ralph
 I would say hello Ralph.
 ]]></programlisting>
-
                 </sect5>
 
-                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.verbosedebug">
+                <sect5
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.verbosedebug">
                     <title>Verbose and Debug modes</title>
 
                     <para>
@@ -712,7 +729,8 @@ class My_Component_HelloProvider
 ]]></programlisting>
                 </sect5>
 
-                <sect5 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.configstorage">
+                <sect5
+                    id="zend.tool.extending.zend-tool-framework.providers-and-manifests.advanced.configstorage">
                     <title>Accessing User Config and Storage</title>
 
                     <para>
@@ -742,14 +760,15 @@ class My_Component_HelloProvider
                     <para>
                         The returned configuration is of the type
                         <classname>Zend_Tool_Framework_Client_Config</classname> but internally the
-                        <methodname>__get()</methodname> and <methodname>__set()</methodname> magic methods
-                        proxy to a <classname>Zend_Config</classname> of the given configuration type.
+                        <methodname>__get()</methodname> and <methodname>__set()</methodname> magic
+                        methods proxy to a <classname>Zend_Config</classname> of the given
+                        configuration type.
                     </para>
 
                     <para>
-                        The storage allows to save arbitrary data for later reference. This can be useful for batch
-                        processing tasks or for re-runs of your tasks. You can access the storage in a similar way
-                        like the configuration:
+                        The storage allows to save arbitrary data for later reference. This can be
+                        useful for batch processing tasks or for re-runs of your tasks. You can
+                        access the storage in a similar way like the configuration:
                     </para>
 
                     <programlisting language="php"><![CDATA[
@@ -783,56 +802,54 @@ class Zend_Tool_Framework_Client_Storage
 
                     <important>
                         <para>
-                            When designing your providers that are config or storage aware remember to
-                            check if the required user-config or storage keys really exist for a user.
-                            You won't run into fatal errors when none of these are provided though,
-                            since empty ones are created upon request.
+                            When designing your providers that are config or storage aware remember
+                            to check if the required user-config or storage keys really exist for a
+                            user. You won't run into fatal errors when none of these are provided
+                            though, since empty ones are created upon request.
                         </para>
                     </important>
                 </sect5>
-
             </sect4>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.tool.extending.zend-tool-project">
         <title>Zend_Tool_Project Extensions</title>
 
         <para>
-            Zend_Tool_Project exposes a rich set of functionality and capabilities that make the task
-            of creating new providers, specficially those targetting project easier and more manageable.
+            Zend_Tool_Project exposes a rich set of functionality and capabilities that make the
+            task of creating new providers, specficially those targetting project easier and more
+            manageable.
         </para>
 
         <sect3 id="zend.tool.extending.zend-tool-project.architecture">
             <title>Overall Architecture</title>
 
             <para>
-                This same concept applies to Zend Framework projects. In Zend Framework projects, you have
-                controllers, actions, views, models, databases and so on and so forth. In terms of
-                <classname>Zend_Tool</classname>, we need a way to track these types of resources - thus
-                <classname>Zend_Tool_Project</classname>.
+                This same concept applies to Zend Framework projects. In Zend Framework projects,
+                you have controllers, actions, views, models, databases and so on and so forth. In
+                terms of <classname>Zend_Tool</classname>, we need a way to track these types of
+                resources - thus <classname>Zend_Tool_Project</classname>.
             </para>
 
             <para>
-                <classname>Zend_Tool_Project</classname> is capable of tracking project resources throughout
-                the development of a project. So, for example, if in one command you created a controller,
-                and in the next command you wish to create an action within that controller,
-                <classname>Zend_Tool_Project</classname> is gonna have to <emphasis>know</emphasis> about
-                the controller file you created so that you can (in the next action), be able to append that
-                action to it. This is what keeps our projects up to date and <emphasis>stateful</emphasis>.
+                <classname>Zend_Tool_Project</classname> is capable of tracking project resources
+                throughout the development of a project. So, for example, if in one command you
+                created a controller, and in the next command you wish to create an action within
+                that controller, <classname>Zend_Tool_Project</classname> is gonna have to
+                <emphasis>know</emphasis> about the controller file you created so that you can (in
+                the next action), be able to append that action to it. This is what keeps our
+                projects up to date and <emphasis>stateful</emphasis>.
             </para>
 
             <para>
-                Another important point to understand about projects is that typically, resources are
-                organized in a hierarchical fashion. With that in mind,
-                <classname>Zend_Tool_Project</classname> is capable of serializing the current project into
-                a internal representation that allows it to keep track of not only <emphasis>what</emphasis>
-                resources are part of a project at any given time, but also <emphasis>where</emphasis> they
-                are in relation to one another.
+                Another important point to understand about projects is that typically, resources
+                are organized in a hierarchical fashion. With that in mind,
+                <classname>Zend_Tool_Project</classname> is capable of serializing the current
+                project into a internal representation that allows it to keep track of not only
+                <emphasis>what</emphasis> resources are part of a project at any given time, but
+                also <emphasis>where</emphasis> they are in relation to one another.
             </para>
-
         </sect3>
 
 
@@ -840,11 +857,12 @@ class Zend_Tool_Framework_Client_Storage
             <title>Creating Providers</title>
 
             <para>
-                Project specific providers are created in the same fashion as plain framework providers, with
-                one exception: project providers must extend the <code>Zend_Tool_Project_Provider_Abstract</code>.
-                This class comes with some significant functionality that helps developers load existing project,
-                obtian the profile object, and be able to search the profile, then later store any changes to the
-                current project profile.
+                Project specific providers are created in the same fashion as plain framework
+                providers, with one exception: project providers must extend the
+                <code>Zend_Tool_Project_Provider_Abstract</code>. This class comes with some
+                significant functionality that helps developers load existing project, obtian the
+                profile object, and be able to search the profile, then later store any changes to
+                the current project profile.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -861,7 +879,6 @@ class My_Component_HelloProvider
     }
 }
 ]]></programlisting>
-
         </sect3>
 
         <!--
@@ -872,6 +889,5 @@ class My_Component_HelloProvider
 
         </sect3>
         -->
-
     </sect2>
 </sect1>

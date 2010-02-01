@@ -156,6 +156,20 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Got notice: Undefined index:  type
+     */
+    public function testDefaultTransport() {
+        $options = array('transport' => array(//'type' => 'sendmail', // dont define type
+                                              'register' => true)); 
+        $resource = new Zend_Application_Resource_Mail(array());
+        $resource->setBootstrap($this->bootstrap);
+        $resource->setOptions($options);
+
+        $resource->init();
+        $this->assertTrue(Zend_Mail::getDefaultTransport() instanceof Zend_Mail_Transport_Sendmail);        
+    }
+    
+    /**
     * @group ZF-8811
     */
     public function testDefaultsCaseSensivity() {
@@ -169,7 +183,20 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
         $this->assertNull(Zend_Mail::getDefaultTransport());
         $this->assertEquals($options['defaultFroM'], Zend_Mail::getDefaultFrom());
         $this->assertEquals($options['defAultReplyTo'], Zend_Mail::getDefaultReplyTo());
+    }
+    
+    /**
+     * @group ZF-8981
+     */
+    public function testNumericRegisterDirectiveIsPassedOnCorrectly() {
+        $options = array('transport' => array('type' => 'sendmail',
+                                              'register' => '1')); // Culprit
+        $resource = new Zend_Application_Resource_Mail(array());
+        $resource->setBootstrap($this->bootstrap);
+        $resource->setOptions($options);
 
+        $resource->init();
+        $this->assertTrue(Zend_Mail::getDefaultTransport() instanceof Zend_Mail_Transport_Sendmail);    	
     }
 }
 

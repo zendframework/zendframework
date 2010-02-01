@@ -65,6 +65,7 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
             {
                 $this->_transport = $this->_setupTransport($options['transport']);
                 if(!isset($options['transport']['register']) ||
+                   $options['transport']['register'] == '1' ||
                    (isset($options['transport']['register']) &&
                         !is_numeric($options['transport']['register']) &&
                         (bool) $options['transport']['register'] == true))
@@ -101,6 +102,10 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
 
     protected function _setupTransport($options)
     {
+    	if(!isset($options['type'])) {
+    		$options['type'] = 'sendmail';
+    	}
+    	
         $transportName = ucfirst(strtolower($options['type']));
         unset($options['type']);
 

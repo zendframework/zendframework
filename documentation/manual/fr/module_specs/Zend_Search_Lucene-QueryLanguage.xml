@@ -215,29 +215,29 @@ roam~0.8
     <sect2 id="zend.search.lucene.query-language.boosting">
         <title>Booster un terme</title>
         <para>
-            Java Lucene and <classname>Zend_Search_Lucene</classname> provide the relevance level of matching documents based
-            on the terms found. To boost the relevance of a term use the caret, "^", symbol with a boost factor (a number)
-            at the end of the term you are searching. The higher the boost factor, the more relevant
-            the term will be.
+            Java Lucene et <classname>Zend_Search_Lucene</classname> fournissent le niveau de pertinence des documents
+            basé sur les termes trouvés. Pour booster la pertinence d'un terme, utilisez le symbole circonflexe "^" avec
+            un facteur de boost (un nombre) à la fin du terme que vous cherchez. Plus le facteur de boost est élevé, plus
+            la pertinence du terme le sera.
         </para>
         <para>
-            Boosting allows you to control the relevance of a document by boosting individual terms. For example,
-            if you are searching for
+            Le boostage vous permet de contrôler la pertinence d'un document en boostant les termes individuellement.
+            Par exemple, si vous cherchez
             <programlisting language="querystring"><![CDATA[
 PHP framework
 ]]></programlisting>
-            and you want the term "PHP" to be more relevant boost it using the ^ symbol along with the
-            boost factor next to the term. You would type:
+            et que vous voulez que le terme "PHP" soit plus pertinent, boostez le en utilisant le symbole ^ et
+            son facteur de boost juste après le terme. Vous pourriez écrire :
             <programlisting language="querystring"><![CDATA[
 PHP^4 framework
 ]]></programlisting>
-            This will make documents with the term PHP appear more relevant. You can also boost phrase
-            terms and subqueries as in the example:
+            Cela fera en sorte que les documents possédant le terme PHP seront plus pertinents. Vous pouvez également
+            booster des phrases ou des sous-requêtes, comme dans l'exemple ci-dessous :
             <programlisting language="querystring"><![CDATA[
 "PHP framework"^4 "Zend Framework"
 ]]></programlisting>
-            By default, the boost factor is 1. Although the boost factor must be positive,
-            it may be less than 1 (e.g. 0.2).
+            Par défaut, le facteur de boost est 1. Bien que le facteur de boost doive être positif,
+            il peut être inférieur à 1 (p. ex. 0.2).
         </para>
     </sect2>
     <sect2 id="zend.search.lucene.query-language.boolean">

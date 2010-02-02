@@ -22,6 +22,7 @@
             <listitem>
                 <para>count()</para>
             </listitem>
+
             <listitem>
                 <para>getItems($offset, $itemCountPerPage)</para>
             </listitem>
@@ -35,8 +36,8 @@
         </para>
 
         <para>
-            If you've ever used the SPL interface
-            <ulink url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></ulink>,
+            If you've ever used the SPL interface <ulink
+                url="http://www.php.net/~helly/php/ext/spl/interfaceCountable.html"><code>Countable</code></ulink>,
             you're familiar with <methodname>count()</methodname>. As used with
             <classname>Zend_Paginator</classname>, this is the total number of items
             in the data collection.
@@ -127,7 +128,8 @@ Zend_Paginator::addScrollingStylePrefixPath($prefix, $path);
             <classname>Zend_Paginator</classname> can be told to cache the data it has already
             passed on, preventing the adapter from fetching them each time they are used.
             To tell paginator to automatically cache the adapter's data, just pass to
-            its <methodname>setCache()</methodname> method a <classname>Zend_Cache_Core</classname> instance.
+            its <methodname>setCache()</methodname> method a <classname>Zend_Cache_Core</classname>
+            instance.
         </para>
 
         <para>
@@ -141,9 +143,10 @@ Zend_Paginator::setCache($cache);
         </para>
 
         <para>
-            As far as <classname>Zend_Paginator</classname> has got a <classname>Zend_Cache_Core</classname> instance, data will
-            be cached. Sometimes you would like not to cache data even if you already passed
-            a cache instance. You should then use <methodname>setCacheEnable()</methodname> for that.
+            As far as <classname>Zend_Paginator</classname> has got a
+            <classname>Zend_Cache_Core</classname> instance, data will be cached. Sometimes you
+            would like not to cache data even if you already passed a cache instance. You should
+            then use <methodname>setCacheEnable()</methodname> for that.
         </para>
 
         <para>
@@ -224,12 +227,14 @@ var_dump($paginator->getPageItemCache());
         <title>Zend_Paginator_AdapterAggregate Interface</title>
 
         <para>
-            Depending on your application you might want to paginate objects, whose internal data-structure
-            is equal to existing adapters, but you don't want to break up your encapsulation to allow access
-            to this data. In other cases an object might be in a "has-an adapter" relationship, rather than
-            the "is-an adapter" relationsship that <classname>Zend_Paginator_Adapter_Abstract</classname> promotes.
-            For this cases you can use the <classname>Zend_Paginator_AdapterAggregate</classname> interface that
-            behaves much like the <classname>IteratorAggregate</classname> interface of the PHP SPL extension.
+            Depending on your application you might want to paginate objects, whose internal
+            data-structure is equal to existing adapters, but you don't want to break up your
+            encapsulation to allow access to this data. In other cases an object might be in a
+            "has-an adapter" relationship, rather than the "is-an adapter" relationsship that
+            <classname>Zend_Paginator_Adapter_Abstract</classname> promotes. For this cases you can
+            use the <classname>Zend_Paginator_AdapterAggregate</classname> interface that behaves
+            much like the <classname>IteratorAggregate</classname> interface of the PHP SPL
+            extension.
         </para>
 
         <para>
@@ -248,9 +253,9 @@ interface Zend_Paginator_AdapterAggregate
 
         <para>
             The interface is fairly small and only expects you to return an instance of
-            <classname>Zend_Paginator_Adapter_Abstract</classname>. An Adapter Aggregate instance is then
-            recognized by both <code>Zend_Paginator::factory</code> and the constructor of Zend_Paginator and
-            handled accordingly.
+            <classname>Zend_Paginator_Adapter_Abstract</classname>. An Adapter Aggregate instance is
+            then recognized by both <code>Zend_Paginator::factory</code> and the constructor of
+            Zend_Paginator and handled accordingly.
         </para>
     </sect2>
 </sect1>

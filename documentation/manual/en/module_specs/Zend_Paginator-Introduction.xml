@@ -17,17 +17,20 @@
                     Paginate arbitrary data, not just relational databases
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Fetch only the results that need to be displayed
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Do not force users to adhere to only one way of displaying
                     data or rendering pagination controls
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Loosely couple <classname>Zend_Paginator</classname> to other Zend

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.service.slideshare">
-
     <title>Introduction</title>
 
     <para>
@@ -12,21 +11,21 @@
     </para>
 
     <sect2 id="zend.service.slideshare.basicusage">
-
         <title>Getting Started with Zend_Service_SlideShare</title>
 
         <para>
-            In order to use the <classname>Zend_Service_SlideShare</classname> component you must first create an account
-            on the slideshare.net servers (more information can be found
+            In order to use the <classname>Zend_Service_SlideShare</classname> component you must
+            first create an account on the slideshare.net servers (more information can be found
             <ulink url="http://www.slideshare.net/developers/">here</ulink>) in order to receive an
-            <acronym>API</acronym> key, username, password and shared secret value -- all of which are needed in order
-            to use the <classname>Zend_Service_SlideShare</classname> component.
+            <acronym>API</acronym> key, username, password and shared secret value -- all of which
+            are needed in order to use the <classname>Zend_Service_SlideShare</classname> component.
         </para>
 
         <para>
             Once you have setup an account, you can begin using the
-            <classname>Zend_Service_SlideShare</classname> component by creating a new instance of the
-            <classname>Zend_Service_SlideShare</classname> object and providing these values as shown below:
+            <classname>Zend_Service_SlideShare</classname> component by creating a new instance of
+            the <classname>Zend_Service_SlideShare</classname> object and providing these values as
+            shown below:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -36,18 +35,16 @@ $ss = new Zend_Service_SlideShare('APIKEY',
                                   'USERNAME',
                                   'PASSWORD');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.service.slideshare.slideshowobj">
-
         <title>The SlideShow object</title>
 
         <para>
-            All slide shows in the <classname>Zend_Service_SlideShare</classname> component are represented
-            using the <classname>Zend_Service_SlideShare_SlideShow</classname> object (both when retrieving
-            and uploading new slide shows). For your reference a pseudo-code version of this class
-            is provided below.
+            All slide shows in the <classname>Zend_Service_SlideShare</classname> component are
+            represented using the <classname>Zend_Service_SlideShare_SlideShow</classname> object
+            (both when retrieving and uploading new slide shows). For your reference a pseudo-code
+            version of this class is provided below.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -190,30 +187,26 @@ class Zend_Service_SlideShare_SlideShow {
 ]]></programlisting>
 
         <note>
-
             <para>
                 The above pseudo-class only shows those methods which should be used by end-user
                 developers. Other available methods are internal to the component.
             </para>
-
         </note>
 
         <para>
-            When using the <classname>Zend_Service_SlideShare</classname> component, this data class will be
-            used frequently to browse or add new slide shows to or from the web service.
+            When using the <classname>Zend_Service_SlideShare</classname> component, this data class
+            will be used frequently to browse or add new slide shows to or from the web service.
         </para>
-
     </sect2>
 
     <sect2 id="zend.service.slideshare.getslideshow">
-
         <title>Retrieving a single slide show</title>
 
         <para>
-            The simplest usage of the <classname>Zend_Service_SlideShare</classname> component is the
-            retrieval of a single slide show by slide show ID provided by the slideshare.net
-            application and is done by calling the <methodname>getSlideShow()</methodname> method of a
-            <classname>Zend_Service_SlideShare</classname> object and using the resulting
+            The simplest usage of the <classname>Zend_Service_SlideShare</classname> component is
+            the retrieval of a single slide show by slide show ID provided by the slideshare.net
+            application and is done by calling the <methodname>getSlideShow()</methodname> method of
+            a <classname>Zend_Service_SlideShare</classname> object and using the resulting
             <classname>Zend_Service_SlideShare_SlideShow</classname> object as shown.
         </para>
 
@@ -229,11 +222,9 @@ $slideshow = $ss->getSlideShow(123456);
 print "Slide Show Title: {$slideshow->getTitle()}<br/>\n";
 print "Number of views: {$slideshow->getNumViews()}<br/>\n";
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.service.slideshare.getslideshowlist">
-
         <title>Retrieving Groups of Slide Shows</title>
 
         <para>
@@ -249,8 +240,8 @@ print "Number of views: {$slideshow->getNumViews()}<br/>\n";
 
                 <para>
                     You can retrieve slide shows from a specific account by using the
-                    <methodname>getSlideShowsByUsername()</methodname> method and providing the username from
-                    which the slide shows should be retrieved
+                    <methodname>getSlideShowsByUsername()</methodname> method and providing the
+                    username from which the slide shows should be retrieved
                 </para>
             </listitem>
 
@@ -304,17 +295,15 @@ foreach($ss_user as $slideshow) {
    print "Slide Show Title: {$slideshow->getTitle}<br/>\n";
 }
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.service.slideshare.caching">
-
         <title>Zend_Service_SlideShare Caching policies</title>
 
         <para>
-            By default, <classname>Zend_Service_SlideShare</classname> will cache any request against the web
-            service automatically to the filesystem (default path <code>/tmp</code>) for 12 hours.
-            If you desire to change this behavior, you must provide your own
+            By default, <classname>Zend_Service_SlideShare</classname> will cache any request
+            against the web service automatically to the filesystem (default path <code>/tmp</code>)
+            for 12 hours. If you desire to change this behavior, you must provide your own
             <xref linkend="zend.cache" /> object using the <code>setCacheObject</code> method as
             shown:
         </para>
@@ -339,19 +328,17 @@ $ss->setCacheObject($cache);
 
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.service.slideshare.httpclient">
-
         <title>Changing the behavior of the HTTP Client</title>
 
         <para>
-            If for whatever reason you would like to change the behavior of the <acronym>HTTP</acronym> client when
-            making the web service request, you can do so by creating your own instance of the
-            <classname>Zend_Http_Client</classname> object (see <xref linkend="zend.http" />). This is useful
-            for instance when it is desirable to set the timeout for the connection to something
-            other then default as shown:
+            If for whatever reason you would like to change the behavior of the
+            <acronym>HTTP</acronym> client when making the web service request, you can do so by
+            creating your own instance of the <classname>Zend_Http_Client</classname> object (see
+            <xref linkend="zend.http" />). This is useful for instance when it is desirable to set
+            the timeout for the connection to something other then default as shown:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -365,7 +352,5 @@ $ss = new Zend_Service_SlideShare('APIKEY',
 $ss->setHttpClient($client);
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 ]]></programlisting>
-
     </sect2>
-
 </sect1>

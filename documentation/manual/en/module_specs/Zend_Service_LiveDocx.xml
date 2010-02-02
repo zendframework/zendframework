@@ -38,24 +38,28 @@
                     <classname>Zend_Service_LiveDocx</classname> within a matter of minutes.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <ulink url="http://www.phplivedocx.org/">
                     <classname>Zend_Service_LiveDocx</classname> blog and web site</ulink>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <ulink url="http://www.livedocx.com/pub/documentation/api.aspx">
                     LiveDocx SOAP API documentation</ulink>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <ulink url="https://api.livedocx.com/1.2/mailmerge.asmx?wsdl">
                     LiveDocx WSDL</ulink>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <ulink url="https://www.livedocx.com/">LiveDocx blog and web site</ulink>.
@@ -814,7 +818,7 @@ foreach ($blockNames as $blockName) {
                     font-substitution will take place. This may lead to undesirable results.
                 </para>
 
-            <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $phpLiveDocx = new Zend_Service_LiveDocx_MailMerge();
 
 $phpLiveDocx->setUsername('myUsername')

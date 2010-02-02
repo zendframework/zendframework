@@ -2,20 +2,27 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.service.flickr">
     <title>Zend_Service_Flickr</title>
+
     <sect2 id="zend.service.flickr.introduction">
         <title>Introduction</title>
+
         <para>
-            <classname>Zend_Service_Flickr</classname> is a simple <acronym>API</acronym> for using the Flickr REST Web Service. In order to use
-            the Flickr web services, you must have an <acronym>API</acronym> key. To obtain a key and for more information about the
-            Flickr REST Web Service, please visit the
-            <ulink url="http://www.flickr.com/services/api/">Flickr <acronym>API</acronym> Documentation</ulink>.
+            <classname>Zend_Service_Flickr</classname> is a simple <acronym>API</acronym> for using
+            the Flickr REST Web Service. In order to use the Flickr web services, you must have an
+            <acronym>API</acronym> key. To obtain a key and for more information about the Flickr
+            REST Web Service, please visit the <ulink
+                url="http://www.flickr.com/services/api/">Flickr <acronym>API</acronym>
+                Documentation</ulink>.
         </para>
+
         <para>
-            In the following example, we use the <methodname>tagSearch()</methodname> method to search for photos having "php"
-            in the tags.
+            In the following example, we use the <methodname>tagSearch()</methodname> method to
+            search for photos having "php" in the tags.
         </para>
+
         <example id="zend.service.flickr.introduction.example-1">
             <title>Simple Flickr Photo Search</title>
+
             <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
@@ -26,44 +33,58 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
+
         <note>
             <title>Optional parameter</title>
+
             <para>
-                <methodname>tagSearch()</methodname> accepts an optional second parameter as an array of options.
+                <methodname>tagSearch()</methodname> accepts an optional second parameter as an
+                array of options.
             </para>
         </note>
     </sect2>
+
     <sect2 id="zend.service.flickr.finding-users">
         <title>Finding Flickr Users' Photos and Information</title>
+
         <para>
-            <classname>Zend_Service_Flickr</classname> provides several ways to get information about Flickr users:
+            <classname>Zend_Service_Flickr</classname> provides several ways to get information
+            about Flickr users:
         </para>
+
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>userSearch()</methodname>: Accepts a string query of space-delimited tags and an optional second
-                    parameter as an array of search options, and returns a set of photos as a
-                    <classname>Zend_Service_Flickr_ResultSet</classname> object.
+                    <methodname>userSearch()</methodname>: Accepts a string query of space-delimited
+                    tags and an optional second parameter as an array of search options, and returns
+                    a set of photos as a <classname>Zend_Service_Flickr_ResultSet</classname>
+                    object.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>getIdByUsername()</methodname>: Returns a string user ID associated with the given username string.
+                    <methodname>getIdByUsername()</methodname>: Returns a string user ID associated
+                    with the given username string.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>getIdByEmail()</methodname>: Returns a string user ID associated with the given email address
-                    string.
+                    <methodname>getIdByEmail()</methodname>: Returns a string user ID associated
+                    with the given email address string.
                 </para>
             </listitem>
         </itemizedlist>
+
         <example id="zend.service.flickr.finding-users.example-1">
             <title>Finding a Flickr User's Public Photos by E-Mail Address</title>
+
             <para>
-                In this example, we have a Flickr user's e-mail address, and we search for the user's public photos by
-                using the <methodname>userSearch()</methodname> method:
+                In this example, we have a Flickr user's e-mail address, and we search for the
+                user's public photos by using the <methodname>userSearch()</methodname> method:
             </para>
+
             <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
@@ -75,14 +96,18 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.flickr.grouppoolgetphotos">
         <title>Finding photos From a Group Pool</title>
+
         <para>
-            <classname>Zend_Service_Flickr</classname> allows to retrieve a group's pool photos based
-            on the group ID. Use the <methodname>groupPoolGetPhotos()</methodname> method:
+            <classname>Zend_Service_Flickr</classname> allows to retrieve a group's pool photos
+            based on the group ID. Use the <methodname>groupPoolGetPhotos()</methodname> method:
         </para>
+
         <example id="zend.service.flickr.grouppoolgetphotos.example-1">
             <title>Retrieving a Group's Pool Photos by Group ID</title>
+
             <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
@@ -93,24 +118,34 @@ $flickr = new Zend_Service_Flickr('MY_API_KEY');
     }
 ]]></programlisting>
         </example>
+
         <note>
             <title>Optional parameter</title>
+
             <para>
-                <methodname>groupPoolGetPhotos()</methodname> accepts an optional second parameter as an array of options.
+                <methodname>groupPoolGetPhotos()</methodname> accepts an optional second parameter
+                as an array of options.
             </para>
         </note>
     </sect2>
+
     <sect2 id="zend.service.flickr.getimagedetails">
         <title>Retrieving Flickr Image Details</title>
+
         <para>
-            <classname>Zend_Service_Flickr</classname> makes it quick and easy to get an image's details based on a given image
-            ID. Just use the <methodname>getImageDetails()</methodname> method, as in the following example:
+            <classname>Zend_Service_Flickr</classname> makes it quick and easy to get an image's
+            details based on a given image ID. Just use the
+            <methodname>getImageDetails()</methodname> method, as in the following example:
         </para>
+
         <example id="zend.service.flickr.getimagedetails.example-1">
             <title>Retrieving Flickr Image Details</title>
+
             <para>
-                Once you have a Flickr image ID, it is a simple matter to fetch information about the image:
+                Once you have a Flickr image ID, it is a simple matter to fetch information about
+                the image:
             </para>
+
             <programlisting language="php"><![CDATA[
 $flickr = new Zend_Service_Flickr('MY_API_KEY');
 
@@ -121,19 +156,43 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.flickr.classes">
         <title>Zend_Service_Flickr Result Classes</title>
+
         <para>
-            The following classes are all returned by <methodname>tagSearch()</methodname> and <methodname>userSearch()</methodname>:
+            The following classes are all returned by <methodname>tagSearch()</methodname> and
+            <methodname>userSearch()</methodname>:
+
             <itemizedlist>
-                <listitem><para><link linkend="zend.service.flickr.classes.resultset"><classname>Zend_Service_Flickr_ResultSet</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.flickr.classes.result"><classname>Zend_Service_Flickr_Result</classname></link></para></listitem>
-                <listitem><para><link linkend="zend.service.flickr.classes.image"><classname>Zend_Service_Flickr_Image</classname></link></para></listitem>
+                <listitem>
+                    <para>
+                        <link
+                            linkend="zend.service.flickr.classes.resultset"><classname>Zend_Service_Flickr_ResultSet</classname></link>
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                       <link
+                           linkend="zend.service.flickr.classes.result"><classname>Zend_Service_Flickr_Result</classname></link>
+                   </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <link
+                            linkend="zend.service.flickr.classes.image"><classname>Zend_Service_Flickr_Image</classname></link>
+                    </para>
+                </listitem>
             </itemizedlist>
         </para>
+
         <sect3 id="zend.service.flickr.classes.resultset">
             <title>Zend_Service_Flickr_ResultSet</title>
+
             <para>Represents a set of Results from a Flickr search.</para>
+
             <note>
                 <para>
                     Implements the <classname>SeekableIterator</classname> interface for easy
@@ -141,10 +200,13 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                     access to a specific result using <methodname>seek()</methodname>.
                 </para>
             </note>
+
             <sect4 id="zend.service.flickr.classes.resultset.properties">
                 <title>Properties</title>
+
                 <table id="zend.service.flickr.classes.resultset.properties.table-1">
                     <title>Zend_Service_Flickr_ResultSet Properties</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -153,17 +215,20 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                                 <entry>Description</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>totalResultsAvailable</entry>
                                 <entry>int</entry>
                                 <entry>Total Number of Results available</entry>
                             </row>
+
                             <row>
                                 <entry>totalResultsReturned</entry>
                                 <entry>int</entry>
                                 <entry>Total Number of Results returned</entry>
                             </row>
+
                             <row>
                                 <entry>firstResultPosition</entry>
                                 <entry>int</entry>
@@ -173,8 +238,10 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                     </tgroup>
                 </table>
             </sect4>
+
             <sect4 id="zend.service.flickr.classes.resultset.totalResults">
                 <title>Zend_Service_Flickr_ResultSet::totalResults()</title>
+
                 <para>
                     <methodsynopsis>
                         <type>int</type>
@@ -182,23 +249,30 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                         <void />
                     </methodsynopsis>
                 </para>
+
                 <para>
                     Returns the total number of results in this result set.
                 </para>
+
                 <para>
                     <link linkend="zend.service.flickr.classes">Back to Class List</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.flickr.classes.result">
             <title>Zend_Service_Flickr_Result</title>
+
             <para>
                 A single Image result from a Flickr query
             </para>
+
             <sect4 id="zend.service.flickr.classes.result.properties">
                 <title>Properties</title>
+
                 <table id="zend.service.flickr.classes.result.properties.table-1">
                     <title>Zend_Service_Flickr_Result Properties</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -207,117 +281,185 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                                 <entry>Description</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>id</entry>
                                 <entry>string</entry>
                                 <entry>Image ID</entry>
                             </row>
+
                             <row>
                                 <entry>owner</entry>
                                 <entry>string</entry>
                                 <entry>The photo owner's <acronym>NSID</acronym>.</entry>
                             </row>
+
                             <row>
                                 <entry>secret</entry>
                                 <entry>string</entry>
                                 <entry>A key used in url construction.</entry>
                             </row>
+
                             <row>
                                 <entry>server</entry>
                                 <entry>string</entry>
-                                <entry>The servername to use for <acronym>URL</acronym> construction.</entry>
+
+                                <entry>
+                                    The servername to use for <acronym>URL</acronym> construction.
+                                </entry>
                             </row>
+
                             <row>
                                 <entry>title</entry>
                                 <entry>string</entry>
                                 <entry>The photo's title.</entry>
                             </row>
+
                             <row>
                                 <entry>ispublic</entry>
                                 <entry>string</entry>
                                 <entry>The photo is public.</entry>
                             </row>
+
                             <row>
                                 <entry>isfriend</entry>
                                 <entry>string</entry>
-                                <entry>The photo is visible to you because you are a friend of the owner.</entry>
+
+                                <entry>
+                                    The photo is visible to you because you are a friend of the
+                                    owner.
+                                </entry>
                             </row>
+
                             <row>
                                 <entry>isfamily</entry>
                                 <entry>string</entry>
-                                <entry>The photo is visible to you because you are family of the owner.</entry>
+
+                                <entry>
+                                    The photo is visible to you because you are family of the owner.
+                                </entry>
                             </row>
+
                             <row>
                                 <entry>license</entry>
                                 <entry>string</entry>
                                 <entry>The license the photo is available under.</entry>
                             </row>
+
                             <row>
                                 <entry>dateupload</entry>
                                 <entry>string</entry>
                                 <entry>The date the photo was uploaded.</entry>
                             </row>
+
                             <row>
                                 <entry>datetaken</entry>
                                 <entry>string</entry>
                                 <entry>The date the photo was taken.</entry>
                             </row>
+
                             <row>
                                 <entry>ownername</entry>
                                 <entry>string</entry>
                                 <entry>The screenname of the owner.</entry>
                             </row>
+
                             <row>
                                 <entry>iconserver</entry>
                                 <entry>string</entry>
-                                <entry>The server used in assembling icon <acronym>URL</acronym>s.</entry>
+
+                                <entry>
+                                    The server used in assembling icon <acronym>URL</acronym>s.
+                                </entry>
                             </row>
+
                             <row>
                                 <entry>Square</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+
+                                <entry>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
+
                                 <entry>A 75x75 thumbnail of the image.</entry>
                             </row>
+
                             <row>
                                 <entry>Thumbnail</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+
+                                <entry>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
+
                                 <entry>A 100 pixel thumbnail of the image.</entry>
                             </row>
+
                             <row>
                                 <entry>Small</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+
+                                <entry>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
+
                                 <entry>A 240 pixel version of the image.</entry>
                             </row>
+
                             <row>
                                 <entry>Medium</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+
+                                <entry>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
+
                                 <entry>A 500 pixel version of the image.</entry>
                             </row>
+
                             <row>
                                 <entry>Large</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+
+                                <entry>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
+
                                 <entry>A 640 pixel version of the image.</entry>
                             </row>
+
                             <row>
                                 <entry>Original</entry>
-                                <entry><link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link></entry>
+
+                                <entry>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                </entry>
+
                                 <entry>The original image.</entry>
                             </row>
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.flickr.classes">Back to Class List</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.flickr.classes.image">
             <title>Zend_Service_Flickr_Image</title>
+
             <para>Represents an Image returned by a Flickr search.</para>
+
             <sect4 id="zend.service.flickr.classes.image.properties">
                 <title>Properties</title>
+
                 <table id="zend.service.flickr.classes.image.properties.table-1">
                     <title>Zend_Service_Flickr_Image Properties</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -326,22 +468,30 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                                 <entry>Description</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>uri</entry>
                                 <entry>string</entry>
                                 <entry>URI for the original image</entry>
                             </row>
+
                             <row>
                                 <entry>clickUri</entry>
                                 <entry>string</entry>
-                                <entry>Clickable <acronym>URI</acronym> (i.e. the Flickr page) for the image</entry>
+
+                                <entry>
+                                    Clickable <acronym>URI</acronym> (i.e. the Flickr page) for the
+                                    image
+                                </entry>
                             </row>
+
                             <row>
                                 <entry>width</entry>
                                 <entry>int</entry>
                                 <entry>Width of the Image</entry>
                             </row>
+
                             <row>
                                 <entry>height</entry>
                                 <entry>int</entry>
@@ -350,6 +500,7 @@ echo "<a href=\"$image->clickUri\">Click for Image</a>\n";
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.flickr.classes">Back to Class List</link>
                 </para>

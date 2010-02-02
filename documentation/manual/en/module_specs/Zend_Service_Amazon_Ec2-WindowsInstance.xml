@@ -16,6 +16,7 @@
                 Desktop instead of SSH.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Administrative Password—To access Windows instances the first time,
@@ -23,10 +24,11 @@
                 command.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                Simplified Bundling—To bundle a Windows instance, you use a single command
-                that shuts down the instance, saves it as an <acronym>AMI</acronym>, and restarts it.
+                Simplified Bundling—To bundle a Windows instance, you use a single command that
+                shuts down the instance, saves it as an <acronym>AMI</acronym>, and restarts it.
             </para>
         </listitem>
     </itemizedlist>
@@ -35,15 +37,18 @@
         As part of this service, Amazon EC2 instances can now run Microsoft Windows Server
         2003. Our base Windows image provides you with most of the common functionality associated
         with Windows. However, if you require more than two concurrent Windows users or need to
-        leverage applications that require <acronym>LDAP</acronym>, Kerberos, RADIUS, or other credential services,
-        you must use Windows with Authentication Services. For example, Microsoft Exchange Server
-        and Microsoft SharePoint Server require Windows with Authentication Services.
+        leverage applications that require <acronym>LDAP</acronym>, Kerberos, RADIUS, or other
+        credential services, you must use Windows with Authentication Services. For example,
+        Microsoft Exchange Server and Microsoft SharePoint Server require Windows with
+        Authentication Services.
     </para>
+
     <note>
         <para>
-            To get started using Windows instances, we recommend using the <acronym>AWS</acronym> Management Console.
-            There are differences in pricing between Windows and Windows with Authentication
-            Services instances. For information on pricing, go to the Amazon EC2 Product Page.
+            To get started using Windows instances, we recommend using the <acronym>AWS</acronym>
+            Management Console. There are differences in pricing between Windows and Windows with
+            Authentication Services instances. For information on pricing, go to the Amazon EC2
+            Product Page.
         </para>
     </note>
 
@@ -52,18 +57,10 @@
     </para>
 
     <itemizedlist>
-        <listitem>
-            <para>Windows Authenticated (32-bit)</para>
-        </listitem>
-        <listitem>
-            <para>Windows Authenticated (64-bit)</para>
-        </listitem>
-        <listitem>
-            <para>Windows Anonymous (32-bit)</para>
-        </listitem>
-        <listitem>
-            <para>Windows Anonymous (64-bit)</para>
-        </listitem>
+        <listitem><para>Windows Authenticated (32-bit)</para></listitem>
+        <listitem><para>Windows Authenticated (64-bit)</para></listitem>
+        <listitem><para>Windows Anonymous (32-bit)</para></listitem>
+        <listitem><para>Windows Anonymous (64-bit)</para></listitem>
     </itemizedlist>
 
     <para>
@@ -84,12 +81,14 @@
                 from this instance use the new password.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Configures the computer name to the internal DNS name. To
                 determine the internal DNS name, see Using Instance Addressing.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Sends the last three system and application errors from the
@@ -105,21 +104,27 @@
 
         <example id="zend.service.amazon.ec2.windows.instance.operations.bundle">
             <title>Bundles an Amazon EC2 instance running Windows</title>
+
             <para>
                 <methodname>bundle()</methodname> has three require paramters and one optional
             </para>
+
             <itemizedlist>
                 <listitem>
                      <para><emphasis>instanceId</emphasis> The instance you want to bundle</para>
                 </listitem>
+
                 <listitem>
                      <para><emphasis>s3Bucket</emphasis> Where you want the ami to live on S3</para>
                 </listitem>
+
                 <listitem>
                      <para>
-                        <emphasis>s3Prefix</emphasis> The prefix you want to assign to the <acronym>AMI</acronym> on S3
+                        <emphasis>s3Prefix</emphasis> The prefix you want to assign to the
+                        <acronym>AMI</acronym> on S3
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>uploadExpiration</emphasis> The expiration of the upload policy.
@@ -128,11 +133,13 @@
                     </para>
                 </listitem>
             </itemizedlist>
+
             <para>
                 <methodname>bundle()</methodname> returns a multi-demential array that contains
                 instanceId, bundleId, state, startTime, updateTime, progress
                 s3Bucket and s3Prefix.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
@@ -143,14 +150,17 @@ $return = $ec2_instance->bundle('instanceId', 's3Bucket', 's3Prefix');
 
         <example id="zend.service.amazon.ec2.windows.instance.operations.describe">
             <title>Describes current bundling tasks</title>
+
             <para>
                 <methodname>describeBundle()</methodname> Describes current bundling tasks
             </para>
+
             <para>
                 <methodname>describeBundle()</methodname> returns a multi-demential array that
                 contains instanceId, bundleId, state, startTime, updateTime, progress
                 s3Bucket and s3Prefix.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
@@ -160,20 +170,22 @@ $return = $ec2_instance->describeBundle('bundleId');
 
         <example id="zend.service.amazon.ec2.windows.instance.operations.cancel">
             <title>Cancels an Amazon EC2 bundling operation</title>
+
             <para>
                 <methodname>cancelBundle()</methodname> Cancels an Amazon EC2 bundling operation
             </para>
+
             <para>
                 <methodname>cancelBundle()</methodname> returns a multi-demential array that
                 contains instanceId, bundleId, state, startTime, updateTime, progress
                 s3Bucket and s3Prefix.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->cancelBundle('bundleId');
 ]]></programlisting>
-
         </example>
     </sect2>
 </sect1>

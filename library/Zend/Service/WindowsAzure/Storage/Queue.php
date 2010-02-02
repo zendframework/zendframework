@@ -505,7 +505,7 @@ class Zend_Service_WindowsAzure_Storage_Queue extends Zend_Service_WindowsAzure_
 	 */
     public static function isValidQueueName($queueName = '')
     {
-        if (!ereg("^[a-z0-9][a-z0-9-]*$", $queueName)) {
+        if (preg_match("^[a-z0-9][a-z0-9-]*$", $queueName) === 0) {
             return false;
         }
     

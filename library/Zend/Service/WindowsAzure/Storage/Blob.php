@@ -1343,7 +1343,7 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
             return true;
         }
             
-        if (!ereg("^[a-z0-9][a-z0-9-]*$", $containerName)) {
+        if (preg_match("^[a-z0-9][a-z0-9-]*$", $containerName) === 0) {
             return false;
         }
     

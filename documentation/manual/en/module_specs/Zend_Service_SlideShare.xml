@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.service.slideshare">
-    <title>Introduction</title>
+    <title>Zend_Service_SlideShare</title>
 
     <para>
         The <classname>Zend_Service_SlideShare</classname> component is used to interact with the

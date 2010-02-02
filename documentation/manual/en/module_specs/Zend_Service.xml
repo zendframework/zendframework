@@ -53,6 +53,24 @@
 
         <listitem>
             <para>
+                <link linkend="zend.service.livedocx">LiveDocx</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.nirvanix">Nirvanix</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.recaptcha">ReCaptcha</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
                 <link linkend="zend.service.simpy">Simpy</link>
             </para>
         </listitem>
@@ -66,6 +84,24 @@
         <listitem>
             <para>
                 <link linkend="zend.service.strikeiron">StrikeIron</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.technorati">Technorati</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.twitter">Twitter</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.windowsazure">Windows Azure</link>
             </para>
         </listitem>
 

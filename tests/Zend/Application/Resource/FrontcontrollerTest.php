@@ -312,7 +312,7 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
                   'stackindex' => 10),
             'Zend_Controller_Plugin_ActionStack',
             array('class' => 'Zend_Controller_Plugin_PutHandler',
-                  'stackindex' => 5),
+                  'stackIndex' => 5),
         );
 
         $expected = array(

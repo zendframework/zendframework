@@ -80,7 +80,7 @@
                 class names. The resource will instantiate each class (with no constructor
                 arguments) and then register the instance with the front controller. If you want to
                 register a plugin with a particular stack index, you need to provide an array with
-                two keys <property>class</property> and <property>index</property>.
+                two keys <property>class</property> and <property>stackIndex</property>.
             </para>
         </listitem>
 
@@ -117,7 +117,7 @@ resources.frontController.baseUrl = "/subdir"
 resources.frontController.plugins.foo = "My_Plugin_Foo"
 resources.frontController.plugins.bar = "My_Plugin_Bar"
 resources.frontController.plugins.baz.class = "My_Plugin_Baz"
-resources.frontController.plugins.baz.index = 123
+resources.frontController.plugins.baz.stackIndex = 123
 resources.frontController.env = APPLICATION_ENV
 ]]></programlisting>
     </example>

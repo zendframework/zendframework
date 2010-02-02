@@ -96,15 +96,17 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
                 case 'plugins':
                     foreach ((array) $value as $pluginClass) {
                     	$stackIndex = null;
-                    	if(is_array($pluginClass) && 
-                    	   isset($pluginClass['class']))
-                    	{
-                    		if(isset($pluginClass['stackindex'])) {
-                    			$stackIndex = $pluginClass['stackindex'];
-                    		}
+                    	if(is_array($pluginClass)) {
+                    	    $pluginClass = array_change_key_case($pluginClass, CASE_LOWER);
+                            if(isset($pluginClass['class']))
+                            {
+                                if(isset($pluginClass['stackindex'])) {
+                                    $stackIndex = $pluginClass['stackindex'];
+                                }
 
-                    		$pluginClass = $pluginClass['class'];
-                    	}
+                                $pluginClass = $pluginClass['class'];
+                            }
+                        }
 
                         $plugin = new $pluginClass();
                         $front->registerPlugin($plugin, $stackIndex);

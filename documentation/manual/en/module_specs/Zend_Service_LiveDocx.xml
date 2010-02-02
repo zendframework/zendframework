@@ -291,14 +291,12 @@
 
             <para>
                 <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.generation-diabasic.png"
-                    format="PNG" />
+                    fileref="figures/zend.service.livedocx.mailmerge.generation-diabasic_zoom.png"
+                    format="PNG" thumbnail="true" />
             </para>
 
             <para>
-                Data is inserted into template to create a document (<ulink
-                    url="figures/zend.service.livedocx.mailmerge.generation-diabasic_zoom.png">view
-                    larger</ulink>).
+                Data is inserted into template to create a document.
             </para>
 
             <para>
@@ -318,14 +316,12 @@
 
             <para>
                 <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.templates-msworddialog.png"
-                    format="PNG" />
+                    fileref="figures/zend.service.livedocx.mailmerge.templates-msworddialog_zoom.png"
+                    format="PNG" thumbnail="true" />
             </para>
 
             <para>
-                Microsoft Word 2007 Field dialog box (<ulink
-                    url="figures/zend.service.livedocx.mailmerge.templates-msworddialog_zoom.png">view
-                    larger</ulink>).
+                Microsoft Word 2007 Field dialog box.
             </para>
 
             <para>
@@ -336,14 +332,12 @@
 
             <para>
                 <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull.png"
-                    format="PNG" />
+                    fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull_zoom.png"
+                    format="PNG" thumbnail="true" />
             </para>
 
             <para>
-                Template in Microsoft Word 2007 (<ulink
-                    url="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull_zoom.png">view
-                    larger</ulink>).
+                Template in Microsoft Word 2007.
             </para>
 
             <para>
@@ -357,14 +351,12 @@
 
             <para>
                 <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped.png"
-                    format="PNG" />
+                    fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped_zoom.png"
+                    format="PNG" thumbnail="true" />
             </para>
 
             <para>
-                Cropped template in Microsoft Word 2007 (<ulink
-                    url="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped_zoom.png">view
-                    larger</ulink>).
+                Cropped template in Microsoft Word 2007.
             </para>
 
             <para>
@@ -401,15 +393,12 @@ file_put_contents('document.pdf', $document);
 
             <para>
                 <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.templates-msworddocument.png"
-                    format="PNG" />
+                    fileref="figures/zend.service.livedocx.mailmerge.templates-msworddocument_zoom.png"
+                    format="PNG" thumbnail="true" />
             </para>
 
             <para>
-                Resulting document as <acronym>PDF</acronym> in Document Viewer 2.26.1
-                (<ulink
-                    url="figures/zend.service.livedocx.mailmerge.templates-msworddocument_zoom.png">view
-                    larger</ulink>).
+                Resulting document as <acronym>PDF</acronym> in Document Viewer 2.26.1.
             </para>
         </sect3>
 
@@ -446,14 +435,8 @@ file_put_contents('document.pdf', $document);
 
             <para>
                 <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat.png"
-                    format="PNG" />
-            </para>
-
-            <para>
-                (<ulink
-                    url="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat_zoom.png">view
-                    larger</ulink>).
+                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat_zoom.png"
+                    format="PNG" thumbnail="true" />
             </para>
 
             <para>
@@ -485,14 +468,12 @@ blockEnd_block1
 
             <para>
                 <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate.png"
-                    format="PNG" />
+                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate_zoom.png"
+                    format="PNG" thumbnail="true" />
             </para>
 
             <para>
-                Template, illustrating blocks in Microsoft Word 2007 (<ulink
-                    url="figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate_zoom.png">view
-                    larger</ulink>).
+                Template, illustrating blocks in Microsoft Word 2007.
             </para>
 
             <para>
@@ -556,15 +537,12 @@ file_put_contents('document.pdf', $document);
 
             <para>
                 <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument.png"
-                    format="PNG" />
+                    fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument_zoom.png"
+                    format="PNG" thumbnail="true" />
             </para>
 
             <para>
-                Resulting document as <acronym>PDF</acronym> in Document Viewer 2.26.1
-                (<ulink
-                    url="figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument_zoom.png">view
-                    larger</ulink>).
+                Resulting document as <acronym>PDF</acronym> in Document Viewer 2.26.1.
             </para>
 
             <para>
@@ -650,26 +628,22 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
 
             <para>
                 <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1.png"
-                    format="PNG" />
+                    fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1_zoom.png"
+                    format="PNG" thumbnail="true" />
             </para>
 
             <para>
-                documentPage1.png (<ulink
-                    url="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1_zoom.png">view
-                    larger</ulink>).
+                documentPage1.png.
             </para>
 
             <para>
                 <inlinegraphic
-                    fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2.png"
-                    format="PNG" />
+                    fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2_zoom.png"
+                    format="PNG" thumbnail="true" />
             </para>
 
             <para>
-                documentPage2.png (<ulink
-                    url="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2_zoom.png">view
-                    larger</ulink>).
+                documentPage2.png.
             </para>
         </sect3>
 

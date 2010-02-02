@@ -62,8 +62,11 @@ class Application_Model_Guestbook
 
     public function setId($id);
     public function getId();
+}
 
-    public function save();
+class Application_Model_GuestbookMapper
+{
+    public function save(Application_Model_Guestbook $guestbook);
     public function find($id);
     public function fetchAll();
 }
@@ -78,7 +81,8 @@ class Application_Model_Guestbook
 
     <para>
         <methodname>find()</methodname> and <methodname>fetchAll()</methodname> provide the ability
-        to fetch a single entry or all entries.
+        to fetch a single entry or all entries, while <methodname>save()</methodname> takes care of
+        saving an entry to the data store.
     </para>
 
     <para>
@@ -88,23 +92,74 @@ class Application_Model_Guestbook
     <para>
         First we need to initialize our <classname>Db</classname> resource. As with the
         <classname>Layout</classname> and <classname>View</classname> resource, we can provide
-        configuration for the <classname>Db</classname> resource. In your
-        <filename>application/configs/application.ini</filename> file, add the following lines in
-        the appropriate sections.
+        configuration for the <classname>Db</classname> resource. We can do this with the
+        <command>zf configure db-adapter</command> command:
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf configure db-adapter \
+> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH % "/../data/db/guestbook.db"' \
+> -s production
+A db configuration for the production has been written to the application config file.
+
+% zf configure db-adapter \
+> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH % "/../data/db/guestbook-testing.db"' \
+> -s testing
+A db configuration for the production has been written to the application config file.
+
+% zf configure db-adapter \
+> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH % "/../data/db/guestbook-dev.db"' \
+> -s development
+A db configuration for the production has been written to the application config file.
+]]></programlisting>
+
+    <para>
+        Now edit your <filename>application/configs/application.ini</filename> file, where you'll
+        see the following lines were added in the appropriate sections.
     </para>
 
     <programlisting language="ini"><![CDATA[
 ; application/configs/application.ini
 
-; Add these lines to the appropriate sections:
 [production]
-resources.db.adapter       = "PDO_SQLITE"
+; ...
+resources.db.adapter = "PDO_SQLITE"
+resources.db.params.dbname = "APPLICATION_PATH "/../data/db/guestbook.db""
+
+[testing : production]
+; ...
+resources.db.adapter = "PDO_SQLITE"
+resources.db.params.dbname = "APPLICATION_PATH "/../data/db/guestbook-testing.db""
+
+[development : production]
+; ...
+resources.db.adapter = "PDO_SQLITE"
+resources.db.params.dbname = "APPLICATION_PATH "/../data/db/guestbook-dev.db""
+]]></programlisting>
+
+    <para>
+        If you look carefully, you'll notice a slight problem: the
+        <constant>APPLICATION_PATH</constant> constant is within quotes; this is due to limitations
+        of the INI format. Edit the file so that the lines look as follows (ensure you also remove
+        the extra quote at the end of the lines):
+    </para>
+
+    <programlisting language="ini"><![CDATA[
+; application/configs/application.ini
+
+[production]
+; ...
+resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
 
 [testing : production]
+; ...
+resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-testing.db"
 
 [development : production]
+; ...
+resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-dev.db"
 ]]></programlisting>
 
@@ -120,7 +175,9 @@ phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
+appnamespace = "Application"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 0
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 resources.view[] =
 resources.db.adapter = "PDO_SQLITE"
@@ -131,11 +188,13 @@ resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
 [testing : production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
+resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-testing.db"
 
 [development : production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
+resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-dev.db"
 ]]></programlisting>
 
@@ -339,9 +398,23 @@ Data Loaded.
         We'll use a <ulink url="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
             Gateway</ulink> to connect to our data source; <classname>Zend_Db_Table</classname>
         provides this functionality. To get started, lets create a
-        <classname>Zend_Db_Table</classname>-based table class. First, create the directory
-        <filename>application/models/DbTable/</filename>. Then create and edit a file
-        <filename>Guestbook.php</filename> within it, and add the following contents:
+        <classname>Zend_Db_Table</classname>-based table class. Just as we've done for layouts and
+        the database adapter, we can use the <command>zf</command> tool to assist, using the command
+        <command>create db-table</command>. This takes minimally two arguments, the name by which
+        you want to refer to the class, and the database table it maps to.
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf create db-table Guestbook guestbook
+Creating a DbTable at application/models/DbTable/Guestbook.php
+Updating project profile 'zfproject.xml'
+]]></programlisting>
+
+    <para>
+        Looking at your directory tree, you'll now see that a new directory,
+        <filename>application/models/DbTable/</filename>, was created, with the file
+        <filename>Guestbook.php</filename>. If you open that file, you'll see the following
+        contents:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -390,8 +463,18 @@ class Application_Model_GuestbookMapper
 
     <para>
         In addition to these methods, we'll add methods for setting and retrieving the Table Data
-        Gateway. The final class, located in
-        <filename>application/models/GuestbookMapper.php</filename>, looks like this:
+        Gateway. To create the initial class, use the <command>zf</command> CLI tool:
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf create model GuestbookMapper
+Creating a model at application/models/GuestbookMapper.php
+Updating project profile '.zfproject.xml'
+]]></programlisting>
+        
+    <para>
+        Now, edit the class <classname>Application_Model_GuestbookMapper</classname> found in
+        <filename>application/models/GuestbookMapper.php</filename> to read as follows:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -469,12 +552,21 @@ class Application_Model_GuestbookMapper
 ]]></programlisting>
 
     <para>
-        Now it's time to update our model class slightly, to accomodate the data mapper. Just like
-        the data mapper contains a reference to the data source, the model contains a reference to
-        the data mapper. Additionally, we'll make it easy to populate the model by passing an array
+        Now it's time to create our model class. We'll do so, once again, using the
+        <command>zf create model</command> command:
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf create model Guestbook
+Creating a model at application/models/Guestbook.php
+Updating project profile '.zfproject.xml'
+]]></programlisting>
+    
+    <para>
+        We'll modify this empty PHP class to make it easy to populate the model by passing an array
         of data either to the constructor or a <methodname>setOptions()</methodname> method. The
-        final model class, located in <filename>application/models/Guestbook.php</filename>, looks
-        like this:
+        final model class, located in <filename>application/models/Guestbook.php</filename>, should
+        look like this:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -486,7 +578,6 @@ class Application_Model_Guestbook
     protected $_created;
     protected $_email;
     protected $_id;
-    protected $_mapper;
 
     public function __construct(array $options = null)
     {
@@ -568,36 +659,6 @@ class Application_Model_Guestbook
     {
         return $this->_id;
     }
-
-    public function setMapper($mapper)
-    {
-        $this->_mapper = $mapper;
-        return $this;
-    }
-
-    public function getMapper()
-    {
-        if (null === $this->_mapper) {
-            $this->setMapper(new Application_Model_GuestbookMapper());
-        }
-        return $this->_mapper;
-    }
-
-    public function save()
-    {
-        $this->getMapper()->save($this);
-    }
-
-    public function find($id)
-    {
-        $this->getMapper()->find($id, $this);
-        return $this;
-    }
-
-    public function fetchAll()
-    {
-        return $this->getMapper()->fetchAll();
-    }
 }
 ]]></programlisting>
 
@@ -607,16 +668,19 @@ class Application_Model_Guestbook
     </para>
 
     <para>
-        To create a new controller, open a terminal or DOS console, navigate to your project
-        directory, and enter the following:
+        To create a new controller, use the <command>zf create controller</command> command:
     </para>
 
     <programlisting language="shell"><![CDATA[
-# Unix-like systems:
-% zf.sh create controller guestbook
-
-# DOS/Windows:
-C:> zf.bat create controller guestbook
+% zf create controller Guestbook
+Creating a controller at 
+    application/controllers/GuestbookController.php
+Creating an index action method in controller Guestbook
+Creating a view script for the index action method at 
+    application/views/scripts/guestbook/index.phtml
+Creating a controller test file at 
+    tests/application/controllers/GuestbookControllerTest.php
+Updating project profile '.zfproject.xml'
 ]]></programlisting>
 
     <para>
@@ -644,7 +708,7 @@ class GuestbookController extends Zend_Controller_Action
 {
     public function indexAction()
     {
-        $guestbook = new Application_Model_Guestbook();
+        $guestbook = new Application_Model_GuestbookMapper();
         $this->view->entries = $guestbook->fetchAll();
     }
 }

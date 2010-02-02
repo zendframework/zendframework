@@ -42,9 +42,23 @@
 
     <para>
         To get started using Zend_Layout, first we need to inform our bootstrap to use the
-        <classname>Layout</classname> resource. This can be done by adding the following line to
-        your <filename>application/configs/application.ini</filename> file, within the
-        <constant>production</constant> section:
+        <classname>Layout</classname> resource. This can be done using the
+        <command>zf enable layout</command> command:
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf enable layout
+Layouts have been enabled, and a default layout created at 
+application/layouts/scripts/layout.phtml
+A layout entry has been added to the application config file.
+]]></programlisting>
+
+
+    <para>
+        As noted by the command,
+        <filename>application/configs/application.ini</filename> is updated, and
+        now contains the following within the <constant>production</constant>
+        section:
     </para>
 
     <programlisting language="ini"><![CDATA[
@@ -68,7 +82,9 @@ phpSettings.display_errors = 0
 includePaths.library = APPLICATION_PATH "/../library"
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
+appnamespace = "Application"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 0
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 
 [staging : production]
@@ -84,7 +100,9 @@ phpSettings.display_errors = 1
 
     <para>
         This directive tells your application to look for layout view scripts in
-        <filename>application/layouts/scripts</filename>. Create those directories now.
+        <filename>application/layouts/scripts</filename>. If you examine your directory tree, you'll
+        see that this directory has been created for you now, with the file
+        <filename>layout.phtml</filename>.
     </para>
 
     <para>

@@ -8,10 +8,19 @@
     </para>
 
     <para>
-        Our first order of business is to create the actual form class. First, create the directory
-        <filename>application/forms/</filename>. This directory will contain form classes for the
-        application. Next, we'll create a form class in
-        <filename>application/forms/Guestbook.php</filename>:
+        Our first order of business is to create the actual form class. To create the empty form
+        class, execute:
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf create form Guestbook
+Creating a form at application/forms/Guestbook.php
+Updating project profile '.zfproject.xml'
+]]></programlisting>
+
+    <para>
+        This will create the directory <filename>application/forms/</filename> with the classfile
+        <filename>Guestbook.php</filename>. Open that file and update it so it reads as follows:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -81,16 +90,18 @@ class Application_Form_Guestbook extends Zend_Form
     </para>
 
     <programlisting language="shell"><![CDATA[
-# Unix-like systems:
-% zf.sh create action sign guestbook
-
-# DOS/Windows:
-C:> zf.bat create action sign guestbook
+% zf create action sign Guestbook
+Creating an action named sign inside controller 
+    at application/controllers/GuestbookController.php
+Updating project profile '.zfproject.xml'
+Creating a view script for the sign action method 
+    at application/views/scripts/guestbook/sign.phtml
+Updating project profile '.zfproject.xml'
 ]]></programlisting>
 
     <para>
-        This will create a <methodname>signAction()</methodname> method in our controller, as well
-        as the appropriate view script.
+        As you can see from the output, this will create a <methodname>signAction()</methodname>
+        method in our controller, as well as the appropriate view script.
     </para>
 
     <para>
@@ -115,8 +126,9 @@ class GuestbookController extends Zend_Controller_Action
 
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
-                $model = new Application_Model_Guestbook($form->getValues());
-                $model->save();
+                $comment = new Application_Model_Guestbook($form->getValues());
+                $mapper  = new Application_Model_GuestbookMapper();
+                $mapper->save($comment);
                 return $this->_helper->redirector('index');
             }
         }

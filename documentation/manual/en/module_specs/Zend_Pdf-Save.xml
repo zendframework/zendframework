@@ -25,6 +25,7 @@
 
     <example id="zend.pdf.save.example-1">
         <title>Saving PDF Documents</title>
+
         <programlisting language="php"><![CDATA[
 ...
 // Load the PDF document
@@ -41,7 +42,6 @@ $pdfString = $pdf->render();
 ...
 ]]></programlisting>
     </example>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

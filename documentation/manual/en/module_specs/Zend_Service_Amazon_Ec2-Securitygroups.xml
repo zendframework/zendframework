@@ -9,13 +9,16 @@
          be delivered to your instance. All other ingress traffic will be
          discarded.
     </para>
+
     <para>
         You can modify rules for a group at any time. The new rules are
         automatically enforced for all running instances and instances
         launched in the future.
     </para>
+
     <note>
         <title>Maximum Security Groups</title>
+
         <para>You can create up to 100 security groups.</para>
     </note>
 
@@ -24,6 +27,7 @@
 
         <example id="zend.service.amazon.ec2.securitygroups.maintenance.create">
             <title>Create a new Security Group</title>
+
             <para>
                 <code>create</code> a new security group. Every instance is
                 launched in a security group. If no security group is specified
@@ -47,15 +51,18 @@ $return = $ec2_sg->create('mygroup', 'my group description');
 
         <example id="zend.service.amazon.ec2.securitygroups.maintenance.describe">
             <title>Describe a Security Group</title>
+
             <para>
                 <code>describe</code> returns information about security groups that
                 you own.
             </para>
+
             <para>
                 If you specify security group names, information about those security
                 groups is returned. Otherwise, information for all security groups is
                 returned. If you specify a group that does not exist, a fault is returned.
             </para>
+
             <para>
                 <code>describe</code> will return an array containing information
                 about security groups which includes the ownerId, groupName,
@@ -72,6 +79,7 @@ $return = $ec2_sg->describe('mygroup');
 
         <example id="zend.service.amazon.ec2.securitygroups.maintenance.delete">
             <title>Delete a Security Group</title>
+
             <para>
                 <code>delete</code> will remove the security group. If you attempt to
                 delete a security group that contains instances, a fault is returned.
@@ -99,10 +107,12 @@ $return = $ec2_sg->delete('mygroup');
 
         <example id="zend.service.amazon.ec2.securitygroups.authorize.ip">
             <title>Authorizing by IP</title>
+
             <para>
                 <code>authorizeIp</code> Adds permissions to a security group based on
                 an IP address, protocol type and port range.
             </para>
+
             <para>
                 Permissions are specified by the IP protocol (TCP, UDP or ICMP), the
                 source of the request (by IP range or an Amazon EC2 user-group pair),
@@ -110,6 +120,7 @@ $return = $ec2_sg->delete('mygroup');
                 ICMP codes and types (for ICMP). When authorizing ICMP, -1 can be used
                 as a wildcard in the type and code fields.
             </para>
+
             <para>
                 Permission changes are propagated to instances within the security group
                 as quickly as possible. However, depending on the number of instances, a
@@ -134,9 +145,11 @@ $return = $ec2_sg->authorizeIp('mygroup',
 
         <example id="zend.service.amazon.ec2.securitygroups.authorize.group">
             <title>Authorize By Group</title>
+
             <para>
                 <code>authorizeGroup</code> Adds permissions to a security group.
             </para>
+
             <para>
                 Permission changes are propagated to instances within the security group
                 as quickly as possible. However, depending on the number of instances, a
@@ -161,11 +174,13 @@ $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
 
         <example id="zend.service.amazon.ec2.securitygroups.revoke.ip">
             <title>Revoke by IP</title>
+
             <para>
                 <code>revokeIp</code> Revokes permissions to a security group based on
                 an IP address, protocol type and port range. The permissions used to revoke
                 must be specified using the same values used to grant the permissions.
             </para>
+
             <para>
                 Permissions are specified by the IP protocol (TCP, UDP or ICMP), the
                 source of the request (by IP range or an Amazon EC2 user-group pair),
@@ -173,6 +188,7 @@ $return = $ec2_sg->authorizeGroup('mygroup', 'securityGroupName', 'ownerId');
                 ICMP codes and types (for ICMP). When authorizing ICMP, -1 can be used
                 as a wildcard in the type and code fields.
             </para>
+
             <para>
                 Permission changes are propagated to instances within the security group
                 as quickly as possible. However, depending on the number of instances, a
@@ -197,11 +213,13 @@ $return = $ec2_sg->revokeIp('mygroup',
 
         <example id="zend.service.amazon.ec2.securitygroups.revoke.group">
             <title>Revoke By Group</title>
+
             <para>
                 <code>revokeGroup</code> Adds permissions to a security group. The permissions
                 to revoke must be specified using the same values used to grant the
                 permissions.
             </para>
+
             <para>
                 Permission changes are propagated to instances within the security group
                 as quickly as possible. However, depending on the number of instances, a

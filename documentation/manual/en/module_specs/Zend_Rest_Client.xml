@@ -2,8 +2,10 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.client">
     <title>Zend_Rest_Client</title>
+
     <sect2 id="zend.rest.client.introduction">
         <title>Introduction</title>
+
         <para>
             Using the <classname>Zend_Rest_Client</classname> is very similar to using
             <code>SoapClient</code> objects (<ulink
@@ -28,13 +30,14 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Hello Davey, Good Day"
 
         <note>
             <title>Differences in calling</title>
+
             <para>
                 <classname>Zend_Rest_Client</classname> attempts to make remote methods
                 look as much like native methods as possible, the only
                 difference being that you must follow the method call with one
                 of either <methodname>get()</methodname>, <methodname>post()</methodname>,
-                <methodname>put()</methodname> or <methodname>delete()</methodname>. This call may be
-                made via method chaining or in separate method calls:
+                <methodname>put()</methodname> or <methodname>delete()</methodname>. This call may
+                be made via method chaining or in separate method calls:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -62,6 +65,7 @@ echo $client->get();
 
         <example id="zend.rest.client.return.example-1">
             <title>Response Status</title>
+
             <programlisting language="php"><![CDATA[
 $result = $client->sayHello('Davey', 'Day')->get();
 
@@ -105,6 +109,7 @@ echo $result->firstname() .' '. $result->lastname();
 
         <example id="zend.rest.client.return.example-3">
             <title>Example Technorati Response</title>
+
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generator="Technorati API version 1.0 /bloginfo" -->
@@ -215,7 +220,6 @@ $client->arg('value1')->arg2('value2')->get();
         </warning>
     </sect2>
 </sect1>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

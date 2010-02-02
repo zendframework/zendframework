@@ -2,23 +2,28 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.create">
     <title>Creating and Loading PDF Documents</title>
+
     <para>
-    The <classname>Zend_Pdf</classname> class represents <acronym>PDF</acronym> documents and provides document-level
-    operations.
+        The <classname>Zend_Pdf</classname> class represents <acronym>PDF</acronym> documents and
+        provides document-level operations.
     </para>
 
     <para>
-    To create a new document, a new <classname>Zend_Pdf</classname> object should first be created.
+        To create a new document, a new <classname>Zend_Pdf</classname> object should first be
+        created.
     </para>
 
     <para>
-    <classname>Zend_Pdf</classname> class also provides two static methods to load an existing <acronym>PDF</acronym> document.
-    These are the <methodname>Zend_Pdf::load()</methodname> and <methodname>Zend_Pdf::parse()</methodname> methods.
-    Both of them return <classname>Zend_Pdf</classname> objects as a result or throw an exception if an error occurs.
+        <classname>Zend_Pdf</classname> class also provides two static methods to load an existing
+        <acronym>PDF</acronym> document. These are the <methodname>Zend_Pdf::load()</methodname> and
+        <methodname>Zend_Pdf::parse()</methodname> methods. Both of them return
+        <classname>Zend_Pdf</classname> objects as a result or throw an exception if an error
+        occurs.
     </para>
 
     <example id="zend.pdf.create.example-1">
         <title>Create new or load existing PDF document</title>
+
         <programlisting language="php"><![CDATA[
 ...
 // Create a new PDF document
@@ -34,24 +39,29 @@ $pdf3 = Zend_Pdf::parse($pdfString);
     </example>
 
     <para>
-    The <acronym>PDF</acronym> file format supports incremental document update. Thus each time a document
-    is updated, then a new revision of the document is created.
-    <classname>Zend_Pdf</classname> component supports the retrieval of a specified revision.
+        The <acronym>PDF</acronym> file format supports incremental document update. Thus each time
+        a document is updated, then a new revision of the document is created.
+        <classname>Zend_Pdf</classname> component supports the retrieval of a specified revision.
     </para>
+
     <para>
-    A revision can be specified as a second parameter to the <methodname>Zend_Pdf::load()</methodname> and
-    <methodname>Zend_Pdf::parse()</methodname> methods or requested by calling the <methodname>Zend_Pdf::rollback()</methodname> method.
+        A revision can be specified as a second parameter to the
+        <methodname>Zend_Pdf::load()</methodname> and <methodname>Zend_Pdf::parse()</methodname>
+        methods or requested by calling the <methodname>Zend_Pdf::rollback()</methodname> method.
+
         <footnote>
             <para>
-            <methodname>Zend_Pdf::rollback()</methodname> method must be invoked before any changes are applied to the document,
-            otherwise the behavior is not defined.
+                <methodname>Zend_Pdf::rollback()</methodname> method must be invoked before any
+                changes are applied to the document, otherwise the behavior is not defined.
             </para>
         </footnote>
-    call.
+
+        call.
     </para>
 
     <example id="zend.pdf.create.example-2">
         <title>Requesting Specific Revisions of a PDF Document</title>
+
         <programlisting language="php"><![CDATA[
 ...
 // Load the previous revision of the PDF document
@@ -67,7 +77,6 @@ $pdf3->rollback($revisions - 1);
 ...
 ]]></programlisting>
     </example>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

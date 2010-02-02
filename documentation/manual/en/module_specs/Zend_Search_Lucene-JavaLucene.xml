@@ -5,15 +5,21 @@
 
     <sect2 id="zend.search.lucene.index-creation.file-formats">
         <title>File Formats</title>
+
         <para>
-          <classname>Zend_Search_Lucene</classname> index file formats are binary compatible with Java Lucene
-          version 1.4 and greater.
+            <classname>Zend_Search_Lucene</classname> index file formats are binary compatible with
+            Java Lucene version 1.4 and greater.
         </para>
 
         <para>
-          A detailed description of this format is available here:
-          <ulink url="http://lucene.apache.org/java/2_3_0/fileformats.html"/>
-          <footnote><para>The currently supported Lucene index file format version is 2.3 (starting from Zend Framework 1.6).</para></footnote>.
+            A detailed description of this format is available here:
+            <ulink url="http://lucene.apache.org/java/2_3_0/fileformats.html"/>
+            <footnote>
+                <para>
+                    The currently supported Lucene index file format version is 2.3 (starting from
+                    Zend Framework 1.6).
+                </para>
+            </footnote>.
         </para>
     </sect2>
 
@@ -21,25 +27,27 @@
         <title>Index Directory</title>
 
         <para>
-        After index creation, the index directory will contain several files:
+            After index creation, the index directory will contain several files:
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                The <filename>segments</filename> file is a list of index segments.
+                    The <filename>segments</filename> file is a list of index segments.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                The <filename>*.cfs</filename> files contain index segments.
-                Note! An optimized index always has only one segment.
+                    The <filename>*.cfs</filename> files contain index segments.
+                    Note! An optimized index always has only one segment.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                The <filename>deletable</filename> file is a list of files that are no longer used
-                by the index, but which could not be deleted.
+                    The <filename>deletable</filename> file is a list of files that are no longer
+                    used by the index, but which could not be deleted.
                 </para>
             </listitem>
         </itemizedlist>
@@ -47,6 +55,7 @@
 
     <sect2 id="zend.search.lucene.java-lucene.source-code">
         <title>Java Source Code</title>
+
         <para>
             The Java program listing below provides an example of how to index a file
             using Java Lucene:
@@ -83,7 +92,6 @@ indexWriter.addDocument(doc);
 ]]></programlisting>
     </sect2>
 </sect1>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

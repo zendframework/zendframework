@@ -5,24 +5,25 @@
 
     <sect2 id="zend.search.lucene.extending.analysis">
         <title>Text Analysis</title>
+
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> class is used by the indexer to tokenize document
-            text fields.
+            The <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> class is used by the
+            indexer to tokenize document text fields.
         </para>
 
         <para>
-            The <methodname>Zend_Search_Lucene_Analysis_Analyzer::getDefault()</methodname> and <code>
-            Zend_Search_Lucene_Analysis_Analyzer::setDefault()</code> methods are used
+            The <methodname>Zend_Search_Lucene_Analysis_Analyzer::getDefault()</methodname> and
+            <code>Zend_Search_Lucene_Analysis_Analyzer::setDefault()</code> methods are used
             to get and set the default analyzer.
         </para>
 
         <para>
             You can assign your own text analyzer or choose it from the set of predefined analyzers:
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text</classname> and
-            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname> (default).
-            Both of them interpret tokens as sequences of letters.
-            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname> converts all tokens
-            to lower case.
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
+            (default). Both of them interpret tokens as sequences of letters.
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
+            converts all tokens to lower case.
         </para>
 
         <para>
@@ -37,15 +38,17 @@ $index->addDocument($doc);
 ]]></programlisting>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> class is designed to be an ancestor of all user
-            defined analyzers. User should only define the <methodname>reset()</methodname> and <methodname>nextToken()</methodname> methods,
-            which takes its string from the $_input member and returns tokens one by one
-            (a <constant>NULL</constant> value indicates the end of the stream).
+            The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> class is designed
+            to be an ancestor of all user defined analyzers. User should only define the
+            <methodname>reset()</methodname> and <methodname>nextToken()</methodname> methods, which
+            takes its string from the $_input member and returns tokens one by one (a
+            <constant>NULL</constant> value indicates the end of the stream).
         </para>
 
         <para>
-            The <methodname>nextToken()</methodname> method should call the <methodname>normalize()</methodname> method on each
-            token. This will allow you to use token filters with your analyzer.
+            The <methodname>nextToken()</methodname> method should call the
+            <methodname>normalize()</methodname> method on each token. This will allow you to use
+            token filters with your analyzer.
         </para>
 
         <para>
@@ -53,6 +56,7 @@ $index->addDocument($doc);
 
             <example id="zend.search.lucene.extending.analysis.example-1">
                 <title>Custom text Analyzer</title>
+
                 <programlisting language="php"><![CDATA[
 /**
  * Here is a custom text analyser, which treats words with digits as
@@ -131,34 +135,39 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
     <sect2 id="zend.search.lucene.extending.filters">
         <title>Tokens Filtering</title>
+
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> analyzer also offers a token filtering
-            mechanism.
+            The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> analyzer also
+            offers a token filtering mechanism.
         </para>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_TokenFilter</classname> class provides an abstract interface for such filters.
-            Your own filters should extend this class either directly or indirectly.
+            The <classname>Zend_Search_Lucene_Analysis_TokenFilter</classname> class provides an
+            abstract interface for such filters. Your own filters should extend this class either
+            directly or indirectly.
         </para>
 
         <para>
-            Any custom filter must implement the <methodname>normalize()</methodname> method which may transform input token or signal that
-            the current token should be skipped.
+            Any custom filter must implement the <methodname>normalize()</methodname> method which
+            may transform input token or signal that the current token should be skipped.
         </para>
 
         <para>
             There are three filters already defined in the analysis subpackage:
+
             <itemizedlist>
                 <listitem>
                     <para>
                         <classname>Zend_Search_Lucene_Analysis_TokenFilter_LowerCase</classname>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <classname>Zend_Search_Lucene_Analysis_TokenFilter_ShortWords</classname>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname>
@@ -169,13 +178,14 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
         <para>
             The <code>LowerCase</code> filter is already used for
-            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname> analyzer
-            by default.
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
+            analyzer by default.
         </para>
 
         <para>
-            The <code>ShortWords</code> and <code>StopWords</code> filters may be used with pre-defined or custom
-            analyzers like this:
+            The <code>ShortWords</code> and <code>StopWords</code> filters may be used with
+            pre-defined or custom analyzers like this:
+
             <programlisting language="php"><![CDATA[
 $stopWords = array('a', 'an', 'at', 'the', 'and', 'or', 'is', 'am');
 $stopWordsFilter =
@@ -199,8 +209,9 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> constructor takes an array of stop-words
-            as an input. But stop-words may be also loaded from a file:
+            The <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> constructor
+            takes an array of stop-words as an input. But stop-words may be also loaded from a file:
+
             <programlisting language="php"><![CDATA[
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords();
 $stopWordsFilter->loadFromFile($my_stopwords_file);
@@ -211,34 +222,39 @@ $analyzer->addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
-            This file should be a common text file with one word in each line. The '#' character marks a line as a comment.
+
+            This file should be a common text file with one word in each line. The '#' character
+            marks a line as a comment.
         </para>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_TokenFilter_ShortWords</classname> constructor has one optional argument.
-            This is the word length limit, set by default to 2.
+            The <classname>Zend_Search_Lucene_Analysis_TokenFilter_ShortWords</classname>
+            constructor has one optional argument. This is the word length limit, set by default to
+            2.
         </para>
-
     </sect2>
 
     <sect2 id="zend.search.lucene.extending.scoring">
         <title>Scoring Algorithms</title>
+
         <para>
             The score of a document <literal>d</literal> for a query <literal>q</literal>
             is defined as follows:
         </para>
 
         <para>
-            <code>score(q,d) = sum( tf(t in d) * idf(t) * getBoost(t.field in d) * lengthNorm(t.field in d) ) *
-            coord(q,d) * queryNorm(q)</code>
+            <code>score(q,d) = sum( tf(t in d) * idf(t) * getBoost(t.field in d) *
+                lengthNorm(t.field in d) ) * coord(q,d) * queryNorm(q)</code>
         </para>
 
         <para>
-            tf(t in d) - <methodname>Zend_Search_Lucene_Search_Similarity::tf($freq)</methodname> - a score factor based on the frequency of a term or phrase in a document.
+            tf(t in d) - <methodname>Zend_Search_Lucene_Search_Similarity::tf($freq)</methodname> -
+            a score factor based on the frequency of a term or phrase in a document.
         </para>
 
         <para>
-            idf(t) - <methodname>Zend_Search_Lucene_Search_Similarity::idf($input, $reader)</methodname> - a score factor for a simple term with the specified index.
+            idf(t) - <methodname>Zend_Search_Lucene_Search_Similarity::idf($input,
+                $reader)</methodname> - a score factor for a simple term with the specified index.
         </para>
 
         <para>
@@ -251,14 +267,17 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             These values, together with field boosts, are stored in an index and multiplied
             into scores for hits on each field by the search code.
         </para>
+
         <para>
-            Matches in longer fields are less precise, so implementations of this method
-            usually return smaller values when numTokens is large, and larger values when numTokens is small.
+            Matches in longer fields are less precise, so implementations of this method usually
+            return smaller values when numTokens is large, and larger values when numTokens is
+            small.
         </para>
 
         <para>
-            coord(q,d) - <methodname>Zend_Search_Lucene_Search_Similarity::coord($overlap, $maxOverlap)</methodname> - a
-            score factor based on the fraction of all query terms that a document contains.
+            coord(q,d) - <methodname>Zend_Search_Lucene_Search_Similarity::coord($overlap,
+                $maxOverlap)</methodname> - a score factor based on the fraction of all query terms
+            that a document contains.
         </para>
 
         <para>
@@ -280,9 +299,11 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            The scoring algorithm can be customized by defining your own Similarity class. To do this
-            extend the <classname>Zend_Search_Lucene_Search_Similarity</classname> class as defined below, then use
-            the <classname>Zend_Search_Lucene_Search_Similarity::setDefault($similarity);</classname> method to set it as default.
+            The scoring algorithm can be customized by defining your own Similarity class. To do
+            this extend the <classname>Zend_Search_Lucene_Search_Similarity</classname> class as
+            defined below, then use the
+            <classname>Zend_Search_Lucene_Search_Similarity::setDefault($similarity);</classname>
+            method to set it as default.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -323,35 +344,38 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 
     <sect2 id="zend.search.lucene.extending.storage">
         <title>Storage Containers</title>
+
         <para>
-        The abstract class <classname>Zend_Search_Lucene_Storage_Directory</classname> defines directory functionality.
+            The abstract class <classname>Zend_Search_Lucene_Storage_Directory</classname> defines
+            directory functionality.
         </para>
 
         <para>
-        The <classname>Zend_Search_Lucene</classname> constructor uses either a string or a
-        <classname>Zend_Search_Lucene_Storage_Directory</classname> object
-        as an input.
+            The <classname>Zend_Search_Lucene</classname> constructor uses either a string or a
+            <classname>Zend_Search_Lucene_Storage_Directory</classname> object as an input.
         </para>
 
         <para>
-        The <classname>Zend_Search_Lucene_Storage_Directory_Filesystem</classname> class implements directory
-        functionality for a file system.
+            The <classname>Zend_Search_Lucene_Storage_Directory_Filesystem</classname> class
+            implements directory functionality for a file system.
         </para>
 
         <para>
-        If a string is used as an input for the <classname>Zend_Search_Lucene</classname> constructor, then the index
-        reader (<classname>Zend_Search_Lucene</classname> object) treats it as a file system path and instantiates
-        the <classname>Zend_Search_Lucene_Storage_Directory_Filesystem</classname> object.
+            If a string is used as an input for the <classname>Zend_Search_Lucene</classname>
+            constructor, then the index reader (<classname>Zend_Search_Lucene</classname> object)
+            treats it as a file system path and instantiates the
+            <classname>Zend_Search_Lucene_Storage_Directory_Filesystem</classname> object.
         </para>
 
         <para>
-        You can define your own directory implementation by extending the
-        <classname>Zend_Search_Lucene_Storage_Directory</classname> class.
+            You can define your own directory implementation by extending the
+            <classname>Zend_Search_Lucene_Storage_Directory</classname> class.
         </para>
 
         <para>
-        <classname>Zend_Search_Lucene_Storage_Directory</classname> methods:
+            <classname>Zend_Search_Lucene_Storage_Directory</classname> methods:
         </para>
+
         <programlisting language="php"><![CDATA[
 abstract class Zend_Search_Lucene_Storage_Directory {
 /**
@@ -431,20 +455,26 @@ abstract function getFileObject($filename);
 ]]></programlisting>
 
         <para>
-        The <methodname>getFileObject($filename)</methodname> method of a <classname>Zend_Search_Lucene_Storage_Directory</classname>
-        instance returns a <classname>Zend_Search_Lucene_Storage_File</classname> object.
+            The <methodname>getFileObject($filename)</methodname> method of a
+            <classname>Zend_Search_Lucene_Storage_Directory</classname> instance returns a
+            <classname>Zend_Search_Lucene_Storage_File</classname> object.
         </para>
+
         <para>
-        The <classname>Zend_Search_Lucene_Storage_File</classname> abstract class implements file abstraction and index
-        file reading primitives.
+            The <classname>Zend_Search_Lucene_Storage_File</classname> abstract class implements
+            file abstraction and index file reading primitives.
         </para>
+
         <para>
-        You must also extend <classname>Zend_Search_Lucene_Storage_File</classname> for your directory implementation.
+            You must also extend <classname>Zend_Search_Lucene_Storage_File</classname> for your
+            directory implementation.
         </para>
+
         <para>
-        Only two methods of <classname>Zend_Search_Lucene_Storage_File</classname> must be overridden in your
-        implementation:
+            Only two methods of <classname>Zend_Search_Lucene_Storage_File</classname> must be
+            overridden in your implementation:
         </para>
+
         <programlisting language="php"><![CDATA[
 class MyFile extends Zend_Search_Lucene_Storage_File {
     /**
@@ -478,10 +508,8 @@ class MyFile extends Zend_Search_Lucene_Storage_File {
     }
 }
 ]]></programlisting>
-
     </sect2>
 </sect1>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

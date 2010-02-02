@@ -3,65 +3,79 @@
 <sect1 id="zend.pdf.introduction">
     <!-- @todo review and revise upon completion of refactoring -->
     <title>Introduction</title>
-    <para>
-    The <classname>Zend_Pdf</classname> component is a <acronym>PDF</acronym> (Portable Document Format) manipulation engine.
-    It can load, create, modify and save documents.
-    Thus it can help any <acronym>PHP</acronym> application dynamically create <acronym>PDF</acronym> documents by modifying existing documents or generating new ones from scratch.
 
-    <classname>Zend_Pdf</classname> offers the following features:
-    <itemizedlist>
-        <listitem>
-            <para>
-            Create a new document or load existing one.
-            <footnote>
+    <para>
+        The <classname>Zend_Pdf</classname> component is a <acronym>PDF</acronym> (Portable Document
+        Format) manipulation engine. It can load, create, modify and save documents. Thus it can
+        help any <acronym>PHP</acronym> application dynamically create <acronym>PDF</acronym>
+        documents by modifying existing documents or generating new ones from scratch.
+        <classname>Zend_Pdf</classname> offers the following features:
+
+        <itemizedlist>
+            <listitem>
                 <para>
-                Loading <acronym>PDF</acronym> V1.4 (Acrobat 5) documents is now supported.
+                    Create a new document or load existing one.
+
+                    <footnote>
+                        <para>
+                            Loading <acronym>PDF</acronym> V1.4 (Acrobat 5) documents is now
+                            supported.
+                        </para>
+                    </footnote>
                 </para>
-            </footnote>
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Retrieve a specified revision of the document.
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Manipulate pages within a document. Change page order, add new pages, remove pages
-            from a document.
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Different drawing primitives (lines, rectangles, polygons, circles, ellipses and sectors).
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Text drawing using any of the 14 standard (built-in) fonts or your own custom TrueType fonts.
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Rotations.
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Image drawing.
-            <footnote>
+            </listitem>
+
+            <listitem>
                 <para>
-                JPG, PNG [Up to 8bit per channel+Alpha] and TIFF images are supported.
+                    Retrieve a specified revision of the document.
                 </para>
-            </footnote>
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-            Incremental <acronym>PDF</acronym> file update.
-            </para>
-        </listitem>
-    </itemizedlist>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Manipulate pages within a document. Change page order, add new pages, remove
+                    pages from a document.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Different drawing primitives (lines, rectangles, polygons, circles, ellipses and
+                    sectors).
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Text drawing using any of the 14 standard (built-in) fonts or your own custom
+                    TrueType fonts.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Rotations.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Image drawing.
+
+                    <footnote>
+                        <para>
+                            JPG, PNG [Up to 8bit per channel+Alpha] and TIFF images are supported.
+                        </para>
+                    </footnote>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Incremental <acronym>PDF</acronym> file update.
+                </para>
+            </listitem>
+        </itemizedlist>
     </para>
 </sect1>
 <!--

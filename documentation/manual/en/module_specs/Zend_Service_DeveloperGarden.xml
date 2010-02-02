@@ -22,7 +22,8 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.baseuserservice">BaseUserService</link>:
+                    <link
+                        linkend="zend.service.developergarden.baseuserservice">BaseUserService</link>:
                     Class to manage API quota and user accounting details.
                 </para>
             </listitem>
@@ -38,7 +39,8 @@
             <listitem>
                 <para>
                     <link linkend="zend.service.developergarden.localsearch">LocalSearch</link>:
-                    Allows you to search with options nearby or around a given geo coordinate or city.
+                    Allows you to search with options nearby or around a given geo coordinate or
+                    city.
                 </para>
             </listitem>
 
@@ -65,7 +67,8 @@
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.conferencecall">ConferenceCall</link>:
+                    <link
+                        linkend="zend.service.developergarden.conferencecall">ConferenceCall</link>:
                     You can configure a whole conference room with participants for an adhoc
                     conference or you can also schedule your conference.
                 </para>
@@ -267,7 +270,8 @@ echo 'Quota Level: ', $result->getQuotaLevel(), '<br />';
                 environment.
             </para>
 
-            <example id="zend.service.developergarden.baseuserservice.changequotainformation.example">
+            <example
+                id="zend.service.developergarden.baseuserservice.changequotainformation.example">
                 <title>Change quota information example</title>
 
                 <programlisting language="php"><![CDATA[
@@ -662,8 +666,8 @@ $service->tearDownCall($sessionId);
 
             <listitem>
                 <para>
-                    <methodname>commitConference()</methodname> saves the conference, and, if no date
-                    is configured, immediately starts the conference
+                    <methodname>commitConference()</methodname> saves the conference, and, if no
+                    date is configured, immediately starts the conference
                 </para>
             </listitem>
 
@@ -750,7 +754,8 @@ $service->tearDownCall($sessionId);
 
             <listitem>
                 <para>
-                    <methodname>removeConferenceTemplate()</methodname> removes a conference template
+                    <methodname>removeConferenceTemplate()</methodname> removes a conference
+                    template
                 </para>
             </listitem>
 

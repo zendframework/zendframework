@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.jspush">
     <title>Zend_ProgressBar_Adapter_JsPush</title>
+
     <para>
         <classname>Zend_ProgressBar_Adapter_JsPush</classname> is an adapter which let's
         you update a progressbar in a browser via Javascript Push. This means
@@ -9,11 +10,13 @@
         running process, but that the process itself sends its status directly
         to the browser.
     </para>
+
     <para>
         You can set the adapter options either via the <code>set*</code> methods
         or give an array or a <classname>Zend_Config</classname> instance with options as first
         parameter to the constructor. The available options are:
     </para>
+
     <itemizedlist>
         <listitem>
             <para>
@@ -22,6 +25,7 @@
                 <classname>Zend_ProgressBar_Update</classname>.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>finishMethodName</code>: The javascript method which
@@ -30,6 +34,7 @@
             </para>
         </listitem>
     </itemizedlist>
+
     <para>
         The usage of this adapter is quite simple. First you create a progressbar
         in your browser, either with JavaScript or previously created with plain
@@ -40,45 +45,53 @@
         running, the adapter will call the update method on every update with
         a json object, containing the following parameters:
     </para>
+
     <itemizedlist>
         <listitem>
             <para>
                 <code>current</code>: The current absolute value
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>max</code>: The max absolute value
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>percent</code>: The calculated percentage
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>timeTaken</code>: The time how long the process ran yet
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <code>timeRemaining</code>: The expected time for the process to
-                finish
+                <code>timeRemaining</code>: The expected time for the process to finish
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>text</code>: The optional status message, if given
             </para>
         </listitem>
     </itemizedlist>
+
     <example id="zend.progressbar-adapter.jspush.example">
         <title>Basic example for the client-side stuff</title>
+
         <para>
             This example illustrates a basic setup of HTML, <acronym>CSS</acronym> and JavaScript
             for the JsPush adapter
         </para>
+
         <programlisting language="html"><![CDATA[
 <div id="zend-progressbar-container">
     <div id="zend-progressbar-done"></div>
@@ -86,6 +99,7 @@
 
 <iframe src="long-running-process.php" id="long-running-process"></iframe>
 ]]></programlisting>
+
         <programlisting language="css"><![CDATA[
 #long-running-process {
     position: absolute;
@@ -111,6 +125,7 @@
     background-color: #000000;
 }
 ]]></programlisting>
+
         <programlisting language="javascript"><![CDATA[
 function Zend_ProgressBar_Update(data)
 {
@@ -124,28 +139,44 @@ function Zend_ProgressBar_Update(data)
             the <code>iframe</code> or <code>object</code> by <code>display: none;</code>,
             as some browsers like Safari 2 will not load the actual content then.
         </para>
+
         <para>
             Instead of creating your custom progressbar, you may want to use
             one of the available JavaScript libraries like Dojo, jQuery etc.
             For example, there are:
         </para>
+
         <itemizedlist>
             <listitem>
-                <para>Dojo: <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/user-assistance-and-feedback/progress-bar" /></para>
+                <para>
+                    Dojo: <ulink
+                        url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/user-assistance-and-feedback/progress-bar" />
+                </para>
             </listitem>
+
             <listitem>
-                <para>jQuery: <ulink url="http://t.wits.sg/2008/06/20/jquery-progress-bar-11/" /></para>
+                <para>
+                    jQuery: <ulink url="http://t.wits.sg/2008/06/20/jquery-progress-bar-11/" />
+                </para>
             </listitem>
+
             <listitem>
-                <para>MooTools: <ulink url="http://davidwalsh.name/dw-content/progress-bar.php" /></para>
+                <para>
+                    MooTools: <ulink url="http://davidwalsh.name/dw-content/progress-bar.php" />
+                </para>
             </listitem>
+
             <listitem>
-                <para>Prototype: <ulink url="http://livepipe.net/control/progressbar" /></para>
+                <para>
+                    Prototype: <ulink url="http://livepipe.net/control/progressbar" />
+                </para>
             </listitem>
         </itemizedlist>
     </example>
+
     <note>
         <title>Interval of updates</title>
+
         <para>
             You should take care of not sending too many updates, as every update
             has a min-size of 1kb. This is a requirement for the Safari browser

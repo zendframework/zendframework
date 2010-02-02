@@ -23,21 +23,26 @@
                         <entry>Description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>Array</entry>
                         <entry>Use a <acronym>PHP</acronym> array</entry>
                     </row>
+
                     <row>
                         <entry>DbSelect</entry>
+
                         <entry>
                             Use a <link
                                 linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>
                             instance, which will return an array
                         </entry>
                     </row>
+
                     <row>
                         <entry>DbTableSelect</entry>
+
                         <entry>
                             Use a <link
                                 linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>
@@ -47,16 +52,20 @@
                             result set, such as column names.
                         </entry>
                     </row>
+
                     <row>
                         <entry>Iterator</entry>
+
                         <entry>
                             Use an <ulink
                                 url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><classname>Iterator</classname></ulink>
                             instance
                         </entry>
                     </row>
+
                     <row>
                         <entry>Null</entry>
+
                         <entry>
                             Do not use <classname>Zend_Paginator</classname> to manage
                             data pagination. You can still take advantage of
@@ -169,6 +178,7 @@ $this->view->paginator = $paginator;
 
     <sect2 id="zend.paginator.usage.dbselect">
         <title>The DbSelect and DbTableSelect adapter</title>
+
         <para>
             The usage of most adapters is pretty straight-forward. However, the
             database adapters require a more detailed explanation regarding
@@ -176,18 +186,19 @@ $this->view->paginator = $paginator;
         </para>
 
         <para>
-            To use the DbSelect and DbTableSelect adapters you don't have to retrieve the data upfront from
-            the database. Both adapters do the retrieval for you, aswell as the counting of the total pages.
-            If additional work has to be done on the database results the adapter <methodname>getItems()</methodname> method
-            has to be extended in your application.
+            To use the DbSelect and DbTableSelect adapters you don't have to retrieve the data
+            upfront from the database. Both adapters do the retrieval for you, aswell as the
+            counting of the total pages. If additional work has to be done on the database results
+            the adapter <methodname>getItems()</methodname> method has to be extended in your
+            application.
         </para>
 
         <para>
-            Additionally these adapters do <emphasis>not</emphasis> fetch all records from the database
-            in order to count them. Instead, the adapters manipulates the original query to produce
-            the corresponding COUNT query. Paginator then executes that COUNT query to get the
-            number of rows. This does require an extra round-trip to the database, but this is many
-            times faster than fetching an entire result set and using
+            Additionally these adapters do <emphasis>not</emphasis> fetch all records from the
+            database in order to count them. Instead, the adapters manipulates the original query to
+            produce the corresponding COUNT query. Paginator then executes that COUNT query to get
+            the number of rows. This does require an extra round-trip to the database, but this is
+            many times faster than fetching an entire result set and using
             <methodname>count()</methodname>. Especially with large collections of data.
         </para>
 
@@ -302,9 +313,11 @@ $paginator = new Zend_Paginator($adapter);
                         <entry>Description</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>All</entry>
+
                         <entry>
                             Returns every page. This is useful for dropdown
                             menu pagination controls with relatively few
@@ -312,23 +325,29 @@ $paginator = new Zend_Paginator($adapter);
                             available to the user at once.
                         </entry>
                     </row>
+
                     <row>
                         <entry>Elastic</entry>
+
                         <entry>
                             A Google-like scrolling style that expands and
                             contracts as a user scrolls through the pages.
                         </entry>
                     </row>
+
                     <row>
                         <entry>Jumping</entry>
+
                         <entry>
                             As users scroll through, the page number advances
                             to the end of a given range, then starts again at
                             the beginning of the new range.
                         </entry>
                     </row>
+
                     <row>
                         <entry>Sliding</entry>
+
                         <entry>
                             A Yahoo!-like scrolling style that positions the
                             current page number in the center of the page
@@ -543,84 +562,86 @@ $('paginationControl').observe('change', function() {
                             <entry>Description</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry>first</entry>
                             <entry>integer</entry>
                             <entry>First page number (i.e., 1)</entry>
                         </row>
+
                         <row>
                             <entry>firstItemNumber</entry>
                             <entry>integer</entry>
-                            <entry>
-                                Absolute number of the first item on this page
-                            </entry>
+                            <entry>Absolute number of the first item on this page</entry>
                         </row>
+
                         <row>
                             <entry>firstPageInRange</entry>
                             <entry>integer</entry>
-                            <entry>
-                                First page in the range returned by the
-                                scrolling style
-                            </entry>
+                            <entry>First page in the range returned by the scrolling style</entry>
                         </row>
+
                         <row>
                             <entry>current</entry>
                             <entry>integer</entry>
                             <entry>Current page number</entry>
                         </row>
+
                         <row>
                             <entry>currentItemCount</entry>
                             <entry>integer</entry>
                             <entry>Number of items on this page</entry>
                         </row>
+
                         <row>
                             <entry>itemCountPerPage</entry>
                             <entry>integer</entry>
                             <entry>Maximum number of items available to each page</entry>
                         </row>
+
                         <row>
                             <entry>last</entry>
                             <entry>integer</entry>
                             <entry>Last page number</entry>
                         </row>
+
                         <row>
                             <entry>lastItemNumber</entry>
                             <entry>integer</entry>
-                            <entry>
-                                Absolute number of the last item on this page
-                            </entry>
+                            <entry>Absolute number of the last item on this page</entry>
                         </row>
+
                         <row>
                             <entry>lastPageInRange</entry>
                             <entry>integer</entry>
-                            <entry>
-                                Last page in the range returned by the
-                                scrolling style
-                            </entry>
+                            <entry>Last page in the range returned by the scrolling style</entry>
                         </row>
+
                         <row>
                             <entry>next</entry>
                             <entry>integer</entry>
                             <entry>Next page number</entry>
                         </row>
+
                         <row>
                             <entry>pageCount</entry>
                             <entry>integer</entry>
                             <entry>Number of pages</entry>
                         </row>
+
                         <row>
                             <entry>pagesInRange</entry>
                             <entry>array</entry>
-                            <entry>
-                                Array of pages returned by the scrolling style
-                            </entry>
+                            <entry>Array of pages returned by the scrolling style</entry>
                         </row>
+
                         <row>
                             <entry>previous</entry>
                             <entry>integer</entry>
                             <entry>Previous page number</entry>
                         </row>
+
                         <row>
                             <entry>totalItemCount</entry>
                             <entry>integer</entry>

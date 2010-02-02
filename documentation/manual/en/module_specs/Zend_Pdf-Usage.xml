@@ -2,20 +2,23 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.usage">
     <title>Zend_Pdf module usage example</title>
+
     <para>
-    This section provides an example of module usage.
+        This section provides an example of module usage.
     </para>
 
     <para>
-    This example can be found in a <filename>demos/Zend/Pdf/demo.php</filename> file.
+        This example can be found in a <filename>demos/Zend/Pdf/demo.php</filename> file.
     </para>
+
     <para>
-    There are also <filename>test.pdf</filename> file, which can be used with this demo
-    for test purposes.
+        There are also <filename>test.pdf</filename> file, which can be used with this demo
+        for test purposes.
     </para>
 
     <example id="zend.pdf.usage.example-1">
         <title>Zend_Pdf module usage demo</title>
+
         <programlisting language="php"><![CDATA[
 /**
  * @package Zend_Pdf
@@ -263,7 +266,6 @@ if (isset($argv[2])) {
 }
 ]]></programlisting>
     </example>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

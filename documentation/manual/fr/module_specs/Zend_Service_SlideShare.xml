@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20843 -->
+<!-- EN-Revision: 20855 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.slideshare">
-    <title>Introduction</title>
+    <title>Zend_Service_SlideShare</title>
 
     <para>
         Le composant <classname>Zend_Service_SlideShare</classname> est utilisé dans

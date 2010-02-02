@@ -292,7 +292,7 @@
             <para>
                 <inlinegraphic
                     fileref="figures/zend.service.livedocx.mailmerge.generation-diabasic_zoom.png"
-                    format="PNG" thumbnail="true" />
+                    format="PNG" />
             </para>
 
             <para>
@@ -317,7 +317,7 @@
             <para>
                 <inlinegraphic
                     fileref="figures/zend.service.livedocx.mailmerge.templates-msworddialog_zoom.png"
-                    format="PNG" thumbnail="true" />
+                    format="PNG" />
             </para>
 
             <para>
@@ -333,7 +333,7 @@
             <para>
                 <inlinegraphic
                     fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatefull_zoom.png"
-                    format="PNG" thumbnail="true" />
+                    format="PNG" />
             </para>
 
             <para>
@@ -352,7 +352,7 @@
             <para>
                 <inlinegraphic
                     fileref="figures/zend.service.livedocx.mailmerge.templates-mswordtemplatecropped_zoom.png"
-                    format="PNG" thumbnail="true" />
+                    format="PNG" />
             </para>
 
             <para>
@@ -394,7 +394,7 @@ file_put_contents('document.pdf', $document);
             <para>
                 <inlinegraphic
                     fileref="figures/zend.service.livedocx.mailmerge.templates-msworddocument_zoom.png"
-                    format="PNG" thumbnail="true" />
+                    format="PNG" />
             </para>
 
             <para>
@@ -436,7 +436,7 @@ file_put_contents('document.pdf', $document);
             <para>
                 <inlinegraphic
                     fileref="figures/zend.service.livedocx.mailmerge.advanced-mergefieldblockformat_zoom.png"
-                    format="PNG" thumbnail="true" />
+                    format="PNG" />
             </para>
 
             <para>
@@ -469,7 +469,7 @@ blockEnd_block1
             <para>
                 <inlinegraphic
                     fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblockstemplate_zoom.png"
-                    format="PNG" thumbnail="true" />
+                    format="PNG" />
             </para>
 
             <para>
@@ -538,7 +538,7 @@ file_put_contents('document.pdf', $document);
             <para>
                 <inlinegraphic
                     fileref="figures/zend.service.livedocx.mailmerge.advanced-mswordblocksdocument_zoom.png"
-                    format="PNG" thumbnail="true" />
+                    format="PNG" />
             </para>
 
             <para>
@@ -629,7 +629,7 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
             <para>
                 <inlinegraphic
                     fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage1_zoom.png"
-                    format="PNG" thumbnail="true" />
+                    format="PNG" />
             </para>
 
             <para>
@@ -639,7 +639,7 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
             <para>
                 <inlinegraphic
                     fileref="figures/zend.service.livedocx.mailmerge.bitmaps-documentpage2_zoom.png"
-                    format="PNG" thumbnail="true" />
+                    format="PNG" />
             </para>
 
             <para>

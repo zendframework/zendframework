@@ -63,7 +63,10 @@
         <listitem><para>
             <emphasis><property>plugins</property></emphasis>&#160;: tableau de nom de classe
             de plugins de contrôleurs. La ressource instanciera chaque classe (sans arguments
-            de contructeur) et les enregistrera dans le contrôleur frontal.
+            de contructeur) et les enregistrera dans le contrôleur frontal. Si vous souhaitez
+            enregistrer un plugin avec un index particulier dans la pile des plugins, vous
+            devez fournir un tableau avec deux clés <property>class</property> et
+            <property>index</property>.
         </para></listitem>
 
         <listitem><para>
@@ -96,6 +99,8 @@ resources.frontController.defaultModule = "static"
 resources.frontController.baseUrl = "/subdir"
 resources.frontController.plugins.foo = "My_Plugin_Foo"
 resources.frontController.plugins.bar = "My_Plugin_Bar"
+resources.frontController.plugins.baz.class = "My_Plugin_Baz"
+resources.frontController.plugins.baz.index = 123
 resources.frontController.env = APPLICATION_ENV
 ]]></programlisting>
     </example>

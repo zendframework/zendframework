@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20837 -->
+<!-- EN-Revision: 20842 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
@@ -66,7 +66,7 @@
             de contructeur) et les enregistrera dans le contrôleur frontal. Si vous souhaitez
             enregistrer un plugin avec un index particulier dans la pile des plugins, vous
             devez fournir un tableau avec deux clés <property>class</property> et
-            <property>index</property>.
+            <property>stackIndex</property>.
         </para></listitem>
 
         <listitem><para>
@@ -100,7 +100,7 @@ resources.frontController.baseUrl = "/subdir"
 resources.frontController.plugins.foo = "My_Plugin_Foo"
 resources.frontController.plugins.bar = "My_Plugin_Bar"
 resources.frontController.plugins.baz.class = "My_Plugin_Baz"
-resources.frontController.plugins.baz.index = 123
+resources.frontController.plugins.baz.stackIndex = 123
 resources.frontController.env = APPLICATION_ENV
 ]]></programlisting>
     </example>

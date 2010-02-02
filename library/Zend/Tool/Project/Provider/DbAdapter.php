@@ -75,8 +75,8 @@ class Zend_Tool_Project_Provider_DbAdapter
         
         if ($dsn) {
             $this->_configureViaDSN($dsn);
-        } elseif ($interactivelyPrompt) {
-            $this->_promptForConfig();
+        //} elseif ($interactivelyPrompt) {
+        //    $this->_promptForConfig();
         } else {
             $this->_registry->getResponse()->appendContent('Nothing to do!');
         }

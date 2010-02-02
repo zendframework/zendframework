@@ -66,7 +66,7 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
      * @var Zend_Tool_Project_Profile
      */
     protected $_profile = null;
-
+    
     /**
      * getName()
      *
@@ -76,7 +76,7 @@ class Zend_Tool_Project_Context_System_ProjectProfileFile
     {
         return 'ProjectProfileFile';
     }
-
+    
     /**
      * setProfile()
      *

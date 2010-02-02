@@ -315,10 +315,6 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
             }
         }
 
-//        if ($specialtyName != '_Global') {
-//            $methodName .= $specialtyName;
-//        }
-
         $this->_handleDispatchExecution($provider, $methodName, $callParameters);
     }
     

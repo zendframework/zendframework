@@ -33,9 +33,20 @@ class Zend_Tool_Project_Provider_Application
     
     protected $_specialties = array('ClassNamePrefix');
     
-    public function changeClassNamePrefix($classNamePrefix, $force = false)
+    /**
+     * 
+     * @param $classNamePrefix Prefix of classes
+     * @param $force
+     */
+    public function changeClassNamePrefix($classNamePrefix /* , $force = false */)
     {
         $profile = $this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
+        
+        $originalClassNamePrefix = $classNamePrefix;
+        
+        if (substr($classNamePrefix, -1) != '_') {
+            $classNamePrefix .= '_';
+        }
         
         $configFileResource = $profile->search('ApplicationConfigFile');
         $zc = $configFileResource->getAsZendConfig('production');
@@ -55,9 +66,19 @@ class Zend_Tool_Project_Provider_Application
         $applicationDirectory = $profile->search('ApplicationDirectory');
         $applicationDirectory->setClassNamePrefix($classNamePrefix);
 
+        $response = $this->_registry->getResponse();
+        
+        if ($originalClassNamePrefix !== $classNamePrefix) {
+            $response->appendContent(
+                'Note: the name provided "' . $originalClassNamePrefix . '" was'
+                    . ' altered to "' . $classNamePrefix . '" for correctness.',
+                array('color' => 'yellow')
+                );
+        } 
+        
         // note to the user
-        $this->_registry->getResponse()->appendContent('application.ini updated with new appnamespace ' . $classNamePrefix);
-        $this->_registry->getResponse()->appendContent('Note: All existing models will need to be altered to this new namespace by hand', array('color' => 'yellow'));
+        $response->appendContent('Note: All existing models will need to be altered to this new namespace by hand', array('color' => 'yellow'));
+        $response->appendContent('application.ini updated with new appnamespace ' . $classNamePrefix);
         
         // store profile
         $this->_storeProfile();

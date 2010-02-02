@@ -116,8 +116,7 @@ class Zend_Tool_Project_Context_Zf_ApplicationConfigFile extends Zend_Tool_Proje
      */
     public function addStringItem($key, $value, $section = 'production', $quoteValue = true)
     {
-        
-        
+        // null quote value means to auto-detect
         if ($quoteValue === null) {
             $quoteValue = preg_match('#[\"\']#', $value) ? false : true;
         }

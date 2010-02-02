@@ -126,32 +126,65 @@ class Zend_Tool_Project_Provider_Action
      * @param bool $viewIncluded     Whether the view should the view be included.
      * @param string $module         Module name action should be applied to.
      */
-    public function create($name, $controllerName = 'index', $viewIncluded = true, $module = null)
+    public function create($name, $controllerName = 'Index', $viewIncluded = true, $module = null)
     {
 
         $this->_loadProfile();
-
-        if (self::hasResource($this->_loadedProfile, $name, $controllerName, $module)) {
-            throw new Zend_Tool_Project_Provider_Exception('This controller (' . $controllerName . ') already has an action named (' . $name . ')');
-        }
 
         // Check that there is not a dash or underscore, return if doesnt match regex
         if (preg_match('#[_-]#', $name)) {
             throw new Zend_Tool_Project_Provider_Exception('Action names should be camel cased.');
         }
         
+        $originalName = $name;
+        $originalControllerName = $controllerName;
+        
         // ensure it is camelCase (lower first letter)
         $name = strtolower(substr($name, 0, 1)) . substr($name, 1);
         
+        // ensure controller is MixedCase
+        $controllerName = ucfirst($controllerName);
+        
+        if (self::hasResource($this->_loadedProfile, $name, $controllerName, $module)) {
+            throw new Zend_Tool_Project_Provider_Exception('This controller (' . $controllerName . ') already has an action named (' . $name . ')');
+        }
+        
         $actionMethod = self::createResource($this->_loadedProfile, $name, $controllerName, $module);
 
-        if ($this->_registry->getRequest()->isPretend()) {
-            $this->_registry->getResponse()->appendContent(
+        // get request/response object
+        $request = $this->_registry->getRequest();
+        $response = $this->_registry->getResponse();
+        
+        // alert the user about inline converted names
+        $tense = (($request->isPretend()) ? 'would be' : 'is');
+        
+        if ($name !== $originalName) {
+            $response->appendContent(
+                'Note: The canonical action name that ' . $tense
+                    . ' used with other providers is "' . $name . '";'
+                    . ' not "' . $originalName . '" as supplied',
+                array('color' => array('yellow'))
+                );
+        }
+        
+        if ($controllerName !== $originalControllerName) {
+            $response->appendContent(
+                'Note: The canonical controller name that ' . $tense
+                    . ' used with other providers is "' . $controllerName . '";'
+                    . ' not "' . $originalControllerName . '" as supplied',
+                array('color' => array('yellow'))
+                );
+        }
+        
+        unset($tense);
+        
+        if ($request->isPretend()) {
+            $response->appendContent(
                 'Would create an action named ' . $name .
                 ' inside controller at ' . $actionMethod->getParentResource()->getContext()->getPath()
                 );
         } else {
-            $this->_registry->getResponse()->appendContent(
+            $response->appendContent(
                 'Creating an action named ' . $name .
                 ' inside controller at ' . $actionMethod->getParentResource()->getContext()->getPath()
                 );
@@ -163,11 +196,11 @@ class Zend_Tool_Project_Provider_Action
             $viewResource = Zend_Tool_Project_Provider_View::createResource($this->_loadedProfile, $name, $controllerName, $module);
 
             if ($this->_registry->getRequest()->isPretend()) {
-                $this->_registry->getResponse()->appendContent(
+                $response->appendContent(
                     'Would create a view script for the ' . $name . ' action method at ' . $viewResource->getContext()->getPath()
                     );
             } else {
-                $this->_registry->getResponse()->appendContent(
+                $response->appendContent(
                     'Creating a view script for the ' . $name . ' action method at ' . $viewResource->getContext()->getPath()
                     );
                 $viewResource->create();

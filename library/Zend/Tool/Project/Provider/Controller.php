@@ -125,7 +125,12 @@ class Zend_Tool_Project_Provider_Controller
             throw new Zend_Tool_Project_Provider_Exception('Controller names should be camel cased.');
         }
         
-        $name = ucwords($name);
+        $originalName = $name;
+        $name = ucfirst($name);
+        
+        // get request & response
+        $request = $this->_registry->getRequest();
+        $response = $this->_registry->getResponse();
         
         try {
             $controllerResource = self::createResource($this->_loadedProfile, $name, $module);
@@ -138,39 +143,50 @@ class Zend_Tool_Project_Provider_Controller
             }
 
         } catch (Exception $e) {
-            $response = $this->_registry->getResponse();
             $response->setException($e);
             return;
         }
 
+        // determime if we need to note to the user about the name
+        if (($name !== $originalName)) {
+            $tense = (($request->isPretend()) ? 'would be' : 'is');
+            $response->appendContent(
+                'Note: The canonical controller name that ' . $tense
+                    . ' used with other providers is "' . $name . '";'
+                    . ' not "' . $originalName . '" as supplied',
+                array('color' => array('yellow'))
+                );
+            unset($tense);
+        }
+        
         // do the creation
-        if ($this->_registry->getRequest()->isPretend()) {
-
-            $this->_registry->getResponse()->appendContent('Would create a controller at '  . $controllerResource->getContext()->getPath());
+        if ($request->isPretend()) {
+            
+            $response->appendContent('Would create a controller at '  . $controllerResource->getContext()->getPath());
 
             if (isset($indexActionResource)) {
-                $this->_registry->getResponse()->appendContent('Would create an index action method in controller ' . $name);
-                $this->_registry->getResponse()->appendContent('Would create a view script for the index action method at ' . $indexActionViewResource->getContext()->getPath());
+                $response->appendContent('Would create an index action method in controller ' . $name);
+                $response->appendContent('Would create a view script for the index action method at ' . $indexActionViewResource->getContext()->getPath());
             }
-
+            
             if ($testControllerResource) {
-                $this->_registry->getResponse()->appendContent('Would create a controller test file at ' . $testControllerResource->getContext()->getPath());
+                $response->appendContent('Would create a controller test file at ' . $testControllerResource->getContext()->getPath());
             }
 
         } else {
 
-            $this->_registry->getResponse()->appendContent('Creating a controller at ' . $controllerResource->getContext()->getPath());
+            $response->appendContent('Creating a controller at ' . $controllerResource->getContext()->getPath());
             $controllerResource->create();
 
             if (isset($indexActionResource)) {
-                $this->_registry->getResponse()->appendContent('Creating an index action method in controller ' . $name);
+                $response->appendContent('Creating an index action method in controller ' . $name);
                 $indexActionResource->create();
-                $this->_registry->getResponse()->appendContent('Creating a view script for the index action method at ' . $indexActionViewResource->getContext()->getPath());
+                $response->appendContent('Creating a view script for the index action method at ' . $indexActionViewResource->getContext()->getPath());
                 $indexActionViewResource->create();
             }
 
             if ($testControllerResource) {
-                $this->_registry->getResponse()->appendContent('Creating a controller test file at ' . $testControllerResource->getContext()->getPath());
+                $response->appendContent('Creating a controller test file at ' . $testControllerResource->getContext()->getPath());
                 $testControllerResource->create();
             }
 

@@ -48,12 +48,7 @@ class Zend_Tool_Project_Profile extends Zend_Tool_Project_Profile_Resource_Conta
      * @var bool
      */
     protected static $_traverseEnabled = false;
-
-    /**
-     * @var array
-     */
-    protected $_attributes = array();
-
+    
     /**
      * Constructor, standard usage would allow the setting of options
      *

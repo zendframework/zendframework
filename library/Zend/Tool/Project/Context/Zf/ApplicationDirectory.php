@@ -45,7 +45,9 @@ class Zend_Tool_Project_Context_Zf_ApplicationDirectory extends Zend_Tool_Projec
     
     public function init()
     {
-        $this->_classNamePrefix = $this->_resource->getAttribute('classNamePrefix');
+        if ($this->_resource->hasAttribute('classNamePrefix')) {
+            $this->_classNamePrefix = $this->_resource->getAttribute('classNamePrefix');
+        }
         parent::init();
     }
     

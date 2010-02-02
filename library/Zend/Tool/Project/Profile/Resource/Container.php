@@ -50,6 +50,11 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
      * @var bool
      */
     protected $_appendable = true;
+    
+    /**
+     * @var array
+     */
+    protected $_attributes = array();
 
     /**
      * Finder method to be able to find resources by context name
@@ -247,6 +252,17 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
     public function getAttribute($name)
     {
         return (array_key_exists($name, $this->_attributes)) ? $this->_attributes[$name] : null;
+    }
+    
+    /**
+     * hasAttribute()
+     * 
+     * @param string $name
+     * @return bool
+     */
+    public function hasAttribute($name)
+    {
+        return array_key_exists($name, $this->_attributes);
     }
 
     /**

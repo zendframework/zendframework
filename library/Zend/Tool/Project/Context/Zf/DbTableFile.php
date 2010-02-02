@@ -82,12 +82,6 @@ class Zend_Tool_Project_Context_Zf_DbTableFile extends Zend_Tool_Project_Context
                             'defaultValue' => $this->_actualTableName
                             ))
                         ),
-//                    'methods' => array(
-//                        new Zend_CodeGenerator_Php_Method(array(
-//                            'name' => 'init',
-//                            'body' => '/* Form Elements & Other Definitions Here ... */',
-//                            ))
-//                        )
                 
                     ))
                 )

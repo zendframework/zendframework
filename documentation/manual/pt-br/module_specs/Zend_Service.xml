@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
+<!-- EN-Revision: 20855 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.introduction">
     <title>Introdução</title>
@@ -24,39 +24,93 @@
 
     <itemizedlist>
         <listitem>
-            <para><link linkend="zend.service.akismet">Akismet</link></para>
+            <para>
+                <link linkend="zend.service.akismet">Akismet</link>
+            </para>
         </listitem>
 
         <listitem>
-            <para><link linkend="zend.service.amazon">Amazon</link></para>
+            <para>
+                <link linkend="zend.service.amazon">Amazon</link>
+            </para>
         </listitem>
 
         <listitem>
-            <para><link linkend="zend.service.audioscrobbler">Audioscrobbler</link></para>
+            <para>
+                <link linkend="zend.service.audioscrobbler">Audioscrobbler</link>
+            </para>
         </listitem>
 
         <listitem>
-            <para><link linkend="zend.service.delicious">Del.icio.us</link></para>
+            <para>
+                <link linkend="zend.service.delicious">Del.icio.us</link>
+            </para>
         </listitem>
 
         <listitem>
-            <para><link linkend="zend.service.flickr">Flickr</link></para>
+            <para>
+                <link linkend="zend.service.flickr">Flickr</link>
+            </para>
         </listitem>
 
         <listitem>
-            <para><link linkend="zend.service.simpy">Simpy</link></para>
+            <para>
+                <link linkend="zend.service.livedocx">LiveDocx</link>
+            </para>
         </listitem>
 
         <listitem>
-            <para><link linkend="zend.service.slideshare">SlideShare</link></para>
+            <para>
+                <link linkend="zend.service.nirvanix">Nirvanix</link>
+            </para>
         </listitem>
 
         <listitem>
-            <para><link linkend="zend.service.strikeiron">StrikeIron</link></para>
+            <para>
+                <link linkend="zend.service.recaptcha">ReCaptcha</link>
+            </para>
         </listitem>
 
         <listitem>
-            <para><link linkend="zend.service.yahoo">Yahoo!</link></para>
+            <para>
+                <link linkend="zend.service.simpy">Simpy</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.slideshare">SlideShare</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.strikeiron">StrikeIron</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.technorati">Technorati</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.twitter">Twitter</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.windowsazure">Windows Azure</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.yahoo">Yahoo!</link>
+            </para>
         </listitem>
     </itemizedlist>
 

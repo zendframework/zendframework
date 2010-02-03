@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.charset">
     <title>Conjunto de Caractere</title>
@@ -13,6 +13,7 @@
             "UTF-8 modificado" usado pelo Java. O núcleo do
             <classname>Zend_Search_Lucene</classname> suporta esta codificação plenamente, com uma
             exceção.
+
             <footnote>
                <para>
                    <classname>Zend_Search_Lucene</classname> suporta somente os caracteres do Plano
@@ -31,21 +32,25 @@
         </para>
 
         <para>
-            Actual input data encoding may be specified through <classname>Zend_Search_Lucene</classname> <acronym>API</acronym>. Data will
-            be automatically converted into UTF-8 encoding.
+            Actual input data encoding may be specified through
+            <classname>Zend_Search_Lucene</classname> <acronym>API</acronym>. Data will be
+            automatically converted into UTF-8 encoding.
         </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.charset.default_analyzer">
         <title>Default text analyzer</title>
+
         <para>
             However, the default text analyzer (which is also used within query parser) uses
             ctype_alpha() for tokenizing text and queries.
         </para>
 
         <para>
-            ctype_alpha() is not UTF-8 compatible, so the analyzer converts text to 'ASCII//TRANSLIT' encoding before
-            indexing. The same processing is transparently performed during query parsing.
+            ctype_alpha() is not UTF-8 compatible, so the analyzer converts text to
+            'ASCII//TRANSLIT' encoding before indexing. The same processing is transparently
+            performed during query parsing.
+
             <footnote>
                <para>
                    Conversion to 'ASCII//TRANSLIT' may depend on current locale and OS.
@@ -56,8 +61,8 @@
         <note>
             <title/>
             <para>
-                Default analyzer doesn't treats numbers as parts of terms. Use corresponding 'Num' analyzer if you don't want words
-                to be broken by numbers.
+                Default analyzer doesn't treats numbers as parts of terms. Use corresponding 'Num'
+                analyzer if you don't want words to be broken by numbers.
             </para>
         </note>
     </sect2>
@@ -66,8 +71,10 @@
         <title>UTF-8 compatible text analyzers</title>
 
         <para>
-            <classname>Zend_Search_Lucene</classname> also contains a set of UTF-8 compatible analyzers: <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8</classname>,
-            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num</classname>, <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive</classname>,
+            <classname>Zend_Search_Lucene</classname> also contains a set of UTF-8 compatible
+            analyzers: <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8</classname>,
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num</classname>,
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive</classname>,
             <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive</classname>.
         </para>
 
@@ -83,19 +90,23 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <warning>
             <title/>
             <para>
-                UTF-8 compatible analyzers were improved in Zend Framework 1.5. Early versions of analyzers assumed
-                all non-ascii characters are letters. New analyzers implementation has more accurate behavior.
+                UTF-8 compatible analyzers were improved in Zend Framework 1.5. Early versions of
+                analyzers assumed all non-ascii characters are letters. New analyzers implementation
+                has more accurate behavior.
             </para>
+
             <para>
-                This may need you to re-build index to have data and search queries tokenized in the same way, otherwise search engine
-                may return wrong result sets.
+                This may need you to re-build index to have data and search queries tokenized in the
+                same way, otherwise search engine may return wrong result sets.
             </para>
         </warning>
 
         <para>
-            All of these analyzers need PCRE (Perl-compatible regular expressions) library to be compiled with UTF-8 support turned on.
-            PCRE UTF-8 support is turned on for the PCRE library sources bundled with <acronym>PHP</acronym> source code distribution, but if shared library is used
-            instead of bundled with <acronym>PHP</acronym> sources, then UTF-8 support state may depend on you operating system.
+            All of these analyzers need PCRE (Perl-compatible regular expressions) library to be
+            compiled with UTF-8 support turned on. PCRE UTF-8 support is turned on for the PCRE
+            library sources bundled with <acronym>PHP</acronym> source code distribution, but if
+            shared library is used instead of bundled with <acronym>PHP</acronym> sources, then
+            UTF-8 support state may depend on you operating system.
         </para>
 
         <para>
@@ -111,12 +122,15 @@ if (@preg_match('/\pL/u', 'a') == 1) {
         </para>
 
         <para>
-            Case insensitive versions of UTF-8 compatible analyzers also need <ulink url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink> extension to be enabled.
+            Case insensitive versions of UTF-8 compatible analyzers also need <ulink
+                url="http://www.php.net/manual/en/ref.mbstring.php">mbstring</ulink> extension to
+            be enabled.
         </para>
 
         <para>
-            If you don't want mbstring extension to be turned on, but need case insensitive search, you may use the following approach: normalize source data before indexing
-            and query string before searching by converting them to lowercase:
+            If you don't want mbstring extension to be turned on, but need case insensitive search,
+            you may use the following approach: normalize source data before indexing and query
+            string before searching by converting them to lowercase:
 
             <programlisting language="php"><![CDATA[
 // Indexing

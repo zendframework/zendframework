@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18739 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.extending">
     <title>Extensibilidade</title>
@@ -141,22 +141,24 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <title>Tokens Filtering</title>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> analyzer also offers a token filtering
-            mechanism.
+            The <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> analyzer also
+            offers a token filtering mechanism.
         </para>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_TokenFilter</classname> class provides an abstract interface for such filters.
-            Your own filters should extend this class either directly or indirectly.
+            The <classname>Zend_Search_Lucene_Analysis_TokenFilter</classname> class provides an
+            abstract interface for such filters. Your own filters should extend this class either
+            directly or indirectly.
         </para>
 
         <para>
-            Any custom filter must implement the <methodname>normalize()</methodname> method which may transform input token or signal that
-            the current token should be skipped.
+            Any custom filter must implement the <methodname>normalize()</methodname> method which
+            may transform input token or signal that the current token should be skipped.
         </para>
 
         <para>
             There are three filters already defined in the analysis subpackage:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -180,13 +182,13 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
         <para>
             The <code>LowerCase</code> filter is already used for
-            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname> analyzer
-            by default.
+            <classname>Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive</classname>
+            analyzer by default.
         </para>
 
         <para>
-            The <code>ShortWords</code> and <code>StopWords</code> filters may be used with pre-defined or custom
-            analyzers like this:
+            The <code>ShortWords</code> and <code>StopWords</code> filters may be used with
+            pre-defined or custom analyzers like this:
 
             <programlisting language="php"><![CDATA[
 $stopWords = array('a', 'an', 'at', 'the', 'and', 'or', 'is', 'am');
@@ -199,7 +201,6 @@ $analyzer->addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
-
             <programlisting language="php"><![CDATA[
 $shortWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords();
 
@@ -212,8 +213,8 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> constructor takes an array of stop-words
-            as an input. But stop-words may be also loaded from a file:
+            The <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> constructor
+            takes an array of stop-words as an input. But stop-words may be also loaded from a file:
 
             <programlisting language="php"><![CDATA[
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords();
@@ -226,12 +227,14 @@ $analyzer->addFilter($stopWordsFilter);
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
 
-            This file should be a common text file with one word in each line. The '#' character marks a line as a comment.
+            This file should be a common text file with one word in each line. The '#' character
+            marks a line as a comment.
         </para>
 
         <para>
-            The <classname>Zend_Search_Lucene_Analysis_TokenFilter_ShortWords</classname> constructor has one optional argument.
-            This is the word length limit, set by default to 2.
+            The <classname>Zend_Search_Lucene_Analysis_TokenFilter_ShortWords</classname>
+            constructor has one optional argument. This is the word length limit, set by default to
+            2.
         </para>
     </sect2>
 
@@ -244,8 +247,8 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            <code>score(q,d) = sum( tf(t in d) * idf(t) * getBoost(t.field in d) * lengthNorm(t.field in d) ) *
-            coord(q,d) * queryNorm(q)</code>
+            <code>score(q,d) = sum( tf(t in d) * idf(t) * getBoost(t.field in d) *
+                lengthNorm(t.field in d) ) * coord(q,d) * queryNorm(q)</code>
         </para>
 
         <para>
@@ -254,9 +257,9 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
         </para>
 
         <para>
-            idf(t) -
-            <methodname>Zend_Search_Lucene_Search_Similarity::idf($input, $reader)</methodname> -
-            um fator de pontuação para um termo simples com o índice especificado.
+            idf(t) - <methodname>Zend_Search_Lucene_Search_Similarity::idf($input,
+                $reader)</methodname> - um fator de pontuação para um termo simples com o índice
+            especificado.
         </para>
 
         <para>
@@ -512,10 +515,8 @@ class MyFile extends Zend_Search_Lucene_Storage_File {
     }
 }
 ]]></programlisting>
-
     </sect2>
 </sect1>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18536 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.index-creation">
     <title>Construindo Índices</title>
@@ -145,15 +145,16 @@ for ($count = 0; $count < $index->maxDoc(); $count++) {
         <para>
             Os arquivos de segmento de índice Lucene não podem ser atualizados devido ao seu
             projeto. A atualização de um segmento necessita de uma reorganização completa do
-            segmento. Veja os formatos de arquivos de índice Lucene para mais detalhes
-            (<ulink
+            segmento. Veja os formatos de arquivos de índice Lucene para mais detalhes (<ulink
                 url="http://lucene.apache.org/java/2_3_0/fileformats.html">http://lucene.apache.org/java/2_3_0/fileformats.html</ulink>)
+
             <footnote>
                 <para>
                     O formato de arquivo de índice Lucene atualmente suportado é a versão 2.3
                     (desde Zend Framework 1.6).
                 </para>
             </footnote>.
+
             Novos documentos são adicionados ao índice através da criação de um novo segmento.
         </para>
 
@@ -193,12 +194,13 @@ $index->optimize();
             <title>MaxBufferedDocs auto-optimization option</title>
 
             <para>
-                <emphasis>MaxBufferedDocs</emphasis> is a minimal number of documents required before
-                the buffered in-memory documents are written into a new segment.
+                <emphasis>MaxBufferedDocs</emphasis> is a minimal number of documents required
+                before the buffered in-memory documents are written into a new segment.
             </para>
 
             <para>
-                <emphasis>MaxBufferedDocs</emphasis> can be retrieved or set by <code>$index->getMaxBufferedDocs()</code> or
+                <emphasis>MaxBufferedDocs</emphasis> can be retrieved or set by
+                <code>$index->getMaxBufferedDocs()</code> or
                 <code>$index->setMaxBufferedDocs($maxBufferedDocs)</code> calls.
             </para>
 
@@ -211,14 +213,15 @@ $index->optimize();
             <title>MaxMergeDocs auto-optimization option</title>
 
             <para>
-                <emphasis>MaxMergeDocs</emphasis> is a largest number of documents ever merged by addDocument().
-                Small values (e.g., less than 10.000) are best for interactive indexing, as this limits the length
-                of pauses while indexing to a few seconds. Larger values are best for batched indexing and speedier
-                searches.
+                <emphasis>MaxMergeDocs</emphasis> is a largest number of documents ever merged by
+                addDocument(). Small values (e.g., less than 10.000) are best for interactive
+                indexing, as this limits the length of pauses while indexing to a few seconds.
+                Larger values are best for batched indexing and speedier searches.
             </para>
 
             <para>
-                <emphasis>MaxMergeDocs</emphasis> can be retrieved or set by <code>$index->getMaxMergeDocs()</code> or
+                <emphasis>MaxMergeDocs</emphasis> can be retrieved or set by
+                <code>$index->getMaxMergeDocs()</code> or
                 <code>$index->setMaxMergeDocs($maxMergeDocs)</code> calls.
             </para>
 
@@ -231,21 +234,26 @@ $index->optimize();
             <title>MergeFactor auto-optimization option</title>
 
             <para>
-                <emphasis>MergeFactor</emphasis> determines how often segment indices are merged by addDocument().
-                With smaller values, less <acronym>RAM</acronym> is used while indexing, and searches on unoptimized indices are faster,
-                but indexing speed is slower. With larger values, more <acronym>RAM</acronym> is used during indexing, and while searches
-                on unoptimized indices are slower, indexing is faster. Thus larger values (&gt; 10) are best for batch
-                index creation, and smaller values (&lt; 10) for indices that are interactively maintained.
+                <emphasis>MergeFactor</emphasis> determines how often segment indices are merged by
+                addDocument(). With smaller values, less <acronym>RAM</acronym> is used while
+                indexing, and searches on unoptimized indices are faster, but indexing speed is
+                slower. With larger values, more <acronym>RAM</acronym> is used during indexing, and
+                while searches on unoptimized indices are slower, indexing is faster. Thus larger
+                values (&gt; 10) are best for batch index creation, and smaller values (&lt; 10) for
+                indices that are interactively maintained.
             </para>
 
             <para>
-                <emphasis>MergeFactor</emphasis> is a good estimation for average number of segments merged by one auto-optimization pass.
-                Too large values produce large number of segments while they are not merged into new one. It may be a cause of
-                "failed to open stream: Too many open files" error message. This limitation is system dependent.
+                <emphasis>MergeFactor</emphasis> is a good estimation for average number of segments
+                merged by one auto-optimization pass. Too large values produce large number of
+                segments while they are not merged into new one. It may be a cause of "failed to
+                open stream: Too many open files" error message. This limitation is system
+                dependent.
             </para>
 
             <para>
-                <emphasis>MergeFactor</emphasis> can be retrieved or set by <code>$index->getMergeFactor()</code> or
+                <emphasis>MergeFactor</emphasis> can be retrieved or set by
+                <code>$index->getMergeFactor()</code> or
                 <code>$index->setMergeFactor($mergeFactor)</code> calls.
             </para>
 
@@ -254,17 +262,27 @@ $index->optimize();
             </para>
 
             <para>
-                Lucene Java and Luke (Lucene Index Toolbox - <ulink url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>)
-                can also be used to optimize an index. Latest Luke release (v0.8) is based on Lucene v2.3 and compatible with
-                current implementation of <classname>Zend_Search_Lucene</classname> component (Zend Framework 1.6). Earlier versions of <classname>Zend_Search_Lucene</classname> implementations
-                need another versions of Java Lucene tools to be compatible:
+                Lucene Java and Luke (Lucene Index Toolbox - <ulink
+                    url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>) can also
+                be used to optimize an index. Latest Luke release (v0.8) is based on Lucene v2.3 and
+                compatible with current implementation of <classname>Zend_Search_Lucene</classname>
+                component (Zend Framework 1.6). Earlier versions of
+                <classname>Zend_Search_Lucene</classname> implementations need another versions of
+                Java Lucene tools to be compatible:
+
                 <itemizedlist>
                     <listitem>
-                        <para>Zend Framework 1.5 - Java Lucene 2.1 (Luke tool v0.7.1 - <ulink url="http://www.getopt.org/luke/luke-0.7.1/"/>)</para>
+                        <para>
+                            Zend Framework 1.5 - Java Lucene 2.1 (Luke tool v0.7.1 - <ulink
+                                url="http://www.getopt.org/luke/luke-0.7.1/"/>)
+                        </para>
                     </listitem>
 
                     <listitem>
-                        <para>Zend Framework 1.0 - Java Lucene 1.4 - 2.1 (Luke tool v0.6 - <ulink url="http://www.getopt.org/luke/luke-0.6/"/>)</para>
+                        <para>
+                            Zend Framework 1.0 - Java Lucene 1.4 - 2.1 (Luke tool v0.6 - <ulink
+                                url="http://www.getopt.org/luke/luke-0.6/"/>)
+                        </para>
                     </listitem>
                 </itemizedlist>
             </para>
@@ -279,7 +297,9 @@ $index->optimize();
         </para>
 
         <para>
-            It's possible to override this with the <methodname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</methodname> method:
+            It's possible to override this with the
+            <methodname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</methodname>
+            method:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -311,12 +331,15 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
             <title>Supported Filesystems</title>
 
             <para>
-                <classname>Zend_Search_Lucene</classname> uses <methodname>flock()</methodname> to provide concurrent searching, index updating and optimization.
+                <classname>Zend_Search_Lucene</classname> uses <methodname>flock()</methodname> to
+                provide concurrent searching, index updating and optimization.
             </para>
 
             <para>
-                According to the <acronym>PHP</acronym> <ulink url="http://www.php.net/manual/en/function.flock.php">documentation</ulink>,
-                "<methodname>flock()</methodname> will not work on NFS and many other networked file systems".
+                According to the <acronym>PHP</acronym> <ulink
+                    url="http://www.php.net/manual/en/function.flock.php">documentation</ulink>,
+                "<methodname>flock()</methodname> will not work on NFS and many other networked file
+                systems".
             </para>
 
             <para>
@@ -325,7 +348,6 @@ Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660)
         </sect3>
     </sect2>
 </sect1>
-
 <!--
 vim:se ts=4 sw=4 et:
 -->

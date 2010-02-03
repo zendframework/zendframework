@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 20554 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.output">
-
     <title>Ausgabe von Maßeinheiten</title>
 
     <para>
@@ -10,27 +9,24 @@
     </para>
 
     <para>
-        <link linkend="zend.measure.output.auto"><code>Automatische Ausgabe</code>
-        </link>
+        <link linkend="zend.measure.output.auto"><code>Automatische Ausgabe</code></link>
     </para>
 
     <para>
-        <link linkend="zend.measure.output.value"><code>Ausgabe als Wert</code>
-        </link>
+        <link linkend="zend.measure.output.value"><code>Ausgabe als Wert</code></link>
     </para>
 
     <para>
-        <link linkend="zend.measure.output.unit"><code>Ausgabe mit einer Maßeinheit</code>
-        </link>
+        <link linkend="zend.measure.output.unit"><code>Ausgabe mit einer Maßeinheit</code></link>
     </para>
 
     <para>
-        <link linkend="zend.measure.output.unit"><code>Ausgabe als lokalisierte Zeichenkette</code>
-        </link>
+        <link
+            linkend="zend.measure.output.unit"><code>Ausgabe als lokalisierte
+            Zeichenkette</code></link>
     </para>
 
     <sect2 id="zend.measure.output.auto">
-
         <title>Automatische Ausgabe</title>
 
         <para>
@@ -40,7 +36,7 @@
                 <title>Automatische Ausgabe</title>
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
-$mystring = "1.234.567,89 Meter";
+$mystring = "1.234.567,89";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 $locale);
@@ -52,17 +48,16 @@ echo $unit;
 
         <note>
             <title>Ausgabe der Maßeinheit</title>
+
             <para>
                 Die Ausgabe kann einfach erzielt werden durch Verwendung von
                 <ulink url="http://php.net/echo"><code>echo</code></ulink> oder
                 <ulink url="http://php.net/print"><code>print</code></ulink>.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.measure.output.value">
-
         <title>Ausgabe als Wert</title>
 
         <para>
@@ -72,7 +67,7 @@ echo $unit;
                 <title>Ausgabe eines Wertes</title>
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
-$mystring = "1.234.567,89 Meter";
+$mystring = "1.234.567,89";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 $locale);
@@ -90,13 +85,13 @@ echo $unit->getValue();
     </sect2>
 
     <sect2 id="zend.measure.output.unit">
-
         <title>Ausgabe mit einer Maßeinheit</title>
 
         <para>
             Die Funktion <methodname>getType()</methodname> gibt die aktuelle Maßeinheit zurück.
             <example id="zend.measure.output.unit.example-1">
                 <title>Outputting units</title>
+
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
@@ -108,11 +103,9 @@ echo $unit->getType();
 ]]></programlisting>
             </example>
         </para>
-
     </sect2>
 
     <sect2 id="zend.measure.output.localized">
-
         <title>Ausgabe als lokalisierte Zeichenkette</title>
 
         <para>
@@ -121,10 +114,5 @@ echo $unit->getType();
             Beispiel zu "1.234.567,8" werden. Diese Funktionalität wird in einem zukünftigen Release
             unterstützt.
         </para>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

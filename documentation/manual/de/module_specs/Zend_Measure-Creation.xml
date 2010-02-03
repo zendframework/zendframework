@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20554 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.creation">
-
     <title>Erstellung einer Maßeinheit</title>
 
     <para>
@@ -17,7 +16,6 @@
     </para>
 
     <sect2 id="zend.measure.creation.number">
-
         <title>Eine Maßeinheit von einer Integer oder Floatzahl erstellen</title>
 
         <para>
@@ -30,6 +28,7 @@
 
         <example id="zend.measure.creation.number.example-1">
             <title>Erstellung einer Maßeinheit durch Integer oder Floatwerte</title>
+
             <programlisting language="php"><![CDATA[
 $measurement = 1234.7;
 $unit = new Zend_Measure_Length((integer)$measurement,
@@ -42,11 +41,9 @@ echo $unit;
 // Ausgabe '1234.7 m' (Meter)
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.measure.creation.string">
-
         <title>Erstellen einer Maßeinheit aus Zeichenketten</title>
 
         <para>
@@ -67,6 +64,7 @@ echo $unit;
 
         <example id="zend.measure.creation.string.example-1">
             <title>Erstellung einer Maßeinheit durch Strings</title>
+
             <programlisting language="php"><![CDATA[
 $mystring = "10010100111010111010100001011011101010001";
 $unit = new Zend_Measure_Number($mystring, Zend_Measure_Number::BINARY);
@@ -74,32 +72,9 @@ $unit = new Zend_Measure_Number($mystring, Zend_Measure_Number::BINARY);
 echo $unit;
 ]]></programlisting>
         </example>
-
-        <para>
-            Normalerweise kann <classname>Zend_Measure_*</classname> automatisch die gewünschte
-            Maßeinheit aus einer gewöhnlichen Zeichenkette extrahieren. Nur die erste
-            identifizierbare Zahl die Standard Europäisch/Lateinische Ziffern (0,1,2,3,4,5,6,7,8,9)
-            benutzt wird für die Erstellung der Maßeinheit benutzt. Wenn weitere Zahlen in der
-            Zeichenkette enthalten sind, werden diese Ignoriert.
-        </para>
-
-        <example id="zend.measure.creation.string.example-2">
-            <title>Gewöhliche Texteingaben welche Maßeinheiten beinhalten</title>
-            <programlisting language="php"><![CDATA[
-$mystring = "Mein Haus ist 125m² groß";
-$unit = new Zend_Measure_Area($mystring, Zend_Measure_Area::STANDARD);
-echo $unit; // Ausgabe "125 m²";
-
-$mystring = "Mein Haus ist 125m² groß, es hat 5 Räume mit jeweils 25m².";
-$unit = new Zend_Measure_Area($mystring, Zend_Measure_Area::STANDARD);
-echo $unit; // Ausgabe "125 m²";
-]]></programlisting>
-        </example>
-
     </sect2>
 
     <sect2 id="zend.measure.creation.localized">
-
         <title>Maßeinheiten von lokalisierten Zeichenketten</title>
 
         <para>
@@ -115,15 +90,16 @@ echo $unit; // Ausgabe "125 m²";
 
         <example id="zend.measure.creation.localized.example-1">
             <title>Lokalisierte Zeichenketten</title>
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
-$mystring = "Das Boot ist 1,234.50 lang.";
+$mystring = "1,234.50";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 $locale);
 echo $unit; // Ausgabe "1.234 m"
 
-$mystring = "Das Boot ist 1,234.50 lang.";
+$mystring = "1,234.50";
 $unit = new Zend_Measure_Length($mystring,
                                 Zend_Measure_Length::STANDARD,
                                 'en_US');
@@ -147,10 +123,5 @@ Zend_Registry::set('Zend_Locale', $locale);
 // Irgendwo in der eigenen Anwendung
 $length = new Zend_Measure_Length(Zend_Measure_Length::METER();
 ]]></programlisting>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

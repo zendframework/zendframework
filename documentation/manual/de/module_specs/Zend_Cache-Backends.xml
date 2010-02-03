@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20760 -->
+<!-- EN-Revision: 20761 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Zend_Cache Backends</title>
@@ -581,8 +581,8 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
             Dieses Backend arbeitet in Verbindung mit
             <classname>Zend_Cache_Frontend_Capture</classname> (diese zwei müssen zusammen verwendet
             werden) um die Ausgabe von Anfragen als statische Dateien zu speichern. Dies bedeutet
-            das die statischen Dateien bei weiteren Anfragen direkt serviert werden ohne das PHP
-            oder sogar der Zend Framework involviert sind.
+            das die statischen Dateien bei weiteren Anfragen direkt serviert werden ohne dass
+            <acronym>PHP</acronym> oder sogar Zend Framework involviert sind.
         </para>
 
         <para>
@@ -599,10 +599,10 @@ $cache = Zend_Cache::factory('Core', 'Zend_Cache_Backend_ZendServer_Disk',
 
         <para>
             Bevor die Optionen beschrieben werden sollte man beachten das dies einige Änderungen der
-            Standardwerte in der .htaccess Datei benötigt damit Anfrage auf die staischen Dateien
-            zeigen wenn diese existieren. Hier ist ein Beispiel einer einfachen Anwendung die etwas
-            Inhalt cacht, inklusive zwei spezifischer Feeds welche zusätzliche Behandlung benötigen
-            um einen korrekten Content-Type Header zu schicken:
+            Standardwerte in der <filename>.htaccess</filename> Datei benötigt damit Anfrage auf die
+            staischen Dateien zeigen wenn diese existieren. Hier ist ein Beispiel einer einfachen
+            Anwendung die etwas Inhalt cacht, inklusive zwei spezifischer Feeds welche zusätzliche
+            Behandlung benötigen um einen korrekten Content-Type Header zu schicken:
         </para>
 
         <programlisting language="text"><![CDATA[
@@ -633,21 +633,23 @@ RewriteRule ^.*$ index.php [NC,L]
 ]]></programlisting>
 
         <para>
-            Das obenstehende nimmt an das statische Dateien im Verzeichnis ./public/cached gecacht
-            werden. Wir betrachten die Einstellung dieses Ortes unter "public_dir" weiter unten.
+            Das obenstehende nimmt an das statische Dateien im Verzeichnis
+            <filename>./public/cached</filename> gecacht werden. Wir betrachten die Einstellung
+            dieses Ortes unter "public_dir" weiter unten.
         </para>
 
         <para>
             Durch die Natur des Cachens von statischen Dateien bietet die Backend Klasse zwei
             zusätzliche Methoden an: <methodname>remove()</methodname> und
-            <methodname>removeRecursively()</methodname>. Beide akzeptieren eine Anfrage URI
-            welche, wenn Sie mit dem "public_dir" in dem statische Dateien gecacht werden verknüpft
-            wird, und eine vor-gespeicherte Erweiterung angehängt wird, entweder den Namen einer
-            statischen Datei anbietet welche zu löschen ist, oder einen Verzeichnispfad welcher
-            rekursiv zu löschen ist. Durch die Einschränkung von
+            <methodname>removeRecursively()</methodname>. Beide akzeptieren eine Anfrage
+            <acronym>URI</acronym> welche, wenn Sie mit dem "public_dir" in dem statische Dateien
+            gecacht werden verknüpft wird, und eine vor-gespeicherte Erweiterung angehängt wird,
+            entweder den Namen einer statischen Datei anbietet welche zu löschen ist, oder einen
+            Verzeichnispfad welcher rekursiv zu löschen ist. Durch die Einschränkung von
             <classname>Zend_Cache_Backend_Interface</classname> akzeptieren alle anderen Methoden
-            wie <classname>save()</classname> eine ID welche durch Anwendung von bin2hex() auf eine
-            Anfrage URI berechnet wird.
+            wie <methodname>save()</methodname> eine ID welche durch Anwendung von
+            <methodname>bin2hex()</methodname> auf eine Anfrage <acronym>URI</acronym> berechnet
+            wird.
         </para>
 
         <para>
@@ -656,20 +658,21 @@ RewriteRule ^.*$ index.php [NC,L]
             <classname>Zend_Controller_Action_Helper_Cache</classname> ausgelegt. Dieser Helfer
             assistiert beim Einstellen welche Aktionen eines Controllers zu cachen sind, mit welchen
             Tags, und mit welcher Erweiterung. Er bietet auch Methoden für das Entleeren des Caches
-            durch die Anfrage URI oder Tag. Statischen Dateicaching wird auch durch
-            <classname>Zend_Cache_Manager</classname> unterstützt welcher vorkonfigurierte
+            durch die Anfrage <acronym>URI</acronym> oder Tag. Statischen Dateicaching wird auch
+            durch <classname>Zend_Cache_Manager</classname> unterstützt welcher vorkonfigurierte
             Konfigurationstemplates für den statischen Cache enthält (als
-            Zend_Cache_Manager::PAGECACHE oder "page"). Die Standardwerte können hierbei wie
-            benötigt konfiguriert werden um einen "public_dir" Ort für das Cachen zu setzen, usw.
+            <constant>Zend_Cache_Manager::PAGECACHE</constant> oder "page"). Die Standardwerte
+            können hierbei wie benötigt konfiguriert werden um einen "public_dir" Ort für das Cachen
+            zu setzen, usw.
         </para>
 
         <note>
             <para>
                 Es sollte beachtet werden dass der statische Cache aktuell einen zweiten Cache
                 verwendet um Tags zu speichern (offensichtlich können wir Sie nicht anderswo
-                speichern da bei einem statischen Cache PHP nicht aufgerufen wird wenn er
-                richtig arbeitet). Das ist nur ein standardmäßiger Core Cache, und er sollte ein
-                persistentes Backend wie File oder TwoLevels verwenden (um die Vorteile des
+                speichern da bei einem statischen Cache <acronym>PHP</acronym> nicht aufgerufen wird
+                wenn er richtig arbeitet). Das ist nur ein standardmäßiger Core Cache, und er sollte
+                ein persistentes Backend wie File oder TwoLevels verwenden (um die Vorteile des
                 Memory Speichers zu verwenden ohne die permanente Persistenz zu opfern). Das
                 Backend enthält die Option "tag_cache" um es zu konfigurieren (das ist
                 obligatorisch), oder die Methode <methodname>setInnerCache()</methodname>.
@@ -693,7 +696,7 @@ RewriteRule ^.*$ index.php [NC,L]
                     <row>
                         <entry><emphasis>public_dir</emphasis></entry>
                         <entry><type>String</type></entry>
-                        <entry>NULL</entry>
+                        <entry><constant>NULL</constant></entry>
 
                         <entry>
                             Verzeichnis in dem statische Dateien zu speichern sind. Es muß im
@@ -756,7 +759,7 @@ RewriteRule ^.*$ index.php [NC,L]
                     <row>
                         <entry><emphasis>file_extension</emphasis></entry>
                         <entry><type>String</type></entry>
-                        <entry>'.html'</entry>
+                        <entry>'<filename>.html</filename>'</entry>
 
                         <entry>
                             Standardmäßige Dateierweiterung für erstellt statische Dateien. Diese
@@ -764,7 +767,7 @@ RewriteRule ^.*$ index.php [NC,L]
                             <methodname>Zend_Cache_Backend_Static::save()</methodname> obwohl
                             generell empfohlen wird sich auf
                             <classname>Zend_Controller_Action_Helper_Cache</classname> zu verlassen
-                            wenn man das macht, weil es ein einfacherer Weg ist als mit Arrays und
+                            wenn man das macht, weil es ein einfacherer Weg ist als mit Arrays oder
                             der manuellen Serialisierung herumzuspielen.
                         </entry>
                     </row>
@@ -775,37 +778,38 @@ RewriteRule ^.*$ index.php [NC,L]
                         <entry>'index'</entry>
 
                         <entry>
-                            Wenn eine Anfrage URI nicht genügend Informationen enthält um eine
-                            statische Datei zu erstellen (normalerweise bedeutet dies einen
-                            Indexaufruf, z.B. die URI von '/'), dann wir stattdessen
-                            index_filename verwendet. Deshalb würden '' oder '/' auf 'index.html'
-                            verweisen (in der Annahme das die standardmäßige file_extension '.html'
-                            ist).
+                            Wenn eine Anfrage <acronym>URI</acronym> nicht genügend Informationen
+                            enthält um eine statische Datei zu erstellen (normalerweise bedeutet
+                            dies einen Indexaufruf, z.B. die <acronym>URI</acronym> von '/'), dann
+                            wir stattdessen index_filename verwendet. Deshalb würden '' oder '/' auf
+                            '<filename>index.html</filename>' verweisen (in der Annahme das die
+                            standardmäßige file_extension '<filename>.html</filename>' ist).
                         </entry>
                     </row>
 
                     <row>
                         <entry><emphasis>tag_cache</emphasis></entry>
                         <entry><type>Object</type></entry>
-                        <entry>NULL</entry>
+                        <entry><constant>NULL</constant></entry>
 
                         <entry>
                             Wird verwendet um einen 'inner' Cache zu Setzen der verwendet wird um
                             Tags zu speichern und Dateierweiterungen mit statischen Dateien zu
-                            verknüpfen. Das MUSS gesetzt sein, oder der statische Cache kann nicht
-                            verfolgt und gemanagt werden.
+                            verknüpfen. Das <emphasis>muss</emphasis> gesetzt sein, oder der
+                            statische Cache kann nicht verfolgt und gemanagt werden.
                         </entry>
                     </row>
 
                     <row>
                         <entry><emphasis>disable_caching</emphasis></entry>
                         <entry><type>Boolean</type></entry>
-                        <entry>FALSE</entry>
+                        <entry><constant>FALSE</constant></entry>
 
                         <entry>
-                            Wenn es auf TRUE gesetzt wird, werden statische Dateien nicht gecacht.
-                            Das zwingt alle Anfragen dynamisch zu sein, selbst wenn diese markiert
-                            und in den Controller gecacht sind. Dies ist für das Debuggen nützlich.
+                            Wenn es auf <constant>TRUE</constant> gesetzt wird, werden statische
+                            Dateien nicht gecacht. Das zwingt alle Anfragen dynamisch zu sein,
+                            selbst wenn diese markiert und in den Controller gecacht sind. Dies ist
+                            für das Debuggen nützlich.
                         </entry>
                     </row>
                 </tbody>

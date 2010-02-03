@@ -7,15 +7,17 @@
         <title>Introduction to DeveloperGarden</title>
 
         <para>
-            DeveloperGarden is the name for the &quot;Open Development services&quot; of the German
-            Telekom. The &quot;Open Development services&quot; are a set of <acronym>SOAP</acronym>
-            API Services.
+            Developer Garden is the name of Deutsche Telekom’s developer community.
+			Developer Garden offers you  access to core services of Deutsche Telekom,
+			such as voice connections (Voice Call) or sending text messages (Send SMS)
+			via open interfaces (Open APIs). You can access the Developer Garden
+			services directly via <acronym>SOAP</acronym> or <acronym>REST</acronym>.
         </para>
 
         <para>
             The family of <classname>Zend_Service_DeveloperGarden</classname> components provides a
             clean and simple interface to the <ulink
-                url="http://www.developergarden.com">DeveloperGarden API</ulink> and additionally
+                url="http://www.developergarden.com">Developer Garden APIs</ulink> and additionally
             offers functionality to improve handling and performance.
         </para>
 
@@ -30,9 +32,9 @@
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.iplocation">IpLocation</link>:
+                    <link linkend="zend.service.developergarden.iplocation">IPLocation</link>:
                     Locale the given IP and returns geo coordinates. Works only with IPs allocated
-                    in the network of the german telekom.
+                    in the network of the Deutsche Telekom.
                     </para>
             </listitem>
 
@@ -46,22 +48,22 @@
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.sendsms">SendSms</link>: Send a Sms
-                    or Flash Sms to a given number.
+                    <link linkend="zend.service.developergarden.sendsms">SendSMS</link>: Send a SMS
+                    or Flash SMS to a given number.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.smsvalidation">SmsValidation</link>:
-                    You can validate a number to use it with SendSms for also supply a back channel.
+                    <link linkend="zend.service.developergarden.smsvalidation">SMSValidation</link>:
+                    You can validate a number to use it with SendSMS for also supply a back channel.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
                     <link linkend="zend.service.developergarden.voicecall">VoiceCall</link>:
-                    Initiates a call between two numbers.
+                    Initiates a call between two participants.
                  </para>
             </listitem>
 
@@ -76,7 +78,7 @@
         </itemizedlist>
 
         <para>
-            The backend SOAP API is documented
+            The backend <acronym>SOAP</acronym> API is documented
             <ulink url="http://www.developergarden.com/openapi/dokumentation/">here</ulink>.
         </para>
 

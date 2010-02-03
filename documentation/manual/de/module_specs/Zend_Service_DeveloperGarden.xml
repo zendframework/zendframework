@@ -8,9 +8,11 @@
         <title>Einführung in DeveloperGarden</title>
 
         <para>
-            DeveloperGarden ist der Name für die &quot;Open Development services&quot; der Deutschen
-            Telekom. Die &quot;Open Development services&quot; sind ein Set von
-            <acronym>SOAP</acronym> API Services.
+            Developer Garden ist der Name für die Entwicker Community der Deutschen Telekom.
+			Developer Garden erlaubt den Zugriff auf die zentralen Services der Deutschen Telekom,
+			wie z.B. Sprache Verbindungen oder der Versand von SMS Nachrichten über die Open Apis.
+			Der Zugriff auf die API Services erfolgt über <acronym>SOAP</acronym> 
+			oder <acronym>REST</acronym>.
         </para>
 
         <para>
@@ -31,9 +33,9 @@
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.iplocation">IpLocation</link>:
+                    <link linkend="zend.service.developergarden.iplocation">IPLocation</link>:
                     Lokalisiert die angegebene IP und gibt deren Geo Koordinaten zurück. Arbeitet
-                    nur mit IPs welche dem Netzwerk der deutschen Telekom zugeordnet sind.
+                    nur mit IPs welche dem Netzwerk der Deutschen Telekom zugeordnet sind.
                 </para>
             </listitem>
 
@@ -47,15 +49,15 @@
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.sendsms">SendSms</link>: Sendet
-                    eine Sms oder Flash Sms zu einer gegebenen Nummer.
+                    <link linkend="zend.service.developergarden.sendsms">SendSMS</link>: Sendet
+                    eine SMS oder Flash SMS zu einer gegebenen Nummer.
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <link linkend="zend.service.developergarden.smsvalidation">SmsValidation</link>:
-                    Prüft eine Nummer um Sie mit SendSms zu verwenden und auch um einen Rückkanal
+                    <link linkend="zend.service.developergarden.smsvalidation">SMSValidation</link>:
+                    Prüft eine Nummer um Sie mit SendSMS zu verwenden und auch um einen Rückkanal
                     zu unterstützen.
                 </para>
             </listitem>
@@ -63,7 +65,7 @@
             <listitem>
                 <para>
                     <link linkend="zend.service.developergarden.voicecall">VoiceCall</link>:
-                    Initiiert alle Anrufe zwischen zwei Nummern.
+                    Initiiert alle Anrufe zwischen zwei Teilnehmern.
                  </para>
             </listitem>
 
@@ -105,7 +107,7 @@
                 <listitem>
                     <para>
                         <emphasis>production</emphasis>: In der Produktionsumgebung muss man für
-                        Anrufe, Sms und andere Bezahlservices zahlen.
+                        Anrufe, SMS und andere Bezahlservices zahlen.
                     </para>
                 </listitem>
 

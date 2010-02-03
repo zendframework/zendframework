@@ -226,22 +226,16 @@ class Zend_Cache_Backend
         if (!isset($this->_directives['logging']) || !$this->_directives['logging']) {
             return;
         }
-        try {
-            /**
-             * @see Zend_Log
-             */
-            require_once 'Zend/Log.php';
-        } catch (Zend_Exception $e) {
-            Zend_Cache::throwException('Logging feature is enabled but the Zend_Log class is not available', $e);
-        }
+
         if (isset($this->_directives['logger'])) {
             if ($this->_directives['logger'] instanceof Zend_Log) {
                 return;
-            } else {
-                Zend_Cache::throwException('Logger object is not an instance of Zend_Log class.');
             }
+            Zend_Cache::throwException('Logger object is not an instance of Zend_Log class.');
         }
+
         // Create a default logger to the standard output stream
+        require_once 'Zend/Log.php';
         require_once 'Zend/Log/Writer/Stream.php';
         $logger = new Zend_Log(new Zend_Log_Writer_Stream('php://output'));
         $this->_directives['logger'] = $logger;

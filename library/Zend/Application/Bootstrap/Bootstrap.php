@@ -80,7 +80,7 @@ class Zend_Application_Bootstrap_Bootstrap
      * If so, it registers the bootstrap with the 'bootstrap' parameter of
      * the front controller, and dispatches the front controller.
      *
-     * @return void
+     * @return mixed
      * @throws Zend_Application_Bootstrap_Exception
      */
     public function run()
@@ -94,7 +94,10 @@ class Zend_Application_Bootstrap_Bootstrap
         }
 
         $front->setParam('bootstrap', $this);
-        $front->dispatch();
+        $response = $front->dispatch();
+        if ($front->returnResponse()) {
+            return $response;
+        }
     }
 
     /**

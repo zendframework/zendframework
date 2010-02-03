@@ -90,6 +90,14 @@
                 register with the front controller.
             </para>
         </listitem>
+
+        <listitem>
+            <para>
+                <emphasis><property>returnresponse</property></emphasis>: whether or not to return
+                the response object after dispatching the front controller. Value should be a
+                boolean; by default, this is disabled.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -118,6 +126,7 @@ resources.frontController.plugins.foo = "My_Plugin_Foo"
 resources.frontController.plugins.bar = "My_Plugin_Bar"
 resources.frontController.plugins.baz.class = "My_Plugin_Baz"
 resources.frontController.plugins.baz.stackIndex = 123
+resources.frontController.returnresponse = 1
 resources.frontController.env = APPLICATION_ENV
 ]]></programlisting>
     </example>

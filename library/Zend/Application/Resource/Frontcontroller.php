@@ -113,6 +113,10 @@ class Zend_Application_Resource_Frontcontroller extends Zend_Application_Resourc
                     }
                     break;
 
+                case 'returnresponse':
+                    $front->returnResponse((bool) $value);
+                    break;
+
                 case 'throwexceptions':
                     $front->throwExceptions((bool) $value);
                     break;

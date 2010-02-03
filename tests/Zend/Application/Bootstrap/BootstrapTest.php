@@ -167,6 +167,29 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit_Framework_TestCas
         $al = $bootstrap->getResourceLoader();
         $this->assertEquals('Default', $al->getNamespace());
     }
+
+    /**
+     * @group ZF-7367
+     */
+    public function testBootstrapRunMethodShouldReturnResponseIfFlagEnabled()
+    {
+        $this->bootstrap->setOptions(array(
+            'resources' => array(
+                'frontcontroller' => array(
+                    'moduleDirectory' => dirname(__FILE__) . '/../_files/modules',
+                    'returnresponse'  => true,
+                ),
+            ),
+        ));
+        $this->bootstrap->bootstrap();
+
+        $front   = $this->bootstrap->getResource('FrontController');
+        $request = $front->getRequest();
+        $request->setRequestUri('/zfappbootstrap');
+
+        $result = $this->bootstrap->run();
+        $this->assertTrue($result instanceof Zend_Controller_Response_Abstract);
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Bootstrap_BootstrapTest::main') {

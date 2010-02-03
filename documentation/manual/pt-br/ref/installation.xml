@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19778 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <chapter id="introduction.installation">
-
     <title>Instalação</title>
 
     <para>
@@ -26,6 +25,7 @@
                 aqueles que ainda não conhecem o Zend Framework.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <ulink url="http://framework.zend.com/download/snapshot">Baixe o nightly snapshot
@@ -36,6 +36,7 @@
                 Zend Framework, considere usar um cliente de Subversion (<acronym>SVN</acronym>).
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Usar um cliente <ulink url="http://subversion.tigris.org">Subversion</ulink>
@@ -46,12 +47,14 @@
                 aplicação, se desejar contribuir com o framework, ou se precisar atualizar sua
                 versão do framework antes que os lançamentos ocorram.
             </para>
+
             <para>
                 <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.export.html">
                 Exportação</ulink> é útil se você quiser pegar uma determinada revisão do
                 framework sem que os diretórios <filename>.svn</filename> sejam criados em uma
                 cópia de trabalho.
             </para>
+
             <para>
                 <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.checkout.html">
                 Verifique uma cópia de trabalho</ulink> caso queira contribuir com o Zend
@@ -62,12 +65,14 @@
                 <ulink url="http://svnbook.red-bean.com/nightly/en/svn.ref.svn.c.commit.html">
                 svn commit</ulink>.
             </para>
+
             <para>
                 Uma
                 <ulink url="http://svnbook.red-bean.com/nightly/en/svn.advanced.externals.html">
                 definição externa</ulink> é altamente conveniente para desenvolvedores que já usam
                 <acronym>SVN</acronym> para gerenciar cópias de trabalho de sua aplicação.
             </para>
+
             <para>
                 A <acronym>URL</acronym> para o trunk do repositório <acronym>SVN</acronym> do
                 Zend Framework é: <ulink
@@ -98,5 +103,4 @@
         escolhidos para uso independente conforme a necessidade. Cada um dos capítulos seguintes
         documenta o uso de um determinado componente.
     </para>
-
 </chapter>

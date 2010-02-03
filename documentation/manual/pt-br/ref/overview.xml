@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19778 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <chapter id="introduction.overview">
-
     <title>Resumo</title>
 
     <para>
@@ -13,6 +12,7 @@
         permite que os desenvolvedores utilizem os componentes individualmente.
         Costumamos chamar isso de modelo "use à vontade".
     </para>
+
     <para>
         Embora eles possam ser usados separadamente, os componentes da biblioteca padrão do
         Zend Framework formam um poderoso e extensível framework para aplicações web quando
@@ -28,6 +28,7 @@
         provavelmente irá encontrar um componente do Zend Framework que poderá ser usado para
         reduzir drasticamente o tempo de desenvolvimento com uma base testada exaustivamente.
     </para>
+
     <para>
         A principal patrocinadora do projeto 'Zend Framework' é a
         <ulink url="http://www.zend.com">Zend Technologies</ulink>, mas muitas empresas têm
@@ -36,6 +37,7 @@
         interfaces de web services e outras tecnologias que pretendam disponibilizar aos
         desenvolvedores do Zend Framework.
     </para>
+
     <para>
         Zend Framework não poderia distribuir e dar suporte a todos esses recursos sem a ajuda da
         vibrante comunidade do Zend Framework. Os membros da comunidade, incluindo colaboradores,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15215 -->
+<!-- EN-Revision: 20872 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.configuration">
     <title>Configuração</title>
@@ -19,22 +19,24 @@
                     <entry>Descrição</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry>setCurrentPageNumber</entry>
-                    <entry>
-                        Define o número da página atual (padrão 1).
-                    </entry>
+                    <entry>Define o número da página atual (padrão 1).</entry>
                 </row>
+
                 <row>
                     <entry>setItemCountPerPage</entry>
+
                     <entry>
-                        Define o número máximo de itens a serem exibidos em uma página
-                        (padrão 10).
+                        Define o número máximo de itens a serem exibidos em uma página (padrão 10).
                     </entry>
                 </row>
+
                 <row>
                     <entry>setPageRange</entry>
+
                     <entry>
                         Define o número de itens a serem exibidos no controle de paginação (padrão
                         10). Nota: Na maioria das vezes esse número será aderido exatamente, mas
@@ -42,8 +44,10 @@
                         inicial (ex.: Elástico).
                     </entry>
                 </row>
+
                 <row>
                     <entry>setView</entry>
+
                     <entry>
                         Define a instância da apresentação, para conveniência na renderização.
                     </entry>

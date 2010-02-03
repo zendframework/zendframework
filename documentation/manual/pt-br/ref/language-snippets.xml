@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 20313 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 
 <!-- links -->
@@ -52,4 +52,3 @@
 <!ENTITY requirements.all.components            'Todos os Componentes'>
 <!ENTITY requirements.virtually.all.components  'Virtualmente todos os componentes'>
 <!ENTITY requirements.all.pdo.adapters          'Todos os adaptadores de banco de dados <acronym>PDO</acronym>'>
-

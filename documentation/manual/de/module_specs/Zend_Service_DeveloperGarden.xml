@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20221 -->
+<!-- EN-Revision: 20760 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.developergarden">
     <title>Zend_Service_DeveloperGarden</title>
@@ -9,10 +9,10 @@
 
         <para>
             Developer Garden ist der Name für die Entwicker Community der Deutschen Telekom.
-			Developer Garden erlaubt den Zugriff auf die zentralen Services der Deutschen Telekom,
-			wie z.B. Sprache Verbindungen oder der Versand von SMS Nachrichten über die Open Apis.
-			Der Zugriff auf die API Services erfolgt über <acronym>SOAP</acronym> 
-			oder <acronym>REST</acronym>.
+            Developer Garden erlaubt den Zugriff auf die zentralen Services der Deutschen Telekom,
+            wie z.B. Sprache Verbindungen oder der Versand von SMS Nachrichten über die Open Apis.
+            Der Zugriff auf die API Services erfolgt über <acronym>SOAP</acronym>
+            oder <acronym>REST</acronym>.
         </para>
 
         <para>

@@ -72,7 +72,7 @@ $storageClient->deleteContainer('testcontainer');
                 Container hierfür bereits vorher erstellt worden sein muss.
             </para>
 
-            <example id="zend.service.windowsazure.storage.blob.api.storing-blob">
+            <example id="zend.service.windowsazure.storage.blob.api.storing-blob.example">
                 <title>Speichern eines Blobs</title>
 
                 <programlisting language="php"><![CDATA[

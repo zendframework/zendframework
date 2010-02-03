@@ -112,7 +112,7 @@ class MyClass
     }
 }
 
-$valid = new Zend_Validate_Callback(array('MyClass, 'test'));
+$valid = new Zend_Validate_Callback(array('MyClass', 'test'));
 if ($valid->isValid($input)) {
     // input semble valide
 } else {

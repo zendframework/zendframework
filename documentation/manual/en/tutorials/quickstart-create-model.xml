@@ -516,8 +516,7 @@ class Application_Model_GuestbookMapper
             $entry->setId($row->id)
                   ->setEmail($row->email)
                   ->setComment($row->comment)
-                  ->setCreated($row->created)
-                  ->setMapper($this);
+                  ->setCreated($row->created);
             $entries[] = $entry;
         }
         return $entries;

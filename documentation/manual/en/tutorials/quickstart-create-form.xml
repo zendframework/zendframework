@@ -164,9 +164,8 @@ echo $this->form;
         </para>
 
         <para>
-            Additionally, you may be interested in <ulink
-                url="http://weierophinney.net/matthew/plugin/tag/decorators">this series of posts on
-                decorators</ulink>.
+            Additionally, you may be interested in <link
+                linkend="learning.form.decorators.intro">our tutorial on form decorators</link>.
         </para>
     </note>
 

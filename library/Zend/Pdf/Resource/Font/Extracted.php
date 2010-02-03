@@ -21,7 +21,7 @@
  */
 
 
-/** Zend_Pdf_Resource_Font */
+/** @see Zend_Pdf_Resource_Font */
 require_once 'Zend/Pdf/Resource/Font.php';
 
 /**
@@ -37,6 +37,13 @@ require_once 'Zend/Pdf/Resource/Font.php';
  */
 class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
 {
+    /**
+     * Messages
+     */
+    const TYPE_NOT_SUPPORTED = 'Unsupported font type.';
+    const ENCODING_NOT_SUPPORTED  = 'Font encoding is not supported';
+    const OPERATION_NOT_SUPPORTED = 'Operation is not supported for extracted fonts';
+
     /**
      * Extracted font encoding
      *
@@ -70,7 +77,7 @@ class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
                 if (count($fontDictionary->DescendantFonts->items) != 1) {
                     // Multiple descendant fonts are not supported
                     require_once 'Zend/Pdf/Exception.php';
-                    throw new Zend_Pdf_Exception('Unsupported font type.');
+                    throw new Zend_Pdf_Exception(self::TYPE_NOT_SUPPORTED);
                 }
 
                 $fontDictionaryIterator = $fontDictionary->DescendantFonts->items->getIterator();
@@ -109,7 +116,7 @@ class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
 
             default:
                 require_once 'Zend/Pdf/Exception.php';
-                throw new Zend_Pdf_Exception('Unsupported font type.');
+                throw new Zend_Pdf_Exception(self::TYPE_NOT_SUPPORTED);
         }
 
         $this->_fontNames[Zend_Pdf_Font::NAME_POSTSCRIPT]['en'] = iconv('UTF-8', 'UTF-16BE', $fontDictionary->BaseFont->value);
@@ -141,7 +148,7 @@ class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
     public function glyphNumbersForCharacters($characterCodes)
     {
         require_once 'Zend/Pdf/Exception.php';
-        throw new Zend_Pdf_Exception('Operation is not supported for extracted fonts');
+        throw new Zend_Pdf_Exception(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -159,7 +166,7 @@ class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
     public function glyphNumberForCharacter($characterCode)
     {
         require_once 'Zend/Pdf/Exception.php';
-        throw new Zend_Pdf_Exception('Operation is not supported for extracted fonts');
+        throw new Zend_Pdf_Exception(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -183,7 +190,7 @@ class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
     public function getCoveredPercentage($string, $charEncoding = '')
     {
         require_once 'Zend/Pdf/Exception.php';
-        throw new Zend_Pdf_Exception('Operation is not supported for extracted fonts');
+        throw new Zend_Pdf_Exception(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -201,7 +208,7 @@ class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
     public function widthsForGlyphs($glyphNumbers)
     {
         require_once 'Zend/Pdf/Exception.php';
-        throw new Zend_Pdf_Exception('Operation is not supported for extracted fonts');
+        throw new Zend_Pdf_Exception(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -216,7 +223,7 @@ class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
     public function widthForGlyph($glyphNumber)
     {
         require_once 'Zend/Pdf/Exception.php';
-        throw new Zend_Pdf_Exception('Operation is not supported for extracted fonts');
+        throw new Zend_Pdf_Exception(self::OPERATION_NOT_SUPPORTED);
     }
 
     /**
@@ -239,7 +246,7 @@ class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
         }
 
         require_once 'Zend/Pdf/Exception.php';
-        throw new Zend_Pdf_Exception('Fonf encoding is not supported');
+        throw new Zend_Pdf_Exception(self::ENCODING_NOT_SUPPORTED);
     }
 
     /**
@@ -262,6 +269,6 @@ class Zend_Pdf_Resource_Font_Extracted extends Zend_Pdf_Resource_Font
         }
 
         require_once 'Zend/Pdf/Exception.php';
-        throw new Zend_Pdf_Exception('Fonf encoding is not supported');
+        throw new Zend_Pdf_Exception(self::ENCODING_NOT_SUPPORTED);
     }
 }

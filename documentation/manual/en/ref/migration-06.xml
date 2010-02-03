@@ -75,6 +75,7 @@ $ctrl->dispatch();
                             Set <methodname>throwExceptions()</methodname> in the front
                             controller:
                         </para>
+
                         <programlisting language="php"><![CDATA[
 $front->throwExceptions(true);
 ]]></programlisting>
@@ -85,6 +86,7 @@ $front->throwExceptions(true);
                             Set <methodname>renderExceptions()</methodname> in the response
                             object:
                         </para>
+
                         <programlisting language="php"><![CDATA[
 $response->renderExceptions(true);
 $front->setResponse($response);

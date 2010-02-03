@@ -61,8 +61,9 @@
     </sect2>
 
     <sect2 id="performance.database.select">
-        <title>SQL generated with Zend_Db_Select s not hitting my indexes; how
-            can I make it better?</title>
+        <title>
+            SQL generated with Zend_Db_Select s not hitting my indexes; how can I make it better?
+        </title>
 
         <para>
             <classname>Zend_Db_Select</classname> is relatively good at its job. However,
@@ -79,6 +80,7 @@
                 <classname>Zend_Db_Select</classname>, so providing your own, tuned
                 <acronym>SQL</acronym> select statements is a perfectly legitimate approach,
             </para>
+
             <para>
                 Run <constant>EXPLAIN</constant> on your queries, and test a variety of
                 approaches until you can reliably hit your indices in the most

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <appendix id="requirements" xmlns:xi="http://www.w3.org/2001/XInclude">
-
     <title>Zend Framework Requirements</title>
 
     <sect1 id="requirements.introduction">
-
         <title>Introduction</title>
 
         <para>
@@ -24,7 +22,6 @@
         </para>
 
         <sect2 id="requirements.version">
-
             <title>PHP Version</title>
 
             <para>
@@ -37,11 +34,9 @@
                 Zend Framework has an extensive collection of unit tests, which you can run using
                 PHPUnit 3.3.0 or later.
             </para>
-
         </sect2>
 
         <sect2 id="requirements.extensions">
-
             <title>PHP Extensions</title>
 
             <para>
@@ -66,7 +61,6 @@
         </sect2>
 
         <sect2 id="requirements.zendcomponents">
-
             <title>Zend Framework Components</title>
 
             <para>
@@ -91,7 +85,6 @@
         </sect2>
 
         <sect2 id="requirements.dependencies">
-
             <title>Zend Framework Dependencies</title>
 
             <para>
@@ -123,9 +116,7 @@
 
             <xi:include href="requirements-dependencies-table.xml" />
         </sect2>
-
     </sect1>
-
 </appendix>
 <!--
 vim:se ts=4 sw=4 et:

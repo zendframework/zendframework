@@ -25,26 +25,33 @@
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <methodname>getDefaultModule()</methodname>: should return the name of
-                    the default module.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getDefaultModule()</methodname>: should return the name of
+                        the default module.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getDefaultControllerName()</methodname>: should return the
-                    name of the default controller.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getDefaultControllerName()</methodname>: should return the
+                        name of the default controller.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <methodname>getDefaultAction()</methodname>: should return the
-                    name of the default action.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <methodname>getDefaultAction()</methodname>: should return the
+                        name of the default action.
+                    </para>
+                </listitem>
             </itemizedlist>
         </sect3>
     </sect2>
 
     <sect2 id="migration.16.zend.file.transfer">
         <title>Zend_File_Transfer</title>
+
         <sect3 id="migration.16.zend.file.transfer.validators">
             <title>Changes when using validators</title>
 
@@ -62,15 +69,19 @@
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    Old method <acronym>API</acronym>: <methodname>addValidator($validator,
-                    $options, $files)</methodname>.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        Old method <acronym>API</acronym>: <methodname>addValidator($validator,
+                            $options, $files)</methodname>.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    New method <acronym>API</acronym>: <methodname>addValidator($validator,
-                    $breakChainOnFailure, $options, $files)</methodname>.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        New method <acronym>API</acronym>: <methodname>addValidator($validator,
+                            $breakChainOnFailure, $options, $files)</methodname>.
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>

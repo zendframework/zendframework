@@ -276,8 +276,8 @@ foreach ($form->getElements() as $element) {
 
     <para>
         By this point in the tutorial, you should be getting fairly comfortable with the markup
-        possibilities using <classname>Zend_Form</classname>'s decorators. In the next section, we'll
-        revisit the date element from above, and demonstrate how to create a custom element
+        possibilities using <classname>Zend_Form</classname>'s decorators. In the next section,
+        we'll revisit the date element from above, and demonstrate how to create a custom element
         and decorator for composite elements.
     </para>
 </sect1>

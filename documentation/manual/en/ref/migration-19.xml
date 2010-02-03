@@ -181,67 +181,83 @@ $client->setFileUpload('file2.txt',
                             <entry>New call</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry>
                                 <methodname>getLanguageTranslationList($locale)</methodname>
                             </entry>
+
                             <entry>
                                 <methodname>getTranslationList('language', $locale)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getScriptTranslationList($locale)</methodname>
                             </entry>
+
                             <entry>
                                 <methodname>getTranslationList('script', $locale)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getCountryTranslationList($locale)</methodname>
                             </entry>
+
                             <entry>
                                 <methodname>getTranslationList('territory', $locale, 2)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getTerritoryTranslationList($locale)</methodname>
                             </entry>
+
                             <entry>
                                 <methodname>getTranslationList('territory', $locale, 1)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getLanguageTranslation($value, $locale)</methodname>
                             </entry>
+
                             <entry>
                                 <methodname>getTranslation($value, 'language', $locale)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getScriptTranslation($value, $locale)</methodname>
                             </entry>
+
                             <entry>
                                 <methodname>getTranslation($value, 'script', $locale)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getCountryTranslation($value, $locale)</methodname>
                             </entry>
+
                             <entry>
                                 <methodname>getTranslation($value, 'country', $locale)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getTerritoryTranslation($value, $locale)</methodname>
                             </entry>
+
                             <entry>
                                 <methodname>getTranslation($value, 'territory',
                                     $locale)</methodname>

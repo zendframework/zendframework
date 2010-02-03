@@ -144,21 +144,27 @@ class My_View extends Zend_View
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <varname>$name</varname>: the name of the view script to render
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <varname>$name</varname>: the name of the view script to render
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <varname>$module</varname>: the name of the module in which the
-                    view script resides; or, if no third argument is provided
-                    and this is an array or object, it will be the
-                    <varname>$model</varname> argument.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <varname>$module</varname>: the name of the module in which the
+                        view script resides; or, if no third argument is provided
+                        and this is an array or object, it will be the
+                        <varname>$model</varname> argument.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <varname>$model</varname>: an array or object to pass to the
-                    partial representing the clean data to assign to the view.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <varname>$model</varname>: an array or object to pass to the
+                        partial representing the clean data to assign to the view.
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>

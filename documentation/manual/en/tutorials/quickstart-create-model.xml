@@ -16,8 +16,8 @@
         mini-applications.  Modules mimic the directory structure that the <command>zf</command>
         tool sets up under <filename>application/</filename>, and all classes inside them are
         assumed to begin with a common prefix, the module name.  <filename>application/</filename>
-        is itself a module -- the "default" or "application" module. As such, we'll want to setup autoloading for resources
-        within this directory.
+        is itself a module -- the "default" or "application" module. As such, we'll want to setup
+        autoloading for resources within this directory.
     </para>
 
     <para>
@@ -445,7 +445,7 @@ class Application_Model_GuestbookMapper
 Creating a model at application/models/GuestbookMapper.php
 Updating project profile '.zfproject.xml'
 ]]></programlisting>
-        
+
     <para>
         Now, edit the class <classname>Application_Model_GuestbookMapper</classname> found in
         <filename>application/models/GuestbookMapper.php</filename> to read as follows:
@@ -535,7 +535,7 @@ class Application_Model_GuestbookMapper
 Creating a model at application/models/Guestbook.php
 Updating project profile '.zfproject.xml'
 ]]></programlisting>
-    
+
     <para>
         We'll modify this empty PHP class to make it easy to populate the model by passing an array
         of data either to the constructor or a <methodname>setOptions()</methodname> method. The
@@ -647,12 +647,12 @@ class Application_Model_Guestbook
 
     <programlisting language="shell"><![CDATA[
 % zf create controller Guestbook
-Creating a controller at 
+Creating a controller at
     application/controllers/GuestbookController.php
 Creating an index action method in controller Guestbook
-Creating a view script for the index action method at 
+Creating a view script for the index action method at
     application/views/scripts/guestbook/index.phtml
-Creating a controller test file at 
+Creating a controller test file at
     tests/application/controllers/GuestbookControllerTest.php
 Updating project profile '.zfproject.xml'
 ]]></programlisting>

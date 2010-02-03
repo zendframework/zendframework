@@ -24,7 +24,6 @@
             information: fingerprint, eye retinal scan, passphrase, or any other obscure personal
             information.
         </para>
-
     </sect2>
 
     <sect2 id="learning.multiuser.authentication.basic-usage">
@@ -180,4 +179,3 @@ echo $this->form;
         </para>
     </sect2>
 </sect1>
-

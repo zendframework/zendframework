@@ -121,5 +121,4 @@ foreach ($paginator as $item) {
         is being executed efficiently, see the <classname>Zend_Paginator</classname> chapter in the
         reference manual on the DbSelect and DbTableSelect adapters.
     </para>
-
 </sect1>

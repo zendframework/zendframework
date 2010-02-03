@@ -17,18 +17,17 @@
         <para>
             The act of interacting with a web application is typically defined by the sum
             of all requests sent to a web server.  Since there can be many consumers being served
-            simultaneously, the application must decide which requests belong to which consumer.  These
-            requests are typically known as a "session".
+            simultaneously, the application must decide which requests belong to which consumer.
+            These requests are typically known as a "session".
         </para>
 
         <para>
             In PHP, the session problem is solved by the session extension which utilizes some state
             tracking, typically cookies, and some form of local storage which is exposed via the
-            $_SESSION superglobal.  In Zend Framework, the component Zend_Session adds value to the php
-            session extension making it easier to use and depend on inside object-oriented
+            $_SESSION superglobal.  In Zend Framework, the component Zend_Session adds value to the
+            php session extension making it easier to use and depend on inside object-oriented
             applications.
         </para>
-
     </sect2>
 
     <sect2 id="learning.multiuser.sessions.basic-usage">
@@ -79,8 +78,8 @@ resources.session.remember_me_seconds = 864000
             into the Zend_Session managed $_SESSION superglobal.  The reason it is called
             Zend_Session_Namespace is that it effectively namespaces the data inside $_SESSION, thus
             allowing multiple components and objects to safely store and retrieve data.  In the
-            following code, we'll explore how to build a simple session incrementing counter, starting
-            at 1000 and resetting itself after 1999.
+            following code, we'll explore how to build a simple session incrementing counter,
+            starting at 1000 and resetting itself after 1999.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -100,10 +99,11 @@ if ($mysession->counter > 1999) {
         <para>
             As you can see above, the session namespace object uses the magic __get, __set,
             __isset, and __unset to allow you to seemlessly and fluently interact with the session.
-            The information stored in the above example is stored at $_SESSION['mysession']['counter'].
+            The information stored in the above example is stored at
+            $_SESSION['mysession']['counter'].
         </para>
-
     </sect2>
+
     <sect2 id="learning.multiuser.sessions.advanced-usage">
         <title>Advanced Usage of Zend_Session</title>
 
@@ -125,9 +125,5 @@ resources.session.saveHandler.options.modifiedColumn = "modified"
 resources.session.saveHandler.options.dataColumn = "session_data"
 resources.session.saveHandler.options.lifetimeColumn = "lifetime"
 ]]></programlisting>
-
-
     </sect2>
-
-
 </sect1>

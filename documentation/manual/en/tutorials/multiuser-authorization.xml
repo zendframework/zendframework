@@ -40,7 +40,6 @@
             building a tree of roles, resources and privileges to manage and query authorization
             requests against.
         </para>
-
     </sect2>
 
     <sect2 id="learning.multiuser.authorization.basic-usage">

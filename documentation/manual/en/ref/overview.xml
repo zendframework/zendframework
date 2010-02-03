@@ -11,6 +11,7 @@
         with few dependencies on other components. This loosely coupled architecture allows
         developers to use components individually. We often call this a "use-at-will" design.
     </para>
+
     <para>
         While they can be used separately, Zend Framework components in the standard library form a
         powerful and extensible web application framework when combined. Zend Framework offers a
@@ -24,6 +25,7 @@
         Whatever your application needs are, you're likely to find a Zend Framework component that
         can be used to dramatically reduce development time with a thoroughly tested foundation.
     </para>
+
     <para>
         The principal sponsor of the project 'Zend Framework' is <ulink url="http://www.zend.com">
         Zend Technologies</ulink>, but many companies have contributed components or significant
@@ -31,6 +33,7 @@
         partnered with Zend to provide interfaces to web services and other technologies that they
         wish to make available to Zend Framework developers.
     </para>
+
     <para>
         Zend Framework could not deliver and support all of these features without the help of the
         vibrant Zend Framework community. Community members, including contributors, make

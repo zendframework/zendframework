@@ -76,7 +76,6 @@
             <title>Indentation</title>
 
             <para>Indentation should consist of 4 spaces. Tabs are not allowed.</para>
-
             <para>Tags which are at the same level must have the same indentation.</para>
 
             <programlisting language="xml"><![CDATA[

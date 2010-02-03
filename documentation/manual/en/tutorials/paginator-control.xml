@@ -5,19 +5,21 @@
 
     <para>
         Rendering the items for a page on the screen has been a good start. In the code
-        snippets in previous section we have also seen the <methodname>setCurrentPageNumber()</methodname>
-        method to set the active page number. The next step is to navigate through your pages.
-        To do this, Paginator provides you with two important tools: the ability to render the Paginator
-        with help of a View Partial, and support for so-called ScrollingStyles.
+        snippets in previous section we have also seen the
+        <methodname>setCurrentPageNumber()</methodname> method to set the active page number. The
+        next step is to navigate through your pages. To do this, Paginator provides you with two
+        important tools: the ability to render the Paginator with help of a View Partial, and
+        support for so-called ScrollingStyles.
     </para>
 
     <para>
-        The View Partial is a small view script that renders the Pagination controls, such as buttons to go
-        to the next or previous page. Which pagination controls are rendered depends on the contents of
-        the view partial. Working with the view partial requires that you have set up Zend_View.
-        To get started with the pagination control, create a new view script somewhere in
-        your view scripts path. You can name it anything you want, but we'll call it "controls.phtml" in this text.
-        The reference manual contains various examples of what might go in the view script. Here is one example.
+        The View Partial is a small view script that renders the Pagination controls, such as
+        buttons to go to the next or previous page. Which pagination controls are rendered depends
+        on the contents of the view partial. Working with the view partial requires that you have
+        set up Zend_View. To get started with the pagination control, create a new view script
+        somewhere in your view scripts path. You can name it anything you want, but we'll call it
+        "controls.phtml" in this text. The reference manual contains various examples of what might
+        go in the view script. Here is one example.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -73,11 +75,11 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
 
     <para>
         The last step is probably the easiest. Make sure you have assigned your Paginator object
-        to the a script (NOT the 'controls.phtml' script!). The only thing left to do is echo the Paginator in the view script.
-        This will automatically render the Paginator using the PaginationControl view helper.
-        In this next example, the Paginator object has been assigned to the 'paginator' view variable.
-        Don't worry if you don't fully get how it all works yet. The next section will feature
-        a complete example.
+        to the a script (NOT the 'controls.phtml' script!). The only thing left to do is echo the
+        Paginator in the view script. This will automatically render the Paginator using the
+        PaginationControl view helper. In this next example, the Paginator object has been assigned
+        to the 'paginator' view variable. Don't worry if you don't fully get how it all works yet.
+        The next section will feature a complete example.
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -85,14 +87,15 @@ Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
 ]]></programlisting>
 
     <para>
-        <classname>Zend_Paginator</classname>, together with the 'controls.phtml' view script you wrote,
-        makes sure your Paginator navigation is rendered properly. In order to decide
+        <classname>Zend_Paginator</classname>, together with the 'controls.phtml' view script you
+        wrote, makes sure your Paginator navigation is rendered properly. In order to decide
         which page numbers need to be displayed on screen, Paginator uses so-called ScrollingStyles.
         The default style is called "Sliding", which is similar to the way Yahoo's search result
         navigation works. To mimick Google's ScrollingStyle, use the Elastic style.
-        You can set a default ScrollingStyle with the static <methodname>setDefaultScrollingStyle()</methodname> method,
-        or you can specify a ScrollingStyle dynamically when rendering the Paginator in your view script. This
-        requires manual invocation of the view helper in your view script.
+        You can set a default ScrollingStyle with the static
+        <methodname>setDefaultScrollingStyle()</methodname> method, or you can specify a
+        ScrollingStyle dynamically when rendering the Paginator in your view script. This requires
+        manual invocation of the view helper in your view script.
     </para>
 
     <programlisting language="php"><![CDATA[

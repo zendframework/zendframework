@@ -51,4 +51,3 @@
 <!ENTITY requirements.all.components            'All Components'>
 <!ENTITY requirements.virtually.all.components  'Virtually all components'>
 <!ENTITY requirements.all.pdo.adapters          'All <acronym>PDO</acronym> database adapters'>
-

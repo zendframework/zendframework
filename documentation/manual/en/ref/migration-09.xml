@@ -27,12 +27,14 @@
                     <methodname>Zend_Controller_Action_Helper_Redirector::setCode()</methodname>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setRedirectPrependBase()</methodname>; use
                     <methodname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</methodname>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setRedirectExit()</methodname>; use

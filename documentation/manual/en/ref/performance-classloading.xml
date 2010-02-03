@@ -124,25 +124,25 @@ set_include_path(implode(PATH_SEPARATOR, $paths);
                 safely pushed to the last item in the list.
             </para>
 
-        <example id="performance.classloading.includepath.example">
-            <title>Example: Optimized include_path</title>
+            <example id="performance.classloading.includepath.example">
+                <title>Example: Optimized include_path</title>
 
-            <para>
-                Let's put all of these suggestions together. Our assumption will
-                be that you are using one or more <acronym>PEAR</acronym> libraries in conjunction
-                with Zend Framework -- perhaps the PHPUnit and <classname>Archive_Tar</classname>
-                libraries -- and that you occasionally need to include
-                files relative to the current file.
-            </para>
+                <para>
+                    Let's put all of these suggestions together. Our assumption will be that you
+                    are using one or more <acronym>PEAR</acronym> libraries in conjunction with
+                    Zend Framework -- perhaps the PHPUnit and <classname>Archive_Tar</classname>
+                    libraries -- and that you occasionally need to include
+                    files relative to the current file.
+                </para>
 
-            <para>
-                First, we'll create a library directory in our project. Inside
-                that directory, we'll symlink our Zend Framework's <filename>library/Zend</filename>
-                directory, as well as the necessary directories from our <acronym>PEAR</acronym>
-                installation:
-            </para>
+                <para>
+                    First, we'll create a library directory in our project. Inside that
+                    directory, we'll symlink our Zend Framework's <filename>library/Zend</filename>
+                    directory, as well as the necessary directories from our <acronym>PEAR</acronym>
+                    installation:
+                </para>
 
-            <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 library
     Archive/
     PEAR/
@@ -150,35 +150,35 @@ library
     Zend/
 ]]></programlisting>
 
-            <para>
-                This allows us to add our own library code if necessary, while
-                keeping shared libraries intact.
-            </para>
+                <para>
+                    This allows us to add our own library code if necessary, while
+                    keeping shared libraries intact.
+                </para>
 
-            <para>
-                Next, we'll opt to create our include_path programmatically
-                within our <filename>public/index.php</filename> file. This allows us to move our
-                code around on the file system, without needing to edit the
-                include_path every time.
-            </para>
+                <para>
+                    Next, we'll opt to create our include_path programmatically
+                    within our <filename>public/index.php</filename> file. This allows us to move
+                    our code around on the file system, without needing to edit the
+                    include_path every time.
+                </para>
 
-            <para>
-                We'll borrow ideas from each of the suggestions above: we'll use
-                absolute paths, as determined using <methodname>realpath()</methodname>;
-                we'll include Zend Framework's include path early; we've
-                already consolidated include_paths; and we'll put the current
-                directory as the last path. In fact, we're doing really well
-                here -- we're going to end up with only two paths.
-            </para>
+                <para>
+                    We'll borrow ideas from each of the suggestions above: we'll use
+                    absolute paths, as determined using <methodname>realpath()</methodname>;
+                    we'll include Zend Framework's include path early; we've
+                    already consolidated include_paths; and we'll put the current
+                    directory as the last path. In fact, we're doing really well
+                    here -- we're going to end up with only two paths.
+                </para>
 
-            <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $paths = array(
     realpath(dirname(__FILE__) . '/../library'),
     '.'
 );
 set_include_path(implode(PATH_SEPARATOR, $paths));
 ]]></programlisting>
-        </example>
+            </example>
         </sect3>
     </sect2>
 
@@ -276,39 +276,55 @@ Zend_Loader_Autoloader::getInstance();
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <classname>Zend_Controller_Action_HelperBroker</classname>: helpers
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Controller_Action_HelperBroker</classname>: helpers
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Dojo</classname>: view helpers, form elements and decorators
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Dojo</classname>: view helpers, form elements and decorators
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_File_Transfer</classname>: adapters
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_File_Transfer</classname>: adapters
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Filter_Inflector</classname>: filters (used by the
-                ViewRenderer action helper and <classname>Zend_Layout</classname>)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Filter_Inflector</classname>: filters (used by the
+                    ViewRenderer action helper and <classname>Zend_Layout</classname>)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Filter_Input</classname>: filters and validators
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Filter_Input</classname>: filters and validators
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Form</classname>: elements, validators, filters,
-                decorators, captcha and file transfer adapters
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Form</classname>: elements, validators, filters,
+                    decorators, captcha and file transfer adapters
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Paginator</classname>: adapters
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Paginator</classname>: adapters
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_View</classname>: helpers, filters
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_View</classname>: helpers, filters
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

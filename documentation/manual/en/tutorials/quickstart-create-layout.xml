@@ -48,11 +48,10 @@
 
     <programlisting language="shell"><![CDATA[
 % zf enable layout
-Layouts have been enabled, and a default layout created at 
+Layouts have been enabled, and a default layout created at
 application/layouts/scripts/layout.phtml
 A layout entry has been added to the application config file.
 ]]></programlisting>
-
 
     <para>
         As noted by the command,

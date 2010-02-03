@@ -34,34 +34,42 @@
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <emphasis>Array</emphasis>: this is the fastest, as it is,
-                    by definition, parsed into a native <acronym>PHP</acronym> format immediately
-                    on inclusion.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Array</emphasis>: this is the fastest, as it is, by
+                        definition, parsed into a native <acronym>PHP</acronym> format immediately
+                        on inclusion.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <emphasis><acronym>CSV</acronym></emphasis>: uses
-                    <methodname>fgetcsv()</methodname> to parse a <acronym>CSV</acronym> file and
-                    transform it into a native <acronym>PHP</acronym> format.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis><acronym>CSV</acronym></emphasis>: uses
+                        <methodname>fgetcsv()</methodname> to parse a <acronym>CSV</acronym> file
+                        and transform it into a native <acronym>PHP</acronym> format.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <emphasis><acronym>INI</acronym></emphasis>: uses
-                    <methodname>parse_ini_file()</methodname> to parse an <acronym>INI</acronym>
-                    file and transform it into a native <acronym>PHP</acronym> format. This and the
-                    <acronym>CSV</acronym> adapter are roughly equivalent performance-wise.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis><acronym>INI</acronym></emphasis>: uses
+                        <methodname>parse_ini_file()</methodname> to parse an <acronym>INI</acronym>
+                        file and transform it into a native <acronym>PHP</acronym> format. This and
+                        the <acronym>CSV</acronym> adapter are roughly equivalent performance-wise.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <emphasis>Gettext</emphasis>: The gettext adapter from Zend Framework
-                    does <emphasis>not</emphasis> use the gettext
-                    extension as it is not thread safe and does not allow
-                    specifying more than one locale per server. As a result, it
-                    is slower than using the gettext extension directly, but,
-                    because the gettext format is binary, it's faster to parse
-                    than <acronym>XML</acronym>.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Gettext</emphasis>: The gettext adapter from Zend Framework
+                        does <emphasis>not</emphasis> use the gettext
+                        extension as it is not thread safe and does not allow
+                        specifying more than one locale per server. As a result, it
+                        is slower than using the gettext extension directly, but,
+                        because the gettext format is binary, it's faster to parse
+                        than <acronym>XML</acronym>.
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>
@@ -101,15 +109,16 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <link linkend="zend.translate.adapter.caching"><classname>
-                        Zend_Translate</classname> adapter caching</link>
+                        <link
+                            linkend="zend.translate.adapter.caching"><classname>Zend_Translate</classname>
+                            adapter caching</link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <link linkend="zend.locale.cache"><classname>Zend_Locale</classname>
-                        caching</link>
+                            caching</link>
                     </para>
                 </listitem>
             </itemizedlist>

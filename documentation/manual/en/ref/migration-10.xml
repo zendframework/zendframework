@@ -70,15 +70,10 @@ $front->setParam('noViewRenderer', true);
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>Calls to <command>$this->render();</command></para>
-            </listitem>
-            <listitem>
-                <para>Calls to <command>$this->_forward();</command></para>
-            </listitem>
-            <listitem>
-                <para>Calls to <command>$this->_redirect();</command></para>
-            </listitem>
+            <listitem><para>Calls to <command>$this->render();</command></para></listitem>
+            <listitem><para>Calls to <command>$this->_forward();</command></para></listitem>
+            <listitem><para>Calls to <command>$this->_redirect();</command></para></listitem>
+
             <listitem>
                 <para>Calls to the <classname>Redirector</classname> action helper</para>
             </listitem>
@@ -122,12 +117,14 @@ public function preDispatch()
                     action, you don't need to change a thing.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     If you're simply calling <methodname>render()</methodname> with no
                     arguments, you can remove such lines.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     If you're calling <methodname>render()</methodname> with arguments, and
@@ -224,12 +221,14 @@ $currency = new Zend_Currency($currency, $locale);
                     Replacement for the old 'rules' parameter.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>script</emphasis>:
                     Replacement for the old 'script' parameter.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>format</emphasis>:
@@ -237,18 +236,21 @@ $currency = new Zend_Currency($currency, $locale);
                     set new currencies but only the number format.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>display</emphasis>:
                     Replacement for the old 'rules' parameter.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>precision</emphasis>:
                     New parameter.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>name</emphasis>:
@@ -256,12 +258,14 @@ $currency = new Zend_Currency($currency, $locale);
                     currencies name.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>currency</emphasis>:
                     New parameter.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>symbol</emphasis>:

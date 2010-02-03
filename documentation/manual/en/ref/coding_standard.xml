@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
-  <title>Zend Framework Coding Standard for PHP</title>
+    <title>Zend Framework Coding Standard for PHP</title>
+
     <sect1 id="coding-standard.overview">
         <title>Overview</title>
 
@@ -1135,7 +1136,6 @@ switch ($numPeople) {
             </sect3>
         </sect2>
     </sect1>
-
 </appendix>
 <!--
 vim:se ts=4 sw=4 et:

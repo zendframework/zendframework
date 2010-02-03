@@ -2,58 +2,62 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.pages">
     <title>Working with Pages</title>
+
     <sect2 id="zend.pdf.pages.creation">
         <title>Page Creation</title>
+
         <para>
-            The pages in a <acronym>PDF</acronym> document are represented as <classname>Zend_Pdf_Page</classname> instances in <classname>Zend_Pdf</classname>.
+            The pages in a <acronym>PDF</acronym> document are represented as
+            <classname>Zend_Pdf_Page</classname> instances in <classname>Zend_Pdf</classname>.
         </para>
 
         <para>
-            <acronym>PDF</acronym> pages either are loaded from an existing <acronym>PDF</acronym> or created using the <classname>Zend_Pdf</classname> <acronym>API</acronym>.
+            <acronym>PDF</acronym> pages either are loaded from an existing <acronym>PDF</acronym>
+            or created using the <classname>Zend_Pdf</classname> <acronym>API</acronym>.
         </para>
 
         <para>
-            New pages can be created by instantiating new <classname>Zend_Pdf_Page</classname> objects directly or by calling
-            the <methodname>Zend_Pdf::newPage()</methodname> method, which returns a <classname>Zend_Pdf_Page</classname> object.
+            New pages can be created by instantiating new <classname>Zend_Pdf_Page</classname>
+            objects directly or by calling the <methodname>Zend_Pdf::newPage()</methodname> method,
+            which returns a <classname>Zend_Pdf_Page</classname> object.
             <methodname>Zend_Pdf::newPage()</methodname> creates a page that is already attached to
-            a document. Unattached pages can't be used with multiple <acronym>PDF</acronym> documents,
-            but they are somewhat more performant.
+            a document. Unattached pages can't be used with multiple <acronym>PDF</acronym>
+            documents, but they are somewhat more performant.
+
             <footnote>
                 <para>
-                It's a limitation of current Zend Framework version. It will be eliminated in future versions.
-                But unattached pages will always give better (more optimal) result for sharing pages between documents.
+                    It's a limitation of current Zend Framework version. It will be eliminated in
+                    future versions. But unattached pages will always give better (more optimal)
+                    result for sharing pages between documents.
                 </para>
             </footnote>
         </para>
 
         <para>
-        The <methodname>Zend_Pdf::newPage()</methodname> method and the <classname>Zend_Pdf_Page</classname> constructor take the same
-        parameters specifying page size. They can take either the size of page ($x, $y) in points (1/72 inch)
-        or a predefined constant representing a page type:
+            The <methodname>Zend_Pdf::newPage()</methodname> method and the
+            <classname>Zend_Pdf_Page</classname> constructor take the same parameters specifying
+            page size. They can take either the size of page ($x, $y) in points (1/72 inch) or a
+            predefined constant representing a page type:
+
             <itemizedlist>
-                <listitem>
-                    <para>Zend_Pdf_Page::SIZE_A4</para>
-                </listitem>
-                <listitem>
-                    <para>Zend_Pdf_Page::SIZE_A4_LANDSCAPE</para>
-                </listitem>
-                <listitem>
-                    <para>Zend_Pdf_Page::SIZE_LETTER</para>
-                </listitem>
-                <listitem>
-                    <para>Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE</para>
-                </listitem>
+                <listitem><para>Zend_Pdf_Page::SIZE_A4</para></listitem>
+                <listitem><para>Zend_Pdf_Page::SIZE_A4_LANDSCAPE</para></listitem>
+                <listitem><para>Zend_Pdf_Page::SIZE_LETTER</para></listitem>
+                <listitem><para>Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE</para></listitem>
             </itemizedlist>
         </para>
 
         <para>
-            Document pages are stored in the <varname>$pages</varname> public attribute of the <classname>Zend_Pdf</classname> class.
-            The attribute holds an array of <classname>Zend_Pdf_Page</classname> objects and completely defines the instances and order of pages.
-            This array can be manipulated like any other <acronym>PHP</acronym> array:
+            Document pages are stored in the <varname>$pages</varname> public attribute of the
+            <classname>Zend_Pdf</classname> class. The attribute holds an array of
+            <classname>Zend_Pdf_Page</classname> objects and completely defines the instances and
+            order of pages. This array can be manipulated like any other <acronym>PHP</acronym>
+            array:
         </para>
 
         <example id="zend.pdf.pages.example-1">
             <title>PDF document pages management</title>
+
             <programlisting language="php"><![CDATA[
 ...
 // Reverse page order
@@ -74,12 +78,15 @@ unset($pdf->pages[$id]);
 
     <sect2 id="zend.pdf.pages.cloning">
         <title>Page cloning</title>
+
         <para>
-            Existing <acronym>PDF</acronym> page can be cloned by creating new <classname>Zend_Pdf_Page</classname> object with existing page as a parameter:
+            Existing <acronym>PDF</acronym> page can be cloned by creating new
+            <classname>Zend_Pdf_Page</classname> object with existing page as a parameter:
         </para>
 
         <example id="zend.pdf.pages.example-2">
             <title>Cloning existing page</title>
+
             <programlisting language="php"><![CDATA[
 ...
 // Store template page in a separate variable
@@ -108,8 +115,9 @@ unset($pdf->pages[$templatePageIndex]);
 
         <caution>
             <para>
-                Important! Cloned page shares some <acronym>PDF</acronym> resources with a template page, so it can be used only within the same document
-                as a template page. Modified document can be saved as new one.
+                Important! Cloned page shares some <acronym>PDF</acronym> resources with a template
+                page, so it can be used only within the same document as a template page. Modified
+                document can be saved as new one.
             </para>
         </caution>
     </sect2>

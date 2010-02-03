@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.interactive-features">
     <title>Interactive Features</title>
+
     <sect2 id="zend.pdf.pages.interactive-features.destinations">
         <title>Destinations</title>
 
@@ -72,15 +73,13 @@
 
                     <listitem>
                         <para>
-                            <varname>$left</varname> is a left edge of the displayed page
-                            (float).
+                            <varname>$left</varname> is a left edge of the displayed page (float).
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <varname>$top</varname> is a top edge of the displayed page
-                            (float).
+                            <varname>$top</varname> is a top edge of the displayed page (float).
                         </para>
                     </listitem>
 
@@ -302,15 +301,13 @@
 
                     <listitem>
                         <para>
-                            <varname>$right</varname> is a right edge of the displayed page
-                            (float).
+                            <varname>$right</varname> is a right edge of the displayed page (float).
                         </para>
                     </listitem>
 
                     <listitem>
                         <para>
-                            <varname>$top</varname> is a top edge of the displayed page
-                            (float).
+                            <varname>$top</varname> is a top edge of the displayed page (float).
                         </para>
                     </listitem>
                 </itemizedlist>
@@ -634,6 +631,7 @@ $pdf->resolveDestination(Zend_Pdf_Destination_Named::create('Page3'));
                 The following action types are recognized while loading <acronym>PDF</acronym>
                 document:
             </para>
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -897,6 +895,7 @@ printf("Actions in a tree: %d\n", $actionsCount++);
 
     <sect2 id="zend.pdf.pages.interactive-features.outlines">
         <title>Document Outline (bookmarks)</title>
+
         <para>
             A PDF document may optionally display a document outline on the screen, allowing
             the user to navigate interactively from one part of the document to another.
@@ -915,6 +914,7 @@ printf("Actions in a tree: %d\n", $actionsCount++);
             <classname>Zend_Pdf</classname> class provides public property
             <varname>$outlines</varname> which is an array of
             <classname>Zend_Pdf_Outline</classname> objects.
+
             <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($path);
 
@@ -1042,7 +1042,8 @@ $pdf->save($path, true);
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Outline::create(string $title[, Zend_Pdf_Target|string $target])</methodname>
+                    <methodname>Zend_Pdf_Outline::create(string $title[, Zend_Pdf_Target|string
+                        $target])</methodname>
                 </para>
             </listitem>
 
@@ -1063,6 +1064,7 @@ $pdf->save($path, true);
         <para>
             <classname>Zend_Pdf_Outline</classname> class implements RecursiveArray interface,
             so child outlines may be recursively iterated using RecursiveIteratorIterator:
+
             <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($path);
 
@@ -1120,8 +1122,8 @@ $pdf->save($path, true);
 
         <para>
             Annotation may be attached to a page using
-            <methodname>Zend_Pdf_Page::attachAnnotation(Zend_Pdf_Annotation $annotation)</methodname>
-            method.
+            <methodname>Zend_Pdf_Page::attachAnnotation(Zend_Pdf_Annotation
+                $annotation)</methodname> method.
         </para>
 
         <para>
@@ -1131,21 +1133,24 @@ $pdf->save($path, true);
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Annotation_Link::create($x1, $y1, $x2, $y2, $target)</methodname>
-                    where <varname>$target</varname> is an action object or a destination or
-                    string (which may be used in place of named destination object).
+                    <methodname>Zend_Pdf_Annotation_Link::create($x1, $y1, $x2, $y2,
+                        $target)</methodname> where <varname>$target</varname> is an action object
+                    or a destination or string (which may be used in place of named destination
+                    object).
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Annotation_Text::create($x1, $y1, $x2, $y2, $text)</methodname>
+                    <methodname>Zend_Pdf_Annotation_Text::create($x1, $y1, $x2, $y2,
+                        $text)</methodname>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>Zend_Pdf_Annotation_FileAttachment::create($x1, $y1, $x2, $y2, $fileSpecification)</methodname>
+                    <methodname>Zend_Pdf_Annotation_FileAttachment::create($x1, $y1, $x2, $y2,
+                        $fileSpecification)</methodname>
                 </para>
             </listitem>
         </itemizedlist>

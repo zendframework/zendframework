@@ -4,7 +4,8 @@
     <title>Query Language</title>
 
     <para>
-        Java Lucene and <classname>Zend_Search_Lucene</classname> provide quite powerful query languages.
+        Java Lucene and <classname>Zend_Search_Lucene</classname> provide quite powerful query
+        languages.
     </para>
 
     <para>
@@ -20,20 +21,25 @@
         <title>Terms</title>
 
         <para>
-            A query is broken up into terms and operators. There are three types of terms: Single Terms, Phrases,
-            and Subqueries.
+            A query is broken up into terms and operators. There are three types of terms: Single
+            Terms, Phrases, and Subqueries.
         </para>
+
         <para>
             A Single Term is a single word such as "test" or "hello".
         </para>
+
         <para>
             A Phrase is a group of words surrounded by double quotes such as "hello dolly".
         </para>
+
         <para>
             A Subquery is a query surrounded by parentheses such as "(hello dolly)".
         </para>
+
         <para>
-            Multiple terms can be combined together with boolean operators to form complex queries (see below).
+            Multiple terms can be combined together with boolean operators to form complex queries
+            (see below).
         </para>
     </sect2>
 
@@ -41,17 +47,21 @@
         <title>Fields</title>
 
         <para>
-            Lucene supports fields of data. When performing a search you can either specify a field, or use
-            the default field. The field names depend on indexed data and default field is defined
-            by current settings.
+            Lucene supports fields of data. When performing a search you can either specify a field,
+            or use the default field. The field names depend on indexed data and default field is
+            defined by current settings.
         </para>
+
         <para>
-            The first and most significant difference from Java Lucene is that terms are searched through
-            <emphasis>all fields</emphasis> by default.
+            The first and most significant difference from Java Lucene is that terms are searched
+            through <emphasis>all fields</emphasis> by default.
         </para>
+
         <para>
-            There are two static methods in the <classname>Zend_Search_Lucene</classname> class which allow the developer to configure these settings:
+            There are two static methods in the <classname>Zend_Search_Lucene</classname> class
+            which allow the developer to configure these settings:
         </para>
+
         <programlisting language="php"><![CDATA[
 $defaultSearchField = Zend_Search_Lucene::getDefaultSearchField();
 ...
@@ -59,45 +69,57 @@ Zend_Search_Lucene::setDefaultSearchField('contents');
 ]]></programlisting>
 
         <para>
-            The <constant>NULL</constant> value indicated that the search is performed across all fields. It's the default setting.
+            The <constant>NULL</constant> value indicated that the search is performed across all
+            fields. It's the default setting.
         </para>
+
         <para>
-            You can search specific fields by typing the field name followed by a colon ":" followed by the term you
-            are looking for.
+            You can search specific fields by typing the field name followed by a colon ":" followed
+            by the term you are looking for.
         </para>
+
         <para>
-            As an example, let's assume a Lucene index contains two fields- title and text- with text as the default field.
-            If you want to find the document entitled "The Right Way" which contains the text "don't go this way",
-            you can enter:
+            As an example, let's assume a Lucene index contains two fields- title and text- with
+            text as the default field. If you want to find the document entitled "The Right Way"
+            which contains the text "don't go this way", you can enter:
         </para>
+
         <programlisting language="querystring"><![CDATA[
 title:"The Right Way" AND text:go
 ]]></programlisting>
+
         <para>
             or
         </para>
+
         <programlisting language="querystring"><![CDATA[
 title:"Do it right" AND go
 ]]></programlisting>
+
         <para>
             Because "text" is the default field, the field indicator is not required.
         </para>
 
         <para>
-            Note: The field is only valid for the term, phrase or subquery that it directly precedes,
-            so the query
+            Note: The field is only valid for the term, phrase or subquery that it directly
+            precedes, so the query
+
             <programlisting language="querystring"><![CDATA[
 title:Do it right
 ]]></programlisting>
-            Will only find "Do" in the title field. It will find "it" and "right" in the default field (if the default field is set)
-            or in all indexed fields (if the default field is set to <constant>NULL</constant>).
+
+            Will only find "Do" in the title field. It will find "it" and "right" in the default
+            field (if the default field is set) or in all indexed fields (if the default field is
+            set to <constant>NULL</constant>).
         </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.query-language.wildcard">
         <title>Wildcards</title>
+
         <para>
-            Lucene supports single and multiple character wildcard searches within single terms (but not within phrase queries).
+            Lucene supports single and multiple character wildcard searches within single terms (but
+            not within phrase queries).
         </para>
 
         <para>
@@ -109,16 +131,19 @@ title:Do it right
         </para>
 
         <para>
-            The single character wildcard search looks for string that match the term with the "?" replaced by any single character.
-            For example, to search for "text" or "test" you can use the search:
+            The single character wildcard search looks for string that match the term with the "?"
+            replaced by any single character. For example, to search for "text" or "test" you can
+            use the search:
+
             <programlisting language="querystring"><![CDATA[
 te?t
 ]]></programlisting>
         </para>
 
         <para>
-            Multiple character wildcard searches look for 0 or more characters when matching strings against terms. For example, to search for test,
-            tests or tester, you can use the search:
+            Multiple character wildcard searches look for 0 or more characters when matching strings
+            against terms. For example, to search for test, tests or tester, you can use the search:
+
             <programlisting language="querystring"><![CDATA[
 test*
 ]]></programlisting>
@@ -126,20 +151,32 @@ test*
 
         <para>
             You can use "?", "*" or both at any place of the term:
+
             <programlisting language="querystring"><![CDATA[
 *wr?t*
 ]]></programlisting>
+
             It searches for "write", "wrote", "written", "rewrite", "rewrote" and so on.
         </para>
 
         <para>
-            Starting from ZF 1.7.7 wildcard patterns need some non-wildcard prefix. Default prefix length is 3 (like in Java Lucene).
-            So "*", "te?t", "*wr?t*" terms will cause an exception<footnote>
-            <para>Please note, that it's not a <code>Zend_Search_Lucene_Search_QueryParserException</code>, but a
-            <code>Zend_Search_Lucene_Exception</code>. It's thrown during query rewrite (execution) operation.</para></footnote>.
+            Starting from ZF 1.7.7 wildcard patterns need some non-wildcard prefix. Default prefix
+            length is 3 (like in Java Lucene). So "*", "te?t", "*wr?t*" terms will cause an
+            exception
+
+            <footnote>
+                <para>
+                    Please note, that it's not a
+                    <code>Zend_Search_Lucene_Search_QueryParserException</code>, but a
+                    <code>Zend_Search_Lucene_Exception</code>. It's thrown during query rewrite
+                    (execution) operation.
+                </para>
+            </footnote>.
         </para>
+
         <para>
-            It can be altered using <code>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</code> and
+            It can be altered using
+            <code>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</code> and
             <code>Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength()</code> methods.
         </para>
     </sect2>
@@ -150,31 +187,47 @@ test*
         <para>
             Lucene supports modifying query terms to provide a wide range of searching options.
         </para>
+
         <para>
-            "~" modifier can be used to specify proximity search for phrases or fuzzy search for individual terms.
+            "~" modifier can be used to specify proximity search for phrases or fuzzy search for
+            individual terms.
         </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.query-language.range">
         <title>Range Searches</title>
+
         <para>
-            Range queries allow the developer or user to match documents whose field(s) values are between the lower and upper bound specified by the range query.
-            Range Queries can be inclusive or exclusive of the upper and lower bounds. Sorting is performed lexicographically.
+            Range queries allow the developer or user to match documents whose field(s) values are
+            between the lower and upper bound specified by the range query. Range Queries can be
+            inclusive or exclusive of the upper and lower bounds. Sorting is performed
+            lexicographically.
+
             <programlisting language="querystring"><![CDATA[
 mod_date:[20020101 TO 20030101]
 ]]></programlisting>
-            This will find documents whose mod_date fields have values between 20020101 and 20030101, inclusive. Note that Range Queries are not
-            reserved for date fields. You could also use range queries with non-date fields:
+
+            This will find documents whose mod_date fields have values between 20020101 and
+            20030101, inclusive. Note that Range Queries are not reserved for date fields. You could
+            also use range queries with non-date fields:
+
             <programlisting language="querystring"><![CDATA[
 title:{Aida TO Carmen}
 ]]></programlisting>
-            This will find all documents whose titles would be sorted between Aida and Carmen, but not including Aida and Carmen.
+
+            This will find all documents whose titles would be sorted between Aida and Carmen, but
+            not including Aida and Carmen.
         </para>
+
         <para>
-            Inclusive range queries are denoted by square brackets. Exclusive range queries are denoted by curly brackets.
+            Inclusive range queries are denoted by square brackets. Exclusive range queries are
+            denoted by curly brackets.
         </para>
+
         <para>
-            If field is not specified then <classname>Zend_Search_Lucene</classname> searches for specified interval through all fields by default.
+            If field is not specified then <classname>Zend_Search_Lucene</classname> searches for
+            specified interval through all fields by default.
+
             <programlisting language="querystring"><![CDATA[
 {Aida TO Carmen}
 ]]></programlisting>
@@ -183,19 +236,20 @@ title:{Aida TO Carmen}
 
     <sect2 id="zend.search.lucene.query-language.fuzzy">
         <title>Fuzzy Searches</title>
+
         <para>
-            <classname>Zend_Search_Lucene</classname> as well as Java Lucene supports fuzzy searches based on the Levenshtein Distance, or Edit Distance algorithm.
-            To do a fuzzy search use the tilde, "~", symbol at the end of a Single word Term. For example to search for a term similar
-            in spelling to "roam" use the fuzzy search:
+            <classname>Zend_Search_Lucene</classname> as well as Java Lucene supports fuzzy searches
+            based on the Levenshtein Distance, or Edit Distance algorithm. To do a fuzzy search use
+            the tilde, "~", symbol at the end of a Single word Term. For example to search for a
+            term similar in spelling to "roam" use the fuzzy search:
 
             <programlisting language="querystring"><![CDATA[
 roam~
 ]]></programlisting>
 
-            This search will find terms like foam and roams.
-
-            Additional (optional) parameter can specify the required similarity. The value is between 0 and 1, with a value closer to 1 only terms
-            with a higher similarity will be matched. For example:
+            This search will find terms like foam and roams. Additional (optional) parameter can
+            specify the required similarity. The value is between 0 and 1, with a value closer to 1
+            only terms with a higher similarity will be matched. For example:
 
             <programlisting language="querystring"><![CDATA[
 roam~0.8
@@ -209,14 +263,17 @@ roam~0.8
         <title>Matched terms limitation</title>
 
         <para>
-            Wildcard, range and fuzzy search queries may match too many terms. It may cause incredible search performance downgrade.
+            Wildcard, range and fuzzy search queries may match too many terms. It may cause
+            incredible search performance downgrade.
         </para>
 
         <para>
-            So Zend_Search_Lucene sets a limit of matching terms per query (subquery). This limit can be retrieved and set using
+            So Zend_Search_Lucene sets a limit of matching terms per query (subquery). This limit
+            can be retrieved and set using
             <code>Zend_Search_Lucene::getTermsPerQueryLimit()</code>/<code>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</code>
             methods.
         </para>
+
         <para>
             Default matched terms per query limit is 1024.
         </para>
@@ -226,9 +283,11 @@ roam~0.8
         <title>Proximity Searches</title>
 
         <para>
-            Lucene supports finding words from a phrase that are within a specified word distance in a string. To do a proximity search
-            use the tilde, "~", symbol at the end of the phrase. For example to search for a "Zend" and
-            "Framework" within 10 words of each other in a document use the search:
+            Lucene supports finding words from a phrase that are within a specified word distance in
+            a string. To do a proximity search use the tilde, "~", symbol at the end of the phrase.
+            For example to search for a "Zend" and "Framework" within 10 words of each other in a
+            document use the search:
+
             <programlisting language="querystring"><![CDATA[
 "Zend Framework"~10
 ]]></programlisting>
@@ -239,27 +298,34 @@ roam~0.8
         <title>Boosting a Term</title>
 
         <para>
-            Java Lucene and <classname>Zend_Search_Lucene</classname> provide the relevance level of matching documents based
-            on the terms found. To boost the relevance of a term use the caret, "^", symbol with a boost factor (a number)
-            at the end of the term you are searching. The higher the boost factor, the more relevant
-            the term will be.
+            Java Lucene and <classname>Zend_Search_Lucene</classname> provide the relevance level of
+            matching documents based on the terms found. To boost the relevance of a term use the
+            caret, "^", symbol with a boost factor (a number) at the end of the term you are
+            searching. The higher the boost factor, the more relevant the term will be.
         </para>
+
         <para>
-            Boosting allows you to control the relevance of a document by boosting individual terms. For example,
-            if you are searching for
+            Boosting allows you to control the relevance of a document by boosting individual terms.
+            For example, if you are searching for
+
             <programlisting language="querystring"><![CDATA[
 PHP framework
 ]]></programlisting>
-            and you want the term "PHP" to be more relevant boost it using the ^ symbol along with the
-            boost factor next to the term. You would type:
+
+            and you want the term "PHP" to be more relevant boost it using the ^ symbol along with
+            the boost factor next to the term. You would type:
+
             <programlisting language="querystring"><![CDATA[
 PHP^4 framework
 ]]></programlisting>
-            This will make documents with the term PHP appear more relevant. You can also boost phrase
-            terms and subqueries as in the example:
+
+            This will make documents with the term PHP appear more relevant. You can also boost
+            phrase terms and subqueries as in the example:
+
             <programlisting language="querystring"><![CDATA[
 "PHP framework"^4 "Zend Framework"
 ]]></programlisting>
+
             By default, the boost factor is 1. Although the boost factor must be positive,
             it may be less than 1 (e.g. 0.2).
         </para>
@@ -271,26 +337,34 @@ PHP^4 framework
         <para>
             Boolean operators allow terms to be combined through logic operators.
             Lucene supports AND, "+", OR, NOT and "-" as Boolean operators.
-            Java Lucene requires boolean operators to be ALL CAPS. <classname>Zend_Search_Lucene</classname> does not.
+            Java Lucene requires boolean operators to be ALL CAPS.
+            <classname>Zend_Search_Lucene</classname> does not.
         </para>
 
         <para>
-            AND, OR, and NOT operators and "+", "-" defines two different styles to construct boolean queries.
-            Unlike Java Lucene, <classname>Zend_Search_Lucene</classname> doesn't allow these two styles to be mixed.
+            AND, OR, and NOT operators and "+", "-" defines two different styles to construct
+            boolean queries. Unlike Java Lucene, <classname>Zend_Search_Lucene</classname> doesn't
+            allow these two styles to be mixed.
         </para>
+
         <para>
-            If the AND/OR/NOT style is used, then an AND or OR operator must be present between all query terms.
-            Each term may also be preceded by NOT operator. The AND operator has higher precedence than the OR operator.
-            This differs from Java Lucene behavior.
+            If the AND/OR/NOT style is used, then an AND or OR operator must be present between all
+            query terms. Each term may also be preceded by NOT operator. The AND operator has higher
+            precedence than the OR operator. This differs from Java Lucene behavior.
         </para>
 
         <sect3 id="zend.search.lucene.query-language.boolean.and">
             <title>AND</title>
+
             <para>
-                The AND operator means that all terms in the "AND group" must match some part of the searched field(s).
+                The AND operator means that all terms in the "AND group" must match some part of the
+                searched field(s).
             </para>
+
             <para>
-                To search for documents that contain "PHP framework" and "Zend Framework" use the query:
+                To search for documents that contain "PHP framework" and "Zend Framework" use the
+                query:
+
                 <programlisting language="querystring"><![CDATA[
 "PHP framework" AND "Zend Framework"
 ]]></programlisting>
@@ -299,11 +373,15 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.or">
             <title>OR</title>
+
             <para>
                 The OR operator divides the query into several optional terms.
             </para>
+
             <para>
-                To search for documents that contain "PHP framework" or "Zend Framework" use the query:
+                To search for documents that contain "PHP framework" or "Zend Framework" use the
+                query:
+
                 <programlisting language="querystring"><![CDATA[
 "PHP framework" OR "Zend Framework"
 ]]></programlisting>
@@ -312,12 +390,17 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.not">
             <title>NOT</title>
+
             <para>
-                The NOT operator excludes documents that contain the term after NOT. But an "AND group" which contains
-                only terms with the NOT operator gives an empty result set instead of a full set of indexed documents.
+                The NOT operator excludes documents that contain the term after NOT. But an "AND
+                group" which contains only terms with the NOT operator gives an empty result set
+                instead of a full set of indexed documents.
             </para>
+
             <para>
-                To search for documents that contain "PHP framework" but not "Zend Framework" use the query:
+                To search for documents that contain "PHP framework" but not "Zend Framework" use
+                the query:
+
                 <programlisting language="querystring"><![CDATA[
 "PHP framework" AND NOT "Zend Framework"
 ]]></programlisting>
@@ -326,6 +409,7 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.other-form">
             <title>&amp;&amp;, ||, and ! operators</title>
+
             <para>
                 &amp;&amp;, ||, and ! may be used instead of AND, OR, and NOT notation.
             </para>
@@ -333,11 +417,16 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.plus">
             <title>+</title>
+
             <para>
-                The "+" or required operator stipulates that the term after the "+" symbol must match the document.
+                The "+" or required operator stipulates that the term after the "+" symbol must
+                match the document.
             </para>
+
             <para>
-                To search for documents that must contain "Zend" and may contain "Framework" use the query:
+                To search for documents that must contain "Zend" and may contain "Framework" use the
+                query:
+
                 <programlisting language="querystring"><![CDATA[
 +Zend Framework
 ]]></programlisting>
@@ -346,11 +435,16 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.minus">
             <title>-</title>
+
             <para>
-                The "-" or prohibit operator excludes documents that match the term after the "-" symbol.
+                The "-" or prohibit operator excludes documents that match the term after the "-"
+                symbol.
             </para>
+
             <para>
-                To search for documents that contain "PHP framework" but not "Zend Framework" use the query:
+                To search for documents that contain "PHP framework" but not "Zend Framework" use
+                the query:
+
                 <programlisting language="querystring"><![CDATA[
 "PHP framework" -"Zend Framework"
 ]]></programlisting>
@@ -359,18 +453,25 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.no-operator">
             <title>No Operator</title>
+
             <para>
-                If no operator is used, then the search behavior is defined by the "default boolean operator".
+                If no operator is used, then the search behavior is defined by the "default boolean
+                operator".
             </para>
+
             <para>
                 This is set to <code>OR</code> by default.
             </para>
+
             <para>
-                That implies each term is optional by default. It may or may not be present within document, but documents with this term
-                will receive a higher score.
+                That implies each term is optional by default. It may or may not be present within
+                document, but documents with this term will receive a higher score.
             </para>
+
             <para>
-                To search for documents that requires "PHP framework" and may contain "Zend Framework" use the query:
+                To search for documents that requires "PHP framework" and may contain "Zend
+                Framework" use the query:
+
                 <programlisting language="querystring"><![CDATA[
 +"PHP framework" "Zend Framework"
 ]]></programlisting>
@@ -378,9 +479,12 @@ PHP^4 framework
 
             <para>
                 The default boolean operator may be set or retrieved with the
-                <classname>Zend_Search_Lucene_Search_QueryParser::setDefaultOperator($operator)</classname> and
-                <classname>Zend_Search_Lucene_Search_QueryParser::getDefaultOperator()</classname> methods, respectively.
+                <classname>Zend_Search_Lucene_Search_QueryParser::setDefaultOperator($operator)</classname>
+                and
+                <classname>Zend_Search_Lucene_Search_QueryParser::getDefaultOperator()</classname>
+                methods, respectively.
             </para>
+
             <para>
                 These methods operate with the
                 <classname>Zend_Search_Lucene_Search_QueryParser::B_AND</classname> and
@@ -393,8 +497,10 @@ PHP^4 framework
         <title>Grouping</title>
 
         <para>
-            Java Lucene and <classname>Zend_Search_Lucene</classname> support using parentheses to group clauses to form sub queries. This can be
-            useful if you want to control the precedence of boolean logic operators for a query or mix different boolean query styles:
+            Java Lucene and <classname>Zend_Search_Lucene</classname> support using parentheses to
+            group clauses to form sub queries. This can be useful if you want to control the
+            precedence of boolean logic operators for a query or mix different boolean query styles:
+
             <programlisting language="querystring"><![CDATA[
 +(framework OR library) +php
 ]]></programlisting>
@@ -408,8 +514,11 @@ PHP^4 framework
         <para>
             Lucene also supports using parentheses to group multiple clauses to a single field.
         </para>
+
         <para>
-            To search for a title that contains both the word "return" and the phrase "pink panther" use the query:
+            To search for a title that contains both the word "return" and the phrase "pink panther"
+            use the query:
+
             <programlisting language="querystring"><![CDATA[
 title:(+return +"pink panther")
 ]]></programlisting>
@@ -420,21 +529,25 @@ title:(+return +"pink panther")
         <title>Escaping Special Characters</title>
 
         <para>
-            Lucene supports escaping special characters that are used in query syntax. The current list of special
-            characters is:
+            Lucene supports escaping special characters that are used in query syntax. The current
+            list of special characters is:
         </para>
+
         <para>
             + - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \
         </para>
+
         <para>
             + and - inside single terms are automatically treated as common characters.
         </para>
+
         <para>
-            For other instances of these characters use the \ before each special character you'd like to escape. For example to search for (1+1):2 use the query:
+            For other instances of these characters use the \ before each special character you'd
+            like to escape. For example to search for (1+1):2 use the query:
+
             <programlisting language="querystring"><![CDATA[
 \(1\+1\)\:2
 ]]></programlisting>
         </para>
     </sect2>
-
 </sect1>

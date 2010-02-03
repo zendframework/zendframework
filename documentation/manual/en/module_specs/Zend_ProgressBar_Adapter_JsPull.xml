@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.jspull">
     <title>Zend_ProgressBar_Adapter_JsPull</title>
+
     <para>
         <classname>Zend_ProgressBar_Adapter_JsPull</classname> is the opposite of jsPush,
         as it requires to pull for new updates, instead of pushing updates out
@@ -14,11 +15,13 @@
         <methodname>update()</methodname> is called or <constant>TRUE</constant>, when
         <methodname>finish()</methodname> is called.
     </para>
+
     <para>
         You can set the adapter options either via the <code>set*</code> methods
         or give an array or a <classname>Zend_Config</classname> instance with options as first
         parameter to the constructor. The available options are:
     </para>
+
     <itemizedlist>
         <listitem>
             <para>

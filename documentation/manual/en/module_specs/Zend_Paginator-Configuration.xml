@@ -18,22 +18,24 @@
                     <entry>Description</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry>setCurrentPageNumber</entry>
-                    <entry>
-                        Sets the current page number (default 1).
-                    </entry>
+                    <entry>Sets the current page number (default 1).</entry>
                 </row>
+
                 <row>
                     <entry>setItemCountPerPage</entry>
+
                     <entry>
-                        Sets the maximum number of items to display on a page
-                        (default 10).
+                        Sets the maximum number of items to display on a page (default 10).
                     </entry>
                 </row>
+
                 <row>
                     <entry>setPageRange</entry>
+
                     <entry>
                         Sets the number of items to display in the pagination
                         control (default 10). Note: Most of the time this
@@ -42,11 +44,10 @@
                         starting value (e.g., Elastic).
                     </entry>
                 </row>
+
                 <row>
                     <entry>setView</entry>
-                    <entry>
-                        Sets the view instance, for rendering convenience.
-                    </entry>
+                    <entry>Sets the view instance, for rendering convenience.</entry>
                 </row>
             </tbody>
         </tgroup>

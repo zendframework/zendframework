@@ -2,6 +2,7 @@
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.provider">
     <title>Zend_OpenId_Provider</title>
+
     <para>
         <classname>Zend_OpenId_Provider</classname> can be used to implement OpenID
         servers. This chapter provides examples that demonstrate how to
@@ -11,7 +12,8 @@
     </para>
 
     <sect2 id="zend.openid.provider.start">
-        <title>Quick Start</title>
+        <title>Quick start</title>
+
         <para>
             The following example includes code for creating a user account
             using <classname>Zend_OpenId_Provider::register</classname>. The link element with
@@ -28,6 +30,7 @@
 
         <example id="zend.openid.provider.example-1">
             <title>The Identity</title>
+
             <programlisting language="php"><![CDATA[
 <?php
 // Set up test identity
@@ -52,20 +55,23 @@ if (!$server->hasUser(TEST_ID)) {
             from OpenID-enabled sites (for association and authentication). Both of
             them are handled by the same method:
             <classname>Zend_OpenId_Provider::handle</classname>. The two arguments to the
-            <classname>Zend_OpenId_Provider</classname> constructor are <acronym>URL</acronym>s of login and trust pages, which
-            ask for input from the end user.
+            <classname>Zend_OpenId_Provider</classname> constructor are <acronym>URL</acronym>s of
+            login and trust pages, which ask for input from the end user.
         </para>
 
         <para>
             On success, the method <classname>Zend_OpenId_Provider::handle</classname>
             returns a string that should be passed back to the OpenID-enabled site. On
             failure, it returns <constant>FALSE</constant>. This example will return an
-            <acronym>HTTP</acronym> 403 response if <classname>Zend_OpenId_Provider::handle</classname> fails. You will get this response if you open this script with a
-            web browser, because it sends a non-OpenID conforming request.
+            <acronym>HTTP</acronym> 403 response if
+            <classname>Zend_OpenId_Provider::handle</classname> fails. You will get this response if
+            you open this script with a web browser, because it sends a non-OpenID conforming
+            request.
         </para>
 
         <example id="zend.openid.provider.example-2">
             <title>Simple Identity Provider</title>
+
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider("example-8-login.php",
                                    "example-8-trust.php");
@@ -85,12 +91,12 @@ if (is_string($ret)) {
                 especially for the following interactive scripts- to prevent password
                 disclosure.
             </para>
-       </note>
+        </note>
 
         <para>
             The following script implements a login screen for an identity
-            server using <classname>Zend_OpenId_Provider</classname> and redirects to this page when a
-            required user has not yet logged in. On this page, a user will enter his password
+            server using <classname>Zend_OpenId_Provider</classname> and redirects to this page when
+            a required user has not yet logged in. On this page, a user will enter his password
             to login.
         </para>
 
@@ -118,6 +124,7 @@ if (is_string($ret)) {
 
         <example id="zend.openid.provider.example-3">
             <title>Simple Login Screen</title>
+
             <programlisting language="php"><![CDATA[
 <?php
 $server = new Zend_OpenId_Provider();
@@ -183,6 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
 
         <example id="zend.openid.provider.example-4">
             <title>Simple Trust Screen</title>
+
             <programlisting language="php"><![CDATA[
 <?php
 $server = new Zend_OpenId_Provider();
@@ -239,6 +247,7 @@ is your identity URL.
 
     <sect2 id="zend.openid.provider.all">
         <title>Combined Provide Scripts</title>
+
         <para>
             It is possible to combine all provider functionality in one script. In
             this case login and trust <acronym>URL</acronym>s are omitted, and
@@ -250,13 +259,14 @@ is your identity URL.
             <para>
                 The following example is not complete. It doesn't provide GUI code for
                 the user, instead performing an automatic login and trust relationship instead.
-                This is done just to simplify the example; a production server should include some code
-                from previous examples.
+                This is done just to simplify the example; a production server should include some
+                code from previous examples.
             </para>
         </note>
 
         <example id="zend.openid.provider.example-5">
             <title>Everything Together</title>
+
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
 
@@ -289,24 +299,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         <para>
             If you compare this example with previous examples split in to
             separate pages, you will see only the one
-            difference besides the dispatch code: <methodname>unset($_GET['openid_action'])</methodname>. This
-            call to <code>unset</code> is necessary to route the next request to main
-            handler.
+            difference besides the dispatch code:
+            <methodname>unset($_GET['openid_action'])</methodname>. This call to <code>unset</code>
+            is necessary to route the next request to main handler.
         </para>
     </sect2>
 
     <sect2 id="zend.openid.provider.sreg">
         <title>Simple Registration Extension</title>
+
         <para>
-            Again, the code before the &lt;html&gt; tag is just a trick to demonstrate functionality. It creates a new user
-            account and associates it with a profile (nickname and password). Such
-            tricks aren't needed in deployed providers where end users register on OpenID
-            servers and fill in their profiles. Implementing this GUI is out of scope for
+            Again, the code before the &lt;html&gt; tag is just a trick to demonstrate
+            functionality. It creates a new user account and associates it with a profile (nickname
+            and password). Such tricks aren't needed in deployed providers where end users register
+            on OpenID servers and fill in their profiles. Implementing this GUI is out of scope for
             this manual.
         </para>
 
         <example id="zend.openid.provider.example-6">
             <title>Identity with Profile</title>
+
             <programlisting language="php"><![CDATA[
 <?php
 define("TEST_SERVER", Zend_OpenId::absoluteURL("example-10.php"));
@@ -344,13 +356,13 @@ if (!$server->hasUser(TEST_ID)) {
         </para>
 
         <para>
-            This script is a variation of the script in the "Everything Together" example. It uses the
-            same automatic login mechanism, but doesn't contain any code for a trust
+            This script is a variation of the script in the "Everything Together" example. It uses
+            the same automatic login mechanism, but doesn't contain any code for a trust
             page. The user already trusts the example scripts forever. This trust was
-            established by calling the <methodname>Zend_OpenId_Provider::allowSite()</methodname> method in the identity
-            script. The same method associates the profile with the trusted <acronym>URL</acronym>. This
-            profile will be returned automatically for a request from the trusted
-            <acronym>URL</acronym>.
+            established by calling the <methodname>Zend_OpenId_Provider::allowSite()</methodname>
+            method in the identity script. The same method associates the profile with the trusted
+            <acronym>URL</acronym>. This profile will be returned automatically for a request from
+            the trusted <acronym>URL</acronym>.
         </para>
 
         <para>
@@ -361,6 +373,7 @@ if (!$server->hasUser(TEST_ID)) {
 
         <example id="zend.openid.provider.example-7">
             <title>Provider with SREG</title>
+
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
 $sreg = new Zend_OpenId_Extension_Sreg();
@@ -393,6 +406,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
 
     <sect2 id="zend.openid.provider.else">
         <title>Anything Else?</title>
+
         <para>
             Building OpenID providers is much less common than building
             OpenID-enabled sites, so this manual doesn't cover all
@@ -411,6 +425,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
                     users to register and manage their trusted sites and profiles
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     An abstract storage layer to store information about users,
@@ -420,6 +435,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
                     file storage by default, but may used with another backend.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     An abstract user-association layer that may associate
@@ -429,8 +445,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         </itemizedlist>
 
         <para>
-            The <classname>Zend_OpenId_Provider</classname> class doesn't attempt to cover all possible
-            features that can be implemented by OpenID servers, e.g. digital
+            The <classname>Zend_OpenId_Provider</classname> class doesn't attempt to cover all
+            possible features that can be implemented by OpenID servers, e.g. digital
             certificates, but it can be extended easily using
             <classname>Zend_OpenId_Extension</classname>s or by standard object-oriented extension.
         </para>

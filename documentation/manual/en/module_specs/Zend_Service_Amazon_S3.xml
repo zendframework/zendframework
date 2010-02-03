@@ -7,12 +7,12 @@
         <title>Introduction</title>
 
         <para>
-    Amazon S3 provides a simple web services interface that can be used to
-    store and retrieve any amount of data, at any time, from anywhere on
-    the web. It gives any developer access to the same highly scalable,
-    reliable, fast, inexpensive data storage infrastructure that Amazon
-    uses to run its own global network of web sites. The service aims to
-    maximize benefits of scale and to pass those benefits on to developers.
+            Amazon S3 provides a simple web services interface that can be used to
+            store and retrieve any amount of data, at any time, from anywhere on
+            the web. It gives any developer access to the same highly scalable,
+            reliable, fast, inexpensive data storage infrastructure that Amazon
+            uses to run its own global network of web sites. The service aims to
+            maximize benefits of scale and to pass those benefits on to developers.
         </para>
     </sect2>
 
@@ -20,8 +20,8 @@
         <title>Registering with Amazon S3</title>
 
         <para>
-            Before you can get started with <classname>Zend_Service_Amazon_S3</classname>, you must first
-            register for an account. Please see the
+            Before you can get started with <classname>Zend_Service_Amazon_S3</classname>, you must
+            first register for an account. Please see the
             <ulink url="http://aws.amazon.com/s3/faqs/">S3 FAQ</ulink>
             page on the Amazon website for more information.
         </para>
@@ -36,13 +36,13 @@
         <title>API Documentation</title>
 
         <para>
-            The <classname>Zend_Service_Amazon_S3</classname> class provides the <acronym>PHP</acronym> wrapper to the
-            Amazon S3 REST interface. Please consult the
-            <ulink url="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=48">Amazon S3 documentation</ulink>
-            for detailed description of the service. You will need to be familiar with basic concepts
-            in order to use this service.
+            The <classname>Zend_Service_Amazon_S3</classname> class provides the
+            <acronym>PHP</acronym> wrapper to the Amazon S3 REST interface. Please consult the
+            <ulink
+                url="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=48">Amazon
+                S3 documentation</ulink> for detailed description of the service. You will need to
+            be familiar with basic concepts in order to use this service.
         </para>
-
     </sect2>
 
     <sect2 id="zend.service.amazon.s3.features">
@@ -61,9 +61,9 @@
 
                 <listitem>
                     <para>
-                        A proxy object that is more convenient to use than an <acronym>HTTP</acronym> client
-                        alone, mostly removing the need to manually construct <acronym>HTTP</acronym> POST
-                        requests to access the REST service.
+                        A proxy object that is more convenient to use than an
+                        <acronym>HTTP</acronym> client alone, mostly removing the need to manually
+                        construct <acronym>HTTP</acronym> POST requests to access the REST service.
                     </para>
                 </listitem>
 
@@ -101,6 +101,7 @@
 
         <example id="zend.service.amazon.s3.storing-your-first.example">
             <title>Zend_Service_Amazon_S3 Usage Example</title>
+
              <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
@@ -117,7 +118,6 @@ echo $s3->getObject("my-own-bucket/myobject");
         <para>
             Since <classname>Zend_Service_Amazon_S3</classname> service requires authentication,
             you should pass your credentials (AWS key and secret key) to the constructor.
-
             If you only use one account, you can set default credentials for the service:
         </para>
 
@@ -133,15 +133,16 @@ $s3 = new Zend_Service_Amazon_S3();
         <title>Bucket operations</title>
 
         <para>
-        All objects in S3 system are stored in buckets. Bucket has to be created
-        before any storage operation. Bucket name is unique in the system, so
-        you can not have bucket named the same as someone else's bucket.
+            All objects in S3 system are stored in buckets. Bucket has to be created
+            before any storage operation. Bucket name is unique in the system, so
+            you can not have bucket named the same as someone else's bucket.
         </para>
 
         <para>
-        Bucket name can contain lowercase letters, digits, periods (.), underscores (_), and dashes (-).
-        No other symbols allowed. Bucket name should start with letter or digit, and be 3 to 255 characters long.
-        Names looking like an IP address (e.g. "192.168.16.255") are not allowed.
+            Bucket name can contain lowercase letters, digits, periods (.), underscores (_), and
+            dashes (-). No other symbols allowed. Bucket name should start with letter or digit, and
+            be 3 to 255 characters long. Names looking like an IP address (e.g. "192.168.16.255")
+            are not allowed.
         </para>
 
         <itemizedlist>
@@ -150,19 +151,24 @@ $s3 = new Zend_Service_Amazon_S3();
                     <methodname>createBucket()</methodname> creates a new bucket.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>cleanBucket()</methodname> removes all objects that are contained in a bucket.
+                    <methodname>cleanBucket()</methodname> removes all objects that are contained in
+                    a bucket.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>removeBucket()</methodname> removes the bucket from the system. The bucket should be
-                    empty to be removed.
+                    <methodname>removeBucket()</methodname> removes the bucket from the system. The
+                    bucket should be empty to be removed.
                 </para>
-        <example id="zend.service.amazon.s3.buckets.remove.example">
-            <title>Zend_Service_Amazon_S3 Bucket Removal Example</title>
-             <programlisting language="php"><![CDATA[
+
+                <example id="zend.service.amazon.s3.buckets.remove.example">
+                    <title>Zend_Service_Amazon_S3 Bucket Removal Example</title>
+
+                    <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
@@ -170,16 +176,19 @@ $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
 $s3->cleanBucket("my-own-bucket");
 $s3->removeBucket("my-own-bucket");
 ]]></programlisting>
-        </example>
+                </example>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>getBuckets()</methodname> returns the list of the names of all buckets belonging to the
-                    user.
+                    <methodname>getBuckets()</methodname> returns the list of the names of all
+                    buckets belonging to the user.
                 </para>
-        <example id="zend.service.amazon.s3.buckets.list.example">
-            <title>Zend_Service_Amazon_S3 Bucket Listing Example</title>
-             <programlisting language="php"><![CDATA[
+
+                <example id="zend.service.amazon.s3.buckets.list.example">
+                    <title>Zend_Service_Amazon_S3 Bucket Listing Example</title>
+
+                    <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
@@ -189,13 +198,13 @@ foreach($list as $bucket) {
   echo "I have bucket $bucket\n";
 }
 ]]></programlisting>
-        </example>
+                </example>
             </listitem>
 
             <listitem>
                 <para>
-                    <methodname>isBucketAvailable()</methodname> check if the bucket exists and returns
-                    <constant>TRUE</constant> if it does.
+                    <methodname>isBucketAvailable()</methodname> check if the bucket exists and
+                    returns <constant>TRUE</constant> if it does.
                 </para>
             </listitem>
         </itemizedlist>
@@ -203,81 +212,119 @@ foreach($list as $bucket) {
 
     <sect2 id="zend.service.amazon.s3.objects">
         <title>Object operations</title>
+
         <para>
-        The object is the basic storage unit in S3. Object stores unstructured data, which can be
-        any size up to 4 gigabytes. There's no limit on how many objects can be stored on the system.
+            The object is the basic storage unit in S3. Object stores unstructured data, which can
+            be any size up to 4 gigabytes. There's no limit on how many objects can be stored on the
+            system.
         </para>
 
         <para>
-        The object are contained in buckets. Object is identified by name, which can be any utf-8 string.
-        It is common to use hierarchical names (such as <code>Pictures/Myself/CodingInPHP.jpg</code>) to
-        organise object names. Object name is prefixed with bucket name when using object functions, so for
-        object "mydata" in bucket "my-own-bucket" the name would be <code>my-own-bucket/mydata</code>.
+            The object are contained in buckets. Object is identified by name, which can be any
+            utf-8 string. It is common to use hierarchical names (such as
+            <code>Pictures/Myself/CodingInPHP.jpg</code>) to organise object names. Object name is
+            prefixed with bucket name when using object functions, so for object "mydata" in bucket
+            "my-own-bucket" the name would be <code>my-own-bucket/mydata</code>.
         </para>
 
         <para>
-        Objects can be replaced (by rewriting new data with the same key) or deleted, but not modified, appended, etc.
-        Object is always stored whole.
+            Objects can be replaced (by rewriting new data with the same key) or deleted, but not
+            modified, appended, etc. Object is always stored whole.
         </para>
 
         <para>
-        By default, all objects are private and can be accessed only by their owner. However, it is possible
-        to specify object with public access, in which case it will be available through the <acronym>URL</acronym>:
-        <code>http://s3.amazonaws.com/[bucket-name]/[object-name]</code>.
+            By default, all objects are private and can be accessed only by their owner. However, it
+            is possible to specify object with public access, in which case it will be available
+            through the <acronym>URL</acronym>:
+            <code>http://s3.amazonaws.com/[bucket-name]/[object-name]</code>.
         </para>
 
         <itemizedlist>
             <listitem>
                 <para>
-                    <methodname>putObject($object, $data, $meta)</methodname> created an object with name <varname>$object</varname>
-                    (should contain the bucket name as prefix!) having <varname>$data</varname> as its content.
+                    <methodname>putObject($object, $data, $meta)</methodname> created an object with
+                    name <varname>$object</varname> (should contain the bucket name as prefix!)
+                    having <varname>$data</varname> as its content.
                 </para>
-                <para>Optional <varname>$meta</varname> parameter is the array of metadata, which currently supports the
-                following parameters as keys:
+
+                <para>
+                Optional <varname>$meta</varname> parameter is the array of metadata, which
+                currently supports the following parameters as keys:
                 </para>
+
                 <variablelist>
-                <varlistentry><term><constant>S3_CONTENT_TYPE_HEADER</constant></term>
-                    <listitem>
-                    <para>
-                    <acronym>MIME</acronym> content type of the data. If not specified, the type will be guessed according
-                    to the file extension of the object name.
-                    </para>
-                    </listitem>
-                </varlistentry>
-                <varlistentry><term><constant>S3_ACL_HEADER</constant></term>
-                    <listitem>
-                    <para>
-                    The access to the item. Following access constants can be used:
-                        <variablelist>
-                        <varlistentry><term><constant>S3_ACL_PRIVATE</constant></term>
-                            <listitem>
-                            <para>Only the owner has access to the item.</para>
-                            </listitem>
-                        </varlistentry>
-                        <varlistentry><term><constant>S3_ACL_PUBLIC_READ</constant></term>
-                            <listitem>
-                            <para>Anybody can read the object, but only owner can write.
-                            This is setting may be used to store publicly accessible content.</para>
-                            </listitem>
-                        </varlistentry>
-                        <varlistentry><term><constant>S3_ACL_PUBLIC_WRITE</constant></term>
-                            <listitem>
-                            <para>Anybody can read or write the object. This policy is rarely useful.</para>
-                            </listitem>
-                        </varlistentry>
-                        <varlistentry><term><constant>S3_ACL_AUTH_READ</constant></term>
-                            <listitem>
-                            <para>Only the owner has write access to the item, and other authenticated S3
-                            users have read access. This is useful for sharing data between S3 accounts without
-                            exposing them to the public.</para>
-                            </listitem>
-                        </varlistentry>
-                        </variablelist>
-                    By default, all the items are private.
-                    </para>
-        <example id="zend.service.amazon.s3.objects.public.example">
-            <title>Zend_Service_Amazon_S3 Public Object Example</title>
-             <programlisting language="php"><![CDATA[
+                    <varlistentry>
+                        <term><constant>S3_CONTENT_TYPE_HEADER</constant></term>
+
+                        <listitem>
+                            <para>
+                                <acronym>MIME</acronym> content type of the data. If not specified,
+                                the type will be guessed according to the file extension of the
+                                object name.
+                            </para>
+                        </listitem>
+                    </varlistentry>
+
+                    <varlistentry>
+                        <term><constant>S3_ACL_HEADER</constant></term>
+
+                        <listitem>
+                            <para>
+                                The access to the item. Following access constants can be used:
+
+                                <variablelist>
+                                    <varlistentry>
+                                        <term><constant>S3_ACL_PRIVATE</constant></term>
+
+                                        <listitem>
+                                            <para>Only the owner has access to the item.</para>
+                                        </listitem>
+                                    </varlistentry>
+
+                                    <varlistentry>
+                                        <term><constant>S3_ACL_PUBLIC_READ</constant></term>
+
+                                        <listitem>
+                                            <para>
+                                                Anybody can read the object, but only owner can
+                                                write. This is setting may be used to store publicly
+                                                accessible content.
+                                            </para>
+                                        </listitem>
+                                    </varlistentry>
+
+                                    <varlistentry>
+                                        <term><constant>S3_ACL_PUBLIC_WRITE</constant></term>
+
+                                        <listitem>
+                                            <para>
+                                                Anybody can read or write the object. This policy is
+                                                rarely useful.
+                                            </para>
+                                        </listitem>
+                                    </varlistentry>
+
+                                    <varlistentry>
+                                        <term><constant>S3_ACL_AUTH_READ</constant></term>
+
+                                        <listitem>
+                                            <para>
+                                                Only the owner has write access to the item, and
+                                                other authenticated S3 users have read access. This
+                                                is useful for sharing data between S3 accounts
+                                                without exposing them to the public.
+                                            </para>
+                                        </listitem>
+                                    </varlistentry>
+                                </variablelist>
+
+                                By default, all the items are private.
+                            </para>
+
+                            <example id="zend.service.amazon.s3.objects.public.example">
+                                <title>Zend_Service_Amazon_S3 Public Object Example</title>
+
+                                <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
@@ -291,58 +338,85 @@ $s3->putFile("me.png", "my-own-bucket/Pictures/Me.png",
           Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ));
 echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
 ]]></programlisting>
-        </example>
-                    </listitem>
-                </varlistentry>
-                   </variablelist>
+                            </example>
+                        </listitem>
+                    </varlistentry>
+                </variablelist>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>getObject($object)</methodname> retrieves object data from the storage by name.
+                    <methodname>getObject($object)</methodname> retrieves object data from the
+                    storage by name.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>removeObject($object)</methodname> removes the object from the storage.
+                    <methodname>removeObject($object)</methodname> removes the object from the
+                    storage.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>getInfo($object)</methodname> retrieves the metadata information about the object. The
-                    function will return array with metadata information. Some of the useful keys are:
-                        <variablelist>
-                        <varlistentry><term><code>type</code></term>
+                    <methodname>getInfo($object)</methodname> retrieves the metadata information
+                    about the object. The function will return array with metadata information. Some
+                    of the useful keys are:
+
+                    <variablelist>
+                        <varlistentry>
+                            <term><code>type</code></term>
+
                             <listitem>
-                            <para>The <acronym>MIME</acronym> type of the item.</para>
+                                <para>The <acronym>MIME</acronym> type of the item.</para>
                             </listitem>
                         </varlistentry>
-                        <varlistentry><term><code>size</code></term>
+                        <varlistentry>
+                            <term><code>size</code></term>
+
                             <listitem>
-                            <para>The size of the object data.</para>
+                                <para>The size of the object data.</para>
                             </listitem>
                         </varlistentry>
-                        <varlistentry><term><code>mtime</code></term>
+
+                        <varlistentry>
+                            <term><code>mtime</code></term>
+
                             <listitem>
-                            <para>UNIX-type timestamp of the last modification for the object.</para>
+                                <para>
+                                    UNIX-type timestamp of the last modification for the object.
+                                </para>
                             </listitem>
                         </varlistentry>
-                        <varlistentry><term><code>etag</code></term>
+
+                        <varlistentry>
+                            <term><code>etag</code></term>
+
                             <listitem>
-                            <para>The ETag of the data, which is the MD5 hash of the data, surrounded by quotes (").</para>
+                                <para>
+                                    The ETag of the data, which is the MD5 hash of the data,
+                                    surrounded by quotes (").
+                                </para>
                             </listitem>
                         </varlistentry>
-                        </variablelist>
-                        The function will return <constant>FALSE</constant> if the key does not correspond to any existing object.
+                    </variablelist>
+
+                    The function will return <constant>FALSE</constant> if the key does not
+                    correspond to any existing object.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>getObjectsByBucket($bucket)</methodname> returns the list of the object keys, contained
-                    in the bucket.
+                    <methodname>getObjectsByBucket($bucket)</methodname> returns the list of the
+                    object keys, contained in the bucket.
                 </para>
-        <example id="zend.service.amazon.s3.objects.list.example">
-            <title>Zend_Service_Amazon_S3 Object Listing Example</title>
-             <programlisting language="php"><![CDATA[
+
+                <example id="zend.service.amazon.s3.objects.list.example">
+                    <title>Zend_Service_Amazon_S3 Object Listing Example</title>
+
+                    <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
@@ -354,38 +428,51 @@ foreach($list as $name) {
   echo "with data: $data\n";
 }
 ]]></programlisting>
-        </example>
+                </example>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>isObjectAvailable($object)</methodname> checks if the object with given name exists.
+                    <methodname>isObjectAvailable($object)</methodname> checks if the object with
+                    given name exists.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <methodname>putFile($path, $object, $meta)</methodname> puts the content of the file in <varname>$path</varname>
-                    into the object named <varname>$object</varname>.
+                    <methodname>putFile($path, $object, $meta)</methodname> puts the content of the
+                    file in <varname>$path</varname> into the object named
+                    <varname>$object</varname>.
                 </para>
+
                 <para>
-                The optional <varname>$meta</varname> argument is the same as for <code>putObject</code>. If the
-                content type is omitted, it will be guessed basing on the source file name.
+                    The optional <varname>$meta</varname> argument is the same as for
+                    <code>putObject</code>. If the content type is omitted, it will be guessed
+                    basing on the source file name.
                 </para>
             </listitem>
-       </itemizedlist>
+        </itemizedlist>
     </sect2>
+
     <sect2 id="zend.service.amazon.s3.streaming">
         <title>Data Streaming</title>
+
         <para>
-        It is possible to get and put objects using not stream data held in memory but files or PHP streams.
-        This is especially useful when file sizes are large in order not to overcome memory limits.
+            It is possible to get and put objects using not stream data held in memory but files or
+            PHP streams. This is especially useful when file sizes are large in order not to
+            overcome memory limits.
         </para>
+
         <para>
-        To receive object using streaming, use method <methodname>getObjectStream($object, $filename)</methodname>. This method
-        will return <classname>Zend_Http_Response_Stream</classname>, which can be used as described in
-        <link linkend="zend.http.client.streaming">HTTP Client Data Streaming</link> section.
-        <example id="zend.service.amazon.s3.streaming.example1">
-        <title>Zend_Service_Amazon_S3 Data Streaming Example</title>
-             <programlisting language="php"><![CDATA[
+            To receive object using streaming, use method
+            <methodname>getObjectStream($object, $filename)</methodname>. This method will return
+            <classname>Zend_Http_Response_Stream</classname>, which can be used as described in
+            <link linkend="zend.http.client.streaming">HTTP Client Data Streaming</link> section.
+
+            <example id="zend.service.amazon.s3.streaming.example1">
+                <title>Zend_Service_Amazon_S3 Data Streaming Example</title>
+
+                <programlisting language="php"><![CDATA[
 $response = $amazon->getObjectStream("mybycket/zftest");
 // copy file
 copy($response->getStreamName(), "my/downloads/file");
@@ -393,32 +480,41 @@ copy($response->getStreamName(), "my/downloads/file");
 $fp = fopen("my/downloads/file2", "w");
 stream_copy_to_stream($response->getStream(), $fp);
 ]]></programlisting>
-        </example>
+            </example>
         </para>
-        <para>Second parameter for <methodname>getObjectStream()</methodname> is optional and specifies target file
-         to write the data. If not specified, temporary file is used, which will be deleted after
-         the respons eobject is destroyed.
-         </para>
 
-         <para>
-         To send object using streaming, use <methodname>putFileStream()</methodname> which has the same signature as
-         <methodname>putFile()</methodname> but will use streaming and not read the file into memory.
-         </para>
+        <para>
+            Second parameter for <methodname>getObjectStream()</methodname> is optional and
+            specifies target file to write the data. If not specified, temporary file is used, which
+            will be deleted after the respons eobject is destroyed.
+        </para>
 
-         <para>
-         Also, you can pass stream resource to <methodname>putObject()</methodname> method data parameter,
-         in which case the data will be read from the stream when sending the request to the server.
-         </para>
+        <para>
+            To send object using streaming, use <methodname>putFileStream()</methodname> which has
+            the same signature as <methodname>putFile()</methodname> but will use streaming and not
+            read the file into memory.
+        </para>
+
+        <para>
+            Also, you can pass stream resource to <methodname>putObject()</methodname> method data
+            parameter, in which case the data will be read from the stream when sending the request
+            to the server.
+        </para>
     </sect2>
+
     <sect2 id="zend.service.amazon.s3.streams">
         <title>Stream wrapper</title>
+
         <para>
-        In addition to the interfaces described above, <classname>Zend_Service_Amazon_S3</classname> also supports
-        operating as a stream wrapper. For this, you need to register the client object as the stream wrapper:
+            In addition to the interfaces described above,
+            <classname>Zend_Service_Amazon_S3</classname> also supports operating as a stream
+            wrapper. For this, you need to register the client object as the stream wrapper:
         </para>
+
         <example id="zend.service.amazon.s3.streams.example">
             <title>Zend_Service_Amazon_S3 Streams Example</title>
-             <programlisting language="php"><![CDATA[
+
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
@@ -433,10 +529,10 @@ echo file_get_contents("s3://my-own-bucket/testdata");
         </example>
 
         <para>
-        Directory operations (<code>mkdir</code>, <code>rmdir</code>, <code>opendir</code>, etc.)
-        will operate on buckets and thus their arguments should be of the form of <code>s3://bucketname</code>.
-        File operations operate on objects. Object creation, reading, writing, deletion, stat and
-        directory listing is supported.
+            Directory operations (<code>mkdir</code>, <code>rmdir</code>, <code>opendir</code>,
+            etc.) will operate on buckets and thus their arguments should be of the form of
+            <code>s3://bucketname</code>. File operations operate on objects. Object creation,
+            reading, writing, deletion, stat and directory listing is supported.
         </para>
     </sect2>
 </sect1>

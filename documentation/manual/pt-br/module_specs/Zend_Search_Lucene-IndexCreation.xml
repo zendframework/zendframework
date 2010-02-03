@@ -191,47 +191,49 @@ $index->optimize();
         </para>
 
         <sect3 id="zend.search.lucene.index-creation.optimization.maxbuffereddocs">
-            <title>MaxBufferedDocs auto-optimization option</title>
+            <title>Opção de auto-otimização MaxBufferedDocs</title>
 
             <para>
-                <emphasis>MaxBufferedDocs</emphasis> is a minimal number of documents required
-                before the buffered in-memory documents are written into a new segment.
+                <emphasis>MaxBufferedDocs</emphasis> é o número mínimo de documentos necessários
+                antes que os documentos presentes na memória dentro do buffer sejam escritos em um
+                novo segmento.
             </para>
 
             <para>
-                <emphasis>MaxBufferedDocs</emphasis> can be retrieved or set by
-                <code>$index->getMaxBufferedDocs()</code> or
-                <code>$index->setMaxBufferedDocs($maxBufferedDocs)</code> calls.
+                <emphasis>MaxBufferedDocs</emphasis> pode ser recuperado ou definido pelas chamadas
+                <code>$index->getMaxBufferedDocs()</code> ou
+                <code>$index->setMaxBufferedDocs($maxBufferedDocs)</code>.
             </para>
 
             <para>
-                Default value is 10.
+                O valor padrão é 10.
             </para>
         </sect3>
 
         <sect3 id="zend.search.lucene.index-creation.optimization.maxmergedocs">
-            <title>MaxMergeDocs auto-optimization option</title>
+            <title>Opção de auto-otimização MaxMergeDocs</title>
 
             <para>
-                <emphasis>MaxMergeDocs</emphasis> is a largest number of documents ever merged by
-                addDocument(). Small values (e.g., less than 10.000) are best for interactive
-                indexing, as this limits the length of pauses while indexing to a few seconds.
-                Larger values are best for batched indexing and speedier searches.
+                <emphasis>MaxMergeDocs</emphasis> é o maior número de documentos já fundidos por
+                addDocument(). Valores pequenos (p. ex., menores que 10.000) são os melhores para
+                indexação interativa, visto que isso limita em alguns segundos a duração das pausas
+                durante a indexação. Os maiores valores são os melhores para a indexação em lote e
+                buscas rápidas.
             </para>
 
             <para>
-                <emphasis>MaxMergeDocs</emphasis> can be retrieved or set by
-                <code>$index->getMaxMergeDocs()</code> or
-                <code>$index->setMaxMergeDocs($maxMergeDocs)</code> calls.
+                <emphasis>MaxMergeDocs</emphasis> pode ser recuperado ou definido pelas chamadas
+                <code>$index->getMaxMergeDocs()</code> ou
+                <code>$index->setMaxMergeDocs($maxMergeDocs)</code>.
             </para>
 
             <para>
-                Default value is PHP_INT_MAX.
+                O valor padrão é PHP_INT_MAX.
             </para>
         </sect3>
 
         <sect3 id="zend.search.lucene.index-creation.optimization.mergefactor">
-            <title>MergeFactor auto-optimization option</title>
+            <title>Opção de auto-otimização MergeFactor</title>
 
             <para>
                 <emphasis>MergeFactor</emphasis> determines how often segment indices are merged by
@@ -252,13 +254,13 @@ $index->optimize();
             </para>
 
             <para>
-                <emphasis>MergeFactor</emphasis> can be retrieved or set by
-                <code>$index->getMergeFactor()</code> or
-                <code>$index->setMergeFactor($mergeFactor)</code> calls.
+                <emphasis>MergeFactor</emphasis> pode ser recuperado ou definido pelas chamadas
+                <code>$index->getMergeFactor()</code> ou
+                <code>$index->setMergeFactor($mergeFactor)</code>.
             </para>
 
             <para>
-                Default value is 10.
+                O valor padrão é 10.
             </para>
 
             <para>

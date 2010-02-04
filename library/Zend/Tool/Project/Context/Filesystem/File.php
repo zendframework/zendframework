@@ -39,6 +39,12 @@ require_once 'Zend/Tool/Project/Context/Filesystem/Abstract.php';
 class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Context_Filesystem_Abstract
 {
 
+    protected $_fileOnlyContext = null;
+    
+    protected $_filesystemName = 'file.txt';
+    
+    protected $_content = null;
+    
     /**
      * getName()
      * 
@@ -56,7 +62,16 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
      */
     public function init()
     {
-        // @todo check to ensure that this 'file' resource has no children
+        if ($this->_resource->hasAttribute('filesystemName')) {
+            $this->_filesystemName = $this->_resource->getAttribute('filesystemName');
+        }
+        
+        // check to see if this file is 
+        if ($this->getName() == 'file') {
+            $this->_initFileOnlyContext();
+        }
+        
+        // @potential-todo check to ensure that this 'file' resource has no children
         parent::init();
         return $this;
     }
@@ -71,6 +86,16 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
         $this->_resource = $resource;
         $this->_resource->setAppendable(false);
         return $this;
+    }
+    
+    /**
+     * getResource()
+     * 
+     * @return Zend_Tool_Project_Profile_Resource
+     */
+    public function getResource()
+    {
+        return $this->_resource;
     }
 
     /**
@@ -116,7 +141,17 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
      */
     public function getContents()
     {
-        return null;
+        return $this->_content;
     }
 
+    protected function _initFileOnlyContext()
+    {
+        if ($this->_resource->hasAttribute('defaultContentCallback')) {
+            $contentFunc = $this->_resource->getAttribute('defaultContentCallback');
+            if (is_callable($contentFunc)) {
+                $this->_content = call_user_func_array($contentFunc, array($this));
+            }
+        }
+    }
+    
 }

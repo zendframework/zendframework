@@ -62,7 +62,6 @@ class Zend_Tool_Project_Context_Zf_HtaccessFile extends Zend_Tool_Project_Contex
     public function getContents()
     {
         $output = <<<EOS
-SetEnv APPLICATION_ENV development
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]

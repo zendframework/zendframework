@@ -49,12 +49,9 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
             throw new Zend_File_Transfer_Exception('File uploads are not allowed in your php config!');
         }
 
+        $this->setOptions($options);
         $this->_prepareFiles();
         $this->addValidator('Upload', false, $this->_files);
-
-        if (is_array($options)) {
-            $this->setOptions($options);
-        }
     }
 
     /**

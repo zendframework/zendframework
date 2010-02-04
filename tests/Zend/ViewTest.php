@@ -672,7 +672,7 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $view->foo);
         $paths = $view->getScriptPaths();
         $this->assertEquals(1, count($paths));
-        $this->assertEquals(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'View' . DIRECTORY_SEPARATOR . '_templates' . DIRECTORY_SEPARATOR, $paths[0]);
+        $this->assertEquals(dirname(__FILE__) . '/View/_templates/', $paths[0]);
     }
 
     public function testHelperViewAccessor()
@@ -826,10 +826,10 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
     public function testGetScriptPath()
     {
         $view = new Zend_View();
-        $base = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'View' . DIRECTORY_SEPARATOR . '_templates';
+        $base = dirname(__FILE__) . '/View/_templates';
         $view->setScriptPath($base);
         $path = $view->getScriptPath('test.phtml');
-        $this->assertEquals($base . DIRECTORY_SEPARATOR . 'test.phtml', $path);
+        $this->assertEquals($base . '/test.phtml', $path);
     }
 
     public function testGetHelper()
@@ -1122,6 +1122,21 @@ class Zend_ViewTest extends PHPUnit_Framework_TestCase
     	$helper = new Zend_View_Helper_Doctype();
     	$view->registerHelper($helper, 'doctype');
         $this->assertSame($view, $helper->view);
+    }
+
+    /**
+     * @group ZF-9000
+     */
+    public function testAddingStreamSchemeAsScriptPathShouldNotReverseSlashesOnWindows()
+    {
+        if (false === strstr(strtolower(PHP_OS), 'windows')) {
+            $this->markTestSkipped('Windows-only test');
+        }
+    	$view = new Zend_View();
+        $path = rtrim('file://' . str_replace('\\', '/', realpath(dirname(__FILE__))), '/') . '/';
+        $view->addScriptPath($path);
+        $paths = $view->getScriptPaths();
+        $this->assertContains($path, $paths, var_export($paths, 1));
     }
 }
 

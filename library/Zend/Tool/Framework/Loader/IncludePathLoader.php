@@ -46,7 +46,8 @@ class Zend_Tool_Framework_Loader_IncludePathLoader extends Zend_Tool_Framework_L
      */
     protected function _getFiles()
     {
-        $paths = explode(PATH_SEPARATOR, get_include_path());
+        require_once 'Zend/Loader.php';
+        $paths = Zend_Loader::explodeIncludePath();
 
         // used for checking similarly named files
         $relativeItems   = array();

@@ -256,7 +256,7 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(Zend_Loader::isReadable(__FILE__ . '.foobaar'));
 
         // test that a file in include_path gets loaded, see ZF-2985
-        $this->assertTrue(Zend_Loader::isReadable('Zend/Controller/Front.php'));
+        $this->assertTrue(Zend_Loader::isReadable('Zend/Controller/Front.php'), get_include_path());
     }
 
     /**
@@ -467,6 +467,62 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
             $this->markTestSkipped('PHP < 5.3.0 does not support namespaces');
         }
         Zend_Loader::loadClass('\Zfns\Foo', array(dirname(__FILE__) . '/Loader/_files'));
+    }
+
+    /**
+     * @group ZF-7271
+     * @group ZF-8913
+     */
+    public function testIsReadableShouldHonorStreamDefinitions()
+    {
+        if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+            $this->markTestSkipped();
+        }
+
+        $pharFile = dirname(__FILE__) . '/Loader/_files/Zend_LoaderTest.phar';
+        $phar     = new Phar($pharFile, 0, 'zlt.phar');
+        $incPath = 'phar://zlt.phar'
+                 . PATH_SEPARATOR . $this->includePath;
+        set_include_path($incPath);
+        $this->assertTrue(Zend_Loader::isReadable('User.php'));
+        unset($phar);
+    }
+
+    /**
+     * @group ZF-8913
+     */
+    public function testIsReadableShouldNotLockWhenTestingForNonExistantFileInPhar()
+    {
+        if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+            $this->markTestSkipped();
+        }
+
+        $pharFile = dirname(__FILE__) . '/Loader/_files/Zend_LoaderTest.phar';
+        $phar     = new Phar($pharFile, 0, 'zlt.phar');
+        $incPath = 'phar://zlt.phar'
+                 . PATH_SEPARATOR . $this->includePath;
+        set_include_path($incPath);
+        $this->assertFalse(Zend_Loader::isReadable('does-not-exist'));
+        unset($phar);
+    }
+
+    /**
+     * @group ZF-7271
+     */
+    public function testExplodeIncludePathProperlyIdentifiesStreamSchemes()
+    {
+        if (PATH_SEPARATOR != ':') {
+            $this->markTestSkipped();
+        }
+        $path = 'phar://zlt.phar:/var/www:.:filter://[a-z]:glob://*';
+        $paths = Zend_Loader::explodeIncludePath($path);
+        $this->assertSame(array(
+            'phar://zlt.phar',
+            '/var/www',
+            '.',
+            'filter://[a-z]',
+            'glob://*',
+        ), $paths);
     }
 
     /**

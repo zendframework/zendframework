@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20855 -->
 <sect1 id="zend.service.introduction">
     <title>導入</title>
     <para>
@@ -44,6 +44,25 @@
                 <link linkend="zend.service.flickr">Flickr</link>
             </para>
         </listitem>
+
+         <listitem>
+             <para>
+                <link linkend="zend.service.livedocx">LiveDocx</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.nirvanix">Nirvanix</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.recaptcha">ReCaptcha</link>
+            </para>
+        </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.service.simpy">Simpy</link>
@@ -59,6 +78,25 @@
                 <link linkend="zend.service.strikeiron">StrikeIron</link>
             </para>
         </listitem>
+
+         <listitem>
+             <para>
+                <link linkend="zend.service.technorati">Technorati</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.twitter">Twitter</link>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <link linkend="zend.service.windowsazure">Windows Azure</link>
+            </para>
+        </listitem>
+
         <listitem>
             <para>
                 <link linkend="zend.service.yahoo">Yahoo!</link>

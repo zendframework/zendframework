@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20096 -->
+<!-- EN-Revision: 20876 -->
 <appendix id="coding-standard">
-  <title>Zend Framework PHP 標準コーディング規約</title>
+    <title>Zend Framework PHP 標準コーディング規約</title>
     <sect1 id="coding-standard.overview">
         <title>概要</title>
 

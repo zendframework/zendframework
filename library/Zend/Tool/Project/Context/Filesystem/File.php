@@ -41,7 +41,7 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
 
     protected $_fileOnlyContext = null;
     
-    protected $_filesystemName = 'file.txt';
+    protected $_filesystemName = null;
     
     protected $_content = null;
     
@@ -76,6 +76,20 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
         return $this;
     }
 
+    /**
+     * getPersistentAttributes()
+     *
+     * @return array
+     */
+    public function getPersistentAttributes()
+    {
+        $returnAttrs = array();
+        if ($this->_filesystemName !== null) {
+            $returnAttrs['filesystemName'] = $this->_filesystemName;
+        }
+        return $returnAttrs;
+    }
+    
     /**
      * setResource()
      *
@@ -151,6 +165,9 @@ class Zend_Tool_Project_Context_Filesystem_File extends Zend_Tool_Project_Contex
             if (is_callable($contentFunc)) {
                 $this->_content = call_user_func_array($contentFunc, array($this));
             }
+        }
+        if ($this->_filesystemName == null) {
+            $this->_filesystemName = 'file.txt';
         }
     }
     

@@ -89,6 +89,11 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
         $this->query->setDocument($this->getHtml());
     }
 
+    public function handleError($msg, $code = 0) 
+    {
+        $this->error = $msg;
+    }
+
     public function testConstructorShouldNotRequireArguments()
     {
         $query = new Zend_Dom_Query();
@@ -154,11 +159,14 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
 
     public function testQueryingInvalidDocumentShouldThrowException()
     {
+        set_error_handler(array($this, 'handleError'));
         $this->query->setDocumentXml('some bogus string');
         try {
             $this->query->query('.foo');
+            restore_error_handler();
             $this->fail('Querying invalid document should throw exception');
         } catch (Zend_Dom_Exception $e) {
+            restore_error_handler();
             $this->assertContains('Error parsing', $e->getMessage());
         }
     }

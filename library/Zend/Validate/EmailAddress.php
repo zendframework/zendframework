@@ -362,8 +362,8 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
                 }
 
                 $segmentData = array(
-                    'network'   => (int)$this->_binaryToIp(str_pad(substr($binaryHost, 0, $host[1]), 32, 0)),
-                    'broadcast' => (int)$this->_binaryToIp(str_pad(substr($binaryHost, 0, $host[1]), 32, 1))
+                    'network'   => (int)$this->_toIp(str_pad(substr($binaryHost, 0, $host[1]), 32, 0)),
+                    'broadcast' => (int)$this->_toIp(str_pad(substr($binaryHost, 0, $host[1]), 32, 1))
                 );
 
                 for ($j = $i; $j < 4; $j++) {

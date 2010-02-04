@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16507 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Action Helfer</title>
 
     <sect2 id="zend.controller.actionhelper.introduction">
         <title>Einführung</title>
+
         <para>
             Aktion Helfer erlauben Entwicklern Runtime und/oder On-Demand Funktionalität in jeden
             Aktion Controller zu inizieren der <classname>Zend_Controller_Action</classname>
@@ -338,6 +339,3 @@ $this->_helper->redirector('item', 'view', 'blog', array('id' => 42));
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

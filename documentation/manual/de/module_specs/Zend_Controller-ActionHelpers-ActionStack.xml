@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16003 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.actionstack">
     <title>ActionStack</title>
@@ -53,7 +53,6 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-
     </example>
 
     <example id="zend.controller.actionhelpers.actionstack.simple2">
@@ -90,6 +89,3 @@ class FooController extends Zend_Controller_Action
 ]]></programlisting>
     </example>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

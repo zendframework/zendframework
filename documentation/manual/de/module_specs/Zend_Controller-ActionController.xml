@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18556 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.action">
     <title>Action Controller</title>
 
     <sect2 id="zend.controller.action.introduction">
         <title>Einführung</title>
+
         <para>
             <classname>Zend_Controller_Action</classname> ist eine abstrakte Klasse die verwendet
             werden kann um Aktion Controller zu implementieren die mit dem Front Controller
@@ -221,11 +222,13 @@ class FooController extends Zend_Controller_Action
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <emphasis>Anfrage Objekt</emphasis>: <methodname>getRequest()</methodname> kann
-                verwendet werden um das Anfrage Objekt zu erhalten das verwendet wurde um die
-                Aktion aufzurufen.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>Anfrage Objekt</emphasis>: <methodname>getRequest()</methodname> kann
+                    verwendet werden um das Anfrage Objekt zu erhalten das verwendet wurde um die
+                    Aktion aufzurufen.
+                </para>
+            </listitem>
 
             <listitem>
                 <para>
@@ -387,7 +390,8 @@ string render(string $action = null,
                 übergeben werden.
             </para>
 
-            <note><para>
+            <note>
+                <para>
                     Da Controller- und Aktionsnamen Wort Begrenzer Zeichen enthalten können wie
                     z.B. '_', '.' und '-', normalisiert <methodname>render()</methodname> diese
                     zu '-' wenn der Skript Name eruiert wird. Intern werden die Wort- und
@@ -397,7 +401,8 @@ string render(string $action = null,
                     Aktionsmethode camelCase Zeichen enthält, muß beachtet werden das diese in '-'
                     seperierten Wörter umgewandelt werden wenn der Dateiname des View Skripts
                     eruiert wird.
-            </para></note>
+                </para>
+            </note>
 
             <para>
                 Einige Beispiele:
@@ -646,6 +651,3 @@ abstract class My_Base_Controller extends Zend_Controller_Action
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

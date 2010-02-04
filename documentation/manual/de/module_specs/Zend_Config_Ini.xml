@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17564 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -97,58 +97,64 @@ echo $config->database->params->host;   // Ausgabe "dev.example.com"
 echo $config->database->params->dbname; // Ausgabe "dbname"
 ]]></programlisting>
     </example>
-    <note>
-    <table id="zend.config.adapters.ini.table">
-        <title>Zend_Config_Ini Kontruktor Parameter</title>
 
-        <tgroup cols="2">
-            <thead>
-                  <row>
-                    <entry>Parameter</entry>
-                    <entry>Notizen</entry>
-                </row>
-            </thead>
-            <tbody>
-                <row>
-                    <entry><varname>$filename</varname></entry>
-                    <entry>Die <acronym>INI</acronym> Datei die geladen wird.</entry>
-                </row>
-                <row>
-                    <entry><varname>$section</varname></entry>
-                    <entry>
-                        Die [section] innerhalb der ini Datei die geladen wird. Das Setzen dieses
-                        Parameters auf <constant>NULL</constant> lädt alle Sektionen. Alternativ,
-                        kann ein Array von Sektionsnamen übergeben werden um mehrere Sektionen zu
-                        laden.
-                    </entry>
-                </row>
-                <row>
-                    <entry><varname>$options</varname> (Default <constant>FALSE</constant>)</entry>
-                    <entry>Options Array. Die folgenden Schlüssel werden unterstützt:
-                        <itemizedlist>
-                            <listitem>
-                                <para>
-                                    <emphasis><property>allowModifications</property></emphasis>:
-                                    Auf <constant>TRUE</constant> gesetzt erlaubt es weiterführende
-                                    Modifikationen der geladenen Konfigurationsdaten im Speicher.
-                                    Standardmäßig auf <constant>NULL</constant> gestellt
-                                </para>
-                            </listitem>
-                            <listitem>
-                                <para>
-                                    <emphasis><property>nestSeparator</property></emphasis>: Auf
-                                    das Zeichen zu setzen das als Abschnitts Separator verwendet
-                                    wird. Standardmäßig auf "." gestellt
-                                </para>
-                            </listitem>
-                        </itemizedlist>
-                    </entry>
-                </row>
-            </tbody>
-        </tgroup>
-    </table>
+    <note>
+        <table id="zend.config.adapters.ini.table">
+            <title>Zend_Config_Ini Kontruktor Parameter</title>
+
+            <tgroup cols="2">
+                <thead>
+                    <row>
+                        <entry>Parameter</entry>
+                        <entry>Notizen</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry><varname>$filename</varname></entry>
+                        <entry>Die <acronym>INI</acronym> Datei die geladen wird.</entry>
+                    </row>
+                    <row>
+                        <entry><varname>$section</varname></entry>
+
+                        <entry>
+                            Die [section] innerhalb der ini Datei die geladen wird. Das Setzen
+                            dieses Parameters auf <constant>NULL</constant> lädt alle Sektionen.
+                            Alternativ, kann ein Array von Sektionsnamen übergeben werden um mehrere
+                            Sektionen zu laden.
+                        </entry>
+                    </row>
+
+                    <row>
+                        <entry><varname>$options</varname> (Default <constant>FALSE</constant>)</entry>
+
+                        <entry>
+                            Options Array. Die folgenden Schlüssel werden unterstützt:
+
+                            <itemizedlist>
+                                <listitem>
+                                    <para>
+                                        <emphasis><property>allowModifications</property></emphasis>:
+                                        Auf <constant>TRUE</constant> gesetzt erlaubt es
+                                        weiterführende Modifikationen der geladenen
+                                        Konfigurationsdaten im Speicher. Standardmäßig auf
+                                        <constant>NULL</constant> gestellt
+                                    </para>
+                                </listitem>
+
+                                <listitem>
+                                    <para>
+                                        <emphasis><property>nestSeparator</property></emphasis>: Auf
+                                        das Zeichen zu setzen das als Abschnitts Separator verwendet
+                                        wird. Standardmäßig auf "." gestellt
+                                    </para>
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
     </note>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

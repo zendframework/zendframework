@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16422 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.theory">
     <title>Die Theorie des Cachens</title>
@@ -21,19 +21,24 @@
         <methodname>Zend_Cache_Core::save()</methodname>).
     </para>
 
-    <note><para>
-        Das Design der bedingten Ausführung des erzeugten Codes ist in einigen Frontends nicht
-        notwendig (<emphasis>Function</emphasis>, zum Beispiel) wenn die komplette Logik im
-        verwendeten Frontend integriert ist.
-    </para></note>
+    <note>
+        <para>
+            Das Design der bedingten Ausführung des erzeugten Codes ist in einigen Frontends nicht
+            notwendig (<emphasis>Function</emphasis>, zum Beispiel) wenn die komplette Logik im
+            verwendeten Frontend integriert ist.
+        </para>
+    </note>
 
-    <note><para>
-        'Cache hit' ist ein Ausdruck für eine Bedingung, wenn ein Cache Datensatz gefunden wurde, er
-        gültig und 'frisch' ist (in anderen Worten, er ist noch nicht abgelaufen). 'Cache miss' ist
-        alles andere. Wenn ein 'Cache miss' passiert, müssen die Daten erzeugt werden (wie man es
-        normalerweise tun würde) und anschließend cachen. Wenn ein 'Cache hit' geschieht muß, auf
-        der anderen Seite, das Backend automatisch den Datensatz vom Cache transparent holen.
-    </para></note>
+    <note>
+        <para>
+            'Cache hit' ist ein Ausdruck für eine Bedingung, wenn ein Cache Datensatz gefunden
+            wurde, er gültig und 'frisch' ist (in anderen Worten, er ist noch nicht abgelaufen).
+            'Cache miss' ist alles andere. Wenn ein 'Cache miss' passiert, müssen die Daten erzeugt
+            werden (wie man es normalerweise tun würde) und anschließend cachen. Wenn ein
+            'Cache hit' geschieht muß, auf der anderen Seite, das Backend automatisch den Datensatz
+            vom Cache transparent holen.
+        </para>
+    </note>
 
     <sect2 id="zend.cache.factory">
         <title>Die Zend_Cache Factory Methode</title>
@@ -89,30 +94,39 @@ $cache = Zend_Cache::factory($frontendName,
             markierten Cache Datensätze mit einer bestimmten Markierung (oder Markierungen), zu
             löschen:
         </para>
+
         <programlisting language="php"><![CDATA[
 $cache->save($huge_data, 'myUniqueID', array('tagA', 'tagB', 'tagC'));
 ]]></programlisting>
-        <note><para>
-            Man beachte, dass die <methodname>save()</methodname> Method einen optionales, viertes
-            Argument akzeptiert: <varname>$specificLifetime</varname> (wenn !=
-            <constant>FALSE</constant>, setzt es eine spezifische Laufzeit für diesen speziellen
-            Cache Eintrag)
-        </para></note>
+
+        <note>
+            <para>
+                Man beachte, dass die <methodname>save()</methodname> Method einen optionales,
+                viertes Argument akzeptiert: <varname>$specificLifetime</varname> (wenn !=
+                <constant>FALSE</constant>, setzt es eine spezifische Laufzeit für diesen speziellen
+                Cache Eintrag)
+            </para>
+        </note>
     </sect2>
+
     <sect2 id="zend.cache.clean">
         <title>Löschen des Caches</title>
+
         <para>
             Um eine bestimmte Cache ID zu entfernen oder annullieren, kann die
             <methodname>remove()</methodname> Methode benutzt werden:
         </para>
-             <programlisting language="php"><![CDATA[
+
+        <programlisting language="php"><![CDATA[
 $cache->remove('idToRemove');
 ]]></programlisting>
+
         <para>
             Um mehrere Cache IDs mit einer Operation zu entfernen oder annulieren, kann die
             <methodname>clean()</methodname> Methode benutzt werden. Zum Beispiel um alle Cache
             Datensätze zu entfernen :
         </para>
+
         <programlisting language="php"><![CDATA[
 // Löschen aller Datensätze
 $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
@@ -120,33 +134,40 @@ $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
 // Nur abgelaufene löschen
 $cache->clean(Zend_Cache::CLEANING_MODE_OLD);
 ]]></programlisting>
+
         <para>
             Um Cache Einträge zu löschen, die zu den Tags 'tagA' und 'tagC' entsprechen :
         </para>
+
         <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_TAG,
     array('tagA', 'tagC')
 );
 ]]></programlisting>
+
         <para>
             Um Cache Einträge zu löschen die den Tags 'tagA' oder 'tagC' nicht entsprechen:
         </para>
+
         <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_NOT_MATCHING_TAG,
     array('tagA', 'tagC')
 );
 ]]></programlisting>
+
         <para>
             Um Cache Einträge zu löschen, die zu den Tags 'tagA' oder 'tagC' entsprechen :
         </para>
+
         <programlisting language="php"><![CDATA[
 $cache->clean(
     Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG,
     array('tagA', 'tagC')
 );
 ]]></programlisting>
+
         <para>
             Mögliche Löschmodi sind: <constant>CLEANING_MODE_ALL</constant>,
             <constant>CLEANING_MODE_OLD</constant>,
@@ -158,6 +179,3 @@ $cache->clean(
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

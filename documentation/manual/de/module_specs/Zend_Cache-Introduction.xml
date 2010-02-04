@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15962 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.introduction">
     <title>Einführung</title>
+
     <para>
         <classname>Zend_Cache</classname> bietet einen generellen Weg für das Cachen von Daten.
     </para>
+
     <para>
-      Cachen im Zend Framework wird mit Frontends durchgeführt, wobei Cache Datensätze über Backend
-      Adapter (<emphasis>File</emphasis>, <emphasis>Sqlite</emphasis>,
-      <emphasis>Memcached</emphasis>...), durch ein flexibles System von IDs und Tags, gespeichert
-      werden. Durch deren Verwendung ist es einfach, spezielle Typen von Datensätzen im Nachhinein
-      zu Löschen (zum Beispiel: "Löschen aller Cache Datensätze welche mit einem bestimmten Tag
-      markiert sind").
+        Cachen im Zend Framework wird mit Frontends durchgeführt, wobei Cache Datensätze über
+        Backend Adapter (<emphasis>File</emphasis>, <emphasis>Sqlite</emphasis>,
+        <emphasis>Memcached</emphasis>...), durch ein flexibles System von IDs und Tags, gespeichert
+        werden. Durch deren Verwendung ist es einfach, spezielle Typen von Datensätzen im Nachhinein
+        zu Löschen (zum Beispiel: "Löschen aller Cache Datensätze welche mit einem bestimmten Tag
+        markiert sind").
     </para>
+
     <para>
         Der Kern des Moduls (<classname>Zend_Cache_Core</classname>) ist generell, flexibel und
         konfigurierbar. Nun gibt es - für spezielle Bedürfnisse - Cache Frontends, welche
         <classname>Zend_Cache_Core</classname> erweitern: <emphasis>Output</emphasis>,
         <emphasis>File</emphasis>, <emphasis>Function</emphasis> und <emphasis>Class</emphasis>.
     </para>
+
     <example id="zend.cache.introduction.example-1">
         <title>Ein Frontend mit Zend_Cache::factory() erzeugen</title>
+
         <para>
             <methodname>Zend_Cache::factory()</methodname> instanziiert korrekte Objekte und fügt
             sie zusammen. In diesem ersten Beispiel wird das <emphasis>Core</emphasis> Frontend
@@ -48,6 +53,7 @@ $cache = Zend_Cache::factory('Core',
 
     <note>
         <title>Frontends und Backends bestehend aus mehrfachen Wörtern</title>
+
         <para>
             Bei einige Frontends und Backends werden mehrere Wörter verwendet wie z.B.
             'ZendPlatform'. Wenn diese der Fabrik spezifiziert werden, müssen diese aufgeteilt
@@ -90,23 +96,25 @@ if(!$result = $cache->load('myresult')) {
 
 print_r($result);
 ]]></programlisting>
-
     </example>
 
     <example id="zend.cache.introduction.example-3">
         <title>Cache Ausgabe mit dem Zend_Cache Frontend</title>
+
         <para>
             Abschnitte, in denen die Ausgabe gecached werden soll, werden 'markiert', durch
             Hinzufügen von etwas bedingter Logik, wobei der Abschnitt innerhalb der
             <methodname>start()</methodname> und <methodname>end()</methodname> Methoden gekapselt
             wird (das ähnelt dem ersten Beispiel, und ist eine Kernstrategie für das Cachen).
         </para>
+
         <para>
             Darin muß die Ausgabe der Daten wie immer geschehen - jede Ausgabe wird gecached, wenn
             die Ausführung auf die <methodname>end()</methodname> Methode trifft. Bei der nächsten
             Ausführung wird der komplette Abschnitt übersprungen, dafür werden die Daten vom Cache
             geholt (solange der Cache Datensatz gültig ist).
         </para>
+
         <programlisting language="php"><![CDATA[
 $frontendOptions = array(
    'lifetime' => 30,                   // Lebenszeit des Caches 30 Sekunden
@@ -132,6 +140,7 @@ if(!$cache->start('mypage')) {
 
 echo 'Das wird nie gecached ('.time().').';
 ]]></programlisting>
+
         <para>
             Zu beachten ist dass das Ergebnis von <methodname>time()</methodname> zweimal ausgegeben
             wird; das ist etwas dynamisches für Demonstrationszwecke. Beim Versuch dieses
@@ -144,15 +153,15 @@ echo 'Das wird nie gecached ('.time().').';
             in der Konsole testen.
         </para>
     </example>
-    <note><para>
-        Wenn <classname>Zend_Cache</classname> benutzt wird, muß auf die wichtigen Cache
-        Identifizierungen geachtet werden (welche an <methodname>save()</methodname> und
-        <methodname>start()</methodname> übergeben werden). Diese müssen für jede Ressource
-        einzigartig sein, die gecached werden soll. Andernfalls würden sich unverknüpfte Cache
-        Datensätze gegenseitig entfernen oder, noch schlimmer, anstatt des anderen dargestellt
-        werden.
-    </para></note>
+
+    <note>
+        <para>
+            Wenn <classname>Zend_Cache</classname> benutzt wird, muß auf die wichtigen Cache
+            Identifizierungen geachtet werden (welche an <methodname>save()</methodname> und
+            <methodname>start()</methodname> übergeben werden). Diese müssen für jede Ressource
+            einzigartig sein, die gecached werden soll. Andernfalls würden sich unverknüpfte Cache
+            Datensätze gegenseitig entfernen oder, noch schlimmer, anstatt des anderen dargestellt
+            werden.
+        </para>
+    </note>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
-+-->

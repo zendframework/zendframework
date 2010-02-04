@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15978 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.introduction">
     <title>Einleitung</title>
+
     <para>
         <classname>Zend_Config</classname> wurde entworfen um den Zugriff auf und die Verwendung von
         Konfigurations-Daten zu vereinfachen. Es stellt diese Konfigurations-Daten innerhalb
@@ -14,8 +15,10 @@
         <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>
         Adapter für das Einlesen von Daten aus Textfiles zur Verfügung.
     </para>
+
     <example id="zend.config.introduction.example.using">
         <title>Zend-Config verwenden</title>
+
         <para>
             In der Regel geht man davon aus, dass Anwender eine der Adapter-Klassen wie
             <link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
@@ -26,6 +29,7 @@
             Constructor übergeben werden, um dann über die objektorientierte Schnittstelle auf sie
             zugreifen zu können:
         </para>
+
         <programlisting language="php"><![CDATA[
 // Gegeben ist ein Array mit Konfigurations-Daten
 $configArray = array(
@@ -56,25 +60,31 @@ $db = Zend_Db::factory($config->database->adapter,
 $db = Zend_Db::factory($config->database);
 ]]></programlisting>
     </example>
+
     <para>
         Wie das Beispiel oben zeigt, kann man über <classname>Zend_Config</classname> auf die
         Konfigurations-Daten aus dem übergebenen Array so zugreifen, wie auf die Eigenschaften
         einer verschachtelten Objekt-Struktur.
     </para>
+
     <para>
         Zusätzlich zum objektorientierten Zugriff auf die Daten Werte hat
         <classname>Zend_Config</classname> <methodname>get()</methodname> welches den unterstützten
         Standardwert zurückgibt wenn das Daten Element nicht existiert. Zum Beispiel:
     </para>
+
     <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
+
     <example id="zend.config.introduction.example.file.php">
         <title>Zend_Config mit einer PHP Konfigurationsdatei verwenden</title>
+
         <para>
             Es ist oft gewünscht eine reine <acronym>PHP</acronym> basierende Konfigurationsdatei
             zu verwenden. Der folgende Code zeigt wie das ganz einfach erreicht werden kann:
         </para>
+
         <programlisting language="php"><![CDATA[
 // config.php
 return array(
@@ -90,6 +100,7 @@ return array(
     )
 );
 ]]></programlisting>
+
         <programlisting language="php"><![CDATA[
 // Konfiguration konsumieren
 $config = new Zend_Config(require 'config.php');
@@ -99,6 +110,3 @@ echo $config->webhost;
 ]]></programlisting>
     </example>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

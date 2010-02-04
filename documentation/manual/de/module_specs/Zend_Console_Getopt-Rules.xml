@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16476 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.rules">
     <title>Definieren von Getopt Regeln</title>
+
     <para>
         Der Constructor für die <classname>Zend_Console_Getopt</classname> Klasse nimmt ein bis drei
         Argumente. Das erste Argument definiert welche Optionen durch die Anwendung unterstützt
@@ -10,11 +11,13 @@
         Die nächsten Sektionen geben Auskunft über das Format und die Verwendung dieser
         Syntaxformen.
     </para>
+
     <para>
         Der Constructor nimmt zwei weitere Argumente, welche optional sind. Das zweite Argument kann
         Kommandozeilen Argumente enthalten. Sein Standardwert ist
         <varname>$_SERVER['argv']</varname>.
     </para>
+
     <para>
         Das dritte Argument des Constructors kann Konfigurationsoptionen enthalten um das Verhalten
         von <classname>Zend_Console_Getopt</classname> anzupassen. Siehe <link
@@ -24,6 +27,7 @@
 
     <sect2 id="zend.console.getopt.rules.short">
         <title>Optionen mit der kurzen Syntax definieren</title>
+
         <para>
             <classname>Zend_Console_Getopt</classname> unterstützt eine kompakte Syntax wie Sie
             durch <acronym>GNU</acronym> Getopt verwendet wird (siehe <ulink
@@ -33,18 +37,22 @@
             wird. Der Buchstabe, gefolgt von einem Doppelpunkt Zeichen (<emphasis>:</emphasis>)
             zeigt ein Flag das einen Parameter benötigt.
         </para>
+
         <example id="zend.console.getopt.rules.short.example">
             <title>Verwendung der kurzen Syntax</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 ]]></programlisting>
         </example>
+
         <para>
             Das obige Beispiel zeigt die Verwendung von <classname>Zend_Console_Getopt</classname>
             um die Optionen zu definieren die als <command>-a</command>, <command>-b</command>,
             oder <command>-p</command> angegeben werden können. Das letzte Flag benötigt
             einen Parameter.
         </para>
+
         <para>
             Die kurze Syntax ist limitiert auf Flags mit einzelnen Zeichen.
             Aliase, Parametertypen und Hilfszeichenketten werden in der
@@ -54,6 +62,7 @@ $opts = new Zend_Console_Getopt('abp:');
 
     <sect2 id="zend.console.getopt.rules.long">
         <title>Optionen mit der langen Syntax definieren</title>
+
         <para>
             Eine andere Syntax mit mehr Möglichkeiten ist auch vorhanden. Diese
             Syntax ermöglicht es Aliase für Flags, Typen von Optionsparametern
@@ -63,6 +72,7 @@ $opts = new Zend_Console_Getopt('abp:');
             die lange Syntax ein assoziatives Array als erstes Argument für den
             Constructor.
         </para>
+
         <para>
             Der Schlüssel jeden Elements des assoziativen Array ist eine
             Zeichenkette mit einem Format dass das Flag benennt, mit jedem Alias,
@@ -71,35 +81,42 @@ $opts = new Zend_Console_Getopt('abp:');
             ein Gleichheitszeichen ("<emphasis>=</emphasis>") mit einem Buchstaben der
             für den <emphasis>Typ</emphasis> dieses Parameters steht:
         </para>
+
         <itemizedlist>
             <listitem>
                 <para>
                     "<emphasis>=s</emphasis>" für einen Zeichenketten Parameter
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     "<emphasis>=w</emphasis>" für einen Wort Parameter
                     (eine Zeichenkette die keine Leerzeichen enthält)
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     "<emphasis>=i</emphasis>" für einen Integer Parameter
                 </para>
             </listitem>
         </itemizedlist>
+
         <para>
             Wenn der Parameter optional ist, kann ein Bindestrich ("<emphasis>-</emphasis>")
             statt des Gleichheitszeichens verwendet werden.
         </para>
+
         <para>
             Der Wert jeden Elements in diesem assiziativen Array ist eine
             Hilfszeichenkette um dem Benutzer zu beschreiben wie das Programm
             verwendet werden kann.
         </para>
+
         <example id="zend.console.getopt.rules.long.example">
             <title>Verwendung der langen Syntax</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt(
     array(
@@ -110,6 +127,7 @@ $opts = new Zend_Console_Getopt(
 );
 ]]></programlisting>
         </example>
+
         <para>
             In der obigen Beispieldefinition, sind drei Optionen.
             <command>--apfel</command> und <command>-a</command> sind Aliase füreinander,
@@ -121,5 +139,4 @@ $opts = new Zend_Console_Getopt(
             Zeichenketten Parameter annehmen.
         </para>
     </sect2>
-
 </sect1>

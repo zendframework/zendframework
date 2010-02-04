@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15976 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.codegenerator.examples">
     <title>Zend_CodeGenerator Beispiele</title>
@@ -37,7 +37,7 @@ echo $foo->generate();
             Der obige Code führt zu dem folgenden:
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Beispiel einer erzeugten Klasse
  *
@@ -137,7 +137,7 @@ class Foo
             Instanzen von <classname>Zend_CodeGenerator_Php_Method</classname> hinzugefügt werden.
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => 'Beispiel einer erzeugten Klasse',
@@ -216,7 +216,7 @@ echo $foo->generate();
             Das obige erzeugt die folgende Ausgabe:
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * Beispiel einer erzeugten Klasse
  *
@@ -380,6 +380,7 @@ file_put_contents($path, $generator->generate());
 
     <example id="zend.codegenerator.examples.reflection-class">
         <title>Sähen der Erzeugung einer PHP Klasse über Reflection</title>
+
         <para>
             Man kann Code zu einer bestehenden Klasse hinzufügen. Um das Durchzuführen muß die
             statische <methodname>fromReflection()</methodname> Methode verwendet werden um die

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20761 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.cache.backends">
     <title>Zend_Cache Backends</title>
@@ -169,15 +169,14 @@
                         <entry><emphasis>cache_db_complete_path (mandatory)</emphasis></entry>
                         <entry><type>String</type></entry>
                         <entry><constant>NULL</constant></entry>
-                        <entry>
-                            Der komplette Pfad (inklusive Dateiname) der SQLite Datenbank
-                        </entry>
+                        <entry>Der komplette Pfad (inklusive Dateiname) der SQLite Datenbank</entry>
                     </row>
 
                     <row>
                         <entry><emphasis>automatic_vacuum_factor</emphasis></entry>
                         <entry><type>Integer</type></entry>
                         <entry>10</entry>
+
                         <entry>
                             Deaktiviert oder stellt den automatischen Vakuumprozess ein.
                             Der automatische Vakuumprozess defragmentiert die Datenbankdatei (und

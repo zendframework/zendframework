@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17597 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.actionhelpers.viewrenderer">
     <title>ViewRenderer</title>
@@ -283,13 +283,15 @@ $this->_helper->viewRenderer('foo');
 $this->_helper->viewRenderer('form', 'html', true);
 ]]></programlisting>
 
-                <note><para>
+                <note>
+                    <para>
                         <methodname>setRender()</methodname> und <methodname>direct()</methodname>
                         stellen das View Sktript nicht dar, sondern setzen Hinweise die
                         <methodname>postDispatch()</methodname> und
                         <methodname>render()</methodname> dann verwenden wenn die View dargestellt
                         wird.
-                </para></note>
+                    </para>
+                </note>
             </listitem>
         </itemizedlist>
 
@@ -504,11 +506,13 @@ $viewRenderer =
                     <methodname>render()</methodname> Methode des View Objekts.
                 </para>
 
-                <note><para>
-                    Sobald die View zum Antwort Objekt gerendert wurde, setzt diese
-                    <emphasis>noRender</emphasis> um irrtümliches mehrfaches rendern zum selben
-                    View Skript zu verhindern.
-                </para></note>
+                <note>
+                    <para>
+                        Sobald die View zum Antwort Objekt gerendert wurde, setzt diese
+                        <emphasis>noRender</emphasis> um irrtümliches mehrfaches rendern zum selben
+                        View Skript zu verhindern.
+                    </para>
+                </note>
 
                 <note>
                     <para>
@@ -651,6 +655,7 @@ class Foo_BarController extends Zend_Controller_Action
 
         <note>
             <title>Benamungs Konventionen: Wort Begrenzer in Controller- und Aktionnamen</title>
+
             <para>
                 Wenn der Controller- oder Aktionsname aus mehreren Wörtern aufgebaut ist, müssen
                 diese, da der Dispatcher das benötigt, seperiert sein durch die
@@ -879,6 +884,3 @@ class SearchController extends Zend_Controller_Action
         </example>
     </sect4>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

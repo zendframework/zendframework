@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16674 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.captcha.adapters">
     <title>CAPTCHA Adapter</title>
@@ -35,44 +35,57 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>setWordLen($length)</methodname> und
-                <methodname>getWordLen()</methodname> erlauben es die Länge des erzeugten "Wortes"
-                in Zeichen zu spezifizieren, und den aktuellen Wert zu erhalten.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setWordLen($length)</methodname> und
+                    <methodname>getWordLen()</methodname> erlauben es die Länge des erzeugten
+                    "Wortes" in Zeichen zu spezifizieren, und den aktuellen Wert zu erhalten.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setTimeout($ttl)</methodname> und <methodname>getTimeout()</methodname>
-                erlauben es die Lebenszeit des Sessiontokens zu spezifizieren, und den aktuellen
-                Wert er erhalten. <varname>$ttl</varname> sollte in Sekunden spezifiziert sein.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setTimeout($ttl)</methodname> und
+                    <methodname>getTimeout()</methodname> erlauben es die Lebenszeit des
+                    Sessiontokens zu spezifizieren, und den aktuellen Wert er erhalten.
+                    <varname>$ttl</varname> sollte in Sekunden spezifiziert sein.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setSessionClass($class)</methodname> und
-                <methodname>getSessionClass()</methodname> erlauben es eine alternative
-                <classname>Zend_Session_Namespace</classname> Implementation zu spezifizieren die
-                verwendet werden soll um das <acronym>CAPTCHA</acronym> Token persistent zu machen
-                und den aktuellen Wert zu bekommen.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setSessionClass($class)</methodname> und
+                    <methodname>getSessionClass()</methodname> erlauben es eine alternative
+                    <classname>Zend_Session_Namespace</classname> Implementation zu spezifizieren
+                    die verwendet werden soll um das <acronym>CAPTCHA</acronym> Token persistent zu
+                    machen und den aktuellen Wert zu bekommen.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>getId()</methodname> erlaubt es den aktuellen Tokenidentifikator zu
-                erhalten.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>getId()</methodname> erlaubt es den aktuellen Tokenidentifikator zu
+                    erhalten.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>getWord()</methodname> erlaubt es das erzeugte Wort das mit dem
-                <acronym>CAPTCHA</acronym> verwendet wird zu erhalten. Es wird das Wort erzeugen
-                wenn es bis dahin noch nicht erstellt wurde.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>getWord()</methodname> erlaubt es das erzeugte Wort das mit dem
+                    <acronym>CAPTCHA</acronym> verwendet wird zu erhalten. Es wird das Wort erzeugen
+                    wenn es bis dahin noch nicht erstellt wurde.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setSession(Zend_Session_Namespace $session)</methodname> erlaubt es ein
-                Sessionobjekt zu spezifizieren das für die Persistenz des
-                <acronym>CAPTCHA</acronym> Tokens verwendet wird.
-                <methodname>getSession()</methodname> erlaubt es das aktuelle Sessionobjekt
-                zu erhalten.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setSession(Zend_Session_Namespace $session)</methodname> erlaubt es
+                    ein Sessionobjekt zu spezifizieren das für die Persistenz des
+                    <acronym>CAPTCHA</acronym> Tokens verwendet wird.
+                    <methodname>getSession()</methodname> erlaubt es das aktuelle Sessionobjekt
+                    zu erhalten.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -142,75 +155,94 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>setExpiration($expiration)</methodname> und
-                <methodname>getExpiration()</methodname> erlauben es eine maximale Lebenszeit zu
-                definieren die das <acronym>CAPTCHA</acronym> Bild auf dem Dateisystem bleibt. Das
-                ist typischerweise längerer als die Session Lifetime. Die Garbage Collection läuft
-                periodisch jedes Mal wenn das <acronym>CAPTCHA</acronym> Objekt enthalten ist, und
-                löscht die Bilder die abgelaufen sind. Der Wert der Löschung sollte in Sekunden
-                angegeben werden.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setExpiration($expiration)</methodname> und
+                    <methodname>getExpiration()</methodname> erlauben es eine maximale Lebenszeit zu
+                    definieren die das <acronym>CAPTCHA</acronym> Bild auf dem Dateisystem bleibt.
+                    Das ist typischerweise längerer als die Session Lifetime. Die Garbage Collection
+                    läuft periodisch jedes Mal wenn das <acronym>CAPTCHA</acronym> Objekt enthalten
+                    ist, und löscht die Bilder die abgelaufen sind. Der Wert der Löschung sollte in
+                    Sekunden angegeben werden.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setGcFreq($gcFreq)</methodname> und
-                <methodname>getGcFreg()</methodname> erlauben es zu Spezifizieren wie oft die
-                Garbage Collection laufen soll. Die Garbage Collection wird alle
-                <command>1/$gcFreq</command> Aufrufe ausgeführt. Standard ist 100.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setGcFreq($gcFreq)</methodname> und
+                    <methodname>getGcFreg()</methodname> erlauben es zu Spezifizieren wie oft die
+                    Garbage Collection laufen soll. Die Garbage Collection wird alle
+                    <command>1/$gcFreq</command> Aufrufe ausgeführt. Standard ist 100.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setFont($font)</methodname> und <methodname>getFont()</methodname>
-                erlauben es die Schrift zu Spezifizieren die man verwenden will.
-                <varname>$font</varname> sollte ein voll qualifizierter Pfad zu der
-                Schriftart-Datei sein. Dieser Wert wird benötigt; das <acronym>CAPTCHA</acronym>
-                wird wärend der Erzeugung eine Ausnahme werfen wenn die Schriftdatei nicht
-                spezifiziert wurde.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setFont($font)</methodname> und <methodname>getFont()</methodname>
+                    erlauben es die Schrift zu Spezifizieren die man verwenden will.
+                    <varname>$font</varname> sollte ein voll qualifizierter Pfad zu der
+                    Schriftart-Datei sein. Dieser Wert wird benötigt; das <acronym>CAPTCHA</acronym>
+                    wird wärend der Erzeugung eine Ausnahme werfen wenn die Schriftdatei nicht
+                    spezifiziert wurde.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setFontSize($fsize)</methodname> und
-                <methodname>getFontSize()</methodname> erlauben es die Schriftgröße in Pixel zu
-                Spezifizieren die verwendet wird wenn das <acronym>CAPTCHA</acronym> erzeugt wird.
-                Der Standardwert ist 24px.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setFontSize($fsize)</methodname> und
+                    <methodname>getFontSize()</methodname> erlauben es die Schriftgröße in Pixel zu
+                    Spezifizieren die verwendet wird wenn das <acronym>CAPTCHA</acronym> erzeugt
+                    wird. Der Standardwert ist 24px.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setHeight($height)</methodname> und
-                <methodname>getHeight()</methodname> erlauben es die Höhe in Pixel zu Spezifizieren
-                die das erzeugte <acronym>CAPTCHA</acronym> Bild haben soll. Der Standardwert ist
-                50px.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setHeight($height)</methodname> und
+                    <methodname>getHeight()</methodname> erlauben es die Höhe in Pixel zu
+                    Spezifizieren die das erzeugte <acronym>CAPTCHA</acronym> Bild haben soll. Der
+                    Standardwert ist 50px.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setWidth($width)</methodname> und <methodname>getWidth()</methodname>
-                erlauben es die Breite in Pixel zu Spezifizieren die das erzeugte
-                <acronym>CAPTCHA</acronym> Bild haben soll. Der Standardwert ist 200px.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setWidth($width)</methodname> und
+                    <methodname>getWidth()</methodname> erlauben es die Breite in Pixel zu
+                    Spezifizieren die das erzeugte <acronym>CAPTCHA</acronym> Bild haben soll. Der
+                    Standardwert ist 200px.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setImgDir($imgDir)</methodname> und
-                <methodname>getImgDir()</methodname> erlauben es das Verzeichnis für das Speicher
-                der <acronym>CAPTCHA</acronym> Bilder zu spezifizieren. Der Standardwert ist
-                "<filename>./images/captcha/</filename>", was relativ zum Bootstrapskript zu sehen
-                ist.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setImgDir($imgDir)</methodname> und
+                    <methodname>getImgDir()</methodname> erlauben es das Verzeichnis für das
+                    Speicher der <acronym>CAPTCHA</acronym> Bilder zu spezifizieren. Der
+                    Standardwert ist "<filename>./images/captcha/</filename>", was relativ zum
+                    Bootstrapskript zu sehen ist.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setImgUrl($imgUrl)</methodname> und
-                <methodname>getImgUrl()</methodname> erlauben es den Relativen Pfad zum
-                <acronym>CAPTCHA</acronym> Bild für die Verwendung im <acronym>HTML</acronym>
-                Markup zu spezifizieren. Der Standardwert ist
-                "<filename>/images/captcha/</filename>".
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setImgUrl($imgUrl)</methodname> und
+                    <methodname>getImgUrl()</methodname> erlauben es den Relativen Pfad zum
+                    <acronym>CAPTCHA</acronym> Bild für die Verwendung im <acronym>HTML</acronym>
+                    Markup zu spezifizieren. Der Standardwert ist
+                    "<filename>/images/captcha/</filename>".
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setSuffix($suffix)</methodname> und
-                <methodname>getSuffix()</methodname> erlauben es die Endung des Dateinamens für das
-                <acronym>CAPTCHA</acronym> Bild zu spezifizieren. Der Standardwert ist
-                "<filename>.png</filename>". Beachte: Das Ändern dieses Wertes wird den Typ des
-                erzeugten Bildes nicht ändern.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setSuffix($suffix)</methodname> und
+                    <methodname>getSuffix()</methodname> erlauben es die Endung des Dateinamens für
+                    das <acronym>CAPTCHA</acronym> Bild zu spezifizieren. Der Standardwert ist
+                    "<filename>.png</filename>". Beachte: Das Ändern dieses Wertes wird den Typ des
+                    erzeugten Bildes nicht ändern.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -231,28 +263,33 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>setPrivKey($key)</methodname> und <methodname>getPrivKey()</methodname>
-                erlauben es den privaten Schlüssel zu spezifizieren der für den ReCaptcha Service
-                verwendet werden soll. Er muß wärend der Erstellung spezifiziert werden, auch wenn
-                er jederzeit überschrieben werden kann.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setPrivKey($key)</methodname> und
+                    <methodname>getPrivKey()</methodname> erlauben es den privaten Schlüssel zu
+                    spezifizieren der für den ReCaptcha Service verwendet werden soll. Er muß wärend
+                    der Erstellung spezifiziert werden, auch wenn er jederzeit überschrieben werden
+                    kann.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setPubKey($key)</methodname> und <methodname>getPubKey()</methodname>
-                erlauben es den öffentlichen Schlüssel zu spezifizieren der mit dem ReCaptcha
-                Service verwendet werden soll. Er muß wärend der Erstellung spezifiziert werden,
-                auch wenn er jederzeit überschrieben werden kann.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setPubKey($key)</methodname> und
+                    <methodname>getPubKey()</methodname> erlauben es den öffentlichen Schlüssel zu
+                    spezifizieren der mit dem ReCaptcha Service verwendet werden soll. Er muß wärend
+                    der Erstellung spezifiziert werden, auch wenn er jederzeit überschrieben werden
+                    kann.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>setService(Zend_Service_ReCaptcha $service)</methodname> und
-                <methodname>getService()</methodname> erlauben es das ReCaptcha Serviceobjekt zu
-                setzen und erhalten.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>setService(Zend_Service_ReCaptcha $service)</methodname> und
+                    <methodname>getService()</methodname> erlauben es das ReCaptcha Serviceobjekt zu
+                    setzen und erhalten.
+                </para>
+            </listitem>
         </itemizedlist>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

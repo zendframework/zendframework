@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16474 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.console.getopt.configuration">
     <title>Konfigurieren von Zend_Console_Getopt</title>
@@ -32,6 +32,7 @@ $opts->addRules(
 );
 ]]></programlisting>
         </example>
+
         <para>
             Das obige Beispiel zeigt das hinzufügen der <command>--verbose</command>
             Option mit einem Alias von <command>-v</command> zu einem Set von Optionen
@@ -43,6 +44,7 @@ $opts->addRules(
 
     <sect2 id="zend.console.getopt.configuration.addhelp">
         <title>Hilfstexte hinzufügen</title>
+
         <para>
             Zusätzlich zum Definieren von Hilfstexten bei der Definition
             von Optionsregeln im langen Format, können Hilfstexte
@@ -51,8 +53,10 @@ $opts->addRules(
             <methodname>setHelp()</methodname> Methode ist ein assoziatives Array, in welchen der
             Schlüssel ein Flag ist, und der Wert der betreffende Hilfetext.
         </para>
+
         <example id="zend.console.getopt.configuration.addhelp.example">
             <title>Verwenden von setHelp()</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setHelp(
@@ -64,10 +68,12 @@ $opts->setHelp(
 );
 ]]></programlisting>
         </example>
+
         <para>
             Wenn Optionen mit Aliasen definiert wurden, kann jeder dieser Aliase
             als Schlüssel für das assizoative Array verwendet werden.
         </para>
+
         <para>
             Die <methodname>setHelp()</methodname> Methode ist der einzige Weg um einen
             Hilfetext zu definieren wenn die Optionen mit der kurzen Syntax definiert
@@ -77,6 +83,7 @@ $opts->setHelp(
 
     <sect2 id="zend.console.getopt.configuration.addaliases">
         <title>Aliase für Optionen hinzufügen</title>
+
         <para>
             Aliase für Optionen können mit der <methodname>setAliases()</methodname> Methode
             definiert werden. Das Argument ist ein assoziatives Array, dessen
@@ -85,12 +92,15 @@ $opts->setHelp(
             Alias für dieses Flag gemischt. Mit anderen Worten, die zuvor definierten
             Aliase sind noch immer in Verwendung.
         </para>
+
         <para>
             Ein Alias kann nur einmal definiert werden. Wenn versucht wird einen Alias nochmals zu
             definieren wird eine <classname>Zend_Console_Getopt_Exception</classname> geworfen.
         </para>
+
         <example id="zend.console.getopt.configuration.addaliases.example">
             <title>Verwenden von setAliases()</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setAliases(
@@ -102,12 +112,14 @@ $opts->setAliases(
 );
 ]]></programlisting>
         </example>
+
         <para>
             Im obigen Beispiel sind, nach Definition der Aliase, <command>-a</command>,
             <command>--apple</command> und <command>--apfel</command> Aliase füreinander.
             Auch <command>-p</command> und <command>--pfirsich</command> sind füreinander
             Aliase.
         </para>
+
         <para>
             Die <methodname>setAliases()</methodname> Methode ist der einzige Weg um Aliase
             zu definieren wenn die Optionen mit der kurzen Syntax definiert wurden.
@@ -216,21 +228,26 @@ $opts->setArguments(array('-a', '-p', 'p_parameter', 'non_option_arg'));
                 </para>
             </listitem>
         </itemizedlist>
+
         <para>
             Zusätzliche Konfigurationsoptionen können in zukünftigen Versionen dieser
             Klasse hinzugefügt werden.
         </para>
+
         <para>
             Die zwei Argumente der <methodname>setOption()</methodname> Methode sind ein Name einer
             Konfigurationsoption und ein Wert für die Option.
         </para>
+
         <example id="zend.console.getopt.configuration.config.example.setoption">
             <title>Verwenden von setOption()</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setOption('ignoreCase', true);
 ]]></programlisting>
         </example>
+
         <para>
             Das Argument für die <methodname>setOptions()</methodname> Methode ist ein
             assoziatives Array. Die Schlüssel dieses Arrays sind die Namen der
@@ -240,8 +257,10 @@ $opts->setOption('ignoreCase', true);
             aktuellen Konfiguration zusammengefügt; es müssen also nicht alle
             Optionen angegeben werden.
         </para>
+
         <example id="zend.console.getopt.configuration.config.example.setoptions">
             <title>Verwenden von setOptions()</title>
+
             <programlisting language="php"><![CDATA[
 $opts = new Zend_Console_Getopt('abp:');
 $opts->setOptions(
@@ -253,5 +272,4 @@ $opts->setOptions(
 ]]></programlisting>
         </example>
     </sect2>
-
 </sect1>

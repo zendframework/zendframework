@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16652 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.introduction">
-
     <title>Einführung</title>
 
     <para>
@@ -35,7 +34,6 @@
     </note>
 
     <sect2 id="zend.auth.introduction.adapters">
-
         <title>Adapter</title>
 
         <para>
@@ -103,11 +101,9 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
             ist, sollte <methodname>authenticate()</methodname> eine Ausnahme werfen die von
             <classname>Zend_Auth_Adapter_Exception</classname> abgeleitet ist.
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.introduction.results">
-
         <title>Ergebnisse</title>
 
         <para>
@@ -128,6 +124,7 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
                     repräsentiert
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getCode()</methodname> - Gibt einen konstanten
@@ -145,12 +142,14 @@ class MyAuthAdapter implements Zend_Auth_Adapter_Interface
                     die Notiz anbei.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getIdentity()</methodname> - Gibt die Identität des
                     Authentifizierungs-Versuchs zurück
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getMessages()</methodname> - Gibt ein Array von Nachrichten
@@ -206,11 +205,9 @@ switch ($result->getCode()) {
         break;
 }
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.auth.introduction.persistence">
-
         <title>Dauerhafte Identitäten</title>
 
         <para>
@@ -226,7 +223,6 @@ switch ($result->getCode()) {
         </para>
 
         <sect3 id="zend.auth.introduction.persistence.default">
-
             <title>Normale Persistenz in PHP Sessions</title>
 
             <para>
@@ -253,7 +249,6 @@ switch ($result->getCode()) {
             </note>
 
             <example id="zend.auth.introduction.persistence.default.example">
-
                 <title>Den Namensraum der Session ändern</title>
 
                 <para>
@@ -282,13 +277,10 @@ $auth->setStorage(new Zend_Auth_Storage_Session('someNamespace'));
 // persistent machen
 $result = $auth->authenticate($authAdapter);
 ]]></programlisting>
-
             </example>
-
         </sect3>
 
         <sect3 id="zend.auth.introduction.persistence.custom">
-
             <title>Eigene Speicher implementieren</title>
 
             <para>
@@ -300,7 +292,6 @@ $result = $auth->authenticate($authAdapter);
             </para>
 
             <example id="zend.auth.introduction.persistence.custom.example">
-
                 <title>Eine eigene Speicher Klasse verwenden</title>
 
                 <para>
@@ -392,15 +383,11 @@ Zend_Auth::getInstance()->setStorage(new MyStorage());
 // Authentifizieren, das Ergebnis speichern, und die Identität bei Erfolg
 $result = Zend_Auth::getInstance()->authenticate($authAdapter);
 ]]></programlisting>
-
             </example>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.auth.introduction.using">
-
         <title>Verwendung</title>
 
         <para>
@@ -413,6 +400,7 @@ $result = Zend_Auth::getInstance()->authenticate($authAdapter);
                     Indirekt durch <methodname>Zend_Auth::authenticate()</methodname>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Direkt durch die <methodname>authenticate()</methodname> Methode des Adapters
@@ -501,10 +489,5 @@ if (!$result->isValid()) {
     // $result->getIdentity() === $username
 }
 ]]></programlisting>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

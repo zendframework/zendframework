@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.introduction">
-
     <title>Einführung</title>
 
     <para>
@@ -25,6 +24,7 @@
                 ist. Die Benutzung von Gettext zum Beispiel ist sehr kompliziert.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>PHP unterstützt nur Gettext und Arrays:</emphasis>
@@ -33,6 +33,7 @@
                 eingebauten Support hierfür gibt.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Keine Erkennung der Standard Sprache:</emphasis>
@@ -40,6 +41,7 @@
                 über die Hintergründe der Web Browser erkannt und benutzt werden.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Gettext ist nicht Threadsicher:</emphasis>
@@ -67,6 +69,7 @@
                 Formate wie zum Beispiel TMX und CSV Quellen.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Threadsicheres Gettext:</emphasis>
@@ -74,6 +77,7 @@
                 kann ohne Probleme in Multithreaded Umgebungen verwendet werden.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Einfache und einheitliche <acronym>API</acronym>:</emphasis>
@@ -85,6 +89,7 @@
                 zu Ändern ist um den anderen Adapter zu spezifizieren.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Erkennung der Standard Sprache des Benutzers:</emphasis>
@@ -92,6 +97,7 @@
                 <classname>Zend_Translate</classname> erkannt und automatisch verwendet werden.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <emphasis>Automatische Erkennung der Quelle:</emphasis>
@@ -103,7 +109,6 @@
     </itemizedlist>
 
     <sect2 id="zend.translate.introduction.adapters">
-
         <title>Beginnen wir mit der Mehrsprachigkeit</title>
 
         <para>
@@ -117,25 +122,21 @@
 
         <orderedlist numeration='arabic'>
             <listitem>
-                <para>
-                    Den Adapter auswählen der Benutzt werden soll;
-                </para>
+                <para>Den Adapter auswählen der Benutzt werden soll;</para>
             </listitem>
+
             <listitem>
                 <para>
                     Die View erzeugen und <classname>Zend_Translate</classname> in den Code
                     integrieren;
                 </para>
             </listitem>
-            <listitem>
-                <para>
-                    Die Quell Datei vom Code erzeugen;
-                </para>
+
+            <listitem><para>Die Quell Datei vom Code erzeugen;</para>
             </listitem>
+
             <listitem>
-                <para>
-                    Die Quell Datei in die gewünschten Sprachen übersetzen.
-                </para>
+                <para>Die Quell Datei in die gewünschten Sprachen übersetzen.</para>
             </listitem>
         </orderedlist>
 
@@ -144,10 +145,5 @@
             Sie sollten sorgfältig studiert werden um eigene Mehrsprachige
             Web Applikationen erstellen zu können.
         </para>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

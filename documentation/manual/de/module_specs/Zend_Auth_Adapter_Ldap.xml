@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.ldap">
-
     <title>LDAP Authentifizierung</title>
 
     <sect2 id="zend.auth.adapter.ldap.introduction">
-
         <title>Einführung</title>
 
         <para>
@@ -26,11 +24,9 @@
             Informationen für die Fehlerbehandlung bei Authentifizierungs Problemen, und Beispiel
             Optionen für beide, Active Directory und OpenLDAP Server.
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.ldap.usage">
-
         <title>Verwendung</title>
 
         <para>
@@ -139,11 +135,9 @@ ldap.server2.baseDn = "CN=Users,DC=w,DC=net"
             wegen der Kanonifizierung der Namen (beschrieben im
             <emphasis>Kanonifizierung von Benutzernamen</emphasis> Kapitel anbei).
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.ldap.api">
-
         <title>Die API</title>
 
         <para>
@@ -207,6 +201,7 @@ Array
 
         <note>
             <title>Was ist ein ausgezeichneter Name?</title>
+
             <para>
                 Ein DN oder "distinguished name" ist ein String der den Pfad zu einem Objekt im
                 <acronym>LDAP</acronym> Verzeichnis repräsentiert. Jede komma-seperierte Komponente
@@ -237,6 +232,7 @@ Array
 
         <note>
             <title>Die glorreichen Details: Was passiert bei der Authentifizierungs Methode?</title>
+
             <para>
                 Wenn die <methodname>authenticate()</methodname> Methode aufgerufen wird, iteriert
                 der Adapter über jedes Set von Serveroptione, setzt diese auf der internen
@@ -273,11 +269,9 @@ Array
             <methodname>setUsername()</methodname> und <methodname>setPassword()</methodname>
             Methoden gesetzt werden.
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.ldap.server-options">
-
         <title>Server Optionen</title>
 
         <para>
@@ -289,6 +283,7 @@ Array
 
         <table id="zend.auth.adapter.ldap.server-options.table">
             <title>Server Optionen</title>
+
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -296,16 +291,20 @@ Array
                         <entry>Beschreibung</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><emphasis><property>host</property></emphasis></entry>
+
                         <entry>
                             Der Hostname des <acronym>LDAP</acronym> Servers der diese Optionen
                             repräsentiert. Diese Option wird benötigt.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>port</property></emphasis></entry>
+
                         <entry>
                             Der Port auf den der <acronym>LDAP</acronym> Server schaut. Wenn
                             <emphasis>useSsl</emphasis> <constant>TRUE</constant> ist, ist der
@@ -314,8 +313,10 @@ Array
                             Standardwert von <property>port</property> 389.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>useStartTls</property></emphasis></entry>
+
                         <entry>
                             Ob der <acronym>LDAP</acronym> Client einen <acronym>TSL</acronym> (aka
                             <acronym>SSL</acronym>v2) verschlüsselten Transport verwenden soll oder
@@ -331,8 +332,10 @@ Array
                             unterstützen diesen neueren Mechanismus.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>useSsl</property></emphasis></entry>
+
                         <entry>
                             Ob der <acronym>LDAP</acronym> Client einen <acronym>SSL</acronym>
                             verschlüsselten Transport verwenden soll. Die
@@ -345,8 +348,10 @@ Array
                             Beschreibung weiter oben).
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>username</property></emphasis></entry>
+
                         <entry>
                             Der DN des Accounts der verwendet wird um DN Account Loopups
                             durchzuführen. <acronym>LDAP</acronym> Server die den Benutzernamen
@@ -359,8 +364,10 @@ Array
                             Privilegs</emphasis>).
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>password</property></emphasis></entry>
+
                         <entry>
                             Das Passwort des Accounts der verwendet wird um DN Lookups
                             durchzuführen. Wenn diese Option nicht unterstützt wird, versucht der
@@ -368,8 +375,10 @@ Array
                             durchgeführt werden.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>bindRequiresDn</property></emphasis></entry>
+
                         <entry>
                             Einige <acronym>LDAP</acronym> Server benötigen den zum Binden
                             verwendeten Benutzernamen in der DN Form wie
@@ -392,8 +401,10 @@ Array
                             <property>accountFilterFormat</property> Option.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>baseDn</property></emphasis></entry>
+
                         <entry>
                             Der Ort vom DN unter dem alle Accounts die authentifiziert werden. Diese
                             Option wird benötigt. Wenn man sich unsicher über den richtigen
@@ -407,8 +418,10 @@ Array
                             effizienter.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
+
                         <entry>
                             Ein Wert von 2, 3 oder 4 zeigt die Form zu der Account Namen
                             authorisiert werden sollten nachdem die Authentifizierung erfolgreich
@@ -437,8 +450,10 @@ Array
                             Server, kann das quirks für die High-Level Logik einer Anwendung sein).
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>accountDomainName</property></emphasis></entry>
+
                         <entry>
                             Der <acronym>FQDN</acronym> Domainname für welchen der Ziel
                             <acronym>LDAP</acronym> Server eine Authorität ist (z.B.,
@@ -457,8 +472,10 @@ Array
                             gibt welche die Erstellung von prinzipieller Namensform benötigen.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
+
                         <entry>
                             Die 'short' Domain für die der Ziel <acronym>LDAP</acronym> Server eine
                             Authorität ist (z.B., <acronym>FOO</acronym>). Es ist z ubeachten das
@@ -474,8 +491,10 @@ Array
                             unterstützt.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>accountFilterFormat</property></emphasis></entry>
+
                         <entry>
                             Der <acronym>LDAP</acronym> Suchfilter der für die Suche nach Accounts
                             verwendet wird. Dieser String ist ein <ulink
@@ -493,8 +512,10 @@ Array
                             werden.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>optReferrals</property></emphasis></entry>
+
                         <entry>
                             Wenn sie auf <constant>TRUE</constant> gesetzt wird, zeigt diese Option
                             dem <acronym>LDAP</acronym> Client an, das Referenzen gefolgt werden
@@ -521,11 +542,9 @@ Array
                 dass der OpenLDAP Client die Identität des Servers prüfen kann.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.ldap.debugging">
-
         <title>Debug Nachrichten sammeln</title>
 
         <para>
@@ -538,6 +557,7 @@ Array
 
         <table id="zend.auth.adapter.ldap.debugging.table">
             <title>Debug Nachrichten</title>
+
             <tgroup cols="2">
                 <thead>
                     <row>
@@ -545,17 +565,21 @@ Array
                         <entry>Beschreibung</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>Index 0</entry>
+
                         <entry>
                             Eine generelle, Benutzerfreundliche Meldung die für die Anzeige für
                             Benutzer passt (z.B. "Ungültige Anmeldedaten"). Wenn die
                             Authentifizierung erfolgreich ist, dann ist dieser String leer.
                         </entry>
                     </row>
+
                     <row>
-                    <entry>Index 1</entry>
+                        <entry>Index 1</entry>
+
                         <entry>
                             Eine detailiertere Fehlermeldung die nicht für die Anzeige für Benutzer
                             hergenommen werden kann, die aber mitgeloggt werden sollte zum Vorteil
@@ -563,11 +587,10 @@ Array
                             dieser String leer.
                         </entry>
                     </row>
+
                     <row>
                         <entry>Indezes 2 und höher</entry>
-                        <entry>
-                            Alle Logmeldungen in Reihenfolge starten bei Index 2.
-                        </entry>
+                        <entry>Alle Logmeldungen in Reihenfolge starten bei Index 2.</entry>
                     </row>
                 </tbody>
             </tgroup>
@@ -579,15 +602,12 @@ Array
             Debugging Information gesammelt wird, sollten die Indezes 2 und höher auch geloggt
             werden (auch wenn die letzte Nachricht immer den String vom Index 1 enthält).
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.ldap.options-common-server-specific">
-
         <title>Übliche Optionen für spezielle Server</title>
 
         <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.active-directory">
-
             <title>Optionen für Active Directory</title>
 
             <para>
@@ -597,6 +617,7 @@ Array
             <table
                 id="zend.auth.adapter.ldap.options-common-server-specific.active-directory.table">
                 <title>Optionen für Active Directory</title>
+
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -604,29 +625,34 @@ Array
                             <entry>Zusätzliche Notizen</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry><emphasis><property>host</property></emphasis></entry>
-                            <entry>
-                                Wie bei allen Servern, wird diese Option benötigt.
-                            </entry>
+                            <entry>Wie bei allen Servern, wird diese Option benötigt.</entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>useStartTls</property></emphasis></entry>
+
                             <entry>
                                 Zum Zwecke der Sicherheit, sollte das <constant>TRUE</constant> sein
                                 wenn der Server das notwendige Zertifikat installiert hat.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>useSsl</property></emphasis></entry>
+
                             <entry>
                                 Möglicherweise als Alternative zu <emphasis>useStartTls</emphasis>
                                 zu verwenden (siehe davor).
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>baseDn</property></emphasis></entry>
+
                             <entry>
                                 Wie bei allen Servern, wird diese Option benötigt. Standardmäßig
                                 platziert AD alle Benutzer Accounts unter dem
@@ -637,8 +663,10 @@ Array
                                 werden.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
+
                             <entry>
                                 Das wird man normalerweise für Schrägstrich-Stil Namen auf 3 stellen
                                 (z.B., <filename>FOO\alice</filename>), was für Windows Benutzer am
@@ -651,16 +679,20 @@ Array
                                 behandelt). (siehe auch die Notiz anbei.)
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>accountDomainName</property></emphasis></entry>
+
                             <entry>
                                 Das wird mit AD benötigt, ausser
                                 <property>accountCanonicalForm</property> 2 wird
                                 verwendet, was wiederum nicht eingesetzt werden sollte.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
+
                             <entry>
                                 Der NetBIOS Name der Domain in der die Benutzer sind und für den der
                                 AD Server die Authorität ist. Das wird benötigt wenn der
@@ -685,11 +717,9 @@ Array
                     Accountnamen zu verwenden.
                 </para>
             </note>
-
         </sect3>
 
         <sect3 id="zend.auth.adapter.ldap.options-common-server-specific.openldap">
-
             <title>Optionen für OpenLDAP</title>
 
             <para>
@@ -699,6 +729,7 @@ Array
 
             <table id="zend.auth.adapter.ldap.options-common-server-specific.openldap.table">
                 <title>Optionen für OpenLDAP</title>
+
                 <tgroup cols="2">
                     <thead>
                         <row>
@@ -706,59 +737,72 @@ Array
                             <entry>Zusätzliche Notizen</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry><emphasis><property>host</property></emphasis></entry>
-                            <entry>
-                                Wie bei allen Servern, wird diese Option benötigt.
-                            </entry>
+                            <entry>Wie bei allen Servern, wird diese Option benötigt.</entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>useStartTls</property></emphasis></entry>
+
                             <entry>
                                 Zum Zwecke der Sicherheit, sollte das <constant>TRUE</constant> sein
                                 wenn der Server das notwendige Zertifikat installiert hat.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>useSsl</property></emphasis></entry>
+
                             <entry>
                                 Möglicherweise als Alternative zu <property>useStartTls</property>
                                 zu verwenden (siehe davor).
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>username</property></emphasis></entry>
+
                             <entry>
                                 Benötigt und muß ein DN sein, da OpenLDAP den Benutzernamen in DN
                                 Form benötigt wenn ein Binden durchgeführt wird. Es sollte versucht
                                 werden einen nicht privilegierten Account zu verwenden.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>password</property></emphasis></entry>
+
                             <entry>
                                 Das Passwort das zum Benutzernamen von oben gehört. Es kann aber
                                 unterdrückt werden wenn der <acronym>LDAP</acronym> Server anonymes
                                 Binden bei Abfragen zu Benutzer Accounts erlaubt.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>bindRequiresDn</property></emphasis></entry>
+
                             <entry>
                                 Benötigt und muß <constant>TRUE</constant> sein, da OpenLDAP den
                                 Benutzernamen in DN Form benötigt wenn ein Binden durchgeführt wird.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>baseDn</property></emphasis></entry>
+
                             <entry>
                                 Wie bei allen Servern, wird diese Option benötigt und zeigt den DN
                                 in dem alle Accounts die authentifiziert werden enthalten sind.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>accountCanonicalForm</property></emphasis></entry>
+
                             <entry>
                                 Optional, aber der Standardwert ist 4 (prinzipielle-Stil Namen wie
                                 <filename>alice@foo.net</filename>) und könnte für die Benutzer
@@ -767,16 +811,20 @@ Array
                                 sollte der Wert 3 verwendet werden.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>accountDomainName</property></emphasis></entry>
+
                             <entry>
                                 Benötigt es sei denn man verwendet
                                 <property>accountCanonicalForm</property> 2, was nicht
                                 zu empfehlen ist.
                             </entry>
                         </row>
+
                         <row>
                             <entry><emphasis><property>accountDomainNameShort</property></emphasis></entry>
+
                             <entry>
                                 Wenn AD auch nicht verwendet wird, wird dieser Wert nicht benötigt.
                                 Andernfalls, wenn
@@ -796,6 +844,3 @@ Array
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

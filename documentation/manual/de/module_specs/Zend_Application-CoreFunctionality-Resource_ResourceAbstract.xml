@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16649 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.resource-resourceabstract">
     <title>Zend_Application_Resource_ResourceAbstract</title>
@@ -18,6 +18,7 @@
 
     <table id="zend.application.core-functionality.resource-resourceabstract.api">
         <title>Zend_Application_Resource_ResourceAbstract Methods</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -27,20 +28,29 @@
                     <entry>Beschreibung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><methodname>__construct($options = null)</methodname></entry>
                     <entry><type>Void</type></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$options</varname>: <emphasis>optional</emphasis>.
-                            Optionen mit denen der Ressource Status gesetzt wird.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Der Konstruktor sollte die Übergabe von Optionen erlauben mit denen der
-                        Status initialisiert wird.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$options</varname>: <emphasis>optional</emphasis>.
+                                    Optionen mit denen der Ressource Status gesetzt wird.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>
+                            Der Konstruktor sollte die Übergabe von Optionen erlauben mit denen der
+                            Status initialisiert wird.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
@@ -48,48 +58,55 @@
                         <methodname>setBootstrap(Zend_Application_Bootstrap_Bootstrapper
                             $bootstrap)</methodname>
                     </entry>
+
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
-                    <entry><itemizedlist>
-                            <listitem><para>
-                                <varname>$bootstrap</varname>: <emphasis>required</emphasis>.
-                                Parent Bootstrap der diese Ressource initialisiert.
-                            </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Sollte es erlauben das Parent Bootstrap Objekt zu registrieren.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$bootstrap</varname>: <emphasis>required</emphasis>.
+                                    Parent Bootstrap der diese Ressource initialisiert.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>Sollte es erlauben das Parent Bootstrap Objekt zu registrieren.</para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>getBootstrap()</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Empfange die registrierte Bootstrap Instanz.
-                    </para></entry>
+                    <entry><para>Empfange die registrierte Bootstrap Instanz.</para></entry>
                 </row>
 
                 <row>
                     <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$options</varname>: <emphasis>required</emphasis>.
-                            Optionen mit denen der Status gesetzt werden soll.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Set resource state.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$options</varname>: <emphasis>required</emphasis>.
+                                    Optionen mit denen der Status gesetzt werden soll.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry><para>Set resource state.</para></entry>
                 </row>
 
                 <row>
                     <entry><methodname>getOptions()</methodname></entry>
                     <entry><type>Array</type></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Empfangen der registrierten Optionen.
-                    </para></entry>
+                    <entry><para>Empfangen der registrierten Optionen.</para></entry>
                 </row>
             </tbody>
         </tgroup>

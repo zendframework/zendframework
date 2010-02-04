@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15860 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.digest">
-
     <title>Digest Authentication</title>
 
     <sect2 id="zend.auth.adapter.digest.introduction">
-
         <title>Einführung</title>
 
         <para>
@@ -30,11 +28,13 @@
                     Benutzername, wie z.B. "<emphasis><filename>joe.user</filename></emphasis>"
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Bereich, wie z.B. "<emphasis>Administrativer Bereich</emphasis>"
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <acronym>MD5</acronym> Hash von Benutzername, Bereich und Passwort, getrennt
@@ -51,11 +51,9 @@
         <programlisting language="txt"><![CDATA[
 irgendeinBenutzer:Irgendein Bereich:fde17b91c3a510ecbaf7dbd37f59d4f8
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.digest.specifics">
-
         <title>Spezifisches</title>
 
         <para>
@@ -70,16 +68,19 @@ irgendeinBenutzer:Irgendein Bereich:fde17b91c3a510ecbaf7dbd37f59d4f8
                     werden
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     realm - Digest Authentifizierungs Bereich
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     username - Digest Authentifizierungs Benutzer
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     password - Passwort für den Benutzer des Bereichs
@@ -91,11 +92,9 @@ irgendeinBenutzer:Irgendein Bereich:fde17b91c3a510ecbaf7dbd37f59d4f8
             Diese Parameter müssen vor dem Aufruf von <methodname>authenticate()</methodname>
             gesetzt werden.
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.digest.identity">
-
         <title>Identität</title>
 
         <para>
@@ -127,10 +126,5 @@ Array
 )
 */
 ]]></programlisting>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

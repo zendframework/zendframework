@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17734 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.theory-of-operation">
     <title>Theorie der Funktionsweise</title>
@@ -37,6 +37,7 @@
                 Klasse.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <classname>Zend_Application_Bootstrap</classname>: Bietet Interfaces für Bootstrap
@@ -46,6 +47,7 @@
                 Bedarf zu laden.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <classname>Zend_Application_Resource</classname> bietet ein Interface für Standard
@@ -64,16 +66,8 @@
     </para>
 
     <itemizedlist>
-        <listitem>
-            <para>
-                Die aktuelle Umgebung
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-                Optionen für das Bootstrapping
-            </para>
-        </listitem>
+        <listitem><para>Die aktuelle Umgebung</para></listitem>
+        <listitem><para>Optionen für das Bootstrapping</para></listitem>
     </itemizedlist>
 
     <para>
@@ -83,44 +77,37 @@
 
     <itemizedlist>
         <listitem>
-            <para>
-                Jeden include_path der extra zu setzen ist
-            </para>
+            <para>Jeden include_path der extra zu setzen ist</para>
         </listitem>
+
         <listitem>
-            <para>
-                Jeden Autoloader Namespace der zusätzlich zu registrieren ist
-            </para>
+            <para>Jeden Autoloader Namespace der zusätzlich zu registrieren ist</para>
         </listitem>
+
         <listitem>
-            <para>
-                Jede <filename>php.ini</filename> Einstellung die zu initialisieren ist
-            </para>
+            <para>Jede <filename>php.ini</filename> Einstellung die zu initialisieren ist</para>
         </listitem>
+
         <listitem>
             <para>
                 Den Klassennamen für die Bootstrap Klasse (wenn diese nicht "Bootstrap" ist)
             </para>
         </listitem>
+
         <listitem>
-            <para>
-                Ressourcen Präfix zu Pfad Paare die zu verwenden sind
-            </para>
+            <para>Ressourcen Präfix zu Pfad Paare die zu verwenden sind</para>
         </listitem>
+
         <listitem>
-            <para>
-                Jede Ressource die zu verwenden ist (durch Name der Klasse oder Kurzname)
-            </para>
+            <para>Jede Ressource die zu verwenden ist (durch Name der Klasse oder Kurzname)</para>
         </listitem>
+
         <listitem>
-            <para>
-                Zusätzliche Pfade zu einer Konfigurationsdatei die zu laden ist
-            </para>
+            <para>Zusätzliche Pfade zu einer Konfigurationsdatei die zu laden ist</para>
         </listitem>
+
         <listitem>
-            <para>
-                Zusätzliche Konfigurations Optionen
-            </para>
+            <para>Zusätzliche Konfigurations Optionen</para>
         </listitem>
     </itemizedlist>
 

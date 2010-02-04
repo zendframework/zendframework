@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18729 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.introduction">
     <title>Einführung</title>
@@ -23,6 +23,7 @@
                 Zugriff kontrolliert wird.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 ist eine <emphasis>Rolle</emphasis> ein Objekt, dass den Zugriff
@@ -45,6 +46,7 @@
 
     <sect2 id="zend.acl.introduction.resources">
         <title>Ressourcen</title>
+
         <para>
             Das Erstellen einer Ressource ist in <classname>Zend_Acl</classname> sehr einfach.
             <classname>Zend_Acl</classname> stellt die Ressource
@@ -56,6 +58,7 @@
             <classname>Zend_Acl_Resource</classname> in <classname>Zend_Acl</classname> als einfache
             Ressourcen Implementation enthalten, damit Entwickler sie wenn nötig erweitern können.
         </para>
+
         <para>
             <classname>Zend_Acl</classname> stellt eine Baumstruktur bereit, in die mehrere
             Ressourcen aufgenommen werden können. Weil Ressourcen in solch einer Baumstruktur
@@ -72,6 +75,7 @@
             übergeordnete Ressource seine eigenen übergeordneten Ressourcen haben kann, und so
             weiter.
         </para>
+
         <para>
             <classname>Zend_Acl</classname> unterstützt außerdem Rechte auf Ressourcen (z.B.
             "erstellen", "lesen", "aktualisieren", "löschen") damit der Entwickler Regeln zuordnen
@@ -82,6 +86,7 @@
 
     <sect2 id="zend.acl.introduction.roles">
         <title>Rollen</title>
+
         <para>
             Wie bei den Ressourcen, ist auch das Erstellen einer Rolle sehr einfach. Alle Rollen
             müssen <classname>Zend_Acl_Role_Interface</classname> implementieren. Dieses Interface
@@ -90,6 +95,7 @@
             einfache Rollen Implementation angeboten, damit Entwickler sie bei Bedarf erweitern
             können.
         </para>
+
         <para>
             In <classname>Zend_Acl</classname> kann eine Rolle von einer oder mehreren Rollen
             erben. Dies soll die Vererbung von Regeln zwischen den Rollen ermöglichen. Zum Beispiel
@@ -98,14 +104,17 @@
             "Administrator" getrennt Regeln zuordnen und "Sally" würde diese Regeln von beiden
             erben, ohne dass "Sally" direkt Regeln zugeordnet werden müssen.
         </para>
+
         <para>
             Auch wenn die Möglichkeit der Vererbung von verschiedenen Rollen sehr nützlich ist,
             führt die mehrfache Vererbung auch einen gewissen Grad an Komplexität ein. Das folgende
             Beispiel illustriert die mehrdeutigen Bedingungen und wie
             <classname>Zend_Acl</classname> sie auflöst.
         </para>
+
         <example id="zend.acl.introduction.roles.example.multiple_inheritance">
             <title>Mehrfache Vererbung zwischen Rollen</title>
+
             <para>
                 Der folgende Code definiert drei Basis Rollen - "guest", "member" und "admin" - von
                 denen andere Rollen erben können. Dann wird eine Rolle "someUser" eingerichtet, die
@@ -115,6 +124,7 @@
                 Rolle (hier "someUser"), sondern auch für die Rollen, von denen die abgefragte
                 Rolle erbt (hier "guest", "member" und "admin"):
             </para>
+
             <programlisting language="php"><![CDATA[
 $acl = new Zend_Acl();
 
@@ -132,6 +142,7 @@ $acl->allow('member', 'someResource');
 
 echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
 ]]></programlisting>
+
             <para>
                 Da keine Regel speziell für die Rolle "someUser" und "someResource" definiert
                 wurde, muss <classname>Zend_Acl</classname> nach Regeln suchen, die für Rollen
@@ -140,6 +151,7 @@ echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
                 besucht und <classname>Zend_Acl</classname> findet hier eine Regel, die angibt,
                 dass "member" der Zugriff auf "someResource" erlaubt ist.
             </para>
+
             <para>
                 Wenn <classname>Zend_Acl</classname> fortfahren würde, die für weitere
                 übergeordnete Rollen definierten Regeln zu untersuchen, würde heraus gefunden
@@ -148,6 +160,7 @@ echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
                 "someResource" sowohl verboten als auch erlaubt ist, aufgrund der vererbten Regeln
                 von verschiedenen übergeordnete Rollen, die miteinander im Konflikt stehen.
             </para>
+
             <para>
                 <classname>Zend_Acl</classname> löst diese Mehrdeutigkeit dadurch auf, dass eine
                 Abfrage beendet wird, wenn die erste Regel gefunden wird, die direkt auf die
@@ -155,6 +168,7 @@ echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
                 ausgeben, weil die "member" Rolle vor der "guest" Rolle untersucht wird.
             </para>
         </example>
+
         <note>
             <para>
                 Wenn man mehrere übergeordnete Rollen angibt, sollte man beachten, dass die zuletzt
@@ -209,38 +223,42 @@ $acl = new Zend_Acl();
         </para>
 
         <table id="zend.acl.introduction.role_registry.table.example_cms_access_controls">
-          <title>Zugangsbeschränkung für ein Beispiel-CMS</title>
-          <tgroup cols="3">
-            <thead>
-              <row>
-                <entry>Name</entry>
-                <entry>Eindeutige Genehmigung</entry>
-                <entry>Erbe Genehmigungen von</entry>
-              </row>
-            </thead>
-            <tbody>
-              <row>
-                <entry>Guest</entry>
-                <entry>View</entry>
-                <entry>N/A</entry>
-              </row>
-              <row>
-                <entry>Staff</entry>
-                <entry>Edit, Submit, Revise</entry>
-                <entry>Guest</entry>
-              </row>
-              <row>
-                <entry>Editor</entry>
-                <entry>Publish, Archive, Delete</entry>
-                <entry>Staff</entry>
-              </row>
-              <row>
-                <entry>Administrator</entry>
-                <entry>(bekommt kompletten Zugriff gewährt)</entry>
-                <entry>N/A</entry>
-              </row>
-            </tbody>
-          </tgroup>
+            <title>Zugangsbeschränkung für ein Beispiel-CMS</title>
+            <tgroup cols="3">
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Eindeutige Genehmigung</entry>
+                        <entry>Erbe Genehmigungen von</entry>
+                    </row>
+                </thead>
+
+                <tbody>
+                    <row>
+                        <entry>Guest</entry>
+                        <entry>View</entry>
+                        <entry>N/A</entry>
+                    </row>
+
+                    <row>
+                        <entry>Staff</entry>
+                        <entry>Edit, Submit, Revise</entry>
+                        <entry>Guest</entry>
+                    </row>
+
+                    <row>
+                        <entry>Editor</entry>
+                        <entry>Publish, Archive, Delete</entry>
+                        <entry>Staff</entry>
+                    </row>
+
+                    <row>
+                        <entry>Administrator</entry>
+                        <entry>(bekommt kompletten Zugriff gewährt)</entry>
+                        <entry>N/A</entry>
+                    </row>
+                </tbody>
+            </tgroup>
         </table>
 
         <para>
@@ -333,7 +351,6 @@ $acl->allow('administrator');
             Die <constant>NULL</constant> Werte im obigen <methodname>allow()</methodname> Aufrufen
             werden verwendet, um anzugeben, dass diese Regeln für alle Ressourcen gelten.
         </para>
-
     </sect2>
 
     <sect2 id="zend.acl.introduction.querying">
@@ -379,9 +396,5 @@ echo $acl->isAllowed('administrator', null, 'update') ?
      "allowed" : "denied";
 // erlaubt, weil Administrator alle Rechte haben
 ]]></programlisting>
-
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

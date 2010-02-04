@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.dbtable">
-
     <title>Datenbanktabellen Authentifizierung</title>
 
     <sect2 id="zend.auth.adapter.dbtable.introduction">
-
         <title>Einführung</title>
 
         <para>
@@ -31,6 +29,7 @@
                     jene Datenbank Authentifikations Abfrage durchgeführt wird.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis><property>identityColumn</property></emphasis>: Ist der Name der
@@ -39,6 +38,7 @@
                     oder eine Email Adresse.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis><property>credentialColumn</property></emphasis>: Das ist der Name
@@ -48,6 +48,7 @@
                     <property>credentialTreatment</property> Option.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis><property>credentialTreatment</property></emphasis>: In vielen Fällen
@@ -65,7 +66,6 @@
         </itemizedlist>
 
         <example id="zend.auth.adapter.dbtable.introduction.example.basic_usage">
-
             <title>Grundsätzliche Verwendung</title>
 
             <para>
@@ -179,13 +179,10 @@ Array
                 Da die Zeile der Tabelle die Zeugnis Daten enthält ist es wichtig diese Werte
                 gegenüber unberechtigten Versuchen abzusichern.
             </para>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.dbtable.advanced.storing_result_row">
-
         <title>Fortgeschrittene Verwendung: Ein DbTable Ergebnis Objekt dauerhaft machen</title>
 
         <para>
@@ -228,7 +225,6 @@ if ($result->isValid()) {
 
 }
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.dbtable.advanced.advanced_usage">
@@ -318,14 +314,12 @@ $adapter = new Zend_Auth_Adapter_DbTable(
 ]]></programlisting>
 
         <note>
-
             <para>
                 Die Sicherheit kann sogar noch mehr erhöht werden indem ein statischer Salt Wert
                 hardcoded in der Anwendung verwendet wird. Im Falle das die Datenbank korrumpiert
                 wird (z.B. durch eine <acronym>SQL</acronym> Injection Attacke) aber der Webserver
                 intakt bleibt sind die Daten für den Angreifer noch immer nicht verwendbar.
             </para>
-
         </note>
 
         <para>
@@ -340,11 +334,13 @@ $adapter = new Zend_Auth_Adapter_DbTable(
             Werte im Select Objekt wärend des Ausführens von
             <methodname>authenticate()</methodname> platziert werden.
         </para>
+
         <para>
             Als Beispiel einer Situation könnte man die <methodname>getDbSelect()</methodname>
             Methode verwenden um den Status eines Benutzers zu prüfen, in anderen Worten sehen ob
             der Account des Benutzers aktiviert ist.
         </para>
+
         <programlisting language="php"><![CDATA[
 // Das Beispiel von oben weiterführen
 $adapter = new Zend_Auth_Adapter_DbTable(
@@ -362,10 +358,5 @@ $select->where('active = "TRUE"');
 // Authentifizieren, das stellt sicher das users.active = TRUE
 $adapter->authenticate();
 ]]></programlisting>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

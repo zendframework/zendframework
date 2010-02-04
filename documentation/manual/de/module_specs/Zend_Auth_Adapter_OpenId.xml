@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15960 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.openid">
-
     <title>Open ID Authentifikation</title>
 
     <sect2 id="zend.auth.adapter.openid.introduction">
-
         <title>Einführung</title>
+
         <para>
             Der <classname>Zend_Auth_Adapter_OpenId</classname> Adapter kann verwendet werden um
             Benutzer durch Verwendung eines entfernten OpenID Servers zu authentifizieren. Diese
@@ -16,6 +15,7 @@
             Eigentümerschaft der Identität mit Hilfe eines Passwortes oder einer anderen Methode zu
             prüfen. Dieses Passwort wird der Web Anwendung nie bekannt gegeben.
         </para>
+
         <para>
             Die OpenID Identität ist nur eine <acronym>URL</acronym> die auf eine Webseite mit
             entsprechenden Informationen über den Benutzer und spezielle Tags verweist welche
@@ -23,6 +23,7 @@
             übermitteln ist. Mehr über OpenID kann auf der
             <ulink url="http://www.openid.net/">offiziellen OpenID Site</ulink> nachgelesen werden.
         </para>
+
         <para>
             Die <classname>Zend_Auth_Adapter_OpenId</classname> Klasse umgibt die
             <classname>Zend_OpenId_Consumer</classname> Komponente welche das OpenID
@@ -42,6 +43,7 @@
 
     <sect2 id="zend.auth.adapter.openid.specifics">
         <title>Spezielles</title>
+
         <para>
             Wie in diesem Fall für alle <classname>Zend_Auth</classname> Adapter, implementiert die
             <classname>Zend_Auth_Adapter_OpenId</classname> Klasse das
@@ -131,9 +133,5 @@ if ((isset($_POST['openid_action']) &&
             OpenID Server zu erhalten. Alle diese Möglichkeiten werden detailierter im Kapitel
             <classname>Zend_OpenId_Consumer</classname> beschrieben.
         </para>
-
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

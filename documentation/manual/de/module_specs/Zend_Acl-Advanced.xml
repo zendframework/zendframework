@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15814 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.advanced">
-
     <title>Fortgeschrittene Verwendung</title>
 
     <sect2 id="zend.acl.advanced.storing">
-
         <title>Dauerhafte Speicherung von ACL Daten</title>
 
         <para>
@@ -28,11 +26,9 @@
             serialisiert werden und das Ergebnis kann überall gespeichert werden, wo es der
             Entwickler möchte, wie z.B. eine Datei, eine Datenbank oder ein Cache Mechanismus.
         </para>
-
     </sect2>
 
     <sect2 id="zend.acl.advanced.assertions">
-
         <title>Schreiben von bedingten ACL Regeln mit Behauptungen</title>
 
         <para>
@@ -102,10 +98,5 @@ $acl->allow(null, null, null, new CleanIPAssertion());
             Kontext für die Behauptungsklasse bereit zu stellen, um die Bedingungen zu ermitteln wo
             erforderlich.
         </para>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

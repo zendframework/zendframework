@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17372 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.application.quick-start">
     <title>Zend_Application Quick Start</title>
@@ -162,20 +162,27 @@ $application->bootstrap()
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Eine <filename>application/Bootstrap.php</filename> Datei mit der Klasse
-                <classname>Bootstrap</classname> erstellen.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Eine <filename>application/Bootstrap.php</filename> Datei mit der Klasse
+                    <classname>Bootstrap</classname> erstellen.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Eine Konfigurationsdatei <filename>application/configs/application.ini</filename>
-                mit der Basiskonfiguration für <classname>Zend_Application</classname> erstellen.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Eine Konfigurationsdatei
+                    <filename>application/configs/application.ini</filename> mit der
+                    Basiskonfiguration für <classname>Zend_Application</classname> erstellen.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Ändern von <filename>public/index.php</filename> um
-                <classname>Zend_Application</classname> anzupassen.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Ändern von <filename>public/index.php</filename> um
+                    <classname>Zend_Application</classname> anzupassen.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

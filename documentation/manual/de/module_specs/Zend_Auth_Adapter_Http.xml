@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19483 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.auth.adapter.http">
     <title>HTTP Authentication Adapter</title>
@@ -28,17 +28,20 @@
                     Unterstützt sowohl Basis als auch Digest Authentifizierung.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Enthält Aufrufe für alle unterstützten Schemas, damit Klienten mit jedem
                     unterstützten Schema arbeiten können.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    Bietet Proxi Authentifizierung.
+                    Bietet Proxy Authentifizierung.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Enthält Unterstützung für die Authentifizierung gegenüber Textdateien und
@@ -60,22 +63,22 @@
                     Unterstützung bei wiederholenden Attacken erhöht.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Authentifizierung mit Integritäts-Prüfung, oder "auth-int".
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Authentifizierungs-Info <acronym>HTTP</acronym> Header.
                 </para>
             </listitem>
         </itemizedlist>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.design_overview">
-
         <title>Design Übersicht</title>
 
         <para>
@@ -88,11 +91,9 @@
             "aufgelösten" Zeugnisse werden dann mit den Werten verglichen die vom Klienten
             übermittelt wurden um zu eruieren ob die Authentifizierung erfolgreich war.
         </para>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.configuration_options">
-
         <title>Konfigurations Optionen</title>
 
         <para>
@@ -103,6 +104,7 @@
 
         <table id="zend.auth.adapter.configuration_options.table">
             <title>Konfigurations Optionen</title>
+
             <tgroup cols="3">
                 <thead>
                     <row>
@@ -111,10 +113,12 @@
                         <entry>Beschreibung</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><emphasis><property>accept_schemes</property></emphasis></entry>
                         <entry>Ja</entry>
+
                         <entry>
                             Ermittelt welches Authentifizierungs Schema der Adapter vom
                             Klienten akzeptiert. Muß eine Leerzeichen-getrennte Liste sein, die
@@ -122,20 +126,25 @@
                             enthält.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>realm</property></emphasis></entry>
                         <entry>Ja</entry>
+
                         <entry>
                             Setzt das Authentifizierungs-Bereich; Benutzernamen sollten im
                             angegebenen Bereich einmalig sein.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>digest_domains</property></emphasis></entry>
+
                         <entry>
                             Ja, wenn <property>accept_schemes</property>
                             <emphasis>digest</emphasis> enthält
                         </entry>
+
                         <entry>
                             Leerzeichen-getrennte Liste von <acronym>URI</acronym>s für welche die
                             gleichen Authentifizierungs Informationen gültig sind. Die
@@ -143,20 +152,25 @@
                             zeigen.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>nonce_timeout</property></emphasis></entry>
+
                         <entry>
                             Ja, wenn <property>accept_schemes</property>
                             <emphasis>digest</emphasis> enthält
                         </entry>
+
                         <entry>
                             Setzt die Anzahl an Sekunden für welche die Verfolgung gültig ist.
                             Siehe die Notizen anbei.
                         </entry>
                     </row>
+
                     <row>
                         <entry><emphasis><property>proxy_auth</property></emphasis></entry>
                         <entry>Nein</entry>
+
                         <entry>
                             Standardmäßig ausgeschaltet. Einschalten um Proxi Authentifizierung
                             durchzuführen statt normaler originaler Server Authentifizierung.
@@ -177,11 +191,9 @@
                 Support implementiert werden.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.http.resolvers">
-
         <title>Auflöser</title>
 
         <para>
@@ -199,7 +211,6 @@
         </para>
 
         <sect3 id="zend.auth.adapter.http.resolvers.file">
-
             <title>Datei Auflöser</title>
 
             <para>
@@ -246,13 +257,10 @@ $resolver->setFile($path);
             <para>
                 Wenn der angegebene Pfad leer oder nicht lesbar ist, wird eine Ausnahme geworfen.
             </para>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.auth.adapter.http.basic_usage">
-
         <title>Grundsätzliche Verwendung</title>
 
         <para>
@@ -319,10 +327,5 @@ if (!$result->isValid()) {
     // Schlechter Benutzername/Passwort, oder abgebrochener Passwort Prompt
 }
 ]]></programlisting>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

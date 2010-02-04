@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18389 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.acl.refining">
-
     <title>Verfeinern der Zugriffskontrolle</title>
 
     <sect2 id="zend.acl.refining.precise">
-
         <title>Präzise Zugangsbeschränkung</title>
 
         <para>
@@ -128,11 +126,9 @@ echo $acl->isAllowed('administrator', 'announcement', 'archive') ?
      "allowed" : "denied";
 // verweigert
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.acl.refining.removing">
-
         <title>Zugangsbeschränkungen entfernen</title>
 
         <para>
@@ -190,10 +186,5 @@ echo $acl->isAllowed('marketing', 'latest', 'anything') ?
      "allowed" : "denied";
 // erlaubt
 ]]></programlisting>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

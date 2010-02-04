@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18178 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.modules">
     <title>Zend_Application_Resource_Modules</title>
@@ -70,6 +70,7 @@ $options = array(
 
     <example id="zend.application.available-resources.modules.configExample">
         <title>Module konfigurieren</title>
+
         <para>
             Man kann eine modul-spezifische Konfiguration spezifizieren indem der Modulname als
             Präfix oder Unter-Sektion in der Konfigurationsdatei verwendet wird.

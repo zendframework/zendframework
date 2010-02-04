@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15733 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-bootstrapper">
     <title>Zend_Application_Bootstrap_Bootstrapper</title>
@@ -17,6 +17,7 @@
 
     <table id="zend.application.core-functionality.bootstrap-bootstrapper.methods-table">
         <title>Zend_Application_Bootstrap_Bootstrapper Interface</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -26,98 +27,137 @@
                     <entry>Beschreibung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><methodname>__construct($application)</methodname></entry>
                     <entry><type>Void</type></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$application</varname>: <emphasis>benötigt</emphasis>.
-                            Sollte ein <classname>Zend_Application</classname> oder
-                            <classname>Zend_Application_Bootstrap_Bootstrapper</classname> Objekt
-                            als einziges Argument akzeptieren.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Konstruktor. Akzeptiert ein einzelnes Argument, welche ein
-                        <classname>Zend_Application</classname> oder ein anderes Bootstrap Objekt
-                        sein sollte.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$application</varname>: <emphasis>benötigt</emphasis>.
+                                    Sollte ein <classname>Zend_Application</classname> oder
+                                    <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
+                                    Objekt als einziges Argument akzeptieren.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>
+                            Konstruktor. Akzeptiert ein einzelnes Argument, welche ein
+                            <classname>Zend_Application</classname> oder ein anderes Bootstrap
+                            Objekt sein sollte.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>setOptions(array $options)</methodname></entry>
                     <entry><classname>Zend_Application_Bootstrap_Bootstrapper</classname></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$options</varname>: <emphasis>benötigt</emphasis>.
-                            Array von Optionen die gesetzt werden.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Typischerweise wird jede Option die einen passenden Setter hat diesen
-                        Setter aufrufen; andernfalls, wird die Option einfach für ein späteres
-                        Empfangen gespeichert.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$options</varname>: <emphasis>benötigt</emphasis>.
+                                    Array von Optionen die gesetzt werden.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>
+                            Typischerweise wird jede Option die einen passenden Setter hat diesen
+                            Setter aufrufen; andernfalls, wird die Option einfach für ein späteres
+                            Empfangen gespeichert.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>getApplication()</methodname></entry>
+
                     <entry>
                         <classname>Zend_Application</classname> |
                         <classname>Zend_Application_Bootstrap_Bootstrapper</classname>
                     </entry>
+
                     <entry>N/A</entry>
-                    <entry><para>
-                        Empfängt das Anwendungs oder Bootstrap Objekt das über den Konstruktor
-                        übergeben wurde.
-                    </para></entry>
+
+                    <entry>
+                        <para>
+                            Empfängt das Anwendungs oder Bootstrap Objekt das über den Konstruktor
+                            übergeben wurde.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>getEnvironment()</methodname></entry>
                     <entry><type>String</type></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Empfängt den Environment String der mit dem Eltern-Anwendungs oder
-                        Bootstrap Objekt registriert wurde.
-                    </para></entry>
+
+                    <entry>
+                        <para>
+                            Empfängt den Environment String der mit dem Eltern-Anwendungs oder
+                            Bootstrap Objekt registriert wurde.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>getClassResources()</methodname></entry>
                     <entry><type>Array</type></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Empfängt eine Liste von vorhandenen Ressource Initialisierungs-Namen
-                        die in der Klasse definiert sind. Das kann für jede Implementierung
-                        speziell sein.
-                    </para></entry>
+
+                    <entry>
+                        <para>
+                            Empfängt eine Liste von vorhandenen Ressource Initialisierungs-Namen
+                            die in der Klasse definiert sind. Das kann für jede Implementierung
+                            speziell sein.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>bootstrap($resource = null)</methodname></entry>
                     <entry><type>Mixed</type></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$resource</varname>: <emphasis>Optional</emphasis>.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Wenn <varname>$resource</varname> leer ist werden alle Bootstrap Ressourcen
-                        ausgeführt. Wird ein String angegeben, wird diese einzelne Ressource
-                        ausgeführt; wird ein Array angegeben, wird jede Ressource in diesem
-                        Array ausgeführt.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$resource</varname>: <emphasis>Optional</emphasis>.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>
+                            Wenn <varname>$resource</varname> leer ist werden alle Bootstrap
+                            Ressourcen ausgeführt. Wird ein String angegeben, wird diese einzelne
+                            Ressource ausgeführt; wird ein Array angegeben, wird jede Ressource in
+                            diesem Array ausgeführt.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>run()</methodname></entry>
                     <entry><type>Void</type></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Definiert welche Anwendungslogik nach dem Bootstrapping ausgeführt wird.
-                    </para></entry>
+
+                    <entry>
+                        <para>
+                            Definiert welche Anwendungslogik nach dem Bootstrapping ausgeführt wird.
+                        </para>
+                    </entry>
                 </row>
             </tbody>
         </tgroup>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15733 -->
+<!-- EN-Revision: 20763 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.bootstrap-resourcebootstrapper">
     <title>Zend_Application_Bootstrap_ResourceBootstrapper</title>
@@ -21,6 +21,7 @@
 
     <table id="zend.application.core-functionality.bootstrap-resourcebootstrapper.methods-table">
         <title>Zend_Application_Bootstrap_ResourceBootstrapper Interface</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -30,84 +31,120 @@
                     <entry>Beschreibung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry>
                         <methodname>registerPluginResource($resource, $options = null)</methodname>
                     </entry>
+
                     <entry>
                         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>
                     </entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
-                            Ein Ressourcen Name oder ein
-                            <classname>Zend_Application_Resource_Resource</classname> Objekt.
-                        </para></listitem>
 
-                        <listitem><para>
-                            <varname>$options</varname>: <emphasis>Optional</emphasis>.
-                            Ein Array oder <classname>Zend_Config</classname> Objekt das an die
-                            Ressource bei der Instanziierung zu übergeben ist.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Registriert eine Ressource mit der Klasse, und bietet die Übergaben einer
-                        optionalen Konfiguration an diese Ressource an.
-                    </para></entry>
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
+                                    Ein Ressourcen Name oder ein
+                                    <classname>Zend_Application_Resource_Resource</classname>
+                                    Objekt.
+                                </para>
+                            </listitem>
+
+                            <listitem>
+                                <para>
+                                    <varname>$options</varname>: <emphasis>Optional</emphasis>. Ein
+                                    Array oder <classname>Zend_Config</classname> Objekt das an die
+                                    Ressource bei der Instanziierung zu übergeben ist.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>
+                            Registriert eine Ressource mit der Klasse, und bietet die Übergaben
+                            einer optionalen Konfiguration an diese Ressource an.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>unregisterPluginResource($resource)</methodname></entry>
+
                     <entry>
                         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>
                     </entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
-                            Name der Ressource die von der Klasse de-registriert werden soll.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Entfernt eine Plugin Ressource von der Klasse.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
+                                    Name der Ressource die von der Klasse de-registriert werden
+                                    soll.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry><para>Entfernt eine Plugin Ressource von der Klasse.</para></entry>
                 </row>
 
                 <row>
                     <entry><methodname>hasPluginResource($resource)</methodname></entry>
                     <entry><type>Boolean</type></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
-                            Name der Ressource.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Erkennt ob eine spezifische Ressource in der Klasse registriert wurde.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
+                                    Name der Ressource.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>
+                            Erkennt ob eine spezifische Ressource in der Klasse registriert wurde.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>getPluginResource($resource)</methodname></entry>
                     <entry><classname>Zend_Application_Resource_Resource</classname></entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
-                            Name einer Ressource die empfangen werden soll (String).
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Empfängt die Instanz einer Plugin Ressource durch Ihren Namen.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$resource</varname>: <emphasis>Benötigt</emphasis>.
+                                    Name einer Ressource die empfangen werden soll (String).
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>
+                            Empfängt die Instanz einer Plugin Ressource durch Ihren Namen.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>getPluginResourceNames()</methodname></entry>
                     <entry><type>Array</type></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Empfängt eine Liste aller registrierten Plugin Ressource Namen.
-                    </para></entry>
+
+                    <entry>
+                        <para>Empfängt eine Liste aller registrierten Plugin Ressource Namen.</para>
+                    </entry>
                 </row>
 
                 <row>
@@ -115,29 +152,36 @@
                         <methodname>setPluginLoader(Zend_Loader_PluginLoader_Interface
                             $loader)</methodname>
                     </entry>
+
                     <entry>
                         <classname>Zend_Application_Bootstrap_ResourceBootstrapper</classname>
                     </entry>
-                    <entry><itemizedlist>
-                        <listitem><para>
-                            <varname>$loader</varname>: <emphasis>Benötigt</emphasis>.
-                            Instanz des Plugin Loaders der verwendet werden soll wenn Plugin Namen
-                            auf Klassen umgewandelt werden.
-                        </para></listitem>
-                    </itemizedlist></entry>
-                    <entry><para>
-                        Registriert eine Instanz eines Plugin Loaders die zu verwenden ist wenn die
-                        Klassennamen eines Plugins aufgelöst werden sollen.
-                    </para></entry>
+
+                    <entry>
+                        <itemizedlist>
+                            <listitem>
+                                <para>
+                                    <varname>$loader</varname>: <emphasis>Benötigt</emphasis>.
+                                    Instanz des Plugin Loaders der verwendet werden soll wenn Plugin
+                                    Namen auf Klassen umgewandelt werden.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </entry>
+
+                    <entry>
+                        <para>
+                            Registriert eine Instanz eines Plugin Loaders die zu verwenden ist wenn
+                            die Klassennamen eines Plugins aufgelöst werden sollen.
+                        </para>
+                    </entry>
                 </row>
 
                 <row>
                     <entry><methodname>getPluginLoader()</methodname></entry>
                     <entry><classname>Zend_Loader_PluginLoader_Interface</classname></entry>
                     <entry>N/A</entry>
-                    <entry><para>
-                        Empfängt den registrierten Plugin Loader.
-                    </para></entry>
+                    <entry><para>Empfängt den registrierten Plugin Loader.</para></entry>
                 </row>
             </tbody>
         </tgroup>

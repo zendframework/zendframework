@@ -5641,6 +5641,18 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(6, $date->getFractionalPrecision());
         $this->assertEquals('345200', $date->toString('S'));
     }
+
+    /**
+     * @ZF-9085
+     */
+    public function testGettingMonthWhenUsingGNU()
+    {
+        Zend_Date::setOptions(array('format_type' => 'php'));
+        $date = new Zend_Date(array('day' => 1, 'month' => 4, 'year' => 2008));
+        $date2  = $date->getMonth();
+        $result = $date2->toArray();
+        $this->assertEquals(1970, $result['year']);
+    }
 }
 
 class Zend_Date_TestHelper extends Zend_Date

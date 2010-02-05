@@ -2743,7 +2743,13 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getTime($locale = null)
     {
-        return $this->copyPart(self::TIME_MEDIUM, $locale);
+        if (self::$_options['format_type'] == 'php') {
+            $format = 'H:i:s';
+        } else {
+            $format = self::TIME_MEDIUM;
+        }
+
+        return $this->copyPart($format, $locale);
     }
 
     /**
@@ -2882,8 +2888,15 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getDate($locale = null)
     {
+        $orig = self::$_options['format_type'];
+        if (self::$_options['format_type'] == 'php') {
+            self::$_options['format_type'] = 'iso';
+        }
+
         $date = $this->copyPart(self::DATE_MEDIUM, $locale);
         $date->addTimestamp($this->getGmtOffset());
+        self::$_options['format_type'] = $orig;
+
         return $date;
     }
 
@@ -3111,7 +3124,13 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getArpa($locale = null)
     {
-        return $this->toString(self::RFC_822, 'iso', $locale);
+        if (self::$_options['format_type'] == 'php') {
+            $format = 'D\, d M y H\:i\:s O';
+        } else {
+            $format = self::RFC_822;
+        }
+
+        return $this->toString($format, 'iso', $locale);
     }
 
 
@@ -3488,7 +3507,13 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getYear($locale = null)
     {
-        return $this->copyPart(self::YEAR, $locale);
+        if (self::$_options['format_type'] == 'php') {
+            $format = 'Y';
+        } else {
+            $format = self::YEAR;
+        }
+
+        return $this->copyPart($format, $locale);
     }
 
 
@@ -3574,7 +3599,13 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getMonth($locale = null)
     {
-        return $this->copyPart(self::MONTH, $locale);
+        if (self::$_options['format_type'] == 'php') {
+            $format = 'm';
+        } else {
+            $format = self::MONTH;
+        }
+
+        return $this->copyPart($format, $locale);
     }
 
 
@@ -3873,7 +3904,13 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getWeekday($locale = null)
     {
-        return $this->copyPart(self::WEEKDAY, $locale);
+        if (self::$_options['format_type'] == 'php') {
+            $format = 'l';
+        } else {
+            $format = self::WEEKDAY;
+        }
+
+        return $this->copyPart($format, $locale);
     }
 
 
@@ -4018,7 +4055,13 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getDayOfYear($locale = null)
     {
-        return $this->copyPart(self::DAY_OF_YEAR, $locale);
+        if (self::$_options['format_type'] == 'php') {
+            $format = 'D';
+        } else {
+            $format = self::DAY_OF_YEAR;
+        }
+
+        return $this->copyPart($format, $locale);
     }
 
 
@@ -4178,7 +4221,13 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getMinute($locale = null)
     {
-        return $this->copyPart(self::MINUTE, $locale);
+        if (self::$_options['format_type'] == 'php') {
+            $format = 'i';
+        } else {
+            $format = self::MINUTE;
+        }
+
+        return $this->copyPart($format, $locale);
     }
 
 
@@ -4258,7 +4307,13 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getSecond($locale = null)
     {
-        return $this->copyPart(self::SECOND, $locale);
+        if (self::$_options['format_type'] == 'php') {
+            $format = 's';
+        } else {
+            $format = self::SECOND;
+        }
+
+        return $this->copyPart($format, $locale);
     }
 
 
@@ -4537,7 +4592,13 @@ class Zend_Date extends Zend_Date_DateObject
      */
     public function getWeek($locale = null)
     {
-        return $this->copyPart(self::WEEK, $locale);
+        if (self::$_options['format_type'] == 'php') {
+            $format = 'W';
+        } else {
+            $format = self::WEEK;
+        }
+
+        return $this->copyPart($format, $locale);
     }
 
     /**

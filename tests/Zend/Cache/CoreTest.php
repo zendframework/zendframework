@@ -86,6 +86,17 @@ class Zend_Cache_CoreTest extends PHPUnit_Framework_TestCase
         $test->setConfig($config);
         $this->assertEquals(3600, $test->getOption('lifetime'));
     }
+    
+    /**
+     * @group ZF-9092
+     */
+    public function testSettingLifetimeAsEmptyIsInterpretedAsNull()
+    {
+        $config = new Zend_Config(array('lifetime' => '', 'caching' => true));
+        $test = new Zend_Cache_Core();
+        $test->setConfig($config);
+        $this->assertSame(NULL, $test->getOption('lifetime'));
+    }
 
     public function testConstructorBadOption()
     {

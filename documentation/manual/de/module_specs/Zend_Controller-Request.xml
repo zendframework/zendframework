@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17597 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.request">
     <title>Das Request Objekt</title>
+
     <sect2 id="zend.controller.request.introduction">
         <title>Einführung</title>
+
         <para>
             Das Request Objekt ist eine einfaches Wertobjekt, das zwischen
             <classname>Zend_Controller_Front</classname> und den Router, Dispatcher und Controller
@@ -15,26 +17,37 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Auf den Modul Namen kann über <methodname>getModuleName()</methodname> und
-                <methodname>setModuleName()</methodname> zugegriffen werden.
-            </para></listitem>
-            <listitem><para>
-                Auf den Controller Namen kann über <methodname>getControllerName()</methodname> und
-                <methodname>setControllerName()</methodname> zugegriffen werden.
-            </para></listitem>
-            <listitem><para>
-                Auf den Namen der Aktion, die in diesem Controller aufgerufen wird, kann über
-                accessed by <methodname>getActionName()</methodname> und
-                <methodname>setActionName()</methodname> zugegriffen werden.
-            </para></listitem>
-            <listitem><para>
-                Parameter, die von der Aktion ansprechbar sind, bestehen aus einem assoziativen
-                Array mit Schlüssel und Werte Paaren, auf die komplett per
-                <methodname>getParams()</methodname> und <methodname>setParams()</methodname> oder
-                einzeln per <methodname>getParam()</methodname> und
-                <methodname>setParam()</methodname> zugegriffen werden kann.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Auf den Modul Namen kann über <methodname>getModuleName()</methodname> und
+                    <methodname>setModuleName()</methodname> zugegriffen werden.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Auf den Controller Namen kann über <methodname>getControllerName()</methodname>
+                    und <methodname>setControllerName()</methodname> zugegriffen werden.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Auf den Namen der Aktion, die in diesem Controller aufgerufen wird, kann über
+                    accessed by <methodname>getActionName()</methodname> und
+                    <methodname>setActionName()</methodname> zugegriffen werden.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    Parameter, die von der Aktion ansprechbar sind, bestehen aus einem assoziativen
+                    Array mit Schlüssel und Werte Paaren, auf die komplett per
+                    <methodname>getParams()</methodname> und <methodname>setParams()</methodname>
+                    oder einzeln per <methodname>getParam()</methodname> und
+                    <methodname>setParam()</methodname> zugegriffen werden kann.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -80,6 +93,7 @@
 
             <note>
                 <title>Superglobale Daten</title>
+
                 <para>
                     Beim Zugriff auf superglobale Daten über die öffentlichen Eigenschaften von
                     <classname>Zend_Controller_Request_Http</classname> ist es notwendig, darauf zu
@@ -103,6 +117,7 @@
 
             <note>
                 <title>GET und POST Daten</title>
+
                 <para>
                     Vorsicht wenn auf Daten von einem Anfrage Objekt zugegriffen wird da diese in
                     keiner Weise gefiltert werden. Der Router und Dispatcher prüfen und filtern
@@ -164,6 +179,7 @@
 
             <note>
                 <title>Apache Quirks</title>
+
                 <para>
                     Wenn Apache's 404 Handler verwendet wird um eingehende Anfragen an den Front
                     Controller zu übergeben, oder ein PT Flag mit Rewrite Regeln verwendet wird,
@@ -211,6 +227,7 @@ $front->setRequest($request);
 
             <note>
                 <title>URL Erkennung beachtet Groß- und Kleinschreibung</title>
+
                 <para>
                     Die automatische Erkennung der Basis <acronym>URL</acronym> beachtet die Groß-
                     und Kleinschreibung, weshalb man sicherstellen sollte, dass die
@@ -240,7 +257,6 @@ $controller->setControllerDirectory('./application/controllers')
            ->setBaseUrl('/projects/myapp'); // Setze die Basis URL!
 $response   = $controller->dispatch();
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.controller.request.http.method">
@@ -291,6 +307,7 @@ $response   = $controller->dispatch();
                         Prototype und Scriptaculous (und von Prototype abgeleitete Bibliotheken)
                     </para>
                 </listitem>
+
                 <listitem><para>Yahoo! UI Library</para></listitem>
                 <listitem><para>jQuery</para></listitem>
                 <listitem><para>MochiKit</para></listitem>
@@ -416,6 +433,3 @@ abstract class Zend_Controller_Request_Abstract
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

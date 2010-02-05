@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16705 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.quickstart">
     <title>Zend_Controller Schnellstart</title>
@@ -61,7 +61,6 @@ html/
     .htaccess
     index.php
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.controller.quickstart.go.docroot">
@@ -335,12 +334,9 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             </para>
 
             <itemizedlist>
-                <listitem>
-                    <para><filename>http://example.com/</filename></para>
-                </listitem>
-                <listitem>
-                    <para><filename>http://example.com/index</filename></para>
-                </listitem>
+                <listitem><para><filename>http://example.com/</filename></para></listitem>
+                <listitem><para><filename>http://example.com/index</filename></para></listitem>
+
                 <listitem>
                     <para><filename>http://example.com/index/index</filename></para>
                 </listitem>
@@ -353,6 +349,3 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

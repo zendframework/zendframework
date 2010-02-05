@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18940 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.router" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Der Standard Router</title>
+
     <sect2 id="zend.controller.router.introduction">
         <title>Einführung</title>
+
         <para>
             <classname>Zend_Controller_Router_Rewrite</classname> ist der Standard Router des
             Frameworks. Routing ist der Prozess der Übernahme und Zerteilung einer
@@ -57,6 +59,7 @@ RewriteRule ^[\w/\%]*(?:\.(?!(?:js|ico|gif|jpg|png|css|html)$)[\w\%]*$)? /index.
 
         <note>
             <title>IIS Isapi_Rewrite</title>
+
             <para>
                 Bei Verwendung von <acronym>IIS</acronym>, wird
                 <varname>$_SERVER['REQUEST_URI']</varname> entweder nicht vorhanden oder auf einen
@@ -162,30 +165,35 @@ $router->addRoute('user',
                         linkend="zend.controller.router.routes.standard">Zend_Controller_Router_Route</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.static">Zend_Controller_Router_Route_Static</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.regex">Zend_Controller_Router_Route_Regex</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.hostname">Zend_Controller_Router_Route_Hostname</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
                         linkend="zend.controller.router.routes.chain">Zend_Controller_Router_Route_Chain</link>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link
@@ -245,6 +253,7 @@ $router->addRoute('user',
 
         <note>
             <title>Umgekehrter Vergleich</title>
+
             <para>
                 Routen werden in umgekehrter Reihenfolge verglichen. Deswegen muß sichergestellt
                 werden das die generellen Routen zuerst definiert werden.
@@ -253,6 +262,7 @@ $router->addRoute('user',
 
         <note>
             <title>Zurückgegebene Werte</title>
+
             <para>
                 Werte die vom Routen zurückgegeben werden kommen von <acronym>URL</acronym>
                 Parametern oder Benutzerdefinierten Router Standards. Diese Variablen sind später
@@ -270,6 +280,7 @@ $router->addRoute('user',
 
         <note>
             <title>Spezielle Variablen</title>
+
             <para>
                 Die Namen dieser speziellen Variablen kann unterschiedlich sein wenn entschieden
                 wird die Standards in <classname>Zend_Controller_Request_Http</classname> mithilfe
@@ -277,7 +288,6 @@ $router->addRoute('user',
                 <methodname>setActionKey()</methodname> Methode zu Ändern.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.controller.router.default-routes">
@@ -360,7 +370,6 @@ $this->addRoute('default', $compat);
 // Löschen aller Standard Routen
 $router->removeDefaultRoutes();
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.controller.router.rewritebase">
@@ -386,7 +395,6 @@ $router->removeDefaultRoutes();
         <programlisting language="php"><![CDATA[
 $request->setBaseUrl('/~user/application-root/');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.controller.router.global.parameters">
@@ -517,6 +525,3 @@ interface Zend_Controller_Router_Interface
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

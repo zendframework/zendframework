@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16705 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.controller.modular">
     <title>Eine konventionelle modulare Verzeichnis Struktur verwenden</title>
 
     <sect2 id="zend.controller.modular.introduction">
         <title>Einführung</title>
+
         <para>
             Eine konventionelle modulare Verzeichnisstruktur erlaubt es verschiedene
             <acronym>MVC</acronym> Anwendungen in selbst-enthaltene Einheiten zu teilen, und diese
@@ -63,6 +64,7 @@ application/
 
         <note>
             <title>Keine Verwendung von Namensräumen im Standard Modul</title>
+
             <para>
                 Es ist zu beachten das Controller, im Standardmodul, keinen Prefix für den
                 Namensraum benötigen. Deshalb benötigt der Controller, im obigen Beispiel, den
@@ -169,11 +171,13 @@ $front->setModuleControllerDirectoryName('con');
 $front->addModuleDirectory('/path/to/application/modules');
 ]]></programlisting>
 
-        <note><para>
-            Man kann angeben das kein Controller Unterverzeichnis für die eigenen Module verwendet
-            wird, indem ein leerer Wert an
-            <methodname>setModuleControllerDirectoryName()</methodname> übergeben wird.
-        </para></note>
+        <note>
+            <para>
+                Man kann angeben das kein Controller Unterverzeichnis für die eigenen Module
+                verwendet wird, indem ein leerer Wert an
+                <methodname>setModuleControllerDirectoryName()</methodname> übergeben wird.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.controller.modular.router">
@@ -221,6 +225,3 @@ $front->setParam('useDefaultControllerAlways', true);
 ]]></programlisting>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

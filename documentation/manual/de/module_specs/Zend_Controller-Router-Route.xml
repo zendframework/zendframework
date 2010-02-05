@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17592 -->
+<!-- EN-Revision: 20765 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.controller.router.routes.standard">
     <title>Zend_Controller_Router_Route</title>
@@ -43,6 +43,7 @@ $router->addRoute('user', $route);
 
     <note>
         <title>Zeichen verwenden</title>
+
         <para>
             Die aktuelle Implementation erlaubt die Verwendung von allen Zeichen (außer einem
             Schrägstrich) als variablen Identifikator, aber es wird dringend empfohlen das nur
@@ -154,7 +155,6 @@ $router->addRoute('archive', $route);
             Diese Route führt dazu das an die Methode <methodname>showAction()</methodname> der
             Klasse <classname>ArchiveController</classname> weitergeleitet wird.
         </para>
-
     </sect4>
 
     <sect4 id="zend.controller.router.routes.standard.variable-requirements">
@@ -203,6 +203,7 @@ $router->addRoute('archive', $route);
                     In die Registry mit dem Schlüssel <classname>Zend_Translate</classname> geben.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Über die statische Methode
@@ -210,6 +211,7 @@ $router->addRoute('archive', $route);
                     setzen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Als vierten Parameter im Constructor übergeben.
@@ -230,6 +232,7 @@ $router->addRoute('archive', $route);
                     In die Registry mit dem Schlüssel <classname>Zend_Locale</classname> geben.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Über die statische Methode
@@ -237,11 +240,13 @@ $router->addRoute('archive', $route);
                     setzen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Als fünften Parameter im Constructor übergeben.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Als <command>@locale</command> Parameter der assemble Methode übergeben.
@@ -261,6 +266,7 @@ $router->addRoute('archive', $route);
 
         <note>
             <title>Nachrichten IDs und eigene Sprachdateien</title>
+
             <para>
                 Normalerweise werden Nachrichten IDs die man in einer seiner Routen verwenden will,
                 bereits in einem View Skript oder irgendwo anders verwendet. Um die komplette
@@ -361,8 +367,4 @@ $route->assemble(array('mode' => 'month', 'value' => '5'));
 $route->assemble(array('mode' => 'month', 'value' => '5', '@locale' => 'de'));
 ]]></programlisting>
     </sect4>
-
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

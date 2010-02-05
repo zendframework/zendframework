@@ -9,13 +9,13 @@
     </para>
 
     <sect2 id="zend.markup.renderers.add">
-        <title>Adding your own tags</title>
+        <title>Adding your own markups</title>
 
         <para>
-            By adding your own tags, you can add your own functionality to the
-            <classname>Zend_Markup</classname> renderers. With the tag structure, you can add about
-            any functionality you want. From simple tags, to complicated tag structures. A simple
-            example for a 'foo' tag:
+            By adding your own markups, you can add your own functionality to the
+            <classname>Zend_Markup</classname> renderers. With the markup structure, you can add about
+            any functionality you want. From simple markups, to complicated markup structures. A simple
+            example for a 'foo' markup:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -23,12 +23,12 @@
 // with Zend_Markup_Parser_BbCode as its parser
 $bbcode = Zend_Markup::factory('Bbcode');
 
-// this will create a simple 'foo' tag
-// The first parameter defines the tag's name.
-// The second parameter takes an integer that defines the tags type.
+// this will create a simple 'foo' markup
+// The first parameter defines the markup's name.
+// The second parameter takes an integer that defines the markups type.
 // The third parameter is an array that defines other things about a
-// tag, like the tag's group, and (in this case) a start and end tag.
-$bbcode->addTag(
+// markup, like the markup's group, and (in this case) a start and end markup.
+$bbcode->addMarkup(
     'foo',
     Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
     array(
@@ -38,29 +38,29 @@ $bbcode->addTag(
     )
 );
 
-// now, this will output: 'my -bar-tag-baz-'
-echo $bbcode->render('my [foo]tag[/foo]');
+// now, this will output: 'my -bar-markup-baz-'
+echo $bbcode->render('my [foo]markup[/foo]');
 ]]></programlisting>
 
         <para>
-            Please note that creating your own tags only makes sense when your parser also supports
-            it with a tag structure. Currently, only BBCode supports this. Textile doesn't have
-            support for custom tags.
+            Please note that creating your own markups only makes sense when your parser also supports
+            it with a markup structure. Currently, only BBCode supports this. Textile doesn't have
+            support for custom markups.
         </para>
 
         <para>
             Some renderers (like the HTML renderer) also have support for a
-            'tag' parameter. This replaces the 'start' and 'end' parameters, and
-            it renders the tags including some default attributes and the
-            closing tag.
+            'markup' parameter. This replaces the 'start' and 'end' parameters, and
+            it renders the markups including some default attributes and the
+            closing markup.
         </para>
 
         <sect3 id="zend.markup.renderers.add.callback">
-            <title>Add a callback tag</title>
+            <title>Add a callback markup</title>
 
             <para>
-                By adding a callback tag, you can do a lot more then just a
-                simple replace of the tags. For instance, you can change the
+                By adding a callback markup, you can do a lot more then just a
+                simple replace of the markups. For instance, you can change the
                 contents, use the parameters to influence the output etc.
             </para>
 
@@ -83,7 +83,7 @@ class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterI
 ]]></programlisting>
 
             <para>
-                Now you can add the 'upper' tag, with as callback, an instance
+                Now you can add the 'upper' markup, with as callback, an instance
                 of the <classname>My_Markup_Renderer_Html_Upper</classname>
                 class. A simple example:
             </para>
@@ -93,12 +93,12 @@ class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterI
 // with Zend_Markup_Parser_BbCode as its parser
 $bbcode = Zend_Markup::factory('Bbcode');
 
-// this will create a simple 'foo' tag
-// The first parameter defines the tag's name.
-// The second parameter takes an integer that defines the tags type.
+// this will create a simple 'foo' markup
+// The first parameter defines the markup's name.
+// The second parameter takes an integer that defines the markups type.
 // The third parameter is an array that defines other things about a
-// tag, like the tag's group, and (in this case) a start and end tag.
-$bbcode->addTag(
+// markup, like the markup's group, and (in this case) a start and end markup.
+$bbcode->addMarkup(
     'upper',
     Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
     array(
@@ -107,17 +107,17 @@ $bbcode->addTag(
     )
 );
 
-// now, this will output: 'my !up!TAG!up!'
-echo $bbcode->render('my [upper]tag[/upper]');
+// now, this will output: 'my !up!MARKUP!up!'
+echo $bbcode->render('my [upper]markup[/upper]');
 ]]></programlisting>
         </sect3>
     </sect2>
 
     <sect2 id="zend.markup.renderers.list">
-        <title>List of tags</title>
+        <title>List of markups</title>
 
-        <table id="zend.markup.renderers.list.tags">
-            <title>List of tags</title>
+        <table id="zend.markup.renderers.list.markups">
+            <title>List of markups</title>
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
                 <thead>

@@ -56,7 +56,7 @@ echo 'Container name is: ' . $result->Name;
             <example id="zend.service.windowsazure.storage.blob.api.delete-container.example">
                 <title>Deleting a storage container</title>
 
-                <programlisting role="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Blob();
 $storageClient->deleteContainer('testcontainer');
 ]]></programlisting>

@@ -716,7 +716,7 @@ $sessionHandler->register();
         <example id="zend.service.windowsazure.storage.table.api.sessionhandler-usage">
             <title>Using table storage session handler</title>
 
-            <programlisting role="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 $storageClient = new Zend_Service_WindowsAzure_Storage_Table(
     'table.core.windows.net', 'myaccount', 'myauthkey'
 );

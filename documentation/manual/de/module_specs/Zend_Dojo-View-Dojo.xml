@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20143 -->
+<!-- EN-Revision: 20766 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.view.dojo">
     <title>dojo() View Helfer</title>
@@ -13,18 +13,11 @@
         <listitem>
             <para>Spezifizieren eines CDN oder lokalen Pfades zu einer Dojo Installation.</para>
         </listitem>
-        <listitem>
-            <para>Spezifizieren von Pfaden zu eigenen Dojo Modulen.</para>
-        </listitem>
-        <listitem>
-            <para>Spezifizieren von dojo.require Statements.</para>
-        </listitem>
-        <listitem>
-            <para>Spezifizieren von Dijit Stylesheet Themen zur Verwendung.</para>
-        </listitem>
-        <listitem>
-            <para>Spezifizieren von dojo.addOnLoad() Events.</para>
-        </listitem>
+
+        <listitem><para>Spezifizieren von Pfaden zu eigenen Dojo Modulen.</para></listitem>
+        <listitem><para>Spezifizieren von dojo.require Statements.</para></listitem>
+        <listitem><para>Spezifizieren von Dijit Stylesheet Themen zur Verwendung.</para></listitem>
+        <listitem><para>Spezifizieren von dojo.addOnLoad() Events.</para></listitem>
     </itemizedlist>
 
     <para>
@@ -303,7 +296,8 @@ $view->dojo()->addLayer('/js/foo/foo.js');
 
         <para>
             Für weitere Informationen über die Erstellung von eigenen Build, schauen Sie bitte
-            <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">in
+            <ulink
+                url="http://dojotoolkit.org/book/dojo-book-0-9/part-4-meta-dojo/package-system-and-custom-builds">in
                 die Dojo Builddokumentation</ulink>.
         </para>
     </sect3>
@@ -323,6 +317,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     Viewinstanz im Container
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>enable()</methodname>: Die Dojo Integration explizit einschalten.
@@ -331,47 +326,55 @@ $view->dojo()->addLayer('/js/foo/foo.js');
             <listitem>
                 <para><methodname>disable()</methodname>: Die Dojo Integration ausschalten.</para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>isEnabled()</methodname>: Ermitteln ob die Dojo Integration
                     eingeschaltet ist oder nicht.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>requireModule($module)</methodname>: Ein
                     <property>dojo.require</property> Statement konfigurieren.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getModules()</methodname>: Erkennen welche Module benötigt werden.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>registerModulePath($module, $path)</methodname>: Einen Dojo
                     Modulpfad registrieren.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getModulePaths()</methodname>: Eine Liste von registrierten
                     Modulpfaden erhalten.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>addLayer($path)</methodname>: Einen Layerpfad (eigenen Build) für
                     die Verwendung hinzufügen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getLayers()</methodname>: Eine Liste von allen registrierten
                     Layerpfaden (eigene Builds) erhalten.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>removeLayer($path)</methodname>: Den Layer der
@@ -379,6 +382,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     (eigene Builds) entfernen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setCdnBase($url)</methodname>: Den Basis <acronym>URL</acronym> für
@@ -388,23 +392,27 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     <acronym>URL</acronym> String vor der Versionsnummer benötigt.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getCdnBase()</methodname>: Den Basis CDN URL empfangen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setCdnVersion($version = null)</methodname>: Setzen selche Version
                     von Dojo vom CDN verwendet wird.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getCdnVersion()</methodname>: Die Dojo Version vom CDN erhalten die
                     verwendet wird.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setCdnDojoPath($path)</methodname>: Setzt den relativen Pfad zur
@@ -414,18 +422,21 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     Pfadstring nach der Versionsnummer benötigt.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getCdnDojoPath()</methodname>: Das letzte Pfadsegment der CDN URL
                     erhalten das auf die dojo.js Datei zeigt.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>useCdn()</methodname>: Dem Container mitteilen das CDN verwendet
                     werden soll; aktiviert die Integration implizit.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setLocalPath($path)</methodname>: Dem Container den Pfad zu einer
@@ -433,6 +444,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     und die dojo.js Datei selbst enthalten); aktiviert die Integration implizit.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getLocalPath()</methodname>: Erkennen welches lokale Pfad zu Dojo
@@ -440,60 +452,70 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     wird.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>useLocalPath()</methodname>: Verwendet die Integration einen
                     lokalen Dojopfad?
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setDjConfig(array $config)</methodname>: Setzt Dojo/Dijit
                     Konfigurationswerte (erwartet ein assoziatives Array).
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setDjConfigOption($option, $value)</methodname>: Setzt einen
                     einzelnen Dojo/Dijit Konfigurationswert.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getDjConfig()</methodname>: Retourniert alle Dojo/Dijit
                     Konfigurationswerte.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getDjConfigOption($option, $default = null)</methodname>:
                     Retourniert einen einzelnen Dojo/Dijit Konfigurationswert.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>addStylesheetModule($module)</methodname>: Fügt ein Stylesheet
                     hinzu basierend auf einem Modulthema.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getStylesheetModules()</methodname>: Retourniert die als Modulthema
                     registrierten Modulthemen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>addStylesheet($path)</methodname>: Fügt einen lokalen Stylesheet
                     zur Verwendung mit Dojo hinzu.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getStylesheets()</methodname>: Retourniert die lokalen Dojo
                     Stylesheets.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>addOnLoad($spec, $function = null)</methodname>: Fügt ein Lambda
@@ -504,6 +526,7 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     Objekt oder ein Abschluß um dieses Objekt zu verwenden.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>prependOnLoad($spec, $function = null)</methodname>: genau wie
@@ -511,12 +534,14 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     Stacks angefügt wird.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>getOnLoadActions()</methodname>: Gibt alle im Container
                     registrierten dojo.onLoad Aktionen zurück. Das ist ein Array von Arrays.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>onLoadCaptureStart($obj = null)</methodname>: Empfange Daten die
@@ -525,24 +550,28 @@ $view->dojo()->addLayer('/js/foo/foo.js');
                     Objekt verwendet werden soll.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>onLoadCaptureEnd($obj = null)</methodname>: Beendet das Empfangen
                     von Daten für die Verwendung mit dojo.onLoad().
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>javascriptCaptureStart()</methodname>: Empfange Javascript das im
                     Dojo JS inkludiert werden soll (onLoad, require, und andere Anweisungen).
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>javascriptCaptureEnd()</methodname>: Beende das Empfangen von
                     Javascript.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>__toString()</methodname>: Castet den Container zu einem String;
@@ -552,6 +581,3 @@ $view->dojo()->addLayer('/js/foo/foo.js');
         </itemizedlist>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17750 -->
-<!-- Reviewed: 17750 -->
+<!-- EN-Revision: 20766 -->
+<!-- Reviewed: 20766 -->
 <sect1 id="zend.date.additional">
     <title>Funktionierende Beispiele</title>
 
@@ -118,6 +118,7 @@ if (Zend_Date::isDate($date,'dd MMMM yyyy', 'en')) {
 
         <example id="zend.date.additional.sunrise-sunset.example-1">
             <title>Alle verfügbaren Städte ausgeben</title>
+
             <programlisting language="php"><![CDATA[
 // Ausgabe der kompletten Liste aller verfügbaren Städte
 print_r (Zend_Date_Cities::getCityList());
@@ -149,25 +150,30 @@ print_r (Zend_Date_Cities::getCityList());
                         <entry>Verwendung</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>effective</entry>
                         <entry>Standard Horizont</entry>
+
                         <entry>
                             Nimmt an das die Welt ein Ball ist. Dieser Horizont wird immer benutzt
                             wenn keiner definiert wurde.
                         </entry>
                     </row>
+
                     <row>
                         <entry>civil</entry>
                         <entry>Üblicher Horizont</entry>
                         <entry>Oft in den üblichen Medien wie Fernsehen und Radio benutzt.</entry>
                     </row>
+
                     <row>
                         <entry>nautic</entry>
                         <entry>Nautischer Horizont</entry>
                         <entry>Oft in der Navigation zu See benutzt.</entry>
                     </row>
+
                     <row>
                         <entry>astronomic</entry>
                         <entry>Astronomischer Horizont</entry>
@@ -186,6 +192,7 @@ print_r (Zend_Date_Cities::getCityList());
 
         <example id="zend.date.additional.sunrise-sunset.example-2">
             <title>Die Ortsangabe für eine Stadt auslesen</title>
+
             <programlisting language="php"><![CDATA[
 // Die Ortsangabe für eine bestimmte Stadt auslesen
 // Benutzt den effektiven Horizont da kein Horizont angegeben wurde
@@ -213,6 +220,7 @@ $mylocation = array('latitude' => 41.5, 'longitude' => 13.2446);
 
         <example id="zend.date.additional.sunrise-sunset.example-3">
             <title>Berechnung von Sonneninformationen</title>
+
             <programlisting language="php"><![CDATA[
 // Die Ortsangabe einer bestimmten Stadt auslesen
 $city = Zend_Date_Cities::city('Vienna');

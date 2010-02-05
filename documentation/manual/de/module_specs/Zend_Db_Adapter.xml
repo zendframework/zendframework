@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20766 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -291,45 +291,41 @@ $db = Zend_Db::factory($config->database);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis>host</emphasis>:
-                        Ein String der den Hostname oder die Ip-Adresse des Datenbankservers
-                        beinhaltet. Wenn die Datenbank auf dem gleichen Host wie die
-                        <acronym>PHP</acronym> Anwendung läuft wird 'localhost' oder '127.0.0.1'
-                        verwendet.
+                        <emphasis>host</emphasis>: Ein String der den Hostname oder die Ip-Adresse
+                        des Datenbankservers beinhaltet. Wenn die Datenbank auf dem gleichen Host
+                        wie die <acronym>PHP</acronym> Anwendung läuft wird 'localhost' oder
+                        '127.0.0.1' verwendet.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>username</emphasis>:
-                        Konto Kennung zur Authentisierung einer Verbindung zum
-                        <acronym>RDBMS</acronym> Server.
+                        <emphasis>username</emphasis>: Konto Kennung zur Authentisierung einer
+                        Verbindung zum <acronym>RDBMS</acronym> Server.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>password</emphasis>:
-                        Konto Passwort zur Authentisierung einer Verbindung zum
-                        <acronym>RDBMS</acronym> Server.
+                        <emphasis>password</emphasis>: Konto Passwort zur Authentisierung einer
+                        Verbindung zum <acronym>RDBMS</acronym> Server.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>dbname</emphasis>:
-                        Datenbank Name auf dem <acronym>RDBMS</acronym> Server.
+                        <emphasis>dbname</emphasis>: Datenbank Name auf dem <acronym>RDBMS</acronym>
+                        Server.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <emphasis>port</emphasis>:
-                        Einige <acronym>RDBMS</acronym> Server können Netzwerkverbindungen an vom
-                        Administrator spezifizierten Ports akzeptieren. Der Port-Parameter gibt die
-                        Möglichkeit die Portnummer anzugeben, an welche die <acronym>PHP</acronym>
-                        Anwendung verbindet um der Port-Konfiguration des <acronym>RDBMS</acronym>
-                        Servers zu entsprechen.
+                        <emphasis>port</emphasis>: Einige <acronym>RDBMS</acronym> Server können
+                        Netzwerkverbindungen an vom Administrator spezifizierten Ports akzeptieren.
+                        Der Port-Parameter gibt die Möglichkeit die Portnummer anzugeben, an welche
+                        die <acronym>PHP</acronym> Anwendung verbindet um der Port-Konfiguration des
+                        <acronym>RDBMS</acronym> Servers zu entsprechen.
                     </para>
                 </listitem>
 
@@ -342,9 +338,9 @@ $db = Zend_Db::factory($config->database);
 
                 <listitem>
                     <para>
-                        <emphasis>options</emphasis>:
-                        Dieser Parameter ist ein assoziatives Array von Optionen die in allen
-                        <classname>Zend_Db_Adapter</classname> Klassen enthalten sind.
+                        <emphasis>options</emphasis>: Dieser Parameter ist ein assoziatives Array
+                        von Optionen die in allen <classname>Zend_Db_Adapter</classname> Klassen
+                        enthalten sind.
                     </para>
                 </listitem>
 
@@ -359,8 +355,8 @@ $db = Zend_Db::factory($config->database);
 
                 <listitem>
                     <para>
-                        <emphasis>adapterNamespace</emphasis>:
-                        Benennt den führenden Teil des Klassen Namens für den Adapter statt
+                        <emphasis>adapterNamespace</emphasis>: Benennt den führenden Teil des
+                        Klassen Namens für den Adapter statt
                         '<classname>Zend_Db_Adapter</classname>'. Dies kann verwendet werden wenn
                         man die <methodname>factory()</methodname>Methode verwenden muß um eine
                         nicht von Zend kommende Datenbank Adapter Klasse zu laden.
@@ -696,10 +692,9 @@ $result = $db->fetchAll($sql, 2);
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis>Zend_Db::FETCH_ASSOC</emphasis>:
-                        Gibt Daten in einem assoziativem Array zurück. Die Array Schlüssel sind
-                        Strings der Spaltennamen. Dies ist der Standardmodus für
-                        <classname>Zend_Db_Adapter</classname> Klassen.
+                        <emphasis>Zend_Db::FETCH_ASSOC</emphasis>: Gibt Daten in einem assoziativem
+                        Array zurück. Die Array Schlüssel sind Strings der Spaltennamen. Dies ist
+                        der Standardmodus für <classname>Zend_Db_Adapter</classname> Klassen.
                     </para>
 
                     <para>
@@ -1314,7 +1309,8 @@ echo $sql;
                 Zu beachten ist, dass der Rückgabewert von <methodname>quote()</methodname> die
                 Stringwertbegrenzer enthält. Dies ist ein Unterschied zu anderen Methoden die
                 spezielle Zeichen ersetzen, aber keine Stringwertbegrenzer hinzufügen, wie z.B.
-                <ulink url="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</ulink>.
+                <ulink
+                    url="http://www.php.net/mysqli_real_escape_string">mysql_real_escape_string()</ulink>.
             </para>
 
             <para>
@@ -1590,6 +1586,7 @@ try {
 
         <table frame="all" cellpadding="5" id="zend.db.adapter.list-describe.metadata">
             <title>Metadata Felder die von describeTable() zurückgegeben werden</title>
+
             <tgroup cols="3" align="left" colsep="1" rowsep="1">
                 <thead>
                     <row>
@@ -1651,6 +1648,7 @@ try {
                     <row>
                         <entry><constant>LENGTH</constant></entry>
                         <entry>(integer)</entry>
+
                         <entry>
                             Länge oder Größe der Spalte wie vom <acronym>RDBMS</acronym> angegeben.
                         </entry>
@@ -1659,6 +1657,7 @@ try {
                     <row>
                         <entry><constant>SCALE</constant></entry>
                         <entry>(integer)</entry>
+
                         <entry>
                             Scalar vom Typ <acronym>SQL</acronym> NUMERIC oder
                             <constant>DECIMAL</constant>.
@@ -1727,30 +1726,13 @@ try {
             </para>
 
             <itemizedlist>
-                <listitem>
-                    <para>
-                        <constant>IDENTITY</constant> - DB2, MSSQL
-                    </para>
-                </listitem>
+                <listitem><para><constant>IDENTITY</constant> - DB2, MSSQL</para></listitem>
+                <listitem><para><constant>AUTO_INCREMENT</constant> - MySQL</para></listitem>
+                <listitem><para><constant>SERIAL</constant> - PostgreSQL</para></listitem>
 
                 <listitem>
-                    <para>
-                        <constant>AUTO_INCREMENT</constant> - MySQL
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <constant>SERIAL</constant> - PostgreSQL
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <constant>SEQUENCE</constant> - Oracle
-                    </para>
-                </listitem>
-            </itemizedlist>
+                    <para><constant>SEQUENCE</constant> - Oracle</para></listitem>
+                </itemizedlist>
         </note>
 
         <para>
@@ -1935,6 +1917,7 @@ if (!is_null($version)) {
 
         <sect3 id="zend.db.adapter.adapter-notes.sqlsrv">
             <title>Microsoft SQL Server</title>
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -2109,9 +2092,10 @@ if (!is_null($version)) {
                     <para>
                         Standardmäßig werden LOB Felder als OCI-Log Objekte zurückgegeben. Man kann
                         Sie für alle Anfragen als String empfangen indem die Treiberoption
-                        '<property>lob_as_string</property>' verwendet wird, oder für spezielle Anfragen
-                        durch Verwendung von <methodname>setLobAsString(boolean)</methodname> auf
-                        dem Adapter oder dem Statement.
+                        '<property>lob_as_string</property>' verwendet wird, oder für spezielle
+                        Anfragen durch Verwendung von
+                        <methodname>setLobAsString(boolean)</methodname> auf dem Adapter oder dem
+                        Statement.
                     </para>
                 </listitem>
             </itemizedlist>
@@ -2216,6 +2200,7 @@ if (!is_null($version)) {
 
         <sect3 id="zend.db.adapter.adapter-notes.pdo-mysql">
             <title>PDO MySQL</title>
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -2413,6 +2398,3 @@ if (!is_null($version)) {
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

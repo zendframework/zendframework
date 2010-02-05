@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18427 -->
-<!-- Reviewed: 18427 -->
+<!-- EN-Revision: 20766 -->
+<!-- Reviewed: 20766 -->
 <sect1 id="zend.date.creation">
     <title>Erstellen von Datumswerten</title>
 
@@ -124,7 +124,6 @@ $date = new Zend_Date($unixtimestamp, Zend_Date::TIMESTAMP);
 $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.date.creation.array">
@@ -136,41 +135,16 @@ $date = new Zend_Date($datecolumn, Zend_Date::ISO_8601);
         </para>
 
         <itemizedlist mark='opencircle'>
-            <listitem>
-                <para>
-                    <emphasis>day</emphasis>: Tag des Datums als Zahl
-                </para>
-            </listitem>
+            <listitem><para><emphasis>day</emphasis>: Tag des Datums als Zahl</para></listitem>
+            <listitem><para><emphasis>month</emphasis>: Monat des Datums als Zahl</para></listitem>
 
             <listitem>
-                <para>
-                    <emphasis>month</emphasis>: Monat des Datums als Zahl
-                </para>
+                <para><emphasis>year</emphasis>: Vollständiges Jahr des Datums</para>
             </listitem>
 
-            <listitem>
-                <para>
-                    <emphasis>year</emphasis>: Vollständiges Jahr des Datums
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>hour</emphasis>: Stunde des Datums
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>minute</emphasis>: Minute des Datums
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>second</emphasis>: Sekunde des Datums
-                </para>
-            </listitem>
+            <listitem><para><emphasis>hour</emphasis>: Stunde des Datums</para></listitem>
+            <listitem><para><emphasis>minute</emphasis>: Minute des Datums</para></listitem>
+            <listitem><para><emphasis>second</emphasis>: Sekunde des Datums</para></listitem>
         </itemizedlist>
 
         <example id="zend.date.creation.array.example">

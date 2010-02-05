@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 20766 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Dojo View Helfer</title>
@@ -9,11 +9,13 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            <emphasis>dojo():</emphasis> Erstellt die Dojo Umgebung für die eigene Seite, inklusive
-            der Werte für die Dojo Konfiguration, eigene Modulpfade, benötigte Modulstatements,
-            Themenstylesheets, CDN Verwendung, und vieles mehr.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>dojo():</emphasis> Erstellt die Dojo Umgebung für die eigene Seite,
+                inklusive der Werte für die Dojo Konfiguration, eigene Modulpfade, benötigte
+                Modulstatements, Themenstylesheets, CDN Verwendung, und vieles mehr.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.dojo.view.setup">
@@ -43,6 +45,3 @@ Zend_Dojo::enableView($view);
     <xi:include href="Zend_Dojo-View-Dojo.xml" />
     <xi:include href="Zend_Dojo-View-Helpers.xml" />
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

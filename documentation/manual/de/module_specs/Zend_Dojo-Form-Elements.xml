@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20176 -->
+<!-- EN-Revision: 20766 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.dojo.form.elements">
     <title>Dijit-Specifische Fomularelemente</title>
@@ -561,9 +561,9 @@ $form->addElement(
         <para>
             Editor bietet einen WYSIWYG Editor der verwendet werden kann um Rich HTML Inhalte sowohl
             zu erstellen als auch zu bearbeiten. dijit.Editor ist pluggable und kann mit eigenen
-            Plugins erweitert werden wenn das gewünscht ist; siehe
-            <ulink url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">
-                die dijit.Editor Dokumentation</ulink> für weitere Details.
+            Plugins erweitert werden wenn das gewünscht ist; siehe <ulink
+                url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">die
+                dijit.Editor Dokumentation</ulink> für weitere Details.
         </para>
 
         <para>
@@ -724,19 +724,25 @@ $form->addElement(
                     <listitem>
                         <para><methodname>addStyleSheet($styleSheet)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>addStyleSheets(array $styleSheets)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>setStyleSheets(array $styleSheets)</methodname></para>
                     </listitem>
+
                     <listitem><para><methodname>getStyleSheets()</methodname></para></listitem>
+
                     <listitem>
                         <para><methodname>hasStyleSheet($styleSheet)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>removeStyleSheet($styleSheet)</methodname></para>
                     </listitem>
+
                     <listitem>
                         <para><methodname>clearStyleSheets()</methodname></para>
                     </listitem>
@@ -1657,6 +1663,3 @@ $form->addElement(
         </example>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

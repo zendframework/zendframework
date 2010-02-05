@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17598 -->
+<!-- EN-Revision: 20766 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.relationships">
     <title>Zend_Db_Table Relationships</title>
@@ -21,7 +21,6 @@
     </sect2>
 
     <sect2 id="zend.db.table.relationships.defining">
-
         <title>Verknüpfungen definieren</title>
 
         <para>
@@ -103,14 +102,12 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </para>
 
         <note>
-
             <para>
                 Die Deklaration von <varname>$_dependentTables</varname> sollte übergangen werden
                 wenn referentielle Integritätsverknüpfungen im <acronym>RDBMS</acronym> Server
                 verwendet werden um kaskadierende Operationen zu implementieren. Siehe
                 <xref linkend="zend.db.table.relationships.cascading" /> für weitere Informationen.
             </para>
-
         </note>
 
         <para>
@@ -122,12 +119,12 @@ class BugsProducts extends Zend_Db_Table_Abstract
         </para>
 
         <para>
-            Der Schlüssel der Regel ist ein String der als Index zum <varname>$_referenceMap</varname>
-            Array verwendet wird. Dieser Regelschlüssel wird verwendet um jede Referenzen von
-            Abhängigkeiten zu idenzifizieren. Es sollte ein sprechender Name für diesen
-            Regelschlüssel ausgewählt werden. Deshalb ist es das beste einen String zu verwendet
-            welcher Teil eines <acronym>PHP</acronym> Methodennamens sein kann, wie man später
-            sieht.
+            Der Schlüssel der Regel ist ein String der als Index zum
+            <varname>$_referenceMap</varname> Array verwendet wird. Dieser Regelschlüssel wird
+            verwendet um jede Referenzen von Abhängigkeiten zu idenzifizieren. Es sollte ein
+            sprechender Name für diesen Regelschlüssel ausgewählt werden. Deshalb ist es das beste
+            einen String zu verwendet welcher Teil eines <acronym>PHP</acronym> Methodennamens sein
+            kann, wie man später sieht.
         </para>
 
         <para>
@@ -169,8 +166,8 @@ class BugsProducts extends Zend_Db_Table_Abstract
                     gleichen Elterntabelle. In der Beispieldatenbank gibt es eine Referenz von der
                     <code>bugs</code> Tabelle zu der <code>products</code> Tabelle, aber drei
                     Referenzen von der <code>bugs</code> Tabelle zur <code>accounts</code> Tabelle.
-                    Jede Referenz sollte in einen separaten Eintrag im <varname>$_referenceMap</varname>
-                    Array gegeben werden.
+                    Jede Referenz sollte in einen separaten Eintrag im
+                    <varname>$_referenceMap</varname> Array gegeben werden.
                 </para>
             </listitem>
 
@@ -214,11 +211,9 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 </para>
             </listitem>
         </itemizedlist>
-
     </sect2>
 
     <sect2 id="zend.db.table.relationships.fetching.dependent">
-
         <title>Eine abhängige Zeile holen</title>
 
         <para>
@@ -233,18 +228,18 @@ $row->findDependentRowset($table, [$rule]);
 
         <para>
             Diese Methode gibt ein <classname>Zend_Db_Table_Rowset_Abstract</classname> Objekt
-            zurück, welche ein Set von Zeilen der abhängigen Tabelle <varname>$table</varname> enthält die
-            die Zeile referenzieren die durch das <varname>$row</varname> Objekt identifiziert werden.
+            zurück, welche ein Set von Zeilen der abhängigen Tabelle <varname>$table</varname>
+            enthält die die Zeile referenzieren die durch das <varname>$row</varname> Objekt
+            identifiziert werden.
         </para>
 
         <para>
-            Das erste Argument <varname>$table</varname> kann ein String sein, der die abhängige Tabelle
-            durch Ihren Klassennamen spezifiziert. Man kann die abhängige Tabelle auch durch
+            Das erste Argument <varname>$table</varname> kann ein String sein, der die abhängige
+            Tabelle durch Ihren Klassennamen spezifiziert. Man kann die abhängige Tabelle auch durch
             Verwendung eines Objekts dieser Tabellenklasse spezifizieren.
         </para>
 
         <example id="zend.db.table.relationships.fetching.dependent.example">
-
             <title>Eine abhängige Zeile holen</title>
 
             <para>
@@ -260,7 +255,6 @@ $user1234 = $accountsRowset->current();
 
 $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -278,7 +272,6 @@ $bugsReportedByUser = $user1234->findDependentRowset('Bugs');
         </para>
 
         <example id="zend.db.table.relationships.fetching.dependent.example-by">
-
             <title>Eine anhängige Zeile durch eine spezifische Regel erhalten</title>
 
             <para>
@@ -296,7 +289,6 @@ $user1234 = $accountsRowset->current();
 
 $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -305,9 +297,7 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs', 'Engineer');
         </para>
 
         <para>
-
             <example id="zend.db.table.relationships.fetching.dependent.example-by-select">
-
                 <title>
                     Ein anhängiges Zeilenset erhalten indem Zend_Db_Table_Select verwendet wird
                 </title>
@@ -330,7 +320,6 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                                                      'Engineer',
                                                      $select);
 ]]></programlisting>
-
             </example>
 
             Alternativ können Zeilen von einer abhängigen Tabelle abgefragt werden indem ein
@@ -363,7 +352,6 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
         </para>
 
         <note>
-
             <para>
                 Einige Applikationsframeworks, wie Ruby on Rails, verwenden einen Mechanismus der
                 "inflection" genannt wird um die Änderung der Schreibweise von Identifizierern
@@ -372,11 +360,9 @@ $bugsAssignedToUser = $user1234->findDependentRowset('Bugs',
                 Identität der Tabelle und der Regelschlüssel die im Methodenaufruf genannt werden
                 müssen der Schreibweise der Klasse und des Regelschlüssels exakt entsprechen.
             </para>
-
         </note>
 
         <example id="zend.db.table.relationships.fetching.dependent.example-magic">
-
             <title>Holen von abhängigen Zeilen durch Verwendung der magischen Methode</title>
 
             <para>
@@ -396,13 +382,10 @@ $bugsReportedBy = $user1234->findBugs();
 // Eine Referenzregel spezifizieren
 $bugsAssignedTo = $user1234->findBugsByEngineer();
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.db.table.relationships.fetching.parent">
-
         <title>Eine Elternzeile holen</title>
 
         <para>
@@ -422,13 +405,12 @@ $row->findParentRow($table, [$rule]);
         </para>
 
         <para>
-            Das erste Argument <varname>$table</varname> kann ein String sein der die Elterntabelle durch
-            Ihren Klassennamen spezifiziert. Man kann die Elterntabelle auch durch Verwendung eines
-            Objektes dieser Tabellenklasse spezifizieren.
+            Das erste Argument <varname>$table</varname> kann ein String sein der die Elterntabelle
+            durch Ihren Klassennamen spezifiziert. Man kann die Elterntabelle auch durch Verwendung
+            eines Objektes dieser Tabellenklasse spezifizieren.
         </para>
 
         <example id="zend.db.table.relationships.fetching.parent.example">
-
             <title>Eine Elternzeile holen</title>
 
             <para>
@@ -445,7 +427,6 @@ $bug1 = $bugsRowset->current();
 
 $reporter = $bug1->findParentRow('Accounts');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -463,7 +444,6 @@ $reporter = $bug1->findParentRow('Accounts');
         </para>
 
         <example id="zend.db.table.relationships.fetching.parent.example-by">
-
             <title>Eine Elternzeile durch eine spezifizierte Regel holen</title>
 
             <para>
@@ -480,7 +460,6 @@ $bug1 = $bugsRowset->current();
 
 $engineer = $bug1->findParentRow('Accounts', 'Engineer');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -515,17 +494,14 @@ $engineer = $bug1->findParentRow('Accounts', 'Engineer');
         </para>
 
         <note>
-
             <para>
                 Die Identität der Tabelle und des Regelschlüssels die im Aufruf der Methode genannt
                 werden, müssen der Schreibweise der Klasse und des Regelschlüssels exakt
                 entsprechen.
             </para>
-
         </note>
 
         <example id="zend.db.table.relationships.fetching.parent.example-magic">
-
             <title>Die Elternzeile durch verwenden der magischen Methode holen</title>
 
             <para>
@@ -545,13 +521,10 @@ $reporter = $bug1->findParentAccounts();
 // Die Referenzregel spezifizieren
 $engineer = $bug1->findParentAccountsByEngineer();
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.db.table.relationships.fetching.many-to-many">
-
         <title>Ein Zeilenset über eine Viele-zu-Viele Verknüpfung holen</title>
 
         <para>
@@ -575,14 +548,14 @@ $row->findManyToManyRowset($table,
         <para>
             Diese Methode gibt ein <classname>Zend_Db_Table_Rowset_Abstract</classname> zurück
             welches Zeilen von der Tabelle <varname>$table</varname> enthält, und der Viele-Zu-Viele
-            Abhängigkeit entspricht. Das aktuelle Zeilenobjekt <varname>$row</varname> von der originalen
-            Tabelle wird verwendet um Zeilen in der Verknüpfungstabelle zu finden, und es ist mit
-            der Zieltabelle verbunden.
+            Abhängigkeit entspricht. Das aktuelle Zeilenobjekt <varname>$row</varname> von der
+            originalen Tabelle wird verwendet um Zeilen in der Verknüpfungstabelle zu finden, und es
+            ist mit der Zieltabelle verbunden.
         </para>
 
         <para>
-            Das erste Argument <varname>$table</varname> kann ein String sein der die Zieltabelle in der
-            Viele-Zu-Viele Verknüpfung durch seinen Klassennamen spezifiziert. Es kann auch die
+            Das erste Argument <varname>$table</varname> kann ein String sein der die Zieltabelle in
+            der Viele-Zu-Viele Verknüpfung durch seinen Klassennamen spezifiziert. Es kann auch die
             Zieltabelle durch Verwendung eines Objekts dieser Tabellenklasse spezifiziert werden.
         </para>
 
@@ -594,7 +567,6 @@ $row->findManyToManyRowset($table,
         </para>
 
         <example id="zend.db.table.relationships.fetching.many-to-many.example">
-
             <title>Ein Zeilenset mit einer Viele-Zu-Viele Methode holen</title>
 
             <para>
@@ -612,13 +584,12 @@ $bug1234 = $bugsRowset->current();
 $productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts');
 ]]></programlisting>
-
         </example>
 
         <para>
-            Das dritte und vierte Argument <varname>$rule1</varname> und <varname>$rule2</varname> sind
-            optional. Das sind Strings die den Regelschlüssel im <varname>$_referenceMap</varname> Array
-            der verknüpfungstabelle benennen.
+            Das dritte und vierte Argument <varname>$rule1</varname> und <varname>$rule2</varname>
+            sind optional. Das sind Strings die den Regelschlüssel im
+            <varname>$_referenceMap</varname> Array der verknüpfungstabelle benennen.
         </para>
 
         <para>
@@ -636,9 +607,9 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <para>
             Ähnlich den Methoden für das finden von Eltern- und abhängigen Zeilen verwendet die
             Methode, wenn keine Regel spezifiziert wird, die erste Regel im
-            <varname>$_referenceMap</varname> Array das den Tabellen in der Verknüpfung entspricht. Wenn
-            eine andere Regel als die erste verwendet werden soll, muß der Schlüssel spezifiziert
-            werden.
+            <varname>$_referenceMap</varname> Array das den Tabellen in der Verknüpfung entspricht.
+            Wenn eine andere Regel als die erste verwendet werden soll, muß der Schlüssel
+            spezifiziert werden.
         </para>
 
         <para>
@@ -648,7 +619,6 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         </para>
 
         <example id="zend.db.table.relationships.fetching.many-to-many.example-by">
-
             <title>
                 Ein Zeilenset mit einer Viele-Zu-Viele Methode durch eine spezielle Regel holen
             </title>
@@ -668,7 +638,6 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
                                                  'BugsProducts',
                                                  'Bug');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -683,22 +652,19 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         <itemizedlist>
             <listitem>
                 <para>
-                    <code>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;(
-                    [Zend_Db_Table_Select $select])</code>
+                    <code>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;([Zend_Db_Table_Select $select])</code>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;(
-                    [Zend_Db_Table_Select $select])</code>
+                    <code>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;([Zend_Db_Table_Select $select])</code>
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    <code>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;And&lt;Regel2&gt;(
-                    [Zend_Db_Table_Select $select])</code>
+                    <code>$row->find&lt;TabellenKlasse&gt;Via&lt;VerknüpfungsTabellenKlasse&gt;By&lt;Regel1&gt;And&lt;Regel2&gt;([Zend_Db_Table_Select $select])</code>
                 </para>
             </listitem>
         </itemizedlist>
@@ -713,17 +679,14 @@ $productsRowset = $bug1234->findManyToManyRowset('Products',
         </para>
 
         <note>
-
             <para>
                 Die Tabelleneinheiten und die Regelschlüssel die in der aufgerufenen Methode
                 benannt werden, müssen exakt der Schreibweise der Klasse und des Regelschlüssels
                 entsprechen.
             </para>
-
         </note>
 
         <example id="zend.db.table.relationships.fetching.many-to-many.example-magic">
-
             <title>Zeilensets durch Verwendung der magischen Viele-Zu-Viele Methode holen</title>
 
             <para>
@@ -743,17 +706,13 @@ $products = $bug1234->findProductsViaBugsProducts();
 // Spezifizieren der Referenzregel
 $products = $bug1234->findProductsViaBugsProductsByBug();
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.db.table.relationships.cascading">
-
         <title>Schreiboperationen kaskadieren</title>
 
         <note>
-
             <title>Deklarieren von DRI in der Datenbank:</title>
 
             <para>
@@ -783,7 +742,6 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
                 <acronym>RDBMS</acronym> und der eigenen <classname>Zend_Db_Table</classname>
                 Klasse deklariert werden.
             </para>
-
         </note>
 
         <para>
@@ -793,7 +751,6 @@ $products = $bug1234->findProductsViaBugsProductsByBug();
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-delete">
-
             <title>Beispiel für ein kaskadierendes Löschen</title>
 
             <para>
@@ -810,7 +767,6 @@ $product1234 = $productsRowset->current();
 $product1234->delete();
 // Kaskadiert automatisch zur Bugs Tabelle und löscht abhängige Zeilen.
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -831,16 +787,15 @@ $product1234->delete();
 
         <para>
             Um eine kaskadierende Abhängigkeit in <classname>Zend_Db_Table</classname> zu
-            deklarieren, müssen die Regeln in <varname>$_referenceMap</varname> bearbeitet werden. Die
-            assoziativen Arrayschlüssel <code>'onDelete'</code> und <code>'onUpdate'</code> müssen
-            auf den String 'cascade' (oder die Konstante <constant>self::CASCADE</constant>) gesetzt
-            werden. Bevor eine Zeile von der Elterntabelle gelöscht wird oder dessen Wert des
-            primären Schlüssels aktualisiert wird, werden alle Zeilen in der abhängigen Tabelle,
+            deklarieren, müssen die Regeln in <varname>$_referenceMap</varname> bearbeitet werden.
+            Die assoziativen Arrayschlüssel <code>'onDelete'</code> und <code>'onUpdate'</code>
+            müssen auf den String 'cascade' (oder die Konstante <constant>self::CASCADE</constant>)
+            gesetzt werden. Bevor eine Zeile von der Elterntabelle gelöscht wird oder dessen Wert
+            des primären Schlüssels aktualisiert wird, werden alle Zeilen in der abhängigen Tabelle,
             welche die Eltern-Zeilen referenzieren, zuerst gelöscht oder aktualisiert.
         </para>
 
         <example id="zend.db.table.relationships.cascading.example-declaration">
-
             <title>Beispieldeklaration einer kaskadierenden Operation</title>
 
             <para>
@@ -874,11 +829,9 @@ class BugsProducts extends Zend_Db_Table_Abstract
     );
 }
 ]]></programlisting>
-
         </example>
 
         <sect3 id="zend.db.table.relationships.cascading.notes">
-
             <title>Notizen betreffend kaskadierenden Operationen</title>
 
             <para>
@@ -951,12 +904,6 @@ class BugsProducts extends Zend_Db_Table_Abstract
                 muß eine Zeile in eine Elterntabelle in einer Operation hinzufügen, und Zeilen zu
                 einer abhängigen Tabelle in einer unabhängigen Operation hinzufügen.
             </para>
-
         </sect3>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17600 -->
+<!-- EN-Revision: 20766 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.db.profiler.profilers.firebug">
     <title>Profilen mit Firebug</title>
@@ -23,21 +23,27 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            Ein Firefox Browser idealerweise Version 3 aber auch Version 2 wird unterstützt.
-        </para></listitem>
+        <listitem>
+            <para>
+                Ein Firefox Browser idealerweise Version 3 aber auch Version 2 wird unterstützt.
+            </para>
+        </listitem>
 
-        <listitem> <para>
-            Die Firebug Firefox Erweiterung welche unter <ulink
-                url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>
-            heruntergeladen werden kann.
-        </para></listitem>
+        <listitem>
+            <para>
+                Die Firebug Firefox Erweiterung welche unter <ulink
+                    url="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</ulink>
+                heruntergeladen werden kann.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            Die FirePHP Filefox Erweiterung welche unter <ulink
-                url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>
-            heruntergeladen werden kann.
-        </para></listitem>
+        <listitem>
+            <para>
+                Die FirePHP Filefox Erweiterung welche unter <ulink
+                    url="https://addons.mozilla.org/en-US/firefox/addon/6149">https://addons.mozilla.org/en-US/firefox/addon/6149</ulink>
+                heruntergeladen werden kann.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.db.profiler.profilers.firebug.example.with_front_controller">
@@ -86,6 +92,3 @@ $response->sendHeaders();
 ]]></programlisting>
     </example>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18834 -->
+<!-- EN-Revision: 20766 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.debug.dumping">
     <title>Variablen ausgeben</title>
@@ -13,6 +13,7 @@
 
     <example id="zend.debug.dumping.example">
         <title>Beispiel der dump() Methode</title>
+
         <programlisting language="php"><![CDATA[
 Zend_Debug::dump($var, $label = null, $echo = true);
 ]]></programlisting>

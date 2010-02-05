@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20176 -->
+<!-- EN-Revision: 20766 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.dojo.data">
     <title>Zend_Dojo_Data: dojo.data Envelopes</title>
@@ -65,7 +65,8 @@ $data->setIdentifier('id')
 
         <para>
             Man kann jederzeit ein einzelnes Element hinzufügen, oder Elemente anfügen, indem
-            <methodname>addItem()</methodname> und <methodname>addItems()</methodname> verwendet wird.
+            <methodname>addItem()</methodname> und <methodname>addItems()</methodname> verwendet
+            wird.
         </para>
 
         <example id="zend.dojo.data.usage.append">
@@ -425,6 +426,3 @@ $json = (string) $data; // Casten zu einem String == casten zu JSON
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

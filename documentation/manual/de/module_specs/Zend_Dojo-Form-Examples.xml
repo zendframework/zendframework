@@ -410,6 +410,3 @@ class My_Custom_Form extends Zend_Form
         </para>
     </example>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

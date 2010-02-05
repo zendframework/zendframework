@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17782 -->
+<!-- EN-Revision: 20766 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.table.definition">
-
     <title>Zend_Db_Table_Definition</title>
 
     <sect2 id="zend.db.table.definition.introduction">
-
         <title>Einführung</title>
 
         <para>
-            <classname>Zend_Db_Table_Definition</classname> ist eine Klasse die verwendet werden kann
-            um Relationen und Optionen der Konfiguration zu beschreiben die verwendet werden sollten
-            wenn <classname>Zend_Db_Table</classname> über eine konkrete Instanz verwendet wird.
+            <classname>Zend_Db_Table_Definition</classname> ist eine Klasse die verwendet werden
+            kann um Relationen und Optionen der Konfiguration zu beschreiben die verwendet werden
+            sollten wenn <classname>Zend_Db_Table</classname> über eine konkrete Instanz verwendet
+            wird.
         </para>
-
     </sect2>
 
     <sect2 id="zend.db.table.definition.usage">
-
         <title>Grundsätzliche Verwendung</title>
 
         <para>
@@ -37,7 +34,6 @@
         </para>
 
         <example id="zend.db.table.definition.example1">
-
             <title>Die Definition eines Datenbank Data Modells beschreiben</title>
 
             <programlisting language="php"><![CDATA[
@@ -73,7 +69,6 @@ $definition = new Zend_Db_Table_Definition(array(
         )
     ));
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -92,7 +87,6 @@ $definition = new Zend_Db_Table_Definition(array(
         </para>
 
         <example id="zend.db.table.definition.example2">
-
             <title>Mit der beschriebenen Definition interagieren</title>
 
             <programlisting language="php"><![CDATA[
@@ -118,13 +112,10 @@ foreach ($authors as $author) {
     }
 }
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.db.table.definition.advanced-usage">
-
         <title>Fortgeschrittene Verwendung</title>
 
         <para>
@@ -143,7 +134,6 @@ foreach ($authors as $author) {
         </para>
 
         <example id="zend.db.table.definition.example3">
-
             <title>Mit einer gemischten Zend_Db_Table Definition interagieren</title>
 
             <programlisting language="php"><![CDATA[
@@ -203,9 +193,6 @@ foreach ($authors as $author) {
     }
 }
 ]]></programlisting>
-
         </example>
-
     </sect2>
-
 </sect1>

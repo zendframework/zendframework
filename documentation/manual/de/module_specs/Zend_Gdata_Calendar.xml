@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20779 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.calendar">
     <title>Google Kalender verwenden</title>
@@ -272,6 +272,7 @@ try {
     echo "Fehler: " . $e->getMessage();
 }
 ]]></programlisting>
+
         <para>
             Der Aufruf von <methodname>getCalendarListFeed()</methodname> erstellt eine neue Instanz
             von <classname>Zend_Gdata_Calendar_ListFeed</classname> die jeden vorhandenen Kalender
@@ -279,6 +280,7 @@ try {
             der Feed empfangen wurde, können der Iterator und der Accessor die innerhalb des Feeds
             enthalten sind, verwendet werden um die enthaltenen Kalender zu inspizieren.
         </para>
+
         <programlisting language="php"><![CDATA[
 echo "<h1>Kalender Feed Liste</h1>";
 echo "<ul>";

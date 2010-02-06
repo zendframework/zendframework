@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20779 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.clientlogin">
     <title>Authentifizieren mit ClientLogin</title>
@@ -11,8 +11,8 @@
     </para>
 
     <para>
-        Siehe
-        <ulink url="http://code.google.com/apis/accounts/AuthForInstalledApps.html">http://code.google.com/apis/accounts/AuthForInstalledApps.html</ulink>
+        Siehe <ulink
+            url="http://code.google.com/apis/accounts/AuthForInstalledApps.html">http://code.google.com/apis/accounts/AuthForInstalledApps.html</ulink>
         für weitere Informationen über die Google Data ClientLogin Authentifizierung.
     </para>
 
@@ -51,9 +51,9 @@
         <para>
             Der optionale vierte Parameter ist eine Instanz von
             <classname>Zend_Http_Client</classname>. Das erlaubt das Setzen von Optionen an den
-            Client, wie z.B. Proxy Server Einstellungen. Wenn für diesen Parameter <constant>NULL</constant>
-            übergeben wird, wird ein generisches <classname>Zend_Http_Client</classname> Objekt
-            erstellt.
+            Client, wie z.B. Proxy Server Einstellungen. Wenn für diesen Parameter
+            <constant>NULL</constant> übergeben wird, wird ein generisches
+            <classname>Zend_Http_Client</classname> Objekt erstellt.
         </para>
 
         <para>
@@ -98,7 +98,6 @@ try {
 
 $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.gdata.clientlogin.terminating">
@@ -110,7 +109,5 @@ $cal = new Zend_Gdata_Calendar($client);
             verwendet werden sind der Login und das Passwort zu einem Google Account, und deshalb
             können diese wiederholend in der Zukunft verwendet werden.
         </para>
-
     </sect2>
-
 </sect1>

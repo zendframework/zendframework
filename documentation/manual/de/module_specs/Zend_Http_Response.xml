@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20121 -->
+<!-- EN-Revision: 20779 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.response">
     <title>Zend_Http_Response</title>
@@ -19,6 +19,7 @@
             In den meisten Fällen wird ein Zend_Http_Response Objekt über die fromString() Methode
             instanziert, die einen String liest, der eine HTTP Rückantwort enthält und ein
             Zend_Http_Response Objekt zurückgibt.
+
             <example id="zend.http.response.introduction.example-1">
                 <title>Ein Zend_Http_Response Object über die factory Methode instanzieren</title>
 
@@ -97,6 +98,7 @@ $response = Zend_Http_Response::fromString($str);
             mehrere Methoden bereit, die zum Testen des Typs der Antwort verwendet werden können.
             Diese geben alle ein boolesches <constant>TRUE</constant> oder
             <constant>FALSE</constant> zurück:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -145,6 +147,7 @@ if ($response->isError()) {
         <para>
             Der Hauptzweck eines Response Okjektes ist der einfache Zugriff auf diverse
             Antwortparameter.
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -263,6 +266,7 @@ echo $body;
             Rückantworten bereit. Diese Methoden sind alle als statische Methoden eingerichtet, so
             dass man sie extern verwenden kann, ohne dass man ein Response Objekt instanzierebn muss
             und nur einen bestimmten Teil der Antwort extrahieren möchte.
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -323,6 +327,7 @@ echo $body;
         <para>
             Neben der Analysemethoden beinhaltet die Klasse auch einen Satz von Dekodieren für
             allgemein <acronym>HTTP</acronym> Antwort Transferkodierungen:
+
             <itemizedlist>
                 <listitem>
                     <para>

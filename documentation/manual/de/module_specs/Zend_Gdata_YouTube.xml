@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20779 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.youtube">
     <title>Verwenden der YouTube Daten API</title>
@@ -27,13 +27,14 @@
             Anfragen muß sich ein Benutzer entweder mit ClientLogin oder AuthSub authentifizieren.
             Schauen Sie bitte in das <ulink
                 url="http://code.google.com/apis/youtube/developers_guide_php.html#Authentication">Kapitel
-                über Authentifizierung in der <acronym>PHP</acronym> Entwickler Dokumentation</ulink> für
-            weitere Details.
+                über Authentifizierung in der <acronym>PHP</acronym> Entwickler
+                Dokumentation</ulink> für weitere Details.
         </para>
     </sect2>
 
     <sect2 id="zend.gdata.youtube.developer_key">
         <title>Entwickler Schlüssel und Client ID</title>
+
         <para>
             Ein Entwickler Schlüssel identifiziert den QouTube Entwickler der die
             <acronym>API</acronym> Anfrage schickt. Eine Client ID identifiziert die Anwendung für
@@ -44,10 +45,13 @@
                 url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube.html">Zend_Gdata_YouTube</ulink>
             Service Pbjekt übergeben werden.
         </para>
+
         <example id="zend.gdata.youtube.developer_key.example">
+
             <title>
                 Einen Entwicklerschlüssel und eine ClientID an Zend_Gdata_YouTube übergeben
             </title>
+
             <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube($httpClient,
                              $applicationId,
@@ -84,6 +88,7 @@ $yt = new Zend_Gdata_YouTube($httpClient,
 
             <example id="zend.gdata.youtube.videos.searching.example">
                 <title>Suchen nach Videos</title>
+
                 <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $query = $yt->newVideoQuery();
@@ -129,6 +134,7 @@ foreach ($videoFeed as $videoEntry) {
 
             <example id="zend.gdata.youtube.videos.searchingcategories.example">
                 <title>Suchen nach Videos in speziellen Kategorien</title>
+
                 <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $query = $yt->newVideoQuery();
@@ -146,8 +152,8 @@ $videoFeed = $yt->getVideoFeed($query);
             <para>
                 Die YouTube Daten <acronym>API</acronym> hat eine Anzahl an <ulink
                     url="http://code.google.com/apis/youtube/reference.html#Standard_feeds">Standard
-                    Feeds</ulink>. Diese Standard Feeds können als
-                <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoFeed.html">Zend_Gdata_YouTube_VideoFeed</ulink>
+                    Feeds</ulink>. Diese Standard Feeds können als <ulink
+                    url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoFeed.html">Zend_Gdata_YouTube_VideoFeed</ulink>
                 Objekte empfangen werden indem die spezifizierten <acronym>URL</acronym>s und die in
                 der <ulink
                     url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube.html">Zend_Gdata_YouTube</ulink>
@@ -163,6 +169,7 @@ $videoFeed = $yt->getVideoFeed($query);
 
             <example id="zend.gdata.youtube.videos.standard.example-1">
                 <title>Empfangen eines Standard Videofeeds</title>
+
                 <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $videoFeed = $yt->getTopRatedVideoFeed();
@@ -180,6 +187,7 @@ $videoFeed = $yt->getTopRatedVideoFeed();
 
             <example id="zend.gdata.youtube.videos.standard.example-2">
                 <title>Verwenden von Zend_Gdata_YouTube_VideoQuery um Videos zu empfangen</title>
+
                 <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $query = $yt->newVideoQuery();
@@ -195,6 +203,7 @@ $videoFeed = $yt->getTopRatedVideoFeed($query);
 
             <example id="zend.gdata.youtube.videos.standard.example-3">
                 <title>Empfangen eines Video Feeds durch die URL</title>
+
                 <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $url = 'http://gdata.youtube.com/feeds/standardfeeds/top_rated?time=today'
@@ -216,6 +225,7 @@ $videoFeed = $yt->getVideoFeed($url);
                 <title>
                     Empfangen von Videos die von einem spezifischen Benutzer hochgeladen wurden
                 </title>
+
                 <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $videoFeed = $yt->getUserUploads('liz');
@@ -234,6 +244,7 @@ $videoFeed = $yt->getUserUploads('liz');
 
             <example id="zend.gdata.youtube.videos.favorites.example">
                 <title>Empfangen von den bevorzugten Videos eines Benutzers</title>
+
                 <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $videoFeed = $yt->getUserFavorites('liz');
@@ -252,6 +263,7 @@ $videoFeed = $yt->getUserFavorites('liz');
 
             <example id="zend.gdata.youtube.videos.responses.example">
                 <title>Empfangen eines Feeds von Video Antworten</title>
+
                 <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $videoFeed = $yt->getVideoResponseFeed('abc123813abc');
@@ -271,6 +283,7 @@ $videoFeed = $yt->getVideoResponseFeed('abc123813abc');
 
         <example id="zend.gdata.youtube.videos.comments.example-1">
             <title>Empfangen eines Feeds von Videokommentaren von einer Video ID</title>
+
             <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $commentFeed = $yt->getVideoCommentFeed('abc123813abc');
@@ -283,8 +296,8 @@ foreach ($commentFeed as $commentEntry) {
         </example>
 
         <para>
-            Kommentare können für ein Video auch empfangen werden wenn man eine Kopie des
-            <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
+            Kommentare können für ein Video auch empfangen werden wenn man eine Kopie des <ulink
+                url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
             Objektes hat:
         </para>
 
@@ -292,6 +305,7 @@ foreach ($commentFeed as $commentEntry) {
             <title>
                 Empfangen eines Feeds von Videokommentaren von einem Zend_Gdata_YouTube_VideoEntry
             </title>
+
             <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $videoEntry = $yt->getVideoEntry('abc123813abc');
@@ -300,7 +314,6 @@ $commentFeed = $yt->getVideoCommentFeed(null,
                                         $videoEntry->comments->href);
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.gdata.youtube.playlists">
@@ -322,6 +335,7 @@ $commentFeed = $yt->getVideoCommentFeed(null,
 
             <example id="zend.gdata.youtube.playlists.user.example">
                 <title>Empfangen von Playlisten eines Benutzers</title>
+
                 <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $playlistListFeed = $yt->getPlaylistListFeed('liz');
@@ -346,6 +360,7 @@ foreach ($playlistListFeed as $playlistEntry) {
 
             <example id="zend.gdata.youtube.playlists.special.example">
                 <title>Empfangen von speziellen Playlisten</title>
+
                 <programlisting language="php"><![CDATA[
 $feedUrl = $playlistEntry->getPlaylistVideoFeedUrl();
 $playlistVideoFeed = $yt->getPlaylistVideoFeed($feedUrl);
@@ -359,8 +374,8 @@ $playlistVideoFeed = $yt->getPlaylistVideoFeed($feedUrl);
 
         <para>
             Ein Benutzer kann verschiedene Arten von Einschreibungen besitzen: Kanal
-            Einschreibungen, Tag Einschreibungen, oder Favoriten Einschreibungen. Ein
-            <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_SubscriptionEntry.html">Zend_Gdata_YouTube_SubscriptionEntry</ulink>
+            Einschreibungen, Tag Einschreibungen, oder Favoriten Einschreibungen. Ein <ulink
+                url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_SubscriptionEntry.html">Zend_Gdata_YouTube_SubscriptionEntry</ulink>
             wird verwendet um individuelle Einschreibungen zu repräsentieren.
         </para>
 
@@ -371,6 +386,7 @@ $playlistVideoFeed = $yt->getPlaylistVideoFeed($feedUrl);
 
         <example id="zend.gdata.youtube.subscriptions.example">
             <title>Empfangen aller Einschreibungen eines Benutzers</title>
+
             <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $subscriptionFeed = $yt->getSubscriptionFeed('liz');
@@ -392,6 +408,7 @@ foreach ($subscriptionFeed as $subscriptionEntry) {
 
         <example id="zend.gdata.youtube.profile.example">
             <title>Empfangen des Profils eines Benutzers</title>
+
             <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube();
 $userProfile = $yt->getUserProfile('liz');
@@ -415,8 +432,8 @@ echo "Heimatstadt: " . $userProfile->hometown->text . "\n";
         </para>
 
         <para>
-            Um ein Video direkt hochzuladen, muß zuerst ein neues
-            <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
+            Um ein Video direkt hochzuladen, muß zuerst ein neues <ulink
+                url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
             Objekt erstellt und einige benötigte Meta-Daten spezifiziert werden. Das folgende
             Beispiel zeigt das Hochladen des Quicktime Videos "mytestmovie.mov" auf YouTube mit den
             folgenden Eigenschaften:
@@ -424,6 +441,7 @@ echo "Heimatstadt: " . $userProfile->hometown->text . "\n";
 
         <table id="zend.gdata.youtube.uploads.metadata">
             <title>Metadaten die im folgenden Code-Beispiel verwendet werden</title>
+
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
                 <thead>
                     <row>
@@ -431,39 +449,48 @@ echo "Heimatstadt: " . $userProfile->hometown->text . "\n";
                         <entry>Wert</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>Title</entry>
                         <entry>My Test Movie</entry>
                     </row>
+
                     <row>
                         <entry>Category</entry>
                         <entry>Autos</entry>
                     </row>
+
                     <row>
                         <entry>Keywords</entry>
                         <entry>cars, funny</entry>
                     </row>
+
                     <row>
                         <entry>Description</entry>
                         <entry>My description</entry>
                     </row>
+
                     <row>
                         <entry>Filename</entry>
                         <entry>mytestmovie.mov</entry>
                     </row>
+
                     <row>
                         <entry>File <acronym>MIME</acronym> type</entry>
                         <entry>video/quicktime</entry>
                     </row>
+
                     <row>
                         <entry>Video private?</entry>
                         <entry><constant>FALSE</constant></entry>
                     </row>
+
                     <row>
                         <entry>Video location</entry>
                         <entry>37, -122 (lat, long)</entry>
                     </row>
+
                     <row>
                         <entry>Developer Tags</entry>
                         <entry>mydevelopertag, anotherdevelopertag</entry>
@@ -473,12 +500,13 @@ echo "Heimatstadt: " . $userProfile->hometown->text . "\n";
         </table>
 
         <para>
-            Der folgende Code erzeugt einen leeren
-            <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
-            der Hochgeladen werden kann. Ein
-            <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_App_MediaFileSource.html">Zend_Gdata_App_MediaFileSource</ulink>
+            Der folgende Code erzeugt einen leeren <ulink
+                url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
+            der Hochgeladen werden kann. Ein <ulink
+                url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_App_MediaFileSource.html">Zend_Gdata_App_MediaFileSource</ulink>
             wird dann verwendet um die aktuelle Video Datei zu speichern. Unter der Hand wird ein
-            <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_Extension_MediaGroup.html">Zend_Gdata_YouTube_Extension_MediaGroup</ulink>
+            <ulink
+                url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_Extension_MediaGroup.html">Zend_Gdata_YouTube_Extension_MediaGroup</ulink>
             Objekt verwendet um alle Metadaten des Videos zu speichern. Die anbei beschriebenen
             Helfermethoden erlauben es die Metadaten des Videos zu setzen ohne das man sich um das
             Medien Gruppen Objekt kümmern muß. $uploadUrl ist der Ort an den der neue Eintrag
@@ -489,6 +517,7 @@ echo "Heimatstadt: " . $userProfile->hometown->text . "\n";
 
         <example id="zend.gdata.youtube.uploads.example">
             <title>Ein Video hochladen</title>
+
             <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube($httpClient);
 $myVideoEntry = new Zend_Gdata_YouTube_VideoEntry();
@@ -544,19 +573,17 @@ try {
             verwendet werden; bevor das Hochladen durchgeführt wird. $videoEntry->isVideoPrivate()
             kann verwendet werden um zu prüfen ob ein Video Eintrag privat ist oder nicht.
         </para>
-
     </sect2>
 
     <sect2 id="zend.gdata.youtube.uploads.browser">
-
         <title>Browser-basierender Upload</title>
 
         <para>
             Browser-basierendes hochladen wird fast auf die gleiche Weise durchgeführt wie direktes
-            Hochladen, ausser das man kein
-            <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_App_MediaFileSource.html">Zend_Gdata_App_MediaFileSource</ulink>
-            Objekt an den
-            <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
+            Hochladen, ausser das man kein <ulink
+                url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_App_MediaFileSource.html">Zend_Gdata_App_MediaFileSource</ulink>
+            Objekt an den <ulink
+                url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
             anhängt den man erstellt. Stattdessen überträgt man einfach alle Metadaten des Videos um
             ein Token Element zurück zu erhalten welches verwendet werden kann um ein HTML Upload
             Formular zu erstellen.
@@ -564,6 +591,7 @@ try {
 
         <example id="zend.gdata.youtube.uploads.browser.example-1">
             <title>Browser-basierender Upload</title>
+
             <programlisting language="php"><![CDATA[
 $yt = new Zend_Gdata_YouTube($httpClient);
 
@@ -596,6 +624,7 @@ $postUrl = $tokenArray['url'];
 
         <example id="zend.gdata.youtube.uploads.browser.example-2">
             <title>Browser-basierender Upload: Erstellen des HTML Formulars</title>
+
             <programlisting language="php"><![CDATA[
 // Platzieren um den Benutzer nach dem Upload umzuleiten
 $nextUrl = 'http://mysite.com/youtube_uploads';
@@ -608,11 +637,9 @@ $form = '<form action="'. $postUrl .'?nexturl='. $nextUrl .
         '</form>';
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.gdata.youtube.uploads.status">
-
         <title>Den Upload Status prüfen</title>
 
         <para>
@@ -620,13 +647,14 @@ $form = '<form action="'. $postUrl .'?nexturl='. $nextUrl .
              Benutzer unmittelbar sichtbar sein. Trotzdem wird es auf der Site nicht öffentlich sein
              solange es nicht bearbeitet wurde. Videos die ausgeschlossen oder nicht erfolgreich
              hochgeladen wurden werden auch nur im Upload Feed des authentifizierten Benutzers
-             sichtbar sein. Der folgende Code prüft den Status eines
-             <ulink url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
+             sichtbar sein. Der folgende Code prüft den Status eines <ulink
+                 url="http://framework.zend.com/apidoc/core/Zend_Gdata/Zend_Gdata_YouTube_VideoEntry.html">Zend_Gdata_YouTube_VideoEntry</ulink>
              um zu sehen ob er jetzt noch nicht live ist oder ob er nicht akzeptiert wurde.
         </para>
 
         <example id="zend.gdata.youtube.uploads.status.example">
             <title>Den Status von Video Uploads checken</title>
+
             <programlisting language="php"><![CDATA[
 try {
     $control = $videoEntry->getControl();
@@ -652,11 +680,9 @@ if ($control instanceof Zend_Gdata_App_Extension_Control) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.gdata.youtube.other">
-
         <title>Andere Funktionen</title>
 
         <para>
@@ -673,7 +699,5 @@ if ($control instanceof Zend_Gdata_App_Extension_Control) {
             <ulink url="http://code.google.com/apis/youtube/developers_guide_php.html">PHP
                 Entwickler Guide</ulink> auf code.google.com zu finden ist.
         </para>
-
     </sect2>
-
 </sect1>

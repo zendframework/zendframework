@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17987 -->
+<!-- EN-Revision: 20779 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.authsub">
     <title>Authentifizierung mit AuthSub</title>
@@ -33,6 +33,7 @@
 
     <note>
         <title>Registrierte Anwendungen</title>
+
         <para>
             <classname>Zend_Gdata</classname> unterstützt aktuell die Verwendung von sicheren Tokens
             nicht, weil die AuthSub Authentifizierung die Übergabe von Digitalen Zertifikaten, um
@@ -103,7 +104,6 @@ $client = Zend_Gdata_AuthSub::getHttpClient($_SESSION['cal_token']);
 // Erstellt ein Gdara Objekt das den authentifizierten Http Client verwendet
 $cal = new Zend_Gdata_Calendar($client);
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.gdata.authsub.logout">
@@ -130,22 +130,23 @@ if (isset($_GET['logout'])) {
 }
 ]]></programlisting>
 
-    <note>
-        <title>Sicherheitshinweise</title>
-        <para>
-            Das vermeiden der <varname>$php_self</varname> Variable im obigen Beispiel ist eine
-            generelle Sicherheits Richtlinie, die nicht nur für <classname>Zend_Gdata</classname>
-            gilt. Inhalt der zu Http Headern ausgegeben wird sollte immer gefiltert werden.
-        </para>
-        <para>
-            Betreffend der Beendigung des authentifizierten Tokens wird empfohlen dass dies gemacht
-            wird, sobald der Benutzer mit seiner Google Data Session fertig ist. Die Möglichkeit das
-            jemand das Token herausfindet und für seine eigenen miesen Zwecke verwendet ist sehr
-            klein, aber trotzdem ist es eine gute Praxis einen authentifizierten Zugriff auf
-            jegliche Services zu beenden.
-        </para>
-    </note>
+        <note>
+            <title>Sicherheitshinweise</title>
 
+            <para>
+                Das vermeiden der <varname>$php_self</varname> Variable im obigen Beispiel ist eine
+                generelle Sicherheits Richtlinie, die nicht nur für
+                <classname>Zend_Gdata</classname> gilt. Inhalt der zu Http Headern ausgegeben wird
+                sollte immer gefiltert werden.
+            </para>
+
+            <para>
+                Betreffend der Beendigung des authentifizierten Tokens wird empfohlen dass dies
+                gemacht wird, sobald der Benutzer mit seiner Google Data Session fertig ist. Die
+                Möglichkeit das jemand das Token herausfindet und für seine eigenen miesen Zwecke
+                verwendet ist sehr klein, aber trotzdem ist es eine gute Praxis einen
+                authentifizierten Zugriff auf jegliche Services zu beenden.
+            </para>
+        </note>
     </sect2>
-
 </sect1>

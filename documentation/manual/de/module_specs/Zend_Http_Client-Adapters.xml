@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20779 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client.adapters">
     <title>Zend_Http_Client - Verbindungsadapter</title>
@@ -20,29 +20,28 @@
         <para>
             Derzeit stellt die <classname>Zend_Http_Client</classname> Klasse vier eingebaute
             Verbindungsadapter bereit:
+
             <itemizedlist>
                 <listitem>
                     <para>
                         <classname>Zend_Http_Client_Adapter_Socket</classname> (Standard)
                     </para>
                 </listitem>
+
                 <listitem>
-                    <para>
-                        <classname>Zend_Http_Client_Adapter_Proxy</classname>
-                    </para>
+                    <para><classname>Zend_Http_Client_Adapter_Proxy</classname></para>
                 </listitem>
+
                 <listitem>
-                    <para>
-                        <classname>Zend_Http_Client_Adapter_Curl</classname>
-                    </para>
+                    <para><classname>Zend_Http_Client_Adapter_Curl</classname></para>
                 </listitem>
+
                 <listitem>
-                    <para>
-                        <classname>Zend_Http_Client_Adapter_Test</classname>
-                    </para>
+                    <para><classname>Zend_Http_Client_Adapter_Test</classname></para>
                 </listitem>
             </itemizedlist>
         </para>
+
         <para>
             Der Verbindungsadapter für das <classname>Zend_Http_Client</classname> Objekt wird durch
             Verwendung der 'adapter' Konfigurationsoption gesetzt. Beim Instanzieren des Client
@@ -56,6 +55,7 @@
 
     <sect2 id="zend.http.client.adapters.socket">
         <title>Der Socket Adapter</title>
+
         <para>
             Der Standard-Adapter ist <classname>Zend_Http_Client_Adapter_Socket</classname>.
             Dieser wird benutzt, wenn kein anderer angegeben wird. Der Socket Adapter benutzt die
@@ -67,6 +67,7 @@
             Der Socket Adapter erlaubt verschiedene zusätzliche Konfigurations Optionen die gesetzt
             werden können durch Verwendung von <classname>Zend_Http_Client->setConfig()</classname>
             oder deren Übergabe an den Konstruktor des Clients.
+
             <table id="zend.http.client.adapter.socket.configuration.table">
                 <title>Zend_Http_Client_Adapter_Socket Konfigurations Parameter</title>
 
@@ -216,6 +217,7 @@ $response = $client->request();
             <para>
                 Man kann auf den Stream Kontext zugreifen indem die folgenden Methoden von
                 <classname>Zend_Http_Client_Adapter_Socket</classname> verwendet werden:
+
                 <itemizedlist>
                     <listitem>
                         <para>
@@ -230,6 +232,7 @@ $response = $client->request();
                             dieser Optionen erstellt, und gesetzt.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <firstterm><methodname>getStreamContext()</methodname></firstterm>
@@ -242,8 +245,10 @@ $response = $client->request();
                     </listitem>
                 </itemizedlist>
             </para>
+
             <example id="zend.http.client.adapters.socket.streamcontext.example-1">
                 <title>Setzen von Stream Kontext Optionen für den Socket Adapter</title>
+
                 <programlisting language="php"><![CDATA[
 // Array von Optionen
 $options = array(
@@ -286,6 +291,7 @@ $opts = stream_context_get_options($adapter->getStreamContext());
 echo $opts['ssl']['peer_certificate'];
 ]]></programlisting>
             </example>
+
             <note>
                 <para>
                     Es ist zu beachten das alle Stream Kontext Optionen gesetzt sein müssen bevor
@@ -301,6 +307,7 @@ echo $opts['ssl']['peer_certificate'];
 
     <sect2 id="zend.http.client.adapters.proxy">
         <title>Der Proxy Adapter</title>
+
         <para>
             Der Proxy Adapter <classname>Zend_Http_Client_Adapter_Proxy</classname> verhält sich wie
             der standard <classname>Zend_Http_Client_Adapter_Socket</classname>, mit dem
@@ -313,8 +320,10 @@ echo $opts['ssl']['peer_certificate'];
         <para>
             Der Proxy Adapter benötigt zusätzliche Konfigurationsvariablen, die
             nachfolgend gelistet sind.
+
             <table id="zend.http.client.adapters.proxy.table">
                 <title>Zend_Http_Client Konfigurationsparameter</title>
+
                 <tgroup cols="4">
                     <thead>
                         <row>
@@ -324,6 +333,7 @@ echo $opts['ssl']['peer_certificate'];
                             <entry>Beispielwert</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry>proxy_host</entry>
@@ -331,24 +341,28 @@ echo $opts['ssl']['peer_certificate'];
                             <entry>string</entry>
                             <entry>zum Beispiel 'proxy.myhost.com' oder '10.1.2.3'</entry>
                         </row>
+
                         <row>
                             <entry>proxy_port</entry>
                             <entry><acronym>TCP</acronym> Port des Proxy-Servers</entry>
                             <entry>integer</entry>
                             <entry>8080 (Standardwert) oder 81</entry>
                         </row>
+
                         <row>
                             <entry>proxy_user</entry>
                             <entry>Benutzername für die Proxynutzung, falls nötig</entry>
                             <entry>string</entry>
                             <entry>'wulli' oder '' für keinen Namen (Standardwert)</entry>
                         </row>
+
                         <row>
                             <entry>proxy_pass</entry>
                             <entry>Passwort für die Proxynutzung, falls nötig</entry>
                             <entry>string</entry>
                             <entry>'geheim' oder '' für kein Passwort (Standardwert)</entry>
                         </row>
+
                         <row>
                             <entry>proxy_auth</entry>
                             <entry>Proxy <acronym>HTTP</acronym> Authentifizierungs-Typ</entry>
@@ -359,12 +373,14 @@ echo $opts['ssl']['peer_certificate'];
                 </tgroup>
             </table>
         </para>
+
         <para>
             proxy_host muss immer gesetzt werden, ansonsten wird der Proxy-Adapter auf
             <classname>Zend_Http_Client_Adapter_Socket</classname> zurückgreifen und keinen Proxy
             Server benutzen. Wird kein Prot mit übergeben, so versucht der Proxy-Adapter sich auf
             den Standardport '8080' zu verbinden.
         </para>
+
         <para>
             proxy_user und proxy_pass werden nur dann benötigt, wenn der Proxy-Server
             tatsächlich eine Authentifizierung erwartet. Werden diese Parameter mit
@@ -372,6 +388,7 @@ echo $opts['ssl']['peer_certificate'];
             Header bei Anfragen. Wird keine Authentifizierung benötigt, sollten die
             beiden Parameter weggelassen werden.
         </para>
+
         <para>
             proxy_auth setzt den Authentifizierungs-Typ. Dies ist nur nötig, wenn der
             Proxy-Server eine Authentifizierung erwartet.
@@ -379,8 +396,10 @@ echo $opts['ssl']['peer_certificate'];
             Zur Zeit wird nur die BASIC-Authentifizierung
             (Zend_Http_Client::AUTH_BASIC) unterstützt.
         </para>
+
         <example id="zend.http.client.adapters.proxy.example-1">
             <title>Zend_Http_Client hinter einem Proxy-Server nutzen</title>
+
             <programlisting language="php"><![CDATA[
 // Konfigurationsparameter setzen
 $config = array(
@@ -397,11 +416,11 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
 // $client kann jetzt wie gewohnt benutzt werden
 ]]></programlisting>
         </example>
+
         <para>
-                        Wie vorher erwähnt, nutzt der Proxy-Adapter eine einfache Socket-Verbindung,
-                        wenn proxy_host nicht gesetzt oder leer gelassen wurde. Dies ermöglicht
-                        die optionale Nutzung eines Proxy-Servers, abhängig von dem proxy_host
-                        Parameter.
+            Wie vorher erwähnt, nutzt der Proxy-Adapter eine einfache Socket-Verbindung,
+            wenn proxy_host nicht gesetzt oder leer gelassen wurde. Dies ermöglicht
+            die optionale Nutzung eines Proxy-Servers, abhängig von dem proxy_host Parameter.
         </para>
 
         <note>
@@ -417,6 +436,7 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
 
     <sect2 id="zend.http.client.adapters.curl">
         <title>Der cURL Adapter</title>
+
         <para>
             cURL ist eine Standard <acronym>HTTP</acronym> Client Bibliothek die mit vielen
             Betriebssystemen ausgeliefert wird, und kann in <acronym>PHP</acronym> über die cURL
@@ -429,6 +449,7 @@ $client = new Zend_Http_Client('http://www.example.com', $config);
 
         <example id="zend.http.client.adapters.curl.example-1">
             <title>Setzen von cURL Optionen</title>
+
             <programlisting language="php"><![CDATA[
 $config = array(
     'adapter'   => 'Zend_Http_Client_Adapter_Curl',
@@ -477,12 +498,14 @@ $client->request("PUT");
 
     <sect2 id="zend.http.client.adapters.test">
         <title>Der Test Adapter</title>
+
         <para>
             Manchmal ist es sehr schwer Code zu testen, der von <acronym>HTTP</acronym> Verbindungen
             abhängig ist. Zum Beispiel verlangt das Testen einer Applikation, die einen
             <acronym>RSS</acronym> Feed von einem fremden Server anfordert, eine Netzwerkverbindung,
             die nicht immer verfügbar ist.
         </para>
+
         <para>
             Aus diesem Grund wird der <classname>Zend_Http_Client_Adapter_Test</classname> Adapter
             bereit gestellt. Man kann seine eigenen Applikationen schreiben, um
@@ -490,6 +513,7 @@ $client->request("PUT");
             der Unit Test Suite, den Standardadapter durch den Testadapter (ein Mock Objekt)
             austauschen, um Tests ohne direkte Serverbindungen auszuführen.
         </para>
+
         <para>
             Der <classname>Zend_Http_Client_Adapter_Test</classname> Adapter stellt die zusätzliche
             Methode setResponse() bereit. Diese Methode nimmt einen Parameter entgegen, der eine
@@ -498,8 +522,10 @@ $client->request("PUT");
             wird der Testadapter immer diese Antwort zurückgeben, ohne tatsächlich eine
             <acronym>HTTP</acronym> Anfrage auszuführen.
         </para>
+
         <example id="zend.http.client.adapters.test.example-1">
             <title>Testen gegen einen einfachen HTTP Response Stumpf</title>
+
             <programlisting language="php"><![CDATA[
 // Instanziere einen neuen Adapter und Client
 $adapter = new Zend_Http_Client_Adapter_Test();
@@ -544,6 +570,7 @@ $response = $client->request('GET');
 
         <example id="zend.http.client.adapters.test.example-2">
             <title>Test mit mehreren HTTP-Antworten</title>
+
             <programlisting language="php"><![CDATA[
 // Instanzen vom Adapter und Client erzeugen
 $adapter = new Zend_Http_Client_Adapter_Test();
@@ -614,6 +641,7 @@ $adapter->addResponse(
 
         <example id="zend.http.client.adapters.test.example-3">
             <title>Erzwingen das der Adapter fehlschlägt</title>
+
             <programlisting language="php"><![CDATA[
 // Einen neuen Adapter und Client instanziieren
 $adapter = new Zend_Http_Client_Adapter_Test();
@@ -655,6 +683,7 @@ try {
 
         <example id="zend.http.client.adapters.extending.example-1">
             <title>Gerüst für einen eigenen Verbindungs-Adapter</title>
+
             <programlisting language="php"><![CDATA[
 class MyApp_Http_Client_Adapter_BananaProtocol
     implements Zend_Http_Client_Adapter_Interface

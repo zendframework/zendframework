@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18786 -->
+<!-- EN-Revision: 20779 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.docs">
     <title>Verwenden der Google Dokumente Listen Daten API</title>
@@ -12,13 +12,14 @@
     </para>
 
     <para>
-        Siehe
-        <ulink url="http://code.google.com/apis/documents/overview.html">http://code.google.com/apis/documents/overview.html</ulink>
+        Siehe <ulink
+            url="http://code.google.com/apis/documents/overview.html">http://code.google.com/apis/documents/overview.html</ulink>
         für weitere Informationen über die Google Dokumente Listen <acronym>API</acronym>.
     </para>
 
     <sect2 id="zend.gdata.docs.listdocuments">
         <title>Eine Liste von Dokumenten erhalten</title>
+
         <para>
             Man kann eine Liste von den Google Dokumenten für einen bestimmten Benutzer erhalten
             indem die <methodname>getDocumentListFeed()</methodname> Methode des Docs Services
@@ -45,12 +46,14 @@ $feed = $docs->getDocumentListFeed();
 
     <sect2 id="zend.gdata.docs.creating">
         <title>Ein Dokument hochladen</title>
+
         <para>
             Man kann ein neues Google Dokument erstellen indem ein Wortverarbeitungs Dokument, eine
             Tabellenkalkulation oder eine Präsentation hochgeladen wird. Dieses Beispiel ist vom
             interaktiven Docs.php Beispiel welches mit der Bibliothek kommt. Es demonstriert das
             Hochladen einer Datei und das Ausdrucken der Information über das Ergebnis vom Server.
         </para>
+
         <programlisting language="php"><![CDATA[
 /**
  * Ein spezielles Dokument hochladen
@@ -109,6 +112,7 @@ function uploadDocument($docs, $html, $originalFileName,
 
     <sect2 id="zend.gdata.docs.queries">
         <title>Den Dokumenten Feed durchsuchen</title>
+
         <para>
             Die Dokumenten Liste kann durchsucht werden indem einer der
             <ulink url="http://code.google.com/apis/gdata/reference.html#Queries">standardmäßigen
@@ -122,6 +126,7 @@ function uploadDocument($docs, $html, $originalFileName,
 
         <sect3 id="zend.gdata.docs.listwpdocuments">
             <title>Eine Liste von Wortverarbeitungs Dokumenten erhalten</title>
+
             <para>
                 Ein Feed der alle Dokumente eines speziellen Typs enthält kann auch angefragt
                 werden. Um zum Beispiel eine Liste von eigenen Wortverarbeitungs Dokumenten zu
@@ -136,6 +141,7 @@ $feed = $docs->getDocumentListFeed(
 
         <sect3 id="zend.gdata.docs.listspreadsheets">
             <title>Eine Liste von Tabellenkalkulationen erhalten</title>
+
             <para>
                 Um eine Liste aller eigenen Google Tabellenkalkulationen zu erhalten kann die
                 folgende Abfrage verwendet werden:
@@ -149,6 +155,7 @@ $feed = $docs->getDocumentListFeed(
 
         <sect3 id="zend.gdata.docs.textquery">
             <title>Eine Textabfrage durchführen</title>
+
             <para>
                 Der Inhalt von Dokumenten kann durch Verwendung von
                 <classname>Zend_Gdata_Docs_Query</classname> in der Abfrage durchsucht werden. Ein
@@ -157,13 +164,12 @@ $feed = $docs->getDocumentListFeed(
                 Beispielmethode welche die Dokumenten Liste nach Dokumenten abfrage die den
                 Suchstring enthalten:
             </para>
+
             <programlisting language="php"><![CDATA[
 $docsQuery = new Zend_Gdata_Docs_Query();
 $docsQuery->setQuery($query);
 $feed = $client->getDocumentListFeed($docsQuery);
 ]]></programlisting>
         </sect3>
-
     </sect2>
-
 </sect1>

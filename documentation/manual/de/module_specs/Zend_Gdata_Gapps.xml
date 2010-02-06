@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19867 -->
+<!-- EN-Revision: 20779 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.gapps">
     <title>Google Apps Provisionierung verwenden</title>
@@ -22,13 +22,14 @@
 
     <para>
         Für weitere Information zur Google Apps Provisionierungs <acronym>API</acronym>, inklusive
-        Anleitungen für das einschalten des <acronym>API</acronym> Zugriffs, kann in die
-        <ulink url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html">Provisionierungs
+        Anleitungen für das einschalten des <acronym>API</acronym> Zugriffs, kann in die <ulink
+            url="http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html">Provisionierungs
             <acronym>API</acronym> V2.0 Referenz</ulink> gesehen werden.
     </para>
 
     <note>
         <title>Authentifizierung</title>
+
         <para>
             Die Provisionierungs <acronym>API</acronym> unterstützt keine Authentifizierung über
             AuthSub und anonymer Zugriff ist nicht gestattet. Alle <acronym>HTTP</acronym>
@@ -59,7 +60,6 @@
 $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.domain.query">
@@ -89,9 +89,7 @@ $domain = "example.com";
 $gdata = new Zend_Gdata_Gapps($client, $domain);
 $query = $gdata->newUserQuery($arg);
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.gapps.users">
@@ -139,7 +137,6 @@ $user = $gdata->insertUser($user);
                 Operional kann das Passwort als SHA-1 Schlüssel angegeben werden wenn
                 <code>login->passwordHashFunction</code> auf 'SHA-1' gesetzt ist.
             </para>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.users.retrieving">
@@ -195,7 +192,6 @@ echo 'Hat den Regeln zugestimmt: ' .
                 ServiceExceptions werden in <xref linkend="zend.gdata.gapps.exceptions" />
                 behandelt.
             </para>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.users.retrievingAll">
@@ -235,7 +231,6 @@ foreach ($feed as $user) {
         ' ' . $user->name->familyName . ")\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.users.updating">
@@ -274,7 +269,6 @@ $user = $user->save();
                     wiederherzustellen da gespeicherte Passwörter aus Sicherheitsgründern nicht über
                     die Provisionierungs <acronym>API</acronym> verfügbar gemacht werden.
                 </para>
-
             </sect4>
 
             <sect4 id="zend.gdata.gapps.users.updating.forcingPasswordChange">
@@ -297,7 +291,6 @@ $user = $user->save();
                     <code>login->changePasswordAtNextLogin</code> Eigenschaft auf
                     <constant>FALSE</constant> gesetzt wird.
                 </para>
-
             </sect4>
 
             <sect4 id="zend.gdata.gapps.users.updating.suspendingAccount">
@@ -332,7 +325,6 @@ $user = $user->save();
                     Um den Benutzerzugang wiederherzustellen muß die <code>login->suspended</code>
                     Eigenschaft auf <constant>FALSE</constant> gesetzt werden.
                 </para>
-
             </sect4>
 
             <sect4 id="zend.gdata.gapps.users.updating.grantingAdminRights">
@@ -354,9 +346,7 @@ $user = $user->save();
                     Und wie erwartet, entfernt das Setzen der Eigenschaft <code>login->admin</code>,
                     des Benutzers auf <constant>FALSE</constant>, dessen administrative Rechte.
                 </para>
-
             </sect4>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.users.deleting">
@@ -380,9 +370,7 @@ $user->delete();
             <programlisting language="php"><![CDATA[
 $gdata->deleteUser('foo');
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.gapps.nicknames">
@@ -425,7 +413,6 @@ $nickname->login = $gdata->newLogin('foo');
 $nickname->nickname = $gdata->newNickname('bar');
 $nickname = $gdata->insertNickname($nickname);
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.nicknames.retrieving">
@@ -466,7 +453,6 @@ echo 'Eigentümer: ' . $nickname->login->username . "\n";
                 <constant>Zend_Gdata_Gapps_Error::ENTITY_DOES_NOT_EXIST</constant> zurückgegeben.
                 Auch das wird in <xref linkend="zend.gdata.gapps.exceptions" /> beschrieben.
             </para>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.nicknames.retrievingUser">
@@ -506,11 +492,11 @@ foreach ($feed as $nickname) {
     echo '  * ' . $nickname->nickname->name . "\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.nicknames.retrievingAll">
             <title>Empfangen aller Spitznamen in einer Domain</title>
+
             <para>
                 Um alle Spitznamen in einerm Feed zu empfangen, muß einfach die bequeme Methode
                 <methodname>retrieveAllNicknames()</methodname> aufgerufen werden.
@@ -543,7 +529,6 @@ foreach ($feed as $nickname) {
         $nickname->login->username . "\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.nicknames.deleting">
@@ -567,9 +552,7 @@ $nickname->delete();
             <programlisting language="php"><![CDATA[
 $gdata->deleteNickname('bar');
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.gapps.emailLists">
@@ -611,7 +594,6 @@ $list = $gdata->newEmailListEntry();
 $list->emailList = $gdata->newEmailList('friends');
 $list = $gdata->insertEmailList($list);
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.emailList.retrieve">
@@ -653,7 +635,6 @@ foreach ($feed as $list) {
     echo '  * ' . $list->emailList->name . "\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.emailLists.retrievingAll">
@@ -689,7 +670,6 @@ foreach ($feed as $list) {
     echo '  * ' . $list->emailList->name . "\n";
 }
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.emailList.deleting">
@@ -703,9 +683,7 @@ foreach ($feed as $list) {
             <programlisting language="php"><![CDATA[
 $gdata->deleteEmailList('friends');
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.gapps.emailListRecipients">
@@ -729,7 +707,6 @@ $gdata->deleteEmailList('friends');
             <programlisting language="php"><![CDATA[
 $gdata->addRecipientToEmailList('bar@somewhere.com', 'friends');
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.emailListRecipients.retrieving">
@@ -769,7 +746,6 @@ foreach ($feed as $recipient) {
                 Das Erstellt ein <classname>Zend_Gdata_Gapps_EmailListRecipientFeed</classname>
                 Objekt welche jeden Empfänger für die ausgewählte Email Liste enthält.
             </para>
-
         </sect3>
 
         <sect3 id="zend.gdata.gapps.emailListRecipients.removing">
@@ -778,15 +754,12 @@ foreach ($feed as $recipient) {
             <para>
                 Um einen Empfänger von einer Email Liste zu entfernen, muß die bequeme
                 <methodname>removeRecipientFromEmailList()</methodname> Methode aufgerufen werden:
-                method:
             </para>
 
             <programlisting language="php"><![CDATA[
 $gdata->removeRecipientFromEmailList('baz@somewhere.com', 'friends');
 ]]></programlisting>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.gdata.gapps.exceptions">
@@ -841,7 +814,5 @@ function retrieveUser ($username) {
     return $user;
 }
 ]]></programlisting>
-
     </sect2>
-
 </sect1>

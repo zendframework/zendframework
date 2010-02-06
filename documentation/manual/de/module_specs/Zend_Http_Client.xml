@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20779 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.client">
     <title>Einführung</title>
@@ -23,6 +23,7 @@
             entweder ein String oder ein Zend_Uri_Http Objekt sein) und ein Array oder Zend_Config
             Objekt welches Konfigurationsparameter enthält. Beides kann ausgelassen und später
             durch Verwendung der setUri() and setConfig() Methoden gesetzt werden.
+
             <example id="zend.http.client.introduction.example-1">
                 <title>Ein Zend_Http_Client Objekt instanzieren</title>
 
@@ -65,6 +66,7 @@ $client->setConfig($config);
             Der Konstruktor und die setConfig() Methode akzeptieren ein assoziatives Array mit
             Konfigurationsparametern oder ein <classname>Zend_Config</classname> Objekt. Das Setzen
             dieser Parameter ist optional, da alle einen Standardwert haben.
+
             <table id="zend.http.client.configuration.table">
                 <title>Zend_Http_Client Konfigurationsparameter</title>
 
@@ -193,6 +195,7 @@ $client->setConfig($config);
         <para>
             Das Durchführen von einfachen HTTP Anfragen kann sehr leicht durch Verwendung der
             request() Methode gemacht werden und benötigt selten mehr als drei Codezeilen:
+
             <example id="zend.http.client.basic-requests.example-1">
                 <title>Durchführen einer einfache GET Anfrage</title>
 
@@ -207,9 +210,10 @@ $response = $client->request();
             Protokoll definiert.
 
             <footnote>
-              <para>
-                Siehe RFC 2616 - <ulink url="http://www.w3.org/Protocols/rfc2616/rfc2616.html" />.
-              </para>
+                <para>
+                    Siehe RFC 2616 - <ulink
+                        url="http://www.w3.org/Protocols/rfc2616/rfc2616.html" />.
+                </para>
             </footnote>.
 
             Zur Erleichterung sind alle als Klassenkonstanten definiert:
@@ -220,6 +224,7 @@ $response = $client->request();
             Wenn keine Methode angegeben worden ist, wird die durch den letzten Aufruf von
             setMethod() gesetzte Methode verwendet. Wenn setMethod() vorher nicht aufgerufen worden
             ist, wird als Standardmethode GET verwendet (siehe obiges Beispiel).
+
             <example id="zend.http.client.basic-requests.example-2">
                 <title>Andere Anfragemethoden als GET verwenden</title>
 
@@ -247,6 +252,7 @@ $response = $client->request();
             setParameterGet() Methode auch ein einzelnes assoziatives Array mit GET Parameter als
             Name => Wert Variablen, was beim setzen von mehreren GET Parametern komfortabler sein
             kann.
+
             <example id="zend.http.client.parameters.example-1">
                 <title>Setzen von GET Parametern</title>
 
@@ -273,6 +279,7 @@ $client->setParameterGet(array(
             Parameter zu einer Anfrage ist sehr ähnlich wie das Hinzufügen von GET Parametern and
             kann mit der setParameterPost() Methode gemacht werden, die vom Aufbau der
             setParameterGet() Methode ähnlich ist..
+
             <example id="zend.http.client.parameters.example-2">
                 <title>Setzen von POST Parametern</title>
 

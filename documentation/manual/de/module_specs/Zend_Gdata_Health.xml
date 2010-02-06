@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20779 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.gdata.health">
     <title>Verwenden von Google Health</title>
+
     <para>
         Die Google Health Data <acronym>API</acronym> wurde entwickelt um es Entwicklern zu erlauben
         die folgenden 2 Dinge zu tun:
+
         <itemizedlist>
             <listitem>
                 <para>
@@ -15,6 +17,7 @@
                     Daten anzubieten.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Neue Medizinische Daten zu einem Benutzerprofil hinzuzufügen indem CCR Daten
@@ -27,6 +30,7 @@
             </listitem>
         </itemizedlist>
     </para>
+
     <para>
         Es gibt drei Hauptfeeds, die alle eine Authentifikation benötigen. Anders als andere Google
         Data <acronym>API</acronym>s hat jede der Google Health Feeds ein begrenztes Set von
@@ -34,6 +38,7 @@
         Authentifizierungsmethode die man verwendet (ClientLogin oder AuthSub/OAuth). Für eine Liste
         von gestatteten Anweisungen siehe <ulink
             url="http://code.google.com/apis/health/reference.html#Authentication">http://code.google.com/apis/health/reference.html#Authentication</ulink>.
+
         <itemizedlist>
             <listitem>
                 <para>
@@ -41,12 +46,14 @@
                     Gesundheitsprofil eines Benutzers nach speziellen Informationen zu durchsuchen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <firstterm>Registrierungs Feed</firstterm>
                     verwende den Registrierungsfeed um neue CCR Daten in ein Profil einzupflegen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <firstterm>Profil Listen Feed</firstterm> der Profil Listen Feed sollte
@@ -57,13 +64,16 @@
             </listitem>
         </itemizedlist>
     </para>
+
     <para>
         Siehe <ulink
             url="http://code.google.com/apis/health/">http://code.google.com/apis/health</ulink> für
         weitere Informationen über die Google Health <acronym>API</acronym>.
     </para>
+
     <sect2 id="zend.gdata.health.connect">
         <title>Zum Health Service verbinden</title>
+
         <para>
             Die Google Health <acronym>API</acronym> basiert, wie alle Google Data
             <acronym>API</acronym>s, auf dem Atom Publishing Protokoll (APP), einem
@@ -71,19 +81,23 @@
             Ressourcen. Verkehr zwischen einem Client und dem Google Health Servern findet über
             <acronym>HTTP</acronym> statt und erlaubt authentifizierte Verbindungen.
         </para>
+
         <para>
             Bevor eine Transaktion stattfinden kann, muß eine Verbindung erstellt werden. Das
             Erstellen einer Verbindung zu den Health Servern beinhaltet zwei Schritte: Erstellung
             eines <acronym>HTTP</acronym> Clients und diesen Client an eine
             <classname>Zend_Gdata_Health</classname> Instanz binden.
         </para>
+
         <sect3 id="zend.gdata.health.connect.authentication">
             <title>Authentifikation</title>
+
             <para>
                 Die Google Health <acronym>API</acronym> erlaubt den programmtechnischen Zugriff auf
                 das Gesundheitsprofil eines Benutzer. Es gibt drei Authentifizierungsschemata die
                 von Google Health unterstützt werden:
             </para>
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -94,6 +108,7 @@
                         installierte/Desktopanwendungen empfohlen.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>AuthSub</firstterm>
@@ -105,6 +120,7 @@
                         <acronym>API</acronym> digital signiert werden müssen.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <firstterm>OAuth</firstterm>
@@ -116,6 +132,7 @@
                     </para>
                 </listitem>
             </itemizedlist>
+
             <para>
                 Siehe
                 <ulink url="http://code.google.com/apis/gdata/auth.html">Authentication Overview in
@@ -123,14 +140,17 @@
                 Informationen über jede Authentifizierungsmethode.
             </para>
         </sect3>
+
         <sect3 id="zend.gdata.health.connect.service">
             <title>Erstellen einer Health Service Instanz</title>
+
             <para>
                 Um mit Google Health zu interagieren, bietet die Client Bibliothek die Serviceklasse
                 <classname>Zend_Gdata_Health</classname>. Diese Klasse bietet ein übliches Interface
                 zu den Google Data und Atom Publishing Protokoll Modellen und hilft bei der
                 Durchführung von Anfragen von und zur Health <acronym>API</acronym>.
             </para>
+
             <para>
                 Sobald man sich für ein Authentifizierungsschema entschieden hat, ist der nächste
                 Schritt die Erstellung einer Instanz von <classname>Zend_Gdata_Health</classname>.
@@ -138,15 +158,18 @@
                 übergeben werden. Diese bietet ein Interface für- AuthSub/OAuth und ClientLogin um
                 einen speziell authentifizierten <acronym>HTTP</acronym> Client zu erstellen.
             </para>
+
             <para>
                 Um mit dem H9 des Entwicklers (/h9) statt Google Health (/health) nimmt der
                 Konstruktor von <classname>Zend_Gdata_Health</classname> ein optionales drittes
                 Argument mit dem man den H9 Service Name 'weaver' spezifizieren kann.
             </para>
+
             <para>
                 Das folgende Beispiel zeigt wie eine Health Service Klasse bei Verwendung der
                 ClientLogin Authentifizierung erstellt wird:
             </para>
+
             <programlisting language="php"><![CDATA[
 // Parameter für die ClientLogin Authentifikation
 $healthServiceName = Zend_Gdata_Health::HEALTH_SERVICE_NAME;
@@ -162,6 +185,7 @@ $client = Zend_Gdata_ClientLogin::getHttpClient($user,
 // Erstellt eine Instanz des Health Services
 $service = new Zend_Gdata_Health($client);
 ]]></programlisting>
+
             <para>
                 Ein Health Service der AuthSub verwendet kann ähnlich erstellt werden, im einem
                 etwas längeren Aussehen. AuthSub ist das empfohlene Interface um mit Google Health
@@ -169,6 +193,7 @@ $service = new Zend_Gdata_Health($client);
                 Benutzers verlinkt wird. Anders als andere Google Data <acronym>API</acronym>s, ist
                 es notwendig das alle Anfragen von der eigenen Anwendung digital signiert werden.
             </para>
+
             <programlisting language="php"><![CDATA[
 /*
  * Empfängt die aktuelle URL damit der AuthSub Server weiß wohin er den
@@ -255,26 +280,32 @@ $healthService = new Zend_Gdata_Health($client,
                                        'googleInc-MyTestAppName-v1.0',
                                        $userH9Sandbox);
 ]]></programlisting>
+
             <para>
                 Achtung: der Rest dieses Dokument wird annehmen das man AuthSub für die
                 Authentifikation verwendet.
             </para>
         </sect3>
     </sect2>
+
     <sect2 id="zend.gdata.health.profilefeed">
         <title>Profil Feed</title>
+
         <para>
             Um den Profil Feed des Benutzers abzufragen, muß man sicherstellen das der initiale
             AuthSub Token mit gesetztem <code>permission=1</code> Parameter angefragt wurde. Der
             Prozess des extrahierens von Daten aus dem Profil benötigt zwei Schritte. Das Senden
             einer Anfrage und dem durchlaufen des resultierenden Feeds.
         </para>
+
         <sect3 id="zend.gdata.health.profilefeed.query">
             <title>Eine strukturierte Anfrage senden</title>
+
             <para>
                 Man kann strukturierte Anfragen senden um spezielle Einträge von einem
                 Benutzerprofil zu erhalten.
             </para>
+
             <para>
                 Wenn man die Health <acronym>API</acronym> verwendet um ein Profil zu empfangen,
                 werden speziell konstruierte Anfrage <acronym>URL</acronym>s verwendet um zu
@@ -283,14 +314,17 @@ $healthService = new Zend_Gdata_Health($client,
                 vereinfachen indem automatisch eine Abfrage <acronym>URL</acronym> erstellt wird
                 basierend auf den Parametern die man gesetzt hat.
             </para>
+
             <sect4 id="zend.gdata.health.profilefeed.query.construct">
                 <title>Den Feed abfragen</title>
+
                 <para>
                     Um eine Abfrage eines Profil Feeds durchzuführen, muß eine neue Instanz von
                     <classname>Zend_Gdata_Health_Query</classname> erzeugt und die
                     <methodname>getHealthProfileFeed()</methodname> Methode des Services aufgerufen
                     werden:
                 </para>
+
                 <programlisting language="php"><![CDATA[
 $healthService = new Zend_Gdata_Health($client);
 
@@ -304,11 +338,13 @@ $query->setCategory("medication");
 
 $profileFeed = $healthService->getHealthProfileFeed($query);
 ]]></programlisting>
+
                 <para>
                     Wenn man <methodname>setDigest("true")</methodname> verwendet werden alle CCR
                     Daten des Benutzers in einem einzelnen Atom <code>&lt;entry&gt;</code>
                     zurückgegeben.
                 </para>
+
                 <para>
                     Dem <methodname>setCategory()</methodname> Helfer kann ein zusätzlicher
                     Parameter übergeben werden um spezifischere CCR Informationen zurückzuerhalten.
@@ -317,6 +353,7 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
                     kann bei anderen Kategorien wie Konditionen, Allergien, Labor Ergebnisse, usw.
                     angewendet werden.
                 </para>
+
                 <para>
                     Eine komplette Liste der unterstützten Abfrageparameter ist im <ulink
                         url="http://code.google.com/apis/health/reference.html#Parameters">Kapitel
@@ -325,20 +362,24 @@ $profileFeed = $healthService->getHealthProfileFeed($query);
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.gdata.health.profilefeed.iterate">
             <title>Durch die Profil Einträge iterieren</title>
+
             <para>
                 Jeder Google Health Eintrag enthält CCR Daten, trotzem führt die Verwendung des
                 Abfrageparameters <code>digest=true</code> dazu das alle CCR Elemente (die dieser
                 Abfrage entsprechen) in einen einzelnen Atom <code>&lt;entry&gt;</code>
                 zusammengefügt werden.
             </para>
+
             <para>
                 Um die kompletten CCR Informationen von einem Eintrag zu erhalten, muß ein Aufruf
                 zur <methodname>getCcr()</methodname> Methode der
                 <classname>Zend_Gdata_Health_ProfileEntry</classname> Klasse durchgeführt werden.
                 Das gibt ein <classname>Zend_Gdata_Health_Extension_CCR</classname> zurück:
             </para>
+
             <programlisting language="php"><![CDATA[
 $entries = $profileFeed->getEntries();
 foreach ($entries as $entry) {
@@ -353,6 +394,7 @@ foreach ($entries as $entry) {
     }
 }
 ]]></programlisting>
+
             <para>
                 Hier wird die <methodname>getCcr()</methodname> Methode in Verbindung mit einem
                 magischen Helfer verwendet um nur die Medikationsdaten aufzureißen und aus den CCR
@@ -362,11 +404,13 @@ foreach ($entries as $entry) {
                 den <ulink url="http://code.google.com/apis/health/reference.html#CatQueries">Google
                     Health Referenz Guide</ulink> gesehen werden.
             </para>
+
             <para>
                 Um effizienter zu sein, können auch Kategorie Abfragen verwendet werden um nur die
                 notwendigen CCRs von den Google Health Servern zu erhalten. Dann muß durch diese
                 Ergebnisse iteriert werden:
             </para>
+
             <programlisting language="php"><![CDATA[
 $query = new Zend_Gdata_Health_Query();
 $query->setDigest("true");
@@ -385,11 +429,14 @@ foreach ($conditions as $cond) {
 ]]></programlisting>
         </sect3>
     </sect2>
+
     <sect2 id="zend.gdata.health.profilelist">
         <title>Profil Listen Feed</title>
+
         <para>
             Beachte: Dieser Feed ist nur vorhanden wenn man ClientLogin verwendet
         </para>
+
         <para>
             Da ClientLogin bei jedem seiner Feeds eine Profil ID benötigt, sollten Anwendungen
             diesen Feed als erstes abfragen um die richtigen Profile auszuwählen. Der Profil Listen
@@ -397,13 +444,16 @@ foreach ($conditions as $cond) {
             entsprechen. Die ProfilID wird im Atom <code>&lt;content&gt;</code> und der Name im
             <code>&lt;title&gt;</code> Element zurückgegeben.
         </para>
+
         <sect3 id="zend.gdata.health.profilelist.query">
             <title>Den Feed abfragen</title>
+
             <para>
                 Um eine Abfrage gegen den Profil Listen Feed durchzuführen muß die
                 <methodname>getHealthProfileListFeed()</methodname> Methode des Services aufgerufen
                 werden:
             </para>
+
             <programlisting language="php"><![CDATA[
 $client = Zend_Gdata_ClientLogin::getHttpClient('user@gmail.com',
                                                 'pa$$word',
@@ -418,12 +468,14 @@ foreach ($entries as $entry) {
     echo 'Profil ID: ' . $entry->getProfileID() . '</p>';
 }
 ]]></programlisting>
+
             <para>
                 Sobald man sich entschieden hat welches Profil verwendet werden soll, wird
                 <methodname>setProfileID()</methodname> mit der Profil ID als Argument aufgerufen.
                 Das begrenzt die weiteren <acronym>API</acronym> Abfragen auf genau das betreffende
                 Profil:
             </para>
+
             <programlisting language="php"><![CDATA[
 // Verwende das erste Profil
 $profileID = $feed->entry[0]->getProfileID();
@@ -436,8 +488,10 @@ echo '<p><b>Abgefragte Profil ID</b>: ' . $profileID . '</p>';
 ]]></programlisting>
         </sect3>
     </sect2>
+
     <sect2 id="zend.gdata.health.notice">
         <title>Notizen an des Register Feed versenden</title>
+
         <para>
             Individuelle Antworten zum registrierten Feed sind als Notizen bekannt. Notizen werden
             von Dritt-Anwendungen gesendet um den Benutzer über ein neues Event zu informieren. Mit
@@ -448,12 +502,15 @@ echo '<p><b>Abgefragte Profil ID</b>: ' . $profileID . '</p>';
             Sie spezielle Rezepte nehmen sollen, oder sie können Laborergebnisse im CCR Format
             enthalten.
         </para>
+
         <sect3 id="zend.gdata.health.notice.send">
             <title>Senden einer Notiz</title>
+
             <para>
                 Notizen können durch das Verwenden der <methodname>sendHealthNotice()</methodname>
                 Methode des Health Services gesendet werden:
             </para>
+
             <programlisting language="php"><![CDATA[
 $healthService = new Zend_Gdata_Health($client);
 
@@ -486,6 +543,6 @@ $responseEntry = $healthService->sendHealthNotice($subject,
                                                   "html",
                                                   $ccr);
 ]]></programlisting>
-      </sect3>
+        </sect3>
     </sect2>
 </sect1>

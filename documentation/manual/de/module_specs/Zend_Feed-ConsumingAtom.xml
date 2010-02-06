@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.consuming-atom">
     <title>Einen Atom Feed konsumieren</title>
@@ -17,10 +17,12 @@
 
     <example id="zend.feed.consuming-atom.example.usage">
         <title>Grundlegende Verwendung eines Atom Feeds</title>
+
         <para>
             Lese einen Atom Feed und gebe <code>title</code> und <code>summary</code> jedes
             Eintrages aus:
         </para>
+
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/');
 echo 'Der Feed enthält ' . $feed->count() . ' Einträge.' . "\n\n";
@@ -38,16 +40,25 @@ foreach ($feed as $entry) {
     <para>
         <itemizedlist>
             <listitem>
-                <para><code>title</code> - Die Überschrift des Feeds, gleichbedeutend mit der
-                Überschrift eines <acronym>RSS</acronym> Channels</para>
+                <para>
+                    <code>title</code> - Die Überschrift des Feeds, gleichbedeutend mit der
+                    Überschrift eines <acronym>RSS</acronym> Channels
+                </para>
             </listitem>
+
             <listitem>
-                <para><code>id</code> - Jeder Feed und Eintrag hat in Atom einen einzigartige
-                Bezeichner</para>
+                <para>
+                    <code>id</code> - Jeder Feed und Eintrag hat in Atom einen einzigartige
+                    Bezeichner
+                </para>
             </listitem>
+
             <listitem>
-                <para><code>link</code> - Feeds können mehrere Links enthalten, welche durch ein
-                <code>type</code> Attribut ausgezeichnet werden</para>
+                <para>
+                    <code>link</code> - Feeds können mehrere Links enthalten, welche durch ein
+                    <code>type</code> Attribut ausgezeichnet werden
+                </para>
+
                 <para>
                     In einem <acronym>RSS</acronym> Channel wäre dies gleichbedeutend mit
                     <code>type="text/html"</code>. Wenn der Link auf eine alternative Version des
@@ -55,9 +66,13 @@ foreach ($feed as $entry) {
                     <code>rel="alternate"</code> Attribut enthalten.
                 </para>
             </listitem>
+
             <listitem>
-                <para><code>subtitle</code> - Die Beschreibung des Feeds, gleichbedeutend mit der
-                Beschreibung eines <acronym>RSS</acronym> Channels</para>
+                <para>
+                    <code>subtitle</code> - Die Beschreibung des Feeds, gleichbedeutend mit der
+                    Beschreibung eines <acronym>RSS</acronym> Channels
+                </para>
+
                 <para><code>author->name()</code> - Der Name des Autoren des Feeds</para>
                 <para><code>author->email()</code> - Die E-Mail Adresse des Autoren des Feeds</para>
             </listitem>
@@ -73,32 +88,51 @@ foreach ($feed as $entry) {
             <listitem>
                 <para><code>id</code> - Der einzigartige Bezeichner des Eintrags</para>
             </listitem>
+
             <listitem>
-                <para><code>title</code> - Die Überschrift des Eintrags, gleichbedeutend mit der
-                Überschrift eines <acronym>RSS</acronym> Eintrags</para>
+                <para>
+                    <code>title</code> - Die Überschrift des Eintrags, gleichbedeutend mit der
+                    Überschrift eines <acronym>RSS</acronym> Eintrags
+                </para>
             </listitem>
+
             <listitem>
-                <para><code>link</code> - Ein Link zu einem anderen Format oder einer alternativen
-                Ansicht diesen Eintrags</para>
+                <para>
+                    <code>link</code> - Ein Link zu einem anderen Format oder einer alternativen
+                    Ansicht diesen Eintrags
+                </para>
             </listitem>
+
             <listitem>
                 <para><code>summary</code> - Eine Zusammenfassung des Inhalts dieses Eintrags</para>
             </listitem>
+
             <listitem>
-                <para><code>content</code> - Der komplette Inhalt des Eintrags; kann übersprungen
-                werden, wenn der Feed nur Zusammenfassungen enthält</para>
+                <para>
+                    <code>content</code> - Der komplette Inhalt des Eintrags; kann übersprungen
+                    werden, wenn der Feed nur Zusammenfassungen enthält
+                </para>
             </listitem>
+
             <listitem>
-                <para><code>author</code> - Mit <code>name</code> und <code>email</code> Unter-Tags
-                wie den Feeds</para>
+                <para>
+                    <code>author</code> - Mit <code>name</code> und <code>email</code> Unter-Tags
+                    wie den Feeds
+                </para>
             </listitem>
+
             <listitem>
-                <para><code>published</code> - Das Datum, an dem der Eintrag veröffentlicht wurde,
-                im <acronym>RFC</acronym> 3339 Format</para>
+                <para>
+                    <code>published</code> - Das Datum, an dem der Eintrag veröffentlicht wurde,
+                    im <acronym>RFC</acronym> 3339 Format
+                </para>
             </listitem>
+
             <listitem>
-                <para><code>updated</code> - Das Datum, an dem der Eintrag das letzte Mal geändert
-                wurde, im <acronym>RFC</acronym> 3339 Format</para>
+                <para>
+                    <code>updated</code> - Das Datum, an dem der Eintrag das letzte Mal geändert
+                    wurde, im <acronym>RFC</acronym> 3339 Format
+                </para>
             </listitem>
         </itemizedlist>
     </para>
@@ -108,6 +142,3 @@ foreach ($feed as $entry) {
         <ulink url="http://www.atomenabled.org/">http://www.atomenabled.org/</ulink>.
     </para>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

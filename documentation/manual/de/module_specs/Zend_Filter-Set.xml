@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20760 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Standard Filter Klassen</title>
@@ -11,6 +11,7 @@
 
     <sect2 id="zend.filter.set.alnum">
         <title>Alnum</title>
+
         <para>
             Gibt den String <varname>$value</varname> zurück und entfernt alles ausser alphabetische
             und nummerische Zeichen. Dieser Filter inkludiert eine Option die auch Leerzeichen
@@ -29,6 +30,7 @@
 
     <sect2 id="zend.filter.set.alpha">
         <title>Alpha</title>
+
         <para>
             Gibt den String <varname>$value</varname> zurück und entfernt alles ausser alphabetische
             Zeichen. Dieser Filter inkludiert eine Option die auch Leerzeichen erlaubt.
@@ -37,6 +39,7 @@
 
     <sect2 id="zend.filter.set.basename">
         <title>BaseName</title>
+
         <para>
             Wenn ein String einen Pfad zu einer Datei enthält gibt dieser Filter den Basisnamen der
             Datei zurück.
@@ -50,6 +53,7 @@
 
     <sect2 id="zend.filter.set.digits">
         <title>Digits</title>
+
         <para>
             Gibt den String <varname>$value</varname> zurück und entfernt alles ausser nummerische
             Zeichen.
@@ -58,6 +62,7 @@
 
     <sect2 id="zend.filter.set.dir">
         <title>Dir</title>
+
         <para>
             Gibt den Verzeichnisnamen einer Pfadangabe zurück.
         </para>
@@ -67,6 +72,7 @@
 
     <sect2 id="zend.filter.set.htmlentities">
         <title>HtmlEntities</title>
+
         <para>
             Gibt den String <varname>$value</varname> zurück und konvertiert die Zeichen in Ihre
             entsprechende <acronym>HTML</acronym> Entitität wenn diese existiert.
@@ -75,6 +81,7 @@
 
     <sect2 id="zend.filter.set.int">
         <title>Int</title>
+
         <para>
             Gibt (int) <varname>$value</varname> zurück.
         </para>
@@ -90,6 +97,7 @@
 
     <sect2 id="zend.filter.set.stringtrim">
         <title>StringTrim</title>
+
         <para>
             Gibt den String <varname>$value</varname> zurück und entfernt alle Leerzeichen vom
             Beginn und vom Ende.

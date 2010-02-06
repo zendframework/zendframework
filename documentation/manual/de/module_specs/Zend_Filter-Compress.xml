@@ -1,49 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.compress">
     <title>Compress und Decompress</title>
+
     <para>
         Diese zwei Filter sind in der Lage Strings, Dateien und Verzeichnisse zu komprimieren und zu
         dekomprimieren. Sie verwenden Adapter und unterstützen die folgenden Kompressions Formate:
     </para>
 
     <itemizedlist>
-        <listitem>
-            <para>
-                <emphasis>Bz2</emphasis>
-            </para>
-        </listitem>
-
-        <listitem>
-            <para>
-                <emphasis>Gz</emphasis>
-            </para>
-        </listitem>
-
-        <listitem>
-            <para>
-                <emphasis>Lzf</emphasis>
-            </para>
-        </listitem>
-
-        <listitem>
-            <para>
-                <emphasis>Rar</emphasis>
-            </para>
-        </listitem>
-
-        <listitem>
-            <para>
-                <emphasis>Tar</emphasis>
-            </para>
-        </listitem>
-
-        <listitem>
-            <para>
-                <emphasis>Zip</emphasis>
-            </para>
-        </listitem>
+        <listitem><para><emphasis>Bz2</emphasis></para></listitem>
+        <listitem><para><emphasis>Gz</emphasis></para></listitem>
+        <listitem><para><emphasis>Lzf</emphasis></para></listitem>
+        <listitem><para><emphasis>Rar</emphasis></para></listitem>
+        <listitem><para><emphasis>Tar</emphasis></para></listitem>
+        <listitem><para><emphasis>Zip</emphasis></para></listitem>
     </itemizedlist>
 
     <para>
@@ -281,17 +253,9 @@ $compressed = $filter->filter('filename.zip');
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>Strings</para>
-            </listitem>
-
-            <listitem>
-                <para>Dateien</para>
-            </listitem>
-
-            <listitem>
-                <para>Verzeichnisse</para>
-            </listitem>
+            <listitem><para>Strings</para></listitem>
+            <listitem><para>Dateien</para></listitem>
+            <listitem><para>Verzeichnisse</para></listitem>
         </itemizedlist>
 
         <para>
@@ -336,17 +300,9 @@ $compressed = $filter->filter('filename.zip');
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>Strings</para>
-            </listitem>
-
-            <listitem>
-                <para>Dateien</para>
-            </listitem>
-
-            <listitem>
-                <para>Verzeichnisse</para>
-            </listitem>
+            <listitem><para>Strings</para></listitem>
+            <listitem><para>Dateien</para></listitem>
+            <listitem><para>Verzeichnisse</para></listitem>
         </itemizedlist>
 
         <para>
@@ -397,9 +353,7 @@ $compressed = $filter->filter('filename.zip');
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>Strings</para>
-            </listitem>
+            <listitem><para>Strings</para></listitem>
         </itemizedlist>
 
         <note>
@@ -427,13 +381,8 @@ $compressed = $filter->filter('filename.zip');
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>Dateien</para>
-            </listitem>
-
-            <listitem>
-                <para>Verzeichnisse</para>
-            </listitem>
+            <listitem><para>Dateien</para></listitem>
+            <listitem><para>Verzeichnisse</para></listitem>
         </itemizedlist>
 
         <note>
@@ -510,13 +459,8 @@ $compressed = $filter->filter('filename.zip');
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>Dateien</para>
-            </listitem>
-
-            <listitem>
-                <para>Verzeichnisse</para>
-            </listitem>
+            <listitem><para>Dateien</para></listitem>
+            <listitem><para>Verzeichnisse</para></listitem>
         </itemizedlist>
 
         <note>
@@ -589,17 +533,9 @@ $compressed = $filter->filter('filename.zip');
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>Strings</para>
-            </listitem>
-
-            <listitem>
-                <para>Dateien</para>
-            </listitem>
-
-            <listitem>
-                <para>Verzeichnisse</para>
-            </listitem>
+            <listitem><para>Strings</para></listitem>
+            <listitem><para>Dateien</para></listitem>
+            <listitem><para>Verzeichnisse</para></listitem>
         </itemizedlist>
 
         <note>
@@ -645,6 +581,3 @@ $compressed = $filter->filter('filename.zip');
         </para>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

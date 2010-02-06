@@ -25,6 +25,3 @@ $feedArray = Zend_Feed::findFeeds('http://www.example.com/news.html');
         <classname>Zend_Feed</classname> eine <classname>Zend_Feed_Exception</classname>.
     </para>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

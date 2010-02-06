@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19802 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.writer">
     <title>Zend_Feed_Writer</title>
@@ -354,10 +354,7 @@ $out = $feed->export('atom');
 
                     <row>
                         <entry><methodname>setCopyright()</methodname></entry>
-
-                        <entry>
-                            Setzt eine Copyright Notiz die mit dem Feed assoziiert ist.
-                        </entry>
+                        <entry>Setzt eine Copyright Notiz die mit dem Feed assoziiert ist.</entry>
                     </row>
 
                     <row>
@@ -528,10 +525,7 @@ $out = $feed->export('atom');
 
                     <row>
                         <entry><methodname>setCopyright()</methodname></entry>
-
-                        <entry>
-                            Setzt eine Copyright Notiz die mit dem Feed assoziiert ist.
-                        </entry>
+                        <entry>Setzt eine Copyright Notiz die mit dem Feed assoziiert ist.</entry>
                     </row>
 
                     <row>

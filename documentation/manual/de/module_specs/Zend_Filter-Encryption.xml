@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
@@ -169,6 +169,7 @@ print $encrypted;
 
     <sect3 id="zend.filter.set.encrypt.openssl">
         <title>Verschlüsselung mit OpenSSL</title>
+
         <para>
             Wenn man die <code>OpenSSL</code> Erweiterung installiert hat, kann man den
             <code>OpenSSL</code> Adapter verwenden. Dieser Adapter unterstützt bei der

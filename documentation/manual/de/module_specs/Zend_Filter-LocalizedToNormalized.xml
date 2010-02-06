@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17969 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.localizedtonormalized">
-
     <title>LocalizedToNormalized</title>
 
     <para>
@@ -78,7 +77,6 @@
     </note>
 
     <sect3 id="zend.filter.set.localizedtonormalized.numbers">
-
         <title>Normalisierung von Zahlen</title>
 
         <para>
@@ -113,23 +111,9 @@ $filter->filter('123.456,78');
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>
-                    <emphasis>date_format</emphasis>
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>locale</emphasis>
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>precision</emphasis>
-                </para>
-            </listitem>
+            <listitem><para><emphasis>date_format</emphasis></para></listitem>
+            <listitem><para><emphasis>locale</emphasis></para></listitem>
+            <listitem><para><emphasis>precision</emphasis></para></listitem>
         </itemizedlist>
 
         <para>
@@ -152,11 +136,9 @@ $filter->filter('123.456');
 $filter->filter('123.456,78901');
 // Gibt den Wert '123456.79' zurück
 ]]></programlisting>
-
     </sect3>
 
     <sect3 id="zend.filter.set.localizedtonormalized.dates">
-
         <title>Normalisierung für Datum und Zeit</title>
 
         <para>
@@ -193,8 +175,4 @@ $filter->filter('11:22:33');
 // Gibt array('hour' => '33', 'minute' => '22', 'second' => '11') zurück
 ]]></programlisting>
     </sect3>
-
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

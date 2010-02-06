@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.file.transfer.validators">
     <title>Prüfungen für Zend_File_Transfer</title>
@@ -530,8 +530,8 @@ $upload->addValidator('ExcludeExtension',
                       false,
                       array('php', 'exe', 'case' => true));
 ]]></programlisting>
-
         </example>
+
         <note>
             <para>
                 Es ist zu beachten das diese Prüfung nur die Dateierweiterung prüft. Sie prüft nicht
@@ -838,27 +838,19 @@ $upload->addValidator('FilesSize',
 
         <itemizedlist>
             <listitem>
-                <para>
-                    <code>minheight</code>: Setzt die mindeste Höhe des Bildes.
-                </para>
+                <para><code>minheight</code>: Setzt die mindeste Höhe des Bildes.</para>
             </listitem>
 
             <listitem>
-                <para>
-                    <code>maxheight</code>: Settzt die maximale Höhe des Bildes.
-                </para>
+                <para><code>maxheight</code>: Settzt die maximale Höhe des Bildes.</para>
             </listitem>
 
             <listitem>
-                <para>
-                    <code>minwidth</code>: Setzt die mindeste Breite des Bildes.
-                </para>
+                <para><code>minwidth</code>: Setzt die mindeste Breite des Bildes.</para>
             </listitem>
 
             <listitem>
-                <para>
-                    <code>maxwidth</code>: Setzt die maximale Breite des Bildes.
-                </para>
+                <para><code>maxwidth</code>: Setzt die maximale Breite des Bildes.</para>
             </listitem>
         </itemizedlist>
 
@@ -1119,9 +1111,7 @@ $upload->addValidator('Md5',
             </listitem>
 
             <listitem>
-                <para>
-                    <code>magicfile</code>: Das Magicfile das verwendet werden soll.
-                </para>
+                <para><code>magicfile</code>: Das Magicfile das verwendet werden soll.</para>
 
                 <para>
                     Mit dieser Option kann definiert werden welches Magicfile zu verwenden ist. Wenn
@@ -1246,7 +1236,6 @@ $upload->addValidator('NotExists',
                             '\home\uploads')
                      );
 ]]></programlisting>
-
         </example>
 
         <note>
@@ -1308,15 +1297,11 @@ $upload->addValidator('Sha1',
 
         <itemizedlist>
             <listitem>
-                <para>
-                    <code>min</code>: Setzt die minimale Dateigröße.
-                </para>
+                <para><code>min</code>: Setzt die minimale Dateigröße.</para>
             </listitem>
 
             <listitem>
-                <para>
-                    <code>max</code>: Setzt die maximale Dateigröße.
-                </para>
+                <para><code>max</code>: Setzt die maximale Dateigröße.</para>
             </listitem>
 
             <listitem>

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.writing_filters">
-
     <title>Filter schreiben</title>
 
     <para>
@@ -34,7 +33,6 @@ class MyFilter implements Zend_Filter_Interface
     }
 }
 ]]></programlisting>
-
     </para>
 
     <para>
@@ -44,10 +42,5 @@ class MyFilter implements Zend_Filter_Interface
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new MyFilter());
 ]]></programlisting>
-
     </para>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

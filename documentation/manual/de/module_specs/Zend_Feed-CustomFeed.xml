@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17502 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.custom-feed">
     <title>Eigene Klassen für Feeds und Einträge</title>
@@ -19,6 +19,7 @@
 
     <example id="zend.feed.custom-feed.example.extending">
         <title>Die Klasse für Atom Einträge mit einem eigenen Namensraum erweitern</title>
+
         <programlisting language="php"><![CDATA[
 /**
  * Die eigene Klasse für Einträge kennt automatisch die Feed URI (optional)
@@ -90,8 +91,4 @@ $entry->myUpdated();
 $entry->myUpdated;
 ]]></programlisting>
     </example>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.decorators">
     <title>Erstellen von eigenem Form Markup durch Zend_Form_Decorator</title>
@@ -54,22 +54,26 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>placement</code>: Die Platzierung kann entweder 'append' oder 'prepend'
                     sein (unabhängig von der Schreibweise), und definiert ob der Inhalt der
                     <methodname>render()</methodname> übergeben wird, angehängt oder vorangestellt
                     wird. Im Fall das ein Dekorator den Inhalt ersetzt wird diese Einstellung
                     ignoriert. Der Standardwert ist anhängen (append).
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>separator</code>: Der Separator wird zwischen dem Inhalt der an
                     <methodname>render()</methodname> übergeben wird und durch den Dekorator neu
                     erstelltem Inhalt verwendet, oder zwischen Teilen die durch den Dekorator
                     dargestellt werden (z.B. FormElements verwenden Separatoren zwischen jedem
                     dargestellten Element). Im Fall das ein Dekorator den Inhalt ersetzt, wird
                     diese Einstellung ignoriert. Der Standardwert ist <constant>PHP_EOL</constant>.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -78,25 +82,35 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>setOption($key, $value)</methodname>: Setzt eine einzelne Option.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>getOption($key)</methodname>: Einen einzelnen Optionswert erhalten.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>getOptions()</methodname>: Alle Optionen erhalten.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>removeOption($key)</methodname>: Eine einzelne Option entfernen.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>clearOptions()</methodname>: Alle Optionen entfernen.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -371,6 +385,3 @@ echo $form->renderHtmlTag('wrap this content');
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

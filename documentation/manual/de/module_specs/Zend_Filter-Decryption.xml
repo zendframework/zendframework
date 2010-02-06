@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19150 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
+
     <para>
         Dieser Filter verschlüsselt beliebige Strings mit den angegebenen Einstellungen. Hierfür
         verwendet er Adapter. Aktuell gibt es Adapter für die <code>Mcrypt</code> und
@@ -17,6 +18,7 @@
 
     <sect3 id="zend.filter.set.decrypt.mcrypt">
         <title>Entschlüsselung mit Mcrypt</title>
+
         <para>
             Für die Entschlüsselung von Inhalten die vorher mit <code>Mcrypt</code> verschlüsselt
             wurden muß man die Optionen wissen mit denen die Verschlüsselung aufgerufen wurde.
@@ -63,6 +65,7 @@ print $decrypted;
 
     <sect3 id="zend.filter.set.decrypt.openssl">
         <title>Entschlüsselung mit OpenSSL</title>
+
         <para>
             Entschlüsselung mit <code>OpenSSL</code> ist so einfach die Verschlüsseln. Aber man
             benötigt alle Daten von der Person die den Inhalt verschlüsselt hat.
@@ -157,6 +160,3 @@ print $decrypted;
 ]]></programlisting>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

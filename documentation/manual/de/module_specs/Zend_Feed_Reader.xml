@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.reader">
     <title>Zend_Feed_Reader</title>
@@ -411,14 +411,14 @@ if(isset($links->atom)) {
             der ArrayObject Iterator verwendet wird.
         </para>
 
-                <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $links = Zend_Feed_Reader::findFeedLinks('http://www.planet-php.net');
 
 foreach ($links as $link) {
     echo $link['uri'], "\n";
 }
 ]]></programlisting>
-  </sect2>
+    </sect2>
 
     <sect2 id="zend.feed.reader.attribute-collections">
         <title>Attribut Sammlungen</title>
@@ -502,7 +502,7 @@ $labels = $categories->getValues();
         </para>
     </sect2>
 
-  <sect2 id="zend.feed.reader.retrieve-info">
+    <sect2 id="zend.feed.reader.retrieve-info">
         <title>Empfangen von Feed Informationen</title>
 
         <para>
@@ -574,13 +574,11 @@ $labels = $categories->getValues();
 
                     <row>
                         <entry><methodname>getTitle()</methodname></entry>
-
                         <entry>Gibt den Titel des Feeds zurück</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getDescription()</methodname></entry>
-
                         <entry>Gibt die textuelle Beschreibung des Feeds zurück</entry>
                     </row>
 
@@ -829,19 +827,16 @@ $labels = $categories->getValues();
 
                     <row>
                         <entry><methodname>key()</methodname></entry>
-
                         <entry>Gibt den aktuellen Index für Einträge zurück</entry>
                     </row>
 
                     <row>
                         <entry><methodname>next()</methodname></entry>
-
                         <entry>Addiert den Wert des Index für Einträge um Eins</entry>
                     </row>
 
                     <row>
                         <entry><methodname>rewind()</methodname></entry>
-
                         <entry>Resetiert den Index für Einträge auf 0</entry>
                     </row>
 
@@ -849,7 +844,7 @@ $labels = $categories->getValues();
                         <entry><methodname>valid()</methodname></entry>
 
                         <entry>
-                            Prüft pb der aktuelle Index für Einträge gültig ist, z.B. ob er nicht
+                            Prüft ob der aktuelle Index für Einträge gültig ist, z.B. ob er nicht
                             unter 0 fällt und die Anzahl der existierenden Einträge nicht
                             übersteigt.
                         </entry>
@@ -912,19 +907,16 @@ $labels = $categories->getValues();
                 <tbody>
                     <row>
                         <entry><methodname>getId()</methodname></entry>
-
                         <entry>Gibt eine eindeutige ID für den aktuellen Eintrag zurück.</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getTitle()</methodname></entry>
-
                         <entry>Gibt den Titel des aktuellen Eintrags zurück.</entry>
                     </row>
 
                     <row>
                         <entry><methodname>getDescription()</methodname></entry>
-
                         <entry>Gibt eine Beschreibung des aktuellen Eintrags zurück.</entry>
                     </row>
 
@@ -1262,13 +1254,11 @@ $labels = $categories->getValues();
 
                     <row>
                         <entry>Content (nur Eintrag)</entry>
-
                         <entry>Implementiert Unterstützung für Content 1.0</entry>
                     </row>
 
                     <row>
                         <entry>Atom (Feed und Eintrag)</entry>
-
                         <entry>Implementiert Unterstützung für Atom 0.3 und Atom 1.0</entry>
                     </row>
 
@@ -1326,6 +1316,7 @@ $labels = $categories->getValues();
                 <tbody>
                     <row>
                         <entry>Syndication</entry>
+
                         <entry>
                             Implementiert Unterstützung für Syndication 1.0 <acronym>RSS</acronym>
                             Feeds
@@ -1334,6 +1325,7 @@ $labels = $categories->getValues();
 
                     <row>
                         <entry>CreativeCommons</entry>
+
                         <entry>
                             Ein <acronym>RSS</acronym> Modul das ein Element auf &lt;channel&gt;
                             oder &lt;item&gt; Level hinzufügt welches spezifiziert welche

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17172 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.inflector">
     <title>Zend_Filter_Inflector</title>
@@ -361,17 +361,8 @@ $inflector->setFilterRule('script', array(
             </para>
 
             <itemizedlist>
-                <listitem>
-                    <para>
-                        <emphasis>':' prefix</emphasis>: Filterregeln.
-                    </para>
-                </listitem>
-
-                <listitem>
-                    <para>
-                        <emphasis>kein Präfix</emphasis>: statische Regel.
-                    </para>
-                </listitem>
+                <listitem><para><emphasis>':' prefix</emphasis>: Filterregeln.</para></listitem>
+                <listitem><para><emphasis>kein Präfix</emphasis>: statische Regel.</para></listitem>
             </itemizedlist>
 
             <example id="zend.filter.inflector.rules.multiple.example">
@@ -460,9 +451,7 @@ $inflector->addRules(array(
 
         <itemizedlist>
             <listitem>
-                <para>
-                    <code>target</code> spezifiziert das Beugungsziel.
-                </para>
+                <para><code>target</code> spezifiziert das Beugungsziel.</para>
             </listitem>
 
             <listitem>
@@ -512,6 +501,3 @@ $inflector->setConfig($config);
         </example>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -24,9 +24,7 @@
         </listitem>
 
         <listitem>
-            <para>
-                <code>Encrypt</code>: Dieser Filter kann Dateien verschlüsseln.
-            </para>
+            <para><code>Encrypt</code>: Dieser Filter kann Dateien verschlüsseln.</para>
         </listitem>
 
         <listitem>
@@ -190,7 +188,6 @@ $upload->addFilter('Rename', 'C:\picture\newjpg', 'file1')
                 Filter verwendet werden.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.file.transfer.filters.decrypt">
@@ -337,7 +334,6 @@ $upload->addFilter('LowerCase', 'ISO-8859-1');
                 man Ihn auf ein einzelnes Dateielement einschränken will.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.file.transfer.filters.rename">
@@ -408,21 +404,14 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
             <tgroup cols="2" align="left">
                 <thead>
                     <row>
-                        <entry>
-                            Schreibweise
-                        </entry>
-
-                        <entry>
-                            Beschreibung
-                        </entry>
+                        <entry>Schreibweise</entry>
+                        <entry>Beschreibung</entry>
                     </row>
                 </thead>
 
                 <tbody>
                     <row>
-                        <entry>
-                            <methodname>addFile('C:\uploads')</methodname>
-                        </entry>
+                        <entry><methodname>addFile('C:\uploads')</methodname></entry>
 
                         <entry>
                             Spezifiziert einen neuen Pfad für alle Dateien wenn der angegebene
@@ -433,9 +422,7 @@ $upload->addFilter('Rename', 'C:\mypics\newgifs', 'uploadfile1');
                     </row>
 
                     <row>
-                        <entry>
-                            <methodname>addFile('C:\uploads\file.ext')</methodname>
-                        </entry>
+                        <entry><methodname>addFile('C:\uploads\file.ext')</methodname></entry>
 
                         <entry>
                             Spezifiziert einen neuen Pfad und Dateinamen für alle Dateien wenn der

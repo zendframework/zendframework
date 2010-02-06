@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15854 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.normalizedtolocalized">
-
     <title>NormalizedToLocalized</title>
 
     <para>
@@ -52,15 +51,11 @@
         </listitem>
 
         <listitem>
-            <para>
-                <emphasis>time</emphasis>: Zeitwerte, werden in einen String lokalisiert.
-            </para>
+            <para><emphasis>time</emphasis>: Zeitwerte, werden in einen String lokalisiert.</para>
         </listitem>
 
         <listitem>
-            <para>
-                <emphasis>date</emphasis>: Datumswerte, werden in einen String lokalisiert.
-            </para>
+            <para><emphasis>date</emphasis>: Datumswerte, werden in einen String lokalisiert.</para>
         </listitem>
     </itemizedlist>
 
@@ -69,7 +64,6 @@
     </para>
 
     <sect3 id="zend.filter.set.normalizedtolocalized.numbers">
-
         <title>Lokalisierung von Zahlen</title>
 
         <para>
@@ -104,23 +98,9 @@ $filter->filter(123456.78);
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>
-                    <emphasis>date_format</emphasis>
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>locale</emphasis>
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    <emphasis>precision</emphasis>
-                </para>
-            </listitem>
+            <listitem><para><emphasis>date_format</emphasis></para></listitem>
+            <listitem><para><emphasis>locale</emphasis></para></listitem>
+            <listitem><para><emphasis>precision</emphasis></para></listitem>
         </itemizedlist>
 
         <para>
@@ -143,11 +123,9 @@ $filter->filter(123456);
 $filter->filter(123456.78901);
 // Gibt den Wert '123.456,79' zurück
 ]]></programlisting>
-
     </sect3>
 
     <sect3 id="zend.filter.set.normalizedtolocalized.dates">
-
         <title>Lokalisierung für Datum und Zeit</title>
 
         <para>
@@ -184,9 +162,4 @@ $filter->filter(array('hour' => '33', 'minute' => '22', 'second' => '11'));
 // Gibt '11:22:33' zurück
 ]]></programlisting>
     </sect3>
-
 </sect2>
-
-<!--
-vim:se ts=4 sw=4 et:
--->

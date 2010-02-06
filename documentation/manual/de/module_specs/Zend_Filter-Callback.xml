@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18081 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.callback">
     <title>Callback</title>
+
     <para>
         Dieser Filter erlaubt es einem eigene Methoden in Verbindung mit
         <classname>Zend_Filter</classname> zu verwenden. Man muß keinen neuen Filter erstellen
@@ -75,5 +76,4 @@ $value = MyMethod('Hello', 'param1', 'param2');
             aufgerufen werden kann, eine Exception auslöst.
         </para>
     </note>
-
 </sect2>

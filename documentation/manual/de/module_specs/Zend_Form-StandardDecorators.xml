@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardDecorators">
     <title>Standard Formular Dekoratoren die mit dem Zend Framework ausgeliefert werden</title>
@@ -223,39 +223,55 @@ class Util
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <code>ignoreSubForms</code>: Ob die Rekursion im Unterformular ausgeschaltet werden
-                soll oder nicht. Standardwert: <constant>FALSE</constant> (erlaubt Rekursion).
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>ignoreSubForms</code>: Ob die Rekursion im Unterformular ausgeschaltet
+                    werden soll oder nicht. Standardwert: <constant>FALSE</constant> (erlaubt
+                    Rekursion).
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>markupElementLabelEnd</code>: Markup welcher der Elementüberschrift angehängt
-                wird. Standardwert: '&lt;/b&gt;'
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>markupElementLabelEnd</code>: Markup welcher der Elementüberschrift
+                    angehängt wird. Standardwert: '&lt;/b&gt;'
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>markupElementLabelStart</code>: Markup welcher der Elementüberschrift
-                vorangestellt wird. Standardwert: '&lt;b&gt;'
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>markupElementLabelStart</code>: Markup welcher der Elementüberschrift
+                    vorangestellt wird. Standardwert: '&lt;b&gt;'
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>markupListEnd</code>: Markup welcher der Nachrichtenliste angehängt wird.
-                Standardwert: '&lt;/ul&gt;'.
-            </para></listitem>
-            <listitem><para>
-                <code>markupListItemEnd</code>: Markup der individuellen Fehlermeldungen angehängt
-                wird. Standardwert: '&lt;/li&gt;'
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>markupListEnd</code>: Markup welcher der Nachrichtenliste angehängt wird.
+                    Standardwert: '&lt;/ul&gt;'.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>markupListItemStart</code>: Markup der individuellen Fehlermeldungen
-                vorangestellt wird. Standardwert: '&lt;li&gt;'
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>markupListItemEnd</code>: Markup der individuellen Fehlermeldungen
+                    angehängt wird. Standardwert: '&lt;/li&gt;'
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <code>markupListStart</code>: Markup welcher der Nachrichtenliste vorangestellt wird.
-                Standardwert: '&lt;ul class="form-errors"&gt;'
-            </para></listitem>
+            <listitem>
+                <para>
+                    <code>markupListItemStart</code>: Markup der individuellen Fehlermeldungen
+                    vorangestellt wird. Standardwert: '&lt;li&gt;'
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <code>markupListStart</code>: Markup welcher der Nachrichtenliste vorangestellt
+                    wird. Standardwert: '&lt;ul class="form-errors"&gt;'
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -331,33 +347,41 @@ class Util
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>optionalPrefix</code>: Setzt den Text, der dem Label vorangestellt wird,
                     wenn das Element optional ist. Kann mit den Zugriffsmethoden
                     <methodname>setOptionalPrefix()</methodname> und
                     <methodname>getOptionalPrefix()</methodname> manipuliert werden.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>optionalSuffix</code>: Setzt den Text, der dem Label angehängt wird,
                     wenn das Element optional ist. Kann mit den Zugriffsmethoden
                     <methodname>setOptionalSuffix()</methodname> und
                     <methodname>getOptionalSuffix()</methodname> manipuliert werden.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>requiredPrefix</code>: Setzt den Text, der dem Label vorangestellt wird,
                     wenn das Element benötigt wird. Kann mit den Zugriffsmethoden
                     <methodname>setRequiredPrefix()</methodname> und
                     <methodname>getRequiredPrefix()</methodname> manipuliert werden.
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <code>requiredSuffix</code>: Setzt den Text, der dem Label angehängt wird,
                     wenn das Element benötigt wird. Kann mit den Zugriffsmethoden
                     <methodname>setRequiredSuffix()</methodname> und
                     <methodname>getRequiredSuffix()</methodname> manipuliert werden.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -433,23 +457,25 @@ $form->setDecorators(array(
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                    <code>element</code>: Das Element, welches dekoriert wird
-            </para></listitem>
+            <listitem>
+                <para><code>element</code>: Das Element, welches dekoriert wird</para>
+            </listitem>
 
-            <listitem><para>
-                    <code>content</code>: Der Inhalt, der an den Dekorator übergeben wird
-            </para></listitem>
+            <listitem>
+                <para><code>content</code>: Der Inhalt, der an den Dekorator übergeben wird</para>
+            </listitem>
 
-            <listitem><para>
-                    <code>decorator</code>: Das Dekorator Objekt selbst
-            </para></listitem>
+            <listitem>
+                <para><code>decorator</code>: Das Dekorator Objekt selbst</para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     Zusätzlich werden, alle Optionen, die an den Dekorator mit
                     <methodname>setOptions()</methodname> übergeben und nicht intern verwendet
                     werden, an das View Skript als View Variablen übergeben.
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -520,6 +546,3 @@ $this->decorator->setOption('placement', false);
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 tw=80 et:
--->

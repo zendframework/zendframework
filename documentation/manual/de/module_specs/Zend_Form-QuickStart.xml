@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.quickstart">
     <title>Schnellstart mit Zend_Form</title>
@@ -65,49 +65,21 @@ $form->setAttrib('id', 'login');
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                button
-            </para></listitem>
+            <listitem><para>button</para></listitem>
 
-            <listitem><para>
-                checkbox (oder viele Checkboxen auf einmal mit multiCheckbox)
-            </para></listitem>
+            <listitem>
+                <para>checkbox (oder viele Checkboxen auf einmal mit multiCheckbox)</para>
+            </listitem>
 
-            <listitem><para>
-                hidden
-            </para></listitem>
-
-            <listitem><para>
-                image
-            </para></listitem>
-
-            <listitem><para>
-                password
-            </para></listitem>
-
-            <listitem><para>
-                radio
-            </para></listitem>
-
-            <listitem><para>
-                reset
-            </para></listitem>
-
-            <listitem><para>
-                select (beide, normale und Mehrfachauswahl Typen)
-            </para></listitem>
-
-            <listitem><para>
-                submit
-            </para></listitem>
-
-            <listitem><para>
-                text
-            </para></listitem>
-
-            <listitem><para>
-                textarea
-            </para></listitem>
+            <listitem><para>hidden</para></listitem>
+            <listitem><para>image</para></listitem>
+            <listitem><para>password</para></listitem>
+            <listitem><para>radio</para></listitem>
+            <listitem><para>reset</para></listitem>
+            <listitem><para>select (beide, normale und Mehrfachauswahl Typen)</para></listitem>
+            <listitem><para>submit</para></listitem>
+            <listitem><para>text</para></listitem>
+            <listitem><para>textarea</para></listitem>
         </itemizedlist>
 
         <para>
@@ -234,12 +206,14 @@ $form->addElement('text', 'username', array(
 ));
 ]]></programlisting>
 
-        <note><para>
-            Wenn man sieht, dass man Elemente welche die gleichen Optionen in vielen Plätzen
-            verwenden, konfiguriert, kann es gewünscht sein, eine eigene
-            <classname>Zend_Form_Element</classname> Unterklasse zu erstellen und diese stattdessen
-            anzupassen; das spart viel Tipparbeit im weiteren Verlauf.
-        </para></note>
+        <note>
+            <para>
+                Wenn man sieht, dass man Elemente welche die gleichen Optionen in vielen Plätzen
+                verwenden, konfiguriert, kann es gewünscht sein, eine eigene
+                <classname>Zend_Form_Element</classname> Unterklasse zu erstellen und diese
+                stattdessen anzupassen; das spart viel Tipparbeit im weiteren Verlauf.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.form.quickstart.render">
@@ -549,7 +523,7 @@ class UserController extends Zend_Controller_Action
             Und ein View Skript für die Darstellung des Formulars:
         </para>
 
-<programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 <h2>Bitte anmelden:</h2>
 <?php echo $this->form ?>
 ]]></programlisting>
@@ -627,6 +601,3 @@ $form   = new Zend_Form($config->user->login);
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

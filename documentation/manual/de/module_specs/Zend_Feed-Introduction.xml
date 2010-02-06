@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.introduction">
     <title>Einführung</title>
+
     <para>
         <classname>Zend_Feed</classname> stellt Funktionalitäten für das Konsumieren von
         <acronym>RSS</acronym> und Atom Feeds. Es stellt eine natürliche Syntax bereit, um auf
@@ -31,6 +32,7 @@
 
     <note>
         <title>Achtung</title>
+
         <para>
             Viele <acronym>RSS</acronym> Feeds bieten verschiedene Eigenschaften für Kanäle und
             Einträge. Die <acronym>RSS</acronym> Spezifikation bietet viele optionale Eigenschaften,
@@ -41,6 +43,7 @@
 
     <example id="zend.feed.introduction.example.rss">
         <title>Zend_Feed für die Verarbeitung von RSS Feed Daten verwenden</title>
+
         <programlisting language="php"><![CDATA[
 // hole die neuesten Slashdot Schlagzeilen
 try {
@@ -71,6 +74,3 @@ foreach ($slashdotRss as $item) {
 ]]></programlisting>
     </example>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

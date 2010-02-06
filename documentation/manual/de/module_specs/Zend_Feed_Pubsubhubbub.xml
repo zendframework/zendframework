@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20760 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.feed.pubsubhubbub.introduction">
     <title>Zend_Feed_Pubsubhubbub</title>
@@ -245,7 +245,8 @@ if (!$publisher->isSuccess()) {
             </para>
         </important>
 
-        <sect3 id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing">
+        <sect3
+            id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing">
             <title>Abonnieren und Abos löschen</title>
 
             <para>
@@ -280,15 +281,15 @@ if (!$publisher->isSuccess()) {
             </para>
 
             <programlisting language="php"><![CDATA[
-    $storage = new Zend_Feed_Pubsubhubbub_Model_Subscription;
+$storage = new Zend_Feed_Pubsubhubbub_Model_Subscription;
 
-    $subscriber = new Zend_Feed_Pubsubhubbub_Subscriber;
-    $subscriber->setStorage($storage);
-    $subscriber->addHubUrl('http://hubbub.example.com');
-    $subscriber->setTopicUrl('http://www.example.net/rss.xml');
-    $subscriber->setCallbackUrl('http://www.mydomain.com/hubbub/callback');
-    $subscriber->subscribeAll();
-    ]]></programlisting>
+$subscriber = new Zend_Feed_Pubsubhubbub_Subscriber;
+$subscriber->setStorage($storage);
+$subscriber->addHubUrl('http://hubbub.example.com');
+$subscriber->setTopicUrl('http://www.example.net/rss.xml');
+$subscriber->setCallbackUrl('http://www.mydomain.com/hubbub/callback');
+$subscriber->subscribeAll();
+]]></programlisting>
 
             <para>
                 Um Abos zu speichern und Zugriff auf dessen Daten für eine generelle Verwendung zu
@@ -336,16 +337,15 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                 folgenden Parameter enthält (basierend auf dem vorhergehenden Beispiel):
             </para>
 
-            <table id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing.table">
+            <table
+                id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.subscribing.and.unsubscribing.table">
                 <title>Anfrageparameter beim Abonnieren</title>
 
                 <tgroup cols="3">
                     <thead>
                         <row>
                             <entry>Parameter</entry>
-
                             <entry>Wert</entry>
-
                             <entry>Beschreibung</entry>
                         </row>
                     </thead>
@@ -353,7 +353,6 @@ CREATE TABLE IF NOT EXISTS `subscription` (
                     <tbody>
                         <row>
                             <entry>hub.callback</entry>
-
                             <entry>http://www.mydomain.com/hubbub/callback?xhub.subscription=5536df06b5dcb966edab3a4c4d56213c16a8184</entry>
 
                             <entry>
@@ -392,7 +391,6 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                         <row>
                             <entry>hub.lease_seconds</entry>
-
                             <entry>2592000</entry>
 
                             <entry>
@@ -412,7 +410,6 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                         <row>
                             <entry>hub.mode</entry>
-
                             <entry>subscribe</entry>
 
                             <entry>
@@ -426,7 +423,6 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                         <row>
                             <entry>hub.topic</entry>
-
                             <entry>http://www.example.net/rss.xml</entry>
 
                             <entry>
@@ -439,7 +435,6 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                         <row>
                             <entry>hub.verify</entry>
-
                             <entry>sync</entry>
 
                             <entry>
@@ -454,7 +449,6 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                         <row>
                             <entry>hub.verify</entry>
-
                             <entry>async</entry>
 
                             <entry>
@@ -469,7 +463,6 @@ CREATE TABLE IF NOT EXISTS `subscription` (
 
                         <row>
                             <entry>hub.verify_token</entry>
-
                             <entry>3065919804abcaa7212ae89.879827871253878386</entry>
 
                             <entry>
@@ -556,27 +549,27 @@ CREATE TABLE IF NOT EXISTS `subscription` (
             </para>
 
             <programlisting language="php"><![CDATA[
-    $storage = new Zend_Feed_Pubsubhubbub_Model_Subscription;
-    $callback = new Zend_Feed_Pubsubhubbub_Subscriber_Callback;
-    $callback->setStorage($storage);
-    $callback->handle();
-    $callback->sendResponse();
+$storage = new Zend_Feed_Pubsubhubbub_Model_Subscription;
+$callback = new Zend_Feed_Pubsubhubbub_Subscriber_Callback;
+$callback->setStorage($storage);
+$callback->handle();
+$callback->sendResponse();
 
+/**
+ * Prüfe ob der resultierende Callback das Ergebnis eines Feed Updates ist.
+ * Andernfalls war es entweder eine (De-)Abo-Prüfanfrage oder ungültig.
+ * Typischerweise müssen wir nicht mehr tun als die Behandlung der
+ * Aktualisierungen vom Feed hinzuzufügen - der Rest wird intern von der
+ * Klasse behandelt.
+ */
+if ($callback->hasFeedUpdate()) {
+    $feedString = $callback->getFeedUpdate();
     /**
-     * Prüfe ob der resultierende Callback das Ergebnis eines Feed Updates ist.
-     * Andernfalls war es entweder eine (De-)Abo-Prüfanfrage oder ungültig.
-     * Typischerweise müssen wir nicht mehr tun als die Behandlung der
-     * Aktualisierungen vom Feed hinzuzufügen - der Rest wird intern von der
-     * Klasse behandelt.
+     * Die Aktualisierung des Feeds asynchron bearbeiten um ein Timeout
+     * des Hubs zu vermeiden.
      */
-    if ($callback->hasFeedUpdate()) {
-        $feedString = $callback->getFeedUpdate();
-        /**
-         * Die Aktualisierung des Feeds asynchron bearbeiten um ein Timeout
-         * des Hubs zu vermeiden.
-         */
-    }
-    ]]></programlisting>
+}
+]]></programlisting>
 
             <note>
                 <para>
@@ -613,7 +606,8 @@ CREATE TABLE IF NOT EXISTS `subscription` (
             </important>
         </sect3>
 
-        <sect3 id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.setting.up.and.using.a.callback.url.route">
+        <sect3
+            id="zend.feed.pubsubhubbub.zend.feed.pubsubhubbub.subscriber.setting.up.and.using.a.callback.url.route">
             <title>Eine Callback URL Route einstellen und verwenden</title>
 
             <para>
@@ -687,7 +681,7 @@ class CallbackController extends Zend_Controller_Action
     }
 
 }
-    ]]></programlisting>
+]]></programlisting>
 
         <para>
             Aktuell kann das Hinzufügen der Route zu einem Parameter welcher den Schlüssel der an

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17054 -->
+<!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.realpath">
     <title>RealPath</title>
@@ -42,5 +42,4 @@ $filtered = $filter->filter($path);
 // Gibt '/www/non/existing/path' zurück, selbst wenn
 // file_exists oder realpath false zurückgeben würden
 ]]></programlisting>
-
 </sect2>

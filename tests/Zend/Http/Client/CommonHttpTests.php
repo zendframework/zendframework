@@ -506,7 +506,7 @@ abstract class Zend_Http_Client_CommonHttpTests extends PHPUnit_Framework_TestCa
 
         // Set the new expected URI
         $uri = clone $this->client->getUri();
-        $uri->setPath(dirname($uri->getPath()) . '/path/to/fake/file.ext');
+        $uri->setPath(rtrim(dirname($uri->getPath()), '/') . '/path/to/fake/file.ext');
         $uri = $uri->__toString();
 
         $res = $this->client->request('GET');

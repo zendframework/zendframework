@@ -483,6 +483,43 @@ BBCODE;
             $this->_markup->render('[img]http://google.com/"<script>alert(1)</script>[/img]'));
     }
 
+    public function testAddGroup()
+    {
+        $m = $this->_markup;
+
+        $m->addGroup('table', array('block'));
+        $m->addGroup('table-row', array('table'));
+        $m->addGroup('table-cell', array('table-row'), array('inline', 'inline-empty'));
+
+        $m->addMarkup(
+            'table',
+            Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
+            array(
+                'tag'   => 'table',
+                'group' => 'table'
+            )
+        );
+        $m->addMarkup(
+            'tr',
+            Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
+            array(
+                'tag'   => 'tr',
+                'group' => 'table-row'
+            )
+        );
+        $m->addMarkup(
+            'td',
+            Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
+            array(
+                'tag'   => 'td',
+                'group' => 'table-cell'
+            )
+        );
+
+        $this->assertEquals('<table><tr><td>test</td></tr></table>',
+            $m->render('[table][tr][td]test[/td][/tr][/table]'));
+    }
+
 }
 
 // Call Zend_Markup_BbcodeAndHtmlTest::main()

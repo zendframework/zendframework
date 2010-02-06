@@ -670,6 +670,34 @@ abstract class Zend_Markup_Renderer_RendererAbstract
     }
 
     /**
+     * Add a render group
+     *
+     * @param string $name
+     * @param array $allowedInside
+     * @param array $allowsInside
+     *
+     * @return void
+     */
+    public function addGroup($name, array $allowedInside = array(), array $allowsInside = array())
+    {
+        $this->_groups[$name] = $allowsInside;
+
+        foreach ($allowedInside as $group) {
+            $this->_groups[$group][] = $name;
+        }
+    }
+
+    /**
+     * Get group definitions
+     *
+     * @return array
+     */
+    public function getGroups()
+    {
+        return $this->_groups;
+    }
+
+    /**
      * Set the default filters
      *
      * @return void

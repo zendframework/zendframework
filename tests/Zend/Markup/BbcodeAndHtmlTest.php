@@ -266,7 +266,7 @@ class Zend_Markup_BbcodeAndHtmlTest extends PHPUnit_Framework_TestCase
     public function testFailureAfterCodeTag()
     {
         $input = "[code][b][/code][list][*]Foo[/*][/list]";
-        $expected = "<code>[b]</code><ul><li>Foo</li></ul>";
+        $expected = "<code><span style=\"color: #000000\">\n[b]</span>\n</code><ul><li>Foo</li></ul>";
         $this->assertEquals($expected, $this->_markup->render($input));
     }
 

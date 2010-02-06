@@ -125,6 +125,11 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
             'type'     => self::TYPE_SINGLE,
             'stoppers' => array(),
         ),
+        'code' => array(
+            'type'         => self::TYPE_DEFAULT,
+            'stoppers'     => array('[/code]', '[/]'),
+            'parse_inside' => false
+        )
     );
 
     /**
@@ -365,6 +370,16 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
                         ));
                     } elseif (isset($token['name']) && ($token['name'][0] == '/')) {
                         // this is a stopper, add it as a empty token
+                        $this->_current->addChild(new Zend_Markup_Token(
+                            $token['tag'],
+                            Zend_Markup_Token::TYPE_NONE,
+                            '',
+                            array(),
+                            $this->_current
+                        ));
+                    } elseif (isset($this->_tags[$this->_current->getName()]['parse_inside'])
+                        && !$this->_tags[$this->_current->getName()]['parse_inside']
+                    ) {
                         $this->_current->addChild(new Zend_Markup_Token(
                             $token['tag'],
                             Zend_Markup_Token::TYPE_NONE,

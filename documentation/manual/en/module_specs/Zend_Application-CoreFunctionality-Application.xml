@@ -135,6 +135,18 @@
                                             to determine what section of the
                                             configuration to pull.
                                         </para>
+                                        <para>
+                                            As of 1.10, you may also pass multiple paths containing config
+                                            files to be merged into a single configuration. This assists in
+                                            reducing config duplication across many contexts which share
+                                            common settings (e.g. configs for HTTP, or CLI, each sharing some
+                                            characteristics but with their own conflicting values for others) or
+                                            merely splitting a long configuration across many smaller categorised
+                                            files. The parameter in this case is an array with a single key "configs"
+                                            whose value is an array of the files to merge. Note: this means
+                                            you either pass a literal path, or
+                                            array("configs"=>array("/path1","/path2"[,...])).
+                                        </para>
                                     </listitem>
 
                                     <listitem>

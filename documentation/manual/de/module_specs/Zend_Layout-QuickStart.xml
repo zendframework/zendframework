@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.quickstart">
     <title>Zend_Layout Schnellstart</title>
@@ -216,16 +216,10 @@ $layout = Zend_Layout::getMvcInstance();
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>
-                    Abgrenzung von Layout Variablen.
-                </para>
-            </listitem>
+            <listitem><para>Abgrenzung von Layout Variablen.</para></listitem>
 
             <listitem>
-                <para>
-                    Isolation vom Layout View Skript von anderen View Skripten.
-                </para>
+                <para>Isolation vom Layout View Skript von anderen View Skripten.</para>
             </listitem>
         </itemizedlist>
 
@@ -275,6 +269,3 @@ echo $layout->render();
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.introduction">
     <title>Einführung</title>
@@ -61,6 +61,3 @@
         </listitem>
     </itemizedlist>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19912 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.basics">
     <title>Grundlegende Verwendung</title>
+
     <para>
         Die Verwendung von <classname>Zend_Json</classname> bedingt den Gebrauch der beiden
         öffentlich verfügbaren, statischen Methoden <methodname>Zend_Json::encode()</methodname> und
         <methodname>Zend_Json::decode()</methodname>.
     </para>
+
     <programlisting language="php"><![CDATA[
 // Empfange einen Wert
 $phpNative = Zend_Json::decode($encodedValue);
@@ -43,6 +45,3 @@ if($debug) {
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

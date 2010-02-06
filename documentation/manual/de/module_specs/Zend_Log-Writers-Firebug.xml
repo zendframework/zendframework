@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.log.writers.firebug">
-
     <title>An Firebox schreiben</title>
 
     <para>
@@ -91,7 +90,6 @@ $response->sendHeaders();
     </example>
 
     <sect3 id="zend.log.writers.firebug.priority-styles">
-
         <title>Setzen von Stilen für Prioritäten</title>
 
         <para>
@@ -116,72 +114,83 @@ $writer->setDefaultPriorityStyle('TRACE');
 
         <para>
             Die unterstützten Stile sind wie folgt:
-        <table id="zend.log.writers.firebug.priority-styles.table">
-            <title>Firebug Logging Stile</title>
-            <tgroup cols="2">
-                <thead>
-                    <row>
-                        <entry>Stil</entry>
-                        <entry>Beschreibung</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry><constant>LOG</constant></entry>
-                        <entry>Zeigt eine reine Lognachricht an</entry>
-                    </row>
-                    <row>
-                        <entry><constant>INFO</constant></entry>
-                        <entry>Zeigt eine Info Lognachricht an</entry>
-                    </row>
-                    <row>
-                        <entry><constant>WARN</constant></entry>
-                        <entry>Zeigt eine Warnungs Lognachricht an</entry>
-                    </row>
-                    <row>
-                        <entry><constant>ERROR</constant></entry>
-                        <entry>
-                            Zeigt eine Fehler Lognachricht an die den Fehlerzählen von Firebug
-                            erhöht
-                        </entry>
-                    </row>
-                    <row>
-                        <entry><constant>TRACE</constant></entry>
-                        <entry>
-                            Zeigt eine Lognachricht mit einem erweiterbaren Stack Trace an
-                        </entry>
-                    </row>
-                    <row>
-                        <entry><constant>EXCEPTION</constant></entry>
-                        <entry>
-                            Zeigt eine lange Fehlernachicht mit erweiterbarem Stack Trace an
-                        </entry>
-                    </row>
-                    <row>
-                        <entry><constant>TABLE</constant></entry>
-                        <entry>Zeigt eine Lognachricht mit erweiterbarer Tabelle an</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
-      </para>
+
+            <table id="zend.log.writers.firebug.priority-styles.table">
+                <title>Firebug Logging Stile</title>
+
+                <tgroup cols="2">
+                    <thead>
+                        <row>
+                            <entry>Stil</entry>
+                            <entry>Beschreibung</entry>
+                        </row>
+                    </thead>
+
+                    <tbody>
+                        <row>
+                            <entry><constant>LOG</constant></entry>
+                            <entry>Zeigt eine reine Lognachricht an</entry>
+                        </row>
+
+                        <row>
+                            <entry><constant>INFO</constant></entry>
+                            <entry>Zeigt eine Info Lognachricht an</entry>
+                        </row>
+
+                        <row>
+                            <entry><constant>WARN</constant></entry>
+                            <entry>Zeigt eine Warnungs Lognachricht an</entry>
+                        </row>
+
+                        <row>
+                            <entry><constant>ERROR</constant></entry>
+
+                            <entry>
+                                Zeigt eine Fehler Lognachricht an die den Fehlerzählen von Firebug
+                                erhöht
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><constant>TRACE</constant></entry>
+
+                            <entry>
+                                Zeigt eine Lognachricht mit einem erweiterbaren Stack Trace an
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><constant>EXCEPTION</constant></entry>
+
+                            <entry>
+                                Zeigt eine lange Fehlernachicht mit erweiterbarem Stack Trace an
+                            </entry>
+                        </row>
+
+                        <row>
+                            <entry><constant>TABLE</constant></entry>
+                            <entry>Zeigt eine Lognachricht mit erweiterbarer Tabelle an</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </para>
     </sect3>
 
     <sect3 id="zend.log.writers.firebug.preparing-data">
+        <title>Daten für das Loggen vorbereiten</title>
 
-      <title>Daten für das Loggen vorbereiten</title>
+        <para>
+            Wärend jede <acronym>PHP</acronym> Variable mit den eingebauten Prioritäten geloggt
+            werden kann, ist eine etwas spezielle Formatierung notwendig wenn einige der
+            spezialisierteren Logstile verwendet werden.
+        </para>
 
-      <para>
-          Wärend jede <acronym>PHP</acronym> Variable mit den eingebauten Prioritäten geloggt werden
-          kann, ist eine etwas spezielle Formatierung notwendig wenn einige der spezialisierteren
-          Logstile verwendet werden.
-      </para>
-
-      <para>
-          Die <constant>LOG</constant>, <constant>INFO</constant>, <constant>WARN</constant>,
-          <constant>ERROR</constant> und <constant>TRACE</constant> Stile benötigen keine spezielle
-          Formatierung.
-      </para>
+        <para>
+            Die <constant>LOG</constant>, <constant>INFO</constant>, <constant>WARN</constant>,
+            <constant>ERROR</constant> und <constant>TRACE</constant> Stile benötigen keine
+            spezielle Formatierung.
+        </para>
     </sect3>
 
     <sect3 id="zend.log.writers.firebug.preparing-data.exception">
@@ -201,7 +210,6 @@ $logger->err($exception);
     </sect3>
 
     <sect3 id="zend.log.writers.firebug.preparing-data.table">
-
       <title>Tabellen loggen</title>
 
       <para>

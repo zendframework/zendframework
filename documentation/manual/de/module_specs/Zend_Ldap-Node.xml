@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16633 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.node">
     <title>Objektorientierter Zugriff auf den LDAP Baum durch Verwendung von Zend_Ldap_Node</title>
+
     <sect2 id="zend.ldap.node.basic">
         <title>Grundsätzliche CRUD Operationen</title>
+
         <sect3 id="zend.ldap.node.basic.retrieve">
             <title>Daten von LDAP holen</title>
+
             <sect4 id="zend.ldap.node.basic.retrieve.dn">
                 <title>Einen Node durch seinen DN erhalten</title>
                 <para/>
             </sect4>
+
             <sect4 id="zend.ldap.node.basic.retrieve.search">
                 <title>Den Subbaum eines Nodes durchsuchen</title>
                 <para/>
             </sect4>
         </sect3>
+
         <sect3 id="zend.ldap.node.basic.add">
             <title>Einen neuen Node in LDAP hinzufügen</title>
             <para/>
         </sect3>
+
         <sect3 id="zend.ldap.node.basic.delete">
             <title>Einen Node von LDAP löschen</title>
             <para/>
         </sect3>
+
         <sect3 id="zend.ldap.node.basic.update">
             <title>Einen Node in LDAP aktualisieren</title>
             <para/>
         </sect3>
     </sect2>
+
     <sect2 id="zend.ldap.node.extended">
         <title>Erweiterte Operationen</title>
+
         <sect3 id="zend.ldap.node.extended.copy-and-move">
             <title>Nodes in LDAP kopieren und verschieben</title>
             <para/>
         </sect3>
     </sect2>
+
     <sect2 id="zend.ldap.node.traversal">
         <title>Baum Durchlaufen</title>
 
-            <example>
+        <example>
             <title>Einen LDAP Baum rekursiv durchlaufen</title>
-<programlisting language="php"><![CDATA[
+
+            <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
 $ldap->bind();
@@ -51,7 +62,6 @@ foreach ($ri as $rdn => $n) {
     var_dump($n);
 }
 ]]></programlisting>
-            </example>
-
+        </example>
     </sect2>
 </sect1>

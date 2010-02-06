@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20794 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.hostname">
     <title>Hostname</title>
@@ -75,7 +75,6 @@ if ($validator->isValid($hostname)) {
 $validator = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS |
                                         Zend_Validate_Hostname::ALLOW_IP);
 ]]></programlisting>
-
     </para>
 
     <para>

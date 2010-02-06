@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.layout.advanced">
     <title>Erweiterte Verwendung von Zend_Layout</title>
@@ -165,17 +165,8 @@ $layoutVars   = $placeholders->placeholder('Zend_Layout')->getArrayCopy();
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>
-                    'foo' wird zu 'foo.phtml' transformiert.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    'FooBarBaz' wird zu 'foo-bar-baz.phtml' transformiert.
-                </para>
-            </listitem>
+            <listitem><para>'foo' wird zu 'foo.phtml' transformiert.</para></listitem>
+            <listitem><para>'FooBarBaz' wird zu 'foo-bar-baz.phtml' transformiert.</para></listitem>
         </itemizedlist>
 
         <para>
@@ -263,6 +254,3 @@ $layout->setInflector($inflector);
         </note>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

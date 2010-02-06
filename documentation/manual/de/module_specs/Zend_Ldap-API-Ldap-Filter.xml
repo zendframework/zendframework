@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19247 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-filter">
     <title>Zend_Ldap_Filter</title>
@@ -14,111 +14,119 @@
                     <entry>Beschreibung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter equals(string $attr,
-                        string $value)</code> </emphasis>
+                            string $value)</code></emphasis>
                     </entry>
-                    <entry>
-                        Erstellt einen 'gleich' Filter: <code>(attr=value)</code>.
-                    </entry>
+
+                    <entry>Erstellt einen 'gleich' Filter: <code>(attr=value)</code>.</entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter begins(string $attr,
-                        string $value)</code> </emphasis>
+                            string $value)</code></emphasis>
                     </entry>
-                    <entry>
-                        Erstellt einen 'beginnt mit' Filter: <code>(attr=value*)</code>.
-                    </entry>
+
+                    <entry>Erstellt einen 'beginnt mit' Filter: <code>(attr=value*)</code>.</entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter ends(string $attr, string
-                        $value)</code> </emphasis>
+                            $value)</code></emphasis>
                     </entry>
-                    <entry>
-                        Erstellt einen 'endet mit' Filter: <code>(attr=*value)</code>.
-                    </entry>
+
+                    <entry>Erstellt einen 'endet mit' Filter: <code>(attr=*value)</code>.</entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter contains(string $attr,
-                        string $value)</code> </emphasis>
+                            string $value)</code></emphasis>
                     </entry>
-                    <entry>
-                        Erstellt einen 'enthält' Filter: <code>(attr=*value*)</code>.
-                    </entry>
+
+                    <entry>Erstellt einen 'enthält' Filter: <code>(attr=*value*)</code>.</entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter greater(string $attr,
-                        string $value)</code> </emphasis>
+                            string $value)</code></emphasis>
                     </entry>
-                    <entry>
-                        Erstellt einen 'größer' Filter: <code>(attr&gt;value)</code>.
-                    </entry>
+
+                    <entry>Erstellt einen 'größer' Filter: <code>(attr&gt;value)</code>.</entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter greaterOrEqual(string
-                        $attr, string $value)</code> </emphasis>
+                            $attr, string $value)</code></emphasis>
                     </entry>
+
                     <entry>
                         Erstellt einen 'größer oder gleich' Filter: <code>(attr&gt;=value)</code>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter less(string $attr, string
-                        $value)</code> </emphasis>
+                            $value)</code></emphasis>
                     </entry>
-                    <entry>
-                        Erstellt einen 'kleiner' Filter: <code>(attr&lt;value)</code>.
-                    </entry>
+
+                    <entry>Erstellt einen 'kleiner' Filter: <code>(attr&lt;value)</code>.</entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter lessOrEqual(string $attr,
-                        string $value)</code> </emphasis>
+                            string $value)</code></emphasis>
                     </entry>
+
                     <entry>
                         Erstellt einen 'kleiner oder gleich' Filter: <code>(attr&lt;=value)</code>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter approx(string $attr,
-                        string $value)</code> </emphasis>
+                            string $value)</code></emphasis>
                     </entry>
-                    <entry>
-                        Erstellt einen 'ungefähr' Filter: <code>(attr~=value)</code>.
-                    </entry>
+
+                    <entry>Erstellt einen 'ungefähr' Filter: <code>(attr~=value)</code>.</entry>
                 </row>
+
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter any(string $attr)</code>
-                        </emphasis>
+                        <emphasis><code>Zend_Ldap_Filter any(string $attr)</code></emphasis>
                     </entry>
+
                     <entry>Erstellt einen 'jeden' Filter: <code>(attr=*)</code>.</entry>
                 </row>
+
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Filter string(string
-                        $filter)</code> </emphasis>
+                        <emphasis><code>Zend_Ldap_Filter string(string $filter)</code></emphasis>
                     </entry>
+
                     <entry>
                         Erstellt einen einfachen eigenen String Filter. Der Benutzer ist dafür
                         verantwortlich das alle Werte kommentiert sind da der Filter so wie er
                         ist verwendet wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter mask(string $mask, string
-                        $value,...)</code> </emphasis>
+                            $value,...)</code></emphasis>
                     </entry>
+
                     <entry>
                         Erstellt einen Filter von einer String Maske. Alle <varname>$value</varname>
                         Parameter werden kommentiert und in <varname>$mask</varname> umgewandelt
@@ -127,28 +135,31 @@
                         verwendet wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter
-                        andFilter(Zend_Ldap_Filter_Abstract $filter,...)</code>
-                        </emphasis>
+                            andFilter(Zend_Ldap_Filter_Abstract $filter,...)</code></emphasis>
                     </entry>
+
                     <entry>Erstellt einen 'und' Filter von allen angegebenen Attributen.</entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Filter
-                        orFilter(Zend_Ldap_Filter_Abstract $filter,...)</code>
-                        </emphasis>
+                            orFilter(Zend_Ldap_Filter_Abstract $filter,...)</code></emphasis>
                     </entry>
+
                     <entry>Erstellt einen 'oder' Filter von allen angegebenen Attributen.</entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>__construct(string $attr, string $value, string
-                        $filtertype, string|null $prepend, string|null
-                        $append)</code>
+                            $filtertype, string|null $prepend, string|null $append)</code>
                     </entry>
+
                     <entry>
                         Constructor. Erstellt einen eigenen Filter entsprechend den angegebenen
                         Parametern. Der resultierende Filter ist eine Verknüpfung von
@@ -157,46 +168,56 @@
                         Verwendung der entsprechenden Factory Methoden erstellt werden können.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>string toString()</code></entry>
                     <entry>Gibt eine String Repräsentation des Filters zurück.</entry>
                 </row>
+
                 <row>
                     <entry><code>string __toString()</code></entry>
+
                     <entry>
                         Gibt eine String Repräsentation des Filters zurück. Verweist auf
                         <methodname>Zend_Ldap_Filter::toString()</methodname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>Zend_Ldap_Filter_Abstract negate()</code></entry>
                     <entry>Invertiert den aktuellen Filter.</entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>Zend_Ldap_Filter_Abstract
-                        addAnd(Zend_Ldap_Filter_Abstract $filter,...)</code>
+                            addAnd(Zend_Ldap_Filter_Abstract $filter,...)</code>
                     </entry>
+
                     <entry>
                         Erstellt einen 'und' Filter vom aktuellen Filter und allen als
                         Argument übergegebenen Filtern.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>Zend_Ldap_Filter_Abstract
-                        addOr(Zend_Ldap_Filter_Abstract $filter,...)</code>
+                            addOr(Zend_Ldap_Filter_Abstract $filter,...)</code>
                     </entry>
+
                     <entry>
                         Erstellt einen 'oder' Filter vom aktuellen Filter und allen als Argument
                         übergebenen Filtern.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>string|array escapeValue(string|array
-                        $values)</code> </emphasis>
+                            $values)</code></emphasis>
                     </entry>
+
                     <entry>
                         Kommentiert die angegenen <varname>$values</varname> entsprechend
                         <acronym>RFC</acronym> 2254 so das Sie sicher in <acronym>LDAP</acronym>
@@ -209,11 +230,13 @@
                         Hexadezimalen Wert des Zeichens repräsentiert.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>string|array unescapeValue(string|array
-                        $values)</code> </emphasis>
+                            $values)</code></emphasis>
                     </entry>
+
                     <entry>
                         Entfernt die Konvertierung die von
                         <methodname>Zend_Ldap_Filter::escapeValue()</methodname> durchgeführt wurde.

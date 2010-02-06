@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.api" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>API Übersicht</title>
@@ -23,9 +23,11 @@
                         <entry>Beschreibung</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry><property>host</property></entry>
+
                         <entry>
                             Der Standard Hostname des <acronym>LDAP</acronym> Servers wenn bei
                             <methodname>connect()</methodname> keiner angegeben wurde (kann auch
@@ -33,15 +35,19 @@
                             <methodname>bind()</methodname> zu kanonisieren).
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>port</property></entry>
+
                         <entry>
                             Standard Port des <acronym>LDAP</acronym> Servers wenn bei
                             <methodname>connect()</methodname> keiner angegeben wurde.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>useStartTls</property></entry>
+
                         <entry>
                             Ob der <acronym>LDAP</acronym> Client <acronym>TLS</acronym> (auch als
                             <acronym>SSLv2</acronym> bekannt) verschlüsselten Transport verwenden
@@ -56,8 +62,10 @@
                             aber nicht alle Server unterstützen diesen neueren Mechanismus.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>useSsl</property></entry>
+
                         <entry>
                             Ob der <acronym>LDAP</acronym> Client einen <acronym>SSL</acronym>
                             verschlüsselten Transport verwenden soll. Die Optionen
@@ -65,8 +73,10 @@
                             sind gegenseitig exklusiv.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>username</property></entry>
+
                         <entry>
                             Der Standard Benutzername des Accounts. Einige Server erwarten Ihn
                             in DN Form. Er muß in DN Form angegeben werden wenn der
@@ -74,15 +84,19 @@
                             das Binden mit einem einfachen Benutzernamen möglich sein soll.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>password</property></entry>
+
                         <entry>
                             Das Standard Passwort des Accounts (nur mit dem obigen Benutzernamen
                             verwendet).
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>bindRequiresDn</property></entry>
+
                         <entry>
                             Ist er <constant>TRUE</constant>, dann instruiert er
                             <classname>Zend_Ldap</classname> den DN für den Account zu empfangen
@@ -91,16 +105,20 @@
                             <constant>FALSE</constant>.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>baseDn</property></entry>
+
                         <entry>
                             Der Standard Basis DN der für das Suchen (z.B. nach Accounts) verwendet
                             wird. Diese Option wird fr die meisten Account bezogenen Operationen
                             verwendet und sollte den DN anzeigen unter dem Accounts zu finden sind.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountCanonicalForm</property></entry>
+
                         <entry>
                             Ein kleiner Integerwert der die Form anzeigt zu der Accountnamen
                             kanonisiert werden sollen. Siehe auch das Kapitel <link
@@ -108,15 +126,19 @@
                                 von Account Namen</emphasis></link> weiter unten.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountDomainName</property></entry>
+
                         <entry>
                             Die <acronym>FQDN</acronym> Domain für die der <acronym>LDAP</acronym>
                             Zielserver die Authorität ist (z.B., example.com).
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountDomainNameShort</property></entry>
+
                         <entry>
                             Die 'short' Domain für die der <acronym>LDAP</acronym> Zielserver die
                             Authorität ist. Das wird normalerweise verwendet um den NetBIOS
@@ -124,8 +146,10 @@
                             nicht-AD Servern verwendet werden.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>accountFilterFormat</property></entry>
+
                         <entry>
                             Der Suchfilter für <acronym>LDAP</acronym> der für das Suchen von
                             Accounts verwendet wird. Der String ist ein Ausdruck im Stil von <ulink
@@ -141,8 +165,10 @@
                             Option zu ändern.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>allowEmptyPassword</property></entry>
+
                         <entry>
                             Einige <acronym>LDAP</acronym> Server können konfiguriert werden um
                             ein leeres Passwort als anonymen Bind zu akzeptieren. Dieses Verhalten
@@ -152,16 +178,20 @@
                             Bindens übergeben werden kann.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>optReferrals</property></entry>
+
                         <entry>
                             Wenn Sie auf <constant>TRUE</constant> gesetzt wird zeigt diese Option
                             an das dem <acronym>LDAP</acronym> Client der referiert, gefolgt werden
                             soll. Der Standardwert ist <constant>FALSE</constant>.
                         </entry>
                     </row>
+
                     <row>
                         <entry><property>tryUsernameSplit</property></entry>
+
                         <entry>
                             Wenn Sie auf <constant>FALSE</constant> gesetzt wird zeigt diese Option
                             an das der angegebene Benutzername nicht mit dem ersten

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-attribute">
     <title>Zend_Ldap_Attribute</title>
@@ -25,6 +25,7 @@
 
         <varlistentry>
             <term><code>boolean</code></term>
+
             <listitem>
                 <para>
                     <constant>TRUE</constant> wird zu
@@ -36,12 +37,18 @@
 
         <varlistentry>
             <term><code>object</code> und <code>array</code></term>
-            <listitem><para>Diese Werte werden zu einem String konvertiert indem
-            <methodname>serialize()</methodname> verwendet wird.</para></listitem>
+
+            <listitem>
+                <para>
+                    Diese Werte werden zu einem String konvertiert indem
+                    <methodname>serialize()</methodname> verwendet wird.
+                </para>
+            </listitem>
         </varlistentry>
 
         <varlistentry>
             <term><code>resource</code></term>
+
             <listitem>
                 <para>
                     Wenn eine <code>stream</code> Ressource angegeben wurde, werden die Daten
@@ -52,13 +59,13 @@
 
         <varlistentry>
             <term>others</term>
+
             <listitem>
                 <para>
                     Alle anderen Datentypen (speziell nicht-Stream Ressourcen) werden verweigert.
                 </para>
             </listitem>
         </varlistentry>
-
     </variablelist>
 
     <para>Beim Lesen von Attributwerten werden die folgenden Konvertierungen durchgeführt:</para>
@@ -76,6 +83,7 @@
 
         <varlistentry>
             <term>others</term>
+
             <listitem>
                 <para>
                     Alle anderen Strings werden nicht automatisch konvertiert und so wie Sie sind
@@ -83,7 +91,6 @@
                 </para>
             </listitem>
         </varlistentry>
-
     </variablelist>
 
     <table id="zend.ldap.api.reference.zend-ldap-attribute.table">
@@ -96,13 +103,15 @@
                     <entry>Beschreibung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry>
                         <emphasis><code>void setAttribute(array &amp;$data, string
-                        $attribName, mixed $value, boolean $append)</code>
+                            $attribName, mixed $value, boolean $append)</code>
                         </emphasis>
                     </entry>
+
                     <entry>
                         Setzt die Attribute <varname>$attribName</varname> in
                         <varname>$data</varname> auf den Wert <varname>$value</varname>. Wenn
@@ -112,11 +121,13 @@
                         von skalaren Werten sein. Eine Konvertierung wird durchgeführt.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>array|mixed getAttribute(array $data,
-                        string $attribName, integer|null $index)</code> </emphasis>
+                            string $attribName, integer|null $index)</code></emphasis>
                     </entry>
+
                     <entry>
                         Gibt das Attribut <varname>$attribName</varname> von
                         <varname>$data</varname> zurück. Wenn <varname>$index</varname>
@@ -129,11 +140,13 @@
                         Eine Konvertierung wird durchgeführt.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>boolean attributeHasValue(array &amp;$data,
-                        string $attribName, mixed|array $value)</code> </emphasis>
+                            string $attribName, mixed|array $value)</code></emphasis>
                     </entry>
+
                     <entry>
                         Prüft ob das Attribut <varname>$attribName</varname> in
                         <varname>$data</varname> den Wert oder die Werte welche in
@@ -143,53 +156,63 @@
                         strikt durchgeführt (der Datentyp wird respektiert).
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>void removeDuplicatesFromAttribute(array
-                        &amp;$data, string $attribName)</code> </emphasis>
+                            &amp;$data, string $attribName)</code></emphasis>
                     </entry>
+
                     <entry>
                         Entfernt alle Duplikate vom Attribut <varname>$attribName</varname> in
                         <varname>$data</varname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>void removeFromAttribute(array &amp;$data,
-                        string $attribName, mixed|array $value)</code> </emphasis>
+                            string $attribName, mixed|array $value)</code></emphasis>
                     </entry>
+
                     <entry>
                         Entfernt den Wert oder die Werte vom Attribut <varname>$attribName</varname>
                         die in <varname>$value</varname> angegeben werden von
                         <varname>$data</varname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>string|null convertToLdapValue(mixed
-                        $value)</code> </emphasis>
+                            $value)</code></emphasis>
                     </entry>
+
                     <entry>
                         Konvertiert einen <acronym>PHP</acronym> Datentyp in seine
                         <acronym>LDAP</acronym> Repräsentation. Siehe die Einleitung für Details.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>mixed convertFromLdapValue(string
-                        $value)</code> </emphasis>
+                            $value)</code></emphasis>
                     </entry>
+
                     <entry>
                         Konvertiert einen <acronym>LDAP</acronym> Wert in seinen
                         <acronym>PHP</acronym> Datentyp. Siehe die Einleitung für Details.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>string|null
-                        convertToLdapDateTimeValue(integer $value, boolean $utc)</code>
+                            convertToLdapDateTimeValue(integer $value, boolean $utc)</code>
                         </emphasis>
                     </entry>
+
                     <entry>
                         Konvertiert einen Zeitpunkt in seine <acronym>LDAP</acronym> Datum und Zeit
                         Repräsentation. Wenn <varname>$utc</varname> <constant>TRUE</constant> ist
@@ -199,12 +222,14 @@
                         String zurückgegeben.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>integer|null
-                        convertFromLdapDateTimeValue(string $value)</code>
+                            convertFromLdapDateTimeValue(string $value)</code>
                         </emphasis>
                     </entry>
+
                     <entry>
                         Konvertiert eine Datum und Zeit Repräsentation für <acronym>LDAP</acronym>
                         in einen Zeitpunkt. Die Methode gibt <constant>NULL</constant> zurück wenn
@@ -212,12 +237,13 @@
                         zurückkonvertiert werden kann.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>void setPassword(array &amp;$data, string
-                        $password, string $hashType, string $attribName)</code>
-                        </emphasis>
+                            $password, string $hashType, string $attribName)</code></emphasis>
                     </entry>
+
                     <entry>
                         Setzt ein <acronym>LDAP</acronym> Passwort für das Attribut
                         <varname>$attribName</varname> in <varname>$data</varname> zurück.
@@ -229,11 +255,13 @@
                         Möglichkeit ist.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>string createPassword(string $password,
-                        string $hashType)</code> </emphasis>
+                            string $hashType)</code></emphasis>
                     </entry>
+
                     <entry>
                         Erstellt ein <acronym>LDAP</acronym> Passwort. Der Hash für das Passwort
                         kann mit <varname>$hashType</varname> spezifiziert werden. Der Standardwert
@@ -242,12 +270,14 @@
                         Möglichkeit ist.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>void setDateTimeAttribute(array &amp;$data,
-                        string $attribName, integer|array $value, boolean $utc, boolean
-                        $append)</code> </emphasis>
+                            string $attribName, integer|array $value, boolean $utc, boolean
+                            $append)</code></emphasis>
                     </entry>
+
                     <entry>
                         Setzt das Attribut <varname>$attribName</varname> in
                         <varname>$data</varname> auf den Datum und Zeitwert
@@ -261,12 +291,13 @@
                         durchgeführt.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>array|integer getDateTimeAttribute(array
-                        $data, string $attribName, integer|null $index)</code>
-                        </emphasis>
+                            $data, string $attribName, integer|null $index)</code></emphasis>
                     </entry>
+
                     <entry>
                         Gibt das Datum und Zeit Attribut <varname>$attribName</varname> von
                         <varname>$data</varname> zurück. Wenn <varname>$index</varname>

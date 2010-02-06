@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18791 -->
+<!-- EN-Revision: 20794 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.identical">
-
     <title>Identical</title>
 
     <para>
@@ -120,6 +119,3 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

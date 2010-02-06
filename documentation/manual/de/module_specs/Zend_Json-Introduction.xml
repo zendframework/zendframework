@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.introduction">
     <title>Einführung</title>
@@ -31,8 +31,4 @@
         eine nette nützliche Funktion was wiederum in einfacheren Anwendungs-spezifischer
         Datenverarbeitungs Techniken resultiert.
     </para>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19437 -->
+<!-- EN-Revision: 20794 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.object">
     <title>HTML Objekt Helfer</title>
@@ -17,26 +17,29 @@
     <itemizedlist>
         <listitem>
             <para>
-                <methodname>htmlFlash()</methodname>
-                Erzeugt Markup für die Einbettung von Flash Dateien.
+                <methodname>htmlFlash()</methodname> Erzeugt Markup für die Einbettung von Flash
+                Dateien.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <methodname>htmlObject()</methodname>
-                Erzeugt Markup für die Einbettung von eigenen Objekten.
+                <methodname>htmlObject()</methodname> Erzeugt Markup für die Einbettung von eigenen
+                Objekten.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <methodname>htmlPage()</methodname>
-                Erzeugt Markup für die Einbettung anderer (X)HTML Seiten.
+                <methodname>htmlPage()</methodname> Erzeugt Markup für die Einbettung anderer
+                (X)HTML Seiten.
             </para>
         </listitem>
+
         <listitem>
             <para>
-                <methodname>htmlQuicktime()</methodname>
-                Erzeugt Markup für die Einbettung von QuickTime Dateien.
+                <methodname>htmlQuicktime()</methodname> Erzeugt Markup für die Einbettung von
+                QuickTime Dateien.
             </para>
         </listitem>
     </itemizedlist>
@@ -47,7 +50,6 @@
     </para>
 
     <example id="zend.view.helpers.initial.object.flash">
-
         <title>Flash Helfer</title>
 
         <para>
@@ -70,7 +72,6 @@
         codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
 </object>
 ]]></programlisting>
-
     </example>
 
     <para>
@@ -124,6 +125,3 @@ Das würde folgendes ausgeben:
 ]]></programlisting>
     </example>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

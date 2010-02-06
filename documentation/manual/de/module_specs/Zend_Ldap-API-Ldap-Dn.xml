@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-dn">
     <title>Zend_Ldap_Dn</title>
@@ -61,12 +61,14 @@
                     <entry>Beschreibung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Dn factory(string|array $dn,
-                        string|null $caseFold)</code> </emphasis>
+                            string|null $caseFold)</code></emphasis>
                     </entry>
+
                     <entry>
                         Erstellt eine <classname>Zend_Ldap_Dn</classname> Instanz von einem Array
                         oder String. Das Array muß der unter
@@ -74,104 +76,116 @@
                         Arraystruktur entsprechen.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Dn fromString(string $dn,
-                        string|null $caseFold)</code> </emphasis>
+                            string|null $caseFold)</code></emphasis>
                     </entry>
+
                     <entry>
                         Erstellt eine <classname>Zend_Ldap_Dn</classname> Instanz von einem String.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>Zend_Ldap_Dn fromArray(array $dn,
-                        string|null $caseFold)</code> </emphasis>
+                            string|null $caseFold)</code></emphasis>
                     </entry>
+
                     <entry>
                         Erstellt eine <classname>Zend_Ldap_Dn</classname> Instanz von einem
                         Array. Das Array muß der Arraystruktur entsprechen welche unter
                         <methodname>Zend_Ldap_Dn::implodeDn()</methodname> beschrieben ist.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>array getRdn(string|null $caseFold)</code></entry>
+
                     <entry>
                         Gibt den <acronym>RDN</acronym> des aktuellen DN zurück. Der zurückgegebene
                         Wert ist ein Array wobei die Namen der Attribute von <acronym>RDN</acronym>
                         im Schlüssel gesetzt sind und die <acronym>RDN</acronym> Attribute als Wert.
                     </entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>string getRdnString(string|null
-                        $caseFold)</code>
-                    </entry>
+                    <entry><code>string getRdnString(string|null $caseFold)</code></entry>
+
                     <entry>
                         Gibt den <acronym>RDN</acronym> vom aktuellen DN zurück. Der zurückgegebene
                         Wert ist ein String.
                     </entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>Zend_Ldap_Dn getParentDn(integer
-                        $levelUp)</code>
-                    </entry>
+                    <entry><code>Zend_Ldap_Dn getParentDn(integer $levelUp)</code></entry>
+
                     <entry>
                         Gibt den DN des aktuellen DN Knotens, <varname>$levelUp</varname> Levels
                         höher, zurück. <varname>$levelUp</varname> ist standardmäßig <code>1</code>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>array get(integer $index, integer $length, string|null
-                        $caseFold)</code>
+                            $caseFold)</code>
                     </entry>
+
                     <entry>
                         Gibt einen Teil des aktuellen DN zurück der von <varname>$index</varname>
                         und <varname>$length</varname> eingegrenzt wird. <varname>$index</varname>
                         beginnt mit <code>0</code> und der DN Teil von links.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Dn set(integer $index, array
-                        $value)</code>
+                        <code>Zend_Ldap_Dn set(integer $index, array $value)</code>
                     </entry>
+
                     <entry>
                         Ersetzt den DN Teil im aktuellen DN. Diese Operation manipuliert die
                         aktuelle Instanz.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Dn remove(integer $index, integer
-                        $length)</code>
+                        <code>Zend_Ldap_Dn remove(integer $index, integer $length)</code>
                     </entry>
+
                     <entry>
                         Entfernt einen DN Teil vom aktuellen DN. Diese Operation manipuliert die
                         aktuelle Instanz. <varname>$length</varname> ist standardmäßig
                         <code>1</code>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>Zend_Ldap_Dn append(array $value)</code></entry>
+
                     <entry>
                         Fügt einen DN Teil zum aktuellen DN hinzu, Diese Operation manipuliert die
                         aktuelle Instanz.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>Zend_Ldap_Dn prepend(array $value)</code></entry>
+
                     <entry>
                         Fügt einen DN Teil vor dem aktuellen DN hinzu. Diese Operation manipuliert
                         die aktuelle Instanz.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Dn insert(integer $index, array
-                        $value)</code>
+                        <code>Zend_Ldap_Dn insert(integer $index, array $value)</code>
                     </entry>
 
                     <entry>
@@ -205,66 +219,75 @@
 
                 <row>
                     <entry><code>string __toString()</code></entry>
+
                     <entry>
                         Gibt den DN als String zurück - verweist auf
                         <methodname>Zend_Ldap_Dn::toString(null)</methodname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <emphasis><code>void setDefaultCaseFold(string
-                        $caseFold)</code> </emphasis>
+                        <emphasis><code>void setDefaultCaseFold(string $caseFold)</code></emphasis>
                     </entry>
+
                     <entry>
                         Setzt die standardmäßige Option für die Schreibweise welche von allen
                         Instanzen bei der Erstellung standardmäßig verwendet wird. Bereits
                         existierende Instanzen sind von dieser Einstellung nicht betroffen.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <emphasis><code>array escapeValue(string|array
-                        $values)</code> </emphasis>
+                        <emphasis><code>array escapeValue(string|array $values)</code></emphasis>
                     </entry>
+
                     <entry>Escapt einen DN Wert entsprechend <acronym>RFC</acronym> 2253.</entry>
                 </row>
+
                 <row>
                     <entry>
-                        <emphasis><code>array unescapeValue(string|array
-                        $values)</code> </emphasis>
+                        <emphasis><code>array unescapeValue(string|array $values)</code></emphasis>
                     </entry>
+
                     <entry>
                         Macht die Konvertierung von
                         <methodname>Zend_Ldap_Dn::escapeValue()</methodname> rückgängig.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>array explodeDn(string $dn, array
-                        &amp;$keys, array &amp;$vals, string|null $caseFold)</code>
-                        </emphasis>
+                            &amp;$keys, array &amp;$vals, string|null $caseFold)</code></emphasis>
                     </entry>
+
                     <entry>
                         Zerteilt den DN <varname>$dn</varname> in ein Array das alle Teile des
                         angegebenen DN enthält. <varname>$keys</varname> sind optional die DN
                         Schlüssel (z.B. CN, OU, DC, ...). <varname>$vals</varname> sind optional die
                         DN Werte. Das zurückgegebene Array ist vom Typ
-                    <programlisting language="php"><![CDATA[
+
+                        <programlisting language="php"><![CDATA[
 array(
 array("cn" => "name1", "uid" => "user"),
 array("cn" => "name2"),
 array("dc" => "example"),
 array("dc" => "org")
 )
-]]></programlisting> für einen DN von <code>cn=name1+uid=user,cn=name2,dc=example,dc=org</code>.
+]]></programlisting>
+
+                        für einen DN von <code>cn=name1+uid=user,cn=name2,dc=example,dc=org</code>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>boolean checkDn(string $dn, array
-                        &amp;$keys, array &amp;$vals, string|null $caseFold)</code>
-                        </emphasis>
+                            &amp;$keys, array &amp;$vals, string|null $caseFold)</code></emphasis>
                     </entry>
+
                     <entry>
                         Prüft ob der gegebene DN <varname>$dn</varname> fehlerhaft ist. Wenn
                         <varname>$keys</varname> oder <varname>$keys</varname> und
@@ -272,28 +295,32 @@ array("dc" => "org")
                         betreffenden DN Schlüssel und Werten gefüllt.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>string implodeRdn(array $part, string|null
-                        $caseFold)</code> </emphasis>
+                            $caseFold)</code></emphasis>
                     </entry>
+
                     <entry>
                         Gibt den DN Teil in der Form <code>$attribute=$value</code> zurück.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>string implodeDn(array $dnArray,
-                        string|null $caseFold, string $separator)</code>
-                        </emphasis>
+                            string|null $caseFold, string $separator)</code></emphasis>
                     </entry>
+
                     <entry>
                         Implodiert ein Array der Form die von
                         <methodname>Zend_Ldap_Dn::explodeDn()</methodname> kommt in einen DN
                         String. <varname>$separator</varname> ist standardmäßig <code>','</code>
                         aber einige LDAP Server verstehen auch <code>';'</code>.
                         <varname>$dnArray</varname> muß von folgendem Typ sein:
-                    <programlisting language="php"><![CDATA[
+
+                        <programlisting language="php"><![CDATA[
 array(
 array("cn" => "name1", "uid" => "user"),
 array("cn" => "name2"),
@@ -303,11 +330,13 @@ array("dc" => "org")
 ]]></programlisting>
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>boolean isChildOf(string|Zend_Ldap_Dn
-                        $childDn, string|Zend_Ldap_Dn $parentDn)</code> </emphasis>
+                            $childDn, string|Zend_Ldap_Dn $parentDn)</code></emphasis>
                     </entry>
+
                     <entry>
                         Prüft ob der angegebene <varname>$childDn</varname> unter dem
                         <varname>$parentDn</varname> Subbaum ist.
@@ -317,4 +346,3 @@ array("dc" => "org")
         </tgroup>
     </table>
 </sect3>
-

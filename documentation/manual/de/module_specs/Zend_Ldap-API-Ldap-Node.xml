@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-node">
     <title>Zend_Ldap_Node</title>
@@ -28,9 +28,11 @@
                     <entry>Beschreibung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><code>Zend_Ldap getLdap()</code></entry>
+
                     <entry>
                         Gibt die aktuelle <acronym>LDAP</acronym> Verbindung zurück. Wirft eine
                         <classname>Zend_Ldap_Exception</classname> wenn der aktuelle Node im
@@ -38,11 +40,10 @@
                         Instanz verbunden).
                     </entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>Zend_Ldap_Node attachLdap(Zend_Ldap
-                        $ldap)</code>
-                    </entry>
+                    <entry><code>Zend_Ldap_Node attachLdap(Zend_Ldap$ldap)</code></entry>
+
                     <entry>
                         Hängt den aktuellen Node an die <classname>Zend_Ldap</classname> Instanz
                         <varname>$ldap</varname> an. Wirft eine
@@ -51,23 +52,29 @@
                         der Basis DN von <varname>$ldap</varname> ist).
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>Zend_Ldap_Node detachLdap()</code></entry>
                     <entry>Hängt den Node von der <acronym>LDAP</acronym> Verbindung ab.</entry>
                 </row>
+
                 <row>
                     <entry><code>boolean isAttached()</code></entry>
+
                     <entry>
                         Prüft ob der aktuelle Node an eine <acronym>LDAP</acronym> Verbindung
                         angehängt ist.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Node
-                        create(string|array|Zend_Ldap_Dn $dn, array $objectClass)</code>
+                        <emphasis>
+                            <code>Zend_Ldap_Node create(string|array|Zend_Ldap_Dn $dn, array
+                                $objectClass)</code>
                         </emphasis>
                     </entry>
+
                     <entry>
                         Factory Methode um einen neuen abgehängten
                         <classname>Zend_Ldap_Node</classname> für einen angegebenen DN zu erstellen.
@@ -75,12 +82,15 @@
                         <varname>$dn</varname> und der Objektklasse <varname>$objectClass</varname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Node
-                        fromLdap(string|array|Zend_Ldap_Dn $dn, Zend_Ldap $ldap)</code>
+                        <emphasis>
+                            <code>Zend_Ldap_Node fromLdap(string|array|Zend_Ldap_Dn $dn, Zend_Ldap
+                                $ldap)</code>
                         </emphasis>
                     </entry>
+
                     <entry>
                         Factory Methode um einen angehängten <classname>Zend_Ldap_Node</classname>
                         für einen angegebenen DN zu erstellen. Lädt einen existierenden
@@ -88,11 +98,15 @@
                         der <acronym>LDAP</acronym> Verbindung <varname>$ldap</varname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <emphasis><code>Zend_Ldap_Node fromArray((array $data,
-                        boolean $fromDataSource)</code> </emphasis>
+                        <emphasis>
+                            <code>Zend_Ldap_Node fromArray((array $data, boolean
+                                $fromDataSource)</code>
+                        </emphasis>
                     </entry>
+
                     <entry>
                         Factory Methode um einen abgehängten <classname>Zend_Ldap_Node</classname>
                         aus den Array Daten <varname>$data</varname> zu erstellen. Wenn
@@ -101,8 +115,10 @@
                         <acronym>LDAP</acronym> Baum vorhanden, betrachtet.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>boolean isNew()</code></entry>
+
                     <entry>
                         Sagt ob der Node als Neu betrachtet wird (nicht auf dem Server vorhanden).
                         Es ist zu beachten dass das nicht sagt ob der Node wirklich auf dem Server
@@ -110,8 +126,10 @@
                         verwenden um zu sehen ob der Node dort bereits existiert.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>boolean willBeDeleted()</code></entry>
+
                     <entry>
                         Sagt ob dieser Node gelöscht wird sobald
                         <methodname>Zend_Ldap_Node::update()</methodname> aufgerufen wird.
@@ -153,133 +171,159 @@
                         angegebene <acronym>LDAP</acronym> Verbindung angehängt.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>Zend_Ldap_Dn getCurrentDn()</code></entry>
+
                     <entry>
                         Gibt den aktuellen DN des aktuellen Nodes als Zend_Ldap_Dn zurück. Das
                         reflektiert mögliche rename-Operationen.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>Zend_Ldap_Dn getDn()</code></entry>
+
                     <entry>
                         Gibt den originalen DN des aktuellen Nodes als Zend_Ldap_Dn zurück. Das
                         reflektiert mögliche rename-Operationen.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>string getDnString(string $caseFold)</code></entry>
+
                     <entry>
                         Gibt den originalen DN des aktuellen Nodes als String zurück. Das
                         reflektiert mögliche rename-Operationen.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>array getDnArray(string $caseFold)</code></entry>
+
                     <entry>
                         Gibt den originalen DN des aktuellen Nodes als Array zurück. Das reflektiert
                         mögliche rename-Operationen.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>string getRdnString(string $caseFold)</code></entry>
+
                     <entry>
                         Gibt den <acronym>RDN</acronym> des aktuellen Nodes als String zurück. Das
                         reflektiert mögliche rename-Operationen.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>array getRdnArray(string $caseFold)</code></entry>
+
                     <entry>
                         Gibt den <acronym>RDN</acronym> des aktuellen Nodes als Array zurück. Das
                         reflektiert mögliche rename-Operationen.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Node setDn(Zend_Ldap_Dn|string|array
-                        $newDn)</code>
+                        <code>Zend_Ldap_Node setDn(Zend_Ldap_Dn|string|array $newDn)</code>
                     </entry>
+
                     <entry>
                         Setzt den neuen DB für diesen Node und verschiebt diesen Node effektiv
                         sobald <methodname>Zend_Ldap_Node::update()</methodname> aufgerufen wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Node move(Zend_Ldap_Dn|string|array
-                        $newDn)</code>
+                        <code>Zend_Ldap_Node move(Zend_Ldap_Dn|string|array $newDn)</code>
                     </entry>
+
                     <entry>
                         Das ist ein Alias für <methodname>Zend_Ldap_Node::setDn()</methodname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Node rename(Zend_Ldap_Dn|string|array
-                        $newDn)</code>
+                        <code>Zend_Ldap_Node rename(Zend_Ldap_Dn|string|array $newDn)</code>
                     </entry>
+
                     <entry>
                         Das ist ein Alias für <methodname>Zend_Ldap_Node::setDn()</methodname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>array getObjectClass()</code></entry>
                     <entry>Gibt objectClass des Nodes zurück.</entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Node setObjectClass(array|string
-                        $value)</code>
+                        <code>Zend_Ldap_Node setObjectClass(array|string $value)</code>
                     </entry>
+
                     <entry>Setzt das objectClass Attribut.</entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Node appendObjectClass(array|string
-                        $value)</code>
+                        <code>Zend_Ldap_Node appendObjectClass(array|string $value)</code>
                     </entry>
+
                     <entry>Stellt dem objectClass Attribut voran.</entry>
                 </row>
+
                 <row>
                     <entry><code>string toLdif(array $options)</code></entry>
+
                     <entry>
                         Gibt eine <acronym>LDIF</acronym> Repräsentation des aktuellen Nodes zurück.
                         <varname>$options</varname> wird an
                         <classname>Zend_Ldap_Ldif_Encoder</classname> übergeben.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>array getChangedData()</code></entry>
+
                     <entry>
                         Gibt geänderte Node Daten zurück. Das Array enthält alle geänderten
                         Attribute. Dieses format kann in <methodname>Zend_Ldap::add()</methodname>
                         und <methodname>Zend_Ldap::update()</methodname> verwendet werden.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>array getChanges()</code></entry>
                     <entry>Gibt alle gemachten Änderungen zurück.</entry>
                 </row>
+
                 <row>
                     <entry><code>string toString()</code></entry>
+
                     <entry>
                         Gibt den DN des aktuellen Nodes zurück - leitet auf
                         <methodname>Zend_Ldap_Dn::getDnString()</methodname> weiter.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>string __toString()</code></entry>
+
                     <entry>
                         Castet auf eine String Repräsentation - leitet auf
                         <methodname>Zend_Ldap_Dn::toString()</methodname> weiter.
                     </entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>array toArray(boolean
-                        $includeSystemAttributes)</code>
-                    </entry>
+                    <entry><code>array toArray(boolean $includeSystemAttributes)</code></entry>
+
                     <entry>
                         Gibt eine Array Repräsentation des aktuellen Nodes zurück. Wenn
                         <varname>$includeSystemAttributes</varname> <constant>FALSE</constant> ist
@@ -289,31 +333,28 @@
                         resultierende Array den DN mit dem Schlüssel <code>'dn'</code>.
                     </entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>string toJson(boolean
-                        $includeSystemAttributes)</code>
-                    </entry>
+                    <entry><code>string toJson(boolean $includeSystemAttributes)</code></entry>
+
                     <entry>
                         Gibt eine <acronym>JSON</acronym> Repräsentation des aktuellen Nodes  zurück
                         wobei <methodname>Zend_Ldap_Node::toArray()</methodname> verwendet wird.
                     </entry>
                 </row>
+
                 <row>
+                    <entry><code>array getData(boolean $includeSystemAttributes)</code></entry>
+
                     <entry>
-                        <code>array getData(boolean
-                        $includeSystemAttributes)</code>
-                    </entry>
-                    <entry>
-                        Gibt die Attribute des Nodes zurück. Das Array enthält alle Attribute in Ihrem
-                        internen Format (keine Konvertierung).
+                        Gibt die Attribute des Nodes zurück. Das Array enthält alle Attribute in
+                        Ihrem internen Format (keine Konvertierung).
                     </entry>
                 </row>
 
                 <row>
                     <entry>
-                        <code>boolean existsAttribute(string $name, boolean
-                        $emptyExists)</code>
+                        <code>boolean existsAttribute(string $name, boolean $emptyExists)</code>
                     </entry>
 
                     <entry>
@@ -331,8 +372,7 @@
 
                 <row>
                     <entry>
-                        <code>boolean attributeHasValue(string $name, mixed|array
-                        $value)</code>
+                        <code>boolean attributeHasValue(string $name, mixed|array $value)</code>
                     </entry>
 
                     <entry>
@@ -350,22 +390,24 @@
                         Gibt die Anzahl der Attribute im Node zurück. Implementiert Countable.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>mixed getAttribute(string $name, integer|null
-                        $index)</code>
+                        <code>mixed getAttribute(string $name, integer|null $index)</code>
                     </entry>
+
                     <entry>
                         Holt ein <acronym>LDAP</acronym> Attribut. Die Datenkonvertierung wird
                         angewendet durch Verwendung von
                         <methodname>Zend_Ldap_Attribute::getAttribute()</methodname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>array getAttributes(boolean
-                        $includeSystemAttributes)</code>
+                        <code>array getAttributes(boolean $includeSystemAttributes)</code>
                     </entry>
+
                     <entry>
                         Holt alle Attribute des Nodes. Wenn
                         <varname>$includeSystemAttributes</varname> <constant>FALSE</constant> ist
@@ -373,66 +415,76 @@
                         spezifischen Attribute vom Array entfernt.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Node setAttribute(string $name, mixed
-                        $value)</code>
+                        <code>Zend_Ldap_Node setAttribute(string $name, mixed $value)</code>
                     </entry>
+
                     <entry>
                         Setzt ein <acronym>LDAP</acronym> Attribut. Die Datenkonvertierung wird
                         angewendet durch Verwendung von
                         <methodname>Zend_Ldap_Attribute::setAttribute()</methodname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
-                        <code>Zend_Ldap_Node appendToAttribute(string $name, mixed
-                        $value)</code>
+                        <code>Zend_Ldap_Node appendToAttribute(string $name, mixed $value)</code>
                     </entry>
+
                     <entry>
                         Hängt etwas an ein <acronym>LDAP</acronym> Attribut an. Die
                         Datenkonvertierung wird angewendet durch Verwendung von
                         <methodname>Zend_Ldap_Attribute::setAttribute()</methodname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>array|integer getDateTimeAttribute(string $name,
-                        integer|null $index)</code>
+                            integer|null $index)</code>
                     </entry>
+
                     <entry>
                         Holt ein <acronym>LDAP</acronym> Date/Time Attribut. Die Datenkonvertierung
                         wird angewendet durch Verwendung von
                         <methodname>Zend_Ldap_Attribute::setDateTimeAttribute()</methodname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>Zend_Ldap_Node setDateTimeAttribute(string $name,
-                        integer|array $value, boolean $utc)</code>
+                            integer|array $value, boolean $utc)</code>
                     </entry>
+
                     <entry>
                         Setzt ein <acronym>LDAP</acronym> Date/Time Attribut. Die Datenkonvertierung
                         wird angewendet durch Verwendung von
                         <methodname>Zend_Ldap_Attribute::setDateTimeAttribute()</methodname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>Zend_Ldap_Node appendToDateTimeAttribute(string $name,
-                        integer|array $value, boolean $utc)</code>
+                            integer|array $value, boolean $utc)</code>
                     </entry>
+
                     <entry>
                         Hängt etwas an ein <acronym>LDAP</acronym> Date/Time Attribut an. Die
                         Datenkonvertierung wird angewendet durch Verwendung von
                         <methodname>Zend_Ldap_Attribute::setDateTimeAttribute()</methodname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>Zend_Ldap_Node setPasswordAttribute(string $password,
-                        string $hashType, string $attribName)</code>
+                            string $hashType, string $attribName)</code>
                     </entry>
+
                     <entry>
                         Setzt ein <acronym>LDAP</acronym> Passwort bei
                         <varname>$attribName</varname> (der Standardwert ist
@@ -441,53 +493,58 @@
                         <constant>Zend_Ldap_Attribute::PASSWORD_HASH_MD5</constant>).
                     </entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>Zend_Ldap_Node deleteAttribute(string
-                        $name)</code>
-                    </entry>
+                    <entry><code>Zend_Ldap_Node deleteAttribute(string $name)</code></entry>
                     <entry>Löscht ein <acronym>LDAP</acronym> Attribut.</entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>void removeDuplicatesFromAttribute(string
-                        $name)</code>
-                    </entry>
+                    <entry><code>void removeDuplicatesFromAttribute(string $name)</code></entry>
+
                     <entry>
                         Entfernt doppelte Werte von einem <acronym>LDAP</acronym> Attribut.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>void removeFromAttribute(string $attribName,
-                        mixed|array $value)</code>
+                            mixed|array $value)</code>
                     </entry>
+
                     <entry>
                         Entfernt die angegebenen Werte von einem <acronym>LDAP</acronym> Attribut.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>boolean exists(Zend_Ldap $ldap)</code></entry>
+
                     <entry>
                         Prüft ob der aktuelle Node im angegebenen <acronym>LDAP</acronym> Server
                         existiert (der aktuelle Server wird verwendet wenn
                         <constant>NULL</constant> übergeben wird).
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>Zend_Ldap_Node reload(Zend_Ldap $ldap)</code></entry>
+
                     <entry>
                         Lädt die Attribute des aktuellen Nodes nochmalig vom angegebenen
                         <acronym>LDAP</acronym> Server (der aktuelle Server wird verwendet wenn
                         <constant>NULL</constant> übergeben wird).
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>Zend_Ldap_Node_Collection
-                        searchSubtree(string|Zend_Ldap_Filter_Abstract $filter, integer
-                        $scope, string $sort)</code>
+                            searchSubtree(string|Zend_Ldap_Filter_Abstract $filter, integer
+                            $scope, string $sort)</code>
                     </entry>
+
                     <entry>
                         Sucht den Unterbaum des Nodes mit dem angegebenen <varname>$filter</varname>
                         und den angegebenen Suchparametern ab. Siehe
@@ -495,11 +552,13 @@
                         Parameter <varname>$scope</varname> und <varname>$sort</varname>.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>integer countSubtree(string|Zend_Ldap_Filter_Abstract
-                        $filter, integer $scope)</code>
+                            $filter, integer $scope)</code>
                     </entry>
+
                     <entry>
                         Zählt die Elemente des Unterbaums vom Node welche dem angegebenen
                         <varname>$filter</varname> entsprechen und dem angegebenen Suchbereich.
@@ -507,38 +566,39 @@
                         <varname>$scope</varname> Parameter.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>integer countChildren()</code></entry>
                     <entry>Zählt die Kinder des Nodes.</entry>
                 </row>
+
                 <row>
                     <entry>
                         <code>Zend_Ldap_Node_Collection
-                        searchChildren(string|Zend_Ldap_Filter_Abstract $filter, string
-                        $sort)</code>
+                            searchChildren(string|Zend_Ldap_Filter_Abstract $filter, string
+                            $sort)</code>
                     </entry>
+
                     <entry>
                         Sucht nach Kindern des Nodes die dem angegebenen <varname>$filter</varname>
                         entsprechen. Siehe <methodname>Zend_Ldap::search()</methodname> für Details
                         über den <varname>$sort</varname> Parameter.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>boolean hasChildren()</code></entry>
                     <entry>Gibt zurück ob der aktuelle Node Kinder hat.</entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>Zend_Ldap_Node_ChildrenIterator
-                        getChildren()</code>
-                    </entry>
+                    <entry><code>Zend_Ldap_Node_ChildrenIterator getChildren()</code></entry>
                     <entry>Gibt alle Kinder des aktuellen Nodes zurück.</entry>
                 </row>
+
                 <row>
-                    <entry>
-                        <code>Zend_Ldap_Node getParent(Zend_Ldap
-                        $ldap)</code>
-                    </entry>
+                    <entry><code>Zend_Ldap_Node getParent(Zend_Ldap $ldap)</code></entry>
+
                     <entry>
                         Gibt den Elternteil des aktuellen Nodes zurück wobei die
                         <acronym>LDAP</acronym> Verbindung <varname>$ldap</varname> verwendet wird

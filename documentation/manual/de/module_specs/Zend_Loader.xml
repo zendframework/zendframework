@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20243 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.loader.load">
     <title>Dynamisches Laden von Dateien und Klassen</title>
@@ -41,7 +41,7 @@
             <programlisting language="php"><![CDATA[
 Zend_Loader::loadFile($filename, $dirs=null, $once=false);
 ]]></programlisting>
-    </example>
+        </example>
 
         <para>
             Das <varname>$filename</varname> Argument definert den Dateinamen der geladen

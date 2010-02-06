@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.locale.date.datesandtimes">
     <title>Arbeiten mit Daten und Zeiten</title>
@@ -42,6 +42,7 @@
 
         <table id="zend.locale.date.normalize.table-1">
             <title>Schlüsselwerte für getDate() mit der Option 'fix_date'</title>
+
             <tgroup cols='2'>
                 <thead>
                     <row>
@@ -49,23 +50,28 @@
                         <entry>Bedeutung</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>0</entry>
                         <entry>Nichts korrigiert</entry>
                     </row>
+
                     <row>
                         <entry>1</entry>
                         <entry>Falsches Monat wurde korrigiert</entry>
                     </row>
+
                     <row>
                         <entry>2</entry>
                         <entry>Tag und Jahr wurden getauscht</entry>
                     </row>
+
                     <row>
                         <entry>3</entry>
                         <entry>Monat und Jahr wurden getauscht</entry>
                     </row>
+
                     <row>
                         <entry>4</entry>
                         <entry>Monat und Tag wurden getauscht</entry>
@@ -99,6 +105,7 @@
 
         <table id="zend.locale.date.normalize.table-2">
             <title>Rückgabewerte</title>
+
             <tgroup cols='5'>
                 <thead>
                     <row>
@@ -109,6 +116,7 @@
                         <entry>Maximum</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>d</entry>
@@ -117,6 +125,7 @@
                         <entry>1</entry>
                         <entry>31</entry>
                     </row>
+
                     <row>
                         <entry>M</entry>
                         <entry>month</entry>
@@ -124,6 +133,7 @@
                         <entry>1</entry>
                         <entry>12</entry>
                     </row>
+
                     <row>
                         <entry>y</entry>
                         <entry>year</entry>
@@ -131,6 +141,7 @@
                         <entry>kein Limit</entry>
                         <entry>PHP's Maximum für Integer</entry>
                     </row>
+
                     <row>
                         <entry>h</entry>
                         <entry>hour</entry>
@@ -138,6 +149,7 @@
                         <entry>0</entry>
                         <entry>PHP's Maximum für Integer</entry>
                     </row>
+
                     <row>
                         <entry>m</entry>
                         <entry>minute</entry>
@@ -145,6 +157,7 @@
                         <entry>0</entry>
                         <entry>PHP's Maximum für Integer</entry>
                     </row>
+
                     <row>
                         <entry>s</entry>
                         <entry>second</entry>
@@ -158,6 +171,7 @@
 
         <example id="zend.locale.date.normalize.example-1">
             <title>Normalisieren von Daten</title>
+
             <programlisting language="php"><![CDATA[
 $dateString = Zend_Locale_Format::getDate('13.04.2006',
                                           array('date_format' =>
@@ -213,6 +227,7 @@ Array
 
         <example id="zend.locale.date.normalize.example-2">
             <title>Normalisieren eines Datums durch ein Gebietsschema</title>
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $date = Zend_Locale_Format::getDate('13.04.2006',
@@ -232,6 +247,7 @@ print_r ($date);
 
         <example id="zend.locale.date.normalize.example-3">
             <title>Normalisieren eines Datums mit Uhrzeit</title>
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 $date = Zend_Locale_Format::getDate('13.04.2005 22:14:55',
@@ -253,6 +269,7 @@ print_r ($date);
 
         <example id="zend.locale.date.normalize.example-4">
             <title>Normalisieren eines Benutzerdefinierten Datums</title>
+
             <programlisting language="php"><![CDATA[
 $date = Zend_Locale_Format::getDate('13200504T551422',
                                     array('date_format' =>
@@ -269,6 +286,7 @@ print_r ($date);
 
         <table id="zend.locale.date.normalize.table-3">
             <title>Format Definition</title>
+
             <tgroup cols='2'>
                 <thead>
                     <row>
@@ -276,31 +294,38 @@ print_r ($date);
                         <entry>Beschreibung</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>d oder dd</entry>
                         <entry>Tag mit 1 oder 2 Ziffern</entry>
                     </row>
+
                     <row>
                         <entry>M oder MM</entry>
                         <entry>Monat mit 1 oder 2 Ziffern</entry>
                     </row>
+
                     <row>
                         <entry>y oder yy</entry>
                         <entry>Jahr mit 1 or 2 Ziffern</entry>
                     </row>
+
                     <row>
                         <entry>yyyy</entry>
                         <entry>Jahr mit 4 Ziffern</entry>
                     </row>
+
                     <row>
                         <entry>h</entry>
                         <entry>Stunde mit 1 oder 2 Ziffern</entry>
                     </row>
+
                     <row>
                         <entry>m</entry>
                         <entry>Minute mit 1 oder 2 Ziffern</entry>
                     </row>
+
                     <row>
                         <entry>s</entry>
                         <entry>Sekunde mit 1 oder 2 Ziffern</entry>
@@ -315,6 +340,7 @@ print_r ($date);
 
         <table id="zend.locale.date.normalize.table-4">
             <title>Beispielformate</title>
+
             <tgroup cols='3'>
                 <thead>
                     <row>
@@ -323,19 +349,20 @@ print_r ($date);
                         <entry>Ausgabe</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>dd.MM.yy</entry>
                         <entry>1.4.6</entry>
-                        <entry>['day'] => 1,
-                                   ['month'] => 4,
-                                   ['year'] => 6</entry>
+                        <entry>['day'] => 1, ['month'] => 4, ['year'] => 6</entry>
                     </row>
+
                     <row>
                         <entry>dd.MM.yy</entry>
                         <entry>01.04.2006</entry>
                         <entry>['day'] => 1, ['month'] => 4, ['year'] => 2006</entry>
                     </row>
+
                     <row>
                         <entry>yyyyMMdd</entry>
                         <entry>1.4.6</entry>
@@ -364,6 +391,7 @@ print_r ($date);
 
         <example id="zend.locale.date.normalize.example-5">
             <title>Automatische Korrektur von Datumsangaben</title>
+
             <programlisting language="php"><![CDATA[
 $date = Zend_Locale_Format::getDate('41.10.20',
                                     array('date_format' => 'ddMMyy',
@@ -408,11 +436,9 @@ if (Zend_Locale_Format::checkDateFormat('13.Apr.2006',
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.locale.time.normalizing">
-
         <title>Normalisieren von Zeiten</title>
 
         <para>
@@ -425,6 +451,7 @@ if (Zend_Locale_Format::checkDateFormat('13.Apr.2006',
 
         <example id="zend.locale.time.normalizing.example-1">
             <title>Normalisieren einer unbekannten Zeit</title>
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 if (Zend_Locale_Format::getTime('13:44:42',
@@ -438,11 +465,9 @@ if (Zend_Locale_Format::getTime('13:44:42',
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.locale.time.test">
-
         <title>Testen von Zeiten</title>
 
         <para>
@@ -454,6 +479,7 @@ if (Zend_Locale_Format::getTime('13:44:42',
 
         <example id="zend.locale.time.test.example-1">
             <title>Testen einer Zeit</title>
+
             <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de_AT');
 if (Zend_Locale_Format::checkDateFormat('13:44:42',
@@ -465,7 +491,5 @@ if (Zend_Locale_Format::checkDateFormat('13:44:42',
 }
 ]]></programlisting>
         </example>
-
     </sect2>
-
 </sect1>

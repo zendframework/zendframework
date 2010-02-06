@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.xml2json">
     <title>XML zu JSON Konvertierung</title>
+
     <para>
         <classname>Zend_Json</classname> bietet eine bequeme Methode für das transformieren von
         <acronym>XML</acronym> formatierten Daten in das <acronym>JSON</acronym> Format. Dieses
@@ -22,6 +23,7 @@
         Standardverhalten darun <acronym>XML</acronym> Attribute zu ignorieren. Der Funktionsaufruf
         wird wie folgt durchgeführt:
     </para>
+
     <programlisting language="php"><![CDATA[
 // Die fromXml Funktion nimmt einfach einen String der XML
 // Inhalt als Eingabe enthält.
@@ -122,8 +124,4 @@ $jsonContents = Zend_Json::fromXml($xmlStringContents, true);
         Weitere Details über das xml2json Feature können im originalen Proposal selbst gefunden
         werden. Siehe <ulink url="http://tinyurl.com/2tfa8z">Zend_xml2json proposal</ulink>.
     </para>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

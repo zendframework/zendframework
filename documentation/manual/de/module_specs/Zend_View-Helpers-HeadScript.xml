@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19437 -->
+<!-- EN-Revision: 20794 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.headscript">
     <title>HeadScript Helfer</title>
@@ -90,6 +90,7 @@
 
         <example id="zend.view.helpers.initial.headscript.conditional">
             <title>Headscript mit abhängigen Kommentaren</title>
+
             <programlisting language="php"><![CDATA[
 // Scripte hinzufügen
 $this->headScript()->appendFile(
@@ -98,7 +99,6 @@ $this->headScript()->appendFile(
     array('conditional' => 'lt IE 7')
 );
 ]]></programlisting>
-
         </example>
     </note>
 
@@ -257,6 +257,3 @@ $('foo_form').action = action;
         </itemizedlist>
     </example>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

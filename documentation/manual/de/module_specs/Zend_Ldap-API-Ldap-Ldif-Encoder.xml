@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17169 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.ldap.api.reference.zend-ldap-ldif-encoder">
     <title>Zend_Ldif_Encoder</title>
@@ -14,28 +14,32 @@
                     <entry>Beschreibung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
-                    <entry>
-                        <emphasis><code>array decode(string $string)</code></emphasis>
-                    </entry>
+                    <entry><emphasis><code>array decode(string $string)</code></emphasis></entry>
+
                     <entry>
                         Dekodiert den String <varname>$string</varname> in ein Array von
                         <acronym>LDIF</acronym> Elementen.
                     </entry>
                 </row>
+
                 <row>
                     <entry>
                         <emphasis><code>string encode(scalar|array|Zend_Ldap_Node
-                        $value, array $options)</code> </emphasis>
+                            $value, array $options)</code></emphasis>
                     </entry>
+
                     <entry>
                         Kodiert <varname>$value</varname> in eine <acronym>LDIF</acronym>
                         Repräsentation. <varname>$options</varname> ist ein Array welches die
                         folgenden Schlüssel enthalten kann:
+
                         <variablelist>
                             <varlistentry>
                                 <term><code>'sort'</code></term>
+
                                 <listitem>
                                     <para>
                                         Sortiert die gegebenen Attribute nach <code>dn</code>
@@ -48,6 +52,7 @@
 
                             <varlistentry>
                                 <term><code>'version'</code></term>
+
                                 <listitem>
                                     <para>
                                         Die Version des <acronym>LDIF</acronym> Formats.
@@ -58,11 +63,12 @@
 
                             <varlistentry>
                                 <term><code>'wrap'</code></term>
+
                                 <listitem>
-                                <para>
-                                    Die Zeilenlänge. Standardmäßig ist er <code>78</code> um der
-                                    <acronym>LDIF</acronym> Spezifikation zu entsprechen.
-                                </para>
+                                    <para>
+                                        Die Zeilenlänge. Standardmäßig ist er <code>78</code> um der
+                                        <acronym>LDIF</acronym> Spezifikation zu entsprechen.
+                                    </para>
                                 </listitem>
                             </varlistentry>
                         </variablelist>

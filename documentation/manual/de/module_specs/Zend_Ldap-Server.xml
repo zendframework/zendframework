@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16641 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.ldap.server">
     <title>Informationen vom LDAP Server erhalten</title>
+
     <sect2 id="zend.ldap.server.rootdse">
         <title>RootDSE</title>
 
@@ -17,6 +18,7 @@
                     <ulink url="http://www.zytrax.com/books/ldap/ch3/#operational">OpenLDAP</ulink>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <ulink
@@ -24,6 +26,7 @@
                         ActiveDirectory</ulink>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <ulink
@@ -35,6 +38,7 @@
 
         <example id="zend.ldap.server.rootdse.getting">
             <title>Mit dem RootDSE arbeiten</title>
+
             <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -49,6 +53,7 @@ $serverType = $rootdse->getServerType();
 
         <example id="zend.ldap.server.schema.getting">
             <title>Mit dem Schema Server arbeiten</title>
+
             <programlisting language="php"><![CDATA[
 $options = array(/* ... */);
 $ldap = new Zend_Ldap($options);
@@ -64,8 +69,10 @@ $classes = $schema->getObjectClasses();
 
         <sect3 id="zend.ldap.server.schema.activedirectory">
             <title>ActiveDirectory</title>
+
             <note>
                 <title>Browsen im Schema von ActiveDirectory Servern</title>
+
                 <para>
                     Wegen der Restriktionen bei Microsoft ActiveDirectory Servern bei der
                     Anzahl an Einträgen die von generischen Suchroutinen zurückgegeben werden

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19771 -->
+<!-- EN-Revision: 20794 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.view.helpers.initial.doctype">
     <title>Doctype Helfer</title>
@@ -59,7 +59,6 @@ $doctypeHelper->doctype('XHTML1_STRICT');
         <programlisting language="php"><![CDATA[
 <?php echo $this->doctype() ?>
 ]]></programlisting>
-
     </example>
 
     <example id="zend.view.helpers.initial.doctype.retrieving">
@@ -96,6 +95,3 @@ if ($view->doctype()->isHtml5()) {
 ]]></programlisting>
     </example>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

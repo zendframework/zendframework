@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20792 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.json.server">
     <title>Zend_Json_Server - JSON-RPC Server</title>
@@ -28,21 +28,15 @@
     </para>
 
     <itemizedlist>
-        <listitem>
-            <para>
-                Instanzieren des Server Objekts
-            </para>
-        </listitem>
+        <listitem><para>Instanzieren des Server Objekts</para></listitem>
+
         <listitem>
             <para>
                 Eine oder mehrere Funktionen und/oder Klassen/Objekte dem Server Objekt hinzufügen
             </para>
         </listitem>
-        <listitem>
-            <para>
-                Die Anfrage mit handle() ausführen
-            </para>
-        </listitem>
+
+        <listitem><para>Die Anfrage mit handle() ausführen</para></listitem>
     </itemizedlist>
 
     <para>
@@ -54,16 +48,8 @@
     </para>
 
     <itemizedlist>
-        <listitem>
-            <para>
-                Alle Parameter und deren erwarteter Variablentypen
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-                Den Variablentyp des Rückgabewertes
-            </para>
-        </listitem>
+        <listitem><para>Alle Parameter und deren erwarteter Variablentypen</para></listitem>
+        <listitem><para>Den Variablentyp des Rückgabewertes</para></listitem>
     </itemizedlist>
 
     <para>
@@ -241,6 +227,7 @@ $server->handle();
                         benutzerdefinierte Funktion die dem Server hinzugefügt werden soll.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setClass($class)</methodname>: Spezifiziert eine Klasse oder ein
@@ -249,6 +236,7 @@ $server->handle();
                         bekanntgegeben.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>fault($fault = null, $code = 404, $data = null)</methodname>:
@@ -256,6 +244,7 @@ $server->handle();
                         Objekt.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>handle($request = false)</methodname>: Behandelt eine
@@ -264,36 +253,42 @@ $server->handle();
                         übergeben werden (standardmäßig wird eines erstellt).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getFunctions()</methodname>: Gibt eine Liste aller hinzugefügten
                         Methoden zurück.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setRequest(Zend_Json_Server_Request $request)</methodname>:
                         Spezifiziert ein Anfrageobjekt um es für den Server zu verwenden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getRequest()</methodname>: Empfängt das Anfrageobjekt das vom
                         Server verwendet wird.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setResponse(Zend_Json_Server_Response $response)</methodname>:
                         Setzt das Antwort Objekt das der Server verwendet.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getResponse()</methodname>: Empfängt das Anfrageobjekt das vom
                         Server verwendet wird.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setAutoEmitResponse($flag)</methodname>: Zeigt ob der Server die
@@ -301,12 +296,14 @@ $server->handle();
                         <constant>TRUE</constant>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>autoEmitResponse()</methodname>: Stellt fest ob das automatische
                         senden der Antwort eingeschaltet ist.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getServiceMap()</methodname>: Empfängt die Service Map
@@ -345,6 +342,7 @@ $server->handle();
                         <methodname>setId()</methodname> und <methodname>setVersion()</methodname>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>addParam($value, $key = null)</methodname>: Fügt einen Parameter
@@ -352,58 +350,68 @@ $server->handle();
                         Werte sein, oder optional auch den Parameternamen enthalten.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>addParams(array $params)</methodname>: Mehrere Parameter auf
                         einmal hinzufügen; Ruft <methodname>addParam()</methodname> auf
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setParams(array $params)</methodname>: Setzt alle Parameter auf
                         einmal; überschreibt jeden existierenden Parameter.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getParam($index)</methodname>: Empfängt einen Parameter durch
                         seine Position oder seinen Namen.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getParams()</methodname>: Empfängt alle Parameter auf einmal.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setMethod($name)</methodname>: Setzt die Methode die aufgerufen
                         wird.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getMethod()</methodname>: Empfängt die Methode die aufgerufen
                         wird.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>isMethodError()</methodname>: Erkennt ob eine Anfrage fehlerhaft
                         ist und einen Fehler produzieren würde, oder nicht.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setId($name)</methodname>: Setzt den Identifikator der Anfrage
                         (durch den Client verwendet um Anfragen auf Antworten abzubilden).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getId()</methodname>: Empfängt den Anfrage Identifikator.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setVersion($version)</methodname>: Setzt die Version der
@@ -411,19 +419,21 @@ $server->handle();
                         entweder '1.0' oder '2.0' sein.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getVersion()</methodname>: Empfängt die Version der
-                        JSON-RPC Spezifikation die von der Anfrage verwendet
-                        wird.
+                        JSON-RPC Spezifikation die von der Anfrage verwendetwird.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>loadJson($json)</methodname>: Lädt das Anfrageobjekt von einem
                         <acronym>JSON</acronym> String.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>toJson()</methodname>: Stellt den <acronym>JSON</acronym> String
@@ -462,11 +472,13 @@ $server->handle();
                         <methodname>setResult($value)</methodname>: Setzt das Ergebnis der Antwort.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getResult()</methodname>: Empfängt das Antwortergebnis.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setError(Zend_Json_Server_Error $error)</methodname>: Setzt ein
@@ -474,41 +486,48 @@ $server->handle();
                         <acronym>JSON</acronym> serialisiert wird.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getError()</methodname>: Empfängt das Fehlerobjekt, wenn
                         vorhanden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>isError()</methodname>: Ob die Antwort eine Fehlerantwort ist
                         oder nicht.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setId($name)</methodname>: Setzt den Antwortindentifikator
                         (damit der Client die Antwort mit der Originalanfrage in Verbindung bringt).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getId()</methodname>: Empfängt den Antwortidentifikator.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setVersion($version)</methodname>: Setzt die
                         JSON-RPC Version der die Antwort entspricht.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getVersion()</methodname>: Empfängt die
                         JSON-RPC Version der die Antwort entspricht.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>toJson()</methodname>: Serialisiert die Antwort auf
@@ -516,12 +535,14 @@ $server->handle();
                         Fehlerobjekt serialisiert.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setServiceMap($serviceMap)</methodname>: Setzt das Servicemap
                         Objekt für die Antwort.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getServiceMap()</methodname>: Empfängt das Servicemap Objekt,
@@ -568,40 +589,47 @@ $server->handle();
                         ist, wird -32000 hinzugefügt.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getCode()</methodname>: Empfängt den aktuellen Fehlercode.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setMessage($message)</methodname>: Setzt die Fehlernachricht.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getMessage()</methodname>: Empfängt die aktuelle
                         Fehlernachricht.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setData($data)</methodname>: Setzt zusätzliche Daten die den
                         Fehler genauer qualifizieren, wie ein Backtrace.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getData()</methodname>: Empfängt alle aktuellen zusätzlichen
                         Fehlerdaten.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>toArray()</methodname>: Weist den Fehler einem Array zu. Das
                         Array enthält die Schlüssel 'code', 'message' und 'data'.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>toJson()</methodname>: Weist den Fehler einer
@@ -671,6 +699,7 @@ $server->handle();
                         beginnen) können als Schlüssel verwendet werden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setTransport($transport)</methodname>: Setzt den Transport der
@@ -678,12 +707,14 @@ $server->handle();
                         unterstützt.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getTransport()</methodname>: Empfängt den aktuellen Transport
                         des Services.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setEnvelope($envelopeType)</methodname>: Setzt den aktuelle
@@ -693,48 +724,56 @@ $server->handle();
                         <constant>Zend_Json_Server_Smd::ENV_JSONRPC_2</constant> verwendet.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getEnvelope()</methodname>: Empfängt den aktuellen
                         Anfrageenvelope.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setContentType($type)</methodname>: Setzt den Contenttype den
                         Anfragen verwenden sollten (standardmäßig ist das 'application/json').
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getContentType()</methodname>: Empfängt den aktuellen
                         Contenttype für Anfragen an den Service.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setTarget($target)</methodname>: Setzt den aktuellen
                         <acronym>URL</acronym> Endpunkt für den Service.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getTarget()</methodname>: Empfängt den <acronym>URL</acronym>
                         Endpunkt für den Service.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setId($id)</methodname>: Tpischerweise ist das der
                         <acronym>URL</acronym> Endpunkt des Services (der selbe wie das Ziel).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getId()</methodname>: Empfängt die ServiceID (typischerweise der
                         <acronym>URL</acronym> Endpunkt des Services).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setDescription($description)</methodname>: Setzt eine
@@ -742,11 +781,13 @@ $server->handle();
                         Services beschreiben).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getDescription()</methodname>: Empfängt die Servicebeschreibung.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setDojoCompatible($flag)</methodname>: Setzt ein Flag das
@@ -756,12 +797,14 @@ $server->handle();
                         erwartet.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>isDojoCompatible()</methodname>: Gibt den Wert des
                         Dojokompatibilitätsflags zurück (Standardmäßig <constant>FALSE</constant>).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>addService($service)</methodname>: Fügt ein Service der Mappe
@@ -770,47 +813,55 @@ $server->handle();
                         eine Instanz dieser Klasse.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>addServices(array $services)</methodname>: Fügt mehrere Services
                         auf einmal hinzu.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setServices(array $services)</methodname>: Fügt mehrere Serices
                         auf einmal hinzu, und überschreibt alle vorher gesetzten Services.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getService($name)</methodname>: Gibt ein Service durch seinen
                         Namen zurück.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getServices()</methodname>: Gibt alle hinzugefügten Services
                         zurück.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>removeService($name)</methodname>: Entfernt ein Service von der
                         Mappe.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>toArray()</methodname>: Weißt die Service Mappe einem Array zu.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>toDojoArray()</methodname>: Weißt die Service Mappe einem Array
                         zu das mit dem Dojo Toolkit kompatibel ist.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>toJson()</methodname>: Weißt die Service Mappe einer
@@ -831,17 +882,20 @@ $server->handle();
                         Schlüssel verwendet und über diese Methode gesetzt werden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setName($name)</methodname>: Setzt den Namen des Services
                         (typischerweise die Funktion oder den Methodennamen).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getName()</methodname>: Empfängt den Servicenamen.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setTransport($transport)</methodname>: Setzt den Transport des
@@ -849,11 +903,13 @@ $server->handle();
                         <classname>Zend_Json_Server_Smd</classname> erlaubt sind).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getTransport()</methodname>: Empfängt den aktuellen Transport.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setTarget($target)</methodname>: Setzt den
@@ -861,12 +917,14 @@ $server->handle();
                         selbe wir im gesamten SMD welchem der Service hinzugefügt wird).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getTarget()</methodname>: Gibt den <acronym>URL</acronym>
                         Endpunkt des Services zurück.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setEnvelope($envelopeType)</methodname>: Setzt den
@@ -874,12 +932,14 @@ $server->handle();
                         <classname>Zend_Json_Server_Smd</classname> erlaubt sind).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getEnvelope()</methodname>: Empfängt den Typ des
                         Serviceenvelopes.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>addParam($type, array $options = array(), $order =
@@ -887,23 +947,27 @@ $server->handle();
                         Standardmäßig ist nur der Parametertyp notwendig. Trotzdem kann die
                         Reihenfolge spezifiziert werden sowie auch Optionen wie:
                     </para>
+
                     <itemizedlist>
                         <listitem>
                             <para>
                                 <emphasis>name</emphasis>: Der Name des Parameters
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
                                 <emphasis>optional</emphasis>: Ob der Parameter optional ist oder
                                 nicht
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
                                 <emphasis>default</emphasis>: Ein Standardwert für diesen Parameter
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
                                 <emphasis>description</emphasis>: Ein Text der den Parameter
@@ -912,6 +976,7 @@ $server->handle();
                         </listitem>
                     </itemizedlist>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>addParams(array $params)</methodname>: Fügt verschiedene
@@ -922,35 +987,41 @@ $server->handle();
                         <methodname>addOption()</methodname> übergeben.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setParams(array $params)</methodname>: Setzt viele Parameter aus
                         einmal, überschreibt alle aktuellen Parameter auf einmal.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getParams()</methodname>: Empfängt alle aktuell gesetzten
                         Parameter.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>setReturn($type)</methodname>: Setzt den Type des Rückgabewertes
                         des Services.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>getReturn()</methodname>: Empfängt den Typ des Rückgabewertes
                         des Services.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>toArray()</methodname>: Weist das Service an ein Array zu.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>toJson()</methodname>: Weist das Service einer
@@ -961,6 +1032,3 @@ $server->handle();
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20227 -->
+<!-- EN-Revision: 20794 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.helpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>View Helfer</title>
@@ -65,36 +65,47 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>declareVars()</methodname>: Primär benutzt mit
-                <methodname>strictVars()</methodname>, kann dieser Helfer verwendet werden um
-                template Variablen zu deklarieren welche bereits, oder noch nicht, im View Objekt
-                bereits gesetzt sind, sowie auch Standard Werte. Arrays welche als Argument dieser
-                Methode übergeben werden, werden verwendet um Standard Werte zu setzen; Andernfalls,
-                wenn die Variable nicht existiert, wird diese mit einem leeren String gesetzt.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>declareVars()</methodname>: Primär benutzt mit
+                    <methodname>strictVars()</methodname>, kann dieser Helfer verwendet werden um
+                    template Variablen zu deklarieren welche bereits, oder noch nicht, im View
+                    Objekt bereits gesetzt sind, sowie auch Standard Werte. Arrays welche als
+                    Argument dieser Methode übergeben werden, werden verwendet um Standard Werte zu
+                    setzen; Andernfalls, wenn die Variable nicht existiert, wird diese mit einem
+                    leeren String gesetzt.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>fieldset($name, $content, $attribs)</methodname>: Erstellt ein
-                <acronym>XHTML</acronym> Fieldset. Wenn <varname>$attribs</varname> einen 'legend'
-                Schlüssel enthält, wird der Wert für die Fieldset Beschriftung verwendet. Das
-                Fieldset wird <varname>$content</varname> umfassen wie vom Helfer angeboten.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>fieldset($name, $content, $attribs)</methodname>: Erstellt ein
+                    <acronym>XHTML</acronym> Fieldset. Wenn <varname>$attribs</varname> einen
+                    'legend' Schlüssel enthält, wird der Wert für die Fieldset Beschriftung
+                    verwendet. Das Fieldset wird <varname>$content</varname> umfassen wie vom Helfer
+                    angeboten.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>form($name, $attribs, $content)</methodname>: Erzeugt eine
-                <acronym>XHTML</acronym> Form. Alle <varname>$attribs</varname> werden als
-                <acronym>XHTML</acronym> Attribute des Form Tags escaped und dargestellt. Wenn
-                <varname>$content</varname> vorhanden und kein boolsches <constant>FALSE</constant>
-                ist, dann wird dieser Inhalt innerhalb der Start und End Form Tags dargestellt
-                werden; wenn <varname>$content</varname> ein boolsches <constant>FALSE</constant>
-                ist (der Standard), wird nur das beginnende Formtag erzeugt.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>form($name, $attribs, $content)</methodname>: Erzeugt eine
+                    <acronym>XHTML</acronym> Form. Alle <varname>$attribs</varname> werden als
+                    <acronym>XHTML</acronym> Attribute des Form Tags escaped und dargestellt. Wenn
+                    <varname>$content</varname> vorhanden und kein boolsches
+                    <constant>FALSE</constant> ist, dann wird dieser Inhalt innerhalb der Start und
+                    End Form Tags dargestellt werden; wenn <varname>$content</varname> ein boolsches
+                    <constant>FALSE</constant> ist (der Standard), wird nur das beginnende Formtag
+                    erzeugt.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formButton($name, $value, $attribs)</methodname>: Erstellt ein
-                &lt;button /&gt; Element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formButton($name, $value, $attribs)</methodname>: Erstellt ein
+                    &lt;button /&gt; Element.
+                </para>
+            </listitem>
 
             <listitem>
                 <para>
@@ -188,111 +199,143 @@ echo $this->formCheckbox('foo',
                 </para>
 
                 <itemizedlist>
-                    <listitem><para>
+                    <listitem>
+                        <para>
                             <methodname>setElementStart($string)</methodname>; Standard ist
                             '&lt;ul class="errors"%s"&gt;&lt;li&gt;', wobei %s mit den in
                             <varname>$options</varname> spezifizierten Attributen ersetzt wird.
-                    </para></listitem>
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
+                    <listitem>
+                        <para>
                             <methodname>setElementSeparator($string)</methodname>; Standard ist
                             '&lt;/li&gt;&lt;li&gt;'.
-                    </para></listitem>
+                        </para>
+                    </listitem>
 
-                    <listitem><para>
+                    <listitem>
+                        <para>
                             <methodname>setElementEnd($string)</methodname>; Standard ist
                             '&lt;/li&gt;&lt;/ul&gt;'.
-                    </para></listitem>
+                        </para>
+                    </listitem>
                 </itemizedlist>
             </listitem>
 
-            <listitem><para>
-                <methodname>formFile($name, $attribs)</methodname>: Erstellt ein
-                &lt;input type="file" /&gt; Element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formFile($name, $attribs)</methodname>: Erstellt ein
+                    &lt;input type="file" /&gt; Element.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formHidden($name, $value, $attribs)</methodname>: Erstellt ein
-                &lt;input type="hidden" /&gt; Element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formHidden($name, $value, $attribs)</methodname>: Erstellt ein
+                    &lt;input type="hidden" /&gt; Element.
+                </para>
+            </listitem>
 
-           <listitem><para>
-                <methodname>formLabel($name, $value, $attribs)</methodname>: Erstellt ein
-                &lt;label&gt; Element, setzt das <property>for</property> Attribut auf
-                <varname>$name</varname>, und den aktuellen Labeltext auf
-                <varname>$value</varname>. Wenn <emphasis>disable</emphasis> an
-                <property>attribs</property> übergeben wird, wird nichts zurückgegeben.
-            </para></listitem>
+           <listitem>
+               <para>
+                    <methodname>formLabel($name, $value, $attribs)</methodname>: Erstellt ein
+                    &lt;label&gt; Element, setzt das <property>for</property> Attribut auf
+                    <varname>$name</varname>, und den aktuellen Labeltext auf
+                    <varname>$value</varname>. Wenn <emphasis>disable</emphasis> an
+                    <property>attribs</property> übergeben wird, wird nichts zurückgegeben.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formMultiCheckbox($name, $value, $attribs, $options,
-                    $listsep)</methodname>: Erstellt eine Liste von Checkboxen.
-                <varname>$options</varname> sollte ein assoziatives Array sein und kann beliebig
-                tief werden. <varname>$value</varname> kann ein einzelner Wert oder ein Array von
-                ausgewählten Werten sein die Schlüsseln im <varname>$options</varname> Array
-                entsprechen. <varname>$listsep</varname> ist standardmäßig ein HTML Break
-                ("&lt;br /&gt;"). Standardmäßig wird dieses Element als Array behandelt; alle
-                Checkboxen teilen den gleichen Namen, und werden als Array übertragen.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formMultiCheckbox($name, $value, $attribs, $options,
+                        $listsep)</methodname>: Erstellt eine Liste von Checkboxen.
+                    <varname>$options</varname> sollte ein assoziatives Array sein und kann beliebig
+                    tief werden. <varname>$value</varname> kann ein einzelner Wert oder ein Array
+                    von ausgewählten Werten sein die Schlüsseln im <varname>$options</varname> Array
+                    entsprechen. <varname>$listsep</varname> ist standardmäßig ein HTML Break
+                    ("&lt;br /&gt;"). Standardmäßig wird dieses Element als Array behandelt; alle
+                    Checkboxen teilen den gleichen Namen, und werden als Array übertragen.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formPassword($name, $value, $attribs)</methodname>: Erstellt ein
-                &lt;input type="password" /&gt; Element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formPassword($name, $value, $attribs)</methodname>: Erstellt ein
+                    &lt;input type="password" /&gt; Element.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formRadio($name, $value, $attribs, $options)</methodname>: Erstellt eine
-                Reihe von &lt;input type="radio" /&gt; Elementen, eine für jeden der $options
-                Elemente. Im $options Array ist der Elementschlüssel der Wert und der Elementwert
-                die Bezeichnung des Radio-Buttons. Der $value Radiobutton wird für dich vorgewählt.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formRadio($name, $value, $attribs, $options)</methodname>: Erstellt
+                    eine Reihe von &lt;input type="radio" /&gt; Elementen, eine für jeden der
+                    $options Elemente. Im $options Array ist der Elementschlüssel der Wert und der
+                    Elementwert die Bezeichnung des Radio-Buttons. Der $value Radiobutton wird für
+                    dich vorgewählt.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formReset($name, $value, $attribs)</methodname>: Erstellt ein
-                &lt;input type="reset" /&gt; Element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formReset($name, $value, $attribs)</methodname>: Erstellt ein
+                    &lt;input type="reset" /&gt; Element.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formSelect($name, $value, $attribs, $options)</methodname>: Erstellt
-                einen &lt;select&gt;...&lt;/select&gt; block mit einer &lt;option&gt;one für jedes
-                $options Element. Im $options Array ist der Elementschlüssel der Optionswert und
-                der Elementwert die Optionsbezeichnung. Die $value Optionen werden für dich
-                vorgewählt.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formSelect($name, $value, $attribs, $options)</methodname>: Erstellt
+                    einen &lt;select&gt;...&lt;/select&gt; block mit einer &lt;option&gt;one für
+                    jedes $options Element. Im $options Array ist der Elementschlüssel der
+                    Optionswert und der Elementwert die Optionsbezeichnung. Die $value Optionen
+                    werden für dich vorgewählt.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formSubmit($name, $value, $attribs)</methodname>: Erstellt ein
-                &lt;input type="submit" /&gt; Element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formSubmit($name, $value, $attribs)</methodname>: Erstellt ein
+                    &lt;input type="submit" /&gt; Element.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formText($name, $value, $attribs)</methodname>: Erstellt ein
-                &lt;input type="text" /&gt; Element.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formText($name, $value, $attribs)</methodname>: Erstellt ein
+                    &lt;input type="text" /&gt; Element.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>formTextarea($name, $value, $attribs)</methodname>: Erstellt einen
-                &lt;textarea&gt;...&lt;/textarea&gt; Block.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>formTextarea($name, $value, $attribs)</methodname>: Erstellt einen
+                    &lt;textarea&gt;...&lt;/textarea&gt; Block.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>url($urlOptions, $name, $reset)</methodname>: Erstellt einen
-                <acronym>URL</acronym> String basierend auf dem Namen der Route.
-                <varname>$urlOptions</varname> sollte ein assoziatives Array von Schlüßel/Werte
-                Paaren sein, welche bon der speziellen Route verwendet wird.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>url($urlOptions, $name, $reset)</methodname>: Erstellt einen
+                    <acronym>URL</acronym> String basierend auf dem Namen der Route.
+                    <varname>$urlOptions</varname> sollte ein assoziatives Array von Schlüßel/Werte
+                    Paaren sein, welche bon der speziellen Route verwendet wird.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>htmlList($items, $ordered, $attribs, $escape)</methodname>: erzeugt
-                ungeordnete und geordnete Listen welche auf den <varname>$items</varname> basieren
-                die übergeben wurden. Wenn <varname>$items</varname> ein multidimensionales Array
-                ist, wird eine verschachtelte Liste gebaut. Wenn das <varname>$escape</varname> Flag
-                <constant>TRUE</constant> ist (standard), werden individuelle Abschnitte escaped
-                durch Verwendung des Escaping Mechanismus der im View Objekt registriert wurde; ein
-                <constant>FALSE</constant> Wert wird übergeben wenn Markups in den Listen gewünscht
-                werden.
-            </para></listitem>
-
+            <listitem>
+                <para>
+                    <methodname>htmlList($items, $ordered, $attribs, $escape)</methodname>: erzeugt
+                    ungeordnete und geordnete Listen welche auf den <varname>$items</varname>
+                    basieren die übergeben wurden. Wenn <varname>$items</varname> ein
+                    multidimensionales Array ist, wird eine verschachtelte Liste gebaut. Wenn das
+                    <varname>$escape</varname> Flag <constant>TRUE</constant> ist (standard), werden
+                    individuelle Abschnitte escaped durch Verwendung des Escaping Mechanismus der im
+                    View Objekt registriert wurde; ein <constant>FALSE</constant> Wert wird
+                    übergeben wenn Markups in den Listen gewünscht werden.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -362,7 +405,6 @@ echo $this->formCheckbox('foo',
         <xi:include href="Zend_View-Helpers-Json.xml" />
         <xi:include href="Zend_View-Helpers-Navigation.xml" />
         <xi:include href="Zend_View-Helpers-Translate.xml" />
-
     </sect2>
 
     <sect2 id="zend.view.helpers.paths">
@@ -410,7 +452,6 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
 // "Zend/View/Helpers/HelperName.php" mit dem Klassennamen
 // "Zend_View_Helper_HelperName" schauen.
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.view.helpers.custom">
@@ -421,46 +462,56 @@ $view->addHelperPath('/other/path/to/helpers', 'Your_View_Helper');
         </para>
 
         <itemizedlist>
+            <listitem>
+                <para>
+                    Wärend das nicht strikt notwendig ist, ist es empfohlen entweder
+                    <classname>Zend_View_Helper_Interface</classname> zu implementieren oder
+                    <classname>Zend_View_Helper_Abstract</classname> zu erweitern wenn eigene Helfer
+                    erstellt werden. Eingeführt mit 1.6.0, definieren diese einfach die
+                    <methodname>setView()</methodname> Methode; trotzdem, in kommenden Releases, ist
+                    es geplant ein Strategy Pattern zu implementieren das vieles der Namensschemas
+                    einfacher mach wie anbei beschrieben. Wenn darauf aufgebaut wird hilft das, das
+                    der eigene Code Zukunftssicher ist.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Wärend das nicht strikt notwendig ist, ist es empfohlen entweder
-                <classname>Zend_View_Helper_Interface</classname> zu implementieren oder
-                <classname>Zend_View_Helper_Abstract</classname> zu erweitern wenn eigene Helfer
-                erstellt werden. Eingeführt mit 1.6.0, definieren diese einfach die
-                <methodname>setView()</methodname> Methode; trotzdem, in kommenden Releases, ist es
-                geplant ein Strategy Pattern zu implementieren das vieles der Namensschemas
-                einfacher mach wie anbei beschrieben. Wenn darauf aufgebaut wird hilft das, das der
-                eigene Code Zukunftssicher ist.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Der Klassenname muss mindestens auf den Helfernamen unter Verwendung der
+                    MixedCaps selber enden. Wenn du z.B. einen Helfer mit Namen "specialPurpose"
+                    schreibst, muss der Klassenname mindestens "SpecialPurpose" lauten. Man kann,
+                    und sollte, dem Klassennamen einen Präfix geben und es wird empfohlen,
+                    'View_Helper' als Teil des Präfix zu verwenden: "My_View_Helper_SpecialPurpose"
+                    (man muss den Präfix mit oder oder abschließenden Unterstrich an
+                    <methodname>addHelperPath()</methodname> oder
+                    <methodname>setHelperPath()</methodname> übergeben).
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Der Klassenname muss mindestens auf den Helfernamen unter Verwendung der MixedCaps
-                selber enden. Wenn du z.B. einen Helfer mit Namen "specialPurpose" schreibst, muss
-                der Klassenname mindestens "SpecialPurpose" lauten. Man kann, und sollte, dem
-                Klassennamen einen Präfix geben und es wird empfohlen, 'View_Helper' als Teil des
-                Präfix zu verwenden: "My_View_Helper_SpecialPurpose" (man muss den Präfix mit oder
-                oder abschließenden Unterstrich an <methodname>addHelperPath()</methodname> oder
-                <methodname>setHelperPath()</methodname> übergeben).
-            </para></listitem>
+            <listitem>
+                <para>
+                    Die Klasse muss eine öffentliche Methode mit dem Namen des Helfers haben. Dies
+                    ist die Methode, welche vom View Skript durch "$this->specialPurpose()"
+                    aufgerufen wird. In unserem "specialPurpose" Beispiel, würde die notwendige
+                    Deklaration dieser Methode "public function specialPurpose()" lauten.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Die Klasse muss eine öffentliche Methode mit dem Namen des Helfers haben. Dies ist
-                die Methode, welche vom View Skript durch "$this->specialPurpose()" aufgerufen wird.
-                In unserem "specialPurpose" Beispiel, würde die notwendige Deklaration dieser
-                Methode "public function specialPurpose()" lauten.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Im Allgemeinen sollte die Klasse keine Ausgaben durch echo(), print() oder auf
+                    andere Weise erstellen. Stattdessen sollte es die auszugebenen Werte
+                    zurückgeben. Die zurückgegebenen Werte sollten entsprechend maskiert werden.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Im Allgemeinen sollte die Klasse keine Ausgaben durch echo(), print() oder auf
-                andere Weise erstellen. Stattdessen sollte es die auszugebenen Werte zurückgeben.
-                Die zurückgegebenen Werte sollten entsprechend maskiert werden.
-            </para></listitem>
-
-            <listitem><para>
-                Diese Klasse muss sich in einer Datei befinden, die nach der Helfermethode benannt
-                ist. Bezogen auf unser "specialPurpose" Beispiel, muss der Dateiname
-                "SpecialPurpose.php" lauten.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Diese Klasse muss sich in einer Datei befinden, die nach der Helfermethode
+                    benannt ist. Bezogen auf unser "specialPurpose" Beispiel, muss der Dateiname
+                    "SpecialPurpose.php" lauten.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -503,6 +554,7 @@ echo $this->specialPurpose();
         <para>
             Die Ausgabe wird in etwa so aussehen:
         </para>
+
         <programlisting language="php"><![CDATA[
 Ich habe 'The Jerk' 1 Mal(e) gesehen.
 Ich habe 'The Jerk' 2 Mal(e) gesehen.
@@ -581,6 +633,3 @@ $view->registerHelper($helper, 'foo');
         </note>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

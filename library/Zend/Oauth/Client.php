@@ -92,6 +92,8 @@ class Zend_Oauth_Client extends Zend_Http_Client
             $this->setRequestMethod(self::GET);
         } elseif($method == self::POST) {
             $this->setRequestMethod(self::POST);
+        } elseif($method == self::PUT) {
+            $this->setRequestMethod(self::PUT);
         }
         return parent::setMethod($method);
     }

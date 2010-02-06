@@ -76,7 +76,8 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         'persistent'    => false,
         'ssltransport'  => 'ssl',
         'sslcert'       => null,
-        'sslpassphrase' => null
+        'sslpassphrase' => null,
+        'sslusecontext' => false
     );
 
     /**
@@ -201,7 +202,7 @@ class Zend_Http_Client_Adapter_Socket implements Zend_Http_Client_Adapter_Interf
         // Now, if we are not connected, connect
         if (! is_resource($this->socket) || ! $this->config['keepalive']) {
             $context = $this->getStreamContext();
-            if ($secure) {
+            if ($secure || $this->config['sslusecontext']) {
                 if ($this->config['sslcert'] !== null) {
                     if (! stream_context_set_option($context, 'ssl', 'local_cert',
                                                     $this->config['sslcert'])) {

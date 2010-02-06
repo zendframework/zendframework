@@ -129,6 +129,18 @@
                             <entry>string</entry>
                             <entry><constant>NULL</constant></entry>
                         </row>
+                        
+                        <row>
+                            <entry>sslusecontext</entry>
+
+                            <entry>
+                                Enables proxied connections to use SSL even if
+                                the proxy connection itself does not.
+                            </entry>
+
+                            <entry>boolean</entry>
+                            <entry><constant>FALSE</constant></entry>
+                        </row>
                     </tbody>
                 </tgroup>
             </table>

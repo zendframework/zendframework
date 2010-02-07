@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20827 -->
 <sect1 id="zend.navigation.introduction">
     <title>導入</title>
 
@@ -21,6 +21,7 @@
 
         <sect3 id="zend.navigation.introduction.pages">
             <title>ページ</title>
+
             <para>
                 <classname>Zend_Navigation</classname>におけるページ (<classname>Zend_Navigation_Page</classname>) は、
                 - その最も基本的な形式で -
@@ -39,6 +40,7 @@
 
         <sect3 id="zend.navigation.introduction.containers">
             <title>コンテナ</title>
+
             <para>
                 ナビゲーション・コンテナ (<classname>Zend_Navigation_Container</classname>) は、
                 ページのためのコンテナ・クラスです。

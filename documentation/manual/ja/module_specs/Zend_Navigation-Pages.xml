@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 20827 -->
 <sect1 id="zend.navigation.pages" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>画面</title>
 
@@ -14,6 +14,7 @@
                      – <classname>Zend_Navigation_Page_Mvc</classname>クラスを使用
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link linkend="zend.navigation.pages.uri">URI画面</link>

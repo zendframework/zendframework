@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20818 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.ebs">
     <title>Zend_Service_Amazon_Ec2: Elastischer Block Speicher (EBS)</title>
@@ -48,10 +48,12 @@ $return = $ec2_ebs->createNewVolume(40, 'us-east-1a');
 
         <example id="zend.service.amazon.ec2.ebs.creating.volumesnapshot">
             <title>Ein EBS Volume von einem Snapshot erstellen</title>
+
             <para>
                 Um ein EBS Volume von einem Snapshot zu erstellen benötigt man die snapshot_id
                 in die Zone in der man das EBS Volume haben will.
             </para>
+
             <para>
                 <code>createVolumeFromSnapshot</code> gibt ein Array mit Informationen zurück.
                 Diese enthalten volumeId, size, zone, status, createTime und snapshotId.
@@ -65,10 +67,12 @@ $return = $ec2_ebs->createVolumeFromSnapshot('snap-78a54011', 'us-east-1a');
 
         <example id="zend.service.amazon.ec2.ebs.creating.snapshot">
             <title>Einen Snapshot von einem EBS Volume erstellen</title>
+
             <para>
                 Um einen Snapshot von einem EBS Volume zu erstellen wird die volumeId des EBS
                 Volums benötigt.
             </para>
+
             <para>
                 <code>createSnapshot</code> gibt ein Array zurück das Informationen über den neuen
                 Volume Snapshot enthält. Dieses beinhaltet snapshotId, volumeId, status, startTime
@@ -87,6 +91,7 @@ $return = $ec2_ebs->createSnapshot('volumeId');
 
         <example id="zend.service.amazon.ec2.ebs.describing.volume">
             <title>Ein EBS Volume beschreiben</title>
+
             <para>
                 <code>describeVolume</code> erlaubt es Informationen über ein EBS Volume oder ein
                 Set von EBS Volums zu erhalten. Wenn nichts angegeben wird, werden alle EBS Volums
@@ -94,6 +99,7 @@ $return = $ec2_ebs->createSnapshot('volumeId');
                 übergeben werden, wärend ein Array von EBS Volume Id's übergeben werden können um
                 diese zu beschreiben.
             </para>
+
             <para>
                 <code>describeVolume</code> gibt ein Array mit Informationen über jedes Volume
                 zurück. Dieses enthält die volumeId, size, status und createTime. Wenn das Volume
@@ -111,11 +117,13 @@ $return = $ec2_ebs->describeVolume('volumeId');
 
         <example id="zend.service.amazon.ec2.ebs.describing.attachedvolumes">
             <title>Angehängte Volumes beschreiben</title>
+
             <para>
                 Um eine Liste der EBS Volumes, die einer laufenden Instanz aktuell angehängt sind,
                 zurückzugeben kann man diese Methode aufrufen. Sie gibt nur EBS Volumes zurück die
                 Instanzen angehängt sind, welche die übergebene instanceId haben.
             </para>
+
             <para>
                 <code>describeAttachedVolumes</code> gibt die gleichen Informationen wie
                 <code>describeVolume</code> zurück, allerdings nur für die EBS Volumes die der
@@ -130,6 +138,7 @@ $return = $ec2_ebs->describeAttachedVolumes('instanceId');
 
         <example id="zend.service.amazon.ec2.ebs.describing.snapshot">
             <title>Einen EBS Volume Snapshot beschreiben</title>
+
             <para>
                 <code>describeSnapshot</code> erlaub es Informationen über einen EBS Volume
                 Snapshot oder ein Set von EBS Volume Snapshots zu erhalten. Wenn nichts übergeben
@@ -138,6 +147,7 @@ $return = $ec2_ebs->describeAttachedVolumes('instanceId');
                 übergeben werden, wärend ein Array von EBS Volume Snapshot Id's übergeben werden
                 kann um mehrere zu beschreiben.
             </para>
+
             <para>
                 <code>describeSnapshot</code> gibt ein Array mit Informationen über jedes EBS
                 Volume Snapshot zurück. Dieses enthält snapshotId, volumeId, status, startTime
@@ -156,11 +166,13 @@ $return = $ec2_ebs->describeSnapshot('volumeId');
 
         <example id="zend.service.amazon.ec2.ebs.attachdetach.attach">
             <title>Ein EBS Volume anhängen</title>
+
             <para>
                 <code>attachVolume</code> hängt ein EBS Volume an eine laufende Instanz an. Um
                 ein Volume anzuhängen muß man die volumeId, die instanceId und das device
                 <emphasis>(ex: /dev/sdh)</emphasis> spezifizieren.
             </para>
+
             <para>
                 <code>attachVolume</code> gibt ein Array mit Informationen über über den
                 angehängten Status zurück. Dieses enthält volumeId, instanceId, device, status
@@ -194,6 +206,7 @@ $ec2_ebs = new Zend_Service_Amazon_Ec2_Ebs('aws_key','aws_secret_key');
 $return = $ec2_ebs->detachVolume('volumeId');
 ]]></programlisting>
         </example>
+
         <note>
             <title>Erzwungene Entfernung</title>
 

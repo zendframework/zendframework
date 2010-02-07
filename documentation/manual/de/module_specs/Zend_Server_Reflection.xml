@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
-<!-- Reviewed: 17175 -->
+<!-- EN-Revision: 20818 -->
+<!-- Reviewed: 20818 -->
 <sect1 id="zend.server.reflection">
     <title>Zend_Server_Reflection</title>
 
@@ -16,6 +16,7 @@
             alle möglichen, gültigen Aufrufkombinationen) sowie Funktions- und
             Methodenbeschreibungen bereit zu stellen.
         </para>
+
         <para>
             Normalerweise wird diese Funktionalität nur von Entwicklern von Serverklassen für das
             Framework verwendet.

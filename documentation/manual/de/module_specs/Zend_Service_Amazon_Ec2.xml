@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20818 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_Amazon_Ec2</title>
 
     <sect2 id="zend.service.amazon.ec2.introduction">
         <title>Einführung</title>
+
         <para>
             <classname>Zend_Service_Amazon_Ec2</classname> bietet ein Interface zu Amazon's Elastic
             Clound Computing (EC2).
         </para>
     </sect2>
+
     <sect2 id="zend.service.amazon.ec2.whatis">
         <title>Was ist Amazon Ec2?</title>
+
         <para>
             Amazon EC2 ist ein Web Service der es erlaubt Server Instanzen in Amazon's Data Centern
             zu starten und zu managen indem <acronym>API</acronym>s oder vorhandenen Tools und
@@ -23,6 +26,7 @@
 
     <sect2 id="zend.service.amazon.ec2.staticmethods">
         <title>Statische Methoden</title>
+
         <para>
             Um die Verwendung der Ec2 Klasse einfacher zu machen gibt es zwei Methoden die von
             jedem der Ec2 Elemente aufgerufen werden kann. Die erste statusche Methode ist
@@ -30,31 +34,37 @@
             Standardschlüssel definiert. Wenn man dann ein neues Objekt erstellt muß man keine
             Schlüssel mehr an den Construktor übergeben.
         </para>
+
         <example id="zend.service.amazon.ec2.staticmethods.setkeys">
             <title>setKeys() Example</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Service_Amazon_Ec2_Ebs::setKeys('aws_key','aws_secret_key');
 ]]></programlisting>
         </example>
+
         <para>
             Um die Region zu setzen in der man arbeitet kann man <code>setRegion</code> aufrufen
             um die Amazon Ec2 Region zu setzen in der man arbeitet. Aktuell sind nur zwei Regionen
             vorhanden, us-east-1 und eu-west-1. Wenn ein ungültiger Wert übergeben wird, wird eine
             Exception geworfen die das ausgibt.
         </para>
+
         <example id="zend.service.amazon.ec2.staticmethods.setregion">
             <title>setRegion() Example</title>
+
             <programlisting language="php"><![CDATA[
 Zend_Service_Amazon_Ec2_Ebs::setRegion('us-east-1');
 ]]></programlisting>
         </example>
+
         <note id="zend.service.amazon.ec2.staticmethods.setregion.note">
             <title>Setzen einer Amazon Ec2 Region</title>
+
             <para>
                 Alternativ kann man die Region setzen wenn man jede Klasse als dritten Parameter
                 in der Construktor Methode erstellt.
             </para>
         </note>
     </sect2>
-
 </sect1>

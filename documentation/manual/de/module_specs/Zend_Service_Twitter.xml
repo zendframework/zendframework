@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20818 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.twitter" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_Twitter</title>
@@ -97,6 +97,7 @@
 
         <example id="zend.service.twitter.authentication.example">
             <title>Erstellung der Twitter Klasse</title>
+
             <para>
                 Das folgende Codebeispiel zeigt wie man den Twitter Service erstellt, den
                 Benutzernamen und das Passwort übergibt, und überprüft ob Sie korrekt sind.
@@ -150,6 +151,7 @@ $response = $twitter->account->verifyCredentials();
 
                 <example id="zend.service.twitter.account.endsession">
                     <title>Beenden von Sessions</title>
+
                     <programlisting language="php"><![CDATA[
 $twitter  = new Zend_Service_Twitter('myusername', 'mysecretpassword');
 $response = $twitter->account->endSession();
@@ -226,6 +228,7 @@ $response = $twitter->status->friendsTimeline();
                             Stunden alt) erstellt wurden.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>page</code> spezifiziert die Seite die man zurückbekommen will.
@@ -362,11 +365,13 @@ $response = $twitter->status->replies();
                             erstellt wurden.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>page</code> spezifiziert welche Seite soll zurückgegeben werden.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>since_id</code> gibt nur Stati zurück die eine größere ID (das
@@ -426,6 +431,7 @@ $response = $twitter->user->friends();
                             Benutzers von dem die Liste an Freunden zurückgegeben werden soll.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>since</code> grenzt die zurückzugebenden Ergebnisse auf jene
@@ -433,6 +439,7 @@ $response = $twitter->user->friends();
                             erstellt wurden.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>page</code> spezifiziert welche Seite soll zurückgegeben werden.
@@ -866,6 +873,7 @@ $response2 = $twitter->block->blocking(1, true);
                             einzelne Seite enthält 20 Id's.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             <code>returnUserIds</code> spezifiziert ob ein Array von nummerischen
@@ -880,6 +888,3 @@ $response2 = $twitter->block->blocking(1, true);
 
     <xi:include href="Zend_Service_Twitter_Search.xml" />
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

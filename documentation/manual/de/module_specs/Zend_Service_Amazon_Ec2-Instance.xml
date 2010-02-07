@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20818 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.instance">
     <title>Zend_Service_Amazon_Ec2: Instanzen</title>
@@ -18,6 +18,7 @@
             <acronym>CPU</acronym> Instanztypen für <acronym>CPU</acronym>-intensive
             Datenverarbeitungs Tasks zu verwenden.
         </para>
+
         <para>
             Eine der Vorteile von EC2 ist das man pro Stunde der Instanz zahlt, was es bequem und
             kostengünstig macht die Performance der eigenen Anwendung auf verschiedenen
@@ -28,13 +29,16 @@
 
         <note>
             <title>Instanz Typen</title>
+
             <para>
                 Der Instanztyp ist als Konstante im Code definiert. Spalte acht in der Tabelle ist
                 der definierte Name der Konstante
             </para>
         </note>
+
         <table id="zend.service.amazon.ec2.instance.types-table">
             <title>Vorhandene Instanztypen</title>
+
             <tgroup cols="8">
                 <thead>
                     <row>
@@ -49,127 +53,127 @@
                     </row>
                 </thead>
                 <tbody>
+
                     <row>
                         <entry><code>Klein</code></entry>
-                        <entry><para>
-                            1 <constant>EC2</constant> Recheneinheit (1 virtueller Kern mit 1
-                            <constant>EC2</constant> Recheneinheit)
-                        </para></entry>
-                        <entry><para>
-                            1.7 GB
-                        </para></entry>
-                        <entry><para>
-                            160 GB Speicher der Instanz (150 GB plus 10 GB Root Partition)
-                        </para></entry>
-                        <entry><para>
-                            32-bit
-                        </para></entry>
-                        <entry><para>
-                            Moderat
-                        </para></entry>
-                        <entry><para>
-                            m1.small
-                        </para></entry>
+
                         <entry>
-                            <constant>Zend_Service_Amazon_Ec2_Instance::SMALL</constant>
+                            <para>
+                                1 <constant>EC2</constant> Recheneinheit (1 virtueller Kern mit 1
+                                <constant>EC2</constant> Recheneinheit)
+                            </para>
                         </entry>
+
+                        <entry><para>1.7 GB</para></entry>
+
+                        <entry>
+                            <para>
+                                160 GB Speicher der Instanz (150 GB plus 10 GB Root Partition)
+                            </para>
+                        </entry>
+
+                        <entry><para>32-bit</para></entry>
+                        <entry><para>Moderat</para></entry>
+                        <entry><para>m1.small</para></entry>
+                        <entry><constant>Zend_Service_Amazon_Ec2_Instance::SMALL</constant></entry>
                     </row>
+
                     <row>
                         <entry><code>Groß</code></entry>
-                        <entry><para>
-                            4 <constant>EC2</constant> Recheneinheiten (2 virtuelle Kerne mit
-                            jeweils 2 <constant>EC2</constant> Recheneinheiten)
-                        </para></entry>
-                        <entry><para>
-                            7.5 GB
-                        </para></entry>
-                        <entry><para>
-                            850 GB Speicher der Instanz (2 x 420 GB plus 10 GB Root Partition)
-                        </para></entry>
-                        <entry><para>
-                            64-bit
-                        </para></entry>
-                        <entry><para>
-                            Hoch
-                        </para></entry>
-                        <entry><para>
-                            m1.large
-                        </para></entry>
+
                         <entry>
-                            <constant>Zend_Service_Amazon_Ec2_Instance::LARGE</constant>
+                            <para>
+                                4 <constant>EC2</constant> Recheneinheiten (2 virtuelle Kerne mit
+                                jeweils 2 <constant>EC2</constant> Recheneinheiten)
+                            </para>
                         </entry>
+
+                        <entry><para>7.5 GB</para></entry>
+
+                        <entry>
+                            <para>
+                                850 GB Speicher der Instanz (2 x 420 GB plus 10 GB Root Partition)
+                            </para>
+                        </entry>
+
+                        <entry><para>64-bit</para></entry>
+                        <entry><para>Hoch</para></entry>
+                        <entry><para>m1.large</para></entry>
+                        <entry><constant>Zend_Service_Amazon_Ec2_Instance::LARGE</constant></entry>
                     </row>
+
                     <row>
                         <entry><code>Extra Groß</code></entry>
-                        <entry><para>
-                            8 <constant>EC2</constant> Recheneinheiten (4 virtuelle Kerne mit
-                            jeweils 2 <constant>EC2</constant> Recheneinheiten)
-                        </para></entry>
-                        <entry><para>
-                            15 GB
-                        </para></entry>
-                        <entry><para>
-                            1,690 GB Speicher der Instanz (4 x 420 GB plus 10 GB Root Partition)
-                        </para></entry>
-                        <entry><para>
-                            64-bit
-                        </para></entry>
-                        <entry><para>
-                            Hoch
-                        </para></entry>
-                        <entry><para>
-                            m1.xlarge
-                        </para></entry>
+
                         <entry>
-                            <constant>Zend_Service_Amazon_Ec2_Instance::XLARGE</constant>
+                            <para>
+                                8 <constant>EC2</constant> Recheneinheiten (4 virtuelle Kerne mit
+                                jeweils 2 <constant>EC2</constant> Recheneinheiten)
+                            </para>
                         </entry>
+
+                        <entry><para>15 GB</para></entry>
+
+                        <entry>
+                            <para>
+                                1,690 GB Speicher der Instanz (4 x 420 GB plus 10 GB Root Partition)
+                            </para>
+                        </entry>
+
+                        <entry><para>64-bit</para></entry>
+                        <entry><para>Hoch</para></entry>
+                        <entry><para>m1.xlarge</para></entry>
+                        <entry><constant>Zend_Service_Amazon_Ec2_Instance::XLARGE</constant></entry>
                     </row>
+
                     <row>
                         <entry><code>High-CPU Medium</code></entry>
-                        <entry><para>
-                            5 <constant>EC2</constant> Recheneinheiten (2 virtuelle Kerne mit
-                            jeweils 2.5 <constant>EC2</constant> Recheneinheiten)
-                        </para></entry>
-                        <entry><para>
-                            1.7 GB
-                        </para></entry>
-                        <entry><para>
-                            350 GB Speicher der Instanz (340 GB plus 10 GB Root Partition)
-                        </para></entry>
-                        <entry><para>
-                            32-bit
-                        </para></entry>
-                        <entry><para>
-                            Durchschnittlich
-                        </para></entry>
-                        <entry><para>
-                            c1.medium
-                        </para></entry>
+
+                        <entry>
+                            <para>
+                                5 <constant>EC2</constant> Recheneinheiten (2 virtuelle Kerne mit
+                                jeweils 2.5 <constant>EC2</constant> Recheneinheiten)
+                            </para>
+                        </entry>
+
+                        <entry><para>1.7 GB</para></entry>
+
+                        <entry>
+                            <para>
+                                350 GB Speicher der Instanz (340 GB plus 10 GB Root Partition)
+                            </para>
+                        </entry>
+
+                        <entry><para>32-bit</para></entry>
+                        <entry><para>Durchschnittlich</para></entry>
+                        <entry><para>c1.medium</para></entry>
+
                         <entry>
                             <constant>Zend_Service_Amazon_Ec2_Instance::HCPU_MEDIUM</constant>
                         </entry>
                     </row>
+
                     <row>
                         <entry><code>High-CPU Extra Groß</code></entry>
-                        <entry><para>
-                            20 <constant>EC2</constant> Recheneinheiten (8 virtuelle Kerne mit
-                            jeweils 2.5 <constant>EC2</constant> Recheneinheiten)
-                        </para></entry>
-                        <entry><para>
-                            7 GB
-                        </para></entry>
-                        <entry><para>
-                            1,690 GB Speicher der Instanz (4 x 420 GB plus 10 GB Root Partition)
-                        </para></entry>
-                        <entry><para>
-                            64-bit
-                        </para></entry>
-                        <entry><para>
-                            Hoch
-                        </para></entry>
-                        <entry><para>
-                            c1.xlarge
-                        </para></entry>
+
+                        <entry>
+                            <para>
+                                20 <constant>EC2</constant> Recheneinheiten (8 virtuelle Kerne mit
+                                jeweils 2.5 <constant>EC2</constant> Recheneinheiten)
+                            </para>
+                        </entry>
+
+                        <entry><para>7 GB</para></entry>
+                        <entry>
+                            <para>
+                                1,690 GB Speicher der Instanz (4 x 420 GB plus 10 GB Root Partition)
+                            </para>
+                        </entry>
+
+                        <entry><para>64-bit</para></entry>
+                        <entry><para>Hoch</para></entry>
+                        <entry><para>c1.xlarge</para></entry>
+
                         <entry>
                             <constant>Zend_Service_Amazon_Ec2_Instance::HCPU_XLARGE</constant>
                         </entry>
@@ -181,135 +185,212 @@
 
     <sect2 id="zend.service.amazon.ec2.instance.operations">
         <title>Ausführen von Amazon EC2 Instanzen</title>
+
         <para>
             Dieses Kapitel beschreibt die Methoden für die Behandlung von Amazon EC2 Instanzen.
         </para>
 
         <example id="zend.service.amazon.ec2.instance.operations.run">
             <title>Starten neuer EC2 Instanzen</title>
+
             <para>
                 <code>run</code> startetn eine spezifische Anzahl von EC2 Instanzen.
                 <code>run</code> nimmt für den Start ein Array von Parametern. Anbei ist eine
                 Tabelle welche die gültigen Werte enthält.
             </para>
+
             <para>
-            <table id="zend.service.amazon.ec2.instance.operations.run-table">
-                <title>Gültige Optionen für das Starten</title>
-                <tgroup cols="3">
-                    <thead>
-                        <row>
-                            <entry>Name</entry>
-                            <entry>Beschreibung</entry>
-                            <entry>Benötigt</entry>
-                        </row>
-                    </thead>
-                    <tbody>
-                        <row>
-                            <entry><code>imageId</code></entry>
-                            <entry><para>
-                                ID der <acronym>AMI</acronym> mit der Instanzen gestartet werden.
-                            </para></entry>
-                            <entry><para>Ja</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>minCount</code></entry>
-                            <entry><para>
-                                Minimale Anzahl der zu startenden Instanzen. Standardwert: 1
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>maxCount</code></entry>
-                            <entry><para>
-                                Maximale Anzahl der zu startenden Instanzen. Standardwert: 1
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>keyName</code></entry>
-                            <entry><para>
-                                Name des Schlüsselpaares mit dem Instanzen gestartet werden. Wenn
-                                man keinen Schlüssel angibt, werden alle Instanzen unangreifbar.
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>securityGroup</code></entry>
-                            <entry><para>
-                                Name der Sicherheitsgruppe mit der Instanzen zu assoziieren sind.
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>userData</code></entry>
-                            <entry><para>
-                                Die Benutzerdaten welche bei den zu startenden Instanzen vorhanden
-                                sind. Diese sollten nicht Base64 verschlüsselt sein.
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>instanceType</code></entry>
-                            <entry><para>
-                                Spezifiziert den Instanztyp. Standardwert: m1.small
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>placement</code></entry>
-                            <entry><para>
-                                Spezifiziert die Availability Zone in der Instanz(en) zu starten
-                                sind. Standardmäßig wählt Amazon <constant>EC2</constant> eine
-                                Availability Zone aus.
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>kernelId</code></entry>
-                            <entry><para>
-                                Die ID des Kernels mit dem die Instanz gestartet werden soll.
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>ramdiskId</code></entry>
-                            <entry><para>
-                                Die ID der <acronym>RAM</acronym> Disk mit der die Instanz gestartet
-                                werden soll.
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>blockDeviceVirtualName</code></entry>
-                            <entry><para>
-                                Spezifiziert den virtuellen Name der zu dem korrespondierenden
-                                Devicenamen gemappt werden soll. Zum Beispiel: instancestore0
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>blockDeviceName</code></entry>
-                            <entry><para>
-                                Spezifiziert das Device zu dem der virtuelle Name gemappt werden
-                                soll. Zum Beispiel: sdb
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                        <row>
-                            <entry><code>monitor</code></entry>
-                            <entry><para>
-                                 Schaltet das Monitoring für die <acronym>AWS</acronym> CloudWatch
-                                 Instanz ein
-                            </para></entry>
-                            <entry><para>Nein</para></entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
+                <table id="zend.service.amazon.ec2.instance.operations.run-table">
+                    <title>Gültige Optionen für das Starten</title>
+
+                    <tgroup cols="3">
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Beschreibung</entry>
+                                <entry>Benötigt</entry>
+                            </row>
+                        </thead>
+
+                        <tbody>
+                            <row>
+                                <entry><code>imageId</code></entry>
+
+                                <entry>
+                                    <para>
+                                        ID der <acronym>AMI</acronym> mit der Instanzen gestartet
+                                        werden.
+                                    </para>
+                                </entry>
+
+                                <entry><para>Ja</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>minCount</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Minimale Anzahl der zu startenden Instanzen. Standardwert: 1
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>maxCount</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Maximale Anzahl der zu startenden Instanzen. Standardwert: 1
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>keyName</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Name des Schlüsselpaares mit dem Instanzen gestartet werden.
+                                        Wenn man keinen Schlüssel angibt, werden alle Instanzen
+                                        unangreifbar.
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>securityGroup</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Name der Sicherheitsgruppe mit der Instanzen zu assoziieren
+                                        sind.
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>userData</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Die Benutzerdaten welche bei den zu startenden Instanzen
+                                        vorhanden sind. Diese sollten nicht Base64 verschlüsselt
+                                        sein.
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>instanceType</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Spezifiziert den Instanztyp. Standardwert: m1.small
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>placement</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Spezifiziert die Availability Zone in der Instanz(en) zu
+                                        starten sind. Standardmäßig wählt Amazon
+                                        <constant>EC2</constant> eine Availability Zone aus.
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>kernelId</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Die ID des Kernels mit dem die Instanz gestartet werden
+                                        soll.
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>ramdiskId</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Die ID der <acronym>RAM</acronym> Disk mit der die Instanz
+                                        gestartet werden soll.
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>blockDeviceVirtualName</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Spezifiziert den virtuellen Name der zu dem
+                                        korrespondierenden Devicenamen gemappt werden soll. Zum
+                                        Beispiel: instancestore0
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>blockDeviceName</code></entry>
+
+                                <entry>
+                                    <para>
+                                        Spezifiziert das Device zu dem der virtuelle Name gemappt
+                                        werden soll. Zum Beispiel: sdb
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+
+                            <row>
+                                <entry><code>monitor</code></entry>
+
+                                <entry>
+                                    <para>
+                                         Schaltet das Monitoring für die <acronym>AWS</acronym>
+                                         CloudWatch Instanz ein
+                                    </para>
+                                </entry>
+
+                                <entry><para>Nein</para></entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
             </para>
+
             <para>
                 <code>run</code> gibt Informationen über jede Instanz zurück die gestartet wird.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
@@ -318,7 +399,6 @@ $return = $ec2_instance->run(array('imageId' => 'ami-509320',
                                    'securityGroup' => array('web',
                                                             'default')));
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.instance.operations.reboot">
@@ -345,7 +425,6 @@ $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->reboot('instanceId');
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.instance.operations.terminate">
@@ -368,6 +447,7 @@ $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
 $return = $ec2_instance->terminate('instanceId');
 ]]></programlisting>
         </example>
+
         <note>
             <title>Terminierte Instanzen</title>
             <para>Terminierte Instanzen bleiben nach der Terminierung sichtbar (voraussichtlich
@@ -377,6 +457,7 @@ $return = $ec2_instance->terminate('instanceId');
 
     <sect2 id="zend.service.amazon.ec2.instance.utility">
         <title>Utilities für Amazon Instanzen</title>
+
         <para>
             In diesem Kapitel erfährt man wie man Informationen über die Ausgabe der Console
             erhält und sieht ob eine Instanz einen Produktcode enthält.
@@ -384,10 +465,12 @@ $return = $ec2_instance->terminate('instanceId');
 
         <example id="zend.service.amazon.ec2.instance.utility.describe">
             <title>Instanzen beschreiben</title>
+
             <para>
                 <code>describe</code> gibt Information über die Instanzen zurück die einem
                 gehören.
             </para>
+
             <para>
                 Wenn man eine oder mehrere Instanz IDs spezifiziert, gibt Amazon EC2 Informationen
                 über diese Instanzen zurück. Wenn man keine Instanz IDs spezifiziert, gibt Amazon
@@ -396,10 +479,12 @@ $return = $ec2_instance->terminate('instanceId');
                 spezifiziert wird die man nicht besitzt, wird diese in den zurückgegebenen
                 Ergebnissen nicht enthalten sein.
             </para>
+
             <para>
                 <code>describe</code> gibt ein Array zurück das Informationen über die Instanz
                 enthält.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
@@ -470,6 +555,7 @@ $return = $ec2_instance->describeByImageId('imageId');
                 <code>instanceId</code>, <code>timestamp</code> von der letzten Ausgabe enthält und
                 <code>output</code> von der Konsole.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
@@ -530,7 +616,6 @@ $ec2_instance = new Zend_Service_Amazon_Ec2_Instance('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->unmonitor('instanceId');
 ]]></programlisting>
-
         </example>
     </sect2>
 </sect1>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20818 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.reflection.introduction">
     <title>Einführung</title>
@@ -11,34 +11,37 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            Die Möglichkeit die Typen der Rückgabewerte zu erhalten.
-        </para></listitem>
+        <listitem><para>Die Möglichkeit die Typen der Rückgabewerte zu erhalten.</para></listitem>
 
-        <listitem><para>
-            Die Möglichkeit Methoden und Funktions Parametertypen zu erhalten.
-        </para></listitem>
+        <listitem>
+            <para>Die Möglichkeit Methoden und Funktions Parametertypen zu erhalten.</para>
+        </listitem>
 
-        <listitem><para>
-            Die Möglichkeit Eigenschaftstypen von Klassen zu erhalten.
-        </para></listitem>
+        <listitem><para>Die Möglichkeit Eigenschaftstypen von Klassen zu erhalten.</para></listitem>
 
-        <listitem><para>
-            DocBlocks mit der Reflection Klasse, welche die Begutachtung von DocBlocks erlauben.
-            Das bietet die Möglichkeit zu erheben welche Typen definiert wurden, sowie deren
-            Werte zu erhalten, und die Möglichkeit die Kurz- und Langbeschreibungen zu empfangen.
-        </para></listitem>
+        <listitem>
+            <para>
+                DocBlocks mit der Reflection Klasse, welche die Begutachtung von DocBlocks erlauben.
+                Das bietet die Möglichkeit zu erheben welche Typen definiert wurden, sowie deren
+                Werte zu erhalten, und die Möglichkeit die Kurz- und Langbeschreibungen zu
+                empfangen.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            Dateien mit der Reflection Klasse, erlauben es <acronym>PHP</acronym> Dateien zu
-            betrachten. Das bietet die Möglichkeit zu eruieren welche Funktionen und Klasssen in der
-            gegebenen Datei definiert sind, sowie Sie zu betrachten.
-        </para></listitem>
+        <listitem>
+            <para>
+                Dateien mit der Reflection Klasse, erlauben es <acronym>PHP</acronym> Dateien zu
+                betrachten. Das bietet die Möglichkeit zu eruieren welche Funktionen und Klasssen
+                in der gegebenen Datei definiert sind, sowie Sie zu betrachten.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            Die Möglichkeit jede Reflection Klasse mit einer eigenen Variante zu überladen,
-            für den kompletten Reflection Baum den man erstellt.
-        </para></listitem>
+        <listitem>
+            <para>
+                Die Möglichkeit jede Reflection Klasse mit einer eigenen Variante zu überladen,
+                für den kompletten Reflection Baum den man erstellt.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>

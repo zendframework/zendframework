@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20818 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.cloudwatch">
     <title>Zend_Service_Amazon_Ec2: CloudWatch Monitoring</title>
+
     <para>
         Amazon CloudWatch ist ein einfach zu verwendender Web Service der vollständiges Monitoring
         für Amazon Elastic Compute Cloud (Amazon <acronym>EC2</acronym>) und Elastic Load
         Balancing bietet. Für detailiertere Informationen sehen Sie in den <ulink
-            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/index.html?SvcIntro.html">
-            Amazon CloudWatch Developers Guide</ulink>.
+            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/index.html?SvcIntro.html">Amazon
+            CloudWatch Developers Guide</ulink>.
     </para>
 
     <sect2 id="zend.service.amazon.ec2.cloudwatch.usage">
@@ -16,6 +17,7 @@
 
         <example id="zend.service.amazon.ec2.cloudwatch.usage.list">
             <title>Liste der vorhandenen Metrik</title>
+
             <para>
                 <methodname>listMetrics()</methodname> gibt eine Liste von bis zu 500 gültigen
                 Metriken an für welche aufgezeichnete Daten vorhanden sind und einen NextToken
@@ -31,10 +33,12 @@ $return = $ec2_ebs->listMetrics();
 
         <example id="zend.service.amazon.ec2.cloudwatch.usage.getmetricstatistics">
             <title>Gibt Statistiken für eine gegebene Metrik zurück</title>
+
             <para>
                 <methodname>getMetricStatistics()</methodname> gibt Daten für ein oder mehrere
                 Statistiken einer gegebenen Metrik zurück.
             </para>
+
             <para>
                 <note>
                     <para>
@@ -50,14 +54,17 @@ $return = $ec2_ebs->listMetrics();
                     </para>
                 </note>
             </para>
+
             <para>
                 <methodname>getMetricStatistics()</methodname> benötigt nur zwei Parameter, besitzt
                 aber vier zusätzliche Parameter die optional sind.
             </para>
+
             <itemizedlist>
                 <listitem>
                     <para><emphasis>Benötigt:</emphasis></para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>MeasureName</emphasis> Der Name der Maßeinheit die mit der
@@ -66,10 +73,11 @@ $return = $ec2_ebs->listMetrics();
                         NetworkIn, NetworkOut, DiskWriteOps, DiskReadBytes, DiskReadOps,
                         DiskWriteBytes. Gültige Elastic Load Balancing Metriken sind Latency,
                         RequestCount, HealthyHostCount, UnHealthyHostCount. <ulink
-                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">
-                            Für weitere Informationen hier klicken</ulink>.
+                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-AmazonCloudWatch-metricscollected.html">Für
+                            weitere Informationen hier klicken</ulink>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>Statistics</emphasis> Die Statistik die für die angegebene Metrik
@@ -78,13 +86,15 @@ $return = $ec2_ebs->listMetrics();
                         Wenn man keine spezifiziert dann wird als Standard Average genommen statt
                         nichts zu tun. Wenn man eine ungültige Option spezifiziert wird diese
                         einfach ignoriert. <ulink
-                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-Amazon-CloudWatch-statistics.html">
-                            Für weitere Informationen hier klicken</ulink>.
+                            url="http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/arch-Amazon-CloudWatch-statistics.html">Für
+                            weitere Informationen hier klicken</ulink>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para><emphasis>Optional:</emphasis></para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>Dimensions</emphasis> Amazon CloudWatch erlaubt es eine Dimension
@@ -93,6 +103,7 @@ $return = $ec2_ebs->listMetrics();
                         angegebenen Namen der Maßeinheit und dem Zeitbereich zurück.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>Unit</emphasis> Die Standardeinheit der Maßeinheit für ein
@@ -104,6 +115,7 @@ $return = $ec2_ebs->listMetrics();
                         dazu führen das Average immer 1 ist wenn die Einheit Count/Second ist.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>StartTime</emphasis> Der Zeitpunkt des ersten Datenpunkts der
@@ -115,6 +127,7 @@ $return = $ec2_ebs->listMetrics();
                         liegen.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>EndTime</emphasis> Der Zeitpunkt der für die Ermittlung des

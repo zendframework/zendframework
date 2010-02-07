@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17948 -->
+<!-- EN-Revision: 20818 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.zones">
     <title>Zend_Service_Amazon_Ec2: Regionen und Availability Zones</title>
@@ -16,12 +16,14 @@
 
     <sect2 id="zend.service.amazon.ec2.zones.regions">
         <title>Amazon EC2 Regionen</title>
+
         <para>
              Amazon EC2 bietet viele Regionen so das man Amazon EC2 Instanzen in verschiedenen
              Lokationen, die den eigenen Notwendigkeiten entsprechen, starten kann. Zum Beispiel
              kann es gewünscht sein Instanzen in Europa zu starten um den eigenen europäischen
              Kunden näher zu sein oder um legalen Notwendigkeiten zu entsprechen.
          </para>
+
          <para>
              Jede Amazon EC2 Region wurde gestaltet um von anderen Amazon EC2 Instanzen komplett
              isoliert zu sein. Das bietet die grösst mögliche Fehlerunabhängigkeit und
@@ -30,10 +32,12 @@
 
         <example id="zend.service.amazon.ec2.zones.regions.example">
             <title>Ansehen der vorhendenen Regionen</title>
+
             <para>
                 <code>describe</code> wird verwendet um herauszufinden zu welcher Region der
                 eigene Account Zugriff hat.
             </para>
+
             <para>
                 <code>describe</code> gibt ein Array zurück das Informationen darüber enthält
                 welche Regionen verfügbar sind. Jedes Array enthält regionName und regionUrl.
@@ -52,6 +56,7 @@ foreach($regions as $region) {
 
     <sect2 id="zend.service.amazon.ec2.zones.availability">
         <title>Amazon EC2 Availability Zonen</title>
+
         <para>
             Wenn man eine Instanz startet, kann man optional eine Availability Zone spezifizieren.
             Wenn man keine Availability Zone spezifiziert, wählt Amazon EC2 eine in der Region aus
@@ -66,10 +71,12 @@ foreach($regions as $region) {
 
         <example id="zend.service.amazon.ec2.zones.availability.example">
             <title>Vorhendene Zonen sehen</title>
+
             <para>
                 <code>describe</code> wird verwendet um herauszufinden wie der Status jeder
                 Availability Zone ist.
             </para>
+
             <para>
                 <code>describe</code> gibt ein Array zurück das Informationen darüber enthält,
                 welche Zonen verfügbar sind. Jedes Array enthält zoneName und zoneState.

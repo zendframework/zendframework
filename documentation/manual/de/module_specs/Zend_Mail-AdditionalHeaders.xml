@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19450 -->
+<!-- EN-Revision: 20819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.additional-headers">
     <title>Zusätzliche Kopfzeilen</title>
@@ -7,6 +7,7 @@
     <para>
         <classname>Zend_Mail</classname> bietet verschiedene Methode um zusätzliche Mail Header zu
         setzen:
+
         <itemizedlist>
             <listitem>
                 <para>
@@ -55,6 +56,7 @@
 
     <example id="zend.mail.additional-headers.example-1">
         <title>Eine E-Mail Kopfzeile hinzufügen</title>
+
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->addHeader('X-MailGenerator', 'MeineCooleAnwendung');
@@ -63,6 +65,3 @@ $mail->addHeader('X-greetingsTo', 'Dad', true);
 ]]></programlisting>
     </example>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

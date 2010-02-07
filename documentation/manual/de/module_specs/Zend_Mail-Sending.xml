@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 20819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.sending">
     <title>Versand über SMTP</title>
+
     <para>
         Um eine E-Mail über SMTP zu versenden, muss <classname>Zend_Mail_Transport_Smtp</classname>
         erstellt und in <classname>Zend_Mail</classname> registriert werden, bevor die
@@ -10,13 +11,16 @@
         <methodname>Zend_Mail::send()</methodname> im aktuellen Skript wird dann der SMTP Versand
         verwendet:
     </para>
+
     <example id="zend.mail.sending.example-1">
         <title>E-Mail Versand über SMTP</title>
+
         <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Smtp('mail.example.com');
 Zend_Mail::setDefaultTransport($tr);
 ]]></programlisting>
     </example>
+
     <para>
         Die <methodname>setDefaultTransport()</methodname> Methode und der Konstruktor von
         <classname>Zend_Mail_Transport_Smtp</classname> sind nicht aufwendig. Diese beiden Zeilen
@@ -28,6 +32,3 @@ Zend_Mail::setDefaultTransport($tr);
         welcher Mailserver verwendet wird, usw.
     </para>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19422 -->
+<!-- EN-Revision: 20819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.character-sets">
     <title>Zeichensätze</title>
@@ -52,6 +52,3 @@ $mail->send();
 ]]></programlisting>
     </example>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

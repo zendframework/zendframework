@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.html-mails">
     <title>HTML E-Mail</title>
+
     <para>
         Um einen E-Mail im HTML Format zu versenden, muss der Hauptteil der Nachricht durch die
         <methodname>setBodyHTML()</methodname> statt durch die
@@ -11,8 +12,10 @@
         auch Text Daten verwendest, wird automatisch eine multipart/alternative
         <acronym>MIME</acronym> E-Mail erstellt:
     </para>
+
     <example id="zend.mail.html-mails.example-1">
         <title>Versand von HTML E-Mail</title>
+
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('Mein netter Test Text');
@@ -24,6 +27,3 @@ $mail->send();
 ]]></programlisting>
     </example>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

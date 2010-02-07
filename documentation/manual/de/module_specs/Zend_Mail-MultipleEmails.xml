@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20039 -->
+<!-- EN-Revision: 20819 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mail.multiple-emails">
     <title>Versand von mehreren E-Mails über eine SMTP Verbindung</title>
@@ -50,7 +50,6 @@ for ($i = 0; $i < 5; $i++) {
 Zend_Mail::clearDefaultFrom();
 Zend_Mail::clearDefaultReplyTo();
 ]]></programlisting>
-
     </example>
 
     <para>
@@ -61,7 +60,6 @@ Zend_Mail::clearDefaultReplyTo();
     </para>
 
     <example id="zend.mail.multiple-emails.example-2">
-
         <title>Die Transportverbindung manuell kontrollieren</title>
 
         <programlisting language="php"><![CDATA[
@@ -92,10 +90,5 @@ for ($i = 0; $i < 5; $i++) {
 $protocol->quit();
 $protocol->disconnect();
 ]]></programlisting>
-
     </example>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

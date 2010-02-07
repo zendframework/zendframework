@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.text.table.introduction">
     <title>Zend_Text_Table</title>
+
     <para>
         <classname>Zend_Text_Table</classname> ist eine Komponente für die Erstellung von
         Text-basierenden Tabellen welche mit unterschiedlichen Dekoratoren arbeitet. Das kann
@@ -12,8 +13,10 @@
         <classname>Zend_Text_Table</classname> unterstützt mehrzeilige Spalten, Colspan und auch
         Ausrichtung.
     </para>
+
     <note>
         <title>Kodierung</title>
+
         <para>
             <classname>Zend_Text_Table</classname> erwartet die Strings standardmäßig als UTF-8
             kodiert. Wenn das nicht der Fall ist, kann entweder die Zeichenkodierung als Parameter
@@ -25,6 +28,7 @@
             <methodname>Zend_Text_Table::setOutputCharset($charset)</methodname> gesetzt werden.
         </para>
     </note>
+
     <para>
         Ein <classname>Zend_Text_Table</classname> Objekt besteht aus Zeilen, die Spalten enthalten,
         repräsentiert durch <classname>Zend_Text_Table_Row</classname> und
@@ -38,6 +42,7 @@
                     Breite in Zeichen definiert.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>decorator</code>: Der Dekorator der für die Tabellenränder verwendet wird.
@@ -45,42 +50,50 @@
                     spezifizieren, oder eine Instanz eines eigenen Dekoratorobjekts angeben.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>padding</code>: Die linke und rechte Füllung innerhalb der Spalten in
                     Zeichen. Die Standardfüllung ist Null.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <code>AutoSeparate</code>: Der Weg auf dem Zeilen mit horizontalen Linien
                     getrennt werden. Der Standard ist eine Trennung zwischen allen Zeilen. Das ist
                     als Bitmaske definiert die ein oder mehrere der folgenden Konstanten von
                     <classname>Zend_Text_Table</classname> haben kann:
+
                     <itemizedlist>
                         <listitem>
                             <para><constant>Zend_Text_Table::AUTO_SEPARATE_NONE</constant></para>
                         </listitem>
+
                         <listitem>
                             <para>
                                 <constant>Zend_Text_Table::AUTO_SEPARATE_HEADER</constant>
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
                                 <constant>Zend_Text_Table::AUTO_SEPARATE_FOOTER</constant>
                             </para>
                         </listitem>
+
                         <listitem>
                             <para><constant>Zend_Text_Table::AUTO_SEPARATE_ALL</constant></para>
                         </listitem>
                     </itemizedlist>
+
                     Wobei der Tabellenheader immer die erste Zeile, und der Tabellenfooter immer
                     die letzte Zeile ist.
                 </para>
             </listitem>
         </itemizedlist>
     </para>
+
     <para>
         Zeilen werden zur Tabelle einfach hinzugefügt indem eine neue Instanz von
         <classname>Zend_Text_Table_Row</classname> erstellt, und der Tabelle über die
@@ -88,6 +101,7 @@
         der <code>appendRow</code> Methode auch direkt auch ein Array geben, welches dann
         automatisch in ein Zeilenobjekt konvertiert wird, welches mehrere Spaltenobjekte enthält.
     </para>
+
     <para>
         Auf dem gleichen Weg kann man Spalten zu Zeilen hinzufügen. Man erstellt eine neue Instanz
         von <classname>Zend_Text_Table_Column</classname> und setzt dann entweder die Zeilenoptionen
@@ -98,21 +112,9 @@
         <classname>Zend_Text_Table_Column</classname> sein kann:
 
         <itemizedlist>
-            <listitem>
-                <para>
-                    <constant>ALIGN_LEFT</constant>
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <constant>ALIGN_CENTER</constant>
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <constant>ALIGN_RIGHT</constant>
-                </para>
-            </listitem>
+            <listitem><para><constant>ALIGN_LEFT</constant></para></listitem>
+            <listitem><para><constant>ALIGN_CENTER</constant></para></listitem>
+            <listitem><para><constant>ALIGN_RIGHT</constant></para></listitem>
         </itemizedlist>
 
         Der dritte Parameter ist die Colspan der Zeile. Wenn man, zum Beispiel, "2" als Colspan
@@ -123,17 +125,21 @@
         werden. Alternativ kann ein String direkt an die <code>appendColumn</code> Methode übergeben
         werden.
     </para>
+
     <para>
         Um die Tabelle letztendlich darzustellen, kann man entweder die <code>render</code> Methode
         der Tabelle verwenden, oder die magische <code>__toString</code> Methode der Tabelle, indem
         man <code>echo $table;</code> oder <code>$tableString = (string) $table</code> ausführt.
     </para>
+
     <example id="zend.text.table.example.using">
         <title>Verwenden von Zend_Text_Table</title>
+
         <para>
             Ein Beispiel zeigt die grundsätzliche Verwendung von
             <classname>Zend_Text_Table</classname> um eine einfache Tabelle zu erstellen:
         </para>
+
         <programlisting language="php"><![CDATA[
 $table = new Zend_Text_Table(array('columnWidths' => array(10, 20)));
 
@@ -150,9 +156,11 @@ $table->appendRow($row);
 
 echo $table;
 ]]></programlisting>
+
         <para>
             Das führt zur folgenden Ausgabe:
         </para>
+
         <programlisting language="text"><![CDATA[
 ┌──────────┬────────────────────┐
 │Zend      │Framework           │
@@ -160,6 +168,3 @@ echo $table;
 ]]></programlisting>
     </example>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

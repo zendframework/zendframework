@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19426 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.adapter">
-
     <title>Adapter für Zend_Translate</title>
 
     <para>
@@ -13,6 +12,7 @@
 
     <table id="zend.translate.adapter.table">
         <title>Adapter für Zend_Translate</title>
+
         <tgroup cols="3">
             <thead>
                 <row>
@@ -21,74 +21,92 @@
                     <entry>Benutzung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry>Array</entry>
                     <entry>Für <acronym>PHP</acronym> Arrays</entry>
                     <entry>Kleine Seiten; Einfachste Handhabung; nur für Programmierer</entry>
                 </row>
+
                 <row>
                     <entry>Csv</entry>
                     <entry>Für kommagetrennte (*.csv/*.txt) Dateien</entry>
+
                     <entry>
                         Einfaches Textdatei Format; schnell; mögliche Probleme bei der Verwendung
                         von Unicode Zeichen
                     </entry>
                 </row>
+
                 <row>
                     <entry>Gettext</entry>
                     <entry>Für binäre Gettext (*.mo) Dateien</entry>
+
                     <entry>
                         GNU Standard für Linux; Threadsicher; benötigt Tools für die Übersetzung
                     </entry>
                 </row>
+
                 <row>
                     <entry>Ini</entry>
                     <entry>Für einfache ini (*.ini) Dateien</entry>
+
                     <entry>
                         Einfaches Testdatei Format; schnell; mögliche Probleme mit Unicode Zeichen
                     </entry>
                 </row>
+
                 <row>
                     <entry>Tbx</entry>
                     <entry>Für termbase exchange (*.tbx/*.xml) Dateien</entry>
+
                     <entry>
                         Industrie Standard für Applikations übergreifende terminologie Strings;
                         <acronym>XML</acronym> Format
                     </entry>
                 </row>
+
                 <row>
                     <entry>Tmx</entry>
                     <entry>Für TMX (*.tmx/*.xml) Dateien</entry>
+
                     <entry>
                         Industrie Standard für Applikations übergreifende Übersetzungen;
                         <acronym>XML</acronym> Format, menschlich lesbar
                     </entry>
                 </row>
+
                 <row>
                     <entry>Qt</entry>
                     <entry>Für qt Linguist (*.ts) Dateien</entry>
+
                     <entry>
                         Plattform übergreifender Anwendungs Framework; <acronym>XML</acronym>
                         Format, menschlich lesbar
                     </entry>
                 </row>
+
                 <row>
                     <entry>Xliff</entry>
                     <entry>Für XLIFF (*.xliff/*.xml) Dateien</entry>
+
                     <entry>
                         Ein einfacheres Format als <acronym>TMX</acronym> aber vergleichbar;
                         <acronym>XML</acronym> Format; menschlich lesbar
                     </entry>
                 </row>
+
                 <row>
                     <entry>XmlTm</entry>
                     <entry>Für xmltm (*.xml) Dateien</entry>
+
                     <entry>
                         Industrie Standard für <acronym>XML</acronym> basierende
                         Übersetzungsspeicher; <acronym>XML</acronym> Format; menschlich lesbar
                     </entry>
                 </row>
+
                 <row>
                     <entry>Andere</entry>
                     <entry>*.sql</entry>
@@ -99,7 +117,6 @@
     </table>
 
     <sect2 id="zend.translate.adapter.decision">
-
         <title>Wie man entscheidet welchen Adapter man benutzen soll</title>
 
         <para>
@@ -133,7 +150,6 @@
         </note>
 
         <sect3 id="zend.translate.adapter.array">
-
             <title>Zend_Translate_Adapter_Array</title>
 
             <para>
@@ -152,7 +168,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.csv">
-
             <title>Zend_Translate_Adapter_Csv</title>
 
             <para>
@@ -179,7 +194,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.gettext">
-
             <title>Zend_Translate_Adapter_Gettext</title>
 
             <para>
@@ -206,7 +220,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.ini">
-
             <title>Zend_Translate_Adapter_Ini</title>
 
             <para>
@@ -222,7 +235,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.tbx">
-
             <title>Zend_Translate_Adapter_Tbx</title>
 
             <para>
@@ -258,7 +270,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.tmx">
-
             <title>Zend_Translate_Adapter_Tmx</title>
 
             <para>
@@ -277,7 +288,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.qt">
-
             <title>Zend_Translate_Adapter_Qt</title>
 
             <para>
@@ -295,7 +305,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.xliff">
-
             <title>Zend_Translate_Adapter_Xliff</title>
 
             <para>
@@ -315,7 +324,6 @@
         </sect3>
 
         <sect3 id="zend.translate.adapter.xmltm">
-
             <title>Zend_Translate_Adapter_XmlTm</title>
 
             <para>
@@ -331,11 +339,9 @@
                 existieren. Die Dateien sind menschlich lesbar und systemunabhängig.
             </para>
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.translate.adapter.selfwritten">
-
         <title>Selbst geschriebene Adapter integrieren</title>
 
         <para>
@@ -370,11 +376,9 @@ try {
     // Genereller Fehler
 }
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.translate.adapter.caching">
-
         <title>Alle Adapter verschnellern</title>
 
         <para>
@@ -414,7 +418,5 @@ $translate = new Zend_Translate('gettext',
                 <methodname>addTranslation()</methodname> Methode hinzugefügt wird.
             </para>
         </note>
-
     </sect2>
-
 </sect1>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16656 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.introduction">
     <title>Einführung</title>
@@ -71,40 +71,54 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            <classname>Zend_Tool_Framework</classname> - Der Framework der die Tooling Möglichkeiten
-            anbietet.
-        </para></listitem>
+        <listitem>
+            <para>
+                <classname>Zend_Tool_Framework</classname> - Der Framework der die Tooling
+                Möglichkeiten anbietet.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>Tooling Client</emphasis> - Ein Entwickler Tool das sich zu
-            <classname>Zend_Tool_Framework</classname> verbindet und es verwendet.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>Tooling Client</emphasis> - Ein Entwickler Tool das sich zu
+                <classname>Zend_Tool_Framework</classname> verbindet und es verwendet.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>Client</emphasis> - Das Untersystem vom
-            <classname>Zend_Tool_Framework</classname> das ein Interface anbietet auf welches sich
-            Tooling Clients verbinden, und abfragen , sowie Kommandos ausführen können.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>Client</emphasis> - Das Untersystem vom
+                <classname>Zend_Tool_Framework</classname> das ein Interface anbietet auf welches
+                sich Tooling Clients verbinden, und abfragen , sowie Kommandos ausführen können.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>Console Client / Command Line Interface /
-            <filename>zf.php</filename></emphasis> - Der Tooling Client für die Komandozeile.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>Console Client / Command Line Interface /
+                <filename>zf.php</filename></emphasis> - Der Tooling Client für die Komandozeile.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>Provider</emphasis> - Ein Subsystem und eine Kollektion von eingebauten
-            Funktionalitäten die der Framework exportiert.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>Provider</emphasis> - Ein Subsystem und eine Kollektion von eingebauten
+                Funktionalitäten die der Framework exportiert.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis>Manifest</emphasis> - Ein Untersystem für das Definieren, die Organisation
-            und die Verbreitung von notwendigen Providerdaten.
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>Manifest</emphasis> - Ein Untersystem für das Definieren, die Organisation
+                und die Verbreitung von notwendigen Providerdaten.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <classname>Zend_Tool_Project</classname> Provider - Ein Set von Providern speziell für
-            die Erstellung und das Maintaining von Zend_Framework basierenden Projekten.
-        </para></listitem>
+        <listitem>
+            <para>
+                <classname>Zend_Tool_Project</classname> Provider - Ein Set von Providern speziell
+                für die Erstellung und das Maintaining von Zend_Framework basierenden Projekten.
+            </para>
+        </listitem>
     </itemizedlist>
 </sect1>

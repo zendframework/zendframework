@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20229 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Standard Prüfklassen</title>
@@ -26,7 +26,6 @@
                 <classname>Zend_Locale</classname> spezifiziert.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.validate.set.alpha">
@@ -43,6 +42,7 @@
 
     <sect2 id="zend.validate.set.between">
         <title>Between</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> zwischen
             dem minimalen und maximalen Grenzwert ist. Der Vergleich ist standardmäßig inklusive
@@ -90,6 +90,7 @@
 
     <sect2 id="zend.validate.set.digits">
         <title>Digits</title>
+
         <para>
             Gibt nur dann <constant>TRUE</constant> zurück wenn <varname>$value</varname> nur
             digitale Zeichen enthält.

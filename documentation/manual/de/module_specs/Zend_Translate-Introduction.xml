@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.introduction">
     <title>Einführung</title>
@@ -121,9 +121,7 @@
         </para>
 
         <orderedlist numeration='arabic'>
-            <listitem>
-                <para>Den Adapter auswählen der Benutzt werden soll;</para>
-            </listitem>
+            <listitem><para>Den Adapter auswählen der Benutzt werden soll;</para></listitem>
 
             <listitem>
                 <para>
@@ -132,8 +130,7 @@
                 </para>
             </listitem>
 
-            <listitem><para>Die Quell Datei vom Code erzeugen;</para>
-            </listitem>
+            <listitem><para>Die Quell Datei vom Code erzeugen;</para></listitem>
 
             <listitem>
                 <para>Die Quell Datei in die gewünschten Sprachen übersetzen.</para>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19568 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.writing-providers">
     <title>Erstellen von Providern für die Verwendung mit Zend_Tool_Framework</title>
@@ -239,24 +239,25 @@ class My_Component_HelloProvider
         <sect3 id="zend.tool.framework.writing-providers.advanced.pretendable">
             <title>Voranstellen um eine Provider Aktion auszuführen</title>
 
-        <para>
-            Ein anderes interessantes Feature das man implementieren kann ist
-            <emphasis>Voranstellbarkeit</emphasis>. Voranstellbarkeit ist die Fähigkeit des
-            Providers "Voranzustellen" wie wenn er die angefragte Aktion und Provider
-            Kombination ausführt, und dem Benutzer so viel Information wie möglich darüber gibt
-            was er tun <emphasis>würde</emphasis> ohne es wirklich zu tun. Das kann eine wichtige
-            Option sein wenn viele Datenbank oder Dateisystem Änderungen durchzuführen sind, die
-            der Benutzer andernfalls nicht tun würde.
-        </para>
+            <para>
+                Ein anderes interessantes Feature das man implementieren kann ist
+                <emphasis>Voranstellbarkeit</emphasis>. Voranstellbarkeit ist die Fähigkeit des
+                Providers "Voranzustellen" wie wenn er die angefragte Aktion und Provider
+                Kombination ausführt, und dem Benutzer so viel Information wie möglich darüber gibt
+                was er tun <emphasis>würde</emphasis> ohne es wirklich zu tun. Das kann eine
+                wichtige Option sein wenn viele Datenbank oder Dateisystem Änderungen durchzuführen
+                sind, die der Benutzer andernfalls nicht tun würde.
+            </para>
 
-        <para>
-            Voranstellbarkeit ist einfach zu implementieren. Es gibt zwei Teile dieses Features:
-            1) Markieren des Providers, das er die Fähigkeit des "voranstellens" hat und 2) prüfen
-            der Anfrage um Sicherzustellen das die aktuelle Anfrage wirklich das "voranstellen"
-            angefragt hat. Dieses Feature wird im nächsten Code Beispiel demonstriert.
-        </para>
+            <para>
+                Voranstellbarkeit ist einfach zu implementieren. Es gibt zwei Teile dieses Features:
+                1) Markieren des Providers, das er die Fähigkeit des "voranstellens" hat und 2)
+                prüfen der Anfrage um Sicherzustellen das die aktuelle Anfrage wirklich das
+                "voranstellen" angefragt hat. Dieses Feature wird im nächsten Code Beispiel
+                demonstriert.
+            </para>
 
-        <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 class My_Component_HelloProvider
     extends    Zend_Tool_Framework_Provider_Abstract
     implements Zend_Tool_Framework_Provider_Pretendable
@@ -281,7 +282,6 @@ class My_Component_HelloProvider
 % zf --pretend say hello Ralph
 I würde zu Ralph hallo sagen.
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.tool.framework.writing-providers.advanced.verbosedebug">

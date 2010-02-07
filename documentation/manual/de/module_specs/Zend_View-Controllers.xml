@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16444 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.controllers">
     <title>Controller Skripte</title>
@@ -11,7 +11,6 @@
     </para>
 
     <sect2 id="zend.view.controllers.assign">
-
         <title>Variablen übergeben</title>
 
         <para>
@@ -71,11 +70,9 @@ $view->assign('a', "Hay");
 $view->assign('b', "Bee");
 $view->assign('c', "Sea");
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.view.controllers.render">
-
         <title>Verarbeitung eines View Skripts</title>
 
         <para>
@@ -93,11 +90,9 @@ $view->b = "Bee";
 $view->c = "Sea";
 echo $view->render('someView.php');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.view.controllers.script-paths">
-
         <title>Pfade für View Skripte</title>
 
         <para>
@@ -170,10 +165,5 @@ $view->render('passwd');
                 kontrolliert werden.
             </para>
         </note>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

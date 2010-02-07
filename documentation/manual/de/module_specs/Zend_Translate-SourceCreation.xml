@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17406 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.sourcecreation">
     <title>Erstellen von Quelldateien</title>
@@ -106,6 +106,7 @@ $translate->addTranslation('/path/to/german.mo', 'de');
                  immer nur ein Encoding für alle Quell Dateien verwenden, und hierbei würde eine der
                  gewünschten Sprachen nicht korrekt angezeigt werden.
             </para>
+
             <para>
                  UTF-8 ist ein portables Format welches alle Sprachen unterstützt. Wenn UTF-8 für
                  alle Sprachen verwendet wird, eliminiert man die Probleme mit inkompatiblen
@@ -142,6 +143,7 @@ print_r($translate->getAdapterInfo());
 
         <example id="zend.translate.sourcecreation.tmx.example">
             <title>Beispiel einer TMX Datei</title>
+
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" ?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
@@ -190,6 +192,7 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
 
         <example id="zend.translate.sourcecreation.csv.example">
             <title>Beispiel CSV Datei</title>
+
             <programlisting language="txt"><![CDATA[
 ﻿#Example csv file
 message1;Nachricht1
@@ -229,6 +232,7 @@ $translate->addTranslation('path/to/other.csv', 'fr');
 
         <example id="zend.translate.sourcecreation.csv.example2">
             <title>Zweites Beispiel für CSV Dateien</title>
+
             <programlisting language="txt"><![CDATA[
 ﻿# Example CSV file
 "message,1",Nachricht1
@@ -267,6 +271,7 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
 
         <example id="zend.translate.sourcecreation.ini.example">
             <title>Beispiel einer INI Datei</title>
+
             <programlisting language="txt"><![CDATA[
 [Test]
 ;TestPage Comment

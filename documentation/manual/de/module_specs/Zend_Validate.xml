@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.validate.introduction">
     <title>Einführung</title>
@@ -30,7 +30,6 @@
             Anforderungen nicht entspricht, wäre es nützlich zu wissen welche der Anforderungen der
             Benutzername nicht entsprochen hat.
         </para>
-
     </sect2>
 
     <sect2 id="zend.validate.introduction.using">
@@ -211,7 +210,6 @@ if (Zend_Validate::is($value, 'Between', array('min' => 1, 'max' => 12))) {
     // Ja, $value ist zwischen 1 und 12
 }
 ]]></programlisting>
-
         </para>
 
         <para>
@@ -377,6 +375,3 @@ if (!$validator->isTranslatorDisabled()) {
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

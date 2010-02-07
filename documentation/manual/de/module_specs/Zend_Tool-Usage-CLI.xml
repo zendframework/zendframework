@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.usage.cli">
     <title>Verwendung von Zend_Tool auf der Kommandozeile</title>
@@ -71,8 +71,8 @@ pear install zfcampus/zf
             </para>
 
             <para>
-                Wenn man auf einem *nix oder Mac System ist, kann man auch einen Link von irgendwo im
-                eigenen Pfad zur zf.sh Datei erstellen. Wenn man das macht muss man sich keine
+                Wenn man auf einem *nix oder Mac System ist, kann man auch einen Link von irgendwo
+                im eigenen Pfad zur zf.sh Datei erstellen. Wenn man das macht muss man sich keine
                 Gedanken darüber machen das die Zend Framework Bibliothek im eigenen include_path
                 ist, da die Dateien zf.php und zf.sh auf die Bibliothek, relativ dazu wo Sie sind,
                 zugreifen können (was bedeutet das die ./bin/ Dateien relativ zu ../library/ der
@@ -280,7 +280,7 @@ zf create action login --controller-name=Auth
             <programlisting language="text"><![CDATA[
 zf create view Auth my-script-name
 zf create view -c Auth -a my-script-name
-            ]]></programlisting>
+]]></programlisting>
 
             <para>
                 Das erstellt ein View Skript im Controller Verzeichnis von Auth.
@@ -350,18 +350,10 @@ zf create form Comment -m Blog
                 Um zum Beispiel die folgenden Informationen einzugeben:
 
                 <itemizedlist>
-                    <listitem>
-                        <para>adapter: Pdo_Mysql</para>
-                    </listitem>
-                    <listitem>
-                        <para>username: test</para>
-                    </listitem>
-                    <listitem>
-                        <para>password: test</para>
-                    </listitem>
-                    <listitem>
-                        <para>dbname: test </para>
-                    </listitem>
+                    <listitem><para>adapter: Pdo_Mysql</para></listitem>
+                    <listitem><para>username: test</para></listitem>
+                    <listitem><para>password: test</para></listitem>
+                    <listitem><para>dbname: test </para></listitem>
                 </itemizedlist>
 
                 Muss das folgende auf der Kommandozeile ausgeführt werden:
@@ -486,6 +478,7 @@ zf --setup config-file
             <itemizedlist>
                 <listitem>
                     <para>ZF_HOME</para>
+
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -498,6 +491,7 @@ zf --setup config-file
 
                         <listitem>
                             <para>Suchrichtung:</para>
+
                             <itemizedlist>
                                 <listitem><para>ZF_HOME Umgebungsvariable</para></listitem>
                                 <listitem><para>HOME Umgebungsvariable</para></listitem>
@@ -506,8 +500,10 @@ zf --setup config-file
                         </listitem>
                     </itemizedlist>
                 </listitem>
+
                 <listitem>
                     <para>ZF_STORAGE_DIRECTORY</para>
+
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -519,6 +515,7 @@ zf --setup config-file
 
                         <listitem>
                             <para>Suchrichtung:</para>
+
                             <itemizedlist>
                                 <listitem>
                                     <para>ZF_STORAGE_DIRECTORY Umgebungsvariable</para>
@@ -532,6 +529,7 @@ zf --setup config-file
 
                 <listitem>
                     <para>ZF_CONFIG_FILE</para>
+
                     <itemizedlist>
                         <listitem>
                             <para>Wo dieses Tool nach der Konfigurationsdatei nachsieht</para>
@@ -539,6 +537,7 @@ zf --setup config-file
 
                         <listitem>
                             <para>Suchrichtung:</para>
+
                             <itemizedlist>
                                 <listitem><para>ZF_CONFIG_FILE Umgebungsvariable</para></listitem>
 
@@ -556,6 +555,7 @@ zf --setup config-file
 
                 <listitem>
                     <para>ZF_INCLUDE_PATH</para>
+
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -566,6 +566,7 @@ zf --setup config-file
 
                         <listitem>
                             <para>Originales Verhalten:</para>
+
                             <itemizedlist>
                                 <listitem>
                                     <para>Verwende php's include_path um ZF zu finden</para>
@@ -588,6 +589,7 @@ zf --setup config-file
 
                 <listitem>
                     <para>ZF_INCLUDE_PATH_PREPEND</para>
+
                     <itemizedlist>
                         <listitem>
                             <para>

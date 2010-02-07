@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: 20115 -->
 <sect1 id="zend.uri.chapter">
     <title>Zend_Uri</title>
@@ -241,5 +241,5 @@ $isValid = $uri->valid();  // TRUE
                 <acronym>URI</acronym> Objekt auf Gültigkeit zu überprüfen.
             </para>
         </sect3>
-  </sect2>
+    </sect2>
 </sect1>

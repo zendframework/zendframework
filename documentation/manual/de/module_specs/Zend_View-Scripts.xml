@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18935 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.scripts">
-
     <title>View Scripte</title>
 
     <para>
@@ -53,7 +52,6 @@
 ]]></programlisting>
 
     <sect2 id="zend.view.scripts.escaping">
-
         <title>Ausgaben maskieren</title>
 
         <para>
@@ -109,11 +107,9 @@ echo $view->render(...);
             Diese Callback Funktion oder Methode sollte den zu maskierenden Wert als ersten
             Parameter übernehmen und alle anderen Parameter sollten optional sein.
         </para>
-
     </sect2>
 
     <sect2 id="zend.view.scripts.templates">
-
         <title>Verwendung alternativer Templatesysteme</title>
 
         <para>
@@ -132,6 +128,7 @@ echo $view->render(...);
                 und anzupassen, z.B. für eine PHPLIB-style Template. Das
                 Viewskript für solch eine Aufgabe könnte so aussehen:
             </para>
+
             <programlisting language="php"><![CDATA[
 include_once 'template.inc';
 $tpl = new Template();
@@ -178,7 +175,6 @@ if ($this->books) {
 <!-- nobooks.tpl -->
 <p>Es gibt keine Bücher zum Anzeigen.</p>
 ]]></programlisting>
-
         </sect3>
 
         <sect3 id="zend.view.scripts.templates.interface">
@@ -463,10 +459,6 @@ class FooController extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
-
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

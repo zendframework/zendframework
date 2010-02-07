@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19577 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.view.introduction">
     <title>Einführung</title>
@@ -12,25 +12,20 @@
     </para>
 
     <para>
-        <classname>Zend_View</classname> ist unabhängig von einem Template System. Du kannst <acronym>PHP</acronym> als
-        Template Sprache verwenden oder Instanzen anderer Template Systeme erstellen und diese in
-        deinem View Skript verarbeiten.
+        <classname>Zend_View</classname> ist unabhängig von einem Template System. Du kannst
+        <acronym>PHP</acronym> als Template Sprache verwenden oder Instanzen anderer Template
+        Systeme erstellen und diese in deinem View Skript verarbeiten.
     </para>
 
     <para>
         Im Wesentlichen verläuft die Verwendung von <classname>Zend_View</classname> in zwei
-        Hauptschritten:
-
-        1. Dein Controller Skript erstellt eine Instanz von <classname>Zend_View</classname> und
-        übergibt Variablen an diese Instanz.
-
-        2. Der Controller teilt <classname>Zend_View</classname> mit, ein bestimmtes View Skript zu
-        verarbeiten. Dabei wird die Kontrolle an das View Skript übergeben, welches die Ausgabe
-        erstellt.
+        Hauptschritten: 1. Dein Controller Skript erstellt eine Instanz von
+        <classname>Zend_View</classname> und übergibt Variablen an diese Instanz. 2. Der Controller
+        teilt <classname>Zend_View</classname> mit, ein bestimmtes View Skript zu verarbeiten. Dabei
+        wird die Kontrolle an das View Skript übergeben, welches die Ausgabe erstellt.
     </para>
 
     <sect2 id="zend.view.introduction.controller">
-
         <title>Controller Skript</title>
 
         <para>
@@ -64,11 +59,9 @@ $view->books = $data;
 // und verarbeite ein View Skript mit Namen "booklist.php"
 echo $view->render('booklist.php');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.view.introduction.view">
-
         <title>View Skript</title>
 
         <para>
@@ -110,7 +103,6 @@ echo $view->render('booklist.php');
             Beachte, wie wir die "escape()" Methode verwenden, um die Variablen für die Ausgabe zu
             maskieren.
         </para>
-
     </sect2>
 
     <sect2 id="zend.view.introduction.options">
@@ -142,35 +134,44 @@ base/path/
                 </para>
             </listitem>
 
-            <listitem><para>
-                <property>encoding</property>: zeigt das Verschlüsseln der Zeichen für die
-                Verwendung mit <methodname>htmlentities()</methodname>,
-                <methodname>htmlspecialchars()</methodname>, und anderen Operationen. Standardwert
-                ist ISO-8859-1 (latin1). Kann über
-                <methodname>setEncoding()</methodname>, oder die <property>encoding</property>
-                Option im Constructor, gesetzt werden.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>encoding</property>: zeigt das Verschlüsseln der Zeichen für die
+                    Verwendung mit <methodname>htmlentities()</methodname>,
+                    <methodname>htmlspecialchars()</methodname>, und anderen Operationen.
+                    Standardwert ist ISO-8859-1 (latin1). Kann über
+                    <methodname>setEncoding()</methodname>, oder die <property>encoding</property>
+                    Option im Constructor, gesetzt werden.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <property>escape</property>: zeigt einen Rückruf welche durch
-                <methodname>escape()</methodname> benutzt wird. Kann über
-                <methodname>setEscape()</methodname>, oder die <property>escape</property> Option im
-                Konstruktor, gesetzt werden.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>escape</property>: zeigt einen Rückruf welche durch
+                    <methodname>escape()</methodname> benutzt wird. Kann über
+                    <methodname>setEscape()</methodname>, oder die <property>escape</property>
+                    Option im Konstruktor, gesetzt werden.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <property>filter</property>: zeigt einen Filter welcher nach dem Rendern des View
-                Skripts verwendet wird. Kann über <methodname>setFilter()</methodname>,
-                <methodname>addFilter()</methodname>, oder die <property>filter</property> Option im
-                Konstruktor, gesetzt werden.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>filter</property>: zeigt einen Filter welcher nach dem Rendern des
+                    View Skripts verwendet wird. Kann über <methodname>setFilter()</methodname>,
+                    <methodname>addFilter()</methodname>, oder die <property>filter</property>
+                    Option im Konstruktor, gesetzt werden.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <property>strictVars:</property> zwingt <classname>Zend_View</classname> Notizen und
-                Warnungen auszugeben wenn auf nicht initialisierte View Variablen zugegriffen wird.
-                Das kann durch den Aufruf von <methodname>strictVars(true)</methodname>, oder der
-                Übergabe der <property>strictVars</property> Option im Konstruktor, gesetzt werden.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <property>strictVars:</property> zwingt <classname>Zend_View</classname> Notizen
+                    und Warnungen auszugeben wenn auf nicht initialisierte View Variablen
+                    zugegriffen wird. Das kann durch den Aufruf von
+                    <methodname>strictVars(true)</methodname>, oder der Übergabe der
+                    <property>strictVars</property> Option im Konstruktor, gesetzt werden.
+                </para>
+            </listitem>
         </itemizedlist>
     </sect2>
 
@@ -181,10 +182,10 @@ base/path/
             In unseren Beispielen verwenden wir <acronym>PHP</acronym> Long
             Tags: <emphasis>&lt;?php</emphasis>. Wir empfehlen auch die <ulink
                 url="http://us.php.net/manual/en/control-structures.alternative-syntax.php">
-                alternative Syntax für Kontrollstrukturen</ulink>. Diese sind übliche Abkürzungen die
-            Verwendet werden wenn View Skripte geschrieben werden, da Sie Konstrukte verständlicher
-            machen, die Anweisungen auf einer einzelnen Zeile belassen und die Notwendigkeit
-            eleminieren nach Klammern im HTML zu suchen.
+                alternative Syntax für Kontrollstrukturen</ulink>. Diese sind übliche Abkürzungen
+            die Verwendet werden wenn View Skripte geschrieben werden, da Sie Konstrukte
+            verständlicher machen, die Anweisungen auf einer einzelnen Zeile belassen und die
+            Notwendigkeit eleminieren nach Klammern im HTML zu suchen.
         </para>
 
         <para>
@@ -323,6 +324,3 @@ $view->setUseStreamWrapper(true);
         </itemizedlist>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

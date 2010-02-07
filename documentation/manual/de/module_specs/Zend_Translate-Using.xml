@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.using">
-
     <title>Benutzen von Übersetzungs Adaptoren</title>
 
     <para>
@@ -11,6 +10,7 @@
 
     <example id="zend.translate.using.example1">
         <title>Beispiel eines einsprachigen PHP Codes</title>
+
         <programlisting language="php"><![CDATA[
 print "Beispiel\n";
 print "========\n";
@@ -35,6 +35,7 @@ print "Hier ist Zeile zwei\n";
 
     <example id="zend.translate.using.example2">
         <title>Beispiel für mehrsprachigen PHP Code</title>
+
         <programlisting language="php"><![CDATA[
 $translate = new Zend_Translate(
     'gettext',
@@ -141,7 +142,6 @@ print $translate->_(2) . "\n";
     </para>
 
     <sect2 id="zend.translate.using.structure">
-
         <title>Strukturen für Übersetzungdateien</title>
 
         <para>
@@ -159,9 +159,7 @@ print $translate->_(2) . "\n";
 
         <itemizedlist>
             <listitem>
-                <para>
-                    Einzeln strukturierte Quellen
-                </para>
+                <para>Einzeln strukturierte Quellen</para>
 
                 <programlisting language="txt"><![CDATA[
 /application/
@@ -176,10 +174,9 @@ print $translate->_(2) . "\n";
                     Verzeichnis gespeichert. Keine Aufteilung der betreffenden Dateien.
                 </para>
             </listitem>
+
             <listitem>
-                <para>
-                    Sprachlich stukturierte Quellen
-                </para>
+                <para>Sprachlich stukturierte Quellen</para>
 
                 <programlisting language="txt"><![CDATA[
 /application/
@@ -200,10 +197,9 @@ print $translate->_(2) . "\n";
                     transparent.
                 </para>
             </listitem>
+
             <listitem>
-                <para>
-                    Applikations strukturierte Quellen
-                </para>
+                <para>Applikations strukturierte Quellen</para>
 
                 <programlisting language="txt"><![CDATA[
 /application/
@@ -225,10 +221,9 @@ print $translate->_(2) . "\n";
                     problematisch sein.
                 </para>
             </listitem>
+
             <listitem>
-                <para>
-                    Gettext strukturierte Quellen
-                </para>
+                <para>Gettext strukturierte Quellen</para>
 
                 <programlisting language="txt"><![CDATA[
 /application/
@@ -254,10 +249,9 @@ print $translate->_(2) . "\n";
                     noch nie benutzt haben, verwirrend.
                 </para>
             </listitem>
+
             <listitem>
-                <para>
-                    Datei strukturierte Quellen
-                </para>
+                <para>Datei strukturierte Quellen</para>
 
                 <programlisting language="txt"><![CDATA[
 /application/
@@ -271,9 +265,8 @@ print $translate->_(2) . "\n";
 /application/controllers/MyController.en
 /library/
 ]]></programlisting>
-                <para>
-                    Positiv: Übersetzungsdateien sind in der Nähe Ihrer Quelle zu finden.
-                </para>
+
+                <para>Positiv: Übersetzungsdateien sind in der Nähe Ihrer Quelle zu finden.</para>
 
                 <para>
                     Negativ: Zu viele und auch kleine Übersetzungsdateien führen zu einer
@@ -292,6 +285,5 @@ print $translate->_(2) . "\n";
             Also jetzt, da bekannt ist welche Struktur verwendet wird,
             müssen die einzelnen Übersetzungs Dateien erstellt werden.
         </para>
-
     </sect2>
 </sect1>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19669 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.translate.plurals">
     <title>Plurale Schreibweisen für Übersetzungen</title>
@@ -94,7 +94,6 @@ $translate->plural('Car', 'Cars', $number);
 $translate = new Zend_Translate('gettext', '/path/to/german.mo', 'de');
 $translate->translate(array('Car', 'Cars', $number));
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -145,6 +144,7 @@ $translate->translate(array('Car',
 
         <table id="zend.translate.plurals.source.supportedadapters">
             <title>Unterstützung für Plural</title>
+
             <tgroup cols="4">
                 <thead>
                     <row>
@@ -366,6 +366,3 @@ Zend_Translate_Plural::setPlural('MyPlural', 'zh');
         </note>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

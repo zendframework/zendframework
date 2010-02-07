@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18844 -->
+<!-- EN-Revision: 20799 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.creditcard">
     <title>CreditCard</title>
@@ -34,57 +34,19 @@
 
     <itemizedlist>
         <listitem>
-            <para>
-                <emphasis>American Express</emphasis>
-            </para>
-
-            <para>
-                <emphasis>China UnionPay</emphasis>
-            </para>
-
-            <para>
-                <emphasis>Diners Club Card Blanche</emphasis>
-            </para>
-
-            <para>
-                <emphasis>Diners Club International</emphasis>
-            </para>
-
-            <para>
-                <emphasis>Diners Club US &amp; Canada</emphasis>
-            </para>
-
-            <para>
-                <emphasis>Discover Card</emphasis>
-            </para>
-
-            <para>
-                <emphasis>JCB</emphasis>
-            </para>
-
-            <para>
-                <emphasis>Laser</emphasis>
-            </para>
-
-            <para>
-                <emphasis>Maestro</emphasis>
-            </para>
-
-            <para>
-                <emphasis>MasterCard</emphasis>
-            </para>
-
-            <para>
-                <emphasis>Solo</emphasis>
-            </para>
-
-            <para>
-                <emphasis>Visa</emphasis>
-            </para>
-
-            <para>
-                <emphasis>Visa Electron</emphasis>
-            </para>
+            <para><emphasis>American Express</emphasis></para>
+            <para><emphasis>China UnionPay</emphasis></para>
+            <para><emphasis>Diners Club Card Blanche</emphasis></para>
+            <para><emphasis>Diners Club International</emphasis></para>
+            <para><emphasis>Diners Club US &amp; Canada</emphasis></para>
+            <para><emphasis>Discover Card</emphasis></para>
+            <para><emphasis>JCB</emphasis></para>
+            <para><emphasis>Laser</emphasis></para>
+            <para><emphasis>Maestro</emphasis></para>
+            <para><emphasis>MasterCard</emphasis></para>
+            <para><emphasis>Solo</emphasis></para>
+            <para><emphasis>Visa</emphasis></para>
+            <para><emphasis>Visa Electron</emphasis></para>
         </listitem>
     </itemizedlist>
 
@@ -165,8 +127,8 @@ $valid = new Zend_Validate_CreditCard(array(
 
         <para>
             Wie bei allen Prüfern kann man auch ein assoziatives Array an Optionen oder eine
-            Instanz von <classname>Zend_Config</classname> angeben. In diesem Fall muß man die Institute mit dem
-            Arrayschlüssel <property>type</property> angeben wie hier simuliert:
+            Instanz von <classname>Zend_Config</classname> angeben. In diesem Fall muß man die
+            Institute mit dem Arrayschlüssel <property>type</property> angeben wie hier simuliert:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -177,6 +139,7 @@ $valid = new Zend_Validate_CreditCard(array(
 
         <table id="zend.validate.set.creditcard.institute.table">
             <title>Konstanten für Kreditkarten Institute</title>
+
             <tgroup cols="5">
                 <thead>
                     <row>
@@ -336,6 +299,3 @@ $valid->setService(array($service, 'checkOnline'));
         </para>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

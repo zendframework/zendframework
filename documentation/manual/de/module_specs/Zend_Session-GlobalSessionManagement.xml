@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20810 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.global_session_management">
-
     <title>Globales Session Management</title>
 
     <para>
@@ -19,7 +18,6 @@
     </para>
 
     <sect2 id="zend.session.global_session_management.configuration_options">
-
         <title>Konfigurations Optionen</title>
 
         <para>
@@ -45,7 +43,6 @@
         </para>
 
         <example id="zend.session.global_session_management.setoptions.example">
-
             <title>Verwenden von Zend_Config um Zend_Session zu konfigurieren</title>
 
             <para>
@@ -109,13 +106,13 @@ $config = new Zend_Config_Ini('myapp.ini', 'development');
 require_once 'Zend/Session.php';
 Zend_Session::setOptions($config->toArray());
 ]]></programlisting>
-
         </example>
 
         <para>
             Die meisten der oben gezeigten Optionen benötigen keine Erklärung die nicht in der
             Standard <acronym>PHP</acronym> Dokumentation gefunden werden kann, aber jene von
             speziellem Interesse sind anbei beschrieben.
+
             <itemizedlist mark="opencircle">
                 <listitem>
                     <para>
@@ -124,6 +121,7 @@ Zend_Session::setOptions($config->toArray());
                         Zend_Session_Namespace()</code> verwendet wird.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         integer <code>remember_me_seconds</code> - Wie lange soll das Session Id
@@ -131,6 +129,7 @@ Zend_Session::setOptions($config->toArray());
                         Anwendung geschlossen)
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         string <code>save_path</code> - Der richtige Wert ist abhängig vom System,
@@ -141,8 +140,10 @@ Zend_Session::setOptions($config->toArray());
                         Ausnahme werden sobald Sie gestartet wird (z.B. wenn
                         <methodname>start()</methodname> aufgerufen wird).
                     </para>
+
                     <note>
                         <title>Sicherheits Risiko</title>
+
                         <para>
                             Wenn der Pfad von einer anderen Anwendung aus lesbar ist, kann die
                             Entführung der Session möglich sein. Wenn der Pfad von einer anderen
@@ -156,6 +157,7 @@ Zend_Session::setOptions($config->toArray());
                             <acronym>PHP</acronym> veranlassen die eigenen Session Dateien zu
                             löschen).
                         </para>
+
                         <para>
                             Zum Beispiel kann ein Angreifer die Webseite des Opfers besuchen um ein
                             Session Cookie zu erhalten. Dann, den Cookie Pfad auf die eigene Domain
@@ -179,6 +181,7 @@ Zend_Session::setOptions($config->toArray());
                         </para>
                     </note>
                 </listitem>
+
                 <listitem>
                     <para>
                         string <code>name</code> - Der richtige Wert ist abhängig vom System and
@@ -186,8 +189,10 @@ Zend_Session::setOptions($config->toArray());
                         bereitgestellt werden, welcher für jede Zend Framework Anwendung
                         <emphasis>eindeutig</emphasis> ist.
                     </para>
+
                     <note>
                         <title>Sicherheits Risiko</title>
+
                         <para>
                             Wenn die <code>php.ini</code> Einstellung für <code>session.name</code>
                             die selbe ist (z.B., die standardmäßige "PHPSESSID"), und es zwei oder
@@ -198,12 +203,15 @@ Zend_Session::setOptions($config->toArray());
                         </para>
                     </note>
                 </listitem>
+
                 <listitem>
                     <para>
                         boolean <code>use_only_cookies</code> - Um zusätzliche Sicherheitsrisiken
                         zu vermeiden, sollte der Standardwert dieser Option nicht verändert werden.
+
                         <note>
                             <title>Sicherheits Risiko</title>
+
                             <para>
                                 Wenn diese Einstellung nicht aktiviert wird, kann ein Angreifer
                                 einfach die Session Id des Opfers ändern indem ein Link auf der
@@ -220,11 +228,9 @@ Zend_Session::setOptions($config->toArray());
                 </listitem>
             </itemizedlist>
         </para>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.headers_sent">
-
         <title>Fehler: Header schon gesendet</title>
 
         <para>
@@ -252,6 +258,7 @@ Zend_Session::setOptions($config->toArray());
                     <acronym>HTTP</acronym> Headern) welche die Puffergröße überschreitet.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Anternativ kann versucht werden die Logik der Anwendung anders anzuordnen, so
@@ -259,6 +266,7 @@ Zend_Session::setOptions($config->toArray());
                     ausgeführt werden.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Wenn eine Methode von <classname>Zend_Session</classname> als Verursacher der
@@ -272,6 +280,7 @@ Zend_Session::setOptions($config->toArray());
                     gesendet.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Anternativ kann versucht werden die Logik der Anwendung anders anzuordnen, so
@@ -279,6 +288,7 @@ Zend_Session::setOptions($config->toArray());
                     ausgeführt werden.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Jedes schließende "<code>?&gt;</code>" Tag sollte entfernt werden, wenn es am
@@ -288,11 +298,9 @@ Zend_Session::setOptions($config->toArray());
                 </para>
             </listitem>
         </itemizedlist>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.session_identifiers">
-
         <title>Session Identifizierer</title>
 
         <para>
@@ -351,8 +359,8 @@ Zend_Session::setOptions($config->toArray());
             <methodname>regenerateId()</methodname> verwendet werden.
         </para>
 
-        <sect3 id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation">
-
+        <sect3
+            id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation">
             <title>Session-Entführung und Fixierung</title>
 
             <para>
@@ -405,6 +413,7 @@ Zend_Session::setOptions($config->toArray());
                 möglicherweise zu einem Angreifer. Unter der folgenden Annahme, gibt es
                 möglicherweise keinen Weg, für eine Webseiten Anwendung, zwischen einem Opfer und
                 einem Angreifer zu unterscheiden:
+
                 <itemizedlist mark='opencircle'>
                     <listitem>
                         <para>
@@ -412,6 +421,7 @@ Zend_Session::setOptions($config->toArray());
                             Session Id zu erhalten
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             Der Angreifer benutzt XSS Gefährdungen auf der Webseite um ein Cookie
@@ -419,6 +429,7 @@ Zend_Session::setOptions($config->toArray());
                             Session Fixierung), zu erstellen
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             Beide, das Opfer und der Angreifer kommen von der selben Proxy Farm
@@ -427,13 +438,14 @@ Zend_Session::setOptions($config->toArray());
                         </para>
                     </listitem>
                 </itemizedlist>
+
                 Der Beispiel-Code anbei, macht es für Angreifer viel schwerer die aktuelle Session
                 Id des Opfers zu wissen solange der Angreifer nicht bereits die ersten Zwei Schritte
                 von oben ausgeführt hat.
             </para>
 
-            <example id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example">
-
+            <example
+                id="zend.session.global_session_management.session_identifiers.hijacking_and_fixation.example">
                 <title>Session Fixierung</title>
 
                 <programlisting language="php"><![CDATA[
@@ -444,15 +456,11 @@ if (!isset($defaultNamespace->initialized)) {
     $defaultNamespace->initialized = true;
 }
 ]]></programlisting>
-
             </example>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.rememberme">
-
         <title>>rememberMe(integer $seconds)</title>
 
         <para>
@@ -469,11 +477,9 @@ if (!isset($defaultNamespace->initialized)) {
             verwendet werden wenn sich ein Benutzer erfolgreich an der Anwendung authentifiziert hat
             (z.B., durch ein "login" Formular).
         </para>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.forgetme">
-
         <title>forgetMe()</title>
 
         <para>
@@ -481,11 +487,9 @@ if (!isset($defaultNamespace->initialized)) {
             Schreiben eines Session Cookies das eine Lebenszeit hat die endet wenn der Benutzer
             terminiert.
         </para>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.sessionexists">
-
         <title>sessionExists()</title>
 
         <para>
@@ -494,11 +498,9 @@ if (!isset($defaultNamespace->initialized)) {
             werden, und ist unabhängig von allen anderen <classname>Zend_Session</classname> und
             <classname>Zend_Session_Namespace</classname> Methoden.
         </para>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.destroy">
-
         <title>destroy(bool $remove_cookie = true, bool $readonly = true)</title>
 
         <para>
@@ -527,16 +529,15 @@ if (!isset($defaultNamespace->initialized)) {
 
         <note>
             <title>Wirft</title>
+
             <para>
                 Standardmäßig ist <varname>$readonly</varname> aktiviert, und weitere Aktionen
                 welche das Schreiben in den Session Daten Speicher beinhalten, werfen eine Ausnahme.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.stop">
-
         <title>stop()</title>
 
         <para>
@@ -549,11 +550,9 @@ if (!isset($defaultNamespace->initialized)) {
             Versuche Aktionen auszuführen welche das Schreiben über diese Instanzen oder Methoden
             inkludieren werden eine Ausnahme werfen.
         </para>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.writeclose">
-
         <title>writeClose($readonly = true)</title>
 
         <para>
@@ -567,6 +566,7 @@ if (!isset($defaultNamespace->initialized)) {
 
         <note>
             <title>Wirft</title>
+
             <para>
                 Standardmäßig ist <varname>$readonly</varname> aktiviert und weitere Aktionen welche
                 in den Session Daten Speicher schreiben werfen eine Ausnahme. Trotzdem könnten
@@ -576,11 +576,9 @@ if (!isset($defaultNamespace->initialized)) {
                 <varname>$readonly</varname> für jene vorhanden die Sie benötigen.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.expiresessioncookie">
-
         <title>expireSessionCookie()</title>
 
         <para>
@@ -588,11 +586,9 @@ if (!isset($defaultNamespace->initialized)) {
             Session Cookie zu löschen. Manchmal wird diese Technik dazu verwendet einen Logout auf
             der Seite des Client auszuführen.
         </para>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.savehandler">
-
         <title>setSaveHandler(Zend_Session_SaveHandler_Interface $interface)</title>
 
         <para>
@@ -600,11 +596,9 @@ if (!isset($defaultNamespace->initialized)) {
             Diese Methode bietet einen objekt-orientierten Wrapper für <ulink
                 url="http://php.net/session_set_save_handler"><methodname>session_set_save_handler()</methodname></ulink>.
         </para>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.namespaceisset">
-
         <title>namespaceIsset($namespace)</title>
 
         <para>
@@ -614,17 +608,16 @@ if (!isset($defaultNamespace->initialized)) {
 
         <note>
             <title>Wirft</title>
+
             <para>
                 Eine Ausnahme wird geworfen wenn <classname>Zend_Session</classname> nicht als
                 lesbar markiert ist (z.B. bevor <classname>Zend_Session</classname> gestartet
                 wurde).
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.namespaceunset">
-
         <title>namespaceUnset($namespace)</title>
 
         <para>
@@ -641,16 +634,15 @@ if (!isset($defaultNamespace->initialized)) {
 
         <note>
             <title>Wirft</title>
+
             <para>
                 Eine Ausnahme wird geworfen wenn der Namensraum nicht beschreibbar ist (z.B. nach
                 <methodname>destroy()</methodname>).
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.namespaceget">
-
         <title>namespaceGet($namespace)</title>
 
         <para>
@@ -664,16 +656,15 @@ if (!isset($defaultNamespace->initialized)) {
 
         <note>
             <title>Wirft</title>
+
             <para>
                 Eine Ausnahme wird geworfen wenn <classname>Zend_Session</classname> nicht als
                 lesbar markiert ist (z.B bevor <classname>Zend_Session</classname> gestartet wurde).
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.session.global_session_management.getiterator">
-
         <title>getIterator()</title>
 
         <para>
@@ -683,13 +674,12 @@ if (!isset($defaultNamespace->initialized)) {
 
         <note>
             <title>Wirft</title>
+
             <para>
                 Eine Ausnahme wird geworfen wenn <classname>Zend_Session</classname> nicht als
                 lesbar markiert ist (z.B. bevor <classname>Zend_Session</classname> gestartet
                 wurde).
             </para>
         </note>
-
     </sect2>
-
 </sect1>

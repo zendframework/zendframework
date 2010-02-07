@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16656 -->
+<!-- EN-Revision: 20807 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.clitool">
     <title>Verwenden des CLI Tools</title>
@@ -52,6 +52,7 @@
                     aufzurufen, unabhängig davon welches das aktuelle Arbeitsverzeichnis ist.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <filename>ZendFramework/library</filename> ist im eigenen
@@ -67,7 +68,6 @@
                 <filename>./path/to/zf.php</filename> funktioniert.
             </para>
         </note>
-
     </sect2>
 
     <sect2 id="zend.tool.framework.clitool.setup-starnix">
@@ -155,7 +155,6 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
             Das erstellt einen Link den man global von der Kommandozeile aus aufrufen können
             sollte.
         </para>
-
     </sect2>
 
     <sect2 id="zend.tool.framework.clitool.setup-windows">
@@ -226,7 +225,6 @@ C:\WAMP\PHP\bin
             <filename>C:\Path\To\ZendFramework\library</filename> im
             <property>include_path</property> ist.
         </para>
-
     </sect2>
 
     <sect2 id="zend.tool.framework.clitool.setup-othernotes">

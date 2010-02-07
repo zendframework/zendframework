@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19568 -->
+<!-- EN-Revision: 20807 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.timesync.introduction">
     <title>Einführung</title>
@@ -49,9 +49,7 @@
 
         <itemizedlist mark='opencircle'>
             <listitem>
-                <para>
-                    <emphasis>Server ohne Zeitservice</emphasis>
-                </para>
+                <para><emphasis>Server ohne Zeitservice</emphasis></para>
 
                 <para>
                     Wenn eine Anwendung auf einem Server läuft und auf diesem Server kein
@@ -61,9 +59,7 @@
             </listitem>
 
             <listitem>
-                <para>
-                    <emphasis>Separater Datenbank Server</emphasis>
-                </para>
+                <para><emphasis>Separater Datenbank Server</emphasis></para>
 
                 <para>
                     Wenn eine Datenbank auf einem anderen Server läuft und dieser Server
@@ -74,9 +70,7 @@
             </listitem>
 
             <listitem>
-                <para>
-                    <emphasis>Mehrere Server</emphasis>
-                </para>
+                <para><emphasis>Mehrere Server</emphasis></para>
 
                 <para>
                     Wenn die Anwendung auf mehr als einem Server läuft, und die Zeitbasis dieser
@@ -87,9 +81,7 @@
             </listitem>
 
             <listitem>
-                <para>
-                    <emphasis>Batch Ausführung</emphasis>
-                </para>
+                <para><emphasis>Batch Ausführung</emphasis></para>
 
                 <para>
                     Wenn man mit einem Zeitserver arbeiten oder in einer Batchdatei oder in einer
@@ -104,7 +96,6 @@
             und kann verwendet werden, wenn man nicht in der Lage ist, Services auf dem Server zu
             starten.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.introduction.ntp">
@@ -154,9 +145,7 @@
 
         <itemizedlist mark='opencircle'>
             <listitem>
-                <para>
-                    Distanz
-                </para>
+                <para>Distanz</para>
 
                 <para>
                     Die Distanz vom Server auf dem die Anwendung läuft und dem angefragten
@@ -168,9 +157,7 @@
             </listitem>
 
             <listitem>
-                <para>
-                    Geschwindigkeit
-                </para>
+                <para>Geschwindigkeit</para>
 
                 <para>
                     Wie lange es dauert, eine Anfrage zu empfangen ist auch relevant. Es sollten
@@ -181,9 +168,7 @@
             </listitem>
 
             <listitem>
-                <para>
-                    Aufteilung
-                </para>
+                <para>Aufteilung</para>
 
                 <para>
                     Es sollte nicht immer der gleiche Server verwendet werden. Alle Zeitserver

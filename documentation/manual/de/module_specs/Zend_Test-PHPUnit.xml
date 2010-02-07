@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19568 -->
+<!-- EN-Revision: 20807 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.test.phpunit" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Test_PHPUnit</title>
@@ -20,14 +20,18 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Die Login Form sollte nicht-authenthifizierten Benutzern angezeigt werden.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Die Login Form sollte nicht-authenthifizierten Benutzern angezeigt werden.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Wenn sich ein Benutzer einloggt, sollte er zu seiner Profilseite umgeleitet werden,
-                und diese Profilseite sollte relevante Informationen enthalten.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Wenn sich ein Benutzer einloggt, sollte er zu seiner Profilseite umgeleitet
+                    werden, und diese Profilseite sollte relevante Informationen enthalten.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -106,6 +110,3 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     <xi:include href="Zend_Test-PHPUnit-Assertions.xml" />
     <xi:include href="Zend_Test-PHPUnit-Examples.xml" />
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

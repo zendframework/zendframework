@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17086 -->
+<!-- EN-Revision: 20810 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.savehandler.dbtable">
-
     <title>Zend_Session_SaveHandler_DbTable</title>
 
     <para>
@@ -112,6 +111,3 @@ Zend_Session::start();
 ]]></programlisting>
     </example>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

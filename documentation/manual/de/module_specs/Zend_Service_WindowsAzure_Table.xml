@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20679 -->
+<!-- EN-Revision: 20810 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.service.windowsazure.storage.table">
     <title>Zend_Service_WindowsAzure_Storage_Table</title>
@@ -103,17 +103,8 @@ foreach ($result as $table) {
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>
-                    Erzwungenes Schema
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    Nicht erzwungenes Schema
-                </para>
-            </listitem>
+            <listitem><para>Erzwungenes Schema</para></listitem>
+            <listitem><para>Nicht erzwungenes Schema</para></listitem>
         </itemizedlist>
 
         <para>
@@ -254,7 +245,8 @@ public $<Name der Eigenschaft in PHP>;
                 Tabellen Speichers definiert wird:
             </para>
 
-            <example id="zend.service.windowsazure.storage.table.entities.enforced.schema-property-sample">
+            <example
+                id="zend.service.windowsazure.storage.table.entities.enforced.schema-property-sample">
                 <title>Beispiel einer erzwungenen Eigenschaft</title>
 
                 <programlisting language="php"><![CDATA[
@@ -299,9 +291,7 @@ public $Age;
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <constant>Edm.Double</constant> - Eine 64-bit Gleitkommazahl.
-                    </para>
+                    <para><constant>Edm.Double</constant> - Eine 64-bit Gleitkommazahl.</para>
                 </listitem>
 
                 <listitem>
@@ -312,15 +302,11 @@ public $Age;
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <constant>Edm.Int32</constant> - Ein 32-bit Integerwert.
-                    </para>
+                    <para><constant>Edm.Int32</constant> - Ein 32-bit Integerwert.</para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <constant>Edm.Int64</constant> - Ein 64-bit Integerwert.
-                    </para>
+                    <para><constant>Edm.Int64</constant> - Ein 64-bit Integerwert.</para>
                 </listitem>
 
                 <listitem>
@@ -405,7 +391,8 @@ $target->Age  = 25;     // Fügt die Eigenschaft "Age" vom Typ "Edm.Int32" hinzu
                 Optional kann der Typ einer Eigenschaft erzwungen werden:
             </para>
 
-            <example id="zend.service.windowsazure.storage.table.entities.dynamic.schema-forcedproperties">
+            <example
+                id="zend.service.windowsazure.storage.table.entities.dynamic.schema-forcedproperties">
                 <title>
                     Erzwingen von Eigenschaftstypen auf
                     Zend_Service_WindowsAzure_Storage_DynamicTableEntity
@@ -472,7 +459,8 @@ echo 'Etag: ' . $result->getEtag() . "\n";
                     Entität bereits vorher erstellt worden sein müssen.
                 </para>
 
-                <example id="zend.service.windowsazure.storage.table.entities.api.retrieve-by-id.example">
+                <example
+                    id="zend.service.windowsazure.storage.table.entities.api.retrieve-by-id.example">
                     <title>
                         Empfangen einer Entität durch dessen Partitions- und Zeilenschlüssel
                     </title>
@@ -520,7 +508,8 @@ $result = $storageClient->updateEntity('testtable', $entity);
                     sicherzustellen das neuere Daten nicht überschrieben werden.
                 </para>
 
-                <example id="zend.service.windowsazure.storage.table.entities.api.updating.example-etag">
+                <example
+                    id="zend.service.windowsazure.storage.table.entities.api.updating.example-etag">
                     <title>Aktualisieren einer Entität (mit Etag Prüfung)</title>
 
                     <programlisting language="php"><![CDATA[

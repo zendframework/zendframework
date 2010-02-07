@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18385 -->
+<!-- EN-Revision: 20807 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.framework.extending">
     <title>Extending and Configuring Zend_Tool_Framework</title>
 
     <sect2 id="zend.tool.framework.console-client">
-
         <title>Anpassen des Zend_Tool Konsolen Clients</title>
 
         <para>
@@ -35,7 +34,6 @@
         </para>
 
         <sect3 id="zend.tool.framework.console-client.home-directory">
-
             <title>Das Home Verzeichnis</title>
 
             <para>
@@ -70,7 +68,6 @@
         </sect3>
 
         <sect3 id="zend.tool.framework.console-client.local-storage">
-
             <title>Lokaler Speicher</title>
 
             <para>
@@ -103,7 +100,6 @@
         </sect3>
 
         <sect3 id="zend.tool.framework.console-client.configuration-file">
-
             <title>Benutzer Konfiguration</title>
 
             <para>
@@ -147,11 +143,9 @@
                 <classname>Zend_Tool_Framework</classname> nicht versucht diese Datei automatisch
                 zu erstellen.
             </para>
-
         </sect3>
 
         <sect3 id="zend.tool.framework.console-client.configuration-content">
-
             <title>Inhalt der Benutzer Konfigurationsdatei</title>
 
             <para>
@@ -187,9 +181,6 @@ php.error_reporting = 1
                     Werte nicht in PHP oder XML Konfigurationen setzen.
                 </para>
             </important>
-
         </sect3>
-
     </sect2>
-
 </sect1>

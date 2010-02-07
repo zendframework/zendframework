@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20810 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.basic_usage">
-
     <title>Grundsätzliche Verwendung</title>
 
     <para>
@@ -37,7 +36,6 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
     </para>
 
     <sect2 id="zend.session.basic_usage.basic_examples">
-
         <title>Übungs Beispiele</title>
 
         <para>
@@ -52,7 +50,6 @@ $myNamespace = new Zend_Session_Namespace('myNamespace');
         </para>
 
         <example id="zend.session.basic_usage.basic_examples.example.counting_page_views">
-
             <title>Seitenzugriffe zählen</title>
 
             <programlisting language="php"><![CDATA[
@@ -68,7 +65,6 @@ if (isset($defaultNamespace->numberOfPageRequests)) {
 echo "Seitenzugriffe in dieser Session: ",
     $defaultNamespace->numberOfPageRequests;
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -90,8 +86,8 @@ echo "Seitenzugriffe in dieser Session: ",
         </para>
 
         <example id="zend.session.basic_usage.basic_examples.example.namespaces.new">
-
             <title>Neuer Weg: Namensräume verhindern Kollisionen</title>
+
             <programlisting language="php"><![CDATA[
 // In der Zend_Auth Komponente
 require_once 'Zend/Session.php';
@@ -111,20 +107,16 @@ $webServiceNamespace->user = "meinwebbenutzername";
         </para>
 
         <example id="zend.session.basic_usage.basic_examples.example.namespaces.old">
-
             <title>Alter Weg: PHP Session Zugriff</title>
 
             <programlisting language="php"><![CDATA[
 $_SESSION['Zend_Auth']['user'] = "meinbenutzername";
 $_SESSION['Some_Web_Service']['user'] = "meinwebbenutzername";
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.session.basic_usage.iteration">
-
         <title>Session Namensräume wiederholen</title>
 
         <para>
@@ -135,7 +127,6 @@ $_SESSION['Some_Web_Service']['user'] = "meinwebbenutzername";
         </para>
 
         <example id="zend.session.basic_usage.iteration.example">
-
             <title>Session wiederholen</title>
 
             <programlisting language="php"><![CDATA[
@@ -147,11 +138,9 @@ foreach ($aNamespace as $index => $value) {
 }
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.session.basic_usage.accessors">
-
         <title>Zugriffsfunktionen für Session Namensräume</title>
 
         <para>
@@ -165,7 +154,6 @@ foreach ($aNamespace as $index => $value) {
         </para>
 
         <example id="zend.session.basic_usage.accessors.example">
-
             <title>Zugriff auf Session Daten</title>
 
             <programlisting language="php"><![CDATA[
@@ -182,7 +170,5 @@ if (!isset($namespace->bar)) {
 unset($namespace->foo);
 ]]></programlisting>
         </example>
-
     </sect2>
-
 </sect1>

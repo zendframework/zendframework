@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19418 -->
+<!-- EN-Revision: 20807 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.testing">
     <title>Testen eigener Controller und MVC Anwendungen</title>
@@ -129,6 +129,3 @@ class MyController extends Zend_Controller_Action
         </important>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

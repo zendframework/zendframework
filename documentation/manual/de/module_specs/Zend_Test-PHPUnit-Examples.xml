@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20807 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.examples">
     <title>Beispiele</title>
@@ -20,43 +20,59 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                Wenn ein Benutzer nicht authentifiziert ist, wird er immer zur Login Seite des
-                Controllers umgeleitet, unabhängig von der spezifizierten Aktion.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Wenn ein Benutzer nicht authentifiziert ist, wird er immer zur Login Seite des
+                    Controllers umgeleitet, unabhängig von der spezifizierten Aktion.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Die Login Formularseite wird beides zeigen, das Login Formular und das Registrations
-                Formular.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Die Login Formularseite wird beides zeigen, das Login Formular und das
+                    Registrations Formular.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Die angabe von ungültigen Anmeldedaten sollte in der Rückgabe des Login Formulars
-                resultieren.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Die Angabe von ungültigen Anmeldedaten sollte in der Rückgabe des Login
+                    Formulars resultieren.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Das Ansehen der Anmeldedaten sollte in einer Umleitung zur Profilseite des Benutzers
-                resultieren.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Das Ansehen der Anmeldedaten sollte in einer Umleitung zur Profilseite des
+                    Benutzers resultieren.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Die Profilseite sollte verändert werden um den Benutzernamen des Benutzers zu
-                enthalten.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Die Profilseite sollte verändert werden um den Benutzernamen des Benutzers zu
+                    enthalten.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Authentifizierte Benutzer welche die Loginseite besuchen sollten zu Ihrer
-                Profilseite umgeleitet werden.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Authentifizierte Benutzer welche die Loginseite besuchen sollten zu Ihrer
+                    Profilseite umgeleitet werden.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Bei der Abmeldung, sollten ein Benutzer zur Loginseite umgeleitet werden.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Bei der Abmeldung, sollten ein Benutzer zur Loginseite umgeleitet werden.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                Mit ungültigen Daten sollte die Registrierung fehlschlagen.
-            </para></listitem>
+            <listitem>
+                <para>
+                    Mit ungültigen Daten sollte die Registrierung fehlschlagen.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -307,6 +323,3 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         </para>
     </example>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

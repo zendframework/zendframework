@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20807 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.introduction">
-
     <title>Einführung</title>
 
     <para>
@@ -70,5 +69,4 @@
         senden. Ein <classname>Zend_Db</classname> kompatibles Speichermodul wurde schon in der
         Liste veröffentlicht.
     </para>
-
 </sect1>

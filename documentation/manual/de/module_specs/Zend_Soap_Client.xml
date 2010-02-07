@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17405 -->
+<!-- EN-Revision: 20810 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.soap.client">
     <title>Zend_Soap_Client</title>
@@ -28,14 +28,17 @@
 
     <sect2 id="zend.soap.client.constructor">
         <title>Der Zend_Soap_Client Konstruktor</title>
+
         <para>
             Der <classname>Zend_Soap_Client</classname> Konstruktor nimmt zwei Parameter:
+
             <itemizedlist>
                 <listitem>
                     <para>
                         <varname>$wsdl</varname> - eine <acronym>URI</acronym> einer WSDL Datei.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <varname>$options</varname> - Optionen um ein <acronym>SOAP</acronym> Client
@@ -51,6 +54,7 @@
 
         <note>
             <title>Wichtig!</title>
+
             <para>
                 Wenn die <classname>Zend_Soap_Client</classname> Komponente im nicht-WSDL Modus
                 verwendet wird, <emphasis>müssen</emphasis> die 'location' und 'uri' Optionen
@@ -60,6 +64,7 @@
 
         <para>
             Die folgenden Optionen werden erkannt:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -67,50 +72,59 @@
                         (SOAP_1_1 oder <acronym>SOAP</acronym>_1_2).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         'classmap' ('classMap') welche verwendet werden kann um einige WSDL Typen
                         auf <acronym>PHP</acronym> Klassen zu mappen.
                     </para>
+
                     <para>
                         Die Option muß ein Array mit WSDL Typen als Schlüssel und Namen von
                         <acronym>PHP</acronym> Klassen als Werte sein.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         'encoding' - Interne Zeichen Kodierung (UTF-8 wird immer als externe
                         Kodierung verwendet).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         'wsdl' welcher dem Aufruf von <methodname>setWsdl($wsdlValue)</methodname>
                         entspricht.
                     </para>
+
                     <para>
                         Das Ändern dieser Option kann das <classname>Zend_Soap_Client</classname>
                         Objekt von oder zum WSDL Modus wechseln.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         'uri' - Der Ziel-Namespace für den <acronym>SOAP</acronym> Service (benötigt
                         im nicht-WSDL Modus, funktioniert nicht im WSDL Modus).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         'location' - Die <acronym>URL</acronym> der Anfrage (benötigt im nicht-WSDL
                         Modus, funktioniert nicht im WSDL Modus).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         'style' - Anfrage Stil (funktioniert nicht im WSDL Modus):
                         <constant>SOAP_RPC</constant> oder <constant>SOAP_DOCUMENT</constant>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         'use' - Methode zum Verschlüsseln von Nachrichten (funktioniert nicht im
@@ -118,24 +132,28 @@
                         <constant>SOAP_LITERAL</constant>.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         'login' und 'password' - Login und Passwort für eine <acronym>HTTP</acronym>
                         Authentifizierung.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         'proxy_host', 'proxy_port', 'proxy_login', und 'proxy_password' - Eine
                         <acronym>HTTP</acronym> Verbindung über einen Proxy Server.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         'local_cert' und 'passphrase' - <acronym>HTTPS</acronym> Client
                         Authentifizierungs Optionen für Zertifikate.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         'compression' - Komprimierungs Optionen; das ist eine Kombination von
@@ -143,6 +161,7 @@
                         <constant>SOAP_COMPRESSION_GZIP</constant> und
                         <constant>SOAP_COMPRESSION_DEFLATE</constant> Optionen welche wie folgt
                         verwendet werden können:
+
                         <programlisting language="php"><![CDATA[
 // Komprimierung der Antworten akzeptieren
 $client = new Zend_Soap_Client("some.wsdl",
@@ -171,6 +190,7 @@ $client = new Zend_Soap_Client("some.wsdl",
             Nachdem ein <classname>Zend_Soap_Client</classname> Objekt erstellt wurde sind wir
             bereit um <acronym>SOAP</acronym> Anfragen durchzuführen.
         </para>
+
         <para>
             Jede Methode des Web Services wird auf eine virtuelle
             <classname>Zend_Soap_Client</classname> Objekt-Methode gemappt welche Parameter mit
@@ -179,6 +199,7 @@ $client = new Zend_Soap_Client("some.wsdl",
 
         <para>
             Es ist wie im folgenden Beispiel zu verwenden:
+
             <programlisting language="php"><![CDATA[
 //****************************************************************
 //                Server Code

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19778 -->
+<!-- EN-Revision: 20807 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.tool.extending">
     <title>Zend_Tool erweitern</title>
@@ -20,10 +20,10 @@
 
         <para>
             <classname>Zend_Tool_Project</classname> builds on and extends the capabilities of
-            <classname>Zend_Tool_Framework</classname> to that of managing a "project". In general, a
-            "project" is a planned endeavor or an initiative. In the computer world, projects generally
-            are a collection of resources. These resources can be files, directories, databases,
-            schemas, images, styles, and more.
+            <classname>Zend_Tool_Framework</classname> to that of managing a "project". In general,
+            a "project" is a planned endeavor or an initiative. In the computer world, projects
+            generally are a collection of resources. These resources can be files, directories,
+            databases, schemas, images, styles, and more.
         </para>
 
     </sect2>
@@ -52,8 +52,8 @@
                         <emphasis>Base client functionality</emphasis> and a concrete
                         console implementation that connect external tools and
                         interfaces to the <classname>Zend_Tool_Framework</classname>. The Console
-                        client may be used in <acronym>CLI</acronym> environments such as unix shells and
-                        the Windows console.
+                        client may be used in <acronym>CLI</acronym> environments such as unix
+                        shells and the Windows console.
                     </para>
                 </listitem>
 
@@ -111,7 +111,8 @@
 
                 <listitem><para>
                     <emphasis>Console Client / Command Line Interface /
-                    <filename>zf.php</filename></emphasis> - The tooling client for the command line.
+                    <filename>zf.php</filename></emphasis> - The tooling client for the command
+                    line.
                 </para></listitem>
 
                 <listitem><para>
@@ -138,12 +139,12 @@
             <title>Understanding the CLI Client</title>
 
             <para>
-                The <acronym>CLI</acronym>, or command line tool (internally known as the console tool),
-                is currently the primary interface for dispatching <classname>Zend_Tool</classname>
-                requests. With the <acronym>CLI</acronym> tool, developers can issue tooling requests
-                inside the "command line windows", also commonly known as a "terminal"
-                window. This environment is predominant in the *nix environment, but
-                also has a common implementation in windows with the
+                The <acronym>CLI</acronym>, or command line tool (internally known as the console
+                tool), is currently the primary interface for dispatching
+                <classname>Zend_Tool</classname> requests. With the <acronym>CLI</acronym> tool,
+                developers can issue tooling requests inside the "command line windows", also
+                commonly known as a "terminal" window. This environment is predominant in the *nix
+                environment, but also has a common implementation in windows with the
                 <filename>cmd.exe</filename>, console2 and also with the Cygwin project.
             </para>
 
@@ -154,8 +155,8 @@
                     To issue tooling requests via the command line client, you first
                     need to set up the client so that your system can handle the "zf"
                     command. The command line client, for all intents and purposes, is
-                    the <filename>.sh</filename> or <filename>.bat</filename> file that is provided with
-                    your Zend Framework distribution. In trunk, it can be found here:
+                    the <filename>.sh</filename> or <filename>.bat</filename> file that is provided
+                    with your Zend Framework distribution. In trunk, it can be found here:
                     <ulink
                         url="http://framework.zend.com/svn/framework/standard/trunk/bin/">http://framework.zend.com/svn/framework/standard/trunk/bin/</ulink>.
                 </para>
@@ -212,9 +213,9 @@
 
                 <para>
                     The most common setup in the *nix environment, is to copy the
-                    <filename>zf.sh</filename> and <filename>zf.php</filename> into the same directory
-                    as your <acronym>PHP</acronym> binary. This can generally be found in one of the
-                    following places:
+                    <filename>zf.sh</filename> and <filename>zf.php</filename> into the same
+                    directory as your <acronym>PHP</acronym> binary. This can generally be found in
+                    one of the following places:
                 </para>
 
                 <programlisting language="text"><![CDATA[
@@ -225,23 +226,26 @@
 ]]></programlisting>
 
                 <para>
-                    To find out the location of your <acronym>PHP</acronym> binary, you can execute 'which
-                    php' on the command line. This will return the location of the <acronym>PHP</acronym>
-                    binary you will be using to run <acronym>PHP</acronym> scripts in this environment.
+                    To find out the location of your <acronym>PHP</acronym> binary, you can execute
+                    'which php' on the command line. This will return the location of the
+                    <acronym>PHP</acronym> binary you will be using to run <acronym>PHP</acronym>
+                    scripts in this environment.
                 </para>
 
                 <para>
                     The next order of business is to ensure that Zend Framework
                     library is set up correctly inside of the system <acronym>PHP</acronym>
                     <property>include_path</property>. To find out where your
-                    <property>include_path</property> is located, you can execute <command>php -i</command>
-                    and look for the <property>include_path</property> variable, or more succinctly,
-                    execute <command>php -i | grep include_path</command>. Once you have found where
+                    <property>include_path</property> is located, you can execute
+                    <command>php -i</command> and look for the <property>include_path</property>
+                    variable, or more succinctly, execute
+                    <command>php -i | grep include_path</command>. Once you have found where
                     your <property>include_path</property> is located (this will generally be
-                    something like <filename>/usr/lib/php</filename>, <filename>/usr/share/php</filename>,
-                    <filename>/usr/local/lib/php</filename>, or similar), ensure that the contents of the
-                    <filename>/library/</filename> directory are put
-                    inside your <property>include_path</property> specified directory.
+                    something like <filename>/usr/lib/php</filename>,
+                    <filename>/usr/share/php</filename>, <filename>/usr/local/lib/php</filename>, or
+                    similar), ensure that the contents of the <filename>/library/</filename>
+                    directory are put inside your <property>include_path</property> specified
+                    directory.
                 </para>
 
                 <para>
@@ -266,8 +270,8 @@
                 </para>
 
                 <para>
-                    <emphasis>Alternative Setup</emphasis> involves keeping the Zend
-                    Framework download together as is, and creating a link from a <constant>PATH</constant>
+                    <emphasis>Alternative Setup</emphasis> involves keeping the Zend Framework
+                    download together as is, and creating a link from a <constant>PATH</constant>
                     location to the <filename>zf.sh</filename>. What this means is you can
                     place the contents of the ZendFramework download into a location
                     such as <filename>/usr/local/share/ZendFramework</filename>, or more locally
@@ -301,8 +305,8 @@ ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
                 <para>
                     The most common setup in the Windows Win32 environment, is to copy
                     the <filename>zf.bat</filename> and <filename>zf.php</filename> into the same
-                    directory as your <acronym>PHP</acronym> binary. This can generally be found in one of
-                    the following places:
+                    directory as your <acronym>PHP</acronym> binary. This can generally be found in
+                    one of the following places:
                 </para>
 
                 <programlisting language="text"><![CDATA[

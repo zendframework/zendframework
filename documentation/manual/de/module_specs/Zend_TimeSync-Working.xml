@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19568 -->
+<!-- EN-Revision: 20807 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.timesync.working">
     <title>Arbeiten mit Zend_TimeSync</title>
@@ -22,7 +22,6 @@
     </note>
 
     <sect2 id="zend.timesync.working.generic">
-
         <title>Generelle Anfragen von Zeitserver</title>
 
         <para>
@@ -52,11 +51,9 @@ print $server->getDate()->getIso();
             Dokumentation von <link
                 linkend="zend.date.introduction"><classname>Zend_Date</classname></link> nach.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.multiple">
-
         <title>Mehrere Zeitserver</title>
 
         <para>
@@ -109,11 +106,9 @@ print $server->getDate()->getIso();
             Die Benennung der Zeitserver gibt die Möglichkeit, dass ein spezieller Zeitserver
             angefragt werden kann, wie man später in diesem Kapitel sieht.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.protocol">
-
         <title>Protokolle von Zeitservern</title>
 
         <para>
@@ -145,11 +140,9 @@ print $server->getDate()->getIso();
             nicht auf ein einzelnes Prokoll beschränkt, aber man kann jeden Zeitserver unabhängig
             von seinem Protokoll hinzufügen.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.ports">
-
         <title>Ports für Zeitserver verwenden</title>
 
         <para>
@@ -172,11 +165,9 @@ $server->addServer('sntp:\\internal.myserver.com:399', 'additional');
 
 print $server->getDate()->getIso();
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.options">
-
         <title>Optionen für Zeitserver</title>
 
         <para>
@@ -218,11 +209,9 @@ print "Timeout = " . Zend_TimeSync::getOptions('timeout');
             Wie man sieht, sind die Optionen für <classname>Zend_TimeSync</classname> statisch. Jede
             Instanz von <classname>Zend_TimeSync</classname> verwendet die gleichen Optionen.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.different">
-
         <title>Verschiedene Zeitserver verwenden</title>
 
         <para>
@@ -244,11 +233,9 @@ $server->addServer('sntp:\\internal.myserver.com', 'additional');
 $actual = $server->getServer();
 $server = $server->setServer('additional');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.informations">
-
         <title>Informationen von Zeitservern</title>
 
         <para>
@@ -268,11 +255,9 @@ print_r ($server->getInfo());
             Die zurückgegebenen Informationen unterscheiden sich im verwendeten Protokoll und im
             verwendeten Server.
         </para>
-
     </sect2>
 
     <sect2 id="zend.timesync.working.exceptions">
-
         <title>Behandeln von Ausnahmen</title>
 
         <para>

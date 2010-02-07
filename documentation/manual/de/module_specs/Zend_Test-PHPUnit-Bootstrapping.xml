@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19568 -->
+<!-- EN-Revision: 20807 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.bootstrapping">
     <title>Bootstrapping der eigenen TestCases</title>
@@ -115,23 +115,27 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            Wir bieten keine alternative Implementierung der Anfrage und Antwort Objekte; diese
-            werden nicht verwendet. <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>
-            verwendet eigene Anfrage und Antwort Objekte,
-            <classname>Zend_Controller_Request_HttpTestCase</classname> und
-            <classname>Zend_Controller_Response_HttpTestCase</classname>. Diese Objekte bieten
-            Methoden für das Konfigurieren der Anfrageumgebung auf gezieltem Wege an, und dem Holen
-            von Antwort Artefakten auf speziellem Weg.
-        </para></listitem>
+        <listitem>
+            <para>
+                Wir bieten keine alternative Implementierung der Anfrage und Antwort Objekte; diese
+                werden nicht verwendet. <classname>Zend_Test_PHPUnit_ControllerTestCase</classname>
+                verwendet eigene Anfrage und Antwort Objekte,
+                <classname>Zend_Controller_Request_HttpTestCase</classname> und
+                <classname>Zend_Controller_Response_HttpTestCase</classname>. Diese Objekte bieten
+                Methoden für das Konfigurieren der Anfrageumgebung auf gezieltem Wege an, und dem
+                Holen von Antwort Artefakten auf speziellem Weg.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            Man sollte nicht erwarten Server spezielles zu testen. In anderen Worten, die Tests
-            garantieren nicht das der Code in einer speziellen Serverkonfiguration läuft, aber das
-            die Anwendung wie erwartet funktionieren sollte, und der Router eine gegebene Anfrage
-            routen kann. Um das Abzuschließen sollten keine Server-speziellen Header im Anfrage
-            Objekt gesetzt werden.
-        </para></listitem>
+        <listitem>
+            <para>
+                Man sollte nicht erwarten Server spezielles zu testen. In anderen Worten, die Tests
+                garantieren nicht das der Code in einer speziellen Serverkonfiguration läuft, aber
+                das die Anwendung wie erwartet funktionieren sollte, und der Router eine gegebene
+                Anfrage routen kann. Um das Abzuschließen sollten keine Server-speziellen Header im
+                Anfrage Objekt gesetzt werden.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -139,6 +143,3 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
         Tests zu erstellen.
     </para>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

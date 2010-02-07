@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18840 -->
+<!-- EN-Revision: 20810 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.recaptcha">
     <title>Zend_Service_ReCaptcha</title>
@@ -145,8 +145,10 @@ print($mailHide);
             Konstruktor der Klasse spezifiziert werden. Es existiert ein viertes Argument das es
             erlaubt einige Optionen für die Komponente zu setzen. Die vorhandenen Optionen sind in
             der folgenden Tabelle aufgelistet:
+
             <table id="zend.service.recaptcha.mailhide.options.table">
                 <title>Zend_Service_ReCaptcha_MailHide options</title>
+
                 <tgroup cols="4">
                     <thead>
                         <row>
@@ -156,6 +158,7 @@ print($mailHide);
                             <entry>Standard Werte</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry>linkTitle</entry>
@@ -163,18 +166,21 @@ print($mailHide);
                             <entry>string</entry>
                             <entry>'Reveal this e-mail address'</entry>
                         </row>
+
                         <row>
                             <entry>linkHiddenText</entry>
                             <entry>Der Text welche den Popup Link enthält</entry>
                             <entry>string</entry>
                             <entry>'...'</entry>
                         </row>
+
                         <row>
                             <entry>popupWidth</entry>
                             <entry>Die Breite des Popup Fensters</entry>
                             <entry>int</entry>
                             <entry>500</entry>
                         </row>
+
                         <row>
                             <entry>popupHeight</entry>
                             <entry>Die Höhe des Popup Fensters</entry>
@@ -222,6 +228,3 @@ foreach ($mailAddresses as $mail) {
         </example>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

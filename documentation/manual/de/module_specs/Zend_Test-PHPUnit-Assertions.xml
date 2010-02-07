@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20807 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.test.phpunit.assertions">
     <title>Behauptungen</title>
@@ -34,58 +34,70 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>assertQuery($path, $message = '')</methodname>: Nimmt an das ein oder
-                mehrere DOM Elemente, die dem gegebenen <acronym>CSS</acronym> Selektor entsprechen,
-                vorhanden sind. Wenn eine <varname>$message</varname> vorhanden ist, wird diese
-                jeder fehlgeschlagenen Meldung einer Behauptung vorangestellt.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertQuery($path, $message = '')</methodname>: Nimmt an das ein
+                    oder mehrere DOM Elemente, die dem gegebenen <acronym>CSS</acronym> Selektor
+                    entsprechen, vorhanden sind. Wenn eine <varname>$message</varname> vorhanden
+                    ist, wird diese jeder fehlgeschlagenen Meldung einer Behauptung vorangestellt.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertQueryContentContains($path, $match, $message = '')</methodname>:
-                Nimmt an das ein oder mehrere DOM Elemente, die dem angegebenen
-                <acronym>CSS</acronym> Selektor entsprechen, vorhanden sind, und das zumindest einer
-                dem Inhalt, der in <varname>$match</varname> angegeben wurde, entspricht. Wenn eine
-                <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
-                Meldung einer Behauptung vorangestellt.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertQueryContentContains($path, $match, $message =
+                        '')</methodname>: Nimmt an das ein oder mehrere DOM Elemente, die dem
+                    angegebenen <acronym>CSS</acronym> Selektor entsprechen, vorhanden sind, und das
+                    zumindest einer dem Inhalt, der in <varname>$match</varname> angegeben wurde,
+                    entspricht. Wenn eine <varname>$message</varname> vorhanden ist, wird diese
+                    jeder fehlgeschlagenen Meldung einer Behauptung vorangestellt.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertQueryContentRegex($path, $pattern, $message = '')</methodname>:
-                Nimmt an das ein oder mehrere DOM Elemente, die dem angegebenen
-                <acronym>CSS</acronym> Selektor entsprechen, vorhanden sind, und das zumindest einer
-                dem Regulären Ausdruck der in <varname>$pattern</varname> angegeben wurde,
-                entspricht. Wenn eine <varname>$message</varname> vorhanden ist, wird diese jeder
-                fehlgeschlagenen Meldung einer Behauptung vorangestellt.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertQueryContentRegex($path, $pattern, $message =
+                        '')</methodname>: Nimmt an das ein oder mehrere DOM Elemente, die dem
+                    angegebenen <acronym>CSS</acronym> Selektor entsprechen, vorhanden sind, und das
+                    zumindest einer dem Regulären Ausdruck der in <varname>$pattern</varname>
+                    angegeben wurde, entspricht. Wenn eine <varname>$message</varname> vorhanden
+                    ist, wird diese jeder fehlgeschlagenen Meldung einer Behauptung vorangestellt.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertQueryCount($path, $count, $message = '')</methodname>:  Nimmt an
-                das exakt <varname>$count</varname> DOM Elemente dem angegebenen
-                <acronym>CSS</acronym> Selektor entsprechen. Wenn eine <varname>$message</varname>
-                vorhanden ist, wird diese jeder fehlgeschlagenen Meldung einer Behauptung
-                vorangestellt.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertQueryCount($path, $count, $message = '')</methodname>:  Nimmt
+                    an das exakt <varname>$count</varname> DOM Elemente dem angegebenen
+                    <acronym>CSS</acronym> Selektor entsprechen. Wenn eine
+                    <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
+                    Meldung einer Behauptung vorangestellt.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertQueryCountMin($path, $count, $message = '')</methodname>: Nimmt an
-                das zumindest <varname>$count</varname> DOM Element dem angegebenen
-                <acronym>CSS</acronym> Selektor entsprechen. Wenn eine <varname>$message</varname>
-                vorhanden ist, wird diese jeder fehlgeschlagenen Meldung einer Behauptung
-                vorangestellt. <emphasis>Achtung:</emphasis> Die Spezifizierung eines Wertes von 1
-                für <varname>$count</varname> ist das Gleiche wie die einfache Verwendung von
-                <methodname>assertQuery()</methodname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertQueryCountMin($path, $count, $message = '')</methodname>:
+                    Nimmt an das zumindest <varname>$count</varname> DOM Element dem angegebenen
+                    <acronym>CSS</acronym> Selektor entsprechen. Wenn eine
+                    <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
+                    Meldung einer Behauptung vorangestellt. <emphasis>Achtung:</emphasis> Die
+                    Spezifizierung eines Wertes von 1 für <varname>$count</varname> ist das Gleiche
+                    wie die einfache Verwendung von <methodname>assertQuery()</methodname>.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertQueryCountMax($path, $count, $message = '')</methodname>: Nimmt an
-                das es nicht mehr als <varname>$count</varname> DOM Elemente gibt die dem
-                angegebenen <acronym>CSS</acronym> Selektor entsprechen. Wenn eine
-                <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
-                Meldung einer Behauptung vorangestellt. <emphasis>Achtung:</emphasis> Die
-                Spezifizierung eines Wertes von 1 für <varname>$count</varname> ist das Gleiche wie
-                die einfache Verwendung von <methodname>assertQuery()</methodname>.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertQueryCountMax($path, $count, $message = '')</methodname>:
+                    Nimmt an das es nicht mehr als <varname>$count</varname> DOM Elemente gibt die
+                    dem angegebenen <acronym>CSS</acronym> Selektor entsprechen. Wenn eine
+                    <varname>$message</varname> vorhanden ist, wird diese jeder fehlgeschlagenen
+                    Meldung einer Behauptung vorangestellt. <emphasis>Achtung:</emphasis> Die
+                    Spezifizierung eines Wertes von 1 für <varname>$count</varname> ist das Gleiche
+                    wie die einfache Verwendung von <methodname>assertQuery()</methodname>.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -108,36 +120,64 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>assertXpath($path, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertNotXpath($path, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertXpathContentContains($path, $match, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertNotXpathContentContains($path, $match, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertXpathContentRegex($path, $pattern, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertNotXpathContentRegex($path, $pattern, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertXpathCount($path, $count, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertNotXpathCount($path, $count, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertXpathCountMin($path, $count, $message = '')</methodname>
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertNotXpathCountMax($path, $count, $message = '')</methodname>
-            </para></listitem>
+            <listitem>
+                <para><methodname>assertXpath($path, $message = '')</methodname></para>
+            </listitem>
+
+            <listitem>
+                <para><methodname>assertNotXpath($path, $message = '')</methodname></para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertXpathContentContains($path, $match, $message =
+                        '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertNotXpathContentContains($path, $match, $message =
+                        '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertXpathContentRegex($path, $pattern, $message = '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertNotXpathContentRegex($path, $pattern, $message =
+                        '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertXpathCount($path, $count, $message = '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertNotXpathCount($path, $count, $message = '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertXpathCountMin($path, $count, $message = '')</methodname>
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertNotXpathCountMax($path, $count, $message = '')</methodname>
+                </para>
+            </listitem>
         </itemizedlist>
     </sect3>
 
@@ -151,40 +191,52 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>assertRedirect($message = '')</methodname>: Nimmt einfach an das eine
-                Umleitung stattgefunden hat.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertRedirect($message = '')</methodname>: Nimmt einfach an das
+                    eine Umleitung stattgefunden hat.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertNotRedirect($message = '')</methodname>: Nimmt einfach an das
-                keine Umleitung stattgefunden hat.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertNotRedirect($message = '')</methodname>: Nimmt einfach an das
+                    keine Umleitung stattgefunden hat.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertRedirectTo($url, $message = '')</methodname>: Nimmt an das eine
-                Umleitung stattgefunden hat, und das der Wert des Ziel Headers die angegebene
-                <varname>$url</varname> ist.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertRedirectTo($url, $message = '')</methodname>: Nimmt an das
+                    eine Umleitung stattgefunden hat, und das der Wert des Ziel Headers die
+                    angegebene <varname>$url</varname> ist.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertNotRedirectTo($url, $message = '')</methodname>: Nimmt an das eine
-                Umleitung entweder NICHT stattgefunden hat, oder das der Wert des Ziel Headers NICHT
-                die angegebene <varname>$url</varname> ist.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertNotRedirectTo($url, $message = '')</methodname>: Nimmt an das
+                    eine Umleitung entweder NICHT stattgefunden hat, oder das der Wert des Ziel
+                    Headers NICHT die angegebene <varname>$url</varname> ist.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertRedirectRegex($pattern, $message = '')</methodname>: Nimmt an das
-                eine Umleitung stattgefunden hat, und das der Wert des Ziel Headers dem durch
-                <varname>$pattern</varname> angegebenen regulären Ausdruck entspricht.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertRedirectRegex($pattern, $message = '')</methodname>: Nimmt an
+                    das eine Umleitung stattgefunden hat, und das der Wert des Ziel Headers dem
+                    durch <varname>$pattern</varname> angegebenen regulären Ausdruck entspricht.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertNotRedirectRegex($pattern, $message = '')</methodname>: Nimmt an
-                das eine Umleitung entweder NICHT stattgefunden hat, oder das der Wert des Ziel
-                Headers NICHT dem durch <varname>$pattern</varname> angegebenen regulären Ausdruck
-                entspricht.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertNotRedirectRegex($pattern, $message = '')</methodname>: Nimmt
+                    an das eine Umleitung entweder NICHT stattgefunden hat, oder das der Wert des
+                    Ziel Headers NICHT dem durch <varname>$pattern</varname> angegebenen regulären
+                    Ausdruck entspricht.
+                </para>
+            </listitem>
         </itemizedlist>
     </sect3>
 
@@ -200,27 +252,35 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>assertResponseCode($code, $message = '')</methodname>: Nimmt an das die
-                Antwort zum gegebenen <acronym>HTTP</acronym> Antwort Code geführt hat.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertResponseCode($code, $message = '')</methodname>: Nimmt an das
+                    die Antwort zum gegebenen <acronym>HTTP</acronym> Antwort Code geführt hat.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertHeader($header, $message = '')</methodname>: Nimmt an das die
-                Antwort den gegebenen Header enthält.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertHeader($header, $message = '')</methodname>: Nimmt an das die
+                    Antwort den gegebenen Header enthält.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertHeaderContains($header, $match, $message = '')</methodname>: Nimmt
-                an das die Antwort den gegebenen Header enthält und das sein Inhalt den gegebenen
-                String enthält.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertHeaderContains($header, $match, $message = '')</methodname>:
+                    Nimmt an das die Antwort den gegebenen Header enthält und das sein Inhalt den
+                    gegebenen String enthält.
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <methodname>assertHeaderRegex($header, $pattern, $message = '')</methodname>: Nimmt
-                an das die Antwort den gegebenen Header enthält und das sein Inhalt der gegebenen
-                Regex entspricht.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertHeaderRegex($header, $pattern, $message = '')</methodname>:
+                    Nimmt an das die Antwort den gegebenen Header enthält und das sein Inhalt der
+                    gegebenen Regex entspricht.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -239,22 +299,34 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <methodname>assertModule($module, $message = '')</methodname>: Nimmt an dass das
-                angegebene Modul in der letzten Dispatch Aktion verwendet wurde.
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertController($controller, $message = '')</methodname>: Nimmt an das
-                der angegebene Controller in der letzten ausgeführten Aktion ausgewählt wurde.
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertAction($action, $message = '')</methodname>: Nimmt an das die
-                angegebene Aktion zuletzt ausgeführt wurde.
-            </para></listitem>
-            <listitem><para>
-                <methodname>assertRoute($route, $message = '')</methodname>: Nimmt an das die
-                angegebene benannte Route dem Router entsprochen hat.
-            </para></listitem>
+            <listitem>
+                <para>
+                    <methodname>assertModule($module, $message = '')</methodname>: Nimmt an dass das
+                    angegebene Modul in der letzten Dispatch Aktion verwendet wurde.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertController($controller, $message = '')</methodname>: Nimmt an
+                    das der angegebene Controller in der letzten ausgeführten Aktion ausgewählt
+                    wurde.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertAction($action, $message = '')</methodname>: Nimmt an das die
+                    angegebene Aktion zuletzt ausgeführt wurde.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <methodname>assertRoute($route, $message = '')</methodname>: Nimmt an das die
+                    angegebene benannte Route dem Router entsprochen hat.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -262,6 +334,3 @@
         </para>
     </sect3>
 </sect2>
-<!--
-vim:se ts=4 sw=4 et:
--->

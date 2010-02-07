@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20810 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.advanced_usage">
-
     <title>Fortgeschrittene Benutzung</title>
 
     <para>
@@ -13,7 +12,6 @@
     </para>
 
     <sect2 id="zend.session.advanced_usage.starting_a_session">
-
         <title>Starten einer Session</title>
 
         <para>
@@ -22,13 +20,11 @@
         </para>
 
         <example id="zend.session.advanced_usage.starting_a_session.example">
-
             <title>Starten einer globalen Session</title>
 
             <programlisting language="php"><![CDATA[
 Zend_Session::start();
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -59,6 +55,7 @@ php_value session.auto_start 0
 ]]></programlisting>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Falsch: <acronym>PHP</acronym>'s <ulink
@@ -74,6 +71,7 @@ php_value session.auto_start 0
                     Aufruf wird ignoriert.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Richtig: Verwenden von <methodname>Zend_Session::start()</methodname>. Wenn es
@@ -82,6 +80,7 @@ php_value session.auto_start 0
                     aufgerufen werden. Session haben einigen Overhead. Wenn einige Anfragen Sessions
                     benötigen aber andere Anfragen keine Sessions verwenden, dann:
                 </para>
+
                 <itemizedlist mark="opencircle">
                     <listitem>
                         <para>
@@ -91,6 +90,7 @@ php_value session.auto_start 0
                             Datei.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             Aufruf von <methodname>Zend_Session::start()</methodname> nur für die
@@ -98,6 +98,7 @@ php_value session.auto_start 0
                             <classname>Zend_Session_Namespace</classname> initiiert werden.
                         </para>
                     </listitem>
+
                     <listitem>
                         <para>
                             Normales verwenden von "<code>new Zend_Session_Namespace()</code>" wo es
@@ -106,6 +107,7 @@ php_value session.auto_start 0
                         </para>
                     </listitem>
                 </itemizedlist>
+
                 <para>
                     Die Option <code>strict</code> verhindert das <code>new
                     Zend_Session_Namespace()</code> automatisch eine Session startet und dabei
@@ -120,6 +122,7 @@ php_value session.auto_start 0
                     darunterliegenden Optionen für ext/session.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Richtig: Einfach <code>new Zend_Session_Namespace()</code> instanzieren wo dies
@@ -137,11 +140,9 @@ php_value session.auto_start 0
                 </para>
             </listitem>
         </orderedlist>
-
     </sect2>
 
     <sect2 id="zend.session.advanced_usage.locking">
-
         <title>Gesperrte Session Namensräume</title>
 
         <para>
@@ -160,8 +161,8 @@ php_value session.auto_start 0
         </para>
 
         <example id="zend.session.advanced_usage.locking.example.basic">
-
             <title>Sperren von Session Namensräumen</title>
+
             <programlisting language="php"><![CDATA[
 $userProfileNamespace = new Zend_Session_Namespace('userProfileNamespace');
 
@@ -173,13 +174,10 @@ if ($userProfileNamespace->isLocked()) {
     $userProfileNamespace->unLock();
 }
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.session.advanced_usage.expiration">
-
         <title>Verfall von Namensräumen</title>
 
         <para>
@@ -193,7 +191,6 @@ if ($userProfileNamespace->isLocked()) {
         </para>
 
         <example id="zend.session.advanced_usage.expiration.example">
-
             <title>Beispiel für den Verfall</title>
 
             <programlisting language="php"><![CDATA[
@@ -212,7 +209,6 @@ $s->setExpirationSeconds(60);
 // sobald der erste Aufruf empfangen wurde und 60 Sekunden
 // vergangen sind, oder in 5 Sprüngen, was auch immer zuerst stattfindet
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -223,11 +219,9 @@ $s->setExpirationSeconds(60);
             Daten in eine temporäre Variable geholt werden, diese im Namensraum entfernt und
             anschliessend der entsprechende Schlüssel wieder gesetzt werden.
         </para>
-
     </sect2>
 
     <sect2 id="zend.session.advanced_usage.controllers">
-
         <title>Kapseln von Sessions und Controller</title>
 
         <para>
@@ -238,7 +232,6 @@ $s->setExpirationSeconds(60);
         </para>
 
         <example id="zend.session.advanced_usage.controllers.example">
-
             <title>Session Namensräume für Controller mit automatischem Verfall</title>
 
             <para>
@@ -277,11 +270,9 @@ $testSpace->accept_answer = true;
 // ...
 ]]></programlisting>
         </example>
-
     </sect2>
 
     <sect2 id="zend.session.advanced_usage.single_instance">
-
         <title>Mehrfache Instanzen pro Namensraum verhindern</title>
 
         <para>
@@ -300,7 +291,6 @@ $testSpace->accept_answer = true;
         </para>
 
         <example id="zend.session.advanced_usage.single_instance.example">
-
             <title>Zugriff auf Session Namensräume auf eine einzelne Instanz limitieren</title>
 
             <programlisting language="php"><![CDATA[
@@ -325,7 +315,6 @@ try {
          '$authSpaceAccessor2 erstellt wurde\n';
 }
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -343,11 +332,9 @@ try {
             hinzufügen (siehe <xref linkend="zend.registry" />), oder diese andernfalls für andere
             Methoden verfügbar zu machen die Zugriff auf den Namensraum der Session benötigen.
         </para>
-
     </sect2>
 
     <sect2 id="zend.session.advanced_usage.arrays">
-
         <title>Arbeiten mit Arrays</title>
 
         <para>
@@ -360,7 +347,6 @@ try {
         </para>
 
         <example id="zend.session.advanced_usage.arrays.example.modifying">
-
             <title>Array Daten innerhalb eines Session Namensraumes verändern</title>
 
             <para>
@@ -374,11 +360,9 @@ $sessionNamespace->array = array();
 $sessionNamespace->array['testKey'] = 1;
 echo $sessionNamespace->array['testKey'];
 ]]></programlisting>
-
         </example>
 
         <example id="zend.session.advanced_usage.arrays.example.building_prior">
-
             <title>Arrays erstellen bevor es Session Speicher gab</title>
 
             <para>
@@ -390,7 +374,6 @@ echo $sessionNamespace->array['testKey'];
 $sessionNamespace = new Zend_Session_Namespace('Foo');
 $sessionNamespace->array = array('a', 'b', 'c');
 ]]></programlisting>
-
         </example>
 
         <para>
@@ -400,7 +383,6 @@ $sessionNamespace->array = array('a', 'b', 'c');
         </para>
 
         <example id="zend.session.advanced_usage.arrays.example.workaround.reassign">
-
             <title>Workaround: Ein geändertes Array neu Verbinden</title>
 
             <para>
@@ -426,11 +408,9 @@ $sessionNamespace->array = $tmp;
 
 echo $sessionNamespace->array['fruit']; // gibt "peach" aus
 ]]></programlisting>
-
         </example>
 
         <example id="zend.session.advanced_usage.arrays.example.workaround.reference">
-
             <title>Workaround: Array das Referenz enthält speichern</title>
 
             <para>
@@ -445,13 +425,10 @@ $myNamespace->someArray = array( &$a );
 $a['foo'] = 'bar';
 echo $myNamespace->someArray['foo']; // gibt "bar" aus
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.session.advanced_usage.objects">
-
         <title>Sessions mit Objekten verwenden</title>
 
         <para>
@@ -465,11 +442,9 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
              Klasse eines unserialisierten Objektes nicht definiert wurde, wird es eine Instand von
              <code>stdClass</code>.
         </para>
-
     </sect2>
 
     <sect2 id="zend.session.advanced_usage.testing">
-
         <title>Verwenden von Sessions mit Unit Tests</title>
 
         <para>
@@ -503,7 +478,6 @@ echo $myNamespace->someArray['foo']; // gibt "bar" aus
         </para>
 
         <example id="zend.session.advanced_usage.testing.example">
-
             <title>PHPUnit Test Code der auf Zend_Session beruht</title>
 
             <programlisting language="php"><![CDATA[
@@ -555,7 +529,5 @@ $this->assertTrue($result === ';p === plum',
     "fehlgeschlaten (result=$result)");
 ]]></programlisting>
         </example>
-
     </sect2>
-
 </sect1>

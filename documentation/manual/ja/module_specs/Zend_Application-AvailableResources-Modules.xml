@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18178 -->
+<!-- EN-Revision: 20763 -->
 <sect2 id="zend.application.available-resources.modules">
     <title>Zend_Application_Resource_Modules</title>
 
@@ -71,6 +71,7 @@ $options = array(
 
     <example id="zend.application.available-resources.modules.configExample">
         <title>モジュールの設定</title>
+
         <para>
             構成ファイルのプレフィックスまたはサブセクションとして
             モジュール名を使用しているモジュール固有の構成を指定できます。

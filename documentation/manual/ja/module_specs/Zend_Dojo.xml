@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17987 -->
+<!-- EN-Revision: 20766 -->
 <sect1 id="zend.dojo.introduction">
     <title>導入</title>
 
@@ -17,7 +17,10 @@
         <listitem><para>dojo.data との互換性</para></listitem>
         <listitem><para>Dojo 環境を準備するためのビューヘルパー</para></listitem>
         <listitem><para>Dijit 固有の <classname>Zend_View</classname> ヘルパー</para></listitem>
-        <listitem><para>Dijit 固有の <classname>Zend_Form</classname> 要素およびデコレータ</para></listitem>
+
+        <listitem>
+            <para>Dijit 固有の <classname>Zend_Form</classname> 要素およびデコレータ</para>
+        </listitem>
     </itemizedlist>
 
     <para>

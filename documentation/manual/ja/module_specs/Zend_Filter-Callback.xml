@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18081 -->
+<!-- EN-Revision: 20774 -->
 <sect2 id="zend.filter.set.callback">
     <title>Callback</title>
+
     <para>
-        このフィルタにより、<classname>Zend_Filter</classname>とともに自分自身のメソッドを使うことができます。
+        このフィルタにより、 <classname>Zend_Filter</classname> とともに自分自身のメソッドを使えます。
         機能を果たすメソッドすでにあるとき、新しいフィルタを生成する必要はありません。
     </para>
 
@@ -21,7 +22,7 @@ print $filter->filter('Hello!');
 
     <para>
         おわかりのように、自分自身のフィルタを定義するために本当に簡単にコールバックを使えます。
-        メソッド（それはクラス内で定義されます）をコールバックとして配列を与えることによって使うことも可能です。
+        メソッド（それはクラス内で定義されます）をコールバックとして配列を与えることによって使うこともできます。
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -37,8 +38,8 @@ print $filter->filter('Hello!');
 ]]></programlisting>
 
     <para>
-        実際に設定されているコールバックを取得するには<methodname>getCallback()</methodname>を使い、
-        他のコールバックを設定するには<methodname>setCallback()</methodname>を使います。
+        実際に設定されているコールバックを取得するには <methodname>getCallback()</methodname> を使い、
+        他のコールバックを設定するには <methodname>setCallback()</methodname> を使います。
     </para>
 
     <para>

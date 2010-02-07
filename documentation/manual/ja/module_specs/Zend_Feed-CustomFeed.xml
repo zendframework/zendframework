@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17502 -->
+<!-- EN-Revision: 20774 -->
 <sect1 id="zend.feed.custom-feed">
     <title>独自のフィードクラスおよびエントリクラス</title>
 
@@ -19,6 +19,7 @@
 
     <example id="zend.feed.custom-feed.example.extending">
         <title>独自の名前空間を使用しての Atom エントリクラスの拡張</title>
+
         <programlisting language="php"><![CDATA[
 /**
  * この独自エントリクラスは、自動的にフィード URI を識別 (オプション) して
@@ -77,7 +78,7 @@ class MyEntry extends Zend_Feed_Entry_Atom
 
         <para>
             そしてこのクラスを使用すると、インスタンスを作成したらすぐに
-            <property>myUpdated</property> プロパティを設定することができます。
+            <property>myUpdated</property> プロパティを設定できます。
         </para>
 
         <programlisting language="php"><![CDATA[

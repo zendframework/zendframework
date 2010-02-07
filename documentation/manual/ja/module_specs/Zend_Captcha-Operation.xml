@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16125 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.captcha.operation">
     <title>Captcha の方法</title>
 
@@ -49,7 +49,7 @@ interface Zend_Captcha_Adapter extends Zend_Validate_Interface
         典型的な使用例は、次のようになります。
     </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Zend_View インスタンスを作成します
 $view = new Zend_View();
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 20774 -->
 <sect1 id="zend.feed.consuming-atom-single-entry">
     <title>単一の Atom エントリの処理</title>
 
@@ -19,6 +19,7 @@
 
     <example id="zend.feed.consuming-atom-single-entry.example.atom">
         <title>Atom フィードからの単一のエントリの読み込み</title>
+
         <programlisting language="php"><![CDATA[
 $feed = new Zend_Feed_Atom('http://atom.example.com/feed/1');
 echo 'このフィードには ' . $feed->count() . ' 件のエントリが含まれます。';
@@ -34,6 +35,7 @@ $entry = $feed->current();
 
     <example id="zend.feed.consuming-atom-single-entry.example.entryatom">
         <title>単一エントリの Atom フィードに対する、エントリオブジェクトを直接使用したアクセス</title>
+
         <programlisting language="php"><![CDATA[
 $entry = new Zend_Feed_Entry_Atom('http://atom.example.com/feed/1');
 echo $entry->title();

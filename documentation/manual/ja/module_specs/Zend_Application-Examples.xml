@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20474 -->
+<!-- EN-Revision: 20763 -->
 <sect1 id="zend.application.examples">
     <title>例</title>
 
@@ -95,11 +95,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 <classname>Zend_Application</classname>オブジェクトが初期化されるとき
             </para>
         </listitem>
+
         <listitem>
             <para>
                 ブートストラップオブジェクトの初期化中
             </para>
         </listitem>
+
         <listitem>
             <para>
                 メソッド呼び出しを介してそれらをブートストラップ・オブジェクトで明示的に使用可能にすることによって

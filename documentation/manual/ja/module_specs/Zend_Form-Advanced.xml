@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20774 -->
 <sect1 id="zend.form.advanced">
     <title>Zend_Form の高度な使用法</title>
 
@@ -188,12 +188,14 @@
                 </para>
             </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                     <methodname>Zend_Form::setElementsBelongTo($array)</methodname>:
                     このメソッドを使用すると、フォームの全要素が属する
                     配列の名前を指定できます。現在設定されている値を調べるには
                     <methodname>getElementsBelongTo()</methodname> アクセサを使用します。
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

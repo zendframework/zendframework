@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16565 -->
+<!-- EN-Revision: 20876 -->
 <sect1 id="performance.database">
     <title>Zend_Dbパフォーマンス</title>
 
@@ -60,8 +60,10 @@
     </sect2>
 
     <sect2 id="performance.database.select">
-        <title>Zend_Db_Selectで生成されたSQLがインデックスにヒットしません。
-        どのようにしたらより良く出来ますか？</title>
+        <title>
+            Zend_Db_Selectで生成されたSQLがインデックスにヒットしません。
+            どのようにしたらより良く出来ますか？
+        </title>
 
         <para>
             <classname>Zend_Db_Select</classname>は比較的その仕事が得意です。
@@ -78,6 +80,7 @@
                 <classname>Zend_Db_Select</classname>を使わずに、<acronym>SQL</acronym>のselect文を調整する
                 ことがもっとも完璧に筋の通った道です。
             </para>
+
             <para>
                 <constant>EXPLAIN</constant> をクエリに対して実行して、
                 最もパフォーマンスのあるインデックスを本当に当てるまで、

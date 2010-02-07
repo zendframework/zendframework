@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18083 -->
+<!-- EN-Revision: 20765 -->
 <sect3 id="zend.controller.router.routes.chain">
     <title>Zend_Controller_Router_Route_Chain</title>
 
     <para>
-        <classname>Zend_Controller_Router_Route_Chain</classname>は、
+        <classname>Zend_Controller_Router_Route_Chain</classname> は、
         複数のルートを一緒にチェーンできるルートです。
         これは、たとえばホスト名とルート、パスとルート、または複数のパスとルートをチェーンできます。
         チェーンは、プログラム的に、または、構成ファイルの範囲内で行なえます。
@@ -13,6 +13,7 @@
 
     <note>
         <title>パラメータ優先度</title>
+
         <para>
             ルートを一緒にチェーンするとき、
             外側のルートのパラメータは内側のルートのパラメータより高い優先度を持ちます。
@@ -23,15 +24,15 @@
 
     <para>
         プログラム的にチェーンするとき、これを達成する2つの方法があります。
-        最初の1つは、<classname>Zend_Controller_Router_Route_Chain</classname>
+        最初の1つは、 <classname>Zend_Controller_Router_Route_Chain</classname>
         インスタンスを新規作成して、
         そして、一緒にチェーンでつながなければならないルートすべてで
-        <methodname>chain()</methodname>メソッドを複数回呼ぶことです。
+        <methodname>chain()</methodname> メソッドを複数回呼ぶことです。
         他の方法は、最初のルート（例えばホスト名のルート）を受け取って、
         それに付加されなければならないルートとともに、
-        そのルート上で<methodname>chain()</methodname>メソッドを呼ぶことです。
+        そのルート上で <methodname>chain()</methodname> メソッドを呼ぶことです。
         これはホスト名ルートを修正せずとも、
-        <classname>Zend_Controller_Router_Route_Chain</classname>の新規インスタンスを返します。
+        <classname>Zend_Controller_Router_Route_Chain</classname> の新規インスタンスを返します。
         そして、両方のルートは一緒につながれます。
     </para>
 
@@ -71,13 +72,13 @@ echo $chainedRoute->assemble();
 
         <para>
             構成ファイルでルートをチェーンするために、それらの構成のための付加パラメータがあります。
-            より単純なアプローチは、<property>chains</property>パラメータを使うことです。
+            より単純なアプローチは、 <property>chains</property> パラメータを使うことです。
             このものは単にルートの一覧です。そして、それは親ルートでチェーンされます。
             親ルートも子供ルートも、結果として生じるチェーンされたルートにだけ直接追加され、
             それ以外のルータには追加されません。
             ルータでのチェーンされたルートの名前は、
             デフォルトでダッシュで連結される親ルート名と子供ルート名です。
-            <acronym>XML</acronym>での単純な構成は、このように見えます。
+            <acronym>XML</acronym> での単純な構成は、このように見えます。
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -119,15 +120,15 @@ echo $chainedRoute->assemble();
 ]]></programlisting>
 
         <para>
-            これは結果として、ホスト名及びルート<command>misc</command>に基づいてマッチするだけで、
+            これは結果として、ホスト名及びルート <command>misc</command> に基づいてマッチするだけで、
             どんなホスト名ともマッチする3つのルート、
-            <command>www-language-index</command>、<command>www-language-imprint</command>及び
-            <command>users-language-profile</command>になります。
+            <command>www-language-index</command> 、 <command>www-language-imprint</command> 及び
+            <command>users-language-profile</command> になります。
         </para>
 
         <para>
             チェーンされたルートを作成する別な方法は、
-            <property>chain</property>パラメータを介することです。
+            <property>chain</property> パラメータを介することです。
             それはチェーン・ルート型とともにのみ直接使うことができ、
             さらに root レベルでのみ動作します。
         </para>
@@ -161,7 +162,7 @@ echo $chainedRoute->assemble();
 
         <para>
             コンマでルートを分離する代わりに、
-            配列として<property>chain</property>パラメータを与えることもできます
+            配列として <property>chain</property> パラメータを与えることもできます
         </para>
 
         <programlisting language="xml"><![CDATA[
@@ -178,8 +179,9 @@ echo $chainedRoute->assemble();
     </www-imprint>
 </routes>
 ]]></programlisting>
+
         <para>
-            <classname>Zend_Config</classname>でチェーン・ルートを構成して、
+            <classname>Zend_Config</classname> でチェーン・ルートを構成して、
             チェーン名の分離記号をダッシュ以外にしたい場合、
             この分離記号を別途指定する必要があります。
         </para>

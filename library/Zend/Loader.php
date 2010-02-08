@@ -173,6 +173,12 @@ class Zend_Loader
      */
     public static function isReadable($filename)
     {
+        if (is_readable($filename)) {
+            // Return early if the filename is readable without needing the 
+            // include_path
+            return true;
+        }
+
         foreach (self::explodeIncludePath() as $path) {
             if ($path == '.') {
                 if (is_readable($filename)) {

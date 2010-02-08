@@ -178,7 +178,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     </para>
 
     <programlisting language="php"><![CDATA[
-// application/layouts/scripts/layout.phtml
+<!-- application/layouts/scripts/layout.phtml -->
 <?php echo $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>

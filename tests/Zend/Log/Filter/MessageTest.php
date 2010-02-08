@@ -20,8 +20,7 @@
  * @version    $Id$
  */
 
-/** PHPUnit_Framework_TestCase */
-require_once 'PHPUnit/Framework/TestCase.php';
+require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_Log */
 require_once 'Zend/Log.php';
@@ -69,5 +68,20 @@ class Zend_Log_Filter_MessageTest extends PHPUnit_Framework_TestCase
 
         $logger = Zend_Log::factory($cfg['log']);
         $this->assertTrue($logger instanceof Zend_Log);
+    }
+
+    public function testFactoryWithConfig()
+    {
+        require_once 'Zend/Config.php';
+        $config = new Zend_Config(array('log' => array('memory' => array(
+            'writerName'   => "Mock", 
+            'filterName'   => "Message", 
+            'filterParams' => array(
+                'regexp'   => "/42/" 
+             ),        
+        ))));
+
+        $filter = Zend_Log_Filter_Message::factory($config->log->memory->filterParams);
+        $this->assertTrue($filter instanceof Zend_Log_Filter_Message);
     }
 }

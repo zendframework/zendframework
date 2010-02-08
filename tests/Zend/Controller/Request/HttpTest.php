@@ -827,6 +827,18 @@ class Zend_Controller_Request_HttpTest extends PHPUnit_Framework_TestCase
         $params = $this->_request->getParams();
         $this->assertEquals(array('foo' => 'baz'), $params);
     }
+
+    /**
+     * @group ZF-9091
+     */
+    public function testSetPathInfoShouldNotStripBaseUrlIfBaseUrlNotInRequestUri()
+    {
+        $request = new Zend_Controller_Request_Http();
+        $request->setBaseUrl('/app');
+        $_SERVER['REQUEST_URI'] = '/index/index';
+        $pathInfo = $request->getPathInfo();
+        $this->assertEquals('/index/index', $pathInfo);
+    }
 }
 
 // Call Zend_Controller_Request_HttpTest::main() if this source file is executed directly.

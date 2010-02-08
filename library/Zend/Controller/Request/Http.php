@@ -623,13 +623,17 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
                 $requestUri = substr($requestUri, 0, $pos);
             }
 
-            if ((null !== $baseUrl)
-                && (false === ($pathInfo = substr($requestUri, strlen($baseUrl)))))
-            {
-                // If substr() returns false then PATH_INFO is set to an empty string
+            if (null !== $baseUrl
+                && ((!empty($baseUrl) && 0 === strpos($requestUri, $baseUrl)) 
+                    || empty($baseUrl))
+                    && false === ($pathInfo = substr($requestUri, strlen($baseUrl)))
+            ){ 
+                // If substr() returns false then PATH_INFO is set to an empty string 
                 $pathInfo = '';
-            } elseif (null === $baseUrl) {
-                $pathInfo = $requestUri;
+            } elseif (null === $baseUrl 
+                    || (!empty($baseUrl) && false === strpos($requestUri, $baseUrl))
+            ) { 
+                $pathInfo = $requestUri; 
             }
         }
 

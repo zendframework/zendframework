@@ -56,10 +56,10 @@
             </para>
 
             <para>
-                Wherever you see references to <filename>zf.sh</filename> or
-                <filename>zf.bat</filename>, please substitute the absolute path to the script. On
-                Unix-like systems, you may want to use your shell's alias functionality:
-                <command>alias zf.sh=path/to/ZendFramework/bin/zf.sh</command>.
+                Wherever you see references to the command <command>zf</command>, please substitute
+                the absolute path to the script. On Unix-like systems, you may want to use your
+                shell's alias functionality: <command>alias
+                    zf.sh=path/to/ZendFramework/bin/zf.sh</command>.
             </para>
 
             <para>
@@ -76,11 +76,7 @@
         </para>
 
         <programlisting language="shell"><![CDATA[
-# Unix:
-% zf.sh create project quickstart
-
-# DOS/Windows:
-C:> zf.bat create project quickstart
+% zf create project quickstart
 ]]></programlisting>
 
         <para>
@@ -107,6 +103,7 @@ quickstart
 |               `-- index.phtml
 |-- library
 |-- public
+|   |-- .htaccess
 |   `-- index.php
 `-- tests
     |-- application
@@ -417,15 +414,117 @@ class ErrorController extends Zend_Controller_Action
 ]]></programlisting>
     </sect2>
 
+    <sect2 id="learning.quickstart.create-project.vhost">
+        <title>Create a virtual host</title>
+
+        <para>
+            For purposes of this quick start, we will assume you are using the <ulink
+                url="http://httpd.apache.org/">Apache web server</ulink>. Zend Framework works
+            perfectly well with other web servers -- including Microsoft Internet Information Server,
+            lighttpd, nginx, and more -- but most developers should be famililar with Apache at the
+            minimum, and it provides an easy introduction to Zend Framework's directory structure
+            and rewrite capabilities.
+        </para>
+
+        <para>
+            To create your vhost, you need to know the location of your
+            <filename>httpd.conf</filename> file, and potentially where other configuration files
+            are located. Some common locations:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <filename>/etc/httpd/httpd.conf</filename> (Fedora, RHEL, and others)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <filename>/etc/apache2/httpd.conf</filename> (Debian, Ubuntu, and others)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <filename>/usr/local/zend/etc/httpd.conf</filename> (Zend Server on *nix
+                    machines)
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <filename>C:\Program Files\Zend\Apache2\conf</filename> (Zend Server on Windows
+                    machines)
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <para>
+            Within your <filename>httpd.conf</filename> (or <filename>httpd-vhosts.conf</filename>
+            on some systems), you will need to do two things. First, ensure that the
+            <varname>NameVirtualHost</varname> is defined; typically, you will set it to a value of
+            "*:80". Second, define a virtual host:
+        </para>
+
+        <programlisting language="apache"><![CDATA[
+<VirtualHost *:80>
+    ServerName quickstart.local
+    DocumentRoot /path/to/quickstart/public
+
+    SetEnv APPLICATION_ENV "development"
+
+    <Directory /path/to/quickstart/public>
+        DirectoryIndex index.php
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
+]]></programlisting>
+
+        <para>
+            There are several things to note. First, note that the <varname>DocumentRoot</varname>
+            setting specifies the <filename>public</filename> subdirectory of our project; this
+            means that only files under that directory can ever be served directly by the server.
+            Second, note the <varname>AllowOverride</varname>, <varname>Order</varname>, and
+            <varname>Allow</varname> directives; these are to allow us to use
+            <filename>htacess</filename> files within our project. During development, this is a
+            good practice, as it prevents the need to constantly restart the web server as you make
+            changes to your site directives; however, in production, you should likely push the
+            content of your <filename>htaccess</filename> file into your server configuration and
+            disable this. Third, note the <varname>SetEnv</varname> directive. What we are doing
+            here is setting an environment variable for your virtual host; this variable will be
+            picked up in the <filename>index.php</filename> and used to set the
+            <constant>APPLICATION_ENV</constant> constant for our Zend Framework application. In
+            production, you can omit this directive (in which case it will default to the value
+            "production") or set it explicitly to "production".
+        </para>
+
+        <para>
+            Finally, you will need to add an entry in your <filename>hosts</filename> file
+            corresponding to the value you place in your <varname>ServerName</varname> directive. On
+            *nix-like systems, this is usually <filename>/etc/hosts</filename>; on Windows, you'll
+            typically find it in <filename>C:\WINDOWS\system32\drivers\etc</filename>. Regardless of
+            the system, the entry will look like the following:
+        </para>
+
+        <programlisting language="text"><![CDATA[
+127.0.0.1 quickstart.local
+]]></programlisting>
+
+        <para>
+            Start your webserver (or restart it), and you should be ready to go.
+        </para>
+    </sect2>
+
     <sect2 id="learning.quickstart.create-project.checkpoint">
         <title>Checkpoint</title>
 
         <para>
             At this point, you should be able to fire up your initial Zend Framework application.
-            Create a virtual host in your web server, and point its document root to your
-            application's <filename>public/</filename> subdirectory. Make sure your host's name is
-            in your DNS or hosts file, and then point your browser to it. You should be able to see
-            a welcome page at this point.
+            Point your browser to the server name you configured in the previous section; you should
+            be able to see a welcome page at this point.
         </para>
     </sect2>
 </sect1>

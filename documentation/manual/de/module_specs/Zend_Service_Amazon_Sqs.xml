@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20843 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.sqs">
     <title>Zend_Service_Amazon_Sqs</title>
@@ -56,7 +56,6 @@
                 SQS Dokumentation</ulink> für eine detailierte Beschreibung des Services. Man muß
             mit dem grundsätzlichen Konzept vertraut sein um dieses Service verwenden zu können.
         </para>
-
     </sect2>
 
     <sect2 id="zend.service.amazon.sqs.features">

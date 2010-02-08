@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 20843 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.introduction">
     <title>Einführung</title>
@@ -18,17 +18,20 @@
                     Seitenweise Verarbeitung jeglicher Daten, nicht nur relationale Datenbanken
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Nur die Ergebnisse holen die Dargestellt werden sollen
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Benutzer nicht dazu zwingen nur einen Weg der Anzeige von Daten oder der
                     Darstellung von Seitenweisen Kontrollen anzuhängen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Lose Kopplung von <classname>Zend_Paginator</classname> zu anderen Zend
@@ -40,6 +43,3 @@
         </itemizedlist>
     </para>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

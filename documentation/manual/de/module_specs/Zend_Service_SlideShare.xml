@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20843 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.slideshare">
-
     <title>Einführung</title>
 
     <para>
@@ -14,7 +13,6 @@
     </para>
 
     <sect2 id="zend.service.slideshare.basicusage">
-
         <title>Mit Zend_Service_SlideShare beginnen</title>
 
         <para>
@@ -40,11 +38,9 @@ $ss = new Zend_Service_SlideShare('APIKEY',
                                   'USERNAME',
                                   'PASSWORD');
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.service.slideshare.slideshowobj">
-
         <title>Das SlideShow Objekt</title>
 
         <para>
@@ -195,13 +191,11 @@ class Zend_Service_SlideShare_SlideShow {
 ]]></programlisting>
 
         <note>
-
             <para>
                 Die obige Pseudo-Klasse zeigt nur die Methoden welche von End-Benutzer
                 Entwicklern verwendet werden sollten. Andere vorhandene Methoden sind
                 intern für die Komponente.
             </para>
-
         </note>
 
         <para>
@@ -209,11 +203,9 @@ class Zend_Service_SlideShare_SlideShow {
             diese Daten Klasse sehr oft verwendet um nachzusehen oder neue Slideshows zu oder
             von einem Webservice hinzuzufügen.
         </para>
-
     </sect2>
 
     <sect2 id="zend.service.slideshare.getslideshow">
-
         <title>Empfangen einer einzelnen Slideshow</title>
 
         <para>
@@ -238,11 +230,9 @@ $slideshow = $ss->getSlideShow(123456);
 print "Slide Show Titel: {$slideshow->getTitle()}<br/>\n";
 print "Anzahl an Besuchen: {$slideshow->getNumViews()}<br/>\n";
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.service.slideshare.getslideshowlist">
-
         <title>Empfangen von Gruppen von Slideshows</title>
 
         <para>
@@ -316,11 +306,9 @@ foreach($ss_user as $slideshow) {
    print "Slide Show Titel: {$slideshow->getTitle}<br/>\n";
 }
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.service.slideshare.caching">
-
         <title>Zend_Service_SlideShare Caching Policy</title>
 
         <para>
@@ -351,11 +339,9 @@ $ss->setCacheObject($cache);
 
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 ]]></programlisting>
-
     </sect2>
 
     <sect2 id="zend.service.slideshare.httpclient">
-
         <title>Das Verhalten des HTTP Clients ändern</title>
 
         <para>
@@ -378,7 +364,5 @@ $ss = new Zend_Service_SlideShare('APIKEY',
 $ss->setHttpClient($client);
 $ss_user = $ss->getSlideShowsByUser('username', $starting_offset, $limit);
 ]]></programlisting>
-
     </sect2>
-
 </sect1>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20192 -->
+<!-- EN-Revision: 20843 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.livedocx">
     <title>Zend_Service_LiveDocx</title>
@@ -10,11 +10,11 @@
         <para>
             LiveDocx ist ein <acronym>SOAP</acronym>-Service, der es Entwicklern erlaubt, MS Word
             Dokumente zu erstellen, indem strukturierte Daten von PHP mit einem Template kombiniert
-            werden, die in einer MS Word-kompatiblen Anwendung erstellt wurden. Das resultierende Dokument kann
-            als <acronym>PDF</acronym>, <acronym>DOCX</acronym>, <acronym>DOC</acronym>,
-            <acronym>HTML</acronym> oder <acronym>RTF</acronym> Datei gespeichert werden. LiveDocx
-            implementiert <ulink url="http://en.wikipedia.org/wiki/Mail_merge">Mail-Merge</ulink>
-            in PHP.
+            werden, die in einer MS Word-kompatiblen Anwendung erstellt wurden. Das resultierende
+            Dokument kann als <acronym>PDF</acronym>, <acronym>DOCX</acronym>,
+            <acronym>DOC</acronym>, <acronym>HTML</acronym> oder <acronym>RTF</acronym> Datei
+            gespeichert werden. LiveDocx implementiert <ulink
+                url="http://en.wikipedia.org/wiki/Mail_merge">Mail-Merge</ulink> in PHP.
         </para>
 
         <para>
@@ -43,24 +43,28 @@
                     kommen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <ulink url="http://www.phplivedocx.org/">
                     <classname>Zend_Service_LiveDocx</classname> Blog und Webseite</ulink>.
                </para>
             </listitem>
+
             <listitem>
                 <para>
                     <ulink url="http://www.livedocx.com/pub/documentation/api.aspx">
                     LiveDocx SOAP API Dokumentation</ulink>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <ulink url="https://api.livedocx.com/1.2/mailmerge.asmx?wsdl">
                     LiveDocx WSDL</ulink>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <ulink url="https://www.livedocx.com/">LiveDocx Blog und Webseite</ulink>.
@@ -424,8 +428,9 @@ file_put_contents('document.pdf', $document);
 
             <para>
                 <classname>Zend_Service_LiveDocx_MailMerge</classname> erlaubt es Entwicklern eine
-                beliebige Anzahl an Text-Feldern in ein Template einzufügen. Diese Text-Felder werden
-                mit Daten gefüllt, wenn <emphasis>createDocument()</emphasis> aufgerufen wird.
+                beliebige Anzahl an Text-Feldern in ein Template einzufügen. Diese Text-Felder
+                werden mit Daten gefüllt, wenn <emphasis>createDocument()</emphasis> aufgerufen
+                wird.
             </para>
 
             <para>
@@ -607,8 +612,8 @@ file_put_contents('document.pdf', $document);
 
             <para>
                 <varname>$fromPage</varname> ist die untere Grenze der Seitenzahl des Bereichs an
-                Seiten, die als Bilder zurückgegeben werden sollen und <varname>$toPage</varname> ist
-                die obere Grenze der Seitenzahlen. <varname>$zoomFactor</varname> ist die Größe
+                Seiten, die als Bilder zurückgegeben werden sollen und <varname>$toPage</varname>
+                ist die obere Grenze der Seitenzahlen. <varname>$zoomFactor</varname> ist die Größe
                 der Bilder, als Prozentwert, relativ zur originalen Seitengröße. Der Bereich dieses
                 Parameters ist von 10 bis 400. <varname>$format</varname> ist das Format des
                 Bildes welches von dieser Methode zurückgegeben wird. Die unterstützten Formate
@@ -715,12 +720,12 @@ $phpLiveDocx->setLocalTemplate('./template.docx');
 ]]></programlisting>
 
             <para>
-                Im Falle, dass ein Template remote gespeichert ist, wird es nur einmal auf den Server
-                geladen und anschließend bei allen nachfolgenden Anfragen darauf referenziert.
-                Natürlich ist es viel schneller, als ein lokales Template zu verwenden, da das
-                Template nicht bei jeder Anfrage übertragen werden muss. Für Anwendungen bei denen
-                die Geschwindigkeit kritisch ist, wird es empfohlen die Remote-Template Methode zu
-                verwenden.
+                Im Falle, dass ein Template remote gespeichert ist, wird es nur einmal auf den
+                Server geladen und anschließend bei allen nachfolgenden Anfragen darauf
+                referenziert. Natürlich ist es viel schneller, als ein lokales Template zu
+                verwenden, da das Template nicht bei jeder Anfrage übertragen werden muss. Für
+                Anwendungen bei denen die Geschwindigkeit kritisch ist, wird es empfohlen die
+                Remote-Template Methode zu verwenden.
             </para>
 
             <para>
@@ -766,8 +771,8 @@ $phpLiveDocx->setRemoteTemplate('template.docx');
                 <title>Ein Array an Feldnamen vom Template erhalten</title>
 
                 <para>
-                    Der folgende Code gibt ein Array aller Feldnamen im
-                    spezifizierten Template zurück und zeigt diese an. Diese Funktionalität ist nützlich, wenn man eine
+                    Der folgende Code gibt ein Array aller Feldnamen im spezifizierten Template
+                    zurück und zeigt diese an. Diese Funktionalität ist nützlich, wenn man eine
                     Anwendung erstellt, in welcher der End-Benutzer das Template aktualisieren kann.
                 </para>
 
@@ -823,8 +828,8 @@ foreach ($blockNames as $blockName) {
                 </title>
 
                 <para>
-                    Der folgende Code zeigt ein Array aller auf dem Server
-                    installierten Schriftarten an. Diese Methode kann verwendet werden, um eine Liste
+                    Der folgende Code zeigt ein Array aller auf dem Server installierten
+                    Schriftarten an. Diese Methode kann verwendet werden, um eine Liste
                     von Schriftarten anzuzeigen, welche in einem Template verwendet werden können.
                     Das ist nützlich, um den Endbenutzer über die auf dem Server installierten
                     Schriften zu informieren, da nur diese Schriftarten in einem Template verwendet
@@ -923,6 +928,3 @@ Zend_Debug::dump($phpLiveDocx->getImageFormats());
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 tw=100 et:
--->

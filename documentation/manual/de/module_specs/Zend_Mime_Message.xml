@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20843 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.message">
     <title>Zend_Mime_Message</title>
@@ -22,6 +22,7 @@
 
     <sect2 id="zend.mime.message.instantiation">
         <title>Instanziierung</title>
+
         <para>
             Es gibt keinen expliziten Konstruktor für <classname>Zend_Mime_Message</classname>.
         </para>
@@ -103,6 +104,3 @@
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

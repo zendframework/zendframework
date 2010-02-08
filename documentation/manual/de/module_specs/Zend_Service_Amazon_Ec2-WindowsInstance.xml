@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20843 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.windows.instance">
     <title>Zend_Service_Amazon_Ec2: Windows Instanzen</title>
@@ -16,6 +16,7 @@
                 verwendet werden.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Administratives Passwort—Um auf Windows Instanzen das erste Mal zugreifen zu
@@ -23,6 +24,7 @@
                 Befehl verwendet wird.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Vereinfachtes Bündeln- Um eine Windows Instanz zu bündeln muß ein einzelnes
@@ -41,6 +43,7 @@
         Beispiel benötigen Microsoft Exchange Server und Microsoft Sharepoint Server Windows mit
         Authentifizierungs Services.
     </para>
+
     <note>
         <para>
             Um damit zu beginnen Windows Instanzen zu verwenden ist es empfohlen die
@@ -55,18 +58,10 @@
     </para>
 
     <itemizedlist>
-        <listitem>
-            <para>Windows Authentifiziert (32-bit)</para>
-        </listitem>
-        <listitem>
-            <para>Windows Authentifiziert (64-bit)</para>
-        </listitem>
-        <listitem>
-            <para>Windows Anonym (32-bit)</para>
-        </listitem>
-        <listitem>
-            <para>Windows Anonym (64-bit)</para>
-        </listitem>
+        <listitem><para>Windows Authentifiziert (32-bit)</para></listitem>
+        <listitem><para>Windows Authentifiziert (64-bit)</para></listitem>
+        <listitem><para>Windows Anonym (32-bit)</para></listitem>
+        <listitem><para>Windows Anonym (64-bit)</para></listitem>
     </itemizedlist>
 
     <para>
@@ -87,12 +82,14 @@
                 Instanz erstellt wurden das neue Passwort verwenden.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Konfiguriert den Computernamen auf den internen DNS Namen. Um den internen DNS
                 Namen zu ermitteln, siehe Verwendung von Instanz Adressierung.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 Sendet die letzten drei System- und Anwendungsfehler vom Eventlog an die Konsole.
@@ -107,25 +104,30 @@
 
         <example id="zend.service.amazon.ec2.windows.instance.operations.bundle">
             <title>Bündelt eine Amazon EC2 Instanz auf der Windows läuft</title>
+
             <para>
                 <methodname>bundle()</methodname> hat drei benötigte Parameter und einen optionalen
             </para>
+
             <itemizedlist>
                 <listitem>
                      <para><emphasis>instanceId</emphasis> Die Instanz die man bündeln will</para>
                 </listitem>
+
                 <listitem>
                      <para>
                          <emphasis>s3Bucket</emphasis> Wo man will das die <acronym>AMI</acronym>
                          auf S3 lebt
                      </para>
                 </listitem>
+
                 <listitem>
                      <para>
                         <emphasis>s3Prefix</emphasis> Der Präfix den man dem AMI auf S3 zuordnen
                         will
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>uploadExpiration</emphasis> Der Ablauf der Upload Policy. Amazon
@@ -134,29 +136,33 @@
                     </para>
                 </listitem>
             </itemizedlist>
+
             <para>
                 <methodname>bundle()</methodname> gibt ein multidimensionales Array zurück welches
                 die folgenden Werte enthält: instanceId, bundleId, state, startTime, updateTime,
                 progress, s3Bucket und s3Prefix.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->bundle('instanceId', 's3Bucket', 's3Prefix');
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.amazon.ec2.windows.instance.operations.describe">
             <title>Beschreibt die aktuellen Bündelungstasks</title>
+
             <para>
                 <methodname>describeBundle()</methodname> Beschreibt die aktuellen Bündelungstasks
             </para>
+
             <para>
                 <methodname>describeBundle()</methodname> gibt ein multidimensionales Array zurück
                 welches die folgenden Werte enthält: instanceId, bundleId, state, startTime,
                 updateTime, progress, s3Bucket und s3Prefix.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
@@ -166,20 +172,22 @@ $return = $ec2_instance->describeBundle('bundleId');
 
         <example id="zend.service.amazon.ec2.windows.instance.operations.cancel">
             <title>Beendet eine Amazon EC2 Bündel-Operation</title>
+
             <para>
                 <methodname>cancelBundle()</methodname> Beendet eine Amazon EC2 Bündel-Operation
             </para>
+
             <para>
                 <methodname>cancelBundle()</methodname> gibt ein multidimensionales Array zurück
                 welches die folgenden Werte enthält: instanceId, bundleId, state, startTime,
                 updateTime, progress, s3Bucket und s3Prefix.
             </para>
+
             <programlisting language="php"><![CDATA[
 $ec2_instance = new Zend_Service_Amazon_Ec2_Instance_Windows('aws_key',
                                                      'aws_secret_key');
 $return = $ec2_instance->cancelBundle('bundleId');
 ]]></programlisting>
-
         </example>
     </sect2>
 </sect1>

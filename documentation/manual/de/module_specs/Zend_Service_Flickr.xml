@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19568 -->
+<!-- EN-Revision: 20843 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.flickr">
     <title>Zend_Service_Flickr</title>
@@ -165,22 +165,26 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
         <para>
             Die folgenden Klassen werden durch <methodname>tagSearch()</methodname> und
             <methodname>userSearch()</methodname> zurückgegeben:
+
             <itemizedlist>
                 <listitem>
                     <para>
-                        <link linkend="zend.service.flickr.classes.resultset"><classname>Zend_Service_Flickr_ResultSet</classname></link>
+                        <link
+                            linkend="zend.service.flickr.classes.resultset"><classname>Zend_Service_Flickr_ResultSet</classname></link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <link linkend="zend.service.flickr.classes.result"><classname>Zend_Service_Flickr_Result</classname></link>
+                        <link
+                            linkend="zend.service.flickr.classes.result"><classname>Zend_Service_Flickr_Result</classname></link>
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <link linkend="zend.service.flickr.classes.image"><classname>Zend_Service_Flickr_Image</classname></link>
+                        <link
+                            linkend="zend.service.flickr.classes.image"><classname>Zend_Service_Flickr_Image</classname></link>
                     </para>
                 </listitem>
             </itemizedlist>
@@ -221,11 +225,13 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                                 <entry>int</entry>
                                 <entry>Gesamt Anzahl aller gefundenen Ergebnisse</entry>
                             </row>
+
                             <row>
                                 <entry>totalResultsReturned</entry>
                                 <entry>int</entry>
                                 <entry>Gesamt Anzahl der zurückgegebenen Ergebnisse</entry>
                             </row>
+
                             <row>
                                 <entry>firstResultPosition</entry>
                                 <entry>int</entry>
@@ -235,8 +241,10 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                     </tgroup>
                 </table>
             </sect4>
+
             <sect4 id="zend.service.flickr.classes.resultset.totalResults">
                 <title>Zend_Service_Flickr_ResultSet::totalResults()</title>
+
                 <para>
                     <methodsynopsis>
                         <type>int</type>
@@ -244,23 +252,30 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                         <void />
                     </methodsynopsis>
                 </para>
+
                 <para>
                     Gibt die Gesamt Anzahl der Ergebnisse für dieses Ergebnis Set zurück.
                 </para>
+
                 <para>
                     <link linkend="zend.service.flickr.classes">Zurück zur Liste der Klassen</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.flickr.classes.result">
             <title>Zend_Service_Flickr_Result</title>
+
             <para>
                 Ein einzelnes Bild Ergebnis von einer Flickr Suche
             </para>
+
             <sect4 id="zend.service.flickr.classes.result.properties">
                 <title>Eigenschaften</title>
+
                 <table id="zend.service.flickr.classes.result.properties.table-1">
                     <title>Zend_Service_Flickr_Result Eigenschaften</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -269,145 +284,193 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>id</entry>
                                 <entry>string</entry>
                                 <entry>Image ID</entry>
                             </row>
+
                             <row>
                                 <entry>owner</entry>
                                 <entry>string</entry>
+
                                 <entry>
                                     Die <acronym>NSID</acronym> des Eigentümers des Photos.
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>secret</entry>
                                 <entry>string</entry>
+
                                 <entry>
                                     Ein Schlüssel welcher beim <acronym>URL</acronym> Aufbau benutzt
                                     wird.
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>server</entry>
                                 <entry>string</entry>
+
                                 <entry>
                                     Der Servername welcher beim <acronym>URL</acronym> Aufbau
                                     benutzt wird.
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>title</entry>
                                 <entry>string</entry>
                                 <entry>Die Überschrift des Bildes.</entry>
                             </row>
+
                             <row>
                                 <entry>ispublic</entry>
                                 <entry>string</entry>
                                 <entry>Ist das Bild öffentlich ?</entry>
                             </row>
+
                             <row>
                                 <entry>isfriend</entry>
                                 <entry>string</entry>
+
                                 <entry>
                                     Das Bild ist sichtbar, weil man ein Freund des Eigentümers ist.
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>isfamily</entry>
                                 <entry>string</entry>
+
                                 <entry>
                                     Das Bild ist sichtbar, weil man Familienmitglied des Eigentümers
                                     ist.
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>license</entry>
                                 <entry>string</entry>
                                 <entry>Die Lizenz des Bildes ist erreichbar unter.</entry>
                             </row>
+
                             <row>
                                 <entry>dateupload</entry>
                                 <entry>string</entry>
                                 <entry>Das Datum an dem das Bild hochgeladen wurde.</entry>
                             </row>
+
                             <row>
                                 <entry>datetaken</entry>
                                 <entry>string</entry>
                                 <entry>Das Datum an dem das Bild gemacht wurde.</entry>
                             </row>
+
                             <row>
                                 <entry>ownername</entry>
                                 <entry>string</entry>
                                 <entry>Der Bildschirmname des Eigentümers.</entry>
                             </row>
+
                             <row>
                                 <entry>iconserver</entry>
                                 <entry>string</entry>
+
                                 <entry>
                                     Der Server welcher benutzt wurde um die Icon
                                     <acronym>URL</acronym> zu erstellen.
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>Square</entry>
+
                                 <entry>
-                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
                                 </entry>
+
                                 <entry>Ein 75x75 Thumbnail des Bildes.</entry>
                             </row>
+
                             <row>
                                 <entry>Thumbnail</entry>
+
                                 <entry>
-                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
                                 </entry>
+
                                 <entry>Ein 100 Pixel Thumbnail des Bildes.</entry>
                             </row>
+
                             <row>
                                 <entry>Small</entry>
+
                                 <entry>
-                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
                                 </entry>
+
                                 <entry>Eine 240 Pixel Version des Bildes.</entry>
                             </row>
+
                             <row>
                                 <entry>Medium</entry>
+
                                 <entry>
-                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
                                 </entry>
+
                                 <entry>Eine 500 Pixel Version des Bildes.</entry>
                             </row>
+
                             <row>
                                 <entry>Large</entry>
+
                                 <entry>
-                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
                                 </entry>
+
                                 <entry>Eine 640 Pixel Version des Bildes.</entry>
                             </row>
+
                             <row>
                                 <entry>Original</entry>
+
                                 <entry>
-                                    <link linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
+                                    <link
+                                        linkend="zend.service.flickr.classes.image">Zend_Service_Flickr_Image</link>
                                 </entry>
+
                                 <entry>Das Original Bild.</entry>
                             </row>
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.flickr.classes">Zurück zur Liste der Klassen</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.flickr.classes.image">
             <title>Zend_Service_Flickr_Image</title>
             <para>Repräsentiert ein Bild welches durch eine Flickr Suche zurückgegeben wird.</para>
+
             <sect4 id="zend.service.flickr.classes.image.properties">
                 <title>Eigenschaften</title>
+
                 <table id="zend.service.flickr.classes.image.properties.table-1">
                     <title>Zend_Service_Flickr_Image Eigenschaften</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -416,25 +479,30 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>uri</entry>
                                 <entry>string</entry>
                                 <entry>URI des Original Bildes</entry>
                             </row>
+
                             <row>
                                 <entry>clickUri</entry>
                                 <entry>string</entry>
+
                                 <entry>
                                     Klickbare <acronym>URI</acronym> (z.B. die Flickr Seite) für das
                                     Bild
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>width</entry>
                                 <entry>int</entry>
                                 <entry>Breite des Bildes</entry>
                             </row>
+
                             <row>
                                 <entry>height</entry>
                                 <entry>int</entry>
@@ -443,6 +511,7 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.flickr.classes">Zurück zur Liste der Klassen</link>
                 </para>
@@ -450,6 +519,3 @@ echo "<a href=\"$image->clickUri\">Klicken für das Bild</a>\n";
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

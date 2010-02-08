@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.part">
     <title>Zend_Mime_Part</title>
 
     <sect2 id="zend.mime.part.introduction">
-      <title>Einführung</title>
+        <title>Einführung</title>
 
-      <para>Diese Klasse repräsentiert einen einzelnen Abschnitte einer <acronym>MIME</acronym>
-      Nachricht. Sie enthält den aktuellen Inhalt des Abschnitts der Nachricht und zusätzlich
-      Informationen über Ihre Verschlüsselung, den Typ und den originalen Dateinamen.
-      Sie stellt ausserdem eine Methode, für die Erzeugung eines Strings aus den
-      in Ihr gespeicherten Daten, zur Verfügung. <classname>Zend_Mime_Part</classname> Objekte
-      können zu <link linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>
-      hinzugefügt werden, um zu einer kompletten mehrteiligen Nachricht verknüpft
-      zu werden.</para>
+        <para>
+            Diese Klasse repräsentiert einen einzelnen Abschnitte einer <acronym>MIME</acronym>
+            Nachricht. Sie enthält den aktuellen Inhalt des Abschnitts der Nachricht und zusätzlich
+            Informationen über Ihre Verschlüsselung, den Typ und den originalen Dateinamen.
+            Sie stellt ausserdem eine Methode, für die Erzeugung eines Strings aus den
+            in Ihr gespeicherten Daten, zur Verfügung. <classname>Zend_Mime_Part</classname> Objekte
+            können zu <link
+                linkend="zend.mime.message"><classname>Zend_Mime_Message</classname></link>
+            hinzugefügt werden, um zu einer kompletten mehrteiligen Nachricht verknüpft
+            zu werden.
+        </para>
     </sect2>
 
-  <sect2 id="zend.mime.part.instantiation">
-    <title>Instanziierung</title>
+    <sect2 id="zend.mime.part.instantiation">
+        <title>Instanziierung</title>
 
-    <para><classname>Zend_Mime_Part</classname> wird instanziiert mit einem String welcher den
-    Inhalt des neuen Abschnitts repräsentiert. Der Typ wird angenommen mit OCTET-STREAM,
-    die Verschlüsselung mit 8Bit. Nach der Instanziierung einer
-    <classname>Zend_Mime_Part</classname> kann die Meta Informationen gesetzt werden durch
-    direkten Zugriff auf die Attribute:</para>
+        <para>
+            <classname>Zend_Mime_Part</classname> wird instanziiert mit einem String welcher den
+            Inhalt des neuen Abschnitts repräsentiert. Der Typ wird angenommen mit OCTET-STREAM,
+            die Verschlüsselung mit 8Bit. Nach der Instanziierung einer
+            <classname>Zend_Mime_Part</classname> kann die Meta Informationen gesetzt werden durch
+            direkten Zugriff auf die Attribute:
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 public $type = Zend_Mime::TYPE_OCTETSTREAM;
 public $encoding = Zend_Mime::ENCODING_8BIT;
 public $id;
@@ -38,75 +43,79 @@ public $boundary;
 public $location;
 public $language;
 ]]></programlisting>
-  </sect2>
+    </sect2>
 
-  <sect2 id="zend.mime.part.methods">
-    <title>Methoden für das übertragen der des Teils der Nachricht zu einem String</title>
+    <sect2 id="zend.mime.part.methods">
+        <title>Methoden für das übertragen der des Teils der Nachricht zu einem String</title>
 
-    <para><methodname>getContent()</methodname> gibt den verschlüsselten Inhalt des MimeParts als
-    String zurück, wobei die Verschlüsselung verwendet wird welche im Attribut
-    $encoding definiert wurde. Gültige Werte sind Zend_Mime::ENCODING_* Zeichensatz Konvertierungen
-    werden nicht durchgeführt.</para>
+        <para>
+            <methodname>getContent()</methodname> gibt den verschlüsselten Inhalt des MimeParts als
+            String zurück, wobei die Verschlüsselung verwendet wird welche im Attribut
+            $encoding definiert wurde. Gültige Werte sind Zend_Mime::ENCODING_* Zeichensatz
+            Konvertierungen werden nicht durchgeführt.
+        </para>
 
-    <para>
-        <methodname>getHeaders()</methodname> gibt den Mime-Headers für den
-        MimePart zurück, erzeugt anhand der Informationen der öffentlich
-        zugänglichen Attribute. Die Attribute des Objektes müssen korrekt gesetzt sein,
-        bevor diese Methode aufgerufen wird.
-        <itemizedlist>
-            <listitem>
-                <para>
-                    <varname>$charset</varname> muß auf den aktuellen Charset des Inhaltes gesetzt
-                    werden, wenn dieser ein Texttyp ist (Text oder HTML).
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <varname>$id</varname> kann gesetzt werden für die Erkennung einer Content-ID
-                    für Inline Grafiken in einer HTML Nachricht.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <varname>$filename</varname>
-                    enthält den Namen welche die Datei bekommt wenn sie heruntergeladen wird.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <varname>$disposition</varname> definiert ob die Datei als Anhang behandelt
-                    werden soll, oder ob sie in einer (HTML-) Nachricht verwendet wird (Inline).
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <varname>$description</varname>
-                    wird nur zur Zweck der Information verwendet.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <varname>$boundary</varname>
-                    definiert den String als umgebend.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <varname>$location</varname>
-                    kann als Ressource <acronym>URI</acronym> verwendet werden, der eine Relation
-                    zum Inhalt hat.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <varname>$language</varname>
-                    definiert die Sprache des Inhalts.
-                </para>
-            </listitem>
-        </itemizedlist>
-    </para>
-  </sect2>
+        <para>
+            <methodname>getHeaders()</methodname> gibt den Mime-Headers für den
+            MimePart zurück, erzeugt anhand der Informationen der öffentlich
+            zugänglichen Attribute. Die Attribute des Objektes müssen korrekt gesetzt sein,
+            bevor diese Methode aufgerufen wird.
+
+            <itemizedlist>
+                <listitem>
+                    <para>
+                        <varname>$charset</varname> muß auf den aktuellen Charset des Inhaltes
+                        gesetzt werden, wenn dieser ein Texttyp ist (Text oder HTML).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <varname>$id</varname> kann gesetzt werden für die Erkennung einer
+                        Content-ID für Inline Grafiken in einer HTML Nachricht.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <varname>$filename</varname> enthält den Namen welche die Datei bekommt wenn
+                        sie heruntergeladen wird.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <varname>$disposition</varname> definiert ob die Datei als Anhang behandelt
+                        werden soll, oder ob sie in einer (HTML-) Nachricht verwendet wird (Inline).
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <varname>$description</varname> wird nur zur Zweck der Information
+                        verwendet.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <varname>$boundary</varname> definiert den String als umgebend.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <varname>$location</varname> kann als Ressource <acronym>URI</acronym>
+                        verwendet werden, der eine Relation zum Inhalt hat.
+                    </para>
+                </listitem>
+
+                <listitem>
+                    <para>
+                        <varname>$language</varname> definiert die Sprache des Inhalts.
+                    </para>
+                </listitem>
+            </itemizedlist>
+        </para>
+    </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

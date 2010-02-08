@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
+<!-- EN-Revision: 20842 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
@@ -79,7 +79,9 @@
             <para>
                 <emphasis><property>plugins</property></emphasis>: Array von Front Controller Plugin
                 Klassennamen. Die Ressource wird jede Klasse instanziieren (ohne Contructor
-                Argumente) und die Instanz dann mit dem Front Controller registrieren.
+                Argumente) und die Instanz dann mit dem Front Controller registrieren. Wenn man ein
+                Plugin mit einem speziellen Stackindex registriert muss man ein Array mit den zwei
+                Schlüsseln <property>class</property> und <property>stackIndex</property> angeben.
             </para>
         </listitem>
 
@@ -116,6 +118,8 @@ resources.frontController.defaultModule = "static"
 resources.frontController.baseUrl = "/subdir"
 resources.frontController.plugins.foo = "My_Plugin_Foo"
 resources.frontController.plugins.bar = "My_Plugin_Bar"
+resources.frontController.plugins.baz.class = "My_Plugin_Baz"
+resources.frontController.plugins.baz.stackIndex = 123
 resources.frontController.env = APPLICATION_ENV
 ]]></programlisting>
     </example>

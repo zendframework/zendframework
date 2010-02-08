@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20787 -->
+<!-- EN-Revision: 20832 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-layout">
     <title>Ein Layout erstellen</title>
@@ -45,9 +45,20 @@
 
     <para>
         Um mit Zend_Layout zu beginnen müssen wir als erstes die Bootstrap informieren das Sie die
-        <classname>Layout</classname> Ressource verwenden soll. Das kann getan werden indem die
-        folgende Linie zur Datei <filename>application/configs/application.ini</filename> im
-        Abschnitt <constant>production</constant> hinzugefügt wird:
+        <classname>Layout</classname> Ressource verwenden soll. Das kann getan werden indem der
+        Befehl <command>zf enable layout</command> verwendet wird:
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf enable layout
+Layouts have been enabled, and a default layout created at
+application/layouts/scripts/layout.phtml
+A layout entry has been added to the application config file.
+]]></programlisting>
+
+    <para>
+        Wie vom Kommando notiert wird <filename>application/configs/application.ini</filename>
+        aktualisiert und enthält jetzt das folgende im Abschnitt <constant>production</constant>:
     </para>
 
     <programlisting language="ini"><![CDATA[
@@ -71,7 +82,9 @@ phpSettings.display_errors = 0
 includePaths.library = APPLICATION_PATH "/../library"
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
+appnamespace = "Application"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 0
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 
 [staging : production]
@@ -87,8 +100,9 @@ phpSettings.display_errors = 1
 
     <para>
         Diese Direktive sagt der Anwendung das Sie nach Layout View Skripten unter
-        <filename>application/layouts/scripts</filename> nachschauen soll. Jetzt müssen diese
-        Verzeichnisse erstellt werden.
+        <filename>application/layouts/scripts</filename> nachschauen soll. Wenn man den
+        Verzeichnisbaum betrachtet sieht man das dieses Verzeichnis jetzt, zusammen mit der Datei
+        <filename>layout.phtml</filename>, erstellt wurde.
     </para>
 
     <para>

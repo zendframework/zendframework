@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.common">
     <title>Übliche Seiten Features</title>
@@ -26,6 +26,7 @@
 
     <table id="zend.navigation.pages.common.options">
         <title>Übliche Seiten Optionen</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -35,55 +36,64 @@
                     <entry>Beschreibung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><code>label</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
-                    <entry>
-                        Ein Seitenlabel, wie 'Home' oder 'Blog'.
-                    </entry>
+                    <entry>Ein Seitenlabel, wie 'Home' oder 'Blog'.</entry>
                 </row>
+
                 <row>
                     <entry><code>id</code></entry>
                     <entry><type>String</type> | <code>int</code></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Ein Id Tag/Attribut das verwendet werden kann wenn die Seite dargestellt
                         wird, typischerweise in einem Anker Element.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>class</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Eine <acronym>CSS</acronym> Klasse die verwendet werden kann wenn die Seite
                         dargestellt wird, typischerweise ein Anker Element.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>title</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Eine kurze Seitenbeschreibung, typischerweise für die Verwendung als
                         <code>title</code> Attribut in einem Anker.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>target</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Spezifiziert ein Ziel das für die Seite verwendet werden kann,
                         typischerweise ein Anker Element.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>rel</code></entry>
                     <entry><type>Array</type></entry>
                     <entry><methodname>array()</methodname></entry>
+
                     <entry>
                         Spezifiziert die Weiterleitungs-Relation für die Seite. Jedes Element im
                         Array ist ein Schlüssel-Wert Paar, wobei der Schlüssel den Relation/Link
@@ -96,21 +106,27 @@
                         Link Helfer</link>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>rev</code></entry>
                     <entry><type>Array</type></entry>
                     <entry><methodname>array()</methodname></entry>
+
                     <entry>
                         Spezifiziert die Rückwärts Relation für die Seite. Arbeitet genauso wie
                         <code>rel</code>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>order</code></entry>
+
                     <entry>
                         <type>String</type> | <code>int</code> | <constant>NULL</constant>
                     </entry>
+
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Arbeitet die order für Elemente in
                         Works like order for elements in
@@ -126,13 +142,17 @@
                         hinzugefügt wurde.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>resource</code></entry>
+
                     <entry>
                         <type>String</type> | <classname>Zend_Acl_Resource_Interface</classname> |
                         <constant>NULL</constant>
                     </entry>
+
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         <acronym>ACL</acronym> Ressource die mit der Seite verknüpft werden soll.
                         Lesen Sie mehr im <link
@@ -140,10 +160,12 @@
                             <acronym>ACL</acronym> Integration in View Helfern</link>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>privilege</code></entry>
                     <entry><type>String</type> | <constant>NULL</constant></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         <acronym>ACL</acronym> Privileg das mit der Seite assoziiert werden soll.
                         Lesen Sie mehr im <link
@@ -151,10 +173,12 @@
                             <acronym>ACL</acronym> Integration in View Helfern</link>.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>active</code></entry>
                     <entry><code>bool</code></entry>
                     <entry><constant>FALSE</constant></entry>
+
                     <entry>
                         Ob die Seite für die aktuelle Anfrage als aktiv betrachtet werden soll.
                         Wenn active <constant>FALSE</constant> ist oder nicht angegeben wird, werden
@@ -162,22 +186,28 @@
                         prüfen wenn <code>$page->isActive()</code> aufgerufen wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>visible</code></entry>
                     <entry><code>bool</code></entry>
                     <entry><constant>TRUE</constant></entry>
+
                     <entry>
                         Ob die Seite für den Benutzer sichtbar sein soll, oder nur ein Teil einer
                         Struktur ist. Unsichtbare Seiten werden von View Helfern übersprungen.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>pages</code></entry>
+
                     <entry>
                         <type>Array</type> | <classname>Zend_Config</classname> |
                         <constant>NULL</constant>
                     </entry>
+
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Kind Seiten der Seite. Das sollte ein <type>Array</type> oder
                         <classname>Zend_Config</classname> Objekt sein das entweder Seiten Optionen
@@ -192,6 +222,7 @@
 
     <note>
         <title>Eigene Eigenschaften</title>
+
         <para>
             Alle Seiten unterstützen das Setzen und Empfangen von eigenen Eigenschaften durch
             Verwendung der magischen Methoden <methodname>__set($name, $value)</methodname>,
@@ -201,6 +232,7 @@
             was bedeutet das Seiten erfolgreich serialisiert/de-serialisiert werden können, selbst
             wenn die Seiten Eigenschaften enthalten die nicht nativ in der Seitenklasse sind.
         </para>
+
         <para>
             Sowohl native als auch eigene Eigenschaften können gesetzt werden indem
             <code>$page->set($name, $value)</code> verwendet und empfangen indem

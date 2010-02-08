@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20482 -->
+<!-- EN-Revision: 20832 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-form">
     <title>Erstellen eines Formulars</title>
@@ -10,10 +10,20 @@
     </para>
 
     <para>
-        Unsere erste Arbeit ist die Erstellung der aktuellen Formularklasse. Zuerst muss das
-        Verzeichnis <filename>application/forms/</filename> erstellt werden. Dieses Verzeichnis
-        enthält Formularklassen für die Anwendung. Als nächstes Erstellen wir eine Formularklasse
-        in <filename>application/forms/Guestbook.php</filename>:
+        Unsere erste Arbeit ist die Erstellung der aktuellen Formularklasse. Um eine leere
+        Fomularklasse zu erstellen muss folgendes ausgeführt werden:
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf create form Guestbook
+Creating a form at application/forms/Guestbook.php
+Updating project profile '.zfproject.xml'
+]]></programlisting>
+
+    <para>
+        Dies erstellt das Verzeichnis <filename>application/forms/</filename> mit der
+        Klassendatei <filename>Guestbook.php</filename>. Diese Datei ist zu öffnen und so zu
+        aktualisieren das Sie wie folgt aussieht:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -85,11 +95,13 @@ class Application_Form_Guestbook extends Zend_Form
     </para>
 
     <programlisting language="shell"><![CDATA[
-# Unix-artige Systeme:
-% zf.sh create action sign guestbook
-
-# DOS/Windows:
-C:> zf.bat create action sign guestbook
+% zf create action sign Guestbook
+Creating an action named sign inside controller
+    at application/controllers/GuestbookController.php
+Updating project profile '.zfproject.xml'
+Creating a view script for the sign action method
+    at application/views/scripts/guestbook/sign.phtml
+Updating project profile '.zfproject.xml'
 ]]></programlisting>
 
     <para>

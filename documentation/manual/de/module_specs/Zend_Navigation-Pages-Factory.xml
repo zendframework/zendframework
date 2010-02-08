@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.factory">
     <title>Erstellen von Seiten durch Verwendung der Page Factory</title>
@@ -83,11 +83,11 @@ $page = Zend_Navigation_Page::factory(array(
     <example id="zend.navigation.pages.factory.example.custom">
         <title>Erstellung eines eigenen Seiten Typs durch Verwendung der Page Factory</title>
 
-     <para>
-         Um einen eigenen Seitentyp zu erstellen mit Hilfe der Verwendung der Factory, muß die
-         Option <code>type</code> verwendet werden um den Klassennamen zu spezifizieren der
-         instanziiert werden muß.
-     </para>
+        <para>
+            Um einen eigenen Seitentyp zu erstellen mit Hilfe der Verwendung der Factory, muß die
+            Option <code>type</code> verwendet werden um den Klassennamen zu spezifizieren der
+            instanziiert werden muß.
+        </para>
 
         <programlisting language="php"><![CDATA[
 class My_Navigation_Page extends Zend_Navigation_Page

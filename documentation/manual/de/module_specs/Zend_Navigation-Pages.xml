@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15103 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.navigation.pages" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Seiten</title>
@@ -14,6 +14,7 @@
                      – diese Verwenden die Klasse <classname>Zend_Navigation_Page_Mvc</classname>
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <link linkend="zend.navigation.pages.uri">URI Seiten</link>
@@ -35,5 +36,4 @@
     <xi:include href="Zend_Navigation-Pages-URI.xml" />
     <xi:include href="Zend_Navigation-Pages-Custom.xml" />
     <xi:include href="Zend_Navigation-Pages-Factory.xml" />
-
 </sect1>

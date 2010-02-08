@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20554 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.output">
     <title>Ausgabe von Maßeinheiten</title>
@@ -32,8 +32,10 @@
         <para>
             <classname>Zend_Measure</classname> unterstützt die automatische Ausgabe von
             Zeichenketten.
+
             <example id="zend.measure.output.auto.example-1">
                 <title>Automatische Ausgabe</title>
+
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
@@ -63,8 +65,10 @@ echo $unit;
         <para>
             Der Wert einer Maßeinheit kann mit <methodname>getValue()</methodname> ausgegeben
             werden.
+
             <example id="zend.measure.output.value.example-1">
                 <title>Ausgabe eines Wertes</title>
+
                 <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('de');
 $mystring = "1.234.567,89";
@@ -89,6 +93,7 @@ echo $unit->getValue();
 
         <para>
             Die Funktion <methodname>getType()</methodname> gibt die aktuelle Maßeinheit zurück.
+
             <example id="zend.measure.output.unit.example-1">
                 <title>Outputting units</title>
 

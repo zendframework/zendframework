@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.overview">
     <title>Übersicht</title>
 
     <sect2 id="zend.memory.introduction">
         <title>Einführung</title>
+
         <para>
             Die <classname>Zend_Memory</classname> Komponente ist dafür gedacht Daten in
             Systemen mit limitiertem Speicher zu Verwalten.
@@ -34,10 +35,12 @@
 
         <example id="zend.memory.introduction.example-1">
             <title>Verwenden der Zend_Memory Komponente</title>
+
             <para>
                 <methodname>Zend_Memory::factory()</methodname> instantiiert das Speichermanager
                 Objekt mit den definierten Backend Optionen.
             </para>
+
             <programlisting language="php"><![CDATA[
 // Verzeichnis in welches die getauschten Speicherblöcke geschrieben werden
 $backendOptions = array(
@@ -66,29 +69,20 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
     </sect2>
 
     <sect2 id="zend.memory.theory-of-operation">
-
         <title>Theorie der Verwendung</title>
 
         <para>
             Die <classname>Zend_Memory</classname> Komponente arbeitet mit den folgenden Konzepten:
+
             <itemizedlist>
-                <listitem>
-                    <para>Memory Manager</para>
-                </listitem>
-                <listitem>
-                    <para>Memory Container</para>
-                </listitem>
-                <listitem>
-                    <para>Verschlüsseltes Memory Objekt</para>
-                </listitem>
-                <listitem>
-                    <para>Verschiebbares Memory Objekt</para>
-                </listitem>
+                <listitem><para>Memory Manager</para></listitem>
+                <listitem><para>Memory Container</para></listitem>
+                <listitem><para>Verschlüsseltes Memory Objekt</para></listitem>
+                <listitem><para>Verschiebbares Memory Objekt</para></listitem>
             </itemizedlist>
         </para>
 
         <sect3 id="zend.memory.theory-of-operation.manager">
-
             <title>Memory Manager</title>
 
             <para>
@@ -96,11 +90,9 @@ $loadedFiles[$index3]->value[$charIndex] = '_';
                 durch Anfrage der Anwendung des Benutzers und gibt diese
                 in einem Memory Container Objekt zurück.
             </para>
-
         </sect3>
 
         <sect3 id="zend.memory.theory-of-operation.container">
-
             <title>Memory Container</title>
 
             <para>
@@ -137,11 +129,9 @@ $memObject->value = substr($memObject->value, $start, $length);
                     verwendet werden statt direkt auf die Wert Eigenschaften zuzugreifen.
                 </para>
             </note>
-
         </sect3>
 
         <sect3 id="zend.memory.theory-of-operation.locked">
-
             <title>Verschlüsselter Memory</title>
 
             <para>
@@ -149,11 +139,9 @@ $memObject->value = substr($memObject->value, $start, $length);
                 Daten welche im verschlüsselten Speicher gespeichert sind, werden
                 niemals in das Cache Backend getauscht.
             </para>
-
         </sect3>
 
         <sect3 id="zend.memory.theory-of-operation.movable">
-
             <title>Verschiebbarer Memory</title>
 
             <para>
@@ -168,9 +156,6 @@ $memObject->value = substr($memObject->value, $start, $length);
                 <xref linkend="zend.memory.memory-manager.settings.min-size" />
                 für mehr Details.
             </para>
-
         </sect3>
-
     </sect2>
-
 </sect1>

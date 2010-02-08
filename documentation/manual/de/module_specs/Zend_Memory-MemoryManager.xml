@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-manager">
     <title>Memory Manager</title>
 
     <sect2 id="zend.memory.memory-manager.creation">
-
         <title>Erstellen eines Memory Manager</title>
 
         <para>
@@ -60,11 +59,9 @@ $memoryManager = Zend_Memory::factory('None');
         <para>
             Das '<code>None</code>' Backend benötigt keine Definition von Optionen.
         </para>
-
     </sect2>
 
     <sect2 id="zend.memory.memory-manager.objects-management">
-
         <title>Memory Objekte verwalten</title>
 
         <para>
@@ -74,17 +71,16 @@ $memoryManager = Zend_Memory::factory('None');
         </para>
 
         <sect3 id="zend.memory.memory-manager.objects-management.movable">
-
             <title>Erstellung verschiebbarer Objekte</title>
 
             <para>
                 Verschiebbare Objekte (Objekte, welche verschoben werden können)
                 können erstellt werden mit Hilfe der
                 <methodname>Zend_Memory_Manager::create([$data])</methodname> Methode:
+
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting>
-
             </para>
 
             <para>
@@ -92,17 +88,16 @@ $memObject = $memoryManager->create($data);
                 die Objekt Werte zu initialisieren. Wenn das <varname>$data</varname>
                 unterdrückt wird, ist der Wert eine leere Zeichenkette.
             </para>
-
         </sect3>
 
         <sect3 id="zend.memory.memory-manager.objects-management.locked">
-
             <title>Erstellen verschlüsselter Objekte</title>
 
             <para>
                 Verschlüsselte Objekte (Objekte, welche niemals getauscht werden) können
                 erstellt werden mit Hilfe der
                 <methodname>Zend_Memory_Manager::createLocked([$data])</methodname> Methode:
+
                 <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting>
@@ -113,11 +108,9 @@ $memObject = $memoryManager->createLocked($data);
                 die Objekt Werte zu initialisieren. Wenn das <varname>$data</varname>
                 Argument unterdrückt wird, ist der Wert eine leere Zeichenkette.
             </para>
-
         </sect3>
 
         <sect3 id="zend.memory.memory-manager.objects-management.destruction">
-
             <title>Objekte vernichten</title>
 
             <para>
@@ -154,17 +147,13 @@ function foo()
             <para>
                 Das gilt für beide, verschiebbare und verschlüsselte Objekte.
             </para>
-
         </sect3>
-
     </sect2>
 
     <sect2 id="zend.memory.memory-manager.settings">
-
         <title>Memory Manager Einstellungen</title>
 
         <sect3 id="zend.memory.memory-manager.settings.memory-limit">
-
             <title>Memory Limit</title>
 
             <para>
@@ -182,6 +171,7 @@ function foo()
                 Das Memory Limit kann empfangen oder gesetzt werden durch Verwendung
                 der <methodname>getMemoryLimit()</methodname> und
                 <methodname>setMemoryLimit($newLimit)</methodname> Methoden:
+
                 <programlisting language="php"><![CDATA[
 $oldLimit = $memoryManager->getMemoryLimit(); // Memorylimit in Bytes empfangen
 $memoryManager->setMemoryLimit($newLimit);    // Memorylimit in Bytes setzen
@@ -197,11 +187,9 @@ $memoryManager->setMemoryLimit($newLimit);    // Memorylimit in Bytes setzen
                 in php.ini oder 'kein Limit' (-1) wenn '<code>memory_limit</code>' in der
                 php.ini nihct gesetzt ist.
             </para>
-
         </sect3>
 
         <sect3 id="zend.memory.memory-manager.settings.min-size">
-
             <title>MinSize</title>
 
             <para>
@@ -215,6 +203,7 @@ $memoryManager->setMemoryLimit($newLimit);    // Memorylimit in Bytes setzen
                 Man kann die minimale Größe empfangen oder setzen durch Verwendung der
                 <methodname>getMinSize()</methodname> und
                 <methodname>setMinSize($newSize)</methodname> Methoden:
+
                 <programlisting language="php"><![CDATA[
 $oldMinSize = $memoryManager->getMinSize();  // MinSize in Bytes empfangen
 $memoryManager->setMinSize($newSize);        // MinSize Limit in Bytes setzen
@@ -224,9 +213,6 @@ $memoryManager->setMinSize($newSize);        // MinSize Limit in Bytes setzen
             <para>
                 Die standardmäßige Wert für die minimale Größe ist 16KB (16384 bytes).
             </para>
-
         </sect3>
-
     </sect2>
-
 </sect1>

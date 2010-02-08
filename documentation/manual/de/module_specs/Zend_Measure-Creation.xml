@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20554 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.creation">
     <title>Erstellung einer Maßeinheit</title>
@@ -79,10 +79,10 @@ echo $unit;
 
         <para>
             Wenn eine Zeichenkette in lokalisierter Schreibweise eingegeben wurde, kann die richtige
-            Interpretation nicht herausgefunden werden ohne dass das gewünschte Gebietsschema bekannt
-            ist. Die Teilung der Dezimalziffern mit "." und die Gruppierung der Tausender mit ","
-            ist in der Englischen Sprache üblich, aber nur in anderen Sprachen. Um mit solchen
-            Problemen umgehen zu können, besteht bei den lokalisierten Klassen der
+            Interpretation nicht herausgefunden werden ohne dass das gewünschte Gebietsschema
+            bekannt ist. Die Teilung der Dezimalziffern mit "." und die Gruppierung der Tausender
+            mit "," ist in der Englischen Sprache üblich, aber nur in anderen Sprachen. Um mit
+            solchen Problemen umgehen zu können, besteht bei den lokalisierten Klassen der
             <classname>Zend_Measure_*</classname> Familie die Möglichkeit eine Sprache oder Region
             anzugeben, um einen Eingabewert eindeutig zu machen und die erwartete semantische
             Eingabe richtig zu interpretieren.

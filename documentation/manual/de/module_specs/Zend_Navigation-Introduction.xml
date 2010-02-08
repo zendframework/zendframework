@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.navigation.introduction">
     <title>Einführung</title>
@@ -20,6 +20,7 @@
 
         <sect3 id="zend.navigation.introduction.pages">
             <title>Seiten</title>
+
             <para>
                 Eine Seite (<classname>Zend_Navigation_Page</classname>) ist in
                 <classname>Zend_Navigation</classname> - in seiner einfachsten Form - ein Objekt
@@ -36,6 +37,7 @@
 
         <sect3 id="zend.navigation.introduction.containers">
             <title>Container</title>
+
             <para>
                 Ein Navigations Container (<classname>Zend_Navigation_Container</classname>) ist
                 eine Containerklasse für Seiten. Sie hat Methoden für das hinzufügen, empfangen,

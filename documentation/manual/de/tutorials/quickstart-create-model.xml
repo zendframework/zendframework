@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20482 -->
+<!-- EN-Revision: 20832 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-model">
     <title>Ein Modell und eine Datenbank Tabelle erstellen</title>
@@ -67,8 +67,11 @@ class Application_Model_Guestbook
 
     public function setId($id);
     public function getId();
+}
 
-    public function save();
+class Application_Model_GuestbookMapper
+{
+    public function save(Application_Model_Guestbook $guestbook);
     public function find($id);
     public function fetchAll();
 }
@@ -83,7 +86,8 @@ class Application_Model_Guestbook
 
     <para>
         <methodname>find()</methodname> und <methodname>fetchAll()</methodname> bieten die Fähigkeit
-        einen einzelnen Eintrag oder alle Einträge zu holen.
+        einen einzelnen Eintrag oder alle Einträge zu holen, wärend <methodname>save()</methodname>
+        das Speichern der Einträge im Datenspeicher übernimmt.
     </para>
 
     <para>
@@ -93,23 +97,75 @@ class Application_Model_Guestbook
     <para>
         Zuerst muss unsere <classname>Db</classname> Ressource initialisiert werden. Wie bei der
         <classname>Layout</classname> und <classname>View</classname> kann die Konfiguration für die
-        <classname>Db</classname> Ressource angegeben werden. In der Datei
-        <filename>application/configs/application.ini</filename> müssen die folgenden Zeilen in den
-        richtigen Sektionen hinzugefügt werden.
+        <classname>Db</classname> Ressource angegeben werden. Dies kann mit dem Befehl
+        <command>zf configure db-adapter</command> getan werden:
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf configure db-adapter \
+> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH % "/../data/db/guestbook.db"' \
+> -s production
+A db configuration for the production has been written to the application config file.
+
+% zf configure db-adapter \
+> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH % "/../data/db/guestbook-testing.db"' \
+> -s testing
+A db configuration for the production has been written to the application config file.
+
+% zf configure db-adapter \
+> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH % "/../data/db/guestbook-dev.db"' \
+> -s development
+A db configuration for the production has been written to the application config file.
+]]></programlisting>
+
+    <para>
+        Jetzt muss die Datei <filename>application/configs/application.ini</filename> bearbeitet
+        werden, und man kann sehen das die folgenden Zeilen in den betreffenden Abschnitten
+        hinzugefügt wurden.
     </para>
 
     <programlisting language="ini"><![CDATA[
 ; application/configs/application.ini
 
-; Diese Zeile sind in den richtigen Sektionen hinzuzufügen:
 [production]
+; ...
 resources.db.adapter       = "PDO_SQLITE"
+resources.db.params.dbname = "APPLICATION_PATH "/../data/db/guestbook.db""
+
+[testing : production]
+; ...
+resources.db.adapter = "PDO_SQLITE"
+resources.db.params.dbname = "APPLICATION_PATH "/../data/db/guestbook-testing.db""
+
+[development : production]
+; ...
+resources.db.adapter = "PDO_SQLITE"
+resources.db.params.dbname = "APPLICATION_PATH "/../data/db/guestbook-dev.db""
+]]></programlisting>
+
+    <para>
+        Wenn man es genau betrachtet dann kann mein ein kleines Problem feststellen: die Konstante
+        <constant>APPLICATION_PATH</constant> ist in Hochkommas; das ist wegen der Begrenzungen des
+        INI Formats. Die Datei ist so zu bearbeiten das die Zeilen wie folgt aussieht (man muss
+        sicherstellen das auch die Extra Hochkommas am Ende der Zeilen entfernt werden):
+    </para>
+
+    <programlisting language="ini"><![CDATA[
+; application/configs/application.ini
+
+[production]
+; ...
+resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
 
 [testing : production]
+; ...
+resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-testing.db"
 
 [development : production]
+; ...
+resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-dev.db"
 ]]></programlisting>
 
@@ -125,7 +181,9 @@ phpSettings.display_startup_errors = 0
 phpSettings.display_errors = 0
 bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
 bootstrap.class = "Bootstrap"
+appnamespace = "Application"
 resources.frontController.controllerDirectory = APPLICATION_PATH "/controllers"
+resources.frontController.params.displayExceptions = 0
 resources.layout.layoutPath = APPLICATION_PATH "/layouts/scripts"
 resources.view[] =
 resources.db.adapter = "PDO_SQLITE"
@@ -136,11 +194,13 @@ resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
 [testing : production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
+resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-testing.db"
 
 [development : production]
 phpSettings.display_startup_errors = 1
 phpSettings.display_errors = 1
+resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook-dev.db"
 ]]></programlisting>
 
@@ -352,10 +412,24 @@ Daten geladen.
             url="http://martinfowler.com/eaaCatalog/tableDataGateway.html">Table Data
             Gateway</ulink> um uns mit unserer Datenquelle zu verbinden;
         <classname>Zend_Db_Table</classname> bietet diese Funktionalität. Um anzufangen erstellen wir
-        eine <classname>Zend_Db_Table</classname>-basierende Tabellenklasse. Zuerst erstellen wir
-        das Verzeichnis <filename>application/models/DbTable/</filename>. Dann erstellen und
-        bearbeiten wir die Datei <filename>Guestbook.php</filename> in Ihm und fügen die folgenden
-        Inhalte ein:
+        eine <classname>Zend_Db_Table</classname>-basierende Tabellenklasse. Wie wir es für Layouts
+        und den Datenbank Adapter getan haben, können wir das <command>zf</command> Tool verwenden
+        um uns zu assistieren indem der Befehl <command>create db-table</command> verwendet wird.
+        Dieser nimmt mindestens zwei Argumente, den Namen mit dem man auf die Klasse referenzieren
+        will, und die Datenbanktabelle auf die Sie zeigt.
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf create db-table Guestbook guestbook
+Creating a DbTable at application/models/DbTable/Guestbook.php
+Updating project profile 'zfproject.xml'
+]]></programlisting>
+
+    <para>
+        Wenn man in der Verzeichnisbaum sieht, dann wird man jetzt sehen das ein neues Verzeichnis
+        <filename>application/models/DbTable/</filename> zusammen mit der Datei
+        <filename>Guestbook.php</filename> erstellt wurde. Wenn man die Datei öffnet wird man den
+        folgenden Inhalt sehen:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -406,9 +480,20 @@ class Application_Model_GuestbookMapper
 
     <para>
         Zusätzlich zu diesen Methoden, fügen wir Methoden für das Setzen und Holen des Table Data
-        Gateways hinzu. Die endgültige Klasse, welche unter
-        <filename>application/models/GuestbookMapper.php</filename> platziert ist, sieht wie folgt
-        aus:
+        Gateways hinzu. Um die initiale Klasse zu erstellen kann das <command>zf</command> CLI
+        Tool verwendet werden:
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf create model GuestbookMapper
+Creating a model at application/models/GuestbookMapper.php
+Updating project profile '.zfproject.xml'
+]]></programlisting>
+       
+    <para>
+        Jetzt muss die Klasse <classname>Application_Model_GuestbookMapper</classname> welche in
+        <filename>application/models/GuestbookMapper.php</filename> gefunden werden kann so
+        geändert werden dass Sie wie folgt zu lesen ist:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -486,12 +571,21 @@ class Application_Model_GuestbookMapper
 ]]></programlisting>
 
     <para>
-        Jetzt ist es Zeit unsere Modellklasse leicht zu aktualisieren, um den Daten Mapper
-        aufzunehmen. So wie der Daten Mapper eine Referenz zur Datenquelle enthält, enthält das
-        Modell eine Referenz zum Daten Mapper. Zusätzlich machen wir es einfach das Modell
-        bekanntzumachen indem ein Array an Daten entweder an den Constructor oder an die
+        Jetzt ist es Zeit unsere Modellklasse zu erstellen. Wir machen dies indem wieder das
+        Kommando <command>zf create model</command> verwendet wird:
+    </para>
+
+    <programlisting language="shell"><![CDATA[
+% zf create model Guestbook
+Creating a model at application/models/Guestbook.php
+Updating project profile '.zfproject.xml'
+]]></programlisting>
+  
+   <para>
+        Wir verändern diese leere PHP Klasse um es einfach zu machen das Modell
+        bekanntzugeben indem ein Array an Daten entweder an den Constructor oder an die
         <methodname>setOptions()</methodname> Methode übergeben wird. Das endgültige Modell, welches
-        in <filename>application/models/Guestbook.php</filename> ist, sieht wie folgt aus:
+        in <filename>application/models/Guestbook.php</filename> ist, sollte wie folgt aussehen:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -503,7 +597,6 @@ class Application_Model_Guestbook
     protected $_created;
     protected $_email;
     protected $_id;
-    protected $_mapper;
 
     public function __construct(array $options = null)
     {
@@ -585,36 +678,6 @@ class Application_Model_Guestbook
     {
         return $this->_id;
     }
-
-    public function setMapper($mapper)
-    {
-        $this->_mapper = $mapper;
-        return $this;
-    }
-
-    public function getMapper()
-    {
-        if (null === $this->_mapper) {
-            $this->setMapper(new Application_Model_GuestbookMapper());
-        }
-        return $this->_mapper;
-    }
-
-    public function save()
-    {
-        $this->getMapper()->save($this);
-    }
-
-    public function find($id)
-    {
-        $this->getMapper()->find($id, $this);
-        return $this;
-    }
-
-    public function fetchAll()
-    {
-        return $this->getMapper()->fetchAll();
-    }
 }
 ]]></programlisting>
 
@@ -624,16 +687,20 @@ class Application_Model_Guestbook
     </para>
 
     <para>
-        Um einen neuen Controller zu erstellen muss ein Terminal oder eine DOS Konsole geöffnet,
-        in das Projektverzeichnis navigiert und das folgende eingegeben werden:
+        Um einen neuen Controller zu erstellen muss das Kommando
+        <command>zf create controller</command> verwendet werden:
     </para>
 
     <programlisting language="shell"><![CDATA[
-# Unix-artige Systeme:
-% zf.sh create controller guestbook
-
-# DOS/Windows:
-C:> zf.bat create controller guestbook
+% zf create controller Guestbook
+Creating a controller at
+    application/controllers/GuestbookController.php
+Creating an index action method in controller Guestbook
+Creating a view script for the index action method at
+    application/views/scripts/guestbook/index.phtml
+Creating a controller test file at
+    tests/application/controllers/GuestbookControllerTest.php
+Updating project profile '.zfproject.xml'
 ]]></programlisting>
 
     <para>
@@ -661,7 +728,7 @@ class GuestbookController extends Zend_Controller_Action
 {
     public function indexAction()
     {
-        $guestbook = new Application_Model_Guestbook();
+        $guestbook = new Application_Model_GuestbookMapper();
         $this->view->entries = $guestbook->fetchAll();
     }
 }

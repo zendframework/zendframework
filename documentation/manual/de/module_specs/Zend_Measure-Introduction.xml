@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17173 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.measure.introduction">
-
     <title>Einführung</title>
 
     <para>
@@ -16,6 +15,7 @@
 
     <example id="zend.measure.introduction.example-1">
         <title>Konvertieren von Maßeinheiten</title>
+
         <para>
             Das folgende einführende Beispiel zeigt die automatische Konvertierung von Einheiten von
             Maßeinheiten. Um eine Maßeinheit zu konvertieren muß dessen Wert und Typ bekannt sein.
@@ -23,6 +23,7 @@
             enthält. Konvertierungen sind nur für Einheiten des gleichen Typs möglich (Masse,
             Fläche, Temperatur, Beschleunigung, usw.), nicht zwischen verschiedenen Typen.
         </para>
+
         <programlisting language="php"><![CDATA[
 $locale = new Zend_Locale('en');
 $unit = new Zend_Measure_Length(100, Zend_Measure_Length::METER, $locale);
@@ -44,12 +45,14 @@ echo $unit->convertTo(Zend_Measure_Length::YARD);
 
     <example id="zend.measure.introduction.example-2">
         <title>Die Maßeinheit meter</title>
+
         <para>
             Der <code>meter</code> wird für das Abmessen von Längen verwendet und kann in der Klasse
             <code>Length</code> gefunden werden. Um auf diese Maßeinheit zu verweisen muß die
             Schreibweise <constant>Length::METER</constant> verwendet werden. Die
             Darstellungseinheit ist <code>m</code>.
         </para>
+
         <programlisting language="php"><![CDATA[
 echo Zend_Measure_Length::STANDARD;  // Ausgabe 'Length::METER'
 echo Zend_Measure_Length::KILOMETER; // Ausgabe 'Length::KILOMETER'
@@ -59,8 +62,4 @@ echo $unit;
 // Ausgabe '100 m'
 ]]></programlisting>
     </example>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

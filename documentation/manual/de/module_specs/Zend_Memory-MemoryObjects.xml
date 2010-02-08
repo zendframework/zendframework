@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.memory.memory-objects">
     <title>Memory Objekte</title>
@@ -10,6 +10,7 @@
         <para>
             Um verschiebbare Memory Objekte zu Erstellen kann die
             <methodname>create([$data])</methodname> Methode des Memory Managers verwendet werden:
+
             <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 ]]></programlisting>
@@ -28,6 +29,7 @@ $memObject = $memoryManager->create($data);
         <para>
             Gesperrte Memory Objekte können erstellt werden mit Hilfe der
             <methodname>createLocked([$data])</methodname> Methode des Memory Managers:
+
             <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->createLocked($data);
 ]]></programlisting>
@@ -70,6 +72,7 @@ $memObject = $memoryManager->createLocked($data);
         <para>
             Die '<code>value</code>' Eigenschaft des Memory Containers (gesperrt oder verschiebbar)
             kann verwendet werden um mit Memory Objekt Daten zu arbeiten:
+
             <programlisting language="php"><![CDATA[
 $memObject = $memoryManager->create($data);
 

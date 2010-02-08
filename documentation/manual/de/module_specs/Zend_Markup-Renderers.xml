@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20760 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.markup.renderers">
     <title>Zend_Markup Renderer</title>
@@ -124,7 +124,6 @@ echo $bbcode->render('my [upper]tag[/upper]');
                 <thead>
                     <row>
                         <entry>Beispiel Eingabe (BBCode)</entry>
-
                         <entry>Beispiel Ausgabe</entry>
                     </row>
                 </thead>
@@ -132,74 +131,71 @@ echo $bbcode->render('my [upper]tag[/upper]');
                 <tbody>
                     <row>
                         <entry>[b]foo[/b]</entry>
-
                         <entry><![CDATA[<strong>foo</strong>]]></entry>
                     </row>
 
                     <row>
                         <entry>[i]foo[/i]</entry>
-
                         <entry><![CDATA[<em>foo</em>]]></entry>
                     </row>
 
                     <row>
                         <entry>[cite]foo[/cite]</entry>
-
                         <entry><![CDATA[<cite>foo</cite>]]></entry>
                     </row>
 
                     <row>
                         <entry>[del]foo[/del]</entry>
-
                         <entry><![CDATA[<del>foo</del>]]></entry>
                     </row>
 
                     <row>
                         <entry>[ins]foo[/ins]</entry>
-
                         <entry><![CDATA[<ins>foo</ins>]]></entry>
                     </row>
 
                     <row>
                         <entry>[sup]foo[/sup]</entry>
-
                         <entry><![CDATA[<sup>foo</sup>]]></entry>
                     </row>
 
                     <row>
                         <entry>[sub]foo[/sub]</entry>
-
                         <entry><![CDATA[<sub>foo</sub>]]></entry>
                     </row>
 
                     <row>
                         <entry>[span]foo[/span]</entry>
-
                         <entry><![CDATA[<span>foo</span>]]></entry>
                     </row>
 
                     <row>
                         <entry>[acronym title="PHP Hypertext Preprocessor]PHP[/acronym]</entry>
 
-                        <entry><![CDATA[<acronym title="PHP Hypertext Preprocessor">PHP</acronym>]]></entry>
+                        <entry>
+                            <![CDATA[<acronym title="PHP Hypertext Preprocessor">PHP</acronym>]]>
+                        </entry>
                     </row>
 
                     <row>
                         <entry>[url=http://framework.zend.com/]Zend Framework[/url]</entry>
 
-                        <entry><![CDATA[<a href="http://framework.zend.com/">Zend Framework</a>]]></entry>
+                        <entry>
+                            <![CDATA[<a href="http://framework.zend.com/">Zend Framework</a>]]>
+                        </entry>
                     </row>
 
                     <row>
                         <entry>[h1]foobar[/h1]</entry>
-
                         <entry><![CDATA[<h1>foobar</h1>]]></entry>
                     </row>
 
                     <row>
                         <entry>[img]http://framework.zend.com/images/logo.gif[/img]</entry>
 
-                        <entry><![CDATA[<img src="http://framework.zend.com/images/logo.gif" />]]></entry>
+                        <entry>
+                            <![CDATA[<img src="http://framework.zend.com/images/logo.gif" />]]>
+                        </entry>
                     </row>
                 </tbody>
             </tgroup>

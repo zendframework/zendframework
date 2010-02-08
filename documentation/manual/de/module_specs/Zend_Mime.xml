@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.mime.mime">
     <title>Zend_Mime</title>
@@ -23,6 +23,7 @@
         <para>
             <classname>Zend_Mime</classname> stellt einige einfache statische Hilfsmethoden für die
             <acronym>MIME</acronym> Verarbeitung bereit:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -72,6 +73,7 @@
         <para>
             <classname>Zend_Mime</classname> definiert einen Satz Konstanten, die üblicherweise von
             <acronym>MIME</acronym> Nachrichten verwendet werden:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -81,27 +83,19 @@
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <constant>Zend_Mime::TYPE_TEXT</constant>: 'text/plain'
-                    </para>
+                    <para><constant>Zend_Mime::TYPE_TEXT</constant>: 'text/plain'</para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <constant>Zend_Mime::TYPE_HTML</constant>: 'text/html'
-                    </para>
+                    <para><constant>Zend_Mime::TYPE_HTML</constant>: 'text/html'</para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <constant>Zend_Mime::ENCODING_7BIT</constant>: '7bit'
-                    </para>
+                    <para><constant>Zend_Mime::ENCODING_7BIT</constant>: '7bit'</para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <constant>Zend_Mime::ENCODING_8BIT</constant>: '8bit';
-                    </para>
+                    <para><constant>Zend_Mime::ENCODING_8BIT</constant>: '8bit';</para>
                 </listitem>
 
                 <listitem>
@@ -112,9 +106,7 @@
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <constant>Zend_Mime::ENCODING_BASE64</constant>: 'base64'
-                    </para>
+                    <para><constant>Zend_Mime::ENCODING_BASE64</constant>: 'base64'</para>
                 </listitem>
 
                 <listitem>
@@ -124,21 +116,18 @@
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <constant>Zend_Mime::DISPOSITION_INLINE</constant>: 'inline'
-                    </para>
+                    <para><constant>Zend_Mime::DISPOSITION_INLINE</constant>: 'inline'</para>
                 </listitem>
 
                 <listitem>
                     <para>
-                        <constant>Zend_Mime::MULTIPART_ALTERNATIVE</constant>: 'multipart/alternative'
+                        <constant>Zend_Mime::MULTIPART_ALTERNATIVE</constant>:
+                        'multipart/alternative'
                     </para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <constant>Zend_Mime::MULTIPART_MIXED</constant>: 'multipart/mixed'
-                    </para>
+                    <para><constant>Zend_Mime::MULTIPART_MIXED</constant>: 'multipart/mixed'</para>
                 </listitem>
 
                 <listitem>
@@ -164,6 +153,7 @@
 
         <para>
             Ein <classname>Zend_Mime</classname> Objekt hat die folgenden Methoden:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -189,6 +179,3 @@
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

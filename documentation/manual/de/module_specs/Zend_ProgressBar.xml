@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.progressbar.introduction" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_ProgressBar</title>
 
     <sect2 id="zend.progressbar.whatisit">
         <title>Einführung</title>
+
         <para>
             <classname>Zend_ProgressBar</classname> ist eine Komponente um Fortschrittsbalken in
             verschiedenen Umgebungen zu erstellen und zu aktualisieren. Sie besteht aus einem
@@ -18,6 +19,7 @@
 
     <sect2 id="zend.progressbar.basic">
         <title>Grundsätzliche Verwendung von Zend_Progressbar</title>
+
         <para>
             <classname>Zend_ProgressBar</classname> ist sehr einfach in seiner Verwendung. Man
             erstellt einfach eine neue Instanz von <classname>Zend_Progressbar</classname>,
@@ -44,6 +46,7 @@ $progressBar->finish();
             wird der Fortschrittsbalken mit der aktuellen Byteanzahl aktualisiert. Am Ende der
             Schleife, wird der Status des Fortschrittsbalken auf fertig gestellt.
         </para>
+
         <para>
             Man kann auch die <methodname>update()</methodname> Methode von
             <classname>Zend_ProgressBar</classname> ohne Argumente aufrufen, das die ETA einfach neu
@@ -54,6 +57,7 @@ $progressBar->finish();
 
     <sect2 id="zend.progressbar.persistent">
         <title>Persistenter Fortschritt</title>
+
         <para>
             Wenn man den Fortschrittsbalken über mehrere Aufrufe hinweg persistent haben will, kann
             man den Namen eines Session Namespaces als viertes Argument an den Constructor angeben.
@@ -66,6 +70,7 @@ $progressBar->finish();
 
     <sect2 id="zend.progressbar.adapters">
         <title>Standard Adapter</title>
+
         <para>
             <classname>Zend_ProgressBar</classname> kommt mit den folgenden zwei Adaptern:
 
@@ -73,6 +78,7 @@ $progressBar->finish();
                 <listitem>
                     <para><xref linkend="zend.progressbar.adapter.console" /></para>
                 </listitem>
+
                 <listitem><para><xref linkend="zend.progressbar.adapter.jspush" /></para></listitem>
                 <listitem><para><xref linkend="zend.progressbar.adapter.jspull" /></para></listitem>
             </itemizedlist>
@@ -83,6 +89,3 @@ $progressBar->finish();
         <xi:include href="Zend_ProgressBar_Adapter_JsPull.xml" />
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

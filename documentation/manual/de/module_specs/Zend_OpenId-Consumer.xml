@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.consumer">
     <title>Zend_OpenId_Consumer Grundlagen</title>
@@ -19,21 +19,15 @@
 
         <orderedlist>
             <listitem>
-                <para>
-                    Zeige das OpenID Authentifikations Formular
-                </para>
+                <para>Zeige das OpenID Authentifikations Formular</para>
             </listitem>
 
             <listitem>
-                <para>
-                    Akzeptiere die OpenID Identität und übergib Sie an den OpenID Provider
-                </para>
+                <para>Akzeptiere die OpenID Identität und übergib Sie an den OpenID Provider</para>
             </listitem>
 
             <listitem>
-                <para>
-                    Überprüfe die Antwort des OpenID Providers
-                </para>
+                <para>Überprüfe die Antwort des OpenID Providers</para>
             </listitem>
         </orderedlist>
 
@@ -52,6 +46,7 @@
 
         <example id="zend.openid.consumer.example-1">
             <title>Das einfache OpenID Login Formular</title>
+
             <programlisting language="php"><![CDATA[
 <html><body>
 <form method="post" action="example-1_2.php"><fieldset>
@@ -74,6 +69,7 @@
 
         <example id="zend.openid.consumer.example-1_2">
             <title>Der Authentifizierungs Anfrage Handler</title>
+
             <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
@@ -120,6 +116,7 @@ if (!$consumer->login($_POST['openid_identifier'], 'example-1_3.php')) {
 
         <example id="zend.openid.consumer.example-1_3">
             <title>Der Authentifizierungs Antwort Prüfer</title>
+
             <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if ($consumer->verify($_GET, $id)) {
@@ -142,6 +139,7 @@ if ($consumer->verify($_GET, $id)) {
 
     <sect2 id="zend.openid.consumer.combine">
         <title>Alle Schritte in einer Seite kombinieren</title>
+
         <para>
             Das folgende Beispiel kombiniert alle drei Schritte in einem Skript. Es bietet keine
             neuen Funktionalitäten. Der Vorteil der Verwendung eines einzelnen Skripts ist, das
@@ -153,6 +151,7 @@ if ($consumer->verify($_GET, $id)) {
 
         <example id="zend.openid.consumer.example-2">
             <title>Das komplette Skript für ein OpenID Login</title>
+
             <programlisting language="php"><![CDATA[
 $status = "";
 if (isset($_POST['openid_action']) &&
@@ -201,6 +200,7 @@ if (isset($_POST['openid_action']) &&
 
     <sect2 id="zend.openid.consumer.realm">
         <title>Konsumenten Bereiche</title>
+
         <para>
             Wenn eine OpenID-aktivierte Site eine Authentifikations Anfrage an einen Provider
             übergibt, identifiziert diese sich selbst mit einer Bereichs <acronym>URL</acronym>.
@@ -226,6 +226,7 @@ if (isset($_POST['openid_action']) &&
 
         <example id="zend.openid.consumer.example-3_2">
             <title>Authentifizierungs Anfrage für spezielle Bereiche</title>
+
             <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if (!$consumer->login($_POST['openid_identifier'],
@@ -244,6 +245,7 @@ if (!$consumer->login($_POST['openid_identifier'],
 
     <sect2 id="zend.openid.consumer.check">
         <title>Sofortige Prüfung</title>
+
         <para>
             In einigen Fällen muß eine Anwendung nur prüfen ob ein Benutzer bereits auf einem
             vertrauten OpenID Server eingeloggt ist ohne einer Interaktion mit dem Benutzer. Die
@@ -257,6 +259,7 @@ if (!$consumer->login($_POST['openid_identifier'],
 
         <example id="zend.openid.consumer.example-4">
             <title>Sofortige Prüfung ohne Interaktion</title>
+
             <programlisting language="php"><![CDATA[
 $consumer = new Zend_OpenId_Consumer();
 if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
@@ -273,6 +276,7 @@ if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
 
     <sect2 id="zend.openid.consumer.storage">
         <title>Zend_OpenId_Consumer_Storage</title>
+
         <para>
             Es gibt drei Schritte beim Authentifizierungs Prozess von OpenID, und jeder wird durch
             eine separate <acronym>HTTP</acronym> Anfrage durchgeführt. Um die Informationen
@@ -306,6 +310,7 @@ if (!$consumer->check($_POST['openid_identifier'], 'example-4_3.php')) {
 
         <example id="zend.openid.consumer.example-5">
             <title>Datenbank Speicher</title>
+
             <programlisting language="php"><![CDATA[
 class DbStorage extends Zend_OpenId_Consumer_Storage
 {
@@ -517,6 +522,7 @@ $consumer = new Zend_OpenId_Consumer($storage);
 
     <sect2 id="zend.openid.consumer.sreg">
         <title>Einfache Registrations Erweiterung</title>
+
         <para>
             Zusätzlich zur Authentifikation kann OpenID Standard für einen leichtgewichtigen
             Profiltausch verwendet werden, um Informationen über einen Benutzer über mehrere Sites
@@ -530,59 +536,67 @@ $consumer = new Zend_OpenId_Consumer($storage);
         <itemizedlist>
             <listitem>
                 <para>
-                    <emphasis>nickname</emphasis>
-                     - ein UTF-8 String den der End-Benutzer als Spitzname verwendet.
+                    <emphasis>nickname</emphasis> - ein UTF-8 String den der End-Benutzer als
+                    Spitzname verwendet.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>email</emphasis> - die Email Adresse des Benutzers wie in Sektion
                     3.4.1 von RFC2822 spezifiziert.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <emphasis>fullname</emphasis>
-                    - eine UTF-8 String Repräsentation des kompletten Namens des Benutzers.
+                    <emphasis>fullname</emphasis> - eine UTF-8 String Repräsentation des kompletten
+                    Namens des Benutzers.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                    <emphasis>dob</emphasis>
-                    - das Geburtsdatum des Benutzers im Format 'YYYY-MM-DD'. Jeder Wert dessen
-                    Repräsentation weniger als die speifizierte Anzahl an Ziffern in diesem Format
-                    verwendet sollte mit Nullen aufgefüllt werden. In anderen Worten, die Länge
-                    dieses Wertes muß immer 10 sein. Wenn der Benutzer irgendeinen Teil dieses
-                    Wertes (z.B. Jahr, Monat oder Tag) nicht angeben will, dann muß dieser auf Null
-                    gesetzt werden. Wenn ein Benutzer zum Beispiel angeben will das sein
-                    Geburtsdatum in das Jahr 1980 fällt, aber nicht den Monat oder Tag angeben will,
-                    dann sollte der zurückgegebene Wert '1980-00-00' sein.
+                    <emphasis>dob</emphasis> - das Geburtsdatum des Benutzers im Format
+                    'YYYY-MM-DD'. Jeder Wert dessen Repräsentation weniger als die speifizierte
+                    Anzahl an Ziffern in diesem Format verwendet sollte mit Nullen aufgefüllt
+                    werden. In anderen Worten, die Länge dieses Wertes muß immer 10 sein. Wenn der
+                    Benutzer irgendeinen Teil dieses Wertes (z.B. Jahr, Monat oder Tag) nicht
+                    angeben will, dann muß dieser auf Null gesetzt werden. Wenn ein Benutzer zum
+                    Beispiel angeben will das sein Geburtsdatum in das Jahr 1980 fällt, aber nicht
+                    den Monat oder Tag angeben will, dann sollte der zurückgegebene Wert
+                    '1980-00-00' sein.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
-                <emphasis>gender</emphasis>
-                - das Geschlecht des Benutzers: "M" für männlich, "F" für weiblich
+                    <emphasis>gender</emphasis> - das Geschlecht des Benutzers: "M" für männlich,
+                    "F" für weiblich
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>postcode</emphasis> - ein UTF-8 String der dem Postleitzahl System des
                     Landes des End-Benutzers entspricht
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>country</emphasis> - das Land des Wohnsitzes des Benutzers wie
                     in ISO3166 spezifiziert
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>language</emphasis> - die bevorzugte Sprache des Benutzers wie in
                     ISO639 spezifiziert
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>timezone</emphasis> - ein <acronym>ASCII</acronym> String von der
@@ -603,6 +617,7 @@ $consumer = new Zend_OpenId_Consumer($storage);
 
         <example id="zend.openid.consumer.example-6_2">
             <title>Anfragen mit einer einfachen Registrations Erweiterung senden</title>
+
             <programlisting language="php"><![CDATA[
 $sreg = new Zend_OpenId_Extension_Sreg(array(
     'nickname'=>true,
@@ -639,6 +654,7 @@ if (!$consumer->login($_POST['openid_identifier'],
 
         <example id="zend.openid.consumer.example-6_3">
             <title>Antworten mit einer einfachen Registierungs Erweiterung prüfen</title>
+
             <programlisting language="php"><![CDATA[
 $sreg = new Zend_OpenId_Extension_Sreg(array(
     'nickname'=>true,

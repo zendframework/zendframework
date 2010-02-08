@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20827 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.navigation.pages.mvc">
     <title>Zend_Navigation_Page_Mvc</title>
@@ -16,6 +16,7 @@
 
     <table id="zend.navigation.pages.mvc.options">
         <title>MVC Seiten Optionen</title>
+
         <tgroup cols="4">
             <thead>
                 <row>
@@ -25,53 +26,65 @@
                     <entry>Beschreibung</entry>
                 </row>
             </thead>
+
             <tbody>
                 <row>
                     <entry><code>action</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Name der Aktion die verwendet wird wenn eine href zur Seite erstellt wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>controller</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Name des Controllers der verwendet wird wenn eine href zur Seite erstellt
                         wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>module</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Name des Moduls das verwendet wird wenn eine href zur Seite erstellt wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>params</code></entry>
                     <entry><type>Array</type></entry>
                     <entry><methodname>array()</methodname></entry>
+
                     <entry>
                         Benutzer Parameter die verwendet werden wenn eine href zur Seite erstellt
                         wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>route</code></entry>
                     <entry><type>String</type></entry>
                     <entry><constant>NULL</constant></entry>
+
                     <entry>
                         Name der Route die verwendet wird wenn eine href zur Seite erstellt wird.
                     </entry>
                 </row>
+
                 <row>
                     <entry><code>reset_params</code></entry>
                     <entry><code>bool</code></entry>
                     <entry><constant>TRUE</constant></entry>
+
                     <entry>
                         Ob Benutzer Parameter resetiert werden sollen wenn eine href zur Seite
                         erstellt wird.

@@ -158,7 +158,7 @@ class Zend_Tool_Project_Provider_Module
             if (strtolower($name) == 'default') {
                 $response->appendContent('Added a key for the default module to the application.ini file');
                 $appConfigFile = $this->_loadedProfile->search('ApplicationConfigFile');
-                $appConfigFile->addStringItem('resources.frontcontroller.params.prefixDefaultModule', '1', 'production');
+                $appConfigFile->addStringItem('resources.frontController.params.prefixDefaultModule', '1', 'production');
                 $appConfigFile->create();
             }
 

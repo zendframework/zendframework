@@ -83,7 +83,7 @@ resources.session.remember_me_seconds = 864000
         </para>
 
         <programlisting language="php"><![CDATA[
-$mysession = Zend_Session_Namespace('mysession');
+$mysession = new Zend_Session_Namespace('mysession');
 
 if (!isset($mysession->counter)) {
     $mysession->counter = 1000;
@@ -98,7 +98,7 @@ if ($mysession->counter > 1999) {
 
         <para>
             As you can see above, the session namespace object uses the magic __get, __set,
-            __isset, and __unset to allow you to seemlessly and fluently interact with the session.
+            __isset, and __unset to allow you to seamlessly and fluently interact with the session.
             The information stored in the above example is stored at
             $_SESSION['mysession']['counter'].
         </para>
@@ -108,7 +108,7 @@ if ($mysession->counter > 1999) {
         <title>Advanced Usage of Zend_Session</title>
 
         <para>
-            Addionally, if you wanted to use the DbTable
+            Additionally, if you wanted to use the DbTable
             save handler for Zend_Session, you'd add the following code to your application.ini:
         </para>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20832 -->
+<!-- EN-Revision: 20853 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-model">
     <title>Ein Modell und eine Datenbank Tabelle erstellen</title>
@@ -103,18 +103,18 @@ class Application_Model_GuestbookMapper
 
     <programlisting language="shell"><![CDATA[
 % zf configure db-adapter \
-> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH % "/../data/db/guestbook.db"' \
-> -s production
+> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH "/../data/db/guestbook.db"' \
+> production
 A db configuration for the production has been written to the application config file.
 
 % zf configure db-adapter \
-> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH % "/../data/db/guestbook-testing.db"' \
-> -s testing
+> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH "/../data/db/guestbook-testing.db"' \
+> testing
 A db configuration for the production has been written to the application config file.
 
 % zf configure db-adapter \
-> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH % "/../data/db/guestbook-dev.db"' \
-> -s development
+> 'adapter=PDO_SQLITE&dbname=APPLICATION_PATH "/../data/db/guestbook-dev.db"' \
+> development
 A db configuration for the production has been written to the application config file.
 ]]></programlisting>
 
@@ -130,32 +130,6 @@ A db configuration for the production has been written to the application config
 [production]
 ; ...
 resources.db.adapter       = "PDO_SQLITE"
-resources.db.params.dbname = "APPLICATION_PATH "/../data/db/guestbook.db""
-
-[testing : production]
-; ...
-resources.db.adapter = "PDO_SQLITE"
-resources.db.params.dbname = "APPLICATION_PATH "/../data/db/guestbook-testing.db""
-
-[development : production]
-; ...
-resources.db.adapter = "PDO_SQLITE"
-resources.db.params.dbname = "APPLICATION_PATH "/../data/db/guestbook-dev.db""
-]]></programlisting>
-
-    <para>
-        Wenn man es genau betrachtet dann kann mein ein kleines Problem feststellen: die Konstante
-        <constant>APPLICATION_PATH</constant> ist in Hochkommas; das ist wegen der Begrenzungen des
-        INI Formats. Die Datei ist so zu bearbeiten das die Zeilen wie folgt aussieht (man muss
-        sicherstellen das auch die Extra Hochkommas am Ende der Zeilen entfernt werden):
-    </para>
-
-    <programlisting language="ini"><![CDATA[
-; application/configs/application.ini
-
-[production]
-; ...
-resources.db.adapter = "PDO_SQLITE"
 resources.db.params.dbname = APPLICATION_PATH "/../data/db/guestbook.db"
 
 [testing : production]

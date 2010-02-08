@@ -719,6 +719,16 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest extends PHPUnit_Framework
         $actual   = $bootstrap->getOptionKeys();
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * @group ZF-9110
+     * @expectedException Zend_Application_Bootstrap_Exception
+     */
+    public function testPassingSameBootstrapAsApplicationShouldNotCauseRecursion()
+    {
+        $bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->application);
+        $bootstrap->setApplication($bootstrap);
+    }
 }
 
 class Zend_Application_Bootstrap_BootstrapAbstractTest_View

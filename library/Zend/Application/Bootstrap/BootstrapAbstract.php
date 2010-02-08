@@ -433,6 +433,9 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
         if (($application instanceof Zend_Application)
             || ($application instanceof Zend_Application_Bootstrap_Bootstrapper)
         ) {
+            if ($application === $this) {
+                throw new Zend_Application_Bootstrap_Exception('Cannot set application to same object; creates recursion');
+            }
             $this->_application = $application;
         } else {
             throw new Zend_Application_Bootstrap_Exception('Invalid application provided to bootstrap constructor (received "' . get_class($application) . '" instance)');

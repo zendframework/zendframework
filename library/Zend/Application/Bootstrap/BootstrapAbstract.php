@@ -755,6 +755,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
                 if (0 === strpos($className, $prefix)) {
                     $pluginName = substr($className, strlen($prefix));
                     $pluginName = trim($pluginName, '_');
+                    break;
                 }
             }
         }

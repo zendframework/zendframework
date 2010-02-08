@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19771 -->
+<!-- EN-Revision: 20794 -->
 <sect3 id="zend.view.helpers.initial.doctype">
     <title>Doctype ヘルパー</title>
 
@@ -36,8 +36,8 @@
 
     <para>
         <classname>Doctype</classname> ヘルパーは、
-        <link linkend="zend.view.helpers.initial.placeholder">Placeholder
-        ヘルパー</link> の具象実装です。
+        <link linkend="zend.view.helpers.initial.placeholder">Placeholder ヘルパー</link>
+        の具象実装です。
     </para>
 
     <example id="zend.view.helpers.initial.doctype.basicusage">

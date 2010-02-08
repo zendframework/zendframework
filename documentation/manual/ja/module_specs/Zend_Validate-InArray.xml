@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18822 -->
+<!-- EN-Revision: 20794 -->
 <sect2 id="zend.validate.set.in_array">
 
     <title>InArray</title>
@@ -15,7 +15,7 @@
         <title>単純な配列の検証</title>
 
         <para>
-            最も単純な方法は、初期化のさいに検索される配列を与えることがまさにそうです。
+            最も単純な方法は、初期化の際に検索される配列を与えることがまさにそうです。
         </para>
 
         <programlisting language="php"><![CDATA[

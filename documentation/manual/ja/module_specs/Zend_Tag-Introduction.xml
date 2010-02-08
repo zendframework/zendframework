@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17789 -->
+<!-- EN-Revision: 20807 -->
 <sect1 id="zend.tag.introduction">
     <title>導入</title>
 
@@ -33,10 +33,12 @@
 
     <example id="zend.tag.example.using">
         <title>Zend_Tagの利用</title>
+
         <para>
             この例は、タグの一覧を作成して、
             絶対の重み付け値をそれらに行き渡らせる方法を例示します。
         </para>
+
         <programlisting language="php"><![CDATA[
 //項目一覧を作成
 $list = new Zend_Tag_ItemList();
@@ -54,6 +56,7 @@ foreach ($list as $item) {
     printf("%s: %d\n", $item->getTitle(), $item->getParam('weightValue'));
 }
 ]]></programlisting>
+
         <para>
             これはCodeとZend Framework及び<acronym>PHP</acronym>を
             絶対値の10、１及び２で出力します。

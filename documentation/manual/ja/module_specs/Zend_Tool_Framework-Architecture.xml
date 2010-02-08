@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16656 -->
+<!-- EN-Revision: 20807 -->
 <sect1 id="zend.tool.framework.architecture">
     <title>アーキテクチャ</title>
 
@@ -92,7 +92,7 @@ interface Zend_Tool_Framework_Provider_Interface
 
         <para>
             あるいは、もし望めば、<classname>Zend_Tool_Framework_Registry</classname>に
-            アクセスできるようにする基底（または抽象）プロバイダを実装することができます。:
+            アクセスできるようにする基底（または抽象）プロバイダを実装できます。:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -202,7 +202,7 @@ interface Zend_Tool_Framework_Manifest_Interface
             下記で定義されたローダによって、
             メタデータ・オブジェクトはマニフェスト・リポジトリ(<classname>Zend_Tool_Framework_Manifest_Repository</classname>)にロードされます。
             すべてのプロバイダがプロバイダ・リポジトリにロードされるとわかったあと、マニフェストは処理されます。
-            これによって、何が現在プロバイダ・リポジトリ内部にあるかに基づくメタデータ・オブジェクトをマニフェストは作成することができます。
+            これによって、何が現在プロバイダ・リポジトリ内部にあるかに基づくメタデータ・オブジェクトをマニフェストは作成できます。
         </para>
 
         <para>
@@ -280,7 +280,7 @@ class Zend_Tool_Framework_Manifest_ProviderMetadata
         <para>
             基底<classname>Zend_Tool_Framework_Manifest_Metadata</classname>クラスを拡張して、
             クラス/オブジェクト・ローカル・マニフェストを通してこれらの新しいメタデータ・オブジェクトを返しさえすれば、
-            あなた自身のメタデータ・タイプを構築することができます。
+            あなた自身のメタデータ・タイプを構築できます。
             これらのユーザー・ベースのクラスは、マニフェスト・リポジトリの中に残ります
         </para>
 
@@ -389,7 +389,8 @@ abstract class Zend_Tool_Framework_Client_Abstract
             （他の２つは提案されます）
             初期化、前処理と後処理
             コマンド・ライン・クライアントが動く方法についてより深く研究するには、
-            <ulink url="http://framework.zend.com/svn/framework/standard/branches/release-1.8/library/Zend/Tool/Framework/Client/Console.php">ソースコード</ulink>
+            <ulink
+                url="http://framework.zend.com/svn/framework/standard/branches/release-1.8/library/Zend/Tool/Framework/Client/Console.php">ソースコード</ulink>
             を見てください。
         </para>
 

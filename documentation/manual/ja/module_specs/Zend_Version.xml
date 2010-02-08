@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19432 -->
+<!-- EN-Revision: 20794 -->
 <sect1 id="zend.version.reading">
 
     <title>Zend Framework のバージョンの取得</title>
@@ -24,6 +24,7 @@
 
     <example id="zend.version.reading.example">
         <title>compareVersion() メソッドの例</title>
+
         <programlisting language="php"><![CDATA[
 // -1、0 あるいは 1 を返します
 $cmp = Zend_Version::compareVersion('2.0.0');

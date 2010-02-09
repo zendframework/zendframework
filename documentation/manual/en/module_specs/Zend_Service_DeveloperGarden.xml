@@ -86,7 +86,7 @@
             <title>Sign Up for an Account</title>
 
             <para>
-                Before you can start using the DeveloperGarden API, you must first
+                Before you can start using the DeveloperGarden API, you first have to
                 <ulink url="http://www.developergarden.com/register">sign up</ulink> for an account.
             </para>
         </sect3>
@@ -95,38 +95,39 @@
             <title>The Environment</title>
 
             <para>
-                With the DeveloperGarden API you have the possibility to choose 3 different
-                environments to work on.
+                With the DeveloperGarden API you have the possibility to choose between 3 different
+                development environments.
             </para>
 
             <itemizedlist>
                 <listitem>
                     <para>
-                        <emphasis>production</emphasis>: In Production environement you have to pay
-                        for calls, sms and other payable services.
+                        <emphasis>production</emphasis>: In Production environment there are no
+                        usage limitations. You have to pay for calls, sms and other services with
+                        costs.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <emphasis>sandbox</emphasis>: In the Sandbox mode you can use the same
-                        features with some limitations like in the production just without to pay
-                        for them. Normally during development you can test your application.
+                        features (with limitations) as in the production without to paying
+                        for them. This environment is suitable for testing your prototype.
                     </para>
                 </listitem>
 
                 <listitem>
                     <para>
                         <emphasis>mock</emphasis>: The Mock environment allows you to build your
-                        application and have results but you don not initiate any action on the API
-                        side.
+                        application and have results but you do not initiate any action on the API
+                        side. This environment is intended for testing during development.
                     </para>
                 </listitem>
             </itemizedlist>
 
             <para>
-                For every environment and service are some special features (options) available for
-                testing. Please look <ulink
+                For every environment and service, there are some special features (options)
+                available for testing. Please look <ulink
                     url="http://www.developergarden.com/openapi/dokumentation/">here</ulink> for
                 details.
             </para>
@@ -184,7 +185,7 @@ $service = new Zend_Service_DeveloperGarden_SendSms($config);
         </para>
 
         <para>
-            The <methodname>getAccountBalance()</methodname> method is there to fetch an array
+            The <methodname>getAccountBalance()</methodname> method fetches an array
             of account id's with the current balance status (credits).
         </para>
 
@@ -221,7 +222,7 @@ echo 'Quota Level: ', $result->getQuotaLevel(), '<br />';
             </example>
 
             <para>
-                You get a <classname>Result</classname> object that contains all information that
+                You get a <classname>result</classname> object that contains all the information
                 you need, optional you can pass to the <methodname>QuotaInformation</methodname>
                 method the environment constant to fetch the quota for the specific environment.
             </para>
@@ -369,8 +370,8 @@ print_r($service->locateIp($ip));
         <title>Local Search</title>
 
         <para>
-            The Local Search service provides the local search machine <ulink
-                url="http://www.suchen.de">suchen.de</ulink> via a the web service interface.  For
+            The Local Search service provides the location based search machine <ulink
+                url="http://www.suchen.de">suchen.de</ulink> via web service interface. For
             more details, refer to <ulink
                 url="http://www.developergarden.com/static/docu/en/ch04s02s06.html">the
                 documentation</ulink>.
@@ -414,7 +415,7 @@ print_r($service->localSearch($search));
             <listitem>
                 <para>
                     An SMS or Flash SMS in the sandbox environment is shortened and enhanced by a
-                    note in the DeveloperGarden. The maximum length of the message sent is 160
+                    note from the DeveloperGarden. The maximum length of the message is 160
                     characters.
                 </para>
             </listitem>
@@ -434,7 +435,7 @@ print_r($service->localSearch($search));
 
             <listitem>
                 <para>
-                    If an SMS or Flash SMS is longer than 160 characters, one message is charged for
+                    If a SMS or Flash SMS is longer than 160 characters, one message is charged for
                     each 153 characters (quota and credit).
                 </para>
             </listitem>
@@ -447,7 +448,7 @@ print_r($service->localSearch($search));
 
             <listitem>
                 <para>
-                    The sender can exist of a maximum of 11 characters. Permitted characters are
+                    The sender can be a maximum of 11 characters. Permitted characters are
                     letters and numbers.
                 </para>
             </listitem>
@@ -525,7 +526,7 @@ print_r($service->validate('TheKeyWord', '+49-172-123456'));
         <title>Voice Call</title>
 
         <para>
-            The Voice Call service is used for setting up a voice connection between two telephone
+            The Voice Call service can be used to set up a voice connection between two telephone
             connections. For specific details please read the <ulink
                 url="http://www.developergarden.com/static/docu/en/ch04s02.html">API
                 Documentation</ulink>.
@@ -878,7 +879,7 @@ Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setWsdlCache([PHP CONSTA
         </itemizedlist>
 
         <para>
-            If you want also to cache the result for calls to the SecuritTokenServer
+            If you also want to cache the result for calls to the SecuritTokenServer
             you can setup a <classname>Zend_Cache</classname> instance and pass it to the
             <methodname>setCache()</methodname>.
         </para>

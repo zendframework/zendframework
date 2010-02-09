@@ -181,7 +181,7 @@ class Zend_Ldap_Ldif_Encoder
     protected function _encodeString($string, &$base64 = null)
     {
         $string = (string)$string;
-        if (empty($string)) {
+        if (!is_numeric($string) && empty($string)) {
             return '';
         }
 

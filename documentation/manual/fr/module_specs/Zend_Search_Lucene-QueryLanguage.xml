@@ -241,28 +241,34 @@ PHP^4 framework
         </para>
     </sect2>
     <sect2 id="zend.search.lucene.query-language.boolean">
-        <title>Boolean Operators</title>
+        <title>Opérateurs booléens</title>
         <para>
-            Boolean operators allow terms to be combined through logic operators.
-            Lucene supports AND, "+", OR, NOT and "-" as Boolean operators.
-            Java Lucene requires boolean operators to be ALL CAPS. <classname>Zend_Search_Lucene</classname> does not.
+            Les opérateurs booléens permettent de combiner des termes avec des opérateurs logiques.
+            Lucene supporte AND, "+", OR, NOT et "-" en tant qu'opérateurs booléens.
+            Dans Java Lucene, les opérateurs booléens doivent être en MAJUSCULE. Ce n'est pas
+            nécessaire dans <classname>Zend_Search_Lucene</classname>.
         </para>
         <para>
-            AND, OR, and NOT operators and "+", "-" defines two different styles to construct boolean queries.
-            Unlike Java Lucene, <classname>Zend_Search_Lucene</classname> doesn't allow these two styles to be mixed.
+            Les opérateurs AND, OR et NOT et "+", "-" définissent deux styles différents pour
+            construire des requêtes booléennes.
+            Contrairement à Java Lucene, <classname>Zend_Search_Lucene</classname> ne permet pas
+            de mixer ces deux styles.
         </para>
         <para>
-            If the AND/OR/NOT style is used, then an AND or OR operator must be present between all query terms.
-            Each term may also be preceded by NOT operator. The AND operator has higher precedence than the OR operator.
-            This differs from Java Lucene behavior.
+            Si le style AND/OR/NOT est utilisé, un opérateur AND ou OR devra être présent entre
+            chaque terme de requête.
+            Chaque terme peut également être précédé de l'opérateur NOT. L'opérateur AND à la priorité sur
+            l'opérateur OR. Cela diffère du comportement de Java Lucene.
         </para>
         <sect3 id="zend.search.lucene.query-language.boolean.and">
             <title>AND</title>
             <para>
-                The AND operator means that all terms in the "AND group" must match some part of the searched field(s).
+                L'opérateur AND signifie que tous les termes dans le "groupe AND" doivent correspondre à
+                une partie du/des champs cherché(s).
             </para>
             <para>
-                To search for documents that contain "PHP framework" and "Zend Framework" use the query:
+                Pour chercher des documents qui contiennent "PHP framework" et "Zend Framework", utilisez
+                la requête :
                 <programlisting language="querystring"><![CDATA[
 "PHP framework" AND "Zend Framework"
 ]]></programlisting>
@@ -271,10 +277,11 @@ PHP^4 framework
         <sect3 id="zend.search.lucene.query-language.boolean.or">
             <title>OR</title>
             <para>
-                The OR operator divides the query into several optional terms.
+                L'opérateur OR divise la requête en plusieurs termes optionnels.
             </para>
             <para>
-                To search for documents that contain "PHP framework" or "Zend Framework" use the query:
+                Pour chercher des documents qui contiennent "PHP framework" ou "Zend Framework", utilisez
+                la requête :
                 <programlisting language="querystring"><![CDATA[
 "PHP framework" OR "Zend Framework"
 ]]></programlisting>
@@ -283,29 +290,32 @@ PHP^4 framework
         <sect3 id="zend.search.lucene.query-language.boolean.not">
             <title>NOT</title>
             <para>
-                The NOT operator excludes documents that contain the term after NOT. But an "AND group" which contains
-                only terms with the NOT operator gives an empty result set instead of a full set of indexed documents.
+                L'opérateur NOT exclut les documents qui contiennent le terme situé après NOT. Mais un "groupe AND"
+                qui contient uniquement des termes précédés de NOT ne retournera aucun résultat au lieu de retourner
+                tous les documents indexés.
             </para>
             <para>
-                To search for documents that contain "PHP framework" but not "Zend Framework" use the query:
+                Pour chercher des documents qui contiennent "PHP framework", mais pas "Zend Framework", utilisez
+                la requête :
                 <programlisting language="querystring"><![CDATA[
 "PHP framework" AND NOT "Zend Framework"
 ]]></programlisting>
             </para>
         </sect3>
         <sect3 id="zend.search.lucene.query-language.boolean.other-form">
-            <title>&amp;&amp;, ||, and ! operators</title>
+            <title>Les opérateurs &amp;&amp;, ||, et !</title>
             <para>
-                &amp;&amp;, ||, and ! may be used instead of AND, OR, and NOT notation.
+                &amp;&amp;, ||, et ! peuvent être utilisés à la place de la notation AND, OR, et NOT.
             </para>
         </sect3>
         <sect3 id="zend.search.lucene.query-language.boolean.plus">
             <title>+</title>
             <para>
-                The "+" or required operator stipulates that the term after the "+" symbol must match the document.
+                L'opérateur "+" ou 'requis' stipule que le terme après le symbole "+" doit correspondre au document.
             </para>
             <para>
-                To search for documents that must contain "Zend" and may contain "Framework" use the query:
+                Pour chercher des documents qui doivent contenir "Zend" et peuvent contenir "Framework", utilisez
+                la requête :
                 <programlisting language="querystring"><![CDATA[
 +Zend Framework
 ]]></programlisting>
@@ -314,82 +324,87 @@ PHP^4 framework
         <sect3 id="zend.search.lucene.query-language.boolean.minus">
             <title>-</title>
             <para>
-                The "-" or prohibit operator excludes documents that match the term after the "-" symbol.
+                L'opérateur "-" ou 'interdit' exclut les documents qui correspondent au terme suivant le symbole "-".
             </para>
             <para>
-                To search for documents that contain "PHP framework" but not "Zend Framework" use the query:
+                Pour chercher des documents qui contiennent "PHP framework" mais pas "Zend Framework", utilisez
+                la requête :
                 <programlisting language="querystring"><![CDATA[
 "PHP framework" -"Zend Framework"
 ]]></programlisting>
             </para>
         </sect3>
         <sect3 id="zend.search.lucene.query-language.boolean.no-operator">
-            <title>No Operator</title>
+            <title>Pas d'opérateur</title>
             <para>
-                If no operator is used, then the search behavior is defined by the "default boolean operator".
+                Si aucun opérateur n'est utilisé, le comportement de la recherche est définit par "l'opérateur
+                booléen par défaut".
             </para>
             <para>
-                This is set to <code>OR</code> by default.
+                Il est défini à <code>OR</code> par défaut.
             </para>
             <para>
-                That implies each term is optional by default. It may or may not be present within document, but documents with this term
-                will receive a higher score.
+                Cela implique que chaque terme est optionnel par défaut. Il peut être présent ou pas dans le document, mais
+                les documents avec le terme recevront un score plus élevé.
             </para>
             <para>
-                To search for documents that requires "PHP framework" and may contain "Zend Framework" use the query:
+                Pour chercher des documents qui doivent contenir "PHP framework" et peuvent contenir "Zend Framework", utilisez
+                la requête :
                 <programlisting language="querystring"><![CDATA[
 +"PHP framework" "Zend Framework"
 ]]></programlisting>
             </para>
             <para>
-                The default boolean operator may be set or retrieved with the
-                <classname>Zend_Search_Lucene_Search_QueryParser::setDefaultOperator($operator)</classname> and
-                <classname>Zend_Search_Lucene_Search_QueryParser::getDefaultOperator()</classname> methods, respectively.
+                L'opérateur booléen par défaut peut être défini ou récupéré avec les méthodes
+                <classname>Zend_Search_Lucene_Search_QueryParser::setDefaultOperator($operator)</classname> et
+                <classname>Zend_Search_Lucene_Search_QueryParser::getDefaultOperator()</classname>, respectivement.
             </para>
             <para>
-                These methods operate with the
-                <classname>Zend_Search_Lucene_Search_QueryParser::B_AND</classname> and
-                <classname>Zend_Search_Lucene_Search_QueryParser::B_OR</classname> constants.
+                Ces méthodes travaillent avec les constantes
+                <classname>Zend_Search_Lucene_Search_QueryParser::B_AND</classname> et
+                <classname>Zend_Search_Lucene_Search_QueryParser::B_OR</classname>.
             </para>
         </sect3>
     </sect2>
     <sect2 id="zend.search.lucene.query-language.grouping">
-        <title>Grouping</title>
+        <title>Groupement</title>
         <para>
-            Java Lucene and <classname>Zend_Search_Lucene</classname> support using parentheses to group clauses to form sub queries. This can be
-            useful if you want to control the precedence of boolean logic operators for a query or mix different boolean query styles:
+            Java Lucene et <classname>Zend_Search_Lucene</classname> supportent l'usage de parenthèses pour grouper des clauses et former
+            des sous-requêtes. Cela peut s'avérer utile si vous voulez contrôler la priorité des opérateurs logiques pour une requête
+            ou bien mixer différents styles de requête :
             <programlisting language="querystring"><![CDATA[
 +(framework OR library) +php
 ]]></programlisting>
-            <classname>Zend_Search_Lucene</classname> supports subqueries nested to any level.
+            <classname>Zend_Search_Lucene</classname> supporte l'imbrication de requêtes à n'importe quel niveau.
         </para>
     </sect2>
     <sect2 id="zend.search.lucene.query-language.field-grouping">
-        <title>Field Grouping</title>
+        <title>Groupement de champs</title>
         <para>
-            Lucene also supports using parentheses to group multiple clauses to a single field.
+            Lucene supporte également l'usage des parenthèses pour grouper plusieurs clauses sur un simple champ.
         </para>
         <para>
-            To search for a title that contains both the word "return" and the phrase "pink panther" use the query:
+            Pour chercher un titre (champ 'title') qui contient le mot "return" ET la phrase "pink panther", utilisez la requête :
             <programlisting language="querystring"><![CDATA[
 title:(+return +"pink panther")
 ]]></programlisting>
         </para>
     </sect2>
     <sect2 id="zend.search.lucene.query-language.escaping">
-        <title>Escaping Special Characters</title>
+        <title>Echappement des caractères spéciaux</title>
         <para>
-            Lucene supports escaping special characters that are used in query syntax. The current list of special
-            characters is:
+            Lucene supporte l'échappement des caractères spéciaux qui sont utilisés dans la syntaxe
+            de requête. La liste des caractères spéciaux est la suivante :
         </para>
         <para>
             + - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \
         </para>
         <para>
-            + and - inside single terms are automatically treated as common characters.
+            dans les termes simples, + et - sont automatiquement traités comme des caractères normaux.
         </para>
         <para>
-            For other instances of these characters use the \ before each special character you'd like to escape. For example to search for (1+1):2 use the query:
+            Pour d'autres occurences de ces caractères, utilisez le \ avant chaque caractère spécial si vous
+            voulez l'échapper. Par exemple, pour chercher (1+1):2, utilisez la requête :
             <programlisting language="querystring"><![CDATA[
 \(1\+1\)\:2
 ]]></programlisting>

@@ -99,26 +99,31 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
             }
         }
     }
-
+    
     protected function _setupTransport($options)
     {
     	if(!isset($options['type'])) {
     		$options['type'] = 'sendmail';
     	}
     	
-        $transportName = ucfirst(strtolower($options['type']));
-        unset($options['type']);
+        $transportName = $options['type'];
+        if(!Zend_Loader_Autoloader::autoload($transportName))
+        {
+            $transportName = ucfirst(strtolower($transportName));
 
-        if(!Zend_Loader_Autoloader::autoload($transportName)) {
-            $transportName = 'Zend_Mail_Transport_' . $transportName;
-
-            if(!Zend_Loader_Autoloader::autoload($transportName)) {
-                throw new Zend_Application_Resource_Exception(
-                    "Specified Mail Transport '{$transportName}'"
-                    . 'could not be found'
-                );
+            if(!Zend_Loader_Autoloader::autoload($transportName))
+            {
+                $transportName = 'Zend_Mail_Transport_' . $transportName;
+                if(!Zend_Loader_Autoloader::autoload($transportName)) {
+                    throw new Zend_Application_Resource_Exception(
+                        "Specified Mail Transport '{$transportName}'"
+                        . 'could not be found'
+                    );
+                }
             }
         }
+        
+        unset($options['type']);
         
         switch($transportName) {
             case 'Zend_Mail_Transport_Smtp':

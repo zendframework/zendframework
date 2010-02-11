@@ -35,12 +35,6 @@ require_once dirname(__FILE__) . '/../../../TestHelper.php';
 require_once 'Zend/Loader/Autoloader.php';
 
 /**
- * @see Zend_Application_Resource_Mail
- */
-require_once 'Zend/Application/Resource/Mail.php';
-
-
-/**
  * @category   Zend
  * @package    Zend_Application
  * @subpackage UnitTests
@@ -196,10 +190,11 @@ class Zend_Application_Resource_MailTest extends PHPUnit_Framework_TestCase
         $resource->setOptions($options);
 
         $resource->init();
-        $this->assertTrue(Zend_Mail::getDefaultTransport() instanceof Zend_Mail_Transport_Sendmail);    	
+        $this->assertTrue(Zend_Mail::getDefaultTransport() instanceof Zend_Mail_Transport_Sendmail);        
     }
+    
 }
 
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_LogTest::main') {
-    Zend_Application_Resource_LogTest::main();
+if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_MainTest::main') {
+    Zend_Application_Resource_MainTest::main();
 }

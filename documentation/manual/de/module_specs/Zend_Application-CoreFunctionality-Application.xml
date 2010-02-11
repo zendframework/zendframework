@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20763 -->
+<!-- EN-Revision: 20943 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.application">
     <title>Zend_Application</title>
@@ -134,6 +134,24 @@
                                             Anwendung. <varname>$environment</varname> wird
                                             verwendet um zu erkennen welche Sektion der
                                             Konfiguration geholt werden soll.
+                                        </para>
+
+                                        <para>
+                                            Ab 1.10 kann man auch mehrere Pfade übergeben übergeben
+                                            welche Konfigurationsdateien enthalten die in eine
+                                            einzelne Konfiguration zusammengefügt werden sollen. Das
+                                            Hilft bei der Reduzierung von doppelten Konfigurationen
+                                            über mehrere Kontexte welche die gleichen gemeinsamen
+                                            Einstellungen teilen (z.B. Konfiguration für HTTP, oder
+                                            CLI, welche alle einige Charakteristiken teilen aber mit
+                                            deren eigenen wiedersprüchlichen Werten für andere)
+                                            oder indem eine lange Konfiguration in viele kleinere
+                                            kategorisierte Dateien geteilt wird. Der Parameter ist
+                                            in diesem Fall ein Array mit einem einzelnen Schlüssel
+                                            "configs" dessen Wert ein Array von Dateien ist welche
+                                            zusammengefügt werden. Beachte: Dies bedeutet das man
+                                            entweder einen literalen Pfad übergibt, oder
+                                            array("configs"=>array("/path1","/path2"[,...])).
                                         </para>
                                     </listitem>
 

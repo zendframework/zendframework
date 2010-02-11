@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20779 -->
+<!-- EN-Revision: 21018 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.http.cookies">
     <title>Zend_Http_Cookie und Zend_Http_CookieJar</title>
@@ -96,7 +96,8 @@
 
                 <listitem>
                     <para>
-                        Durch das Aufrufen der statischen fromString()-Methode mit einem
+                        Durch das Aufrufen der statischen fromString($cookieStr, [$refUri,
+                        [$encodeValue]])-Methode mit einem
                         Cookie-String, wie er unter 'Set-Cookie' in einer <acronym>HTTP</acronym>
                         Antwort und 'Cookie' in einer <acronym>HTTP</acronym> Anfrage zu finden ist.
                         In diesem Fall muss der Cookie-Inhalt bereits kodiert sein. Falls der
@@ -104,6 +105,38 @@
                         <acronym>URI</acronym> angeben, aus dem die Domain und der Pfad des Cookies
                         bestimmt wird.
                     </para>
+
+                    <para>
+                        Die Methode <code>fromString</code> akzeptiert die folgenden Parameter:
+                    </para>
+
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                                <varname>$cookieStr</varname>: Ein Cookie String wie im
+                                <acronym>HTTP</acronym> Response Header 'Set-Cookie' oder im
+                                <acronym>HTTP</acronym> Request Header 'Cookie' (wird dort benötigt)
+                                dargestellt
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <varname>$refUri</varname>: Eine Referenz <acronym>URI</acronym>
+                                auf welche die Domain und der Pfad von Cookies gesetzt werden.
+                                (Optional wird standardmäßig dieser Wert von $cookieStr geparst)
+                            </para>
+                        </listitem>
+
+                        <listitem>
+                            <para>
+                                <varname>$encodeValue</varname>: Ob der Wert über urldecode
+                                übergeben werden soll.Hat auch Einfluss auf der Verhalten des
+                                Cookies wenn es in einen Cookie String zurückkonvertiert wird.
+                                (Optional ist er standardmäßig true)
+                            </para>
+                        </listitem>
+                    </itemizedlist>
                 </listitem>
             </itemizedlist>
 

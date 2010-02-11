@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20872 -->
+<!-- EN-Revision: 20883 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.images">
     <title>Zend_Service_Amazon_Ec2: Amazon Maschinen Images (AMI)</title>

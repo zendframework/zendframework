@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 20977 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-layout">
     <title>Ein Layout erstellen</title>
@@ -179,7 +179,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     </para>
 
     <programlisting language="php"><![CDATA[
-// application/layouts/scripts/layout.phtml
+<!-- application/layouts/scripts/layout.phtml -->
 
 <?php echo $this->doctype() ?>
 <html xmlns="http://www.w3.org/1999/xhtml">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 20879 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-model">
     <title>Ein Modell und eine Datenbank Tabelle erstellen</title>
@@ -535,8 +535,7 @@ class Application_Model_GuestbookMapper
             $entry->setId($row->id)
                   ->setEmail($row->email)
                   ->setComment($row->comment)
-                  ->setCreated($row->created)
-                  ->setMapper($this);
+                  ->setCreated($row->created);
             $entries[] = $entry;
         }
         return $entries;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20827 -->
+<!-- EN-Revision: 20927 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.markup.renderers">
     <title>Zend_Markup Renderer</title>
@@ -10,13 +10,13 @@
     </para>
 
     <sect2 id="zend.markup.renderers.add">
-        <title>Eigene Tags hinzufügen</title>
+        <title>Eigene Markups hinzufügen</title>
 
         <para>
-            Indem man eigene Tags hinzufügt, kann man den <classname>Zend_Markup</classname>
-            Renderern eigene Funktionalitäten hinzufügen. Mit der Tag Struktur kann man jede
-            Funktionalität welche man haben will hinzufügen. Von einfachen Tags bis zu komplizierten
-            Tag Strukturen. Ein einfaches Beispiel für ein 'foo' Tag:
+            Indem man eigene Merkups hinzufügt, kann man den <classname>Zend_Markup</classname>
+            Renderern eigene Funktionalitäten hinzufügen. Mit der Markup Struktur kann man jede
+            Funktionalität welche man haben will hinzufügen. Von einfachen Markups bis zu
+            komplizierten Markup Strukturen. Ein einfaches Beispiel für ein 'foo' Markup:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -24,12 +24,12 @@
 // mit Zend_Markup_Parser_BbCode als seinen Parser
 $bbcode = Zend_Markup::factory('Bbcode');
 
-// Dies erstellt ein einfaches 'foo' Tag
-// Der erste Parameter definiert den Namen des Tags
-// Der zweite Parameter nimmt ein Integer welche den Typ des Tags definiert
-// Der dritte Parameter ist ein Array die andere Dinge des Tags definiert
-// wie die Gruppe des Tags, und (in diesem Fall) ein Start und Ende Tag
-$bbcode->addTag(
+// Dies erstellt ein einfaches 'foo' Markup
+// Der erste Parameter definiert den Namen des Markups
+// Der zweite Parameter nimmt ein Integer welche den Typ des Markups definiert
+// Der dritte Parameter ist ein Array die andere Dinge des Markups definiert
+// wie die Gruppe des Markups, und (in diesem Fall) ein Start und Ende Markup
+$bbcode->addMarkup(
     'foo',
     Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
     array(
@@ -39,29 +39,29 @@ $bbcode->addTag(
     )
 );
 
-// Jetzt gibt dies folgendes aus: 'my -bar-tag-baz-'
-echo $bbcode->render('my [foo]tag[/foo]');
+// Jetzt gibt dies folgendes aus: 'my -bar-markup-baz-'
+echo $bbcode->render('my [foo]markup[/foo]');
 ]]></programlisting>
 
         <para>
-            Es gilt zu beachten das die Erstellung eigener Tag nur dann Sinn macht wenn der eigene
-            Parser diese auch in einer Tag Struktur unterstützt. Aktuell unterstützt dies nur
-            BBCode. Textile hat keine Unterstützung für eigene Tags.
+            Es gilt zu beachten das die Erstellung eigener Markups nur dann Sinn macht wenn der
+            eigene Parser diese auch in einer Markup Struktur unterstützt. Aktuell unterstützt dies
+            nur BBCode. Textile hat keine Unterstützung für eigene Markups.
         </para>
 
         <para>
-            Einige Renderer (wie der HTML Renderer) enthalten auch Unterstützung für einen 'tag'
-            Parameter. Dieser ersetzt die 'start' und 'end' Parameter, und er stellt die Tags
-            inklusive einiger Standardattribute und dem schließenden Tag dar.
+            Einige Renderer (wie der HTML Renderer) enthalten auch Unterstützung für einen 'markup'
+            Parameter. Dieser ersetzt die 'start' und 'end' Parameter, und er stellt die Markups
+            inklusive einiger Standardattribute und dem schließenden Markup dar.
         </para>
 
         <sect3 id="zend.markup.renderers.add.callback">
-            <title>Ein Callback Tag hinzufügen</title>
+            <title>Ein Callback Markup hinzufügen</title>
 
             <para>
-                Durch das Hinzufügen eines Callback Tags kann man viel mehr tun als nur das einfache
-                Ersetzen von Tags. Zum Beispiel kann man den Inhalt ändern, die Parameter verwenden
-                um die Ausgabe zu beeinflussen, usw.
+                Durch das Hinzufügen eines Callback Markups kann man viel mehr tun als nur das
+                einfache Ersetzen von Markups. Zum Beispiel kann man den Inhalt ändern, die
+                Parameter verwenden um die Ausgabe zu beeinflussen, usw.
             </para>
 
             <para>
@@ -71,7 +71,7 @@ echo $bbcode->render('my [foo]tag[/foo]');
             </para>
 
             <programlisting language="php"><![CDATA[
-class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterInterface
+class My_Markup_Renderer_Html_Upper implements Zend_Markup_Renderer_TokenConverterInterface
 {
 
     public function convert(Zend_Markup_Token $token, $text)
@@ -83,7 +83,7 @@ class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterI
 ]]></programlisting>
 
             <para>
-                Jetzt kann man das 'upper' Tag, mit einem Callback einer Instanz der Klasse
+                Jetzt kann man das 'upper' Markup, mit einem Callback einer Instanz der Klasse
                 <classname>My_Markup_Renderer_Html_Upper</classname> hinzufügen. Ein einfaches
                 Beispiel:
             </para>
@@ -93,13 +93,13 @@ class My_Markup_Renderer_Html_Upper extends Zend_Markup_Renderer_TokenConverterI
 // mit Zend_Markup_Parser_BbCode als seinen Parser
 $bbcode = Zend_Markup::factory('Bbcode');
 
-// Das erstellt ein einfaches 'foo' Tag
-// Der erste Parameter definiert den Namen des Tags
-// Der zweite Parameter nimmt ein Integer welches den Tagtyp definiert
-// Der dritte Parameter ist ein Array welches andere Dinge über ein Tag
-// definiert, wie die Gruppe des Tags und (in diesem Fall) ein Start und Ende
-// Tag
-$bbcode->addTag(
+// Das erstellt ein einfaches 'foo' Markup
+// Der erste Parameter definiert den Namen des Markups
+// Der zweite Parameter nimmt ein Integer welches den Markuptyp definiert
+// Der dritte Parameter ist ein Array welches andere Dinge über ein Markup
+// definiert, wie die Gruppe des Markups und (in diesem Fall) ein Start und Ende
+// Markup
+$bbcode->addMarkup(
     'upper',
     Zend_Markup_Renderer_RendererAbstract::TYPE_REPLACE,
     array(
@@ -108,17 +108,17 @@ $bbcode->addTag(
     )
 );
 
-// Jetzt wird die folgende Ausgabe erstellt: 'my !up!TAG!up!'
-echo $bbcode->render('my [upper]tag[/upper]');
+// Jetzt wird die folgende Ausgabe erstellt: 'my !up!MARKUP!up!'
+echo $bbcode->render('my [upper]markup[/upper]');
 ]]></programlisting>
         </sect3>
     </sect2>
 
     <sect2 id="zend.markup.renderers.list">
-        <title>Liste der Tags</title>
+        <title>Liste der Markups</title>
 
-        <table id="zend.markup.renderers.list.tags">
-            <title>Liste der Tags</title>
+        <table id="zend.markup.renderers.list.markups">
+            <title>Liste der Markups</title>
 
             <tgroup cols="2" align="left" colsep="1" rowsep="1">
                 <thead>

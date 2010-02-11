@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20832 -->
+<!-- EN-Revision: 20879 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.quickstart.create-form">
     <title>Erstellen eines Formulars</title>
@@ -170,9 +170,9 @@ echo $this->form;
         </para>
 
         <para>
-            Zusätzlich könnte man an <ulink
-                url="http://weierophinney.net/matthew/plugin/tag/decorators">dieser Serie von
-                Einträgen über Decorators interessiert sein</ulink>.
+            Zusätzlich könnte man an <link
+                linkend="learning.form.decorators.intro">unserem Tutorial über Formular
+                Decorations</link> interessiert sein.
         </para>
     </note>
 

@@ -299,23 +299,24 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
 ]]></programlisting>
         </para>
         <para>
-            Please use caution when using a non-default search order; the query needs to retrieve
-            documents completely from an index, which may dramatically reduce search performance.
+            Soyez prudents en personnalisant vos clés de tri; la requête aura besoin de récupérer
+            tous les documents correspondant de l'index, ce qui peut réduire considérablement les
+            performances de recherche.
         </para>
     </sect2>
     <sect2 id="zend.search.lucene.searching.highlighting">
-        <title>Search Results Highlighting</title>
+        <title>Mise en évidence des résultats de recherche</title>
         <para>
-            <classname>Zend_Search_Lucene</classname> provides two options for search results
-            highlighting.
+            <classname>Zend_Search_Lucene</classname> propose deux options pour mettre en
+            évidence les résultats de recherche.
         </para>
         <para>
-            The first one is utilizing <classname>Zend_Search_Lucene_Document_Html</classname> class
-            (see <link linkend="zend.search.lucene.index-creation.html-documents">HTML documents
-                section</link> for details) using the following methods:
+            La première consiste à utiliser la classe <classname>Zend_Search_Lucene_Document_Html</classname>
+            (voyez <link linkend="zend.search.lucene.index-creation.html-documents">la section
+            Documents HTML</link> pour des détails) en utilisant les méthodes suivantes :
             <programlisting language="php"><![CDATA[
 /**
- * Highlight text with specified color
+ * Mise en évidence de texte avec la couleur spécifiée
  *
  * @param string|array $words
  * @param string $colour
@@ -325,15 +326,16 @@ public function highlight($words, $colour = '#66ffff');
 ]]></programlisting>
             <programlisting language="php"><![CDATA[
 /**
- * Highlight text using specified View helper or callback function.
+ * Mise en évidence du texte en utilisant le View helper spécifié ou une
+ * fonction callback.
  *
- * @param string|array $words  Words to highlight. Words could be organized
-                               using the array or string.
- * @param callback $callback   Callback method, used to transform
-                               (highlighting) text.
- * @param array    $params     Array of additionall callback parameters passed
-                               through into it (first non-optional parameter
-                               is an HTML fragment for highlighting)
+ * @param string|array $words  Les mots à mettre en évidence. Ils peuvent être organisés
+                               dans un tableau ou une chaîne de caractères.
+ * @param callback $callback   La méthode callback, utilisée pour transformer
+                               (mettre en évidence) le texte.
+ * @param array    $params     Un tableau de paramètres additionnels passés à la fonction
+                               callback (le premier paramètre non optionnel est un fragment
+                               de code HTML pour la mise en évidence).
  * @return string
  * @throws Zend_Search_Lucene_Exception
  */
@@ -341,117 +343,122 @@ public function highlightExtended($words, $callback, $params = array())
 ]]></programlisting>
         </para>
         <para>
-            To customize highlighting behavior use <methodname>highlightExtended()</methodname>
-            method with specified callback, which takes one or more parameters
+            Pour personnaliser le comportement de mise en évidence, utilisez la méthode
+            <methodname>highlightExtended()</methodname> avec le callback spécifié qui prendra
+            un ou plusieurs paramètres.
             <footnote>
                 <para>
-                    The first is an HTML fragment for highlighting and others are callback behavior
-                    dependent. Returned value is a highlighted HTML fragment.
+                    Le premier paramètre est un fragment de code HTML pour la mise en évidence et
+                    les suivants sont dépendants du comportement du callback. La valeur de retour
+                    est un fragment HTML mise en évidence.
                 </para>
             </footnote>
-            , or extend <classname>Zend_Search_Lucene_Document_Html</classname> class and redefine
-            <methodname>applyColour($stringToHighlight, $colour)</methodname> method used as a
-            default highlighting callback.
+            , ou étendez la classe <classname>Zend_Search_Lucene_Document_Html</classname> et
+            redéfinissez la méthode <methodname>applyColour($stringToHighlight, $colour)</methodname>
+            qui est utilisée comme le callback de mise en évidence par défaut.
             <footnote>
                 <para>
-                    In both cases returned HTML is automatically transformed into valid
-                    <acronym>XHTML</acronym>.
+                    Dans les deux cas, le HTML retourné est automatiquement transformé en
+                    <acronym>XHTML</acronym> valide.
                 </para>
             </footnote>
         </para>
         <para>
-            <link linkend="zend.view.helpers">View helpers</link> also can be used as callbacks in
-            context of view script:
+            Les <link linkend="zend.view.helpers">View helpers</link> peuvent également être utilisés
+            comme des callbacks dans un contexte d'affichage du script :
             <programlisting language="php"><![CDATA[
 $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
 ]]></programlisting>
         </para>
         <para>
-            The result of highlighting operation is retrieved by
-            <code>Zend_Search_Lucene_Document_Html->getHTML()</code> method.
+            Le résultat de l'opération de mise en évidence est récupéré avec
+            la méthode <code>Zend_Search_Lucene_Document_Html->getHTML()</code>.
         </para>
         <note>
             <para>
-                Highlighting is performed in terms of current analyzer. So all forms of the word(s)
-                recognized by analyzer are highlighted.
+                La mise en évidence est exécutée dans les termes de l'analyseur courant. Donc toutes
+                les formes de mot(s) reconnues par l'analyseur seront mises en évidence.
             </para>
             <para>
-                E.g. if current analyzer is case insensitive and we request to highlight 'text'
-                word, then 'text', 'Text', 'TEXT' and other case combinations will be highlighted.
+                Ex.: Si l'analyseur courant est insensible à la casse et que l'on demande à mettre
+                en évidence le mot 'text', alors 'text', 'Text', 'TEXT' ou toute autre combinaison de
+                casse seront mis en évidence.
             </para>
             <para>
-                In the same way, if current analyzer supports stemming and we request to highlight
-                'indexed', then 'index', 'indexing', 'indices' and other word forms will be
-                highlighted.
+                Dans le même ordre d'idées, si l'analyseur courant supporte les requêtes proches (stemming)
+                et que l'on souhaite mettre en évidence 'indexed', alors 'index', 'indexing', 'indices' et
+                d'autres mots proches seront mis en évidences.
             </para>
             <para>
-                On the other hand, if word is skipped by current analyzer (e.g. if short words
-                filter is applied to the analyzer), then nothing will be highlighted.
+                A l'inverse, si un mot est ignoré par l'analyseur courant (ex. si un filtre pour
+                ignorer les mots trop courts est appliqué à l'analyseur), alors rien ne sera mis en évidence.
             </para>
         </note>
         <para>
-            The second option is to use
+            La seconde option est d'utiliser la méthode
             <code>Zend_Search_Lucene_Search_Query->highlightMatches(string $inputHTML[,
                 $defaultEncoding = 'UTF-8'[,
-                Zend_Search_Lucene_Search_Highlighter_Interface $highlighter]])</code> method:
+                Zend_Search_Lucene_Search_Highlighter_Interface $highlighter]])</code>:
             <programlisting language="php"><![CDATA[
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 $highlightedHTML = $query->highlightMatches($sourceHTML);
 ]]></programlisting>
         </para>
         <para>
-            Optional second parameter is a default HTML document encoding. It's used if encoding is
-            not specified using Content-type HTTP-EQUIV meta tag.
+            Le second paramètre optionnel est l'encodage par défaut du document HTML. Il est
+            utilisé si l'encodage n'est pas spécifié dans le metatag HTTP-EQUIV Content-Type.
         </para>
         <para>
-            Optional third parameter is a highlighter object which has to implement
-            <classname>Zend_Search_Lucene_Search_Highlighter_Interface</classname> interface:
+            Le troisième paramètre optionnel est un objet de mise en évidence qui doit
+            implémenter l'interface <classname>Zend_Search_Lucene_Search_Highlighter_Interface</classname>:
             <programlisting language="php"><![CDATA[
 interface Zend_Search_Lucene_Search_Highlighter_Interface
 {
     /**
-     * Set document for highlighting.
+     * Définit le document pour la mise en évidence
      *
      * @param Zend_Search_Lucene_Document_Html $document
      */
     public function setDocument(Zend_Search_Lucene_Document_Html $document);
     /**
-     * Get document for highlighting.
+     * Récupère le document pour la mise en évidence
      *
      * @return Zend_Search_Lucene_Document_Html $document
      */
     public function getDocument();
     /**
-     * Highlight specified words (method is invoked once per subquery)
+     * Mise en évidence des mots spécifiés (appelée une fois par sous-requête)
      *
-     * @param string|array $words  Words to highlight. They could be
-                                   organized using the array or string.
+     * @param string|array $words  Les mots à mettre en évidence. Ils peuvent être organisés
+     *                             dans un tableau ou une chaîne de caractères.
      */
     public function highlight($words);
 }
 ]]></programlisting>
-            Where <classname>Zend_Search_Lucene_Document_Html</classname> object is an object
-            constructed from the source HTML provided to the
-            <classname>Zend_Search_Lucene_Search_Query->highlightMatches()</classname> method.
+            Où l'objet <classname>Zend_Search_Lucene_Document_Html</classname> est un objet
+            construit à partir de la source HTML fournie par la méthode
+            <classname>Zend_Search_Lucene_Search_Query->highlightMatches()</classname>
         </para>
         <para>
-            If <varname>$highlighter</varname> parameter is omitted, then
-            <classname>Zend_Search_Lucene_Search_Highlighter_Default</classname> object is
-            instantiated and used.
+            Si le paramètre <varname>$highlighter</varname> est omis, un objet
+            <classname>Zend_Search_Lucene_Search_Highlighter_Default</classname> est
+            instancié et utilisé.
         </para>
         <para>
-            Highlighter <methodname>highlight()</methodname> method is invoked once per subquery, so
-            it has an ability to differentiate highlighting for them.
+            La méthode de mise en évidence <methodname>highlight()</methodname> est invoquée une
+            fois par sous-requête, ainsi elle a la possibilité de différencier la mise en évidence
+            pour chacune.
         </para>
         <para>
-            Actually, default highlighter does this walking through predefined color table. So you
-            can implement your own highlighter or just extend the default and redefine color table.
+            La mise en évidence par défaut le fait en parcourant une table prédéfinie de couleurs.
+            Vous pouvez implémenter votre propre classe de mise en évidence ou juste étendre la classe
+            par défaut et redéfinir la table de couleurs.
         </para>
         <para>
-            <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code> has similar
-            behavior. The only difference is that it takes as an input and returns HTML fragment
-            without &lt;>HTML>, &lt;HEAD>, &lt;BODY> tags. Nevertheless, fragment is automatically
-            transformed to valid <acronym>XHTML</acronym>.
+            <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code> a un comportement
+            similaire. La seule différence est qu'il prend en entrée et retourne un fragment HTML sans
+            les balises &lt;>HTML>, &lt;HEAD>, &lt;BODY>. Néanmoins, le fragment est automatiquement
+            transformé en <acronym>XHTML</acronym> valide.
         </para>
     </sect2>
 </sect1>

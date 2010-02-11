@@ -78,9 +78,13 @@ class Zend_Application_Resource_Multidb extends Zend_Application_Resource_Resour
         $options = $this->getOptions();
         
         foreach ($options as $id => $params) {
-            $this->_dbs[$id] = Zend_Db::factory($params['adapter'], $params);
+        	$adapter = $params['adapter'];
+            $default = isset($params['default'])?(int)$params['default']:false;
+            unset($params['adapter'], $params['default']);
+        	
+            $this->_dbs[$id] = Zend_Db::factory($adapter, $params);
 
-            if ((isset($params['default']) && $params['default'] == true) 
+            if ($default
                 // For consistency with the Db Resource Plugin
                 || (isset($params['isDefaultTableAdapter']) 
                     && $params['isDefaultTableAdapter'] == true)

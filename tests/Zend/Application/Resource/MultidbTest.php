@@ -169,6 +169,28 @@ class Zend_Application_Resource_MultidbTest extends PHPUnit_Framework_TestCase
         }
     }
     
+    /**
+     * @group ZF-9131
+     */
+    public function testParamDefaultAndAdapterAreNotPassedOnAsParameter()
+    {
+        $resource = new Zend_Application_Resource_Multidb(array());
+        $resource->setBootstrap($this->bootstrap);
+        $resource->setOptions($this->_dbOptions);
+        $res = $resource->init();
+        
+        $expected = array(
+            'dbname' => 'db2',
+            'password' => 'notthatpublic',
+            'username' => 'dba',
+            'charset' => null,
+            'persistent' => false,
+            'options' => array('caseFolding' => 0, 'autoQuoteIdentifiers' => true),
+            'driver_options' => array());
+        $this->assertEquals($expected, $res->getDb('db2')->getConfig());
+    }
+
+    
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_LogTest::main') {

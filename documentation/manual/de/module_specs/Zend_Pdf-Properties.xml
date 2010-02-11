@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20872 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.info">
     <!-- @todo review and revise upon completion of refactoring -->
@@ -15,7 +15,8 @@
         gespeichert. Diese struktur kann als assoziatives Array mithilfe der öffentlichen
         <code>properties</code> Eigenschaft des <classname>Zend_Pdf</classname> Objektes gelesen und
         geschrieben werden:
-            <programlisting language="php"><![CDATA[
+
+        <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 
 echo $pdf->properties['Title'] . "\n";
@@ -24,7 +25,6 @@ echo $pdf->properties['Author'] . "\n";
 $pdf->properties['Title'] = 'Neuer Titel.';
 $pdf->save($pdfPath);
 ]]></programlisting>
-
     </para>
 
     <para>
@@ -36,23 +36,27 @@ $pdf->save($pdfPath);
                     <emphasis>Title</emphasis> - String, optional, der Titel des Dokuments.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>Author</emphasis> - String, optional, der Name der Person die das
                     Dokument erstellt hat.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>Subject</emphasis> - String, optional, was das Dokument beschreibt.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>Keywords</emphasis> - String, optional, mit dem Dokument assoziierte
                     Wörter.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>Creator</emphasis> - String, optional, wenn das Dokument von einem
@@ -61,6 +65,7 @@ $pdf->save($pdfPath);
                     hat von dem es konvertiert wurde.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>Producer</emphasis> - String, optional, wenn das Dokument von einem
@@ -69,41 +74,31 @@ $pdf->save($pdfPath);
                     konvertiert hat.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>CreationDate</emphasis> - Wtring, optional, Datum und Zeit der
                     Erstellung des Dokumentes in der folgenden Form "D:YYYYMMDDHHmmSSOHH'mm'" wobei:
+
                     <itemizedlist>
+                        <listitem><para><emphasis>YYYY</emphasis> ist das Jahr.</para></listitem>
+                        <listitem><para><emphasis>MM</emphasis> ist der Monat.</para></listitem>
                         <listitem>
-                            <para>
-                                <emphasis>YYYY</emphasis> ist das Jahr.
-                            </para>
+                            <para><emphasis>DD</emphasis> ist der Tag (01–31).</para>
                         </listitem>
+
                         <listitem>
-                            <para>
-                                <emphasis>MM</emphasis> ist der Monat.
-                            </para>
+                            <para><emphasis>HH</emphasis> ist die Stunde (00–23).</para>
                         </listitem>
+
                         <listitem>
-                            <para>
-                                <emphasis>DD</emphasis> ist der Tag (01–31).
-                            </para>
+                            <para><emphasis>mm</emphasis>ist die Minute (00–59).</para>
                         </listitem>
+
                         <listitem>
-                            <para>
-                                <emphasis>HH</emphasis> ist die Stunde (00–23).
-                            </para>
+                            <para><emphasis>SS</emphasis> ist die Sekunde (00–59).</para>
                         </listitem>
-                        <listitem>
-                            <para>
-                                <emphasis>mm</emphasis>ist die Minute (00–59).
-                            </para>
-                        </listitem>
-                        <listitem>
-                            <para>
-                                <emphasis>SS</emphasis> ist die Sekunde (00–59).
-                            </para>
-                        </listitem>
+
                         <listitem>
                             <para>
                                 <emphasis>O</emphasis> ist die Relation der lokalen Zeit zur
@@ -111,12 +106,14 @@ $pdf->save($pdfPath);
                                 -, oder Z (siehe anbei).
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
                                 <emphasis>HH</emphasis> gefolgt von ' ist der absolute Wert des
                                 Offsets von UT in Stunden (00–23).
                             </para>
                         </listitem>
+
                         <listitem>
                             <para>
                                 <emphasis>mm</emphasis> gefolgt von ' ist der absolute Wert des
@@ -124,6 +121,7 @@ $pdf->save($pdfPath);
                             </para>
                         </listitem>
                     </itemizedlist>
+
                     Das Apostroph Zeichen (') nach HH und mm ist Teil der Syntax. Alle Felder nach
                     dem Jahr sind optional. (Die Prefix D:, obwohl auch optional, wird dringend
                     empfohlen.) Der Standardwert für MM und DD sind beide 01; alle anderen
@@ -134,11 +132,13 @@ $pdf->save($pdfPath);
                     spezifizierten Zeit zu UT als unbekannt angenommen. Egal ob die Zeitzone bekannt
                     ist oder nicht, sollte der Rest des Datums in lokaler Zeit spezifiziert werden.
                 </para>
+
                 <para>
                     Zum Beispiel, 23. Dezember, 1998, um 19:52, U.S. Pazifik Standard Zeit, wird
                     dargestellt durch den String "D:199812231952−08'00'".
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>ModDate</emphasis> - String, optional, das Datum und die Uhrzeit an
@@ -146,10 +146,12 @@ $pdf->save($pdfPath);
                     <emphasis>CreationDate</emphasis>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <emphasis>Trapped</emphasis> - bool, optional, zeigt ob das Dokument modifiziert
                     wurde um eingeschlossene Informationen zu enthalten.
+
                     <itemizedlist>
                         <listitem>
                             <para>
@@ -192,7 +194,8 @@ $pdf->save($pdfPath);
         Dieses XML Dokument kann empfangen und dem PDF mit der
         <methodname>Zend_Pdf::getMetadata()</methodname> und der
         <methodname>Zend_Pdf::setMetadata($metadata)</methodname> Methode wieder hinzugefügt werden:
-            <programlisting language="php"><![CDATA[
+
+        <programlisting language="php"><![CDATA[
 $pdf = Zend_Pdf::load($pdfPath);
 $metadata = $pdf->getMetadata();
 $metadataDOM = new DOMDocument();
@@ -220,6 +223,3 @@ $pdf->save($pdfPath);
         verantwortlich das beide Synchron gehalten werden.
     </para>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

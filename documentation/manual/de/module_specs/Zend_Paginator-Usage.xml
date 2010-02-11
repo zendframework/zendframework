@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.paginator.usage">
     <title>Verwendung</title>
@@ -24,21 +24,26 @@
                         <entry>Beschreibung</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>Array</entry>
                         <entry>Verwendet ein <acronym>PHP</acronym> Array</entry>
                     </row>
+
                     <row>
                         <entry>DbSelect</entry>
+
                         <entry>
                             Verwendet eine Instanz von <link
                                 linkend="zend.db.select"><classname>Zend_Db_Select</classname></link>,
                             welche ein Array zurückgibt
                         </entry>
                     </row>
+
                     <row>
                         <entry>DbTableSelect</entry>
+
                         <entry>
                             Verwendet eine Instanz von <link
                                 linkend="zend.db.table.fetch-all"><classname>Zend_Db_Table_Select</classname></link>,
@@ -48,15 +53,19 @@
                             der Spalten.
                         </entry>
                     </row>
+
                     <row>
                         <entry>Iterator</entry>
+
                         <entry>
                             Verwendet eine Instanz von <ulink
                                 url="http://www.php.net/~helly/php/ext/spl/interfaceIterator.html"><classname>Iterator</classname></ulink>
                         </entry>
                     </row>
+
                     <row>
                         <entry>Null</entry>
+
                         <entry>
                             <classname>Zend_Paginator</classname> nicht für das Verwalten von
                             seitenweisen Daten verwenden. Man kann trotzdem die Vorteile des
@@ -167,6 +176,7 @@ $this->view->paginator = $paginator;
 
     <sect2 id="zend.paginator.usage.dbselect">
         <title>Die Adapter DbSelect und DbTableSelect</title>
+
         <para>
             Die Verwendung der meisten Adapter ist recht zielgerichtet. Trotzdem benötigen die
             Datenbank Adapter detailiertere Erklärungen betreffend dem Empfang und dem Zählen von
@@ -301,9 +311,11 @@ $paginator = new Zend_Paginator($adapter);
                         <entry>Beschreibung</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>All</entry>
+
                         <entry>
                             Gibt alle Seiten zurück. Das ist für Seitenkontrollen mit Dropdownmenüs
                             nützlich wenn Sie relativ wenig Seiten haben. In diesen Fällen ist es
@@ -311,23 +323,29 @@ $paginator = new Zend_Paginator($adapter);
                             anzuzeigen.
                         </entry>
                     </row>
+
                     <row>
                         <entry>Elastic</entry>
+
                         <entry>
                             Eine Google-artiger Scrolling Stil der sich erweitert und verkleinert
                             wenn ein Benutzer durch die Seiten scrollt.
                         </entry>
                     </row>
+
                     <row>
                         <entry>Jumping</entry>
+
                         <entry>
                             Wenn Benutzer scrollen, steigt die Seitenzahl bis zum Ende eines
                             gegebenen Bereichs, und startet anschließend wieder beim Beginn eines
                             neuen Bereichs.
                         </entry>
                     </row>
+
                     <row>
                         <entry>Sliding</entry>
+
                         <entry>
                             Ein Yahoo!-artiger Scrolling Stil der die aktuelle Seitenzahl in der
                             Mitte des Seitenbereichs platziert, oder so nahe wie möglich. Das ist
@@ -539,84 +557,98 @@ $('paginationControl').observe('change', function() {
                             <entry>Beschreibung</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry>first</entry>
                             <entry>integer</entry>
                             <entry>Erste Seitennummer (z.B., 1)</entry>
                         </row>
+
                         <row>
                             <entry>firstItemNumber</entry>
                             <entry>integer</entry>
-                            <entry>
-                                Absolute Nummer des ersten Elements auf dieser Seite
-                            </entry>
+                            <entry>Absolute Nummer des ersten Elements auf dieser Seite</entry>
                         </row>
+
                         <row>
                             <entry>firstPageInRange</entry>
                             <entry>integer</entry>
+
                             <entry>
                                 Erste Seite des Bereichs der vom Scrolling Stil zurückgegeben wird
                             </entry>
                         </row>
+
                         <row>
                             <entry>current</entry>
                             <entry>integer</entry>
                             <entry>Aktuelle Seitenzahl</entry>
                         </row>
+
                         <row>
                             <entry>currentItemCount</entry>
                             <entry>integer</entry>
                             <entry>Anzahl der Elemente auf dieser Seite</entry>
                         </row>
+
                         <row>
                             <entry>itemCountPerPage</entry>
                             <entry>integer</entry>
+
                             <entry>
                                 Maximale Anzahl der Elemente die auf jeder Seite vorhanden sind
                             </entry>
                         </row>
+
                         <row>
                             <entry>last</entry>
                             <entry>integer</entry>
                             <entry>Letzte Seitennummer</entry>
                         </row>
+
                         <row>
                             <entry>lastItemNumber</entry>
                             <entry>integer</entry>
-                            <entry>
-                                Absolute Zahl des letzten Elements auf dieser Seite
-                            </entry>
+                            <entry>Absolute Zahl des letzten Elements auf dieser Seite</entry>
                         </row>
+
                         <row>
                             <entry>lastPageInRange</entry>
                             <entry>integer</entry>
+
                             <entry>
                                 Letzte Seite im Bereich der vom Scrolling Stil zurückgegeben wird
                             </entry>
                         </row>
+
                         <row>
                             <entry>next</entry>
                             <entry>integer</entry>
                             <entry>Nächste Seitenzahl</entry>
                         </row>
+
                         <row>
                             <entry>pageCount</entry>
                             <entry>integer</entry>
                             <entry>Anzahl an Seiten</entry>
                         </row>
+
                         <row>
                             <entry>pagesInRange</entry>
                             <entry>array</entry>
+
                             <entry>
                                 Array von Seiten das vom Scrolling Stil zurückgegeben wird
                             </entry>
                         </row>
+
                         <row>
                             <entry>previous</entry>
                             <entry>integer</entry>
                             <entry>Vorherige Seitenzahl</entry>
                         </row>
+
                         <row>
                             <entry>totalItemCount</entry>
                             <entry>integer</entry>
@@ -628,6 +660,3 @@ $('paginationControl').observe('change', function() {
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

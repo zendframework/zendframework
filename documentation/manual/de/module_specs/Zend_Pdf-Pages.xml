@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20872 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.pages">
     <title>Arbeiten mit Seiten</title>
+
     <sect2 id="zend.pdf.pages.creation">
         <title>Erstellen von Seiten</title>
+
         <para>
             Die Seiten in einem <acronym>PDF</acronym> Dokument werden durch
             <classname>Zend_Pdf_Page</classname> Instanzen in <classname>Zend_Pdf</classname>
@@ -25,11 +27,13 @@
             <methodname>Zend_Pdf::newPage()</methodname> erstellt eine Seite die bereits an ein
             Dokument angehängt ist. Ungebundene Seiten können nicht mit verschiedenen
             <acronym>PDF</acronym> Dokumenten verwendet werden, sind aber etwas schneller.
+
             <footnote>
                 <para>
-                Dies ist eine Einschränkung der aktuellen Zend Framework Version. Sie wird in
-                zukünftigen Versionen beseitigt werden. Aber ungebundene Seiten werden immer ein
-                besseres (also optimaleres) Ergebnis für gemeinsame Benutzung in Dokumenten liefern.
+                    Dies ist eine Einschränkung der aktuellen Zend Framework Version. Sie wird in
+                    zukünftigen Versionen beseitigt werden. Aber ungebundene Seiten werden immer ein
+                    besseres (also optimaleres) Ergebnis für gemeinsame Benutzung in Dokumenten
+                    liefern.
                 </para>
             </footnote>
         </para>
@@ -40,19 +44,12 @@
             die Größe der Seite spezifizieren. Sie können entweder die Seitengröße ($x, $y) in
             Punkten (1/72 Zoll) nehmen oder eine vordefinierte Konstante, die den Seitentyp
             repräsentiert:
+
             <itemizedlist>
-                <listitem>
-                    <para>Zend_Pdf_Page::SIZE_A4</para>
-                </listitem>
-                <listitem>
-                    <para>Zend_Pdf_Page::SIZE_A4_LANDSCAPE</para>
-                </listitem>
-                <listitem>
-                    <para>Zend_Pdf_Page::SIZE_LETTER</para>
-                </listitem>
-                <listitem>
-                    <para>Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE</para>
-                </listitem>
+                <listitem><para>Zend_Pdf_Page::SIZE_A4</para></listitem>
+                <listitem><para>Zend_Pdf_Page::SIZE_A4_LANDSCAPE</para></listitem>
+                <listitem><para>Zend_Pdf_Page::SIZE_LETTER</para></listitem>
+                <listitem><para>Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE</para></listitem>
             </itemizedlist>
         </para>
 
@@ -66,6 +63,7 @@
 
         <example id="zend.pdf.pages.example-1">
             <title>Verwaltung von PDF Dokumentseiten</title>
+
             <programlisting language="php"><![CDATA[
 ...
 // Umgekehrte Seitenreihenfolge
@@ -86,6 +84,7 @@ unset($pdf->pages[$id]);
 
     <sect2 id="zend.pdf.pages.cloning">
         <title>Klonen von Seiten</title>
+
         <para>
             Bestehende <acronym>PDF</acronym> Seiten können durch das Erstellen eines neuen
             <classname>Zend_Pdf_Page</classname> Objektes geklont werden indem eine existierende
@@ -94,6 +93,7 @@ unset($pdf->pages[$id]);
 
         <example id="zend.pdf.pages.example-2">
             <title>Klonen bestehender Seiten</title>
+
             <programlisting language="php"><![CDATA[
 ...
 // Die Template Seite in einer separaten Variable speichern
@@ -130,8 +130,4 @@ unset($pdf->pages[$templatePageIndex]);
             </para>
         </caution>
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.rest.client">
     <title>Zend_Rest_Client</title>
+
     <sect2 id="zend.rest.client.introduction">
         <title>Einführung</title>
+
         <para>
             Die Verwendung von <classname>Zend_Rest_Client</classname> ist sehr ähnlich der
-            Verwendung von <code>SoapClient</code> Objekten (<ulink url="http://www.php.net/soap">SOAP Web Service Erweiterung</ulink>).
-            Man kann einfach die REST Service Prozeduren als <classname>Zend_Rest_Client</classname> Methoden
+            Verwendung von <code>SoapClient</code> Objekten (<ulink
+                url="http://www.php.net/soap">SOAP Web Service Erweiterung</ulink>). Man kann
+            einfach die REST Service Prozeduren als <classname>Zend_Rest_Client</classname> Methoden
             aufrufen. Spezifiziere die komplette Adresse des Services im Constructor von
             <classname>Zend_Rest_Client</classname>.
         </para>
@@ -28,6 +31,7 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Servus Davey, guten Tag"
 
         <note>
             <title>Unterschiede im Aufruf</title>
+
             <para>
                 <classname>Zend_Rest_Client</classname> versucht, dass die entfernten Methoden, so
                 weit wie möglich, wie die nativen Methoden aussehen, wobei der einzige Unterschied
@@ -61,6 +65,7 @@ echo $client->get();
 
         <example id="zend.rest.client.return.example-1">
             <title>Antwort Status</title>
+
             <programlisting language="php"><![CDATA[
 $result = $client->sayHello('Davey', 'Tag')->get();
 
@@ -71,18 +76,19 @@ if ($result->isSuccess()) {
         </example>
 
         <para>
-            Im obigen Beispiel kann man sehen, dass das Ergebnis der Anfrage als Objekt verwendet wird,
-            um <methodname>isSuccess()</methodname> aufzurufen. Mithilfe der magischen
-            <methodname>__toString()</methodname>-Methode kann man das Objekt bzw. das Ergebnis ausgeben
-            (<code>echo</code>). <classname>Zend_Rest_Client_Response</classname> erlaubt die
-            Ausgabe jedes skalaren Wertes. Für komplexe Typen, kann entweder die Array- oder die
+            Im obigen Beispiel kann man sehen, dass das Ergebnis der Anfrage als Objekt verwendet
+            wird, um <methodname>isSuccess()</methodname> aufzurufen. Mithilfe der magischen
+            <methodname>__toString()</methodname>-Methode kann man das Objekt bzw. das Ergebnis
+            ausgeben (<code>echo</code>). <classname>Zend_Rest_Client_Response</classname> erlaubt
+            die Ausgabe jedes skalaren Wertes. Für komplexe Typen, kann entweder die Array- oder die
             Objektschreibweise verwendet werden.
         </para>
 
         <para>
-            Wenn trotzdem ein Service abgefragt wird, der nicht <classname>Zend_Rest_Server</classname>
-            verwendet, wird sich das <classname>Zend_Rest_Client_Response</classname> Objekt mehr wie
-            ein <code>SimpleXMLElement</code> verhalten. Um die Dinge trotzdem einfacher zu gestalten,
+            Wenn trotzdem ein Service abgefragt wird, der nicht
+            <classname>Zend_Rest_Server</classname> verwendet, wird sich das
+            <classname>Zend_Rest_Client_Response</classname> Objekt mehr wie ein
+            <code>SimpleXMLElement</code> verhalten. Um die Dinge trotzdem einfacher zu gestalten,
             wird das <acronym>XML</acronym> automatisch abgefragt, indem XPath verwendet wird, wenn
             die Eigenschaft nicht von direkter Abstammung des Dokument Root-Elements ist.
             Zusätzlich, wenn auf eine Eigenschaft als Methode zugegriffen wird, empfängt man den
@@ -104,6 +110,7 @@ echo $result->firstname() .' '. $result->lastname();
 
         <example id="zend.rest.client.return.example-3">
             <title>Beispiel Technorati Antwort</title>
+
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generator="Technorati API version 1.0 /bloginfo" -->
@@ -150,8 +157,8 @@ echo $result->firstname() .' '. $result->lastname();
             <title>Mehrere Elemente</title>
 
             <para>
-                Wenn beim Zugriff, über einen Namen, mehrere Elemente mit demselben Namen gefunden werden,
-                wird ein Array von SimpleXML-Elementen zurückgegeben. Beim Zugriff über die
+                Wenn beim Zugriff, über einen Namen, mehrere Elemente mit demselben Namen gefunden
+                werden, wird ein Array von SimpleXML-Elementen zurückgegeben. Beim Zugriff über die
                 Methodenschreibweise wird ein Array von <acronym>PHP</acronym> Werten zurückgegeben.
             </para>
         </note>
@@ -161,13 +168,15 @@ echo $result->firstname() .' '. $result->lastname();
         <title>Anfrage Argumente</title>
 
         <para>
-            Wenn man eine Anfrage an einen Server sendet, welcher nicht auf <classname>Zend_Rest_Server</classname>
-            basiert, sind die Chancen groß, dass man mehrere Argumente mit der Anfrage senden muß. Das
-            wird durchgeführt, indem man eine Methode mit dem Namen des Arguments aufruft und den Wert, als das
-            erste (und einzige) Argument übergibt. Jeder dieser Methodenaufrufe, gibt das Objekt selbst zurück,
-            was Verkettung oder "flüssige" Verwendung erlaubt. Der erste Aufruf, oder das erste Argument, das
-            übergeben wird, wenn man mehr als ein Argument übergeben will, wird immer als die Methode angenommen
-            wenn ein <classname>Zend_Rest_Server</classname> Service aufgerufen wird.
+            Wenn man eine Anfrage an einen Server sendet, welcher nicht auf
+            <classname>Zend_Rest_Server</classname> basiert, sind die Chancen groß, dass man mehrere
+            Argumente mit der Anfrage senden muß. Das wird durchgeführt, indem man eine Methode mit
+            dem Namen des Arguments aufruft und den Wert, als das erste (und einzige) Argument
+            übergibt. Jeder dieser Methodenaufrufe, gibt das Objekt selbst zurück, was Verkettung
+            oder "flüssige" Verwendung erlaubt. Der erste Aufruf, oder das erste Argument, das
+            übergeben wird, wenn man mehr als ein Argument übergeben will, wird immer als die
+            Methode angenommen wenn ein <classname>Zend_Rest_Server</classname> Service aufgerufen
+            wird.
         </para>
 
         <example id="zend.rest.client.args.example-1">
@@ -210,6 +219,3 @@ $client->arg('value1')->arg2('value2')->get();
         </warning>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

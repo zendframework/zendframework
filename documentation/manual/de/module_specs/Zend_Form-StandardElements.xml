@@ -2,7 +2,7 @@
 <!-- EN-Revision: 20774 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.form.standardElements">
-    <title>Standard Form Elemente die mit dem With Zend Framework ausgeliefert werden</title>
+    <title>Standard Form Elemente die mit dem Zend Framework ausgeliefert werden</title>
 
     <para>
         Zend Framework wird mit konkreten Element Klassen ausgeliefert welche die meisten HTML

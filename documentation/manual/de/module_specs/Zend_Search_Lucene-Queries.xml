@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20473 -->
+<!-- EN-Revision: 20872 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-api">
     <title>Abfrage Erzeugungs API</title>
@@ -12,6 +12,7 @@
     <para>
         Benutzerabfragen können mit Abfragen die durch die API erstellte wurden kombiniert werden.
         Einfach den Abfrageparser verwenden um eine Abfrage von einem String zu erstellen:
+
         <programlisting language="php"><![CDATA[
 $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 ]]></programlisting>
@@ -22,6 +23,7 @@ $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
 
         <para>
             Der Abfrageparser kann zwei Typen von Ausnahmen erstellen.
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -41,6 +43,7 @@ $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
             Es ist eine gute Idee die
             <classname>Zend_Search_Lucene_Search_QueryParserException</classname>s abzufangen und
             richtig abzuarbeiten:
+
             <programlisting language="php"><![CDATA[
 try {
     $query = Zend_Search_Lucene_Search_QueryParser::parse($queryString);
@@ -72,6 +75,7 @@ try {
 
     <sect2 id="zend.search.lucene.queries.term-query">
         <title>Begriffsabfrage</title>
+
         <para>
             Begriffsabfragen können für das Suchen mit einem einzelnen Begriff verwendet werden.
         </para>
@@ -79,6 +83,7 @@ try {
         <para>
             Abfragestring:
         </para>
+
         <programlisting language="querystring"><![CDATA[
 word1
 ]]></programlisting>
@@ -88,6 +93,7 @@ word1
         <para>
             Aufbau der Abfrage mit der <acronym>API</acronym>:
         </para>
+
         <programlisting language="php"><![CDATA[
 $term  = new Zend_Search_Lucene_Index_Term('word1', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Term($term);
@@ -96,8 +102,8 @@ $hits  = $index->find($query);
 
         <para>
             Das Term Feld ist optional. <classname>Zend_Search_Lucene</classname> durchsucht alle
-            indizierten Felder in jedem Dokument wenn das Feld nicht spezifiziert
-            wurde:
+            indizierten Felder in jedem Dokument wenn das Feld nicht spezifiziert wurde:
+
             <programlisting language="php"><![CDATA[
 // Sucht nach 'word1' in allen indizierten Feldern
 $term  = new Zend_Search_Lucene_Index_Term('wort1');
@@ -109,6 +115,7 @@ $hits  = $index->find($query);
 
     <sect2 id="zend.search.lucene.queries.multiterm-query">
         <title>Mehrfache Begriffsabfrage</title>
+
         <para>
             Mehrfache Begriffsabfragen sind für Suchen mit einem Satz von Begriffen gedacht.
         </para>
@@ -125,12 +132,14 @@ $hits  = $index->find($query);
                         Begriff nicht enthalten, nicht der Abfrage entsprechen;
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>prohibited</emphasis> bedeutet, dass Dokumente, die diesen
                         Begriff enthalten, nicht der Abfrage entsprechen;
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>neither</emphasis>, in welchem Fall Dokumenten den Begriff weder
@@ -155,21 +164,15 @@ $hits  = $index->find($query);
         <para>
             Abfragestring:
         </para>
+
         <programlisting language="querystring"><![CDATA[
 +word1 author:word2 -word3
 ]]></programlisting>
 
         <itemizedlist>
-            <listitem>
-                <para>
-                    '+' wird für notwendige Begriffe verwendet.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    '-' wird für verbotene Begriffe verwendet.
-                </para>
-            </listitem>
+            <listitem><para>'+' wird für notwendige Begriffe verwendet.</para></listitem>
+            <listitem><para>'-' wird für verbotene Begriffe verwendet.</para></listitem>
+
             <listitem>
                 <para>
                     Der 'field:' Präfix wird für die Angabe des Dokumentenfelds für die Suche
@@ -183,6 +186,7 @@ $hits  = $index->find($query);
         <para>
             Aufbau der Abfrage mit der <acronym>API</acronym>:
         </para>
+
         <programlisting language="php"><![CDATA[
 $query = new Zend_Search_Lucene_Search_Query_MultiTerm();
 
@@ -197,6 +201,7 @@ $hits  = $index->find($query);
         <para>
             Es ist auch möglich Begriffslisten in einem MultiTerm Anfrage Konstruktor zu
             spezifizieren:
+
             <programlisting language="php"><![CDATA[
 $terms = array(new Zend_Search_Lucene_Index_Term('word1'),
                new Zend_Search_Lucene_Index_Term('word2', 'author'),
@@ -211,17 +216,20 @@ $hits  = $index->find($query);
 
         <para>
             Das <varname>$signs</varname> Array enthält Informationen über den Begriffstyp:
+
             <itemizedlist>
                 <listitem>
                     <para>
                         <constant>TRUE</constant> wird für notwendige Begriffe verwendet.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>FALSE</constant> wird für verbotene Begriffe verwendet.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>NULL</constant> wird für weder notwendige noch verbotene Begriffe
@@ -234,6 +242,7 @@ $hits  = $index->find($query);
 
     <sect2 id="zend.search.lucene.queries.boolean-query">
         <title>Boolsche Abfragen</title>
+
         <para>
             Boolsche Abfragen erlauben die Erstellung von Abfragen die andere Abfragen und boolsche
             Operatoren verwenden.
@@ -250,12 +259,14 @@ $hits  = $index->find($query);
                         nicht entsprechen auch der Gesamtabfrage nicht entsprechen;
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>prohibited</emphasis> bedeutet das Dokumente die dieser
                         Unterabfrage entsprechen auch der Gesamtabfrage nicht entsprechen;
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <emphasis>optional</emphasis>, in dem Fall das entsprechende Dokumente in
@@ -280,6 +291,7 @@ $hits  = $index->find($query);
         <para>
             Abfrage String:
         </para>
+
         <programlisting language="querystring"><![CDATA[
 +(word1 word2 word3) (author:word4 author:word5) -(word6)
 ]]></programlisting>
@@ -290,11 +302,13 @@ $hits  = $index->find($query);
                     '+' wird verwendet um eine benötigte Unterabfrage zu definieren.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     '-' wird verwendet um eine verbotene Unterabfrage zu definieren.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     'field:' Der Prefix wird verwendet um ein Feld des Dokuments für eine Suche zu
@@ -308,6 +322,7 @@ $hits  = $index->find($query);
         <para>
             Aufbau der Abfrage durch die <acronym>API</acronym>:
         </para>
+
         <programlisting language="php"><![CDATA[
 $query = new Zend_Search_Lucene_Search_Query_Boolean();
 
@@ -333,6 +348,7 @@ $hits  = $index->find($query);
         <para>
             Es ist auch möglich Listen von Unterabfragen im Konstruktor der Boolschen Abfrage zu
             definieren:
+
             <programlisting language="php"><![CDATA[
 ...
 $subqueries = array($subquery1, $subquery2, $subquery3);
@@ -346,6 +362,7 @@ $hits  = $index->find($query);
 
         <para>
             Das <varname>$signs</varname> Array enthält Informationen über den Typ der Unterabfrage:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -353,12 +370,14 @@ $hits  = $index->find($query);
                         definieren.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>FALSE</constant> wird verwendet um eine verbotene Unterabfrage zu
                         definieren.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>NULL</constant> wird verwendet um eine Unterabfrage zu definieren
@@ -372,10 +391,13 @@ $hits  = $index->find($query);
             Jede Abfrage die boolsche Operatoren verwendet kann, kann auch auch umgeschrieben werden
             damit Sie die Vorzeichen-Schreibweise verwendet und mit Hilfe der API erstellt wird. Zum
             Beispiel:
+
             <programlisting language="querystring"><![CDATA[
 word1 AND (word2 AND word3 AND NOT word4) OR word5
 ]]></programlisting>
+
             ist identisch mit
+
             <programlisting language="querystring"><![CDATA[
 (+(word1) +(+word2 +word3 -word4)) (word5)
 ]]></programlisting>
@@ -384,6 +406,7 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
 
     <sect2 id="zend.search.lucene.queries.wildcard">
         <title>Wildcard Abfragen</title>
+
         <para>
             Wildcard Abfragen können dazu verwendet werden um nach Dokumenten zu suchen die Strings
             enthalten welche den spezifizierten Patterns entsprechen.
@@ -399,6 +422,7 @@ word1 AND (word2 AND word3 AND NOT word4) OR word5
 
         <para>
             Abfragestring:
+
             <programlisting language="querystring"><![CDATA[
 field1:test*
 ]]></programlisting>
@@ -408,6 +432,7 @@ field1:test*
 
         <para>
             Abfrageerstellung durch die API:
+
             <programlisting language="php"><![CDATA[
 $pattern = new Zend_Search_Lucene_Index_Term('test*', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Wildcard($pattern);
@@ -418,6 +443,7 @@ $hits  = $index->find($query);
         <para>
             Die Ausdrucksfelder sind optional. <classname>Zend_Search_Lucene</classname> durchsucht
             alle Felder in jedem Dokument wenn kein Feld spezifiziert wurde:
+
             <programlisting language="php"><![CDATA[
 $pattern = new Zend_Search_Lucene_Index_Term('test*');
 $query = new Zend_Search_Lucene_Search_Query_Wildcard($pattern);
@@ -428,6 +454,7 @@ $hits  = $index->find($query);
 
     <sect2 id="zend.search.lucene.queries.fuzzy">
         <title>Fuzzy Abfragen</title>
+
         <para>
             Fuzzy Abfragen können verwendet werden um nach Dokumenten zu Suchen die Strings
             enthalten welche Ausdrücken entsprechen die den spezifizierten Ausdrücken ähnlich sind.
@@ -435,9 +462,11 @@ $hits  = $index->find($query);
 
         <para>
             Abfrage String:
+
             <programlisting language="querystring"><![CDATA[
 field1:test~
 ]]></programlisting>
+
             Diese Abfrage trifft Dokumente welche die Wörter 'test' 'text' 'best' und andere
             enthalten.
         </para>
@@ -446,6 +475,7 @@ field1:test~
 
         <para>
             Abfrageerstellung durch die API:
+
             <programlisting language="php"><![CDATA[
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
@@ -459,6 +489,7 @@ $hits  = $index->find($query);
 
         <para>
             Abfrage String:
+
             <programlisting language="querystring"><![CDATA[
 field1:test~0.4
 ]]></programlisting>
@@ -468,6 +499,7 @@ field1:test~0.4
 
         <para>
             Abfrageerstellung durch die API:
+
             <programlisting language="php"><![CDATA[
 $term = new Zend_Search_Lucene_Index_Term('test', 'field1');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term, 0.4);
@@ -478,6 +510,7 @@ $hits  = $index->find($query);
         <para>
             Das Term Feld ist optional. <classname>Zend_Search_Lucene</classname> durchsucht alle
             Felder in jedem Dokument ob ein Feld nicht spezifiziert ist:
+
             <programlisting language="php"><![CDATA[
 $term = new Zend_Search_Lucene_Index_Term('test');
 $query = new Zend_Search_Lucene_Search_Query_Fuzzy($term);
@@ -488,6 +521,7 @@ $hits  = $index->find($query);
 
     <sect2 id="zend.search.lucene.queries.phrase-query">
         <title>Phrasenabfrage</title>
+
         <para>
             Phrasenabfragen können für das Suchen einer Phrase innerhalb von Dokumenten verwendet
             werden.
@@ -544,6 +578,7 @@ $query4 = new Zend_Search_Lucene_Search_Query_Phrase(
             Der <classname>Zend_Search_Lucene_Search_Query_Phrase</classname> Klassenkonstruktor
             nimmt drei optionale Argumente entgegen:
         </para>
+
         <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_Query_Phrase(
     [array $terms[, array $offsets[, string $field]]]
@@ -573,6 +608,7 @@ Zend_Search_Lucene_Search_Query_Phrase(
 $query =
     new Zend_Search_Lucene_Search_Query_Phrase(array('zend', 'framework'));
 ]]></programlisting>
+
         <para>
             Wird nach der Phrase 'zend framework' in allen Feldern suchen.
         </para>
@@ -604,6 +640,7 @@ $query = new Zend_Search_Lucene_Search_Query_Phrase(
             nimmt zwei Argumente entgeben. Ein <classname>Zend_Search_Lucene_Index_Term</classname>
             Objekt ist erforderlich und die Position optional:
         </para>
+
         <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_Query_Phrase::addTerm(
     Zend_Search_Lucene_Index_Term $term[, integer $position]
@@ -657,6 +694,7 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework', 'title'));
             entsprechende Abfrage eine exakte Suche nach der Phrase. Für größere Werte funktioniert
             das ähnlich dem WITHIN (innerhalb) oder NEAR (nahe) Operator.
         </para>
+
         <para>
             Der Ungenauigkeitsfaktor ist tatsächlich eine veränderbare Distanz, wobei die
             Veränderung dem Verschieben von Begriffen in der Phrasenabfrage entspricht. Um zum
@@ -665,14 +703,17 @@ $query->addTerm(new Zend_Search_Lucene_Index_Term('framework', 'title'));
             Neusortierung der Phrasen zu erlauben, muß der Ungenauigkeitsfaktor mindestens zwei
             sein.
         </para>
+
         <para>
             Exaktere Treffer werden höher bewertet als ungenauere Treffer, so dass die
             Suchergebnisse nach der Genauigkeit sortiert werden. Die Ungenauigkeit liegt
             standardmäßig bei 0, was exakte Treffer erfordert.
         </para>
+
         <para>
             Der Ungenauigkeitsfaktor kannnach der Erstellung der Abfrage zugeordnet werden:
         </para>
+
         <programlisting language="php"><![CDATA[
 // Query without a gap.
 $query =
@@ -692,6 +733,7 @@ $hits2 = $index->find($query);
 
     <sect2 id="zend.search.lucene.queries.range">
         <title>Bereichsabfragen</title>
+
         <para>
             <link linkend="zend.search.lucene.query-language.range">Bereichsabfragen</link> sind
             dazu gedacht Terme innerhalb eines spezifizierten Intervalls zu suchen.
@@ -699,6 +741,7 @@ $hits2 = $index->find($query);
 
         <para>
             Abfragestring:
+
             <programlisting language="querystring"><![CDATA[
 mod_date:[20020101 TO 20030101]
 title:{Aida TO Carmen}
@@ -709,6 +752,7 @@ title:{Aida TO Carmen}
 
         <para>
             Abfrageerstellung durch die API:
+
             <programlisting language="php"><![CDATA[
 $from = new Zend_Search_Lucene_Index_Term('20020101', 'mod_date');
 $to   = new Zend_Search_Lucene_Index_Term('20030101', 'mod_date');
@@ -722,6 +766,7 @@ $hits  = $index->find($query);
         <para>
             Begriffsfelder sind optional. <classname>Zend_Search_Lucene</classname> durchsucht alle
             Felder wenn das Feld nicht spezifiziert wurde:
+
             <programlisting language="php"><![CDATA[
 $from = new Zend_Search_Lucene_Index_Term('Aida');
 $to   = new Zend_Search_Lucene_Index_Term('Carmen');
@@ -736,6 +781,7 @@ $hits  = $index->find($query);
             Jede (aber nicht beide) der Begrenzungsausdrücke kann auf <constant>TRUE</constant>
             gesetzt werden. <classname>Zend_Search_Lucene</classname> sucht vom Anfang oder bis zum
             Ende des Verzeichnisses für die spezifizierten Feld(er) für diesen Fall:
+
             <programlisting language="php"><![CDATA[
 // Sucht nach ['20020101' TO ...]
 $from = new Zend_Search_Lucene_Index_Term('20020101', 'mod_date');

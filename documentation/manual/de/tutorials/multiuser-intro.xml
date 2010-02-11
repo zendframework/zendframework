@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19809 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.intro">
     <title>Erstellung von Multi-User Anwendungen mit Zend Framework</title>
@@ -34,22 +34,11 @@
 
         <itemizedlist>
             <listitem>
-                <para>
-                    Wie trennt den Benutzer einer Anwendung von einem anderen?
-                </para>
+                <para>Wie trennt den Benutzer einer Anwendung von einem anderen?</para>
             </listitem>
 
-            <listitem>
-                <para>
-                    Wie identifiziert man einen Benutzer als authentisch?
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    Wie kontrolliert man wozu ein Benutzer Zugriff hat?
-                </para>
-            </listitem>
+            <listitem><para>Wie identifiziert man einen Benutzer als authentisch?</para></listitem>
+            <listitem><para>Wie kontrolliert man wozu ein Benutzer Zugriff hat?</para></listitem>
         </itemizedlist>
 
         <note>

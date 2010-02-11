@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20161 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.19">
     <title>Zend Framework 1.9</title>
@@ -70,6 +70,7 @@ $valid->enableHeaderCheck();
 
     <sect2 id="migration.19.zend.http.client">
         <title>Zend_Http_Client</title>
+
         <sect3 id="migration.19.zend.http.client.fileuploadsarray">
             <title>
                 Änderungen in der internen Speicherung der Information von hochgeladenen Dateien
@@ -180,7 +181,6 @@ $client->setFileUpload('file2.txt',
             </para>
 
             <table id="migration.19.zend.locale.depreciated.table-1">
-
                 <title>List der Methodenaufrufe</title>
 
                 <tgroup cols="2">
@@ -190,6 +190,7 @@ $client->setFileUpload('file2.txt',
                             <entry>Neuer Aufruf</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry>

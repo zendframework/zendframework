@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20714 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.queue.adapters">
     <title>Adapter</title>
@@ -12,15 +12,11 @@
 
     <itemizedlist>
         <listitem>
-            <para>
-                <ulink url="http://activemq.apache.org/">Apache ActiveMQ</ulink>.
-            </para>
+            <para><ulink url="http://activemq.apache.org/">Apache ActiveMQ</ulink>.</para>
         </listitem>
 
         <listitem>
-            <para>
-                Eine Datenbank verwendende Queue über <classname>Zend_Db</classname>.
-            </para>
+            <para>Eine Datenbank verwendende Queue über <classname>Zend_Db</classname>.</para>
         </listitem>
 
         <listitem>
@@ -38,9 +34,7 @@
         </listitem>
 
         <listitem>
-            <para>
-                Ein lokales Array. Nützlich für Unit Tests.
-            </para>
+            <para>Ein lokales Array. Nützlich für Unit Tests.</para>
         </listitem>
     </itemizedlist>
 
@@ -263,7 +257,8 @@ $queue = new Zend_Queue('Db', $options);
 
                 <listitem>
                     <para>
-                         <emphasis>$options['driverOptions']['host'] = 'host.domain.tld';</emphasis>
+                         <emphasis>$options['driverOptions']['host'] =
+                             'host.domain.tld';</emphasis>
                     </para>
 
                     <para>
@@ -295,7 +290,8 @@ $queue = new Zend_Queue('Db', $options);
             <itemizedlist>
                 <listitem>
                     <para>
-                         <emphasis>$options['daemonOptions']['host'] = '127.0.0.1:10003';</emphasis>
+                         <emphasis>$options['daemonOptions']['host'] =
+                             '127.0.0.1:10003';</emphasis>
                     </para>
 
                     <para>
@@ -336,7 +332,6 @@ $queue = new Zend_Queue('Db', $options);
 
     <sect2 id="zend.queue.adapters.notes">
         <title>Hinweise für spezielle Adapter</title>
-
         <para>Die folgenden Adapter haben Hinweise:</para>
 
         <sect3 id="zend.queue.adapters.notes.activemq">
@@ -359,26 +354,10 @@ $queue = new Zend_Queue('Db', $options);
             </para>
 
             <itemizedlist>
-                <listitem>
-                    <para>
-                        <filename>/queue/</filename>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <filename>/topic/</filename>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <filename>/temp-queue/</filename>
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        <filename>/temp-topic/</filename>
-                    </para>
-                </listitem>
+                <listitem><para><filename>/queue/</filename></para></listitem>
+                <listitem><para><filename>/topic/</filename></para></listitem>
+                <listitem><para><filename>/temp-queue/</filename></para></listitem>
+                <listitem><para><filename>/temp-topic/</filename></para></listitem>
             </itemizedlist>
 
             <para>
@@ -515,8 +494,8 @@ $queue = new Zend_Queue('Db', $options);
 
                 <listitem>
                     <para>
-                        <methodname>count()</methodname> - Gibt die totale Anzahl an Jobs zurück die
-                        aktuell in der Job Queue aktiv sind.
+                        <methodname>count()</methodname> - Gibt die totale Anzahl an Jobs zurück
+                        die aktuell in der Job Queue aktiv sind.
                     </para>
                 </listitem>
 
@@ -525,7 +504,8 @@ $queue = new Zend_Queue('Db', $options);
                         <methodname>send()</methodname> - Diese Methode ist möglicherweise die eine
                         Methode welche sich am meisten von den anderen Adaptern unterscheidet.
                         Das <varname>$message</varname> Argument kann eine von drei möglichen
-                        Typen sein und arbeitet unterschiedlich, basierend auf dem übergebenen Wert:
+                        Typen sein und arbeitet unterschiedlich, basierend auf dem übergebenen
+                        Wert:
                     </para>
 
                     <itemizedlist>
@@ -555,7 +535,8 @@ $queue = new Zend_Queue('Db', $options);
                                 <listitem>
                                     <para>
                                         <varname>priority</varname> - Die Priorität des Jobs die
-                                        verwendet werden soll wenn er in der Queue registriert wird.
+                                        verwendet werden soll wenn er in der Queue registriert
+                                        wird.
                                     </para>
                                 </listitem>
 
@@ -578,8 +559,8 @@ $queue = new Zend_Queue('Db', $options);
                                     <para>
                                         <varname>preserved</varname> - Ob der Job in der History
                                         der Job Queue behalten werden soll. Standardmäßig aus;
-                                        wenn ein <constant>TRUE</constant> Wert übergeben wird, dann
-                                        wird er behalten.
+                                        wenn ein <constant>TRUE</constant> Wert übergeben wird,
+                                        dann wird er behalten.
                                     </para>
                                 </listitem>
 
@@ -616,8 +597,8 @@ $queue = new Zend_Queue('Db', $options);
                                     <para>
                                         <varname>schedule_time</varname> - Ein
                                         <acronym>UNIX</acronym> Zeitstempel der anzeigt wann der
-                                        Job ausgeführt werden soll; standardmäßig 0, was anzeigt das
-                                        der Job so früh wie möglich ausgeführt werden soll.
+                                        Job ausgeführt werden soll; standardmäßig 0, was anzeigt
+                                        das der Job so früh wie möglich ausgeführt werden soll.
                                     </para>
                                 </listitem>
 
@@ -625,8 +606,8 @@ $queue = new Zend_Queue('Db', $options);
                                     <para>
                                         <varname>application_id</varname> - Der Identifikator der
                                         Anwendung für den Job. Standardmäßig ist er
-                                        <constant>NULL</constant>, was anzeigt das automatisch einer
-                                        von der Queue zugeordnet wird, wenn die Queue einer
+                                        <constant>NULL</constant>, was anzeigt das automatisch
+                                        einer von der Queue zugeordnet wird, wenn die Queue einer
                                         Anwendungs ID zugeordnet wird.
                                     </para>
                                 </listitem>
@@ -651,9 +632,9 @@ $queue = new Zend_Queue('Db', $options);
 
                     <para>
                         In allen Instanzen gibt <methodname>send()</methodname> ein
-                        <classname>Zend_Queue_Message_PlatformJob</classname> Objekt zurück, welches
-                        Zugriff zum <classname>ZendApi_Job</classname> Objekt gibt und verwendet
-                        wird um mit der Job Queue zu kommunizieren.
+                        <classname>Zend_Queue_Message_PlatformJob</classname> Objekt zurück,
+                        welches Zugriff zum <classname>ZendApi_Job</classname> Objekt gibt und
+                        verwendet wird um mit der Job Queue zu kommunizieren.
                     </para>
                 </listitem>
 

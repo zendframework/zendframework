@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.create">
     <title>Erstellen und Laden von PDF Dokumenten</title>
+
     <para>
         Die <classname>Zend_Pdf</classname> Klasse bildet das <acronym>PDF</acronym> Dokument ab
         und stellt Operationen auf Dokumentebene bereit.
@@ -23,6 +24,7 @@
 
     <example id="zend.pdf.create.example-1">
         <title>Erstellen und Laden von PDF Dokumenten</title>
+
         <programlisting language="php"><![CDATA[
 ...
 // Erstelle ein neues PDF Dokument
@@ -43,21 +45,25 @@ $pdf3 = Zend_Pdf::parse($pdfString);
         Dokuments erstellt. Die <classname>Zend_Pdf</classname> Komponente unterstützt die Rückgabe
         einer vorgegebenen Revision des Dokuments.
     </para>
+
     <para>
         Die Revision kann den Methoden <methodname>Zend_Pdf::load()</methodname> und
         <methodname>Zend_Pdf::parse()</methodname> als zweiter Parameter übergeben oder durch Aufruf
         der <methodname>Zend_Pdf::rollback()</methodname> Methode.
+
         <footnote>
             <para>
                 Die <methodname>Zend_Pdf::rollback()</methodname> Methode muss vor einer Änderung
                 eines Dokuments aufgerufen werden, andernfalls ist das Verhalten nicht definiert.
             </para>
         </footnote>
+
         Aufruf angefordert werden.
     </para>
 
     <example id="zend.pdf.create.example-2">
         <title>Rückgabe einer vorgegebenen Revision eines PDF Dokuments</title>
+
         <programlisting language="php"><![CDATA[
 ...
 // Lade die vorherige Revision des PDF Dokuments
@@ -73,8 +79,4 @@ $pdf3->rollback($revisions - 1);
 ...
 ]]></programlisting>
     </example>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

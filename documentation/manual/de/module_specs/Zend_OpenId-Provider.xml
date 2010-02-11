@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20872 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.provider">
     <title>Zend_OpenId_Provider</title>
+
     <para>
         <classname>Zend_OpenId_Provider</classname> kann verwendet werden um OpenID Server zu
         implementieren. Dieses Kapitel bietet Beispiele die Demonstrieren wie ein sehr einfacher
@@ -13,6 +14,7 @@
 
     <sect2 id="zend.openid.provider.start">
         <title>Schellstart</title>
+
         <para>
             Das folgende Beispiel beinhaltet Code für das Erstellen eines Benutzerzugang indem
             <classname>Zend_OpenId_Provider::register</classname> verwendet wird. Das Link-Element
@@ -28,6 +30,7 @@
 
         <example id="zend.openid.provider.example-1">
             <title>Die Identität</title>
+
             <programlisting language="php"><![CDATA[
 <?php
 // eine Testidentität erstellen
@@ -68,6 +71,7 @@ if (!$server->hasUser(TEST_ID)) {
 
         <example id="zend.openid.provider.example-2">
             <title>Einfacher Identitäts Provider</title>
+
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider("example-8-login.php",
                                    "example-8-trust.php");
@@ -121,6 +125,7 @@ if (is_string($ret)) {
 
         <example id="zend.openid.provider.example-3">
             <title>Einfacher Login Schirm</title>
+
             <programlisting language="php"><![CDATA[
 <?php
 $server = new Zend_OpenId_Provider();
@@ -186,6 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
 
         <example id="zend.openid.provider.example-4">
             <title>Einfacher Vertrauens Schirm</title>
+
             <programlisting language="php"><![CDATA[
 <?php
 $server = new Zend_OpenId_Provider();
@@ -243,6 +249,7 @@ ihre Identitäts URL ist.
 
     <sect2 id="zend.openid.provider.all">
         <title>Kombinierte Skripte</title>
+
         <para>
             Es ist möglich alle Provider Funktionalitäten in einem Skript zusammen zu kombinieren.
             In diesem Fall werden Login und Vertraute <acronym>URL</acronym>s unterdrückt, und
@@ -261,6 +268,7 @@ ihre Identitäts URL ist.
 
         <example id="zend.openid.provider.example-5">
             <title>Alles zusammen</title>
+
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
 
@@ -300,6 +308,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
 
     <sect2 id="zend.openid.provider.sreg">
         <title>Einfache Registrierungs Erweiterung (SREG)</title>
+
         <para>
             Wieder ist der Code vor dem &lt;html&gt; Tag nur ein Trick um die Funktionalität zu
             demonstrieren. Er erstellt einen neuen Benutzerzugang und assoziiert Ihn mit einem
@@ -310,6 +319,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
 
         <example id="zend.openid.provider.example-6">
             <title>Identität mit Profil</title>
+
             <programlisting language="php"><![CDATA[
 <?php
 define("TEST_SERVER", Zend_OpenId::absoluteURL("example-10.php"));
@@ -365,6 +375,7 @@ if (!$server->hasUser(TEST_ID)) {
 
         <example id="zend.openid.provider.example-7">
             <title>Provider mit SREG</title>
+
             <programlisting language="php"><![CDATA[
 $server = new Zend_OpenId_Provider();
 $sreg = new Zend_OpenId_Extension_Sreg();
@@ -397,6 +408,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
 
     <sect2 id="zend.openid.provider.else">
         <title>Sonst noch was?</title>
+
         <para>
             Das Erstellen von OpenID Providern ist eine viel seltenere Aufgabe als die Erstellung
             von OpenID-aktivierten Sites, weswegen dieses Handbuch nicht alle
@@ -415,6 +427,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
                     erlauben sich zu registrieren und Ihre vertrauten Seiten und Profile zu managen.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Einen abstrakten Speicherlayer um Informationen über Benutzer, Ihre Seiten und
@@ -424,6 +437,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
                     auch den Dateispeicher, kann aber mit anderen Backends abgeleitet werden.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Einen Abtraktions Benutzer-Assoziierungs Layer der Web-Browser von Benutzern mit
@@ -441,6 +455,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' &&
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

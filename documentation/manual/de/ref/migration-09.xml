@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18682 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.09">
     <title>Zend Framework 0.9</title>
@@ -26,12 +26,14 @@
                     <methodname>Zend_Controller_Action_Helper_Redirector::setCode()</methodname>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setRedirectPrependBase()</methodname>; wurde umbenannt in
                     <methodname>Zend_Controller_Action_Helper_Redirector::setPrependBase()</methodname>.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     <methodname>setRedirectExit()</methodname>; wurde umbenannt in
@@ -49,6 +51,3 @@
         </para>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

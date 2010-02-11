@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19620 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.searching">
     <title>Einen Index durchsuchen</title>
@@ -27,6 +27,7 @@
                         und nicht für von Programmen erstellte Texte entwickelt.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         Nicht in einzelne Tokens aufgeteilte Felder werden am besten direkt zu der
@@ -39,6 +40,7 @@
                         <acronym>API</acronym> erstellt werden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         In einem Abfrageformular sollten generelle Textfelder den Query Parser
@@ -50,6 +52,7 @@
                         eine TermQuery Klausel hinzugefügt werden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         Boolesche Abfragen erlauben es dem Programmierer zwei oder mehr Abfragen
@@ -59,7 +62,6 @@
                     </para>
                 </listitem>
             </orderedlist>
-
         </para>
 
         <para>
@@ -79,17 +81,20 @@ $index->find($query);
             <classname>Zend_Search_Lucene_Search_Query</classname> Objekt aus einer Eingabe vom Typ
             String zu erstellen.
         </para>
+
         <para>
             Es ist wichtig zu beachten, dass der Query Parser den Standard Analyzer verwendet, um
             verschiedene Teile des Abfragestrings in Token aufzuteilen. Dadurch werden alle
             Umwandlungen, die auf einen indizierten Text ausgeführt werden, auch für den
             Abfragestring ausgeführt.
         </para>
+
         <para>
             Der Standardanalysator kann den Abfragestring, für die Unabhängigkeit von Groß- und
             Kleinschreibung, in Kleinbuchstaben umwandeln, Stopwörter entfernen, und andere
             Umwandlungen durchführen.
         </para>
+
         <para>
             Die <acronym>API</acronym> Methoden transformieren oder filtern Eingabebegriffe in
             keinem Fall. Das passt deshalb eher für computergenerierte oder nicht geteilte Felder.
@@ -97,6 +102,7 @@ $index->find($query);
 
         <sect3 id="zend.search.lucene.searching.query_building.parsing">
             <title>Parsen der Abfrage</title>
+
             <para>
                 Die <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname> Methode
                 kann verwendet werden um einen Abfrage String in ein Abfrage Objekt zu parsen.
@@ -132,6 +138,7 @@ $hits = $index->find($query);
                 Die <methodname>Zend_Search_Lucene_Search_QueryParser::parse()</methodname> Methode
                 nimmt auch einen optionalen Encoding Parameter, welche die Codierung des Abfrage
                 Strings definieren kann:
+
                 <programlisting language="php"><![CDATA[
 $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
                                                           'iso-8859-5');
@@ -147,6 +154,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr,
                 Es ist auch möglich eine Standard Codierung für den Abfragestring mit der
                 <methodname>Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding()</methodname>
                 Methode zu definieren:
+
                 <programlisting language="php"><![CDATA[
 Zend_Search_Lucene_Search_QueryParser::setDefaultEncoding('iso-8859-5');
 ...
@@ -164,6 +172,7 @@ $userQuery = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 
     <sect2 id="zend.search.lucene.searching.results">
         <title>Suchergebnisse</title>
+
         <para>
             Das Suchergebnis ist ein Array mit
             <classname>Zend_Search_Lucene_Search_QueryHit</classname> Objekten. Jedes davon hat zwei
@@ -248,16 +257,19 @@ foreach ($hits as $hit) {
             <classname>Zend_Search_Lucene</classname> bietet die Möglichkeit die Ergebnisse mit den
             <methodname>getResultSetLimit()</methodname> und
             <methodname>setResultSetLimit()</methodname> Methoden zu begrenzen:
+
             <programlisting language="php"><![CDATA[
 $currentResultSetLimit = Zend_Search_Lucene::getResultSetLimit();
 
 Zend_Search_Lucene::setResultSetLimit($newLimit);
 ]]></programlisting>
+
             Der Standardwert von 0 bedeutet 'keine Grenze'.
         </para>
 
         <para>
             Es gibt nicht die 'besten N' Ergebnisse, sonder nur die 'ersten N'
+
             <footnote>
                 <para>
                     Zurückgegebenen Ergebnisse werden trotzdem nach dem Treffer geordnet oder
@@ -269,6 +281,7 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
 
     <sect2 id="zend.search.lucene.searching.results-scoring">
         <title>Ergebnisgewichtung</title>
+
         <para>
             <classname>Zend_Search_Lucene</classname> verwendet die selben Gewichtungsalgorithmen
             wie Java Lucene. Alle Treffer in den Suchergebnisse werden standardmäßig nach einem
@@ -287,6 +300,7 @@ Zend_Search_Lucene::setResultSetLimit($newLimit);
             Der Punktwert kann über die <code>score</code> Eigenschaft des Treffers ermittelt
             werden:
         </para>
+
         <programlisting language="php"><![CDATA[
 $hits = $index->find($query);
 
@@ -302,11 +316,11 @@ foreach ($hits as $hit) {
                 linkend="zend.search.lucene.extending.scoring">Erweiterbarkeit. Algorithmen für
                 Punktwertermittlung</link> Abschnitt für weitere Details.
         </para>
-
     </sect2>
 
     <sect2 id="zend.search.lucene.searching.sorting">
         <title>Sortierung der Suchergebnisse</title>
+
         <para>
             Standardmäßig werden die Suchergebnisse nach dem Punktwert sortiert. Der Programmierer
             kann dieses Verhalten durch das Setzen eines Sortierfeldes und der Parameter für die
@@ -316,6 +330,7 @@ foreach ($hits as $hit) {
         <para>
             <code>$index->find()</code> Aufruf kann verschiedene optionale Parameter entgegen
             nehmen:
+
             <programlisting language="php"><![CDATA[
 $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
                     [, $sortField2 [, $sortType [, $sortOrder]]]
@@ -343,12 +358,15 @@ $index->find($query [, $sortField [, $sortType [, $sortOrder]]]
 
         <para>
             Beispiele:
+
             <programlisting language="php"><![CDATA[
 $index->find($query, 'quantity', SORT_NUMERIC, SORT_DESC);
 ]]></programlisting>
+
             <programlisting language="php"><![CDATA[
 $index->find($query, 'fname', SORT_STRING, 'lname', SORT_STRING);
 ]]></programlisting>
+
             <programlisting language="php"><![CDATA[
 $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
 ]]></programlisting>
@@ -363,14 +381,17 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
 
     <sect2 id="zend.search.lucene.searching.highlighting">
         <title>Such Resultate hervorheben</title>
+
         <para>
             <classname>Zend_Search_Lucene</classname> bietet zwei Optionen für das Highlightinh von
             Suchergebnissen.
         </para>
+
         <para>
             Die erste ist die Verwendung der <code>Zend_Search_Lucene_Document_Html</code> Klasse
             (siehe <link linkend="zend.search.lucene.index-creation.html-documents">das Kapitel
             über HTML Dokumente</link> für Details) mit den folgenden Methoden:
+
             <programlisting language="php"><![CDATA[
 /**
  * Highlight text with specified color
@@ -381,6 +402,7 @@ $index->find($query, 'name', SORT_STRING, 'quantity', SORT_NUMERIC, SORT_DESC);
  */
 public function highlight($words, $colour = '#66ffff');
 ]]></programlisting>
+
             <programlisting language="php"><![CDATA[
 /**
  * Highlight text using specified View helper or callback function.
@@ -398,10 +420,12 @@ public function highlight($words, $colour = '#66ffff');
 public function highlightExtended($words, $callback, $params = array())
 ]]></programlisting>
         </para>
+
         <para>
             Um das Verhalten beim Highlighting zu verändern kann die
             <methodname>highlightExtended()</methodname> Methode mit einem spezifizierten Callback
             verwendet werden, welche einen oder mehreren Parametern entgegennimmt
+
             <footnote>
                 <para>
                     Der erste ist ein HTML Fragment für das Highlighting und die anderen sind
@@ -409,9 +433,11 @@ public function highlightExtended($words, $callback, $params = array())
                     HTML Fragment.
                 </para>
             </footnote>
+
             , oder durch Erweiterung der <code>Zend_Search_Lucene_Document_Html</code> Klasse und
             dem Anpassen der <methodname>applyColour($stringToHighlight, $colour)</methodname>
             Methode die als Standardmäßiger Callback für das Highlighten verwendet wird.
+
             <footnote>
                 <para>
                     In beiden Fällen wird das zurückgegebene HTML automatisch in gültiges
@@ -419,13 +445,16 @@ public function highlightExtended($words, $callback, $params = array())
                 </para>
             </footnote>
         </para>
+
         <para>
             <link linkend="zend.view.helpers">View Helfer</link> können auch als Callbacks im
             Kontext von View Skripten verwendet werden:
+
             <programlisting language="php"><![CDATA[
 $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
 ]]></programlisting>
         </para>
+
         <para>
             Das Ergebnis der Highlighting Operation wird von der
             <code>Zend_Search_Lucene_Document_Html->getHTML()</code> Methode empfangen.
@@ -436,16 +465,19 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
                 Highlighting wird in den Ausdrücken des aktuellen Analysators durchgeführt. So
                 werden alle Formen des Wortes/der Wörter vom Analysator erkannt und highgelighted.
             </para>
+
             <para>
                 Z.B. wenn der aktuelle Analysator unabhängig von der Groß- oder Kleinschreibung ist
                 und wir das Highlighten des Wortes 'text' anfragen, dann werden 'text', 'Text',
                 'TEXT' und alle anderen Kombinationen von Schreibweisen geHighlightet.
             </para>
+
             <para>
                 Auf dem gleichen Weg wird, wenn der aktuelle Analysator Abstammung unterstützt und
                 wir das Highlighten von 'indexed' anfragen, dann werden 'index', 'indexing',
                 'indices' und andere Formen dieser Wörter geHighlighted.
             </para>
+
             <para>
                 Wenn andererseits das Wort vom aktuellen Analysator übersprungen wird (z.B. wenn
                 ein Filter für kurze Wörter dem Analysator angehängt ist), dann wird nichts
@@ -458,20 +490,24 @@ $doc->highlightExtended('word1 word2 word3...', array($this, 'myViewHelper'));
             <code>Zend_Search_Lucene_Search_Query->highlightMatches(string $inputHTML[,
             $defaultEncoding = 'UTF-8'[,
             Zend_Search_Lucene_Search_Highlighter_Interface $highlighter]])</code> Methode:
+
             <programlisting language="php"><![CDATA[
 query = Zend_Search_Lucene_Search_QueryParser::parse($queryStr);
 highlightedHTML = $query->highlightMatches($sourceHTML);
 ]]></programlisting>
         </para>
+
         <para>
             Der optionale zweite Parameter ist die standardmäßige Kodierung des HTML Dokuments.
             Er wird verwendet wenn die Kodierung nicht, durch die Verwendung des Content-type
             MetaTags HTTP-EQUIV, spezifiziert ist.
         </para>
+
         <para>
             Der optionale dritte Parameter ist ein Highlighter Objekt welches das
             <classname>Zend_Search_Lucene_Search_Highlighter_Interface</classname> Interface
             implementiert:
+
             <programlisting language="php"><![CDATA[
 interface Zend_Search_Lucene_Search_Highlighter_Interface
 {
@@ -498,6 +534,7 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
     public function highlight($words);
 }
 ]]></programlisting>
+
             Wobei das <code>Zend_Search_Lucene_Document_Html</code> Objekt ein Objekt ist welches
             von der HMTL Quelle erzeugt wird, die wiederum von der
             <code>Zend_Search_Lucene_Search_Query->highlightMatches()</code> Methode geliefert
@@ -509,16 +546,19 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
             <code>Zend_Search_Lucene_Search_Highlighter_Default</code> Objekt initiiert und
             verwendet.
         </para>
+
         <para>
             Die Highlighter Methode <methodname>highlight()</methodname> ist einmal pro SubQuery
             enthalten, deshalb hat sie für diese auch die Möglichkeit das Highlightig zu
             unterscheiden.
         </para>
+
         <para>
             Aktuell, macht der standardmäßige Highlighter das indem eine vordefinierte Farbtabelle
             durchlaufen wird. Man kann also seinen eigenen Highlighter implementieren, oder den
             standardmäßigen nur erweitern und die Farbtabelle umdefinieren.
         </para>
+
         <para>
             <code>Zend_Search_Lucene_Search_Query->htmlFragmentHighlightMatches()</code>
             hat ein ähnliches Verhalten. Der einzige Unterschied besteht darin das er eine
@@ -527,5 +567,4 @@ interface Zend_Search_Lucene_Search_Highlighter_Interface
             <acronym>XHTML</acronym> transformiert.
         </para>
     </sect2>
-
 </sect1>

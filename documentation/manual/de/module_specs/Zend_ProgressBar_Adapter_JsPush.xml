@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.jspush">
     <title>Zend_ProgressBar_Adapter_JsPush</title>
+
     <para>
         <classname>Zend_ProgressBar_Adapter_JsPush</classname> ist ein Adapter der es erlaubt den
         Fortschrittsbalken in einem Browser über Javascript Push zu aktualisieren. Das bedeutet das
         keine zweite Verbindung benötigt wird um den Status über den aktuell laufenden Prozess zu
         erhalten, sondern das der Prozess selbst seinen Status direkt an den Browser schickt.
     </para>
+
     <para>
         Man kann auch die Optionen des Adapters entweder über die <code>set*</code> Methoden oder
         durch die Übergabe eines Arrays, oder einer Instanz von <classname>Zend_Config</classname>,
         an den Constructor mit dem Optionen als ersten Parameter. Die möglichen Optionen sind:
     </para>
+
     <itemizedlist>
         <listitem>
             <para>
@@ -22,14 +25,16 @@
                 <classname>Zend_ProgressBar_Update</classname>.
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <code>finishMethodName</code>: Die Javascript Methode die aufgerufen werden soll
-                wenn der Beendet-Status gesetzt wurde. Der Standardwert ist <constant>NULL</constant>, was
-                bedeutet das nichts passiert.
+                wenn der Beendet-Status gesetzt wurde. Der Standardwert ist
+                <constant>NULL</constant>, was bedeutet das nichts passiert.
             </para>
         </listitem>
     </itemizedlist>
+
     <para>
         Die Verwendung dieses Adapters ist recht einfach. Zuerst wird ein Fortschrittsbalken im
         Browser erstellt, entweder mit JavaScript oder mit vorher erstelltem reinen HTML. Dann
@@ -39,44 +44,33 @@
         aufgerufen. Wärend der Prozess läuft wird der Adapter die Update Methode bei jedem Update
         mit einem Json Objekt aufgerufen, das die folgenden Parameter enthält:
     </para>
+
     <itemizedlist>
+        <listitem><para><code>current</code>: Der aktuelle absolute Wert</para></listitem>
+        <listitem><para><code>max</code>: Der maximale absolute Wert</para></listitem>
+        <listitem><para><code>percent</code>: Der berechnete Prozentwert</para></listitem>
+
         <listitem>
-            <para>
-                <code>current</code>: Der aktuelle absolute Wert
-            </para>
+            <para><code>timeTaken</code>: Die Zeit die der Prozess bis jetzt gelaufen ist</para>
         </listitem>
+
         <listitem>
-            <para>
-                <code>max</code>: Der maximale absolute Wert
-            </para>
+            <para><code>timeRemaining</code>: Die erwartete Zeit bis der Prozess beendet ist</para>
         </listitem>
+
         <listitem>
-            <para>
-                <code>percent</code>: Der berechnete Prozentwert
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-                <code>timeTaken</code>: Die Zeit die der Prozess bis jetzt gelaufen ist
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-                <code>timeRemaining</code>: Die erwartete Zeit bis der Prozess beendet ist
-            </para>
-        </listitem>
-        <listitem>
-            <para>
-                <code>text</code>: Die optionale Statusmeldung, wenn angegeben
-            </para>
+            <para><code>text</code>: Die optionale Statusmeldung, wenn angegeben</para>
         </listitem>
     </itemizedlist>
+
     <example id="zend.progressbar-adapter.jspush.example">
         <title>Grundsätzliches Beispiel für den Client-seitigen Teil</title>
+
         <para>
             Dieses Beispiel zeigt ein grundsätzliches Setup von HTML, <acronym>CSS</acronym> und
             JavaScript für den JsPush Adapter
         </para>
+
         <programlisting language="html"><![CDATA[
 <div id="zend-progressbar-container">
     <div id="zend-progressbar-done"></div>
@@ -84,6 +78,7 @@
 
 <iframe src="long-running-process.php" id="long-running-process"></iframe>
 ]]></programlisting>
+
         <programlisting language="css"><![CDATA[
 #long-running-process {
     position: absolute;
@@ -109,6 +104,7 @@
     background-color: #000000;
 }
 ]]></programlisting>
+
         <programlisting language="javascript"><![CDATA[
 function Zend_ProgressBar_Update(data)
 {
@@ -122,10 +118,12 @@ function Zend_ProgressBar_Update(data)
             nicht mit <code>display: none;</code> verstecken, da einige Browser wie Safari 2 den
             aktuellen Inhalt dann nicht laden.
         </para>
+
         <para>
             Statt einen eigenen Fortschrittsbalken zu erstellen, kann es gewünscht sein einen von
             einer vorhandenen Bibliothek wir Dojo, jQuery usw zu verwenden. Es gibt zum Beispiel:
         </para>
+
         <itemizedlist>
             <listitem>
                 <para>
@@ -133,23 +131,28 @@ function Zend_ProgressBar_Update(data)
                         url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/user-assistance-and-feedback/progress-bar" />
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     jQuery: <ulink url="http://t.wits.sg/2008/06/20/jquery-progress-bar-11/" />
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     MooTools: <ulink url="http://davidwalsh.name/dw-content/progress-bar.php" />
                 </para>
             </listitem>
+
             <listitem>
                 <para>Prototype: <ulink url="http://livepipe.net/control/progressbar" /></para>
             </listitem>
         </itemizedlist>
     </example>
+
     <note>
         <title>Intervall der Updates</title>
+
         <para>
             Man sollte davon Abstand nehmen zuviele Updates zu senden, da jedes Update eine
             Mindestgröße von 1kb hat. Das ist eine Notwendigkeit für den Safari Browser um den
@@ -158,6 +161,3 @@ function Zend_ProgressBar_Update(data)
         </para>
     </note>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

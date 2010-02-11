@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19423 -->
+<!-- EN-Revision: 20872 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon">
     <title>Zend_Service_Amazon</title>
+
     <sect2 id="zend.service.amazon.introduction">
         <title>Einführung</title>
+
         <para>
             <classname>Zend_Service_Amazon</classname> ist eine einfach <acronym>API</acronym> für
             die Benutzung des Amazon Web Services. <classname>Zend_Service_Amazon</classname> hat 2
@@ -12,38 +14,24 @@
             <acronym>API</acronym> folgt, und eine simplere "Abfrage <acronym>API</acronym>" um
             sogar komplexe Suchabfragen einfachst machen zu können.
         </para>
+
         <para>
             <classname>Zend_Service_Amazon</classname> erlaubt es Entwicklern, Informationen von
             allen Amazon.com Web Seiten durch das Amazon Web Services <acronym>API</acronym> zu
             empfangen. Beispiele beinhalten:
+
             <itemizedlist>
                 <listitem>
-                    <para>
-                        Informationen speichern, wie Bilder, Beschreibungen, Preise uvm.
-                    </para>
+                    <para>Informationen speichern, wie Bilder, Beschreibungen, Preise uvm.</para>
                 </listitem>
-                <listitem>
-                    <para>
-                        Kunden und Editorial Reviews
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Ähnliche Produkte und Zubehör
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        Amazon.com Angebote
-                    </para>
-                </listitem>
-                <listitem>
-                    <para>
-                        ListMania Listen
-                    </para>
-                </listitem>
+
+                <listitem><para>Kunden und Editorial Reviews</para></listitem>
+                <listitem><para>Ähnliche Produkte und Zubehör</para></listitem>
+                <listitem><para>Amazon.com Angebote</para></listitem>
+                <listitem><para>ListMania Liste</para></listitem>
             </itemizedlist>
         </para>
+
         <para>
             Um <classname>Zend_Service_Amazon</classname> benutzen zu können, benötigt man einen
             Amazon Entwickler <acronym>API</acronym> Schlüssel sowie einen geheimen Schlüssel. Um
@@ -53,20 +41,25 @@
             <acronym>API</acronym> über <classname>Zend_Service_Amazon</classname> nur dann
             verwenden wenn man einen zusätzlichen geheimen Schlüssel spezifiziert.
         </para>
+
         <note>
             <title>Achtung</title>
+
             <para>
                 Der eigene Amazon Entwickler <acronym>API</acronym> und der geheime Schlüssel sind
                 mit der eigenen Amazon Identität verknüpft. Deswegen sollte man darauf achten das
                 die Schlüssel privat bleibt.
             </para>
         </note>
+
         <example id="zend.service.amazon.introduction.example.itemsearch">
             <title>Suchen in Amazon mit der traditionellen API</title>
+
             <para>
                 In diesem Beispiel suchen wir nach <acronym>PHP</acronym> Büchern bei Amazon,
                 blättern durch die Resultate und Drucken diese aus.
             </para>
+
             <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
@@ -76,13 +69,16 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
+
         <example id="zend.service.amazon.introduction.example.query_api">
             <title>Suchen in Amazon mit der Abfrage API</title>
+
             <para>
                 Hier suchen wir auch nach <acronym>PHP</acronym> Büchern bei Amazon. Aber wir
                 verwenden stattdessen die Abfrage <acronym>API</acronym>, welche das Fluent
                 Interface Design Pattern verwendet.
             </para>
+
             <programlisting language="php"><![CDATA[
 $query = new Zend_Service_Amazon_Query('AMAZON_API_KEY',
                                        'US',
@@ -95,42 +91,53 @@ foreach ($results as $result) {
 ]]></programlisting>
         </example>
     </sect2>
+
     <sect2 id="zend.service.amazon.countrycodes">
         <title>Ländercodes</title>
+
         <para>
             Standardmäßig verbindet sich <classname>Zend_Service_Amazon</classname> zum Amazon Web
             Service der Vereinigten Staaten ("<code>US</code>"). Um sich zu einem anderen Land zu
             verbinden, muß einfach der entsprechende String des Landercodes als zweiter Parameter an
             den Konstruktor übergeben werden:
         </para>
+
         <example id="zend.service.amazon.countrycodes.example.country_code">
             <title>Auswahl eines Amazon Web Service Landes</title>
+
             <programlisting language="php"><![CDATA[
 // Zu Amazon in Japan verbinden
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'JP', 'AMAZON_SECRET_KEY');
 ]]></programlisting>
         </example>
+
         <note>
             <title>Ländercodes</title>
+
             <para>
                 Gültige Ländercodes sind: <code>CA</code>, <code>DE</code>, <code>FR</code>,
                 <code>JP</code>, <code>UK</code>, and <code>US</code>.
             </para>
         </note>
     </sect2>
+
     <sect2 id="zend.service.amazon.itemlookup">
         <title>Betrachten eines speziellen Teils bei Amazon durch ASIN</title>
+
         <para>
             Die <methodname>itemLookup()</methodname> Methode ermöglicht es ein bestimmtes Teil bei
             Amazon zu erhalten wenn der <acronym>ASIN</acronym> bekannt ist.
         </para>
+
         <example id="zend.service.amazon.itemlookup.example.asin">
             <title>Betrachten eines speziellen Teils bei Amazon durch ASIN</title>
+
             <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $item = $amazon->itemLookup('B0000A432X');
 ]]></programlisting>
         </example>
+
         <para>
             Die <methodname>itemLookup()</methodname> Methode akzeptiert auch einen optionalen
             zweiten Parameter für die Handhabung der Suchoptionen. Für komplette Details, inklusive
@@ -138,8 +145,10 @@ $item = $amazon->itemLookup('B0000A432X');
                 url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemLookupOperation">relevante
                 Amazon Dokumentation</ulink>.
         </para>
+
         <note>
             <title>Bildinformationen</title>
+
             <para>
                 Um Bildinformationen für deine Suchergebnisse zu erhalten, musst du die
                 <code>ResponseGroup</code> Option auf <code>Medium</code> oder <code>Large</code>
@@ -147,15 +156,19 @@ $item = $amazon->itemLookup('B0000A432X');
              </para>
         </note>
     </sect2>
+
     <sect2 id="zend.service.amazon.itemsearch">
         <title>Suchen nach Teilen bei Amazon</title>
+
         <para>
             Das Suchen nach Teilen, basierend auf den unterschiedlichen möglichen Kriterien ist
             einfach gehalten durch benutzen der <methodname>itemSearch()</methodname> Methode wie im
             folgenden Beispiel:
         </para>
+
         <example id="zend.service.amazon.itemsearch.example.basic">
             <title>Suchen nach Teilen bei Amazon</title>
+
             <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $results = $amazon->itemSearch(array('SearchIndex' => 'Books',
@@ -165,12 +178,15 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
+
         <example id="zend.service.amazon.itemsearch.example.responsegroup">
             <title>Verwenden der ResponseGroup Option</title>
+
             <para>
                 Die <code>ResponseGroup</code> Option wird verwendet um die spezielle Information
                 zu kontrollieren die in der Antwort zurückgegeben wird.
             </para>
+
             <programlisting language="php"><![CDATA[
 $amazon = new Zend_Service_Amazon('AMAZON_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $results = $amazon->itemSearch(array(
@@ -184,6 +200,7 @@ foreach ($results as $result) {
 }
 ]]></programlisting>
         </example>
+
         <para>
             Die <methodname>itemSearch()</methodname> Methode akzeptiert einen einzelnen Parameter
             als Array für die Handhabung der Suchoptionen. Für komplette Details, inklusive eine
@@ -191,6 +208,7 @@ foreach ($results as $result) {
                 url="http://www.amazon.com/gp/aws/sdk/main.html/103-9285448-4703844?s=AWSEcommerceService&amp;v=2005-10-05&amp;p=ApiReference/ItemSearchOperation">relevante
                 Amazon Dokumentation</ulink>
         </para>
+
         <tip>
             <para>
                 Die <link
@@ -199,10 +217,13 @@ foreach ($results as $result) {
             </para>
         </tip>
     </sect2>
+
     <sect2 id="zend.service.amazon.query">
         <title>Benutzen der alternativen Abfrage API</title>
+
         <sect3 id="zend.service.amazon.query.introduction">
             <title>Einführung</title>
+
             <para>
                 <classname>Zend_Service_Amazon_Query</classname> bietet eine alternative
                 <acronym>API</acronym> für die Benutzung der Amazon Web Services. Die alternative
@@ -210,6 +231,7 @@ foreach ($results as $result) {
                 Aufrufe können durchgeführt werden durch Benutzen von verketteten Methoden Aufrufen.
                 (z.B., <code>$obj->method()->method2($arg)</code>)
             </para>
+
             <para>
                 Die <classname>Zend_Service_Amazon_Query</classname> <acronym>API</acronym> benutzt
                 Überladung um einfachst eine Teile Suche zu realisieren, und ermöglicht es,
@@ -217,12 +239,15 @@ foreach ($results as $result) {
                 Methoden Aufruf angeboten, und jedes Methoden Argument korrespondiert mit dem
                 beschriebenen Options Wert:
             </para>
+
             <example id="zend.service.amazon.query.introduction.example.basic">
                 <title>Suchen in Amazon durch Benutzen der alternativen Abfrage API</title>
+
                 <para>
                     In diesem Beispiel wird die alternative Abfrage <acronym>API</acronym> als
                     Fluent Interface benutzt um Optionen und Ihre Werte festzulegen:
                 </para>
+
                 <programlisting language="php"><![CDATA[
 $query = new Zend_Service_Amazon_Query('MY_API_KEY', 'US', 'AMAZON_SECRET_KEY');
 $query->Category('Books')->Keywords('PHP');
@@ -231,10 +256,12 @@ foreach ($results as $result) {
     echo $result->Title . '<br />';
 }
 ]]></programlisting>
+
                 <para>
                     Das setzt die Option <code>Category</code> auf "Books" und <code>Keywords</code>
                     auf "PHP".
                 </para>
+
                 <para>
                     Für weitere Informationen über die möglichen Optionen, sehen Sie bitte in die
                     <ulink
@@ -244,75 +271,101 @@ foreach ($results as $result) {
             </example>
         </sect3>
     </sect2>
+
     <sect2 id="zend.service.amazon.classes">
         <title>Zend_Service_Amazon Klassen</title>
+
         <para>
             Die folgenden klassen werden alle zurückgegeben durch <link
                 linkend="zend.service.amazon.itemlookup"><methodname>Zend_Service_Amazon::itemLookup()</methodname></link>
             und <link
                 linkend="zend.service.amazon.itemsearch"><methodname>Zend_Service_Amazon::itemSearch()</methodname></link>:
+
             <itemizedlist>
                 <listitem>
                     <para>
-                        <link linkend="zend.service.amazon.classes.item"><classname>Zend_Service_Amazon_Item</classname></link>
+                        <link
+                            linkend="zend.service.amazon.classes.item"><classname>Zend_Service_Amazon_Item</classname></link>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <link linkend="zend.service.amazon.classes.image"><classname>Zend_Service_Amazon_Image</classname></link>
+                        <link
+                            linkend="zend.service.amazon.classes.image"><classname>Zend_Service_Amazon_Image</classname></link>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <link linkend="zend.service.amazon.classes.resultset"><classname>Zend_Service_Amazon_ResultSet</classname></link>
+                        <link
+                            linkend="zend.service.amazon.classes.resultset"><classname>Zend_Service_Amazon_ResultSet</classname></link>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <link linkend="zend.service.amazon.classes.offerset"><classname>Zend_Service_Amazon_OfferSet</classname></link>
+                        <link
+                            linkend="zend.service.amazon.classes.offerset"><classname>Zend_Service_Amazon_OfferSet</classname></link>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <link linkend="zend.service.amazon.classes.offer"><classname>Zend_Service_Amazon_Offer</classname></link>
+                        <link
+                            linkend="zend.service.amazon.classes.offer"><classname>Zend_Service_Amazon_Offer</classname></link>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <link linkend="zend.service.amazon.classes.similarproduct"><classname>Zend_Service_Amazon_SimilarProduct</classname></link>
+                        <link
+                            linkend="zend.service.amazon.classes.similarproduct"><classname>Zend_Service_Amazon_SimilarProduct</classname></link>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <link linkend="zend.service.amazon.classes.accessories"><classname>Zend_Service_Amazon_Accessories</classname></link>
+                        <link
+                            linkend="zend.service.amazon.classes.accessories"><classname>Zend_Service_Amazon_Accessories</classname></link>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <link linkend="zend.service.amazon.classes.customerreview"><classname>Zend_Service_Amazon_CustomerReview</classname></link>
+                        <link
+                            linkend="zend.service.amazon.classes.customerreview"><classname>Zend_Service_Amazon_CustomerReview</classname></link>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <link linkend="zend.service.amazon.classes.editorialreview"><classname>Zend_Service_Amazon_EditorialReview</classname></link>
+                        <link
+                            linkend="zend.service.amazon.classes.editorialreview"><classname>Zend_Service_Amazon_EditorialReview</classname></link>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
-                        <link linkend="zend.service.amazon.classes.listmania"><classname>Zend_Service_Amazon_ListMania</classname></link>
+                        <link
+                            linkend="zend.service.amazon.classes.listmania"><classname>Zend_Service_Amazon_ListMania</classname></link>
                     </para>
                 </listitem>
             </itemizedlist>
         </para>
+
         <sect3 id="zend.service.amazon.classes.item">
             <title>Zend_Service_Amazon_Item</title>
+
             <para>
                 <classname>Zend_Service_Amazon_Item</classname> ist ein Klassen Typ der benutzt wird
                 um ein Amazon Teil darzustellen welches durch das Web Service zurück gegeben wird.
                 Es enthält alle Attribute des Teils wie z.B. Titel, Beschreibung, Reviews, usw.
             </para>
+
             <sect4 id="zend.service.amazon.classes.item.asxml">
                 <title>Zend_Service_Amazon_Item::asXML()</title>
+
                 <para>
                     <methodsynopsis>
                         <type>string</type>
@@ -320,17 +373,22 @@ foreach ($results as $result) {
                         <void />
                     </methodsynopsis>
                 </para>
+
                 <para>Gibt das original <acronym>XML</acronym> für dieses Teil zurück</para>
             </sect4>
+
             <sect4 id="zend.service.amazon.classes.item.properties">
                 <title>Eigenschaften</title>
+
                 <para>
                     <classname>Zend_Service_Amazon_Item</classname> hat eine Anzahl an Eigenschaften
                     welche eine direkte Beziehung zu Ihren Standard Amazon <acronym>API</acronym>
                     Gegenstücken haben.
                 </para>
+
                 <table id="zend.service.amazon.classes.item.properties.table-1">
                     <title>Zend_Service_Amazon_Item Eigenschaften</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -339,120 +397,128 @@ foreach ($results as $result) {
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Amazon Teil ID</entry>
                             </row>
+
                             <row>
                                 <entry>DetailPageURL</entry>
                                 <entry>string</entry>
                                 <entry>URL zur Detailseite des Teils</entry>
                             </row>
+
                             <row>
                                 <entry>SalesRank</entry>
                                 <entry>int</entry>
                                 <entry>Verkaufs Rang des Teils</entry>
                             </row>
+
                             <row>
                                 <entry>SmallImage</entry>
                                 <entry>Zend_Service_Amazon_Image</entry>
                                 <entry>Kleines Bild des Tiles</entry>
                             </row>
+
                             <row>
                                 <entry>MediumImage</entry>
                                 <entry>Zend_Service_Amazon_Image</entry>
                                 <entry>Mittleres Bild des Teils</entry>
                             </row>
+
                             <row>
                                 <entry>LargeImage</entry>
                                 <entry>Zend_Service_Amazon_Image</entry>
                                 <entry>Großes Bild des Teils</entry>
                             </row>
+
                             <row>
                                 <entry>Subjects</entry>
                                 <entry>array</entry>
                                 <entry>Inhalte des Teils</entry>
                             </row>
+
                             <row>
                                 <entry>Offers</entry>
+
                                 <entry>
-                                    <code>
-                                        <link
-                                            linkend="zend.service.amazon.classes.offerset">Zend_Service_Amazon_OfferSet</link>
-                                    </code>
+                                    <code><link
+                                        linkend="zend.service.amazon.classes.offerset">Zend_Service_Amazon_OfferSet</link></code>
                                 </entry>
+
                                 <entry>Summe der Angebote und Angebote für dieses Teil</entry>
                             </row>
+
                             <row>
                                 <entry>CustomerReviews</entry>
                                 <entry>array</entry>
+
                                 <entry>
                                     Kunden Reviews dargestellt als Array von
-                                    <code>
-                                        <link
-                                            linkend="zend.service.amazon.classes.customerreview">Zend_Service_Amazon_CustomerReview</link>
-                                    </code>
+                                    <code><link
+                                        linkend="zend.service.amazon.classes.customerreview">Zend_Service_Amazon_CustomerReview</link></code>
                                     Objekten
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>EditorialReviews</entry>
                                 <entry>array</entry>
+
                                 <entry>
-                                    Editorial Reviews dargestellt als Array von
-                                    <code>
-                                        <link
-                                            linkend="zend.service.amazon.classes.editorialreview">Zend_Service_Amazon_EditorialReview</link>
-                                    </code>
+                                    Editorial Reviews dargestellt als Array von <code><link
+                                        linkend="zend.service.amazon.classes.editorialreview">Zend_Service_Amazon_EditorialReview</link></code>
                                     Objekten
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>SimilarProducts</entry>
                                 <entry>array</entry>
+
                                 <entry>
-                                    Ähnliche Produkte dargestellt als Array von
-                                    <code>
-                                        <link
-                                            linkend="zend.service.amazon.classes.similarproduct">Zend_Service_Amazon_SimilarProduct</link>
-                                    </code>
+                                    Ähnliche Produkte dargestellt als Array von <code><link
+                                        linkend="zend.service.amazon.classes.similarproduct">Zend_Service_Amazon_SimilarProduct</link></code>
                                     Objekten
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>Accessories</entry>
                                 <entry>array</entry>
+
                                 <entry>
-                                    Zubehör für dieses Teil dargestellt als Array von
-                                    <code>
-                                        <link
-                                            linkend="zend.service.amazon.classes.accessories">Zend_Service_Amazon_Accessories</link>
-                                    </code>
+                                    Zubehör für dieses Teil dargestellt als Array von <code><link
+                                        linkend="zend.service.amazon.classes.accessories">Zend_Service_Amazon_Accessories</link></code>
                                     Objekten
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>Tracks</entry>
                                 <entry>array</entry>
+
                                 <entry>
                                     Ein Array mit Track Nummern und Namen für Musik CDs und
                                     <constant>DVD</constant>s
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>ListmaniaLists</entry>
                                 <entry>array</entry>
+
                                 <entry>
                                     Passende Listmania Liste für diese Teil, als Array von
-                                    <code>
-                                        <link
-                                            linkend="zend.service.amazon.classes.listmania">Zend_Service_Amazon_ListmainList</link>
-                                    </code>
+                                    <code><link
+                                        linkend="zend.service.amazon.classes.listmania">Zend_Service_Amazon_ListmainList</link></code>
                                     Objekten
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>PromotionalTag</entry>
                                 <entry>string</entry>
@@ -461,21 +527,27 @@ foreach ($results as $result) {
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.amazon.classes">Zurück zur Liste der Klassen</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.amazon.classes.image">
             <title>Zend_Service_Amazon_Image</title>
+
             <para>
                 <classname>Zend_Service_Amazon_Image</classname> repräsentiert ein entferntes Bild
                 für ein Produkt.
             </para>
+
             <sect4 id="zend.service.amazon.classes.image.properties">
                 <title>Eigenschaften</title>
+
                 <table id="zend.service.amazon.classes.image.properties.table-1">
                     <title>Zend_Service_Amazon_Image Eigenschaften</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -484,17 +556,20 @@ foreach ($results as $result) {
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>Url</entry>
                                 <entry>Zend_Uri</entry>
                                 <entry>Entfernte <acronym>URL</acronym> für das Bild</entry>
                             </row>
+
                             <row>
                                 <entry>Height</entry>
                                 <entry>int</entry>
                                 <entry>Die Höhe des Bildes als Pixel</entry>
                             </row>
+
                             <row>
                                 <entry>Width</entry>
                                 <entry>int</entry>
@@ -503,44 +578,55 @@ foreach ($results as $result) {
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.amazon.classes">Zurück zur Liste der Klassen</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.amazon.classes.resultset">
             <title>Zend_Service_Amazon_ResultSet</title>
+
             <para>
                 <classname>Zend_Service_Amazon_ResultSet</classname> Objekte werden zurückgegeben
                 durch <link
                     linkend="zend.service.amazon.itemsearch">Zend_Service_Amazon::itemSearch()</link>
                 und erlauben es, die vielfach zurück gelieferten Resultate, einfachst zu Handhaben.
             </para>
+
             <note>
                 <title>SeekableIterator</title>
+
                 <para>
                     Implementiert den <code>SeekableIterator</code> für einfach Iteration
                     (z.B. benutzen von <code>foreach</code>), sowie direkten Zugriff auf ein
                     Spezielles Resultat mit <methodname>seek()</methodname>.
                 </para>
             </note>
+
             <sect4 id="zend.service.amazon.classes.resultset.totalresults">
                 <title>Zend_Service_Amazon_ResultSet::totalResults()</title>
+
                 <methodsynopsis>
                     <type>int</type>
                     <methodname>totalResults</methodname>
                     <void />
                 </methodsynopsis>
+
                 <para>
                     Liefert die Gesamtanzahl der Resultate welche die Suche zurückgegeben hat
                 </para>
+
                 <para>
                     <link linkend="zend.service.amazon.classes">Zurück zur Liste der Klassen</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.amazon.classes.offerset">
             <title>Zend_Service_Amazon_OfferSet</title>
+
             <para>
                 Jedes Resultat welches durch <link
                     linkend="zend.service.amazon.itemsearch">Zend_Service_Amazon::itemSearch()</link>
@@ -550,10 +636,13 @@ foreach ($results as $result) {
                 <classname>Zend_Service_Amazon_OfferSet</classname>
                 Objekt durch welches Preisinformationen für das Teil empfangen werden können.
             </para>
+
             <sect4 id="zend.service.amazon.classes.offerset.parameters">
                 <title>Eigenschaften</title>
+
                 <table id="zend.service.amazon.classes.offerset.parameters.table-1">
                     <title>Zend_Service_Amazon_OfferSet Properties</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -562,94 +651,107 @@ foreach ($results as $result) {
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>LowestNewPrice</entry>
                                 <entry>int</entry>
                                 <entry>Niedrigster Preis des Teiles als &quot;Neuwert&quot;</entry>
                             </row>
+
                             <row>
                                 <entry>LowestNewPriceCurrency</entry>
                                 <entry>string</entry>
-                                <entry>
-                                    Die Währung für
-                                    <code>LowestNewPrice</code>
-                                </entry>
+                                <entry>Die Währung für <code>LowestNewPrice</code></entry>
                             </row>
+
                             <row>
                                 <entry>LowestOldPrice</entry>
                                 <entry>int</entry>
+
                                 <entry>
                                     Niedrigster Preis des Teiles als &quot;Gebrauchtwert&quot;
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>LowestOldPriceCurrency</entry>
                                 <entry>string</entry>
-                                <entry>
-                                    Die Währung für
-                                    <code>LowestOldPrice</code>
-                                </entry>
+                                <entry>Die Währung für <code>LowestOldPrice</code></entry>
                             </row>
+
                             <row>
                                 <entry>TotalNew</entry>
                                 <entry>int</entry>
+
                                 <entry>
                                     Erhältliche Gesamtanzahl dieses Teils mit &quot;Neuwert&quot;
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>TotalUsed</entry>
                                 <entry>int</entry>
+
                                 <entry>
                                     Erhältliche Gesamtanzahl dieses Teils mit
                                     &quot;Gebrauchtwert&quot;
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>TotalCollectible</entry>
                                 <entry>int</entry>
+
                                 <entry>
                                     Erhältliche Gesamtanzahl dieses Teils die &quot;Sammelbar&quot;
                                     sind
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>TotalRefurbished</entry>
                                 <entry>int</entry>
+
                                 <entry>
                                     Erhältliche Gesamtanzahl dieses Teils die
                                     &quot;Wiederhergestellt&quot; sind
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>Offers</entry>
                                 <entry>array</entry>
+
                                 <entry>
                                     Ein Array von
-                                    <classname>Zend_Service_Amazon_Offer</classname>
-                                    Objekten.
+                                    <classname>Zend_Service_Amazon_Offer</classname> Objekten.
                                 </entry>
                             </row>
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.amazon.classes">Zurück zur Liste der Klassen</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.amazon.classes.offer">
             <title>Zend_Service_Amazon_Offer</title>
+
             <para>
                 Jedes Angebot für ein Teil wird als
-                <classname>Zend_Service_Amazon_Offer</classname>
-                Objekt zurück gegeben.
+                <classname>Zend_Service_Amazon_Offer</classname> Objekt zurück gegeben.
             </para>
+
             <sect4 id="zend.service.amazon.classes.offer.properties">
                 <title>Zend_Service_Amazon_Offer Eigenschaften</title>
+
                 <table id="zend.service.amazon.classes.offer.properties.table-1">
                     <title>Eigenschaften</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -658,47 +760,57 @@ foreach ($results as $result) {
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>MerchantId</entry>
                                 <entry>string</entry>
                                 <entry>Amazon ID des Anbieters</entry>
                             </row>
+
                             <row>
                                 <entry>GlancePage</entry>
                                 <entry>string</entry>
+
                                 <entry>
                                     URL einer Seite mit einer Zusammenfassung des Anbieters
                                 </entry>
                             </row>
+
                             <row>
                                 <entry>Condition</entry>
                                 <entry>string</entry>
                                 <entry>Kondition des Teils</entry>
                             </row>
+
                             <row>
                                 <entry>OfferListingId</entry>
                                 <entry>string</entry>
                                 <entry>ID der Angebots Liste</entry>
                             </row>
+
                             <row>
                                 <entry>Price</entry>
                                 <entry>int</entry>
                                 <entry>Preis für das Teil</entry>
                             </row>
+
                             <row>
                                 <entry>CurrencyCode</entry>
                                 <entry>string</entry>
                                 <entry>Währungscode des Preises für das Teil</entry>
                             </row>
+
                             <row>
                                 <entry>Availability</entry>
                                 <entry>string</entry>
                                 <entry>Erhältlichkeit des Teils</entry>
                             </row>
+
                             <row>
                                 <entry>IsEligibleForSuperSaverShipping</entry>
                                 <entry>boolean</entry>
+
                                 <entry>
                                     Ob das Teil erhältlich ist für Super Sicheren Versand oder nicht
                                 </entry>
@@ -706,26 +818,33 @@ foreach ($results as $result) {
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.amazon.classes">Zurück zur Liste der Klassen</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.amazon.classes.similarproduct">
             <title>Zend_Service_Amazon_SimilarProduct</title>
+
             <para>
                 Bei der Suche nach Teilen gibt Amazon auch eine Liste an ähnlichen Produkten zurück,
                 welche dem Suchenden empfohlen werden. Jedes dieser Produkte wird als
                 <classname>Zend_Service_Amazon_SimilarProduct</classname> Objekt zurückgegeben.
             </para>
+
             <para>
                 Jedes Objekt enthält die Informationen welche es erlauben eine Subanfrage zu machen,
                 um die kompletten Informationen zu diesem Teil zu bekommen.
             </para>
+
             <sect4 id="zend.service.amazon.classes.similarproduct.properties">
                 <title>Eigenschaften</title>
+
                 <table id="zend.service.amazon.classes.similarproduct.properties.table-1">
                     <title>Zend_Service_Amazon_SimilarProduct Eigenschaften</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -734,12 +853,14 @@ foreach ($results as $result) {
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Eindeutige Amazon ID des Produkts (ASIN)</entry>
                             </row>
+
                             <row>
                                 <entry>Title</entry>
                                 <entry>string</entry>
@@ -748,21 +869,27 @@ foreach ($results as $result) {
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.amazon.classes">Zurück zur Liste der Klassen</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.amazon.classes.accessories">
             <title>Zend_Service_Amazon_Accessories</title>
+
             <para>
                 Zubehör für das zurückgegebene Teil werden als
                 <classname>Zend_Service_Amazon_Accessories</classname> Objekte dargestellt.
             </para>
+
             <sect4 id="zend.service.amazon.classes.accessories.properties">
                 <title>Eigenschaften</title>
+
                 <table id="zend.service.amazon.classes.accessories.properties.table-1">
                     <title>Zend_Service_Amazon_Accessories Eigenschaften</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -771,12 +898,14 @@ foreach ($results as $result) {
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry><acronym>ASIN</acronym></entry>
                                 <entry>string</entry>
                                 <entry>Eindeutige Amazon ID des Produkts (ASIN)</entry>
                             </row>
+
                             <row>
                                 <entry>Title</entry>
                                 <entry>string</entry>
@@ -785,21 +914,27 @@ foreach ($results as $result) {
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.amazon.classes">Back to Class List</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.amazon.classes.customerreview">
             <title>Zend_Service_Amazon_CustomerReview</title>
+
             <para>
                 Jede Kunden Review wird als
                 <classname>Zend_Service_Amazon_CustomerReview</classname> Objekt zurückgegeben.
             </para>
+
             <sect4 id="zend.service.amazon.classes.customerreview.properties">
                 <title>Eigenschaften</title>
+
                 <table id="zend.service.amazon.classes.customerreview.properties.table-1">
                     <title>Zend_Service_Amazon_CustomerReview Eigenschaften</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -808,37 +943,44 @@ foreach ($results as $result) {
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>Rating</entry>
                                 <entry>string</entry>
                                 <entry>Bewertung des Teils</entry>
                             </row>
+
                             <row>
                                 <entry>HelpfulVotes</entry>
                                 <entry>string</entry>
                                 <entry>Stimmen wie hilfreich die Review ist</entry>
                             </row>
+
                             <row>
                                 <entry>CustomerId</entry>
                                 <entry>string</entry>
                                 <entry>Kunden ID</entry>
                             </row>
+
                             <row>
                                 <entry>TotalVotes</entry>
                                 <entry>string</entry>
                                 <entry>Gesamtzahl der Stimmen</entry>
                             </row>
+
                             <row>
                                 <entry>Date</entry>
                                 <entry>string</entry>
                                 <entry>Datum der Review</entry>
                             </row>
+
                             <row>
                                 <entry>Summary</entry>
                                 <entry>string</entry>
                                 <entry>Zusammenfassung der Review</entry>
                             </row>
+
                             <row>
                                 <entry>Content</entry>
                                 <entry>string</entry>
@@ -847,21 +989,27 @@ foreach ($results as $result) {
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.amazon.classes">Zurück zur Liste der Klassen</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.amazon.classes.editorialreview">
             <title>Zend_Service_Amazon_EditorialReview</title>
+
             <para>
                 Jede Editorial review des Teils wird als
                 <classname>Zend_Service_Amazon_EditorialReview</classname> Objekt zurückgegeben.
             </para>
+
             <sect4 id="zend.service.amazon.classes.editorialreview.properties">
                 <title>Eigenschaften</title>
+
                 <table id="zend.service.amazon.classes.editorialreview.properties.table-1">
                     <title>Zend_Service_Amazon_EditorialReview Eigenschaften</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -870,12 +1018,14 @@ foreach ($results as $result) {
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>Source</entry>
                                 <entry>string</entry>
                                 <entry>Quelle der Editorial Review</entry>
                             </row>
+
                             <row>
                                 <entry>Content</entry>
                                 <entry>string</entry>
@@ -884,21 +1034,27 @@ foreach ($results as $result) {
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.amazon.classes">Zurück zur Liste der Klassen</link>
                 </para>
             </sect4>
         </sect3>
+
         <sect3 id="zend.service.amazon.classes.listmania">
             <title>Zend_Service_Amazon_Listmania</title>
+
             <para>
                 Jedes List Mania List Ergebnis des Teils wird als
                 <classname>Zend_Service_Amazon_Listmania</classname> Objekt zurückgegeben.
             </para>
+
             <sect4 id="zend.service.amazon.classes.listmania.properties">
                 <title>Eigenschaften</title>
+
                 <table id="zend.service.amazon.classes.listmania.properties.table-1">
                     <title>Zend_Service_Amazon_Listmania Eigenschaften</title>
+
                     <tgroup cols="3">
                         <thead>
                             <row>
@@ -907,12 +1063,14 @@ foreach ($results as $result) {
                                 <entry>Beschreibung</entry>
                             </row>
                         </thead>
+
                         <tbody>
                             <row>
                                 <entry>ListId</entry>
                                 <entry>string</entry>
                                 <entry>ID der Liste</entry>
                             </row>
+
                             <row>
                                 <entry>ListName</entry>
                                 <entry>string</entry>
@@ -921,6 +1079,7 @@ foreach ($results as $result) {
                         </tbody>
                     </tgroup>
                 </table>
+
                 <para>
                     <link linkend="zend.service.amazon.classes">Zurück zur Liste der Klassen</link>
                 </para>
@@ -928,6 +1087,3 @@ foreach ($results as $result) {
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

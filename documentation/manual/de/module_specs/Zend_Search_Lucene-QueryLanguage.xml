@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18536 -->
+<!-- EN-Revision: 20872 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.query-language">
     <title>Abfragesprache</title>
@@ -16,8 +16,8 @@
 
     <para>
         Die komplette Java Lucene Syntax Dokumentation der Abfragesprache kann
-        <ulink url="http://lucene.apache.org/java/2_3_0/queryparsersyntax.html">hier</ulink> gefunden
-        werden.
+        <ulink url="http://lucene.apache.org/java/2_3_0/queryparsersyntax.html">hier</ulink>
+        gefunden werden.
     </para>
 
     <sect2 id="zend.search.lucene.query-language.terms">
@@ -27,16 +27,20 @@
             Eine Abfrage wird in Ausdrücke und Operatoren zerteilt. Es gibt drei Arten von
             Ausdrücken: Einzelne Ausdrücke, Phrasen und Unterabfragen.
         </para>
+
         <para>
             Ein einzelner Ausdruck ist ein einzelnes Wort wie "Test" oder "Hallo".
         </para>
+
         <para>
             Eine Phrase ist eine Gruppe von Wörtern die von doppelten Hochkommata umgeben sind wie
             "Hallo Dolly".
         </para>
+
         <para>
             Eine Unterabfrage ist eine Abfrage die von Klammern umgeben ist wie "(Hallo Dolly)".
         </para>
+
         <para>
             Mehrere Ausdrücke können mithilfe eines boolschen Operators miteinander kombiniert
             werden um komplexere Abfragen zu formen (siehe anbei).
@@ -52,14 +56,17 @@
             den indizierten Daten ab und das Standardfeld wird durch aktuelle Einstellungen
             definiert.
         </para>
+
         <para>
             Der erste und größte Unterschied zu Java Lucene ist der das Ausdrücke standardmäßig
             über <emphasis>alle Felder</emphasis> gesucht werden.
         </para>
+
         <para>
             Es gibt zwei statische Methoden in der <classname>Zend_Search_Lucene</classname> Klasse
             welche dem Entwickler das Konfigurieren dieser Einstellungen erlauben:
         </para>
+
         <programlisting language="php"><![CDATA[
 $defaultSearchField = Zend_Search_Lucene::getDefaultSearchField();
 ...
@@ -67,27 +74,33 @@ Zend_Search_Lucene::setDefaultSearchField('contents');
 ]]></programlisting>
 
         <para>
-            Der <constant>NULL</constant> Wert bedeutet, das die Suche über alle Felder durchgeführt wird.
-            Das ist die Standardeinstellung.
+            Der <constant>NULL</constant> Wert bedeutet, das die Suche über alle Felder durchgeführt
+            wird. Das ist die Standardeinstellung.
         </para>
+
         <para>
             Es können spezielle Felder gesucht werden indem der Feldname gefolgt von einem
             Doppelpunkt ":" angegeben wird, gefolgt von dem Begriff nach dem gesucht wird.
         </para>
+
         <para>
             Als Beispiel nehmen wir an das ein Lucene Index zwei Felder enthält - title und text -
             text ist das Standardfeld. Wenn man das "Der richtige Weg" benannte Dokument finden will
             welches den Text "gehe nicht diesen Weg" enthält, geht das mit:
         </para>
+
         <programlisting language="querystring"><![CDATA[
 title:"Der richtige Weg" AND text:go
 ]]></programlisting>
+
         <para>
             oder
         </para>
+
         <programlisting language="querystring"><![CDATA[
 title:"Mach es richtig" AND go
 ]]></programlisting>
+
         <para>
             Weil "text" das Standardfeld ist, wird der Feld Indikator nicht benötigt.
         </para>
@@ -95,9 +108,11 @@ title:"Mach es richtig" AND go
         <para>
             Beachte: Das Feld nur nur für den Ausdruck, die Phrase oder die Unterabfrage gültig die
             direkt danach folgt, sodas die Abfrage
+
             <programlisting language="querystring"><![CDATA[
 title:Mach es richtig
 ]]></programlisting>
+
             nur "Mach" im title Feld finden wird. Es findet "es" und "richtig" im Standardfeld (wenn
             das Standardfeld gesetzt ist) oder in allen indizierten Felder (wenn das Standardfeld
             auf <constant>NULL</constant> gesetzt ist).
@@ -106,6 +121,7 @@ title:Mach es richtig
 
     <sect2 id="zend.search.lucene.query-language.wildcard">
         <title>Wildcards</title>
+
         <para>
             Lucene unterstützt Einzelzeichen und Mehrfachzeichen Suchen mit Wildcards in einzelnen
             Ausdrücken (aber nicht innerhalb von Phrasenabfragen).
@@ -123,6 +139,7 @@ title:Mach es richtig
             Die Einzelzeichen Wildcardsuche schucht nach Strings die dem Begriff entsprechen wobei
             das "?" durch ein beliebiges einzelnes Zeichen ersetzt wird. Um, zum Beispiel, nach
             "Text" oder "Test" zu suchen kann die folgende Suche verwendet werden:
+
             <programlisting language="querystring"><![CDATA[
 Te?t
 ]]></programlisting>
@@ -132,6 +149,7 @@ Te?t
             Mehrzeichen Wildcardsuche sucht nach 0 oder mehr Zeichen wenn Strings nach passenden
             Begriffen sucht. Um, zum Beispiel, nach Test, Tests oder Tester zu suchen, kann die
             folgende Suche verwendet werden:
+
             <programlisting language="querystring"><![CDATA[
 Test*
 ]]></programlisting>
@@ -139,9 +157,11 @@ Test*
 
         <para>
             Es können "?", "*" oder beide an jeder Stelle des Ausdrucks verwendet werden:
+
             <programlisting language="querystring"><![CDATA[
 *schrei?t*
 ]]></programlisting>
+
             Sucht nach "schreibt", "schreibtisch", "beschreibt", "schreist" und so weiter.
         </para>
 
@@ -149,6 +169,7 @@ Test*
             Beginnend mit ZF 1.7.7 benötigen Wildcard Präfixe einen nicht-Wildcard Präfix. Die
             standardmäßige Länge des Präfixes ist 3 (wie in Java Lucene). Die Ausdrücke
             "*", "te?t", "*wr?t*" werden also eine Exception werfen
+
             <footnote>
                 <para>
                     Es ist zu beachten das es nicht zu einer
@@ -158,6 +179,7 @@ Test*
                 </para>
             </footnote>.
         </para>
+
         <para>
             Das kann durch Verwendung der Methoden
             <code>Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength()</code> und
@@ -173,6 +195,7 @@ Test*
             Lucene unterstützt die Veränderung von Abfrageausdrücken und bietet damit ein beites
             Spektrum von Suchoptionen.
         </para>
+
         <para>
             Der "~" Modifikator kann für verwendet werden um eine annähernde Suche auf Phrasen oder
             Fuzzy Suchen für individuelle Ausdrücke durchzuführen.
@@ -187,25 +210,32 @@ Test*
             Felder zwischen der unteren und oberen Grenze sind die durch die Bereichsabfrage
             spezifiziert wurden. Bereichsabfragen können inklusive oder exklusive der oberen und
             unteren Grenze sein. Sortierungen werden lexikalisch durchgeführt.
+
             <programlisting language="querystring"><![CDATA[
 mod_date:[20020101 TO 20030101]
 ]]></programlisting>
+
             Das wird Dokumente finden dessen lod_date Felder Werte zwischen 20020101 und 20030101
             inklusive haben. Es ist zu beachten das Bereichsabfragen nicht für Datumsfelder
             reserviert sind. Bereichsabfragen können auch mit nicht-datums Felder verwendet werden:
+
             <programlisting language="querystring"><![CDATA[
 title:{Aida TO Carmen}
 ]]></programlisting>
+
             Das wird alle Dokumente finden dessen Titel zwischen Aida und Carmen sortiert sind,
             aber ohne Aida und Carmen.
         </para>
+
         <para>
             Bereichsabfragen inklusive, werden durch eine eckige Klammer abgegrenzt.
             Bereichsabfragen exklusive werden durch geschlungene Klammern abgegrenzt.
         </para>
+
         <para>
             Wenn kein Feld spezifiziert wurde sucht <classname>Zend_Search_Lucene</classname>
             standardmäßig nach spezifizierten Intervallen in allen Feldern.
+
             <programlisting language="querystring"><![CDATA[
 {Aida TO Carmen}
 ]]></programlisting>
@@ -214,22 +244,27 @@ title:{Aida TO Carmen}
 
     <sect2 id="zend.search.lucene.query-language.fuzzy">
         <title>Fuzzy Suchen</title>
+
         <para>
             <classname>Zend_Search_Lucene</classname> unterstützt, genauso wie Java Lucene, die
             Fuzzy Suche basierend auf der Levenshtein Distanz oder dem Edit Algorithmus. Um eine
             Fuzzy Suche durchzuführen muß das Tilde Symbol "~", am Ende eines einzelnen Wortbegriffs
             verwendet werden. Um zum Beispiel nach einem Begriff zu suchen der in der Aussprache
             ähnlich zu "Raum" ist kann die folgende Fuzzy Suche verwendet werden:
+
             <programlisting language="querystring"><![CDATA[
 roam~
 ]]></programlisting>
+
             Diese Suche wird Begriffe wie "Baum" und "Saum" finden. Zusätzliche (optionale)
             Parameter können die benötigte Ähnlichkeit spezifizieren. Der Wert muß zwischen 0 und 1
             sein. Mit einem Wert näher bei 1 werden nur Begriffe mit einer höheren Warscheinlichkeit
             gefunden. Zum Beispiel:
+
             <programlisting language="querystring"><![CDATA[
 roam~0.8
 ]]></programlisting>
+
             Der verwendete Standardwert wenn der Parameter nicht angegeben wurde ist 0.5.
         </para>
     </sect2>
@@ -249,6 +284,7 @@ roam~0.8
             <code>Zend_Search_Lucene::setTermsPerQueryLimit($limit)</code> empfangen und gesetzt
             werden.
         </para>
+
         <para>
             Das standardmäßige Limit für passende Ausdrücke ist 1024.
         </para>
@@ -263,6 +299,7 @@ roam~0.8
             das Tilde, "~", Symbol am Ende der Phrase verwendet werden. Um zum Beispiel nach "Zend"
             und "Framework" innerhalb von 10 Wörtern zueinander in einem Dokument zu suchen kann die
             folgende Suche verwendet werden:
+
             <programlisting language="querystring"><![CDATA[
 "Zend Framework"~10
 ]]></programlisting>
@@ -279,23 +316,30 @@ roam~0.8
             (einer Zahl) am Ende des Ausdrucks nach dem gesucht wird, verwendet werden. Je höher
             Boost Faktor ist, desdo relevanter wird der Ausdruck werden.
         </para>
+
         <para>
             Das boosten erlaubt die Kontrolle der Relevanz eines Dokuments durch das boosten
             individueller Ausdrücke. Wenn man zum Beispiel nach
+
             <programlisting language="querystring"><![CDATA[
 PHP framework
 ]]></programlisting>
+
             sucht und will das der Ausdruck "PHP" mehr Relevanz hat, kann er durch Verwendung des ^
             Symbols zusammen mit einem Boost Faktor beim Ausdruck geboostet werden. Man würde zum
             Beispiel folgendes angeben:
+
             <programlisting language="querystring"><![CDATA[
 PHP^4 framework
 ]]></programlisting>
+
             Das macht Dokumente in denen der Ausdruck PHP vorkommt relevanter. Man kann genauso
             Phrasenausdrücke boosten und Unterabfragen wie im Beispiel gezeigt:
+
             <programlisting language="querystring"><![CDATA[
 "PHP framework"^4 "Zend Framework"
 ]]></programlisting>
+
             Standardwert ist der Boost Faktor 1. Auch wenn der Boost Faktor positiv sein muß, kann
             er kleiner als 1 sein (z.B. 0.2).
         </para>
@@ -316,6 +360,7 @@ PHP^4 framework
             boolsche Abfragen zu erstellen. Im Gegensatz zu Java Lucene erlaubt es
             <classname>Zend_Search_Lucene</classname> nicht diese zwei Stile zu mischen.
         </para>
+
         <para>
             Wenn der AND/OR/NOT Stil verwendet wird dann muß der AND oder OR Operator zwischen allen
             Abfrageausdrücken vorhanden sein. Jedem Ausdruck kann auch ein NOT Operator
@@ -325,13 +370,16 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.and">
             <title>AND</title>
+
             <para>
                 Der AND Operator bedeutet das alle Ausdrücke der "AND Gruppe" in einigen Teilen der
                 gesuchten Feld(er) passen müssen.
             </para>
+
             <para>
                 Um nach Dokumenten zu Suchen die "PHP Framework" und "Zend Framework" enthalten kann
                 die folgende Abfrage verwendet werden:
+
                 <programlisting language="querystring"><![CDATA[
 "PHP Framework" AND "Zend Framework"
 ]]></programlisting>
@@ -340,12 +388,15 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.or">
             <title>OR</title>
+
             <para>
                 Der OR Operator teilt die Abfrage in verschiedene optionale Begriffe.
             </para>
+
             <para>
                 Um nach Dokumenten zu Suchen die "PHP Framework" oder "Zend Framework" enthalten
                 kann die folgende Abfrage verwendet werden:
+
                 <programlisting language="querystring"><![CDATA[
 "PHP Framework" OR "Zend Framework"
 ]]></programlisting>
@@ -354,14 +405,17 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.not">
             <title>NOT</title>
+
             <para>
                 Der NOT Operator scheidet Dokumente aus die den Ausdruck nach NOT enthalten. Aber
                 eine "AND Gruppe" die nur Ausdrücke mit NOT Operatoren enthält, gibt ein leeres
                 Ergebnis zurück statt einem kompletten Set von indizierten Dokumenten.
             </para>
+
             <para>
                 Um nach Dokumenten zu Suchen die "PHP Framework" enthalten aber "Zend Framework"
                 nicht kann die folgende Abfrage verwendet werden:
+
                 <programlisting language="querystring"><![CDATA[
 "PHP Framework" AND NOT "Zend Framework"
 ]]></programlisting>
@@ -370,6 +424,7 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.other-form">
             <title>&amp;&amp;, ||, und ! Operatoren</title>
+
             <para>
                 &amp;&amp;, ||, und ! können statt den AND, OR und NOT Notation verwendet werden.
             </para>
@@ -377,13 +432,16 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.plus">
             <title>+</title>
+
             <para>
                 Der "+" oder benötigende Operator erfordert das der Ausdruck nach dem "+" Symbol im
                 passenden Dokument vorhanden ist.
             </para>
+
             <para>
                 Um nach Dokumenten zu Suchen die "Zend" enthalten müssen und "Framework" enthalten
                 können, kann die folgende Abfrage verwendet werden:
+
                 <programlisting language="querystring"><![CDATA[
 +Zend Framework
 ]]></programlisting>
@@ -392,13 +450,16 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.minus">
             <title>-</title>
+
             <para>
                 Der "-" oder ausschließende Operator schließt Dokumente aus die dem Ausdruck nach
                 dem "-" Symbol entsprechen.
             </para>
+
             <para>
                 Um nach Dokumenten zu Suchen die "PHP Framework" enthalten aber "Zend Framework"
                 nicht, kann die folgende Abfrage verwendet werden:
+
                 <programlisting language="querystring"><![CDATA[
 "PHP Framework" -"Zend Framework"
 ]]></programlisting>
@@ -407,21 +468,26 @@ PHP^4 framework
 
         <sect3 id="zend.search.lucene.query-language.boolean.no-operator">
             <title>kein Operator</title>
+
             <para>
                 Wenn kein Operator verwendet wird, dann wird das Suchverhalten durch den
                 "standardmäßigen boolschen Operator" bestimmt.
             </para>
+
             <para>
                 Dieser ist standardmäßig auf <code>OR</code> gesetzt.
             </para>
+
             <para>
                 Das impliziert das jeder Ausdruck standardmäßig optional ist. Er kann oder kann
                 nicht innerhalb des Dokuments enthalten sein, aber Dokumenten mit diesem Ausdruck
                 haben einen Höheren Stellenwert.
             </para>
+
             <para>
                 Um nach Dokumenten zu Suchen die "PHP Framework" benötigen und "Zend Framework"
                 enthalten können kann die folgende Abfrage verwendet werden:
+
                 <programlisting language="querystring"><![CDATA[
 +"PHP Framework" "Zend Framework"
 ]]></programlisting>
@@ -434,6 +500,7 @@ PHP^4 framework
                 <classname>Zend_Search_Lucene_Search_QueryParser::getDefaultOperator()</classname>
                 Methoden gesetzt oder geholt werden.
             </para>
+
             <para>
                 Diese Methoden arbeiten mit den
                 <classname>Zend_Search_Lucene_Search_QueryParser::B_AND</classname> und
@@ -450,9 +517,11 @@ PHP^4 framework
             von Klammern um Fälle zu gruppieren und Unterabfragen zu erstellen. Das kann nützlich
             sein wenn man die boolsche Operatoren für eine Abfrage kontrollieren will, oder
             unterschiedliche Abfragestile mischen will:
+
             <programlisting language="querystring"><![CDATA[
 +(Framework OR Bibliothek) +php
 ]]></programlisting>
+
             <classname>Zend_Search_Lucene</classname> unterstützt Unterabfragen von beliebigen
             Ebenen.
         </para>
@@ -465,9 +534,11 @@ PHP^4 framework
             Lucene unterstützt auch die Verwendung von Klammern um mehrere Fälle in ein einzelnes
             Feld zu gruppieren.
         </para>
+
         <para>
             Um nach einem Titel zu suchen die sowohl das Wort "Rückkehr" und die Phrase "rosaroter
             Panther" kann die folgende Abfrage verwendet werden:
+
             <programlisting language="querystring"><![CDATA[
 title:(+Rückkehr +"rosaroter Panther")
 ]]></programlisting>
@@ -481,20 +552,23 @@ title:(+Rückkehr +"rosaroter Panther")
             Lucene unterstützt das Escapen von speziellen Zeichen die in der Abfragesyntax verwendet
             werden. Die aktuelle Liste der speziellen Zeichen ist:
         </para>
+
         <para>
             + - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \
         </para>
+
         <para>
             + und - in einem einzelnen Ausdruck werden automatisch als normale Zeichen behandelt.
         </para>
+
         <para>
             Für andere Instanzen von solchen Zeichen kann das \ vor jedem speziellen Zeichen
             verwendet werden der escaped werden soll. Um zum Beispiel nach (1+1):2 zu suchen kann
             die folgende Abfrage verwendet werden:
+
             <programlisting language="querystring"><![CDATA[
 \(1\+1\)\:2
 ]]></programlisting>
         </para>
     </sect2>
-
 </sect1>

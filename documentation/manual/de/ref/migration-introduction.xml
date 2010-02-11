@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18845 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.introduction">
     <title>Einführung</title>
@@ -28,6 +28,3 @@
         hochrüstet.
     </para>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

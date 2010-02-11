@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.charset">
     <title>Zeichensätze</title>
@@ -12,6 +12,7 @@
             Indexdateien speichern Unicode Daten in Java's "modifiziertem UTF-8 Codierung". Der Kern
             von <classname>Zend_Search_Lucene</classname> unterstützt diesen Zeichensatz mit einer
             Ausnahme komplett.
+
             <footnote>
                <para>
                    <classname>Zend_Search_Lucene</classname> unterstützt nur Basic Multilingual
@@ -37,6 +38,7 @@
 
     <sect2 id="zend.search.lucene.charset.default_analyzer">
         <title>Standard Textanalysator</title>
+
         <para>
             Trotzdem verwendet der standardmäßige Textanalysator (welche auch im Anfrageparser
             arbeitet) ctype_alpha() für das analysieren von Text und Anfragen.
@@ -46,6 +48,7 @@
             ctype_alpha() ist nicht UTf-8 kompatibel, weswegen der Analysator Text zuerst in die
             'ASCII//TRANSLIT' Codierung konvertiert bevor er indiziert. Die selbe Bearbeitung wird
             transparent wärend des Parsens der Abfrage durchgeführt
+
             <footnote>
                <para>
                    Konvertierungen in 'ASCII//TRANSLIT' sind abhängig von dem aktuellen
@@ -56,6 +59,7 @@
 
         <note>
             <title/>
+
             <para>
                 Der Standardanalysator behandelt Zahlen nicht als Teile von Ausdrücken. Wenn Wörter
                 nicht durch Zahlen unterbrochen werden sollen kann der entsprechende 'Num'
@@ -86,11 +90,13 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
         <warning>
             <title/>
+
             <para>
                 Die UTF-8 kompatiblen Analysatoren wurden in Zend Framework 1.5 verbessert. Frühere
                 Versionen der Analysatoren nahmen an das alle nicht-Ascii Zeichen Buchstaben sind.
                 Die neuen Analysatoren haben ein genaueres Verhalten.
             </para>
+
             <para>
                 Deswegen kann es notwendig sein den Index neu zu erstellen um Daten und Suchanfragen
                 auf die gleiche Art und Weise in Ausdrücke zerlegt zu haben, weil sonst andererseits

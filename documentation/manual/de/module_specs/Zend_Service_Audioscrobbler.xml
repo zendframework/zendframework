@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20872 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.audioscrobbler">
-
     <title>Zend_Service_Audioscrobbler</title>
 
     <sect2 id="zend.service.audioscrobbler.introduction">
-
         <title>Einführung</title>
 
         <para>
@@ -21,18 +19,17 @@
                 url="http://www.audioscrobbler.net/data/webservices/">Audioscrobbler Web Service
                 Seite</ulink>.
         </para>
-
     </sect2>
 
     <sect2 id="zend.service.audioscrobbler.users">
-
         <title>Benutzer</title>
 
         <para>
             Um Informationen über einen bestimmten Benutzer zu erhalten, wird zuerst die
             <methodname>setUser()</methodname> Methode verwendet um den Benutzer zu selektieren für
             den Daten empfangen werden sollen. <classname>Zend_Service_Audioscrobbler</classname>
-            bietet verschiedene Methoden für das empfangen von Daten eines einzelnen Benutzers:
+            bietet verschiedene Methoden für das Empfangen von Daten eines einzelnen Benutzers:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -40,6 +37,7 @@
                         Objekt zurück das die aktuellen Profilinformationen des Benutzers enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetTopArtists()</methodname>: Gibt ein SimpleXML Objekt
@@ -47,6 +45,7 @@
                         Benutzers enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetTopAlbums()</methodname>: Gibt ein SimpleXML Objekt
@@ -54,12 +53,14 @@
                         enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetTopTracks()</methodname>: Gibt ein SimpleXML Objekt
                         zurück welches das aktuell am meisten gelistete Lied des Benutzers enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetTopTags()</methodname>: Gibt ein SimpleXML Objekt zurück
@@ -67,6 +68,7 @@
                         zugeordnet wurden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetTopTagsForArtist()</methodname>: Erfordert das ein Artist
@@ -75,6 +77,7 @@
                         durch den aktuellen Benutzer zugeordnet worden sind.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetTopTagsForAlbum()</methodname>: Erfordert das ein Album
@@ -83,6 +86,7 @@
                         den aktuellen Benutzer zugeordnet worden sind.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetTopTagsForTrack()</methodname>: Erfordert das ein Lied
@@ -91,12 +95,14 @@
                         aktuellen Benutzer zugeordnet worden sind.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetFriends()</methodname>: Gibt ein SimpleXML Objekt zurück
                         das die Benutzernamen der Freunde des aktuellen Benutzers enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetNeighbours()</methodname>: Gibt ein SimpleXML Objekt
@@ -104,6 +110,7 @@
                         Unterhaltungs-Gewohnheiten wie der aktuelle Benutzer haben.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetRecentTracks()</methodname>: Gibt ein SimpleXML Objekt
@@ -111,6 +118,7 @@
                         Benutzers enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetRecentBannedTracks()</methodname>: Gibt ein SimpleXML
@@ -118,6 +126,7 @@
                         Benutzers enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetRecentLovedTracks()</methodname>: Gibt ein SimpleXML
@@ -125,6 +134,7 @@
                         Benutzers enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetRecentJournals()</methodname>: Gibt ein SimpleXML Objekt
@@ -132,6 +142,7 @@
                         enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetWeeklyChartList()</methodname>: Gibt ein SimpleXML Objekt
@@ -139,6 +150,7 @@
                         aktuellen Benutzers existiert.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetRecentWeeklyArtistChart()</methodname>: Gibt ein
@@ -146,6 +158,7 @@
                         aktuellen Benutzers enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetRecentWeeklyAlbumChart()</methodname>: Gibt ein SimpleXML
@@ -153,6 +166,7 @@
                         Benutzers enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetRecentWeeklyTrackChart()</methodname>: Gibt ein SimpleXML
@@ -160,6 +174,7 @@
                         Benutzers enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetPreviousWeeklyArtistChart($fromDate,
@@ -168,6 +183,7 @@
                         <varname>$toDate</varname> für den aktuellen Benutzer enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetPreviousWeeklyAlbumChart($fromDate,
@@ -176,6 +192,7 @@
                         <varname>$toDate</varname> für den aktuellen Benutzer enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>userGetPreviousWeeklyTrackChart($fromDate,
@@ -188,7 +205,6 @@
         </para>
 
         <example id="zend.service.audioscrobbler.users.example.profile_information">
-
             <title>Informationen von Benutzerprofilen erhalten</title>
 
             <para>
@@ -207,11 +223,9 @@ $profileInfo = $as->userGetProfileInformation();
 print "Informationen für $profileInfo->realname können unter "
     . "$profileInfo->url gefunden werden";
 ]]></programlisting>
-
         </example>
 
         <example id="zend.service.audioscrobbler.users.example.weekly_artist_chart">
-
             <title>Die wöchentlichen Artistencharts eines Benutzers erhalten</title>
 
             <programlisting language="php"><![CDATA[
@@ -239,19 +253,17 @@ foreach ($previousWeeklyArtists as $artist) {
     print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
 }
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.service.audioscrobbler.artists">
-
         <title>Artisten</title>
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden um Daten
             über einen speziellen Artisten zu empfangen, der über die
             <methodname>setArtist()</methodname> Methode spezifiziert wurde:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -260,6 +272,7 @@ foreach ($previousWeeklyArtists as $artist) {
                         ähnlich sind.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>artistGetTopFans()</methodname>: Gibt ein SimpleXML Objekt
@@ -267,6 +280,7 @@ foreach ($previousWeeklyArtists as $artist) {
                         meisten hören.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>artistGetTopTracks()</methodname>: Gibt ein SimpleXML Objekt
@@ -274,6 +288,7 @@ foreach ($previousWeeklyArtists as $artist) {
                         enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>artistGetTopAlbums()</methodname>: Gibt ein SimpleXML Objekt
@@ -281,6 +296,7 @@ foreach ($previousWeeklyArtists as $artist) {
                         Artisten enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>artistGetTopTags()</methodname>: Gibt ein SimpleXML Objekt
@@ -292,7 +308,6 @@ foreach ($previousWeeklyArtists as $artist) {
         </para>
 
         <example id="zend.service.audioscrobbler.artists.example.related_artists">
-
             <title>Ähnliche Artisten erhalten</title>
 
             <programlisting language="php"><![CDATA[
@@ -306,19 +321,17 @@ foreach ($relatedArtists as $artist) {
     print '<a href="' . $artist->url . '">' . $artist->name . '</a><br />';
 }
 ]]></programlisting>
-
         </example>
-
     </sect2>
 
     <sect2 id="zend.service.audioscrobbler.tracks">
-
         <title>Lieder</title>
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> bietet zwei Methoden für das
             Empfangen von Daten für ein einzelnes Lied, das über die
             <methodname>setTrack()</methodname> Methode spezifiziert wurde:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -327,6 +340,7 @@ foreach ($relatedArtists as $artist) {
                         gehört haben.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>trackGetTopTags()</methodname>: Gibt ein SimpleXML Objekt zurück
@@ -336,17 +350,16 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-
     </sect2>
 
     <sect2 id="zend.service.audioscrobbler.tags">
-
         <title>Tags</title>
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden für das
             Empfangen von Daten die einem einzelnen Tag zugeordnet sind, welches über die
             <methodname>setTag()</methodname> Methode zugeordnet werden:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -355,6 +368,7 @@ foreach ($relatedArtists as $artist) {
                         verwendet werden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>tagGetTopArtists()</methodname>: Gibt ein SimpleXML Objekt
@@ -362,6 +376,7 @@ foreach ($relatedArtists as $artist) {
                         zugeordnet wurden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>tagGetTopAlbums()</methodname>: Gibt ein SimpleXML Objekt zurück
@@ -369,6 +384,7 @@ foreach ($relatedArtists as $artist) {
                         wurden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>tagGetTopTracks()</methodname>: Gibt ein SimpleXML Objekt zurück
@@ -378,17 +394,16 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-
     </sect2>
 
     <sect2 id="zend.service.audioscrobbler.groups">
-
         <title>Gruppen</title>
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> bietet verschiedene Methoden um Daten
             zu erhalten die einer speziellen Gruppe gehören, die über die
             <methodname>setGroup()</methodname> Methode zugeordnet wurde:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -397,6 +412,7 @@ foreach ($relatedArtists as $artist) {
                         Gruppe enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>groupGetWeeklyChart()</methodname>: Gibt ein SimpleXML Objekt
@@ -404,6 +420,7 @@ foreach ($relatedArtists as $artist) {
                         aktuellen Gruppe existiert.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>groupGetRecentWeeklyArtistChart()</methodname>: Gibt ein
@@ -411,6 +428,7 @@ foreach ($relatedArtists as $artist) {
                         aktuellen Gruppe enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>groupGetRecentWeeklyAlbumChart()</methodname>: Gibt ein
@@ -418,6 +436,7 @@ foreach ($relatedArtists as $artist) {
                         aktuellen Gruppe enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>groupGetRecentWeeklyTrackChart()</methodname>: Gibt ein
@@ -425,6 +444,7 @@ foreach ($relatedArtists as $artist) {
                         aktuellen Gruppe enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>groupGetPreviousWeeklyArtistChart($fromDate,
@@ -434,6 +454,7 @@ foreach ($relatedArtists as $artist) {
                         aktuellen toDate der aktuellen Gruppe enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>groupGetPreviousWeeklyAlbumChart($fromDate,
@@ -443,6 +464,7 @@ foreach ($relatedArtists as $artist) {
                         toDate der aktuellen Gruppe enthält.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <methodname>groupGetPreviousWeeklyTrackChart($fromDate,
@@ -453,17 +475,16 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-
     </sect2>
 
     <sect2 id="zend.service.audioscrobbler.forums">
-
         <title>Foren</title>
 
         <para>
             <classname>Zend_Service_Audioscrobbler</classname> bietet eine Methode für das Empfangen
             von Daten eines einzelnen Forums, das über die <methodname>setForum()</methodname>
             Methode spezifiziert wurde:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -473,10 +494,5 @@ foreach ($relatedArtists as $artist) {
                 </listitem>
             </itemizedlist>
         </para>
-
     </sect2>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

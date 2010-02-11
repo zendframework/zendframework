@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17178 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.advanced">
     <title>Erweitert</title>
@@ -16,6 +16,7 @@
             Das aktuelle Indexformat kann durch den Aufruf von
             <code>$index->getFormatVersion()</code> abgefragt werden. Er gibt eine der folgenden
              Werte zurück:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -23,12 +24,14 @@
                         Lucene Index Format 1.4-1.9.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Search_Lucene::FORMAT_2_1</constant> für das Java Lucene
                         Index Format 2.1 (es wird auch in Lucene 2.2 verwendet).
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <constant>Zend_Search_Lucene::FORMAT_2_3</constant> für das Java Lucene
@@ -57,6 +60,7 @@
             <code>$index->setFormatVersion()</code> zuweisen welches entweder die
             <constant>Zend_Search_Lucene::FORMAT_2_1</constant> oder
             <constant>Zend_Search_Lucene::FORMAT_2_3</constant> Konstante entgegennimmt:
+
             <itemizedlist>
                 <listitem>
                     <para>
@@ -64,6 +68,7 @@
                         nichts da pre-2.1 Indezes automatisch in das 2.1 Format konvertiert werden.
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                          <constant>Zend_Search_Lucene::FORMAT_2_3</constant> erzwingt die
@@ -79,6 +84,7 @@
 
         <note>
             <title>Wichtig!</title>
+
             <para>
                 Sobald Indezes in eine höhere Version konvertiert wurden können Sie nicht zurück
                 konvertiert werden. Deswegen sollte man ein Backup der Indezes machen wenn man plant
@@ -181,6 +187,5 @@ Searcher::commit();
 ...
 ]]></programlisting>
         </para>
-
     </sect2>
 </sect1>

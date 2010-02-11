@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20872 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.s3">
     <title>Zend_Service_Amazon_S3</title>
@@ -106,7 +106,8 @@
 
         <example id="zend.service.amazon.s3.storing-your-first.example">
             <title>Beispiel der Verwendung von Zend_Service_Amazon_S3</title>
-             <programlisting language="php"><![CDATA[
+
+            <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
 $s3 = new Zend_Service_Amazon_S3($my_aws_key, $my_aws_secret_key);
@@ -122,10 +123,8 @@ echo $s3->getObject("my-own-bucket/myobject");
         <para>
             Da der <classname>Zend_Service_Amazon_S3</classname> Service eine Authentifizierung
             benötigt, sollte man seine Zugangsdaten (AWS Schlüssel und Geheimschlüssel) an den
-            Konstruktor übergeben.
-
-            Wenn man nur einen Account verwendet, kann man Standard-Zugangsdaten für das Service
-            setzen:
+            Konstruktor übergeben. Wenn man nur einen Account verwendet, kann man
+            Standard-Zugangsdaten für das Service setzen:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -177,6 +176,7 @@ $s3 = new Zend_Service_Amazon_S3();
                     <title>
                         Beispiel für das Entfernen eines Buckets in Zend_Service_Amazon_S3
                     </title>
+
                     <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
@@ -196,6 +196,7 @@ $s3->removeBucket("my-own-bucket");
 
                 <example id="zend.service.amazon.s3.buckets.list.example">
                     <title>Beispiel für das Auflisten der Buckets in Zend_Service_Amazon_S3</title>
+
                     <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
@@ -265,6 +266,7 @@ foreach($list as $bucket) {
                 <variablelist>
                     <varlistentry>
                         <term><constant>S3_CONTENT_TYPE_HEADER</constant></term>
+
                         <listitem>
                             <para>
                                 <acronym>MIME</acronym> Content Type der Daten. Wenn nicht
@@ -276,6 +278,7 @@ foreach($list as $bucket) {
 
                     <varlistentry>
                         <term><constant>S3_ACL_HEADER</constant></term>
+
                         <listitem>
                             <para>
                                 Der Zugriff auf das Element. Folgende Zugriffskonstanten können
@@ -284,6 +287,7 @@ foreach($list as $bucket) {
                                 <variablelist>
                                     <varlistentry>
                                         <term><constant>S3_ACL_PRIVATE</constant></term>
+
                                         <listitem>
                                             <para>
                                                 Nur der Besitzer hat auf das Element Zugriff.
@@ -293,6 +297,7 @@ foreach($list as $bucket) {
 
                                     <varlistentry>
                                         <term><constant>S3_ACL_PUBLIC_READ</constant></term>
+
                                         <listitem>
                                             <para>
                                                 Jeder kann das Objekt lesen, aber nur der Besitzer
@@ -305,6 +310,7 @@ foreach($list as $bucket) {
 
                                     <varlistentry>
                                         <term><constant>S3_ACL_PUBLIC_WRITE</constant></term>
+
                                         <listitem>
                                             <para>
                                                 Jeder kann das Objekt schreiben oder lesen. Diese
@@ -315,6 +321,7 @@ foreach($list as $bucket) {
 
                                     <varlistentry>
                                         <term><constant>S3_ACL_AUTH_READ</constant></term>
+
                                         <listitem>
                                             <para>
                                                 Nur der Besitzer hat Schreibzugriff auf das
@@ -334,6 +341,7 @@ foreach($list as $bucket) {
                                 <title>
                                     Beispiel für ein öffentliches Objekt in Zend_Service_Amazon_S3
                                 </title>
+
                                 <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
@@ -376,6 +384,7 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
                     <variablelist>
                         <varlistentry>
                             <term><code>type</code></term>
+
                             <listitem>
                                 <para>Der <acronym>MIME</acronym> Typ des Elements.</para>
                             </listitem>
@@ -383,13 +392,12 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
 
                         <varlistentry>
                             <term><code>size</code></term>
-                            <listitem>
-                                <para>Die Größe der Objektdaten.</para>
-                            </listitem>
+                            <listitem><para>Die Größe der Objektdaten.</para></listitem>
                         </varlistentry>
 
                         <varlistentry>
                             <term><code>mtime</code></term>
+
                             <listitem>
                                 <para>
                                     UNIX-artiger Zeitstempel der letzten Änderung für das Objekt.
@@ -399,6 +407,7 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
 
                         <varlistentry>
                             <term><code>etag</code></term>
+
                             <listitem>
                                 <para>
                                     Das ETag der Daten, welches ein MD5 Hash der Daten ist,
@@ -421,6 +430,7 @@ echo "Go to http://s3.amazonaws.com/my-own-bucket/Pictures/Me.png to see me!\n";
 
                 <example id="zend.service.amazon.s3.objects.list.example">
                     <title>Beispiel für die Auflistung eines Zend_Service_Amazon_S3 Objekts</title>
+
                     <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 
@@ -474,6 +484,7 @@ foreach($list as $name) {
             Methode gibt einen <classname>Zend_Http_Response_Stream</classname> zurück, welcher wie
             im Kapitel <link linkend="zend.http.client.streaming">HTTP Client Daten Streaming</link>
             verwendet werden kann.
+
             <example id="zend.service.amazon.s3.streaming.example1">
                 <title>Beispiel für das Streamen von Daten mit Zend_Service_Amazon_S3</title>
 
@@ -519,6 +530,7 @@ stream_copy_to_stream($response->getStream(), $fp);
 
         <example id="zend.service.amazon.s3.streams.example">
             <title>Beispiel für Streams mit Zend_Service_Amazon_S3</title>
+
              <programlisting language="php"><![CDATA[
 require_once 'Zend/Service/Amazon/S3.php';
 

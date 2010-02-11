@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 15617 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.pdf.usage">
     <title>Anwendungsbeispiel für die Zend_Pdf Komponente</title>
+
     <para>
         Dieser Abschnitt stellt ein Beispiel für die Anwendung der Komponente bereit.
     </para>
 
     <para>
-        Das Beispiel kann in der Datei <filename>demos/Zend/Pdf/demo.php</filename> gefunden werden.
+        Das Beispiel kann in der Datei <filename>demos/Zend/Pdf/demo.php</filename> gefunden
+        werden.
     </para>
+
     <para>
         Dort gibt es auch die Datei <filename>test.pdf</filename>, die für diese Demo zu
         Testzwecken verwendet werden kann.
@@ -17,6 +20,7 @@
 
     <example id="zend.pdf.usage.example-1">
         <title>Anwendungsbeispiel für die Zend_Pdf Komponente</title>
+
         <programlisting language="php"><![CDATA[
 /**
  * @package Zend_Pdf
@@ -265,8 +269,4 @@ if (isset($argv[2])) {
 }
 ]]></programlisting>
     </example>
-
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

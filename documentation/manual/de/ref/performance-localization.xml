@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16566 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.localization">
     <title>Internationalisierung (I18n) und Lokalisierung (L10n)</title>
@@ -35,34 +35,42 @@
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <emphasis>Array</emphasis>: Das ist der Schnellste, weil er, von seiner
-                    Definition her, sofort in ein natives <acronym>PHP</acronym> Format geparst und
-                    sofort eingefügt wird.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Array</emphasis>: Das ist der Schnellste, weil er, von seiner
+                        Definition her, sofort in ein natives <acronym>PHP</acronym> Format geparst
+                        und sofort eingefügt wird.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <emphasis><acronym>CSV</acronym></emphasis>: Verwendet
-                    <methodname>fgetcsv()</methodname> um eine <acronym>CSV</acronym> Datei zu
-                    parsen und transformiert es in ein natives <acronym>PHP</acronym> Format.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis><acronym>CSV</acronym></emphasis>: Verwendet
+                        <methodname>fgetcsv()</methodname> um eine <acronym>CSV</acronym> Datei zu
+                        parsen und transformiert es in ein natives <acronym>PHP</acronym> Format.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <emphasis><acronym>INI</acronym></emphasis>: Verwendet
-                    <methodname>parse_ini_file()</methodname> um eine <acronym>INI</acronym> Datei
-                    zu lesen und Sie in ein natives <acronym>PHP</acronym> Format zu
-                    transformieren. Dieser und der <acronym>CSV</acronym> Adapter sind in Ihrer
-                    Geschwindigkeit ziemlich identisch.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis><acronym>INI</acronym></emphasis>: Verwendet
+                        <methodname>parse_ini_file()</methodname> um eine <acronym>INI</acronym>
+                        Datei zu lesen und Sie in ein natives <acronym>PHP</acronym> Format zu
+                        transformieren. Dieser und der <acronym>CSV</acronym> Adapter sind in Ihrer
+                        Geschwindigkeit ziemlich identisch.
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <emphasis>Gettext</emphasis>: Der Gettext Adapter von Zend Framework verwendet
-                    <emphasis>nicht</emphasis> die Gettext Erweiterung da diese nicht Threadsicher
-                    ist und es nicht erlaubt mehr als ein Gebietsschema pro Server zu definieren.
-                    Als Ergebnis, ist ist er langsamer als die Gettext Erweiterung direkt, aber,
-                    weil das Gettext Format binär ist, ist es schneller geparst als
-                    <acronym>XML</acronym>.
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <emphasis>Gettext</emphasis>: Der Gettext Adapter von Zend Framework
+                        verwendet <emphasis>nicht</emphasis> die Gettext Erweiterung da diese nicht
+                        Threadsicher ist und es nicht erlaubt mehr als ein Gebietsschema pro Server
+                        zu definieren. Als Ergebnis, ist ist er langsamer als die Gettext
+                        Erweiterung direkt, aber, weil das Gettext Format binär ist, ist es
+                        schneller geparst als <acronym>XML</acronym>.
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>
@@ -101,8 +109,9 @@
             <itemizedlist>
                 <listitem>
                     <para>
-                        <link linkend="zend.translate.adapter.caching"><classname>Zend_Translate</classname>
-                        Adapter Caching</link>
+                        <link
+                            linkend="zend.translate.adapter.caching"><classname>Zend_Translate</classname>
+                            Adapter Caching</link>
                     </para>
                 </listitem>
 
@@ -116,6 +125,3 @@
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

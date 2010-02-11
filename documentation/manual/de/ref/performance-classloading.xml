@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19426 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.classloading">
     <title>Laden von Klassen</title>
@@ -271,39 +271,40 @@ Zend_Loader_Autoloader::getInstance();
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <classname>Zend_Controller_Action_HelperBroker</classname>: Helfer
-            </para></listitem>
+            <listitem>
+                <para><classname>Zend_Controller_Action_HelperBroker</classname>: Helfer</para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Dojo</classname>: View Helfer, Form Elemente und Dekorator
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Dojo</classname>: View Helfer, Form Elemente und Dekorator
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_File_Transfer</classname>: Adapter
-            </para></listitem>
+            <listitem>
+                <para><classname>Zend_File_Transfer</classname>: Adapter</para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Filter_Inflector</classname>: Filter (verwendet vom ViewRenderer
-                Action Helfer und <classname>Zend_Layout</classname>)
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Filter_Inflector</classname>: Filter (verwendet vom ViewRenderer
+                    Action Helfer und <classname>Zend_Layout</classname>)
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Filter_Input</classname>: Filter und Prüfungen
-            </para></listitem>
+            <listitem>
+                <para><classname>Zend_Filter_Input</classname>: Filter und Prüfungen</para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Form</classname>: Elemente, Prüfungen, Filter, Dekoratore, Captcha
-                und File Transfer Adapter
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Form</classname>: Elemente, Prüfungen, Filter, Dekoratore,
+                    Captcha und File Transfer Adapter
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Paginator</classname>: Adapter
-            </para></listitem>
-
-            <listitem><para>
-                <classname>Zend_View</classname>: Helfer, Filter
-            </para></listitem>
+            <listitem><para><classname>Zend_Paginator</classname>: Adapter</para></listitem>
+            <listitem><para><classname>Zend_View</classname>: Helfer, Filter</para></listitem>
         </itemizedlist>
 
         <para>
@@ -330,6 +331,3 @@ Zend_Loader_Autoloader::getInstance();
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20649 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.multiuser.authorization">
     <title>Erstellung eines Authorisations Systems in Zend Framework</title>
@@ -42,7 +42,6 @@
             der Erstellung eines Baums von Rollen, Ressourcen und Privilegien um
             Authorisationsanfragen zu managen und abzufragen.
         </para>
-
     </sect2>
 
     <sect2 id="learning.multiuser.authorization.basic-usage">

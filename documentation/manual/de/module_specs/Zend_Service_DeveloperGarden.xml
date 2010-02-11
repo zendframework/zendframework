@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20760 -->
+<!-- EN-Revision: 20873 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.developergarden">
     <title>Zend_Service_DeveloperGarden</title>
@@ -241,33 +241,23 @@ echo 'Quotenlevel: ', $result->getQuotaLevel(), '<br />';
 
             <itemizedlist>
                 <listitem>
-                    <para>
-                        <methodname>getConfernceCallQuotaInformation()</methodname>
-                    </para>
+                    <para><methodname>getConfernceCallQuotaInformation()</methodname></para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <methodname>getIPLocationQuotaInformation()</methodname>
-                    </para>
+                    <para><methodname>getIPLocationQuotaInformation()</methodname></para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <methodname>getLocalSearchQuotaInformation()</methodname>
-                    </para>
+                    <para><methodname>getLocalSearchQuotaInformation()</methodname></para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <methodname>getSmsQuotaInformation()</methodname>
-                    </para>
+                    <para><methodname>getSmsQuotaInformation()</methodname></para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <methodname>getVoiceCallQuotaInformation()</methodname>
-                    </para>
+                    <para><methodname>getVoiceCallQuotaInformation()</methodname></para>
                 </listitem>
             </itemizedlist>
         </sect3>
@@ -303,33 +293,23 @@ if (!$result->hasError()) {
 
             <itemizedlist>
                 <listitem>
-                    <para>
-                        <methodname>changeConferenceCallQuotaPool()</methodname>
-                    </para>
+                    <para><methodname>changeConferenceCallQuotaPool()</methodname></para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <methodname>changeIPLocationQuotaPool()</methodname>
-                    </para>
+                    <para><methodname>changeIPLocationQuotaPool()</methodname></para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <methodname>changeLocalSearchQuotaPool()</methodname>
-                    </para>
+                    <para><methodname>changeLocalSearchQuotaPool()</methodname></para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <methodname>changeSmsQuotaPool()</methodname>
-                    </para>
+                    <para><methodname>changeSmsQuotaPool()</methodname></para>
                 </listitem>
 
                 <listitem>
-                    <para>
-                        <methodname>changeVoiceCallQuotaPool()</methodname>
-                    </para>
+                    <para><methodname>changeVoiceCallQuotaPool()</methodname></para>
                 </listitem>
             </itemizedlist>
         </sect3>
@@ -348,17 +328,9 @@ if (!$result->hasError()) {
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>Die IP Adresse muss im T-Home Netzwerk sein</para>
-            </listitem>
-
-            <listitem>
-                <para>Nur die nächste größere Stadt wird aufgelöst</para>
-            </listitem>
-
-            <listitem>
-                <para>IPv6 wird aktuell nicht unterstützt</para>
-            </listitem>
+            <listitem><para>Die IP Adresse muss im T-Home Netzwerk sein</para></listitem>
+            <listitem><para>Nur die nächste größere Stadt wird aufgelöst</para></listitem>
+            <listitem><para>IPv6 wird aktuell nicht unterstützt</para></listitem>
         </itemizedlist>
 
         <example id="zend.service.developergarden.iplocation.locateip.example">
@@ -550,16 +522,10 @@ print_r($service->validate('DasSchlüsselWort', '+49-172-123456'));
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>
-                    Den ersten Teilnehmer anrufen.
-                </para>
-            </listitem>
+            <listitem><para>Den ersten Teilnehmer anrufen.</para></listitem>
 
             <listitem>
-                <para>
-                    Wenn die Verbindung erfolgreich war, den zweiten Teilnehmer anrufen.
-                </para>
+                <para>Wenn die Verbindung erfolgreich war, den zweiten Teilnehmer anrufen.</para>
             </listitem>
 
             <listitem>
@@ -634,35 +600,15 @@ $service->tearDownCall($sessionId);
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>
-                    Konferenzen mit einem sofortigen Start
-                </para>
-            </listitem>
+            <listitem><para>Konferenzen mit einem sofortigen Start</para></listitem>
+            <listitem><para>Konferenzen mit einem definierten Startdatum</para></listitem>
+            <listitem><para>Wiederkehrende Konferenzserien</para></listitem>
 
             <listitem>
-                <para>
-                    Konferenzen mit einem definierten Startdatum
-                </para>
+                <para>Teilnehmer einer Konferenz hinzufügen, löschen und lautlos stellen</para>
             </listitem>
 
-            <listitem>
-                <para>
-                    Wiederkehrende Konferenzserien
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    Teilnehmer einer Konferenz hinzufügen, löschen und lautlos stellen
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    Templates für Konferenzen
-                </para>
-            </listitem>
+            <listitem><para>Templates für Konferenzen</para></listitem>
         </itemizedlist>
 
         <para>

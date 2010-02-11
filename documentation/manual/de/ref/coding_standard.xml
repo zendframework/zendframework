@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20096 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
-  <title>Zend Framework Coding Standard für PHP</title>
+    <title>Zend Framework Coding Standard für PHP</title>
+
     <sect1 id="coding-standard.overview">
         <title>Übersicht</title>
 
@@ -34,21 +35,10 @@
             </para>
 
             <itemizedlist>
-                <listitem>
-                    <para><acronym>PHP</acronym> Dateiformatierung</para>
-                </listitem>
-
-                <listitem>
-                    <para>Namens Konventionen</para>
-                </listitem>
-
-                <listitem>
-                    <para>Code Stil</para>
-                </listitem>
-
-                <listitem>
-                    <para>Inline Dokumentation</para>
-                </listitem>
+                <listitem><para><acronym>PHP</acronym> Dateiformatierung</para></listitem>
+                <listitem><para>Namens Konventionen</para></listitem>
+                <listitem><para>Code Stil</para></listitem>
+                <listitem><para>Inline Dokumentation</para></listitem>
             </itemizedlist>
         </sect2>
 
@@ -89,6 +79,7 @@
 
         <sect2 id="coding-standard.php-file-formatting.indentation">
             <title>Einrücken</title>
+
             <para>
                 Ein Einzug sollte aus 4 Leerzeichen bestehen. Tabulatoren sind nicht erlaubt.
             </para>
@@ -1167,8 +1158,4 @@ switch ($numPeople) {
             </sect3>
         </sect2>
     </sect1>
-
 </appendix>
-<!--
-vim:se ts=4 sw=4 et:
--->

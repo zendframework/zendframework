@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17227 -->
+<!-- EN-Revision: 20872 -->
 <!-- Reviewed: no -->
 <sect3 id="zend.progressbar.adapter.jspull">
     <title>Zend_ProgressBar_Adapter_JsPull</title>
+
     <para>
         <classname>Zend_ProgressBar_Adapter_JsPull</classname> ist das Gegenteil von jsPush, da es
         ein Holen für neue Updates benötigt, statt die Updates zum Browser zu schicken. Generell
@@ -14,11 +15,13 @@
         aufgerufen wurde, oder <constant>TRUE</constant> wenn <methodname>finish()</methodname>
         aufgerufen wurde.
     </para>
+
     <para>
         Die Adapteroptionen kann man entweder über die <code>set*</code> Methoden oder durch die
         Übergabe eines Arrays oder einer Instanz von <classname>Zend_Config</classname> mit den
         Optionen als ersten Parameter an den Constructor setzen. Die vorhandenen Optionen sind:
     </para>
+
     <itemizedlist>
         <listitem>
             <para>
@@ -28,6 +31,3 @@
         </listitem>
     </itemizedlist>
 </sect3>
-<!--
-vim:se ts=4 sw=4 et:
--->

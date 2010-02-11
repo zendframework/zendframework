@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 16565 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <sect1 id="performance.database">
     <title>Zend_Db Performance</title>
@@ -84,6 +84,7 @@
                 <classname>Zend_Db_Select</classname>, als ist die Verwendung von eigenen, getunten
                 <acronym>SQL</acronym> Select Statements, eine perfekte und legitime Anwendung.
             </para>
+
             <para>
                 Lasse <constant>EXPLAIN</constant> auf den Abfragen laufen, und teste eine Vielzahl
                 von Möglichkeiten bis man die eigenen Indezes auf dem besten und performantesten
@@ -109,6 +110,3 @@ $sql = vsprintf(
         </sect3>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

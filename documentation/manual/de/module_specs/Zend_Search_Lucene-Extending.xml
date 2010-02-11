@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18739 -->
+<!-- EN-Revision: 20854 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.search.lucene.extending">
     <title>Erweiterbarkeit</title>
 
     <sect2 id="zend.search.lucene.extending.analysis">
         <title>Textanalyse</title>
+
         <para>
             Die <classname>Zend_Search_Lucene_Analysis_Analyzer</classname> Klasse wird vom Indexer
             verwendet, um die Textfelder der Dokumente in Abschnitte aufzuteilen.
@@ -59,6 +60,7 @@ $index->addDocument($doc);
 
             <example id="zend.search.lucene.extending.analysis.example-1">
                 <title>Eigener Textanalysator</title>
+
                 <programlisting language="php"><![CDATA[
 /**
  * Hier ist ein eigener Textanalysator, der Worte mit Ziffern
@@ -137,6 +139,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
     <sect2 id="zend.search.lucene.extending.filters">
         <title>Filtern von Tokens</title>
+
         <para>
             Der <classname>Zend_Search_Lucene_Analysis_Analyzer_Common</classname> Analisator bietet
             auch einen Mechanismus zum Filtern von Tokens.
@@ -156,17 +159,20 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
 
         <para>
             Es gibt bereits drei Filter die im Analyse Unterpaket definierte sind:
+
             <itemizedlist>
                 <listitem>
                     <para>
                         <classname>Zend_Search_Lucene_Analysis_TokenFilter_LowerCase</classname>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <classname>Zend_Search_Lucene_Analysis_TokenFilter_ShortWords</classname>
                     </para>
                 </listitem>
+
                 <listitem>
                     <para>
                         <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname>
@@ -184,6 +190,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault(
         <para>
             Die <code>ShortWords</code> und <code>StopWords</code> Filter können mit bereits
             definierten oder eigenen Analysatoren wie folgt verwendet werden:
+
             <programlisting language="php"><![CDATA[
 $stopWords = array('a', 'an', 'at', 'the', 'and', 'or', 'is', 'am');
 $stopWordsFilter =
@@ -195,6 +202,7 @@ $analyzer->addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
+
             <programlisting language="php"><![CDATA[
 $shortWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords();
 
@@ -210,6 +218,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             Der <classname>Zend_Search_Lucene_Analysis_TokenFilter_StopWords</classname> Konstruktor
             nimmt ein Array mit Stopwörtern als Eingabe entgegen. Aber Stopwörter können auch aus
             einer Datei geladen werden:
+
             <programlisting language="php"><![CDATA[
 $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords();
 $stopWordsFilter->loadFromFile($my_stopwords_file);
@@ -220,6 +229,7 @@ $analyzer->addFilter($stopWordsFilter);
 
 Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
 ]]></programlisting>
+
             Die Datei sollte eine normale Textdatei mit einem Wort pro Zeile sein. Das '#' Zeichen
             markiert eine Zeile als Kommentar.
         </para>
@@ -229,11 +239,11 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             Konstruktor hat ein optionales Argument. Es ist das Limit für die Wortlänge, der
             standardmäßig 2 ist.
         </para>
-
     </sect2>
 
     <sect2 id="zend.search.lucene.extending.scoring">
         <title>Algorithmen für Punktwertermittlung</title>
+
         <para>
             Der Punktwert einer Abfrage <literal>q</literal> für das Dokument <literal>d</literal>
             ist wie folgt definiert:
@@ -266,6 +276,7 @@ Zend_Search_Lucene_Analysis_Analyzer::setDefault($analyzer);
             werden zusammen mit dem Verstärkungsfaktor im Index abgelegt und vom Suchcode für
             alle Treffer eines Feldes zu Punktwerten multipliziert.
         </para>
+
         <para>
             Treffer in längeren Feldern sind weniger präzise, so dass Implementierungen dieser
             Methode normalerweise kleinere Werte zurückgeben, wenn numTokens groß ist, und größere
@@ -344,6 +355,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
 
     <sect2 id="zend.search.lucene.extending.storage">
         <title>Storage Container</title>
+
         <para>
             Die abstrakte Klasse <classname>Zend_Search_Lucene_Storage_Directory</classname>
             definiert Funktionalitäten für Verzeichnisse.
@@ -373,7 +385,7 @@ Zend_Search_Lucene_Search_Similarity::setDefault($mySimilarity);
         </para>
 
         <para>
-        <classname>Zend_Search_Lucene_Storage_Directory</classname> Methoden:
+            <classname>Zend_Search_Lucene_Storage_Directory</classname> Methoden:
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -459,14 +471,17 @@ abstract function getFileObject($filename);
             <classname>Zend_Search_Lucene_Storage_Directory</classname> Instanz gibt ein
             <classname>Zend_Search_Lucene_Storage_File</classname> Objekt zurück.
         </para>
+
         <para>
             Die abstrakte Klasse <classname>Zend_Search_Lucene_Storage_File</classname>
             implementiert einfache Funktionen für Dateiabstraktion und das Lesen von Indexdateien.
         </para>
+
         <para>
             Es muß außerdem <classname>Zend_Search_Lucene_Storage_File</classname> für eine eigene
             Verzeichnisimplementation erweitert werden.
         </para>
+
         <para>
             Nur zwei Methoden der <classname>Zend_Search_Lucene_Storage_File</classname> Klasse
             müssen in der eigenen Implementation überschrieben werden:
@@ -505,9 +520,5 @@ class MyFile extends Zend_Search_Lucene_Storage_File {
     }
 }
 ]]></programlisting>
-
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

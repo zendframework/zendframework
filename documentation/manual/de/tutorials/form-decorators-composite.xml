@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 20876 -->
 <!-- Reviewed: no -->
 <sect1 id="learning.form.decorators.composite">
     <title>Erstellung und Darstellung von kombinierten Elementen</title>
@@ -37,17 +37,8 @@
         </para>
 
         <itemizedlist>
-            <listitem>
-                <para>
-                    Wir würde man den Wert setzen und empfangen?
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    Wie würde der Wert geprüft werden?
-                </para>
-            </listitem>
+            <listitem><para>Wir würde man den Wert setzen und empfangen?</para></listitem>
+            <listitem><para>Wie würde der Wert geprüft werden?</para></listitem>
 
             <listitem>
                 <para>
@@ -259,14 +250,14 @@ class My_Form_Decorator_Date extends Zend_Form_Decorator_Abstract
 }
 ]]></programlisting>
 
-    <para>
-        Jetzt müssen wir kleinere Änderungen an unserem Formular Element durchführen und Ihm sagen
-        das wir den obigen Decorator als Standard verwenden wollen. Das benötigt zwei Schritte.
-        Erstens müssen wir das Element über den Pfad des Decorators informieren. Wir können das im
-        Constructor tun:
-    </para>
+        <para>
+            Jetzt müssen wir kleinere Änderungen an unserem Formular Element durchführen und Ihm
+            sagen das wir den obigen Decorator als Standard verwenden wollen. Das benötigt zwei
+            Schritte. Erstens müssen wir das Element über den Pfad des Decorators informieren. Wir
+            können das im Constructor tun:
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 {
     // ...
@@ -285,22 +276,22 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 }
 ]]></programlisting>
 
-    <para>
-        Es ist zu beachten dass das im Constructor getan wird und nicht in
-        <methodname>init()</methodname>. Es gibt hierfür zwei Gründe. Erstens erlaubt dies das
-        Element später zu erweitern um Logik in <methodname>init</methodname> hinzuzufügen ohne das
-        man sich Gedanken über den Aufruf von <methodname>parent::init()</methodname> machen muss.
-        Zweitens erlaubt es zusätzliche Plugin Pfade über die Konfiguration zu übergeben oder in
-        einer <methodname>init</methodname> Methode die dann das Überladen des standardmäßigen
-        <classname>Date</classname> Decorators mit einem eigenen Ersatz erlaubt.
-    </para>
+        <para>
+            Es ist zu beachten dass das im Constructor getan wird und nicht in
+            <methodname>init()</methodname>. Es gibt hierfür zwei Gründe. Erstens erlaubt dies das
+            Element später zu erweitern um Logik in <methodname>init</methodname> hinzuzufügen ohne
+            das man sich Gedanken über den Aufruf von <methodname>parent::init()</methodname> machen
+            muss. Zweitens erlaubt es zusätzliche Plugin Pfade über die Konfiguration zu übergeben
+            oder in einer <methodname>init</methodname> Methode die dann das Überladen des
+            standardmäßigen <classname>Date</classname> Decorators mit einem eigenen Ersatz erlaubt.
+        </para>
 
-    <para>
-        Als nächstes überladen wir die <methodname>loadDefaultDecorators()</methodname> Methode um
-        unseren neuen <classname>Date</classname> Decorator zu verwenden:
-    </para>
+        <para>
+            Als nächstes überladen wir die <methodname>loadDefaultDecorators()</methodname> Methode
+            um unseren neuen <classname>Date</classname> Decorator zu verwenden:
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 {
     // ...
@@ -331,11 +322,11 @@ class My_Form_Element_Date extends Zend_Form_Element_Xhtml
 }
 ]]></programlisting>
 
-    <para>
-        Wie sieht die endgültige Ausgabe aus=? Nehmen wir das folgende Element an:
-    </para>
+        <para>
+            Wie sieht die endgültige Ausgabe aus=? Nehmen wir das folgende Element an:
+        </para>
 
-    <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $d = new My_Form_Element_Date('dateOfBirth');
 $d->setLabel('Geburtsdatum: ')
   ->setView(new Zend_View());
@@ -345,12 +336,12 @@ $d->setValue('20 April 2009');
 $d->setValue(array('year' => '2009', 'month' => '04', 'day' => '20'));
 ]]></programlisting>
 
-    <para>
-        Wenn man dieses Element ausgibt erhält man das folgende Markup (mit einigen wenigen
-        Modifikationen an Leerzeichen für die Lesbarkeit):
-    </para>
+        <para>
+            Wenn man dieses Element ausgibt erhält man das folgende Markup (mit einigen wenigen
+            Modifikationen an Leerzeichen für die Lesbarkeit):
+        </para>
 
-    <programlisting language="html"><![CDATA[
+        <programlisting language="html"><![CDATA[
 <dt id="dateOfBirth-label"><label for="dateOfBirth" class="optional">
     Geburtsdatum:
 </label></dt>

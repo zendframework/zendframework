@@ -95,13 +95,37 @@
 
                 <listitem>
                     <para>
-                        By calling the fromString() static method, with a cookie string as
+                        By calling the fromString($cookieStr, [$refUri, [$encodeValue]]) static method, , with a cookie string as
                         represented in the 'Set-Cookie' <acronym>HTTP</acronym> response header or
                         'Cookie' <acronym>HTTP</acronym> request header. In this case, the cookie
                         value must already be encoded. When the cookie string does not contain a
                         'domain' part, you must provide a reference <acronym>URI</acronym> according
                         to which the cookie's domain and path will be set.
                     </para>
+                    <para>
+                        The <code>fromString</code> method accepts the following parameters:
+                    </para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>
+                            <varname>$cookieStr</varname>: a cookie string as represented in the
+                           'Set-Cookie' <acronym>HTTP</acronym> response header or 'Cookie' 
+                           <acronym>HTTP</acronym> request header (required)
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                            <varname>$refUri</varname>: a reference <acronym>URI</acronym> according to which the cookie's domain and path
+                            will be set. (optional, defaults to parsing the value from the $cookieStr)
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para>
+                            <varname>$encodeValue</varname>: If the value should be passed through urldecode. Also effects the cookie's
+                            behavior when being converted back to a cookie string. (optional, defaults to true)
+                            </para>
+                        </listitem>
+                    </itemizedlist>
                 </listitem>
             </itemizedlist>
 

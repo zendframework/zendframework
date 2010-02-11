@@ -89,6 +89,13 @@ class Zend_Http_Cookie
     protected $secure;
 
     /**
+     * Whether the cookie value has been encoded/decoded
+     *
+     * @var boolean
+     */
+    protected $encodeValue;
+
+    /**
      * Cookie object constructor
      *
      * @todo Add validation of each one of the parameters (legal domain, etc.)
@@ -258,7 +265,10 @@ class Zend_Http_Cookie
      */
     public function __toString()
     {
-        return $this->name . '=' . urlencode($this->value) . ';';
+        if ($this->encodeValue) {
+            return $this->name . '=' . urlencode($this->value) . ';';
+        }
+        return $this->name . '=' . $this->value . ';';
     }
 
     /**
@@ -266,14 +276,16 @@ class Zend_Http_Cookie
      * (for example the value of the Set-Cookie HTTP header)
      *
      * @param string $cookieStr
-     * @param Zend_Uri_Http|string $ref_uri Reference URI for default values (domain, path)
+     * @param Zend_Uri_Http|string $refUri Reference URI for default values (domain, path)
+     * @param boolean $encodeValue Weither or not the cookie's value should be
+     *                             passed through urlencode/urldecode
      * @return Zend_Http_Cookie A new Zend_Http_Cookie object or false on failure.
      */
-    public static function fromString($cookieStr, $ref_uri = null)
+    public static function fromString($cookieStr, $refUri = null, $encodeValue = true)
     {
         // Set default values
-        if (is_string($ref_uri)) {
-            $ref_uri = Zend_Uri_Http::factory($ref_uri);
+        if (is_string($refUri)) {
+            $refUri = Zend_Uri_Http::factory($refUri);
         }
 
         $name    = '';
@@ -290,12 +302,14 @@ class Zend_Http_Cookie
         // Get the name and value of the cookie
         list($name, $value) = explode('=', trim(array_shift($parts)), 2);
         $name  = trim($name);
-        $value = urldecode(trim($value));
+        if ($encodeValue) {
+            $value = urldecode(trim($value));
+        }
 
         // Set default domain and path
-        if ($ref_uri instanceof Zend_Uri_Http) {
-            $domain = $ref_uri->getHost();
-            $path = $ref_uri->getPath();
+        if ($refUri instanceof Zend_Uri_Http) {
+            $domain = $refUri->getHost();
+            $path = $refUri->getPath();
             $path = substr($path, 0, strrpos($path, '/'));
         }
 
@@ -342,7 +356,9 @@ class Zend_Http_Cookie
         }
 
         if ($name !== '') {
-            return new self($name, $value, $domain, $expires, $path, $secure);
+            $ret = new self($name, $value, $domain, $expires, $path, $secure);
+            $ret->encodeValue = ($encodeValue) ? true : false;
+            return $ret;
         } else {
             return false;
         }

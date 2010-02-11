@@ -170,6 +170,14 @@ $client->setConfig($config);
                             <entry>boolean</entry>
                             <entry><constant>TRUE</constant></entry>
                         </row>
+                        <row>
+                            <entry>encodecookies</entry>
+                            <entry>Whether to pass the cookie value through urlencode/urldecode.
+                            Enabling this breaks support with some web servers.
+                            Disabling this limits the range of values the cookies can contain.</entry>
+                            <entry>boolean</entry>
+                            <entry><constant>TRUE</constant></entry>
+                        </row>
                     </tbody>
                 </tgroup>
             </table>

@@ -93,6 +93,48 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Make sure we get the correct value if it was set through fromString()
+     *
+     * @param        string $value
+     * @dataProvider validCookieValueProvider
+     */
+    public function testGetRawValueFromString($val)
+    {
+        // Because ';' has special meaning in the cookie, strip it out for this test.
+        $val = str_replace(';', '', $val);
+        $cookie = Zend_Http_Cookie::fromString('cookie=' . $val . '; domain=example.com', null, false);
+        $this->assertEquals($val, $cookie->getValue());
+    }
+
+    /**
+     * Make sure we get the correct value if it was set through fromString()
+     *
+     * @param        string $value
+     * @dataProvider validCookieValueProvider
+     */
+    public function testGetRawValueFromStringToString($val)
+    {
+        // Because ';' has special meaning in the cookie, strip it out for this test.
+        $val = str_replace(';', '', $val);
+        $cookie = Zend_Http_Cookie::fromString('cookie=' . $val . '; domain=example.com', null, false);
+        $this->assertEquals('cookie=' . $val . ';', (string)$cookie);
+    }
+
+    /**
+     * Make sure we get the correct value if it was set through fromString()
+     *
+     * @param        string $value
+     * @dataProvider validCookieValueProvider
+     */
+    public function testGetValueFromStringEncodedToString($val)
+    {
+        // Because ';' has special meaning in the cookie, strip it out for this test.
+        $val = str_replace(';', '', $val);
+        $cookie = Zend_Http_Cookie::fromString('cookie=' . $val . '; domain=example.com', null, true);
+        $this->assertEquals('cookie=' . urlencode($val) . ';', (string)$cookie);
+    }
+
+    /**
      * Make sure we get the correct domain when it's set in the cookie string
      *
      * @dataProvider validCookieWithInfoProvider
@@ -443,6 +485,7 @@ class Zend_Http_CookieTest extends PHPUnit_Framework_TestCase
             array('space cookie'),
             array('!@#$%^*&()* ][{}?;'),
             array("line\n\rbreaks"),
+            array("0000j8CydACPu_-J9bE8uTX91YU:12a83ks4k"), // value from: Alexander Cheshchevik's comment on issue: ZF-1850
 
             // Long cookie value - 2kb
             array(str_repeat(md5(time()), 64))

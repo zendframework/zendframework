@@ -117,7 +117,8 @@ class Zend_Http_Client
         'keepalive'       => false,
         'storeresponse'   => true,
         'strict'          => true,
-        'output_stream'	  => false,
+        'output_stream'   => false,
+        'encodecookies'   => true,
     );
 
     /**
@@ -640,7 +641,7 @@ class Zend_Http_Client
             return $this;
         }
 
-        if ($value !== null) {
+        if ($value !== null && $this->config['encodecookies']) {
             $value = urlencode($value);
         }
 
@@ -648,7 +649,9 @@ class Zend_Http_Client
             if ($cookie instanceof Zend_Http_Cookie) {
                 $this->cookiejar->addCookie($cookie);
             } elseif (is_string($cookie) && $value !== null) {
-                $cookie = Zend_Http_Cookie::fromString("{$cookie}={$value}", $this->uri);
+                $cookie = Zend_Http_Cookie::fromString("{$cookie}={$value}",
+                                                       $this->uri,
+                                                       $this->config['encodecookies']);
                 $this->cookiejar->addCookie($cookie);
             }
         } else {

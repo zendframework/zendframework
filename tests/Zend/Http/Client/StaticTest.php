@@ -608,7 +608,8 @@ class Zend_Http_Client_StaticTest_Mock extends Zend_Http_Client
         'keepalive'       => false,
         'storeresponse'   => true,
         'strict'          => true,
-        'output_stream'	  => false,
+        'output_stream'   => false,
+        'encodecookies'   => true,
     );
 }
 

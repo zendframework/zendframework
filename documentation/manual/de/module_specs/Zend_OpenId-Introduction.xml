@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20843 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.openid.introduction">
     <title>Einführung</title>
+
     <para>
         <classname>Zend_OpenId</classname> ist eine Zend Framework Komponente die eine einfache
         <acronym>API</acronym> für das Erstellen von OpenID-verwendenden Sites und Identitäts
@@ -11,6 +12,7 @@
 
     <sect2 id="zend.openid.introduction.what">
         <title>Was ist OpenID?</title>
+
         <para>
             OpenID ist ein Set von Protokollen für Benutzer-zentrierte digitale Identitäts Provider.
             Diese Protokolle erlauben Benutzern online die Erstellung einer Identität, indem ein
@@ -37,6 +39,7 @@
 
     <sect2 id="zend.openid.introduction.how">
         <title>Wie funktioniert das ?</title>
+
         <para>
             Der Zweck der <classname>Zend_OpenId</classname> Komponente ist es das OpenID
             Authentifizierungsprotokoll zu implementieren, wie im folgenden Sequenzdiagramm
@@ -55,6 +58,7 @@
                     Identifikator zum OpenID Konsumenten, durch einen User-Agenten, übergibt.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Der OpenID Konsument führt eine Normalisierung und Begutachtung des vom Benutzer
@@ -63,6 +67,7 @@
                     eine OpenID Protokoll Version.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Der OpenID Konsument führt eine optionale Assoziierung mit dem Provider durch
@@ -71,23 +76,27 @@
                     verifizieren der nachfolgenden Nachrichten verwendet wird.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Der OpenID Konsument leitet den Benutzer-Agenten zur <acronym>URL</acronym> des
                     OpenID Providers mit einer OpenID Authentifizierungs Anfrage weiter.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Der OpenID Provider prüft ob der Benutzer-Agent bereits authentifiziert wurde,
                     und wenn nicht bietet er es an.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Der Endbenutzer gibt das benötigte Passwort an.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Der OpenID Provider prüft ob es erlaubt ist die Identität des Benutzers zum
@@ -95,17 +104,20 @@
                     ist.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Der Benutzer erlaubt oder verweigert das übergeben seiner Identität.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Der OpenID Provider leitet den Benutzer-Agenten zum OpenID Konsumenten zurück
                     mit einer "Authentifizierung durchgeführt" oder "fehlgeschlagen" Anfrage.
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Der OpenID Konsument verifiziert die vom Provider empfangenen Informationen
@@ -118,6 +130,7 @@
 
     <sect2 id="zend.openid.introduction.structure">
         <title>Zend_OpenId Struktur</title>
+
         <para>
             <classname>Zend_OpenId</classname> besteht aus zwei Unterpaketen. Das erste ist
             <classname>Zend_OpenId_Consumer</classname> für die Entwicklung von OpenID-verwendenden
@@ -146,34 +159,27 @@
 
     <sect2 id="zend.openid.introduction.standards">
         <title>Unterstützte OpenId Standards</title>
+
         <para>
-            Die <classname>Zend_OpenId</classname> Komponente unterstützt die folgenden Stanadards:
+            Die <classname>Zend_OpenId</classname> Komponente unterstützt die folgenden Standards:
         </para>
 
         <itemizedlist>
             <listitem>
-                <para>
-                    OpenID Authentifizierungs Protokoll Version 1.1
-                </para>
+                <para>OpenID Authentifizierungs Protokoll Version 1.1</para>
             </listitem>
+
             <listitem>
-                <para>
-                    OpenID Authentifizierungs Protokoll Version 2.0 Entwurf 11
-                </para>
+                <para>OpenID Authentifizierungs Protokoll Version 2.0 Entwurf 11</para>
             </listitem>
+
             <listitem>
-                <para>
-                    OpenID Einfache Registrierungs Erweiterung Version 1.0
-                </para>
+                <para>OpenID Einfache Registrierungs Erweiterung Version 1.0</para>
             </listitem>
+
             <listitem>
-                <para>
-                    OpenID Einfache Registrierungs Erweiterung Version 1.1 Entwurf 1
-                </para>
+                <para>OpenID Einfache Registrierungs Erweiterung Version 1.1 Entwurf 1</para>
             </listitem>
         </itemizedlist>
     </sect2>
 </sect1>
-<!--
-vim:se ts=4 sw=4 et:
--->

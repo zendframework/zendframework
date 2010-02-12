@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 20799 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 20799 -->
 <sect1 id="zend.translate.introduction">
     <title>Einführung</title>
 
     <para>
-        <classname>Zend_Translate</classname> ist die Lösung des Framework's für mehrsprachige
+        <classname>Zend_Translate</classname> ist die Lösung des Frameworks für mehrsprachige
         Applikationen.
     </para>
 
     <para>
-        In mehrsprachigen Applikationen muß der Inhalt in verschiedene Sprachen übersetzt,
-        und der Inhalt angezeigt werden, abhängig von der Sprache des Benutzers.
-        <acronym>PHP</acronym> bietet bereits mehrere Wege um solche Probleme zu behandeln, trotzdem
+        In mehrsprachigen Applikationen muß der Inhalt abhängig von der Sprache des Benutzers
+        in verschiedene Sprachen übersetzt und angezeigt werden.
+        <acronym>PHP</acronym> bietet bereits mehrere Wege, um solche Probleme zu lösen, trotzdem
         zeigt die Verwendung von <acronym>PHP</acronym> einige Probleme:
     </para>
 
@@ -20,7 +20,7 @@
         <listitem>
             <para>
                 <emphasis>Unzureichende <acronym>API</acronym>:</emphasis>
-                Es gibt keine <acronym>API</acronym> die für die verschiedenen Quellen identisch
+                Es gibt keine <acronym>API</acronym>, die für die verschiedenen Quellen identisch
                 ist. Die Benutzung von Gettext zum Beispiel ist sehr kompliziert.
             </para>
         </listitem>
@@ -36,18 +36,18 @@
 
         <listitem>
             <para>
-                <emphasis>Keine Erkennung der Standard Sprache:</emphasis>
-                Die Standard Sprache eines Benutzers kann nicht ohne tiefere Kenntnisse
-                über die Hintergründe der Web Browser erkannt und benutzt werden.
+                <emphasis>Keine Erkennung der Standardsprache:</emphasis>
+                Die Standardsprache eines Benutzers kann nicht ohne tiefere Kenntnisse
+                über die Hintergründe der Webbrowser erkannt werden.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>Gettext ist nicht Threadsicher:</emphasis>
-                <acronym>PHP</acronym>'s Gettext Bibliothek ist nicht Threadsicher und sollte nicht
-                in Multithreaded Umgebungen verwendet werden. Das ist ein Problem der
-                verwendeten Gettext Bibliothek und nicht von <acronym>PHP</acronym> selbst. Aber es
+                <emphasis>Gettext ist nicht threadsicher:</emphasis>
+                <acronym>PHP</acronym>s Gettext-Bibliothek ist nicht threadsicher und sollte nicht
+                in Multithreaded-Umgebungen verwendet werden. Das ist ein Problem der
+                verwendeten Gettext-Bibliothek und nicht von <acronym>PHP</acronym> selbst. Aber es
                 ist ein bekanntes und noch immer vorhandenes Problem.
             </para>
         </listitem>
@@ -55,26 +55,26 @@
 
     <para>
         <classname>Zend_Translate</classname> hat keines der oben angesprochene Probleme. Deswegen
-        wird empfohlen <classname>Zend_Translate</classname> statt der <acronym>PHP</acronym>
-        eigenen Funktionen zu verwenden. Die Vorteile von <classname>Zend_Translate</classname> sind
-        unter anderem:
+        wird empfohlen <classname>Zend_Translate</classname>  zu verwenden und nicht
+        die <acronym>PHP</acronym>-eigenen Funktionen. Die Vorteile von
+        <classname>Zend_Translate</classname> sind unter anderem:
     </para>
 
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>Unterstützt mehrere Quell Formate:</emphasis>
-                <classname>Zend_Translate</classname> unterstützt verschiedene Quell Formate,
-                natürlich auch die welche von <acronym>PHP</acronym> unterstützt werden und andere
-                Formate wie zum Beispiel TMX und CSV Quellen.
+                <emphasis>Unterstützt mehrere Quellformate:</emphasis>
+                <classname>Zend_Translate</classname> unterstützt verschiedene Quellformate,
+                natürlich auch die, welche von <acronym>PHP</acronym> unterstützt werden und andere
+                Formate wie zum Beispiel TMX- und CSV-Quellen.
             </para>
         </listitem>
 
         <listitem>
             <para>
                 <emphasis>Threadsicheres Gettext:</emphasis>
-                Der Gettext Reader von <classname>Zend_Translate</classname> ist Threadsicher. Er
-                kann ohne Probleme in Multithreaded Umgebungen verwendet werden.
+                Der Gettext Reader von <classname>Zend_Translate</classname> ist threadsicher. Er
+                kann ohne Probleme in Multithreaded-Umgebungen verwendet werden.
             </para>
         </listitem>
 
@@ -83,17 +83,17 @@
                 <emphasis>Einfache und einheitliche <acronym>API</acronym>:</emphasis>
                 Die <acronym>API</acronym> von <classname>Zend_Translate</classname> ist sehr
                 einfach und benötigt nur eine handvoll von Funktionen. So ist sie einfach zu lernen
-                und einfach zu warten. Alle Quell Formate werden auf die gleiche Art und Weise
-                gehandhabt, sodas wenn zum Beispiel der Wechsel des Quell Formats
-                von Gettext zu TMX notwendig wird, nur eine einzelne Zeile im Code
-                zu Ändern ist um den anderen Adapter zu spezifizieren.
+                und einfach zu warten. Alle Quellformate werden auf die gleiche Art und Weise
+                gehandhabt, so dass zum Beispiel bei einem Wechsel des Quellformats
+                von Gettext zu TMX nur eine einzelne Zeile im Code
+                zu ändern ist, um den anderen Adapter zu spezifizieren.
             </para>
         </listitem>
 
         <listitem>
             <para>
-                <emphasis>Erkennung der Standard Sprache des Benutzers:</emphasis>
-                Die bevorzugte Sprache des Benutzers der auf die Site zugreift kann durch
+                <emphasis>Erkennung der Standardsprache des Benutzers:</emphasis>
+                Die bevorzugte Sprache des Benutzers, der auf die Site zugreift, kann durch
                 <classname>Zend_Translate</classname> erkannt und automatisch verwendet werden.
             </para>
         </listitem>
@@ -112,16 +112,16 @@
         <title>Beginnen wir mit der Mehrsprachigkeit</title>
 
         <para>
-            Beginnen wir mit dem Mehrsprachigen Business. Was wir also prinzipiell
-            machen ist die Übersetzung unseres Strings, den wir ausgeben wollen,
-            sodas die View die korrekte Übersetzte Ausgabe produziert.
-            Sonst müssten wir für jede Sprache eine eigene View schreiben, und
-            das würde keiner machen wollen. Normalerweise sind mehrsprachige Sites
-            sehr einfach in Ihrem Aufbau. Es sind hierbei nur 4 Schritte zu befolgen:
+            Beginnen wir mit dem mehrsprachigen Betrieb. Was wir also prinzipiell
+            machen, ist die Übersetzung unseres Strings, den wir ausgeben wollen,
+            so dass die View die korrekt übersetzte Ausgabe produziert.
+            Sonst müssten wir für jede Sprache eine eigene View schreiben und
+            das würde niemand machen wollen. Normalerweise sind mehrsprachige Sites
+            sehr einfach in ihrem Aufbau. Es sind hierbei nur vier Schritte zu befolgen:
         </para>
 
         <orderedlist numeration='arabic'>
-            <listitem><para>Den Adapter auswählen der Benutzt werden soll;</para></listitem>
+            <listitem><para>Den Adapter auswählen, der benutzt werden soll;</para></listitem>
 
             <listitem>
                 <para>
@@ -130,17 +130,14 @@
                 </para>
             </listitem>
 
-            <listitem><para>Die Quell Datei vom Code erzeugen;</para></listitem>
-
-            <listitem>
-                <para>Die Quell Datei in die gewünschten Sprachen übersetzen.</para>
-            </listitem>
+            <listitem><para>Die Quelldatei auf der Basis des Codes erzeugen;</para></listitem>
+            <listitem><para>Die Quelldatei in die gewünschten Sprachen übersetzen.</para></listitem>
         </orderedlist>
 
         <para>
-            Die folgenden Abschnitte leiten durch alle vier Abschnitte.
-            Sie sollten sorgfältig studiert werden um eigene Mehrsprachige
-            Web Applikationen erstellen zu können.
+            Die folgenden Abschnitte leiten durch alle vier Schritte.
+            Sie sollten sorgfältig studiert werden, um eigene mehrsprachige
+            Web Anwendungen erstellen zu können.
         </para>
     </sect2>
 </sect1>

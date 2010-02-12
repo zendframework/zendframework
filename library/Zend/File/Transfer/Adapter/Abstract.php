@@ -553,7 +553,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
         $file = $this->_getFiles($files, false, true);
 
         if (is_array($options)) {
-            if ($file === null) {
+            if (empty($file)) {
                 $this->_options = array_merge($this->_options, $options);
             }
 

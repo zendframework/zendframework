@@ -6,11 +6,11 @@
 
     <para>
         <classname>Zend_Translate</classname> ist die Lösung des Frameworks für mehrsprachige
-        Applikationen.
+        Anwendungen.
     </para>
 
     <para>
-        In mehrsprachigen Applikationen muß der Inhalt abhängig von der Sprache des Benutzers
+        In mehrsprachigen Anwendungen muß der Inhalt abhängig von der Sprache des Benutzers
         in verschiedene Sprachen übersetzt und angezeigt werden.
         <acronym>PHP</acronym> bietet bereits mehrere Wege, um solche Probleme zu lösen, trotzdem
         zeigt die Verwendung von <acronym>PHP</acronym> einige Probleme:

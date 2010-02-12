@@ -48,7 +48,7 @@
 
                 <para>
                     <classname>Zend_Currency</classname> allows you also to calculate with currency
-                    values. Therefor it provides you a interface to exchange services.
+                    values. Therefore, it provides you an interface to exchange services.
                 </para>
             </listitem>
 
@@ -59,8 +59,8 @@
 
                 <para>
                     <classname>Zend_Currency</classname> includes several additional methods that
-                    offer informations about details to currencies like: which currency is used
-                    within a defined region, or what are the known abbreviations of a currency.
+                    offer detailed informations about currencies like which currency is used
+                    within a defined region and what are the known abbreviations of a currency.
                 </para>
             </listitem>
         </itemizedlist>

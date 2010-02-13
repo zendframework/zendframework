@@ -152,19 +152,21 @@ print_r($translate->getAdapterInfo());
 <?xml version="1.0" ?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
- <header creationtoolversion="1.0.0" datatype="winres" segtype="sentence"
-         adminlang="en-us" srclang="de-at" o-tmf="abc"
-         creationtool="XYZTool" >
- </header>
- <body>
-  <tu tuid='message1'>
-   <tuv xml:lang="de"><seg>Nachricht1</seg></tuv>
-   <tuv xml:lang="en"><seg>message1</seg></tuv>
-  </tu>
-  <tu tuid='message2'>
-   <tuv xml:lang="en"><seg>message2</seg></tuv>
-   <tuv xml:lang="de"><seg>Nachricht2</seg></tuv>
-  </tu>
+   <header creationtoolversion="1.0.0" datatype="winres" segtype="sentence"
+           adminlang="en-us" srclang="de-at" o-tmf="abc"
+           creationtool="XYZTool" >
+   </header>
+   <body>
+       <tu tuid='message1'>
+           <tuv xml:lang="de"><seg>Nachricht1</seg></tuv>
+           <tuv xml:lang="en"><seg>message1</seg></tuv>
+       </tu>
+       <tu tuid='message2'>
+           <tuv xml:lang="de"><seg>Nachricht2</seg></tuv>
+           <tuv xml:lang="en"><seg>message2</seg></tuv>
+       </tu>
+   </body>
+</tmx>
 ]]></programlisting>
 
             <programlisting language="php"><![CDATA[
@@ -185,6 +187,28 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
             <methodname>addLanguage()</methodname>. The default value for this option is to add all
             languages.
         </para>
+
+        <note>
+            <title>Option useId</title>
+
+            <para>
+                When you set the <emphasis>useId</emphasis> option to <constant>FALSE</constant>
+                then the <emphasis>srclang</emphasis> header will be used to define the language
+                which sets the message.
+            </para>
+
+            <para>
+                In our example the message key would <emphasis>message1</emphasis> per default.
+                When this option is set to <constant>FALSE</constant> the message key
+                <emphasis>Nachricht1</emphasis> would be used.
+            </para>
+
+            <para>
+                Note that the <emphasis>tuv</emphasis> entry which is related to the
+                <emphasis>srclang</emphasis> entry must be the first
+                <emphasis>tuv</emphasis> entry which is set like shown in the above example.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.csv">

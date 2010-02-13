@@ -236,6 +236,15 @@ class Zend_Translate_Adapter_TmxTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Message 1 (fr)', $adapter->_('Message 1', 'fr_FR'));
     }
 
+    public function testUseId()
+    {
+        $adapter = new Zend_Translate_Adapter_Tmx(dirname(__FILE__) . '/_files/translation_en2.tmx', 'en', array('useId' => false));
+        $this->assertEquals(false, $adapter->getOptions('useId'));
+        $this->assertEquals('Message 1 (en)', $adapter->translate('Nachricht 1'));
+        $this->assertEquals('Message 1 (en)', $adapter->_('Nachricht 1'));
+        $this->assertEquals('Nachricht 6', $adapter->translate('Nachricht 6'));
+    }
+
     /**
      * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
      *

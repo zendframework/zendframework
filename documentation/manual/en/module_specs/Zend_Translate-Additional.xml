@@ -210,7 +210,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                     <row>
                         <entry>useId</entry>
-                        <entry>Xliff</entry>
+                        <entry>Xliff and Tmx</entry>
 
                         <entry>
                             If you set this option to <constant>FALSE</constant>, then the source

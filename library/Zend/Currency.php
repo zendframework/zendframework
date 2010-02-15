@@ -100,7 +100,7 @@ class Zend_Currency
 
         $this->setLocale($locale);
         // Get currency details
-        if (!isset($options['currency']) || !is_array($options)) {
+        if (!isset($this->_options['currency']) || !is_array($options)) {
             $this->_options['currency'] = self::getShortName($options, $this->_options['locale']);
         }
 

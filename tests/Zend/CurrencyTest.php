@@ -788,4 +788,13 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         $currency->setService('ExchangeTest');
         $this->assertTrue($currency->getService() instanceof Zend_Currency_CurrencyInterface);
     }
+
+    /**
+     * IsLess values
+     */
+    public function testContructingPrecisionValues()
+    {
+        $currency  = new Zend_Currency(array('value' => 100.5));
+        $this->assertEquals('€ 100,50', $currency->toString('de_AT'));
+    }
 }

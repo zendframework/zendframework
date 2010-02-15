@@ -151,4 +151,21 @@ class Zend_Filter_HtmlEntitiesTest extends PHPUnit_Framework_TestCase
         $instance = $this->_filter->setCharSet('UTF-8')->setQuoteStyle(ENT_QUOTES)->setDoubleQuote(false);
         $this->assertTrue($instance instanceof Zend_Filter_HtmlEntities);
     }
+
+    /**
+     * @group ZF-8995
+     */
+    public function testConfigObject()
+    {
+        require_once 'Zend/Config.php';
+        $options = array('quotestyle' => 5, 'encoding' => 'ISO-8859-1');
+        $config  = new Zend_Config($options);
+
+        $filter = new Zend_Filter_HtmlEntities(
+            $config
+        );
+
+        $this->assertEquals('ISO-8859-1', $filter->getEncoding());
+        $this->assertEquals(5, $filter->getQuoteStyle());
+    }
 }

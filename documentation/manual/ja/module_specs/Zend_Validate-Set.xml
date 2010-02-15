@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20229 -->
+<!-- EN-Revision: 21047 -->
 <sect1 id="zend.validate.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のバリデーションクラス群</title>
@@ -11,6 +11,7 @@
 
     <sect2 id="zend.validate.set.alnum">
         <title>Alnum</title>
+
         <para>
             <code>$value</code> がアルファベットおよび数字のみで構成されているときにのみ <constant>TRUE</constant> を返します。
             このバリデータでは、オプションとして空白文字を認めることもできます。
@@ -28,6 +29,7 @@
 
     <sect2 id="zend.validate.set.alpha">
         <title>Alpha</title>
+
         <para>
              <code>$value</code> がアルファベットのみで構成されているときにのみ <constant>TRUE</constant> を返します。
             このバリデータでは、オプションとして空白文字を認めることもできます。
@@ -40,6 +42,7 @@
 
     <sect2 id="zend.validate.set.between">
         <title>Between</title>
+
         <para>
             <code>$value</code> が最小値と最大値の間にある場合にのみ <constant>TRUE</constant> を返します。
             デフォルトでは、両端の値も含めて比較します
@@ -58,10 +61,12 @@
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
+
         <para>
             <code>$value</code> が Luhn アルゴリズム (10 で割ったあまりのチェックサム)
             を満たすクレジットカード番号である場合にのみ <constant>TRUE</constant> を返します。
         </para>
+
         <note>
             <para>
                 <classname>Ccnum</classname> バリデータは、
@@ -74,6 +79,7 @@
 
     <sect2 id="zend.validate.set.date">
         <title>Date</title>
+
         <para>
             <code>$value</code> が 'YYYY-MM-DD' 形式の日付である場合にのみ
             <constant>TRUE</constant> を返します。オプションの <property>locale</property>
@@ -89,6 +95,7 @@
 
     <sect2 id="zend.validate.set.digits">
         <title>Digits</title>
+
         <para>
             <code>$value</code> が数字のみで構成されている場合にのみ <constant>TRUE</constant> を返します。
         </para>
@@ -98,6 +105,7 @@
 
     <sect2 id="zend.validate.set.float">
         <title>Float</title>
+
         <para>
             <code>$value</code> が浮動小数点値である場合にのみ <constant>TRUE</constant> を返します。
             Zend Framework 1.8 以降では、このバリデータは
@@ -109,31 +117,31 @@
 
     <sect2 id="zend.validate.set.greater_than">
         <title>GreaterThan</title>
+
         <para>
             <code>$value</code> が最小値よりも大きい場合にのみ <constant>TRUE</constant> を返します。
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.hex">
-        <title>Hex</title>
-        <para>
-            <code>$value</code> が16進文字のみで構成されている場合にのみ <constant>TRUE</constant> を返します。
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Hex.xml">
+        <xi:fallback><xi:include href="../../en/module_specs/Zend_Validate-Hex.xml" /></xi:fallback>
+    </xi:include>
     <xi:include href="Zend_Validate-Hostname.xml" />
 
     <sect2 id="zend.validate.set.iban">
         <title>Iban</title>
+
         <para>
             <code>$value</code> が正しい IBAN
             (International Bank Account Number) を含む場合にのみ <constant>TRUE</constant> を返します。
             IBAN 番号の検証は、使用している国に対して行い、チェックサムを使用します。
         </para>
+
         <para>
             IBAN 番号の検証方法は 2 通りあります。最初の方法では、国を表すロケールを指定します。
             その国に対して、指定した IBAN 番号の検証を行います。
         </para>
+
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban('de_AT');
 $iban = 'AT611904300234573201';
@@ -146,10 +154,12 @@ if ($validator->isValid($iban)) {
     }
 }
 ]]></programlisting>
+
         <para>
             これは、IBAN 番号をひとつの国に対して検証したい場合に使用します。
             もっとシンプルな方法としては、この例のようにロケールを指定しないものもあります。
         </para>
+
         <programlisting language="php"><![CDATA[
 $validator = new Zend_Validate_Iban();
 $iban = 'AT611904300234573201';
@@ -159,6 +169,7 @@ if ($validator->isValid($iban)) {
     // IBAN は無効です
 }
 ]]></programlisting>
+
         <para>
             しかしこれには大きな問題がひとつあります。
             たとえばフランスならフランスなど 1 か国だけの IBAN 番号を許可したいときに、
@@ -176,6 +187,7 @@ if ($validator->isValid($iban)) {
 
     <sect2 id="zend.validate.set.int">
         <title>Int</title>
+
         <para>
             <code>$value</code> が整数値である場合にのみ <constant>TRUE</constant> を返します。
             Zend Framework 1.8 以降では、このバリデータは
@@ -194,6 +206,7 @@ if ($validator->isValid($iban)) {
 
     <sect2 id="zend.validate.set.less_than">
         <title>LessThan</title>
+
         <para>
             <code>$value</code> が最大値よりも小さい場合にのみ <constant>TRUE</constant> を返します。
         </para>
@@ -209,6 +222,7 @@ if ($validator->isValid($iban)) {
 
     <sect2 id="zend.validate.set.regex">
         <title>Regex</title>
+
         <para>
             <code>$value</code> が正規表現パターンにマッチする場合にのみ <constant>TRUE</constant> を返します。
         </para>
@@ -218,6 +232,7 @@ if ($validator->isValid($iban)) {
 
     <sect2 id="zend.validate.set.string_length">
         <title>StringLength</title>
+
         <para>
             文字列 <code>$value</code> の長さが最小値以上、
             かつ最大値以下 (最大値が <constant>NULL</constant> 以外のとき)

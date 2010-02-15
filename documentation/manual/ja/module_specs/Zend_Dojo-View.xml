@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 20766 -->
 <sect1 id="zend.dojo.view" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Dojo ビューヘルパー</title>
 
@@ -9,11 +9,13 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            <emphasis>dojo():</emphasis> Dojo 環境のセットアップ、つまり
-            dojo の設定やカスタムモジュールのパス、モジュールの require 文、
-            テーマのスタイルシート、CDN を使用するか否かなどの指定を行います。
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis>dojo():</emphasis> Dojo 環境のセットアップ、つまり
+                dojo の設定やカスタムモジュールのパス、モジュールの require 文、
+                テーマのスタイルシート、 CDN を使用するか否かなどの指定を行います。
+            </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.dojo.view.setup">

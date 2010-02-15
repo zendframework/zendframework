@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16507 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.controller.actionhelpers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>アクションヘルパー</title>
 
     <sect2 id="zend.controller.actionhelper.introduction">
         <title>導入</title>
+
         <para>
             アクションヘルパーを使用すると、<classname>Zend_Controller_Action</classname>
             を継承した任意のアクションコントローラに対して
-            実行時やその他必要に応じて機能追加をすることができます。
+            実行時やその他必要に応じて機能を追加できます。
             アクションヘルパーの狙いは、
             アクションコントローラに共通機能を追加するために
             いちいち抽象クラスを継承する手間を省くことにあります。
@@ -103,7 +104,7 @@ $this->_helper->FlashMessenger('先ほどのリクエストで、あることを
         <para>
             <classname>Zend_Controller_Action_HelperBroker</classname>
             がヘルパーオブジェクトやそのパスの登録に関する詳細を処理します。
-            また、必要に応じてそこからヘルパーを取得することができます。
+            また、必要に応じてそこからヘルパーを取得できます。
         </para>
 
         <para>
@@ -154,7 +155,7 @@ Zend_Controller_Action_HelperBroker::addPath('./Plugins/Helpers',
         </itemizedlist>
 
         <para>
-            これらは静的メソッドなので、コントローラチェイン内の任意の場所で使用することができます。
+            これらは静的メソッドなので、コントローラチェイン内の任意の場所で使用できます。
             これにより、必要に応じて動的にヘルパーを追加できることになります。
         </para>
 
@@ -335,7 +336,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             たとえば、<link
                 linkend="zend.controller.actionhelpers.redirector">redirector</link>
             の <methodname>direct()</methodname> は <methodname>goto()</methodname>
-            のエイリアスとなっているので、このようにして使用することができます。
+            のエイリアスとなっているので、このようにして使用できます。
         </para>
 
         <programlisting language="php"><![CDATA[

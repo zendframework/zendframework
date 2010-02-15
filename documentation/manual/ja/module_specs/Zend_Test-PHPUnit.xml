@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19568 -->
+<!-- EN-Revision: 20807 -->
 <sect1 id="zend.test.phpunit" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Test_PHPUnit</title>
 
@@ -22,14 +22,18 @@
         </para>
 
         <itemizedlist>
-            <listitem><para>
+            <listitem>
+                <para>
                 ログインフォームは、未認証のユーザに対しても表示されること。
-            </para></listitem>
+                </para>
+            </listitem>
 
-            <listitem><para>
+            <listitem>
+                <para>
                 ユーザがログインしたら、自分のプロファイルページにリダイレクトされること。
                 そしてプロファイルページには、関連する情報が表示されること。
-            </para></listitem>
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

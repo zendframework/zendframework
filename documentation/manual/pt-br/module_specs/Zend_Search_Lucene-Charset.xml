@@ -32,18 +32,18 @@
         </para>
 
         <para>
-            Actual input data encoding may be specified through
-            <classname>Zend_Search_Lucene</classname> <acronym>API</acronym>. Data will be
-            automatically converted into UTF-8 encoding.
+            A codificação dos dados de entrada pode ser especificada através da
+            <acronym>API</acronym> de <classname>Zend_Search_Lucene</classname>. Os dados serão
+            convertidos automaticamente na codificação UTF-8.
         </para>
     </sect2>
 
     <sect2 id="zend.search.lucene.charset.default_analyzer">
-        <title>Default text analyzer</title>
+        <title>Analisador de texto padrão</title>
 
         <para>
-            However, the default text analyzer (which is also used within query parser) uses
-            ctype_alpha() for tokenizing text and queries.
+            De qualquer modo, o analisador de texto padrão (que também é usado no analisador de
+            consulta) utiliza ctype_alpha() para a sinalização de texto e consultas.
         </para>
 
         <para>

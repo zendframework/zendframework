@@ -236,21 +236,23 @@ $index->optimize();
             <title>Opção de auto-otimização MergeFactor</title>
 
             <para>
-                <emphasis>MergeFactor</emphasis> determines how often segment indices are merged by
-                addDocument(). With smaller values, less <acronym>RAM</acronym> is used while
-                indexing, and searches on unoptimized indices are faster, but indexing speed is
-                slower. With larger values, more <acronym>RAM</acronym> is used during indexing, and
-                while searches on unoptimized indices are slower, indexing is faster. Thus larger
-                values (&gt; 10) are best for batch index creation, and smaller values (&lt; 10) for
-                indices that are interactively maintained.
+                <emphasis>MergeFactor</emphasis> determina a frequência com que os índices de
+                segmento são fundidos por addDocument(). Com valores menores, menos memória
+                <acronym>RAM</acronym> é usada durante a indexação, e buscas em índices não
+                otimizados são mais rápidas, mas a velocidade de indexação é mais lenta. Com valores
+                maiores, mais memória <acronym>RAM</acronym> é usada durante a indexação, e, embora
+                as buscas em índices não otimizados sejam mais lentas, a indexação é mais rápida.
+                Desse modo, valores maiores (&gt; 10) são melhores para a criação de índices em
+                lotes, e os valores menores (&lt; 10) são melhores para os índices que são mantidos
+                de forma interativa.
             </para>
 
             <para>
-                <emphasis>MergeFactor</emphasis> is a good estimation for average number of segments
-                merged by one auto-optimization pass. Too large values produce large number of
-                segments while they are not merged into new one. It may be a cause of "failed to
-                open stream: Too many open files" error message. This limitation is system
-                dependent.
+                <emphasis>MergeFactor</emphasis> é uma boa estimativa para o número médio de
+                segmentos fundidos em uma passagem de auto-otimização. Valores muito grandes
+                produzem um grande número de segmentos, enquanto não são fundidos em um novo. Isso
+                pode causar a mensagem de erro "failed to open stream: Too many open files". Essa
+                limitação é dependente do sistema.
             </para>
 
             <para>
@@ -264,13 +266,13 @@ $index->optimize();
             </para>
 
             <para>
-                Lucene Java and Luke (Lucene Index Toolbox - <ulink
-                    url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>) can also
-                be used to optimize an index. Latest Luke release (v0.8) is based on Lucene v2.3 and
-                compatible with current implementation of <classname>Zend_Search_Lucene</classname>
-                component (Zend Framework 1.6). Earlier versions of
-                <classname>Zend_Search_Lucene</classname> implementations need another versions of
-                Java Lucene tools to be compatible:
+                Lucene Java e Luke (Lucene Index Toolbox - <ulink
+                    url="http://www.getopt.org/luke/">http://www.getopt.org/luke/</ulink>) também
+                podem ser usados para otimizar um índice. O último lançamento do Luke (v0.8) é
+                baseado no Lucene v2.3 e é compatível com a atual implementação do componente
+                <classname>Zend_Search_Lucene</classname> (Zend Framework 1.6). Versões anteriores
+                das implementações do <classname>Zend_Search_Lucene</classname> necessitam de outras
+                versões das ferramentas Java Lucene para serem compatíveis:
 
                 <itemizedlist>
                     <listitem>
@@ -292,60 +294,60 @@ $index->optimize();
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.permissions">
-        <title>Permissions</title>
+        <title>Permissões</title>
 
         <para>
-            By default, index files are available for reading and writing by everyone.
+            Por padrão, arquivos de índice estão disponíveis para leitura e escrita por todos.
         </para>
 
         <para>
-            It's possible to override this with the
-            <methodname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</methodname>
-            method:
+            É possível substituir esse comportamento com o método
+            <methodname>Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions()</methodname>:
         </para>
 
         <programlisting language="php"><![CDATA[
-// Get current default file permissions
+// Recupera as permissões padrões
 $currentPermissions =
     Zend_Search_Lucene_Storage_Directory_Filesystem::getDefaultFilePermissions();
 
-// Give read-writing permissions only for current user and group
+// Fornece permissões de leitura e escrita apenas para o usuário e grupo atuais
 Zend_Search_Lucene_Storage_Directory_Filesystem::setDefaultFilePermissions(0660);
 ]]></programlisting>
     </sect2>
 
     <sect2 id="zend.search.lucene.index-creation.limitations">
-        <title>Limitations</title>
+        <title>Limitações</title>
 
         <sect3 id="zend.search.lucene.index-creation.limitations.index-size">
-            <title>Index size</title>
+            <title>Tamanho do Índice</title>
 
             <para>
-                Index size is limited by 2GB for 32-bit platforms.
+                O tamanho do índice é limitado em 2GB para plataformas 32-bit.
             </para>
 
             <para>
-                Use 64-bit platforms for larger indices.
+                Utilize plataformas 64-bit para índices maiores.
             </para>
         </sect3>
 
         <sect3 id="zend.search.lucene.index-creation.limitations.filesystems">
-            <title>Supported Filesystems</title>
+            <title>Sistemas de Arquivos Suportados</title>
 
             <para>
-                <classname>Zend_Search_Lucene</classname> uses <methodname>flock()</methodname> to
-                provide concurrent searching, index updating and optimization.
+                <classname>Zend_Search_Lucene</classname> utiliza <methodname>flock()</methodname>
+                para fornecer pesquisas simultâneas, atualização de índice e otimização.
             </para>
 
             <para>
-                According to the <acronym>PHP</acronym> <ulink
-                    url="http://www.php.net/manual/en/function.flock.php">documentation</ulink>,
-                "<methodname>flock()</methodname> will not work on NFS and many other networked file
-                systems".
+                De acordo com a <ulink
+                    url="http://www.php.net/manual/en/function.flock.php">documentação</ulink> do
+                <acronym>PHP</acronym>, "<methodname>flock()</methodname> não funcionará em NFS ou
+                em qualquer outro sistema de arquivos em rede.".
             </para>
 
             <para>
-                Do not use networked file systems with <classname>Zend_Search_Lucene</classname>.
+                Não utilize sistemas de arquivos em rede com o
+                <classname>Zend_Search_Lucene</classname>.
             </para>
         </sect3>
     </sect2>

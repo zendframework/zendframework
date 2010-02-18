@@ -97,7 +97,7 @@ echo $view->render('someView.php');
 
         <para>
             Por padrão, <classname>Zend_View</classname> espera encontrar os scripts de visualização
-            localizados no mesmo diretório onde reside o script controlador.  Por exemplo, se o seu
+            localizados no mesmo diretório onde reside o script controlador. Por exemplo, se o seu
             script controlador estiver em "/path/to/app/controllers" e chamar
             $view->render('someView.php'), <classname>Zend_View</classname> irá procurar por ele em
             "/path/to/app/controllers/someView.php".
@@ -122,7 +122,7 @@ $view->setScriptPath('/path/to/app/views');
         <para>
             De fato, você pode "empilhar" caminhos usando o método addScriptPath(). A medida que
             você acrescenta caminhos à pilha, <classname>Zend_View</classname> irá procurar pela
-            visão no caminho mais recentemente adicionado à pilha.  Isto permite sobrepor visões
+            visão no caminho mais recentemente adicionado à pilha. Isto permite sobrepor visões
             padronizadas por visões customizadas, permitindo a criação de "temas" e "peles" para
             algumas visões, deixando outras intocadas.
         </para>

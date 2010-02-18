@@ -130,6 +130,24 @@ class Zend_Filter_PregReplaceTest extends PHPUnit_Framework_TestCase
         } catch (Exception $e) {
         }
     }
+
+    /**
+      * @group ZF-9202
+      */
+    public function testExtendsPregReplace()
+    {
+        $startMatchPattern = '~(&gt;){3,}~i';
+        $filter = new XPregReplace();
+        $this->assertEquals($startMatchPattern, $filter->getMatchPattern());
+    }
+}
+
+/**
+ * @group ZF-9202
+ */
+class XPregReplace extends Zend_Filter_PregReplace
+{
+    protected $_matchPattern = '~(&gt;){3,}~i';
 }
 
 // Call Zend_Filter_PregReplaceTest::main() if this source file is executed directly.

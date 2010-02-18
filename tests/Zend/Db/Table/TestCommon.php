@@ -1304,9 +1304,9 @@ abstract class Zend_Db_Table_TestCommon extends Zend_Db_Table_TestSetup
         try {
             $bugsTable = $this->_getTable('My_ZendDbTable_TableBugs');
             $primary = $bugsTable->info(Zend_Db_Table_Abstract::PRIMARY);
-            $this->fail('Expected to catch Zend_Db_Table_Exception');
-        } catch (Zend_Exception $e) {
-            $this->assertType('Zend_Db_Table_Exception', $e);
+            $this->fail('Expected to catch PHPUnit_Framework_Error');
+        } catch (PHPUnit_Framework_Error $e) {
+            $this->assertEquals(E_USER_NOTICE, $e->getCode(), 'Error type not E_USER_NOTICE');
             $this->assertEquals('Failed saving metadata to metadataCache', $e->getMessage());
         }
 

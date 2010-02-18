@@ -319,12 +319,13 @@ class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
 
         // Are MX checks supported by this system?
         if (!$validator->validateMxSupported()) {
-            return true;
+            $this->markTestSkipped('Testing MX records is not supported with this configuration');
+            return;
         }
 
         $valuesExpected = array(
-            array(true, array('Bob.Jones@zend.com', 'Bob.Jones@studio24.net')),
-            array(false, array('Bob.Jones@madeupdomain242424a.com', 'Bob.Jones@madeupdomain242424b.net'))
+            array(true, array('Bob.Jones@zend.com', 'Bob.Jones@php.net')),
+            array(false, array('Bob.Jones@bad.example.com', 'Bob.Jones@anotherbad.example.com'))
             );
         foreach ($valuesExpected as $element) {
             foreach ($element[1] as $input) {

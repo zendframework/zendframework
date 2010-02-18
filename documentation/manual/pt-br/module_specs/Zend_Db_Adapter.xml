@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21080 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -789,9 +789,9 @@ echo $result[0]->bug_description;
             <title>Buscando um Conjunto de Resultados como um matriz Associativo</title>
 
             <para>
-                O método <methodname>fetchAssoc()</methodname> retorna dados em um matriz
-                de matrizs associativos, independente de qual valor você tenha configurado
-                para o modo de busca.
+                O método <methodname>fetchAssoc()</methodname> retorna dados em uma matriz
+                de matrizes associativas, independente de qual valor você tenha configurado
+                para o modo de busca, utilizando a primeira coluna como índice da matriz.
             </para>
 
             <example id="zend.db.adapter.select.fetchassoc.example">
@@ -800,10 +800,11 @@ echo $result[0]->bug_description;
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
-$result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
+$result = $db->fetchAssoc('SELECT bug_id, bug_description, bug_status FROM bugs');
 
-// $result é um matriz de matrizs associativos, conforme o modo de busca
-echo $result[0]['bug_description'];
+// $result é uma matriz de matrizes associativas, conforme o modo de busca
+echo $result[2]['bug_description']; // Descrição do Erro #2
+echo $result[1]['bug_description']; // Descrição do Erro #1
 ]]></programlisting>
             </example>
         </sect3>

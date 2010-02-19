@@ -64,7 +64,7 @@ print $currency; // Could return '$ 100'
 ]]></programlisting>
 
         <para>
-            So by using the default setting the currency (in our case $) could eighter be
+            So by using the default setting the currency (in our case $) could either be
             rendered left or right from the value. Now let's define a fixed position:
         </para>
 

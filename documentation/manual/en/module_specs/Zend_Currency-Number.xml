@@ -10,9 +10,9 @@
     </para>
 
     <para>
-        For example, most locales are using the latin script for rendering numbers. But there
-        are languages like "Arabic" which are using other digits. And when you have an arabic
-        website you may also want to render other currencies by using the arabic script. See
+        For example, most locales are using the Latin script for rendering numbers. But there
+        are languages like "Arabic" which are using other digits. And when you have an Arabic
+        website you may also want to render other currencies by using the Arabic script. See
         the following example:
     </para>
 
@@ -21,7 +21,7 @@
 
         <para>
             Let's expect that we are again using our "Dollar" currency. But now we want to
-            render our currency by using the arabic script.
+            render our currency by using the Arabic script.
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -61,14 +61,14 @@ print $currency; // Could return '$ 1.000'
 ]]></programlisting>
 
     <para>
-        There are two ways to define the format which will be used. You can eighter give a
+        There are two ways to define the format which will be used. You can either give a
         locale or define a format manually.
     </para>
 
     <para>
         When you are using a locale for defining the format all is done automatically. The
         locale 'de', for example, defines '.' as separator for thousands and ',' as decimal
-        point. Within english this is reversed.
+        point. Within English this is reversed.
     </para>
 
     <programlisting language="php"><![CDATA[

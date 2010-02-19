@@ -53,15 +53,15 @@
 
             <para>
                 The amount of currency (generally known as money value) is formatted by
-                usaging the formatting rules defined by the locale. For example is the ','
-                sign in english used as separator for thousands, but in german as precision
+                using the formatting rules defined by the locale. For example is the ','
+                sign in English used as separator for thousands, but in German as precision
                 sign.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        The following list mentions all options which could be set. They can eighter be set at
+        The following list mentions all options which could be set. They can either be set at
         initiation or by using the <methodname>setFormat()</methodname> method. In any case
         you have to give this options as array.
     </para>
@@ -166,6 +166,6 @@
     <para>
         As you can see there is much which could be changed. Still as already mentioned the
         default values for this settings conform the official standard for currency
-        represenation in every country.
+        representation in every country.
     </para>
 </sect1>

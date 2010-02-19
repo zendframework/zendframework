@@ -75,6 +75,7 @@ abstract class Zend_Db_Table_Row_TestCommon extends Zend_Db_Table_TestSetup
             'data'   => $data,
         );
 
+        $this->_useMyIncludePath();
         Zend_Loader::loadClass('My_ZendDbTable_Row_TestTableRow');
         return new My_ZendDbTable_Row_TestTableRow($config);
     }

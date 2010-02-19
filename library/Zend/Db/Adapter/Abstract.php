@@ -526,13 +526,27 @@ abstract class Zend_Db_Adapter_Abstract
         // extract and quote col names from the array keys
         $cols = array();
         $vals = array();
+        $i = 0;
         foreach ($bind as $col => $val) {
             $cols[] = $this->quoteIdentifier($col, true);
             if ($val instanceof Zend_Db_Expr) {
                 $vals[] = $val->__toString();
                 unset($bind[$col]);
             } else {
-                $vals[] = '?';
+                if ($this->supportsParameters('positional')) {
+                    $vals[] = '?';
+                } else {
+                    if ($this->supportsParameters('named')) {
+                        unset($bind[$col]);
+                        $bind[':col'.$i] = $val;
+                        $vals[] = ':col'.$i;
+                        $i++;
+                    } else {
+                        /** @see Zend_Db_Adapter_Exception */
+                        require_once 'Zend/Db/Adapter/Exception.php';
+                        throw new Zend_Db_Adapter_Exception(get_class($this) ." doesn't support positional or named binding");
+                    }
+                }
             }
         }
 
@@ -543,7 +557,10 @@ abstract class Zend_Db_Adapter_Abstract
              . 'VALUES (' . implode(', ', $vals) . ')';
 
         // execute the statement and return the number of affected rows
-        $stmt = $this->query($sql, array_values($bind));
+        if ($this->supportsParameters('positional')) {
+            $bind = array_values($bind);
+        }
+        $stmt = $this->query($sql, $bind);
         $result = $stmt->rowCount();
         return $result;
     }
@@ -574,8 +591,8 @@ abstract class Zend_Db_Adapter_Abstract
                 } else {
                     if ($this->supportsParameters('named')) {
                         unset($bind[$col]);
-                        $bind[':'.$col.$i] = $val;
-                        $val = ':'.$col.$i;
+                        $bind[':col'.$i] = $val;
+                        $val = ':col'.$i;
                         $i++;
                     } else {
                         /** @see Zend_Db_Adapter_Exception */

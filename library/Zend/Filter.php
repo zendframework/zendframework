@@ -210,7 +210,7 @@ class Zend_Filter implements Zend_Filter_Interface
         $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, array('Zend_Filter'));
         foreach ($namespaces as $namespace) {
             $className = $namespace . '_' . ucfirst($classBaseName);
-            if (!class_exists($className)) {
+            if (!class_exists($className, false)) {
                 try {
                     $file = str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
                     if (Zend_Loader::isReadable($file)) {

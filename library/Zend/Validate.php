@@ -197,7 +197,7 @@ class Zend_Validate implements Zend_Validate_Interface
         $namespaces = array_merge((array) $namespaces, self::$_defaultNamespaces, array('Zend_Validate'));
         $className  = ucfirst($classBaseName);
         try {
-            if (!class_exists($className)) {
+            if (!class_exists($className, false)) {
                 require_once 'Zend/Loader.php';
                 foreach($namespaces as $namespace) {
                     $class = $namespace . '_' . $className;

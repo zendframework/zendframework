@@ -193,6 +193,7 @@ class Zend_Validate_PostCode extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
+        $this->_setValue($value);
         if (!is_string($value) && !is_int($value)) {
             $this->_error(self::INVALID);
             return false;

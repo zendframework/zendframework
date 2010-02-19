@@ -174,6 +174,16 @@ class Zend_Validate_PostCodeTest extends PHPUnit_Framework_TestCase
             $this->assertContains('a not empty string', $e->getMessage());
         }
     }
+
+    /**
+     * @group ZF-9212
+     */
+    public function testErrorMessageText()
+    {
+        $this->assertFalse($this->_validator->isValid('hello'));
+        $message = $this->_validator->getMessages();
+        $this->assertContains('not appear to be an postal code', $message['postcodeNoMatch']);
+    }
 }
 
 if (PHPUnit_MAIN_METHOD == 'Zend_Validate_PostCodeTest::main') {

@@ -864,7 +864,8 @@ abstract class Zend_Db_Statement_TestCommon extends Zend_Db_TestSetup
      */
     public function testStatementCanReturnDriverStatement()
     {
-        $statement = $this->_db->query('SELECT * FROM zfproducts');
+        $products = $this->_db->quoteIdentifier('zfproducts');
+        $statement = $this->_db->query("SELECT * FROM $products");
         $this->assertNotNull($statement->getDriverStatement());
         return $statement;
     }

@@ -255,5 +255,5 @@ return array(
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "Tipo especificado inválido, o valor deve ser uma string",
     "'%value%' is less than %min% characters long" => "O tamanho de '%value%' é inferior a %min% caracteres",
-    "'%value%' is more than %max% characters long" => "O tamanho de '%value%' é superior a %min% caracteres",
+    "'%value%' is more than %max% characters long" => "O tamanho de '%value%' é superior a %max% caracteres",
 );

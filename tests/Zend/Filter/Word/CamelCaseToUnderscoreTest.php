@@ -65,6 +65,30 @@ class Zend_Filter_Word_CamelCaseToUnderscoreTest extends PHPUnit_Framework_TestC
         $this->assertNotEquals($string, $filtered);
         $this->assertEquals('Camel_Cased_Words', $filtered);
     }
+
+    public function testFilterSeperatingNumbersToUnterscore()
+    {
+        $string = 'PaTitle';
+        $filter   = new Zend_Filter_Word_CamelCaseToUnderscore();
+        $filtered = $filter->filter($string);
+
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('Pa_Title', $filtered);
+
+        $string = 'Pa2Title';
+        $filter   = new Zend_Filter_Word_CamelCaseToUnderscore();
+        $filtered = $filter->filter($string);
+
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('Pa2_Title', $filtered);
+
+        $string = 'Pa2aTitle';
+        $filter   = new Zend_Filter_Word_CamelCaseToUnderscore();
+        $filtered = $filter->filter($string);
+
+        $this->assertNotEquals($string, $filtered);
+        $this->assertEquals('Pa2a_Title', $filtered);
+    }
 }
 
 // Call Zend_Filter_Word_CamelCaseToUnderscoreTest::main() if this source file is executed directly.

@@ -36,10 +36,10 @@ class Zend_Filter_Word_CamelCaseToSeparator extends Zend_Filter_Word_Separator_A
     public function filter($value)
     {
         if (self::isUnicodeSupportEnabled()) {
-            parent::setMatchPattern(array('#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#','#(?<=(?:\p{Ll}))(\p{Lu})#'));
+            parent::setMatchPattern(array('#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#','#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#'));
             parent::setReplacement(array($this->_separator . '\1', $this->_separator . '\1'));
         } else {
-            parent::setMatchPattern(array('#(?<=(?:[A-Z]))([A-Z]+)([A-Z][A-z])#', '#(?<=(?:[a-z]))([A-Z])#'));
+            parent::setMatchPattern(array('#(?<=(?:[A-Z]))([A-Z]+)([A-Z][A-z])#', '#(?<=(?:[a-z0-9]))([A-Z])#'));
             parent::setReplacement(array('\1' . $this->_separator . '\2', $this->_separator . '\1'));
         }
 

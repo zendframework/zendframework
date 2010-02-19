@@ -1257,5 +1257,27 @@ abstract class Zend_Db_Table_Relationships_TestCommon extends Zend_Db_Table_Test
         $table = $this->_getTable('My_ZendDbTable_TableSpecial', $options);
         return $table;
     }
+    
+    /**
+     * Ensure that the related table returned from the ManyToManyRowset only contains
+     * the proper columns for the table.
+     * 
+     * @group ZF-3709
+     */
+    public function testTableRelationshipReturnsOnlyTheColumnsInTargetTable()
+    {
+        $table = $this->_table['bugs'];
+        $relatedTable = $this->_table['products'];
+        $relatedTableExpectedColumns = $relatedTable->info(Zend_Db_Table::COLS);
+
+        $row = $table->fetchRow('bug_id = 1');
+
+        $relatedRows = $row->findManyToManyRowset('My_ZendDbTable_TableProducts', 'My_ZendDbTable_TableBugsProducts');
+
+        foreach ($relatedRows as $relatedRow) {
+            $actualColumns = array_keys($relatedRow->toArray());
+            $this->assertEquals($relatedTableExpectedColumns, $actualColumns);
+        }
+    }
 
 }

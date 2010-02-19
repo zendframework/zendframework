@@ -1051,7 +1051,7 @@ abstract class Zend_Db_Table_Row_Abstract implements ArrayAccess
         }
         $joinCond = implode(' AND ', $joinCond);
 
-        $select->from(array('i' => $interName), Zend_Db_Select::SQL_WILDCARD, $interSchema)
+        $select->from(array('i' => $interName), array(), $interSchema)
                ->joinInner(array('m' => $matchName), $joinCond, Zend_Db_Select::SQL_WILDCARD, $matchSchema)
                ->setIntegrityCheck(false);
 

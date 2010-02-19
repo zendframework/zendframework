@@ -264,6 +264,37 @@ abstract class Zend_Db_Table_Select_TestCommon extends Zend_Db_Select_TestCommon
         $selectUnionSql = $selectUnion->assemble();
     }
 
+    /**
+     * Test the Adapter's fetchRow() method with a select with offset
+     * @group ZF-8944
+     */
+    public function testAdapterFetchRowWithOffset()
+    {
+        $table = $this->_getSelectTable('products');
+        $products = $this->_db->quoteIdentifier('zfproducts');
+        $product_id = $this->_db->quoteIdentifier('product_id');
+
+        // Grab the first two rows
+        $data[0] = $this->_db->fetchRow("SELECT * from $products WHERE $product_id = 1");
+        $data[1] = $this->_db->fetchRow("SELECT * from $products WHERE $product_id = 2");
+
+        $select = $table->select();
+        $select->order('product_id');
+        $select->limit(1, 0);
+
+        $row = $this->_db->fetchRow($select);
+
+        $this->assertEquals($data[0], $row);
+
+        $select = $table->select();
+        $select->order('product_id');
+        $select->limit(1, 1);
+
+        $row = $this->_db->fetchRow($select);
+
+        $this->assertEquals($data[1], $row);
+    }
+
     // ZF-3239
 //    public function testFromPartIsAvailableRightAfterInstantiation()
 //    {

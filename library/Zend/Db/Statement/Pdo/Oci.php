@@ -81,8 +81,9 @@ class Zend_Db_Statement_Pdo_Oci extends Zend_Db_Statement_Pdo
     {
         $row = parent::fetch($style, $cursor, $offset);
 
-        if (is_array($row) && array_key_exists('zend_db_rownum', $row)) {
-            unset($row['zend_db_rownum']);
+        $remove = $this->_adapter->foldCase('zend_db_rownum');
+        if (is_array($row) && array_key_exists($remove, $row)) {
+            unset($row[$remove]);
         }
 
         return $row;

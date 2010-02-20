@@ -5,22 +5,22 @@
 
     <para>
         This filter will decrypt any given string with the provided setting. Therefor it makes use
-        of Adapters. Actually there are adapters for the <code>Mcrypt</code> and
-        <code>OpenSSL</code> extensions from php.
+        of Adapters. Actually there are adapters for the <classname>Mcrypt</classname> and
+        <classname>OpenSSL</classname> extensions from php.
     </para>
 
     <para>
-        For details about how to encrypt content look at the <code>Encrypt</code> filter. As the
-        basics are covered within the <code>Encrypt</code> filter, we will describe here only the
-        needed additional methods and changes for decryption.
+        For details about how to encrypt content look at the <classname>Encrypt</classname> filter.
+        As the basics are covered within the <classname>Encrypt</classname> filter, we will
+        describe here only the needed additional methods and changes for decryption.
     </para>
 
     <sect3 id="zend.filter.set.decrypt.mcrypt">
         <title>Decryption with Mcrypt</title>
 
         <para>
-            For decrypting content which was previously encrypted with <code>Mcrypt</code> you need
-            to have the options with which the encryption has been called.
+            For decrypting content which was previously encrypted with <classname>Mcrypt</classname>
+            you need to have the options with which the encryption has been called.
         </para>
 
         <para>
@@ -55,8 +55,8 @@ print $decrypted;
         <note>
             <para>
                 You should also note that all settings which be checked when you create the instance
-                or when you call setEncryption(). If mcrypt detects problem with your settings an
-                exception will be thrown.
+                or when you call <methodname>setEncryption()</methodname>. If mcrypt detects problem
+                with your settings an exception will be thrown.
             </para>
         </note>
     </sect3>
@@ -65,12 +65,12 @@ print $decrypted;
         <title>Decryption with OpenSSL</title>
 
         <para>
-            Decryption with <code>OpenSSL</code> is as simple as encryption. But you need to have
-            all data from the person who encrypted the content.
+            Decryption with <classname>OpenSSL</classname> is as simple as encryption. But you need
+            to have all data from the person who encrypted the content.
         </para>
 
         <para>
-            For decryption with <code>OpenSSL</code> you need:
+            For decryption with <classname>OpenSSL</classname> you need:
         </para>
 
         <itemizedlist>
@@ -107,8 +107,8 @@ $filter->setEnvelopeKey(array(
 
         <note>
             <para>
-                Note that the <code>OpenSSL</code> adapter will not work when you do not provide
-                valid keys.
+                Note that the <classname>OpenSSL</classname> adapter will not work when you do not
+                provide valid keys.
             </para>
         </note>
 

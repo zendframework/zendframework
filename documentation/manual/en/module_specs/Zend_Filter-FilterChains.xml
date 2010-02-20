@@ -9,8 +9,9 @@
         <classname>Zend_Filter</classname> provides a simple method by which filters may be chained
         together. The following code illustrates how to chain together two filters for the submitted
         username:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Create a filter chain and add filters to the chain
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new Zend_Filter_Alpha())
@@ -20,10 +21,10 @@ $filterChain->addFilter(new Zend_Filter_Alpha())
 $username = $filterChain->filter($_POST['username']);
 ]]></programlisting>
 
+    <para>
         Filters are run in the order they were added to <classname>Zend_Filter</classname>. In the
         above example, the username is first removed of any non-alphabetic characters, and then any
         uppercase characters are converted to lowercase.
-
     </para>
 
     <para>

@@ -270,6 +270,10 @@ class Zend_Locale_Format
             if (strlen($pre) >= $options['precision']) {
                 $input = substr($input, 0, strlen($input) - strlen($pre) + $options['precision']);
             }
+
+            if (($options['precision'] == 0) && ($input[strlen($input) - 1] == '.')) {
+                $input = substr($input, 0, -1);
+            }
         }
 
         return $input;

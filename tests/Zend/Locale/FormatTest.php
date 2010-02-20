@@ -1074,4 +1074,12 @@ class Zend_Locale_FormatTest extends PHPUnit_Framework_TestCase
         $options = array('locale' => 'de_AT');
         $this->assertEquals('0,567', Zend_Locale_Format::toNumber(.567, $options));
     }
+
+    /**
+     * @group ZF-9160
+     */
+    public function testGetNumberWithZeroPrecision()
+    {
+        $this->assertEquals(1234, Zend_Locale_Format::getNumber('1234.567', array('locale' => 'en_US', 'precision' => 0)));
+    }
 }

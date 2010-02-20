@@ -84,7 +84,7 @@ $databaseCache = $manager->getCache('database');
     <para>
         If for any reason, you are unsure where the Cache Manager contains a
         pre-instantiated cache or a relevant option cache template to create one
-        on request, you can check for the existance of a name cache configuration
+        on request, you can check for the existence of a name cache configuration
         or instance using the method <methodname>Zend_Cache_Manager::hasCache()</methodname>.
     </para>
 

@@ -833,7 +833,7 @@ $result = $cache->foobar2('1', '2');
                                             <emphasis>(int, <constant>FALSE</constant> by
                                                 default) specific_lifetime</emphasis>: if not
                                             <constant>FALSE</constant>, the
-                                            given lifetime will be used for the choosen regexp
+                                            given lifetime will be used for the chosen regexp
                                         </para>
                                     </listitem>
 

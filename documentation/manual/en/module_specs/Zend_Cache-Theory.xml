@@ -9,13 +9,13 @@
         <emphasis>'lifetime'</emphasis> directive as seen in the examples; it defines for how long
         the cached resource is considered 'fresh'. The third key concept is conditional execution so
         that parts of your code can be skipped entirely, boosting performance. The main frontend
-        function (eg. <methodname>Zend_Cache_Core::get()</methodname>) is always designed to return
+        function (e.g. <methodname>Zend_Cache_Core::get()</methodname>) is always designed to return
         <constant>FALSE</constant> for a cache miss if that makes sense for the nature of a
         frontend. That enables
         end-users to wrap parts of the code they would like to cache (and skip) in
         <emphasis><methodname>if()</methodname>{ ... }</emphasis> statements where the condition is
         a <classname>Zend_Cache</classname> method itself. On the end if these blocks you must save
-        what you've generated, however (eg. <methodname>Zend_Cache_Core::save()</methodname>).
+        what you've generated, however (e.g. <methodname>Zend_Cache_Core::save()</methodname>).
     </para>
 
     <note>
@@ -51,10 +51,10 @@ $backendName = '[...]';
 // We choose a frontend (for example 'Core', 'Output', 'Page'...)
 $frontendName = '[...]';
 
-// We set an array of options for the choosen frontend
+// We set an array of options for the chosen frontend
 $frontendOptions = array([...]);
 
-// We set an array of options for the choosen backend
+// We set an array of options for the chosen backend
 $backendOptions = array([...]);
 
 // We create an instance of Zend_Cache

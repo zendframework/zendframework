@@ -6,7 +6,7 @@
     <para>
         <classname>Zend_Mail</classname> can read mail messages from several local or remote mail storages. All of them have the
         same basic <acronym>API</acronym> to count and fetch messages and some of them implement additional interfaces for not so common
-        features. For a feature overview of the implemented storages see the following table.
+        features. For a feature overview of the implemented storages, see the following table.
     </para>
 
     <table id="zend.mail.read.table-1">
@@ -230,7 +230,7 @@ unset($mail[$messageNum]);
         <methodname>getHeader()</methodname> if you want more control or have unusual header names. The header names are
         lower-cased internally, thus the case of the header name in the mail message doesn't matter. Also headers
         with a dash can be written in camel-case. If no header is found for both notations an exception is thrown.
-        To encounter this the method <methodname>headerExists()</methodname> can be used to check the existance of a header.</para>
+        To encounter this the method <methodname>headerExists()</methodname> can be used to check the existence of a header.</para>
 
         <programlisting language="php"><![CDATA[
 // get the message object

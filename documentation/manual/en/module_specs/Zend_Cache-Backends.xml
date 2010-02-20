@@ -12,7 +12,7 @@
         <title>Zend_Cache_Backend_File</title>
 
         <para>
-            This (extended) backends stores cache records into files (in a choosen directory).
+            This (extended) backends stores cache records into files (in a chosen directory).
         </para>
 
         <para>

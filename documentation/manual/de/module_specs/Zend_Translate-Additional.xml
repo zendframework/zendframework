@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
-<!-- Reviewed: 20799 -->
+<!-- EN-Revision: 21049 -->
+<!-- Reviewed: 21049 -->
 <sect1 id="zend.translate.additional">
     <title>Zusätzliche Features für Übersetzungen</title>
 
@@ -215,7 +215,7 @@ $translate->addTranslation('/path/to/new.csv', 'fr', $options);
 
                     <row>
                         <entry>useId</entry>
-                        <entry>Xliff</entry>
+                        <entry>Xliff und Tmx</entry>
 
                         <entry>
                             Wenn diese Option auf <constant>FALSE</constant> gesetzt wird, dann wird

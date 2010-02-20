@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 21076 -->
 <!-- Reviewed: no -->
 <sect1 id="migration.110">
     <title>Zend Framework 1.10</title>
@@ -19,8 +19,9 @@
             nur den Standardcontroller und die Standardaktion angezeigt. Seit Zend Framework 1.10
             wirft der Router korrekterweise, wie im Router Interface beschrieben, eine Exception
             wenn keine passende Route vorhanden ist. Das Error Plugin fängt die Exception und leitet
-            Sie an den Errorcontroller weiter. Man kann mit der Konstante <constant></constant> auf
-            einen spezifischen Fehler testen:
+            Sie an den Errorcontroller weiter. Man kann mit der Konstante
+            <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE</constant> auf einen
+            spezifischen Fehler testen:
         </para>
 
         <programlisting language="php"><![CDATA[

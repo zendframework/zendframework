@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20799 -->
+<!-- EN-Revision: 21049 -->
 <!-- Reviewed: 20799 -->
 <sect1 id="zend.translate.sourcecreation">
     <title>Erstellen von Quelldateien</title>
@@ -148,19 +148,21 @@ print_r($translate->getAdapterInfo());
 <?xml version="1.0" ?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
- <header creationtoolversion="1.0.0" datatype="winres" segtype="sentence"
-         adminlang="en-us" srclang="de-at" o-tmf="abc"
-         creationtool="XYZTool" >
- </header>
- <body>
-  <tu tuid='message1'>
-   <tuv xml:lang="de"><seg>Nachricht1</seg></tuv>
-   <tuv xml:lang="en"><seg>message1</seg></tuv>
-  </tu>
-  <tu tuid='message2'>
-   <tuv xml:lang="en"><seg>message2</seg></tuv>
-   <tuv xml:lang="de"><seg>Nachricht2</seg></tuv>
-  </tu>
+   <header creationtoolversion="1.0.0" datatype="winres" segtype="sentence"
+           adminlang="en-us" srclang="de-at" o-tmf="abc"
+           creationtool="XYZTool" >
+   </header>
+   <body>
+       <tu tuid='message1'>
+           <tuv xml:lang="de"><seg>Nachricht1</seg></tuv>
+           <tuv xml:lang="en"><seg>message1</seg></tuv>
+       </tu>
+       <tu tuid='message2'>
+           <tuv xml:lang="de"><seg>Nachricht2</seg></tuv>
+           <tuv xml:lang="en"><seg>message2</seg></tuv>
+       </tu>
+   </body>
+</tmx>
 ]]></programlisting>
 
             <programlisting language="php"><![CDATA[
@@ -180,6 +182,29 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
             Option können gewünschte Sprachen explizit mit <methodname>addLanguage()</methodname>
             hinzugefügt werden. Der Standardwert für diese Option fügt alle Sprachen hinzu.
         </para>
+
+        <note>
+            <title>Option useId</title>
+
+            <para>
+                Wenn man die Option <emphasis>useId</emphasis> auf <constant>FALSE</constant> setzt
+                dann wird der <emphasis>srclang</emphasis> Header verwendet um die Sprache zu
+                definieren welche die Meldung setzt.
+            </para>
+
+            <para>
+                In unserem Beispiel würde der Schlüssel der Meldung standardmäßig
+                <emphasis>message1</emphasis> sein. Wenn diese Option auf <constant>FALSE</constant>
+                gesetzt wird, dann würde der Schlüssel <emphasis>Nachricht1</emphasis> verwendet
+                werden.
+            </para>
+
+            <para>
+                Es ist zu beachten dass der <emphasis>tuv</emphasis> Eintrag, welcher dem
+                <emphasis>srclang</emphasis> Eintrag entspricht, der erste <emphasis>tuv</emphasis>
+                Eintrag sin muss welcher gesetzt ist, wie im obigen Beispiel zu sehen ist.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.csv">

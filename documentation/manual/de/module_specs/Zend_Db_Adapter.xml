@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20766 -->
+<!-- EN-Revision: 21080 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.db.adapter">
     <title>Zend_Db_Adapter</title>
@@ -774,7 +774,8 @@ echo $result[0]->bug_description;
 
             <para>
                 Die <methodname>fetchAssoc()</methodname> Methode gibt Daten in einem Array von
-                assoziativen Array zurück, egal welcher Wert für den fetch-Modus gesetzt wurde.
+                assoziativen Array zurück, egal welcher Wert für den fetch-Modus gesetzt wurde,
+                indem die erste Spalte als Array Index verwendet wird.
             </para>
 
             <example id="zend.db.adapter.select.fetchassoc.example">
@@ -783,10 +784,11 @@ echo $result[0]->bug_description;
                 <programlisting language="php"><![CDATA[
 $db->setFetchMode(Zend_Db::FETCH_OBJ);
 
-$result = $db->fetchAssoc('SELECT * FROM bugs WHERE bug_id = ?', 2);
+$result = $db->fetchAssoc('SELECT bug_id, bug_description, bug_status FROM bugs');
 
 // $result ist ein Array von assoziativen Arrays im Geist von fetch mode
-echo $result[0]['bug_description'];
+echo $result[2]['bug_description']; // Beschreibung von Fehler #2
+echo $result[1]['bug_description']; // Beschreibung von Fehler #1
 ]]></programlisting>
             </example>
         </sect3>

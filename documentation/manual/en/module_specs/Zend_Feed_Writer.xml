@@ -9,10 +9,11 @@
         <para>
             <classname>Zend_Feed_Writer</classname> is the sibling component to
             <classname>Zend_Feed_Reader</classname> responsible for generating feeds for output. It
-            supports the Atom 1.0 specification (RFC 4287) and RSS 2.0 as specified by the RSS
-            Advisory Board (RSS 2.0.11). It does not deviate from these standards. It does, however,
-            offer a simple Extension system which allows for any extension/module for either of
-            these two specifications to be implemented if they are not provided out of the box.
+            supports the Atom 1.0 specification (RFC 4287) and <acronym>RSS</acronym> 2.0 as
+            specified by the <acronym>RSS</acronym> Advisory Board (<acronym>RSS</acronym> 2.0.11).
+            It does not deviate from these standards. It does, however, offer a simple Extension
+            system which allows for any extension and module for either of these two specifications
+            to be implemented if they are not provided out of the box.
         </para>
 
         <para>
@@ -20,18 +21,19 @@
             <classname>Zend_Feed_Reader</classname>. Where <classname>Zend_Feed_Reader</classname>
             focused on providing an easy to use architecture fronted by getter methods,
             <classname>Zend_Feed_Writer</classname> is fronted by similarly named setters or
-            mutators. This ensures the API won't pose a learning curve to anyone familiar with
-            <classname>Zend_Feed_Reader</classname>.
+            mutators. This ensures the <acronym>API</acronym> won't pose a learning curve to anyone
+            familiar with <classname>Zend_Feed_Reader</classname>.
         </para>
 
         <para>
             As a result of this design, the rest may even be obvious. Behind the scenes, data set on
             any <classname>Zend_Feed_Reader</classname> object is translated at render time onto a
-            <classname>DOMDocument</classname> object using the necessary feed elements. For each
-            supported feed type there is both an Atom 1.0 and RSS 2.0 renderer. Using a
-            <classname>DOMDocument</classname> rather a templating solution has numerous advantages,
-            the most obvious being the ability to export the <classname>DOMDocument</classname> for
-            additional processing and relying on PHP DOM for correct and valid rendering.
+            DOMDocument object using the necessary feed elements. For each
+            supported feed type there is both an Atom 1.0 and <acronym>RSS</acronym> 2.0 renderer.
+            Using a DOMDocument rather a templating solution has numerous advantages,
+            the most obvious being the ability to export the DOMDocument for
+            additional processing and relying on <acronym>PHP</acronym> <acronym>DOM</acronym> for
+            correct and valid rendering.
         </para>
 
         <para>
@@ -54,10 +56,10 @@
             <classname>Zend_Feed_Writer_Entry</classname> classes. The Entry classes can be attached
             to any Feed class. The sole purpose of these containers is to collect data about the
             feed to generate using a simple interface of setter methods. These methods perform some
-            data validity testing. For example, it will validate any passed URIs, dates, etc. These
-            checks are not tied to any of the feed standards. The container objects also contain
-            methods to allow for fast rendering and export of the final feed, and these can be
-            reused at will.
+            data validity testing. For example, it will validate any passed <acronym>URI</acronym>s,
+            dates, etc. These checks are not tied to any of the feed standards. The container
+            objects also contain methods to allow for fast rendering and export of the final feed,
+            and these can be reused at will.
         </para>
 
         <para>
@@ -120,7 +122,9 @@ $entry->addAuthor(array(
 $entry->setDateModified(time());
 $entry->setDateCreated(time());
 $entry->setDescription('Exposing the difficultly of porting games to English.');
-$entry->setContent('I am not writing the article. The example is long enough as is ;).');
+$entry->setContent(
+    'I am not writing the article. The example is long enough as is ;).'
+);
 $feed->addEntry($entry);
 
 /**
@@ -134,53 +138,57 @@ $out = $feed->export('atom');
             The output rendered should be as follows:
         </para>
 
-        <programlisting language="xml">
-&#60;?xml version="1.0" encoding="utf-8"?&#62;
-&#60;feed xmlns="http://www.w3.org/2005/Atom"&#62;
-    &#60;title type="text"&#62;Paddy's Blog&#60;/title&#62;
-    &#60;subtitle type="text"&#62;Writing about PC Games since 176 BC.&#60;/subtitle&#62;
-    &#60;updated&#62;2009-12-14T20:28:18+00:00&#60;/updated&#62;
-    &#60;generator uri="http://framework.zend.com" version="1.10.0alpha"&#62;
+        <programlisting language="xml"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title type="text">Paddy's Blog</title>
+    <subtitle type="text">Writing about PC Games since 176 BC.</subtitle>
+    <updated>2009-12-14T20:28:18+00:00</updated>
+    <generator uri="http://framework.zend.com" version="1.10.0alpha">
         Zend_Feed_Writer
-    &#60;/generator&#62;
-    &#60;link rel="alternate" type="text/html" href="http://www.example.com"/&#62;
-    &#60;link rel="self" type="application/atom+xml" href="http://www.example.com/atom"/&#62;
-    &#60;id&#62;http://www.example.com&#60;/id&#62;
-    &#60;author&#62;
-        &#60;name&#62;Paddy&#60;/name&#62;
-        &#60;email&#62;paddy@example.com&#60;/email&#62;
-        &#60;uri&#62;http://www.example.com&#60;/uri&#62;
-    &#60;/author&#62;
-    &#60;link rel="hub" href="http://pubsubhubbub.appspot.com/"/&#62;
-    &#60;entry&#62;
-        &#60;title type="html"&#62;&#60;![CDATA[All Your Base Are Belong To Us]]&#62;&#60;/title&#62;
-        &#60;summary type="html"&#62;
-            &#60;![CDATA[Exposing the difficultly of porting games to English.]]&#62;
-        &#60;/summary&#62;
-        &#60;published&#62;2009-12-14T20:28:18+00:00&#60;/published&#62;
-        &#60;updated&#62;2009-12-14T20:28:18+00:00&#60;/updated&#62;
-        &#60;link rel="alternate" type="text/html" href="http://www.example.com/all-your-base-are-belong-to-us"/&#62;
-        &#60;id&#62;http://www.example.com/all-your-base-are-belong-to-us&#60;/id&#62;
-        &#60;author&#62;
-        &#60;name&#62;Paddy&#60;/name&#62;
-        &#60;email&#62;paddy@example.com&#60;/email&#62;
-        &#60;uri&#62;http://www.example.com&#60;/uri&#62;
-        &#60;/author&#62;
-        &#60;content type="html"&#62;
-            &#60;![CDATA[I am not writing the article. The example is long enough as is ;).]]&#62;
-        &#60;/content&#62;
-    &#60;/entry&#62;
-&#60;/feed&#62;
-</programlisting>
+    </generator>
+    <link rel="alternate" type="text/html" href="http://www.example.com"/>
+    <link rel="self" type="application/atom+xml"
+        href="http://www.example.com/atom"/>
+    <id>http://www.example.com</id>
+    <author>
+        <name>Paddy</name>
+        <email>paddy@example.com</email>
+        <uri>http://www.example.com</uri>
+    </author>
+    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    <entry>
+        <title type="html"><![CDATA[All Your Base Are Belong To Us]]></title>
+        <summary type="html">
+            <![CDATA[Exposing the difficultly of porting games to English.]]>
+        </summary>
+        <published>2009-12-14T20:28:18+00:00</published>
+        <updated>2009-12-14T20:28:18+00:00</updated>
+        <link rel="alternate" type="text/html"
+             href="http://www.example.com/all-your-base-are-belong-to-us"/>
+        <id>http://www.example.com/all-your-base-are-belong-to-us</id>
+        <author>
+            <name>Paddy</name>
+            <email>paddy@example.com</email>
+            <uri>http://www.example.com</uri>
+        </author>
+        <content type="html">
+            <![CDATA[I am not writing the article.
+                     The example is long enough as is ;).]]>
+        </content>
+    </entry>
+</feed>
+]]></programlisting>
 
         <para>
             This is a perfectly valid Atom 1.0 example. It should be noted that omitting an
             obligatory point of data, such as a title, will trigger an
-            <classname>Exception</classname> when rendering as Atom 1.0. This will differ for RSS
-            2.0 since a title may be omitted so long as a description is present. This gives rise to
-            Exceptions that differ between the two standards depending on the renderer in use. By
-            design, <classname>Zend_Feed_Writer</classname> will not render an invalid feed for
-            either standard unless the end-user deliberately elects to ignore all Exceptions.
+            <classname>Exception</classname> when rendering as Atom 1.0. This will differ for
+            <acronym>RSS</acronym> 2.0 since a title may be omitted so long as a description is
+            present. This gives rise to Exceptions that differ between the two standards depending
+            on the renderer in use. By design, <classname>Zend_Feed_Writer</classname> will not
+            render an invalid feed for either standard unless the end-user deliberately elects to
+            ignore all Exceptions.
         </para>
     </sect2>
 
@@ -189,15 +197,15 @@ $out = $feed->export('atom');
 
         <para>
             Before you can render a feed, you must first setup the data necessary for
-            the feed being rendered. This utilises a simple setter style API which doubles
-            as an initial method for validating the data being set. By design, the API
-            closely matches that for <classname>Zend_Feed_Reader</classname> to avoid
-            undue confusion and uncertainty.
+            the feed being rendered. This utilises a simple setter style <acronym>API</acronym>
+            which doubles as an initial method for validating the data being set. By design, the
+            <acronym>API</acronym> closely matches that for <classname>Zend_Feed_Reader</classname>
+            to avoid undue confusion and uncertainty.
         </para>
 
         <para>
-            <classname>Zend_Feed_Writer</classname> offers this API via its data container
-            classes <classname>Zend_Feed_Writer_Feed</classname> and
+            <classname>Zend_Feed_Writer</classname> offers this <acronym>API</acronym> via its data
+            container classes <classname>Zend_Feed_Writer_Feed</classname> and
             <classname>Zend_Feed_Writer_Entry</classname>. These classes merely store
             all feed data in type-agnostic manner, meaning you may reuse any data
             container with any renderer without requiring additional work. Both classes
@@ -227,8 +235,8 @@ $out = $feed->export('atom');
 
                         <entry>
                             Set a unique ID associated with this feed. For Atom 1.0
-                            this is an atom:id element, whereas for RSS 2.0 it is added
-                            as a guid element. These are optional so long as a link is
+                            this is an atom:id element, whereas for <acronym>RSS</acronym> 2.0 it
+                            is added as a guid element. These are optional so long as a link is
                             added, i.e. the link is set as the ID.
                         </entry>
                     </row>
@@ -259,14 +267,14 @@ $out = $feed->export('atom');
                         <entry><methodname>setFeedLinks()</methodname></entry>
 
                         <entry>
-                            Add a link to an XML feed, whether the feed being generated or
-                            an alternate URI pointing to the same feed but in a different
-                            format. At a minimum, it is recommended to include a link to
-                            the feed being generated so it has an identifiable final
-                            URI allowing a client to track its location changes without
-                            necessitating constant redirects. The parameter is an array of
-                            arrays, where each sub-array contains the keys "type" and "uri".
-                            The type should be one of "atom", "rss", or "rdf". If a type is
+                            Add a link to an <acronym>XML</acronym> feed, whether the feed being
+                            generated or an alternate <acronym>URI</acronym> pointing to the same
+                            feed but in a different format. At a minimum, it is recommended to
+                            include a link to the feed being generated so it has an identifiable
+                            final <acronym>URI</acronym> allowing a client to track its location
+                            changes without necessitating constant redirects. The parameter is an
+                            array of arrays, where each sub-array contains the keys "type" and
+                            "uri". The type should be one of "atom", "rss", or "rdf". If a type is
                             omitted, it defaults to the type used when rendering the feed.
                         </entry>
                     </row>
@@ -278,10 +286,10 @@ $out = $feed->export('atom');
                             Sets the data for authors. The parameter is an array of arrays
                             where each sub-array may contain the keys "name", "email" and
                             "uri". The "uri" value is only applicable for Atom feeds since
-                            RSS contains no facility to show it. For RSS 2.0, rendering will
-                            create two elements - an author element containing the email
-                            reference with the name in brackets, and a Dublin Core creator
-                            element only containing the name.
+                            <acronym>RSS</acronym> contains no facility to show it. For
+                            <acronym>RSS</acronym> 2.0, rendering will create two elements - an
+                            author element containing the email reference with the name in brackets,
+                            and a Dublin Core creator element only containing the name.
                         </entry>
                     </row>
 
@@ -301,7 +309,8 @@ $out = $feed->export('atom');
                             Sets the date on which this feed was created. Generally
                             only applicable to Atom where it represents the date the resource
                             described by an Atom 1.0 document was created. The expected parameter
-                            may be a UNIX timestamp or a <classname>Zend_Date</classname> object.
+                            may be a <acronym>UNIX</acronym> timestamp or a
+                            <classname>Zend_Date</classname> object.
                         </entry>
                     </row>
 
@@ -310,8 +319,8 @@ $out = $feed->export('atom');
 
                         <entry>
                             Sets the date on which this feed was last modified. The expected
-                            parameter may be a UNIX timestamp or a <classname>Zend_Date</classname>
-                            object.
+                            parameter may be a <acronym>UNIX</acronym> timestamp or a
+                            <classname>Zend_Date</classname> object.
                         </entry>
                     </row>
 
@@ -331,7 +340,7 @@ $out = $feed->export('atom');
                             array containing the keys "name", "version" and "uri". If omitted
                             a default generator will be added referencing
                             <classname>Zend_Feed_Writer</classname>, the current Zend Framework
-                            version and the Framework's URI.
+                            version and the Framework's <acronym>URI</acronym>.
                         </entry>
                     </row>
 
@@ -360,10 +369,11 @@ $out = $feed->export('atom');
                             Accepts an array of categories for rendering, where each element is
                             itself an array whose possible keys include "term", "label" and
                             "scheme". The "term" is a typically a category name suitable for
-                            inclusion in a URI. The "label" may be a human readable category name
-                            supporting special characters (it is encoded during rendering) and is a
-                            required key. The "scheme" (called the domain in RSS) is optional but
-                            must be a valid URI.
+                            inclusion in a <acronym>URI</acronym>. The "label" may be a human
+                            readable category name supporting special characters (it is encoded
+                            during rendering) and is a required key. The "scheme" (called the domain
+                            in <acronym>RSS</acronym>) is optional but must be a valid
+                            <acronym>URI</acronym>.
                         </entry>
                     </row>
                 </tbody>
@@ -375,9 +385,9 @@ $out = $feed->export('atom');
         <title>Setting Entry Data Points</title>
 
         <para>
-            Here's a summary of the Core <acronym>API</acronym> for Entries/Items. You should note
-            it comprises not only the basic <acronym>RSS</acronym> and Atom standards, but also
-            accounts for a number of included Extensions bundled with
+            Here's a summary of the Core <acronym>API</acronym> for Entries and Items. You should
+            note it comprises not only the basic <acronym>RSS</acronym> and Atom standards, but
+            also accounts for a number of included Extensions bundled with
             <classname>Zend_Feed_Writer</classname>. The naming of these
             Extension sourced methods remain fairly generic - all Extension
             methods operate at the same level as the Core <acronym>API</acronym> though we do allow
@@ -392,10 +402,12 @@ $out = $feed->export('atom');
                     <row>
                         <entry><methodname>setId()</methodname></entry>
 
-                        <entry>Set a unique ID associated with this feed. For Atom 1.0
-                        this is an atom:id element, whereas for RSS 2.0 it is added
-                        as a guid element. These are optional so long as a link is
-                        added, i.e. the link is set as the ID.</entry>
+                        <entry>
+                            Set a unique ID associated with this feed. For Atom 1.0
+                            this is an atom:id element, whereas for <acronym>RSS</acronym> 2.0 it is
+                            added as a guid element. These are optional so long as a link is
+                            added, i.e. the link is set as the ID.
+                        </entry>
                     </row>
 
                     <row>
@@ -424,14 +436,14 @@ $out = $feed->export('atom');
                         <entry><methodname>setFeedLinks()</methodname></entry>
 
                         <entry>
-                            Add a link to an XML feed, whether the feed being generated or
-                            an alternate URI pointing to the same feed but in a different
-                            format. At a minimum, it is recommended to include a link to
-                            the feed being generated so it has an identifiable final
-                            URI allowing a client to track its location changes without
-                            necessitating constant redirects. The parameter is an array of
-                            arrays, where each sub-array contains the keys "type" and "uri".
-                            The type should be one of "atom", "rss", or "rdf". If a type is
+                            Add a link to an <acronym>XML</acronym> feed, whether the feed being
+                            generated or an alternate <acronym>URI</acronym> pointing to the same
+                            feed but in a different format. At a minimum, it is recommended to
+                            include a link to the feed being generated so it has an identifiable
+                            final <acronym>URI</acronym> allowing a client to track its location
+                            changes without necessitating constant redirects. The parameter is an
+                            array of arrays, where each sub-array contains the keys "type" and
+                            "uri". The type should be one of "atom", "rss", or "rdf". If a type is
                             omitted, it defaults to the type used when rendering the feed.
                         </entry>
                     </row>
@@ -443,10 +455,10 @@ $out = $feed->export('atom');
                             Sets the data for authors. The parameter is an array of arrays
                             where each sub-array may contain the keys "name", "email" and
                             "uri". The "uri" value is only applicable for Atom feeds since
-                            RSS contains no facility to show it. For RSS 2.0, rendering will
-                            create two elements - an author element containing the email
-                            reference with the name in brackets, and a Dublin Core creator
-                            element only containing the name.
+                            <acronym>RSS</acronym> contains no facility to show it. For
+                            <acronym>RSS</acronym> 2.0, rendering will create two elements - an
+                            author element containing the email reference with the name in brackets,
+                            and a Dublin Core creator element only containing the name.
                         </entry>
                     </row>
 
@@ -466,7 +478,8 @@ $out = $feed->export('atom');
                             Sets the date on which this feed was created. Generally
                             only applicable to Atom where it represents the date the resource
                             described by an Atom 1.0 document was created. The expected parameter
-                            may be a UNIX timestamp or a <classname>Zend_Date</classname> object.
+                            may be a <acronym>UNIX</acronym> timestamp or a
+                            <classname>Zend_Date</classname> object.
                         </entry>
                     </row>
 
@@ -475,8 +488,8 @@ $out = $feed->export('atom');
 
                         <entry>
                             Sets the date on which this feed was last modified. The expected
-                            parameter may be a UNIX timestamp or a <classname>Zend_Date</classname>
-                            object.
+                            parameter may be a <acronym>UNIX</acronym> timestamp or a
+                            <classname>Zend_Date</classname> object.
                         </entry>
                     </row>
 
@@ -496,7 +509,7 @@ $out = $feed->export('atom');
                             array containing the keys "name", "version" and "uri". If omitted
                             a default generator will be added referencing
                             <classname>Zend_Feed_Writer</classname>, the current Zend Framework
-                            version and the Framework's URI.
+                            version and the Framework's <acronym>URI</acronym>.
                         </entry>
                     </row>
 
@@ -525,10 +538,11 @@ $out = $feed->export('atom');
                             Accepts an array of categories for rendering, where each element is
                             itself an array whose possible keys include "term", "label" and
                             "scheme". The "term" is a typically a category name suitable for
-                            inclusion in a URI. The "label" may be a human readable category name
-                            supporting special characters (it is encoded during rendering) and is a
-                            required key. The "scheme" (called the domain in RSS) is optional but
-                            must be a valid URI.
+                            inclusion in a <acronym>URI</acronym>. The "label" may be a human
+                            readable category name supporting special characters (it is encoded
+                            during rendering) and is a required key. The "scheme" (called the domain
+                            in <acronym>RSS</acronym>) is optional but must be a valid
+                            <acronym>URI</acronym>.
                         </entry>
                     </row>
                 </tbody>

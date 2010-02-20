@@ -9,7 +9,7 @@
     </para>
 
     <example id="zend.serializer.introduction.example.dynamic">
-        <title>Using <classname>Zend_Serializer</classname> dynamic interface</title>
+        <title>Using Zend_Serializer dynamic interface</title>
 
         <para>
             To instantiate a serializer you should use the factory method with the name of the
@@ -34,8 +34,8 @@ try {
     </example>
 
     <para>
-        The method <methodname>serialize</methodname> generates a storable string. To regenerate
-        this serialized data you can simply call the method <methodname>unserialize</methodname>.
+        The method <methodname>serialize()</methodname> generates a storable string. To regenerate
+        this serialized data you can simply call the method <methodname>unserialize()</methodname>.
     </para>
 
     <para>
@@ -46,8 +46,8 @@ try {
 
     <para>
         To configure a given serializer adapter, you can optionally add an array or an instance of
-        <classname>Zend_Config</classname> to the <methodname>factory</methodname> or to the
-        <methodname>un-/serialize</methodname> methods:
+        <classname>Zend_Config</classname> to the <methodname>factory()</methodname> or to the
+        <methodname>serialize()</methodname> and <methodname>unserialize()</methodname> methods:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -56,18 +56,25 @@ $serializer = Zend_Serializer::factory('Wddx', array(
 ));
 
 try {
-    $serialized = $serializer->serialize($data, array('comment' => 'change comment'));
-    $unserialized = $serializer->unserialize($serialized, array(/* options for unserialize */));
+    $serialized = $serializer->serialize(
+        $data,
+        array('comment' => 'change comment')
+    );
+
+    $unserialized = $serializer->unserialize(
+        $serialized,
+        array(/* options for unserialize */)
+    );
 } catch (Zend_Serializer_Exception $e) {
     echo $e;
 }
 ]]></programlisting>
 
     <para>
-        Options passed to the <methodname>factory</methodname> are valid for the instantiated
+        Options passed to the <methodname>factory()</methodname> are valid for the instantiated
         object. You can change these options using the <methodname>setOption(s)</methodname> method.
         To change one or more options only for a single call, pass them as the second argument to
-        either the <methodname>serialize</methodname> or <methodname>unserialize</methodname>
+        either the <methodname>serialize()</methodname> or <methodname>unserialize()</methodname>
         method.
     </para>
 

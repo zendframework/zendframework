@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20818 -->
+<!-- EN-Revision: 21119 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.server.introduction">
     <title>Introdução</title>
@@ -9,7 +9,7 @@
         várias classes de servidores, incluindo <classname>Zend_XmlRpc_Server</classname>,
         <classname>Zend_Rest_Server</classname>, <classname>Zend_Json_Server</classname> e
         <classname>Zend_Soap_Wsdl</classname>. <classname>Zend_Server_Interface</classname>
-        fornece uma interface que imita a classe <code>SoapServer</code> do
+        fornece uma interface que imita a classe <classname>SoapServer</classname> do
         <acronym>PHP</acronym> 5; todas as classes de servidores deverão implementar esta
         interface, a fim de fornecer uma <acronym>API</acronym> padrão de servidor.
     </para>

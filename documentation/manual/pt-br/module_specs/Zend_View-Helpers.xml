@@ -346,7 +346,7 @@ echo $this->formCheckbox('foo',
         <programlisting language="php"><![CDATA[
 // dentro do seu script de visualização,
 // $this aponta para a instância de Zend_View.
-// 
+//
 // digamos que você já atribuiu uma série de valores a matriz
 // $countries = array('us' => 'United States', 'il' =>
 // 'Israel', 'de' => 'Germany').

@@ -72,7 +72,7 @@ return array(
 
     // Zend_Validate_Digits
     "Invalid type given, value should be string, integer or float" => "Invalid type given, value should be string, integer or float",
-    "'%value%' contains not only digit characters" => "'%value%' contains not only digit characters",
+    "'%value%' contains characters which are no digits; but only digits are allowed" => "'%value%' contains characters which are no digits; but only digits are allowed",
     "'%value%' is an empty string" => "'%value%' is an empty string",
 
     // Zend_Validate_EmailAddress

@@ -49,7 +49,7 @@ class Zend_Validate_Digits extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_DIGITS   => "'%value%' contains not only digit characters",
+        self::NOT_DIGITS   => "'%value%' contains characters which are no digits; but only digits are allowed",
         self::STRING_EMPTY => "'%value%' is an empty string",
         self::INVALID      => "Invalid type given, value should be string, integer or float",
     );

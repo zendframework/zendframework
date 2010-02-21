@@ -128,20 +128,22 @@ echo $config->database->params->dbname; // prints "dbname"
 
                         <entry>
                             Options array. The following keys are supported:
+
                             <itemizedlist>
                                 <listitem>
                                     <para>
                                         <emphasis><property>allowModifications</property></emphasis>:
-                                        Set to <constant>TRUE</constant> to allow
-                                        subsequent modification of loaded configuration data in-memory.
+                                        Set to <constant>TRUE</constant> to allow subsequent
+                                        modification of loaded configuration data in-memory.
                                         Defaults to <constant>NULL</constant>
                                     </para>
                                 </listitem>
 
                                 <listitem>
                                     <para>
-                                        <emphasis><property>nestSeparator</property></emphasis>: Set to
-                                        the character to be used as the nest separator. Defaults to "."
+                                        <emphasis><property>nestSeparator</property></emphasis>: Set
+                                        to the character to be used as the nest separator. Defaults
+                                        to "."
                                     </para>
                                 </listitem>
                             </itemizedlist>

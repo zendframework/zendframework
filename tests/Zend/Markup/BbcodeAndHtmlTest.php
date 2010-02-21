@@ -520,6 +520,16 @@ BBCODE;
             $m->render('[table][tr][td]test[/td][/tr][/table]'));
     }
 
+    /**
+     * Test for ZF-9220
+     */
+    public function testUrlMatchCorrectly()
+    {
+        $m = $this->_markup;
+
+        $this->assertEquals('<a href="http://framework.zend.com/">test</a><a href="http://framework.zend.com/">test</a>',
+            $m->render('[url="http://framework.zend.com/"]test[/url][url="http://framework.zend.com/"]test[/url]'));
+    }
 }
 
 // Call Zend_Markup_BbcodeAndHtmlTest::main()

@@ -295,7 +295,7 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
                     break;
                 case self::STATE_PARSEVALUE:
                     $matches = array();
-                    $regex   = '#\G((?<quote>"|\')(?<valuequote>[^\\2]*)\\2|(?<value>[^\]\s]+))#';
+                    $regex   = '#\G((?<quote>"|\')(?<valuequote>.*?)\\2|(?<value>[^\]\s]+))#';
                     if (!preg_match($regex, $this->_value, $matches, null, $this->_pointer)) {
                         $this->_state = self::STATE_SCANATTRS;
                         break;

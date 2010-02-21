@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16847 -->
+<!-- EN-Revision: 20885 -->
 <sect2 id="zend.application.available-resources.frontcontroller">
     <title>Zend_Application_Resource_Frontcontroller</title>
 
@@ -24,54 +24,85 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            <emphasis><property>controllerDirectory</property></emphasis>:
-            コントローラ・ディレクトリを単独で指定している文字列値か、
-            またはモジュールからコントローラ・ディレクトリへの連想配列。
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>controllerDirectory</property></emphasis>:
+                コントローラ・ディレクトリを単独で指定している文字列値か、
+                またはモジュールからコントローラ・ディレクトリへの連想配列。
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>moduleControllerDirectoryName</property></emphasis>:
-            コントローラを含むモジュールの配下でサブディレクトリを示す文字列値
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>moduleControllerDirectoryName</property></emphasis>:
+                コントローラを含むモジュールの配下でサブディレクトリを示す文字列値
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>moduleDirectory</property></emphasis>:
-            モジュールが見つかるかもしれないディレクトリ
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>moduleDirectory</property></emphasis>:
+                モジュールが見つかるかもしれないディレクトリ
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>defaultControllerName</property></emphasis>:
-            デフォルト・コントローラの基底名。（通常は "index"）
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>defaultControllerName</property></emphasis>:
+                デフォルト・コントローラの基底名。（通常は "index"）
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>defaultAction</property></emphasis>:
-            デフォルト・アクションの基底名。（通常は "index"）
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>defaultAction</property></emphasis>:
+                デフォルト・アクションの基底名。（通常は "index"）
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>defaultModule</property></emphasis>:
-            デフォルト・モジュールの基底名。（通常は "default"）
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>defaultModule</property></emphasis>:
+                デフォルト・モジュールの基底名。（通常は "default"）
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>baseUrl</property></emphasis>:
-            アプリケーションに対して明示された基底<acronym>URL</acronym>
-            （通常は自動検出）
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>baseUrl</property></emphasis>:
+                アプリケーションに対して明示された基底<acronym>URL</acronym>
+                （通常は自動検出）
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>plugins</property></emphasis>:
-            フロントコントローラのプラグイン・クラス名配列
-            このリソースは、各々のクラスを（コンストラクタ引数なしで）インスタンス化して、
-            それからフロントコントローラでインスタンスを登録します。
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>plugins</property></emphasis>:
+                フロントコントローラのプラグイン・クラス名配列
+                このリソースは、各々のクラスを（コンストラクタ引数なしで）インスタンス化して、
+                それからフロントコントローラでインスタンスを登録します。
+                <!-- TODO : to be translated -->
+                If you want to
+                register a plugin with a particular stack index, you need to provide an array with
+                two keys <property>class</property> and <property>stackIndex</property>.
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>params</property></emphasis>:
-            フロントコントローラに登録する連想配列
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>params</property></emphasis>:
+                フロントコントローラに登録する連想配列
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                <!-- TODO : to be translated -->
+                <emphasis><property>returnresponse</property></emphasis>: whether or not to return
+                the response object after dispatching the front controller. Value should be a
+                boolean; by default, this is disabled.
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -98,6 +129,9 @@ resources.frontController.defaultModule = "static"
 resources.frontController.baseUrl = "/subdir"
 resources.frontController.plugins.foo = "My_Plugin_Foo"
 resources.frontController.plugins.bar = "My_Plugin_Bar"
+resources.frontController.plugins.baz.class = "My_Plugin_Baz"
+resources.frontController.plugins.baz.stackIndex = 123
+resources.frontController.returnresponse = 1
 resources.frontController.env = APPLICATION_ENV
 ]]></programlisting>
     </example>

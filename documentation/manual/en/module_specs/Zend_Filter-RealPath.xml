@@ -5,15 +5,15 @@
 
     <para>
         This filter will resolve given links and pathnames and returns canonicalized absolute
-        pathnames. References to <filename>'/./'</filename>, <filename>'/../'</filename> and extra
-        <filename>'/'</filename> characters in the input path will be stripped. The resulting path
-        will not have any symbolic link, <filename>'/./'</filename> or <filename>'/../'</filename>
+        pathnames. References to '<filename>/./</filename>', '<filename>/../</filename>' and extra
+        '<filename>/</filename>' characters in the input path will be stripped. The resulting path
+        will not have any symbolic link, '<filename>/./</filename>' or '<filename>/../</filename>'
         character.
     </para>
 
     <para>
         <classname>Zend_Filter_RealPath</classname> will return <constant>FALSE</constant> on
-        failure, e.g. if the file does not exist. On BSD systems
+        failure, e.g. if the file does not exist. On <acronym>BSD</acronym> systems
         <classname>Zend_Filter_RealPath</classname> doesn't fail if only the last path component
         doesn't exist, while other systems will return <constant>FALSE</constant>.
     </para>

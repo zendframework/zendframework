@@ -113,10 +113,10 @@
         <title>StripTags</title>
 
         <para>
-            This filter returns the input string, with all HTML and <acronym>PHP</acronym> tags
-            stripped from it, except those that have been explicitly allowed. In addition to the
-            ability to specify which tags are allowed, developers can specify which attributes are
-            allowed across all allowed tags and for specific tags only.
+            This filter returns the input string, with all <acronym>HTML</acronym> and
+            <acronym>PHP</acronym> tags stripped from it, except those that have been explicitly
+            allowed. In addition to the ability to specify which tags are allowed, developers can
+            specify which attributes are allowed across all allowed tags and for specific tags only.
         </para>
     </sect2>
 </sect1>

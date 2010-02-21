@@ -1,141 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17405 -->
+<!-- EN-Revision: 20799 -->
 <sect1 id="zend.uri.chapter">
-  <title>Zend_Uri</title>
+    <title>Zend_Uri</title>
 
-  <sect2 id="zend.uri.overview">
-    <title>概要</title>
+    <sect2 id="zend.uri.overview">
+        <title>概要</title>
 
-    <para>
-      <classname>Zend_Uri</classname> は、
-      <ulink url="http://www.w3.org/Addressing/">Uniform Resource
-      Identifiers</ulink> (<acronym>URI</acronym>s) の操作および検証を行うためのコンポーネントです。
-      <classname>Zend_Uri</classname> の本来の目的は
-      <classname>Zend_Http_Client</classname> のような他のコンポーネントを支援することですが、
-      単体で使用しても便利です。
-    </para>
+        <para>
+            <classname>Zend_Uri</classname> は、 <ulink
+             url="http://www.w3.org/Addressing/">Uniform Resource Identifiers</ulink>
+              (<acronym>URI</acronym>s) の操作および検証を行うためのコンポーネントです。
+            <classname>Zend_Uri</classname> の本来の目的は
+            <classname>Zend_Http_Client</classname> のような他のコンポーネントを支援することですが、
+            単体で使用しても便利です。
+        </para>
 
-    <para>
-      <acronym>URI</acronym> の最初は常にスキームから始まり、その後にコロンが続きます。
-      スキームにはさまざまなものがあります。
-      <classname>Zend_Uri</classname> クラスは、
-      各スキームに特化した自身のサブクラスを返すファクトリメソッドを提供しています。
-      サブクラスの名前は <classname>Zend_Uri_&lt;scheme&gt;</classname>
-      となり、<code>&lt;scheme&gt;</code> の部分には
-      スキーム名の最初の文字だけを大文字にしたものがあてはまります。
-      この規則にはひとつ例外があり、<acronym>HTTPS</acronym> スキームについては
-      <classname>Zend_Uri_Http</classname> で扱われます。
-    </para>
-  </sect2>
+        <para>
+            <acronym>URI</acronym> の最初は常にスキームから始まり、その後にコロンが続きます。
+            スキームにはさまざまなものがあります。
+            <classname>Zend_Uri</classname> クラスは、
+            各スキームに特化した自身のサブクラスを返すファクトリメソッドを提供しています。
+            サブクラスの名前は <classname>Zend_Uri_&lt;scheme&gt;</classname>
+            となり、<code>&lt;scheme&gt;</code> の部分には
+            スキーム名の最初の文字だけを大文字にしたものがあてはまります。
+            この規則にはひとつ例外があり、<acronym>HTTPS</acronym> スキームについては
+            <classname>Zend_Uri_Http</classname> で扱われます。
+        </para>
+    </sect2>
 
-  <sect2 id="zend.uri.creation">
-    <title>新しい URI の作成</title>
+    <sect2 id="zend.uri.creation">
+        <title>新しい URI の作成</title>
 
-    <para>
-      スキームのみを <methodname>Zend_Uri::factory()</methodname> に渡すと、
-      <classname>Zend_Uri</classname> は新しい <acronym>URI</acronym> をゼロから作成します。
-    </para>
+        <para>
+            スキームのみを <methodname>Zend_Uri::factory()</methodname> に渡すと、
+            <classname>Zend_Uri</classname> は新しい <acronym>URI</acronym> をゼロから作成します。
+        </para>
 
-    <example id="zend.uri.creation.example-1">
-      <title>Zend_Uri::factory() による新しい URI の作成</title>
+        <example id="zend.uri.creation.example-1">
+            <title>Zend_Uri::factory() による新しい URI の作成</title>
 
-      <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 何もないところから新しい URI を作成するには、スキームのみを渡します
 $uri = Zend_Uri::factory('http');
 
 // $uri は Zend_Uri_Http のインスタンスとなります
 ]]></programlisting>
-    </example>
+        </example>
 
-    <para>
-      新しい <acronym>URI</acronym> を作成するには、スキームのみを
-      <methodname>Zend_Uri::factory()</methodname> に渡します
-      <footnote><para>現時点では、
-      <classname>Zend_Uri</classname> がサポートしているスキームは <acronym>HTTP</acronym> および <acronym>HTTPS</acronym> だけです。</para></footnote>。
-      サポートしていないスキームが渡された場合は、
-      <classname>Zend_Uri_Exception</classname> がスローされます。
-    </para>
+        <para>
+            新しい <acronym>URI</acronym> を作成するには、スキームのみを
+            <methodname>Zend_Uri::factory()</methodname> に渡します
+            <footnote><para>現時点では、
+            <classname>Zend_Uri</classname> がサポートしているスキームは <acronym>HTTP</acronym> および <acronym>HTTPS</acronym> だけです。</para></footnote>。
+            サポートしていないスキームが渡された場合は、
+            <classname>Zend_Uri_Exception</classname> がスローされます。
+        </para>
 
-    <para>
-      渡されたスキームあるいは <acronym>URI</acronym> をサポートしている場合は、
-      <methodname>Zend_Uri::factory()</methodname> は自分自身のサブクラスを返します。
-      これは、指定したスキームに特化したものとなります。
-    </para>
-  </sect2>
+        <para>
+            渡されたスキームあるいは <acronym>URI</acronym> をサポートしている場合は、
+            <methodname>Zend_Uri::factory()</methodname> は自分自身のサブクラスを返します。
+            これは、指定したスキームに特化したものとなります。
+        </para>
+    </sect2>
 
-  <sect2 id="zend.uri.manipulation">
-    <title>既存の URI の操作</title>
+    <sect2 id="zend.uri.manipulation">
+        <title>既存の URI の操作</title>
 
-    <para>
-      既存の <acronym>URI</acronym> を操作するには、完全な <acronym>URI</acronym> を
-      <methodname>Zend_Uri::factory()</methodname> に渡します。
-    </para>
+        <para>
+            既存の <acronym>URI</acronym> を操作するには、完全な <acronym>URI</acronym> を
+            <methodname>Zend_Uri::factory()</methodname> に渡します。
+        </para>
 
-    <example id="zend.uri.manipulation.example-1">
-      <title>Zend_Uri::factory() による既存の URI の操作</title>
+        <example id="zend.uri.manipulation.example-1">
+            <title>Zend_Uri::factory() による既存の URI の操作</title>
 
-      <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 既存の URI を操作するには、それを渡します
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 // $uri は Zend_Uri_Http のインスタンスです
 ]]></programlisting>
-    </example>
+        </example>
 
-    <para>
-      このとき、<acronym>URI</acronym> のパースと検証が行われます。
-      もし妥当な形式でなかった場合は、そこで
-      <classname>Zend_Uri_Exception</classname> がスローされます。それ以外の場合は
-      <methodname>Zend_Uri::factory()</methodname> は自分自身のサブクラスを返します。
-      これは、操作するスキームに特化したものとなります。
-    </para>
-  </sect2>
+        <para>
+            このとき、<acronym>URI</acronym> のパースと検証が行われます。
+            もし妥当な形式でなかった場合は、そこで
+            <classname>Zend_Uri_Exception</classname> がスローされます。それ以外の場合は
+            <methodname>Zend_Uri::factory()</methodname> は自分自身のサブクラスを返します。
+            これは、操作するスキームに特化したものとなります。
+        </para>
+    </sect2>
 
-  <sect2 id="zend.uri.validation">
-    <title>URI の検証</title>
+    <sect2 id="zend.uri.validation">
+        <title>URI の検証</title>
 
-    <para>
-      <methodname>Zend_Uri::check()</methodname> 関数を使用すると、
-      既存の <acronym>URI</acronym> の検証のみを行うことができます。
-    </para>
+        <para>
+            <methodname>Zend_Uri::check()</methodname> 関数を使用すると、
+            既存の <acronym>URI</acronym> の検証のみを行うことができます。
+        </para>
 
-    <example id="zend.uri.validation.example-1">
-      <title>Zend_Uri::check() による URI の検証</title>
+        <example id="zend.uri.validation.example-1">
+            <title>Zend_Uri::check() による URI の検証</title>
 
-      <programlisting language="php"><![CDATA[
+            <programlisting language="php"><![CDATA[
 // 指定した URI が正しい形式かどうかを調べます
 $valid = Zend_Uri::check('http://uri.in.question');
 
 // $valid は、正しければ TRUE、そうでなければ FALSE となります
 ]]></programlisting>
-    </example>
-
-    <para>
-      <methodname>Zend_Uri::check()</methodname> は boolean 値を返します。
-      これは <methodname>Zend_Uri::factory()</methodname>
-      を使用して例外を処理するよりも便利です。
-    </para>
-
-    <sect3 id="zend.uri.validation.allowunwise">
-        <title>URL 内での "Unwise" 文字の許可</title>
+        </example>
 
         <para>
-            デフォルトでは、<classname>Zend_Uri</classname> は次の文字を許可しません。
-            <code>"{", "}", "|", "\", "^", "`"</code>
-            これらは <acronym>RFC</acronym> で "unwise" と定義されており無効なものです。
-            しかし、多くの実装ではこれらの文字を妥当なものとして扱います。
+            <methodname>Zend_Uri::check()</methodname> は boolean 値を返します。
+            これは <methodname>Zend_Uri::factory()</methodname>
+            を使用して例外を処理するよりも便利です。
         </para>
 
-        <para>
-            <classname>Zend_Uri</classname> でもこれらの "unwise" 文字を許可することができます。
-            そのためには、<methodname>Zend_Uri::setConfig()</methodname> メソッドで
-            'allow_unwise' オプションを TRUE に設定します。
-        </para>
+        <sect3 id="zend.uri.validation.allowunwise">
+            <title>URL 内での "Unwise" 文字の許可</title>
 
-        <example id="zend.uri.validation.allowunwise.example-1">
-            <title>URI における特殊文字の許可</title>
-            <programlisting language="php"><![CDATA[
+            <para>
+                デフォルトでは、<classname>Zend_Uri</classname> は次の文字を許可しません。
+                <code>"{", "}", "|", "\", "^", "`"</code>
+                これらは <acronym>RFC</acronym> で "unwise" と定義されており無効なものです。
+                しかし、多くの実装ではこれらの文字を妥当なものとして扱います。
+            </para>
+
+            <para>
+                <classname>Zend_Uri</classname> でもこれらの "unwise" 文字を許可することができます。
+                そのためには、<methodname>Zend_Uri::setConfig()</methodname> メソッドで
+                'allow_unwise' オプションを <constant>TRUE</constant> に設定します。
+            </para>
+
+            <example id="zend.uri.validation.allowunwise.example-1">
+                <title>URI における特殊文字の許可</title>
+
+                <programlisting language="php"><![CDATA[
 // '|' 記号を含んでいます
 // 通常は、これは false を返します
 $valid = Zend_Uri::check('http://example.com/?q=this|that');
@@ -148,98 +149,99 @@ $valid = Zend_Uri::check('http://example.com/?q=this|that');
 // 'allow_unwise' の値をデフォルトの FALSE に戻します
 Zend_Uri::setConfig(array('allow_unwise' => false));
 ]]></programlisting>
-        </example>
+            </example>
 
-        <note>
-            <para><methodname>Zend_Uri::setConfig()</methodname> は、全体の設定オプションを変更します。
-            そのため、上の例のように最後は 'allow_unwise' を 'false'
-            に戻すことを推奨します。unwise な文字を常に許可したいという場合は別です。</para>
-        </note>
-    </sect3>
-  </sect2>
+            <note>
+                <para>
+                    <methodname>Zend_Uri::setConfig()</methodname> は、全体の設定オプションを変更します。
+                    そのため、上の例のように最後は 'allow_unwise' を '<constant>FALSE</constant>'
+                    に戻すことを推奨します。unwise な文字を常に許可したいという場合は別です。
+                </para>
+            </note>
+        </sect3>
+    </sect2>
 
-  <sect2 id="zend.uri.instance-methods">
-    <title>共通のインスタンスメソッド</title>
+    <sect2 id="zend.uri.instance-methods">
+        <title>共通のインスタンスメソッド</title>
 
-    <para>
-      すべての <classname>Zend_Uri</classname> のサブクラス (例
-      <classname>Zend_Uri_Http</classname>) のインスタンスには、
-      <acronym>URI</acronym> 操作のために便利なインスタンスメソッドがいくつか提供されています。
-    </para>
+        <para>
+            すべての <classname>Zend_Uri</classname> のサブクラス (例
+            <classname>Zend_Uri_Http</classname>) のインスタンスには、
+            <acronym>URI</acronym> 操作のために便利なインスタンスメソッドがいくつか提供されています。
+        </para>
 
-    <sect3 id="zend.uri.instance-methods.getscheme">
-      <title>URI のスキームの取得</title>
+        <sect3 id="zend.uri.instance-methods.getscheme">
+            <title>URI のスキームの取得</title>
 
-      <para>
-        <acronym>URI</acronym> のスキームとは、<acronym>URI</acronym> でカンマの前にくる部分のことです。
-        たとえば <code>http://www.zend.com</code> のスキームは
-        <code>http</code> となります。
-      </para>
+            <para>
+                <acronym>URI</acronym> のスキームとは、<acronym>URI</acronym> でカンマの前にくる部分のことです。
+                たとえば <code>http://www.zend.com</code> のスキームは
+                <code>http</code> となります。
+            </para>
 
-      <example id="zend.uri.instance-methods.getscheme.example-1">
-        <title>Zend_Uri_* オブジェクトからのスキームの取得</title>
+            <example id="zend.uri.instance-methods.getscheme.example-1">
+                <title>Zend_Uri_* オブジェクトからのスキームの取得</title>
 
-        <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 $scheme = $uri->getScheme();  // "http"
 ]]></programlisting>
-      </example>
+            </example>
 
-      <para>
-        インスタンスメソッド <methodname>getScheme()</methodname> は、
-        <acronym>URI</acronym> オブジェクトからスキームの部分のみを返します。
-      </para>
+            <para>
+                インスタンスメソッド <methodname>getScheme()</methodname> は、
+                <acronym>URI</acronym> オブジェクトからスキームの部分のみを返します。
+            </para>
 
-    </sect3>
+        </sect3>
 
-    <sect3 id="zend.uri.instance-methods.geturi">
-      <title>URI 全体の取得</title>
+        <sect3 id="zend.uri.instance-methods.geturi">
+            <title>URI 全体の取得</title>
 
-      <example id="zend.uri.instance-methods.geturi.example-1">
-        <title>Zend_Uri_* オブジェクトからの URI 全体の取得</title>
+            <example id="zend.uri.instance-methods.geturi.example-1">
+                <title>Zend_Uri_* オブジェクトからの URI 全体の取得</title>
 
-        <programlisting language="php"><![CDATA[
+                <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 echo $uri->getUri();  // "http://www.zend.com"
 ]]></programlisting>
-      </example>
+            </example>
 
-      <para>
-        <methodname>getUri()</methodname> メソッドは、<acronym>URI</acronym> 全体を文字列として返します。
-      </para>
-    </sect3>
+            <para>
+                <methodname>getUri()</methodname> メソッドは、<acronym>URI</acronym> 全体を文字列として返します。
+            </para>
+        </sect3>
 
-    <sect3 id="zend.uri.instance-methods.valid">
-      <title>URI の検証</title>
+        <sect3 id="zend.uri.instance-methods.valid">
+            <title>URI の検証</title>
 
-      <para>
-        <methodname>Zend_Uri::factory()</methodname> は渡された <acronym>URI</acronym> を常に検証しており、
-        渡された <acronym>URI</acronym> が無効な場合は <classname>Zend_Uri</classname>
-        のサブクラスのインスタンスを作成しません。しかし、いったん
-        <classname>Zend_Uri</classname> のサブクラスのインスタンスを
-        (新規に、あるいは既存のものから) 作成し、
-        それを操作した後でもまだ妥当な形式であるかどうかを調べることもできます。
-      </para>
+            <para>
+                <methodname>Zend_Uri::factory()</methodname> は渡された <acronym>URI</acronym> を常に検証しており、
+                渡された <acronym>URI</acronym> が無効な場合は <classname>Zend_Uri</classname>
+                のサブクラスのインスタンスを作成しません。しかし、いったん
+                <classname>Zend_Uri</classname> のサブクラスのインスタンスを
+                (新規に、あるいは既存のものから) 作成し、
+                それを操作した後でもまだ妥当な形式であるかどうかを調べることもできます。
+            </para>
 
-      <example id="zend.uri.instance-methods.valid.example-1">
-        <title>Zend_Uri_* オブジェクトの検証</title>
+            <example id="zend.uri.instance-methods.valid.example-1">
+                <title>Zend_Uri_* オブジェクトの検証</title>
 
-        <programlisting language="php"><![CDATA[
+                    <programlisting language="php"><![CDATA[
 $uri = Zend_Uri::factory('http://www.zend.com');
 
 $isValid = $uri->valid();  // TRUE
 ]]></programlisting>
-      </example>
+            </example>
 
-      <para>
-        インスタンスメソッド <methodname>valid()</methodname> により、
-        <acronym>URI</acronym> オブジェクトが妥当なものかどうかを調べることができます。
-      </para>
-    </sect3>
-
-  </sect2>
+            <para>
+                インスタンスメソッド <methodname>valid()</methodname> により、
+                <acronym>URI</acronym> オブジェクトが妥当なものかどうかを調べることができます。
+            </para>
+        </sect3>
+    </sect2>
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

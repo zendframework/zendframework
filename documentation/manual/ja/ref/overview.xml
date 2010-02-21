@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19778 -->
+<!-- EN-Revision: 20876 -->
 <chapter id="introduction.overview">
 
     <title>概要</title>
@@ -15,6 +15,7 @@
         個々のコンポーネントを個別に使いやすくしているのです。
         我々はこれを "use-at-will (使いたいように使ってくれ)" 方式と呼んでいます。
     </para>
+
     <para>
         個別に使うこともできますが、
         Zend Framework の標準ライブラリのコンポーネントを組み合わせて使用すると
@@ -32,6 +33,7 @@
         それを使用することで開発期間を大幅に短縮させることができ、
         また十分にテスト済みの仕組みを使用できます。
     </para>
+
     <para>
         Zend Framework プロジェクトの主なスポンサーは <ulink url="http://www.zend.com">
         Zend Technologies</ulink> ですが、
@@ -40,6 +42,7 @@
         Zend と提携してウェブサービスへのインターフェイスやその他の技術を提供しています。
         それにより、Zend Framework の開発者がより多くの機能を使用できるようになっています。
     </para>
+
     <para>
         Zend Framework がこれらの仕組みを提供できるのもすべて、
         活発な Zend Framework コミュニティのおかげです。コミュニティのメンバーは、

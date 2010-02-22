@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20765 -->
+<!-- EN-Revision: 21130 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.config.adapters.ini">
     <title>Zend_Config_Ini</title>
@@ -128,7 +128,9 @@ echo $config->database->params->dbname; // imprime "dbname"
                             <varname>$options</varname> (padrão <constant>FALSE</constant>)
                         </entry>
 
-                        <entry>Matriz de opções. As seguintes chaves são suportadas:
+                        <entry>
+                            Matriz de opções. As seguintes chaves são suportadas:
+
                             <itemizedlist>
                                 <listitem>
                                     <para>

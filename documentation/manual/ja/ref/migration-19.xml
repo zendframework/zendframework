@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20161 -->
+<!-- EN-Revision: 20876 -->
 <sect1 id="migration.19">
     <title>Zend Framework 1.9</title>
 
@@ -185,6 +185,7 @@ $client->setFileUpload('file2.txt',
                             <entry>新しい方法</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry>
@@ -194,6 +195,7 @@ $client->setFileUpload('file2.txt',
                                 <methodname>getTranslationList('language', $locale)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getScriptTranslationList($locale)</methodname>
@@ -202,6 +204,7 @@ $client->setFileUpload('file2.txt',
                                 <methodname>getTranslationList('script', $locale)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getCountryTranslationList($locale)</methodname>
@@ -210,6 +213,7 @@ $client->setFileUpload('file2.txt',
                                 <methodname>getTranslationList('territory', $locale, 2)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getTerritoryTranslationList($locale)</methodname>
@@ -218,6 +222,7 @@ $client->setFileUpload('file2.txt',
                                 <methodname>getTranslationList('territory', $locale, 1)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getLanguageTranslation($value, $locale)</methodname>
@@ -226,6 +231,7 @@ $client->setFileUpload('file2.txt',
                                 <methodname>getTranslation($value, 'language', $locale)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getScriptTranslation($value, $locale)</methodname>
@@ -234,6 +240,7 @@ $client->setFileUpload('file2.txt',
                                 <methodname>getTranslation($value, 'script', $locale)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getCountryTranslation($value, $locale)</methodname>
@@ -242,6 +249,7 @@ $client->setFileUpload('file2.txt',
                                 <methodname>getTranslation($value, 'country', $locale)</methodname>
                             </entry>
                         </row>
+
                         <row>
                             <entry>
                                 <methodname>getTerritoryTranslation($value, $locale)</methodname>

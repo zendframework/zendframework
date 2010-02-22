@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17406 -->
+<!-- EN-Revision: 21049 -->
 <sect1 id="zend.translate.sourcecreation">
 
     <title>ソースファイルの作成</title>
@@ -47,7 +47,7 @@ $translate->addTranslation($deutsch, 'de');
 
         <para>
             リリース 1.5 以降では、配列を外部のファイルに含めることもサポートしています。
-            ファイル名を指定すると、<classname>Zend_Translate</classname>
+            ファイル名を指定すると、 <classname>Zend_Translate</classname>
             が自動的にそれをインクルードして配列を探します。
             詳細は、次の例を参照ください。
         </para>
@@ -115,6 +115,7 @@ $translate->addTranslation('/path/to/german.mo', 'de');
                  ソースファイルのエンコーディングはひとつしか指定できないので、
                  どちらか一方は正しく表示されなくなります。
             </para>
+
             <para>
                  UTF-8 は可搬性の高いフォーマットで、全言語をサポートしています。
                  すべての言語で UTF-8 を使用することで、
@@ -157,23 +158,26 @@ print_r($translate->getAdapterInfo());
 
         <example id="zend.translate.sourcecreation.tmx.example">
             <title>TMX ファイルの例</title>
+
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" ?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
- <header creationtoolversion="1.0.0" datatype="winres" segtype="sentence"
-         adminlang="en-us" srclang="de-at" o-tmf="abc"
-         creationtool="XYZTool" >
- </header>
- <body>
-  <tu tuid='message1'>
-   <tuv xml:lang="de"><seg>Nachricht1</seg></tuv>
-   <tuv xml:lang="en"><seg>message1</seg></tuv>
-  </tu>
-  <tu tuid='message2'>
-   <tuv xml:lang="en"><seg>message2</seg></tuv>
-   <tuv xml:lang="de"><seg>Nachricht2</seg></tuv>
-  </tu>
+   <header creationtoolversion="1.0.0" datatype="winres" segtype="sentence"
+           adminlang="en-us" srclang="de-at" o-tmf="abc"
+           creationtool="XYZTool" >
+   </header>
+   <body>
+       <tu tuid='message1'>
+           <tuv xml:lang="de"><seg>Nachricht1</seg></tuv>
+           <tuv xml:lang="en"><seg>message1</seg></tuv>
+       </tu>
+       <tu tuid='message2'>
+           <tuv xml:lang="de"><seg>Nachricht2</seg></tuv>
+           <tuv xml:lang="en"><seg>message2</seg></tuv>
+       </tu>
+   </body>
+</tmx>
 ]]></programlisting>
 
             <programlisting language="php"><![CDATA[
@@ -195,6 +199,29 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
             で明示的に指定します。このオプションのデフォルト設定は、
             全言語を対象とするようになっています。
         </para>
+
+        <!-- TODO : to be translated -->
+        <note>
+            <title>Option useId</title>
+
+            <para>
+                When you set the <emphasis>useId</emphasis> option to <constant>FALSE</constant>
+                then the <emphasis>srclang</emphasis> header will be used to define the language
+                which sets the message.
+            </para>
+
+            <para>
+                In our example the message key would <emphasis>message1</emphasis> per default.
+                When this option is set to <constant>FALSE</constant> the message key
+                <emphasis>Nachricht1</emphasis> would be used.
+            </para>
+
+            <para>
+                Note that the <emphasis>tuv</emphasis> entry which is related to the
+                <emphasis>srclang</emphasis> entry must be the first
+                <emphasis>tuv</emphasis> entry which is set like shown in the above example.
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.translate.sourcecreation.csv">
@@ -209,6 +236,7 @@ $translate = new Zend_Translate('tmx', 'path/to/mytranslation.tmx', 'en');
 
         <example id="zend.translate.sourcecreation.csv.example">
             <title>CSV ファイルの例</title>
+
             <programlisting language="txt"><![CDATA[
 # csv ファイルの例
 message1;Nachricht1
@@ -236,7 +264,7 @@ $translate->addTranslation('path/to/other.csv', 'fr');
                 </para>
             </footnote>。
             が、オプション '<code>delimiter</code>' を使用すると、
-            別の区切り文字を使用することができます。
+            別の区切り文字を使用できます。
         </para>
 
         <para>
@@ -254,6 +282,7 @@ $translate->addTranslation('path/to/other.csv', 'fr');
 
         <example id="zend.translate.sourcecreation.csv.example2">
             <title>CSV ファイルの例 その 2</title>
+
             <programlisting language="txt"><![CDATA[
 # csv ファイルの例
 "message,1",Nachricht1
@@ -297,6 +326,7 @@ $translate->addTranslation('/path/to/other.csv', 'fr');
 
         <example id="zend.translate.sourcecreation.ini.example">
             <title>INI ファイルの例</title>
+
             <programlisting language="txt"><![CDATA[
 [Test]
 ;TestPage Comment

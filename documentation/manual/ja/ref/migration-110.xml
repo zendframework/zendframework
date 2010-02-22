@@ -21,7 +21,7 @@
             in the router interface, throw an exception if no route matches. The error
             plugin will then catch that exception and forward to the error controller.
             You can then test for that specific error with the constant
-            <constant></constant>:
+            <constant>Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_ROUTE</constant>:
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18935 -->
+<!-- EN-Revision: 20799 -->
 <sect1 id="zend.view.scripts">
 
     <title>ビュースクリプト</title>
@@ -100,8 +100,8 @@ $obj = new SomeClass();
 $view->setEscape(array($obj, 'methodName'));
 
 // そして、ビューをレンダリングします
-echo $view->render(...);]]>
-        </programlisting>
+echo $view->render(...);
+]]></programlisting>
 
         <para>
             コールバック関数あるいはメソッドは、
@@ -153,8 +153,8 @@ if ($this->books) {
 } else {
     $tpl->setFile("nobooks", "nobooks.tpl")
     $tpl->pparse("output", "nobooks");
-}]]>
-            </programlisting>
+}
+]]></programlisting>
 
             <para>
                 関連するテンプレートファイルは、このようになります。
@@ -177,8 +177,8 @@ if ($this->books) {
     </tr>
 
 <!-- nobooks.tpl -->
-<p>表示する本がありません。</p>]]>
-            </programlisting>
+<p>表示する本がありません。</p>
+]]></programlisting>
 
         </sect3>
 
@@ -238,8 +238,8 @@ public function clearVars();
 /**
  * $name というテンプレートをレンダリングします
  */
-public function render($name);]]>
-            </programlisting>
+public function render($name);
+]]></programlisting>
 
             <para>
                 このインターフェイスを使用すると、
@@ -415,8 +415,8 @@ class Zend_View_Smarty implements Zend_View_Interface
     {
         return $this->_smarty->fetch($name);
     }
-}]]>
-            </programlisting>
+}
+]]></programlisting>
 
             <para>
                 この例では、<classname>Zend_View</classname> ではなく

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18210 -->
+<!-- EN-Revision: 20876 -->
 <sect1 id="performance.view">
     <title>ビューのレンダリング</title>
 
@@ -145,19 +145,25 @@ class My_View extends Zend_View
             </para>
 
             <itemizedlist>
-                <listitem><para>
-                    <varname>$name</varname>: レンダリングするビュースクリプトの名前
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <varname>$name</varname>: レンダリングするビュースクリプトの名前
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <varname>$module</varname>: 表示スクリプトが位置するモジュールの名前;
-                    または３番目の引数が渡されない場合、配列またはオブジェクトで、
-                    <varname>$model</varname>引数
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <varname>$module</varname>: 表示スクリプトが位置するモジュールの名前;
+                        または３番目の引数が渡されない場合、配列またはオブジェクトで、
+                        <varname>$model</varname>引数
+                    </para>
+                </listitem>
 
-                <listitem><para>
-                    <varname>$model</varname>: ビューにアサインする純粋なデータを示す部分に渡す配列またはオブジェクト
-                </para></listitem>
+                <listitem>
+                    <para>
+                        <varname>$model</varname>: ビューにアサインする純粋なデータを示す部分に渡す配列またはオブジェクト
+                    </para>
+                </listitem>
             </itemizedlist>
 
             <para>

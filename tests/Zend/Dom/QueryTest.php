@@ -230,6 +230,19 @@ class Zend_Dom_QueryTest extends PHPUnit_Framework_TestCase
         $result = $this->query->queryXpath('//li[contains(@dojotype, "bar")]');
         $this->assertEquals(2, count($result), $result->getXpathQuery());
     }
+
+    /**
+     * @group ZF-9243
+     */
+    public function testLoadingDocumentWithErrorsShouldNotRaisePhpErrors()
+    {
+        $file = file_get_contents(dirname(__FILE__) . '/_files/bad-sample.html');
+        $this->query->setDocument($file);
+        $this->query->query('p');
+        $errors = $this->query->getDocumentErrors();
+        $this->assertTrue(is_array($errors));
+        $this->assertTrue(0 < count($errors));
+    }
 }
 
 // Call Zend_Dom_QueryTest::main() if this source file is executed directly.

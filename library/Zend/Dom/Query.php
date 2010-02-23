@@ -53,6 +53,12 @@ class Zend_Dom_Query
     protected $_document;
 
     /**
+     * DOMDocument errors, if any
+     * @var false|array
+     */
+    protected $_documentErrors = false;
+
+    /**
      * Document type
      * @var string
      */
@@ -80,7 +86,8 @@ class Zend_Dom_Query
         if (0 === strlen($document)) {
             return $this;
         }
-        if ('<?xml' == substr(trim($document), 0, 5)) {
+        // breaking XML declaration to make syntax highlighting work
+        if ('<' . '?xml' == substr(trim($document), 0, 5)) {
             return $this->setDocumentXml($document);
         }
         if (strstr($document, 'DTD XHTML')) {
@@ -149,6 +156,16 @@ class Zend_Dom_Query
     }
 
     /**
+     * Get any DOMDocument errors found
+     * 
+     * @return false|array
+     */
+    public function getDocumentErrors()
+    {
+        return $this->_documentErrors;
+    }
+
+    /**
      * Perform a CSS selector query
      *
      * @param  string $query
@@ -174,6 +191,7 @@ class Zend_Dom_Query
             throw new Zend_Dom_Exception('Cannot query; no document registered');
         }
 
+        libxml_use_internal_errors(true);
         $domDoc = new DOMDocument;
         $type   = $this->getDocumentType();
         switch ($type) {
@@ -186,6 +204,12 @@ class Zend_Dom_Query
                 $success = $domDoc->loadHTML($document);
                 break;
         }
+        $errors = libxml_get_errors();
+        if (!empty($errors)) {
+            $this->_documentErrors = $errors;
+            libxml_clear_errors();
+        }
+        libxml_use_internal_errors(false);
 
         if (!$success) {
             require_once 'Zend/Dom/Exception.php';

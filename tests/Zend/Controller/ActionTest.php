@@ -290,7 +290,7 @@ class Zend_Controller_ActionTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($view instanceof Zend_View);
         $scriptPath = $view->getScriptPaths();
         $this->assertTrue(is_array($scriptPath));
-        $this->assertEquals(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR, $scriptPath[0]);
+        $this->assertEquals(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'scripts/', $scriptPath[0]);
     }
 
     public function testRender()

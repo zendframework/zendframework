@@ -278,7 +278,10 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
 
         $scriptPaths = $this->helper->view->getScriptPaths();
         $scriptPath  = $scriptPaths[0];
-        $this->assertContains($viewDir, $scriptPath);
+        $this->assertContains(
+            $this->_normalizePath($viewDir),
+            $this->_normalizePath($scriptPath)
+            );
 
         $helperPaths = $this->helper->view->getHelperPaths();
         $found       = false;
@@ -786,9 +789,11 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
 
         $viewScriptPaths = $this->helper->view->getAllPaths();
 
-        // we need this until View decides to not use DIRECTORY_SEPARATOR
-        $expectedPathRegex = (DIRECTORY_SEPARATOR == '\\') ? '#modules\\\\bar\\\\bar\\\\scripts\\\\$#' : '#modules/bar/bar/scripts/$#';
-        $this->assertRegExp($expectedPathRegex, $viewScriptPaths['script'][0]);
+        $expectedPathRegex = '#modules/bar/bar/scripts/$#';
+        $this->assertRegExp(
+            $expectedPathRegex,
+            $this->_normalizePath($viewScriptPaths['script'][0])
+            );
         $this->assertEquals($this->helper->getViewScript(), 'index/admin.phtml');
     }
 
@@ -804,8 +809,11 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $this->helper->setActionController($controller);
         $viewScriptPaths = $this->helper->view->getAllPaths();
 
-        $expectedPathRegex = (DIRECTORY_SEPARATOR == '\\') ? '#modules\\\\foo\\\\views\\\\scripts\\\\$#' : '#modules/foo/views/scripts/$#';
-        $this->assertRegExp($expectedPathRegex, $viewScriptPaths['script'][0]);
+        $expectedPathRegex = '#modules/foo/views/scripts/$#';
+        $this->assertRegExp(
+            $expectedPathRegex,
+            $this->_normalizePath($viewScriptPaths['script'][0])
+            );
         $this->assertEquals('car-bar/baz.phtml', $this->helper->getViewScript());
     }
 
@@ -832,6 +840,11 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
         $this->helper->render();
         $body = $this->response->getBody();
         $this->assertContains('SampleZfHelper invoked', $body, 'Received ' . $body);
+    }
+    
+    protected function _normalizePath($path)
+    {
+        return str_replace(array('/', '\\'), '/', $path);
     }
 }
 

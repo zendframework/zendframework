@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21123 -->
 <sect1 id="zend.filter.filter_chains">
 
     <title>フィルタチェイン</title>
@@ -11,8 +11,9 @@
         小文字の英字のみに限定する場合などです。
         <classname>Zend_Filter</classname> は、複数のフィルタを連結する機能を提供しています。
         以下のコードで、二つのフィルタをユーザ名に対して適用する方法を説明します。
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // フィルタチェインを作成し、そこにフィルタを追加します
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new Zend_Filter_Alpha())
@@ -22,10 +23,10 @@ $filterChain->addFilter(new Zend_Filter_Alpha())
 $username = $filterChain->filter($_POST['username']);
 ]]></programlisting>
 
+    <para>
         フィルタは、<classname>Zend_Filter</classname> に追加した順に適用されます。
         上の例では、まずユーザ名から非英字を除去したあとで、
         大文字を小文字に変換します。
-
     </para>
 
     <para>

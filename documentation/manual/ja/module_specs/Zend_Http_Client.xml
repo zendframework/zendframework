@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17230 -->
+<!-- EN-Revision: 21018 -->
 <sect1 id="zend.http.client">
     <title>導入</title>
+
     <para>
         <classname>Zend_Http_Client</classname> は、Hyper-Text Transfer Protocol (<acronym>HTTP</acronym>)
         リクエストを簡単に扱うためのインターフェイスを提供します。
@@ -12,16 +13,20 @@
         オブジェクトを返します。これを使用すると、レスポンスのヘッダや本文にアクセスできます
         (<xref linkend="zend.http.response" /> を参照ください)。
     </para>
+
     <sect2 id="zend.http.client.usage">
         <title>Zend_Http_Client の使用法</title>
+
         <para>
-            クラスのコンストラクタには、オプションの引数として URL を指定することができます
+            クラスのコンストラクタには、オプションの引数として URL を指定できます
             (文字列か Zend_Uri_Http オブジェクトのどちらでも可能です)。
             また、配列あるいは Zend_Config オブジェクトで設定オプションを指定することもできます。
             どちらも省略することが可能で、その場合は後から
             setUri() メソッドや setConfig() メソッドで指定します。
+
             <example id="zend.http.client.introduction.example-1">
                 <title>Zend_Http_Client のインスタンスの作成</title>
+
                 <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org', array(
     'maxredirects' => 0,
@@ -41,25 +46,31 @@ $client->setConfig($config);
             </example>
 
             <note>
-                <para>Zend_Http_Client は Zend_Uri_Http を用いて URL を検証します。
-                つまり、URL 中にあるパイプ記号 ('|') やキャレット記号 ('^')
-                などの特殊文字はデフォルトでは許可されないということです。
-
-                これを変更するには、Zend_Uri のオプション 'allow_unwise' を
-                'true' に設定します。詳細は <xref linkend="zend.uri.validation.allowunwise" />
-                を参照ください。</para>
+                <para>
+                    Zend_Http_Client は Zend_Uri_Http を用いて URL を検証します。
+                    つまり、URL 中にあるパイプ記号 ('|') やキャレット記号 ('^')
+                    などの特殊文字はデフォルトでは許可されないということです。
+                    これを変更するには、Zend_Uri のオプション 'allow_unwise' を
+                    '<constant>TRUE</constant>' に設定します。詳細は <xref
+                        linkend="zend.uri.validation.allowunwise" />
+                    を参照ください。
+                </para>
             </note>
         </para>
     </sect2>
+
     <sect2 id="zend.http.client.configuration">
         <title>設定パラメータ</title>
+
         <para>
             コンストラクタおよび setConfig() メソッドでは、
             設定パラメータの連想配列あるいは <classname>Zend_Config</classname> オブジェクトを受け取ります。
             これらのパラメータは、設定してもしなくてもかまいません。
             すべてのパラメータにはデフォルト値があります。
+
             <table id="zend.http.client.configuration.table">
                 <title>Zend_Http_Client の設定パラメータ</title>
+
                 <tgroup cols="4">
                     <thead>
                         <row>
@@ -69,6 +80,7 @@ $client->setConfig($config);
                             <entry>デフォルト値</entry>
                         </row>
                     </thead>
+
                     <tbody>
                         <row>
                             <entry>maxredirects</entry>
@@ -76,94 +88,136 @@ $client->setConfig($config);
                             <entry>integer</entry>
                             <entry>5</entry>
                         </row>
+
                         <row>
                             <entry>strict</entry>
-                            <entry>ヘッダ名の検証を行うかどうか。false に設定すると、検証関数をスキップします。通常はこれを変更してはいけません。</entry>
+                            <entry>
+                                ヘッダ名の検証を行うかどうか。
+                                <constant>FALSE</constant> に設定すると、検証関数をスキップします。
+                                通常はこれを変更してはいけません。
+                            </entry>
                             <entry>boolean</entry>
-                            <entry>true</entry>
+                            <entry><constant>TRUE</constant></entry>
                         </row>
+
                         <row>
                             <entry>strictredirects</entry>
-                            <entry>リダイレクトの際に RFC に厳密に従うかどうか (<xref linkend="zend.http.client.redirections" /> を参照ください)</entry>
+                            <entry>
+                                リダイレクトの際に RFC に厳密に従うかどうか (<xref
+                                    linkend="zend.http.client.redirections" /> を参照ください)
+                            </entry>
                             <entry>boolean</entry>
-                            <entry>false</entry>
+                            <entry><constant>FALSE</constant></entry>
                         </row>
+
                         <row>
                             <entry>useragent</entry>
                             <entry>ユーザエージェントを表す文字列 (リクエストヘッダに付加されます)</entry>
                             <entry>string</entry>
                             <entry>'Zend_Http_Client'</entry>
                         </row>
+
                         <row>
                             <entry>timeout</entry>
                             <entry>接続タイムアウト秒数</entry>
                             <entry>integer</entry>
                             <entry>10</entry>
                         </row>
+
                         <row>
                             <entry>httpversion</entry>
                             <entry><acronym>HTTP</acronym> プロトコルのバージョン (通常は '1.1' あるいは '1.0')</entry>
                             <entry>string</entry>
                             <entry>'1.1'</entry>
                         </row>
+
                         <row>
                             <entry>adapter</entry>
-                            <entry>使用する接続アダプタクラス (<xref linkend="zend.http.client.adapters" /> を参照ください)</entry>
+                            <entry>
+                                使用する接続アダプタクラス (<xref
+                                    linkend="zend.http.client.adapters" /> を参照ください)
+                            </entry>
                             <entry>mixed</entry>
                             <entry>'Zend_Http_Client_Adapter_Socket'</entry>
                         </row>
+
                         <row>
                             <entry>keepalive</entry>
                             <entry>
-                             サーバとの keep-alive 接続を有効にするかどうか。
-                             同一サーバに連続してリクエストが発生する場合などに便利で、性能を向上させるでしょう。
+                                 サーバとの keep-alive 接続を有効にするかどうか。
+                                 同一サーバに連続してリクエストが発生する場合などに便利で、
+                                 性能を向上させるでしょう。
                             </entry>
                             <entry>boolean</entry>
-                            <entry>false</entry>
+                            <entry><constant>FALSE</constant></entry>
                         </row>
+
                         <row>
                             <entry>storeresponse</entry>
-                            <entry>直近のレスポンスを保存して後から
-                            <methodname>getLastResponse()</methodname> で取得できるようにするかどうか。false の場合
-                            <methodname>getLastResponse()</methodname> は null を返します。</entry>
+                            <entry>
+                                直近のレスポンスを保存して後から
+                                <methodname>getLastResponse()</methodname> で取得できるようにするかどうか。
+                                <constant>FALSE</constant> の場合、
+                                <methodname>getLastResponse()</methodname> は <constant>NULL</constant> を返します。
+                            </entry>
                             <entry>boolean</entry>
-                            <entry>true</entry>
+                            <entry><constant>TRUE</constant></entry>
+                        </row>
+
+                        <!-- TODO : to be translated -->
+                        <row>
+                            <entry>encodecookies</entry>
+                            <entry>Whether to pass the cookie value through urlencode/urldecode.
+                            Enabling this breaks support with some web servers.
+                            Disabling this limits the range of values the cookies can contain.</entry>
+                            <entry>boolean</entry>
+                            <entry><constant>TRUE</constant></entry>
                         </row>
                     </tbody>
                 </tgroup>
             </table>
         </para>
     </sect2>
+
     <sect2 id="zend.http.client.basic-requests">
         <title>基本的な HTTP リクエストの処理</title>
+
         <para>
             シンプルな <acronym>HTTP</acronym> リクエストを実行するのは非常に簡単で、単に
             request() メソッドを実行するだけです。たったの三行ですんでしまいます。
+
             <example id="zend.http.client.basic-requests.example-1">
                 <title>シンプルな GET リクエストの処理</title>
+
                 <programlisting language="php"><![CDATA[
 $client = new Zend_Http_Client('http://example.org');
 $response = $client->request();
 ]]></programlisting>
             </example>
-            request() メソッドには、オプションでパラメータを指定することができます。
+
+            request() メソッドには、オプションでパラメータを指定できます。
             このパラメータはリクエストメソッドで、<acronym>HTTP</acronym> プロトコルで定義されている
             GET、POST、PUT、HEAD、DELETE、TRACE、OPTIONS そして CONNECT
             のいずれかを指定可能です。
+
             <footnote>
               <para>
                 RFC 2616 - <ulink url="http://www.w3.org/Protocols/rfc2616/rfc2616.html" /> を参照ください。
               </para>
-            </footnote>.
+            </footnote>
+
             利便性を高めるため、これらはすべてクラス定数として定義されています。たとえば
             Zend_Http_Client::GET、Zend_Http_Client::POST などのようになっています。
         </para>
+
         <para>
             メソッドを指定しない場合は、直近の setMethod() コールで指定されたメソッドを使用します。
             setMethod() もコールされていない場合は、デフォルトのリクエストメソッドとして
             GET を使用します (上の例を参照ください)。
+
             <example id="zend.http.client.basic-requests.example-2">
                 <title>GET 以外のリクエストメソッドの使用</title>
+
                 <programlisting language="php"><![CDATA[
 // POST リクエストを実行します
 $response = $client->request('POST');
@@ -178,6 +232,7 @@ $response = $client->request();
 
     <sect2 id="zend.http.client.parameters">
         <title>GET や POST へのパラメータの追加</title>
+
         <para>
             GET パラメータを <acronym>HTTP</acronym> リクエストに追加するのは簡単です。
             URL の一部として指定するか、あるいは setParameterGet() メソッドを使用します。
@@ -186,8 +241,10 @@ $response = $client->request();
             さらに便利に使用するため、setParameterGet()
             メソッドでは name => value 形式の連想配列で GET 変数を指定することもできます。
             これは、複数の GET パラメータを指定する必要がある場合に便利です。
+
             <example id="zend.http.client.parameters.example-1">
                 <title>GET パラメータの設定</title>
+
                 <programlisting language="php"><![CDATA[
 // setParameterGet メソッドで GET パラメータを指定します
 $client->setParameterGet('knight', 'lancelot');
@@ -204,6 +261,7 @@ $client->setParameterGet(array(
 ]]></programlisting>
             </example>
         </para>
+
         <para>
             GET パラメータはあらゆるリクエストメソッドで送信できますが、
             POST パラメータは POST リクエストの本文としてしか送信できません。
@@ -211,8 +269,10 @@ $client->setParameterGet(array(
             パラメータを追加する場合と非常に似ています。
             使用するのは setParameterPost() メソッドで、このメソッドの使用法は
             setParameterGet() メソッドと同じです。
+
             <example id="zend.http.client.parameters.example-2">
                 <title>POST パラメータの設定</title>
+
                 <programlisting language="php"><![CDATA[
 // POST パラメータを設定します
 $client->setParameterPost('language', 'fr');
@@ -225,6 +285,7 @@ $client->setParameterPost(array(
 ));
 ]]></programlisting>
             </example>
+
             POST リクエストを送信する際には、GET パラメータと POST
             パラメータの両方を設定できることに注意しましょう。
             一方、POST パラメータを POST 以外のリクエストで指定しても何のエラーも発生しませんが、
@@ -235,6 +296,7 @@ $client->setParameterPost(array(
 
     <sect2 id="zend.http.client.accessing_last">
         <title>直近のリクエストやレスポンスへのアクセス</title>
+
         <para>
             <classname>Zend_Http_Client</classname> では、そのクライアントオブジェクトが
             直近に送信したリクエストおよび

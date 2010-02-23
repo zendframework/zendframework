@@ -455,6 +455,30 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
             "Zend_View_Helper_" => array("Zend/View/Helper/"),
         ), $loader2->getPaths());
     }
+
+    /**
+     * @group ZF-4697
+     */
+    public function testClassFilesGrabCorrectPathForLoadedClasses()
+    {
+        require_once 'Zend/View/Helper/DeclareVars.php';
+        $reflection = new ReflectionClass('Zend_View_Helper_DeclareVars');
+        $expected   = $reflection->getFileName();
+        
+        $loader = new Zend_Loader_PluginLoader(array());
+        $loader->addPrefixPath('Zend_View_Helper', $this->libPath . '/Zend/View/Helper');
+        $loader->addPrefixPath('ZfTest', dirname(__FILE__) . '/_files/ZfTest');
+        try {
+            // Class in /Zend/View/Helper and not in /_files/ZfTest
+            $className = $loader->load('DeclareVars');
+        } catch (Exception $e) {
+            $paths = $loader->getPaths();
+            $this->fail(sprintf("Failed loading helper; paths: %s", var_export($paths, 1)));
+        }
+        
+        $classPath = $loader->getClassPath('DeclareVars');
+        $this->assertContains($expected, $classPath);
+    }
 }
 
 // Call Zend_Loader_PluginLoaderTest::main() if this source file is executed directly.

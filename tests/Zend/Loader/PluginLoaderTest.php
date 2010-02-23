@@ -479,6 +479,27 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
         $classPath = $loader->getClassPath('DeclareVars');
         $this->assertContains($expected, $classPath);
     }
+
+    /**
+     * @group ZF-7350
+     */
+    public function testPrefixesEndingInBackslashDenoteNamespacedClasses()
+    {
+        if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+            $this->markTestSkipped(__CLASS__ . '::' . __METHOD__ . ' requires PHP 5.3.0 or greater');
+            return;
+        }
+        $loader = new Zend_Loader_PluginLoader(array());
+        $loader->addPrefixPath('Zfns\\', dirname(__FILE__) . '/_files/Zfns');
+        try {
+            $className = $loader->load('Foo');
+        } catch (Exception $e) {
+            $paths = $loader->getPaths();
+            $this->fail(sprintf("Failed loading helper; paths: %s", var_export($paths, 1)));
+        }
+        $this->assertEquals('Zfns\\Foo', $className);
+        $this->assertEquals('Zfns\\Foo', $loader->getClassName('Foo'));
+    }
 }
 
 // Call Zend_Loader_PluginLoaderTest::main() if this source file is executed directly.

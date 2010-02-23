@@ -20,16 +20,12 @@
  * @version    $Id$
  */
 
+require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * Zend_Measure_Energy
  */
 require_once 'Zend/Measure/Energy.php';
-
-/**
- * PHPUnit test case
- */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend
@@ -322,6 +318,7 @@ class Zend_Measure_EnergyTest extends PHPUnit_Framework_TestCase
     /**
      * test setting computed type
      * expected new type
+     * @group foo
      */
     public function testEnergySetComputedType1()
     {

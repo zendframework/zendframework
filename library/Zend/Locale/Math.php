@@ -65,8 +65,8 @@ class Zend_Locale_Math
     public static function round($op1, $precision = 0)
     {
         if (self::$_bcmathDisabled) {
-            $return = round($op1, $precision);
-            if (strpos((string) $return, 'E') === false) {
+            $op1 = round($op1, $precision);
+            if (strpos((string) $op1, 'E') === false) {
                 return self::normalize(round($op1, $precision));
             }
         }
@@ -118,8 +118,14 @@ class Zend_Locale_Math
             $roundUp[$roundPos + $decPos] = '1';
 
             if ($op1 > 0) {
+                if (self::$_bcmathDisabled) {
+                    return Zend_Locale_Math_PhpMath::Add($op1, $roundUp, $precision);
+                }
                 return self::Add($op1, $roundUp, $precision);
             } else {
+                if (self::$_bcmathDisabled) {
+                    return Zend_Locale_Math_PhpMath::Sub($op1, $roundUp, $precision);
+                }
                 return self::Sub($op1, $roundUp, $precision);
             }
         } elseif ($precision >= 0) {
@@ -341,8 +347,9 @@ class Zend_Locale_Math
     }
 }
 
-if ((defined('TESTS_ZEND_LOCALE_BCMATH_ENABLED') && !TESTS_ZEND_LOCALE_BCMATH_ENABLED)
-    || !extension_loaded('bcmath')) {
+if (!extension_loaded('bcmath')
+    || (defined('TESTS_ZEND_LOCALE_BCMATH_ENABLED') && !TESTS_ZEND_LOCALE_BCMATH_ENABLED)
+) {
     require_once 'Zend/Locale/Math/PhpMath.php';
     Zend_Locale_Math_PhpMath::disable();
 }

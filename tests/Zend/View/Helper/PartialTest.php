@@ -247,7 +247,7 @@ class Zend_View_Helper_PartialTest extends PHPUnit_Framework_TestCase
 
         foreach (get_object_vars($model) as $key => $value) {
             $string = sprintf('%s: %s', $key, $value);
-            $this->assertContains($string, $return);
+            $this->assertContains($string, $return, "Checking for '$return' containing '$string'");
         }
     }
 

@@ -237,7 +237,6 @@ abstract class Zend_Measure_Abstract
         if (empty($this->_type)) {
             $this->_type = $type;
         } else {
-
             // Convert to standard value
             $value = $this->_value;
             if (is_array($this->_units[$this->getType()][0])) {
@@ -245,7 +244,7 @@ abstract class Zend_Measure_Abstract
                     switch ($key) {
                         case "/":
                             if ($found != 0) {
-                                $value = @call_user_func(Zend_Locale_Math::$div, $value, $found, 25);
+                                $value = call_user_func(Zend_Locale_Math::$div, $value, $found, 25);
                             }
                             break;
                         case "+":
@@ -278,13 +277,13 @@ abstract class Zend_Measure_Abstract
                             break;
                         default:
                             if ($found != 0) {
-                                $value = @call_user_func(Zend_Locale_Math::$div, $value, $found, 25);
+                                $value = call_user_func(Zend_Locale_Math::$div, $value, $found, 25);
                             }
                             break;
                     }
                 }
             } else {
-                $value = @call_user_func(Zend_Locale_Math::$div, $value, $this->_units[$type][0], 25);
+                $value = call_user_func(Zend_Locale_Math::$div, $value, $this->_units[$type][0], 25);
             }
 
             $slength = strlen($value);

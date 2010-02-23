@@ -249,12 +249,12 @@ $return = $ec2_img->modifyAttribute('imageId',
         </example>
 
         <example id="zend.service.amazon.ec2.images.attribute.reset">
-            <title>Resetieren eines AMI Attributes</title>
+            <title>Zurücksetzen eines AMI Attributes</title>
 
             <para>
-                <code>resetAttribute</code> resetiert die Attribute eines <acronym>AMI</acronym> zu
-                dessen Standardwerten.
-                <emphasis>Das productCodes Attribut kann nicht resetiert werden.</emphasis>
+                <code>resetAttribute</code> setzt die Attribute eines <acronym>AMI</acronym> auf
+                dessen Standardwerte zurück.
+                <emphasis>Das productCodes Attribut kann nicht zurückgesetzt werden.</emphasis>
             </para>
 
             <programlisting language="php"><![CDATA[

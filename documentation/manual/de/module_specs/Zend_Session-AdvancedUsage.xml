@@ -215,7 +215,7 @@ $s->setExpirationSeconds(60);
             Wenn mit Daten einer Session gearbeitet wird, die in der aktuellen Anfrage ablaufen,
             sollte Vorsicht beim Empfangen dieser Daten gehalten werden. Auch wenn diese Daten durch
             Referenz zurückgegeben werden, wird die Änderung derselben, diese Daten nicht über diese
-            Abfrage hinweg gültig machen. Um die Zeit für das Ablaufen zu "resetieren", müssen die
+            Abfrage hinweg gültig machen. Um die Zeit für das Ablaufen "zurückzusetzen", müssen die
             Daten in eine temporäre Variable geholt werden, diese im Namensraum entfernt und
             anschliessend der entsprechende Schlüssel wieder gesetzt werden.
         </para>

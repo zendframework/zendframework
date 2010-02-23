@@ -86,7 +86,7 @@
                     <entry><constant>TRUE</constant></entry>
 
                     <entry>
-                        Ob Benutzer Parameter resetiert werden sollen wenn eine href zur Seite
+                        Ob Benutzer Parameter zurückgesetzt werden sollen wenn eine href zur Seite
                         erstellt wird.
                     </entry>
                 </row>

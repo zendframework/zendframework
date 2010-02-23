@@ -30,9 +30,9 @@
             Ressource enthalten für welche die Daten gefiltert werden. Weil Akismeth's Ursprung
             Wordpress ist, wird diese Ressource die Blog <acronym>URL</acronym> genannt. Dieser Wert
             sollte als zweites Argument an den Konstruktor übergeben werden; aber er kann zu jeder
-            Zeit resetiert werden in dem der <methodname>setBlogUrl()</methodname> Methode verwendet
-            wird, oder überschrieben durch die Spezifizierung eines 'blog' Schlüssels in den
-            verschiedenen Methodenaufrufen.
+            Zeit zurückgesetzt werden in dem der <methodname>setBlogUrl()</methodname> Methode
+            verwendet wird, oder überschrieben durch die Spezifizierung eines 'blog' Schlüssels in
+            den verschiedenen Methodenaufrufen.
         </para>
     </sect2>
 

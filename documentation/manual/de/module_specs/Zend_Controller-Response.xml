@@ -319,8 +319,8 @@ array(
                     benanntes Segment indiziert. In jedem Fall wird, wenn das übergeben wird, das
                     spezifizierte benannte Segment überschrieben oder es wird erstellt wenn es
                     nicht existiert (standardmäßig dem Array hinzugefügt). Wenn kein benanntes
-                    Segment an <methodname>setBody()</methodname> übergeben wird, resetiert es den
-                    kompletten Inhalt des Body Arrays. Wenn kein benanntes Segment an
+                    Segment an <methodname>setBody()</methodname> übergeben wird, setzt es den
+                    kompletten Inhalt des Body Arrays zurück. Wenn kein benanntes Segment an
                     <methodname>appendBody()</methodname> übergeben wird, wird der Inhalt dem Wert
                     im 'default' benannten Segment hinzugefügt.
                 </para>

@@ -103,7 +103,7 @@ class UserControllerTest extends Zend_Test_PHPUnit_ControllerTestCase
     <para>
         Wärend der normalen Anwendung wird die <methodname>setUp()</methodname> Methode das
         Bootstrap der Anwendung ausführen. Dieser Prozess wird zuerst das Löschen der Umgebung
-        enthalten um einen reinen Anfragestatus zu erhalten, das Resetieren jedes Plugins, Helfers
+        enthalten um einen reinen Anfragestatus zu erhalten, das Zurücksetzen jedes Plugins, Helfers
         und Antwort Objektes. Sobald das getan wurde, wird sie anschließend die Datei mit
         <methodname>include()</methodname> laden, die in <varname>$bootstrap</varname> spezifiziert
         wurde, oder den spezifizierten Callback aufrufen.

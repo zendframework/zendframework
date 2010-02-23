@@ -443,9 +443,9 @@ $autoloader->pushAutoloader($foo, 'Foo_');
 
                         <entry>
                             <para>
-                                Resetiert den Status der Singleton Instanz von
-                                <classname>Zend_Loader_Autoloader</classname> zu dem originalen
-                                Status, de-registriert alle Autoloader Callbacks und alle
+                                Setzt den Status der Singleton Instanz von
+                                <classname>Zend_Loader_Autoloader</classname> auf den originalen
+                                Status zurück, de-registriert alle Autoloader Callbacks und alle
                                 registrierten Namespaces.
                             </para>
                         </entry>

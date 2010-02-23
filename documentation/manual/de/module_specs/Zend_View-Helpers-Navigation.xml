@@ -1280,7 +1280,7 @@ Ausgabe:
 
                 <para>
                     <varname>$options</varname> wird verwendet um temporär spezifizierte Optionen zu
-                    überschreiben ohne das die Werte in der Helferinstanz resetiert werden. Es
+                    überschreiben ohne das die Werte in der Helferinstanz zurückgesetzt werden. Es
                     ist ein assoziatives Array wobei jeder Schlüssel mit einer Option im Helfer
                     korrespondiert.
                 </para>

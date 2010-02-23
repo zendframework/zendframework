@@ -137,9 +137,9 @@
                         indem das <code>order</code> Attribut auf eine kleinere Nummer gesetzt
                         wird, z.B. -100. Wenn ein <type>String</type> angegeben wird, muß dieser
                         in einen gültigen <code>int</code> aufgelöst werden können. Wenn
-                        <constant>NULL</constant> angegeben wird, wird er resetiert, was bedeutet
-                        das die Reihenfolge verwendet wird mit der die Seite in den Container
-                        hinzugefügt wurde.
+                        <constant>NULL</constant> angegeben wird, wird er zurückgesetzt, was
+                        bedeutet dass die Reihenfolge verwendet wird mit der die Seite im
+                        Container hinzugefügt wurde.
                     </entry>
                 </row>
 

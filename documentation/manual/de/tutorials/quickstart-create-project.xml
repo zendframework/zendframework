@@ -505,7 +505,7 @@ class ErrorController extends Zend_Controller_Action
             die Direktiven <varname>AllowOverride</varname>, <varname>Order</varname>, und
             <varname>Allow</varname> zu beachten; diese erlauben uns <filename>htacess</filename>
             Dateien in unserem Projekt zu verwenden. Wärend der Entwicklung ist das eine gute
-            Praxis, da es verhindert den Web Server konstant resetieren zu müssen wenn man
+            Praxis, da es verhindert den Web Server konstant zurücksetzen zu müssen wenn man
             Änderungen in den Site Direktiven macht; trotzdem sollte man in der Produktion den
             Inhalt der <filename>htacess</filename> Datei in die Server Konfiguration verschieben
             und diese deaktivieren. Drittens ist die <varname>SetEnv</varname> Direktive zu

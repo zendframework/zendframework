@@ -82,8 +82,8 @@ resources.session.remember_me_seconds = 864000
             Der Grund warum es Zend_Session_Namespace genannt wird ist, das es die Daten in
             $_SESSION effektiv namespaced, und es so mehreren Komponenten und Objekten erlaubt Daten
             sicher zu speichern und zu empfangen. Im folgenden Code sehen wir wie ein einfacher
-            hochzählender Counter für Sessions erstellt werden kan der bei 1000 anfängt und sich
-            selbst nach 1999 resetiert.
+            hochzählender Counter für Sessions erstellt werden kann der bei 1000 anfängt und sich
+            selbst nach 1999 zurücksetzt.
         </para>
 
         <programlisting language="php"><![CDATA[

@@ -273,7 +273,8 @@ class My_Controller_Dispatcher extends Zend_Controller_Dispatcher
 
                         <para>
                             Der obige Code prüft ob die angefragte Aktion in der Controllerklasse
-                            existiert ; wenn nicht wird die Aktion auf die Standardaktion resetiert.
+                            existiert ; wenn nicht wird die Aktion auf die Standardaktion
+                            zurückgesetzt.
                         </para>
 
                         <para>

@@ -16,9 +16,9 @@
         standardmäßiger reply-to Header. Das kann durch die statischen Methoden
         <methodname>setDefaultFrom()</methodname> und <methodname>setDefaultReplyTo()</methodname>
         getan werden. Diese Standardwerte werden verwendet wenn man keine From oder Reply-to Adresse
-        oder -Name angibt bis die Standardwerte resetiert werden (gelöscht). Das Resetieren der
-        Standardwerte kann durch die Verwendung von <methodname>clearDefaultFrom()</methodname> und
-        <methodname>clearDefaultReplyTo</methodname> durchgeführt werden.
+        oder -Name angibt bis die Standardwerte zurückgesetzt werden (gelöscht). Das Zurücksetzen
+        der Standardwerte kann durch die Verwendung von <methodname>clearDefaultFrom()</methodname>
+        und <methodname>clearDefaultReplyTo</methodname> durchgeführt werden.
     </para>
 
     <example id="zend.mail.multiple-emails.example-1">
@@ -46,7 +46,7 @@ for ($i = 0; $i < 5; $i++) {
     $mail->send($transport);
 }
 
-// Resetiert die Standardwerte
+// Setzt die Standardwerte zurück
 Zend_Mail::clearDefaultFrom();
 Zend_Mail::clearDefaultReplyTo();
 ]]></programlisting>

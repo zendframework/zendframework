@@ -251,10 +251,10 @@ $user = $user->save();
 ]]></programlisting>
 
             <sect4 id="zend.gdata.gapps.users.updating.resettingPassword">
-                <title>Ein Benutzerpasswort resetieren</title>
+                <title>Ein Benutzerpasswort zurücksetzen</title>
 
                 <para>
-                    Ein Benutzerpasswort kann zu einem neuen Wert resetiert werden indem die
+                    Ein Benutzerpasswort kann auf einen neuen Wert zurückgesetzt werden indem die
                     <code>login->password</code> Eigenschaft aktualisiert wird.
                 </para>
 

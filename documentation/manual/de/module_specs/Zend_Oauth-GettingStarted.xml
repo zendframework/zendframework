@@ -63,7 +63,7 @@ $consumer = new Zend_Oauth_Consumer($config);
         Weiterleitung welche GET verwendet). Der konsumierende Client (siehe später) enthält auch
         seine Authorisierung in Art eines Headers. Einige Services können, zu Ihrer Diskretion,
         Alternativen benötigen. Man kann requestMethod (welche standardmäßig Zend_Oauth::POST ist)
-        zum Beispiel auf Zend_Oauth::GET resetieren, und requestScheme von seinem Standardwert
+        zum Beispiel auf Zend_Oauth::GET zurückgesetzt, und requestScheme von seinem Standardwert
         Zend_Oauth::REQUEST_SCHEME_HEADER entweder auf Zend_Oauth::REQUEST_SCHEME_POSTBODY oder auf
         Zend_Oauth::REQUEST_SCHEME_QUERYSTRING. Typischerweise sollten die Standardwerte bis auf ein
         paar bestimmte Ausnahmen problemlos funktionieren. Für Details sehen Sie bitte in die

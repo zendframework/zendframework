@@ -85,8 +85,8 @@ class My_View extends Zend_View
      *                     Route Objekts übergeben werden
      * @param  mixed $name Der Name der zu verwendenden Route. Wenn null wir
      *                     die aktuelle Route verwendet
-     * @param  bool $reset Ob die Routenstandard mit den angegebenen resetiert
-     *                     werden sollen oder nicht
+     * @param  bool $reset Ob die Routenstandard mit den angegebenen
+     *                     zurückgesetzt werden sollen oder nicht
      * @return string Url für das Link Href Attribut.
      */
     public function url(array $urlOptions = array(), $name = null,
@@ -266,8 +266,8 @@ class LoginPlugin extends Zend_Controller_Plugin_Abstract
             <para>
                 Wärend der ActionStack trotzdem noch einen Dispatch Zyklus benötigt, ist das
                 trotzdem immer noch billiger als der <methodname>action()</methodname> View Helfer
-                da er Objekte nicht klonen und den internen Status resetieren muß. Zustzlich stellt
-                es sicher das alle Pre und Post Dispatch Plugins aufgerufen werden, was von
+                da er Objekte nicht klonen und den internen Status zurücksetzen muß. Zustzlich
+                stellt es sicher das alle Pre und Post Dispatch Plugins aufgerufen werden, was von
                 spezieller Wichtigkeit ist wenn man Frontcontroller Plugins für die Behandlung von
                 <acronym>ACL</acronym>'s in speziellen Aktionen verwendet.
             </para>

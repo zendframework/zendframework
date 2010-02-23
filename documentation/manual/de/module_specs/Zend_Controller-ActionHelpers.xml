@@ -266,7 +266,7 @@ if (Zend_Controller_Action_HelperBroker::hasHelper('redirector')) {
             <listitem>
                 <para>
                     <methodname>init()</methodname>, wird vom Helfer Broker wärend der
-                    Instanzierung ausgeführt und kann verwendet werden um den Status zu resetieren
+                    Instanzierung ausgeführt und kann verwendet werden um den Status zurückzusetzen
                     wenn mehrere Controller den gleichen Helfer in einer verketteten Aktion
                     verwenden.
                 </para>

@@ -225,7 +225,7 @@ $this->foo(); // Foo_View_Helper_Foo::foo() aufrufen
                 <para>
                     <methodname>setNeverController($flag = true)</methodname> ist analog zu
                     <methodname>setNoController()</methodname>, arbeitet aber auf einem globalen
-                    Leven -- z.B. wird es nicht für jede ausgeführte Aktion resetiert.
+                    Level -- z.B. wird es nicht für jede ausgeführte Aktion zurückgesetzt.
                     <methodname>getNeverController()</methodname> empfängt den aktuellen Wert.
                 </para>
             </listitem>

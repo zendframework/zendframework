@@ -837,7 +837,7 @@ $labels = $categories->getValues();
 
                     <row>
                         <entry><methodname>rewind()</methodname></entry>
-                        <entry>Resetiert den Index für Einträge auf 0</entry>
+                        <entry>Setzt den Index für Einträge auf 0 zurück</entry>
                     </row>
 
                     <row>

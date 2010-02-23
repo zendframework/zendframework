@@ -889,7 +889,7 @@ $upload->addValidator('ImageSize', false,
                             'maxheight' => 200
                      );
 
-// Resetiert die Breite der Prüfung
+// Setzt die Breite der Prüfung zurück
 $upload->setImageWidth(array('minwidth' => 20, 'maxwidth' => 200));
 ]]></programlisting>
         </example>

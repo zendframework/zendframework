@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21115
+ * EN-Revision: 21134
  */
 return array(
     // Zend_Validate_Alnum
@@ -72,7 +72,7 @@ return array(
 
     // Zend_Validate_Digits
     "Invalid type given, value should be string, integer or float" => "Tipo especificado inválido, o valor deve ser string, inteiro ou float",
-    "'%value%' contains characters which are no digits; but only digits are allowed" => "'%value%' contém caracteres que não são dígitos, mas apenas dígitos são permitidos",
+    "'%value%' contains characters which are not digits; but only digits are allowed" => "'%value%' contém caracteres que não são dígitos, mas apenas dígitos são permitidos",
     "'%value%' is an empty string" => "'%value%' é uma string vazia",
 
     // Zend_Validate_EmailAddress

@@ -664,7 +664,7 @@ $client = new Zend_Http_Client('http://www.example.com', array(
 ));
 
 // Force the next request to fail with an exception
-$adapter->nextRequestWillFail(true);
+$adapter->setNextRequestWillFail(true);
 
 try {
     // This call will result in a Zend_Http_Client_Adapter_Exception

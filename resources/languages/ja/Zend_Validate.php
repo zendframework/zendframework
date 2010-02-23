@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 20377
+ * EN-Revision: 21135
  */
 return array(
     // Zend_Validate_Alnum
@@ -72,7 +72,7 @@ return array(
 
     // Zend_Validate_Digits
     "Invalid type given, value should be string, integer or float" => "不正な形式です。値は文字列、整数、もしくは小数である必要があります",
-    "'%value%' contains not only digit characters" => "'%value%' に数字以外の文字が含まれています",
+    "'%value%' contains characters which are not digits; but only digits are allowed" => "'%value%' に数字以外の文字が含まれています。数字のみが許されます",
     "'%value%' is an empty string" => "'%value%' は空の文字列です",
 
     // Zend_Validate_EmailAddress

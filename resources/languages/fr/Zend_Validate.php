@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 20377
+ * EN-Revision: 21135
  */
 return array(
     // Zend_Validate_Alnum
@@ -72,6 +72,7 @@ return array(
 
     // Zend_Validate_Digits
     "Invalid type given, value should be string, integer or float" => "Type invalide : chaîne, entier ou flottant attendu",
+    "'%value%' contains characters which are not digits; but only digits are allowed" => "'%value%' contient des caractères qui ne sont pas numériques ; seuls les caractères numériques sont autorisés",
     "'%value%' contains not only digit characters" => "'%value%' ne contient pas que des chiffres",
     "'%value%' is an empty string" => "'%value%' est une chaîne vide",
 

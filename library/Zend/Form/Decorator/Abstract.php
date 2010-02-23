@@ -244,7 +244,7 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
      *
      * @param  string $content
      * @return string
-     * @throws Zend_Dorm_Decorator_Exception when unimplemented
+     * @throws Zend_Form_Decorator_Exception when unimplemented
      */
     public function render($content)
     {

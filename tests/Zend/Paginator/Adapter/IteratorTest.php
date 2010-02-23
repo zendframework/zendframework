@@ -128,4 +128,13 @@ class Zend_Paginator_Adapter_IteratorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue( ($items->getInnerIterator() == $innerIterator), 'getItems has to be serializable to use caching');
     }
 
+    /**
+     * @group ZF-4151
+     */
+    public function testEmptySet() {
+        $iterator = new ArrayIterator(array());
+        $this->_adapter = new Zend_Paginator_Adapter_Iterator($iterator);
+        $actual = $this->_adapter->getItems(0, 10);
+        $this->assertEquals(array(), $actual);
+    }
 }

@@ -80,4 +80,14 @@ class Zend_Paginator_Adapter_ArrayTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(101, $this->_adapter->count());
     }
+    
+
+    /**
+     * @group ZF-4151
+     */
+    public function testEmptySet() {
+        $this->_adapter = new Zend_Paginator_Adapter_Array(array());
+        $actual = $this->_adapter->getItems(0, 10);
+        $this->assertEquals(array(), $actual);
+    }
 }

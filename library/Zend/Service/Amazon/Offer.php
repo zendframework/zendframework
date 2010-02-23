@@ -39,6 +39,11 @@ class Zend_Service_Amazon_Offer
     /**
      * @var string
      */
+    public $MerchantName;
+
+    /**
+     * @var string
+     */
     public $GlancePage;
 
     /**
@@ -82,6 +87,10 @@ class Zend_Service_Amazon_Offer
         $xpath = new DOMXPath($dom->ownerDocument);
         $xpath->registerNamespace('az', 'http://webservices.amazon.com/AWSECommerceService/2005-10-05');
         $this->MerchantId = (string) $xpath->query('./az:Merchant/az:MerchantId/text()', $dom)->item(0)->data;
+        $name = $xpath->query('./az:Merchant/az:Name/text()', $dom);
+        if ($name->length == 1) {
+          $this->MerchantName = (string) $name->item(0)->data;
+        }
         $this->GlancePage = (string) $xpath->query('./az:Merchant/az:GlancePage/text()', $dom)->item(0)->data;
         $this->Condition = (string) $xpath->query('./az:OfferAttributes/az:Condition/text()', $dom)->item(0)->data;
         $this->OfferListingId = (string) $xpath->query('./az:OfferListing/az:OfferListingId/text()', $dom)->item(0)->data;

@@ -109,31 +109,24 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         }
 
         try {
-            $currency = new Zend_Currency('EUR');
+            $currency = new Zend_Currency(array('currency' => 'EUR'));
             $this->assertTrue($currency instanceof Zend_Currency);
         } catch (Zend_Currency_Exception $e) {
             $this->assertContains('No region found within the locale', $e->getMessage());
         }
 
         try {
-            $currency = new Zend_Currency('USD');
+            $currency = new Zend_Currency(array('currency' => 'USD'));
             $this->assertTrue($currency instanceof Zend_Currency);
         } catch (Zend_Currency_Exception $e) {
             $this->assertContains('No region found within the locale', $e->getMessage());
         }
 
         try {
-            $currency = new Zend_Currency('AWG');
+            $currency = new Zend_Currency(array('currency' => 'AWG'));
             $this->assertTrue($currency instanceof Zend_Currency);
         } catch (Zend_Currency_Exception $e) {
             $this->assertContains('No region found within the locale', $e->getMessage());
-        }
-
-        try {
-            $currency = new Zend_Currency('XYZ');
-            $this->fail("unknown shortname should not have been recognised");
-        } catch (Zend_Currency_Exception $e) {
-            // success
         }
     }
 
@@ -503,13 +496,13 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         }
 
         try {
-            $currency = new Zend_Currency('USD');
+            $currency = new Zend_Currency(array('currency' => 'USD'));
             $this->assertTrue(is_array($currency->getRegionList()));
         } catch (Zend_Currency_Exception $e) {
             $this->assertContains('No region found within the locale', $e->getMessage());
         }
 
-        $currency = new Zend_Currency('USD', 'en_US');
+        $currency = new Zend_Currency(array('currency' => 'USD'), 'en_US');
         $currency->setFormat(array('currency' => null));
         try {
             $this->assertEquals('US', $currency->getRegionList());
@@ -518,7 +511,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
             $this->assertContains("No currency defined", $e->getMessage());
         }
 
-        $currency = new Zend_Currency('USD', 'en_US');
+        $currency = new Zend_Currency(array('currency' => 'USD'), 'en_US');
         $this->assertEquals(array(0 => 'AS', 1 => 'EC', 2 => 'FM', 3 => 'GU', 4 => 'IO', 5 => 'MH', 6 => 'MP',
             7 => 'PR', 8 => 'PW', 9 => "SV", 10 => 'TC', 11 => 'TL', 12 => 'UM', 13 => 'US', 14 => 'VG', 15 => 'VI'), $currency->getRegionList());
     }

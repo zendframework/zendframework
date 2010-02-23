@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+require_once dirname(__FILE__) . '/../../TestHelper.php';
+
 /**
  * @see Zend_Locale
  */
@@ -91,7 +93,7 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testTranslationAvailableAtEngligh()
+    public function testTranslationAvailableInEnglish()
     {
         foreach ($this->_translations as $lang => $translation) {
             if ($lang == 'en') {
@@ -107,7 +109,7 @@ class resources_languages_Zend_ValidateTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testTranslationDifferFromEnglish()
+    public function testTranslationDiffersFromEnglish()
     {
         foreach ($this->_translations as $lang => $translation) {
             if ($lang == 'en') {

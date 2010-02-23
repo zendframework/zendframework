@@ -152,18 +152,11 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
      *
      * @group  ZF-2724
      * @return void
+     * @expectedException Zend_Validate_Exception
      */
     public function testStaticFactoryClassNotFound()
     {
-        set_error_handler(array($this, 'handleNotFoundError'), E_WARNING);
-        try {
-            Zend_Validate::is('1234', 'UnknownValidator');
-        } catch (Zend_Exception $e) {
-        }
-        restore_error_handler();
-        $this->assertTrue($this->error);
-        $this->assertTrue(isset($e));
-        $this->assertContains('Validate class not found', $e->getMessage());
+        Zend_Validate::is('1234', 'UnknownValidator');
     }
 
     /**

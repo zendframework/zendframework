@@ -1,73 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 20854 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.pdf.create">
-    <title>Criando e Carregando documentos PDF.</title>
+    <title>Criando e Carregando Documentos PDF</title>
+
     <para>
-     A classe <code>Zend_Pdf</code> representa o próprio documento PDF e provê
-     funcionalidades para manupulação do documento.
+        A classe <classname>Zend_Pdf</classname> representa os documentos <acronym>PDF</acronym> e
+        provê funcionalidades para manupulação do documento.
     </para>
 
     <para>
-    Para criar um novo documento, um objeto <code>Zend_Pdf</code> deve ser instanciado.
+        Para criar um novo documento, um novo objeto <code>Zend_Pdf</code> deve ser instanciado
+        primeiro.
     </para>
 
     <para>
-    A classe <code>Zend_Pdf</code> também provê dois métodos estáticos para carregar um PDF existente.
-    Os métodos são o <code>Zend_Pdf::load()</code> e o <code>Zend_Pdf::parse()</code>.
-    Ambos retornam um objeto Zend_Pdf como resultado, ou uma exceção se algum erro ocorrer.
+        A classe <classname>Zend_Pdf</classname> também provê dois métodos estáticos para carregar
+        um documento <acronym>PDF</acronym> existente. Os métodos são
+        <methodname>Zend_Pdf::load()</methodname> e <methodname>Zend_Pdf::parse()</methodname>.
+        Ambos retornam objetos <classname>Zend_Pdf</classname> como resultado, ou uma exceção se
+        algum erro ocorrer.
     </para>
 
     <example id="zend.pdf.create.example-1">
-        <title>Criar um novo documento PDF ou Carregar um já existente.</title>
-        <programlisting role="php"><![CDATA[<?php
+        <title>Criar um novo documento PDF ou carregar um já existente</title>
+
+        <programlisting language="php"><![CDATA[
 ...
-// Create new PDF document.
+// Cria um novo documento PDF
 $pdf1 = new Zend_Pdf();
 
-// Load PDF document from a file.
+// Carrega um documento PDF a partir de um arquivo
 $pdf2 = Zend_Pdf::load($fileName);
 
-// Load PDF document from a string.
+// Carrega um documento PDF a partir de uma string
 $pdf3 = Zend_Pdf::parse($pdfString);
-...]]>
-      </programlisting>
+...
+]]></programlisting>
     </example>
 
     <para>
-    O formato de arquivo PDF suporta a atualização incremental do documento. Dessa forma, toda vez que um documento
-    é atualizado uma nova revisão do documento é criada.
-    O módulo Zend_Pdf suporta a recuperação da revisão especificada.
+        O formato de arquivo <acronym>PDF</acronym> suporta a atualização incremental do documento.
+        Dessa forma, toda vez que um documento é atualizado, uma nova revisão do documento é criada.
+        O componente <classname>Zend_Pdf</classname> suporta a recuperação de uma revisão
+        especificada.
     </para>
+
     <para>
-    A revisão pode ser especificada como o segundo parâmetro dos métodos <code>Zend_Pdf::load()</code> e
-    <code>Zend_Pdf::parse()</code> ou solicitada através de <code>Zend_Pdf::rollback()</code>
+        Uma revisão pode ser especificada como o segundo parâmetro para os métodos
+        <methodname>Zend_Pdf::load()</methodname> e <methodname>Zend_Pdf::parse()</methodname> ou
+        solicitada chamando o método <methodname>Zend_Pdf::rollback()</methodname>.
+
         <footnote>
             <para>
-            O método <code>Zend_Pdf::rollback()</code> deve ser chamado antes que qualquer mudança seja
-            aplicada ao documento.
-            De outra forma o coportamento do método é indefinido.
+                O método <methodname>Zend_Pdf::rollback()</methodname> deve ser chamado antes que
+                qualquer mudança seja aplicada ao documento, caso contrário o comportamento do
+                método não é definido.
             </para>
         </footnote>
-    call.
     </para>
 
     <example id="zend.pdf.create.example-2">
-        <title>Solicitando uma revisão específica do documento PDF.</title>
-        <programlisting role="php"><![CDATA[<?php
+        <title>Solicitando Revisões Específicas de um Documento PDF</title>
+
+        <programlisting language="php"><![CDATA[
 ...
-// Load PDF previouse revision of the document.
+// Carrega a revisão anterior do documento PDF
 $pdf1 = Zend_Pdf::load($fileName, 1);
 
-// Load PDF previouse revision of the document.
+// Carrega a revisão anterior do documento PDF
 $pdf2 = Zend_Pdf::parse($pdfString, 1);
 
-// Load first revision of the document.
+// Carrega a primeira revisão do documento PDF
 $pdf3 = Zend_Pdf::load($fileName);
 $revisions = $pdf3->revisions();
 $pdf3->rollback($revisions - 1);
-...]]>
-        </programlisting>
+...
+]]></programlisting>
     </example>
-
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

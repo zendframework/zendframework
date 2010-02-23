@@ -973,6 +973,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
 
     /**
      * @group ZF-9011
+     *
      */
     public function testSendmailTransportThrowsExceptionWithInvalidParams()
     {
@@ -984,7 +985,7 @@ class Zend_Mail_MailTest extends PHPUnit_Framework_TestCase
         $transport = new Zend_Mail_Transport_Sendmail();
         $transport->parameters = true;
         try {
-            $mail->send();
+            $mail->send($transport);
             $this->fail('Exception should have been thrown, but wasn\'t');
         } catch(Zend_Mail_Transport_Exception $e) {
         	// do nothing

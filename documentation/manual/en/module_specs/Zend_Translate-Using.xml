@@ -282,7 +282,7 @@ print $translate->_(2) . "\n";
 
                 <para>
                     Negative: too many and also small translation files result in
-                    being tendious to translate.
+                    being tedious to translate.
                     Also every file has to be added as translation source.
                 </para>
             </listitem>

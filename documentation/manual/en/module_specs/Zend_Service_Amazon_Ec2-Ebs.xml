@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
 <sect1 id="zend.service.amazon.ec2.ebs">
-    <title>Zend_Service_Amazon_Ec2: Elastic Block Stroage (EBS)</title>
+    <title>Zend_Service_Amazon_Ec2: Elastic Block Storage (EBS)</title>
 
     <para>
         Amazon Elastic Block Store (Amazon EBS) is a new type of storage
@@ -191,7 +191,7 @@ $return = $ec2_ebs->attachVolume('volumeId', 'instanceid', '/dev/sdh');
                 <code>detachVolume</code> will detach an EBS Volume from a running Instance.
                 <code>detachVolume</code> requires that you specify the volumeId with the optional
                 instanceId and device name that was passed when attaching the volume. If you need to
-                force the detachment you can set the forth parameter to be <constant>TRUE</constant>
+                force the detachment you can set the fourth parameter to be <constant>TRUE</constant>
                 and it will force the volume to detach.
             </para>
 
@@ -250,7 +250,7 @@ $return = $ec2_ebs->deleteVolume('volumeId');
             </para>
 
             <para>
-                <code>deleteSnapshot</code> returns booleen <constant>TRUE</constant> or
+                <code>deleteSnapshot</code> returns boolean <constant>TRUE</constant> or
                 <constant>FALSE</constant>.
             </para>
 

@@ -14,7 +14,7 @@
         meanings. But as you may imagine each language has it's own definition of plurals.
         English, for example, supports one plural. We have a singular definition, for example
         "car", which means implicit one car, and we have the plural definition, "cars" which could
-        mean more than one car but also zero cars. Other languages like russian or polish have
+        mean more than one car but also zero cars. Other languages like Russian or Polish have
         more plurals and also the rules for plurals are different.
     </para>
 
@@ -50,7 +50,7 @@
 
             <para>
                 The number will be used to detect the plural which has to be returned. A optional
-                forth parameter can be used to give a locale which will be used to return the
+                fourth parameter can be used to give a locale which will be used to return the
                 translation.
             </para>
 
@@ -65,7 +65,7 @@ $translate->plural('Car', 'Cars', $number);
         <title>Modern plural translations</title>
 
         <para>
-            As traditional plural translations are restricted to source code using english plurals
+            As traditional plural translations are restricted to source code using English plurals
             we added a new way for plural translations. It allows to use the same
             <methodname>translate()</methodname> for standard and for plural translations.
         </para>
@@ -74,7 +74,7 @@ $translate->plural('Car', 'Cars', $number);
             To use plural translations with <methodname>translate()</methodname> you need to give
             an array as messageId instead of an string. This array must have the original plural
             messageId's, then the amount and at last an optional locale when your given messageId's
-            are not in english notation.
+            are not in English notation.
         </para>
 
         <example id="zend.translate.plurals.modern.example1">
@@ -100,8 +100,8 @@ $translate->translate(array('Car', 'Cars', $number));
             <title>Example of modern plural translations using a different source language</title>
 
             <para>
-                Let's expect we want to use russian and let's also expect that the given
-                messageId's are russian and not english.
+                Let's expect we want to use Russian and let's also expect that the given
+                messageId's are Russian and not English.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -115,13 +115,13 @@ $translate->translate(array('Car',
         </example>
 
         <para>
-            As you can see you can give more than just the one english plural. But you must give
+            As you can see you can give more than just the one English plural. But you must give
             the source language in this case so <classname>Zend_Translate</classname> knows which
             plural rules it has to apply.
         </para>
 
         <para>
-            When you omit the plural language then english will be used per default and any
+            When you omit the plural language then English will be used per default and any
             additional plural definition will be ignored.
         </para>
     </sect2>
@@ -220,7 +220,7 @@ array(
                 In the above example <code>plural_0</code> and <code>plural_1</code> are the
                 plural definitions from the source code. And the array at <code>plural_0</code>
                 has all translated plural forms available. Take a look at the following example
-                with real content and translation from english source to german.
+                with real content and translation from English source to German.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -235,7 +235,7 @@ array(
 
             <para>
                 When your translated language supports more plural forms then simply add them to
-                the array below the first plural form. When your source language suppors more
+                the array below the first plural form. When your source language supports more
                 plural forms, than simply add a new empty translation.
             </para>
         </sect3>
@@ -283,7 +283,7 @@ array(
         <title>Custom plural rules</title>
 
         <para>
-            In rare cases it could be useful to be able to define own plural rules. See chinese for
+            In rare cases it could be useful to be able to define own plural rules. See Chinese for
             example. This language defines two plural rules. Per default it does not use plurals.
             But in rare cases it uses a rule like <emphasis>(number == 1) ? 0 : 1</emphasis>.
         </para>
@@ -331,7 +331,7 @@ Zend_Translate_Plural::setPlural('MyPlural', 'zh');
 ]]></programlisting>
 
         <para>
-            Now we linked our plural definition to the chinese language.
+            Now we linked our plural definition to the Chinese language.
         </para>
 
         <para>

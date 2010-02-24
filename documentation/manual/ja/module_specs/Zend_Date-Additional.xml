@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17750 -->
+<!-- EN-Revision: 20766 -->
 <sect1 id="zend.date.additional">
     <title>動作例</title>
 
@@ -146,22 +146,30 @@ print_r (Zend_Date_Cities::getCityList());
                         <entry>使用例</entry>
                     </row>
                 </thead>
+
                 <tbody>
                     <row>
                         <entry>effective</entry>
                         <entry>標準の水平線</entry>
-                        <entry>世界が完全な球体であると仮定します。何も指定しない場合には常にこれを使用します。</entry>
+                        
+                        <entry>
+                            世界が完全な球体であると仮定します。
+                            何も指定しない場合には常にこれを使用します。
+                        </entry>
                     </row>
+
                     <row>
                         <entry>civil</entry>
                         <entry>一般的な水平線</entry>
                         <entry>テレビやラジオなどのメディアで一般に使用します。</entry>
                     </row>
+
                     <row>
                         <entry>nautic</entry>
                         <entry>航海時の水平線</entry>
                         <entry>航海時によく使用します。</entry>
                     </row>
+
                     <row>
                         <entry>astronomic</entry>
                         <entry>天文学上の水平線</entry>
@@ -181,6 +189,7 @@ print_r (Zend_Date_Cities::getCityList());
 
         <example id="zend.date.additional.sunrise-sunset.example-2">
             <title>都市の位置の取得</title>
+
             <programlisting language="php"><![CDATA[
 // 定義済みの都市の位置を取得します
 // 水平線を指定していないので、effective horizon を使用します

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16705 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.controller.quickstart">
     <title>Zend_Controller クイックスタート</title>
 
     <sect2 id="zend.controller.quickstart.introduction">
         <title>導入</title>
+
         <para>
             <classname>Zend_Controller</classname> は、Zend Framework の <acronym>MVC</acronym>
             システムの中心となるものです。<acronym>MVC</acronym> は <ulink
@@ -18,6 +19,7 @@
             すべてのリクエストをいったんフロントコントローラで受け取った上でその
             <acronym>URL</acronym> にもとづいたアクションコントローラに配送します。
         </para>
+
         <para>
             <classname>Zend_Controller</classname> は、拡張性を考慮して作成されています。
             拡張の方法としては、既存のクラスのサブクラスを作成する方法と
@@ -336,9 +338,17 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
             </para>
 
             <itemizedlist>
-                <listitem><para><filename>http://example.com/</filename></para></listitem>
-                <listitem><para><filename>http://example.com/index</filename></para></listitem>
-                <listitem><para><filename>http://example.com/index/index</filename></para></listitem>
+                <listitem>
+                    <para><filename>http://example.com/</filename></para>
+                </listitem>
+
+                <listitem>
+                    <para><filename>http://example.com/index</filename></para>
+                </listitem>
+
+                <listitem>
+                    <para><filename>http://example.com/index/index</filename></para>
+                </listitem>
             </itemizedlist>
 
             <para>

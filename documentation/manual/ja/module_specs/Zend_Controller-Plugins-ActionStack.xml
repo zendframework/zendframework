@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16705 -->
+<!-- EN-Revision: 20765 -->
 <sect3 id="zend.controller.plugins.standard.actionstack">
     <title>ActionStack</title>
 
@@ -22,30 +22,38 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>getRegistry()</methodname> および <methodname>setRegistry()</methodname>。
                 <emphasis>ActionStack</emphasis> は、内部的に
                 <classname>Zend_Registry</classname> のインスタンスを使ってスタックを管理しています。
                 別のレジストリインスタンスでこれを置き換えたり、
                 インスタンスを取得したりする際にこれらのアクセサを使用します。
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>getRegistryKey()</methodname> および <methodname>setRegistryKey()</methodname>。
                 これらは、スタックに格納する際にレジストリのどのキーを使用するかを指定します。
                 デフォルト値は '<classname>Zend_Controller_Plugin_ActionStack</classname>' です。
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>getStack()</methodname> は、
                 そのアクションのスタック全体を取得します。
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 <methodname>pushStack()</methodname> および <methodname>popStack()</methodname>
                 は、それぞれスタックへの追加とスタックからの取り出しを行います。
                 <methodname>pushStack()</methodname> にはリクエストオブジェクトを渡します。
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>

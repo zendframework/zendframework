@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18822 -->
+<!-- EN-Revision: 20794 -->
 <sect2 id="zend.validate.sitemap">
     <title>サイトマップ・バリデータ</title>
 
@@ -18,6 +18,7 @@
             使用できるかどうか検証します。
             有効値は、 'always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly' または 'never' です。
         </para>
+
         <para>
             値が文字列で、上記で指定される頻度のうちの1つと等しい場合に限り、
             <constant>TRUE</constant>を返します。
@@ -33,6 +34,7 @@
             lastmod要素は <acronym>W3C</acronym> 日付文字列を含まなければなりません。
             そして、任意で時間についての情報を無効にします。
         </para>
+
         <para>
             値が文字列で、プロトコルに従って妥当な場合に限り、
             <constant>TRUE</constant>を返します。

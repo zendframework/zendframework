@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15860 -->
+<!-- EN-Revision: 20763 -->
 <sect1 id="zend.auth.adapter.digest">
 
     <title>ダイジェスト認証</title>
@@ -28,11 +28,13 @@
                     "<emphasis><filename>joe.user</filename></emphasis>" のようなユーザ名。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     "<emphasis>Administrative Area</emphasis>" のようなレルム。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     ユーザ名、レルムおよびパスワードをコロンで区切った文字列の <acronym>MD5</acronym> ハッシュ。
@@ -66,16 +68,19 @@ someUser:Some Realm:fde17b91c3a510ecbaf7dbd37f59d4f8
                     filename - 認証の問い合わせ先となるファイル名。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     realm - ダイジェスト認証のレルム。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     username - ダイジェスト認証のユーザ名。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     password - 指定したレルムにおける、ユーザのパスワード。

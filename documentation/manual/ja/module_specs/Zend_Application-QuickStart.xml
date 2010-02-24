@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17372 -->
+<!-- EN-Revision: 20763 -->
 <sect1 id="zend.application.quick-start">
     <title>Zend_Application クイックスタート</title>
 
@@ -161,20 +161,26 @@ $application->bootstrap()
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <classname>Bootstrap</classname>クラスを持つ
-                <filename>application/Bootstrap.php</filename>ファイルを作成します。
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Bootstrap</classname>クラスを持つ
+                    <filename>application/Bootstrap.php</filename>ファイルを作成します。
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Application</classname>に必要な基本的な設定を持つ構成ファイル、
-                <filename>application/configs/application.ini</filename>を作成します。
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Application</classname>に必要な基本的な設定を持つ構成ファイル、
+                    <filename>application/configs/application.ini</filename>を作成します。
+                </para>
+            </listitem>
 
-            <listitem><para>
-                <classname>Zend_Application</classname>を利用するために、
-                <filename>public/index.php</filename>を変更します。
-            </para></listitem>
+            <listitem>
+                <para>
+                    <classname>Zend_Application</classname>を利用するために、
+                    <filename>public/index.php</filename>を変更します。
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>

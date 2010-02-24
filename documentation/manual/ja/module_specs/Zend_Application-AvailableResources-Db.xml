@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20111 -->
+<!-- EN-Revision: 20763 -->
 <sect2 id="zend.application.available-resources.db">
     <title>Zend_Application_Resource_Db</title>
 
@@ -9,10 +9,9 @@
         それに渡されるオプションに基づいて<classname>Zend_Db</classname>アダプタを初期化します。
         デフォルトで、<classname>Zend_Db_Table</classname>用のデフォルト・アダプタとして、
         アダプタを設定します。
-        <!-- TODO : to be translated -->
-        If you want to use mutliple databases simultaneously, you can use the <link
-        linkend="zend.application.available-resources.multidb">Multidb Resource
-        Plugin</link>.
+        複数のデータベースを同時に利用したい場合、 <link
+            linkend="zend.application.available-resources.multidb">Multidb リソース・プラグイン</link>
+        を利用できます。
     </para>
 
     <para>
@@ -20,17 +19,23 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
-            <emphasis><property>adapter</property></emphasis>: <classname>Zend_Db</classname>アダプタ・タイプ
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>adapter</property></emphasis>: <classname>Zend_Db</classname>アダプタ・タイプ
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>params</property></emphasis>: アダプタ・インスタンスを取得するときに使う構成パラメータの連想配列です。
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>params</property></emphasis>: アダプタ・インスタンスを取得するときに使う構成パラメータの連想配列です。
+            </para>
+        </listitem>
 
-        <listitem><para>
-            <emphasis><property>isDefaultTableAdapter</property></emphasis>: アダプタをデフォルト・テーブル・アダプタとして確立するべきかどうか。
-        </para></listitem>
+        <listitem>
+            <para>
+                <emphasis><property>isDefaultTableAdapter</property></emphasis>: アダプタをデフォルト・テーブル・アダプタとして確立するべきかどうか。
+            </para>
+        </listitem>
     </itemizedlist>
 
     <example id="zend.application.available-resources.db.configExample">

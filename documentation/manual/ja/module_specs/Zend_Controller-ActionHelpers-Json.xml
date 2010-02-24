@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16503 -->
+<!-- EN-Revision: 20765 -->
 <sect3 id="zend.controller.actionhelpers.json">
     <title>JSON</title>
 
@@ -15,9 +15,11 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>
+        <listitem>
+            <para>
                 レイアウト機能が有効になっている場合はそれを無効にする。
-        </para></listitem>
+            </para>
+        </listitem>
 
         <listitem>
             <para>
@@ -32,18 +34,24 @@ $this->_helper->json($data, array('enableJsonExprFinder' => true));
 ]]></programlisting>
         </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 ViewRenderer が有効になっている場合にそれを無効にする。
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 'Content-Type' レスポンスヘッダを '<filename>application/json</filename>' に設定する。
-        </para></listitem>
+            </para>
+        </listitem>
 
-        <listitem><para>
+        <listitem>
+            <para>
                 デフォルトでレスポンスをすぐに返す。
                 アクションの実行が終了するのを待たない。
-        </para></listitem>
+            </para>
+        </listitem>
     </itemizedlist>
 
     <para>
@@ -89,7 +97,7 @@ $this->_helper->json($data, true);
         <para>
             オプションで、2 番目の引数に配列を渡すことができます。
             この配列には、<emphasis>keepLayouts</emphasis>
-            のオプションを含むさまざまなオプションを指定することができます。
+            のオプションを含むさまざまなオプションを指定できます。
         </para>
 
         <programlisting language="php"><![CDATA[
@@ -102,7 +110,7 @@ $this->_helper->json($data, array('keepLayouts' => true);
 
         <para>
             <methodname>Zend_Json::encode()</methodname> は、ネイティブ <acronym>JSON</acronym> 式を
-            <classname>Zend_Json_Expr</classname> オブジェクトを使用してエンコードすることができます。
+            <classname>Zend_Json_Expr</classname> オブジェクトを使用してエンコードできます。
             このオプションはデフォルトでは無効になっています。
             有効にするには、<emphasis>enableJsonExprFinder</emphasis>
             オプションに <constant>TRUE</constant> を設定します。

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17593 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.controller.exceptions">
     <title>MVC での例外</title>
 
@@ -233,6 +233,7 @@ class My_Controller_Action extends Zend_Controller_Action
     }
 }
 ]]></programlisting>
+
                         <para>
                             上の例は、未定義のアクションメソッドがコールされた場合にそれをすべて受け取り、
                             そのコントローラのデフォルトアクションにリダイレクトします。

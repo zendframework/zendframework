@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19691 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.config.writer.introduction">
     <title>Zend_Config_Writer</title>
 
@@ -25,11 +25,13 @@
                 <classname>Zend_Config_Writer_Array</classname>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <classname>Zend_Config_Writer_Ini</classname>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <classname>Zend_Config_Writer_Xml</classname>
@@ -66,10 +68,12 @@
 
     <example id="zend.config.writer.example.using">
         <title>Zend_Config_Writer の使用法</title>
+
         <para>
             この例では、<classname>Zend_Config_Writer_Xml</classname>
             で新しい設定ファイルを作成する方法を説明します。
         </para>
+
         <programlisting language="php"><![CDATA[
 // config オブジェクトを作成します
 $config = new Zend_Config(array(), true);
@@ -101,6 +105,7 @@ $writer->setConfig($config)
 $writer = new Zend_Config_Writer_Xml();
 $writer->write('config.xml', $config);
 ]]></programlisting>
+
         <para>
             これは、production と staging というセクションを持つ <acronym>XML</acronym>
             設定ファイルを作成します。staging は production を継承しています。
@@ -109,9 +114,11 @@ $writer->write('config.xml', $config);
 
     <example id="zend.config.writer.modifying">
         <title>既存の設定の変更</title>
+
         <para>
             この例では、既存の設定ファイルを編集する方法を説明します。
         </para>
+
         <programlisting language="php"><![CDATA[
 // すべてのセクションを既存の設定ファイルから読み込みますが継承は読み飛ばします
 $config = new Zend_Config_Ini('config.ini',

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15814 -->
+<!-- EN-Revision: 20763 -->
 <sect1 id="zend.acl.advanced">
 
     <title>高度な使用法</title>
@@ -24,8 +24,8 @@
         <acronym>ACL</acronym> データの保存は、場面に応じて開発者側で考えることになります。
         <classname>Zend_Acl</classname> はシリアライズ可能なので、<acronym>ACL</acronym> オブジェクトを <acronym>PHP</acronym> の
         <ulink url="http://php.net/serialize"><methodname>serialize()</methodname></ulink>
-        関数でシリアライズすることができます。シリアライズした結果を、
-        ファイルやデータベースあるいはキャッシュなどのお好みの場所に保存することができます。
+        関数でシリアライズできます。シリアライズした結果を、
+        ファイルやデータベースあるいはキャッシュなどのお好みの場所に保存できます。
         </para>
 
     </sect2>

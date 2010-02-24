@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15978 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.config.introduction">
     <title>導入</title>
+
     <para>
         <classname>Zend_Config</classname> は、アプリケーションの設定データを
         簡単に使用できるようにするために設計されたものです。
@@ -15,16 +16,19 @@
         と <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>
         の二種類で、テキストファイルに格納された設定データを使用できるようになっています。.
     </para>
+
     <example id="zend.config.introduction.example.using">
         <title>Zend_Config の使用例</title>
+
         <para>
             通常は、<link linkend="zend.config.adapters.ini"><classname>Zend_Config_Ini</classname></link>
             あるいは <link linkend="zend.config.adapters.xml"><classname>Zend_Config_Xml</classname></link>
             のようなアダプタクラスを使用することが想定されています。
             しかし、もし設定データが <acronym>PHP</acronym> の配列として存在するのなら、
             単にそれを <classname>Zend_Config</classname> のコンストラクタに渡すだけで、
-            シンプルなオブジェクト指向のインターフェイスを使用することができます。
+            シンプルなオブジェクト指向のインターフェイスを使用できます。
         </para>
+
         <programlisting language="php"><![CDATA[
 // 設定データは配列で渡されます
 $configArray = array(
@@ -55,26 +59,32 @@ $db = Zend_Db::factory($config->database->adapter,
 $db = Zend_Db::factory($config->database);
 ]]></programlisting>
     </example>
+
     <para>
         上の例で説明したように、<classname>Zend_Config</classname> を使用すると、
         コンストラクタに渡されたデータについて、
         階層化されたプロパティの形式でアクセスできるようになります。
     </para>
+
     <para>
         このようにオブジェクト思考形式でデータの値にアクセスするだけでなく、
         <classname>Zend_Config</classname> では <code>get()</code> メソッドも用意しています。
         これは、指定した要素が存在しない場合にデフォルト値を返すように設定できます。
         たとえば次のように使用します。
     </para>
+
     <programlisting language="php"><![CDATA[
 $host = $config->database->get('host', 'localhost');
 ]]></programlisting>
+
     <example id="zend.config.introduction.example.file.php">
         <title>Zend_Config における PHP 設定ファイルの使用法</title>
+
         <para>
             設定ファイルそのものを <acronym>PHP</acronym> で書きたいこともあるでしょう。
             以下のようにすると、簡単にそれを行うことができます。
         </para>
+
         <programlisting language="php"><![CDATA[
 // config.php
 return array(
@@ -90,6 +100,7 @@ return array(
     )
 );
 ]]></programlisting>
+
         <programlisting language="php"><![CDATA[
 // 設定を読み込みます
 $config = new Zend_Config(require 'config.php');
@@ -97,6 +108,7 @@ $config = new Zend_Config(require 'config.php');
 // 設定データを出力します (この結果は 'www.example.com' です)
 echo $config->webhost;
 ]]></programlisting>
+
     </example>
 </sect1>
 <!--

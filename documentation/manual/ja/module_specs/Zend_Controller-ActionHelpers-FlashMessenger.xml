@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16015 -->
+<!-- EN-Revision: 20765 -->
 <sect3 id="zend.controller.actionhelpers.flashmessenger">
     <title>FlashMessenger</title>
 
     <sect4 id="zend.controller.actionhelper.flashmessenger.introduction">
         <title>導入</title>
+
         <para>
             <emphasis>FlashMessenger</emphasis> ヘルパーは、
             次のリクエストの際にユーザに見せる必要のあるメッセージを渡すためのものです。
@@ -22,6 +23,7 @@
 
     <sect4 id="zend.controller.actionhelper.flashmessenger.basicusage">
         <title>基本的な使用例</title>
+
         <para>
             以下の使用例は、もっとも基本的なフラッシュメッセンジャーの使用法を示すものです。
             アクション <filename>/some/my</filename> がコールされると、フラッシュメッセージに

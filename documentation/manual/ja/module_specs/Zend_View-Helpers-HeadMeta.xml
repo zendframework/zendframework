@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19777 -->
+<!-- EN-Revision: 20794 -->
 <sect3 id="zend.view.helpers.initial.headmeta">
     <title>HeadMeta ヘルパー</title>
 
@@ -24,36 +24,43 @@
                 <command>appendName($keyValue, $content, $conditionalName)</command>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <command>offsetSetName($index, $keyValue, $content, $conditionalName)</command>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <command>prependName($keyValue, $content, $conditionalName)</command>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <command>setName($keyValue, $content, $modifiers)</command>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <command>appendHttpEquiv($keyValue, $content, $conditionalHttpEquiv)</command>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <commande>offsetSetHttpEquiv($index, $keyValue, $content, $conditionalHttpEquiv)</commande>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <command>prependHttpEquiv($keyValue, $content, $conditionalHttpEquiv)</command>
             </para>
         </listitem>
+
         <listitem>
             <para>
                 <command>setHttpEquiv($keyValue, $content, $modifiers)</command>

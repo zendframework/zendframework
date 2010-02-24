@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 16705 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.controller.modular">
     <title>モジュラーディレクトリ構造の規約の使用</title>
 
     <sect2 id="zend.controller.modular.introduction">
         <title>導入</title>
+
         <para>
             モジュラーディレクトリ構造の規約 (The Conventional Modular directory structure)
             により、さまざまな <acronym>MVC</acronym> アプリケーションを自己完結した単位にまとめることができます。
@@ -63,6 +64,7 @@ application/
 
         <note>
             <title>デフォルトモジュールでは名前空間を使用しない</title>
+
             <para>
                 デフォルトモジュールでは、コントローラは
                 名前空間プレフィックスを必要としないことに注意しましょう。
@@ -171,11 +173,13 @@ $front->setModuleControllerDirectoryName('con');
 $front->addModuleDirectory('/path/to/application/modules');
 ]]></programlisting>
 
-        <note><para>
-            モジュール内でコントローラディレクトリを使用しない場合は、
-            <methodname>setModuleControllerDirectoryName()</methodname>
-            に空の文字列を指定します。
-        </para></note>
+        <note>
+            <para>
+                モジュール内でコントローラディレクトリを使用しない場合は、
+                <methodname>setModuleControllerDirectoryName()</methodname>
+                に空の文字列を指定します。
+            </para>
+        </note>
     </sect2>
 
     <sect2 id="zend.controller.modular.router">

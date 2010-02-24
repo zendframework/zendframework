@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18556 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.controller.action">
     <title>アクションコントローラ</title>
 
     <sect2 id="zend.controller.action.introduction">
         <title>導入</title>
+
         <para>
             <classname>Zend_Controller_Action</classname> は、
             モデル - ビュー - コントローラ (<acronym>MVC</acronym>)
@@ -230,11 +231,13 @@ class FooController extends Zend_Controller_Action
         </para>
 
         <itemizedlist>
-            <listitem><para>
-                <emphasis>リクエストオブジェクト</emphasis>:
-                <methodname>getRequest()</methodname> を使用してリクエストオブジェクトを取得し、
-                それを用いてアクションをコールします。
-            </para></listitem>
+            <listitem>
+                <para>
+                    <emphasis>リクエストオブジェクト</emphasis>:
+                    <methodname>getRequest()</methodname> を使用してリクエストオブジェクトを取得し、
+                    それを用いてアクションをコールします。
+                </para>
+            </listitem>
 
             <listitem>
                 <para>
@@ -398,7 +401,8 @@ string render(string $action = null,
                 <varname>$name</varname> の値を指定します。
             </para>
 
-            <note><para>
+            <note>
+                <para>
                     コントローラやアクションの名前には区切り文字
                     ('_' や '.'、'-') を含めることができるので、
                     <methodname>render()</methodname> はスクリプト名を決定する際にこれらの文字を
@@ -408,7 +412,8 @@ string render(string $action = null,
                     レンダリングされるスクリプトは <filename>foo-bar/baz-bat.phtml</filename> です。
                     アクションメソッド名が camelCase 方式の場合、
                     ビュースクリプトのファイル名では単語が '-' で区切られることに注意しましょう。
-            </para></note>
+                </para>
+            </note>
 
             <para>
                 例を見てみましょう。

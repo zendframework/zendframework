@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15960 -->
+<!-- EN-Revision: 20763 -->
 <sect1 id="zend.auth.adapter.openid">
 
     <title>Open ID 認証</title>
 
     <sect2 id="zend.auth.adapter.openid.introduction">
-
         <title>導入</title>
+
         <para>
             <classname>Zend_Auth_Adapter_OpenId</classname>
             は、リモートの OpenID サーバを使用したユーザ認証を行います。
@@ -16,6 +16,7 @@
             プロバイダにリダイレクトされ、そこでパスワードなどを用いて識別子の所有者情報を確認します。
             ここで入力したパスワードは、ウェブアプリケーション側には知られることはありません。
         </para>
+
         <para>
             OpenID の識別子は単なる <acronym>URI</acronym> で、
             指し示す先のウェブページにはそのユーザに関する情報や特別なタグが含まれます。
@@ -24,6 +25,7 @@
             <ulink url="http://www.openid.net/">OpenID の公式サイト</ulink>
             を参照ください。
         </para>
+
         <para>
             <classname>Zend_Auth_Adapter_OpenId</classname> クラスは
             <classname>Zend_OpenId_Consumer</classname> コンポーネントのラッパーで、
@@ -42,6 +44,7 @@
 
     <sect2 id="zend.auth.adapter.openid.specifics">
         <title>仕様</title>
+
         <para>
             他の <classname>Zend_Auth</classname> アダプタ同様、<classname>Zend_Auth_Adapter_OpenId</classname>
             クラスは <classname>Zend_Auth_Adapter_Interface</classname> を実装しています。

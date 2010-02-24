@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 15976 -->
+<!-- EN-Revision: 20765 -->
 <sect1 id="zend.codegenerator.examples">
     <title>Zend_CodeGeneratorサンプル</title>
 
@@ -36,7 +36,7 @@ echo $foo->generate();
             上記のコードは下記の結果になります。:
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * 生成されたクラスサンプル
  *
@@ -134,7 +134,7 @@ class Foo
             メソッドは、配列かまたは具体的な<classname>Zend_CodeGenerator_Php_Method</classname>インスタンスとして付与されるかもしれません。
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 $foo      = new Zend_CodeGenerator_Php_Class();
 $docblock = new Zend_CodeGenerator_Php_Docblock(array(
     'shortDescription' => '生成されたクラスサンプル',
@@ -212,7 +212,7 @@ echo $foo->generate();
             上記のコードは下記の出力になります。:
         </para>
 
-            <programlisting language="php"><![CDATA[
+        <programlisting language="php"><![CDATA[
 /**
  * 生成されたクラスサンプル
  *
@@ -375,6 +375,7 @@ file_put_contents($path, $generator->generate());
 
     <example id="zend.codegenerator.examples.reflection-class">
         <title>reflection経由のPHPクラス生成の種まき</title>
+
         <para>
             コード・ジェネレーターを使って、既存のPHPファイルにPHPコードを加えることができます。
             そうするために、最初にクラスをジェネレーター・オブジェクトにマップするために、

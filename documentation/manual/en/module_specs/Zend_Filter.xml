@@ -117,7 +117,7 @@ echo Zend_Filter::filterStatic('"',
             <title>Namespaces</title>
 
             <para>
-                When working with self defined filters you can give a forth parameter
+                When working with self defined filters you can give a fourth parameter
                 to <methodname>Zend_Filter::filterStatic()</methodname> which is the namespace
                 where your filter can be found.
             </para>
@@ -145,7 +145,7 @@ echo Zend_Filter::filterStatic('"', 'OtherFilter', array($parameters));
 ]]></programlisting>
 
             <para>
-                For your convinience there are following methods which allow the handling of
+                For your convenience there are following methods which allow the handling of
                 namespaces:
             </para>
 

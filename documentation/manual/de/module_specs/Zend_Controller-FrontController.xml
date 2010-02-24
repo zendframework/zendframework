@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 17175 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 17175 -->
 <sect1 id="zend.controller.front">
     <title>Der Front Controller</title>
 
@@ -13,7 +13,7 @@
                 Controller-Entwurfsmuster</ulink>, das in <ulink
                 url="http://de.wikipedia.org/wiki/Model_View_Controller">Model-View-Controller
                 (MVC)</ulink>-Anwendungen verwendet wird. Seine Aufgabe ist, die Abfrage-Umgebung
-                u initialisieren, die eingehende Abfrage zu routen und dann die Anfrage an alle
+                zu initialisieren, die eingehende Abfrage zu routen und dann die Anfrage an alle
                 angefragten Aktionen weiterzuleiten (das alles zusammen wird auch dispatchen
                 genannt); er fasst alle Antworten zusammen und gibt sie zurück, wenn der Prozess
                 beendet ist.
@@ -38,7 +38,7 @@
 
         <para>
             Als ein absolutes Minimum, um zu funktionieren, braucht der Front-Controller den Pfad
-            zu einem oder mehr Verzeichnissen, die
+            zu einem oder mehreren Verzeichnissen, die
             <link linkend="zend.controller.action">Action-Controller</link> enthalten. Verschiedene
             Methoden können auch noch aufgerufen werden, um die Front-Controller-Umgebung und die
             seiner Hilfsklassen anzupassen.
@@ -84,7 +84,7 @@ $front->setParam('noViewRenderer', true);
         <para>
             Der Front-Controller hat etliche Zugriffsmethoden, die benutzt werden können, um seine
             Umgebung zu konfigurieren. Jedoch gibt es drei grundlegende Methoden, die entscheidend
-            für die funktionalität des Front-Controllers sind:
+            für die Funktionalität des Front-Controllers sind:
         </para>
 
         <sect3 id="zend.controller.front.methods.primary.getinstance">
@@ -93,7 +93,7 @@ $front->setParam('noViewRenderer', true);
             <para>
                 <methodname>getInstance()</methodname> wird benutzt, um eine Front-Controller
                 Instanz zu erhalten. Da der Front-Controller das Singleton-Entwurfsmuster
-                implementiert, ist das auch die einzige Möglichkeit, ein Front-Controller Objekt zu
+                implementiert, ist das auch die einzige Möglichkeit, ein Front-Controller-Objekt zu
                 erhalten.
             </para>
 
@@ -111,7 +111,7 @@ $front = Zend_Controller_Front::getInstance();
                 zu sagen, wo er nach <link
                     linkend="zend.controller.action">Action-Controller</link>-Klassendateien suchen
                 soll. Sie akzeptiert sowohl einen einzelnen Pfad als auch ein Array aus
-                Modul und Pfad-Paaren.
+                Modul und Pfadpaaren.
             </para>
 
             <para>
@@ -144,7 +144,7 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <para>
                 Die aktuellen Einstellungen für den/die Controller-Ordner können mit
                 <methodname>getControllerDirectory()</methodname> abgerufen werden; das gibt ein
-                Array mit Modul und Verzeichnis-Paaren zurück.
+                Array mit Modul- und Verzeichnispaaren zurück.
             </para>
         </sect3>
 
@@ -152,31 +152,31 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             <title>addModuleDirectory() und getModuleDirectory()</title>
 
             <para>
-                Ein Aspekt des Frontcontrollers ist das man <link
-                     linkend="zend.controller.modular">eine modulare Verzeichnisstruktur definieren
-                     kann</link> für die Erstellung von alleinstehenden Komponenten; diese werden
-                "Module" (modules) genannt.
+                Ein Aspekt des Front-Controllers ist, dass man für die Erstellung von
+                alleinstehenden Komponenten <link linkend="zend.controller.modular">eine modulare
+                    Verzeichnisstruktur definieren kann</link>; diese werden "Module" (modules)
+                genannt.
             </para>
 
             <para>
                 Jedes Modul sollte in seinem eigenen Verzeichnis sein und die Verzeichnisstruktur
                 des Standardmoduls spiegeln -- z.B., sollte es mindestens ein
-                <filename>/controllers/</filename> Unterzeichnis haben und typischerweise ein
+                <filename>/controllers/</filename> Unterverzeichnis haben und typischerweise ein
                 <filename>/views/</filename> Unterverzeichnis und andere Anwendungsverzeichnisse.
             </para>
 
             <para>
-                <methodname>addModuleDirectory()</methodname> erlaubt es den Namen des
-                Verzeichnisses zu übergeben der ein oder mehrere Modulverzeichnisse enthält. Er
-                scannt dieses dann und fügt es den Controllerverzeichnissen des Frontcontrollers
+                <methodname>addModuleDirectory()</methodname> erlaubt es, den Namen des
+                Verzeichnisses zu übergeben, der ein oder mehrere Modulverzeichnisse enthält. Er
+                scannt dieses dann und fügt es den Controllerverzeichnissen des Front-Controllers
                 hinzu.
             </para>
 
             <para>
                 Später, wenn man den Pfad zu einem speziellen Modul oder dem aktuellen Modul
                 eruieren will, kann <methodname>getModuleDirectory()</methodname> aufgerufen werden
-                und optional ein Modulname übergeben werden für dass das spezielle Modulverzeichnis
-                geholt werden soll.
+                und optional ein Modulname übergeben werden, für welches das spezielle
+                Modulverzeichnis geholt werden soll.
             </para>
         </sect3>
 
@@ -189,22 +189,22 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
                 erledigt die Schwerstarbeit des Front-Controllers. Sie nimmt als Parameter optional
                 ein <link linkend="zend.controller.request">Anfrage-Object</link> und/oder ein <link
                     linkend="zend.controller.response">Antwort-Objekt</link> entgegen,
-                was dem entwickler erlaubt, wahlweise eigene Objekte für diese beiden Aufgaben zu
+                was es dem Entwickler erlaubt, wahlweise eigene Objekte für diese beiden Aufgaben zu
                 bestimmen.
             </para>
 
             <para>
                 Wenn kein Anfrage- oder Antwort-Objekt angegeben werden, wird
                 <methodname>dispatch()</methodname> nach vorher registrierten Objekten suchen und
-                diese benutzen oder Standard-Versionen für seinen Prozess instanzieren (in beiden
-                Fällen wird der <acronym>HTTP</acronym> Dialekt als Standard benutzt).
+                diese benutzen oder Standardversionen für seinen Prozess instanzieren (in beiden
+                Fällen wird der <acronym>HTTP</acronym>-Dialekt als Standard benutzt).
             </para>
 
             <para>
                 Auf ähnliche Art sucht <methodname>dispatch()</methodname> nach registrierten <link
                     linkend="zend.controller.router">Router</link>- und <link
                     linkend="zend.controller.dispatcher">Dispatcher</link>-Objekten und instanziert
-                die Standard-Versionen wenn keine gefunden werden.
+                die Standardversionen wenn keine gefunden werden.
             </para>
 
             <para>
@@ -218,11 +218,11 @@ $front->addControllerDirectory('../modules/foo/controllers', 'foo');
             </itemizedlist>
 
             <para>
-                Das Routing geschieht genau einmal, indem die Werte aus dem Anfrage-Objekt benutzt,
+                Das Routing geschieht genau einmal, indem die Werte aus dem Anfrageobjekt benutzt,
                 die zum Zeitpunkt des Aufrufes von <methodname>dispatch()</methodname> vorhanden
                 waren. Das Dispatchen geschieht in einer Schleife; eine Anfrage kann entweder
                 melden, dass es mehrere Aktionen gibt, die ausgeführt werden sollen, oder der
-                Controller oder ein Plugin können das Anfrage-Objekt zurücksetzen, um zu erzwingen,
+                Controller oder ein Plugin können das Anfrageobjekt zurücksetzen, um zu erzwingen,
                 dass noch zusätzliche Aktionen ausgeführt werden sollen. Wenn alles erledigt ist,
                 gibt der Front-Controller eine Antwort zurück.
             </para>
@@ -306,7 +306,7 @@ Zend_Controller_Front::run('../application/controllers');
                     Objekt, das während des Dispatch-Prozesses verwendet wird und um das aktuelle
                     Objekt zu erhalten. Wenn das Requestobjekt gesetzt wird, kann ein
                     Request-Klassenname übergeben werden, und in diesem Fall wird die Methode die
-                    Klassendatei laden und Sie initialisieren.
+                    Klassendatei laden und sie initialisieren.
                 </para>
             </listitem>
 
@@ -329,7 +329,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <methodname>setBaseUrl()</methodname> und
-                    <methodname>setBaseUrl()</methodname> erlauben es, die <link
+                    <methodname>getBaseUrl()</methodname> erlauben es, die <link
                         linkend="zend.controller.request.http.baseurl">Basis
                     <acronym>URL</acronym></link> zu setzen, die beim Routen der Anfrage außen vor
                     gelassen wird, sowie den aktuellen Wert dieser Einstellung zu erhalten. Diese
@@ -340,7 +340,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     <methodname>setDispatcher()</methodname> und
-                    <methodname>setDispatcher()</methodname> kann die <link
+                    <methodname>getDispatcher()</methodname> kann die <link
                         linkend="zend.controller.dispatcher">Dispatcher</link>-Klasse oder das
                     Dispatcher-Objekt setzen, das den Dispatch-Prozess übernimmt. Wie oben, so kann
                     auch hier ein Klassenname oder ein Objekt übergeben werden; die get-Methode gibt
@@ -357,7 +357,7 @@ Zend_Controller_Front::run('../application/controllers');
             <listitem>
                 <para>
                     Über <methodname>setResponse()</methodname> und
-                    <methodname>setResponse()</methodname> kann das <link
+                    <methodname>getResponse()</methodname> kann das <link
                     linkend="zend.controller.response">Antwort-Objekt</link> gesetzt bzw. erhalten
                     werden. Auch hier kann wieder ein Klassenname oder ein Objekt übergeben werden.
                 </para>
@@ -420,14 +420,14 @@ Zend_Controller_Front::run('../application/controllers');
     </sect2>
 
     <sect2 id="zend.controller.front.methods.params">
-        <title>Front Controller-Parameter</title>
+        <title>Front-Controller-Parameter</title>
 
         <para>
             In der Einführung haben wir erwähnt, dass der Front-Controller auch als eine Registry
             für die verschiedenen Controller-Komponenten fungiert. Das macht er über eine Gruppe von
             "param"-Methoden, de es erlauben, beliebige Daten -- Objekte und Variablen -- im
             Front-Controller zu registrieren, die dann zu jeder Zeit im Dispatch-Prozess abgerufen
-            werden können. Diese Werte werden weitergegeben an den Router, den Dispatcher, und an
+            werden können. Diese Werte werden weitergegeben an den Router, den Dispatcher und an
             die Aktions-Controller. Diese Methodengruppe besteht aus:
         </para>
 
@@ -472,7 +472,7 @@ Zend_Controller_Front::run('../application/controllers');
         </itemizedlist>
 
         <para>
-            Es gibt mehrere vordefinierte Parameter (die ebenfalls gesetzt werden können), die
+            Es gibt mehrere vordefinierte Parameter, die ebenfalls gesetzt werden können und die
             speziellen Einfluss auf den Dispatch-Prozess haben:
         </para>
 
@@ -558,7 +558,7 @@ class My_Controller_Front extends Zend_Controller_Front
             Typischerweise muss der Front-Controller nicht erweitert werden, es sei denn, es ist
             gewünscht, neue Funktionalität (wie zum Beispiel einen Plugin-Autoloader oder einen Weg,
             Action-Helper-Pfade anzugeben) hinzuzufügen. Einige Gelegenheiten, bei denen das
-            Standard-Verhalten geändert werden könnte, wären zum Beispiel die Art, wie Controller
+            Standardverhalten geändert werden könnte, wären zum Beispiel die Art, wie Controller
             geladen oder deren Pfade gespeichert werden, oder welcher Standard-Router und/oder
             Dispatcher benutzt werden.
         </para>

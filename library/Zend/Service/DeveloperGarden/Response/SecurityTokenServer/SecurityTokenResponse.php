@@ -71,7 +71,7 @@ class Zend_Service_DeveloperGarden_Response_SecurityTokenServer_SecurityTokenRes
     public function getTokenData()
     {
         if (empty($this->tokenData)) {
-            require_once 'Zend/Services/DeveloperGarden/Response/Exception.php';
+            require_once 'Zend/Service/DeveloperGarden/Response/Exception.php';
             throw new Zend_Service_DeveloperGarden_Response_Exception('No valid tokenData found.');
         }
 

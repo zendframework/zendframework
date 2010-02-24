@@ -305,8 +305,9 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
         <para>
             Documentos <acronym>PDF</acronym> suportam as fontes PostScript Type 1 e TrueType, assim
             como dois tipos especiais do <acronym>PDF</acronym>, o Type 3 e as fontes compostas.
-            Existem também 14 fontes padrão Type 1 inclusas em todos os visualizadores de PDF:
-            Courier (4 estilos), Helvetica (4 estilos), Times (4 estilos), Symbol, e Zapf Dingbats.
+            Existem também 14 fontes padrão Type 1 inclusas em todos os visualizadores de
+            <acronym>PDF</acronym>: Courier (4 estilos), Helvetica (4 estilos), Times (4 estilos),
+            Symbol, e Zapf Dingbats.
         </para>
 
         <para>
@@ -314,7 +315,8 @@ public function setFont(Zend_Pdf_Resource_Font $font, $fontSize);
             <acronym>PDF</acronym> padrão, assim como às suas fontes personalizadas TrueType.
             Objetos do tipo Font são obtidos via um dos dois métodos fábrica:
             <methodname>Zend_Pdf_Font::fontWithName($fontName)</methodname> para as 14 fontes padrão
-            ou <methodname>Zend_Pdf_Font::fontWithPath($filePath)</methodname> para fontes
+            do <acronym>PDF</acronym> ou
+            <methodname>Zend_Pdf_Font::fontWithPath($filePath)</methodname> para fontes
             personalizadas.
         </para>
 
@@ -356,7 +358,7 @@ $pdfPage->setFont($font, 36);
 
         <para>
             Você também pode usar qualquer fonte individual TrueType (que normalmente possui a
-            extensão '.ttf') ou uma fonte OpenType (de extansão '.otf') se ela contiver o mesmo
+            extensão '.ttf') ou uma fonte OpenType (de extensão '.otf') se ela contiver o mesmo
             contorno das TrueType. Atualmente sem suporte, mas planejadas para um lançamento futuro
             são os arquivos .dfont do Mac OS X e os arquivos Microsoft TrueType Collection (extensão
             '.ttc').
@@ -684,9 +686,10 @@ $pdfPage->drawImage($image, 100, 100, 400, 300);
         </example>
 
         <para>
-            <emphasis>Importante! O suporte a JPEG requer que a extensão PHP GD esteja
-                configurada.</emphasis> <emphasis>Importante! O suporte a PNG requer que extensão
-                ZLIB esteja configurada para trabalhar com imagens com canal Alpha.</emphasis>
+            <emphasis>Importante! O suporte a JPEG requer que a extensão <acronym>PHP</acronym> GD
+                esteja configurada.</emphasis> <emphasis>Importante! O suporte a PNG requer que
+                extensão ZLIB esteja configurada para trabalhar com imagens com canal
+                Alpha.</emphasis>
         </para>
 
         <para>
@@ -787,10 +790,10 @@ public function setLineDashingPattern($pattern, $phase = 0);
                             os envolvem caminhos complexos ou com auto-intersecção, como os que são
                             apresentados na Figura 4.10 (na Referência do <acronym>PDF</acronym>).
                             Para um caminho que consiste em uma estrela de cinco pontas, desenhada
-                            com cinco linhas retas conectadas interseccionando-se, a regra considera
-                            como sendo o interior toda a área delimitada pela estrela, incluindo o
-                            pentágono no centro. Para um caminho composto de dois círculos
-                            concêntricos, as áreas delimitadas por ambos os círculos são
+                            com cinco linhas retas conectadas se inter-seccionando, a regra
+                            considera como sendo o interior toda a área delimitada pela estrela,
+                            incluindo o pentágono no centro. Para um caminho composto de dois
+                            círculos concêntricos, as áreas delimitadas por ambos os círculos são
                             consideradas como sendo o interior, desde que ambos os círculos sejam
                             desenhados na mesma direção. Se os círculos forem desenhados em direções
                             opostas, apenas a forma da "rosquinha" entre eles está no interior, de
@@ -923,7 +926,7 @@ public function skew($x, $y, $xAngle, $yAngle);
 
         <para>
             A qualquer hora os estados gráficos de uma página (fonte atual, tamanho da fonte, cor
-            das linhas, cor de preenchimento, estilo de linha, rotação da página, e área de clip)
+            das linhas, cor de preenchimento, estilo de linha, rotação da página, e área de corte)
             podem ser salvos e então restaurados. Operações "Salvar" colocam os dados em uma pilha,
             as restaurações recuperam os estados da pilha.
         </para>

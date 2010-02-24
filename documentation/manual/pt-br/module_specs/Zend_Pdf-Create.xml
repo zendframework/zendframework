@@ -6,12 +6,12 @@
 
     <para>
         A classe <classname>Zend_Pdf</classname> representa os documentos <acronym>PDF</acronym> e
-        provê funcionalidades para manupulação do documento.
+        provê funcionalidades para manipulação do documento.
     </para>
 
     <para>
-        Para criar um novo documento, um novo objeto <code>Zend_Pdf</code> deve ser instanciado
-        primeiro.
+        Para criar um novo documento, um novo objeto <classname>Zend_Pdf</classname> deve ser
+        instanciado primeiro.
     </para>
 
     <para>

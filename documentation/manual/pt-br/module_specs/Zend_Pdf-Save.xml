@@ -1,39 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 20854 -->
+<!-- Reviewed: no -->
 <sect1 id="zend.pdf.save">
-    <title>Salvar mudanças no documento PDF.</title>
+    <title>Salvar Mudanças em Documentos PDF</title>
+
     <para>
-    Existem dois métodos que fornecem a persistência para mudanças feitas no documento PDF. Eles são os métodos
-    <code>Zend_Pdf::save()</code>e o <code>Zend_Pdf::render()</code>.
+        Existem dois métodos que salvam as mudanças feitas em documentos <acronym>PDF</acronym>: os
+        métodos <methodname>Zend_Pdf::save()</methodname> e
+        <methodname>Zend_Pdf::render()</methodname>.
     </para>
 
     <para>
-    O <code>Zend_Pdf::save($filename, $updateOnly = false)</code> salva do documento PDF em um arquivo. Se o argumento $updateOnly
-    for verdadeiro, então apenas os novos segmentos do PDF serão acrescentados ao arquivo. De outra forma, o arquivo é sobrescrito.
+        <methodname>Zend_Pdf::save($filename, $updateOnly = false)</methodname> salva o documento
+        <acronym>PDF</acronym> em um arquivo. Se $updateOnly for
+        <constant>TRUE</constant>, então apenas o novo segmento do arquivo <acronym>PDF</acronym>
+        será acrescentado ao arquivo. De outra forma, o arquivo é sobrescrito.
     </para>
 
     <para>
-    O <code>Zend_Pdf::render($newSegmentOnly = false)</code> retorna o documento PDF como um texto(string). Se
-    $newSegmentOnly for verdadeiro, então apenas os novos segmentos do PDF serão retornados.
+        <methodname>Zend_Pdf::render($newSegmentOnly = false)</methodname> retorna o documento
+        <acronym>PDF</acronym> como uma string. Se $newSegmentOnly for <constant>TRUE</constant>,
+        então apenas o novo segmento do arquivo <acronym>PDF</acronym> será retornado.
     </para>
 
     <example id="zend.pdf.save.example-1">
-        <title>Salvar um documento PDF.</title>
-        <programlisting role="php"><![CDATA[<?php
+        <title>Salvando Documentos PDF</title>
+
+        <programlisting language="php"><![CDATA[
 ...
-// Load PDF document.
+// Carrega o documento PDF
 $pdf = Zend_Pdf::load($fileName);
 ...
-// Update document
+// Atualiza o documento PDF
 $pdf->save($fileName, true);
-// Save document as a new file
+// Salva o documento como um novo arquivo
 $pdf->save($newFileName);
 
-// Return PDF document as a string.
+// Retorna o documento PDF como uma string
 $pdfString = $pdf->render();
 
-...]]>
-        </programlisting>
+...
+]]></programlisting>
     </example>
-
 </sect1>
 <!--
 vim:se ts=4 sw=4 et:

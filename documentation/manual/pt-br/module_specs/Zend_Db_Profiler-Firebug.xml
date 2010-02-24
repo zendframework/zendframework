@@ -6,14 +6,14 @@
 
     <para>
         <classname>Zend_Db_Profiler_Firebug</classname> envia informações de análise de
-        desempenho para o 
+        desempenho para o
         <ulink url="http://www.getfirebug.com/">Firebug</ulink> <ulink
             url="http://getfirebug.com/logging.html">Console</ulink>.
     </para>
 
     <para>
-        Todos os dados são enviados via componente 
-        <classname>Zend_Wildfire_Channel_HttpHeaders</classname> que usa cabeçalhos 
+        Todos os dados são enviados via componente
+        <classname>Zend_Wildfire_Channel_HttpHeaders</classname> que usa cabeçalhos
         <acronym>HTTP</acronym> para assegurar que o conteúdo da página não fique
         confuso. É possivel depurar requisições <acronym>AJAX</acronym> que exigem respostas
         <acronym>JSON</acronym> e <acronym>XML</acronym> com esta abordagem.
@@ -59,8 +59,8 @@ $db->setProfiler($profiler)
 
 // Despache seu controlador frontal
 
-// Todas as consultas a banco de dados em seus arquivos de modelo, visão e controle
-// serão agora analisadas e enviadas para o Firebug
+// Todas as consultas a banco de dados em seus arquivos de modelo,
+// visão e controle serão agora analisadas e enviadas para o Firebug
 ]]></programlisting>
     </example>
 

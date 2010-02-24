@@ -664,13 +664,14 @@ CREATE TABLE bugs_products (
                 O primeiro argumento para este método é uma string contendo uma
                 declaração <acronym>SELECT</acronym>. Como alternativa, o primeiro argumento pode
                 ser um objeto da classe <link linkend="zend.db.select">Zend_Db_Select</link>.
-                A classe adaptadora converte automaticamente esse objeto em uma representação de string
-                da declaração <acronym>SELECT</acronym>.
+                A classe adaptadora converte automaticamente esse objeto em uma representação de
+                string da declaração <acronym>SELECT</acronym>.
             </para>
 
             <para>
                 O segundo argumento para <methodname>fetchAll()</methodname> é um matriz de
-                valores para substituir por curingas de parâmetro na declaração <acronym>SQL</acronym>.
+                valores para substituir por curingas de parâmetro na declaração
+                <acronym>SQL</acronym>.
             </para>
 
             <example id="zend.db.adapter.select.fetchall.example">
@@ -712,8 +713,8 @@ $result = $db->fetchAll($sql, 2);
                     <para>
                         Note que se sua lista de seleção contém mais de uma
                         coluna com o mesmo nome, por exemplo se elas são de
-                        duas tabelas diferentes em um <acronym>JOIN</acronym>, pode haver somente uma
-                        entrada na matriz associativo para o nome dado.
+                        duas tabelas diferentes em um <acronym>JOIN</acronym>, pode haver somente
+                        uma entrada na matriz associativa para o nome dado.
                         Se você usa o modo <acronym>FETCH_ASSOC</acronym>, deve especificar
                         apelidos de coluna em sua consulta <acronym>SELECT</acronym> para garantir
                         que os nomes resultem em chaves de matriz únicas.
@@ -1361,12 +1362,12 @@ echo $sql;
 
             <para>
                 Os valores podem precisar ser citados ou não citados de acordo com o
-                contexto de tipo de dados <acronym>SQL</acronym> em que eles são usados. Por exemplo, em algumas
-                marcas de SGBDR, um valor inteiro não deve ser citado como uma string
-                se for comparado a uma coluna ou expressão do tipo inteiro.
-                Em outras palavras, o código seguinte é um erro em algumas implementações <acronym>SQL</acronym>,
-                assumindo que <property>intColumn</property> tem um tipo de dados
-                <acronym>SQL</acronym> <constant>INTEGER</constant>
+                contexto de tipo de dados <acronym>SQL</acronym> em que eles são usados. Por
+                exemplo, em algumas marcas de SGBDR, um valor inteiro não deve ser citado como uma
+                string se for comparado a uma coluna ou expressão do tipo inteiro.
+                Em outras palavras, o código seguinte é um erro em algumas implementações
+                <acronym>SQL</acronym>, assumindo que <property>intColumn</property> tem um tipo de
+                dados <acronym>SQL</acronym> <constant>INTEGER</constant>
 
                 <programlisting language="php"><![CDATA[
 SELECT * FROM atable WHERE intColumn = '123'

@@ -621,6 +621,11 @@ abstract class Zend_File_Transfer_Adapter_Abstract
             if (array_key_exists('validators', $content) &&
                 in_array('Zend_Validate_File_Count', $content['validators'])) {
                 $validator = $this->_validators['Zend_Validate_File_Count'];
+                $count     = $content;
+                if (empty($content['tmp_name'])) {
+                    continue;
+                }
+
                 if (array_key_exists('destination', $content)) {
                     $checkit = $content['destination'];
                 } else {
@@ -628,8 +633,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 }
 
                 $checkit .= DIRECTORY_SEPARATOR . $content['name'];
-                $validator->addFile($checkit);
-                $count = $content;
+                    $validator->addFile($checkit);
             }
         }
 

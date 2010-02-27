@@ -54,8 +54,15 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
         'salt'                => false
     );
 
+    /**
+     * Internal compression
+     *
+     * @var array
+     */
+    protected $_compression;
+
     protected static $_srandCalled = false;
-    
+
     /**
      * Class constructor
      *
@@ -75,6 +82,11 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
         } elseif (!is_array($options)) {
             require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Invalid options argument provided to filter');
+        }
+
+        if (array_key_exists('compression', $options)) {
+            $this->setCompression($options['compression']);
+            unset($options['compress']);
         }
 
         $this->setEncryption($options);
@@ -181,15 +193,48 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
     }
 
     /**
+     * Returns the compression
+     *
+     * @return array
+     */
+    public function getCompression()
+    {
+        return $this->_compression;
+    }
+
+    /**
+     * Sets a internal compression for values to encrypt
+     *
+     * @param string|array $compression
+     * @return Zend_Filter_Encrypt_Mcrypt
+     */
+    public function setCompression($compression)
+    {
+        if (is_string($this->_compression)) {
+            $compression = array('adapter' => $compression);
+        }
+
+        $this->_compression = $compression;
+        return $this;
+    }
+
+    /**
      * Defined by Zend_Filter_Interface
      *
-     * Encrypts the file $value with the defined settings
+     * Encrypts $value with the defined settings
      *
-     * @param  string $value Full path of file to change
-     * @return string The filename which has been set, or false when there were errors
+     * @param  string $value The content to encrypt
+     * @return string The encrypted content
      */
     public function encrypt($value)
     {
+        // compress prior to encryption
+        if (!empty($this->_compression)) {
+            require_once 'Zend/Filter/Compress.php';
+            $compress = new Zend_Filter_Compress($this->_compression);
+            $value    = $compress->filter($value);
+        }
+
         $cipher  = $this->_openCipher();
         $this->_initCipher($cipher);
         $encrypted = mcrypt_generic($cipher, $value);
@@ -202,10 +247,10 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
     /**
      * Defined by Zend_Filter_Interface
      *
-     * Decrypts the file $value with the defined settings
+     * Decrypts $value with the defined settings
      *
-     * @param  string $value Full path of file to change
-     * @return string The filename which has been set, or false when there were errors
+     * @param  string $value Content to decrypt
+     * @return string The decrypted content
      */
     public function decrypt($value)
     {
@@ -214,6 +259,13 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
         $decrypted = mdecrypt_generic($cipher, $value);
         mcrypt_generic_deinit($cipher);
         $this->_closeCipher($cipher);
+
+        // decompress after decryption
+        if (!empty($this->_compression)) {
+            require_once 'Zend/Filter/Decompress.php';
+            $decompress = new Zend_Filter_Decompress($this->_compression);
+            $decrypted  = $decompress->filter($decrypted);
+        }
 
         return $decrypted;
     }
@@ -292,10 +344,10 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
 
         return $this;
     }
-    
+
     /**
      * _srand() interception
-     * 
+     *
      * @see ZF-8742
      */
     protected function _srand()
@@ -303,7 +355,7 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
         if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
             return;
         }
-        
+
         if (!self::$_srandCalled) {
             srand((double) microtime() * 1000000);
             self::$_srandCalled = true;

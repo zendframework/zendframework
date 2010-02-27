@@ -1241,7 +1241,7 @@ print $date->toString("'Era:GGGG='GGGG, ' Date:yy.MMMM.dd'yy.MMMM.dd");
 
                     <row>
                         <entry>A</entry>
-                        <entry>Millisecond</entry>
+                        <entry>Milliseconds from the actual day</entry>
                         <entry><constant>Zend_Date::MILLISECOND</constant></entry>
                         <entry><emphasis>20563</emphasis></entry>
                     </row>

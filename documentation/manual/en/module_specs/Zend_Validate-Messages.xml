@@ -82,7 +82,7 @@ $translator = new Zend_Translate(
     'array',
     '/resources/languages',
     $language,
-    array('scan' => Zend_Locale::LOCALE_DIRECTORY)
+    array('scan' => Zend_Translate::LOCALE_DIRECTORY)
 );
 Zend_Validate_Abstract::setDefaultTranslator($translator);
 ]]></programlisting>

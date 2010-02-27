@@ -49,7 +49,7 @@ require_once 'Zend/Auth.php';
  * An AMF gateway server implementation to allow the connection of the Adobe Flash Player to
  * Zend Framework
  *
- * @todo       Make the relection methods cache and autoload.
+ * @todo       Make the reflection methods cache and autoload.
  * @package    Zend_Amf
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -108,7 +108,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
     protected $_session = false;
 
     /**
-     * Namespace allows all AMF calls to not clobber other php session variables
+     * Namespace allows all AMF calls to not clobber other PHP session variables
      * @var Zend_Session_NameSpace default session namespace zend_amf
      */
     protected $_sesionNamespace = 'zend_amf';
@@ -228,7 +228,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
      * Check if the ACL allows accessing the function or method
      *
      * @param string|object $object Object or class being accessed
-     * @param string $function Function or method being acessed
+     * @param string $function Function or method being accessed
      * @return unknown_type
      */
     protected function _checkAcl($object, $function)
@@ -442,7 +442,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
     }
 
     /**
-     * Handle AMF authenticaton
+     * Handle AMF authentication
      *
      * @param string $userid
      * @param string $password
@@ -488,7 +488,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
         // create a response object to place the output from the services.
         $response = $this->getResponse();
 
-        // set reponse encoding
+        // set response encoding
         $response->setObjectEncoding($objectEncoding);
 
         $responseBody = $request->getAmfBodies();
@@ -673,7 +673,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
     }
 
     /**
-     * Public access method to private Zend_Amf_Server_Response refrence
+     * Public access method to private Zend_Amf_Server_Response reference
      *
      * @param  string|Zend_Amf_Server_Response $response
      * @return Zend_Amf_Server
@@ -695,7 +695,7 @@ class Zend_Amf_Server implements Zend_Server_Interface
     }
 
     /**
-     * get a refrence to the Zend_Amf_response instance
+     * get a reference to the Zend_Amf_response instance
      *
      * @return Zend_Amf_Server_Response
      */

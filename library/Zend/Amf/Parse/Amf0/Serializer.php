@@ -27,7 +27,7 @@ require_once 'Zend/Amf/Constants.php';
 require_once 'Zend/Amf/Parse/Serializer.php';
 
 /**
- * Serializer php misc types back to there corresponding AMF0 Type Marker.
+ * Serializer PHP misc types back to there corresponding AMF0 Type Marker.
  *
  * @uses       Zend_Amf_Parse_Serializer
  * @package    Zend_Amf
@@ -63,7 +63,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
     public function writeTypeMarker($data, $markerType = null)
     {
         if (null !== $markerType) {
-            //try to refrence the given object
+            //try to reference the given object
             if( !$this->writeObjectReference($data, $markerType) ) {
 
                 // Write the Type Marker to denote the following action script data type
@@ -206,7 +206,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
     }
 
     /**
-     * Write a php array with string or mixed keys.
+     * Write a PHP array with string or mixed keys.
      *
      * @param object $data
      * @return Zend_Amf_Parse_Amf0_Serializer
@@ -215,7 +215,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
     {
         // Loop each element and write the name of the property.
         foreach ($object as $key => $value) {
-            // skip variables starting with an _ provate transient
+            // skip variables starting with an _ private transient
             if( $key[0] == "_") continue;
             $this->_stream->writeUTF($key);
             $this->writeTypeMarker($value);
@@ -241,7 +241,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
             // write the length of the array
             $this->_stream->writeLong(0);
         } else {
-            // Write the length of the numberic array
+            // Write the length of the numeric array
             $this->_stream->writeLong($length);
             for ($i=0; $i<$length; $i++) {
                 $value = isset($array[$i]) ? $array[$i] : null;
@@ -293,7 +293,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
 
     /**
      * Encountered and AMF3 Type Marker use AMF3 serializer. Once AMF3 is
-     * enountered it will not return to AMf0.
+     * encountered it will not return to AMf0.
      *
      * @param  string $data
      * @return Zend_Amf_Parse_Amf0_Serializer

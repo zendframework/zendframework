@@ -411,20 +411,6 @@ class Zend_Mail_Protocol_Pop3
     /**
      * Make a RETR call for retrieving a full message with headers and body
      *
-     * @deprecated since 1.1.0; this method has a typo - please use retrieve()
-     * @param  int $msgno  message number
-     * @return string message
-     * @throws Zend_Mail_Protocol_Exception
-     */
-    public function retrive($msgno)
-    {
-        return $this->retrieve($msgno);
-    }
-
-
-    /**
-     * Make a RETR call for retrieving a full message with headers and body
-     *
      * @param  int $msgno  message number
      * @return string message
      * @throws Zend_Mail_Protocol_Exception

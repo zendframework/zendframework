@@ -68,30 +68,36 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     /**
      * Constructor
      *
-     * @param string $target
-     * @param array $rules
+     * @param string|array $options Options to set
      */
-    public function __construct($target = null, Array $rules = array(), $throwTargetExceptionsOn = null, $targetReplacementIdentifer = null)
+    public function __construct($options = null)
     {
-        if ($target instanceof Zend_Config) {
-            $this->setConfig($target);
-        } else {
-            if ((null !== $target) && is_string($target)) {
-                $this->setTarget($target);
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        } else if (!is_array($options)) {
+            $options = func_get_args();
+            $temp    = array();
+
+            if (!empty($options)) {
+                $temp['target'] = array_shift($options);
             }
 
-            if (null !== $rules) {
-                $this->addRules($rules);
+            if (!empty($options)) {
+                $temp['rules'] = array_shift($options);
             }
 
-            if ($throwTargetExceptionsOn !== null) {
-                $this->setThrowTargetExceptionsOn($throwTargetExceptionsOn);
+            if (!empty($options)) {
+                $temp['throwTargetExceptionsOn'] = array_shift($options);
             }
 
-            if ($targetReplacementIdentifer != '') {
-                $this->setTargetReplacementIdentifier($targetReplacementIdentifer);
+            if (!empty($options)) {
+                $temp['targetReplacementIdentifier'] = array_shift($options);
             }
+
+            $options = $temp;
         }
+
+        $this->setOptions($options);
     }
 
     /**
@@ -123,38 +129,60 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
     /**
      * Use Zend_Config object to set object state
      *
+     * @deprecated Use setOptions() instead
      * @param  Zend_Config $config
      * @return Zend_Filter_Inflector
      */
     public function setConfig(Zend_Config $config)
     {
-        foreach ($config as $key => $value) {
+        return $this->setOptions($config);
+    }
+
+    /**
+     * Set options
+     *
+     * @param  array $options
+     * @return Zend_Filter_Inflector
+     */
+    public function setOptions($options) {
+        if ($options instanceof Zend_Config) {
+            $options = $options->toArray();
+        }
+
+        foreach ($options as $key => $value) {
             switch ($key) {
                 case 'target':
                     $this->setTarget($value);
                     break;
+
                 case 'filterPrefixPath':
                     if (is_scalar($value)) {
                         break;
                     }
-                    $paths = $value->toArray();
-                    foreach ($paths as $prefix => $path) {
+
+                    foreach ($value as $prefix => $path) {
                         $this->addFilterPrefixPath($prefix, $path);
                     }
+
                     break;
+
                 case 'throwTargetExceptionsOn':
                     $this->setThrowTargetExceptionsOn($value);
                     break;
+
                 case 'targetReplacementIdentifier':
                     $this->setTargetReplacementIdentifier($value);
                     break;
+
                 case 'rules':
-                    $this->addRules($value->toArray());
+                    $this->addRules($value);
                     break;
+
                 default:
                     break;
             }
         }
+
         return $this;
     }
 
@@ -202,7 +230,10 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
      */
     public function setTargetReplacementIdentifier($targetReplacementIdentifier)
     {
-        $this->_targetReplacementIdentifier = (string) $targetReplacementIdentifier;
+        if ($targetReplacementIdentifier) {
+            $this->_targetReplacementIdentifier = (string) $targetReplacementIdentifier;
+        }
+
         return $this;
     }
 
@@ -502,5 +533,4 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
 
         return $ruleObject;
     }
-
 }

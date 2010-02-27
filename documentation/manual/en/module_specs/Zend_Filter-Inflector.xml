@@ -455,7 +455,7 @@ $inflector->addRules(array(
             You can use <classname>Zend_Config</classname> to set rules, filter prefix
             paths, and other object state in your inflectors, either by passing
             a <classname>Zend_Config</classname> object to the constructor or
-            <methodname>setConfig()</methodname>. The following settings may be specified:
+            <methodname>setOptions()</methodname>. The following settings may be specified:
         </para>
 
         <itemizedlist>
@@ -505,9 +505,9 @@ $inflector->addRules(array(
 $config    = new Zend_Config($options);
 $inflector = new Zend_Filter_Inflector($config);
 
-// Or with setConfig():
+// Or with setOptions():
 $inflector = new Zend_Filter_Inflector();
-$inflector->setConfig($config);
+$inflector->setOptions($config);
 ]]></programlisting>
         </example>
     </sect2>

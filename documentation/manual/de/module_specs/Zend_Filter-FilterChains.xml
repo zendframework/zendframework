@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21123 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.filter.filter_chains">
     <title>Filter Ketten</title>
@@ -10,8 +10,9 @@
         und alphabetische Zeichen haben sollte. <classname>Zend_Filter</classname> bietet eine
         einfache Methode mit der Filter zusammengekettet werden können. Der folgende Code zeigt wie
         eine Verkettung von zwei Filtern für das übermitteln eines Benutzernamens funktioniert:
+    </para>
 
-        <programlisting language="php"><![CDATA[
+    <programlisting language="php"><![CDATA[
 // Eine Filterkette erstellen und die Filter der Kette hinzufügen
 $filterChain = new Zend_Filter();
 $filterChain->addFilter(new Zend_Filter_Alpha())
@@ -21,6 +22,7 @@ $filterChain->addFilter(new Zend_Filter_Alpha())
 $username = $filterChain->filter($_POST['username']);
 ]]></programlisting>
 
+    <para>
         Filter werden in der Reihenfolge ausgeführt in der Sie <classname>Zend_Filter</classname>
         hinzugefügt werden. Im obigen Beispiel wird dem Benutzernamen zuerst jedes
         nicht-alphabetische Zeichen entfernt und anschließend jeder Großbuchstabe in einen

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20760 -->
+<!-- EN-Revision: 21119 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.serializer.introduction">
     <title>Einführung</title>
@@ -11,9 +11,7 @@
     </para>
 
     <example id="zend.serializer.introduction.example.dynamic">
-        <title>
-            Verwenden des dynamischen Interfaces von <classname>Zend_Serializer</classname>
-        </title>
+        <title>Verwenden des dynamischen Interfaces von Zend_Serializer</title>
 
         <para>
             Um einen Serializer zu instanzieren sollte man die Factory Methode mit dem Namen des
@@ -39,9 +37,9 @@ try {
     </example>
 
     <para>
-        Die Methode <methodname>serialize</methodname> erzeugt einen speicherbaren String. Um diese
-        serialisierten Daten wiederherzustellen kann einfach die Methode
-        <methodname>unserialize</methodname> aufgerufen werden.
+        Die Methode <methodname>serialize()</methodname> erzeugt einen speicherbaren String. Um
+        diese serialisierten Daten wiederherzustellen kann einfach die Methode
+        <methodname>unserialize()</methodname> aufgerufen werden.
     </para>
 
     <para>
@@ -52,8 +50,9 @@ try {
 
     <para>
         Um einen gegebenen Serialisierungs-Adapter zu konfigurieren kann optional ein Array oder
-        eine Instanz von <classname>Zend_Config</classname> an die <methodname>factory</methodname>
-        oder die Methoden <methodname>un-/serialize</methodname> übergeben werden:
+        eine Instanz von <classname>Zend_Config</classname> an die
+        <methodname>factory()</methodname> oder die Methoden <methodname>serialize()</methodname>
+        und <methodname>unserialize()</methodname> übergeben werden:
     </para>
 
     <programlisting language="php"><![CDATA[
@@ -62,7 +61,11 @@ $serializer = Zend_Serializer::factory('Wddx', array(
 ));
 
 try {
-    $serialized = $serializer->serialize($data, array('comment' => 'change comment'));
+    $serialized = $serializer->serialize(
+        $data,
+        array('comment' => 'change comment')
+    );
+
     $unserialized = $serializer->unserialize(
         $serialized,
         array(/* Optionen für die Deserialisierung */)
@@ -73,12 +76,12 @@ try {
 ]]></programlisting>
 
     <para>
-        Optionen welche an <methodname>factory</methodname> übergeben werden sind für das
+        Optionen welche an <methodname>factory()</methodname> übergeben werden sind für das
         instanzierte Objekt gültig. Man kann diese Optionen verändern indem die
         <methodname>setOption(s)</methodname> Methoden verwendet werden. Um ein oder mehrere
         Optionen für einen einzelnen Aufruf zu verändern, können diese als zweites Argument
-        an die Methoden <methodname>serialize</methodname> oder <methodname>unserialize</methodname>
-        übergeben werden.
+        an die Methoden <methodname>serialize()</methodname> oder
+        <methodname>unserialize()</methodname> übergeben werden.
     </para>
 
     <example id="zend.serializer.introduction.example.static.php">

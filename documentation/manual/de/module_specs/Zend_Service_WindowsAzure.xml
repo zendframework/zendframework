@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20810 -->
+<!-- EN-Revision: 21123 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.service.windowsazure" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Zend_Service_WindowsAzure</title>
@@ -8,7 +8,7 @@
         <title>Einführung</title>
 
         <para>
-            Windows Azure ist der Name einer Microsoft Software + Service Plattform, einem
+            Windows Azure ist der Name von Microsoft's Software + Service Plattform, einem
             Betriebssystem in einem Cloud anbietenden Services für das Hosten, Managen von
             skalierbaren Speichern mit Unterstützung für einfache Blobs, Tabellen und Queues, sowie
             als Management Infrastruktur für provisionierte und geo-verteilte Cloud-basierte
@@ -27,9 +27,9 @@
             <listitem>
                 <para>
                     Man kann eigene Anwendungen entwickeln indem
-                    <classname>Zend_Service_WindowsAzure</classname> und die Windows Azure SDK
-                    verwendet wird, welche eine lokale Entwicklungsumgebung der von der Windows
-                    Azure Cloud Infrastruktur angebotenen Services anbietet.
+                    <classname>Zend_Service_WindowsAzure</classname> und die Windows Azure
+                    <acronym>SDK</acronym> verwendet wird, welche eine lokale Entwicklungsumgebung
+                    der von der Windows Azure Cloud Infrastruktur angebotenen Services anbietet.
                 </para>
             </listitem>
 
@@ -46,8 +46,8 @@
             Der erste Fall benötigt die Installation der <ulink
                 url="http://www.microsoft.com/downloads/details.aspx?FamilyID=6967ff37-813e-47c7-b987-889124b43abd&amp;displaylang=en">Windows
                 Azure SDK</ulink> auf der Entwicklungsmaschine. Sie ist aktuell nur für Windows
-            Umgebungen vorhanden; es gibt Fortschritte für eine Java-basierende Version der SDK
-            welche auf jeder Plattform ausgeführt werden kann.
+            Umgebungen vorhanden; es gibt Fortschritte für eine Java-basierende Version der
+            <acronym>SDK</acronym> welche auf jeder Plattform ausgeführt werden kann.
         </para>
 
         <para>
@@ -60,9 +60,9 @@
         <title>API Dokumentation</title>
 
         <para>
-            Die Klasse <classname>Zend_Service_WindowsAzure</classname> bietet den PHP Wrapper zum
-            Windows Azure <acronym>REST</acronym> Interface. Man sollte die <ulink
-                url="http://msdn.microsoft.com/en-us/library/dd179355.aspx">REST
+            Die Klasse <classname>Zend_Service_WindowsAzure</classname> bietet den
+            <acronym>PHP</acronym> Wrapper zum Windows Azure <acronym>REST</acronym> Interface. Man
+            sollte die <ulink url="http://msdn.microsoft.com/en-us/library/dd179355.aspx">REST
                 Dokumentation</ulink> für eine detailiertere Beschreibung des Services konsultieren.
             Man sollte mit den grundsätzlichen Konzepten vertraut sein um diesen Service zu
             verwenden.
@@ -79,14 +79,15 @@
         <itemizedlist>
             <listitem>
                 <para>
-                    PHP Klassen für Windows Azure Blobs, Tabellen und Queues (für
+                    <acronym>PHP</acronym> Klassen für Windows Azure Blobs, Tabellen und Queues (für
                     <acronym>CRUD</acronym> Operationen)
                 </para>
             </listitem>
 
             <listitem>
                 <para>
-                    Helfer Klassen für HTTP Transport, AuthN/AuthZ, REST und Fehlermanagement
+                    Helfer Klassen für <acronym>HTTP</acronym> Transport, AuthN/AuthZ,
+                    <acronym>REST</acronym> und Fehlermanagement
                 </para>
             </listitem>
 
@@ -103,8 +104,9 @@
 
         <para>
             <classname>Zend_Service_WindowsAzure</classname> bietet Zugriff zu Windows Azure's
-            Speicher, Berechnungs und Management Interfaces durch Abstrahierung des REST/XML
-            Interfaces welches Windows Azure bietet in einer einfachen PHP API.
+            Speicher, Berechnungs und Management Interfaces durch Abstrahierung des
+            <acronym>REST</acronym> - <acronym>XML</acronym> Interfaces welches Windows Azure bietet
+            in einer einfachen <acronym>PHP</acronym> <acronym>API</acronym>.
         </para>
 
         <para>

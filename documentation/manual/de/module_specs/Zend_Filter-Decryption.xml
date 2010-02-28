@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20774 -->
+<!-- EN-Revision: 21123 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
 
     <para>
         Dieser Filter verschlüsselt beliebige Strings mit den angegebenen Einstellungen. Hierfür
-        verwendet er Adapter. Aktuell gibt es Adapter für die <code>Mcrypt</code> und
-        <code>OpenSSL</code> Erweiterungen von php.
+        verwendet er Adapter. Aktuell gibt es Adapter für die <classname>Mcrypt</classname> und
+        <classname>OpenSSL</classname> Erweiterungen von php.
     </para>
 
     <para>
-        Für Details darüber wie man Inhalte verschlüsselt siehe den <code>Encrypt</code> Filter. Da
-        die Grundlegenden Dinge beim <code>Encrypt</code> Filter behandelt werden, beschreiben wir
-        hier nur mehr die zusätzlichen Methoden und Änderungen für die Entschlüsselung.
+        Für Details darüber wie man Inhalte verschlüsselt siehe den <classname>Encrypt</classname>
+        Filter. Da die Grundlegenden Dinge beim <classname>Encrypt</classname> Filter behandelt
+        werden, beschreiben wir hier nur mehr die zusätzlichen Methoden und Änderungen für die
+        Entschlüsselung.
     </para>
 
     <sect3 id="zend.filter.set.decrypt.mcrypt">
         <title>Entschlüsselung mit Mcrypt</title>
 
         <para>
-            Für die Entschlüsselung von Inhalten die vorher mit <code>Mcrypt</code> verschlüsselt
-            wurden muß man die Optionen wissen mit denen die Verschlüsselung aufgerufen wurde.
+            Für die Entschlüsselung von Inhalten die vorher mit <classname>Mcrypt</classname>
+            verschlüsselt wurden muß man die Optionen wissen mit denen die Verschlüsselung
+            aufgerufen wurde.
         </para>
 
         <para>
@@ -57,8 +59,8 @@ print $decrypted;
         <note>
             <para>
                 Man sollte ausserdem beachten das alle Einstellungen geprüft werden wenn man die
-                Instanz erstellt oder wenn man setEncryption() aufruft. Wenn Mcrypt ein Problem mit
-                den Einstellungen erkennt wird eine Ausnahme geworfen.
+                Instanz erstellt oder wenn man <methodname>setEncryption()</methodname> aufruft.
+                Wenn Mcrypt ein Problem mit den Einstellungen erkennt wird eine Ausnahme geworfen.
             </para>
         </note>
     </sect3>
@@ -67,12 +69,12 @@ print $decrypted;
         <title>Entschlüsselung mit OpenSSL</title>
 
         <para>
-            Entschlüsselung mit <code>OpenSSL</code> ist so einfach die Verschlüsseln. Aber man
-            benötigt alle Daten von der Person die den Inhalt verschlüsselt hat.
+            Entschlüsselung mit <classname>OpenSSL</classname> ist so einfach die Verschlüsseln.
+            Aber man benötigt alle Daten von der Person die den Inhalt verschlüsselt hat.
         </para>
 
         <para>
-            Für die Entschlüsselung mit <code>OpenSSL</code> benötigt man:
+            Für die Entschlüsselung mit <classname>OpenSSL</classname> benötigt man:
         </para>
 
         <itemizedlist>
@@ -110,8 +112,8 @@ $filter->setEnvelopeKey(array(
 
         <note>
             <para>
-                Beachte das der <code>OpenSSL</code> Adapter nicht funktionieren wird wenn man keine
-                gültigen Schlüssel angibt.
+                Beachte das der <classname>OpenSSL</classname> Adapter nicht funktionieren wird wenn
+                man keine gültigen Schlüssel angibt.
             </para>
         </note>
 

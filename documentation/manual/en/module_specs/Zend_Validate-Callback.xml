@@ -170,7 +170,7 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </sect3>
 
-    <sect3 id="zend.validate.set.callback.options">
+    <sect3 id="zend.validate.set.callback.options2">
         <title>Adding options</title>
 
         <para>

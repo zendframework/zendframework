@@ -98,7 +98,9 @@ abstract class Zend_Cache_CommonBackendTest extends PHPUnit_Framework_TestCase {
 
     public function tearDown()
     {
-        $this->_instance->clean();
+        if ($this->_instance) {
+            $this->_instance->clean();
+        }
         $this->rmdir();
     }
 

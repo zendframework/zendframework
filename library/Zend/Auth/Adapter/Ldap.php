@@ -1,4 +1,4 @@
-<?php
+f<?php
 /**
  * Zend Framework
  *
@@ -286,7 +286,7 @@ class Zend_Auth_Adapter_Ldap implements Zend_Auth_Adapter_Interface
                  * @see Zend_Auth_Adapter_Exception
                  */
                 require_once 'Zend/Auth/Adapter/Exception.php';
-                throw new Zend_Auth_Adapter_Exception('Adapter options array not in array');
+                throw new Zend_Auth_Adapter_Exception('Adapter options array not an array');
             }
             $adapterOptions = $this->_prepareOptions($ldap, $options);
             $dname = '';

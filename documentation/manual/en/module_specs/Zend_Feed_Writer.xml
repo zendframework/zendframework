@@ -138,47 +138,47 @@ $out = $feed->export('atom');
             The output rendered should be as follows:
         </para>
 
-        <programlisting language="xml"><![CDATA[
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <title type="text">Paddy's Blog</title>
-    <subtitle type="text">Writing about PC Games since 176 BC.</subtitle>
-    <updated>2009-12-14T20:28:18+00:00</updated>
-    <generator uri="http://framework.zend.com" version="1.10.0alpha">
+        <programlisting language="xml">
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;feed xmlns="http://www.w3.org/2005/Atom">
+    &lt;title type="text">Paddy's Blog&lt;/title>
+    &lt;subtitle type="text">Writing about PC Games since 176 BC.&lt;/subtitle>
+    &lt;updated>2009-12-14T20:28:18+00:00&lt;/updated>
+    &lt;generator uri="http://framework.zend.com" version="1.10.0alpha">
         Zend_Feed_Writer
-    </generator>
-    <link rel="alternate" type="text/html" href="http://www.example.com"/>
-    <link rel="self" type="application/atom+xml"
+    &lt;/generator>
+    &lt;link rel="alternate" type="text/html" href="http://www.example.com"/>
+    &lt;link rel="self" type="application/atom+xml"
         href="http://www.example.com/atom"/>
-    <id>http://www.example.com</id>
-    <author>
-        <name>Paddy</name>
-        <email>paddy@example.com</email>
-        <uri>http://www.example.com</uri>
-    </author>
-    <link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
-    <entry>
-        <title type="html"><![CDATA[All Your Base Are Belong To Us]]></title>
-        <summary type="html">
-            <![CDATA[Exposing the difficultly of porting games to English.]]>
-        </summary>
-        <published>2009-12-14T20:28:18+00:00</published>
-        <updated>2009-12-14T20:28:18+00:00</updated>
-        <link rel="alternate" type="text/html"
+    &lt;id>http://www.example.com&lt;/id>
+    &lt;author>
+        &lt;name>Paddy&lt;/name>
+        &lt;email>paddy@example.com&lt;/email>
+        &lt;uri>http://www.example.com&lt;/uri>
+    &lt;/author>
+    &lt;link rel="hub" href="http://pubsubhubbub.appspot.com/"/>
+    &lt;entry>
+        &lt;title type="html">&lt;![CDATA[All Your Base Are Belong To Us]]&gt;&lt;/title>
+        &lt;summary type="html">
+            &lt;![CDATA[Exposing the difficultly of porting games to English.]]&gt;
+        &lt;/summary>
+        &lt;published>2009-12-14T20:28:18+00:00&lt;/published>
+        &lt;updated>2009-12-14T20:28:18+00:00&lt;/updated>
+        &lt;link rel="alternate" type="text/html"
              href="http://www.example.com/all-your-base-are-belong-to-us"/>
-        <id>http://www.example.com/all-your-base-are-belong-to-us</id>
-        <author>
-            <name>Paddy</name>
-            <email>paddy@example.com</email>
-            <uri>http://www.example.com</uri>
-        </author>
-        <content type="html">
-            <![CDATA[I am not writing the article.
-                     The example is long enough as is ;).]]>
-        </content>
-    </entry>
-</feed>
-]]></programlisting>
+        &lt;id>http://www.example.com/all-your-base-are-belong-to-us&lt;/id>
+        &lt;author>
+            &lt;name>Paddy&lt;/name>
+            &lt;email>paddy@example.com&lt;/email>
+            &lt;uri>http://www.example.com&lt;/uri>
+        &lt;/author>
+        &lt;content type="html">
+            &lt;![CDATA[I am not writing the article.
+                     The example is long enough as is ;).]]&gt;
+        &lt;/content>
+    &lt;/entry>
+&lt;/feed>
+</programlisting>
 
         <para>
             This is a perfectly valid Atom 1.0 example. It should be noted that omitting an

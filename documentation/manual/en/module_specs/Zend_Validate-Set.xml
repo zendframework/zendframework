@@ -38,29 +38,12 @@
     </sect2>
 
     <xi:include href="Zend_Validate-Barcode.xml" />
-
-    <sect2 id="zend.validate.set.between">
-        <title>Between</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> is between
-            the minimum and maximum boundary values. The comparison is inclusive by default
-            (<varname>$value</varname> may equal a boundary value), though this may be overridden in
-            order to do a strict comparison, where <varname>$value</varname> must be strictly
-            greater than the minimum and strictly less than the maximum.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-Between.xml" />
     <xi:include href="Zend_Validate-Callback.xml" />
     <xi:include href="Zend_Validate-CreditCard.xml" />
 
     <sect2 id="zend.validate.set.ccnum">
         <title>Ccnum</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> follows the
-            Luhn algorithm (mod-10 checksum) for credit card numbers.
-        </para>
 
         <note>
             <para>

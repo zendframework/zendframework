@@ -22,7 +22,7 @@ $mail->createAttachment($someBinaryString);
 $mail->createAttachment($myImage,
                         'image/gif',
                         Zend_Mime::DISPOSITION_INLINE,
-                        Zend_Mime::ENCODING_8BIT);
+                        Zend_Mime::ENCODING_BASE64);
 ]]></programlisting>
     </example>
 
@@ -39,7 +39,7 @@ $mail = new Zend_Mail();
 $at = $mail->createAttachment($myImage);
 $at->type        = 'image/gif';
 $at->disposition = Zend_Mime::DISPOSITION_INLINE;
-$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->encoding    = Zend_Mime::ENCODING_BASE64;
 $at->filename    = 'test.gif';
 
 $mail->send();
@@ -56,7 +56,7 @@ $mail = new Zend_Mail();
 $at = new Zend_Mime_Part($myImage);
 $at->type        = 'image/gif';
 $at->disposition = Zend_Mime::DISPOSITION_INLINE;
-$at->encoding    = Zend_Mime::ENCODING_8BIT;
+$at->encoding    = Zend_Mime::ENCODING_BASE64;
 $at->filename    = 'test.gif';
 
 $mail->addAttachment($at);

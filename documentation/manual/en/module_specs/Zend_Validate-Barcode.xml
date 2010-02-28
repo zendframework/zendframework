@@ -350,6 +350,39 @@
         </listitem>
     </itemizedlist>
 
+    <sect3 id="zend.validate.set.barcode.options">
+        <title>Supported options for Zend_Validate_Barcode</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Validate_Barcode</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>adapter</property></emphasis>: Sets the barcode adapter
+                    which will be used. Supported are all above noted adapters. When using a self
+                    defined adapter, then you have to set the complete classname.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>checksum</property></emphasis>: <constant>TRUE</constant>
+                    when the barcode should contain a checksum. The default value depends on the
+                    used adapter. Note that some adapters don't allow to set this option.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>options</property></emphasis>: Defines optional options for
+                    a self written adapters.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
     <sect3 id="zend.validate.set.barcode.basic">
         <title>Basic usage</title>
 

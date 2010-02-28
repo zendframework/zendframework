@@ -146,7 +146,7 @@ class Zend_File_Transfer_Adapter_HttpTest extends PHPUnit_Framework_TestCase
         try {
             $this->assertFalse($this->adapter->receive('unknownFile'));
         } catch (Zend_File_Transfer_Exception $e) {
-            $this->assertContains('not found', $e->getMessage());
+            $this->assertContains('not find', $e->getMessage());
         }
     }
 

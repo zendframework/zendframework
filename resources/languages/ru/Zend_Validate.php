@@ -136,7 +136,7 @@ return array(
 
     // Zend_Validate_File_IsImage
     "File '%value%' is no image, '%type%' detected" => "Файл '%value%' не является изображением. MIME-тип файла - '%type%'",
-    "The mimetype of file '%value%' could not been detected" => "Не удается определить MIME-тип файла '%value%'",
+    "The mimetype of file '%value%' could not be detected" => "Не удается определить MIME-тип файла '%value%'",
     "File '%value%' can not be read" => "Файл '%value%' не может быть прочитан",
 
     // Zend_Validate_File_Md5

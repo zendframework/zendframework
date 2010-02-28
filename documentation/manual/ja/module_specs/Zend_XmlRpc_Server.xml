@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 20818 -->
 <sect1 id="zend.xmlrpc.server">
     <title>Zend_XmlRpc_Server</title>
 
@@ -118,6 +118,7 @@ echo $server->handle();
 
     <sect2 id="zend.xmlrpc.server.conventions">
         <title>規約</title>
+
         <para>
             <classname>Zend_XmlRpc_Server</classname> では、開発者が関数やクラスメソッドを
             <acronym>XML-RPC</acronym> メソッドとしてアタッチできるようになっています。
@@ -450,9 +451,10 @@ $server->setClass('Services_PricingService',
 ]]></programlisting>
 
             <para>
-                The arguments passed at <methodname>setClass()</methodname> at server construction time are
-                injected into the method call <command>pricing.calculate()</command> on remote invokation.
-                In the example above, only the argument <code>$purchaseId</code> is expected from the client.
+                The arguments passed at <methodname>setClass()</methodname> at server construction
+                time are injected into the method call <command>pricing.calculate()</command> on
+                remote invokation. In the example above, only the argument <code>$purchaseId</code>
+                is expected from the client.
             </para>
         </example>
 

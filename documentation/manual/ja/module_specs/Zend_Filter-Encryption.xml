@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20115 -->
+<!-- EN-Revision: 21212 -->
 <sect2 id="zend.filter.set.encrypt">
     <title>Encrypt</title>
+
     <para>
         このフィルタは、指定した設定で任意の文字列を暗号化します。
         暗号化の際に、アダプタを使用します。実際には、PHP の
@@ -46,6 +47,7 @@ $filter->setAdapter('openssl');
 
     <sect3 id="zend.filter.set.encrypt.mcrypt">
         <title>Mcrypt での暗号化</title>
+
         <para>
             <code>Mcrypt</code> 拡張モジュールをインストールすると、
             <code>Mcrypt</code> アダプタが使えるようになります。
@@ -111,6 +113,16 @@ $filter->setAdapter('openssl');
                     デフォルトは <constant>FALSE</constant> です。
                 </para>
             </listitem>
+
+            <!-- TODO : to be translated -->
+            <listitem>
+                <para>
+                    <emphasis>compression</emphasis>: If the encrypted value should be compressed.
+                    Default is no compression. For details take a look into <link
+                        linkend="zend.filter.set.encrypt.openssl.compressed">compression for
+                        Openssl</link>.
+                </para>
+            </listitem>
         </itemizedlist>
 
         <para>
@@ -169,6 +181,7 @@ print $encrypted;
 
     <sect3 id="zend.filter.set.encrypt.openssl">
         <title>OpenSSL での暗号化</title>
+
         <para>
             <code>OpenSSL</code> 拡張モジュールをインストールすると、
             <code>OpenSSL</code> アダプタが使えるようになります。
@@ -190,6 +203,21 @@ print $encrypted;
                     <emphasis>private</emphasis>: コンテンツの暗号化に使用する、あなたの秘密鍵。
                     鍵ファイルのパスとファイル名を指定するか、
                     あるいは単に鍵ファイルの内容そのものを指定することもできます。
+                </para>
+            </listitem>
+
+            <!-- TODO : to be translated -->
+            <listitem>
+                <para>
+                    <emphasis>compression</emphasis>: If the encrypted value should be compressed.
+                    Default is no compression.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>package</emphasis>: If the envelope key should be packed with the
+                    encrypted value. Default is <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>
@@ -278,6 +306,89 @@ print $encrypted;
 
 // 復号の方法は Decrypt フィルタを参照ください
 ]]></programlisting>
+
+        <!-- TODO : to be translated -->
+        <sect4 id="zend.filter.set.encrypt.openssl.simplified">
+            <title>Simplified usage with Openssl</title>
+
+            <para>
+                As seen before, you need to get the envelope key to be able to decrypt the previous
+                encrypted value. This can be very annoying when you work with multiple values.
+            </para>
+
+            <para>
+                To have a simplified usage you can set the <property>package</property> option to
+                <constant>TRUE</constant>. The default value is <constant>FALSE</constant>.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// Use openssl and provide a private key
+$filter = new Zend_Filter_Encrypt(array(
+    'adapter' => 'openssl',
+    'private' => '/path/to/mykey/private.pem',
+    'public'  => '/public/key/path/public.pem',
+    'package' => true
+));
+
+$encrypted = $filter->filter('text_to_be_encoded');
+print $encrypted;
+
+// For decryption look at the Decrypt filter
+]]></programlisting>
+
+            <para>
+                Now the returned value contains the encrypted value and the envelope. You don't
+                need to get them after the compression. But, and this is the negative aspect of
+                this feature, the encrypted value can now only be decrypted by using
+                <classname>Zend_Filter_Encrypt</classname>.
+            </para>
+        </sect4>
+
+        <sect4 id="zend.filter.set.encrypt.openssl.compressed">
+            <title>Compressing the content</title>
+
+            <para>
+                Based on the original value, the encrypted value can be a very large string. To
+                reduce the value <classname>Zend_Filter_Encrypt</classname> allows the usage of
+                compression.
+            </para>
+
+            <para>
+                The <property>compression</property> option can eighter be set to the name of a
+                compression adapter, or to an array which sets all wished options for the
+                compression adapter.
+            </para>
+
+            <programlisting language="php"><![CDATA[
+// Use basic compression adapter
+$filter1 = new Zend_Filter_Encrypt(array(
+    'adapter'     => 'openssl',
+    'private'     => '/path/to/mykey/private.pem',
+    'public'      => '/public/key/path/public.pem',
+    'package'     => true,
+    'compression' => 'bz2'
+));
+
+// Use basic compression adapter
+$filter2 = new Zend_Filter_Encrypt(array(
+    'adapter'     => 'openssl',
+    'private'     => '/path/to/mykey/private.pem',
+    'public'      => '/public/key/path/public.pem',
+    'package'     => true,
+    'compression' => array('adapter' => 'zip', 'target' => '\usr\tmp\tmp.zip')
+));
+]]></programlisting>
+
+            <note>
+                <title>Decryption with same settings</title>
+
+                <para>
+                    When you want to decrypt a value which is additionally compressed, then you
+                    need to set the same compression settings for decryption as for encryption.
+                    Otherwise the decryption will fail.
+                </para>
+            </note>
+        </sect4>
     </sect3>
 </sect2>
 

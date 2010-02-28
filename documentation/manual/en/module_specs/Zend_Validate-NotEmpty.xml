@@ -9,6 +9,24 @@
         elements have values associated with them.
     </para>
 
+    <sect3 id="zend.validate.set.notempty.options">
+        <title>Supported options for Zend_Validate_NotEmpty</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Validate_NotEmpty</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>type</property></emphasis>: Sets the type of validation
+                    which will be processed. For details take a look into <link
+                        linkend="zend.validate.set.notempty.types">this section</link>.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
     <sect3 id="zend.validate.set.notempty.default">
         <title>Default behaviour for Zend_Validate_NotEmpty</title>
 

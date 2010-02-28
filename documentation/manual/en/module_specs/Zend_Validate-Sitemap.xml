@@ -99,4 +99,12 @@ $validator->isValid('foo'); // false
 ]]></programlisting>
         </example>
     </sect3>
+
+    <sect3 id="zend.validate.set.callback.options">
+        <title>Supported options for Zend_Validate_Sitemap_*</title>
+
+        <para>
+            There are no supported options for any of the Sitemap validators.
+        </para>
+    </sect3>
 </sect2>

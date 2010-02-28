@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<sect2 id="zend.validate.set.greaterthan">
+<sect2 id="zend.validate.set.lessthan">
     <title>LessThan</title>
 
     <para>

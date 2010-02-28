@@ -100,7 +100,7 @@ $validator->isValid('foo'); // false
         </example>
     </sect3>
 
-    <sect3 id="zend.validate.set.callback.options">
+    <sect3 id="zend.validate.set.sitemap.options">
         <title>Supported options for Zend_Validate_Sitemap_*</title>
 
         <para>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reviewed: no -->
+<sect2 id="zend.validate.set.greaterthan">
+    <title>GreaterThan</title>
+
+    <para>
+        <classname>Zend_Validate_GreaterThan</classname> allows you to validate if a given value is
+        greater than a minimum border value.
+    </para>
+
+    <note>
+        <title>Zend_Validate_GreaterThan supports only number validation</title>
+
+        <para>
+            It should be noted that Zend_Validate_GreaterThan supports only the validation of
+            numbers. Strings or dates can not be validated with this validator.
+        </para>
+    </note>
+
+    <sect3 id="zend.validate.set.greaterthan.options">
+        <title>Supported options for Zend_Validate_GreaterThan</title>
+
+        <para>
+            The following options are supported for <classname>Zend_Validate_GreaterThan</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>min</property></emphasis>: Sets the minimum allowed value.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
+
+    <sect3 id="zend.validate.set.greaterthan.basic">
+        <title>Basic usage</title>
+
+        <para>
+            To validate if a given value is greater than a defined border simply use the following
+            example.
+        </para>
+
+        <programlisting language="php"><![CDATA[
+$valid  = new Zend_Validate_GreaterThan(array('min' => 10));
+$value  = 10;
+$return = $valid->isValid($value);
+// returns true
+]]></programlisting>
+
+        <para>
+            The above example returns <constant>TRUE</constant> for all values which are equal to 10
+            or greater than 10.
+        </para>
+    </sect3>
+</sect2>
+<!--
+vim:se ts=4 sw=4 et:
+-->

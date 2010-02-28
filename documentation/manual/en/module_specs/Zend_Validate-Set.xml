@@ -92,15 +92,7 @@
         </para>
     </sect2>
 
-    <sect2 id="zend.validate.set.greater_than">
-        <title>GreaterThan</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> is greater
-            than the minimum boundary.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-GreaterThan.xml" />
     <xi:include href="Zend_Validate-Hex.xml" />
     <xi:include href="Zend_Validate-Hostname.xml" />
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17618 -->
+<!-- EN-Revision: 20774 -->
 <sect1 id="zend.feed.introduction">
     <title>導入</title>
+
     <para>
         <classname>Zend_Feed</classname> は、<acronym>RSS</acronym> や Atom のフィードを扱う機能を提供します。
         フィードの要素や属性、そしてエントリの属性に、自然な方法でアクセスできるようになります。
@@ -27,6 +28,7 @@
 
     <note>
         <title>注意</title>
+
         <para>
             <acronym>RSS</acronym> フィードによって、使用できるチャネルやアイテムのプロパティが違います。
             <acronym>RSS</acronym> の仕様ではオプションのプロパティが多く定義されているので、
@@ -36,6 +38,7 @@
 
     <example id="zend.feed.introduction.example.rss">
         <title>Zend_Feed による RSS フィードデータの使用</title>
+
         <programlisting language="php"><![CDATA[
 // 最新の Slashdot ヘッドラインを取得します
 try {

@@ -164,16 +164,7 @@ if ($validator->isValid($iban)) {
 
     <xi:include href="Zend_Validate-Ip.xml" />
     <xi:include href="Zend_Validate-Isbn.xml" />
-
-    <sect2 id="zend.validate.set.less_than">
-        <title>LessThan</title>
-
-        <para>
-            Returns <constant>TRUE</constant> if and only if <varname>$value</varname> is less than
-            the maximum boundary.
-        </para>
-    </sect2>
-
+    <xi:include href="Zend_Validate-LessThan.xml" />
     <xi:include href="Zend_Validate-NotEmpty.xml" />
     <xi:include href="Zend_Validate-PostCode.xml" />
 

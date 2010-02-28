@@ -52,9 +52,13 @@ class Zend_Oauth_Http_Utility
             'oauth_nonce'            => $this->generateNonce(),
             'oauth_signature_method' => $config->getSignatureMethod(),
             'oauth_timestamp'        => $this->generateTimestamp(),
-            'oauth_token'            => $config->getToken()->getToken(),
             'oauth_version'          => $config->getVersion(),
         );
+        
+        if ($config->getToken()->getToken() != null) {
+            $params['oauth_token'] = $config->getToken()->getToken();
+        }
+
 
         if (!is_null($serviceProviderParams)) {
             $params = array_merge($params, $serviceProviderParams);

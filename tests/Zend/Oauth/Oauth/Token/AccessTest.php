@@ -79,7 +79,7 @@ class Zend_Oauth_Token_AccessTest extends PHPUnit_Framework_TestCase
             'http://www.example.com',
             new Test_Config_90244
         );
-        $this->assertEquals('OAuth realm="",oauth_consumer_key="1234567890",oauth_nonce="e807f1fcf82d132f9bb018ca6738a19f",oauth_signature_method="HMAC-SHA1",oauth_timestamp="12345678901",oauth_token="abcde",oauth_version="1.0",oauth_signature="6fb42da0e32e07b61c9f0251fe627a9c"', $value);
+        $this->assertEquals('OAuth realm="",oauth_consumer_key="1234567890",oauth_nonce="e807f1fcf82d132f9bb018ca6738a19f",oauth_signature_method="HMAC-SHA1",oauth_timestamp="12345678901",oauth_version="1.0",oauth_token="abcde",oauth_signature="6fb42da0e32e07b61c9f0251fe627a9c"', $value);
     }
 
 }

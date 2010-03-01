@@ -477,7 +477,21 @@ class Zend_Cache_Core
         if (!($this->_backendCapabilities['tags'])) {
             Zend_Cache::throwException(self::BACKEND_NOT_SUPPORT_TAG);
         }
-        return $this->_backend->getIdsMatchingTags($tags);
+
+        $ids = $this->_backend->getIdsMatchingTags($tags);
+
+        // we need to remove cache_id_prefix from ids (see #ZF-6178, #ZF-7600)
+        if (isset($this->_options['cache_id_prefix']) && $this->_options['cache_id_prefix'] !== '') {
+            $prefix    = & $this->_options['cache_id_prefix'];
+            $prefixLen = strlen($prefix);
+            foreach ($ids as &$id) {
+                if (strpos($id, $this->_options['cache_id_prefix']) === 0) {
+                    $id = substr($id, $prefixLen);
+                }
+            }
+        }
+
+        return $ids;
     }
 
     /**
@@ -496,7 +510,21 @@ class Zend_Cache_Core
         if (!($this->_backendCapabilities['tags'])) {
             Zend_Cache::throwException(self::BACKEND_NOT_SUPPORT_TAG);
         }
-        return $this->_backend->getIdsNotMatchingTags($tags);
+
+        $ids = $this->_backend->getIdsNotMatchingTags($tags);
+
+        // we need to remove cache_id_prefix from ids (see #ZF-6178, #ZF-7600)
+        if (isset($this->_options['cache_id_prefix']) && $this->_options['cache_id_prefix'] !== '') {
+            $prefix    = & $this->_options['cache_id_prefix'];
+            $prefixLen = strlen($prefix);
+            foreach ($ids as &$id) {
+                if (strpos($id, $this->_options['cache_id_prefix']) === 0) {
+                    $id = substr($id, $prefixLen);
+                }
+            }
+        }
+
+        return $ids;
     }
 
     /**
@@ -515,7 +543,21 @@ class Zend_Cache_Core
         if (!($this->_backendCapabilities['tags'])) {
             Zend_Cache::throwException(self::BACKEND_NOT_SUPPORT_TAG);
         }
-        return $this->_backend->getIdsMatchingAnyTags($tags);
+
+        $ids = $this->_backend->getIdsMatchingAnyTags($tags);
+
+        // we need to remove cache_id_prefix from ids (see #ZF-6178, #ZF-7600)
+        if (isset($this->_options['cache_id_prefix']) && $this->_options['cache_id_prefix'] !== '') {
+            $prefix    = & $this->_options['cache_id_prefix'];
+            $prefixLen = strlen($prefix);
+            foreach ($ids as &$id) {
+                if (strpos($id, $this->_options['cache_id_prefix']) === 0) {
+                    $id = substr($id, $prefixLen);
+                }
+            }
+        }
+
+        return $ids;
     }
 
     /**
@@ -528,18 +570,21 @@ class Zend_Cache_Core
         if (!$this->_extendedBackend) {
             Zend_Cache::throwException(self::BACKEND_NOT_IMPLEMENTS_EXTENDED_IF);
         }
-        $array = $this->_backend->getIds();
-        if ((!isset($this->_options['cache_id_prefix'])) || ($this->_options['cache_id_prefix'] == '')) return $array;
-        // we need to remove cache_id_prefix from ids (see #ZF-6178)
-        $res = array();
-        while (list(,$id) = each($array)) {
-            if (strpos($id, $this->_options['cache_id_prefix']) === 0) {
-                $res[] = preg_replace("~^{$this->_options['cache_id_prefix']}~", '', $id);
-            } else {
-                $res[] = $id;
+
+        $ids = $this->_backend->getIds();
+
+        // we need to remove cache_id_prefix from ids (see #ZF-6178, #ZF-7600)
+        if (isset($this->_options['cache_id_prefix']) && $this->_options['cache_id_prefix'] !== '') {
+            $prefix    = & $this->_options['cache_id_prefix'];
+            $prefixLen = strlen($prefix);
+            foreach ($ids as &$id) {
+                if (strpos($id, $this->_options['cache_id_prefix']) === 0) {
+                    $id = substr($id, $prefixLen);
+                }
             }
         }
-        return $res;
+
+        return $ids;
     }
 
     /**

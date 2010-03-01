@@ -2796,6 +2796,19 @@ class Zend_Date extends Zend_Date_DateObject
                     throw new Zend_Date_Exception($e->getMessage(), 0, $e);
                 }
             }
+
+            if (!array_key_exists('hour', $parsed)) {
+                $parsed['hour'] = 0;
+            }
+
+            if (!array_key_exists('minute', $parsed)) {
+                $parsed['minute'] = 0;
+            }
+
+            if (!array_key_exists('second', $parsed)) {
+                $parsed['second'] = 0;
+            }
+
             $time  = str_pad($parsed['hour'], 2, '0', STR_PAD_LEFT) . ":";
             $time .= str_pad($parsed['minute'], 2, '0', STR_PAD_LEFT) . ":";
             $time .= str_pad($parsed['second'], 2, '0', STR_PAD_LEFT);
@@ -2805,6 +2818,7 @@ class Zend_Date extends Zend_Date_DateObject
         if ($calc != 'cmp') {
             return $this;
         }
+
         return $return;
     }
 
@@ -2947,6 +2961,19 @@ class Zend_Date extends Zend_Date_DateObject
                     throw new Zend_Date_Exception($e->getMessage(), 0, $e);
                 }
             }
+
+            if (!array_key_exists('day', $parsed)) {
+                $parsed['day'] = 1;
+            }
+
+            if (!array_key_exists('month', $parsed)) {
+                $parsed['month'] = 1;
+            }
+
+            if (!array_key_exists('year', $parsed)) {
+                $parsed['year'] = 0;
+            }
+
             $date  = $parsed['day'] . "." . $parsed['month'] . "." . $parsed['year'];
         }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20876 -->
+<!-- EN-Revision: 21161 -->
 <!-- Reviewed: no -->
 <appendix id="coding-standard">
     <title>Zend Framework Coding Standard für PHP</title>
@@ -184,6 +184,51 @@
                     Klassen vor dieser Version kann es sein das sie dieser Regel nicht folgen, aber
                     Sie werden in Zukunft umbenannt um zu entsprechen.
                 </para>
+
+                <para>
+                    Der Hintergrund dieser Änderung ist die Verwendung von Namespaces. Da wir auf
+                    Zend Framework 2.0 und die Verwendung von PHP 5.3 zugehen, werden wir Namespaces
+                    verwenden. Der einfachste Weg die Konvertierung zu Namespaces zu automatisieren
+                    besteht darin die Unterstriche in Namespace Separatoren zu konvertieren -- aber
+                    in der alten Namenskonvention, lässt dies den Klassennamen einfach als
+                    "Abstract" oder "Interface" zurück" -- beide sind reservierte Schlüsselwörter
+                    in PHP. Wenn wir den Namen der (Unter)Komponente dem Klassennamen voranstellen
+                    können wir diese Probleme vermeiden.
+                </para>
+
+                <para>
+                    Um die Situation zu illustrieren, nehmen wir an dass die Klasse
+                    <classname>Zend_Controller_Request_Abstract</classname> konvertiert wird um
+                    Namespaces zu verwenden:
+                </para>
+
+                <programlisting language="php"><![CDATA[
+namespace Zend\Controller\Request;
+
+abstract class Abstract
+{
+    // ...
+}
+]]></programlisting>
+
+                <para>
+                    Natürlich wird das nicht funktionieren. In der neuen Namenskonvention würde
+                    dies aber trotzdem zu folgendem werden:
+                </para>
+                <programlisting language="php"><![CDATA[
+namespace Zend\Controller\Request;
+
+abstract class RequestAbstract
+{
+    // ...
+}
+]]></programlisting>
+
+                <para>
+                    Wir bleiben trotzdem bei der Semantik und der Trennung auf Namespaces, wärend
+                    wir die Probleme mit den Schlüsselworten vermeiden; simultan beschreibt dies
+                    abstrakte Klassen besser.
+                </para>
             </note>
         </sect2>
 
@@ -210,7 +255,10 @@
                 <para>
                     Diese Namens Konvention ist neu mit Version 1.9.0 des Zend Frameworks. Bei
                     Klassen vor dieser Version kann es sein das sie dieser Regel nicht folgen, aber
-                    Sie werden in Zukunft umbenannt um zu entsprechen.
+                    Sie werden in Zukunft umbenannt um zu entsprechen. Siehe <link
+                        linkend="coding-standard.naming-conventions.abstracts">den vorhergehenden
+                        Abschnitt</link> für weitere Informationen über die Hintergründe für diese
+                    Änderung.
                 </para>
             </note>
         </sect2>

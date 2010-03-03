@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20943 -->
+<!-- EN-Revision: 21130 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.core-functionality.application">
     <title>Zend_Application</title>
@@ -142,8 +142,9 @@
                                             einzelne Konfiguration zusammengefügt werden sollen. Das
                                             Hilft bei der Reduzierung von doppelten Konfigurationen
                                             über mehrere Kontexte welche die gleichen gemeinsamen
-                                            Einstellungen teilen (z.B. Konfiguration für HTTP, oder
-                                            CLI, welche alle einige Charakteristiken teilen aber mit
+                                            Einstellungen teilen (z.B. Konfiguration für
+                                            <acronym>HTTP</acronym>, oder <acronym>CLI</acronym>,
+                                            welche alle einige Charakteristiken teilen aber mit
                                             deren eigenen wiedersprüchlichen Werten für andere)
                                             oder indem eine lange Konfiguration in viele kleinere
                                             kategorisierte Dateien geteilt wird. Der Parameter ist
@@ -151,7 +152,7 @@
                                             "configs" dessen Wert ein Array von Dateien ist welche
                                             zusammengefügt werden. Beachte: Dies bedeutet das man
                                             entweder einen literalen Pfad übergibt, oder
-                                            array("configs"=>array("/path1","/path2"[,...])).
+                                            <command>array("configs"=>array("/path1","/path2"[,...]))</command>.
                                         </para>
                                     </listitem>
 

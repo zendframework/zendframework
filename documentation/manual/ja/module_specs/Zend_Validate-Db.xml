@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 18417 -->
+<!-- EN-Revision: 21241 -->
 <sect2 id="zend.validate.Db">
     <title>Db_RecordExists および Db_NoRecordExists</title>
 
@@ -10,6 +10,54 @@
         データベースのテーブル上に
         指定した値のレコードが存在するかどうかを調べる手段を提供します。
     </para>
+
+    <!-- TODO : to be translated -->
+    <sect3 id="zend.validate.set.db.options">
+        <title>Supported options for Zend_Validate_Db_*</title>
+
+        <para>
+            The following options are supported for
+            <classname>Zend_Validate_Db_NoRecordExists</classname> and
+            <classname>Zend_Validate_Db_RecordExists</classname>:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>adapter</property></emphasis>: The database adapter which
+                    will be used for the search.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>exclude</property></emphasis>: Sets records which will be
+                    excluded from the search.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>field</property></emphasis>: The database field within this
+                    table which will be searched for the record.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>schema</property></emphasis>: Sets the schema which will be
+                    used for the search.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>table</property></emphasis>: The table which will be
+                    searched for the record.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
 
     <sect3 id="zend.validate.db.basic-usage">
         <title>基本的な使用法</title>

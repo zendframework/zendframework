@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21263 -->
 <sect2 id="zend.validate.sitemap">
     <title>サイトマップ・バリデータ</title>
 
@@ -99,5 +99,13 @@ $validator->isValid(0xFF); // false
 $validator->isValid('foo'); // false
 ]]></programlisting>
         </example>
+    </sect3>
+
+    <sect3 id="zend.validate.set.sitemap.options">
+        <title>Zend_Validate_Sitemap_* でサポートされるオプション</title>
+
+        <para>
+            サイトマップ・バリデータのいずれもサポートするオプションはありません。
+        </para>
     </sect3>
 </sect2>

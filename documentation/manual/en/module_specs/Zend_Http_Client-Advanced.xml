@@ -444,7 +444,7 @@ $client->setRawData($fp, 'application/zip')->request('PUT');
                 <title>Receiving file from HTTP server with streaming</title>
 
                 <programlisting language="php"><![CDATA[
-$client->setStreaming(); // will use temp file
+$client->setStream(); // will use temp file
 $response = $client->request('GET');
 // copy file
 copy($response->getStreamName(), "my/downloads/file");
@@ -452,7 +452,7 @@ copy($response->getStreamName(), "my/downloads/file");
 $fp = fopen("my/downloads/file2", "w");
 stream_copy_to_stream($response->getStream(), $fp);
 // Also can write to known file
-$client->setStreaming("my/downloads/myfile)->request('GET');
+$client->setStream("my/downloads/myfile)->request('GET');
 ]]></programlisting>
             </example>
         </para>

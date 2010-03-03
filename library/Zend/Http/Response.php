@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -26,6 +25,8 @@
  * includes easy access to all the response's different elemts, as well as some
  * convenience methods for parsing and validating HTTP responses.
  *
+ * @uses       Zend_Http_Exception
+ * @uses       Zend_Http_Response
  * @package    Zend_Http
  * @subpackage Response
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -152,7 +153,6 @@ class Zend_Http_Response
     {
         // Make sure the response code is valid and set it
         if (self::responseCodeAsText($code) === null) {
-            require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("{$code} is not a valid HTTP response code");
         }
 
@@ -160,7 +160,6 @@ class Zend_Http_Response
 
         // Make sure we got valid headers and set them
         if (! is_array($headers)) {
-            require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception('No valid headers were passed');
     }
 
@@ -176,7 +175,6 @@ class Zend_Http_Response
 
         // Set the HTTP version
         if (! preg_match('|^\d\.\d$|', $version)) {
-            require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception("Invalid HTTP response version: $version");
         }
 
@@ -572,7 +570,6 @@ class Zend_Http_Response
 
         while (trim($body)) {
             if (! preg_match("/^([\da-fA-F]+)[^\r\n]*\r\n/sm", $body, $m)) {
-                require_once 'Zend/Http/Exception.php';
                 throw new Zend_Http_Exception("Error parsing body - doesn't seem to be a chunked message");
             }
 
@@ -600,7 +597,6 @@ class Zend_Http_Response
     public static function decodeGzip($body)
     {
         if (! function_exists('gzinflate')) {
-            require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception(
                 'zlib extension is required in order to decode "gzip" encoding'
             );
@@ -620,7 +616,6 @@ class Zend_Http_Response
     public static function decodeDeflate($body)
     {
         if (! function_exists('gzuncompress')) {
-            require_once 'Zend/Http/Exception.php';
             throw new Zend_Http_Exception(
                 'zlib extension is required in order to decode "deflate" encoding'
             );

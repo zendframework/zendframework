@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** @see Zend_Amf_Request */
-require_once 'Zend/Amf/Request.php';
-
 /**
  * AMF Request object -- Request via HTTP
  *
@@ -30,6 +27,7 @@ require_once 'Zend/Amf/Request.php';
  * built at construction time using a raw POST; if no data is available, the
  * request is declared a fault.
  *
+ * @uses       Zend_Amf_Request
  * @package    Zend_Amf
  * @subpackage Request
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

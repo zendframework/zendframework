@@ -20,14 +20,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-
-/** Zend_View_Exception */
-require_once 'Zend/View/Exception.php';
-
-
 /**
  * Exception for Zend_View_Helper_Partial class.
  *
+ * @uses       Zend_View_Exception
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

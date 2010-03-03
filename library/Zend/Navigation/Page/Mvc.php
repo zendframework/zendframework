@@ -21,26 +21,13 @@
  */
 
 /**
- * @see Zend_Navigation_Page
- */
-require_once 'Zend/Navigation/Page.php';
-
-/**
- * @see Zend_Controller_Action_HelperBroker
- */
-require_once 'Zend/Controller/Action/HelperBroker.php';
-
-/**
- * Used to check if page is active
- *
- * @see Zend_Controller_Front
- */
-require_once 'Zend/Controller/Front.php';
-
-/**
  * Represents a page that is defined using module, controller, action, route
  * name and route params to assemble the href
  *
+ * @uses       Zend_Controller_Action_HelperBroker
+ * @uses       Zend_Controller_Front
+ * @uses       Zend_Navigation_Exception
+ * @uses       Zend_Navigation_Page
  * @category   Zend
  * @package    Zend_Navigation
  * @subpackage Page
@@ -218,7 +205,6 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
     public function setAction($action)
     {
         if (null !== $action && !is_string($action)) {
-            require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
                     'Invalid argument: $action must be a string or null');
         }
@@ -252,7 +238,6 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
     public function setController($controller)
     {
         if (null !== $controller && !is_string($controller)) {
-            require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
                     'Invalid argument: $controller must be a string or null');
         }
@@ -286,7 +271,6 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
     public function setModule($module)
     {
         if (null !== $module && !is_string($module)) {
-            require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
                     'Invalid argument: $module must be a string or null');
         }
@@ -354,7 +338,6 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
     public function setRoute($route)
     {
         if (null !== $route && (!is_string($route) || strlen($route) < 1)) {
-            require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
                  'Invalid argument: $route must be a non-empty string or null');
         }

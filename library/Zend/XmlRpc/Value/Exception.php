@@ -20,14 +20,8 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_XmlRpc_Exception
- */
-require_once 'Zend/XmlRpc/Exception.php';
-
-
-/**
+ * @uses       Zend_XmlRpc_Exception
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value

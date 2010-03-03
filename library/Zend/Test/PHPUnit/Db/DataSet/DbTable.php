@@ -21,19 +21,11 @@
  */
 
 /**
- * @see PHPUnit_Extensions_Database_DataSet_QueryTable
- */
-require_once "PHPUnit/Extensions/Database/DataSet/QueryTable.php";
-
-/**
- * @see Zend_Db_Table_Abstract
- */
-require_once "Zend/Db/Table/Abstract.php";
-
-/**
  * Use a Zend_Db_Table for assertions with other PHPUnit Database Extension table types.
  *
+ * @uses       PHPUnit_Extensions_Database_DataSet_DefaultTableMetaData
  * @uses       PHPUnit_Extensions_Database_DataSet_QueryTable
+ * @uses       Zend_Db_Table_Abstract
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

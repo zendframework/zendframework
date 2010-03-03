@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_Http_Client_Exception
- */
-require_once 'Zend/Http/Client/Exception.php';
-
-/**
+ * @uses       Zend_Http_Client_Exception
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter

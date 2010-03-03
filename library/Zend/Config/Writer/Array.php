@@ -20,11 +20,7 @@
  */
 
 /**
- * @see Zend_Config_Writer
- */
-require_once 'Zend/Config/Writer/FileAbstract.php';
-
-/**
+ * @uses       Zend_Config_Writer_FileAbstract
  * @category   Zend
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

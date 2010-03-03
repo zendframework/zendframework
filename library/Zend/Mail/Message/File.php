@@ -19,18 +19,9 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_Mail_Part
- */
-require_once 'Zend/Mail/Part/File.php';
-
-/**
- * Zend_Mail_Message_Interface
- */
-require_once 'Zend/Mail/Message/Interface.php';
-
-/**
+ * @uses       Zend_Mail_Message_Interface
+ * @uses       Zend_Mail_Part_File
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

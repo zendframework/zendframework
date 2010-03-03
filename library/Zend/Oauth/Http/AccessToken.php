@@ -19,13 +19,11 @@
  * @version    $Id$
  */
 
-/** Zend_Oauth_Http */
-require_once 'Zend/Oauth/Http.php';
-
-/** Zend_Oauth_Token_Access */
-require_once 'Zend/Oauth/Token/Access.php';
-
 /**
+ * @uses       Zend_Http_Client
+ * @uses       Zend_Oauth
+ * @uses       Zend_Oauth_Http
+ * @uses       Zend_Oauth_Token_Access
  * @category   Zend
  * @package    Zend_Oauth
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

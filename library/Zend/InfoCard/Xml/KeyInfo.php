@@ -21,13 +21,12 @@
  */
 
 /**
- * Zend_InfoCard_Xml_Element
- */
-require_once 'Zend/InfoCard/Xml/Element.php';
-
-/**
  * Factory class to return a XML KeyInfo block based on input XML
  *
+ * @uses       Zend_InfoCard_Xml_Element
+ * @uses       Zend_InfoCard_Xml_Exception
+ * @uses       Zend_InfoCard_Xml_KeyInfo_Default
+ * @uses       Zend_InfoCard_Xml_KeyInfo_XmlDSig
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml
@@ -71,10 +70,8 @@ class Zend_InfoCard_Xml_KeyInfo
             foreach($sxe->getDocNameSpaces() as $namespace) {
                 switch($namespace) {
                     case 'http://www.w3.org/2000/09/xmldsig#':
-                        include_once 'Zend/InfoCard/Xml/KeyInfo/XmlDSig.php';
                         return simplexml_load_string($strXmlData, 'Zend_InfoCard_Xml_KeyInfo_XmlDSig');
                     default:
-
                         throw new Zend_InfoCard_Xml_Exception("Unknown KeyInfo Namespace provided");
                     // We are ignoring these lines, as XDebug reports each as a "non executed" line
                     // which breaks my coverage %
@@ -84,7 +81,6 @@ class Zend_InfoCard_Xml_KeyInfo
         }
         // @codeCoverageIgnoreEnd
 
-        include_once 'Zend/InfoCard/Xml/KeyInfo/Default.php';
         return simplexml_load_string($strXmlData, 'Zend_InfoCard_Xml_KeyInfo_Default');
     }
 }

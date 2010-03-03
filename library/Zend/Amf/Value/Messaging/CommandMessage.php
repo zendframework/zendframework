@@ -21,11 +21,6 @@
  */
 
 /**
- * @see Zend_Amf_Value_Messaging_AsyncMessage
- */
-require_once 'Zend/Amf/Value/Messaging/AsyncMessage.php';
-
-/**
  * A message that represents an infrastructure command passed between
  * client and server. Subscribe/unsubscribe operations result in
  * CommandMessage transmissions, as do polling operations.
@@ -34,6 +29,7 @@ require_once 'Zend/Amf/Value/Messaging/AsyncMessage.php';
  *
  * Note: THESE VALUES MUST BE THE SAME ON CLIENT AND SERVER
  *
+ * @uses       Zend_Amf_Value_Messaging_AsyncMessage
  * @package    Zend_Amf
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

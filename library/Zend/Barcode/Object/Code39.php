@@ -21,18 +21,10 @@
  */
 
 /**
- * @see Zend_Barcode_Object_ObjectAbstract
- */
-require_once 'Zend/Barcode/Object/ObjectAbstract.php';
-
-/**
- * @see 'Zend_Validate_Barcode'
- */
-require_once 'Zend/Validate/Barcode.php';
-
-/**
  * Class for generate Code39 barcode
  *
+ * @uses       Zend_Barcode_Object_ObjectAbstract
+ * @uses       Zend_Validate_Barcode
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

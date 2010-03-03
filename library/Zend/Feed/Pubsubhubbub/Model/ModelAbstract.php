@@ -19,17 +19,9 @@
  * @version    $Id$
  */
 
-
-/** @see Zend_Db_Table */
-require_once 'Zend/Db/Table.php';
-
-/** 
- * @see Zend_Registry
- * Seems to fix the file not being included by Zend_Db_Table...
- */
-require_once 'Zend/Registry.php';
-
 /**
+ * @uses       Zend_Db_Table
+ * @uses       Zend_Registry
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

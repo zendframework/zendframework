@@ -22,6 +22,8 @@
 
 
 /**
+ * @uses       RecursiveIterator
+ * @uses       Zend_Mail_Storage_Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
@@ -151,10 +153,6 @@ class Zend_Mail_Storage_Folder implements RecursiveIterator
     public function __get($name)
     {
         if (!isset($this->_folders[$name])) {
-            /**
-             * @see Zend_Mail_Storage_Exception
-             */
-            require_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception("no subfolder named $name");
         }
 

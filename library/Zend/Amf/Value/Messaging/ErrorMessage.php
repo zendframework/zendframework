@@ -20,14 +20,12 @@
  * @version    $Id$
  */
 
-/** @see Zend_Amf_Value_Messaging_AcknowledgeMessage */
-require_once 'Zend/Amf/Value/Messaging/AcknowledgeMessage.php';
-
 /**
  * Creates the error message to report to flex the issue with the call
  *
  * Corresponds to flex.messaging.messages.ErrorMessage
  *
+ * @uses       Zend_Amf_Value_Messaging_AcknowledgeMessage
  * @package    Zend_Amf
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

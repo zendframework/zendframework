@@ -20,16 +20,8 @@
  */
 
 /**
- * @see Zend_Feed_Reader_Extension_EntryAbstract
- */
-require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
-
-/**
- * @see Zend_Feed_Reader_Extension_CreativeCommons_Feed
- */
-require_once 'Zend/Feed/Reader/Extension/CreativeCommons/Feed.php';
-
-/**
+ * @uses       Zend_Feed_Reader_Extension_CreativeCommons_Feed
+ * @uses       Zend_Feed_Reader_Extension_EntryAbstract
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Abstract */
-require_once 'Zend/Form/Decorator/Abstract.php';
-
 /**
  * Zend_Form_Decorator_Image
  *
@@ -32,6 +29,8 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  *
  * Any other options passed will be used as HTML attributes of the image tag.
  *
+ * @uses       Zend_Form_Decorator_Abstract
+ * @uses       Zend_Form_Decorator_HtmlTag;
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -137,7 +136,6 @@ class Zend_Form_Decorator_Image extends Zend_Form_Decorator_Abstract
         $image = $view->formImage($name, $element->getImageValue(), $attribs);
 
         if (null !== $tag) {
-            require_once 'Zend/Form/Decorator/HtmlTag.php';
             $decorator = new Zend_Form_Decorator_HtmlTag();
             $decorator->setOptions(array('tag' => $tag));
             $image = $decorator->render($image);

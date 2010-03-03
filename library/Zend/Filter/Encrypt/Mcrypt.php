@@ -20,13 +20,10 @@
  */
 
 /**
- * @see Zend_Filter_Encrypt_Interface
- */
-require_once 'Zend/Filter/Encrypt/Interface.php';
-
-/**
  * Encryption adapter for mcrypt
  *
+ * @uses       Zend_Filter_Encrypt_Interface
+ * @uses       Zend_Filter_Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -64,7 +61,6 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
     public function __construct($options)
     {
         if (!extension_loaded('mcrypt')) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('This filter needs the mcrypt extension');
         }
 
@@ -73,7 +69,6 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
         } elseif (is_string($options)) {
             $options = array('key' => $options);
         } elseif (!is_array($options)) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Invalid options argument provided to filter');
         }
 
@@ -103,25 +98,21 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
         }
 
         if (!is_array($options)) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Invalid options argument provided to filter');
         }
 
         $options = $options + $this->getEncryption();
         $algorithms = mcrypt_list_algorithms($options['algorithm_directory']);
         if (!in_array($options['algorithm'], $algorithms)) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("The algorithm '{$options['algorithm']}' is not supported");
         }
 
         $modes = mcrypt_list_modes($options['mode_directory']);
         if (!in_array($options['mode'], $modes)) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("The mode '{$options['mode']}' is not supported");
         }
 
         if (!mcrypt_module_self_test($options['algorithm'], $options['algorithm_directory'])) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('The given algorithm can not be used due an internal mcrypt problem');
         }
 
@@ -170,7 +161,6 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
             }
             $vector = mcrypt_create_iv($size, $method);
         } else if (strlen($vector) != $size) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('The given vector has a wrong size for the set algorithm');
         }
 
@@ -243,7 +233,6 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
             $this->_encryption['mode_directory']);
 
         if ($cipher === false) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Mcrypt can not be opened with your settings');
         }
 
@@ -280,13 +269,11 @@ class Zend_Filter_Encrypt_Mcrypt implements Zend_Filter_Encrypt_Interface
             $keysize = mcrypt_enc_get_key_size($cipher);
             $key     = substr(md5($key), 0, $keysize);
         } else if (!in_array(strlen($key), $keysizes)) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('The given key has a wrong size for the set algorithm');
         }
 
         $result = mcrypt_generic_init($cipher, $key, $this->_encryption['vector']);
         if ($result < 0) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Mcrypt could not be initialize with the given setting');
         }
 

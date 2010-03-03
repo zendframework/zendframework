@@ -20,12 +20,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_View_Helper_Placeholder_Container_Abstract */
-require_once 'Zend/View/Helper/Placeholder/Container/Abstract.php';
-
 /**
  * Container for placeholder values
  *
+ * @uses       Zend_View_Helper_Placeholder_Container_Abstract
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

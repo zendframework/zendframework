@@ -20,11 +20,10 @@
  */
 
 /**
- * @see Zend_Reflection_Parameter
- */
-require_once 'Zend/Reflection/Parameter.php';
-
-/**
+ * @uses       ReflectionFunction
+ * @uses       Zend_Reflection_Docblock_Tag
+ * @uses       Zend_Reflection_Exception
+ * @uses       Zend_Reflection_Parameter
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -41,12 +40,10 @@ class Zend_Reflection_Function extends ReflectionFunction
     public function getDocblock($reflectionClass = 'Zend_Reflection_Docblock')
     {
         if ('' == ($comment = $this->getDocComment())) {
-            require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception($this->getName() . ' does not have a docblock');
         }
         $instance = new $reflectionClass($comment);
         if (!$instance instanceof Zend_Reflection_Docblock) {
-            require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Docblock');
         }
         return $instance;
@@ -100,7 +97,6 @@ class Zend_Reflection_Function extends ReflectionFunction
         while ($phpReflections && ($phpReflection = array_shift($phpReflections))) {
             $instance = new $reflectionClass($this->getName(), $phpReflection->getName());
             if (!$instance instanceof Zend_Reflection_Parameter) {
-                require_once 'Zend/Reflection/Exception.php';
                 throw new Zend_Reflection_Exception('Invalid reflection class provided; must extend Zend_Reflection_Parameter');
             }
             $zendReflections[] = $instance;
@@ -119,7 +115,6 @@ class Zend_Reflection_Function extends ReflectionFunction
     {
         $docblock = $this->getDocblock();
         if (!$docblock->hasTag('return')) {
-            require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Function does not specify an @return annotation tag; cannot determine return type');
         }
         $tag    = $docblock->getTag('return');

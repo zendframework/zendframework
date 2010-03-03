@@ -20,13 +20,11 @@
  * @version    $Id$
  */
 
-/** Zend_Dojo_View_Helper_Dijit */
-require_once 'Zend/Dojo/View/Helper/Dijit.php';
-
 /**
  * Dojo RadioButton dijit
  *
  * @uses       Zend_Dojo_View_Helper_Dijit
+ * @uses       Zend_Filter_Alnum
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -76,7 +74,6 @@ class Zend_Dojo_View_Helper_RadioButton extends Zend_Dojo_View_Helper_Dijit
             if (array_key_exists('id', $attribs)) {
                 $baseId = $attribs['id'];
             }
-            require_once 'Zend/Filter/Alnum.php';
             $filter = new Zend_Filter_Alnum();
             foreach (array_keys($options) as $key) {
                 $optId = $baseId . '-' . $filter->filter($key);

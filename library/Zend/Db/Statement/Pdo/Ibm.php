@@ -21,16 +21,13 @@
  */
 
 /**
- * @see Zend_Db_Statement_Pdo
- */
-require_once 'Zend/Db/Statement/Pdo.php';
-
-/**
  * Proxy class to wrap a PDOStatement object for IBM Databases.
  * Matches the interface of PDOStatement.  All methods simply proxy to the
  * matching method in PDOStatement.  PDOExceptions thrown by PDOStatement
  * are re-thrown as Zend_Db_Statement_Exception.
  *
+ * @uses       Zend_Db_Statement_Exception
+ * @uses       Zend_Db_Statement_Pdo
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Statement
@@ -86,9 +83,7 @@ class Zend_Db_Statement_Pdo_Ibm extends Zend_Db_Statement_Pdo
                 return $this->_stmt->bindParam($parameter, $variable, $type, $length, $options);
             }
         } catch (PDOException $e) {
-            require_once 'Zend/Db/Statement/Exception.php';
             throw new Zend_Db_Statement_Exception($e->getMessage(), $e->getCode(), $e);
         }
     }
-
 }

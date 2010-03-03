@@ -19,12 +19,10 @@
  * @version    $Id$
  */
 
-/** @see Zend_Barcode_Exception */
-require_once 'Zend/Barcode/Exception.php';
-
 /**
  * Zend_Barcode_Renderer_Exception
  *
+ * @uses       Zend_Barcode_Exception
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

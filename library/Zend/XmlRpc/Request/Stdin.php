@@ -19,22 +19,19 @@
  */
 
 /**
- * Zend_XmlRpc_Request
- */
-require_once 'Zend/XmlRpc/Request.php';
-
-/**
  * XmlRpc Request object -- Request via STDIN
  *
  * Extends {@link Zend_XmlRpc_Request} to accept a request via STDIN. Request is
  * built at construction time using data from STDIN; if no data is available, the
  * request is declared a fault.
  *
- * @category Zend
- * @package  Zend_XmlRpc
+ * @uses       Zend_XmlRpc_Request
+ * @uses       Zend_XmlRpc_Server_Exception
+ * @category   Zend
+ * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_XmlRpc_Request_Stdin extends Zend_XmlRpc_Request
 {

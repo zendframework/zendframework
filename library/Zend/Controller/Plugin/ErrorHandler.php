@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Plugin_Abstract */
-require_once 'Zend/Controller/Plugin/Abstract.php';
-
 /**
  * Handle exceptions that bubble up based on missing controllers, actions, or
  * application errors, and forward to an error handler.

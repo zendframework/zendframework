@@ -20,6 +20,7 @@
  */
 
 /**
+ * @uses       Zend_Json
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -181,7 +182,6 @@ class Zend_Json_Server_Error
      */
     public function toJson()
     {
-        require_once 'Zend/Json.php';
         return Zend_Json::encode($this->toArray());
     }
 

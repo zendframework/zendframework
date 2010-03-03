@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_Db_Table_Abstract
- */
-require_once 'Zend/Db/Table/Abstract.php';
-
-/**
+ * @uses       Zend_Db_Table_Abstract
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter

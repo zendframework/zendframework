@@ -19,12 +19,8 @@
  * @version    $Id$
  */
 
-
-/** Zend_Exception */
-require_once 'Zend/Exception.php';
-
-
 /**
+ * @uses       Zend_Exception
  * @category   Zend
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -32,4 +28,3 @@ require_once 'Zend/Exception.php';
  */
 class Zend_Controller_Exception extends Zend_Exception
 {}
-

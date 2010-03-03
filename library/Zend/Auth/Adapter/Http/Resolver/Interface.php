@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-
 /**
  * Auth HTTP Resolver Interface
  *

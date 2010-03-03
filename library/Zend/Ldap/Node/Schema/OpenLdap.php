@@ -21,22 +21,13 @@
  */
 
 /**
- * @see Zend_Ldap_Node_Schema
- */
-require_once 'Zend/Ldap/Node/Schema.php';
-/**
- * @see Zend_Ldap_Node_Schema_AttributeType_OpenLdap
- */
-require_once 'Zend/Ldap/Node/Schema/AttributeType/OpenLdap.php';
-/**
- * @see Zend_Ldap_Node_Schema_ObjectClass_OpenLdap
- */
-require_once 'Zend/Ldap/Node/Schema/ObjectClass/OpenLdap.php';
-
-/**
  * Zend_Ldap_Node_Schema_OpenLdap provides a simple data-container for the Schema node of
  * an OpenLDAP server.
  *
+ * @uses       Zend_Ldap_Attribute
+ * @uses       Zend_Ldap_Node_Schema
+ * @uses       Zend_Ldap_Node_Schema_AttributeType_OpenLdap
+ * @uses       Zend_Ldap_Node_Schema_ObjectClass_OpenLdap
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema

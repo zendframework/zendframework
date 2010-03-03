@@ -21,13 +21,9 @@
  */
 
 /**
- * @see Zend_Tag_Cloud_Decorator_Cloud
- */
-require_once 'Zend/Tag/Cloud/Decorator/Cloud.php';
-
-/**
  * Simple HTML decorator for clouds
  *
+ * @uses      Zend_Tag_Cloud_Decorator_Cloud
  * @category  Zend
  * @package   Zend_Tag
  * @uses      Zend_Tag_Cloud_Decorator_Cloud

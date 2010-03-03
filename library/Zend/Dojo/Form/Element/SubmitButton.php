@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Dojo_Form_Element_Button */
-require_once 'Zend/Dojo/Form/Element/Button.php';
-
 /**
  * Submit button dijit
  *
+ * @uses       Zend_Dojo_Form_Element_Button
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element

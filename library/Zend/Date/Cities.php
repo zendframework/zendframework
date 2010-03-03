@@ -25,6 +25,7 @@
  * Holds the geographical data for all capital cities and many others worldwide
  * Original data from http://www.fallingrain.com/world/
  *
+ * @uses       Zend_Date_Exception
  * @category   Zend
  * @package    Zend_Date
  * @subpackage Zend_Date_Cities
@@ -306,7 +307,6 @@ class Zend_Date_Cities
                 return $return;
             }
         }
-        require_once 'Zend/Date/Exception.php';
         throw new Zend_Date_Exception('unknown city');
     }
 

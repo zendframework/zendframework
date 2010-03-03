@@ -23,6 +23,7 @@
 /**
  * A value-holder object for non-expressable parameter default values, such as null, booleans and empty array()
  *
+ * @uses       Zend_CodeGenerator_Php_Exception
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @subpackage Php
@@ -44,7 +45,6 @@ class Zend_CodeGenerator_Php_Parameter_DefaultValue
     public function __construct($defaultValue)
     {
         if(!is_string($defaultValue)) {
-            require_once "Zend/CodeGenerator/Php/Exception.php";
             throw new Zend_CodeGenerator_Php_Exception(
                 "Can only set a string as default value representation, ".
                 "but ".gettype($defaultValue)." was given."

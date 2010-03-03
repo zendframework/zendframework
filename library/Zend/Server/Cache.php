@@ -22,6 +22,7 @@
 /**
  * Zend_Server_Cache: cache server definitions
  *
+ * @uses       Zend_Server_Definition
  * @category   Zend
  * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -20,12 +20,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_View_Helper_Abstract.php */
-require_once 'Zend/View/Helper/Abstract.php';
-
 /**
  * Helper for making easy links and getting urls that depend on the routes and router
  *
+ * @uses       Zend_Controller_Front
+ * @uses       Zend_View_Helper_Abstract
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -20,10 +20,8 @@
  * @version    $Id$
  */
 
-/** Zend_Log_Writer_Abstract */
-require_once 'Zend/Log/Writer/Abstract.php';
-
 /**
+ * @uses       Zend_Log_Writer_Abstract
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer

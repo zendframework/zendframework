@@ -21,15 +21,12 @@
  */
 
 /**
- * @see Zend_Application_Resource_ResourceAbstract
- */
-require_once 'Zend/Application/Resource/ResourceAbstract.php';
-
-
-/**
  * Resource for setting translation options
  *
+ * @uses       Zend_Application_Resource_Exception
  * @uses       Zend_Application_Resource_ResourceAbstract
+ * @uses       Zend_Registry
+ * @uses       Zend_Translate
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource

@@ -21,24 +21,12 @@
  */
 
 /**
- * @see Zend_Auth_Adapter_Interface
- */
-require_once 'Zend/Auth/Adapter/Interface.php';
-
-/**
- * @see Zend_Auth_Result
- */
-require_once 'Zend/Auth/Result.php';
-
-/**
- * @see Zend_InfoCard
- */
-require_once 'Zend/InfoCard.php';
-
-/**
  * A Zend_Auth Authentication Adapter allowing the use of Information Cards as an
  * authentication mechanism
  *
+ * @uses       Zend_Auth_Adapter_Interface
+ * @uses       Zend_Auth_Result
+ * @uses       Zend_InfoCard
  * @category   Zend
  * @package    Zend_Auth
  * @subpackage Zend_Auth_Adapter

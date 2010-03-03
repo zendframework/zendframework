@@ -19,12 +19,6 @@
  * @version    $Id$
  */
 
-/** Zend_Controller_Request_Http */
-require_once 'Zend/Controller/Request/Http.php';
-
-/** Zend_Uri */
-require_once 'Zend/Uri.php';
-
 /**
  * Zend_Controller_Request_Apache404
  *
@@ -37,6 +31,7 @@ require_once 'Zend/Uri.php';
  * REQUEST_URI.
  *
  * @uses       Zend_Controller_Request_Http
+ * @uses       Zend_Uri
  * @package    Zend_Controller
  * @subpackage Request
  */

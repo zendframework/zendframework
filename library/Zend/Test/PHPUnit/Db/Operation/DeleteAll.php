@@ -21,34 +21,14 @@
  */
 
 /**
- * @see PHPUnit_Extensions_Database_Operation_IDatabaseOperation
- */
-require_once "PHPUnit/Extensions/Database/Operation/IDatabaseOperation.php";
-
-/**
- * @see PHPUnit_Extensions_Database_DB_IDatabaseConnection
- */
-require_once "PHPUnit/Extensions/Database/DB/IDatabaseConnection.php";
-
-/**
- * @see PHPUnit_Extensions_Database_DataSet_IDataSet
- */
-require_once "PHPUnit/Extensions/Database/DataSet/IDataSet.php";
-
-/**
- * @see PHPUnit_Extensions_Database_Operation_Exception
- */
-require_once "PHPUnit/Extensions/Database/Operation/Exception.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_Connection
- */
-require_once "Zend/Test/PHPUnit/Db/Connection.php";
-
-/**
  * Delete All Operation that can be executed on set up or tear down of a database tester.
  *
+ * @uses       PHPUnit_Extensions_Database_DataSet_IDataSet
+ * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
+ * @uses       PHPUnit_Extensions_Database_Operation_Exception
  * @uses       PHPUnit_Extensions_Database_Operation_IDatabaseOperation
+ * @uses       Zend_Test_PHPUnit_Db_Connection
+ * @uses       Zend_Test_PHPUnit_Db_Exception
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -64,7 +44,6 @@ class Zend_Test_PHPUnit_Db_Operation_DeleteAll implements PHPUnit_Extensions_Dat
     public function execute(PHPUnit_Extensions_Database_DB_IDatabaseConnection $connection, PHPUnit_Extensions_Database_DataSet_IDataSet $dataSet)
     {
         if(!($connection instanceof Zend_Test_PHPUnit_Db_Connection)) {
-            require_once "Zend/Test/PHPUnit/Db/Exception.php";
             throw new Zend_Test_PHPUnit_Db_Exception("Not a valid Zend_Test_PHPUnit_Db_Connection instance, ".get_class($connection)." given!");
         }
 
@@ -73,7 +52,6 @@ class Zend_Test_PHPUnit_Db_Operation_DeleteAll implements PHPUnit_Extensions_Dat
                 $tableName = $table->getTableMetaData()->getTableName();
                 $connection->getConnection()->delete($tableName);
             } catch (Exception $e) {
-                require_once "PHPUnit/Extensions/Database/Operation/Exception.php";
                 throw new PHPUnit_Extensions_Database_Operation_Exception('DELETEALL', 'DELETE FROM '.$tableName.'', array(), $table, $e->getMessage());
             }
         }

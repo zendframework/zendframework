@@ -21,13 +21,13 @@
  */
 
 /**
- * @see Zend_Ldap_Node
- */
-require_once 'Zend/Ldap/Node.php';
-
-/**
  * Zend_Ldap_Node_ChildrenIterator provides an iterator to a collection of children nodes.
  *
+ * @uses       ArrayAccess
+ * @uses       Countable
+ * @uses       Iterator
+ * @uses       RecursiveIterator
+ * @uses       Zend_Ldap_Node
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Node

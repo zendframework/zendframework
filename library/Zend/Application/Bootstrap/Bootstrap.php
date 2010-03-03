@@ -25,7 +25,9 @@
  *
  * Registers and utilizes Zend_Controller_Front by default.
  *
- * @uses       Zend_Application_Bootstrap_Bootstrap
+ * @uses       Zend_Application_Bootstrap_BootstrapAbstract
+ * @uses       Zend_Application_Bootstrap_Exception
+ * @uses       Zend_Application_Module_Autoloader
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Bootstrap

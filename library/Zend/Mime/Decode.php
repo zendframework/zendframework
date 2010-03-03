@@ -20,11 +20,8 @@
  */
 
 /**
- * @see Zend_Mime
- */
-require_once 'Zend/Mime.php';
-
-/**
+ * @uses       Zend_Exception
+ * @uses       Zend_Mime
  * @category   Zend
  * @package    Zend_Mime
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

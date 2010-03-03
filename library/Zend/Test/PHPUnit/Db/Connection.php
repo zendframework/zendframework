@@ -21,24 +21,12 @@
  */
 
 /**
- * @see PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection
- */
-require_once "PHPUnit/Extensions/Database/DB/DefaultDatabaseConnection.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_DataSet_QueryTable
- */
-require_once "Zend/Test/PHPUnit/Db/DataSet/QueryTable.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_Metadata_Generic
- */
-require_once "Zend/Test/PHPUnit/Db/Metadata/Generic.php";
-
-/**
  * Generic Abstraction of Zend_Db Connections in the PHPUnit Database Extension context.
  *
+ * @uses       PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection
  * @uses       Zend_Db_Adapter_Abstract
+ * @uses       Zend_Test_PHPUnit_Db_DataSet_QueryTable
+ * @uses       Zend_Test_PHPUnit_Db_Metadata_Generic
  * @uses       PHPUnit_Extensions_Database_DB_DefaultDatabaseConnection
  * @category   Zend
  * @package    Zend_Test

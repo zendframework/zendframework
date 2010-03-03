@@ -21,13 +21,10 @@
  */
 
 /**
- * Zend_InfoCard_Xml_Element
- */
-require_once 'Zend/InfoCard/Xml/Element.php';
-
-/**
  * Represents a SecurityTokenReference XML block
  *
+ * @uses       Zend_InfoCard_Xml_Element
+ * @uses       Zend_InfoCard_Xml_Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

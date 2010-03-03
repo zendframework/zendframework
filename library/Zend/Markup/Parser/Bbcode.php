@@ -21,16 +21,10 @@
  */
 
 /**
- * @see Zend_Markup_TokenList
- */
-require_once 'Zend/Markup/TokenList.php';
-
-/**
- * @see Zend_Markup_Parser_ParserInterface
- */
-require_once 'Zend/Markup/Parser/ParserInterface.php';
-
-/**
+ * @uses       Zend_Markup_Parser_Exception
+ * @uses       Zend_Markup_Parser_ParserInterface
+ * @uses       Zend_Markup_Token
+ * @uses       Zend_Markup_TokenList
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Parser
@@ -156,18 +150,10 @@ class Zend_Markup_Parser_Bbcode implements Zend_Markup_Parser_ParserInterface
     public function parse($value)
     {
         if (!is_string($value)) {
-            /**
-             * @see Zend_Markup_Parser_Exception
-             */
-            require_once 'Zend/Markup/Parser/Exception.php';
             throw new Zend_Markup_Parser_Exception('Value to parse should be a string.');
         }
 
         if (empty($value)) {
-            /**
-             * @see Zend_Markup_Parser_Exception
-             */
-            require_once 'Zend/Markup/Parser/Exception.php';
             throw new Zend_Markup_Parser_Exception('Value to parse cannot be left empty.');
         }
 

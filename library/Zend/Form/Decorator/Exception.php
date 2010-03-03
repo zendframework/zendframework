@@ -20,12 +20,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Exception */
-require_once 'Zend/Form/Exception.php';
-
 /**
  * Exception for Zend_Form component.
  *
+ * @uses       Zend_Form_Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

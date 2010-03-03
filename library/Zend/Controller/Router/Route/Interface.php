@@ -20,9 +20,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Config */
-require_once 'Zend/Config.php';
-
 /**
  * @package    Zend_Controller
  * @subpackage Router

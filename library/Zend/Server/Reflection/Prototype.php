@@ -19,26 +19,19 @@
  */
 
 /**
- * Zend_Server_Reflection_ReturnValue
- */
-require_once 'Zend/Server/Reflection/ReturnValue.php';
-
-/**
- * Zend_Server_Reflection_Parameter
- */
-require_once 'Zend/Server/Reflection/Parameter.php';
-
-/**
  * Method/Function prototypes
  *
  * Contains accessors for the return value and all method arguments.
  *
+ * @uses       Zend_Server_Reflection_Exception
+ * @uses       Zend_Server_Reflection_Parameter
+ * @uses       Zend_Server_Reflection_ReturnValue
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_Server_Reflection_Prototype
 {
@@ -54,14 +47,12 @@ class Zend_Server_Reflection_Prototype
         $this->_return = $return;
 
         if (!is_array($params) && (null !== $params)) {
-            require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid parameters');
         }
 
         if (is_array($params)) {
             foreach ($params as $param) {
                 if (!$param instanceof Zend_Server_Reflection_Parameter) {
-                    require_once 'Zend/Server/Reflection/Exception.php';
                     throw new Zend_Server_Reflection_Exception('One or more params are invalid');
                 }
             }

@@ -19,15 +19,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Abstract */
-require_once 'Zend/Form/Decorator/Abstract.php';
-
 /**
  * Zend_Form_Decorator_DtDdWrapper
  *
  * Creates an empty <dt> item, and wraps the content in a <dd>. Used as a
  * default decorator for subforms and display groups.
  *
+ * @uses       Zend_Form_Decorator_Abstract
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

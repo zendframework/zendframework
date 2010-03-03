@@ -20,10 +20,10 @@
  * @version    $Id$
  */
 
-/** Zend_Log_Formatter_Interface */
-require_once 'Zend/Log/Formatter/Interface.php';
-
 /**
+ * @uses       DOMDocument
+ * @uses       DOMElement
+ * @uses       Zend_Log_Formatter_Interface
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Formatter

@@ -26,13 +26,15 @@
  * It's an OO string wrapper.
  * Used to intercept string updates.
  *
+ * @uses       ArrayAccess
+ * @uses       Countable
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @todo       also implement Countable for PHP 5.1 but not yet to stay 5.0 compatible
  */
-class Zend_Memory_Value implements ArrayAccess {
+class Zend_Memory_Value implements ArrayAccess,Countable
+{
     /**
      * Value
      *
@@ -78,6 +80,15 @@ class Zend_Memory_Value implements ArrayAccess {
         $this->_trace = false;
     }
 
+    /**
+     * Countable
+     * 
+     * @return int
+     */
+    public function count()
+    {
+        return strlen($this->_value);
+    }
 
     /**
      * ArrayAccess interface method

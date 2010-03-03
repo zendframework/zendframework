@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-/** Zend_Amf_Response */
-require_once 'Zend/Amf/Response.php';
-
 /**
  * Creates the proper http headers and send the serialized AMF stream to standard out.
  *
+ * @uses       Zend_Amf_Response
  * @package    Zend_Amf
  * @subpackage Response
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

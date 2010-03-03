@@ -22,6 +22,10 @@
 /**
  * Zend_Ldap_Dn provides an API for DN manipulation
  *
+ * @uses       ArrayAccess
+ * @uses       Zend_Ldap_Converter
+ * @uses       Zend_Ldap_Dn
+ * @uses       Zend_Ldap_Exception
  * @category   Zend
  * @package    Zend_Ldap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -69,10 +73,6 @@ class Zend_Ldap_Dn implements ArrayAccess
         } else if (is_string($dn)) {
             return self::fromString($dn, $caseFold);
         } else {
-            /**
-             * Zend_Ldap_Exception
-             */
-            require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'Invalid argument type for $dn');
         }
     }
@@ -157,10 +157,6 @@ class Zend_Ldap_Dn implements ArrayAccess
     {
         $levelUp = (int)$levelUp;
         if ($levelUp < 1 || $levelUp >= count($this->_dn)) {
-            /**
-             * Zend_Ldap_Exception
-             */
-            require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'Cannot retrieve parent DN with given $levelUp');
         }
         $newDn = array_slice($this->_dn, $levelUp);
@@ -281,17 +277,9 @@ class Zend_Ldap_Dn implements ArrayAccess
     protected function _assertIndex($index)
     {
         if (!is_int($index)) {
-            /**
-             * Zend_Ldap_Exception
-             */
-            require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'Parameter $index must be an integer');
         }
         if ($index < 0 || $index >= count($this->_dn)) {
-            /**
-             * Zend_Ldap_Exception
-             */
-            require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'Parameter $index out of bounds');
         }
         return true;
@@ -307,19 +295,11 @@ class Zend_Ldap_Dn implements ArrayAccess
     protected static function _assertRdn(array $value)
     {
         if (count($value)<1) {
-            /**
-             * Zend_Ldap_Exception
-             */
-            require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'RDN Array is malformed: it must have at least one item');
         }
 
         foreach (array_keys($value) as $key) {
             if (!is_string($key)) {
-                /**
-                 * Zend_Ldap_Exception
-                 */
-                require_once 'Zend/Ldap/Exception.php';
                 throw new Zend_Ldap_Exception(null, 'RDN Array is malformed: it must use string keys');
             }
         }
@@ -508,11 +488,6 @@ class Zend_Ldap_Dn implements ArrayAccess
      */
     public static function escapeValue($values = array())
     {
-        /**
-         * @see Zend_Ldap_Converter
-         */
-        require_once 'Zend/Ldap/Converter.php';
-
         if (!is_array($values)) $values = array($values);
         foreach ($values as $key => $val) {
             // Escaping of filter meta characters
@@ -550,11 +525,6 @@ class Zend_Ldap_Dn implements ArrayAccess
      */
     public static function unescapeValue($values = array())
     {
-        /**
-         * @see Zend_Ldap_Converter
-         */
-        require_once 'Zend/Ldap/Converter.php';
-
         if (!is_array($values)) $values = array($values);
         foreach ($values as $key => $val) {
             // strip slashes from special chars
@@ -590,10 +560,6 @@ class Zend_Ldap_Dn implements ArrayAccess
         $k = array();
         $v = array();
         if (!self::checkDn($dn, $k, $v, $caseFold)) {
-            /**
-             * Zend_Ldap_Exception
-             */
-            require_once 'Zend/Ldap/Exception.php';
             throw new Zend_Ldap_Exception(null, 'DN is malformed');
         }
         $ret = array();

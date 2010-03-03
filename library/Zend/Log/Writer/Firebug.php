@@ -20,21 +20,13 @@
  * @version    $Id$
  */
 
-/** Zend_Log */
-require_once 'Zend/Log.php';
-
-/** Zend_Log_Writer_Abstract */
-require_once 'Zend/Log/Writer/Abstract.php';
-
-/** Zend_Log_Formatter_Firebug */
-require_once 'Zend/Log/Formatter/Firebug.php';
-
-/** Zend_Wildfire_Plugin_FirePhp */
-require_once 'Zend/Wildfire/Plugin/FirePhp.php';
-
 /**
  * Writes log messages to the Firebug Console via FirePHP.
  *
+ * @uses       Zend_Log
+ * @uses       Zend_Log_Formatter_Firebug
+ * @uses       Zend_Log_Writer_Abstract
+ * @uses       Zend_Wildfire_Plugin_FirePhp
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer

@@ -20,11 +20,6 @@
  */
 
 /**
- * Zend_Memory_Container_Interface
- */
-require_once 'Zend/Memory/Container/Interface.php';
-
-/**
  * Memory object container access controller.
  *
  * Memory manager stores a list of generated objects to control them.
@@ -36,6 +31,7 @@ require_once 'Zend/Memory/Container/Interface.php';
  *
  * Class also provides Zend_Memory_Container_Interface interface and works as proxy for such cases.
  *
+ * @uses       Zend_Memory_Container_Interface
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

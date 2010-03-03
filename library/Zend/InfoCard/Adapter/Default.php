@@ -21,16 +21,12 @@
  */
 
 /**
- * Zend_InfoCard_Adapter_Interface
- */
-require_once 'Zend/InfoCard/Adapter/Interface.php';
-
-/**
  * The default InfoCard component Adapter which serves as a pass-thru placeholder
  * for developers. Initially developed to provide a callback mechanism to store and retrieve
  * assertions as part of the validation process it can be used anytime callback facilities
  * are necessary
  *
+ * @uses       Zend_InfoCard_Adapter_Interface
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Adapter

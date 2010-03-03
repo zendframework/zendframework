@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,13 +20,9 @@
  */
 
 /**
- * @see Zend_Session_Exception
- */
-require_once 'Zend/Session/Exception.php';
-
-/**
  * Zend_Session_SaveHandler_Exception
  *
+ * @uses       Zend_Session_Exception
  * @category   Zend
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

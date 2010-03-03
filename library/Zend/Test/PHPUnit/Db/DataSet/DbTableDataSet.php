@@ -20,19 +20,14 @@
  * @version    $Id$
  */
 
-require_once "PHPUnit/Extensions/Database/DataSet/QueryDataSet.php";
-
-require_once "PHPUnit/Extensions/Database/DB/IDatabaseConnection.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_DataSet_DbTable
- */
-require_once "Zend/Test/PHPUnit/Db/DataSet/DbTable.php";
-
 /**
  * Aggregate several Zend_Db_Table instances into a dataset.
  *
- * @uses       Zend_Db_Table
+ * @uses       InvalidArgumentException
+ * @uses       PHPUnit_Extensions_Database_DataSet_DefaultTableIterator
+ * @uses       PHPUnit_Extensions_Database_DataSet_QueryDataSet
+ * @uses       PHPUnit_Extensions_Database_DB_IDatabaseConnection
+ * @uses       Zend_Test_PHPUnit_Db_DataSet_DbTable
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

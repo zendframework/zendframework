@@ -20,17 +20,11 @@
  * @version    $Id$
  */
 
-
-/**
- * Zend_XmlRpc_Exception
- */
-require_once 'Zend/XmlRpc/Client/Exception.php';
-
-
 /**
  * Thrown by Zend_XmlRpc_Client when an HTTP error occurs during an
  * XML-RPC method call.
  *
+ * @uses       Zend_XmlRpc_Exception
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Client

@@ -19,14 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @see Zend_Validate_Interface */
-require_once 'Zend/Validate/Interface.php';
-
 /**
  * Generic Captcha adapter interface
  *
  * Each specific captcha implementation should implement this interface
  *
+ * @uses       Zend_Validate_Interface
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter

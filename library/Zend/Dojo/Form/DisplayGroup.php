@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_DisplayGroup */
-require_once 'Zend/Form/DisplayGroup.php';
-
 /**
  * Dijit-enabled DisplayGroup
  *

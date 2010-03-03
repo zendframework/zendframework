@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
-
-/** Zend_Amf_Value_Messaging_AbstractMessage */
-require_once 'Zend/Amf/Value/Messaging/AbstractMessage.php';
-
 /**
  * This type of message contains information necessary to perform
  * point-to-point or publish-subscribe messaging.
  *
+ * @uses       Zend_Amf_Value_Messaging_AbstractMessage
  * @package    Zend_Amf
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

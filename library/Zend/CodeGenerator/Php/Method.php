@@ -21,21 +21,10 @@
  */
 
 /**
- * @see Zend_CodeGenerator_Php_Member_Abstract
- */
-require_once 'Zend/CodeGenerator/Php/Member/Abstract.php';
-
-/**
- * @see Zend_CodeGenerator_Php_Docblock
- */
-require_once 'Zend/CodeGenerator/Php/Docblock.php';
-
-/**
- * @see Zend_CodeGenerator_Php_Parameter
- */
-require_once 'Zend/CodeGenerator/Php/Parameter.php';
-
-/**
+ * @uses       Zend_CodeGenerator_Php_Docblock
+ * @uses       Zend_CodeGenerator_Php_Exception
+ * @uses       Zend_CodeGenerator_Php_Member_Abstract
+ * @uses       Zend_CodeGenerator_Php_Parameter
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -141,7 +130,6 @@ class Zend_CodeGenerator_Php_Method extends Zend_CodeGenerator_Php_Member_Abstra
         } elseif ($parameter instanceof Zend_CodeGenerator_Php_Parameter) {
             $parameterName = $parameter->getName();
         } else {
-            require_once 'Zend/CodeGenerator/Php/Exception.php';
             throw new Zend_CodeGenerator_Php_Exception('setParameter() expects either an array of method options or an instance of Zend_CodeGenerator_Php_Parameter');
         }
 

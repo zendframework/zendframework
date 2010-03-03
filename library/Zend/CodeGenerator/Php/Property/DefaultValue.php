@@ -21,11 +21,8 @@
  */
 
 /**
- * @see Zend_CodeGenerator_Php_Abstract
- */
-require_once 'Zend/CodeGenerator/Php/Abstract.php';
-
-/**
+ * @uses       Zend_CodeGenerator_Php_Abstract
+ * @uses       Zend_CodeGenerator_Php_Exception
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -310,7 +307,6 @@ class Zend_CodeGenerator_Php_Property_DefaultValue extends Zend_CodeGenerator_Ph
                 break;
             case self::TYPE_OTHER:
             default:
-                require_once "Zend/CodeGenerator/Php/Exception.php";
                 throw new Zend_CodeGenerator_Php_Exception(
                     "Type '".get_class($value)."' is unknown or cannot be used as property default value."
                 );

@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** @see PHPUnit_Framework_ExpectationFailedException */
-require_once 'PHPUnit/Framework/ExpectationFailedException.php';
-
 /**
  * Zend_Test_PHPUnit_Constraint_Exception
  *

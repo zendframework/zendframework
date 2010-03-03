@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Dojo_Form_Element_Dijit */
-require_once 'Zend/Dojo/Form/Element/Dijit.php';
-
 /**
  * Textarea dijit
  *
+ * @uses       Zend_Dojo_Form_Element_Dijit
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage Form_Element

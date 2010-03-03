@@ -19,19 +19,12 @@
  * @version    $Id$
  */
 
-/** Zend_Memory_Exception */
-require_once 'Zend/Memory/Manager.php';
-
-/** Zend_Memory_Value */
-require_once 'Zend/Memory/Value.php';
-
-/** Zend_Memory_Container */
-require_once 'Zend/Memory/Container.php';
-
-/** Zend_Memory_Exception */
-require_once 'Zend/Cache.php';
-
 /**
+ * @uses       Zend_Cache
+ * @uses       Zend_Memory_Container
+ * @uses       Zend_Memory_Exception
+ * @uses       Zend_Memory_Manager
+ * @uses       Zend_Memory_Value
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -65,7 +58,6 @@ class Zend_Memory
         }
 
         if (!$backendIsFound) {
-            require_once 'Zend/Memory/Exception.php';
             throw new Zend_Memory_Exception("Incorrect backend ($backend)");
         }
 

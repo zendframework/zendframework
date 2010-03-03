@@ -20,11 +20,9 @@
  */
 
 /**
- * @see Zend_Filter_Interface
- */
-require_once 'Zend/Filter/Interface.php';
-
-/**
+ * @uses       Zend_Filter_Exception
+ * @uses       Zend_Filter_Interface
+ * @uses       Zend_Locale
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -154,7 +152,6 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
         }
 
         if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Unknown type');
         }
 
@@ -186,14 +183,11 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
         } elseif ($locale instanceof Zend_Locale) {
             $locale = array($locale->toString());
         } elseif (!is_array($locale)) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Locale has to be string, array or an instance of Zend_Locale');
         }
 
-        require_once 'Zend/Locale.php';
         foreach ($locale as $single) {
             if (!Zend_Locale::isLocale($single)) {
-                require_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception("Unknown locale '$single'");
             }
         }
@@ -244,7 +238,6 @@ class Zend_Filter_Boolean implements Zend_Filter_Interface
         if ($type >= self::YES) {
             $type -= self::YES;
             if (is_string($value)) {
-                require_once 'Zend/Locale.php';
                 $locales = $this->getLocale();
                 foreach ($locales as $locale) {
                     if ($this->_getLocalizedQuestion($value, false, $locale) === false) {

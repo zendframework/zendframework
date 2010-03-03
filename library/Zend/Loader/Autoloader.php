@@ -26,7 +26,7 @@ require_once 'Zend/Loader.php';
 /**
  * Autoloader stack and namespace autoloader
  *
- * @uses       Zend_Loader_Autoloader
+ * @uses       Zend_Loader
  * @package    Zend_Loader
  * @subpackage Autoloader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

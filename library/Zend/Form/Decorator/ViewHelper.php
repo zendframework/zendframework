@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Abstract */
-require_once 'Zend/Form/Decorator/Abstract.php';
-
 /**
  * Zend_Form_Decorator_ViewHelper
  *
@@ -34,6 +31,8 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * Assumes the view helper accepts three parameters, the name, value, and
  * optional attributes; these will be provided by the element.
  *
+ * @uses       Zend_Form_Decorator_Abstract
+ * @uses       Zend_Form_Decorator_Exception
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -222,7 +221,6 @@ class Zend_Form_Decorator_ViewHelper extends Zend_Form_Decorator_Abstract
 
         $view = $element->getView();
         if (null === $view) {
-            require_once 'Zend/Form/Decorator/Exception.php';
             throw new Zend_Form_Decorator_Exception('ViewHelper decorator cannot render without a registered view object');
         }
 

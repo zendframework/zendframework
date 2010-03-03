@@ -20,14 +20,10 @@
  * @version    $Id$
  */
 
-
-/** Zend_View_Helper_FormRadio */
-require_once 'Zend/View/Helper/FormRadio.php';
-
-
 /**
  * Helper to generate a set of checkbox button elements
  *
+ * @uses       Zend_View_Helper_FormRadio
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

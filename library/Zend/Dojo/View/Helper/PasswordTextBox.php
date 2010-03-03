@@ -20,18 +20,15 @@
  * @version    $Id$
  */
 
-/** Zend_Dojo_View_Helper_ValidationTextBox */
-require_once 'Zend/Dojo/View/Helper/ValidationTextBox.php';
-
 /**
  * Dojo ValidationTextBox dijit tied to password input
  *
- * @uses       Zend_Dojo_View_Helper_Dijit
+ * @uses       Zend_Dojo_View_Helper_ValidationTextBox
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-  */
+ */
 class Zend_Dojo_View_Helper_PasswordTextBox extends Zend_Dojo_View_Helper_ValidationTextBox
 {
     /**

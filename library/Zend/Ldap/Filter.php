@@ -21,13 +21,12 @@
  */
 
 /**
- * @see Zend_Ldap_Filter_String
- */
-require_once 'Zend/Ldap/Filter/String.php';
-
-/**
  * Zend_Ldap_Filter.
  *
+ * @uses       Zend_Ldap_Filter_And
+ * @uses       Zend_Ldap_Filter_Mask
+ * @uses       Zend_Ldap_Filter_Or
+ * @uses       Zend_Ldap_Filter_String
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter
@@ -192,10 +191,6 @@ class Zend_Ldap_Filter extends Zend_Ldap_Filter_String
      */
     public static function mask($mask, $value)
     {
-        /**
-         * Zend_Ldap_Filter_Mask
-         */
-        require_once 'Zend/Ldap/Filter/Mask.php';
         return new Zend_Ldap_Filter_Mask($mask, $value);
     }
 
@@ -207,10 +202,6 @@ class Zend_Ldap_Filter extends Zend_Ldap_Filter_String
      */
     public static function andFilter($filter)
     {
-        /**
-         * Zend_Ldap_Filter_And
-         */
-        require_once 'Zend/Ldap/Filter/And.php';
         return new Zend_Ldap_Filter_And(func_get_args());
     }
 
@@ -222,10 +213,6 @@ class Zend_Ldap_Filter extends Zend_Ldap_Filter_String
      */
     public static function orFilter($filter)
     {
-        /**
-         * Zend_Ldap_Filter_Or
-         */
-        require_once 'Zend/Ldap/Filter/Or.php';
         return new Zend_Ldap_Filter_Or(func_get_args());
     }
 

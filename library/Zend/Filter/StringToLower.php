@@ -20,11 +20,8 @@
  */
 
 /**
- * @see Zend_Filter_Interface
- */
-require_once 'Zend/Filter/Interface.php';
-
-/**
+ * @uses       Zend_Filter_Exception
+ * @uses       Zend_Filter_Interface
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -83,13 +80,11 @@ class Zend_Filter_StringToLower implements Zend_Filter_Interface
     {
         if ($encoding !== null) {
             if (!function_exists('mb_strtolower')) {
-                require_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception('mbstring is required for this feature');
             }
 
             $encoding = (string) $encoding;
             if (!in_array(strtolower($encoding), array_map('strtolower', mb_list_encodings()))) {
-                require_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception("The given encoding '$encoding' is not supported by mbstring");
             }
         }

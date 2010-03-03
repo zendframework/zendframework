@@ -21,23 +21,11 @@
  */
 
 /**
- * @see Zend_Db_Adapter_Abstract
- */
-require_once "Zend/Db/Adapter/Abstract.php";
-
-/**
- * @see Zend_Test_DbStatement
- */
-require_once "Zend/Test/DbStatement.php";
-
-/**
- * @see Zend_Db_Profiler
- */
-require_once 'Zend/Db/Profiler.php';
-
-/**
  * Testing Database Adapter which acts as a stack for SQL Results
  *
+ * @uses       Zend_Db_Adapter_Abstract
+ * @uses       Zend_Db_Profiler
+ * @uses       Zend_Test_DbStatement
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

@@ -20,11 +20,8 @@
  */
 
 /**
- * @see Zend_Markup_Token
- */
-require_once 'Zend/Markup/Token.php';
-
-/**
+ * @uses       RecursiveIterator
+ * @uses       Zend_Markup_Token
  * @category   Zend
  * @package    Zend_Markup
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

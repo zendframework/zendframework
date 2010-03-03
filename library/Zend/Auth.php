@@ -21,6 +21,7 @@
 
 
 /**
+ * @uses       Zend_Auth_Storage_Session
  * @category   Zend
  * @package    Zend_Auth
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -84,10 +85,6 @@ class Zend_Auth
     public function getStorage()
     {
         if (null === $this->_storage) {
-            /**
-             * @see Zend_Auth_Storage_Session
-             */
-            require_once 'Zend/Auth/Storage/Session.php';
             $this->setStorage(new Zend_Auth_Storage_Session());
         }
 

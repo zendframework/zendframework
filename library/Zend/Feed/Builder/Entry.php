@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,13 +19,14 @@
  * @version    $Id$
  */
 
-
 /**
  * An entry of a custom build feed
  *
  * Classes implementing the Zend_Feed_Builder_Interface interface
  * uses this class to describe an entry of a feed
  *
+ * @uses       ArrayObject
+ * @uses       Zend_Feed_Builder_Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -221,10 +221,6 @@ class Zend_Feed_Builder_Entry extends ArrayObject
     public function addCategory(array $category)
     {
         if (empty($category['term'])) {
-            /**
-             * @see Zend_Feed_Builder_Exception
-             */
-            require_once 'Zend/Feed/Builder/Exception.php';
             throw new Zend_Feed_Builder_Exception("you have to define the name of the category");
         }
 
@@ -260,10 +256,6 @@ class Zend_Feed_Builder_Entry extends ArrayObject
     {
         foreach ($enclosures as $enclosure) {
             if (empty($enclosure['url'])) {
-                /**
-                 * @see Zend_Feed_Builder_Exception
-                 */
-                require_once 'Zend/Feed/Builder/Exception.php';
                 throw new Zend_Feed_Builder_Exception("you have to supply an url for your enclosure");
             }
             $type = isset($enclosure['type']) ? $enclosure['type'] : '';

@@ -20,11 +20,7 @@
  */
  
 /**
- * @see Zend_Feed_Writer_Extension_RendererInterface
- */
-require_once 'Zend/Feed/Writer/Extension/RendererInterface.php';
- 
- /**
+ * @uses       Zend_Feed_Writer_Extension_RendererInterface
  * @category   Zend
  * @package    Zend_Feed_Writer_Entry_Rss
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,17 +20,11 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Db_Table_Rowset_Abstract
- */
-require_once 'Zend/Db/Table/Rowset/Abstract.php';
-
-
 /**
  * Reference concrete class that extends Zend_Db_Table_Rowset_Abstract.
  * Developers may also create their own classes that extend the abstract class.
  *
+ * @uses       Zend_Db_Table_Rowset_Abstract
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Table

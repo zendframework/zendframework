@@ -19,16 +19,6 @@
  */
 
 /**
- * Zend_XmlRpc_Value
- */
-require_once 'Zend/XmlRpc/Value.php';
-
-/**
- * Zend_XmlRpc_Fault
- */
-require_once 'Zend/XmlRpc/Fault.php';
-
-/**
  * XmlRpc Request object
  *
  * Encapsulates an XmlRpc request, holding the method call and all parameters.
@@ -39,11 +29,14 @@ require_once 'Zend/XmlRpc/Fault.php';
  * generated and stored in {@link $_fault}; developers may check for it using
  * {@link isFault()} and {@link getFault()}.
  *
- * @category Zend
- * @package  Zend_XmlRpc
+ * @uses       SimpleXMLElement
+ * @uses       Zend_XmlRpc_Fault
+ * @uses       Zend_XmlRpc_Value
+ * @category   Zend
+ * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_XmlRpc_Request
 {

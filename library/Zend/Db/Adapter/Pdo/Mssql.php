@@ -20,16 +20,12 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Db_Adapter_Pdo_Abstract
- */
-require_once 'Zend/Db/Adapter/Pdo/Abstract.php';
-
-
 /**
  * Class for connecting to Microsoft SQL Server databases and performing common operations.
  *
+ * @uses       Zend_Db
+ * @uses       Zend_Db_Adapter_Exception
+ * @uses       Zend_Db_Adapter_Pdo_Abstract
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
@@ -318,15 +314,11 @@ class Zend_Db_Adapter_Pdo_Mssql extends Zend_Db_Adapter_Pdo_Abstract
      {
         $count = intval($count);
         if ($count <= 0) {
-            /** @see Zend_Db_Adapter_Exception */
-            require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
         }
 
         $offset = intval($offset);
         if ($offset < 0) {
-            /** @see Zend_Db_Adapter_Exception */
-            require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument offset=$offset is not valid");
         }
 

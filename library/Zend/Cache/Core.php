@@ -21,6 +21,9 @@
 
 
 /**
+ * @uses       Zend_Cache
+ * @uses       Zend_Log
+ * @uses       Zend_Log_Writer_Stream
  * @package    Zend_Cache
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -668,7 +671,6 @@ class Zend_Cache_Core
         }
 
         // Create a default logger to the standard output stream
-        require_once 'Zend/Log/Writer/Stream.php';
         $logger = new Zend_Log(new Zend_Log_Writer_Stream('php://output'));
         $this->_options['logger'] = $logger;
     }

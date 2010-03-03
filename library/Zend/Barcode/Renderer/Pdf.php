@@ -20,21 +20,14 @@
  * @version    $Id$
  */
 
-/** @see Zend_Barcode_Renderer_RendererAbstract */
-require_once 'Zend/Barcode/Renderer/RendererAbstract.php';
-
-/** @see Zend_Pdf */
-require_once 'Zend/Pdf.php';
-
-/** @see Zend_Pdf_Page */
-require_once 'Zend/Pdf/Page.php';
-
-/** @see Zend_Pdf_Color_Rgb */
-require_once 'Zend/Pdf/Color/Rgb.php';
-
 /**
  * Class for rendering the barcode in PDF resource
  *
+ * @uses       Zend_Barcode_Renderer_Exception
+ * @uses       Zend_Barcode_Renderer_RendererAbstract
+ * @uses       Zend_Pdf
+ * @uses       Zend_Pdf_Page
+ * @uses       Zend_Pdf_Color_Rgb
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -69,7 +62,6 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
     public function setResource($pdf, $page = 0)
     {
         if (!$pdf instanceof Zend_Pdf) {
-            require_once 'Zend/Barcode/Renderer/Exception.php';
             throw new Zend_Barcode_Renderer_Exception(
                 'Invalid Zend_Pdf resource provided to setResource()'
             );

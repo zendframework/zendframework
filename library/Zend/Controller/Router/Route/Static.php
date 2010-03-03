@@ -20,14 +20,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Router_Route_Abstract */
-require_once 'Zend/Controller/Router/Route/Abstract.php';
-
 /**
  * StaticRoute is used for managing static URIs.
  *
  * It's a lot faster compared to the standard Route implementation.
  *
+ * @uses       Zend_Controller_Router_Route_Abstract
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

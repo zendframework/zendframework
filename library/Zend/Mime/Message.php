@@ -19,19 +19,11 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_Mime
- */
-require_once 'Zend/Mime.php';
-
-/**
- * Zend_Mime_Part
- */
-require_once 'Zend/Mime/Part.php';
-
-
-/**
+ * @uses       Zend_Exception
+ * @uses       Zend_Mime
+ * @uses       Zend_Mime_Decode
+ * @uses       Zend_Mime_Part
  * @category   Zend
  * @package    Zend_Mime
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -242,7 +234,6 @@ class Zend_Mime_Message
      */
     public static function createFromMessage($message, $boundary, $EOL = Zend_Mime::LINEEND)
     {
-        require_once 'Zend/Mime/Decode.php';
         $parts = Zend_Mime_Decode::splitMessageStruct($message, $boundary, $EOL);
 
         $res = new self();

@@ -21,13 +21,9 @@
  */
 
 /**
- * @see Zend_Soap_Wsdl_Strategy_Interface
- */
-require_once "Zend/Soap/Wsdl/Strategy/Interface.php";
-
-/**
  * Abstract class for Zend_Soap_Wsdl_Strategy.
  *
+ * @uses       Zend_Soap_Wsdl_Strategy_Interface
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Wsdl

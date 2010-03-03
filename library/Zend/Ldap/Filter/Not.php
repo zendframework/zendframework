@@ -21,13 +21,9 @@
  */
 
 /**
- * @see Zend_Ldap_Filter_Abstract
- */
-require_once 'Zend/Ldap/Filter/Abstract.php';
-
-/**
  * Zend_Ldap_Filter_Not provides a negation filter.
  *
+ * @uses       Zend_Ldap_Filter_Abstract
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter

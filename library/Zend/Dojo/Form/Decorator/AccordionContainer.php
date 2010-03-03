@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Dojo_Form_Decorator_DijitContainer */
-require_once 'Zend/Dojo/Form/Decorator/DijitContainer.php';
-
 /**
  * AccordionContainer
  *

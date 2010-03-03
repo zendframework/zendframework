@@ -21,25 +21,20 @@
  */
 
 /**
- * @see Zend_Ldap_Node_Schema_Item
- */
-require_once 'Zend/Ldap/Node/Schema/Item.php';
-/**
- * @see Zend_Ldap_Node_Schema_ObjectClass_Interface
- */
-require_once 'Zend/Ldap/Node/Schema/ObjectClass/Interface.php';
-
-/**
  * Zend_Ldap_Node_Schema_ObjectClass_OpenLdap provides access to the objectClass
  * schema information on an OpenLDAP server.
  *
+ * @uses       Zend_Ldap_Node_Schema
+ * @uses       Zend_Ldap_Node_Schema_Item
+ * @uses       Zend_Ldap_Node_Schema_ObjectClass_Interface
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Ldap_Node_Schema_ObjectClass_OpenLdap extends Zend_Ldap_Node_Schema_Item
+class Zend_Ldap_Node_Schema_ObjectClass_OpenLdap 
+    extends Zend_Ldap_Node_Schema_Item
     implements Zend_Ldap_Node_Schema_ObjectClass_Interface
 {
     /**

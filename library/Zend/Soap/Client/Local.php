@@ -20,12 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Soap_Server */
-require_once 'Zend/Soap/Server.php';
-
-/** Zend_Soap_Client */
-require_once 'Zend/Soap/Client.php';
-
 if (extension_loaded('soap')) {
 
 /**
@@ -36,6 +30,8 @@ if (extension_loaded('soap')) {
  *
  * Could be used for development or testing purposes.
  *
+ * @uses       Zend_Soap_Client
+ * @uses       Zend_Soap_Server
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client

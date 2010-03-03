@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,16 +19,10 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Feed_Entry_Abstract
- */
-require_once 'Zend/Feed/Entry/Abstract.php';
-
-
 /**
  * Concrete class for working with RSS items.
  *
+ * @uses       Zend_Feed_Entry_Abstract
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -20,14 +20,10 @@
  */
 
 /**
- * Implement needed classes
- */
-require_once 'Zend/Measure/Abstract.php';
-require_once 'Zend/Locale.php';
-
-/**
  * Class for handling weight conversions
  *
+ * @uses       Zend_Locale
+ * @uses       Zend_Measure_Abstract
  * @category   Zend
  * @package    Zend_Measure
  * @subpackage Zend_Measure_Weigth

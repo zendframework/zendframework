@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_FormElements */
-require_once 'Zend/Form/Decorator/FormElements.php';
-
 /**
  * Zend_Form_Decorator_PrepareElements
  *
@@ -32,6 +29,7 @@ require_once 'Zend/Form/Decorator/FormElements.php';
  *
  * Any other options passed will be used as HTML attributes of the form tag.
  *
+ * @uses       Zend_Form_Decorator_FormElements
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

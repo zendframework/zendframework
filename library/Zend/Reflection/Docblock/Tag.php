@@ -19,10 +19,10 @@
  * @version    $Id$
  */
 
-/** Zend_Loader */
-require_once 'Zend/Loader.php';
-
 /**
+ * @uses       Reflector
+ * @uses       Zend_Loader
+ * @uses       Zend_Reflection_Exception
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -59,7 +59,6 @@ class Zend_Reflection_Docblock_Tag implements Reflector
         $matches = array();
 
         if (!preg_match('#^@(\w+)(\s|$)#', $tagDocblockLine, $matches)) {
-            require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('No valid tag name found within provided docblock line.');
         }
 
@@ -113,7 +112,6 @@ class Zend_Reflection_Docblock_Tag implements Reflector
 
         // find the line
         if (!preg_match('#^@(\w+)(?:\s+([^\s].*)|$)?#', $tagDocblockLine, $matches)) {
-            require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Provided docblock line does not contain a valid tag');
         }
 

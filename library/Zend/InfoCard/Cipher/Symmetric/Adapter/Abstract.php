@@ -21,11 +21,7 @@
  */
 
 /**
- * Zend_InfoCard_Cipher_Symmetric_Interface
- */
-require_once 'Zend/InfoCard/Cipher/Symmetric/Interface.php';
-
-/**
+ * @uses       Zend_InfoCard_Cipher_Symmetric_Interface
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

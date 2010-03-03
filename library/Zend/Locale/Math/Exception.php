@@ -21,12 +21,7 @@
 
 
 /**
- * Zend_Exception
- */
-require_once 'Zend/Locale/Exception.php';
-
-
-/**
+ * @uses       Zend_Locale_Exception
  * @category   Zend
  * @package    Zend_Locale
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

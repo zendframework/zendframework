@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -26,6 +25,7 @@
  * includes easy access to all the response's different elemts, as well as some
  * convenience methods for parsing and validating HTTP responses.
  *
+ * @uses       Zend_Http_Response
  * @package    Zend_Http
  * @subpackage Response
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

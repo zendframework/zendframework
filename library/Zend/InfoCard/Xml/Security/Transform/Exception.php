@@ -21,11 +21,7 @@
  */
 
 /**
- * Zend_InfoCard_Xml_Security_Exception
- */
-require_once 'Zend/InfoCard/Xml/Security/Exception.php';
-
-/**
+ * @uses       Zend_InfoCard_Xml_Security_Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml_Security

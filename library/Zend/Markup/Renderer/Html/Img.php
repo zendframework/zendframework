@@ -21,17 +21,10 @@
  */
 
 /**
- * @see Zend_Markup_Renderer_Html
- */
-require_once 'Zend/Markup/Renderer/Html.php';
-/**
- * @see Zend_Markup_Renderer_Html_HtmlAbstract
- */
-require_once 'Zend/Markup/Renderer/Html/HtmlAbstract.php';
-
-/**
  * Tag interface
  *
+ * @uses       Zend_Markup_Renderer_Html
+ * @uses       Zend_Markup_Renderer_Html_HtmlAbstract
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Html

@@ -20,13 +20,9 @@
  */
 
 /**
- * Zend_Exception
- */
-require_once 'Zend/Exception.php';
-
-/**
  * Exception class for Zend_File_Transfer
  *
+ * @uses       Zend_Exception
  * @category   Zend
  * @package    Zend_File_Transfer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

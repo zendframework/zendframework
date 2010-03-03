@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,22 +19,14 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Feed
- */
-require_once 'Zend/Feed.php';
-
-/**
- * @see Zend_Feed_Element
- */
-require_once 'Zend/Feed/Element.php';
-
-
 /**
  * Zend_Feed_Entry_Abstract represents a single entry in an Atom or RSS
  * feed.
  *
+ * @uses       DOMDocument
+ * @uses       Zend_Feed
+ * @uses       Zend_Feed_Element
+ * @uses       Zend_Feed_Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -93,19 +84,11 @@ abstract class Zend_Feed_Entry_Abstract extends Zend_Feed_Element
                         }
                     }
 
-                    /**
-                     * @see Zend_Feed_Exception
-                     */
-                    require_once 'Zend/Feed/Exception.php';
                     throw new Zend_Feed_Exception("DOMDocument cannot parse XML: $php_errormsg");
                 }
 
                 $element = $doc->getElementsByTagName($this->_rootElement)->item(0);
                 if (!$element) {
-                    /**
-                     * @see Zend_Feed_Exception
-                     */
-                    require_once 'Zend/Feed/Exception.php';
                     throw new Zend_Feed_Exception('No root <' . $this->_rootElement . '> element found, cannot parse feed.');
                 }
             } else {

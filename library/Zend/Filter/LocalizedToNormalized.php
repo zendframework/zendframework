@@ -20,18 +20,10 @@
  */
 
 /**
- * @see Zend_Filter_Interface
- */
-require_once 'Zend/Filter/Interface.php';
-
-/**
- * @see Zend_Loader
- */
-require_once 'Zend/Locale/Format.php';
-
-/**
  * Normalizes given localized input
  *
+ * @uses       Zend_Filter_Interface
+ * @uses       Zend_Locale_Format
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

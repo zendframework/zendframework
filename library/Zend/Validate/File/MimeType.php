@@ -20,16 +20,15 @@
  */
 
 /**
- * @see Zend_Validate_Abstract
- */
-require_once 'Zend/Validate/Abstract.php';
-
-/**
  * Validator for the mime type of a file
  *
+ * @uses      finfo
+ * @uses      Zend_Loader
+ * @uses      Zend_Validate_Abstract
+ * @uses      Zend_Validate_Exception
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
@@ -117,7 +116,6 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
         } elseif (is_string($mimetype)) {
             $mimetype = explode(',', $mimetype);
         } elseif (!is_array($mimetype)) {
-            require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception("Invalid options to validator provided");
         }
 
@@ -170,7 +168,6 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
         if (empty($file)) {
             $this->_magicfile = null;
         } else if (!is_readable($file)) {
-            require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('The given magicfile can not be read');
         } else {
             $this->_magicfile = (string) $file;
@@ -245,7 +242,6 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
         if (is_string($mimetype)) {
             $mimetype = explode(',', $mimetype);
         } elseif (!is_array($mimetype)) {
-            require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception("Invalid options to validator provided");
         }
 
@@ -294,7 +290,6 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
         }
 
         // Is file readable ?
-        require_once 'Zend/Loader.php';
         if (!Zend_Loader::isReadable($value)) {
             return $this->_throw($file, self::NOT_READABLE);
         }

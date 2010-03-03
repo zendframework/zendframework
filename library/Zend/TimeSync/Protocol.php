@@ -22,9 +22,12 @@
 /**
  * Abstract class definition for all timeserver protocols
  *
+ * @uses      Zend_Date
+ * @uses      Zend_TimeSync
+ * @uses      Zend_TimeSync_Exception
  * @category  Zend
  * @package   Zend_TimeSync
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_TimeSync_Protocol

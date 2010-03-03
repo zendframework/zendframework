@@ -20,13 +20,11 @@
  * @version    $Id$
  */
 
-/** @see PHPUnit_Framework_Constraint */
-require_once 'PHPUnit/Framework/Constraint.php';
-
 /**
  * Redirection constraints
  *
  * @uses       PHPUnit_Framework_Constraint
+ * @uses       Zend_Test_PHPUnit_Constraint_Exception
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -101,7 +99,6 @@ class Zend_Test_PHPUnit_Constraint_Redirect extends PHPUnit_Framework_Constraint
     public function evaluate($other, $assertType = null)
     {
         if (!$other instanceof Zend_Controller_Response_Abstract) {
-            require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
             throw new Zend_Test_PHPUnit_Constraint_Exception('Redirect constraint assertions require a response object');
         }
 
@@ -111,7 +108,6 @@ class Zend_Test_PHPUnit_Constraint_Redirect extends PHPUnit_Framework_Constraint
         }
 
         if (!in_array($assertType, $this->_assertTypes)) {
-            require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
             throw new Zend_Test_PHPUnit_Constraint_Exception(sprintf('Invalid assertion type "%s" provided to %s constraint', $assertType, __CLASS__));
         }
 
@@ -124,7 +120,6 @@ class Zend_Test_PHPUnit_Constraint_Redirect extends PHPUnit_Framework_Constraint
         switch ($assertType) {
             case self::ASSERT_REDIRECT_TO:
                 if (3 > $argc) {
-                    require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
                     throw new Zend_Test_PHPUnit_Constraint_Exception('No redirect URL provided against which to match');
                 }
                 $this->_match = $match = $argv[2];
@@ -133,7 +128,6 @@ class Zend_Test_PHPUnit_Constraint_Redirect extends PHPUnit_Framework_Constraint
                     : $this->_match($response, $match);
             case self::ASSERT_REDIRECT_REGEX:
                 if (3 > $argc) {
-                    require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
                     throw new Zend_Test_PHPUnit_Constraint_Exception('No pattern provided against which to match redirect');
                 }
                 $this->_match = $match = $argv[2];
@@ -158,7 +152,6 @@ class Zend_Test_PHPUnit_Constraint_Redirect extends PHPUnit_Framework_Constraint
      */
     public function fail($other, $description, $not = false)
     {
-        require_once 'Zend/Test/PHPUnit/Constraint/Exception.php';
         switch ($this->_assertType) {
             case self::ASSERT_REDIRECT_TO:
                 $failure = 'Failed asserting response redirects to "%s"';

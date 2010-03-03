@@ -22,13 +22,9 @@
  */
 
 /**
- * Zend
- */
-require_once 'Zend/Db/Adapter/Exception.php';
-
-/**
  * Zend_Db_Adapter_Mysqli_Exception
  *
+ * @uses       Zend_Db_Adapter_Exception
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter

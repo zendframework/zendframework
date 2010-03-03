@@ -20,23 +20,12 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Auth_Adapter_Interface
- */
-require_once 'Zend/Auth/Adapter/Interface.php';
-
-
-/**
- * @see Zend_OpenId_Consumer
- */
-require_once 'Zend/OpenId/Consumer.php';
-
-
 /**
  * A Zend_Auth Authentication Adapter allowing the use of OpenID protocol as an
  * authentication mechanism
  *
+ * @uses       Zend_Auth_Adapter_Interface
+ * @uses       Zend_OpenId_Consumer
  * @category   Zend
  * @package    Zend_Auth
  * @subpackage Zend_Auth_Adapter

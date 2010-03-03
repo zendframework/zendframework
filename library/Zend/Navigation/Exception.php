@@ -20,16 +20,12 @@
  */
 
 /**
- * @see Zend_Exception
- */
-require_once 'Zend/Exception.php';
-
-/**
  * Navigation exception
  *
+ * @uses      Zend_Exception
  * @category  Zend
  * @package   Zend_Navigation
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Navigation_Exception extends Zend_Exception

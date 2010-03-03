@@ -20,17 +20,11 @@
  * @version    $Id$
  */
 
-
-/** Zend_Service_Abstract */
-require_once 'Zend/Service/Abstract.php';
-
-/** Zend_Rest_Client_Result */
-require_once 'Zend/Rest/Client/Result.php';
-
-/** Zend_Uri */
-require_once 'Zend/Uri.php';
-
 /**
+ * @uses       Zend_Rest_Client_Exception
+ * @uses       Zend_Rest_Client_Result
+ * @uses       Zend_Service_Abstract
+ * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Rest
  * @subpackage Client
@@ -102,7 +96,6 @@ class Zend_Rest_Client extends Zend_Service_Abstract
     {
         // Get the URI object and configure it
         if (!$this->_uri instanceof Zend_Uri_Http) {
-            require_once 'Zend/Rest/Client/Exception.php';
             throw new Zend_Rest_Client_Exception('URI object must be set before performing call');
         }
 

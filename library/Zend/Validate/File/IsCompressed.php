@@ -20,16 +20,12 @@
  */
 
 /**
- * @see Zend_Validate_File_MimeType
- */
-require_once 'Zend/Validate/File/MimeType.php';
-
-/**
  * Validator which checks if the file already exists in the directory
  *
+ * @uses      Zend_Validate_File_MimeType
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_IsCompressed extends Zend_Validate_File_MimeType

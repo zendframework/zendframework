@@ -21,15 +21,11 @@
  */
 
 /**
- * @see Zend_Validate_Abstract
- */
-require_once 'Zend/Validate/Abstract.php';
-
-/**
  * Validates whether a given value is valid as a sitemap <priority> value
  *
  * @link       http://www.sitemaps.org/protocol.php Sitemaps XML format
  *
+ * @uses       Zend_Validate_Abstract
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage Sitemap

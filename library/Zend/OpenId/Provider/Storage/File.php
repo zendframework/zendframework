@@ -22,13 +22,10 @@
  */
 
 /**
- * @see Zend_OpenId_Provider_Storage
- */
-require_once "Zend/OpenId/Provider/Storage.php";
-
-/**
  * External storage implemmentation using serialized files
  *
+ * @uses       Zend_OpenId_Exception
+ * @uses       Zend_OpenId_Provider_Storage
  * @category   Zend
  * @package    Zend_OpenId
  * @subpackage Zend_OpenId_Provider

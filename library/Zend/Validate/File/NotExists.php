@@ -20,16 +20,12 @@
  */
 
 /**
- * @see Zend_Validate_File_Exists
- */
-require_once 'Zend/Validate/File/Exists.php';
-
-/**
  * Validator which checks if the destination file does not exist
  *
+ * @uses      Zend_Validate_File_Exists
  * @category  Zend
  * @package   Zend_Validate
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_File_NotExists extends Zend_Validate_File_Exists

@@ -24,6 +24,9 @@
  * Zend_Ldap_Node_Schema_Item provides a base implementation for managing schema
  * items like objectClass and attribute.
  *
+ * @uses       ArrayAccess
+ * @uses       BadMethodCallException
+ * @uses       Countable
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Schema

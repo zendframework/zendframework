@@ -22,6 +22,7 @@
 
 /**
  * Empty Interface represents a Pki cipher object
+ *
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

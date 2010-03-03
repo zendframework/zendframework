@@ -19,14 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @see Zend_Form_Decorator_Abstract */
-require_once 'Zend/Form/Decorator/Abstract.php';
-
 /**
  * Captcha generic decorator
  *
  * Adds captcha adapter output
  *
+ * @uses       Zend_Form_Decorator_Abstract
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

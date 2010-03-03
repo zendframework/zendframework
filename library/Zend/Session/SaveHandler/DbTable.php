@@ -21,28 +21,13 @@
  */
 
 /**
- * @see Zend_Session
- */
-require_once 'Zend/Session.php';
-
-/**
- * @see Zend_Db_Table_Abstract
- */
-require_once 'Zend/Db/Table/Abstract.php';
-
-/**
- * @see Zend_Db_Table_Row_Abstract
- */
-require_once 'Zend/Db/Table/Row/Abstract.php';
-
-/**
- * @see Zend_Config
- */
-require_once 'Zend/Config.php';
-
-/**
  * Zend_Session_SaveHandler_DbTable
  *
+ * @uses       Zend_Config
+ * @uses       Zend_Db_Table_Abstract
+ * @uses       Zend_Db_Table_Row_Abstract
+ * @uses       Zend_Session
+ * @uses       Zend_Session_SaveHandler_Exception
  * @category   Zend
  * @package    Zend_Session
  * @subpackage SaveHandler
@@ -165,11 +150,6 @@ class Zend_Session_SaveHandler_DbTable
         if ($config instanceof Zend_Config) {
             $config = $config->toArray();
         } else if (!is_array($config)) {
-            /**
-             * @see Zend_Session_SaveHandler_Exception
-             */
-            require_once 'Zend/Session/SaveHandler/Exception.php';
-
             throw new Zend_Session_SaveHandler_Exception(
                 '$config must be an instance of Zend_Config or array of key/value pairs containing '
               . 'configuration options for Zend_Session_SaveHandler_DbTable and Zend_Db_Table_Abstract.');
@@ -229,10 +209,6 @@ class Zend_Session_SaveHandler_DbTable
     public function setLifetime($lifetime, $overrideLifetime = null)
     {
         if ($lifetime < 0) {
-            /**
-             * @see Zend_Session_SaveHandler_Exception
-             */
-            require_once 'Zend/Session/SaveHandler/Exception.php';
             throw new Zend_Session_SaveHandler_Exception();
         } else if (empty($lifetime)) {
             $this->_lifetime = (int) ini_get('session.gc_maxlifetime');
@@ -417,11 +393,6 @@ class Zend_Session_SaveHandler_DbTable
     protected function _setupTableName()
     {
         if (empty($this->_name) && basename(($this->_name = session_save_path())) != $this->_name) {
-            /**
-             * @see Zend_Session_SaveHandler_Exception
-             */
-            require_once 'Zend/Session/SaveHandler/Exception.php';
-
             throw new Zend_Session_SaveHandler_Exception('session.save_path is a path and not a table name.');
         }
 
@@ -449,20 +420,10 @@ class Zend_Session_SaveHandler_DbTable
         }
 
         if (count($this->_primaryAssignment) !== count($this->_primary)) {
-            /**
-             * @see Zend_Session_SaveHandler_Exception
-             */
-            require_once 'Zend/Session/SaveHandler/Exception.php';
-
             throw new Zend_Session_SaveHandler_Exception(
                 "Value for configuration option '" . self::PRIMARY_ASSIGNMENT . "' must have an assignment "
               . "for each session table primary key.");
         } else if (!in_array(self::PRIMARY_ASSIGNMENT_SESSION_ID, $this->_primaryAssignment)) {
-            /**
-             * @see Zend_Session_SaveHandler_Exception
-             */
-            require_once 'Zend/Session/SaveHandler/Exception.php';
-
             throw new Zend_Session_SaveHandler_Exception(
                 "Value for configuration option '" . self::PRIMARY_ASSIGNMENT . "' must have an assignment "
               . "for the session id ('" . self::PRIMARY_ASSIGNMENT_SESSION_ID . "').");
@@ -478,29 +439,14 @@ class Zend_Session_SaveHandler_DbTable
     protected function _checkRequiredColumns()
     {
         if ($this->_modifiedColumn === null) {
-            /**
-             * @see Zend_Session_SaveHandler_Exception
-             */
-            require_once 'Zend/Session/SaveHandler/Exception.php';
-
             throw new Zend_Session_SaveHandler_Exception(
                 "Configuration must define '" . self::MODIFIED_COLUMN . "' which names the "
               . "session table last modification time column.");
         } else if ($this->_lifetimeColumn === null) {
-            /**
-             * @see Zend_Session_SaveHandler_Exception
-             */
-            require_once 'Zend/Session/SaveHandler/Exception.php';
-
             throw new Zend_Session_SaveHandler_Exception(
                 "Configuration must define '" . self::LIFETIME_COLUMN . "' which names the "
               . "session table lifetime column.");
         } else if ($this->_dataColumn === null) {
-            /**
-             * @see Zend_Session_SaveHandler_Exception
-             */
-            require_once 'Zend/Session/SaveHandler/Exception.php';
-
             throw new Zend_Session_SaveHandler_Exception(
                 "Configuration must define '" . self::DATA_COLUMN . "' which names the "
               . "session table data column.");

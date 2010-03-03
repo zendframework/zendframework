@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Multi */
-require_once 'Zend/Form/Element/Multi.php';
-
 /**
  * Radio form element
  *
+ * @uses       Zend_Form_Element_Multi
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

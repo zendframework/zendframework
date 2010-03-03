@@ -21,13 +21,9 @@
  */
 
 /**
- * @see Zend_Ldap_Filter_Logical
- */
-require_once 'Zend/Ldap/Filter/Logical.php';
-
-/**
  * Zend_Ldap_Filter_Or provides an 'or' filter.
  *
+ * @uses       Zend_Ldap_Filter_Logical
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter

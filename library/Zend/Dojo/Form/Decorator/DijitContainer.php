@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Abstract */
-require_once 'Zend/Form/Decorator/Abstract.php';
-
 /**
  * Zend_Dojo_Form_Decorator_DijitContainer
  *
@@ -33,6 +30,7 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * parameters, and (X)HTML attributes; these will be provided by the element.
  *
  * @uses       Zend_Form_Decorator_Abstract
+ * @uses       Zend_Form_Decorator_Exception
  * @package    Zend_Dojo
  * @subpackage Form_Decorator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -73,7 +71,6 @@ abstract class Zend_Dojo_Form_Decorator_DijitContainer extends Zend_Form_Decorat
     public function getHelper()
     {
         if (null === $this->_helper) {
-            require_once 'Zend/Form/Decorator/Exception.php';
             throw new Zend_Form_Decorator_Exception('No view helper specified fo DijitContainer decorator');
         }
         return $this->_helper;

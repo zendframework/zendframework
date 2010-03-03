@@ -22,11 +22,6 @@
  */
 
 /**
- * Zend_Gdata_App
- */
-require_once 'Zend/Gdata/App.php';
-
-/**
  * Provides functionality to interact with Google data APIs
  * Subclasses exist to implement service-specific features
  *
@@ -35,6 +30,8 @@ require_once 'Zend/Gdata/App.php';
  *
  * @link http://code.google.com/apis/gdata/overview.html
  *
+ * @uses       Zend_Gdata_App
+ * @uses       Zend_Gdata_App_InvalidArgumentException
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
@@ -154,7 +151,6 @@ class Zend_Gdata extends Zend_Gdata_App
         } elseif ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'You must specify the location as either a string URI ' .
                     'or a child of Zend_Gdata_Query');
@@ -179,7 +175,6 @@ class Zend_Gdata extends Zend_Gdata_App
         } elseif ($location instanceof Zend_Gdata_Query) {
             $uri = $location->getQueryUrl();
         } else {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'You must specify the location as either a string URI ' .
                     'or a child of Zend_Gdata_Query');

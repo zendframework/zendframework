@@ -21,13 +21,9 @@
  */
 
 /**
- * Zend_InfoCard_Cipher_Symmetric_Adapter_Aes256cbc
- */
-require_once 'Zend/InfoCard/Cipher/Symmetric/Adapter/Aes256cbc.php';
-
-/**
  * Implements AES128 with CBC encryption implemented using the mCrypt extension
  *
+ * @uses       Zend_InfoCard_Cipher_Symmetric_Adapter_Aes256cbc
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

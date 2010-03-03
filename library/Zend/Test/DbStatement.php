@@ -21,13 +21,10 @@
  */
 
 /**
- * @see Zend_Db_Statement_Interface
- */
-require_once "Zend/Db/Statement/Interface.php";
-
-/**
  * Testing Database Statement that acts as a stack to SQL resultsets.
  *
+ * @uses       Zend_Db_Statement_Exception
+ * @uses       Zend_Db_Statement_Interface
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit
@@ -64,7 +61,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      */
     static public function createSelectStatement(array $rows=array())
     {
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new self();
         foreach($rows AS $row) {
             $stmt->append($row);
         }
@@ -112,7 +109,7 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      */
     static protected function _createRowCountStatement($affectedRows)
     {
-        $stmt = new Zend_Test_DbStatement();
+        $stmt = new self();
         $stmt->setRowCount($affectedRows);
         return $stmt;
     }
@@ -305,7 +302,6 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
             return false;
         } else {
             if(count($row) < $col) {
-                require_once "Zend/Db/Statement/Exception.php";
                 throw new Zend_Db_Statement_Exception(
                     "Column Position '".$col."' is out of bounds."
                 );

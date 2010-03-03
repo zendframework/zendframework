@@ -21,15 +21,10 @@
  */
 
 /**
- * @see Zend_Markup_Exception
- */
-require_once 'Zend/Markup/Exception.php';
-
-/**
  * Exception class for Zend_Markup_Parser
  *
- * @category   Zend 
  * @uses       Zend_Markup_Exception
+ * @category   Zend 
  * @package    Zend_Markup
  * @subpackage Parser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

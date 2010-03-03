@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Amf_Value_Messaging_AsyncMessage */
-require_once 'Zend/Amf/Value/Messaging/AsyncMessage.php';
-
 /**
  * This is the type of message returned by the MessageBroker
  * to endpoints after the broker has routed an endpoint's message
@@ -30,6 +27,7 @@ require_once 'Zend/Amf/Value/Messaging/AsyncMessage.php';
  *
  * flex.messaging.messages.AcknowledgeMessage
  *
+ * @uses       Zend_Amf_Value_Messaging_AsyncMessage
  * @package    Zend_Amf
  * @subpackage Value
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

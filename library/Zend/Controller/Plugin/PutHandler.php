@@ -21,18 +21,10 @@
  */
 
 /**
- * @see Zend_Controller_Plugin_Abstract
- */
-require_once 'Zend/Controller/Plugin/Abstract.php';
-
-/**
- * @see Zend_Controller_Request_Http
- */
-require_once 'Zend/Controller/Request/Http.php';
-
-/**
  * Plugin to digest PUT request body and make params available just like POST
  *
+ * @uses       Zend_Controller_Plugin_Abstract
+ * @uses       Zend_Controller_Request_Http
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Plugin
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -21,30 +21,15 @@
  */
 
 /**
- * @see Zend_Amf_Value_Messaging_AcknowledgeMessage
- */
-require_once 'Zend/Amf/Value/Messaging/AcknowledgeMessage.php';
-/**
- * @see Zend_Amf_Value_Messaging_AsyncMessage
- */
-require_once 'Zend/Amf/Value/Messaging/AsyncMessage.php';
-/**
- * @see Zend_Amf_Value_Messaging_CommandMessage
- */
-require_once 'Zend/Amf/Value/Messaging/CommandMessage.php';
-/**
- * @see Zend_Amf_Value_Messaging_ErrorMessage
- */
-require_once 'Zend/Amf/Value/Messaging/ErrorMessage.php';
-/**
- * @see Zend_Amf_Value_Messaging_RemotingMessage
- */
-require_once 'Zend/Amf/Value/Messaging/RemotingMessage.php';
-
-/**
  * Loads a local class and executes the instantiation of that class.
  *
  * @todo       PHP 5.3 can drastically change this class w/ namespace and the new call_user_func w/ namespace
+ * @uses       Zend_Amf_Exception
+ * @uses       Zend_Amf_Value_Messaging_AcknowledgeMessage
+ * @uses       Zend_Amf_Value_Messaging_AsyncMessage
+ * @uses       Zend_Amf_Value_Messaging_CommandMessage
+ * @uses       Zend_Amf_Value_Messaging_ErrorMessage
+ * @uses       Zend_Amf_Value_Messaging_RemotingMessage
  * @package    Zend_Amf
  * @subpackage Parse
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -202,21 +187,18 @@ final class Zend_Amf_Parse_TypeLoader
     public static function handleResource($resource)
     {
         if(!self::$_resourceLoader) {
-            require_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Unable to handle resources - resource plugin loader not set');
         }
         try {
             while(is_resource($resource)) {
                 $resclass = self::getResourceParser($resource);
                 if(!$resclass) {
-                    require_once 'Zend/Amf/Exception.php';
                     throw new Zend_Amf_Exception('Can not serialize resource type: '. get_resource_type($resource));
                 }
                 $parser = new $resclass();
                 if(is_callable(array($parser, 'parse'))) {
                     $resource = $parser->parse($resource);
                 } else {
-                    require_once 'Zend/Amf/Exception.php';
                     throw new Zend_Amf_Exception("Could not call parse() method on class $resclass");
                 }
             }
@@ -224,7 +206,6 @@ final class Zend_Amf_Parse_TypeLoader
         } catch(Zend_Amf_Exception $e) {
             throw new Zend_Amf_Exception($e->getMessage(), $e->getCode(), $e);
         } catch(Exception $e) {
-            require_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Can not serialize resource type: '. get_resource_type($resource), 0, $e);
         }
     }

@@ -20,11 +20,8 @@
  */
 
 /**
- * @see Zend_Reflection_Docblock_Tag
- */
-require_once 'Zend/Reflection/Docblock/Tag.php';
-
-/**
+ * @uses       Reflector
+ * @uses       Zend_Reflection_Docblock_Tag
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -115,7 +112,6 @@ class Zend_Reflection_Docblock implements Reflector
         if ($commentOrReflector instanceof Reflector) {
             $this->_reflector = $commentOrReflector;
             if (!method_exists($commentOrReflector, 'getDocComment')) {
-                require_once 'Zend/Reflection/Exception.php';
                 throw new Zend_Reflection_Exception('Reflector must contain method "getDocComment"');
             }
             $docComment = $commentOrReflector->getDocComment();
@@ -128,12 +124,10 @@ class Zend_Reflection_Docblock implements Reflector
         } elseif (is_string($commentOrReflector)) {
             $docComment = $commentOrReflector;
         } else {
-            require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception(get_class($this) . ' must have a (string) DocComment or a Reflector in the constructor');
         }
 
         if ($docComment == '') {
-            require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('DocComment cannot be empty');
         }
 

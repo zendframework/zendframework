@@ -20,14 +20,8 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_XmlRpc_Value
- */
-require_once 'Zend/XmlRpc/Value.php';
-
-
-/**
+ * @uses       Zend_XmlRpc_Value
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value

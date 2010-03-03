@@ -23,6 +23,8 @@
 /**
  * Wraps the XML-RPC system.* introspection methods
  *
+ * @uses       Zend_XmlRpc_Client_FaultException
+ * @uses       Zend_XmlRpc_Client_IntrospectException
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Client
@@ -56,7 +58,6 @@ class Zend_XmlRpc_Client_ServerIntrospection
     {
         $methods = $this->listMethods();
 
-        require_once 'Zend/XmlRpc/Client/FaultException.php';
         try {
             $signatures = $this->getSignatureForEachMethodByMulticall($methods);
         } catch (Zend_XmlRpc_Client_FaultException $e) {
@@ -95,13 +96,11 @@ class Zend_XmlRpc_Client_ServerIntrospection
         if (! is_array($serverSignatures)) {
             $type = gettype($serverSignatures);
             $error = "Multicall return is malformed.  Expected array, got $type";
-            require_once 'Zend/XmlRpc/Client/IntrospectException.php';
             throw new Zend_XmlRpc_Client_IntrospectException($error);
         }
 
         if (count($serverSignatures) != count($methods)) {
             $error = 'Bad number of signatures received from multicall';
-            require_once 'Zend/XmlRpc/Client/IntrospectException.php';
             throw new Zend_XmlRpc_Client_IntrospectException($error);
         }
 
@@ -146,7 +145,6 @@ class Zend_XmlRpc_Client_ServerIntrospection
         $signature = $this->_system->methodSignature($method);
         if (!is_array($signature)) {
             $error = 'Invalid signature for method "' . $method . '"';
-            require_once 'Zend/XmlRpc/Client/IntrospectException.php';
             throw new Zend_XmlRpc_Client_IntrospectException($error);
         }
         return $signature;

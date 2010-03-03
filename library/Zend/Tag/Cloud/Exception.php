@@ -20,13 +20,9 @@
  */
 
 /**
- * Zend_Tag_Exception
- */
-require_once 'Zend/Tag/Exception.php';
-
-/**
  * Exception class for Zend_Tag_Cloud
  *
+ * @uses      Zend_Tag_Exception
  * @category  Zend
  * @package   Zend_Tag
  * @uses      Zend_Exception

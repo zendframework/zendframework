@@ -19,27 +19,16 @@
  * @version    $Id$
  */
 
-/** @see Zend_Feed_Writer_Feed */
-require_once 'Zend/Feed/Writer/Feed.php';
-
-/** @see Zend_Version */
-require_once 'Zend/Version.php';
-
-/** @see Zend_Feed_Writer_Renderer_RendererInterface */
-require_once 'Zend/Feed/Writer/Renderer/RendererInterface.php';
-
-/** @see Zend_Feed_Writer_Renderer_Entry_Atom */
-require_once 'Zend/Feed/Writer/Renderer/Entry/Atom.php';
-
-/** @see Zend_Feed_Writer_Renderer_Entry_Atom_Deleted */
-require_once 'Zend/Feed/Writer/Renderer/Entry/Atom/Deleted.php';
-
-/** @see Zend_Feed_Writer_Renderer_RendererAbstract */
-require_once 'Zend/Feed/Writer/Renderer/RendererAbstract.php';
-
-require_once 'Zend/Feed/Writer/Renderer/Feed/Atom/AtomAbstract.php';
-
 /**
+ * @uses       DOMDocument
+ * @uses       Zend_Feed_Writer
+ * @uses       Zend_Feed_Writer_Feed
+ * @uses       Zend_Feed_Writer_Renderer_Entry_Atom
+ * @uses       Zend_Feed_Writer_Renderer_Entry_Atom_Deleted
+ * @uses       Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
+ * @uses       Zend_Feed_Writer_Renderer_RendererAbstract
+ * @uses       Zend_Feed_Writer_Renderer_RendererInterface
+ * @uses       Zend_Version
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

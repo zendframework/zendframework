@@ -19,10 +19,9 @@
  * @version    $Id$
  */
 
-/** @see Zend_Loader_PluginLoader */
-require_once 'Zend/Loader/PluginLoader.php';
-
 /**
+ * @uses       Zend_Loader_PluginLoader
+ * @uses       Zend_Serializer_Exception
  * @category   Zend
  * @package    Zend_Serializer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -61,14 +60,12 @@ class Zend_Serializer
         try {
             $adapterClass = $adapterLoader->load($adapterName);
         } catch (Exception $e) {
-            require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('Can\'t load serializer adapter "'.$adapterName.'"', 0, $e);
         }
 
         // ZF-8842:
         // check that the loaded class implements Zend_Serializer_Adapter_AdapterInterface without execute code
         if (!in_array('Zend_Serializer_Adapter_AdapterInterface', class_implements($adapterClass))) {
-            require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('The serializer adapter class "'.$adapterClass.'" must implement Zend_Serializer_Adapter_AdapterInterface');
         }
 

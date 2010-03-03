@@ -22,7 +22,10 @@
 /**
  * Server methods metadata
  *
- * @todo       Implement iterator
+ * @uses       Countable
+ * @uses       Iterator
+ * @uses       Zend_Server_Exception
+ * @uses       Zend_Server_Method_Definition
  * @category   Zend
  * @package    Zend_Server
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -76,10 +79,8 @@ class Zend_Server_Definition implements Countable, Iterator
     public function addMethod($method, $name = null)
     {
         if (is_array($method)) {
-            require_once 'Zend/Server/Method/Definition.php';
             $method = new Zend_Server_Method_Definition($method);
         } elseif (!$method instanceof Zend_Server_Method_Definition) {
-            require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception('Invalid method provided');
         }
 
@@ -92,12 +93,10 @@ class Zend_Server_Definition implements Countable, Iterator
             $name = $method->getName();
         }
         if (null === $name) {
-            require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception('No method name provided');
         }
 
         if (!$this->_overwriteExistingMethods && array_key_exists($name, $this->_methods)) {
-            require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception(sprintf('Method by name of "%s" already exists', $name));
         }
         $this->_methods[$name] = $method;

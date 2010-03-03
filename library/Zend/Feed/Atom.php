@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,18 +19,6 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Feed_Abstract
- */
-require_once 'Zend/Feed/Abstract.php';
-
-/**
- * @see Zend_Feed_Entry_Atom
- */
-require_once 'Zend/Feed/Entry/Atom.php';
-
-
 /**
  * Atom feed class
  *
@@ -42,6 +29,10 @@ require_once 'Zend/Feed/Entry/Atom.php';
  * Zend_Feed_Atom expects, and as a further pointer for users as to
  * what kind of feed object they have been passed.
  *
+ * @uses       DOMDocument
+ * @uses       Zend_Feed_Abstract
+ * @uses       Zend_Feed_Entry_Atom
+ * @uses       Zend_Feed_Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -89,10 +80,6 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
             // Try to find a single <entry> instead.
             $element = $this->_element->getElementsByTagName($this->_entryElementName)->item(0);
             if (!$element) {
-                /**
-                 * @see Zend_Feed_Exception
-                 */
-                require_once 'Zend/Feed/Exception.php';
                 throw new Zend_Feed_Exception('No root <feed> or <' . $this->_entryElementName
                                               . '> element found, cannot parse feed.');
             }
@@ -376,10 +363,6 @@ class Zend_Feed_Atom extends Zend_Feed_Abstract
     public function send()
     {
         if (headers_sent()) {
-            /**
-             * @see Zend_Feed_Exception
-             */
-            require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Cannot send ATOM because headers have already been sent.');
         }
 

@@ -20,14 +20,13 @@
  * @version    $Id$
  */
 
-/** @see Zend_Captcha_Word */
-require_once 'Zend/Captcha/Word.php';
-
 /**
  * Image-based captcha element
  *
  * Generates image displaying random word
  *
+ * @uses       Zend_Captcha_Exception
+ * @uses       Zend_Captcha_Word
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter
@@ -446,24 +445,20 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
     protected function _generateImage($id, $word)
     {
         if (!extension_loaded("gd")) {
-            require_once 'Zend/Captcha/Exception.php';
             throw new Zend_Captcha_Exception("Image CAPTCHA requires GD extension");
         }
 
         if (!function_exists("imagepng")) {
-            require_once 'Zend/Captcha/Exception.php';
             throw new Zend_Captcha_Exception("Image CAPTCHA requires PNG support");
         }
 
         if (!function_exists("imageftbbox")) {
-            require_once 'Zend/Captcha/Exception.php';
             throw new Zend_Captcha_Exception("Image CAPTCHA requires FT fonts support");
         }
 
         $font = $this->getFont();
 
         if (empty($font)) {
-            require_once 'Zend/Captcha/Exception.php';
             throw new Zend_Captcha_Exception("Image CAPTCHA requires font");
         }
 
@@ -477,7 +472,6 @@ class Zend_Captcha_Image extends Zend_Captcha_Word
         } else {
             $img = imagecreatefrompng($this->_startImage);
             if(!$img) {
-                require_once 'Zend/Captcha/Exception.php';
                 throw new Zend_Captcha_Exception("Can not load start image");
             }
             $w = imagesx($img);

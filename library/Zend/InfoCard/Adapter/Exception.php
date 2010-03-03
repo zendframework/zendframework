@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_InfoCard_Exception
- */
-require_once 'Zend/InfoCard/Exception.php';
-
-/**
+ * @uses       Zend_InfoCard_Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Adapter

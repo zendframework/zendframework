@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-/** @see Zend_Barcode_Object_ObjectAbstract */
-require_once 'Zend/Barcode/Object/ObjectAbstract.php';
-
 /**
  * Class for generate Barcode
  *
+ * @uses       Zend_Barcode_Object_ObjectAbstract
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -12,6 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
+ * @uses       Zend_Barcode_Object_Exception
  * @category   Zend
  * @package    Zend_Barcode
  * @subpackage Object
@@ -297,7 +298,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     public function setBarHeight($value)
     {
         if (intval($value) <= 0) {
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception(
                 'Bar height must be greater than 0'
             );
@@ -324,7 +324,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     public function setBarThinWidth($value)
     {
         if (intval($value) <= 0) {
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception(
                 'Bar width must be greater than 0'
             );
@@ -351,7 +350,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     public function setBarThickWidth($value)
     {
         if (intval($value) <= 0) {
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception(
                 'Bar width must be greater than 0'
             );
@@ -379,7 +377,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     public function setFactor($value)
     {
         if (floatval($value) <= 0) {
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception(
                 'Factor must be greater than 0'
             );
@@ -411,7 +408,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
         } elseif (is_numeric($value) && $value >= 0 && $value <= 16777125) {
             $this->_foreColor = intval($value);
         } else {
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception(
                 'Text color must be set as #[0-9A-F]{6}'
             );
@@ -441,7 +437,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
         } elseif (is_numeric($value) && $value >= 0 && $value <= 16777125) {
             $this->_backgroundColor = intval($value);
         } else {
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception(
                 'Background color must be set as #[0-9A-F]{6}'
             );
@@ -698,7 +693,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     {
         if (is_int($value) && $value >= 1 && $value <= 5) {
             if (!extension_loaded('gd')) {
-                require_once 'Zend/Barcode/Object/Exception.php';
                 throw new Zend_Barcode_Object_Exception(
                     'GD extension is required to use numeric font'
                 );
@@ -712,7 +706,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
         } elseif (is_string($value)) {
             $this->_font = $value;
         } else {
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception(sprintf(
                 'Invalid font "%s" provided to setFont()',
                 $value
@@ -744,7 +737,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
         }
 
         if (!is_numeric($value)) {
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception(
                 'Font size must be a numeric value'
             );
@@ -867,7 +859,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
             $value = $this->_text;
         }
         if (!strlen($value)) {
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception(
                 'A text must be provide to Barcode before drawing'
             );
@@ -886,7 +877,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     {
         $ratio = $this->_barThickWidth / $this->_barThinWidth;
         if (!($ratio >= $min && $ratio <= $max)) {
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception(sprintf(
                 'Ratio thick/thin bar must be between %0.1f and %0.1f (actual %0.3f)',
                 $min,
@@ -904,7 +894,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
     protected function _checkFontAndOrientation()
     {
         if (is_numeric($this->_font) && $this->_orientation != 0) {
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception(
                 'Only drawing with TTF font allow orientation of the barcode.'
             );
@@ -1228,11 +1217,6 @@ abstract class Zend_Barcode_Object_ObjectAbstract
 
         if (!$validator->isValid($value)) {
             $message = implode("\n", $validator->getMessages());
-
-            /**
-             * @see Zend_Barcode_Object_Exception
-             */
-            require_once 'Zend/Barcode/Object/Exception.php';
             throw new Zend_Barcode_Object_Exception($message);
         }
     }

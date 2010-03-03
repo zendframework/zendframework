@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-/** Zend_Server_Cache */
-require_once 'Zend/Server/Cache.php';
-
 /**
  * Zend_Json_Server_Cache: cache Zend_Json_Server server definition and SMD
  *
+ * @uses       Zend_Server_Cache
  * @category   Zend
  * @package    Zend_Json
  * @subpackage Server

@@ -19,12 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @see Zend_Captcha_Base */
-require_once 'Zend/Captcha/Base.php';
-
-/** @see Zend_Service_ReCaptcha */
-require_once 'Zend/Service/ReCaptcha.php';
-
 /**
  * ReCaptcha adapter
  *
@@ -32,6 +26,8 @@ require_once 'Zend/Service/ReCaptcha.php';
  *
  * @see http://recaptcha.net/apidocs/captcha/
  *
+ * @uses       Zend_Captcha_Base
+ * @uses       Zend_Service_ReCaptcha
  * @category   Zend
  * @package    Zend_Captcha
  * @subpackage Adapter

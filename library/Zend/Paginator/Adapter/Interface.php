@@ -22,6 +22,7 @@
 /**
  * Interface for pagination adapters.
  *
+ * @uses       Countable
  * @category   Zend
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

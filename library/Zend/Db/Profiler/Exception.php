@@ -20,14 +20,8 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Db_Exception
- */
-require_once 'Zend/Db/Exception.php';
-
-
-/**
+ * @uses       Zend_Db_Exception
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Profiler

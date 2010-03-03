@@ -21,11 +21,7 @@
  */
 
 /**
- * Zend_InfoCard_Cipher_Symmetric_Aes256cbc_Interface
- */
-require_once 'Zend/InfoCard/Cipher/Symmetric/Aes256cbc/Interface.php';
-
-/**
+ * @uses       Zend_InfoCard_Cipher_Symmetric_Aes256cbc_Interface
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher

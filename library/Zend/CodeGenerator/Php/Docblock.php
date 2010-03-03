@@ -21,16 +21,9 @@
  */
 
 /**
- * @see Zend_CodeGenerator_Php_Abstract
- */
-require_once 'Zend/CodeGenerator/Php/Abstract.php';
-
-/**
- * @see Zend_CodeGenerator_Php_Docblock_Tag
- */
-require_once 'Zend/CodeGenerator/Php/Docblock/Tag.php';
-
-/**
+ * @uses       Zend_CodeGenerator_Php_Abstract
+ * @uses       Zend_CodeGenerator_Php_Docblock_Tag
+ * @uses       Zend_CodeGenerator_Php_Exception
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -151,7 +144,6 @@ class Zend_CodeGenerator_Php_Docblock extends Zend_CodeGenerator_Php_Abstract
         if (is_array($tag)) {
             $tag = new Zend_CodeGenerator_Php_Docblock_Tag($tag);
         } elseif (!$tag instanceof Zend_CodeGenerator_Php_Docblock_Tag) {
-            require_once 'Zend/CodeGenerator/Php/Exception.php';
             throw new Zend_CodeGenerator_Php_Exception(
                 'setTag() expects either an array of method options or an '
                 . 'instance of Zend_CodeGenerator_Php_Docblock_Tag'

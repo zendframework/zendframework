@@ -20,21 +20,9 @@
  */
 
 /**
- * @see Zend_Controller_Action_Helper_Abstract
- */
-require_once 'Zend/Controller/Action/Helper/Abstract.php';
-
-/**
- * @see Zend_Controller_Action_Exception
- */
-require_once 'Zend/Controller/Action/Exception.php';
-
-/**
- * @see Zend_Cache_Manager
- */
-require_once 'Zend/Cache/Manager.php';
-
-/**
+ * @uses       Zend_Controller_Action_Exception
+ * @uses       Zend_Controller_Action_Helper_Abstract
+ * @uses       Zend_Cache_Manager
  * @category   Zend
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -19,19 +19,14 @@
  */
 
 /**
- * Zend_XmlRpc_Response
- */
-require_once 'Zend/XmlRpc/Response.php';
-
-/**
  * HTTP response
  *
- * @uses Zend_XmlRpc_Response
- * @category Zend
- * @package  Zend_XmlRpc
+ * @uses       Zend_XmlRpc_Response
+ * @category   Zend
+ * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_XmlRpc_Response_Http extends Zend_XmlRpc_Response
 {

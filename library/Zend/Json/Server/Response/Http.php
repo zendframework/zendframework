@@ -20,11 +20,7 @@
  */
 
 /**
- * @see Zend_Json_Server_Response
- */
-require_once 'Zend/Json/Server/Response.php';
-
-/**
+ * @uses       Zend_Json_Server_Response
  * @category   Zend
  * @package    Zend_Json
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

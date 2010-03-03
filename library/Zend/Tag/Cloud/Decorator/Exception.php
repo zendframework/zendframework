@@ -21,13 +21,9 @@
  */
 
 /**
- * Zend_Tag_Cloud_Exception
- */
-require_once 'Zend/Tag/Cloud/Exception.php';
-
-/**
  * Exception class for Zend_Tag_Cloud_Decorator
  *
+ * @uses      Zend_Tag_Cloud_Exception
  * @category  Zend
  * @package   Zend_Tag
  * @uses      Zend_Tag_Cloud_Exception

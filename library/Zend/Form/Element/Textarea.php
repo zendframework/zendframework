@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Xhtml */
-require_once 'Zend/Form/Element/Xhtml.php';
-
 /**
  * Textarea form element
  *
+ * @uses       Zend_Form_Element_Xhtml
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

@@ -20,23 +20,12 @@
  */
 
 /**
- * Zend_InfoCard_Xml_KeyInfo_Abstract
- */
-require_once 'Zend/InfoCard/Xml/KeyInfo/Abstract.php';
-
-/**
- * Zend_InfoCard_Xml_EncryptedKey
- */
-require_once 'Zend/InfoCard/Xml/EncryptedKey.php';
-
-/**
- * Zend_InfoCard_Xml_KeyInfo_Interface
- */
-require_once 'Zend/InfoCard/Xml/KeyInfo/Interface.php';
-
-/**
  * Represents a Xml Digital Signature XML Data Block
  *
+ * @uses       Zend_InfoCard_Xml_EncryptedKey
+ * @uses       Zend_InfoCard_Xml_Exception
+ * @uses       Zend_InfoCard_Xml_KeyInfo_Abstract
+ * @uses       Zend_InfoCard_Xml_KeyInfo_Interface
  * @category   Zend
  * @package    Zend_InfoCard
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

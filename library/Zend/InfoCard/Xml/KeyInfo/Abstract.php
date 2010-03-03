@@ -21,11 +21,7 @@
  */
 
 /**
- * Zend_InfoCard_Xml_Element
- */
-require_once 'Zend/InfoCard/Xml/Element.php';
-
-/**
+ * @uses       Zend_InfoCard_Xml_Element
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

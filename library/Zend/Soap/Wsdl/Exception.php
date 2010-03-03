@@ -21,13 +21,9 @@
  */
 
 /**
- * @see Zend_Exception
- */
-require_once "Zend/Exception.php";
-
-/**
  * Zend_Soap_Wsdl_Exception
  *
+ * @uses       Zend_Exception
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Wsdl

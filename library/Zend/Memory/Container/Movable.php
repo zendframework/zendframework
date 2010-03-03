@@ -19,23 +19,21 @@
  * @version    $Id$
  */
 
-/** Zend_Memory_Container */
-require_once 'Zend/Memory/Container.php';
-
-/** Zend_Memory_Value */
-require_once 'Zend/Memory/Value.php';
-
 /**
  * Memory value container
  *
  * Movable (may be swapped with specified backend and unloaded).
  *
+ * @uses       Zend_Memory_Container
+ * @uses       Zend_Memory_Exception
+ * @uses       Zend_Memory_Value
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Memory_Container_Movable extends Zend_Memory_Container {
+class Zend_Memory_Container_Movable extends Zend_Memory_Container 
+{
     /**
      * Internal object Id
      *
@@ -135,7 +133,6 @@ class Zend_Memory_Container_Movable extends Zend_Memory_Container {
     public function __get($property)
     {
         if ($property != 'value') {
-            require_once 'Zend/Memory/Exception.php';
             throw new Zend_Memory_Exception('Unknown property: Zend_Memory_container::$' . $property);
         }
 
@@ -157,7 +154,6 @@ class Zend_Memory_Container_Movable extends Zend_Memory_Container {
     public function __set($property, $value)
     {
         if ($property != 'value') {
-            require_once 'Zend/Memory/Exception.php';
             throw new Zend_Memory_Exception('Unknown property: Zend_Memory_container::$' . $property);
         }
 

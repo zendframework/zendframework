@@ -21,16 +21,8 @@
  */
 
 /**
- * @see Zend_CodeGenerator_Php_Abstract
- */
-require_once 'Zend/CodeGenerator/Php/Abstract.php';
-
-/**
- * @see Zend_CodeGenerator_Php_ParameterDefaultValue
- */
-require_once 'Zend/CodeGenerator/Php/Parameter/DefaultValue.php';
-
-/**
+ * @uses       Zend_CodeGenerator_Php_Abstract
+ * @uses       Zend_CodeGenerator_Php_ParameterDefaultValue
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

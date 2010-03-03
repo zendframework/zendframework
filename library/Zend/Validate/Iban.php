@@ -20,13 +20,12 @@
  */
 
 /**
- * @see Zend_Validate_Abstract
- */
-require_once 'Zend/Validate/Abstract.php';
-
-/**
  * Validates IBAN Numbers (International Bank Account Numbers)
  *
+ * @uses       Zend_Locale
+ * @uses       Zend_Registry
+ * @uses       Zend_Validate_Abstract
+ * @uses       Zend_Validate_Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -124,7 +123,6 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
         }
 
         if (empty($locale)) {
-            require_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Locale')) {
                 $locale = Zend_Registry::get('Zend_Locale');
             }
@@ -153,10 +151,8 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
      */
     public function setLocale($locale = null)
     {
-        require_once 'Zend/Locale.php';
         $locale = Zend_Locale::findLocale($locale);
         if (strlen($locale) < 4) {
-            require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Region must be given for IBAN validation');
         }
 

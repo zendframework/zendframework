@@ -21,13 +21,13 @@
  */
 
 /**
- * @see Zend_Queue_Adapter_AdapterAbstract
- */
-require_once 'Zend/Queue/Adapter/AdapterAbstract.php';
-
-/**
  * Zend Platform JobQueue adapter
  *
+ * @uses       ZendApi_Queue
+ * @uses       ZendAPI_Job
+ * @uses       Zend_Loader
+ * @uses       Zend_Queue_Adapter_AdapterAbstract
+ * @uses       Zend_Queue_Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
@@ -53,34 +53,28 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
         parent::__construct($options, $queue);
 
         if (!extension_loaded("jobqueue_client")) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Platform Job Queue extension does not appear to be loaded');
         }
 
         if (! isset($this->_options['daemonOptions'])) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Job Queue host and password should be provided');
         }
 
         $options = $this->_options['daemonOptions'];
 
         if (!array_key_exists('host', $options)) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Platform Job Queue host should be provided');
         }
         if (!array_key_exists('password', $options)) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Platform Job Queue password should be provided');
         }
 
         $this->_zendQueue = new ZendApi_Queue($options['host']);
 
         if (!$this->_zendQueue) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Platform Job Queue connection failed');
         }
         if (!$this->_zendQueue->login($options['password'])) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Job Queue login failed');
         }
 
@@ -102,7 +96,6 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
      */
     public function isExists($name)
     {
-        require_once 'Zend/Queue/Exception.php';
         throw new Zend_Queue_Exception('isExists() is not supported in this adapter');
     }
 
@@ -116,7 +109,6 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
      */
     public function create($name, $timeout=null)
     {
-        require_once 'Zend/Queue/Exception.php';
         throw new Zend_Queue_Exception('create() is not supported in ' . get_class($this));
     }
 
@@ -129,7 +121,6 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
      */
     public function delete($name)
     {
-        require_once 'Zend/Queue/Exception.php';
         throw new Zend_Queue_Exception('delete() is not supported in ' . get_class($this));
     }
 
@@ -141,7 +132,6 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
      */
     public function getQueues()
     {
-        require_once 'Zend/Queue/Exception.php';
         throw new Zend_Queue_Exception('getQueues() is not supported in this adapter');
     }
 
@@ -154,7 +144,6 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
     public function count(Zend_Queue $queue = null)
     {
         if ($queue !== null) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Queue parameter is not supported');
         }
 
@@ -176,14 +165,12 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
     public function send($message, Zend_Queue $queue = null)
     {
         if ($queue !== null) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Queue parameter is not supported');
         }
 
         // This adapter can work only for this message type
         $classname = $this->_queue->getMessageClass();
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
 
@@ -199,7 +186,6 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
         $jobId = $this->_zendQueue->addJob($platformJob);
 
         if (!$jobId) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Failed to add a job to queue: '
                 . $this->_zendQueue->getLastError());
         }
@@ -224,7 +210,6 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
         }
 
         if ($queue !== null) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Queue shouldn\'t be set');
         }
 
@@ -232,7 +217,6 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
 
         $classname = $this->_queue->getMessageClass();
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
 
@@ -245,7 +229,6 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
         $classname = $this->_queue->getMessageSetClass();
 
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
         return new $classname($options);
@@ -264,7 +247,6 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
     public function deleteMessage(Zend_Queue_Message $message)
     {
         if (get_class($message) != $this->_queue->getMessageClass()) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception(
                 'Failed to remove job from the queue; only messages of type '
                 . 'Zend_Queue_Message_PlatformJob may be used'
@@ -332,11 +314,9 @@ class Zend_Queue_Adapter_PlatformJobQueue extends Zend_Queue_Adapter_AdapterAbst
         $this->_zendQueue = new ZendApi_Queue($options['host']);
 
         if (!$this->_zendQueue) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Platform Job Queue connection failed');
         }
         if (!$this->_zendQueue->login($options['password'])) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Job Queue login failed');
         }
     }

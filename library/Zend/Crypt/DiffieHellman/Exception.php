@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_Crypt_Exception
- */
-require_once 'Zend/Crypt/Exception.php';
-
-/**
+ * @uses       Zend_Crypt_Exception
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

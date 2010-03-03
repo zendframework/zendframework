@@ -23,6 +23,10 @@
 /**
  * Zend_Ldap_Filter_Abstract provides a base implementation for filters.
  *
+ * @uses       Zend_Ldap_Converter
+ * @uses       Zend_Ldap_Filter_And
+ * @uses       Zend_Ldap_Filter_Not
+ * @uses       Zend_Ldap_Filter_Or
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter
@@ -56,10 +60,6 @@ abstract class Zend_Ldap_Filter_Abstract
      */
     public function negate()
     {
-        /**
-         * Zend_Ldap_Filter_Not
-         */
-        require_once 'Zend/Ldap/Filter/Not.php';
         return new Zend_Ldap_Filter_Not($this);
     }
 
@@ -71,10 +71,6 @@ abstract class Zend_Ldap_Filter_Abstract
      */
     public function addAnd($filter)
     {
-        /**
-         * Zend_Ldap_Filter_And
-         */
-        require_once 'Zend/Ldap/Filter/And.php';
         $fa = func_get_args();
         $args = array_merge(array($this), $fa);
         return new Zend_Ldap_Filter_And($args);
@@ -88,10 +84,6 @@ abstract class Zend_Ldap_Filter_Abstract
      */
     public function addOr($filter)
     {
-        /**
-         * Zend_Ldap_Filter_Or
-         */
-        require_once 'Zend/Ldap/Filter/Or.php';
         $fa = func_get_args();
         $args = array_merge(array($this), $fa);
         return new Zend_Ldap_Filter_Or($args);
@@ -112,11 +104,6 @@ abstract class Zend_Ldap_Filter_Abstract
      */
     public static function escapeValue($values = array())
     {
-        /**
-         * @see Zend_Ldap_Converter
-         */
-        require_once 'Zend/Ldap/Converter.php';
-
         if (!is_array($values)) $values = array($values);
         foreach ($values as $key => $val) {
             // Escaping of filter meta characters
@@ -142,11 +129,6 @@ abstract class Zend_Ldap_Filter_Abstract
      */
     public static function unescapeValue($values = array())
     {
-        /**
-         * @see Zend_Ldap_Converter
-         */
-        require_once 'Zend/Ldap/Converter.php';
-
         if (!is_array($values)) $values = array($values);
         foreach ($values as $key => $value) {
             // Translate hex code into ascii

@@ -21,39 +21,16 @@
  */
 
 /**
- * @see PHPUnit_Extensions_Database_TestCase
- */
-require_once "PHPUnit/Extensions/Database/TestCase.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_Operation_Truncate
- */
-require_once "Zend/Test/PHPUnit/Db/Operation/Truncate.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_Operation_Insert
- */
-require_once "Zend/Test/PHPUnit/Db/Operation/Insert.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet
- */
-require_once "Zend/Test/PHPUnit/Db/DataSet/DbTableDataSet.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_DataSet_DbTable
- */
-require_once "Zend/Test/PHPUnit/Db/DataSet/DbTable.php";
-
-/**
- * @see Zend_Test_PHPUnit_Db_DataSet_DbRowset
- */
-require_once "Zend/Test/PHPUnit/Db/DataSet/DbRowset.php";
-
-/**
  * Generic Testcase for Zend Framework related DbUnit Testing with PHPUnit
  *
+ * @uses       PHPUnit_Extensions_Database_Operation_Composite
  * @uses       PHPUnit_Extensions_Database_TestCase
+ * @uses       Zend_Test_PHPUnit_Db_Connection
+ * @uses       Zend_Test_PHPUnit_Db_DataSet_DbTable
+ * @uses       Zend_Test_PHPUnit_Db_DataSet_DbTableDataSet
+ * @uses       Zend_Test_PHPUnit_Db_DataSet_DbRowset
+ * @uses       Zend_Test_PHPUnit_Db_Operation_Insert
+ * @uses       Zend_Test_PHPUnit_Db_Operation_Truncate
  * @category   Zend
  * @package    Zend_Test
  * @subpackage PHPUnit

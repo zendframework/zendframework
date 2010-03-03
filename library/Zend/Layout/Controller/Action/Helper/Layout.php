@@ -20,13 +20,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Action_Helper_Abstract */
-require_once 'Zend/Controller/Action/Helper/Abstract.php';
-
 /**
  * Helper for interacting with Zend_Layout objects
  *
  * @uses       Zend_Controller_Action_Helper_Abstract
+ * @uses       Zend_Controller_Front
+ * @uses       Zend_Layout
+ * @uses       Zend_Layout_Exception
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action
@@ -61,10 +61,6 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
         if (null !== $layout) {
             $this->setLayoutInstance($layout);
         } else {
-            /**
-             * @see Zend_Layout
-             */
-            require_once 'Zend/Layout.php';
             $layout = Zend_Layout::getMvcInstance();
         }
 
@@ -91,10 +87,6 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
     public function getFrontController()
     {
         if (null === $this->_frontController) {
-            /**
-             * @see Zend_Controller_Front
-             */
-            require_once 'Zend/Controller/Front.php';
             $this->_frontController = Zend_Controller_Front::getInstance();
         }
 
@@ -109,10 +101,6 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
     public function getLayoutInstance()
     {
         if (null === $this->_layout) {
-            /**
-             * @see Zend_Layout
-             */
-            require_once 'Zend/Layout.php';
             if (null === ($this->_layout = Zend_Layout::getMvcInstance())) {
                 $this->_layout = new Zend_Layout();
             }
@@ -180,7 +168,6 @@ class Zend_Layout_Controller_Action_Helper_Layout extends Zend_Controller_Action
             return call_user_func_array(array($layout, $method), $args);
         }
 
-        require_once 'Zend/Layout/Exception.php';
         throw new Zend_Layout_Exception(sprintf("Invalid method '%s' called on layout action helper", $method));
     }
 }

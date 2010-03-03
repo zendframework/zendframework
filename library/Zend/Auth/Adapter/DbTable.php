@@ -20,24 +20,11 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Auth_Adapter_Interface
- */
-require_once 'Zend/Auth/Adapter/Interface.php';
-
-/**
- * @see Zend_Db_Adapter_Abstract
- */
-require_once 'Zend/Db/Adapter/Abstract.php';
-
-/**
- * @see Zend_Auth_Result
- */
-require_once 'Zend/Auth/Result.php';
-
-
-/**
+ * @uses       Zend_Auth_Adapter_Exception
+ * @uses       Zend_Auth_Adapter_Interface
+ * @uses       Zend_Auth_Result
+ * @uses       Zend_Db_Adapter_Abstract
  * @category   Zend
  * @package    Zend_Auth
  * @subpackage Adapter
@@ -338,10 +325,6 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
         }
 
         if (null !== $exception) {
-            /**
-             * @see Zend_Auth_Adapter_Exception
-             */
-            require_once 'Zend/Auth/Adapter/Exception.php';
             throw new Zend_Auth_Adapter_Exception($exception);
         }
 
@@ -409,10 +392,6 @@ class Zend_Auth_Adapter_DbTable implements Zend_Auth_Adapter_Interface
                 unset($origDbFetchMode);
             }
         } catch (Exception $e) {
-            /**
-             * @see Zend_Auth_Adapter_Exception
-             */
-            require_once 'Zend/Auth/Adapter/Exception.php';
             throw new Zend_Auth_Adapter_Exception('The supplied parameters to Zend_Auth_Adapter_DbTable failed to '
                                                 . 'produce a valid sql statement, please check table and column names '
                                                 . 'for validity.', 0, $e);

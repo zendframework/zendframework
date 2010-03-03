@@ -20,6 +20,8 @@
  */
 
 /**
+ * @uses       Zend_Feed_Exception
+ * @uses       Zend_Feed_Reader
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -211,7 +213,6 @@ abstract class Zend_Feed_Reader_EntryAbstract
                 return call_user_func_array(array($extension, $method), $args);
             }
         }
-        require_once 'Zend/Feed/Exception.php';
         throw new Zend_Feed_Exception('Method: ' . $method
             . 'does not exist and could not be located on a registered Extension');
     }

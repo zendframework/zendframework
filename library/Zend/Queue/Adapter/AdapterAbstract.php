@@ -21,18 +21,11 @@
  */
 
 /**
- * @see Zend_Queue
- */
-require_once 'Zend/Queue.php';
-
-/**
- * @see Zend_Queue_Adapter_AdapterInterface
- */
-require_once 'Zend/Queue/Adapter/AdapterInterface.php';
-
-/**
  * Class for connecting to queues performing common operations.
  *
+ * @uses       Zend_Queue
+ * @uses       Zend_Queue_Adapter_AdapterInterface
+ * @uses       Zend_Queue_Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
@@ -106,7 +99,6 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
          * Verify that adapter parameters are in an array.
          */
         if (!is_array($options)) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Adapter options must be an array or Zend_Config object');
         }
 
@@ -121,7 +113,6 @@ abstract class Zend_Queue_Adapter_AdapterAbstract
         // Normalize the options and merge with the defaults
         if (array_key_exists('options', $options)) {
             if (!is_array($options['options'])) {
-                require_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception("Configuration array 'options' must be an array");
             }
 

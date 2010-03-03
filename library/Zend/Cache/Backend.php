@@ -22,6 +22,9 @@
 
 
 /**
+ * @uses       Zend_Cache
+ * @uses       Zend_Log
+ * @uses       Zend_Log_Writer_Stream
  * @package    Zend_Cache
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -235,8 +238,6 @@ class Zend_Cache_Backend
         }
 
         // Create a default logger to the standard output stream
-        require_once 'Zend/Log.php';
-        require_once 'Zend/Log/Writer/Stream.php';
         $logger = new Zend_Log(new Zend_Log_Writer_Stream('php://output'));
         $this->_directives['logger'] = $logger;
     }

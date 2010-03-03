@@ -21,14 +21,11 @@
  */
 
 /**
- * @see Zend_Application_Resource_ResourceAbstract
- */
-require_once 'Zend/Application/Resource/ResourceAbstract.php';
-
-/**
  * Resource for creating database adapter
  *
  * @uses       Zend_Application_Resource_ResourceAbstract
+ * @uses       Zend_Db
+ * @uses       Zend_Db_Table
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource

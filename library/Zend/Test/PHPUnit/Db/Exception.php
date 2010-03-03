@@ -21,11 +21,6 @@
  */
 
 /**
- * @see Zend_Exception
- */
-require_once "Zend/Exception.php";
-
-/**
  * Exception for Zend_Test_PHPUnit_Database package
  *
  * @uses       Zend_Exception

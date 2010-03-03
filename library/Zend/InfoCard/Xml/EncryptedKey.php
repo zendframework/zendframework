@@ -21,23 +21,13 @@
  */
 
 /**
- * Zend_InfoCard_Xml_Element
- */
-require_once 'Zend/InfoCard/Xml/Element.php';
-
-/**
- * Zend_InfoCard_Xml_EncryptedKey
- */
-require_once 'Zend/InfoCard/Xml/EncryptedKey.php';
-
-/**
- * Zend_InfoCard_Xml_KeyInfo_Interface
- */
-require_once 'Zend/InfoCard/Xml/KeyInfo/Interface.php';
-
-/**
  * An object representing an Xml EncryptedKEy block
  *
+ * @uses       Zend_InfoCard_Xml_Element
+ * @uses       Zend_InfoCard_Xml_EncryptedKey
+ * @uses       Zend_InfoCard_Xml_Exception
+ * @uses       Zend_InfoCard_Xml_KeyInfo
+ * @uses       Zend_InfoCard_Xml_KeyInfo_Interface
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

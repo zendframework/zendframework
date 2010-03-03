@@ -23,6 +23,8 @@
 /**
  * Abstract class representing container for placeholder values
  *
+ * @uses       ArrayObject
+ * @uses       Zend_View_Helper_Placeholder_Container_Exception
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -259,7 +261,6 @@ abstract class Zend_View_Helper_Placeholder_Container_Abstract extends ArrayObje
     public function captureStart($type = Zend_View_Helper_Placeholder_Container_Abstract::APPEND, $key = null)
     {
         if ($this->_captureLock) {
-            require_once 'Zend/View/Helper/Placeholder/Container/Exception.php';
             $e = new Zend_View_Helper_Placeholder_Container_Exception('Cannot nest placeholder captures for the same placeholder');
             $e->setView($this->view);
             throw $e;

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,10 +19,14 @@
  * @version    $Id$
  */
 
-
 /**
  * Wraps a DOMElement allowing for SimpleXML-like access to attributes.
  *
+ * @uses       ArrayAccess
+ * @uses       DOMDocument
+ * @uses       Zend_Feed
+ * @uses       Zend_Feed_Element
+ * @uses       Zend_Feed_Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -239,10 +242,6 @@ class Zend_Feed_Element implements ArrayAccess
                 $this->_element->appendChild($node);
             }
         } elseif (count($nodes) > 1) {
-            /**
-             * @see Zend_Feed_Exception
-             */
-            require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Cannot set the value of multiple tags simultaneously.');
         } else {
             $nodes[0]->nodeValue = $val;

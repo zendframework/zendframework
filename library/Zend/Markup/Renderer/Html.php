@@ -21,25 +21,14 @@
  */
 
 /**
- * @see Zend_Filter_HtmlEntities
- */
-require_once 'Zend/Filter/HtmlEntities.php';
-/**
- * @see Zend_Filter_PregReplace
- */
-require_once 'Zend/Filter/PregReplace.php';
-/**
- * @see Zend_Filter_Callback
- */
-require_once 'Zend/Filter/Callback.php';
-/**
- * @see Zend_Markup_Renderer_RendererAbstract
- */
-require_once 'Zend/Markup/Renderer/RendererAbstract.php';
-
-/**
  * HTML renderer
  *
+ * @uses       Zend_Filter
+ * @uses       Zend_Filter_Callback
+ * @uses       Zend_Filter_HtmlEntities
+ * @uses       Zend_Filter_PregReplace
+ * @uses       Zend_Loader_PluginLoader
+ * @uses       Zend_Markup_Renderer_RendererAbstract
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer

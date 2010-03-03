@@ -20,16 +20,14 @@
  */
 
 /**
- * Zend_TimeSync_Protocol
- */
-require_once 'Zend/TimeSync/Protocol.php';
-
-/**
  * NTP Protocol handling class
  *
+ * @uses      Zend_TimeSync
+ * @uses      Zend_TimeSync_Exception
+ * @uses      Zend_TimeSync_Protocol
  * @category  Zend
  * @package   Zend_TimeSync
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_TimeSync_Ntp extends Zend_TimeSync_Protocol

@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Multi */
-require_once 'Zend/Form/Element/Multi.php';
-
 /**
  * MultiCheckbox form element
  *
@@ -29,6 +26,7 @@ require_once 'Zend/Form/Element/Multi.php';
  * as labelled checkboxes; these will return an array of values for those
  * checkboxes selected.
  *
+ * @uses       Zend_Form_Element_Multi
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

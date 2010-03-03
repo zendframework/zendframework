@@ -21,18 +21,11 @@
  */
 
 /**
- * @see Zend_Db_Table_Abstract
- */
-require_once 'Zend/Db/Table/Abstract.php';
-
-/**
- * @see Zend_Db_Table_Definition
- */
-require_once 'Zend/Db/Table/Definition.php';
-
-/**
  * Class for SQL table interface.
  *
+ * @uses       Zend_Db_Table_Abstract
+ * @uses       Zend_Db_Table_Definition
+ * @uses       Zend_Registry
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Table

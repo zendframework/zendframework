@@ -20,13 +20,9 @@
  */
 
 /**
- * @see Zend_Exception
- */
-require_once 'Zend/Exception.php';
-
-/**
  * Exception class for Zend_Markup
  *
+ * @uses       Zend_Exception
  * @category   Zend 
  * @uses       Zend_Exception
  * @package    Zend_Markup

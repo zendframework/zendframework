@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_Crypt_Math_BigInteger
- */
-require_once 'Zend/Crypt/Math/BigInteger.php';
-
-/**
+ * @uses       Zend_Crypt_Math_BigInteger
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

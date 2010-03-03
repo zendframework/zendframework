@@ -21,6 +21,10 @@
  */
 
 /**
+ * @uses       Countable
+ * @uses       Iterator
+ * @uses       Zend_Loader
+ * @uses       Zend_Queue_Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Message
@@ -93,14 +97,12 @@ class Zend_Queue_Message_Iterator implements Iterator, Countable
         }
 
         if (!is_array($options['data'])) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('array optionsuration must have $options[\'data\'] = array');
         }
 
         // load the message class
         $classname = $this->_messageClass;
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
 

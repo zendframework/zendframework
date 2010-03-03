@@ -21,18 +21,14 @@
  */
 
 /**
- * @see Zend_View_Helper_Navigation_Helper
- */
-require_once 'Zend/View/Helper/Navigation/Helper.php';
-
-/**
- * @see Zend_View_Helper_HtmlElement
- */
-require_once 'Zend/View/Helper/HtmlElement.php';
-
-/**
  * Base class for navigational helpers
  *
+ * @uses       RecursiveIteratorIterator
+ * @uses       Zend_Navigation
+ * @uses       Zend_Registry
+ * @uses       Zend_View_Exception
+ * @uses       Zend_View_Helper_HtmlElement
+ * @uses       Zend_View_Helper_Navigation_Helper
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
@@ -169,7 +165,6 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     {
         if (null === $this->_container) {
             // try to fetch from registry first
-            require_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Navigation')) {
                 $nav = Zend_Registry::get('Zend_Navigation');
                 if ($nav instanceof Zend_Navigation_Container) {
@@ -178,7 +173,6 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
             }
 
             // nothing found in registry, create new container
-            require_once 'Zend/Navigation.php';
             $this->_container = new Zend_Navigation();
         }
 
@@ -311,7 +305,6 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     public function getTranslator()
     {
         if (null === $this->_translator) {
-            require_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Translate')) {
                 $this->setTranslator(Zend_Registry::get('Zend_Translate'));
             }
@@ -375,7 +368,6 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
             $role instanceof Zend_Acl_Role_Interface) {
             $this->_role = $role;
         } else {
-            require_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception(sprintf(
                 '$role must be a string, null, or an instance of ' 
                 .  'Zend_Acl_Role_Interface; %s given',
@@ -846,7 +838,6 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
             $role instanceof Zend_Acl_Role_Interface) {
             self::$_defaultRole = $role;
         } else {
-            require_once 'Zend/View/Exception.php';
             throw new Zend_View_Exception(
                 '$role must be null|string|Zend_Acl_Role_Interface'
             );

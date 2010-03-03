@@ -20,11 +20,8 @@
  */
 
 /**
- * @see Zend_Validate_Abstract
- */
-require_once 'Zend/Validate/Abstract.php';
-
-/**
+ * @uses       Zend_Validate_Abstract
+ * @uses       Zend_Validate_Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -74,10 +71,6 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
             $options = $options->toArray();
         }
         if (!is_array($options)) {
-            /**
-             * @see Zend_Validate_Exception
-             */
-            require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid options provided.');
         }
 
@@ -218,10 +211,6 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
     {
         // check separator
         if (!in_array($separator, array('-', ' ', ''))) {
-            /**
-             * @see Zend_Validate_Exception
-             */
-            require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid ISBN separator.');
         }
 
@@ -250,10 +239,6 @@ class Zend_Validate_Isbn extends Zend_Validate_Abstract
     {
         // check type
         if (!in_array($type, array(self::AUTO, self::ISBN10, self::ISBN13))) {
-            /**
-             * @see Zend_Validate_Exception
-             */
-            require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid ISBN type');
         }
 

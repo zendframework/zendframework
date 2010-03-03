@@ -19,10 +19,9 @@
  * @version    $Id$
  */
 
-/** Zend_Reflection_Docblock_Tag */
-require_once 'Zend/Reflection/Docblock/Tag.php';
-
 /**
+ * @uses       Zend_Reflection_Docblock_Tag
+ * @uses       Zend_Reflection_Exception
  * @category   Zend
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -50,12 +49,10 @@ class Zend_Reflection_Docblock_Tag_Param extends Zend_Reflection_Docblock_Tag
         $matches = array();
 
         if (!preg_match('#^@(\w+)\s+([\w|\\\]+)(?:\s+(\$\S+))?(?:\s+(.*))?#s', $tagDocblockLine, $matches)) {
-            require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Provided docblock line is does not contain a valid tag');
         }
 
         if ($matches[1] != 'param') {
-            require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Provided docblock line is does not contain a valid @param tag');
         }
 

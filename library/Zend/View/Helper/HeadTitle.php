@@ -20,12 +20,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_View_Helper_Placeholder_Container_Standalone */
-require_once 'Zend/View/Helper/Placeholder/Container/Standalone.php';
-
 /**
  * Helper for setting and retrieving title element for HTML head
  *
+ * @uses       Zend_Registry
+ * @uses       Zend_View_Exception
+ * @uses       Zend_View_Helper_Placeholder_Container_Abstract
  * @uses       Zend_View_Helper_Placeholder_Container_Standalone
  * @package    Zend_View
  * @subpackage Helper
@@ -90,7 +90,6 @@ class Zend_View_Helper_HeadTitle extends Zend_View_Helper_Placeholder_Container_
         } elseif ($translate instanceof Zend_Translate) {
             $this->_translator = $translate->getAdapter();
         } else {
-            require_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception("You must set an instance of Zend_Translate or Zend_Translate_Adapter");
             $e->setView($this->view);
             throw $e;
@@ -109,7 +108,6 @@ class Zend_View_Helper_HeadTitle extends Zend_View_Helper_Placeholder_Container_
     public function getTranslator()
     {
         if (null === $this->_translator) {
-            require_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Translate')) {
                 $this->setTranslator(Zend_Registry::get('Zend_Translate'));
             }

@@ -20,13 +20,10 @@
  */
 
 /**
- * @see Zend_Navigation_Container
- */
-require_once 'Zend/Navigation/Container.php';
-
-/**
  * A simple container class for {@link Zend_Navigation_Page} pages
  *
+ * @uses      Zend_Navigation_Container
+ * @uses      Zend_Navigation_Exception
  * @category  Zend
  * @package   Zend_Navigation
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -45,7 +42,6 @@ class Zend_Navigation extends Zend_Navigation_Container
         if (is_array($pages) || $pages instanceof Zend_Config) {
             $this->addPages($pages);
         } elseif (null !== $pages) {
-            require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
                     'Invalid argument: $pages must be an array, an ' .
                     'instance of Zend_Config, or null');

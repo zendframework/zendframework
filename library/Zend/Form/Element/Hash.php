@@ -19,12 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Xhtml */
-require_once 'Zend/Form/Element/Xhtml.php';
-
 /**
  * CSRF form protection
  *
+ * @uses       Zend_Form_Element_Xhtml
+ * @uses       Zend_Session_Namespace
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -105,7 +104,6 @@ class Zend_Form_Element_Hash extends Zend_Form_Element_Xhtml
     public function getSession()
     {
         if (null === $this->_session) {
-            require_once 'Zend/Session/Namespace.php';
             $this->_session = new Zend_Session_Namespace($this->getSessionName());
         }
         return $this->_session;

@@ -19,14 +19,12 @@
  * @version    $Id$
  */
 
-/** Zend_Memory_Container */
-require_once 'Zend/Memory/Container.php';
-
 /**
  * Memory value container
  *
  * Locked (always stored in memory).
  *
+ * @uses       Zend_Memory_Container
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

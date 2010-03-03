@@ -19,11 +19,6 @@
  */
 
 /**
- * Zend_Server_Reflection_Function_Abstract
- */
-require_once 'Zend/Server/Reflection/Function/Abstract.php';
-
-/**
  * Function Reflection
  *
  * @uses       Zend_Server_Reflection_Function_Abstract
@@ -32,7 +27,7 @@ require_once 'Zend/Server/Reflection/Function/Abstract.php';
  * @subpackage Reflection
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_Server_Reflection_Function extends Zend_Server_Reflection_Function_Abstract
 {

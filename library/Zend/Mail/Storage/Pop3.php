@@ -20,24 +20,12 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Mail_Storage_Abstract
- */
-require_once 'Zend/Mail/Storage/Abstract.php';
-
-/**
- * @see Zend_Mail_Protocol_Pop3
- */
-require_once 'Zend/Mail/Protocol/Pop3.php';
-
-/**
- * @see Zend_Mail_Message
- */
-require_once 'Zend/Mail/Message.php';
-
-
-/**
+ * @uses       Zend_Mail_Message
+ * @uses       Zend_Mail_Protocol_Pop3
+ * @uses       Zend_Mail_Storage_Abstract
+ * @uses       Zend_Mail_Storage_Exception
+ * @uses       Zend_Mime_Decode
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Storage
@@ -109,10 +97,6 @@ class Zend_Mail_Storage_Pop3 extends Zend_Mail_Storage_Abstract
     {
         if ($part !== null) {
             // TODO: implement
-            /**
-             * @see Zend_Mail_Storage_Exception
-             */
-            require_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('not implemented');
         }
 
@@ -132,10 +116,6 @@ class Zend_Mail_Storage_Pop3 extends Zend_Mail_Storage_Abstract
     {
         if ($part !== null) {
             // TODO: implement
-            /**
-             * @see Zend_Mail_Storage_Exception
-             */
-            require_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('not implemented');
         }
 
@@ -174,10 +154,6 @@ class Zend_Mail_Storage_Pop3 extends Zend_Mail_Storage_Abstract
         }
 
         if (!isset($params->user)) {
-            /**
-             * @see Zend_Mail_Storage_Exception
-             */
-            require_once 'Zend/Mail/Storage/Exception.php';
             throw new Zend_Mail_Storage_Exception('need at least user in params');
         }
 
@@ -276,10 +252,6 @@ class Zend_Mail_Storage_Pop3 extends Zend_Mail_Storage_Abstract
             }
         }
 
-        /**
-         * @see Zend_Mail_Storage_Exception
-         */
-        require_once 'Zend/Mail/Storage/Exception.php';
         throw new Zend_Mail_Storage_Exception('unique id not found');
     }
 

@@ -21,13 +21,10 @@
  */
 
 /**
- * Zend_InfoCard_Xml_EncryptedData/Abstract.php
- */
-require_once 'Zend/InfoCard/Xml/EncryptedData/Abstract.php';
-
-/**
  * An XmlEnc formatted EncryptedData XML block
  *
+ * @uses       Zend_InfoCard_Xml_EncryptedData_Abstract
+ * @uses       Zend_InfoCard_Xml_Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

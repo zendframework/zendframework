@@ -20,16 +20,10 @@
  * @version    $Id$
  */
 
-/** Zend_Dojo_View_Helper_Dijit */
-require_once 'Zend/Dojo/View/Helper/Dijit.php';
-
-/** Zend_Json */
-require_once 'Zend/Json.php';
-
 /**
  * Dojo Editor dijit
  *
- * @uses       Zend_Dojo_View_Helper_Textarea
+ * @uses       Zend_Dojo_View_Helper_Dijit
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

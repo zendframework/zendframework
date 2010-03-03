@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Dojo_View_Helper_DijitContainer */
-require_once 'Zend/Dojo/View/Helper/DijitContainer.php';
-
 /**
  * Dojo SplitContainer dijit
  *
@@ -31,7 +28,7 @@ require_once 'Zend/Dojo/View/Helper/DijitContainer.php';
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-  */
+ */
 class Zend_Dojo_View_Helper_SplitContainer extends Zend_Dojo_View_Helper_DijitContainer
 {
     /**

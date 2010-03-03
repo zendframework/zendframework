@@ -21,12 +21,6 @@
  */
 
 /**
- * Zend_XmlRpc_Fault
- */
-require_once 'Zend/XmlRpc/Fault.php';
-
-
-/**
  * XMLRPC Server Faults
  *
  * Encapsulates an exception for use as an XMLRPC fault response. Valid
@@ -41,6 +35,7 @@ require_once 'Zend/XmlRpc/Fault.php';
  * To allow method chaining, you may use the {@link getInstance()} factory
  * to instantiate a Zend_XmlRpc_Server_Fault.
  *
+ * @uses       Zend_XmlRpc_Fault
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Server

@@ -21,16 +21,13 @@
  */
 
 /**
- * @see Zend_Crypt
- */
-require_once 'Zend/Crypt.php';
-
-/**
  * PHP implementation of the RFC 2104 Hash based Message Authentication Code
  * algorithm.
  *
  * @todo  Patch for refactoring failed tests (key block sizes >80 using internal algo)
  * @todo       Check if mhash() is a required alternative (will be PECL-only soon)
+ * @uses       Zend_Crypt
+ * @uses       Zend_Crypt_Hmac_Exception
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -92,7 +89,6 @@ class Zend_Crypt_Hmac extends Zend_Crypt
     {
         // set the key
         if (!isset($key) || empty($key)) {
-            require_once 'Zend/Crypt/Hmac/Exception.php';
             throw new Zend_Crypt_Hmac_Exception('provided key is null or empty');
         }
         self::$_key = $key;
@@ -113,7 +109,6 @@ class Zend_Crypt_Hmac extends Zend_Crypt
     protected static function _setHashAlgorithm($hash)
     {
         if (!isset($hash) || empty($hash)) {
-            require_once 'Zend/Crypt/Hmac/Exception.php';
             throw new Zend_Crypt_Hmac_Exception('provided hash string is null or empty');
         }
 
@@ -129,7 +124,6 @@ class Zend_Crypt_Hmac extends Zend_Crypt
         }
 
         if ($hashSupported === false) {
-            require_once 'Zend/Crypt/Hmac/Exception.php';
             throw new Zend_Crypt_Hmac_Exception('hash algorithm provided is not supported on this PHP installation; please enable the hash or mhash extensions');
         }
         self::$_hashAlgorithm = $hash;

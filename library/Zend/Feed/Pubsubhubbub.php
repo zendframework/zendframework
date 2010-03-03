@@ -20,31 +20,12 @@
  */
 
 /**
- * @see Zend_Http_Client
- */
-require_once 'Zend/Http/Client.php';
-
-/**
- * @see Zend_Uri
- */
-require_once 'Zend/Uri.php';
-
-/**
- * @see Zend_Version
- */
-require_once 'Zend/Version.php';
-
-/**
- * @see Zend_Feed_Reader
- */
-require_once 'Zend/Feed/Reader.php';
-
-/**
- * @see Zend_Feed_Abstract
- */
-require_once 'Zend/Feed/Abstract.php';
-
-/**
+ * @uses       Zend_Http_Client
+ * @uses       Zend_Feed_Abstract
+ * @uses       Zend_Feed_Pubsubhubbub_Exception
+ * @uses       Zend_Feed_Reader
+ * @uses       Zend_Uri
+ * @uses       Zend_Version
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

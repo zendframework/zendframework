@@ -19,20 +19,14 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Abstract */
-require_once 'Zend/Form/Decorator/Abstract.php';
-
-/** Zend_Form_Decorator_Marker_File_Interface */
-require_once 'Zend/Form/Decorator/Marker/File/Interface.php';
-
-/** Zend_File_Transfer_Adapter_Http */
-require_once 'Zend/File/Transfer/Adapter/Http.php';
-
 /**
  * Zend_Form_Decorator_File
  *
  * Fixes the rendering for all subform and multi file elements
  *
+ * @uses       Zend_Form_Decorator_Abstract
+ * @uses       Zend_Form_Decorator_Marker_File_Interface
+ * @uses       Zend_File_Transfer_Adapter_Http
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator

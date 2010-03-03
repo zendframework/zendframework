@@ -21,14 +21,14 @@
  */
 
 /**
- * @see Zend_Application_Resource_ResourceAbstract
- */
-require_once 'Zend/Application/Resource/ResourceAbstract.php';
-
-/**
  * Resource for setting up Mail Transport and default From & ReplyTo addresses
  *
+ * @uses       Zend_Application_Resource_Exception
  * @uses       Zend_Application_Resource_ResourceAbstract
+ * @uses       Zend_Loader_Autoloader
+ * @uses       Zend_Mail
+ * @uses       Zend_Mail_Transport_Sendmail
+ * @uses       Zend_Mail_Transport_Smtp
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource
@@ -43,12 +43,17 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
      */
     protected $_transport;
 
-    public function init() {
+    /**
+     * Initialize mail resource
+     * 
+     * @return Zend_Mail_Transport_Abstract
+     */
+    public function init() 
+    {
         return $this->getMail();
     }
     
     /**
-     *
      * @return Zend_Mail_Transport_Abstract|null
      */
     public function getMail()
@@ -81,7 +86,14 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
         return $this->_transport;
     }
     
-    protected function _setDefaults($type) {
+    /**
+     * Set transport/message defaults
+     * 
+     * @param  string $type 
+     * @return void
+     */
+    protected function _setDefaults($type) 
+    {
         $key = strtolower('default' . $type);
         $options = $this->getOptions();
 
@@ -100,19 +112,23 @@ class Zend_Application_Resource_Mail extends Zend_Application_Resource_ResourceA
         }
     }
     
-    protected function _setupTransport($options)
+    /**
+     * Setup mail transport
+     * 
+     * @param  array $options 
+     * @return void
+     */
+    protected function _setupTransport(array $options)
     {
     	if(!isset($options['type'])) {
     		$options['type'] = 'sendmail';
     	}
     	
         $transportName = $options['type'];
-        if(!Zend_Loader_Autoloader::autoload($transportName))
-        {
+        if(!Zend_Loader_Autoloader::autoload($transportName)) {
             $transportName = ucfirst(strtolower($transportName));
 
-            if(!Zend_Loader_Autoloader::autoload($transportName))
-            {
+            if(!Zend_Loader_Autoloader::autoload($transportName)) {
                 $transportName = 'Zend_Mail_Transport_' . $transportName;
                 if(!Zend_Loader_Autoloader::autoload($transportName)) {
                     throw new Zend_Application_Resource_Exception(

@@ -20,18 +20,15 @@
  */
 
 /**
- * @see Zend_Soap_Wsdl_Strategy_Interface
- */
-require_once "Zend/Soap/Wsdl/Strategy/Interface.php";
-
-/**
- * @see Zend_Soap_Wsdl_Strategy_Abstract
- */
-require_once "Zend/Soap/Wsdl/Strategy/Abstract.php";
-
-/**
  * Zend_Soap_Wsdl
  *
+ * @uses       DOMDocument
+ * @uses       Zend_Server_Exception
+ * @uses       Zend_Soap_Wsdl_Exception
+ * @uses       Zend_Soap_Wsdl_Strategy_Abstract
+ * @uses       Zend_Soap_Wsdl_Strategy_AnyType
+ * @uses       Zend_Soap_Wsdl_Strategy_DefaultComplexType
+ * @uses       Zend_Soap_Wsdl_Strategy_Interface
  * @category   Zend
  * @package    Zend_Soap
  */
@@ -98,7 +95,6 @@ class Zend_Soap_Wsdl
                     xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'></definitions>";
         $this->_dom = new DOMDocument();
         if (!$this->_dom->loadXML($wsdl)) {
-            require_once 'Zend/Server/Exception.php';
             throw new Zend_Server_Exception('Unable to create DomDocument');
         } else {
             $this->_wsdl = $this->_dom->documentElement;
@@ -142,16 +138,13 @@ class Zend_Soap_Wsdl
     public function setComplexTypeStrategy($strategy)
     {
         if($strategy === true) {
-            require_once "Zend/Soap/Wsdl/Strategy/DefaultComplexType.php";
             $strategy = new Zend_Soap_Wsdl_Strategy_DefaultComplexType();
         } else if($strategy === false) {
-            require_once "Zend/Soap/Wsdl/Strategy/AnyType.php";
             $strategy = new Zend_Soap_Wsdl_Strategy_AnyType();
         } else if(is_string($strategy)) {
             if(class_exists($strategy)) {
                 $strategy = new $strategy();
             } else {
-                require_once "Zend/Soap/Wsdl/Exception.php";
                 throw new Zend_Soap_Wsdl_Exception(
                     sprintf("Strategy with name '%s does not exist.", $strategy
                 ));
@@ -159,7 +152,6 @@ class Zend_Soap_Wsdl
         }
 
         if(!($strategy instanceof Zend_Soap_Wsdl_Strategy_Interface)) {
-            require_once "Zend/Soap/Wsdl/Exception.php";
             throw new Zend_Soap_Wsdl_Exception("Set a strategy that is not of type 'Zend_Soap_Wsdl_Strategy_Interface'");
         }
         $this->_strategy = $strategy;
@@ -612,7 +604,6 @@ class Zend_Soap_Wsdl
     private function _parseElement($element)
     {
         if (!is_array($element)) {
-            require_once "Zend/Soap/Wsdl/Exception.php";
             throw new Zend_Soap_Wsdl_Exception("The 'element' parameter needs to be an associative array.");
         }
 

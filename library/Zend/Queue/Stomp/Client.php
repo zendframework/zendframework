@@ -23,6 +23,7 @@
 /**
  * The Stomp client interacts with a Stomp server.
  *
+ * @uses       Zend_Loader
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Stomp
@@ -88,7 +89,6 @@ class Zend_Queue_Stomp_Client
     public function addConnection($scheme, $host, $port, $class = 'Zend_Queue_Stomp_Client_Connection')
     {
         if (!class_exists($class)) {
-            require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($class);
         }
 

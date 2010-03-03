@@ -20,17 +20,17 @@
  * @version    $Id$
  */
 
-/** Zend_Amf_Constants */
-require_once 'Zend/Amf/Constants.php';
-
-/** @see Zend_Amf_Parse_Deserializer */
-require_once 'Zend/Amf/Parse/Deserializer.php';
-
 /**
  * Read an AMF0 input stream and convert it into PHP data types
  *
  * @todo       Implement Typed Object Class Mapping
  * @todo       Class could be implmented as Factory Class with each data type it's own class
+ * @uses       Zend_Amf_Constants
+ * @uses       Zend_Amf_Exception
+ * @uses       Zend_Amf_Parse_Amf3_Deserializer
+ * @uses       Zend_Amf_Parse_Deserializer
+ * @uses       Zend_Amf_Parse_TypeLoader
+ * @uses       Zend_Date
  * @package    Zend_Amf
  * @subpackage Parse_Amf0
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -130,7 +130,6 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
                 return $this->readAmf3TypeMarker();
 
             default:
-                require_once 'Zend/Amf/Exception.php';
                 throw new Zend_Amf_Exception('Unsupported marker type: ' . $typeMarker);
         }
     }
@@ -180,7 +179,6 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
     {
         $key = $this->_stream->readInt();
         if (!array_key_exists($key, $this->_reference)) {
-            require_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Invalid reference key: '. $key);
         }
         return $this->_reference[$key];
@@ -234,7 +232,6 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
         // so read and ignore.
         $offset = $this->_stream->readInt();
 
-        require_once 'Zend/Date.php';
         $date   = new Zend_Date($timestamp);
         return $date;
     }
@@ -262,7 +259,6 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
      */
     public function readTypedObject()
     {
-         require_once 'Zend/Amf/Parse/TypeLoader.php';
         // get the remote class name
         $className = $this->_stream->readUTF();
         $loader = Zend_Amf_Parse_TypeLoader::loadType($className);
@@ -287,7 +283,6 @@ class Zend_Amf_Parse_Amf0_Deserializer extends Zend_Amf_Parse_Deserializer
      */
     public function readAmf3TypeMarker()
     {
-        require_once 'Zend/Amf/Parse/Amf3/Deserializer.php';
         $deserializer = new Zend_Amf_Parse_Amf3_Deserializer($this->_stream);
         $this->_objectEncoding = Zend_Amf_Constants::AMF3_OBJECT_ENCODING;
         return $deserializer->readTypeMarker();

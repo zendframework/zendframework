@@ -20,16 +20,15 @@
  */
 
 /**
- * Implement needed classes
- */
-require_once 'Zend/Measure/Abstract.php';
-require_once 'Zend/Locale.php';
-
-/**
  * Class for handling number conversions
  *
  * This class can only handle numbers without precision
  *
+ * @uses       Zend_Locale
+ * @uses       Zend_Locale_Format
+ * @uses       Zend_Locale_Math
+ * @uses       Zend_Measure_Abstract
+ * @uses       Zend_Measure_Exception
  * @category   Zend
  * @package    Zend_Measure
  * @subpackage Zend_Measure_Number
@@ -155,7 +154,6 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
 
         if (!Zend_Locale::isLocale($locale, true, false)) {
             if (!Zend_Locale::isLocale($locale, true, false)) {
-                require_once 'Zend/Measure/Exception.php';
                 throw new Zend_Measure_Exception("Language (" . (string) $locale . ") is unknown");
             }
 
@@ -169,7 +167,6 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
         }
 
         if (isset($this->_units[$type]) === false) {
-            require_once 'Zend/Measure/Exception.php';
             throw new Zend_Measure_Exception("Type ($type) is unknown");
         }
 
@@ -191,7 +188,6 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
         }
 
         if (empty($this->_units[$type])) {
-            require_once 'Zend/Measure/Exception.php';
             throw new Zend_Measure_Exception('unknown type of number:' . $type);
         }
 
@@ -255,7 +251,6 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
                 try {
                     $value = Zend_Locale_Format::getInteger($value, array('locale' => $locale));
                 } catch (Exception $e) {
-                    require_once 'Zend/Measure/Exception.php';
                     throw new Zend_Measure_Exception($e->getMessage(), $e->getCode(), $e);
                 }
                 if (call_user_func(Zend_Locale_Math::$comp, $value, 0) < 0) {
@@ -342,7 +337,6 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
 
                 --$count;
                 if ($count === 0) {
-                    require_once 'Zend/Measure/Exception.php';
                     throw new Zend_Measure_Exception("Your value '$tempvalue' cannot be processed because it extends 200 digits");
                 }
             }
@@ -369,7 +363,6 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
 
                     --$count;
                     if ($count === 0) {
-                        require_once 'Zend/Measure/Exception.php';
                         throw new Zend_Measure_Exception("Your value '$tempvalue' cannot be processed because it extends 200 digits");
                     }
                 }
@@ -393,7 +386,6 @@ class Zend_Measure_Number extends Zend_Measure_Abstract
     public function setType($type)
     {
         if (empty($this->_units[$type]) === true) {
-            require_once 'Zend/Measure/Exception.php';
             throw new Zend_Measure_Exception('Unknown type of number:' . $type);
         }
 

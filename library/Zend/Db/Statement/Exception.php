@@ -21,13 +21,9 @@
  */
 
 /**
- * @see Zend_Db_Exception
- */
-require_once 'Zend/Db/Exception.php';
-
-/**
  * Zend_Db_Statement_Exception
  *
+ * @uses       Zend_Db_Exception
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Statement

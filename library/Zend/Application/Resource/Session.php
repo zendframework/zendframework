@@ -21,15 +21,11 @@
  */
 
 /**
- * @see Zend_Application_Resource_ResourceAbstract
- */
-require_once 'Zend/Application/Resource/ResourceAbstract.php';
-
-
-/**
  * Resource for setting session options
  *
+ * @uses       Zend_Application_Resource_Exception
  * @uses       Zend_Application_Resource_ResourceAbstract
+ * @uses       Zend_Session
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource

@@ -20,10 +20,8 @@
  * @version    $Id$
  */
 
-/** Zend_Controller_Request_Abstract */
-require_once 'Zend/Controller/Request/Abstract.php';
-
 /**
+ * @uses       Zend_Controller_Request_Abstract
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Request

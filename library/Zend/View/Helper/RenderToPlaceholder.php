@@ -20,19 +20,16 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_View_Helper_Abstract.php */
-require_once 'Zend/View/Helper/Abstract.php';
-
 /**
  * Renders a template and stores the rendered output as a placeholder
  * variable for later use.
  *
+ * @uses       Zend_View_Helper_Abstract
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 class Zend_View_Helper_RenderToPlaceholder extends Zend_View_Helper_Abstract
 {
 

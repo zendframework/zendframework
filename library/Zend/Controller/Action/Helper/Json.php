@@ -21,14 +21,11 @@
  */
 
 /**
- * @see Zend_Controller_Action_Helper_Abstract
- */
-require_once 'Zend/Controller/Action/Helper/Abstract.php';
-
-/**
  * Simplify AJAX context switching based on requested format
  *
+ * @uses       Zend_Controller_Action_HelperBroker
  * @uses       Zend_Controller_Action_Helper_Abstract
+ * @uses       Zend_View_Helper_Json
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper
@@ -64,18 +61,10 @@ class Zend_Controller_Action_Helper_Json extends Zend_Controller_Action_Helper_A
      */
     public function encodeJson($data, $keepLayouts = false)
     {
-        /**
-         * @see Zend_View_Helper_Json
-         */
-        require_once 'Zend/View/Helper/Json.php';
         $jsonHelper = new Zend_View_Helper_Json();
         $data = $jsonHelper->json($data, $keepLayouts);
 
         if (!$keepLayouts) {
-            /**
-             * @see Zend_Controller_Action_HelperBroker
-             */
-            require_once 'Zend/Controller/Action/HelperBroker.php';
             Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->setNoRender(true);
         }
 

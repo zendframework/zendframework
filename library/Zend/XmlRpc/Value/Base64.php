@@ -20,14 +20,8 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_XmlRpc_Value_Scalar
- */
-require_once 'Zend/XmlRpc/Value/Scalar.php';
-
-
-/**
+ * @uses       Zend_XmlRpc_Value_Scalar
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Value

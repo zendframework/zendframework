@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_Exception
- */
-require_once "Zend/Exception.php";
-
-/**
+ * @uses       Zend_Exception
  * @package    Zend_Soap
  * @subpackage AutoDiscover
  */

@@ -21,6 +21,11 @@
 /**
  * Zend_Form_DisplayGroup
  *
+ * @uses       Countable
+ * @uses       Iterator
+ * @uses       Zend_Controller_Action_HelperBroker
+ * @uses       Zend_Form
+ * @uses       Zend_Form_Exception
  * @category   Zend
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -296,7 +301,6 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
     {
         $name = $this->filtername($name);
         if (('0' !== $name) && empty($name)) {
-            require_once 'Zend/Form/Exception.php';
             throw new Zend_Form_Exception('Invalid name provided; must contain only valid variable characters and be non-empty');
         }
 
@@ -446,7 +450,6 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
     {
         foreach ($elements as $element) {
             if (!$element instanceof Zend_Form_Element) {
-                require_once 'Zend/Form/Exception.php';
                 throw new Zend_Form_Exception('elements passed via array to addElements() must be Zend_Form_Elements only');
             }
             $this->addElement($element);
@@ -673,7 +676,6 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
                 break;
             }
             if (is_numeric($name)) {
-                require_once 'Zend/Form/Exception.php';
                 throw new Zend_Form_Exception('Invalid alias provided to addDecorator; must be alphanumeric string');
             }
             if (is_string($spec)) {
@@ -685,7 +687,6 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
                 $decorator = $spec;
             }
         } else {
-            require_once 'Zend/Form/Exception.php';
             throw new Zend_Form_Exception('Invalid decorator provided to addDecorator; must be string or Zend_Form_Decorator_Interface');
         }
 
@@ -730,7 +731,6 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
                     }
                 }
             } else {
-                require_once 'Zend/Form/Exception.php';
                 throw new Zend_Form_Exception('Invalid decorator passed to addDecorators()');
             }
         }
@@ -850,7 +850,6 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
     public function getView()
     {
         if (null === $this->_view) {
-            require_once 'Zend/Controller/Action/HelperBroker.php';
             $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
             $this->setView($viewRenderer->view);
         }
@@ -905,7 +904,6 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
         } elseif ($translator instanceof Zend_Translate) {
             $this->_translator = $translator->getAdapter();
         } else {
-            require_once 'Zend/Form/Exception.php';
             throw new Zend_Form_Exception('Invalid translator specified');
         }
         return $this;
@@ -923,7 +921,6 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
         }
 
         if (null === $this->_translator) {
-            require_once 'Zend/Form.php';
             return Zend_Form::getDefaultTranslator();
         }
 
@@ -975,11 +972,9 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
                 return $decorator->render($seed);
             }
 
-            require_once 'Zend/Form/Exception.php';
             throw new Zend_Form_Exception(sprintf('Decorator by name %s does not exist', $decoratorName));
         }
 
-        require_once 'Zend/Form/Exception.php';
         throw new Zend_Form_Exception(sprintf('Method %s does not exist', $method));
     }
 

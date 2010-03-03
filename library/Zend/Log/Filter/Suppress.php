@@ -20,10 +20,8 @@
  * @version    $Id$
  */
 
-/** Zend_Log_Filter_Interface */
-require_once 'Zend/Log/Filter/Interface.php';
-
 /**
+ * @uses       Zend_Log_Filter_Abstract
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Filter

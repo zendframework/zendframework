@@ -20,50 +20,25 @@
  */
 
 /**
- * @see Zend_Date
- */
-require_once 'Zend/Date.php';
-
-/**
- * @see Zend_Date
- */
-require_once 'Zend/Uri.php';
-
-/**
- * @see Zend_Feed_Writer
- */
-require_once 'Zend/Feed/Writer.php';
-
-/**
- * @see Zend_Feed_Writer_Entry
- */
-require_once 'Zend/Feed/Writer/Entry.php';
-
-/**
- * @see Zend_Feed_Writer_Deleted
- */
-require_once 'Zend/Feed/Writer/Deleted.php';
-
-/**
- * @see Zend_Feed_Writer_Renderer_Feed_Atom
- */
-require_once 'Zend/Feed/Writer/Renderer/Feed/Atom.php';
-
-/**
- * @see Zend_Feed_Writer_Renderer_Feed_Rss
- */
-require_once 'Zend/Feed/Writer/Renderer/Feed/Rss.php';
-
-require_once 'Zend/Feed/Writer/Feed/FeedAbstract.php';
-
-/**
+ * @uses       Countable
+ * @uses       Iterator
+ * @uses       Zend_Date
+ * @uses       Zend_Feed_Exception
+ * @uses       Zend_Feed_Writer
+ * @uses       Zend_Feed_Writer_Deleted
+ * @uses       Zend_Feed_Writer_Entry
+ * @uses       Zend_Feed_Writer_Feed_FeedAbstract
+ * @uses       Zend_Feed_Writer_Renderer_Feed_Atom
+ * @uses       Zend_Feed_Writer_Renderer_Feed_Rss
+ * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Writer_Feed extends Zend_Feed_Writer_Feed_FeedAbstract
-implements Iterator, Countable
+class Zend_Feed_Writer_Feed 
+    extends Zend_Feed_Writer_Feed_FeedAbstract
+    implements Iterator, Countable
 {
 
     /**
@@ -147,7 +122,6 @@ implements Iterator, Countable
         if (isset($this->_entries[$index])) {
             unset($this->_entries[$index]);
         }
-        require_once 'Zend/Feed/Exception.php';
         throw new Zend_Feed_Exception('Undefined index: ' . $index . '. Entry does not exist.');
     }
 
@@ -162,7 +136,6 @@ implements Iterator, Countable
         if (isset($this->_entries[$index])) {
             return $this->_entries[$index];
         }
-        require_once 'Zend/Feed/Exception.php';
         throw new Zend_Feed_Exception('Undefined index: ' . $index . '. Entry does not exist.');
     }
 
@@ -266,7 +239,6 @@ implements Iterator, Countable
         $this->setType(strtolower($type));
         $type = ucfirst($this->getType());
         if ($type !== 'Rss' && $type !== 'Atom') {
-            require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Invalid feed type specified: ' . $type . '.'
             . ' Should be one of "rss" or "atom".');
         }

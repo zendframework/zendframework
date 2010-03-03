@@ -20,11 +20,8 @@
  */
 
 /**
- * @see Zend_Validate_Abstract
- */
-require_once 'Zend/Validate/Abstract.php';
-
-/**
+ * @uses       Zend_Validate_Abstract
+ * @uses       Zend_Validate_Exception
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -133,7 +130,6 @@ class Zend_Validate_NotEmpty extends Zend_Validate_Abstract
         }
 
         if (!is_int($type) || ($type < 0) || ($type > self::ALL)) {
-            require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Unknown type');
         }
 

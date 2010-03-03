@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-/** Zend_Server_Cache */
-require_once 'Zend/Server/Cache.php';
-
 /**
  * Zend_XmlRpc_Server_Cache: cache Zend_XmlRpc_Server server definition
  *
+ * @uses       Zend_Server_Cache
  * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Server

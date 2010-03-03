@@ -21,13 +21,10 @@
  */
 
 /**
- * @see Zend_View_Helper_HtmlElement
- */
-require_once 'Zend/View/Helper/HtmlElement.php';
-
-/**
  * Base helper for form elements.  Extend this, don't use it on its own.
  *
+ * @uses       Zend_View_Exception
+ * @uses       Zend_View_Helper_HtmlElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
@@ -66,7 +63,6 @@ abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
         } elseif ($translator instanceof Zend_Translate) {
             $this->_translator = $translator->getAdapter();
         } else {
-            require_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception('Invalid translator specified');
             $e->setView($this->view);
             throw $e;

@@ -20,18 +20,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Json */
-require_once 'Zend/Json.php';
-
-/** Zend_Controller_Front */
-require_once 'Zend/Controller/Front.php';
-
-/** Zend_View_Helper_Abstract.php */
-require_once 'Zend/View/Helper/Abstract.php';
-
 /**
  * Helper for simplifying JSON responses
  *
+ * @uses       Zend_Controller_Front
+ * @uses       Zend_Json
+ * @uses       Zend_Layout
+ * @uses       Zend_View_Helper_Abstract
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -66,7 +61,6 @@ class Zend_View_Helper_Json extends Zend_View_Helper_Abstract
 
         $data = Zend_Json::encode($data, null, $options);
         if (!$keepLayouts) {
-            require_once 'Zend/Layout.php';
             $layout = Zend_Layout::getMvcInstance();
             if ($layout instanceof Zend_Layout) {
                 $layout->disableLayout();

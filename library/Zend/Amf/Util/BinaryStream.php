@@ -23,6 +23,7 @@
 /**
  * Utility class to walk through a data stream byte by byte with conventional names
  *
+ * @uses       Zend_Amf_Exception
  * @package    Zend_Amf
  * @subpackage Util
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -63,7 +64,6 @@ class Zend_Amf_Util_BinaryStream
     public function __construct($stream)
     {
         if (!is_string($stream)) {
-            require_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Inputdata is not of type String');
         }
 
@@ -94,7 +94,6 @@ class Zend_Amf_Util_BinaryStream
     public function readBytes($length)
     {
         if (($length + $this->_needle) > $this->_streamLength) {
-            require_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Buffer underrun at needle position: ' . $this->_needle . ' while requesting length: ' . $length);
         }
         $bytes = substr($this->_stream, $this->_needle, $length);
@@ -124,7 +123,6 @@ class Zend_Amf_Util_BinaryStream
     public function readByte()
     {
         if (($this->_needle + 1) > $this->_streamLength) {
-            require_once 'Zend/Amf/Exception.php';
             throw new Zend_Amf_Exception('Buffer underrun at needle position: ' . $this->_needle . ' while requesting length: ' . $length);
         }
 

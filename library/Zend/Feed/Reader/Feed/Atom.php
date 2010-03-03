@@ -20,16 +20,9 @@
  */
 
 /**
- * @see Zend_Feed_Reader_FeedAbstract
- */
-require_once 'Zend/Feed/Reader/FeedAbstract.php';
-
-/**
- * @see Zend_Feed_Reader_Extension_Atom_Feed
- */
-require_once 'Zend/Feed/Reader/Extension/Atom/Feed.php';
-
-/**
+ * @uses       Zend_Feed_Reader
+ * @uses       Zend_Feed_Reader_Extension_Atom_Feed
+ * @uses       Zend_Feed_Reader_FeedAbstract
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

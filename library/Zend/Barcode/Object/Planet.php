@@ -21,18 +21,10 @@
  */
 
 /**
- * @see Zend_Barcode_Object_Postnet
- */
-require_once 'Zend/Barcode/Object/Postnet.php';
-
-/**
- * @see Zend_Validate_Barcode
- */
-require_once 'Zend/Validate/Barcode.php';
-
-/**
  * Class for generate Planet barcode
  *
+ * @uses       Zend_Barcode_Object_Postnet
+ * @uses       Zend_Validate_Barcode
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -20,13 +20,6 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Feed_Element
- */
-require_once 'Zend/Feed/Element.php';
-
-
 /**
  * The Zend_Feed_Abstract class is an abstract class representing feeds.
  *
@@ -35,6 +28,11 @@ require_once 'Zend/Feed/Element.php';
  * considered to be the entry collection, such that iterating over the
  * feed takes you through each of the feed.s entries.
  *
+ * @uses       Countable
+ * @uses       Iterator
+ * @uses       Zend_Feed
+ * @uses       Zend_Feed_Element
+ * @uses       Zend_Feed_Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -77,10 +75,6 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
             $client->setUri($uri);
             $response = $client->request('GET');
             if ($response->getStatus() !== 200) {
-                /**
-                 * @see Zend_Feed_Exception
-                 */
-                require_once 'Zend/Feed/Exception.php';
                 throw new Zend_Feed_Exception('Feed failed to load, got response code ' . $response->getStatus());
             }
             $this->_element = $response->getBody();
@@ -124,10 +118,6 @@ abstract class Zend_Feed_Abstract extends Zend_Feed_Element implements Iterator,
                 }
             }
 
-            /**
-             * @see Zend_Feed_Exception
-             */
-            require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception("DOMDocument cannot parse XML: $php_errormsg");
         }
 

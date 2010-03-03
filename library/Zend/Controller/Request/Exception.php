@@ -20,12 +20,8 @@
  * @version    $Id$
  */
 
-
-/** Zend_Controller_Exception */
-require_once 'Zend/Controller/Exception.php';
-
-
 /**
+ * @uses       Zend_Controller_Exception
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Request

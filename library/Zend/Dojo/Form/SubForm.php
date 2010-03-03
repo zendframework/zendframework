@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_SubForm */
-require_once 'Zend/Form/SubForm.php';
-
 /**
  * Dijit-enabled SubForm
  *

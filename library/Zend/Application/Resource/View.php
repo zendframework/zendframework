@@ -21,15 +21,12 @@
  */
 
 /**
- * @see Zend_Application_Resource_ResourceAbstract
- */
-require_once 'Zend/Application/Resource/ResourceAbstract.php';
-
-
-/**
  * Resource for settings view options
  *
  * @uses       Zend_Application_Resource_ResourceAbstract
+ * @uses       Zend_Controller_Action_HelperBroker
+ * @uses       Zend_Controller_Action_Helper_ViewRenderer
+ * @uses       Zend_View
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource

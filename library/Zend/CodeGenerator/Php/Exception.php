@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_CodeGenerator_Exception
- */
-require_once 'Zend/CodeGenerator/Exception.php';
-
-/**
+ * @uses       Zend_CodeGenerator_Exception
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

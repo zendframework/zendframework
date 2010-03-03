@@ -20,8 +20,8 @@
  * @version    $Id$
  */
 
-
 /**
+ * @uses       Zend_Mail_Protocol_Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol
@@ -102,10 +102,6 @@ class Zend_Mail_Protocol_Pop3
         $errstr = '';
         $this->_socket = @fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
         if (!$this->_socket) {
-            /**
-             * @see Zend_Mail_Protocol_Exception
-             */
-            require_once 'Zend/Mail/Protocol/Exception.php';
             throw new Zend_Mail_Protocol_Exception('cannot connect to host; error = ' . $errstr .
                                                    ' (errno = ' . $errno . ' )');
         }
@@ -124,10 +120,6 @@ class Zend_Mail_Protocol_Pop3
             $this->request('STLS');
             $result = stream_socket_enable_crypto($this->_socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
             if (!$result) {
-                /**
-                 * @see Zend_Mail_Protocol_Exception
-                 */
-                require_once 'Zend/Mail/Protocol/Exception.php';
                 throw new Zend_Mail_Protocol_Exception('cannot enable TLS');
             }
         }
@@ -147,10 +139,6 @@ class Zend_Mail_Protocol_Pop3
     {
         $result = @fputs($this->_socket, $request . "\r\n");
         if (!$result) {
-            /**
-             * @see Zend_Mail_Protocol_Exception
-             */
-            require_once 'Zend/Mail/Protocol/Exception.php';
             throw new Zend_Mail_Protocol_Exception('send failed - connection closed?');
         }
     }
@@ -167,10 +155,6 @@ class Zend_Mail_Protocol_Pop3
     {
         $result = @fgets($this->_socket);
         if (!is_string($result)) {
-            /**
-             * @see Zend_Mail_Protocol_Exception
-             */
-            require_once 'Zend/Mail/Protocol/Exception.php';
             throw new Zend_Mail_Protocol_Exception('read failed - connection closed?');
         }
 
@@ -183,10 +167,6 @@ class Zend_Mail_Protocol_Pop3
         }
 
         if ($status != '+OK') {
-            /**
-             * @see Zend_Mail_Protocol_Exception
-             */
-            require_once 'Zend/Mail/Protocol/Exception.php';
             throw new Zend_Mail_Protocol_Exception('last request failed');
         }
 
@@ -382,10 +362,6 @@ class Zend_Mail_Protocol_Pop3
             if ($fallback) {
                 return $this->retrieve($msgno);
             } else {
-                /**
-                 * @see Zend_Mail_Protocol_Exception
-                 */
-                require_once 'Zend/Mail/Protocol/Exception.php';
                 throw new Zend_Mail_Protocol_Exception('top not supported and no fallback wanted');
             }
         }

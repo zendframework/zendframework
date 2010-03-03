@@ -23,6 +23,7 @@
 /**
  * Class for managing queue messages
  *
+ * @uses       Zend_Queue_Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Message
@@ -79,7 +80,6 @@ class Zend_Queue_Message
                     $result = get_class($options['queue']);
                 }
 
-                require_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception(
                     '$options[\'queue\'] = '
                     . $result
@@ -89,7 +89,6 @@ class Zend_Queue_Message
         }
         if (isset($options['data'])) {
             if (!is_array($options['data'])) {
-                require_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception('Data must be an array');
             }
             $this->_data = $options['data'];
@@ -106,7 +105,6 @@ class Zend_Queue_Message
     public function __get($key)
     {
         if (!array_key_exists($key, $this->_data)) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception("Specified field \"$key\" is not in the message");
         }
         return $this->_data[$key];
@@ -123,7 +121,6 @@ class Zend_Queue_Message
     public function __set($key, $value)
     {
         if (!array_key_exists($key, $this->_data)) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception("Specified field \"$key\" is not in the message");
         }
         $this->_data[$key] = $value;

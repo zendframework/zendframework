@@ -21,13 +21,12 @@
  */
 
 /**
- * @see Zend_View_Helper_Navigation_HelperAbstract
- */
-require_once 'Zend/View/Helper/Navigation/HelperAbstract.php';
-
-/**
  * Helper for printing <link> elements
  *
+ * @uses       RecursiveIteratorIterator
+ * @uses       Zend_Navigation_Page
+ * @uses       Zend_View_Exception
+ * @uses       Zend_View_Helper_Navigation_HelperAbstract
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
@@ -270,7 +269,6 @@ class Zend_View_Helper_Navigation_Links
     public function findRelation(Zend_Navigation_Page $page, $rel, $type)
     {
         if (!in_array($rel, array('rel', 'rev'))) {
-            require_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception(sprintf(
                 'Invalid argument: $rel must be "rel" or "rev"; "%s" given',
                 $rel));
@@ -709,7 +707,6 @@ class Zend_View_Helper_Navigation_Links
     public function renderLink(Zend_Navigation_Page $page, $attrib, $relation)
     {
         if (!in_array($attrib, array('rel', 'rev'))) {
-            require_once 'Zend/View/Exception.php';
             $e = new Zend_View_Exception(sprintf(
                     'Invalid relation attribute "%s", must be "rel" or "rev"',
                     $attrib));

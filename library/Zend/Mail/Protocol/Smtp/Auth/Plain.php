@@ -20,16 +20,10 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Mail_Protocol_Smtp
- */
-require_once 'Zend/Mail/Protocol/Smtp.php';
-
-
 /**
  * Performs PLAIN authentication
  *
+ * @uses       Zend_Mail_Protocol_Smtp
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol

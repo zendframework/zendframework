@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-/** Zend_View_Helper_FormElement **/
-require_once 'Zend/View/Helper/FormElement.php';
-
 /**
  * Form label helper
  *
+ * @uses       Zend_View_Helper_FormElement
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper

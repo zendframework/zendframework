@@ -20,14 +20,9 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Auth_Adapter_Interface
- */
-require_once 'Zend/Auth/Adapter/Interface.php';
-
-
-/**
+ * @uses       Zend_Auth_Adapter_Exception
+ * @uses       Zend_Auth_Adapter_Interface
  * @category   Zend
  * @package    Zend_Auth
  * @subpackage Adapter
@@ -183,19 +178,11 @@ class Zend_Auth_Adapter_Digest implements Zend_Auth_Adapter_Interface
         $optionsRequired = array('filename', 'realm', 'username', 'password');
         foreach ($optionsRequired as $optionRequired) {
             if (null === $this->{"_$optionRequired"}) {
-                /**
-                 * @see Zend_Auth_Adapter_Exception
-                 */
-                require_once 'Zend/Auth/Adapter/Exception.php';
                 throw new Zend_Auth_Adapter_Exception("Option '$optionRequired' must be set before authentication");
             }
         }
 
         if (false === ($fileHandle = @fopen($this->_filename, 'r'))) {
-            /**
-             * @see Zend_Auth_Adapter_Exception
-             */
-            require_once 'Zend/Auth/Adapter/Exception.php';
             throw new Zend_Auth_Adapter_Exception("Cannot open '$this->_filename' for reading");
         }
 

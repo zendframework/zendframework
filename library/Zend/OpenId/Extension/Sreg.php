@@ -21,13 +21,9 @@
  */
 
 /**
- * @see Zend_OpenId_Extension
- */
-require_once "Zend/OpenId/Extension.php";
-
-/**
  * 'Simple Refistration Extension' for Zend_OpenId
  *
+ * @uses       Zend_OpenId_Extension
  * @category   Zend
  * @package    Zend_OpenId
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -137,7 +133,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
                 }
             }
             if ($this->_version >= 1.1) {
-                $params['openid.ns.sreg'] = Zend_OpenId_Extension_Sreg::NAMESPACE_1_1;
+                $params['openid.ns.sreg'] = self::NAMESPACE_1_1;
             }
             if (!empty($required)) {
                 $params['openid.sreg.required'] = $required;
@@ -163,7 +159,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
     public function parseRequest($params)
     {
         if (isset($params['openid_ns_sreg']) &&
-            $params['openid_ns_sreg'] === Zend_OpenId_Extension_Sreg::NAMESPACE_1_1) {
+            $params['openid_ns_sreg'] === self::NAMESPACE_1_1) {
             $this->_version= 1.1;
         } else {
             $this->_version= 1.0;
@@ -207,7 +203,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
     {
         if (is_array($this->_props) && count($this->_props) > 0) {
             if ($this->_version >= 1.1) {
-                $params['openid.ns.sreg'] = Zend_OpenId_Extension_Sreg::NAMESPACE_1_1;
+                $params['openid.ns.sreg'] = self::NAMESPACE_1_1;
             }
             foreach (self::getSregProperties() as $prop) {
                 if (!empty($this->_props[$prop])) {
@@ -228,7 +224,7 @@ class Zend_OpenId_Extension_Sreg extends Zend_OpenId_Extension
     public function parseResponse($params)
     {
         if (isset($params['openid_ns_sreg']) &&
-            $params['openid_ns_sreg'] === Zend_OpenId_Extension_Sreg::NAMESPACE_1_1) {
+            $params['openid_ns_sreg'] === self::NAMESPACE_1_1) {
             $this->_version= 1.1;
         } else {
             $this->_version= 1.0;

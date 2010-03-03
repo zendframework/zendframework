@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Submit */
-require_once 'Zend/Form/Element/Submit.php';
-
 /**
  * Reset form element
  *
+ * @uses       Zend_Form_Element_Submit
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

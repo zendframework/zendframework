@@ -20,15 +20,11 @@
  * @version    $Id$
  */
 
-/** @see Zend_Barcode_Object_Code25interleaved */
-require_once 'Zend/Barcode/Object/Code25interleaved.php';
-
-/** @see Zend_Validate_Barcode */
-require_once 'Zend/Validate/Barcode.php';
-
 /**
  * Class for generate Itf14 barcode
  *
+ * @uses       Zend_Barcode_Object_Code25interleaved
+ * @uses       Zend_Validate_Barcode
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

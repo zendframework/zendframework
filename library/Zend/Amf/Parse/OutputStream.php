@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Amf_Util_BinaryStream */
-require_once 'Zend/Amf/Util/BinaryStream.php';
-
 /**
  * Iterate at a binary level through the AMF response
  *

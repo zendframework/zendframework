@@ -19,13 +19,9 @@
  */
 
 /**
- * @see Zend_Server_Exception
- */
-require_once 'Zend/Server/Exception.php';
-
-/**
  * Zend_Server_Reflection exceptions
  *
+ * @uses       Zend_Server_Exception
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Reflection

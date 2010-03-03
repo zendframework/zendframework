@@ -20,15 +20,8 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Application/Resource/ResourceAbstract.php';
-
-require_once 'Zend/Db/Table.php';
-
 /**
- */
-
-/**
- * Cache Manager resource
+ * Database resource for multiple database setups
  *
  * Example configuration:
  * <pre>
@@ -46,6 +39,10 @@ require_once 'Zend/Db/Table.php';
  *   resources.multidb.db2.dbname = "db2"
  * </pre>
  *
+ * @uses       Zend_Application_Resource_Exception
+ * @uses       Zend_Application_Resource_ResourceAbstract
+ * @uses       Zend_Db
+ * @uses       Zend_Db_Table
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource

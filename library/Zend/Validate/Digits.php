@@ -20,11 +20,8 @@
  */
 
 /**
- * @see Zend_Validate_Abstract
- */
-require_once 'Zend/Validate/Abstract.php';
-
-/**
+ * @uses       Zend_Filter_Digits
+ * @uses       Zend_Validate_Abstract
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -77,7 +74,6 @@ class Zend_Validate_Digits extends Zend_Validate_Abstract
         }
 
         if (null === self::$_filter) {
-            require_once 'Zend/Filter/Digits.php';
             self::$_filter = new Zend_Filter_Digits();
         }
 

@@ -23,6 +23,7 @@
 /**
  * Class for SQL table interface.
  *
+ * @uses       Zend_Db_Table
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Table

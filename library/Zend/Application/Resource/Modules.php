@@ -21,14 +21,11 @@
  */
 
 /**
- * @see Zend_Application_Resource_ResourceAbstract
- */
-require_once 'Zend/Application/Resource/ResourceAbstract.php';
-
-
-/**
  * Module bootstrapping resource
  *
+ * @uses       ArrayObject
+ * @uses       Zend_Application_Resource_Exception
+ * @uses       Zend_Application_Resource_ResourceAbstract
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource

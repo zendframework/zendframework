@@ -19,14 +19,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @see Zend_Form_Decorator_Abstract */
-require_once 'Zend/Form/Decorator/Abstract.php';
-
 /**
  * Word-based captcha decorator
  *
  * Adds hidden field for ID and text input field for captcha text
  *
+ * @uses       Zend_Form_Decorator_Abstract
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

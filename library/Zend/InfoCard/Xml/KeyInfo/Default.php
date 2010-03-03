@@ -21,20 +21,13 @@
  */
 
 /**
- * Zend_InfoCard_Xml_KeyInfo_Abstract
- */
-require_once 'Zend/InfoCard/Xml/KeyInfo/Abstract.php';
-
-/**
- * Zend_InfoCard_Xml_SecurityTokenReference
- */
-require_once 'Zend/InfoCard/Xml/SecurityTokenReference.php';
-
-/**
  * An object representation of a XML <KeyInfo> block which doesn't provide a namespace
  * In this context, it is assumed to mean that it is the type of KeyInfo block which
  * contains the SecurityTokenReference
  *
+ * @uses       Zend_InfoCard_Xml_Exception
+ * @uses       Zend_InfoCard_Xml_KeyInfo_Abstract
+ * @uses       Zend_InfoCard_Xml_SecurityTokenReference
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Xml

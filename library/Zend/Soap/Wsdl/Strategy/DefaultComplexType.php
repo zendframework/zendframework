@@ -21,13 +21,11 @@
  */
 
 /**
- * @see Zend_Soap_Wsdl_Strategy_Abstract
- */
-require_once "Zend/Soap/Wsdl/Strategy/Abstract.php";
-
-/**
  * Zend_Soap_Wsdl_Strategy_DefaultComplexType
  *
+ * @uses       ReflectionClass
+ * @uses       Zend_Soap_Wsdl_Exception
+ * @uses       Zend_Soap_Wsdl_Strategy_Abstract
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Wsdl
@@ -45,7 +43,6 @@ class Zend_Soap_Wsdl_Strategy_DefaultComplexType extends Zend_Soap_Wsdl_Strategy
     public function addComplexType($type)
     {
         if(!class_exists($type)) {
-            require_once "Zend/Soap/Wsdl/Exception.php";
             throw new Zend_Soap_Wsdl_Exception(sprintf(
                 "Cannot add a complex type %s that is not an object or where ".
                 "class could not be found in 'DefaultComplexType' strategy.", $type

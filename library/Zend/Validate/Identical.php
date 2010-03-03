@@ -19,10 +19,8 @@
  * @version    $Id$
  */
 
-/** @see Zend_Validate_Abstract */
-require_once 'Zend/Validate/Abstract.php';
-
 /**
+ * @uses       Zend_Validate_Abstract
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -20,15 +20,11 @@
  * @version    $Id$
  */
 
-
-/** @see Zend_Db_Adapter_Pdo_Ibm */
-require_once 'Zend/Db/Adapter/Pdo/Ibm.php';
-
-/** @see Zend_Db_Statement_Pdo_Ibm */
-require_once 'Zend/Db/Statement/Pdo/Ibm.php';
-
-
 /**
+ * @uses       Zend_Db
+ * @uses       Zend_Db_Adapter_Exception
+ * @uses       Zend_Db_Adapter_Pdo_Ibm
+ * @uses       Zend_Db_Statement_Pdo_Ibm
  * @category   Zend
  * @package    Zend_Db
  * @subpackage Adapter
@@ -167,14 +163,10 @@ class Zend_Db_Adapter_Pdo_Ibm_Db2
     {
         $count = intval($count);
         if ($count < 0) {
-            /** @see Zend_Db_Adapter_Exception */
-            require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("LIMIT argument count=$count is not valid");
         } else {
             $offset = intval($offset);
             if ($offset < 0) {
-                /** @see Zend_Db_Adapter_Exception */
-                require_once 'Zend/Db/Adapter/Exception.php';
                 throw new Zend_Db_Adapter_Exception("LIMIT argument offset=$offset is not valid");
             }
 

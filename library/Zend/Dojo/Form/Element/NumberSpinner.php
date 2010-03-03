@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Dojo_Form_Element_ValidationTextBox */
-require_once 'Zend/Dojo/Form/Element/ValidationTextBox.php';
-
 /**
  * NumberSpinner dijit
  *

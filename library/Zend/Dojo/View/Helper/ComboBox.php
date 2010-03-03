@@ -20,18 +20,16 @@
  * @version    $Id$
  */
 
-/** Zend_Dojo_View_Helper_Dijit */
-require_once 'Zend/Dojo/View/Helper/Dijit.php';
-
 /**
  * Dojo ComboBox dijit
  *
  * @uses       Zend_Dojo_View_Helper_Dijit
+ * @uses       Zend_Json
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
-  */
+ */
 class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
 {
     /**
@@ -134,7 +132,6 @@ class Zend_Dojo_View_Helper_ComboBox extends Zend_Dojo_View_Helper_Dijit
 
         if ($this->_useProgrammatic()) {
             if (!$this->_useProgrammaticNoScript()) {
-                require_once 'Zend/Json.php';
                 $this->dojo->addJavascript('var ' . $storeParams['jsId'] . ";\n");
                 $js = $storeParams['jsId'] . ' = '
                     . 'new ' . $storeParams['dojoType'] . '('

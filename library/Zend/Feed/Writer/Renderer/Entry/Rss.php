@@ -20,11 +20,11 @@
  */
 
 /**
- * @see Zend_Feed_Writer_Renderer_RendererAbstract
- */
-require_once 'Zend/Feed/Writer/Renderer/RendererAbstract.php';
-
-/**
+ * @uses       Zend_Date
+ * @uses       Zend_Feed_Exception
+ * @uses       Zend_Feed_Writer_Renderer_RendererAbstract
+ * @uses       Zend_Feed_Writer_Renderer_RendererInterface
+ * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -89,10 +89,9 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
     {
         if(!$this->getDataContainer()->getDescription()
         && !$this->getDataContainer()->getTitle()) {
-            require_once 'Zend/Feed/Exception.php';
             $message = 'RSS 2.0 entry elements SHOULD contain exactly one'
-            . ' title element but a title has not been set. In addition, there'
-            . ' is no description as required in the absence of a title.';
+                . ' title element but a title has not been set. In addition, there'
+                . ' is no description as required in the absence of a title.';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;
@@ -118,11 +117,10 @@ class Zend_Feed_Writer_Renderer_Entry_Rss
     {
         if(!$this->getDataContainer()->getDescription()
         && !$this->getDataContainer()->getTitle()) {
-            require_once 'Zend/Feed/Exception.php';
             $message = 'RSS 2.0 entry elements SHOULD contain exactly one'
-            . ' description element but a description has not been set. In'
-            . ' addition, there is no title element as required in the absence'
-            . ' of a description.';
+                . ' description element but a description has not been set. In'
+                . ' addition, there is no title element as required in the absence'
+                . ' of a description.';
             $exception = new Zend_Feed_Exception($message);
             if (!$this->_ignoreExceptions) {
                 throw $exception;

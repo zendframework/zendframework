@@ -19,25 +19,19 @@
  */
 
 /**
- * Zend_XmlRpc_Value
- */
-require_once 'Zend/XmlRpc/Value.php';
-
-/**
- * Zend_XmlRpc_Fault
- */
-require_once 'Zend/XmlRpc/Fault.php';
-
-/**
  * XmlRpc Response
  *
  * Container for accessing an XMLRPC return value and creating the XML response.
  *
- * @category Zend
- * @package  Zend_XmlRpc
+ * @uses       SimpleXMLElement
+ * @uses       Zend_XmlRpc_Fault
+ * @uses       Zend_XmlRpc_Value
+ * @uses       Zend_XmlRpc_Value_Exception
+ * @category   Zend
+ * @package    Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id$
+ * @version    $Id$
  */
 class Zend_XmlRpc_Response
 {

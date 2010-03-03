@@ -20,21 +20,12 @@
  */
 
 /**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
-
-/**
- * @see Zend_Filter
- */
-require_once 'Zend/Filter.php';
-
-/**
- * @see Zend_Validate
- */
-require_once 'Zend/Validate.php';
-
-/**
+ * @uses       ReflectionClass
+ * @uses       Zend_Filter
+ * @uses       Zend_Filter_Exception
+ * @uses       Zend_Loader_PluginLoader
+ * @uses       Zend_Registry
+ * @uses       Zend_Validate
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -242,7 +233,6 @@ class Zend_Filter_Input
                 $this->_loaders[$type] = $loader;
                 return $this;
             default:
-                require_once 'Zend/Filter/Exception.php';
                 throw new Zend_Filter_Exception(sprintf('Invalid type "%s" provided to setPluginLoader()', $type));
         }
 
@@ -277,11 +267,9 @@ class Zend_Filter_Input
                     $pathSegment   = 'Zend/Validate/';
                     break;
                 default:
-                    require_once 'Zend/Filter/Exception.php';
                     throw new Zend_Filter_Exception(sprintf('Invalid type "%s" provided to getPluginLoader()', $type));
             }
 
-            require_once 'Zend/Loader/PluginLoader.php';
             $this->_loaders[$type] = new Zend_Loader_PluginLoader(
                 array($prefixSegment => $pathSegment)
             );
@@ -464,11 +452,9 @@ class Zend_Filter_Input
     {
         $this->_process();
         if ($this->hasInvalid()) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("Input has invalid fields");
         }
         if ($this->hasMissing()) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("Input has missing fields");
         }
 
@@ -507,7 +493,6 @@ class Zend_Filter_Input
             $escapeFilter = $this->_getFilter($escapeFilter);
         }
         if (!$escapeFilter instanceof Zend_Filter_Interface) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Escape filter specified does not implement Zend_Filter_Interface');
         }
         $this->_defaultEscapeFilter = $escapeFilter;
@@ -561,7 +546,6 @@ class Zend_Filter_Input
                     $this->_defaults[$option] = $value;
                     break;
                 default:
-                    require_once 'Zend/Filter/Exception.php';
                     throw new Zend_Filter_Exception("Unknown option '$option'");
                     break;
             }
@@ -583,7 +567,6 @@ class Zend_Filter_Input
         } elseif ($translator instanceof Zend_Translate) {
             $this->_translator = $translator->getAdapter();
         } else {
-            require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('Invalid translator specified');
         }
 
@@ -602,7 +585,6 @@ class Zend_Filter_Input
         }
 
         if ($this->_translator === null) {
-            require_once 'Zend/Registry.php';
             if (Zend_Registry::isRegistered('Zend_Translate')) {
                 $translator = Zend_Registry::get('Zend_Translate');
                 if ($translator instanceof Zend_Translate_Adapter) {
@@ -1110,7 +1092,6 @@ class Zend_Filter_Input
         $class = new ReflectionClass($className);
 
         if (!$class->implementsInterface($interfaceName)) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception("Class '$className' based on basename '$classBaseName' must implement the '$interfaceName' interface");
         }
 

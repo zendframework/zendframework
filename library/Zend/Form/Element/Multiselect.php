@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Select */
-require_once 'Zend/Form/Element/Select.php';
-
 /**
  * Multiselect form element
  *
+ * @uses       Zend_Form_Element_Select
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element

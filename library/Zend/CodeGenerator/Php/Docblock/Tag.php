@@ -21,21 +21,10 @@
  */
 
 /**
- * @see Zend_CodeGenerator_Abstract
- */
-require_once 'Zend/CodeGenerator/Php/Abstract.php';
-
-/**
- * @see Zend_CodeGenerator_Php_Docblock_Tag_Param
- */
-require_once 'Zend/CodeGenerator/Php/Docblock/Tag/Param.php';
-
-/**
- * @see Zend_CodeGenerator_Php_Docblock_Tag_Return
- */
-require_once 'Zend/CodeGenerator/Php/Docblock/Tag/Return.php';
-
-/**
+ * @uses       Zend_CodeGenerator_Abstract
+ * @uses       Zend_CodeGenerator_Php_Docblock_Tag_Param
+ * @uses       Zend_CodeGenerator_Php_Docblock_Tag_Return
+ * @uses       Zend_Loader_PluginLoader
  * @category   Zend
  * @package    Zend_CodeGenerator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -104,7 +93,6 @@ class Zend_CodeGenerator_Php_Docblock_Tag extends Zend_CodeGenerator_Php_Abstrac
     public static function getPluginLoader()
     {
         if (self::$_pluginLoader == null) {
-            require_once 'Zend/Loader/PluginLoader.php';
             self::setPluginLoader(new Zend_Loader_PluginLoader(array(
                 'Zend_CodeGenerator_Php_Docblock_Tag' => dirname(__FILE__) . '/Tag/'))
                 );

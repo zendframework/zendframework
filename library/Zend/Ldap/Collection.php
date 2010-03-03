@@ -22,6 +22,8 @@
 /**
  * Zend_Ldap_Collection wraps a list of LDAP entries.
  *
+ * @uses       Countable
+ * @uses       Iterator
  * @category   Zend
  * @package    Zend_Ldap
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

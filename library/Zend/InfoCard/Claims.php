@@ -23,6 +23,7 @@
  * Result value of the InfoCard component, contains any error messages and claims
  * from the processing of an information card.
  *
+ * @uses       Zend_InfoCard_Exception
  * @category   Zend
  * @package    Zend_InfoCard
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -129,7 +130,6 @@ class Zend_InfoCard_Claims
             }
 
             if(empty($leader)) {
-                require_once 'Zend/InfoCard/Exception.php';
                 throw new Zend_InfoCard_Exception("Failed to determine default namespace");
             }
 
@@ -156,7 +156,6 @@ class Zend_InfoCard_Claims
             }
         }
 
-        require_once 'Zend/InfoCard/Exception.php';
         throw new Zend_InfoCard_Exception("At least one claim must exist in specified namespace to make it the default namespace");
     }
 
@@ -204,7 +203,6 @@ class Zend_InfoCard_Claims
     public function setClaims(Array $claims)
     {
         if($this->_claims !== null) {
-            require_once 'Zend/InfoCard/Exception.php';
             throw new Zend_InfoCard_Exception("Claim objects are read-only");
         }
 
@@ -229,7 +227,6 @@ class Zend_InfoCard_Claims
                 return $this;
         }
 
-        require_once 'Zend/InfoCard/Exception.php';
         throw new Zend_InfoCard_Exception("Attempted to set unknown error code");
     }
 
@@ -275,7 +272,6 @@ class Zend_InfoCard_Claims
      */
     public function __unset($k)
     {
-        require_once 'Zend/InfoCard/Exception.php';
         throw new Zend_InfoCard_Exception("Claim objects are read-only");
     }
 
@@ -301,7 +297,6 @@ class Zend_InfoCard_Claims
      */
     public function __set($k, $v)
     {
-        require_once 'Zend/InfoCard/Exception.php';
         throw new Zend_InfoCard_Exception("Claim objects are read-only");
     }
 }

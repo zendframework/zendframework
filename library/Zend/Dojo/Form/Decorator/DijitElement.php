@@ -18,9 +18,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_ViewHelper */
-require_once 'Zend/Form/Decorator/ViewHelper.php';
-
 /**
  * Zend_Dojo_Form_Decorator_DijitElement
  *
@@ -34,6 +31,8 @@ require_once 'Zend/Form/Decorator/ViewHelper.php';
  * Assumes the view helper accepts three parameters, the name, value, and
  * optional attributes; these will be provided by the element.
  *
+ * @uses       Zend_Form_Decorator_Exception
+ * @uses       Zend_Form_Decorator_ViewHelper
  * @package    Zend_Dojo
  * @subpackage Form_Decorator
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -152,7 +151,6 @@ class Zend_Dojo_Form_Decorator_DijitElement extends Zend_Form_Decorator_ViewHelp
         $element = $this->getElement();
         $view = $element->getView();
         if (null === $view) {
-            require_once 'Zend/Form/Decorator/Exception.php';
             throw new Zend_Form_Decorator_Exception('DijitElement decorator cannot render without a registered view object');
         }
 

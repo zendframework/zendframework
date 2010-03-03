@@ -20,11 +20,11 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Application/Resource/ResourceAbstract.php';
-
 /**
  * Cache Manager resource
  *
+ * @uses       Zend_Application_Resource_ResourceAbstract
+ * @uses       Zend_Cache_Manager
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource

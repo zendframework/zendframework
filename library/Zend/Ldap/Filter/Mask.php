@@ -21,14 +21,9 @@
  */
 
 /**
- * @see Zend_Ldap_Filter_String
- */
-require_once 'Zend/Ldap/Filter/String.php';
-
-
-/**
  * Zend_Ldap_Filter_Mask provides a simple string filter to be used with a mask.
  *
+ * @uses       Zend_Ldap_Filter_String
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage Filter

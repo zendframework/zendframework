@@ -20,10 +20,9 @@
  * @version    $Id$
  */
 
-/** @see Zend_Serializer_Adapter_AdapterAbstract */
-require_once 'Zend/Serializer/Adapter/AdapterAbstract.php';
-
 /**
+ * @uses       Zend_Serializer_Adapter_AdapterAbstract
+ * @uses       Zend_Serializer_Exception
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -65,7 +64,6 @@ class Zend_Serializer_Adapter_PhpSerialize extends Zend_Serializer_Adapter_Adapt
         $ret = serialize($value);
         if ($ret === false) {
             $lastErr = error_get_last();
-            require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception($lastErr['message']);
         }
         return $ret;
@@ -86,7 +84,6 @@ class Zend_Serializer_Adapter_PhpSerialize extends Zend_Serializer_Adapter_Adapt
         $ret = @unserialize($serialized);
         if ($ret === false && $serialized !== self::$_serializedFalse) {
             $lastErr = error_get_last();
-            require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception($lastErr['message']);
         }
         return $ret;

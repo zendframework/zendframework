@@ -19,12 +19,10 @@
  * @version    $Id$
  */
 
-/** Zend_Exception */
-require_once 'Zend/Exception.php';
-
 /**
  * Zend_Dom Exceptions
  *
+ * @uses       Zend_Exception
  * @category   Zend
  * @package    Zend_Dom
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

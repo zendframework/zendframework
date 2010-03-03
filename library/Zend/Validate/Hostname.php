@@ -20,16 +20,6 @@
  */
 
 /**
- * @see Zend_Validate_Abstract
- */
-require_once 'Zend/Validate/Abstract.php';
-
-/**
- * @see Zend_Validate_Ip
- */
-require_once 'Zend/Validate/Ip.php';
-
-/**
  * Please note there are two standalone test scripts for testing IDN characters due to problems
  * with file encoding.
  *
@@ -39,6 +29,8 @@ require_once 'Zend/Validate/Ip.php';
  * The second is tests/Zend/Validate/HostnameTestForm.php which is designed to be run via HTML
  * to allow users to test entering UTF-8 characters in a form.
  *
+ * @uses       Zend_Validate_Abstract
+ * @uses       Zend_Validate_Ip
  * @category   Zend
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

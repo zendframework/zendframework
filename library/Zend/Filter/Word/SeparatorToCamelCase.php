@@ -20,11 +20,7 @@
  */
 
 /**
- * @see Zend_Filter_PregReplace
- */
-require_once 'Zend/Filter/Word/Separator/Abstract.php';
-
-/**
+ * @uses       Zend_Filter_Word_Separator_Abstract
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

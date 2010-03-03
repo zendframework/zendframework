@@ -19,13 +19,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Dojo_Form_Element_DateTextBox */
-require_once 'Zend/Dojo/Form/Element/DateTextBox.php';
-
 /**
  * TimeTextBox dijit
  *
  * @uses       Zend_Dojo_Form_Element_DateTextBox
+ * @uses       Zend_Form_Element_Exception
  * @package    Zend_Dojo
  * @subpackage Form_Element
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -50,7 +48,6 @@ class Zend_Dojo_Form_Element_TimeTextBox extends Zend_Dojo_Form_Element_DateText
     protected function _validateIso8601($format)
     {
         if (!preg_match('/^T\d{2}:\d{2}:\d{2}$/', $format)) {
-            require_once 'Zend/Form/Element/Exception.php';
             throw new Zend_Form_Element_Exception(sprintf('Invalid format "%s" provided; must match T:00:00:00 format', $format));
         }
         return true;

@@ -21,18 +21,10 @@
  */
 
 /**
- * @see Zend_Barcode_Object_Ean5
- */
-require_once 'Zend/Barcode/Object/Ean5.php';
-
-/**
- * @see Zend_Validate_Barcode
- */
-require_once 'Zend/Validate/Barcode.php';
-
-/**
  * Class for generate Ean2 barcode
  *
+ * @uses       Zend_Barcode_Object_Ean5
+ * @uses       Zend_Validate_Barcode
  * @category   Zend
  * @package    Zend_Barcode
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

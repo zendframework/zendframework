@@ -21,13 +21,13 @@
  */
 
 /**
- * @see Zend_Ldap_Node_Abstract
- */
-require_once 'Zend/Ldap/Node/Abstract.php';
-
-/**
  * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDSE node.
  *
+ * @uses       Zend_Ldap_Dn
+ * @uses       Zend_Ldap_Node_Abstract
+ * @uses       Zend_Ldap_Node_RootDse_ActiveDirectory
+ * @uses       Zend_Ldap_Node_RootDse_eDirectory
+ * @uses       Zend_Ldap_Node_RootDse_OpenLdap
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage RootDSE
@@ -53,23 +53,11 @@ class Zend_Ldap_Node_RootDse extends Zend_Ldap_Node_Abstract
         $dn = Zend_Ldap_Dn::fromString('');
         $data = $ldap->getEntry($dn, array('*', '+'), true);
         if (isset($data['domainfunctionality'])) {
-            /**
-             * @see Zend_Ldap_Node_RootDse_ActiveDirectory
-             */
-            require_once 'Zend/Ldap/Node/RootDse/ActiveDirectory.php';
             return new Zend_Ldap_Node_RootDse_ActiveDirectory($dn, $data);
         } else if (isset($data['dsaname'])) {
-            /**
-             * @see Zend_Ldap_Node_RootDse_ActiveDirectory
-             */
-            require_once 'Zend/Ldap/Node/RootDse/eDirectory.php';
             return new Zend_Ldap_Node_RootDse_eDirectory($dn, $data);
         } else if (isset($data['structuralobjectclass']) &&
                 $data['structuralobjectclass'][0] === 'OpenLDAProotDSE') {
-            /**
-             * @see Zend_Ldap_Node_RootDse_OpenLdap
-             */
-            require_once 'Zend/Ldap/Node/RootDse/OpenLdap.php';
             return new Zend_Ldap_Node_RootDse_OpenLdap($dn, $data);
         } else {
             return new self($dn, $data);
@@ -149,10 +137,6 @@ class Zend_Ldap_Node_RootDse extends Zend_Ldap_Node_Abstract
     public function getSchemaDn()
     {
         $schemaDn = $this->getSubschemaSubentry();
-        /**
-         * @see Zend_Ldap_Dn
-         */
-        require_once 'Zend/Ldap/Dn.php';
         return Zend_Ldap_Dn::fromString($schemaDn);
     }
 }

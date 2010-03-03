@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Soap_Client */
-require_once 'Zend/Soap/Client.php';
-
 if (extension_loaded('soap')) {
 
 /**
@@ -34,6 +31,8 @@ if (extension_loaded('soap')) {
  * Please leave your notes, compatiblity issues reports or
  * suggestions in fw-webservices@lists.zend.com or fw-general@lists.com
  *
+ * @uses       Zend_Soap_Client
+ * @uses       Zend_Soap_Client_Exception
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Client
@@ -68,7 +67,6 @@ class Zend_Soap_Client_DotNet extends Zend_Soap_Client
         if (count($arguments) > 1  ||
             (count($arguments) == 1  &&  !is_array(reset($arguments)))
            ) {
-            require_once 'Zend/Soap/Client/Exception.php';
             throw new Zend_Soap_Client_Exception('.Net webservice arguments have to be grouped into array: array(\'a\' => $a, \'b\' => $b, ...).');
         }
 

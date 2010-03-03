@@ -20,18 +20,12 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Feed_Exception
- */
-require_once 'Zend/Feed/Exception.php';
-
-
 /**
  * Feed exceptions
  *
  * Class to represent exceptions that occur during Feed operations.
  *
+ * @uses       Zend_Feed_Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

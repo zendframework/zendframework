@@ -20,15 +20,15 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Registry */
-require_once 'Zend/Registry.php';
-
 /**
  * Zend_Dojo_View_Helper_Dojo: Dojo View Helper
  *
  * Allows specifying stylesheets, path to dojo, module paths, and onLoad
  * events.
  *
+ * @uses       Zend_Dojo_View_Exception
+ * @uses       Zend_Dojo_View_Helper_Dojo_Container
+ * @uses       Zend_Registry
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -70,7 +70,6 @@ class Zend_Dojo_View_Helper_Dojo
     {
         $registry = Zend_Registry::getInstance();
         if (!isset($registry[__CLASS__])) {
-            require_once 'Zend/Dojo/View/Helper/Dojo/Container.php';
             $container = new Zend_Dojo_View_Helper_Dojo_Container();
             $registry[__CLASS__] = $container;
         }
@@ -110,7 +109,6 @@ class Zend_Dojo_View_Helper_Dojo
     public function __call($method, $args)
     {
         if (!method_exists($this->_container, $method)) {
-            require_once 'Zend/Dojo/View/Exception.php';
             throw new Zend_Dojo_View_Exception(sprintf('Invalid method "%s" called on dojo view helper', $method));
         }
 

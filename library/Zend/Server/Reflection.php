@@ -19,18 +19,13 @@
  */
 
 /**
- * Zend_Server_Reflection_Function
- */
-require_once 'Zend/Server/Reflection/Function.php';
-
-/**
- * Zend_Server_Reflection_Class
- */
-require_once 'Zend/Server/Reflection/Class.php';
-
-/**
  * Reflection for determining method signatures to use with server classes
  *
+ * @uses       ReflectionClass
+ * @uses       ReflectionObject
+ * @uses       Zend_Server_Reflection_Class
+ * @uses       Zend_Server_Reflection_Exception
+ * @uses       Zend_Server_Reflection_Function
  * @category   Zend
  * @package    Zend_Server
  * @subpackage Reflection
@@ -64,12 +59,10 @@ class Zend_Server_Reflection
         } elseif (class_exists($class)) {
             $reflection = new ReflectionClass($class);
         } else {
-            require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid class or object passed to attachClass()');
         }
 
         if ($argv && !is_array($argv)) {
-            require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid argv argument passed to reflectClass');
         }
 
@@ -96,13 +89,11 @@ class Zend_Server_Reflection
     public static function reflectFunction($function, $argv = false, $namespace = '')
     {
         if (!is_string($function) || !function_exists($function)) {
-            require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid function "' . $function . '" passed to reflectFunction');
         }
 
 
         if ($argv && !is_array($argv)) {
-            require_once 'Zend/Server/Reflection/Exception.php';
             throw new Zend_Server_Reflection_Exception('Invalid argv argument passed to reflectClass');
         }
 

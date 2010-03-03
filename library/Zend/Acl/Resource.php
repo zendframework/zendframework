@@ -19,14 +19,8 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Acl_Resource_Interface
- */
-require_once 'Zend/Acl/Resource/Interface.php';
-
-
-/**
+ * @uses       Zend_Acl_Resource_Interface
  * @category   Zend
  * @package    Zend_Acl
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

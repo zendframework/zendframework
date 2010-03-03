@@ -21,13 +21,11 @@
  */
 
 /**
- * @see Zend_Queue_Adapter_AdapterAbstract
- */
-require_once 'Zend/Queue/Adapter/AdapterAbstract.php';
-
-/**
  * Class for using a standard PHP array as a queue
  *
+ * @uses       Zend_Loader
+ * @uses       Zend_Queue_Adapter_AdapterAbstract
+ * @uses       Zend_Queue_Exception
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Adapter
@@ -143,10 +141,6 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
         }
 
         if (!isset($this->_data[$queue->getName()])) {
-            /**
-             * @see Zend_Queue_Exception
-             */
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Queue does not exist');
         }
 
@@ -172,7 +166,6 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
         }
 
         if (!$this->isExists($queue->getName())) {
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Queue does not exist:' . $queue->getName());
         }
 
@@ -196,7 +189,6 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
 
         $classname = $queue->getMessageClass();
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
         return new $classname($options);
@@ -255,7 +247,6 @@ class Zend_Queue_Adapter_Array extends Zend_Queue_Adapter_AdapterAbstract
 
         $classname = $queue->getMessageSetClass();
         if (!class_exists($classname)) {
-            require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($classname);
         }
         return new $classname($options);

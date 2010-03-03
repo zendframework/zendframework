@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -20,18 +19,6 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Feed_Abstract
- */
-require_once 'Zend/Feed/Abstract.php';
-
-/**
- * @see Zend_Feed_Entry_Rss
- */
-require_once 'Zend/Feed/Entry/Rss.php';
-
-
 /**
  * RSS channel class
  *
@@ -41,6 +28,10 @@ require_once 'Zend/Feed/Entry/Rss.php';
  * against with the instanceof operator, and expects to be handling
  * RSS-formatted data instead of Atom.
  *
+ * @uses       DOMDocument
+ * @uses       Zend_Feed_Abstract
+ * @uses       Zend_Feed_Entry_Rss
+ * @uses       Zend_Feed_Exception
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -87,10 +78,6 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
             $this->_element = $this->_element->getElementsByTagName('channel')->item(0);
         }
         if (!$this->_element) {
-            /**
-             * @see Zend_Feed_Exception
-             */
-            require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('No root <channel> element found, cannot parse channel.');
         }
 
@@ -514,10 +501,6 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
     public function send()
     {
         if (headers_sent()) {
-            /**
-             * @see Zend_Feed_Exception
-             */
-            require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Cannot send RSS because headers have already been sent.');
         }
 

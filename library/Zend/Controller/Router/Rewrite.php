@@ -20,15 +20,12 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Router_Abstract */
-require_once 'Zend/Controller/Router/Abstract.php';
-
-/** Zend_Controller_Router_Route */
-require_once 'Zend/Controller/Router/Route.php';
-
 /**
  * Ruby routing based Router.
  *
+ * @uses       Zend_Controller_Router_Abstract
+ * @uses       Zend_Controller_Router_Route
+ * @uses       Zend_Loader
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -211,7 +208,6 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
     {
         $class = (isset($info->type)) ? $info->type : 'Zend_Controller_Router_Route';
         if (!class_exists($class)) {
-            require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($class);
         }
 

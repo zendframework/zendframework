@@ -20,36 +20,15 @@
  */
 
 /**
- * @see Zend_Feed_Reader
- */
-require_once 'Zend/Feed/Reader.php';
-
-/**
- * @see Zend_Feed_Reader_Extension_EntryAbstract
- */
-require_once 'Zend/Feed/Reader/Extension/EntryAbstract.php';
-
-/**
- * @see Zend_Date
- */
-require_once 'Zend/Date.php';
-
-/**
- * @see Zend_Uri
- */
-require_once 'Zend/Uri.php';
-
-/**
- * @see Zend_Feed_Reader_Collection_Category
- */
-require_once 'Zend/Feed/Reader/Collection/Category.php';
-
-/**
- * @see Zend_Feed_Reader_Feed_Atom_Source
- */
-require_once 'Zend/Feed/Reader/Feed/Atom/Source.php';
-
-/**
+ * @uses       DOMDocument
+ * @uses       stdClass
+ * @uses       Zend_Date
+ * @uses       Zend_Feed_Reader
+ * @uses       Zend_Feed_Reader_Feed_Atom_Source
+ * @uses       Zend_Feed_Reader_Collection_Author
+ * @uses       Zend_Feed_Reader_Collection_Category
+ * @uses       Zend_Feed_Reader_Extension_EntryAbstract
+ * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -20,16 +20,10 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Auth_Exception
- */
-require_once 'Zend/Auth/Exception.php';
-
-
 /**
  * HTTP Auth Resolver Exception
  *
+ * @uses       Zend_Auth_Exception
  * @category   Zend
  * @package    Zend_Auth
  * @subpackage Zend_Auth_Adapter_Http

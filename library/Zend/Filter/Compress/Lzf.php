@@ -20,13 +20,10 @@
  */
 
 /**
- * @see Zend_Filter_Compress_CompressInterface
- */
-require_once 'Zend/Filter/Compress/CompressInterface.php';
-
-/**
  * Compression adapter for Lzf
  *
+ * @uses       Zend_Filter_Compress_CompressInterface
+ * @uses       Zend_Filter_Exception
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -40,7 +37,6 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     public function __construct()
     {
         if (!extension_loaded('lzf')) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('This filter needs the lzf extension');
         }
     }
@@ -55,7 +51,6 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     {
         $compressed = lzf_compress($content);
         if (!$compressed) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Error during compression');
         }
 
@@ -72,7 +67,6 @@ class Zend_Filter_Compress_Lzf implements Zend_Filter_Compress_CompressInterface
     {
         $compressed = lzf_decompress($content);
         if (!$compressed) {
-            require_once 'Zend/Filter/Exception.php';
             throw new Zend_Filter_Exception('Error during compression');
         }
 

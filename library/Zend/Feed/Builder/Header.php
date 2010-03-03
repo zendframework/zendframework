@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,22 +20,18 @@
  */
 
 /**
- * @see Zend_Feed_Builder_Header_Itunes
- */
-require_once 'Zend/Feed/Builder/Header/Itunes.php';
-
-/**
- * @see Zend_Uri
- */
-require_once 'Zend/Uri.php';
-
-
-/**
  * Header of a custom build feed
  *
  * Classes implementing the Zend_Feed_Builder_Interface interface
  * uses this class to describe the header of a feed
  *
+ * @uses       ArrayObject
+ * @uses       Zend_Feed_Builder_Exception
+ * @uses       Zend_Feed_Builder_Header_Itunes
+ * @uses       Zend_Uri
+ * @uses       Zend_Uri_Http
+ * @uses       Zend_Validate_EmailAddress
+ * @uses       Zend_Validate_Int
  * @category   Zend
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -169,16 +164,8 @@ class Zend_Feed_Builder_Header extends ArrayObject
      */
     public function setEmail($email)
     {
-        /**
-         * @see Zend_Validate_EmailAddress
-         */
-        require_once 'Zend/Validate/EmailAddress.php';
         $validate = new Zend_Validate_EmailAddress();
         if (!$validate->isValid($email)) {
-            /**
-             * @see Zend_Feed_Builder_Exception
-             */
-            require_once 'Zend/Feed/Builder/Exception.php';
             throw new Zend_Feed_Builder_Exception("you have to set a valid email address into the email property");
         }
         $this->offsetSet('email', $email);
@@ -243,16 +230,8 @@ class Zend_Feed_Builder_Header extends ArrayObject
      */
     public function setWebmaster($webmaster)
     {
-        /**
-         * @see Zend_Validate_EmailAddress
-         */
-        require_once 'Zend/Validate/EmailAddress.php';
         $validate = new Zend_Validate_EmailAddress();
         if (!$validate->isValid($webmaster)) {
-            /**
-             * @see Zend_Feed_Builder_Exception
-             */
-            require_once 'Zend/Feed/Builder/Exception.php';
             throw new Zend_Feed_Builder_Exception("you have to set a valid email address into the webmaster property");
         }
         $this->offsetSet('webmaster', $webmaster);
@@ -269,16 +248,8 @@ class Zend_Feed_Builder_Header extends ArrayObject
      */
     public function setTtl($ttl)
     {
-        /**
-         * @see Zend_Validate_Int
-         */
-        require_once 'Zend/Validate/Int.php';
         $validate = new Zend_Validate_Int();
         if (!$validate->isValid($ttl)) {
-            /**
-             * @see Zend_Feed_Builder_Exception
-             */
-            require_once 'Zend/Feed/Builder/Exception.php';
             throw new Zend_Feed_Builder_Exception("you have to set an integer value to the ttl property");
         }
         $this->offsetSet('ttl', $ttl);
@@ -314,10 +285,6 @@ class Zend_Feed_Builder_Header extends ArrayObject
             $uri = Zend_Uri::factory($uri);
         }
         if (!$uri instanceof Zend_Uri_Http) {
-            /**
-             * @see Zend_Feed_Builder_Exception
-             */
-            require_once 'Zend/Feed/Builder/Exception.php';
             throw new Zend_Feed_Builder_Exception('Passed parameter is not a valid HTTP URI');
         }
         if (!$uri->getPort()) {
@@ -359,18 +326,10 @@ class Zend_Feed_Builder_Header extends ArrayObject
     public function setSkipHours(array $hours)
     {
         if (count($hours) > 24) {
-            /**
-             * @see Zend_Feed_Builder_Exception
-             */
-            require_once 'Zend/Feed/Builder/Exception.php';
             throw new Zend_Feed_Builder_Exception("you can not have more than 24 rows in the skipHours property");
         }
         foreach ($hours as $hour) {
             if ($hour < 0 || $hour > 23) {
-                /**
-                 * @see Zend_Feed_Builder_Exception
-                 */
-                require_once 'Zend/Feed/Builder/Exception.php';
                 throw new Zend_Feed_Builder_Exception("$hour has te be between 0 and 23");
             }
         }
@@ -389,19 +348,11 @@ class Zend_Feed_Builder_Header extends ArrayObject
     public function setSkipDays(array $days)
     {
         if (count($days) > 7) {
-            /**
-             * @see Zend_Feed_Builder_Exception
-             */
-            require_once 'Zend/Feed/Builder/Exception.php';
             throw new Zend_Feed_Builder_Exception("you can not have more than 7 days in the skipDays property");
         }
         $valid = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
         foreach ($days as $day) {
             if (!in_array(strtolower($day), $valid)) {
-                /**
-                 * @see Zend_Feed_Builder_Exception
-                 */
-                require_once 'Zend/Feed/Builder/Exception.php';
                 throw new Zend_Feed_Builder_Exception("$day is not a valid day");
             }
         }

@@ -20,15 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Log_Writer_Abstract */
-require_once 'Zend/Log/Writer/Abstract.php';
-
-/** Zend_Log_Exception */
-require_once 'Zend/Log/Exception.php';
-
-/** Zend_Log_Formatter_Simple*/
-require_once 'Zend/Log/Formatter/Simple.php';
-
 /**
  * Class used for writing log messages to email via Zend_Mail.
  *
@@ -36,6 +27,9 @@ require_once 'Zend/Log/Formatter/Simple.php';
  * Zend_Mail object.  Note that this class only sends the email upon
  * completion, so any log entries accumulated are sent in a single email.
  *
+ * @uses       Zend_Log_Exception
+ * @uses       Zend_Log_Formatter_Simple
+ * @uses       Zend_Log_Writer_Abstract
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
@@ -127,7 +121,7 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
      */
     static public function factory($config)
     {
-        throw new Zend_Exception('Zend_Log_Writer_Mail does not currently implement a factory');
+        throw new Zend_Log_Exception('Zend_Log_Writer_Mail does not currently implement a factory');
     }
 
     /**

@@ -21,14 +21,10 @@
  */
 
 /**
- * @see Zend_Ldap_Node_RootDse
- */
-require_once 'Zend/Ldap/Node/RootDse.php';
-
-/**
  * Zend_Ldap_Node_RootDse provides a simple data-container for the RootDSE node of
  * a Novell eDirectory server.
  *
+ * @uses       Zend_Ldap_Node_RootDse
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage RootDSE

@@ -24,6 +24,10 @@
  * Provides an abstraction for encryption ciphers used in an Information Card
  * implementation
  *
+ * @uses       Zend_InfoCard_Cipher_Exception
+ * @uses       Zend_InfoCard_Cipher_Pki_Adapter_Rsa
+ * @uses       Zend_InfoCard_Cipher_Symmetric_Adapter_Aes128cbc
+ * @uses       Zend_InfoCard_Cipher_Symmetric_Adapter_Aes256cbc
  * @category   Zend
  * @package    Zend_InfoCard
  * @subpackage Zend_InfoCard_Cipher
@@ -74,25 +78,20 @@ class Zend_InfoCard_Cipher
     {
         switch($uri) {
             case self::ENC_AES256CBC:
-                include_once 'Zend/InfoCard/Cipher/Symmetric/Adapter/Aes256cbc.php';
                 return new Zend_InfoCard_Cipher_Symmetric_Adapter_Aes256cbc();
 
             case self::ENC_AES128CBC:
-                include_once 'Zend/InfoCard/Cipher/Symmetric/Adapter/Aes128cbc.php';
                 return new Zend_InfoCard_Cipher_Symmetric_Adapter_Aes128cbc();
 
             case self::ENC_RSA_OAEP_MGF1P:
-                include_once 'Zend/InfoCard/Cipher/Pki/Adapter/Rsa.php';
                 return new Zend_InfoCard_Cipher_Pki_Adapter_Rsa(Zend_InfoCard_Cipher_Pki_Adapter_Rsa::OAEP_PADDING);
                 break;
 
             case self::ENC_RSA:
-                include_once 'Zend/InfoCard/Cipher/Pki/Adapter/Rsa.php';
                 return new Zend_InfoCard_Cipher_Pki_Adapter_Rsa(Zend_InfoCard_Cipher_Pki_Adapter_Rsa::NO_PADDING);
                 break;
 
             default:
-                require_once 'Zend/InfoCard/Cipher/Exception.php';
                 throw new Zend_InfoCard_Cipher_Exception("Unknown Cipher URI");
         }
     }

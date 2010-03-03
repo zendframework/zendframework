@@ -21,6 +21,7 @@
  */
 
 /**
+ * @uses       Zend_Json
  * @category   Zend
  * @package    Zend_Json
  * @subpackage Server
@@ -189,7 +190,6 @@ class Zend_Json_Server_Response
             $response['jsonrpc'] = $version;
         }
 
-        require_once 'Zend/Json.php';
         return Zend_Json::encode($response);
     }
 

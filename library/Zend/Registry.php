@@ -22,6 +22,9 @@
 /**
  * Generic storage class helps to manage global data.
  *
+ * @uses       ArrayObject
+ * @uses       Zend_Exception
+ * @uses       Zend_Loader
  * @category   Zend
  * @package    Zend_Registry
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -66,7 +69,6 @@ class Zend_Registry extends ArrayObject
     public static function setInstance(Zend_Registry $registry)
     {
         if (self::$_registry !== null) {
-            require_once 'Zend/Exception.php';
             throw new Zend_Exception('Registry is already initialized');
         }
 
@@ -97,12 +99,10 @@ class Zend_Registry extends ArrayObject
     public static function setClassName($registryClassName = 'Zend_Registry')
     {
         if (self::$_registry !== null) {
-            require_once 'Zend/Exception.php';
             throw new Zend_Exception('Registry is already initialized');
         }
 
         if (!is_string($registryClassName)) {
-            require_once 'Zend/Exception.php';
             throw new Zend_Exception("Argument is not a class name");
         }
 
@@ -110,7 +110,6 @@ class Zend_Registry extends ArrayObject
          * @see Zend_Loader
          */
         if (!class_exists($registryClassName)) {
-            require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($registryClassName);
         }
 
@@ -143,7 +142,6 @@ class Zend_Registry extends ArrayObject
         $instance = self::getInstance();
 
         if (!$instance->offsetExists($index)) {
-            require_once 'Zend/Exception.php';
             throw new Zend_Exception("No entry is registered for key '$index'");
         }
 

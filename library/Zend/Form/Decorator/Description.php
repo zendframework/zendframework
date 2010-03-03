@@ -19,9 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Abstract */
-require_once 'Zend/Form/Decorator/Abstract.php';
-
 /**
  * Zend_Form_Decorator_Description
  *
@@ -34,6 +31,8 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  *
  * Any other options passed will be used as HTML attributes of the HTML tag used.
  *
+ * @uses       Zend_Form_Decorator_Abstract
+ * @uses       Zend_Form_Decorator_HtmlTag
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -182,10 +181,9 @@ class Zend_Form_Decorator_Description extends Zend_Form_Decorator_Abstract
         }
 
         if (!empty($tag)) {
-            require_once 'Zend/Form/Decorator/HtmlTag.php';
             $options['tag'] = $tag;
-            $decorator = new Zend_Form_Decorator_HtmlTag($options);
-            $description = $decorator->render($description);
+            $decorator      = new Zend_Form_Decorator_HtmlTag($options);
+            $description    = $decorator->render($description);
         }
 
         switch ($placement) {

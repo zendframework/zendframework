@@ -21,11 +21,6 @@
  */
 
 /**
- * @see Zend_Controller_Action
- */
-require_once 'Zend/Controller/Action.php';
-
-/**
  * @category   Zend
  * @package    Zend_Controller
  * @subpackage Zend_Controller_Action_Helper

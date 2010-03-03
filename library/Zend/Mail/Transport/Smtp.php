@@ -20,28 +20,16 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Mime
- */
-require_once 'Zend/Mime.php';
-
-/**
- * @see Zend_Mail_Protocol_Smtp
- */
-require_once 'Zend/Mail/Protocol/Smtp.php';
-
-/**
- * @see Zend_Mail_Transport_Abstract
- */
-require_once 'Zend/Mail/Transport/Abstract.php';
-
-
 /**
  * SMTP connection object
  *
  * Loads an instance of Zend_Mail_Protocol_Smtp and forwards smtp transactions
  *
+ * @uses       Zend_Loader
+ * @uses       Zend_Mail_Protocol_Smtp
+ * @uses       Zend_Mail_Transport_Abstract
+ * @uses       Zend_Mail_Transport_Exception
+ * @uses       Zend_Mime
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Transport
@@ -192,7 +180,6 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
                 $connectionClass .= '_Auth_' . ucwords($this->_auth);
             }
             if (!class_exists($connectionClass)) {
-                require_once 'Zend/Loader.php';
                 Zend_Loader::loadClass($connectionClass);
             }
             $this->setConnection(new $connectionClass($this->_host, $this->_port, $this->_config));
@@ -228,10 +215,6 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
     protected function _prepareHeaders($headers)
     {
         if (!$this->_mail) {
-            /**
-             * @see Zend_Mail_Transport_Exception
-             */
-            require_once 'Zend/Mail/Transport/Exception.php';
             throw new Zend_Mail_Transport_Exception('_prepareHeaders requires a registered Zend_Mail object');
         }
 

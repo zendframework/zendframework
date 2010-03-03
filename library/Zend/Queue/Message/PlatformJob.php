@@ -21,13 +21,11 @@
  */
 
 /**
- * @see Zend_Queue_Message
- */
-require_once 'Zend/Queue/Message.php';
-
-/**
  * Class for managing Zend Platform JobQueue jobs via Zend_Queue
  *
+ * @uses       ZendApi_Job
+ * @uses       Zend_Queue_Exception
+ * @uses       Zend_Queue_Message
  * @category   Zend
  * @package    Zend_Queue
  * @subpackage Message
@@ -68,7 +66,6 @@ class Zend_Queue_Message_PlatformJob extends Zend_Queue_Message
     {
         if (isset($options['data'])) {
             if (!($options['data'] instanceof ZendApi_Job)) {
-                require_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception('Data must be an instance of ZendApi_Job');
             }
             $this->_job = $options['data'];
@@ -77,7 +74,6 @@ class Zend_Queue_Message_PlatformJob extends Zend_Queue_Message
             parent::__construct($options);
 
             if (!isset($options['script'])) {
-                require_once 'Zend/Queue/Exception.php';
                 throw new Zend_Queue_Exception('The script is mandatory data');
             }
 

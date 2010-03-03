@@ -21,13 +21,9 @@
  */
 
 /**
- * @see Zend_Markup_Renderer_TokenConverterInterface
- */
-require_once 'Zend/Markup/Renderer/TokenConverterInterface.php';
-
-/**
  * Tag interface
  *
+ * @uses       Zend_Markup_Renderer_TokenConverterInterface
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer_Html

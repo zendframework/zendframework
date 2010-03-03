@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,11 +20,6 @@
  */
 
 /**
- * @see Zend_Controller_Response_Abstract
- */
-require_once "Zend/Controller/Response/Abstract.php";
-
-/**
  * Static class that contains common utility functions for
  * {@link Zend_OpenId_Consumer} and {@link Zend_OpenId_Provider}.
  *
@@ -33,6 +27,9 @@ require_once "Zend/Controller/Response/Abstract.php";
  * Consumer and Provider. They include functions for Diffie-Hellman keys
  * generation and exchange, URL normalization, HTTP redirection and some others.
  *
+ * @uses       Zend_Controller_Response_Abstract
+ * @uses       Zend_Controller_Response_Http
+ * @uses       Zend_OpenId_Exception
  * @category   Zend
  * @package    Zend_OpenId
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -425,7 +422,6 @@ class Zend_OpenId
         $url = Zend_OpenId::absoluteUrl($url);
         $body = "";
         if (null === $response) {
-            require_once "Zend/Controller/Response/Http.php";
             $response = new Zend_Controller_Response_Http();
         }
 
@@ -502,7 +498,6 @@ class Zend_OpenId
                 return mhash(MHASH_SHA256 , $data);
             }
         }
-        require_once "Zend/OpenId/Exception.php";
         throw new Zend_OpenId_Exception(
             'Unsupported digest algorithm "' . $func . '".',
             Zend_OpenId_Exception::UNSUPPORTED_DIGEST);
@@ -521,8 +516,6 @@ class Zend_OpenId
      */
     static public function hashHmac($macFunc, $data, $secret)
     {
-//        require_once "Zend/Crypt/Hmac.php";
-//        return Zend_Crypt_Hmac::compute($secret, $macFunc, $data, Zend_Crypt_Hmac::BINARY);
         if (function_exists('hash_hmac')) {
             return hash_hmac($macFunc, $data, $secret, 1);
         } else {
@@ -558,7 +551,6 @@ class Zend_OpenId
             }
             return $bn;
         }
-        require_once "Zend/OpenId/Exception.php";
         throw new Zend_OpenId_Exception(
             'The system doesn\'t have proper big integer extension',
             Zend_OpenId_Exception::UNSUPPORTED_LONG_MATH);
@@ -587,7 +579,6 @@ class Zend_OpenId
             if ($cmp == 0) {
                 return (chr(0));
             } else if ($cmp < 0) {
-                require_once "Zend/OpenId/Exception.php";
                 throw new Zend_OpenId_Exception(
                     'Big integer arithmetic error',
                     Zend_OpenId_Exception::ERROR_LONG_MATH);
@@ -602,7 +593,6 @@ class Zend_OpenId
             }
             return $bin;
         }
-        require_once "Zend/OpenId/Exception.php";
         throw new Zend_OpenId_Exception(
             'The system doesn\'t have proper big integer extension',
             Zend_OpenId_Exception::UNSUPPORTED_LONG_MATH);
@@ -705,7 +695,6 @@ class Zend_OpenId
             $bn_secret  = bcpowmod($bn_pub_key, $dh['priv_key'], $dh['p']);
             return self::bigNumToBin($bn_secret);
         }
-        require_once "Zend/OpenId/Exception.php";
         throw new Zend_OpenId_Exception(
             'The system doesn\'t have proper big integer extension',
             Zend_OpenId_Exception::UNSUPPORTED_LONG_MATH);

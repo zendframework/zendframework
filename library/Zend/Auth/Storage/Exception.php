@@ -20,14 +20,8 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Auth_Exception
- */
-require_once 'Zend/Auth/Exception.php';
-
-
-/**
+ * @uses       Zend_Auth_Exception
  * @category   Zend
  * @package    Zend_Auth
  * @subpackage Storage

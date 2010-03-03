@@ -20,18 +20,11 @@
  */
 
 /**
- * @see Zend_Filter_Interface
- */
-require_once 'Zend/Filter/Interface.php';
-
-/**
- * @see Zend_Loader
- */
-require_once 'Zend/Locale/Format.php';
-
-/**
  * Localizes given normalized input
  *
+ * @uses       Zend_Date
+ * @uses       Zend_Filter_Interface
+ * @uses       Zend_Locale_Format
  * @category   Zend
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -97,7 +90,6 @@ class Zend_Filter_NormalizedToLocalized implements Zend_Filter_Interface
     public function filter($value)
     {
         if (is_array($value)) {
-            require_once 'Zend/Date.php';
             $date = new Zend_Date($value, $this->_options['locale']);
             return $date->toString($this->_options['date_format']);
         } else if ($this->_options['precision'] === 0) {

@@ -20,30 +20,15 @@
  */
 
 /**
- * @see Zend_Controller_Router_Route_Interface
- */
-require_once 'Zend/Controller/Router/Route/Interface.php';
-
-/**
- * @see Zend_Controller_Router_Route_Module
- */
-require_once 'Zend/Controller/Router/Route/Module.php';
-
-/**
- * @see Zend_Controller_Dispatcher_Interface
- */
-require_once 'Zend/Controller/Dispatcher/Interface.php';
-
-/**
- * @see Zend_Controller_Request_Abstract
- */
-require_once 'Zend/Controller/Request/Abstract.php';
-
-/**
  * Rest Route
  *
  * Request-aware route for RESTful modular routing
  *
+ * @uses       Zend_Controller_Dispatcher_Interface
+ * @uses       Zend_Controller_Front
+ * @uses       Zend_Controller_Request_Abstract
+ * @uses       Zend_Controller_Router_Route_Interface
+ * @uses       Zend_Controller_Router_Route_Module
  * @category   Zend
  * @package    Zend_Rest
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

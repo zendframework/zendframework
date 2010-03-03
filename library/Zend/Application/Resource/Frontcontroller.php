@@ -21,14 +21,11 @@
  */
 
 /**
- * @see Zend_Application_Resource_ResourceAbstract
- */
-require_once 'Zend/Application/Resource/ResourceAbstract.php';
-
-
-/**
  * Front Controller resource
  *
+ * @uses       Zend_Application_Resource_ResourceAbstract
+ * @uses       Zend_Controller_Action_HelperBroker
+ * @uses       Zend_Controller_Front
  * @category   Zend
  * @package    Zend_Application
  * @subpackage Resource

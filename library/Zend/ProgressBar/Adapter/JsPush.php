@@ -18,19 +18,11 @@
  */
 
 /**
- * @see Zend_Json
- */
-require_once 'Zend/Json.php';
-
-/**
- * @see Zend_ProgressBar_Adapter
- */
-require_once 'Zend/ProgressBar/Adapter.php';
-
-/**
  * Zend_ProgressBar_Adapter_JsPush offers a simple method for updating a
  * progressbar in a browser.
  *
+ * @uses      Zend_Json
+ * @uses      Zend_ProgressBar_Adapter
  * @category  Zend
  * @package   Zend_ProgressBar
  * @uses      Zend_ProgressBar_Adapter_Interface

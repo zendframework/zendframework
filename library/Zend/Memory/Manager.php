@@ -19,23 +19,17 @@
  * @version    $Id$
  */
 
-/** Zend_Memory_Container_Movable */
-require_once 'Zend/Memory/Container/Movable.php';
-
-/** Zend_Memory_Container_Locked */
-require_once 'Zend/Memory/Container/Locked.php';
-
-/** Zend_Memory_AccessController */
-require_once 'Zend/Memory/AccessController.php';
-
-
 /**
  * Memory manager
  *
  * This class encapsulates memory menagement operations, when PHP works
  * in limited memory mode.
  *
- *
+ * @uses       Zend_Cache
+ * @uses       Zend_Memory_AccessController
+ * @uses       Zend_Memory_Container_Locked
+ * @uses       Zend_Memory_Container_Movable
+ * @uses       Zend_Memory_Exception
  * @category   Zend
  * @package    Zend_Memory
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -407,7 +401,6 @@ class Zend_Memory_Manager
             }
         }
 
-        require_once 'Zend/Memory/Exception.php';
         throw new Zend_Memory_Exception('Memory manager can\'t get enough space.');
     }
 

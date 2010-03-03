@@ -21,13 +21,9 @@
  */
 
 /**
- * @see Zend_Markup_Exception
- */
-require_once 'Zend/Markup/Exception.php';
-
-/**
  * Exception class for Zend_Markup_Renderer
  *
+ * @uses       Zend_Markup_Exception
  * @category   Zend
  * @uses       Zend_Markup_Exception
  * @package    Zend_Markup

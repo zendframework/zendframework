@@ -20,13 +20,9 @@
  */
 
 /**
- * @see Zend_Exception
- */
-require_once 'Zend/Exception.php';
-
-/**
  * Exception class for Zend_ProgressBar
  *
+ * @uses      Zend_Exception
  * @category  Zend
  * @package   Zend_ProgressBar
  * @uses      Zend_Exception

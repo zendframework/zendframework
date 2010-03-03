@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,10 +20,10 @@
  * @since      Preview Release 0.2
  */
 
-
 /**
  * Zend_Session_Abstract
  *
+ * @uses       Zend_Session_Exception
  * @category   Zend
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -79,10 +78,6 @@ abstract class Zend_Session_Abstract
     protected static function _namespaceIsset($namespace, $name = null)
     {
         if (self::$_readable === false) {
-            /**
-             * @see Zend_Session_Exception
-             */
-            require_once 'Zend/Session/Exception.php';
             throw new Zend_Session_Exception(self::_THROW_NOT_READABLE_MSG);
         }
 
@@ -105,10 +100,6 @@ abstract class Zend_Session_Abstract
     protected static function _namespaceUnset($namespace, $name = null)
     {
         if (self::$_writable === false) {
-            /**
-             * @see Zend_Session_Exception
-             */
-            require_once 'Zend/Session/Exception.php';
             throw new Zend_Session_Exception(self::_THROW_NOT_WRITABLE_MSG);
         }
 
@@ -140,10 +131,6 @@ abstract class Zend_Session_Abstract
     protected static function & _namespaceGet($namespace, $name = null)
     {
         if (self::$_readable === false) {
-            /**
-             * @see Zend_Session_Exception
-             */
-            require_once 'Zend/Session/Exception.php';
             throw new Zend_Session_Exception(self::_THROW_NOT_READABLE_MSG);
         }
 

@@ -19,16 +19,11 @@
  * @version    $Id$
  */
 
-/** Zend_Oauth */
-require_once 'Zend/Oauth.php';
-
-/** Zend_Uri */
-require_once 'Zend/Uri.php';
-
-/** Zend_Oauth_Config_Interface */
-require_once 'Zend/Oauth/Config/ConfigInterface.php';
-
 /**
+ * @uses       Zend_Oauth
+ * @uses       Zend_Oauth_Config_Interface
+ * @uses       Zend_Oauth_Exception
+ * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Oauth
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -287,7 +282,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
                 'HMAC-SHA1', 'HMAC-SHA256', 'RSA-SHA1', 'PLAINTEXT'
             ))
         ) {
-            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Unsupported signature method: '
                 . $method
                 . '. Supported are HMAC-SHA1, RSA-SHA1, PLAINTEXT and HMAC-SHA256');
@@ -322,7 +316,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
                 Zend_Oauth::REQUEST_SCHEME_QUERYSTRING,
             ))
         ) {
-            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $scheme . '\' is an unsupported request scheme'
             );
@@ -330,7 +323,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
         if ($scheme == Zend_Oauth::REQUEST_SCHEME_POSTBODY
             && $this->getRequestMethod() == Zend_Oauth::GET
         ) {
-            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 'Cannot set POSTBODY request method if HTTP method set to GET'
             );
@@ -381,7 +373,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setCallbackUrl($url)
     {
         if (!Zend_Uri::check($url)) {
-            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $url . '\' is not a valid URI'
             );
@@ -410,7 +401,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setSiteUrl($url)
     {
         if (!Zend_Uri::check($url)) {
-            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $url . '\' is not a valid URI'
             );
@@ -439,7 +429,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setRequestTokenUrl($url)
     {
         if (!Zend_Uri::check($url)) {
-            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $url . '\' is not a valid URI'
             );
@@ -474,7 +463,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setAccessTokenUrl($url)
     {
         if (!Zend_Uri::check($url)) {
-            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $url . '\' is not a valid URI'
             );
@@ -521,7 +509,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
     public function setAuthorizeUrl($url)
     {
         if (!Zend_Uri::check($url)) {
-            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $url . '\' is not a valid URI'
             );
@@ -573,7 +560,6 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
                 Zend_Oauth::DELETE,
             ))
         ) {
-            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Invalid method: ' . $method);
         }
         $this->_requestMethod = $method;

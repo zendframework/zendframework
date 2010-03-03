@@ -20,32 +20,18 @@
  */
 
 /**
- * @see Zend_Feed_Reader
- */
-require_once 'Zend/Feed/Reader.php';
-
-/**
- * @see Zend_Feed_Reader_EntryInterface
- */
-require_once 'Zend/Feed/Reader/EntryInterface.php';
-
-/**
- * @see Zend_Feed_Reader_EntryAbstract
- */
-require_once 'Zend/Feed/Reader/EntryAbstract.php';
-
-/**
- * @see Zend_Feed_Reader_Extension_Atom_Entry
- */
-require_once 'Zend/Feed/Reader/Extension/Atom/Entry.php';
-
-/**
+ * @uses       Zend_Feed_Reader
+ * @uses       Zend_Feed_Reader_EntryAbstract
+ * @uses       Zend_Feed_Reader_EntryInterface
+ * @uses       Zend_Feed_Reader_Extension_Atom_Entry
  * @category   Zend
  * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Feed_Reader_Entry_Atom extends Zend_Feed_Reader_EntryAbstract implements Zend_Feed_Reader_EntryInterface
+class Zend_Feed_Reader_Entry_Atom 
+    extends Zend_Feed_Reader_EntryAbstract 
+    implements Zend_Feed_Reader_EntryInterface
 {
     /**
      * XPath query

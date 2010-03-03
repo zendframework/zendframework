@@ -22,6 +22,7 @@
 /**
  * Utility class for returning the plural rules according to the given locale
  *
+ * @uses       Zend_Translate_Exception
  * @category   Zend
  * @package    Zend_Locale
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -215,7 +216,6 @@ class Zend_Translate_Plural
         }
 
         if (!is_callable($rule)) {
-            require_once 'Zend/Translate/Exception.php';
             throw new Zend_Translate_Exception('The given rule can not be called');
         }
 

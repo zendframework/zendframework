@@ -18,12 +18,11 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Decorator_Interface */
-require_once 'Zend/Form/Decorator/Interface.php';
-
 /**
  * Zend_Form_Decorator_Abstract
  *
+ * @uses       Zend_Form_Decorator_Exception
+ * @uses       Zend_Form_Decorator_Interface
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
@@ -179,7 +178,6 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
             && (!$element instanceof Zend_Form)
             && (!$element instanceof Zend_Form_DisplayGroup))
         {
-            require_once 'Zend/Form/Decorator/Exception.php';
             throw new Zend_Form_Decorator_Exception('Invalid element type passed to decorator');
         }
 
@@ -248,7 +246,6 @@ abstract class Zend_Form_Decorator_Abstract implements Zend_Form_Decorator_Inter
      */
     public function render($content)
     {
-        require_once 'Zend/Form/Decorator/Exception.php';
         throw new Zend_Form_Decorator_Exception('render() not implemented');
     }
 }

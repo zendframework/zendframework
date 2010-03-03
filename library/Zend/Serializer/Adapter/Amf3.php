@@ -20,22 +20,13 @@
  * @version    $Id$
  */
 
-/** @see Zend_Serializer_Adapter_AdapterAbstract */
-require_once 'Zend/Serializer/Adapter/AdapterAbstract.php';
-
-/** @see Zend_Amf_Parse_OutputStream */
-require_once 'Zend/Amf/Parse/OutputStream.php';
-
-/** @see Zend_Amf_Parse_Amf3_Serializer */
-require_once 'Zend/Amf/Parse/Amf3/Serializer.php';
-
-/** @see Zend_Amf_Parse_InputStream */
-require_once 'Zend/Amf/Parse/InputStream.php';
-
-/** @see Zend_Amf_Parse_Amf3_Deserializer */
-require_once 'Zend/Amf/Parse/Amf3/Deserializer.php';
-
 /**
+ * @uses       Zend_Amf_Parse_Amf3_Deserializer
+ * @uses       Zend_Amf_Parse_Amf3_Serializer
+ * @uses       Zend_Amf_Parse_InputStream
+ * @uses       Zend_Amf_Parse_OutputStream
+ * @uses       Zend_Serializer_Adapter_AdapterAbstract
+ * @uses       Zend_Serializer_Exception
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage Adapter
@@ -60,7 +51,6 @@ class Zend_Serializer_Adapter_Amf3 extends Zend_Serializer_Adapter_AdapterAbstra
             $serializer->writeTypeMarker($value);
             return $stream->getStream();
         } catch (Exception $e) {
-            require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('Serialization failed by previous error', 0, $e);
         }
     }
@@ -80,7 +70,6 @@ class Zend_Serializer_Adapter_Amf3 extends Zend_Serializer_Adapter_AdapterAbstra
             $deserializer = new Zend_Amf_Parse_Amf3_Deserializer($stream);
             return $deserializer->readTypeMarker();
         } catch (Exception $e) {
-            require_once 'Zend/Serializer/Exception.php';
             throw new Zend_Serializer_Exception('Unserialization failed by previous error', 0, $e);
         }
     }

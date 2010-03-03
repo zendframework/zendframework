@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Dojo_View_Helper_DijitContainer */
-require_once 'Zend/Dojo/View/Helper/DijitContainer.php';
-
 /**
  * Dojo AccordionContainer dijit
  *

@@ -26,6 +26,7 @@
  * Sampling of PHP environments and platforms suggests that at least 80% to 90% support bcmath.
  * Thus, this file should be as light as possible.
  *
+ * @uses       Zend_Locale_Math_PhpMath
  * @category   Zend
  * @package    Zend_Locale
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -350,6 +351,5 @@ class Zend_Locale_Math
 if (!extension_loaded('bcmath')
     || (defined('TESTS_ZEND_LOCALE_BCMATH_ENABLED') && !TESTS_ZEND_LOCALE_BCMATH_ENABLED)
 ) {
-    require_once 'Zend/Locale/Math/PhpMath.php';
     Zend_Locale_Math_PhpMath::disable();
 }

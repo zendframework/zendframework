@@ -19,13 +19,11 @@
  * @version    $Id$
  */
 
-/** Zend_Oauth_Http_Utility */
-require_once 'Zend/Oauth/Http/Utility.php';
-
-/** Zend_Uri_Http */
-require_once 'Zend/Uri/Http.php';
-
 /**
+ * @uses       Zend_Oauth
+ * @uses       Zend_Oauth_Exception
+ * @uses       Zend_Oauth_Http_Utility
+ * @uses       Zend_Uri_Http
  * @category   Zend
  * @package    Zend_Oauth
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -105,7 +103,6 @@ class Zend_Oauth_Http
     public function setMethod($method)
     {
         if (!in_array($method, array(Zend_Oauth::POST, Zend_Oauth::GET))) {
-            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('invalid HTTP method: ' . $method);
         }
         $this->_preferredRequestMethod = $method;
@@ -174,7 +171,6 @@ class Zend_Oauth_Http
         try {
             $response = $this->_attemptRequest($params);
         } catch (Zend_Http_Client_Exception $e) {
-            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Error in HTTP request', null, $e);
         }
         if (!is_null($response)) {
@@ -230,7 +226,6 @@ class Zend_Oauth_Http
                 $this->_preferredRequestScheme = Zend_Oauth::REQUEST_SCHEME_QUERYSTRING;
                 break;
             default:
-                require_once 'Zend/Oauth/Exception.php';
                 throw new Zend_Oauth_Exception(
                     'Could not retrieve a valid Token response from Token URL:'
                     . (!is_null($response) 

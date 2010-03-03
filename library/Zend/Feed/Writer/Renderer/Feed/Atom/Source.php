@@ -19,9 +19,10 @@
  * @version    $Id$
  */
  
-require_once 'Zend/Feed/Writer/Renderer/Feed/Atom/AtomAbstract.php';
- 
 /**
+ * @uses       DOMDocument
+ * @uses       Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
+ * @uses       Zend_Feed_Writer_Renderer_RendererInterface
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

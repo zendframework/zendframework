@@ -20,12 +20,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Router_Route_Abstract */
-require_once 'Zend/Controller/Router/Route/Abstract.php';
-
 /**
  * Route
  *
+ * @uses       Zend_Controller_Router_Route_Abstract
+ * @uses       Zend_Controller_Router_Exception
+ * @uses       Zend_Registry
+ * @uses       Zend_Registry
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -347,7 +348,6 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
                 } elseif (isset($this->_defaults[$name])) {
                     $value = $this->_defaults[$name];
                 } else {
-                    require_once 'Zend/Controller/Router/Exception.php';
                     throw new Zend_Controller_Router_Exception($name . ' is not specified');
                 }
 
@@ -495,7 +495,6 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
             }
         }
 
-        require_once 'Zend/Controller/Router/Exception.php';
         throw new Zend_Controller_Router_Exception('Could not find a translator');
     }
 

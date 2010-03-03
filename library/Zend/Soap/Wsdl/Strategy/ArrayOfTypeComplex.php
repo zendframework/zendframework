@@ -21,13 +21,10 @@
  */
 
 /**
- * @see Zend_Soap_Wsdl_Strategy_DefaultComplexType
- */
-require_once "Zend/Soap/Wsdl/Strategy/DefaultComplexType.php";
-
-/**
  * Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex
  *
+ * @uses       Zend_Soap_Wsdl_Exception
+ * @uses       Zend_Soap_Wsdl_Strategy_DefaultComplexType
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage Wsdl
@@ -47,7 +44,6 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
     public function addComplexType($type)
     {
         if(in_array($type, $this->_inProcess)) {
-            require_once "Zend/Soap/Wsdl/Exception.php";
             throw new Zend_Soap_Wsdl_Exception("Infinite recursion, cannot nest '".$type."' into itself.");
         }
         $this->_inProcess[$type] = $type;
@@ -55,7 +51,6 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
         $nestingLevel = $this->_getNestedCount($type);
 
         if($nestingLevel > 1) {
-            require_once "Zend/Soap/Wsdl/Exception.php";
             throw new Zend_Soap_Wsdl_Exception(
                 "ArrayOfTypeComplex cannot return nested ArrayOfObject deeper than ".
                 "one level. Use array object properties to return deep nested data.
@@ -65,7 +60,6 @@ class Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex extends Zend_Soap_Wsdl_Strategy
         $singularType = $this->_getSingularPhpType($type);
 
         if(!class_exists($singularType)) {
-            require_once "Zend/Soap/Wsdl/Exception.php";
             throw new Zend_Soap_Wsdl_Exception(sprintf(
                 "Cannot add a complex type %s that is not an object or where ".
                 "class could not be found in 'DefaultComplexType' strategy.", $type

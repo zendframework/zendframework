@@ -20,13 +20,6 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Auth_Storage_Interface
- */
-require_once 'Zend/Auth/Storage/Interface.php';
-
-
 /**
  * Non-Persistent Auth Storage
  *
@@ -34,6 +27,7 @@ require_once 'Zend/Auth/Storage/Interface.php';
  * re-populated. So there's no need to use sessions, this simple value class
  * will hold the data for rest of the current request.
  *
+ * @uses       Zend_Auth_Storage_Interface
  * @category   Zend
  * @package    Zend_Auth
  * @subpackage Storage

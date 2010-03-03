@@ -21,16 +21,8 @@
  */
 
 /**
- * @see Zend_Crypt_Rsa_Key_Private
- */
-require_once 'Zend/Crypt/Rsa/Key/Private.php';
-
-/**
- * @see Zend_Crypt_Rsa_Key_Public
- */
-require_once 'Zend/Crypt/Rsa/Key/Public.php';
-
-/**
+ * @uses       Zend_Crypt_Rsa_Key_Private
+ * @uses       Zend_Crypt_Rsa_Key_Public
  * @category   Zend
  * @package    Zend_Crypt
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

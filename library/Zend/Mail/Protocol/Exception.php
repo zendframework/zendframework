@@ -20,14 +20,8 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Exception
- */
-require_once 'Zend/Mail/Exception.php';
-
-
-/**
+ * @uses       Zend_Mail_Exception
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Protocol

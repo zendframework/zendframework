@@ -18,12 +18,13 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Xhtml */
-require_once 'Zend/Form/Element/Xhtml.php';
-
 /**
  * Zend_Form_Element
  *
+ * @uses       Zend_Form
+ * @uses       Zend_Form_Element_Exception
+ * @uses       Zend_Form_Element_Xhtml
+ * @uses       Zend_Loader_PluginLoader
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
@@ -123,7 +124,6 @@ class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
         }
 
         if (!array_key_exists($type, $this->_loaders)) {
-            require_once 'Zend/Loader/PluginLoader.php';
             $loader = new Zend_Loader_PluginLoader(array(
                 'Zend_File_Transfer_Adapter' => 'Zend/File/Transfer/Adapter/',
             ));
@@ -176,7 +176,6 @@ class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
             $class  = $loader->load($adapter);
             $this->_adapter = new $class;
         } else {
-            require_once 'Zend/Form/Element/Exception.php';
             throw new Zend_Form_Element_Exception('Invalid adapter specified');
         }
 
@@ -753,7 +752,6 @@ class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
 
         $translator = $this->getTransferAdapter()->getTranslator();
         if (null === $translator) {
-            require_once 'Zend/Form.php';
             return Zend_Form::getDefaultTranslator();
         }
 
@@ -870,7 +868,6 @@ class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
         }
 
         if (!$marker) {
-            require_once 'Zend/Form/Element/Exception.php';
             throw new Zend_Form_Element_Exception('No file decorator found... unable to render file element');
         }
 

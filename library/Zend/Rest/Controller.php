@@ -19,16 +19,14 @@
  * @version    $Id$
  */
 
-/** Zend_Controller_Action */
-require_once 'Zend/Controller/Action.php';
-
 /**
  * An abstract class to guide implementation of action controllers for use with
  * Zend_Rest_Route.
  *
+ * @uses       Zend_Controller_Action
  * @category   Zend
- * @package Zend_Rest
- * @see Zend_Rest_Route
+ * @package    Zend_Rest
+ * @see        Zend_Rest_Route
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

@@ -19,19 +19,12 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Mime_Decode
- */
-require_once 'Zend/Mime/Decode.php';
-
-/**
- * @see Zend_Mail_Part_Interface
- */
-require_once 'Zend/Mail/Part/Interface.php';
-
-
-/**
+ * @uses       RecursiveIterator
+ * @uses       Zend_Mail_Exception
+ * @uses       Zend_Mail_Part_Interface
+ * @uses       Zend_Mime
+ * @uses       Zend_Mime_Decode
  * @category   Zend
  * @package    Zend_Mail
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -105,17 +98,9 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
     {
         if (isset($params['handler'])) {
             if (!$params['handler'] instanceof Zend_Mail_Storage_Abstract) {
-                /**
-                 * @see Zend_Mail_Exception
-                 */
-                require_once 'Zend/Mail/Exception.php';
                 throw new Zend_Mail_Exception('handler is not a valid mail handler');
             }
             if (!isset($params['id'])) {
-                /**
-                 * @see Zend_Mail_Exception
-                 */
-                require_once 'Zend/Mail/Exception.php';
                 throw new Zend_Mail_Exception('need a message id with a handler');
             }
 
@@ -173,10 +158,6 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
         if ($this->_mail) {
             return $this->_mail->getRawContent($this->_messageNum);
         } else {
-            /**
-             * @see Zend_Mail_Exception
-             */
-            require_once 'Zend/Mail/Exception.php';
             throw new Zend_Mail_Exception('no content');
         }
     }
@@ -213,10 +194,6 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
         // split content in parts
         $boundary = $this->getHeaderField('content-type', 'boundary');
         if (!$boundary) {
-            /**
-             * @see Zend_Mail_Exception
-             */
-            require_once 'Zend/Mail/Exception.php';
             throw new Zend_Mail_Exception('no boundary found in content type to split message');
         }
         $parts = Zend_Mime_Decode::splitMessageStruct($this->_content, $boundary);
@@ -243,10 +220,6 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
         }
 
         if (!$this->_mail && $this->_content === null) {
-            /**
-             * @see Zend_Mail_Exception
-             */
-            require_once 'Zend/Mail/Exception.php';
             throw new Zend_Mail_Exception('part not found');
         }
 
@@ -258,10 +231,6 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
         $this->_cacheContent();
 
         if (!isset($this->_parts[$num])) {
-            /**
-             * @see Zend_Mail_Exception
-             */
-            require_once 'Zend/Mail/Exception.php';
             throw new Zend_Mail_Exception('part not found');
         }
 
@@ -340,10 +309,6 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
         if ($this->headerExists($name) == false) {
             $lowerName = strtolower(preg_replace('%([a-z])([A-Z])%', '\1-\2', $name));
             if($this->headerExists($lowerName) == false) {
-                /**
-                 * @see Zend_Mail_Exception
-                 */
-                require_once 'Zend/Mail/Exception.php';
                 throw new Zend_Mail_Exception("no Header with Name $name or $lowerName found");
             }
         }
@@ -397,7 +362,8 @@ class Zend_Mail_Part implements RecursiveIterator, Zend_Mail_Part_Interface
      * @return string|array wanted part or all parts as array($firstName => firstPart, partname => value)
      * @throws Zend_Exception, Zend_Mail_Exception
      */
-    public function getHeaderField($name, $wantedPart = 0, $firstName = 0) {
+    public function getHeaderField($name, $wantedPart = 0, $firstName = 0) 
+    {
         return Zend_Mime_Decode::splitHeaderField(current($this->getHeader($name, 'array')), $wantedPart, $firstName);
     }
 

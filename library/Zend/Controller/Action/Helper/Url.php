@@ -21,11 +21,6 @@
  */
 
 /**
- * @see Zend_Controller_Action_Helper_Abstract
- */
-require_once 'Zend/Controller/Action/Helper/Abstract.php';
-
-/**
  * Helper for creating URLs for redirects and other tasks
  *
  * @uses       Zend_Controller_Action_Helper_Abstract

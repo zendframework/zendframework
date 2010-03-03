@@ -20,9 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Dojo_View_Helper_Slider */
-require_once 'Zend/Dojo/View/Helper/Slider.php';
-
 /**
  * Dojo VerticalSlider dijit
  *

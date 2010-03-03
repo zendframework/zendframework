@@ -20,11 +20,8 @@
  */
 
 /**
- * @see Zend_Config_Writer
- */
-require_once 'Zend/Config/Writer/FileAbstract.php';
-
-/**
+ * @uses       Zend_Config_Exception
+ * @uses       Zend_Config_Writer_FileAbstract
  * @category   Zend
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -155,8 +152,6 @@ class Zend_Config_Writer_Ini extends Zend_Config_Writer_FileAbstract
         } elseif (strpos($value, '"') === false) {
             return '"' . $value .  '"';
         } else {
-            /** @see Zend_Config_Exception */
-            require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception('Value can not contain double quotes "');
         }
     }

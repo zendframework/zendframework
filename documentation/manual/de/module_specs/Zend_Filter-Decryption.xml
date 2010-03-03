@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21123 -->
+<!-- EN-Revision: 21212 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.filter.set.decrypt">
     <title>Decrypt</title>
@@ -91,7 +91,16 @@ print $decrypted;
                 <para>
                     <emphasis>envelope</emphasis>: Der verschlüsselte Umschlagschlüssel vom Benutzer
                     der den Inhalt verschlüsselt hat. Man kann entweder den Pfad mit dem Dateinamen
-                    zur Schlüsseldatei angeben, oder den Inhalt der Schlüsseldatei selbst.
+                    zur Schlüsseldatei angeben, oder den Inhalt der Schlüsseldatei selbst. Wenn die
+                    <property>package</property> Option gesetzt wurde, kann man diesen Parameter
+                    unterdrücken.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis>package</emphasis>: Ob der Umschlagschlüssel mit dem verschlüsselten
+                    Wert gepackt werden soll. Der Standardwert ist <constant>FALSE</constant>.
                 </para>
             </listitem>
         </itemizedlist>

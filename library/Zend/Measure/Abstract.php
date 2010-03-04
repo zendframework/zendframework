@@ -288,7 +288,7 @@ abstract class Zend_Measure_Abstract
 
             $slength = strlen($value);
             $length  = 0;
-            for($i = 1; $i <= 25; ++$i) {
+            for($i = 1; $i <= $slength; ++$i) {
                 if ($value[$slength - $i] != '0') {
                     $length = 26 - $i;
                     break;

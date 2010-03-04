@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,18 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Exif
- */
-require_once 'Zend/Gdata/Exif.php';
-
-/**
  * Represents the exif:focalLength element used by the Gdata Exif extensions.
  *
+ * @uses       Zend_Gdata_Exif
+ * @uses       Zend_Gdata_Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Exif

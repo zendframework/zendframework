@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,20 +21,12 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Photos
- */
-require_once 'Zend/Gdata/Photos.php';
-
-/**
  * Represents the gphoto:access element used by the API.
  * This determines the visibility for an album, and can be either
  * the strings 'private' or 'public'.
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

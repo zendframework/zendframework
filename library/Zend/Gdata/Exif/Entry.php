@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,23 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Exif
- */
-require_once 'Zend/Gdata/Exif.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_Tags
- */
-require_once 'Zend/Gdata/Exif/Extension/Tags.php';
-
-/**
  * An Atom entry containing EXIF metadata.
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Exif
+ * @uses       Zend_Gdata_Exif_Extension_Tags
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Exif

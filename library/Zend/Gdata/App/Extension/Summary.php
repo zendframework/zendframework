@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,9 @@
  */
 
 /**
- * @see Zend_Gdata_App_Extension_Text
- */
-require_once 'Zend/Gdata/App/Extension/Text.php';
-
-/**
  * Represents the atom:summary element
  *
+ * @uses       Zend_Gdata_App_Extension_Text
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

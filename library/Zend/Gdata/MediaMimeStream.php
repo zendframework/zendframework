@@ -22,19 +22,11 @@
  */
 
 /**
-*  @see Zend_Gdata_MimeFile
-*/
-require_once 'Zend/Gdata/MimeFile.php';
-
-/**
-* @see Zend_Gdata_MimeBodyString
-*/
-require_once 'Zend/Gdata/MimeBodyString.php';
-
-
-/**
  * A streaming Media MIME class that allows for buffered read operations.
  *
+ * @uses       Zend_Gdata_App_IOException
+ * @uses       Zend_Gdata_MimeBodyString
+ * @uses       Zend_Gdata_MimeFile
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
@@ -92,7 +84,6 @@ class Zend_Gdata_MediaMimeStream
         $fileContentType = null)
     {
         if (!file_exists($filePath) || !is_readable($filePath)) {
-            require_once 'Zend/Gdata/App/IOException.php';
             throw new Zend_Gdata_App_IOException('File to be uploaded at ' .
                 $filePath . ' does not exist or is not readable.');
         }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,50 +21,18 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Calendar_Extension_AccessLevel
- */
-require_once 'Zend/Gdata/Calendar/Extension/AccessLevel.php';
-
-/**
- * @see Zend_Calendar_Extension_Color
- */
-require_once 'Zend/Gdata/Calendar/Extension/Color.php';
-
-/**
- * @see Zend_Calendar_Extension_Hidden
- */
-require_once 'Zend/Gdata/Calendar/Extension/Hidden.php';
-
-/**
- * @see Zend_Calendar_Extension_Selected
- */
-require_once 'Zend/Gdata/Calendar/Extension/Selected.php';
-
-/**
- * @see Zend_Gdata_Extension_EventStatus
- */
-require_once 'Zend/Gdata/Extension/EventStatus.php';
-
-/**
- * @see Zend_Gdata_Extension_Visibility
- */
-require_once 'Zend/Gdata/Extension/Visibility.php';
-
-
-/**
- * @see Zend_Extension_Where
- */
-require_once 'Zend/Gdata/Extension/Where.php';
-
-/**
  * Represents a Calendar entry in the Calendar data API meta feed of a user's
  * calendars.
  *
+ * @uses       Zend_Gdata_Calendar
+ * @uses       Zend_Gdata_Calendar_Extension_AccessLevel
+ * @uses       Zend_Gdata_Calendar_Extension_Color
+ * @uses       Zend_Gdata_Calendar_Extension_Hidden
+ * @uses       Zend_Gdata_Calendar_Extension_Selected
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Extension_EventStatus
+ * @uses       Zend_Gdata_Extension_Visibility
+ * @uses       Zend_Gdata_Extension_Where
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar

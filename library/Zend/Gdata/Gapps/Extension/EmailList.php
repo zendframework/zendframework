@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,20 +21,12 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Gapps
- */
-require_once 'Zend/Gdata/Gapps.php';
-
-/**
  * Represents the apps:emailList element used by the Apps data API. This
  * class represents properties of an email list and is usually contained
  * within an instance of Zend_Gdata_Gapps_EmailListEntry.
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Gapps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps

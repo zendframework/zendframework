@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,87 +21,27 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaContent
- */
-require_once 'Zend/Gdata/Media/Extension/MediaContent.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaCategory
- */
-require_once 'Zend/Gdata/Media/Extension/MediaCategory.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaCopyright
- */
-require_once 'Zend/Gdata/Media/Extension/MediaCopyright.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaCredit
- */
-require_once 'Zend/Gdata/Media/Extension/MediaCredit.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaDescription
- */
-require_once 'Zend/Gdata/Media/Extension/MediaDescription.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaHash
- */
-require_once 'Zend/Gdata/Media/Extension/MediaHash.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaKeywords
- */
-require_once 'Zend/Gdata/Media/Extension/MediaKeywords.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaPlayer
- */
-require_once 'Zend/Gdata/Media/Extension/MediaPlayer.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaRating
- */
-require_once 'Zend/Gdata/Media/Extension/MediaRating.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaRestriction
- */
-require_once 'Zend/Gdata/Media/Extension/MediaRestriction.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaText
- */
-require_once 'Zend/Gdata/Media/Extension/MediaText.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaThumbnail
- */
-require_once 'Zend/Gdata/Media/Extension/MediaThumbnail.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaTitle
- */
-require_once 'Zend/Gdata/Media/Extension/MediaTitle.php';
-
-
-/**
  * This class represents the media:group element of Media RSS.
  * It allows the grouping of media:content elements that are
  * different representations of the same content.  When it exists,
  * it is a child of an Entry (Atom) or Item (RSS).
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Media
+ * @uses       Zend_Gdata_Media_Extension_MediaCategory
+ * @uses       Zend_Gdata_Media_Extension_MediaContent
+ * @uses       Zend_Gdata_Media_Extension_MediaCopyright
+ * @uses       Zend_Gdata_Media_Extension_MediaCredit
+ * @uses       Zend_Gdata_Media_Extension_MediaDescription
+ * @uses       Zend_Gdata_Media_Extension_MediaHash
+ * @uses       Zend_Gdata_Media_Extension_MediaKeywords
+ * @uses       Zend_Gdata_Media_Extension_MediaPlayer
+ * @uses       Zend_Gdata_Media_Extension_MediaRating
+ * @uses       Zend_Gdata_Media_Extension_MediaRestriction
+ * @uses       Zend_Gdata_Media_Extension_MediaText
+ * @uses       Zend_Gdata_Media_Extension_MediaThumbnail
+ * @uses       Zend_Gdata_Media_Extension_MediaTitle
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media

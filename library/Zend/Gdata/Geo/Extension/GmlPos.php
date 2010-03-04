@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,18 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Geo
- */
-require_once 'Zend/Gdata/Geo.php';
-
-/**
  * Represents the gml:pos element used by the Gdata Geo extensions.
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Geo
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Geo

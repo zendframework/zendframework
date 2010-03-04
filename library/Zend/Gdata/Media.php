@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,14 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata
- */
-require_once 'Zend/Gdata.php';
-
-/**
  * Service class for interacting with the services which use the media extensions
  * @link http://code.google.com/apis/gdata/calendar.html
  *
+ * @uses       Zend_Gdata
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media

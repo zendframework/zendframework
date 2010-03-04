@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,14 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_EntryAtom
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
  * Represents a Documents List entry in the Documents List data API meta feed
  * of a user's documents.
  *
+ * @uses       Zend_Gdata_Docs
+ * @uses       Zend_Gdata_Entry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Docs

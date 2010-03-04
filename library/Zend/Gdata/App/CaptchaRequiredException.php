@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,11 +21,6 @@
  */
 
 /**
- * @see Zend_Gdata_App_CaptchaRequiredException
- */
-require_once 'Zend/Gdata/App/AuthException.php';
-
-/**
  * Gdata exceptions
  *
  * Class to represent an exception that occurs during the use of ClientLogin.
@@ -34,6 +28,7 @@ require_once 'Zend/Gdata/App/AuthException.php';
  * challenge is a visual puzzle presented to the user to prove that they are
  * not an automated system.
  *
+ * @uses       Zend_Gdata_App_AuthException
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -69,7 +64,7 @@ class Zend_Gdata_App_CaptchaRequiredException extends Zend_Gdata_App_AuthExcepti
      */
     public function __construct($captchaToken, $captchaUrl) {
         $this->captchaToken = $captchaToken;
-        $this->captchaUrl = Zend_Gdata_App_CaptchaRequiredException::ACCOUNTS_URL . $captchaUrl;
+        $this->captchaUrl   = self::ACCOUNTS_URL . $captchaUrl;
         parent::__construct('CAPTCHA challenge issued by server');
     }
 

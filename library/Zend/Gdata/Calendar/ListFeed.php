@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,18 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_Feed
- */
-require_once 'Zend/Gdata/Feed.php';
-
-/**
- * @see Zend_Gdata_Extension_Timezone
- */
-require_once 'Zend/Gdata/Calendar/Extension/Timezone.php';
-
-/**
  * Represents the meta-feed list of calendars
  *
+ * @uses       Zend_Gdata_Calendar
+ * @uses       Zend_Gdata_Extension_Timezone
+ * @uses       Zend_Gdata_Feed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar

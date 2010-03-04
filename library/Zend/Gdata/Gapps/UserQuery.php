@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,11 +21,6 @@
  */
 
 /**
- * @see Zend_Gdata_Gapps_Query
- */
-require_once('Zend/Gdata/Gapps/Query.php');
-
-/**
  * Assists in constructing queries for Google Apps user entries.
  * Instances of this class can be provided in many places where a URL is
  * required.
@@ -34,6 +28,8 @@ require_once('Zend/Gdata/Gapps/Query.php');
  * For information on submitting queries to a server, see the Google Apps
  * service class, Zend_Gdata_Gapps.
  *
+ * @uses       Zend_Gdata_Gapps
+ * @uses       Zend_Gdata_Gapps_Query
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps

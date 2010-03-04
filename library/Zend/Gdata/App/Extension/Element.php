@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,14 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_App_Extension
- */
-require_once 'Zend/Gdata/App/Extension.php';
-
-/**
  * Class that represents elements which were not handled by other parsing
  * code in the library.
  *
+ * @uses       Zend_Gdata_App_Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,13 +20,10 @@
  */
 
 /**
- * @see Zend_Gdata_Books_Extension_BooksLink
- */
-require_once 'Zend/Gdata/Books/Extension/BooksLink.php';
-
-/**
  * Describes an info link
  *
+ * @uses       Zend_Gdata_Books
+ * @uses       Zend_Gdata_Books_Extension_BooksLink
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,38 +21,14 @@
  */
 
 /**
- * @see Zend_Gdata_App_Entry
- */
-require_once 'Zend/Gdata/App/Entry.php';
-
-/**
- * @see Zend_Gdata_App_FeedSourceParent
- */
-require_once 'Zend/Gdata/App/FeedEntryParent.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Generator
- */
-require_once 'Zend/Gdata/App/Extension/Generator.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Icon
- */
-require_once 'Zend/Gdata/App/Extension/Icon.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Logo
- */
-require_once 'Zend/Gdata/App/Extension/Logo.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Subtitle
- */
-require_once 'Zend/Gdata/App/Extension/Subtitle.php';
-
-/**
  * Atom feed class
  *
+ * @uses       Zend_Gdata_App_Entry
+ * @uses       Zend_Gdata_App_Extension_Generator
+ * @uses       Zend_Gdata_App_Extension_Icon
+ * @uses       Zend_Gdata_App_Extension_Logo
+ * @uses       Zend_Gdata_App_Extension_Subtitle
+ * @uses       Zend_Gdata_App_FeedSourceParent
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

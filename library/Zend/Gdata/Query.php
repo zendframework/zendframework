@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,15 +21,12 @@
  */
 
 /**
- * Zend_Gdata_App_Util
- */
-require_once 'Zend/Gdata/App/Util.php';
-
-/**
  * Provides a mechanism to build a query URL for Gdata services.
  * Queries are not defined for APP, but are provided by Gdata services
  * as an extension.
  *
+ * @uses       Zend_Gdata_App_Exception
+ * @uses       Zend_Gdata_App_Util
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
@@ -399,7 +395,6 @@ class Zend_Gdata_Query
         if (method_exists($this, $method)) {
             return call_user_func(array(&$this, $method));
         } else {
-            require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('Property ' . $name . '  does not exist');
         }
     }
@@ -410,7 +405,6 @@ class Zend_Gdata_Query
         if (method_exists($this, $method)) {
             return call_user_func(array(&$this, $method), $val);
         } else {
-            require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('Property ' . $name . '  does not exist');
         }
     }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,20 +21,13 @@
  */
 
 /**
- * @see Zend_Gdata_Media_Feed
- */
-require_once 'Zend/Gdata/Media/Feed.php';
-
-/**
- * @see Zend_Gdata_YouTube_InboxEntry
- */
-require_once 'Zend/Gdata/YouTube/InboxEntry.php';
-
-/**
  * The YouTube inbox feed list flavor of an Atom Feed with media support
  * Represents a list of individual inbox entries, where each contained entry is
  * a message.
  *
+ * @uses       Zend_Gdata_Media_Feed
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_InboxEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

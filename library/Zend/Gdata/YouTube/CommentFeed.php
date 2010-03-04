@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,18 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_feed
- */
-require_once 'Zend/Gdata/Feed.php';
-
-/**
- * @see Zend_Gdata_YouTube_CommentEntry
- */
-require_once 'Zend/Gdata/YouTube/CommentEntry.php';
-
-/**
  * The YouTube comments flavor of an Atom Feed
  *
+ * @uses       Zend_Gdata_Feed
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_CommentEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

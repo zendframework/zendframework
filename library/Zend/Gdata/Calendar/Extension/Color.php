@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,14 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
  * Represents the gCal:color element used by the Calendar data API
  * to define the color of a calendar in the UI.
  *
+ * @uses       Zend_Gdata_Calendar
+ * @uses       Zend_Gdata_Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Calendar

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,21 +21,13 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Gapps
- */
-require_once 'Zend/Gdata/Gapps.php';
-
-/**
  * Represents the apps:quota element used by the Apps data API. This is
  * used to indicate the amount of storage space available to a user. Quotas
  * may not be able to be set, depending on the domain used. This class
  * is usually contained within an instance of Zend_Gdata_Gapps_UserEntry.
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Gapps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps

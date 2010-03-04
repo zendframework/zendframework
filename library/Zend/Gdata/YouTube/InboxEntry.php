@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,34 +21,15 @@
  */
 
 /**
- * @see Zend_Gdata_Media_Entry
- */
-require_once 'Zend/Gdata/Media/Entry.php';
-
-/**
- * @see Zend_Gdata_Extension_Rating
- */
-require_once 'Zend/Gdata/Extension/Rating.php';
-
-/**
- * @see Zend_Gdata_Extension_Comments
- */
-require_once 'Zend/Gdata/Extension/Comments.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Statistics
- */
-require_once 'Zend/Gdata/YouTube/Extension/Statistics.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Description
- */
-require_once 'Zend/Gdata/YouTube/Extension/Description.php';
-
-
-/**
  * Represents the YouTube message flavor of an Atom entry
  *
+ * @uses       Zend_Gdata_App_VersionException
+ * @uses       Zend_Gdata_Extension_Comments
+ * @uses       Zend_Gdata_Extension_Rating
+ * @uses       Zend_Gdata_Media_Entry
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_Extension_Description
+ * @uses       Zend_Gdata_YouTube_Extension_Statistics
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube
@@ -179,7 +159,6 @@ class Zend_Gdata_YouTube_InboxEntry extends Zend_Gdata_Media_Entry
     public function getDescription()
     {
         if ($this->getMajorProtocolVersion() == 2) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The getDescription ' .
                 ' method is only supported in version 1 of the YouTube ' .
                 'API.');
@@ -199,7 +178,6 @@ class Zend_Gdata_YouTube_InboxEntry extends Zend_Gdata_Media_Entry
     public function setDescription($description = null)
     {
         if ($this->getMajorProtocolVersion() == 2) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The setDescription ' .
                 ' method is only supported in version 1 of the YouTube ' .
                 'API.');

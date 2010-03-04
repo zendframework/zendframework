@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,14 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
  * Data model for gd:extendedProperty element, used by some Gdata
  * services to implement arbitrary name/value pair storage
  *
+ * @uses       Zend_Gdata_Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

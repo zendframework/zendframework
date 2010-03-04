@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_Feed
- */
-require_once 'Zend/Gdata/Feed.php';
-
-/**
  * Describes a Book Search volume feed
  *
+ * @uses       Zend_Gdata_Books
+ * @uses       Zend_Gdata_Feed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

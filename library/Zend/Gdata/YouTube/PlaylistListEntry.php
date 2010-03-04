@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,38 +21,15 @@
  */
 
 /**
- * @see Zend_Gdata_YouTube
- */
-require_once 'Zend/Gdata/YouTube.php';
-
-/**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Extension_FeedLink
- */
-require_once 'Zend/Gdata/Extension/FeedLink.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Description
- */
-require_once 'Zend/Gdata/YouTube/Extension/Description.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_PlaylistId
- */
-require_once 'Zend/Gdata/YouTube/Extension/PlaylistId.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_CountHint
- */
-require_once 'Zend/Gdata/YouTube/Extension/CountHint.php';
-
-/**
  * Represents the YouTube video playlist flavor of an Atom entry
  *
+ * @uses       Zend_Gdata_App_VersionException
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Extension_FeedLink
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_Extension_CountHint
+ * @uses       Zend_Gdata_YouTube_Extension_Description
+ * @uses       Zend_Gdata_YouTube_Extension_PlaylistId
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube
@@ -218,7 +194,6 @@ class Zend_Gdata_YouTube_PlaylistListEntry extends Zend_Gdata_Entry
     {
         if (($this->getMajorProtocolVersion() == null) ||
             ($this->getMajorProtocolVersion() == 1)) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The yt:countHint ' .
                 'element is not supported in versions earlier than 2.');
         } else {
@@ -236,7 +211,6 @@ class Zend_Gdata_YouTube_PlaylistListEntry extends Zend_Gdata_Entry
     {
         if (($this->getMajorProtocolVersion() == null) ||
             ($this->getMajorProtocolVersion() == 1)) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The yt:playlistId ' .
                 'element is not supported in versions earlier than 2.');
         } else {

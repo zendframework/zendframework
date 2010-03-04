@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -13,30 +12,24 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category     Zend
- * @package      Zend_Gdata
- * @subpackage   Spreadsheets
+ * @category   Zend
+ * @package    Zend_Gdata
+ * @subpackage Spreadsheets
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Spreadsheets_Extension_Custom
- */
-require_once 'Zend/Gdata/Spreadsheets/Extension/Custom.php';
-
-/**
  * Concrete class for working with List entries.
  *
- * @category     Zend
- * @package      Zend_Gdata
- * @subpackage   Spreadsheets
+ * @uses       Zend_Gdata_App_InvalidArgumentException;
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Spreadsheets
+ * @uses       Zend_Gdata_Spreadsheets_Extension_Custom
+ * @category   Zend
+ * @package    Zend_Gdata
+ * @subpackage Spreadsheets
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -175,7 +168,6 @@ class Zend_Gdata_Spreadsheets_ListEntry extends Zend_Gdata_Entry
             $key = array_search($element, $this->_customByName);
             unset($this->_customByName[$key]);
         } else {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                 'Element does not exist.');
         }
@@ -198,7 +190,6 @@ class Zend_Gdata_Spreadsheets_ListEntry extends Zend_Gdata_Entry
             $key = array_search($element, $this->_custom);
             unset($this->_custom[$key]);
         } else {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                 'Element does not exist.');
         }

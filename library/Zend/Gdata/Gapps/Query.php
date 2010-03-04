@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,22 +21,15 @@
  */
 
 /**
- * Zend_Gdata_Query
- */
-require_once('Zend/Gdata/Query.php');
-
-/**
- * Zend_Gdata_Gapps
- */
-require_once('Zend/Gdata/Gapps.php');
-
-/**
  * Assists in constructing queries for Google Apps entries. This class
  * provides common methods used by all other Google Apps query classes.
  *
  * This class should never be instantiated directly. Instead, instantiate a
  * class which inherits from this class.
-  *
+ *
+ * @uses       Zend_Gdata_App_InvalidArgumentException
+ * @uses       Zend_Gdata_Gapps
+ * @uses       Zend_Gdata_Query
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps
@@ -114,7 +106,6 @@ abstract class Zend_Gdata_Gapps_Query extends Zend_Gdata_Query
              return Zend_Gdata_Gapps::APPS_BASE_FEED_URI . '/' . $this->_domain;
          }
          else {
-             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
              throw new Zend_Gdata_App_InvalidArgumentException(
                  'Domain must be specified.');
          }

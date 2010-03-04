@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
  * Describes a viewability
  *
+ * @uses       Zend_Gdata_Books
+ * @uses       Zend_Gdata_Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

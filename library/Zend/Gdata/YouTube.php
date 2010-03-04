@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,60 +21,23 @@
  */
 
 /**
- * @see Zend_Gdata_Media
- */
-require_once 'Zend/Gdata/Media.php';
-
-/**
- * @see Zend_Gdata_YouTube_VideoEntry
- */
-require_once 'Zend/Gdata/YouTube/VideoEntry.php';
-
-/**
- * @see Zend_Gdata_YouTube_VideoFeed
- */
-require_once 'Zend/Gdata/YouTube/VideoFeed.php';
-
-/**
- * @see Zend_Gdata_YouTube_CommentFeed
- */
-require_once 'Zend/Gdata/YouTube/CommentFeed.php';
-
-/**
- * @see Zend_Gdata_YouTube_PlaylistListFeed
- */
-require_once 'Zend/Gdata/YouTube/PlaylistListFeed.php';
-
-/**
- * @see Zend_Gdata_YouTube_SubscriptionFeed
- */
-require_once 'Zend/Gdata/YouTube/SubscriptionFeed.php';
-
-/**
- * @see Zend_Gdata_YouTube_ContactFeed
- */
-require_once 'Zend/Gdata/YouTube/ContactFeed.php';
-
-/**
- * @see Zend_Gdata_YouTube_PlaylistVideoFeed
- */
-require_once 'Zend/Gdata/YouTube/PlaylistVideoFeed.php';
-
-/**
- * @see Zend_Gdata_YouTube_ActivityFeed
- */
-require_once 'Zend/Gdata/YouTube/ActivityFeed.php';
-
-/**
- * @see Zend_Gdata_YouTube_InboxFeed
- */
-require_once 'Zend/Gdata/YouTube/InboxFeed.php';
-
-
-/**
  * Service class for interacting with the YouTube Data API.
  * @link http://code.google.com/apis/youtube/
  *
+ * @uses       Zend_Gdata_App_Exception
+ * @uses       Zend_Gdata_App_HttpException
+ * @uses       Zend_Gdata_App_InvalidArgumentException
+ * @uses       Zend_Gdata_App_VersionException
+ * @uses       Zend_Gdata_Media
+ * @uses       Zend_Gdata_YouTube_ActivityFeed
+ * @uses       Zend_Gdata_YouTube_CommentFeed
+ * @uses       Zend_Gdata_YouTube_ContactFeed
+ * @uses       Zend_Gdata_YouTube_InboxFeed
+ * @uses       Zend_Gdata_YouTube_PlaylistListFeed
+ * @uses       Zend_Gdata_YouTube_PlaylistVideoFeed
+ * @uses       Zend_Gdata_YouTube_SubscriptionFeed
+ * @uses       Zend_Gdata_YouTube_VideoEntry
+ * @uses       Zend_Gdata_YouTube_VideoFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube
@@ -227,7 +189,6 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
             $client = new Zend_Http_Client();
         }
         if (!$client instanceof Zend_Http_Client) {
-            require_once 'Zend/Gdata/App/HttpException.php';
             throw new Zend_Gdata_App_HttpException(
                 'Argument is not an instance of Zend_Http_Client.');
         }
@@ -656,7 +617,6 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
         @ini_restore('track_errors');
 
         if (!$success) {
-            require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception(
                 "Zend_Gdata_YouTube::parseFormUploadTokenResponse - " .
                 "DOMDocument cannot parse XML: $php_errormsg");
@@ -682,7 +642,6 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
         if ($tokenText != null && $urlText != null) {
             return array('token' => $tokenText, 'url' => $urlText);
         } else {
-            require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception(
                 'Form upload token not found in response');
         }
@@ -704,7 +663,6 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
             $response = $this->post($videoEntry, $url);
             return self::parseFormUploadTokenResponse($response->getBody());
         } else {
-            require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception(
                 'Url must be provided as a string URL');
         }
@@ -722,7 +680,6 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
     public function getActivityForUser($username)
     {
         if ($this->getMajorProtocolVersion() == 1) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('User activity feeds ' .
                 'are not available in API version 1.');
         }
@@ -733,7 +690,6 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
         } else {
             if (count(explode(',', $username)) >
                 self::ACTIVITY_FEED_MAX_USERS) {
-                require_once 'Zend/Gdata/App/InvalidArgumentException.php';
                 throw new Zend_Gdata_App_InvalidArgumentException(
                     'Activity feed can only retrieve for activity for up to ' .
                     self::ACTIVITY_FEED_MAX_USERS .  ' users per request');
@@ -753,7 +709,6 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
     public function getFriendActivityForCurrentUser()
     {
         if (!$this->isAuthenticated()) {
-            require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('You must be authenticated to ' .
                 'use the getFriendActivityForCurrentUser function in Zend_' .
                 'Gdata_YouTube.');
@@ -771,7 +726,6 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
     public function getInboxFeedForCurrentUser()
     {
         if (!$this->isAuthenticated()) {
-            require_once 'Zend/Gdata/App/Exception.php';
             throw new Zend_Gdata_App_Exception('You must be authenticated to ' .
                 'use the getInboxFeedForCurrentUser function in Zend_' .
                 'Gdata_YouTube.');
@@ -801,7 +755,6 @@ class Zend_Gdata_YouTube extends Zend_Gdata_Media
         $videoId = null, $recipientUserName)
     {
         if (!$videoId && !$videoEntry) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                 'Expecting either a valid videoID or a videoEntry object in ' .
                 'Zend_Gdata_YouTube->sendVideoMessage().');

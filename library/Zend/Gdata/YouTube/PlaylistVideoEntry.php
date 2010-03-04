@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,18 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_YouTube_VideoEntry
- */
-require_once 'Zend/Gdata/YouTube/VideoEntry.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Position
- */
-require_once 'Zend/Gdata/YouTube/Extension/Position.php';
-
-/**
  * Represents the YouTube video playlist flavor of an Atom entry
  *
+ * @uses       Zend_Gdata_YouTube_Extension_Position
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_VideoEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

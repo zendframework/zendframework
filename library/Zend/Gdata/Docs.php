@@ -22,34 +22,15 @@
  */
 
 /**
- * @see Zend_Gdata
- */
-require_once 'Zend/Gdata.php';
-
-/**
- * @see Zend_Gdata_Docs_DocumentListFeed
- */
-require_once 'Zend/Gdata/Docs/DocumentListFeed.php';
-
-/**
- * @see Zend_Gdata_Docs_DocumentListEntry
- */
-require_once 'Zend/Gdata/Docs/DocumentListEntry.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Category
- */
-require_once 'Zend/Gdata/App/Extension/Category.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Title
- */
-require_once 'Zend/Gdata/App/Extension/Title.php';
-
-/**
  * Service class for interacting with the Google Document List data API
  * @link http://code.google.com/apis/documents/
  *
+ * @uses       Zend_Gdata
+ * @uses       Zend_Gdata_App_Extension_Category
+ * @uses       Zend_Gdata_App_Extension_Title
+ * @uses       Zend_Gdata_App_InvalidArgumentException
+ * @uses       Zend_Gdata_Docs_DocumentListEntry
+ * @uses       Zend_Gdata_Docs_DocumentListFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Docs
@@ -139,7 +120,6 @@ class Zend_Gdata_Docs extends Zend_Gdata
     public function getDocumentListEntry($location = null)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {

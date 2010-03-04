@@ -21,15 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_App_Exception
- */
-require_once 'Zend/Gdata/App/Exception.php';
-
-/**
  * Gdata exceptions
  *
  * Class to represent exceptions that occur during Gdata operations.
  *
+ * @uses       Zend_Gdata_App_Exception
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

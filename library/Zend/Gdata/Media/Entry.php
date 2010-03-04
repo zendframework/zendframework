@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,23 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Media
- */
-require_once 'Zend/Gdata/Media.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaGroup
- */
-require_once 'Zend/Gdata/Media/Extension/MediaGroup.php';
-
-/**
  * Represents the Gdata flavor of an Atom entry
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Media
+ * @uses       Zend_Gdata_Media_Extension_MediaGroup
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media

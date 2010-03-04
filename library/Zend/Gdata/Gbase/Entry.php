@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,20 +21,13 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Gbase_Extension_BaseAttribute
- */
-require_once 'Zend/Gdata/Gbase/Extension/BaseAttribute.php';
-
-/**
  * Base class for working with Google Base entries.
  *
  * @link http://code.google.com/apis/base/
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Gbase
+ * @uses       Zend_Gdata_Gbase_Extension_BaseAttribute
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gbase

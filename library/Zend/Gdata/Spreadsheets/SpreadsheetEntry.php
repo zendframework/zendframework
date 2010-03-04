@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
  * Concrete class for working with Atom entries.
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Spreadsheets
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets

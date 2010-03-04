@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,9 @@
  */
 
 /**
- * @see Zend_Gdata_App_Base
- */
-require_once 'Zend/Gdata/App/Base.php';
-
-/**
  * Gdata App extensions
  *
+ * @uses       Zend_Gdata_App_Base
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

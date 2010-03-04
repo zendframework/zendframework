@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,10 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * @see Zend_Gdata_Gapps_Query
- */
-require_once('Zend/Gdata/Gapps/Query.php');
 
 /**
  * Assists in constructing queries for Google Apps email list entries.
@@ -34,6 +29,8 @@ require_once('Zend/Gdata/Gapps/Query.php');
  * For information on submitting queries to a server, see the Google Apps
  * service class, Zend_Gdata_Gapps.
  *
+ * @uses       Zend_Gdata_Gapps
+ * @uses       Zend_Gdata_Gapps_Query
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps

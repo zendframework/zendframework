@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,22 +21,14 @@
  */
 
 /**
- * @see Zend_Gdata_Feed
- */
-require_once 'Zend/Gdata/Feed.php';
-
-/**
- * @see Zend_Gdata_Gapps_NicknameEntry
- */
-require_once 'Zend/Gdata/Gapps/NicknameEntry.php';
-
-/**
  * Data model for a collection of Google Apps nickname entries, usually
  * provided by the Google Apps servers.
  *
  * For information on requesting this feed from a server, see the Google
  * Apps service class, Zend_Gdata_Gapps.
  *
+ * @uses       Zend_Gdata_Feed
+ * @uses       Zend_Gdata_Gapps_NicknameEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps

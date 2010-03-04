@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,32 +21,6 @@
  */
 
 /**
- * @see Zend_Gdata
- */
-require_once 'Zend/Gdata.php';
-
-/**
- * @see Zend_Gdata_Gapps_UserFeed
- */
-require_once 'Zend/Gdata/Gapps/UserFeed.php';
-
-/**
- * @see Zend_Gdata_Gapps_NicknameFeed
- */
-require_once 'Zend/Gdata/Gapps/NicknameFeed.php';
-
-/**
- * @see Zend_Gdata_Gapps_EmailListFeed
- */
-require_once 'Zend/Gdata/Gapps/EmailListFeed.php';
-
-/**
- * @see Zend_Gdata_Gapps_EmailListRecipientFeed
- */
-require_once 'Zend/Gdata/Gapps/EmailListRecipientFeed.php';
-
-
-/**
  * Service class for interacting with the Google Apps Provisioning API.
  *
  * Like other service classes in this module, this class provides access via
@@ -58,6 +31,17 @@ require_once 'Zend/Gdata/Gapps/EmailListRecipientFeed.php';
  *
  * @link http://code.google.com/apis/apps/gdata_provisioning_api_v2.0_reference.html
  *
+ * @uses       Zend_Gdata
+ * @uses       Zend_Gdata_App_Exception
+ * @uses       Zend_Gdata_App_InvalidArgumentException
+ * @uses       Zend_Gdata_App_IOException
+ * @uses       Zend_Gdata_Gapps_EmailListFeed
+ * @uses       Zend_Gdata_Gapps_EmailListRecipientFeed
+ * @uses       Zend_Gdata_Gapps_Error
+ * @uses       Zend_Gdata_Gapps_NicknameFeed
+ * @uses       Zend_Gdata_Gapps_ServiceException
+ * @uses       Zend_Gdata_Gapps_UserFeed
+ * @uses       Zend_Loader
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps
@@ -133,21 +117,20 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * @throws Zend_Gdata_Gapps_ServiceException
      * @throws mixed
      */
-    public static function throwServiceExceptionIfDetected($e) {
+    public static function throwServiceExceptionIfDetected($e) 
+    {
         // Check to make sure that there actually response!
         // This can happen if the connection dies before the request
         // completes. (See ZF-5949)
         $response = $e->getResponse();
         if (!$response) {
-          require_once('Zend/Gdata/App/IOException.php');
-          throw new Zend_Gdata_App_IOException('No HTTP response received (possible connection failure)');
+            throw new Zend_Gdata_App_IOException('No HTTP response received (possible connection failure)');
         }
 
         try {
             // Check to see if there is an AppsForYourDomainErrors
             // datastructure in the response. If so, convert it to
             // an exception and throw it.
-            require_once 'Zend/Gdata/Gapps/ServiceException.php';
             $error = new Zend_Gdata_Gapps_ServiceException();
             $error->importFromString($response->getBody());
             throw $error;
@@ -321,7 +304,6 @@ class Zend_Gdata_Gapps extends Zend_Gdata
          } else if ($this->_domain !== null) {
              return self::APPS_BASE_FEED_URI . '/' . $this->_domain;
          } else {
-             require_once 'Zend/Gdata/App/InvalidArgumentException.php';
              throw new Zend_Gdata_App_InvalidArgumentException(
                      'Domain must be specified.');
          }
@@ -407,7 +389,6 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     public function getEmailListRecipientFeed($location)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
@@ -430,7 +411,6 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     public function getUserEntry($location)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
@@ -453,7 +433,6 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     public function getNicknameEntry($location)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
@@ -476,7 +455,6 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     public function getEmailListEntry($location)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
@@ -499,7 +477,6 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     public function getEmailListRecipientEntry($location)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {
@@ -595,7 +572,6 @@ class Zend_Gdata_Gapps extends Zend_Gdata
     public function insertEmailListRecipient($recipient, $uri = null)
     {
         if ($uri === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'URI must not be null');
         } elseif ($uri instanceof Zend_Gdata_Gapps_EmailListEntry) {
@@ -628,7 +604,6 @@ class Zend_Gdata_Gapps extends Zend_Gdata
                      // Autoloading disabled on next line for compatibility
                      // with magic factories. See ZF-6660.
                      if (!class_exists($name . '_' . $class, false)) {
-                        require_once 'Zend/Loader.php';
                         @Zend_Loader::loadClass($name . '_' . $class);
                      }
                      $foundClassName = $name . '_' . $class;
@@ -643,7 +618,6 @@ class Zend_Gdata_Gapps extends Zend_Gdata
                 $args = array_merge(array($this->getDomain()), $args);
                 return $reflectionObj->newInstanceArgs($args);
             } else {
-                require_once 'Zend/Gdata/App/Exception.php';
                 throw new Zend_Gdata_App_Exception(
                         "Unable to find '${class}' in registered packages");
             }
@@ -698,7 +672,8 @@ class Zend_Gdata_Gapps extends Zend_Gdata
      * @throws Zend_Gdata_App_InvalidArgumentException
      * @throws Zend_Gdata_App_HttpException
      */
-    public function retrieveUser ($username) {
+    public function retrieveUser ($username) 
+    {
         $query = $this->newUserQuery($username);
         try {
             $user = $this->getUserEntry($query);

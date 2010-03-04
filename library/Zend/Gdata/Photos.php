@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,26 +21,6 @@
  */
 
 /**
- * @see Zend_Gdata
- */
-require_once 'Zend/Gdata.php';
-
-/**
- * @see Zend_Gdata_Photos_UserFeed
- */
-require_once 'Zend/Gdata/Photos/UserFeed.php';
-
-/**
- * @see Zend_Gdata_Photos_AlbumFeed
- */
-require_once 'Zend/Gdata/Photos/AlbumFeed.php';
-
-/**
- * @see Zend_Gdata_Photos_PhotoFeed
- */
-require_once 'Zend/Gdata/Photos/PhotoFeed.php';
-
-/**
  * Service class for interacting with the Google Photos Data API.
  *
  * Like other service classes in this module, this class provides access via
@@ -49,6 +28,11 @@ require_once 'Zend/Gdata/Photos/PhotoFeed.php';
  *
  * @link http://code.google.com/apis/picasaweb/gdata.html
  *
+ * @uses       Zend_Gdata
+ * @uses       Zend_Gdata_App_InvalidArgumentException
+ * @uses       Zend_Gdata_Photos_AlbumFeed
+ * @uses       Zend_Gdata_Photos_PhotoFeed
+ * @uses       Zend_Gdata_Photos_UserFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos
@@ -187,7 +171,6 @@ class Zend_Gdata_Photos extends Zend_Gdata
     public function getAlbumFeed($location = null)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
@@ -240,7 +223,6 @@ class Zend_Gdata_Photos extends Zend_Gdata
     public function getUserEntry($location)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
@@ -265,7 +247,6 @@ class Zend_Gdata_Photos extends Zend_Gdata
     public function getAlbumEntry($location)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
@@ -290,7 +271,6 @@ class Zend_Gdata_Photos extends Zend_Gdata
     public function getPhotoEntry($location)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
@@ -315,7 +295,6 @@ class Zend_Gdata_Photos extends Zend_Gdata
     public function getTagEntry($location)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
@@ -340,7 +319,6 @@ class Zend_Gdata_Photos extends Zend_Gdata
     public function getCommentEntry($location)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Photos_UserQuery) {
@@ -396,7 +374,6 @@ class Zend_Gdata_Photos extends Zend_Gdata
             $uri = $uri->getLink(self::FEED_LINK_PATH)->href;
         }
         if ($uri === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'URI must not be null');
         }
@@ -422,7 +399,6 @@ class Zend_Gdata_Photos extends Zend_Gdata
             $uri = $uri->getLink(self::FEED_LINK_PATH)->href;
         }
         if ($uri === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'URI must not be null');
         }
@@ -449,7 +425,6 @@ class Zend_Gdata_Photos extends Zend_Gdata
             $uri = $uri->getLink(self::FEED_LINK_PATH)->href;
         }
         if ($uri === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'URI must not be null');
         }

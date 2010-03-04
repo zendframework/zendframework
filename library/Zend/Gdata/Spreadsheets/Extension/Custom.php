@@ -21,19 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-
-/**
  * Concrete class for working with custom gsx elements.
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Spreadsheets
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets

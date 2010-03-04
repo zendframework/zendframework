@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,16 +21,13 @@
  */
 
 /**
- * @see Zend_Gdata_Media_Extension_MediaContent
- */
-require_once 'Zend/Gdata/Media/Extension/MediaContent.php';
-
-/**
  * Represents the media:content element of Media RSS.
  * Represents media objects.  Multiple media objects representing
  * the same content can be represented using a
  * media:group (Zend_Gdata_Media_Extension_MediaGroup) element.
  *
+ * @uses       Zend_Gdata_Media_Extension_MediaContent
+ * @uses       Zend_Gdata_YouTube
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

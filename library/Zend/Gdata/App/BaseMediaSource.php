@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_App_MediaSource
- */
-require_once 'Zend/Gdata/App/MediaSource.php';
-
-/**
  * Concrete class to use a file handle as an attachment within a MediaEntry.
  *
+ * @uses       ReflectionClass
+ * @uses       Zend_Gdata_App_InvalidArgumentException
+ * @uses       Zend_Gdata_App_MediaSource
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -116,7 +113,6 @@ abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSou
         } else if (property_exists($this, "_${name}")) {
             return $this->{'_' . $name};
         } else {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Property ' . $name . ' does not exist');
         }
@@ -140,7 +136,6 @@ abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSou
         } else if (isset($this->{'_' . $name}) || ($this->{'_' . $name} === null)) {
             $this->{'_' . $name} = $val;
         } else {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Property ' . $name . '  does not exist');
         }
@@ -156,7 +151,6 @@ abstract class Zend_Gdata_App_BaseMediaSource implements Zend_Gdata_App_MediaSou
         $rc = new ReflectionClass(get_class($this));
         $privName = '_' . $name;
         if (!($rc->hasProperty($privName))) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Property ' . $name . ' does not exist');
         } else {

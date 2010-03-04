@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,28 +21,12 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Extension_AttendeeStatus
- */
-require_once 'Zend/Gdata/Extension/AttendeeStatus.php';
-
-/**
- * @see Zend_Gdata_Extension_AttendeeType
- */
-require_once 'Zend/Gdata/Extension/AttendeeType.php';
-
-/**
- * @see Zend_Gdata_Extension_EntryLink
- */
-require_once 'Zend/Gdata/Extension/EntryLink.php';
-
-/**
  * Data model class to represent a participant
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Extension_AttendeeStatus
+ * @uses       Zend_Gdata_Extension_AttendeeType
+ * @uses       Zend_Gdata_Extension_EntryLink
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

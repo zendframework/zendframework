@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,23 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Geo
- */
-require_once 'Zend/Gdata/Geo.php';
-
-/**
- * @see Zend_Gdata_Geo_Extension_GeoRssWhere
- */
-require_once 'Zend/Gdata/Geo/Extension/GeoRssWhere.php';
-
-/**
  * An Atom entry containing Geograpic data.
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Geo
+ * @uses       Zend_Gdata_Geo_Extension_GeoRssWhere
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Geo

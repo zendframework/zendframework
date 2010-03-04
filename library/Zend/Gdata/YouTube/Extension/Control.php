@@ -21,19 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_App_Extension_Control
- */
-require_once 'Zend/Gdata/App/Extension/Control.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_State
- */
-require_once 'Zend/Gdata/YouTube/Extension/State.php';
-
-
-/**
  * Specialized Control class for use with YouTube. Enables use of yt extension elements.
  *
+ * @uses       Zend_Gdata_App_Extension_Control
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_Extension_State
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

@@ -22,38 +22,13 @@
  */
 
 /**
- * @see Zend_Gdata
- */
-require_once 'Zend/Gdata.php';
-
-/**
- * @see Zend_Gdata_DublinCore
- */
-require_once 'Zend/Gdata/DublinCore.php';
-
-/**
- * @see Zend_Gdata_Books_CollectionEntry
- */
-require_once 'Zend/Gdata/Books/CollectionEntry.php';
-
-/**
- * @see Zend_Gdata_Books_CollectionFeed
- */
-require_once 'Zend/Gdata/Books/CollectionFeed.php';
-
-/**
- * @see Zend_Gdata_Books_VolumeEntry
- */
-require_once 'Zend/Gdata/Books/VolumeEntry.php';
-
-/**
- * @see Zend_Gdata_Books_VolumeFeed
- */
-require_once 'Zend/Gdata/Books/VolumeFeed.php';
-
-/**
  * Service class for interacting with the Books service
  *
+ * @uses       Zend_Gdata
+ * @uses       Zend_Gdata_Books_CollectionEntry
+ * @uses       Zend_Gdata_Books_CollectionFeed
+ * @uses       Zend_Gdata_Books_VolumeEntry
+ * @uses       Zend_Gdata_Books_VolumeFeed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

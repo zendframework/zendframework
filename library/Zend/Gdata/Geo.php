@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,17 +21,13 @@
  */
 
 /**
- * @see Zend_Gdata
- */
-require_once 'Zend/Gdata.php';
-
-/**
  * Service class for interacting with the services which use the
  * GeoRSS + GML extensions.
  * @link http://georss.org/
  * @link http://www.opengis.net/gml/
  * @link http://code.google.com/apis/picasaweb/reference.html#georss_reference
  *
+ * @uses       Zend_Gdata
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Geo

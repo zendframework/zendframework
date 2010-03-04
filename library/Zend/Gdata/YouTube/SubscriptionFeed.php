@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,20 +21,13 @@
  */
 
 /**
- * @see Zend_Gdata_Media_Feed
- */
-require_once 'Zend/Gdata/Media/Feed.php';
-
-/**
- * @see Zend_Gdata_YouTube_SubscriptionEntry
- */
-require_once 'Zend/Gdata/YouTube/SubscriptionEntry.php';
-
-/**
  * The YouTube video subscription list flavor of an Atom Feed with media support
  * Represents a list of individual subscriptions, where each contained entry is
  * a subscription.
  *
+ * @uses       Zend_Gdata_Media_Feed
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_SubscriptionEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

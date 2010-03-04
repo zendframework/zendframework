@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,15 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_Gbase_Feed
- */
-require_once 'Zend/Gdata/Gbase/Feed.php';
-
-/**
  * Represents the Google Base Customer Items Feed
  *
  * @link http://code.google.com/apis/base/
  *
+ * @uses       Zend_Gdata_Gbase_Feed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gbase

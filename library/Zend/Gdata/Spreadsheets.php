@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,75 +21,26 @@
  */
 
 /**
- * Zend_Gdata
- */
-require_once('Zend/Gdata.php');
-
-/**
- * Zend_Gdata_Spreadsheets_SpreadsheetFeed
- */
-require_once('Zend/Gdata/Spreadsheets/SpreadsheetFeed.php');
-
-/**
- * Zend_Gdata_Spreadsheets_WorksheetFeed
- */
-require_once('Zend/Gdata/Spreadsheets/WorksheetFeed.php');
-
-/**
- * Zend_Gdata_Spreadsheets_CellFeed
- */
-require_once('Zend/Gdata/Spreadsheets/CellFeed.php');
-
-/**
- * Zend_Gdata_Spreadsheets_ListFeed
- */
-require_once('Zend/Gdata/Spreadsheets/ListFeed.php');
-
-/**
- * Zend_Gdata_Spreadsheets_SpreadsheetEntry
- */
-require_once('Zend/Gdata/Spreadsheets/SpreadsheetEntry.php');
-
-/**
- * Zend_Gdata_Spreadsheets_WorksheetEntry
- */
-require_once('Zend/Gdata/Spreadsheets/WorksheetEntry.php');
-
-/**
- * Zend_Gdata_Spreadsheets_CellEntry
- */
-require_once('Zend/Gdata/Spreadsheets/CellEntry.php');
-
-/**
- * Zend_Gdata_Spreadsheets_ListEntry
- */
-require_once('Zend/Gdata/Spreadsheets/ListEntry.php');
-
-/**
- * Zend_Gdata_Spreadsheets_DocumentQuery
- */
-require_once('Zend/Gdata/Spreadsheets/DocumentQuery.php');
-
-/**
- * Zend_Gdata_Spreadsheets_ListQuery
- */
-require_once('Zend/Gdata/Spreadsheets/ListQuery.php');
-
-/**
- * Zend_Gdata_Spreadsheets_CellQuery
- */
-require_once('Zend/Gdata/Spreadsheets/CellQuery.php');
-
-/**
  * Gdata Spreadsheets
  *
  * @link http://code.google.com/apis/gdata/spreadsheets.html
  *
- * @category     Zend
- * @package      Zend_Gdata
- * @subpackage   Spreadsheets
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @uses        Zend_Gdata
+ * @uses        Zend_Gdata_Spreadsheets_CellEntry
+ * @uses        Zend_Gdata_Spreadsheets_CellFeed
+ * @uses        Zend_Gdata_Spreadsheets_CellQuery
+ * @uses        Zend_Gdata_Spreadsheets_DocumentQuery
+ * @uses        Zend_Gdata_Spreadsheets_ListEntry
+ * @uses        Zend_Gdata_Spreadsheets_ListFeed
+ * @uses        Zend_Gdata_Spreadsheets_ListQuery
+ * @uses        Zend_Gdata_Spreadsheets_SpreadsheetEntry
+ * @uses        Zend_Gdata_Spreadsheets_SpreadsheetFeed
+ * @uses        Zend_Gdata_Spreadsheets_WorksheetEntry
+ * @category    Zend
+ * @package     Zend_Gdata
+ * @subpackage  Spreadsheets
+ * @copyright   Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license     http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_Spreadsheets extends Zend_Gdata
 {

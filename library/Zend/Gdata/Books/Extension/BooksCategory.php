@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_App_Extension_Category
- */
-require_once 'Zend/Gdata/App/Extension/Category.php';
-
-/**
  * Describes a books category
  *
+ * @uses       Zend_Gdata_App_Extension_Category
+ * @uses       Zend_Gdata_Books
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

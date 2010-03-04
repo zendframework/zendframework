@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,16 +21,6 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Extension_Who
- */
-require_once 'Zend/Gdata/Extension/Who.php';
-
-/**
  * Data model class for a Google Apps Email List Recipient Entry.
  *
  * Each instance of this class represents a recipient of an email list
@@ -46,6 +35,9 @@ require_once 'Zend/Gdata/Extension/Who.php';
  *
  * This class represents <atom:entry> in the Google Data protocol.
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Extension_Who
+ * @uses       Zend_Gdata_Gapps
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_App_Extension
- */
-require_once 'Zend/Gdata/App/Extension.php';
-
-/**
  * Represents the media:restriction element
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Media
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Media

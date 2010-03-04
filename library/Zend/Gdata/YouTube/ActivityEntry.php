@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,30 +21,15 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_VideoId
- */
-require_once 'Zend/Gdata/YouTube/Extension/VideoId.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Username
- */
-require_once 'Zend/Gdata/YouTube/Extension/Username.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Rating
- */
-require_once 'Zend/Gdata/Extension/Rating.php';
-
-/**
  * A concrete class for working with YouTube user activity entries.
  *
  * @link http://code.google.com/apis/youtube/
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_Extension_Rating
+ * @uses       Zend_Gdata_YouTube_Extension_Username
+ * @uses       Zend_Gdata_YouTube_Extension_VideoId
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

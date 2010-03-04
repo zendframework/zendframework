@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,19 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Photos
- */
-require_once 'Zend/Gdata/Photos.php';
-
-/**
  * Represents the gphoto:height element used by the API.
  * The height of a photo in pixels.
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

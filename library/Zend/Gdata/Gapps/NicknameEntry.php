@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,21 +21,6 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Gapps_Extension_Login
- */
-require_once 'Zend/Gdata/Gapps/Extension/Login.php';
-
-/**
- * @see Zend_Gdata_Gapps_Extension_Nickname
- */
-require_once 'Zend/Gdata/Gapps/Extension/Nickname.php';
-
-/**
  * Data model class for a Google Apps Nickname Entry.
  *
  * Each nickname entry describes a single nickname within a Google Apps
@@ -50,6 +34,10 @@ require_once 'Zend/Gdata/Gapps/Extension/Nickname.php';
  *
  * This class represents <atom:entry> in the Google Data protocol.
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Gapps
+ * @uses       Zend_Gdata_Gapps_Extension_Login
+ * @uses       Zend_Gdata_Gapps_Extension_Nickname
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps

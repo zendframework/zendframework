@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,21 +21,6 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Extension_FeedLink
- */
-require_once 'Zend/Gdata/Extension/FeedLink.php';
-
-/**
- * @see Zend_Gdata_Gapps_Extension_EmailList
- */
-require_once 'Zend/Gdata/Gapps/Extension/EmailList.php';
-
-/**
  * Data model class for a Google Apps Email List Entry.
  *
  * Each email list entry describes a single email list within a Google Apps
@@ -50,6 +34,10 @@ require_once 'Zend/Gdata/Gapps/Extension/EmailList.php';
  *
  * This class represents <atom:entry> in the Google Data protocol.
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Extension_FeedLink
+ * @uses       Zend_Gdata_Gapps
+ * @uses       Zend_Gdata_Gapps_Extension_EmailList
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,51 +21,20 @@
  */
 
 /**
- * @see Zend_Gdata_Media_Extension_MediaGroup
- */
-require_once 'Zend/Gdata/Media/Extension/MediaGroup.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_MediaContent
- */
-require_once 'Zend/Gdata/YouTube/Extension/MediaContent.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Duration
- */
-require_once 'Zend/Gdata/YouTube/Extension/Duration.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_MediaRating
- */
-require_once 'Zend/Gdata/YouTube/Extension/MediaRating.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_MediaCredit
- */
-require_once 'Zend/Gdata/YouTube/Extension/MediaCredit.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Private
- */
-require_once 'Zend/Gdata/YouTube/Extension/Private.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_VideoId
- */
-require_once 'Zend/Gdata/YouTube/Extension/VideoId.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Uploaded
- */
-require_once 'Zend/Gdata/YouTube/Extension/Uploaded.php';
-
-/**
  * This class represents the media:group element of Media RSS.
  * It allows the grouping of media:content elements that are
  * different representations of the same content.  When it exists,
  * it is a child of an Entry (Atom) or Item (RSS).
  *
+ * @uses       Zend_Gdata_Media_Extension_MediaGroup
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_Extension_Duration
+ * @uses       Zend_Gdata_YouTube_Extension_MediaContent
+ * @uses       Zend_Gdata_YouTube_Extension_MediaCredit
+ * @uses       Zend_Gdata_YouTube_Extension_MediaRating
+ * @uses       Zend_Gdata_YouTube_Extension_Private
+ * @uses       Zend_Gdata_YouTube_Extension_Uploaded
+ * @uses       Zend_Gdata_YouTube_Extension_VideoId
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

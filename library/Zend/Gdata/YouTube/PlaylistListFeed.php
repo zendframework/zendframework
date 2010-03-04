@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,20 +21,13 @@
  */
 
 /**
- * @see Zend_Gdata_Media_Feed
- */
-require_once 'Zend/Gdata/Media/Feed.php';
-
-/**
- * @see Zend_Gdata_YouTube_PlaylistListEntry
- */
-require_once 'Zend/Gdata/YouTube/PlaylistListEntry.php';
-
-/**
  * The YouTube video playlist flavor of an Atom Feed with media support
  * Represents a list of individual playlists, where each contained entry is
  * a playlist.
  *
+ * @uses       Zend_Gdata_Media_Feed
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_PlaylistListEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

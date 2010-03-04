@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,24 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Geo
- */
-require_once 'Zend/Gdata/Geo.php';
-
-/**
- * @see Zend_Gdata_Geo_Extension_GmlPoint
- */
-require_once 'Zend/Gdata/Geo/Extension/GmlPoint.php';
-
-
-/**
  * Represents the georss:where element used by the Gdata Geo extensions.
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Geo
+ * @uses       Zend_Gdata_Geo_Extension_GmlPoint
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Geo

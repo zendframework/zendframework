@@ -22,35 +22,16 @@
  */
 
 /**
- * @see Zend_Gdata
- */
-require_once 'Zend/Gdata.php';
-
-/**
- * @see Zend_Gdata_Gbase_ItemFeed
- */
-require_once 'Zend/Gdata/Gbase/ItemFeed.php';
-
-/**
- * @see Zend_Gdata_Gbase_ItemEntry
- */
-require_once 'Zend/Gdata/Gbase/ItemEntry.php';
-
-/**
- * @see Zend_Gdata_Gbase_SnippetEntry
- */
-require_once 'Zend/Gdata/Gbase/SnippetEntry.php';
-
-/**
- * @see Zend_Gdata_Gbase_SnippetFeed
- */
-require_once 'Zend/Gdata/Gbase/SnippetFeed.php';
-
-/**
  * Service class for interacting with the Google Base data API
  *
  * @link http://code.google.com/apis/base
  *
+ * @uses       Zend_Gdata
+ * @uses       Zend_Gdata_App_InvalidArgumentException
+ * @uses       Zend_Gdata_Gbase_ItemEntry
+ * @uses       Zend_Gdata_Gbase_ItemFeed
+ * @uses       Zend_Gdata_Gbase_SnippetFeed
+ * @uses       Zend_Gdata_Gbase_SnippetEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gbase
@@ -134,7 +115,6 @@ class Zend_Gdata_Gbase extends Zend_Gdata
     public function getGbaseItemEntry($location = null)
     {
         if ($location === null) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'Location must not be null');
         } else if ($location instanceof Zend_Gdata_Query) {

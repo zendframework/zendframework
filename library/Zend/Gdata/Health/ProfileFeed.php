@@ -22,15 +22,12 @@
  */
 
 /**
- * @see Zend_Gdata_Feed
- */
-require_once 'Zend/Gdata/Feed.php';
-
-/**
  * Represents a Google Health user's Profile Feed
  *
  * @link http://code.google.com/apis/health/
  *
+ * @uses       Zend_Gdata_Feed
+ * @uses       Zend_Gdata_Health
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Health

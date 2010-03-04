@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,18 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_App_Extension
- */
-require_once 'Zend/Gdata/App/Extension.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Draft
- */
-require_once 'Zend/Gdata/App/Extension/Draft.php';
-
-/**
  * Represents the app:control element
  *
+ * @uses       Zend_Gdata_App_Extension
+ * @uses       Zend_Gdata_App_Extension_Draft
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

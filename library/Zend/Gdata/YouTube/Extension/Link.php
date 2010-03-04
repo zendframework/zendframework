@@ -21,19 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_App_Extension_Link
- */
-require_once 'Zend/Gdata/App/Extension/Link.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Token
- */
-require_once 'Zend/Gdata/YouTube/Extension/Token.php';
-
-
-/**
  * Specialized Link class for use with YouTube. Enables use of yt extension elements.
  *
+ * @uses       Zend_Gdata_App_Extension_Link
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_Extension_Token
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

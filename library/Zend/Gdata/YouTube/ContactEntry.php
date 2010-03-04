@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,19 +21,12 @@
  */
 
 /**
- * @see Zend_Gdata_YouTube_UserProfileEntry
- */
-require_once 'Zend/Gdata/YouTube/UserProfileEntry.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Status
- */
-require_once 'Zend/Gdata/YouTube/Extension/Status.php';
-
-/**
  * The YouTube contacts flavor of an Atom Entry with media support
  * Represents a an individual contact
  *
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_Extension_Status
+ * @uses       Zend_Gdata_YouTube_UserProfileEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

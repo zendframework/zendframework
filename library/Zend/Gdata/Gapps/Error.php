@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,12 +20,6 @@
  * @version    $Id$
  */
 
-
-/**
- * Zend_Gdata_App_Base
- */
-require_once 'Zend/Gdata/App/Base.php';
-
 /**
  * Gdata Gapps Error class. This class is used to represent errors returned
  * within an AppsForYourDomainErrors message received from the Google Apps
@@ -36,6 +29,7 @@ require_once 'Zend/Gdata/App/Base.php';
  * the error code returned by the server. For a list of error codes
  * available at the time of this writing, see getErrorCode.
  *
+ * @uses       Zend_Gdata_App_Base
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gapps

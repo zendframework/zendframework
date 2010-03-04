@@ -1,4 +1,4 @@
-<?php
+<?php;
 
 /**
  * Zend Framework
@@ -22,13 +22,9 @@
  */
 
 /**
- * @see Zend_Gdata_App_Extension
- */
-require_once 'Zend/Gdata/App/Extension.php';
-
-/**
  * Represents a Gdata extension
  *
+ * @uses       Zend_Gdata_App_Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

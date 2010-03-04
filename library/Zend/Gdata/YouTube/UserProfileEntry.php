@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,113 +21,31 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Extension_FeedLink
- */
-require_once 'Zend/Gdata/Extension/FeedLink.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Description
- */
-require_once 'Zend/Gdata/YouTube/Extension/Description.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_AboutMe
- */
-require_once 'Zend/Gdata/YouTube/Extension/AboutMe.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Age
- */
-require_once 'Zend/Gdata/YouTube/Extension/Age.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Username
- */
-require_once 'Zend/Gdata/YouTube/Extension/Username.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Books
- */
-require_once 'Zend/Gdata/YouTube/Extension/Books.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Company
- */
-require_once 'Zend/Gdata/YouTube/Extension/Company.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Hobbies
- */
-require_once 'Zend/Gdata/YouTube/Extension/Hobbies.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Hometown
- */
-require_once 'Zend/Gdata/YouTube/Extension/Hometown.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Location
- */
-require_once 'Zend/Gdata/YouTube/Extension/Location.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Movies
- */
-require_once 'Zend/Gdata/YouTube/Extension/Movies.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Music
- */
-require_once 'Zend/Gdata/YouTube/Extension/Music.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Occupation
- */
-require_once 'Zend/Gdata/YouTube/Extension/Occupation.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_School
- */
-require_once 'Zend/Gdata/YouTube/Extension/School.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Gender
- */
-require_once 'Zend/Gdata/YouTube/Extension/Gender.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Relationship
- */
-require_once 'Zend/Gdata/YouTube/Extension/Relationship.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_FirstName
- */
-require_once 'Zend/Gdata/YouTube/Extension/FirstName.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_LastName
- */
-require_once 'Zend/Gdata/YouTube/Extension/LastName.php';
-
-/**
- * @see Zend_Gdata_YouTube_Extension_Statistics
- */
-require_once 'Zend/Gdata/YouTube/Extension/Statistics.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaThumbnail
- */
-require_once 'Zend/Gdata/Media/Extension/MediaThumbnail.php';
-
-/**
  * Represents the YouTube video playlist flavor of an Atom entry
  *
+ * @uses       Zend_Gdata_App_VersionException
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Extension_FeedLink
+ * @uses       Zend_Gdata_Media_Extension_MediaThumbnail
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_Extension_AboutMe
+ * @uses       Zend_Gdata_YouTube_Extension_Age
+ * @uses       Zend_Gdata_YouTube_Extension_Books
+ * @uses       Zend_Gdata_YouTube_Extension_Company
+ * @uses       Zend_Gdata_YouTube_Extension_Description
+ * @uses       Zend_Gdata_YouTube_Extension_FirstName
+ * @uses       Zend_Gdata_YouTube_Extension_Gender
+ * @uses       Zend_Gdata_YouTube_Extension_Hobbies
+ * @uses       Zend_Gdata_YouTube_Extension_Hometown
+ * @uses       Zend_Gdata_YouTube_Extension_LastName
+ * @uses       Zend_Gdata_YouTube_Extension_Location
+ * @uses       Zend_Gdata_YouTube_Extension_Movies
+ * @uses       Zend_Gdata_YouTube_Extension_Music
+ * @uses       Zend_Gdata_YouTube_Extension_Occupation
+ * @uses       Zend_Gdata_YouTube_Extension_Relationship
+ * @uses       Zend_Gdata_YouTube_Extension_School
+ * @uses       Zend_Gdata_YouTube_Extension_Statistics
+ * @uses       Zend_Gdata_YouTube_Extension_Username
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube
@@ -499,7 +416,6 @@ class Zend_Gdata_YouTube_UserProfileEntry extends Zend_Gdata_Entry
     {
         if (($this->getMajorProtocolVersion() == null) ||
            ($this->getMajorProtocolVersion() == 1)) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The setAboutMe ' .
                 ' method is only supported as of version 2 of the YouTube ' .
                 'API.');
@@ -519,7 +435,6 @@ class Zend_Gdata_YouTube_UserProfileEntry extends Zend_Gdata_Entry
     {
         if (($this->getMajorProtocolVersion() == null) ||
            ($this->getMajorProtocolVersion() == 1)) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The getAboutMe ' .
                 ' method is only supported as of version 2 of the YouTube ' .
                 'API.');
@@ -539,7 +454,6 @@ class Zend_Gdata_YouTube_UserProfileEntry extends Zend_Gdata_Entry
     {
         if (($this->getMajorProtocolVersion() == null) ||
            ($this->getMajorProtocolVersion() == 1)) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The setFirstName ' .
                 ' method is only supported as of version 2 of the YouTube ' .
                 'API.');
@@ -559,7 +473,6 @@ class Zend_Gdata_YouTube_UserProfileEntry extends Zend_Gdata_Entry
     {
         if (($this->getMajorProtocolVersion() == null) ||
            ($this->getMajorProtocolVersion() == 1)) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The getFirstName ' .
                 ' method is only supported as of version 2 of the YouTube ' .
                 'API.');
@@ -579,7 +492,6 @@ class Zend_Gdata_YouTube_UserProfileEntry extends Zend_Gdata_Entry
     {
         if (($this->getMajorProtocolVersion() == null) ||
            ($this->getMajorProtocolVersion() == 1)) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The setLastName ' .
                 ' method is only supported as of version 2 of the YouTube ' .
                 'API.');
@@ -599,7 +511,6 @@ class Zend_Gdata_YouTube_UserProfileEntry extends Zend_Gdata_Entry
     {
         if (($this->getMajorProtocolVersion() == null) ||
            ($this->getMajorProtocolVersion() == 1)) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The getLastName ' .
                 ' method is only supported as of version 2 of the YouTube ' .
                 'API.');
@@ -618,7 +529,6 @@ class Zend_Gdata_YouTube_UserProfileEntry extends Zend_Gdata_Entry
     {
         if (($this->getMajorProtocolVersion() == null) ||
            ($this->getMajorProtocolVersion() == 1)) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The getStatistics ' .
                 ' method is only supported as of version 2 of the YouTube ' .
                 'API.');
@@ -637,7 +547,6 @@ class Zend_Gdata_YouTube_UserProfileEntry extends Zend_Gdata_Entry
     {
         if (($this->getMajorProtocolVersion() == null) ||
            ($this->getMajorProtocolVersion() == 1)) {
-            require_once 'Zend/Gdata/App/VersionException.php';
             throw new Zend_Gdata_App_VersionException('The getThumbnail ' .
                 ' method is only supported as of version 2 of the YouTube ' .
                 'API.');

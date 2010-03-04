@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,18 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_Feed
- */
-require_once 'Zend/Gdata/Feed.php';
-
-/**
- * @see Zend_Gdata_YouTube_ActivityEntry
- */
-require_once 'Zend/Gdata/YouTube/ActivityEntry.php';
-
-/**
  * A feed of user activity entries for YouTube
  *
+ * @uses       Zend_Gdata_Feed
+ * @uses       Zend_Gdata_YouTube
+ * @uses       Zend_Gdata_YouTube_ActivityEntry
  * @link http://code.google.com/apis/youtube/
  * @category   Zend
  * @package    Zend_Gdata

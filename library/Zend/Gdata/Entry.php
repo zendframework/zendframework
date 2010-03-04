@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,18 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata
- */
-require_once 'Zend/Gdata.php';
-
-/**
- * @see Zend_Gdata_App_MediaEntry
- */
-require_once 'Zend/Gdata/App/MediaEntry.php';
-
-/**
  * Represents the Gdata flavor of an Atom entry
  *
+ * @uses       Zend_Gdata
+ * @uses       Zend_Gdata_App_IOException
+ * @uses       Zend_Gdata_App_MediaEntry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
@@ -119,7 +111,6 @@ class Zend_Gdata_Entry extends Zend_Gdata_App_MediaEntry
                 $this->_etag = $etag;
             }
             elseif ($this->_etag != $etag) {
-                require_once('Zend/Gdata/App/IOException.php');
                 throw new Zend_Gdata_App_IOException("ETag mismatch");
             }
             break;

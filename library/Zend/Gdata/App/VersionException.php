@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,15 +21,11 @@
  */
 
 /**
- * Zend_Gdata_App_Exception
- */
-require_once 'Zend/Gdata/App/Exception.php';
-
-/**
  * Gdata APP exceptions
  *
  * Class to represent version exceptions that occur during Gdata APP operations.
  *
+ * @uses       Zend_Gdata_App_Exception
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

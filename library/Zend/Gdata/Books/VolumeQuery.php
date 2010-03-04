@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,18 +21,10 @@
  */
 
 /**
- * Zend_Gdata_Books
- */
-require_once('Zend/Gdata/Books.php');
-
-/**
- * Zend_Gdata_Query
- */
-require_once('Zend/Gdata/Query.php');
-
-/**
  * Assists in constructing queries for Books volumes
  *
+ * @uses       Zend_Gdata_Books
+ * @uses       Zend_Gdata_Query
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

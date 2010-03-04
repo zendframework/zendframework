@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,86 +21,6 @@
  */
 
 /**
- * @see Zend_Gdata_MediaEntry
- */
-require_once 'Zend/Gdata/Media/Entry.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_PhotoId
- */
-require_once 'Zend/Gdata/Photos/Extension/PhotoId.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Version
- */
-require_once 'Zend/Gdata/Photos/Extension/Version.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_AlbumId
- */
-require_once 'Zend/Gdata/Photos/Extension/AlbumId.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Id
- */
-require_once 'Zend/Gdata/Photos/Extension/Id.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Width
- */
-require_once 'Zend/Gdata/Photos/Extension/Width.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Height
- */
-require_once 'Zend/Gdata/Photos/Extension/Height.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Size
- */
-require_once 'Zend/Gdata/Photos/Extension/Size.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Client
- */
-require_once 'Zend/Gdata/Photos/Extension/Client.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Checksum
- */
-require_once 'Zend/Gdata/Photos/Extension/Checksum.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Timestamp
- */
-require_once 'Zend/Gdata/Photos/Extension/Timestamp.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_CommentingEnabled
- */
-require_once 'Zend/Gdata/Photos/Extension/CommentingEnabled.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_CommentCount
- */
-require_once 'Zend/Gdata/Photos/Extension/CommentCount.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_Tags
- */
-require_once 'Zend/Gdata/Exif/Extension/Tags.php';
-
-/**
- * @see Zend_Gdata_Geo_Extension_GeoRssWhere
- */
-require_once 'Zend/Gdata/Geo/Extension/GeoRssWhere.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Category
- */
-require_once 'Zend/Gdata/App/Extension/Category.php';
-
-/**
  * Data model class for a Comment Entry.
  *
  * To transfer user entries to and from the servers, including
@@ -110,6 +29,23 @@ require_once 'Zend/Gdata/App/Extension/Category.php';
  *
  * This class represents <atom:entry> in the Google Data protocol.
  *
+ * @uses       Zend_Gdata_App_Extension_Category
+ * @uses       Zend_Gdata_Exif_Extension_Tags
+ * @uses       Zend_Gdata_Geo_Extension_GeoRssWhere
+ * @uses       Zend_Gdata_MediaEntry
+ * @uses       Zend_Gdata_Photos
+ * @uses       Zend_Gdata_Photos_Extension_AlbumId
+ * @uses       Zend_Gdata_Photos_Extension_Checksum
+ * @uses       Zend_Gdata_Photos_Extension_Client
+ * @uses       Zend_Gdata_Photos_Extension_CommentCount
+ * @uses       Zend_Gdata_Photos_Extension_CommentingEnabled
+ * @uses       Zend_Gdata_Photos_Extension_Height
+ * @uses       Zend_Gdata_Photos_Extension_Id
+ * @uses       Zend_Gdata_Photos_Extension_PhotoId
+ * @uses       Zend_Gdata_Photos_Extension_Size
+ * @uses       Zend_Gdata_Photos_Extension_Timestamp
+ * @uses       Zend_Gdata_Photos_Extension_Version
+ * @uses       Zend_Gdata_Photos_Extension_Width
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

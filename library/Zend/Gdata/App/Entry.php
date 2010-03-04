@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,43 +21,15 @@
  */
 
 /**
- * @see Zend_Gdata_App_FeedEntryParent
- */
-require_once 'Zend/Gdata/App/FeedEntryParent.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Content
- */
-require_once 'Zend/Gdata/App/Extension/Content.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Edited
- */
-require_once 'Zend/Gdata/App/Extension/Edited.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Published
- */
-require_once 'Zend/Gdata/App/Extension/Published.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Source
- */
-require_once 'Zend/Gdata/App/Extension/Source.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Summary
- */
-require_once 'Zend/Gdata/App/Extension/Summary.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Control
- */
-require_once 'Zend/Gdata/App/Extension/Control.php';
-
-/**
  * Concrete class for working with Atom entries.
  *
+ * @uses       Zend_Gdata_App_Extension_Content
+ * @uses       Zend_Gdata_App_Extension_Control
+ * @uses       Zend_Gdata_App_Extension_Edited
+ * @uses       Zend_Gdata_App_Extension_Published
+ * @uses       Zend_Gdata_App_Extension_Source
+ * @uses       Zend_Gdata_App_Extension_Summary
+ * @uses       Zend_Gdata_App_FeedEntryParent
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

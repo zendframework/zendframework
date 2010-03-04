@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,68 +21,20 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Exif
- */
-require_once 'Zend/Gdata/Exif.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_Distance
- */
-require_once 'Zend/Gdata/Exif/Extension/Distance.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_Exposure
- */
-require_once 'Zend/Gdata/Exif/Extension/Exposure.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_Flash
- */
-require_once 'Zend/Gdata/Exif/Extension/Flash.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_FocalLength
- */
-require_once 'Zend/Gdata/Exif/Extension/FocalLength.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_FStop
- */
-require_once 'Zend/Gdata/Exif/Extension/FStop.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_ImageUniqueId
- */
-require_once 'Zend/Gdata/Exif/Extension/ImageUniqueId.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_Iso
- */
-require_once 'Zend/Gdata/Exif/Extension/Iso.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_Make
- */
-require_once 'Zend/Gdata/Exif/Extension/Make.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_Model
- */
-require_once 'Zend/Gdata/Exif/Extension/Model.php';
-
-/**
- * @see Zend_Gdata_Exif_Extension_Time
- */
-require_once 'Zend/Gdata/Exif/Extension/Time.php';
-
-/**
  * Represents the exif:tags element used by the Gdata Exif extensions.
  *
+ * @uses       Zend_Gdata_Exif
+ * @uses       Zend_Gdata_Exif_Extension_Distance
+ * @uses       Zend_Gdata_Exif_Extension_Exposure
+ * @uses       Zend_Gdata_Exif_Extension_Flash
+ * @uses       Zend_Gdata_Exif_Extension_FocalLength
+ * @uses       Zend_Gdata_Exif_Extension_FStop
+ * @uses       Zend_Gdata_Exif_Extension_ImageUniqueId
+ * @uses       Zend_Gdata_Exif_Extension_Iso
+ * @uses       Zend_Gdata_Exif_Extension_Make
+ * @uses       Zend_Gdata_Exif_Extension_Model
+ * @uses       Zend_Gdata_Exif_Extension_Time
+ * @uses       Zend_Gdata_Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Exif

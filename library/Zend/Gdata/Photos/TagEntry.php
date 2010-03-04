@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,21 +21,6 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Weight
- */
-require_once 'Zend/Gdata/Photos/Extension/Weight.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Category
- */
-require_once 'Zend/Gdata/App/Extension/Category.php';
-
-/**
  * Data model class for a Tag Entry.
  *
  * To transfer user entries to and from the servers, including
@@ -45,6 +29,10 @@ require_once 'Zend/Gdata/App/Extension/Category.php';
  *
  * This class represents <atom:entry> in the Google Data protocol.
  *
+ * @uses       Zend_Gdata_App_Extension_Category
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Photos
+ * @uses       Zend_Gdata_Photos_Extension_Weight
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

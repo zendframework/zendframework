@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,71 +21,6 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Access
- */
-require_once 'Zend/Gdata/Photos/Extension/Access.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_BytesUsed
- */
-require_once 'Zend/Gdata/Photos/Extension/BytesUsed.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Location
- */
-require_once 'Zend/Gdata/Photos/Extension/Location.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Name
- */
-require_once 'Zend/Gdata/Photos/Extension/Name.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_NumPhotos
- */
-require_once 'Zend/Gdata/Photos/Extension/NumPhotos.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_NumPhotosRemaining
- */
-require_once 'Zend/Gdata/Photos/Extension/NumPhotosRemaining.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_CommentCount
- */
-require_once 'Zend/Gdata/Photos/Extension/CommentCount.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_CommentingEnabled
- */
-require_once 'Zend/Gdata/Photos/Extension/CommentingEnabled.php';
-
-/**
- * @see Zend_Gdata_Photos_Extension_Id
- */
-require_once 'Zend/Gdata/Photos/Extension/Id.php';
-
-/**
- * @see Zend_Gdata_Geo_Extension_GeoRssWhere
- */
-require_once 'Zend/Gdata/Geo/Extension/GeoRssWhere.php';
-
-/**
- * @see Zend_Gdata_Media_Extension_MediaGroup
- */
-require_once 'Zend/Gdata/Media/Extension/MediaGroup.php';
-
-/**
- * @see Zend_Gdata_App_Extension_Category
- */
-require_once 'Zend/Gdata/App/Extension/Category.php';
-
-/**
  * Data model class for a Photo Album Entry.
  *
  * To transfer user entries to and from the servers, including
@@ -95,6 +29,20 @@ require_once 'Zend/Gdata/App/Extension/Category.php';
  *
  * This class represents <atom:entry> in the Google Data protocol.
  *
+ * @uses       Zend_Gdata_App_Extension_Category
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Geo_Extension_GeoRssWhere
+ * @uses       Zend_Gdata_Media_Extension_MediaGroup
+ * @uses       Zend_Gdata_Photos
+ * @uses       Zend_Gdata_Photos_Extension_Access
+ * @uses       Zend_Gdata_Photos_Extension_BytesUsed
+ * @uses       Zend_Gdata_Photos_Extension_CommentCount
+ * @uses       Zend_Gdata_Photos_Extension_CommentingEnabled
+ * @uses       Zend_Gdata_Photos_Extension_Id
+ * @uses       Zend_Gdata_Photos_Extension_Location
+ * @uses       Zend_Gdata_Photos_Extension_Name
+ * @uses       Zend_Gdata_Photos_Extension_NumPhotos
+ * @uses       Zend_Gdata_Photos_Extension_NumPhotosRemaining
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_App_MediaData
- */
-require_once 'Zend/Gdata/App/BaseMediaSource.php';
-
-/**
  * Concrete class to use a file handle as an attachment within a MediaEntry.
  *
+ * @uses       Zend_Gdata_App_IOException
+ * @uses       Zend_Gdata_App_MediaData
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
@@ -76,14 +72,12 @@ class Zend_Gdata_App_MediaFileSource extends Zend_Gdata_App_BaseMediaSource
             $fileHandle = fopen($this->getFilename(), 'r', true);
             $result = fread($fileHandle, filesize($this->getFilename()));
             if ($result === false) {
-                require_once 'Zend/Gdata/App/IOException.php';
                 throw new Zend_Gdata_App_IOException("Error reading file - " .
                         $this->getFilename() . '. Read failed.');
             }
             fclose($fileHandle);
             return $result;
         } else {
-            require_once 'Zend/Gdata/App/IOException.php';
             throw new Zend_Gdata_App_IOException("Error reading file - " .
                     $this->getFilename() . '. File is not readable.');
         }

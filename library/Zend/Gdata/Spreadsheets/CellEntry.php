@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -13,30 +12,23 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category     Zend
- * @package      Zend_Gdata
- * @subpackage   Spreadsheets
+ * @category   Zend
+ * @package    Zend_Gdata
+ * @subpackage Spreadsheets
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Spreadsheets_Extension_Cell
- */
-require_once 'Zend/Gdata/Spreadsheets/Extension/Cell.php';
-
-/**
  * Concrete class for working with Cell entries.
  *
- * @category     Zend
- * @package      Zend_Gdata
- * @subpackage   Spreadsheets
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Spreadsheets
+ * @uses       Zend_Gdata_Spreadsheets_Extension_Cell
+ * @category   Zend
+ * @package    Zend_Gdata
+ * @subpackage Spreadsheets
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

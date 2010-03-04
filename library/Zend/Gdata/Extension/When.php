@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,18 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Extension_Reminder
- */
-require_once 'Zend/Gdata/Extension/Reminder.php';
-
-/**
  * Represents the gd:when element
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Extension_Reminder
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

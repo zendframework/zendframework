@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,20 +21,12 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Photos
- */
-require_once 'Zend/Gdata/Photos.php';
-
-/**
  * Represents the gphoto:albumid element used by the API. This
  * class represents the ID of an album and is usually contained
  * within an instance of Zend_Gdata_Photos_AlbumEntry or CommentEntry.
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

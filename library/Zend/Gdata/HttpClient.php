@@ -21,16 +21,14 @@
  */
 
 /**
- * Zend_Http_Client
- */
-require_once 'Zend/Http/Client.php';
-
-/**
  * Gdata Http Client object.
  *
  * Class to extend the generic Zend Http Client with the ability to perform
  * secure AuthSub requests
  *
+ * @uses       Zend_Gdata_App_Exception
+ * @uses       Zend_Gdata_App_InvalidArgumentException
+ * @uses       Zend_Http_Client
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata
@@ -95,10 +93,10 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
      * @return void
      */
     public function setAuthSubPrivateKeyFile($file, $passphrase = null,
-                                             $useIncludePath = false) {
+        $useIncludePath = false
+    ) {
         $fp = @fopen($file, "r", $useIncludePath);
         if (!$fp) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException('Failed to open private key file for AuthSub.');
         }
 
@@ -122,9 +120,9 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
      * @throws Zend_Gdata_App_InvalidArgumentException
      * @return Zend_Gdata_HttpClient Provides a fluent interface
      */
-    public function setAuthSubPrivateKey($key, $passphrase = null) {
+    public function setAuthSubPrivateKey($key, $passphrase = null) 
+    {
         if ($key != null && !function_exists('openssl_pkey_get_private')) {
-            require_once 'Zend/Gdata/App/InvalidArgumentException.php';
             throw new Zend_Gdata_App_InvalidArgumentException(
                     'You cannot enable secure AuthSub if the openssl module ' .
                     'is not enabled in your PHP installation.');
@@ -218,7 +216,6 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
                 $signSuccess = openssl_sign($dataToSign, $signature, $pKeyId,
                                             OPENSSL_ALGO_SHA1);
                 if (!$signSuccess) {
-                    require_once 'Zend/Gdata/App/Exception.php';
                     throw new Zend_Gdata_App_Exception(
                             'openssl_signing failure - returned false');
                 }

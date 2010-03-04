@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,20 +21,12 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Photos
- */
-require_once 'Zend/Gdata/Photos.php';
-
-/**
  * Represents the gphoto:client element used by the API.
  * This is an optional field that can be used to indicate the
  * client which created a photo.
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Photos
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Photos

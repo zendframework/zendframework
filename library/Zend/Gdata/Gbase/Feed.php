@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,15 +21,12 @@
  */
 
 /**
- * @see Zend_Gdata_Feed
- */
-require_once 'Zend/Gdata/Feed.php';
-
-/**
  * Base class for the Google Base Feed
  *
  * @link http://code.google.com/apis/base/
  *
+ * @uses       Zend_Gdata_Feed
+ * @uses       Zend_Gdata_Gbase
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gbase

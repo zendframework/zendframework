@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,23 +21,11 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
- * @see Zend_Gdata_Extension_EntryLink
- */
-require_once 'Zend/Gdata/Extension/EntryLink.php';
-
-/**
- * @see Zend_Gdata_Extension_OriginalEvent
- */
-require_once 'Zend/Gdata/Extension/OriginalEvent.php';
-
-/**
  * Data model class to represent an entry's recurrenceException
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_Extension_EntryLink
+ * @uses       Zend_Gdata_Extension_OriginalEvent
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gdata

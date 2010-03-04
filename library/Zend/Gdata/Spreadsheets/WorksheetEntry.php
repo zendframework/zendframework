@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,23 +21,12 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Spreadsheets_Extension_RowCount
- */
-require_once 'Zend/Gdata/Spreadsheets/Extension/RowCount.php';
-
-/**
- * @see Zend_Gdata_Spreadsheets_Extension_ColCount
- */
-require_once 'Zend/Gdata/Spreadsheets/Extension/ColCount.php';
-
-/**
  * Concrete class for working with Worksheet entries.
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Spreadsheets
+ * @uses       Zend_Gdata_Spreadsheets_Extension_ColCount
+ * @uses       Zend_Gdata_Spreadsheets_Extension_RowCount
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets

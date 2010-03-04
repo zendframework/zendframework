@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
  * Describes an entry in a feed of collections
  *
+ * @uses       Zend_Gdata_Books
+ * @uses       Zend_Gdata_Entry
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

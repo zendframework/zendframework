@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_App_Extension_Link
- */
-require_once 'Zend/Gdata/App/Extension/Link.php';
-
-/**
  * Extends the base Link class with Books extensions
  *
+ * @uses       Zend_Gdata_App_Extension_Link
+ * @uses       Zend_Gdata_Books
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Books

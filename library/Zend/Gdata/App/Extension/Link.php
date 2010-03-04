@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,9 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
  * Data model for representing an atom:link element
  *
+ * @uses       Zend_Gdata_App_Extension
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App

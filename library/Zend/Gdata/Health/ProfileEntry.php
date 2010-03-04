@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,20 +21,13 @@
  */
 
 /**
- * @see Zend_Gdata_Entry
- */
-require_once 'Zend/Gdata/Entry.php';
-
-/**
- * @see Zend_Gdata_Health_Extension_Ccr
- */
-require_once 'Zend/Gdata/Health/Extension/Ccr.php';
-
-/**
  * Concrete class for working with Health profile entries.
  *
  * @link http://code.google.com/apis/health/
  *
+ * @uses       Zend_Gdata_Entry
+ * @uses       Zend_Gdata_Health
+ * @uses       Zend_Gdata_Health_Extension_Ccr
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Health

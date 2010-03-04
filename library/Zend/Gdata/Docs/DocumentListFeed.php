@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,14 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_Feed
- */
-require_once 'Zend/Gdata/Feed.php';
-
-
-/**
  * Data model for a Google Documents List feed of documents
  *
+ * @uses       Zend_Gdata_Docs
+ * @uses       Zend_Gdata_Feed
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Docs

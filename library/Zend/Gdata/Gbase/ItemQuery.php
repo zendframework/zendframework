@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,21 +21,12 @@
  */
 
 /**
- * @see Zend_Gdata_Query
- */
-require_once('Zend/Gdata/Query.php');
-
-/**
- * @see Zend_Gdata_Gbase_Query
- */
-require_once('Zend/Gdata/Gbase/Query.php');
-
-
-/**
  * Assists in constructing queries for Google Base Customer Items Feed
  *
  * @link http://code.google.com/apis/base/
  *
+ * @uses       Zend_Gdata_Gbase_Query
+ * @uses       Zend_Gdata_Query
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Gbase

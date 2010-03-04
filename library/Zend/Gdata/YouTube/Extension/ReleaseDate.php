@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,13 +21,10 @@
  */
 
 /**
- * @see Zend_Gdata_Extension
- */
-require_once 'Zend/Gdata/Extension.php';
-
-/**
  * Represents the yt:releaseDate element
  *
+ * @uses       Zend_Gdata_Extension
+ * @uses       Zend_Gdata_YouTube
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage YouTube

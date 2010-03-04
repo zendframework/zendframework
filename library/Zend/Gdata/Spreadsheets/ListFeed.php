@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,12 +21,8 @@
  */
 
 /**
- * @see Zend_Gdata_Feed
- */
-require_once 'Zend/Gdata/Feed.php';
-
-/**
- *
+ * @uses       Zend_Gdata_Feed
+ * @uses       Zend_Gdata_Spreadsheets
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage Spreadsheets

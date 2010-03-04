@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,25 +21,13 @@
  */
 
 /**
- * @see Zend_Gdata_Feed
- */
-require_once 'Zend/Gdata/Feed.php';
-
-/**
- * @see Zend_Gdata_Spreadsheets_Extension_RowCount
- */
-require_once 'Zend/Gdata/Spreadsheets/Extension/RowCount.php';
-
-/**
- * @see Zend_Gdata_Spreadsheets_Extension_ColCount
- */
-require_once 'Zend/Gdata/Spreadsheets/Extension/ColCount.php';
-
-/**
- *
+ * @uses       Zend_Gdata_Feed
+ * @uses       Zend_Gdata_Spreadsheets
+ * @uses       Zend_Gdata_Spreadsheets_Extension_ColCount
+ * @uses       Zend_Gdata_Spreadsheets_Extension_RowCount
  * @category   Zend
  * @package    Zend_Gdata
- * @subpackage   Spreadsheets
+ * @subpackage Spreadsheets
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */

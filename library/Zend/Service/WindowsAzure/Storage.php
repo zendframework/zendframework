@@ -262,7 +262,9 @@ class Zend_Service_WindowsAzure_Storage
 	    
 	    if ($this->_useProxy) {
 	    	$credentials = explode(':', $this->_proxyCredentials);
-	    	
+	    	if(!isset($credentials[1])) {
+	    	    $credentials[1] = '';
+	    	}
 	    	$this->_httpClientChannel->setConfig(array(
 				'proxy_host' => $this->_proxyUrl,
 	    		'proxy_port' => $this->_proxyPort,

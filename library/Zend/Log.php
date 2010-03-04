@@ -227,6 +227,25 @@ class Zend_Log
     }
 
     /**
+     * Packs message and priority into Event array
+     *
+     * @param  string   $message   Message to log
+     * @param  integer  $priority  Priority of message
+     * @return array Event array
+     **/
+    protected function _packEvent($message, $priority)
+    {
+        return array_merge(array(
+            'timestamp'    => date('c'),
+            'message'      => $message,
+            'priority'     => $priority,
+            'priorityName' => $this->_priorities[$priority]
+            ),
+            $this->_extras
+        );
+    }
+
+    /**
      * Class destructor.  Shutdown log writers
      *
      * @return void
@@ -300,11 +319,7 @@ class Zend_Log
         }
 
         // pack into event required by filters and writers
-        $event = array_merge(array('timestamp'    => date('c'),
-                                    'message'      => $message,
-                                    'priority'     => $priority,
-                                    'priorityName' => $this->_priorities[$priority]),
-                              $this->_extras);
+        $event = $this->_packEvent($message, $priority);
 
         // Check to see if any extra information was passed
         if (!empty($extras)) {

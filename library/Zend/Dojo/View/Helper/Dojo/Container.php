@@ -268,11 +268,11 @@ class Zend_Dojo_View_Helper_Dojo_Container
                     $this->registerDojoStylesheet($value);
                     break;
                 case 'enable':
-                	if($value == 0) {
-                		$this->disable();
-                	} else {
-                		$this->enable();
-                	}
+                    if($value) {
+                        $this->enable();
+                    } else {
+                        $this->disable();
+                    }
             }
         }
 

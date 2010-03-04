@@ -205,6 +205,7 @@ class Zend_Validate implements Zend_Validate_Interface
                     if (Zend_Loader::isReadable($file)) {
                         Zend_Loader::loadClass($class);
                         $className = $class;
+                        break;
                     }
                 }
             }

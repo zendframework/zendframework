@@ -66,7 +66,7 @@ class Zend_Application_Resource_Dojo
             $view = $this->getBootstrap()->view;
 
             Zend_Dojo::enableView($view);
-            $view->dojo()->setOptions($this->getOptions())->enable();
+            $view->dojo()->setOptions($this->getOptions());
 
             $this->_dojo = $view->dojo();
         }

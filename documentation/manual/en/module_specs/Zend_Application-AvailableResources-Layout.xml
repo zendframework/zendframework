@@ -15,7 +15,7 @@
 
         <para>
             Below is a sample <acronym>INI</acronym> snippet showing how to
-            configure the navigation resource.
+            configure the layout resource.
         </para>
 
         <programlisting language="ini"><![CDATA[

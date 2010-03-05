@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 19030 -->
+<!-- EN-Revision: 21321 -->
 <sect2 id="zend.application.available-resources.layout">
     <title>Zend_Application_Resource_Layout</title>
 
@@ -16,7 +16,7 @@
         <title>レイアウト構成サンプル</title>
 
         <para>
-            下記は、ナビゲーション・リソースを設定する方法を示す、
+            下記は、レイアウト・リソースを設定する方法を示す、
             <acronym>INI</acronym>スニペット・サンプルです。
         </para>
 

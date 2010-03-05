@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17133 -->
+<!-- EN-Revision: 21194 -->
 <sect1 id="zend.translate.using">
 
     <title>翻訳アダプタの使用法</title>
@@ -11,6 +11,7 @@
 
     <example id="zend.translate.using.example1">
         <title>単一言語の PHP コードの例</title>
+
         <programlisting language="php"><![CDATA[
 print "Example\n";
 print "=======\n";
@@ -177,6 +178,7 @@ print $translate->_(2) . "\n";
                     関連するファイルを分割する必要がありません。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     言語ごとに分けた構造
@@ -200,6 +202,7 @@ print $translate->_(2) . "\n";
                     また、複数のファイルを透過的に使用できます。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     アプリケーションごとに分けた構造
@@ -224,6 +227,7 @@ print $translate->_(2) . "\n";
                     欠点: 同じ言語で複数のファイルを使用する場合に問題が発生します。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                     Gettext 形式の構造
@@ -253,6 +257,7 @@ print $translate->_(2) . "\n";
                     サブディレクトリの中にまたサブディレクトリという構造は不可解でしょう。
                 </para>
             </listitem>
+
             <listitem>
                 <para>
                    ファイル構造のソース

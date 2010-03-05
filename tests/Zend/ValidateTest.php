@@ -36,6 +36,11 @@ require_once 'Zend/Validate.php';
 require_once 'Zend/Validate/Abstract.php';
 
 /**
+ * @see Zend_Translate
+ */
+require_once 'Zend/Translate.php';
+
+/**
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage UnitTests
@@ -208,6 +213,15 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(strlen($message) <= 5);
     }
 
+    public function testSetGetDefaultTranslator()
+    {
+        set_error_handler(array($this, 'errorHandlerIgnore'));
+        $translator = new Zend_Translate('array', array(), 'en');
+        restore_error_handler();
+        Zend_Validate_Abstract::setDefaultTranslator($translator);
+        $this->assertSame($translator->getAdapter(), Zend_Validate_Abstract::getDefaultTranslator());
+    }
+
     /**
      * Handle file not found errors
      *
@@ -221,6 +235,21 @@ class Zend_ValidateTest extends PHPUnit_Framework_TestCase
         if (strstr($errstr, 'No such file')) {
             $this->error = true;
         }
+    }
+
+    /**
+     * Ignores a raised PHP error when in effect, but throws a flag to indicate an error occurred
+     *
+     * @param  integer $errno
+     * @param  string  $errstr
+     * @param  string  $errfile
+     * @param  integer $errline
+     * @param  array   $errcontext
+     * @return void
+     */
+    public function errorHandlerIgnore($errno, $errstr, $errfile, $errline, array $errcontext)
+    {
+        $this->_errorOccurred = true;
     }
 }
 

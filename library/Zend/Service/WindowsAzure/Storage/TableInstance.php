@@ -21,12 +21,7 @@
  */
 
 /**
- * @see Zend_Service_WindowsAzure_Exception
- */
-require_once 'Zend/Service/WindowsAzure/Exception.php';
-
-
-/**
+ * @uses       Zend_Service_WindowsAzure_Exception
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage
@@ -77,7 +72,7 @@ class Zend_Service_WindowsAzure_Storage_TableInstance
             return;
         }
 
-        throw new Exception("Unknown property: " . $name);
+        throw new Zend_Service_WindowsAzure_Exception("Unknown property: " . $name);
     }
 
     /**
@@ -90,6 +85,6 @@ class Zend_Service_WindowsAzure_Storage_TableInstance
             return $this->_data[strtolower($name)];
         }
 
-        throw new Exception("Unknown property: " . $name);
+        throw new Zend_Service_WindowsAzure_Exception("Unknown property: " . $name);
     }
 }

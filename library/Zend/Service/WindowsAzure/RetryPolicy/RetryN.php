@@ -21,16 +21,8 @@
  */
 
 /**
- * @see Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
- */
-require_once 'Zend/Service/WindowsAzure/RetryPolicy/RetryPolicyAbstract.php';
-
-/**
- * @see Zend_Service_WindowsAzure_RetryPolicy_Exception
- */
-require_once 'Zend/Service/WindowsAzure/RetryPolicy/Exception.php';
-
-/**
+ * @uses       Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
+ * @uses       Zend_Service_WindowsAzure_RetryPolicy_Exception
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage RetryPolicy

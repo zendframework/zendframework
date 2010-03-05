@@ -21,15 +21,12 @@
  */
 
 /**
- * @see Zend_Http_Client
- */
-require_once 'Zend/Http/Client.php';
-
-/**
  * This class allows Nirvanix authentication credentials to be specified
  * in one place and provides a factory for returning convenience wrappers
  * around the Nirvanix web service namespaces.
  *
+ * @uses       Zend_Http_Client
+ * @uses       Zend_Loader
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Nirvanix
@@ -88,7 +85,6 @@ class Zend_Service_Nirvanix
         $options = array_merge($this->_options, $options);
 
         if (!class_exists($class)) {
-            require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($class);
         }
         return new $class($options);

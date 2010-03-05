@@ -20,21 +20,12 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Service_Technorati_Author
- */
-require_once 'Zend/Service/Technorati/Author.php';
-
-/**
- * @see Zend_Service_Technorati_Utils
- */
-require_once 'Zend/Service/Technorati/Utils.php';
-
-
 /**
  * Represents a Weblog object successful recognized by Technorati.
  *
+ * @uses       DOMXPath
+ * @uses       Zend_Service_Technorati_Author
+ * @uses       Zend_Service_Technorati_Utils
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati

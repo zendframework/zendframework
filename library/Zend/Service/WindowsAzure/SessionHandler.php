@@ -20,15 +20,10 @@
  * @version    $Id$
  */
 
-/** Zend_Service_WindowsAzure_Storage_Table */
-require_once 'Zend/Service/WindowsAzure/Storage/Table.php';
-
 /**
- * @see Zend_Service_WindowsAzure_Exception
- */
-require_once 'Zend/Service/WindowsAzure/Exception.php';
-
-/**
+ * @uses       Zend_Service_WindowsAzure_Exception
+ * @uses       Zend_Service_WindowsAzure_Storage_DynamicTableEntity
+ * @uses       Zend_Service_WindowsAzure_Storage_Table
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Session

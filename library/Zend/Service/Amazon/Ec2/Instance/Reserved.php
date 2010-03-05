@@ -21,13 +21,9 @@
  */
 
 /**
- * @see Zend_Service_Amazon_Ec2_Abstract
- */
-require_once 'Zend/Service/Amazon/Ec2/Abstract.php';
-
-/**
  * Allows you to interface with the reserved instances on Amazon Ec2
  *
+ * @uses       Zend_Service_Amazon_Ec2_Abstract
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

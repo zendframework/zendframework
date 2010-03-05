@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,14 +20,11 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Service_Amazon_Item
- */
-require_once 'Zend/Service/Amazon/Item.php';
-
-
-/**
+ * @uses       DOMXPath
+ * @uses       OutOfBoundsException
+ * @uses       SeekableIterator
+ * @uses       Zend_Service_Amazon_Item
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon

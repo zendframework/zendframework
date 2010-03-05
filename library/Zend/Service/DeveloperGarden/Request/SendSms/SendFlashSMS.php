@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
- */
-require_once 'Zend/Service/DeveloperGarden/Request/SendSms/SendSmsAbstract.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Request_SendSms_SendSmsAbstract
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

@@ -21,17 +21,8 @@
  */
 
 /**
- * @see Zend_Service_WindowsAzure_Storage_Blob
- */
-require_once 'Zend/Service/WindowsAzure/Storage/Blob.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Exception
- */
-require_once 'Zend/Service/WindowsAzure/Exception.php';
-
-
-/**
+ * @uses       Zend_Service_WindowsAzure_Exception
+ * @uses       Zend_Service_WindowsAzure_Storage_Blob
  * @category   Zend
  * @package    Zend_Service_WindowsAzure_Storage
  * @subpackage Blob

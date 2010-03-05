@@ -21,57 +21,17 @@
  */
 
 /**
- * @see Zend_Service_WindowsAzure_Credentials_CredentialsAbstract_SharedKey
- */
-require_once 'Zend/Service/WindowsAzure/Credentials/SharedKey.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
- */
-require_once 'Zend/Service/WindowsAzure/Credentials/SharedAccessSignature.php';
-
-/**
- * @see Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
- */
-require_once 'Zend/Service/WindowsAzure/RetryPolicy/RetryPolicyAbstract.php';
-
-/**
- * @see Zend_Http_Client
- */
-require_once 'Zend/Http/Client.php';
-
-/**
- * @see Zend_Http_Response
- */
-require_once 'Zend/Http/Response.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Storage
- */
-require_once 'Zend/Service/WindowsAzure/Storage.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Storage_BlobContainer
- */
-require_once 'Zend/Service/WindowsAzure/Storage/BlobContainer.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Storage_BlobInstance
- */
-require_once 'Zend/Service/WindowsAzure/Storage/BlobInstance.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Storage_SignedIdentifier
- */
-require_once 'Zend/Service/WindowsAzure/Storage/SignedIdentifier.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Exception
- */
-require_once 'Zend/Service/WindowsAzure/Exception.php';
-
-
-/**
+ * @uses       Zend_Http_Client
+ * @uses       Zend_Http_Response
+ * @uses       Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+ * @uses       Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
+ * @uses       Zend_Service_WindowsAzure_Exception
+ * @uses       Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
+ * @uses       Zend_Service_WindowsAzure_Storage
+ * @uses       Zend_Service_WindowsAzure_Storage_BlobContainer
+ * @uses       Zend_Service_WindowsAzure_Storage_BlobInstance
+ * @uses       Zend_Service_WindowsAzure_Storage_Blob_Stream
+ * @uses       Zend_Service_WindowsAzure_Storage_SignedIdentifier
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage
@@ -1289,11 +1249,6 @@ class Zend_Service_WindowsAzure_Storage_Blob extends Zend_Service_WindowsAzure_S
      */
     public function registerStreamWrapper($name = 'azure')
     {
-        /**
-         * @see Zend_Service_WindowsAzure_Storage_Blob_Stream
-         */
-        require_once 'Zend/Service/WindowsAzure/Storage/Blob/Stream.php';
-
         stream_register_wrapper($name, 'Zend_Service_WindowsAzure_Storage_Blob_Stream');
         $this->registerAsClient($name);
     }

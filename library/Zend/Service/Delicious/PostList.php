@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,10 +20,16 @@
  * @version    $Id$
  */
 
-
 /**
  * List of posts retrived from the del.icio.us web service
  *
+ * @uses       ArrayAccess
+ * @uses       Countable
+ * @uses       Iterator
+ * @uses       OutOfBoundsException
+ * @uses       Zend_Service_Delicious_Exception
+ * @uses       Zend_Service_Delicious_Post
+ * @uses       Zend_Service_Delicious_SimplePost
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Delicious
@@ -274,10 +279,6 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
      */
     public function offsetSet($offset, $value)
     {
-        /**
-         * @see Zend_Service_Delicious_Exception
-         */
-        require_once 'Zend/Service/Delicious/Exception.php';
         throw new Zend_Service_Delicious_Exception('You are trying to set read-only property');
     }
 
@@ -291,10 +292,6 @@ class Zend_Service_Delicious_PostList implements Countable, Iterator, ArrayAcces
      */
     public function offsetUnset($offset)
     {
-        /**
-         * @see Zend_Service_Delicious_Exception
-         */
-        require_once 'Zend/Service/Delicious/Exception.php';
         throw new Zend_Service_Delicious_Exception('You are trying to unset read-only property');
     }
 }

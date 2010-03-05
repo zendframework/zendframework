@@ -21,13 +21,9 @@
  */
 
 /**
- * @see Zend_Service_Amazon_Ec2_Abstract
- */
-require_once 'Zend/Service/Amazon/Ec2/Abstract.php';
-
-/**
  * An Amazon EC2 interface to create, delete, describe, grand and revoke sercurity permissions.
  *
+ * @uses       Zend_Service_Amazon_Ec2_Abstract
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Response_VoiceButler_CallStatusResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/VoiceButler/CallStatusResponse.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Response_VoiceButler_CallStatusResponse
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

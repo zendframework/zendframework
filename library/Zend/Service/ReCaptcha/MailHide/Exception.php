@@ -19,12 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** @see Zend_Service_ReCaptcha_Exception */
-require_once 'Zend/Service/ReCaptcha/Exception.php';
-
 /**
  * Zend_Service_ReCaptcha_MailHide_Exception
  *
+ * @uses       Zend_Service_ReCaptcha_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage ReCaptcha

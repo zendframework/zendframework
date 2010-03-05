@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_Validate_Ip
- */
-require_once 'Zend/Validate/Ip.php';
-
-/**
+ * @uses       Zend_Validate_Ip
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

@@ -23,6 +23,8 @@
 /**
  * Amazon Ec2 Interface to allow easy creation of the Ec2 Components
  *
+ * @uses       Zend_Loader
+ * @uses       Zend_Service_Amazon_Ec2_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon
@@ -78,7 +80,6 @@ class Zend_Service_Amazon_Ec2
         }
 
         if (!class_exists($class)) {
-            require_once 'Zend/Loader.php';
             Zend_Loader::loadClass($class);
         }
         return new $class($key, $secret_key);

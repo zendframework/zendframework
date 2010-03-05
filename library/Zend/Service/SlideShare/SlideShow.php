@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-
 /**
  * The Zend_Service_SlideShare_SlideShow class represents a slide show on the
  * slideshare.net servers.

@@ -20,21 +20,10 @@
  */
 
 /**
- * @see Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
- */
-require_once 'Zend/Service/WindowsAzure/Credentials/CredentialsAbstract.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Storage
- */
-require_once 'Zend/Service/WindowsAzure/Storage.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Credentials_SharedKey
- */
-require_once 'Zend/Service/WindowsAzure/Credentials/SharedKey.php';
-
-/**
+ * @uses       Zend_Http_Client
+ * @uses       Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+ * @uses       Zend_Service_WindowsAzure_Credentials_SharedKey
+ * @uses       Zend_Service_WindowsAzure_Storage
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

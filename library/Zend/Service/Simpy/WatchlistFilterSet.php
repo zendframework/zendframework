@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,14 +20,10 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Service_Simpy_WatchlistFilter
- */
-require_once 'Zend/Service/Simpy/WatchlistFilter.php';
-
-
-/**
+ * @uses       ArrayIterator
+ * @uses       IteratorAggregate
+ * @uses       Zend_Service_Simpy_WatchlistFilter
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Simpy

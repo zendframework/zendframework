@@ -21,11 +21,8 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Response_ResponseAbstract
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ResponseAbstract.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Response_Exception
+ * @uses       Zend_Service_DeveloperGarden_Response_ResponseAbstract
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -52,7 +49,6 @@ abstract class Zend_Service_DeveloperGarden_Response_SendSms_SendSmsAbstract
     public function parse()
     {
         if ($this->hasError()) {
-            require_once 'Zend/Service/DeveloperGarden/Response/Exception.php';
             throw new Zend_Service_DeveloperGarden_Response_Exception(
                 $this->getErrorMessage(),
                 $this->getErrorCode()

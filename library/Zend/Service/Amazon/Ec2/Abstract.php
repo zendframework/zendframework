@@ -21,23 +21,15 @@
  */
 
 /**
- * @see Zend_Service_Amazon_Abstract
- */
-require_once 'Zend/Service/Amazon/Abstract.php';
-
-/**
- * @see Zend_Service_Amazon_Ec2_Response
- */
-require_once 'Zend/Service/Amazon/Ec2/Response.php';
-
-/**
- * @see Zend_Service_Amazon_Ec2_Exception
- */
-require_once 'Zend/Service/Amazon/Ec2/Exception.php';
-
-/**
  * Provides the basic functionality to send a request to the Amazon Ec2 Query API
  *
+ * @uses       DOMXPath
+ * @uses       Zend_Crypt_Hmac
+ * @uses       Zend_Http_Client
+ * @uses       Zend_Service_Amazon_Abstract
+ * @uses       Zend_Service_Amazon_Exception
+ * @uses       Zend_Service_Amazon_Ec2_Exception
+ * @uses       Zend_Service_Amazon_Ec2_Response
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
@@ -103,7 +95,6 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
         } else {
             // make rue the region is valid
             if(!empty($region) && !in_array(strtolower($region), self::$_validEc2Regions, true)) {
-                require_once 'Zend/Service/Amazon/Exception.php';
                 throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
             }
         }
@@ -124,7 +115,6 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
         if(in_array(strtolower($region), self::$_validEc2Regions, true)) {
             self::$_defaultRegion = $region;
         } else {
-            require_once 'Zend/Service/Amazon/Exception.php';
             throw new Zend_Service_Amazon_Exception('Invalid Amazon Ec2 Region');
         }
     }
@@ -245,7 +235,6 @@ abstract class Zend_Service_Amazon_Ec2_Abstract extends Zend_Service_Amazon_Abst
 
         $data .= implode('&', $arrData);
 
-        require_once 'Zend/Crypt/Hmac.php';
         $hmac = Zend_Crypt_Hmac::compute($this->_getSecretKey(), 'SHA256', $data, Zend_Crypt_Hmac::BINARY);
 
         return base64_encode($hmac);

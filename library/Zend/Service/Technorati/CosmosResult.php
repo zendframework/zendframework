@@ -20,18 +20,13 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Service_Technorati_Result
- */
-require_once 'Zend/Service/Technorati/Result.php';
-
-
 /**
  * Represents a single Technorati Cosmos query result object.
  * It is never returned as a standalone object,
  * but it always belongs to a valid Zend_Service_Technorati_CosmosResultSet object.
  *
+ * @uses       Zend_Service_Technorati_Result
+ * @uses       Zend_Service_Technorati_Utils
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
@@ -99,8 +94,8 @@ class Zend_Service_Technorati_CosmosResult extends Zend_Service_Technorati_Resul
 
         // filter fields
         $this->_nearestPermalink = Zend_Service_Technorati_Utils::normalizeUriHttp($this->_nearestPermalink);
-        $this->_linkUrl = Zend_Service_Technorati_Utils::normalizeUriHttp($this->_linkUrl);
-        $this->_linkCreated = Zend_Service_Technorati_Utils::normalizeDate($this->_linkCreated);
+        $this->_linkUrl          = Zend_Service_Technorati_Utils::normalizeUriHttp($this->_linkUrl);
+        $this->_linkCreated      = Zend_Service_Technorati_Utils::normalizeDate($this->_linkCreated);
     }
 
     /**

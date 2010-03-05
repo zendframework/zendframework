@@ -21,36 +21,13 @@
  */
 
 /**
- * @see Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
- */
-require_once 'Zend/Service/WindowsAzure/Credentials/CredentialsAbstract.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Credentials_SharedKey
- */
-require_once 'Zend/Service/WindowsAzure/Credentials/SharedKey.php';
-
-/**
- * @see Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
- */
-require_once 'Zend/Service/WindowsAzure/RetryPolicy/RetryPolicyAbstract.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Exception
- */
-require_once 'Zend/Service/WindowsAzure/Exception.php';
-
-/**
- * @see Zend_Http_Client
- */
-require_once 'Zend/Http/Client.php';
-
-/**
- * @see Zend_Http_Response
- */
-require_once 'Zend/Http/Response.php';
-
-/**
+ * @uses       Zend_Http_Client
+ * @uses       Zend_Http_Response
+ * @uses       Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+ * @uses       Zend_Service_WindowsAzure_Credentials_SharedKey
+ * @uses       Zend_Service_WindowsAzure_Exception
+ * @uses       Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
+ * @uses       Zend_Service_WindowsAzure_Storage
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage
@@ -177,9 +154,9 @@ class Zend_Service_WindowsAzure_Storage
 	 * @param Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy Retry policy to use when making requests
 	 */
 	public function __construct(
-		$host = self::URL_DEV_BLOB,
-		$accountName = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT,
-		$accountKey = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY,
+		$host            = self::URL_DEV_BLOB,
+		$accountName     = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_ACCOUNT,
+		$accountKey      = Zend_Service_WindowsAzure_Credentials_CredentialsAbstract::DEVSTORE_KEY,
 		$usePathStyleUri = false,
 		Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract $retryPolicy = null
 	) {

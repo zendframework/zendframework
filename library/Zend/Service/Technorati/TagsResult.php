@@ -20,18 +20,12 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Service_Technorati_Result
- */
-require_once 'Zend/Service/Technorati/Result.php';
-
-
 /**
  * Represents a single Technorati TopTags or BlogPostTags query result object.
  * It is never returned as a standalone object,
  * but it always belongs to a valid Zend_Service_Technorati_TagsResultSet object.
  *
+ * @uses       Zend_Service_Technorati_Result
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati

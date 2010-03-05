@@ -20,11 +20,11 @@
  * @version    $Id$
  */
 
-
 /**
  * Represents a single Technorati KeyInfo query result object.
  * It provides information about your Technorati API Key daily usage.
  *
+ * @uses       DOMXPath
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
@@ -67,8 +67,6 @@ class Zend_Service_Technorati_KeyInfoResult
      */
     public function __construct(DomDocument $dom, $apiKey = null)
     {
-        // $this->_dom   = $dom;
-        // $this->_xpath = new DOMXPath($dom);
         $xpath = new DOMXPath($dom);
 
         $this->_apiQueries   = (int) $xpath->query('/tapi/document/result/apiqueries/text()')->item(0)->data;

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -22,11 +21,7 @@
  */
 
 /**
- * @see Zend_Service_Exception
- */
-require_once 'Zend/Service/Exception.php';
-
-/**
+ * @uses       Zend_Service_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage SlideShare

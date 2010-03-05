@@ -21,13 +21,10 @@
  */
 
 /**
- * @see Zend_Service_Amazon_Ec2_Abstract
- */
-require_once 'Zend/Service/Amazon/Ec2/Abstract.php';
-
-/**
  * An Amazon EC2 interface to create, delete and describe Ec2 KeyPairs.
  *
+ * @uses       Zend_Service_Amazon_Ec2_Abstract
+ * @uses       Zend_Service_Amazon_Ec2_Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
@@ -51,7 +48,6 @@ class Zend_Service_Amazon_Ec2_Keypair extends Zend_Service_Amazon_Ec2_Abstract
         $params['Action'] = 'CreateKeyPair';
 
         if(!$keyName) {
-            require_once 'Zend/Service/Amazon/Ec2/Exception.php';
             throw new Zend_Service_Amazon_Ec2_Exception('Invalid Key Name');
         }
 
@@ -121,7 +117,6 @@ class Zend_Service_Amazon_Ec2_Keypair extends Zend_Service_Amazon_Ec2_Abstract
         $params['Action'] = 'DeleteKeyPair';
 
         if(!$keyName) {
-            require_once 'Zend/Service/Amazon/Ec2/Exception.php';
             throw new Zend_Service_Amazon_Ec2_Exception('Invalid Key Name');
         }
 

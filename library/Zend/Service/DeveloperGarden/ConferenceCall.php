@@ -21,301 +21,65 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Client_ClientAbstract
- */
-require_once 'Zend/Service/DeveloperGarden/Client/ClientAbstract.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_CreateConferenceRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/CreateConferenceRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_CreateConferenceResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/CreateConferenceResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_CreateConferenceResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/CreateConferenceResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_NewParticipantRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/NewParticipantRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_NewParticipantResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/NewParticipantResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_NewParticipantResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/NewParticipantResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_GetParticipantStatusRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/GetParticipantStatusRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetParticipantStatusResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetParticipantStatusResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetParticipantStatusResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetParticipantStatusResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_UpdateParticipantRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/UpdateParticipantRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_UpdateParticipantResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/UpdateParticipantResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveParticipantRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/RemoveParticipantRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_RemoveParticipantResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/RemoveParticipantResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceListRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/GetConferenceListRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceListResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetConferenceListResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceListResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetConferenceListResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveConferenceRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/RemoveConferenceRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_RemoveConferenceResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/RemoveConferenceResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_CCSResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/CCSResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceStatusRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/GetConferenceStatusRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceStatusResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetConferenceStatusResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceStatusResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetConferenceStatusResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_GetRunningConferenceRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/GetRunningConferenceRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetRunningConferenceResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetRunningConferenceResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetRunningConferenceResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetRunningConferenceResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceTemplateListRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/GetConferenceTemplateListRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateListResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetConferenceTemplateListResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateListResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetConferenceTemplateListResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_CreateConferenceTemplateRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/CreateConferenceTemplateRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_CreateConferenceTemplateResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/CreateConferenceTemplateResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_CreateConferenceTemplateResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/CreateConferenceTemplateResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceTemplateRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/GetConferenceTemplateRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetConferenceTemplateResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetConferenceTemplateResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveConferenceTemplateRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/RemoveConferenceTemplateRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_RemoveConferenceTemplateResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/RemoveConferenceTemplateResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_UpdateConferenceTemplateRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/UpdateConferenceTemplateRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_UpdateConferenceTemplateResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/UpdateConferenceTemplateResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceTemplateParticipantRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/GetConferenceTemplateParticipantRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateParticipantResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetConferenceTemplateParticipantResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateParticipantResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/GetConferenceTemplateParticipantResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveConferenceTemplateParticipantRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/RemoveConferenceTemplateParticipantRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_RemoveConferenceTemplateParticipantResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/RemoveConferenceTemplateParticipantResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_UpdateConferenceTemplateParticipantRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/UpdateConferenceTemplateParticipantRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_UpdateConferenceTemplateParticipantResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/UpdateConferenceTemplateParticipantResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_AddConferenceTemplateParticipantRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/AddConferenceTemplateParticipantRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_AddConferenceTemplateParticipantResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/AddConferenceTemplateParticipantResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_AddConferenceTemplateParticipantResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/AddConferenceTemplateParticipantResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_CommitConferenceRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/CommitConferenceRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_CommitConferenceResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/CommitConferenceResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_ConferenceCall_UpdateConferenceRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/ConferenceCall/UpdateConferenceRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_UpdateConferenceResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/UpdateConferenceResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_ConferenceCall_ConferenceDetail
- */
-require_once 'Zend/Service/DeveloperGarden/ConferenceCall/ConferenceDetail.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_ConferenceCall_ConferenceSchedule
- */
-require_once 'Zend/Service/DeveloperGarden/ConferenceCall/ConferenceSchedule.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_ConferenceCall_Participant
- */
-require_once 'Zend/Service/DeveloperGarden/ConferenceCall/Participant.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail
- */
-require_once 'Zend/Service/DeveloperGarden/ConferenceCall/ParticipantDetail.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_ConferenceCall_ParticipantStatus
- */
-require_once 'Zend/Service/DeveloperGarden/ConferenceCall/ParticipantStatus.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_ConferenceCall_ConferenceAccount
- */
-require_once 'Zend/Service/DeveloperGarden/ConferenceCall/ConferenceAccount.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Client_ClientAbstract
+ * @uses       Zend_Service_DeveloperGarden_ConferenceCall_ConferenceAccount
+ * @uses       Zend_Service_DeveloperGarden_ConferenceCall_ConferenceDetail
+ * @uses       Zend_Service_DeveloperGarden_ConferenceCall_ConferenceSchedule
+ * @uses       Zend_Service_DeveloperGarden_ConferenceCall_Participant
+ * @uses       Zend_Service_DeveloperGarden_ConferenceCall_ParticipantDetail
+ * @uses       Zend_Service_DeveloperGarden_ConferenceCall_ParticipantStatus
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_AddConferenceTemplateParticipantRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_CommitConferenceRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_CreateConferenceRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_CreateConferenceTemplateRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceListRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceStatusRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceTemplateListRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceTemplateParticipantRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceTemplateRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_GetParticipantStatusRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_GetRunningConferenceRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_NewParticipantRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveConferenceRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveConferenceTemplateParticipantRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveConferenceTemplateRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_RemoveParticipantRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_UpdateConferenceRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_UpdateConferenceTemplateParticipantRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_UpdateConferenceTemplateRequest
+ * @uses       Zend_Service_DeveloperGarden_Request_ConferenceCall_UpdateParticipantRequest
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_AddConferenceTemplateParticipantResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_AddConferenceTemplateParticipantResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_CCSResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_CommitConferenceResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_CreateConferenceResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_CreateConferenceResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_CreateConferenceTemplateResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_CreateConferenceTemplateResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceListResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceListResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceStatusResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceStatusResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateListResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateListResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateParticipantResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateParticipantResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetConferenceTemplateResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetParticipantStatusResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetParticipantStatusResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetRunningConferenceResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_GetRunningConferenceResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_NewParticipantResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_NewParticipantResponseType
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_RemoveConferenceResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_RemoveConferenceTemplateParticipantResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_RemoveConferenceTemplateResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_RemoveParticipantResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_UpdateConferenceResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_UpdateConferenceTemplateParticipantResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_UpdateConferenceTemplateResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_UpdateParticipantResponse
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

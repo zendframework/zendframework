@@ -21,11 +21,7 @@
  */
 
 /**
- * Zend_Service_Response_Exception
- */
-require_once 'Zend/Service/DeveloperGarden/Response/Exception.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Response_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

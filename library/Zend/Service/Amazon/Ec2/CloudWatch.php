@@ -21,14 +21,11 @@
  */
 
 /**
- * @see Zend_Service_Amazon_Ec2_Abstract
- */
-require_once 'Zend/Service/Amazon/Ec2/Abstract.php';
-
-/**
  * An Amazon EC2 interface that allows yout to run, terminate, reboot and describe Amazon
  * Ec2 Instances.
  *
+ * @uses       Zend_Service_Amazon_Ec2_Abstract
+ * @uses       Zend_Service_Amazon_Ec2_Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2

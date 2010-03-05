@@ -21,46 +21,13 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Client_ClientAbstract
- */
-require_once 'Zend/Service/DeveloperGarden/Client/ClientAbstract.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_IpLocation_LocateIPResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/IpLocation/LocateIPResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_IpLocation_LocateIPResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/IpLocation/LocateIPResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_IpLocation_IPAddressLocationType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/IpLocation/IPAddressLocationType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_IpLocation_RegionType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/IpLocation/RegionType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_IpLocation_GeoCoordinatesType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/IpLocation/GeoCoordinatesType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_IpLocation_CityType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/IpLocation/CityType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_IpLocation_LocateIPRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/IpLocation/LocateIPRequest.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Client_ClientAbstract
+ * @uses       Zend_Service_DeveloperGarden_Request_IpLocation_LocateIPRequest
+ * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_CityType
+ * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_GeoCoordinatesType
+ * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_IPAddressLocationType
+ * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_LocateIPResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_IpLocation_LocateIPResponseType
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

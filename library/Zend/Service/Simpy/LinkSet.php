@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,14 +20,11 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Service_Simpy_Link
- */
-require_once 'Zend/Service/Simpy/Link.php';
-
-
-/**
+ * @uses       ArrayIterator
+ * @uses       DOMXPath
+ * @uses       IteratorAggregate
+ * @uses       Zend_Service_Simpy_Link
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Simpy

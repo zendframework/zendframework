@@ -21,14 +21,11 @@
  */
 
 /**
- * @see Zend_Service_Amazon_Ec2_Abstract
- */
-require_once 'Zend/Service/Amazon/Ec2/Abstract.php';
-
-/**
  * An Amazon EC2 interface that allows yout to run, terminate, reboot and describe Amazon
  * Ec2 Instances.
  *
+ * @uses       Zend_Service_Amazon_Ec2_Abstract
+ * @uses       Zend_Service_Amazon_Ec2_Exception
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage Ec2
@@ -108,16 +105,15 @@ class Zend_Service_Amazon_Ec2_Instance extends Zend_Service_Amazon_Ec2_Abstract
     public function run(array $options)
     {
         $_defaultOptions = array(
-            'minCount'  => 1,
-            'maxCount'  => 1,
-            'instanceType' => Zend_Service_Amazon_Ec2_Instance::SMALL
+            'minCount'     => 1,
+            'maxCount'     => 1,
+            'instanceType' => self::SMALL
         );
 
         // set / override the defualt optoins if they are not passed into the array;
         $options = array_merge($_defaultOptions, $options);
 
         if(!isset($options['imageId'])) {
-            require_once 'Zend/Service/Amazon/Ec2/Exception.php';
             throw new Zend_Service_Amazon_Ec2_Exception('No Image Id Provided');
         }
 

@@ -20,13 +20,6 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Service_Technorati_Result
- */
-require_once 'Zend/Service/Technorati/Result.php';
-
-
 /**
  * This is the most essential result set.
  * The scope of this class is to be extended by a query-specific child result set class,
@@ -35,6 +28,10 @@ require_once 'Zend/Service/Technorati/Result.php';
  * Each of the specific result sets represents a collection of query-specific
  * Zend_Service_Technorati_Result objects.
  *
+ * @uses       DOMDocument
+ * @uses       DOMXpath
+ * @uses       OutOfBoundsException
+ * @uses       Zend_Service_Technorati_Result
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,20 +20,9 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Service_Yahoo_ResultSet
- */
-require_once 'Zend/Service/Yahoo/ResultSet.php';
-
-
-/**
- * @see Zend_Service_Yahoo_WebResult
- */
-require_once 'Zend/Service/Yahoo/WebResult.php';
-
-
-/**
+ * @uses       Zend_Service_Yahoo_ResultSet
+ * @uses       Zend_Service_Yahoo_WebResult
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Yahoo

@@ -21,16 +21,9 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Response_ResponseAbstract
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ResponseAbstract.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_SecurityTokenServer_Interface
- */
-require_once 'Zend/Service/DeveloperGarden/Response/SecurityTokenServer/Interface.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Response_ResponseAbstract
+ * @uses       Zend_Service_DeveloperGarden_Response_SecurityTokenServer_Exception
+ * @uses       Zend_Service_DeveloperGarden_Response_SecurityTokenServer_Interface
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -66,7 +59,6 @@ class Zend_Service_DeveloperGarden_Response_SecurityTokenServer_GetTokensRespons
     public function getSecurityToken()
     {
         if (!$this->securityToken instanceof Zend_Service_DeveloperGarden_Response_SecurityTokenServer_SecurityTokenResponse) {
-            require_once 'Zend/Service/DeveloperGarden/Response/SecurityTokenServer/Exception.php';
             throw new Zend_Service_DeveloperGarden_Response_SecurityTokenServer_Exception(
                 'No valid securityToken found.'
             );

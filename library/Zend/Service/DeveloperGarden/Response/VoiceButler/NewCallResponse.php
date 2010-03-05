@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Response_VoiceButler_VoiceButlerAbstract
- */
-require_once 'Zend/Service/DeveloperGarden/Response/VoiceButler/VoiceButlerAbstract.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Response_VoiceButler_VoiceButlerAbstract
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

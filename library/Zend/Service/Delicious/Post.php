@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,21 +20,13 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Date
- */
-require_once 'Zend/Date.php';
-
-/**
- * @see Zend_Service_Delicious_SimplePost
- */
-require_once 'Zend/Service/Delicious/SimplePost.php';
-
-
 /**
  * Zend_Service_Delicious_Post represents a post of a user that can be edited
  *
+ * @uses       Zend_Date
+ * @uses       Zend_Service_Delicious
+ * @uses       Zend_Service_Delicious_Exception
+ * @uses       Zend_Service_Delicious_SimplePost
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Delicious
@@ -88,19 +79,11 @@ class Zend_Service_Delicious_Post extends Zend_Service_Delicious_SimplePost
         }
 
         if (!is_array($values) || !isset($values['url']) || !isset($values['title'])) {
-            /**
-             * @see Zend_Service_Delicious_Exception
-             */
-            require_once 'Zend/Service/Delicious/Exception.php';
             throw new Zend_Service_Delicious_Exception("Second argument must be array with at least 2 keys ('url' and"
                                                      . " 'title')");
         }
 
         if (isset($values['date']) && ! $values['date'] instanceof Zend_Date) {
-            /**
-             * @see Zend_Service_Delicious_Exception
-             */
-            require_once 'Zend/Service/Delicious/Exception.php';
             throw new Zend_Service_Delicious_Exception("Date has to be an instance of Zend_Date");
         }
 
@@ -281,9 +264,6 @@ class Zend_Service_Delicious_Post extends Zend_Service_Delicious_SimplePost
             'notes'  => $node->getAttribute('extended'),
             'others' => (int) $node->getAttribute('others'),
             'tags'   => explode(' ', $node->getAttribute('tag')),
-            /**
-             * @todo replace strtotime() with Zend_Date equivalent
-             */
             'date'   => new Zend_Date(strtotime($node->getAttribute('time'))),
             'shared' => ($node->getAttribute('shared') == 'no' ? false : true),
             'hash'   => $node->getAttribute('hash')

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -23,6 +22,7 @@
 
 
 /**
+ * @uses       DOMXPath
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon

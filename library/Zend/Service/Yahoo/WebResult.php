@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,14 +20,9 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Service_Yahoo_Result
- */
-require_once 'Zend/Service/Yahoo/Result.php';
-
-
-/**
+ * @uses       DOMXPath
+ * @uses       Zend_Service_Yahoo_Result
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Yahoo

@@ -20,10 +20,13 @@
  * @version    $Id$
  */
 
-
 /**
  * Collection of utilities for various Zend_Service_Technorati classes.
  *
+ * @uses       Zend_Date
+ * @uses       Zend_Locale
+ * @uses       Zend_Service_Technorati_Exception
+ * @uses       Zend_Uri
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
@@ -48,10 +51,6 @@ class Zend_Service_Technorati_Utils
             return null;
         }
 
-        /**
-         * @see Zend_Uri
-         */
-        require_once 'Zend/Uri.php';
         if ($input instanceof Zend_Uri_Http) {
             $uri = $input;
         } else {
@@ -60,20 +59,12 @@ class Zend_Service_Technorati_Utils
             }
             // wrap exception under Zend_Service_Technorati_Exception object
             catch (Exception $e) {
-                /**
-                 * @see Zend_Service_Technorati_Exception
-                 */
-                require_once 'Zend/Service/Technorati/Exception.php';
                 throw new Zend_Service_Technorati_Exception($e->getMessage(), 0, $e);
             }
         }
 
         // allow inly Zend_Uri_Http objects or child classes
         if (!($uri instanceof Zend_Uri_Http)) {
-            /**
-             * @see Zend_Service_Technorati_Exception
-             */
-            require_once 'Zend/Service/Technorati/Exception.php';
             throw new Zend_Service_Technorati_Exception(
                 "Invalid URL $uri, only HTTP(S) protocols can be used");
         }
@@ -95,15 +86,6 @@ class Zend_Service_Technorati_Utils
      */
     public static function normalizeDate($input)
     {
-        /**
-         * @see Zend_Date
-         */
-        require_once 'Zend/Date.php';
-        /**
-         * @see Zend_Locale
-         */
-        require_once 'Zend/Locale.php';
-
         // allow null as value and return valid Zend_Date objects
         if (($input === null) || ($input instanceof Zend_Date)) {
             return $input;
@@ -114,10 +96,6 @@ class Zend_Service_Technorati_Utils
         if (@strtotime($input) !== FALSE) {
             return new Zend_Date($input);
         } else {
-            /**
-             * @see Zend_Service_Technorati_Exception
-             */
-            require_once 'Zend/Service/Technorati/Exception.php';
             throw new Zend_Service_Technorati_Exception("'$input' is not a valid Date/Time");
         }
     }

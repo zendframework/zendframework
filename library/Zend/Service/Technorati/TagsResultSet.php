@@ -20,16 +20,11 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Service_Technorati_ResultSet
- */
-require_once 'Zend/Service/Technorati/ResultSet.php';
-
-
 /**
  * Represents a Technorati TopTags or BlogPostTags queries result set.
  *
+ * @uses       Zend_Service_Technorati_ResultSet
+ * @uses       Zend_Service_Technorati_TagsResult
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
@@ -58,10 +53,6 @@ class Zend_Service_Technorati_TagsResultSet extends Zend_Service_Technorati_Resu
      */
     public function current()
     {
-        /**
-         * @see Zend_Service_Technorati_TagsResult
-         */
-        require_once 'Zend/Service/Technorati/TagsResult.php';
         return new Zend_Service_Technorati_TagsResult($this->_results->item($this->_currentIndex));
     }
 }

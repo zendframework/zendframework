@@ -21,14 +21,11 @@
  */
 
 /**
- * @see Zend_Service_Abstract
- */
-require_once 'Zend/Service/Abstract.php';
-
-/**
  * Abstract Amazon class that handles the credentials for any of the Web Services that
  * Amazon offers
  *
+ * @uses       Zend_Service_Abstract
+ * @uses       Zend_Service_Amazon_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon
@@ -88,7 +85,6 @@ abstract class Zend_Service_Amazon_Abstract extends Zend_Service_Abstract
         }
 
         if(!$accessKey || !$secretKey) {
-            require_once 'Zend/Service/Amazon/Exception.php';
             throw new Zend_Service_Amazon_Exception("AWS keys were not supplied");
         }
         $this->_accessKey = $accessKey;

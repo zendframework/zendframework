@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,14 +20,9 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Service_Simpy_WatchlistFilterSet
- */
-require_once 'Zend/Service/Simpy/WatchlistFilterSet.php';
-
-
-/**
+ * @uses       Zend_Service_Simpy_WatchlistFilter
+ * @uses       Zend_Service_Simpy_WatchlistFilterSet
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Simpy

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,14 +20,11 @@
  * @version    $Id$
  */
 
-
 /**
- * @see Zend_Service_Simpy_Tag
- */
-require_once 'Zend/Service/Simpy/Tag.php';
-
-
-/**
+ * @uses       DOMXPath
+ * @uses       ArrayIterator
+ * @uses       IteratorAggregate
+ * @uses       Zend_Service_Simpy_Tag
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Simpy

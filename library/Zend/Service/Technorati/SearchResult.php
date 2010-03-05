@@ -20,18 +20,13 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Service_Technorati_Result
- */
-require_once 'Zend/Service/Technorati/Result.php';
-
-
 /**
  * Represents a single Technorati Search query result object.
  * It is never returned as a standalone object,
  * but it always belongs to a valid Zend_Service_Technorati_SearchResultSet object.
  *
+ * @uses       Zend_Service_Technorati_Result
+ * @uses       Zend_Service_Technorati_Utils
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati
@@ -99,7 +94,7 @@ class Zend_Service_Technorati_SearchResult extends Zend_Service_Technorati_Resul
 
         // filter fields
         $this->_permalink = Zend_Service_Technorati_Utils::normalizeUriHttp($this->_permalink);
-        $this->_created = Zend_Service_Technorati_Utils::normalizeDate($this->_created);
+        $this->_created   = Zend_Service_Technorati_Utils::normalizeDate($this->_created);
     }
 
     /**

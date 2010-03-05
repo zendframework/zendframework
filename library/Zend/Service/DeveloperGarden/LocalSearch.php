@@ -21,31 +21,11 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Client_ClientAbstract
- */
-require_once 'Zend/Service/DeveloperGarden/Client/ClientAbstract.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType
- */
-require_once 'Zend/Service/DeveloperGarden/Response/LocalSearch/LocalSearchResponseType.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Request_LocalSearch_LocalSearchRequest
- */
-require_once 'Zend/Service/DeveloperGarden/Request/LocalSearch/LocalSearchRequest.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/LocalSearch/LocalSearchResponse.php';
-
-/**
- * @see Zend_Service_DeveloperGarden_LocalSearch_SearchParameters
- */
-require_once 'Zend/Service/DeveloperGarden/LocalSearch/SearchParameters.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Client_ClientAbstract
+ * @uses       Zend_Service_DeveloperGarden_LocalSearch_SearchParameters
+ * @uses       Zend_Service_DeveloperGarden_Request_LocalSearch_LocalSearchRequest
+ * @uses       Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponse
+ * @uses       Zend_Service_DeveloperGarden_Response_LocalSearch_LocalSearchResponseType
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

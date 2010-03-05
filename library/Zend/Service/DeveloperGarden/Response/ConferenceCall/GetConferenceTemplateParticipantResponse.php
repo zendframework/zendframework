@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Response_ConferenceCall_ConferenceCallAbstract
- */
-require_once 'Zend/Service/DeveloperGarden/Response/ConferenceCall/ConferenceCallAbstract.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Response_ConferenceCall_ConferenceCallAbstract
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

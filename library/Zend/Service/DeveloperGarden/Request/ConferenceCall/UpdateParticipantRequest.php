@@ -21,11 +21,8 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Request_RequestAbstract
- */
-require_once 'Zend/Service/DeveloperGarden/Request/RequestAbstract.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_ConferenceCall
+ * @uses       Zend_Service_DeveloperGarden_Request_RequestAbstract
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

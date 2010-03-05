@@ -21,11 +21,8 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Request_RequestAbstract
- */
-require_once 'Zend/Service/DeveloperGarden/Request/RequestAbstract.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Request_RequestAbstract
+ * @uses       Zend_Service_DeveloperGarden_Request_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -83,7 +80,6 @@ class Zend_Service_DeveloperGarden_Request_ConferenceCall_GetConferenceListReque
     public function setWhat($what)
     {
         if (!array_key_exists($what, $this->_whatValues)) {
-            require_once 'Zend/Service/DeveloperGarden/Request/Exception.php';
             throw new Zend_Service_DeveloperGarden_Request_Exception('What value not allowed.');
         }
         $this->what = $what;

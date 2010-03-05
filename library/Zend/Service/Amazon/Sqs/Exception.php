@@ -20,14 +20,8 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_Service_Amazon/Exception
- */
-require_once 'Zend/Service/Amazon/Exception.php';
-
-
-/**
+ * @uses       Zend_Service_Amazon_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Amazon_Sqs

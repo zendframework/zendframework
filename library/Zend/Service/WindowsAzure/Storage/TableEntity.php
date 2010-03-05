@@ -21,12 +21,8 @@
  */
 
 /**
- * @see Zend_Service_WindowsAzure_Exception
- */
-require_once 'Zend/Service/WindowsAzure/Exception.php';
-
-
-/**
+ * @uses       ReflectionClass
+ * @uses       Zend_Service_WindowsAzure_Exception
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage

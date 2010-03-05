@@ -21,11 +21,8 @@
  */
 
 /**
- * @see Zend_Validate_Ip
- */
-require_once 'Zend/Validate/Ip.php';
-
-/**
+ * @uses       Zend_Validate_Ip
+ * @uses       Zend_Service_DeveloperGarden_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden
@@ -83,7 +80,6 @@ class Zend_Service_DeveloperGarden_IpLocation_IpAddress
 
         if (!$validator->isValid($ip)) {
             $message = $validator->getMessages();
-            require_once 'Zend/Service/DeveloperGarden/Exception.php';
             throw new Zend_Service_DeveloperGarden_Exception($message['notIpAddress']);
         }
         $this->_address = $ip;
@@ -110,7 +106,6 @@ class Zend_Service_DeveloperGarden_IpLocation_IpAddress
     public function setVersion($version)
     {
         if (!in_array($version, $this->_versionSupported)) {
-            require_once 'Zend/Service/DeveloperGarden/Exception.php';
             throw new Zend_Service_DeveloperGarden_Exception('Ip Version ' . (int)$version . ' is not supported.');
         }
 

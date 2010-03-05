@@ -21,47 +21,15 @@
  */
 
 /**
- * @see Zend_Service_WindowsAzure_Credentials_SharedKey
- */
-require_once 'Zend/Service/WindowsAzure/Credentials/SharedKey.php';
-
-/**
- * @see Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
- */
-require_once 'Zend/Service/WindowsAzure/RetryPolicy/RetryPolicyAbstract.php';
-
-/**
- * @see Zend_Http_Client
- */
-require_once 'Zend/Http/Client.php';
-
-/**
- * @see Zend_Http_Response
- */
-require_once 'Zend/Http/Response.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Storage
- */
-require_once 'Zend/Service/WindowsAzure/Storage.php';
-
-/**
- * Zend_Service_WindowsAzure_Storage_QueueInstance
- */
-require_once 'Zend/Service/WindowsAzure/Storage/QueueInstance.php';
-
-/**
- * Zend_Service_WindowsAzure_Storage_QueueMessage
- */
-require_once 'Zend/Service/WindowsAzure/Storage/QueueMessage.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Exception
- */
-require_once 'Zend/Service/WindowsAzure/Exception.php';
-
-
-/**
+ * @uses       Zend_Http_Client
+ * @uses       Zend_Http_Response
+ * @uses       Zend_Service_WindowsAzure_Credentials_CredentialsAbstract
+ * @uses       Zend_Service_WindowsAzure_Credentials_SharedKey
+ * @uses       Zend_Service_WindowsAzure_Exception
+ * @uses       Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
+ * @uses       Zend_Service_WindowsAzure_Storage
+ * @uses       Zend_Service_WindowsAzure_Storage_QueueInstance
+ * @uses       Zend_Service_WindowsAzure_Storage_QueueMessage
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage

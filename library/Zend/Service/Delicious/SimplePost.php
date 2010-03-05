@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,10 +20,10 @@
  * @version    $Id$
  */
 
-
 /**
  * Represents a publicly available post
  *
+ * @uses       Zend_Service_Delicious_Exception
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Delicious
@@ -63,10 +62,6 @@ class Zend_Service_Delicious_SimplePost
     public function __construct(array $post)
     {
         if (!isset($post['u']) || !isset($post['d'])) {
-            /**
-             * @see Zend_Service_Delicious_Exception
-             */
-            require_once 'Zend/Service/Delicious/Exception.php';
             throw new Zend_Service_Delicious_Exception('Title and URL not set.');
         }
 

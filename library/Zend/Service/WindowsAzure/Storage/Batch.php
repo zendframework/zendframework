@@ -21,16 +21,10 @@
  */
 
 /**
- * @see Zend_Service_WindowsAzure_Exception
- */
-require_once 'Zend/Service/WindowsAzure/Exception.php';
-
-/**
- * @see Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
- */
-require_once 'Zend/Service/WindowsAzure/Storage/BatchStorageAbstract.php';
-
-/**
+ * @uses       Zend_Http_Client
+ * @uses       Zend_Service_WindowsAzure_Exception
+ * @uses       Zend_Service_WindowsAzure_Storage
+ * @uses       Zend_Service_WindowsAzure_Storage_BatchStorageAbstract
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
  * @subpackage Storage

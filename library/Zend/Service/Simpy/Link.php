@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Zend Framework
  *
@@ -21,8 +20,9 @@
  * @version    $Id$
  */
 
-
 /**
+ * @uses       DOMDocument
+ * @uses       DOMXPath
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Simpy

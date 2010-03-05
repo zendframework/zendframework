@@ -20,16 +20,11 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Service_Technorati_Utils
- */
-require_once 'Zend/Service/Technorati/Utils.php';
-
-
 /**
  * Represents a weblog Author object. It usually belongs to a Technorati account.
  *
+ * @uses       DOMXPath
+ * @uses       Zend_Service_Technorati_Utils
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Technorati

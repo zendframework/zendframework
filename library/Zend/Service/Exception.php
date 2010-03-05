@@ -19,14 +19,8 @@
  * @version    $Id$
  */
 
-
 /**
- * Zend_Exception
- */
-require_once 'Zend/Exception.php';
-
-
-/**
+ * @uses       Zend_Exception
  * @category   Zend
  * @package    Zend_Service
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

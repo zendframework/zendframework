@@ -21,11 +21,7 @@
  */
 
 /**
- * @see Zend_Service_DeveloperGarden_Response_VoiceButler_NewCallResponse
- */
-require_once 'Zend/Service/DeveloperGarden/Response/VoiceButler/NewCallResponse.php';
-
-/**
+ * @uses       Zend_Service_DeveloperGarden_Response_VoiceButler_NewCallResponse
  * @category   Zend
  * @package    Zend_Service
  * @subpackage DeveloperGarden

@@ -20,17 +20,6 @@
  * @version    $Id$
  */
 
-
-/** Internally used classes */
-require_once 'Zend/Pdf/Element/Array.php';
-require_once 'Zend/Pdf/Element/Dictionary.php';
-require_once 'Zend/Pdf/Element/Name.php';
-require_once 'Zend/Pdf/Element/Numeric.php';
-
-/** Zend_Pdf_Font */
-require_once 'Zend/Pdf/Font.php';
-
-
 /**
  * FontDescriptor implementation
  *
@@ -40,6 +29,12 @@ require_once 'Zend/Pdf/Font.php';
  * substitute font or select a similar font when the font program is unavailable. The
  * font descriptor may also be used to embed the font program in the PDF file.
  *
+ * @uses       Zend_Pdf_Element_Array
+ * @uses       Zend_Pdf_Element_Dictionary
+ * @uses       Zend_Pdf_Element_Name
+ * @uses       Zend_Pdf_Element_Numeric
+ * @uses       Zend_Pdf_Exception
+ * @uses       Zend_Pdf_Font
  * @package    Zend_Pdf
  * @subpackage Fonts
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -53,7 +48,6 @@ class Zend_Pdf_Resource_Font_FontDescriptor
      */
     public function __construct()
     {
-        require_once 'Zend/Pdf/Exception.php';
         throw new Zend_Pdf_Exception('Zend_Pdf_Resource_Font_FontDescriptor is not intended to be instantiated');
     }
 
@@ -166,7 +160,6 @@ class Zend_Pdf_Resource_Font_FontDescriptor
                     $message = 'This font cannot be embedded in the PDF document. If you would like to use '
                              . 'it anyway, you must pass Zend_Pdf_Font::EMBED_SUPPRESS_EMBED_EXCEPTION '
                              . 'in the $options parameter of the font constructor.';
-                    require_once 'Zend/Pdf/Exception.php';
                     throw new Zend_Pdf_Exception($message, Zend_Pdf_Exception::FONT_CANT_BE_EMBEDDED);
                 }
 

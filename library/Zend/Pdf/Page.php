@@ -19,21 +19,22 @@
  * @version    $Id$
  */
 
-/** Internally used classes */
-require_once 'Zend/Pdf/Element.php';
-require_once 'Zend/Pdf/Element/Array.php';
-require_once 'Zend/Pdf/Element/String/Binary.php';
-require_once 'Zend/Pdf/Element/Boolean.php';
-require_once 'Zend/Pdf/Element/Dictionary.php';
-require_once 'Zend/Pdf/Element/Name.php';
-require_once 'Zend/Pdf/Element/Null.php';
-require_once 'Zend/Pdf/Element/Numeric.php';
-require_once 'Zend/Pdf/Element/String.php';
-
-
 /**
  * PDF Page
  *
+ * @uses       Zend_Pdf
+ * @uses       Zend_Pdf_Element
+ * @uses       Zend_Pdf_ElementFactory
+ * @uses       Zend_Pdf_Element_Array
+ * @uses       Zend_Pdf_Element_Boolean
+ * @uses       Zend_Pdf_Element_Dictionary
+ * @uses       Zend_Pdf_Element_Name
+ * @uses       Zend_Pdf_Element_Null
+ * @uses       Zend_Pdf_Element_Numeric
+ * @uses       Zend_Pdf_Element_String
+ * @uses       Zend_Pdf_Element_String_Binary
+ * @uses       Zend_Pdf_Exception
+ * @uses       Zend_Pdf_Resource_Font_Extracted
  * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -264,7 +265,6 @@ class Zend_Pdf_Page
             if ($param2 !== null) {
                 $this->_objFactory = $param2;
             } else {
-                require_once 'Zend/Pdf/ElementFactory.php';
                 $this->_objFactory = Zend_Pdf_ElementFactory::createFactory(1);
             }
             $this->_attached   = false;
@@ -272,16 +272,16 @@ class Zend_Pdf_Page
 
             switch (strtolower($param1)) {
                 case 'a4':
-                    $param1 = Zend_Pdf_Page::SIZE_A4;
+                    $param1 = self::SIZE_A4;
                     break;
                 case 'a4-landscape':
-                    $param1 = Zend_Pdf_Page::SIZE_A4_LANDSCAPE;
+                    $param1 = self::SIZE_A4_LANDSCAPE;
                     break;
                 case 'letter':
-                    $param1 = Zend_Pdf_Page::SIZE_LETTER;
+                    $param1 = self::SIZE_LETTER;
                     break;
                 case 'letter-landscape':
-                    $param1 = Zend_Pdf_Page::SIZE_LETTER_LANDSCAPE;
+                    $param1 = self::SIZE_LETTER_LANDSCAPE;
                     break;
                 default:
                     // should be in "x:y" or "x:y:" form
@@ -296,7 +296,6 @@ class Zend_Pdf_Page
                  * @todo support of user defined pagesize notations, like:
                  *       "210x297mm", "595x842", "8.5x11in", "612x792"
                  */
-                require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Wrong pagesize notation.');
             }
             /**
@@ -308,7 +307,6 @@ class Zend_Pdf_Page
             if ($param3 !== null) {
                 $this->_objFactory = $param3;
             } else {
-                require_once 'Zend/Pdf/ElementFactory.php';
                 $this->_objFactory = Zend_Pdf_ElementFactory::createFactory(1);
             }
 
@@ -318,13 +316,11 @@ class Zend_Pdf_Page
             $pageHeight = $param2;
 
         } else {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Unrecognized method signature, wrong number of arguments or wrong argument types.');
         }
 
         $this->_pageDictionary = $this->_objFactory->newObject(new Zend_Pdf_Element_Dictionary());
         $this->_pageDictionary->Type         = new Zend_Pdf_Element_Name('Page');
-        require_once 'Zend/Pdf.php';
         $this->_pageDictionary->LastModified = new Zend_Pdf_Element_String(Zend_Pdf::pdfDate());
         $this->_pageDictionary->Resources    = new Zend_Pdf_Element_Dictionary();
         $this->_pageDictionary->MediaBox     = new Zend_Pdf_Element_Array();
@@ -343,7 +339,6 @@ class Zend_Pdf_Page
      */
     public function __clone()
     {
-        require_once 'Zend/Pdf/Exception.php';
         throw new Zend_Pdf_Exception('Cloning Zend_Pdf_Page object using \'clone\' keyword is not supported. Use \'new Zend_Pdf_Page($srcPage)\' syntax');
     }
 
@@ -429,7 +424,6 @@ class Zend_Pdf_Page
     public function flush()
     {
         if ($this->_saveCount != 0) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Saved graphics state is not restored');
         }
 
@@ -496,7 +490,6 @@ class Zend_Pdf_Page
         }
 
         if ($this->_attached) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Page is attached to one documen, but rendered in context of another.');
             /**
              * @todo Page cloning must be implemented here instead of exception.
@@ -570,7 +563,7 @@ class Zend_Pdf_Page
     {
         $this->_addProcSet('PDF');
 
-        if ($pattern === Zend_Pdf_Page::LINE_DASHING_SOLID) {
+        if ($pattern === self::LINE_DASHING_SOLID) {
             $pattern = array();
             $phase   = 0;
         }
@@ -650,11 +643,9 @@ class Zend_Pdf_Page
     {
         if (!in_array($mode, array('Normal', 'Multiply', 'Screen', 'Overlay', 'Darken', 'Lighten', 'ColorDodge',
                                    'ColorBurn', 'HardLight', 'SoftLight', 'Difference', 'Exclusion'))) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Unsupported transparency mode.');
         }
         if (!is_numeric($alpha)  ||  $alpha < 0  ||  $alpha > 1) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Alpha value must be numeric between 0 (transparent) and 1 (opaque).');
         }
 
@@ -677,7 +668,7 @@ class Zend_Pdf_Page
         } while ($resources->ExtGState->$gStateName !== null);
 
 
-        $gStateDictionary = new Zend_Pdf_Element_Dictionary();
+        $gStateDictionary       = new Zend_Pdf_Element_Dictionary();
         $gStateDictionary->Type = new Zend_Pdf_Element_Name('ExtGState');
         $gStateDictionary->BM   = new Zend_Pdf_Element_Name($mode);
         $gStateDictionary->CA   = new Zend_Pdf_Element_Numeric($alpha);
@@ -741,7 +732,6 @@ class Zend_Pdf_Page
 
             if (! ($fontDictionary instanceof Zend_Pdf_Element_Reference  ||
                    $fontDictionary instanceof Zend_Pdf_Element_Object) ) {
-                require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Font dictionary has to be an indirect object or object reference.');
             }
 
@@ -749,10 +739,8 @@ class Zend_Pdf_Page
         }
 
         $fonts = array();
-        require_once 'Zend/Pdf/Exception.php';
         foreach ($fontResourcesUnique as $resourceId => $fontDictionary) {
             try {
-                require_once 'Zend/Pdf/Resource/Font/Extracted.php';
                 // Try to extract font
                 $extractedFont = new Zend_Pdf_Resource_Font_Extracted($fontDictionary);
 
@@ -786,13 +774,11 @@ class Zend_Pdf_Page
 
         $fontResourcesUnique = array();
 
-        require_once 'Zend/Pdf/Exception.php';
         foreach ($fontResources->getKeys() as $fontResourceName) {
             $fontDictionary = $fontResources->$fontResourceName;
 
             if (! ($fontDictionary instanceof Zend_Pdf_Element_Reference  ||
                    $fontDictionary instanceof Zend_Pdf_Element_Object) ) {
-                require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Font dictionary has to be an indirect object or object reference.');
             }
 
@@ -810,7 +796,6 @@ class Zend_Pdf_Page
 
             try {
                 // Try to extract font
-                require_once 'Zend/Pdf/Resource/Font/Extracted.php';
                 return new Zend_Pdf_Resource_Font_Extracted($fontDictionary);
             } catch (Zend_Pdf_Exception $e) {
                 if ($e->getMessage() != 'Unsupported font type.') {
@@ -873,7 +858,6 @@ class Zend_Pdf_Page
     public function restoreGS()
     {
         if ($this->_saveCount-- <= 0) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Restoring graphics state which is not saved');
         }
         $this->_contents .= " Q\n";
@@ -1020,7 +1004,7 @@ class Zend_Pdf_Page
 
         $this->_contents .= $path;
 
-        if ($fillMethod == Zend_Pdf_Page::FILL_METHOD_NON_ZERO_WINDING) {
+        if ($fillMethod == self::FILL_METHOD_NON_ZERO_WINDING) {
             $this->_contents .= " h\n W\nn\n";
         } else {
             // Even-Odd fill method.
@@ -1129,7 +1113,7 @@ class Zend_Pdf_Page
         if ($param5 === null) {
             // drawEllipse($x1, $y1, $x2, $y2);
             $startAngle = null;
-            $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE;
+            $fillType = self::SHAPE_DRAW_FILL_AND_STROKE;
         } else if ($param6 === null) {
             // drawEllipse($x1, $y1, $x2, $y2, $fillType);
             $startAngle = null;
@@ -1141,7 +1125,7 @@ class Zend_Pdf_Page
             $endAngle   = $param6;
 
             if ($param7 === null) {
-                $fillType = Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE;
+                $fillType = self::SHAPE_DRAW_FILL_AND_STROKE;
             } else {
                 $fillType = $param7;
             }
@@ -1216,13 +1200,13 @@ class Zend_Pdf_Page
                          .      $xC->toString() . ' ' . $yUp->toString() . " c\n";
 
         switch ($fillType) {
-            case Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE:
+            case self::SHAPE_DRAW_FILL_AND_STROKE:
                 $this->_contents .= " B*\n";
                 break;
-            case Zend_Pdf_Page::SHAPE_DRAW_FILL:
+            case self::SHAPE_DRAW_FILL:
                 $this->_contents .= " f*\n";
                 break;
-            case Zend_Pdf_Page::SHAPE_DRAW_STROKE:
+            case self::SHAPE_DRAW_STROKE:
                 $this->_contents .= " S\n";
                 break;
         }
@@ -1339,23 +1323,23 @@ class Zend_Pdf_Page
         $this->_contents .= $path;
 
         switch ($fillType) {
-            case Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE:
-                if ($fillMethod == Zend_Pdf_Page::FILL_METHOD_NON_ZERO_WINDING) {
+            case self::SHAPE_DRAW_FILL_AND_STROKE:
+                if ($fillMethod == self::FILL_METHOD_NON_ZERO_WINDING) {
                     $this->_contents .= " b\n";
                 } else {
                     // Even-Odd fill method.
                     $this->_contents .= " b*\n";
                 }
                 break;
-            case Zend_Pdf_Page::SHAPE_DRAW_FILL:
-                if ($fillMethod == Zend_Pdf_Page::FILL_METHOD_NON_ZERO_WINDING) {
+            case self::SHAPE_DRAW_FILL:
+                if ($fillMethod == self::FILL_METHOD_NON_ZERO_WINDING) {
                     $this->_contents .= " h\n f\n";
                 } else {
                     // Even-Odd fill method.
                     $this->_contents .= " h\n f*\n";
                 }
                 break;
-            case Zend_Pdf_Page::SHAPE_DRAW_STROKE:
+            case self::SHAPE_DRAW_STROKE:
                 $this->_contents .= " S\n";
                 break;
         }
@@ -1391,13 +1375,13 @@ class Zend_Pdf_Page
                              .  $widthObj->toString() . ' ' . $height2Obj->toString() . " re\n";
 
         switch ($fillType) {
-            case Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE:
+            case self::SHAPE_DRAW_FILL_AND_STROKE:
                 $this->_contents .= " B*\n";
                 break;
-            case Zend_Pdf_Page::SHAPE_DRAW_FILL:
+            case self::SHAPE_DRAW_FILL:
                 $this->_contents .= " f*\n";
                 break;
-            case Zend_Pdf_Page::SHAPE_DRAW_STROKE:
+            case self::SHAPE_DRAW_STROKE:
                 $this->_contents .= " S\n";
                 break;
         }
@@ -1530,13 +1514,13 @@ class Zend_Pdf_Page
         }
 
         switch ($fillType) {
-            case Zend_Pdf_Page::SHAPE_DRAW_FILL_AND_STROKE:
+            case self::SHAPE_DRAW_FILL_AND_STROKE:
                 $this->_contents .= " B*\n";
                 break;
-            case Zend_Pdf_Page::SHAPE_DRAW_FILL:
+            case self::SHAPE_DRAW_FILL:
                 $this->_contents .= " f*\n";
                 break;
-            case Zend_Pdf_Page::SHAPE_DRAW_STROKE:
+            case self::SHAPE_DRAW_STROKE:
                 $this->_contents .= " S\n";
                 break;
         }
@@ -1558,7 +1542,6 @@ class Zend_Pdf_Page
     public function drawText($text, $x, $y, $charEncoding = '')
     {
         if ($this->_font === null) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Font has not been set');
         }
 

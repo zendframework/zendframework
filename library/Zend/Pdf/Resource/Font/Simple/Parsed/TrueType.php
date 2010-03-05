@@ -20,23 +20,16 @@
  * @version    $Id$
  */
 
-
-/** Internally used classes */
-require_once 'Zend/Pdf/Element/Name.php';
-
-/** Zend_Pdf_Resource_Font_FontDescriptor */
-require_once 'Zend/Pdf/Resource/Font/FontDescriptor.php';
-
-
-/** Zend_Pdf_Resource_Font_Simple_Parsed */
-require_once 'Zend/Pdf/Resource/Font/Simple/Parsed.php';
-
 /**
  * TrueType fonts implementation
  *
  * Font objects should be normally be obtained from the factory methods
  * {@link Zend_Pdf_Font::fontWithName} and {@link Zend_Pdf_Font::fontWithPath}.
  *
+ * @uses       Zend_Pdf_Element_Name
+ * @uses       Zend_Pdf_Font
+ * @uses       Zend_Pdf_Resource_Font_FontDescriptor
+ * @uses       Zend_Pdf_Resource_Font_Simple_Parsed
  * @package    Zend_Pdf
  * @subpackage Fonts
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

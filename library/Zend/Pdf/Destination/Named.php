@@ -20,14 +20,6 @@
  * @version    $Id$
  */
 
-/** Internally used classes */
-require_once 'Zend/Pdf/Element.php';
-require_once 'Zend/Pdf/Element/String.php';
-
-
-/** Zend_Pdf_Destination */
-require_once 'Zend/Pdf/Destination.php';
-
 /**
  * Destination array: [page /Fit]
  *
@@ -37,6 +29,10 @@ require_once 'Zend/Pdf/Destination.php';
  * the smaller of the two, centering the page within the window in the other
  * dimension.
  *
+ * @uses       Zend_Pdf_Destination
+ * @uses       Zend_Pdf_Element
+ * @uses       Zend_Pdf_Element_String
+ * @uses       Zend_Pdf_Exception
  * @package    Zend_Pdf
  * @subpackage Destination
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -60,7 +56,6 @@ class Zend_Pdf_Destination_Named extends Zend_Pdf_Destination
     public function __construct(Zend_Pdf_Element $resource)
     {
         if ($resource->getType() != Zend_Pdf_Element::TYPE_NAME  &&  $resource->getType() != Zend_Pdf_Element::TYPE_STRING) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Named destination resource must be a PDF name or a PDF string.');
         }
 
@@ -75,7 +70,7 @@ class Zend_Pdf_Destination_Named extends Zend_Pdf_Destination
      */
     public static function create($name)
     {
-        return new Zend_Pdf_Destination_Named(new Zend_Pdf_Element_String($name));
+        return new self(new Zend_Pdf_Element_String($name));
     }
 
     /**

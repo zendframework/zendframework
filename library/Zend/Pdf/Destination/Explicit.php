@@ -20,17 +20,12 @@
  * @version    $Id$
  */
 
-
-/** Internally used classes */
-require_once 'Zend/Pdf/Element.php';
-
-
-/** Zend_Pdf_Destination */
-require_once 'Zend/Pdf/Destination.php';
-
 /**
  * Abstract PDF explicit destination representation class
  *
+ * @uses       Zend_Pdf_Destination
+ * @uses       Zend_Pdf_Element
+ * @uses       Zend_Pdf_Exception
  * @package    Zend_Pdf
  * @subpackage Destination
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -61,7 +56,6 @@ abstract class Zend_Pdf_Destination_Explicit extends Zend_Pdf_Destination
     public function __construct(Zend_Pdf_Element $destinationArray)
     {
         if ($destinationArray->getType() != Zend_Pdf_Element::TYPE_ARRAY) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Explicit destination resource Array must be a direct or an indirect array object.');
         }
 
@@ -69,12 +63,10 @@ abstract class Zend_Pdf_Destination_Explicit extends Zend_Pdf_Destination
 
         switch (count($this->_destinationArray->items)) {
             case 0:
-                require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Destination array must contain a page reference.');
                 break;
 
             case 1:
-                require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Destination array must contain a destination type name.');
                 break;
 
@@ -93,7 +85,6 @@ abstract class Zend_Pdf_Destination_Explicit extends Zend_Pdf_Destination
                 break;
 
             default:
-                require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Destination target must be a page number or page dictionary object.');
                 break;
         }

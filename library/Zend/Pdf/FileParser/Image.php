@@ -20,19 +20,11 @@
  * @version    $Id$
  */
 
-
-/** Internally used classes */
-
-/** Zend_Pdf_Image */
-require_once 'Zend/Pdf/Image.php';
-
-
-/** Zend_Pdf_FileParser */
-require_once 'Zend/Pdf/FileParser.php';
-
 /**
  * FileParser for Zend_Pdf_Image subclasses.
  *
+ * @uses       Zend_Pdf_FileParser
+ * @uses       Zend_Pdf_Image
  * @package    Zend_Pdf
  * @subpackage FileParser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

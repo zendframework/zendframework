@@ -20,10 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Exception */
-require_once 'Zend/Exception.php';
-
-
 /**
  * Exception class for Zend_Pdf.
  *
@@ -43,6 +39,7 @@ require_once 'Zend/Exception.php';
  * time. ALWAYS use the symbolic constant names, which are guaranteed never to
  * change, in logical checks! You have been warned.
  *
+ * @uses       Zend_Exception
  * @package    Zend_Pdf
  * @subpackage Core
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

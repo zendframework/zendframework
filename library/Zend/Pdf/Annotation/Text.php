@@ -20,21 +20,17 @@
  * @version    $Id$
  */
 
-/** Internally used classes */
-require_once 'Zend/Pdf/Element.php';
-require_once 'Zend/Pdf/Element/Array.php';
-require_once 'Zend/Pdf/Element/Dictionary.php';
-require_once 'Zend/Pdf/Element/Name.php';
-require_once 'Zend/Pdf/Element/Numeric.php';
-require_once 'Zend/Pdf/Element/String.php';
-
-
-/** Zend_Pdf_Annotation */
-require_once 'Zend/Pdf/Annotation.php';
-
 /**
  * A text annotation represents a "sticky note" attached to a point in the PDF document.
  *
+ * @uses       Zend_Pdf_Annotation
+ * @uses       Zend_Pdf_Element
+ * @uses       Zend_Pdf_Element_Array
+ * @uses       Zend_Pdf_Element_Dictionary
+ * @uses       Zend_Pdf_Element_Name
+ * @uses       Zend_Pdf_Element_Numeric
+ * @uses       Zend_Pdf_Element_String
+ * @uses       Zend_Pdf_Exception
  * @package    Zend_Pdf
  * @subpackage Annotation
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -50,14 +46,12 @@ class Zend_Pdf_Annotation_Text extends Zend_Pdf_Annotation
     public function __construct(Zend_Pdf_Element $annotationDictionary)
     {
         if ($annotationDictionary->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Annotation dictionary resource has to be a dictionary.');
         }
 
         if ($annotationDictionary->Subtype === null  ||
             $annotationDictionary->Subtype->getType() != Zend_Pdf_Element::TYPE_NAME  ||
             $annotationDictionary->Subtype->value != 'Text') {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Subtype => Text entry is requires');
         }
 
@@ -90,6 +84,6 @@ class Zend_Pdf_Annotation_Text extends Zend_Pdf_Annotation
 
         $annotationDictionary->Contents = new Zend_Pdf_Element_String($text);
 
-        return new Zend_Pdf_Annotation_Text($annotationDictionary);
+        return new self($annotationDictionary);
     }
 }

@@ -20,22 +20,18 @@
  * @version    $Id$
  */
 
-/** Internally used classes */
-require_once 'Zend/Pdf/Element/Dictionary.php';
-require_once 'Zend/Pdf/Element/Name.php';
-require_once 'Zend/Pdf/Element/String.php';
-require_once 'Zend/Pdf/Element/Boolean.php';
-
-
-/** Zend_Pdf_Action */
-require_once 'Zend/Pdf/Action.php';
-
-
 /**
  * PDF 'Resolve a uniform resource identifier' action
  *
  * A URI action causes a URI to be resolved.
  *
+ * @uses       SplObjectStorage
+ * @uses       Zend_Pdf_Action
+ * @uses       Zend_Pdf_Element_Boolean
+ * @uses       Zend_Pdf_Element_Dictionary
+ * @uses       Zend_Pdf_Element_Name
+ * @uses       Zend_Pdf_Element_String
+ * @uses       Zend_Pdf_Exception
  * @package    Zend_Pdf
  * @subpackage Actions
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -55,7 +51,6 @@ class Zend_Pdf_Action_URI extends Zend_Pdf_Action
         parent::__construct($dictionary, $processedActions);
 
         if ($dictionary->URI === null) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('URI action dictionary entry is required');
         }
     }
@@ -71,7 +66,6 @@ class Zend_Pdf_Action_URI extends Zend_Pdf_Action
     {
         $scheme = parse_url((string)$uri, PHP_URL_SCHEME);
         if ($scheme === false || $scheme === null) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Invalid URI');
         }
     }
@@ -87,7 +81,7 @@ class Zend_Pdf_Action_URI extends Zend_Pdf_Action
     {
         self::_validateUri($uri);
 
-        $dictionary = new Zend_Pdf_Element_Dictionary();
+        $dictionary       = new Zend_Pdf_Element_Dictionary();
         $dictionary->Type = new Zend_Pdf_Element_Name('Action');
         $dictionary->S    = new Zend_Pdf_Element_Name('URI');
         $dictionary->Next = null;
@@ -96,7 +90,7 @@ class Zend_Pdf_Action_URI extends Zend_Pdf_Action
             $dictionary->IsMap = new Zend_Pdf_Element_Boolean(true);
         }
 
-        return new Zend_Pdf_Action_URI($dictionary, new SplObjectStorage());
+        return new self($dictionary, new SplObjectStorage());
     }
 
     /**

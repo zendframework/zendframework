@@ -19,17 +19,11 @@
  * @version    $Id$
  */
 
-
-/** Internally used classes */
-require_once 'Zend/Pdf.php';
-
-
-/** Zend_Pdf_Element */
-require_once 'Zend/Pdf/Element.php';
-
 /**
  * PDF file 'stream' element implementation
  *
+ * @uses       Zend_Pdf
+ * @uses       Zend_Pdf_Element
  * @category   Zend
  * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

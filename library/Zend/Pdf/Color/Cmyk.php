@@ -19,16 +19,11 @@
  * @version    $Id$
  */
 
-/** Internally used classes */
-require_once 'Zend/Pdf/Element/Numeric.php';
-
-
-/** Zend_Pdf_Color */
-require_once 'Zend/Pdf/Color.php';
-
 /**
  * CMYK color implementation
  *
+ * @uses       Zend_Pdf_Color
+ * @uses       Zend_Pdf_Element_Numeric
  * @category   Zend
  * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

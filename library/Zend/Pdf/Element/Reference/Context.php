@@ -19,7 +19,6 @@
  * @version    $Id$
  */
 
-
 /**
  * PDF reference object context
  * Reference context is defined by PDF parser and PDF Refernce table

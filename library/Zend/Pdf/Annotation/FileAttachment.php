@@ -20,22 +20,18 @@
  * @version    $Id$
  */
 
-/** Internally used classes */
-require_once 'Zend/Pdf/Element.php';
-require_once 'Zend/Pdf/Element/Array.php';
-require_once 'Zend/Pdf/Element/Dictionary.php';
-require_once 'Zend/Pdf/Element/Name.php';
-require_once 'Zend/Pdf/Element/Numeric.php';
-require_once 'Zend/Pdf/Element/String.php';
-
-
-/** Zend_Pdf_Annotation */
-require_once 'Zend/Pdf/Annotation.php';
-
 /**
  * A file attachment annotation contains a reference to a file,
  * which typically is embedded in the PDF file.
  *
+ * @uses       Zend_Pdf_Annotation
+ * @uses       Zend_Pdf_Element
+ * @uses       Zend_Pdf_Element_Array
+ * @uses       Zend_Pdf_Element_Dictionary
+ * @uses       Zend_Pdf_Element_Name
+ * @uses       Zend_Pdf_Element_Numeric
+ * @uses       Zend_Pdf_Element_String
+ * @uses       Zend_Pdf_Exception
  * @package    Zend_Pdf
  * @subpackage Annotation
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -51,14 +47,12 @@ class Zend_Pdf_Annotation_FileAttachment extends Zend_Pdf_Annotation
     public function __construct(Zend_Pdf_Element $annotationDictionary)
     {
         if ($annotationDictionary->getType() != Zend_Pdf_Element::TYPE_DICTIONARY) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Annotation dictionary resource has to be a dictionary.');
         }
 
         if ($annotationDictionary->Subtype === null  ||
             $annotationDictionary->Subtype->getType() != Zend_Pdf_Element::TYPE_NAME  ||
             $annotationDictionary->Subtype->value != 'FileAttachment') {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Subtype => FileAttachment entry is requires');
         }
 
@@ -96,6 +90,6 @@ class Zend_Pdf_Annotation_FileAttachment extends Zend_Pdf_Annotation
         $annotationDictionary->FS = $fsDictionary;
 
 
-        return new Zend_Pdf_Annotation_FileAttachment($annotationDictionary);
+        return new self($annotationDictionary);
     }
 }

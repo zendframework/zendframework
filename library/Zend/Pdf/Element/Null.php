@@ -19,14 +19,10 @@
  * @version    $Id$
  */
 
-
-/** Zend_Pdf_Element */
-require_once 'Zend/Pdf/Element.php';
-
-
 /**
  * PDF file 'null' element implementation
  *
+ * @uses       Zend_Pdf_Element
  * @category   Zend
  * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

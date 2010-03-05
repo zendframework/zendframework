@@ -19,14 +19,10 @@
  * @version    $Id$
  */
 
-
-/** Zend_Pdf_Element_String */
-require_once 'Zend/Pdf/Element/String.php';
-
-
 /**
  * PDF file 'binary string' element implementation
  *
+ * @uses       Zend_Pdf_Element_String
  * @category   Zend
  * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -20,16 +20,6 @@
  * @version    $Id$
  */
 
-
-/** Internally used classes */
-require_once 'Zend/Pdf/Element/Array.php';
-require_once 'Zend/Pdf/Element/Name.php';
-require_once 'Zend/Pdf/Element/Numeric.php';
-
-
-/** Zend_Pdf_Destination_Explicit */
-require_once 'Zend/Pdf/Destination/Explicit.php';
-
 /**
  * Zend_Pdf_Destination_FitBoundingBoxHorizontally explicit detination
  *
@@ -40,6 +30,11 @@ require_once 'Zend/Pdf/Destination/Explicit.php';
  * magnified just enough to fit the entire width of its bounding box within the
  * window.
  *
+ * @uses       Zend_Pdf_Destination_Explicit
+ * @uses       Zend_Pdf_Element_Array
+ * @uses       Zend_Pdf_Element_Name
+ * @uses       Zend_Pdf_Element_Numeric
+ * @uses       Zend_Pdf_Exception
  * @package    Zend_Pdf
  * @subpackage Destination
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -64,14 +59,13 @@ class Zend_Pdf_Destination_FitBoundingBoxHorizontally extends Zend_Pdf_Destinati
         } else if (is_integer($page)) {
             $destinationArray->items[] = new Zend_Pdf_Element_Numeric($page);
         } else {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Page entry must be a Zend_Pdf_Page object or a page number.');
         }
 
         $destinationArray->items[] = new Zend_Pdf_Element_Name('FitBH');
         $destinationArray->items[] = new Zend_Pdf_Element_Numeric($top);
 
-        return new Zend_Pdf_Destination_FitBoundingBoxHorizontally($destinationArray);
+        return new self($destinationArray);
     }
 
     /**

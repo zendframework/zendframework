@@ -20,17 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_Resource */
-require_once 'Zend/Pdf/Resource.php';
-
-/**
- * Zend_Pdf_Font
- *
- * Zend_Pdf_Font class constants are used within Zend_Pdf_Resource_Font
- * and its subclusses.
- */
-require_once 'Zend/Pdf/Font.php';
-
 /**
  * Abstract class which manages PDF fonts.
  *
@@ -42,6 +31,10 @@ require_once 'Zend/Pdf/Font.php';
  * Font objects should be normally be obtained from the factory methods
  * {@link Zend_Pdf_Font::fontWithName} and {@link Zend_Pdf_Font::fontWithPath}.
  *
+ * @uses       Zend_Pdf_Element_Dictionary
+ * @uses       Zend_Pdf_Element_Name
+ * @uses       Zend_Pdf_Font
+ * @uses       Zend_Pdf_Resource
  * @package    Zend_Pdf
  * @subpackage Fonts
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

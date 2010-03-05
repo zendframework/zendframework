@@ -20,10 +20,6 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_Cmap */
-require_once 'Zend/Pdf/Cmap.php';
-
-
 /**
  * Implements the "byte encoding" character map (type 0).
  *
@@ -34,6 +30,8 @@ require_once 'Zend/Pdf/Cmap.php';
  * The mapping from Mac Roman to Unicode can be found at
  * {@link http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/ROMAN.TXT}.
  *
+ * @uses       Zend_Pdf_Cmap
+ * @uses       Zend_Pdf_Exception
  * @package    Zend_Pdf
  * @subpackage Fonts
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -150,7 +148,6 @@ class Zend_Pdf_Cmap_ByteEncoding extends Zend_Pdf_Cmap
          */
         $actualLength = strlen($cmapData);
         if ($actualLength != 262) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Insufficient table data',
                                          Zend_Pdf_Exception::CMAP_TABLE_DATA_TOO_SMALL);
         }
@@ -159,14 +156,12 @@ class Zend_Pdf_Cmap_ByteEncoding extends Zend_Pdf_Cmap
          */
         $type = $this->_extractUInt2($cmapData, 0);
         if ($type != Zend_Pdf_Cmap::TYPE_BYTE_ENCODING) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Wrong cmap table type',
                                          Zend_Pdf_Exception::CMAP_WRONG_TABLE_TYPE);
         }
 
         $length = $this->_extractUInt2($cmapData, 2);
         if ($length != $actualLength) {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("Table length ($length) does not match actual length ($actualLength)",
                                          Zend_Pdf_Exception::CMAP_WRONG_TABLE_LENGTH);
         }

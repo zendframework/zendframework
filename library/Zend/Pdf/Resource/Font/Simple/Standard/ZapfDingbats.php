@@ -20,14 +20,6 @@
  * @version    $Id$
  */
 
-
-/** Internally used classes */
-require_once 'Zend/Pdf/Element/Name.php';
-
-
-/** Zend_Pdf_Resource_Font_Simple_Standard */
-require_once 'Zend/Pdf/Resource/Font/Simple/Standard.php';
-
 /**
  * Implementation for the standard PDF font ZapfDingbats.
  *
@@ -41,6 +33,10 @@ require_once 'Zend/Pdf/Resource/Font/Simple/Standard.php';
  * standard fonts. You should modify the script and regenerate the classes
  * instead of changing this class file by hand.
  *
+ * @uses       Zend_Pdf_Cmap
+ * @uses       Zend_Pdf_Element_Name
+ * @uses       Zend_Pdf_Font
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard
  * @package    Zend_Pdf
  * @subpackage Fonts
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -372,7 +368,6 @@ class Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats extends Zend_Pdf_Resou
           0x27b5 =>   0xc1, 0x27b6 =>   0xc2, 0x27b7 =>   0xc3, 0x27b8 =>   0xc4,
           0x27b9 =>   0xc5, 0x27ba =>   0xc6, 0x27bb =>   0xc7, 0x27bc =>   0xc8,
           0x27bd =>   0xc9, 0x27be =>   0xca);
-        require_once 'Zend/Pdf/Cmap.php';
         $this->_cmap = Zend_Pdf_Cmap::cmapWithTypeData(
             Zend_Pdf_Cmap::TYPE_BYTE_ENCODING_STATIC, $cmapData);
 

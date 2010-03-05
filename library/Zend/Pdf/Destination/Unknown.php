@@ -20,13 +20,10 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_Destination_Explicit */
-require_once 'Zend/Pdf/Destination/Explicit.php';
-
-
 /**
  * Unrecognized explicit destination representation class
  *
+ * @uses       Zend_Pdf_Destination_Explicit
  * @package    Zend_Pdf
  * @subpackage Destination
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

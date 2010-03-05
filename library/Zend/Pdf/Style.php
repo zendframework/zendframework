@@ -19,13 +19,15 @@
  * @version    $Id$
  */
 
-
 /**
  * Style object.
  * Style object doesn't directly correspond to any PDF file object.
  * It's utility class, used as a container for style information.
  * It's used by Zend_Pdf_Page class in draw operations.
  *
+ * @uses       Zend_Pdf_Element_Array
+ * @uses       Zend_Pdf_Element_Numeric
+ * @uses       Zend_Pdf_Page
  * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -134,7 +136,6 @@ class Zend_Pdf_Style
      */
     public function setLineWidth($width)
     {
-        require_once 'Zend/Pdf/Element/Numeric.php';
         $this->_lineWidth = new Zend_Pdf_Element_Numeric($width);
     }
 
@@ -147,13 +148,11 @@ class Zend_Pdf_Style
      */
     public function setLineDashingPattern($pattern, $phase = 0)
     {
-        require_once 'Zend/Pdf/Page.php';
         if ($pattern === Zend_Pdf_Page::LINE_DASHING_SOLID) {
             $pattern = array();
             $phase   = 0;
         }
 
-        require_once 'Zend/Pdf/Element/Numeric.php';
         $this->_lineDashingPattern = $pattern;
         $this->_lineDashingPhase   = new Zend_Pdf_Element_Numeric($phase);
     }
@@ -275,10 +274,8 @@ class Zend_Pdf_Style
         }
 
         if ($this->_lineDashingPattern !== null) {
-            require_once 'Zend/Pdf/Element/Array.php';
             $dashPattern = new Zend_Pdf_Element_Array();
 
-            require_once 'Zend/Pdf/Element/Numeric.php';
             foreach ($this->_lineDashingPattern as $dashItem) {
                 $dashElement = new Zend_Pdf_Element_Numeric($dashItem);
                 $dashPattern->items[] = $dashElement;

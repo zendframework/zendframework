@@ -20,12 +20,15 @@
  * @version    $Id$
  */
 
-
 /**
  * Abstract PDF outline representation class
  *
  * @todo Implement an ability to associate an outline item with a structure element (PDF 1.3 feature)
  *
+ * @uses       Countable
+ * @uses       RecursiveIterator
+ * @uses       Zend_Pdf_Exception
+ * @uses       Zend_Pdf_Outline_Created
  * @package    Zend_Pdf
  * @subpackage Outlines
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -198,7 +201,6 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
                     break;
 
                 default:
-                    require_once 'Zend/Pdf/Exception.php';
                     throw new Zend_Pdf_Exception("Unknown option name - '$key'.");
                     break;
             }
@@ -229,10 +231,8 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
      */
     public static function create($param1, $param2 = null)
     {
-        require_once 'Zend/Pdf/Outline/Created.php';
         if (is_string($param1)) {
             if ($param2 !== null  &&  !($param2 instanceof Zend_Pdf_Target  ||  is_string($param2))) {
-                require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Outline create method takes $title (string) and $target (Zend_Pdf_Target or string) or an array as an input');
             }
 
@@ -240,7 +240,6 @@ abstract class Zend_Pdf_Outline implements RecursiveIterator, Countable
                                                       'target' => $param2));
         } else {
             if (!is_array($param1)  ||  $param2 !== null) {
-                require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception('Outline create method takes $title (string) and $destination (Zend_Pdf_Destination) or an array as an input');
             }
 

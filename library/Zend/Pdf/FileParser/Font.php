@@ -20,13 +20,6 @@
  * @version    $Id$
  */
 
-/** Internally used classes */
-require_once 'Zend/Pdf/Font.php';
-
-
-/** Zend_Pdf_FileParser */
-require_once 'Zend/Pdf/FileParser.php';
-
 /**
  * Abstract helper class for {@link Zend_Pdf_Font} that parses font files.
  *
@@ -34,6 +27,9 @@ require_once 'Zend/Pdf/FileParser.php';
  * for parsing the raw binary data from the font file on disk. Also provides
  * a debug logging interface and a couple of shared utility methods.
  *
+ * @uses       Zend_Log
+ * @uses       Zend_Pdf_FileParser
+ * @uses       Zend_Pdf_Font
  * @package    Zend_Pdf
  * @subpackage FileParser
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -210,7 +206,6 @@ abstract class Zend_Pdf_FileParser_Font extends Zend_Pdf_FileParser
             $message = vsprintf($message, $args);
         }
 
-        require_once 'Zend/Log.php';
         $logger = new Zend_Log();
         $logger->log($message, Zend_Log::DEBUG);
     }

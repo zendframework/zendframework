@@ -20,21 +20,16 @@
  * @version    $Id$
  */
 
-
-/** Internally used classes */
-require_once 'Zend/Pdf/Element/Array.php';
-require_once 'Zend/Pdf/Element/Name.php';
-require_once 'Zend/Pdf/Element/Numeric.php';
-
-
-/** Zend_Pdf_Resource_Font_Simple */
-require_once 'Zend/Pdf/Resource/Font/Simple.php';
-
 /**
  * Parsed and (optionaly) embedded fonts implementation
  *
  * OpenType fonts can contain either TrueType or PostScript Type 1 outlines.
  *
+ * @uses       Zend_Pdf_Element_Array
+ * @uses       Zend_Pdf_Element_Name
+ * @uses       Zend_Pdf_Element_Numeric
+ * @uses       Zend_Pdf_Font
+ * @uses       Zend_Pdf_Resource_Font_Simple
  * @package    Zend_Pdf
  * @subpackage Fonts
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

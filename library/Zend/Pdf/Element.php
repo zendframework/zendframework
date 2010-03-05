@@ -19,10 +19,14 @@
  * @version    $Id$
  */
 
-
 /**
  * PDF file element implementation
  *
+ * @uses       Zend_Pdf_Element_Array
+ * @uses       Zend_Pdf_Element_Boolean
+ * @uses       Zend_Pdf_Element_Dictionary
+ * @uses       Zend_Pdf_Element_Numeric
+ * @uses       Zend_Pdf_Element_String
  * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -127,10 +131,8 @@ abstract class Zend_Pdf_Element
     public static function phpToPdf($input)
     {
         if (is_numeric($input)) {
-            require_once 'Zend/Pdf/Element/Numeric.php';
             return new Zend_Pdf_Element_Numeric($input);
         } else if (is_bool($input)) {
-            require_once 'Zend/Pdf/Element/Boolean.php';
             return new Zend_Pdf_Element_Boolean($input);
         } else if (is_array($input)) {
             $pdfElementsArray = array();
@@ -140,18 +142,15 @@ abstract class Zend_Pdf_Element
                 if (is_string($key)) {
                     $isDictionary = true;
                 }
-                $pdfElementsArray[$key] = Zend_Pdf_Element::phpToPdf($value);
+                $pdfElementsArray[$key] = self::phpToPdf($value);
             }
 
             if ($isDictionary) {
-                require_once 'Zend/Pdf/Element/Dictionary.php';
                 return new Zend_Pdf_Element_Dictionary($pdfElementsArray);
             } else {
-                require_once 'Zend/Pdf/Element/Array.php';
                 return new Zend_Pdf_Element_Array($pdfElementsArray);
             }
         } else {
-            require_once 'Zend/Pdf/Element/String.php';
             return new Zend_Pdf_Element_String((string)$input);
         }
     }

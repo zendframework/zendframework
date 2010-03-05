@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
-/** Zend_Pdf_Action */
-require_once 'Zend/Pdf/Action.php';
-
-
 /**
  * PDF 'Set the states of optional content groups' action
  * PDF 1.5+ feature
  *
+ * @uses       Zend_Pdf_Action
  * @package    Zend_Pdf
  * @subpackage Actions
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

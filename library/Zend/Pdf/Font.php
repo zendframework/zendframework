@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-
 /**
  * Abstract factory class which vends {@link Zend_Pdf_Resource_Font} objects.
  *
@@ -31,6 +30,26 @@
  * the true base class ({@link Zend_Pdf_Resource_Font}) is not intuitive for the
  * end user.
  *
+ * @uses       Zend_Pdf_Exception
+ * @uses       Zend_Pdf_FileParserDataSource_File
+ * @uses       Zend_Pdf_Resource_Font_CidFont_TrueType
+ * @uses       Zend_Pdf_Resource_Font_OpenType_TrueType
+ * @uses       Zend_Pdf_Resource_Font_Simple_Parsed_TrueType
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_Courier
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_CourierBold
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_CourierBoldOblique
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_CourierOblique
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_Helvetica
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_HelveticaBold
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_HelveticaBoldOblique
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_HelveticaOblique
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_Symbol
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_TimesBold
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_TimesBoldItalic
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_TimesItalic
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_TimesRoman
+ * @uses       Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats
+ * @uses       Zend_Pdf_Resource_Font_Type0
  * @package    Zend_Pdf
  * @subpackage Fonts
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -464,8 +483,8 @@ abstract class Zend_Pdf_Font
         {
         /* First check the cache. Don't duplicate font objects.
          */
-        if (isset(Zend_Pdf_Font::$_fontNames[$name])) {
-            return Zend_Pdf_Font::$_fontNames[$name];
+        if (isset(self::$_fontNames[$name])) {
+            return self::$_fontNames[$name];
         }
 
         /**
@@ -480,85 +499,70 @@ abstract class Zend_Pdf_Font
          * if this is one of the standard 14 PDF fonts.
          */
         switch ($name) {
-            case Zend_Pdf_Font::FONT_COURIER:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/Courier.php';
+            case self::FONT_COURIER:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_Courier();
                 break;
 
-            case Zend_Pdf_Font::FONT_COURIER_BOLD:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/CourierBold.php';
+            case self::FONT_COURIER_BOLD:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_CourierBold();
                 break;
 
-            case Zend_Pdf_Font::FONT_COURIER_OBLIQUE:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/CourierOblique.php';
+            case self::FONT_COURIER_OBLIQUE:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_CourierOblique();
                 break;
 
-            case Zend_Pdf_Font::FONT_COURIER_BOLD_OBLIQUE:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/CourierBoldOblique.php';
+            case self::FONT_COURIER_BOLD_OBLIQUE:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_CourierBoldOblique();
                 break;
 
-            case Zend_Pdf_Font::FONT_HELVETICA:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/Helvetica.php';
+            case self::FONT_HELVETICA:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_Helvetica();
                 break;
 
-            case Zend_Pdf_Font::FONT_HELVETICA_BOLD:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/HelveticaBold.php';
+            case self::FONT_HELVETICA_BOLD:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_HelveticaBold();
                 break;
 
-            case Zend_Pdf_Font::FONT_HELVETICA_OBLIQUE:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/HelveticaOblique.php';
+            case self::FONT_HELVETICA_OBLIQUE:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_HelveticaOblique();
                 break;
 
-            case Zend_Pdf_Font::FONT_HELVETICA_BOLD_OBLIQUE:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/HelveticaBoldOblique.php';
+            case self::FONT_HELVETICA_BOLD_OBLIQUE:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_HelveticaBoldOblique();
                 break;
 
-            case Zend_Pdf_Font::FONT_SYMBOL:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/Symbol.php';
+            case self::FONT_SYMBOL:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_Symbol();
                 break;
 
-            case Zend_Pdf_Font::FONT_TIMES_ROMAN:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/TimesRoman.php';
+            case self::FONT_TIMES_ROMAN:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_TimesRoman();
                 break;
 
-            case Zend_Pdf_Font::FONT_TIMES_BOLD:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/TimesBold.php';
+            case self::FONT_TIMES_BOLD:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_TimesBold();
                 break;
 
-            case Zend_Pdf_Font::FONT_TIMES_ITALIC:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/TimesItalic.php';
+            case self::FONT_TIMES_ITALIC:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_TimesItalic();
                 break;
 
-            case Zend_Pdf_Font::FONT_TIMES_BOLD_ITALIC:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/TimesBoldItalic.php';
+            case self::FONT_TIMES_BOLD_ITALIC:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_TimesBoldItalic();
                 break;
 
-            case Zend_Pdf_Font::FONT_ZAPFDINGBATS:
-                require_once 'Zend/Pdf/Resource/Font/Simple/Standard/ZapfDingbats.php';
+            case self::FONT_ZAPFDINGBATS:
                 $font = new Zend_Pdf_Resource_Font_Simple_Standard_ZapfDingbats();
                 break;
 
             default:
-                require_once 'Zend/Pdf/Exception.php';
                 throw new Zend_Pdf_Exception("Unknown font name: $name",
                                              Zend_Pdf_Exception::BAD_FONT_NAME);
         }
 
         /* Add this new font to the cache array and return it for use.
          */
-        Zend_Pdf_Font::$_fontNames[$name] = $font;
+        self::$_fontNames[$name] = $font;
         return $font;
     }
 
@@ -592,14 +596,13 @@ abstract class Zend_Pdf_Font
         /* First check the cache. Don't duplicate font objects.
          */
         $filePathKey = md5($filePath);
-        if (isset(Zend_Pdf_Font::$_fontFilePaths[$filePathKey])) {
-            return Zend_Pdf_Font::$_fontFilePaths[$filePathKey];
+        if (isset(self::$_fontFilePaths[$filePathKey])) {
+            return self::$_fontFilePaths[$filePathKey];
         }
 
         /* Create a file parser data source object for this file. File path and
          * access permission checks are handled here.
          */
-        require_once 'Zend/Pdf/FileParserDataSource/File.php';
         $dataSource = new Zend_Pdf_FileParserDataSource_File($filePath);
 
         /* Attempt to determine the type of font. We can't always trust file
@@ -612,7 +615,7 @@ abstract class Zend_Pdf_Font
          */
         switch ($fileExtension) {
             case 'ttf':
-                $font = Zend_Pdf_Font::_extractTrueTypeFont($dataSource, $embeddingOptions);
+                $font = self::_extractTrueTypeFont($dataSource, $embeddingOptions);
                 break;
 
             default:
@@ -635,7 +638,7 @@ abstract class Zend_Pdf_Font
 
             // TrueType
             if (($font === null) && ($fileExtension != 'ttf')) {
-                $font = Zend_Pdf_Font::_extractTrueTypeFont($dataSource, $embeddingOptions);
+                $font = self::_extractTrueTypeFont($dataSource, $embeddingOptions);
             }
 
             // Type 1 PostScript
@@ -654,16 +657,15 @@ abstract class Zend_Pdf_Font
             /* Parsing was successful. Add this font instance to the cache arrays
              * and return it for use.
              */
-            $fontName = $font->getFontName(Zend_Pdf_Font::NAME_POSTSCRIPT, '', '');
-            Zend_Pdf_Font::$_fontNames[$fontName] = $font;
+            $fontName = $font->getFontName(self::NAME_POSTSCRIPT, '', '');
+            self::$_fontNames[$fontName] = $font;
             $filePathKey = md5($filePath);
-            Zend_Pdf_Font::$_fontFilePaths[$filePathKey] = $font;
+            self::$_fontFilePaths[$filePathKey] = $font;
             return $font;
 
         } else {
             /* The type of font could not be determined. Give up.
              */
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("Cannot determine font type: $filePath",
                                          Zend_Pdf_Exception::CANT_DETERMINE_FONT_TYPE);
          }
@@ -695,16 +697,12 @@ abstract class Zend_Pdf_Font
     protected static function _extractTrueTypeFont($dataSource, $embeddingOptions)
     {
         try {
-            require_once 'Zend/Pdf/FileParser/Font/OpenType/TrueType.php';
             $fontParser = new Zend_Pdf_FileParser_Font_OpenType_TrueType($dataSource);
 
             $fontParser->parse();
             if ($fontParser->isAdobeLatinSubset) {
-                require_once 'Zend/Pdf/Resource/Font/Simple/Parsed/TrueType.php';
                 $font = new Zend_Pdf_Resource_Font_Simple_Parsed_TrueType($fontParser, $embeddingOptions);
             } else {
-                require_once 'Zend/Pdf/Resource/Font/CidFont/TrueType.php';
-                require_once 'Zend/Pdf/Resource/Font/Type0.php';
                 /* Use Composite Type 0 font which supports Unicode character mapping */
                 $cidFont = new Zend_Pdf_Resource_Font_CidFont_TrueType($fontParser, $embeddingOptions);
                 $font    = new Zend_Pdf_Resource_Font_Type0($cidFont);
@@ -716,7 +714,6 @@ abstract class Zend_Pdf_Font
              * a problem; throw the exception again.
              */
             $fontParser = null;
-            require_once 'Zend/Pdf/Exception.php';
             switch ($e->getCode()) {
                 case Zend_Pdf_Exception::WRONG_FONT_TYPE:    // break intentionally omitted
                 case Zend_Pdf_Exception::BAD_TABLE_COUNT:    // break intentionally omitted

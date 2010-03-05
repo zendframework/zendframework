@@ -19,10 +19,10 @@
  * @version    $Id$
  */
 
-
 /**
  * PDF file trailer
  *
+ * @uses       Zend_Pdf_Exception
  * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -48,7 +48,6 @@ abstract class Zend_Pdf_Trailer
     {
         if ( !in_array($key, self::$_allowedKeys) ) {
             /** @todo Make warning (log entry) instead of an exception */
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception("Unknown trailer dictionary key: '$key'.");
         }
     }

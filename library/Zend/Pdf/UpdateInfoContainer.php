@@ -19,10 +19,10 @@
  * @version    $Id$
  */
 
-
 /**
  * Container which collects updated object info.
  *
+ * @uses       Zend_Pdf
  * @package    Zend_Pdf
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
@@ -71,7 +71,6 @@ class Zend_Pdf_UpdateInfoContainer
 
         if ($dump !== null) {
             if (strlen($dump) > 1024) {
-                require_once 'Zend/Pdf.php';
                 $this->_dump = Zend_Pdf::getMemoryManager()->create($dump);
             } else {
                 $this->_dump = $dump;

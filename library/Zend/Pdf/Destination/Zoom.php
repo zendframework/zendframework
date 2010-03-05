@@ -20,16 +20,6 @@
  * @version    $Id$
  */
 
-/** Internally used classes */
-require_once 'Zend/Pdf/Element/Array.php';
-require_once 'Zend/Pdf/Element/Name.php';
-require_once 'Zend/Pdf/Element/Null.php';
-require_once 'Zend/Pdf/Element/Numeric.php';
-
-
-/** Zend_Pdf_Destination_Explicit */
-require_once 'Zend/Pdf/Destination/Explicit.php';
-
 /**
  * Zend_Pdf_Destination_Zoom explicit detination
  *
@@ -41,6 +31,12 @@ require_once 'Zend/Pdf/Destination/Explicit.php';
  * or zoom specifies that the current value of that parameter is to be retained unchanged.
  * A zoom value of 0 has the same meaning as a null value.
  *
+ * @uses       Zend_Pdf_Destination_Explicit
+ * @uses       Zend_Pdf_Element_Array
+ * @uses       Zend_Pdf_Element_Name
+ * @uses       Zend_Pdf_Element_Null
+ * @uses       Zend_Pdf_Element_Numeric
+ * @uses       Zend_Pdf_Exception
  * @package    Zend_Pdf
  * @subpackage Destination
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -67,7 +63,6 @@ class Zend_Pdf_Destination_Zoom extends Zend_Pdf_Destination_Explicit
         } else if (is_integer($page)) {
             $destinationArray->items[] = new Zend_Pdf_Element_Numeric($page);
         } else {
-            require_once 'Zend/Pdf/Exception.php';
             throw new Zend_Pdf_Exception('Page entry must be a Zend_Pdf_Page object or a page number.');
         }
 
@@ -91,7 +86,7 @@ class Zend_Pdf_Destination_Zoom extends Zend_Pdf_Destination_Explicit
             $destinationArray->items[] = new Zend_Pdf_Element_Numeric($zoom);
         }
 
-        return new Zend_Pdf_Destination_Zoom($destinationArray);
+        return new self($destinationArray);
     }
 
     /**

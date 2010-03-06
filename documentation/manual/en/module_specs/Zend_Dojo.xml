@@ -11,7 +11,7 @@
     </para>
 
     <itemizedlist>
-        <listitem><para><acromyn>JSON-RPC</acromyn> support</para></listitem>
+        <listitem><para><acronym>JSON-RPC</acronym> support</para></listitem>
         <listitem><para><command>dojo.data</command> compatibility</para></listitem>
         <listitem><para>View helper to help setup the Dojo environment</para></listitem>
         <listitem><para>Dijit-specific <classname>Zend_View</classname> helpers</para></listitem>
@@ -29,8 +29,8 @@
         into your javascript directory, copy it, or use the build tool to create
         your own custom build to include in your project. Alternatively, you can
         use one of the Content Delivery Networks that offer Dojo (Zend Framework supports
-        both the official <acromyn>AOL</acromyn> <acromyn>CDN</acromyn> as well as the Google
-        <acromyn>CDN</acromyn>).
+        both the official <acronym>AOL</acronym> <acronym>CDN</acronym> as well as the Google
+        <acronym>CDN</acronym>).
     </para>
 </sect1>
 <!--

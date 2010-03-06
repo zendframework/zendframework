@@ -557,8 +557,8 @@ $form->addElement(
         <title>Editor</title>
 
         <para>
-            Editor provides a <acromyn>WYSIWYG</acromyn> editor that can be used to both create and
-            edit rich <acromyn>HTML</acromyn> content. <command>dijit.Editor</command> is pluggable
+            Editor provides a <acronym>WYSIWYG</acronym> editor that can be used to both create and
+            edit rich <acronym>HTML</acronym> content. <command>dijit.Editor</command> is pluggable
             and may be extended with custom plugins if desired; see <ulink
                 url="http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/advanced-editing-and-display/editor-rich-text">the
                 dijit.Editor documentation</ulink> for more details.
@@ -608,7 +608,7 @@ $form->addElement(
 
             <listitem>
                 <para>
-                    <emphasis>events</emphasis> are standard <acromyn>DOM</acromyn> events, such as
+                    <emphasis>events</emphasis> are standard <acronym>DOM</acronym> events, such as
                     onClick, onKeyUp, etc. The following accessors and mutators
                     are available for manipulating events:
                 </para>
@@ -767,7 +767,7 @@ $form->addElement('editor', 'content', array(
             <para>
                 The Editor dijit uses an <acronym>HTML</acronym> <acronym>DIV</acronym> by default.
                 The <command>dijit._editor.RichText</command> documentation indicates that
-                having it built on an <acromyn>HTML</acromyn> <acronym>TEXTAREA</acronym> can
+                having it built on an <acronym>HTML</acronym> <acronym>TEXTAREA</acronym> can
                 potentially have security implications.
             </para>
 
@@ -855,8 +855,8 @@ $editor->degrade = true;
                 <para>
                     <methodname>setTopDecorationAttribs(array $attribs)</methodname> and
                     <methodname>setBottomDecorationAttribs(array $attribs)</methodname>:
-                    <acromyn>HTML</acromyn> attributes to specify for the given Rule or RuleLabels
-                    <acromyn>HTML</acromyn> element container.
+                    <acronym>HTML</acronym> attributes to specify for the given Rule or RuleLabels
+                    <acronym>HTML</acronym> element container.
                 </para>
             </listitem>
 
@@ -1203,7 +1203,7 @@ $form->addElement(
         <title>SimpleTextarea</title>
 
         <para>
-            SimpleTextarea acts primarily like a standard <acromyn>HTML</acromyn> textarea. However,
+            SimpleTextarea acts primarily like a standard <acronym>HTML</acronym> textarea. However,
             it does not support either the rows or cols settings. Instead, the
             textarea width should be specified using standard <acronym>CSS</acronym> measurements.
             Unlike Textarea, it will not grow automatically
@@ -1360,7 +1360,7 @@ $form->addElement(
                     <methodname>setUppercase($flag)</methodname> and
                     <methodname>getUppercase()</methodname>: set and retrieve
                     the flag indicating whether or not the input should be cast to
-                    <acromyn>UPPERCASE</acromyn>.
+                    <acronym>UPPERCASE</acronym>.
                 </para>
             </listitem>
 
@@ -1403,7 +1403,7 @@ $form->addElement(
         <title>Textarea</title>
 
         <para>
-            Textarea acts primarily like a standard <acromyn>HTML</acromyn> textarea. However, it
+            Textarea acts primarily like a standard <acronym>HTML</acronym> textarea. However, it
             does not support either the rows or cols settings. Instead, the
             textarea width should be specified using standard <acronym>CSS</acronym> measurements;
             rows should be omitted entirely. The textarea will then grow
@@ -1470,7 +1470,7 @@ $form->addElement(
                 <para>
                     <methodname>setVisibleIncrement($format)</methodname> and
                     <methodname>getVisibleIncrement()</methodname>: set the increment visible
-                    in the time chooser; must follow <acromyn>ISO_8601</acromyn> formats.
+                    in the time chooser; must follow <acronym>ISO_8601</acronym> formats.
                 </para>
             </listitem>
 
@@ -1479,7 +1479,7 @@ $form->addElement(
                     <methodname>setVisibleRange($format)</methodname> and
                     <methodname>getVisibleRange()</methodname>: set and retrieve the range of
                     time visible in the time chooser at any given moment; must
-                    follow <acromyn>ISO_8601</acromyn> formats.
+                    follow <acronym>ISO_8601</acronym> formats.
                 </para>
             </listitem>
         </itemizedlist>

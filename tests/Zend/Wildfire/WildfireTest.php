@@ -534,6 +534,36 @@ class Zend_Wildfire_WildfireTest extends PHPUnit_Framework_TestCase
                                                         $rowOld));
     }
 
+    /**
+     * @group ZF-6396
+     */
+    public function testTableMessage2()
+    {
+        $this->_setupWithoutFrontController();
+
+        $channel = Zend_Wildfire_Channel_HttpHeaders::getInstance();
+        $protocol = $channel->getProtocol(Zend_Wildfire_Plugin_FirePhp::PROTOCOL_URI);
+
+        $table = new Zend_Wildfire_Plugin_FirePhp_TableMessage('TestMessage');
+        $table->setHeader(array('col1','col2'));
+        $table->setBuffered(true);
+
+        Zend_Wildfire_Plugin_FirePhp::send($table);
+
+        $cell = new ArrayObject();
+        $cell->append("item1");
+        $cell->append("item2");
+
+        $table->addRow(array("row1", $cell));
+
+        Zend_Wildfire_Channel_HttpHeaders::getInstance()->flush();
+
+        $messages = $protocol->getMessages();
+
+        $this->assertEquals($messages[Zend_Wildfire_Plugin_FirePhp::STRUCTURE_URI_FIREBUGCONSOLE]
+                                            [Zend_Wildfire_Plugin_FirePhp::PLUGIN_URI][0],
+                            '[{"Type":"TABLE","Label":"TestMessage"},[["col1","col2"],["row1",{"__className":"ArrayObject","undeclared:0":"item1","undeclared:1":"item2"}]]]');
+    }
 
     public function testMessageGroups()
     {

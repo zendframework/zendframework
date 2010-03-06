@@ -222,10 +222,10 @@
                 <title>Das CLI Tool auf Unix-artigen Systemen einrichten</title>
 
                 <para>
-                    Das üblichste Setzup in einer *nix Umgebung ist es, <filename>zf.sh</filename>
+                    Das üblichste Setup in einer *nix Umgebung ist es, <filename>zf.sh</filename>
                     und <filename>zf.sh</filename> in das selbe Verzeichnis wie die
-                    <acronym>PHP</acronym> Bibliothek zu kopieren. Diese kann normalerweise in einem
-                    der folgenden Plätze gefunden werden:
+                    <acronym>PHP</acronym> Installation zu kopieren. Diese kann normalerweise in
+                    einem der folgenden Plätze gefunden werden:
                 </para>
 
                 <programlisting language="text"><![CDATA[
@@ -236,31 +236,30 @@
 ]]></programlisting>
 
                 <para>
-                    To find out the location of your <acronym>PHP</acronym> binary, you can execute
-                    'which php' on the command line. This will return the location of the
-                    <acronym>PHP</acronym> binary you will be using to run <acronym>PHP</acronym>
-                    scripts in this environment.
+                    Um den Ort der eigenen <acronym>PHP</acronym> Installation zu finden kann man
+                    'which php' auf der Kommandozeile ausführen. Das gibt den Ort der
+                    <acronym>PHP</acronym> Installation zurück welche verwendet wird um in dieser
+                    Umgebung <acronym>PHP</acronym> Skripte auszuführen.
                 </para>
 
                 <para>
-                    The next order of business is to ensure that Zend Framework
-                    library is set up correctly inside of the system <acronym>PHP</acronym>
-                    <property>include_path</property>. To find out where your
-                    <property>include_path</property> is located, you can execute
-                    <command>php -i</command> and look for the <property>include_path</property>
-                    variable, or more succinctly, execute
-                    <command>php -i | grep include_path</command>. Once you have found where
-                    your <property>include_path</property> is located (this will generally be
-                    something like <filename>/usr/lib/php</filename>,
-                    <filename>/usr/share/php</filename>, <filename>/usr/local/lib/php</filename>, or
-                    similar), ensure that the contents of the <filename>/library/</filename>
-                    directory are put inside your <property>include_path</property> specified
-                    directory.
+                    Der nächste Schritt ist es sicherzustellen das die Zend Framework Bibliothek
+                    korrekt im <acronym>PHP</acronym> <property>include_path</property> eingestellt
+                    wurde. Um herauszufinden wo der <property>include_path</property> ist, kann man
+                    <command>php -i</command> ausführen und nach der
+                    <property>include_path</property> Variable sehen, oder kompakter
+                    <command>php -i | grep include_path</command> ausführen. Sobald man
+                    herausgefunden hat wo der <property>include_path</property> ist (er ist
+                    normalerweise etwas wie <filename>/usr/lib/php</filename>,
+                    <filename>/usr/share/php</filename>, <filename>/usr/local/lib/php</filename>,
+                    oder so ähnlich), sollte man sicherstellen das der Inhalt des Verzeichnisses
+                    <filename>/library/</filename> in einem der in <property>include_path</property>
+                    spezifizierten Verzeichnisse ist.
                 </para>
 
                 <para>
-                    Once you have done those two things, you should be able to issue a
-                    command and get back the proper response like this:
+                    Sobald man diese zwei Dinge getan hat, sollte man in der Lage sein ein Kommando
+                    auszuführen und die richtige Antwort zurück zu erhalten, wie zum Beispiel:
                 </para>
 
                 <para>
@@ -269,54 +268,55 @@
                 </para>
 
                 <para>
-                    If you do not see this type of output, go back and check your setup
-                    to ensure you have all of the necessary pieces in the proper place.
+                    Wenn man diese Art der Ausgabe nicht sieht, sollte man zurückgeben und die
+                    eigenen Einstellungen prüfen um sicherzustellen das man alle notwendigen Teile
+                    am richtigen Ort vorhanden sind.
                 </para>
 
                 <para>
-                    There are a couple of alternative setups you might want to employ
-                    depending on your servers configuration, your level of access, or
-                    for other reasons.
+                    Es gibt eine Anzahl an alternativen Einstellungen die man erstellen kann,
+                    abhängig von der Konfiguration des Servers, dem Zugriffslevel, oder aus anderen
+                    Gründen.
                 </para>
 
                 <para>
-                    <emphasis>Alternative Setup</emphasis> involves keeping the Zend Framework
-                    download together as is, and creating a link from a <constant>PATH</constant>
-                    location to the <filename>zf.sh</filename>. What this means is you can
-                    place the contents of the ZendFramework download into a location
-                    such as <filename>/usr/local/share/ZendFramework</filename>, or more locally
-                    like <filename>/home/username/lib/ZendFramework</filename>, and creating a
-                    symbolic link to the <filename>zf.sh</filename>.
+                    Das <emphasis>alternative Setup</emphasis> enthält das man den Download vom Zend
+                    Framework zusammenbehält wie er ist, und einen Link von einem
+                    <constant>PATH</constant> Ort zur <filename>zf.sh</filename> erstellt. Was dies
+                    bedeutet ist, dass man den Inhalt des Zend Framework Downloads in einem Ort wie
+                    <filename>/usr/local/share/ZendFramework</filename> platzieren kann, oder
+                    lokaler unter <filename>/home/username/lib/ZendFramework</filename> und einen
+                    symbolischen Link zu <filename>zf.sh</filename> erstellt.
                 </para>
 
                 <para>
-                    Assuming you want to put the link inside <filename>/usr/local/bin</filename>
-                    (this could also work for placing the link inside
-                    <filename>/home/username/bin/</filename> for example) you would issue a
-                    command similar to this: </para>
+                    Angenommen man will den Link in <filename>/usr/local/bin</filename> platzieren
+                    (dies könnte zum Beispiel auch für die Platzierung des Links unter
+                    <filename>/home/username/bin/</filename> funktionieren), dan würde man ein
+                    Kommando wie das folgende platzieren:
+                </para>
 
                 <programlisting language="sh"><![CDATA[
 ln -s /usr/local/share/ZendFramework/bin/zf.sh /usr/local/bin/zf
 
-# OR (for example)
+# ODER (zum Beispiel)
 ln -s /home/username/lib/ZendFramework/bin/zf.sh /home/username/bin/zf
 ]]></programlisting>
 
                 <para>
-                    This will create a link which you should be able to access globally
-                    on the command line.
+                    Das erstellt einen Link auf den man global von der Kommandozeile aus zugreifen
+                    kann.
                 </para>
-
             </sect4>
 
             <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-windows">
-                <title>Setting up the CLI tool on Windows</title>
+                <title>Das CLI Tool unter Windows einrichten</title>
 
                 <para>
-                    The most common setup in the Windows Win32 environment, is to copy
-                    the <filename>zf.bat</filename> and <filename>zf.php</filename> into the same
-                    directory as your <acronym>PHP</acronym> binary. This can generally be found in
-                    one of the following places:
+                    Das üblichste Setup in einer Windows Win32 Umgebung ist es
+                    <filename>zf.bat</filename> und <filename>zf.php</filename> in das selbe
+                    Verzeichnis wie die <acronym>PHP</acronym> Bibliothek zu kopieren. Diese kann
+                    generell an einem der folgenden Plätze gefunden werden:
                 </para>
 
                 <programlisting language="text"><![CDATA[
@@ -326,31 +326,33 @@ C:\WAMP\PHP\bin
 ]]></programlisting>
 
                 <para>
-                    You should be able to run <filename>php.exe</filename> on the command line.
-                    If you are not able to, first check the documentation that came with
-                    your <acronym>PHP</acronym> distribution, or ensure that the path to
-                    <filename>php.exe</filename> is in your
-                    Windows <constant>PATH</constant> environment variable.
+                    Man sollte in der Lage sein <filename>php.exe</filename> von der Kommandozeile
+                    aus auszuführen. Wenn man dazu nicht in der Lage ist, sollte man zuerst die
+                    Dokumentation prüfen welche mit der <acronym>PHP</acronym> Bibliothek
+                    mitgeliefert wird, um sicherzustellen dass der Pfad zu
+                    <filename>php.exe</filename> in der Windows Umgebungsvariable
+                    <constant>PATH</constant> zu finden ist.
                 </para>
 
                 <para>
-                    The next order of business is to ensure that Zend Framework
-                    library is set up correctly inside of the system <acronym>PHP</acronym>
-                    <property>include_path</property>. To find out where your
-                    <property>include_path</property> is located, you can type <command>php -i</command> and
-                    look for the <property>include_path</property> variable, or more succinctly
-                    execute <command>php -i | grep include_path</command> if you have Cygwin setup with
-                    grep available. Once you have found where your
-                    <property>include_path</property> is located (this will generally be
-                    something like <filename>C:\PHP\pear</filename>, <filename>C:\PHP\share</filename>,
-                    <filename>C:\Program%20Files\ZendServer\share</filename> or similar), ensure
-                    that the contents of the library/ directory are put inside your
-                    <property>include_path</property> specified directory.
+                    Der nächste Schritt besteht darin sicherzustellen das die Zend Framework
+                    Bibliothek richtig auf dem <acronym>PHP</acronym>
+                    <property>include_path</property> des Systems eingerichtet ist. Um
+                    herauszufinden wo der <property>include_path</property> ist, kann man
+                    <command>php -i</command> eingeben und nach der Variable
+                    <property>include_path</property> sehen, oder kompakter
+                    <command>php -i | grep include_path</command> ausführen wenn man ein Cygwin
+                    Setup mit vorhandenem grep hat. Sobald man herausgefunden hat wo der
+                    <property>include_path</property> liegt (das ist normalerweise etwas wie
+                    <filename>C:\PHP\pear</filename>, <filename>C:\PHP\share</filename>,
+                    <filename>C:\Program%20Files\ZendServer\share</filename>, oder ähnlich), sollte
+                    man sicherstellen das der Inhalt des Verzeichnisses library/ in einem vom
+                    <property>include_path</property> spezifizierten Verzeichnis ist.
                 </para>
 
                 <para>
-                    Once you have done those two things, you should be able to issue a
-                    command and get back the proper response like this:
+                    Sobald man diese zwei Dinge getan hat, sollte man in der Lage sein ein Kommando
+                    auszuführen und die richtige Antwort, so ähnlich wie die folgende, zu erhalten:
                 </para>
 
                 <para>
@@ -359,124 +361,123 @@ C:\WAMP\PHP\bin
                 </para>
 
                 <para>
-                    If you do not see this type of output, go back and check your setup
-                    to ensure you have all of the necessary pieces in the proper place.
+                    Wenn man diese Art der Ausgabe nicht sieht, sollte man zurückgehen und die
+                    Einstellungen prüfen um sicherzustellen das man alle notwendigen Teile an den
+                    richtigen Orten hat.
                 </para>
 
                 <para>
-                    There are a couple of alternative setups you might want to employ
-                    depending on your server's configuration, your level of access, or
-                    for other reasons.
+                    Es gibt eine Anzahl an alternativen Einstellungen die man erstellen kann,
+                    abhängig von der Konfiguration des Servers, dem Zugriffslevel, oder aus anderen
+                    Gründen.
                 </para>
 
                 <para>
-                    <emphasis>Alternative Setup</emphasis> involves keeping the Zend
-                    Framework download together as is, and altering both your system
-                    <constant>PATH</constant> as well as the <filename>php.ini</filename> file.
-                    In your user's environment, make sure to add
-                    <filename>C:\Path\To\ZendFramework\bin</filename>, so that your
-                    <filename>zf.bat</filename> file is executable. Also, alter the
-                    <filename>php.ini</filename> file to ensure that
-                    <filename>C:\Path\To\ZendFramework\library</filename> is in your
-                    <property>include_path</property>.
+                    Das <emphasis>alternative Setup</emphasis> enthält das man den Download vom Zend
+                    Framework zusammenbehält wie er ist, und sowohl den System
+                    <constant>PATH</constant>, als auch die <filename>php.ini</filename> Datei
+                    verändert. In der Umgebung des Benutzers muss man
+                    <filename>C:\Path\To\ZendFramework\bin</filename> hinzufügen damit die Datei
+                    <filename>zf.bat</filename> ausführbar ist. Auch die Datei
+                    <filename>php.ini</filename> ist zu verändern um sicherzustellen das
+                    <filename>C:\Path\To\ZendFramework\library</filename> im
+                    <property>include_path</property> liegt.
                 </para>
-
             </sect4>
 
             <sect4 id="zend.tool.extending.zend-tool-framework.cli-client.setup-othernotes">
-                <title>Other Setup Considerations</title>
+                <title>Andere Einstellungs-Möglichkeiten</title>
 
                 <para>
-                    If for some reason you do not want Zend Framework library inside
-                    your <property>include_path</property>, there is another option. There are
-                    two special environment variables that <filename>zf.php</filename> will
-                    utilize to determine the location of your Zend Framework
-                    installation.
+                    Wenn man aus bestimmten Gründen die Zend Framework Bibliothek nicht im
+                    <property>include_path</property> haben will, gibt es andere Optionen. Es gibt
+                    zwei spezielle Umgebungsvariablen welche <filename>zf.php</filename> verwendet
+                    um den Ort der Zend Framework Installation zu erkennen.
                 </para>
 
                 <para>
-                    The first is <constant>ZEND_TOOL_INCLUDE_PATH_PREPEND</constant>, which will
-                    prepend the value of this environment variable to the system
-                    (<filename>php.ini</filename>) <property>include_path</property> before loading the
-                    client.
+                    Die erste ist <constant>ZEND_TOOL_INCLUDE_PATH_PREPEND</constant>, welche den
+                    Wert der Umgebungsvariable dem <property>include_path</property> des Systems
+                    (<filename>php.ini</filename>) voranstellt bevor der Client geladen wird.
                 </para>
 
                 <para>
-                    Alternatively, you might want to use
-                    <constant>ZEND_TOOL_INCLUDE_PATH</constant> to completely
-                    <emphasis>replace</emphasis> the system <property>include_path</property>
-                    for one that makes sense specifically for the <command>zf</command>
-                    command line tool.
+                    Alternativ kann man <constant>ZEND_TOOL_INCLUDE_PATH</constant> verwenden um den
+                    <property>include_path</property> des System komplett zu
+                    <emphasis>ersetzen</emphasis> für jene bei denen es Sinn macht, speziell für das
+                    <command>zf</command> Kommandozeilen-Tool.
                 </para>
             </sect4>
-
         </sect3>
 
         <sect3 id="zend.tool.extending.zend-tool-framework.providers-and-manifests">
-            <title>Creating Providers</title>
+            <title>Erstellen von Providern</title>
 
             <para>
-                In general, a provider, on its own, is nothing more than the shell for a
-                developer to bundle up some capabilities they wish to dispatch with the
-                command line (or other) clients. It is an analogue to what a
-                "controller" is inside of your <acronym>MVC</acronym> application.
+                Generell, ist ein Provider für sich selbst gesehen, nichts weiter als eine Shell für
+                einen Entwickler um einige Möglichkeiten zu bündeln welche er mit den Kommandozeilen
+                (oder anderen) Clients ausführen will. Das ist eine Analogie für das was der
+                "Controller" in der <acronym>MVC</acronym> Anwendung ist.
             </para>
 
             <sect4 id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading">
-                <title>How Zend Tool finds your Providers</title>
+                <title>Wie Zend Tool eigene Provider findet</title>
 
                 <para>
-                    By default Zend Tool uses the BasicLoader to find all
-                    the providers that you can run. It recursivly iterates all
-                    include path directories and opens all files that end
-                    with "Manifest.php" or "Provider.php". All classes in these
-                    files are inspected if they implement either
-                    <classname>Zend_Tool_Framework_Provider_Interface</classname>
-                    or <classname>Zend_Tool_Framework_Manifest_ProviderManifestable</classname>.
-                    Instances of the provider interface make up for the real functionality
-                    and all their public methods are accessible as provider actions.
-                    The ProviderManifestable interface however requires the implementation of a method
-                    <methodname>getProviders()</methodname> which returns an array of
-                    instantiated provider interface instances.
+                    Standardmäßig verwendet Zend Tool den BasicLoader um alle Provider zu finden die
+                    es ausführen kann. Er durchsucht alle Verzeichnisse des Include Pfades rekursiv
+                    und öffnet alle Dateien welche mit "Manifest.php" oder "Provider.php" enden.
+                    Alle Klassen in diesen Dateien werden darauf durchsucht ob Sie entweder
+                    <classname>Zend_Tool_Framework_Provider_Interface</classname> oder
+                    <classname>Zend_Tool_Framework_Manifest_ProviderManifestable</classname>
+                    implementieren. Instanzen des Provider Interfaces sind für die echte
+                    Funktionalität zuständig und alle Ihre öffentlichen Methoden kann als Provider
+                    Aktionen zugegriffen werden. Das ProviderManifestable Interface benötigt
+                    trotzdem die Implementation einer <methodname>getProviders()</methodname>
+                    Methode welche ein Array an instanzierten Provider Interface Instanzen
+                    zurückgibt.
                 </para>
 
                 <para>
-                    The following naming rules apply on how you can access the providers
-                    that were found by the IncludePathLoader:
+                    Die folgenden Namensregeln sind darauf anzuwenden, wie man auf die Provider
+                    zugreifen kann welche vom IncludePathLoader gefunden werden:
                 </para>
 
                 <itemizedlist>
                     <listitem>
                         <para>
-                            The last part of your classname split by underscore is used
-                            for the provider name, e.g. "My_Provider_Hello" leads to your
-                            provider being accessible by the name "hello".
+                            Der letzte Teil des eigenen Klassennamens welcher von einem Unterstrich
+                            getrennt ist, wird für den Providernamen verwendet, zum Beispiel führt
+                            "My_Provider_Hello" zum Provider auf welchen mit dem Namen "hello"
+                            zugegriffen werden kann.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            If your provider has a method <methodname>getName()</methodname>
-                            it will be used instead of the previous method to determine
-                            the name.
+                            Wenn der Provider eine Methode <methodname>getName()</methodname> hat,
+                            dann wird diese verwendet statt der vorherigen Methode um den Namen zu
+                            erkennen.
                         </para>
                     </listitem>
                     <listitem>
                         <para>
-                            If your provider has "Provider" as prefix, e.g. it is called
-                            <classname>My_HelloProvider</classname> it will be stripped
-                            from the name so that the provider will be called "hello".
+                            Wenn der Provider den Präfix "Provider" hat, zum Beispiel wenn er
+                            <classname>My_HelloProvider</classname> heißt, dann wird er vom Namen
+                            entfernt so dass der Provider "hello" heißt.
                         </para>
                     </listitem>
                 </itemizedlist>
 
                 <note>
-                    <para>The IncludePathLoader does not follow symlinks, that means
-                    you cannot link provider functionality into your include paths,
-                    they have to be physically present in the include paths.</para>
+                    <para>
+                        Der IncludePathLoader folgt Symlinks nicht, was bedeutet das man Provider
+                        Funktionalitäten nicht in den Include Pfaden verlinken kann, sondern dass
+                        Sie physikalisch in den Include Pfaden vorhanden sein müssen.
+                    </para>
                 </note>
 
                 <example id="zend.tool.extending.zend-tool-framework.providers-and-manifests.loading.example">
-                    <title>Exposing Your Providers with a Manifest</title>
+                    <title>Provider mit einem Manifest bekanntmachen</title>
 
                     <para>
                         You can expose your providers to Zend Tool by offering a manifest

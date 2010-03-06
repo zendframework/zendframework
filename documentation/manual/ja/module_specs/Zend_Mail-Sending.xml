@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17166 -->
+<!-- EN-Revision: 20819 -->
 <sect1 id="zend.mail.sending">
     <title>SMTP 経由での送信</title>
+
     <para>
         SMTP 経由でメールを送信するには、<methodname>send()</methodname> をコールする前に
         <classname>Zend_Mail_Transport_Smtp</classname> を作成し、それを
@@ -10,13 +11,16 @@
         <methodname>Zend_Mail::send()</methodname> がコールされると、
         SMTP による転送が使用されます。
     </para>
+
     <example id="zend.mail.sending.example-1">
         <title>SMTP によるメールの送信</title>
+
         <programlisting language="php"><![CDATA[
 $tr = new Zend_Mail_Transport_Smtp('mail.example.com');
 Zend_Mail::setDefaultTransport($tr);
 ]]></programlisting>
     </example>
+
     <para>
         <methodname>setDefaultTransport()</methodname> メソッドや
         <classname>Zend_Mail_Transport_Smtp</classname> のコンストラクタは、
@@ -26,7 +30,7 @@ Zend_Mail::setDefaultTransport($tr);
         これにより、メール送信を SMTP 経由で行うのか
         <ulink url="http://php.net/mail"><methodname>mail()</methodname></ulink> を使用するのか、
         そしてどのメールサーバを使用するのかなどといった設定情報を、
-        アプリケーションから分離することができます。
+        アプリケーションから分離できます。
     </para>
 </sect1>
 <!--

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 20760 -->
+<!-- EN-Revision: 21129 -->
 <sect1 id="zend.filter.set" xmlns:xi="http://www.w3.org/2001/XInclude">
 
     <title>標準のフィルタクラス群</title>
@@ -11,6 +11,7 @@
 
     <sect2 id="zend.filter.set.alnum">
         <title>Alnum</title>
+
         <para>
             文字列 <varname>$value</varname>
             から、アルファベットおよび数字以外を取り除いたものを返します。
@@ -29,6 +30,7 @@
 
     <sect2 id="zend.filter.set.alpha">
         <title>Alpha</title>
+
         <para>
             文字列 <varname>$value</varname>
             から、アルファベット以外を取り除いたものを返します。
@@ -38,6 +40,7 @@
 
     <sect2 id="zend.filter.set.basename">
         <title>BaseName</title>
+
         <para>
             ファイルへのパスを含む文字列を受け取り、
             ファイルのベース名の部分のみを返します。
@@ -55,6 +58,7 @@
 
     <sect2 id="zend.filter.set.digits">
         <title>Digits</title>
+
         <para>
             文字列 <varname>$value</varname>
             から、数字以外を取り除いたものを返します。
@@ -63,6 +67,7 @@
 
     <sect2 id="zend.filter.set.dir">
         <title>Dir</title>
+
         <para>
             パス文字列からディレクトリ名を返します。
         </para>
@@ -72,6 +77,7 @@
 
     <sect2 id="zend.filter.set.htmlentities">
         <title>HtmlEntities</title>
+
         <para>
             文字列 <varname>$value</varname> について、
             <acronym>HTML</acronym> エンティティが存在するものについてはそのエンティティに変換したものを返します。
@@ -80,6 +86,7 @@
 
     <sect2 id="zend.filter.set.int">
         <title>Int</title>
+
         <para>
             (int) <varname>$value</varname> を返します。
         </para>
@@ -98,6 +105,7 @@
 
     <sect2 id="zend.filter.set.stringtrim">
         <title>StringTrim</title>
+
         <para>
             文字列 <varname>$value</varname>
             の先頭と末尾から文字を取り除いたものを返します。
@@ -106,6 +114,7 @@
 
     <sect2 id="zend.filter.set.stripnewlines">
         <title>StripNewlines</title>
+
         <para>
             文字列 <varname>$value</varname> から一切の改行制御文字を取り除いたものを返します。
         </para>
@@ -113,8 +122,9 @@
 
     <sect2 id="zend.filter.set.striptags">
         <title>StripTags</title>
+
         <para>
-            入力文字列からすべての HTML タグおよび <acronym>PHP</acronym> タグを取り除いた結果を返します。
+            入力文字列からすべての <acronym>HTML</acronym> タグおよび <acronym>PHP</acronym> タグを取り除いた結果を返します。
             ただし明示的に許可したタグは取り除きません。
             どのタグを許可するかだけではなく、すべてのタグにおいてどの属性を許可するか、
             特定のタグだけで許可する属性は何かなども指定できます。

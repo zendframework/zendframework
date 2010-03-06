@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17175 -->
+<!-- EN-Revision: 20854 -->
 <sect1 id="zend.rest.client">
     <title>Zend_Rest_Client</title>
+
     <sect2 id="zend.rest.client.introduction">
         <title>導入</title>
+
         <para>
             <classname>Zend_Rest_Client</classname> の使用法は、
             <code>SoapClient</code> オブジェクト (<ulink
             url="http://www.php.net/soap">SOAP ウェブサービス拡張モジュール</ulink>)
             の使用法と非常によく似ています。REST サービスのプロシージャは、簡単に
-            <classname>Zend_Rest_Client</classname> のメソッドとしてコールすることができます。
+            <classname>Zend_Rest_Client</classname> のメソッドとしてコールできます。
             まず、そのサービスのアドレスを <classname>Zend_Rest_Client</classname> のコンストラクタに指定します。
         </para>
 
@@ -29,6 +31,7 @@ echo $client->sayHello('Davey', 'Day')->get(); // "Hello Davey, Good Day"
 
         <note>
             <title>コール方法の違い</title>
+
             <para>
                 <classname>Zend_Rest_Client</classname> は、
                 リモートメソッドのコールをできるだけネイティブなメソッドと同様に行おうとします。
@@ -52,7 +55,7 @@ echo $client->get();
         <para>
             <classname>Zend_Rest_Client</classname> を使用して行ったリクエストは、すべて
             <classname>Zend_Rest_Client_Response</classname> オブジェクトを返します。
-            このオブジェクトには多くのプロパティがあり、結果に簡単にアクセスすることができます。
+            このオブジェクトには多くのプロパティがあり、結果に簡単にアクセスできます。
         </para>
 
         <para>
@@ -63,6 +66,7 @@ echo $client->get();
 
         <example id="zend.rest.client.return.example-1">
             <title>レスポンスステータス</title>
+
             <programlisting language="php"><![CDATA[
 $result = $client->sayHello('Davey', 'Day')->get();
 
@@ -107,6 +111,7 @@ echo $result->firstname() .' '. $result->lastname();
 
         <example id="zend.rest.client.return.example-3">
             <title>Technorati からのレスポンスの例</title>
+
             <programlisting language="xml"><![CDATA[
 <?xml version="1.0" encoding="utf-8"?>
 <!-- generator="Technorati API version 1.0 /bloginfo" -->
@@ -145,9 +150,9 @@ echo $result->firstname() .' '. $result->lastname();
 
         <para>
             ここで、<code>firstname</code> や
-            <code>lastname</code> といったプロパティにアクセスすることができます。
+            <code>lastname</code> といったプロパティにアクセスできます。
             これらはトップレベル要素ではありませんが、
-            名前を指定するだけで自動的に取得することができます。
+            名前を指定するだけで自動的に取得できます。
         </para>
 
         <note>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Reviewed: no -->
-<!-- EN-Revision: 17232 -->
+<!-- EN-Revision: 20819 -->
 <sect1 id="zend.mail.html-mails">
     <title>HTML メール</title>
+
     <para>
         HTML 形式のメールを送信するには、本文を作成する際に
         <methodname>setBodyText()</methodname> ではなく <methodname>setBodyHTML()</methodname> を使用します。
@@ -10,8 +11,10 @@
         HTML とプレーンテキストの両方を使用した場合は、
         multipart/alternative な <acronym>MIME</acronym> メッセージが自動的に生成されます。
     </para>
+
     <example id="zend.mail.html-mails.example-1">
         <title>HTML メールの送信</title>
+
         <programlisting language="php"><![CDATA[
 $mail = new Zend_Mail();
 $mail->setBodyText('My Nice Test Text');

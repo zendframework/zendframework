@@ -20,11 +20,10 @@
 resources.dojo.enable = true ; Always load the Dojo javascript files
 ]]></programlisting>
 
-
         <para>
             The <classname>Zend_Dojo</classname> resource plugin utilises the options for the
-            <command>Zend_Dojo_View_Helper_Dojo_Container::setOptions()</command> to configure the
-            viewhelpers. Please see the <classname><link linkend="zend.dojo">Zend_Dojo</link></classname>
+            <methodname>Zend_Dojo_View_Helper_Dojo_Container::setOptions()</methodname> to
+            configure the viewhelpers. Please see the <link linkend="zend.dojo">Zend_Dojo</link>
             chapter for full descriptions and available options.
         </para>
     </example>

@@ -149,7 +149,7 @@
                                             single key "configs" whose value is an array of the
                                             files to merge. Note: this means you either pass a
                                             literal path, or
-                                            <command>array("configs"=>array("/path1","/path2"[,...]))</command>.
+                                            <command>array("configs"=>array("/path1","/path2"[,...]));</command>.
                                         </para>
                                     </listitem>
 

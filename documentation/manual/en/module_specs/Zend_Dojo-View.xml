@@ -10,9 +10,9 @@
     <itemizedlist>
         <listitem>
             <para>
-                <emphasis>dojo():</emphasis> setup the Dojo environment
-                for your page, including dojo configuration values, custom module
-                paths, module require statements, theme stylesheets, CDN usage, and more.
+                <emphasis><methodname>dojo()</methodname>:</emphasis> setup the Dojo environment
+                for your page, including dojo configuration values, custom module paths, module
+                require statements, theme stylesheets, <acromyn>CDN</acromyn> usage, and more.
             </para>
         </listitem>
     </itemizedlist>

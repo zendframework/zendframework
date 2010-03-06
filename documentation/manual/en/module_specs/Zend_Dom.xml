@@ -4,9 +4,9 @@
     <title>Introduction</title>
 
     <para>
-        <classname>Zend_Dom</classname> provides tools for working with DOM documents and
-        structures. Currently, we offer <classname>Zend_Dom_Query</classname>, which
-        provides a unified interface for querying DOM documents utilizing both
+        <classname>Zend_Dom</classname> provides tools for working with <acromyn>DOM</acromyn>
+        documents and structures. Currently, we offer <classname>Zend_Dom_Query</classname>, which
+        provides a unified interface for querying <acromyn>DOM</acromyn> documents utilizing both
         XPath and <acronym>CSS</acronym> selectors.
     </para>
 </sect1>

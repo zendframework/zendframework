@@ -91,8 +91,8 @@ $view->dojo()->registerModulePath('custom', '../custom/')
 
         <para>
             As an example, let's say you wanted to create the module layer
-            "custom.main". Assuming you follow the recommended project directory
-            structure, and that you are storing your JavaScript files under
+            "<filename>custom.main</filename>". Assuming you follow the recommended project
+            directory structure, and that you are storing your JavaScript files under
             <filename>public/js/</filename>, you could do the following:
         </para>
 

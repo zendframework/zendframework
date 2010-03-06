@@ -11,8 +11,8 @@
     </para>
 
     <itemizedlist>
-        <listitem><para>JSON-RPC support</para></listitem>
-        <listitem><para>dojo.data compatibility</para></listitem>
+        <listitem><para><acromyn>JSON-RPC</acromyn> support</para></listitem>
+        <listitem><para><command>dojo.data</command> compatibility</para></listitem>
         <listitem><para>View helper to help setup the Dojo environment</para></listitem>
         <listitem><para>Dijit-specific <classname>Zend_View</classname> helpers</para></listitem>
 
@@ -23,13 +23,14 @@
 
     <para>
         The Dojo distribution itself may be found in the
-        <filename>externals/dojo/</filename> directory of the Zend Framework
+        <filename>externals/dojo/</filename> directory of Zend Framework's
         distribution. This is a source distribution, which includes Dojo's full
         javascript source, unit tests, and build tools. You can symlink this
         into your javascript directory, copy it, or use the build tool to create
         your own custom build to include in your project. Alternatively, you can
         use one of the Content Delivery Networks that offer Dojo (Zend Framework supports
-        both the official AOL CDN as well as the Google CDN).
+        both the official <acromyn>AOL</acromyn> <acromyn>CDN</acromyn> as well as the Google
+        <acromyn>CDN</acromyn>).
     </para>
 </sect1>
 <!--

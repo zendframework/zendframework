@@ -153,6 +153,14 @@ class Zend_Wildfire_WildfireTest extends PHPUnit_Framework_TestCase
         $this->_request->setUserAgentExtensionEnabled(false);
 
         $this->assertFalse($channel->isReady(true));
+        
+        $this->_request->setUserAgentExtensionEnabled(true, 'User-Agent');
+        
+        $this->assertTrue($channel->isReady(true));
+
+        $this->_request->setUserAgentExtensionEnabled(true, 'X-FirePHP-Version');
+        
+        $this->assertTrue($channel->isReady(true));
     }
 
     public function testIsReady2()
@@ -166,6 +174,14 @@ class Zend_Wildfire_WildfireTest extends PHPUnit_Framework_TestCase
         $this->_request->setUserAgentExtensionEnabled(false);
 
         $this->assertFalse($channel->isReady());
+
+        $this->_request->setUserAgentExtensionEnabled(true, 'User-Agent');
+        
+        $this->assertTrue($channel->isReady());
+
+        $this->_request->setUserAgentExtensionEnabled(true, 'X-FirePHP-Version');
+        
+        $this->assertTrue($channel->isReady());
     }
 
     public function testFirePhpPluginInstanciation()
@@ -999,20 +1015,28 @@ class Zend_Wildfire_WildfireTest_Request extends Zend_Controller_Request_HttpTes
 {
 
     protected $_enabled = false;
+    protected $_enabled_headerName = false;
 
-    public function setUserAgentExtensionEnabled($enabled) {
+    public function setUserAgentExtensionEnabled($enabled, $headerName = "User-Agent") {
         $this->_enabled = $enabled;
+        $this->_enabled_headerName = $headerName;
     }
 
     public function getHeader($header, $default = null)
     {
-        if ($header == 'User-Agent') {
+        if ($header == 'User-Agent' && $this->_enabled_headerName == 'User-Agent') {
             if ($this->_enabled) {
                 return 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14 FirePHP/0.1.0';
             } else {
                 return 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14';
             }
+        } else
+        if ($header == 'X-FirePHP-Version' && $this->_enabled_headerName == 'X-FirePHP-Version') {
+            if ($this->_enabled) {
+                return '0.1.0';
+            }
         }
+        return null;
     }
 }
 

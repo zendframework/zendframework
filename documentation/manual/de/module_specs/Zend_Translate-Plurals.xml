@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 21194 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 21194 -->
 <sect1 id="zend.translate.plurals">
-    <title>Plurale Schreibweisen für Übersetzungen</title>
+    <title>Schreibweisen von Pluralformen für Übersetzungen</title>
 
     <para>
-        Ab Zend Framework 1.9 ist <classname>Zend_Translate</classname> in der Lage plurale
-        Unterstützung anzubieten. Professionelle Übersetzung wird immer die Notwendigkeit haben
-        Plurale zu verwenden da Sie in allen Sprachen gängig sind.
+        Ab Zend Framework 1.9 ist <classname>Zend_Translate</classname> in der Lage, Unterstützung
+        für Pluralformen anzubieten. Professionelle Übersetzung wird immer die Notwendigkeit haben,
+        den Plural zu verwenden, da dieser in allen Sprachen gängig ist.
     </para>
 
     <para>
-        Was sind also Plurale? Generell gesprochen sind Plurale Wörter die eine nummerische
-        Bedeutung haben. Wie man aber vielleicht erkennen kann hat jede Sprache seine eigene
-        Definition von Pluralen. Englisch zum Beispiel, unterstützt ein Plural. Wir haben eine
-        Singular Definition, zum Beispiel "Car", was implizit ein Auto bedeutet. Und wir haben die
-        plurale Definition "Cars" welche mehr als ein Auto aber auch null Autos bedeueten kann.
-        Andere Sprachen wie russisch oder polnisch haben mehrere Plurale und auch die Regeln für
-        die Plurale sind unterschiedlich.
+        Was sind Pluralformen? Im Allgemeinen sind Wörter im Plural Wörter, die eine numerische
+        Bedeutung haben. Wie man sich sicher vorstellen kann, hat jede Sprache ihre eigene
+        Definition von Pluralformen. Im Englischen gibt es einen einzigen Plural. Es gibt einen
+        Singular, zum Beispiel "Car", was implizit ein Auto bedeutet. Und es gibt
+        den Plural "Cars", welcher mehr als ein Auto aber auch null Autos bedeuten kann.
+        Andere Sprachen wie russisch oder polnisch haben mehrere Pluralformen und auch die Regeln für
+        die Pluralformen sind unterschiedlich.
     </para>
 
     <para>
-        Wenn man Plurale mit <classname>Zend_Translate</classname> verwenden will muß man nicht
-        wissen wie Plurale definiert werden. Nur der Übersetzer muß das wissen da er die
-        Übersetzung durchführt. Die einzige Information die man haben muß ist die Sprache.
+        Wenn man Pluralformen mit <classname>Zend_Translate</classname> verwenden will, muß man nicht
+        wissen, wie Pluralformen definiert werden. Nur der Übersetzer muß das wissen, da er die
+        Übersetzung durchführt. Die einzige Information, die man haben muß, ist die Sprache.
     </para>
 
     <para>
-        Es gibt zwei Wege für die Verwendung von Pluralen... den traditionellen, der bedeutet das
-        man eine eigene Methode verwendet, und einen modernen, der es erlaubt plurale Übersetzungen
+        Es gibt zwei Wege für die Verwendung von Pluralformen: den traditionellen, der bedeutet, dass
+        man eine eigene Methode verwendet, und einen modernen, der es erlaubt, Übersetzungen im Plural
         mit der gleichen Methode durchzuführen wie normale Übersetzungen.
     </para>
 
     <sect2 id="zend.translate.plurals.traditional">
-        <title>Traditionelle plurale Übersetzung</title>
+        <title>Traditionelle Übersetzung des Plurals</title>
 
         <para>
-            Personen die in der Vergangenheit mit Gettext gearbeitet haben werden mit
-            traditionellen pluralen Übersetzungen besser zurechtkommen. Es gibt eine eigene
-            Methode <methodname>plural()</methodname> die für plurale Übersetzungen verwendet
+            Personen, die in der Vergangenheit mit Gettext gearbeitet haben, werden mit
+            traditionellen Pluralübersetzungen besser zurechtkommen. Es gibt eine eigene
+            Methode <methodname>plural()</methodname>, die für Übersetzungen des Plurals verwendet
             werden kann.
         </para>
 
         <example id="zend.translate.plurals.traditional.example1">
-            <title>Beispiel einer traditionellen pluralen Übersetzung</title>
+            <title>Beispiel einer traditionellen Übersetzung des Plurals</title>
 
             <para>
                 Die Methode <methodname>plural()</methodname> akzeptiert 4 Parameter. Der erste
-                Parameter ist die Singular messageId, der zweite ist die Plurale messageId und
+                Parameter ist die messageId des Singular, der zweite ist die messageId des Plural und
                 der dritte ist die Zahl oder Menge.
             </para>
 
             <para>
-                Die Zahl wird verwendet um das Plural zu erkennen das zurückzugeben ist. Als
-                optionaler vierter Parameter kann ein Gebietsschema angegeben werden das verwendet
-                wird um die Übersetzung zurückzugeben.
+                Die Zahl wird verwendet, um den Plural zu erkennen, der zurückzugeben ist. Als
+                optionaler vierter Parameter kann ein Gebietsschema angegeben werden, das verwendet
+                wird, um die Übersetzung zurückzugeben.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -65,29 +65,29 @@ $translate->plural('Car', 'Cars', $number);
     </sect2>
 
     <sect2 id="zend.translate.plurals.modern">
-        <title>Moderne plurale Übersetzungen</title>
+        <title>Moderne Übersetzungen des Plurals</title>
 
         <para>
-            Da traditionelle plurale Übersetzungen aus Quellcode begrenzt ist der die englische
-            Pluralform verwendet wurde ein neuer Weg für plurale Übersetzungen hinzugefügt.
-            Er erlaubt es die gleiche <methodname>translate()</methodname> Methode für normale und
-            plurale Übersetzungen zu verwenden.
+            Da traditionelle Übersetzungen des Plurals begrenzt ist auf Quellcode, der die englische
+            Pluralform verwendet, wurde ein neuer Weg für Übersetzungen des Plurals hinzugefügt.
+            Er erlaubt es, die gleiche <methodname>translate()</methodname> Methode für normale und
+            Pluralübersetzungen zu verwenden.
         </para>
 
         <para>
-            Um plurale Übersetzungen mit <methodname>translate()</methodname> zu verwenden muß man
-            ein Array als messageId statt einem String angeben. Diese Array muß die originalen
-            pluralen messageId's enthalten, dann die Anzahl und als letztes ein optionales
-            Gebietsschema wenn die angegebenen messageId's nicht in englischer Schreibweise
+            Um Plural-Übersetzungen mit <methodname>translate()</methodname> zu verwenden, muß man
+            statt einem String ein Array als messageId angeben. Dieses Array muß die originalen
+            messageId's der Plurale enthalten, dann die Anzahl und als letztes ein optionales
+            Gebietsschema, wenn die angegebenen messageId's nicht in englischer Schreibweise
             vorliegen.
         </para>
 
         <example id="zend.translate.plurals.modern.example1">
-            <title>Beispiel für moderne plurale Übersetzungen</title>
+            <title>Beispiel für moderne Übersetzungen des Plurals</title>
 
             <para>
-                Wenn wir die selben pluralen Definitionen übersetzen wollen wie vorher dann müsste
-                unser Beispiel wie anbei gezeigt aussehen.
+                Wenn wir dieselben Pluraldefinitionen übersetzen wollen wie vorher, dann müsste
+                unser Beispiel wie folgt aussehen.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -97,18 +97,18 @@ $translate->translate(array('Car', 'Cars', $number));
         </example>
 
         <para>
-            Bei der Verwendung von pluralen Übersetzungen ist es auch möglich jede Sprache als
+            Bei der Verwendung von Pluralübersetzungen ist es auch möglich, jede Sprache als
             Quelle für messageId's zu verwenden.
         </para>
 
         <example id="zend.translate.plurals.modern.example2">
             <title>
-                Beispiel einer modernen pluralen Übersetzung durch Verwendung einer anderen
-                Quellsprachen
+                Beispiel einer modernen Übersetzung des Plurals durch Verwendung einer anderen
+                Quellsprache
             </title>
 
             <para>
-                Nehmen wir an wir wollen russisch verwenden und nehmen wir ausserdem an das die
+                Nehmen wir an, wir wollen russisch verwenden und nehmen wir außerdem an, dass die
                 gegebenen messageId's russisch und nicht englisch sind.
             </para>
 
@@ -123,23 +123,23 @@ $translate->translate(array('Car',
         </example>
 
         <para>
-            Wie man sieht kann man mehr als ein englisches Plural angeben. Aber dann muß man die
-            Quellsprache angeben damit <classname>Zend_Translate</classname> in diesem Fall weiß
-            welche Plurale Regeln anzuwenden sind.
+            Wie man sieht, kann man mehr als ein englisches Plural angeben. Aber dann muß man die
+            Quellsprache angeben, damit <classname>Zend_Translate</classname> in diesem Fall weiß,
+            welche Pluralregeln anzuwenden sind.
         </para>
 
         <para>
-            Wenn man die plurale Sprache nicht angibt dan wird standardmäßig englisch verwendet
-            und jede zusätzliche Plurale Definition wird ignoriert.
+            Wenn man die Pluralsprache nicht angibt, dann wird standardmäßig englisch verwendet
+            und jede zusätzliche Pluraldefinition wird ignoriert.
         </para>
     </sect2>
 
     <sect2 id="zend.translate.plurals.source">
-        <title>Plurale Quelldateien</title>
+        <title>Pluralquelldateien</title>
 
         <para>
-            Nicht alle Quellformate unterstützen plurale Formen. Sehen Sie für Details in diese
-            Liste:
+            Nicht alle Quellformate unterstützen Pluralformen. Sehen Sie sich für Details diese
+            Liste an:
         </para>
 
         <table id="zend.translate.plurals.source.supportedadapters">
@@ -203,14 +203,14 @@ $translate->translate(array('Car',
         </table>
 
         <para>
-            Anbei sind Beispiel für die Definition von pluralen Quelldateien zu finden.
+            Im folgenden sind Beispiele für die Definition von Pluralquelldateien zu finden.
         </para>
 
         <sect3 id="zend.translate.plurals.source.array">
-            <title>Array Quellen mit pluralen Definitionen</title>
+            <title>Array-Quellen mit Pluraldefinitionen</title>
 
             <para>
-                Ein Array mit pluralen Definitionen hat wie im folgenden Beispiel auszusehen.
+                Ein Array mit Pluraldefinitionen hat wie im folgenden Beispiel auszusehen.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -227,10 +227,10 @@ array(
 
             <para>
                 Im obigen Beispiel sind <code>plural_0</code> und <code>plural_1</code> die
-                pluralen Definitionen vom Quellcode. Und beim Array <code>plural_0</code>
-                hat alle übersetzten Pluralformen erhältlich. Sehen Sie auf das folgende
-                Beispiel mit realem Inhalt und der Übersetzung von einer Englischen Quelle
-                ins Deutsche.
+                Pluraldefinitionen des Quellcodes. Und im Array <code>plural_0</code>
+                sind alle übersetzten Pluralformen verfügbar. Sehen Sie sich das folgende
+                Beispiel an, das tatsächlichen Inhalt und die Übersetzung von einer englischen Quelle
+                ins Deutsche beinhaltet.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -244,18 +244,18 @@ array(
 ]]></programlisting>
 
             <para>
-                Wenn die eigene Übersetzte Sprache mehr plurale Formen unterstützt müssen diese
-                einfach an das Array der ersten pluralen Form hinzugefügt werden. Wenn die eigene
-                Quellsprache mehr plurale Formen unterstützt, dann muß einfach eine neue leere
+                Wenn die eigene übersetzte Sprache mehr Pluralformen unterstützt, müssen diese
+                einfach an das Array der ersten Pluralform angehängt werden. Wenn die eigene
+                Quellsprache mehr Pluralformen unterstützt, dann muß einfach eine neue leere
                 Übersetzung hinzugefügt werden.
             </para>
         </sect3>
 
         <sect3 id="zend.translate.plurals.source.csv">
-            <title>CSV Quellen mit pluralen Definitionen</title>
+            <title>CSV-Quellen mit Pluraldefinitionen</title>
 
             <para>
-                Eine CSV Datei mit pluralen Definitionen muß wie im folgenden Beispiel gezeigt
+                Eine CSV-Datei mit Pluraldefinitionen muß wie im folgenden Beispiel
                 aussehen.
             </para>
 
@@ -265,27 +265,27 @@ array(
 ]]></programlisting>
 
             <para>
-                Alle übersetzten Pluralen Formen müssen nach der ersten Pluralen der Quell Sprache
-                hinzugefügt werden. Und alle weiteren Pluralen Formen der Quell Sprache müssen
-                darunter aber ohne Übersetzung hinzugefügt werden. Es ist zu beachten das ein
-                Trennzeichen bei den leeren Quell Plurals hinzugefügt werden muß.
+                Alle übersetzten Pluralformen müssen nach dem ersten Plural der Quellsprache
+                hinzugefügt werden. Und alle weiteren Pluralformen der Quellsprache müssen
+                darunter ohne Übersetzung hinzugefügt werden. Es ist zu beachten, dass ein
+                Trennzeichen bei den leeren Quellpluralformen hinzugefügt werden muß.
             </para>
         </sect3>
 
         <sect3 id="zend.translate.plurals.source.gettext">
-            <title>Gettext Quellen mit pluralen Definitionen</title>
+            <title>Gettext-Quellen mit Pluraldefinitionen</title>
 
             <para>
-                Gettext Quellen unterstützen Plurale Formen von Haus aus. Es gibt keine
-                Notwendigkeit Anpassungen durchzuführen da die <filename>*.mo</filename> Datei
+                Gettext-Quellen unterstützen Pluralformen von Haus aus. Es gibt keine
+                Notwendigkeit Anpassungen durchzuführen, da die <filename>*.mo</filename> Datei
                 alle notwendigen Daten enthält.
             </para>
 
             <note>
                 <para>
-                    Es ist zu beachten das Gettext die Verwendung von Quell-Sprachen, welche keine
+                    Es ist zu beachten, dass Gettext die Verwendung von Quellsprachen, welche keine
                     englischen Pluralformen verwenden, nicht unterstützt. Wenn man plant
-                    Quellsprachen zu verwenden welche andere Pluralformen unterstützt, wie zum
+                    Quellsprachen zu verwenden, welche andere Pluralformen unterstützt, wie zum
                     Beispiel russisch, dann kann man Gettext nicht als Quelle verwenden.
                 </para>
             </note>
@@ -293,23 +293,23 @@ array(
     </sect2>
 
     <sect2 id="zend.translate.plurals.customrules">
-        <title>Eigene Plural Regeln</title>
+        <title>Eigene Pluralregeln</title>
 
         <para>
-            In seltenen Fällen kann es nützlich sein wenn man in der Lage ist eigene Plural Regeln
-            zu definieren. Chinesisch zum Beispiel. Diese Sprache definiert zwei Plural Regeln.
+            In seltenen Fällen kann es nützlich sein, wenn man in der Lage ist eigene Pluralregeln
+            zu definieren. Chinesisch zum Beispiel. Diese Sprache definiert zwei Pluralregeln.
             Standardmäßig verwendet Sie kein Plural. Aber in seltenen Fällen wird eine Regel wie
             diese verwendet: <emphasis>(number == 1) ? 0 : 1</emphasis>.
         </para>
 
         <para>
-            Auch wenn man eine Sprache verwenden will die keine bekannten Plural Regeln hat, und
+            Auch wenn man eine Sprache verwenden will, die keine bekannten Plural Regeln hat und
             man eigene Regeln definieren will.
         </para>
 
         <para>
             Das kann durch Verwendung von <methodname>Zend_Translate_Plural::setRule()</methodname>
-            getan werden. Diese Methode erwartet zwei Parameter welche angegeben werden müssen. Eine
+            getan werden. Diese Methode erwartet zwei Parameter, welche angegeben werden müssen. Eine
             Regel, welche einfach ein Callback zu einer selbst definierten Methode ist. Und ein
             Gebietsschema für das diese Regel verwendet wird.
         </para>
@@ -326,15 +326,15 @@ public function MyRule($number) {
 
         <para>
             Wie man sieht muss die eigene Regel einen Parameter akzeptieren. Er ist eine Zahl die
-            man verwendet um zurückzugeben welches Plural der Übersetzung verwendet werden muss.
-            In unserem Beispiel haben wir definiert dass wenn wie eine '10' erhalten, die Plural
-            Definition 0 verwendet werden soll, und in allen anderen Fälle verwendet wir eine 1.
+            man verwendet um zurückzugeben, welches Plural der Übersetzung verwendet werden muss.
+            In unserem Beispiel haben wir definiert, dass wenn wir eine '10' erhalten, die Plural
+            Definition 0 verwendet werden soll, und in allen anderen Fälle verwenden wir eine 1.
         </para>
 
         <para>
             Eigene Regeln können so einfach oder so kompliziert sein wie man will. Man muss einfach
-            nur einen Integer Wert zurückgeben. Die Plural Definition ß steht hierbei für die
-            Singular Übersetzung, und 1 steht für die erste Plural Regel.
+            nur einen Integer-Wert zurückgeben. Die Pluraldefinition 0 steht hierbei für die
+            Singular-Übersetzung und 1 steht für die erste Pluralregel.
         </para>
 
         <para>
@@ -347,20 +347,20 @@ Zend_Translate_Plural::setPlural('MyPlural', 'zh');
 ]]></programlisting>
 
         <para>
-            Jetzt haben wir unsere Plural Definition mit der chinesischen Sprache verknüpft.
+            Jetzt haben wir unsere Pluraldefinition mit der chinesischen Sprache verknüpft.
         </para>
 
         <para>
-            Man kann für jede Sprache eigene Plural Regeln definieren. Aber man sollte aufpassen
-            dass man plurale Regeln setzt bevor Übersetzungen durchgeführt werden.
+            Man kann für jede Sprache eigene Pluralregeln definieren. Aber man sollte aufpassen
+            dass man Pluralregeln setzt, bevor Übersetzungen durchgeführt werden.
         </para>
 
         <note>
-            <title>Eigene Plural Regeln nur definieren wenn dies benötigt wird</title>
+            <title>Eigene Pluralregeln nur definieren, wenn dies benötigt wird</title>
 
             <para>
                 <classname>Zend_Translate</classname> definiert Plurale für die meisten bekannten
-                Sprachen. Man sollte keine eigenen Plurale definieren wenn man das nicht
+                Sprachen. Man sollte keine eigenen Plurale definieren, wenn man das nicht
                 benötigt. Die Standardregeln funktionieren meistens.
             </para>
         </note>

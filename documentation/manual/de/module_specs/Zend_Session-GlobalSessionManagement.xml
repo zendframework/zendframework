@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20810 -->
+<!-- EN-Revision: 21305 -->
 <!-- Reviewed: no -->
 <sect1 id="zend.session.global_session_management">
     <title>Globales Session Management</title>
@@ -256,14 +256,6 @@ Zend_Session::setOptions($config->toArray());
                     Buffergröße nicht überschreiten, andernfalls wird das Problem von Zeit zu Zeit
                     wieder auftreten, wann auch immer eine Ausgabe gesendet wird (vor den
                     <acronym>HTTP</acronym> Headern) welche die Puffergröße überschreitet.
-                </para>
-            </listitem>
-
-            <listitem>
-                <para>
-                    Anternativ kann versucht werden die Logik der Anwendung anders anzuordnen, so
-                    das Aktionen welche Header manipulieren vor dem Senden von jeglicher Ausgabe
-                    ausgeführt werden.
                 </para>
             </listitem>
 

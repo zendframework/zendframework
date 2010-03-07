@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 21238 -->
+<!-- EN-Revision: 21261 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.callback">
     <title>Callback</title>
@@ -173,7 +173,7 @@ if ($valid->isValid($input)) {
 ]]></programlisting>
     </sect3>
 
-    <sect3 id="zend.validate.set.callback.options">
+    <sect3 id="zend.validate.set.callback.options2">
         <title>Optionen hinzufügen</title>
 
         <para>

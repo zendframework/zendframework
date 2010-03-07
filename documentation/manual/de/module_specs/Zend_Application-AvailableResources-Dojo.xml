@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EN-Revision: 21321 -->
+<!-- Reviewed: no -->
+<sect2 id="zend.application.available-resources.dojo">
+    <title>Zend_Application_Resource_Dojo</title>
+
+    <para>
+        <classname>Zend_Application_Resource_Dojo</classname> kann verwendet werden um die
+        Viewhelfer von <classname>Zend_Dojo</classname> zu konfigurieren.
+    </para>
+
+    <example id="zend.application.available-resources.dojo.configExample">
+        <title>Beispiel einer Dojo Ressource Konfiguration</title>
+
+        <para>
+            Anbei ist ein Beispiel einer <acronym>INI</acronym> Datei welches zeigt wie
+            <classname>Zend_Dojo</classname> aktiviert werden kann.
+        </para>
+
+        <programlisting language="ini"><![CDATA[
+resources.dojo.enable = true ; Always load the Dojo javascript files
+]]></programlisting>
+
+        <para>
+            Das <classname>Zend_Dojo</classname> Ressource Plugin verwendet die Optionen für
+            <methodname>Zend_Dojo_View_Helper_Dojo_Container::setOptions()</methodname> um die
+            Viewhelfer zu konfigurieren. Sehen Sie bitte im Kapitel über
+            <link linkend="zend.dojo">Zend_Dojo</link> für eine vollständige Beschreibung und die
+            vorhandenen Optionen nach.
+        </para>
+    </example>
+</sect2>

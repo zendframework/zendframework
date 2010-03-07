@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 19030 -->
+<!-- EN-Revision: 21321 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.application.available-resources.layout">
     <title>Zend_Application_Resource_Layout</title>
@@ -16,7 +16,7 @@
 
         <para>
             Anbei ist ein beispielhaftes <acronym>INI</acronym> Schnipsel das zeigt wie
-            Navigations Ressourcen konfiguriert werden können.
+            Layout Ressourcen konfiguriert werden können.
         </para>
 
         <programlisting language="ini"><![CDATA[

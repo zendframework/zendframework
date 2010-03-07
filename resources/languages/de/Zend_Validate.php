@@ -21,7 +21,7 @@
  */
 
 /**
- * EN-Revision: 21134
+ * EN-Revision: 21362
  */
 return array(
     // Zend_Validate_Alnum
@@ -242,15 +242,19 @@ return array(
 
     // Zend_Validate_Sitemap_Changefreq
     "'%value%' is no valid sitemap changefreq" => "'%value%' ist keine gültige Changefreq für Sitemap",
+    "Invalid type given, the value should be a string" => "Ungültiger Typ angegeben. Der Wert sollte ein String sein",
 
     // Zend_Validate_Sitemap_Lastmod
     "'%value%' is no valid sitemap lastmod" => "'%value%' ist keine gültige Lastmod für Sitemap",
+    "Invalid type given, the value should be a string" => "Ungültiger Typ angegeben. Der Wert sollte ein String sein",
 
     // Zend_Validate_Sitemap_Loc
     "'%value%' is no valid sitemap location" => "'%value%' ist keine gültige Location für Sitemap",
+    "Invalid type given, the value should be a string" => "Ungültiger Typ angegeben. Der Wert sollte ein String sein",
 
     // Zend_Validate_Sitemap_Priority
     "'%value%' is no valid sitemap priority" => "'%value%' ist keine gültige Priority für Sitemap",
+    "Invalid type given, the value should be a integer, a float or a numeric string" => "Ungültiger Typ angegeben. Der Wert sollte ein Integer, ein Float oder ein nummerischer String sein",
 
     // Zend_Validate_StringLength
     "Invalid type given, value should be a string" => "Ungültiger Typ angegeben. Der Wert sollte ein String sein",

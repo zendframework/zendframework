@@ -146,7 +146,7 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
      */
     public function testExceptionIsThrownWhenInvalidXmlIsReturnedByServer()
     {
-        set_error_handler(array($this, 'handleError'));
+        set_error_handler(array($this, 'trackError'));
         $invalidResponse = 'foo';
         $response = new Zend_XmlRpc_Response();
         $this->assertFalse($this->_errorOccured);
@@ -251,7 +251,7 @@ EOD;
         }
     }
 
-    public function handleError($error)
+    public function trackError($error)
     {
         $this->_errorOccured = true;
     }

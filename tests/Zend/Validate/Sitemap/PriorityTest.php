@@ -82,14 +82,30 @@ class Zend_Validate_Sitemap_PriorityTest extends PHPUnit_Framework_TestCase
     public function testInvalidPriorities()
     {
         $values = array(
-            'alwayz',  '_hourly', 'Daily', 'wEekly',
-            'mönthly ', ' yearly ', 'never ', 'rofl',
-            '0,0', '1.1', '02', '3', '01.4', '0.f',
-            1.1, -0.001, 1.0001
+            -1, -0.1, 1.1, 100, 10, 2, '3', '-4',
         );
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
+            $messages = $this->_validator->getMessages();
+            $this->assertContains('is no valid', current($messages));
+        }
+    }
+
+    /**
+     * Tests values that are no numbers
+     *
+     */
+    public function testNotNumbers()
+    {
+        $values = array(
+            null, new stdClass(), true, false, 'abcd',
+        );
+
+        foreach ($values as $value) {
+            $this->assertSame(false, $this->_validator->isValid($value));
+            $messages = $this->_validator->getMessages();
+            $this->assertContains('should be a integer', current($messages));
         }
     }
 }

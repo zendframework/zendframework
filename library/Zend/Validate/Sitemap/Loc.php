@@ -47,7 +47,8 @@ class Zend_Validate_Sitemap_Loc extends Zend_Validate_Abstract
      * Validation key for not valid
      *
      */
-    const NOT_VALID = 'invalidSitemapLoc';
+    const NOT_VALID = 'sitemapLocNotValid';
+    const INVALID   = 'sitemapLocInvalid';
 
     /**
      * Validation failure message template definitions
@@ -56,6 +57,7 @@ class Zend_Validate_Sitemap_Loc extends Zend_Validate_Abstract
      */
     protected $_messageTemplates = array(
         self::NOT_VALID => "'%value%' is no valid sitemap location",
+        self::INVALID   => "Invalid type given, the value should be a string",
     );
 
     /**
@@ -68,12 +70,18 @@ class Zend_Validate_Sitemap_Loc extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
-
         if (!is_string($value)) {
+            $this->_error(self::INVALID);
             return false;
         }
 
-        return Zend_Uri::check($value);
+        $this->_setValue($value);
+        $result = Zend_Uri::check($value);
+        if ($result !== true) {
+            $this->_error(self::NOT_VALID);
+            return false;
+        }
+
+        return true;
     }
 }

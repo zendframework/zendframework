@@ -48,7 +48,8 @@ class Zend_Validate_Sitemap_Lastmod extends Zend_Validate_Abstract
      * Validation key for not valid
      *
      */
-    const NOT_VALID = 'invalidSitemapLastmod';
+    const NOT_VALID = 'sitemapLastmodNotValid';
+    const INVALID   = 'sitemapLastmodInvalid';
 
     /**
      * Validation failure message template definitions
@@ -57,6 +58,7 @@ class Zend_Validate_Sitemap_Lastmod extends Zend_Validate_Abstract
      */
     protected $_messageTemplates = array(
         self::NOT_VALID => "'%value%' is no valid sitemap lastmod",
+        self::INVALID   => "Invalid type given, the value should be a string",
     );
 
     /**
@@ -69,12 +71,18 @@ class Zend_Validate_Sitemap_Lastmod extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
-
         if (!is_string($value)) {
+            $this->_error(self::INVALID);
             return false;
         }
 
-        return @preg_match(self::LASTMOD_REGEX, $value) == 1;
+        $this->_setValue($value);
+        $result = @preg_match(self::LASTMOD_REGEX, $value);
+        if ($result != 1) {
+            $this->_error(self::NOT_VALID);
+            return false;
+        }
+
+        return true;
     }
 }

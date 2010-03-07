@@ -89,15 +89,32 @@ class Zend_Validate_Sitemap_LocTest extends PHPUnit_Framework_TestCase
             'www.example.com',
             '/news/',
             '#',
-            new stdClass(),
-            42,
             'http:/example.com/',
-            null,
             'https://www.exmaple.com/?foo="bar\'&bar=<bat>'
         );
 
         foreach ($values as $value) {
             $this->assertSame(false, $this->_validator->isValid($value));
+            $messages = $this->_validator->getMessages();
+            $this->assertContains('is no valid', current($messages));
         }
     }
+
+    /**
+     * Tests values that are not strings
+     *
+     */
+    public function testNotStrings()
+    {
+        $values = array(
+            1, 1.4, null, new stdClass(), true, false
+        );
+
+        foreach ($values as $value) {
+            $this->assertSame(false, $this->_validator->isValid($value));
+            $messages = $this->_validator->getMessages();
+            $this->assertContains('should be a string', current($messages));
+        }
+    }
+
 }

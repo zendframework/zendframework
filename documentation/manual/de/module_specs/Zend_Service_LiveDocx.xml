@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 20850 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 20850 -->
 <sect1 id="zend.service.livedocx">
     <title>Zend_Service_LiveDocx</title>
 
@@ -20,12 +20,12 @@
         <para>
             Die Familie der <classname>Zend_Service_LiveDocx</classname> Komponenten bietet ein
             klares und einfaches Interface zur <ulink url="http://www.livedocx.com">LiveDocx
-                API</ulink> und bietet zusätzlich Funktionalitäten um die Geschwindigkeit im
+                API</ulink> und bietet zusätzlich Funktionalitäten, um die Geschwindigkeit im
             Netzwerk zu erhöhen.
         </para>
 
         <para>
-            Wenn man, zusätzlich zu diesem Kapitel des Handbuchs, daran interessiert ist mehr
+            Wenn man zusätzlich zu diesem Kapitel des Handbuchs daran interessiert ist, mehr
             über <classname>Zend_Service_LiveDocx</classname> und den dahinterliegenden
             <acronym>SOAP</acronym>-Service LiveDocx zu lernen, kann man bei den folgenden
             Ressourcen nachsehen:
@@ -76,12 +76,12 @@
             <title>Für einen Account anmelden</title>
 
             <para>
-                Bevor man damit beginnt LiveDocx zu verwenden muss man sich zuerst für einen Account
+                Bevor man damit beginnt LiveDocx zu verwenden, muss man sich zuerst für einen Account
                 <ulink
                     url="https://www.livedocx.com/user/account_registration.aspx">anmelden</ulink>.
-                Der Account ist komplett kostenlos, und es muss nur einen
-                <emphasis>Benutzernamen</emphasis>, ein <emphasis>Passwort</emphasis> und eine
-                <emphasis>E-Mail Adresse</emphasis> eingegeben werden. Die Anmeldedaten werden mit der
+                Der Account ist komplett kostenlos, und es muss nur ein
+                <emphasis>Benutzername</emphasis>, ein <emphasis>Passwort</emphasis> und eine
+                <emphasis>E-Mail-Adresse</emphasis> eingegeben werden. Die Anmeldedaten werden mit der
                 E-Mail-Adresse verknüpft, die man angibt, deshalb sollte man vorsichtig tippen.
             </para>
         </sect3>
@@ -142,7 +142,7 @@
                     <listitem>
                         <para>
                             <ulink url="http://en.wikipedia.org/wiki/Rich_Text_Format">RTF</ulink> -
-                            Rich Text Dateiformat
+                            Rich-Text-Dateiformat
                         </para>
                     </listitem>
 
@@ -156,7 +156,7 @@
             </sect4>
 
             <sect4 id="zend.service.livedocx.formats.document">
-                <title>Dokument Dateiformate (Ausgabe):</title>
+                <title>Dateiformate des Dokuments (Ausgabe):</title>
 
                 <para>
                     Das resultierende Dokument kann in jedem der folgenden Dateiformate gespeichert
@@ -188,7 +188,7 @@
                     <listitem>
                         <para>
                             <ulink url="http://en.wikipedia.org/wiki/Rich_Text_Format">RTF</ulink> -
-                            Rich Text File Format
+                            Rich-Text-Dateiformat
                         </para>
                     </listitem>
 
@@ -217,7 +217,7 @@
             </sect4>
 
             <sect4 id="zend.service.livedocx.formats.image">
-                <title>Bild Dateiformate (Ausgabe):</title>
+                <title>Bilddateiformate (Ausgabe):</title>
 
                 <para>
                     Das resultierende Dokument kann in jedem der folgenden grafischen Dateiformate
@@ -228,7 +228,7 @@
                     <listitem>
                         <para>
                             <ulink url="http://en.wikipedia.org/wiki/BMP_file_format">BMP</ulink> -
-                            Bitmap Image Format
+                            Bitmap Bildformat
                         </para>
                     </listitem>
 
@@ -319,7 +319,7 @@
 
             <para>
                 Man muss damit beginnen Microsoft Word zu starten und ein neues Dokument zu
-                erstellen. Als nächstes, wird der Dialog <emphasis>Felder</emphasis> geöffnet.
+                erstellen. Als nächstes wird der Dialog <emphasis>Felder</emphasis> geöffnet.
                 Er sieht wie folgt aus:
             </para>
 
@@ -423,8 +423,8 @@ file_put_contents('document.pdf', $document);
             </para>
 
             <para>
-                Zusätzlich zu Text-Felder ist es auch möglich spezielle Regionen eines Dokuments
-                zu spezifizieren, die wiederholt werden sollen.
+                Zusätzlich zu Textfeldern ist es auch möglich, spezielle Regionen eines Dokuments
+                anzugeben, die wiederholt werden sollen.
             </para>
 
             <para>
@@ -525,7 +525,7 @@ $billConnections = array(
 
 $phpLiveDocx->assign('connection', $billConnections);
 
-// ... andere Daten hier anhängen ...
+// ... andere Daten hier zuweisen ...
 
 $phpLiveDocx->createDocument();
 $document = $phpLiveDocx->retrieveDocument('pdf');
@@ -593,9 +593,9 @@ file_put_contents('document.pdf', $document);
                 <varname>$fromPage</varname> ist die untere Grenze der Seitenzahl des Bereichs an
                 Seiten, die als Bilder zurückgegeben werden sollen und <varname>$toPage</varname>
                 ist die obere Grenze der Seitenzahlen. <varname>$zoomFactor</varname> ist die Größe
-                der Bilder, als Prozentwert, relativ zur originalen Seitengröße. Der Bereich dieses
+                der Bilder als Prozentwert relativ zur originalen Seitengröße. Der Bereich dieses
                 Parameters ist von 10 bis 400. <varname>$format</varname> ist das Format des
-                Bildes welches von dieser Methode zurückgegeben wird. Die unterstützten Formate
+                Bildes, welches von dieser Methode zurückgegeben wird. Die unterstützten Formate
                 erhält man, wenn man <methodname>getImageFormats()</methodname> aufruft.
             </para>
 
@@ -637,7 +637,7 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
             <para>
                 Das produziert zwei Bilder (<filename>documentPage1.png</filename> und
                 <filename>documentPage2.png</filename>) und schreibt diese auf die Festplatte
-                in das gleiche Verzeichnis wie die ausführbare PHP Datei.
+                in das gleiche Verzeichnis wie die ausführbare PHP-Datei.
             </para>
 
             <para>
@@ -675,12 +675,12 @@ foreach ($bitmaps as $pageNumber => $bitmapData) {
                 Client auf den Server transferiert werden. Wenn sich der Inhalt vom Templates
                 selten ändert, ist dieser Weg sehr ineffizient. Ähnlich auch, wenn das Template eine
                 Größe von mehreren Megabyte hat, kann es eine beträchtliche Zeit dauern, es auf den
-                Server zu transferieren. Lokale Templates sind in Situationen sinnvoll in denen der
+                Server zu transferieren. Lokale Templates sind in Situationen sinnvoll, in denen der
                 Inhalt des Templates konstant geändert wird.
             </para>
 
             <para>
-                Der folgende Code zeigt wie man ein lokales Template verwendet.
+                Der folgende Code zeigt, wie man ein lokales Template verwendet.
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -700,11 +700,11 @@ $phpLiveDocx->setLocalTemplate('./template.docx');
                 referenziert. Natürlich ist es viel schneller, als ein lokales Template zu
                 verwenden, da das Template nicht bei jeder Anfrage übertragen werden muss. Für
                 Anwendungen bei denen die Geschwindigkeit kritisch ist, wird es empfohlen die
-                Remote-Template Methode zu verwenden.
+                Remote-Template-Methode zu verwenden.
             </para>
 
             <para>
-                Der folgende Code zeigt wie ein Template auf den Server übertragen wird:
+                Der folgende Code zeigt, wie ein Template auf den Server übertragen wird:
             </para>
 
             <programlisting language="php"><![CDATA[
@@ -717,7 +717,7 @@ $phpLiveDocx->uploadTemplate('template.docx');
 ]]></programlisting>
 
             <para>
-                Der folgende Code zeigt wie auf das remote gespeicherte Template bei allen
+                Der folgende Code zeigt, wie auf das remote gespeicherte Template bei allen
                 weiteren Anfragen referenziert wird:
             </para>
 
@@ -746,9 +746,9 @@ $phpLiveDocx->setRemoteTemplate('template.docx');
                 <title>Ein Array an Feldnamen vom Template erhalten</title>
 
                 <para>
-                    Der folgende Code gibt ein Array aller Feldnamen im spezifizierten Template
+                    Der folgende Code gibt ein Array aller Feldnamen im angegebenen Template
                     zurück und zeigt diese an. Diese Funktionalität ist nützlich, wenn man eine
-                    Anwendung erstellt, in welcher der End-Benutzer das Template aktualisieren kann.
+                    Anwendung erstellt, in welcher der Endbenutzer das Template aktualisieren kann.
                 </para>
 
                 <programlisting language="php"><![CDATA[
@@ -768,13 +768,13 @@ foreach ($fieldNames as $fieldName) {
             </example>
 
             <example id="zend.service.livedocx.mailmerge.information.getblockfieldname">
-                <title>Ein Array an Block Feldnamen vom Template erhalten</title>
+                <title>Ein Array an Blockfeldnamen vom Template erhalten</title>
 
                 <para>
-                    Der folgende Code zeigt ein Array aller Block-Feldnamen im
-                    spezifizierten Template an. Diese Funktionalität ist nützlich, wenn man eine
-                    Anwendung erstellt, in welcher der End-Benutzer das Template aktualisieren kann.
-                    Bevor solche Templates veröffentlicht werden können, ist es notwendig die Namen
+                    Der folgende Code zeigt ein Array aller Blockfeldnamen im
+                    angegebenen Template an. Diese Funktionalität ist nützlich, wenn man eine
+                    Anwendung erstellt, in welcher der Endbenutzer das Template aktualisieren kann.
+                    Bevor solche Templates veröffentlicht werden können, ist es notwendig, die Namen
                     der enthaltenen Blockfelder herauszufinden.
                 </para>
 
@@ -860,7 +860,7 @@ Zend_Debug::dump($phpLiveDocx->getTemplateFormats());
 
                 <para>
                     Der folgende Code zeigt ein Array aller unterstützten
-                    Dateiformate für Dokumente. Diese Methode ist partiell nützlich im Fall das
+                    Dateiformate für Dokumente. Diese Methode ist besonders nützlich, falls
                     eine Auswahlliste angezeigt werden soll, welche es dem Endbenutzer erlaubt,
                     das Ausgabeformat für den Erstellungsprozess des Dokuments auszuwählen.
                 </para>
@@ -880,8 +880,8 @@ Zend_Debug::dump($phpLiveDocx->getDocumentFormats());
 
                 <para>
                     Der folgende Code zeigt ein Array aller unterstützten
-                    Dateiformate für Bilder. Diese Methode ist partiell nützlich im Fall das
-                    eine Auswahlliste angezeigt werden soll, welche es dem Endbenutzer erlaubt
+                    Dateiformate für Bilder. Diese Methode ist besonders nützlich, falls
+                    eine Auswahlliste angezeigt werden soll, welche es dem Endbenutzer erlaubt,
                     das Ausgabeformat für den Erstellungsprozess des Dokuments auszuwählen.
                 </para>
 

@@ -44,6 +44,11 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
     protected $_response;
 
     /**
+     * @var bool
+     */
+    protected $_errorOccured = false;
+
+    /**
      * Setup environment
      */
     public function setUp()
@@ -134,6 +139,19 @@ class Zend_XmlRpc_ResponseTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->_response->loadXml(new stdClass()));
         $this->assertTrue($this->_response->isFault());
         $this->assertSame(650, $this->_response->getFault()->getCode());
+    }
+
+    /**
+     * @group ZF-9039
+     */
+    public function testExceptionIsThrownWhenInvalidXmlIsReturnedByServer()
+    {
+        set_error_handler(array($this, 'handleError'));
+        $invalidResponse = 'foo';
+        $response = new Zend_XmlRpc_Response();
+        $this->assertFalse($this->_errorOccured);
+        $this->assertFalse($response->loadXml($invalidResponse));
+        $this->assertFalse($this->_errorOccured);
     }
 
     /**
@@ -231,5 +249,10 @@ EOD;
             $this->fail('Invalid XML-RPC response should raise an exception');
         } catch (Exception $e) {
         }
+    }
+
+    public function handleError($error)
+    {
+        $this->_errorOccured = true;
     }
 }

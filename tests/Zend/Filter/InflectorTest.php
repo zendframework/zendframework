@@ -361,10 +361,6 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
     {
         $options = array(
             'target' => '$controller/$action.$suffix',
-            'filterPrefixPath' => array(
-                'Zend_View_Filter' => 'Zend/View/Filter/',
-                'Foo_Filter'       => 'foo/filters/'
-            ),
             'throwTargetExceptionsOn' => true,
             'targetReplacementIdentifier' => '$',
             'rules' => array(
@@ -377,6 +373,10 @@ class Zend_Filter_InflectorTest extends PHPUnit_Framework_TestCase
                     'rule2' => 'StringToUpper',
                 ),
                 'suffix' => 'php'
+            ),
+            'filterPrefixPath' => array(
+                'Zend_View_Filter' => 'Zend/View/Filter/',
+                'Foo_Filter'       => 'foo/filters/'
             ),
         );
         return $options;

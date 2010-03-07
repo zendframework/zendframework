@@ -149,38 +149,29 @@ class Zend_Filter_Inflector implements Zend_Filter_Interface
             $options = $options->toArray();
         }
 
-        foreach ($options as $key => $value) {
-            switch ($key) {
-                case 'target':
-                    $this->setTarget($value);
-                    break;
-
-                case 'filterPrefixPath':
-                    if (is_scalar($value)) {
-                        break;
-                    }
-
-                    foreach ($value as $prefix => $path) {
-                        $this->addFilterPrefixPath($prefix, $path);
-                    }
-
-                    break;
-
-                case 'throwTargetExceptionsOn':
-                    $this->setThrowTargetExceptionsOn($value);
-                    break;
-
-                case 'targetReplacementIdentifier':
-                    $this->setTargetReplacementIdentifier($value);
-                    break;
-
-                case 'rules':
-                    $this->addRules($value);
-                    break;
-
-                default:
-                    break;
+        // Set Präfix Path
+        if (array_key_exists('filterPrefixPath', $options)) {
+            if (!is_scalar($options['filterPrefixPath'])) {
+                foreach ($options['filterPrefixPath'] as $prefix => $path) {
+                    $this->addFilterPrefixPath($prefix, $path);
+                }
             }
+        }
+
+        if (array_key_exists('throwTargetExceptionsOn', $options)) {
+            $this->setThrowTargetExceptionsOn($options['throwTargetExceptionsOn']);
+        }
+
+        if (array_key_exists('targetReplacementIdentifier', $options)) {
+            $this->setTargetReplacementIdentifier($options['targetReplacementIdentifier']);
+        }
+
+        if (array_key_exists('target', $options)) {
+            $this->setTarget($options['target']);
+        }
+
+        if (array_key_exists('rules', $options)) {
+            $this->addRules($options['rules']);
         }
 
         return $this;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21245 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.post_code">
     <title>PostCode</title>
@@ -111,5 +111,30 @@ $validator = new Zend_Validate_PostCode(array(
     'format' => 'AT_\d+'
 ));
 ]]></programlisting>
+    </sect3>
+
+    <sect3 id="zend.validate.set.post_code.options">
+        <title>Unterstützte Optionen für Zend_Validate_PostCode</title>
+
+        <para>
+            Die folgenden Optionen werden für <classname>Zend_Validate_PostCode</classname>
+            unterstützt:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>format</property></emphasis>: Setzt das Postleitzahl-Format
+                    welches für die Prüfung der Eingabe verwendet werden soll.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>locale</property></emphasis>: Setzt ein Gebietsschema von
+                    dem die Postleitzahl genommen wird.
+                </para>
+            </listitem>
+        </itemizedlist>
     </sect3>
 </sect2>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 18417 -->
+<!-- EN-Revision: 21241 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.Db">
     <title>Db_RecordExists und Db_NoRecordExists</title>
@@ -10,6 +10,53 @@
         ein Eintrag in einer angegebenen Tabelle einer Datenbank, mit einem gegebenen Wert,
         existiert.
     </para>
+
+    <sect3 id="zend.validate.set.db.options">
+        <title>Unterstützte Optionen für Zend_Validate_Db_*</title>
+
+        <para>
+            Die folgenden Optionen werden für
+            <classname>Zend_Validate_Db_NoRecordExists</classname> und
+            <classname>Zend_Validate_Db_RecordExists</classname> unterstützt:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>adapter</property></emphasis>: Der Datenbank-Adapter welcher
+                    für die Suche verwendet wird.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>exclude</property></emphasis>: Setzt die Einträge welche von
+                    der Suche ausgenommen werden.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>field</property></emphasis>: Das Datenbank-Feld in dieser
+                    Tabelle welches nach dem Eintrag durchsucht wird.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>schema</property></emphasis>: Setzt das Schema welches für
+                    die Suche verwendet wird.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>table</property></emphasis>: Die Tabelle welche nach dem
+                    Eintrag durchsucht wird.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
 
     <sect3 id="zend.validate.db.basic-usage">
         <title>Grundsätzliche Verwendung</title>

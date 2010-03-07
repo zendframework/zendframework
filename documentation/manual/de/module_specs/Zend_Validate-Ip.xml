@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20794 -->
+<!-- EN-Revision: 21243 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.ip">
     <title>Ip</title>
@@ -8,6 +8,30 @@
         <classname>Zend_Validate_Ip</classname> erlaubt es zu Prüfen ob ein gegebener Wert eine IP
         Adresse ist. Er unterstützt den IPv4 und auch den IPv6 Standard.
     </para>
+
+    <sect3 id="zend.validate.set.ip.options">
+        <title>Unterstützte Optionen für Zend_Validate_Ip</title>
+
+        <para>
+            Die folgenden Optionen werden für <classname>Zend_Validate_Ip</classname> unterstützt:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>allowipv4</property></emphasis>: Definiert ob die Prüfung
+                    IPv4 Adressen erlaubt. Diese Option ist standardmäßig <constant>TRUE</constant>.
+                </para>
+            </listitem>
+
+            <listitem>
+                <para>
+                    <emphasis><property>allowipv6</property></emphasis>: Definiert ob die Prüfung
+                    IPv6 Adressen erlaubt. Diese Option ist standardmäßig <constant>TRUE</constant>.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
 
     <sect3 id="zend.validate.set.ip.basic">
         <title>Grundsätzliche Verwendung</title>

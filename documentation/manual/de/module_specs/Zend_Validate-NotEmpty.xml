@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- EN-Revision: 20043 -->
+<!-- EN-Revision: 21245 -->
 <!-- Reviewed: no -->
 <sect2 id="zend.validate.set.notempty">
     <title>NotEmpty</title>
@@ -9,6 +9,26 @@
         nützlich wenn man mit Formular Elementen oder anderen Benutzereingaben arbeitet, und man
         sicherstellen will das den benötigten Elementen Werte zugeordnet wurden.
     </para>
+
+    <sect3 id="zend.validate.set.notempty.options">
+        <title>Unterstützte Optionen für Zend_Validate_NotEmpty</title>
+
+        <para>
+            Die folgenden Optionen werden für <classname>Zend_Validate_NotEmpty</classname>
+            unterstützt:
+        </para>
+
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <emphasis><property>type</property></emphasis>: Setzt den Typ der Prüfung
+                    welcher durchgeführt wird. Für Details sollte in <link
+                        linkend="zend.validate.set.notempty.types">diesem Abschnitt</link>
+                    nachgesehen werden.
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect3>
 
     <sect3 id="zend.validate.set.notempty.default">
         <title>Standardverhalten für Zend_Validate_NotEmpty</title>

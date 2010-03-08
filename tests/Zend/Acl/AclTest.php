@@ -470,6 +470,7 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
      */
     public function testDefaultAssert()
     {
+        require_once dirname(__FILE__) . '/_files/MockAssertion.php';
         $this->_acl->deny(null, null, null, new Zend_Acl_MockAssertion(false));
         $this->assertTrue($this->_acl->isAllowed());
         $this->assertTrue($this->_acl->isAllowed(null, null, 'somePrivilege'));
@@ -1067,6 +1068,7 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
      */
     public function testAclInternalDFSMethodsBehaveProperly()
     {
+        require_once dirname(__FILE__) . '/_files/ExtendedAclZF2234.php';
         $acl = new Zend_Acl_ExtendedAclZF2234();
 
         $someResource = new Zend_Acl_Resource('someResource');
@@ -1137,6 +1139,8 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
     {
         $acl = $this->_loadUseCase1();
 
+        require_once dirname(__FILE__) . '/_files/UseCase1/User.php';
+        require_once dirname(__FILE__) . '/_files/UseCase1/BlogPost.php';
         $user = new Zend_Acl_UseCase1_User();
         $blogPost = new Zend_Acl_UseCase1_BlogPost();
 
@@ -1165,7 +1169,8 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
      */
     protected function _loadUseCase1()
     {
-        if (!class_exists('Zend_Acl_UseCase1_Acl')) {
+        if (!class_exists('Zend_Acl_UseCase1_Acl', false)) {
+            require_once dirname(__FILE__) . '/_files/UseCase1/Acl.php';
         }
         return new Zend_Acl_UseCase1_Acl();
     }
@@ -1235,7 +1240,9 @@ class Zend_Acl_AclTest extends PHPUnit_Framework_TestCase
     /**
      * @group ZF-7973
      */
-    public function testAclPassesPrivilegeToAssertClass() {
+    public function testAclPassesPrivilegeToAssertClass() 
+    {
+        require_once dirname(__FILE__) . '/_files/AssertionZF7973.php';
         $assertion = new Zend_Acl_AclTest_AssertionZF7973();
 
         $acl = new Zend_Acl();

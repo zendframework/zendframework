@@ -7,6 +7,7 @@ class Zend_Acl_UseCase1_Acl extends Zend_Acl
 
     public function __construct()
     {
+        require_once dirname(__FILE__) . '/UserIsBlogPostOwnerAssertion.php';
         $this->customAssertion = new Zend_Acl_UseCase1_UserIsBlogPostOwnerAssertion();
 
         $this->addRole(new Zend_Acl_Role('guest'));                    // $acl->addRole('guest');

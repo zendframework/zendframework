@@ -27,14 +27,11 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Zend_Loader_Autoloader
  */
-require_once 'Zend/Loader/Autoloader.php';
 
-require_once 'Zend/Application/Resource/View.php';
 
 /**
  * @category   Zend
@@ -67,7 +64,6 @@ class Zend_Application_Resource_ViewTest extends PHPUnit_Framework_TestCase
 
         $this->application = new Zend_Application('testing');
 
-        require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';
         $this->bootstrap = new ZfAppBootstrap($this->application);
 
         Zend_Controller_Action_HelperBroker::resetHelpers();
@@ -110,7 +106,6 @@ class Zend_Application_Resource_ViewTest extends PHPUnit_Framework_TestCase
         $options = array(
             'scriptPath' => dirname(__FILE__),
         );
-        require_once 'Zend/Application/Resource/View.php';
         $resource = new Zend_Application_Resource_View($options);
         $resource->init();
         $view  = $resource->getView();

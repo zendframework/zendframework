@@ -20,8 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Extension/When.php';
-require_once 'Zend/Gdata.php';
 
 /**
  * @category   Zend

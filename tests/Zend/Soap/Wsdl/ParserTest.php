@@ -20,10 +20,6 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__)."/../../../TestHelper.php";
-require_once "Zend/Soap/Wsdl.php";
-require_once "Zend/Soap/Wsdl/Parser.php";
-require_once "Zend/Soap/Wsdl/Parser/Result.php";
 
 /**
  * @category   Zend

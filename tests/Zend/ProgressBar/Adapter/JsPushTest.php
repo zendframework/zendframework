@@ -28,12 +28,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Zend_ProgressBar_Adapter_JsPush
  */
-require_once 'Zend/ProgressBar/Adapter/JsPush.php';
 
 /**
  * @category   Zend
@@ -84,7 +82,7 @@ class Zend_ProgressBar_Adapter_jsPushTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class Zend_ProgressBar_Adapter_jsPush_Stub extends Zend_ProgressBar_Adapter_jsPush
+class Zend_ProgressBar_Adapter_jsPush_Stub extends Zend_ProgressBar_Adapter_JsPush
 {
     protected $_lastOutput = null;
 

@@ -20,14 +20,7 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Tool/Framework/Manifest/ActionManifestable.php';
-require_once 'Zend/Tool/Framework/Manifest/ProviderManifestable.php';
-require_once 'Zend/Tool/Framework/Manifest/MetadataManifestable.php';
-require_once 'Zend/Tool/Framework/Manifest/Indexable.php';
-require_once 'Zend/Tool/Framework/Metadata/Basic.php';
 
-require_once 'ProviderTwo.php';
-require_once 'ActionTwo.php';
 
 /**
  * @category   Zend

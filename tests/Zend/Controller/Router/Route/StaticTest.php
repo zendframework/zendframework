@@ -21,10 +21,8 @@
  */
 
 /** Zend_Controller_Router_Route */
-require_once 'Zend/Controller/Router/Route/Static.php';
 
 /** PHPUnit test case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend
@@ -112,7 +110,6 @@ class Zend_Controller_Router_Route_StaticTest extends PHPUnit_Framework_TestCase
 
     public function testGetInstance()
     {
-        require_once 'Zend/Config.php';
 
         $routeConf = array(
             'route' => 'users/all',

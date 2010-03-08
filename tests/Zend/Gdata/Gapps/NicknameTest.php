@@ -20,8 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Gapps/Extension/Nickname.php';
-require_once 'Zend/Gdata.php';
 
 /**
  * @category   Zend

@@ -25,17 +25,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_TranslateTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_View_Helper_Translate */
-require_once 'Zend/View/Helper/Translate.php';
 
 /** Zend_Registry */
-require_once 'Zend/Registry.php';
 
 /** Zend_Translate */
-require_once 'Zend/Translate.php';
-require_once 'Zend/Translate/Adapter/Array.php';
 
 /**
  * Test class for Zend_View_Helper_Translate.
@@ -67,7 +62,6 @@ class Zend_View_Helper_TranslateTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_TranslateTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

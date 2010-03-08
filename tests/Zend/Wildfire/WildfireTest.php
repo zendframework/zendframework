@@ -24,34 +24,24 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Wildfire_WildfireTest::main');
 }
 
-require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 /** Zend_Wildfire_Channel_HttpHeaders */
-require_once 'Zend/Wildfire/Channel/HttpHeaders.php';
 
 /** Zend_Wildfire_Plugin_FirePhp */
-require_once 'Zend/Wildfire/Plugin/FirePhp.php';
 
 /** Zend_Wildfire_Plugin_FirePhp_Message */
-require_once 'Zend/Wildfire/Plugin/FirePhp/Message.php';
 
 /** Zend_Wildfire_Plugin_FirePhp_TableMessage */
-require_once 'Zend/Wildfire/Plugin/FirePhp/TableMessage.php';
 
 /** Zend_Controller_Request_HttpTestCase */
-require_once 'Zend/Controller/Request/HttpTestCase.php';
 
 /** Zend_Controller_Response_Http */
-require_once 'Zend/Controller/Response/HttpTestCase.php';
 
 /** Zend_Controller_Front **/
-require_once 'Zend/Controller/Front.php';
 
 /** Zend_Json */
-require_once 'Zend/Json.php';
 
 /** Zend_Json_Encoder */
-require_once 'Zend/Json/Encoder.php';
 
 /**
  * @category   Zend

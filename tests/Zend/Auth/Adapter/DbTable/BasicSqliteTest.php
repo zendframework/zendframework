@@ -20,18 +20,15 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 /**
  * PHPUnit_Framework_TestCase
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 
 /**
  * @see Zend_Db_Adapter_Pdo_Sqlite
  */
-require_once 'Zend/Db/Adapter/Pdo/Sqlite.php';
 
 
 /**
@@ -40,13 +37,11 @@ require_once 'Zend/Db/Adapter/Pdo/Sqlite.php';
  *
  * @see Zend_Db
  */
-require_once 'Zend/Db.php';
 
 
 /**
  * @see Zend_Auth_Adapter_DbTable
  */
-require_once 'Zend/Auth/Adapter/DbTable.php';
 
 
 /**

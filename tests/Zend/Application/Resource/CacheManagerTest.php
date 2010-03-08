@@ -27,22 +27,18 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Zend_Loader_Autoloader
  */
-require_once 'Zend/Loader/Autoloader.php';
 
 /**
  * Zend_Controller_Front
  */
-require_once 'Zend/Controller/Front.php';
 
 /**
  * Zend_Application_Resource_Cachemanager
  */
-require_once 'Zend/Application/Resource/Cachemanager.php';
 
 /**
  * @category   Zend
@@ -75,7 +71,6 @@ class Zend_Application_Resource_CacheManagerTest extends PHPUnit_Framework_TestC
 
         $this->application = new Zend_Application('testing');
 
-        require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';
         $this->bootstrap = new ZfAppBootstrap($this->application);
     }
 

@@ -23,7 +23,6 @@
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 
 /**

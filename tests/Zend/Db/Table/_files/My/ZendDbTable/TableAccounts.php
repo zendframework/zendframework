@@ -24,13 +24,11 @@
 /**
  * @see Zend_Db_Table_Abstract
  */
-require_once 'Zend/Db/Table/Abstract.php';
 
 /**
  * require other test files needed, this will
  * ensure that Zend_Loader::loadClass is not called
  */
-require_once 'TableBugs.php';
 
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);

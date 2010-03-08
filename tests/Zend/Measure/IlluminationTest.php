@@ -24,12 +24,10 @@
 /**
  * Zend_Measure_Illumination
  */
-require_once 'Zend/Measure/Illumination.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

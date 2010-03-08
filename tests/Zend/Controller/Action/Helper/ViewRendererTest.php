@@ -25,14 +25,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_Helper_ViewRendererTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
-
-require_once 'Zend/Controller/Action/Helper/ViewRenderer.php';
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Response/Http.php';
-require_once 'Zend/Filter/Inflector.php';
-require_once 'Zend/View.php';
 
 require_once dirname(__FILE__) . '/../../_files/modules/foo/controllers/IndexController.php';
 require_once dirname(__FILE__) . '/../../_files/modules/bar/controllers/IndexController.php';
@@ -745,8 +737,6 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit_Framework_T
 
         $this->helper->view->addBasePath($this->basePath . '/_files/modules/bar/views');
 
-        require_once 'Zend/Filter/PregReplace.php';
-        require_once 'Zend/Filter/Word/UnderscoreToSeparator.php';
 
         $inflector = new Zend_Filter_Inflector('test.phtml');
         $inflector->addRules(array(

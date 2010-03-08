@@ -25,9 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_SelectTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
-require_once 'Zend/Form/Element/Select.php';
 
 /**
  * Test class for Zend_Form_Element_Select
@@ -75,7 +73,6 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        require_once 'Zend/View.php';
         $view = new Zend_View(array(
             'encoding' => 'UTF-8',
         ));
@@ -143,8 +140,6 @@ class Zend_Form_Element_SelectTest extends PHPUnit_Framework_TestCase
      */
     public function testTranslationShouldNotRaiseWarningsWithNestedGroups()
     {
-        require_once 'Zend/Translate.php';
-        require_once 'Zend/View.php';
         $translate = new Zend_Translate('array', array('Select Test', 'Select Test Translated'), 'en');
         $this->element
              ->setLabel('Select Test')

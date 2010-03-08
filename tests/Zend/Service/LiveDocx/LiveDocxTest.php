@@ -20,13 +20,11 @@
  * @version    $Id: $
  */
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_LiveDocx_LiveDocxTest::main');
 }
 
-require_once 'Zend/Service/LiveDocx/MailMerge.php';
 
 /**
  * Zend_Service_LiveDocx test case

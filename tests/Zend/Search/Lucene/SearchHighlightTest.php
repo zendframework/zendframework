@@ -23,12 +23,10 @@
 /**
  * Zend_Search_Lucene
  */
-require_once 'Zend/Search/Lucene.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend
@@ -56,11 +54,9 @@ class Zend_Search_Lucene_SearchHighlightTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        require_once 'Zend/Search/Lucene/Search/Query/Wildcard.php';
         $this->_wildcardMinPrefix = Zend_Search_Lucene_Search_Query_Wildcard::getMinPrefixLength();
         Zend_Search_Lucene_Search_Query_Wildcard::setMinPrefixLength(0);
 
-        require_once 'Zend/Search/Lucene/Search/Query/Fuzzy.php';
         $this->_defaultPrefixLength = Zend_Search_Lucene_Search_Query_Fuzzy::getDefaultPrefixLength();
         Zend_Search_Lucene_Search_Query_Fuzzy::setDefaultPrefixLength(0);
     }

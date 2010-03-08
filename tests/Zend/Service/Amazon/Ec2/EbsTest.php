@@ -23,12 +23,7 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Http/Client.php';
-require_once 'Zend/Http/Client/Adapter/Test.php';
-require_once 'Zend/Service/Amazon/Ec2/Ebs.php';
 
 /**
  * Zend_Service_Amazon_Ec2_Ebs test case.

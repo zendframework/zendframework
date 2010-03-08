@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-require_once 'BaseProxy.php';
 
 /**
  * @see Zend_Http_Client_Adapter_Test
  */
-require_once 'Zend/Http/Client/Adapter/Test.php';
 
 /**
  * @category   Zend

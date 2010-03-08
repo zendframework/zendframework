@@ -20,9 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Health.php';
-require_once 'Zend/Gdata/Health/Query.php';
-require_once 'Zend/Http/Client.php';
 
 /**
  * @category   Zend

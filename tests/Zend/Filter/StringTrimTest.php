@@ -23,12 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Filter_StringTrim
  */
-require_once 'Zend/Filter/StringTrim.php';
 
 /**
  * @category   Zend

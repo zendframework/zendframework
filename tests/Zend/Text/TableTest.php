@@ -28,13 +28,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
-require_once 'Zend/Text/Table.php';
-require_once 'Zend/Text/Table/Row.php';
-require_once 'Zend/Text/Table/Column.php';
-require_once 'Zend/Text/Table/Decorator/Unicode.php';
-require_once 'Zend/Text/Table/Decorator/Ascii.php';
 
 /**
  * @category   Zend

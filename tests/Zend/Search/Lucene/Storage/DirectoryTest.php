@@ -23,12 +23,10 @@
 /**
  * Zend_Search_Lucene_Storage_Directory_Filesystem
  */
-require_once 'Zend/Search/Lucene/Storage/Directory/Filesystem.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

@@ -20,9 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'TestHelper.php';
-require_once 'Zend/Gdata/YouTube.php';
-require_once 'Zend/Http/Client.php';
 
 /**
  * @category   Zend

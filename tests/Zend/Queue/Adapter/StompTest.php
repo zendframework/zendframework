@@ -29,22 +29,16 @@
  */
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** TestHelp.php */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue/Message.php';
 
 /** Zend_Queue_Message_Test */
-require_once 'MessageTestClass.php';
 
 /** Base Adapter test class */
-require_once dirname(__FILE__) . '/AdapterTest.php';
 
 /**
  * @category   Zend
@@ -102,7 +96,6 @@ class Zend_Queue_Adapter_StompTest extends Zend_Queue_Adapter_AdapterTest
         /**
          * @see Zend_Queue_Adapter_Stomp
          */
-        require_once 'Zend/Queue/Adapter/Stomp.php';
         $this->assertTrue(is_string(Zend_Queue_Adapter_Stomp::DEFAULT_SCHEME));
         $this->assertTrue(is_string(Zend_Queue_Adapter_Stomp::DEFAULT_HOST));
         $this->assertTrue(is_integer(Zend_Queue_Adapter_Stomp::DEFAULT_PORT));

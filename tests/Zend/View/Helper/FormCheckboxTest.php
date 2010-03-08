@@ -25,11 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormCheckboxTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
-require_once 'Zend/View/Helper/FormCheckbox.php';
-require_once 'Zend/View.php';
-require_once 'Zend/Registry.php';
 
 /**
  * Zend_View_Helper_FormCheckboxTest

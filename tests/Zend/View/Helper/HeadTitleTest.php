@@ -25,16 +25,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HeadTitleTest::main");
 }
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
 
 /** Zend_View_Helper_HeadTitle */
-require_once 'Zend/View/Helper/HeadTitle.php';
 
 /** Zend_View_Helper_Placeholder_Registry */
-require_once 'Zend/View/Helper/Placeholder/Registry.php';
 
 /** Zend_Registry */
-require_once 'Zend/Registry.php';
 
 /**
  * Test class for Zend_View_Helper_HeadTitle.
@@ -213,8 +209,6 @@ class Zend_View_Helper_HeadTitleTest extends PHPUnit_Framework_TestCase
 
     public function testCanTranslateTitle()
     {
-        require_once 'Zend/Translate/Adapter/Ini.php';
-        require_once 'Zend/Registry.php';
         $adapter = new Zend_Translate_Adapter_Ini(dirname(__FILE__) . '/../../Translate/Adapter/_files/translation_en.ini', 'en');
         Zend_Registry::set('Zend_Translate', $adapter);
         $this->helper->enableTranslation();

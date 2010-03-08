@@ -24,12 +24,10 @@
 /**
  * Zend_Measure_Speed
  */
-require_once 'Zend/Measure/Speed.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

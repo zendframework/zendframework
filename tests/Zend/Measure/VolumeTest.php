@@ -24,12 +24,10 @@
 /**
  * Zend_Measure_Volume
  */
-require_once 'Zend/Measure/Volume.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

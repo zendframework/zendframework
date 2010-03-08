@@ -23,15 +23,9 @@
 /**
  * @see TestHelper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** requires */
-require_once 'Zend/Reflection/Method.php';
-require_once 'Zend/CodeGenerator/Php/Method.php';
-require_once 'Zend/Reflection/Docblock.php';
-require_once 'Zend/Reflection/Class.php';
 
-require_once '_files/TestSampleSingleClass.php';
 
 /**
  * @category   Zend

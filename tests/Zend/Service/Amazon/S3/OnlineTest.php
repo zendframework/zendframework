@@ -23,17 +23,14 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 /**
  * @see Zend_Service_Amazon
  */
-require_once 'Zend/Service/Amazon/S3.php';
 
 /**
  * @see Zend_Http_Client_Adapter_Socket
  */
-require_once 'Zend/Http/Client/Adapter/Socket.php';
 
 
 /**

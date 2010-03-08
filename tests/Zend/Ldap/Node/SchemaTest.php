@@ -23,7 +23,6 @@
 /**
  * Zend_Ldap_OnlineTestCase
  */
-require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'OnlineTestCase.php';
 
 /**
  * @category   Zend

@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'BaseProxy.php';
 
 /**
  * @category   Zend

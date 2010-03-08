@@ -20,11 +20,7 @@
  * @version    $Id$
  */
 
-require_once dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-require_once 'Zend/Feed/Writer/Renderer/Feed/Atom.php';
-require_once 'Zend/Feed/Reader.php';
-require_once 'Zend/Version.php';
 
 /**
  * @category   Zend

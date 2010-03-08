@@ -23,12 +23,10 @@
 /**
  * @see Zend_Serializer_Adapter_PythonPickle
  */
-require_once 'Zend/Serializer/Adapter/PythonPickle.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

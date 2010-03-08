@@ -23,12 +23,10 @@
 /**
  * Zend_Mime_Part
  */
-require_once 'Zend/Mime/Part.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

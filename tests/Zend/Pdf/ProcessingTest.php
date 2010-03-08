@@ -21,10 +21,8 @@
  */
 
 /** Zend_Pdf */
-require_once 'Zend/Pdf.php';
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

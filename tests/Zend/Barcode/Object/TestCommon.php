@@ -23,17 +23,14 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/_files/BarcodeTest.php';
 
 /**
  * @see Zend_Config
  */
-require_once 'Zend/Config.php';
 
 /**
  * @category   Zend

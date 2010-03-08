@@ -23,12 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * Zend_Ldap
  */
-require_once 'Zend/Ldap.php';
 
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the

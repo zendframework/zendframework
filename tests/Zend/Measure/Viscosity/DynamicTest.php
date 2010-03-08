@@ -23,12 +23,10 @@
 /**
  * Zend_Measure_Viscosity_Dynamic
  */
-require_once 'Zend/Measure/Viscosity/Dynamic.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

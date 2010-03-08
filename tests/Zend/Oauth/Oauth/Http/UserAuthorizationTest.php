@@ -1,7 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Oauth/Http/UserAuthorization.php';
 
 class Zend_Oauth_Http_UserAuthorizationTest extends PHPUnit_Framework_TestCase
 {

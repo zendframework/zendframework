@@ -23,12 +23,10 @@
 /**
  * Zend_Measure_Cooking_Volume
  */
-require_once 'Zend/Measure/Cooking/Volume.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

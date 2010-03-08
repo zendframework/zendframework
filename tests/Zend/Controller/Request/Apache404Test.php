@@ -25,10 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Controller_Request_Apache404Test::main");
 }
 
-require_once "PHPUnit/Framework/TestCase.php";
-require_once "PHPUnit/Framework/TestSuite.php";
 
-require_once 'Zend/Controller/Request/Apache404.php';
 
 /**
  * Test class for Zend_Controller_Request_Apache404.
@@ -58,7 +55,6 @@ class Zend_Controller_Request_Apache404Test extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Request_Apache404Test");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

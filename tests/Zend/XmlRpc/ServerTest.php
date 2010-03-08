@@ -19,11 +19,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version $Id$
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
-require_once 'Zend/XmlRpc/Server.php';
-require_once 'Zend/XmlRpc/Request.php';
-require_once 'Zend/XmlRpc/Response.php';
 
 /**
  * Test case for Zend_XmlRpc_Server

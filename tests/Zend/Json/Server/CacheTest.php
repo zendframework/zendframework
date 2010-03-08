@@ -25,10 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Json_Server_CacheTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
-require_once 'Zend/Json/Server/Cache.php';
-require_once 'Zend/Json/Server.php';
 
 /**
  * Test class for Zend_Json_Server_Cache
@@ -50,7 +47,6 @@ class Zend_Json_Server_CacheTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Json_Server_CacheTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

@@ -23,7 +23,6 @@
 /**
  * @see Zend_Markup_Renderer_TokenConverterInterface
  */
-require_once 'Zend/Markup/Renderer/TokenConverterInterface.php';
 
 /**
  * Tag interface

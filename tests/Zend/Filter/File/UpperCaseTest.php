@@ -23,12 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Filter_File_UpperCase
  */
-require_once 'Zend/Filter/File/UpperCase.php';
 
 /**
  * @category   Zend

@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__) . '/SocketTest.php';
 
 /**
  * This Testsuite includes all Zend_Http_Client that require a working web

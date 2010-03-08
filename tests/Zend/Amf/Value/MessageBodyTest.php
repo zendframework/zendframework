@@ -24,8 +24,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Amf_Value_MessageBodyTest::main');
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
-require_once 'Zend/Amf/Value/MessageBody.php';
 
 /**
  * Test case for Zend_Amf_Value_MessageBody

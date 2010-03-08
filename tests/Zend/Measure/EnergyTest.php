@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * Zend_Measure_Energy
  */
-require_once 'Zend/Measure/Energy.php';
 
 /**
  * @category   Zend

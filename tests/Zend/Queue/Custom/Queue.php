@@ -29,10 +29,8 @@
  */
 
 /** Zend_Queue */
-require_once 'Zend/Queue.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue/Message.php';
 
 /**
  * @category   Zend
@@ -78,7 +76,6 @@ class Custom_Queue extends Zend_Queue
             /**
              * @see Zend_Queue_Exception
              */
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('$message must be an instance of Custom_Message or Custom_Messages');
         }
         if ($message instanceof Custom_Message) {

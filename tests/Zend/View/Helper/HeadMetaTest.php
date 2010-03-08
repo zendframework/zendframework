@@ -25,19 +25,14 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_HeadMetaTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_View_Helper_HeadMeta */
-require_once 'Zend/View/Helper/HeadMeta.php';
 
 /** Zend_View_Helper_Placeholder_Registry */
-require_once 'Zend/View/Helper/Placeholder/Registry.php';
 
 /** Zend_Registry */
-require_once 'Zend/Registry.php';
 
 /** Zend_View */
-require_once 'Zend/View.php';
 
 /**
  * Test class for Zend_View_Helper_HeadMeta.

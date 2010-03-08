@@ -20,8 +20,6 @@
  * @version $Id: ValueTest.php 18442 2009-09-30 13:17:48Z lars $
  */
 
-require_once 'Zend/XmlRpc/Generator/DomDocument.php';
-require_once 'Zend/XmlRpc/Generator/XmlWriter.php';
 
 abstract class Zend_XmlRpc_TestProvider
 {

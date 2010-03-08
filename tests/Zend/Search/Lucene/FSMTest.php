@@ -23,12 +23,10 @@
 /**
  * Zend_Search_Lucene_FSM
  */
-require_once 'Zend/Search/Lucene/FSM.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

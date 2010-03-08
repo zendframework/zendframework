@@ -21,8 +21,6 @@
  */
 
 
-require_once 'BaseTests.php';
-require_once 'OfflineProxy.php';
 
 /**
  * @category   Zend

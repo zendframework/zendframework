@@ -20,10 +20,7 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Db/Table/TestCommon.php';
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'PHPUnit/Util/Filter.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 /**

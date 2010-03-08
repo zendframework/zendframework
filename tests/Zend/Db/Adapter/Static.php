@@ -24,7 +24,6 @@
 /**
  * PHPUnit_Util_Filter
  */
-require_once 'PHPUnit/Util/Filter.php';
 
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
@@ -33,13 +32,11 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 /**
  * @see Zend_Db_Adapter_Abstract
  */
-require_once 'Zend/Db/Adapter/Abstract.php';
 
 
 /**
  * @see Zend_Db_Statement_Static
  */
-require_once 'Zend/Db/Statement/Static.php';
 
 
 /**
@@ -96,7 +93,6 @@ class Zend_Db_Adapter_Static extends Zend_Db_Adapter_Abstract
     {
         // we need at least a dbname
         if (! array_key_exists('dbname', $config)) {
-            require_once 'Zend/Db/Adapter/Exception.php';
             throw new Zend_Db_Adapter_Exception("Configuration must have a key for 'dbname' that names the database instance");
         }
         $this->config = $config;

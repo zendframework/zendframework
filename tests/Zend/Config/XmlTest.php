@@ -23,12 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * Zend_Config_Xml
  */
-require_once 'Zend/Config/Xml.php';
 
 /**
  * @category   Zend

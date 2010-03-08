@@ -20,11 +20,8 @@
  * @version    $Id$
  */
 
-require_once "Zend/Service/Audioscrobbler.php";
 
-require_once "Zend/Http/Client.php";
 
-require_once "Zend/Http/Client/Adapter/Test.php";
 
 /**
  * @category   Zend

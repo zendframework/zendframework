@@ -27,10 +27,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /** Zend_Memory */
-require_once 'Zend/Memory.php';
 
 /**
  * @category   Zend

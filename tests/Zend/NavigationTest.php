@@ -24,12 +24,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_NavigationTest::main');
 }
 
-require_once dirname(__FILE__) . '/../TestHelper.php';
 
 /**
  * Zend_Navigation
  */
-require_once 'Zend/Navigation.php';
 
 /**
  * @category   Zend
@@ -76,7 +74,6 @@ class Zend_NavigationTest extends PHPUnit_Framework_TestCase
      */
     public function testNavigationArraySortsCorrectly()
     {
-        require_once 'Zend/Navigation/Page/Uri.php';
         $page1 = new Zend_Navigation_Page_Uri(array('uri' => 'page1'));
         $page2 = new Zend_Navigation_Page_Uri(array('uri' => 'page2'));
         $page3 = new Zend_Navigation_Page_Uri(array('uri' => 'page3'));

@@ -23,12 +23,10 @@
 /**
  * Zend_Locale_Data
  */
-require_once 'Zend/Locale/Data.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 
 /**
@@ -46,7 +44,6 @@ class Zend_Locale_DataTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        require_once 'Zend/Cache.php';
         $this->_cache = Zend_Cache::factory('Core', 'File',
                  array('lifetime' => 1, 'automatic_serialization' => true),
                  array('cache_dir' => dirname(__FILE__) . '/../_files/'));

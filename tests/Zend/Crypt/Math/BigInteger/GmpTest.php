@@ -20,10 +20,7 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Crypt/Math/BigInteger/Gmp.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
-require_once 'Zend/Crypt/Math/BigInteger/Bcmath.php';
 
 
 /**

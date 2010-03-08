@@ -24,12 +24,10 @@
 /**
  * Zend_Measure_Torque
  */
-require_once 'Zend/Measure/Torque.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

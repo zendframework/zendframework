@@ -23,12 +23,10 @@
 /**
  * Zend_Search_Lucene_Index_TermInfo
  */
-require_once 'Zend/Search/Lucene/Index/TermInfo.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

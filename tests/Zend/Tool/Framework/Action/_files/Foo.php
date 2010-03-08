@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Tool/Framework/Action/Interface.php';
 
 /**
  * @category   Zend

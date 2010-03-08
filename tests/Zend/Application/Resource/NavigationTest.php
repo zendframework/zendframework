@@ -27,12 +27,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Zend_Loader_Autoloader
  */
-require_once 'Zend/Loader/Autoloader.php';
 
 /**
  * @category   Zend
@@ -145,7 +143,6 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
      */
     public function testViewMethodIsUsedWhenAvailableInsteadOfResourcePlugin()
     {
-        require_once '_files/ZfAppBootstrapCustomView.php';
 
         $bootstrap = new ZfAppBootstrapCustomView($this->application);
         $bootstrap->registerPluginResource('view');

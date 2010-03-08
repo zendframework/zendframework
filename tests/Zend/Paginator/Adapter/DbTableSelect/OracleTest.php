@@ -20,12 +20,10 @@
  * @version    $Id$
  */
 
-require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 /**
  * @see Zend_Paginator_Adapter_DbSelect_OracleTest
  */
-require_once 'Zend/Paginator/Adapter/DbSelect/OracleTest.php';
 
 
 /**

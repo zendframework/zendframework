@@ -21,10 +21,8 @@
  */
 
 /** PHPUnit_Framework_TestCase */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** Zend_Log_Writer_Mock */
-require_once 'Zend/Log/Writer/Stream.php';
 
 /**
  * @category   Zend

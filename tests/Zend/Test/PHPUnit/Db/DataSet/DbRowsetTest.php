@@ -20,11 +20,7 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__)."/../../../../../TestHelper.php";
 
-require_once "Zend/Test/PHPUnit/Db/DataSet/DbRowset.php";
-require_once "Zend/Db/Table/Rowset.php";
-require_once "PHPUnit/Extensions/Database/DataSet/DefaultTableMetaData.php";
 
 /**
  * @category   Zend

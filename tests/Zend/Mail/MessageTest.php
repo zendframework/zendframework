@@ -23,22 +23,18 @@
 /**
  * Zend_Mail_Message
  */
-require_once 'Zend/Mail/Message.php';
 
 /**
  * Zend_Mail_Storage_Mbox
  */
-require_once 'Zend/Mail/Storage/Mbox.php';
 
 /**
  * Zend_Mime_Decode
  */
-require_once 'Zend/Mime/Decode.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

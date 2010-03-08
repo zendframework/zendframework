@@ -23,22 +23,18 @@
 /**
  * Test helper
  */
-require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 /**
  * @see Zend_Uri
  */
-require_once 'Zend/Uri.php';
 
 /**
  * @see Zend_Uri_Http
  */
-require_once 'Zend/Uri/Http.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 
 /**

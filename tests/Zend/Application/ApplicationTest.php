@@ -27,13 +27,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /** Zend_Loader_Autoloader */
-require_once 'Zend/Loader/Autoloader.php';
 
 /** Zend_Application */
-require_once 'Zend/Application.php';
 
 /**
  * @category   Zend
@@ -364,7 +361,6 @@ class Zend_Application_ApplicationTest extends PHPUnit_Framework_TestCase
 
     public function testOptionsShouldRetainOriginalCase()
     {
-        require_once dirname(__FILE__) . '/_files/ZfModuleBootstrap.php';
         $options = array(
             'pluginPaths' => array(
                 'Zend_Application_Test_Path' => dirname(__FILE__),

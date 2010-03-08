@@ -28,9 +28,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
-require_once 'Zend/Loader/PluginLoader.php';
 
 /**
  * Test class for Zend_Loader_PluginLoader.
@@ -53,7 +51,6 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Loader_PluginLoaderTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
@@ -461,7 +458,6 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
      */
     public function testClassFilesGrabCorrectPathForLoadedClasses()
     {
-        require_once 'Zend/View/Helper/DeclareVars.php';
         $reflection = new ReflectionClass('Zend_View_Helper_DeclareVars');
         $expected   = $reflection->getFileName();
         

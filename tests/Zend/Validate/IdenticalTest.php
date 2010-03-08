@@ -25,10 +25,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Validate_IdenticalTest::main');
 }
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /** Zend_Validate_Identical */
-require_once 'Zend/Validate/Identical.php';
 
 /**
  * Zend_Validate_Identical
@@ -45,7 +43,6 @@ class Zend_Validate_IdenticalTest extends PHPUnit_Framework_TestCase
 {
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
         $suite  = new PHPUnit_Framework_TestSuite('Zend_Validate_IdenticalTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }

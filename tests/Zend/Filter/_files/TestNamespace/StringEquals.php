@@ -24,7 +24,6 @@
 /**
  * @see Zend_Validate_Abstract
  */
-require_once 'Zend/Validate/Abstract.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 

@@ -29,17 +29,14 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Filter_Inflector
  */
-require_once 'Zend/Filter/Inflector.php';
 
 /**
  * @see Zend_Config
  */
-require_once 'Zend/Config.php';
 
 
 /**

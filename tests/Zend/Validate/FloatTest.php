@@ -23,12 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Validate_Float
  */
-require_once 'Zend/Validate/Float.php';
 
 /**
  * @category   Zend
@@ -56,7 +54,6 @@ class Zend_Validate_FloatTest extends PHPUnit_Framework_TestCase
     {
         $this->_locale = setlocale(LC_ALL, 0); //backup locale
 
-        require_once 'Zend/Registry.php';
         if (Zend_Registry::isRegistered('Zend_Locale')) {
             Zend_Registry::getInstance()->offsetUnset('Zend_Locale');
         }

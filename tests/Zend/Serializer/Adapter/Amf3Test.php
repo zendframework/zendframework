@@ -23,12 +23,10 @@
 /**
  * @see Zend_Serializer_Adapter_Amf3
  */
-require_once 'Zend/Serializer/Adapter/Amf3.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

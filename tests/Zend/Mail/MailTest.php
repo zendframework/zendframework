@@ -23,37 +23,30 @@
 /**
  * Test helper
  */
-require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 /**
  * Zend_Mail
  */
-require_once 'Zend/Mail.php';
 
 /**
  * Zend_Mail_Transport_Abstract
  */
-require_once 'Zend/Mail/Transport/Abstract.php';
 
 /**
  * Zend_Mail_Transport_Sendmail
  */
-require_once 'Zend/Mail/Transport/Sendmail.php';
 
 /**
  * Zend_Mail_Transport_Smtp
  */
-require_once 'Zend/Mail/Transport/Smtp.php';
 
 /**
  * Zend_Date
  */
-require_once 'Zend/Date.php';
 
 /**
  * Zend_Config
  */
-require_once 'Zend/Config.php';
 
 /**
  * Mock mail transport class for testing purposes

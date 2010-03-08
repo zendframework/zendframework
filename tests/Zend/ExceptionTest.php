@@ -20,9 +20,7 @@
  * @version    $Id$
  */
 
-require_once dirname(dirname(__FILE__)) . '/TestHelper.php';
 
-require_once 'Zend/Exception.php';
 
 /**
  * @category   Zend

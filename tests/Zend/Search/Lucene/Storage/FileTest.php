@@ -23,17 +23,14 @@
 /**
  * Zend_Search_Lucene_Storage_File_Filesystem
  */
-require_once 'Zend/Search/Lucene/Storage/File/Filesystem.php';
 
 /**
  * Zend_Search_Lucene_Storage_File_Memory
  */
-require_once 'Zend/Search/Lucene/Storage/File/Memory.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

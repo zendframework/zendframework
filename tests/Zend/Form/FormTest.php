@@ -24,24 +24,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_FormTest::main');
 }
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 // error_reporting(E_ALL);
 
-require_once 'Zend/Form.php';
 
-require_once 'Zend/Config.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Form/Decorator/Form.php';
-require_once 'Zend/Form/DisplayGroup.php';
-require_once 'Zend/Form/Element.php';
-require_once 'Zend/Form/Element/Text.php';
-require_once 'Zend/Form/Element/File.php';
-require_once 'Zend/Form/SubForm.php';
-require_once 'Zend/Loader/PluginLoader.php';
-require_once 'Zend/Registry.php';
-require_once 'Zend/Translate.php';
-require_once 'Zend/View.php';
 
 /**
  * @category   Zend
@@ -390,7 +376,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testDisplayGroupOrderInConfigShouldNotMatter()
     {
-        require_once 'Zend/Config/Xml.php';
         $config = new Zend_Config_Xml(dirname(__FILE__) . '/_files/config/zf3250.xml', 'sitearea', true);
         $form = new Zend_Form($config->test);
         // no assertions needed; throws error if order matters
@@ -2933,7 +2918,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
 
     public function testCanSetTranslator()
     {
-        require_once 'Zend/Translate/Adapter/Array.php';
         $translator = new Zend_Translate('array', array('foo' => 'bar'));
         $this->form->setTranslator($translator);
         $received = $this->form->getTranslator($translator);
@@ -3233,7 +3217,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             'description' => 'sample description',
         ));
 
-        require_once dirname(__FILE__) . '/_files/decorators/TableRow.php';
         $decorator = new My_Decorator_TableRow();
         $this->form->setElementDecorators(array(
             'ViewHelper',
@@ -3481,7 +3464,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
      */
     public function testShouldAllowSettingDisplayGroupPrefixPathViaConfigOptions()
     {
-        require_once 'Zend/Config/Ini.php';
         $config = new Zend_Config_Ini(dirname(__FILE__) . '/_files/config/zf3213.ini', 'form');
         $form   = new Zend_Form($config);
         $dg     = $form->foofoo;
@@ -3762,7 +3744,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $data = array('valid' => 1234, 'invalid' => 'invalid', 'noElement' => 'noElement');
 
-        require_once "Zend/Validate/Int.php";
 
         $validElement = new Zend_Form_Element("valid");
         $validElement->addValidator(new Zend_Validate_Int());
@@ -3782,7 +3763,6 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
     {
         $data = array('sub' => array('valid' => 1234, 'invalid' => 'invalid', 'noElement' => 'noElement'));
 
-        require_once "Zend/Validate/Int.php";
 
         $subForm = new Zend_Form_SubForm();
         $validElement = new Zend_Form_Element("valid");

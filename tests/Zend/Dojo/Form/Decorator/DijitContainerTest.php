@@ -25,25 +25,18 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Decorator_DijitContainerTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 /** Zend_Dojo_Form_Decorator_DijitContainer */
-require_once 'Zend/Dojo/Form/Decorator/DijitContainer.php';
 
 /** Zend_Dojo_Form_Decorator_ContentPane */
-require_once 'Zend/Dojo/Form/Decorator/ContentPane.php';
 
 /** Zend_Dojo_Form_SubForm */
-require_once 'Zend/Dojo/Form/SubForm.php';
 
 /** Zend_View */
-require_once 'Zend/View.php';
 
 /** Zend_Registry */
-require_once 'Zend/Registry.php';
 
 /** Zend_Dojo_View_Helper_Dojo */
-require_once 'Zend/Dojo/View/Helper/Dojo.php';
 
 /**
  * Test class for Zend_Dojo_Form_Decorator_DijitContainer.
@@ -100,7 +93,6 @@ class Zend_Dojo_Form_Decorator_DijitContainerTest extends PHPUnit_Framework_Test
 
     public function getView()
     {
-        require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
         return $view;

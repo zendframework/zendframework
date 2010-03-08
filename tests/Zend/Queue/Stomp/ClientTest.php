@@ -29,16 +29,12 @@
  */
 
 /** TestHelp.php */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_Queue_Stomp_Frame */
-require_once 'Zend/Queue/Stomp/Frame.php';
 
 /** Zend_Queue_Stomp_Client */
-require_once 'Zend/Queue/Stomp/Client.php';
 
 /** Zend_Queue_Stomp_Client_Interface */
-require_once 'Zend/Queue/Stomp/Client/Connection.php';
 
 /**
  * @category   Zend

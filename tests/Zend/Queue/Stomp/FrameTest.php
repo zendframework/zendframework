@@ -29,13 +29,10 @@
  */
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** TestHelp.php */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend/Queue/Stomp/Frame.php */
-require_once 'Zend/Queue/Stomp/Frame.php';
 
 /**
  * @category   Zend

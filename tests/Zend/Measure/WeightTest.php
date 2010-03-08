@@ -24,12 +24,10 @@
 /**
  * Zend_Measure_Weight
  */
-require_once 'Zend/Measure/Weight.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

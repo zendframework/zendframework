@@ -23,17 +23,14 @@
 /**
  * @see Zend_Paginator
  */
-require_once 'Zend/Paginator.php';
 
 /**
  * @see Zend_Paginator_ScrollingStyle_All
  */
-require_once 'Zend/Paginator/ScrollingStyle/All.php';
 
 /**
  * @see PHPUnit_Framework_TestCase
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

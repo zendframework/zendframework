@@ -24,7 +24,6 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Exclude from code coverage report
@@ -41,7 +40,6 @@ if (!ini_get('date.timezone')) {
 /**
  * @see Zend_Service_Technorati
  */
-require_once 'Zend/Service/Technorati.php';
 
 
 /**

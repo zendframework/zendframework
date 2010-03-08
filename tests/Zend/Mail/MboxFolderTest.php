@@ -24,17 +24,14 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Mail_Storage_Folder_Mbox
  */
-require_once 'Zend/Mail/Storage/Folder/Mbox.php';
 
 /**
  * @see Zend_Config
  */
-require_once 'Zend/Config.php';
 
 
 /**

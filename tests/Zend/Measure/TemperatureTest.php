@@ -27,17 +27,14 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * Zend_Measure_Temperature
  */
-require_once 'Zend/Measure/Temperature.php';
 
 /**
  * Zend_Registry
  */
-require_once 'Zend/Registry.php';
 
 /**
  * @category   Zend

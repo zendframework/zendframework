@@ -23,12 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 /**
  * Zend_Debug
  */
-require_once 'Zend/Debug.php';
 
 /**
  * @category   Zend

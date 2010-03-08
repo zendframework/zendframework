@@ -24,7 +24,6 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR .'TestCase.php';
 
 
 /**
@@ -52,13 +51,11 @@ class Zend_Service_Technorati_TechnoratiTest extends Zend_Service_Technorati_Tes
         /**
          * @see Zend_Http_Client_Adapter_Test
          */
-        require_once 'Zend/Http/Client/Adapter/Test.php';
         $adapter = new Zend_Http_Client_Adapter_Test();
 
         /**
          * @see Zend_Http_Client
          */
-        require_once 'Zend/Http/Client.php';
         $client = new Zend_Http_Client(Zend_Service_Technorati::API_URI_BASE, array(
             'adapter' => $adapter
         ));

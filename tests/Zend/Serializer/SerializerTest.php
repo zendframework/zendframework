@@ -23,12 +23,10 @@
 /**
  * Zend_Serializer
  */
-require_once 'Zend/Serializer.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

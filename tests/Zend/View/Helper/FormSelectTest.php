@@ -25,10 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormSelectTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
-require_once 'Zend/View/Helper/FormSelect.php';
-require_once 'Zend/View.php';
 
 /**
  * Test class for Zend_View_Helper_FormSelect.

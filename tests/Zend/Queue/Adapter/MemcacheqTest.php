@@ -29,22 +29,16 @@
  */
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** TestHelp.php */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue/Message.php';
 
 /** Zend_Queue_Message_Test */
-require_once 'MessageTestClass.php';
 
 /** Base Adapter test class */
-require_once dirname(__FILE__) . '/AdapterTest.php';
 
 /**
  * @category   Zend
@@ -101,7 +95,6 @@ class Zend_Queue_Adapter_MemcacheqTest extends Zend_Queue_Adapter_AdapterTest
         /**
          * @see Zend_Queue_Adapter_Memcacheq
          */
-        require_once 'Zend/Queue/Adapter/Memcacheq.php';
         $this->assertTrue(is_string(Zend_Queue_Adapter_Memcacheq::DEFAULT_HOST));
         $this->assertTrue(is_integer(Zend_Queue_Adapter_Memcacheq::DEFAULT_PORT));
         $this->assertTrue(is_string(Zend_Queue_Adapter_Memcacheq::EOL));

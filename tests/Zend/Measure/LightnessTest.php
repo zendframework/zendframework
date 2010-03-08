@@ -24,12 +24,10 @@
 /**
  * Zend_Measure_Lightness
  */
-require_once 'Zend/Measure/Lightness.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

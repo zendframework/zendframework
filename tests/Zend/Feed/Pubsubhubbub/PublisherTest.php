@@ -19,9 +19,7 @@
  * @version    $Id$
  */
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-require_once 'Zend/Feed/Pubsubhubbub/Publisher.php';
 
 /**
  * @category   Zend

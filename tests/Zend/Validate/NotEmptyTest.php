@@ -28,12 +28,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Validate_NotEmpty
  */
-require_once 'Zend/Validate/NotEmpty.php';
 
 
 /**
@@ -486,7 +484,6 @@ class Zend_Validate_NotEmptyTest extends PHPUnit_Framework_TestCase
      */
     public function testConfigObject()
     {
-        require_once 'Zend/Config.php';
         $options = array('type' => 'all');
         $config  = new Zend_Config($options);
 

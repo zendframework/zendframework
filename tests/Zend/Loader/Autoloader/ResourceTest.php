@@ -27,25 +27,20 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Loader_Autoloader
  */
-require_once 'Zend/Loader/Autoloader.php';
 
 /**
  * @see Zend_Loader_Autoloader_Resource
  */
-require_once 'Zend/Loader/Autoloader/Resource.php';
 
 /**
  * @see Zend_Loader_Autoloader_Interface
  */
-require_once 'Zend/Loader/Autoloader/Interface.php';
 
 /** Zend_Config */
-require_once 'Zend/Config.php';
 
 /**
  * @category   Zend

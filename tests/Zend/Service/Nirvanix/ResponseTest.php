@@ -23,7 +23,6 @@
 /**
  * @see Zend_Service_Nirvanix_Response
  */
-require_once 'Zend/Service/Nirvanix/Response.php';
 
 /**
  * @category   Zend

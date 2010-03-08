@@ -23,12 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Feed_Entry_Atom
  */
-require_once 'Zend/Feed/Entry/Atom.php';
 
 /**
  * @category   Zend

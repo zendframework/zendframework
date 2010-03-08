@@ -25,19 +25,14 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_Element_NumberTextBoxTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 /** Zend_Dojo_Form_Element_NumberTextBox */
-require_once 'Zend/Dojo/Form/Element/NumberTextBox.php';
 
 /** Zend_View */
-require_once 'Zend/View.php';
 
 /** Zend_Registry */
-require_once 'Zend/Registry.php';
 
 /** Zend_Dojo_View_Helper_Dojo */
-require_once 'Zend/Dojo/View/Helper/Dojo.php';
 
 /**
  * Test class for Zend_Dojo_Form_Element_NumberTextBox.
@@ -91,7 +86,6 @@ class Zend_Dojo_Form_Element_NumberTextBoxTest extends PHPUnit_Framework_TestCas
 
     public function getView()
     {
-        require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath('Zend/Dojo/View/Helper/', 'Zend_Dojo_View_Helper');
         return $view;

@@ -23,17 +23,14 @@
 /**
  * Test helper
  */
-require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 /**
  * Zend_Http_Response
  */
-require_once 'Zend/Http/Response.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * Zend_Http_Response unit tests

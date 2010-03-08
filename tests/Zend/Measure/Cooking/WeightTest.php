@@ -23,12 +23,10 @@
 /**
  * Zend_Measure_Cooking_Weight
  */
-require_once 'Zend/Measure/Cooking/Weight.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

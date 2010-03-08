@@ -25,14 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_Helper_RedirectorTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Action.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Controller/Action/Helper/Redirector.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Response/Http.php';
 
 /**
  * Test class for Zend_Controller_Action_Helper_Redirector.
@@ -73,7 +66,6 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit_Framework_Tes
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_RedirectorTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

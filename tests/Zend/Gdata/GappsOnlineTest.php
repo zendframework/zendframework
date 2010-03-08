@@ -20,13 +20,7 @@
  * @version    $Id $
  */
 
-require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-require_once 'Zend/Gdata/Gapps.php';
-require_once 'Zend/Gdata/Gapps/UserEntry.php';
-require_once 'Zend/Gdata/Gapps/UserQuery.php';
-require_once 'Zend/Gdata/ClientLogin.php';
-require_once 'Zend/Http/Client.php';
 
 /**
  * @category   Zend

@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Navigation/Page/Uri.php';
 
 /**
  * Tests the class Zend_Navigation_Page_Uri

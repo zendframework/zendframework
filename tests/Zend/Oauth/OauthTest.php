@@ -1,7 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Oauth.php';
 
 class Test_Http_Client_19485876 extends Zend_Http_Client {}
 

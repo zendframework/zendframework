@@ -24,12 +24,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Service_StrikeIron_Exception
  */
-require_once 'Zend/Service/StrikeIron/Exception.php';
 
 
 /**

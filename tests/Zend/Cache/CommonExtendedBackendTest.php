@@ -20,19 +20,16 @@
  * @version    $Id$
  */
 
-require_once 'PHPUnit/Util/Filter.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @see Zend_Cache_CommonBackendTest
  */
-require_once 'CommonBackendTest.php';
 
 /**
  * @category   Zend

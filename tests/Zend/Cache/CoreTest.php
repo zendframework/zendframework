@@ -23,17 +23,11 @@
 /**
  * Zend_Cache
  */
-require_once 'Zend/Cache.php';
-require_once 'Zend/Cache/Core.php';
-require_once 'Zend/Cache/Backend/File.php'; // TODO : use only Test backend ?
-require_once 'Zend/Cache/Backend/Test.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
-require_once 'Zend/Config.php';
 
 /**
  * @category   Zend

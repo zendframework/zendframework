@@ -20,9 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Docs.php';
-require_once 'Zend/Http/Client.php';
-require_once 'Zend/Gdata/Docs/DocumentListEntry.php';
 
 /**
  * @category   Zend

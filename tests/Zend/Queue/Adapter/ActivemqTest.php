@@ -29,12 +29,9 @@
  */
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** TestHelp.php */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
-require_once 'Zend/Queue/Adapter/AdapterTest.php';
 
 /**
  * @category   Zend
@@ -87,7 +84,6 @@ class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
         /**
          * @see Zend_Queue_Adapter_Activemq
          */
-        require_once 'Zend/Queue/Adapter/Activemq.php';
         $this->assertTrue(is_string(Zend_Queue_Adapter_Activemq::DEFAULT_SCHEME));
         $this->assertTrue(is_string(Zend_Queue_Adapter_Activemq::DEFAULT_HOST));
         $this->assertTrue(is_integer(Zend_Queue_Adapter_Activemq::DEFAULT_PORT));

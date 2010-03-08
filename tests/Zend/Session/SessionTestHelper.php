@@ -22,7 +22,6 @@
 
 
 /** Test helper */
-// require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 // Do not include TestHelper.php since it takes too much time
 // Directly include part of it
@@ -41,7 +40,6 @@ set_include_path(implode(PATH_SEPARATOR, $path));
 /**
  * @see Zend_Session
  */
-require_once 'Zend/Session.php';
 
 
 /**

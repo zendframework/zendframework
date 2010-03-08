@@ -23,10 +23,8 @@
 /**
  * @see TestHelper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /** requires */
-require_once 'Zend/Reflection/File.php';
 
 /**
  * @category   Zend
@@ -47,7 +45,6 @@ class Zend_Reflection_DocblockTest extends PHPUnit_Framework_TestCase
     {
         if (self::$_sampleClassFileRequired === false) {
             $fileToRequire = dirname(__FILE__) . '/_files/TestSampleClass.php';
-            require_once $fileToRequire;
             self::$_sampleClassFileRequired = true;
         }
     }

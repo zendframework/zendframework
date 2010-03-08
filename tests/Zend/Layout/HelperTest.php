@@ -25,14 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Layout_HelperTest::main");
 }
 
-require_once dirname(dirname(dirname(__FILE__))) . '/TestHelper.php';
-require_once "PHPUnit/Framework/TestCase.php";
-require_once "PHPUnit/Framework/TestSuite.php";
 
-require_once 'Zend/Layout/Controller/Action/Helper/Layout.php';
-require_once 'Zend/Layout.php';
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
 
 /**
  * Test class for Zend_Layout_Controller_Action_Helper_Layout
@@ -53,7 +46,6 @@ class Zend_Layout_HelperTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Layout_HelperTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

@@ -29,19 +29,14 @@
  */
 
 /** TestHelper.php */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /** Zend_Config */
-require_once 'Zend/Config.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue/Message.php';
 
 /** Zend_Queue_Adapter_Array */
-require_once 'Zend/Queue/Adapter/Array.php';
 
 /**
  * @category   Zend

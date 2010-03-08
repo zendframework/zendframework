@@ -21,17 +21,6 @@
  */
 
 /*
- * Include PHPUnit dependencies
- */
-require_once 'PHPUnit/Framework.php';
-require_once 'PHPUnit/Framework/IncompleteTestError.php';
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'PHPUnit/Framework/TestSuite.php';
-require_once 'PHPUnit/Runner/Version.php';
-require_once 'PHPUnit/TextUI/TestRunner.php';
-require_once 'PHPUnit/Util/Filter.php';
-
-/*
  * Set error reporting to the level to which Zend Framework code must comply.
  */
 error_reporting( E_ALL | E_STRICT );
@@ -56,6 +45,14 @@ $path = array(
     get_include_path()
     );
 set_include_path(implode(PATH_SEPARATOR, $path));
+
+/**
+ * Setup autoloading
+ */
+require_once 'Zend/Loader/Autoloader.php';
+$autoloader = Zend_Loader_Autoloader::getInstance();
+$autoloader->registerNamespace('PHPUnit_');
+
 
 /*
  * Load the user-defined test configuration file, if it exists; otherwise, load

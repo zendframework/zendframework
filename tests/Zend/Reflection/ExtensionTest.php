@@ -23,10 +23,8 @@
 /**
  * @see TestHelper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /** requires */
-require_once 'Zend/Reflection/Extension.php';
 
 /**
  * @category   Zend

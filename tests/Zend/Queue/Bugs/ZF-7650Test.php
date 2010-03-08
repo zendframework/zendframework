@@ -25,24 +25,18 @@
  */
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** TestHelp.php */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue/Message.php';
 
 /** Zend_Queue_Adapter_Array */
-require_once 'Zend/Queue/Adapter/Array.php';
 
 /**
  * @see Zend_Db_Select
  */
-require_once 'Zend/Db/Select.php';
 
 /**
  * @category   Zend
@@ -52,7 +46,7 @@ require_once 'Zend/Db/Select.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
  */
-class Zend_Queue_QueueTest extends PHPUnit_Framework_TestCase
+class Zend_Queue_Bugs_Zf7650Test extends PHPUnit_Framework_TestCase
 {
     public function test_ZF_7650()
     {
@@ -88,7 +82,6 @@ class Zend_Queue_QueueTest extends PHPUnit_Framework_TestCase
         // Zend_Queue_Adapter_Db
         $driverOptions = array();
         if (defined('TESTS_ZEND_QUEUE_DB')) {
-            require_once 'Zend/Json.php';
             $driverOptions = Zend_Json::decode(TESTS_ZEND_QUEUE_DB);
         }
 

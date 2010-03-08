@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Tag/Cloud/Decorator/HtmlCloud.php';
 
 /**
  * @category   Zend

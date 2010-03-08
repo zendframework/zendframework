@@ -24,7 +24,6 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 
 /**
@@ -98,7 +97,6 @@ abstract class Zend_Service_Simpy_BaseTests extends PHPUnit_Framework_TestCase
             /**
              * @see Zend_Service_Simpy_Link
              */
-            require_once 'Zend/Service/Simpy/Link.php';
 
             $this->_simpy->saveLink(
                 $title,
@@ -182,7 +180,6 @@ abstract class Zend_Service_Simpy_BaseTests extends PHPUnit_Framework_TestCase
         /**
          * @see Zend_Service_Simpy_LinkQuery
          */
-        require_once 'Zend/Service/Simpy/LinkQuery.php';
         $linkQuery = new Zend_Service_Simpy_LinkQuery;
         $linkQuery->setQueryString($this->_link['title']);
         $linkQuery->setBeforeDate($date);

@@ -27,19 +27,15 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Zend_Loader_Autoloader
  */
-require_once 'Zend/Loader/Autoloader.php';
 
 /**
  * @see Zend_Application_Resource_Multidb
  */
-require_once 'Zend/Application/Resource/Multidb.php';
 
-require_once 'Zend/Db/Table.php';
 
 
 /**

@@ -28,25 +28,18 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 /**
  * Test helper
  */
-require_once realpath(dirname(__FILE__) . '/../../..') . '/TestHelper.php';
 
 /** Zend_Layout */
-require_once 'Zend/Layout.php';
 
 /** Zend_Log */
-require_once 'Zend/Log.php';
 
 /** Zend_Log_Writer_Mail */
-require_once 'Zend/Log/Writer/Mail.php';
 
 /** Zend_Mail */
-require_once 'Zend/Mail.php';
 
 /** Zend_Mail_Transport_Exception */
-require_once 'Zend/Mail/Transport/Exception.php';
 
 /** Zend_View_Exception */
-require_once 'Zend/View/Exception.php';
 
 /**
  * @category   Zend
@@ -65,7 +58,6 @@ class Zend_Log_Writer_MailTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
         $suite = new PHPUnit_Framework_TestSuite("Zend_Log_Writer_MailTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }

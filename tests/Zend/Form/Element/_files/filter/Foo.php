@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Filter/File/LowerCase.php'
 
 /**
  * custom filter for use with file element tests

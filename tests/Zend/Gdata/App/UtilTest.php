@@ -20,9 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Http/Client.php';
-require_once 'Zend/Gdata/App/Util.php';
-require_once 'Zend/Gdata/App/Exception.php';
 
 /**
  * @category   Zend

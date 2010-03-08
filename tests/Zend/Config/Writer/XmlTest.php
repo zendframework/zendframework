@@ -23,22 +23,18 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Zend_Config
  */
-require_once 'Zend/Config.php';
 
 /**
  * Zend_Config_Xml
  */
-require_once 'Zend/Config/Xml.php';
 
 /**
  * Zend_Config_Writer_Xml
  */
-require_once 'Zend/Config/Writer/Xml.php';
 
 /**
  * @category   Zend

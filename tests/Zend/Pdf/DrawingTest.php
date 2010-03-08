@@ -21,32 +21,23 @@
  */
 
 /** Zend_Pdf */
-require_once 'Zend/Pdf.php';
 
 /** Zend_Pdf_Page */
-require_once 'Zend/Pdf/Page.php';
 
 /** Zend_Pdf_Color_GrayScale */
-require_once 'Zend/Pdf/Color/GrayScale.php';
 
 /** Zend_Pdf_Color_Cmyk */
-require_once 'Zend/Pdf/Color/Cmyk.php';
 
 /** Zend_Pdf_Color_Rgb */
-require_once 'Zend/Pdf/Color/Rgb.php';
 
 /** Zend_Pdf_Color_Html */
-require_once 'Zend/Pdf/Color/Html.php';
 
 /** Zend_Pdf_Image */
-require_once 'Zend/Pdf/Image.php';
 
 /** Zend_Pdf_Font */
-require_once 'Zend/Pdf/Font.php';
 
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

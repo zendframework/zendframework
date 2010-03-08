@@ -24,38 +24,31 @@
 /**
  * PHPUnit_Framework_TestCase
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 
 /**
  * @see Zend_Db_Adapter_Pdo_Sqlite
  */
-require_once 'Zend/Db/Adapter/Pdo/Sqlite.php';
 
 /**
  * @see Zend_Db_Table_Abstract
  */
-require_once 'Zend/Db/Table/Abstract.php';
 
 /**
  * @see Zend_Validate_Db_Abstract.php
  */
-require_once 'Zend/Validate/Db/Abstract.php';
 
 /**
  * @see Zend_Validate_Db_RecordExists.php
  */
-require_once 'Zend/Validate/Db/NoRecordExists.php';
 
 /**
  * Mock No Result Adapter
  */
-require_once dirname(__FILE__) . '/_files/Db/MockNoResult.php';
 
 /**
  * Mock Result Adapter
  */
-require_once dirname(__FILE__) . '/_files/Db/MockHasResult.php';
 
 
 /**

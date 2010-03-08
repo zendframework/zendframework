@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Tool/Framework/Manifest/ProviderManifestable.php';
-require_once 'Zend/Tool/Framework/Manifest/Indexable.php';
 
 /**
  * @category   Zend

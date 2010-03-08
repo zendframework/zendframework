@@ -24,7 +24,6 @@
 /**
  * @see Zend_Validate_Digits
  */
-require_once 'Zend/Validate/Digits.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 

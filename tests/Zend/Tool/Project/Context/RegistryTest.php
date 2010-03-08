@@ -21,11 +21,8 @@
  */
 
 
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
-require_once 'Zend/Tool/Project/Context/Repository.php';
 
-require_once 'Zend/Debug.php';
 
 /**
  * @category   Zend

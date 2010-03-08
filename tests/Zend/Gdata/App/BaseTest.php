@@ -20,7 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/App/MockBase.php';
 
 /**
  * @category   Zend

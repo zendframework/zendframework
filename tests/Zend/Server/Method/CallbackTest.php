@@ -25,10 +25,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Server_Method_CallbackTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_Server_Method_Callback */
-require_once 'Zend/Server/Method/Callback.php';
 
 /**
  * Test class for Zend_Server_Method_Callback

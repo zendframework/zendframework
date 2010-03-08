@@ -20,11 +20,8 @@
  * @version    $Id$
  */
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
 
-require_once dirname(__FILE__) . '/TestCommon.php';
 
-require_once 'Zend/Barcode/Object/Upca.php';
 
 /**
  * @category   Zend

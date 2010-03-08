@@ -23,12 +23,10 @@
 /**
  * Zend_Pdf_Element_String
  */
-require_once 'Zend/Pdf/Element/String.php';
 
 /**
  * PHPUnit Test Case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

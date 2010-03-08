@@ -24,7 +24,6 @@
 /**
  * @see Zend_Db_TestUtil_Common
  */
-require_once 'Zend/Db/TestUtil/Common.php';
 
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
@@ -84,7 +83,6 @@ class Zend_Db_TestUtil_Mysqli extends Zend_Db_TestUtil_Common
         $retval = $mysqli->query($sql);
         if (!$retval) {
             $e = $mysqli->error;
-            require_once 'Zend/Db/Exception.php';
             throw new Zend_Db_Exception("SQL error for \"$sql\": $e");
         }
     }

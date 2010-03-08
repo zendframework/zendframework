@@ -27,12 +27,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Service_DeveloperGarden_SmsValidation
  */
-require_once 'Zend/Service/DeveloperGarden/SmsValidation.php';
 
 /**
  * Zend_Service_DeveloperGarden test case

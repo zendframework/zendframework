@@ -19,9 +19,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Feed/Pubsubhubbub/Subscriber/Callback.php';
-require_once 'Zend/Feed/Pubsubhubbub/Model/Subscription.php';
-require_once 'Zend/Db/Table/Rowset/Abstract.php';
 
 /**
  * @category   Zend

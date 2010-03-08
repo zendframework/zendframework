@@ -25,10 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Form_Decorator_FormTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
-require_once 'Zend/Form/Decorator/Form.php';
-require_once 'Zend/Form.php';
 
 
 /**
@@ -77,7 +74,6 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper');
         return $view;
@@ -94,8 +90,6 @@ class Zend_Form_Decorator_FormTest extends PHPUnit_Framework_TestCase
         $this->decorator->setOption('helper', 'formForm');
         $this->assertEquals('formForm', $this->decorator->getHelper());
 
-        require_once 'Zend/Form/DisplayGroup.php';
-        require_once 'Zend/Loader/PluginLoader.php';
         $attribs = array(
             'enctype' => 'ascii',
             'charset' => 'us-ascii'

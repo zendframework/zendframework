@@ -24,24 +24,20 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 /**
  * @see Zend_Db
  */
-require_once 'Zend/Db.php';
 
 /**
  * @see Zend_Config
  */
-require_once 'Zend/Config.php';
 
 /**
  * @see Zend_Db_Adapter_Static
  */
-require_once 'Zend/Db/Adapter/Static.php';
 
 
 /**

@@ -23,10 +23,7 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
-require_once 'Zend/Gdata/AuthSub.php';
-require_once 'Zend/Gdata/HttpClient.php';
 
 /**
  * @category   Zend

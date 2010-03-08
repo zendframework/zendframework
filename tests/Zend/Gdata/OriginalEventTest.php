@@ -20,8 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Extension/OriginalEvent.php';
-require_once 'Zend/Gdata.php';
 
 /**
  * @category   Zend

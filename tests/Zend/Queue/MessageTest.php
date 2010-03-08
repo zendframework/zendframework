@@ -29,21 +29,15 @@
  */
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** TestHelp.php */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue/Message.php';
 
 /** Zend_Queue_Adapter_Array */
-require_once 'Zend/Queue/Adapter/Array.php';
 /** Zend_Queue_Adapter_Null */
-require_once 'Zend/Queue/Adapter/Null.php';
 
 /**
  * @category   Zend

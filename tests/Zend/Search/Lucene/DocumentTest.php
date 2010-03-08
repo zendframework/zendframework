@@ -23,27 +23,22 @@
 /**
  * Zend_Search_Lucene_Document
  */
-require_once 'Zend/Search/Lucene/Document.php';
 
 /**
  * Zend_Search_Lucene_Document_Docx
  */
-require_once 'Zend/Search/Lucene/Document/Docx.php';
 
 /**
  * Zend_Search_Lucene_Document_Pptx
  */
-require_once 'Zend/Search/Lucene/Document/Pptx.php';
 
 /**
  * Zend_Search_Lucene_Document_Xlsx
  */
-require_once 'Zend/Search/Lucene/Document/Xlsx.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

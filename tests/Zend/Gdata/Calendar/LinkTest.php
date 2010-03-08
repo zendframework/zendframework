@@ -20,9 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Calendar/Extension/Link.php';
-require_once 'Zend/Gdata/Calendar/Extension/WebContent.php';
-require_once 'Zend/Gdata/Calendar.php';
 
 /**
  * @category   Zend

@@ -27,12 +27,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Validate_EmailAddress
  */
-require_once 'Zend/Validate/EmailAddress.php';
 
 /**
  * @category   Zend
@@ -391,9 +389,7 @@ class Zend_Validate_EmailAddressTest extends PHPUnit_Framework_TestCase
      */
     public function testHostnameValidatorMessagesShouldBeTranslated()
     {
-        require_once 'Zend/Validate/Hostname.php';
         $hostnameValidator = new Zend_Validate_Hostname();
-        require_once 'Zend/Translate.php';
         $translations = array(
             'hostnameIpAddressNotAllowed' => 'hostnameIpAddressNotAllowed translation',
             'hostnameUnknownTld' => 'hostnameUnknownTld translation',

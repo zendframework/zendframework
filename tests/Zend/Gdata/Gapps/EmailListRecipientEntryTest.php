@@ -20,8 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Gapps/EmailListRecipientEntry.php';
-require_once 'Zend/Gdata/Gapps.php';
 
 /**
  * @category   Zend

@@ -23,11 +23,9 @@
 /**
  * Test helper
  */
-require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 /**
  * Zend_Ldap_Converter
  */
-require_once 'Zend/Ldap/Converter.php';
 
 /**
  * @category   Zend

@@ -20,9 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Gbase.php';
-require_once 'Zend/Http/Client.php';
-require_once 'Zend/Gdata/ClientLogin.php';
 
 /**
  * @category   Zend

@@ -112,7 +112,6 @@ class Custom_Message extends Zend_Queue_Message
             /**
              * @see Zend_Queue_Exception
              */
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('Disconnected from queue.  Cannot delete message from queue.');
         }
     }

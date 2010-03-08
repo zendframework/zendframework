@@ -21,7 +21,6 @@
  */
 
 /** Zend_Queue_Message_Iterator */
-require_once('Zend/Queue/Message/Iterator.php');
 
 /**
  * This class uses the SLP_ArrayIterator
@@ -60,7 +59,6 @@ implements ArrayAccess
             /**
              * @see Zend_Queue_Exception
              */
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception('array configuration must have $config[\'data\'] = array');
         }
 
@@ -126,7 +124,6 @@ implements ArrayAccess
             /**
              * @see Zend_Queue_Exception
              */
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception($msg);
         }
 
@@ -150,7 +147,6 @@ implements ArrayAccess
             /**
              * @see Zend_Queue_Exception
              */
-            require_once 'Zend/Queue/Exception.php';
             throw new Zend_Queue_Exception($msg);
         }
 

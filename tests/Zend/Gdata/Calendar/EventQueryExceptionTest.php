@@ -20,10 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Calendar.php';
-require_once 'Zend/Gdata/Calendar/EventQuery.php';
-require_once 'Zend/Http/Client.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

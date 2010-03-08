@@ -21,10 +21,8 @@
  */
 
 /** PHPUnit_Framework_TestCase */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** Zend_Log_Formatter_Simple */
-require_once 'Zend/Log/Formatter/Simple.php';
 
 /**
  * @category   Zend

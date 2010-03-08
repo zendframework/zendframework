@@ -24,12 +24,10 @@
 /**
  * Zend_Measure_Power
  */
-require_once 'Zend/Measure/Power.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

@@ -23,12 +23,10 @@
 /**
  * @see Zend_Db_TestSetup
  */
-require_once 'Zend/Db/TestSetup.php';
 
 /**
  * @see Zend_Loader
  */
-require_once 'Zend/Loader.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 

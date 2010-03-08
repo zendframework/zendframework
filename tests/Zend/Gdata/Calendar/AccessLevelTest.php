@@ -20,8 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Calendar/Extension/AccessLevel.php';
-require_once 'Zend/Gdata/Calendar.php';
 
 /**
  * @category   Zend

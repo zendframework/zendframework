@@ -27,16 +27,12 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /** Zend_Service_Twitter */
-require_once 'Zend/Service/Twitter.php';
 
 /** Zend_Http_Client */
-require_once 'Zend/Http/Client.php';
 
 /** Zend_Http_Client_Adapter_Test */
-require_once 'Zend/Http/Client/Adapter/Test.php';
 
 /**
  * @category   Zend

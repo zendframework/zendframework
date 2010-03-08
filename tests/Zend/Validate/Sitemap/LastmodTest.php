@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Validate/Sitemap/Lastmod.php';
 
 /**
  * Tests Zym_Validate_Sitemap_Lastmod

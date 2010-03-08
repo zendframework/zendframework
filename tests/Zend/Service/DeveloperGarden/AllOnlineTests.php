@@ -27,16 +27,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
-require_once 'Zend/Service/DeveloperGarden/SecurityTokenServerTest.php';
-require_once 'Zend/Service/DeveloperGarden/BaseUserServiceTest.php';
-require_once 'Zend/Service/DeveloperGarden/IpLocationTest.php';
-require_once 'Zend/Service/DeveloperGarden/LocalSearchTest.php';
-require_once 'Zend/Service/DeveloperGarden/SmsValidationTest.php';
-require_once 'Zend/Service/DeveloperGarden/SendSmsTest.php';
-require_once 'Zend/Service/DeveloperGarden/ConferenceCallTest.php';
-require_once 'Zend/Service/DeveloperGarden/VoiceCallTest.php';
 
 /**
  * Zend_Service_DeveloperGarden test suite

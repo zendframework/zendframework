@@ -23,13 +23,10 @@
 /**
  * Zend_Measure_Acceleration
  */
-require_once 'Zend/Measure/Acceleration.php';
-require_once 'Zend/Locale.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

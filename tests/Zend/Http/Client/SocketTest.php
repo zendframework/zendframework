@@ -20,9 +20,7 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__) . '/CommonHttpTests.php';
 
-require_once 'Zend/Http/Client/Adapter/Socket.php';
 
 /**
  * This Testsuite includes all Zend_Http_Client that require a working web
@@ -86,7 +84,6 @@ class Zend_Http_Client_SocketTest extends Zend_Http_Client_CommonHttpTests
      */
     public function testConfigSetAsZendConfig()
     {
-        require_once 'Zend/Config.php';
 
         $config = new Zend_Config(array(
             'timeout'  => 400,

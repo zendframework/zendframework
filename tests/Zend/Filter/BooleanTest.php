@@ -23,12 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Filter_Boolean
  */
-require_once 'Zend/Filter/Boolean.php';
 
 /**
  * @category   Zend
@@ -615,7 +613,6 @@ class Zend_Filter_BooleanTest extends PHPUnit_Framework_TestCase
      */
     public function testConfigObject()
     {
-        require_once 'Zend/Config.php';
         $options = array('type' => 'all', 'locale' => 'de');
         $config  = new Zend_Config($options);
 

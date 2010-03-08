@@ -24,17 +24,14 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 /**
  * @see Zend_Auth_Adapter_Ldap
  */
-require_once 'Zend/Auth/Adapter/Ldap.php';
 
 /**
  * @see Zend_Ldap
  */
-require_once 'Zend/Ldap.php';
 
 /**
  * @category   Zend

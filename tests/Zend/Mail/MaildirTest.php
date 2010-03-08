@@ -23,17 +23,14 @@
 /**
  * Zend_Mail_Storage_Maildir
  */
-require_once 'Zend/Mail/Storage/Maildir.php';
 
 /**
  * Zend_Config
  */
-require_once 'Zend/Config.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

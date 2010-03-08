@@ -24,13 +24,11 @@
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 
 /**
  * @see Zend_Session
  */
-require_once 'Zend/Session.php';
 
 
 /**

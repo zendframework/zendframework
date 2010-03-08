@@ -1,7 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Oauth/Signature/Plaintext.php';
 
 class Zend_Oauth_Signature_PlaintextTest extends PHPUnit_Framework_TestCase
 {

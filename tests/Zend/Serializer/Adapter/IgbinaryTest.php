@@ -23,12 +23,10 @@
 /**
  * @see Zend_Serializer_Adapter_Igbinary
  */
-require_once 'Zend/Serializer/Adapter/Igbinary.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

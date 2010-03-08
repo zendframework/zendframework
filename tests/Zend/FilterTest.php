@@ -24,12 +24,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../TestHelper.php';
 
 /**
  * @see Zend_Filter
  */
-require_once 'Zend/Filter.php';
 
 
 /**

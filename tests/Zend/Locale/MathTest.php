@@ -23,13 +23,10 @@
 /**
  * Zend_Locale_Format
  */
-require_once 'Zend/Locale/Math.php';
-require_once 'Zend/Locale/Math/PhpMath.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 
 /**

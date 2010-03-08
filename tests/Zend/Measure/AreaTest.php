@@ -23,12 +23,10 @@
 /**
  * Zend_Measure_Area
  */
-require_once 'Zend/Measure/Area.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

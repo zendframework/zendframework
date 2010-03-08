@@ -25,10 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Captcha_ImageTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
-require_once 'Zend/Form/Element/Captcha.php';
-require_once 'Zend/Captcha/Adapter.php';
 
 /**
  * @category   Zend
@@ -49,7 +46,6 @@ class Zend_Captcha_ImageTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Captcha_ImageTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
@@ -131,7 +127,6 @@ class Zend_Captcha_ImageTest extends PHPUnit_Framework_TestCase
                     $tmpdir = realpath(dirname($tempFile));
                     unlink($tempFile);
                 } else {
-                    require_once 'Zend/File/Transfer/Exception.php';
                     throw new Zend_File_Transfer_Exception('Could not determine temp directory');
                 }
             }
@@ -142,7 +137,6 @@ class Zend_Captcha_ImageTest extends PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper');
         return $view;

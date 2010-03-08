@@ -24,12 +24,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Validate_Int
  */
-require_once 'Zend/Validate/Int.php';
 
 
 /**

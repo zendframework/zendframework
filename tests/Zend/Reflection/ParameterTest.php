@@ -23,12 +23,10 @@
 /**
  * @see TestHelper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Reflection_Parameter
  */
-require_once 'Zend/Reflection/Parameter.php';
 
 /**
  * @category   Zend
@@ -48,7 +46,6 @@ class Zend_Reflection_ParameterTest extends PHPUnit_Framework_TestCase
     {
         if (self::$_sampleClassFileRequired === false) {
             $fileToRequire = dirname(__FILE__) . '/_files/TestSampleClass.php';
-            require_once $fileToRequire;
             self::$_sampleClassFileRequired = true;
         }
     }

@@ -20,9 +20,7 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__)."/../../../../../TestHelper.php";
 
-require_once "AbstractTestCase.php";
 
 /**
  * @category   Zend

@@ -19,9 +19,6 @@
  * @version    $Id$
  */
  
-require_once 'Zend/Cache.php';
-require_once 'Zend/Cache/Manager.php';
-require_once 'Zend/Config.php';
 
 /**
  * @category   Zend_Cache

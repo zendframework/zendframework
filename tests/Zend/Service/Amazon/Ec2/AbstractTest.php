@@ -20,9 +20,7 @@
  * @version    $Id: AbstractTest.php 17667 2009-08-18 21:40:09Z mikaelkael $
  */
 
-require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-require_once 'Zend/Service/Amazon/Ec2/Abstract.php';
 
 /**
  * @todo: Rename class to Zend_Service_Amazon_AbstractTest
@@ -92,7 +90,7 @@ class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class TestAmamzonAbstract extends Zend_Service_Amazon_Ec2_Abstract
+class TestAmazonAbstract extends Zend_Service_Amazon_Ec2_Abstract
 {
 
     public function returnRegion()

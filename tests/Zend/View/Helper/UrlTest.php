@@ -25,17 +25,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_UrlTest::main");
 }
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
-require_once "PHPUnit/Framework/TestCase.php";
-require_once "PHPUnit/Framework/TestSuite.php";
 
-require_once 'Zend/View.php';
-require_once 'Zend/View/Helper/Url.php';
 
 /* Test dependency on Front Controller because there is no way to get the Controller out of View instance dynamically */
-require_once 'Zend/Controller/Front.php';
 
-require_once 'Zend/Controller/Request/Http.php';
 
 /**
  * Zend_View_Helper_UrlTest
@@ -60,7 +53,6 @@ class Zend_View_Helper_UrlTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_UrlTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

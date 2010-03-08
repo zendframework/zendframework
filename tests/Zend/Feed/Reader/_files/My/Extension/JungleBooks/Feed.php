@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Feed/Reader/Extension/FeedAbstract.php';
 
 /**
  * @category   Zend

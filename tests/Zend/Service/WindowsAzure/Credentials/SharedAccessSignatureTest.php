@@ -23,12 +23,10 @@
 /**
  * Test helpers
  */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 /**
  * @see Zend_Service_WindowsAzure_Credentials_SharedAccessSignature 
  */
-require_once 'Zend/Service/WindowsAzure/Credentials/SharedAccessSignature.php';
 
 
 if (!defined('PHPUnit_MAIN_METHOD')) {

@@ -20,13 +20,11 @@
  * @version    $Id$
  */
 
-require_once dirname(dirname(dirname(__FILE__))) . '/TestHelper.php';
 
 if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Markup_ParserIntegrityTest::main");
 }
 
-require_once 'Zend/Markup.php';
 
 /**
  * @category   Zend
@@ -46,7 +44,6 @@ class Zend_Markup_ParserIntegrityTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Markup_MarkupTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

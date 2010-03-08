@@ -28,12 +28,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Filter_StripTags
  */
-require_once 'Zend/Filter/StripTags.php';
 
 
 /**
@@ -60,7 +58,6 @@ class Zend_Filter_StripTagsTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);

@@ -23,12 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Session_SaveHandler_DbTable
  */
-require_once 'Zend/Session/SaveHandler/DbTable.php';
 
 /**
  * Unit testing for Zend_Session_SaveHandler_DbTable include all tests for
@@ -355,7 +353,6 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
         /**
          * @see Zend_Session_Namespace
          */
-        require_once 'Zend/Session/Namespace.php';
 
         $session = new Zend_Session_Namespace('SaveHandler');
         $session->testArray = $this->_saveHandlerTableConfig;

@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
-require_once 'Zend/Http/Cookie.php';
 
 /**
  * Zend_Http_Cookie unit tests

@@ -19,15 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version $Id$
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
-require_once 'Zend/XmlRpc/Client.php';
 
-require_once 'Zend/XmlRpc/Response.php';
 
-require_once 'Zend/Http/Client/Adapter/Test.php';
 
-require_once 'Zend/XmlRpc/Value/DateTime.php';
 
 /**
  * Test case for Zend_XmlRpc_Value
@@ -740,7 +735,6 @@ class Zend_XmlRpc_ClientTest extends PHPUnit_Framework_TestCase
 }
 
 /** related to ZF-8478 */
-require_once 'Zend/XmlRpc/Client/ServerProxy.php';
 class Python_SimpleXMLRPCServerWithUnsupportedIntrospection extends Zend_XmlRpc_Client_ServerProxy {
     public function __call($method, $args) {
         if ($method == 'methodSignature') {
@@ -751,7 +745,6 @@ class Python_SimpleXMLRPCServerWithUnsupportedIntrospection extends Zend_XmlRpc_
 }
 
 /** related to ZF-8478 */
-require_once 'Zend/XmlRpc/Client.php';
 class Test_XmlRpc_Client extends Zend_XmlRpc_Client {
     public function getProxy($namespace = '') {
     	if (empty($this->_proxyCache[$namespace])) {

@@ -23,12 +23,10 @@
 /**
  * Zend_Translate_Adapter_Tbx
  */
-require_once 'Zend/Translate/Adapter/Tbx.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend
@@ -183,7 +181,6 @@ class Zend_Translate_Adapter_TbxTest extends PHPUnit_Framework_TestCase
 
     public function testOptionLocaleDirectory()
     {
-        require_once 'Zend/Translate.php';
         $adapter = new Zend_Translate_Adapter_Tbx(dirname(__FILE__) . '/_files/testtbx', 'de', array('scan' => Zend_Translate::LOCALE_DIRECTORY));
         $this->assertEquals(array('en' => 'en', 'fr' => 'fr', 'de' => 'de'), $adapter->getList());
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));
@@ -191,7 +188,6 @@ class Zend_Translate_Adapter_TbxTest extends PHPUnit_Framework_TestCase
 
     public function testOptionLocaleFilename()
     {
-        require_once 'Zend/Translate.php';
         $adapter = new Zend_Translate_Adapter_Tbx(dirname(__FILE__) . '/_files/testtbx', 'de', array('scan' => Zend_Translate::LOCALE_FILENAME));
         $this->assertEquals(array('en' => 'en', 'fr' => 'fr', 'de' => 'de'), $adapter->getList());
         $this->assertEquals('Nachricht 1', $adapter->translate('Message 1'));

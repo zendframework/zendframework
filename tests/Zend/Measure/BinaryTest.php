@@ -23,12 +23,10 @@
 /**
  * Zend_Measure_Binary
  */
-require_once 'Zend/Measure/Binary.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

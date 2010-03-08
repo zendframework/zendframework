@@ -22,22 +22,16 @@
 
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** TestHelp.php */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue/Message.php';
 
 /** Zend_Queue_Message_Test */
-require_once 'MessageTestClass.php';
 
 /** Base Adapter test class */
-require_once dirname(__FILE__) . '/AdapterTest.php';
 
 /**
  * @category   Zend

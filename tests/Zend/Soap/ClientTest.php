@@ -24,18 +24,13 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Soap_ClientTest::main');
 }
 
-require_once dirname(__FILE__)."/../../TestHelper.php";
 
 /** PHPUnit Test Case */
-require_once "PHPUnit/Framework/TestCase.php";
 
 /** Zend_Soap_Server */
-require_once 'Zend/Soap/Server.php';
 
 /** Zend_Soap_Client */
-require_once 'Zend/Soap/Client.php';
 
-require_once 'Zend/Config.php';
 
 /**
  * @category   Zend

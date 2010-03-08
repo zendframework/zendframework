@@ -28,12 +28,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Validate_File_ImageSize
  */
-require_once 'Zend/Validate/File/ImageSize.php';
 
 /**
  * @category   Zend

@@ -1,7 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Framework/TestCase.php';
-//require_once 'Zend/Oauth/Signature/Rsa.php';
 
 class Zend_Oauth_Signature_RsaTest extends PHPUnit_Framework_TestCase
 {

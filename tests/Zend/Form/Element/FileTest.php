@@ -25,15 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_FileTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
-require_once 'Zend/Form/Element/File.php';
-require_once 'Zend/File/Transfer/Adapter/Abstract.php';
-require_once 'Zend/Validate/File/Upload.php';
-require_once 'Zend/Form/SubForm.php';
-require_once 'Zend/Form.php';
-require_once 'Zend/Registry.php';
-require_once 'Zend/View.php';
 
 /**
  * Test class for Zend_Form_Element_File
@@ -312,7 +304,6 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
 
     public function testTranslatingValidatorErrors()
     {
-        require_once 'Zend/Translate.php';
         $translate = new Zend_Translate('array', array('unused', 'foo' => 'bar'), 'en');
         $this->element->setTranslator($translate);
 
@@ -431,7 +422,6 @@ class Zend_Form_Element_FileTest extends PHPUnit_Framework_TestCase
     {
         $this->assertNull($this->element->getTranslator());
         $translator = new Zend_Translate('array', array('foo' => 'bar'));
-        require_once 'Zend/Form.php';
         Zend_Form::setDefaultTranslator($translator);
         $received = $this->element->getTranslator();
         $this->assertSame($translator->getAdapter(), $received);

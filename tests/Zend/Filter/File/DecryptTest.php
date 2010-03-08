@@ -23,13 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Filter_File_Decrypt
  */
-require_once 'Zend/Filter/File/Decrypt.php';
-require_once 'Zend/Filter/File/Encrypt.php';
 
 /**
  * @category   Zend

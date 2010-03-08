@@ -25,11 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_FormResetTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
-require_once 'Zend/View/Helper/FormReset.php';
-require_once 'Zend/View.php';
-require_once 'Zend/Registry.php';
 
 /**
  * Test class for Zend_View_Helper_FormReset.

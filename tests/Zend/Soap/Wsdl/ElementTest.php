@@ -20,14 +20,6 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__)."/../../../TestHelper.php";
-require_once "Zend/Soap/Wsdl/Element/Binding.php";
-require_once "Zend/Soap/Wsdl/Element/Type.php";
-require_once "Zend/Soap/Wsdl/Element/Message.php";
-require_once "Zend/Soap/Wsdl/Element/Operation.php";
-require_once "Zend/Soap/Wsdl/Element/Port.php";
-require_once "Zend/Soap/Wsdl/Element/Service.php";
-require_once "Zend/Soap/Wsdl/Element/Collection.php";
 
 /**
  * @category   Zend

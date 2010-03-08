@@ -24,23 +24,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_ElementTest::main');
 }
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 // error_reporting(E_ALL);
 
-require_once 'Zend/Form/Element.php';
 
-require_once 'Zend/Config.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Form.php';
-require_once 'Zend/Form/Decorator/Abstract.php';
-require_once 'Zend/Form/Decorator/HtmlTag.php';
-require_once 'Zend/Loader/PluginLoader.php';
-require_once 'Zend/Registry.php';
-require_once 'Zend/Translate.php';
-require_once 'Zend/Validate/NotEmpty.php';
-require_once 'Zend/Validate/EmailAddress.php';
-require_once 'Zend/View.php';
 
 /**
  * @category   Zend
@@ -254,7 +241,6 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
                       ->addFilter(new Zend_Form_ElementTest_ArrayFilter());
         $test = $this->element->getValue();
         $this->assertTrue(is_array($test));
-        require_once 'Zend/Json.php';
         $test = Zend_Json::encode($test);
         $this->assertNotContains('foo', $test);
         foreach (array('bar', 'baz', 'bat') as $value) {
@@ -690,7 +676,6 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->element->getValidator('Zend_Validate_Digits'));
 
-        require_once 'Zend/Validate/Digits.php';
         $validator = new Zend_Validate_Digits();
         $this->element->addValidator($validator);
         $test = $this->element->getValidator('Zend_Validate_Digits');
@@ -718,7 +703,6 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->element->getValidator('digits'));
 
-        require_once 'Zend/Validate/Digits.php';
         $validator = new Zend_Validate_Digits();
         $this->element->addValidator($validator);
         $test = $this->element->getValidator('digits');
@@ -972,7 +956,6 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
                       ->setValue(array('foo', 'bar', 'baz'))
                       ->addError('error with value %value%');
         $errors = $this->element->getMessages();
-        require_once 'Zend/Json.php';
         $errors = Zend_Json::encode($errors);
         foreach (array('foo', 'bar', 'baz') as $value) {
             $message = 'error with value ' . $value;
@@ -1080,8 +1063,6 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
 
     public function testMessagesPopulatedFollowingFailedIsValidCheck()
     {
-        require_once 'Zend/Validate/NotEmpty.php';
-        require_once 'Zend/Validate/EmailAddress.php';
         $this->element->addValidator(new Zend_Validate_NotEmpty())
                       ->addValidator(new Zend_Validate_EmailAddress());
 
@@ -1154,7 +1135,6 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse($this->element->getFilter('Zend_Filter_Digits'));
 
-        require_once 'Zend/Filter/Digits.php';
         $filter = new Zend_Filter_Digits();
         $this->element->addFilter($filter);
         $test = $this->element->getFilter('Zend_Filter_Digits');
@@ -1167,7 +1147,6 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->element->getFilter('digits'));
 
-        require_once 'Zend/Filter/Digits.php';
         $filter = new Zend_Filter_Digits();
         $this->element->addFilter($filter);
         $test = $this->element->getFilter('digits');
@@ -1391,7 +1370,6 @@ class Zend_Form_ElementTest extends PHPUnit_Framework_TestCase
      */
     public function testAddingConcreteDecoratorShouldHonorOrder()
     {
-        require_once dirname(__FILE__) . '/_files/decorators/TableRow.php';
         $decorator = new My_Decorator_TableRow();
         $this->element->setLabel('Foo')
                       ->setDescription('sample description')

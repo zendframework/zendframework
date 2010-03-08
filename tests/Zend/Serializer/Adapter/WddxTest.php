@@ -23,12 +23,10 @@
 /**
  * @see Zend_Serializer_Adapter_Wddx
  */
-require_once 'Zend/Serializer/Adapter/Wddx.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

@@ -25,9 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Form_Element_HashTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
-require_once 'Zend/Form/Element/Hash.php';
 
 /**
  * Test class for Zend_Form_Element_Hash
@@ -48,7 +46,6 @@ class Zend_Form_Element_HashTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Form_Element_HashTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
@@ -158,7 +155,6 @@ class Zend_Form_Element_HashTest extends PHPUnit_Framework_TestCase
 
     public function getView()
     {
-        require_once 'Zend/View.php';
         $view = new Zend_View();
         $view->addHelperPath(dirname(__FILE__) . '/../../../../library/Zend/View/Helper');
         return $view;

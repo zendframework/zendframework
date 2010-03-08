@@ -25,10 +25,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Dom_Query_Css2XpathTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_Dom_Query_Css2Xpath */
-require_once 'Zend/Dom/Query/Css2Xpath.php';
 
 /**
  * Test class for Zend_Dom_Query_Css2Xpath.

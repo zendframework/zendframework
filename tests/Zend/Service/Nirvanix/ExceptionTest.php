@@ -23,7 +23,6 @@
 /**
  * @see Zend_Service_Nirvanix_Exception
  */
-require_once 'Zend/Service/Nirvanix/Exception.php';
 
 /**
  * @category   Zend

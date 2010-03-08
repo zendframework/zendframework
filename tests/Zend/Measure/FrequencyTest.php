@@ -24,12 +24,10 @@
 /**
  * Zend_Measure_Frequency
  */
-require_once 'Zend/Measure/Frequency.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

@@ -23,12 +23,10 @@
 /**
  * Zend_Rest_Server
  */
-require_once 'Zend/Rest/Client/Result.php';
 
 /**
  * PHPUnit Test Case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * Test cases for Zend_Rest_Server

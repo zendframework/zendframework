@@ -24,12 +24,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . DIRECTORY_SEPARATOR .'TestCase.php';
 
 /**
  * @see Zend_Service_Technorati_SearchResult
  */
-require_once 'Zend/Service/Technorati/SearchResult.php';
 
 
 /**

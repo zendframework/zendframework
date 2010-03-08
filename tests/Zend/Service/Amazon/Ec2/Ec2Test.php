@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
-require_once 'Zend/Service/Amazon/Ec2.php';
 
 /**
  * Zend_Service_Amazon_Ec2 test case.

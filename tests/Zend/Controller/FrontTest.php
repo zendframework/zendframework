@@ -33,17 +33,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     );
 }
 
-require_once "PHPUnit/Framework/TestCase.php";
-require_once "PHPUnit/Framework/TestSuite.php";
 
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Response/Cli.php';
-require_once 'Zend/Controller/Dispatcher/Standard.php';
-require_once 'Zend/Controller/Router/Rewrite.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Controller/Action/Helper/Url.php';
-require_once 'Zend/Controller/Action/Helper/ViewRenderer.php';
 
 /**
  * @category   Zend
@@ -66,7 +56,6 @@ class Zend_Controller_FrontTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_FrontTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

@@ -23,12 +23,10 @@
 /**
  * Zend_Search_Lucene_PriorityQueue
  */
-require_once 'Zend/Search/Lucene/PriorityQueue.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

@@ -21,13 +21,10 @@
  */
 
 /** PHPUnit_Framework_TestCase */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** Zend_Log */
-require_once 'Zend/Log.php';
 
 /** Zend_Log_Filter_Suppress */
-require_once 'Zend/Log/Filter/Suppress.php';
 
 /**
  * @category   Zend

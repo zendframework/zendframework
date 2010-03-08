@@ -23,9 +23,7 @@
 /**
  * @see Zend_Loader
  */
-require_once 'Zend/Loader.php';
 
-require_once 'PHPUnit/Util/Filter.php';
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 /**

@@ -21,29 +21,21 @@
  */
 
 /** Zend_Pdf_Action */
-require_once 'Zend/Pdf/Action.php';
 
 /** Zend_Pdf_Action_GoTo */
-require_once 'Zend/Pdf/Action/GoTo.php';
 
 /** Zend_Pdf_Action_URI */
-require_once 'Zend/Pdf/Action/URI.php';
 
 /** Zend_Pdf_ElementFactory */
-require_once 'Zend/Pdf/ElementFactory.php';
 
 /** Zend_Pdf */
-require_once 'Zend/Pdf.php';
 
 /** Zend_Pdf_RecursivelyIteratableObjectsContainer */
-require_once 'Zend/Pdf/RecursivelyIteratableObjectsContainer.php';
 
 /** Zend_Pdf_ElementFactory */
-require_once 'Zend/Pdf/ElementFactory.php';
 
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 
 /**
@@ -339,7 +331,6 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $page1 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
         $page2 = $pdf->newPage(Zend_Pdf_Page::SIZE_A4);
 
-        require_once 'Zend/Pdf/Destination/Fit.php';
         $destination = Zend_Pdf_Destination_Fit::create($page2);
 
         $action = Zend_Pdf_Action_GoTo::create($destination);
@@ -372,7 +363,6 @@ class Zend_Pdf_ActionTest extends PHPUnit_Framework_TestCase
         $pdf->pages[] = $page1;
         $pdf->pages[] = $page2;
 
-        require_once 'Zend/Pdf/Destination/Fit.php';
         $action1 = Zend_Pdf_Action_GoTo::create(Zend_Pdf_Destination_Fit::create($page2));
         $action2 = Zend_Pdf_Action_GoTo::create(Zend_Pdf_Destination_Fit::create($page3));
 

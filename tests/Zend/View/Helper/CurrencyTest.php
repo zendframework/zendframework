@@ -25,16 +25,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_CurrencyTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_View_Helper_Currency */
-require_once 'Zend/View/Helper/Currency.php';
 
 /** Zend_Registry */
-require_once 'Zend/Registry.php';
 
 /** Zend_Currency */
-require_once 'Zend/Currency.php';
 
 /**
  * Test class for Zend_View_Helper_Currency
@@ -61,7 +57,6 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_CurrencyTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
@@ -85,7 +80,6 @@ class Zend_View_Helper_CurrencyTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->clearRegistry();
-        require_once 'Zend/Cache.php';
         $this->_cache = Zend_Cache::factory('Core', 'File',
                  array('lifetime' => 120, 'automatic_serialization' => true),
                  array('cache_dir' => dirname(__FILE__) . '/../../_files/'));

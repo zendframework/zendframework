@@ -20,17 +20,14 @@
  * @version    $Id $
  */
 
-require_once dirname(__FILE__) . '/../TestHelper.php';
 
 /**
  * Zend_Translate
  */
-require_once 'Zend/Translate.php';
 
 /**
  * Zend_Translate_Plural
  */
-require_once 'Zend/Translate/Plural.php';
 
 /**
  * @category   Zend
@@ -59,7 +56,6 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
             Zend_Translate::removeCache();
         }
 
-        require_once 'Zend/Translate/Adapter/Array.php';
         if (Zend_Translate_Adapter_Array::hasCache()) {
             Zend_Translate_Adapter_Array::removeCache();
         }
@@ -238,7 +234,6 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
 
     public function testTestingCacheHandling()
     {
-        require_once 'Zend/Cache.php';
         $cache = Zend_Cache::factory('Core', 'File',
             array('lifetime' => 120, 'automatic_serialization' => true),
             array('cache_dir' => dirname(__FILE__) . '/_files/'));
@@ -272,9 +267,7 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
 
     public function testZF3679()
     {
-        require_once 'Zend/Locale.php';
         $locale = new Zend_Locale('de_AT');
-        require_once 'Zend/Registry.php';
         Zend_Registry::set('Zend_Locale', $locale);
 
         $lang = new Zend_Translate(Zend_Translate::AN_ARRAY, array('msg1' => 'message1'), 'de_AT');
@@ -320,9 +313,7 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('ignored', $lang->translate('ignored'));
 
         $stream = fopen('php://memory', 'w+');
-        require_once 'Zend/Log/Writer/Stream.php';
         $writer = new Zend_Log_Writer_Stream($stream);
-        require_once 'Zend/Log.php';
         $log    = new Zend_Log($writer);
 
         $lang->setOptions(array('logUntranslated' => true, 'log' => $log));
@@ -348,9 +339,7 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
         $lang = new Zend_Translate(Zend_Translate::AN_CSV, dirname(__FILE__) . '/Translate/Adapter/_files', 'en', array('delimiter' => ','));
 
         $stream = fopen('php://memory', 'w+');
-        require_once 'Zend/Log/Writer/Stream.php';
         $writer = new Zend_Log_Writer_Stream($stream);
-        require_once 'Zend/Log.php';
         $log    = new Zend_Log($writer);
 
         $lang->setOptions(array('log' => $log));
@@ -378,9 +367,7 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('ignored', $lang->translate('ignored'));
 
         $stream = fopen('php://memory', 'w+');
-        require_once 'Zend/Log/Writer/Stream.php';
         $writer = new Zend_Log_Writer_Stream($stream);
-        require_once 'Zend/Log.php';
         $log    = new Zend_Log($writer);
 
         $lang->setOptions(array('logUntranslated' => true, 'log' => $log, 'logMessage' => 'Self defined log message'));
@@ -395,7 +382,6 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
      */
     public function testGetOptionsFromCache()
     {
-        require_once 'Zend/Cache.php';
         $cache = Zend_Cache::factory('Core', 'File',
             array('lifetime' => 120, 'automatic_serialization' => true),
             array('cache_dir' => dirname(__FILE__) . '/_files/'));
@@ -588,9 +574,7 @@ class Zend_TranslateTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($lang->isTranslated('ignored'));
 
         $stream = fopen('php://memory', 'w+');
-        require_once 'Zend/Log/Writer/Stream.php';
         $writer = new Zend_Log_Writer_Stream($stream);
-        require_once 'Zend/Log.php';
         $log    = new Zend_Log($writer);
 
         $lang->setOptions(array('logUntranslated' => true, 'log' => $log));

@@ -25,22 +25,16 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_ActionTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_View_Helper_Action */
-require_once 'Zend/View/Helper/Action.php';
 
 /** Zend_Controller_Front */
-require_once 'Zend/Controller/Front.php';
 
 /** Zend_Controller_Request_Http */
-require_once 'Zend/Controller/Request/Http.php';
 
 /** Zend_Controller_Response_Http */
-require_once 'Zend/Controller/Response/Http.php';
 
 /** Zend_View */
-require_once 'Zend/View.php';
 
 /**
  * Test class for Zend_View_Helper_Action.
@@ -285,7 +279,6 @@ class Zend_View_Helper_ActionTest extends PHPUnit_Framework_TestCase
      */
     public function testActionWithPartialsUseOfViewRendererReturnsToOriginatingViewState()
     {
-        require_once 'Zend/View/Helper/Partial.php';
         $partial = new Zend_View_Helper_Partial();
         $this->view->setScriptPath(dirname(__FILE__) . '/_files/modules/default/views/scripts/');
         $partial->setView($this->view);

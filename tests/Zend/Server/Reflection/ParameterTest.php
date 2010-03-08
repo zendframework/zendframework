@@ -20,9 +20,6 @@
  * @version $Id$
  */
 
-require_once 'Zend/Server/Reflection/Parameter.php';
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'PHPUnit/Framework/IncompleteTestError.php';
 
 /**
  * Test case for Zend_Server_Reflection_Parameter

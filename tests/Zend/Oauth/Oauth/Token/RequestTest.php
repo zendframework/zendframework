@@ -1,7 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Oauth/Token/Request.php';
 
 class Zend_Oauth_Token_RequestTest extends PHPUnit_Framework_TestCase
 {

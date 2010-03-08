@@ -23,7 +23,6 @@
 /**
  * @see Zend_Db_TestUtil_Common
  */
-require_once 'Zend/Db/TestUtil/Common.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
@@ -135,7 +134,6 @@ class Zend_Db_TestUtil_Sqlsrv extends Zend_Db_TestUtil_Common
         if (!$retval) {
             $e = sqlsrv_errors();
             $e = $e[0]['message'];
-            require_once 'Zend/Db/Exception.php';
             throw new Zend_Db_Exception("SQL error for \"$sql\": $e");
         }
     }

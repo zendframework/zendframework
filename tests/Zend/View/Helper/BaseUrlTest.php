@@ -24,17 +24,14 @@
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_View_Helper_BaseUrlTest::main');
 }
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_View_Helper_BaseUrl
  */
-require_once 'Zend/View/Helper/BaseUrl.php';
 
 /**
  * @see Zend_Controller_Front
  */
-require_once 'Zend/Controller/Front.php';
 
 /**
  * @category   Zend

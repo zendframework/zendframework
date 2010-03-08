@@ -23,23 +23,19 @@
 /**
  * Zend_Search_Lucene_Storage_Directory_Filesystem
  */
-require_once 'Zend/Search/Lucene/Storage/Directory/Filesystem.php';
 
 /**
  * Zend_Search_Lucene_Index_SegmentInfo
  */
-require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
 
 
 /**
  * Zend_Search_Lucene_Index_SegmentMerger
  */
-require_once 'Zend/Search/Lucene/Index/SegmentMerger.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

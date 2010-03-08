@@ -22,12 +22,10 @@
 /**
  * Zend_Pdf_Filter_RunLength
  */
-require_once 'Zend/Pdf/Filter/RunLength.php';
 
 /**
  * PHPUnit Test Case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

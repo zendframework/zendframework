@@ -1,7 +1,5 @@
 <?php
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Oauth/Consumer.php';
 
 class Zend_Oauth_ConsumerTest extends PHPUnit_Framework_TestCase
 {

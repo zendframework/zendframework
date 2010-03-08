@@ -24,7 +24,6 @@
 /**
  * PHPUnit_Util_Filter
  */
-require_once 'PHPUnit/Util/Filter.php';
 
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
@@ -33,7 +32,6 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 /**
  * @see Zend_Db_Statement_Mysqli
  */
-require_once 'Zend/Db/Statement/Mysqli.php';
 
 /**
  * Test Class for extending base Zend_Db_Statements

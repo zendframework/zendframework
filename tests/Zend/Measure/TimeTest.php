@@ -23,12 +23,10 @@
 /**
  * Zend_Measure_Time
  */
-require_once 'Zend/Measure/Time.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

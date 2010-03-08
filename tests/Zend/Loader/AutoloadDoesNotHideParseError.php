@@ -23,12 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Loader
  */
-require_once 'Zend/Loader.php';
 
 Zend_Loader::registerAutoload();
 

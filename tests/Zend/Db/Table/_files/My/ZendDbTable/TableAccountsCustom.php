@@ -24,14 +24,12 @@
 /**
  * @see My_ZendDbTable_TableAccounts
  */
-require_once 'TableAccounts.php';
 
 
 /**
  * require other test files needed, this will
  * ensure that Zend_Loader::loadClass is not called
  */
-require_once 'TableBugsCustom.php';
 
 
 

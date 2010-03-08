@@ -23,17 +23,10 @@
 /**
  * @see TestHelper.php
  */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 /**
  * @see Zend_Tool_Framework_Provider_Repository
  */
-require_once 'Zend/Tool/Framework/Provider/Repository.php';
-require_once 'Zend/Tool/Framework/Registry.php';
-require_once 'Zend/Tool/Framework/Action/Repository.php';
-require_once '_files/ProviderOne.php';
-require_once '_files/ProviderTwo.php';
-require_once '_files/ProviderAltName.php';
 
 /**
  * @category   Zend

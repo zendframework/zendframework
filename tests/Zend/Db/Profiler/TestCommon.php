@@ -24,7 +24,6 @@
 /**
  * @see Zend_Db_TestSetup
  */
-require_once 'Zend/Db/TestSetup.php';
 
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);

@@ -22,16 +22,10 @@
 
 // Call Zend_Controller_Plugin_ActionStackTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
-    require_once dirname(__FILE__) . '/../../../TestHelper.php';
     define("PHPUnit_MAIN_METHOD", "Zend_Controller_Plugin_ActionStackTest::main");
 }
 
-require_once "PHPUnit/Framework/TestCase.php";
-require_once "PHPUnit/Framework/TestSuite.php";
 
-require_once 'Zend/Controller/Plugin/ActionStack.php';
-require_once 'Zend/Controller/Request/Simple.php';
-require_once 'Zend/Registry.php';
 
 /**
  * Test class for Zend_Controller_Plugin_ActionStack.
@@ -57,7 +51,6 @@ class Zend_Controller_Plugin_ActionStackTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Plugin_ActionStackTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

@@ -23,12 +23,10 @@
 /**
  * Zend_Measure_Capacitance
  */
-require_once 'Zend/Measure/Capacitance.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

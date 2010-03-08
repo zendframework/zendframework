@@ -23,12 +23,10 @@
 /**
  * Zend_Translate_Adapter_Qt
  */
-require_once 'Zend/Translate/Adapter/Qt.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend
@@ -184,7 +182,6 @@ class Zend_Translate_Adapter_QtTest extends PHPUnit_Framework_TestCase
 
     public function testOptionLocaleDirectory()
     {
-        require_once 'Zend/Translate.php';
         $adapter = new Zend_Translate_Adapter_Qt(dirname(__FILE__) . '/_files/testts', 'de_AT', array('scan' => Zend_Translate::LOCALE_DIRECTORY));
         $this->assertEquals(array('de_AT' => 'de_AT', 'en_GB' => 'en_GB'), $adapter->getList());
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
@@ -192,7 +189,6 @@ class Zend_Translate_Adapter_QtTest extends PHPUnit_Framework_TestCase
 
     public function testOptionLocaleFilename()
     {
-        require_once 'Zend/Translate.php';
         $adapter = new Zend_Translate_Adapter_Qt(dirname(__FILE__) . '/_files/testts', 'de_DE', array('scan' => Zend_Translate::LOCALE_FILENAME));
         $this->assertEquals(array('de_DE' => 'de_DE', 'en_US' => 'en_US'), $adapter->getList());
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));

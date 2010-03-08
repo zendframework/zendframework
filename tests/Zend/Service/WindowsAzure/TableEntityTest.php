@@ -23,12 +23,10 @@
 /**
  * Test helpers
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Service_WindowsAzure_Storage_TableEntity 
  */
-require_once 'Zend/Service/WindowsAzure/Storage/TableEntity.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_TableEntityTest::main');

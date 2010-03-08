@@ -22,15 +22,10 @@
 
 // Call Zend_XmlRpc_Server_FaultTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
-    require_once dirname(__FILE__) . '/../../../TestHelper.php';
     define("PHPUnit_MAIN_METHOD", "Zend_XmlRpc_Server_FaultTest::main");
 }
 
-require_once "PHPUnit/Framework/TestCase.php";
-require_once "PHPUnit/Framework/TestSuite.php";
 
-require_once 'Zend/XmlRpc/Server.php';
-require_once 'Zend/XmlRpc/Server/Fault.php';
 
 /**
  * Test case for Zend_XmlRpc_Server_Fault
@@ -52,7 +47,6 @@ class Zend_XmlRpc_Server_FaultTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_XmlRpc_Server_FaultTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);
@@ -243,7 +237,6 @@ class Zend_XmlRpc_Server_FaultTest extends PHPUnit_Framework_TestCase
 
         $xml = $dom->saveXML();
 
-        require_once 'Zend/XmlRpc/Server/Exception.php';
         $e = new Zend_XmlRpc_Server_Exception('Testing fault', 411);
         $fault = Zend_XmlRpc_Server_Fault::getInstance($e);
 

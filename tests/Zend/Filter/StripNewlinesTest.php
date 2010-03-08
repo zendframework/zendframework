@@ -23,12 +23,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * @see Zend_Filter_StripNewlines
  */
-require_once 'Zend/Filter/StripNewlines.php';
 
 /**
  * @category   Zend

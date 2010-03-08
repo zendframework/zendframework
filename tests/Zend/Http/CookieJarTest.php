@@ -23,10 +23,7 @@
 /**
  * Test helper
  */
-require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Http/CookieJar.php';
 
 /**
  * Zend_Http_CookieJar unit tests

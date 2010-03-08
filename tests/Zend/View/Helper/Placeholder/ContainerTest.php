@@ -25,12 +25,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_Placeholder_ContainerTest::main");
 }
 
-require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . '/TestHelper.php';
-require_once "PHPUnit/Framework/TestCase.php";
-require_once "PHPUnit/Framework/TestSuite.php";
 
 /** Zend_View_Helper_Placeholder_Container */
-require_once 'Zend/View/Helper/Placeholder/Container.php';
 
 /**
  * Test class for Zend_View_Helper_Placeholder_Container.
@@ -57,7 +53,6 @@ class Zend_View_Helper_Placeholder_ContainerTest extends PHPUnit_Framework_TestC
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_Placeholder_ContainerTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

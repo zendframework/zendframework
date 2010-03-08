@@ -27,12 +27,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Zend_Search_Lucene
  */
-require_once 'Zend/Search/Lucene.php';
 
 /**
  * @category   Zend

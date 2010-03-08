@@ -23,12 +23,10 @@
 /**
  * Zend_Pdf_Element_String_Binary
  */
-require_once 'Zend/Pdf/Element/String/Binary.php';
 
 /**
  * PHPUnit Test Case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

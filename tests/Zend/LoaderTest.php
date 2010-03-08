@@ -28,17 +28,14 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../TestHelper.php';
 
 /**
  * Zend_Loader
  */
-require_once 'Zend/Loader.php';
 
 /**
  * Zend_Loader_Autoloader
  */
-require_once 'Zend/Loader/Autoloader.php';
 
 /**
  * @category   Zend
@@ -57,7 +54,6 @@ class Zend_LoaderTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_LoaderTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

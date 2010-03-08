@@ -23,11 +23,8 @@
 /**
  * @see TestHelper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** requires here */
-require_once 'Zend/CodeGenerator/Php/File.php';
-require_once 'Zend/Reflection/File.php';
 
 /**
  * @category   Zend
@@ -79,7 +76,6 @@ class Zend_CodeGenerator_Php_FileTest extends PHPUnit_Framework_TestCase
         $expectedOutput = <<<EOS
 <?php
 
-require_once 'SampleClass.php';
 
 abstract class SampleClass extends ExtendedClassName implements Iterator, Traversable
 {
@@ -106,7 +102,6 @@ EOS;
 
         file_put_contents($tempFile, $codeGenFile->generate());
 
-        require_once $tempFile;
 
         $codeGenFileFromDisk = Zend_CodeGenerator_Php_File::fromReflection(new Zend_Reflection_File($tempFile));
 
@@ -122,7 +117,6 @@ EOS;
         ///$this->markTestSkipped('skipme');
         $file = dirname(__FILE__) . '/_files/TestSampleSingleClass.php';
 
-        require_once $file;
         $codeGenFileFromDisk = Zend_CodeGenerator_Php_File::fromReflection(new Zend_Reflection_File($file));
 
         $codeGenFileFromDisk->getClass()->setMethod(array('name' => 'foobar'));
@@ -190,7 +184,6 @@ EOS;
         // explode by newline, this would leave CF in place if it were generated
         $lines = explode("\n", $codeGenFile);
 
-        $targetLength = strlen('require_once \'SampleClass.php\';');
         $this->assertEquals($targetLength, strlen($lines[2]));
         $this->assertEquals(';', $lines[2]{$targetLength-1});
     }

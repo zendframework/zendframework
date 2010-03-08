@@ -23,12 +23,10 @@
 /**
  * Zend_Measure_Density
  */
-require_once 'Zend/Measure/Density.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

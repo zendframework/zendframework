@@ -24,13 +24,11 @@
 /**
  * PHPUnit_Framework_TestCase
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 
 /**
  * Zend_Auth_Adapter_Digest
  */
-require_once 'Zend/Auth/Adapter/Digest.php';
 
 
 /**

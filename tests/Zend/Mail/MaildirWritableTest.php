@@ -23,12 +23,10 @@
 /**
  * Zend_Mail_Storage_Folder_Maildir
  */
-require_once 'Zend/Mail/Storage/Writable/Maildir.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

@@ -20,22 +20,16 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__)."/../../TestHelper.php";
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** Zend_Soap_AutoDiscover */
-require_once 'Zend/Soap/AutoDiscover.php';
 
 /** Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex */
-require_once "Zend/Soap/Wsdl/Strategy/ArrayOfTypeComplex.php";
 
 /** Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence */
-require_once "Zend/Soap/Wsdl/Strategy/ArrayOfTypeSequence.php";
 
 /** Include Common TestTypes */
-require_once "_files/commontypes.php";
 
 /**
  * Test cases for Zend_Soap_AutoDiscover

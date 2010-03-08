@@ -20,10 +20,7 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__)."/../../../TestHelper.php";
 
-require_once "Zend/Soap/Wsdl/Strategy/DefaultComplexType.php";
-require_once "Zend/Soap/Wsdl.php";
 
 /**
  * @category   Zend

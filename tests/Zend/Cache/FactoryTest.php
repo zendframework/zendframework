@@ -23,19 +23,15 @@
 /**
  * Zend_Cache
  */
-require_once 'Zend/Cache.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 
-require_once 'Zend/Cache/Backend/File.php';
 class Zend_Cache_Backend_FooBarTest extends Zend_Cache_Backend_File { }
 class FooBarTestBackend extends Zend_Cache_Backend_File { }
 
-require_once 'Zend/Cache/Core.php';
 class Zend_Cache_Frontend_FooBarTest extends Zend_Cache_Core { }
 class FooBarTestFrontend extends Zend_Cache_Core { }
 

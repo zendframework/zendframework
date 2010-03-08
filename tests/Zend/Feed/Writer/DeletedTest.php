@@ -20,9 +20,7 @@
  * @version    $Id$
  */
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
 
-require_once 'Zend/Feed/Writer/Deleted.php';
 
 /**
  * @category   Zend

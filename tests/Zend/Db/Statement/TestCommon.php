@@ -20,9 +20,7 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Db/TestSetup.php';
 
-require_once 'Zend/Db/Statement/Exception.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 

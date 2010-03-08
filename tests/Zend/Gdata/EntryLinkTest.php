@@ -20,8 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Extension/EntryLink.php';
-require_once 'Zend/Gdata.php';
 
 /**
  * @category   Zend

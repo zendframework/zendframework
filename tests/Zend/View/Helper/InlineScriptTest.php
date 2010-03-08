@@ -25,18 +25,12 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_View_Helper_InlineScriptTest::main");
 }
 
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/TestHelper.php';
-require_once "PHPUnit/Framework/TestCase.php";
-require_once "PHPUnit/Framework/TestSuite.php";
 
 /** Zend_View_Helper_InlineScript */
-require_once 'Zend/View/Helper/InlineScript.php';
 
 /** Zend_View_Helper_Placeholder_Registry */
-require_once 'Zend/View/Helper/Placeholder/Registry.php';
 
 /** Zend_Registry */
-require_once 'Zend/Registry.php';
 
 /**
  * Test class for Zend_View_Helper_InlineScript.
@@ -68,7 +62,6 @@ class Zend_View_Helper_InlineScriptTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_View_Helper_InlineScriptTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

@@ -23,12 +23,10 @@
 /**
  * @see TestHelper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_CodeGenerator_Php_Class
  */
-require_once 'Zend/CodeGenerator/Php/Class.php';
 
 /**
  * @category   Zend
@@ -241,10 +239,8 @@ EOS;
     public function testClassFromReflectionThatImplementsInterfaces()
     {
         if(!class_exists('Zend_CodeGenerator_Php_ClassWithInterface')) {
-            require_once dirname(__FILE__)."/_files/ClassAndInterfaces.php";
         }
 
-        require_once "Zend/Reflection/Class.php";
         $reflClass = new Zend_Reflection_Class('Zend_CodeGenerator_Php_ClassWithInterface');
 
         $codeGen = Zend_CodeGenerator_Php_Class::fromReflection($reflClass);
@@ -261,10 +257,8 @@ EOS;
     public function testClassFromReflectionDiscardParentImplementedInterfaces()
     {
         if(!class_exists('Zend_CodeGenerator_Php_ClassWithInterface')) {
-            require_once dirname(__FILE__)."/_files/ClassAndInterfaces.php";
         }
 
-        require_once "Zend/Reflection/Class.php";
         $reflClass = new Zend_Reflection_Class('Zend_CodeGenerator_Php_NewClassWithInterface');
 
         $codeGen = Zend_CodeGenerator_Php_Class::fromReflection($reflClass);

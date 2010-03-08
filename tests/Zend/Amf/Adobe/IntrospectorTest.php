@@ -25,12 +25,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Amf_Adobe_IntrospectorTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Amf_Adobe_Introspector
  */
-require_once 'Zend/Amf/Adobe/Introspector.php';
 
 /**
  * @category   Zend
@@ -97,7 +95,6 @@ class Zend_Amf_Adobe_IntrospectorTest extends PHPUnit_Framework_TestCase
 
     public function testPassingDirectoriesOptionShouldResolveServiceClassAndType()
     {
-        require_once dirname(__FILE__) . '/_files/ZendAmfAdobeIntrospectorTestType.php';
         $xml = $this->introspector->introspect('ZendAmfAdobeIntrospectorTest', array(
             'directories' => array(dirname(__FILE__) . '/_files'),
         ));

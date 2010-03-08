@@ -23,12 +23,10 @@
 /**
  * @see Zend_Db_Adapter_TestCommon
  */
-require_once 'Zend/Db/Adapter/TestCommon.php';
 
 /**
  * @see Zend_Db_Adapter_Mysqli
  */
-require_once 'Zend/Db/Adapter/Mysqli.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 

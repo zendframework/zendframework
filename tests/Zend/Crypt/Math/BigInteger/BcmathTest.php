@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Crypt/Math/BigInteger/Bcmath.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

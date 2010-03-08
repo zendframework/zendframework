@@ -28,13 +28,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
-require_once "PHPUnit/Framework/TestCase.php";
-require_once "PHPUnit/Framework/TestSuite.php";
 
-require_once 'Zend/InfoCard.php';
-require_once 'Zend/InfoCard/Adapter/Default.php';
 
 /**
  * @category   Zend
@@ -56,7 +51,6 @@ class Zend_InfoCard_ProcessTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_InfoCard_ProcessTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

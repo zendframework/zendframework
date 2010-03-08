@@ -22,25 +22,11 @@
 
 // Call Zend_Controller_Action_Helper_ContextSwitchTest::main() if this source file is executed directly.
 if (!defined("PHPUnit_MAIN_METHOD")) {
-    require_once dirname(__FILE__) . '/../../../../TestHelper.php';
     define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_Helper_ContextSwitchTest::main");
 }
 
-require_once "PHPUnit/Framework/TestCase.php";
-require_once "PHPUnit/Framework/TestSuite.php";
 
-require_once 'Zend/Controller/Action/Helper/ContextSwitch.php';
 
-require_once 'Zend/Config.php';
-require_once 'Zend/Controller/Action.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Controller/Front.php';
-require_once 'Zend/Controller/Request/Http.php';
-require_once 'Zend/Controller/Response/Cli.php';
-require_once 'Zend/Json.php';
-require_once 'Zend/Layout.php';
-require_once 'Zend/View.php';
-require_once 'Zend/View/Interface.php';
 
 /**
  * Test class for Zend_Controller_Action_Helper_ContextSwitch.
@@ -64,7 +50,6 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit_Framework_
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Action_Helper_ContextSwitchTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

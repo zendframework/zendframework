@@ -28,67 +28,54 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../TestHelper.php';
 
 /**
  * @see Zend_Paginator
  */
-require_once 'Zend/Paginator.php';
 
 /**
  * @see Zend_Paginator_AdapterAggregate
  */
-require_once 'Zend/Paginator/AdapterAggregate.php';
 
 /**
  * @see PHPUnit_Framework_TestCase
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @see Zend_Config_Xml
  */
-require_once 'Zend/Config/Xml.php';
 
 /**
  * @see Zend_Db_Adapter_Pdo_Sqlite
  */
-require_once 'Zend/Db/Adapter/Pdo/Sqlite.php';
 
 /**
  * @see Zend_View
  */
-require_once 'Zend/View.php';
 
 /**
  * @see Zend_Controller_Action_HelperBroker
  */
-require_once 'Zend/Controller/Action/HelperBroker.php';
 
 /**
  * @see Zend_View_Helper_PaginationControl
  */
-require_once 'Zend/View/Helper/PaginationControl.php';
 
 /**
  * @see Zf4207
  */
-require_once 'Zend/Paginator/_files/Zf4207.php';
 
 /**
  * @see TestTable
  */
-require_once 'Zend/Paginator/_files/TestTable.php';
 
 /**
  * @see Zend_Cache
  */
-require_once 'Zend/Cache.php';
 
 /**
  * @see Zend_Filter_Callback
  */
-require_once 'Zend/Filter/Callback.php';
 
 /**
  * @category   Zend

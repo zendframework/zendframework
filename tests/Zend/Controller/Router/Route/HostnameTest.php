@@ -21,16 +21,12 @@
  */
 
 /** Test helper */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 /** Zend_Controller_Router_Route_Hostname */
-require_once 'Zend/Controller/Router/Route/Hostname.php';
 
 /** Zend_Controller_Request_Http */
-require_once 'Zend/Controller/Request/Http.php';
 
 /** PHPUnit test case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Controller_Router_Route_HostnameTest::main');
@@ -55,7 +51,6 @@ class Zend_Controller_Router_Route_HostnameTest extends PHPUnit_Framework_TestCa
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Controller_Router_Route_HostnameTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

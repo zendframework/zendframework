@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Crypt/DiffieHellman.php';
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

@@ -25,10 +25,8 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Dom_QueryTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /** Zend_Dom_Query */
-require_once 'Zend/Dom/Query.php';
 
 /**
  * Test class for Zend_Dom_Query.

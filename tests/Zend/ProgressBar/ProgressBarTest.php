@@ -28,17 +28,14 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * Zend_ProgressBar
  */
-require_once 'Zend/ProgressBar.php';
 
 /**
  * Zend_ProgressBar_Adapter
  */
-require_once 'Zend/ProgressBar/Adapter.php';
 
 /**
  * @category   Zend

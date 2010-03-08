@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Validate/File/Count.php'
 
 /**
  * custom validator for use with file element tests

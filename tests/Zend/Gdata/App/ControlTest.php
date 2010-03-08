@@ -20,9 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/App/Extension/Control.php';
-require_once 'Zend/Gdata/App/Extension/Draft.php';
-require_once 'Zend/Gdata/App.php';
 
 /**
  * @category   Zend

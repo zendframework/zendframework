@@ -21,17 +21,13 @@
  */
 
 /** Zend_Pdf_Destination */
-require_once 'Zend/Pdf/Destination.php';
 
 /** Zend_Pdf_Action */
-require_once 'Zend/Pdf/ElementFactory.php';
 
 /** Zend_Pdf */
-require_once 'Zend/Pdf.php';
 
 
 /** PHPUnit Test Case */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

@@ -23,28 +23,20 @@
 /**
  * Test helper
  */
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 /** PHPUnit_Framework_TestCase */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** Zend_Db */
-require_once 'Zend/Db.php';
 
 /** Zend_Db_Profiler_Firebug */
-require_once 'Zend/Db/Profiler/Firebug.php';
 
 /** Zend_Wildfire_Plugin_FirePhp */
-require_once 'Zend/Wildfire/Plugin/FirePhp.php';
 
 /** Zend_Wildfire_Channel_HttpHeaders */
-require_once 'Zend/Wildfire/Channel/HttpHeaders.php';
 
 /** Zend_Controller_Request_Http */
-require_once 'Zend/Controller/Request/Http.php';
 
 /** Zend_Controller_Response_Http */
-require_once 'Zend/Controller/Response/Http.php';
 
 
 /**
@@ -73,7 +65,6 @@ class Zend_Db_Profiler_FirebugTest extends PHPUnit_Framework_TestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite("Zend_Db_Profiler_FirebugTest");
         $result = PHPUnit_TextUI_TestRunner::run($suite);

@@ -23,24 +23,20 @@
 /**
  * Test helper
  */
-require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 
 /**
  * @see Zend_Auth
  */
-require_once 'Zend/Auth.php';
 
 
 /**
  * @see Zend_Auth_Adapter_Interface
  */
-require_once 'Zend/Auth/Adapter/Interface.php';
 
 /**
  * @see Zend_Session
  */
-require_once 'Zend/Session.php';
 
 /**
  * @issue ZF-7882 - temp solution provided by {@link http://www.alexatnet.com/node/12}

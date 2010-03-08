@@ -24,12 +24,10 @@
 /**
  * Zend_Measure_Force
  */
-require_once 'Zend/Measure/Force.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

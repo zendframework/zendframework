@@ -20,19 +20,12 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__)."/../../../../../TestHelper.php";
 
-require_once "Zend/Db/Table/Abstract.php";
 
-require_once "Zend/Db/Table.php";
 
-require_once "Zend/Test/PHPUnit/Db/DataSet/DbTableDataSet.php";
 
-require_once "PHPUnit/Extensions/Database/DataSet/FlatXmlDataSet.php";
 
-require_once "Zend/Test/PHPUnit/Db/SimpleTester.php";
 
-require_once "Zend/Test/PHPUnit/Db/DataSet/DbRowset.php";
 
 /**
  * @category   Zend

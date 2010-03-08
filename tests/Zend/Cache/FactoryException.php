@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-require_once 'PHPUnit/Extensions/ExceptionTestCase.php';
-require_once 'Zend/Cache.php';
 
 /**
  * @category   Zend

@@ -20,13 +20,7 @@
  * @version    $Id $
  */
 
-require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-require_once 'Zend/Gdata/Photos.php';
-require_once 'Zend/Http/Client.php';
-require_once 'Zend/Http/Client/Adapter/Test.php';
-require_once 'Zend/Gdata/ClientLogin.php';
-require_once 'Zend/Gdata/App/InvalidArgumentException.php';
 
 /**
  * @category   Zend

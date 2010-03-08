@@ -23,7 +23,6 @@
 /**
  * @see Zend_Service_Nirvanix_FunctionalTestCase
  */
-require_once 'Zend/Service/Nirvanix/FunctionalTestCase.php';
 
 /**
  * @category   Zend

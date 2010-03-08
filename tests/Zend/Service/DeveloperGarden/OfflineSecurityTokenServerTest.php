@@ -27,17 +27,14 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Service_DeveloperGarden_SecurityTokenServer
  */
-require_once 'Zend/Service/DeveloperGarden/SecurityTokenServer.php';
 
 /**
  * @see Zend_Service_DeveloperGarden_SecurityTokenServer_Cache
  */
-require_once 'Zend/Service/DeveloperGarden/SecurityTokenServer/Cache.php';
 
 /**
  * Zend_Service_DeveloperGarden test case
@@ -233,7 +230,6 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
 
     public function testTokenCacheSetCache()
     {
-        require_once 'Zend/Cache.php';
         $cache = Zend_Cache::factory('Core', 'File', array(), array());
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
@@ -246,7 +242,6 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
 
     public function testTokenCacheRemoveCache()
     {
-        require_once 'Zend/Cache.php';
         $cache = Zend_Cache::factory('Core', 'File', array(), array());
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
@@ -264,7 +259,6 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
 
     public function testTokenCacheClearCache()
     {
-        require_once 'Zend/Cache.php';
         $cache = Zend_Cache::factory('Core', 'File', array(), array());
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)
@@ -284,7 +278,6 @@ class Zend_Service_DeveloperGarden_OfflineSecurityTokenServerTest extends PHPUni
             'getTokens'
         );
 
-        require_once 'Zend/Cache.php';
         $cache = Zend_Cache::factory('Core', 'File', array(), array());
         $this->assertNull(
             Zend_Service_DeveloperGarden_SecurityTokenServer_Cache::setCache($cache)

@@ -20,9 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Gbase.php';
-require_once 'Zend/Gdata/Gbase/ItemQuery.php';
-require_once 'Zend/Http/Client.php';
 
 /**
  * @category   Zend

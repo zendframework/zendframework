@@ -21,10 +21,8 @@
  */
 
 /** PHPUnit_Framework_TestCase */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** Zend_Log */
-require_once 'Zend/Log.php';
 
 /**
  * @category   Zend

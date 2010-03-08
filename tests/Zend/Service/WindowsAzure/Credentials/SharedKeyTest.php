@@ -23,14 +23,12 @@
 /**
  * Test helpers
  */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Service_WindowsAzure_SharedKeyCredentialsTest::main');
 }
 
 /** Zend_Service_WindowsAzure_Credentials_SharedKey */
-require_once 'Zend/Service/WindowsAzure/Credentials/SharedKey.php';
 
 /**
  * @category   Zend

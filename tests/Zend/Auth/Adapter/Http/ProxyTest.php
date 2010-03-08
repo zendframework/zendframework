@@ -24,31 +24,26 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 
 /**
  * @see Zend_Auth_Adapter_Http
  */
-require_once 'Zend/Auth/Adapter/Http.php';
 
 
 /**
  * @see Zend_Auth_Adapter_Http_Resolver_File
  */
-require_once 'Zend/Auth/Adapter/Http/Resolver/File.php';
 
 
 /**
  * @see Zend_Controller_Request_Http
  */
-require_once 'Zend/Controller/Request/Http.php';
 
 
 /**
  * @see Zend_Controller_Response_Http
  */
-require_once 'Zend/Controller/Response/Http.php';
 
 
 /**

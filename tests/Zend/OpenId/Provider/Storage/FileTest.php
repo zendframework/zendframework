@@ -24,12 +24,10 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
 /**
  * @see Zend_OpenId_Provider_Storage_File
  */
-require_once 'Zend/OpenId/Provider/Storage/File.php';
 
 /**
  * @category   Zend

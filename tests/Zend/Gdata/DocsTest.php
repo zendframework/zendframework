@@ -20,9 +20,6 @@
  * @version    $Id $
  */
 
-require_once 'Zend/Gdata/Docs.php';
-require_once 'Zend/Gdata/HttpClient.php';
-require_once 'Zend/Gdata/TestUtility/MockHttpClient.php';
 
 /**
  * @category   Zend

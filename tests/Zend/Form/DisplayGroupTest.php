@@ -24,21 +24,8 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Form_DisplayGroupTest::main');
 }
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
-require_once 'Zend/Form/DisplayGroup.php';
 
-require_once 'Zend/Config.php';
-require_once 'Zend/Controller/Action/HelperBroker.php';
-require_once 'Zend/Form.php';
-require_once 'Zend/Form/Decorator/Form.php';
-require_once 'Zend/Form/Decorator/HtmlTag.php';
-require_once 'Zend/Form/Element.php';
-require_once 'Zend/Form/Element/Text.php';
-require_once 'Zend/Loader/PluginLoader.php';
-require_once 'Zend/Registry.php';
-require_once 'Zend/Translate.php';
-require_once 'Zend/View.php';
 
 /**
  * @category   Zend
@@ -366,7 +353,6 @@ class Zend_Form_DisplayGroupTest extends PHPUnit_Framework_TestCase
      */
     public function testGetViewShouldNotReturnNullWhenViewRendererIsActive()
     {
-        require_once 'Zend/Controller/Action/HelperBroker.php';
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
         $viewRenderer->initView();
         $view = $this->group->getView();

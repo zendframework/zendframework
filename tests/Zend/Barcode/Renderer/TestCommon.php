@@ -23,7 +23,6 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @category   Zend
@@ -55,7 +54,6 @@ abstract class Zend_Barcode_Renderer_TestCommon extends PHPUnit_Framework_TestCa
 
     public function testSetBarcodeObject()
     {
-        require_once 'Zend/Barcode/Object/Code39.php';
         $barcode = new Zend_Barcode_Object_Code39();
         $this->_renderer->setBarcode($barcode);
         $this->assertSame($barcode, $this->_renderer->getBarcode());
@@ -215,7 +213,6 @@ abstract class Zend_Barcode_Renderer_TestCommon extends PHPUnit_Framework_TestCa
      */
     public function testRendererWithUnkownInstructionProvideByObject()
     {
-        require_once dirname(__FILE__) . '/../Object/_files/BarcodeTest.php';
         $object = new Zend_Barcode_Object_Test();
         $object->setText('test');
         $object->addInstruction(array('type' => 'unknown'));

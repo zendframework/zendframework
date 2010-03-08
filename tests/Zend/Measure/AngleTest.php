@@ -24,12 +24,10 @@
 /**
  * Zend_Measure_Angle
  */
-require_once 'Zend/Measure/Angle.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

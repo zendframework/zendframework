@@ -23,12 +23,10 @@
 /**
  * Zend_Search_Lucene
  */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend
@@ -46,7 +44,6 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($currentAnalyzer instanceof Zend_Search_Lucene_Analysis_Analyzer);
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8Num.php';
 
         $newAnalyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num();
         Zend_Search_Lucene_Analysis_Analyzer::setDefault($newAnalyzer);
@@ -59,7 +56,6 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
     public function testText()
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Text */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Text.php';
 
         $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Text();
 
@@ -86,7 +82,6 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
     public function testTextCaseInsensitive()
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Text/CaseInsensitive.php';
 
         $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive();
 
@@ -113,7 +108,6 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
     public function testTextNum()
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/TextNum.php';
 
         $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum();
 
@@ -140,7 +134,6 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
     public function testTextNumCaseInsensitive()
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/TextNum/CaseInsensitive.php';
 
         $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive();
 
@@ -172,7 +165,6 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
         }
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8 */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8.php';
 
         $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8();
 
@@ -205,7 +197,6 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
         }
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8Num.php';
 
         $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num();
 
@@ -242,7 +233,6 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
         }
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8/CaseInsensitive.php';
 
         $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive();
 
@@ -279,7 +269,6 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
         }
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8Num/CaseInsensitive.php';
         $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive();
 
         // UTF-8 text with a cyrillic symbols
@@ -310,7 +299,6 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
         }
 
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8 */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8.php';
 
         $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8();
 
@@ -338,10 +326,8 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
     public function testStopWords()
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Text/CaseInsensitive.php';
 
         /** Zend_Search_Lucene_Analysis_TokenFilter_StopWords */
-        require_once 'Zend/Search/Lucene/Analysis/TokenFilter/StopWords.php';
 
         $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive();
         $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_StopWords(array('word', 'and', 'or'));
@@ -361,10 +347,8 @@ class Zend_Search_Lucene_AnalysisTest extends PHPUnit_Framework_TestCase
     public function testShortWords()
     {
         /** Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive */
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Text/CaseInsensitive.php';
 
         /** Zend_Search_Lucene_Analysis_TokenFilter_ShortWords */
-        require_once 'Zend/Search/Lucene/Analysis/TokenFilter/ShortWords.php';
 
         $analyzer = new Zend_Search_Lucene_Analysis_Analyzer_Common_Text_CaseInsensitive();
         $stopWordsFilter = new Zend_Search_Lucene_Analysis_TokenFilter_ShortWords(4 /* Minimal length */);

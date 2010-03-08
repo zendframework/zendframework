@@ -27,17 +27,14 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Zend_Loader_Autoloader
  */
-require_once 'Zend/Loader/Autoloader.php';
 
 /**
  * Zend_Controller_Front
  */
-require_once 'Zend/Controller/Front.php';
 
 /**
  * @category   Zend
@@ -70,7 +67,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
         $this->application = new Zend_Application('testing');
 
-        require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';
         $this->bootstrap = new ZfAppBootstrap($this->application);
     }
 
@@ -94,7 +90,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testInitializationCreatesFrontControllerInstance()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array());
         $resource->init();
         $this->assertTrue($resource->getFrontController() instanceof Zend_Controller_Front);
@@ -102,7 +97,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testInitializationPushesFrontControllerToBootstrapWhenPresent()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array());
         $resource->setBootstrap($this->bootstrap);
         $resource->init();
@@ -111,7 +105,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testShouldSetControllerDirectoryWhenStringOptionPresent()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'controllerDirectory' => dirname(__FILE__),
         ));
@@ -123,7 +116,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testShouldSetControllerDirectoryWhenArrayOptionPresent()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'controllerDirectory' => array(
                 'foo' => dirname(__FILE__),
@@ -140,7 +132,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
      */
     public function testAllControllerDirectoriesShouldBeSetWhenArrayPassedToControllerDirectoryOption()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'controllerDirectory' => array(
                 'foo' => dirname(__FILE__),
@@ -158,7 +149,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testShouldSetModuleControllerDirectoryNameWhenOptionPresent()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'moduleControllerDirectoryName' => 'foo',
         ));
@@ -170,7 +160,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testShouldSetModuleDirectoryWhenOptionPresent()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'moduleDirectory' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR
                                . '_files' . DIRECTORY_SEPARATOR . 'modules',
@@ -203,7 +192,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testShouldSetDefaultControllerNameWhenOptionPresent()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'defaultControllerName' => 'foo',
         ));
@@ -215,7 +203,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testShouldSetDefaultActionWhenOptionPresent()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'defaultAction' => 'foo',
         ));
@@ -227,7 +214,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testShouldSetDefaultModuleWhenOptionPresent()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'defaultModule' => 'foo',
         ));
@@ -239,7 +225,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testShouldSetBaseUrlWhenOptionPresent()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'baseUrl' => '/foo',
         ));
@@ -255,7 +240,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
             'foo' => 'bar',
             'bar' => 'baz',
         );
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'params' => $params,
         ));
@@ -270,7 +254,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
         $plugins = array(
             'Zend_Controller_Plugin_ActionStack',
         );
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'plugins' => $plugins,
         ));
@@ -283,7 +266,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testShouldReturnFrontControllerWhenComplete()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'controllerDirectory' => dirname(__FILE__),
         ));
@@ -293,7 +275,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
 
     public function testNoBaseUrlShouldBeSetIfEmptyBaseUrlProvidedInOptions()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'baseurl' => '',
         ));
@@ -340,7 +321,6 @@ class Zend_Application_Resource_FrontcontrollerTest extends PHPUnit_Framework_Te
      */
     public function testPassingReturnResponseFlagShouldAlterFrontControllerStatus()
     {
-        require_once 'Zend/Application/Resource/Frontcontroller.php';
         $resource = new Zend_Application_Resource_Frontcontroller(array(
             'returnresponse' => true,
         ));

@@ -23,22 +23,18 @@
 /**
  * Test helper
  */
-require_once dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 /**
  * @see Zend_Paginator_ScrollingStyle_Elastic
  */
-require_once 'Zend/Paginator/ScrollingStyle/Elastic.php';
 
 /**
  * @see PHPUnit_Framework_TestCase
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @see Zend_Paginator
  */
-require_once 'Zend/Paginator.php';
 
 /**
  * @category   Zend

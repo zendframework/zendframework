@@ -23,13 +23,11 @@
 /**
  * Zend_OpenId
  */
-require_once 'Zend/OpenId/Provider/User/Session.php';
 
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework.php';
 
 /**
  * @category   Zend

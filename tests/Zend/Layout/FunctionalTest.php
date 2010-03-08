@@ -25,10 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Layout_FunctionalTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
-require_once 'Zend/Test/PHPUnit/ControllerTestCase.php';
 
-require_once 'Zend/Controller/Plugin/ErrorHandler.php';
 
 /**
  * @category   Zend
@@ -47,7 +44,6 @@ class Zend_Layout_FunctionalTest extends Zend_Test_PHPUnit_ControllerTestCase
      */
     public static function main()
     {
-        require_once "PHPUnit/TextUI/TestRunner.php";
 
         $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
         $result = PHPUnit_TextUI_TestRunner::run($suite);

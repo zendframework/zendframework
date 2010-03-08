@@ -25,13 +25,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Dojo_Form_SubFormTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_Dojo_Form_SubForm */
-require_once 'Zend/Dojo/Form/SubForm.php';
 
 /** Zend_View */
-require_once 'Zend/View.php';
 
 /**
  * Test class for Zend_Dojo_SubForm

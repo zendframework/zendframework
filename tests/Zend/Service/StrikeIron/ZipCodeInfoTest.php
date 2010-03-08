@@ -24,17 +24,14 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Service_StrikeIron
  */
-require_once 'Zend/Service/StrikeIron.php';
 
 /**
  * @see Zend_Service_StrikeIron_ZipCodeInfo
  */
-require_once 'Zend/Service/StrikeIron/ZipCodeInfo.php';
 
 
 /**

@@ -20,10 +20,7 @@
  * @version    $Id$
  */
 
-require_once dirname(dirname(dirname(dirname(dirname(__FILE__))))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
-require_once 'Zend/Service/Amazon/Sqs.php';
-require_once 'Zend/Http/Client/Adapter/Socket.php';
 
 /**
  * @category   Zend

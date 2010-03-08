@@ -29,24 +29,18 @@
  */
 
 /** TestHelp.php */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue.php';
 
 /** Zend_Queue */
-require_once 'Zend/Queue/Message.php';
 
 /** Zend_Queue_Message_Test */
-require_once 'MessageTestClass.php';
 
 /** Base Adapter test class */
-require_once dirname(__FILE__) . '/AdapterTest.php';
 
 /**
  * @see Zend_Db_Select
  */
-require_once 'Zend/Db/Select.php';
 
 /**
  * @category   Zend
@@ -94,7 +88,6 @@ class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
     {
         $driverOptions = array();
         if (defined('TESTS_ZEND_QUEUE_DB')) {
-            require_once 'Zend/Json.php';
             $driverOptions = Zend_Json::decode(TESTS_ZEND_QUEUE_DB);
         }
 
@@ -119,7 +112,6 @@ class Zend_Queue_Adapter_DbTest extends Zend_Queue_Adapter_AdapterTest
             /**
              * @see Zend_Db_Select
              */
-            require_once 'Zend/Db/Select.php';
             $config['options'][Zend_Db_Select::FOR_UPDATE] = array();
             $queue = $this->createQueue(__FUNCTION__, $config);
             $this->fail('FOR_UPDATE accepted an array');

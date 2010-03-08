@@ -20,11 +20,8 @@
  * @version    $Id$
  */
 
-require_once realpath(dirname(__FILE__) . '/../../../') . '/TestHelper.php';
 
-require_once 'Zend/Http/Client.php';
 
-require_once 'Zend/Http/Client/Adapter/Test.php';
 
 /**
  * This Testsuite includes all Zend_Http_Client tests that do not rely
@@ -322,7 +319,6 @@ class Zend_Http_Client_StaticTest extends PHPUnit_Framework_TestCase
      */
     public function testConfigSetAsZendConfig()
     {
-        require_once 'Zend/Config.php';
 
         $config = new Zend_Config(array(
             'timeout'  => 400,

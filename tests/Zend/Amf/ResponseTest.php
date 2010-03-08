@@ -24,16 +24,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Amf_ResponseTest::main');
 }
 
-require_once dirname(__FILE__) . '/../../TestHelper.php';
-require_once 'Zend/Amf/Response.php';
-require_once 'Zend/Amf/Request.php';
-require_once 'Zend/Amf/Value/MessageBody.php';
-require_once 'Zend/Amf/Value/MessageHeader.php';
-require_once 'Zend/Amf/Value/Messaging/AcknowledgeMessage.php';
-require_once 'Zend/Amf/Parse/TypeLoader.php';
-require_once 'Contact.php';
-require_once 'ContactVO.php';
-require_once 'Zend/Date.php';
 
 /**
  * Test case for Zend_Amf_Response

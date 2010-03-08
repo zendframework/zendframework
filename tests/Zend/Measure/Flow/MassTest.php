@@ -23,12 +23,10 @@
 /**
  * Zend_Measure_Flow_Mass
  */
-require_once 'Zend/Measure/Flow/Mass.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

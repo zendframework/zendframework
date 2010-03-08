@@ -24,7 +24,6 @@
  * @see Zend_Db_TestUtil_Pdo_Oci
  * @see Zend_Db_TestUtil_Common
  */
-require_once 'Zend/Db/TestUtil/Pdo/Oci.php';
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
@@ -44,13 +43,11 @@ class Zend_Db_TestUtil_Oracle extends Zend_Db_TestUtil_Pdo_Oci
         $stmt = oci_parse($conn, $sql);
         if (!$stmt) {
             $e = oci_error($conn);
-            require_once 'Zend/Db/Exception.php';
             throw new Zend_Db_Exception("SQL parse error for \"$sql\": ".$e['message']);
         }
         $retval = oci_execute($stmt);
         if (!$retval) {
             $e = oci_error($conn);
-            require_once 'Zend/Db/Exception.php';
             throw new Zend_Db_Exception("SQL execute error for \"$sql\": ".$e['message']);
         }
     }

@@ -25,17 +25,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_Amf_AuthTest::main");
 }
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once dirname(__FILE__) . '/../../TestHelper.php';
-require_once 'Zend/Amf/Server.php';
-require_once 'Zend/Amf/Request.php';
-require_once 'Zend/Amf/Parse/TypeLoader.php';
-require_once 'Zend/Amf/Auth/Abstract.php';
-require_once 'Zend/Amf/Value/Messaging/RemotingMessage.php';
-require_once 'Zend/Session.php';
-require_once 'Zend/Auth/Result.php';
-require_once 'Zend/Acl.php';
-require_once 'Zend/Acl/Role.php';
 
 /**
  * @category   Zend

@@ -23,12 +23,10 @@
 /**
  * Zend_timeSync
  */
-require_once 'Zend/TimeSync.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 
 /**

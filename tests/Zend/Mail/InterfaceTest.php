@@ -23,12 +23,10 @@
 /**
  * Zend_Mail_Storage_Mbox
  */
-require_once 'Zend/Mail/Storage/Mbox.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

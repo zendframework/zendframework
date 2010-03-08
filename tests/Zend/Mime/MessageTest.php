@@ -23,12 +23,10 @@
 /**
  * Zend_Mime_Message
  */
-require_once 'Zend/Mime/Message.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

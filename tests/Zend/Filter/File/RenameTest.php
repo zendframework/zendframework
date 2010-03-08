@@ -27,12 +27,10 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * @see Zend_Filter_File_Rename
  */
-require_once 'Zend/Filter/File/Rename.php';
 
 /**
  * @category   Zend

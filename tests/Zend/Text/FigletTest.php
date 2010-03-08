@@ -28,17 +28,14 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../../TestHelper.php';
 
 /**
  * Zend_Text_Figlet
  */
-require_once 'Zend/Text/Figlet.php';
 
 /**
  * Zend_Config
  */
-require_once 'Zend/Config.php';
 
 /**
  * @category   Zend

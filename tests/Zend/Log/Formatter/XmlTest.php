@@ -20,13 +20,10 @@
  * @version    $Id$
  */
 
-require_once dirname(__FILE__)."/../../../TestHelper.php";
 
 /** PHPUnit_Framework_TestCase */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /** Zend_Log_Formatter_Xml */
-require_once 'Zend/Log/Formatter/Xml.php';
 
 /**
  * @category   Zend

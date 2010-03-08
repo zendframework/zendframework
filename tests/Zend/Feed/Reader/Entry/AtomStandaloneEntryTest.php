@@ -20,8 +20,6 @@
  * @version    $Id: AtomTest.php 19159 2009-11-21 14:23:15Z padraic $
  */
 
-require_once 'PHPUnit/Framework/TestCase.php';
-require_once 'Zend/Feed/Reader.php';
 
 /**
  * @category   Zend

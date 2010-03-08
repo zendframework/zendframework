@@ -23,7 +23,6 @@
 /**
  * Test helper
  */
-require_once dirname(__FILE__) . '/../TestHelper.php';
 
 /**
  * These const values control some testing behavior.
@@ -42,11 +41,6 @@ if (!defined('TESTS_ZEND_I18N_EXTENDED_COVERAGE')) {
 /**
  * Zend_Date
  */
-require_once 'Zend/Loader.php';
-require_once 'Zend/Date.php';
-require_once 'Zend/Locale.php';
-require_once 'Zend/Date/Cities.php';
-require_once 'Zend/TimeSync.php';
 
 // echo "BCMATH is ", Zend_Locale_Math::isBcmathDisabled() ? 'disabled':'not disabled', "\n";
 
@@ -68,7 +62,6 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
     {
         $this->originalTimezone = date_default_timezone_get();
         date_default_timezone_set('Indian/Maldives');
-        require_once 'Zend/Cache.php';
         $this->_cache = Zend_Cache::factory('Core', 'File',
                  array('lifetime' => 120, 'automatic_serialization' => true),
                  array('cache_dir' => dirname(__FILE__) . '/_files/'));
@@ -5237,7 +5230,6 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
             // success
         }
 
-        require_once 'Zend/Cache.php';
         $cache = Zend_Cache::factory('Core', 'File',
                  array('lifetime' => 120, 'automatic_serialization' => true),
                  array('cache_dir' => dirname(__FILE__) . '/_files/'));
@@ -5333,7 +5325,6 @@ class Zend_DateTest extends PHPUnit_Framework_TestCase
     public function testZF3677()
     {
         $locale = new Zend_Locale('de_AT');
-        require_once 'Zend/Registry.php';
         Zend_Registry::set('Zend_Locale', $locale);
 
         $date   = new Zend_Date('13',null,$locale);

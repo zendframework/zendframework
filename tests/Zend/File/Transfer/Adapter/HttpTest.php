@@ -25,15 +25,7 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
     define("PHPUnit_MAIN_METHOD", "Zend_File_Transfer_Adapter_HttpTest::main");
 }
 
-require_once dirname(__FILE__) . '/../../../../TestHelper.php';
 
-require_once 'Zend/File/Transfer/Adapter/Http.php';
-require_once 'Zend/Filter/BaseName.php';
-require_once 'Zend/Filter/StringToLower.php';
-require_once 'Zend/Loader/PluginLoader.php';
-require_once 'Zend/Validate/File/Count.php';
-require_once 'Zend/Validate/File/Extension.php';
-require_once 'Zend/Validate/File/Upload.php';
 
 /**
  * Test class for Zend_File_Transfer_Adapter_Http
@@ -273,7 +265,6 @@ class Zend_File_Transfer_Adapter_HttpTest extends PHPUnit_Framework_TestCase
         }
 
         $_GET['progress_key'] = 'mykey';
-        require_once 'Zend/ProgressBar/Adapter/Console.php';
         $adapter = new Zend_ProgressBar_Adapter_Console();
         $status = array('progress' => $adapter, 'session' => 'upload');
         $status = Zend_File_Transfer_Adapter_HttpTest_MockAdapter::getProgress($status);

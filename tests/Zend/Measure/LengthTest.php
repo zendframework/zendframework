@@ -24,12 +24,10 @@
 /**
  * Zend_Measure_Length
  */
-require_once 'Zend/Measure/Length.php';
 
 /**
  * PHPUnit test case
  */
-require_once 'PHPUnit/Framework/TestCase.php';
 
 /**
  * @category   Zend

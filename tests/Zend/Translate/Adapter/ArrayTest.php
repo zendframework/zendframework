@@ -24,12 +24,10 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Zend_Translate_Adapter_ArrayTest::main');
 }
 
-require_once dirname(__FILE__) . '/../../../TestHelper.php';
 
 /**
  * Zend_Translate_Adapter_Array
  */
-require_once 'Zend/Translate/Adapter/Array.php';
 
 /**
  * @category   Zend
@@ -214,7 +212,6 @@ class Zend_Translate_Adapter_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testOptionLocaleDirectory()
     {
-        require_once 'Zend/Translate.php';
         $adapter = new Zend_Translate_Adapter_Array(dirname(__FILE__) . '/_files/testarray', 'de_AT', array('scan' => Zend_Translate::LOCALE_DIRECTORY));
         $this->assertEquals(array('de_AT' => 'de_AT', 'en_GB' => 'en_GB', 'ja' => 'ja'), $adapter->getList());
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
@@ -222,7 +219,6 @@ class Zend_Translate_Adapter_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testOptionLocaleFilename()
     {
-        require_once 'Zend/Translate.php';
         $adapter = new Zend_Translate_Adapter_Array(dirname(__FILE__) . '/_files/testarray', 'de_DE', array('scan' => Zend_Translate::LOCALE_FILENAME));
         $this->assertEquals(array('de_DE' => 'de_DE', 'en_US' => 'en_US', 'ja' => 'ja'), $adapter->getList());
         $this->assertEquals('Nachricht 8', $adapter->translate('Message 8'));
@@ -276,7 +272,6 @@ class Zend_Translate_Adapter_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testCaching()
     {
-        require_once 'Zend/Cache.php';
         $cache = Zend_Cache::factory('Core', 'File',
             array('lifetime' => 120, 'automatic_serialization' => true),
             array('cache_dir' => dirname(__FILE__) . '/_files/'));
@@ -307,7 +302,6 @@ class Zend_Translate_Adapter_ArrayTest extends PHPUnit_Framework_TestCase
 
     public function testLoadingFilesIntoCacheAfterwards()
     {
-        require_once 'Zend/Cache.php';
         $cache = Zend_Cache::factory('Core', 'File',
             array('lifetime' => 120, 'automatic_serialization' => true),
             array('cache_dir' => dirname(__FILE__) . '/_files/'));

@@ -378,9 +378,9 @@ $db = Zend_Db::factory($config->database);
                     Você pode especificar essa opção pela constante
                     <constant>Zend_Db::CASE_FOLDING</constant>. Ela corresponde ao atributo
                     <constant>ATTR_CASE</constant> nos drivers de banco de dados
-                    <acronym>PDO</acronym> e <acronym>IBM</acronym> <acronym>DB2</acronym>, ajustando
-                    a caixa das chaves de string nos conjuntos de resultado de consulta. A opção leva
-                    os valores <constant>Zend_Db::CASE_NATURAL</constant> (padrão),
+                    <acronym>PDO</acronym> e <acronym>IBM</acronym> <acronym>DB2</acronym>,
+                    ajustando a caixa das chaves de string nos conjuntos de resultado de consulta.
+                    A opção leva os valores <constant>Zend_Db::CASE_NATURAL</constant> (padrão),
                     <constant>Zend_Db::CASE_UPPER</constant>, e
                     <constant>Zend_Db::CASE_LOWER</constant>.
                 </para>
@@ -1008,7 +1008,7 @@ $db->insert('bugs', $data);
 
             <para>
                 Se sua tabela é definida com uma chave primária de autoincremento
-                você pode chamar  o método <methodname>lastInsertId()</methodname> depois da
+                você pode chamar o método <methodname>lastInsertId()</methodname> depois da
                 inclusão. Esse método retonra o último valor gerado no
                 escopo da conexão atual com o banco de dados.
             </para>
@@ -1366,9 +1366,9 @@ echo $sql;
             <para>
                 Os valores podem precisar ser citados ou não citados de acordo com o
                 contexto de tipo de dados <acronym>SQL</acronym> em que eles são usados. Por
-                exemplo, em algumas marcas de <acronym>SGBDR</acronym>, um valor inteiro não deve ser
-                citado como uma string se for comparado a uma coluna ou expressão do tipo inteiro.
-                Em outras palavras, o código seguinte é um erro em algumas implementações
+                exemplo, em algumas marcas de <acronym>SGBDR</acronym>, um valor inteiro não deve
+                ser citado como uma string se for comparado a uma coluna ou expressão do tipo
+                inteiro. Em outras palavras, o código seguinte é um erro em algumas implementações
                 <acronym>SQL</acronym>, assumindo que <property>intColumn</property> tem um tipo de
                 dados <acronym>SQL</acronym> <constant>INTEGER</constant>
             </para>
@@ -1517,7 +1517,7 @@ echo $sql
             </example>
 
             <para>
-                Identificadores delimitados <acronym>SQL</acronym>  são sensíveis à caixa, ao
+                Identificadores delimitados <acronym>SQL</acronym> são sensíveis à caixa, ao
                 contrário de identificadores não citados. Portanto, se você usar identificadores
                 delimitados, você deve usar a ortografia do identificador exatamente como ela é
                 armazenada no seu esquema, incluindo a caixa das letras.
@@ -1721,7 +1721,7 @@ try {
                         <entry>(integer)</entry>
 
                         <entry>
-                            Precisão de tipo <acronym>SQL</acronym> NUMERIC ou
+                            Precisão de tipo <acronym>SQL</acronym> <constant>NUMERIC</constant> ou
                             <constant>DECIMAL</constant>.
                         </entry>
                     </row>
@@ -1887,7 +1887,7 @@ $db = Zend_Db::factory('Oracle', array(
             </para>
 
             <para>
-                Atualmente, apenas  Oracle, <acronym>DB2</acronym>, e os adaptadores
+                Atualmente, apenas Oracle, <acronym>DB2</acronym>, e os adaptadores
                 <acronym>PDO</acronym> (onde especificado pelo <acronym>PHP</acronym>) suportam
                 persistência em <classname>Zend_Db</classname>.
             </para>
@@ -1898,7 +1898,7 @@ $db = Zend_Db::factory('Oracle', array(
         <title>Rodando Outras Declarações de Banco de Dados</title>
 
         <para>
-            Pode haver casos em que você precisa acessar  o objeto de conexão
+            Pode haver casos em que você precisa acessar o objeto de conexão
             diretamente, como provido pela extensão de banco de dados <acronym>PHP</acronym>.
             Algumas dessas extensões podem oferecer recursos que não são cobertos por
             métodos de <classname>Zend_Db_Adapter_Abstract</classname>.
@@ -2003,8 +2003,8 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        <acronym>IBM</acronym> <acronym>DB2</acronym> suporta tanto seqüências quanto
-                        chaves de autoincremento. Portanto os argumentos para
+                        <acronym>IBM</acronym> <acronym>DB2</acronym> suporta tanto seqüências
+                        quanto chaves de autoincremento. Portanto os argumentos para
                         <methodname>lastInsertId()</methodname> são opcionais. Se você não fornecer
                         argumentos, o adaptador retorna o último valor gerado para uma chave de
                         autoincremento. Se você fornecer argumentos, o adaptador retorna o último
@@ -2183,8 +2183,8 @@ if (!is_null($version)) {
 
                 <listitem>
                     <para>
-                        Esse adaptador usa as extensões <acronym>PHP</acronym> <acronym>PDO</acronym>
-                        e <constant>PDO_IBM</constant>.
+                        Esse adaptador usa as extensões <acronym>PHP</acronym>
+                        <acronym>PDO</acronym> e <constant>PDO_IBM</constant>.
                     </para>
                 </listitem>
 

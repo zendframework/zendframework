@@ -179,13 +179,15 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit_Framework_TestCase
         }
 
         $validator->setMagicFile(__FILE__);
-        $this->assertEquals(__FILE__, $validator->getMagicFile());
+        // @ZF-9320: False Magic File is not allowed to be set
+        $this->assertNotEquals(__FILE__, $validator->getMagicFile());
     }
 
     public function testSetMagicFileWithinConstructor()
     {
         $validator = new Zend_Validate_File_MimeType(array('image/gif', 'magicfile' => __FILE__));
-        $this->assertEquals(__FILE__, $validator->getMagicFile());
+        // @ZF-9320: False Magic File is not allowed to be set
+        $this->assertNotEquals(__FILE__, $validator->getMagicFile());
     }
 
     public function testOptionsAtConstructor()
@@ -196,7 +198,8 @@ class Zend_Validate_File_MimeTypeTest extends PHPUnit_Framework_TestCase
             'magicfile' => __FILE__,
             'headerCheck' => true));
 
-        $this->assertEquals(__FILE__, $validator->getMagicFile());
+        // @ZF-9320: False Magic File is not allowed to be set
+        $this->assertNotEquals(__FILE__, $validator->getMagicFile());
         $this->assertTrue($validator->getHeaderCheck());
         $this->assertEquals('image/gif,image/jpg', $validator->getMimeType());
     }

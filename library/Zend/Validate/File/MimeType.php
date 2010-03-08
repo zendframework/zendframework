@@ -149,7 +149,9 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
                     // supressing errors which are thrown due to openbase_dir restrictions
                     if (@file_exists($file)) {
                         $this->setMagicFile($file);
-                        break;
+                        if ($this->_magicfile !== null) {
+                            break;
+                        }
                     }
                 }
             }
@@ -161,19 +163,28 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
     /**
      * Sets the magicfile to use
      * if null, the MAGIC constant from php is used
+     * if the MAGIC file is errorous, no file will be set
      *
      * @param  string $file
      * @return Zend_Validate_File_MimeType Provides fluid interface
      */
     public function setMagicFile($file)
     {
-        if (empty($file)) {
+        if (empty($file) || !(class_exists('finfo', false))) {
             $this->_magicfile = null;
         } else if (!is_readable($file)) {
             require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception('The given magicfile can not be read');
         } else {
-            $this->_magicfile = (string) $file;
+            $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
+            $mime = new finfo($const, $mimefile);
+            if ($mime === false) {
+                $this->_magicfile = null;
+            } else {
+                $this->_magicfile = (string) $file;
+            }
+
+            unset($mime);
         }
 
         return $this;
@@ -302,15 +313,19 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
         $mimefile = $this->getMagicFile();
         if (class_exists('finfo', false)) {
             $const = defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
+            $mime  = false;
             if (!empty($mimefile)) {
                 $mime = new finfo($const, $mimefile);
-            } else {
+            }
+
+            if ($mime === false) {
                 $mime = new finfo($const);
             }
 
             if ($mime !== false) {
                 $this->_type = $mime->file($value);
             }
+
             unset($mime);
         }
 

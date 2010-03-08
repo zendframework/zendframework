@@ -20,12 +20,8 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Search_Similarity */
-require_once 'Zend/Search/Lucene/Search/Similarity.php';
-
-
 /**
+ * @uses       Zend_Search_Lucene_Search_Similarity
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search

@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-
 /**
  * A Zend_Search_Lucene_Index_TermInfo represents a record of information stored for a term.
  *

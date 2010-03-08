@@ -20,10 +20,8 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_PriorityQueue */
-require_once 'Zend/Search/Lucene/PriorityQueue.php';
-
 /**
+ * @uses       Zend_Search_Lucene_PriorityQueue
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index

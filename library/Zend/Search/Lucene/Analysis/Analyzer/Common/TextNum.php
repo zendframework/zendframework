@@ -20,19 +20,15 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Analysis_Analyzer_Common */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common.php';
-
-
 /**
+ * @uses       Zend_Search_Lucene_Analysis_Analyzer_Common
+ * @uses       Zend_Search_Lucene_Analysis_Token
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 class Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum extends Zend_Search_Lucene_Analysis_Analyzer_Common
 {
     /**

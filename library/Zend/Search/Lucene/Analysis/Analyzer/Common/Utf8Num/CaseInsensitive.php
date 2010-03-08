@@ -20,24 +20,17 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/Utf8Num.php';
-
-/** Zend_Search_Lucene_Analysis_TokenFilter_LowerCaseUtf8 */
-require_once 'Zend/Search/Lucene/Analysis/TokenFilter/LowerCaseUtf8.php';
-
-
 /**
+ * @uses       Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num
+ * @uses       Zend_Search_Lucene_Analysis_TokenFilter_LowerCaseUtf8
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-
-class Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive extends Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num
+class Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num_CaseInsensitive 
+    extends Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8Num
 {
     public function __construct()
     {

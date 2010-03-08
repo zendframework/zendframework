@@ -20,14 +20,10 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Analysis_Token */
-require_once 'Zend/Search/Lucene/Analysis/Token.php';
-
-
 /**
  * Token filter converts (normalizes) Token ore removes it from a token stream.
  *
+ * @uses       Zend_Search_Lucene_Analysis_Token
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
@@ -44,4 +40,3 @@ abstract class Zend_Search_Lucene_Analysis_TokenFilter
      */
     abstract public function normalize(Zend_Search_Lucene_Analysis_Token $srcToken);
 }
-

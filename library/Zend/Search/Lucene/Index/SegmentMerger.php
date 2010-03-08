@@ -20,11 +20,12 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_Index_SegmentInfo */
-require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
-
-
 /**
+ * @uses       Zend_Search_Lucene_Exception
+ * @uses       Zend_Search_Lucene_Field
+ * @uses       Zend_Search_Lucene_Index_SegmentInfo
+ * @uses       Zend_Search_Lucene_Index_SegmentWriter_StreamWriter
+ * @uses       Zend_Search_Lucene_Index_TermsPriorityQueue
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
@@ -83,7 +84,6 @@ class Zend_Search_Lucene_Index_SegmentMerger
     public function __construct($directory, $name)
     {
         /** Zend_Search_Lucene_Index_SegmentWriter_StreamWriter */
-        require_once 'Zend/Search/Lucene/Index/SegmentWriter/StreamWriter.php';
         $this->_writer = new Zend_Search_Lucene_Index_SegmentWriter_StreamWriter($directory, $name);
     }
 
@@ -110,12 +110,10 @@ class Zend_Search_Lucene_Index_SegmentMerger
     public function merge()
     {
         if ($this->_mergeDone) {
-            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Merge is already done.');
         }
 
         if (count($this->_segmentInfos) < 1) {
-            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Wrong number of segments to be merged ('
                                                  . count($this->_segmentInfos)
                                                  . ').');
@@ -223,9 +221,6 @@ class Zend_Search_Lucene_Index_SegmentMerger
      */
     private function _mergeTerms()
     {
-        /** Zend_Search_Lucene_Index_TermsPriorityQueue */
-        require_once 'Zend/Search/Lucene/Index/TermsPriorityQueue.php';
-
         $segmentInfoQueue = new Zend_Search_Lucene_Index_TermsPriorityQueue();
 
         $segmentStartId = 0;

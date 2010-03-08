@@ -20,12 +20,9 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Search_Query */
-require_once 'Zend/Search/Lucene/Search/Query.php';
-
-
 /**
+ * @uses       Zend_Search_Lucene_Search_Query
+ * @uses       Zend_Search_Lucene_Search_Weight_Empty
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -65,7 +62,6 @@ class Zend_Search_Lucene_Search_Query_Empty extends Zend_Search_Lucene_Search_Qu
      */
     public function createWeight(Zend_Search_Lucene_Interface $reader)
     {
-        require_once 'Zend/Search/Lucene/Search/Weight/Empty.php';
         return new Zend_Search_Lucene_Search_Weight_Empty();
     }
 

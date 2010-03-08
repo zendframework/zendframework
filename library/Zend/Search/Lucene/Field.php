@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-
 /**
  * A field is a section of a Document.  Each field has two parts,
  * a name and a value. Values may be free text or they may be atomic

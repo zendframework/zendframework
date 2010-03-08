@@ -20,12 +20,15 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Search_Query */
-require_once 'Zend/Search/Lucene/Search/Query.php';
-
-
 /**
+ * @uses       Zend_Search_Lucene
+ * @uses       Zend_Search_Lucene_Analysis_Analyzer
+ * @uses       Zend_Search_Lucene_Exception
+ * @uses       Zend_Search_Lucene_Index_Term
+ * @uses       Zend_Search_Lucene_Search_Query
+ * @uses       Zend_Search_Lucene_Search_Query_Boolean
+ * @uses       Zend_Search_Lucene_Search_Query_Empty
+ * @uses       Zend_Search_Lucene_Search_Query_Term
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -122,15 +125,12 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
     public function __construct(Zend_Search_Lucene_Index_Term $term, $minimumSimilarity = self::DEFAULT_MIN_SIMILARITY, $prefixLength = null)
     {
         if ($minimumSimilarity < 0) {
-            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('minimumSimilarity cannot be less than 0');
         }
         if ($minimumSimilarity >= 1) {
-            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('minimumSimilarity cannot be greater than or equal to 1');
         }
         if ($prefixLength < 0) {
-            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('prefixLength cannot be less than 0');
         }
 
@@ -193,7 +193,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
             $fields = array($this->_term->field);
         }
 
-        require_once 'Zend/Search/Lucene/Index/Term.php';
         $prefix           = Zend_Search_Lucene_Index_Term::getPrefix($this->_term->text, $this->_prefixLength);
         $prefixByteLength = strlen($prefix);
         $prefixUtf8Length = Zend_Search_Lucene_Index_Term::getLength($prefix);
@@ -206,12 +205,10 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
 
         $scaleFactor = 1/(1 - $this->_minimumSimilarity);
 
-        require_once 'Zend/Search/Lucene.php';
         $maxTerms = Zend_Search_Lucene::getTermsPerQueryLimit();
         foreach ($fields as $field) {
             $index->resetTermsStream();
 
-            require_once 'Zend/Search/Lucene/Index/Term.php';
             if ($prefix != '') {
                 $index->skipTo(new Zend_Search_Lucene_Index_Term($prefix, $field));
 
@@ -249,7 +246,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
                         $this->_scores[]   = ($similarity - $this->_minimumSimilarity)*$scaleFactor;
 
                         if ($maxTerms != 0  &&  count($this->_matches) > $maxTerms) {
-                            require_once 'Zend/Search/Lucene/Exception.php';
                             throw new Zend_Search_Lucene_Exception('Terms per query limit is reached.');
                         }
                     }
@@ -285,7 +281,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
                         $this->_scores[]   = ($similarity - $this->_minimumSimilarity)*$scaleFactor;
 
                         if ($maxTerms != 0  &&  count($this->_matches) > $maxTerms) {
-                            require_once 'Zend/Search/Lucene/Exception.php';
                             throw new Zend_Search_Lucene_Exception('Terms per query limit is reached.');
                         }
                     }
@@ -298,13 +293,10 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
         }
 
         if (count($this->_matches) == 0) {
-            require_once 'Zend/Search/Lucene/Search/Query/Empty.php';
             return new Zend_Search_Lucene_Search_Query_Empty();
         } else if (count($this->_matches) == 1) {
-            require_once 'Zend/Search/Lucene/Search/Query/Term.php';
             return new Zend_Search_Lucene_Search_Query_Term(reset($this->_matches));
         } else {
-            require_once 'Zend/Search/Lucene/Search/Query/Boolean.php';
             $rewrittenQuery = new Zend_Search_Lucene_Search_Query_Boolean();
 
             array_multisort($this->_scores,   SORT_DESC, SORT_NUMERIC,
@@ -312,7 +304,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
                             $this->_matches);
 
             $termCount = 0;
-            require_once 'Zend/Search/Lucene/Search/Query/Term.php';
             foreach ($this->_matches as $id => $matchedTerm) {
                 $subquery = new Zend_Search_Lucene_Search_Query_Term($matchedTerm);
                 $subquery->setBoost($this->_scores[$id]);
@@ -337,7 +328,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
      */
     public function optimize(Zend_Search_Lucene_Interface $index)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('Fuzzy query should not be directly used for search. Use $query->rewrite($index)');
     }
 
@@ -350,7 +340,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
     public function getQueryTerms()
     {
         if ($this->_matches === null) {
-            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Search or rewrite operations have to be performed before.');
         }
 
@@ -366,7 +355,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
      */
     public function createWeight(Zend_Search_Lucene_Interface $reader)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('Fuzzy query should not be directly used for search. Use $query->rewrite($index)');
     }
 
@@ -381,7 +369,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
      */
     public function execute(Zend_Search_Lucene_Interface $reader, $docsFilter = null)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('Fuzzy query should not be directly used for search. Use $query->rewrite($index)');
     }
 
@@ -395,7 +382,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
      */
     public function matchedDocs()
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('Fuzzy query should not be directly used for search. Use $query->rewrite($index)');
     }
 
@@ -409,7 +395,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
      */
     public function score($docId, Zend_Search_Lucene_Interface $reader)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('Fuzzy query should not be directly used for search. Use $query->rewrite($index)');
     }
 
@@ -422,7 +407,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
     {
         $words = array();
 
-        require_once 'Zend/Search/Lucene/Index/Term.php';
         $prefix           = Zend_Search_Lucene_Index_Term::getPrefix($this->_term->text, $this->_prefixLength);
         $prefixByteLength = strlen($prefix);
         $prefixUtf8Length = Zend_Search_Lucene_Index_Term::getLength($prefix);
@@ -436,7 +420,6 @@ class Zend_Search_Lucene_Search_Query_Fuzzy extends Zend_Search_Lucene_Search_Qu
         $scaleFactor = 1/(1 - $this->_minimumSimilarity);
 
         $docBody = $highlighter->getDocument()->getFieldUtf8Value('body');
-        require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
         $tokens = Zend_Search_Lucene_Analysis_Analyzer::getDefault()->tokenize($docBody, 'UTF-8');
         foreach ($tokens as $token) {
             $termText = $token->getTermText();

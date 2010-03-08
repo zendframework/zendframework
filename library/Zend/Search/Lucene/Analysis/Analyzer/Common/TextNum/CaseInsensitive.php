@@ -20,23 +20,15 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer/Common/TextNum.php';
-
-/** Zend_Search_Lucene_Analysis_TokenFilter_LowerCase */
-require_once 'Zend/Search/Lucene/Analysis/TokenFilter/LowerCase.php';
-
-
 /**
+ * @uses       Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum
+ * @uses       Zend_Search_Lucene_Analysis_TokenFilter_LowerCase
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
-
 class Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum_CaseInsensitive extends Zend_Search_Lucene_Analysis_Analyzer_Common_TextNum
 {
     public function __construct()

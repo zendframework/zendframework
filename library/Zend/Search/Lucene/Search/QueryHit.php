@@ -20,8 +20,8 @@
  * @version    $Id$
  */
 
-
 /**
+ * @uses       Zend_Search_Lucene_Proxy
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -64,7 +64,6 @@ class Zend_Search_Lucene_Search_QueryHit
 
     public function __construct(Zend_Search_Lucene_Interface $index)
     {
-        require_once 'Zend/Search/Lucene/Proxy.php';
         $this->_index = new Zend_Search_Lucene_Proxy($index);
     }
 

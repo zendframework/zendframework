@@ -20,15 +20,12 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Search_Query */
-require_once 'Zend/Search/Lucene/Search/Query.php';
-
-
 /**
  * It's an internal abstract class intended to finalize ase a query processing after query parsing.
  * This type of query is not actually involved into query execution.
  *
+ * @uses       Zend_Search_Lucene_Exception
+ * @uses       Zend_Search_Lucene_Search_Query
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -58,7 +55,6 @@ abstract class Zend_Search_Lucene_Search_Query_Preprocessing extends Zend_Search
      */
     public function optimize(Zend_Search_Lucene_Interface $index)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('This query is not intended to be executed.');
     }
 
@@ -70,7 +66,6 @@ abstract class Zend_Search_Lucene_Search_Query_Preprocessing extends Zend_Search
      */
     public function createWeight(Zend_Search_Lucene_Interface $reader)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('This query is not intended to be executed.');
     }
 
@@ -83,7 +78,6 @@ abstract class Zend_Search_Lucene_Search_Query_Preprocessing extends Zend_Search
      */
     public function execute(Zend_Search_Lucene_Interface $reader, $docsFilter = null)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('This query is not intended to be executed.');
     }
 
@@ -96,7 +90,6 @@ abstract class Zend_Search_Lucene_Search_Query_Preprocessing extends Zend_Search
      */
     public function matchedDocs()
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('This query is not intended to be executed.');
     }
 
@@ -109,7 +102,6 @@ abstract class Zend_Search_Lucene_Search_Query_Preprocessing extends Zend_Search
      */
     public function score($docId, Zend_Search_Lucene_Interface $reader)
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('This query is not intended to be executed.');
     }
 
@@ -120,7 +112,6 @@ abstract class Zend_Search_Lucene_Search_Query_Preprocessing extends Zend_Search
      */
     public function getQueryTerms()
     {
-        require_once 'Zend/Search/Lucene/Exception.php';
         throw new Zend_Search_Lucene_Exception('Rewrite operation has to be done before retrieving query terms.');
     }
 }

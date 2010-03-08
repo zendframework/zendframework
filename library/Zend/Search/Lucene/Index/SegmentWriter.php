@@ -20,17 +20,10 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Index_FieldInfo */
-require_once 'Zend/Search/Lucene/Index/FieldInfo.php';
-
-/** Zend_Search_Lucene_Index_Term */
-require_once 'Zend/Search/Lucene/Index/Term.php';
-
-/** Zend_Search_Lucene_Index_TermInfo */
-require_once 'Zend/Search/Lucene/Index/TermInfo.php';
-
 /**
+ * @uses       Zend_Search_Lucene_Index_FieldInfo
+ * @uses       Zend_Search_Lucene_Index_Term
+ * @uses       Zend_Search_Lucene_Index_TermInfo
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index

@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Search_Query */
-require_once 'Zend/Search/Lucene/Search/Query.php';
-
-
 /**
  * The insignificant query returns empty result, but doesn't limit result set as a part of other queries
  *
+ * @uses       Zend_Search_Lucene_Search_Query
+ * @uses       Zend_Search_Lucene_Search_Weight_Empty
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -66,7 +63,6 @@ class Zend_Search_Lucene_Search_Query_Insignificant extends Zend_Search_Lucene_S
      */
     public function createWeight(Zend_Search_Lucene_Interface $reader)
     {
-        require_once 'Zend/Search/Lucene/Search/Weight/Empty.php';
         return new Zend_Search_Lucene_Search_Weight_Empty();
     }
 

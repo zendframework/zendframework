@@ -19,7 +19,6 @@
  * @version    $Id$
  */
 
-
 /**
  * Abstract Priority Queue
  *

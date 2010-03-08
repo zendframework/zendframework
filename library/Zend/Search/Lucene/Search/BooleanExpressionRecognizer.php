@@ -20,11 +20,11 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_FSM */
-require_once 'Zend/Search/Lucene/FSM.php';
-
 /**
+ * @uses       Zend_Search_Lucene_Exception
+ * @uses       Zend_Search_Lucene_FSM
+ * @uses       Zend_Search_Lucene_FSMAction
+ * @uses       Zend_Search_Lucene_Search_QueryParser
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
@@ -194,7 +194,6 @@ class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_
     public function finishExpression()
     {
         if ($this->getState() != self::ST_LITERAL) {
-            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Literal expected.');
         }
 
@@ -214,9 +213,6 @@ class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_
      */
     public function emptyOperatorAction()
     {
-        /** Zend_Search_Lucene_Search_QueryParser */
-        require_once 'Zend/Search/Lucene/Search/QueryParser.php';
-
         if (Zend_Search_Lucene_Search_QueryParser::getDefaultOperator() == Zend_Search_Lucene_Search_QueryParser::B_AND) {
             // Do nothing
         } else {
@@ -232,9 +228,6 @@ class Zend_Search_Lucene_Search_BooleanExpressionRecognizer extends Zend_Search_
      */
     public function emptyNotOperatorAction()
     {
-        /** Zend_Search_Lucene_Search_QueryParser */
-        require_once 'Zend/Search/Lucene/Search/QueryParser.php';
-
         if (Zend_Search_Lucene_Search_QueryParser::getDefaultOperator() == Zend_Search_Lucene_Search_QueryParser::B_AND) {
             // Do nothing
         } else {

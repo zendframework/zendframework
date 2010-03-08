@@ -20,21 +20,18 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Analysis_TokenFilter */
-require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
-
-
 /**
  * Lower case Token filter.
  *
+ * @uses       Zend_Search_Lucene_Analysis_Token
+ * @uses       Zend_Search_Lucene_Analysis_TokenFilter
+ * @uses       Zend_Search_Lucene_Exception
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 class Zend_Search_Lucene_Analysis_TokenFilter_LowerCaseUtf8 extends Zend_Search_Lucene_Analysis_TokenFilter
 {
     /**
@@ -44,7 +41,6 @@ class Zend_Search_Lucene_Analysis_TokenFilter_LowerCaseUtf8 extends Zend_Search_
     {
         if (!function_exists('mb_strtolower')) {
             // mbstring extension is disabled
-            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('Utf8 compatible lower case filter needs mbstring extension to be enabled.');
         }
     }

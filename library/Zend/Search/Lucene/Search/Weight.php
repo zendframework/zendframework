@@ -20,7 +20,6 @@
  * @version    $Id$
  */
 
-
 /**
  * Calculate query weights and build query scorers.
  *

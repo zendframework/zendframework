@@ -20,22 +20,6 @@
  * @version    $Id$
  */
 
-
-/** Define constant used to provide correct file processing order    */
-/** @todo Section should be removed with ZF 2.0 release as obsolete  */
-define('ZEND_SEARCH_LUCENE_COMMON_ANALYZER_PROCESSED', true);
-
-
-/** Zend_Search_Lucene_Analysis_Analyzer */
-require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
-
-/** Zend_Search_Lucene_Analysis_Token */
-require_once 'Zend/Search/Lucene/Analysis/Token.php';
-
-/** Zend_Search_Lucene_Analysis_TokenFilter */
-require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
-
-
 /**
  * Common implementation of the Zend_Search_Lucene_Analysis_Analyzer interface.
  * There are several standard standard subclasses provided by Zend_Search_Lucene/Analysis
@@ -43,6 +27,9 @@ require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
  *
  * @todo ZSearchHTMLAnalyzer and ZSearchXMLAnalyzer implementation
  *
+ * @uses       Zend_Search_Lucene_Analysis_Analyzer
+ * @uses       Zend_Search_Lucene_Analysis_Token
+ * @uses       Zend_Search_Lucene_Analysis_TokenFilter
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis

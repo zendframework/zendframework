@@ -20,16 +20,16 @@
  * @version    $Id$
  */
 
-/** @see Zend_Search_Lucene_Search_Highlighter_Interface */
-require_once 'Zend/Search/Lucene/Search/Highlighter/Interface.php';
 /**
+ * @uses       Zend_Search_Lucene_Search_Highlighter_Interface
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Search_Lucene_Search_Highlighter_Default implements Zend_Search_Lucene_Search_Highlighter_Interface
+class Zend_Search_Lucene_Search_Highlighter_Default 
+    implements Zend_Search_Lucene_Search_Highlighter_Interface
 {
     /**
      * List of colors for text highlighting

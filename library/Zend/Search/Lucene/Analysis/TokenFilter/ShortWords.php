@@ -20,21 +20,17 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Analysis_TokenFilter */
-require_once 'Zend/Search/Lucene/Analysis/TokenFilter.php';
-
-
 /**
  * Token filter that removes short words. What is short word can be configured with constructor.
  *
+ * @uses       Zend_Search_Lucene_Analysis_Token
+ * @uses       Zend_Search_Lucene_Analysis_TokenFilter
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Analysis
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-
 class Zend_Search_Lucene_Analysis_TokenFilter_ShortWords extends Zend_Search_Lucene_Analysis_TokenFilter
 {
     /**

@@ -20,14 +20,11 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Field */
-require_once 'Zend/Search/Lucene/Field.php';
-
-
 /**
  * A Document is a set of fields. Each field has a name and a textual value.
  *
+ * @uses       Zend_Search_Lucene_Exception
+ * @uses       Zend_Search_Lucene_Field
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Document
@@ -100,7 +97,6 @@ class Zend_Search_Lucene_Document
     public function getField($fieldName)
     {
         if (!array_key_exists($fieldName, $this->_fields)) {
-            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception("Field name \"$fieldName\" not found in document.");
         }
         return $this->_fields[$fieldName];

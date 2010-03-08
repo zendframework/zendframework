@@ -20,10 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_Storage_File */
-require_once 'Zend/Search/Lucene/Storage/File.php';
-
 /**
+ * @uses       Zend_Search_Lucene_Exception
+ * @uses       Zend_Search_Lucene_Storage_File
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Storage
@@ -52,7 +51,6 @@ class Zend_Search_Lucene_Storage_File_Filesystem extends Zend_Search_Lucene_Stor
 
         if (strpos($mode, 'w') === false  &&  !is_readable($filename)) {
             // opening for reading non-readable file
-            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception('File \'' . $filename . '\' is not readable.');
         }
 
@@ -63,7 +61,6 @@ class Zend_Search_Lucene_Storage_File_Filesystem extends Zend_Search_Lucene_Stor
 
         if ($this->_fileHandle === false) {
             ini_set('track_errors', $trackErrors);
-            require_once 'Zend/Search/Lucene/Exception.php';
             throw new Zend_Search_Lucene_Exception($php_errormsg);
         }
 

@@ -20,10 +20,13 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_Index_SegmentWriter */
-require_once 'Zend/Search/Lucene/Index/SegmentWriter.php';
-
 /**
+ * @uses       Zend_Search_Lucene_Analysis_Analyzer
+ * @uses       Zend_Search_Lucene_Exception
+ * @uses       Zend_Search_Lucene_Index_SegmentInfo
+ * @uses       Zend_Search_Lucene_Index_SegmentWriter
+ * @uses       Zend_Search_Lucene_Index_Term
+ * @uses       Zend_Search_Lucene_Search_Similarity
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
@@ -71,9 +74,6 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
      */
     public function addDocument(Zend_Search_Lucene_Document $document)
     {
-        /** Zend_Search_Lucene_Search_Similarity */
-        require_once 'Zend/Search/Lucene/Search/Similarity.php';
-
         $storedFields = array();
         $docNorms     = array();
         $similarity   = Zend_Search_Lucene_Search_Similarity::getDefault();
@@ -85,15 +85,11 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                 /**
                  * @todo term vector storing support
                  */
-                require_once 'Zend/Search/Lucene/Exception.php';
                 throw new Zend_Search_Lucene_Exception('Store term vector functionality is not supported yet.');
             }
 
             if ($field->isIndexed) {
                 if ($field->isTokenized) {
-                    /** Zend_Search_Lucene_Analysis_Analyzer */
-                    require_once 'Zend/Search/Lucene/Analysis/Analyzer.php';
-
                     $analyzer = Zend_Search_Lucene_Analysis_Analyzer::getDefault();
                     $analyzer->setInput($field->value, $field->encoding);
 
@@ -213,9 +209,6 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
         $this->_dumpDictionary();
 
         $this->_generateCFS();
-
-        /** Zend_Search_Lucene_Index_SegmentInfo */
-        require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
 
         return new Zend_Search_Lucene_Index_SegmentInfo($this->_directory,
                                                         $this->_name,

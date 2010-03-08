@@ -20,14 +20,10 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Document */
-require_once 'Zend/Search/Lucene/Document.php';
-
-
 /**
  * OpenXML document.
  *
+ * @uses       Zend_Search_Lucene_Document
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Document
@@ -85,19 +81,19 @@ abstract class Zend_Search_Lucene_Document_OpenXml extends Zend_Search_Lucene_Do
         // Read relations and search for core properties
         $relations = simplexml_load_string($package->getFromName("_rels/.rels"));
         foreach ($relations->Relationship as $rel) {
-            if ($rel["Type"] == Zend_Search_Lucene_Document_OpenXml::SCHEMA_COREPROPERTIES) {
+            if ($rel["Type"] == self::SCHEMA_COREPROPERTIES) {
                 // Found core properties! Read in contents...
                 $contents = simplexml_load_string(
                     $package->getFromName(dirname($rel["Target"]) . "/" . basename($rel["Target"]))
                 );
 
-                foreach ($contents->children(Zend_Search_Lucene_Document_OpenXml::SCHEMA_DUBLINCORE) as $child) {
+                foreach ($contents->children(self::SCHEMA_DUBLINCORE) as $child) {
                     $coreProperties[$child->getName()] = (string)$child;
                 }
-                foreach ($contents->children(Zend_Search_Lucene_Document_OpenXml::SCHEMA_COREPROPERTIES) as $child) {
+                foreach ($contents->children(self::SCHEMA_COREPROPERTIES) as $child) {
                     $coreProperties[$child->getName()] = (string)$child;
                 }
-                foreach ($contents->children(Zend_Search_Lucene_Document_OpenXml::SCHEMA_DUBLINCORETERMS) as $child) {
+                foreach ($contents->children(self::SCHEMA_DUBLINCORETERMS) as $child) {
                     $coreProperties[$child->getName()] = (string)$child;
                 }
             }

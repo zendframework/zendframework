@@ -20,10 +20,9 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_Index_SegmentWriter */
-require_once 'Zend/Search/Lucene/Index/SegmentWriter.php';
-
 /**
+ * @uses       Zend_Search_Lucene_Index_SegmentInfo
+ * @uses       Zend_Search_Lucene_Index_SegmentWriter
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Index
@@ -78,9 +77,6 @@ class Zend_Search_Lucene_Index_SegmentWriter_StreamWriter extends Zend_Search_Lu
 
         $this->_dumpFNM();
         $this->_generateCFS();
-
-        /** Zend_Search_Lucene_Index_SegmentInfo */
-        require_once 'Zend/Search/Lucene/Index/SegmentInfo.php';
 
         return new Zend_Search_Lucene_Index_SegmentInfo($this->_directory,
                                                         $this->_name,

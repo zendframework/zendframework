@@ -20,12 +20,8 @@
  * @version    $Id$
  */
 
-
-/** Zend_Search_Lucene_Search_Weight */
-require_once 'Zend/Search/Lucene/Search/Weight.php';
-
-
 /**
+ * @uses       Zend_Search_Lucene_Search_Weight
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @subpackage Search

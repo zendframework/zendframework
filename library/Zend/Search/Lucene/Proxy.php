@@ -19,15 +19,13 @@
  * @version    $Id$
  */
 
-/** Zend_Search_Lucene_Interface */
-require_once 'Zend/Search/Lucene/Interface.php';
-
-
 /**
  * Proxy class intended to be used in userland.
  *
  * It tracks, when index object goes out of scope and forces ndex closing
  *
+ * @uses       Zend_Search_Lucene
+ * @uses       Zend_Search_Lucene_Interface
  * @category   Zend
  * @package    Zend_Search_Lucene
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

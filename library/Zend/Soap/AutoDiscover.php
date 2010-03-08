@@ -92,18 +92,30 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface
     protected $_bindingStyle = array('style' => 'rpc', 'transport' => 'http://schemas.xmlsoap.org/soap/http');
 
     /**
+     * Name of the class to handle the WSDL creation.
+     *
+     * @var string
+     */
+    protected $_wsdlClass = 'Zend_Soap_Wsdl';
+
+    /**
      * Constructor
      *
      * @param boolean|string|Zend_Soap_Wsdl_Strategy_Interface $strategy
      * @param string|Zend_Uri $uri
+     * @param string $wsdlClass
      */
-    public function __construct($strategy = true, $uri=null)
+    public function __construct($strategy = true, $uri=null, $wsdlClass=null)
     {
         $this->_reflection = new Zend_Server_Reflection();
         $this->setComplexTypeStrategy($strategy);
 
         if($uri !== null) {
             $this->setUri($uri);
+        }
+
+        if($wsdlClass !== null) {
+            $this->setWsdlClass($wsdlClass);
         }
     }
 
@@ -148,6 +160,36 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface
             $this->setUri($uri);
         }
         return $uri;
+    }
+
+    /**
+     * Set the name of the WSDL handling class.
+     *
+     * @see Zend_Soap_Exception
+     * @see Zend_Soap_Exception
+     * @throws Zend_Soap_AutoDiscover_Exception
+     * @param  string $wsdlClass
+     * @return Zend_Soap_AutoDiscover
+     */
+    public function setWsdlClass($wsdlClass)
+    {
+        if(!is_string($wsdlClass) && !is_subclass_of($wsdlClass, 'Zend_Soap_Wsdl')) {
+            require_once "Zend/Soap/AutoDiscover/Exception.php";
+            throw new Zend_Soap_AutoDiscover_Exception("No Zend_Soap_Wsdl subclass given to Zend_Soap_AutoDiscover::setWsdlClass as string.");
+        }
+        $this->_wsdlClass = $wsdlClass;
+
+        return $this;
+    }
+
+    /**
+     * Return the name of the WSDL handling class.
+     *
+     * @return string
+     */
+    public function getWsdlClass()
+    {
+        return $this->_wsdlClass;
     }
 
     /**
@@ -268,7 +310,7 @@ class Zend_Soap_AutoDiscover implements Zend_Server_Interface
     {
         $uri = $this->getUri();
 
-        $wsdl = new Zend_Soap_Wsdl($class, $uri, $this->_strategy);
+        $wsdl = new $this->_wsdlClass($class, $uri, $this->_strategy);
 
         // The wsdl:types element must precede all other elements (WS-I Basic Profile 1.1 R2023)
         $wsdl->addSchemaTypeSection();

@@ -21,31 +21,16 @@
  */
 
 /**
- * @see Zend_Tool_Project_Context_Filesystem_Directory
- */
-require_once 'Zend/Tool/Project/Context/Filesystem/Directory.php';
-
-/**
- * @see Zend_Tool_Project_Context_System_Interface
- */
-require_once 'Zend/Tool/Project/Context/System/Interface.php';
-
-/**
- * @see Zend_Tool_Project_Context_System_TopLevelRestrictable
- */
-require_once 'Zend/Tool/Project/Context/System/TopLevelRestrictable.php';
-
-/**
- * @see Zend_Tool_Project_Context_System_NotOverwritable
- */
-require_once 'Zend/Tool/Project/Context/System/NotOverwritable.php';
-
-/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
+ * @uses       Zend_Tool_Project_Context_Filesystem_Directory
+ * @uses       Zend_Tool_Project_Context_System_Interface
+ * @uses       Zend_Tool_Project_Context_System_NotOverwritable
+ * @uses       Zend_Tool_Project_Context_System_TopLevelRestrictable
+ * @uses       Zend_Tool_Project_Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -90,7 +75,6 @@ class Zend_Tool_Project_Context_System_ProjectDirectory
 
         // if not, exception.
         if ($projectDirectory == null) {
-            require_once 'Zend/Tool/Project/Exception.php';
             throw new Zend_Tool_Project_Exception('projectDirectory cannot find the directory for this project.');
         }
 
@@ -105,22 +89,6 @@ class Zend_Tool_Project_Context_System_ProjectDirectory
      */
     public function create()
     {
-        if (file_exists($this->getPath())) {
-            /*
-            foreach (new DirectoryIterator($this->getPath()) as $item) {
-                if (!$item->isDot()) {
-                    if ($registry->getClient()->isInteractive()) {
-                        // @todo prompt for override
-                    } else {
-                        require_once 'Zend/Tool/Project/Context/Exception.php';
-                        throw new Zend_Tool_Project_Context_Exception('This directory is not empty, project creation aborted.');
-                    }
-                    break;
-                }
-            }
-            */
-        }
-
         parent::create();
         return $this;
     }

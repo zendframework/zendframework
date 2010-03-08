@@ -21,24 +21,13 @@
  */
 
 /**
- * @see Zend_Reflection_Class
- */
-require_once 'Zend/Reflection/Class.php';
-
-/**
- * @see Zend_Tool_Framework_Registry
- */
-require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
-
-/**
- * @see Zend_Tool_Framework_Action_Base
- */
-require_once 'Zend/Tool/Framework/Action/Base.php';
-
-/**
  * The purpose of Zend_Tool_Framework_Provider_Signature is to derive
  * callable signatures from the provided provider.
  *
+ * @uses       Zend_Reflection_Class
+ * @uses       Zend_Tool_Framework_Action_Base
+ * @uses       Zend_Tool_Framework_Provider_Exception
+ * @uses       Zend_Tool_Framework_Registry_EnabledInterface
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -256,7 +245,6 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
         if ($this->_providerReflection->hasMethod('getSpecialties')) {
             $specialties = $this->_provider->getSpecialties();
             if (!is_array($specialties)) {
-                require_once 'Zend/Tool/Framework/Provider/Exception.php';
                 throw new Zend_Tool_Framework_Provider_Exception(
                     'Provider ' . get_class($this->_provider) . ' must return an array for method getSpecialties().'
                     );
@@ -265,7 +253,6 @@ class Zend_Tool_Framework_Provider_Signature implements Zend_Tool_Framework_Regi
             $defaultProperties = $this->_providerReflection->getDefaultProperties();
             $specialties = (isset($defaultProperties['_specialties'])) ? $defaultProperties['_specialties'] : array();
             if (!is_array($specialties)) {
-                require_once 'Zend/Tool/Framework/Provider/Exception.php';
                 throw new Zend_Tool_Framework_Provider_Exception(
                     'Provider ' . get_class($this->_provider) . '\'s property $_specialties must be an array.'
                     );

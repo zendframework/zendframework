@@ -21,21 +21,13 @@
  */
 
 /**
- * @see Zend_Tool_Project_Context_Content_Engine_CodeGenerator
- */
-require_once 'Zend/Tool/Project/Context/Content/Engine/CodeGenerator.php';
-
-/**
- * @see Zend_Tool_Project_Context_Content_Engine_Phtml
- */
-require_once 'Zend/Tool/Project/Context/Content/Engine/Phtml.php';
-
-/**
  * This class is the front most class for utilizing Zend_Tool_Project
  *
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
+ * @uses       Zend_Tool_Project_Context_Content_Engine_CodeGenerator
+ * @uses       Zend_Tool_Project_Context_Content_Engine_Phtml
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

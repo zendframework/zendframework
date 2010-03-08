@@ -20,12 +20,17 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Tool/Project/Profile/FileParser/Interface.php';
-require_once 'Zend/Tool/Project/Context/Repository.php';
-require_once 'Zend/Tool/Project/Profile.php';
-require_once 'Zend/Tool/Project/Profile/Resource.php';
 
 /**
+ * @uses       DOMDocument
+ * @uses       Exception
+ * @uses       RecursiveIteratorIterator
+ * @uses       SimpleXMLElement
+ * @uses       SimpleXMLIterator
+ * @uses       Zend_Tool_Project_Context_Repository
+ * @uses       Zend_Tool_Project_Profile
+ * @uses       Zend_Tool_Project_Profile_FileParser_Interface
+ * @uses       Zend_Tool_Project_Profile_Resource
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -156,8 +161,6 @@ class Zend_Tool_Project_Profile_FileParser_Xml implements Zend_Tool_Project_Prof
             $resourceName[0] = strtolower($resourceName[0]);
 
             $newNode = $xmlNode->addChild($resourceName);
-
-            //$reflectionClass = new ReflectionClass($resource->getContext());
 
             if ($resource->isEnabled() == false) {
                 $newNode->addAttribute('enabled', 'false');

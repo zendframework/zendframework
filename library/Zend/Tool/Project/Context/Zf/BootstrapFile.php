@@ -26,6 +26,11 @@
  * A profile is a hierarchical set of resources that keep track of
  * items within a specific project.
  *
+ * @uses       Zend_Application
+ * @uses       Zend_CodeGenerator_Php_Class
+ * @uses       Zend_CodeGenerator_Php_File
+ * @uses       Zend_Tool_Project_Context_Filesystem_File
+ * @uses       Zend_Tool_Project_Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -73,7 +78,7 @@ class Zend_Tool_Project_Context_Zf_BootstrapFile extends Zend_Tool_Project_Conte
         $this->_applicationDirectory = $this->_resource->getProfile()->search('ApplicationDirectory');
 
         if (($this->_applicationConfigFile === false) || ($this->_applicationDirectory === false)) {
-            throw new Exception('To use the BootstrapFile context, your project requires the use of both the "ApplicationConfigFile" and "ApplicationDirectory" contexts.');
+            throw new Zend_Tool_Project_Exception('To use the BootstrapFile context, your project requires the use of both the "ApplicationConfigFile" and "ApplicationDirectory" contexts.');
         }
 
 

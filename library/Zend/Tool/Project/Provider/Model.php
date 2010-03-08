@@ -21,6 +21,8 @@
  */
 
 /**
+ * @uses       Zend_Tool_Project_Provider_Abstract
+ * @uses       Zend_Tool_Project_Provider_Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

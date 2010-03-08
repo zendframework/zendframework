@@ -23,6 +23,7 @@
 /**
  * This class is an iterator that will iterate only over enabled resources
  *
+ * @uses       RecursiveFilterIterator
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

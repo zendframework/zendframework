@@ -20,23 +20,24 @@
  * @version    $Id$
  */
 
-require_once 'Zend/Tool/Framework/Manifest/ProviderManifestable.php';
-require_once 'Zend/Tool/Framework/Manifest/ActionManifestable.php';
-require_once 'Zend/Tool/Framework/System/Provider/Version.php';
-require_once 'Zend/Tool/Framework/System/Provider/Config.php';
-require_once 'Zend/Tool/Framework/System/Provider/Phpinfo.php';
-require_once 'Zend/Tool/Framework/System/Provider/Manifest.php';
-require_once 'Zend/Tool/Framework/System/Action/Create.php';
-require_once 'Zend/Tool/Framework/System/Action/Delete.php';
 
 /**
+ * @uses       Zend_Tool_Framework_Manifest_ActionManifestable
+ * @uses       Zend_Tool_Framework_Manifest_ProviderManifestable
+ * @uses       Zend_Tool_Framework_System_Action_Create
+ * @uses       Zend_Tool_Framework_System_Action_Delete
+ * @uses       Zend_Tool_Framework_System_Provider_Config
+ * @uses       Zend_Tool_Framework_System_Provider_Manifest
+ * @uses       Zend_Tool_Framework_System_Provider_Phpinfo
+ * @uses       Zend_Tool_Framework_System_Provider_Version
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Tool_Framework_System_Manifest
-    implements Zend_Tool_Framework_Manifest_ProviderManifestable, Zend_Tool_Framework_Manifest_ActionManifestable
+    implements Zend_Tool_Framework_Manifest_ProviderManifestable, 
+               Zend_Tool_Framework_Manifest_ActionManifestable
 {
 
     public function getProviders()

@@ -21,26 +21,12 @@
  */
 
 /**
- * @see Zend_Tool_Project_Provider_Abstract
- */
-require_once 'Zend/Tool/Project/Provider/Abstract.php';
-
-/**
- * @see Zend_Tool_Framework_Provider_Pretendable
- */
-require_once 'Zend/Tool/Framework/Provider/Pretendable.php';
-
-/**
- * @see Zend_Tool_Project_Profile_Iterator_ContextFilter
- */
-require_once 'Zend/Tool/Project/Profile/Iterator/ContextFilter.php';
-
-/**
- * @see Zend_Tool_Project_Profile_Iterator_EnabledResourceFilter
- */
-require_once 'Zend/Tool/Project/Profile/Iterator/EnabledResourceFilter.php';
-
-/**
+ * @uses       RecursiveIteratorIterator
+ * @uses       Zend_Tool_Framework_Provider_Pretendable
+ * @uses       Zend_Tool_Project_Profile_Iterator_ContextFilter
+ * @uses       Zend_Tool_Project_Profile_Iterator_EnabledResourceFilter
+ * @uses       Zend_Tool_Project_Provider_Abstract
+ * @uses       Zend_Tool_Project_Provider_Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

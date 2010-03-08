@@ -21,6 +21,12 @@
  */
 
 /**
+ * @uses       Zend_Tool_Framework_Provider_Pretendable
+ * @uses       Zend_Tool_Project_Provider_Abstract
+ * @uses       Zend_Tool_Project_Provider_Action
+ * @uses       Zend_Tool_Project_Provider_Exception
+ * @uses       Zend_Tool_Project_Provider_Test
+ * @uses       Zend_Tool_Project_Provider_View
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -113,7 +119,6 @@ class Zend_Tool_Project_Provider_Controller
         $this->_loadProfile(self::NO_PROFILE_THROW_EXCEPTION);
 
         // determine if testing is enabled in the project
-        require_once 'Zend/Tool/Project/Provider/Test.php';
         $testingEnabled = Zend_Tool_Project_Provider_Test::isTestingEnabled($this->_loadedProfile);
 
         if (self::hasResource($this->_loadedProfile, $name, $module)) {

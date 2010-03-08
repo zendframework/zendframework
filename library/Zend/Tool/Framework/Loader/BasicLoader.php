@@ -21,23 +21,12 @@
  */
 
 /**
- * @see Zend_Tool_Framework_Loader_Abstract
- */
-require_once 'Zend/Tool/Framework/Loader/Interface.php';
-
-/**
- * @see Zend_Tool_Framework_Registry_EnabledInterface
- */
-require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
-
-/**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
-require_once 'Zend/Tool/Framework/Manifest/Interface.php';
-require_once 'Zend/Tool/Framework/Provider/Interface.php';
-
-/**
+ * @uses       ReflectionClass
+ * @uses       Zend_Loader
+ * @uses       Zend_Tool_Framework_Loader_Interface
+ * @uses       Zend_Tool_Framework_Manifest_Interface
+ * @uses       Zend_Tool_Framework_Provider_Interface
+ * @uses       Zend_Tool_Framework_Registry_EnabledInterface
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

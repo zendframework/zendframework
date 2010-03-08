@@ -21,16 +21,15 @@
  */
 
 /**
- * @see Zend_Loader_Autoloader
- */
-require_once 'Zend/Loader/Autoloader.php';
-
-/**
- * @see Zend_Tool_Framework_Registry_EnabledInterface
- */
-require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
-
-/**
+ * @uses       Zend_Loader_Autoloader
+ * @uses       Zend_Log
+ * @uses       Zend_Log_Writer_Null
+ * @uses       Zend_Tool_Framework_Client_Exception
+ * @uses       Zend_Tool_Framework_Client_Interactive_InputHandler
+ * @uses       Zend_Tool_Framework_Client_Interactive_InputInterface
+ * @uses       Zend_Tool_Framework_Client_Manifest
+ * @uses       Zend_Tool_Framework_Registry
+ * @uses       Zend_Tool_Framework_Registry_EnabledInterface
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -113,8 +112,6 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
         
         // setup the debug log
         if (!$this->_debugLogger instanceof Zend_Log) {
-            require_once 'Zend/Log.php';
-            require_once 'Zend/Log/Writer/Null.php';
             $this->_debugLogger = new Zend_Log(new Zend_Log_Writer_Null());
         }
 
@@ -129,10 +126,6 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
 
         // process the manifest repository
         $this->_registry->getManifestRepository()->process();
-
-        if ($this instanceof Zend_Tool_Framework_Client_Interactive_InputInterface) {
-            require_once 'Zend/Tool/Framework/Client/Interactive/InputHandler.php';
-        }
 
         if ($this instanceof Zend_Tool_Framework_Client_Interactive_OutputInterface) {
             $this->_registry->getResponse()->setContentCallback(array($this, 'handleInteractiveOutput'));
@@ -203,7 +196,6 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
     public function promptInteractiveInput($inputRequest)
     {
         if (!$this->hasInteractiveInput()) {
-            require_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('promptInteractive() cannot be called on a non-interactive client.');
         }
 
@@ -229,12 +221,10 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
             if ($this->_registry->getRequest()->isDispatchable()) {
 
                 if ($this->_registry->getRequest()->getActionName() == null) {
-                    require_once 'Zend/Tool/Framework/Client/Exception.php';
                     throw new Zend_Tool_Framework_Client_Exception('Client failed to setup the action name.');
                 }
 
                 if ($this->_registry->getRequest()->getProviderName() == null) {
-                    require_once 'Zend/Tool/Framework/Client/Exception.php';
                     throw new Zend_Tool_Framework_Client_Exception('Client failed to setup the provider name.');
                 }
 
@@ -274,7 +264,6 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
 
         // ensure that we can pretend if this is a pretend request
         if ($request->isPretend() && (!$provider instanceof Zend_Tool_Framework_Provider_Pretendable)) {
-            require_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('Dispatcher error - provider does not support pretend');
         }
 
@@ -283,7 +272,6 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
         $specialtyName = $this->_registry->getRequest()->getSpecialtyName();
 
         if (!$actionableMethod = $providerSignature->getActionableMethodByActionName($actionName, $specialtyName)) {
-            require_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('Dispatcher error - actionable method not found');
         }
 
@@ -302,12 +290,10 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
                     $promptSting = $this->getMissingParameterPromptString($provider, $actionableMethod['action'], $methodParameterValue['name']);
                     $parameterPromptValue = $this->promptInteractiveInput($promptSting)->getContent();
                     if ($parameterPromptValue == null) {
-                        require_once 'Zend/Tool/Framework/Client/Exception.php';
                         throw new Zend_Tool_Framework_Client_Exception('Value supplied for required parameter "' . $methodParameterValue['name'] . '" is empty');
                     }
                     $callParameters[] = $parameterPromptValue;
                 } else {
-                    require_once 'Zend/Tool/Framework/Client/Exception.php';
                     throw new Zend_Tool_Framework_Client_Exception('A required parameter "' . $methodParameterValue['name'] . '" was not supplied.');
                 }
             } else {
@@ -325,7 +311,6 @@ abstract class Zend_Tool_Framework_Client_Abstract implements Zend_Tool_Framewor
         } elseif (method_exists($class, $methodName . 'Action')) {
             call_user_func_array(array($class, $methodName . 'Action'), $callParameters);
         } else {
-            require_once 'Zend/Tool/Framework/Client/Exception.php';
             throw new Zend_Tool_Framework_Client_Exception('Not a supported method.');
         }
     }

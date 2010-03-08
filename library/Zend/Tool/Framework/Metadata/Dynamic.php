@@ -21,16 +21,9 @@
  */
 
 /**
- * @see Zend_Tool_Framework_Metadata_Interface
- */
-require_once 'Zend/Tool/Framework/Metadata/Interface.php';
-
-/**
- * @see Zend_Tool_Framework_Metadata_Attributable
- */
-require_once 'Zend/Tool/Framework/Metadata/Attributable.php';
-
-/**
+ * @uses       Zend_Tool_Framework_Metadata_Attributable
+ * @uses       Zend_Tool_Framework_Metadata_Interface
+ * @uses       Zend_Tool_Framework_Registry_Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -190,7 +183,6 @@ class Zend_Tool_Framework_Metadata_Dynamic
         } elseif (array_key_exists($name, $this->_dynamicAttributes)) {
             return $this->_dynamicAttributes[$name];
         } else {
-            require_once 'Zend/Tool/Framework/Registry/Exception.php';
             throw new Zend_Tool_Framework_Registry_Exception('Property ' . $name . ' was not located in this metadata.');
         }
     }
@@ -210,10 +202,6 @@ class Zend_Tool_Framework_Metadata_Dynamic
             $this->_dynamicAttributes[$name] = $value;
             return $this;
         }
-//        {
-//            require_once 'Zend/Tool/Framework/Registry/Exception.php';
-//            throw new Zend_Tool_Framework_Registry_Exception('Property ' . $name . ' was not located in this registry.');
-//        }
     }
 
 }

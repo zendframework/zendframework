@@ -19,10 +19,9 @@
  * @version    $Id$
  */
 
-/** @see Zend_Tool_Project_Provider_Abstract */
-require_once 'Zend/Tool/Project/Provider/Abstract.php';
-
 /**
+ * @uses       Zend_Tool_Project_Provider_Abstract
+ * @uses       Zend_Tool_Project_Provider_Exception
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -43,10 +42,6 @@ class Zend_Tool_Project_Provider_ProjectProvider extends Zend_Tool_Project_Provi
     {
 
         if (!is_string($projectProviderName)) {
-            /**
-             * @see Zend_Tool_Project_Provider_Exception
-             */
-            require_once 'Zend/Tool/Project/Provider/Exception.php';
             throw new Zend_Tool_Project_Provider_Exception('Zend_Tool_Project_Provider_Controller::createResource() expects \"projectProviderName\" is the name of a project provider resource to create.');
         }
 

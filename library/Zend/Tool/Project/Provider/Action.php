@@ -21,16 +21,10 @@
  */
 
 /**
- * @see Zend_Tool_Project_Provider_Abstract
- */
-require_once 'Zend/Tool/Project/Provider/Abstract.php';
-
-/**
- * @see Zend_Tool_Framework_Provider_Pretendable
- */
-require_once 'Zend/Tool/Framework/Provider/Pretendable.php';
-
-/**
+ * @uses       Zend_Tool_Framework_Provider_Pretendable
+ * @uses       Zend_Tool_Project_Provider_Abstract
+ * @uses       Zend_Tool_Project_Provider_Exception
+ * @uses       Zend_Tool_Project_Provider_View
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

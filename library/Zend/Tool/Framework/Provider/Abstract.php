@@ -21,23 +21,14 @@
  */
 
 /**
- * @see Zend_Tool_Framework_Provider_Interface
- */
-require_once 'Zend/Tool/Framework/Provider/Interface.php';
-
-/**
- * @see Zend_Tool_Framework_Registry_EnabledInterface
- */
-require_once 'Zend/Tool/Framework/Registry/EnabledInterface.php';
-
-
-/**
  * This is a convenience class.
  *
  * At current it will return the request and response from the client registry
  * as they are the more common things that will be needed by providers
  *
  *
+ * @uses       Zend_Tool_Framework_Provider_Interface
+ * @uses       Zend_Tool_Framework_Registry_EnabledInterface
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

@@ -21,23 +21,24 @@
  */
 
 /**
- * @see Zend_Tool_Framework_Client_Abstract
- */
-require_once 'Zend/Tool/Framework/Client/Abstract.php';
-
-/**
- * @see Zend_Tool_Framework_Client_Interactive_InputInterface
- */
-require_once 'Zend/Tool/Framework/Client/Interactive/InputInterface.php';
-
-/**
- * @see Zend_Tool_Framework_Client_Interactive_OutputInterface
- */
-require_once 'Zend/Tool/Framework/Client/Interactive/OutputInterface.php';
-
-/**
  * Zend_Tool_Framework_Client_Console - the CLI Client implementation for Zend_Tool_Framework
  *
+ * @uses       Zend_Filter
+ * @uses       Zend_Filter_StringToLower
+ * @uses       Zend_Filter_Word_CamelCaseToDash
+ * @uses       Zend_Filter_Word_DashToCamelCase
+ * @uses       Zend_Tool_Framework_Client_Abstract
+ * @uses       Zend_Tool_Framework_Client_Console_ArgumentParser
+ * @uses       Zend_Tool_Framework_Client_Console_HelpSystem
+ * @uses       Zend_Tool_Framework_Client_Console_ResponseDecorator_AlignCenter
+ * @uses       Zend_Tool_Framework_Client_Console_ResponseDecorator_Blockize
+ * @uses       Zend_Tool_Framework_Client_Console_ResponseDecorator_Colorizer
+ * @uses       Zend_Tool_Framework_Client_Console_ResponseDecorator_Indention
+ * @uses       Zend_Tool_Framework_Client_Interactive_InputInterface
+ * @uses       Zend_Tool_Framework_Client_Interactive_OutputInterface
+ * @uses       Zend_Tool_Framework_Client_Response_ContentDecorator_Separator
+ * @uses       Zend_Tool_Framework_Client_Storage_Directory
+ * @uses       Zend_Tool_Framework_Loader_BasicLoader
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

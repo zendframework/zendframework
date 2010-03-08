@@ -21,11 +21,8 @@
  */
 
 /**
- * @see Zend_Tool_Framework_Client_Storage_AdapterInterface
- */
-require_once 'Zend/Tool/Framework/Client/Storage/AdapterInterface.php';
-
-/**
+ * @uses       Zend_Tool_Framework_Client_Exception
+ * @uses       Zend_Tool_Framework_Client_Storage_AdapterInterface
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

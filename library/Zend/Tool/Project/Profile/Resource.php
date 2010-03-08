@@ -21,18 +21,11 @@
  */
 
 /**
- * @see Zend_Tool_Project_Profile_Resource_Container
- */
-require_once 'Zend/Tool/Project/Profile/Resource/Container.php';
-
-/**
- * @see Zend_Tool_Project_Context_Repository
- */
-require_once 'Zend/Tool/Project/Context/Repository.php';
-
-/**
  * This class is an iterator that will iterate only over enabled resources
  *
+ * @uses       Zend_Tool_Project_Context_Repository
+ * @uses       Zend_Tool_Project_Exception
+ * @uses       Zend_Tool_Project_Profile_Resource_Container
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

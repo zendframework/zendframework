@@ -21,13 +21,16 @@
  */
 
 /**
- * @see Zend_Tool_Project_Profile_Resource_SearchConstraints
- */
-require_once 'Zend/Tool/Project/Profile/Resource/SearchConstraints.php';
-
-/**
  * This class is an iterator that will iterate only over enabled resources
  *
+ * @uses       Countable
+ * @uses       RecursiveIterator
+ * @uses       RecursiveIteratorIterator
+ * @uses       Zend_Tool_Project_Context_Repository
+ * @uses       Zend_Tool_Project_Profile_Exception
+ * @uses       Zend_Tool_Project_Profile_Iterator_ContextFilter
+ * @uses       Zend_Tool_Project_Profile_Resource
+ * @uses       Zend_Tool_Project_Profile_Resource_SearchConstraints
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
@@ -105,7 +108,6 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
                 if (count($currentConstraint->params) > 0) {
                     $currentResourceAttributes = $currentResource->getAttributes();
                     if (!is_array($currentConstraint->params)) {
-                        require_once 'Zend/Tool/Project/Profile/Exception.php';
                         throw new Zend_Tool_Project_Profile_Exception('Search parameter specifics must be in the form of an array for key "'
                             . $currentConstraint->name .'"');
                     }
@@ -145,7 +147,6 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
     {
         if (!$appendResourceOrSearchConstraints instanceof Zend_Tool_Project_Profile_Resource_Container) {
             if (($parentResource = $this->search($appendResourceOrSearchConstraints)) == false) {
-                require_once 'Zend/Tool/Project/Profile/Exception.php';
                 throw new Zend_Tool_Project_Profile_Exception('No node was found to append to.');
             }
         } else {
@@ -171,11 +172,9 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
             if ($contextRegistry->hasContext($context)) {
                 $context = $contextRegistry->getContext($context);
             } else {
-                require_once 'Zend/Tool/Project/Profile/Exception.php';
                 throw new Zend_Tool_Project_Profile_Exception('Context by name ' . $context . ' was not found in the context registry.');
             }
         } elseif (!$context instanceof Zend_Tool_Project_Context_Interface) {
-            require_once 'Zend/Tool/Project/Profile/Exception.php';
             throw new Zend_Tool_Project_Profile_Exception('Context must be of type string or Zend_Tool_Project_Context_Interface.');
         }
 
@@ -318,7 +317,7 @@ class Zend_Tool_Project_Profile_Resource_Container implements RecursiveIterator,
     public function append(Zend_Tool_Project_Profile_Resource_Container $resource)
     {
         if (!$this->isAppendable()) {
-            throw new Exception('Resource by name ' . (string) $this . ' is not appendable');
+            throw new Zend_Tool_Project_Profile_Exception('Resource by name ' . (string) $this . ' is not appendable');
         }
         array_push($this->_subResources, $resource);
         $resource->setParentResource($this);

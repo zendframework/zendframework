@@ -19,9 +19,9 @@
  * @version    $Id$
  */
 
-require_once "Zend/Tool/Framework/Client/Response/ContentDecorator/Interface.php";
 
 /**
+ * @uses       Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
  * @category   Zend
  * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)

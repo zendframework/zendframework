@@ -19,11 +19,10 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-require_once "Zend/Tool/Framework/Client/Response/ContentDecorator/Interface.php";
-
 /**
  * Try to align a given text central on the screen.
  *
+ * @uses       Zend_Tool_Framework_Client_Response_ContentDecorator_Interface
  * @category   Zend
  * @package    Zend_Tool
  * @subpackage Framework

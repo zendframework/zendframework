@@ -148,7 +148,7 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
             }
         }
 
-        $color = new Zend_Pdf_Color_RGB(
+        $color = new Zend_Pdf_Color_Rgb(
             ($color & 0xFF0000) >> 16,
             ($color & 0x00FF00) >> 8,
             $color & 0x0000FF
@@ -185,7 +185,7 @@ class Zend_Barcode_Renderer_Pdf extends Zend_Barcode_Renderer_RendererAbstract
         $orientation = 0
     ) {
         $page  = $this->_resource->pages[$this->_page];
-        $color = new Zend_Pdf_Color_RGB(
+        $color = new Zend_Pdf_Color_Rgb(
             ($color & 0xFF0000) >> 16,
             ($color & 0x00FF00) >> 8,
             $color & 0x0000FF

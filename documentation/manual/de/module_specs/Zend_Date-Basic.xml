@@ -5,13 +5,13 @@
     <title>Basis Methoden</title>
 
     <para>
-        Der folgende Abschnitt zeigt die Grundsätzliche Benutzung von
+        Der folgende Abschnitt zeigt die grundsätzliche Benutzung von
         <classname>Zend_Date</classname> hauptsächlich durch Beispiele. Für dieses Handbuch sind
         "Daten" immer implizit Kalenderdaten mit Zeiten, selbst wenn es nicht extra erwähnt ist und
-        visa-versa. Der nicht angegebene Teil wird intern standardmäßig mit "null" angenommen. Das
-        bedeutet das ein Datum welches kein Kalenderdatum aber eine Zeit von 12 Stunden hat und ein
-        anderes Datum welches aus einem Kalenderdatum aber ohne Uhrzeit besteht zusammen zu einem
-        Datum führen welches das Kalenderdatum enthält mit einer Uhrzeit von "Mittags".
+        umgekehrt. Der nicht angegebene Teil wird intern standardmäßig mit "null" angenommen. Das
+        bedeutet, dass ein Datum, welches kein Kalenderdatum aber eine Zeit von 12 Stunden hat und ein
+        anderes Datum, welches aus einem Kalenderdatum aber ohne Uhrzeit besteht zusammen zu einem
+        Datum führen, welches das Kalenderdatum enthält mit einer Uhrzeit von "Mittags".
     </para>
 
     <para>
@@ -54,7 +54,7 @@ print $date;
 
         <para>
             Das Durchschauen der Basismethoden von <classname>Zend_Date</classname> ist ein guter
-            Weg für den Start für jene welche noch nie mit Datums Objekten in anderen Sprachen oder
+            Weg für den Start für jene, welche noch nie mit Datumsobjekten in anderen Sprachen oder
             Frameworks gearbeitet haben. Für jede anbei angeführte Methode gibt es ein kleines
             Beispiel.
         </para>
@@ -66,7 +66,7 @@ print $date;
                 Ein Datum in einem <classname>Zend_Date</classname> Objekt kann als Integer oder
                 lokalisierte Zeichenkette ausgegeben werden, indem man die
                 <methodname>get()</methodname> Methode verwendet. Es gibt viele Optionen, welche
-                in einer späteren Sektion beschrieben werden.
+                in einem späteren Abschnitt beschrieben werden.
             </para>
 
             <example id="zend.date.simple.functions.get.example-1">
@@ -85,9 +85,9 @@ print $date->get();
             <title>Setzen eines Datums</title>
 
             <para>
-                Die <methodname>set()</methodname> Methode verändert das Datum welches im Objekt
+                Die <methodname>set()</methodname> Methode verändert das Datum, welches im Objekt
                 gespeichert ist und gibt das endgültige Datum als Zeitpunkt (nicht als Objekt)
-                zurück. Auch hier gibt es viele Optionen die in einer späteren Sektion beschrieben
+                zurück. Auch hier gibt es viele Optionen, die in einem späteren Abschnitt beschrieben
                 werden.
             </para>
 
@@ -109,7 +109,7 @@ print $date->get(Zend_Date::W3C);
 
             <para>
                 Das Addieren von zwei Daten mit <methodname>add()</methodname> bedeutet
-                normalerweise das Addieren eines echtes Datums mit einem speziellen Zeitpunkt der
+                normalerweise das Addieren eines echtes Datums mit einem speziellen Zeitpunkt, der
                 einen Datumsabschnitt repräsentiert, wie z.B. 12 Stunden, wie im nachfolgenden
                 Beispiel gezeigt. Beide, <methodname>add()</methodname> und
                 <methodname>sub()</methodname> verwenden die gleichen Optionen wie
@@ -138,8 +138,8 @@ echo "Datum über toString() = ", $date, "\n";
             <title>Vergleichen von Daten</title>
 
             <para>
-                Alle Basis Methoden von <classname>Zend_Date</classname> können mit kompletten
-                Daten, welche in einem Objekt enthalten sind, arbeiten, oder mit Datumsabschnitten,
+                Alle Basismethoden von <classname>Zend_Date</classname> können mit kompletten
+                Daten, welche in einem Objekt enthalten sind, arbeiten oder mit Datumsabschnitten,
                 wie dem Vergleich eines Minutenwertes in einem Datum mit einem absoluten Wert. Zum
                 Beispiel können die aktuellen Minuten der aktuellen Zeit mit einer speziellen Zahl
                 von Minuten verglichen werden durch Verwendung von

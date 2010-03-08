@@ -20,10 +20,8 @@
  * @version    $Id$
  */
 
-// Call Zend_Amf_ServerTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Amf_ServerTest::main");
-}
+require_once 'ServiceA.php';
+require_once 'ServiceB.php';
 
 /**
  * Test helper
@@ -729,7 +727,7 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
      */
     public function testSetRequestShouldRaiseExceptionOnInvalidStringClassName()
     {
-        $this->_server->setRequest('Zend_Amf_ServerTest_BogusRequest');
+        @$this->_server->setRequest('Zend_Amf_ServerTest_BogusRequest');
     }
 
     public function testSetRequestShouldAllowValidRequestObjects()
@@ -761,7 +759,7 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
      */
     public function testSetResponseShouldRaiseExceptionOnInvalidStringClassName()
     {
-        $this->_server->setResponse('Zend_Amf_ServerTest_BogusResponse');
+        @$this->_server->setResponse('Zend_Amf_ServerTest_BogusResponse');
     }
 
     public function testSetResponseShouldAllowValidResponseObjects()
@@ -1103,10 +1101,6 @@ class Zend_Amf_ServerTest extends PHPUnit_Framework_TestCase
         $this->assertContains("Oops, exception!", $response[0]->getData()->faultString);
     }
 
-}
-
-if (PHPUnit_MAIN_METHOD == "Zend_Amf_ServerTest::main") {
-    Zend_Amf_ServerTest::main();
 }
 
 /**

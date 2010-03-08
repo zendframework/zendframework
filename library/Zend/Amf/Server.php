@@ -621,6 +621,8 @@ class Zend_Amf_Server implements Zend_Server_Interface
             if (!$request instanceof Zend_Amf_Request) {
                 throw new Zend_Amf_Server_Exception('Invalid request class');
             }
+        } elseif (is_string($request) && !class_exists($request)) {
+            throw new Zend_Amf_Server_Exception('Invalid request class');
         } elseif (!$request instanceof Zend_Amf_Request) {
             throw new Zend_Amf_Server_Exception('Invalid request object');
         }
@@ -655,6 +657,8 @@ class Zend_Amf_Server implements Zend_Server_Interface
             if (!$response instanceof Zend_Amf_Response) {
                 throw new Zend_Amf_Server_Exception('Invalid response class');
             }
+        } elseif (is_string($response) && !class_exists($response)) {
+            throw new Zend_Amf_Server_Exception('Invalid response class');
         } elseif (!$response instanceof Zend_Amf_Response) {
             throw new Zend_Amf_Server_Exception('Invalid response object');
         }

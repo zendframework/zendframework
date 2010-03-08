@@ -20,10 +20,8 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Amf_ResponseTest::main');
-}
-
+require_once 'Contact.php';
+require_once 'ContactVO.php';
 
 /**
  * Test case for Zend_Amf_Response
@@ -1050,8 +1048,3 @@ class ReferenceTest {
 class TestObject {
     public $recursive;
 }
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Amf_ResponseTest::main') {
-    Zend_Amf_ResponseTest::main();
-}
-

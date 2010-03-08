@@ -20,12 +20,6 @@
  * @version    $Id$
  */
 
-// Call Zend_Controller_Action_Helper_MultiPageFormTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Amf_Adobe_IntrospectorTest::main");
-}
-
-
 /**
  * @see Zend_Amf_Adobe_Introspector
  */
@@ -209,10 +203,4 @@ class com_zend_framework_IntrospectorTestCustomType
 class com_zend_framework_IntrospectorTestExplicitType
 {
     public $_explicitType = 'explicit';
-}
-
-
-// Call Zend_Amf_Adobe_IntrospectorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Amf_Adobe_IntrospectorTest::main") {
-    Zend_Amf_Adobe_IntrospectorTest::main();
 }

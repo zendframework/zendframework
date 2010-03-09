@@ -21,18 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-/**
- * Zend_Currency
- */
-
-/**
- * PHPUnit test case
- */
-
-/**
  * @category   Zend
  * @package    Zend_Currency
  * @subpackage UnitTests
@@ -766,6 +754,7 @@ class Zend_CurrencyTest extends PHPUnit_Framework_TestCase
         $currency  = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
         $currency2 = new Zend_Currency(array('currency' => 'EUR', 'locale' => 'de_AT', 'value' => 100));
 
+        require_once 'Currency/ExchangeTest.php';
 
         $this->assertEquals(null, $currency->getService());
         $currency->setService(new ExchangeTest());

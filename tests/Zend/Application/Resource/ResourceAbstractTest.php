@@ -20,17 +20,8 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_ResourceAbstractTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * Zend_Loader_Autoloader
- */
+require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';
+require_once dirname(__FILE__) . '/../_files/resources/Foo.php';
 
 /**
  * @category   Zend
@@ -182,8 +173,4 @@ class Zend_Application_Resource_ResourceAbstractTest extends PHPUnit_Framework_T
         $stored   = $resource->getOptions();
         $this->assertSame($options, $stored);
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_ResourceAbstractTest::main') {
-    Zend_Application_Resource_ResourceAbstractTest::main();
 }

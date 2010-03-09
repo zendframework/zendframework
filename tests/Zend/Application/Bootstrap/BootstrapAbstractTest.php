@@ -20,37 +20,8 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Bootstrap_BootstrapAbstractTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * Zend_Loader_Autoloader
- */
-
-/**
- * Zend_Application_Resource_ResourceAbstract
- */
-
-/**
- * Zend_Application_Bootstrap_Bootstrapper
- */
-
-/**
- * Zend_Application_Bootstrap_ResourceBootstrapper
- */
-
-/**
- * Zend_Application_Bootstrap_BootstrapAbstract
- */
-
-/**
- * Zend_Application_Bootstrap_Bootstrap
- */
+require_once dirname(__FILE__) . '/../_files/ZfAppBootstrap.php';
+require_once dirname(__FILE__) . '/../_files/BootstrapBaseCircularDependency.php';
 
 /**
  * @category   Zend
@@ -736,8 +707,4 @@ class Zend_Application_Bootstrap_BootstrapAbstractTest_OptionKeys
     {
         return $this->_optionKeys;
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Bootstrap_BootstrapAbstractTest::main') {
-    Zend_Application_Bootstrap_BootstrapAbstractTest::main();
 }

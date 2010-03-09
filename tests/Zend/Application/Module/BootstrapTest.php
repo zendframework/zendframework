@@ -20,17 +20,7 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Module_BootstrapTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * Zend_Loader_Autoloader
- */
+require_once dirname(__FILE__) . '/../_files/ZfModuleBootstrap.php';
 
 /**
  * @category   Zend
@@ -225,8 +215,4 @@ class Zend_Application_Module_BootstrapTest extends PHPUnit_Framework_TestCase
             $this->assertTrue(array_key_exists('ZfModuleBootstrap_Resource_', $paths));
         }
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Module_BootstrapTest::main') {
-    Zend_Application_Module_BootstrapTest::main();
 }

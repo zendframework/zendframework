@@ -20,18 +20,6 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Resource_NavigationTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * Zend_Loader_Autoloader
- */
-
 /**
  * @category   Zend
  * @package    Zend_Application
@@ -143,6 +131,7 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
      */
     public function testViewMethodIsUsedWhenAvailableInsteadOfResourcePlugin()
     {
+        require_once '_files/ZfAppBootstrapCustomView.php';
 
         $bootstrap = new ZfAppBootstrapCustomView($this->application);
         $bootstrap->registerPluginResource('view');
@@ -182,8 +171,4 @@ class Zend_Application_Resource_NavigationTest extends PHPUnit_Framework_TestCas
         $this->assertEquals(array(true,true,true,false),$results);
         $this->bootstrap->unregisterPluginResource('view');
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Resource_LocaleTest::main') {
-    Zend_Application_Resource_LocaleTest::main();
 }

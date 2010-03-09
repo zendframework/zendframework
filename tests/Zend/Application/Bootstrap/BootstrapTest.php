@@ -20,18 +20,6 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Application_Bootstrap_BootstrapTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * Zend_Loader_Autoloader
- */
-
 /**
  * @category   Zend
  * @package    Zend_Application
@@ -188,8 +176,4 @@ class Zend_Application_Bootstrap_BootstrapTest extends PHPUnit_Framework_TestCas
         $result = $this->bootstrap->run();
         $this->assertTrue($result instanceof Zend_Controller_Response_Abstract);
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Application_Bootstrap_BootstrapTest::main') {
-    Zend_Application_Bootstrap_BootstrapTest::main();
 }

@@ -20,12 +20,7 @@
  * @version    $Id $
  */
 
-/**
- * @see TestHelper
- */
-
-/** requires */
-
+require_once '_files/TestSampleSingleClass.php';
 
 /**
  * @category   Zend

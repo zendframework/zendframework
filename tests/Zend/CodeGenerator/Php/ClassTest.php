@@ -20,13 +20,7 @@
  * @version    $Id $
  */
 
-/**
- * @see TestHelper
- */
-
-/**
- * @see Zend_CodeGenerator_Php_Class
- */
+require_once dirname(__FILE__) . '/_files/ClassAndInterfaces.php';
 
 /**
  * @category   Zend
@@ -238,9 +232,6 @@ EOS;
      */
     public function testClassFromReflectionThatImplementsInterfaces()
     {
-        if(!class_exists('Zend_CodeGenerator_Php_ClassWithInterface')) {
-        }
-
         $reflClass = new Zend_Reflection_Class('Zend_CodeGenerator_Php_ClassWithInterface');
 
         $codeGen = Zend_CodeGenerator_Php_Class::fromReflection($reflClass);

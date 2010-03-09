@@ -20,11 +20,7 @@
  * @version    $Id $
  */
 
-/**
- * @see TestHelper
- */
-
-
+require_once dirname(__FILE__) . '/_files/TestClassWithManyProperties.php';
 
 /**
  * @category   Zend

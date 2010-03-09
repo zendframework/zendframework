@@ -11,7 +11,7 @@ dependencies = {
             name: "../zend/main.js",
             layerDependencies: [],
             dependencies: [
-                "zend.main",
+                "zend.main"
             ]
         }
     ],

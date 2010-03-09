@@ -21,15 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Dojo_BuildLayerTest::main');
-}
-
-
-/**
  * @category   Zend
  * @package    Zend_Dojo
  * @subpackage UnitTests
@@ -39,12 +30,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Dojo_BuildLayerTest extends PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -53,6 +38,10 @@ class Zend_Dojo_BuildLayerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        $registry = Zend_Registry::getInstance();
+        if (isset($registry['Zend_Dojo_View_Helper_Dojo'])) {
+            unset($registry['Zend_Dojo_View_Helper_Dojo']);
+        }
         $this->view = new Zend_View();
         Zend_Dojo::enableView($this->view);
     }
@@ -307,6 +296,7 @@ class Zend_Dojo_BuildLayerTest extends PHPUnit_Framework_TestCase
         $build = new Zend_Dojo_BuildLayer(array(
             'view' => $this->view,
             'layerName' => 'zend.main',
+            'layerScriptPath' => '../zend/main.js',
         ));
         $profile  = $build->generateBuildProfile();
         $expected = file_get_contents(dirname(__FILE__) . '/_files/BuildProfile.js');
@@ -314,7 +304,7 @@ class Zend_Dojo_BuildLayerTest extends PHPUnit_Framework_TestCase
         $decodedProfile  = $this->decodeProfileJson($profile);
         $decodedExpected = $this->decodeProfileJson($expected);
 
-        $this->assertEquals($decodedExpected, $decodedProfile, 'Expected: ' . $expected . "\nReceived: " . $profile . "\n");
+        $this->assertEquals($decodedExpected, $decodedProfile, "Expected:\n" . var_export($decodedExpected, 1) . "\nActual:\n" . var_export($decodedProfile, 1));
     }
 
     public function testGeneratedDojoBuildProfileWithLayerDependencies()
@@ -324,6 +314,7 @@ class Zend_Dojo_BuildLayerTest extends PHPUnit_Framework_TestCase
         $build = new Zend_Dojo_BuildLayer(array(
             'view' => $this->view,
             'layerName' => 'zend.main',
+            'layerScriptPath' => '../zend/main.js',
         ));
         $profile  = $build->generateBuildProfile();
         $expected = file_get_contents(dirname(__FILE__) . '/_files/BuildProfileWithDependencies.js');
@@ -331,7 +322,7 @@ class Zend_Dojo_BuildLayerTest extends PHPUnit_Framework_TestCase
         $decodedProfile  = $this->decodeProfileJson($profile);
         $decodedExpected = $this->decodeProfileJson($expected);
 
-        $this->assertEquals($decodedExpected, $decodedProfile, 'Expected: ' . $expected . "\nReceived: " . $profile . "\n");
+        $this->assertEquals($decodedExpected, $decodedProfile, "Expected:\n" . var_export($decodedExpected, 1) . "\nActual:\n" . var_export($decodedProfile, 1));
     }
 
     protected function stripWhitespace($string)
@@ -358,10 +349,9 @@ class Zend_Dojo_BuildLayerTest extends PHPUnit_Framework_TestCase
     protected function decodeProfileJson($profile)
     {
         $profile = preg_replace('/^dependencies = (.*?);$/s', '$1', $profile);
-        return Zend_Json::decode($profile);
+        $profile = preg_replace('/(\b)([^"\':,]+):/', '$1"$2":', $profile);
+        $data    = Zend_Json::decode($profile);
+        ksort($data);
+        return $data;
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Dojo_BuildLayerTest::main') {
-    Zend_Dojo_BuildLayerTest::main();
 }

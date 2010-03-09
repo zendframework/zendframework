@@ -11,13 +11,13 @@ dependencies = {
             name: "../zend/main.js",
             layerDependencies: [],
             dependencies: [
-                "zend.main",
+                "zend.main"
             ]
         }
     ],
     prefixes: [
+        [ "zend", "../zend" ],
         [ "dijit", "../dijit" ],
-        [ "dojox", "../dojox" ],
-        [ "zend", "../zend" ]
+        [ "dojox", "../dojox" ]
     ]
 };

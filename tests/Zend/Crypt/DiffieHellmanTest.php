@@ -32,6 +32,13 @@
 class Zend_Crypt_DiffieHellmanTest extends PHPUnit_Framework_TestCase
 {
 
+    public function setUp()
+    {
+        if (!extension_loaded('bcmath')) {
+            $this->markTestSkipped('Zend_Crypt_DiffieHellmanTest skipped due to missing ext/bcmath');
+        }
+    }
+
     public function testDiffieWithSpec()
     {
         $aliceOptions = array(

@@ -124,7 +124,7 @@ class Zend_Form_SubFormTest extends PHPUnit_Framework_TestCase
         $form->addSubForm($subForm, 'foobar')
              ->setView(new Zend_View);
         $html = $form->render();
-        $this->assertContains('<dt>&nbsp;</dt>', $html);
+        $this->assertRegexp('#<dt[^>]*>&nbsp;</dt>#s', $html);
     }
 }
 

@@ -3217,6 +3217,7 @@ class Zend_Form_FormTest extends PHPUnit_Framework_TestCase
             'description' => 'sample description',
         ));
 
+        require_once dirname(__FILE__) . '/_files/decorators/TableRow.php';
         $decorator = new My_Decorator_TableRow();
         $this->form->setElementDecorators(array(
             'ViewHelper',

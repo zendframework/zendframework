@@ -21,18 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Ldap
- */
-
-/**
- * @see Zend_Auth_Adapter_Ldap
- */
-
-/**
  * @category   Zend
  * @package    Zend_Auth
  * @subpackage UnitTests
@@ -56,6 +44,9 @@ class Zend_Auth_Adapter_Ldap_OnlineTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_AUTH_ADAPTER_LDAP_ONLINE_ENABLED')) {
+            $this->markTestSkipped('LDAP online tests are not enabled');
+        }
         $this->_options = array(
             'host' => TESTS_ZEND_LDAP_HOST,
             'username' => TESTS_ZEND_LDAP_USERNAME,

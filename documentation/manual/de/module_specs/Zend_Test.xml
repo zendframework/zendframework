@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 17175 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 17175 -->
 <sect1 id="zend.test.introduction">
     <title>Einführung</title>
 
     <para>
-        <classname>Zend_Test</classname> bietet Tools um das Unit der eigenen Zend Framework
-        Anwendung durchzuführen. Aktuell bieten wir Funktionalitäten an um das Testen der eigenen
-        Zend Framework <acronym>MVC</acronym> Anwendung zu erlauben.
+        <classname>Zend_Test</classname> stellt Mittel zur Verfügung, um Unit Tests der eigenen Zend Framework
+        Anwendung zu ermöglichen. Aktuell bieten wir Unterstützung für das Testen von
+        Zend Framework <acronym>MVC</acronym>-Anwendungen.
     </para>
 </sect1>
 <!--

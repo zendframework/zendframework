@@ -41,6 +41,9 @@ class Zend_Gdata_GappsOnlineTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_GDATA_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend_Gdata online tests are not enabled');
+        }
         $this->id = uniqid('ZF-');
         $username = constant('TESTS_ZEND_GDATA_GAPPS_EMAIL');
         $pass = constant('TESTS_ZEND_GDATA_GAPPS_PASSWORD');

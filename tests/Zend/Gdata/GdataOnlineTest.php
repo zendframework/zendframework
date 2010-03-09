@@ -36,6 +36,9 @@ class Zend_Gdata_GdataOnlineTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_GDATA_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend_Gdata online tests are not enabled');
+        }
         $user = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL');
         $pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
         $this->blog = constant('TESTS_ZEND_GDATA_BLOG_ID');

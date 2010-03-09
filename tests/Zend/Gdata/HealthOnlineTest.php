@@ -35,6 +35,9 @@ class Zend_Gdata_HealthOnlineTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_GDATA_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend_Gdata online tests are not enabled');
+        }
         $this->user = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_EMAIL');
         $this->pass = constant('TESTS_ZEND_GDATA_CLIENTLOGIN_PASSWORD');
         $serviceName = Zend_Gdata_Health::HEALTH_SERVICE_NAME;

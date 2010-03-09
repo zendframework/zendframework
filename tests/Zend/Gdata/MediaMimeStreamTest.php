@@ -22,12 +22,16 @@
 
 
 /**
+ * Disabled; was not enabled in ZF1 test suite, and tests indicate different 
+ * functionality than actually present in class
+ *
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Gdata
+ * @group      disable
  */
 class Zend_Gdata_MediaMimeStreamTest extends PHPUnit_Framework_TestCase
 {
@@ -63,6 +67,11 @@ class Zend_Gdata_MediaMimeStreamTest extends PHPUnit_Framework_TestCase
             $this->mediaMimeStream->getTotalSize());
     }
 
+    /**
+     * hasData() not currently implemented
+     *
+     * @group disable
+     */
     public function testHasData()
     {
         $this->assertTrue($this->mediaMimeStream->hasData());
@@ -134,6 +143,10 @@ class Zend_Gdata_MediaMimeStreamTest extends PHPUnit_Framework_TestCase
 
     /**
      * Ensure that nothing breaks if we read a message 1 byte at time.
+     *
+     * Disabled, as hasData() is not implemented
+     *
+     * @group disable
      */
     public function testReadWithoutCrossingSections()
     {
@@ -153,6 +166,10 @@ class Zend_Gdata_MediaMimeStreamTest extends PHPUnit_Framework_TestCase
      * 211, 22, 39 for a total size of 272. This test reads 250 bytes at a time
      * to make sure that we cross sections 1 and 2 and then read part of
      * section 3.
+     *
+     * Disabled, as hasData() is not implemented
+     *
+     * @group disable
      */
     public function testReadCrossing2Sections()
     {
@@ -171,6 +188,10 @@ class Zend_Gdata_MediaMimeStreamTest extends PHPUnit_Framework_TestCase
      * Note: The test message has the following part sizes in length:
      * 211, 22, 39 for a total size of 272. This test reads 230 bytes at a time
      * to make sure that we cross section 1 and then read sections 2 and 3.
+     *
+     * Disabled, as hasData() is not implemented
+     *
+     * @group disable
      */
     public function testReadCrossing1Section()
     {

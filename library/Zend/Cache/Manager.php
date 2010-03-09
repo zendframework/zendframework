@@ -240,7 +240,7 @@ class Zend_Cache_Manager
         }
         if (!isset($this->_optionTemplates[$name])) {
             throw new Zend_Cache_Exception('A cache configuration template'
-                . 'does not exist with the name "' . $name . '"');
+                . ' does not exist with the name "' . $name . '"');
         }
         $this->_optionTemplates[$name]
             = $this->_mergeOptions($this->_optionTemplates[$name], $options);

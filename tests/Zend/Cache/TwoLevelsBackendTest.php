@@ -21,18 +21,6 @@
  */
 
 /**
- * Zend_Cache
- */
-
-/**
- * Common tests for backends
- */
-
-/**
- * PHPUnit test case
- */
-
-/**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
@@ -40,7 +28,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_CommonExtendedBackendTest {
+class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_TestCommonExtendedBackend 
+{
 
     protected $_instance;
     private $_cache_dir;
@@ -52,6 +41,9 @@ class Zend_Cache_TwoLevelsBackendTest extends Zend_Cache_CommonExtendedBackendTe
 
     public function setUp($notag = false)
     {
+        if (!constant('TESTS_ZEND_CACHE_APC_ENABLED')) {
+            $this->markTestSkipped('Zend_Cache APC tests not enabled');
+        }
         @mkdir($this->getTmpDir());
         $this->_cache_dir = $this->getTmpDir() . DIRECTORY_SEPARATOR;
         $slowBackend = 'File';

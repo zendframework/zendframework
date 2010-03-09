@@ -21,22 +21,6 @@
  */
 
 /**
- * Zend_Cache
- */
-
-/**
- * Zend_Log
- */
-
-/**
- * Common tests for backends
- */
-
-/**
- * PHPUnit test case
- */
-
-/**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
@@ -44,7 +28,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_FileBackendTest extends Zend_Cache_CommonExtendedBackendTest {
+class Zend_Cache_FileBackendTest extends Zend_Cache_TestCommonExtendedBackend 
+{
 
     protected $_instance;
     protected $_instance2;

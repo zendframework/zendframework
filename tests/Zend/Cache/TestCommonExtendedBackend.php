@@ -24,14 +24,6 @@
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
 /**
- * PHPUnit test case
- */
-
-/**
- * @see Zend_Cache_CommonBackendTest
- */
-
-/**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
@@ -39,7 +31,8 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_CommonExtendedBackendTest extends Zend_Cache_CommonBackendTest {
+class Zend_Cache_TestCommonExtendedBackend extends Zend_Cache_TestCommonBackend 
+{
 
     private $_capabilities;
 

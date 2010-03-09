@@ -5,26 +5,11 @@
  */
 
 /**
- * Zend_Cache
- */
-
-/**
- * Zend_Log
- */
-
-/**
- * Common tests for backends
- */
-
-/**
- * PHPUnit test case
- */
-
-/**
  * @package    Zend_Cache
  * @subpackage UnitTests
  */
-class Zend_Cache_StaticBackendTest extends Zend_Cache_CommonBackendTest {
+class Zend_Cache_StaticBackendTest extends Zend_Cache_TestCommonBackend 
+{
 
     protected $_instance;
     protected $_instance2;

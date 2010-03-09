@@ -21,18 +21,6 @@
  */
 
 /**
- * Zend_Cache
- */
-
-/**
- * Common tests for backends
- */
-
-/**
- * PHPUnit test case
- */
-
-/**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
@@ -40,7 +28,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_ApcBackendTest extends Zend_Cache_CommonExtendedBackendTest {
+class Zend_Cache_ApcBackendTest extends Zend_Cache_TestCommonExtendedBackend 
+{
 
     protected $_instance;
 
@@ -51,6 +40,9 @@ class Zend_Cache_ApcBackendTest extends Zend_Cache_CommonExtendedBackendTest {
 
     public function setUp($notag = true)
     {
+        if (!constant('TESTS_ZEND_CACHE_APC_ENABLED')) {
+            $this->markTestSkipped('Zend_Cache APC tests not enabled');
+        }
         $this->_instance = new Zend_Cache_Backend_Apc(array());
         parent::setUp($notag);
     }

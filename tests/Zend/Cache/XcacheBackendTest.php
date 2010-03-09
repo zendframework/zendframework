@@ -21,18 +21,6 @@
  */
 
 /**
- * Zend_Cache
- */
-
-/**
- * Common tests for backends
- */
-
-/**
- * PHPUnit test case
- */
-
-/**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
@@ -40,7 +28,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_XcacheBackendTest extends Zend_Cache_CommonBackendTest {
+class Zend_Cache_XcacheBackendTest extends Zend_Cache_TestCommonBackend 
+{
 
     protected $_instance;
 
@@ -51,6 +40,9 @@ class Zend_Cache_XcacheBackendTest extends Zend_Cache_CommonBackendTest {
 
     public function setUp($notag = true)
     {
+        if (!constant('TESTS_ZEND_CACHE_XCACHE_ENABLED')) {
+            $this->markTestSkipped('Zend_Cache XCache tests not enabled');
+        }
         $this->_instance = new Zend_Cache_Backend_Xcache(array(
             'user' => TESTS_ZEND_CACHE_XCACHE_USER,
             'password' => TESTS_ZEND_CACHE_XCACHE_PASSWORD

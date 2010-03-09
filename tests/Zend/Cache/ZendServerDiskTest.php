@@ -21,18 +21,6 @@
  */
 
 /**
- * Zend_Cache
- */
-
-/**
- * Common tests for backends
- */
-
-/**
- * PHPUnit test case
- */
-
-/**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
@@ -40,7 +28,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_ZendServerDiskTest extends Zend_Cache_CommonBackendTest {
+class Zend_Cache_ZendServerDiskTest extends Zend_Cache_TestCommonBackend 
+{
 
     protected $_instance;
 
@@ -51,6 +40,9 @@ class Zend_Cache_ZendServerDiskTest extends Zend_Cache_CommonBackendTest {
 
     public function setUp($notag = true)
     {
+        if (!function_exists('zend_disk_cache_store')) {
+            $this->markTestSkipped('Zend_Cache Zend Server disk backend tests not enabled');
+        }
         $this->_instance = new Zend_Cache_Backend_ZendServer_Disk();
         parent::setUp(true);
     }

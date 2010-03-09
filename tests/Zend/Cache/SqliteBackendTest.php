@@ -21,18 +21,6 @@
  */
 
 /**
- * Zend_Cache
- */
-
-/**
- * Common tests for backends
- */
-
-/**
- * PHPUnit test case
- */
-
-/**
  * @category   Zend
  * @package    Zend_Cache
  * @subpackage UnitTests
@@ -40,7 +28,8 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Cache
  */
-class Zend_Cache_sqliteBackendTest extends Zend_Cache_CommonExtendedBackendTest {
+class Zend_Cache_SqliteBackendTest extends Zend_Cache_TestCommonExtendedBackend 
+{
 
     protected $_instance;
     private $_cache_dir;

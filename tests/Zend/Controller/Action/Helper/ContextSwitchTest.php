@@ -20,14 +20,6 @@
  * @version    $Id$
  */
 
-// Call Zend_Controller_Action_Helper_ContextSwitchTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_Helper_ContextSwitchTest::main");
-}
-
-
-
-
 /**
  * Test class for Zend_Controller_Action_Helper_ContextSwitch.
  *
@@ -987,9 +979,4 @@ class Zend_Controller_Action_Helper_ContextSwitchText_CustomView implements Zend
 
     public function render($name)
     {}
-}
-
-// Call Zend_Controller_Action_Helper_ContextSwitchTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_ContextSwitchTest::main") {
-    Zend_Controller_Action_Helper_ContextSwitchTest::main();
 }

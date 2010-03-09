@@ -20,14 +20,6 @@
  * @version    $Id$
  */
 
-// Call Zend_Controller_Action_Helper_AjaxContextTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Controller_Action_Helper_AjaxContextTest::main");
-}
-
-
-
-
 
 /**
  * Test class for Zend_Controller_Action_Helper_AjaxContext.
@@ -70,6 +62,7 @@ class Zend_Controller_Action_Helper_AjaxContextTest extends PHPUnit_Framework_Te
 
         Zend_Controller_Action_Helper_AjaxContextTest_LayoutOverride::resetMvcInstance();
         Zend_Controller_Action_HelperBroker::resetHelpers();
+        Zend_Controller_Action_HelperBroker::addPrefix('Zend_Controller_Action_Helper');
 
         $this->front = Zend_Controller_Front::getInstance();
         $this->front->resetInstance();
@@ -206,9 +199,4 @@ class Zend_Controller_Action_Helper_AjaxContextTest_LayoutOverride extends Zend_
     {
         self::$_mvcInstance = null;
     }
-}
-
-// Call Zend_Controller_Action_Helper_AjaxContextTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Controller_Action_Helper_AjaxContextTest::main") {
-    Zend_Controller_Action_Helper_AjaxContextTest::main();
 }

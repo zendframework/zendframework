@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 20763 -->
-<!-- Reviewed: no -->
+<!-- Reviewed: 20763 -->
 <sect1 id="zend.acl.introduction">
     <title>Einführung</title>
 
@@ -8,7 +8,7 @@
         <classname>Zend_Acl</classname> stellt eine Implementation von leichtgewichtigen und
         flexiblen Zugriffskontrolllisten (englisch "access control list",
         <acronym>ACL</acronym>) für die Rechteverwaltung bereit. Im Allgemeinen kann eine Anwendung
-        derartige <acronym>ACL</acronym>'s verwenden, um den Zugriff auf bestimmte, geschützte
+        derartige <acronym>ACL</acronym>s verwenden, um den Zugriff auf bestimmte, geschützte
         Objekte durch andere anfordernde Objekte zu kontrollieren.
     </para>
 
@@ -26,16 +26,16 @@
 
         <listitem>
             <para>
-                ist eine <emphasis>Rolle</emphasis> ein Objekt, dass den Zugriff
+                ist eine <emphasis>Rolle</emphasis> ein Objekt, das den Zugriff
                 auf eine Ressource anfordern kann.
             </para>
         </listitem>
     </itemizedlist>
 
     <para>
-        Einfach ausgedrückt, <emphasis>fordern Rollen den Zugriff auf Ressourcen
-        an</emphasis>. Wenn z.B. ein Parkplatzhalter den Zugriff auf ein Auto anfordert, ist der
-        Parkplatzhalter die anfordernde Rolle und das Auto die Ressource, weil der Zugriff auf das
+        Einfach ausgedrückt <emphasis>fordern Rollen den Zugriff auf Ressourcen
+        an</emphasis>. Wenn z.B. ein Parkplatzwächter den Zugriff auf ein Auto anfordert, ist der
+        Parkplatzwächter die anfordernde Rolle und das Auto die Ressource, weil der Zugriff auf das
         Auto nicht jedem erlaubt ist.
     </para>
 
@@ -56,7 +56,7 @@
             <methodname>getResourceId()</methodname>, besteht, damit <classname>Zend_Acl</classname>
             das Objekt als Ressource erkennen kann. Zusätzlich ist
             <classname>Zend_Acl_Resource</classname> in <classname>Zend_Acl</classname> als einfache
-            Ressourcen Implementation enthalten, damit Entwickler sie wenn nötig erweitern können.
+            Ressourcen-Implementation enthalten, damit Entwickler sie wenn nötig erweitern können.
         </para>
 
         <para>
@@ -71,8 +71,8 @@
             zuzuordnen. Einige Gebäude können dennoch Ausnahmen zu solch einer Regel erfordern, und
             dies kann in <classname>Zend_Acl</classname> einfach durch die Zuordnung solcher
             Ausnahmeregeln zu jedem der Gebäude erreicht werden, die eine Ausnahme erfordern. Eine
-            Ressource kann nur von einer einziger übergeordneten Ressource erben, obwohl diese
-            übergeordnete Ressource seine eigenen übergeordneten Ressourcen haben kann, und so
+            Ressource kann nur von einer einzigen übergeordneten Ressource erben, obwohl diese
+            übergeordnete Ressource ihre eigenen übergeordneten Ressourcen haben kann, und so
             weiter.
         </para>
 
@@ -88,7 +88,7 @@
         <title>Rollen</title>
 
         <para>
-            Wie bei den Ressourcen, ist auch das Erstellen einer Rolle sehr einfach. Alle Rollen
+            Wie bei den Ressourcen ist auch das Erstellen einer Rolle sehr einfach. Alle Rollen
             müssen <classname>Zend_Acl_Role_Interface</classname> implementieren. Dieses Interface
             besteht aus einer einzelnen Methode, <methodname>getRoleId()</methodname>, zusätzlich
             wird <classname>Zend_Acl_Role</classname> von <classname>Zend_Acl</classname> als
@@ -116,7 +116,7 @@
             <title>Mehrfache Vererbung zwischen Rollen</title>
 
             <para>
-                Der folgende Code definiert drei Basis Rollen - "guest", "member" und "admin" - von
+                Der folgende Code definiert drei Basisrollen - "guest", "member" und "admin" - von
                 denen andere Rollen erben können. Dann wird eine Rolle "someUser" eingerichtet, die
                 von den drei anderen Rollen erbt. Die Reihenfolge, in der diese Rollen im
                 <varname>$parents</varname> Array erscheinen, ist wichtig. Wenn notwendig, sucht
@@ -146,15 +146,15 @@ echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
             <para>
                 Da keine Regel speziell für die Rolle "someUser" und "someResource" definiert
                 wurde, muss <classname>Zend_Acl</classname> nach Regeln suchen, die für Rollen
-                definiert wurden, von denen "someUser" erbt. Zuerst wird die "admin" Rolle besucht,
-                aber dort ist keine Zugriffsregel definiert. Als nächste wird die "member" Rolle
+                definiert wurden, von denen "someUser" erbt. Zuerst wird die "admin"-Rolle besucht,
+                aber dort ist keine Zugriffsregel definiert. Als nächste wird die "member"-Rolle
                 besucht und <classname>Zend_Acl</classname> findet hier eine Regel, die angibt,
                 dass "member" der Zugriff auf "someResource" erlaubt ist.
             </para>
 
             <para>
                 Wenn <classname>Zend_Acl</classname> fortfahren würde, die für weitere
-                übergeordnete Rollen definierten Regeln zu untersuchen, würde heraus gefunden
+                übergeordnete Rollen definierten Regeln zu untersuchen, würde herausgefunden
                 werden, dass "guest" der Zugriff auf "someResource" verboten ist.
                 Diese Tatsache führt eine Mehrdeutigkeit ein, weil nun "someUser" der Zugriff auf
                 "someResource" sowohl verboten als auch erlaubt ist, aufgrund der vererbten Regeln
@@ -165,7 +165,7 @@ echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
                 <classname>Zend_Acl</classname> löst diese Mehrdeutigkeit dadurch auf, dass eine
                 Abfrage beendet wird, wenn die erste Regel gefunden wird, die direkt auf die
                 Abfrage passt. In diesem Fall würde der Beispiel Code "allowed"
-                ausgeben, weil die "member" Rolle vor der "guest" Rolle untersucht wird.
+                ausgeben, weil die "member"-Rolle vor der "guest"-Rolle untersucht wird.
             </para>
         </example>
 
@@ -186,7 +186,7 @@ echo $acl->isAllowed('guest', 'someResource') ? 'allowed' : 'denied';
             körperlichen oder virtuellen Objekten repräsentieren. Zu Demonstrationszwecken werden
             wir eine grundlegende <acronym>ACL</acronym> für ein Redaktionssystem
             (<acronym>CMS</acronym>) erstellen, die mehrere Schichten von Gruppen über eine
-            Vielzahl von Bereichen verwaltet soll. Um ein <acronym>ACL</acronym> Objekt zu
+            Vielzahl von Bereichen verwaltet soll. Um ein <acronym>ACL</acronym>-Objekt zu
             erstellen, instanzieren wir die <acronym>ACL</acronym> ohne Parameter:
         </para>
 
@@ -196,7 +196,7 @@ $acl = new Zend_Acl();
 
         <note>
             <para>
-                Solange der Entwickler keine "allow" Regel spezifiziert, verweigert
+                Solange der Entwickler keine "allow"-Regel spezifiziert, verweigert
                 <classname>Zend_Acl</classname> den Zugriff auf jegliche Rechte für jede Ressource
                 durch jede Rolle.
             </para>
@@ -208,14 +208,14 @@ $acl = new Zend_Acl();
 
         <para>
             <acronym>CMS</acronym> brauchen fast immer eine Hierarchie von Genehmigungen, um die
-            Autorenfähigkeiten seiner Benutzer festzulegen. Es kann eine 'Guest' Gruppe geben, um
-            beschränkten Zugriff zur Demonstration zu ermöglichen, eine 'Staff' Gruppe für die
+            Autorenfähigkeiten seiner Benutzer festzulegen. Es kann eine 'Guest'-Gruppe geben, um
+            beschränkten Zugriff zur Demonstration zu ermöglichen, eine 'Staff'-Gruppe für die
             Mehrheit der <acronym>CMS</acronym> Nutzer, welche die meisten der alltäglichen
-            Aufgaben erledigen, eine 'Editor' Gruppe für diejenigen, die für das Veröffentlichen,
+            Aufgaben erledigen, eine 'Editor'-Gruppe für diejenigen, die für das Veröffentlichen,
             Überprüfen, Archivieren und Löschen von Inhalten zuständig sind, sowie eine
-            'Administrator' Gruppe, dessen Aufgabenbereiche alle der anderen Gruppen sowie die
-            Pflege sensibler Informationen, der Benutzerverwaltung, der Back-End
-            Konfigurationsdaten und die Datensicherung sowie der Export beinhalten. Diese
+            'Administrator'-Gruppe, dessen Aufgaben alle der anderen Gruppen sowie die
+            Pflege sensibler Informationen, die Benutzerverwaltung, die
+            Backend-Konfigurationsdaten, die Datensicherung und den Export beinhalten. Diese
             Genehmigungen können durch eine Rollenregistrierung repräsentiert werden, die es jeder
             Gruppe erlaubt, die Rechte von 'übergeordneten' Gruppen zu erben sowie eindeutige
             Rechte nur für deren Gruppe bereit zu stellen. Diese Genehmigungen können wie folgt
@@ -309,7 +309,7 @@ $acl->addRole(new Zend_Acl_Role('administrator'));
 
         <note>
             <para>
-                Generell, wendet <classname>Zend_Acl</classname> eine angegebene Regel dann und nur
+                Generell wendet <classname>Zend_Acl</classname> eine angegebene Regel dann und nur
                 dann an, wenn eine speziellere Regel nicht passt.
             </para>
         </note>
@@ -348,7 +348,7 @@ $acl->allow('administrator');
 ]]></programlisting>
 
         <para>
-            Die <constant>NULL</constant> Werte im obigen <methodname>allow()</methodname> Aufrufen
+            Die <constant>NULL</constant>-Werte in obigen <methodname>allow()</methodname>-Aufrufen
             werden verwendet, um anzugeben, dass diese Regeln für alle Ressourcen gelten.
         </para>
     </sect2>
@@ -360,7 +360,7 @@ $acl->allow('administrator');
             Wir haben nun eine flexible <acronym>ACL</acronym>, die in der gesamten Anwendung
             verwendet werden kann, um zu ermitteln, ob Anfragende die Genehmigung haben, Funktionen
             auszuführen. Abfragen durchzuführen ist recht einfach mit Hilfe der
-            <methodname>isAllowed()</methodname> Methode:
+            <methodname>isAllowed()</methodname>-Methode:
         </para>
 
         <programlisting language="php"><![CDATA[

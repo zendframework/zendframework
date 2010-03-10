@@ -20,19 +20,8 @@
  * @version    $Id$
  */
 
-
-/**
- * @see Zend_Paginator_Adapter_DbSelect
- */
-
-/**
- * @see Zend_Db_Adapter_Oracle
- */
-
-/**
- * @see Zend_Paginator_Adapter_DbSelectTest
- */
-
+require_once 'Zend/Paginator/Adapter/DbSelectTest.php';
+require_once dirname(__FILE__) . '/../../_files/TestTable.php';
 
 /**
  * @category   Zend
@@ -83,6 +72,10 @@ class Zend_Paginator_Adapter_DbSelect_OracleTest extends Zend_Paginator_Adapter_
      */
     protected function tearDown ()
     {
+        if (! TESTS_ZEND_DB_ADAPTER_ORACLE_ENABLED) {
+            return;
+        }
+
         $this->_dropTable();
         $this->_db = null;
         $this->_adapter = null;

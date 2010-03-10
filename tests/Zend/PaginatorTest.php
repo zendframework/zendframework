@@ -20,62 +20,8 @@
  * @version    $Id$
  */
 
-// Call Zend_PaginatorTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_PaginatorTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Paginator
- */
-
-/**
- * @see Zend_Paginator_AdapterAggregate
- */
-
-/**
- * @see PHPUnit_Framework_TestCase
- */
-
-/**
- * @see Zend_Config_Xml
- */
-
-/**
- * @see Zend_Db_Adapter_Pdo_Sqlite
- */
-
-/**
- * @see Zend_View
- */
-
-/**
- * @see Zend_Controller_Action_HelperBroker
- */
-
-/**
- * @see Zend_View_Helper_PaginationControl
- */
-
-/**
- * @see Zf4207
- */
-
-/**
- * @see TestTable
- */
-
-/**
- * @see Zend_Cache
- */
-
-/**
- * @see Zend_Filter_Callback
- */
+require_once 'Zend/Paginator/_files/Zf4207.php';
+require_once 'Zend/Paginator/_files/TestTable.php';
 
 /**
  * @category   Zend
@@ -87,17 +33,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Paginator instance
      *
@@ -212,7 +147,9 @@ class Zend_PaginatorTest extends PHPUnit_Framework_TestCase
         $this->assertType('Zend_Paginator_Adapter_DbSelect', $paginator->getAdapter());
     }
 
-    // ZF-4607
+    /**
+     * @group ZF-4607
+     */
     public function testFactoryReturnsDbTableSelectAdapter()
     {
         $table = new TestTable($this->_adapter);
@@ -930,9 +867,4 @@ class Zend_Paginator_TestArrayAggregate implements Zend_Paginator_AdapterAggrega
     {
         return new Zend_Paginator_Adapter_Array(array(1, 2, 3, 4));
     }
-}
-
-// Call Zend_PaginatorTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD === 'Zend_PaginatorTest::main') {
-    Zend_PaginatorTest::main();
 }

@@ -20,18 +20,7 @@
  * @version    $Id$
  */
 
-/**
- * @see Zend_Paginator_Adapter_DbSelect
- */
-
-/**
- * @see Zend_Db_Adapter_Pdo_Sqlite
- */
-
-/**
- * @see PHPUnit_Framework_TestCase
- */
-
+require_once dirname(__FILE__) . '/../_files/TestTable.php';
 
 /**
  * @category   Zend

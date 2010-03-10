@@ -120,23 +120,23 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
     public function testZfNamespacesShouldBeRegisteredByDefault()
     {
         $namespaces = $this->autoloader->getRegisteredNamespaces();
-        $this->assertContains('Zend_', $namespaces);
-        $this->assertContains('ZendX_', $namespaces);
+        $this->assertContains('Zend', $namespaces);
+        $this->assertContains('ZendX', $namespaces);
     }
 
     public function testAutoloaderShouldAllowRegisteringArbitraryNamespaces()
     {
-        $this->autoloader->registerNamespace('Phly_');
+        $this->autoloader->registerNamespace('Phly');
         $namespaces = $this->autoloader->getRegisteredNamespaces();
-        $this->assertContains('Phly_', $namespaces);
+        $this->assertContains('Phly', $namespaces);
     }
 
     public function testAutoloaderShouldAllowRegisteringMultipleNamespacesAtOnce()
     {
-        $this->autoloader->registerNamespace(array('Phly_', 'Solar_'));
+        $this->autoloader->registerNamespace(array('Phly', 'Solar'));
         $namespaces = $this->autoloader->getRegisteredNamespaces();
-        $this->assertContains('Phly_', $namespaces);
-        $this->assertContains('Solar_', $namespaces);
+        $this->assertContains('Phly', $namespaces);
+        $this->assertContains('Solar', $namespaces);
     }
 
     /**
@@ -170,6 +170,61 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
     {
         $o = new stdClass;
         $this->autoloader->unregisterNamespace($o);
+    }
+
+    public function testZfPrefixesShouldBeRegisteredByDefault()
+    {
+        $prefixes = $this->autoloader->getRegisteredPrefixes();
+        $this->assertContains('Zend_', $prefixes);
+        $this->assertContains('ZendX_', $prefixes);
+    }
+
+    public function testAutoloaderShouldAllowRegisteringArbitraryPrefixes()
+    {
+        $this->autoloader->registerPrefix('Phly_');
+        $prefixes = $this->autoloader->getRegisteredPrefixes();
+        $this->assertContains('Phly_', $prefixes);
+    }
+
+    public function testAutoloaderShouldAllowRegisteringMultiplePrefixesAtOnce()
+    {
+        $this->autoloader->registerPrefix(array('Phly_', 'Solar_'));
+        $prefixes = $this->autoloader->getRegisteredPrefixes();
+        $this->assertContains('Phly_', $prefixes);
+        $this->assertContains('Solar_', $prefixes);
+    }
+
+    /**
+     * @expectedException Zend_Loader_Exception
+     */
+    public function testRegisteringInvalidPrefixSpecShouldRaiseException()
+    {
+        $o = new stdClass;
+        $this->autoloader->registerPrefix($o);
+    }
+
+    public function testAutoloaderShouldAllowUnregisteringPrefixes()
+    {
+        $this->autoloader->unregisterPrefix('Zend');
+        $prefixes = $this->autoloader->getRegisteredPrefixes();
+        $this->assertNotContains('Zend', $prefixes);
+    }
+
+    public function testAutoloaderShouldAllowUnregisteringMultiplePrefixesAtOnce()
+    {
+        $this->autoloader->unregisterPrefix(array('Zend', 'ZendX'));
+        $prefixes = $this->autoloader->getRegisteredPrefixes();
+        $this->assertNotContains('Zend', $prefixes);
+        $this->assertNotContains('ZendX', $prefixes);
+    }
+
+    /**
+     * @expectedException Zend_Loader_Exception
+     */
+    public function testUnregisteringInvalidPrefixSpecShouldRaiseException()
+    {
+        $o = new stdClass;
+        $this->autoloader->unregisterPrefix($o);
     }
 
     /**
@@ -315,7 +370,7 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
     public function testAutoloadShouldLoadClassWhenNamespaceIsRegisteredAndClassfileExists()
     {
         $this->addTestIncludePath();
-        $this->autoloader->registerNamespace('ZendLoaderAutoloader');
+        $this->autoloader->registerPrefix('ZendLoaderAutoloader');
         $result = Zend_Loader_Autoloader::autoload('ZendLoaderAutoloader_Foo');
         $this->assertFalse($result === false);
         $this->assertTrue(class_exists('ZendLoaderAutoloader_Foo', false));
@@ -325,7 +380,7 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
     {
         $this->addTestIncludePath();
         $this->autoloader->suppressNotFoundWarnings(false);
-        $this->autoloader->registerNamespace('ZendLoaderAutoloader');
+        $this->autoloader->registerPrefix('ZendLoaderAutoloader');
         set_error_handler(array($this, 'handleErrors'));
         $this->assertFalse(Zend_Loader_Autoloader::autoload('ZendLoaderAutoloader_Bar'));
         restore_error_handler();

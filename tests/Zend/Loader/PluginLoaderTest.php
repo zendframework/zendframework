@@ -49,7 +49,7 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
         // Possible for previous tests to remove autoloader 
         Zend_Loader_Autoloader::resetInstance();
         $al = Zend_Loader_Autoloader::getInstance();
-        $al->registerNamespace('PHPUnit_');
+        $al->registerPrefix('PHPUnit_');
 
         Zend_Loader_PluginLoader::setIncludeFileCache(null);
         $this->_includeCache = dirname(__FILE__) . '/_files/includeCache.inc.php';

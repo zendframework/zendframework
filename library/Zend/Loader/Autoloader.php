@@ -35,6 +35,11 @@ require_once 'Zend/Loader.php';
 class Zend_Loader_Autoloader
 {
     /**
+     * @var Namespace separator
+     */
+    const NS = '\\';
+
+    /**
      * @var Zend_Loader_Autoloader Singleton instance
      */
     protected static $_instance;
@@ -60,11 +65,24 @@ class Zend_Loader_Autoloader
     protected $_internalAutoloader;
 
     /**
+     * @var array Supported prefixes 'Zend_' and 'ZendX_' by default.
+     */
+    protected $_prefixes = array(
+        'Zend_'  => true,
+        'ZendX_' => true,
+    );
+
+    /**
+     * @var array prefix-specific autoloaders
+     */
+    protected $_prefixAutoloaders = array();
+
+    /**
      * @var array Supported namespaces 'Zend' and 'ZendX' by default.
      */
     protected $_namespaces = array(
-        'Zend_'  => true,
-        'ZendX_' => true,
+        'Zend'  => true,
+        'ZendX' => true,
     );
 
     /**
@@ -182,6 +200,75 @@ class Zend_Loader_Autoloader
     public function getAutoloaders()
     {
         return $this->_autoloaders;
+    }
+
+    /**
+     * Return all autoloaders for a given prefix
+     *
+     * @param  string $prefix
+     * @return array
+     */
+    public function getPrefixAutoloaders($prefix)
+    {
+        $prefix = (string) $prefix;
+        if (!array_key_exists($prefix, $this->_prefixAutoloaders)) {
+            return array();
+        }
+        return $this->_prefixAutoloaders[$prefix];
+    }
+
+    /**
+     * Register a prefix to autoload
+     *
+     * @param  string|array $prefix
+     * @return Zend_Loader_Autoloader
+     */
+    public function registerPrefix($prefix)
+    {
+        if (is_string($prefix)) {
+            $prefix = (array) $prefix;
+        } elseif (!is_array($prefix)) {
+            throw new Zend_Loader_Exception('Invalid prefix provided');
+        }
+
+        foreach ($prefix as $ns) {
+            if (!isset($this->_prefixes[$ns])) {
+                $this->_prefixes[$ns] = true;
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Unload a registered autoload prefix
+     *
+     * @param  string|array $prefix
+     * @return Zend_Loader_Autoloader
+     */
+    public function unregisterPrefix($prefix)
+    {
+        if (is_string($prefix)) {
+            $prefix = (array) $prefix;
+        } elseif (!is_array($prefix)) {
+            throw new Zend_Loader_Exception('Invalid prefix provided');
+        }
+
+        foreach ($prefix as $ns) {
+            if (isset($this->_prefixes[$ns])) {
+                unset($this->_prefixes[$ns]);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Get a list of registered autoload prefixes
+     *
+     * @return array
+     */
+    public function getRegisteredPrefixes()
+    {
+        return array_keys($this->_prefixes);
     }
 
     /**
@@ -332,19 +419,42 @@ class Zend_Loader_Autoloader
         $autoloaders = array();
 
         // Add concrete namespaced autoloaders
-        foreach (array_keys($this->_namespaceAutoloaders) as $ns) {
+        if (strstr($class, self::NS)) {
+            foreach (array_keys($this->_namespaceAutoloaders) as $ns) {
+                if ('' == $ns) {
+                    continue;
+                }
+                if (0 === strpos($class, $ns)) {
+                    $namespace   = $ns;
+                    $autoloaders = $autoloaders + $this->getNamespaceAutoloaders($ns);
+                    break;
+                }
+            }
+
+            // Add internal namespaced autoloader
+            foreach ($this->getRegisteredNamespaces() as $ns) {
+                if (0 === strpos($class, $ns)) {
+                    $namespace     = $ns;
+                    $autoloaders[] = $this->_internalAutoloader;
+                    break;
+                }
+            }
+        }
+
+        // Add concrete prefix autoloaders
+        foreach (array_keys($this->_prefixAutoloaders) as $ns) {
             if ('' == $ns) {
                 continue;
             }
             if (0 === strpos($class, $ns)) {
                 $namespace   = $ns;
-                $autoloaders = $autoloaders + $this->getNamespaceAutoloaders($ns);
+                $autoloaders = $autoloaders + $this->getPrefixAutoloaders($ns);
                 break;
             }
         }
 
-        // Add internal namespaced autoloader
-        foreach ($this->getRegisteredNamespaces() as $ns) {
+        // Add internal prefix autoloader
+        foreach ($this->getRegisteredPrefixes() as $ns) {
             if (0 === strpos($class, $ns)) {
                 $namespace     = $ns;
                 $autoloaders[] = $this->_internalAutoloader;
@@ -353,7 +463,7 @@ class Zend_Loader_Autoloader
         }
 
         // Add non-namespaced autoloaders
-        $autoloaders = $autoloaders + $this->getNamespaceAutoloaders('');
+        $autoloaders = $autoloaders + $this->getNamespaceAutoloaders('') + $this->getPrefixAutoloaders('');
 
         // Add fallback autoloader
         if (!$namespace && $this->isFallbackAutoloader()) {

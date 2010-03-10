@@ -20,36 +20,15 @@
  * @version    $Id$
  */
 
-
-/**
- * PHPUnit_Framework_TestCase
- */
-
-
-/**
- * @see Zend_Db_Adapter_Pdo_Sqlite
- */
-
-/**
- * @see Zend_Db_Table_Abstract
- */
-
-/**
- * @see Zend_Validate_Db_Abstract.php
- */
-
-/**
- * @see Zend_Validate_Db_RecordExists.php
- */
-
 /**
  * Mock No Result Adapter
  */
+require_once dirname(__FILE__) . '/_files/Db/MockNoResult.php';
 
 /**
  * Mock Result Adapter
  */
-
+require_once dirname(__FILE__) . '/_files/Db/MockHasResult.php';
 
 /**
  * @category   Zend

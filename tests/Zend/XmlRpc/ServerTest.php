@@ -67,6 +67,13 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->_server instanceof Zend_XmlRpc_Server);
     }
 
+    public function suppressNotFoundWarnings($errno, $errstr)
+    {
+        if (!strstr($errstr, 'failed')) {
+            return false;
+        }
+    }
+
     /**
      * addFunction() test
      *
@@ -497,14 +504,20 @@ class Zend_XmlRpc_ServerTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($req instanceof Zend_XmlRpc_Server_testRequest);
     }
 
+    /**
+     * @outputBuffering enabled
+     */
     public function testSetRequestThrowsExceptionOnBadClass()
     {
+        set_error_handler(array($this, 'suppressNotFoundWarnings'), E_WARNING);
         try {
             $this->_server->setRequest('Zend_XmlRpc_Server_testRequest2');
+            restore_error_handler();
             $this->fail('Invalid request class should throw exception');
         } catch (Zend_XmlRpc_Exception $e) {
             // success
         }
+        restore_error_handler();
 
         try {
             $this->_server->setRequest($this);
@@ -766,9 +779,4 @@ class Zend_XmlRpc_Server_testResponse extends Zend_XmlRpc_Response
 
 class Zend_XmlRpc_Server_testRequest extends Zend_XmlRpc_Request
 {
-}
-
-// Call Zend_XmlRpc_ServerTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_XmlRpc_ServerTest::main") {
-    Zend_XmlRpc_ServerTest::main();
 }

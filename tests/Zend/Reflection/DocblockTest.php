@@ -20,11 +20,7 @@
  * @version    $Id$
  */
 
-/**
- * @see TestHelper
- */
-
-/** requires */
+require_once dirname(__FILE__) . '/_files/TestSampleClass.php';
 
 /**
  * @category   Zend
@@ -37,18 +33,6 @@
  */
 class Zend_Reflection_DocblockTest extends PHPUnit_Framework_TestCase
 {
-
-
-    static protected $_sampleClassFileRequired = false;
-
-    public function setup()
-    {
-        if (self::$_sampleClassFileRequired === false) {
-            $fileToRequire = dirname(__FILE__) . '/_files/TestSampleClass.php';
-            self::$_sampleClassFileRequired = true;
-        }
-    }
-
     public function testDocblockShortDescription()
     {
         $classReflection = new Zend_Reflection_Class('Zend_Reflection_TestSampleClass5');
@@ -135,5 +119,4 @@ EOS;
 
         $this->assertEquals($expectedString, (string)$classDocblock);
     }
-
 }

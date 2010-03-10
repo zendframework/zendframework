@@ -10,10 +10,12 @@
 /**
  * @see Zend_Loader
  */
+require_once 'Zend/Loader.php';
 
 /**
  * @see Zend_Reflection_File
  */
+require_once 'Zend/Registry.php';
 
 /**
  * This is a sample class docblock

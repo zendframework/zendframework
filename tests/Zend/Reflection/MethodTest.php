@@ -20,13 +20,7 @@
  * @version    $Id$
  */
 
-/**
- * @see TestHelper
- */
-
-/**
- * @see Zend_Reflection_Method
- */
+require_once dirname(__FILE__) . '/_files/TestSampleClass.php';
 
 /**
  * @category   Zend
@@ -39,18 +33,7 @@
  */
 class Zend_Reflection_MethodTest extends PHPUnit_Framework_TestCase
 {
-
-    static protected $_sampleClassFileRequired = false;
-
-    public function setup()
-    {
-        if (self::$_sampleClassFileRequired === false) {
-            $fileToRequire = dirname(__FILE__) . '/_files/TestSampleClass.php';
-            self::$_sampleClassFileRequired = true;
-        }
-    }
-
-    public function testDeclaringClassReturn()
+   public function testDeclaringClassReturn()
     {
         $method = new Zend_Reflection_Method('Zend_Reflection_TestSampleClass2', 'getProp1');
         $this->assertEquals(get_class($method->getDeclaringClass()), 'Zend_Reflection_Class');

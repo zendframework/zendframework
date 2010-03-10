@@ -28,22 +28,6 @@
  * an exception.
  */
 
-/** PHPUnit Test Case */
-
-/** TestHelp.php */
-
-/** Zend_Queue */
-
-/** Zend_Queue */
-
-/** Zend_Queue_Message_Test */
-
-/** Zend_Queue_Message_Iterator2 */
-
-/**
- * @see Zend_Config
- */
-
 /**
  * @category   Zend
  * @package    Zend_Queue

@@ -24,20 +24,6 @@
  * This code specifically tests for ZF-7650
  */
 
-/** PHPUnit Test Case */
-
-/** TestHelp.php */
-
-/** Zend_Queue */
-
-/** Zend_Queue */
-
-/** Zend_Queue_Adapter_Array */
-
-/**
- * @see Zend_Db_Select
- */
-
 /**
  * @category   Zend
  * @package    Zend_Queue
@@ -48,7 +34,7 @@
  */
 class Zend_Queue_Bugs_Zf7650Test extends PHPUnit_Framework_TestCase
 {
-    public function test_ZF_7650()
+    public function testArrayAdapterShouldReturnNoMessagesWhenZeroCountRequested()
     {
         // Zend_Queue_Adapter_Array
         $queue = new Zend_Queue('Array');
@@ -59,8 +45,13 @@ class Zend_Queue_Bugs_Zf7650Test extends PHPUnit_Framework_TestCase
 
         $messages = $queue->receive(0);
         $this->assertEquals(0, count($messages));
+    }
 
-        // Zend_Queue_Adapter_Memcacheq
+    public function testMemcacheqAdapterShouldReturnNoMessagesWhenZeroCountRequested()
+    {
+        if (!constant('TESTS_ZEND_QUEUE_MEMCACHEQ_ENABLED')) {
+            $this->markTestSkipped('Zend_Queue Memcacheq adapter tests are not enabled');
+        }
         $driverOptions = array();
         if (defined('TESTS_ZEND_QUEUE_MEMCACHEQ_HOST')) {
             $driverOptions['host'] = TESTS_ZEND_QUEUE_MEMCACHEQ_HOST;
@@ -79,7 +70,13 @@ class Zend_Queue_Bugs_Zf7650Test extends PHPUnit_Framework_TestCase
         $messages = $queue->receive(0);
         $this->assertEquals(0, count($messages));
 
-        // Zend_Queue_Adapter_Db
+    }
+
+    public function testDbAdapterShouldReturnNoMessagesWhenZeroCountRequested()
+    {
+        if (!constant('TESTS_ZEND_QUEUE_DB_ENABLED')) {
+            $this->markTestSkipped('Zend_Queue DB adapter tests are not enabled');
+        }
         $driverOptions = array();
         if (defined('TESTS_ZEND_QUEUE_DB')) {
             $driverOptions = Zend_Json::decode(TESTS_ZEND_QUEUE_DB);
@@ -99,8 +96,13 @@ class Zend_Queue_Bugs_Zf7650Test extends PHPUnit_Framework_TestCase
 
         $messages = $queue->receive(0);
         $this->assertEquals(0, count($messages));
+    }
 
-        // Zend_Queue_Adapter_Activemq
+    public function testActivemqAdapterShouldReturnNoMessagesWhenZeroCountRequested()
+    {
+        if (!constant('TESTS_ZEND_QUEUE_ACTIVEMQ_ENABLED')) {
+            $this->markTestSkipped('Zend_Queue ActiveMQ adapter tests are not enabled');
+        }
         $driverOptions = array();
         if (defined('TESTS_ZEND_QUEUE_ACTIVEMQ_HOST')) {
             $driverOptions['host'] = TESTS_ZEND_QUEUE_ACTIVEMQ_HOST;

@@ -533,12 +533,16 @@ define('TESTS_ZEND_MAIL_SMTP_AUTH', false);
  *
  * Selectively define the below in order to run tests for them.
  */
+define('TESTS_ZEND_QUEUE_ACTIVEMQ_ENABLED', false);
 define('TESTS_ZEND_QUEUE_ACTIVEMQ_SCHEME', false);
 define('TESTS_ZEND_QUEUE_ACTIVEMQ_HOST', false);
 define('TESTS_ZEND_QUEUE_ACTIVEMQ_PORT', false);
+define('TESTS_ZEND_QUEUE_DB_ENABLED', false);
 define('TESTS_ZEND_QUEUE_DB', false);
+define('TESTS_ZEND_QUEUE_MEMCACHEQ_ENABLED', false);
 define('TESTS_ZEND_QUEUE_MEMCACHEQ_HOST', false);
 define('TESTS_ZEND_QUEUE_MEMCACHEQ_PORT', false);
+define('TESTS_ZEND_QUEUE_PLATFORMJQ_ENABLED', false);
 define('TESTS_ZEND_QUEUE_PLATFORMJQ_HOST', false);
 define('TESTS_ZEND_QUEUE_PLATFORMJQ_PASS', false);
 

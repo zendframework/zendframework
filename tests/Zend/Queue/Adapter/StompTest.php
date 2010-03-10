@@ -20,25 +20,8 @@
  * @version    $Id$
  */
 
-/*
- * The adapter test class provides a universal test class for all of the
- * abstract methods.
- *
- * All methods marked not supported are explictly checked for for throwing
- * an exception.
- */
-
-/** PHPUnit Test Case */
-
-/** TestHelp.php */
-
-/** Zend_Queue */
-
-/** Zend_Queue */
-
-/** Zend_Queue_Message_Test */
-
-/** Base Adapter test class */
+require_once 'MessageTestClass.php';
+require_once dirname(__FILE__) . '/AdapterTest.php';
 
 /**
  * @category   Zend
@@ -47,6 +30,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
+ * @group      disable
  */
 class Zend_Queue_Adapter_StompTest extends Zend_Queue_Adapter_AdapterTest
 {

@@ -28,12 +28,6 @@
  * an exception.
  */
 
-/** PHPUnit Test Case */
-
-/** TestHelp.php */
-
-/** Zend/Queue/Adapter/Stomp/IO.php */
-
 /**
  * @category   Zend
  * @package    Zend_Queue
@@ -41,6 +35,7 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
+ * @group      disable
  */
 class Zend_Queue_Adapter_StompIOTest extends PHPUnit_Framework_TestCase
 {

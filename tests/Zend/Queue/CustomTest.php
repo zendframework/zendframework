@@ -25,16 +25,6 @@
  * documentation code.
  */
 
-/** PHPUnit Test Case */
-
-/** TestHelp.php */
-
-/** Custom_Queue */
-
-/** Custom_Message */
-
-/** Custom_Messages */
-
 /**
  * @category   Zend
  * @package    Zend_Queue
@@ -42,31 +32,8 @@
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Queue
+ * @group      disable
  */
-class Custom_Object {
-    public $a;
-
-    public function __construct()
-    {
-        $a = rand(1,200);
-    }
-
-    public function getA()
-    {
-        return $this->a;
-    }
-
-    public function setA($a)
-    {
-        $this->a = $a;
-    }
-
-    public function __sleep()
-    {
-        return array('a'); // serialize only this variable
-    }
-}
-
 class Zend_Queue_CustomTest extends PHPUnit_Framework_TestCase
 {
     public function test_behavior()
@@ -153,3 +120,28 @@ class Zend_Queue_CustomTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($queue));
     }
 }
+
+class Custom_Object {
+    public $a;
+
+    public function __construct()
+    {
+        $a = rand(1,200);
+    }
+
+    public function getA()
+    {
+        return $this->a;
+    }
+
+    public function setA($a)
+    {
+        $this->a = $a;
+    }
+
+    public function __sleep()
+    {
+        return array('a'); // serialize only this variable
+    }
+}
+

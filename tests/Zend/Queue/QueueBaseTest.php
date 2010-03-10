@@ -28,16 +28,6 @@
  * an exception.
  */
 
-/** TestHelper.php */
-
-/** Zend_Config */
-
-/** Zend_Queue */
-
-/** Zend_Queue */
-
-/** Zend_Queue_Adapter_Array */
-
 /**
  * @category   Zend
  * @package    Zend_Queue
@@ -180,19 +170,11 @@ abstract class Zend_Queue_QueueBaseTest extends PHPUnit_Framework_TestCase
         }
 
         // ------------------------------------ send()
-        // parameter verification
-        try {
-            $this->queue->send(array());
-            $this->fail('send() $mesage must be a string');
-        } catch (Exception $e) {
-            $this->assertTrue(true);
-        }
-
         $message = 'Hello world'; // never gets boring!
         $this->assertTrue($this->queue->send($message) instanceof Zend_Queue_Message);
 
         // ------------------------------------ count()
-        $this->assertEquals($this->queue->count(), 1);
+        $this->assertEquals($this->queue->count(), 1, var_export($this->queue->getAdapter()->getData(), 1));
 
         // ------------------------------------ receive()
         // parameter verification

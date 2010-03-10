@@ -28,11 +28,6 @@
  * an exception.
  */
 
-/** PHPUnit Test Case */
-
-/** TestHelp.php */
-
-
 /**
  * @category   Zend
  * @package    Zend_Queue
@@ -43,6 +38,13 @@
  */
 class Zend_Queue_Adapter_ActivemqTest extends Zend_Queue_Adapter_AdapterTest
 {
+    public function setUp()
+    {
+        if (!constant('TESTS_ZEND_QUEUE_ACTIVEMQ_ENABLED')) {
+            $this->markTestSkipped('Zend_Queue ActiveMQ adapter tests are not enabled');
+        }
+    }
+
     /**
      * getAdapterName() is an method to help make AdapterTest work with any
      * new adapters

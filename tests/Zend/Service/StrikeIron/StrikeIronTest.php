@@ -21,14 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Service_StrikeIron
- */
-
-/**
  * @category   Zend
  * @package    Zend_Service_StrikeIron
  * @subpackage UnitTests
@@ -54,7 +46,7 @@ class Zend_Service_StrikeIron_StrikeIronTest extends PHPUnit_Framework_TestCase
             $this->fail();
         } catch (Zend_Service_StrikeIron_Exception $e) {
             $this->assertRegExp('/could not be loaded/i', $e->getMessage());
-            $this->assertRegExp('/not found/i', $e->getMessage());
+            $this->assertRegExp('/failed/i', $e->getMessage());
         }
     }
 

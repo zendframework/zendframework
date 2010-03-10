@@ -20,19 +20,7 @@
  * @version    $Id$
  */
 
-// Call Zend_ProgressBar_Adapter_ConsoleTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_ProgressBar_Adapter_ConsoleTest::main");
-}
-
-/**
- * Test helper
- */
-
-/**
- * Zend_ProgressBar_Adapter_Console
- */
-
+require_once 'MockupStream.php';
 
 /**
  * @category   Zend
@@ -44,7 +32,6 @@ if (!defined("PHPUnit_MAIN_METHOD")) {
  */
 class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit_Framework_TestCase
 {
-
     protected function setUp()
     {
         stream_wrapper_register("zendprogressbaradapterconsole", "Zend_ProgressBar_Adapter_Console_MockupStream");
@@ -53,17 +40,6 @@ class Zend_ProgressBar_Adapter_ConsoleTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         stream_wrapper_unregister('zendprogressbaradapterconsole');
-    }
-
-    /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_ProgressBar_Adapter_ConsoleTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
     public function testWindowsWidth()
@@ -354,9 +330,4 @@ class Zend_ProgressBar_Adapter_Console_Stub extends Zend_ProgressBar_Adapter_Con
     {
         $this->_lastOutput = $data;
     }
-}
-
-// Call Zend_ProgressBar_Adapter_ConsoleTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_ProgressBar_Adapert_ConsoleTest::main") {
-    Zend_ProgressBar_Adapter_ConsoleTest::main();
 }

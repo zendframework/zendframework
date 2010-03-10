@@ -20,16 +20,6 @@
  * @version    $Id$
  */
 
-// Call Zend_Loader_PluginLoaderTest::main() if this source file is executed directly.
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Loader_PluginLoaderTest::main');
-}
-
-/**
- * Test helper
- */
-
-
 /**
  * Test class for Zend_Loader_PluginLoader.
  *
@@ -45,18 +35,6 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
     protected $_includeCache;
 
     /**
-     * Runs the test methods of this class.
-     *
-     * @return void
-     */
-    public static function main()
-    {
-
-        $suite  = new PHPUnit_Framework_TestSuite("Zend_Loader_PluginLoaderTest");
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
-    /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      *
@@ -67,6 +45,12 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
         if (file_exists($this->_includeCache)) {
             unlink($this->_includeCache);
         }
+
+        // Possible for previous tests to remove autoloader 
+        Zend_Loader_Autoloader::resetInstance();
+        $al = Zend_Loader_Autoloader::getInstance();
+        $al->registerNamespace('PHPUnit_');
+
         Zend_Loader_PluginLoader::setIncludeFileCache(null);
         $this->_includeCache = dirname(__FILE__) . '/_files/includeCache.inc.php';
         $this->libPath = realpath(dirname(__FILE__) . '/../../../library');
@@ -481,10 +465,6 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
      */
     public function testPrefixesEndingInBackslashDenoteNamespacedClasses()
     {
-        if (version_compare(PHP_VERSION, '5.3.0', '<')) {
-            $this->markTestSkipped(__CLASS__ . '::' . __METHOD__ . ' requires PHP 5.3.0 or greater');
-            return;
-        }
         $loader = new Zend_Loader_PluginLoader(array());
         $loader->addPrefixPath('Zfns\\', dirname(__FILE__) . '/_files/Zfns');
         try {
@@ -496,9 +476,4 @@ class Zend_Loader_PluginLoaderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Zfns\\Foo', $className);
         $this->assertEquals('Zfns\\Foo', $loader->getClassName('Foo'));
     }
-}
-
-// Call Zend_Loader_PluginLoaderTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD === 'Zend_Loader_PluginLoaderTest::main') {
-    Zend_Loader_PluginLoaderTest::main();
 }

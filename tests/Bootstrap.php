@@ -42,8 +42,8 @@ $zfCoreTests   = "$zfRoot/tests";
 $path = array(
     $zfCoreLibrary,
     $zfCoreTests,
-    get_include_path()
-    );
+    get_include_path(),
+);
 set_include_path(implode(PATH_SEPARATOR, $path));
 
 /**

@@ -20,22 +20,6 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_Loader_AutoloaderTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Loader_Autoloader
- */
-
-/**
- * @see Zend_Loader_Autoloader_Interface
- */
-
 /**
  * @category   Zend
  * @package    Zend_Loader
@@ -46,12 +30,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     public function setUp()
     {
         // Store original autoloaders
@@ -89,6 +67,7 @@ class Zend_Loader_AutoloaderTest extends PHPUnit_Framework_TestCase
 
         // Reset autoloader instance so it doesn't affect other tests
         Zend_Loader_Autoloader::resetInstance();
+        Zend_Loader_Autoloader::getInstance();
     }
 
     public function testAutoloaderShouldBeSingleton()
@@ -406,8 +385,4 @@ class Zend_Loader_AutoloaderTest_Autoloader implements Zend_Loader_Autoloader_In
     {
         return $class;
     }
-}
-
-if (PHPUnit_MAIN_METHOD == 'Zend_Loader_AutoloaderTest::main') {
-    Zend_Loader_AutoloaderTest::main();
 }

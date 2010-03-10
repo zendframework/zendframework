@@ -21,14 +21,6 @@
  */
 
 /**
- * @see Zend_Serializer_Adapter_Wddx
- */
-
-/**
- * PHPUnit test case
- */
-
-/**
  * @category   Zend
  * @package    Zend_Serializer
  * @subpackage UnitTests
@@ -42,6 +34,9 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_SERIALIZER_ADAPTER_WDDX_ENABLED')) {
+            $this->markTestSkipped('Zend_Serializer WDDX tests are not enabled');
+        }
         $this->_adapter = new Zend_Serializer_Adapter_Wddx();
     }
 
@@ -225,32 +220,3 @@ class Zend_Serializer_Adapter_WddxTest extends PHPUnit_Framework_TestCase
     }
 
 }
-
-
-/**
- * @category   Zend
- * @package    Zend_Serializer
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class Zend_Serializer_Adapter_WddxSkipTest extends PHPUnit_Framework_TestCase
-{
-    public $message = null;
-
-    public function setUp()
-    {
-        $message = 'Skipped Zend_Serializer_Adapter_WddxTest';
-        if ($this->message) {
-            $message.= ': ' . $this->message;
-        }
-        $this->markTestSkipped($message);
-    }
-
-    public function testEmpty()
-    {
-        // this is here only so we have at least one test
-    }
-
-}
-

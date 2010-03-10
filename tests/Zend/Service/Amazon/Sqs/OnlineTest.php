@@ -20,8 +20,6 @@
  * @version    $Id$
  */
 
-
-
 /**
  * @category   Zend
  * @package    Zend_Service_Amazon
@@ -55,6 +53,9 @@ class Zend_Service_Amazon_Sqs_OnlineTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend_Service_Amazon_S3 online tests are not enabled');
+        }
         $this->_amazon = new Zend_Service_Amazon_Sqs(
             constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
             constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
@@ -110,22 +111,9 @@ class Zend_Service_Amazon_Sqs_OnlineTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
+        if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
+            return;
+        }
         unset($this->_amazon);
-    }
-}
-
-
-class Zend_Service_Amazon_Sqs_OnlineTest_Skip extends PHPUnit_Framework_TestCase
-{
-    public function setUp()
-    {
-        $this->markTestSkipped(
-            'Zend_Service_Amazon_Sqs online tests not enabled with an access key ID in '
-            . 'TestConfiguration.php'
-        );
-    }
-
-    public function testNothing()
-    {
     }
 }

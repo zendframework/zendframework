@@ -21,22 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Service_Amazon
- */
-
-/**
- * @see Zend_Service_Amazon_Query
- */
-
-/**
- * @see Zend_Http_Client_Adapter_Socket
- */
-
-/**
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
@@ -75,6 +59,9 @@ class Zend_Service_Amazon_OnlineTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend_Service_Amazon_S3 online tests are not enabled');
+        }
         if(!defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID') || !defined('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')) {
             $this->markTestSkipped('Constants AccessKeyId and SecretKey have to be set.');
         }

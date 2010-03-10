@@ -21,18 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Service_Amazon
- */
-
-/**
- * @see Zend_Http_Client_Adapter_Socket
- */
-
-/**
  * @category   Zend
  * @package    Zend_Service_Amazon_S3
  * @subpackage UnitTests
@@ -51,6 +39,9 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend_Service_Amazon_S3 online tests are not enabled');
+        }
         $this->_amazon = new Zend_Service_Amazon_S3(constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ACCESSKEYID'),
                                                     constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_SECRETKEY')
                                                     );
@@ -77,15 +68,18 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        $this->_amazon->unregisterStreamWrapper();
-    $buckets = $this->_amazon->getBuckets();
-    foreach($buckets as $bucket) {
-        if(substr($bucket, 0, strlen($this->_bucket)) != $this->_bucket) {
-            continue;
+        if (!constant('TESTS_ZEND_SERVICE_AMAZON_ONLINE_ENABLED')) {
+            return;
         }
+        $this->_amazon->unregisterStreamWrapper();
+        $buckets = $this->_amazon->getBuckets();
+        foreach($buckets as $bucket) {
+            if(substr($bucket, 0, strlen($this->_bucket)) != $this->_bucket) {
+                continue;
+            }
             $this->_amazon->cleanBucket($bucket);
-        $this->_amazon->removeBucket($bucket);
-    }
+            $this->_amazon->removeBucket($bucket);
+        }
     }
 
     /**
@@ -248,28 +242,5 @@ class Zend_Service_Amazon_S3_StreamTest extends PHPUnit_Framework_TestCase
         // Remove the object
         $result = unlink($this->_fileName);
         $this->assertTrue($result);
-    }
-}
-
-/**
- * @category   Zend
- * @package    Zend_Service_Amazon_S3
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Service
- * @group      Zend_Service_Amazon
- * @group      Zend_Service_Amazon_S3
- */
-class Zend_Service_Amazon_S3_StreamTest_Skip extends PHPUnit_Framework_TestCase
-{
-    public function setUp()
-    {
-        $this->markTestSkipped('Zend_Service_Amazon_S3 online tests not enabled with an access key ID and '
-                             . ' secret key ID in TestConfiguration.php');
-    }
-
-    public function testNothing()
-    {
     }
 }

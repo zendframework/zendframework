@@ -20,11 +20,7 @@
  * @version    $Id: AbstractTest.php 17667 2009-08-18 21:40:09Z mikaelkael $
  */
 
-
-
 /**
- * @todo: Rename class to Zend_Service_Amazon_AbstractTest
- *
  * @category   Zend
  * @package    Zend_Service_Amazon
  * @subpackage UnitTests
@@ -55,23 +51,23 @@ class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
     public function testNoKeysThrowException()
     {
         try {
-            $class = new TestAmamzonAbstract();
+            $class = new TestAmazonAbstract();
             $this->fail('Exception should be thrown when no keys are passed in.');
         } catch(Zend_Service_Amazon_Exception $zsae) {}
     }
 
     public function testSetRegion()
     {
-        TestAmamzonAbstract::setRegion('eu-west-1');
+        TestAmazonAbstract::setRegion('eu-west-1');
 
-        $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
+        $class = new TestAmazonAbstract('TestAccessKey', 'TestSecretKey');
         $this->assertEquals('eu-west-1', $class->returnRegion());
     }
 
     public function testSetInvalidRegionThrowsException()
     {
         try {
-            TestAmamzonAbstract::setRegion('eu-west-1a');
+            TestAmazonAbstract::setRegion('eu-west-1a');
             $this->fail('Invalid Region Set with no Exception Thrown');
         } catch (Zend_Service_Amazon_Exception $zsae) {
             // do nothing
@@ -80,7 +76,7 @@ class Zend_Service_Amazon_Ec2_AbstractTest extends PHPUnit_Framework_TestCase
     
     public function testSignParamsWithSpaceEncodesWithPercentInsteadOfPlus()
     {
-        $class = new TestAmamzonAbstract('TestAccessKey', 'TestSecretKey');
+        $class = new TestAmazonAbstract('TestAccessKey', 'TestSecretKey');
         $ret = $class->testSign(array('Action' => 'Space Test'));
         
         // this is the encode signuature with urlencode - It's Invalid!

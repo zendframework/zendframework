@@ -56,14 +56,12 @@ class Zend_Service_Flickr_OnlineTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        /**
-         * @see Zend_Service_Flickr
-         */
+        if (!constant('TESTS_ZEND_SERVICE_FLICKR_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend_Service_Flickr online tests are not enabled');
+        }
+
         $this->_flickr = new Zend_Service_Flickr(constant('TESTS_ZEND_SERVICE_FLICKR_ONLINE_APIKEY'));
 
-        /**
-         * @see Zend_Http_Client_Adapter_Socket
-         */
         $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();
 
         $this->_flickr->getRestClient()

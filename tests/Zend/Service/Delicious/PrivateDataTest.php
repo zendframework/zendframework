@@ -20,16 +20,6 @@
  * @version    $Id$
  */
 
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Service_Delicious
- */
-
-
 /**
  * @category   Zend_Service
  * @package    Zend_Service_Delicious
@@ -61,6 +51,9 @@ class Zend_Service_Delicious_PrivateDataTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_SERVICE_DELICIOUS_ENABLED')) {
+            $this->markTestSkipped('Zend_Service_Delicious online tests are not enabled');
+        }
         $httpClient = new Zend_Http_Client();
         $httpClient->setConfig(array(
                 'useragent' => 'Zend_Service_Delicious - Unit tests/0.1',

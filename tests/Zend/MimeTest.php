@@ -20,17 +20,7 @@
  * @version    $Id $
  */
 
-/**
- * Test helper
- */
-
-/** Zend_Mail */
-
-/** Zend_Mime */
-
-/** PHPUnit test case */
-
-/** Zend_MailTest */
+require_once 'Zend/Mail/MailTest.php';
 
 /**
  * @category   Zend

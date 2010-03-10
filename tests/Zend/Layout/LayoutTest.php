@@ -20,13 +20,6 @@
  * @version    $Id$
  */
 
-// Call Zend_Layout_LayoutTest::main() if this source file is executed directly.
-if (!defined("PHPUnit_MAIN_METHOD")) {
-    define("PHPUnit_MAIN_METHOD", "Zend_Layout_LayoutTest::main");
-}
-
-
-
 /**
  * Test class for Zend_Layout.
  *
@@ -515,6 +508,7 @@ class Zend_Layout_LayoutTest extends PHPUnit_Framework_TestCase
 
     public function testMinimalViewObjectWorks()
     {
+        require_once dirname(__FILE__) . '/_files/MinimalCustomView.php';
         $layout = new Zend_Layout(array(
             'view' => new Zend_Layout_Test_MinimalCustomView(),
             'ViewScriptPath' => 'some/path'
@@ -564,9 +558,4 @@ class Zend_Layout_LayoutTest_Controller_Plugin_Layout extends Zend_Layout_Contro
 
 class Zend_Layout_LayoutTest_Controller_Action_Helper_Layout extends Zend_Layout_Controller_Action_Helper_Layout
 {
-}
-
-// Call Zend_Layout_LayoutTest::main() if this source file is executed directly.
-if (PHPUnit_MAIN_METHOD == "Zend_Layout_LayoutTest::main") {
-    Zend_Layout_LayoutTest::main();
 }

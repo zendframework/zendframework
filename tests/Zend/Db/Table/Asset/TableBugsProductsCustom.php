@@ -22,23 +22,13 @@
 
 
 /**
- * @see Zend_Db_Table_Abstract
+ * require other test files needed, this will
+ * ensure that Zend_Loader::loadClass is not called
  */
 
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
-/**
- * @category   Zend
- * @package    Zend_Db
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
- */
-class My_ZendDbTable_TableSpecial extends Zend_Db_Table_Abstract
-{
-    // no configuration declared
-}
 
 /**
  * @category   Zend
@@ -47,7 +37,25 @@ class My_ZendDbTable_TableSpecial extends Zend_Db_Table_Abstract
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class zfbugs_products extends Zend_Db_Table_Abstract
+class Zend_Db_Table_Asset_TableBugsProductsCustom extends Zend_Db_Table_Asset_TableBugsProducts
 {
-    // no configuration declared
+    protected $_rowClass    = 'Zend_Db_Table_Asset_Row_TestMyRow';
+    protected $_rowsetClass = 'Zend_Db_Table_Asset_Rowset_TestMyRowset';
+
+    protected $_referenceMap    = array(
+        'Bug' => array(
+            'columns'           => 'bug_id',
+            'refTableClass'     => 'Zend_Db_Table_Asset_TableBugsCustom',
+            'refColumns'        => 'bug_id',
+            'onDelete'          => self::CASCADE,
+            'onUpdate'          => self::CASCADE
+        ),
+        'Product' => array(
+            'columns'           => 'product_id',
+            'refTableClass'     => 'Zend_Db_Table_Asset_TableProductsCustom',
+            'refColumns'        => 'product_id',
+            'onDelete'          => 'anything but self::CASCADE',
+            'onUpdate'          => 'anything but self::CASCADE'
+        )
+    );
 }

@@ -35,6 +35,8 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  */
 class Zend_Db_TestUtil_Pdo_Mysql extends Zend_Db_TestUtil_Mysqli
 {
+    protected $_enabledConstantName = 'TESTS_ZEND_DB_ADAPTER_PDO_MYSQL_ENABLED';
+    
     protected function _rawQuery($sql)
     {
         $conn = $this->_db->getConnection();

@@ -22,17 +22,10 @@
 
 
 /**
- * @see Zend_Db_Table_Abstract
+ * @see Zend_Db_Table_Rowset_Abstract
  */
-
-/**
- * require other test files needed, this will
- * ensure that Zend_Loader::loadClass is not called
- */
-
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
-
 
 /**
  * @category   Zend
@@ -41,8 +34,5 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class My_ZendDbTable_TableProducts extends Zend_Db_Table_Abstract
-{
-    protected $_name = 'zfproducts';
-    protected $_dependentTables = array('My_ZendDbTable_TableBugsProducts');
-}
+class Zend_Db_Table_Asset_Rowset_TestMyRowset extends Zend_Db_Table_Rowset_Abstract
+{}

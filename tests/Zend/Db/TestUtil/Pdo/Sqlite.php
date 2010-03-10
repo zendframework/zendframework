@@ -35,6 +35,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  */
 class Zend_Db_TestUtil_Pdo_Sqlite extends Zend_Db_TestUtil_Pdo_Common
 {
+    protected $_enabledConstantName = 'TESTS_ZEND_DB_ADAPTER_PDO_SQLITE_ENABLED';
 
     public function getParams(array $constants = array())
     {

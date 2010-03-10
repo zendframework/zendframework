@@ -42,6 +42,8 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  */
 abstract class Zend_Db_TestUtil_Common
 {
+    protected $_enabledConstantName = null;
+    
     /**
      * @var Zend_Db_Adapter_Abstract
      */
@@ -57,6 +59,18 @@ abstract class Zend_Db_TestUtil_Common
      */
     protected $_sequences = array();
 
+    /**
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        if ($this->_enabledConstantName == '' || !defined($this->_enabledConstantName)) {
+            return false;
+        }
+        
+        return constant($this->_enabledConstantName);
+    }
+    
     protected function _getSqlCreateTable($tableName)
     {
         return 'CREATE TABLE ' . $this->getAdapter()->quoteIdentifier($tableName, true);

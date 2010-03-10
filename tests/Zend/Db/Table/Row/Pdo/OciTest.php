@@ -46,7 +46,7 @@ class Zend_Db_Table_Row_Pdo_OciTest extends Zend_Db_Table_Row_TestCommon
      */
     protected function _testTableRowSetReadOnlyGetTableBugs()
     {
-        return $this->_getTable('My_ZendDbTable_TableBugs',
+        return $this->_getTable('Zend_Db_Table_Asset_TableBugs',
                                 array(Zend_Db_Table_Abstract::SEQUENCE => 'zfbugs_seq'));
     }
 

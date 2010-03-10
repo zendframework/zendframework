@@ -38,6 +38,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Db
  * @group      Zend_Db_Adapter
+ * @group      Zend_Db_Adapter_Pdo_Mssql
  */
 class Zend_Db_Adapter_Pdo_MssqlTest extends Zend_Db_Adapter_Pdo_TestCommon
 {

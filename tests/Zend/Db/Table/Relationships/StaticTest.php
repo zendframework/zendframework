@@ -50,7 +50,7 @@ class Zend_Db_Table_Relationships_StaticTest extends PHPUnit_Framework_TestCase
 
     public function testTableRelationshipsFindDependentMagic()
     {
-        $row = new My_ZendDbTable_Row_TestMockRow();
+        $row = new Zend_Db_Table_Asset_Row_TestMockRow();
 
         $this->assertNull($row->dependentTable);
         $this->assertNull($row->ruleKey);
@@ -66,7 +66,7 @@ class Zend_Db_Table_Relationships_StaticTest extends PHPUnit_Framework_TestCase
 
     public function testTableRelationshipsFindParentMagic()
     {
-        $row = new My_ZendDbTable_Row_TestMockRow();
+        $row = new Zend_Db_Table_Asset_Row_TestMockRow();
 
         $this->assertNull($row->parentTable);
         $this->assertNull($row->ruleKey);
@@ -82,7 +82,7 @@ class Zend_Db_Table_Relationships_StaticTest extends PHPUnit_Framework_TestCase
 
     public function testTableRelationshipsFindManyToManyMagic()
     {
-        $row = new My_ZendDbTable_Row_TestMockRow();
+        $row = new Zend_Db_Table_Asset_Row_TestMockRow();
 
         $this->assertNull($row->matchTable);
         $this->assertNull($row->intersectionTable);

@@ -34,7 +34,7 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class My_ZendDbTable_Row_TestMockRow extends Zend_Db_Table_Row_Abstract
+class Zend_Db_Table_Asset_Row_TestMockRow extends Zend_Db_Table_Row_Abstract
 {
 
     public $parentTable       = null;

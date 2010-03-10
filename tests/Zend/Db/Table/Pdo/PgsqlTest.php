@@ -86,7 +86,7 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
 
     public function testTableInsertSequence()
     {
-        $table = $this->_getTable('My_ZendDbTable_TableProducts',
+        $table = $this->_getTable('Zend_Db_Table_Asset_TableProducts',
             array(Zend_Db_Table_Abstract::SEQUENCE => 'zfproducts_seq'));
         $row = array (
             'product_name' => 'Solaris'
@@ -125,7 +125,7 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
             'schema'    => $schema
             );
 
-        $table = new My_ZendDbTable_TableBugs($config);
+        $table = new Zend_Db_Table_Asset_TableBugs($config);
 
         $tableInfo = $table->info();
 
@@ -148,7 +148,7 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
             'name'      => $tableName
             );
 
-        $table = new My_ZendDbTable_TableBugs($config);
+        $table = new Zend_Db_Table_Asset_TableBugs($config);
 
         $tableInfo = $table->info();
 
@@ -173,7 +173,7 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
             'name'      => $tableName
             );
 
-        $table = new My_ZendDbTable_TableBugs($config);
+        $table = new Zend_Db_Table_Asset_TableBugs($config);
 
         $tableInfo = $table->info();
 
@@ -194,7 +194,7 @@ class Zend_Db_Table_Pdo_PgsqlTest extends Zend_Db_Table_TestCommon
             'schema'    => $schema,
             );
 
-        $table = new My_ZendDbTable_TableBugs($config);
+        $table = new Zend_Db_Table_Asset_TableBugs($config);
 
         $rowset = $table->fetchAll();
 

@@ -17,9 +17,13 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id $
+ * @version    $Id$
  */
 
+
+/**
+ * @see Zend_Db_Table_Row_Abstract
+ */
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
@@ -29,15 +33,38 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Db
- * @group      Zend_Db_Statement
  */
-class Zend_Db_Statement_OdbcTest extends Zend_Db_Statement_TestCommon
+class Zend_Db_Table_Asset_Row_TestTableRow extends Zend_Db_Table_Row_Abstract
 {
+    protected $_tableClass = 'Zend_Db_Table_Asset_TableBugs';
 
-    public function getDriver()
+    public function setInvalidColumn()
     {
-        return 'Odbc';
+        $this->_transformColumn(array('bug_id'));
     }
 
+    public function setTableToFail()
+    {
+        $this->_tableClass = 'foo';
+    }
+
+    public function setTableColsToFail()
+    {
+        $this->_data = array();
+    }
+
+    public function setPrimaryKeyToFail1()
+    {
+        $this->_primary = 'foo';
+    }
+
+    public function setPrimaryKeyToFail2()
+    {
+        $this->_primary = array();
+    }
+
+    protected function _postUpdate()
+    {
+        $this->bug_id = 0;
+    }
 }

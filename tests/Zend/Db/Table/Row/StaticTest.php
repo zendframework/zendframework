@@ -48,7 +48,7 @@ class Zend_Db_Table_Row_StaticTest extends PHPUnit_Framework_TestCase
             'column_foo'     => 'value2',
             'column_bar_baz' => 'value3'
         );
-        $row = new My_ZendDbTable_Row_TestMockRow(array('data' => $data));
+        $row = new Zend_Db_Table_Asset_Row_TestMockRow(array('data' => $data));
 
         $array = $row->toArray();
         $this->assertEquals($data, $array);
@@ -61,7 +61,7 @@ class Zend_Db_Table_Row_StaticTest extends PHPUnit_Framework_TestCase
             'column_foo'     => 'value2',
             'column_bar_baz' => 'value3'
         );
-        $row = new My_ZendDbTable_Row_TestMockRow(array('data' => $data));
+        $row = new Zend_Db_Table_Asset_Row_TestMockRow(array('data' => $data));
 
         $this->assertEquals('value1', $row->column);
         $this->assertEquals('value2', $row->columnFoo);
@@ -75,7 +75,7 @@ class Zend_Db_Table_Row_StaticTest extends PHPUnit_Framework_TestCase
             'column_foo'     => 'value2',
             'column_bar_baz' => 'value3'
         );
-        $row = new My_ZendDbTable_Row_TestMockRow(array('data' => $data));
+        $row = new Zend_Db_Table_Asset_Row_TestMockRow(array('data' => $data));
 
         $this->assertEquals('value1', $row->column);
         $this->assertEquals('value2', $row->columnFoo);

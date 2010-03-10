@@ -38,33 +38,33 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class My_ZendDbTable_TableBugsCustom extends My_ZendDbTable_TableBugs
+class Zend_Db_Table_Asset_TableBugsCustom extends Zend_Db_Table_Asset_TableBugs
 {
     public $isMetadataFromCache = false;
 
     protected $_metadataCacheInClass = false;
 
-    protected $_rowClass    = 'My_ZendDbTable_Row_TestMyRow';
-    protected $_rowsetClass = 'My_ZendDbTable_Rowset_TestMyRowset';
+    protected $_rowClass    = 'Zend_Db_Table_Asset_Row_TestMyRow';
+    protected $_rowsetClass = 'Zend_Db_Table_Asset_Rowset_TestMyRowset';
 
-    protected $_dependentTables = array('My_ZendDbTable_TableBugsProductsCustom');
+    protected $_dependentTables = array('Zend_Db_Table_Asset_TableBugsProductsCustom');
 
     protected $_referenceMap    = array(
         'Reporter' => array(
             'columns'           => array('reported_by'),
-            'refTableClass'     => 'My_ZendDbTable_TableAccountsCustom',
+            'refTableClass'     => 'Zend_Db_Table_Asset_TableAccountsCustom',
             'refColumns'        => array('account_name'),
             'onDelete'          => self::CASCADE,
             'onUpdate'          => self::CASCADE
         ),
         'Engineer' => array(
             'columns'           => 'assigned_to',
-            'refTableClass'     => 'My_ZendDbTable_TableAccountsCustom',
+            'refTableClass'     => 'Zend_Db_Table_Asset_TableAccountsCustom',
             'refColumns'        => 'account_name'
         ),
         'Verifier' => array(
             'columns'           => 'verified_by',
-            'refTableClass'     => 'My_ZendDbTable_TableAccountsCustom',
+            'refTableClass'     => 'Zend_Db_Table_Asset_TableAccountsCustom',
             'refColumns'        => 'account_name'
         )
     );

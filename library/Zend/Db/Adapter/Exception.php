@@ -37,7 +37,7 @@ class Zend_Db_Adapter_Exception extends Zend_Db_Exception
         if ($e && (0 === $code)) {
             $code = $e->getCode();
         }
-        parent::__construct($message, $code, $e);
+        parent::__construct($message, (int) $code, $e);
     }
 
     public function hasChainedException()

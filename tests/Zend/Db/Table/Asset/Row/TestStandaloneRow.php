@@ -17,9 +17,13 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id $
+ * @version    $Id$
  */
 
+
+/**
+ * @see Zend_Db_Table_Row_Abstract
+ */
 
 PHPUnit_Util_Filter::addFileToFilter(__FILE__);
 
@@ -29,16 +33,8 @@ PHPUnit_Util_Filter::addFileToFilter(__FILE__);
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Db
- * @group      Zend_Db_Table
- * @group      Zend_Db_Table_Relationships
  */
-class Zend_Db_Table_Relationships_OdbcTest extends Zend_Db_Table_Relationships_TestCommon
+class Zend_Db_Table_Asset_Row_TestStandaloneRow extends Zend_Db_Table_Row_Abstract
 {
-
-    public function getDriver()
-    {
-        return 'Odbc';
-    }
-
+    protected $_tableClass = 'Zend_Db_Table_Asset_TableBugs';
 }

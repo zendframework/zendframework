@@ -74,6 +74,12 @@ abstract class Zend_Db_TestSetup extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->_setUpTestUtil();
+        
+        if (!$this->_util->isEnabled()) {
+            $this->markTestSkipped('Driver ' . $this->getDriver() . ' is not enabled in TestConfiguration.php');
+            return;
+        }
+        
         $this->_setUpAdapter();
         $this->_util->setUp($this->_db);
     }
@@ -111,9 +117,15 @@ abstract class Zend_Db_TestSetup extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        $this->_util->tearDown();
-        $this->_db->closeConnection();
-        $this->_db = null;
+        if (isset($this->_util) && $this->_util->isEnabled()) {
+            $this->_util->tearDown();
+        }
+
+        if ($this->_db) {
+            $this->_db->closeConnection();
+            $this->_db = null;            
+        }
+
     }
 
 }

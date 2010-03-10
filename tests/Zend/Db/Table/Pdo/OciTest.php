@@ -53,7 +53,7 @@ class Zend_Db_Table_Pdo_OciTest extends Zend_Db_Table_TestCommon
         $schemaName = $this->_util->getSchema();
         $tableName = 'zfbugs';
         $identifier = join('.', array_filter(array($schemaName, $tableName)));
-        $table = $this->_getTable('My_ZendDbTable_TableSpecial',
+        $table = $this->_getTable('Zend_Db_Table_Asset_TableSpecial',
             array('name' => $tableName, 'schema' => $schemaName,Zend_Db_Table_Abstract::SEQUENCE => 'zfbugs_seq')
         );
 
@@ -79,7 +79,7 @@ class Zend_Db_Table_Pdo_OciTest extends Zend_Db_Table_TestCommon
 
     public function testTableInsertSequence()
     {
-        $table = $this->_getTable('My_ZendDbTable_TableBugs',
+        $table = $this->_getTable('Zend_Db_Table_Asset_TableBugs',
             array(Zend_Db_Table_Abstract::SEQUENCE => 'zfbugs_seq'));
         $row = array (
             'bug_description' => 'New bug',

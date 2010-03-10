@@ -21,14 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-/**
- * Zend_Ldap
- */
-
-/**
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage UnitTests
@@ -54,6 +46,10 @@ class Zend_Ldap_OriginalOfflineTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
+            $this->markTestSkipped("Zend_Ldap online tests are not enabled");
+        }
+
         $this->_ldap = new Zend_Ldap();
     }
 

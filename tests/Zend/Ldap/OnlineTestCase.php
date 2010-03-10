@@ -21,13 +21,6 @@
  */
 
 /**
- * Zend_Ldap_TestCase
- */
-/**
- * @see Zend_Ldap
- */
-
-/**
  * @category   Zend
  * @package    Zend_Ldap
  * @subpackage UnitTests
@@ -57,9 +50,8 @@ abstract class Zend_Ldap_OnlineTestCase extends Zend_Ldap_TestCase
 
     protected function setUp()
     {
-        if (!TESTS_ZEND_LDAP_ONLINE_ENABLED) {
-            $this->markTestSkipped("Test skipped due to test configuration");
-            return;
+        if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
+            $this->markTestSkipped("Zend_Ldap online tests are not enabled");
         }
 
         $options = array(
@@ -133,6 +125,9 @@ abstract class Zend_Ldap_OnlineTestCase extends Zend_Ldap_TestCase
 
     protected function _cleanupLdapServer()
     {
+        if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
+            return;
+        }
         $ldap=$this->_ldap->getResource();
         foreach (array_reverse($this->_nodes) as $dn => $entry) {
             ldap_delete($ldap, $dn);

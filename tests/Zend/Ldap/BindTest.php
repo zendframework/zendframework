@@ -20,14 +20,6 @@
  * @version    $Id$
  */
 
-/**
- * Test helper
- */
-
-/**
- * Zend_Ldap
- */
-
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the
  * bind returns 'Invalid credentials' we know the transport related work
@@ -51,6 +43,10 @@ class Zend_Ldap_BindTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
+            $this->markTestSkipped("Zend_Ldap online tests are not enabled");
+        }
+
         $this->_options = array(
             'host' => TESTS_ZEND_LDAP_HOST,
             'username' => TESTS_ZEND_LDAP_USERNAME,

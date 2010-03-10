@@ -46,6 +46,10 @@ class Zend_Ldap_Node_UpdateTest extends Zend_Ldap_OnlineTestCase
 
     protected function tearDown()
     {
+        if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
+            return;
+        }
+
         foreach ($this->_getLdap()->getBaseNode()->searchChildren('objectClass=*') as $child) {
             $this->_getLdap()->delete($child->getDn(), true);
         }

@@ -20,17 +20,6 @@
  */
 
 /**
- * @package Zend_Soap
- * @subpackage UnitTests
- */
-
-
-/** PHPUnit Test Case */
-
-/** Zend_Soap_Wsdl */
-
-
-/**
  * @category   Zend
  * @package    Zend_Soap
  * @subpackage UnitTests
@@ -156,7 +145,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeSequenceStrategyTest extends PHPUnit_Framework_T
     {
         $this->setExpectedException("Zend_Soap_Wsdl_Exception");
 
-        $this->wsdl->addComplexType('Zend_Soap_Wsdl_UnknownClass[]');
+        $this->wsdl->addComplexType('Some_Soap_Wsdl_UnknownClass[]');
     }
 }
 

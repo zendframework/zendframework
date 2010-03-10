@@ -20,9 +20,7 @@
  * @version    $Id$
  */
 
-/** Zend_Soap_Wsdl */
-
-/** Zend_Soap_Wsdl_Strategy_ArrayOfTypeComplex */
+require_once dirname(__FILE__)."/../_files/commontypes.php";
 
 /**
  * @category   Zend
@@ -57,7 +55,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit_Framework_Te
     public function testAddComplexTypeOfNonExistingClassThrowsException()
     {
         try {
-            $this->wsdl->addComplexType('Zend_Soap_Wsdl_UnknownClass[]');
+            $this->wsdl->addComplexType('Some_Soap_Wsdl_UnknownClass[]');
         } catch(Zend_Soap_Wsdl_Exception $e) {
 
         }
@@ -223,7 +221,7 @@ class Zend_Soap_Wsdl_ArrayOfTypeComplexStrategyTest extends PHPUnit_Framework_Te
             $return = $this->wsdl->addComplexType("Zend_Soap_AutoDiscover_Recursion");
         } catch(Exception $e) {
             $this->assertTrue($e instanceof Zend_Soap_Wsdl_Exception);
-            $this->assertEquals("Infinite recursion, cannot nest 'Zend_Soap_AutoDiscover_Recursion' into itsself.", $e->getMessage());
+            $this->assertEquals("Infinite recursion, cannot nest 'Zend_Soap_AutoDiscover_Recursion' into itself.", $e->getMessage());
         }
     }
 }

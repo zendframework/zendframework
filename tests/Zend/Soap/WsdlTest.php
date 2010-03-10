@@ -20,16 +20,6 @@
  * @version    $Id$
  */
 
-
-/** PHPUnit Test Case */
-
-/** Zend_Soap_Wsdl */
-
-/**
- * Zend_Soap_Wsdl_Strategy_ArrayOfTypeSequence
- */
-
-
 /**
  * Test cases for Zend_Soap_Wsdl
  *
@@ -48,6 +38,13 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
         $xmlstring = str_replace(array("\r", "\n"), "", $xmlstring);
         $xmlstring = preg_replace('/(>[\s]{1,}<)/', '', $xmlstring);
         return $xmlstring;
+    }
+
+    public function swallowIncludeNotices($errno, $errstr)
+    {
+        if ($errno != E_WARNING || !strstr($errstr, 'failed')) {
+            return false;
+        }
     }
 
     function testConstructor()
@@ -549,14 +546,19 @@ class Zend_Soap_WsdlTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($wsdl2->getComplexTypeStrategy() instanceof Zend_Soap_Wsdl_Strategy_AnyType);
     }
 
+    /**
+     * @outputBuffering enabled
+     */
     function testSettingUnknownStrategyThrowsException()
     {
+        set_error_handler(array($this, 'swallowIncludeNotices'), E_WARNING);
         try {
             $wsdl = new Zend_Soap_Wsdl('MyService', 'http://localhost/MyService.php', 'Zend_Soap_Wsdl_Strategy_UnknownStrategyType');
+            restore_error_handler();
             $this->fail();
         } catch(Zend_Soap_Wsdl_Exception $e) {
-
         }
+        restore_error_handler();
     }
 
     function testSettingInvalidStrategyObjectThrowsException()

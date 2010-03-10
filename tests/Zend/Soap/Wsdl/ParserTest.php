@@ -29,6 +29,7 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Soap
  * @group      Zend_Soap_Wsdl
+ * @group      disable
  */
 class Zend_Soap_Wsdl_ParserTest extends PHPUnit_Framework_TestCase
 {

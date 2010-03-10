@@ -21,23 +21,6 @@
  */
 
 /**
- * Zend_Mail_Storage_Imap
- */
-
-/**
- * Zend_Mail_Protocol_Imap
- */
-
-/**
- * Zend_Config
- */
-
-/**
- * PHPUnit test case
- */
-
-
-/**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
@@ -51,6 +34,9 @@ class Zend_Mail_ImapTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_MAIL_IMAP_ENABLED')) {
+            $this->markTestSkipped('Zend_Mail IMAP tests are not enabled');
+        }
         $this->_params = array('host'     => TESTS_ZEND_MAIL_IMAP_HOST,
                                'user'     => TESTS_ZEND_MAIL_IMAP_USER,
                                'password' => TESTS_ZEND_MAIL_IMAP_PASSWORD);

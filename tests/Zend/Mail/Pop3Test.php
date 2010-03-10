@@ -21,22 +21,6 @@
  */
 
 /**
- * Zend_Mail_Storage_Pop3
- */
-
-/**
- * Zend_Mail_Protocol_Pop3
- */
-
-/**
- * Zend_Config
- */
-
-/**
- * PHPUnit test case
- */
-
-/**
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage UnitTests
@@ -50,6 +34,10 @@ class Zend_Mail_Pop3Test extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_MAIL_POP3_ENABLED')) {
+            $this->markTestSkipped('Zend_Mail POP3 tests are not enabled');
+        }
+
         $this->_params = array('host'     => TESTS_ZEND_MAIL_POP3_HOST,
                                'user'     => TESTS_ZEND_MAIL_POP3_USER,
                                'password' => TESTS_ZEND_MAIL_POP3_PASSWORD);

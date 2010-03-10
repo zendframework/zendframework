@@ -20,18 +20,6 @@
  * @version    $Id$
  */
 
-if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Zend_VersionTest::main');
-}
-
-/**
- * Test helper
- */
-
-/**
- * @see Zend_Version
- */
-
 /**
  * @category   Zend
  * @package    Zend_Version
@@ -42,12 +30,6 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 class Zend_VersionTest extends PHPUnit_Framework_TestCase
 {
-    public static function main()
-    {
-        $suite  = new PHPUnit_Framework_TestSuite(__CLASS__);
-        $result = PHPUnit_TextUI_TestRunner::run($suite);
-    }
-
     /**
      * Tests that version_compare() and its "proxy"
      * Zend_Version::compareVersion() work as expected.
@@ -55,8 +37,7 @@ class Zend_VersionTest extends PHPUnit_Framework_TestCase
     public function testVersionCompare()
     {
         $expect = -1;
-        // unit test breaks if ZF version > 1.x
-        for ($i=0; $i <= 1; $i++) {
+        for ($i=0; $i < 2; $i++) {
             for ($j=0; $j < 12; $j++) {
                 for ($k=0; $k < 20; $k++) {
                     foreach (array('dev', 'pr', 'PR', 'alpha', 'a1', 'a2', 'beta', 'b1', 'b2', 'RC', 'RC1', 'RC2', 'RC3', '', 'pl1', 'PL1') as $rel) {
@@ -81,14 +62,7 @@ class Zend_VersionTest extends PHPUnit_Framework_TestCase
                     }
                 }
             }
-        }
-        if ($expect === -1) {
-            $this->fail('Unable to recognize Zend_Version::VERSION ('. Zend_Version::VERSION . '); last version compared: ' . $ver);
-        }
+        };
     }
 
-}
-
-if (PHPUnit_MAIN_METHOD == "Zend_VersionTest::main") {
-    Zend_VersionTest::main();
 }

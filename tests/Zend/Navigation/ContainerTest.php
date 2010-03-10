@@ -979,6 +979,7 @@ class Zend_Navigation_ContainerTest extends PHPUnit_Framework_TestCase
 
     public function testCurrentShouldThrowExceptionIfIndexIsInvalid()
     {
+        require_once dirname(__FILE__) . '/_files/My/Container.php';
         $container = new My_Container(array(
             array(
                 'label' => 'Page 2',

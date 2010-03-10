@@ -443,7 +443,9 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
     {
         $mxHosts = array();
         $result = getmxrr($this->_hostname, $mxHosts);
-        if ($result && $this->_options['deep'] && function_exists('checkdnsrr')) {
+        if (!$result) {
+            $this->_error(self::INVALID_MX_RECORD);
+        } else if ($this->_options['deep'] && function_exists('checkdnsrr')) {
             $validAddress = false;
             $reserved     = true;
             foreach ($mxHosts as $hostname) {

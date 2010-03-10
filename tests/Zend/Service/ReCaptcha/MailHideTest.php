@@ -21,14 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-/** @see Zend_Service_ReCaptcha_MailHide */
-
-/** @see Zend_Config */
-
-/**
  * @category   Zend
  * @package    Zend_Service_ReCaptcha
  * @subpackage UnitTests
@@ -39,15 +31,20 @@
  */
 class Zend_Service_ReCaptcha_MailHideTest extends PHPUnit_Framework_TestCase
 {
-    protected $_publicKey = TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PUBLIC_KEY;
+    protected $_publicKey  = TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PUBLIC_KEY;
     protected $_privateKey = TESTS_ZEND_SERVICE_RECAPTCHA_MAILHIDE_PRIVATE_KEY;
-    protected $_mailHide = null;
+    protected $_mailHide   = null;
 
-    public function setUp() {
+    public function setUp() 
+    {
+        if (!extension_loaded('mcrypt')) {
+            $this->markTestSkipped('Zend_Service_ReCaptcha tests skipped due to missing mcrypt extension');
+        }
         $this->_mailHide = new Zend_Service_ReCaptcha_MailHide();
     }
 
-    public function testSetGetPrivateKey() {
+    public function testSetGetPrivateKey() 
+    {
         $this->_mailHide->setPrivateKey($this->_privateKey);
         $this->assertSame($this->_privateKey, $this->_mailHide->getPrivateKey());
     }

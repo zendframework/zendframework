@@ -21,14 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Session_SaveHandler_DbTable
- */
-
-/**
  * Unit testing for Zend_Session_SaveHandler_DbTable include all tests for
  * regular session handling
  *
@@ -82,6 +74,9 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!extension_loaded('pdo_sqlite')) {
+            $this->markTestSkipped('Zend_Session_SaveHandler_DbTable tests are not enabled due to missing PDO_Sqlite extension');
+        }
         $this->_setupDb($this->_saveHandlerTableConfig['primary']);
     }
 
@@ -553,16 +548,5 @@ class Zend_Session_SaveHandler_DbTableTest extends PHPUnit_Framework_TestCase
     protected function _dropTable()
     {
         $this->_db->query('DROP TABLE Sessions');
-    }
-}
-
-/**
- * This class is used by Zend_Session_SaveHandler_AllTests to produce one skip message when pdo_sqlite is unavailable
- */
-class Zend_Session_SaveHandler_DbTableTestSkip extends PHPUnit_Framework_TestCase
-{
-    public function testNothing()
-    {
-        $this->markTestSkipped('The pdo_sqlite extension must be available and enabled for this test');
     }
 }

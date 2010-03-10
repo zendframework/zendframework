@@ -22,16 +22,6 @@
 
 
 /**
- * PHPUnit test case
- */
-
-
-/**
- * @see Zend_Session
- */
-
-
-/**
  * Black box testing for Zend_Session
  *
  * @category   Zend
@@ -128,6 +118,7 @@ class Zend_SessionTest extends PHPUnit_Framework_TestCase
      * test session id manipulations; expect isRegenerated flag == true
      *
      * @return void
+     * @runInSeparateProcesses
      */
     public function testRegenerateId()
     {

@@ -21,18 +21,6 @@
  */
 
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Service_Yahoo
- */
-
-/**
- * @see Zend_Http_Client_Adapter_Socket
- */
-
-/**
  * @category   Zend
  * @package    Zend_Service_Yahoo
  * @subpackage UnitTests
@@ -64,6 +52,10 @@ class Zend_Service_Yahoo_OnlineTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        if (!constant('TESTS_ZEND_SERVICE_YAHOO_ONLINE_ENABLED')) {
+            $this->markTestSkipped('Zend_Service_Yahoo online tests are not enabled');
+        }
+
         $this->_yahoo = new Zend_Service_Yahoo(constant('TESTS_ZEND_SERVICE_YAHOO_ONLINE_APPID'));
 
         $this->_httpClientAdapterSocket = new Zend_Http_Client_Adapter_Socket();

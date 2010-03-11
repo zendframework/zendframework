@@ -1287,7 +1287,7 @@ abstract class Zend_File_Transfer_Adapter_Abstract
                 $mime = @finfo_open($const, $value['options']['magicFile']);
             }
 
-            if (empty($mime) {
+            if (empty($mime)) {
                 $mime = @finfo_open($const);
             }
 
